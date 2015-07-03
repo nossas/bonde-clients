@@ -14,7 +14,8 @@
   },
   "scripts": {
     "start": "node server",
-    "postinstall": "node deploy"
+    "postinstall": "node deploy",
+    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
   },
   "dependencies": {
     "autoprefixer-core": "^5.2.0",
