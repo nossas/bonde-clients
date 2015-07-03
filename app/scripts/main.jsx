@@ -1,6 +1,7 @@
 require('expose?jQuery!jquery');
 require('expose?$!jquery');
-require('expose?React!react')
+require('expose?React!react');
+require('expose?Auth!j-toker');
 
 // CSS
 import '../styles/main.scss';
@@ -9,6 +10,8 @@ import '../styles/main.scss';
 var ReactRouter = require('react-router');
 var Route = ReactRouter.Route;
 var DefaultRoute = ReactRouter.DefaultRoute;
+
+Auth.configure({ apiUrl: process.env.BASE_URL });
 
 // Components
 var App = require('./components/App.jsx');
