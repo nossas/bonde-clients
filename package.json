@@ -15,7 +15,7 @@
   "scripts": {
     "start": "node server",
     "postinstall": "node deploy",
-    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "dependencies": {
     "autoprefixer-core": "^5.2.0",
@@ -45,9 +45,10 @@
     "webpack-dev-server": "^1.9.0"
   },
   "devDependencies": {
-    "karma-chrome-launcher": "^0.2.0",
     "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.0",
     "karma-sourcemap-loader": "^0.3.5",
-    "karma-webpack": "^1.5.1"
+    "karma-webpack": "^1.5.1",
+    "phantomjs": "^1.9.17"
   }
 }
