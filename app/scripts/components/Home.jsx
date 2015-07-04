@@ -1,7 +1,14 @@
+var LoginForm = require('./LoginForm.jsx')
+
 var Home = React.createClass({
   render: function() {
     return (
-      <div>Olá Nossas Cidades!</div>
+      <div className="container">
+        <div className="lg-col-4">
+          <h2>Login</h2>
+          <LoginForm />
+        </div>
+      </div>
     );
   }
 });
