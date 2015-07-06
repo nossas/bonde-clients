@@ -1,6 +1,7 @@
 var PubSub = require('pubsub-js');
 var ReactRouter = require('react-router');
 var RouteHandler = ReactRouter.RouteHandler;
+var AppMenu = require('./AppMenu.jsx');
 
 Auth.configure({
   apiUrl: process.env.BASE_URL,
@@ -27,6 +28,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
+        <AppMenu />
         <RouteHandler {...this.state} />
       </div>
     );
