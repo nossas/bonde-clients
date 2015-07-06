@@ -1,9 +1,17 @@
 var DashboardMenu = React.createClass({
   render: function(){
+    var user = this.props.user;
+    var mobilization = this.props.mobilization;
+
     return (
       <div className="bg-gray p2 white">
-        <span>{this.props.user.first_name} </span>
-        <span>{this.props.user.last_name}</span>
+        <div>
+          {user.first_name} {user.last_name}
+        </div>
+        <div>
+          <h3 className="silver">Mobilização</h3>
+          {mobilization.name}
+        </div>
       </div>
     );
   }
