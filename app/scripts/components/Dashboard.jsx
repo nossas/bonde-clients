@@ -1,60 +1,20 @@
 var DashboardMenu = require("./DashboardMenu.jsx");
 var ReactRouter = require('react-router');
 var RouteHandler = ReactRouter.RouteHandler;
+import { connect } from 'redux/react';
 
-var Dashboard = React.createClass({
-  getInitialState: function() {
-    return {
-      mobilization: {
-        name: "Bicicletada contra a redução da maioridade penal",
-        pages: [{
-          blocks: [{
-            uuid: "ffxx1122A2",
-            columns: [{
-              size: 12,
-              type: "content",
-              content: "col-12"
-            }]
-          },{
-            uuid: "21398712983712",
-            columns: [{
-              size: 6,
-              type: "content",
-              content: "col-6"
-            },{
-              size: 6,
-              type: "content",
-              content: "col-6"
-            }]
-          },{
-            uuid: "aldkashdkajs",
-            columns: [{
-              size: 4,
-              type: "content",
-              content: "col-4"
-            },{
-              size: 4,
-              type: "content",
-              content: "col-4"
-            },{
-              size: 4,
-              type: "content",
-              content: "col-4"
-            }]
-          }]
-        }]
-      }
-    }
-  },
+@connect(state => ({
+  mobilization: state.mobilization
+}))
 
-  render: function(){
+export default class Dashboard extends React.Component {
+  render(){
     return (
       <div className="flex flex-stretch">
-        <DashboardMenu user={this.props.user} mobilization={this.state.mobilization} />
-        <RouteHandler mobilization={this.state.mobilization} />
+        <DashboardMenu user={this.props.user} mobilization={this.props.mobilization} />
+        {this.props.children &&
+          React.cloneElement(this.props.children, {user: this.props.user})}
       </div>
     );
   }
-});
-
-module.exports = Dashboard;
+}

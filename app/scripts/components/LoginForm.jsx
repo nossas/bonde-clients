@@ -15,7 +15,7 @@ var LoginForm = React.createClass({
     e.preventDefault();
     Auth.emailSignIn(this.state).
       then(function(user){
-        this.transitionTo('/dashboard');
+        this.transitionTo('/dashboard/edit');
       }.bind(this)).
       fail(function(error){
         console.log(error);
