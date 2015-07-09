@@ -6,9 +6,7 @@ export default class PageBlockColumnContent extends React.Component {
 
     return(
       <div>
-        <textarea className="full-width field-light">
-          {column.content}
-        </textarea>
+        <textarea className="full-width field-light" defaultValue={column.content} />
         <button className="button bg-blue right">
           Salvar
         </button>

@@ -10,7 +10,7 @@ var PageEdit = React.createClass({
       <div className="flex-auto p2">
         {
           blocks.map(function(block){
-            return <PageBlock block={block} />
+            return <PageBlock key={block.uuid} block={block} />
           })
         }
       </div>
