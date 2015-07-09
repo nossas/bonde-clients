@@ -1,6 +1,8 @@
-var PageBlockColumnContent = React.createClass({
-  render: function(){
-    var column = this.props.column;
+import React from 'react'
+
+export default class PageBlockColumnContent extends React.Component {
+  render(){
+    var column = this.props.column
 
     return(
       <div>
@@ -13,6 +15,4 @@ var PageBlockColumnContent = React.createClass({
       </div>
     )
   }
-});
-
-module.exports = PageBlockColumnContent;
+}

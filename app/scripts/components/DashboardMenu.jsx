@@ -1,7 +1,9 @@
-var DashboardMenu = React.createClass({
-  render: function(){
-    var user = this.props.user;
-    var mobilization = this.props.mobilization;
+import React from 'react'
+
+export default class DashboardMenu extends React.Component {
+  render(){
+    var user = this.props.user
+    var mobilization = this.props.mobilization
 
     return (
       <div className="bg-gray p2 white">
@@ -13,8 +15,6 @@ var DashboardMenu = React.createClass({
           {mobilization.name}
         </div>
       </div>
-    );
+    )
   }
-});
-
-module.exports = DashboardMenu;
+}

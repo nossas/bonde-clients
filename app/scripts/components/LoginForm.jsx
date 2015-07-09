@@ -1,5 +1,7 @@
-var Navigation = require('react-router').Navigation;
-require('react/addons');
+import React from 'react'
+import Auth from 'j-toker'
+var Navigation = require('react-router').Navigation
+require('react/addons')
 
 var LoginForm = React.createClass({
   mixins: [React.addons.LinkedStateMixin, Navigation],
@@ -8,18 +10,18 @@ var LoginForm = React.createClass({
     return ({
       email: null,
       password: null
-    });
+    })
   },
 
   onSubmit: function(e){
-    e.preventDefault();
+    e.preventDefault()
     Auth.emailSignIn(this.state).
       then(function(user){
-        this.transitionTo('/dashboard/edit');
+        this.transitionTo('/dashboard/edit')
       }.bind(this)).
       fail(function(error){
-        console.log(error);
-      });
+        console.log(error)
+      })
   },
 
   render: function(){
@@ -39,8 +41,8 @@ var LoginForm = React.createClass({
 
         <input type="submit" className="button right" value="Entrar" />
       </form>
-    );
+    )
   }
-});
+})
 
-module.exports = LoginForm;
+module.exports = LoginForm

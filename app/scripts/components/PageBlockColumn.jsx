@@ -1,9 +1,10 @@
-var PageBlockColumnContent = require("./PageBlockColumnContent.jsx");
+import React from 'react'
+import PageBlockColumnContent from "./PageBlockColumnContent.jsx"
 
-var PageBlockColumn = React.createClass({
-  render: function(){
-    var column = this.props.column;
-    var className = "border p2 center col col-" + column.size;
+export default class PageBlockColumn extends React.Component {
+  render(){
+    var column = this.props.column
+    var className = "border p2 center col col-" + column.size
 
     return(
       <div className={className}>
@@ -11,6 +12,4 @@ var PageBlockColumn = React.createClass({
       </div>
     )
   }
-});
-
-module.exports = PageBlockColumn;
+}

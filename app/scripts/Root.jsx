@@ -1,38 +1,40 @@
+import React from 'react'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
 import { Provider } from 'redux/react'
 import { createDispatcher, createRedux, composeStores } from 'redux'
 
 // Middlewares
-import { loggerMiddleware, thunkMiddleware } from './../middleware'
+import loggerMiddleware from './middleware/logger.js'
+import thunkMiddleware from './middleware/thunk.js'
 
-// Components
-import Application from './Application.jsx'
-import AppMenu from './AppMenu.jsx'
-import Home from './Home.jsx'
-import Dashboard from './Dashboard.jsx'
-import PageEdit from './PageEdit.jsx'
+// Containers
+import Application from './containers/Application.jsx'
+import Dashboard from './containers/Dashboard.jsx'
+
+// Pages
+import Home from './pages/Home.jsx'
+import PageEdit from './pages/PageEdit.jsx'
 
 // Stores
-import * as stores from './../stores'
+import * as stores from './stores'
 
 const dispatcher = createDispatcher(
   composeStores(stores),
   getState => [ thunkMiddleware(getState), loggerMiddleware ]
 )
 
-const redux = createRedux(dispatcher);
+const redux = createRedux(dispatcher)
 
-var App = React.createClass({
-  render: function () {
+export default class Root extends React.Component {
+  render () {
     const { history } = this.props
-
     return (
       <Provider redux={redux}>
         {renderRoutes.bind(null, history)}
       </Provider>
-    );
+    )
   }
-});
+}
 
 function renderRoutes(history) {
   return(
@@ -46,5 +48,3 @@ function renderRoutes(history) {
     </Router>
   )
 }
-
-module.exports = App;

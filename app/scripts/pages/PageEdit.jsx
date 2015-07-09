@@ -1,8 +1,9 @@
-var PageBlock = require("./PageBlock.jsx")
+import React from 'react'
+import PageBlock from './../components/PageBlock.jsx'
 
 var PageEdit = React.createClass({
   render: function(){
-    var page = this.props.mobilization.pages[0];
+    var page = this.props.mobilization.pages[0]
     var blocks = page.blocks
 
     return (
@@ -13,8 +14,8 @@ var PageEdit = React.createClass({
           })
         }
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = PageEdit;
+module.exports = PageEdit

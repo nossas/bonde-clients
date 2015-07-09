@@ -1,14 +1,18 @@
-import AppMenu from './AppMenu.jsx'
+import React from 'react'
 import PubSub from 'pubsub-js'
+import Auth from 'j-toker'
+
+// Components
+import MainMenu from './../components/MainMenu.jsx'
 
 Auth.configure({
   apiUrl: process.env.BASE_URL,
   handleTokenValidationResponse: function(resp) {
     // https://github.com/lynndylanhurley/j-toker/issues/10
     PubSub.publish("auth.validation.success", resp.data)
-    return resp.data;
+    return resp.data
   }
-});
+})
 
 export default class Application extends React.Component {
   constructor(props, context) {
@@ -21,15 +25,14 @@ export default class Application extends React.Component {
 
   componentWillMount() {
     PubSub.subscribe('auth', function() {
-      this.setState({user: Auth.user});
-    }.bind(this));
+      this.setState({user: Auth.user})
+    }.bind(this))
   }
 
   render() {
-    console.log(this.props)
     return(
       <div>
-        <AppMenu />
+        <MainMenu />
         {this.props.children &&
           React.cloneElement(this.props.children, {user: this.state.user})}
       </div>

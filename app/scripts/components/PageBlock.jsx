@@ -1,8 +1,9 @@
-var PageBlockColumn = require("./PageBlockColumn.jsx")
+import React from 'react'
+import PageBlockColumn from "./PageBlockColumn.jsx"
 
-var PageBlock = React.createClass({
-  render: function(){
-    var columns = this.props.block.columns;
+export default class PageBlock extends React.Component {
+  render(){
+    var columns = this.props.block.columns
 
     return(
       <div className="clearfix mb4">
@@ -14,6 +15,4 @@ var PageBlock = React.createClass({
       </div>
     )
   }
-});
-
-module.exports = PageBlock;
+}

@@ -1,7 +1,8 @@
-var LoginForm = require('./LoginForm.jsx')
+import React from 'react'
+import LoginForm from './../components/LoginForm.jsx'
 
-var Home = React.createClass({
-  render: function() {
+export default class Home extends React.Component {
+  render() {
     return (
       <div className="container">
         <div className="lg-col-4">
@@ -9,8 +10,6 @@ var Home = React.createClass({
           <LoginForm />
         </div>
       </div>
-    );
+    )
   }
-});
-
-module.exports = Home;
+}
