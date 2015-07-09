@@ -12,10 +12,11 @@ export default class PageBlock extends React.Component {
           columns.map(function(column){
             return(
               <PageBlockColumn
+                {...this.props}
                 key={block.uuid + block.columns.indexOf(column)}
                 column={column} />
             )
-          })
+          }.bind(this))
         }
       </div>
     )
