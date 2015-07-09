@@ -1,12 +1,5 @@
-export default function mobilization(state = initialState, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
-
-const initialState = {
-  mobilization: {
+const initialState = [
+  {
     name: "Bicicletada contra a redução da maioridade penal",
     pages: [{
       blocks: [{
@@ -44,5 +37,12 @@ const initialState = {
         }]
       }]
     }]
+  }
+]
+
+export default function mobilization(state = initialState, action) {
+  switch (action.type) {
+    default:
+      return state
   }
 }
