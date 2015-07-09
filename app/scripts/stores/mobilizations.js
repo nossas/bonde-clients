@@ -40,7 +40,7 @@ const initialState = [
   }
 ]
 
-export default function mobilization(state = initialState, action) {
+export default function mobilizations(state = initialState, action) {
   switch (action.type) {
     default:
       return state
