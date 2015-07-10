@@ -2,7 +2,7 @@ var Webpack = require('webpack');
 var path = require('path');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = path.resolve(__dirname, 'public', 'build');
-var mainPath = path.resolve(__dirname, 'app', 'scripts', 'main.jsx');
+var mainPath = path.resolve(__dirname, 'app', 'scripts', 'index.jsx');
 var autoprefixer = require('autoprefixer-core');
 
 module.exports = {
