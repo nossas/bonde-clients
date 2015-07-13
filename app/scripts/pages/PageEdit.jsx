@@ -1,25 +1,26 @@
 import React from 'react'
 import PageBlock from './../components/PageBlock.jsx'
 import { bindActionCreators } from 'redux'
-import * as MobilizationActions from './../actions/MobilizationActions'
+import * as WidgetActions from './../actions/WidgetActions'
+import { connect } from 'redux/react'
 
-var PageEdit = React.createClass({
-  render: function(){
-    const page = this.props.mobilization.pages[0]
-    const { blocks } = page
-    const { dispatch } = this.props
-    const actions = bindActionCreators(MobilizationActions, dispatch)
+@connect(state => ({
+  blocks: state.blocks
+}))
+
+export default class PageEdit extends React.Component {
+  render(){
+    const { mobilization, dispatch } = this.props
+    const actions = bindActionCreators(WidgetActions, dispatch)
 
     return (
       <div className="flex-auto p2">
         {
-          blocks.map(function(block){
+          this.props.blocks.map(function(block){
             return <PageBlock {...this.props} actions={actions} key={block.uuid} block={block} />
           }.bind(this))
         }
       </div>
     )
   }
-})
-
-module.exports = PageEdit
+}

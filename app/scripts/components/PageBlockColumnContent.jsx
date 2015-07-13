@@ -15,12 +15,10 @@ export default class PageBlockColumnContent extends React.Component {
 
   onSaveClick() {
     this.setState({editing: false})
-    this.props.actions.editColumnContent(
-      this.props.mobilization.id,
-      this.props.block.uuid,
-      this.props.column.hash,
-      this.state.content
-    )
+    this.props.actions.editWidget({
+      id: this.props.column.id,
+      content: this.state.content
+    })
   }
 
   onContentChange(e) {
