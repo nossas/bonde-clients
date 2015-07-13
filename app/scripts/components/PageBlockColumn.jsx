@@ -3,14 +3,12 @@ import PageBlockColumnContent from "./PageBlockColumnContent.jsx"
 
 export default class PageBlockColumn extends React.Component {
   render(){
-    var column = this.props.column
-    var className = "border p2 col col-" + column.size
+    var className = "border p2 col col-" + this.props.widget.size
 
     return(
       <div className={className}>
         <PageBlockColumnContent
-          {...this.props}
-          column={column} />
+          {...this.props} />
       </div>
     )
   }

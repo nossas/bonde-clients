@@ -8,18 +8,17 @@ import { connect } from 'redux/react'
 
 export default class PageBlock extends React.Component {
   render(){
-    const block = this.props.block
-    const columns = this.props.widgets
+    const { widgets } = this.props
 
     return(
       <div className="clearfix mb4">
         {
-          columns.map(function(column){
+          widgets.map(function(widget){
             return(
               <PageBlockColumn
                 {...this.props}
-                key={block.uuid + columns.indexOf(column)}
-                column={column} />
+                key={"widget-" + widget.id}
+                widget={widget} />
             )
           }.bind(this))
         }

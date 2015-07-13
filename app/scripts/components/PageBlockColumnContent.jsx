@@ -5,7 +5,7 @@ export default class PageBlockColumnContent extends React.Component {
     super(props, context)
     this.state = {
       editing: false,
-      content: props.column.content
+      content: props.widget.content
     }
   }
 
@@ -16,7 +16,7 @@ export default class PageBlockColumnContent extends React.Component {
   onSaveClick() {
     this.setState({editing: false})
     this.props.actions.editWidget({
-      id: this.props.column.id,
+      id: this.props.widget.id,
       content: this.state.content
     })
   }
@@ -36,7 +36,7 @@ export default class PageBlockColumnContent extends React.Component {
       )
     } else {
       element = (
-        <div onClick={::this.onContentClick}>{this.props.column.content}</div>
+        <div onClick={::this.onContentClick}>{this.props.widget.content}</div>
       )
     }
 
