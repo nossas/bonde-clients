@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class PageBlockColumnContent extends React.Component {
+export default class WidgetContent extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {

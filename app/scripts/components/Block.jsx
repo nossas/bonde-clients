@@ -1,12 +1,12 @@
 import React from 'react'
-import PageBlockColumn from "./PageBlockColumn.jsx"
+import Widget from "./Widget.jsx"
 import { connect } from 'redux/react'
 
 @connect(state => ({
   widgets: state.widgets
 }))
 
-export default class PageBlock extends React.Component {
+export default class Block extends React.Component {
   render(){
     const { widgets } = this.props
 
@@ -15,7 +15,7 @@ export default class PageBlock extends React.Component {
         {
           widgets.map(function(widget){
             return(
-              <PageBlockColumn
+              <Widget
                 {...this.props}
                 key={"widget-" + widget.id}
                 widget={widget} />

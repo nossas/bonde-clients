@@ -1,5 +1,5 @@
 import React from 'react'
-import PageBlock from './../components/PageBlock.jsx'
+import Block from './../components/Block.jsx'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import { connect } from 'redux/react'
@@ -17,7 +17,7 @@ export default class PageEdit extends React.Component {
       <div className="flex-auto p2">
         {
           this.props.blocks.map(function(block){
-            return <PageBlock {...this.props} actions={actions} key={block.uuid} block={block} />
+            return <Block {...this.props} actions={actions} key={block.uuid} block={block} />
           }.bind(this))
         }
       </div>
