@@ -1,1 +1,2 @@
 export const EDIT_COLUMN_CONTENT = 'EDIT_COLUMN_CONTENT'
+export const EDIT_WIDGET = 'EDIT_WIDGET'
