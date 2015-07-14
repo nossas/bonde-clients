@@ -5,7 +5,7 @@ export default class WidgetContent extends React.Component {
     super(props, context)
     this.state = {
       editing: false,
-      content: props.widget.content
+      content: props.widget.settings.content
     }
   }
 
@@ -17,7 +17,7 @@ export default class WidgetContent extends React.Component {
     this.setState({editing: false})
     this.props.actions.editWidget({
       id: this.props.widget.id,
-      content: this.state.content
+      settings: {content: this.state.content}
     })
   }
 
@@ -36,7 +36,7 @@ export default class WidgetContent extends React.Component {
       )
     } else {
       element = (
-        <div onClick={::this.onContentClick}>{this.props.widget.content}</div>
+        <div onClick={::this.onContentClick}>{this.props.widget.settings.content}</div>
       )
     }
 

@@ -1,10 +1,5 @@
 import React from 'react'
 import Widget from "./Widget.jsx"
-import { connect } from 'redux/react'
-
-@connect(state => ({
-  widgets: state.widgets
-}))
 
 export default class Block extends React.Component {
   render(){
