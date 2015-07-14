@@ -17,13 +17,20 @@ export default class Dashboard extends React.Component {
 
   render(){
     const mobilization = this.props.mobilizations[0]
+    return(mobilization ? this.renderDashboard(mobilization) : this.renderLoader())
+  }
 
-    return (
+  renderDashboard(mobilization){
+    return(
       <div className="flex flex-stretch">
         <DashboardMenu {...this.props} mobilization={mobilization} />
         {this.props.children &&
           React.cloneElement(this.props.children, {...this.props, mobilization: mobilization})}
       </div>
     )
+  }
+
+  renderLoader(){
+    return(<div>Carregando...</div>)
   }
 }
