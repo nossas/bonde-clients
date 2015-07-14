@@ -1,2 +1,6 @@
 node_modules
 *.log
+
+=0.0.4
+*.sublime-project
+*.sublime-workspace
