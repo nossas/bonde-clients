@@ -2,21 +2,29 @@ import React from 'react'
 import Widget from "./Widget.jsx"
 
 export default class Block extends React.Component {
-  render(){
-    const { widgets } = this.props
+  filterWidgets(widgets, block){
+    return widgets.filter(function(widget){
+      return widget.block_id == block.id
+    }.bind(this))
+  }
 
+  renderWidgets(widgets){
+    return widgets.map(function(widget){
+      return(
+        <Widget
+          {...this.props}
+          key={"widget-" + widget.id}
+          widget={widget} />
+      )
+    }.bind(this))
+  }
+
+  render(){
+    const { widgets, block } = this.props
+    const filteredWidgets = this.filterWidgets(widgets, block)
     return(
       <div className="clearfix mb4">
-        {
-          widgets.map(function(widget){
-            return(
-              <Widget
-                {...this.props}
-                key={"widget-" + widget.id}
-                widget={widget} />
-            )
-          }.bind(this))
-        }
+        { this.renderWidgets(filteredWidgets) }
       </div>
     )
   }
