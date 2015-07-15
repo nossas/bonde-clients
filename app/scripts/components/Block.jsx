@@ -1,5 +1,6 @@
 import React from 'react'
 import Widget from "./Widget.jsx"
+import classnames from 'classnames'
 
 export default class Block extends React.Component {
   filterWidgets(widgets, block){
@@ -23,7 +24,7 @@ export default class Block extends React.Component {
     const { widgets, block } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className="clearfix py4">
+      <div className={classnames("clearfix", "py4", block.bg_class)}>
         { this.renderWidgets(filteredWidgets) }
       </div>
     )

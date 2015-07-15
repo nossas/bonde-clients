@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import Block from './../components/Block.jsx'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
@@ -20,8 +21,10 @@ export default class PageEdit extends React.Component {
   }
 
   render(){
+    const { mobilization } = this.props
+    const className = classnames("flex-auto", mobilization.color_scheme, mobilization.font_set)
     return (
-      <div className="flex-auto">
+      <div className={className}>
         {
           this.props.blocks.map(function(block){
             return <Block {...this.props} key={"block-" + block.id} block={block} />
