@@ -36,7 +36,9 @@ export default class WidgetContent extends React.Component {
       )
     } else {
       element = (
-        <div onClick={::this.onContentClick}>{this.props.widget.settings.content}</div>
+        <div
+          onClick={::this.onContentClick}
+          dangerouslySetInnerHTML={{__html: this.props.widget.settings.content}} />
       )
     }
 

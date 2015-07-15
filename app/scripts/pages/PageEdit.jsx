@@ -21,7 +21,7 @@ export default class PageEdit extends React.Component {
 
   render(){
     return (
-      <div className="flex-auto p2">
+      <div className="flex-auto">
         {
           this.props.blocks.map(function(block){
             return <Block {...this.props} key={"block-" + block.id} block={block} />

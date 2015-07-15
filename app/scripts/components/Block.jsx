@@ -23,7 +23,7 @@ export default class Block extends React.Component {
     const { widgets, block } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className="clearfix mb4">
+      <div className="clearfix py4">
         { this.renderWidgets(filteredWidgets) }
       </div>
     )
