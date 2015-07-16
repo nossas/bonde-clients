@@ -22,7 +22,7 @@ export default class PageEdit extends React.Component {
 
   orderBlocks(blocks){
     return blocks.sort(function(b1, b2){
-      return b1.index > b2.index
+      return b1.position > b2.position
     })
   }
 

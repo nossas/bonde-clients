@@ -10,8 +10,8 @@ let block1, block2, disorderlyBlocks, orderlyBlocks, mobilization, dispatch
 
 describe('PageEdit', function() {
   before(function(){
-    block1 = { index: 0, id: 1 }
-    block2 = { index: 1, id: 2 }
+    block1 = { position: 0, id: 1 }
+    block2 = { position: 1, id: 2 }
     orderlyBlocks = [block1, block2]
     disorderlyBlocks = [block2, block1]
     mobilization = { color_scheme: "meurio-scheme", font_set: "brush-up" }
@@ -19,7 +19,7 @@ describe('PageEdit', function() {
   })
 
   describe('#orderBlocks', function(){
-    it('should return blocks ordered by index', function(){
+    it('should return blocks ordered by position', function(){
       const blocks = PageEdit.prototype.orderBlocks(disorderlyBlocks)
       expect(blocks).to.be.eql(orderlyBlocks)
     })
