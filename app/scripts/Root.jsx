@@ -14,6 +14,7 @@ import Dashboard from './containers/Dashboard.jsx'
 // Pages
 import Home from './pages/Home.jsx'
 import PageEdit from './pages/PageEdit.jsx'
+import NewContentBlock from './pages/NewContentBlock.jsx'
 
 // Stores
 import * as stores from './stores'
@@ -42,7 +43,8 @@ function renderRoutes(history) {
       <Route component={Application}>
         <Route path="/" component={Home}/>
         <Route path="dashboard" component={Dashboard}>
-          <Route path="/edit" component={PageEdit} />
+          <Route path="edit" component={PageEdit} />
+          <Route path="new" component={NewContentBlock} />
         </Route>
       </Route>
     </Router>

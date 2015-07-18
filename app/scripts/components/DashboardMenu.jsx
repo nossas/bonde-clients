@@ -10,8 +10,10 @@ export default class DashboardMenu extends React.Component {
           {user.first_name} {user.last_name}
         </div>
         <div>
-          <h3 className="silver">Mobilização</h3>
+          <h4 className="silver caps muted">Mobilização</h4>
           {mobilization.name}
+          <h4 className="silver caps muted">Construção da página</h4>
+          <a href="#/dashboard/new" className="silver caps">+ Conteúdo</a>
         </div>
       </div>
     )
