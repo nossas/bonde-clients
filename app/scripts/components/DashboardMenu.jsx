@@ -2,6 +2,7 @@ import React from 'react'
 
 export default class DashboardMenu extends React.Component {
   render(){
+    console.log(this.props)
     const { user, mobilization } = this.props
     const style = { minWidth: "300px" }
     return(
@@ -11,7 +12,7 @@ export default class DashboardMenu extends React.Component {
         </div>
         <div>
           <h4 className="silver caps muted">Mobilização</h4>
-          {mobilization.name}
+          <a href="#/dashboard/edit" className="white">{mobilization.name}</a>
           <h4 className="silver caps muted">Construção da página</h4>
           <a href="#/dashboard/new" className="silver caps">+ Conteúdo</a>
         </div>
