@@ -2,7 +2,6 @@ import React from 'react'
 
 export default class DashboardMenu extends React.Component {
   render(){
-    console.log(this.props)
     const { user, mobilization } = this.props
     const style = { minWidth: "300px" }
     return(
