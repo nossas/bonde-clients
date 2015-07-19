@@ -78,15 +78,26 @@ export default class Block extends React.Component {
     })
   }
 
+  handleToggleHiddenClick() {
+    this.bindedBlockActions.editBlock({
+      mobilization_id: this.props.mobilization.id,
+      block_id: this.props.block.id,
+      block: {
+        hidden: !this.props.block.hidden
+      }
+    })
+  }
+
   render(){
     const { widgets, block } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", this.props.block.bg_class)}>
+      <div className={classnames("clearfix", block.bg_class)}>
         <div className="right-align py2">
           <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
-          <button className="button mr2" disabled={this.props.block.position == 1} onClick={::this.handleMoveUpClick}>Mover para cima</button>
-          <button className="button mr2" disabled={this.props.block.position == this.props.blocks.length} onClick={::this.handleMoveDownClick}>Mover para baixo</button>
+          <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>
+          <button className="button mr2" disabled={block.position == 1} onClick={::this.handleMoveUpClick}>▲</button>
+          <button className="button mr2" disabled={block.position == this.props.blocks.length} onClick={::this.handleMoveDownClick}>▼</button>
         </div>
         { this.renderColorPicker() }
         <div className="clearfix py4">

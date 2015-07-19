@@ -16,15 +16,19 @@ export default function blocks(state = [], action) {
           return block
         }
       })
-      blocks = blocks.map(function(block) {
-        if (block.position == new_position && block.id != action.block.id) {
-          block.position = old_position
-        }
-        return block
-      })
-      return blocks.sort(function(b1, b2){
-        return b1.position > b2.position
-      })
+      if (old_position != new_position) {
+        blocks = blocks.map(function(block) {
+          if (block.position == new_position && block.id != action.block.id) {
+            block.position = old_position
+          }
+          return block
+        })
+        return blocks.sort(function(b1, b2){
+          return b1.position > b2.position
+        })
+      } else {
+        return blocks
+      }
     default:
       return state
   }
