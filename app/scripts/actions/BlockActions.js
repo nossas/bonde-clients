@@ -1,4 +1,4 @@
-import { FETCH_BLOCKS } from '../constants/ActionTypes'
+import { FETCH_BLOCKS, EDIT_BLOCK } from '../constants/ActionTypes'
 
 const BASE_URL = process.env.BASE_URL
 
@@ -31,5 +31,23 @@ export function addBlock(params) {
     .then(res => res.json())
     .then(res => console.log(this))
     // TODO redirect to /dashboard/edit
+  }
+}
+
+export function editBlock(params) {
+  return dispatch => {
+    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ block: params.block })
+    })
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: EDIT_BLOCK,
+      block: res
+    }))
   }
 }
