@@ -20,20 +20,13 @@ export default class PageEdit extends React.Component {
     bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
   }
 
-  orderBlocks(blocks){
-    return blocks.sort(function(b1, b2){
-      return b1.position > b2.position
-    })
-  }
-
   render(){
     const { mobilization, blocks } = this.props
     const className = classnames("flex-auto", mobilization.color_scheme, mobilization.font_set)
-    const orderlyBlocks = this.orderBlocks(blocks)
     return (
       <div className={className}>
         {
-          orderlyBlocks.map(function(block){
+          blocks.map(function(block){
             return <Block {...this.props} key={"block-" + block.id} block={block} />
           }.bind(this))
         }
