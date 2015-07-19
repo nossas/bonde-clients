@@ -5,7 +5,7 @@ export default class WidgetContent extends React.Component {
     super(props, context)
     this.state = {
       editing: false,
-      content: props.widget.settings.content
+      content: (props.widget.settings ? props.widget.settings.content : 'Clique para editar...')
     }
   }
 
@@ -38,7 +38,7 @@ export default class WidgetContent extends React.Component {
       element = (
         <div
           onClick={::this.onContentClick}
-          dangerouslySetInnerHTML={{__html: this.props.widget.settings.content}} />
+          dangerouslySetInnerHTML={{__html: (this.props.widget.settings ? this.props.widget.settings.content : 'Clique para editar...')}} />
       )
     }
 
