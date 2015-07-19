@@ -37,7 +37,7 @@ export default class Block extends React.Component {
     if(this.state.editingBackground) {
       return(
         <div className="clearfix bg-white p2">
-          <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
         </div>
       )
     }
