@@ -1,4 +1,4 @@
-import { FETCH_BLOCKS, EDIT_BLOCK } from '../constants/ActionTypes'
+import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK } from '../constants/ActionTypes'
 
 const BASE_URL = process.env.BASE_URL
 
@@ -47,6 +47,23 @@ export function editBlock(params) {
     .then(res => res.json())
     .then(res => dispatch({
       type: EDIT_BLOCK,
+      block: res
+    }))
+  }
+}
+
+export function removeBlock(params) {
+  return dispatch => {
+    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: REMOVE_BLOCK,
       block: res
     }))
   }

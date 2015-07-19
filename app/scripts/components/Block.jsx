@@ -88,6 +88,15 @@ export default class Block extends React.Component {
     })
   }
 
+  handleRemoveClick() {
+    if (confirm("Você tem certeza que quer remover este bloco?")) {
+      this.bindedBlockActions.removeBlock({
+        mobilization_id: this.props.mobilization.id,
+        block_id: this.props.block.id
+      })
+    }
+  }
+
   render(){
     const { widgets, block } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
@@ -96,6 +105,7 @@ export default class Block extends React.Component {
         <div className="right-align py2">
           <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
           <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>
+          <button className="button mr2" onClick={::this.handleRemoveClick}>Remover</button>
           <button className="button mr2" disabled={block.position == 1} onClick={::this.handleMoveUpClick}>▲</button>
           <button className="button mr2" disabled={block.position == this.props.blocks.length} onClick={::this.handleMoveDownClick}>▼</button>
         </div>

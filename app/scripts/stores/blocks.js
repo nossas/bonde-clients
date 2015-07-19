@@ -1,4 +1,4 @@
-import { FETCH_BLOCKS, EDIT_BLOCK } from './../constants/ActionTypes'
+import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK } from './../constants/ActionTypes'
 
 export default function blocks(state = [], action) {
   switch (action.type) {
@@ -29,6 +29,10 @@ export default function blocks(state = [], action) {
       } else {
         return blocks
       }
+    case REMOVE_BLOCK:
+      return state.filter(function(block){
+        return action.block.id != block.id
+      })
     default:
       return state
   }

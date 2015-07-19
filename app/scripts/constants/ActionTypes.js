@@ -8,3 +8,4 @@ export const EDIT_WIDGET = 'EDIT_WIDGET'
 // Block actions
 export const FETCH_BLOCKS = 'FETCH_BLOCKS'
 export const EDIT_BLOCK = 'EDIT_BLOCK'
+export const REMOVE_BLOCK = 'REMOVE_BLOCK'
