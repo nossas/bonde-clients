@@ -26,8 +26,8 @@ export default class PageEdit extends React.Component {
     return (
       <div className={className}>
         {
-          blocks.map(function(block){
-            return <Block {...this.props} key={"block-" + block.id} block={block} />
+          blocks.map(function(block, index){
+            return <Block {...this.props} key={"block-" + block.id} block={block} index={index} />
           }.bind(this))
         }
       </div>
