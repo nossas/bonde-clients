@@ -49,7 +49,7 @@ export default class Block extends React.Component {
       mobilization_id: this.props.mobilization.id,
       block_id: this.props.block.id,
       block: {
-        bg_class: event.target.getAttribute('data-bg-class')
+        bg_class: event.currentTarget.getAttribute('data-bg-class')
       }
     })
   }
