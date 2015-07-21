@@ -1,4 +1,4 @@
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK } from '../constants/ActionTypes'
+import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../constants/ActionTypes'
 
 const BASE_URL = process.env.BASE_URL
 
@@ -64,6 +64,44 @@ export function removeBlock(params) {
     .then(res => res.json())
     .then(res => dispatch({
       type: REMOVE_BLOCK,
+      block: res
+    }))
+  }
+}
+
+export function moveBlockUp(params) {
+  const { block, blocks } = params
+  return dispatch => {
+    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ block: {position: blocks[blocks.indexOf(block) - 1].position} })
+    })
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: MOVE_BLOCK_UP,
+      block: res
+    }))
+  }
+}
+
+export function moveBlockDown(params) {
+  const { block, blocks } = params
+  return dispatch => {
+    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ block: {position: blocks[blocks.indexOf(block) + 1].position} })
+    })
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: MOVE_BLOCK_DOWN,
       block: res
     }))
   }
