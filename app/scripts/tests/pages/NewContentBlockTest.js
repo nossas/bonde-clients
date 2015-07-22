@@ -1,11 +1,12 @@
 import React from 'react/addons'
+import * as BlockActions from './../../actions/BlockActions'
 import { BlockMiniature, ColorPicker } from './../../components'
 import NewContentBlock from './../../pages/NewContentBlock.jsx'
 import classnames from 'classnames'
 
 const { TestUtils } = React.addons
 
-let component, mobilization, dispatch
+let container, component, mobilization, dispatch
 
 before(() => {
   mobilization = { id: 1 }
@@ -45,8 +46,17 @@ describe('NewContentBlock', () => {
 
   describe('#handleAddBlockClick', () => {
     it('should dispatch add block action', () => {
+      const addBlockStub = sinon.stub(BlockActions, 'addBlock')
+      component.setState({
+        selectedSizes: [68, 69],
+        bgClass: 'bg-test'
+      })
       component.handleAddBlockClick()
-      // TODO: how to test this?
+      expect(addBlockStub).to.have.been.calledWith({
+        bg_class: 'bg-test',
+        mobilization_id: mobilization.id,
+        widgets: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
+      })
     })
   })
 
