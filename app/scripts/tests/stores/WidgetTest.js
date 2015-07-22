@@ -1,9 +1,9 @@
 import widgets from './../../stores/widgets'
 import { EDIT_WIDGET } from './../../constants/ActionTypes';
 
-describe('widgets', function(){
-  describe('EDIT_WIDGET', function(){
-    it("should return the edited widget", function(){
+describe('widgets', () => {
+  describe('EDIT_WIDGET', () => {
+    it("should return the edited widget", () => {
       const newContent = "My widget content"
       const initialState = [
         {

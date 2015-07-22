@@ -3,8 +3,8 @@ import MainMenu from './../../components/MainMenu.jsx'
 
 let { TestUtils } = React.addons
 
-describe('MainMenu', function() {
-  it('should render a link to #', function(){
+describe('MainMenu', () => {
+  it('should render a link to #', () => {
     var component = TestUtils.renderIntoDocument(
       <MainMenu />
     )

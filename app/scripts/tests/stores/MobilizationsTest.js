@@ -1,4 +1,4 @@
 import mobilizations from './../../stores/mobilizations'
 
-describe('mobilizations', function(){
+describe('mobilizations', () => {
 })

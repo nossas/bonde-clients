@@ -37,7 +37,7 @@ export default class Block extends React.Component {
     if(this.state.editingBackground) {
       return(
         <div className="clearfix bg-white p2">
-          <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
         </div>
       )
     }
@@ -49,7 +49,7 @@ export default class Block extends React.Component {
       mobilization_id: this.props.mobilization.id,
       block_id: this.props.block.id,
       block: {
-        bg_class: event.target.getAttribute('data-bg-class')
+        bg_class: event.currentTarget.getAttribute('data-bg-class')
       }
     })
   }
@@ -59,22 +59,18 @@ export default class Block extends React.Component {
   }
 
   handleMoveUpClick() {
-    this.bindedBlockActions.editBlock({
+    this.bindedBlockActions.moveBlockUp({
       mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
-      block: {
-        position: this.props.blocks[this.props.index - 1].position
-      }
+      block: this.props.block,
+      blocks: this.props.blocks
     })
   }
 
   handleMoveDownClick() {
-    this.bindedBlockActions.editBlock({
+    this.bindedBlockActions.moveBlockDown({
       mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
-      block: {
-        position: this.props.blocks[this.props.index + 1].position
-      }
+      block: this.props.block,
+      blocks: this.props.blocks
     })
   }
 
@@ -98,7 +94,7 @@ export default class Block extends React.Component {
   }
 
   render(){
-    const { widgets, block, blocks, index } = this.props
+    const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
       <div className={classnames("clearfix", "relative", block.bg_class)}>
@@ -106,8 +102,8 @@ export default class Block extends React.Component {
           <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
           <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>
           <button className="button mr2" onClick={::this.handleRemoveClick}>Remover</button>
-          <button className="button mr2" disabled={block.position == blocks[0].position} onClick={::this.handleMoveUpClick}>▲</button>
-          <button className="button mr2" disabled={block.position == blocks[blocks.length - 1].position} onClick={::this.handleMoveDownClick}>▼</button>
+          <button className="button mr2" disabled={!canMoveUp} onClick={::this.handleMoveUpClick}>▲</button>
+          <button className="button mr2" disabled={!canMoveDown} onClick={::this.handleMoveDownClick}>▼</button>
         </div>
         { this.renderColorPicker() }
         <div className="clearfix py4">

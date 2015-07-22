@@ -1,34 +1,37 @@
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK } from './../constants/ActionTypes'
+import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from './../constants/ActionTypes'
 
 export default function blocks(state = [], action) {
   switch (action.type) {
     case FETCH_BLOCKS:
       return action.blocks
     case EDIT_BLOCK:
-      var old_position
-      var new_position
-      let blocks = state.map(function(block) {
+      return state.map(function(block) {
         if (block.id == action.block.id) {
-          old_position = block.position
-          new_position = action.block.position
           return action.block
         } else {
           return block
         }
       })
-      if (old_position != new_position) {
-        blocks = blocks.map(function(block) {
-          if (block.position == new_position && block.id != action.block.id) {
-            block.position = old_position
-          }
+    case MOVE_BLOCK_UP:
+      return state.map(function(block, index) {
+        if (index + 1 < state.length && state[index + 1].id == action.block.id) {
+          return action.block
+        } else if (block.id == action.block.id) {
+          return state[index - 1]
+        } else {
           return block
-        })
-        return blocks.sort(function(b1, b2){
-          return b1.position > b2.position
-        })
-      } else {
-        return blocks
-      }
+        }
+      })
+    case MOVE_BLOCK_DOWN:
+      return state.map(function(block, index) {
+        if (index > 0 && state[index - 1].id == action.block.id) {
+          return action.block
+        } if (block.id == action.block.id) {
+          return state[index + 1]
+        } else {
+          return block
+        }
+      })
     case REMOVE_BLOCK:
       return state.filter(function(block){
         return action.block.id != block.id

@@ -6,33 +6,32 @@ import classnames from 'classnames'
 const PageEdit = PageEditImport.DecoratedComponent
 const { TestUtils } = React.addons
 
-let block1, block2, disorderlyBlocks, orderlyBlocks, mobilization, dispatch
+let block1, block2, blocks, mobilization, dispatch
 
-describe('PageEdit', function() {
-  before(function(){
+describe('PageEdit', () => {
+  before(() => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
-    orderlyBlocks = [block1, block2]
-    disorderlyBlocks = [block2, block1]
+    blocks = [block1, block2]
     mobilization = { color_scheme: "meurio-scheme", font_set: "brush-up" }
-    dispatch = function(){}
+    dispatch = () => {}
   })
 
-  describe('#render', function(){
+  describe('#render', () => {
     let component
 
-    before(function(){
+    before(() => {
       component = TestUtils.renderIntoDocument(
-        <PageEdit mobilization={mobilization} blocks={orderlyBlocks} widgets={[]} dispatch={dispatch} />
+        <PageEdit mobilization={mobilization} blocks={blocks} widgets={[]} dispatch={dispatch} />
       )
     })
 
-    it('should render blocks', function(){
+    it('should render blocks', () => {
       const blocksComponents = TestUtils.scryRenderedComponentsWithType(component, Block)
-      expect(blocksComponents).to.have.length(orderlyBlocks.length)
+      expect(blocksComponents).to.have.length(blocks.length)
     })
 
-    it('should apply mobilization classes', function(){
+    it('should apply mobilization classes', () => {
       const { color_scheme, font_set } = mobilization
       const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, font_set))
       expect(div).to.have.length(1)
