@@ -37,7 +37,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} />
       )
       const widgetsComponents = TestUtils.scryRenderedComponentsWithType(component, Widget)
-
       expect(widgetsComponents).to.have.length(blockWidgets.length)
     })
 
