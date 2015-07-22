@@ -5,8 +5,8 @@ let { TestUtils } = React.addons
 
 let widget1, widget2, allWidgets, blockWidgets, block
 
-describe('Block', function() {
-  before(function(){
+describe('Block', () => {
+  before(() => {
     widget1 = { block_id: 1, id: 1, settings: { content: "My widget1" } }
     widget2 = { block_id: 2, id: 2, settings: { content: "My widget2" } }
     allWidgets = [widget1, widget2]
@@ -14,16 +14,16 @@ describe('Block', function() {
     block = { id: 1 }
   })
 
-  describe('#filterWidgets', function(){
-    it('should return widgets filtered by block_id', function(){
+  describe('#filterWidgets', () => {
+    it('should return widgets filtered by block_id', () => {
       const filteredWidgets = Block.prototype.filterWidgets(allWidgets, block)
       expect(filteredWidgets).to.include(widget1)
       expect(filteredWidgets).to.not.include(widget2)
     })
   })
 
-  describe('#renderWidgets', function(){
-    it('should return widgets components', function(){
+  describe('#renderWidgets', () => {
+    it('should return widgets components', () => {
       const renderedWidgets = Block.prototype.renderWidgets(allWidgets)
       expect(renderedWidgets).to.have.length(allWidgets.length)
       assert(TestUtils.isElementOfType(renderedWidgets[0], Widget))
@@ -31,8 +31,8 @@ describe('Block', function() {
     })
   })
 
-  describe('#render', function(){
-    it('should render filtered widgets components', function(){
+  describe('#render', () => {
+    it('should render filtered widgets components', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} />
       )
@@ -41,7 +41,7 @@ describe('Block', function() {
       expect(widgetsComponents).to.have.length(blockWidgets.length)
     })
 
-    it('should render buttons', function(){
+    it('should render buttons', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} />
       )
@@ -52,10 +52,9 @@ describe('Block', function() {
       expect(buttons[2].getDOMNode().textContent).to.equal('Remover')
       expect(buttons[3].getDOMNode().textContent).to.equal('▲')
       expect(buttons[4].getDOMNode().textContent).to.equal('▼')
-      console.log(buttons[0].getDOMNode().onclick)
     })
 
-    it('should disable move up button when canMoveUp is false', function(){
+    it('should disable move up button when canMoveUp is false', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveUp={false} />
       )
@@ -64,7 +63,7 @@ describe('Block', function() {
       expect(buttons[3].getDOMNode().disabled).to.equal(true)
     })
 
-    it('should not disable move up button when canMoveUp is true', function(){
+    it('should not disable move up button when canMoveUp is true', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveUp={true} />
       )
@@ -73,7 +72,7 @@ describe('Block', function() {
       expect(buttons[3].getDOMNode().disabled).to.equal(false)
     })
 
-    it('should disable move down button when canMoveDown is false', function(){
+    it('should disable move down button when canMoveDown is false', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveDown={false} />
       )
@@ -82,7 +81,7 @@ describe('Block', function() {
       expect(buttons[4].getDOMNode().disabled).to.equal(true)
     })
 
-    it('should not disable move down button when canMoveDown is true', function(){
+    it('should not disable move down button when canMoveDown is true', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveDown={true} />
       )

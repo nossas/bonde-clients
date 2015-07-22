@@ -30,7 +30,7 @@ export default class NewContentBlock extends React.Component {
       mobilization_id: this.props.mobilization.id,
       bg_class: this.state.bgClass,
       widgets: this.state.selectedSizes.map((size) => {
-        return { kind: 'content', size: size }
+        return { kind: 'content', size }
       })
     })
   }
