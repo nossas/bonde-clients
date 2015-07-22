@@ -34,7 +34,7 @@ describe('Block', function() {
   describe('#render', function(){
     it('should return filtered widgets components', function(){
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} blocks={[{}]} />
       )
       const widgetsComponents = TestUtils.scryRenderedComponentsWithType(component, Widget)
 

@@ -18,13 +18,6 @@ describe('PageEdit', function() {
     dispatch = function(){}
   })
 
-  describe('#orderBlocks', function(){
-    it('should return blocks ordered by position', function(){
-      const blocks = PageEdit.prototype.orderBlocks(disorderlyBlocks)
-      expect(blocks).to.be.eql(orderlyBlocks)
-    })
-  })
-
   describe('#render', function(){
     let component
 
