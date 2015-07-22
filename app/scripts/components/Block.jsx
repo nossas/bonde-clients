@@ -101,7 +101,7 @@ export default class Block extends React.Component {
     const { widgets, block, blocks, index } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", block.bg_class)}>
+      <div className={classnames("clearfix", "relative", block.bg_class)}>
         <div className="right-align py2">
           <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
           <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>

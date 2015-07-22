@@ -10,6 +10,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      './public/wysihtml/wysihtml-toolbar.min.js',
+      './public/wysihtml/advanced_and_extended.js',
       'webpack.test.config.js'
     ],
 
