@@ -1,6 +1,6 @@
 import React from 'react'
 import Auth from 'j-toker'
-import * as MobilizationsPaths from '../paths/MobilizationsPaths'
+import * as Paths from '../Paths'
 var Navigation = require('react-router').Navigation
 require('react/addons')
 
@@ -19,7 +19,7 @@ var LoginForm = React.createClass({
     Auth.emailSignIn(this.state).
       then(function(user){
         // TODO change this to mobilizations index when we have that page
-        this.transitionTo(MobilizationsPaths.editMobilizationPath(1))
+        this.transitionTo(Paths.editMobilization(1))
       }.bind(this)).
       fail(function(error){
         console.log(error)

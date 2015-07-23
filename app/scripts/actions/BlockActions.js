@@ -1,5 +1,5 @@
 import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../constants/ActionTypes'
-import * as MobilizationsPaths from '../paths/MobilizationsPaths'
+import * as Paths from '../Paths'
 
 const BASE_URL = process.env.BASE_URL
 
@@ -30,7 +30,7 @@ export function addBlock(params) {
       })
     })
     .then(res => res.json())
-    .then(res => params.router.transitionTo(MobilizationsPaths.editMobilizationPath(params.mobilization_id)))
+    .then(res => params.router.transitionTo(Paths.editMobilization(params.mobilization_id)))
   }
 }
 

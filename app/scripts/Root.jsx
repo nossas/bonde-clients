@@ -2,6 +2,7 @@ import React from 'react'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
 import { Provider } from 'redux/react'
 import { createDispatcher, createRedux, composeStores } from 'redux'
+import * as Paths from './Paths'
 
 // Middlewares
 import loggerMiddleware from './middleware/logger.js'
@@ -42,7 +43,7 @@ function renderRoutes(history) {
     <Router history={history}>
       <Route component={Application}>
         <Route path="/" component={Home}/>
-        <Route path="mobilizations/:mobilization_id" component={Dashboard}>
+        <Route path={Paths.mobilization(':mobilization_id')} component={Dashboard}>
           <Route path="edit" component={PageEdit} />
           <Route path="blocks">         
             <Route path="new" component={NewContentBlock} />
