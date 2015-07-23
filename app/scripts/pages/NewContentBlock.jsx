@@ -36,6 +36,10 @@ export default class NewContentBlock extends React.Component {
     })
   }
 
+  handleCancelClick() {
+    this.context.router.transitionTo('/dashboard/edit')
+  }
+
   render(){
     return (
       <div className={classnames("flex-auto", "p2", "center", this.props.mobilization.color_scheme)}>
@@ -50,7 +54,12 @@ export default class NewContentBlock extends React.Component {
           <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
         </div>
         <div className="col col-12 px3">
-          <button className="col col-12 button bg-blue" onClick={::this.handleAddBlockClick}>Adicionar</button>
+          <div className="col col-6 px1">
+            <button className="button full-width" onClick={::this.handleAddBlockClick}>Adicionar</button>
+          </div>
+          <div className="col col-6 px1">
+            <button className="button button-transparent border full-width" onClick={::this.handleCancelClick}>Cancelar</button>
+          </div>
         </div>
       </div>
     )

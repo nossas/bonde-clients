@@ -61,6 +61,15 @@ describe('NewContentBlock', () => {
     })
   })
 
+  describe('#handleCancelClick', () => {
+    it('transition to edit mobilization page', () => {
+      component.context.router = { transitionTo() {} }
+      const transitionTo = sinon.stub(component.context.router, 'transitionTo')
+      component.handleCancelClick()
+      expect(transitionTo).to.have.been.calledWith('/dashboard/edit')
+    })
+  })
+
   describe('#render', () => {
 
     it('should render block miniatures', () => {
@@ -79,9 +88,11 @@ describe('NewContentBlock', () => {
 
     it('should render add button', () => {
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(1)
+      expect(buttons).to.have.length(2)
       expect(buttons[0].getDOMNode().textContent).to.equal('Adicionar')
+      expect(buttons[1].getDOMNode().textContent).to.equal('Cancelar')
       expect(buttons[0].props.onClick.toString()).to.equal(component.handleAddBlockClick.bind(component).toString())
+      expect(buttons[1].props.onClick.toString()).to.equal(component.handleCancelClick.bind(component).toString())
     })
 
   })
