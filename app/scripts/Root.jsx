@@ -42,9 +42,11 @@ function renderRoutes(history) {
     <Router history={history}>
       <Route component={Application}>
         <Route path="/" component={Home}/>
-        <Route path="dashboard" component={Dashboard}>
+        <Route path="mobilizations/:mobilization_id" component={Dashboard}>
           <Route path="edit" component={PageEdit} />
-          <Route path="new" component={NewContentBlock} />
+          <Route path="blocks">         
+            <Route path="new" component={NewContentBlock} />
+          </Route>
         </Route>
       </Route>
     </Router>

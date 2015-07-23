@@ -37,7 +37,7 @@ export default class NewContentBlock extends React.Component {
   }
 
   handleCancelClick() {
-    this.context.router.transitionTo('/dashboard/edit')
+    this.context.router.goBack()
   }
 
   render(){

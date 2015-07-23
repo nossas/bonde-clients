@@ -8,16 +8,15 @@ const { TestUtils } = React.addons
 
 let container, component, mobilization, dispatch
 
-before(() => {
-  mobilization = { id: 1 }
-  dispatch = () => {}
-  component = TestUtils.renderIntoDocument(
-    <NewContentBlock mobilization={mobilization} dispatch={dispatch} />
-  )
-})
-
-
 describe('NewContentBlock', () => {
+
+  before(() => {
+    mobilization = { id: 1 }
+    dispatch = () => {}
+    component = TestUtils.renderIntoDocument(
+      <NewContentBlock mobilization={mobilization} dispatch={dispatch} />
+    )
+  })
 
   describe('#constructor', () => {
     it('should set initial state', () => {
@@ -63,10 +62,10 @@ describe('NewContentBlock', () => {
 
   describe('#handleCancelClick', () => {
     it('transition to edit mobilization page', () => {
-      component.context.router = { transitionTo() {} }
-      const transitionTo = sinon.stub(component.context.router, 'transitionTo')
+      component.context.router = { goBack() {} }
+      const goBack = sinon.stub(component.context.router, 'goBack')
       component.handleCancelClick()
-      expect(transitionTo).to.have.been.calledWith('/dashboard/edit')
+      expect(goBack).to.have.been.calledOnce
     })
   })
 

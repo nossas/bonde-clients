@@ -29,7 +29,7 @@ export function addBlock(params) {
       })
     })
     .then(res => res.json())
-    .then(res => params.router.transitionTo('/dashboard/edit'))
+    .then(res => params.router.transitionTo(`/mobilizations/${params.mobilization_id}/edit`))
   }
 }
 

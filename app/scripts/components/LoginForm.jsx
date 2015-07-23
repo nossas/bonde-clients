@@ -17,7 +17,8 @@ var LoginForm = React.createClass({
     e.preventDefault()
     Auth.emailSignIn(this.state).
       then(function(user){
-        this.transitionTo('/dashboard/edit')
+        // TODO change this id to mobilizations index when we have that page
+        this.transitionTo('/mobilizations/1/edit')
       }.bind(this)).
       fail(function(error){
         console.log(error)
