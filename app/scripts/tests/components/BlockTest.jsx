@@ -45,12 +45,13 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(6)
+      expect(buttons).to.have.length(7)
       expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Alterar cor de fundo')
       expect(buttons[2].getDOMNode().textContent.trim()).to.equal('Esconder')
       expect(buttons[3].getDOMNode().textContent.trim()).to.equal('Remover')
       expect(buttons[4].getDOMNode().textContent.trim()).to.equal('Mover para cima')
       expect(buttons[5].getDOMNode().textContent.trim()).to.equal('Mover para baixo')
+      expect(buttons[6].getDOMNode().textContent.trim()).to.equal('Salvar')
     })
 
     it('should disable move up button when canMoveUp is false', () => {
