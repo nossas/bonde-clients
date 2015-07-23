@@ -29,8 +29,7 @@ export function addBlock(params) {
       })
     })
     .then(res => res.json())
-    .then(res => console.log(this))
-    // TODO redirect to /dashboard/edit
+    .then(res => params.router.transitionTo('/dashboard/edit'))
   }
 }
 

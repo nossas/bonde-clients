@@ -27,6 +27,7 @@ export default class NewContentBlock extends React.Component {
     const { dispatch } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     bindedBlockActions.addBlock({
+      router: this.context.router,
       mobilization_id: this.props.mobilization.id,
       bg_class: this.state.bgClass,
       widgets: this.state.selectedSizes.map((size) => {
@@ -37,7 +38,7 @@ export default class NewContentBlock extends React.Component {
 
   render(){
     return (
-      <div className="flex-auto p2 center">
+      <div className={classnames("flex-auto", "p2", "center", this.props.mobilization.color_scheme)}>
         <h2>Adicione um bloco de conteúdo</h2>
         <p className="mb3">Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento</p>
         <BlockMiniature sizes={[12]} selectedSizes={this.state.selectedSizes} onClick={::this.handleMiniatureClick} />

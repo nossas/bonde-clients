@@ -53,8 +53,9 @@ describe('NewContentBlock', () => {
       })
       component.handleAddBlockClick()
       expect(addBlockStub).to.have.been.calledWith({
-        bg_class: 'bg-test',
+        router: component.context.router,
         mobilization_id: mobilization.id,
+        bg_class: 'bg-test',
         widgets: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
       })
     })
