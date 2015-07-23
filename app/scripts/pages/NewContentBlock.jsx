@@ -55,3 +55,7 @@ export default class NewContentBlock extends React.Component {
     )
   }
 }
+
+NewContentBlock.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
