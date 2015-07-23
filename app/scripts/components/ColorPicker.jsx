@@ -11,7 +11,7 @@ export default class ColorPicker extends React.Component {
   }
 
   render() {
-    const bgClasses = ["bg-white", "bg-silver", "bg-gray", "bg-black", "bg-aqua", "bg-blue", "bg-navy", "bg-teal", "bg-green", "bg-olive", "bg-lime", "bg-yellow", "bg-orange", "bg-red", "bg-fuchsia", "bg-purple", "bg-maroon", "bg-darken-1", "bg-darken-2", "bg-darken-3", "bg-darken-4"]
+    const bgClasses = ["bg-1", "bg-2", "bg-3", "bg-4", "bg-5", "bg-6", "bg-7", "bg-8"]
     return (
       <div>
         {this.renderColors(bgClasses)}
