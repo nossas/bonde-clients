@@ -36,11 +36,28 @@ export default class Block extends React.Component {
   renderColorPicker(){
     if(this.state.editingBackground) {
       return(
-        <div className="clearfix bg-white p2">
-          <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
+        <div>
+          <div className="absolute full-width top-0 left-0 bg-silver" style={{zIndex: 9999}}>
+            <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick}  />
+            <button className="button button-transparent border rounded black mt1 ml1" onClick={::this.handleCancelEdit}>Cancelar</button>
+          </div>
+          <div
+            className="fixed top-0 right-0 bottom-0 left-0"
+            onClick={::this.handleCancelEdit}
+            style={{zIndex: 9998}} />
         </div>
       )
     }
+  }
+
+  handleKeyUp(event){
+    if (event.keyCode == 27) {
+      this.setState({editingBackground: false})
+    }
+  }
+
+  handleCancelEdit(){
+    this.setState({editingBackground: false})
   }
 
   handleColorClick(event) {
@@ -97,7 +114,7 @@ export default class Block extends React.Component {
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", "relative", block.bg_class)}>
+      <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp}>
         <div className="right-align py2">
           <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
           <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>
