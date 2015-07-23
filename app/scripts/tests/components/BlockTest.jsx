@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import { Block, Widget } from './../../components'
+import { Block, Widget, DropDownMenu } from './../../components'
 
 let { TestUtils } = React.addons
 
@@ -45,11 +45,13 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[0].getDOMNode().textContent).to.equal('Alterar cor de fundo')
-      expect(buttons[1].getDOMNode().textContent).to.equal('Esconder')
-      expect(buttons[2].getDOMNode().textContent).to.equal('Remover')
-      expect(buttons[3].getDOMNode().textContent).to.equal('▲')
-      expect(buttons[4].getDOMNode().textContent).to.equal('▼')
+      expect(buttons).to.have.length(7)
+      expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Alterar cor de fundo')
+      expect(buttons[2].getDOMNode().textContent.trim()).to.equal('Esconder')
+      expect(buttons[3].getDOMNode().textContent.trim()).to.equal('Remover')
+      expect(buttons[4].getDOMNode().textContent.trim()).to.equal('Mover para cima')
+      expect(buttons[5].getDOMNode().textContent.trim()).to.equal('Mover para baixo')
+      expect(buttons[6].getDOMNode().textContent.trim()).to.equal('Salvar')
     })
 
     it('should disable move up button when canMoveUp is false', () => {
@@ -57,7 +59,7 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveUp={false} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[3].getDOMNode().disabled).to.equal(true)
+      expect(buttons[4].getDOMNode().disabled).to.equal(true)
     })
 
     it('should not disable move up button when canMoveUp is true', () => {
@@ -65,7 +67,7 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveUp={true} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[3].getDOMNode().disabled).to.equal(false)
+      expect(buttons[4].getDOMNode().disabled).to.equal(false)
     })
 
     it('should disable move down button when canMoveDown is false', () => {
@@ -73,7 +75,7 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveDown={false} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[4].getDOMNode().disabled).to.equal(true)
+      expect(buttons[5].getDOMNode().disabled).to.equal(true)
     })
 
     it('should not disable move down button when canMoveDown is true', () => {
@@ -81,7 +83,7 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveDown={true} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[4].getDOMNode().disabled).to.equal(false)
+      expect(buttons[5].getDOMNode().disabled).to.equal(false)
     })
   })
 })
