@@ -11,7 +11,7 @@ export default class NewContentBlock extends React.Component {
     super(props, context)
     this.state = {
       selectedSizes: [12],
-      bgClass: 'bg-white'
+      bgClass: 'bg-1'
     }
   }
 

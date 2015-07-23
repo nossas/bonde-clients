@@ -23,7 +23,7 @@ describe('NewContentBlock', () => {
     it('should set initial state', () => {
       expect(component.state).to.eql({
         selectedSizes: [12],
-        bgClass: 'bg-white'
+        bgClass: 'bg-1'
       })
     })
   })
