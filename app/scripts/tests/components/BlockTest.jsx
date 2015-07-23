@@ -45,7 +45,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(5)
       expect(buttons[0].getDOMNode().textContent).to.equal('Alterar cor de fundo')
       expect(buttons[1].getDOMNode().textContent).to.equal('Esconder')
       expect(buttons[2].getDOMNode().textContent).to.equal('Remover')
@@ -58,7 +57,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveUp={false} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(5)
       expect(buttons[3].getDOMNode().disabled).to.equal(true)
     })
 
@@ -67,7 +65,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveUp={true} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(5)
       expect(buttons[3].getDOMNode().disabled).to.equal(false)
     })
 
@@ -76,7 +73,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveDown={false} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(5)
       expect(buttons[4].getDOMNode().disabled).to.equal(true)
     })
 
@@ -85,7 +81,6 @@ describe('Block', () => {
         <Block widgets={allWidgets} block={block} canMoveDown={true} />
       )
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(5)
       expect(buttons[4].getDOMNode().disabled).to.equal(false)
     })
   })

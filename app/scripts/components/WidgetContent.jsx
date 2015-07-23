@@ -7,16 +7,20 @@ export default class WidgetContent extends React.Component {
     super(props, context)
     this.state = {
       editing: false,
+      editor: null,
       content: (props.widget.settings ? props.widget.settings.content : 'Clique para editar...'),
       toolbarId: "wysihtml5-toolbar-" + this.props.widget.id
     }
   }
 
-  handleSaveClick() {
-    this.props.actions.editWidget({
-      id: this.props.widget.id,
-      settings: {content: this.state.content}
-    })
+  componentDidMount() {
+    const editor = new wysihtml5.Editor(
+      React.findDOMNode(this.refs.content), {
+        toolbar: this.state.toolbarId,
+        parserRules: wysihtml5ParserRules
+      }
+    ).on("focus", ::this.handleEditorFocus)
+    this.setState({editor: editor})
   }
 
   handleEditorFocus(){
@@ -24,16 +28,26 @@ export default class WidgetContent extends React.Component {
   }
 
   handleOverlayClick(){
+    if(this.hasChanged()){
+      if(confirm("Você deseja salvar suas alterações?")){
+        this.save()
+      } else {
+        this.state.editor.setValue(this.state.content)
+      }
+    }
     this.setState({editing: false})
   }
 
-  componentDidMount() {
-    new wysihtml5.Editor(
-      React.findDOMNode(this.refs.content), {
-        toolbar: this.state.toolbarId,
-        parserRules: wysihtml5ParserRules
-      }
-    ).on("focus", ::this.handleEditorFocus)
+  save(){
+    this.setState({
+      content: this.state.editor.getValue(),
+      editing: false
+    })
+    // TODO: call editWidget action
+  }
+
+  hasChanged(){
+    return this.state.content != this.state.editor.getValue()
   }
 
   render(){
@@ -50,11 +64,20 @@ export default class WidgetContent extends React.Component {
             onClick={::this.handleOverlayClick}
             style={{zIndex: 9998}} />
         </div>
-        <div
-          style={{zIndex: editing ? 9999 : 0}}
-          className="widget relative"
-          dangerouslySetInnerHTML={{__html: this.state.content}}
-          ref="content" />
+        <div style={{zIndex: editing ? 9999 : 0}} className="relative">
+          <div
+            className="widget"
+            dangerouslySetInnerHTML={{__html: this.state.content}}
+            ref="content" />
+          <div className={classnames("right", {"display-none": !editing})}>
+            <button
+              onClick={::this.save}
+              className="button button-transparent bg-silver rounded">
+                <i className="fa fa-cloud-upload mr1" />
+                Salvar
+              </button>
+          </div>
+        </div>
       </div>
     )
   }
