@@ -16,7 +16,8 @@ export default class Dashboard extends React.Component {
   }
 
   render(){
-    const mobilization = this.props.mobilizations[0]
+    const ids = this.props.mobilizations.map((mobilization) => {return mobilization.id.toString()})
+    const mobilization = this.props.mobilizations[ids.indexOf(this.props.params.mobilization_id)]
     return(mobilization ? this.renderDashboard(mobilization) : this.renderLoader())
   }
 

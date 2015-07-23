@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router'
+import * as Paths from '../Paths'
 
 export default class DashboardMenu extends React.Component {
   render(){
@@ -11,9 +13,9 @@ export default class DashboardMenu extends React.Component {
         </div>
         <div>
           <h4 className="silver caps muted">Mobilização</h4>
-          <a href="#/dashboard/edit" className="white">{mobilization.name}</a>
+          <Link to={Paths.editMobilization(mobilization.id)} className="white">{mobilization.name}</Link>
           <h4 className="silver caps muted">Construção da página</h4>
-          <a href="#/dashboard/new" className="silver caps">+ Conteúdo</a>
+          <Link to={Paths.newMobilizationBlock(mobilization.id)} className="silver caps">+ Conteúdo</Link>
         </div>
       </div>
     )

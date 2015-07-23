@@ -8,22 +8,21 @@ const { TestUtils } = React.addons
 
 let container, component, mobilization, dispatch
 
-before(() => {
-  mobilization = { id: 1 }
-  dispatch = () => {}
-  component = TestUtils.renderIntoDocument(
-    <NewContentBlock mobilization={mobilization} dispatch={dispatch} />
-  )
-})
-
-
 describe('NewContentBlock', () => {
+
+  before(() => {
+    mobilization = { id: 1 }
+    dispatch = () => {}
+    component = TestUtils.renderIntoDocument(
+      <NewContentBlock mobilization={mobilization} dispatch={dispatch} />
+    )
+  })
 
   describe('#constructor', () => {
     it('should set initial state', () => {
       expect(component.state).to.eql({
         selectedSizes: [12],
-        bgClass: 'bg-white'
+        bgClass: 'bg-1'
       })
     })
   })
@@ -53,10 +52,20 @@ describe('NewContentBlock', () => {
       })
       component.handleAddBlockClick()
       expect(addBlockStub).to.have.been.calledWith({
-        bg_class: 'bg-test',
+        router: component.context.router,
         mobilization_id: mobilization.id,
+        bg_class: 'bg-test',
         widgets: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
       })
+    })
+  })
+
+  describe('#handleCancelClick', () => {
+    it('transition to edit mobilization page', () => {
+      component.context.router = { goBack() {} }
+      const goBack = sinon.stub(component.context.router, 'goBack')
+      component.handleCancelClick()
+      expect(goBack).to.have.been.calledOnce
     })
   })
 
@@ -78,9 +87,11 @@ describe('NewContentBlock', () => {
 
     it('should render add button', () => {
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(1)
+      expect(buttons).to.have.length(2)
       expect(buttons[0].getDOMNode().textContent).to.equal('Adicionar')
+      expect(buttons[1].getDOMNode().textContent).to.equal('Cancelar')
       expect(buttons[0].props.onClick.toString()).to.equal(component.handleAddBlockClick.bind(component).toString())
+      expect(buttons[1].props.onClick.toString()).to.equal(component.handleCancelClick.bind(component).toString())
     })
 
   })
