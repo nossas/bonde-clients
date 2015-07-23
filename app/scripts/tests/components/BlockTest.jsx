@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import { Block, Widget } from './../../components'
+import { Block, Widget, DropDownMenu } from './../../components'
 
 let { TestUtils } = React.addons
 

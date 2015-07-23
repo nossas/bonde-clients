@@ -1,6 +1,5 @@
 import React from 'react'
-import Widget from "./Widget.jsx"
-import ColorPicker from "./../components/ColorPicker.jsx"
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
@@ -38,7 +37,7 @@ export default class Block extends React.Component {
       return(
         <div>
           <div className="absolute full-width top-0 left-0 bg-silver" style={{zIndex: 9999}}>
-            <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick}  />
+            <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
             <button className="button button-transparent border rounded black mt1 ml1" onClick={::this.handleCancelEdit}>Cancelar</button>
           </div>
           <div
@@ -115,12 +114,14 @@ export default class Block extends React.Component {
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
       <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp}>
-        <div className="right-align py2">
-          <button className="button mr2" onClick={::this.handleEditBackgroundClick}>Alterar cor de fundo</button>
-          <button className="button mr2" onClick={::this.handleToggleHiddenClick}>{(block.hidden ? 'Mostrar' : 'Esconder')}</button>
-          <button className="button mr2" onClick={::this.handleRemoveClick}>Remover</button>
-          <button className="button mr2" disabled={!canMoveUp} onClick={::this.handleMoveUpClick}>▲</button>
-          <button className="button mr2" disabled={!canMoveDown} onClick={::this.handleMoveDownClick}>▼</button>
+        <div className="right-align p2">
+          <DropDownMenu text="Opções">
+            <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
+            <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
+            <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
+            <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
+            <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
+          </DropDownMenu>
         </div>
         { this.renderColorPicker() }
         <div className="clearfix py4">
@@ -130,3 +131,4 @@ export default class Block extends React.Component {
     )
   }
 }
+
