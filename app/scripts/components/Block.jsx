@@ -115,7 +115,7 @@ export default class Block extends React.Component {
     return(
       <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp}>
         <div className="right-align p2">
-          <DropDownMenu text="Opções">
+          <DropDownMenu icon="cog">
             <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
             <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
             <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
