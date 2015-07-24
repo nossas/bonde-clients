@@ -1,6 +1,8 @@
 import React from 'react'
 import WYSIHTMLToolbar from './../components/WYSIHTMLToolbar.jsx'
 import classnames from 'classnames'
+import { bindActionCreators } from 'redux'
+import * as WidgetActions from './../actions/WidgetActions'
 
 export default class WidgetContent extends React.Component {
   constructor(props, context) {
@@ -43,7 +45,18 @@ export default class WidgetContent extends React.Component {
       content: this.state.editor.getValue(),
       editing: false
     })
-    // TODO: call editWidget action
+
+    const { dispatch } = this.props
+    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+    bindedWidgetActions.editWidget({
+      mobilization_id: this.props.mobilization.id,
+      widget_id: this.props.widget.id,
+      widget: {
+        settings: {
+          content: this.state.editor.getValue()
+        }
+      }
+    })
   }
 
   hasChanged(){
