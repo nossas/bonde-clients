@@ -34,9 +34,15 @@ export default class WidgetContent extends React.Component {
       if(confirm("Você deseja salvar suas alterações?")){
         this.save()
       } else {
-        this.state.editor.setValue(this.state.content)
+        this.undo()
       }
+    } else {
+      this.setState({editing: false})
     }
+  }
+
+  undo(){
+    this.state.editor.setValue(this.state.content)
     this.setState({editing: false})
   }
 
@@ -83,13 +89,19 @@ export default class WidgetContent extends React.Component {
             className="widget"
             dangerouslySetInnerHTML={{__html: this.state.content}}
             ref="content" />
-          <div className={classnames("right", {"display-none": !editing})}>
+          <div className={classnames("right", "mt1", {"display-none": !editing})}>
+            <button
+              onClick={::this.undo}
+              className="button button-transparent bg-darken-4 white rounded mr1">
+              <i className="fa fa-undo mr1" />
+              Desfazer
+            </button>
             <button
               onClick={::this.save}
               className="button button-transparent bg-darken-4 white rounded">
-                <i className="fa fa-cloud-upload mr1" />
-                Salvar
-              </button>
+              <i className="fa fa-cloud-upload mr1" />
+              Salvar
+            </button>
           </div>
         </div>
       </div>
