@@ -13,40 +13,45 @@
 
 .meurio-scheme .bg-1 {
   background-color: #039046;
-  color: white;
 }
 
 .meurio-scheme .bg-2 {
   background-color: #2BBAE2;
-  color: white;
 }
 
 .meurio-scheme .bg-3 {
   background-color: #FFCF01;
-  color: white;
 }
 
 .meurio-scheme .bg-4 {
   background-color: #EF7F3A;
-  color: white;
 }
 
 .meurio-scheme .bg-5 {
   background-color: #ED1C24;
-  color: white;
 }
 
 .meurio-scheme .bg-6 {
   background-color: #DF499A;
-  color: white;
 }
 
 .meurio-scheme .bg-7 {
   background-color: #8C78B7;
-  color: white;
 }
 
 .meurio-scheme .bg-8 {
   background-color: #353A3D;
-  color: white;
+}
+
+.meurio-scheme .bg-1,
+.meurio-scheme .bg-2,
+.meurio-scheme .bg-3,
+.meurio-scheme .bg-4,
+.meurio-scheme .bg-5,
+.meurio-scheme .bg-6,
+.meurio-scheme .bg-7,
+.meurio-scheme .bg-8, {
+  .widget h1 { color: white }
+  .widget h2 { color: white }
+  .widget { color: white }
 }

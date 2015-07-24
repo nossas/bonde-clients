@@ -57,7 +57,8 @@ export default class WidgetContent extends React.Component {
         <div className={classnames("full-width", {"display-none": !editing})}>
           <WYSIHTMLToolbar
             elementId={toolbarId}
-            className="absolute full-width top-0 left-0 bg-silver"
+            className="absolute full-width top-0 left-0 bg-darken-4"
+            buttonClassName="button button-transparent white p2"
             style={{zIndex: 9999}}/>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
@@ -72,7 +73,7 @@ export default class WidgetContent extends React.Component {
           <div className={classnames("right", {"display-none": !editing})}>
             <button
               onClick={::this.save}
-              className="button button-transparent bg-silver rounded">
+              className="button button-transparent bg-darken-4 white rounded">
                 <i className="fa fa-cloud-upload mr1" />
                 Salvar
               </button>

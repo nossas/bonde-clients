@@ -2,8 +2,7 @@ import React from 'react'
 
 export default class WYSIHTMLToolbar extends React.Component {
   render(){
-    const { elementId, className, style } = this.props
-    const buttonClassName = "button button-transparent black p2"
+    const { elementId, className, style, buttonClassName } = this.props
     return(
       <div id={elementId} className={className} style={style}>
         <a
