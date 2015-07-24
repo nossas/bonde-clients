@@ -55,10 +55,10 @@ export default class NewContentBlock extends React.Component {
         </div>
         <div className="col col-12 px3">
           <div className="col col-6 px1">
-            <button className="button full-width" onClick={::this.handleAddBlockClick}>Adicionar</button>
+            <button className="button full-width" onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
           </div>
           <div className="col col-6 px1">
-            <button className="button button-transparent border full-width" onClick={::this.handleCancelClick}>Cancelar</button>
+            <button className="button button-transparent border full-width" onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
           </div>
         </div>
       </div>
