@@ -10,11 +10,11 @@ import thunkMiddleware from './middleware/thunk.js'
 
 // Containers
 import Application from './containers/Application.jsx'
-import Dashboard from './containers/Dashboard.jsx'
+import Mobilization from './containers/Mobilization.jsx'
 
 // Pages
 import Home from './pages/Home.jsx'
-import PageEdit from './pages/PageEdit.jsx'
+import EditMobilization from './pages/EditMobilization.jsx'
 import NewContentBlock from './pages/NewContentBlock.jsx'
 
 // Stores
@@ -43,9 +43,9 @@ function renderRoutes(history) {
     <Router history={history}>
       <Route component={Application}>
         <Route path="/" component={Home}/>
-        <Route path={Paths.mobilization(':mobilization_id')} component={Dashboard}>
-          <Route path="edit" component={PageEdit} />
-          <Route path="blocks">         
+        <Route path={Paths.mobilization(':mobilization_id')} component={Mobilization}>
+          <Route path="edit" component={EditMobilization} />
+          <Route path="blocks">
             <Route path="new" component={NewContentBlock} />
           </Route>
         </Route>

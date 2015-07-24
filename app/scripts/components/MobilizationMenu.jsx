@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import * as Paths from '../Paths'
 
-export default class DashboardMenu extends React.Component {
+export default class MobilizationMenu extends React.Component {
   render(){
     const { user, mobilization } = this.props
     const style = { minWidth: "300px" }

@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardMenu from './../components/DashboardMenu.jsx'
+import MobilizationMenu from './../components/MobilizationMenu.jsx'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { connect } from 'redux/react'
 import { bindActionCreators } from 'redux'
@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
   mobilizations: state.mobilizations
 }))
 
-export default class Dashboard extends React.Component {
+export default class Mobilization extends React.Component {
   componentDidMount(){
     const { dispatch } = this.props
     const actions = bindActionCreators(MobilizationActions, dispatch)
@@ -18,13 +18,13 @@ export default class Dashboard extends React.Component {
   render(){
     const ids = this.props.mobilizations.map((mobilization) => {return mobilization.id.toString()})
     const mobilization = this.props.mobilizations[ids.indexOf(this.props.params.mobilization_id)]
-    return(mobilization ? this.renderDashboard(mobilization) : this.renderLoader())
+    return(mobilization ? this.renderMobilization(mobilization) : this.renderLoader())
   }
 
-  renderDashboard(mobilization){
+  renderMobilization(mobilization){
     return(
       <div className="flex flex-stretch">
-        <DashboardMenu {...this.props} mobilization={mobilization} />
+        <MobilizationMenu {...this.props} mobilization={mobilization} />
         {this.props.children &&
           React.cloneElement(this.props.children, {...this.props, mobilization: mobilization})}
       </div>

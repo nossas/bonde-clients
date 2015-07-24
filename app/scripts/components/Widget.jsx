@@ -1,5 +1,5 @@
 import React from 'react'
-import WidgetContent from "./WidgetContent.jsx"
+import ContentWidget from "./ContentWidget.jsx"
 
 export default class Widget extends React.Component {
   render(){
@@ -7,7 +7,7 @@ export default class Widget extends React.Component {
 
     return(
       <div className={className}>
-        <WidgetContent {...this.props} />
+        <ContentWidget {...this.props} />
       </div>
     )
   }

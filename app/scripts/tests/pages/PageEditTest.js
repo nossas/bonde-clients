@@ -1,14 +1,14 @@
 import React from 'react/addons'
 import { Block } from './../../components'
-import * as PageEditImport from './../../pages/PageEdit.jsx'
+import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
 import classnames from 'classnames'
 
-const PageEdit = PageEditImport.DecoratedComponent
+const EditMobilization = EditMobilizationImport.DecoratedComponent
 const { TestUtils } = React.addons
 
 let block1, block2, blocks, mobilization, dispatch
 
-describe('PageEdit', () => {
+describe('EditMobilization', () => {
   before(() => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
@@ -22,7 +22,7 @@ describe('PageEdit', () => {
 
     before(() => {
       component = TestUtils.renderIntoDocument(
-        <PageEdit mobilization={mobilization} blocks={blocks} widgets={[]} dispatch={dispatch} />
+        <EditMobilization mobilization={mobilization} blocks={blocks} widgets={[]} dispatch={dispatch} />
       )
     })
 

@@ -11,7 +11,7 @@ import { connect } from 'redux/react'
   widgets: state.widgets
 }))
 
-export default class PageEdit extends React.Component {
+export default class EditMobilization extends React.Component {
   componentDidMount(){
     const { mobilization, dispatch } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)

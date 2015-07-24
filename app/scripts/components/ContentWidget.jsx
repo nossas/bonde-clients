@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 
-export default class WidgetContent extends React.Component {
+export default class ContentWidget extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {

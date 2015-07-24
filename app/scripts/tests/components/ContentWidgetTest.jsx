@@ -1,13 +1,13 @@
 import React from 'react/addons'
-import WidgetContent from './../../components/WidgetContent.jsx'
+import ContentWidget from './../../components/ContentWidget.jsx'
 
 let { TestUtils } = React.addons
 let widget = {}, component
 
-describe('WidgetContent', function() {
+describe('ContentWidget', function() {
   before(function(){
     component = TestUtils.renderIntoDocument(
-      <WidgetContent widget={widget} />
+      <ContentWidget widget={widget} />
     )
   })
 
