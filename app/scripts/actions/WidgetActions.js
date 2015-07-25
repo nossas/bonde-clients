@@ -1,32 +1,32 @@
-import * as types from '../constants/ActionTypes'
+import { EDIT_WIDGET, FETCH_WIDGETS } from '../constants/ActionTypes'
+import $ from 'jquery'
 
 const BASE_URL = process.env.BASE_URL
 
 export function editWidget(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}`, {
       method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ widget: params.widget })
+      data: { widget: params.widget },
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: EDIT_WIDGET,
+          widgets: data
+        })
+      }
     })
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: types.EDIT_WIDGET,
-      widget: res
-    }))
   }
 }
 
 export function fetchWidgets(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/widgets`)
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: types.FETCH_WIDGETS,
-      widgets: res
-    }))
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/widgets`, {
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: FETCH_WIDGETS,
+          widgets: data
+        })
+      }
+    })
   }
 }

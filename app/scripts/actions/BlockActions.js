@@ -1,108 +1,104 @@
 import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../constants/ActionTypes'
 import * as Paths from '../Paths'
+import $ from 'jquery'
 
 const BASE_URL = process.env.BASE_URL
 
 export function fetchBlocks(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`)
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: FETCH_BLOCKS,
-      blocks: res
-    }))
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: FETCH_BLOCKS,
+          blocks: data
+        })
+      }
+    })
   }
 }
 
 export function addBlock(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+      data: {
         block: {
           bg_class: params.bg_class,
           widgets_attributes: params.widgets
         }
-      })
+      },
+      success: function(data, textStatus, jqXHR){
+        params.router.transitionTo(Paths.editMobilization(params.mobilization_id))
+      }
     })
-    .then(res => res.json())
-    .then(res => params.router.transitionTo(Paths.editMobilization(params.mobilization_id)))
   }
 }
 
 export function editBlock(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ block: params.block })
+      data: { block: params.block },
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: EDIT_BLOCK,
+          block: data
+        })
+      }
     })
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: EDIT_BLOCK,
-      block: res
-    }))
   }
 }
 
 export function removeBlock(params) {
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: REMOVE_BLOCK,
+          block: data
+        })
       }
     })
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: REMOVE_BLOCK,
-      block: res
-    }))
   }
 }
 
 export function moveBlockUp(params) {
   const { block, blocks } = params
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
       method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      data: {
+        block: {
+          position: blocks[blocks.indexOf(block) - 1].position
+        }
       },
-      body: JSON.stringify({ block: {position: blocks[blocks.indexOf(block) - 1].position} })
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: MOVE_BLOCK_UP,
+          block: data
+        })
+      }
     })
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: MOVE_BLOCK_UP,
-      block: res
-    }))
   }
 }
 
 export function moveBlockDown(params) {
   const { block, blocks } = params
   return dispatch => {
-    fetch(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
       method: 'put',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      data: {
+        block: {
+          position: blocks[blocks.indexOf(block) + 1].position
+        }
       },
-      body: JSON.stringify({ block: {position: blocks[blocks.indexOf(block) + 1].position} })
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: MOVE_BLOCK_DOWN,
+          block: data
+        })
+      }
     })
-    .then(res => res.json())
-    .then(res => dispatch({
-      type: MOVE_BLOCK_DOWN,
-      block: res
-    }))
   }
 }
