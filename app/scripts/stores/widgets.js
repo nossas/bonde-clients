@@ -4,7 +4,7 @@ export default function widgets(state = [], action) {
   switch (action.type) {
     case actions.EDIT_WIDGET:
       return state.map(widget =>
-        widget.id === action.id ? {...widget, content: action.content} : widget
+        widget.id == action.widget.id ? action.widget : widget
       )
     case actions.FETCH_WIDGETS:
       return action.widgets

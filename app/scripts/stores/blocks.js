@@ -5,15 +5,11 @@ export default function blocks(state = [], action) {
     case FETCH_BLOCKS:
       return action.blocks
     case EDIT_BLOCK:
-      return state.map(function(block) {
-        if (block.id == action.block.id) {
-          return action.block
-        } else {
-          return block
-        }
-      })
+      return state.map(block =>
+        block.id == action.block.id ? action.block : block
+      )
     case MOVE_BLOCK_UP:
-      return state.map(function(block, index) {
+      return state.map((block, index) => {
         if (index + 1 < state.length && state[index + 1].id == action.block.id) {
           return action.block
         } else if (block.id == action.block.id) {
@@ -23,19 +19,19 @@ export default function blocks(state = [], action) {
         }
       })
     case MOVE_BLOCK_DOWN:
-      return state.map(function(block, index) {
+      return state.map((block, index) => {
         if (index > 0 && state[index - 1].id == action.block.id) {
           return action.block
-        } if (block.id == action.block.id) {
+        } else if (block.id == action.block.id) {
           return state[index + 1]
         } else {
           return block
         }
       })
     case REMOVE_BLOCK:
-      return state.filter(function(block){
-        return action.block.id != block.id
-      })
+      return state.filter(block =>
+        action.block.id != block.id
+      )
     default:
       return state
   }
