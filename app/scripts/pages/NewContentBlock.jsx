@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactS3Uploader from 'react-s3-uploader'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
@@ -40,6 +41,21 @@ export default class NewContentBlock extends React.Component {
     this.context.router.goBack()
   }
 
+  handleUploadProgress() {
+    console.log("onUploadProgress")
+    console.log(arguments)
+  }
+
+  handleUploadError() {
+    console.log("onUploadError")
+    console.log(arguments)
+  }
+  
+  handleUploadFinish() {
+    console.log("onUploadFinish")
+    console.log(arguments)
+  }
+  
   render(){
     return (
       <div className={classnames("flex-auto", "p2", "center", this.props.mobilization.color_scheme)}>
@@ -52,6 +68,14 @@ export default class NewContentBlock extends React.Component {
         <div className="clearfix px3 mb3">
           <h3>Cor de fundo</h3>
           <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <div className="col col-2 p1">
+            <ReactS3Uploader
+              signingUrl={`${process.env.BASE_URL}/uploads`}
+              accept="image/*"
+              onProgress={::this.handleUploadProgress}
+              onError={::this.handleUploadError}
+              onFinish={::this.handleUploadFinish}/>
+          </div>
         </div>
         <div className="col col-12 px3">
           <div className="col col-6 px1">

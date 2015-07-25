@@ -31,6 +31,7 @@
     "font-awesome": "^4.3.0",
     "http-proxy": "^1.11.1",
     "j-toker": "0.0.6",
+    "react-s3-uploader": "1.1.12",
     "jquery": "^2.1.4",
     "karma": "^0.12.37",
     "karma-chai": "^0.1.0",
