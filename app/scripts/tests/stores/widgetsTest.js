@@ -11,19 +11,19 @@ describe('widgets', () => {
           block_id: 1,
           size: 12,
           content: "col-12",
-          kind: "content"
+          kind: "content",
+          settings: { content: 'old content' }
         }
       ]
       const action = {
         type: EDIT_WIDGET,
-        id: 1,
-        content: newContent
+        widget: {
+          id: 1,
+          settings: { content: newContent }
+        }
       }
-
-      var newState;
-      newState = widgets(initialState, action)
-
-      expect(newState[0].content).to.be.equal(newContent)
+      const newState = widgets(initialState, action)
+      expect(newState[0].settings.content).to.equal(newContent)
     })
   })
 })

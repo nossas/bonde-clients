@@ -1,4 +1,5 @@
 import React from 'react/addons'
+import ReactS3Uploader from 'react-s3-uploader'
 import * as BlockActions from './../../actions/BlockActions'
 import { BlockMiniature, ColorPicker } from './../../components'
 import NewContentBlock from './../../pages/NewContentBlock.jsx'
@@ -79,6 +80,14 @@ describe('NewContentBlock', () => {
       })
     })
 
+    it('should render uploader', () => {
+      const components = TestUtils.scryRenderedComponentsWithType(component, ReactS3Uploader)
+      expect(components).to.have.length(1)
+      expect(components[0].props.onProgress.toString()).to.equal(component.handleUploadProgress.bind(component).toString())
+      expect(components[0].props.onError.toString()).to.equal(component.handleUploadError.bind(component).toString())
+      expect(components[0].props.onFinish.toString()).to.equal(component.handleUploadFinish.bind(component).toString())
+    })
+
     it('should render color picker', () => {
       const components = TestUtils.scryRenderedComponentsWithType(component, ColorPicker)
       expect(components).to.have.length(1)
@@ -88,8 +97,8 @@ describe('NewContentBlock', () => {
     it('should render add button', () => {
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
       expect(buttons).to.have.length(2)
-      expect(buttons[0].getDOMNode().textContent).to.equal('Adicionar')
-      expect(buttons[1].getDOMNode().textContent).to.equal('Cancelar')
+      expect(buttons[0].getDOMNode().textContent.trim()).to.equal('Adicionar')
+      expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Cancelar')
       expect(buttons[0].props.onClick.toString()).to.equal(component.handleAddBlockClick.bind(component).toString())
       expect(buttons[1].props.onClick.toString()).to.equal(component.handleCancelClick.bind(component).toString())
     })
