@@ -11,7 +11,7 @@ export function editWidget(params) {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_WIDGET,
-          widgets: data
+          widget: data
         })
       }
     })
