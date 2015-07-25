@@ -36,9 +36,9 @@ export default class Block extends React.Component {
     if(this.state.editingBackground) {
       return(
         <div>
-          <div className="absolute full-width top-0 left-0 bg-silver" style={{zIndex: 9999}}>
+          <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
             <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
-            <button className="button button-transparent border rounded black mt1 ml1" onClick={::this.handleCancelEdit}>Cancelar</button>
+            <button className="button button-transparent border rounded white mt1 ml1" onClick={::this.handleCancelEdit}>Cancelar</button>
           </div>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
