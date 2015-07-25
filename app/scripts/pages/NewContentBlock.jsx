@@ -3,8 +3,7 @@ import ReactS3Uploader from 'react-s3-uploader'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
-import ColorPicker from "./../components/ColorPicker.jsx"
-import BlockMiniature from "./../components/BlockMiniature.jsx"
+import { BlockMiniature, ColorPicker, Progress } from './../components'
 
 export default class NewContentBlock extends React.Component {
 
@@ -12,7 +11,9 @@ export default class NewContentBlock extends React.Component {
     super(props, context)
     this.state = {
       selectedSizes: [12],
-      bgClass: 'bg-1'
+      bgClass: 'bg-1',
+      bgImage: null,
+      uploadProgress: null
     }
   }
 
@@ -41,19 +42,48 @@ export default class NewContentBlock extends React.Component {
     this.context.router.goBack()
   }
 
-  handleUploadProgress() {
-    console.log("onUploadProgress")
-    console.log(arguments)
+  handleUploadProgress(percent) {
+    this.setState({uploadProgress: percent})
   }
 
   handleUploadError() {
-    console.log("onUploadError")
     console.log(arguments)
   }
   
-  handleUploadFinish() {
-    console.log("onUploadFinish")
-    console.log(arguments)
+  handleUploadFinish(image) {
+    const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+    this.setState({bgImage: imageUrl, uploadProgress: null})
+  }
+
+  renderUploader() {
+    if (!this.state.uploadProgress) {
+      return (
+        <ReactS3Uploader
+          signingUrl={`${process.env.BASE_URL}/uploads`}
+          accept="image/*"
+          onProgress={::this.handleUploadProgress}
+          onError={::this.handleUploadError}
+          onFinish={::this.handleUploadFinish}/>
+      )
+    }
+  }
+  
+  renderProgress() {
+    if (this.state.uploadProgress) {
+      return (
+        <Progress className="bg-blue" percent={this.state.uploadProgress} />
+      )
+    }
+  }
+  
+  renderBgImage() {
+    if (this.state.bgImage) {
+      return (
+        <div className="col col-1 p1">
+          <img src={this.state.bgImage} />
+        </div>
+      )
+    }
   }
   
   render(){
@@ -68,21 +98,18 @@ export default class NewContentBlock extends React.Component {
         <div className="clearfix px3 mb3">
           <h3>Cor de fundo</h3>
           <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
-          <div className="col col-2 p1">
-            <ReactS3Uploader
-              signingUrl={`${process.env.BASE_URL}/uploads`}
-              accept="image/*"
-              onProgress={::this.handleUploadProgress}
-              onError={::this.handleUploadError}
-              onFinish={::this.handleUploadFinish}/>
+          {this.renderBgImage()}
+          <div className="col col-1 p1">
+            {this.renderUploader()}
+            {this.renderProgress()}
           </div>
         </div>
         <div className="col col-12 px3">
           <div className="col col-6 px1">
-            <button className="button full-width" onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
+            <button className="button full-width" disabled={this.state.uploadProgress} onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
           </div>
           <div className="col col-6 px1">
-            <button className="button button-transparent border full-width" onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
+            <button className="button button-transparent border full-width" disabled={this.state.uploadProgress} onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
           </div>
         </div>
       </div>
