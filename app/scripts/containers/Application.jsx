@@ -1,6 +1,7 @@
 import React from 'react'
 import PubSub from 'pubsub-js'
 import Auth from 'j-toker'
+import $ from 'jquery'
 
 // Components
 import MainMenu from './../components/MainMenu.jsx'
@@ -13,6 +14,9 @@ Auth.configure({
     return resp.data
   }
 })
+
+$.ajaxSetup({beforeSend: Auth.appendAuthHeaders})
+$(document).ajaxComplete(Auth.updateAuthCredentials)
 
 export default class Application extends React.Component {
   constructor(props, context) {
