@@ -262,36 +262,36 @@ describe('Block', () => {
       expect(items[4].props.onClick.toString()).to.equal(component.handleMoveDownClick.bind(component).toString())
     })
 
-    it('should disable move up button when canMoveUp is false', () => {
+    it('should disable move up menu item when canMoveUp is false', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveUp={false} />
       )
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[4].getDOMNode().disabled).to.equal(true)
+      const items = TestUtils.scryRenderedComponentsWithType(component, DropDownMenuItem)
+      expect(items[3].props.disabled).to.be.true
     })
 
-    it('should not disable move up button when canMoveUp is true', () => {
+    it('should not disable move up menu item when canMoveUp is true', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveUp={true} />
       )
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[4].getDOMNode().disabled).to.equal(false)
+      const items = TestUtils.scryRenderedComponentsWithType(component, DropDownMenuItem)
+      expect(items[3].props.disabled).to.be.false
     })
 
-    it('should disable move down button when canMoveDown is false', () => {
+    it('should disable move down menu item when canMoveDown is false', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveDown={false} />
       )
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[5].getDOMNode().disabled).to.equal(true)
+      const items = TestUtils.scryRenderedComponentsWithType(component, DropDownMenuItem)
+      expect(items[4].props.disabled).to.be.true
     })
 
-    it('should not disable move down button when canMoveDown is true', () => {
+    it('should not disable move down menu item when canMoveDown is true', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} canMoveDown={true} />
       )
-      const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons[5].getDOMNode().disabled).to.equal(false)
+      const items = TestUtils.scryRenderedComponentsWithType(component, DropDownMenuItem)
+      expect(items[4].props.disabled).to.be.false
     })
 
     it('should render color picker when editing background', () => {

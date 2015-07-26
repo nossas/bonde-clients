@@ -1,14 +1,18 @@
 import React from 'react'
+import classnames from 'classnames'
 
 export default class DropDownMenuItem extends React.Component {
-  handleClick(){
-    this.props.onItemClick()
-    this.props.onClick()
+  handleClick(event){
+    event.preventDefault()
+    if(!this.props.disabled) {
+      this.props.onItemClick()
+      this.props.onClick()
+    }
   }
 
   render(){
     return(
-      <button className="button button-transparent full-width left-align block" disabled={this.props.disabled} onClick={::this.handleClick}>{this.props.children}</button>
+      <a className={classnames("button button-transparent full-width left-align block", (this.props.disabled ? 'gray' : ''))} disabled={this.props.disabled} onClick={::this.handleClick}>{this.props.children}</a>
     )
   }
 }

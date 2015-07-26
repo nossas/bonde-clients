@@ -11,12 +11,26 @@ const props = {disabled: false, onClick: onClick, onItemClick: onItemClick}
 
 describe('DropDownMenuItem', () => {
   describe('#handleClick', () => {
-    it('should call both onItemClick and onClick', () => {
+    beforeEach(() => {
+      clickString = null
+    })
+
+    it('should call both onItemClick and onClick when not disabled', () => {
       component = TestUtils.renderIntoDocument(
         <DropDownMenuItem {...props} />
       )
-      component.handleClick()
+      const event = { preventDefault() {}}
+      component.handleClick(event)
       expect(clickString).to.be.equal('foobar')
+    })
+
+    it('should not call onItemClick or onClick when disabled', () => {
+      component = TestUtils.renderIntoDocument(
+        <DropDownMenuItem {...props} disabled={true} />
+      )
+      const event = { preventDefault() {}}
+      component.handleClick(event)
+      expect(clickString).to.be.null
     })
   })
 
@@ -25,17 +39,17 @@ describe('DropDownMenuItem', () => {
       component = TestUtils.renderIntoDocument(
         <DropDownMenuItem {...props} />
       )
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button')
-      expect(button.getDOMNode().getAttribute('disabled')).to.be.null
-      expect(button.props.onClick.toString()).to.equal(component.handleClick.bind(component).toString())
+      const link = TestUtils.findRenderedDOMComponentWithTag(component, 'a')
+      expect(link.getDOMNode().getAttribute('disabled')).to.be.null
+      expect(link.props.onClick.toString()).to.equal(component.handleClick.bind(component).toString())
     })
 
     it('should render disabled', () => {
       component = TestUtils.renderIntoDocument(
         <DropDownMenuItem {...props} disabled={true} />
       )
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button')
-      expect(button.getDOMNode().getAttribute('disabled')).not.to.be.null
+      const link = TestUtils.findRenderedDOMComponentWithTag(component, 'a')
+      expect(link.getDOMNode().getAttribute('disabled')).not.to.be.null
     })
   })
 })
