@@ -12,7 +12,7 @@ export default class DropDownMenuItem extends React.Component {
 
   render(){
     return(
-      <a className={classnames("button button-transparent full-width left-align block", (this.props.disabled ? 'gray' : ''))} disabled={this.props.disabled} onClick={::this.handleClick}>{this.props.children}</a>
+      <a className={classnames("button button-transparent full-width left-align block", (this.props.disabled ? 'muted' : ''))} disabled={this.props.disabled} onClick={::this.handleClick}>{this.props.children}</a>
     )
   }
 }
