@@ -8,6 +8,7 @@ export default class Block extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
+      hasMouseOver: false,
       editingBackground: false,
       bgClass: props.block.bg_class
     }
@@ -109,20 +110,26 @@ export default class Block extends React.Component {
     }
   }
 
+  handleMouseOver() {
+    this.setState({hasMouseOver: true})
+  }
+
+  handleMouseOut() {
+    this.setState({hasMouseOver: false})
+  }
+  
   render(){
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp}>
-        <div className="right-align p2">
-          <DropDownMenu icon="cog">
-            <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
-            <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
-            <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
-          </DropDownMenu>
-        </div>
+      <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
+        <DropDownMenu className={(this.state.hasMouseOver ? "" : "display-none")} icon="cog">
+          <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
+          <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
+          <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
+          <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
+          <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
+        </DropDownMenu>
         { this.renderColorPicker() }
         <div className="clearfix py4">
           { this.renderWidgets(filteredWidgets) }
@@ -131,4 +138,3 @@ export default class Block extends React.Component {
     )
   }
 }
-

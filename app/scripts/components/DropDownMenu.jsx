@@ -46,11 +46,11 @@ export default class DropDownMenuItem extends React.Component {
 
   render(){
     return(
-      <div className="relative inline-block">
+      <div className={classnames("absolute top-0 right-0 p2", this.props.className)}>
         <button className="button white bg-darken-4" onClick={::this.handleClick}>
           {this.renderIcon()} {this.props.text} &#9662;
         </button>
-        <div className={classnames("absolute right-0 mt1 nowrap white bg-darken-4 rounded", (this.state.open ? "" : "display-none"))} style={{zIndex: 9999}}>
+        <div className={classnames("absolute right-0 mt1 mr1 nowrap white bg-darken-4 rounded", (this.state.open ? "" : "display-none"))} style={{zIndex: 9999}}>
           { this.renderChildren() }
         </div>
         { this.renderOverlay() }
