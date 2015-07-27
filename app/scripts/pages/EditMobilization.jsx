@@ -8,16 +8,40 @@ import { connect } from 'redux/react'
 
 @connect(state => ({
   blocks: state.blocks,
-  widgets: state.widgets
+  widgets: state.widgets,
+  scrolledToBottom: false,
+  widgetsCount: state.widgets.length
 }))
 
 export default class EditMobilization extends React.Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      scrolledToBottom: props.scrolledToBottom,
+      widgetsCount: props.widgetsCount
+    }
+  }
+
   componentDidMount(){
     const { mobilization, dispatch } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
     bindedBlockActions.fetchBlocks({mobilization_id: mobilization.id})
     bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
+  }
+
+  componentDidUpdate() {
+    if (!this.state.scrolledToBottom && 
+        this.props.location.query && 
+        this.props.location.query.newBlock &&
+        this.props.location.query.newBlock == "true" &&
+        this.props.blocks.length > 0 &&
+        this.props.widgets.length > 0 &&
+        this.props.widgets.length > this.state.widgetsCount
+        ) {
+      window.scrollTo(0, document.body.scrollHeight)
+      this.setState({scrolledToBottom: true})
+    }
   }
 
   render(){

@@ -23,7 +23,7 @@ export function addBlock(params) {
       method: 'post',
       data: { block: params.block },
       success: function(data, textStatus, jqXHR){
-        params.router.transitionTo(Paths.editMobilization(params.mobilization_id))
+        params.router.transitionTo(Paths.editMobilization(params.mobilization_id) + '?newBlock=true')
       }
     })
   }

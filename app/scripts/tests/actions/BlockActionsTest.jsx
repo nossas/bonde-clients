@@ -54,7 +54,7 @@ describe('BlockActions', () => {
       expect(request.method).to.equal('POST')
       expect(request.requestBody).to.equal($.param({block: block}))
       request.respond(200)
-      expect(transitionToStub).to.have.been.calledWith('/mobilizations/1/edit')
+      expect(transitionToStub).to.have.been.calledWith('/mobilizations/1/edit?newBlock=true')
     })
   })
 
