@@ -34,6 +34,7 @@ export default class EditMobilization extends React.Component {
     if (!this.state.scrolledToBottom && 
         this.props.location.query && 
         this.props.location.query.newBlock &&
+        this.props.location.query.newBlock == "true" &&
         this.props.blocks.length > 0 &&
         this.props.widgets.length > 0 &&
         this.props.widgets.length > this.state.widgetsCount
