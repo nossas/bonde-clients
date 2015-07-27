@@ -50,7 +50,7 @@ export default class NewContentBlock extends React.Component {
   }
 
   handleUploadError() {
-    console.log(arguments)
+    this.setState({uploadProgress: null})
   }
   
   handleUploadFinish(image) {
@@ -109,10 +109,10 @@ export default class NewContentBlock extends React.Component {
         </div>
         <div className="col col-12 px3">
           <div className="col col-6 px1">
-            <button className="button full-width" disabled={this.state.uploadProgress} onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
+            <button className="button full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
           </div>
           <div className="col col-6 px1">
-            <button className="button button-transparent border full-width" disabled={this.state.uploadProgress} onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
+            <button className="button button-transparent border full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
           </div>
         </div>
       </div>
