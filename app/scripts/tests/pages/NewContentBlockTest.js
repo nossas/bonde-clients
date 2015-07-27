@@ -99,6 +99,15 @@ describe('NewContentBlock', () => {
     })
   })
 
+  describe('#handleClearBgImage', () => {
+    it('should clear the image', () => {
+      sinon.stub(window, 'confirm').returns(true)
+      component.setState({bgImage: 'foo.gif'})
+      component.handleClearBgImage()
+      expect(component.state.bgImage).to.be.null
+    })
+  })
+
   describe('#render', () => {
 
     it('should render block miniatures', () => {

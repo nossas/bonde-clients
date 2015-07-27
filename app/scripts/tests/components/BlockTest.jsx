@@ -20,7 +20,22 @@ describe('Block', () => {
     widget2 = { block_id: 2, id: 2, settings: { content: "My widget2" } }
     allWidgets = [widget1, widget2]
     blockWidgets = [widget1]
-    block = { id: 1 }
+    block = { id: 1, bg_class: 'bg-1', bg_image: 'foobar.jpg' }
+  })
+
+  describe('#constructor', () => {
+    it('should set initial state', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      expect(component.state).to.eql({
+        hasMouseOver: false,
+        editingBackground: false,
+        bgClass: component.props.block.bg_class,
+        bgImage: component.props.block.bg_image,
+        uploadProgress: null
+      })
+    })
   })
 
   describe('#filterWidgets', () => {
@@ -65,13 +80,30 @@ describe('Block', () => {
       const component = TestUtils.renderIntoDocument(
         <Block widgets={allWidgets} block={block} />
       )
-      component.setState({editingBackground: true})
+      component.setState({
+        editingBackground: true,
+        bgClass: 'bg-foo',
+        bgImage: 'foo.jpg'
+      })
       component.handleCancelEdit()
       expect(component.state.editingBackground).to.be.false
+      expect(component.state.bgClass).to.equal(block.bg_class)
+      expect(component.state.bgImage).to.equal(block.bg_image)
     })
   })
 
   describe('#handleColorClick', () => {
+    it('should set bg class to the selected bg class event current target', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      const event = {currentTarget: {getAttribute() { return 'bg-purple' }}}
+      component.handleColorClick(event)
+      expect(component.state.bgClass).to.eql('bg-purple')
+    })
+  })
+
+  describe('#handleSaveEdit', () => {
     it('should dispatch edit block action', () => {
       const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
       const component = TestUtils.renderIntoDocument(
@@ -79,18 +111,51 @@ describe('Block', () => {
       )
       component.setState({
         editingBackground: true,
-        bgClass: 'bg-test'
+        bgClass: 'bg-test',
+        bgImage: 'foo.png'
       })
-      const event = {currentTarget: {getAttribute() { return 'bg-1' }}}
-      component.handleColorClick(event)
+      component.handleSaveEdit()
       expect(component.state.editingBackground).to.be.false
       expect(editBlockStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
         block_id: component.props.block.id,
         block: {
-          bg_class: 'bg-1'
+          bg_class: 'bg-test',
+          bg_image: 'foo.png'
         }
       })
+    })
+  })
+
+  describe('#handleUploadProgress', () => {
+    it('should set the progress', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      component.handleUploadProgress(34)
+      expect(component.state.uploadProgress).to.equal(34)
+    })
+  })
+
+  describe('#handleUploadError', () => {
+    it('should set the progress to null', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      component.handleUploadError()
+      expect(component.state.uploadProgress).to.be.null
+    })
+  })
+
+  describe('#handleUploadFinish', () => {
+    it('should set the progress to null and bg image to url', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      const image = { signedUrl: 'http://foo.bar/foobar.jpg?abc=123' }
+      component.handleUploadFinish(image)
+      expect(component.state.uploadProgress).to.be.null
+      expect(component.state.bgImage).to.equal('http://foo.bar/foobar.jpg')
     })
   })
 
@@ -102,6 +167,18 @@ describe('Block', () => {
       component.setState({editingBackground: false})
       component.handleEditBackgroundClick()
       expect(component.state.editingBackground).to.be.true
+    })
+  })
+
+  describe('#handleClearBgImage', () => {
+    it('should clear the image', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} />
+      )
+      sandbox.stub(window, 'confirm').returns(true)
+      component.setState({bgImage: 'foo.gif'})
+      component.handleClearBgImage()
+      expect(component.state.bgImage).to.be.null
     })
   })
 

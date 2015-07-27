@@ -58,6 +58,12 @@ export default class NewContentBlock extends React.Component {
     this.setState({bgImage: imageUrl, uploadProgress: null})
   }
 
+  handleClearBgImage() {
+    if (confirm('Deseja remover a imagem de fundo?')) {
+      this.setState({bgImage: null})
+    }
+  }
+  
   renderUploader() {
     if (!this.state.uploadProgress) {
       return (
@@ -82,8 +88,13 @@ export default class NewContentBlock extends React.Component {
   renderBgImage() {
     if (this.state.bgImage) {
       return (
-        <div className="col col-1 p1">
-          <img src={this.state.bgImage} />
+        <div>
+          <div className="col col-1 p1">
+            <img src={this.state.bgImage} />
+          </div>
+          <div className="col col-1 p1">
+            <button className="button button-transparent bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
+          </div>
         </div>
       )
     }
@@ -102,7 +113,7 @@ export default class NewContentBlock extends React.Component {
           <h3>Cor de fundo</h3>
           <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
           {this.renderBgImage()}
-          <div className="col col-1 p1">
+          <div className="col col-2 p1" style={{overflow: 'hidden'}}>
             {this.renderUploader()}
             {this.renderProgress()}
           </div>

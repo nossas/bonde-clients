@@ -1,5 +1,6 @@
 import React from 'react'
-import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './'
+import ReactS3Uploader from 'react-s3-uploader'
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress } from './'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
@@ -10,7 +11,9 @@ export default class Block extends React.Component {
     this.state = {
       hasMouseOver: false,
       editingBackground: false,
-      bgClass: props.block.bg_class
+      bgClass: props.block.bg_class,
+      bgImage: props.block.bg_image,
+      uploadProgress: null
     }
     const { dispatch } = this.props
     this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
@@ -38,8 +41,16 @@ export default class Block extends React.Component {
       return(
         <div>
           <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
-            <ColorPicker {...this.props} selectedClass={this.props.block.bg_class} onClick={::this.handleColorClick} />
-            <button className="button button-transparent border rounded white mt1 ml1" onClick={::this.handleCancelEdit}>Cancelar</button>
+            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+            {this.renderBgImage()}
+            <div className="col col-2 p1" style={{overflow: 'hidden'}}>
+              {this.renderUploader()}
+              {this.renderProgress()}
+            </div>
+          </div>
+          <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
+            <button className="button button-transparent bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}><i className="fa fa-cloud-upload mr1" />Salvar</button>
+            <button className="button button-transparent bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}><i className="fa fa-undo mr1" />Cancelar</button>
           </div>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
@@ -50,6 +61,61 @@ export default class Block extends React.Component {
     }
   }
 
+  handleUploadProgress(percent) {
+    this.setState({uploadProgress: percent})
+  }
+
+  handleUploadError() {
+    this.setState({uploadProgress: null})
+  }
+  
+  handleUploadFinish(image) {
+    const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+    this.setState({bgImage: imageUrl, uploadProgress: null})
+  }
+
+  renderUploader() {
+    if (!this.state.uploadProgress) {
+      return (
+        <ReactS3Uploader
+          signingUrl={`${process.env.BASE_URL}/uploads`}
+          accept="image/*"
+          onProgress={::this.handleUploadProgress}
+          onError={::this.handleUploadError}
+          onFinish={::this.handleUploadFinish}/>
+      )
+    }
+  }
+  
+  renderProgress() {
+    if (this.state.uploadProgress) {
+      return (
+        <Progress className="bg-blue" percent={this.state.uploadProgress} />
+      )
+    }
+  }
+  
+  renderBgImage() {
+    if (this.state.bgImage) {
+      return (
+        <div>
+          <div className="col col-1 p1">
+            <img src={this.state.bgImage} style={{maxHeight: '36px'}} />
+          </div>
+          <div className="col col-1 p1">
+            <button className="button button-transparent bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
+          </div>
+        </div>
+      )
+    }
+  }
+  
+  handleClearBgImage() {
+    if (confirm('Deseja remover a imagem de fundo?')) {
+      this.setState({bgImage: null})
+    }
+  }
+  
   handleKeyUp(event){
     if (event.keyCode == 27) {
       this.setState({editingBackground: false})
@@ -57,16 +123,25 @@ export default class Block extends React.Component {
   }
 
   handleCancelEdit(){
-    this.setState({editingBackground: false})
+    this.setState({
+      editingBackground: false,
+      bgClass: this.props.block.bg_class,
+      bgImage: this.props.block.bg_image
+    })
   }
 
   handleColorClick(event) {
+    this.setState({bgClass: event.currentTarget.getAttribute('data-bg-class')})
+  }
+
+  handleSaveEdit() {
     this.setState({editingBackground: false})
     this.bindedBlockActions.editBlock({
       mobilization_id: this.props.mobilization.id,
       block_id: this.props.block.id,
       block: {
-        bg_class: event.currentTarget.getAttribute('data-bg-class')
+        bg_class: this.state.bgClass,
+        bg_image: this.state.bgImage
       }
     })
   }
