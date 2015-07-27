@@ -21,12 +21,7 @@ export function addBlock(params) {
   return dispatch => {
     $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       method: 'post',
-      data: {
-        block: {
-          bg_class: params.bg_class,
-          widgets_attributes: params.widgets
-        }
-      },
+      data: { block: params.block },
       success: function(data, textStatus, jqXHR){
         params.router.transitionTo(Paths.editMobilization(params.mobilization_id))
       }
@@ -66,7 +61,7 @@ export function removeBlock(params) {
 export function moveBlockUp(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {
@@ -86,7 +81,7 @@ export function moveBlockUp(params) {
 export function moveBlockDown(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block.id}`, {
+    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {

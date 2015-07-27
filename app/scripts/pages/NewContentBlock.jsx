@@ -31,10 +31,12 @@ export default class NewContentBlock extends React.Component {
     bindedBlockActions.addBlock({
       router: this.context.router,
       mobilization_id: this.props.mobilization.id,
-      bg_class: this.state.bgClass,
-      widgets: this.state.selectedSizes.map((size) => {
-        return { kind: 'content', size }
-      })
+      block: {
+        bg_class: this.state.bgClass,
+        widgets_attributes: this.state.selectedSizes.map((size) => {
+          return { kind: 'content', size }
+        })
+      }
     })
   }
 
