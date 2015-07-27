@@ -122,7 +122,7 @@ export default class Block extends React.Component {
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
+      <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut} style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <DropDownMenu className={(this.state.hasMouseOver ? "" : "display-none")} icon="cog">
           <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
           <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>

@@ -51,7 +51,8 @@ describe('NewContentBlock', () => {
       const addBlockStub = sinon.stub(BlockActions, 'addBlock')
       component.setState({
         selectedSizes: [68, 69],
-        bgClass: 'bg-test'
+        bgClass: 'bg-test',
+        bgImage: 'foobar.jpg'
       })
       component.handleAddBlockClick()
       expect(addBlockStub).to.have.been.calledWith({
@@ -59,6 +60,7 @@ describe('NewContentBlock', () => {
         mobilization_id: mobilization.id,
         block: {
           bg_class: 'bg-test',
+          bg_image: 'foobar.jpg',
           widgets_attributes: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
         }
       })
