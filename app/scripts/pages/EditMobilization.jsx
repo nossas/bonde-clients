@@ -38,8 +38,6 @@ export default class EditMobilization extends React.Component {
         this.props.widgets.length > 0 &&
         this.props.widgets.length > this.state.widgetsCount
         ) {
-      console.log(this.props.widgets.length)
-      console.log(this.state.widgetsCount)
       window.scrollTo(0, document.body.scrollHeight)
       this.setState({scrolledToBottom: true})
     }
