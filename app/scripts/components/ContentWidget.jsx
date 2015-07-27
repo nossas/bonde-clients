@@ -25,48 +25,50 @@ export default class ContentWidget extends React.Component {
     this.setState({editor: editor})
   }
 
-  handleEditorFocus(){
+  enableEditor() {
     this.setState({editing: true})
+    window.addEventListener('keyup', ::this.handleEscapePress)
   }
 
-  handleOverlayClick(){
-    if(this.hasChanged()){
-      if(confirm("Você deseja salvar suas alterações?")){
-        this.save()
-      } else {
-        this.undo()
-      }
-    } else {
-      this.setState({editing: false})
+  disableEditor() {
+    this.setState({editing: false})
+    window.removeEventListener('keyup', ::this.handleEscapePress)
+    React.findDOMNode(this.refs.content).blur()
+  }
+
+  handleEditorFocus(){
+    this.enableEditor()
+  }
+
+  handleEscapePress(e){
+    if(e.keyCode == 27){
+      this.save()
     }
   }
 
-  undo(){
-    this.state.editor.setValue(this.state.content)
-    this.setState({editing: false})
+  handleOverlayClick(){
+    this.save()
   }
 
   save(){
-    this.setState({
-      content: this.state.editor.getValue(),
-      editing: false
-    })
+    const { editor, content } = this.state
+    const hasChanged = editor.getValue() != content
+    this.setState({content: editor.getValue()})
+    this.disableEditor()
 
-    const { dispatch } = this.props
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedWidgetActions.editWidget({
-      mobilization_id: this.props.mobilization.id,
-      widget_id: this.props.widget.id,
-      widget: {
-        settings: {
-          content: this.state.editor.getValue()
+    if(hasChanged){
+      const { dispatch } = this.props
+      const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+      bindedWidgetActions.editWidget({
+        mobilization_id: this.props.mobilization.id,
+        widget_id: this.props.widget.id,
+        widget: {
+          settings: {
+            content: this.state.editor.getValue()
+          }
         }
-      }
-    })
-  }
-
-  hasChanged(){
-    return this.state.content != this.state.editor.getValue()
+      })
+    }
   }
 
   render(){
@@ -90,12 +92,6 @@ export default class ContentWidget extends React.Component {
             dangerouslySetInnerHTML={{__html: this.state.content}}
             ref="content" />
           <div className={classnames("right", "mt1", {"display-none": !editing})}>
-            <button
-              onClick={::this.undo}
-              className="button button-transparent bg-darken-4 white rounded mr1">
-              <i className="fa fa-undo mr1" />
-              Desfazer
-            </button>
             <button
               onClick={::this.save}
               className="button button-transparent bg-darken-4 white rounded">
