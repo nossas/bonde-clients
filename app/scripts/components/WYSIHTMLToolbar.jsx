@@ -77,6 +77,16 @@ export default class WYSIHTMLToolbar extends React.Component {
           className={buttonClassName}>
           <i className="fa fa-align-right regular" />
         </a>
+        <a
+          data-wysihtml5-command="undo"
+          className={buttonClassName}>
+          <i className="fa fa-undo regular" />
+        </a>
+        <a
+          data-wysihtml5-command="redo"
+          className={buttonClassName}>
+          <i className="fa fa-repeat regular" />
+        </a>
 
         <div data-wysihtml5-dialog="insertImage" style={{display: "none"}}>
           <label>
