@@ -98,7 +98,7 @@ export default class Block extends React.Component {
   renderHiddenTag() {
     if (this.props.block.hidden) {
       return (
-        <div className="absolute bottom-0 right-0 mr2 mb2 bg-darken-4 py1 px2 white">
+        <div className="absolute bottom-0 right-0 mr2 mb2 bg-darken-2 py1 px2 white">
           <i className="fa fa-eye-slash mr1" />
           Escondido
         </div>
