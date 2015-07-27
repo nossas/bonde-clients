@@ -46,7 +46,7 @@ export default class DropDownMenuItem extends React.Component {
 
   render(){
     return(
-      <div className={classnames("absolute top-0 right-0 p2", this.props.className)}>
+      <div className={classnames("absolute top-0 right-0 p2", this.props.className)} style={{zIndex: 9998}}>
         <button className="button white bg-darken-4" onClick={::this.handleClick}>
           {this.renderIcon()} {this.props.text} &#9662;
         </button>
