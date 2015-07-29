@@ -1,4 +1,5 @@
 import React from 'react'
+import Loading from 'react-loading'
 import MobilizationMenu from './../components/MobilizationMenu.jsx'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { connect } from 'redux/react'
@@ -32,6 +33,12 @@ export default class Mobilization extends React.Component {
   }
 
   renderLoader(){
-    return(<div>Carregando...</div>)
+    return(
+      <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
+        <div className="mx-auto" style={{zIndex: 9999}}>
+          <Loading type='spin' />
+        </div>
+      </div>
+    )
   }
 }

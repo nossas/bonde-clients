@@ -25,7 +25,8 @@ describe('Block', () => {
         editingBackground: false,
         bgClass: component.props.block.bg_class,
         bgImage: component.props.block.bg_image,
-        uploadProgress: null
+        uploadProgress: null,
+        loading: false
       })
     })
   })

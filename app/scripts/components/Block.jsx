@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
+import Loading from 'react-loading'
 import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress } from './'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
@@ -13,10 +14,17 @@ export default class Block extends React.Component {
       editingBackground: false,
       bgClass: props.block.bg_class,
       bgImage: props.block.bg_image,
-      uploadProgress: null
+      uploadProgress: null,
+      loading: false
     }
     const { dispatch } = this.props
     this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.loading) {
+      this.setState({loading: false})
+    }
   }
 
   filterWidgets(widgets, block){
@@ -121,6 +129,18 @@ export default class Block extends React.Component {
     }
   }
   
+  renderLoading() {
+    if (this.state.loading) {
+      return (
+        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
+          <div className="mx-auto" style={{zIndex: 9999}}>
+            <Loading type='spin' />
+          </div>
+        </div>
+      )
+    }
+  }
+  
   handleClearBgImage() {
     if (confirm('Deseja remover a imagem de fundo?')) {
       this.setState({bgImage: null})
@@ -146,7 +166,7 @@ export default class Block extends React.Component {
   }
 
   handleSaveEdit() {
-    this.setState({editingBackground: false})
+    this.setState({editingBackground: false, loading: true})
     this.bindedBlockActions.editBlock({
       mobilization_id: this.props.mobilization.id,
       block_id: this.props.block.id,
@@ -162,6 +182,7 @@ export default class Block extends React.Component {
   }
 
   handleMoveUpClick() {
+    this.setState({loading: true})
     this.bindedBlockActions.moveBlockUp({
       mobilization_id: this.props.mobilization.id,
       block: this.props.block,
@@ -170,6 +191,7 @@ export default class Block extends React.Component {
   }
 
   handleMoveDownClick() {
+    this.setState({loading: true})
     this.bindedBlockActions.moveBlockDown({
       mobilization_id: this.props.mobilization.id,
       block: this.props.block,
@@ -178,6 +200,7 @@ export default class Block extends React.Component {
   }
 
   handleToggleHiddenClick() {
+    this.setState({loading: true})
     this.bindedBlockActions.editBlock({
       mobilization_id: this.props.mobilization.id,
       block_id: this.props.block.id,
@@ -189,6 +212,7 @@ export default class Block extends React.Component {
 
   handleRemoveClick() {
     if (confirm("Você tem certeza que quer remover este bloco?")) {
+      this.setState({loading: true})
       this.bindedBlockActions.removeBlock({
         mobilization_id: this.props.mobilization.id,
         block_id: this.props.block.id
@@ -221,6 +245,7 @@ export default class Block extends React.Component {
           { this.renderWidgets(filteredWidgets) }
         </div>
         { this.renderHiddenTag() }
+        { this.renderLoading() }
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import WYSIHTMLToolbar from './../components/WYSIHTMLToolbar.jsx'
+import Loading from 'react-loading'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
@@ -11,7 +12,8 @@ export default class ContentWidget extends React.Component {
       editing: false,
       editor: null,
       content: (props.widget.settings ? props.widget.settings.content : 'Clique para editar...'),
-      toolbarId: "wysihtml5-toolbar-" + this.props.widget.id
+      toolbarId: "wysihtml5-toolbar-" + this.props.widget.id,
+      loading: false
     }
   }
 
@@ -23,6 +25,13 @@ export default class ContentWidget extends React.Component {
       }
     ).on("focus", ::this.handleEditorFocus)
     this.setState({editor: editor})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.loading && this.props.widget.settings.content != nextProps.widget.settings.content) {
+      console.log('aki2')
+      this.setState({loading: false})
+    }
   }
 
   enableEditor() {
@@ -59,6 +68,8 @@ export default class ContentWidget extends React.Component {
     if(hasChanged){
       const { dispatch } = this.props
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+      this.setState({loading: true})
+      console.log('aki')
       bindedWidgetActions.editWidget({
         mobilization_id: this.props.mobilization.id,
         widget_id: this.props.widget.id,
@@ -71,6 +82,18 @@ export default class ContentWidget extends React.Component {
     }
   }
 
+  renderLoading() {
+    if (this.state.loading) {
+      return (
+        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
+          <div className="mx-auto" style={{zIndex: 9999}}>
+            <Loading type='spin' />
+          </div>
+        </div>
+      )
+    }
+  }
+  
   render(){
     const { toolbarId, editing } = this.state
     return (
@@ -100,6 +123,7 @@ export default class ContentWidget extends React.Component {
             </button>
           </div>
         </div>
+        {this.renderLoading()}
       </div>
     )
   }
