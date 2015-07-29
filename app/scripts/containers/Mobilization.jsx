@@ -1,6 +1,6 @@
 import React from 'react'
-import Loading from 'react-loading'
 import MobilizationMenu from './../components/MobilizationMenu.jsx'
+import { Loading } from './../components'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { connect } from 'redux/react'
 import { bindActionCreators } from 'redux'
@@ -19,7 +19,7 @@ export default class Mobilization extends React.Component {
   render(){
     const ids = this.props.mobilizations.map((mobilization) => {return mobilization.id.toString()})
     const mobilization = this.props.mobilizations[ids.indexOf(this.props.params.mobilization_id)]
-    return(mobilization ? this.renderMobilization(mobilization) : this.renderLoader())
+    return(mobilization ? this.renderMobilization(mobilization) : this.renderLoading())
   }
 
   renderMobilization(mobilization){
@@ -32,13 +32,9 @@ export default class Mobilization extends React.Component {
     )
   }
 
-  renderLoader(){
+  renderLoading(){
     return(
-      <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
-        <div className="mx-auto" style={{zIndex: 9999}}>
-          <Loading type='spin' />
-        </div>
-      </div>
+      <Loading />
     )
   }
 }

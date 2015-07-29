@@ -1,6 +1,5 @@
 import React from 'react'
-import WYSIHTMLToolbar from './../components/WYSIHTMLToolbar.jsx'
-import Loading from 'react-loading'
+import { WYSIHTMLToolbar, Loading } from './'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
@@ -85,11 +84,7 @@ export default class ContentWidget extends React.Component {
   renderLoading() {
     if (this.state.loading) {
       return (
-        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
-          <div className="mx-auto" style={{zIndex: 9999}}>
-            <Loading type='spin' />
-          </div>
-        </div>
+        <Loading />
       )
     }
   }
