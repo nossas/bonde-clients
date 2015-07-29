@@ -29,7 +29,6 @@ export default class ContentWidget extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.loading && this.props.widget.settings.content != nextProps.widget.settings.content) {
-      console.log('aki2')
       this.setState({loading: false})
     }
   }
@@ -71,7 +70,6 @@ export default class ContentWidget extends React.Component {
       const { dispatch } = this.props
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       this.setState({loading: true})
-      console.log('aki')
       bindedWidgetActions.editWidget({
         mobilization_id: this.props.mobilization.id,
         widget_id: this.props.widget.id,
