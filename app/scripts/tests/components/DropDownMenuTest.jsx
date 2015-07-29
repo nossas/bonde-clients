@@ -92,19 +92,19 @@ describe('DropDownMenu', () => {
     })
 
     it('should render render icon', () => {
-      const renderIconStub = sinon.stub(component, 'renderIcon')
+      const renderIconStub = sandbox.stub(component, 'renderIcon')
       component.render()
       expect(renderIconStub).to.have.been.calledOnce
     })
 
     it('should render children', () => {
-      const renderChildrenStub = sinon.stub(component, 'renderChildren')
+      const renderChildrenStub = sandbox.stub(component, 'renderChildren')
       component.render()
       expect(renderChildrenStub).to.have.been.calledOnce
     })
 
     it('should render render overlay', () => {
-      const renderOverlayStub = sinon.stub(component, 'renderOverlay')
+      const renderOverlayStub = sandbox.stub(component, 'renderOverlay')
       component.render()
       expect(renderOverlayStub).to.have.been.calledOnce
     })

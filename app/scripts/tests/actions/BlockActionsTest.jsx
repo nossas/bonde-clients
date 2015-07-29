@@ -2,26 +2,12 @@ import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN 
 import * as BlockActions from './../../actions/BlockActions'
 import $ from 'jquery'
 
-let xhr, requests
 const BASE_URL = process.env.BASE_URL
 
 describe('BlockActions', () => {
-  before(() => {
-    xhr = sinon.useFakeXMLHttpRequest()
-    xhr.onCreate = function (req) { requests.push(req); }
-  });
-
-  after(() => {
-    xhr.restore()
-  })
-
-  beforeEach(() => {
-    requests = []
-  })
-
   describe('#fetchBlocks', () => {
     it('should GET blocks using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       BlockActions.fetchBlocks({ mobilization_id: 1 })(dispatch)
       const request = requests[0]
       const blocks = [{id: 1}, {id: 2}]
@@ -37,9 +23,9 @@ describe('BlockActions', () => {
 
   describe('#addBlock', () => {
     it('should POST block using correct URL transition to edit mobilization', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       const router = { transitionTo() {} }
-      const transitionToStub = sinon.stub(router, 'transitionTo')
+      const transitionToStub = sandbox.stub(router, 'transitionTo')
       const block = {
         bg_class: 'bg-test',
         widgets_attributes: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
@@ -60,7 +46,7 @@ describe('BlockActions', () => {
 
   describe('#editBlock', () => {
     it('should PUT block using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       const block = {
         id: 2,
         bg_class: 'bg-test'
@@ -84,7 +70,7 @@ describe('BlockActions', () => {
 
   describe('#removeBlock', () => {
     it('should DELETE block using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       BlockActions.removeBlock({
         mobilization_id: 1,
         block_id: 2
@@ -104,7 +90,7 @@ describe('BlockActions', () => {
 
   describe('#moveBlockUp', () => {
     it('should PUT block using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
@@ -129,7 +115,7 @@ describe('BlockActions', () => {
 
   describe('#moveBlockDown', () => {
     it('should PUT block using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }

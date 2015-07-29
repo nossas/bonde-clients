@@ -2,26 +2,12 @@ import { EDIT_WIDGET, FETCH_WIDGETS } from '../../constants/ActionTypes'
 import * as WidgetActions from './../../actions/WidgetActions'
 import $ from 'jquery'
 
-let xhr, requests
 const BASE_URL = process.env.BASE_URL
 
 describe('WidgetActions', () => {
-  before(() => {
-    xhr = sinon.useFakeXMLHttpRequest()
-    xhr.onCreate = function (req) { requests.push(req); }
-  })
-
-  after(() => {
-    xhr.restore()
-  })
-
-  beforeEach(() => {
-    requests = []
-  })
-
   describe('#fetchMobilizations', () => {
     it('should GET widgets using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       WidgetActions.fetchWidgets({mobilization_id: 1})(dispatch)
       const request = requests[0]
       const widgets = [{id: 1}, {id: 2}]
@@ -37,7 +23,7 @@ describe('WidgetActions', () => {
 
   describe('#editWidget', () => {
     it('should PUT widget using correct URL and dispatch action', () => {
-      const dispatch = sinon.spy()
+      const dispatch = sandbox.spy()
       const widget = {
         id: 2,
         settings: {content: 'text'}

@@ -4,17 +4,9 @@ import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './..
 
 let { TestUtils } = React.addons
 
-let sandbox, widget1, widget2, allWidgets, blockWidgets, block
+let widget1, widget2, allWidgets, blockWidgets, block
 
 describe('Block', () => {
-  beforeEach(() => {
-    sandbox = sinon.sandbox.create()
-  })
-
-  afterEach(() => {
-    sandbox.restore()
-  })
-
   before(() => {
     widget1 = { block_id: 1, id: 1, settings: { content: "My widget1" } }
     widget2 = { block_id: 2, id: 2, settings: { content: "My widget2" } }

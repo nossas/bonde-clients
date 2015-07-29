@@ -48,7 +48,7 @@ describe('NewContentBlock', () => {
 
   describe('#handleAddBlockClick', () => {
     it('should dispatch add block action', () => {
-      const addBlockStub = sinon.stub(BlockActions, 'addBlock')
+      const addBlockStub = sandbox.stub(BlockActions, 'addBlock')
       component.setState({
         selectedSizes: [68, 69],
         bgClass: 'bg-test',
@@ -70,7 +70,7 @@ describe('NewContentBlock', () => {
   describe('#handleCancelClick', () => {
     it('transition to edit mobilization page', () => {
       component.context.router = { goBack() {} }
-      const goBack = sinon.stub(component.context.router, 'goBack')
+      const goBack = sandbox.stub(component.context.router, 'goBack')
       component.handleCancelClick()
       expect(goBack).to.have.been.calledOnce
     })
@@ -101,7 +101,7 @@ describe('NewContentBlock', () => {
 
   describe('#handleClearBgImage', () => {
     it('should clear the image', () => {
-      sinon.stub(window, 'confirm').returns(true)
+      sandbox.stub(window, 'confirm').returns(true)
       component.setState({bgImage: 'foo.gif'})
       component.handleClearBgImage()
       expect(component.state.bgImage).to.be.null

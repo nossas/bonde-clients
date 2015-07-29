@@ -18,8 +18,8 @@ describe('ContentWidget', function() {
     })
 
     it("should add a keyup event listener", function(){
-      const mockedAddEventListener = sinon.spy()
-      sinon.stub(window, 'addEventListener', mockedAddEventListener)
+      const mockedAddEventListener = sandbox.spy()
+      sandbox.stub(window, 'addEventListener', mockedAddEventListener)
       component.enableEditor()
 
       mockedAddEventListener.should.have.been.called
@@ -33,8 +33,8 @@ describe('ContentWidget', function() {
     })
 
     it("should remove the keyup event listener", function(){
-      const mockedRemoveEventListener = sinon.spy()
-      sinon.stub(window, 'removeEventListener', mockedRemoveEventListener)
+      const mockedRemoveEventListener = sandbox.spy()
+      sandbox.stub(window, 'removeEventListener', mockedRemoveEventListener)
       component.disableEditor()
 
       mockedRemoveEventListener.should.have.been.called
@@ -50,8 +50,8 @@ describe('ContentWidget', function() {
 
   describe('#handleEscapePress', function(){
     it("should save the content if the keyCode is escape", function(){
-      const mockedSave = sinon.spy()
-      sinon.stub(component, 'save', mockedSave)
+      const mockedSave = sandbox.spy()
+      sandbox.stub(component, 'save', mockedSave)
       component.handleEscapePress({keyCode: 27})
 
       mockedSave.should.have.been.called
@@ -60,8 +60,8 @@ describe('ContentWidget', function() {
 
   describe('#handleOverlayClick', function(){
     it("should save the content", function(){
-      const mockedSave = sinon.spy()
-      sinon.stub(component, 'save', mockedSave)
+      const mockedSave = sandbox.spy()
+      sandbox.stub(component, 'save', mockedSave)
       component.handleOverlayClick()
 
       mockedSave.should.have.been.called
