@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
-import Loading from 'react-loading'
-import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress } from './'
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
@@ -133,11 +132,7 @@ export default class Block extends React.Component {
   renderLoading() {
     if (this.state.loading) {
       return (
-        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 flex flex-center">
-          <div className="mx-auto" style={{zIndex: 9999}}>
-            <Loading type='spin' />
-          </div>
-        </div>
+        <Loading />
       )
     }
   }
@@ -238,7 +233,7 @@ export default class Block extends React.Component {
   }
 
   displayDropDownMenu() {
-    return this.state.hasMouseOver && !this.state.editingBackground && !this.state.editingWidget
+    return this.state.hasMouseOver && !this.state.editingBackground && !this.state.editingWidget && !this.state.loading
   }
   
   render(){
