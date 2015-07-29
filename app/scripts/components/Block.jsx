@@ -12,6 +12,7 @@ export default class Block extends React.Component {
     this.state = {
       hasMouseOver: false,
       editingBackground: false,
+      editingWidget: false,
       bgClass: props.block.bg_class,
       bgImage: props.block.bg_image,
       uploadProgress: null,
@@ -39,7 +40,7 @@ export default class Block extends React.Component {
         <Widget
           {...this.props}
           key={"widget-" + widget.id}
-          widget={widget} />
+          widget={widget} onEdit={::this.handleWidgetEdit} onCancelEdit={::this.handleWidgetCancelEdit} />
       )
     }.bind(this))
   }
@@ -181,6 +182,14 @@ export default class Block extends React.Component {
     this.setState({editingBackground: true})
   }
 
+  handleWidgetEdit() {
+    this.setState({editingWidget: true})
+  }
+
+  handleWidgetCancelEdit() {
+    this.setState({editingWidget: false})
+  }
+
   handleMoveUpClick() {
     this.setState({loading: true})
     this.bindedBlockActions.moveBlockUp({
@@ -227,13 +236,17 @@ export default class Block extends React.Component {
   handleMouseOut() {
     this.setState({hasMouseOver: false})
   }
+
+  displayDropDownMenu() {
+    return this.state.hasMouseOver && !this.state.editingBackground && !this.state.editingWidget
+  }
   
   render(){
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
       <div className={classnames("clearfix", "relative", block.bg_class)} onKeyUp={::this.handleKeyUp} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut} style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
-        <DropDownMenu className={(this.state.hasMouseOver ? "" : "display-none")} icon="cog">
+        <DropDownMenu className={(this.displayDropDownMenu() ? "" : "display-none")} icon="cog">
           <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
           <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
           <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>

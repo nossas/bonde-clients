@@ -36,11 +36,13 @@ export default class ContentWidget extends React.Component {
 
   enableEditor() {
     this.setState({editing: true})
+    this.props.onEdit && this.props.onEdit()
     window.addEventListener('keyup', ::this.handleEscapePress)
   }
 
   disableEditor() {
     this.setState({editing: false})
+    this.props.onCancelEdit && this.props.onCancelEdit()
     window.removeEventListener('keyup', ::this.handleEscapePress)
     React.findDOMNode(this.refs.content).blur()
   }
@@ -93,7 +95,7 @@ export default class ContentWidget extends React.Component {
       )
     }
   }
-  
+
   render(){
     const { toolbarId, editing } = this.state
     return (

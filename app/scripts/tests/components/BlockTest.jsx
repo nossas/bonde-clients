@@ -23,6 +23,7 @@ describe('Block', () => {
       expect(component.state).to.eql({
         hasMouseOver: false,
         editingBackground: false,
+        editingWidget: false,
         bgClass: component.props.block.bg_class,
         bgImage: component.props.block.bg_image,
         uploadProgress: null,
