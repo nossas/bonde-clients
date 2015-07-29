@@ -1,8 +1,8 @@
 var sandbox, xhr, requests
 var wysihtml5 = {
-  Editor() {
+  Editor: function() {
     return {
-      on() {}
+      on: function() {}
     }
   }
 }
