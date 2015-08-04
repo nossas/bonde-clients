@@ -1,4 +1,5 @@
 import React from 'react'
+import WYSIHTMLToolbarInsertImage from './../components/WYSIHTMLToolbarInsertImage.jsx'
 
 export default class WYSIHTMLToolbar extends React.Component {
   render(){
@@ -20,10 +21,6 @@ export default class WYSIHTMLToolbar extends React.Component {
           className={buttonClassName}>
           <i className="fa fa-link" />
         </a>
-        <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="inline-block ml1 mr1">
-          <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light rounded-left" />
-          <a data-wysihtml5-dialog-action="save" className="button rounded-right">Inserir</a>
-        </div>
         <a
           data-wysihtml5-command="removeLink"
           className={buttonClassName}>
@@ -87,21 +84,10 @@ export default class WYSIHTMLToolbar extends React.Component {
           className={buttonClassName}>
           <i className="fa fa-repeat regular" />
         </a>
-
-        <div data-wysihtml5-dialog="insertImage" style={{display: "none"}}>
-          <label>
-            Image:
-            <input data-wysihtml5-dialog-field="src" defaultValue="http://" />
-          </label>
-          <label>
-            Align:
-            <select data-wysihtml5-dialog-field="className">
-              <option value="">default</option>
-              <option value="wysiwyg-float-left">left</option>
-              <option value="wysiwyg-float-right">right</option>
-            </select>
-          </label>
-          <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+        <WYSIHTMLToolbarInsertImage />
+        <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="white p2 bg-darken-3">
+          <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light mr1" />
+          <a data-wysihtml5-dialog-action="save" className="button button-outline">Inserir</a>
         </div>
       </div>
     )

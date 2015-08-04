@@ -76,7 +76,7 @@ export default class Block extends React.Component {
   handleUploadError() {
     this.setState({uploadProgress: null})
   }
-  
+
   handleUploadFinish(image) {
     const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
     this.setState({bgImage: imageUrl, uploadProgress: null})
@@ -94,7 +94,7 @@ export default class Block extends React.Component {
       )
     }
   }
-  
+
   renderProgress() {
     if (this.state.uploadProgress) {
       return (
@@ -102,7 +102,7 @@ export default class Block extends React.Component {
       )
     }
   }
-  
+
   renderHiddenTag() {
     if (this.props.block.hidden) {
       return (
@@ -113,7 +113,7 @@ export default class Block extends React.Component {
       )
     }
   }
-  
+
   renderBgImage() {
     if (this.state.bgImage) {
       return (
@@ -128,7 +128,7 @@ export default class Block extends React.Component {
       )
     }
   }
-  
+
   renderLoading() {
     if (this.state.loading) {
       return (
@@ -136,13 +136,13 @@ export default class Block extends React.Component {
       )
     }
   }
-  
+
   handleClearBgImage() {
     if (confirm('Deseja remover a imagem de fundo?')) {
       this.setState({bgImage: null})
     }
   }
-  
+
   handleKeyUp(event){
     if (event.keyCode == 27) {
       this.setState({editingBackground: false})
@@ -235,12 +235,17 @@ export default class Block extends React.Component {
   displayDropDownMenu() {
     return this.state.hasMouseOver && !this.state.editingBackground && !this.state.editingWidget && !this.state.loading
   }
-  
+
   render(){
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
-      <div className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))} onKeyUp={::this.handleKeyUp} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut} style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
+      <div
+        className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))}
+        onKeyUp={::this.handleKeyUp}
+        onMouseOver={::this.handleMouseOver}
+        onMouseOut={::this.handleMouseOut}
+        style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <DropDownMenu className={(this.displayDropDownMenu() ? "" : "display-none")} icon="cog">
           <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
           <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
