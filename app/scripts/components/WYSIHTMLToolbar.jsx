@@ -21,10 +21,6 @@ export default class WYSIHTMLToolbar extends React.Component {
           className={buttonClassName}>
           <i className="fa fa-link" />
         </a>
-        <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="inline-block ml1 mr1">
-          <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light rounded-left" />
-          <a data-wysihtml5-dialog-action="save" className="button rounded-right">Inserir</a>
-        </div>
         <a
           data-wysihtml5-command="removeLink"
           className={buttonClassName}>
@@ -89,6 +85,10 @@ export default class WYSIHTMLToolbar extends React.Component {
           <i className="fa fa-repeat regular" />
         </a>
         <WYSIHTMLToolbarInsertImage />
+        <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="white p2 bg-darken-3">
+          <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light mr1" />
+          <a data-wysihtml5-dialog-action="save" className="button button-outline">Inserir</a>
+        </div>
       </div>
     )
   }
