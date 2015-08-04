@@ -241,7 +241,7 @@ export default class Block extends React.Component {
     const filteredWidgets = this.filterWidgets(widgets, block)
     return(
       <div
-        className={classnames("clearfix", "relative", "bg-cover", block.bg_class)} 
+        className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))}
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
