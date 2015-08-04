@@ -1,21 +1,25 @@
 import React from 'react'
 import Auth from 'j-toker'
 import * as Paths from '../Paths'
-var Navigation = require('react-router').Navigation
-require('react/addons')
+import reactMixin from 'react-mixin'
+import { Navigation } from 'react-router'
+import { addons } from 'react/addons'
+const { LinkedStateMixin } = addons
 
-var LoginForm = React.createClass({
-  mixins: [React.addons.LinkedStateMixin, Navigation],
+@reactMixin.decorate(Navigation)
+@reactMixin.decorate(LinkedStateMixin)
+export default class LoginForm extends React.Component {
 
-  getInitialState: function(){
-    return ({
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
       email: null,
       password: null
-    })
-  },
+    }
+  }
 
-  onSubmit: function(e){
-    e.preventDefault()
+  handleSubmit(event) {
+    event.preventDefault()
     Auth.emailSignIn(this.state).
       then(function(user){
         // TODO change this to mobilizations index when we have that page
@@ -24,11 +28,11 @@ var LoginForm = React.createClass({
       fail(function(error){
         console.log(error)
       })
-  },
+  }
 
-  render: function(){
+  render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={::this.handleSubmit}>
         <label>Email</label>
         <input
           type="email"
@@ -45,6 +49,4 @@ var LoginForm = React.createClass({
       </form>
     )
   }
-})
-
-module.exports = LoginForm
+}
