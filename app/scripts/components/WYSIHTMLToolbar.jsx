@@ -1,5 +1,5 @@
 import React from 'react'
-import WYSIHTMLToolbarInsertImage from './../components/WYSIHTMLToolbarInsertImage.jsx'
+import { WYSIHTMLToolbarInsertImage, WYSIHTMLToolbarInsertHTML, WYSIHTMLToolbarCreateLink } from './'
 
 export default class WYSIHTMLToolbar extends React.Component {
   render(){
@@ -30,6 +30,11 @@ export default class WYSIHTMLToolbar extends React.Component {
           data-wysihtml5-command="insertImage"
           className={buttonClassName}>
           <i className="fa fa-image" />
+        </a>
+        <a
+          data-wysihtml5-command="insertHTMLForm"
+          className={buttonClassName}>
+          <i className="fa fa-code" />
         </a>
         <a
           data-wysihtml5-command="formatBlock"
@@ -85,10 +90,8 @@ export default class WYSIHTMLToolbar extends React.Component {
           <i className="fa fa-repeat regular" />
         </a>
         <WYSIHTMLToolbarInsertImage />
-        <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="white p2 bg-darken-3">
-          <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light mr1" />
-          <a data-wysihtml5-dialog-action="save" className="button button-outline">Inserir</a>
-        </div>
+        <WYSIHTMLToolbarCreateLink />
+        <WYSIHTMLToolbarInsertHTML />
       </div>
     )
   }
