@@ -3,9 +3,6 @@ import PubSub from 'pubsub-js'
 import Auth from 'j-toker'
 import $ from 'jquery'
 
-// Components
-import MainMenu from './../components/MainMenu.jsx'
-
 Auth.configure({
   apiUrl: process.env.BASE_URL,
   handleTokenValidationResponse: function(resp) {
