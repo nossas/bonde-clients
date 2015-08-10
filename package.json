@@ -41,7 +41,7 @@
     "pubsub-js": "^1.5.2",
     "react": "^0.13.3",
     "react-mixin": "^1.7.0",
-    "react-router": "1.0.0-beta2",
+    "react-router": "1.0.0-beta3",
     "react-s3-uploader": "1.1.12",
     "redux": "^0.12.0",
     "reflux": "^0.2.8",
