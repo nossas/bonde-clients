@@ -31,8 +31,8 @@ export default class EditMobilization extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.scrolledToBottom && 
-        this.props.location.query && 
+    if (!this.state.scrolledToBottom &&
+        this.props.location.query &&
         this.props.location.query.newBlock &&
         this.props.location.query.newBlock == "true" &&
         this.props.blocks.length > 0 &&
@@ -51,7 +51,16 @@ export default class EditMobilization extends React.Component {
       <div className={className}>
         {
           blocks.map(function(block, index){
-            return <Block {...this.props} key={"block-" + block.id} block={block} canMoveUp={index != 0} canMoveDown={index != blocks.length - 1} />
+            return(
+              <Block
+                {...this.props}
+                key={"block-" + block.id}
+                block={block}
+                canMoveUp={index != 0}
+                canMoveDown={index != blocks.length - 1}
+                editable={true}
+              />
+            )
           }.bind(this))
         }
       </div>
