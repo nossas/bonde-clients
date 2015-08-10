@@ -233,7 +233,13 @@ export default class Block extends React.Component {
   }
 
   displayDropDownMenu() {
-    return this.state.hasMouseOver && !this.state.editingBackground && !this.state.editingWidget && !this.state.loading
+    return(
+      this.state.hasMouseOver &&
+      !this.state.editingBackground &&
+      !this.state.editingWidget &&
+      !this.state.loading &&
+      this.props.editable
+    )
   }
 
   render(){

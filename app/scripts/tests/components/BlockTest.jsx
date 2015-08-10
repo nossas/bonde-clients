@@ -310,9 +310,19 @@ describe('Block', () => {
       expect(menus[0].props.className).to.equal('display-none')
     })
 
-    it('should render DropDownMenu with display-none when mouse is out', () => {
+    it('should render DropDownMenu with display-none when block is not editable', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} editable={false} />
+      )
+      component.setState({hasMouseOver: true})
+      const menus = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
+      expect(menus).to.have.length(1)
+      expect(menus[0].props.className).to.equal('display-none')
+    })
+
+    it('should render DropDownMenu when mouse is over', () => {
+      const component = TestUtils.renderIntoDocument(
+        <Block widgets={allWidgets} block={block} editable={true} />
       )
       component.setState({hasMouseOver: true})
       const menu = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
@@ -381,6 +391,12 @@ describe('Block', () => {
       component.setState({editingBackground: false})
       const colorPicker = TestUtils.scryRenderedComponentsWithType(component, ColorPicker)
       expect(colorPicker).to.have.length(0)
+    })
+  })
+
+  describe('#displayDropDownMenu', () => {
+    it('should be false when editable is false', () => {
+
     })
   })
 })
