@@ -25,9 +25,8 @@ export default class Mobilization extends React.Component {
   renderMobilization(mobilization){
     return(
       <div className="flex flex-stretch">
-        <MobilizationMenu {...this.props} mobilization={mobilization} />
-        {this.props.children &&
-          React.cloneElement(this.props.children, {...this.props, mobilization: mobilization})}
+        { this.props.sidebar ? React.cloneElement(this.props.sidebar, {...this.props, mobilization: mobilization}) : null }
+        { React.cloneElement(this.props.main, {...this.props, mobilization: mobilization}) }
       </div>
     )
   }
