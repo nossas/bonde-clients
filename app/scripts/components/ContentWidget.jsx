@@ -17,13 +17,15 @@ export default class ContentWidget extends React.Component {
   }
 
   componentDidMount() {
-    const editor = new wysihtml5.Editor(
-      React.findDOMNode(this.refs.content), {
-        toolbar: this.state.toolbarId,
-        parserRules: wysihtml5ParserRules
-      }
-    ).on("focus", ::this.handleEditorFocus)
-    this.setState({editor: editor})
+    if(this.props.editable){
+      const editor = new wysihtml5.Editor(
+        React.findDOMNode(this.refs.content), {
+          toolbar: this.state.toolbarId,
+          parserRules: wysihtml5ParserRules
+        }
+      ).on("focus", ::this.handleEditorFocus)
+      this.setState({editor: editor})
+    }
   }
 
   componentWillReceiveProps(nextProps) {
