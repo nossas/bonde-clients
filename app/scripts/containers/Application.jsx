@@ -36,7 +36,6 @@ export default class Application extends React.Component {
   render() {
     return(
       <div>
-        <MainMenu />
         {this.props.children &&
           React.cloneElement(this.props.children, {user: this.state.user})}
       </div>
