@@ -1,82 +1,104 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { connect } from 'redux/react'
+import reduxForm from 'redux-form'
 import Auth from 'j-toker'
 import * as Paths from '../Paths'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { addons } from 'react/addons'
-const { LinkedStateMixin } = addons
+
+function loginValidation(data) {
+  const errors = {}
+
+  if (!data.email) {
+    errors.email = 'Informe o e-mail'
+  } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
+    errors.email = 'E-mail inválido'
+  }
+  if (!data.password) {
+    errors.password = 'Informe a senha'
+  }
+
+  return errors
+}
 
 @reactMixin.decorate(Navigation)
-@reactMixin.decorate(LinkedStateMixin)
+@connect(state => ({ form: state.login }))
+@reduxForm('login', loginValidation)
 export default class LoginForm extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      email: null,
-      password: null,
-      errors: {}
+      error: null
     }
   }
 
-  validateForm() {
-    let errors = {}
-
-    if (!this.state.email) {
-      errors.email = 'Informe o e-mail.'
-    } else if (!this.state.password) {
-      errors.password = 'Informe a senha.'
-    }
-
-    this.setState({ errors: errors })
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    touchAll: PropTypes.func.isRequired,
+    valid: PropTypes.bool.isRequired
   }
 
   handleSubmit(event) {
+    this.setState({ error: null })
     event.preventDefault()
-    this.validateForm()
+    const { data, touchAll, valid } = this.props
 
-    if (Object.keys(this.state.errors).length === 0) {
-      Auth.emailSignIn(this.state).
+    if (valid) {
+      Auth.emailSignIn(data).
         then(function(user){
           // TODO change this to mobilizations index when we have that page
           this.transitionTo(Paths.editMobilization(1))
         }.bind(this)).
         fail(function(error){
-          this.handleLoginError(error.reason)
+          this.setState({ error: error.reason })
         }.bind(this))
+    } else {
+      touchAll()
     }
   }
 
-  handleLoginError(error) {
-    this.setState({ errors: { general: error } })
-  }
-
   renderErrorMessage() {
-    if (this.state.errors) {
+    if (this.state.error) {
       return (
-        <div className="red mb2">{this.state.errors}</div>
+        <div className="red mb2">{this.state.error}</div>
       )
     }
   }
 
   render() {
+    const {
+      data: { email, password },
+      errors: { email: emailError, password: passwordError },
+      touched: { email: emailTouched, password: passwordTouched },
+      handleChange,
+      handleBlur
+    } = this.props
+
     return (
       <form onSubmit={::this.handleSubmit}>
         <label>Email</label>
-        <span className="red ml2">{this.state.errors.email}</span>
+        {emailError && emailTouched && <span className="red ml2">{emailError}</span>}
         <input
           type="email"
           className="field-light block full-width mb2"
-          valueLink={this.linkState('email')} />
+          value={email}
+          onChange={handleChange('email')}
+          onBlur={handleBlur('email')} />
 
         <label>Senha</label>
-        <span className="red ml2">{this.state.errors.password}</span>
+        {passwordError && passwordTouched && <span className="red ml2">{passwordError}</span>}
         <input
           type="password"
           className="field-light block full-width mb2"
-          valueLink={this.linkState('password')} />
+          value={password}
+          onChange={handleChange('password')}
+          onBlur={handleBlur('password')} />
 
-        <div className="red mb2">{this.state.errors.general}</div>
+        {::this.renderErrorMessage()}
 
         <input type="submit" className="button right" value="Entrar" />
       </form>
