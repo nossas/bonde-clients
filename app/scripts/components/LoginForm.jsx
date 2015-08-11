@@ -29,6 +29,7 @@ export default class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
+      submitting: false,
       error: null
     }
   }
@@ -43,7 +44,7 @@ export default class LoginForm extends React.Component {
   }
 
   handleSubmit(event) {
-    this.setState({ error: null })
+    this.setState({ submitting: true, error: null })
     event.preventDefault()
     const { data, touchAll, valid } = this.props
 
@@ -54,10 +55,11 @@ export default class LoginForm extends React.Component {
           this.transitionTo(Paths.editMobilization(1))
         }.bind(this)).
         fail(function(error){
-          this.setState({ error: error.reason })
+          this.setState({ submitting: false, error: error.reason })
         }.bind(this))
     } else {
       touchAll()
+      this.setState({ submitting: false })
     }
   }
 
@@ -98,9 +100,13 @@ export default class LoginForm extends React.Component {
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
 
-        {::this.renderErrorMessage()}
+        <input
+          type="submit"
+          className="button full-width"
+          disabled={this.state.submitting}
+          value={this.state.submitting ? "Entrando..." : "Entrar"} />
 
-        <input type="submit" className="button right" value="Entrar" />
+      {::this.renderErrorMessage()}
       </form>
     )
   }
