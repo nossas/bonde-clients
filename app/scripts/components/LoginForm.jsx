@@ -15,26 +15,27 @@ export default class LoginForm extends React.Component {
     this.state = {
       email: null,
       password: null,
-      errorMessage: null
+      errors: {}
     }
   }
 
   validateForm() {
+    let errors = {}
+
     if (!this.state.email) {
-      this.setState({ errorMessage: 'Informe o email.' })
+      errors.email = 'Informe o e-mail.'
     } else if (!this.state.password) {
-      this.setState({ errorMessage: 'Informe a senha.' })
-    } else {
-      this.setState({ errorMessage: null })
-      return true
+      errors.password = 'Informe a senha.'
     }
-    return false
+
+    this.setState({ errors: errors })
   }
 
   handleSubmit(event) {
     event.preventDefault()
+    this.validateForm()
 
-    if (this.validateForm()) {
+    if (Object.keys(this.state.errors).length === 0) {
       Auth.emailSignIn(this.state).
         then(function(user){
           // TODO change this to mobilizations index when we have that page
@@ -47,13 +48,13 @@ export default class LoginForm extends React.Component {
   }
 
   handleLoginError(error) {
-    this.setState({ errorMessage: error })
+    this.setState({ errors: { general: error } })
   }
 
   renderErrorMessage() {
-    if (this.state.errorMessage) {
+    if (this.state.errors) {
       return (
-        <div className="red mb2">{this.state.errorMessage}</div>
+        <div className="red mb2">{this.state.errors}</div>
       )
     }
   }
@@ -62,18 +63,20 @@ export default class LoginForm extends React.Component {
     return (
       <form onSubmit={::this.handleSubmit}>
         <label>Email</label>
+        <span className="red ml2">{this.state.errors.email}</span>
         <input
           type="email"
           className="field-light block full-width mb2"
           valueLink={this.linkState('email')} />
 
         <label>Senha</label>
+        <span className="red ml2">{this.state.errors.password}</span>
         <input
           type="password"
           className="field-light block full-width mb2"
           valueLink={this.linkState('password')} />
 
-        {this.renderErrorMessage()}
+        <div className="red mb2">{this.state.errors.general}</div>
 
         <input type="submit" className="button right" value="Entrar" />
       </form>
