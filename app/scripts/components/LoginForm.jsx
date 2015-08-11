@@ -66,7 +66,7 @@ export default class LoginForm extends React.Component {
   renderErrorMessage() {
     if (this.state.error) {
       return (
-        <div className="red mb2">{this.state.error}</div>
+        <div className="red center">{this.state.error}</div>
       )
     }
   }
@@ -81,32 +81,33 @@ export default class LoginForm extends React.Component {
     } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit}>
-        <label>Email</label>
+      <form onSubmit={::this.handleSubmit} className="mt2">
+
+        <label className="bold">E-MAIL</label>
         {emailError && emailTouched && <span className="red ml2">{emailError}</span>}
         <input
           type="email"
-          className="field-light block full-width mb2"
+          className="field-light block full-width mt1 mb2"
           value={email}
           onChange={handleChange('email')}
           onBlur={handleBlur('email')} />
 
-        <label>Senha</label>
+        <label className="bold">SENHA</label>
         {passwordError && passwordTouched && <span className="red ml2">{passwordError}</span>}
         <input
           type="password"
-          className="field-light block full-width mb2"
+          className="field-light block full-width mt1 mb2"
           value={password}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
 
         <input
           type="submit"
-          className="button full-width"
+          className="button full-width bg-blue p2 mt1 mb2"
           disabled={this.state.submitting}
-          value={this.state.submitting ? "Entrando..." : "Entrar"} />
+          value={this.state.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
-      {::this.renderErrorMessage()}
+        {::this.renderErrorMessage()}
       </form>
     )
   }
