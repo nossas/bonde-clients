@@ -21,9 +21,9 @@ function loginValidation(data) {
   return errors
 }
 
-@reactMixin.decorate(Navigation)
 @connect(state => ({ form: state.login }))
 @reduxForm('login', loginValidation)
+@reactMixin.decorate(Navigation)
 export default class LoginForm extends React.Component {
 
   constructor(props, context) {
