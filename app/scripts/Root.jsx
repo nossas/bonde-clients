@@ -1,12 +1,12 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
-import { Provider } from 'redux/react'
-import { createDispatcher, createRedux, composeStores } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import * as Paths from './Paths'
 
-// Middlewares
-import loggerMiddleware from './middleware/logger.js'
-import thunkMiddleware from './middleware/thunk.js'
+// Middleware
+import default as logger from './middleware/logger.js'
 
 // Containers
 import Application from './containers/Application.jsx'
@@ -21,21 +21,18 @@ import ShowMobilization from './pages/ShowMobilization.jsx'
 // Components
 import MobilizationMenu from './components/MobilizationMenu.jsx'
 
-// Stores
-import * as stores from './stores'
+// Reducers
+import * as reducers from './reducers'
 
-const dispatcher = createDispatcher(
-  composeStores(stores),
-  getState => [ thunkMiddleware(getState), loggerMiddleware ]
-)
-
-const redux = createRedux(dispatcher)
+const reducer = combineReducers(reducers)
+const finalCreateStore = applyMiddleware(thunk, logger)(createStore)
+const store = finalCreateStore(reducer)
 
 export default class Root extends React.Component {
   render () {
     const { history } = this.props
     return (
-      <Provider redux={redux}>
+      <Provider store={store}>
         {renderRoutes.bind(null, history)}
       </Provider>
     )
