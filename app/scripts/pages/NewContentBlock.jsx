@@ -4,30 +4,14 @@ import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
 import { BlockMiniature, ColorPicker, Progress } from './../components'
-
-const layouts = [
-  [{sm_size: 12, md_size: 12, lg_size: 12}],
-  [
-    {sm_size: 12, md_size: 6, lg_size: 6},
-    {sm_size: 12, md_size: 6, lg_size: 6}
-  ],
-  [
-    {sm_size: 12, md_size: 12, lg_size: 4},
-    {sm_size: 12, md_size: 12, lg_size: 4},
-    {sm_size: 12, md_size: 12, lg_size: 4}
-  ],
-  [
-    {sm_size: 12, md_size: 6, lg_size: 4},
-    {sm_size: 12, md_size: 6, lg_size: 8}
-  ]
-]
+import { BLOCK_LAYOUTS } from '../constants/Layouts'
 
 export default class NewContentBlock extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      selectedLayout: layouts[0],
+      selectedLayout: BLOCK_LAYOUTS[0],
       bgClass: 'bg-1',
       bgImage: null,
       uploadProgress: null
@@ -128,7 +112,7 @@ export default class NewContentBlock extends React.Component {
           </p>
           <label className="bold mb1 block">Tipo de bloco</label>
           <div className="mxn1">
-            {layouts.map((layout) => {
+            {BLOCK_LAYOUTS.map((layout) => {
               return(
                 <BlockMiniature
                   layout={layout}
