@@ -66,7 +66,7 @@ export default class LoginForm extends React.Component {
   renderErrorMessage() {
     if (this.state.error) {
       return (
-        <div className="red center">{this.state.error}</div>
+        <div className="red center mt2">{this.state.error}</div>
       )
     }
   }
@@ -88,6 +88,7 @@ export default class LoginForm extends React.Component {
         <input
           type="email"
           className="field-light block full-width mt1 mb2"
+          style={{height: '44px'}}
           value={email}
           onChange={handleChange('email')}
           onBlur={handleBlur('email')} />
@@ -97,13 +98,15 @@ export default class LoginForm extends React.Component {
         <input
           type="password"
           className="field-light block full-width mt1 mb2"
+          style={{height: '44px'}}
           value={password}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
 
         <input
           type="submit"
-          className="button full-width bg-blue p2 mt1 mb2"
+          className="button full-width bg-blue mt1"
+          style={{height: '44px'}}
           disabled={this.state.submitting}
           value={this.state.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
