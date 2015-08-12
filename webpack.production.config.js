@@ -37,7 +37,9 @@ module.exports = {
     new Webpack.DefinePlugin({
       'process.env': {
         'BASE_URL': '"https://hub-api.herokuapp.com"'
-      }
+      },
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false
     })
   ]
 };

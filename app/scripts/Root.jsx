@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import * as Paths from './Paths'
 
@@ -24,17 +24,43 @@ import MobilizationMenu from './components/MobilizationMenu.jsx'
 // Reducers
 import * as reducers from './reducers'
 
+let finalCreateStore;
+if (__DEVELOPMENT__ && __DEVTOOLS__) {
+  const { devTools, persistState } = require('redux-devtools');
+  finalCreateStore = compose(
+    applyMiddleware(thunk, logger),
+    devTools(),
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+    createStore
+ )
+} else {
+  finalCreateStore = applyMiddleware(thunk)(createStore)
+}
+
 const reducer = combineReducers(reducers)
-const finalCreateStore = applyMiddleware(thunk, logger)(createStore)
 const store = finalCreateStore(reducer)
 
 export default class Root extends React.Component {
   render () {
     const { history } = this.props
+
+    let debugPanel
+    if (__DEVTOOLS__) {
+      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react')
+      debugPanel = (
+        <DebugPanel top right bottom key="debugPanel">
+          <DevTools store={store} monitor={LogMonitor}/>
+        </DebugPanel>
+      )
+    }
+
     return (
-      <Provider store={store}>
-        {renderRoutes.bind(null, history)}
-      </Provider>
+      <div>
+        <Provider store={store}>
+          {renderRoutes.bind(null, history)}
+        </Provider>
+        {debugPanel}
+      </div>
     )
   }
 }
