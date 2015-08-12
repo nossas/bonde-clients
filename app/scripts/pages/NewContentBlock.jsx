@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
 import { BlockMiniature, ColorPicker, Progress } from './../components'
-import { BLOCK_LAYOUTS } from '../constants/Layouts'
+import { BLOCK_LAYOUTS } from '../constants/BlockLayouts'
 
 export default class NewContentBlock extends React.Component {
 
