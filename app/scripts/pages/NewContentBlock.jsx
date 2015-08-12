@@ -119,33 +119,48 @@ export default class NewContentBlock extends React.Component {
 
   render(){
     return (
-      <div className={classnames("flex-auto", "p2", "center", this.props.mobilization.color_scheme)}>
-        <h2>Adicione um bloco de conteúdo</h2>
-        <p className="mb3">Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento</p>
-        {layouts.map((layout) => {
-          return(
-            <BlockMiniature
-              layout={layout}
-              selectedLayout={this.state.selectedLayout}
-              onClick={::this.handleMiniatureClick}
-            />
-          )
-        })}
-        <div className="clearfix px3 mb3">
-          <h3>Cor de fundo</h3>
-          <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
-          {this.renderBgImage()}
-          <div className="col col-2 p1" style={{overflow: 'hidden'}}>
-            {this.renderUploader()}
-            {this.renderProgress()}
+      <div className={classnames("flex-auto", "bg-silver", "gray", this.props.mobilization.color_scheme)}>
+        <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
+        <div className="py3 px4">
+          <p
+            className="mb3">
+            Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento
+          </p>
+          <label className="bold mb1 block">Tipo de bloco</label>
+          <div className="mxn1">
+            {layouts.map((layout) => {
+              return(
+                <BlockMiniature
+                  layout={layout}
+                  selectedLayout={this.state.selectedLayout}
+                  onClick={::this.handleMiniatureClick}
+                />
+              )
+            })}
           </div>
-        </div>
-        <div className="col col-12 px3">
-          <div className="col col-6 px1">
-            <button className="button full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
+          <div className="clearfix mb3">
+            <label className="bold mb1 block">Cor de fundo</label>
+            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+            {this.renderBgImage()}
+            <div className="col col-2 p1" style={{overflow: 'hidden'}}>
+              {this.renderUploader()}
+              {this.renderProgress()}
+            </div>
           </div>
-          <div className="col col-6 px1">
-            <button className="button button-transparent border full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
+          <div className="clearfix">
+            <button
+              className="button button-outline mr1 big"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleCancelClick}>
+              Cancelar
+            </button>
+            <button
+              className="button bg-aqua big"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleAddBlockClick}>
+              <i className="fa fa-cloud-upload mr1" />
+              Adicionar
+            </button>
           </div>
         </div>
       </div>
