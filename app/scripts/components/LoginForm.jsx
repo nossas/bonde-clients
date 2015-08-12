@@ -1,81 +1,113 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { connect } from 'redux/react'
+import reduxForm from 'redux-form'
 import Auth from 'j-toker'
 import * as Paths from '../Paths'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { addons } from 'react/addons'
-const { LinkedStateMixin } = addons
 
+function loginValidation(data) {
+  const errors = {}
+
+  if (!data.email) {
+    errors.email = 'Informe o e-mail'
+  } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
+    errors.email = 'E-mail inválido'
+  }
+  if (!data.password) {
+    errors.password = 'Informe a senha'
+  }
+
+  return errors
+}
+
+@connect(state => ({ form: state.login }))
+@reduxForm('login', loginValidation)
 @reactMixin.decorate(Navigation)
-@reactMixin.decorate(LinkedStateMixin)
 export default class LoginForm extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      email: null,
-      password: null,
-      errorMessage: null
+      submitting: false,
+      error: null
     }
   }
 
-  validateForm() {
-    if (!this.state.email) {
-      this.setState({ errorMessage: 'Informe o email.' })
-    } else if (!this.state.password) {
-      this.setState({ errorMessage: 'Informe a senha.' })
-    } else {
-      this.setState({ errorMessage: null })
-      return true
-    }
-    return false
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    touchAll: PropTypes.func.isRequired,
+    valid: PropTypes.bool.isRequired
   }
 
   handleSubmit(event) {
+    this.setState({ submitting: true, error: null })
     event.preventDefault()
+    const { data, touchAll, valid } = this.props
 
-    if (this.validateForm()) {
-      Auth.emailSignIn(this.state).
+    if (valid) {
+      Auth.emailSignIn(data).
         then(function(user){
           // TODO change this to mobilizations index when we have that page
           this.transitionTo(Paths.editMobilization(1))
         }.bind(this)).
         fail(function(error){
-          this.handleLoginError(error.reason)
+          this.setState({ submitting: false, error: error.reason })
         }.bind(this))
+    } else {
+      touchAll()
+      this.setState({ submitting: false })
     }
   }
 
-  handleLoginError(error) {
-    this.setState({ errorMessage: error })
-  }
-
   renderErrorMessage() {
-    if (this.state.errorMessage) {
+    if (this.state.error) {
       return (
-        <div className="red mb2">{this.state.errorMessage}</div>
+        <div className="red center">{this.state.error}</div>
       )
     }
   }
 
   render() {
+    const {
+      data: { email, password },
+      errors: { email: emailError, password: passwordError },
+      touched: { email: emailTouched, password: passwordTouched },
+      handleChange,
+      handleBlur
+    } = this.props
+
     return (
-      <form onSubmit={::this.handleSubmit}>
-        <label>Email</label>
+      <form onSubmit={::this.handleSubmit} className="mt2">
+
+        <label className="bold">E-MAIL</label>
+        {emailError && emailTouched && <span className="red ml2">{emailError}</span>}
         <input
           type="email"
-          className="field-light block full-width mb2"
-          valueLink={this.linkState('email')} />
+          className="field-light block full-width mt1 mb2"
+          value={email}
+          onChange={handleChange('email')}
+          onBlur={handleBlur('email')} />
 
-        <label>Senha</label>
+        <label className="bold">SENHA</label>
+        {passwordError && passwordTouched && <span className="red ml2">{passwordError}</span>}
         <input
           type="password"
-          className="field-light block full-width mb2"
-          valueLink={this.linkState('password')} />
+          className="field-light block full-width mt1 mb2"
+          value={password}
+          onChange={handleChange('password')}
+          onBlur={handleBlur('password')} />
 
-        {this.renderErrorMessage()}
+        <input
+          type="submit"
+          className="button full-width bg-blue p2 mt1 mb2"
+          disabled={this.state.submitting}
+          value={this.state.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
-        <input type="submit" className="button right" value="Entrar" />
+        {::this.renderErrorMessage()}
       </form>
     )
   }

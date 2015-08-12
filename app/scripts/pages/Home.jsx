@@ -5,8 +5,8 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="lg-col-4">
-          <h2>Login</h2>
+        <div className="lg-col-6 mx-auto">
+          <h1 className="center">Faça seu Login</h1>
           <LoginForm />
         </div>
       </div>
