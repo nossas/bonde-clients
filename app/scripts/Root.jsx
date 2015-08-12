@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 import * as Paths from './Paths'
 
 // Middleware
-import default as logger from './middleware/logger.js'
+import logger from './middleware/logger.js'
 
 // Containers
 import Application from './containers/Application.jsx'
