@@ -3,10 +3,8 @@ import { Provider } from 'react-redux'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import * as Paths from './Paths'
-
-// Middleware
-import logger from './middleware/logger.js'
 
 // Containers
 import Application from './containers/Application.jsx'

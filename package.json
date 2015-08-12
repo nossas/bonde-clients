@@ -46,6 +46,7 @@
     "react-s3-uploader": "1.1.12",
     "redux": "^1.0.0-rc",
     "redux-form": "0.0.8",
+    "redux-logger": "0.0.1",
     "redux-thunk": "^0.1.0",
     "sass-loader": "^1.0.2",
     "sinon": "^1.15.3",
