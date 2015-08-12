@@ -4,21 +4,22 @@ import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
 import { BlockMiniature, ColorPicker, Progress } from './../components'
+import { BLOCK_LAYOUTS } from '../constants/BlockLayouts'
 
 export default class NewContentBlock extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      selectedSizes: [12],
+      selectedLayout: BLOCK_LAYOUTS[0],
       bgClass: 'bg-1',
       bgImage: null,
       uploadProgress: null
     }
   }
 
-  handleMiniatureClick(event) {
-    this.setState({selectedSizes: event.currentTarget.getAttribute('data-sizes').split(',').map(Number)})
+  handleMiniatureClick(layout) {
+    this.setState({selectedLayout: layout})
   }
 
   handleColorClick(event) {
@@ -34,8 +35,8 @@ export default class NewContentBlock extends React.Component {
       block: {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage,
-        widgets_attributes: this.state.selectedSizes.map((size) => {
-          return { kind: 'content', size }
+        widgets_attributes: this.state.selectedLayout.map((column) => {
+          return { kind: 'content', ...column }
         })
       }
     })
@@ -52,7 +53,7 @@ export default class NewContentBlock extends React.Component {
   handleUploadError() {
     this.setState({uploadProgress: null})
   }
-  
+
   handleUploadFinish(image) {
     const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
     this.setState({bgImage: imageUrl, uploadProgress: null})
@@ -63,7 +64,7 @@ export default class NewContentBlock extends React.Component {
       this.setState({bgImage: null})
     }
   }
-  
+
   renderUploader() {
     if (!this.state.uploadProgress) {
       return (
@@ -76,7 +77,7 @@ export default class NewContentBlock extends React.Component {
       )
     }
   }
-  
+
   renderProgress() {
     if (this.state.uploadProgress) {
       return (
@@ -84,7 +85,7 @@ export default class NewContentBlock extends React.Component {
       )
     }
   }
-  
+
   renderBgImage() {
     if (this.state.bgImage) {
       return (
@@ -99,31 +100,51 @@ export default class NewContentBlock extends React.Component {
       )
     }
   }
-  
+
   render(){
     return (
-      <div className={classnames("flex-auto", "p2", "center", this.props.mobilization.color_scheme)}>
-        <h2>Adicione um bloco de conteúdo</h2>
-        <p className="mb3">Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento</p>
-        <BlockMiniature sizes={[12]} selectedSizes={this.state.selectedSizes} onClick={::this.handleMiniatureClick} />
-        <BlockMiniature sizes={[6, 6]} selectedSizes={this.state.selectedSizes} onClick={::this.handleMiniatureClick} />
-        <BlockMiniature sizes={[4, 8]} selectedSizes={this.state.selectedSizes} onClick={::this.handleMiniatureClick} />
-        <BlockMiniature sizes={[4, 4, 4]} selectedSizes={this.state.selectedSizes} onClick={::this.handleMiniatureClick} />
-        <div className="clearfix px3 mb3">
-          <h3>Cor de fundo</h3>
-          <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
-          {this.renderBgImage()}
-          <div className="col col-2 p1" style={{overflow: 'hidden'}}>
-            {this.renderUploader()}
-            {this.renderProgress()}
+      <div className={classnames("flex-auto", "bg-silver", "gray", this.props.mobilization.color_scheme)}>
+        <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
+        <div className="py3 px4">
+          <p
+            className="mb3">
+            Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento
+          </p>
+          <label className="bold mb1 block">Tipo de bloco</label>
+          <div className="mxn1">
+            {BLOCK_LAYOUTS.map((layout) => {
+              return(
+                <BlockMiniature
+                  layout={layout}
+                  selectedLayout={this.state.selectedLayout}
+                  onClick={::this.handleMiniatureClick}
+                />
+              )
+            })}
           </div>
-        </div>
-        <div className="col col-12 px3">
-          <div className="col col-6 px1">
-            <button className="button full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleAddBlockClick}><i className="fa fa-cloud-upload mr1" />Adicionar</button>
+          <div className="clearfix mb3">
+            <label className="bold mb1 block">Cor de fundo</label>
+            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+            {this.renderBgImage()}
+            <div className="col col-2 p1" style={{overflow: 'hidden'}}>
+              {this.renderUploader()}
+              {this.renderProgress()}
+            </div>
           </div>
-          <div className="col col-6 px1">
-            <button className="button button-transparent border full-width" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelClick}><i className="fa fa-undo mr1" />Cancelar</button>
+          <div className="clearfix">
+            <button
+              className="button bg-darken-3 rounded white button-transparent mr1"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleCancelClick}>
+              Cancelar
+            </button>
+            <button
+              className="button bg-aqua"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleAddBlockClick}>
+              <i className="fa fa-cloud-upload mr1" />
+              Adicionar
+            </button>
           </div>
         </div>
       </div>

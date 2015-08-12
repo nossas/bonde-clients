@@ -4,6 +4,7 @@ import * as BlockActions from './../../actions/BlockActions'
 import { BlockMiniature, ColorPicker, Progress } from './../../components'
 import NewContentBlock from './../../pages/NewContentBlock.jsx'
 import classnames from 'classnames'
+import { BLOCK_LAYOUTS } from './../../constants/BlockLayouts'
 
 const { TestUtils } = React.addons
 
@@ -22,7 +23,7 @@ describe('NewContentBlock', () => {
   describe('#constructor', () => {
     it('should set initial state', () => {
       expect(component.state).to.eql({
-        selectedSizes: [12],
+        selectedLayout: BLOCK_LAYOUTS[0],
         bgClass: 'bg-1',
         bgImage: null,
         uploadProgress: null
@@ -31,10 +32,9 @@ describe('NewContentBlock', () => {
   })
 
   describe('#handleMiniatureClick', () => {
-    it('should set selected sizes to the sizes of event current target', () => {
-      const event = {currentTarget: {getAttribute() { return '1,2,3' }}}
-      component.handleMiniatureClick(event)
-      expect(component.state.selectedSizes).to.eql([1, 2, 3])
+    it('should set state selected layout', () => {
+      component.handleMiniatureClick(BLOCK_LAYOUTS[1])
+      expect(component.state.selectedLayout).to.eql(BLOCK_LAYOUTS[1])
     })
   })
 
@@ -50,7 +50,7 @@ describe('NewContentBlock', () => {
     it('should dispatch add block action', () => {
       const addBlockStub = sandbox.stub(BlockActions, 'addBlock')
       component.setState({
-        selectedSizes: [68, 69],
+        selectedLayout: BLOCK_LAYOUTS[0],
         bgClass: 'bg-test',
         bgImage: 'foobar.jpg'
       })
@@ -61,7 +61,7 @@ describe('NewContentBlock', () => {
         block: {
           bg_class: 'bg-test',
           bg_image: 'foobar.jpg',
-          widgets_attributes: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
+          widgets_attributes: [{kind: 'content', sm_size: 12, md_size: 12, lg_size: 12}]
         }
       })
     })
@@ -155,12 +155,12 @@ describe('NewContentBlock', () => {
       component.setState({uploadProgress: null})
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
       expect(buttons).to.have.length(2)
-      expect(buttons[0].getDOMNode().textContent.trim()).to.equal('Adicionar')
-      expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Cancelar')
+      expect(buttons[0].getDOMNode().textContent.trim()).to.equal('Cancelar')
+      expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Adicionar')
       expect(buttons[0].props.disabled).to.be.false
       expect(buttons[1].props.disabled).to.be.false
-      expect(buttons[0].props.onClick.toString()).to.equal(component.handleAddBlockClick.bind(component).toString())
-      expect(buttons[1].props.onClick.toString()).to.equal(component.handleCancelClick.bind(component).toString())
+      expect(buttons[0].props.onClick.toString()).to.equal(component.handleCancelClick.bind(component).toString())
+      expect(buttons[1].props.onClick.toString()).to.equal(component.handleAddBlockClick.bind(component).toString())
     })
 
     it('should render buttons disabled when uploading', () => {

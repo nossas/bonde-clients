@@ -2,26 +2,31 @@ import React from 'react'
 import classnames from 'classnames'
 
 export default class BlockMiniature extends React.Component {
+  handleClick(){
+    this.props.onClick(this.props.layout)
+  }
+
   render(){
-    const { bgClass, selectedSizes, sizes, onClick } = this.props
-    return React.createElement('div', {className: "col col-6 px3 mb3", onClick: onClick, 'data-sizes': sizes}, 
-      React.createElement('div', {className: classnames("clearfix", "border", (sizes.length > 1 ? "py2" : "p2"), "button", "block", (selectedSizes.toString() == sizes.toString() ? "bg-silver" : "bg-white")), style: {lineHeight: '50%'}}, ...sizes.map((size) => {
-        return React.createElement('div', {className: classnames("clearfix", "col", "col-" + size, (sizes.length > 1 ? "px2" : ""))}, 
-          React.createElement('div', {className: "col col-12 mb2 bg-blue"}, 
-            React.createElement('br'),
-            React.createElement('br'),
-            React.createElement('br'),
-            React.createElement('br'),
-            React.createElement('br'),
-            React.createElement('br'),
-            React.createElement('br')
-          ),
-          React.createElement('div', {className: "col col-12 mb2 bg-blue"}, React.createElement('br')),
-          React.createElement('div', {className: "col col-12 mb2 bg-blue"}, React.createElement('br')),
-          React.createElement('div', {className: "col col-12 mb2 bg-blue"}, React.createElement('br')),
-          React.createElement('div', {className: "col col-12 bg-blue"}, React.createElement('br'))
-        )
-      }))
+    const { bgClass, selectedLayout, layout } = this.props
+    return(
+      <div className="col col-3 mb3 px1" onClick={::this.handleClick}>
+        <div className={classnames("clearfix", "border", "p1", "button", "button-transparent", "block", "bg-white", "rounded",
+          selectedLayout == layout ? "is-active" : null)}>
+          <div className="mxn1">
+            {layout.map((size) => {
+              return(
+                <div className={classnames("clearfix", "px1", "col", "col-" + size.lg_size)}>
+                  <div className="col col-12 mb1 bg-darken-2" style={{height: "50px"}} />
+                  <div className="col col-12 mb1 bg-darken-2" style={{height: "5px"}} />
+                  <div className="col col-12 mb1 bg-darken-2" style={{height: "5px"}} />
+                  <div className="col col-12 mb1 bg-darken-2" style={{height: "5px"}} />
+                  <div className="col col-12 bg-darken-2" style={{height: "5px"}} />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
     )
   }
 }
