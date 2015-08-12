@@ -13,9 +13,9 @@ export default class BlockMiniature extends React.Component {
         <div className={classnames("clearfix", "border", "p1", "button", "button-transparent", "block", "bg-white", "rounded",
           selectedLayout == layout ? "is-active" : null)}>
           <div className="mxn1">
-            {layout.map((size) => {
+            {layout.map((size, index) => {
               return(
-                <div className={classnames("clearfix", "px1", "col", "col-" + size.lg_size)}>
+                <div className={classnames("clearfix", "px1", "col", "col-" + size.lg_size)} key={index}>
                   <div className="col col-12 mb1 bg-darken-2" style={{height: "50px"}} />
                   <div className="col col-12 mb1 bg-darken-2" style={{height: "5px"}} />
                   <div className="col col-12 mb1 bg-darken-2" style={{height: "5px"}} />
