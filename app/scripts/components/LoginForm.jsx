@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'redux/react'
+import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import Auth from 'j-toker'
 import * as Paths from '../Paths'

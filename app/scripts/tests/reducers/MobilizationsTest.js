@@ -1,4 +1,4 @@
-import mobilizations from './../../stores/mobilizations'
+import mobilizations from './../../reducers/mobilizations'
 import { FETCH_MOBILIZATIONS } from './../../constants/ActionTypes';
 
 describe('mobilizations', () => {

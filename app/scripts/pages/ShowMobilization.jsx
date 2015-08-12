@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import Block from './../components/Block.jsx'
 import * as BlockActions from './../actions/BlockActions'
 import * as WidgetActions from './../actions/WidgetActions'
-import { connect } from 'redux/react'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 @connect(state => ({

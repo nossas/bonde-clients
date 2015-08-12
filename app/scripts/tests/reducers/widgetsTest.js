@@ -1,4 +1,4 @@
-import widgets from './../../stores/widgets'
+import widgets from './../../reducers/widgets'
 import { EDIT_WIDGET } from './../../constants/ActionTypes';
 
 describe('widgets', () => {

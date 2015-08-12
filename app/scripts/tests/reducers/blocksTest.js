@@ -1,4 +1,4 @@
-import blocks from './../../stores/blocks'
+import blocks from './../../reducers/blocks'
 import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from './../../constants/ActionTypes';
 
 let initialState
