@@ -1,9 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import MobilizationMenu from './../components/MobilizationMenu.jsx'
 import { Loading } from './../components'
 import * as MobilizationActions from './../actions/MobilizationActions'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 @connect(state => ({
   mobilizations: state.mobilizations

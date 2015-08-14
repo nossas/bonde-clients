@@ -1,15 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router'
-import * as Paths from '../Paths'
+import { Link, Navigation } from 'react-router'
+import reactMixin from 'react-mixin'
 
+import * as Paths from '../Paths'
+import * as AuthActions from './../actions/AuthActions'
+
+@reactMixin.decorate(Navigation)
 export default class MobilizationMenu extends React.Component {
+  handleLogout(event) {
+    event.preventDefault()
+    this.props.dispatch(AuthActions.logout())
+      .fail((state) => this.setState({ auth: state }))
+      .always(() => this.transitionTo('/'))
+  }
+
   render(){
     const { user, mobilization } = this.props
     const style = { minWidth: "300px" }
     return(
       <div style={style} className="bg-gray p2 white">
         <div>
-          {user.first_name} {user.last_name}
+          <span>{user.first_name} {user.last_name} (
+            <a className="btn white" style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={::this.handleLogout}>Sair</a>)
+          </span>
         </div>
         <div>
           <h4 className="silver caps muted">Mobilização</h4>
