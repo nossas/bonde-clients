@@ -101,8 +101,7 @@ export default class LoginForm extends React.Component {
 
         <input
           type="submit"
-          className="button full-width bg-blue mt1"
-          style={{height: '44px'}}
+          className="button full-width bg-aqua mt1 p2"
           disabled={this.state.auth.submitting}
           value={this.state.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
