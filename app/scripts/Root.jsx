@@ -17,6 +17,7 @@ import Home from './pages/Home.jsx'
 import EditMobilization from './pages/EditMobilization.jsx'
 import NewContentBlock from './pages/NewContentBlock.jsx'
 import ShowMobilization from './pages/ShowMobilization.jsx'
+import ConfigMobilization from './pages/ConfigMobilization.jsx'
 
 // Components
 import MobilizationMenu from './components/MobilizationMenu.jsx'
@@ -50,6 +51,7 @@ function renderRoutes(history) {
         <Route path={Paths.mobilization(':mobilization_id')} component={Mobilization}>
           <Route path="show" components={{main: ShowMobilization}} />
           <Route path="edit" components={{main: EditMobilization, sidebar: MobilizationMenu}} />
+          <Route path="config" components={{main: ConfigMobilization, sidebar: MobilizationMenu}} />
           <Route path="blocks">
             <Route path="new" components={{main: NewContentBlock, sidebar: MobilizationMenu}} />
           </Route>
