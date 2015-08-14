@@ -1,5 +1,6 @@
 // Mobilization actions
 export const FETCH_MOBILIZATIONS = 'FETCH_MOBILIZATIONS'
+export const EDIT_MOBILIZATION = 'EDIT_MOBILIZATION'
 
 // Widget actions
 export const FETCH_WIDGETS = 'FETCH_WIDGETS'
