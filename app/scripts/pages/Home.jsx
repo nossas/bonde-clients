@@ -11,7 +11,7 @@ export default class Home extends React.Component {
         <div className="container py4">
           <div className="p3 bg-white border rounded lg-col-6 mx-auto">
             <h1 className="center mt2">Faça seu Login</h1>
-            <LoginForm />
+            <LoginForm {...this.props} />
           </div>
         </div>
       </div>

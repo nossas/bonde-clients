@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
-import Auth from 'j-toker'
-import * as Paths from '../Paths'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 
+import * as Paths from '../Paths'
+import * as AuthActions from './../actions/AuthActions'
+
 function loginValidation(data) {
   const errors = {}
-
   if (!data.email) {
     errors.email = 'Informe o e-mail'
   } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
@@ -17,11 +17,10 @@ function loginValidation(data) {
   if (!data.password) {
     errors.password = 'Informe a senha'
   }
-
   return errors
 }
 
-@connect(state => ({ form: state.login }))
+@connect(state => ({ auth: state.auth, form: state.login }))
 @reduxForm('login', loginValidation)
 @reactMixin.decorate(Navigation)
 export default class LoginForm extends React.Component {
@@ -29,8 +28,10 @@ export default class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      submitting: false,
-      error: null
+      auth: {
+        submitting: false,
+        error: null
+      }
     }
   }
 
@@ -44,29 +45,24 @@ export default class LoginForm extends React.Component {
   }
 
   handleSubmit(event) {
-    this.setState({ submitting: true, error: null })
     event.preventDefault()
-    const { data, touchAll, valid } = this.props
+    const { data, touchAll, valid, dispatch } = this.props
+    this.setState({ auth: { submitting: true, error: null }})
 
     if (valid) {
-      Auth.emailSignIn(data).
-        then(function(user){
-          // TODO change this to mobilizations index when we have that page
-          this.transitionTo(Paths.editMobilization(1))
-        }.bind(this)).
-        fail(function(error){
-          this.setState({ submitting: false, error: error.reason })
-        }.bind(this))
+      dispatch(AuthActions.login(data))
+        .then(() => this.transitionTo(Paths.editMobilization(1)))
+        .fail((state) => this.setState({ auth: state }))
     } else {
       touchAll()
-      this.setState({ submitting: false })
+      this.setState({ auth: { submitting: false } })
     }
   }
 
   renderErrorMessage() {
-    if (this.state.error) {
+    if (this.state.auth.error) {
       return (
-        <div className="red center mt2">{this.state.error}</div>
+        <div className="red center mt2">{this.state.auth.error}</div>
       )
     }
   }
@@ -107,8 +103,8 @@ export default class LoginForm extends React.Component {
           type="submit"
           className="button full-width bg-blue mt1"
           style={{height: '44px'}}
-          disabled={this.state.submitting}
-          value={this.state.submitting ? "ENTRANDO..." : "ENTRAR"} />
+          disabled={this.state.auth.submitting}
+          value={this.state.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
         {::this.renderErrorMessage()}
       </form>
