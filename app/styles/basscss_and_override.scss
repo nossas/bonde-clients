@@ -4,3 +4,7 @@ $gray: #39404D;
 $silver: #F7F7F7;
 
 @import '../../node_modules/basscss-sass/basscss.scss';
+
+.caps {
+  letter-spacing: 0;
+}
