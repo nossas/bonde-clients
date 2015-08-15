@@ -2,6 +2,10 @@ export function mobilization(id) {
   return `/mobilizations/${id}`
 }
 
+export function showMobilization(id) {
+  return `/mobilizations/${id}/show`
+}
+
 export function editMobilization(id) {
   return `/mobilizations/${id}/edit`
 }

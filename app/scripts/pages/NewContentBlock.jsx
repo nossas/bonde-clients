@@ -107,10 +107,10 @@ export default class NewContentBlock extends React.Component {
         <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
         <div className="py3 px4">
           <p
-            className="mb3">
+            className="mb3 muted">
             Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento
           </p>
-          <label className="bold mb1 block">Tipo de bloco</label>
+          <label className="caps h6 bold mb1 block">Tipo de bloco</label>
           <div className="mxn1">
             {BLOCK_LAYOUTS.map((layout, index) => {
               return(
@@ -124,7 +124,7 @@ export default class NewContentBlock extends React.Component {
             })}
           </div>
           <div className="clearfix mb3">
-            <label className="bold mb1 block">Cor de fundo</label>
+            <label className="caps h6 bold mb1 block">Cor de fundo</label>
             <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
             {this.renderBgImage()}
             <div className="col col-2 p1" style={{overflow: 'hidden'}}>

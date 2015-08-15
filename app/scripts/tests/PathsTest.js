@@ -7,6 +7,12 @@ describe('Paths', () => {
     })
   })
 
+  describe('#showMobilization', () => {
+    it('should return the path', () => {
+      expect(Paths.showMobilization(1)).to.equal('/mobilizations/1/show')
+    })
+  })
+
   describe('#editMobilization', () => {
     it('should return the path', () => {
       expect(Paths.editMobilization(1)).to.equal('/mobilizations/1/edit')

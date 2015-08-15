@@ -14,6 +14,11 @@ export default class MobilizationMenu extends React.Component {
       .always(() => this.transitionTo('/'))
   }
 
+  handleBlankTarget(event) {
+    event.preventDefault()
+    window.open(this.makeHref(event.currentTarget.getAttribute('href')))
+  }
+
   render(){
     const { user, mobilization } = this.props
     const style = { minWidth: "300px" }
@@ -33,25 +38,25 @@ export default class MobilizationMenu extends React.Component {
             <i className="fa fa-cog" />
           </Link>
         </div>
-        <div>
-          <span>{user.first_name} {user.last_name} (
-            <a className="btn white" style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={::this.handleLogout}>Sair</a>)
-          </span>
-        </div>
-        <div>
-          <h4 className="silver caps muted">Mobilização</h4>
-          <Link to={Paths.editMobilization(mobilization.id)} className="white">{mobilization.name}</Link>
-          <h4 className="silver caps muted">Construção da página</h4>
-          <Link to={Paths.newMobilizationBlock(mobilization.id)} className="silver caps">+ Conteúdo</Link>
-        </div>
-
         <h6 className="silver caps muted">Edição da página</h6>
         <Link
           to={Paths.newMobilizationBlock(mobilization.id)}
           className="silver button button-transparent full-width">
           <i className="fa fa-plus mr2" />
-          Módulo de conteúdo
+          Bloco de conteúdo
         </Link>
+        <h6 className="silver caps muted">Visualização da página</h6>
+        <a
+          href={Paths.showMobilization(mobilization.id)}
+          className="silver button button-transparent full-width" target="_blank" onClick={::this.handleBlankTarget}>
+          <i className="fa fa-external-link mr2" />
+          Ver em uma nova aba
+        </a>
+        <h6 className="silver caps muted">Perfil</h6>
+        <a className="silver button button-transparent full-width" onClick={::this.handleLogout}>
+          <i className="fa fa-sign-out mr2" />
+          {user.first_name} {user.last_name} (Sair)
+        </a>
       </div>
     )
   }
