@@ -4,7 +4,7 @@ import Block from './../components/Block.jsx'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as BlockActions from './../actions/BlockActions'
-import { connect } from 'redux/react'
+import { connect } from 'react-redux'
 
 @connect(state => ({
   blocks: state.blocks,

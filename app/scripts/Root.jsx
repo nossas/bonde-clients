@@ -1,12 +1,10 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { Redirect, Router, Route, DefaultRoute } from 'react-router'
-import { Provider } from 'redux/react'
-import { createDispatcher, createRedux, composeStores } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import * as Paths from './Paths'
-
-// Middlewares
-import loggerMiddleware from './middleware/logger.js'
-import thunkMiddleware from './middleware/thunk.js'
 
 // Containers
 import Application from './containers/Application.jsx'
@@ -22,23 +20,46 @@ import ConfigMobilization from './pages/ConfigMobilization.jsx'
 // Components
 import MobilizationMenu from './components/MobilizationMenu.jsx'
 
-// Stores
-import * as stores from './stores'
+// Reducers
+import * as reducers from './reducers'
 
-const dispatcher = createDispatcher(
-  composeStores(stores),
-  getState => [ thunkMiddleware(getState), loggerMiddleware ]
-)
+let finalCreateStore;
+if (__DEVELOPMENT__ && __DEVTOOLS__) {
+  const { devTools, persistState } = require('redux-devtools');
+  finalCreateStore = compose(
+    applyMiddleware(thunk, logger),
+    devTools(),
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+    createStore
+ )
+} else {
+  finalCreateStore = applyMiddleware(thunk)(createStore)
+}
 
-const redux = createRedux(dispatcher)
+const reducer = combineReducers(reducers)
+const store = finalCreateStore(reducer)
 
 export default class Root extends React.Component {
   render () {
     const { history } = this.props
+
+    let debugPanel
+    if (__DEVTOOLS__) {
+      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react')
+      debugPanel = (
+        <DebugPanel top right bottom key="debugPanel">
+          <DevTools store={store} monitor={LogMonitor}/>
+        </DebugPanel>
+      )
+    }
+
     return (
-      <Provider redux={redux}>
-        {renderRoutes.bind(null, history)}
-      </Provider>
+      <div>
+        <Provider store={store}>
+          {renderRoutes.bind(null, history)}
+        </Provider>
+        {debugPanel}
+      </div>
     )
   }
 }

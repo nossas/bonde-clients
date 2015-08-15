@@ -112,9 +112,10 @@ export default class NewContentBlock extends React.Component {
           </p>
           <label className="bold mb1 block">Tipo de bloco</label>
           <div className="mxn1">
-            {BLOCK_LAYOUTS.map((layout) => {
+            {BLOCK_LAYOUTS.map((layout, index) => {
               return(
                 <BlockMiniature
+                  key={index}
                   layout={layout}
                   selectedLayout={this.state.selectedLayout}
                   onClick={::this.handleMiniatureClick}

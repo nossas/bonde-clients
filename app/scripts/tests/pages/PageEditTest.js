@@ -3,7 +3,7 @@ import { Block } from './../../components'
 import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
 import classnames from 'classnames'
 
-const EditMobilization = EditMobilizationImport.DecoratedComponent
+const EditMobilization = EditMobilizationImport.WrappedComponent
 const { TestUtils } = React.addons
 
 let block1, block2, blocks, mobilization, dispatch
