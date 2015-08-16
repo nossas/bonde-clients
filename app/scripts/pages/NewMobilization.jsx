@@ -47,7 +47,7 @@ export default class NewMobilization extends React.Component {
     if (valid) {
       dispatch(MobilizationActions.addMobilization({
         transitionTo: this.transitionTo.bind(this), 
-        mobilization: data
+        mobilization: {...data, color_scheme: 'meurio-scheme'}
       }))
     } else {
       touchAll()
