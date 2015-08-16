@@ -9,6 +9,7 @@ export const AUTH_LOGOUT_FAILURE = 'AUTH_LOGOUT_FAILURE'
 // Mobilization actions
 export const FETCH_MOBILIZATIONS = 'FETCH_MOBILIZATIONS'
 export const EDIT_MOBILIZATION = 'EDIT_MOBILIZATION'
+export const ADD_MOBILIZATION = 'ADD_MOBILIZATION'
 
 // Widget actions
 export const FETCH_WIDGETS = 'FETCH_WIDGETS'

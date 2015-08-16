@@ -1,4 +1,5 @@
-import { FETCH_MOBILIZATIONS, EDIT_MOBILIZATION } from '../constants/ActionTypes'
+import { FETCH_MOBILIZATIONS, EDIT_MOBILIZATION, ADD_MOBILIZATION } from '../constants/ActionTypes'
+import * as Paths from '../Paths'
 import $ from 'jquery'
 
 const BASE_URL = process.env.BASE_URL
@@ -11,6 +12,22 @@ export function fetchMobilizations() {
           type: FETCH_MOBILIZATIONS,
           mobilizations: data
         })
+      }
+    })
+  }
+}
+
+export function addMobilization(params) {
+  return dispatch => {
+    $.ajax(`${BASE_URL}/mobilizations`, {
+      method: 'post',
+      data: { mobilization: params.mobilization },
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: ADD_MOBILIZATION,
+          mobilization: data
+        })
+        params.transitionTo(Paths.editMobilization(data.id))
       }
     })
   }
