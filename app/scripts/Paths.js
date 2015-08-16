@@ -14,8 +14,16 @@ export function editMobilization(id) {
   return `/mobilizations/${id}/edit`
 }
 
-export function configMobilization(id) {
-  return `/mobilizations/${id}/config`
+export function basicsConfigMobilization(id) {
+  return `/mobilizations/${id}/config/basics`
+}
+
+export function cityConfigMobilization(id) {
+  return `/mobilizations/${id}/config/city`
+}
+
+export function analyticsConfigMobilization(id) {
+  return `/mobilizations/${id}/config/analytics`
 }
 
 export function newMobilizationBlock(mobilization_id) {

@@ -44,7 +44,7 @@ module.exports = {
         'BASE_URL': '"http://localhost:3000"'
       },
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
     })
   ]
 };
