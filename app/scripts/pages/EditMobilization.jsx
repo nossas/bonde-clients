@@ -4,6 +4,8 @@ import Block from './../components/Block.jsx'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as BlockActions from './../actions/BlockActions'
+import reactMixin from 'react-mixin'
+import { Navigation } from 'react-router'
 import { connect } from 'react-redux'
 
 @connect(state => ({
@@ -12,6 +14,7 @@ import { connect } from 'react-redux'
   scrolledToBottom: false,
   widgetsCount: state.widgets.length
 }))
+@reactMixin.decorate(Navigation)
 
 export default class EditMobilization extends React.Component {
   constructor(props, context) {
@@ -23,7 +26,7 @@ export default class EditMobilization extends React.Component {
   }
 
   componentDidMount(){
-    const { mobilization, dispatch } = this.props
+    const { mobilization, dispatch, blocks } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
     bindedBlockActions.fetchBlocks({mobilization_id: mobilization.id})

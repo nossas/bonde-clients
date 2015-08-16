@@ -5,7 +5,7 @@ export default function mobilizations(state = [], action) {
     case FETCH_MOBILIZATIONS:
       return action.mobilizations
     case ADD_MOBILIZATION:
-      return [...state, action.mobilization]
+      return [action.mobilization, ...state]
     case EDIT_MOBILIZATION:
       return state.map(mobilization =>
         mobilization.id == action.mobilization.id ? action.mobilization : mobilization
