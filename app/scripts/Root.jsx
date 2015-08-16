@@ -9,15 +9,19 @@ import * as Paths from './Paths'
 // Containers
 import Application from './containers/Application.jsx'
 import Mobilization from './containers/Mobilization.jsx'
+import Mobilizations from './containers/Mobilizations.jsx'
 
 // Pages
 import Home from './pages/Home.jsx'
+import ListMobilizations from './pages/ListMobilizations.jsx'
+import NewMobilization from './pages/NewMobilization.jsx'
 import EditMobilization from './pages/EditMobilization.jsx'
-import NewContentBlock from './pages/NewContentBlock.jsx'
+import NewBlock from './pages/NewBlock.jsx'
 import ShowMobilization from './pages/ShowMobilization.jsx'
 import ConfigMobilization from './pages/ConfigMobilization.jsx'
 
 // Components
+import MobilizationsMenu from './components/MobilizationsMenu.jsx'
 import MobilizationMenu from './components/MobilizationMenu.jsx'
 
 // Reducers
@@ -68,13 +72,15 @@ function renderRoutes(history) {
   return(
     <Router history={history}>
       <Route component={Application}>
-        <Route path="/" component={Home}/>
-        <Route path={Paths.mobilization(':mobilization_id')} component={Mobilization}>
-          <Route path="show" components={{main: ShowMobilization}} />
-          <Route path="edit" components={{main: EditMobilization, sidebar: MobilizationMenu}} />
-          <Route path="config" components={{main: ConfigMobilization, sidebar: MobilizationMenu}} />
-          <Route path="blocks">
-            <Route path="new" components={{main: NewContentBlock, sidebar: MobilizationMenu}} />
+        <Route path="/" component={Home} />
+        <Route component={Mobilizations}>
+          <Route path="/mobilizations" components={{main: ListMobilizations, sidebar: MobilizationsMenu}} />
+          <Route path="/mobilizations/new" components={{main: NewMobilization, sidebar: MobilizationsMenu}} />
+          <Route component={Mobilization} >
+            <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
+            <Route path="/mobilizations/:mobilization_id/edit" components={{main: EditMobilization, sidebar: MobilizationMenu}} />
+            <Route path="/mobilizations/:mobilization_id/config" components={{main: ConfigMobilization, sidebar: MobilizationMenu}} />
+            <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu}} />
           </Route>
         </Route>
       </Route>

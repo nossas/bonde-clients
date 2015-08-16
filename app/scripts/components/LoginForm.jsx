@@ -51,7 +51,7 @@ export default class LoginForm extends React.Component {
 
     if (valid) {
       dispatch(AuthActions.login(data))
-        .then(() => this.transitionTo(Paths.editMobilization(1)))
+        .then(() => this.transitionTo(Paths.mobilizations()))
         .fail((state) => this.setState({ auth: state }))
     } else {
       touchAll()

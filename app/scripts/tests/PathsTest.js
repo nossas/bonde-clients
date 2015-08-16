@@ -1,15 +1,21 @@
 import * as Paths from './../Paths'
 
 describe('Paths', () => {
+  describe('#mobilizations', () => {
+    it('should return the path', () => {
+      expect(Paths.mobilizations()).to.equal('/mobilizations')
+    })
+  })
+
   describe('#mobilization', () => {
     it('should return the path', () => {
       expect(Paths.mobilization(1)).to.equal('/mobilizations/1')
     })
   })
 
-  describe('#showMobilization', () => {
+  describe('#newMobilization', () => {
     it('should return the path', () => {
-      expect(Paths.showMobilization(1)).to.equal('/mobilizations/1/show')
+      expect(Paths.newMobilization()).to.equal('/mobilizations/new')
     })
   })
 

@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import { BlockMiniature, ColorPicker, Progress } from './../components'
 import { BLOCK_LAYOUTS } from '../constants/BlockLayouts'
 
-export default class NewContentBlock extends React.Component {
+export default class NewBlock extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -153,6 +153,6 @@ export default class NewContentBlock extends React.Component {
   }
 }
 
-NewContentBlock.contextTypes = {
+NewBlock.contextTypes = {
   router: React.PropTypes.object.isRequired
 }

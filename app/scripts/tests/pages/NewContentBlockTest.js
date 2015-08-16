@@ -2,7 +2,7 @@ import React from 'react/addons'
 import ReactS3Uploader from 'react-s3-uploader'
 import * as BlockActions from './../../actions/BlockActions'
 import { BlockMiniature, ColorPicker, Progress } from './../../components'
-import NewContentBlock from './../../pages/NewContentBlock.jsx'
+import NewBlock from './../../pages/NewBlock.jsx'
 import classnames from 'classnames'
 import { BLOCK_LAYOUTS } from './../../constants/BlockLayouts'
 
@@ -10,13 +10,13 @@ const { TestUtils } = React.addons
 
 let container, component, mobilization, dispatch
 
-describe('NewContentBlock', () => {
+describe('NewBlock', () => {
 
   beforeEach(() => {
     mobilization = { id: 1 }
     dispatch = () => {}
     component = TestUtils.renderIntoDocument(
-      <NewContentBlock mobilization={mobilization} dispatch={dispatch} />
+      <NewBlock mobilization={mobilization} dispatch={dispatch} />
     )
   })
 

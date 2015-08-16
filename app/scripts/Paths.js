@@ -1,9 +1,13 @@
+export function mobilizations(id) {
+  return `/mobilizations`
+}
+
 export function mobilization(id) {
   return `/mobilizations/${id}`
 }
 
-export function showMobilization(id) {
-  return `/mobilizations/${id}/show`
+export function newMobilization() {
+  return `/mobilizations/new`
 }
 
 export function editMobilization(id) {
