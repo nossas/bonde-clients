@@ -27,10 +27,7 @@ export default class EditMobilization extends React.Component {
   }
 
   componentDidMount(){
-    const { mobilization, dispatch, blocks } = this.props
-    if (blocks.length == 0) {
-      this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
-    }
+    const { mobilization, dispatch } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
     bindedBlockActions.fetchBlocks({mobilization_id: mobilization.id})
@@ -38,6 +35,10 @@ export default class EditMobilization extends React.Component {
   }
 
   componentDidUpdate() {
+    const { mobilization, blocks } = this.props
+    if (blocks.length == 0) {
+      this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
+    }
     if (!this.state.scrolledToBottom &&
         this.props.location.query &&
         this.props.location.query.newBlock &&
