@@ -27,7 +27,7 @@ export function addMobilization(params) {
           type: ADD_MOBILIZATION,
           mobilization: data
         })
-        params.transitionTo(Paths.cityConfigMobilization(data.id))
+        params.transitionTo(Paths.cityMobilization(data.id))
       }
     })
   }

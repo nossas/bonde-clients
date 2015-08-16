@@ -33,7 +33,7 @@ export default class MobilizationMenu extends React.Component {
             </Link>
           </div>
           <Link
-            to={Paths.basicsConfigMobilization(mobilization.id)}
+            to={Paths.basicsMobilization(mobilization.id)}
             className="silver h3">
             <i className="fa fa-cog" />
           </Link>
