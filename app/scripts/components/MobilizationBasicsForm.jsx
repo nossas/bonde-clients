@@ -29,7 +29,7 @@ export default class MobilizationBasicsForm extends React.Component {
       submitting: false,
       error: null
     }
-    const { name, goal } = props.mobilization || {name: null, goal: null}
+    const { name, goal } = props.mobilization || {name: undefined, goal: null}
     props.initializeForm({name, goal})
   }
 
@@ -107,20 +107,22 @@ export default class MobilizationBasicsForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="caps bold">Nome</label>
+        <label className="block h6 caps bold mb1">Nome</label>
         {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
         <input
           type="text"
           className="field-light block full-width mt1 mb2"
+          placeholder="Ex: Pela criação de uma delegacia de desaparecidos"
           style={{height: '44px'}}
           value={name}
           onChange={handleChange('name')}
           onBlur={handleBlur('name')} />
 
-        <label className="caps bold">Objetivo</label>
+        <label className="block h6 caps bold mb1">Objetivo</label>
         {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
         <textarea
           className="field-light block full-width mt1 mb2"
+          placeholder="Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois."
           style={{height: '160px'}}
           value={goal}
           onChange={handleChange('goal')}
