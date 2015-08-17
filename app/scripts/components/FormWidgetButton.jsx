@@ -27,8 +27,10 @@ export default class FormWidgetButton extends React.Component {
 
   handleEdit(event) {
     event.stopPropagation()
-    this.setState({editing: true})
-    this.props.onEdit && this.props.onEdit()
+    if(this.props.editable) {
+      this.setState({editing: true})
+      this.props.onEdit && this.props.onEdit()
+    }
   }
 
   handleChange(event) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { FormWidgetButton, Loading } from './'
+import { FormWidgetInput, FormWidgetButton, Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 
@@ -47,7 +47,13 @@ export default class FormWidget extends React.Component {
     bindedWidgetActions.editWidget({
       mobilization_id: mobilization.id,
       widget_id: widget.id,
-      widget: { settings: {...settings, fields: [...fields, {kind, name: 'Título'}]} }
+      widget: { settings: {...settings, fields: [...fields, {
+        uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)), 
+        kind, 
+        label: 'Título',
+        placeholder: 'Preencha as instruções',
+        required: 'false'
+      }]} }
     })
   }
 
@@ -87,14 +93,9 @@ export default class FormWidget extends React.Component {
   }
 
   renderFields() {
-    return this.fields().map(function(field, index){
+    return this.fields().map((field, index) => {
       return(
-        <div className="mb2" key={'field-' + index}>
-          <label className="block h6 caps bold mb1">{field.name}</label>
-          <input 
-            className="field-light block full-width"
-            type={field.kind}/>
-        </div>
+        <FormWidgetInput key={'field-' + index} field={field} {...this.props} />
       )
     }.bind(this))
   }
@@ -107,7 +108,7 @@ export default class FormWidget extends React.Component {
         <div className={classnames("widget", (editable ? 'border p2' : null))} style={(editable ? {borderStyle: 'dashed'} : null)} onClick={::this.handleEdit}>
           { this.renderInstructions() }
           { this.renderFields() }
-          <FormWidgetButton buttonText={widget.settings.button_text || 'Enviar'} {...this.props} />
+          <FormWidgetButton buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props} />
         </div>
         { this.renderLoading() }
       </div>
