@@ -36,7 +36,7 @@ export default class NewBlock extends React.Component {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage,
         widgets_attributes: this.state.selectedLayout.map((column) => {
-          return { kind: 'content', ...column }
+          return { kind: 'draft', ...column }
         })
       }
     })

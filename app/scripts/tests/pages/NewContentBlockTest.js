@@ -61,7 +61,7 @@ describe('NewBlock', () => {
         block: {
           bg_class: 'bg-test',
           bg_image: 'foobar.jpg',
-          widgets_attributes: [{kind: 'content', sm_size: 12, md_size: 12, lg_size: 12}]
+          widgets_attributes: [{kind: 'draft', sm_size: 12, md_size: 12, lg_size: 12}]
         }
       })
     })

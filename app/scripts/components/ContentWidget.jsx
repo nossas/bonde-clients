@@ -10,7 +10,7 @@ export default class ContentWidget extends React.Component {
     this.state = {
       editing: false,
       editor: null,
-      content: (props.widget.settings ? props.widget.settings.content : 'Clique para editar...'),
+      content: (props.widget.settings ? props.widget.settings.content : (props.editable ? 'Clique para editar...' : null)),
       toolbarId: "wysihtml5-toolbar-" + this.props.widget.id,
       loading: false
     }

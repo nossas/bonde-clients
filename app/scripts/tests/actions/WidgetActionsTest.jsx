@@ -36,7 +36,7 @@ describe('WidgetActions', () => {
       const request = requests[0]
       expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/widgets/2`)
       expect(request.method).to.equal('PUT')
-      expect(request.requestBody).to.equal($.param({widget}))
+      expect(request.requestBody).to.equal(JSON.stringify({widget}))
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widget))
       expect(dispatch).to.have.been.calledWith({
         type: EDIT_WIDGET,

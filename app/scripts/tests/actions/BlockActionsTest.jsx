@@ -28,7 +28,7 @@ describe('BlockActions', () => {
       const transitionToStub = sandbox.stub(router, 'transitionTo')
       const block = {
         bg_class: 'bg-test',
-        widgets_attributes: [{kind: 'content', size: 68}, {kind: 'content', size: 69}]
+        widgets_attributes: [{kind: 'draft', size: 68}, {kind: 'draft', size: 69}]
       }
       BlockActions.addBlock({
         router,

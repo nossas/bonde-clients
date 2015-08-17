@@ -7,7 +7,9 @@ export function editWidget(params) {
   return dispatch => {
     $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}`, {
       method: 'put',
-      data: { widget: params.widget },
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify({ widget: params.widget }),
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_WIDGET,
