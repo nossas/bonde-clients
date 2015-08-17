@@ -1,0 +1,62 @@
+.minhasampa-scheme .widget {
+  color: #444;
+}
+
+.minhasampa-scheme .widget a {
+  color: #CAC8C8
+}
+
+.minhasampa-scheme .widget .button {
+  color: white;
+  background-color: #646569;
+}
+
+.minhasampa-scheme .bg-1 {
+  background-color: #D51067;
+}
+
+.minhasampa-scheme .bg-2 {
+  background-color: #FA9ABA;
+}
+
+.minhasampa-scheme .bg-3 {
+  background-color: #646569;
+}
+
+.minhasampa-scheme .bg-4 {
+  background-color: #CAC8C8;
+}
+
+.minhasampa-scheme .bg-5 {
+  background-color: #00C4B3;
+}
+
+.minhasampa-scheme .bg-6 {
+  background-color: #00A7CE;
+}
+
+.minhasampa-scheme .bg-7 {
+  background-color: #8C84D6;
+}
+
+.minhasampa-scheme .bg-8 {
+  background-color: #FFC627;
+}
+
+.minhasampa-scheme .bg-1,
+.minhasampa-scheme .bg-2,
+.minhasampa-scheme .bg-3,
+.minhasampa-scheme .bg-5,
+.minhasampa-scheme .bg-6,
+.minhasampa-scheme .bg-7,
+.minhasampa-scheme .bg-8, {
+  .widget h1 { color: white }
+  .widget h2 { color: white }
+  .widget { color: white }
+}
+
+.minhasampa-scheme .bg-4 {
+  .widget h1 { color: #444 }
+  .widget h2 { color: #444 }
+  .widget { color: #444 }
+}

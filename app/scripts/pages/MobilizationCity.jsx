@@ -22,6 +22,8 @@ export default class MobilizationCity extends React.Component {
           </ul>
         </h2>
         <div className="py3 px4">
+          <div className="bg-white border rounded lg-col-6 mx-auto p3">
+          </div>
         </div>
       </div>
     )

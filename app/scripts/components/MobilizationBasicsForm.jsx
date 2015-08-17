@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import classnames from 'classnames'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
@@ -67,10 +68,28 @@ export default class MobilizationBasicsForm extends React.Component {
     }
   }
 
+  handleCancelClick(event) {
+    event.preventDefault()
+    this.goBack()
+  } 
+
   renderErrorMessage() {
     if (this.state.error) {
       return (
         <div className="red center mt2">{this.state.error}</div>
+      )
+    }
+  }
+
+  renderCancelButton() {
+    if(this.props.mobilization) {
+      return (
+        <button
+          className="caps button bg-darken-3 col col-3 mt1 p2 mr2"
+          disabled={this.state.submitting} 
+          onClick={::this.handleCancelClick}>
+          Cancelar
+        </button>
       )
     }
   }
@@ -107,11 +126,15 @@ export default class MobilizationBasicsForm extends React.Component {
           onChange={handleChange('goal')}
           onBlur={handleBlur('goal')} />
 
-        <input
-          type="submit"
-          className="caps button full-width bg-aqua mt1 p2"
-          disabled={this.state.submitting}
-          value={this.state.submitting ? "Salvando..." : submitText} />
+
+        <div className="clearfix">
+          {this.renderCancelButton()}
+          <input
+            type="submit"
+            className={classnames("caps button bg-aqua mt1 p2", (mobilization ? 'col col-3' : 'full-width'))}
+            disabled={this.state.submitting}
+            value={this.state.submitting ? "Salvando..." : submitText} />
+        </div>
 
         {::this.renderErrorMessage()}
       </form>
