@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { Loading } from './'
+import { FormWidgetButton, Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 
@@ -39,14 +39,14 @@ export default class FormWidget extends React.Component {
   }
 
   addField(kind) {
-    const { settings } = this.props.widget
+    const { dispatch, mobilization, widget } = this.props
+    const { settings } = widget
     const fields = this.fields()
-    const { dispatch } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
     this.setState({loading: true})
     bindedWidgetActions.editWidget({
-      mobilization_id: this.props.mobilization.id,
-      widget_id: this.props.widget.id,
+      mobilization_id: mobilization.id,
+      widget_id: widget.id,
       widget: { settings: {...settings, fields: [...fields, {kind, name: 'Título'}]} }
     })
   }
@@ -100,16 +100,14 @@ export default class FormWidget extends React.Component {
   }
 
   render() {
-    const { editable } = this.props
+    const { editable, widget } = this.props
     return(
       <div>
         { this.renderToolbar() }
         <div className={classnames("widget", (editable ? 'border p2' : null))} style={(editable ? {borderStyle: 'dashed'} : null)} onClick={::this.handleEdit}>
           { this.renderInstructions() }
           { this.renderFields() }
-          <button className="caps button bg-darken-4 p2 full-width">
-            Enviar
-          </button>
+          <FormWidgetButton buttonText={widget.settings.button_text || 'Enviar'} {...this.props} />
         </div>
         { this.renderLoading() }
       </div>
