@@ -48,14 +48,14 @@
 .minhasampa-scheme .bg-3,
 .minhasampa-scheme .bg-5,
 .minhasampa-scheme .bg-6,
-.minhasampa-scheme .bg-7,
-.minhasampa-scheme .bg-8, {
+.minhasampa-scheme .bg-7 {
   .widget h1 { color: white }
   .widget h2 { color: white }
   .widget { color: white }
 }
 
-.minhasampa-scheme .bg-4 {
+.minhasampa-scheme .bg-4, 
+.minhasampa-scheme .bg-8 {
   .widget h1 { color: #444 }
   .widget h2 { color: #444 }
   .widget { color: #444 }
