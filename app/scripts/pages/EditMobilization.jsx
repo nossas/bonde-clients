@@ -36,13 +36,11 @@ export default class EditMobilization extends React.Component {
 
   componentDidUpdate() {
     const { mobilization, blocks } = this.props
-    if (blocks.length == 0) {
+    if (!this.newBlock() && blocks.length == 0) {
       this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
     }
     if (!this.state.scrolledToBottom &&
-        this.props.location.query &&
-        this.props.location.query.newBlock &&
-        this.props.location.query.newBlock == "true" &&
+        this.newBlock() &&
         this.props.blocks.length > 0 &&
         this.props.widgets.length > 0 &&
         this.props.widgets.length > this.state.widgetsCount
@@ -50,6 +48,10 @@ export default class EditMobilization extends React.Component {
       window.scrollTo(0, document.body.scrollHeight)
       this.setState({scrolledToBottom: true})
     }
+  }
+
+  newBlock() {
+    return this.props.location.query && this.props.location.query.newBlock && this.props.location.query.newBlock == "true"
   }
 
   render(){
