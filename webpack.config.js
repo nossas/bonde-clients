@@ -41,11 +41,11 @@ module.exports = {
     new Webpack.HotModuleReplacementPlugin(),
     new Webpack.DefinePlugin({
       'process.env': {
-        'BASE_URL': '"http://localhost:3000"'
+        'BASE_URL': '"http://localhost:3000"',
+        'GOOGLE_ANALYTICS_CODE': '"FAKE_GA_CODE"'
       },
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: false,
-      __GOOGLE_ANALYTICS_CODE__: '"DEV_GA_CODE"'
+      __DEVTOOLS__: false
     })
   ]
 };
