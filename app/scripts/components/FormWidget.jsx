@@ -93,9 +93,15 @@ export default class FormWidget extends React.Component {
   }
 
   renderFields() {
-    return this.fields().map((field, index) => {
+    const fields = this.fields()
+    return fields.map((field, index) => {
       return(
-        <FormWidgetInput key={'field-' + index} field={field} {...this.props} />
+        <FormWidgetInput
+          {...this.props}
+          key={field.uid}
+          canMoveUp={index != 0}
+          canMoveDown={index != fields.length - 1}
+          field={field} />
       )
     }.bind(this))
   }

@@ -58,8 +58,7 @@ export default class FormWidgetInput extends React.Component {
     event.stopPropagation()
   }
 
-  handleSave(event) {
-    event.stopPropagation()
+  updateSettings(newFields) {
     const { dispatch, mobilization, widget } = this.props
     const { settings } = widget
     const { fields } = settings
@@ -68,6 +67,19 @@ export default class FormWidgetInput extends React.Component {
       loading: true,
       editing: false
     })
+    bindedWidgetActions.editWidget({
+      mobilization_id: mobilization.id,
+      widget_id: widget.id,
+      widget: { settings: {
+        ...settings, 
+        fields: newFields
+      } }
+    })
+  }
+
+  handleSave(event) {
+    event.stopPropagation()
+    const { fields } = this.props.widget.settings
     const newFields = fields.map((field) => {
       if(field.uid == this.props.field.uid) {
         return {
@@ -81,17 +93,52 @@ export default class FormWidgetInput extends React.Component {
         return field
       }
     })
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      widget: { settings: {
-        ...settings, 
-        fields: newFields
-      } }
+    this.updateSettings(newFields)
+  }
+
+  handleMoveUp(event) {
+    event.stopPropagation()
+    const { fields } = this.props.widget.settings
+    const newFields = fields.map((field, index) => {
+      if (index + 1 < fields.length && fields[index + 1].uid == this.props.field.uid) {
+        return this.props.field
+      } else if (field.uid == this.props.field.uid) {
+        return fields[index - 1]
+      } else {
+        return field
+      }
     })
+    this.updateSettings(newFields)
+  }
+
+  handleMoveDown(event) {
+    event.stopPropagation()
+    const { fields } = this.props.widget.settings
+    const newFields = fields.map((field, index) => {
+      if (index > 0 && fields[index - 1].uid == this.props.field.uid) {
+        return this.props.field
+      } else if (field.uid == this.props.field.uid) {
+        return fields[index + 1]
+      } else {
+        return field
+      }
+    })
+    this.updateSettings(newFields)
+  }
+
+  handleRemove(event) {
+    event.stopPropagation()
+    if (confirm("Você tem certeza que quer remover este campo?")) {
+      const { fields } = this.props.widget.settings
+      const newFields = fields.filter(field =>
+        field.uid != this.props.field.uid
+      )
+      this.updateSettings(newFields)
+    }
   }
 
   renderToolbar(){
+    const { canMoveUp, canMoveDown } = this.props
     if(this.state.editing) {
       return(
         <div onClick={::this.handleToolbarClick}>
@@ -113,7 +160,7 @@ export default class FormWidgetInput extends React.Component {
                   value={this.state.placeholder}
                   onChange={::this.handlePlaceholderChange} />
               </div>
-              <div className="col col-2 mr2">
+              <div className="col col-1 mr2">
                 <label className="h6 caps bold block mb1">Tipo</label>
                 <select 
                   className="field-light block full-width"
@@ -124,7 +171,7 @@ export default class FormWidgetInput extends React.Component {
                   <option value="number">Número</option>
                 </select>
               </div>
-              <div className="col col-4">
+              <div className="col col-6">
                 <label className="h6 caps bold block full-width mb1">Obrigatório</label>
                 <select 
                   className="field-light mr3"
@@ -133,9 +180,18 @@ export default class FormWidgetInput extends React.Component {
                   <option value="false">Não</option>
                   <option value="true">Sim</option>
                 </select>
-                <button className="button bg-darken-4 px2" onClick={::this.handleSave}>
+                <button className="button bg-darken-4 px2 mr2" onClick={::this.handleSave}>
                   <i className="fa fa-cloud-upload mr1" />
                   Salvar
+                </button>
+                <button disabled={!canMoveUp} className="button bg-darken-4 px2 mr1" onClick={::this.handleMoveUp}>
+                  <i className="fa fa-chevron-up" />
+                </button>
+                <button disabled={!canMoveDown} className="button bg-darken-4 px2 mr1" onClick={::this.handleMoveDown}>
+                  <i className="fa fa-chevron-down" />
+                </button>
+                <button className="button bg-darken-4 px2" onClick={::this.handleRemove}>
+                  <i className="fa fa-trash" />
                 </button>
               </div>
             </div>
