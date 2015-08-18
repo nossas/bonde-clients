@@ -40,7 +40,7 @@ module.exports = {
       },
       __DEVELOPMENT__: false,
       __DEVTOOLS__: false,
-      __GOOGLE_ANALYTICS_CODE__: process.env.GOOGLE_ANALYTICS_CODE
+      __GOOGLE_ANALYTICS_CODE__: "process.env.GOOGLE_ANALYTICS_CODE"
     })
   ]
 };
