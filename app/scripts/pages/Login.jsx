@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginForm from './../components/LoginForm.jsx'
 
-export default class Home extends React.Component {
+export default class Login extends React.Component {
   render() {
     let bgImage = require('./bg-login.png')
     return (

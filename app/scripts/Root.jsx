@@ -13,7 +13,7 @@ import Mobilization from './containers/Mobilization.jsx'
 import Mobilizations from './containers/Mobilizations.jsx'
 
 // Pages
-import Home from './pages/Home.jsx'
+import Login from './pages/Login.jsx'
 import ListMobilizations from './pages/ListMobilizations.jsx'
 import NewMobilization from './pages/NewMobilization.jsx'
 import EditMobilization from './pages/EditMobilization.jsx'
@@ -81,7 +81,7 @@ function renderRoutes(history) {
   return(
     <Router history={history}>
       <Route component={Application}>
-        <Route path="/" component={Home} />
+        <Route path="/" component={Login} />
         <Route component={Mobilizations}>
           <Route path="/mobilizations" components={{main: ListMobilizations, topMenu: TopMenu}} />
           <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
