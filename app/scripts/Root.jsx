@@ -5,7 +5,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import * as Paths from './Paths'
-import ga from 'react-ga'
+import ua from 'universal-analytics'
 
 // Containers
 import Application from './containers/Application.jsx'
@@ -48,20 +48,12 @@ const reducer = combineReducers(reducers)
 const store = finalCreateStore(reducer)
 
 export default class Root extends React.Component {
-  constructor(props, context){
-    super(props, context)
-
-    ga.initialize(
-      process.env.GOOGLE_ANALYTICS_CODE,
-      { debug: __DEVELOPMENT__ }
-    )
-  }
-
   render () {
     const { history } = this.props
 
     history.addChangeListener(() => {
-      ga.pageview(history.location.pathname)
+      ua(process.env.GOOGLE_ANALYTICS_CODE).
+        pageview(history.location.pathname).send()
     })
 
     let debugPanel

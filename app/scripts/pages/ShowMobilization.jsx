@@ -5,6 +5,7 @@ import * as BlockActions from './../actions/BlockActions'
 import * as WidgetActions from './../actions/WidgetActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import ua from 'universal-analytics'
 
 @connect(state => ({
   blocks: state.blocks,
@@ -12,6 +13,11 @@ import { bindActionCreators } from 'redux'
 }))
 
 export default class ShowMobilization extends React.Component {
+  constructor(props, context){
+    super(props, context)
+    ua(props.mobilization.google_analytics_code).pageview("/").send()
+  }
+
   componentDidMount(){
     const { dispatch, mobilization } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
