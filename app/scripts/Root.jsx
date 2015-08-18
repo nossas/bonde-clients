@@ -51,7 +51,6 @@ export default class Root extends React.Component {
   constructor(props, context){
     super(props, context)
 
-    console.log(process.env)
     ga.initialize(
       process.env.GOOGLE_ANALYTICS_CODE,
       { debug: __DEVELOPMENT__ }

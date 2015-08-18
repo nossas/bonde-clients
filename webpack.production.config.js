@@ -37,6 +37,7 @@ module.exports = {
     new Webpack.DefinePlugin({
       'process.env': {
         'BASE_URL': '"https://hub-api.herokuapp.com"'
+        'GOOGLE_ANALYTICS_CODE': '"UA-26278513-30"'
       },
       __DEVELOPMENT__: false,
       __DEVTOOLS__: false
