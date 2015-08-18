@@ -7,13 +7,6 @@ import * as AuthActions from './../actions/AuthActions'
 
 @reactMixin.decorate(Navigation)
 export default class MobilizationMenu extends React.Component {
-  handleLogout(event) {
-    event.preventDefault()
-    this.props.dispatch(AuthActions.logout())
-      .fail((state) => this.setState({ auth: state }))
-      .always(() => this.transitionTo('/'))
-  }
-
   render(){
     const { user } = this.props
     const style = { minWidth: "300px" }
@@ -32,11 +25,6 @@ export default class MobilizationMenu extends React.Component {
           <i className="fa fa-flag-o mr2" />
           Suas mobilizações
         </Link>
-        <h6 className="silver caps muted">Perfil</h6>
-        <a className="silver button button-transparent full-width" onClick={::this.handleLogout}>
-          <i className="fa fa-sign-out mr2" />
-          {user.first_name} {user.last_name} (Sair)
-        </a>
       </div>
     )
   }
