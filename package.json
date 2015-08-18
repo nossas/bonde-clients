@@ -23,6 +23,7 @@
     "basscss-sass": "^1.0.2",
     "chai": "^3.2.0",
     "classnames": "^2.1.3",
+    "console": "^0.5.2",
     "css-loader": "^0.16.0",
     "drmonty-chosen": "^1.4.2",
     "expose-loader": "^0.7.0",
