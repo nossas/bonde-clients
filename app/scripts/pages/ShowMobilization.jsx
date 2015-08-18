@@ -15,7 +15,7 @@ import ua from 'universal-analytics'
 export default class ShowMobilization extends React.Component {
   constructor(props, context){
     super(props, context)
-    ua(props.mobilization.google_analytics_code).pageview("/").send()
+    ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
   }
 
   componentDidMount(){

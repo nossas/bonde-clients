@@ -52,7 +52,7 @@ export default class Root extends React.Component {
     const { history } = this.props
 
     history.addChangeListener(() => {
-      ua(process.env.GOOGLE_ANALYTICS_CODE).
+      ua(process.env.GOOGLE_ANALYTICS_CODE, {https: true}).
         pageview(history.location.pathname).send()
     })
 
