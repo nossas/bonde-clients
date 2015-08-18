@@ -52,7 +52,7 @@ export default class Root extends React.Component {
     super(props, context)
 
     ga.initialize(
-      process.env.GOOGLE_ANALYTICS_CODE,
+      __GOOGLE_ANALYTICS_CODE__,
       { debug: __DEVELOPMENT__ }
     )
   }

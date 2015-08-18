@@ -39,7 +39,8 @@ module.exports = {
         'BASE_URL': '"https://hub-api.herokuapp.com"'
       },
       __DEVELOPMENT__: false,
-      __DEVTOOLS__: false
+      __DEVTOOLS__: false,
+      __GOOGLE_ANALYTICS_CODE__: process.env.GOOGLE_ANALYTICS_CODE
     })
   ]
 };

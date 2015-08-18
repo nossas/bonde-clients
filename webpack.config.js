@@ -44,7 +44,8 @@ module.exports = {
         'BASE_URL': '"http://localhost:3000"'
       },
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
+      __DEVTOOLS__: false,
+      __GOOGLE_ANALYTICS_CODE__: '"DEV_GA_CODE"'
     })
   ]
 };
