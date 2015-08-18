@@ -26,6 +26,7 @@ import MobilizationAnalytics from './pages/MobilizationAnalytics.jsx'
 // Components
 import MobilizationsMenu from './components/MobilizationsMenu.jsx'
 import MobilizationMenu from './components/MobilizationMenu.jsx'
+import TopMenu from './components/TopMenu.jsx'
 
 // Reducers
 import * as reducers from './reducers'
@@ -90,15 +91,16 @@ function renderRoutes(history) {
       <Route component={Application}>
         <Route path="/" component={Home} />
         <Route component={Mobilizations}>
-          <Route path="/mobilizations" components={{main: ListMobilizations, sidebar: MobilizationsMenu}} />
-          <Route path="/mobilizations/new" components={{main: NewMobilization, sidebar: MobilizationsMenu}} />
+          <Route path="/mobilizations" components={{main: ListMobilizations, topMenu: TopMenu}} />
+          <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
           <Route component={Mobilization} >
             <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
-            <Route path="/mobilizations/:mobilization_id/edit" components={{main: EditMobilization, sidebar: MobilizationMenu}} />
-            <Route path="/mobilizations/:mobilization_id/basics" components={{main: MobilizationBasics, sidebar: MobilizationMenu}} />
-            <Route path="/mobilizations/:mobilization_id/city" components={{main: MobilizationCity, sidebar: MobilizationMenu}} />
-            <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu}} />
-            <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu}} />
+            <Route path="/mobilizations/:mobilization_id/edit" components={{main: EditMobilization, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/basics" components={{main: MobilizationBasics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/city" components={{main: MobilizationCity, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
           </Route>
         </Route>
       </Route>

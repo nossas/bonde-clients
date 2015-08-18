@@ -22,6 +22,10 @@ export function cityMobilization(id) {
   return `/mobilizations/${id}/city`
 }
 
+export function cityNewMobilization(id) {
+  return `/mobilizations/${id}/cityNew`
+}
+
 export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
 }

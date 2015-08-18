@@ -307,7 +307,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: false})
       const menus = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menus).to.have.length(1)
-      expect(menus[0].props.className).to.equal('display-none')
+      expect(menus[0].props.className).to.equal('p2 display-none')
     })
 
     it('should render DropDownMenu with display-none when block is not editable', () => {
@@ -317,7 +317,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: true})
       const menus = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menus).to.have.length(1)
-      expect(menus[0].props.className).to.equal('display-none')
+      expect(menus[0].props.className).to.equal('p2 display-none')
     })
 
     it('should render DropDownMenu when mouse is over', () => {
@@ -327,7 +327,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: true})
       const menu = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menu).to.have.length(1)
-      expect(menu[0].props.className).to.be.empty
+      expect(menu[0].props.className).to.equal('p2')
     })
 
     it('should render DropDownMenuItems', () => {
