@@ -67,6 +67,7 @@ export default class FormWidgetInput extends React.Component {
       loading: true,
       editing: false
     })
+    this.props.onCancelEdit && this.props.onCancelEdit()
     bindedWidgetActions.editWidget({
       mobilization_id: mobilization.id,
       widget_id: widget.id,
