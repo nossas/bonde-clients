@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import * as Paths from './Paths'
+import ga from 'react-ga'
 
 // Containers
 import Application from './containers/Application.jsx'
@@ -29,9 +30,9 @@ import MobilizationMenu from './components/MobilizationMenu.jsx'
 // Reducers
 import * as reducers from './reducers'
 
-let finalCreateStore;
+let finalCreateStore
 if (__DEVELOPMENT__ && __DEVTOOLS__) {
-  const { devTools, persistState } = require('redux-devtools');
+  const { devTools, persistState } = require('redux-devtools')
   finalCreateStore = compose(
     applyMiddleware(thunk, logger),
     devTools(),
@@ -46,8 +47,21 @@ const reducer = combineReducers(reducers)
 const store = finalCreateStore(reducer)
 
 export default class Root extends React.Component {
+  constructor(props, context){
+    super(props, context)
+
+    ga.initialize(
+      process.env.GOOGLE_ANALYTICS_CODE,
+      { debug: __DEVELOPMENT__ }
+    )
+  }
+
   render () {
     const { history } = this.props
+
+    history.addChangeListener(() => {
+      ga.pageview(history.location.pathname)
+    })
 
     let debugPanel
     if (__DEVTOOLS__) {
