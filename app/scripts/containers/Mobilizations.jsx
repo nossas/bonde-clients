@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { Loading } from './../components'
+import { TopMenu, Loading } from './../components'
 import * as MobilizationActions from './../actions/MobilizationActions'
 
 @connect(state => ({
@@ -20,12 +20,19 @@ export default class Mobilizations extends React.Component {
     return(this.props.mobilizations.length > 0 ? this.renderMobilizations() : this.renderLoading())
   }
 
+  renderTopMenu() {
+    return this.props.topMenu && React.cloneElement(this.props.topMenu, {...this.props})
+  }
+
   renderComponents() {
     if(this.props.main) {
       return (
-        <div className="flex flex-stretch">
-          { this.props.sidebar && React.cloneElement(this.props.sidebar, {...this.props}) }
-          { React.cloneElement(this.props.main, {...this.props}) }
+        <div>
+          { this.renderTopMenu() }
+          <div className="flex flex-stretch">
+            { this.props.sidebar && React.cloneElement(this.props.sidebar, {...this.props}) }
+            { React.cloneElement(this.props.main, {...this.props}) }
+          </div>
         </div>
       )
     }
