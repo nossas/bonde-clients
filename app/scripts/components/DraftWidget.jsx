@@ -44,7 +44,7 @@ export default class DraftWidget extends React.Component {
     if(this.props.editable){
       return (
         <div className="widget border center p2" style={{borderStyle: 'dashed'}}>
-          <h6>Escolha uma das opções abaixo</h6>
+          <h4>Escolha uma das opções abaixo</h4>
           <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleContentClick}>
             Texto
           </button>

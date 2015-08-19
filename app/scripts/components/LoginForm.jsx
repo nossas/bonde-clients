@@ -8,20 +8,23 @@ import * as Paths from '../Paths'
 import * as AuthActions from './../actions/AuthActions'
 
 function loginValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (!data.email) {
     errors.email = 'Informe o e-mail'
+    errors.valid = false
   } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
     errors.email = 'E-mail inválido'
+    errors.valid = false
   }
   if (!data.password) {
     errors.password = 'Informe a senha'
+    errors.valid = false
   }
   return errors
 }
 
-@connect(state => ({ auth: state.auth, form: state.login }))
-@reduxForm('login', loginValidation)
+@connect(state => ({ auth: state.auth, form: state.loginForm }))
+@reduxForm('loginForm', loginValidation)
 @reactMixin.decorate(Navigation)
 export default class LoginForm extends React.Component {
 
@@ -62,7 +65,7 @@ export default class LoginForm extends React.Component {
   renderErrorMessage() {
     if (this.state.auth.error) {
       return (
-        <div className="red center mt2">{this.state.auth.error}</div>
+        <div className="h5 red bold center mt2">{this.state.auth.error}</div>
       )
     }
   }
@@ -77,31 +80,31 @@ export default class LoginForm extends React.Component {
     } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit} className="mt2">
+      <form onSubmit={::this.handleSubmit}>
 
-        <label className="bold">E-MAIL</label>
-        {emailError && emailTouched && <span className="red ml2">{emailError}</span>}
+        <label className="block h5 caps bold mb1">E-mail</label>
         <input
           type="email"
-          className="field-light block full-width mt1 mb2"
-          style={{height: '44px'}}
+          className="field-light block full-width mt1 mb1"
+          style={{height: '50px'}}
           value={email}
           onChange={handleChange('email')}
           onBlur={handleBlur('email')} />
+        <span className="h5 red bold">{emailTouched && emailError}</span>
 
-        <label className="bold">SENHA</label>
-        {passwordError && passwordTouched && <span className="red ml2">{passwordError}</span>}
+        <label className="block h5 caps bold mt1 mb1">Senha</label>
         <input
           type="password"
-          className="field-light block full-width mt1 mb2"
-          style={{height: '44px'}}
+          className="field-light block full-width mt1 mb1"
+          style={{height: '50px'}}
           value={password}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
+        <span className="h5 red bold">{passwordTouched && passwordError}</span>
 
         <input
           type="submit"
-          className="button full-width bg-aqua mt1 p2"
+          className="button full-width bg-aqua mt2 p2"
           disabled={this.state.auth.submitting}
           value={this.state.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
 

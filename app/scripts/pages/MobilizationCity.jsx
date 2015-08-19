@@ -10,9 +10,10 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 
 function mobilizationCityValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (!data.colorScheme) {
     errors.colorScheme = 'Você deve escolher uma cidade'
+    errors.valid = false
   }
   return errors
 }
@@ -52,7 +53,7 @@ export default class MobilizationCity extends React.Component {
   }
 
   newMobilization() {
-    return this.props.location.query && this.props.location.query.newMobilization && this.props.location.query.newMobilization == "true"
+    return /cityNew/.test(this.props.location.pathname)
   }
 
   handleSubmit(event) {
@@ -73,7 +74,7 @@ export default class MobilizationCity extends React.Component {
   handleCancelClick(event) {
     event.preventDefault()
     this.goBack()
-  } 
+  }
 
   renderErrorMessage() {
     if (this.state.error) {
@@ -95,12 +96,12 @@ export default class MobilizationCity extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h6 caps bold mb1">
+        <label className="block h4 caps bold mb1">
           Cidade
         </label>
         {colorSchemeError && colorSchemeTouched && <span className="red ml2">{colorSchemeError}</span>}
-        <select 
-          className="field-light block full-width mt1 mb2"
+        <select
+          className="field-light block h3 full-width mt1 mb2"
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
           value={colorScheme}>
@@ -111,7 +112,7 @@ export default class MobilizationCity extends React.Component {
           { this.renderCancelButton() }
           <input
             type="submit"
-            className={classnames("caps button bg-aqua mt1 p2", (this.newMobilization() ? 'full-width' : 'col col-3'))}
+            className={classnames("caps button bg-aqua h3 mt1 p2", (this.newMobilization() ? 'full-width' : 'col col-3'))}
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>
@@ -125,8 +126,8 @@ export default class MobilizationCity extends React.Component {
     if(!this.newMobilization()) {
       return (
         <button
-          className="caps button bg-darken-3 col col-3 mt1 p2 mr2"
-          disabled={this.state.submitting} 
+          className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
+          disabled={this.state.submitting}
           onClick={::this.handleCancelClick}>
           Cancelar
         </button>
@@ -144,11 +145,19 @@ export default class MobilizationCity extends React.Component {
     }
   }
 
+  renderTitle() {
+    if(this.newMobilization()) {
+      return (
+        <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3>
+      )
+    }
+  }
+
   render(){
     const { mobilization } = this.props
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white px3 m0 clearfix" style={{paddingTop: '2rem'}}>
+        <h2 className={classnames("bg-white m0 clearfix", (this.newMobilization() ? 'px4' : 'px3'))} style={{paddingTop: '2rem'}}>
           <div className="col col-4 mt0">{(this.newMobilization() ? 'Nova mobilização' : 'Configure sua mobilização')}</div>
           <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
             <li className={classnames("inline-block mr3", (this.newMobilization() ? 'muted' : null))}>
@@ -159,7 +168,7 @@ export default class MobilizationCity extends React.Component {
           </ul>
         </h2>
         <div className="py3 px4">
-          <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3>
+          { this.renderTitle() }
           <div className="bg-white border rounded lg-col-6 mx-auto p3">
             { !this.state.initializing && this.renderForm() }
           </div>

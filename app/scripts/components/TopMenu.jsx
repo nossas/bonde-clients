@@ -11,7 +11,7 @@ export default class TopMenu extends React.Component {
   handleLogout() {
     this.props.dispatch(AuthActions.logout())
       .fail((state) => this.setState({ auth: state }))
-      .always(() => this.transitionTo('/'))
+      .always(() => this.transitionTo(Paths.login()))
   }
 
   renderUserMenu() {
@@ -19,10 +19,10 @@ export default class TopMenu extends React.Component {
     if(user) {
       return (
         <div className="clearfix">
-          <DropDownMenu className="mt1" menuClassName="bg-aqua white" icon="user">
-            <DropDownMenuItem href={'/#'+ Paths.newMobilization()}><i className="fa fa-plus" /> Nova mobilização</DropDownMenuItem>
-            <DropDownMenuItem href={'/#'+ Paths.mobilizations()}><i className="fa fa-flag-o" /> Suas mobilizações</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleLogout}><i className="fa fa-sign-out" /> Sair</DropDownMenuItem>
+          <DropDownMenu className="mt1 mr4" menuClassName="bg-aqua white" icon="user">
+            <DropDownMenuItem href={'/#'+ Paths.newMobilization()}><i className="fa fa-plus" style={{marginRight: '6px'}} /> Nova mobilização</DropDownMenuItem>
+            <DropDownMenuItem href={'/#'+ Paths.mobilizations()}><i className="fa fa-flag-o" style={{marginRight: '2px'}} /> Suas mobilizações</DropDownMenuItem>
+            <DropDownMenuItem onClick={::this.handleLogout}><i className="fa fa-sign-out" style={{marginRight: '3px'}} /> Sair</DropDownMenuItem>
           </DropDownMenu>
         </div>
       )

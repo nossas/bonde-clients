@@ -64,7 +64,7 @@ export default class FormWidget extends React.Component {
           <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
             <button className="button button-transparent white p2" onClick={::this.handleAddTextField}>
               <i className="fa fa-plus mr2" />
-              Campo de texto
+              Adicionar campo
             </button>
           </div>
           <div
@@ -79,7 +79,7 @@ export default class FormWidget extends React.Component {
   renderInstructions() {
     if(this.props.editable && this.fields().length == 0) {
       return (
-        <p>Clique para personalizar seu formulário...</p>
+        <h4 className="mb2">Clique para personalizar seu formulário...</h4>
       )
     }
   }
