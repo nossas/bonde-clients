@@ -7,10 +7,8 @@ $form-field-height: 3rem;
 
 @import '../../node_modules/basscss-sass/basscss.scss';
 
-.caps {
-  letter-spacing: 0;
-}
+.caps { letter-spacing: 0; }
+form .button { height: 3rem; }
 
-form .button {
-  height: 3rem;
-}
+.field-light:invalid:focus { border-color: $blue; }
+.field-light.has-error { border-color: $red !important; }
