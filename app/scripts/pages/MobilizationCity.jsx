@@ -52,7 +52,7 @@ export default class MobilizationCity extends React.Component {
   }
 
   newMobilization() {
-    return this.props.location.query && this.props.location.query.newMobilization && this.props.location.query.newMobilization == "true"
+    return /cityNew/.test(this.props.location.pathname)
   }
 
   handleSubmit(event) {
@@ -144,11 +144,19 @@ export default class MobilizationCity extends React.Component {
     }
   }
 
+  renderTitle() {
+    if(this.newMobilization()) {
+      return (
+        <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3>
+      )
+    }
+  }
+
   render(){
     const { mobilization } = this.props
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white px3 m0 clearfix" style={{paddingTop: '2rem'}}>
+        <h2 className={classnames("bg-white m0 clearfix", (this.newMobilization() ? 'px4' : 'px3'))} style={{paddingTop: '2rem'}}>
           <div className="col col-4 mt0">{(this.newMobilization() ? 'Nova mobilização' : 'Configure sua mobilização')}</div>
           <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
             <li className={classnames("inline-block mr3", (this.newMobilization() ? 'muted' : null))}>
@@ -159,7 +167,7 @@ export default class MobilizationCity extends React.Component {
           </ul>
         </h2>
         <div className="py3 px4">
-          <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3>
+          { this.renderTitle() }
           <div className="bg-white border rounded lg-col-6 mx-auto p3">
             { !this.state.initializing && this.renderForm() }
           </div>
