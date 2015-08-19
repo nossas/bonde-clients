@@ -7,12 +7,14 @@ import { Navigation } from 'react-router'
 import * as MobilizationActions from './../actions/MobilizationActions'
 
 function mobilizationBasicsValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (!data.name) {
     errors.name = 'Informe nome da mobilização'
+    errors.valid = false
   }
   if (!data.goal) {
     errors.goal = 'Informe o objetivo da mobilização'
+    errors.valid = false
   }
   return errors
 }
@@ -59,7 +61,7 @@ export default class MobilizationBasicsForm extends React.Component {
     if (valid) {
       dispatch(mobilizationAction({
         id: mobilizationId,
-        transitionTo: this.transitionTo.bind(this), 
+        transitionTo: this.transitionTo.bind(this),
         mobilization: {...data, ...defaultData}
       }))
     } else {
@@ -71,7 +73,7 @@ export default class MobilizationBasicsForm extends React.Component {
   handleCancelClick(event) {
     event.preventDefault()
     this.goBack()
-  } 
+  }
 
   renderErrorMessage() {
     if (this.state.error) {
@@ -86,7 +88,7 @@ export default class MobilizationBasicsForm extends React.Component {
       return (
         <button
           className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
-          disabled={this.state.submitting} 
+          disabled={this.state.submitting}
           onClick={::this.handleCancelClick}>
           Cancelar
         </button>

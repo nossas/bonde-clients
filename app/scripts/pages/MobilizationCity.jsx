@@ -10,9 +10,10 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 
 function mobilizationCityValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (!data.colorScheme) {
     errors.colorScheme = 'Você deve escolher uma cidade'
+    errors.valid = false
   }
   return errors
 }
@@ -73,7 +74,7 @@ export default class MobilizationCity extends React.Component {
   handleCancelClick(event) {
     event.preventDefault()
     this.goBack()
-  } 
+  }
 
   renderErrorMessage() {
     if (this.state.error) {
@@ -99,7 +100,7 @@ export default class MobilizationCity extends React.Component {
           Cidade
         </label>
         {colorSchemeError && colorSchemeTouched && <span className="red ml2">{colorSchemeError}</span>}
-        <select 
+        <select
           className="field-light block h3 full-width mt1 mb2"
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
@@ -126,7 +127,7 @@ export default class MobilizationCity extends React.Component {
       return (
         <button
           className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
-          disabled={this.state.submitting} 
+          disabled={this.state.submitting}
           onClick={::this.handleCancelClick}>
           Cancelar
         </button>

@@ -9,9 +9,10 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 
 function mobilizationAnalyticsValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
     errors.id = 'Informe um id do Google Analytics válido'
+    errors.valid = false
   }
   return errors
 }
@@ -65,7 +66,7 @@ export default class MobilizationAnalytics extends React.Component {
   handleCancelClick(event) {
     event.preventDefault()
     this.goBack()
-  } 
+  }
 
   renderErrorMessage() {
     if (this.state.error) {
@@ -102,7 +103,7 @@ export default class MobilizationAnalytics extends React.Component {
         <div className="clearfix">
           <button
             className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
-            disabled={this.state.submitting} 
+            disabled={this.state.submitting}
             onClick={::this.handleCancelClick}>
             Cancelar
           </button>
