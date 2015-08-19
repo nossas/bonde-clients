@@ -1,5 +1,13 @@
+export function login() {
+  return `/login`
+}
+
+export function logout() {
+  return `/logout`
+}
+
 export function mobilizations(id) {
-  return `/mobilizations`
+  return `/`
 }
 
 export function mobilization(id) {

@@ -11,7 +11,7 @@ export default class TopMenu extends React.Component {
   handleLogout() {
     this.props.dispatch(AuthActions.logout())
       .fail((state) => this.setState({ auth: state }))
-      .always(() => this.transitionTo('/'))
+      .always(() => this.transitionTo(Paths.login()))
   }
 
   renderUserMenu() {

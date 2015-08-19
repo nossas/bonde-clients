@@ -81,9 +81,9 @@ function renderRoutes(history) {
   return(
     <Router history={history}>
       <Route component={Application}>
-        <Route path="/" component={Login} />
+        <Route path="/login" component={Login} />
         <Route component={Mobilizations}>
-          <Route path="/mobilizations" components={{main: ListMobilizations, topMenu: TopMenu}} />
+          <Route path="/" components={{main: ListMobilizations, topMenu: TopMenu}} />
           <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
           <Route component={Mobilization} >
             <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
