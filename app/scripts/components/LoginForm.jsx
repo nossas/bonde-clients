@@ -66,7 +66,7 @@ export default class LoginForm extends React.Component {
   renderErrorMessage() {
     if (this.state.auth.error) {
       return (
-        <div className="h5 red bold center mt2">{this.state.auth.error}</div>
+        <div className="h5 red bold center mt2 animated shake">{this.state.auth.error}</div>
       )
     }
   }
