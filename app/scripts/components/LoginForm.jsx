@@ -82,21 +82,19 @@ export default class LoginForm extends React.Component {
     return (
       <form onSubmit={::this.handleSubmit}>
 
-        <label className="block h5 caps bold mb1">E-mail</label>
+        <label htmlFor="email" className="block h5 caps bold mb1">E-mail</label>
         <input
-          type="email"
+          type="email" id="email"
           className="field-light block full-width mt1 mb1"
-          style={{height: '50px'}}
           value={email}
           onChange={handleChange('email')}
           onBlur={handleBlur('email')} />
         <span className="h5 red bold">{emailTouched && emailError}</span>
 
-        <label className="block h5 caps bold mt1 mb1">Senha</label>
+        <label htmlFor="password" className="block h5 caps bold mt1 mb1">Senha</label>
         <input
-          type="password"
+          type="password" id="password"
           className="field-light block full-width mt1 mb1"
-          style={{height: '50px'}}
           value={password}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
