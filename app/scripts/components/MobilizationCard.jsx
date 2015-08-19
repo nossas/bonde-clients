@@ -6,12 +6,12 @@ export default class MobilizationCard extends React.Component {
   render() {
     const { mobilization } = this.props
     return(
-      <div className="bg-white p2 border mb2">
-        <Link to={Paths.editMobilization(mobilization.id)} className="h3 bold gray">
-          { mobilization.name }
-        </Link>
-        <p>{ mobilization.goal }</p>
-      </div>
+      <Link to={Paths.editMobilization(mobilization.id)} style={{textDecoration: 'none'}}>
+        <div className="bg-white p2 border mb2">
+          <h3 className="bold gray">{ mobilization.name }</h3>
+          <p className="gray">{ mobilization.goal }</p>
+        </div>
+      </Link>
     )
   }
 }

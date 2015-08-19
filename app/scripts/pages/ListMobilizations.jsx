@@ -17,7 +17,7 @@ export default class ListMobilizations extends React.Component {
             Nova mobilização
           </Link>
         </h2>
-        <div className="py3 px4">
+        <div className="col-6 mx-auto py3 px4">
           {
             this.props.mobilizations.map(function(mobilization, index){
               return <MobilizationCard {...this.props} key={"mobilization-" + mobilization.id} mobilization={mobilization} />
