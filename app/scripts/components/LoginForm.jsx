@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
+import classnames from 'classnames'
 
 import * as Paths from '../Paths'
 import * as AuthActions from './../actions/AuthActions'
@@ -41,8 +42,8 @@ export default class LoginForm extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     valid: PropTypes.bool.isRequired
   }
@@ -65,7 +66,7 @@ export default class LoginForm extends React.Component {
   renderErrorMessage() {
     if (this.state.auth.error) {
       return (
-        <div className="h5 red bold center mt2">{this.state.auth.error}</div>
+        <div className="h5 red bold center mt2 animated shake">{this.state.auth.error}</div>
       )
     }
   }
@@ -80,12 +81,12 @@ export default class LoginForm extends React.Component {
     } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit}>
+      <form onSubmit={::this.handleSubmit} noValidate>
 
         <label htmlFor="email" className="block h5 caps bold mb1">E-mail</label>
         <input
           type="email" id="email"
-          className="field-light block full-width mt1 mb1"
+          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((emailTouched && emailError) ? 'has-error' : null))}
           value={email}
           onChange={handleChange('email')}
           onBlur={handleBlur('email')} />
@@ -94,7 +95,7 @@ export default class LoginForm extends React.Component {
         <label htmlFor="password" className="block h5 caps bold mt1 mb1">Senha</label>
         <input
           type="password" id="password"
-          className="field-light block full-width mt1 mb1"
+          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((passwordTouched && passwordError) ? 'has-error' : null))}
           value={password}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')} />
