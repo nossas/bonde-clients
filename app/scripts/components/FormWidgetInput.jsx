@@ -223,10 +223,11 @@ export default class FormWidgetInput extends React.Component {
     return(
       <div className="mb2">
         { this.renderToolbar() }
-        <label className="block h6 caps bold mb1">{field.label}</label>
+        <label className="block h4 caps bold mb1">{field.label}</label>
         <input 
           onClick={::this.handleEdit}
           className="field-light block full-width"
+          style={{height: '44px'}}
           placeholder={field.placeholder}
           type={field.kind}/>
         { this.renderLoading() }

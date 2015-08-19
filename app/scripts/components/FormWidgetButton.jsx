@@ -97,7 +97,7 @@ export default class FormWidgetButton extends React.Component {
     return(
       <div>
         { this.renderToolbar() }
-        <button className="caps button bg-darken-4 p2 full-width" onClick={::this.handleEdit}>
+        <button className="caps button bg-darken-4 p2 full-width mt1" onClick={::this.handleEdit}>
           {this.props.buttonText}
         </button>
         { this.renderLoading() }
