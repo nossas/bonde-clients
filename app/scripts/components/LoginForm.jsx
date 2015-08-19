@@ -8,20 +8,23 @@ import * as Paths from '../Paths'
 import * as AuthActions from './../actions/AuthActions'
 
 function loginValidation(data) {
-  const errors = {}
+  const errors = { valid: true }
   if (!data.email) {
     errors.email = 'Informe o e-mail'
+    errors.valid = false
   } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
     errors.email = 'E-mail inválido'
+    errors.valid = false
   }
   if (!data.password) {
     errors.password = 'Informe a senha'
+    errors.valid = false
   }
   return errors
 }
 
-@connect(state => ({ auth: state.auth, form: state.login }))
-@reduxForm('login', loginValidation)
+@connect(state => ({ auth: state.auth, form: state.loginForm }))
+@reduxForm('loginForm', loginValidation)
 @reactMixin.decorate(Navigation)
 export default class LoginForm extends React.Component {
 
