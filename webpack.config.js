@@ -45,7 +45,7 @@ module.exports = {
     new Webpack.DefinePlugin({
       'process.env': {
         'BASE_URL': '"http://localhost:3000"',
-        'GOOGLE_ANALYTICS_CODE': '"FAKE_GA_CODE"'
+        'GOOGLE_ANALYTICS_CODE': '"UA-27626466-6"'
       },
       __DEVELOPMENT__: true,
       __DEVTOOLS__: false
