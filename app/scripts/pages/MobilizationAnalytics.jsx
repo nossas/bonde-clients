@@ -7,11 +7,12 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
+import { ConfigurationsMenu } from './../components'
 
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
-    errors.id = 'Informe um id do Google Analytics válido'
+    errors.id = 'Informe um código do Google Analytics válido'
     errors.valid = false
   }
   return errors
@@ -63,11 +64,6 @@ export default class MobilizationAnalytics extends React.Component {
     }
   }
 
-  handleCancelClick(event) {
-    event.preventDefault()
-    this.goBack()
-  }
-
   renderErrorMessage() {
     if (this.state.error) {
       return (
@@ -86,33 +82,32 @@ export default class MobilizationAnalytics extends React.Component {
     } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit}>
-        <label className="mb2 block">
-          <span style={{cursor: "pointer"}} className="block h4 caps bold mb1">Id do Google Analytics</span>
+      <form className="mt2 mb4" onSubmit={::this.handleSubmit}>
+        <div className="mb1 h5 caps bold">
+          <label
+            style={{cursor: "pointer"}}
+            htmlFor="ga-code-input">
+            Código do Google Analytics
+          </label>
+        </div>
+        <div className="mb1">
           <input
             type="text"
+            id="ga-code-input"
             placeholder="UA-42446026-2"
-            className="field-light block h3 full-width mt1 mb1"
+            className="field-light h3 mr1"
             onChange={handleChange('id')}
             onBlur={handleBlur('id')}
-            value={id} />
-          {idError && idTouched && <span className="red block">{idError}</span>}
-        </label>
-
-        <div className="clearfix">
-          <button
-            className="caps button bg-darken-3 h3 mt1 p2 mr2"
-            disabled={this.state.submitting}
-            onClick={::this.handleCancelClick}>
-            Cancelar
-          </button>
+            value={id}
+          />
           <input
             type="submit"
-            className="caps button bg-aqua h3 mt1 p2"
+            className="caps button bg-aqua h4 p2"
             disabled={this.state.submitting}
-            value={this.state.submitting ? "Salvando..." : "Salvar"} />
+            value={this.state.submitting ? "Salvando..." : "Salvar"}
+          />
         </div>
-
+        {idError && idTouched && <span className="red block">{idError}</span>}
         {::this.renderErrorMessage()}
       </form>
     )
@@ -122,22 +117,26 @@ export default class MobilizationAnalytics extends React.Component {
     const { mobilization } = this.props
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white px3 m0 clearfix" style={{paddingTop: '2rem'}}>
-          <div className="col col-4 mt0">Configure sua mobilização</div>
-          <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
-            <li className="inline-block mr3">
-              <Link to={Paths.basicsMobilization(mobilization.id)} className="gray">1. Nome e objetivo</Link>
+        <ConfigurationsMenu {...this.props} />
+        <div className="py3 px3 col col-8">
+          <p className="h5">
+            Para acompanhar os resultados da sua página, você precisa de uma conta no Google
+            Analytics. Siga os passos abaixo:
+          </p>
+          <ol className="h5">
+            <li>
+              Crie uma conta no Google Analytics
+              <a href="http://www.google.com/analytics/" target="_blank"> clicando aqui</a>
             </li>
-            <li className="inline-block mr3">
-              <Link to={Paths.cityMobilization(mobilization.id)} className="gray">2. Cidade</Link>
+            <li>
+              Procure o código e insira abaixo: (ele sempre começa com as letras UA)
+              { !this.state.initializing && this.renderForm() }
             </li>
-            <li className="inline-block py3 border-bottom" style={{borderWidth: '3px'}}>3. Google Analytics</li>
-          </ul>
-        </h2>
-        <div className="py3 px4">
-          <div className="bg-white border rounded lg-col-6 mx-auto p3">
-            { !this.state.initializing && this.renderForm() }
-          </div>
+            <li>
+              Pronto! Dentro de 24 horas os resultados poderão ser acompanhados através da
+              sua conta do Google Analytics.
+            </li>
+          </ol>
         </div>
       </div>
     )

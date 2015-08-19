@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
+import { ConfigurationsMenu } from './../components'
 
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
@@ -157,16 +158,7 @@ export default class MobilizationCity extends React.Component {
     const { mobilization } = this.props
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className={classnames("bg-white m0 clearfix", (this.newMobilization() ? 'px4' : 'px3'))} style={{paddingTop: '2rem'}}>
-          <div className="col col-4 mt0">{(this.newMobilization() ? 'Nova mobilização' : 'Configure sua mobilização')}</div>
-          <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
-            <li className={classnames("inline-block mr3", (this.newMobilization() ? 'muted' : null))}>
-              <Link to={Paths.basicsMobilization(mobilization.id)} className="gray">1. Nome e objetivo</Link>
-            </li>
-            <li className="inline-block py3 mr3 border-bottom" style={{borderWidth: '3px'}}>2. Cidade</li>
-            { this.renderAnalyticsLink() }
-          </ul>
-        </h2>
+        <ConfigurationsMenu {...this.props} />
         <div className="py3 px4">
           { this.renderTitle() }
           <div className="bg-white border rounded lg-col-6 mx-auto p3">
