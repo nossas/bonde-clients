@@ -87,16 +87,16 @@ export default class MobilizationAnalytics extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label>
+        <label className="mb2 block">
           <span style={{cursor: "pointer"}} className="block h4 caps bold mb1">Id do Google Analytics</span>
-          {idError && idTouched && <span className="red ml2 block">{idError}</span>}
           <input
             type="text"
             placeholder="UA-42446026-2"
-            className="field-light block h3 full-width mt1 mb2"
+            className="field-light block h3 full-width mt1 mb1"
             onChange={handleChange('id')}
             onBlur={handleBlur('id')}
             value={id} />
+          {idError && idTouched && <span className="red block">{idError}</span>}
         </label>
 
         <div className="clearfix">
