@@ -102,14 +102,14 @@ export default class MobilizationAnalytics extends React.Component {
 
         <div className="clearfix">
           <button
-            className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
+            className="caps button bg-darken-3 h3 mt1 p2 mr2"
             disabled={this.state.submitting}
             onClick={::this.handleCancelClick}>
             Cancelar
           </button>
           <input
             type="submit"
-            className="caps button bg-aqua h3 mt1 p2 col col-3"
+            className="caps button bg-aqua h3 mt1 p2"
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : "Salvar"} />
         </div>
