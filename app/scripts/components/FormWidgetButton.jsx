@@ -64,14 +64,14 @@ export default class FormWidgetButton extends React.Component {
         <div onClick={::this.handleToolbarClick}>
           <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
             <div className="p2">
-              <label className="h6 caps bold mr2">Texto do botão</label>
+              <label className="h4 block caps bold mb1">Texto do botão</label>
               <input 
-              className="field-light mr2"
+              className="field-light p2 mr2"
+              style={{height: '50px'}}
               type="text"
               value={this.state.buttonText}
               onChange={::this.handleChange} />
-              <button className="button bg-darken-4 px2" onClick={::this.handleSave}>
-                <i className="fa fa-cloud-upload mr1" />
+              <button className="button caps bg-darken-4 py2" onClick={::this.handleSave}>
                 Salvar
               </button>
             </div>

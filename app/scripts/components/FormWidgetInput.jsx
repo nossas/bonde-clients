@@ -149,6 +149,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Título</label>
                 <input 
                   className="field-light block full-width"
+                  style={{height: '50px'}}
                   type="text"
                   value={this.state.label}
                   onChange={::this.handleLabelChange} />
@@ -157,6 +158,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Instruções</label>
                 <input 
                   className="field-light block full-width"
+                  style={{height: '50px'}}
                   type="text"
                   value={this.state.placeholder}
                   onChange={::this.handlePlaceholderChange} />
@@ -165,6 +167,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Tipo</label>
                 <select 
                   className="field-light block full-width"
+                  style={{height: '50px'}}
                   onChange={::this.handleKindChange}
                   value={this.state.kind}>
                   <option value="text">Texto</option>
@@ -176,22 +179,22 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block full-width mb1">Obrigatório</label>
                 <select 
                   className="field-light mr3"
+                  style={{height: '50px'}}
                   onChange={::this.handleRequiredChange}
                   value={this.state.required}>
                   <option value="false">Não</option>
                   <option value="true">Sim</option>
                 </select>
-                <button className="button bg-darken-4 px2 mr2" onClick={::this.handleSave}>
-                  <i className="fa fa-cloud-upload mr1" />
+                <button className="button caps bg-darken-4 p2 mr2" onClick={::this.handleSave}>
                   Salvar
                 </button>
-                <button disabled={!canMoveUp} className="button bg-darken-4 px2 mr1" onClick={::this.handleMoveUp}>
+                <button disabled={!canMoveUp} className="button bg-darken-4 p2 mr1" onClick={::this.handleMoveUp}>
                   <i className="fa fa-chevron-up" />
                 </button>
-                <button disabled={!canMoveDown} className="button bg-darken-4 px2 mr1" onClick={::this.handleMoveDown}>
+                <button disabled={!canMoveDown} className="button bg-darken-4 p2 mr1" onClick={::this.handleMoveDown}>
                   <i className="fa fa-chevron-down" />
                 </button>
-                <button className="button bg-darken-4 px2" onClick={::this.handleRemove}>
+                <button className="button bg-darken-4 p2" onClick={::this.handleRemove}>
                   <i className="fa fa-trash" />
                 </button>
               </div>
