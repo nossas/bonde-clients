@@ -85,7 +85,7 @@ export default class MobilizationBasicsForm extends React.Component {
     if(this.props.mobilization) {
       return (
         <button
-          className="caps button bg-darken-3 col col-3 mt1 p2 mr2"
+          className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
           disabled={this.state.submitting} 
           onClick={::this.handleCancelClick}>
           Cancelar
@@ -107,21 +107,21 @@ export default class MobilizationBasicsForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h6 caps bold mb1">Nome</label>
+        <label className="block h4 caps bold mb1">Nome</label>
         {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
         <input
           type="text"
-          className="field-light block full-width mt1 mb2"
+          className="field-light block h3 full-width mt1 mb2"
           placeholder="Ex: Pela criação de uma delegacia de desaparecidos"
           style={{height: '44px'}}
           value={name}
           onChange={handleChange('name')}
           onBlur={handleBlur('name')} />
 
-        <label className="block h6 caps bold mb1">Objetivo</label>
+        <label className="block h4 caps bold mb1">Objetivo</label>
         {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
         <textarea
-          className="field-light block full-width mt1 mb2"
+          className="field-light block h3 full-width mt1 mb2"
           placeholder="Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois."
           style={{height: '160px'}}
           value={goal}
@@ -133,7 +133,7 @@ export default class MobilizationBasicsForm extends React.Component {
           {this.renderCancelButton()}
           <input
             type="submit"
-            className={classnames("caps button bg-aqua mt1 p2", (mobilization ? 'col col-3' : 'full-width'))}
+            className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? 'col col-3' : 'full-width'))}
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>

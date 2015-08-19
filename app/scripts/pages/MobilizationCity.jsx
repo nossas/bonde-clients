@@ -95,12 +95,12 @@ export default class MobilizationCity extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h6 caps bold mb1">
+        <label className="block h4 caps bold mb1">
           Cidade
         </label>
         {colorSchemeError && colorSchemeTouched && <span className="red ml2">{colorSchemeError}</span>}
         <select 
-          className="field-light block full-width mt1 mb2"
+          className="field-light block h3 full-width mt1 mb2"
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
           value={colorScheme}>
@@ -111,7 +111,7 @@ export default class MobilizationCity extends React.Component {
           { this.renderCancelButton() }
           <input
             type="submit"
-            className={classnames("caps button bg-aqua mt1 p2", (this.newMobilization() ? 'full-width' : 'col col-3'))}
+            className={classnames("caps button bg-aqua h3 mt1 p2", (this.newMobilization() ? 'full-width' : 'col col-3'))}
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>
@@ -125,7 +125,7 @@ export default class MobilizationCity extends React.Component {
     if(!this.newMobilization()) {
       return (
         <button
-          className="caps button bg-darken-3 col col-3 mt1 p2 mr2"
+          className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
           disabled={this.state.submitting} 
           onClick={::this.handleCancelClick}>
           Cancelar

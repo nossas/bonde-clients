@@ -86,14 +86,14 @@ export default class MobilizationAnalytics extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h6 caps bold mb1">
+        <label className="block h4 caps bold mb1">
           Id do Google Analytics
         </label>
         {idError && idTouched && <span className="red ml2">{idError}</span>}
         <input
           type="text"
           placeholder="UA-42446026-2"
-          className="field-light block full-width mt1 mb2"
+          className="field-light block h3 full-width mt1 mb2"
           style={{height: '44px'}}
           onChange={handleChange('id')}
           onBlur={handleBlur('id')}
@@ -101,14 +101,14 @@ export default class MobilizationAnalytics extends React.Component {
 
         <div className="clearfix">
           <button
-            className="caps button bg-darken-3 col col-3 mt1 p2 mr2"
+            className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
             disabled={this.state.submitting} 
             onClick={::this.handleCancelClick}>
             Cancelar
           </button>
           <input
             type="submit"
-            className="caps button bg-aqua mt1 p2 col col-3"
+            className="caps button bg-aqua h3 mt1 p2 col col-3"
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : "Salvar"} />
         </div>
