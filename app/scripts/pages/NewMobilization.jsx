@@ -5,7 +5,7 @@ export default class NewMobilization extends React.Component {
   render(){
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white px3 m0 clearfix" style={{paddingTop: '2rem'}}>
+        <h2 className="bg-white px4 m0 clearfix" style={{paddingTop: '2rem'}}>
           <div className="col col-4 mt0">Nova mobilização</div>
           <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
             <li className="inline-block py3 mr3 border-bottom" style={{borderWidth: '3px'}}>1. Nome e objetivo</li>
