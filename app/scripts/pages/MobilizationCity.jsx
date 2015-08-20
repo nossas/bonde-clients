@@ -136,16 +136,6 @@ export default class MobilizationCity extends React.Component {
     }
   }
 
-  renderAnalyticsLink() {
-    if(!this.newMobilization()) {
-      return (
-        <li className="inline-block">
-          <Link to={Paths.analyticsMobilization(this.props.mobilization.id)} className="gray">3. Google Analytics</Link>
-        </li>
-      )
-    }
-  }
-
   renderTitle() {
     if(this.newMobilization()) {
       return (
@@ -154,11 +144,29 @@ export default class MobilizationCity extends React.Component {
     }
   }
 
+  renderMenu() {
+    if(this.newMobilization()) {
+      return (
+        <h2 className="bg-white px4 m0 clearfix" style={{paddingTop: '2rem'}}>
+          <div className="col col-4 mt0">Nova mobilização</div>
+          <ul className="list-reset m0 col col-8" style={{marginTop: '-25px'}}>
+            <li className="inline-block mr3 muted">1. Nome e objetivo</li>
+            <li className="inline-block py3 border-bottom" style={{borderWidth: '3px'}}>2. Cidade</li>
+          </ul>
+        </h2>
+      )
+    } else {
+      return(
+        <ConfigurationsMenu {...this.props} />
+      )
+    }
+  }
+
   render(){
     const { mobilization } = this.props
     return(
       <div className="flex-auto bg-silver gray">
-        <ConfigurationsMenu {...this.props} />
+        { this.renderMenu() }
         <div className="py3 px4">
           { this.renderTitle() }
           <div className="bg-white border rounded lg-col-6 mx-auto p3">

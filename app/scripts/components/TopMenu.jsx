@@ -32,7 +32,7 @@ export default class TopMenu extends React.Component {
   render() {
     return(
       <div className="clearfix flex flex-stretch bg-aqua px4">
-        <Link to="/" className="left h3 button button-transparent white p2">mobilize</Link>
+        <Link to="/" className="left h3 button button-transparent white p2" style={{marginLeft: '-18px'}}>mobilize</Link>
         { this.renderUserMenu() }
       </div>
     )
