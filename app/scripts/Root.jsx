@@ -84,7 +84,7 @@ function renderRoutes(history) {
       <Route component={Application}>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route component={Mobilizations} onEnter={/* requireAuth */}>
+        <Route component={Mobilizations} onEnter={requireAuth}>
           <Route path="/" components={{main: ListMobilizations, topMenu: TopMenu}} />
           <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
           <Route component={Mobilization} >
@@ -103,8 +103,8 @@ function renderRoutes(history) {
 }
 
 function requireAuth(nextState, transition) {
-  const state = store.getState()
+  /* const state = store.getState()
   if (!state.auth.user) {
     transition.to(Paths.login(), null, { nextPathname: nextState.location.pathname });
-  }
+  } */
 }
