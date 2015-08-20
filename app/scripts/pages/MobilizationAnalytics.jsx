@@ -12,7 +12,7 @@ import { ConfigurationsMenu } from './../components'
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
-    errors.id = 'Informe uma ID do Google Analytics válida'
+    errors.id = 'Informe uma ID válida'
     errors.valid = false
   }
   return errors
@@ -112,7 +112,7 @@ export default class MobilizationAnalytics extends React.Component {
         {idError && idTouched && <span className="red block">{idError}</span>}
         {::this.renderErrorMessage()}
         { this.state.hasSubmitted && !this.props.dirty &&
-          <div className="green">ID do Google Analytics confirmado!</div> }
+          <div className="green">ID do Google Analytics confirmada!</div> }
       </form>
     )
   }
