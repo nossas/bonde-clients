@@ -13,7 +13,7 @@ export default class NewMobilization extends React.Component {
           </ul>
         </h2>
         <div className="p3">
-          <h3 className="h2 mt0 mb3 center">Conte um pouco sobre sua mobilização</h3>
+          <h3 className="h2 mt0 mb3 center">Qual o objetivo da sua mobilização?</h3>
           <MobilizationBasicsForm {...this.props} />
         </div>
       </div>
