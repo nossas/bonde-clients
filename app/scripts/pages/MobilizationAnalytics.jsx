@@ -37,6 +37,7 @@ export default class MobilizationAnalytics extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.state.initializing && this.setState({initializing: false})
     this.state.submitting && this.setState({submitting: false})
+    this.state.submitting && this.setState({hasSubmitted: true})
   }
 
   static propTypes = {
@@ -52,7 +53,7 @@ export default class MobilizationAnalytics extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch, mobilization } = this.props
-    this.setState({ submitting: true, error: null })
+    this.setState({ submitting: true, error: null, hasSubmitted: false })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
@@ -109,6 +110,8 @@ export default class MobilizationAnalytics extends React.Component {
         </div>
         {idError && idTouched && <span className="red block">{idError}</span>}
         {::this.renderErrorMessage()}
+        { this.state.hasSubmitted &&
+          <div className="green">ID do Google Analytics confirmado!</div> }
       </form>
     )
   }
