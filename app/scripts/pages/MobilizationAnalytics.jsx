@@ -12,7 +12,7 @@ import { ConfigurationsMenu } from './../components'
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
-    errors.id = 'Informe um código do Google Analytics válido'
+    errors.id = 'Informe uma ID do Google Analytics válida'
     errors.valid = false
   }
   return errors
@@ -87,14 +87,14 @@ export default class MobilizationAnalytics extends React.Component {
           <label
             style={{cursor: "pointer"}}
             htmlFor="ga-code-input">
-            Código do Google Analytics
+            ID do Google Analytics
           </label>
         </div>
         <div className="mb1">
           <input
             type="text"
             id="ga-code-input"
-            placeholder="UA-42446026-2"
+            placeholder="UA-00000000-0"
             className="field-light h3 mr1"
             onChange={handleChange('id')}
             onBlur={handleBlur('id')}
@@ -104,7 +104,7 @@ export default class MobilizationAnalytics extends React.Component {
             type="submit"
             className="caps button bg-aqua h4 p2"
             disabled={this.state.submitting}
-            value={this.state.submitting ? "Salvando..." : "Salvar"}
+            value={this.state.submitting ? "Confirmando..." : "Confirmar"}
           />
         </div>
         {idError && idTouched && <span className="red block">{idError}</span>}
@@ -120,8 +120,8 @@ export default class MobilizationAnalytics extends React.Component {
         <ConfigurationsMenu {...this.props} />
         <div className="py3 px3 col col-8">
           <p className="h5">
-            Para acompanhar os resultados da sua página, você precisa de uma conta no Google
-            Analytics. Siga os passos abaixo:
+            Para acompanhar os resultados da sua mobilização, você precisa configurar
+            uma conta no Google Analytics. Siga os passos abaixo:
           </p>
           <ol className="h5">
             <li>
@@ -129,12 +129,16 @@ export default class MobilizationAnalytics extends React.Component {
               <a href="http://www.google.com/analytics/" target="_blank"> clicando aqui</a>
             </li>
             <li>
-              Procure o código e insira abaixo: (ele sempre começa com as letras UA)
+              Obtenha sua ID de acompanhamento no Google Analytics. É um código
+              que começa sempre com as letras UA, que você verá após criar sua conta lá.
+            </li>
+            <li>
+              Copie a ID de acompanhamento e cole no campo abaixo:
               { !this.state.initializing && this.renderForm() }
             </li>
             <li>
-              Pronto! Dentro de 24 horas os resultados poderão ser acompanhados através da
-              sua conta do Google Analytics.
+              Pronto! Você já pode acompanhar as estatísticas da sua mobilização
+              no Google Analytics!
             </li>
           </ol>
         </div>
