@@ -59,6 +59,7 @@ export default class MobilizationAnalytics extends React.Component {
         id: mobilization.id,
         mobilization: {google_analytics_code: data.id}
       }))
+      this.props.initializeForm({id: data.id})
     } else {
       touchAll()
       this.setState({ submitting: false })
@@ -104,13 +105,13 @@ export default class MobilizationAnalytics extends React.Component {
           <input
             type="submit"
             className="caps button bg-aqua h4 p2"
-            disabled={this.state.submitting}
+            disabled={this.state.submitting || (this.state.hasSubmitted && !this.props.dirty)}
             value={this.state.submitting ? "Confirmando..." : "Confirmar"}
           />
         </div>
         {idError && idTouched && <span className="red block">{idError}</span>}
         {::this.renderErrorMessage()}
-        { this.state.hasSubmitted &&
+        { this.state.hasSubmitted && !this.props.dirty &&
           <div className="green">ID do Google Analytics confirmado!</div> }
       </form>
     )
