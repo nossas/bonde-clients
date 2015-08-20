@@ -11,7 +11,7 @@ export default class Login extends React.Component {
         <div className="py4">
           <div className="container py4">
             <div className="px3 bg-white rounded-top lg-col-6 mx-auto">
-              <h1 className="center m0 py2">Faça seu Login</h1>
+              <h1 className="center m0 py3">Faça seu Login</h1>
             </div>
             <div className="p3 bg-silver rounded-bottom lg-col-6 mx-auto">
               <LoginForm {...this.props} />
