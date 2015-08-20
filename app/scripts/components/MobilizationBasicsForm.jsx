@@ -115,7 +115,7 @@ export default class MobilizationBasicsForm extends React.Component {
           type="text"
           className="field-light block h3 full-width mt1 mb2"
           placeholder="Ex: Pela criação de uma delegacia de desaparecidos"
-          style={{height: '44px'}}
+          style={{height: '48px'}}
           value={name}
           onChange={handleChange('name')}
           onBlur={handleBlur('name')} />

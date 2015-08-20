@@ -7,9 +7,11 @@ export default class ListMobilizations extends React.Component {
   render(){
     return(
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white mt0 py3 px4 clearfix">
-          <i className="fa fa-flag-o mr2 aqua" />
-          Suas mobilizações
+        <h2 className="bg-white mt0 py3 px4 clearfix align-middle">
+          <div className="left" style={{marginTop: '12px'}}>
+            <i className="fa fa-flag-o mr2 aqua" />
+            Suas mobilizações
+          </div>
           <Link
             to={Paths.newMobilization()}
             className="button bg-aqua caps h4 py2 right">

@@ -149,7 +149,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Título</label>
                 <input 
                   className="field-light block full-width"
-                  style={{height: '50px'}}
+                  style={{height: '52px'}}
                   type="text"
                   value={this.state.label}
                   onChange={::this.handleLabelChange} />
@@ -158,7 +158,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Instruções</label>
                 <input 
                   className="field-light block full-width"
-                  style={{height: '50px'}}
+                  style={{height: '52px'}}
                   type="text"
                   value={this.state.placeholder}
                   onChange={::this.handlePlaceholderChange} />
@@ -167,7 +167,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block mb1">Tipo</label>
                 <select 
                   className="field-light block full-width"
-                  style={{height: '50px'}}
+                  style={{height: '52px'}}
                   onChange={::this.handleKindChange}
                   value={this.state.kind}>
                   <option value="text">Texto</option>
@@ -179,7 +179,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h6 caps bold block full-width mb1">Obrigatório</label>
                 <select 
                   className="field-light mr3"
-                  style={{height: '50px'}}
+                  style={{height: '52px'}}
                   onChange={::this.handleRequiredChange}
                   value={this.state.required}>
                   <option value="false">Não</option>
