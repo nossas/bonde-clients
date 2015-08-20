@@ -103,6 +103,7 @@ export default class MobilizationCity extends React.Component {
         {colorSchemeError && colorSchemeTouched && <span className="red ml2">{colorSchemeError}</span>}
         <select
           className="field-light block h3 full-width mt1 mb2"
+          style={{height: '48px'}}
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
           value={colorScheme}>
