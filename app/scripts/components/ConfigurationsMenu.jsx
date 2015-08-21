@@ -2,59 +2,35 @@ import React from 'react'
 import { Link, Navigation } from 'react-router'
 import * as Paths from '../Paths'
 import classNames from 'classnames'
+import { ConfigurationsMenuItem } from './'
 
 export default class ConfigurationsMenu extends React.Component {
   render(){
     const { mobilization, location } = this.props
+    const basicsMobilizationPath = Paths.basicsMobilization(mobilization.id)
+    const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
+    const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
+
     return(
       <div className="bg-white px3 clearfix">
         <h2 className="mb3">Configure sua mobilização</h2>
         <div>
           <ul className="list-reset mb0">
-            <li className={
-                classNames(
-                  "inline-block",
-                  "mr3",
-                  "py2",
-                  "h5",
-                  {"border-bottom border-aqua bold": Paths.basicsMobilization(mobilization.id) == location.pathname}
-                )
-              }>
-              <Link
-                to={Paths.basicsMobilization(mobilization.id)}
-                className="gray">
-                Informações básicas
-              </Link>
-            </li>
-            <li className={
-                classNames(
-                  "inline-block",
-                  "mr3",
-                  "py2",
-                  "h5",
-                  {"border-bottom border-aqua bold": Paths.cityMobilization(mobilization.id) == location.pathname}
-                )
-              }>
-              <Link
-                to={Paths.cityMobilization(mobilization.id)}
-                className="gray">
-                Cidade
-              </Link>
-            </li>
-            <li className={
-                classNames(
-                  "inline-block",
-                  "py2",
-                  "h5",
-                  {"border-bottom border-aqua bold": Paths.analyticsMobilization(mobilization.id) == location.pathname}
-                )
-              }>
-              <Link
-                to={Paths.analyticsMobilization(mobilization.id)}
-                className="gray">
-                Google Analytics
-              </Link>
-            </li>
+            <ConfigurationsMenuItem
+              path={basicsMobilizationPath}
+              text="Informações básicas"
+              isActive={basicsMobilizationPath == location.pathname}
+            />
+            <ConfigurationsMenuItem
+              path={cityMobilizationPath}
+              text="Cidade"
+              isActive={cityMobilizationPath == location.pathname}
+            />
+            <ConfigurationsMenuItem
+              path={analyticsMobilizationPath}
+              text="Google Analytics"
+              isActive={analyticsMobilizationPath == location.pathname}
+            />
           </ul>
         </div>
       </div>

@@ -23,3 +23,4 @@ export { default as WYSIHTMLToolbarInsertImage } from './WYSIHTMLToolbarInsertIm
 export { default as WYSIHTMLToolbarInsertHTML } from './WYSIHTMLToolbarInsertHTML.jsx'
 export { default as WYSIHTMLToolbarCreateLink } from './WYSIHTMLToolbarCreateLink.jsx'
 export { default as ConfigurationsMenu } from './ConfigurationsMenu.jsx'
+export { default as ConfigurationsMenuItem } from './ConfigurationsMenuItem.jsx'
