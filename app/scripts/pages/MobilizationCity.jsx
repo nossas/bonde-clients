@@ -107,6 +107,13 @@ export default class MobilizationCity extends React.Component {
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
           value={colorScheme}>
+          <option value="minhablumenau-scheme">Blumenau</option>
+          <option value="minhacampinas-scheme">Campinas</option>
+          <option value="minhacuritiba-scheme">Curitiba</option>
+          <option value="minhagaropaba-scheme">Garopaba</option>
+          <option value="minhaouropreto-scheme">Ouro Preto</option>
+          <option value="minhaportoalegre-scheme">Porto Alegre</option>
+          <option value="meurecife-scheme">Recife</option>
           <option value="meurio-scheme">Rio de Janeiro</option>
           <option value="minhasampa-scheme">São Paulo</option>
         </select>
