@@ -23,6 +23,7 @@ import ShowMobilization from './pages/ShowMobilization.jsx'
 import MobilizationBasics from './pages/MobilizationBasics.jsx'
 import MobilizationCity from './pages/MobilizationCity.jsx'
 import MobilizationAnalytics from './pages/MobilizationAnalytics.jsx'
+import MobilizationSharing from './pages/MobilizationSharing.jsx'
 
 // Components
 import MobilizationsMenu from './components/MobilizationsMenu.jsx'
@@ -94,6 +95,7 @@ function renderRoutes(history) {
             <Route path="/mobilizations/:mobilization_id/city" components={{main: MobilizationCity, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/sharing" components={{main: MobilizationSharing, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
           </Route>
         </Route>

@@ -34,6 +34,10 @@ export function cityNewMobilization(id) {
   return `/mobilizations/${id}/cityNew`
 }
 
+export function sharingMobilization(id) {
+  return `/mobilizations/${id}/sharing`
+}
+
 export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
 }
