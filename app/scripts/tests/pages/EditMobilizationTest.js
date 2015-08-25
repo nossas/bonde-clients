@@ -33,7 +33,7 @@ describe('EditMobilization', () => {
 
     it('should apply mobilization classes', () => {
       const { color_scheme, header_font, body_font } = mobilization
-      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, header_font, body_font))
+      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, `${header_font}-header`, `${body_font}-body`))
       expect(div).to.have.length(1)
     })
   })
