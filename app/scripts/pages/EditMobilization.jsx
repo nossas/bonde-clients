@@ -56,7 +56,9 @@ export default class EditMobilization extends React.Component {
 
   render(){
     const { mobilization, blocks } = this.props
-    const className = classnames("flex-auto", mobilization.color_scheme, mobilization.header_font, mobilization.body_font)
+    const { color_scheme, header_font, body_font } = mobilization
+    const className = classnames('flex-auto', color_scheme, `${header_font}-header`, `${body_font}-body`)
+
     return (
       <div className={className}>
         {
