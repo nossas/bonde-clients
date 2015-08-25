@@ -13,7 +13,7 @@ describe('EditMobilization', () => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
     blocks = [block1, block2]
-    mobilization = { color_scheme: "meurio-scheme", font_set: "brush-up" }
+    mobilization = { color_scheme: "meurio-scheme", header_font: "ubuntu", body_font: "open-sans" }
     dispatch = () => {}
   })
 
@@ -32,8 +32,8 @@ describe('EditMobilization', () => {
     })
 
     it('should apply mobilization classes', () => {
-      const { color_scheme, font_set } = mobilization
-      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, font_set))
+      const { color_scheme, header_font, body_font } = mobilization
+      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, header_font, body_font))
       expect(div).to.have.length(1)
     })
   })
