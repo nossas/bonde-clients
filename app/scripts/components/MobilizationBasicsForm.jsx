@@ -9,11 +9,18 @@ import * as MobilizationActions from './../actions/MobilizationActions'
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
   if (!data.name) {
-    errors.name = 'Informe nome da mobilização'
+    errors.name = 'Insira o nome da mobilização'
+    errors.valid = false
+  } else if (data.name.length > 100) {
+    errors.name = 'Tamanho máximo atingido'
     errors.valid = false
   }
+
   if (!data.goal) {
-    errors.goal = 'Informe o objetivo da mobilização'
+    errors.goal = 'Insira o objetivo da mobilização'
+    errors.valid = false
+  } else if (data.goal.length > 500) {
+    errors.goal = 'Tamanho máximo atingido'
     errors.valid = false
   }
   return errors
