@@ -67,7 +67,7 @@ export default class FormWidgetFields extends React.Component {
     return(
       <div className="flex-auto bg-silver gray">
         <FormWidgetMenu {...this.props} widget={widget} />
-        <div className="py3 px3 col col-8">
+        <div className="py3 px3">
           <p className="h5 mb3">
             Adicione, remova, edite e ordene os campos de acordo com as necessidades da sua ação.
           </p>
