@@ -66,7 +66,6 @@ export default class FormWidgetInput extends React.Component {
       loading: true,
       editing: false
     })
-    this.props.onCancelEdit && this.props.onCancelEdit()
     bindedWidgetActions.editWidget({
       mobilization_id: mobilization.id,
       widget_id: widget.id,
@@ -212,7 +211,7 @@ export default class FormWidgetInput extends React.Component {
             </div>
           </div>
         </div>
-        <div className="col col-6 px2">
+        <div className="col col-6 px3">
           <div>
             <button disabled={!canMoveUp} className="button button-transparent p2 mr1" onClick={::this.handleMoveUp}>
               <i className="fa fa-chevron-up mr1" />
@@ -231,7 +230,7 @@ export default class FormWidgetInput extends React.Component {
               Remover
             </button>
           </div>
-          <div className="mt2">
+          <div className="mt1">
             <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
               Cancelar
             </button>

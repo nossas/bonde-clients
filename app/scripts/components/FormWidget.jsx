@@ -22,10 +22,11 @@ export default class FormWidget extends React.Component {
     }
   }
 
-  renderInstructions() {
-    if(this.props.editable && this.fields().length == 0) {
+  renderCallToAction() {
+    const { configurable, widget } = this.props
+    if(!configurable) {
       return (
-        <h4 className="mb2">Clique para personalizar seu formulário...</h4>
+        <h2 className="mt0 mb3 center">{widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'}</h2>
       )
     }
   }
@@ -53,14 +54,28 @@ export default class FormWidget extends React.Component {
     }
   }
 
+  renderCount() {
+    const { configurable, widget } = this.props
+    if(!configurable) {
+      return(
+        <div className="mt2 h3 center">
+          0
+          &nbsp;
+          {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
+        </div>
+      )
+    }
+  }
+
   render() {
     const { editable } = this.props
     return(
       <div>
         <div className={classnames("widget", (editable ? 'border p2' : null))} style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)} onClick={::this.handleClick}>
-          { this.renderInstructions() }
+          { this.renderCallToAction() }
           { this.renderFields() }
           { this.renderButton() }
+          { this.renderCount() }
         </div>
       </div>
     )

@@ -94,7 +94,7 @@ export default class MobilizationBasicsForm extends React.Component {
     if(this.props.mobilization) {
       return (
         <button
-          className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
+          className="caps button bg-darken-3 h3 mt1 p2 mr2"
           disabled={this.state.submitting}
           onClick={::this.handleCancelClick}>
           Cancelar
@@ -142,7 +142,7 @@ export default class MobilizationBasicsForm extends React.Component {
           {this.renderCancelButton()}
           <input
             type="submit"
-            className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? 'col col-3' : 'full-width'))}
+            className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? null : 'full-width'))}
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>
