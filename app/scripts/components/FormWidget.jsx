@@ -1,36 +1,20 @@
 import React from 'react'
 import classnames from 'classnames'
-import { FormWidgetInput, FormWidgetButton, Loading } from './'
+import { FormWidgetInput, FormWidgetButton } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
+import reactMixin from 'react-mixin'
+import { Navigation } from 'react-router'
+import * as Paths from '../Paths'
+
+@reactMixin.decorate(Navigation)
 
 export default class FormWidget extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      editing: false,
-      loading: false
+      hasMouseOver: false
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.state.loading && this.props.widget != nextProps.widget) {
-      this.setState({loading: false})
-    }
-  }
-
-  handleCancelEdit(){
-    this.setState({editing: false})
-    this.props.onCancelEdit && this.props.onCancelEdit()
-  }
-
-  handleEdit() {
-    this.setState({editing: true})
-    this.props.onEdit && this.props.onEdit()
-  }
-
-  handleAddTextField() {
-    this.addField('text')
   }
 
   fields() {
@@ -38,56 +22,26 @@ export default class FormWidget extends React.Component {
     return (settings && settings.fields ? settings.fields : [])
   }
 
-  addField(kind) {
-    const { dispatch, mobilization, widget } = this.props
-    const { settings } = widget
-    const fields = this.fields()
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({loading: true})
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      widget: { settings: {...settings, fields: [...fields, {
-        uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)), 
-        kind, 
-        label: 'Título',
-        placeholder: 'Preencha as instruções',
-        required: 'false'
-      }]} }
-    })
+  handleMouseEnter() {
+    this.setState({hasMouseOver: true})
   }
 
-  renderToolbar(){
-    if(this.state.editing) {
-      return(
-        <div>
-          <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
-            <button className="button button-transparent white p2" onClick={::this.handleAddTextField}>
-              <i className="fa fa-plus mr2" />
-              Adicionar campo
-            </button>
-          </div>
-          <div
-            className="fixed top-0 right-0 bottom-0 left-0"
-            onClick={::this.handleCancelEdit}
-            style={{zIndex: 9998}} />
-        </div>
-      )
+  handleMouseLeave() {
+    this.setState({hasMouseOver: false})
+  }
+
+  handleClick() {
+    const {mobilization, widget} = this.props
+    if(this.props.editable) {
+      this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
-  renderInstructions() {
-    if(this.props.editable && this.fields().length == 0) {
+  renderCallToAction() {
+    const { configurable, widget } = this.props
+    if(!configurable) {
       return (
-        <h4 className="mb2">Clique para personalizar seu formulário...</h4>
-      )
-    }
-  }
-
-  renderLoading() {
-    if (this.state.loading) {
-      return (
-        <Loading />
+        <h2 className="mt0 mb3 center">{widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'}</h2>
       )
     }
   }
@@ -99,6 +53,7 @@ export default class FormWidget extends React.Component {
         <FormWidgetInput
           {...this.props}
           key={field.uid}
+          uid={field.uid}
           canMoveUp={index != 0}
           canMoveDown={index != fields.length - 1}
           field={field} />
@@ -106,17 +61,57 @@ export default class FormWidget extends React.Component {
     }.bind(this))
   }
 
+  renderButton() {
+    const { configurable, widget } = this.props
+    if(!configurable) {
+      return(
+        <FormWidgetButton buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props} />
+      )
+    }
+  }
+
+  renderCount() {
+    const { configurable, widget } = this.props
+    if(!configurable) {
+      return(
+        <div className="mt2 h3 center">
+          0
+          &nbsp;
+          {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
+        </div>
+      )
+    }
+  }
+
+  renderOverlay() {
+    const { editable, configurable } = this.props
+    if(editable && !configurable && this.state.hasMouseOver) {
+      return(
+        <div
+          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
+          style={{zIndex: 9998}}>
+          <div className="center full-width white">Clique para editar</div>
+        </div>
+      )
+    }
+  }
+
   render() {
-    const { editable, widget } = this.props
+    const { editable } = this.props
     return(
       <div>
-        { this.renderToolbar() }
-        <div className={classnames("widget", (editable ? 'border p2' : null))} style={(editable ? {borderStyle: 'dashed'} : null)} onClick={::this.handleEdit}>
-          { this.renderInstructions() }
+        <div
+          className={classnames("widget relative", (editable ? 'border p2' : null))}
+          style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
+          onMouseEnter={::this.handleMouseEnter}
+          onMouseLeave={::this.handleMouseLeave}
+          onClick={::this.handleClick}>
+          { this.renderCallToAction() }
           { this.renderFields() }
-          <FormWidgetButton buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props} />
+          { this.renderButton() }
+          { this.renderCount() }
+          { this.renderOverlay() }
         </div>
-        { this.renderLoading() }
       </div>
     )
   }

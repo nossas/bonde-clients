@@ -9,11 +9,18 @@ import * as MobilizationActions from './../actions/MobilizationActions'
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
   if (!data.name) {
-    errors.name = 'Informe nome da mobilização'
+    errors.name = 'Insira o nome da mobilização'
+    errors.valid = false
+  } else if (data.name.length > 100) {
+    errors.name = 'Seu título está muito longo!'
     errors.valid = false
   }
+
   if (!data.goal) {
-    errors.goal = 'Informe o objetivo da mobilização'
+    errors.goal = 'Insira o objetivo da mobilização'
+    errors.valid = false
+  } else if (data.goal.length > 500) {
+    errors.goal = 'O limite de caracteres foi atingido.'
     errors.valid = false
   }
   return errors
@@ -87,11 +94,29 @@ export default class MobilizationBasicsForm extends React.Component {
     if(this.props.mobilization) {
       return (
         <button
-          className="caps button bg-darken-3 h3 col col-3 mt1 p2 mr2"
+          className="caps button bg-darken-3 h3 mt1 p2 mr2"
           disabled={this.state.submitting}
           onClick={::this.handleCancelClick}>
           Cancelar
         </button>
+      )
+    }
+  }
+
+  renderNameLength() {
+    const { data: {name} } = this.props
+    if(name && name.length > 0) {
+      return(
+        <div className={classnames('right h3', (name.length > 90 ? 'red' : null))}>{100 - name.length}</div>
+      )
+    }
+  }
+
+  renderGoalLength() {
+    const { data: {goal} } = this.props
+    if(goal && goal.length > 0) {
+      return(
+        <div className={classnames('right h3', (goal.length > 490 ? 'red' : null))}>{500 - goal.length}</div>
       )
     }
   }
@@ -109,7 +134,8 @@ export default class MobilizationBasicsForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h4 caps bold mb1">Nome</label>
+        <label className="block h4 caps bold mb1 left">Nome</label>
+        { this.renderNameLength() }
         {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
         <input
           type="text"
@@ -120,7 +146,8 @@ export default class MobilizationBasicsForm extends React.Component {
           onChange={handleChange('name')}
           onBlur={handleBlur('name')} />
 
-        <label className="block h4 caps bold mb1">Objetivo</label>
+        <label className="block h4 caps bold mb1 left">Objetivo</label>
+        { this.renderGoalLength() }
         {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
         <textarea
           className="field-light block h3 full-width mt1 mb2"
@@ -135,7 +162,7 @@ export default class MobilizationBasicsForm extends React.Component {
           {this.renderCancelButton()}
           <input
             type="submit"
-            className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? 'col col-3' : 'full-width'))}
+            className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? null : 'full-width'))}
             disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>

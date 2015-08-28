@@ -28,7 +28,9 @@ export default class ShowMobilization extends React.Component {
 
   render(){
     const { mobilization, blocks } = this.props
-    const className = classnames("flex-auto", mobilization.color_scheme, mobilization.font_set)
+    const { color_scheme, header_font, body_font } = mobilization
+    const className = classnames('flex-auto', color_scheme, `${header_font}-header`, `${body_font}-body`)
+
     return (
       <div className={className}>
         {

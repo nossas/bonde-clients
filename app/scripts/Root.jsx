@@ -23,6 +23,8 @@ import ShowMobilization from './pages/ShowMobilization.jsx'
 import MobilizationBasics from './pages/MobilizationBasics.jsx'
 import MobilizationCity from './pages/MobilizationCity.jsx'
 import MobilizationAnalytics from './pages/MobilizationAnalytics.jsx'
+import FormWidgetFields from './pages/FormWidgetFields.jsx'
+import FormWidgetForm from './pages/FormWidgetForm.jsx'
 
 // Components
 import MobilizationsMenu from './components/MobilizationsMenu.jsx'
@@ -95,6 +97,8 @@ function renderRoutes(history) {
             <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" components={{main: FormWidgetFields, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" components={{main: FormWidgetForm, sidebar: MobilizationMenu, topMenu: TopMenu}} />
           </Route>
         </Route>
       </Route>

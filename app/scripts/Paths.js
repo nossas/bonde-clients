@@ -41,3 +41,11 @@ export function analyticsMobilization(id) {
 export function newMobilizationBlock(mobilization_id) {
   return `/mobilizations/${mobilization_id}/blocks/new`
 }
+
+export function fieldsMobilizationWidget(mobilization_id, widget_id) {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/fields`
+}
+
+export function formMobilizationWidget(mobilization_id, widget_id) {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/form`
+}
