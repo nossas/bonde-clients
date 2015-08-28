@@ -1,8 +1,8 @@
 import React from 'react'
+import * as ReactAddons from 'react/addons'
 import classnames from 'classnames'
-import { Loading } from './'
-import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
+import { FormWidgetInputForm } from './'
+const ReactTransitionGroup = ReactAddons.addons.TransitionGroup
 
 export default class FormWidgetInput extends React.Component {
   constructor(props, context) {
@@ -10,18 +10,7 @@ export default class FormWidgetInput extends React.Component {
     const { field } = this.props
     this.state = {
       hasMouseOver: false,
-      editing: false,
-      loading: false,
-      kind: field.kind,
-      label: field.label,
-      placeholder: field.placeholder,
-      required: field.required
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.state.loading && this.props.field != nextProps.field) {
-      this.setState({loading: false})
+      editing: false
     }
   }
 
@@ -41,205 +30,16 @@ export default class FormWidgetInput extends React.Component {
     }
   }
 
-  handleLabelChange(event) {
-    this.setState({label: event.target.value})
-  }
-
-  handlePlaceholderChange(event) {
-    this.setState({placeholder: event.target.value})
-  }
-
-  handleRequiredChange(event) {
-    this.setState({required: event.target.value})
-  }
-
-  handleKindChange(event) {
-    this.setState({kind: event.target.value})
-  }
-
-  updateSettings(newFields) {
-    const { dispatch, mobilization, widget } = this.props
-    const { settings } = widget
-    const { fields } = settings
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({
-      loading: true,
-      editing: false
-    })
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      widget: { settings: {
-        ...settings, 
-        fields: newFields
-      } }
-    })
-  }
-
-  handleCancel(event) {
-    event.stopPropagation()
-    const { field } = this.props
-    this.setState({
-      editing: false,
-      kind: field.kind,
-      label: field.label,
-      placeholder: field.placeholder,
-      required: field.required
-    })
-  }
-
-  handleSave(event) {
-    event.stopPropagation()
-    const { fields } = this.props.widget.settings
-    const newFields = fields.map((field) => {
-      if(field.uid == this.props.field.uid) {
-        return {
-          uid: field.uid,
-          kind: this.state.kind,
-          label: this.state.label,
-          placeholder: this.state.placeholder,
-          required: this.state.required
-        }
-      } else {
-        return field
-      }
-    })
-    this.updateSettings(newFields)
-  }
-
-  handleMoveUp(event) {
-    event.stopPropagation()
-    const { fields } = this.props.widget.settings
-    const newFields = fields.map((field, index) => {
-      if (index + 1 < fields.length && fields[index + 1].uid == this.props.field.uid) {
-        return this.props.field
-      } else if (field.uid == this.props.field.uid) {
-        return fields[index - 1]
-      } else {
-        return field
-      }
-    })
-    this.updateSettings(newFields)
-  }
-
-  handleMoveDown(event) {
-    event.stopPropagation()
-    const { fields } = this.props.widget.settings
-    const newFields = fields.map((field, index) => {
-      if (index > 0 && fields[index - 1].uid == this.props.field.uid) {
-        return this.props.field
-      } else if (field.uid == this.props.field.uid) {
-        return fields[index + 1]
-      } else {
-        return field
-      }
-    })
-    this.updateSettings(newFields)
-  }
-
-  handleRemove(event) {
-    event.stopPropagation()
-    if (confirm("Você tem certeza que quer remover este campo?")) {
-      const { fields } = this.props.widget.settings
-      const newFields = fields.filter(field =>
-        field.uid != this.props.field.uid
-      )
-      this.updateSettings(newFields)
-    }
+  handleCloseForm() {
+    this.setState({editing: false})
   }
 
   renderForm(){
-    const { canMoveUp, canMoveDown, uid } = this.props
-    return(
-      <div id={"form-" + uid} className={classnames("border p2 mb3 bg-white clearfix")}>
-        <div className="col col-6">
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Título do campo</label>
-            </div>
-            <div className="col col-8">
-              <input 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                type="text"
-                value={this.state.label}
-                onChange={::this.handleLabelChange} />
-            </div>
-          </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Texto de apoio</label>
-            </div>
-            <div className="col col-8">
-              <input 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                type="text"
-                value={this.state.placeholder}
-                onChange={::this.handlePlaceholderChange} />
-            </div>
-          </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Tipo de campo</label>
-            </div>
-            <div className="col col-8">
-              <select 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                onChange={::this.handleKindChange}
-                value={this.state.kind}>
-                <option value="text">Texto</option>
-                <option value="email">E-mail</option>
-                <option value="number">Número</option>
-              </select>
-            </div>
-          </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Obrigatório</label>
-            </div>
-            <div className="col col-8">
-              <select 
-                className="field-light mr3"
-                style={{height: '52px'}}
-                onChange={::this.handleRequiredChange}
-                value={this.state.required}>
-                <option value="false">Não</option>
-                <option value="true">Sim</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="col col-6 px3">
-          <div>
-            <button disabled={!canMoveUp} className="button button-transparent p2 mr1" onClick={::this.handleMoveUp}>
-              <i className="fa fa-chevron-up mr1" />
-              Mover para cima
-            </button>
-          </div>
-          <div>
-            <button disabled={!canMoveDown} className="button button-transparent p2 mr1" onClick={::this.handleMoveDown}>
-              <i className="fa fa-chevron-down mr1" />
-              Mover para baixo
-            </button>
-          </div>
-          <div>
-            <button className="button button-transparent p2" onClick={::this.handleRemove}>
-              <i className="fa fa-trash mr1" />
-              Remover
-            </button>
-          </div>
-          <div className="mt1">
-            <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
-              Cancelar
-            </button>
-            <button className="button caps bg-aqua p2 mr2" onClick={::this.handleSave}>
-              Salvar
-            </button>
-          </div>
-        </div>
-      </div>
+    const { uid } = this.props
+    return (
+      <ReactTransitionGroup>
+        <FormWidgetInputForm {...this.props} onClose={::this.handleCloseForm} key={'form-' + uid} />
+      </ReactTransitionGroup>
     )
   }
 
@@ -267,17 +67,8 @@ export default class FormWidgetInput extends React.Component {
           style={(editable || configurable ? {cursor: 'pointer'} : null)}
           placeholder={field.placeholder}
           type={field.kind}/>
-        { this.renderLoading() }
       </div>
     )
-  }
-
-  renderLoading() {
-    if (this.state.loading) {
-      return (
-        <Loading />
-      )
-    }
   }
 
   render() {
