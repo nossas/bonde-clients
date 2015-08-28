@@ -19,6 +19,7 @@ export default class FormWidgetForm extends React.Component {
     this.state = {
       initializing: true,
       submitting: false,
+      hasSubmitted: false,
       error: null
     }
     this.props.initializeForm({callToAction: null, buttonText: null, countText: null, emailText: null })
@@ -39,6 +40,7 @@ export default class FormWidgetForm extends React.Component {
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
+      this.state.submitting && this.setState({hasSubmitted: true})
     }
   }
 
@@ -49,6 +51,7 @@ export default class FormWidgetForm extends React.Component {
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
+    dirty: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
@@ -67,7 +70,7 @@ export default class FormWidgetForm extends React.Component {
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization } = this.props
-    this.setState({ submitting: true, error: null })
+    this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidget({
@@ -81,6 +84,7 @@ export default class FormWidgetForm extends React.Component {
           email_text: data.emailText
         } }
       })
+      this.props.initializeForm({callToAction: data.callToAction, buttonText: data.buttonText, countText: data.countText, emailText: data.emailText })
     } else {
       touchAll()
       this.setState({ submitting: false })
@@ -101,7 +105,8 @@ export default class FormWidgetForm extends React.Component {
       errors: { callToAction: callToActionError, buttonText: buttonTextError, countText: countTextError, emailText: emailTextError },
       touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched, countText: countTextTouched, emailText: emailTextTouched },
       handleChange,
-      handleBlur
+      handleBlur,
+      dirty
     } = this.props
 
     return (
@@ -158,11 +163,13 @@ export default class FormWidgetForm extends React.Component {
           <input
             type="submit"
             className={classnames("caps button bg-aqua h3 mt1 p2")}
-            disabled={this.state.submitting}
+            disabled={this.state.submitting || (!dirty)}
             value={this.state.submitting ? "Salvando..." : "Salvar"} />
         </div>
 
         {::this.renderErrorMessage()}
+        { this.state.hasSubmitted && !dirty &&
+          <div className="green mt2">Configurações do formulário atualizadas!</div> }
       </form>
     )
   }

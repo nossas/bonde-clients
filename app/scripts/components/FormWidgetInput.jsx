@@ -30,7 +30,6 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleMouseOut() {
-    console.log('out')
     this.setState({hasMouseOver: false})
   }
 

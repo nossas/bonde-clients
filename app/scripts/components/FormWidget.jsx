@@ -88,7 +88,7 @@ export default class FormWidget extends React.Component {
         <div
           className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
           style={{zIndex: 9998}}>
-          <div className="center full-width">Clique para editar</div>
+          <div className="center full-width white">Clique para editar</div>
         </div>
       )
     }
