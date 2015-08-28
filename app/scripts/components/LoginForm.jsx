@@ -6,7 +6,7 @@ import { Navigation } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../Paths'
-import * as AuthActions from './../actions/AuthActions'
+// import * as AuthActions from './../actions/AuthActions'
 
 function loginValidation(data) {
   const errors = { valid: true }
@@ -54,9 +54,9 @@ export default class LoginForm extends React.Component {
     this.setState({ auth: { submitting: true, error: null }})
 
     if (valid) {
-      dispatch(AuthActions.login(data))
-        .then(() => this.transitionTo(Paths.mobilizations()))
-        .fail((state) => this.setState({ auth: state }))
+      // dispatch(AuthActions.login(data))
+      //   .then(() => this.transitionTo(Paths.mobilizations()))
+      //   .fail((state) => this.setState({ auth: state }))
     } else {
       touchAll()
       this.setState({ auth: { submitting: false } })

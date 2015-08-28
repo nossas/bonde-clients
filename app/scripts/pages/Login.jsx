@@ -1,5 +1,6 @@
 import React from 'react'
-import { TopMenu, LoginForm } from './../components'
+import TopMenu from './../components/TopMenu.jsx'
+import LoginForm from './../components/LoginForm.jsx'
 
 export default class Login extends React.Component {
   render() {
