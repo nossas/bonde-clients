@@ -12,7 +12,7 @@ function mobilizationBasicsValidation(data) {
     errors.name = 'Insira o nome da mobilização'
     errors.valid = false
   } else if (data.name.length > 100) {
-    errors.name = 'Tamanho máximo atingido'
+    errors.name = 'Seu título está muito longo!'
     errors.valid = false
   }
 
@@ -20,7 +20,7 @@ function mobilizationBasicsValidation(data) {
     errors.goal = 'Insira o objetivo da mobilização'
     errors.valid = false
   } else if (data.goal.length > 500) {
-    errors.goal = 'Tamanho máximo atingido'
+    errors.goal = 'O limite de caracteres foi atingido.'
     errors.valid = false
   }
   return errors
@@ -103,6 +103,24 @@ export default class MobilizationBasicsForm extends React.Component {
     }
   }
 
+  renderNameLength() {
+    const { data: {name} } = this.props
+    if(name && name.length > 0) {
+      return(
+        <div className={classnames('right h3', (name.length > 90 ? 'red' : null))}>{100 - name.length}</div>
+      )
+    }
+  }
+
+  renderGoalLength() {
+    const { data: {goal} } = this.props
+    if(goal && goal.length > 0) {
+      return(
+        <div className={classnames('right h3', (goal.length > 490 ? 'red' : null))}>{500 - goal.length}</div>
+      )
+    }
+  }
+
   renderForm() {
     const {
       data: { name, goal },
@@ -116,7 +134,8 @@ export default class MobilizationBasicsForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h4 caps bold mb1">Nome</label>
+        <label className="block h4 caps bold mb1 left">Nome</label>
+        { this.renderNameLength() }
         {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
         <input
           type="text"
@@ -127,7 +146,8 @@ export default class MobilizationBasicsForm extends React.Component {
           onChange={handleChange('name')}
           onBlur={handleBlur('name')} />
 
-        <label className="block h4 caps bold mb1">Objetivo</label>
+        <label className="block h4 caps bold mb1 left">Objetivo</label>
+        { this.renderGoalLength() }
         {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
         <textarea
           className="field-light block h3 full-width mt1 mb2"
