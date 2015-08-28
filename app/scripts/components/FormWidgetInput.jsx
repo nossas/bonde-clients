@@ -149,9 +149,9 @@ export default class FormWidgetInput extends React.Component {
   }
 
   renderForm(){
-    const { canMoveUp, canMoveDown } = this.props
+    const { canMoveUp, canMoveDown, uid } = this.props
     return(
-      <div className="border p2 mb3 bg-white clearfix">
+      <div id={"form-" + uid} className={classnames("border p2 mb3 bg-white clearfix")}>
         <div className="col col-6">
           <div className="flex flex-center mb2">
             <div className="col col-4">

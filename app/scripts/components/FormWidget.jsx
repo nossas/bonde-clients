@@ -53,6 +53,7 @@ export default class FormWidget extends React.Component {
         <FormWidgetInput
           {...this.props}
           key={field.uid}
+          uid={field.uid}
           canMoveUp={index != 0}
           canMoveDown={index != fields.length - 1}
           field={field} />
@@ -83,7 +84,8 @@ export default class FormWidget extends React.Component {
   }
 
   renderOverlay() {
-    if(this.state.hasMouseOver) {
+    const { editable, configurable } = this.props
+    if(editable && !configurable && this.state.hasMouseOver) {
       return(
         <div
           className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
