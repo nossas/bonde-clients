@@ -10,9 +10,24 @@ import * as Paths from '../Paths'
 @reactMixin.decorate(Navigation)
 
 export default class FormWidget extends React.Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      hasMouseOver: false
+    }
+  }
+
   fields() {
     const { settings } = this.props.widget
     return (settings && settings.fields ? settings.fields : [])
+  }
+
+  handleMouseEnter() {
+    this.setState({hasMouseOver: true})
+  }
+
+  handleMouseLeave() {
+    this.setState({hasMouseOver: false})
   }
 
   handleClick() {
@@ -67,15 +82,33 @@ export default class FormWidget extends React.Component {
     }
   }
 
+  renderOverlay() {
+    if(this.state.hasMouseOver) {
+      return(
+        <div
+          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
+          style={{zIndex: 9998}}>
+          <div className="center full-width">Clique para editar</div>
+        </div>
+      )
+    }
+  }
+
   render() {
     const { editable } = this.props
     return(
       <div>
-        <div className={classnames("widget", (editable ? 'border p2' : null))} style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)} onClick={::this.handleClick}>
+        <div
+          className={classnames("widget relative", (editable ? 'border p2' : null))}
+          style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
+          onMouseEnter={::this.handleMouseEnter}
+          onMouseLeave={::this.handleMouseLeave}
+          onClick={::this.handleClick}>
           { this.renderCallToAction() }
           { this.renderFields() }
           { this.renderButton() }
           { this.renderCount() }
+          { this.renderOverlay() }
         </div>
       </div>
     )
