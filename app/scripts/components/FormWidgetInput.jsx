@@ -30,6 +30,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleMouseOut() {
+    console.log('out')
     this.setState({hasMouseOver: false})
   }
 
@@ -259,7 +260,7 @@ export default class FormWidgetInput extends React.Component {
     const { field, editable, configurable } = this.props
 
     return(
-      <div className="mb3" onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut} style={(editable || configurable ? {cursor: 'pointer'} : null)} onClick={::this.handleClick}>
+      <div className="mb3" onMouseEnter={::this.handleMouseOver} onMouseLeave={::this.handleMouseOut} style={(editable || configurable ? {cursor: 'pointer'} : null)} onClick={::this.handleClick}>
         <label className="block h4 caps bold mb1 left" style={(editable || configurable ? {cursor: 'pointer'} : null)}>{field.label}</label>
         { this.renderInstructions() }
         <input 
