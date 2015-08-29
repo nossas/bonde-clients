@@ -5,7 +5,7 @@ import * as BlockActions from './../actions/BlockActions'
 import * as WidgetActions from './../actions/WidgetActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import ua from 'universal-analytics'
+// import ua from 'universal-analytics'
 
 @connect(state => ({
   blocks: state.blocks,
@@ -15,7 +15,7 @@ import ua from 'universal-analytics'
 export default class ShowMobilization extends React.Component {
   constructor(props, context){
     super(props, context)
-    ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
+    // ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
   }
 
   componentDidMount(){
