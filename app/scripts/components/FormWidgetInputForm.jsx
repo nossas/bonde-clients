@@ -69,6 +69,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleCancel(event) {
+    event.preventDefault()
     event.stopPropagation()
     const { field, uid } = this.props
     this.setState({
@@ -83,6 +84,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleSave(event) {
+    event.preventDefault()
     event.stopPropagation()
     const { fields } = this.props.widget.settings
     const newFields = fields.map((field) => {
@@ -102,6 +104,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleMoveUp(event) {
+    event.preventDefault()
     event.stopPropagation()
     const { fields } = this.props.widget.settings
     const newFields = fields.map((field, index) => {
@@ -117,6 +120,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleMoveDown(event) {
+    event.preventDefault()
     event.stopPropagation()
     const { fields } = this.props.widget.settings
     const newFields = fields.map((field, index) => {
@@ -132,6 +136,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleRemove(event) {
+    event.preventDefault()
     event.stopPropagation()
     if (confirm("Você tem certeza que quer remover este campo?")) {
       const { fields } = this.props.widget.settings
@@ -207,24 +212,24 @@ export default class FormWidgetInput extends React.Component {
         </div>
         <div className="col col-6 px3">
           <div>
-            <button disabled={!canMoveUp} className="button button-transparent p2 mr1" onClick={::this.handleMoveUp}>
+            <button disabled={!canMoveUp} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveUp}>
               <i className="fa fa-chevron-up mr1" />
               Mover para cima
             </button>
           </div>
           <div>
-            <button disabled={!canMoveDown} className="button button-transparent p2 mr1" onClick={::this.handleMoveDown}>
+            <button disabled={!canMoveDown} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveDown}>
               <i className="fa fa-chevron-down mr1" />
               Mover para baixo
             </button>
           </div>
           <div>
-            <button className="button button-transparent p2" onClick={::this.handleRemove}>
+            <button className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleRemove}>
               <i className="fa fa-trash mr1" />
               Remover
             </button>
           </div>
-          <div className="mt1">
+          <div className="mt1 ml2">
             <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
               Cancelar
             </button>
