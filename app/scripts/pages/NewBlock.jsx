@@ -134,16 +134,15 @@ export default class NewBlock extends React.Component {
           </div>
           <div className="clearfix">
             <button
-              className="button bg-darken-3 rounded white button-transparent mr1"
+              className="button bg-darken-3 rounded white caps button-transparent mr1"
               disabled={!!this.state.uploadProgress}
               onClick={::this.handleCancelClick}>
               Cancelar
             </button>
             <button
-              className="button bg-aqua"
+              className="button bg-aqua caps"
               disabled={!!this.state.uploadProgress}
               onClick={::this.handleAddBlockClick}>
-              <i className="fa fa-cloud-upload mr1" />
               Adicionar
             </button>
           </div>

@@ -57,8 +57,8 @@ export default class Block extends React.Component {
             </div>
           </div>
           <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
-            <button className="button button-transparent bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}><i className="fa fa-cloud-upload mr1" />Salvar</button>
-            <button className="button button-transparent bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}><i className="fa fa-undo mr1" />Cancelar</button>
+            <button className="button button-transparent caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
+            <button className="button button-transparent caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
           </div>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
