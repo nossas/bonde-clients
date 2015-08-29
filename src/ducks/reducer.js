@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import mobilizations from './../../app/scripts/reducers/mobilizations'
 import blocks from './../../app/scripts/reducers/blocks'
 import widgets from './../../app/scripts/reducers/widgets'
+import auth from './../../app/scripts/reducers/auth'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
+const loginForm = createFormReducer('loginForm', ['email', 'password'])
 
 export default combineReducers({
   mobilizations,
@@ -14,5 +16,7 @@ export default combineReducers({
   mobilizationCity,
   mobilizationAnalytics,
   blocks,
-  widgets
+  widgets,
+  loginForm,
+  auth
 });

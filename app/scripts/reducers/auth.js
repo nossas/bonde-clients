@@ -15,7 +15,7 @@ export default function auth(state = [], action) {
       }
     case AUTH_LOGIN_SUCCESS:
       return {...state,
-        user: user,
+        user: action.data.data,
         submitting: false,
         error: null
       }
