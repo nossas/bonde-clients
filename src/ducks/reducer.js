@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
+import mobilizations from './../../app/scripts/reducers/mobilizations'
 
 export default combineReducers({
-  auth
+  mobilizations
 });
