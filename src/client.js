@@ -7,13 +7,11 @@ import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';
 import queryString from 'query-string';
 import createStore from './redux/create';
-import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 const history = new BrowserHistory();
-const client = new ApiClient();
 
 const dest = document.getElementById('content');
-const store = createStore(client, window.__data);
+const store = createStore(window.__data);
 const search = document.location.search;
 const query = search && queryString.parse(search);
 const location = new Location(document.location.pathname, query);
