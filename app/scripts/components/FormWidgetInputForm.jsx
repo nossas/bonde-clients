@@ -199,14 +199,10 @@ export default class FormWidgetInput extends React.Component {
               <label className="h5 bold">Obrigatório</label>
             </div>
             <div className="col col-8">
-              <select 
-                className="field-light mr3"
-                style={{height: '52px'}}
-                onChange={::this.handleRequiredChange}
-                value={this.state.required}>
-                <option value="false">Não</option>
-                <option value="true">Sim</option>
-              </select>
+              <input id={"required-true-" + uid} type="radio" name={"required-" + uid} value='true' checked={this.state.required == 'true'} onChange={::this.handleRequiredChange} />
+              <label className="mr2" htmlFor={"required-true-" + uid}>Sim</label>
+              <input id={"required-false-" + uid} type="radio" name={"required-" + uid} value='false' checked={this.state.required == 'false'} onChange={::this.handleRequiredChange} />
+              <label htmlFor={"required-false-" + uid}>Não</label>
             </div>
           </div>
         </div>
