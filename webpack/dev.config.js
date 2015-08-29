@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 var assetsPath = path.resolve(__dirname, '../static/dist');
 var host = 'localhost';
-var port = parseInt(process.env.PORT) + 1 || 3001;
+var port = parseInt(process.env.PORT) + 1 || 3002;
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -48,6 +48,10 @@ module.exports = {
     new webpack.IgnorePlugin(/\.json$/),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
+      'process.env': {
+        'BASE_URL': '"http://localhost:3000"',
+        'GOOGLE_ANALYTICS_CODE': '"UA-27626466-6"'
+      },
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,

@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     isProduction: false,
-    port: 3000,
+    port: 3001,
     apiPort: 3030,
     app: {
       name: 'React Redux Example Development'
