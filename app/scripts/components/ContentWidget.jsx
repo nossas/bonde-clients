@@ -114,8 +114,7 @@ export default class ContentWidget extends React.Component {
           <div className={classnames("right", "mt1", {"display-none": !editing})}>
             <button
               onClick={::this.save}
-              className="button button-transparent bg-darken-4 white rounded">
-              <i className="fa fa-cloud-upload mr1" />
+              className="button button-transparent caps bg-darken-4 white rounded">
               Salvar
             </button>
           </div>

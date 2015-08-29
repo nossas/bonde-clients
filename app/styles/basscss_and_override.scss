@@ -14,3 +14,11 @@ form .button { height: 3rem; }
 .field-light:invalid:focus { border-color: $blue; }
 .field-light.has-error { border-color: $red !important; }
 .button.is-disabled, .button:disabled { opacity: .25; }
+
+.hover {
+  opacity: 0.8;
+}
+
+.hover:hover {
+  opacity: 1;
+}
