@@ -22,6 +22,7 @@ export function addMobilization(params) {
     $.ajax(`${BASE_URL}/mobilizations`, {
       method: 'post',
       data: { mobilization: params.mobilization },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: ADD_MOBILIZATION,
@@ -38,6 +39,7 @@ export function editMobilization(params) {
     $.ajax(`${BASE_URL}/mobilizations/${params.id}`, {
       method: 'put',
       data: { mobilization: params.mobilization },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_MOBILIZATION,

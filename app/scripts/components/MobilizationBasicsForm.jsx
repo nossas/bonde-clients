@@ -26,7 +26,7 @@ function mobilizationBasicsValidation(data) {
   return errors
 }
 
-@connect(state => ({ form: state.mobilizationBasics }))
+@connect(state => ({ form: state.mobilizationBasics, auth: state.auth }))
 @reduxForm('mobilizationBasics', mobilizationBasicsValidation)
 @reactMixin.decorate(Navigation)
 
@@ -59,7 +59,7 @@ export default class MobilizationBasicsForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     const mobilizationAction = (mobilization ? MobilizationActions.editMobilization : MobilizationActions.addMobilization)
     const mobilizationId = (mobilization ? mobilization.id : null)
     const defaultData = (mobilization ? {} : {color_scheme: 'meurio-scheme'})
@@ -69,7 +69,8 @@ export default class MobilizationBasicsForm extends React.Component {
       dispatch(mobilizationAction({
         id: mobilizationId,
         transitionTo: this.transitionTo.bind(this),
-        mobilization: {...data, ...defaultData}
+        mobilization: {...data, ...defaultData},
+        credentials: auth.credentials
       }))
     } else {
       touchAll()

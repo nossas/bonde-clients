@@ -19,7 +19,7 @@ function mobilizationCityValidation(data) {
   return errors
 }
 
-@connect(state => ({ form: state.mobilizationCity }))
+@connect(state => ({ form: state.mobilizationCity, auth: state.auth }))
 @reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
@@ -59,12 +59,13 @@ export default class MobilizationCity extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
-        mobilization: {color_scheme: data.colorScheme}
+        mobilization: {color_scheme: data.colorScheme},
+        credentials: auth.credentials
       }))
     } else {
       touchAll()
