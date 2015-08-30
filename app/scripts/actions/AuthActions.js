@@ -20,7 +20,14 @@ export function login(data) {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: AUTH_LOGIN_SUCCESS,
-          data
+          user: data.data,
+          credentials: {
+            "Access-Token": jqXHR.getResponseHeader('Access-Token'),
+            "Expiry": jqXHR.getResponseHeader('Expiry'),
+            "Token-Type": jqXHR.getResponseHeader('Token-Type'),
+            "Uid": jqXHR.getResponseHeader('Uid'),
+            "Client": jqXHR.getResponseHeader('Client')
+          }
         })
       },
       error: function(jqXHR, textStatus, errorThrown){
