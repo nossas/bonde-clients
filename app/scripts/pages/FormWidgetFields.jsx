@@ -71,6 +71,7 @@ export default class FormWidgetFields extends React.Component {
           <p className="h5 mb3">
             Adicione, remova, edite e ordene os campos de acordo com as necessidades da sua ação.
           </p>
+          { this.fields().length == 0 && <div className="mb3">Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.</div>}
           <FormWidget {...this.props} widget={widget} configurable={true} />
           <button className="button bg-aqua caps p2" onClick={::this.handleAddTextField}>
             <i className="fa fa-plus mr2" />
