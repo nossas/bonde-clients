@@ -154,7 +154,7 @@ describe('NewBlock', () => {
     it('should render buttons not disabled when not uploading', () => {
       component.setState({uploadProgress: null})
       const buttons = TestUtils.scryRenderedDOMComponentsWithTag(component, 'button')
-      expect(buttons).to.have.length(2)
+      expect(buttons).to.have.length(3)
       expect(buttons[0].getDOMNode().textContent.trim()).to.equal('Cancelar')
       expect(buttons[1].getDOMNode().textContent.trim()).to.equal('Adicionar')
       expect(buttons[0].props.disabled).to.be.false

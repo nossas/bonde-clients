@@ -34,6 +34,14 @@ export default class FormWidgetInput extends React.Component {
     }
   }
 
+  dirty() {
+    const { field } = this.props
+    return field.kind != this.state.kind ||
+           field.label != this.state.label ||
+           field.placeholder != this.state.placeholder ||
+           field.required != this.state.required
+  }
+
   handleLabelChange(event) {
     this.setState({label: event.target.value})
   }
@@ -147,93 +155,109 @@ export default class FormWidgetInput extends React.Component {
     }
   }
 
+  handleOverlayClick(event) {
+    console.log('aki')
+    event.preventDefault()
+    event.stopPropagation()
+    const dirty = this.dirty()
+    if (!dirty || (dirty && confirm("Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?"))) {
+      this.handleCancel(event)
+    }
+  }
+
   render(){
     const { canMoveUp, canMoveDown, uid } = this.props
     return(
-      <div id={"form-" + uid} className={classnames("border p2 mb3 bg-white clearfix")}>
-        <div className="col col-6">
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Título do campo</label>
+      <div>
+        <div id={"form-" + uid} className={classnames("border p2 mb3 bg-white clearfix relative")} style={{zIndex: 9999}}>
+          <div className="col col-6">
+            <div className="flex flex-center mb2">
+              <div className="col col-4">
+                <label className="h5 bold">Título do campo</label>
+              </div>
+              <div className="col col-8">
+                <input 
+                  className="field-light block full-width"
+                  style={{height: '52px'}}
+                  type="text"
+                  value={this.state.label}
+                  onChange={::this.handleLabelChange} />
+              </div>
             </div>
-            <div className="col col-8">
-              <input 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                type="text"
-                value={this.state.label}
-                onChange={::this.handleLabelChange} />
+            <div className="flex flex-center mb2">
+              <div className="col col-4">
+                <label className="h5 bold">Texto de apoio</label>
+              </div>
+              <div className="col col-8">
+                <input 
+                  className="field-light block full-width"
+                  style={{height: '52px'}}
+                  type="text"
+                  value={this.state.placeholder}
+                  onChange={::this.handlePlaceholderChange} />
+              </div>
+            </div>
+            <div className="flex flex-center mb2">
+              <div className="col col-4">
+                <label className="h5 bold">Tipo de campo</label>
+              </div>
+              <div className="col col-8">
+                <select 
+                  className="field-light block full-width"
+                  style={{height: '52px'}}
+                  onChange={::this.handleKindChange}
+                  value={this.state.kind}>
+                  <option value="text">Texto</option>
+                  <option value="email">E-mail</option>
+                  <option value="number">Número</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex flex-center mb2">
+              <div className="col col-4">
+                <label className="h5 bold">Obrigatório</label>
+              </div>
+              <div className="col col-8">
+                <input id={"required-true-" + uid} type="radio" name={"required-" + uid} value='true' checked={this.state.required == 'true'} onChange={::this.handleRequiredChange} />
+                <label className="mr2" htmlFor={"required-true-" + uid}>Sim</label>
+                <input id={"required-false-" + uid} type="radio" name={"required-" + uid} value='false' checked={this.state.required == 'false'} onChange={::this.handleRequiredChange} />
+                <label htmlFor={"required-false-" + uid}>Não</label>
+              </div>
             </div>
           </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Texto de apoio</label>
+          <div className="col col-6 px3">
+            <div>
+              <button disabled={!canMoveUp} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveUp}>
+                <i className="fa fa-chevron-up mr1" />
+                Mover para cima
+              </button>
             </div>
-            <div className="col col-8">
-              <input 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                type="text"
-                value={this.state.placeholder}
-                onChange={::this.handlePlaceholderChange} />
+            <div>
+              <button disabled={!canMoveDown} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveDown}>
+                <i className="fa fa-chevron-down mr1" />
+                Mover para baixo
+              </button>
             </div>
-          </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Tipo de campo</label>
+            <div>
+              <button className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleRemove}>
+                <i className="fa fa-trash mr1" />
+                Remover
+              </button>
             </div>
-            <div className="col col-8">
-              <select 
-                className="field-light block full-width"
-                style={{height: '52px'}}
-                onChange={::this.handleKindChange}
-                value={this.state.kind}>
-                <option value="text">Texto</option>
-                <option value="email">E-mail</option>
-                <option value="number">Número</option>
-              </select>
-            </div>
-          </div>
-          <div className="flex flex-center mb2">
-            <div className="col col-4">
-              <label className="h5 bold">Obrigatório</label>
-            </div>
-            <div className="col col-8">
-              <input id={"required-true-" + uid} type="radio" name={"required-" + uid} value='true' checked={this.state.required == 'true'} onChange={::this.handleRequiredChange} />
-              <label className="mr2" htmlFor={"required-true-" + uid}>Sim</label>
-              <input id={"required-false-" + uid} type="radio" name={"required-" + uid} value='false' checked={this.state.required == 'false'} onChange={::this.handleRequiredChange} />
-              <label htmlFor={"required-false-" + uid}>Não</label>
+            <div className="mt1 ml2">
+              <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
+                Cancelar
+              </button>
+              <button disabled={this.state.loading} className="button caps bg-aqua p2 mr2" onClick={::this.handleSave}>
+                {this.state.loading ? 'Salvando...' : 'Salvar'}
+              </button>
             </div>
           </div>
         </div>
-        <div className="col col-6 px3">
-          <div>
-            <button disabled={!canMoveUp} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveUp}>
-              <i className="fa fa-chevron-up mr1" />
-              Mover para cima
-            </button>
-          </div>
-          <div>
-            <button disabled={!canMoveDown} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveDown}>
-              <i className="fa fa-chevron-down mr1" />
-              Mover para baixo
-            </button>
-          </div>
-          <div>
-            <button className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleRemove}>
-              <i className="fa fa-trash mr1" />
-              Remover
-            </button>
-          </div>
-          <div className="mt1 ml2">
-            <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
-              Cancelar
-            </button>
-            <button disabled={this.state.loading} className="button caps bg-aqua p2 mr2" onClick={::this.handleSave}>
-              {this.state.loading ? 'Salvando...' : 'Salvar'}
-            </button>
-          </div>
-        </div>
+        <div
+          className="fixed top-0 right-0 bottom-0 left-0"
+          onClick={::this.handleOverlayClick}
+          style={{zIndex: 9998}} />
       </div>
     )
   }

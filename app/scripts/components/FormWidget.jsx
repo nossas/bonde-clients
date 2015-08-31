@@ -56,6 +56,7 @@ export default class FormWidget extends React.Component {
           uid={field.uid}
           canMoveUp={index != 0}
           canMoveDown={index != fields.length - 1}
+          initializeEditing={this.props.hasNewField && index == fields.length - 1}
           field={field} />
       )
     }.bind(this))

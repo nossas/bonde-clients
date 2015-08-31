@@ -3,8 +3,9 @@ import ReactS3Uploader from 'react-s3-uploader'
 import { bindActionCreators } from 'redux'
 import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
-import { BlockMiniature, ColorPicker, Progress } from './../components'
+import { BlockMiniature, ColorPicker, Progress, CloseButton } from './../components'
 import { BLOCK_LAYOUTS } from '../constants/BlockLayouts'
+import * as Paths from '../Paths'
 
 export default class NewBlock extends React.Component {
 
@@ -103,7 +104,7 @@ export default class NewBlock extends React.Component {
 
   render(){
     return (
-      <div className={classnames("flex-auto", "bg-silver", "gray", this.props.mobilization.color_scheme)}>
+      <div className={classnames("flex-auto bg-silver gray relative", this.props.mobilization.color_scheme)}>
         <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
         <div className="py3 px4">
           <p
@@ -147,6 +148,7 @@ export default class NewBlock extends React.Component {
             </button>
           </div>
         </div>
+        <CloseButton dirty={false} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }

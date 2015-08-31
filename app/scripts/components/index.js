@@ -26,3 +26,4 @@ export { default as WYSIHTMLToolbarCreateLink } from './WYSIHTMLToolbarCreateLin
 export { default as ConfigurationsMenu } from './ConfigurationsMenu.jsx'
 export { default as FormWidgetMenu } from './FormWidgetMenu.jsx'
 export { default as TabMenuItem } from './TabMenuItem.jsx'
+export { default as CloseButton } from './CloseButton.jsx'

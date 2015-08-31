@@ -10,7 +10,7 @@ export default class FormWidgetInput extends React.Component {
     const { field } = this.props
     this.state = {
       hasMouseOver: false,
-      editing: false
+      editing: this.props.initializeEditing
     }
   }
 

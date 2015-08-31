@@ -38,6 +38,12 @@ export default class MobilizationMenu extends React.Component {
           <i className="fa fa-plus mr2" />
           Bloco de conteúdo
         </Link>
+        <Link
+          to={Paths.stylesMobilization(mobilization.id)}
+          className="silver button button-transparent full-width">
+          <i className="fa fa-paint-brush mr2" />
+          Editar Estilo
+        </Link>
         <h6 className="silver caps muted">Visualização da página</h6>
         <a
           href={Paths.mobilization(mobilization.id)}

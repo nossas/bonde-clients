@@ -8,7 +8,7 @@ export default class MobilizationBasics extends React.Component {
   render(){
     const { mobilization } = this.props
     return(
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         <ConfigurationsMenu {...this.props} />
         <div className="py3 px4">
           <MobilizationBasicsForm {...this.props} />
