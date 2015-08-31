@@ -13,7 +13,8 @@ export default class FormWidgetFields extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      loading: false
+      loading: false,
+      hasNewField: false
     }
   }
 
@@ -25,7 +26,9 @@ export default class FormWidgetFields extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.state.loading && this.widget() != this.widget(nextProps)) {
-      this.setState({loading: false})
+      this.setState({loading: false, hasNewField: true})
+    } else {
+      this.setState({hasNewField: false})
     }
   }
 
@@ -73,7 +76,7 @@ export default class FormWidgetFields extends React.Component {
             Adicione, remova, edite e ordene os campos de acordo com as necessidades da sua ação.
           </p>
           { this.fields().length == 0 && <div className="mb3">Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.</div>}
-          <FormWidget {...this.props} widget={widget} configurable={true} />
+          <FormWidget {...this.props} widget={widget} configurable={true} hasNewField={this.state.hasNewField} />
           <button className="button bg-aqua caps p2" onClick={::this.handleAddTextField}>
             <i className="fa fa-plus mr2" />
             Adicionar um campo
