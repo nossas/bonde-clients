@@ -5,7 +5,7 @@ import PubSub from 'pubsub-js'
 import $ from 'jquery'
 
 import '../../styles/main.scss'
-// import '../../../node_modules/font-awesome/css/font-awesome.css'
+import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 
 // Auth.configure({
 //   apiUrl: process.env.BASE_URL,
