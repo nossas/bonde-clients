@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { ConfigurationsMenu } from './../components'
+import { ConfigurationsMenu, CloseButton } from './../components'
 
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
@@ -118,9 +118,9 @@ export default class MobilizationAnalytics extends React.Component {
   }
 
   render(){
-    const { mobilization } = this.props
+    const { mobilization, dirty } = this.props
     return(
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         <ConfigurationsMenu {...this.props} />
         <div className="py3 px3 col col-8">
           <p className="h5">
@@ -146,6 +146,7 @@ export default class MobilizationAnalytics extends React.Component {
             </li>
           </ol>
         </div>
+        <CloseButton dirty={dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }

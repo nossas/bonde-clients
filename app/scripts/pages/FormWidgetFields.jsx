@@ -2,7 +2,8 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
-import { FormWidgetMenu, FormWidget, Loading } from './../components'
+import { FormWidgetMenu, FormWidget, Loading, CloseButton } from './../components'
+import * as Paths from '../Paths'
 
 @connect(state => ({
   widgets: state.widgets
@@ -65,7 +66,7 @@ export default class FormWidgetFields extends React.Component {
   renderFields() {
     const widget = this.widget()
     return(
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
         <div className="py3 px3">
           <p className="h5 mb3">
@@ -79,6 +80,7 @@ export default class FormWidgetFields extends React.Component {
           </button>
         </div>
         { this.renderLoading() }
+        <CloseButton dirty={false} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }

@@ -5,6 +5,8 @@ import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as MobilizationActions from './../actions/MobilizationActions'
+import * as Paths from '../Paths'
+import { CloseButton } from './'
 
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
@@ -54,6 +56,7 @@ export default class MobilizationBasicsForm extends React.Component {
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
+    dirty: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
@@ -173,9 +176,11 @@ export default class MobilizationBasicsForm extends React.Component {
   }
 
   render(){
+    const { mobilization, dirty } = this.props
     return(
       <div className="bg-white border rounded lg-col-6 mx-auto p3">
         { !this.state.initializing && this.renderForm() }
+        { mobilization && <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} /> }
       </div>
     )
   }

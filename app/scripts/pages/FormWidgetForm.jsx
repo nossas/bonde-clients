@@ -3,7 +3,8 @@ import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
-import { FormWidgetMenu, Loading } from './../components'
+import * as Paths from '../Paths'
+import { FormWidgetMenu, Loading, CloseButton } from './../components'
 import reduxForm from 'redux-form'
 
 function widgetFormValidation(data) {
@@ -175,14 +176,15 @@ export default class FormWidgetForm extends React.Component {
   }
 
   renderPage() {
-    const { widgets } = this.props
+    const { widgets, dirty } = this.props
     const widget = widgets[widgets.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
     return(
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
         <div className="py3 px3">
           { !this.state.initializing && this.renderForm() }
         </div>
+        <CloseButton dirty={dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }
