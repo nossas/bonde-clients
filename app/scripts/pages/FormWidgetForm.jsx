@@ -37,7 +37,7 @@ export default class FormWidgetForm extends React.Component {
     if(widget) {
       if(this.state.initializing) {
         const { call_to_action: callToAction, button_text: buttonText, count_text: countText, email_text: emailText } = (widget.settings || {call_to_action: null, button_text: null, count_text: null, email_text: null})
-        this.props.initializeForm({callToAction, buttonText, countText, emailText })
+        this.props.initializeForm({callToAction, buttonText, countText, emailText: (emailText || 'Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço') })
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
@@ -113,43 +113,43 @@ export default class FormWidgetForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h4 caps bold mb1">Texto acima do formulário</label>
+        <label className="block h4 caps bold mb1">Título do formulário</label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <textarea
           className="field-light block h3 full-width mt1 mb3"
-          placeholder="Chamada para ação que irá aparecer acima do seu formulário."
+          placeholder="Ex: Preencha o formulário abaixo para assinar a petição."
           style={{height: '160px'}}
           value={callToAction}
           onChange={handleChange('callToAction')}
           onBlur={handleBlur('callToAction')} />
 
-        <label className="block h4 caps bold mb1">Texto do botão de envio</label>
+        <label className="block h4 caps bold mb1">Botão</label>
         {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
         <input
           type="text"
           className="field-light block h3 full-width mt1 mb3"
-          placeholder="Texto que irá aparecer no botão de envio do seu formulário."
+          placeholder="Defina o texto do botão de confirmação do formulário."
           style={{height: '48px'}}
           value={buttonText}
           onChange={handleChange('buttonText')}
           onBlur={handleBlur('buttonText')} />
 
-        <label className="block h4 caps bold mb1">Texto do contador de envios</label>
+        <label className="block h4 caps bold mb1">Contador</label>
         {countTextError && countTextTouched && <span className="red ml2">{countTextError}</span>}
         <input
           type="text"
           className="field-light block h3 full-width mt1 mb3"
-          placeholder="Texto que irá aparecer abaixo do seu formulário no contador de envios."
+          placeholder="Defina o texto que ficará ao lado do número de pessoas que agiram."
           style={{height: '48px'}}
           value={countText}
           onChange={handleChange('countText')}
           onBlur={handleBlur('countText')} />
 
-        <label className="block h4 caps bold mb1">Texto do email</label>
+        <label className="block h4 caps bold mb1">Email de agradecimento</label>
         {emailTextError && emailTextTouched && <span className="red ml2">{emailTextError}</span>}
         <textarea
           className="field-light block h3 full-width mt1 mb3"
-          placeholder="Texto do email enviado para os assinantes do formulário."
+          placeholder="Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço."
           style={{height: '160px'}}
           value={emailText}
           onChange={handleChange('emailText')}

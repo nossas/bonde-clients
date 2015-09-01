@@ -59,9 +59,9 @@ export default class FormWidgetFields extends React.Component {
       credentials: auth.credentials,
       widget: { settings: {...settings, fields: [...fields, {
         uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)),
-        kind,
-        label: 'Título do campo',
-        placeholder: 'Preencha o texto de apoio',
+        kind: 'text',
+        label: '',
+        placeholder: '',
         required: 'false'
       }]} }
     })
@@ -74,9 +74,8 @@ export default class FormWidgetFields extends React.Component {
         <FormWidgetMenu {...this.props} widget={widget} />
         <div className="py3 px3">
           <p className="h5 mb3">
-            Adicione, remova, edite e ordene os campos de acordo com as necessidades da sua ação.
+            { this.fields().length == 0 ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.' : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.' }
           </p>
-          { this.fields().length == 0 && <div className="mb3">Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.</div>}
           <FormWidget {...this.props} widget={widget} configurable={true} hasNewField={this.state.hasNewField} />
           <button className="button bg-aqua caps p2" onClick={::this.handleAddTextField}>
             <i className="fa fa-plus mr2" />

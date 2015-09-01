@@ -12,16 +12,16 @@ export default class FormWidgetMenu extends React.Component {
 
     return(
       <div className="bg-white px3 clearfix">
-        <h2 className="mb3">Configure seu formulário</h2>
+        <h2 className="mb3">Configure o formulário da sua ação</h2>
         <div>
           <ul className="list-reset mb0">
             <TabMenuItem
               path={fieldsPath}
-              text="Campos de preenchimento"
+              text="Campos do formulário"
               isActive={fieldsPath == location.pathname} />
             <TabMenuItem
               path={formPath}
-              text="Opções do formulário"
+              text="Ajustes"
               isActive={formPath == location.pathname} />
           </ul>
         </div>

@@ -157,7 +157,6 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleOverlayClick(event) {
-    console.log('aki')
     event.preventDefault()
     event.stopPropagation()
     const dirty = this.dirty()
@@ -179,6 +178,7 @@ export default class FormWidgetInput extends React.Component {
               <div className="col col-8">
                 <input
                   className="field-light block full-width"
+                  placeholder="Ex: Email"
                   style={{height: '52px'}}
                   type="text"
                   value={this.state.label}
@@ -187,11 +187,12 @@ export default class FormWidgetInput extends React.Component {
             </div>
             <div className="flex flex-center mb2">
               <div className="col col-4">
-                <label className="h5 bold">Texto de apoio</label>
+                <label className="h5 bold">Texto de ajuda</label>
               </div>
               <div className="col col-8">
                 <input
                   className="field-light block full-width"
+                  placeholder="Ex: Insira aqui o seu email"
                   style={{height: '52px'}}
                   type="text"
                   value={this.state.placeholder}
