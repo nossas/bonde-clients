@@ -35,6 +35,7 @@ export function editBlock(params) {
     $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'put',
       data: { block: params.block },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_BLOCK,
@@ -49,6 +50,7 @@ export function removeBlock(params) {
   return dispatch => {
     $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'delete',
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: REMOVE_BLOCK,
@@ -69,6 +71,7 @@ export function moveBlockUp(params) {
           position: blocks[blocks.indexOf(block) - 1].position
         }
       },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: MOVE_BLOCK_UP,
@@ -89,6 +92,7 @@ export function moveBlockDown(params) {
           position: blocks[blocks.indexOf(block) + 1].position
         }
       },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: MOVE_BLOCK_DOWN,

@@ -162,10 +162,12 @@ export default class Block extends React.Component {
   }
 
   handleSaveEdit() {
+    const { mobilization, block, auth } = this.props
     this.setState({editingBackground: false, loading: true})
     this.bindedBlockActions.editBlock({
-      mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
+      mobilization_id: mobilization.id,
+      block_id: block.id,
+      credentials: auth.credentials,
       block: {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage
@@ -186,40 +188,46 @@ export default class Block extends React.Component {
   }
 
   handleMoveUpClick() {
+    const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.moveBlockUp({
-      mobilization_id: this.props.mobilization.id,
-      block: this.props.block,
-      blocks: this.props.blocks
+      credentials: auth.credentials,
+      mobilization_id: mobilization.id,
+      block: block,
+      blocks: blocks
     })
   }
 
   handleMoveDownClick() {
+    const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.moveBlockDown({
-      mobilization_id: this.props.mobilization.id,
-      block: this.props.block,
-      blocks: this.props.blocks
+      credentials: auth.credentials,
+      mobilization_id: mobilization.id,
+      block: block,
+      blocks: blocks
     })
   }
 
   handleToggleHiddenClick() {
+    const { mobilization, block, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.editBlock({
-      mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
-      block: {
-        hidden: !this.props.block.hidden
-      }
+      mobilization_id: mobilization.id,
+      block_id: block.id,
+      credentials: auth.credentials,
+      block: { hidden: !block.hidden }
     })
   }
 
   handleRemoveClick() {
+    const { mobilization, block, auth } = this.props
     if (confirm("Você tem certeza que quer remover este bloco?")) {
       this.setState({loading: true})
       this.bindedBlockActions.removeBlock({
-        mobilization_id: this.props.mobilization.id,
-        block_id: this.props.block.id
+        mobilization_id: mobilization.id,
+        block_id: block.id,
+        credentials: auth.credentials
       })
     }
   }
