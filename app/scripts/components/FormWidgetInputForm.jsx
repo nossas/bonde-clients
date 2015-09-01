@@ -59,7 +59,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   updateSettings(newFields) {
-    const { dispatch, mobilization, widget } = this.props
+    const { dispatch, mobilization, widget, auth } = this.props
     const { settings } = widget
     const { fields } = settings
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -69,8 +69,9 @@ export default class FormWidgetInput extends React.Component {
     bindedWidgetActions.editWidget({
       mobilization_id: mobilization.id,
       widget_id: widget.id,
+      credentials: auth.credentials,
       widget: { settings: {
-        ...settings, 
+        ...settings,
         fields: newFields
       } }
     })
@@ -176,7 +177,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h5 bold">Título do campo</label>
               </div>
               <div className="col col-8">
-                <input 
+                <input
                   className="field-light block full-width"
                   style={{height: '52px'}}
                   type="text"
@@ -189,7 +190,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h5 bold">Texto de apoio</label>
               </div>
               <div className="col col-8">
-                <input 
+                <input
                   className="field-light block full-width"
                   style={{height: '52px'}}
                   type="text"
@@ -202,7 +203,7 @@ export default class FormWidgetInput extends React.Component {
                 <label className="h5 bold">Tipo de campo</label>
               </div>
               <div className="col col-8">
-                <select 
+                <select
                   className="field-light block full-width"
                   style={{height: '52px'}}
                   onChange={::this.handleKindChange}

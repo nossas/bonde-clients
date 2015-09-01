@@ -10,6 +10,7 @@ export function editWidget(params) {
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify({ widget: params.widget }),
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_WIDGET,

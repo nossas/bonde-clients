@@ -68,12 +68,13 @@ export default class ContentWidget extends React.Component {
     this.disableEditor()
 
     if(hasChanged){
-      const { dispatch } = this.props
+      const { dispatch, auth } = this.props
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       this.setState({loading: true})
       bindedWidgetActions.editWidget({
         mobilization_id: this.props.mobilization.id,
         widget_id: this.props.widget.id,
+        credentials: auth.credentials,
         widget: {
           settings: {
             content: this.state.editor.getValue()

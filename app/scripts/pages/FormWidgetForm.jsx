@@ -70,15 +70,16 @@ export default class FormWidgetForm extends React.Component {
     event.preventDefault()
     const widget = this.widget()
     const { settings } = widget
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidget({
         mobilization_id: mobilization.id,
         widget_id: widget.id,
+        credentials: auth.credentials,
         widget: { settings: {
-          ...settings, 
+          ...settings,
           call_to_action: data.callToAction,
           button_text: data.buttonText,
           count_text: data.countText,

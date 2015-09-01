@@ -47,7 +47,7 @@ export default class FormWidgetFields extends React.Component {
   }
 
   addField(kind) {
-    const { dispatch, mobilization } = this.props
+    const { dispatch, mobilization, auth } = this.props
     const widget = this.widget()
     const { settings } = widget
     const fields = this.fields()
@@ -56,9 +56,10 @@ export default class FormWidgetFields extends React.Component {
     bindedWidgetActions.editWidget({
       mobilization_id: mobilization.id,
       widget_id: widget.id,
+      credentials: auth.credentials,
       widget: { settings: {...settings, fields: [...fields, {
-        uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)), 
-        kind, 
+        uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)),
+        kind,
         label: 'Título do campo',
         placeholder: 'Preencha o texto de apoio',
         required: 'false'
