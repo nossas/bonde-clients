@@ -38,8 +38,8 @@ export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
 }
 
-export function stylesMobilization(id) {
-  return `/mobilizations/${id}/styles`
+export function fontsMobilization(id) {
+  return `/mobilizations/${id}/fonts`
 }
 
 export function newMobilizationBlock(mobilization_id) {
