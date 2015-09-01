@@ -22,6 +22,7 @@ export function addBlock(params) {
     $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       method: 'post',
       data: { block: params.block },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         params.router.transitionTo(Paths.editMobilization(params.mobilization_id) + '?newBlock=true')
       }

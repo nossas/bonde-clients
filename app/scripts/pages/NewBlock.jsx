@@ -28,11 +28,12 @@ export default class NewBlock extends React.Component {
   }
 
   handleAddBlockClick() {
-    const { dispatch } = this.props
+    const { dispatch, auth } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     bindedBlockActions.addBlock({
       router: this.context.router,
       mobilization_id: this.props.mobilization.id,
+      credentials: auth.credentials,
       block: {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage,
