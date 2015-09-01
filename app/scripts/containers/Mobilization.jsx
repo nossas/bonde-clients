@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+@connect(state => ({ auth: state.auth }))
 export default class Mobilization extends React.Component {
   renderTopMenu() {
     return this.props.topMenu && React.cloneElement(this.props.topMenu, {...this.props})
