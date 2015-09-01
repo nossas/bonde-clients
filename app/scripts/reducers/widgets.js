@@ -8,6 +8,10 @@ export default function widgets(state = [], action) {
       )
     case actions.FETCH_WIDGETS:
       return action.widgets
+    case actions.ADD_FORM_ENTRY:
+      return state.map(widget =>
+        widget.id == action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
+      )
     default:
       return state
   }

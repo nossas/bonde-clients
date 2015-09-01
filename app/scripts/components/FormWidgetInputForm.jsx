@@ -156,7 +156,6 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleOverlayClick(event) {
-    console.log('aki')
     event.preventDefault()
     event.stopPropagation()
     const dirty = this.dirty()

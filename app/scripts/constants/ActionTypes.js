@@ -21,3 +21,6 @@ export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
 export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
+
+// Form entries actions
+export const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'

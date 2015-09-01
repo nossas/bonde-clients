@@ -76,7 +76,7 @@ export default class FormWidget extends React.Component {
     if(!configurable) {
       return(
         <div className="mt2 h3 center">
-          0
+          {widget.form_entries_count}
           &nbsp;
           {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
         </div>
