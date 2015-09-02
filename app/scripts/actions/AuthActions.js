@@ -18,16 +18,28 @@ export function login(data) {
         })
       },
       success: function(data, textStatus, jqXHR){
+        const credentials = {
+          "Access-Token": jqXHR.getResponseHeader('Access-Token'),
+          "Expiry": jqXHR.getResponseHeader('Expiry'),
+          "Token-Type": jqXHR.getResponseHeader('Token-Type'),
+          "Uid": jqXHR.getResponseHeader('Uid'),
+          "Client": jqXHR.getResponseHeader('Client')
+        }
+
+        // Create a session into the server-side rendering server
+        $.ajax(`/api/login`, {
+          method: 'post',
+          contentType: "application/json",
+          data: JSON.stringify({
+            credentials: credentials,
+            user: data.data
+          })
+        })
+
         dispatch({
           type: AUTH_LOGIN_SUCCESS,
           user: data.data,
-          credentials: {
-            "Access-Token": jqXHR.getResponseHeader('Access-Token'),
-            "Expiry": jqXHR.getResponseHeader('Expiry'),
-            "Token-Type": jqXHR.getResponseHeader('Token-Type'),
-            "Uid": jqXHR.getResponseHeader('Uid'),
-            "Client": jqXHR.getResponseHeader('Client')
-          }
+          credentials: credentials
         })
       },
       error: function(jqXHR, textStatus, errorThrown){
