@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
+import classnames from 'classnames'
 import * as Paths from '../Paths'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { TabMenuItem, CloseButton } from '../components'
@@ -138,8 +139,8 @@ export default class MobilizationFonts extends React.Component {
           <option value="ubuntu">Ubuntu</option>
         </select>
 
-        <div className="bg-white border rounded p2 mb3 lg-col-6 center">
-          <h1 className="m0" style={{fontFamily: this.props.data.headerFont}}>Exemplo de Título</h1>
+        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6 center", `${headerFont}-header`)}>
+          <h1 className="m0">Exemplo de Título</h1>
         </div>
 
         <label className="block h4 caps bold mb1">Fonte para textos corridos</label>
@@ -164,8 +165,8 @@ export default class MobilizationFonts extends React.Component {
           <option value="ubuntu">Ubuntu</option>
         </select>
 
-        <div className="bg-white border rounded p2 mb3 lg-col-6">
-          <p className="m0" style={{fontFamily: this.props.data.bodyFont}}>Este é um exemplo de parágrafo</p>
+        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6", `${bodyFont}-body`)}>
+          <p className="m0">Este é um exemplo de parágrafo</p>
         </div>
 
         <div className="clearfix">
