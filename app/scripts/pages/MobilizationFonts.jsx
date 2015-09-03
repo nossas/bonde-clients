@@ -5,9 +5,16 @@ import * as Paths from '../Paths'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { TabMenuItem, CloseButton } from '../components'
 
-/* TODO: validate form */
 function mobilizationFontsValidation(data) {
   const errors = { valid: true }
+  if (!data.headerFont) {
+    errors.headerFont = 'Você deve escolher uma fonte para títulos'
+    errors.valid = false
+  }
+  if (!data.bodyFont) {
+    errors.bodyFont = 'Você deve escolher uma fonte para textos'
+    errors.valid = false
+  }
   return errors
 }
 
@@ -27,10 +34,20 @@ export default class MobilizationFonts extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+    this.state = {
+      submitting: false,
+      error: null
+    }
     props.initializeForm({
       headerFont: props.mobilization.header_font,
       bodyFont: props.mobilization.body_font
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.state.submitting) {
+      this.setState({ submitting: false })
+    }
   }
 
   handleCancelClick(event) {
@@ -41,6 +58,7 @@ export default class MobilizationFonts extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch, mobilization } = this.props
+    this.setState({ submitting: true, error: null })
 
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
@@ -52,6 +70,7 @@ export default class MobilizationFonts extends React.Component {
       }))
     } else {
       touchAll()
+      this.setState({ submitting: false })
     }
   }
 
@@ -79,6 +98,7 @@ export default class MobilizationFonts extends React.Component {
     return (
       <button
         className="caps button bg-darken-3 h3 mt1 p2 mr2"
+        disabled={this.state.submitting}
         onClick={::this.handleCancelClick}>
         Cancelar
       </button>
@@ -97,7 +117,7 @@ export default class MobilizationFonts extends React.Component {
     return (
       <form onSubmit={::this.handleSubmit}>
         <label className="block h4 caps bold mb1">Fonte para títulos</label>
-        {headerFontError && headerFontTouched &&<span className="red ml2">{headerFontError}</span>}
+        {headerFontError && headerFontTouched &&<span className="h5 red bold">{headerFontError}</span>}
 
         <select
           className="field-light block h3 mt1 mb2"
@@ -123,7 +143,7 @@ export default class MobilizationFonts extends React.Component {
         </div>
 
         <label className="block h4 caps bold mb1">Fonte para textos corridos</label>
-        {bodyFontError && bodyFontTouched &&<span className="red ml2">{bodyFontError}</span>}
+        {bodyFontError && bodyFontTouched &&<span className="h5 red bold">{bodyFontError}</span>}
 
         <select
           className="field-light block h3 mt1 mb2"
@@ -153,7 +173,8 @@ export default class MobilizationFonts extends React.Component {
           <input
             type="submit"
             className="caps button bg-aqua h3 mt1 p2"
-            value="Salvar" />
+            disabled={this.state.submitting}
+            value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
       </form>
     )
