@@ -102,7 +102,7 @@ export default class FormWidget extends React.Component {
     return(
       <div>
         <div
-          className={classnames("widget relative", (editable ? 'border p2' : null))}
+          className={classnames("widget relative", (editable ? 'border p2' : null), `${this.props.mobilization.header_font}-header`, `${this.props.mobilization.body_font}-body`)}
           style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}

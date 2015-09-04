@@ -108,7 +108,7 @@ export default class ContentWidget extends React.Component {
         </div>
         <div style={{zIndex: editing ? 9999 : 0}} className="relative">
           <div
-            className="widget"
+            className={classnames('widget', `${this.props.mobilization.header_font}-header`, `${this.props.mobilization.body_font}-body`)}
             dangerouslySetInnerHTML={{__html: this.state.content}}
             ref="content" />
           <div className={classnames("right", "mt1", {"display-none": !editing})}>
