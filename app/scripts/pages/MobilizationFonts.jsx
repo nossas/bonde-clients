@@ -145,7 +145,7 @@ export default class MobilizationFonts extends React.Component {
 
         { this.renderFontSelect('headerFont', headerFont) }
 
-        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6 center", `${headerFont}-header`)}>
+        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6", `${headerFont}-header`)}>
           <h1 className="m0">Exemplo de Título</h1>
         </div>
 
