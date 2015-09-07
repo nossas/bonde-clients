@@ -8,15 +8,9 @@ const widget = {}
 let component
 
 describe('ContentWidget', function() {
-  it('should apply mobilization classes', () => {
-    const { header_font: headerFont, body_font: bodyFont } = mobilization
-    const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(`${headerFont}-header`, `${bodyFont}-body`))
-    expect(div).to.have.length(1)
-  })
-
   context('when it is editable', function() {
     before(function() {
-      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={true} />)
+      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={true} mobilization={mobilization} />)
     })
 
     describe('#enableEditor', function() {
@@ -75,11 +69,19 @@ describe('ContentWidget', function() {
         mockedSave.should.have.been.called
       })
     })
+
+    describe('#render', function() {
+      it('should apply mobilization classes', () => {
+        const { header_font: headerFont, body_font: bodyFont } = mobilization
+        const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(`${headerFont}-header`, `${bodyFont}-body`))
+        expect(div).to.have.length(1)
+      })
+    })
   })
 
   context('when it is not editable', function() {
     it('should not initialize editor when the widget is not editable', function() {
-      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={false} />)
+      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={false} mobilization={mobilization} />)
       expect(component.state.editor).to.be.eql(null)
     })
   })

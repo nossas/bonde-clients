@@ -6,12 +6,7 @@ import * as WidgetActions from './../actions/WidgetActions'
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    dispatch: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onCancelEdit: PropTypes.func.isRequired
+    mobilization: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
