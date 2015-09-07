@@ -1,13 +1,21 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
+import classnames from 'classnames'
 import * as Paths from '../Paths'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { TabMenuItem, CloseButton } from '../components'
 
-/* TODO: validate form */
 function mobilizationFontsValidation(data) {
   const errors = { valid: true }
+  if (!data.headerFont) {
+    errors.headerFont = 'Você deve escolher uma fonte para títulos'
+    errors.valid = false
+  }
+  if (!data.bodyFont) {
+    errors.bodyFont = 'Você deve escolher uma fonte para textos'
+    errors.valid = false
+  }
   return errors
 }
 
@@ -16,31 +24,50 @@ function mobilizationFontsValidation(data) {
 
 export default class MobilizationFonts extends React.Component {
   static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
+    touched: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
   constructor(props, context) {
     super(props, context)
-    props.initializeForm({
-      headerFont: props.mobilization.header_font,
-      bodyFont: props.mobilization.body_font
+    this.state = {
+      submitting: false,
+      error: null
+    }
+    this.initializeForm()
+  }
+
+  componentWillReceiveProps() {
+    this.state.submitting && this.setState({ submitting: false })
+  }
+
+  initializeForm() {
+    const { initializeForm, mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
+
+    initializeForm({
+      headerFont: headerFont,
+      bodyFont: bodyFont
     })
   }
 
   handleCancelClick(event) {
     event.preventDefault()
-    this.goBack()
+    this.initializeForm()
   }
 
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch, mobilization } = this.props
+    this.setState({ submitting: true, error: null })
 
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
@@ -52,6 +79,7 @@ export default class MobilizationFonts extends React.Component {
       }))
     } else {
       touchAll()
+      this.setState({ submitting: false })
     }
   }
 
@@ -59,7 +87,7 @@ export default class MobilizationFonts extends React.Component {
     const { mobilization, location } = this.props
     const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
 
-    return(
+    return (
       <div className="bg-white px3 clearfix">
         <h2 className="mb3">Estilo da Página</h2>
         <div>
@@ -67,7 +95,7 @@ export default class MobilizationFonts extends React.Component {
             <TabMenuItem
               path={fontsMobilizationPath}
               text="Fontes"
-              isActive={fontsMobilizationPath == location.pathname}
+              isActive={fontsMobilizationPath === location.pathname}
             />
           </ul>
         </div>
@@ -79,9 +107,35 @@ export default class MobilizationFonts extends React.Component {
     return (
       <button
         className="caps button bg-darken-3 h3 mt1 p2 mr2"
+        disabled={this.state.submitting}
         onClick={::this.handleCancelClick}>
         Cancelar
       </button>
+    )
+  }
+
+  renderFontSelect(field, value) {
+    const { handleChange, handleBlur } = this.props
+
+    return (
+      <select
+        className="field-light block h3 mt1 mb2"
+        style={{height: '48px'}}
+        onChange={handleChange(field)}
+        onBlur={handleBlur(field)}
+        value={value}>
+        <option value="armata">Armata</option>
+        <option value="arvo">Arvo</option>
+        <option value="dosis">Dosis</option>
+        <option value="glegoo">Glegoo</option>
+        <option value="lato">Lato</option>
+        <option value="merriweather">Merriweather</option>
+        <option value="merriweather-sans">Merriweather Sans</option>
+        <option value="open-sans">Open Sans</option>
+        <option value="oswald">Oswald</option>
+        <option value="pt-mono">PT Mono</option>
+        <option value="ubuntu">Ubuntu</option>
+      </select>
     )
   }
 
@@ -89,63 +143,27 @@ export default class MobilizationFonts extends React.Component {
     const {
       data: { headerFont, bodyFont },
       errors: { headerFont: headerFontError, bodyFont: bodyFontError },
-      touched: { headerFont: headerFontTouched, bodyFont: bodyFontTouched },
-      handleChange,
-      handleBlur
+      touched: { headerFont: headerFontTouched, bodyFont: bodyFontTouched }
     } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit}>
+      <form onSubmit={ ::this.handleSubmit }>
         <label className="block h4 caps bold mb1">Fonte para títulos</label>
-        {headerFontError && headerFontTouched &&<span className="red ml2">{headerFontError}</span>}
+        { headerFontError && headerFontTouched && <span className="h5 red bold">{headerFontError}</span> }
 
-        <select
-          className="field-light block h3 mt1 mb2"
-          style={{height: '48px'}}
-          onChange={handleChange('headerFont')}
-          onBlur={handleBlur('headerFont')}
-          value={headerFont}>
-          <option value="armata">Armata</option>
-          <option value="arvo">Arvo</option>
-          <option value="dosis">Dosis</option>
-          <option value="glegoo">Glegoo</option>
-          <option value="lato">Lato</option>
-          <option value="merriweather">Merriweather</option>
-          <option value="merriweather-sans">Merriweather Sans</option>
-          <option value="open-sans">Open Sans</option>
-          <option value="oswald">Oswald</option>
-          <option value="pt-mono">PT Mono</option>
-          <option value="ubuntu">Ubuntu</option>
-        </select>
+        { this.renderFontSelect('headerFont', headerFont) }
 
-        <div className="bg-white border rounded p2 mb3 lg-col-6 center">
-          <h1 className="m0" style={{fontFamily: this.props.data.headerFont}}>Exemplo de Título</h1>
+        <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${headerFont}-header`)}>
+          <h1 className="m0">Exemplo de Título</h1>
         </div>
 
         <label className="block h4 caps bold mb1">Fonte para textos corridos</label>
-        {bodyFontError && bodyFontTouched &&<span className="red ml2">{bodyFontError}</span>}
+        { bodyFontError && bodyFontTouched && <span className="h5 red bold">{bodyFontError}</span> }
 
-        <select
-          className="field-light block h3 mt1 mb2"
-          style={{height: '48px'}}
-          onChange={handleChange('bodyFont')}
-          onBlur={handleBlur('bodyFont')}
-          value={bodyFont}>
-          <option value="armata">Armata</option>
-          <option value="arvo">Arvo</option>
-          <option value="dosis">Dosis</option>
-          <option value="glegoo">Glegoo</option>
-          <option value="lato">Lato</option>
-          <option value="merriweather">Merriweather</option>
-          <option value="merriweather-sans">Merriweather Sans</option>
-          <option value="open-sans">Open Sans</option>
-          <option value="oswald">Oswald</option>
-          <option value="pt-mono">PT Mono</option>
-          <option value="ubuntu">Ubuntu</option>
-        </select>
+        { this.renderFontSelect('bodyFont', bodyFont) }
 
-        <div className="bg-white border rounded p2 mb3 lg-col-6">
-          <p className="m0" style={{fontFamily: this.props.data.bodyFont}}>Este é um exemplo de parágrafo</p>
+        <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${bodyFont}-body`)}>
+          <p className="m0">Este é um exemplo de parágrafo</p>
         </div>
 
         <div className="clearfix">
@@ -153,14 +171,15 @@ export default class MobilizationFonts extends React.Component {
           <input
             type="submit"
             className="caps button bg-aqua h3 mt1 p2"
-            value="Salvar" />
+            disabled={this.state.submitting}
+            value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
       </form>
     )
   }
 
   render() {
-    return(
+    return (
       <div className="flex-auto bg-silver gray relative">
         { this.renderMenu() }
         <div className="py3 px4">
