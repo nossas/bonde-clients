@@ -1,4 +1,5 @@
 import React from 'react/addons'
+import classnames from 'classnames'
 import { Block } from './../../components'
 import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
 
