@@ -25,7 +25,7 @@ function mobilizationFontsValidation(data) {
 export default class MobilizationFonts extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,

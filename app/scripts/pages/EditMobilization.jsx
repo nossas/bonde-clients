@@ -20,7 +20,7 @@ import { connect } from 'react-redux'
 export default class EditMobilization extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
   }
 
   constructor(props, context) {
