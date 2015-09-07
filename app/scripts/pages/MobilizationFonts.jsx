@@ -24,12 +24,16 @@ function mobilizationFontsValidation(data) {
 
 export default class MobilizationFonts extends React.Component {
   static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
+    touched: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
@@ -39,21 +43,25 @@ export default class MobilizationFonts extends React.Component {
       submitting: false,
       error: null
     }
-    props.initializeForm({
-      headerFont: props.mobilization.header_font,
-      bodyFont: props.mobilization.body_font
-    })
+    this.initializeForm()
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.state.submitting) {
-      this.setState({ submitting: false })
-    }
+  componentWillReceiveProps() {
+    this.state.submitting && this.setState({ submitting: false })
+  }
+
+  initializeForm() {
+    const { initializeForm, mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
+
+    initializeForm({
+      headerFont: headerFont,
+      bodyFont: bodyFont
+    })
   }
 
   handleCancelClick(event) {
     event.preventDefault()
-    this.goBack()
+    this.initializeForm()
   }
 
   handleSubmit(event) {
@@ -79,7 +87,7 @@ export default class MobilizationFonts extends React.Component {
     const { mobilization, location } = this.props
     const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
 
-    return(
+    return (
       <div className="bg-white px3 clearfix">
         <h2 className="mb3">Estilo da Página</h2>
         <div>
@@ -87,7 +95,7 @@ export default class MobilizationFonts extends React.Component {
             <TabMenuItem
               path={fontsMobilizationPath}
               text="Fontes"
-              isActive={fontsMobilizationPath == location.pathname}
+              isActive={fontsMobilizationPath === location.pathname}
             />
           </ul>
         </div>
@@ -145,7 +153,7 @@ export default class MobilizationFonts extends React.Component {
 
         { this.renderFontSelect('headerFont', headerFont) }
 
-        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6", `${headerFont}-header`)}>
+        <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${headerFont}-header`)}>
           <h1 className="m0">Exemplo de Título</h1>
         </div>
 
@@ -154,7 +162,7 @@ export default class MobilizationFonts extends React.Component {
 
         { this.renderFontSelect('bodyFont', bodyFont) }
 
-        <div className={classnames("bg-white border rounded p2 mb3 lg-col-6", `${bodyFont}-body`)}>
+        <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${bodyFont}-body`)}>
           <p className="m0">Este é um exemplo de parágrafo</p>
         </div>
 
@@ -171,7 +179,7 @@ export default class MobilizationFonts extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className="flex-auto bg-silver gray relative">
         { this.renderMenu() }
         <div className="py3 px4">
