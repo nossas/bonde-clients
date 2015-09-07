@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { FormWidgetInput, FormWidgetButton } from './'
-import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
@@ -10,6 +8,12 @@ import * as Paths from '../Paths'
 @reactMixin.decorate(Navigation)
 
 export default class FormWidget extends React.Component {
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    widget: PropTypes.object.isRequired,
+    editable: PropTypes.bool.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -32,14 +36,14 @@ export default class FormWidget extends React.Component {
 
   handleClick() {
     const {mobilization, widget} = this.props
-    if(this.props.editable) {
+    if (this.props.editable) {
       this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
   renderCallToAction() {
     const { configurable, widget } = this.props
-    if(!configurable) {
+    if (!configurable) {
       return (
         <h2 className="mt0 mb3 center">{widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'}</h2>
       )
@@ -49,7 +53,7 @@ export default class FormWidget extends React.Component {
   renderFields() {
     const fields = this.fields()
     return fields.map((field, index) => {
-      return(
+      return (
         <FormWidgetInput
           {...this.props}
           key={field.uid}
@@ -64,8 +68,8 @@ export default class FormWidget extends React.Component {
 
   renderButton() {
     const { configurable, widget } = this.props
-    if(!configurable) {
-      return(
+    if (!configurable) {
+      return (
         <FormWidgetButton buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props} />
       )
     }
@@ -73,8 +77,8 @@ export default class FormWidget extends React.Component {
 
   renderCount() {
     const { configurable, widget } = this.props
-    if(!configurable) {
-      return(
+    if (!configurable) {
+      return (
         <div className="mt2 h3 center">
           {widget.form_entries_count}
           &nbsp;
@@ -86,8 +90,8 @@ export default class FormWidget extends React.Component {
 
   renderOverlay() {
     const { editable, configurable } = this.props
-    if(editable && !configurable && this.state.hasMouseOver) {
-      return(
+    if (editable && !configurable && this.state.hasMouseOver) {
+      return (
         <div
           className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
           style={{zIndex: 9998}}>
@@ -98,11 +102,11 @@ export default class FormWidget extends React.Component {
   }
 
   render() {
-    const { editable } = this.props
-    return(
+    const { editable, mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
+    return (
       <div>
         <div
-          className={classnames("widget relative", (editable ? 'border p2' : null), `${this.props.mobilization.header_font}-header`, `${this.props.mobilization.body_font}-body`)}
+          className={classnames('widget relative', (editable ? 'border p2' : null), `${headerFont}-header`, `${bodyFont}-body`)}
           style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}

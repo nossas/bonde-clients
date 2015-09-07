@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import Block from './../components/Block.jsx'
 import { bindActionCreators } from 'redux'
@@ -18,6 +18,11 @@ import { connect } from 'react-redux'
 @reactMixin.decorate(Navigation)
 
 export default class EditMobilization extends React.Component {
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -26,7 +31,7 @@ export default class EditMobilization extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { mobilization, dispatch } = this.props
     const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -36,7 +41,7 @@ export default class EditMobilization extends React.Component {
 
   componentDidUpdate() {
     const { mobilization, blocks } = this.props
-    if (!this.newBlock() && blocks.length == 0) {
+    if (!this.newBlock() && blocks.length === 0) {
       this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
     }
     if (!this.state.scrolledToBottom &&
@@ -51,10 +56,10 @@ export default class EditMobilization extends React.Component {
   }
 
   newBlock() {
-    return this.props.location.query && this.props.location.query.newBlock && this.props.location.query.newBlock == "true"
+    return this.props.location.query && this.props.location.query.newBlock && this.props.location.query.newBlock == 'true'
   }
 
-  render(){
+  render() {
     const { mobilization, blocks } = this.props
     const { color_scheme } = mobilization
     const className = classnames('flex-auto', color_scheme)
@@ -62,14 +67,14 @@ export default class EditMobilization extends React.Component {
     return (
       <div className={className}>
         {
-          blocks.map(function(block, index){
-            return(
+          blocks.map(function(block, index) {
+            return (
               <Block
                 {...this.props}
-                key={"block-" + block.id}
+                key={'block-' + block.id}
                 block={block}
-                canMoveUp={index != 0}
-                canMoveDown={index != blocks.length - 1}
+                canMoveUp={index !== 0}
+                canMoveDown={index !== blocks.length - 1}
                 editable={true}
               />
             )
