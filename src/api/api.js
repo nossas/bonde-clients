@@ -10,8 +10,7 @@ const app = express();
 app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  saveUninitialized: false
 }));
 app.use(bodyParser.json());
 
