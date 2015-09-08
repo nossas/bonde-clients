@@ -1,7 +1,7 @@
 import React from 'react/addons'
+import classnames from 'classnames'
 import { Block } from './../../components'
 import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
-import classnames from 'classnames'
 
 const EditMobilization = EditMobilizationImport.WrappedComponent
 const { TestUtils } = React.addons
@@ -13,7 +13,7 @@ describe('EditMobilization', () => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
     blocks = [block1, block2]
-    mobilization = { color_scheme: "meurio-scheme", header_font: "ubuntu", body_font: "open-sans" }
+    mobilization = { color_scheme: 'meurio-scheme' }
     dispatch = () => {}
   })
 
@@ -32,8 +32,8 @@ describe('EditMobilization', () => {
     })
 
     it('should apply mobilization classes', () => {
-      const { color_scheme, header_font, body_font } = mobilization
-      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme, `${header_font}-header`, `${body_font}-body`))
+      const { color_scheme } = mobilization
+      const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(color_scheme))
       expect(div).to.have.length(1)
     })
   })

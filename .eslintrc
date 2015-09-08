@@ -1,0 +1,19 @@
+---
+parser: babel-eslint
+
+extends: eslint-config-airbnb
+
+plugins:
+  - react
+
+env:
+  browser: true
+  node: true
+
+rules:
+  indent: [1, 2, { SwitchCase: 1 }]
+  comma-dangle: [1, 'never']
+  semi: [1, 'never']
+  func-names: 0
+  react/sort-comp: 0
+  react/jsx-quotes: 0

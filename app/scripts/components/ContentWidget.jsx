@@ -1,29 +1,33 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { WYSIHTMLToolbar, Loading } from './'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 
 export default class ContentWidget extends React.Component {
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
       editing: false,
       editor: null,
       content: (props.widget.settings ? props.widget.settings.content : (props.editable ? 'Clique para editar...' : null)),
-      toolbarId: "wysihtml5-toolbar-" + this.props.widget.id,
+      toolbarId: 'wysihtml5-toolbar-' + this.props.widget.id,
       loading: false
     }
   }
 
   componentDidMount() {
-    if(this.props.editable){
+    if (this.props.editable) {
       const editor = new wysihtml5.Editor(
         React.findDOMNode(this.refs.content), {
           toolbar: this.state.toolbarId,
           parserRules: wysihtml5ParserRules
         }
-      ).on("focus", ::this.handleEditorFocus)
+      ).on('focus', ::this.handleEditorFocus)
       this.setState({editor: editor})
     }
   }
@@ -47,21 +51,21 @@ export default class ContentWidget extends React.Component {
     React.findDOMNode(this.refs.content).blur()
   }
 
-  handleEditorFocus(){
+  handleEditorFocus() {
     this.enableEditor()
   }
 
-  handleEscapePress(e){
-    if(e.keyCode == 27){
+  handleEscapePress(e) {
+    if (e.keyCode == 27) {
       this.save()
     }
   }
 
-  handleOverlayClick(){
+  handleOverlayClick() {
     this.save()
   }
 
-  save(){
+  save() {
     const { editor, content } = this.state
     const hasChanged = editor.getValue() != content
     this.setState({content: editor.getValue()})
@@ -92,11 +96,12 @@ export default class ContentWidget extends React.Component {
     }
   }
 
-  render(){
+  render() {
     const { toolbarId, editing } = this.state
+    const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     return (
       <div>
-        <div className={classnames("full-width", {"display-none": !editing})}>
+        <div className={classnames('full-width', {'display-none': !editing})}>
           <WYSIHTMLToolbar
             elementId={toolbarId}
             className="absolute full-width top-0 left-0 bg-darken-4"
@@ -109,10 +114,10 @@ export default class ContentWidget extends React.Component {
         </div>
         <div style={{zIndex: editing ? 9999 : 0}} className="relative">
           <div
-            className="widget"
+            className={classnames('widget', `${headerFont}-header`, `${bodyFont}-body`)}
             dangerouslySetInnerHTML={{__html: this.state.content}}
             ref="content" />
-          <div className={classnames("right", "mt1", {"display-none": !editing})}>
+          <div className={classnames('right mt1', {'display-none': !editing})}>
             <button
               onClick={::this.save}
               className="button button-transparent caps bg-darken-4 white rounded">
