@@ -1,23 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import { TopMenu, Loading } from './../components'
-import * as MobilizationActions from './../actions/MobilizationActions'
+import { Loading } from './../components'
+import { loadMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
 
 @connect(state => ({
-  mobilizations: state.mobilizations
+  mobilizations: state.mobilizations.data
 }))
 
 export default class Mobilizations extends React.Component {
-  componentDidMount(){
-    const { dispatch } = this.props
-    const actions = bindActionCreators(MobilizationActions, dispatch)
-    actions.fetchMobilizations()
-  }
-
-  render(){
-    return(this.props.mobilizations.length > 0 ? this.renderMobilizations() : this.renderLoading())
+  render() {
+    return (this.props.mobilizations.length > 0 ? this.renderMobilizations() : this.renderLoading())
   }
 
   renderTopMenu() {
@@ -25,7 +17,7 @@ export default class Mobilizations extends React.Component {
   }
 
   renderComponents() {
-    if(this.props.main) {
+    if (this.props.main) {
       return (
         <div>
           { this.renderTopMenu() }
@@ -41,7 +33,7 @@ export default class Mobilizations extends React.Component {
   renderMobilizations() {
     const ids = this.props.mobilizations.map((mobilization) => {return mobilization.id.toString()})
     const mobilization = this.props.mobilizations[ids.indexOf(this.props.params.mobilization_id)]
-    return(
+    return (
       <div>
         { this.props.children && React.cloneElement(this.props.children, {...this.props, mobilization})}
         { this.renderComponents() }
@@ -49,9 +41,17 @@ export default class Mobilizations extends React.Component {
     )
   }
 
-  renderLoading(){
-    return(
+  renderLoading() {
+    return (
       <Loading />
     )
+  }
+
+  static fetchData(store) {
+    const promises = []
+    if (!isMobilizationsLoaded(store.getState())) {
+      promises.push(store.dispatch(loadMobilizations()))
+    }
+    return Promise.all(promises)
   }
 }
