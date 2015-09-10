@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
 
 import '../../styles/main.scss'
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 
+@connect(state => ({ auth: state.auth }))
+
 export default class Application extends React.Component {
-  render() {
-    return (
-      <div>
-        {this.props.children && React.cloneElement(this.props.children)}
-      </div>
-    )
+  static propTypes = {
+    children: PropTypes.object.isRequired,
+    auth: PropTypes.object
   }
 
   static fetchData(store) {
@@ -21,7 +21,11 @@ export default class Application extends React.Component {
     return Promise.all(promises)
   }
 
-  static propTypes = {
-    children: PropTypes.object.isRequired
+  render() {
+    return (
+      <div>
+        {React.cloneElement(this.props.children, {auth: this.props.auth})}
+      </div>
+    )
   }
 }
