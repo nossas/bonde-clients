@@ -22,7 +22,7 @@ export default class TopMenu extends React.Component {
               <i className="fa fa-flag-o" style={{marginRight: '2px'}} />
               Suas mobilizações
             </DropDownMenuItem>
-            <DropDownMenuItem href={'/#' + Paths.logout()}>
+            <DropDownMenuItem href={Paths.logout()}>
               <i className="fa fa-sign-out" style={{marginRight: '3px'}} />
               Sair
             </DropDownMenuItem>

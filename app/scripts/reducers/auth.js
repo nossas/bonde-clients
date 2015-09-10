@@ -6,10 +6,10 @@ import {
 
 const initialState = {
   loaded: false
-};
+}
 
 export default function auth(state = initialState, action = {}) {
-  const { type, user, error } = action
+  const { type, error } = action
 
   switch (type) {
     case AUTH_LOAD:
@@ -77,7 +77,7 @@ export function load() {
   return {
     types: [AUTH_LOAD, AUTH_LOAD_SUCCESS, AUTH_LOAD_FAIL],
     promise: (client) => client.get('/loadAuth')
-  };
+  }
 }
 
 export function login(name) {
@@ -88,12 +88,12 @@ export function login(name) {
         name: name
       }
     })
-  };
+  }
 }
 
 export function logout() {
   return {
     types: [AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE],
     promise: (client) => client.get('/logout')
-  };
+  }
 }
