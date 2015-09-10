@@ -1,30 +1,18 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import Block from './../components/Block.jsx'
-import * as WidgetActions from './../actions/WidgetActions'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 // import ua from 'universal-analytics'
-
-@connect(state => ({
-  widgets: state.widgets
-}))
 
 export default class ShowMobilization extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
-    blocks: PropTypes.object.isRequired
+    blocks: PropTypes.object.isRequired,
+    widgets: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
     super(props, context)
     // ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
-  }
-
-  componentDidMount() {
-    const { dispatch, mobilization } = this.props
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
   }
 
   render() {

@@ -1,14 +1,19 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
+import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
 
 @connect(state => ({
   auth: state.auth,
-  blocks: state.blocks
+  blocks: state.blocks,
+  widgets: state.widgets
 }))
 
 export default class Mobilization extends React.Component {
   static propTypes = {
+    blocks: PropTypes.object.isRequired,
+    widgets: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     main: PropTypes.object.isRequired,
     topMenu: PropTypes.object,
     sidebar: PropTypes.object
@@ -21,7 +26,24 @@ export default class Mobilization extends React.Component {
       const promise = store.dispatch(action)
       promises.push(promise)
     }
+    if (!isWidgetsLoaded(store.getState())) {
+      const action = fetchWidgets({mobilization_id: params.mobilization_id})
+      const promise = store.dispatch(action)
+      promises.push(promise)
+    }
     return Promise.all(promises)
+  }
+
+  componentDidMount() {
+    // TODO this callback is a workaround to load data in client-side
+    // but it should be replaced by the static fetchData method that is fetching
+    // data only in the server-side for now
+    if (!this.props.blocks.loaded) {
+      this.props.dispatch(fetchBlocks())
+    }
+    if (!this.props.widgets.loaded) {
+      this.props.dispatch(fetchWidgets())
+    }
   }
 
   render() {

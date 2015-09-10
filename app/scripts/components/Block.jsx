@@ -251,8 +251,10 @@ export default class Block extends React.Component {
   }
 
   render(){
+    // TODO: change widgets constant name to reflex the object that is returned
+    // by the reducer
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
-    const filteredWidgets = this.filterWidgets(widgets, block)
+    const filteredWidgets = this.filterWidgets(widgets.data, block)
     return(
       <div
         className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))}
