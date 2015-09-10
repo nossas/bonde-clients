@@ -51,7 +51,6 @@ export function loadMobilizations() {
           if (err) {
             reject(res.body || err)
           } else {
-            console.log(res.body)
             resolve(res.body)
           }
         })
