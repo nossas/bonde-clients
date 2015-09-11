@@ -1,5 +1,5 @@
 import blocks from './../../reducers/blocks'
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from './../../constants/ActionTypes';
+import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from './../../constants/ActionTypes'
 
 let initialState
 
@@ -12,16 +12,16 @@ describe('blocks', () => {
     ]
   })
 
-  describe('FETCH_BLOCKS', () => {
-    it('should return the mobilizations', () => {
-      const action = {
-        type: FETCH_BLOCKS,
-        blocks: [{id: 1}, {id: 2}]
-      }
-      const newState = blocks(initialState, action)
-      expect(newState).to.eql(action.blocks)
-    })
-  })
+  // describe('FETCH_BLOCKS', () => {
+  //   it('should return the mobilizations', () => {
+  //     const action = {
+  //       type: FETCH_BLOCKS,
+  //       blocks: [{id: 1}, {id: 2}]
+  //     }
+  //     const newState = blocks(initialState, action)
+  //     expect(newState).to.eql(action.blocks)
+  //   })
+  // })
 
   describe('EDIT_BLOCK', () => {
     it('should return the mobilizations with edited block', () => {

@@ -6,13 +6,17 @@ import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
 const EditMobilization = EditMobilizationImport.WrappedComponent
 const { TestUtils } = React.addons
 
-let block1, block2, blocks, mobilization, dispatch
+let block1
+let block2
+let blocks
+let mobilization
+let dispatch
 
 describe('EditMobilization', () => {
   before(() => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
-    blocks = [block1, block2]
+    blocks = {data: [block1, block2]}
     mobilization = { color_scheme: 'meurio-scheme' }
     dispatch = () => {}
   })
@@ -22,13 +26,13 @@ describe('EditMobilization', () => {
 
     before(() => {
       component = TestUtils.renderIntoDocument(
-        <EditMobilization mobilization={mobilization} blocks={blocks} widgets={[]} dispatch={dispatch} />
+        <EditMobilization mobilization={mobilization} blocks={blocks} widgets={{data: []}} dispatch={dispatch} />
       )
     })
 
     it('should render blocks', () => {
       const blocksComponents = TestUtils.scryRenderedComponentsWithType(component, Block)
-      expect(blocksComponents).to.have.length(blocks.length)
+      expect(blocksComponents).to.have.length(blocks.data.length)
     })
 
     it('should apply mobilization classes', () => {
