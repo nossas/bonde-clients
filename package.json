@@ -13,14 +13,22 @@
     "url": "https://github.com/meurio/hub-client/issues"
   },
   "scripts": {
-    "start": "node server",
-    "postinstall": "node deploy",
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox",
+    "start": "node ./node_modules/better-npm-run start",
+    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
-    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\""
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox",
   },
   "betterScripts": {
+    "start": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    },
     "start-dev": {
       "command": "node ./bin/server.js",
       "env": {
