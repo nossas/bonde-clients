@@ -1,10 +1,1 @@
-{
-  "javascript": {
-    "main": "http://localhost:3002/dist/main-a77cb5690d4232f03a1b.js"
-  },
-  "styles": {},
-  "images": {},
-  "style_modules": {
-    ".s": {}
-  }
-}
+{"javascript":{"main":"/dist/main-b5051331c4e8c90f49f3.js"},"styles":{"main":"/dist/main-b5051331c4e8c90f49f3.css"},"images":{},"style_modules":{}}
