@@ -61,7 +61,7 @@ export function fetchBlocks(options) {
     types: [REQUEST_FETCH_BLOCKS, SUCCESS_FETCH_BLOCKS, FAILURE_FETCH_BLOCKS],
     promise: function() {
       return new Promise(function(resolve, reject) {
-        superagent.get(`http://localhost:3000/mobilizations/${options.mobilization_id}/blocks`).end((err, res) => {
+        superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/blocks`).end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {

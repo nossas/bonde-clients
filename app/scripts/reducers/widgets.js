@@ -41,7 +41,7 @@ export function fetchWidgets(options) {
     types: [FETCH_WIDGETS_REQUEST, FETCH_WIDGETS_SUCCESS, FETCH_WIDGETS_FAILURE],
     promise: function() {
       return new Promise(function(resolve, reject) {
-        superagent.get(`http://localhost:3000/mobilizations/${options.mobilization_id}/widgets`).end((err, res) => {
+        superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/widgets`).end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {
