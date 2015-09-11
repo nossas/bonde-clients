@@ -18,7 +18,7 @@
     "watch-client": "node ./node_modules/better-npm-run watch-client",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
     "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
-    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox",
+    "test": "./node_modules/.bin/karma start --single-run --browsers Firefox"
   },
   "betterScripts": {
     "start": {
