@@ -1,7 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import serialize from 'serialize-javascript';
-import DocumentMeta from 'react-document-meta';
-const cdn = '//cdnjs.cloudflare.com/ajax/libs/';
+import React, {Component, PropTypes} from 'react'
+import serialize from 'serialize-javascript'
+import DocumentMeta from 'react-document-meta'
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -20,7 +19,7 @@ export default class Html extends Component {
   }
 
   render() {
-    const {assets, component, store} = this.props;
+    const {assets, component, store} = this.props
     return (
       <html lang="en-us">
         <head>
@@ -42,6 +41,6 @@ export default class Html extends Component {
           <script src={assets.javascript.main}/>
         </body>
       </html>
-    );
+    )
   }
 }
