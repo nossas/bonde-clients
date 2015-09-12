@@ -1,9 +1,12 @@
-import {
-  REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS,
-  EDIT_MOBILIZATION, ADD_MOBILIZATION
-} from './../constants/ActionTypes'
-
 import superagent from 'superagent'
+
+import {
+  REQUEST_FETCH_MOBILIZATIONS,
+  SUCCESS_FETCH_MOBILIZATIONS,
+  FAILURE_FETCH_MOBILIZATIONS,
+  EDIT_MOBILIZATION,
+  ADD_MOBILIZATION
+} from './../constants/ActionTypes'
 
 const initialState = {
   loaded: false,
@@ -13,26 +16,24 @@ const initialState = {
 export default function mobilizations(state = initialState, action) {
   switch (action.type) {
     case REQUEST_FETCH_MOBILIZATIONS:
-      return {
-        data: [],
-        loaded: false
-      }
+      return {...state, loaded: false}
     case SUCCESS_FETCH_MOBILIZATIONS:
-      return {
-        data: action.result,
-        loaded: true
-      }
+      return {...state, data: action.result, loaded: true}
     case FAILURE_FETCH_MOBILIZATIONS:
-      return {
-        data: [],
-        loaded: true
-      }
+      return {...state, loaded: true}
+
+    // TODO impllement REQUEST, SUCCESS and FAILURE action types
     case ADD_MOBILIZATION:
-      return [action.mobilization, ...state]
+      return {...state, data: [action.mobilization, ...state.data]}
+
+    // TODO impllement REQUEST, SUCCESS and FAILURE action types
     case EDIT_MOBILIZATION:
-      return state.map(mobilization =>
-        mobilization.id === action.mobilization.id ? action.mobilization : mobilization
-      )
+      return {
+        ...state,
+        data: state.data.map(
+          m => m.id === action.mobilization.id ? action.mobilization : m
+        )
+      }
     default:
       return state
   }
@@ -42,7 +43,7 @@ export function isMobilizationsLoaded(globalState) {
   return globalState.mobilizations.loaded
 }
 
-export function loadMobilizations() {
+export function fetchMobilizations() {
   return {
     types: [REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS],
     promise: function() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Loading } from './../components'
-import { loadMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
+import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
 
 @connect(state => ({
   mobilizations: state.mobilizations
@@ -13,7 +13,7 @@ export default class Mobilizations extends React.Component {
     // but it should be replaced by the static fetchData method that is fetching
     // mobilizations only in the server-side for now
     if (!this.props.mobilizations.loaded) {
-      this.props.dispatch(loadMobilizations())
+      this.props.dispatch(fetchMobilizations())
     }
   }
 
@@ -64,7 +64,7 @@ export default class Mobilizations extends React.Component {
   static fetchData(store) {
     const promises = []
     if (!isMobilizationsLoaded(store.getState())) {
-      promises.push(store.dispatch(loadMobilizations()))
+      promises.push(store.dispatch(fetchMobilizations()))
     }
     return Promise.all(promises)
   }
