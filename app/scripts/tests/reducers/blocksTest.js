@@ -5,11 +5,13 @@ let initialState
 
 describe('blocks', () => {
   before(() => {
-    initialState = [
-      { id: 1, bg_color: 'bg-1' },
-      { id: 2, bg_color: 'bg-2' },
-      { id: 3, bg_color: 'bg-3' }
-    ]
+    initialState = {
+      data: [
+        { id: 1, bg_color: 'bg-1' },
+        { id: 2, bg_color: 'bg-2' },
+        { id: 3, bg_color: 'bg-3' }
+      ]
+    }
   })
 
   // describe('FETCH_BLOCKS', () => {
@@ -30,7 +32,7 @@ describe('blocks', () => {
         block: {id: 1, bg_color: 'bg-foo'}
       }
       const newState = blocks(initialState, action)
-      expect(newState).to.eql([
+      expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-foo' },
         { id: 2, bg_color: 'bg-2' },
         { id: 3, bg_color: 'bg-3' }
@@ -45,7 +47,7 @@ describe('blocks', () => {
         block: {id: 2, bg_color: 'bg-2'}
       }
       const newState = blocks(initialState, action)
-      expect(newState).to.eql([
+      expect(newState.data).to.eql([
         { id: 2, bg_color: 'bg-2' },
         { id: 1, bg_color: 'bg-1' },
         { id: 3, bg_color: 'bg-3' }
@@ -60,7 +62,7 @@ describe('blocks', () => {
         block: {id: 2, bg_color: 'bg-2'}
       }
       const newState = blocks(initialState, action)
-      expect(newState).to.eql([
+      expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-1' },
         { id: 3, bg_color: 'bg-3' },
         { id: 2, bg_color: 'bg-2' }
@@ -75,7 +77,7 @@ describe('blocks', () => {
         block: {id: 2}
       }
       const newState = blocks(initialState, action)
-      expect(newState).to.eql([
+      expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-1' },
         { id: 3, bg_color: 'bg-3' }
       ])

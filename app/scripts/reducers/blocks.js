@@ -40,22 +40,22 @@ export default function blocks(state = initialState, action) {
       return {...state, loaded: true}
     case MOVE_BLOCK_UP:
       return {...state,
-        data: state.map((block, index) => {
-          if (index + 1 < state.length && state[index + 1].id === action.block.id) {
+        data: state.data.map((block, index) => {
+          if (index + 1 < state.data.length && state.data[index + 1].id === action.block.id) {
             return action.block
           } else if (block.id === action.block.id) {
-            return state[index - 1]
+            return state.data[index - 1]
           }
           return block
         })
       }
     case MOVE_BLOCK_DOWN:
       return {...state,
-        data: state.map((block, index) => {
-          if (index > 0 && state[index - 1].id === action.block.id) {
+        data: state.data.map((block, index) => {
+          if (index > 0 && state.data[index - 1].id === action.block.id) {
             return action.block
           } else if (block.id === action.block.id) {
-            return state[index + 1]
+            return state.data[index + 1]
           }
           return block
         })
