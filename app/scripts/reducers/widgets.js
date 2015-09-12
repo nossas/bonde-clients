@@ -20,13 +20,16 @@ export default function widgets(state = initialState, action) {
     case FETCH_WIDGETS_FAILURE:
       return {...state, loaded: true}
     case EDIT_WIDGET:
-      return state.map(widget =>
-        widget.id === action.widget.id ? action.widget : widget
-      )
+      return {...state,
+        data: state.data.map(
+          widget => widget.id === action.widget.id ? action.widget : widget
+        )}
     case ADD_FORM_ENTRY:
-      return state.map(widget =>
-        widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
-      )
+      return {...state,
+        data: state.data.map(
+          widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
+        )
+      }
     default:
       return state
   }
