@@ -14,11 +14,11 @@ export default class TopMenu extends React.Component {
       return (
         <div className="clearfix">
           <DropDownMenu className="mt1 mr4" menuClassName="bg-aqua white" icon="user">
-            <DropDownMenuItem href={'/#' + Paths.newMobilization()}>
+            <DropDownMenuItem href={Paths.newMobilization()}>
               <i className="fa fa-plus" style={{marginRight: '6px'}} />
               Nova mobilização
             </DropDownMenuItem>
-            <DropDownMenuItem href={'/#' + Paths.mobilizations()}>
+            <DropDownMenuItem href={Paths.mobilizations()}>
               <i className="fa fa-flag-o" style={{marginRight: '2px'}} />
               Suas mobilizações
             </DropDownMenuItem>
