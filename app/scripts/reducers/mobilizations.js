@@ -47,7 +47,7 @@ export function loadMobilizations() {
     types: [REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS],
     promise: function() {
       return new Promise(function(resolve, reject) {
-        superagent.get(`${process.env.API_URL}/mobilizations`).end((err, res) => {
+        superagent.get(`${__API_URL__}/mobilizations`).end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {
