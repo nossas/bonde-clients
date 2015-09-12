@@ -16,7 +16,8 @@ export default class Mobilization extends React.Component {
     dispatch: PropTypes.func.isRequired,
     main: PropTypes.object.isRequired,
     topMenu: PropTypes.object,
-    sidebar: PropTypes.object
+    sidebar: PropTypes.object,
+    mobilization: PropTypes.object.isRequired
   }
 
   static fetchData(store, params) {
@@ -38,11 +39,13 @@ export default class Mobilization extends React.Component {
     // TODO this callback is a workaround to load data in client-side
     // but it should be replaced by the static fetchData method that is fetching
     // data only in the server-side for now
-    if (!this.props.blocks.loaded) {
-      this.props.dispatch(fetchBlocks())
+    const {blocks, dispatch, mobilization, widgets} = this.props
+
+    if (!blocks.loaded) {
+      dispatch(fetchBlocks({mobilization_id: mobilization.id}))
     }
-    if (!this.props.widgets.loaded) {
-      this.props.dispatch(fetchWidgets())
+    if (!widgets.loaded) {
+      dispatch(fetchWidgets({mobilization_id: mobilization.id}))
     }
   }
 
