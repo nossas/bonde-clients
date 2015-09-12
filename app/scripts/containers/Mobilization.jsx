@@ -39,14 +39,9 @@ export default class Mobilization extends React.Component {
     // TODO this callback is a workaround to load data in client-side
     // but it should be replaced by the static fetchData method that is fetching
     // data only in the server-side for now
-    const {blocks, dispatch, mobilization, widgets} = this.props
-
-    if (!blocks.loaded) {
-      dispatch(fetchBlocks({mobilization_id: mobilization.id}))
-    }
-    if (!widgets.loaded) {
-      dispatch(fetchWidgets({mobilization_id: mobilization.id}))
-    }
+    const {dispatch, mobilization} = this.props
+    dispatch(fetchBlocks({mobilization_id: mobilization.id}))
+    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
   }
 
   render() {
