@@ -3,7 +3,7 @@ import $ from 'jquery'
 
 export function editWidget(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/widgets/${params.widget_id}`, {
       method: 'put',
       contentType: 'application/json',
       dataType: 'json',
@@ -21,7 +21,7 @@ export function editWidget(params) {
 
 export function fetchWidgets(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/widgets`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/widgets`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: FETCH_WIDGETS,

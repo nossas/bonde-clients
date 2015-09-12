@@ -7,7 +7,7 @@ import {
 
 export function login(data) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/auth/sign_in`, {
+    $.ajax(`${process.env.API_URL}/auth/sign_in`, {
       method: 'post',
       data: { ...data },
       beforeSend: function(jqXHR, settings){

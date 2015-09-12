@@ -49,7 +49,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'BASE_URL': '"http://localhost:3000"',
+        API_URL: JSON.stringify(process.env.API_URL),
         'GOOGLE_ANALYTICS_CODE': '"UA-27626466-6"'
       },
       __CLIENT__: true,

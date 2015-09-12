@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 export function fetchBlocks(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: FETCH_BLOCKS,
@@ -17,7 +17,7 @@ export function fetchBlocks(params) {
 
 export function addBlock(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       method: 'post',
       data: { block: params.block },
       headers: params.credentials,
@@ -30,7 +30,7 @@ export function addBlock(params) {
 
 export function editBlock(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'put',
       data: { block: params.block },
       headers: params.credentials,
@@ -46,7 +46,7 @@ export function editBlock(params) {
 
 export function removeBlock(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'delete',
       headers: params.credentials,
       success: function(data, textStatus, jqXHR){
@@ -62,7 +62,7 @@ export function removeBlock(params) {
 export function moveBlockUp(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {
@@ -83,7 +83,7 @@ export function moveBlockUp(params) {
 export function moveBlockDown(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {

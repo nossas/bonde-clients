@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 export function fetchMobilizations() {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations`, {
+    $.ajax(`${process.env.API_URL}/mobilizations`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: FETCH_MOBILIZATIONS,
@@ -17,7 +17,7 @@ export function fetchMobilizations() {
 
 export function addMobilization(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations`, {
+    $.ajax(`${process.env.API_URL}/mobilizations`, {
       method: 'post',
       data: { mobilization: params.mobilization },
       headers: params.credentials,
@@ -34,7 +34,7 @@ export function addMobilization(params) {
 
 export function editMobilization(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.id}`, {
       method: 'put',
       data: { mobilization: params.mobilization },
       headers: params.credentials,

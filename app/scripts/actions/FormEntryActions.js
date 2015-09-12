@@ -4,7 +4,7 @@ import $ from 'jquery'
 
 export function addFormEntry(params) {
   return dispatch => {
-    $.ajax(`${__API_URL__}/mobilizations/${params.mobilization_id}/form_entries`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/form_entries`, {
       method: 'post',
       data: { form_entry: params.form_entry },
       success: function(data, textStatus, jqXHR){

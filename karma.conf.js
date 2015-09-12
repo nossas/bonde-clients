@@ -30,7 +30,7 @@ module.exports = function(config) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
-            'BASE_URL': '"http://localhost:3000/v1"',
+            'API_URL': '"http://localhost:3000"',
             'NODE_ENV': '"test"'
           }
         }),
@@ -38,8 +38,7 @@ module.exports = function(config) {
           __CLIENT__: true,
           __SERVER__: false,
           __DEVELOPMENT__: true,
-          __DEVTOOLS__: false,  // <-------- DISABLE redux-devtools HERE
-          __API_URL__: "'http://localhost:3000'"
+          __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
         })
       ]
     },

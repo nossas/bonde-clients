@@ -33,14 +33,16 @@
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "API_URL": "http://localhost:3000"
       }
     },
     "watch-client": {
       "command": "node webpack/webpack-dev-server.js",
       "env": {
         "UV_THREADPOOL_SIZE": 100,
-        "NODE_PATH": "./src"
+        "NODE_PATH": "./src",
+        "API_URL": "http://localhost:3000"
       }
     }
   },

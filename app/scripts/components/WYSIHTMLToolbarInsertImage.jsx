@@ -30,7 +30,7 @@ export default class WYSIHTMLToolbarInsertImage extends React.Component {
       <div data-wysihtml5-dialog="insertImage" style={{display: "none"}} className="white p2 bg-darken-3">
         <div className="mr2" style={{display: this.state.isLoading ? "none" : "inline-block"}}>
           <ReactS3Uploader
-            signingUrl={`${__API_URL__}/uploads`}
+            signingUrl={`${process.env.API_URL}/uploads`}
             accept="image/*"
             onProgress={::this.handleUploadProgress}
             onError={::this.handleUploadError}
