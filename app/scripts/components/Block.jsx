@@ -86,7 +86,7 @@ export default class Block extends React.Component {
     if (!this.state.uploadProgress) {
       return (
         <ReactS3Uploader
-          signingUrl={`${process.env.BASE_URL}/uploads`}
+          signingUrl={`${__API_URL__}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
           onError={::this.handleUploadError}

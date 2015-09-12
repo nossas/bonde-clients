@@ -33,6 +33,13 @@ module.exports = function(config) {
             'BASE_URL': '"http://localhost:3000/v1"',
             'NODE_ENV': '"test"'
           }
+        }),
+        new webpack.DefinePlugin({
+          __CLIENT__: true,
+          __SERVER__: false,
+          __DEVELOPMENT__: true,
+          __DEVTOOLS__: false,  // <-------- DISABLE redux-devtools HERE
+          __API_URL__: "'http://localhost:3000'"
         })
       ]
     },

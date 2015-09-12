@@ -2,7 +2,6 @@ import { FETCH_MOBILIZATIONS, EDIT_MOBILIZATION } from '../../constants/ActionTy
 import * as MobilizationActions from './../../actions/MobilizationActions'
 import $ from 'jquery'
 
-const BASE_URL = process.env.BASE_URL
 let dispatch
 
 describe('MobilizationActions', () => {
@@ -15,7 +14,7 @@ describe('MobilizationActions', () => {
       MobilizationActions.fetchMobilizations()(dispatch)
       const request = requests[0]
       const mobilizations = [{id: 1}, {id: 2}]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations`)
+      expect(request.url).to.equal(`${__API_URL__}/mobilizations`)
       expect(request.method).to.equal('GET')
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(mobilizations))
       expect(dispatch).to.have.been.calledWith({
@@ -37,7 +36,7 @@ describe('MobilizationActions', () => {
       MobilizationActions.editMobilization(params)(dispatch)
 
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1`)
+      expect(request.url).to.equal(`${__API_URL__}/mobilizations/1`)
       expect(request.method).to.equal('PUT')
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(params.mobilization))
     })

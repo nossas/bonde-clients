@@ -2,11 +2,9 @@ import { FETCH_MOBILIZATIONS, EDIT_MOBILIZATION, ADD_MOBILIZATION } from '../con
 import * as Paths from '../Paths'
 import $ from 'jquery'
 
-const BASE_URL = process.env.BASE_URL
-
 export function fetchMobilizations() {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations`, {
+    $.ajax(`${__API_URL__}/mobilizations`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: FETCH_MOBILIZATIONS,
@@ -19,7 +17,7 @@ export function fetchMobilizations() {
 
 export function addMobilization(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations`, {
+    $.ajax(`${__API_URL__}/mobilizations`, {
       method: 'post',
       data: { mobilization: params.mobilization },
       headers: params.credentials,
@@ -36,7 +34,7 @@ export function addMobilization(params) {
 
 export function editMobilization(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.id}`, {
+    $.ajax(`${__API_URL__}/mobilizations/${params.id}`, {
       method: 'put',
       data: { mobilization: params.mobilization },
       headers: params.credentials,

@@ -5,11 +5,9 @@ import {
   AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE
 } from '../constants/ActionTypes'
 
-const BASE_URL = process.env.BASE_URL
-
 export function login(data) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/auth/sign_in`, {
+    $.ajax(`${__API_URL__}/auth/sign_in`, {
       method: 'post',
       data: { ...data },
       beforeSend: function(jqXHR, settings){
