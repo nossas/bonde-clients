@@ -1,13 +1,8 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import { FormWidgetMenu, FormWidget, Loading, CloseButton } from './../components'
 import * as Paths from '../Paths'
-
-@connect(state => ({
-  widgets: state.widgets
-}))
 
 export default class FormWidgetFields extends React.Component {
   constructor(props, context) {
@@ -16,12 +11,6 @@ export default class FormWidgetFields extends React.Component {
       loading: false,
       hasNewField: false
     }
-  }
-
-  componentDidMount(){
-    const { mobilization, dispatch } = this.props
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,7 +27,7 @@ export default class FormWidgetFields extends React.Component {
 
   widget(props = this.props) {
     const { widgets } = props
-    return widgets[widgets.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
+    return widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
   }
 
   fields() {
@@ -89,7 +78,7 @@ export default class FormWidgetFields extends React.Component {
   }
 
   renderLoading(){
-    if(this.state.loading || this.props.widgets.length == 0) {
+    if(this.state.loading || this.props.widgets.data.length == 0) {
       return(
         <Loading />
       )
@@ -97,6 +86,6 @@ export default class FormWidgetFields extends React.Component {
   }
 
   render() {
-    return(this.props.widgets.length > 0 ? this.renderFields() : this.renderLoading())
+    return(this.props.widgets.data.length > 0 ? this.renderFields() : this.renderLoading())
   }
 }

@@ -12,7 +12,7 @@ function widgetFormValidation(data) {
   return errors
 }
 
-@connect(state => ({ widgets: state.widgets, form: state.widgetForm }))
+@connect(state => ({ form: state.widgetForm }))
 @reduxForm('widgetForm', widgetFormValidation)
 export default class FormWidgetForm extends React.Component {
   constructor(props, context) {
@@ -24,12 +24,6 @@ export default class FormWidgetForm extends React.Component {
       error: null
     }
     this.props.initializeForm({callToAction: null, buttonText: null, countText: null, emailText: null })
-  }
-
-  componentDidMount(){
-    const { mobilization, dispatch } = this.props
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,7 +52,7 @@ export default class FormWidgetForm extends React.Component {
 
   widget(props = this.props) {
     const { widgets } = props
-    return widgets[widgets.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
+    return widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
   }
 
   handleCancelClick(event) {
@@ -165,7 +159,7 @@ export default class FormWidgetForm extends React.Component {
           <input
             type="submit"
             className={classnames("caps button bg-aqua h3 mt1 p2")}
-            disabled={this.state.submitting || (!dirty)}
+            disabled={this.state.submitting}
             value={this.state.submitting ? "Salvando..." : "Salvar"} />
         </div>
 
@@ -178,7 +172,7 @@ export default class FormWidgetForm extends React.Component {
 
   renderPage() {
     const { widgets, dirty } = this.props
-    const widget = widgets[widgets.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
+    const widget = widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
     return(
       <div className="flex-auto bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
@@ -197,6 +191,6 @@ export default class FormWidgetForm extends React.Component {
   }
 
   render() {
-    return(this.props.widgets.length > 0 ? this.renderPage() : this.renderLoading())
+    return(this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
   }
 }
