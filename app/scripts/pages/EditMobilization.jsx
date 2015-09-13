@@ -1,17 +1,13 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import Block from './../components/Block.jsx'
-import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
-import * as BlockActions from './../actions/BlockActions'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
+import { fetchWidgets } from './../reducers/widgets'
 
 @connect(state => ({
-  blocks: state.blocks,
-  widgets: state.widgets,
   scrolledToBottom: false,
   widgetsCount: state.widgets.length
 }))
@@ -20,7 +16,10 @@ import { connect } from 'react-redux'
 export default class EditMobilization extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    blocks: PropTypes.object.isRequired,
+    widgets: PropTypes.object.isRequired,
+    location: PropTypes.object
   }
 
   constructor(props, context) {
@@ -32,11 +31,8 @@ export default class EditMobilization extends React.Component {
   }
 
   componentDidMount() {
-    const { mobilization, dispatch } = this.props
-    const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedBlockActions.fetchBlocks({mobilization_id: mobilization.id})
-    bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
+    const {dispatch, mobilization} = this.props
+    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
   }
 
   componentDidUpdate() {
@@ -56,7 +52,8 @@ export default class EditMobilization extends React.Component {
   }
 
   newBlock() {
-    return this.props.location.query && this.props.location.query.newBlock && this.props.location.query.newBlock == 'true'
+    const {location} = this.props
+    return location.query && location.query.newBlock && location.query.newBlock === 'true'
   }
 
   render() {
