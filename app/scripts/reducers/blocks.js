@@ -98,7 +98,7 @@ export function addBlock(params) {
         superagent
         .post(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`)
         .set(params.credentials)
-        .send(params.block)
+        .send({block: params.block})
         .end((err, res) => {
           if (err) {
             reject(res.body || err)
