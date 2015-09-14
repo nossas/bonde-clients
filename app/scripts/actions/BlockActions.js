@@ -66,7 +66,7 @@ export function moveBlockUp(params) {
       method: 'put',
       data: {
         block: {
-          position: blocks[blocks.indexOf(block) - 1].position
+          position: blocks.data[blocks.data.indexOf(block) - 1].position
         }
       },
       headers: params.credentials,
@@ -87,7 +87,7 @@ export function moveBlockDown(params) {
       method: 'put',
       data: {
         block: {
-          position: blocks[blocks.indexOf(block) + 1].position
+          position: blocks.data[blocks.data.indexOf(block) + 1].position
         }
       },
       headers: params.credentials,
