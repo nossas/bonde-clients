@@ -159,7 +159,7 @@ export default class FormWidgetForm extends React.Component {
           <input
             type="submit"
             className={classnames("caps button bg-aqua h3 mt1 p2")}
-            disabled={this.state.submitting}
+            disabled={this.state.submitting || (!dirty)}
             value={this.state.submitting ? "Salvando..." : "Salvar"} />
         </div>
 

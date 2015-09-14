@@ -9,6 +9,7 @@ const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goa
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
 const loginForm = createFormReducer('loginForm', ['email', 'password'])
+const widgetForm = createFormReducer('widgetForm', ['callToAction', 'buttonText', 'countText', 'emailText'])
 
 export default combineReducers({
   mobilizations,
@@ -18,5 +19,6 @@ export default combineReducers({
   blocks,
   widgets,
   loginForm,
+  widgetForm,
   auth
 });
