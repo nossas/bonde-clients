@@ -1,44 +1,30 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import PubSub from 'pubsub-js'
-import Auth from 'j-toker'
-import $ from 'jquery'
+import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
 
-Auth.configure({
-  apiUrl: process.env.BASE_URL,
-  handleTokenValidationResponse: function(resp) {
-    // https://github.com/lynndylanhurley/j-toker/issues/10
-    PubSub.publish("auth.validation.success", resp.data)
-    return resp.data
-  }
-})
-
-$.ajaxSetup({beforeSend: Auth.appendAuthHeaders})
-$(document).ajaxComplete(Auth.updateAuthCredentials)
+import '../../styles/main.scss'
+import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 
 @connect(state => ({ auth: state.auth }))
-export default class Application extends React.Component {
-  constructor(props, context) {
-    super(props, context)
 
-    this.state = {
-      auth: {
-        user: Auth.user
-      }
-    }
+export default class Application extends React.Component {
+  static propTypes = {
+    children: PropTypes.object.isRequired,
+    auth: PropTypes.object
   }
 
-  componentWillMount() {
-    PubSub.subscribe('auth', function() {
-      this.setState({ auth: { user: Auth.user } })
-    }.bind(this))
+  static fetchData(store) {
+    const promises = []
+    if (!isAuthLoaded(store.getState())) {
+      promises.push(store.dispatch(loadAuth()))
+    }
+    return Promise.all(promises)
   }
 
   render() {
-    return(
+    return (
       <div>
-        {this.props.children &&
-          React.cloneElement(this.props.children, {user: this.state.auth.user})}
+        {React.cloneElement(this.props.children, {auth: this.props.auth})}
       </div>
     )
   }

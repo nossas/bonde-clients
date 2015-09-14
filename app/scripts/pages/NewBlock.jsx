@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
-import { bindActionCreators } from 'redux'
-import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
-import { BlockMiniature, ColorPicker, Progress } from './../components'
+import { BlockMiniature, ColorPicker, Progress, CloseButton } from './../components'
 import { BLOCK_LAYOUTS } from '../constants/BlockLayouts'
+import * as Paths from '../Paths'
+import {addBlock} from '../reducers/blocks'
 
 export default class NewBlock extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.object.isRequired,
+    blocks: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
 
   constructor(props, context) {
     super(props, context)
@@ -15,6 +25,15 @@ export default class NewBlock extends React.Component {
       bgClass: 'bg-1',
       bgImage: null,
       uploadProgress: null
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {blocks, mobilization} = this.props
+
+    if (blocks.data.length !== nextProps.blocks.data.length) {
+      const {router} = this.context
+      router.transitionTo(Paths.editMobilization(mobilization.id) + '?newBlock=true')
     }
   }
 
@@ -27,11 +46,11 @@ export default class NewBlock extends React.Component {
   }
 
   handleAddBlockClick() {
-    const { dispatch } = this.props
-    const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
-    bindedBlockActions.addBlock({
-      router: this.context.router,
+    const { dispatch, auth } = this.props
+
+    const action = addBlock({
       mobilization_id: this.props.mobilization.id,
+      credentials: auth.credentials,
       block: {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage,
@@ -40,6 +59,8 @@ export default class NewBlock extends React.Component {
         })
       }
     })
+
+    dispatch(action)
   }
 
   handleCancelClick() {
@@ -69,7 +90,7 @@ export default class NewBlock extends React.Component {
     if (!this.state.uploadProgress) {
       return (
         <ReactS3Uploader
-          signingUrl={`${process.env.BASE_URL}/uploads`}
+          signingUrl={`${process.env.API_URL}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
           onError={::this.handleUploadError}
@@ -101,9 +122,9 @@ export default class NewBlock extends React.Component {
     }
   }
 
-  render(){
+  render() {
     return (
-      <div className={classnames("flex-auto", "bg-silver", "gray", this.props.mobilization.color_scheme)}>
+      <div className={classnames('flex-auto bg-silver gray relative', this.props.mobilization.color_scheme)}>
         <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
         <div className="py3 px4">
           <p
@@ -113,7 +134,7 @@ export default class NewBlock extends React.Component {
           <label className="caps h6 bold mb1 block">Tipo de bloco</label>
           <div className="mxn1">
             {BLOCK_LAYOUTS.map((layout, index) => {
-              return(
+              return (
                 <BlockMiniature
                   key={index}
                   layout={layout}
@@ -134,25 +155,21 @@ export default class NewBlock extends React.Component {
           </div>
           <div className="clearfix">
             <button
-              className="button bg-darken-3 rounded white button-transparent mr1"
+              className="button bg-darken-3 rounded white caps button-transparent mr1"
               disabled={!!this.state.uploadProgress}
               onClick={::this.handleCancelClick}>
               Cancelar
             </button>
             <button
-              className="button bg-aqua"
+              className="button bg-aqua caps"
               disabled={!!this.state.uploadProgress}
               onClick={::this.handleAddBlockClick}>
-              <i className="fa fa-cloud-upload mr1" />
               Adicionar
             </button>
           </div>
         </div>
+        <CloseButton dirty={false} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }
-}
-
-NewBlock.contextTypes = {
-  router: React.PropTypes.object.isRequired
 }

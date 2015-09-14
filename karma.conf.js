@@ -30,9 +30,15 @@ module.exports = function(config) {
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
-            'BASE_URL': '"http://localhost:3000/v1"',
+            'API_URL': '"http://localhost:3000"',
             'NODE_ENV': '"test"'
           }
+        }),
+        new webpack.DefinePlugin({
+          __CLIENT__: true,
+          __SERVER__: false,
+          __DEVELOPMENT__: true,
+          __DEVTOOLS__: false  // <-------- DISABLE redux-devtools HERE
         })
       ]
     },

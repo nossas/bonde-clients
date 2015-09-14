@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { Link, Navigation } from 'react-router'
 
-export default class ConfigurationsMenuItem extends React.Component {
+export default class TabMenuItem extends React.Component {
   render(){
     return(
       <li className={classNames(

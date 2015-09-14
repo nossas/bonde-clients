@@ -57,8 +57,8 @@ export default class Block extends React.Component {
             </div>
           </div>
           <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
-            <button className="button button-transparent bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}><i className="fa fa-cloud-upload mr1" />Salvar</button>
-            <button className="button button-transparent bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}><i className="fa fa-undo mr1" />Cancelar</button>
+            <button className="button button-transparent caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
+            <button className="button button-transparent caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
           </div>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
@@ -86,7 +86,7 @@ export default class Block extends React.Component {
     if (!this.state.uploadProgress) {
       return (
         <ReactS3Uploader
-          signingUrl={`${process.env.BASE_URL}/uploads`}
+          signingUrl={`${process.env.API_URL}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
           onError={::this.handleUploadError}
@@ -162,10 +162,12 @@ export default class Block extends React.Component {
   }
 
   handleSaveEdit() {
+    const { mobilization, block, auth } = this.props
     this.setState({editingBackground: false, loading: true})
     this.bindedBlockActions.editBlock({
-      mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
+      mobilization_id: mobilization.id,
+      block_id: block.id,
+      credentials: auth.credentials,
       block: {
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage
@@ -186,40 +188,46 @@ export default class Block extends React.Component {
   }
 
   handleMoveUpClick() {
+    const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.moveBlockUp({
-      mobilization_id: this.props.mobilization.id,
-      block: this.props.block,
-      blocks: this.props.blocks
+      credentials: auth.credentials,
+      mobilization_id: mobilization.id,
+      block: block,
+      blocks: blocks
     })
   }
 
   handleMoveDownClick() {
+    const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.moveBlockDown({
-      mobilization_id: this.props.mobilization.id,
-      block: this.props.block,
-      blocks: this.props.blocks
+      credentials: auth.credentials,
+      mobilization_id: mobilization.id,
+      block: block,
+      blocks: blocks
     })
   }
 
   handleToggleHiddenClick() {
+    const { mobilization, block, auth } = this.props
     this.setState({loading: true})
     this.bindedBlockActions.editBlock({
-      mobilization_id: this.props.mobilization.id,
-      block_id: this.props.block.id,
-      block: {
-        hidden: !this.props.block.hidden
-      }
+      mobilization_id: mobilization.id,
+      block_id: block.id,
+      credentials: auth.credentials,
+      block: { hidden: !block.hidden }
     })
   }
 
   handleRemoveClick() {
+    const { mobilization, block, auth } = this.props
     if (confirm("Você tem certeza que quer remover este bloco?")) {
       this.setState({loading: true})
       this.bindedBlockActions.removeBlock({
-        mobilization_id: this.props.mobilization.id,
-        block_id: this.props.block.id
+        mobilization_id: mobilization.id,
+        block_id: block.id,
+        credentials: auth.credentials
       })
     }
   }
@@ -243,8 +251,10 @@ export default class Block extends React.Component {
   }
 
   render(){
+    // TODO: change widgets constant name to reflex the object that is returned
+    // by the reducer
     const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
-    const filteredWidgets = this.filterWidgets(widgets, block)
+    const filteredWidgets = this.filterWidgets(widgets.data, block)
     return(
       <div
         className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))}

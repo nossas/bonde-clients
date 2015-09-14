@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { ConfigurationsMenu } from './../components'
+import { ConfigurationsMenu, CloseButton } from './../components'
 
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
@@ -19,7 +19,7 @@ function mobilizationCityValidation(data) {
   return errors
 }
 
-@connect(state => ({ form: state.mobilizationCity }))
+@connect(state => ({ form: state.mobilizationCity, auth: state.auth }))
 @reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
@@ -59,12 +59,13 @@ export default class MobilizationCity extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
-        mobilization: {color_scheme: data.colorScheme}
+        mobilization: {color_scheme: data.colorScheme},
+        credentials: auth.credentials
       }))
     } else {
       touchAll()
@@ -107,6 +108,13 @@ export default class MobilizationCity extends React.Component {
           onChange={handleChange('colorScheme')}
           onBlur={handleBlur('colorScheme')}
           value={colorScheme}>
+          <option value="minhablumenau-scheme">Blumenau</option>
+          <option value="minhacampinas-scheme">Campinas</option>
+          <option value="minhacuritiba-scheme">Curitiba</option>
+          <option value="minhagaropaba-scheme">Garopaba</option>
+          <option value="minhaouropreto-scheme">Ouro Preto</option>
+          <option value="minhaportoalegre-scheme">Porto Alegre</option>
+          <option value="meurecife-scheme">Recife</option>
           <option value="meurio-scheme">Rio de Janeiro</option>
           <option value="minhasampa-scheme">São Paulo</option>
         </select>
@@ -164,9 +172,9 @@ export default class MobilizationCity extends React.Component {
   }
 
   render(){
-    const { mobilization } = this.props
+    const { mobilization, dirty } = this.props
     return(
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         { this.renderMenu() }
         <div className="py3 px4">
           { this.renderTitle() }
@@ -174,6 +182,7 @@ export default class MobilizationCity extends React.Component {
             { !this.state.initializing && this.renderForm() }
           </div>
         </div>
+        {!this.newMobilization() && <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} />}
       </div>
     )
   }

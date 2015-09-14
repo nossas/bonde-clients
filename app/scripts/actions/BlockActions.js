@@ -2,11 +2,9 @@ import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN 
 import * as Paths from '../Paths'
 import $ from 'jquery'
 
-const BASE_URL = process.env.BASE_URL
-
 export function fetchBlocks(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: FETCH_BLOCKS,
@@ -19,9 +17,10 @@ export function fetchBlocks(params) {
 
 export function addBlock(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
       method: 'post',
       data: { block: params.block },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         params.router.transitionTo(Paths.editMobilization(params.mobilization_id) + '?newBlock=true')
       }
@@ -31,9 +30,10 @@ export function addBlock(params) {
 
 export function editBlock(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'put',
       data: { block: params.block },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: EDIT_BLOCK,
@@ -46,8 +46,9 @@ export function editBlock(params) {
 
 export function removeBlock(params) {
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
       method: 'delete',
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: REMOVE_BLOCK,
@@ -61,13 +62,14 @@ export function removeBlock(params) {
 export function moveBlockUp(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {
-          position: blocks[blocks.indexOf(block) - 1].position
+          position: blocks.data[blocks.data.indexOf(block) - 1].position
         }
       },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: MOVE_BLOCK_UP,
@@ -81,13 +83,14 @@ export function moveBlockUp(params) {
 export function moveBlockDown(params) {
   const { block, blocks } = params
   return dispatch => {
-    $.ajax(`${BASE_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
+    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
       method: 'put',
       data: {
         block: {
-          position: blocks[blocks.indexOf(block) + 1].position
+          position: blocks.data[blocks.data.indexOf(block) + 1].position
         }
       },
+      headers: params.credentials,
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: MOVE_BLOCK_DOWN,

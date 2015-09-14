@@ -2,8 +2,6 @@ import { EDIT_WIDGET, FETCH_WIDGETS } from '../../constants/ActionTypes'
 import * as WidgetActions from './../../actions/WidgetActions'
 import $ from 'jquery'
 
-const BASE_URL = process.env.BASE_URL
-
 describe('WidgetActions', () => {
   describe('#fetchMobilizations', () => {
     it('should GET widgets using correct URL and dispatch action', () => {
@@ -11,7 +9,7 @@ describe('WidgetActions', () => {
       WidgetActions.fetchWidgets({mobilization_id: 1})(dispatch)
       const request = requests[0]
       const widgets = [{id: 1}, {id: 2}]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/widgets`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/widgets`)
       expect(request.method).to.equal('GET')
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widgets))
       expect(dispatch).to.have.been.calledWith({
@@ -34,7 +32,7 @@ describe('WidgetActions', () => {
         widget
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/widgets/2`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/widgets/2`)
       expect(request.method).to.equal('PUT')
       expect(request.requestBody).to.equal(JSON.stringify({widget}))
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widget))

@@ -13,26 +13,64 @@
     "url": "https://github.com/meurio/hub-client/issues"
   },
   "scripts": {
-    "start": "node server",
-    "postinstall": "node deploy",
+    "start": "node ./node_modules/better-npm-run start",
+    "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "watch-client": "node ./node_modules/better-npm-run watch-client",
+    "start-dev": "node ./node_modules/better-npm-run start-dev",
+    "dev": "concurrent --kill-others \"npm run watch-client\" \"npm run start-dev\"",
     "test": "./node_modules/.bin/karma start --single-run --browsers Firefox"
+  },
+  "betterScripts": {
+    "start": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    },
+    "start-dev": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "API_URL": "http://localhost:3000"
+      }
+    },
+    "watch-client": {
+      "command": "node webpack/webpack-dev-server.js",
+      "env": {
+        "UV_THREADPOOL_SIZE": 100,
+        "NODE_PATH": "./src",
+        "API_URL": "http://localhost:3000"
+      }
+    }
   },
   "dependencies": {
     "autoprefixer-core": "^5.2.0",
+    "babel": "^5.8.21",
     "babel-loader": "^5.3.2",
+    "babel-plugin-typecheck": "^1.2.0",
+    "babel-runtime": "^5.8.20",
     "basscss-sass": "^1.0.2",
+    "better-npm-run": "0.0.1",
+    "body-parser": "^1.13.2",
     "chai": "^3.2.0",
     "classnames": "^2.1.3",
+    "clean-webpack-plugin": "^0.1.3",
+    "compression": "^1.5.0",
+    "concurrently": "^0.1.1",
     "console": "^0.5.2",
     "css-loader": "^0.16.0",
     "drmonty-chosen": "^1.4.2",
     "expose-loader": "^0.7.0",
     "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
-    "font-awesome": "^4.3.0",
+    "font-awesome": "^4.4.0",
     "fs": "0.0.2",
     "http-proxy": "^1.11.1",
-    "j-toker": "0.0.6",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.2",
     "karma": "0.13.9",
@@ -41,9 +79,13 @@
     "karma-sinon-chai": "^1.0.0",
     "net": "^1.0.2",
     "node-sass": "^3.1.2",
+    "piping": "^0.2.0",
     "postcss-loader": "^0.5.1",
-    "pubsub-js": "^1.5.2",
+    "pretty-error": "^1.1.2",
+    "query-string": "^2.4.0",
     "react": "^0.13.3",
+    "react-document-meta": "^0.1.4",
+    "react-hot-loader": "^1.2.8",
     "react-mixin": "^1.7.0",
     "react-redux": "^0.8.2",
     "react-router": "1.0.0-beta3",
@@ -53,16 +95,27 @@
     "redux-logger": "0.0.3",
     "redux-thunk": "^0.1.0",
     "sass-loader": "^2.0.1",
+    "serialize-javascript": "^1.0.0",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.10.0",
     "sinon": "^1.15.3",
     "sinon-chai": "^2.8.0",
+    "strip-loader": "^0.1.0",
     "style-loader": "^0.12.3",
+    "superagent": "^1.2.0",
     "tls": "0.0.1",
     "universal-analytics": "^0.3.9",
     "url-loader": "^0.5.6",
     "webpack": "^1.11.0",
-    "webpack-dev-server": "^1.9.0"
+    "webpack-dev-server": "^1.9.0",
+    "webpack-isomorphic-tools": "^0.8.1"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^2.0.0",
+    "babel-eslint": "^4.1.1",
+    "eslint": "^1.3.1",
+    "eslint-config-airbnb": "0.0.8",
+    "eslint-plugin-react": "^3.3.1",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
     "karma-sourcemap-loader": "^0.3.5",

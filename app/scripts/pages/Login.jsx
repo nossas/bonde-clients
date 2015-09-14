@@ -1,12 +1,13 @@
 import React from 'react'
-import { TopMenu, LoginForm } from './../components'
+import TopMenu from './../components/TopMenu.jsx'
+import LoginForm from './../components/LoginForm.jsx'
 
 export default class Login extends React.Component {
   render() {
-    let bgImage = require('./bg-login.png')
     return (
       <div className="absolute left-0 top-0 right-0 bottom-0 bg-gray gray bg-cover bg-center">
-        <TopMenu />
+        {/* TODO move TopMenu rendering to the Application component */}
+        <TopMenu {...this.props} />
         <div className="py4">
           <div className="container py4">
             <div className="px3 bg-white rounded-top lg-col-6 mx-auto">

@@ -1,38 +1,52 @@
-import Auth from 'j-toker'
+import $ from 'jquery'
+
 import {
   AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
   AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE
 } from '../constants/ActionTypes'
 
 export function login(data) {
-  return function (dispatch) {
-    dispatch(loginRequest(data))
+  return dispatch => {
+    $.ajax(`${process.env.API_URL}/auth/sign_in`, {
+      method: 'post',
+      data: { ...data },
+      beforeSend: function(jqXHR, settings){
+        dispatch({
+          type: AUTH_LOGIN_REQUEST
+        })
+      },
+      success: function(data, textStatus, jqXHR){
+        const credentials = {
+          "Access-Token": jqXHR.getResponseHeader('Access-Token'),
+          "Expiry": jqXHR.getResponseHeader('Expiry'),
+          "Token-Type": jqXHR.getResponseHeader('Token-Type'),
+          "Uid": jqXHR.getResponseHeader('Uid'),
+          "Client": jqXHR.getResponseHeader('Client')
+        }
 
-    return Auth.emailSignIn(data).then(
-      user => dispatch(loginSuccess(user)),
-      error => dispatch(loginFailure(error.data.errors[0]))
-    )
-  }
-}
+        // Create a session into the server-side rendering server
+        $.ajax(`/api/login`, {
+          method: 'post',
+          contentType: "application/json",
+          data: JSON.stringify({
+            credentials: credentials,
+            user: data.data
+          })
+        })
 
-export function loginRequest(data) {
-  return {
-    type: AUTH_LOGIN_REQUEST,
-    data
-  }
-}
-
-export function loginSuccess(user) {
-  return {
-    type: AUTH_LOGIN_SUCCESS,
-    user
-  }
-}
-
-export function loginFailure(error) {
-  return {
-    type: AUTH_LOGIN_FAILURE,
-    error
+        dispatch({
+          type: AUTH_LOGIN_SUCCESS,
+          user: data.data,
+          credentials: credentials
+        })
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        dispatch({
+          type: AUTH_LOGIN_FAILURE,
+          error: jqXHR.responseJSON.errors[0]
+        })
+      }
+    })
   }
 }
 

@@ -27,18 +27,8 @@ function loginValidation(data) {
 @connect(state => ({ auth: state.auth, form: state.loginForm }))
 @reduxForm('loginForm', loginValidation)
 @reactMixin.decorate(Navigation)
+
 export default class LoginForm extends React.Component {
-
-  constructor(props, context) {
-    super(props, context)
-    this.state = {
-      auth: {
-        submitting: false,
-        error: null
-      }
-    }
-  }
-
   static propTypes = {
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
@@ -51,22 +41,23 @@ export default class LoginForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch } = this.props
-    this.setState({ auth: { submitting: true, error: null }})
 
-    if (valid) {
+    if (valid)
       dispatch(AuthActions.login(data))
-        .then(() => this.transitionTo(Paths.mobilizations()))
-        .fail((state) => this.setState({ auth: state }))
-    } else {
+    else
       touchAll()
-      this.setState({ auth: { submitting: false } })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.user){
+      this.transitionTo(Paths.mobilizations())
     }
   }
 
   renderErrorMessage() {
-    if (this.state.auth.error) {
+    if (this.props.auth.error) {
       return (
-        <div className="h5 red bold center mt2 animated shake">{this.state.auth.error}</div>
+        <div className="h5 red bold center mt2 animated shake">{this.props.auth.error}</div>
       )
     }
   }
@@ -104,8 +95,8 @@ export default class LoginForm extends React.Component {
         <input
           type="submit"
           className="button full-width bg-aqua mt2 p2"
-          disabled={this.state.auth.submitting}
-          value={this.state.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
+          disabled={this.props.auth.submitting}
+          value={this.props.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
         {::this.renderErrorMessage()}
       </form>

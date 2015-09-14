@@ -2,8 +2,6 @@ import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN 
 import * as BlockActions from './../../actions/BlockActions'
 import $ from 'jquery'
 
-const BASE_URL = process.env.BASE_URL
-
 describe('BlockActions', () => {
   describe('#fetchBlocks', () => {
     it('should GET blocks using correct URL and dispatch action', () => {
@@ -11,7 +9,7 @@ describe('BlockActions', () => {
       BlockActions.fetchBlocks({ mobilization_id: 1 })(dispatch)
       const request = requests[0]
       const blocks = [{id: 1}, {id: 2}]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks`)
       expect(request.method).to.equal('GET')
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(blocks))
       expect(dispatch).to.have.been.calledWith({
@@ -36,7 +34,7 @@ describe('BlockActions', () => {
         block
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks`)
       expect(request.method).to.equal('POST')
       expect(request.requestBody).to.equal($.param({block: block}))
       request.respond(200)
@@ -57,7 +55,7 @@ describe('BlockActions', () => {
         block
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks/2`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks/2`)
       expect(request.method).to.equal('PUT')
       expect(request.requestBody).to.equal($.param({block}))
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(block))
@@ -76,7 +74,7 @@ describe('BlockActions', () => {
         block_id: 2
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks/2`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks/2`)
       expect(request.method).to.equal('DELETE')
       expect(request.requestBody).to.be.null
       const block = {id: 2}
@@ -94,14 +92,14 @@ describe('BlockActions', () => {
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
-      const blocks = [block1, block2, block3]
+      const blocks = {data: [block1, block2, block3]}
       BlockActions.moveBlockUp({
         mobilization_id: 1,
         blocks,
         block: block3
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks/3`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks/3`)
       expect(request.method).to.equal('PUT')
       expect(request.requestBody).to.equal($.param({block: {position: 6}}))
       const movedBlock = {...block3, position: 6}
@@ -119,14 +117,14 @@ describe('BlockActions', () => {
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
-      const blocks = [block1, block2, block3]
+      const blocks = {data: [block1, block2, block3]}
       BlockActions.moveBlockDown({
         mobilization_id: 1,
         blocks,
         block: block2
       })(dispatch)
       const request = requests[0]
-      expect(request.url).to.equal(`${BASE_URL}/mobilizations/1/blocks/2`)
+      expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks/2`)
       expect(request.method).to.equal('PUT')
       expect(request.requestBody).to.equal($.param({block: {position: 9}}))
       const movedBlock = {...block3, position: 9}

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link, Navigation } from 'react-router'
+import { Link } from 'react-router'
 import * as Paths from '../Paths'
 import classNames from 'classnames'
-import { ConfigurationsMenuItem } from './'
+import { TabMenuItem } from './'
 
 export default class ConfigurationsMenu extends React.Component {
   render(){
@@ -17,22 +17,22 @@ export default class ConfigurationsMenu extends React.Component {
         <h2 className="mb3">Configure sua mobilização</h2>
         <div>
           <ul className="list-reset mb0">
-            <ConfigurationsMenuItem
+            <TabMenuItem
               path={basicsMobilizationPath}
               text="Informações básicas"
               isActive={basicsMobilizationPath == location.pathname}
             />
-            <ConfigurationsMenuItem
+            <TabMenuItem
               path={cityMobilizationPath}
               text="Cidade"
               isActive={cityMobilizationPath == location.pathname}
             />
-            <ConfigurationsMenuItem
+            <TabMenuItem
               path={sharingMobilizationPath}
               text="Compartilhamento"
               isActive={sharingMobilizationPath == location.pathname}
             />
-            <ConfigurationsMenuItem
+            <TabMenuItem
               path={analyticsMobilizationPath}
               text="Google Analytics"
               isActive={analyticsMobilizationPath == location.pathname}

@@ -1,14 +1,57 @@
-import * as actions from '../constants/ActionTypes';
+import superagent from 'superagent'
 
-export default function widgets(state = [], action) {
+const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
+const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
+const FETCH_WIDGETS_FAILURE = 'FETCH_WIDGETS_FAILURE'
+const EDIT_WIDGET = 'EDIT_WIDGET'
+const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
+
+const initialState = {
+  loaded: false,
+  data: []
+}
+
+export default function widgets(state = initialState, action) {
   switch (action.type) {
-    case actions.EDIT_WIDGET:
-      return state.map(widget =>
-        widget.id == action.widget.id ? action.widget : widget
-      )
-    case actions.FETCH_WIDGETS:
-      return action.widgets
+    case FETCH_WIDGETS_REQUEST:
+      return {...state, loaded: false}
+    case FETCH_WIDGETS_SUCCESS:
+      return {...state, loaded: true, data: action.result }
+    case FETCH_WIDGETS_FAILURE:
+      return {...state, loaded: true}
+    case EDIT_WIDGET:
+      return {...state,
+        data: state.data.map(
+          widget => widget.id === action.widget.id ? action.widget : widget
+        )}
+    case ADD_FORM_ENTRY:
+      return {...state,
+        data: state.data.map(
+          widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
+        )
+      }
     default:
       return state
+  }
+}
+
+export function isWidgetsLoaded(globalState) {
+  return globalState.blocks.loaded
+}
+
+export function fetchWidgets(options) {
+  return {
+    types: [FETCH_WIDGETS_REQUEST, FETCH_WIDGETS_SUCCESS, FETCH_WIDGETS_FAILURE],
+    promise: function() {
+      return new Promise(function(resolve, reject) {
+        superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/widgets`).end((err, res) => {
+          if (err) {
+            reject(res.body || err)
+          } else {
+            resolve(res.body)
+          }
+        })
+      })
+    }
   }
 }

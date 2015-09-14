@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import Block from './../components/Block.jsx'
-import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
-import * as BlockActions from './../actions/BlockActions'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
+import { fetchWidgets } from './../reducers/widgets'
 
 @connect(state => ({
-  blocks: state.blocks,
-  widgets: state.widgets,
   scrolledToBottom: false,
   widgetsCount: state.widgets.length
 }))
 @reactMixin.decorate(Navigation)
 
 export default class EditMobilization extends React.Component {
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    blocks: PropTypes.object.isRequired,
+    widgets: PropTypes.object.isRequired,
+    location: PropTypes.object
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -26,24 +30,21 @@ export default class EditMobilization extends React.Component {
     }
   }
 
-  componentDidMount(){
-    const { mobilization, dispatch } = this.props
-    const bindedBlockActions = bindActionCreators(BlockActions, dispatch)
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    bindedBlockActions.fetchBlocks({mobilization_id: mobilization.id})
-    bindedWidgetActions.fetchWidgets({mobilization_id: mobilization.id})
+  componentDidMount() {
+    const {dispatch, mobilization} = this.props
+    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
   }
 
   componentDidUpdate() {
-    const { mobilization, blocks } = this.props
-    if (!this.newBlock() && blocks.length == 0) {
+    const { mobilization, blocks, widgets } = this.props
+    if (!this.newBlock() && blocks.data.length === 0) {
       this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
     }
     if (!this.state.scrolledToBottom &&
         this.newBlock() &&
-        this.props.blocks.length > 0 &&
-        this.props.widgets.length > 0 &&
-        this.props.widgets.length > this.state.widgetsCount
+        blocks.data.length > 0 &&
+        widgets.data.length > 0 &&
+        widgets.data.length > this.state.widgetsCount
         ) {
       window.scrollTo(0, document.body.scrollHeight)
       this.setState({scrolledToBottom: true})
@@ -51,23 +52,26 @@ export default class EditMobilization extends React.Component {
   }
 
   newBlock() {
-    return this.props.location.query && this.props.location.query.newBlock && this.props.location.query.newBlock == "true"
+    const {location} = this.props
+    return location.query && location.query.newBlock && location.query.newBlock === 'true'
   }
 
-  render(){
+  render() {
     const { mobilization, blocks } = this.props
-    const className = classnames("flex-auto", mobilization.color_scheme, mobilization.font_set)
+    const { color_scheme } = mobilization
+    const className = classnames('flex-auto', color_scheme)
+
     return (
       <div className={className}>
         {
-          blocks.map(function(block, index){
-            return(
+          blocks.data.map(function(block, index) {
+            return (
               <Block
                 {...this.props}
-                key={"block-" + block.id}
+                key={'block-' + block.id}
                 block={block}
-                canMoveUp={index != 0}
-                canMoveDown={index != blocks.length - 1}
+                canMoveUp={index !== 0}
+                canMoveDown={index !== blocks.length - 1}
                 editable={true}
               />
             )

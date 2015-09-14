@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 import * as MobilizationActions from './../actions/MobilizationActions'
-import { Link } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { ConfigurationsMenu } from './../components'
+import { ConfigurationsMenu, CloseButton } from './../components'
 
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
@@ -34,7 +32,7 @@ export default class MobilizationAnalytics extends React.Component {
     props.initializeForm({id: props.mobilization.google_analytics_code})
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.state.initializing && this.setState({initializing: false})
     this.state.submitting && this.setState({submitting: false})
     this.state.submitting && this.setState({hasSubmitted: true})
@@ -46,18 +44,24 @@ export default class MobilizationAnalytics extends React.Component {
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
+    touched: PropTypes.object.isRequired,
+    dirty: PropTypes.bool.isRequired,
     initializeForm: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired
+    valid: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    mobilization: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null, hasSubmitted: false })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
-        mobilization: {google_analytics_code: data.id}
+        mobilization: {google_analytics_code: data.id},
+        credentials: auth.credentials
       }))
       this.props.initializeForm({id: data.id})
     } else {
@@ -87,7 +91,7 @@ export default class MobilizationAnalytics extends React.Component {
       <form className="mt2 mb4" onSubmit={::this.handleSubmit}>
         <div className="mb1 h5 caps bold">
           <label
-            style={{cursor: "pointer"}}
+            style={{cursor: 'pointer'}}
             htmlFor="ga-code-input">
             ID do Google Analytics
           </label>
@@ -106,7 +110,7 @@ export default class MobilizationAnalytics extends React.Component {
             type="submit"
             className="caps button bg-aqua h4 p2"
             disabled={this.state.submitting || (this.state.hasSubmitted && !this.props.dirty)}
-            value={this.state.submitting ? "Confirmando..." : "Confirmar"}
+            value={this.state.submitting ? 'Confirmando...' : 'Confirmar'}
           />
         </div>
         {idError && idTouched && <span className="red block">{idError}</span>}
@@ -117,10 +121,10 @@ export default class MobilizationAnalytics extends React.Component {
     )
   }
 
-  render(){
-    const { mobilization } = this.props
-    return(
-      <div className="flex-auto bg-silver gray">
+  render() {
+    const { dirty } = this.props
+    return (
+      <div className="flex-auto bg-silver gray relative">
         <ConfigurationsMenu {...this.props} />
         <div className="py3 px3 col col-8">
           <p className="h5">
@@ -146,6 +150,7 @@ export default class MobilizationAnalytics extends React.Component {
             </li>
           </ol>
         </div>
+        <CloseButton dirty={dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }

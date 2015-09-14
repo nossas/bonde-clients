@@ -2,17 +2,25 @@ import React from 'react/addons'
 import * as BlockActions from './../../actions/BlockActions'
 import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
 
-let { TestUtils } = React.addons
+const { TestUtils } = React.addons
 
-let widget1, widget2, allWidgets, blockWidgets, block
+let widget1
+let widget2
+let allWidgets
+let blockWidgets
+let block
+let auth
 
 describe('Block', () => {
   before(() => {
-    widget1 = { block_id: 1, id: 1, settings: { content: "My widget1" } }
-    widget2 = { block_id: 2, id: 2, settings: { content: "My widget2" } }
-    allWidgets = [widget1, widget2]
+    widget1 = { block_id: 1, id: 1, settings: { content: 'My widget1' } }
+    widget2 = { block_id: 2, id: 2, settings: { content: 'My widget2' } }
+    allWidgets = {data: [widget1, widget2]}
     blockWidgets = [widget1]
     block = { id: 1, bg_class: 'bg-1', bg_image: 'foobar.jpg' }
+    auth = {
+      credentials: { x: 'y' }
+    }
   })
 
   describe('#constructor', () => {
@@ -34,7 +42,7 @@ describe('Block', () => {
 
   describe('#filterWidgets', () => {
     it('should return widgets filtered by block_id', () => {
-      const filteredWidgets = Block.prototype.filterWidgets(allWidgets, block)
+      const filteredWidgets = Block.prototype.filterWidgets(allWidgets.data, block)
       expect(filteredWidgets).to.include(widget1)
       expect(filteredWidgets).to.not.include(widget2)
     })
@@ -42,8 +50,8 @@ describe('Block', () => {
 
   describe('#renderWidgets', () => {
     it('should return widgets components', () => {
-      const renderedWidgets = Block.prototype.renderWidgets(allWidgets)
-      expect(renderedWidgets).to.have.length(allWidgets.length)
+      const renderedWidgets = Block.prototype.renderWidgets(allWidgets.data)
+      expect(renderedWidgets).to.have.length(allWidgets.data.length)
       assert(TestUtils.isElementOfType(renderedWidgets[0], Widget))
       assert(TestUtils.isElementOfType(renderedWidgets[1], Widget))
     })
@@ -101,7 +109,7 @@ describe('Block', () => {
     it('should dispatch edit block action', () => {
       const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
       )
       component.setState({
         editingBackground: true,
@@ -116,7 +124,8 @@ describe('Block', () => {
         block: {
           bg_class: 'bg-test',
           bg_image: 'foo.png'
-        }
+        },
+        credentials: auth.credentials
       })
     })
   })
@@ -180,13 +189,14 @@ describe('Block', () => {
     it('should dispatch move block up action', () => {
       const moveBlockUpStub = sandbox.stub(BlockActions, 'moveBlockUp')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
       )
       component.handleMoveUpClick()
       expect(moveBlockUpStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
         block: component.props.block,
-        blocks: component.props.blocks
+        blocks: component.props.blocks,
+        credentials: auth.credentials
       })
     })
   })
@@ -195,13 +205,14 @@ describe('Block', () => {
     it('should dispatch move block down action', () => {
       const moveBlockDownStub = sandbox.stub(BlockActions, 'moveBlockDown')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
       )
       component.handleMoveDownClick()
       expect(moveBlockDownStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
         block: component.props.block,
-        blocks: component.props.blocks
+        blocks: component.props.blocks,
+        credentials: auth.credentials
       })
     })
   })
@@ -210,26 +221,28 @@ describe('Block', () => {
     it('should dispatch edit block action when visible', () => {
       const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={{...block, hidden: false}} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={{...block, hidden: false}} auth={auth} />
       )
       component.handleToggleHiddenClick()
       expect(editBlockStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
         block_id: component.props.block.id,
-        block: { hidden: true}
+        block: { hidden: true },
+        credentials: auth.credentials
       })
     })
 
     it('should dispatch edit block action when hidden', () => {
       const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={{...block, hidden: true}} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={{...block, hidden: true}} auth={auth} />
       )
       component.handleToggleHiddenClick()
       expect(editBlockStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
         block_id: component.props.block.id,
-        block: { hidden: false}
+        block: { hidden: false},
+        credentials: auth.credentials
       })
     })
   })
@@ -239,12 +252,13 @@ describe('Block', () => {
       sandbox.stub(window, 'confirm').returns(true)
       const removeBlockStub = sandbox.stub(BlockActions, 'removeBlock')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} />
+        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
       )
       component.handleRemoveClick()
       expect(removeBlockStub).to.have.been.calledWith({
         mobilization_id: component.props.mobilization.id,
-        block_id: component.props.block.id
+        block_id: component.props.block.id,
+        credentials: auth.credentials
       })
     })
 

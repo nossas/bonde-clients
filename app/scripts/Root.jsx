@@ -24,6 +24,9 @@ import MobilizationBasics from './pages/MobilizationBasics.jsx'
 import MobilizationCity from './pages/MobilizationCity.jsx'
 import MobilizationAnalytics from './pages/MobilizationAnalytics.jsx'
 import MobilizationSharing from './pages/MobilizationSharing.jsx'
+import MobilizationFonts from './pages/MobilizationFonts.jsx'
+import FormWidgetFields from './pages/FormWidgetFields.jsx'
+import FormWidgetForm from './pages/FormWidgetForm.jsx'
 
 // Components
 import MobilizationsMenu from './components/MobilizationsMenu.jsx'
@@ -85,7 +88,7 @@ function renderRoutes(history) {
       <Route component={Application}>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route component={Mobilizations}>
+        <Route component={Mobilizations} onEnter={requireAuth}>
           <Route path="/" components={{main: ListMobilizations, topMenu: TopMenu}} />
           <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
           <Route component={Mobilization} >
@@ -96,10 +99,20 @@ function renderRoutes(history) {
             <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/sharing" components={{main: MobilizationSharing, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/fonts" components={{main: MobilizationFonts, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" components={{main: FormWidgetFields, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" components={{main: FormWidgetForm, sidebar: MobilizationMenu, topMenu: TopMenu}} />
           </Route>
         </Route>
       </Route>
     </Router>
   )
+}
+
+function requireAuth(nextState, transition) {
+  /* const state = store.getState()
+  if (!state.auth.user) {
+    transition.to(Paths.login(), null, { nextPathname: nextState.location.pathname });
+  } */
 }
