@@ -8,6 +8,7 @@ import auth from './../../app/scripts/reducers/auth'
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
+const mobilizationFonts = createFormReducer('mobilizationFonts', ['headerFont', 'bodyFont'])
 const loginForm = createFormReducer('loginForm', ['email', 'password'])
 const widgetForm = createFormReducer('widgetForm', ['callToAction', 'buttonText', 'countText', 'emailText'])
 
@@ -16,6 +17,7 @@ export default combineReducers({
   mobilizationBasics,
   mobilizationCity,
   mobilizationAnalytics,
+  mobilizationFonts,
   blocks,
   widgets,
   loginForm,

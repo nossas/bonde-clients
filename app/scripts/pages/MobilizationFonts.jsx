@@ -66,12 +66,13 @@ export default class MobilizationFonts extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null })
 
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
+        credentials: auth.credentials,
         mobilization: {
           header_font: data.headerFont,
           body_font: data.bodyFont
