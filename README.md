@@ -4,16 +4,49 @@
 ## Install
 ```
 npm install
-npm start
+npm run dev
 ```
 And you are done!
 
 ## Tests
 As simples as:
 ```
-karma start
+npm run test
 ```
 Now sit and relax.
+
+## Deploy
+### Staging
+Go to the ```heroku``` branch
+```
+git checkout heroku
+```
+
+Merge your changes to the ```heroku``` branch
+```
+git merge master
+```
+
+Rebuild the static files
+```
+npm run build
+```
+
+Add the new build
+```
+git add -f static/dist
+```
+
+Push to Github
+```
+git push origin heroku
+```
+
+### Production
+Promote staging to production
+```
+heroku pipeline:promote --app hub-client-staging
+```
 
 ## Links
 - [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/888220)
