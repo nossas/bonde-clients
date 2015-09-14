@@ -25,11 +25,6 @@ export default function(store) {
     <Route component={Application}>
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
-      <Route component={Mobilizations}>
-        <Route component={Mobilization} >
-          <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
-        </Route>
-      </Route>
       <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
         <Route component={Mobilizations}>
           <Route path="/" components={{main: ListMobilizations, topMenu: TopMenu}} />
@@ -45,6 +40,11 @@ export default function(store) {
             <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" components={{main: FormWidgetFields, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" components={{main: FormWidgetForm, sidebar: MobilizationMenu, topMenu: TopMenu}} />
           </Route>
+        </Route>
+      </Route>
+      <Route component={Mobilizations}>
+        <Route component={Mobilization} >
+          <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
         </Route>
       </Route>
     </Route>
