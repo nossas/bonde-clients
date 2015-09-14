@@ -92,7 +92,7 @@ describe('BlockActions', () => {
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
-      const blocks = [block1, block2, block3]
+      const blocks = {data: [block1, block2, block3]}
       BlockActions.moveBlockUp({
         mobilization_id: 1,
         blocks,
@@ -117,7 +117,7 @@ describe('BlockActions', () => {
       const block1 = { id: 1, position: 3 }
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
-      const blocks = [block1, block2, block3]
+      const blocks = {data: [block1, block2, block3]}
       BlockActions.moveBlockDown({
         mobilization_id: 1,
         blocks,
