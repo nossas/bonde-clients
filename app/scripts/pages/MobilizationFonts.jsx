@@ -27,6 +27,7 @@ export default class MobilizationFonts extends React.Component {
     mobilization: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
@@ -34,6 +35,7 @@ export default class MobilizationFonts extends React.Component {
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
     touched: PropTypes.bool.isRequired,
+    dirty: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired
   }
 
@@ -41,13 +43,15 @@ export default class MobilizationFonts extends React.Component {
     super(props, context)
     this.state = {
       submitting: false,
+      hasSubmitted: false,
       error: null
     }
     this.initializeForm()
   }
 
   componentWillReceiveProps() {
-    this.state.submitting && this.setState({ submitting: false })
+    this.state.submitting && this.setState({submitting: false})
+    this.state.submitting && this.setState({hasSubmitted: true})
   }
 
   initializeForm() {
@@ -67,7 +71,7 @@ export default class MobilizationFonts extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
-    this.setState({ submitting: true, error: null })
+    this.setState({ submitting: true, hasSubmitted: false, error: null })
 
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
@@ -144,7 +148,8 @@ export default class MobilizationFonts extends React.Component {
     const {
       data: { headerFont, bodyFont },
       errors: { headerFont: headerFontError, bodyFont: bodyFontError },
-      touched: { headerFont: headerFontTouched, bodyFont: bodyFontTouched }
+      touched: { headerFont: headerFontTouched, bodyFont: bodyFontTouched },
+      dirty
     } = this.props
 
     return (
@@ -172,14 +177,18 @@ export default class MobilizationFonts extends React.Component {
           <input
             type="submit"
             className="caps button bg-aqua h3 mt1 p2"
-            disabled={this.state.submitting}
+            disabled={this.state.submitting || (!dirty)}
             value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
+
+        { this.state.hasSubmitted && !dirty &&
+          <div className="green mt2">Configurações de fontes atualizadas!</div> }
       </form>
     )
   }
 
   render() {
+    const { mobilization, dirty } = this.props
     return (
       <div className="flex-auto bg-silver gray relative">
         { this.renderMenu() }
@@ -187,7 +196,7 @@ export default class MobilizationFonts extends React.Component {
           <p className="h5">Defina as fontes da página</p>
           { this.renderForm() }
         </div>
-        <CloseButton path={Paths.editMobilization(this.props.mobilization.id)} />
+        <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} />
       </div>
     )
   }

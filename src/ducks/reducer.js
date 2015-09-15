@@ -1,5 +1,5 @@
 import { createFormReducer } from 'redux-form'
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import mobilizations from './../../app/scripts/reducers/mobilizations'
 import blocks from './../../app/scripts/reducers/blocks'
 import widgets from './../../app/scripts/reducers/widgets'
@@ -23,4 +23,4 @@ export default combineReducers({
   loginForm,
   widgetForm,
   auth
-});
+})
