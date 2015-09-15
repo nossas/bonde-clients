@@ -9,6 +9,17 @@ import ReactS3Uploader from 'react-s3-uploader'
 @reduxForm('mobilizationSharing')
 
 export default class MobilizationSharing extends React.Component {
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
 
@@ -23,12 +34,13 @@ export default class MobilizationSharing extends React.Component {
     })
   }
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault()
-    const { data, dispatch, mobilization } = this.props
+    const { data, dispatch, mobilization, auth } = this.props
 
     dispatch(MobilizationActions.editMobilization({
       id: mobilization.id,
+      credentials: auth.credentials,
       mobilization: {
         facebook_share_title: data.facebook_share_title,
         facebook_share_description: data.facebook_share_description
@@ -36,17 +48,17 @@ export default class MobilizationSharing extends React.Component {
     }))
   }
 
-  handleFacebookShareImageUploadProgress(){
-    if(!this.state.isFacebookShareImageUploading){
+  handleFacebookShareImageUploadProgress() {
+    if (!this.state.isFacebookShareImageUploading) {
       this.setState({isFacebookShareImageUploading: true})
     }
   }
 
-  handleFacebookShareImageUploadFinish(){
+  handleFacebookShareImageUploadFinish() {
     this.setState({isFacebookShareImageUploading: false})
   }
 
-  render(){
+  render() {
     const {
       data: { facebook_share_title, facebook_share_description },
       handleBlur, handleChange
@@ -54,12 +66,12 @@ export default class MobilizationSharing extends React.Component {
 
     const { isFacebookShareImageUploading } = this.state
 
-    return(
+    return (
       <div className="flex-auto bg-silver gray">
         <ConfigurationsMenu {...this.props} />
         <div className="p3 col col-8">
           <div className="h5 caps bold flex flex-center mb2">
-            <i className="fa fa-facebook-square mr1" style={{fontSize: "2em"}} />
+            <i className="fa fa-facebook-square mr1" style={{fontSize: '2em'}} />
             <span>Share de Facebook</span>
           </div>
           <p className="h5 mb3">
@@ -71,14 +83,14 @@ export default class MobilizationSharing extends React.Component {
             <div className="flex mb2">
               <div className="mr2">
                 <label className="h5 bold caps">Imagem</label>
-                <div className="border rounded p2 bg-white center" style={{width: "12em"}}>
-                  <i className="fa fa-image silver mb2" style={{fontSize: "5em"}} />
+                <div className="border rounded p2 bg-white center" style={{width: '12em'}}>
+                  <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />
                   <div className="mb1">A imagem deve ter no mínimo 200x200px</div>
                   <div className="overflow-hidden">
                     { isFacebookShareImageUploading ?
                       <i className="fa fa-spin fa-refresh" /> :
                       <ReactS3Uploader
-                        signingUrl={`${process.env.BASE_URL}/uploads`}
+                        signingUrl={`${process.env.API_URL}/uploads`}
                         accept="image/*"
                         onProgress={::this.handleFacebookShareImageUploadProgress}
                         onFinish={::this.handleFacebookShareImageUploadFinish}
@@ -117,13 +129,5 @@ export default class MobilizationSharing extends React.Component {
         </div>
       </div>
     )
-  }
-
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
   }
 }
