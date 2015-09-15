@@ -17,6 +17,7 @@ import {
   FormWidgetFields,
   FormWidgetForm,
   MobilizationFonts,
+  MobilizationSharing,
   RequireLogin
 } from '../../app/scripts/pages'
 
@@ -36,6 +37,7 @@ export default function(store) {
             <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/fonts" components={{main: MobilizationFonts, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/sharing" components={{main: MobilizationSharing, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" components={{main: FormWidgetFields, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" components={{main: FormWidgetForm, sidebar: MobilizationMenu, topMenu: TopMenu}} />

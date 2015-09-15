@@ -9,6 +9,7 @@ export default class ConfigurationsMenu extends React.Component {
     const { mobilization, location } = this.props
     const basicsMobilizationPath = Paths.basicsMobilization(mobilization.id)
     const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
+    const sharingMobilizationPath = Paths.sharingMobilization(mobilization.id)
     const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
 
     return(
@@ -25,6 +26,11 @@ export default class ConfigurationsMenu extends React.Component {
               path={cityMobilizationPath}
               text="Cidade"
               isActive={cityMobilizationPath == location.pathname}
+            />
+            <TabMenuItem
+              path={sharingMobilizationPath}
+              text="Compartilhamento"
+              isActive={sharingMobilizationPath == location.pathname}
             />
             <TabMenuItem
               path={analyticsMobilizationPath}
