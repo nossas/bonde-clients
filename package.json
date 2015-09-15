@@ -84,7 +84,7 @@
     "pretty-error": "^1.1.2",
     "query-string": "^2.4.0",
     "react": "^0.13.3",
-    "react-document-meta": "^0.1.4",
+    "react-document-meta": "^1.0.1",
     "react-hot-loader": "^1.2.8",
     "react-mixin": "^1.7.0",
     "react-redux": "^0.8.2",

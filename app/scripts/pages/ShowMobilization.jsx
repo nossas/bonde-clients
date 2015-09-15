@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import Block from './../components/Block.jsx'
+import DocumentMeta from 'react-document-meta'
 // import ua from 'universal-analytics'
 
 export default class ShowMobilization extends React.Component {
@@ -20,8 +21,21 @@ export default class ShowMobilization extends React.Component {
     const { color_scheme: colorScheme, header_font: headerFont, body_font: bodyFont } = mobilization
     const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
 
+    const metaData = {
+      title: mobilization.name,
+      description: mobilization.goal,
+      meta: {
+        name: {
+          'og:title': mobilization.facebook_share_title,
+          'og:description': mobilization.facebook_share_description,
+          'og:image': mobilization.facebook_share_image
+        }
+      }
+    }
+
     return (
       <div className={className}>
+        <DocumentMeta {...metaData} />
         {
           blocks.data.map(function(block) {
             if (!block.hidden) {
