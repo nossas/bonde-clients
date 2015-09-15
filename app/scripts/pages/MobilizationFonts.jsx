@@ -70,7 +70,7 @@ export default class MobilizationFonts extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
+    const { data, touchAll, valid, dispatch, mobilization, auth, initializeForm } = this.props
     this.setState({ submitting: true, hasSubmitted: false, error: null })
 
     if (valid) {
@@ -82,6 +82,7 @@ export default class MobilizationFonts extends React.Component {
           body_font: data.bodyFont
         }
       }))
+      initializeForm(data)
     } else {
       touchAll()
       this.setState({ submitting: false })
