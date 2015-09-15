@@ -18,7 +18,7 @@ export default class Mobilizations extends React.Component {
   }
 
   render() {
-    return (this.props.mobilizations.data.length > 0 ? this.renderMobilizations() : this.renderLoading())
+    return (this.props.mobilizations.loaded ? this.renderMobilizations() : this.renderLoading())
   }
 
   renderTopMenu() {
