@@ -23,15 +23,14 @@ export default class MobilizationSharing extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    this.state = {
-      isFacebookShareImageUploading: false
-    }
-
-    const { mobilization } = props
-    props.initializeForm({
+    const {initializeForm, mobilization} = props
+    initializeForm({
       facebook_share_title: mobilization.facebook_share_title,
-      facebook_share_description: mobilization.facebook_share_description
+      facebook_share_description: mobilization.facebook_share_description,
+      facebook_share_image: mobilization.facebook_share_image
     })
+
+    this.state = {isFacebookShareImageUploading: false}
   }
 
   handleSubmit(event) {
@@ -41,10 +40,7 @@ export default class MobilizationSharing extends React.Component {
     dispatch(MobilizationActions.editMobilization({
       id: mobilization.id,
       credentials: auth.credentials,
-      mobilization: {
-        facebook_share_title: data.facebook_share_title,
-        facebook_share_description: data.facebook_share_description
-      }
+      mobilization: {...data}
     }))
   }
 
@@ -54,8 +50,20 @@ export default class MobilizationSharing extends React.Component {
     }
   }
 
-  handleFacebookShareImageUploadFinish() {
+  handleFacebookShareImageUploadFinish(image) {
+    const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+    this.props.handleBlur('facebook_share_image')({target: {value: imageUrl}})
     this.setState({isFacebookShareImageUploading: false})
+  }
+
+  renderFacebookImage() {
+    const {data} = this.props
+
+    return (
+      data.facebook_share_image
+        ? <img src={data.facebook_share_image} />
+        : <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />
+    )
   }
 
   render() {
@@ -84,12 +92,12 @@ export default class MobilizationSharing extends React.Component {
               <div className="mr2">
                 <label className="h5 bold caps">Imagem</label>
                 <div className="border rounded p2 bg-white center" style={{width: '12em'}}>
-                  <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />
+                  { this.renderFacebookImage() }
                   <div className="mb1">A imagem deve ter no mínimo 200x200px</div>
                   <div className="overflow-hidden">
-                    { isFacebookShareImageUploading ?
-                      <i className="fa fa-spin fa-refresh" /> :
-                      <ReactS3Uploader
+                    { isFacebookShareImageUploading
+                      ? <i className="fa fa-spin fa-refresh" />
+                      : <ReactS3Uploader
                         signingUrl={`${process.env.API_URL}/uploads`}
                         accept="image/*"
                         onProgress={::this.handleFacebookShareImageUploadProgress}

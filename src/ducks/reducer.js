@@ -9,9 +9,14 @@ const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goa
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
 const mobilizationFonts = createFormReducer('mobilizationFonts', ['headerFont', 'bodyFont'])
-const mobilizationSharing = createFormReducer('mobilizationSharing', ['facebook_share_title', 'facebook_share_description'])
 const loginForm = createFormReducer('loginForm', ['email', 'password'])
 const widgetForm = createFormReducer('widgetForm', ['callToAction', 'buttonText', 'countText', 'emailText'])
+
+const mobilizationSharing = createFormReducer('mobilizationSharing', [
+  'facebook_share_title',
+  'facebook_share_description',
+  'facebook_share_image'
+])
 
 export default combineReducers({
   mobilizations,
