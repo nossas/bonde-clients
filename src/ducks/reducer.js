@@ -12,12 +12,19 @@ const mobilizationFonts = createFormReducer('mobilizationFonts', ['headerFont', 
 const loginForm = createFormReducer('loginForm', ['email', 'password'])
 const widgetForm = createFormReducer('widgetForm', ['callToAction', 'buttonText', 'countText', 'emailText'])
 
+const mobilizationSharing = createFormReducer('mobilizationSharing', [
+  'facebook_share_title',
+  'facebook_share_description',
+  'facebook_share_image'
+])
+
 export default combineReducers({
   mobilizations,
   mobilizationBasics,
   mobilizationCity,
   mobilizationAnalytics,
   mobilizationFonts,
+  mobilizationSharing,
   blocks,
   widgets,
   loginForm,

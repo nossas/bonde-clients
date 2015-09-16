@@ -4,12 +4,16 @@ import {
   REQUEST_FETCH_MOBILIZATIONS,
   SUCCESS_FETCH_MOBILIZATIONS,
   FAILURE_FETCH_MOBILIZATIONS,
+  REQUEST_EDIT_MOBILIZATION,
+  SUCCESS_EDIT_MOBILIZATION,
+  FAILURE_EDIT_MOBILIZATION,
   EDIT_MOBILIZATION,
   ADD_MOBILIZATION
 } from './../constants/ActionTypes'
 
 const initialState = {
   loaded: false,
+  editing: false,
   data: []
 }
 
@@ -26,7 +30,7 @@ export default function mobilizations(state = initialState, action) {
     case ADD_MOBILIZATION:
       return {...state, data: [action.mobilization, ...state.data]}
 
-    // TODO impllement REQUEST, SUCCESS and FAILURE action types
+    // TODO deprecate this action type
     case EDIT_MOBILIZATION:
       return {
         ...state,
@@ -34,6 +38,19 @@ export default function mobilizations(state = initialState, action) {
           m => m.id === action.mobilization.id ? action.mobilization : m
         )
       }
+
+    case REQUEST_EDIT_MOBILIZATION:
+      return {...state, editing: true}
+    case SUCCESS_EDIT_MOBILIZATION:
+      return {
+        ...state,
+        editing: false,
+        data: state.data.map(
+          m => m.id === action.result.id ? action.result : m
+        )
+      }
+    case FAILURE_EDIT_MOBILIZATION:
+      return {...state, editing: false}
     default:
       return state
   }
@@ -49,6 +66,27 @@ export function fetchMobilizations() {
     promise: function() {
       return new Promise(function(resolve, reject) {
         superagent.get(`${process.env.API_URL}/mobilizations`).end((err, res) => {
+          if (err) {
+            reject(res.body || err)
+          } else {
+            resolve(res.body)
+          }
+        })
+      })
+    }
+  }
+}
+
+export function editMobilization(params) {
+  return {
+    types: [REQUEST_EDIT_MOBILIZATION, SUCCESS_EDIT_MOBILIZATION, FAILURE_EDIT_MOBILIZATION],
+    promise: function() {
+      return new Promise(function(resolve, reject) {
+        superagent
+          .put(`${process.env.API_URL}/mobilizations/${params.id}`)
+          .set(params.credentials)
+          .send({mobilization: params.mobilization})
+          .end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {
