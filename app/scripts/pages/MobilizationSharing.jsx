@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import reduxForm from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
-import {ConfigurationsMenu, CloseButton} from './../components'
+import {ConfigurationsMenu, CloseButton, Label} from './../components'
 import {editMobilization} from './../reducers/mobilizations'
 import * as Paths from '../Paths'
 
@@ -129,7 +129,7 @@ export default class MobilizationSharing extends React.Component {
           </p>
           <form onSubmit={::this.handleSubmit}>
             <div className="mb3">
-              <label className="h5 bold caps">Imagem</label>
+              <Label text="Imagem" htmlFor="facebookShareImage" />
               <div className="border rounded p2 bg-white center">
                 { this.renderFacebookImage() }
                 <div className="mb1">Sugerimos uma imagem de no mínimo 200x200px</div>
@@ -137,6 +137,7 @@ export default class MobilizationSharing extends React.Component {
                   { isFacebookShareImageUploading
                     ? <i className="fa fa-spin fa-refresh" />
                     : <ReactS3Uploader
+                      id="facebookShareImage"
                       signingUrl={`${process.env.API_URL}/uploads`}
                       accept="image/*"
                       onProgress={::this.handleFacebookShareImageUploadProgress}
@@ -147,8 +148,9 @@ export default class MobilizationSharing extends React.Component {
               </div>
             </div>
             <div className="mb3">
-              <label className="h5 bold caps">Título</label>
+              <Label text="Título" htmlFor="facebookShareTitle" />
               <input
+                id="facebookShareTitle"
                 type="text"
                 className="field-light block full-width"
                 value={facebook_share_title}
@@ -158,8 +160,9 @@ export default class MobilizationSharing extends React.Component {
               />
             </div>
             <div className="mb3">
-              <label className="h5 bold caps">Subtítulo</label>
+              <Label text="Subtítulo" htmlFor="facebookShareDescription" />
               <textarea
+                id="facebookShareDescription"
                 className="field-light block full-width"
                 value={facebook_share_description}
                 onChange={handleChange('facebook_share_description')}
