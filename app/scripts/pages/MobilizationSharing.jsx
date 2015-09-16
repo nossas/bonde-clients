@@ -121,19 +121,18 @@ export default class MobilizationSharing extends React.Component {
         <div className="p3 col col-8">
           <div className="h5 caps bold flex flex-center mb2">
             <i className="fa fa-facebook-square mr1" style={{fontSize: '2em'}} />
-            <span>Share de Facebook</span>
+            <span>Postagem de Facebook</span>
           </div>
           <p className="h5 mb3">
-            Configure o post que será publicado no Facebook sempre que alguém
-            compartilhar a ação. É importante que esses textos sejam cativantes
-            e curtos para não aparecerem cortados. :)
+            Configure as informações do post que será publicado no Facebook
+            sempre que alguém compartilhar a ação.
           </p>
           <form onSubmit={::this.handleSubmit}>
             <div className="mb3">
               <label className="h5 bold caps">Imagem</label>
               <div className="border rounded p2 bg-white center">
                 { this.renderFacebookImage() }
-                <div className="mb1">A imagem deve ter no mínimo 200x200px</div>
+                <div className="mb1">Sugerimos uma imagem de no mínimo 200x200px</div>
                 <div className="overflow-hidden">
                   { isFacebookShareImageUploading
                     ? <i className="fa fa-spin fa-refresh" />
@@ -148,21 +147,24 @@ export default class MobilizationSharing extends React.Component {
               </div>
             </div>
             <div className="mb3">
-              <label className="h5 bold caps">Título do post</label>
-              <textarea
+              <label className="h5 bold caps">Título</label>
+              <input
+                type="text"
                 className="field-light block full-width"
                 value={facebook_share_title}
                 onChange={handleChange('facebook_share_title')}
                 onBlur={handleBlur('facebook_share_title')}
+                placeholder="Um título direto que passe a ideia da sua mobilização"
               />
             </div>
             <div className="mb3">
-              <label className="h5 bold caps">Subtítulo do post</label>
+              <label className="h5 bold caps">Subtítulo</label>
               <textarea
                 className="field-light block full-width"
                 value={facebook_share_description}
                 onChange={handleChange('facebook_share_description')}
                 onBlur={handleBlur('facebook_share_description')}
+                placeholder="Complete a informação do título e chame o leitor para a mobilização"
               />
             </div>
             <div>
