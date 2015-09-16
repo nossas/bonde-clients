@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
-import { ConfigurationsMenu } from './../components'
+import React, {PropTypes} from 'react'
 import reduxForm from 'redux-form'
-import { connect } from 'react-redux'
-import * as MobilizationActions from './../actions/MobilizationActions'
+import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
+import {ConfigurationsMenu} from './../components'
+import {editMobilization} from './../reducers/mobilizations'
 
 @connect(state => ({ form: state.mobilizationSharing }))
 @reduxForm('mobilizationSharing')
@@ -17,7 +17,10 @@ export default class MobilizationSharing extends React.Component {
     handleBlur: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    mobilizations: PropTypes.object.isRequired,
+    initializeForm: PropTypes.func.isRequired,
+    dirty: PropTypes.bool.isRequired
   }
 
   constructor(props, context) {
@@ -30,18 +33,32 @@ export default class MobilizationSharing extends React.Component {
       facebook_share_image: mobilization.facebook_share_image
     })
 
-    this.state = {isFacebookShareImageUploading: false}
+    this.state = {
+      isFacebookShareImageUploading: false,
+      edited: false
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {mobilizations} = this.props
+    if (mobilizations.editing !== nextProps.mobilizations.editing) {
+      this.setState({
+        edited: mobilizations.editing && !nextProps.mobilizations.editing
+      })
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault()
     const { data, dispatch, mobilization, auth } = this.props
 
-    dispatch(MobilizationActions.editMobilization({
+    dispatch(editMobilization({
       id: mobilization.id,
       credentials: auth.credentials,
       mobilization: {...data}
     }))
+
+    this.props.initializeForm(this.props.data)
   }
 
   handleFacebookShareImageUploadProgress() {
@@ -63,6 +80,29 @@ export default class MobilizationSharing extends React.Component {
       data.facebook_share_image
         ? <img src={data.facebook_share_image} />
         : <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />
+    )
+  }
+
+  renderSaveButton() {
+    if (this.props.mobilizations.editing) {
+      return (
+        <button className="button bg-aqua h3 mr1" disabled>
+          <i className="fa fa-spin fa-refresh mr1" />
+          Salvando...
+        </button>
+      )
+    } else if (this.state.edited && !this.props.dirty) {
+      return (
+        <button className="button bg-aqua h3 mr1" disabled>
+          <i className="fa fa-check mr1" />
+          Salvo
+        </button>
+      )
+    }
+    return (
+      <button className="button bg-aqua h3 mr1" onClick={::this.handleSubmit}>
+        Salvar
+      </button>
     )
   }
 
@@ -88,50 +128,44 @@ export default class MobilizationSharing extends React.Component {
             e curtos para não aparecerem cortados. :)
           </p>
           <form onSubmit={::this.handleSubmit}>
-            <div className="flex mb2">
-              <div className="mr2">
-                <label className="h5 bold caps">Imagem</label>
-                <div className="border rounded p2 bg-white center" style={{width: '12em'}}>
-                  { this.renderFacebookImage() }
-                  <div className="mb1">A imagem deve ter no mínimo 200x200px</div>
-                  <div className="overflow-hidden">
-                    { isFacebookShareImageUploading
-                      ? <i className="fa fa-spin fa-refresh" />
-                      : <ReactS3Uploader
-                        signingUrl={`${process.env.API_URL}/uploads`}
-                        accept="image/*"
-                        onProgress={::this.handleFacebookShareImageUploadProgress}
-                        onFinish={::this.handleFacebookShareImageUploadFinish}
-                      />
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className="flex-auto">
-                <div className="mb2">
-                  <label className="h5 bold caps">Título do post</label>
-                  <textarea
-                    className="field-light block full-width"
-                    value={facebook_share_title}
-                    onChange={handleChange('facebook_share_title')}
-                    onBlur={handleBlur('facebook_share_title')}
-                  />
-                </div>
-                <div>
-                  <label className="h5 bold caps">Subtítulo do post</label>
-                  <textarea
-                    className="field-light block full-width"
-                    value={facebook_share_description}
-                    onChange={handleChange('facebook_share_description')}
-                    onBlur={handleBlur('facebook_share_description')}
-                  />
+            <div className="mb3">
+              <label className="h5 bold caps">Imagem</label>
+              <div className="border rounded p2 bg-white center">
+                { this.renderFacebookImage() }
+                <div className="mb1">A imagem deve ter no mínimo 200x200px</div>
+                <div className="overflow-hidden">
+                  { isFacebookShareImageUploading
+                    ? <i className="fa fa-spin fa-refresh" />
+                    : <ReactS3Uploader
+                      signingUrl={`${process.env.API_URL}/uploads`}
+                      accept="image/*"
+                      onProgress={::this.handleFacebookShareImageUploadProgress}
+                      onFinish={::this.handleFacebookShareImageUploadFinish}
+                    />
+                  }
                 </div>
               </div>
             </div>
+            <div className="mb3">
+              <label className="h5 bold caps">Título do post</label>
+              <textarea
+                className="field-light block full-width"
+                value={facebook_share_title}
+                onChange={handleChange('facebook_share_title')}
+                onBlur={handleBlur('facebook_share_title')}
+              />
+            </div>
+            <div className="mb3">
+              <label className="h5 bold caps">Subtítulo do post</label>
+              <textarea
+                className="field-light block full-width"
+                value={facebook_share_description}
+                onChange={handleChange('facebook_share_description')}
+                onBlur={handleBlur('facebook_share_description')}
+              />
+            </div>
             <div>
-              <button className="button bg-aqua h3" onClick={::this.handleSubmit}>
-                Salvar
-              </button>
+              { this.renderSaveButton() }
             </div>
           </form>
         </div>
