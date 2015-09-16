@@ -2,8 +2,9 @@ import React, {PropTypes} from 'react'
 import reduxForm from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
-import {ConfigurationsMenu} from './../components'
+import {ConfigurationsMenu, CloseButton} from './../components'
 import {editMobilization} from './../reducers/mobilizations'
+import * as Paths from '../Paths'
 
 @connect(state => ({ form: state.mobilizationSharing }))
 @reduxForm('mobilizationSharing')
@@ -115,7 +116,7 @@ export default class MobilizationSharing extends React.Component {
     const { isFacebookShareImageUploading } = this.state
 
     return (
-      <div className="flex-auto bg-silver gray">
+      <div className="flex-auto bg-silver gray relative">
         <ConfigurationsMenu {...this.props} />
         <div className="p3 col col-8">
           <div className="h5 caps bold flex flex-center mb2">
@@ -169,6 +170,7 @@ export default class MobilizationSharing extends React.Component {
             </div>
           </form>
         </div>
+        <CloseButton dirty={this.props.dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }
