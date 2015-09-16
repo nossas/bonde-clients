@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import reduxForm from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
-import {ConfigurationsMenu, CloseButton, Label} from './../components'
+import {ConfigurationsMenu, CloseButton, Label, InputCounter} from './../components'
 import {editMobilization} from './../reducers/mobilizations'
 import * as Paths from '../Paths'
 
@@ -149,8 +149,14 @@ export default class MobilizationSharing extends React.Component {
             </div>
             <div className="mb3">
               <Label text="Título" htmlFor="facebookShareTitle" />
+              <InputCounter
+                maxLength={70}
+                length={facebook_share_title ? facebook_share_title.length : 0}
+                classNames={['right']}
+              />
               <input
                 id="facebookShareTitle"
+                maxLength={70}
                 type="text"
                 className="field-light block full-width"
                 value={facebook_share_title}
@@ -161,8 +167,14 @@ export default class MobilizationSharing extends React.Component {
             </div>
             <div className="mb3">
               <Label text="Subtítulo" htmlFor="facebookShareDescription" />
+                <InputCounter
+                  maxLength={90}
+                  length={facebook_share_description ? facebook_share_description.length : 0}
+                  classNames={['right']}
+                />
               <textarea
                 id="facebookShareDescription"
+                maxLength={90}
                 className="field-light block full-width"
                 value={facebook_share_description}
                 onChange={handleChange('facebook_share_description')}
