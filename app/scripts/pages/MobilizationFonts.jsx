@@ -155,22 +155,22 @@ export default class MobilizationFonts extends React.Component {
 
     return (
       <form onSubmit={ ::this.handleSubmit }>
-        <label className="block h4 caps bold mb1">Fonte para títulos</label>
+        <label className="block h4 caps bold mb1">Fonte dos títulos</label>
         { headerFontError && headerFontTouched && <span className="h5 red bold">{headerFontError}</span> }
 
         { this.renderFontSelect('headerFont', headerFont) }
 
         <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${headerFont}-header`)}>
-          <h1 className="m0">Exemplo de Título</h1>
+          <h1 className="m0">Os títulos ficarão assim</h1>
         </div>
 
-        <label className="block h4 caps bold mb1">Fonte para textos corridos</label>
+        <label className="block h4 caps bold mb1">Fonte do texto</label>
         { bodyFontError && bodyFontTouched && <span className="h5 red bold">{bodyFontError}</span> }
 
         { this.renderFontSelect('bodyFont', bodyFont) }
 
         <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${bodyFont}-body`)}>
-          <p className="m0">Este é um exemplo de parágrafo</p>
+          <p className="m0">Os textos ficarão assim.</p>
         </div>
 
         <div className="clearfix">
@@ -194,7 +194,6 @@ export default class MobilizationFonts extends React.Component {
       <div className="flex-auto bg-silver gray relative">
         { this.renderMenu() }
         <div className="py3 px4">
-          <p className="h5">Defina as fontes da página</p>
           { this.renderForm() }
         </div>
         <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} />
