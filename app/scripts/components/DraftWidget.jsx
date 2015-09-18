@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 
 export default class DraftWidget extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired,
+    widget: PropTypes.object.isRequired,
+    editable: PropTypes.bool.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -24,11 +32,25 @@ export default class DraftWidget extends React.Component {
   updateKind(kind) {
     const { dispatch, auth } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+    let widgetParams = { kind }
+
+    if (kind === 'form') {
+      widgetParams = {
+        ...widgetParams,
+        settings: {email_text: 'Obrigado por apostar na força da ação coletiva '
+          + 'em rede. Sua participação é muito importante e, agora, precisamos da '
+          + 'sua ajuda para que mais gente colabore com esta mobilização. '
+          + 'Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço'
+        }
+      }
+    }
+
     this.setState({loading: true})
+    // TODO: change it to use the new pattern for reducer actions
     bindedWidgetActions.editWidget({
       mobilization_id: this.props.mobilization.id,
       widget_id: this.props.widget.id,
-      widget: { kind },
+      widget: widgetParams,
       credentials: auth.credentials
     })
   }
@@ -42,7 +64,7 @@ export default class DraftWidget extends React.Component {
   }
 
   renderDraft() {
-    if(this.props.editable){
+    if (this.props.editable) {
       return (
         <div className="widget border center p2" style={{borderStyle: 'dashed'}}>
           <h4>Escolha uma das opções abaixo</h4>
@@ -58,7 +80,7 @@ export default class DraftWidget extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
         {this.renderDraft()}
         {this.renderLoading()}
