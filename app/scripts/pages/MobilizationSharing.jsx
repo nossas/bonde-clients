@@ -129,7 +129,7 @@ export default class MobilizationSharing extends React.Component {
           </p>
           <form onSubmit={::this.handleSubmit}>
             <div className="mb3">
-              <Label text="Imagem" htmlFor="facebookShareImage" />
+              <Label htmlFor="facebookShareImage">Imagem</Label>
               <div className="border rounded p2 bg-white center">
                 { this.renderFacebookImage() }
                 <div className="mb1">Sugerimos uma imagem de no mínimo 200x200px</div>
@@ -148,7 +148,7 @@ export default class MobilizationSharing extends React.Component {
               </div>
             </div>
             <div className="mb3">
-              <Label text="Título" htmlFor="facebookShareTitle" />
+              <Label htmlFor="facebookShareTitle">Título</Label>
               <InputCounter
                 maxLength={70}
                 length={facebook_share_title ? facebook_share_title.length : 0}
@@ -166,7 +166,7 @@ export default class MobilizationSharing extends React.Component {
               />
             </div>
             <div className="mb3">
-              <Label text="Subtítulo" htmlFor="facebookShareDescription" />
+              <Label htmlFor="facebookShareDescription">Subtítulo</Label>
                 <InputCounter
                   maxLength={90}
                   length={facebook_share_description ? facebook_share_description.length : 0}

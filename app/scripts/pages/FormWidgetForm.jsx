@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as Paths from '../Paths'
-import { FormWidgetMenu, Loading, CloseButton } from './../components'
+import { FormWidgetMenu, Loading, CloseButton, Label } from './../components'
 import reduxForm from 'redux-form'
 
 function widgetFormValidation() {
@@ -107,9 +107,10 @@ export default class FormWidgetForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <label className="block h4 caps bold mb1">Título do formulário</label>
+        <Label htmlFor="formTitle">Título do formulário</Label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <textarea
+          id="formTitle"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Ex: Preencha o formulário abaixo para assinar a petição."
           style={{height: '160px'}}
@@ -117,9 +118,10 @@ export default class FormWidgetForm extends React.Component {
           onChange={handleChange('callToAction')}
           onBlur={handleBlur('callToAction')} />
 
-        <label className="block h4 caps bold mb1">Botão</label>
+        <Label htmlFor="buttonText">Botão</Label>
         {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
         <input
+          id="buttonText"
           type="text"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Defina o texto do botão de confirmação do formulário."
@@ -128,9 +130,10 @@ export default class FormWidgetForm extends React.Component {
           onChange={handleChange('buttonText')}
           onBlur={handleBlur('buttonText')} />
 
-        <label className="block h4 caps bold mb1">Contador</label>
+        <Label htmlFor="counterText">Contador</Label>
         {countTextError && countTextTouched && <span className="red ml2">{countTextError}</span>}
         <input
+          id="counterText"
           type="text"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Defina o texto que ficará ao lado do número de pessoas que agiram."
@@ -139,12 +142,13 @@ export default class FormWidgetForm extends React.Component {
           onChange={handleChange('countText')}
           onBlur={handleBlur('countText')} />
 
-        <label className="block h4 caps bold mb1">Email de agradecimento</label>
+        <Label htmlFor="thankYouEmailText">Email de agradecimento</Label>
         {emailTextError && emailTextTouched && <span className="red ml2">{emailTextError}</span>}
         <textarea
+          id="thankYouEmailText"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço."
-          style={{height: '160px'}}
+          rows={5}
           value={emailText}
           onChange={handleChange('emailText')}
           onBlur={handleBlur('emailText')} />
