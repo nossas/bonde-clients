@@ -7,7 +7,7 @@ import * as Paths from '../Paths'
 import { FormWidgetMenu, Loading, CloseButton } from './../components'
 import reduxForm from 'redux-form'
 
-function widgetFormValidation(data) {
+function widgetFormValidation() {
   const errors = { valid: true }
   return errors
 }
@@ -15,6 +15,17 @@ function widgetFormValidation(data) {
 @connect(state => ({ form: state.widgetForm }))
 @reduxForm('widgetForm', widgetFormValidation)
 export default class FormWidgetForm extends React.Component {
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    touchAll: PropTypes.func.isRequired,
+    initializeForm: PropTypes.func.isRequired,
+    dirty: PropTypes.bool.isRequired,
+    valid: PropTypes.bool.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -28,26 +39,15 @@ export default class FormWidgetForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const widget = this.widget(nextProps)
-    if(widget) {
-      if(this.state.initializing) {
+    if (widget) {
+      if (this.state.initializing) {
         const { call_to_action: callToAction, button_text: buttonText, count_text: countText, email_text: emailText } = (widget.settings || {call_to_action: null, button_text: null, count_text: null, email_text: null})
-        this.props.initializeForm({callToAction, buttonText, countText, emailText: (emailText || 'Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço') })
+        this.props.initializeForm({callToAction, buttonText, countText, emailText})
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
       this.state.submitting && this.setState({hasSubmitted: true})
     }
-  }
-
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
   }
 
   widget(props = this.props) {
@@ -158,9 +158,9 @@ export default class FormWidgetForm extends React.Component {
           </button>
           <input
             type="submit"
-            className={classnames("caps button bg-aqua h3 mt1 p2")}
+            className={classnames('caps button bg-aqua h3 mt1 p2')}
             disabled={this.state.submitting || (!dirty)}
-            value={this.state.submitting ? "Salvando..." : "Salvar"} />
+            value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
 
         {::this.renderErrorMessage()}
@@ -172,8 +172,8 @@ export default class FormWidgetForm extends React.Component {
 
   renderPage() {
     const { widgets, dirty } = this.props
-    const widget = widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
-    return(
+    const widget = widgets.data[widgets.data.map((w) => { return w.id.toString()}).indexOf(this.props.params.widget_id)]
+    return (
       <div className="flex-auto bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
         <div className="py3 px3">
@@ -184,13 +184,13 @@ export default class FormWidgetForm extends React.Component {
     )
   }
 
-  renderLoading(){
-    return(
+  renderLoading() {
+    return (
       <Loading />
     )
   }
 
   render() {
-    return(this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
+    return (this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
   }
 }
