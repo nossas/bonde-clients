@@ -58,7 +58,7 @@ export default class FormWidgetButton extends React.Component {
           {this.state.loading ? 'Enviando...' : this.props.buttonText }
         </button>
         { this.state.success &&
-          <div className="center mt2">Muito obrigado por sua participação!</div> }
+          <div className="center mt2">Sua ação foi registrada com sucesso!</div> }
       </div>
     )
   }
