@@ -11,7 +11,9 @@ export default class FormWidget extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired
+    editable: PropTypes.bool.isRequired,
+    configurable: PropTypes.bool,
+    hasNewField: PropTypes.bool
   }
 
   constructor(props, context) {
@@ -58,12 +60,12 @@ export default class FormWidget extends React.Component {
           {...this.props}
           key={field.uid}
           uid={field.uid}
-          canMoveUp={index != 0}
-          canMoveDown={index != fields.length - 1}
-          initializeEditing={this.props.hasNewField && index == fields.length - 1}
+          canMoveUp={index !== 0}
+          canMoveDown={index !== fields.length - 1}
+          initializeEditing={this.props.hasNewField && index === fields.length - 1}
           field={field} />
       )
-    }.bind(this))
+    })
   }
 
   renderButton() {
