@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import $ from 'jquery'
 import { bindActionCreators } from 'redux'
 import * as FormEntryActions from './../actions/FormEntryActions'
-import { Loading } from './'
 
 export default class FormWidgetButton extends React.Component {
+  static propTypes = {
+    editable: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
+    mobilization: PropTypes.object.isRequired,
+    widget: PropTypes.object.isRequired,
+    buttonText: PropTypes.string
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -13,14 +20,14 @@ export default class FormWidgetButton extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
   }
 
   handleClick() {
-    if(!this.props.editable) {
+    if (!this.props.editable) {
       const { dispatch, mobilization, widget } = this.props
       const { settings } = widget
       const { fields } = settings
@@ -29,11 +36,11 @@ export default class FormWidgetButton extends React.Component {
         loading: true
       })
       const fieldsWithValue = fields.map((field) => {
-        return {...field, value: $("#input-" + field.uid).val()}
+        return {...field, value: $('#input-' + field.uid).val()}
       })
       bindedFormEntryActions.addFormEntry({
         mobilization_id: mobilization.id,
-        form_entry: { 
+        form_entry: {
           widget_id: widget.id,
           fields: JSON.stringify(fieldsWithValue)
         }
@@ -42,7 +49,7 @@ export default class FormWidgetButton extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
         <button
           disabled={this.state.loading}
