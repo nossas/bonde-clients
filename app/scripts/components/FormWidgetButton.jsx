@@ -71,22 +71,22 @@ export default class FormWidgetButton extends React.Component {
 
     return (
       <div>
+        {
+          this.state.errors.length > 0 &&
+          <div className="red bold mb1">
+            {
+              errors.map((error) => {
+                return <div className="p1 border-left border-red mb1 rounded-right" style={{backgroundColor: '#F9CACE', borderWidth: '8px'}}>{error}</div>
+              })
+            }
+          </div>
+        }
         <button
           disabled={this.state.loading}
           className="caps button bg-darken-4 p2 full-width mt1 mb2"
           onClick={::this.handleClick}>
           {this.state.loading ? 'Enviando...' : this.props.buttonText }
         </button>
-        {
-          this.state.errors.length > 0 &&
-          <div className="red bold mb1 rounded-right" style={{backgroundColor: 'rgba(69, 17, 17, 0.75)'}}>
-            {
-              errors.map((error) => {
-                return <div className="p2 border-left border-red" style={{borderWidth: '4px'}}>{error}</div>
-              })
-            }
-          </div>
-        }
         { this.state.success &&
           <div className="center">Sua ação foi registrada com sucesso!</div> }
       </div>
