@@ -32,7 +32,7 @@ export default class FormWidgetButton extends React.Component {
   validate(fieldsWithValue) {
     const errors = []
     fieldsWithValue.forEach((field) => {
-      if (field.required && field.value === '') {
+      if (field.required === 'true' && field.value === '') {
         errors.push(`${field.label} não pode ficar em branco`)
       } else if (field.value !== '' && field.kind === 'email' && !field.value.match(emailRegEx)) {
         errors.push(`${field.label} inválido`)
