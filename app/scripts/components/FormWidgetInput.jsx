@@ -57,15 +57,25 @@ export default class FormWidgetInput extends React.Component {
     const { field, editable, configurable, uid } = this.props
 
     return (
-      <div className="mb3" onMouseEnter={::this.handleMouseOver} onMouseLeave={::this.handleMouseOut} style={(editable || configurable ? {cursor: 'pointer'} : null)} onClick={::this.handleClick}>
-        <label className="block h4 caps bold mb1 left" style={(editable || configurable ? {cursor: 'pointer'} : null)}>{field.label}</label>
+      <div
+        className="mb3"
+        onMouseEnter={::this.handleMouseOver}
+        onMouseLeave={::this.handleMouseOut}
+        style={(editable || configurable ? {cursor: 'pointer'} : null)}
+        onClick={::this.handleClick}>
+        <label
+          className="block h4 caps bold mb1 left"
+          style={(editable || configurable ? {cursor: 'pointer'} : null)}>
+          {field.label}{field.required ? ' *' : null}
+        </label>
         { this.renderInstructions() }
         <input
           id={'input-' + uid}
           className="field-light block full-width h3"
           style={(editable || configurable ? {cursor: 'pointer'} : null)}
           placeholder={field.placeholder}
-          type={field.kind}/>
+          type='text'
+        />
       </div>
     )
   }
