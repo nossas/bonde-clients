@@ -26,6 +26,7 @@ export default class ShowMobilization extends React.Component {
       description: mobilization.goal,
       meta: {
         name: {
+          'viewport': 'width=device-width, initial-scale=1',
           'og:title': mobilization.facebook_share_title,
           'og:description': mobilization.facebook_share_description,
           'og:image': mobilization.facebook_share_image
