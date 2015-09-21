@@ -1,13 +1,11 @@
 import React from 'react'
 import * as ReactAddons from 'react/addons'
-import classnames from 'classnames'
 import { FormWidgetInputForm } from './'
 const ReactTransitionGroup = ReactAddons.addons.TransitionGroup
 
 export default class FormWidgetInput extends React.Component {
   constructor(props, context) {
     super(props, context)
-    const { field } = this.props
     this.state = {
       hasMouseOver: false,
       editing: this.props.initializeEditing
@@ -23,7 +21,7 @@ export default class FormWidgetInput extends React.Component {
   }
 
   handleClick(event) {
-    if(this.props.configurable) {
+    if (this.props.configurable) {
       event.stopPropagation()
       event.preventDefault()
       this.setState({editing: true})
@@ -34,7 +32,7 @@ export default class FormWidgetInput extends React.Component {
     this.setState({editing: false})
   }
 
-  renderForm(){
+  renderForm() {
     const { uid } = this.props
     return (
       <ReactTransitionGroup>
@@ -45,8 +43,8 @@ export default class FormWidgetInput extends React.Component {
 
   renderInstructions() {
     const { configurable } = this.props
-    if(configurable && this.state.hasMouseOver) {
-      return(
+    if (configurable && this.state.hasMouseOver) {
+      return (
         <div className="right">
           <i className="fa fa-pencil-square-o mr1" />
           Clique para editar
@@ -58,12 +56,12 @@ export default class FormWidgetInput extends React.Component {
   renderInput() {
     const { field, editable, configurable, uid } = this.props
 
-    return(
+    return (
       <div className="mb3" onMouseEnter={::this.handleMouseOver} onMouseLeave={::this.handleMouseOut} style={(editable || configurable ? {cursor: 'pointer'} : null)} onClick={::this.handleClick}>
         <label className="block h4 caps bold mb1 left" style={(editable || configurable ? {cursor: 'pointer'} : null)}>{field.label}</label>
         { this.renderInstructions() }
-        <input 
-          id={"input-" + uid}
+        <input
+          id={'input-' + uid}
           className="field-light block full-width h3"
           style={(editable || configurable ? {cursor: 'pointer'} : null)}
           placeholder={field.placeholder}
@@ -73,6 +71,6 @@ export default class FormWidgetInput extends React.Component {
   }
 
   render() {
-    return(this.state.editing ? this.renderForm() : this.renderInput())
+    return (this.state.editing ? this.renderForm() : this.renderInput())
   }
 }
