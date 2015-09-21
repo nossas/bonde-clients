@@ -6,7 +6,13 @@ import * as WidgetActions from './../actions/WidgetActions'
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
-    mobilization: PropTypes.object.isRequired
+    mobilization: PropTypes.object.isRequired,
+    widget: PropTypes.object.isRequired,
+    editable: PropTypes.bool.isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onCancelEdit: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
   }
 
   constructor(props, context) {
@@ -14,7 +20,7 @@ export default class ContentWidget extends React.Component {
     this.state = {
       editing: false,
       editor: null,
-      content: (props.widget.settings ? props.widget.settings.content : (props.editable ? 'Clique para editar...' : null)),
+      content: props.widget.settings.content,
       toolbarId: 'wysihtml5-toolbar-' + this.props.widget.id,
       loading: false
     }
@@ -33,7 +39,7 @@ export default class ContentWidget extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.loading && this.props.widget.settings.content != nextProps.widget.settings.content) {
+    if (this.state.loading && this.props.widget.settings.content !== nextProps.widget.settings.content) {
       this.setState({loading: false})
     }
   }
@@ -56,7 +62,7 @@ export default class ContentWidget extends React.Component {
   }
 
   handleEscapePress(e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode === 27) {
       this.save()
     }
   }
@@ -67,11 +73,11 @@ export default class ContentWidget extends React.Component {
 
   save() {
     const { editor, content } = this.state
-    const hasChanged = editor.getValue() != content
+    const hasChanged = editor.getValue() !== content
     this.setState({content: editor.getValue()})
     this.disableEditor()
 
-    if(hasChanged){
+    if (hasChanged) {
       const { dispatch, auth } = this.props
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       this.setState({loading: true})

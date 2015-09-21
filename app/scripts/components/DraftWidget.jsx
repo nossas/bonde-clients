@@ -45,6 +45,13 @@ export default class DraftWidget extends React.Component {
       }
     }
 
+    if (kind === 'content') {
+      widgetParams = {
+        ...widgetParams,
+        settings: {content: 'Clique aqui para editar...'}
+      }
+    }
+
     this.setState({loading: true})
     // TODO: change it to use the new pattern for reducer actions
     bindedWidgetActions.editWidget({

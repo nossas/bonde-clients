@@ -4,13 +4,13 @@ import classnames from 'classnames'
 
 const { TestUtils } = React.addons
 const mobilization = { header_font: 'ubuntu', body_font: 'open-sans' }
-const widget = {}
+const widget = {settings: {content: 'Clique aqui para editar...'}}
 let component
 
 describe('ContentWidget', function() {
   context('when it is editable', function() {
     before(function() {
-      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={true} mobilization={mobilization} />)
+      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable mobilization={mobilization} />)
     })
 
     describe('#enableEditor', function() {
