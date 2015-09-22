@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
 import { bindActionCreators } from 'redux'
@@ -6,6 +6,18 @@ import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
 
 export default class Block extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    block: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    blocks: PropTypes.array.isRequired,
+    editable: PropTypes.bool.isRequired,
+    widgets: PropTypes.array.isRequired,
+    canMoveUp: PropTypes.bool.isRequired,
+    canMoveDown: PropTypes.bool.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -21,32 +33,32 @@ export default class Block extends React.Component {
     this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     if (this.state.loading) {
       this.setState({loading: false})
     }
   }
 
-  filterWidgets(widgets, block){
-    return widgets.filter(function(widget){
-      return widget.block_id == block.id
-    }.bind(this))
+  filterWidgets(widgets, block) {
+    return widgets.filter(function(widget) {
+      return widget.block_id === block.id
+    })
   }
 
-  renderWidgets(widgets){
-    return widgets.map(function(widget){
-      return(
+  renderWidgets(widgets) {
+    return widgets.map(function(widget) {
+      return (
         <Widget
           {...this.props}
-          key={"widget-" + widget.id}
+          key={'widget-' + widget.id}
           widget={widget} onEdit={::this.handleWidgetEdit} onCancelEdit={::this.handleWidgetCancelEdit} />
       )
     }.bind(this))
   }
 
-  renderColorPicker(){
-    if(this.state.editingBackground) {
-      return(
+  renderColorPicker() {
+    if (this.state.editingBackground) {
+      return (
         <div>
           <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
             <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
@@ -143,13 +155,13 @@ export default class Block extends React.Component {
     }
   }
 
-  handleKeyUp(event){
-    if (event.keyCode == 27) {
+  handleKeyUp(event) {
+    if (event.keyCode === 27) {
       this.setState({editingBackground: false})
     }
   }
 
-  handleCancelEdit(){
+  handleCancelEdit() {
     this.setState({
       editingBackground: false,
       bgClass: this.props.block.bg_class,
@@ -222,7 +234,7 @@ export default class Block extends React.Component {
 
   handleRemoveClick() {
     const { mobilization, block, auth } = this.props
-    if (confirm("Você tem certeza que quer remover este bloco?")) {
+    if (confirm('Você tem certeza que quer remover este bloco?')) {
       this.setState({loading: true})
       this.bindedBlockActions.removeBlock({
         mobilization_id: mobilization.id,
@@ -241,7 +253,7 @@ export default class Block extends React.Component {
   }
 
   displayDropDownMenu() {
-    return(
+    return (
       this.state.hasMouseOver &&
       !this.state.editingBackground &&
       !this.state.editingWidget &&
@@ -250,28 +262,29 @@ export default class Block extends React.Component {
     )
   }
 
-  render(){
+  render() {
     // TODO: change widgets constant name to reflex the object that is returned
     // by the reducer
-    const { widgets, block, blocks, canMoveUp, canMoveDown } = this.props
+    const { widgets, block, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets.data, block)
-    return(
+    return (
       <div
-        className={classnames("clearfix", "relative", block.bg_class, (block.bg_image ? 'bg-cover' : null))}
+        id={'block-' + block.id}
+        className={classnames('clearfix', 'relative', block.bg_class, (block.bg_image ? 'bg-cover' : null))}
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
         style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <div className="container">
-          <DropDownMenu className={(this.displayDropDownMenu() ? "p2" : "p2 display-none")} menuClassName="bg-darken-4 rounded white" icon="cog">
+          <DropDownMenu className={(this.displayDropDownMenu() ? 'p2' : 'p2 display-none')} menuClassName="bg-darken-4 rounded white" icon="cog">
             <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-eyedropper" /> Alterar cor de fundo</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames("fa", (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
+            <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
             <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
             <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
             <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
           </DropDownMenu>
           { this.renderColorPicker() }
-          <div className="clearfix py4">
+          <div className="clearfix" style={{padding: '5em 0'}}>
             { this.renderWidgets(filteredWidgets) }
           </div>
           { this.renderHiddenTag() }
