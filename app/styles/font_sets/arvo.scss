@@ -1,12 +1,15 @@
+.arvo-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arvo', serif;
+  }
+}
+
 .arvo-body {
   font-family: 'Arvo', serif;
 }
 
-.arvo-header h1,
-.arvo-header h2,
-.arvo-header h3,
-.arvo-header h4,
-.arvo-header h5,
-.arvo-header h6 {
-  font-family: 'Arvo', serif;
+.arvo-form {
+  label, input {
+    font-family: 'Arvo', serif;
+  }
 }

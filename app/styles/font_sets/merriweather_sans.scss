@@ -1,12 +1,15 @@
+.merriweather-sans-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+}
+
 .merriweather-sans-body {
   font-family: 'Merriweather Sans', sans-serif;
 }
 
-.merriweather-sans-header h1,
-.merriweather-sans-header h2,
-.merriweather-sans-header h3,
-.merriweather-sans-header h4,
-.merriweather-sans-header h5,
-.merriweather-sans-header h6 {
-  font-family: 'Merriweather Sans', sans-serif;
+.merriweather-sans-form {
+  label, input {
+    font-family: 'Merriweather Sans', sans-serif;
+  }
 }

@@ -1,12 +1,15 @@
+.dosis-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Dosis', sans-serif;
+  }
+}
+
 .dosis-body {
   font-family: 'Dosis', sans-serif;
 }
 
-.dosis-header h1,
-.dosis-header h2,
-.dosis-header h3,
-.dosis-header h4,
-.dosis-header h5,
-.dosis-header h6 {
-  font-family: 'Dosis', sans-serif;
+.dosis-form {
+  label, input {
+    font-family: 'Dosis', sans-serif;
+  }
 }

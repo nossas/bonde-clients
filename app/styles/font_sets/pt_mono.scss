@@ -1,12 +1,15 @@
+.pt-mono-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Mono';
+  }
+}
+
 .pt-mono-body {
   font-family: 'PT Mono';
 }
 
-.pt-mono-header h1,
-.pt-mono-header h2,
-.pt-mono-header h3,
-.pt-mono-header h4,
-.pt-mono-header h5,
-.pt-mono-header h6 {
-  font-family: 'PT Mono';
+.pt-mono-form {
+  label, input {
+    font-family: 'PT Mono';
+  }
 }

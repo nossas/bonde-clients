@@ -1,12 +1,15 @@
+.glegoo-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Glegoo', serif;
+  }
+}
+
 .glegoo-body {
   font-family: 'Glegoo', serif;
 }
 
-.glegoo-header h1,
-.glegoo-header h2,
-.glegoo-header h3,
-.glegoo-header h4,
-.glegoo-header h5,
-.glegoo-header h6 {
-  font-family: 'Glegoo', serif;
+.glegoo-form {
+  label, input {
+    font-family: 'Glegoo', serif;
+  }
 }

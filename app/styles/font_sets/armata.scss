@@ -1,12 +1,15 @@
+.armata-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Armata', sans-serif;
+  }
+}
+
 .armata-body {
   font-family: 'Armata', sans-serif;
 }
 
-.armata-header h1,
-.armata-header h2,
-.armata-header h3,
-.armata-header h4,
-.armata-header h5,
-.armata-header h6 {
-  font-family: 'Armata', sans-serif;
+.armata-form {
+  label, input {
+    font-family: 'Armata', sans-serif;
+  }
 }
