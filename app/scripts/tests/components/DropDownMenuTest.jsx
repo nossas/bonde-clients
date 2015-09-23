@@ -87,7 +87,7 @@ describe('DropDownMenu', () => {
   describe('#render', () => {
     it('should render button and bind click', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button')
-      expect(button.getDOMNode().textContent.trim()).to.equal('Foo bar ▾')
+      expect(button.getDOMNode().textContent.trim()).to.equal('Foo bar')
       expect(button.props.onClick.toString()).to.equal(component.handleClick.bind(component).toString())
     })
 
