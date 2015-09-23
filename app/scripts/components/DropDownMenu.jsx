@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
 export default class DropDownMenuItem extends React.Component {
+  static propTypes = {
+    icon: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    menuClassName: PropTypes.string,
+    text: PropTypes.string,
+    children: PropTypes.array
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = { open: false }
@@ -11,7 +19,7 @@ export default class DropDownMenuItem extends React.Component {
     this.setState({open: !this.state.open})
   }
 
-  handleOverlayClick(){
+  handleOverlayClick() {
     this.setState({open: false})
   }
 
@@ -39,18 +47,17 @@ export default class DropDownMenuItem extends React.Component {
       return this.props.children.map((child, index) => {
         return React.cloneElement(child, {key: 'item-' + index, onItemClick: ::this.handleOverlayClick})
       })
-    } else {
-      return React.cloneElement(this.props.children, {onItemClick: ::this.handleOverlayClick})
     }
+    return React.cloneElement(this.props.children, {onItemClick: ::this.handleOverlayClick})
   }
 
-  render(){
-    return(
-      <div className={classnames("absolute top-0 right-0", this.props.className)} style={{zIndex: 9998}}>
-        <button className={classnames("button", this.props.menuClassName)} onClick={::this.handleClick}>
-          {this.renderIcon()} {this.props.text} &#9662;
+  render() {
+    return (
+      <div className={classnames('absolute top-0 right-0', this.props.className)} style={{zIndex: 9998}}>
+        <button className={classnames('button', this.props.menuClassName)} onClick={::this.handleClick}>
+          {this.renderIcon()} {this.props.text}
         </button>
-        <div className={classnames("absolute right-0 mt1 mr1 nowrap", this.props.menuClassName,(this.state.open ? "" : "display-none"))} style={{zIndex: 9999}}>
+        <div className={classnames('absolute right-0 mt1 mr1 nowrap', this.props.menuClassName, (this.state.open ? '' : 'display-none'))} style={{zIndex: 9999}}>
           { this.renderChildren() }
         </div>
         { this.renderOverlay() }
