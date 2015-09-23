@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import Block from './../components/Block.jsx'
+import {Block, Navbar} from './../components'
 import DocumentMeta from 'react-document-meta'
 // import ua from 'universal-analytics'
 
@@ -37,6 +37,7 @@ export default class ShowMobilization extends React.Component {
     return (
       <div className={className}>
         <DocumentMeta {...metaData} />
+        <Navbar blocks={blocks} />
         {
           blocks.data.map(function(block) {
             if (!block.hidden) {
