@@ -29,7 +29,7 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <div className='relative fixed z1 full-width navbar'>
-        <div className='absolute full-width bg-darken-4'>
+        <div className='absolute full-width bg-darken-2'>
           <div className="container">
             <div className="lg-show center">
               {this.renderNavbarButtons(false)}
