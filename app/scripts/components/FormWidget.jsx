@@ -37,8 +37,8 @@ export default class FormWidget extends React.Component {
   }
 
   handleClick() {
-    const {mobilization, widget} = this.props
-    if (this.props.editable) {
+    const { mobilization, widget, editable } = this.props
+    if (editable) {
       this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
@@ -78,10 +78,10 @@ export default class FormWidget extends React.Component {
   }
 
   renderCount() {
-    const { configurable, widget } = this.props
+    const { configurable, widget, mobilization: { body_font: bodyFont }} = this.props
     if (!configurable) {
       return (
-        <div className="mt2 h3 center">
+        <div className={classnames('mt2 h3 center', `${bodyFont}-body`)}>
           {widget.form_entries_count}
           &nbsp;
           {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
@@ -104,11 +104,11 @@ export default class FormWidget extends React.Component {
   }
 
   render() {
-    const { editable, mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
+    const { editable, mobilization: { header_font: headerFont }} = this.props
     return (
       <div>
         <div
-          className={classnames('widget relative', (editable ? 'border p2' : null), `${headerFont}-header`, `${bodyFont}-body`)}
+          className={classnames('widget relative', (editable ? 'border p2' : null), `${headerFont}-header`)}
           style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}

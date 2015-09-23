@@ -1,12 +1,15 @@
+.oswald-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+  }
+}
+
 .oswald-body {
   font-family: 'Oswald', sans-serif;
 }
 
-.oswald-header h1,
-.oswald-header h2,
-.oswald-header h3,
-.oswald-header h4,
-.oswald-header h5,
-.oswald-header h6 {
-  font-family: 'Oswald', sans-serif;
+.oswald-form {
+  label, input {
+    font-family: 'Oswald', sans-serif;
+  }
 }

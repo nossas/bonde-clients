@@ -1,5 +1,6 @@
 import React from 'react'
 import * as ReactAddons from 'react/addons'
+import classnames from 'classnames'
 import { FormWidgetInputForm } from './'
 const ReactTransitionGroup = ReactAddons.addons.TransitionGroup
 
@@ -54,11 +55,19 @@ export default class FormWidgetInput extends React.Component {
   }
 
   renderInput() {
-    const { field, editable, configurable, uid } = this.props
+    const {
+      field,
+      editable,
+      configurable,
+      uid,
+      mobilization: {
+        body_font: bodyFont
+      }
+    } = this.props
 
     return (
       <div
-        className="mb3"
+        className={classnames('mb3', `${bodyFont}-form`)}
         onMouseEnter={::this.handleMouseOver}
         onMouseLeave={::this.handleMouseOut}
         style={(editable || configurable ? {cursor: 'pointer'} : null)}

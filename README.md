@@ -37,6 +37,11 @@ Add the new build
 git add -f static/dist
 ```
 
+Commit the changes
+```
+git commit -am "Rebuild project"
+```
+
 Push to Github
 ```
 git push origin heroku

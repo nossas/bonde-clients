@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import classnames from 'classnames'
 import $ from 'jquery'
 import { bindActionCreators } from 'redux'
 import * as FormEntryActions from './../actions/FormEntryActions'
@@ -67,10 +68,11 @@ export default class FormWidgetButton extends React.Component {
   }
 
   render() {
-    const {errors} = this.state
+    const { mobilization: { body_font: bodyFont }} = this.props
+    const { errors } = this.state
 
     return (
-      <div>
+      <div className={classnames(`${bodyFont}-body`)}>
         {
           this.state.errors.length > 0 &&
           <div className="red bold mb1">

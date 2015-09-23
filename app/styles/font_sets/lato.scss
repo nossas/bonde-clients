@@ -1,12 +1,15 @@
+.lato-header {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
 .lato-body {
   font-family: 'Lato', sans-serif;
 }
 
-.lato-header h1,
-.lato-header h2,
-.lato-header h3,
-.lato-header h4,
-.lato-header h5,
-.lato-header h6 {
-  font-family: 'Lato', sans-serif;
+.lato-form {
+  label, input {
+    font-family: 'Lato', sans-serif;
+  }
 }
