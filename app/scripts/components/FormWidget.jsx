@@ -109,7 +109,7 @@ export default class FormWidget extends React.Component {
       <div>
         <div
           className={`widget relative bg-darken-4 rounded p2 ${headerFont}-header`}
-          style={(editable ? {borderStyle: 'dashed', cursor: 'pointer'} : null)}
+          style={(editable ? {cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
           onClick={::this.handleClick}>
