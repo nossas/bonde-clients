@@ -7,7 +7,7 @@ import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobiliz
   mobilizations: state.mobilizations
 }))
 
-export default class Mobilizations extends React.Component {
+export default class UserDashboard extends React.Component {
   componentDidMount() {
     // TODO this callback is a workaround to load mobilizations in client-side
     // but it should be replaced by the static fetchData method that is fetching
