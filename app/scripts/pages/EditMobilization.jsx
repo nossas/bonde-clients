@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import Block from './../components/Block.jsx'
+import { Block, Loading } from './../components'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
@@ -37,7 +37,7 @@ export default class EditMobilization extends React.Component {
 
   componentDidUpdate() {
     const { mobilization, blocks, widgets } = this.props
-    if (!this.newBlock() && blocks.data.length === 0) {
+    if (!this.newBlock() && blocks.data.length === 0 && blocks.loaded === true) {
       this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
     }
     if (!this.state.scrolledToBottom &&
@@ -56,7 +56,7 @@ export default class EditMobilization extends React.Component {
     return location.query && location.query.newBlock && location.query.newBlock === 'true'
   }
 
-  render() {
+  renderBlocks() {
     const { mobilization, blocks } = this.props
     const { color_scheme } = mobilization
     const className = classnames('flex-auto', color_scheme)
@@ -72,12 +72,22 @@ export default class EditMobilization extends React.Component {
                 block={block}
                 canMoveUp={index !== 0}
                 canMoveDown={index !== blocks.length - 1}
-                editable={true}
+                editable
               />
             )
           }.bind(this))
         }
       </div>
     )
+  }
+
+  renderLoader() {
+    return <Loading />
+  }
+
+  render() {
+    return this.props.blocks.loaded === true
+      ? this.renderBlocks()
+      : this.renderLoader()
   }
 }
