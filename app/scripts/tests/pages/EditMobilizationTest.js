@@ -16,7 +16,7 @@ describe('EditMobilization', () => {
   before(() => {
     block1 = { position: 0, id: 1 }
     block2 = { position: 1, id: 2 }
-    blocks = {data: [block1, block2]}
+    blocks = {data: [block1, block2], loaded: true}
     mobilization = { color_scheme: 'meurio-scheme' }
     dispatch = () => {}
   })
