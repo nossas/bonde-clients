@@ -56,4 +56,4 @@ heroku pipeline:promote --app hub-client-staging
 ## Links
 - [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/888220)
 - [Invision](https://projects.invisionapp.com/share/763UO3YDT#/screens)
-- [Zeplin](https://app.zeplin.io/project.html#pid=55d1d57e14a5317a0e909551&sid=55d1d6ae1feab79619a6929b)
+- [Zeplin](https://app.zeplin.io/project.html#pid=55d1d57e14a5317a0e909551)
