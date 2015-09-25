@@ -35,9 +35,8 @@ export default class DropDownMenuItem extends React.Component {
     if (this.state.open) {
       return (
         <div
-          className="fixed top-0 right-0 bottom-0 left-0"
-          onClick={::this.handleOverlayClick}
-          style={{zIndex: 9998}} />
+          className="fixed top-0 right-0 bottom-0 left-0 z1"
+          onClick={::this.handleOverlayClick}/>
       )
     }
   }
@@ -53,11 +52,11 @@ export default class DropDownMenuItem extends React.Component {
 
   render() {
     return (
-      <div className={classnames('absolute top-0 right-0', this.props.className)} style={{zIndex: 9998}}>
+      <div className={classnames('absolute top-0 right-0 z2', this.props.className)}>
         <button className={classnames('button', this.props.menuClassName)} onClick={::this.handleClick}>
           {this.renderIcon()} {this.props.text}
         </button>
-        <div className={classnames('absolute right-0 mt1 mr1 nowrap', this.props.menuClassName, (this.state.open ? '' : 'display-none'))} style={{zIndex: 9999}}>
+        <div className={classnames('absolute right-0 mt1 mr1 nowrap z2', this.props.menuClassName, (this.state.open ? '' : 'display-none'))}>
           { this.renderChildren() }
         </div>
         { this.renderOverlay() }
