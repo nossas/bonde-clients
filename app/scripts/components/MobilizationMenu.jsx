@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link, Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
-
 import * as Paths from '../Paths'
-import * as AuthActions from './../actions/AuthActions'
 
 @reactMixin.decorate(Navigation)
 export default class MobilizationMenu extends React.Component {
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired
+  }
+
   handleBlankTarget(event) {
     event.preventDefault()
     window.open(this.makeHref(event.currentTarget.getAttribute('href')))
   }
 
-  render(){
-    const { user, mobilization } = this.props
-    const style = { minWidth: "300px" }
-    return(
+  render() {
+    const { mobilization } = this.props
+    const style = { width: '300px' }
+    return (
       <div style={style} className="bg-gray p2 white">
         <div className="flex flex-center mb3">
           <div className="flex-auto">
