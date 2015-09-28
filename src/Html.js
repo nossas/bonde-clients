@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import serialize from 'serialize-javascript'
 import DocumentMeta from 'react-document-meta'
+import analytics from './analytics'
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
@@ -32,6 +33,7 @@ export default class Html extends Component {
             <link href={assets.styles[style]} key={i} media="screen, projection"
                   rel="stylesheet" type="text/css"/>
           )}
+          <script dangerouslySetInnerHTML={{__html: analytics}} />
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>

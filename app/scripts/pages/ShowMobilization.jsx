@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import {Block, Navbar} from './../components'
 import DocumentMeta from 'react-document-meta'
-// import ua from 'universal-analytics'
+import trackPageView from './../../../src/trackPageView'
+import { mobTracker } from './../../../src/analytics'
 
 export default class ShowMobilization extends React.Component {
   static propTypes = {
@@ -11,14 +12,18 @@ export default class ShowMobilization extends React.Component {
     widgets: PropTypes.object.isRequired
   }
 
-  constructor(props, context) {
-    super(props, context)
-    // ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
+  componentDidMount() {
+    trackPageView('/', 'mobTracker')
   }
 
   render() {
     const { mobilization, blocks } = this.props
-    const { color_scheme: colorScheme, header_font: headerFont, body_font: bodyFont } = mobilization
+    const {
+      color_scheme: colorScheme,
+      header_font: headerFont,
+      body_font: bodyFont,
+      google_analytics_code: mobTrackingId
+    } = mobilization
     const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
 
     const metaData = {
@@ -45,6 +50,8 @@ export default class ShowMobilization extends React.Component {
             }
           }.bind(this))
         }
+        { mobTrackingId &&
+          <script dangerouslySetInnerHTML={{__html: mobTracker.replace('{mobTrackingId}', mobTrackingId)}} /> }
       </div>
     )
   }
