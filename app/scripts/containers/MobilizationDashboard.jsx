@@ -9,7 +9,7 @@ import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
   widgets: state.widgets
 }))
 
-export default class Mobilization extends React.Component {
+export default class MobilizationDashboard extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
     widgets: PropTypes.object.isRequired,

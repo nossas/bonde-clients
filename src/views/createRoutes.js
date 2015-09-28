@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router'
-import { Application, UserDashboard, Mobilization } from '../../app/scripts/containers'
+import { Application, UserDashboard, MobilizationDashboard } from '../../app/scripts/containers'
 import { TopMenu, MobilizationMenu } from '../../app/scripts/components'
 
 import {
@@ -28,9 +28,9 @@ export default function(store) {
       <Route path="/logout" component={Logout} />
       <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
         <Route component={UserDashboard}>
-          <Route path="/" components={{main: ListMobilizations, topMenu: TopMenu}} />
-          <Route path="/mobilizations/new" components={{main: NewMobilization, topMenu: TopMenu}} />
-          <Route component={Mobilization} >
+          <Route path="/" components={{main: ListMobilizations}} />
+          <Route path="/mobilizations/new" components={{main: NewMobilization}} />
+          <Route component={MobilizationDashboard} >
             <Route path="/mobilizations/:mobilization_id/edit" components={{main: EditMobilization, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/basics" components={{main: MobilizationBasics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
             <Route path="/mobilizations/:mobilization_id/city" components={{main: MobilizationCity, sidebar: MobilizationMenu, topMenu: TopMenu}} />
@@ -45,7 +45,7 @@ export default function(store) {
         </Route>
       </Route>
       <Route component={UserDashboard}>
-        <Route component={Mobilization} >
+        <Route component={MobilizationDashboard} >
           <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
         </Route>
       </Route>
