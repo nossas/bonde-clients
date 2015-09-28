@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
 import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
+import { MobilizationMenu } from './../components'
 
 @connect(state => ({
   auth: state.auth,
@@ -14,10 +15,9 @@ export default class MobilizationDashboard extends React.Component {
     blocks: PropTypes.object.isRequired,
     widgets: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    main: PropTypes.object.isRequired,
-    topMenu: PropTypes.object,
-    sidebar: PropTypes.object,
-    mobilization: PropTypes.object.isRequired
+    mobilization: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    children: PropTypes.object
   }
 
   static fetchData(store, params) {
@@ -45,12 +45,19 @@ export default class MobilizationDashboard extends React.Component {
   }
 
   render() {
+    const { mobilization, auth, blocks, widgets } = this.props
     return (
       <div>
-        { this.props.topMenu && React.cloneElement(this.props.topMenu, {...this.props}) }
         <div className="flex flex-stretch">
-          { this.props.sidebar && React.cloneElement(this.props.sidebar, {...this.props}) }
-          { React.cloneElement(this.props.main, {...this.props}) }
+          <MobilizationMenu {...this.props} />
+          {
+            React.cloneElement(this.props.children, {
+              mobilization: mobilization,
+              auth: auth,
+              blocks: blocks,
+              widgets: widgets
+            })
+          }
         </div>
       </div>
     )

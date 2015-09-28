@@ -1,7 +1,11 @@
 import React from 'react'
 import { Route } from 'react-router'
-import { Application, UserDashboard, MobilizationDashboard } from '../../app/scripts/containers'
-import { TopMenu, MobilizationMenu } from '../../app/scripts/components'
+
+import {
+  Application,
+  UserDashboard,
+  MobilizationDashboard
+} from '../../app/scripts/containers'
 
 import {
   Login,
@@ -26,27 +30,23 @@ export default function(store) {
     <Route component={Application}>
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
+      <Route path="/mobilizations/:mobilization_id" component={ShowMobilization} />
       <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
         <Route component={UserDashboard}>
-          <Route path="/" components={{main: ListMobilizations}} />
-          <Route path="/mobilizations/new" components={{main: NewMobilization}} />
+          <Route path="/" component={ListMobilizations} />
+          <Route path="/mobilizations/new" component={NewMobilization} />
           <Route component={MobilizationDashboard} >
-            <Route path="/mobilizations/:mobilization_id/edit" components={{main: EditMobilization, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/basics" components={{main: MobilizationBasics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/city" components={{main: MobilizationCity, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/cityNew" components={{main: MobilizationCity, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/analytics" components={{main: MobilizationAnalytics, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/fonts" components={{main: MobilizationFonts, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/sharing" components={{main: MobilizationSharing, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/blocks/new" components={{main: NewBlock, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" components={{main: FormWidgetFields, sidebar: MobilizationMenu, topMenu: TopMenu}} />
-            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" components={{main: FormWidgetForm, sidebar: MobilizationMenu, topMenu: TopMenu}} />
+            <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilization} />
+            <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasics} />
+            <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCity} />
+            <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
+            <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
+            <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
+            <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
+            <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
+            <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
           </Route>
-        </Route>
-      </Route>
-      <Route component={UserDashboard}>
-        <Route component={MobilizationDashboard} >
-          <Route path="/mobilizations/:mobilization_id" components={{main: ShowMobilization}} />
         </Route>
       </Route>
     </Route>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Loading } from './../components'
+import { Loading, TopMenu } from './../components'
 import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
 
 @connect(state => ({
@@ -8,6 +8,14 @@ import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobiliz
 }))
 
 export default class UserDashboard extends React.Component {
+  static fetchData(store) {
+    const promises = []
+    if (!isMobilizationsLoaded(store.getState())) {
+      promises.push(store.dispatch(fetchMobilizations()))
+    }
+    return Promise.all(promises)
+  }
+
   componentDidMount() {
     // TODO this callback is a workaround to load mobilizations in client-side
     // but it should be replaced by the static fetchData method that is fetching
@@ -17,55 +25,32 @@ export default class UserDashboard extends React.Component {
     }
   }
 
-  render() {
-    return (this.props.mobilizations.loaded ? this.renderMobilizations() : this.renderLoading())
-  }
-
-  renderTopMenu() {
-    return this.props.topMenu && React.cloneElement(this.props.topMenu, {...this.props})
-  }
-
-  renderComponents() {
-    if (this.props.main) {
-      return (
-        <div>
-          { this.renderTopMenu() }
-          <div className="flex flex-stretch">
-            { this.props.sidebar && React.cloneElement(this.props.sidebar, {...this.props}) }
-            {
-              /* TODO pass mobilizations as props, and change the following
-              components to read mobilizations.data as the mobilizations list */
-            }
-            { React.cloneElement(this.props.main, {...this.props, mobilizations: this.props.mobilizations.data}) }
-          </div>
-        </div>
-      )
-    }
+  selectedMobilization() {
+    const { mobilizations, params } = this.props
+    return mobilizations.data.filter((m) => {
+      return m.id === parseInt(params.mobilization_id, 10)
+    })[0]
   }
 
   renderMobilizations() {
-    const { mobilizations } = this.props
-    const ids = mobilizations.data.map((mobilization) => {return mobilization.id.toString()})
-    const mobilization = mobilizations.data[ids.indexOf(this.props.params.mobilization_id)]
+    const { auth, mobilizations } = this.props
+
     return (
       <div>
-        { this.props.children && React.cloneElement(this.props.children, {...this.props, mobilization})}
-        { this.renderComponents() }
+        <TopMenu auth={auth} />
+        {
+          /* TODO pass mobilizations as props, and change the following
+          components to read mobilizations.data as the mobilizations list */
+          React.cloneElement(this.props.children, {
+            mobilizations: mobilizations.data,
+            mobilization: this.selectedMobilization()
+          })
+        }
       </div>
     )
   }
 
-  renderLoading() {
-    return (
-      <Loading />
-    )
-  }
-
-  static fetchData(store) {
-    const promises = []
-    if (!isMobilizationsLoaded(store.getState())) {
-      promises.push(store.dispatch(fetchMobilizations()))
-    }
-    return Promise.all(promises)
+  render() {
+    return (this.props.mobilizations.loaded ? this.renderMobilizations() : <Loading />)
   }
 }
