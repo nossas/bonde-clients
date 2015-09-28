@@ -7,7 +7,9 @@ import {
   REQUEST_EDIT_MOBILIZATION,
   SUCCESS_EDIT_MOBILIZATION,
   FAILURE_EDIT_MOBILIZATION,
+  // TODO: deprecate this action
   EDIT_MOBILIZATION,
+  // TODO implement REQUEST, SUCCESS and FAILURE for ADD_MOBILIZATION
   ADD_MOBILIZATION
 } from './../constants/ActionTypes'
 
