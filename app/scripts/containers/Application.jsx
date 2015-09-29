@@ -11,8 +11,10 @@ import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 export default class Application extends React.Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    auth: PropTypes.object
+    auth: PropTypes.object,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    })
   }
 
   static fetchData(store) {
@@ -23,9 +25,10 @@ export default class Application extends React.Component {
     return Promise.all(promises)
   }
 
-  componentDidUpdate() {
-    // TODO: fire trackPageView only if current path has changed
-    trackPageView(this.props.location.pathname)
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      trackPageView(this.props.location.pathname)
+    }
   }
 
   render() {
