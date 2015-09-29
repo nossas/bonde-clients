@@ -1,3 +1,4 @@
+// TODO encapsulate all superagent calls in this file to an ApiClient
 import superagent from 'superagent'
 
 import {
@@ -62,12 +63,14 @@ export function isMobilizationsLoaded(globalState) {
   return globalState.mobilizations.loaded
 }
 
-export function fetchMobilizations() {
+export function fetchMobilizations(options = {}) {
   return {
     types: [REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS],
     promise: function() {
       return new Promise(function(resolve, reject) {
-        superagent.get(`${process.env.API_URL}/mobilizations`).end((err, res) => {
+        superagent.get(`${process.env.API_URL}/mobilizations`)
+        .send(options)
+        .end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {
