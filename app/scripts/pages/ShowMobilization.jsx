@@ -1,27 +1,54 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import {Block, Navbar} from './../components'
 import DocumentMeta from 'react-document-meta'
-// import ua from 'universal-analytics'
+import { connect } from 'react-redux'
+import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
+import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
+import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
+import { Block, Navbar } from './../components'
 
-export default class ShowMobilization extends React.Component {
+const mapStateToProps = (state) => {
+  return ({
+    mobilizations: state.mobilizations,
+    blocks: state.blocks,
+    widgets: state.widgets
+  })
+}
+
+export class ShowMobilization extends React.Component {
   static propTypes = {
-    mobilization: PropTypes.object.isRequired,
+    mobilizations: PropTypes.object.isRequired,
     blocks: PropTypes.object.isRequired,
-    widgets: PropTypes.object.isRequired
+    widgets: PropTypes.object.isRequired,
+    params: PropTypes.object
   }
 
-  constructor(props, context) {
-    super(props, context)
-    // ua(props.mobilization.google_analytics_code, {https: true}).pageview("/").send()
+  static fetchData(store, params) {
+    const promises = []
+
+    if (!isMobilizationsLoaded(store.getState())) {
+      const action = fetchMobilizations({ids: [params.mobilization_id]})
+      const dispatch = store.dispatch(action)
+      promises.push(dispatch)
+    }
+
+    if (!isBlocksLoaded(store.getState())) {
+      const action = fetchBlocks({mobilization_id: params.mobilization_id})
+      const promise = store.dispatch(action)
+      promises.push(promise)
+    }
+
+    if (!isWidgetsLoaded(store.getState())) {
+      const action = fetchWidgets({mobilization_id: params.mobilization_id})
+      const promise = store.dispatch(action)
+      promises.push(promise)
+    }
+
+    return Promise.all(promises)
   }
 
-  render() {
-    const { mobilization, blocks } = this.props
-    const { color_scheme: colorScheme, header_font: headerFont, body_font: bodyFont } = mobilization
-    const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
-
-    const metaData = {
+  metaData(mobilization) {
+    return {
       title: mobilization.name,
       description: mobilization.goal,
       meta: {
@@ -33,19 +60,41 @@ export default class ShowMobilization extends React.Component {
         }
       }
     }
+  }
+
+  render() {
+    const { mobilizations, params } = this.props
+
+    const mobilization = mobilizations.data.filter(
+      (m) => {return m.id === parseInt(params.mobilization_id, 10)}
+    )[0]
+
+    const { blocks, widgets } = this.props
+    const { color_scheme: colorScheme, header_font: headerFont, body_font: bodyFont } = mobilization
+    const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
 
     return (
       <div className={className}>
-        <DocumentMeta {...metaData} />
+        <DocumentMeta {...this.metaData(mobilization)} />
         <Navbar blocks={blocks} />
         {
-          blocks.data.map(function(block) {
+          blocks.data.map((block) => {
             if (!block.hidden) {
-              return <Block {...this.props} key={'block-' + block.id} block={block} editable={false} />
+              return (
+                <Block
+                  key={'block-' + block.id}
+                  block={block}
+                  editable={false}
+                  mobilization={mobilization}
+                  widgets={widgets}
+                />
+              )
             }
-          }.bind(this))
+          })
         }
       </div>
     )
   }
 }
+
+export default connect(mapStateToProps)(ShowMobilization)
