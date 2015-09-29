@@ -55,21 +55,13 @@ export default class MobilizationDashboard extends React.Component {
       overflowY: 'scroll'
     }
 
-    const { mobilization, auth, blocks, widgets } = this.props
     return (
       <div style={flexStyle}>
         <section style={sidebarStyle} className='bg-gray p2 white'>
           <MobilizationMenu {...this.props} />
         </section>
         <section style={contentStyle}>
-          {
-            React.cloneElement(this.props.children, {
-              mobilization: mobilization,
-              auth: auth,
-              blocks: blocks,
-              widgets: widgets
-            })
-          }
+          {React.cloneElement(this.props.children, {...this.props})}
         </section>
       </div>
     )

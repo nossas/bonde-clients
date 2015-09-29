@@ -33,7 +33,7 @@ export default class UserDashboard extends React.Component {
   }
 
   renderMobilizations() {
-    const { auth, mobilizations } = this.props
+    const { children, ...otherProps } = this.props
 
     // TODO http://glenmaddern.com/articles/css-modules
     // we should be using css modules to better define styles
@@ -49,12 +49,12 @@ export default class UserDashboard extends React.Component {
 
     return (
       <div style={absoluteStyle}>
-        <TopMenu auth={auth} />
+        <TopMenu auth={this.props.auth} />
         {
           /* TODO pass mobilizations as props, and change the following
           components to read mobilizations.data as the mobilizations list */
-          React.cloneElement(this.props.children, {
-            mobilizations: mobilizations.data,
+          React.cloneElement(children, {
+            ...otherProps,
             mobilization: this.selectedMobilization()
           })
         }
