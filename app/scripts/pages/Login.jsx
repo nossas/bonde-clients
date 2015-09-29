@@ -6,8 +6,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="absolute left-0 top-0 right-0 bottom-0 bg-gray gray bg-cover bg-center">
-        {/* TODO move TopMenu rendering to the Application component */}
-        <TopMenu {...this.props} />
         <div className="py4">
           <div className="container py4">
             <div className="px3 bg-white rounded-top lg-col-6 mx-auto">
