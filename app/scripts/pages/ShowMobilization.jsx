@@ -6,6 +6,8 @@ import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobiliz
 import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
 import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
 import { Block, Navbar } from './../components'
+import trackPageView from './../../../src/trackPageView'
+import { mobTracker } from './../../../src/analytics'
 
 const mapStateToProps = (state) => {
   return ({
@@ -47,6 +49,10 @@ export class ShowMobilization extends React.Component {
     return Promise.all(promises)
   }
 
+  componentDidMount() {
+    trackPageView('/', 'mobTracker')
+  }
+
   metaData(mobilization) {
     return {
       title: mobilization.name,
@@ -70,7 +76,14 @@ export class ShowMobilization extends React.Component {
     )[0]
 
     const { blocks, widgets } = this.props
-    const { color_scheme: colorScheme, header_font: headerFont, body_font: bodyFont } = mobilization
+
+    const {
+      color_scheme: colorScheme,
+      header_font: headerFont,
+      body_font: bodyFont,
+      google_analytics_code: mobTrackingId
+    } = mobilization
+
     const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
 
     return (
@@ -92,6 +105,8 @@ export class ShowMobilization extends React.Component {
             }
           })
         }
+        { mobTrackingId &&
+          <script dangerouslySetInnerHTML={{__html: mobTracker.replace('{mobTrackingId}', mobTrackingId)}} /> }
       </div>
     )
   }
