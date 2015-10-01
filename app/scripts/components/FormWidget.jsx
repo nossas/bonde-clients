@@ -45,10 +45,10 @@ export default class FormWidget extends React.Component {
 
   renderCallToAction() {
     const { configurable, widget } = this.props
+    let callToAction = widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'
+    callToAction = callToAction.replace('\n', '<br/><br/>')
     if (!configurable) {
-      return (
-        <h2 className="mt0 mb3 center">{widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'}</h2>
-      )
+      return <h2 className="mt0 mb3 center" dangerouslySetInnerHTML={{__html: callToAction}} />
     }
   }
 
