@@ -73,7 +73,7 @@ export default class FormWidgetInput extends React.Component {
         style={(editable || configurable ? {cursor: 'pointer'} : null)}
         onClick={::this.handleClick}>
         <label
-          className="block h4 caps bold mb1 left"
+          className="block h4 caps bold mb1"
           style={(editable || configurable ? {cursor: 'pointer'} : null)}>
           {field.label}{field.required === 'true' ? ' *' : null}
         </label>
