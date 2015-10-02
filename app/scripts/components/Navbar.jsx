@@ -9,7 +9,7 @@ export default class Navbar extends React.Component {
 
   renderNavbarButtons(mobile) {
     const className = classnames(
-      'button button-transparent white p2',
+      'button button-transparent black p2',
       {block: mobile}
     )
 
@@ -28,20 +28,16 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className='relative fixed z1 full-width navbar'>
-        <div className='absolute full-width bg-darken-2'>
-          <div className="container">
-            <div className="lg-show center">
-              {this.renderNavbarButtons(false)}
-            </div>
-            <div className="lg-hide show">
-              <DropDownMenu
-                menuClassName="rounded m1 overflow-hidden bg-darken-4"
-                icon="bars">
-                {this.renderNavbarButtons(true)}
-              </DropDownMenu>
-            </div>
-          </div>
+      <div className="container">
+        <div className="lg-show center">
+          {this.renderNavbarButtons(false)}
+        </div>
+        <div className="lg-hide show">
+          <DropDownMenu
+            menuClassName="rounded m1 overflow-hidden bg-darken-4"
+            icon="bars">
+            {this.renderNavbarButtons(true)}
+          </DropDownMenu>
         </div>
       </div>
     )

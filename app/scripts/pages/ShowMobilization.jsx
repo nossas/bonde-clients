@@ -89,22 +89,28 @@ export class ShowMobilization extends React.Component {
     return (
       <div className={className}>
         <DocumentMeta {...this.metaData(mobilization)} />
-        <Navbar blocks={blocks} />
-        {
-          blocks.data.map((block) => {
-            if (!block.hidden) {
-              return (
-                <Block
-                  key={'block-' + block.id}
-                  block={block}
-                  editable={false}
-                  mobilization={mobilization}
-                  widgets={widgets}
-                />
-              )
-            }
-          })
-        }
+        <div className="absolutez" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}>
+          <div className="flexz" style={{display: 'flex', flexDirection: 'column', overflowY: 'scroll', height: '100%'}}>
+            <Navbar blocks={blocks} />
+            <div className='blocksz' style={{flex: 1, overflowY: 'scroll'}}>
+              {
+                blocks.data.map((block) => {
+                  if (!block.hidden) {
+                    return (
+                      <Block
+                        key={'block-' + block.id}
+                        block={block}
+                        editable={false}
+                        mobilization={mobilization}
+                        widgets={widgets}
+                      />
+                    )
+                  }
+                })
+              }
+            </div>
+          </div>
+        </div>
         { mobTrackingId &&
           <script dangerouslySetInnerHTML={{__html: mobTracker.replace('{mobTrackingId}', mobTrackingId)}} /> }
       </div>

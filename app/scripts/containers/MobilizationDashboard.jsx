@@ -48,7 +48,7 @@ export default class MobilizationDashboard extends React.Component {
     // TODO http://glenmaddern.com/articles/css-modules
     // we should be using css modules to better define styles
     const sidebarStyle = {overflowY: 'scroll', maxWidth: '300px'}
-    const contentStyle = {overflowY: 'scroll', flex: 1}
+    const contentStyle = {overflowY: 'scroll', flex: 1, display: 'flex'}
     const flexStyle = {
       flex: 1,
       display: 'flex',

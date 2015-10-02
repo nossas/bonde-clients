@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { Block, Loading } from './../components'
+import { Block, Loading, Navbar } from './../components'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
@@ -62,21 +62,24 @@ export default class EditMobilization extends React.Component {
     const className = classnames('flex-auto', color_scheme)
 
     return (
-      <div className={className}>
-        {
-          blocks.data.map(function(block, index) {
-            return (
-              <Block
-                {...this.props}
-                key={'block-' + block.id}
-                block={block}
-                canMoveUp={index !== 0}
-                canMoveDown={index !== blocks.length - 1}
-                editable
-              />
-            )
-          }.bind(this))
-        }
+      <div className={`flexz ${color_scheme}`} style={{display: 'flex', flexDirection: 'column', overflowY: 'scroll', flex: '1 1 auto'}}>
+        <Navbar blocks={blocks} />
+        <div className='blocksz' style={{flex: 1, overflowY: 'scroll'}}>
+          {
+            blocks.data.map(function(block, index) {
+              return (
+                <Block
+                  {...this.props}
+                  key={'block-' + block.id}
+                  block={block}
+                  canMoveUp={index !== 0}
+                  canMoveDown={index !== blocks.length - 1}
+                  editable
+                />
+              )
+            }.bind(this))
+          }
+        </div>
       </div>
     )
   }
