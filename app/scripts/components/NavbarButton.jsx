@@ -4,16 +4,19 @@ import $ from 'jquery'
 export default class NavbarButton extends React.Component {
   static propTypes = {
     targetId: PropTypes.string.isRequired,
+    scrollableId: PropTypes.string.isRequired,
     className: PropTypes.string,
     children: PropTypes.array
   }
 
   handleClick(e) {
     e.preventDefault()
-    const {targetId} = this.props
-    const yPosition = $(`#${targetId}`).position().top
+    const { targetId, scrollableId } = this.props
+    const target = $(`#${targetId}`)
+    const scrollable = $(`#${scrollableId}`)
+    const yPosition = target.position().top + scrollable.scrollTop() - scrollable.position().top
 
-    $('body').animate({scrollTop: yPosition}, 500, () => {
+    scrollable.animate({scrollTop: yPosition}, 500, () => {
       window.location.hash = targetId
     })
   }

@@ -58,13 +58,12 @@ export default class EditMobilization extends React.Component {
 
   renderBlocks() {
     const { mobilization, blocks } = this.props
-    const { color_scheme } = mobilization
-    const className = classnames('flex-auto', color_scheme)
+    const { color_scheme: colorScheme } = mobilization
 
     return (
-      <div className={`flexz ${color_scheme}`} style={{display: 'flex', flexDirection: 'column', overflowY: 'scroll', flex: '1 1 auto'}}>
-        <Navbar blocks={blocks} />
-        <div className='blocksz' style={{flex: 1, overflowY: 'scroll'}}>
+      <div className={classnames(colorScheme, 'flex flex-column flex-auto')}>
+        <Navbar blocks={blocks} mobilization={mobilization} />
+        <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
             blocks.data.map(function(block, index) {
               return (

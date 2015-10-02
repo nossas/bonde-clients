@@ -84,33 +84,36 @@ export class ShowMobilization extends React.Component {
       google_analytics_code: mobTrackingId
     } = mobilization
 
-    const className = classnames('flex-auto', colorScheme, `${headerFont}-header`, `${bodyFont}-body`)
+    const pageClasses = classnames(
+      colorScheme,
+      `${headerFont}-header`,
+      `${bodyFont}-body`,
+      'absolute',
+      'flex',
+      'flex-column'
+    )
 
     return (
-      <div className={className}>
-        <DocumentMeta {...this.metaData(mobilization)} />
-        <div className="absolutez" style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}>
-          <div className="flexz" style={{display: 'flex', flexDirection: 'column', overflowY: 'scroll', height: '100%'}}>
-            <Navbar blocks={blocks} />
-            <div className='blocksz' style={{flex: 1, overflowY: 'scroll'}}>
-              {
-                blocks.data.map((block) => {
-                  if (!block.hidden) {
-                    return (
-                      <Block
-                        key={'block-' + block.id}
-                        block={block}
-                        editable={false}
-                        mobilization={mobilization}
-                        widgets={widgets}
-                      />
-                    )
-                  }
-                })
+      <div className={pageClasses} style={{top: 0, bottom: 0, left: 0, right: 0}}>
+        <Navbar blocks={blocks} mobilization={mobilization} />
+        <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
+          {
+            blocks.data.map((block) => {
+              if (!block.hidden) {
+                return (
+                  <Block
+                    key={'block-' + block.id}
+                    block={block}
+                    editable={false}
+                    mobilization={mobilization}
+                    widgets={widgets}
+                  />
+                )
               }
-            </div>
-          </div>
+            })
+          }
         </div>
+        <DocumentMeta {...this.metaData(mobilization)} />
         { mobTrackingId &&
           <script dangerouslySetInnerHTML={{__html: mobTracker.replace('{mobTrackingId}', mobTrackingId)}} /> }
       </div>

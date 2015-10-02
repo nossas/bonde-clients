@@ -45,24 +45,10 @@ export default class MobilizationDashboard extends React.Component {
   }
 
   render() {
-    // TODO http://glenmaddern.com/articles/css-modules
-    // we should be using css modules to better define styles
-    const sidebarStyle = {overflowY: 'scroll', maxWidth: '300px'}
-    const contentStyle = {overflowY: 'scroll', flex: 1, display: 'flex'}
-    const flexStyle = {
-      flex: 1,
-      display: 'flex',
-      overflowY: 'scroll'
-    }
-
     return (
-      <div style={flexStyle}>
-        <section style={sidebarStyle} className='bg-gray p2 white'>
-          <MobilizationMenu {...this.props} />
-        </section>
-        <section style={contentStyle}>
-          {React.cloneElement(this.props.children, {...this.props})}
-        </section>
+      <div className='flex flex-auto overflow-hidden'>
+        <MobilizationMenu {...this.props} />
+        {React.cloneElement(this.props.children, {...this.props})}
       </div>
     )
   }

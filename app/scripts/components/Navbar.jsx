@@ -4,20 +4,26 @@ import { DropDownMenu, NavbarButton } from './'
 
 export default class Navbar extends React.Component {
   static propTypes = {
-    blocks: PropTypes.object.isRequired
+    blocks: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired
   }
 
   renderNavbarButtons(mobile) {
+    const { blocks, mobilization } = this.props
+    const { header_font: headerFont, body_font: bodyFont } = mobilization
     const className = classnames(
       'button button-transparent black p2',
-      {block: mobile}
+      `${headerFont}-header`,
+      `${bodyFont}-body`,
+      { block: mobile }
     )
 
     return (
-      this.props.blocks.data.map((block) => {
+      blocks.data.map((block) => {
         return (
           <NavbarButton
             targetId={'block-' + block.id}
+            scrollableId='blocks-list'
             className={className}>
             Bloco {block.id}
           </NavbarButton>
@@ -28,13 +34,15 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="lg-show center">
-          {this.renderNavbarButtons(false)}
+          <div className="bg-white">
+            {this.renderNavbarButtons(false)}
+          </div>
         </div>
         <div className="lg-hide show">
           <DropDownMenu
-            menuClassName="rounded m1 overflow-hidden bg-darken-4"
+            menuClassName="rounded mt1 mr3 overflow-hidden bg-white black"
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>

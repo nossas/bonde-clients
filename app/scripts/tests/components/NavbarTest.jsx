@@ -3,12 +3,18 @@ import { Navbar, DropDownMenu } from './../../components'
 
 const { TestUtils } = React.addons
 const blocks = {data: [{}, {}, {}]}
+const mobilization = {
+  color_scheme: 'my-color-scheme',
+  header_font: 'my-header-font',
+  body_font: 'my-header-font'
+}
+
 let navbarComponent
 
 describe('Navbar', () => {
   before(() => {
     navbarComponent = TestUtils.renderIntoDocument(
-      <Navbar blocks={blocks} />
+      <Navbar blocks={blocks} mobilization={mobilization} />
     )
   })
 

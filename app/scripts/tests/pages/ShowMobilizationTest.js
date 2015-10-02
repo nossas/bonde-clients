@@ -73,13 +73,13 @@ describe('ShowMobilization', () => {
     it('should render a div with the mobilizations header font', () => {
       expect(
         TestUtils.scryRenderedDOMComponentsWithClass(component, `${mobilization.header_font}-header`)
-      ).to.have.length(1)
+      ).to.have.length.above(0)
     })
 
     it('should render a div with the mobilizations body font', () => {
       expect(
         TestUtils.scryRenderedDOMComponentsWithClass(component, `${mobilization.body_font}-body`)
-      ).to.have.length(1)
+      ).to.have.length.above(0)
     })
   })
 
