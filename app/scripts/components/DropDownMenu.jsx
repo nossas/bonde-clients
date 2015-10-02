@@ -42,12 +42,12 @@ export default class DropDownMenuItem extends React.Component {
   }
 
   renderChildren() {
-    if (this.props.children.length > 0) {
-      return this.props.children.map((child, index) => {
-        return React.cloneElement(child, {key: 'item-' + index, onItemClick: ::this.handleOverlayClick})
+    return this.props.children.map((child, index) => {
+      return React.cloneElement(child, {
+        key: 'item-' + index,
+        onItemClick: ::this.handleOverlayClick
       })
-    }
-    return React.cloneElement(this.props.children, {onItemClick: ::this.handleOverlayClick})
+    })
   }
 
   render() {
@@ -57,7 +57,7 @@ export default class DropDownMenuItem extends React.Component {
           {this.renderIcon()} {this.props.text}
         </button>
         <div className={classnames('absolute right-0 mt1 mr1 nowrap z2', this.props.menuClassName, (this.state.open ? '' : 'display-none'))}>
-          { this.renderChildren() }
+          { this.props.children.length > 0 && this.renderChildren() }
         </div>
         { this.renderOverlay() }
       </div>
