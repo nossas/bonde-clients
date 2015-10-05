@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
     const { blocks, mobilization } = this.props
     const { header_font: headerFont, body_font: bodyFont } = mobilization
     const className = classnames(
-      'button button-transparent black p2',
+      'button button-transparent white p2',
       `${headerFont}-header`,
       `${bodyFont}-body`,
       { block: mobile }
@@ -34,15 +34,15 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="absolute full-width z1">
         <div className="lg-show center">
-          <div className="bg-white">
+          <div className="bg-darken-3">
             {this.renderNavbarButtons(false)}
           </div>
         </div>
         <div className="lg-hide show">
           <DropDownMenu
-            menuClassName="rounded mt1 mr3 overflow-hidden bg-white black"
+            menuClassName="rounded mt1 mr1 overflow-hidden bg-darken-3 white"
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>

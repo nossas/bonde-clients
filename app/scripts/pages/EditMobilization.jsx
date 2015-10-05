@@ -61,7 +61,7 @@ export default class EditMobilization extends React.Component {
     const { color_scheme: colorScheme } = mobilization
 
     return (
-      <div className={classnames(colorScheme, 'flex flex-column flex-auto')}>
+      <div className={classnames(colorScheme, 'flex flex-column flex-auto relative')}>
         <Navbar blocks={blocks} mobilization={mobilization} />
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
