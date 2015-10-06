@@ -4,6 +4,7 @@ import mobilizations from './../../app/scripts/reducers/mobilizations'
 import blocks from './../../app/scripts/reducers/blocks'
 import widgets from './../../app/scripts/reducers/widgets'
 import auth from './../../app/scripts/reducers/auth'
+import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
@@ -29,5 +30,6 @@ export default combineReducers({
   widgets,
   loginForm,
   widgetForm,
-  auth
+  auth,
+  mobilizationEditor
 })
