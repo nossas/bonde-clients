@@ -36,13 +36,13 @@ export default class Navbar extends React.Component {
     return (
       <div className="absolute full-width z1">
         <div className="lg-show center">
-          <div className="bg-darken-3">
+          <div className="bg-darken-4">
             {this.renderNavbarButtons(false)}
           </div>
         </div>
         <div className="lg-hide show">
           <DropDownMenu
-            menuClassName="rounded mt1 mr1 overflow-hidden bg-darken-3 white"
+            menuClassName="rounded mt1 mr1 overflow-hidden bg-darken-4 white"
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>
