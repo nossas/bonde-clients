@@ -10,6 +10,7 @@ let allWidgets
 let blockWidgets
 let block
 let auth
+let dispatch
 
 describe('Block', () => {
   before(() => {
@@ -21,6 +22,7 @@ describe('Block', () => {
     auth = {
       credentials: { x: 'y' }
     }
+    dispatch = () => { return true }
   })
 
   describe('#constructor', () => {
@@ -60,7 +62,7 @@ describe('Block', () => {
   describe('#handleKeyUp', () => {
     it('should set editing background to false when pressed ESC key', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.setState({editingBackground: true})
       component.handleKeyUp({keyCode: 27})
@@ -69,7 +71,7 @@ describe('Block', () => {
 
     it('should not set editing background to false when pressed ESC key', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.setState({editingBackground: true})
       component.handleKeyUp({keyCode: 13})
@@ -80,7 +82,7 @@ describe('Block', () => {
   describe('#handleCancelEdit', () => {
     it('should set editing background to false', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.setState({
         editingBackground: true,
@@ -97,7 +99,7 @@ describe('Block', () => {
   describe('#handleColorClick', () => {
     it('should set bg class to the selected bg class event current target', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       const event = {currentTarget: {getAttribute() { return 'bg-purple' }}}
       component.handleColorClick(event)
@@ -109,7 +111,7 @@ describe('Block', () => {
     it('should dispatch edit block action', () => {
       const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
       const component = TestUtils.renderIntoDocument(
-        <Block dispatch={() => {}} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
+        <Block dispatch={dispatch} mobilization={{id: 1}} widgets={allWidgets} block={block} auth={auth} />
       )
       component.setState({
         editingBackground: true,
@@ -133,7 +135,7 @@ describe('Block', () => {
   describe('#handleUploadProgress', () => {
     it('should set the progress', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.handleUploadProgress(34)
       expect(component.state.uploadProgress).to.equal(34)
@@ -165,7 +167,7 @@ describe('Block', () => {
   describe('#handleEditBackgroundClick', () => {
     it('should set editing background to true', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.setState({editingBackground: false})
       component.handleEditBackgroundClick()
@@ -321,7 +323,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: false})
       const menus = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menus).to.have.length(1)
-      expect(menus[0].props.className).to.equal('p2 display-none')
+      expect(menus[0].props.className).to.equal('p1 display-none')
     })
 
     it('should render DropDownMenu with display-none when block is not editable', () => {
@@ -331,7 +333,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: true})
       const menus = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menus).to.have.length(1)
-      expect(menus[0].props.className).to.equal('p2 display-none')
+      expect(menus[0].props.className).to.equal('p1 display-none')
     })
 
     it('should render DropDownMenu when mouse is over', () => {
@@ -341,7 +343,7 @@ describe('Block', () => {
       component.setState({hasMouseOver: true})
       const menu = TestUtils.scryRenderedComponentsWithType(component, DropDownMenu)
       expect(menu).to.have.length(1)
-      expect(menu[0].props.className).to.equal('p2')
+      expect(menu[0].props.className).to.equal('p1')
     })
 
     it('should render DropDownMenuItems', () => {
@@ -391,7 +393,7 @@ describe('Block', () => {
 
     it('should render color picker when editing background', () => {
       const component = TestUtils.renderIntoDocument(
-        <Block widgets={allWidgets} block={block} />
+        <Block widgets={allWidgets} block={block} dispatch={dispatch} />
       )
       component.setState({editingBackground: true})
       const colorPicker = TestUtils.scryRenderedComponentsWithType(component, ColorPicker)

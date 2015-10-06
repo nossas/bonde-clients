@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
-import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
 import { bindActionCreators } from 'redux'
-import * as BlockActions from './../actions/BlockActions'
 import classnames from 'classnames'
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
+import * as BlockActions from './../actions/BlockActions'
+import { startEditingBlock, stopEditingBlock } from './../reducers/mobilizationEditor'
 
 export default class Block extends React.Component {
   static propTypes = {
@@ -31,6 +32,18 @@ export default class Block extends React.Component {
     }
     const { dispatch } = this.props
     this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.editingBackground && !nextState.editingBackground) {
+      this.props.dispatch(stopEditingBlock())
+    } else if (!this.state.editingBackground && nextState.editingBackground) {
+      this.props.dispatch(startEditingBlock())
+    } else if (this.state.editingWidget && !nextState.editingWidget) {
+      this.props.dispatch(stopEditingBlock())
+    } else if (!this.state.editingWidget && nextState.editingWidget) {
+      this.props.dispatch(startEditingBlock())
+    }
   }
 
   componentWillReceiveProps() {
@@ -270,19 +283,21 @@ export default class Block extends React.Component {
     return (
       <div
         id={'block-' + block.id}
-        className={classnames('clearfix', 'relative', block.bg_class, (block.bg_image ? 'bg-cover' : null))}
+        className={classnames('clearfix', block.bg_class, (block.bg_image ? 'bg-cover' : null))}
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
         style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <div className="container">
-          <DropDownMenu className={(this.displayDropDownMenu() ? 'p2' : 'p2 display-none')} menuClassName="bg-darken-4 rounded white" icon="cog">
-            <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-picture-o" /> Alterar fundo</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
-            <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
-            <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
-            <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
-          </DropDownMenu>
+          <div className='relative'>
+            <DropDownMenu className={(this.displayDropDownMenu() ? 'p1' : 'p1 display-none')} menuClassName="bg-darken-4 rounded white" icon="cog">
+              <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-picture-o" /> Alterar fundo</DropDownMenuItem>
+              <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
+              <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
+              <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
+              <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
+            </DropDownMenu>
+          </div>
           { this.renderColorPicker() }
           <div className="clearfix" style={{padding: '5em 0'}}>
             { this.renderWidgets(filteredWidgets) }
