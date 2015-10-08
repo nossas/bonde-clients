@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
-import { connectReduxForm } from 'redux-form'
+import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { ConfigurationsMenu, CloseButton } from './../components'
@@ -17,13 +17,8 @@ function mobilizationAnalyticsValidation(data) {
 }
 
 @connect(state => ({ form: state.mobilizationAnalytics }))
+@reduxForm('mobilizationAnalytics', mobilizationAnalyticsValidation)
 @reactMixin.decorate(Navigation)
-
-@connectReduxForm({
-  form: 'mobilizationAnalytics',
-  validate: mobilizationAnalyticsValidation,
-  fields: ['id']
-})
 
 export default class MobilizationAnalytics extends React.Component {
 
