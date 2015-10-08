@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as Paths from '../Paths'
 import { FormWidgetMenu, Loading, CloseButton, Label } from './../components'
-import reduxForm from 'redux-form'
+import { connectReduxForm } from 'redux-form'
 
 function widgetFormValidation() {
   const errors = { valid: true }
@@ -13,7 +13,13 @@ function widgetFormValidation() {
 }
 
 @connect(state => ({ form: state.widgetForm }))
-@reduxForm('widgetForm', widgetFormValidation)
+
+@connectReduxForm({
+  form: 'widgetForm',
+  validate: widgetFormValidation,
+  fields: ['callToAction', 'buttonText', 'countText', 'emailText']
+})
+
 export default class FormWidgetForm extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
