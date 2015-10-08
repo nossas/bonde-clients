@@ -5,7 +5,7 @@ import * as MobilizationActions from './../actions/MobilizationActions'
 import { Link } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
-import { connectReduxForm } from 'redux-form'
+import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { ConfigurationsMenu, CloseButton } from './../components'
@@ -20,11 +20,7 @@ function mobilizationCityValidation(data) {
 }
 
 @connect(state => ({ form: state.mobilizationCity, auth: state.auth }))
-@connectReduxForm({
-  form: 'mobilizationCity',
-  validate: mobilizationCityValidation,
-  fields: ['colorScheme']
-})
+@reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
 export default class MobilizationCity extends React.Component {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
-import { connectReduxForm } from 'redux-form'
+import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as MobilizationActions from './../actions/MobilizationActions'
@@ -29,13 +29,8 @@ function mobilizationBasicsValidation(data) {
 }
 
 @connect(state => ({ form: state.mobilizationBasics, auth: state.auth }))
+@reduxForm('mobilizationBasics', mobilizationBasicsValidation)
 @reactMixin.decorate(Navigation)
-
-@connectReduxForm({
-  form: 'mobilizationBasics',
-  validate: mobilizationBasicsValidation,
-  fields: ['name', 'goal']
-})
 
 export default class MobilizationBasicsForm extends React.Component {
   constructor(props, context) {

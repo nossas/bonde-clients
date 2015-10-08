@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import { connectReduxForm } from 'redux-form'
+import reduxForm from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
 import {ConfigurationsMenu, CloseButton, Label, InputCounter} from './../components'
@@ -7,10 +7,7 @@ import {editMobilization} from './../reducers/mobilizations'
 import * as Paths from '../Paths'
 
 @connect(state => ({ form: state.mobilizationSharing }))
-@connectReduxForm({
-  form: 'mobilizationSharing',
-  fields: ['facebook_share_title', 'facebook_share_description', 'facebook_share_image']
-})
+@reduxForm('mobilizationSharing')
 
 export default class MobilizationSharing extends React.Component {
   static propTypes = {
