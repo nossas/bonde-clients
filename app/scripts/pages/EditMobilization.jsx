@@ -65,7 +65,7 @@ export default class EditMobilization extends React.Component {
       <div className={classnames(colorScheme, 'flex flex-column flex-auto relative')}>
         {
           !mobilizationEditor.isEditingBlock
-            && <Navbar blocks={blocks} mobilization={mobilization} />
+            && <Navbar blocks={blocks} mobilization={mobilization} editable />
         }
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
