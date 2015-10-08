@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { connectReduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import classnames from 'classnames'
@@ -25,8 +25,13 @@ function loginValidation(data) {
 }
 
 @connect(state => ({ auth: state.auth, form: state.loginForm }))
-@reduxForm('loginForm', loginValidation)
 @reactMixin.decorate(Navigation)
+
+@connectReduxForm({
+  form: 'loginForm',
+  validate: loginValidation,
+  fields: ['email', 'password']
+})
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -94,7 +99,7 @@ export default class LoginForm extends React.Component {
 
         <input
           type="submit"
-          className="button full-width bg-aqua mt2 p2"
+          className="button full-width bg-aqua mt2 p2 h3"
           disabled={this.props.auth.submitting}
           value={this.props.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
 
