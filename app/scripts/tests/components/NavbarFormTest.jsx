@@ -17,6 +17,7 @@ function generateComponent(options = {}) {
       block={options.block || block}
       dispatch={options.dispatch || dispatch}
       auth={options.auth || auth}
+      defaultValue={block.name}
     />
   )
 }
