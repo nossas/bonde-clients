@@ -12,15 +12,19 @@ export default class Navbar extends React.Component {
   }
 
   renderNavbarButtons(mobile) {
-    const { blocks, mobilization } = this.props
+    const { blocks, mobilization, editable } = this.props
     const { header_font: headerFont, body_font: bodyFont } = mobilization
+
     const className = classnames(
       'button button-transparent white p2',
       `${headerFont}-header`,
       `${bodyFont}-body`,
       { block: mobile }
     )
-    const visibleBlocks = blocks.data.filter((b) => {return !b.hidden})
+
+    const visibleBlocks = blocks.data.filter((b) => {
+      return editable ? !b.hidden : !b.hidden && !b.menu_hidden
+    })
 
     return (
       visibleBlocks.map((block) => {

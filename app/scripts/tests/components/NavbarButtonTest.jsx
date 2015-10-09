@@ -28,14 +28,6 @@ describe('NavbarButton', () => {
       expect(renderedComponent.type).to.be.eql('a')
     })
 
-    it('should render props children inside the anchor', () => {
-      expect(renderedComponent.props.children).to.be.eql(children)
-    })
-
-    it('should apply props className to the anchor', () => {
-      expect(renderedComponent.props.className).to.be.eql(className)
-    })
-
     it('should add an onClick event listener to the anchor', () => {
       expect(renderedComponent.props.onClick).to.be.a('function')
     })

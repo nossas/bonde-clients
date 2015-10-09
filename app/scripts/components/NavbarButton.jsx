@@ -6,7 +6,8 @@ export default class NavbarButton extends React.Component {
     targetId: PropTypes.string.isRequired,
     scrollableId: PropTypes.string.isRequired,
     className: PropTypes.string,
-    children: PropTypes.string
+    children: PropTypes.string,
+    hidden: PropTypes.boolean
   }
 
   handleClick(e) {
@@ -22,10 +23,22 @@ export default class NavbarButton extends React.Component {
   }
 
   render() {
-    const {className, children} = this.props
+    const {className, children, hidden} = this.props
 
     return (
-      <a className={className} onClick={::this.handleClick}>{children}</a>
+      <a
+        className={className + ' relative'}
+        onClick={::this.handleClick}>
+        <span style={{opacity: hidden ? '.25' : '1'}}>
+          {children}
+        </span>
+        {
+          hidden &&
+            <div className='h2 absolute top-0 bottom-0 left-0 right-0 center flex flex-center'>
+              <i className='fa fa-eye-slash flex-auto'/>
+            </div>
+        }
+      </a>
     )
   }
 }

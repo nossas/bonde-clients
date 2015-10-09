@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { NavbarButton, NavbarForm } from './'
+import { editBlock } from './../reducers/blocks'
 
 export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
@@ -26,6 +27,20 @@ export default class NavbarEditionWrapper extends React.Component {
     })
   }
 
+  handleHideButtonClick() {
+    this.refs.hideButton.getDOMNode().blur()
+    const { dispatch, mobilization, block, auth } = this.props
+
+    dispatch(
+      editBlock({
+        mobilization_id: mobilization.id,
+        id: block.id,
+        block: {menu_hidden: !block.menu_hidden},
+        credentials: auth.credentials
+      })
+    )
+  }
+
   handleCloseForm() {
     this.setState({isEditing: false})
   }
@@ -45,13 +60,20 @@ export default class NavbarEditionWrapper extends React.Component {
     )
 
     const editingButtonsStyle = {
-      width: '25px',
-      height: '25px',
+      width: '27px',
+      height: '27px',
       padding: 0,
-      marginLeft: '2px'
+      marginLeft: '4px',
+      marginTop: '4px'
     }
 
     const editingButtonsClassName = 'button white bg-darken-4 circle'
+
+    const hideButtonClassName = classnames(
+      'fa',
+      {'fa-eye-slash': !this.props.block.menu_hidden},
+      {'fa-eye': this.props.block.menu_hidden}
+    )
 
     return (
       <div className='relative'>
@@ -61,6 +83,13 @@ export default class NavbarEditionWrapper extends React.Component {
             style={editingButtonsStyle}
             onClick={::this.handleEditButtonClick}>
             <i className='fa fa-pencil' />
+          </button>
+          <button
+            ref='hideButton'
+            className={editingButtonsClassName}
+            style={editingButtonsStyle}
+            onClick={::this.handleHideButtonClick}>
+            <i className={hideButtonClassName} />
           </button>
         </div>
       </div>
@@ -82,6 +111,7 @@ export default class NavbarEditionWrapper extends React.Component {
         <NavbarButton
           targetId={'block-' + block.id}
           scrollableId='blocks-list'
+          hidden={block.menu_hidden}
           className={className}>
           {this.blockName(block)}
         </NavbarButton>
