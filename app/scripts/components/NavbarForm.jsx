@@ -1,75 +1,71 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
 import { editBlock } from './../reducers/blocks'
-
-@connect(state => ({ form: state.blockForm }))
-@reduxForm('blockForm')
 
 export default class NavbarForm extends React.Component {
   static propTypes = {
-    onCancelButtonClick: PropTypes.func.isRequired,
+    handleCloseForm: PropTypes.func.isRequired,
     mobilization: PropTypes.object.isRequired,
     block: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
+  }
+
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      name: props.block.name
+    }
   }
 
   componentDidMount() {
     this.refs.nameInput.getDOMNode().focus()
-    window.addEventListener('keyup', this.handleKeyUp)
+    this.refs.nameInput.getDOMNode().select()
+    window.addEventListener('keyup', ::this.handleKeyUp)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp)
+    window.removeEventListener('keyup', ::this.handleKeyUp)
   }
 
   handleKeyUp(e) {
     if (e.keyCode === 27) {
-      this.submit()
+      this.submit(e)
     }
   }
 
-  handleFormSubmit(e) {
+  handleChangeName(e) {
+    this.setState({name: e.target.value})
+  }
+
+  submit(e) {
     e.preventDefault()
-    this.submit()
-  }
-
-  handleOverlayClick() {
-    this.submit()
-  }
-
-  submit() {
-    const { mobilization, block, dispatch, auth, data } = this.props
+    const { mobilization, block, dispatch, auth } = this.props
 
     dispatch(
       editBlock({
         mobilization_id: mobilization.id,
         id: block.id,
-        block: data,
+        block: {name: this.state.name},
         credentials: auth.credentials
       })
     )
 
-    this.props.onCancelButtonClick()
+    this.props.handleCloseForm()
   }
 
   render() {
-    const {handleChange} = this.props
-
     return (
-      <form className='inline-block' onSubmit={::this.handleFormSubmit}>
+      <form className='inline-block' onSubmit={::this.submit}>
         <input
-          {...name}
           type='text'
           ref='nameInput'
           className='field-light'
+          value={this.state.name}
+          onChange={::this.handleChangeName}
         />
         <div
           className="fixed top-0 right-0 bottom-0 left-0 z1"
-          onClick={::this.handleOverlayClick}/>
+          onClick={::this.submit}/>
       </form>
     )
   }
