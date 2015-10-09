@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import { DropDownMenu, DropDownMenuItem } from './'
-import * as Paths from '../Paths'
+import { DropDownMenu, DropDownMenuItem } from './../'
+import * as Paths from '../../Paths'
 
 export default class TopMenu extends React.Component {
   static propTypes = {
@@ -34,13 +34,12 @@ export default class TopMenu extends React.Component {
 
   render() {
     return (
-      <div className="clearfix flex flex-stretch bg-aqua px4">
+      <div className="topMenu clearfix flex flex-stretch px4">
         <Link
           to="/"
-          className="left h3 button button-transparent white p2"
-          style={{marginLeft: '-18px'}}>
-          mobilize
+          className="reboo-logo mt1">
         </Link>
+        <i className="fa fa-ellipsis-v py2 lightGray" style={{marginRight: '60px'}}></i>
         { this.renderUserMenu() }
       </div>
     )

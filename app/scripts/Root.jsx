@@ -31,7 +31,7 @@ import FormWidgetForm from './pages/FormWidgetForm.jsx'
 // Components
 import MobilizationsMenu from './components/MobilizationsMenu.jsx'
 import MobilizationMenu from './components/MobilizationMenu.jsx'
-import TopMenu from './components/TopMenu.jsx'
+import TopMenu from './components/TopMenu/TopMenu.jsx'
 
 // Reducers
 import * as reducers from './reducers'
