@@ -7,13 +7,14 @@ export default class NavbarForm extends React.Component {
     mobilization: PropTypes.object.isRequired,
     block: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    defaultValue: PropTypes.string
   }
 
   constructor(props, context) {
     super(props, context)
     this.state = {
-      name: props.block.name
+      name: props.defaultValue
     }
   }
 

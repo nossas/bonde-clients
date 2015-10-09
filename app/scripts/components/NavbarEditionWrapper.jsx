@@ -58,6 +58,10 @@ export default class NavbarEditionWrapper extends React.Component {
     )
   }
 
+  blockName(block) {
+    return block.name || `Bloco ${block.position}`
+  }
+
   renderNavbarButton() {
     const { block, className } = this.props
 
@@ -67,7 +71,7 @@ export default class NavbarEditionWrapper extends React.Component {
           targetId={'block-' + block.id}
           scrollableId='blocks-list'
           className={className}>
-          {block.name || `Bloco ${block.position}`}
+          {this.blockName(block)}
         </NavbarButton>
         {this.props.editable && this.renderEditingButtons()}
       </div>
@@ -75,16 +79,12 @@ export default class NavbarEditionWrapper extends React.Component {
   }
 
   renderNavbarForm() {
-    const { block, mobilization, dispatch, auth } = this.props
+    const { block } = this.props
 
     return (
       <NavbarForm
-        formKey={String(block.id)}
-        initialValues={block}
-        block={block}
-        mobilization={mobilization}
-        dispatch = {dispatch}
-        auth = {auth}
+        {...this.props}
+        defaultValue={this.blockName(block)}
         handleCloseForm={::this.handleCloseForm}
       />
     )
