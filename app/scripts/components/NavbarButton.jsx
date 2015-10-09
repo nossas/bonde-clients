@@ -6,7 +6,7 @@ export default class NavbarButton extends React.Component {
     targetId: PropTypes.string.isRequired,
     scrollableId: PropTypes.string.isRequired,
     className: PropTypes.string,
-    children: PropTypes.array
+    children: PropTypes.string
   }
 
   handleClick(e) {
