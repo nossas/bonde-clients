@@ -302,7 +302,9 @@ export default class Block extends React.Component {
           <div className="clearfix" style={{padding: '5em 0'}}>
             { this.renderWidgets(filteredWidgets) }
           </div>
-          { this.renderHiddenTag() }
+          <div className="relative">
+            { this.renderHiddenTag() }
+          </div>
           { this.renderLoading() }
         </div>
       </div>

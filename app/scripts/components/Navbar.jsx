@@ -12,8 +12,9 @@ export default class Navbar extends React.Component {
   }
 
   renderNavbarButtons(mobile) {
-    const { blocks, mobilization } = this.props
+    const { blocks, mobilization, editable } = this.props
     const { header_font: headerFont, body_font: bodyFont } = mobilization
+
     const className = classnames(
       'button button-transparent white p2',
       `${headerFont}-header`,
@@ -21,11 +22,16 @@ export default class Navbar extends React.Component {
       { block: mobile }
     )
 
+    const visibleBlocks = blocks.data.filter((b) => {
+      return editable ? !b.hidden : !b.hidden && !b.menu_hidden
+    })
+
     return (
-      blocks.data.map((block) => {
+      visibleBlocks.map((block) => {
         return (
           <NavbarEditionWrapper
             {...this.props}
+            key={`navbar-edition-wrapper-${block.id}`}
             block={block}
             className={className}
           />

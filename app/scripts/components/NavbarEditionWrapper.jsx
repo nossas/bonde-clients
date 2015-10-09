@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { NavbarButton, NavbarForm } from './'
+import { editBlock } from './../reducers/blocks'
 
 export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
@@ -19,39 +20,76 @@ export default class NavbarEditionWrapper extends React.Component {
     }
   }
 
-  onEditButtonClick() {
+  handleEditButtonClick() {
     this.setState({
       isEditing: true,
       isMouseOver: false
     })
   }
 
+  handleHideButtonClick() {
+    this.refs.hideButton.getDOMNode().blur()
+    const { dispatch, mobilization, block, auth } = this.props
+
+    dispatch(
+      editBlock({
+        mobilization_id: mobilization.id,
+        id: block.id,
+        block: {menu_hidden: !block.menu_hidden},
+        credentials: auth.credentials
+      })
+    )
+  }
+
   handleCloseForm() {
     this.setState({isEditing: false})
   }
 
-  onMouseOver() {
+  handleMouseOver() {
     this.setState({isMouseOver: true})
   }
 
-  onMouseOut() {
+  handleMouseOut() {
     this.setState({isMouseOver: false})
   }
 
   renderEditingButtons() {
-    const editingButtonsClassName = classnames(
+    const buttonsWrapperClassName = classnames(
       'absolute z1 right-align full-width top-0',
       { hide: this.state && !this.state.isMouseOver }
     )
 
+    const editingButtonsStyle = {
+      width: '27px',
+      height: '27px',
+      padding: 0,
+      marginLeft: '4px',
+      marginTop: '4px'
+    }
+
+    const editingButtonsClassName = 'button white bg-darken-4 circle'
+
+    const hideButtonClassName = classnames(
+      'fa',
+      {'fa-eye-slash': !this.props.block.menu_hidden},
+      {'fa-eye': this.props.block.menu_hidden}
+    )
+
     return (
       <div className='relative'>
-        <div className={editingButtonsClassName}>
+        <div className={buttonsWrapperClassName}>
           <button
-            className='button white bg-darken-4 circle'
-            style={{width: '25px', height: '25px', padding: 0}}
-            onClick={::this.onEditButtonClick}>
+            className={editingButtonsClassName}
+            style={editingButtonsStyle}
+            onClick={::this.handleEditButtonClick}>
             <i className='fa fa-pencil' />
+          </button>
+          <button
+            ref='hideButton'
+            className={editingButtonsClassName}
+            style={editingButtonsStyle}
+            onClick={::this.handleHideButtonClick}>
+            <i className={hideButtonClassName} />
           </button>
         </div>
       </div>
@@ -66,10 +104,14 @@ export default class NavbarEditionWrapper extends React.Component {
     const { block, className } = this.props
 
     return (
-      <div className='inline-block' onMouseOver={::this.onMouseOver} onMouseOut={::this.onMouseOut}>
+      <div
+        className='inline-block'
+        onMouseOver={::this.handleMouseOver}
+        onMouseOut={::this.handleMouseOut}>
         <NavbarButton
           targetId={'block-' + block.id}
           scrollableId='blocks-list'
+          hidden={block.menu_hidden}
           className={className}>
           {this.blockName(block)}
         </NavbarButton>
