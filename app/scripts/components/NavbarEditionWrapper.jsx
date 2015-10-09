@@ -7,6 +7,7 @@ export default class NavbarEditionWrapper extends React.Component {
     block: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     className: PropTypes.string
   }
 
@@ -25,7 +26,7 @@ export default class NavbarEditionWrapper extends React.Component {
     })
   }
 
-  onCancelButtonClick() {
+  handleCloseForm() {
     this.setState({isEditing: false})
   }
 
@@ -39,24 +40,18 @@ export default class NavbarEditionWrapper extends React.Component {
 
   renderEditingButtons() {
     const editingButtonsClassName = classnames(
-      'absolute z4 right-align full-width',
+      'absolute z1 right-align full-width top-0',
       { hide: this.state && !this.state.isMouseOver }
     )
 
     return (
       <div className='relative'>
-        <div className={editingButtonsClassName} style={{top: '0px'}}>
+        <div className={editingButtonsClassName}>
           <button
             className='button white bg-darken-4 circle'
-            style={{width: '25px', height: '25px', padding: 0, margin: '2px'}}
+            style={{width: '25px', height: '25px', padding: 0}}
             onClick={::this.onEditButtonClick}>
             <i className='fa fa-pencil' />
-          </button>
-          <button
-            className='button white bg-darken-4 circle'
-            style={{width: '25px', height: '25px', padding: 0, margin: '2px'}}
-            onClick={::this.onEditButtonClick}>
-            <i className='fa fa-eye-slash' />
           </button>
         </div>
       </div>
@@ -90,7 +85,7 @@ export default class NavbarEditionWrapper extends React.Component {
         mobilization={mobilization}
         dispatch = {dispatch}
         auth = {auth}
-        onCancelButtonClick={::this.onCancelButtonClick}
+        handleCloseForm={::this.handleCloseForm}
       />
     )
   }
