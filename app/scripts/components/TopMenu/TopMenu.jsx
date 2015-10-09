@@ -13,7 +13,7 @@ export default class TopMenu extends React.Component {
     if (user) {
       return (
         <div className="clearfix">
-          <DropDownMenu className="mt1 mr4" menuClassName="bg-topMenu white" icon="user">
+          <DropDownMenu className="mr4" menuClassName="bg-topMenu white" icon="user">
             <DropDownMenuItem href={Paths.newMobilization()}>
               <i className="fa fa-plus" style={{marginRight: '6px'}} />
               Nova mobilização
@@ -34,12 +34,12 @@ export default class TopMenu extends React.Component {
 
   render() {
     return (
-      <div className="topMenu clearfix flex flex-stretch px4 bg-topMenu">
+      <div className="topMenu clearfix flex flex-center px4 bg-topMenu">
         <Link
           to="/"
-          className="reboo-logo mt1">
+          className="reboo-logo mt2">
         </Link>
-        <i className="fa fa-ellipsis-v py2 lightGray" style={{marginRight: '60px'}}></i>
+        <i className="fa fa-ellipsis-v py2 lightGray"></i>
         { this.renderUserMenu() }
       </div>
     )
