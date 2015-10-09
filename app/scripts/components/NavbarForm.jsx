@@ -20,14 +20,14 @@ export default class NavbarForm extends React.Component {
   componentDidMount() {
     this.refs.nameInput.getDOMNode().focus()
     this.refs.nameInput.getDOMNode().select()
-    window.addEventListener('keyup', ::this.handleKeyUp)
+    window.addEventListener('keyup', this.handleKeyUp)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', ::this.handleKeyUp)
+    window.removeEventListener('keyup', this.handleKeyUp)
   }
 
-  handleKeyUp(e) {
+  handleKeyUp = (e) => {
     if (e.keyCode === 27) {
       this.submit(e)
     }
@@ -59,7 +59,7 @@ export default class NavbarForm extends React.Component {
         <input
           type='text'
           ref='nameInput'
-          className='field-light'
+          className='field-light z2 relative'
           value={this.state.name}
           onChange={::this.handleChangeName}
         />
