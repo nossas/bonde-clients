@@ -9,7 +9,8 @@ import { fetchWidgets } from './../reducers/widgets'
 
 @connect(state => ({
   scrolledToBottom: false,
-  widgetsCount: state.widgets.length
+  widgetsCount: state.widgets.length,
+  mobilizationEditor: state.mobilizationEditor
 }))
 @reactMixin.decorate(Navigation)
 
@@ -57,12 +58,15 @@ export default class EditMobilization extends React.Component {
   }
 
   renderBlocks() {
-    const { mobilization, blocks } = this.props
+    const { mobilization, blocks, mobilizationEditor } = this.props
     const { color_scheme: colorScheme } = mobilization
 
     return (
-      <div className={classnames(colorScheme, 'flex flex-column flex-auto')}>
-        <Navbar blocks={blocks} mobilization={mobilization} />
+      <div className={classnames(colorScheme, 'flex flex-column flex-auto relative')}>
+        {
+          !mobilizationEditor.isEditingBlock
+            && <Navbar {...this.props} editable />
+        }
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
             blocks.data.map(function(block, index) {

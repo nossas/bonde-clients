@@ -8,6 +8,10 @@ const REQUEST_ADD_BLOCK = 'REQUEST_ADD_BLOCK'
 const SUCCESS_ADD_BLOCK = 'SUCCESS_ADD_BLOCK'
 const FAILURE_ADD_BLOCK = 'FAILURE_ADD_BLOCK'
 
+const REQUEST_EDIT_BLOCK = 'REQUEST_EDIT_BLOCK'
+const SUCCESS_EDIT_BLOCK = 'SUCCESS_EDIT_BLOCK'
+const FAILURE_EDIT_BLOCK = 'FAILURE_EDIT_BLOCK'
+
 const EDIT_BLOCK = 'EDIT_BLOCK'
 const REMOVE_BLOCK = 'REMOVE_BLOCK'
 const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
@@ -26,6 +30,16 @@ export default function blocks(state = initialState, action) {
       return {...state, loaded: true, data: action.result }
     case FAILURE_FETCH_BLOCKS:
       return {...state, loaded: true}
+    case REQUEST_EDIT_BLOCK:
+      return {...state}
+    case SUCCESS_EDIT_BLOCK:
+      return {...state,
+        data: state.data.map(
+          block => block.id === action.result.id ? action.result : block
+        )
+      }
+    case FAILURE_EDIT_BLOCK:
+      return {...state}
     case EDIT_BLOCK:
       return {...state,
         data: state.data.map(
@@ -97,6 +111,27 @@ export function addBlock(params) {
       return new Promise(function(resolve, reject) {
         superagent
         .post(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`)
+        .set(params.credentials)
+        .send({block: params.block})
+        .end((err, res) => {
+          if (err) {
+            reject(res.body || err)
+          } else {
+            resolve(res.body)
+          }
+        })
+      })
+    }
+  }
+}
+
+export function editBlock(params) {
+  return {
+    types: [REQUEST_EDIT_BLOCK, SUCCESS_EDIT_BLOCK, FAILURE_EDIT_BLOCK],
+    promise: function() {
+      return new Promise(function(resolve, reject) {
+        superagent
+        .put(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.id}`)
         .set(params.credentials)
         .send({block: params.block})
         .end((err, res) => {
