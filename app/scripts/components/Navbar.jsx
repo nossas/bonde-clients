@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { DropDownMenu, NavbarButton } from './'
+import { DropDownMenu, NavbarEditionWrapper } from './'
 
 export default class Navbar extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired
+    mobilization: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    editable: PropTypes.bool
   }
 
   renderNavbarButtons(mobile) {
@@ -21,12 +24,11 @@ export default class Navbar extends React.Component {
     return (
       blocks.data.map((block) => {
         return (
-          <NavbarButton
-            targetId={'block-' + block.id}
-            scrollableId='blocks-list'
-            className={className}>
-            Bloco {block.id}
-          </NavbarButton>
+          <NavbarEditionWrapper
+            {...this.props}
+            block={block}
+            className={className}
+          />
         )
       })
     )
