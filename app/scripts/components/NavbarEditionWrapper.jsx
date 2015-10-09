@@ -19,7 +19,7 @@ export default class NavbarEditionWrapper extends React.Component {
     }
   }
 
-  onEditButtonClick() {
+  handleEditButtonClick() {
     this.setState({
       isEditing: true,
       isMouseOver: false
@@ -30,27 +30,36 @@ export default class NavbarEditionWrapper extends React.Component {
     this.setState({isEditing: false})
   }
 
-  onMouseOver() {
+  handleMouseOver() {
     this.setState({isMouseOver: true})
   }
 
-  onMouseOut() {
+  handleMouseOut() {
     this.setState({isMouseOver: false})
   }
 
   renderEditingButtons() {
-    const editingButtonsClassName = classnames(
+    const buttonsWrapperClassName = classnames(
       'absolute z1 right-align full-width top-0',
       { hide: this.state && !this.state.isMouseOver }
     )
 
+    const editingButtonsStyle = {
+      width: '25px',
+      height: '25px',
+      padding: 0,
+      marginLeft: '2px'
+    }
+
+    const editingButtonsClassName = 'button white bg-darken-4 circle'
+
     return (
       <div className='relative'>
-        <div className={editingButtonsClassName}>
+        <div className={buttonsWrapperClassName}>
           <button
-            className='button white bg-darken-4 circle'
-            style={{width: '25px', height: '25px', padding: 0}}
-            onClick={::this.onEditButtonClick}>
+            className={editingButtonsClassName}
+            style={editingButtonsStyle}
+            onClick={::this.handleEditButtonClick}>
             <i className='fa fa-pencil' />
           </button>
         </div>
@@ -66,7 +75,10 @@ export default class NavbarEditionWrapper extends React.Component {
     const { block, className } = this.props
 
     return (
-      <div className='inline-block' onMouseOver={::this.onMouseOver} onMouseOut={::this.onMouseOut}>
+      <div
+        className='inline-block'
+        onMouseOver={::this.handleMouseOver}
+        onMouseOut={::this.handleMouseOut}>
         <NavbarButton
           targetId={'block-' + block.id}
           scrollableId='blocks-list'
