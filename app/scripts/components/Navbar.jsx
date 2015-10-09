@@ -20,12 +20,14 @@ export default class Navbar extends React.Component {
       `${bodyFont}-body`,
       { block: mobile }
     )
+    const visibleBlocks = blocks.data.filter((b) => {return !b.hidden})
 
     return (
-      blocks.data.map((block) => {
+      visibleBlocks.map((block) => {
         return (
           <NavbarEditionWrapper
             {...this.props}
+            key={`navbar-edition-wrapper-${block.id}`}
             block={block}
             className={className}
           />

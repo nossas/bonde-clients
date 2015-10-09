@@ -2,7 +2,8 @@ import React from 'react/addons'
 import { Navbar, DropDownMenu } from './../../components'
 
 const { TestUtils } = React.addons
-const blocks = {data: [{}, {}, {}]}
+const blocks = {data: [{}, {}, {}, {hidden: true}]}
+const visibleBlocks = blocks.data.filter((b) => {return !b.hidden})
 const mobilization = {
   color_scheme: 'my-color-scheme',
   header_font: 'my-header-font',
@@ -19,9 +20,9 @@ describe('Navbar', () => {
   })
 
   describe('#renderNavbarButtons', () => {
-    it('should return one NavbarButton for each block', () => {
+    it('should return one NavbarButton for each visible block', () => {
       const navbarButtons = navbarComponent.renderNavbarButtons(false)
-      expect(navbarButtons).to.have.length(blocks.data.length)
+      expect(navbarButtons).to.have.length(visibleBlocks.length)
     })
 
     it('should return each NavbarButton with a class "block" when mobile is true', () => {
