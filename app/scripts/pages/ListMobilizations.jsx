@@ -9,16 +9,21 @@ export default class ListMobilizations extends React.Component {
   }
 
   render() {
+    const menuStyle = {
+      marginTop: '12px',
+      borderColor: '#3dd691',
+      borderWidth: '4px'
+    }
     return (
       <div className="flex-auto bg-silver gray">
-        <h2 className="bg-white mt0 py3 px4 clearfix align-middle">
-          <div className="left" style={{marginTop: '12px'}}>
+        <h2 className="bg-white mt0 px4 clearfix align-middle">
+          <div className="left border-bottom py2" style={menuStyle}>
             <i className="fa fa-flag-o mr2 aqua" />
-            Suas mobilizações
+            Suas Mobilizações
           </div>
           <Link
             to={Paths.newMobilization()}
-            className="button bg-aqua caps h4 py2 right">
+            className="button bg-aqua caps h4 py2 right mt2">
             <i className="fa fa-plus mr2" />
             Nova mobilização
           </Link>
