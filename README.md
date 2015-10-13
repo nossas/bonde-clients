@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/meurio/hub-client.svg?branch=master)](https://travis-ci.org/meurio/hub-client)
 
 # Hub Client
+## Configuration
+Hub Client app depends on the host name to decide how to behave, considering this you should [setup a wildcard DNS domain](http://asciithoughts.com/posts/2014/02/23/setting-up-a-wildcard-dns-domain-on-mac-os-x/) on the development environment.
 ## Install
 ```
 npm install
