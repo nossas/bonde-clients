@@ -55,7 +55,7 @@ app.use((req, res) => {
     res.send('<!doctype html>\n' +
       React.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
   } else {
-    universalRouter(location, undefined, store)
+    universalRouter(location, undefined, store, req.headers.host)
       .then(({component, transition, isRedirect}) => {
         if (isRedirect) {
           res.redirect(transition.redirectInfo.pathname);

@@ -50,6 +50,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         API_URL: JSON.stringify(process.env.API_URL),
+        APP_HOST: JSON.stringify(process.env.APP_HOST),
         'GOOGLE_ANALYTICS_CODE': '"UA-27626466-6"'
       },
       __CLIENT__: true,

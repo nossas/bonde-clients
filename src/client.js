@@ -17,7 +17,9 @@ const store = createStore(client, window.__data);
 const search = document.location.search;
 const query = search && queryString.parse(search);
 const location = new Location(document.location.pathname, query);
-universalRouter(location, history, store)
+const host = document.location.host
+
+universalRouter(location, history, store, host)
   .then(({component}) => {
     if (__DEVTOOLS__) {
       const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
