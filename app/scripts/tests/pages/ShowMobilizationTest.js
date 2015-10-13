@@ -1,6 +1,6 @@
 import React from 'react/addons'
 import DocumentMeta from 'react-document-meta'
-import { ShowMobilization } from './../../pages/ShowMobilization'
+import ShowMobilization from './../../pages/ShowMobilization'
 import { Navbar, Block } from './../../components'
 
 const { TestUtils } = React.addons
@@ -19,20 +19,17 @@ const mobilization = {
   body_font: 'my-header-font'
 }
 
-const mobilizations = { data: [mobilization] }
 const block1 = { hidden: false, id: 1 }
 const block2 = { hidden: false, id: 2 }
 const block3 = { hidden: true, id: 3 }
 const blocks = { data: [block1, block2, block3] }
 const widgets = { data: [{}, {}] }
-const params = { mobilization_id: 1 }
 
 describe('ShowMobilization', () => {
   before(() => {
     component = TestUtils.renderIntoDocument(
       <ShowMobilization
-        params={params}
-        mobilizations={mobilizations}
+        mobilization={mobilization}
         blocks={blocks}
         widgets={widgets}
       />

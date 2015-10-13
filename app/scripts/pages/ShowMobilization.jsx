@@ -1,52 +1,15 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
-import { connect } from 'react-redux'
-import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
-import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
-import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
 import { Block, Navbar } from './../components'
 import trackPageView from './../../../src/trackPageView'
 import { mobTracker } from './../../../src/analytics'
 
-const mapStateToProps = (state) => {
-  return ({
-    mobilizations: state.mobilizations,
-    blocks: state.blocks,
-    widgets: state.widgets
-  })
-}
-
-export class ShowMobilization extends React.Component {
+export default class ShowMobilization extends React.Component {
   static propTypes = {
-    mobilizations: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired,
     blocks: PropTypes.object.isRequired,
-    widgets: PropTypes.object.isRequired,
-    params: PropTypes.object
-  }
-
-  static fetchData(store, params) {
-    const promises = []
-
-    if (!isMobilizationsLoaded(store.getState())) {
-      const action = fetchMobilizations({ids: [params.mobilization_id]})
-      const dispatch = store.dispatch(action)
-      promises.push(dispatch)
-    }
-
-    if (!isBlocksLoaded(store.getState())) {
-      const action = fetchBlocks({mobilization_id: params.mobilization_id})
-      const promise = store.dispatch(action)
-      promises.push(promise)
-    }
-
-    if (!isWidgetsLoaded(store.getState())) {
-      const action = fetchWidgets({mobilization_id: params.mobilization_id})
-      const promise = store.dispatch(action)
-      promises.push(promise)
-    }
-
-    return Promise.all(promises)
+    widgets: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -69,13 +32,7 @@ export class ShowMobilization extends React.Component {
   }
 
   render() {
-    const { mobilizations, params } = this.props
-
-    const mobilization = mobilizations.data.filter(
-      (m) => {return m.id === parseInt(params.mobilization_id, 10)}
-    )[0]
-
-    const { blocks, widgets } = this.props
+    const { mobilization, blocks, widgets } = this.props
 
     const {
       color_scheme: colorScheme,
@@ -120,5 +77,3 @@ export class ShowMobilization extends React.Component {
     )
   }
 }
-
-export default connect(mapStateToProps)(ShowMobilization)
