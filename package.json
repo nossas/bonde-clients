@@ -26,6 +26,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
+        "APP_HOST": "www.reboo.org",
         "PORT": 8080
       }
     },

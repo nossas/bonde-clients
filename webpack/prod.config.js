@@ -62,7 +62,8 @@ module.exports = {
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
         NODE_ENV: JSON.stringify('production'),
-        API_URL: JSON.stringify('http://hub-api.herokuapp.com')
+        API_URL: JSON.stringify('http://hub-api.herokuapp.com'),
+        APP_HOST: JSON.stringify(process.env.APP_HOST)
       }
     }),
 
