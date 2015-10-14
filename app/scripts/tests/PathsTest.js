@@ -21,7 +21,8 @@ describe('Paths', () => {
 
   describe('#mobilization', () => {
     it('should return the path', () => {
-      expect(Paths.mobilization(1)).to.equal('/mobilizations/1')
+      expect(Paths.mobilization('meurio', 'reboo.org'))
+        .to.equal('http://meurio.reboo.org')
     })
   })
 
