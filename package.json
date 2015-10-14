@@ -13,7 +13,6 @@
     "url": "https://github.com/meurio/hub-client/issues"
   },
   "scripts": {
-    "start": "node ./node_modules/better-npm-run start",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "watch-client": "node ./node_modules/better-npm-run watch-client",
     "start-dev": "node ./node_modules/better-npm-run start-dev",
@@ -21,15 +20,6 @@
     "test": "./node_modules/.bin/karma start --single-run --browsers Firefox"
   },
   "betterScripts": {
-    "start": {
-      "command": "node ./bin/server.js",
-      "env": {
-        "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "APP_DOMAIN": "reboo.org",
-        "PORT": 8080
-      }
-    },
     "start-dev": {
       "command": "node ./bin/server.js",
       "env": {
