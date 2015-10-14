@@ -12,6 +12,10 @@ const REQUEST_EDIT_BLOCK = 'REQUEST_EDIT_BLOCK'
 const SUCCESS_EDIT_BLOCK = 'SUCCESS_EDIT_BLOCK'
 const FAILURE_EDIT_BLOCK = 'FAILURE_EDIT_BLOCK'
 
+const REQUEST_FIND_BLOCKS = 'REQUEST_FIND_BLOCKS'
+const SUCCESS_FIND_BLOCKS = 'SUCCESS_FIND_BLOCKS'
+const FAILURE_FIND_BLOCKS = 'FAILURE_FIND_BLOCKS'
+
 const EDIT_BLOCK = 'EDIT_BLOCK'
 const REMOVE_BLOCK = 'REMOVE_BLOCK'
 const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
@@ -29,6 +33,12 @@ export default function blocks(state = initialState, action) {
     case SUCCESS_FETCH_BLOCKS:
       return {...state, loaded: true, data: action.result }
     case FAILURE_FETCH_BLOCKS:
+      return {...state, loaded: true}
+    case REQUEST_FIND_BLOCKS:
+      return {...state, loaded: false}
+    case SUCCESS_FIND_BLOCKS:
+      return {...state, loaded: true, data: action.result }
+    case FAILURE_FIND_BLOCKS:
       return {...state, loaded: true}
     case REQUEST_EDIT_BLOCK:
       return {...state}
@@ -93,6 +103,26 @@ export function fetchBlocks(options) {
     promise: function() {
       return new Promise(function(resolve, reject) {
         superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/blocks`).end((err, res) => {
+          if (err) {
+            reject(res.body || err)
+          } else {
+            resolve(res.body)
+          }
+        })
+      })
+    }
+  }
+}
+
+export function findBlocks(options) {
+  return {
+    types: [REQUEST_FIND_BLOCKS, SUCCESS_FIND_BLOCKS, FAILURE_FIND_BLOCKS],
+    promise: function() {
+      return new Promise(function(resolve, reject) {
+        superagent
+        .get(`${process.env.API_URL}/blocks`)
+        .send(options)
+        .end((err, res) => {
           if (err) {
             reject(res.body || err)
           } else {
