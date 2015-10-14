@@ -1,0 +1,86 @@
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
+import { findBlocks, isBlocksLoaded } from './../reducers/blocks'
+import { findWidgets, isWidgetsLoaded } from './../reducers/widgets'
+import { ShowMobilization } from './'
+
+const mapStateToProps = (state) => {
+  return ({
+    mobilizations: state.mobilizations,
+    blocks: state.blocks,
+    widgets: state.widgets
+  })
+}
+
+export class CustomDomainWrapper extends React.Component {
+  static propTypes = {
+    mobilizations: PropTypes.object.isRequired,
+    blocks: PropTypes.object.isRequired,
+    widgets: PropTypes.object.isRequired,
+    params: PropTypes.object
+  }
+
+  static fetchData(store, params, query, host) {
+    const regex = host.match(`(.+)\.${process.env.APP_HOST}`)
+    let findParams
+
+    if (regex) {
+      findParams = { slug: regex[1] }
+    } else {
+      findParams = { custom_domain: host }
+    }
+
+    const promises = []
+
+    if (!isMobilizationsLoaded(store.getState())) {
+      const action = fetchMobilizations(findParams)
+      const dispatch = store.dispatch(action)
+      promises.push(dispatch)
+    }
+
+    if (!isBlocksLoaded(store.getState())) {
+      const action = findBlocks(findParams)
+      const promise = store.dispatch(action)
+      promises.push(promise)
+    }
+
+    if (!isWidgetsLoaded(store.getState())) {
+      const action = findWidgets(findParams)
+      const promise = store.dispatch(action)
+      promises.push(promise)
+    }
+
+    return Promise.all(promises)
+  }
+
+  renderMobilization() {
+    const { mobilizations, blocks, widgets } = this.props
+
+    return (
+      <ShowMobilization
+        mobilization={mobilizations.data[0]}
+        blocks={blocks}
+        widgets={widgets}
+      />
+    )
+  }
+
+  renderMobilizationNotFound() {
+    return (
+      <div>
+        Página não encontrada
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      this.props.mobilizations.data.length === 0
+       ? this.renderMobilizationNotFound()
+       : this.renderMobilization()
+    )
+  }
+}
+
+export default connect(mapStateToProps)(CustomDomainWrapper)
