@@ -1,20 +1,21 @@
-import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
+import React from 'react/addons'
 import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper'
 import ShowMobilization from '../../pages/ShowMobilization'
 
+const { TestUtils } = React.addons
+
 describe('CustomDomainWrapper', () => {
   it('should not render ShowMobilization when there is no mobilization', () => {
-    const component = ReactTestUtils.renderIntoDocument(
+    const component = TestUtils.renderIntoDocument(
       <CustomDomainWrapper mobilizations={{data: []}} />
     )
 
-    const divs = ReactTestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
+    const divs = TestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
     expect(divs.length).to.be.eql(0)
   })
 
   it('should render ShowMobilization when there is a mobilization', () => {
-    const component = ReactTestUtils.renderIntoDocument(
+    const component = TestUtils.renderIntoDocument(
       <CustomDomainWrapper
         mobilizations={{data: [{id: 1}]}}
         blocks={{data: []}}
@@ -22,7 +23,7 @@ describe('CustomDomainWrapper', () => {
       />
     )
 
-    const divs = ReactTestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
+    const divs = TestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
     expect(divs.length).to.be.eql(1)
   })
 })
