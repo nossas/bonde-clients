@@ -22,7 +22,7 @@ export class CustomDomainWrapper extends React.Component {
   }
 
   static fetchData(store, params, query, host) {
-    const regex = host.match(`(.+)\.${process.env.APP_HOST}`)
+    const regex = host.match(`(.+)\.${process.env.APP_DOMAIN}`)
     let findParams
 
     if (regex) {

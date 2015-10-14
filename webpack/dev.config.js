@@ -50,7 +50,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         API_URL: JSON.stringify(process.env.API_URL),
-        APP_HOST: JSON.stringify(process.env.APP_HOST)
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
       },
       __CLIENT__: true,
       __SERVER__: false,

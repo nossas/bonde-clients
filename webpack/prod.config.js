@@ -63,7 +63,7 @@ module.exports = {
         // Useful to reduce the size of client-side libraries, e.g. react
         NODE_ENV: JSON.stringify('production'),
         API_URL: JSON.stringify('http://hub-api.herokuapp.com'),
-        APP_HOST: JSON.stringify(process.env.APP_HOST)
+        APP_DOMAIN: JSON.stringify('reboo.org')
       }
     }),
 

@@ -26,7 +26,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "APP_HOST": "www.reboo.org",
+        "APP_DOMAIN": "reboo.org",
         "PORT": 8080
       }
     },
@@ -36,7 +36,7 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "API_URL": "http://localhost:3000",
-        "APP_HOST": "localhost.dev:3001"
+        "APP_DOMAIN": "localhost.dev:3001"
       }
     },
     "watch-client": {
@@ -45,7 +45,7 @@
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "API_URL": "http://localhost:3000",
-        "APP_HOST": "localhost.dev:3001"
+        "APP_DOMAIN": "localhost.dev:3001"
       }
     }
   },

@@ -26,9 +26,9 @@ import {
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
-  const isAppDomain = (host === process.env.APP_HOST)
+  const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
 
-  if (isAppDomain) {
+  if (isAppSubdomain) {
     return (
       <Route component={Application}>
         <Route path="/login" component={Login} />
