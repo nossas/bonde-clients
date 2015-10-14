@@ -1,6 +1,11 @@
+$bgTopMenu: #304047;
+
 .topMenu {
-  background-color: #304047;
   height: 50px;
+}
+
+.bg-topMenu {
+  background-color: $bgTopMenu;
 }
 
 .lightGray {
