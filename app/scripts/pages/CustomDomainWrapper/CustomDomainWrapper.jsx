@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchMobilizations, isMobilizationsLoaded } from './../reducers/mobilizations'
-import { findBlocks, isBlocksLoaded } from './../reducers/blocks'
-import { findWidgets, isWidgetsLoaded } from './../reducers/widgets'
-import { ShowMobilization } from './'
+import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'
+import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
+import { findWidgets, isWidgetsLoaded } from './../../reducers/widgets'
+import { ShowMobilization } from './../'
 
 const mapStateToProps = (state) => {
   return ({
@@ -67,9 +67,14 @@ export class CustomDomainWrapper extends React.Component {
   }
 
   renderMobilizationNotFound() {
+    const rebooLogo = require('./reboo-logo-login.png')
+
     return (
-      <div>
-        Página não encontrada
+      <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-gray'>
+        <div className='center flex-auto white'>
+          <img src={rebooLogo} alt='Logo Reboo' className='mb2' />
+          <div className='h1'>Página não encontrada</div>
+        </div>
       </div>
     )
   }
