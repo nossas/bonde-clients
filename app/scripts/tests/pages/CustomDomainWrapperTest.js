@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper'
+import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper'
 import ShowMobilization from '../../pages/ShowMobilization'
 
 const { TestUtils } = React.addons
