@@ -7,3 +7,4 @@ node_modules
 *.sublime-workspace
 webpack-stats.json
 static/dist
+.DS_Store
