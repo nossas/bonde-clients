@@ -1,1 +1,1 @@
-web: node ./bin/server
+web: APP_DOMAIN=$APP_DOMAIN node ./bin/server
