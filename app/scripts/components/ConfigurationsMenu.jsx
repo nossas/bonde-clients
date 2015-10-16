@@ -14,6 +14,7 @@ export default class ConfigurationsMenu extends React.Component {
     const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
     const sharingMobilizationPath = Paths.sharingMobilization(mobilization.id)
     const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
+    const customDomainMobilizationPath = Paths.customDomainMobilization(mobilization.id)
 
     return (
       <div className="bg-white px3 clearfix">
@@ -39,6 +40,11 @@ export default class ConfigurationsMenu extends React.Component {
               path={analyticsMobilizationPath}
               text="Google Analytics"
               isActive={analyticsMobilizationPath === location.pathname}
+            />
+            <TabMenuItem
+              path={customDomainMobilizationPath}
+              text="Domínio"
+              isActive={customDomainMobilizationPath === location.pathname}
             />
           </ul>
         </div>
