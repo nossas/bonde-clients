@@ -1,18 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { PropTypes } from 'react'
 import * as Paths from '../Paths'
-import classNames from 'classnames'
 import { TabMenuItem } from './'
 
 export default class ConfigurationsMenu extends React.Component {
-  render(){
+  static propTypes = {
+    mobilization: PropTypes.object.isRequired,
+    location: PropTypes.string.isRequired
+  }
+
+  render() {
     const { mobilization, location } = this.props
     const basicsMobilizationPath = Paths.basicsMobilization(mobilization.id)
     const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
     const sharingMobilizationPath = Paths.sharingMobilization(mobilization.id)
     const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
 
-    return(
+    return (
       <div className="bg-white px3 clearfix">
         <h2 className="mb3">Configure sua mobilização</h2>
         <div>
@@ -20,22 +23,22 @@ export default class ConfigurationsMenu extends React.Component {
             <TabMenuItem
               path={basicsMobilizationPath}
               text="Informações básicas"
-              isActive={basicsMobilizationPath == location.pathname}
+              isActive={basicsMobilizationPath === location.pathname}
             />
             <TabMenuItem
               path={cityMobilizationPath}
               text="Cidade"
-              isActive={cityMobilizationPath == location.pathname}
+              isActive={cityMobilizationPath === location.pathname}
             />
             <TabMenuItem
               path={sharingMobilizationPath}
               text="Compartilhamento"
-              isActive={sharingMobilizationPath == location.pathname}
+              isActive={sharingMobilizationPath === location.pathname}
             />
             <TabMenuItem
               path={analyticsMobilizationPath}
               text="Google Analytics"
-              isActive={analyticsMobilizationPath == location.pathname}
+              isActive={analyticsMobilizationPath === location.pathname}
             />
           </ul>
         </div>
