@@ -22,7 +22,8 @@ import {
   MobilizationFonts,
   MobilizationSharing,
   RequireLogin,
-  CustomDomainWrapper
+  CustomDomainWrapper,
+  MobilizationCustomDomain
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
@@ -45,6 +46,7 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
               <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
               <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
+              <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
               <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
