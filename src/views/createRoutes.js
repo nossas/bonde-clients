@@ -45,11 +45,11 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
+              <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
               <Route component={MobilizationSettings} >
                 <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasics} />
                 <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCity} />
                 <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
-                <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
                 <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
                 <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
               </Route>
