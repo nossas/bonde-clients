@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { bindActionCreators } from 'redux'
 import * as MobilizationActions from './../actions/MobilizationActions'
-import { Link } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { ConfigurationsMenu, CloseButton } from './../components'
+import { CloseButton } from './../components'
 
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
@@ -164,17 +162,13 @@ export default class MobilizationCity extends React.Component {
           </ul>
         </h2>
       )
-    } else {
-      return(
-        <ConfigurationsMenu {...this.props} />
-      )
     }
   }
 
   render(){
     const { mobilization, dirty } = this.props
     return(
-      <div className="flex-auto bg-silver gray relative">
+      <div>
         { this.renderMenu() }
         <div className="py3 px4">
           { this.renderTitle() }

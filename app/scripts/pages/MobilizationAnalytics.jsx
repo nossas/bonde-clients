@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { ConfigurationsMenu, CloseButton } from './../components'
+import { CloseButton } from './../components'
 
 function mobilizationAnalyticsValidation(data) {
   const errors = { valid: true }
@@ -124,32 +124,29 @@ export default class MobilizationAnalytics extends React.Component {
   render() {
     const { dirty } = this.props
     return (
-      <div className="flex-auto bg-silver gray relative">
-        <ConfigurationsMenu {...this.props} />
-        <div className="py3 px3 col col-8">
-          <p className="h5">
-            Para acompanhar os resultados da sua mobilização, você precisa configurar
-            uma conta no Google Analytics. Siga os passos abaixo:
-          </p>
-          <ol className="h5">
-            <li>
-              Crie uma conta no Google Analytics
-              <a href="http://www.google.com/analytics/" target="_blank"> clicando aqui</a>
-            </li>
-            <li>
-              Obtenha sua ID de acompanhamento no Google Analytics. É um código
-              que começa sempre com as letras UA, que você verá após criar sua conta lá.
-            </li>
-            <li>
-              Copie a ID de acompanhamento e cole no campo abaixo:
-              { !this.state.initializing && this.renderForm() }
-            </li>
-            <li>
-              Pronto! Você já pode acompanhar as estatísticas da sua mobilização
-              no Google Analytics!
-            </li>
-          </ol>
-        </div>
+      <div className="py3 px3 col col-8">
+        <p className="h5">
+          Para acompanhar os resultados da sua mobilização, você precisa configurar
+          uma conta no Google Analytics. Siga os passos abaixo:
+        </p>
+        <ol className="h5">
+          <li>
+            Crie uma conta no Google Analytics
+            <a href="http://www.google.com/analytics/" target="_blank"> clicando aqui</a>
+          </li>
+          <li>
+            Obtenha sua ID de acompanhamento no Google Analytics. É um código
+            que começa sempre com as letras UA, que você verá após criar sua conta lá.
+          </li>
+          <li>
+            Copie a ID de acompanhamento e cole no campo abaixo:
+            { !this.state.initializing && this.renderForm() }
+          </li>
+          <li>
+            Pronto! Você já pode acompanhar as estatísticas da sua mobilização
+            no Google Analytics!
+          </li>
+        </ol>
         <CloseButton dirty={dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )

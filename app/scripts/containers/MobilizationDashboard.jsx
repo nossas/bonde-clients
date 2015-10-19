@@ -45,10 +45,12 @@ export default class MobilizationDashboard extends React.Component {
   }
 
   render() {
+    const { children, ...otherProps } = this.props
+
     return (
       <div className='flex flex-auto overflow-hidden'>
-        <MobilizationMenu {...this.props} />
-        {React.cloneElement(this.props.children, {...this.props})}
+        <MobilizationMenu {...otherProps} />
+        {React.cloneElement(children, {...otherProps})}
       </div>
     )
   }
