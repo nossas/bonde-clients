@@ -10,6 +10,7 @@ const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goa
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
 const mobilizationFonts = createFormReducer('mobilizationFonts', ['headerFont', 'bodyFont'])
+const mobilizationCustomDomain = createFormReducer('mobilizationCustomDomain', ['customDomain'])
 const loginForm = createFormReducer('loginForm', ['email', 'password'])
 const widgetForm = createFormReducer('widgetForm', ['callToAction', 'buttonText', 'countText', 'emailText'])
 
@@ -26,6 +27,7 @@ export default combineReducers({
   mobilizationAnalytics,
   mobilizationFonts,
   mobilizationSharing,
+  mobilizationCustomDomain,
   blocks,
   widgets,
   loginForm,
