@@ -24,13 +24,6 @@ describe('Navbar', () => {
       const navbarButtons = navbarComponent.renderNavbarButtons(false)
       expect(navbarButtons).to.have.length(visibleBlocks.length)
     })
-
-    it('should return each NavbarButton with a class "block" when mobile is true', () => {
-      const navbarButtons = navbarComponent.renderNavbarButtons(true)
-      navbarButtons.forEach((navbarButton) => {
-        expect(navbarButton.props.className).to.include('block')
-      })
-    })
   })
 
   describe('#render', () => {

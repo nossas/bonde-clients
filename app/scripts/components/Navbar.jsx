@@ -16,10 +16,9 @@ export default class Navbar extends React.Component {
     const { header_font: headerFont, body_font: bodyFont } = mobilization
 
     const className = classnames(
-      'button button-transparent white p2',
+      'button button-transparent block white p2',
       `${headerFont}-header`,
-      `${bodyFont}-body`,
-      { block: mobile }
+      `${bodyFont}-body`
     )
 
     const visibleBlocks = blocks.data.filter((b) => {
@@ -29,12 +28,14 @@ export default class Navbar extends React.Component {
     return (
       visibleBlocks.map((block) => {
         return (
-          <NavbarEditionWrapper
-            {...this.props}
-            key={`navbar-edition-wrapper-${block.id}`}
-            block={block}
-            className={className}
-          />
+          <div className={classnames({'inline-block': !mobile})}>
+            <NavbarEditionWrapper
+              {...this.props}
+              key={`navbar-edition-wrapper-${block.id}`}
+              block={block}
+              className={className}
+            />
+          </div>
         )
       })
     )
@@ -50,7 +51,9 @@ export default class Navbar extends React.Component {
         </div>
         <div className="lg-hide show">
           <DropDownMenu
-            menuClassName="rounded mt1 mr1 overflow-hidden bg-darken-4 white"
+            wrapperClassName='absolute right-0 top-0 m1'
+            buttonClassName='bg-darken-4 white rounded'
+            menuClassName="rounded bg-darken-4 white top-0 right-0 mt4"
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>

@@ -131,7 +131,7 @@ export default class Block extends React.Component {
   renderHiddenTag() {
     if (this.props.block.hidden) {
       return (
-        <div className="absolute bottom-0 right-0 mr2 mb2 bg-darken-2 py1 px2 white">
+        <div className="absolute bottom-0 left-0 ml1 mb1 bg-darken-2 p1 white rounded">
           <i className="fa fa-eye-slash mr1" />
           Escondido
         </div>
@@ -280,7 +280,10 @@ export default class Block extends React.Component {
     // by the reducer
     const { widgets, block, canMoveUp, canMoveDown } = this.props
     const filteredWidgets = this.filterWidgets(widgets.data, block)
-    const dropdownMenuClass = classnames('p1 absolute top-0 right-0 z2', {'display-none': !this.displayDropDownMenu()})
+    const wrapperClassName = classnames(
+      'm1 absolute bottom-0 right-0 z2',
+      {'display-none': !this.displayDropDownMenu()}
+    )
     return (
       <div
         id={'block-' + block.id}
@@ -290,15 +293,6 @@ export default class Block extends React.Component {
         onMouseOut={::this.handleMouseOut}
         style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
         <div className="container">
-          <div className='relative'>
-            <DropDownMenu className={dropdownMenuClass} menuClassName="bg-darken-4 rounded white" icon="cog">
-              <DropDownMenuItem onClick={::this.handleEditBackgroundClick}><i className="fa fa-picture-o" /> Alterar fundo</DropDownMenuItem>
-              <DropDownMenuItem onClick={::this.handleToggleHiddenClick}><i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}</DropDownMenuItem>
-              <DropDownMenuItem onClick={::this.handleRemoveClick}><i className="fa fa-trash" />&nbsp;&nbsp;Remover</DropDownMenuItem>
-              <DropDownMenuItem disabled={!canMoveUp} onClick={::this.handleMoveUpClick}><i className="fa fa-chevron-up" /> Mover para cima</DropDownMenuItem>
-              <DropDownMenuItem disabled={!canMoveDown} onClick={::this.handleMoveDownClick}><i className="fa fa-chevron-down" /> Mover para baixo</DropDownMenuItem>
-            </DropDownMenu>
-          </div>
           { this.renderColorPicker() }
           <div className="clearfix" style={{padding: '5em 0'}}>
             { this.renderWidgets(filteredWidgets) }
@@ -307,6 +301,41 @@ export default class Block extends React.Component {
             { this.renderHiddenTag() }
           </div>
           { this.renderLoading() }
+          <div className='relative'>
+            <DropDownMenu
+              wrapperClassName={wrapperClassName}
+              menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
+              buttonClassName='button bg-darken-4 white'
+              icon="cog">
+              <DropDownMenuItem
+                onClick={::this.handleEditBackgroundClick}
+                className="button button-transparent">
+                <i className="fa fa-picture-o" /> Alterar fundo
+              </DropDownMenuItem>
+              <DropDownMenuItem
+                onClick={::this.handleToggleHiddenClick}
+                className="button button-transparent">
+                <i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} /> {(block.hidden ? 'Mostrar' : 'Esconder')}
+              </DropDownMenuItem>
+              <DropDownMenuItem
+                onClick={::this.handleRemoveClick}
+                className="button button-transparent">
+                <i className="fa fa-trash" /> Remover
+              </DropDownMenuItem>
+              <DropDownMenuItem
+                disabled={!canMoveUp}
+                onClick={::this.handleMoveUpClick}
+                className="button button-transparent">
+                <i className="fa fa-chevron-up" /> Mover para cima
+              </DropDownMenuItem>
+              <DropDownMenuItem
+                disabled={!canMoveDown}
+                onClick={::this.handleMoveDownClick}
+                className="button button-transparent">
+                <i className="fa fa-chevron-down" /> Mover para baixo
+              </DropDownMenuItem>
+            </DropDownMenu>
+          </div>
         </div>
       </div>
     )

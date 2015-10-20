@@ -13,17 +13,27 @@ export default class TopMenu extends React.Component {
     if (user) {
       return (
         <div className="clearfix">
-          <DropDownMenu className="mr4" menuClassName="bg-topMenu white" icon="user">
-            <DropDownMenuItem href={Paths.newMobilization()}>
-              <i className="fa fa-plus" style={{marginRight: '6px'}} />
+          <DropDownMenu
+            wrapperClassName='ml1'
+            menuClassName='right-0 bg-topMenu mt2 rounded'
+            buttonClassName='bg-topMenu white button'
+            icon="user">
+            <DropDownMenuItem
+              className='block button button-transparent white p1'
+              href={Paths.newMobilization()}>
+              <i className="fa fa-plus center inline-block" style={{width: '30px'}}/>
               Nova mobilização
             </DropDownMenuItem>
-            <DropDownMenuItem href={Paths.mobilizations()}>
-              <i className="fa fa-flag-o" style={{marginRight: '2px'}} />
+            <DropDownMenuItem
+              className='block button button-transparent white p1'
+              href={Paths.mobilizations()}>
+              <i className="fa fa-flag-o center inline-block" style={{width: '30px'}}/>
               Suas mobilizações
             </DropDownMenuItem>
-            <DropDownMenuItem href={Paths.logout()}>
-              <i className="fa fa-sign-out" style={{marginRight: '3px'}} />
+            <DropDownMenuItem
+              className='block button button-transparent white p1'
+              href={Paths.logout()}>
+              <i className="fa fa-sign-out center inline-block" style={{width: '30px'}}/>
               Sair
             </DropDownMenuItem>
           </DropDownMenu>

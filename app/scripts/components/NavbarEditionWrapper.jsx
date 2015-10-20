@@ -105,7 +105,6 @@ export default class NavbarEditionWrapper extends React.Component {
 
     return (
       <div
-        className='inline-block'
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}>
         <NavbarButton

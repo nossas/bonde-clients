@@ -6,6 +6,8 @@ export default class DropDownMenuItem extends React.Component {
     icon: PropTypes.string.isRequired,
     className: PropTypes.string,
     menuClassName: PropTypes.string,
+    wrapperClassName: PropTypes.string,
+    buttonClassName: PropTypes.string,
     text: PropTypes.string,
     children: PropTypes.array
   }
@@ -51,13 +53,15 @@ export default class DropDownMenuItem extends React.Component {
   }
 
   render() {
+    const { wrapperClassName, buttonClassName, menuClassName, text, children } = this.props
+
     return (
-      <div className={classnames(this.props.className)}>
-        <button className={classnames('button', this.props.menuClassName)} onClick={::this.handleClick}>
-          {this.renderIcon()} {this.props.text}
+      <div className={classnames('relative', wrapperClassName)}>
+        <button className={buttonClassName} onClick={::this.handleClick}>
+          {this.renderIcon()} {text}
         </button>
-        <div className={classnames('absolute right-0 mt1 mr1 nowrap z2', this.props.menuClassName, (this.state.open ? '' : 'display-none'))}>
-          { this.props.children.length > 0 && this.renderChildren() }
+        <div className={classnames('absolute nowrap z2', menuClassName, (this.state.open ? '' : 'display-none'))}>
+          { children.length > 0 && this.renderChildren() }
         </div>
         { this.renderOverlay() }
       </div>
