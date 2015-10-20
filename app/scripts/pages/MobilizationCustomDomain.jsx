@@ -81,8 +81,8 @@ export default class MobilizationCustomDomain extends React.Component {
     return (
       <div className="py3 px3 col col-8">
         <p className="h5">
-          Se você possui um domínio e gostaria de utilizá-lo para divulgar a
-          sua mobilização, informe no formulário abaixo:
+          Você pode personalizar o endereço da sua mobilização caso já tenha um domínio.
+          Preencha o campo abaixo e clique em Salvar.
           <form onSubmit={::this.handleSubmit}>
             <div className='mb1'>
               <Label>Domínio personalizado</Label>
@@ -107,8 +107,7 @@ export default class MobilizationCustomDomain extends React.Component {
           </form>
         </p>
         <p>
-          Após inserir o seu domínio no campo acima, você ainda precisará
-          adicionar uma nova entrada na sua zona de DNS:
+          <strong>Atenção</strong>: você ainda precisa configurar o seu domínio no servidor de registro para que ele seja redirecionado para a página da sua mobilização. Para isso, utilize as informações abaixo.
         </p>
         <table>
           <tr>
