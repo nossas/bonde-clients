@@ -44,8 +44,16 @@ describe('EditMobilization', () => {
     })
 
     it('should not render the navbar when it is editing a block', () => {
-      mobilizationEditor = { isEditingBlock: true }
-      component = TestUtils.renderIntoDocument(<WrappedComponent />)
+      let mobilizationEditor = { isEditingBlock: true }
+      const EditMobilizationWithoutNavbar = stubRouterContext(EditMobilization, {
+        mobilization: mobilization,
+        blocks: blocks,
+        widgets: widgets,
+        dispatch: dispatch,
+        mobilizationEditor: mobilizationEditor
+      })
+
+      component = TestUtils.renderIntoDocument(<EditMobilizationWithoutNavbar />)
 
       const navbarComponent = TestUtils.scryRenderedComponentsWithType(component, Navbar)
       expect(navbarComponent).to.have.length(0)
