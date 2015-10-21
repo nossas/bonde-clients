@@ -62,6 +62,7 @@ export class CustomDomainWrapper extends React.Component {
         mobilization={mobilizations.data[0]}
         blocks={blocks}
         widgets={widgets}
+        {...this.props}
       />
     )
   }

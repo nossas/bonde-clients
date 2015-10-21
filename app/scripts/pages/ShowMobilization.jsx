@@ -64,6 +64,7 @@ export default class ShowMobilization extends React.Component {
                     editable={false}
                     mobilization={mobilization}
                     widgets={widgets}
+                    {...this.props}
                   />
                 )
               }
