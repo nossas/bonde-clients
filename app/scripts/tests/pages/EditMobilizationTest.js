@@ -2,6 +2,7 @@ import React from 'react/addons'
 import classnames from 'classnames'
 import { Block, Navbar } from './../../components'
 import * as EditMobilizationImport from './../../pages/EditMobilization.jsx'
+import stubRouterContext from './../stubRouterContext'
 
 const EditMobilization = EditMobilizationImport.WrappedComponent
 const { TestUtils } = React.addons
@@ -12,24 +13,20 @@ const blocks = { data: [block1, block2], loaded: true }
 const mobilization = { color_scheme: 'meurio-scheme' }
 const widgets = { data: [] }
 const dispatch = () => {}
-const mobilizationEditor = { isEditingBlock: false }
-
-function generateComponent(options = {}) {
-  return (
-    <EditMobilization
-      mobilization={options.mobilization || mobilization}
-      blocks={options.blocks || blocks}
-      widgets={options.widgets || widgets}
-      dispatch={options.dispatch || dispatch}
-      mobilizationEditor={options.mobilizationEditor || mobilizationEditor}
-    />
-  )
-}
 
 describe('EditMobilization', () => {
-  describe('#render', () => {
-    let component = TestUtils.renderIntoDocument(generateComponent())
+  let mobilizationEditor = { isEditingBlock: false }
+  const WrappedComponent = stubRouterContext(EditMobilization, {
+    mobilization: mobilization,
+    blocks: blocks,
+    widgets: widgets,
+    dispatch: dispatch,
+    mobilizationEditor: mobilizationEditor
+  })
 
+  let component = TestUtils.renderIntoDocument(<WrappedComponent />)
+
+  describe('#render', () => {
     it('should render blocks', () => {
       const blocksComponents = TestUtils.scryRenderedComponentsWithType(component, Block)
       expect(blocksComponents).to.have.length(blocks.data.length)
@@ -42,18 +39,21 @@ describe('EditMobilization', () => {
     })
 
     it('should render the navbar when it is not editing a block', () => {
-      component = TestUtils.renderIntoDocument(
-        generateComponent({mobilizationEditor: {isEditingBlock: false}})
-      )
-
       const navbarComponent = TestUtils.scryRenderedComponentsWithType(component, Navbar)
       expect(navbarComponent).to.have.length(1)
     })
 
     it('should not render the navbar when it is editing a block', () => {
-      component = TestUtils.renderIntoDocument(
-        generateComponent({mobilizationEditor: {isEditingBlock: true}})
-      )
+      let mobilizationEditor = { isEditingBlock: true }
+      const EditMobilizationWithoutNavbar = stubRouterContext(EditMobilization, {
+        mobilization: mobilization,
+        blocks: blocks,
+        widgets: widgets,
+        dispatch: dispatch,
+        mobilizationEditor: mobilizationEditor
+      })
+
+      component = TestUtils.renderIntoDocument(<EditMobilizationWithoutNavbar />)
 
       const navbarComponent = TestUtils.scryRenderedComponentsWithType(component, Navbar)
       expect(navbarComponent).to.have.length(0)

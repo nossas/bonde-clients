@@ -23,6 +23,10 @@ export default class EditMobilization extends React.Component {
     location: PropTypes.object
   }
 
+  static contextTypes = {
+    router: PropTypes.func.isRequired
+  }
+
   constructor(props, context) {
     super(props, context)
     this.state = {
