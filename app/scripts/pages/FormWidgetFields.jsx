@@ -59,9 +59,9 @@ export default class FormWidgetFields extends React.Component {
   renderFields() {
     const widget = this.widget()
     return(
-      <div className="flex-auto bg-silver gray relative">
+      <div className="flex-auto flex flex-column bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
-        <div className="py3 px3">
+        <div className="p3 flex-auto overflow-scroll">
           <p className="h5 mb3">
             { this.fields().length == 0 ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.' : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.' }
           </p>

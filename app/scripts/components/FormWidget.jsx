@@ -108,7 +108,7 @@ export default class FormWidget extends React.Component {
     return (
       <div>
         <div
-          className={`widget relative rounded p2 ${headerFont}-header`}
+          className={`widget relative ${headerFont}-header`}
           style={(editable ? {cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}

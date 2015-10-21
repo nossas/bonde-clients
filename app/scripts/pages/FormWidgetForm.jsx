@@ -155,14 +155,14 @@ export default class FormWidgetForm extends React.Component {
 
         <div className="clearfix">
           <button
-            className="caps button bg-darken-3 h3 mt1 p2 mr2"
+            className="caps button bg-darken-3 h3 mt1 mr2"
             disabled={this.state.submitting}
             onClick={::this.handleCancelClick}>
             Cancelar
           </button>
           <input
             type="submit"
-            className={classnames('caps button bg-aqua h3 mt1 p2')}
+            className={classnames('caps button bg-aqua h3 mt1')}
             disabled={this.state.submitting || (!dirty)}
             value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
@@ -178,9 +178,9 @@ export default class FormWidgetForm extends React.Component {
     const { widgets, dirty } = this.props
     const widget = widgets.data[widgets.data.map((w) => { return w.id.toString()}).indexOf(this.props.params.widget_id)]
     return (
-      <div className="flex-auto bg-silver gray relative">
+      <div className="flex-auto flex flex-column bg-silver gray relative">
         <FormWidgetMenu {...this.props} widget={widget} />
-        <div className="py3 px3">
+        <div className="p3 flex-auto overflow-scroll">
           { !this.state.initializing && this.renderForm() }
         </div>
         <CloseButton dirty={dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
