@@ -1,13 +1,12 @@
 import React from 'react'
-import TopMenu from './../../components/TopMenu/TopMenu.jsx'
 import LoginForm from './../../components/LoginForm.jsx'
 
 export default class Login extends React.Component {
   render() {
-    const rebooLogo = require("./reboo-logo-login.png");
+    const rebooLogo = require('./reboo-logo-login.png')
     return (
       <div className="bg-cover bg-center bg-reboo absolute top-0 right-0 bottom-0 left-0">
-        <div className="container py4">
+        <div className="container">
           <div className="px3 py3 center lg-col-6 mx-auto">
             <img src={rebooLogo} alt="Logo Reboo" />
           </div>
