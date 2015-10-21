@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { FormWidgetInput, FormWidgetButton } from './'
+import $ from 'jquery'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
+import { bindActionCreators } from 'redux'
 import * as Paths from '../Paths'
+import * as FormEntryActions from './../actions/FormEntryActions'
+import { FormWidgetInput, FormWidgetButton } from './'
+
+const emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
 @reactMixin.decorate(Navigation)
 
@@ -19,7 +24,16 @@ export default class FormWidget extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      hasMouseOver: false
+      hasMouseOver: false,
+      loading: false,
+      success: false,
+      errors: []
+    }
+  }
+
+  componentWillReceiveProps() {
+    if (this.state.loading) {
+      this.setState({loading: false, success: true})
     }
   }
 
@@ -41,6 +55,43 @@ export default class FormWidget extends React.Component {
     if (editable) {
       this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
+  }
+
+  submit() {
+    if (!this.props.editable) {
+      const { dispatch, mobilization, widget } = this.props
+      const { settings } = widget
+      const { fields } = settings
+      const bindedFormEntryActions = bindActionCreators(FormEntryActions, dispatch)
+      const fieldsWithValue = fields.map((field) => {
+        return {...field, value: $('#input-' + field.uid).val()}
+      })
+      const errors = this.validate(fieldsWithValue)
+      this.setState({errors: errors})
+
+      if (errors.length === 0) {
+        this.setState({loading: true})
+        bindedFormEntryActions.addFormEntry({
+          mobilization_id: mobilization.id,
+          form_entry: {
+            widget_id: widget.id,
+            fields: JSON.stringify(fieldsWithValue)
+          }
+        })
+      }
+    }
+  }
+
+  validate(fieldsWithValue) {
+    const errors = []
+    fieldsWithValue.forEach((field) => {
+      if (field.required === 'true' && field.value === '') {
+        errors.push(`${field.label} não pode ficar em branco`)
+      } else if (field.value !== '' && field.kind === 'email' && !field.value.match(emailRegEx)) {
+        errors.push(`${field.label} inválido`)
+      }
+    })
+    return errors
   }
 
   renderCallToAction() {
@@ -70,9 +121,15 @@ export default class FormWidget extends React.Component {
 
   renderButton() {
     const { configurable, widget } = this.props
+    const { loading, success } = this.state
+
     if (!configurable) {
       return (
-        <FormWidgetButton buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props} />
+        <FormWidgetButton
+          buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
+          handleClick={::this.submit}
+          loading={loading}
+          success={success} />
       )
     }
   }
@@ -103,6 +160,27 @@ export default class FormWidget extends React.Component {
     }
   }
 
+  renderErrors() {
+    const { errors } = this.state
+
+    return (
+      errors.length > 0 &&
+      <div className="red bold mb1">
+        {
+          errors.map((error) => {
+            return(
+              <div
+                className="p1 border-left border-red mb1 rounded-right"
+                style={{backgroundColor: '#F9CACE', borderWidth: '8px'}}>
+                {error}
+              </div>
+            )
+          })
+        }
+      </div>
+    )
+  }
+
   render() {
     const { editable, mobilization: { header_font: headerFont }} = this.props
     return (
@@ -115,6 +193,7 @@ export default class FormWidget extends React.Component {
           onClick={::this.handleClick}>
           { this.renderCallToAction() }
           { this.renderFields() }
+          { this.renderErrors() }
           { this.renderButton() }
           { this.renderCount() }
           { this.renderOverlay() }
