@@ -22,7 +22,7 @@ export default class FacebookShareButton extends React.Component {
         className='button h3 p3 full-width caps h5 not-rounded'
         onClick={::this.handleClick}
         style={{backgroundColor: '#2D88ED'}}>
-        Compartilhe no Facebook
+        Compartilhar no Facebook
       </button>
     )
   }

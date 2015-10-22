@@ -191,7 +191,7 @@ export default class FormWidget extends React.Component {
         <div className='py2'>
           <img src={checkMarkImage} style={{width: '100px'}} />
         </div>
-        <p>Agora compartilhe com seus amigos:</p>
+        <p>Agora, convoque mais gente para aumentar a força da mobilização!:</p>
         <FacebookShareButton href={Paths.mobilization(mobilization)} />
       </div>
     )
