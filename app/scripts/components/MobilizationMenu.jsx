@@ -47,7 +47,7 @@ export default class MobilizationMenu extends React.Component {
         </Link>
         <h6 className="silver caps muted">Visualização da página</h6>
         <a
-          href={Paths.mobilization(mobilization.slug)}
+          href={Paths.mobilization(mobilization)}
           className="silver button button-transparent full-width"
           target="_blank"
           onClick={::this.handleBlankTarget}>

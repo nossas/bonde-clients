@@ -10,8 +10,12 @@ export function mobilizations(id) {
   return `/`
 }
 
-export function mobilization(slug, domain = process.env.APP_DOMAIN) {
-  return `http://${slug}.${domain}`
+export function mobilization(mobilization, domain = process.env.APP_DOMAIN) {
+  return (
+    mobilization.custom_domain
+    ? `http://${mobilization.custom_domain}`
+    : `http://${mobilization.slug}.${domain}`
+  )
 }
 
 export function newMobilization() {

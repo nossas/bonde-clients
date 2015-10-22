@@ -20,8 +20,13 @@ describe('Paths', () => {
   })
 
   describe('#mobilization', () => {
-    it('should return the path', () => {
-      expect(Paths.mobilization('meurio', 'reboo.org'))
+    it('should return the custom domain when it is set', () => {
+      expect(Paths.mobilization({custom_domain: 'meurio.org.br'}))
+        .to.equal('http://meurio.org.br')
+    })
+
+    it('should return the subdomain address when custom domain is not set', () => {
+      expect(Paths.mobilization({slug: 'meurio'}, 'reboo.org'))
         .to.equal('http://meurio.reboo.org')
     })
   })
