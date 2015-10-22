@@ -112,7 +112,7 @@ export default class MobilizationFonts extends React.Component {
   renderCancelButton() {
     return (
       <button
-        className="caps button bg-darken-3 h3 mt1 p2 mr2"
+        className="caps button bg-darken-3 h3 mt1 mr2"
         disabled={this.state.submitting}
         onClick={::this.handleCancelClick}>
         Cancelar
@@ -139,6 +139,8 @@ export default class MobilizationFonts extends React.Component {
         <option value="merriweather-sans">Merriweather Sans</option>
         <option value="open-sans">Open Sans</option>
         <option value="oswald">Oswald</option>
+        <option value="pfdin">PF Din</option>
+        <option value="proxima-nova">Proxima Nova</option>
         <option value="pt-mono">PT Mono</option>
         <option value="ubuntu">Ubuntu</option>
       </select>
@@ -177,7 +179,7 @@ export default class MobilizationFonts extends React.Component {
           { this.renderCancelButton() }
           <input
             type="submit"
-            className="caps button bg-aqua h3 mt1 p2"
+            className="caps button bg-aqua h3 mt1"
             disabled={this.state.submitting || (!dirty)}
             value={this.state.submitting ? 'Salvando...' : 'Salvar'} />
         </div>
