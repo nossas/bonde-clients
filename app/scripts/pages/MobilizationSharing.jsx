@@ -31,7 +31,8 @@ export default class MobilizationSharing extends React.Component {
     initializeForm({
       facebook_share_title: mobilization.facebook_share_title,
       facebook_share_description: mobilization.facebook_share_description,
-      facebook_share_image: mobilization.facebook_share_image
+      facebook_share_image: mobilization.facebook_share_image,
+      twitter_share_text: mobilization.twitter_share_text
     })
 
     this.state = {
@@ -88,7 +89,8 @@ export default class MobilizationSharing extends React.Component {
     const {
       data: {
         facebook_share_title: facebookShareTitle,
-        facebook_share_description: facebookShareDescription
+        facebook_share_description: facebookShareDescription,
+        twitter_share_text: twitterShareText
       },
       handleBlur, handleChange, mobilizations, dirty
     } = this.props
@@ -160,6 +162,33 @@ export default class MobilizationSharing extends React.Component {
               placeholder="Complete a informação do título e chame o leitor para a mobilização"
             />
           </div>
+
+          <div className="h5 caps bold flex flex-center mb2">
+            <i className="fa fa-twitter-square mr1" style={{fontSize: '2em'}} />
+            <span>Postagem de Twitter</span>
+          </div>
+          <p className="h5 mb3">
+            Configure a mensagem que será publicada no Twitter
+            sempre que alguém compartilhar sua mobilização.
+          </p>
+          <div className="mb3">
+            <Label htmlFor="twitterShareText">Texto do Tweet</Label>
+              <InputCounter
+                maxLength={140}
+                length={twitterShareText ? twitterShareText.length : 0}
+                classNames={['right']}
+              />
+            <textarea
+              id="twitterShareText"
+              maxLength={140}
+              className="field-light block full-width"
+              value={twitterShareText}
+              onChange={handleChange('twitter_share_text')}
+              onBlur={handleBlur('twitter_share_text')}
+              placeholder={"Acabei de colaborar com " + this.props.mobilization.name + ". Participe você também!"}
+            />
+          </div>
+
           <div>
             <SaveButton
               saving={mobilizations.editing}
