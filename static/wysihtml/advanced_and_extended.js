@@ -77,14 +77,14 @@ var wysihtml5ParserRules = {
 
         "text_color_object": {
           "styles": {
-            "color": true,
-            "background-color": true
+            "color": false,
+            "background-color": false
           }
         },
 
         "text_fontsize_object": {
           "styles": {
-            "font-size": true
+            "font-size": false
           }
         },
 
@@ -245,6 +245,9 @@ var wysihtml5ParserRules = {
                 "rel": "any",
                 "target": "any",
                 "id": "any"
+            },
+            "set_attributes": {
+              "target": "_blank"
             }
         },
         "img": {
