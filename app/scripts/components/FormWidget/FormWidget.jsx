@@ -198,12 +198,18 @@ export default class FormWidget extends React.Component {
   }
 
   renderForm() {
+    const { editable, configurable } = this.props
+    const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
+
     return (
       <div>
-        { this.renderCallToAction() }
-        { this.renderFields() }
-        { this.renderErrors() }
-        { this.renderButton() }
+        <div className={className}>
+          { this.renderCallToAction() }
+          { this.renderFields() }
+          { this.renderErrors() }
+          { this.renderButton() }
+          { this.renderOverlay() }
+        </div>
         { this.renderCount() }
       </div>
     )
@@ -220,12 +226,11 @@ export default class FormWidget extends React.Component {
     return (
       <div>
         <div
-          className={`widget relative ${headerFont}-header`}
+          className={`widget ${headerFont}-header`}
           style={(editable ? {cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
           onClick={::this.handleClick}>
-          { this.renderOverlay() }
           { success ? this.renderShareButtons() : this.renderForm() }
         </div>
       </div>
