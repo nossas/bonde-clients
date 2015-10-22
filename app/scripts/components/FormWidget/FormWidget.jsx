@@ -4,9 +4,9 @@ import $ from 'jquery'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
-import * as Paths from '../Paths'
-import * as FormEntryActions from './../actions/FormEntryActions'
-import { FormWidgetInput, FormWidgetButton } from './'
+import * as Paths from './../../Paths'
+import * as FormEntryActions from './../../actions/FormEntryActions'
+import { FormWidgetInput, FormWidgetButton, FacebookShareButton } from './../'
 
 const emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
@@ -181,8 +181,42 @@ export default class FormWidget extends React.Component {
     )
   }
 
+  renderShareButtons() {
+    const checkMarkImage = require('./checkMarkImage.png')
+    const { mobilization } = this.props
+
+    return (
+      <div className='center p3 bg-white black'>
+        <div className='m0 h3 bold'>Formulário submetido com sucesso!</div>
+        <div className='py2'>
+          <img src={checkMarkImage} style={{width: '100px'}} />
+        </div>
+        <p>Agora compartilhe com seus amigos:</p>
+        <FacebookShareButton href={Paths.mobilization(mobilization)} />
+      </div>
+    )
+  }
+
+  renderForm() {
+    return (
+      <div>
+        { this.renderCallToAction() }
+        { this.renderFields() }
+        { this.renderErrors() }
+        { this.renderButton() }
+        { this.renderCount() }
+      </div>
+    )
+  }
+
   render() {
-    const { editable, mobilization: { header_font: headerFont }} = this.props
+    const {
+      editable,
+      mobilization: { header_font: headerFont }
+    } = this.props
+
+    const { success } = this.state
+
     return (
       <div>
         <div
@@ -191,12 +225,8 @@ export default class FormWidget extends React.Component {
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
           onClick={::this.handleClick}>
-          { this.renderCallToAction() }
-          { this.renderFields() }
-          { this.renderErrors() }
-          { this.renderButton() }
-          { this.renderCount() }
           { this.renderOverlay() }
+          { success ? this.renderShareButtons() : this.renderForm() }
         </div>
       </div>
     )
