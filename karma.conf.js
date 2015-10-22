@@ -23,7 +23,7 @@ module.exports = function(config) {
 
       module: {
         loaders: [
-          { test: /\.jsx?$/, loader: 'babel-loader' }
+          { test: /\.jsx?$/, loader: 'babel-loader?optional=runtime' }
         ]
       },
 
