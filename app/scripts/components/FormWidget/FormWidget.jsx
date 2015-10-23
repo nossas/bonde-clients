@@ -6,7 +6,7 @@ import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as Paths from './../../Paths'
 import * as FormEntryActions from './../../actions/FormEntryActions'
-import { FormWidgetInput, FormWidgetButton, FacebookShareButton } from './../'
+import { FormWidgetInput, FormWidgetButton, FacebookShareButton, TwitterShareButton } from './../'
 
 const emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
@@ -191,8 +191,9 @@ export default class FormWidget extends React.Component {
         <div className='py2'>
           <img src={checkMarkImage} style={{width: '100px'}} />
         </div>
-        <p>Agora, compartilhe com seus amigos</p>
-        <FacebookShareButton href={Paths.mobilization(mobilization)} />
+        <p>Agora, compartilhe com seus amigos!</p>
+        <p><FacebookShareButton href={Paths.mobilization(mobilization)} /></p>
+        <p><TwitterShareButton href={Paths.mobilization(mobilization)} text={mobilization.twitter_share_text} /></p>
       </div>
     )
   }
