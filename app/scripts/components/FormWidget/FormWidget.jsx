@@ -191,7 +191,7 @@ export default class FormWidget extends React.Component {
         <div className='py2'>
           <img src={checkMarkImage} style={{width: '100px'}} />
         </div>
-        <p>Agora, convoque mais gente para aumentar a força da mobilização!</p>
+        <p>Agora, compartilhe com seus amigos</p>
         <FacebookShareButton href={Paths.mobilization(mobilization)} />
       </div>
     )
@@ -210,7 +210,6 @@ export default class FormWidget extends React.Component {
           { this.renderButton() }
           { this.renderOverlay() }
         </div>
-        { this.renderCount() }
       </div>
     )
   }
@@ -232,6 +231,7 @@ export default class FormWidget extends React.Component {
           onMouseLeave={::this.handleMouseLeave}
           onClick={::this.handleClick}>
           { success ? this.renderShareButtons() : this.renderForm() }
+          { this.renderCount() }
         </div>
       </div>
     )
