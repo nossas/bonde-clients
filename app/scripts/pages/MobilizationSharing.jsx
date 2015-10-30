@@ -182,10 +182,10 @@ export default class MobilizationSharing extends React.Component {
               id="twitterShareText"
               maxLength={140}
               className="field-light block full-width"
-              value={twitterShareText}
+              value={ twitterShareText }
               onChange={handleChange('twitter_share_text')}
               onBlur={handleBlur('twitter_share_text')}
-              placeholder={"Acabei de colaborar com " + this.props.mobilization.name + ". Participe você também!"}
+              placeholder={ "Insira uma frase e chame o leitor para a mobilização" }
             />
           </div>
 
