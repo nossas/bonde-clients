@@ -21,11 +21,13 @@ export default class Html extends Component {
 
   render() {
     const {assets, component, store} = this.props
+    const content = React.renderToString(component)
+
     return (
       <html lang="en-us">
         <head>
           <meta charSet="utf-8"/>
-          {DocumentMeta.renderAsReact()}
+          { DocumentMeta.renderAsReact() }
           <link rel="shortcut icon" href="/favicon.ico" />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
@@ -36,7 +38,7 @@ export default class Html extends Component {
           <script dangerouslySetInnerHTML={{__html: analytics}} />
         </head>
         <body>
-          <div id="content" dangerouslySetInnerHTML={{__html: React.renderToString(component)}}/>
+          <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
           <script src="/wysihtml/wysihtml-toolbar.min.js" />
           <script src="/wysihtml/advanced_and_extended.js" />
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
