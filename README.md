@@ -1,4 +1,8 @@
 [![Build Status](https://travis-ci.org/meurio/hub-client.svg?branch=master)](https://travis-ci.org/meurio/hub-client)
+[![Dependencies
+Status](https://david-dm.org/meurio/hub-client.svg)](https://david-dm.org/meurio/hub-client)
+[![Dev Dependencies
+Status](https://david-dm.org/meurio/hub-client/dev-status.svg)](https://david-dm.org/meurio/hub-client#info=devDependencies)
 
 # Hub Client
 ## Configuration
