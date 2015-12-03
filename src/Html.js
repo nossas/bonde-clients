@@ -39,7 +39,7 @@ export default class Html extends Component {
         </head>
         <body>
           <div id="content" dangerouslySetInnerHTML={{__html: content}}/>
-          <script src="/wysihtml/wysihtml-toolbar.min.js" />
+          <script src="/wysihtml/wysihtml-toolbar.js" />
           <script src="/wysihtml/advanced_and_extended.js" />
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
           <script src={assets.javascript.main}/>

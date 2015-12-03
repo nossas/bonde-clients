@@ -245,9 +245,6 @@ var wysihtml5ParserRules = {
                 "rel": "any",
                 "target": "any",
                 "id": "any"
-            },
-            "set_attributes": {
-              "target": "_blank"
             }
         },
         "img": {
