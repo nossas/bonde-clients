@@ -9,7 +9,7 @@ import * as FormEntryActions from './../../actions/FormEntryActions'
 import { FormWidgetInput, FormWidgetButton, FacebookShareButton, TwitterShareButton } from './../'
 
 // Unrestrictive email regex. See http://is.gd/7n5YOk
-const emailRegEx = /\A[^@]+@[^@]+\z/
+const emailRegEx = /[^@]+@[^@]+/
 
 @reactMixin.decorate(Navigation)
 
