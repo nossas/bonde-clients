@@ -8,7 +8,8 @@ import * as Paths from './../../Paths'
 import * as FormEntryActions from './../../actions/FormEntryActions'
 import { FormWidgetInput, FormWidgetButton, FacebookShareButton, TwitterShareButton } from './../'
 
-const emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+// Unrestrictive email regex. See http://is.gd/7n5YOk
+const emailRegEx = /\A[^@]+@[^@]+\z/
 
 @reactMixin.decorate(Navigation)
 
