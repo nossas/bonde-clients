@@ -10,8 +10,8 @@ import { CloseButton } from './../components'
 
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
-  if (!data.colorScheme) {
-    errors.colorScheme = 'Você deve escolher uma cidade'
+  if (!data.organizationId) {
+    errors.organizationId = 'Você deve escolher uma cidade'
     errors.valid = false
   }
   return errors
@@ -30,7 +30,7 @@ export default class MobilizationCity extends React.Component {
       submitting: false,
       error: null
     }
-    props.initializeForm({colorScheme: props.mobilization.color_scheme})
+    props.initializeForm({organizationId: props.mobilization.organization_id})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,7 +48,8 @@ export default class MobilizationCity extends React.Component {
     handleChange: PropTypes.func.isRequired,
     touchAll: PropTypes.func.isRequired,
     initializeForm: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired
+    valid: PropTypes.bool.isRequired,
+    organizations: PropTypes.object.isRequired
   }
 
   newMobilization() {
@@ -62,7 +63,7 @@ export default class MobilizationCity extends React.Component {
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
         id: mobilization.id,
-        mobilization: {color_scheme: data.colorScheme},
+        mobilization: {organization_id: data.organizationId},
         credentials: auth.credentials
       }))
     } else {
@@ -86,11 +87,12 @@ export default class MobilizationCity extends React.Component {
 
   renderForm() {
     const {
-      data: { colorScheme },
-      errors: { colorScheme: colorSchemeError },
-      touched: { colorScheme: colorSchemeTouched },
+      data: { organizationId },
+      errors: { organizationId: organizationIdError },
+      touched: { organizationId: organizationIdTouched },
       handleChange,
-      handleBlur
+      handleBlur,
+      organizations
     } = this.props
     const submitText = (this.newMobilization() ? 'Continuar' : 'Salvar')
 
@@ -99,22 +101,18 @@ export default class MobilizationCity extends React.Component {
         <label className="block h4 caps bold mb1">
           Cidade
         </label>
-        {colorSchemeError && colorSchemeTouched && <span className="red ml2">{colorSchemeError}</span>}
+        {organizationIdError && organizationIdTouched && <span className="red ml2">{organizationIdError}</span>}
         <select
           className="field-light block h3 full-width mt1 mb2"
           style={{height: '48px'}}
-          onChange={handleChange('colorScheme')}
-          onBlur={handleBlur('colorScheme')}
-          value={colorScheme}>
-          <option value="minhablumenau-scheme">Blumenau</option>
-          <option value="minhacampinas-scheme">Campinas</option>
-          <option value="minhacuritiba-scheme">Curitiba</option>
-          <option value="minhagaropaba-scheme">Garopaba</option>
-          <option value="minhaouropreto-scheme">Ouro Preto</option>
-          <option value="minhaportoalegre-scheme">Porto Alegre</option>
-          <option value="meurecife-scheme">Recife</option>
-          <option value="meurio-scheme">Rio de Janeiro</option>
-          <option value="minhasampa-scheme">São Paulo</option>
+          onChange={handleChange('organizationId')}
+          onBlur={handleBlur('organizationId')}
+          value={organizationId}>
+          {
+            organizations.data.map((organization) => {
+              return <option value={organization.id}>{organization.name}</option>
+            })
+          }
         </select>
         <div className="clearfix">
           { this.renderCancelButton() }
