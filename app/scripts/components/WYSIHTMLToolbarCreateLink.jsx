@@ -13,17 +13,17 @@ export default class WYSIHTMLToolbarCreateLink extends React.Component {
   render(){
     return(
       <div data-wysihtml5-dialog="createLink" style={{display: "none"}} className="white p2 bg-darken-3">
-        <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light mr1" />
-        <a data-wysihtml5-dialog-action="save" className="button button-outline">Inserir</a>
-        <span className="ml3">
-          <label htmlFor="newTab">Nova aba?</label>
+        <span className="mr2">
           <input type="checkbox"
             name="newTab"
             onChange={ this.handleChange.bind(this) }
             value={this.state.newTab}
             data-wysihtml5-dialog-field="target"
           />
+          <label htmlFor="newTab">Abrir link em nova aba</label>
         </span>
+        <input type="text" data-wysihtml5-dialog-field="href" defaultValue="http://" className="field-light mr1" />
+        <a data-wysihtml5-dialog-action="save" className="button button-outline">Inserir</a>
       </div>
     )
   }
