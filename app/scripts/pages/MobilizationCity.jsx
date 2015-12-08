@@ -110,7 +110,7 @@ export default class MobilizationCity extends React.Component {
           value={organizationId}>
           {
             organizations.data.map((organization) => {
-              return <option value={organization.id}>{organization.name}</option>
+              return <option value={organization.id}>{organization.city}</option>
             })
           }
         </select>
