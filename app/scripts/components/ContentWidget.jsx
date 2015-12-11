@@ -83,12 +83,12 @@ export default class ContentWidget extends React.Component {
 
   handleClick(e) {
     e.preventDefault()
-    const target = $(e.target.hash)
+    const target = $(e.target).closest("a").prop("hash")
     const scrollable = $('#blocks-list')
-    const yPosition = target.position().top + scrollable.scrollTop() - scrollable.position().top
+    const yPosition = $(target).position().top + scrollable.scrollTop() - scrollable.position().top
 
     scrollable.animate({scrollTop: yPosition}, 500, () => {
-      window.location.hash = e.target.hash
+      window.location.hash = target
     })
   }
 
