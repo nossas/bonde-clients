@@ -3,6 +3,7 @@ import { WYSIHTMLToolbar, Loading } from './'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
+import $ from 'jquery'
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
@@ -35,6 +36,8 @@ export default class ContentWidget extends React.Component {
         }
       ).on('focus', ::this.handleEditorFocus)
       this.setState({editor: editor})
+    } else {
+      this.setClick()
     }
   }
 
@@ -69,6 +72,24 @@ export default class ContentWidget extends React.Component {
 
   handleOverlayClick() {
     this.save()
+  }
+
+  setClick() {
+    const links = document.querySelectorAll('.widget a:not([target="_blank"])')
+    for (let link of links) {
+      $(link).on('click', ::this.handleClick)
+    }
+  }
+
+  handleClick(e) {
+    e.preventDefault()
+    const target = $(e.target.hash)
+    const scrollable = $('#blocks-list')
+    const yPosition = target.position().top + scrollable.scrollTop() - scrollable.position().top
+
+    scrollable.animate({scrollTop: yPosition}, 500, () => {
+      window.location.hash = e.target.hash
+    })
   }
 
   save() {
