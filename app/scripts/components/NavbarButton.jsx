@@ -17,7 +17,7 @@ export default class NavbarButton extends React.Component {
     const scrollable = $(`#${scrollableId}`)
     const yPosition = target.position().top + scrollable.scrollTop() - scrollable.position().top
 
-    scrollable.animate({scrollTop: yPosition}, 500, () => {
+    scrollable.stop().animate({scrollTop: yPosition}, 500, () => {
       window.location.hash = targetId
     })
   }

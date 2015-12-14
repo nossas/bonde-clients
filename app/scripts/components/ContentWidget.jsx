@@ -77,7 +77,7 @@ export default class ContentWidget extends React.Component {
   setClick() {
     const links = document.querySelectorAll('.widget a:not([target="_blank"])')
     for (let link of links) {
-      $(link).on('click', ::this.handleClick)
+      $(link).on('click touchstart', ::this.handleClick)
     }
   }
 
@@ -85,12 +85,11 @@ export default class ContentWidget extends React.Component {
     e.preventDefault()
     const target = $(e.target).closest("a").prop("hash")
     const scrollable = $('#blocks-list')
-    const yPosition = $(target).position().top + scrollable.scrollTop() - scrollable.position().top
+    const yPosition = $(target).offset().top + scrollable.scrollTop() - scrollable.position().top
 
-    scrollable.stop(true).animate({scrollTop: yPosition}, 500, () => {
+    scrollable.stop().animate({scrollTop: yPosition}, 500, () => {
       window.location.hash = target
     })
-
   }
 
   save() {
