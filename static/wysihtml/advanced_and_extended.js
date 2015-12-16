@@ -114,7 +114,13 @@ var wysihtml5ParserRules = {
                 "wysiwyg-font-size-x-large": 1,
                 "wysiwyg-font-size-x-small": 1,
                 "wysiwyg-font-size-xx-large": 1,
-                "wysiwyg-font-size-xx-small": 1
+                "wysiwyg-font-size-xx-small": 1,
+                "wysiwyg-font-size-xx-h1": 1,
+                "wysiwyg-font-size-xx-h2": 1,
+                "wysiwyg-font-size-xx-h3": 1,
+                "wysiwyg-font-size-xx-h4": 1,
+                "wysiwyg-font-size-xx-h5": 1,
+                "wysiwyg-font-size-xx-h6": 1
             }
         }
     },

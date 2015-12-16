@@ -1,10 +1,17 @@
 import React from 'react'
-import { WYSIHTMLToolbarInsertImage, WYSIHTMLToolbarInsertHTML, WYSIHTMLToolbarCreateLink } from './'
+
+import {
+  WYSIHTMLToolbarInsertImage,
+  WYSIHTMLToolbarInsertHTML,
+  WYSIHTMLToolbarCreateLink,
+  DropDownMenu,
+  DropDownMenuItem
+} from './'
 
 export default class WYSIHTMLToolbar extends React.Component {
-  render(){
+  render() {
     const { elementId, className, style, buttonClassName } = this.props
-    return(
+    return (
       <div id={elementId} className={className} style={style}>
         <a
           data-wysihtml5-command="bold"
@@ -16,6 +23,60 @@ export default class WYSIHTMLToolbar extends React.Component {
           className={buttonClassName}>
           <i className="fa fa-italic" />
         </a>
+        <DropDownMenu
+          icon="text-height"
+          wrapperClassName="inline"
+          buttonClassName="button-transparent white p2"
+          menuClassName="bg-darken-4 left-0">
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h6 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h6">
+              Super pequeno
+            </a>
+          </DropDownMenuItem>
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h5 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h5">
+              Bem pequeno
+            </a>
+          </DropDownMenuItem>
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h4 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h4">
+              Médio
+            </a>
+          </DropDownMenuItem>
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h3 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h3">
+              Grande
+            </a>
+          </DropDownMenuItem>
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h2 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h2">
+              Bem grande
+            </a>
+          </DropDownMenuItem>
+          <DropDownMenuItem>
+            <a
+              className="block button button-transparent white h1 p2"
+              data-wysihtml5-command="fontSize"
+              data-wysihtml5-command-value="h1">
+              Super grande
+            </a>
+          </DropDownMenuItem>
+        </DropDownMenu>
         <a
           data-wysihtml5-command="createLink"
           className={buttonClassName}>
@@ -24,7 +85,7 @@ export default class WYSIHTMLToolbar extends React.Component {
         <a
           data-wysihtml5-command="removeLink"
           className={buttonClassName}>
-          <i className="fa fa-link" style={{textDecoration: "line-through"}} />
+          <i className="fa fa-unlink" />
         </a>
         <a
           data-wysihtml5-command="insertImage"
