@@ -112,7 +112,7 @@ export default class MobilizationSharing extends React.Component {
             <Label htmlFor="facebookShareImage">Imagem</Label>
             <div className="border rounded p2 bg-white center">
               { this.renderFacebookImage() }
-              <div className="mb1">Sugerimos uma imagem de no mínimo 200x200px</div>
+              <div className="mb1">Sua imagem deve ter 470x270 pixels</div>
               <div className="overflow-hidden">
                 { isFacebookShareImageUploading
                   ? <i className="fa fa-spin fa-refresh" />
