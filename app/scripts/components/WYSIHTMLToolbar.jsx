@@ -33,7 +33,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h6 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h6">
-              Super pequeno
+              8
             </a>
           </DropDownMenuItem>
           <DropDownMenuItem>
@@ -41,7 +41,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h5 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h5">
-              Bem pequeno
+              16
             </a>
           </DropDownMenuItem>
           <DropDownMenuItem>
@@ -49,7 +49,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h4 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h4">
-              Médio
+              24
             </a>
           </DropDownMenuItem>
           <DropDownMenuItem>
@@ -57,7 +57,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h3 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h3">
-              Grande
+              48
             </a>
           </DropDownMenuItem>
           <DropDownMenuItem>
@@ -65,7 +65,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h2 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h2">
-              Bem grande
+              72
             </a>
           </DropDownMenuItem>
           <DropDownMenuItem>
@@ -73,7 +73,7 @@ export default class WYSIHTMLToolbar extends React.Component {
               className="block button button-transparent white h1 p2"
               data-wysihtml5-command="fontSize"
               data-wysihtml5-command-value="h1">
-              Super grande
+              80
             </a>
           </DropDownMenuItem>
         </DropDownMenu>
@@ -96,24 +96,6 @@ export default class WYSIHTMLToolbar extends React.Component {
           data-wysihtml5-command="insertHTMLForm"
           className={buttonClassName}>
           <i className="fa fa-code" />
-        </a>
-        <a
-          data-wysihtml5-command="formatBlock"
-          data-wysihtml5-command-value="h1"
-          className={buttonClassName}>
-          H1
-        </a>
-        <a
-          data-wysihtml5-command="formatBlock"
-          data-wysihtml5-command-value="h2"
-          className={buttonClassName}>
-          H2
-        </a>
-        <a
-          data-wysihtml5-command="formatBlock"
-          data-wysihtml5-command-blank-value="true"
-          className={buttonClassName}>
-          Normal
         </a>
         <a
           data-wysihtml5-command="insertUnorderedList"
