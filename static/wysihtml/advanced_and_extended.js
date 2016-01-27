@@ -77,8 +77,8 @@ var wysihtml5ParserRules = {
 
         "text_color_object": {
           "styles": {
-            "color": false,
-            "background-color": false
+            "color": true,
+            "background-color": true
           }
         },
 

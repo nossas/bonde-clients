@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import {
   WYSIHTMLToolbarInsertImage,
   WYSIHTMLToolbarInsertHTML,
   WYSIHTMLToolbarCreateLink,
+  WYSIHTMLToolbarColorPicker,
   DropDownMenu,
   DropDownMenuItem
 } from './'
+
+import { FontSize } from './Editor/FontSize.jsx'
 
 export default class WYSIHTMLToolbar extends React.Component {
   render() {
@@ -78,6 +81,11 @@ export default class WYSIHTMLToolbar extends React.Component {
           </DropDownMenuItem>
         </DropDownMenu>
         <a
+          data-wysihtml5-command="foreColorStyle"
+          className={buttonClassName}>
+          <i className="fa fa-eyedropper" />
+        </a>
+        <a
           data-wysihtml5-command="createLink"
           className={buttonClassName}>
           <i className="fa fa-link" />
@@ -135,6 +143,7 @@ export default class WYSIHTMLToolbar extends React.Component {
         <WYSIHTMLToolbarInsertImage />
         <WYSIHTMLToolbarCreateLink />
         <WYSIHTMLToolbarInsertHTML />
+        <WYSIHTMLToolbarColorPicker />
       </div>
     )
   }
