@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/meurio/hub-client.svg?branch=master)](https://travis-ci.org/meurio/hub-client)
+[![Build Status](https://travis-ci.org/ourcities/hub-client.svg?branch=master)](https://travis-ci.org/ourcities/hub-client)
 [![Dependencies
-Status](https://david-dm.org/meurio/hub-client.svg)](https://david-dm.org/meurio/hub-client)
+Status](https://david-dm.org/ourcities/hub-client.svg)](https://david-dm.org/ourcities/hub-client)
 [![Dev Dependencies
-Status](https://david-dm.org/meurio/hub-client/dev-status.svg)](https://david-dm.org/meurio/hub-client#info=devDependencies)
+Status](https://david-dm.org/ourcities/hub-client/dev-status.svg)](https://david-dm.org/ourcities/hub-client#info=devDependencies)
 
 # Hub Client
 ## Configuration
