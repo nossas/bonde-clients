@@ -17,6 +17,61 @@ export default class WYSIHTMLToolbar extends React.Component {
     return (
       <div id={elementId} className={className} style={style}>
         <a
+          data-wysihtml5-command="createLink"
+          className={buttonClassName}>
+          <i className="fa fa-link" />
+        </a>
+        <a
+          data-wysihtml5-command="removeLink"
+          className={buttonClassName}>
+          <i className="fa fa-unlink" />
+        </a>
+        <a
+          data-wysihtml5-command="insertImage"
+          className={buttonClassName}>
+          <i className="fa fa-image" />
+        </a>
+        <a
+          data-wysihtml5-command="insertHTMLForm"
+          className={buttonClassName}>
+          <i className="fa fa-code" />
+        </a>
+        <a
+          data-wysihtml5-command="insertUnorderedList"
+          className={buttonClassName}>
+          <i className="fa fa-list-ul" />
+        </a>
+        <a
+          data-wysihtml5-command="insertOrderedList"
+          className={buttonClassName}>
+          <i className="fa fa-list-ol" />
+        </a>
+        <a
+          data-wysihtml5-command="alignLeftStyle"
+          className={buttonClassName}>
+          <i className="fa fa-align-left" />
+        </a>
+        <a
+          data-wysihtml5-command="alignCenterStyle"
+          className={buttonClassName}>
+          <i className="fa fa-align-center" />
+        </a>
+        <a
+          data-wysihtml5-command="alignRightStyle"
+          className={buttonClassName}>
+          <i className="fa fa-align-right regular" />
+        </a>
+        <a
+          data-wysihtml5-command="undo"
+          className={buttonClassName}>
+          <i className="fa fa-undo regular" />
+        </a>
+        <a
+          data-wysihtml5-command="redo"
+          className={buttonClassName}>
+          <i className="fa fa-repeat regular" />
+        </a>
+        <a
           data-wysihtml5-command="bold"
           className={buttonClassName}>
           <i className="fa fa-bold" />
@@ -84,61 +139,6 @@ export default class WYSIHTMLToolbar extends React.Component {
           data-wysihtml5-command="foreColorStyle"
           className={buttonClassName}>
           <i className="fa fa-eyedropper" />
-        </a>
-        <a
-          data-wysihtml5-command="createLink"
-          className={buttonClassName}>
-          <i className="fa fa-link" />
-        </a>
-        <a
-          data-wysihtml5-command="removeLink"
-          className={buttonClassName}>
-          <i className="fa fa-unlink" />
-        </a>
-        <a
-          data-wysihtml5-command="insertImage"
-          className={buttonClassName}>
-          <i className="fa fa-image" />
-        </a>
-        <a
-          data-wysihtml5-command="insertHTMLForm"
-          className={buttonClassName}>
-          <i className="fa fa-code" />
-        </a>
-        <a
-          data-wysihtml5-command="insertUnorderedList"
-          className={buttonClassName}>
-          <i className="fa fa-list-ul" />
-        </a>
-        <a
-          data-wysihtml5-command="insertOrderedList"
-          className={buttonClassName}>
-          <i className="fa fa-list-ol" />
-        </a>
-        <a
-          data-wysihtml5-command="alignLeftStyle"
-          className={buttonClassName}>
-          <i className="fa fa-align-left" />
-        </a>
-        <a
-          data-wysihtml5-command="alignCenterStyle"
-          className={buttonClassName}>
-          <i className="fa fa-align-center" />
-        </a>
-        <a
-          data-wysihtml5-command="alignRightStyle"
-          className={buttonClassName}>
-          <i className="fa fa-align-right regular" />
-        </a>
-        <a
-          data-wysihtml5-command="undo"
-          className={buttonClassName}>
-          <i className="fa fa-undo regular" />
-        </a>
-        <a
-          data-wysihtml5-command="redo"
-          className={buttonClassName}>
-          <i className="fa fa-repeat regular" />
         </a>
         <WYSIHTMLToolbarInsertImage />
         <WYSIHTMLToolbarCreateLink />
