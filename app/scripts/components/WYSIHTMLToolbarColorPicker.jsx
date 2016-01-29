@@ -15,8 +15,8 @@ export default class WYSIHTMLToolbarColorPicker extends React.Component {
       <div data-wysihtml5-dialog="foreColorStyle"
         style={{
           display: "none",
-          top: "35px",
-          right: "60px"
+          top: "36px",
+          right: "57px"
         }}
         className="white p2 absolute">
         <input
@@ -25,9 +25,10 @@ export default class WYSIHTMLToolbarColorPicker extends React.Component {
           value={ this.state.color }
           onChange={ ::this.handleChange }
           className="hide" />
-        <a ref="saveButton" data-wysihtml5-dialog-action="save" className="hide button button-outline mb1">
-          Inserir</a>
         <ColorSchemer onChange={ ::this.handleChange } />
+        <div className="save-button bg-gray p1">
+          <a data-wysihtml5-dialog-action="save" className="button block center bg-aqua">APLICAR COR</a>
+        </div>
       </div>
     )
   }
