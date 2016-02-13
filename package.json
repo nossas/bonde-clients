@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "autoprefixer-loader": "^2.0.0",
+    "autoprefixer": "^6.3.3",
     "autoprefixer-core": "^5.2.0",
     "babel": "^5.8.21",
     "babel-loader": "^5.3.2",
