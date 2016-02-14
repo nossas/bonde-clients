@@ -46,7 +46,7 @@
     "babel-loader": "^5.3.2",
     "babel-plugin-typecheck": "^1.2.0",
     "babel-runtime": "^5.8.20",
-    "basscss-sass": "^1.0.2",
+    "basscss-sass": "nicolasiensen/basscss-sass#v1.0.2-branch",
     "better-npm-run": "0.0.1",
     "body-parser": "^1.13.2",
     "chai": "^3.2.0",
