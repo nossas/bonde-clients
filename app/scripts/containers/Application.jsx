@@ -4,7 +4,7 @@ import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
 import trackPageView from './../../../src/trackPageView'
 
 import '../../styles/main.scss'
-import '../../../node_modules/font-awesome/scss/font-awesome.scss'
+// import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 
 @connect(state => ({ auth: state.auth }))
 
