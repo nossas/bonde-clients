@@ -41,8 +41,6 @@ export default function universalRouter(location, history, store, host) {
         });
       }
 
-      initialState = initialState || {}
-
       if (history) {  // only on client side
         initialState.history = history;
       }
