@@ -61,9 +61,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
-        NODE_ENV: process.env.NODE_ENV,
-        API_URL: process.env.API_URL,
-        APP_DOMAIN: process.env.APP_DOMAIN
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
       }
     }),
 
