@@ -28,7 +28,6 @@ import {
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
-  console.log(process.env)
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
 
   if (isAppSubdomain) {
