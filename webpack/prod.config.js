@@ -57,6 +57,16 @@ module.exports = {
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 
+    // set global vars
+    new webpack.DefinePlugin({
+      'process.env': {
+        // Useful to reduce the size of client-side libraries, e.g. react
+        NODE_ENV: process.env.NODE_ENV,
+        API_URL: process.env.API_URL,
+        APP_DOMAIN: process.env.APP_DOMAIN
+      }
+    }),
+
     // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
