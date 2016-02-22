@@ -22,41 +22,18 @@ npm run test
 Now sit and relax.
 
 ## Deploy
-### Staging
-Go to the ```heroku``` branch
+We have now two environments, staging and production, hosted by Heroku. All you have to do is to push changes to the master branch of these Heroku repositories, and it will be automatically deployed.
+
+Add staging and production environments into your list of remote repos:
 ```
-git checkout heroku
+git remote add staging https://git.heroku.com/hub-client-staging.git
+git remote add production https://git.heroku.com/hub-client.git
 ```
 
-Merge your changes to the ```heroku``` branch
+Commit your changes to the desired environment:
 ```
-git merge master
-```
-
-Rebuild the static files
-```
-npm run build
-```
-
-Add the new build
-```
-git add -f static/dist
-```
-
-Commit the changes
-```
-git commit -am "Rebuild project"
-```
-
-Push to Github
-```
-git push origin heroku
-```
-
-### Production
-Promote staging to production
-```
-heroku pipeline:promote --app hub-client-staging
+git push staging master
+git push production master
 ```
 
 ## Links

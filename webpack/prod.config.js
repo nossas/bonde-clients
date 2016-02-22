@@ -61,21 +61,15 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         // Useful to reduce the size of client-side libraries, e.g. react
-        NODE_ENV: JSON.stringify('production'),
-        API_URL: JSON.stringify('http://hub-api.herokuapp.com'),
-        APP_DOMAIN: JSON.stringify('reboo.org')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
       }
     }),
 
     // optimizations
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-          warnings: false
-        }
-    }),
-
     webpackIsomorphicToolsPlugin
   ]
 };
