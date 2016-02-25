@@ -4,7 +4,7 @@ const analytics = `(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   var page = document.location.pathname;
-  if (page == '/') {
+  if (page === '/') {
     var page = window.__data.mobilizations.data[0].id;
     ga('send', 'pageview', page);
   }
