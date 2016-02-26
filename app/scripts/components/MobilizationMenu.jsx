@@ -17,12 +17,12 @@ export default class MobilizationMenu extends React.Component {
   render() {
     const { mobilization } = this.props
     return (
-      <div className='p2 white bg-gray' style={{maxWidth: '300px', minWidth: '300px'}}>
-        <div className="flex flex-center mb3">
+      <div className='white bg-gray' style={{maxWidth: '250px', minWidth: '250px'}}>
+        <div className="flex flex-center p3">
           <div className="flex-auto">
             <Link
               to={Paths.editMobilization(mobilization.id)}
-              className="silver h5 bold">
+              className="silver h4 bold">
               {mobilization.name}
             </Link>
           </div>
@@ -32,23 +32,23 @@ export default class MobilizationMenu extends React.Component {
             <i className="fa fa-cog" />
           </Link>
         </div>
-        <h6 className="silver caps muted">Edição da página</h6>
+        <h6 className="px3 silver caps muted">Edição da página</h6>
         <Link
           to={Paths.newMobilizationBlock(mobilization.id)}
-          className="silver button button-transparent full-width">
+          className="silver button-menu button-transparent pl3 full-width">
           <i className="fa fa-plus mr2" />
           Bloco de conteúdo
         </Link>
         <Link
           to={Paths.fontsMobilization(mobilization.id)}
-          className="silver button button-transparent full-width">
+          className="pl3 silver button-menu button-transparent full-width">
           <i className="fa fa-paint-brush mr2" />
           Editar Estilo
         </Link>
-        <h6 className="silver caps muted">Visualização da página</h6>
+        <h6 className="px3 silver caps muted">Visualização da página</h6>
         <a
           href={Paths.mobilization(mobilization)}
-          className="silver button button-transparent full-width"
+          className="silver button-menu button-transparent full-width"
           target="_blank"
           onClick={::this.handleBlankTarget}>
           <i className="fa fa-external-link mr2" />

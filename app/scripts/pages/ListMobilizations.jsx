@@ -11,7 +11,7 @@ export default class ListMobilizations extends React.Component {
   render() {
     const menuStyle = {
       marginTop: '12px',
-      borderColor: '#3dd691',
+      borderColor: '#2FBEE6',
       borderWidth: '4px'
     }
     return (
