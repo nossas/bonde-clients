@@ -4,7 +4,7 @@ $gray: #364C55;
 $darkGray: #4A4A4A;
 $lightGray: #999999;
 $silver: #F7F7F7;
-$font-family: 'Source Sans Pro', sans-serif;
+$font-family: 'Proxima Nova', sans-serif;
 $form-field-height: 3rem;
 $link-color: $aqua;
 
@@ -23,4 +23,16 @@ form .button { height: 3rem; }
 
 .hover:hover {
   opacity: 1;
+}
+
+.button-menu{
+font-weight:lighter;
+display:block;
+padding:0px;
+padding:.5em 2em;
+border-left: 3px solid rgba(0,0,0,0) 
+}
+.button-menu:hover{
+	text-decoration:none;
+	border-left:3px solid #20BDE9;
 }
