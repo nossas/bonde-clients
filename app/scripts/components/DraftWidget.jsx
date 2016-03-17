@@ -29,6 +29,11 @@ export default class DraftWidget extends React.Component {
     this.updateKind('form')
   }
 
+  handleDonationClick(event) {
+    event.preventDefault()
+    this.updateKind('donation')
+  }
+
   updateKind(kind) {
     const { dispatch, auth } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -80,6 +85,9 @@ export default class DraftWidget extends React.Component {
           </button>
           <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleFormClick}>
             Formulário
+          </button>
+          <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleDonationClick}>
+            Doação
           </button>
         </div>
       )

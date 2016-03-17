@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { DraftWidget, ContentWidget, FormWidget } from './'
+import { DraftWidget, ContentWidget, FormWidget, DonationWidget } from './'
 import classnames from 'classnames'
 
 export default class Widget extends React.Component {
@@ -21,6 +21,10 @@ export default class Widget extends React.Component {
       case 'form':
         return (
           <FormWidget {...this.props} />
+        )
+      case 'donation':
+        return (
+          <DonationWidget {...this.props} />
         )
       default:
         return (
