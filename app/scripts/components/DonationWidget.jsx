@@ -49,18 +49,21 @@ export default class FormWidget extends React.Component {
 
 
   renderButton() {
-    const { configurable, widget } = this.props
-    const { loading, success } = this.state
-
-    if (!configurable) {
+    // const { configurable, widget } = this.props
+    // const { loading, success } = this.state
+    //
+    // if (!configurable) {
       return (
-        <FormWidgetButton
-          buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
-          handleClick={::this.submit}
-          loading={loading}
-          success={success} />
+        <div>
+          <script dangerouslySetInnerHTML={{__html: `
+(function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
+          <button onClick={::this.handleClickDonate}>Doe R$ 1.000,00</button>
+        </div>
       )
-    }
+    // }
   }
 
   renderOverlay() {
@@ -76,6 +79,20 @@ export default class FormWidget extends React.Component {
     }
   }
 
+  handleClickDonate() {
+
+      // INICIAR A INSTÂNCIA DO CHECKOUT
+      // declarando um callback de sucesso
+      var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV", success: function(data) {
+       console.log(data);
+      }});
+
+      // DEFINIR AS OPÇÕES
+      // e abrir o modal
+      var params = {"customerData":false, "amount":"100000", "createToken": "true", "interestRate": 10 };
+      checkout.open(params);
+  }
+
   renderForm() {
     const { editable, configurable } = this.props
     const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
@@ -83,6 +100,7 @@ export default class FormWidget extends React.Component {
     return (
       <div>
         <div className={className}>
+          { this.renderButton() }
           { this.renderOverlay() }
         </div>
       </div>
