@@ -43,7 +43,7 @@ export default class FormWidget extends React.Component {
   handleClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
+      this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
