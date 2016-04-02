@@ -35,7 +35,7 @@ export default class DonationWidgetSettings extends React.Component {
       error: null,
       bgClass: ''
     }
-    this.props.initializeForm({titleText: null, donationValue1: null, donationButtonText1: null, donationValue2: null, donationButtonText2: null, donationValue3: null, donationButtonText3: null, paymentMethods: null, customerData: null})
+    //this.props.initializeForm({titleText: null, donationValue1: null, donationButtonText: null, donationValue2: null, donationValue3: null, donationValue4: null, donationValue5: null, paymentMethods: null, customerData: null})
   }
 
   handleColorClick(event) {
@@ -44,10 +44,11 @@ export default class DonationWidgetSettings extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const widget = this.widget(nextProps)
+console.log(widget)
     if (widget) {
       if (this.state.initializing) {
-        const { titleText: titleText, donationValue1:donationValue1, donationButtonText1:donationButtonText1, donationValue2:donationValue2, donationButtonText2:donationButtonText2, donationValue3:donationValue3, donationButtonText3:donationButtonText3, paymentMethods:paymentMethods, customerData:customerData } = (widget.settings || {titleText: null, donationValue1: null, donationButtonText1: null, donationValue2: null, donationButtonText2: null, donationValue3: null, donationButtonText3: null, paymentMethods: null, customerData: null})
-        this.props.initializeForm({titleText, donationValue1, donationButtonText1, donationValue2, donationButtonText2, donationValue3, donationButtonText3, paymentMethods, customerData})
+        const { titleText: titleText, donationValue1:donationValue1, donationButtonText:donationButtonText, donationValue2:donationValue2, donationValue3:donationValue3, donationValue4:donationValue4, donationValue5:donationValue5, paymentMethods:paymentMethods, customerData:customerData } = (widget.settings || {titleText: null, donationValue1: null, donationButtonText: null, donationValue2: null, donationValue3: null, donationValue4: null, donationValue5: null, paymentMethods: null, customerData: null})
+        this.props.initializeForm({titleText, donationValue1, donationValue2, donationButtonText, donationValue3, donationValue4, donationValue5, paymentMethods, customerData})
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
@@ -62,7 +63,7 @@ export default class DonationWidgetSettings extends React.Component {
 
   handleCancelClick(event) {
     event.preventDefault()
-    this.goBack()
+    Paths.editMobilization(this.props.mobilization.id)
   }
 
   handleSubmit(event) {
@@ -70,6 +71,7 @@ export default class DonationWidgetSettings extends React.Component {
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
+    console.log(data)
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -78,14 +80,13 @@ export default class DonationWidgetSettings extends React.Component {
         widget_id: widget.id,
         credentials: auth.credentials,
         widget: { settings: {
-          ...settings,
           titleText: data.titleText,
           donationValue1: data.donationValue1,
-          donationButtonText1: data.donationButtonText1,
+          donationButtonText1: data.donationButtonText,
           donationValue2: data.donationValue2,
-          donationButtonText2: data.donationButtonText2,
           donationValue3: data.donationValue3,
-          donationButtonText3: data.donationButtonText3,
+          donationValue4: data.donationValue4,
+          donationValue5: data.donationValue5,
           paymentMethods: data.paymentMethods,
           customerData: data.customerData
         } }
@@ -93,11 +94,11 @@ export default class DonationWidgetSettings extends React.Component {
       this.props.initializeForm({
         titleText: data.titleText,
         donationValue1: data.donationValue1,
-        donationButtonText1: data.donationButtonText1,
+        donationButtonText1: data.donationButtonText,
         donationValue2: data.donationValue2,
-        donationButtonText2: data.donationButtonText2,
         donationValue3: data.donationValue3,
-        donationButtonText3: data.donationButtonText3,
+        donationValue4: data.donationValue4,
+        donationValue5: data.donationValue5,
         paymentMethods: data.paymentMethods,
         customerData: data.customerData
       })
@@ -117,9 +118,9 @@ export default class DonationWidgetSettings extends React.Component {
 
   renderForm() {
     const {
-      data: { titleText, donationValue1, donationButtonText1, donationValue2, donationButtonText2, donationValue3, donationButtonText3, paymentMethods, customerData },
-      errors: { callToAction: callToActionError, buttonText: buttonTextError, countText: countTextError, emailText: emailTextError },
-      touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched, countText: countTextTouched, emailText: emailTextTouched },
+      data: { titleText, donationButtonText, donationValue1, donationValue2, donationValue3, donationValue4, donationValue5, paymentMethods, customerData },
+      errors: { callToAction: callToActionError },
+      touched: { callToAction: callToActionTouched },
       handleChange,
       handleBlur,
       dirty
@@ -159,22 +160,6 @@ export default class DonationWidgetSettings extends React.Component {
               onChange={handleChange('donationValue1')}
               onBlur={handleBlur('donationValue1')} />
           </div>
-          <div className="sm-col sm-col-10">
-            <Label htmlFor="donationButtonText1">Texto Botão 1</Label>
-            {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
-            <input
-              id="donationButtonText1"
-              type="text"
-              className="field-light block h3 half-width mt1 mb3"
-              placeholder="Doe um cafezinho (R$5)"
-              style={{height: '48px'}}
-              value={donationButtonText1}
-              onChange={handleChange('donationButtonText1')}
-              onBlur={handleBlur('donationButtonText1')} />
-          </div>
-        </div>
-
-        <div className="clearfix">
           <div className="sm-col sm-col-2">
             <Label htmlFor="donationValue2">Valor 2</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
@@ -188,22 +173,6 @@ export default class DonationWidgetSettings extends React.Component {
               onChange={handleChange('donationValue2')}
               onBlur={handleBlur('donationValue2')} />
           </div>
-          <div className="sm-col sm-col-10">
-            <Label htmlFor="donationButtonText1">Texto Botão 2</Label>
-            {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
-            <input
-              id="donationButtonText2"
-              type="text"
-              className="field-light block h3 half-width mt1 mb3"
-              placeholder="Doe um cafezinho (R$5)"
-              style={{height: '48px'}}
-              value={donationButtonText2}
-              onChange={handleChange('donationButtonText2')}
-              onBlur={handleBlur('donationButtonText2')} />
-          </div>
-        </div>
-
-        <div className="clearfix">
           <div className="sm-col sm-col-2">
             <Label htmlFor="donationValue3">Valor 3</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
@@ -217,23 +186,48 @@ export default class DonationWidgetSettings extends React.Component {
               onChange={handleChange('donationValue3')}
               onBlur={handleBlur('donationValue3')} />
           </div>
-          <div className="sm-col sm-col-10">
-            <Label htmlFor="donationButtonText3">Texto Botão 3</Label>
-            {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
+          <div className="sm-col sm-col-2">
+            <Label htmlFor="donationValue4">Valor 4</Label>
+            {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationButtonText3"
+              id="donationValue4"
               type="text"
-              className="field-light block h3 half-width mt1 mb3"
-              placeholder="Doe um cafezinho (R$5)"
-              style={{height: '48px'}}
-              value={donationButtonText3}
-              onChange={handleChange('donationButtonText3')}
-              onBlur={handleBlur('donationButtonText3')} />
+              className="field-light block h3 mt1 mb3"
+              placeholder="R$"
+              style={{height: '48px', width: '90%'}}
+              value={donationValue4}
+              onChange={handleChange('donationValue4')}
+              onBlur={handleBlur('donationValue4')} />
+          </div>
+          <div className="sm-col sm-col-2">
+            <Label htmlFor="donationValue5">Valor 5</Label>
+            {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+            <input
+              id="donationValue5"
+              type="text"
+              className="field-light block h3 mt1 mb3"
+              placeholder="R$"
+              style={{height: '48px', width: '90%'}}
+              value={donationValue5}
+              onChange={handleChange('donationValue5')}
+              onBlur={handleBlur('donationValue5')} />
           </div>
         </div>
-
+        <div className="sm-col sm-col-10">
+          <Label htmlFor="donationButtonText">Texto Botão</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <input
+            id="donationButtonText"
+            type="text"
+            className="field-light block h3 half-width mt1 mb3"
+            placeholder="Doe um cafezinho"
+            style={{height: '48px'}}
+            value={donationButtonText}
+            onChange={handleChange('donationButtonText')}
+            onBlur={handleBlur('donationButtonText')} />
+        </div>
         <Label htmlFor="customerData">pedir dados do usuário</Label>
-        {countTextError && countTextTouched && <span className="red ml2">{countTextError}</span>}
+        {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <p className="muted mt1 mb3">
         <input
           name="customerData"
@@ -253,7 +247,7 @@ export default class DonationWidgetSettings extends React.Component {
         </p>
 
         <Label htmlFor="paymentMethods">métodos de pagamento aceito</Label>
-        {emailTextError && emailTextTouched && <span className="red ml2">{emailTextError}</span>}
+        {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <p className="muted mt1 mb3">
         <input
           type="checkbox"
