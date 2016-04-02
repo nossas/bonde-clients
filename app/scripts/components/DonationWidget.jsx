@@ -7,7 +7,7 @@ import * as Paths from './../Paths'
 
 @reactMixin.decorate(Navigation)
 
-export default class FormWidget extends React.Component {
+export default class DonationWidget extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     widget: PropTypes.object.isRequired,
@@ -41,6 +41,7 @@ export default class FormWidget extends React.Component {
   }
 
   handleClick() {
+
     const { mobilization, widget, editable } = this.props
     if (editable) {
       this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
@@ -49,21 +50,24 @@ export default class FormWidget extends React.Component {
 
 
   renderButton() {
-    // const { configurable, widget } = this.props
-    // const { loading, success } = this.state
-    //
-    // if (!configurable) {
+    const { configurable, widget } = this.props
+    const { loading, success } = this.state
+console.log(widget.settings)
+    if (!configurable) {
       return (
-        <div>
+        <div className="donation">
           <script dangerouslySetInnerHTML={{__html: `
 (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
-          <button onClick={::this.handleClickDonate}>Doe R$ 1.000,00</button>
+          <a className="values" href="#">R$ 15</a>
+          <a className="values" href="#">R$ 30</a>
+          <a className="values" href="#">R$ 45</a>
+          <button onClick={::this.handleClickDonate}>Doe</button>
         </div>
       )
-    // }
+    }
   }
 
   renderOverlay() {
