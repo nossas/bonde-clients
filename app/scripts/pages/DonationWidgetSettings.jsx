@@ -33,22 +33,64 @@ export default class DonationWidgetSettings extends React.Component {
       submitting: false,
       hasSubmitted: false,
       error: null,
-      bgClass: ''
+      main_color: ''
     }
-    //this.props.initializeForm({titleText: null, donationValue1: null, donationButtonText: null, donationValue2: null, donationValue3: null, donationValue4: null, donationValue5: null, paymentMethods: null, customerData: null})
+    this.props.initializeForm({
+      title_text: null,
+      button_text: null,
+      main_color: null,
+      donation_value1: null,
+      donation_value2: null,
+      donation_value3: null,
+      donation_value4: null,
+      donation_value5: null,
+      payment_methods: 'false',
+      customer_data: 'true'})
   }
 
   handleColorClick(event) {
-    this.setState({bgClass: event.currentTarget.getAttribute('data-bg-class')})
+    this.setState({main_color: event.currentTarget.getAttribute('data-bg-class')})
   }
 
   componentWillReceiveProps(nextProps) {
     const widget = this.widget(nextProps)
-console.log(widget)
+
     if (widget) {
       if (this.state.initializing) {
-        const { titleText: titleText, donationValue1:donationValue1, donationButtonText:donationButtonText, donationValue2:donationValue2, donationValue3:donationValue3, donationValue4:donationValue4, donationValue5:donationValue5, paymentMethods:paymentMethods, customerData:customerData } = (widget.settings || {titleText: null, donationValue1: null, donationButtonText: null, donationValue2: null, donationValue3: null, donationValue4: null, donationValue5: null, paymentMethods: null, customerData: null})
-        this.props.initializeForm({titleText, donationValue1, donationValue2, donationButtonText, donationValue3, donationValue4, donationValue5, paymentMethods, customerData})
+        const {
+          title_text,
+          button_text,
+          main_color,
+          donation_value1,
+          donation_value2,
+          donation_value3,
+          donation_value4,
+          donation_value5,
+          payment_methods,
+          customer_data
+        } = (widget.settings || {
+          title_text: null,
+          button_text: null,
+          main_color: null,
+          donation_value1: null,
+          donation_value2: null,
+          donation_value3: null,
+          donation_value4: null,
+          donation_value5: null,
+          payment_methods: 'false',
+          customer_data: 'true'
+        })
+        this.props.initializeForm({
+          title_text,
+          button_text,
+          main_color,
+          donation_value1,
+          donation_value2,
+          donation_value3,
+          donation_value4,
+          donation_value5,
+          payment_methods,
+          customer_data})
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
@@ -71,7 +113,6 @@ console.log(widget)
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
-    console.log(data)
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -80,27 +121,29 @@ console.log(widget)
         widget_id: widget.id,
         credentials: auth.credentials,
         widget: { settings: {
-          titleText: data.titleText,
-          donationValue1: data.donationValue1,
-          donationButtonText1: data.donationButtonText,
-          donationValue2: data.donationValue2,
-          donationValue3: data.donationValue3,
-          donationValue4: data.donationValue4,
-          donationValue5: data.donationValue5,
-          paymentMethods: data.paymentMethods,
-          customerData: data.customerData
+          title_text: data.title_text,
+          button_text: data.button_text,
+          main_color: this.state.main_color,
+          donation_value1: data.donation_value1,
+          donation_value2: data.donation_value2,
+          donation_value3: data.donation_value3,
+          donation_value4: data.donation_value4,
+          donation_value5: data.donation_value5,
+          payment_methods: data.payment_methods,
+          customer_data: data.customer_data
         } }
       })
       this.props.initializeForm({
-        titleText: data.titleText,
-        donationValue1: data.donationValue1,
-        donationButtonText1: data.donationButtonText,
-        donationValue2: data.donationValue2,
-        donationValue3: data.donationValue3,
-        donationValue4: data.donationValue4,
-        donationValue5: data.donationValue5,
-        paymentMethods: data.paymentMethods,
-        customerData: data.customerData
+        title_text: data.title_text,
+        button_text: data.button_text,
+        main_color: this.state.main_color,
+        donation_value1: data.donation_value1,
+        donation_value2: data.donation_value2,
+        donation_value3: data.donation_value3,
+        donation_value4: data.donation_value4,
+        donation_value5: data.donation_value5,
+        payment_methods: data.payment_methods,
+        customer_data: data.customer_data
       })
     } else {
       touchAll()
@@ -118,7 +161,18 @@ console.log(widget)
 
   renderForm() {
     const {
-      data: { titleText, donationButtonText, donationValue1, donationValue2, donationValue3, donationValue4, donationValue5, paymentMethods, customerData },
+      data: {
+        title_text,
+        button_text,
+        main_color,
+        donation_value1,
+        donation_value2,
+        donation_value3,
+        donation_value4,
+        donation_value5,
+        payment_methods,
+        customer_data
+      },
       errors: { callToAction: callToActionError },
       touched: { callToAction: callToActionTouched },
       handleChange,
@@ -128,148 +182,149 @@ console.log(widget)
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <Label htmlFor="titleText">Título do bloco de pagamento</Label>
+        <Label htmlFor="title_text">Título do bloco de pagamento</Label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <input
-          id="titleText"
+          id="title_text"
           type="text"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Texto apresentado no topo do bloco"
           style={{height: '48px'}}
-          value={titleText}
-          onChange={handleChange('titleText')}
-          onBlur={handleBlur('titleText')} />
+          value={title_text}
+          onChange={handleChange('title_text')}
+          onBlur={handleBlur('title_text')} />
 
         <div className="clearfix full-width meurio-scheme mb3">
-          <Label htmlFor="formTitle">Cor do checkout transparente</Label>
+          <Label htmlFor="main_color">Cor do checkout transparente</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <ColorPicker {...this.props} selectedClass={main_color} onClick={::this.handleColorClick} />
         </div>
 
         <div className="clearfix">
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donationValue1">Valor 1</Label>
+            <Label htmlFor="donation_value1">Valor 1</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationValue1"
+              id="donation_value1"
               type="text"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
-              value={donationValue1}
-              onChange={handleChange('donationValue1')}
-              onBlur={handleBlur('donationValue1')} />
+              value={donation_value1}
+              onChange={handleChange('donation_value1')}
+              onBlur={handleBlur('donation_value1')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donationValue2">Valor 2</Label>
+            <Label htmlFor="donation_value2">Valor 2</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationValue2"
+              id="donation_value2"
               type="text"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
-              value={donationValue2}
-              onChange={handleChange('donationValue2')}
-              onBlur={handleBlur('donationValue2')} />
+              value={donation_value2}
+              onChange={handleChange('donation_value2')}
+              onBlur={handleBlur('donation_value2')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donationValue3">Valor 3</Label>
+            <Label htmlFor="donation_value3">Valor 3</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationValue3"
+              id="donation_value3"
               type="text"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
-              value={donationValue3}
-              onChange={handleChange('donationValue3')}
-              onBlur={handleBlur('donationValue3')} />
+              value={donation_value3}
+              onChange={handleChange('donation_value3')}
+              onBlur={handleBlur('donation_value3')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donationValue4">Valor 4</Label>
+            <Label htmlFor="donation_value4">Valor 4</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationValue4"
+              id="donation_value4"
               type="text"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
-              value={donationValue4}
-              onChange={handleChange('donationValue4')}
-              onBlur={handleBlur('donationValue4')} />
+              value={donation_value4}
+              onChange={handleChange('donation_value4')}
+              onBlur={handleBlur('donation_value4')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donationValue5">Valor 5</Label>
+            <Label htmlFor="donation_value5">Valor 5</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
-              id="donationValue5"
+              id="donation_value5"
               type="text"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
-              value={donationValue5}
-              onChange={handleChange('donationValue5')}
-              onBlur={handleBlur('donationValue5')} />
+              value={donation_value5}
+              onChange={handleChange('donation_value5')}
+              onBlur={handleBlur('donation_value5')} />
           </div>
         </div>
         <div className="sm-col sm-col-10">
-          <Label htmlFor="donationButtonText">Texto Botão</Label>
+          <Label htmlFor="button_text">Texto Botão</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <input
-            id="donationButtonText"
+            id="button_text"
             type="text"
             className="field-light block h3 half-width mt1 mb3"
             placeholder="Doe um cafezinho"
             style={{height: '48px'}}
-            value={donationButtonText}
-            onChange={handleChange('donationButtonText')}
-            onBlur={handleBlur('donationButtonText')} />
+            value={button_text}
+            onChange={handleChange('button_text')}
+            onBlur={handleBlur('button_text')} />
         </div>
-        <Label htmlFor="customerData">pedir dados do usuário</Label>
-        {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-        <p className="muted mt1 mb3">
-        <input
-          name="customerData"
-          type="radio"
-          value="sim"
-          checked="checked"
-          onChange={handleChange('customerData')}
-          onBlur={handleBlur('customerData')} />
-        SIM&nbsp;&nbsp;
-        <input
-          name="customerData"
-          type="radio"
-          value="sim"
-          onChange={handleChange('customerData')}
-          onBlur={handleBlur('customerData')} />
-        NÃO
-        </p>
-
-        <Label htmlFor="paymentMethods">métodos de pagamento aceito</Label>
-        {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-        <p className="muted mt1 mb3">
-        <input
-          type="checkbox"
-          id="paymentMethods"
-          value="credit_card"
-          checked="checked"
-          onChange={handleChange('paymentMethods')}
-          onBlur={handleBlur('paymentMethods')} />
-        Cartão de Crédito&nbsp;&nbsp;
+        <div className="sm-col sm-col-10">
+          <Label htmlFor="customer_data">pedir dados do usuário?</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <p className="muted mt1 mb3">
           <input
-            type="checkbox"
-            id="paymentMethods"
-            value="boleto"
-            checked="checked"
-            onChange={handleChange('paymentMethods')}
-            onBlur={handleBlur('paymentMethods')} />
-          Boleto
-        </p>
+            name="customer_data"
+            type="radio"
+            value="true"
+            checked={customer_data == 'true'}
+            onChange={handleChange('customer_data')}
+            onBlur={handleBlur('customer_data')} />
+          SIM&nbsp;&nbsp;
+          <input
+            name="customer_data"
+            type="radio"
+            checked={customer_data == 'false'}
+            value="false"
+            onChange={handleChange('customer_data')} />
+          NÃO
+          </p>
+        </div>
+        <div className="sm-col sm-col-10">
+          <Label htmlFor="payment_methods">permitir opção de pagamento por boleto?</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <p className="muted mt1 mb3">
+            <input
+              name="payment_methods"
+              type="radio"
+              value="true"
+              checked={payment_methods == 'true'}
+              onChange={handleChange('payment_methods')}
+              onBlur={handleBlur('payment_methods')} />
+            SIM&nbsp;&nbsp;
+            <input
+              name="payment_methods"
+              type="radio"
+              checked={payment_methods == 'false'}
+              value="false"
+              onChange={handleChange('payment_methods')} />
+            NÃO
+          </p>
 
-        <Label htmlFor="paymentMethods">conta bancária a ser creditada</Label>
-        <p className="muted mb3">Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</p>
-
+          <Label htmlFor="payment_methods">conta bancária a ser creditada</Label>
+          <p className="muted mb3">Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</p>
+        </div>
         <div className="clearfix">
           <button
             className="caps button bg-darken-3 h3 mt1 mr2"
