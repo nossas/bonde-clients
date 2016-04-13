@@ -6,7 +6,7 @@
   "license": "ISC",
   "homepage": "https://github.com/meurio/hub-client#readme",
   "engines": {
-    "node": "0.12.4"
+    "node": "5.1"
   },
   "repository": {
     "type": "git",

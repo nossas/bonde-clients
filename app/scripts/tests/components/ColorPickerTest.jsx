@@ -28,7 +28,7 @@ describe('ColorPicker', () => {
   describe('#render', () => {
     it('should render with all colors', () => {
       const colorComponents = TestUtils.scryRenderedComponentsWithType(component, Color)
-      expect(colorComponents).to.have.length(8)
+      expect(colorComponents).to.have.length(40)
     })
   })
 })

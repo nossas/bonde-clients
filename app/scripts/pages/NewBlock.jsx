@@ -145,7 +145,7 @@ export default class NewBlock extends React.Component {
             })}
           </div>
           <div className="clearfix mb3">
-            <label className="caps h6 bold mb1 block">Cor de fundo</label>
+            <label className="caps h6 bold mb1 block">Fundo (cor ou imagem)</label>
             <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
             {this.renderBgImage()}
             <div className="col col-2 p1" style={{overflow: 'hidden'}}>
