@@ -22,6 +22,7 @@ export default class DonationWidget extends React.Component {
       hasMouseOver: false,
       loading: false,
       success: false,
+      selected_value: '1',
       errors: []
     }
   }
@@ -48,23 +49,63 @@ export default class DonationWidget extends React.Component {
     }
   }
 
+  handleClickSetValueDonation(v) {
+    this.setState({selected_value: v})
+  }
+
+  handleClickDonate() {
+    const { mobilization, widget } = this.props;
+    const { success, selected_value } = this.state;
+
+    // INICIAR A INSTÂNCIA DO CHECKOUT
+    // declarando um callback de sucesso
+    var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV", success: (data) => {
+     this.setState({'success': true});
+   }, error: function (err) {
+     console.log(err);
+   }});
+    // DEFINIR AS OPÇÕES
+    // e abrir o modal
+    var params = {
+      "createToken"       : "false",
+      "amount"            : widget.settings['donation_value'+selected_value] + "00",
+      "customerData"      : widget.settings.customer_data,
+      "paymentMethods"    : widget.settings.payment_methods === "true" ? 'credit_card,boleto' : 'credit_card',
+      "uiColor"           : widget.settings.main_color,
+      "paymentButtonText" : widget.settings.button_text
+    };
+    checkout.open(params);
+  }
 
   renderButton() {
     const { configurable, widget } = this.props
-    const { loading, success } = this.state
-console.log(widget.settings)
+    const { loading, success, selected_value } = this.state
+
+    let button_text = widget.settings.button_text;
+    let title_text = widget.settings.title_text;
+    let donation_value1 = widget.settings.donation_value1;
+    let donation_value2 = widget.settings.donation_value2;
+    let donation_value3 = widget.settings.donation_value3;
+    let donation_value4 = widget.settings.donation_value4;
+    let donation_value5 = widget.settings.donation_value5;
+
     if (!configurable) {
       return (
         <div className="donation">
+          <h2>{title_text}</h2>
           <script dangerouslySetInnerHTML={{__html: `
 (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
-          <a className="values" href="#">R$ 15</a>
-          <a className="values" href="#">R$ 30</a>
-          <a className="values" href="#">R$ 45</a>
-          <button onClick={::this.handleClickDonate}>Doe</button>
+
+          {donation_value1 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 1)} className={selected_value === 1 ? 'values bg-darken' : 'values'}>{"R$ " + donation_value1}</a> : ''}
+          {donation_value2 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 2)} className={selected_value === 2 ? 'values bg-darken' : 'values'}>{"R$ " + donation_value2}</a> : ''}
+          {donation_value3 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 3)} className={selected_value === 3 ? 'values bg-darken' : 'values'}>{"R$ " + donation_value3}</a> : ''}
+          {donation_value4 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'values bg-darken' : 'values'}>{"R$ " + donation_value4}</a> : ''}
+          {donation_value5 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'values bg-darken' : 'values'}>{"R$ " + donation_value5}</a> : ''}
+
+          <a href="#" className="p1" onClick={::this.handleClickDonate}>{button_text}</a>
         </div>
       )
     }
@@ -83,20 +124,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     }
   }
 
-  handleClickDonate() {
-
-      // INICIAR A INSTÂNCIA DO CHECKOUT
-      // declarando um callback de sucesso
-      var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV", success: function(data) {
-       console.log(data);
-      }});
-
-      // DEFINIR AS OPÇÕES
-      // e abrir o modal
-      var params = {"customerData":false, "amount":"100000", "createToken": "true", "interestRate": 10 };
-      checkout.open(params);
-  }
-
   renderForm() {
     const { editable, configurable } = this.props
     const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
@@ -107,6 +134,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           { this.renderButton() }
           { this.renderOverlay() }
         </div>
+      </div>
+    )
+  }
+
+  renderThankyouText() {
+    return (
+      <div className="p3 bg-darken-3 relative">
+        <p>Obrigado por contribuir.</p>
       </div>
     )
   }
@@ -127,7 +162,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
           onClick={::this.handleClick}>
-          { success ? this.renderShareButtons() : this.renderForm() }
+          { success ? this.renderThankyouText() : this.renderForm() }
         </div>
       </div>
     )
