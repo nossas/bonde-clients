@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as Paths from '../Paths'
-import { FormWidgetMenu, Loading, CloseButton, Label, ColorPicker } from './../components'
+import { FormWidgetMenu, Loading, CloseButton, Label} from './../components'
 import reduxForm from 'redux-form'
+import ColorPicker from 'react-color';
 
 function widgetFormValidation() {
   const errors = { valid: true }
@@ -28,17 +29,23 @@ export default class DonationWidgetSettings extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+
     this.state = {
       initializing: true,
       submitting: false,
       hasSubmitted: false,
       error: null,
-      main_color: ''
+      displayColorPicker: false,
+      selectedColorPicker: '#ffffff'
     }
+
+    this.handleColorClick = this.handleColorClick.bind(this)
+    this.handleToggleColorPickerClick = this.handleToggleColorPickerClick.bind(this)
+
     this.props.initializeForm({
-      title_text: null,
-      button_text: null,
-      main_color: null,
+      title_text: 'faça sua parte',
+      button_text: 'doe',
+      main_color: '#ffffff',
       donation_value1: null,
       donation_value2: null,
       donation_value3: null,
@@ -46,10 +53,6 @@ export default class DonationWidgetSettings extends React.Component {
       donation_value5: null,
       payment_methods: 'false',
       customer_data: 'true'})
-  }
-
-  handleColorClick(event) {
-    this.setState({main_color: event.currentTarget.getAttribute('data-bg-class')})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,9 +72,9 @@ export default class DonationWidgetSettings extends React.Component {
           payment_methods,
           customer_data
         } = (widget.settings || {
-          title_text: null,
-          button_text: null,
-          main_color: null,
+          title_text: 'faça sua parte',
+          button_text: 'doe',
+          main_color: '#ffffff',
           donation_value1: null,
           donation_value2: null,
           donation_value3: null,
@@ -90,8 +93,9 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value4,
           donation_value5,
           payment_methods,
-          customer_data})
-        this.setState({initializing: false})
+          customer_data
+        })
+        this.setState({initializing: false, selectedColorPicker: main_color})
       }
       this.state.submitting && this.setState({submitting: false})
       this.state.submitting && this.setState({hasSubmitted: true})
@@ -113,6 +117,7 @@ export default class DonationWidgetSettings extends React.Component {
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
+    const { selectedColorPicker } = this.state
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -123,7 +128,7 @@ export default class DonationWidgetSettings extends React.Component {
         widget: { settings: {
           title_text: data.title_text,
           button_text: data.button_text,
-          main_color: this.state.main_color,
+          main_color: selectedColorPicker,
           donation_value1: data.donation_value1,
           donation_value2: data.donation_value2,
           donation_value3: data.donation_value3,
@@ -136,7 +141,7 @@ export default class DonationWidgetSettings extends React.Component {
       this.props.initializeForm({
         title_text: data.title_text,
         button_text: data.button_text,
-        main_color: this.state.main_color,
+        main_color: selectedColorPicker,
         donation_value1: data.donation_value1,
         donation_value2: data.donation_value2,
         donation_value3: data.donation_value3,
@@ -159,19 +164,27 @@ export default class DonationWidgetSettings extends React.Component {
     }
   }
 
+  handleToggleColorPickerClick() {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  }
+
+  handleColorClick(color) {
+    this.setState({ selectedColorPicker: '#' + color.hex })
+  }
+
   renderForm() {
     const {
       data: {
         title_text,
         button_text,
-        main_color,
         donation_value1,
         donation_value2,
         donation_value3,
         donation_value4,
         donation_value5,
         payment_methods,
-        customer_data
+        customer_data,
+        main_color
       },
       errors: { callToAction: callToActionError },
       touched: { callToAction: callToActionTouched },
@@ -179,6 +192,11 @@ export default class DonationWidgetSettings extends React.Component {
       handleBlur,
       dirty
     } = this.props
+
+    const {
+      displayColorPicker,
+      selectedColorPicker
+    } = this.state
 
     return (
       <form onSubmit={::this.handleSubmit}>
@@ -197,7 +215,20 @@ export default class DonationWidgetSettings extends React.Component {
         <div className="clearfix full-width meurio-scheme mb3">
           <Label htmlFor="main_color">Cor do checkout transparente</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <ColorPicker {...this.props} selectedClass={main_color} onClick={::this.handleColorClick} />
+          <input
+            id="main_color"
+            type="text"
+            className="field-light block h3 mt1 mb3"
+            value={selectedColorPicker}
+            style={{height: '48px'}}
+            onChange={handleChange('main_color')}
+            onBlur={handleBlur('main_color')} />
+          <button onClick={this.handleToggleColorPickerClick}>Pick Color</button>
+          <ColorPicker
+            color={selectedColorPicker}
+            display={ displayColorPicker }
+            onChangeComplete={this.handleColorClick}
+            type="sketch" />
         </div>
 
         <div className="clearfix">
