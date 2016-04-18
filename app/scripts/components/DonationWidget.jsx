@@ -22,7 +22,7 @@ export default class DonationWidget extends React.Component {
       hasMouseOver: false,
       loading: false,
       success: false,
-      selected_value: '1',
+      selected_value: 1,
       errors: []
     }
   }
