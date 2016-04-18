@@ -99,11 +99,11 @@ export default class DonationWidget extends React.Component {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
 
-          {donation_value1 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 1)} className={selected_value === 1 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value1}</a> : ''}
-          {donation_value2 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 2)} className={selected_value === 2 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value2}</a> : ''}
-          {donation_value3 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 3)} className={selected_value === 3 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value3}</a> : ''}
-          {donation_value4 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value4}</a> : ''}
-          {donation_value5 !== '' ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value5}</a> : ''}
+          {donation_value1 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 1)} className={selected_value === 1 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value1}</a> : ''}
+          {donation_value2 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 2)} className={selected_value === 2 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value2}</a> : ''}
+          {donation_value3 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 3)} className={selected_value === 3 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value3}</a> : ''}
+          {donation_value4 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value4}</a> : ''}
+          {donation_value5 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'p1 mr1 bg-darken-3' : 'p1 mr1 bg-darken-2'}>{"R$ " + donation_value5}</a> : ''}
 
           <a href="#" onClick={::this.handleClickDonate} className="button bg-darken-4">{button_text}</a>
         </div>
