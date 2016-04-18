@@ -81,13 +81,13 @@ export default class DonationWidget extends React.Component {
     const { configurable, widget } = this.props
     const { loading, success, selected_value } = this.state
 
-    let button_text = widget.settings.button_text;
-    let title_text = widget.settings.title_text;
-    let donation_value1 = widget.settings.donation_value1;
-    let donation_value2 = widget.settings.donation_value2;
-    let donation_value3 = widget.settings.donation_value3;
-    let donation_value4 = widget.settings.donation_value4;
-    let donation_value5 = widget.settings.donation_value5;
+    let button_text = (widget.settings ? widget.settings.button_text : 'doe')
+    let title_text = (widget.settings ? widget.settings.title_text : 'faça sua doação!')
+    let donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
+    let donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
+    let donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
+    let donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
+    let donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
 
     if (!configurable) {
       return (
