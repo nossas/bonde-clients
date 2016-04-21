@@ -117,7 +117,6 @@ export default class DonationWidgetSettings extends React.Component {
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
-    const { selectedColorPicker } = this.state
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -128,7 +127,7 @@ export default class DonationWidgetSettings extends React.Component {
         widget: { settings: {
           title_text: data.title_text,
           button_text: data.button_text,
-          main_color: selectedColorPicker,
+          main_color: data.main_color,
           donation_value1: data.donation_value1,
           donation_value2: data.donation_value2,
           donation_value3: data.donation_value3,
@@ -141,7 +140,7 @@ export default class DonationWidgetSettings extends React.Component {
       this.props.initializeForm({
         title_text: data.title_text,
         button_text: data.button_text,
-        main_color: selectedColorPicker,
+        main_color: data.main_color,
         donation_value1: data.donation_value1,
         donation_value2: data.donation_value2,
         donation_value3: data.donation_value3,
@@ -164,8 +163,13 @@ export default class DonationWidgetSettings extends React.Component {
     }
   }
 
-  handleToggleColorPickerClick() {
+  handleToggleColorPickerClick(e) {
+    e.preventDefault()
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  }
+
+  handleClose() {
+    this.setState({ displayColorPicker: false });
   }
 
   handleColorClick(color) {
@@ -183,8 +187,7 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value4,
         donation_value5,
         payment_methods,
-        customer_data,
-        main_color
+        customer_data
       },
       errors: { callToAction: callToActionError },
       touched: { callToAction: callToActionTouched },
@@ -197,7 +200,7 @@ export default class DonationWidgetSettings extends React.Component {
       displayColorPicker,
       selectedColorPicker
     } = this.state
-
+    //           <button className="inline-block" onClick={this.handleToggleColorPickerClick}>Pick Color</button>
     return (
       <form onSubmit={::this.handleSubmit}>
         <Label htmlFor="title_text">Título do bloco de pagamento</Label>
@@ -214,19 +217,21 @@ export default class DonationWidgetSettings extends React.Component {
 
         <div className="clearfix full-width meurio-scheme mb3">
           <Label htmlFor="main_color">Cor do checkout transparente</Label>
+          <div className="clearfix"></div>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <input
             id="main_color"
             type="text"
-            className="field-light block h3 mt1 mb3"
+            className="field-light inline-block h3 mt1"
             value={selectedColorPicker}
             style={{height: '48px'}}
             onChange={handleChange('main_color')}
             onBlur={handleBlur('main_color')} />
-          <button onClick={this.handleToggleColorPickerClick}>Pick Color</button>
           <ColorPicker
             color={selectedColorPicker}
             display={ displayColorPicker }
+            onClose={ this.handleClose }
+            onChange={handleChange('main_color')}
             onChangeComplete={this.handleColorClick}
             type="sketch" />
         </div>
@@ -237,7 +242,7 @@ export default class DonationWidgetSettings extends React.Component {
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value1"
-              type="text"
+              type="number"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
@@ -250,7 +255,7 @@ export default class DonationWidgetSettings extends React.Component {
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value2"
-              type="text"
+              type="number"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
@@ -263,7 +268,7 @@ export default class DonationWidgetSettings extends React.Component {
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value3"
-              type="text"
+              type="number"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
@@ -276,7 +281,7 @@ export default class DonationWidgetSettings extends React.Component {
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value4"
-              type="text"
+              type="number"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
@@ -289,7 +294,7 @@ export default class DonationWidgetSettings extends React.Component {
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value5"
-              type="text"
+              type="number"
               className="field-light block h3 mt1 mb3"
               placeholder="R$"
               style={{height: '48px', width: '90%'}}
@@ -314,7 +319,7 @@ export default class DonationWidgetSettings extends React.Component {
         <div className="sm-col sm-col-10">
           <Label htmlFor="customer_data">pedir dados do usuário?</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <p className="muted mt1 mb3">
+          <p className=" mt1 mb3">
           <input
             name="customer_data"
             type="radio"
@@ -335,7 +340,8 @@ export default class DonationWidgetSettings extends React.Component {
         <div className="sm-col sm-col-10">
           <Label htmlFor="payment_methods">permitir opção de pagamento por boleto?</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <p className="muted mt1 mb3">
+          <p className="muted">O custo de cada boleto pago é R$ 3,00.</p>
+          <p className=" mt1 mb3">
             <input
               name="payment_methods"
               type="radio"
