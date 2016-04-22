@@ -67,7 +67,6 @@ export default class DonationWidget extends React.Component {
     // DEFINIR AS OPÇÕES
     // e abrir o modal
     var params = {
-      "createToken"       : "false",
       "amount"            : widget.settings['donation_value'+selected_value] + "00",
       "customerData"      : widget.settings.customer_data,
       "paymentMethods"    : widget.settings.payment_methods === "true" ? 'credit_card,boleto' : 'credit_card',
