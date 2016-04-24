@@ -302,6 +302,9 @@ export default class DonationWidgetSettings extends React.Component {
               onChange={handleChange('donation_value5')}
               onBlur={handleBlur('donation_value5')} />
           </div>
+          <div className="sm-col sm-col-2 bold">
+            <small>*Insira o valor inteiro</small>
+          </div>
         </div>
         <div className="sm-col sm-col-10">
           <Label htmlFor="button_text">Texto Botão</Label>
