@@ -71,7 +71,7 @@ export default class DonationWidget extends React.Component {
       "amount"            : widget.settings['donation_value'+selected_value] + "00",
       "customerData"      : widget.settings.customer_data,
       "paymentMethods"    : widget.settings.payment_methods === "true" ? 'credit_card,boleto' : 'credit_card',
-      //"uiColor"           : widget.settings.main_color,
+      "uiColor"           : "#43a2cc",
       "paymentButtonText" : widget.settings.button_text
     };
     checkout.open(params);
