@@ -4,8 +4,10 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
+import * as DonationActions from './../actions/DonationActions'
 
 @reactMixin.decorate(Navigation)
+//@connect(state => ({ auth: state.auth, form: state.loginForm }))
 
 export default class DonationWidget extends React.Component {
   static propTypes = {
@@ -54,17 +56,17 @@ export default class DonationWidget extends React.Component {
   }
 
   handleClickDonate() {
-    const { mobilization, widget } = this.props;
+    const { mobilization, widget, dispatch } = this.props;
     const { success, selected_value } = this.state;
 
     // INICIAR A INSTÂNCIA DO CHECKOUT
     // declarando um callback de sucesso
     const encryption_key = process.env.PAGARME_KEY || 'setup env var';
     var checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
-     this.setState({'success': true});
-   }, error: function (err) {
-     console.log(err);
-   }});
+      dispatch(DonationActions.finishTransaction(data));
+    }, error: function (err) {
+      console.log(err);
+    }});
     // DEFINIR AS OPÇÕES
     // e abrir o modal
     var params = {

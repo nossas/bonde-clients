@@ -32,3 +32,8 @@ export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
 
 // Form entries actions
 export const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
+
+// Donation actions
+export const FINISH_TRANSACTION = 'FINISH_TRANSACTION'
+export const TRANSACTION_DONE = 'TRANSACTION_DONE'
+export const TRANSACTION_FAIL = 'TRANSACTION_FAIL'
