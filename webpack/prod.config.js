@@ -63,7 +63,8 @@ module.exports = {
         // Useful to reduce the size of client-side libraries, e.g. react
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_URL: JSON.stringify(process.env.API_URL),
-        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
+        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY)
       }
     }),
 
