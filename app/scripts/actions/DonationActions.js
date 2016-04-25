@@ -4,11 +4,12 @@ import superagent from 'superagent'
 export function finishTransaction(params) {
   return dispatch => {
     superagent
-    .post(`${process.env.API_URL}/donations`)
-    .send({
+    .post(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/donations`)
+    .send({donation: {
+      widget_id: params.widget_id,
       token: params.token,
       payment_method: params.payment_method
-    })
+    }})
     .end((err, res) => {
       if (err) {
         dispatch({

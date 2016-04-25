@@ -63,6 +63,8 @@ export default class DonationWidget extends React.Component {
     // declarando um callback de sucesso
     const encryption_key = process.env.PAGARME_KEY || 'setup env var';
     var checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
+      data.mobilization_id = this.props.mobilization.id;
+      data.widget_id = this.props.widget.id;
       dispatch(DonationActions.finishTransaction(data));
     }, error: function (err) {
       console.log(err);
