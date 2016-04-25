@@ -30,7 +30,8 @@
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "API_URL": "http://localhost:3000",
-        "APP_DOMAIN": "localhost.dev:3001"
+        "APP_DOMAIN": "localhost.dev:3001",
+        "PAGARME_KEY": "ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV"
       }
     },
     "watch-client": {
@@ -39,7 +40,8 @@
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "API_URL": "http://localhost:3000",
-        "APP_DOMAIN": "localhost.dev:3001"
+        "APP_DOMAIN": "localhost.dev:3001",
+        "PAGARME_KEY": "ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV"
       }
     }
   },

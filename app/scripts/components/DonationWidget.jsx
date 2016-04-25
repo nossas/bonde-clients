@@ -59,7 +59,8 @@ export default class DonationWidget extends React.Component {
 
     // INICIAR A INSTÂNCIA DO CHECKOUT
     // declarando um callback de sucesso
-    var checkout = new PagarMeCheckout.Checkout({"encryption_key":"ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV", success: (data) => {
+    const encryption_key = process.env.PAGARME_KEY || 'setup env var';
+    var checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
      this.setState({'success': true});
    }, error: function (err) {
      console.log(err);
