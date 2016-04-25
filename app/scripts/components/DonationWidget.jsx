@@ -65,6 +65,7 @@ export default class DonationWidget extends React.Component {
     var checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
       data.mobilization_id = this.props.mobilization.id;
       data.widget_id = this.props.widget.id;
+      data.amount = widget.settings['donation_value'+selected_value] + "00";
       dispatch(DonationActions.finishTransaction(data));
     }, error: function (err) {
       console.log(err);
@@ -72,7 +73,6 @@ export default class DonationWidget extends React.Component {
     // DEFINIR AS OPÇÕES
     // e abrir o modal
     var params = {
-      "createToken"       : false,
       "amount"            : widget.settings['donation_value'+selected_value] + "00",
       "customerData"      : widget.settings.customer_data,
       "paymentMethods"    : widget.settings.payment_methods === "true" ? 'credit_card,boleto' : 'credit_card',

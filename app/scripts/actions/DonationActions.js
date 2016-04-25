@@ -8,7 +8,8 @@ export function finishTransaction(params) {
     .send({donation: {
       widget_id: params.widget_id,
       token: params.token,
-      payment_method: params.payment_method
+      payment_method: params.payment_method,
+      amount: params.amount
     }})
     .end((err, res) => {
       if (err) {
