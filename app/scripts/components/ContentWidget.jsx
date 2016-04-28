@@ -75,7 +75,7 @@ export default class ContentWidget extends React.Component {
   }
 
   setClick() {
-    const links = document.querySelectorAll('.widget a:not([target="_blank"])')
+    const links = document.querySelectorAll('.content-widget a:not([target="_blank"])')
     for (let link of links) {
       $(link).on('click touchstart', ::this.handleClick)
     }
@@ -128,7 +128,7 @@ export default class ContentWidget extends React.Component {
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     return (
       <div>
-        <div className={classnames('full-width', {'display-none': !editing})}>
+        <div className={classnames('content-widget full-width', {'display-none': !editing})}>
           <WYSIHTMLToolbar
             elementId={toolbarId}
             className="absolute full-width top-0 left-0 bg-darken-4"
