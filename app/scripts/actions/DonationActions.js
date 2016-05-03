@@ -8,7 +8,7 @@ export function finishTransaction(params) {
       data: {
         donation: {
           widget_id: params.widget_id,
-          token: params.token,
+          card_hash: params.card_hash,
           payment_method: params.payment_method,
           amount: params.amount
         }
