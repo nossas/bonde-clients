@@ -58,7 +58,7 @@ export default class DonationWidget extends React.Component {
   handleClickDonate() {
     const { mobilization, widget, dispatch } = this.props;
     const { success, selected_value } = this.state;
-
+    let that = this;
     // INICIAR A INSTÂNCIA DO CHECKOUT
     // declarando um callback de sucesso
     const encryption_key = process.env.PAGARME_KEY || 'setup env var';
@@ -66,6 +66,7 @@ export default class DonationWidget extends React.Component {
       data.mobilization_id = this.props.mobilization.id;
       data.widget_id = this.props.widget.id;
       data.amount = widget.settings['donation_value'+selected_value] + "00";
+      that.setState({success:true});
       dispatch(DonationActions.finishTransaction(data));
     }, error: function (err) {
       console.log(err);
