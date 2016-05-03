@@ -7,7 +7,7 @@ export function finishTransaction(params) {
     .post(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/donations`)
     .send({donation: {
       widget_id: params.widget_id,
-      token: params.token,
+      card_hash: params.card_hash,
       payment_method: params.payment_method,
       amount: params.amount
     }})
