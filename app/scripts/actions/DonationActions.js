@@ -10,7 +10,8 @@ export function finishTransaction(params) {
           widget_id: params.widget_id,
           card_hash: params.card_hash,
           payment_method: params.payment_method,
-          amount: params.amount
+          amount: params.amount,
+          customer: params.customer
         }
       },
       success: function(data, textStatus, jqXHR){
