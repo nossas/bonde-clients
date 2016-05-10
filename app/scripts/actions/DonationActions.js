@@ -1,7 +1,7 @@
-import { FINISH_TRANSACTION, TRANSACTION_FAIL, TRANSACTION_DONE } from '../constants/ActionTypes'
+import { TRANSACTION_DONE } from '../constants/ActionTypes'
 import $ from 'jquery'
 
-export function finishTransaction(params) {
+export function finishTransaction (params) {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/donations`, {
       method: 'post',
@@ -14,7 +14,7 @@ export function finishTransaction(params) {
           customer: params.customer
         }
       },
-      success: function(data, textStatus, jqXHR){
+      success: function (data, textStatus, jqXHR) {
         dispatch({
           type: TRANSACTION_DONE,
           data
