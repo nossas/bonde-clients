@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import * as Paths from '../Paths'
-import { FormWidgetMenu, Loading, CloseButton, Label} from './../components'
+import { DonationWidgetMenu, Loading, CloseButton, Label} from './../components'
 import reduxForm from 'redux-form'
 import ColorPicker from 'react-color';
 
@@ -195,6 +195,8 @@ export default class DonationWidgetSettings extends React.Component {
       handleBlur,
       dirty
     } = this.props
+
+    const widget = this.widget()
 
     const {
       displayColorPicker,
@@ -388,12 +390,10 @@ export default class DonationWidgetSettings extends React.Component {
 
   renderPage() {
     const { widgets, dirty } = this.props
-    const widget = widgets.data[widgets.data.map((w) => { return w.id.toString()}).indexOf(this.props.params.widget_id)]
+    const widget = this.widget()
     return (
       <div className="flex-auto flex flex-column bg-silver gray relative">
-        <div className="bg-white px3 clearfix">
-          <h2 className="mb3">Configure o bloco de doação</h2>
-        </div>
+        <DonationWidgetMenu {...this.props} widget={widget} />
         <div className="p3 flex-auto overflow-scroll">
           { !this.state.initializing && this.renderForm() }
         </div>
