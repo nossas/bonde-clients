@@ -126,9 +126,9 @@ export default class NewBlock extends React.Component {
     return (
       <div className={classnames('flex-auto bg-silver gray relative', this.props.mobilization.color_scheme)}>
         <h2 className="bg-white mt0 py3 px4">Adicione um bloco de conteúdo</h2>
-        <div className="py3 px4">
+        <div className="py1 px4">
           <p
-            className="mb3 muted">
+            className="muted">
             Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento
           </p>
           <label className="caps h6 bold mb1 block">Tipo de bloco</label>
@@ -144,16 +144,16 @@ export default class NewBlock extends React.Component {
               )
             })}
           </div>
-          <div className="clearfix mb3">
+          <div className="clearfix mb1">
             <label className="caps h6 bold mb1 block">Fundo (cor ou imagem)</label>
-            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} colorScheme={this.props.mobilization.color_scheme.split("-")[0]} />
             {this.renderBgImage()}
             <div className="col col-2 p1" style={{overflow: 'hidden'}}>
               {this.renderUploader()}
               {this.renderProgress()}
             </div>
           </div>
-          <div className="clearfix">
+          <div className="clearfix mb1">
             <button
               className="button bg-darken-3 rounded white caps button-transparent mr1"
               disabled={!!this.state.uploadProgress}

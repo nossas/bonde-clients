@@ -10,7 +10,7 @@ const onClick = () => { alert('color was clicked!') }
 describe('ColorPicker', () => {
   before(() => {
     component = TestUtils.renderIntoDocument(
-      <ColorPicker selectedClass={'bg-white'} onClick={onClick.bind(component)} />
+      <ColorPicker selectedClass={'bg-white'} onClick={onClick.bind(component)} colorScheme={'nossascidades'} />
     )
   })
 
