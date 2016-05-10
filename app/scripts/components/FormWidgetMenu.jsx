@@ -7,6 +7,7 @@ export default class FormWidgetMenu extends React.Component {
     const { mobilization, widget, location } = this.props
     const fieldsPath = Paths.fieldsMobilizationWidget(mobilization.id, widget.id)
     const formPath = Paths.formMobilizationWidget(mobilization.id, widget.id)
+    const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
 
     return (
       <div className='bg-white px3 clearfix'>
@@ -21,6 +22,10 @@ export default class FormWidgetMenu extends React.Component {
               path={formPath}
               text='Ajustes'
               isActive={formPath === location.pathname} />
+            <TabMenuItem
+              path={autofirePath}
+              text='Mensagem agradecimento'
+              isActive={autofirePath === location.pathname} />
           </ul>
         </div>
       </div>
