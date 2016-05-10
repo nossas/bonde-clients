@@ -66,6 +66,10 @@ export function formMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/form`
 }
 
+export function autofireMobilizationWidget(mobilization_id, widget_id) {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/autofire`
+}
+
 export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }

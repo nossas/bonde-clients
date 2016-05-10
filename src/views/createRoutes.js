@@ -20,6 +20,7 @@ import {
   NewBlock,
   FormWidgetFields,
   FormWidgetForm,
+  AutoFireForm,
   MobilizationFonts,
   MobilizationSharing,
   RequireLogin,
@@ -46,6 +47,7 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
+              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/autofire" component={AutoFireForm} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/donation" component={DonationWidgetSettings} />
               <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
               <Route component={MobilizationSettings} >
