@@ -43,14 +43,14 @@ export default class DonationWidgetSettings extends React.Component {
     this.handleToggleColorPickerClick = this.handleToggleColorPickerClick.bind(this)
 
     this.props.initializeForm({
-      title_text: 'faça sua parte',
-      button_text: 'doe',
+      title_text: '',
+      button_text: '',
       main_color: '#ffffff',
-      donation_value1: null,
-      donation_value2: null,
-      donation_value3: null,
-      donation_value4: null,
-      donation_value5: null,
+      donation_value1: '',
+      donation_value2: '',
+      donation_value3: '',
+      donation_value4: '',
+      donation_value5: '',
       payment_methods: 'false',
       customer_data: 'true'})
   }
@@ -72,14 +72,14 @@ export default class DonationWidgetSettings extends React.Component {
           payment_methods,
           customer_data
         } = (widget.settings || {
-          title_text: 'faça sua parte',
-          button_text: 'doe',
+          title_text: '',
+          button_text: '',
           main_color: '#ffffff',
-          donation_value1: null,
-          donation_value2: null,
-          donation_value3: null,
-          donation_value4: null,
-          donation_value5: null,
+          donation_value1: '',
+          donation_value2: '',
+          donation_value3: '',
+          donation_value4: '',
+          donation_value5: '',
           payment_methods: 'false',
           customer_data: 'true'
         })
@@ -205,20 +205,20 @@ export default class DonationWidgetSettings extends React.Component {
     //           <button className="inline-block" onClick={this.handleToggleColorPickerClick}>Pick Color</button>
     return (
       <form onSubmit={::this.handleSubmit}>
-        <Label htmlFor="title_text">Título do bloco de pagamento</Label>
+        <Label htmlFor="title_text">Título do bloco de doação</Label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <input
           id="title_text"
           type="text"
           className="field-light block h3 full-width mt1 mb3"
-          placeholder="Texto apresentado no topo do bloco"
+          placeholder="Ex.: Escolha um valor e contribua agora!"
           style={{height: '48px'}}
           value={title_text}
           onChange={handleChange('title_text')}
           onBlur={handleBlur('title_text')} />
 
         <div className="clearfix full-width meurio-scheme mb3">
-          <Label htmlFor="main_color">Cor do checkout transparente</Label>
+          <Label htmlFor="main_color">Defina a cor da página de pagamento</Label>
           <div className="clearfix"></div>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <input
@@ -239,6 +239,8 @@ export default class DonationWidgetSettings extends React.Component {
         </div>
 
         <div className="clearfix">
+          <Label>Defina os valores para o bloco de doação</Label>
+          <p><small className="muted"><em>Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)</em></small></p>
           <div className="sm-col sm-col-2">
             <Label htmlFor="donation_value1">Valor 1</Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
@@ -246,7 +248,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value1"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$"
+              placeholder="R$20"
               style={{height: '48px', width: '90%'}}
               value={donation_value1}
               onChange={handleChange('donation_value1')}
@@ -259,7 +261,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value2"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$"
+              placeholder="R$50"
               style={{height: '48px', width: '90%'}}
               value={donation_value2}
               onChange={handleChange('donation_value2')}
@@ -272,7 +274,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value3"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$"
+              placeholder="R$100"
               style={{height: '48px', width: '90%'}}
               value={donation_value3}
               onChange={handleChange('donation_value3')}
@@ -285,7 +287,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value4"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$"
+              placeholder="R$200"
               style={{height: '48px', width: '90%'}}
               value={donation_value4}
               onChange={handleChange('donation_value4')}
@@ -298,54 +300,33 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value5"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$"
+              placeholder="R$500"
               style={{height: '48px', width: '90%'}}
               value={donation_value5}
               onChange={handleChange('donation_value5')}
               onBlur={handleBlur('donation_value5')} />
           </div>
           <div className="sm-col sm-col-2 bold">
-            <small>*Insira o valor inteiro</small>
+            <small className="muted">*todos os valores são em reais</small>
           </div>
         </div>
         <div className="sm-col sm-col-10">
-          <Label htmlFor="button_text">Texto Botão</Label>
+          <Label htmlFor="button_text">Texto do botão de doação</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <input
             id="button_text"
             type="text"
             className="field-light block h3 half-width mt1 mb3"
-            placeholder="Doe um cafezinho"
+            placeholder="Ex.: Doe agora!"
             style={{height: '48px'}}
             value={button_text}
             onChange={handleChange('button_text')}
             onBlur={handleBlur('button_text')} />
         </div>
         <div className="sm-col sm-col-10">
-          <Label htmlFor="customer_data">pedir dados do usuário?</Label>
+          <Label htmlFor="payment_methods">Habilitar pagamento por boleto?</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <p className=" mt1 mb3">
-          <input
-            name="customer_data"
-            type="radio"
-            value="true"
-            checked={customer_data == 'true'}
-            onChange={handleChange('customer_data')}
-            onBlur={handleBlur('customer_data')} />
-          SIM&nbsp;&nbsp;
-          <input
-            name="customer_data"
-            type="radio"
-            checked={customer_data == 'false'}
-            value="false"
-            onChange={handleChange('customer_data')} />
-          NÃO
-          </p>
-        </div>
-        <div className="sm-col sm-col-10">
-          <Label htmlFor="payment_methods">permitir opção de pagamento por boleto?</Label>
-          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <p className="muted">O custo de cada boleto pago é R$ 3,00.</p>
+          <p><small className="muted"><em>Cada boleto pago terá um custo adicional de R$3,00</em></small></p>
           <p className=" mt1 mb3">
             <input
               name="payment_methods"
@@ -354,20 +335,20 @@ export default class DonationWidgetSettings extends React.Component {
               checked={payment_methods == 'true'}
               onChange={handleChange('payment_methods')}
               onBlur={handleBlur('payment_methods')} />
-            SIM&nbsp;&nbsp;
+            Sim&nbsp;&nbsp;
             <input
               name="payment_methods"
               type="radio"
               checked={payment_methods == 'false'}
               value="false"
               onChange={handleChange('payment_methods')} />
-            NÃO
+            Não
           </p>
 
           <Label htmlFor="payment_methods">conta bancária a ser creditada</Label>
-          <p className="muted mb3">Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</p>
+          <p className="mb3"><em>Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</em></p>
         </div>
-        <div className="clearfix">
+        <div className="sm-col sm-col-10">
           <button
             className="caps button bg-darken-3 h3 mt1 mr2"
             disabled={this.state.submitting}

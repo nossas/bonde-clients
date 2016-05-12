@@ -13,7 +13,7 @@ let container, component, mobilization, dispatch
 describe('NewBlock', () => {
 
   beforeEach(() => {
-    mobilization = { id: 1 }
+    mobilization = { id: 1, color_scheme: "nossascidades-scheme" }
     dispatch = () => {}
     component = TestUtils.renderIntoDocument(
       <NewBlock mobilization={mobilization} dispatch={dispatch} />
