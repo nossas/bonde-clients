@@ -128,12 +128,6 @@ export default class AutoFireForm extends React.Component {
           onChange={handleChange('emailText')}
           onBlur={handleBlur('emailText')} />
         <div className="clearfix">
-          <button
-            className="caps button bg-darken-3 h3 mt1 mr2"
-            disabled={this.state.submitting}
-            onClick={::this.handleCancelClick}>
-            Cancelar
-          </button>
           <input
             type="submit"
             className={classnames('caps button bg-aqua h3 mt1')}
