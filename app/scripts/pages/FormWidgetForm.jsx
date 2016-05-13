@@ -34,15 +34,15 @@ export default class FormWidgetForm extends React.Component {
       hasSubmitted: false,
       error: null
     }
-    this.props.initializeForm({callToAction: null, buttonText: null, countText: null, emailText: null })
+    this.props.initializeForm({callToAction: null, buttonText: null, countText: null })
   }
 
   componentWillReceiveProps(nextProps) {
     const widget = this.widget(nextProps)
     if (widget) {
       if (this.state.initializing) {
-        const { call_to_action: callToAction, button_text: buttonText, count_text: countText, email_text: emailText } = (widget.settings || {call_to_action: null, button_text: null, count_text: null, email_text: null})
-        this.props.initializeForm({callToAction, buttonText, countText, emailText})
+        const { call_to_action: callToAction, button_text: buttonText, count_text: countText } = (widget.settings || {call_to_action: null, button_text: null, count_text: null })
+        this.props.initializeForm({callToAction, buttonText, countText })
         this.setState({initializing: false})
       }
       this.state.submitting && this.setState({submitting: false})
@@ -76,11 +76,10 @@ export default class FormWidgetForm extends React.Component {
           ...settings,
           call_to_action: data.callToAction,
           button_text: data.buttonText,
-          count_text: data.countText,
-          email_text: data.emailText
+          count_text: data.countText
         } }
       })
-      this.props.initializeForm({callToAction: data.callToAction, buttonText: data.buttonText, countText: data.countText, emailText: data.emailText })
+      this.props.initializeForm({callToAction: data.callToAction, buttonText: data.buttonText, countText: data.countText })
     } else {
       touchAll()
       this.setState({ submitting: false })
@@ -97,9 +96,9 @@ export default class FormWidgetForm extends React.Component {
 
   renderForm() {
     const {
-      data: { callToAction, buttonText, countText, emailText },
-      errors: { callToAction: callToActionError, buttonText: buttonTextError, countText: countTextError, emailText: emailTextError },
-      touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched, countText: countTextTouched, emailText: emailTextTouched },
+      data: { callToAction, buttonText, countText },
+      errors: { callToAction: callToActionError, buttonText: buttonTextError, countText: countTextError },
+      touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched, countText: countTextTouched },
       handleChange,
       handleBlur,
       dirty
@@ -142,24 +141,7 @@ export default class FormWidgetForm extends React.Component {
           onChange={handleChange('countText')}
           onBlur={handleBlur('countText')} />
 
-        <Label htmlFor="thankYouEmailText">Email de agradecimento</Label>
-        {emailTextError && emailTextTouched && <span className="red ml2">{emailTextError}</span>}
-        <textarea
-          id="thankYouEmailText"
-          className="field-light block h3 full-width mt1 mb3"
-          placeholder="Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço."
-          rows={5}
-          value={emailText}
-          onChange={handleChange('emailText')}
-          onBlur={handleBlur('emailText')} />
-
         <div className="clearfix">
-          <button
-            className="caps button bg-darken-3 h3 mt1 mr2"
-            disabled={this.state.submitting}
-            onClick={::this.handleCancelClick}>
-            Cancelar
-          </button>
           <input
             type="submit"
             className={classnames('caps button bg-aqua h3 mt1')}

@@ -2,26 +2,21 @@ import React from 'react'
 import * as Paths from '../Paths'
 import { TabMenuItem } from './'
 
-export default class FormWidgetMenu extends React.Component {
+export default class DonationWidgetMenu extends React.Component {
   render () {
     const { mobilization, widget, location } = this.props
-    const fieldsPath = Paths.fieldsMobilizationWidget(mobilization.id, widget.id)
-    const formPath = Paths.formMobilizationWidget(mobilization.id, widget.id)
+    const donationPath = Paths.donationMobilizationWidget(mobilization.id, widget.id)
     const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
 
     return (
       <div className='bg-white px3 clearfix'>
-        <h2 className='mb3'>Configure o formulário da sua ação</h2>
+        <h2 className="mb3">Configure o bloco de doação</h2>
         <div>
           <ul className='list-reset mb0'>
             <TabMenuItem
-              path={fieldsPath}
-              text='Campos do formulário'
-              isActive={fieldsPath === location.pathname} />
-            <TabMenuItem
-              path={formPath}
+              path={donationPath}
               text='Ajustes'
-              isActive={formPath === location.pathname} />
+              isActive={donationPath === location.pathname} />
             <TabMenuItem
               path={autofirePath}
               text='Mensagem agradecimento'

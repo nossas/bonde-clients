@@ -27,6 +27,7 @@ export { default as WYSIHTMLToolbarCreateLink } from './WYSIHTMLToolbarCreateLin
 export { default as WYSIHTMLToolbarColorPicker } from './WYSIHTMLToolbarColorPicker.jsx'
 export { default as ConfigurationsMenu } from './ConfigurationsMenu.jsx'
 export { default as FormWidgetMenu } from './FormWidgetMenu.jsx'
+export { default as DonationWidgetMenu } from './DonationWidgetMenu.jsx'
 export { default as TabMenuItem } from './TabMenuItem.jsx'
 export { default as CloseButton } from './CloseButton.jsx'
 export { default as Label } from './Label.jsx'
