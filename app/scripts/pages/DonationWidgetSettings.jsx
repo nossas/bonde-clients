@@ -343,7 +343,7 @@ export default class DonationWidgetSettings extends React.Component {
             Não
           </p>
 
-          <Label htmlFor="payment_methods">conta bancária a ser creditada</Label>
+          <Label htmlFor="payment_methods">conta bancária</Label>
           <p className="mb3"><em>Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</em></p>
         </div>
         <div className="sm-col sm-col-10">
