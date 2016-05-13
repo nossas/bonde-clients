@@ -5,6 +5,7 @@ import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
 import * as DonationActions from './../actions/DonationActions'
+import TellAFriend from './shared/TellAFriend.jsx'
 
 @reactMixin.decorate(Navigation)
 //@connect(state => ({ auth: state.auth, form: state.loginForm }))
@@ -146,9 +147,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
   renderThankyouText() {
     return (
-      <div className="p3 bg-darken-3 relative">
-        <p>Obrigado por contribuir.</p>
-      </div>
+      <TellAFriend {...this.props} message={"Transação enviada!"} />
     )
   }
 
