@@ -8,8 +8,16 @@ import { DonationWidgetMenu, Loading, CloseButton, Label} from './../components'
 import reduxForm from 'redux-form'
 import ColorPicker from 'react-color';
 
-function widgetFormValidation() {
+function widgetFormValidation(data) {
   const errors = { valid: true }
+
+  if (!data.button_text) {
+    errors.buttonText = 'Insira o texto do botão'
+    errors.valid = false
+  } else if (data.button_text.length > 50) {
+    errors.buttonText = 'O limite de caracteres foi atingido.'
+    errors.valid = false
+  }
   return errors
 }
 
@@ -176,6 +184,15 @@ export default class DonationWidgetSettings extends React.Component {
     this.setState({ selectedColorPicker: '#' + color.hex })
   }
 
+  renderButtonTextLength() {
+    const { data: { button_text } } = this.props
+    if (button_text && button_text.length > 0) {
+      return(
+        <small className={classnames('ml2 italic', (button_text.length > 40 ? 'red' : null))}>{50 - button_text.length} caracteres restantes</small>
+      )
+    }
+  }
+
   renderForm() {
     const {
       data: {
@@ -189,8 +206,8 @@ export default class DonationWidgetSettings extends React.Component {
         payment_methods,
         customer_data
       },
-      errors: { callToAction: callToActionError },
-      touched: { callToAction: callToActionTouched },
+      errors: { callToAction: callToActionError, buttonText: buttonTextError },
+      touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched },
       handleChange,
       handleBlur,
       dirty
@@ -312,7 +329,8 @@ export default class DonationWidgetSettings extends React.Component {
         </div>
         <div className="sm-col sm-col-10">
           <Label htmlFor="button_text">Texto do botão de doação</Label>
-          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          { this.renderButtonTextLength() }
+          {buttonTextError && buttonTextTouched && <span className="red ml2">{buttonTextError}</span>}
           <input
             id="button_text"
             type="text"
