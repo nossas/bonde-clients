@@ -8,8 +8,12 @@ import { connect } from 'react-redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import reduxForm from 'redux-form'
 
-function widgetFormValidation() {
+function widgetFormValidation(data) {
   const errors = { valid: true }
+  if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
+    errors.id = 'Informe uma ID válida'
+    errors.valid = false
+  }
   return errors
 }
 
@@ -31,8 +35,24 @@ export default class AutoFireForm extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      loading: false,
-      hasNewField: false
+      initializing: true,
+      submitting: false,
+      hasSubmitted: false,
+      error: null
+    }
+    this.props.initializeForm({senderName: null, senderEmail: null, emailSubject: null, emailText: null })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const widget = this.widget(nextProps)
+    if (widget) {
+      if (this.state.initializing) {
+        const { sender_name: senderName, sender_email: senderEmail, email_subject: emailSubject, email_text: emailText } = (widget.settings || {sender_name: null, sender_email: null, email_subject: null, email_text: null })
+        this.props.initializeForm({senderName, senderEmail, emailSubject, emailText })
+        this.setState({initializing: false})
+      }
+      this.state.submitting && this.setState({submitting: false})
+      this.state.submitting && this.setState({hasSubmitted: true})
     }
   }
 
@@ -60,13 +80,13 @@ export default class AutoFireForm extends React.Component {
         credentials: auth.credentials,
         widget: { settings: {
           ...settings,
-          call_to_action: data.callToAction,
-          button_text: data.buttonText,
-          count_text: data.countText,
+          sender_name: data.senderName,
+          sender_email: data.senderEmail,
+          email_subject: data.emailSubject,
           email_text: data.emailText
         } }
       })
-      this.props.initializeForm({callToAction: data.callToAction, buttonText: data.buttonText, countText: data.countText, emailText: data.emailText })
+      this.props.initializeForm({senderName: data.senderName, senderEmail: data.senderEmail, emailText: data.emailText, emailSubject: data.emailSubject })
     } else {
       touchAll()
       this.setState({ submitting: false })
@@ -83,9 +103,9 @@ export default class AutoFireForm extends React.Component {
 
   renderForm () {
     const {
-      data: { senderName, senderEmail, emailText },
-      errors: { senderName: senderNameError, senderEmail: senderEmailError, emailText: emailTextError },
-      touched: { senderName: senderNameTouched, senderEmail: senderEmailTouched, emailText: emailTextTouched },
+      data: { senderName, senderEmail, emailText, emailSubject },
+      errors: { senderName: senderNameError, senderEmail: senderEmailError, emailText: emailTextError, emailSubject: emailSubjectError },
+      touched: { senderName: senderNameTouched, senderEmail: senderEmailTouched, emailText: emailTextTouched, emailSubject: emailSubjectTouched },
       handleChange,
       handleBlur,
       dirty
@@ -105,22 +125,34 @@ export default class AutoFireForm extends React.Component {
           onChange={handleChange('senderName')}
           onBlur={handleBlur('senderName')} />
 
-          <Label htmlFor="buttonText">E-mail remetente</Label>
-          {senderEmailError && senderEmailTouched && <span className="red ml2">{senderEmailError}</span>}
-          <input
-            id="senderEmail"
-            type="text"
-            className="field-light block h3 full-width mt1 mb3"
-            placeholder="Defina o e-mail que irá aparecer na mensagem enviada."
-            style={{height: '48px'}}
-            value={senderEmail}
-            onChange={handleChange('senderEmail')}
-            onBlur={handleBlur('senderEmail')} />
+        <Label htmlFor="buttonText">E-mail remetente</Label>
+        {senderEmailError && senderEmailTouched && <span className="red ml2">{senderEmailError}</span>}
+        <input
+          id="senderEmail"
+          type="text"
+          className="field-light block h3 full-width mt1 mb3"
+          placeholder="Defina o e-mail que irá aparecer na mensagem enviada."
+          style={{height: '48px'}}
+          value={senderEmail}
+          onChange={handleChange('senderEmail')}
+          onBlur={handleBlur('senderEmail')} />
 
-        <Label htmlFor="thankYouEmailText">Email de agradecimento</Label>
+        <Label htmlFor="buttonText">Assunto do e-mail</Label>
+        {emailSubjectError && emailSubjectTouched && <span className="red ml2">{emailSubjectError}</span>}
+        <input
+          id="emailSubject"
+          type="text"
+          className="field-light block h3 full-width mt1 mb3"
+          placeholder="Defina o e-mail que irá aparecer na mensagem enviada."
+          style={{height: '48px'}}
+          value={emailSubject}
+          onChange={handleChange('emailSubject')}
+          onBlur={handleBlur('emailSubject')} />
+
+        <Label htmlFor="emailText">Email de agradecimento</Label>
         {emailTextError && emailTextTouched && <span className="red ml2">{emailTextError}</span>}
         <textarea
-          id="thankYouEmailText"
+          id="emailText"
           className="field-light block h3 full-width mt1 mb3"
           placeholder="Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço."
           rows={5}
