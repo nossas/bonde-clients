@@ -1,7 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import { NavbarButton } from './../../components'
 
-const { TestUtils } = React.addons
 let renderedComponent
 let children
 let className

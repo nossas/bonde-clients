@@ -1,7 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import WYSIHTMLToolbar from './../../components/WYSIHTMLToolbar.jsx'
 
-let { TestUtils } = React.addons
 let component
 
 describe('WYSIHTMLToolbar', function() {

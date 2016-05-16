@@ -87,6 +87,7 @@
     "pretty-error": "^1.1.2",
     "query-string": "^2.4.0",
     "react": "^0.14.8",
+    "react-addons-test-utils": "^15.0.2",
     "react-addons-transition-group": "^0.14.8",
     "react-color": "^2.0.0",
     "react-colors-picker": "2.1.1",

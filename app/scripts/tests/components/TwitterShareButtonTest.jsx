@@ -1,7 +1,6 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import { TwitterShareButton } from './../../components'
-
-const { TestUtils } = React.addons
 
 describe('TwitterShareButton', () => {
   it('should open a popup on click', () => {

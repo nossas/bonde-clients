@@ -1,7 +1,7 @@
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import { Navbar, DropDownMenu } from './../../components'
 
-const { TestUtils } = React.addons
 const blocks = {data: [{}, {}, {}, {hidden: true}]}
 const visibleBlocks = blocks.data.filter((b) => {return !b.hidden})
 const mobilization = {
