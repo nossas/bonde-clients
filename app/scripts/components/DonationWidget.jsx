@@ -5,6 +5,7 @@ import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
 import * as DonationActions from './../actions/DonationActions'
+import TellAFriend from './shared/TellAFriend.jsx'
 
 @reactMixin.decorate(Navigation)
 //@connect(state => ({ auth: state.auth, form: state.loginForm }))
@@ -88,8 +89,8 @@ export default class DonationWidget extends React.Component {
     const { configurable, widget } = this.props
     const { loading, success, selected_value } = this.state
 
-    let button_text = (widget.settings ? widget.settings.button_text : 'doe')
-    let title_text = (widget.settings ? widget.settings.title_text : 'faça sua doação!')
+    let button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
+    let title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
     let donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
     let donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
     let donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
@@ -112,7 +113,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           {donation_value4 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value4}</a> : ''}
           {donation_value5 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value5}</a> : ''}
 
-          <a href="#" onClick={::this.handleClickDonate} className="button bg-darken-4 mt2 mb1 ">{button_text}</a>
+          <a href="#" onClick={::this.handleClickDonate} className="caps button bg-darken-4 p2 full-width mt1 mb1 ">{button_text}</a>
         </div>
       )
     }
@@ -147,9 +148,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
   renderThankyouText() {
     return (
-      <div className="p3 bg-darken-3 relative">
-        <p>Obrigado por contribuir.</p>
-      </div>
+      <TellAFriend {...this.props} message={"Transação enviada!"} />
     )
   }
 
