@@ -13,6 +13,7 @@ const blocks = { data: [block1, block2], loaded: true }
 const mobilization = { color_scheme: 'meurio-scheme' }
 const widgets = { data: [] }
 const dispatch = () => {}
+const auth = {}
 
 describe('EditMobilization', () => {
   let mobilizationEditor = { isEditingBlock: false }
@@ -21,7 +22,8 @@ describe('EditMobilization', () => {
     blocks: blocks,
     widgets: widgets,
     dispatch: dispatch,
-    mobilizationEditor: mobilizationEditor
+    mobilizationEditor: mobilizationEditor,
+    auth: auth
   })
 
   let component = TestUtils.renderIntoDocument(<WrappedComponent />)
@@ -44,7 +46,7 @@ describe('EditMobilization', () => {
     })
 
     it('should not render the navbar when it is editing a block', () => {
-      let mobilizationEditor = { isEditingBlock: true }
+      mobilizationEditor = { isEditingBlock: true }
       const EditMobilizationWithoutNavbar = stubRouterContext(EditMobilization, {
         mobilization: mobilization,
         blocks: blocks,

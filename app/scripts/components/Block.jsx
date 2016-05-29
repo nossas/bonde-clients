@@ -12,9 +12,9 @@ export default class Block extends React.Component {
     block: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
-    blocks: PropTypes.array.isRequired,
+    blocks: PropTypes.object.isRequired,
     editable: PropTypes.bool.isRequired,
-    widgets: PropTypes.array.isRequired,
+    widgets: PropTypes.object.isRequired,
     canMoveUp: PropTypes.bool.isRequired,
     canMoveDown: PropTypes.bool.isRequired
   }

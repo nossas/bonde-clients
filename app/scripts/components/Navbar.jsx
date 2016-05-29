@@ -26,9 +26,9 @@ export default class Navbar extends React.Component {
     })
 
     return (
-      visibleBlocks.map((block) => {
+      visibleBlocks.map((block, i) => {
         return (
-          <div className={classnames({'inline-block': !mobile})}>
+          <div key={i} className={classnames({'inline-block': !mobile})}>
             <NavbarEditionWrapper
               {...this.props}
               key={`navbar-edition-wrapper-${block.id}`}
