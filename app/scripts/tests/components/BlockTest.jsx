@@ -8,12 +8,13 @@ const widget2 = { block_id: 2, id: 2, settings: { content: 'My widget2' } }
 const allWidgets = {data: [widget1, widget2]}
 const blockWidgets = [widget1]
 const block = { id: 1, bg_class: 'bg-1', bg_image: 'foobar.jpg' }
+const blocks = {}
 const auth = {credentials: { x: 'y' }}
 const dispatch = () => { return true }
 
 const props = {
   widgets: allWidgets,
-  blocks: {},
+  blocks: blocks,
   block: block,
   auth: auth,
   dispatch: dispatch,
@@ -31,8 +32,8 @@ describe('Block', () => {
         hasMouseOver: false,
         editingBackground: false,
         editingWidget: false,
-        bgClass: component.props.block.bg_class,
-        bgImage: component.props.block.bg_image,
+        bgClass: block.bg_class,
+        bgImage: block.bg_image,
         uploadProgress: null,
         loading: false
       })
@@ -78,7 +79,7 @@ describe('Block', () => {
       component.setState({
         editingBackground: true,
         bgClass: 'bg-foo',
-        bgImage: 'foo.jpg'
+        bgImage: 'foo.png'
       })
       component.handleCancelEdit()
       expect(component.state.editingBackground).to.be.false
@@ -110,8 +111,8 @@ describe('Block', () => {
       component.handleSaveEdit()
       expect(component.state.editingBackground).to.be.false
       expect(editBlockStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block_id: component.props.block.id,
+        mobilization_id: 1,
+        block_id: block.id,
         block: {
           bg_class: 'bg-test',
           bg_image: 'foo.png'
@@ -174,9 +175,9 @@ describe('Block', () => {
       )
       component.handleMoveUpClick()
       expect(moveBlockUpStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block: component.props.block,
-        blocks: component.props.blocks,
+        mobilization_id: 1,
+        block: block,
+        blocks: blocks,
         credentials: auth.credentials
       })
     })
@@ -190,9 +191,9 @@ describe('Block', () => {
       )
       component.handleMoveDownClick()
       expect(moveBlockDownStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block: component.props.block,
-        blocks: component.props.blocks,
+        mobilization_id: 1,
+        block: block,
+        blocks: blocks,
         credentials: auth.credentials
       })
     })
@@ -211,8 +212,8 @@ describe('Block', () => {
       )
       component.handleToggleHiddenClick()
       expect(editBlockStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block_id: component.props.block.id,
+        mobilization_id: 1,
+        block_id: block.id,
         block: { hidden: true },
         credentials: auth.credentials
       })
@@ -230,8 +231,8 @@ describe('Block', () => {
       )
       component.handleToggleHiddenClick()
       expect(editBlockStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block_id: component.props.block.id,
+        mobilization_id: 1,
+        block_id: block.id,
         block: { hidden: false},
         credentials: auth.credentials
       })
@@ -247,8 +248,8 @@ describe('Block', () => {
       )
       component.handleRemoveClick()
       expect(removeBlockStub).to.have.been.calledWith({
-        mobilization_id: component.props.mobilization.id,
-        block_id: component.props.block.id,
+        mobilization_id: 1,
+        block_id: block.id,
         credentials: auth.credentials
       })
     })
@@ -283,16 +284,8 @@ describe('Block', () => {
   })
 
   describe('#render', () => {
-    it('should render container and bind events', () => {
-      const component = TestUtils.renderIntoDocument(<Block {...props} />)
-      const container = TestUtils.scryRenderedDOMComponentsWithTag(component, 'div')[0]
-      expect(container.props.onKeyUp.toString()).to.equal(component.handleKeyUp.bind(component).toString())
-      expect(container.props.onMouseOver.toString()).to.equal(component.handleMouseOver.bind(component).toString())
-      expect(container.props.onMouseOut.toString()).to.equal(component.handleMouseOut.bind(component).toString())
-    })
-
     it('should render filtered widgets components', () => {
-      const component = TestUtils.renderIntoDocument(<Block {...props} blocks={[{}]} />)
+      const component = TestUtils.renderIntoDocument(<Block {...props} blocks={{}} />)
       const widgetsComponents = TestUtils.scryRenderedComponentsWithType(component, Widget)
       expect(widgetsComponents).to.have.length(blockWidgets.length)
     })
