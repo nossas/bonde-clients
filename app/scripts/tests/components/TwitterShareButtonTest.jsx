@@ -1,5 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
+import ReactDOM from 'react-dom'
 import { TwitterShareButton } from './../../components'
 
 describe('TwitterShareButton', () => {
@@ -8,7 +9,7 @@ describe('TwitterShareButton', () => {
       <TwitterShareButton href='http://meurio.org.br' text='Change the world!' />
     )
 
-    const button = React.findDOMNode(component.refs.button)
+    const button = ReactDOM.findDOMNode(component.refs.button)
     const stubOpen = sinon.spy()
     window.open = stubOpen
 
