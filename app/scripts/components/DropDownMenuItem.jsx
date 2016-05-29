@@ -7,7 +7,8 @@ export default class DropDownMenuItem extends React.Component {
     children: PropTypes.array,
     onClick: PropTypes.func,
     onItemClick: PropTypes.func,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    className: PropTypes.string
   }
 
   handleClick(event) {
