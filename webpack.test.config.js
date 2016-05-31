@@ -1,5 +1,5 @@
 // var context = require.context('./app/scripts/tests', true, /Test\.(js|jsx)$/);
-var context = require.context('./app/scripts/tests', true, /TwitterShareButtonTest\.jsx/);
+var context = require.context('./app/scripts/tests', true, /ColorTest\.jsx/);
 
 beforeEach(() => {
   sandbox = sinon.sandbox.create()
