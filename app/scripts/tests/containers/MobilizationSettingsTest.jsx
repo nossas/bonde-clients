@@ -5,7 +5,7 @@ import ConfigurationsMenu from './../../components/ConfigurationsMenu'
 
 import stubRouterContext from './../stubRouterContext'
 const mobilization = {}
-const location = {}
+const location = ''
 
 describe('MobilizationSettings', () => {
   it('should render MobilizationMenu', () => {
