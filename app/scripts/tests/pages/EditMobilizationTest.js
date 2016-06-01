@@ -52,7 +52,8 @@ describe('EditMobilization', () => {
         blocks: blocks,
         widgets: widgets,
         dispatch: dispatch,
-        mobilizationEditor: mobilizationEditor
+        mobilizationEditor: mobilizationEditor,
+        auth: auth
       })
 
       component = TestUtils.renderIntoDocument(<EditMobilizationWithoutNavbar />)
