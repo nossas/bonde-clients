@@ -6,8 +6,8 @@ export default class Navbar extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func,
+    auth: PropTypes.object,
     editable: PropTypes.bool
   }
 
