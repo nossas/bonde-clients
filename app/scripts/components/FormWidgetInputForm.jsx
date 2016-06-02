@@ -212,6 +212,7 @@ export default class FormWidgetInput extends React.Component {
                   <option value="text">Texto</option>
                   <option value="email">E-mail</option>
                   <option value="number">Número</option>
+                  <option value="dropdown">Dropdown</option>
                 </select>
               </div>
             </div>

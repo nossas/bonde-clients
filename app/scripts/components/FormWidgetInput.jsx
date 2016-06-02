@@ -77,13 +77,27 @@ export default class FormWidgetInput extends React.Component {
           {field.label}{field.required === 'true' ? ' *' : null}
         </label>
         { this.renderInstructions() }
-        <input
-          id={'input-' + uid}
-          className="field-light block full-width h3"
-          style={(editable || configurable ? {cursor: 'pointer'} : null)}
-          placeholder={field.placeholder}
-          type='text'
-        />
+        { field.kind === 'dropdown'
+          ? <select
+              id={'input-' + uid}
+              className="field-light block full-width h3"
+              style={(editable || configurable ? {cursor: 'pointer'} : null)}
+            >
+              <option value="">Selecione...</option>
+              {
+                field.placeholder.split(',').map(function(v) {
+                  return <option>{v}</option>
+                })
+              }
+            </select>
+          : <input
+              id={'input-' + uid}
+              className="field-light block full-width h3"
+              style={(editable || configurable ? {cursor: 'pointer'} : null)}
+              placeholder={field.placeholder}
+              type='text'
+            />
+        }
       </div>
     )
   }
