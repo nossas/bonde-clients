@@ -1,11 +1,10 @@
-// var context = require.context('./app/scripts/tests', true, /Test\.(js|jsx)$/);
-var context = require.context('./app/scripts/tests', true, /BlockTest\.jsx/);
+const context = require.context('./app/scripts/tests', true, /Test\.(js|jsx)$/)
 
 beforeEach(() => {
   sandbox = sinon.sandbox.create()
   requests = []
   xhr = sinon.useFakeXMLHttpRequest()
-  xhr.onCreate = function (req) { requests.push(req); }
+  xhr.onCreate = function(req) { requests.push(req) }
 })
 
 afterEach(() => {
@@ -13,4 +12,4 @@ afterEach(() => {
   sandbox.restore()
 })
 
-context.keys().forEach(context);
+context.keys().forEach(context)
