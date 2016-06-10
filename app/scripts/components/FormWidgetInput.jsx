@@ -70,7 +70,14 @@ export default class FormWidgetInput extends React.Component {
         }
       </select>)
     } else if (field.kind === 'greetings') {
-      return ''
+      return (
+        editable || configurable
+        ? <p className="block full-width">
+          <strong>Mensagem de sucesso alterada para:</strong>
+          <br/>{field.placeholder}
+          </p>
+        : null
+      )
     } else {
       return (<input
         id={'input-' + uid}

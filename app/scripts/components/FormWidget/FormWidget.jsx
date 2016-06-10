@@ -188,7 +188,7 @@ export default class FormWidget extends React.Component {
     let message = ''
     fields.map((field) => {
       if (field.kind === 'greetings') {
-        message = 'Formulário submetido com sucesso 222222222!'
+        message = field.placeholder
       }
     })
     if (message === '') {
