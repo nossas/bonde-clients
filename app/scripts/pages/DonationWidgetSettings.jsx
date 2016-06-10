@@ -54,6 +54,7 @@ export default class DonationWidgetSettings extends React.Component {
       title_text: '',
       button_text: '',
       main_color: '#ffffff',
+      default_donation_value: 1,
       donation_value1: '',
       donation_value2: '',
       donation_value3: '',
@@ -72,6 +73,7 @@ export default class DonationWidgetSettings extends React.Component {
           title_text,
           button_text,
           main_color,
+          default_donation_value,
           donation_value1,
           donation_value2,
           donation_value3,
@@ -83,6 +85,7 @@ export default class DonationWidgetSettings extends React.Component {
           title_text: '',
           button_text: '',
           main_color: '#ffffff',
+          default_donation_value: 1,
           donation_value1: '',
           donation_value2: '',
           donation_value3: '',
@@ -95,6 +98,7 @@ export default class DonationWidgetSettings extends React.Component {
           title_text,
           button_text,
           main_color,
+          default_donation_value,
           donation_value1,
           donation_value2,
           donation_value3,
@@ -136,6 +140,7 @@ export default class DonationWidgetSettings extends React.Component {
           title_text: data.title_text,
           button_text: data.button_text,
           main_color: data.main_color,
+          default_donation_value: data.default_donation_value,
           donation_value1: data.donation_value1,
           donation_value2: data.donation_value2,
           donation_value3: data.donation_value3,
@@ -149,6 +154,7 @@ export default class DonationWidgetSettings extends React.Component {
         title_text: data.title_text,
         button_text: data.button_text,
         main_color: data.main_color,
+        default_donation_value: data.default_donation_value,
         donation_value1: data.donation_value1,
         donation_value2: data.donation_value2,
         donation_value3: data.donation_value3,
@@ -169,6 +175,11 @@ export default class DonationWidgetSettings extends React.Component {
         <div className="red center mt2">{this.state.error}</div>
       )
     }
+  }
+
+  handleDefaultDonationValue (e) {
+    e.preventDefault()
+    console.log('foi', e);
   }
 
   handleToggleColorPickerClick(e) {
@@ -198,6 +209,7 @@ export default class DonationWidgetSettings extends React.Component {
       data: {
         title_text,
         button_text,
+        default_donation_value,
         donation_value1,
         donation_value2,
         donation_value3,
@@ -259,7 +271,14 @@ export default class DonationWidgetSettings extends React.Component {
           <Label>Defina os valores para o bloco de doação</Label>
           <p><small className="muted"><em>Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)</em></small></p>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donation_value1">Valor 1</Label>
+            <Label htmlFor="donation_value1">Valor 1
+              <input
+                type="checkbox"
+                onClick={::this.handleDefaultDonationValue}
+                name="default_donation_value"
+                checked={default_donation_value == 1 ? 'checked' : null}
+                value={default_donation_value == 1 ? default_donation_value : null} alt="Clique para definir este valor como padrão." />
+            </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value1"
@@ -272,7 +291,14 @@ export default class DonationWidgetSettings extends React.Component {
               onBlur={handleBlur('donation_value1')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donation_value2">Valor 2</Label>
+            <Label htmlFor="donation_value2">Valor 2
+              <input
+                type="checkbox"
+                onClick={::this.handleDefaultDonationValue}
+                name="default_donation_value"
+                checked={default_donation_value == 2 ? 'checked' : null}
+                value={default_donation_value == 2 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+            </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value2"
@@ -285,7 +311,14 @@ export default class DonationWidgetSettings extends React.Component {
               onBlur={handleBlur('donation_value2')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donation_value3">Valor 3</Label>
+            <Label htmlFor="donation_value3">Valor 3
+              <input
+                type="checkbox"
+                onClick={::this.handleDefaultDonationValue}
+                name="default_donation_value"
+                checked={default_donation_value == 3 ? 'checked' : null}
+                value={default_donation_value == 3 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+            </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value3"
@@ -298,7 +331,14 @@ export default class DonationWidgetSettings extends React.Component {
               onBlur={handleBlur('donation_value3')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donation_value4">Valor 4</Label>
+            <Label htmlFor="donation_value4">Valor 4
+              <input
+                type="checkbox"
+                onClick={::this.handleDefaultDonationValue}
+                name="default_donation_value"
+                checked={default_donation_value == 4 ? 'checked' : null}
+                value={default_donation_value == 4 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+            </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value4"
@@ -311,7 +351,14 @@ export default class DonationWidgetSettings extends React.Component {
               onBlur={handleBlur('donation_value4')} />
           </div>
           <div className="sm-col sm-col-2">
-            <Label htmlFor="donation_value5">Valor 5</Label>
+            <Label htmlFor="donation_value5">Valor 5
+              <input
+                type="checkbox"
+                onClick={::this.handleDefaultDonationValue}
+                name="default_donation_value"
+                checked={default_donation_value == 5 ? 'checked' : null}
+                value={default_donation_value == 5 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+            </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
               id="donation_value5"
