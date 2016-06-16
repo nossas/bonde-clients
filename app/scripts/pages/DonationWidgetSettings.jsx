@@ -47,8 +47,8 @@ export default class DonationWidgetSettings extends React.Component {
       selectedColorPicker: '#ffffff'
     }
 
-    this.handleColorClick = this.handleColorClick.bind(this)
-    this.handleToggleColorPickerClick = this.handleToggleColorPickerClick.bind(this)
+    // this.handleColorClick = this.handleColorClick.bind(this)
+    // this.handleToggleColorPickerClick = this.handleToggleColorPickerClick.bind(this)
 
     this.props.initializeForm({
       title_text: '',
@@ -60,8 +60,7 @@ export default class DonationWidgetSettings extends React.Component {
       donation_value3: '',
       donation_value4: '',
       donation_value5: '',
-      payment_methods: 'false',
-      customer_data: 'true'})
+      payment_methods: 'false'})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,8 +78,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
-          payment_methods,
-          customer_data
+          payment_methods
         } = (widget.settings || {
           title_text: '',
           button_text: '',
@@ -91,8 +89,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: '',
           donation_value4: '',
           donation_value5: '',
-          payment_methods: 'false',
-          customer_data: 'true'
+          payment_methods: 'false'
         })
         this.props.initializeForm({
           title_text,
@@ -104,8 +101,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
-          payment_methods,
-          customer_data
+          payment_methods
         })
         this.setState({initializing: false, selectedColorPicker: main_color})
       }
@@ -146,8 +142,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: data.donation_value3,
           donation_value4: data.donation_value4,
           donation_value5: data.donation_value5,
-          payment_methods: data.payment_methods,
-          customer_data: data.customer_data
+          payment_methods: data.payment_methods
         } }
       })
       this.props.initializeForm({
@@ -160,8 +155,7 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value3: data.donation_value3,
         donation_value4: data.donation_value4,
         donation_value5: data.donation_value5,
-        payment_methods: data.payment_methods,
-        customer_data: data.customer_data
+        payment_methods: data.payment_methods
       })
     } else {
       touchAll()
@@ -176,23 +170,23 @@ export default class DonationWidgetSettings extends React.Component {
       )
     }
   }
+  //
+  // handleToggleColorPickerClick(e) {
+  //   e.preventDefault()
+  //   this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  // }
+  //
+  // handleClose() {
+  //   this.setState({ displayColorPicker: false });
+  // }
 
-  handleDefaultDonationValue (e) {
-    e.preventDefault()
-    console.log('foi', e);
-  }
+  handleColorClick(color, e) {
+    const { handleChange } = this.props
+    const t = handleChange('main_color')
+    console.log(this.props, 'main_color', '#' + color.hex, e)
 
-  handleToggleColorPickerClick(e) {
-    e.preventDefault()
-    this.setState({ displayColorPicker: !this.state.displayColorPicker })
-  }
 
-  handleClose() {
-    this.setState({ displayColorPicker: false });
-  }
-
-  handleColorClick(color) {
-    this.setState({ selectedColorPicker: '#' + color.hex })
+    // t('#' + color.hex)
   }
 
   renderButtonTextLength() {
@@ -209,14 +203,14 @@ export default class DonationWidgetSettings extends React.Component {
       data: {
         title_text,
         button_text,
+        main_color,
         default_donation_value,
         donation_value1,
         donation_value2,
         donation_value3,
         donation_value4,
         donation_value5,
-        payment_methods,
-        customer_data
+        payment_methods
       },
       errors: { callToAction: callToActionError, buttonText: buttonTextError },
       touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched },
@@ -227,10 +221,6 @@ export default class DonationWidgetSettings extends React.Component {
 
     const widget = this.widget()
 
-    const {
-      displayColorPicker,
-      selectedColorPicker
-    } = this.state
     //           <button className="inline-block" onClick={this.handleToggleColorPickerClick}>Pick Color</button>
     return (
       <form onSubmit={::this.handleSubmit}>
@@ -254,16 +244,11 @@ export default class DonationWidgetSettings extends React.Component {
             id="main_color"
             type="text"
             className="field-light inline-block h3 mt1"
-            value={selectedColorPicker}
-            style={{height: '48px'}}
-            onChange={handleChange('main_color')}
-            onBlur={handleBlur('main_color')} />
+            value={main_color}
+            style={{height: '48px'}} />
           <ColorPicker
-            color={selectedColorPicker}
-            display={ displayColorPicker }
-            onClose={ this.handleClose }
-            onChange={handleChange('main_color')}
-            onChangeComplete={this.handleColorClick}
+            color={main_color}
+            onChangeComplete={::this.handleColorClick}
             type="sketch" />
         </div>
 
@@ -274,10 +259,10 @@ export default class DonationWidgetSettings extends React.Component {
             <Label htmlFor="donation_value1">Valor 1
               <input
                 type="checkbox"
-                onClick={::this.handleDefaultDonationValue}
+                onChange={handleChange('default_donation_value')}
                 name="default_donation_value"
                 checked={default_donation_value == 1 ? 'checked' : null}
-                value={default_donation_value == 1 ? default_donation_value : null} alt="Clique para definir este valor como padrão." />
+                value="1" alt="Clique para definir este valor como padrão." />
             </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
@@ -294,10 +279,10 @@ export default class DonationWidgetSettings extends React.Component {
             <Label htmlFor="donation_value2">Valor 2
               <input
                 type="checkbox"
-                onClick={::this.handleDefaultDonationValue}
+                onChange={handleChange('default_donation_value')}
                 name="default_donation_value"
                 checked={default_donation_value == 2 ? 'checked' : null}
-                value={default_donation_value == 2 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+                value="2" title="Clique para definir este valor como padrão." />
             </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
@@ -314,10 +299,10 @@ export default class DonationWidgetSettings extends React.Component {
             <Label htmlFor="donation_value3">Valor 3
               <input
                 type="checkbox"
-                onClick={::this.handleDefaultDonationValue}
+                onChange={handleChange('default_donation_value')}
                 name="default_donation_value"
                 checked={default_donation_value == 3 ? 'checked' : null}
-                value={default_donation_value == 3 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+                value="3" title="Clique para definir este valor como padrão." />
             </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
@@ -334,10 +319,10 @@ export default class DonationWidgetSettings extends React.Component {
             <Label htmlFor="donation_value4">Valor 4
               <input
                 type="checkbox"
-                onClick={::this.handleDefaultDonationValue}
+                onChange={handleChange('default_donation_value')}
                 name="default_donation_value"
                 checked={default_donation_value == 4 ? 'checked' : null}
-                value={default_donation_value == 4 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+                value="4" title="Clique para definir este valor como padrão." />
             </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
@@ -354,10 +339,10 @@ export default class DonationWidgetSettings extends React.Component {
             <Label htmlFor="donation_value5">Valor 5
               <input
                 type="checkbox"
-                onClick={::this.handleDefaultDonationValue}
+                onChange={handleChange('default_donation_value')}
                 name="default_donation_value"
                 checked={default_donation_value == 5 ? 'checked' : null}
-                value={default_donation_value == 5 ? default_donation_value : null} title="Clique para definir este valor como padrão." />
+                value="5" title="Clique para definir este valor como padrão." />
             </Label>
             {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
             <input
