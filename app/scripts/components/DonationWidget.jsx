@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
 import * as DonationActions from './../actions/DonationActions'
 import TellAFriend from './shared/TellAFriend.jsx'
 
 @reactMixin.decorate(Navigation)
-//@connect(state => ({ auth: state.auth, form: state.loginForm }))
+// @connect(state => ({ auth: state.auth, form: state.loginForm }))
 
 export default class DonationWidget extends React.Component {
   static propTypes = {
@@ -45,7 +45,6 @@ export default class DonationWidget extends React.Component {
   }
 
   handleClick() {
-
     const { mobilization, widget, editable } = this.props
     if (editable) {
       this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
@@ -57,45 +56,44 @@ export default class DonationWidget extends React.Component {
   }
 
   handleClickDonate() {
-    const { mobilization, widget, dispatch } = this.props;
-    const { success, selected_value } = this.state;
-    let that = this;
-    // INICIAR A INSTÂNCIA DO CHECKOUT
-    // declarando um callback de sucesso
-    const encryption_key = process.env.PAGARME_KEY || 'setup env var';
-    var checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
-      data.mobilization_id = this.props.mobilization.id;
-      data.widget_id = this.props.widget.id;
-      data.amount = widget.settings['donation_value'+selected_value] + "00";
-      that.setState({success:true});
-      dispatch(DonationActions.finishTransaction(data));
-    }, error: function (err) {
-      console.log(err);
-    }});
-    // DEFINIR AS OPÇÕES
-    // e abrir o modal
-    var params = {
-      "createToken"       : "false",
-      "amount"            : widget.settings['donation_value'+selected_value] + "00",
-      "customerData"      : "true",
-      "paymentMethods"    : widget.settings.payment_methods === "true" ? 'credit_card,boleto' : 'credit_card',
-      "uiColor"           : "#43a2cc",
-      "paymentButtonText" : widget.settings.button_text
-    };
-    checkout.open(params);
+    const { widget, dispatch } = this.props
+    const { success, selected_value } = this.state
+    const that = this
+
+    const main_color = (widget.settings ? widget.settings.main_color : '#43a2cc')
+    const encryption_key = process.env.PAGARME_KEY || 'setup env var'
+    let checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
+      data.mobilization_id = this.props.mobilization.id
+      data.widget_id = this.props.widget.id
+      data.amount = widget.settings['donation_value' + selected_value] + "00"
+      that.setState({success: true})
+      dispatch(DonationActions.finishTransaction(data))
+    }, error: function(err) {
+      console.log(err)
+    }})
+
+    const params = {
+      'createToken': 'false',
+      'amount': widget.settings['donation_value' + selected_value] + '00',
+      'customerData': 'true',
+      'paymentMethods': widget.settings.payment_methods === 'true' ? 'credit_card,boleto' : 'credit_card',
+      'uiColor': main_color,
+      'paymentButtonText': widget.settings.button_text
+    }
+    checkout.open(params)
   }
 
   renderButton() {
     const { configurable, widget } = this.props
     const { loading, success, selected_value } = this.state
 
-    let button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
-    let title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
-    let donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
-    let donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
-    let donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
-    let donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
-    let donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
+    const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
+    const title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
+    const donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
+    const donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
+    const donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
+    const donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
+    const donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
 
     if (!configurable) {
       return (

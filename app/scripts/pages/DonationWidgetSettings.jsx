@@ -47,8 +47,7 @@ export default class DonationWidgetSettings extends React.Component {
       selectedColorPicker: '#ffffff'
     }
 
-    // this.handleColorClick = this.handleColorClick.bind(this)
-    // this.handleToggleColorPickerClick = this.handleToggleColorPickerClick.bind(this)
+    this.handleColorClick = this.handleColorClick.bind(this)
 
     this.props.initializeForm({
       title_text: '',
@@ -170,23 +169,9 @@ export default class DonationWidgetSettings extends React.Component {
       )
     }
   }
-  //
-  // handleToggleColorPickerClick(e) {
-  //   e.preventDefault()
-  //   this.setState({ displayColorPicker: !this.state.displayColorPicker })
-  // }
-  //
-  // handleClose() {
-  //   this.setState({ displayColorPicker: false });
-  // }
 
-  handleColorClick(color, e) {
-    const { handleChange } = this.props
-    const t = handleChange('main_color')
-    console.log(this.props, 'main_color', '#' + color.hex, e)
-
-
-    // t('#' + color.hex)
+  handleColorClick(color) {
+    this.setState({selectedColorPicker: '#' + color.hex})
   }
 
   renderButtonTextLength() {
@@ -219,9 +204,10 @@ export default class DonationWidgetSettings extends React.Component {
       dirty
     } = this.props
 
-    const widget = this.widget()
+    const {
+      selectedColorPicker
+    } = this.state
 
-    //           <button className="inline-block" onClick={this.handleToggleColorPickerClick}>Pick Color</button>
     return (
       <form onSubmit={::this.handleSubmit}>
         <Label htmlFor="title_text">Título do bloco de doação</Label>
@@ -244,10 +230,11 @@ export default class DonationWidgetSettings extends React.Component {
             id="main_color"
             type="text"
             className="field-light inline-block h3 mt1"
-            value={main_color}
+            value={selectedColorPicker}
+            onChange={handleChange('main_color')}
             style={{height: '48px'}} />
           <ColorPicker
-            color={main_color}
+            color={selectedColorPicker}
             onChangeComplete={::this.handleColorClick}
             type="sketch" />
         </div>
