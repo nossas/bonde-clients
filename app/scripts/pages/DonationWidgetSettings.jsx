@@ -59,6 +59,7 @@ export default class DonationWidgetSettings extends React.Component {
       donation_value3: '',
       donation_value4: '',
       donation_value5: '',
+      recurring_period: 1,
       payment_type: 'unique',
       payment_methods: 'false'})
   }
@@ -78,6 +79,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
+          recurring_period,
           payment_type,
           payment_methods
         } = (widget.settings || {
@@ -90,6 +92,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: '',
           donation_value4: '',
           donation_value5: '',
+          recurring_period: 1,
           payment_type: 'unique',
           payment_methods: 'false'
         })
@@ -103,6 +106,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
+          recurring_period,
           payment_type,
           payment_methods
         })
@@ -145,6 +149,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: data.donation_value3,
           donation_value4: data.donation_value4,
           donation_value5: data.donation_value5,
+          recurring_period: data.recurring_period,
           payment_type: data.payment_type,
           payment_methods: data.payment_methods
         } }
@@ -159,6 +164,7 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value3: data.donation_value3,
         donation_value4: data.donation_value4,
         donation_value5: data.donation_value5,
+        recurring_period: data.recurring_period,
         payment_type: data.payment_type,
         payment_methods: data.payment_methods
       })
@@ -201,6 +207,7 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value3,
         donation_value4,
         donation_value5,
+        recurring_period,
         payment_methods,
         payment_type
       },
@@ -244,10 +251,37 @@ export default class DonationWidgetSettings extends React.Component {
               onChange={handleChange('payment_type')} />
             Usuário escolhe
           </p>
-
-          <Label htmlFor="payment_methods">conta bancária</Label>
-          <p className="mb3"><em>Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</em></p>
         </div>
+
+        {(payment_type == 'recurring' || payment_type == 'users_choice') ?
+        <div className="sm-col sm-col-10">
+          <Label htmlFor="recurring_period">Intervalo da recorrência</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <p className=" mt1 mb3">
+            <input
+              name="recurring_period"
+              type="radio"
+              value="1"
+              checked={recurring_period == 1}
+              onChange={handleChange('recurring_period')}
+              onBlur={handleBlur('recurring_period')} />
+            Mensal&nbsp;&nbsp;
+            <input
+              name="recurring_period"
+              type="radio"
+              checked={recurring_period == 6}
+              value="6"
+              onChange={handleChange('recurring_period')} />
+            Semestral&nbsp;&nbsp;
+            <input
+              name="recurring_period"
+              type="radio"
+              checked={recurring_period == 12}
+              value="12"
+              onChange={handleChange('recurring_period')} />
+            Anual
+          </p>
+        </div> : ''}
 
         <Label htmlFor="title_text">Título do bloco de doação</Label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
