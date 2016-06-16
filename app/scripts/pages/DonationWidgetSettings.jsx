@@ -59,6 +59,7 @@ export default class DonationWidgetSettings extends React.Component {
       donation_value3: '',
       donation_value4: '',
       donation_value5: '',
+      payment_type: 'unique',
       payment_methods: 'false'})
   }
 
@@ -77,6 +78,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
+          payment_type,
           payment_methods
         } = (widget.settings || {
           title_text: '',
@@ -88,6 +90,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: '',
           donation_value4: '',
           donation_value5: '',
+          payment_type: 'unique',
           payment_methods: 'false'
         })
         this.props.initializeForm({
@@ -100,6 +103,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3,
           donation_value4,
           donation_value5,
+          payment_type,
           payment_methods
         })
         this.setState({initializing: false, selectedColorPicker: main_color})
@@ -141,6 +145,7 @@ export default class DonationWidgetSettings extends React.Component {
           donation_value3: data.donation_value3,
           donation_value4: data.donation_value4,
           donation_value5: data.donation_value5,
+          payment_type: data.payment_type,
           payment_methods: data.payment_methods
         } }
       })
@@ -154,6 +159,7 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value3: data.donation_value3,
         donation_value4: data.donation_value4,
         donation_value5: data.donation_value5,
+        payment_type: data.payment_type,
         payment_methods: data.payment_methods
       })
     } else {
@@ -195,7 +201,8 @@ export default class DonationWidgetSettings extends React.Component {
         donation_value3,
         donation_value4,
         donation_value5,
-        payment_methods
+        payment_methods,
+        payment_type
       },
       errors: { callToAction: callToActionError, buttonText: buttonTextError },
       touched: { callToAction: callToActionTouched, buttonText: buttonTextTouched },
@@ -210,6 +217,38 @@ export default class DonationWidgetSettings extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
+        <div className="sm-col sm-col-10">
+          <Label htmlFor="payment_type">Tipo de doação</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <p className=" mt1 mb3">
+            <input
+              name="payment_type"
+              type="radio"
+              value="unique"
+              checked={payment_type == 'unique'}
+              onChange={handleChange('payment_type')}
+              onBlur={handleBlur('payment_type')} />
+            Única&nbsp;&nbsp;
+            <input
+              name="payment_type"
+              type="radio"
+              checked={payment_type == 'recurring'}
+              value="recurring"
+              onChange={handleChange('payment_type')} />
+            Recorrente&nbsp;&nbsp;
+            <input
+              name="payment_type"
+              type="radio"
+              checked={payment_type == 'users_choice'}
+              value="users_choice"
+              onChange={handleChange('payment_type')} />
+            Usuário escolhe
+          </p>
+
+          <Label htmlFor="payment_methods">conta bancária</Label>
+          <p className="mb3"><em>Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</em></p>
+        </div>
+
         <Label htmlFor="title_text">Título do bloco de doação</Label>
         {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
         <input
