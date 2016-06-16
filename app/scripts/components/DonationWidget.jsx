@@ -34,6 +34,9 @@ export default class DonationWidget extends React.Component {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
+    const { widget } = this.props
+    const default_donation_value = (widget.settings ? widget.settings.default_donation_value : 1)
+    this.setState({selected_value: Number(default_donation_value)})
   }
 
   handleMouseEnter() {
@@ -52,7 +55,7 @@ export default class DonationWidget extends React.Component {
   }
 
   handleClickSetValueDonation(v) {
-    this.setState({selected_value: v})
+    this.setState({selected_value: Number(v)})
   }
 
   handleClickDonate() {
