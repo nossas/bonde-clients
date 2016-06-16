@@ -24,6 +24,7 @@ export default class DonationWidget extends React.Component {
       hasMouseOver: false,
       loading: false,
       success: false,
+      selected_value: 1,
       errors: []
     }
   }
@@ -32,6 +33,9 @@ export default class DonationWidget extends React.Component {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
+    const { widget } = this.props
+    const default_donation_value = (widget.settings ? widget.settings.default_donation_value : 1)
+    this.setState({selected_value: Number(default_donation_value)})
   }
 
   handleMouseEnter() {
@@ -47,6 +51,10 @@ export default class DonationWidget extends React.Component {
     if (editable) {
       this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
     }
+  }
+
+  handleClickSetValueDonation(v) {
+    this.setState({selected_value: Number(v)})
   }
 
   handleClickDonate() {
@@ -79,7 +87,7 @@ export default class DonationWidget extends React.Component {
 
   renderButton() {
     const { configurable, widget } = this.props
-    const { loading, success } = this.state
+    const { loading, success, selected_value } = this.state
 
     const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
     const title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
@@ -94,7 +102,12 @@ export default class DonationWidget extends React.Component {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
 
-          <DonationWidgetValues configurable={configurable} widget={widget}  />
+          <DonationWidgetValues
+            selectedValue={selected_value}
+            handleClickSetValueDonation={::this.handleClickSetValueDonation}
+            configurable={configurable}
+            widget={widget}
+          />
 
           <a href="#" onClick={::this.handleClickDonate} className="caps button bg-darken-4 p2 full-width mt1 mb1 ">{button_text}</a>
         </div>
