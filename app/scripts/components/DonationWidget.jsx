@@ -111,7 +111,7 @@ export default class DonationWidget extends React.Component {
     const donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
     const donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
     const donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
-
+    const main_color = (widget.settings ? widget.settings.main_color : '#54d0f6')
     const payment_type = (widget.settings ? widget.settings.payment_type : 'unique')
     const recurring_period = (widget.settings ? widget.settings.recurring_period : 1)
     const periodLabel = (payment_type === 'unique' || selected_payment_type === 'unique' ? '' : ' / mês')
@@ -119,23 +119,60 @@ export default class DonationWidget extends React.Component {
     if (!configurable) {
       return (
         <div className="donation center clearfix">
-          <h2 className="mb3">{title_text}</h2>
+          <h2 className="p2 m0" style={{backgroundColor: main_color}}>{title_text}</h2>
           <script dangerouslySetInnerHTML={{__html: `
 (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
+          <div className="p3">
 
-          {donation_value1 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 1)} className={selected_value === 1 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value1 + periodLabel}</a> : ''}
-          {donation_value2 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 2)} className={selected_value === 2 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value2 + periodLabel}</a> : ''}
-          {donation_value3 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 3)} className={selected_value === 3 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value3 + periodLabel}</a> : ''}
-          {donation_value4 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value4 + periodLabel}</a> : ''}
-          {donation_value5 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value5 + periodLabel}</a> : ''}
+          {donation_value1 > 0 ? <a href="#"
+            onClick={::this.handleClickSetValueDonation.bind(this, 1)}
+            style={selected_value === 1 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
+            className={selected_value === 1 ? 'value-option block mb2 py1 full-width bold active' : 'value-option block mb2 py1 full-width bold bg-darken-1'}>
+            {"R$ " + donation_value1 + periodLabel}</a>
+            : ''}
+          {donation_value2 > 0 ? <a href="#"
+            onClick={::this.handleClickSetValueDonation.bind(this, 2)}
+            style={selected_value === 2 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
+            className={selected_value === 2 ? 'value-option block mb2 py1 full-width bold active' : 'value-option block mb2 py1 full-width bold bg-darken-1'}>
+            {"R$ " + donation_value2 + periodLabel}</a>
+            : ''}
+          {donation_value3 > 0 ? <a href="#"
+            onClick={::this.handleClickSetValueDonation.bind(this, 3)}
+            style={selected_value === 3 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
+            className={selected_value === 3 ? 'value-option block mb2 py1 full-width bold active' : 'value-option block mb2 py1 full-width bold bg-darken-1'}>
+            {"R$ " + donation_value3 + periodLabel}</a>
+            : ''}
+          {donation_value4 > 0 ? <a href="#"
+            onClick={::this.handleClickSetValueDonation.bind(this, 4)}
+            style={selected_value === 4 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
+            className={selected_value === 4 ? 'value-option block mb2 py1 full-width bold active' : 'value-option block mb2 py1 full-width bold bg-darken-1'}>
+            {"R$ " + donation_value4 + periodLabel}</a>
+            : ''}
+          {donation_value5 > 0 ? <a href="#"
+            onClick={::this.handleClickSetValueDonation.bind(this, 5)}
+            style={selected_value === 5 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
+            className={selected_value === 5 ? 'value-option block mb2 py1 full-width bold active' : 'value-option block mb2 py1 full-width bold bg-darken-1'}>
+            {"R$ " + donation_value5 + periodLabel}</a>
+            : ''}
 
-          <a href="#" onClick={::this.handleClickDonate} className="caps button bg-darken-4 p2 full-width mt1 mb1 ">{button_text}</a>
+          <a href="#" onClick={::this.handleClickDonate} style={{backgroundColor: main_color}} className="caps button bg-darken-4 p2 full-width">{button_text}</a>
+          </div>
         </div>
       )
     }
+  }
+
+  convertHex(hex,opacity){
+    hex = hex.replace('#','')
+    let r = parseInt(hex.substring(0,2), 16)
+    let g = parseInt(hex.substring(2,4), 16)
+    let b = parseInt(hex.substring(4,6), 16)
+
+    let result = 'rgba('+r+','+g+','+b+','+opacity/100+')'
+    return result
   }
 
   renderOverlay() {
@@ -153,7 +190,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
   renderForm() {
     const { editable, configurable } = this.props
-    const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
+    const className = classnames({'relative': editable || !configurable})
 
     return (
       <div>
@@ -182,7 +219,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     return (
       <div>
         <div
-          className={`widget ${headerFont}-header`}
+          className={`bg-white widget ${headerFont}-header`}
           style={(editable ? {cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}

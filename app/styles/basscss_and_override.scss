@@ -44,6 +44,17 @@ box-sizing: border-box;
 background-color:#CAEFF2;
 }
 
+#content .widget .donation {
+  .value-option {
+    color: #b0b0b0;
+    border-radius: .3rem;
+    box-sizing: border-box;
+    border-width: .3rem;
+    border-style: solid;
+    border-color: #fff;
+  }
+}
+
 // DÁ EFEITO EM BOTÕES COM IMAGEM
 
 .widget a img{
