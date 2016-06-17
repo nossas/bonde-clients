@@ -1,0 +1,24 @@
+
+#content .widget .donation {
+  a:hover {
+    text-decoration: none;
+  }
+  a {
+    color: #b0b0b0;
+    &.button {
+      color: #fff;
+    }
+  }
+  .payment-type {
+    span,img {
+      display: inline-block;
+    }
+  }
+  .value-option {
+    border-radius: .3rem;
+    box-sizing: border-box;
+    border-width: .3rem;
+    border-style: solid;
+    border-color: #fff;
+  }
+}
