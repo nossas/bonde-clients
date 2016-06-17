@@ -18,7 +18,10 @@
     height: 2.2rem;
     display: inline-block;
     margin: 0 .5em 0 0;
-    opacity: .8;
+    filter:alpha(opacity=50);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
+    opacity:.50;
+
   }
   .icon-payment-unique {
     background-image: url('./../scripts/components/DonationWidget/donation-unique.png');

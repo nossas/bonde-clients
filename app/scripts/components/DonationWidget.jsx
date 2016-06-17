@@ -8,6 +8,7 @@ import * as DonationActions from './../actions/DonationActions'
 import TellAFriend from './shared/TellAFriend.jsx'
 
 @reactMixin.decorate(Navigation)
+
 // @connect(state => ({ auth: state.auth, form: state.loginForm }))
 
 export default class DonationWidget extends React.Component {
