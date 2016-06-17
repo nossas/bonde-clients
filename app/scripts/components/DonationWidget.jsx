@@ -26,7 +26,7 @@ export default class DonationWidget extends React.Component {
       loading: false,
       success: false,
       selected_value: 1,
-      selected_payment_type: '',
+      selected_payment_type: 'recurring',
       errors: []
     }
   }
@@ -125,8 +125,8 @@ export default class DonationWidget extends React.Component {
     const periodLabelCurrent = periodLabelOptions[recurring_period]
     const periodLabel = (payment_type === 'unique' || selected_payment_type === 'unique' ? '' : periodLabelCurrent)
 
-    const donationRecurringImage = require('./DonationWidget/donation-recurring.svg')
-    const donationUniqueImage = require('./DonationWidget/donation-unique.svg')
+    // const donationRecurringImage = require('./DonationWidget/donation-recurring.svg')
+    // const donationUniqueImage = require('./DonationWidget/donation-unique.svg')
 
     if (!configurable) {
       return (
@@ -139,17 +139,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
           <div className="p3 relative">
 
-            {payment_type === 'users_choice' ? <div className="m1">
+            {payment_type === 'users_choice' ? <div className="mb2 clearfix">
               <a href="#" onClick={::this.handleClickSetTypeDonation.bind(this, 'recurring')}
                 style={selected_payment_type === 'recurring' ? {color: main_color} : {}}
-                className={selected_payment_type === 'recurring' ? 'bold p1 col-6 active' : 'bold p1 col-6'}>
-                <img src={donationRecurringImage} />
+                className={selected_payment_type === 'recurring' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
+                <i className="icon-payment-recurring" />
                 {'Apoiar todo ' + periodLabelCurrent}
               </a>
               <a href="#" onClick={::this.handleClickSetTypeDonation.bind(this, 'unique')}
                 style={selected_payment_type === 'unique' ? {color: main_color} : {}}
-                className={selected_payment_type === 'unique' ? 'bold p1 col-6 active' : 'bold p1 col-6'}>
-                <img src={donationUniqueImage} />
+                className={selected_payment_type === 'unique' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
+                <i className="icon-payment-unique" />
                 Doação única
               </a>
             </div> : ''}
