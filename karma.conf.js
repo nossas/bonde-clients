@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    './app/scripts/tests/globals.js',
+      './app/scripts/tests/globals.js',
       'webpack.test.config.js'
     ],
 
@@ -18,7 +18,7 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
 
       resolve: {
-        extensions: [ '', '.js', '.jsx' ]
+        extensions: [ '', '.js', '.jsx', '.json' ]
       },
 
       module: {
@@ -27,15 +27,15 @@ module.exports = function(config) {
             test: /\.jsx?$/,
             exclude: /node_modules/,
             loader: 'babel-loader?optional=runtime'
-          }
+          },
+          { test: /\.json$/, loader: 'json' }
         ]
       },
 
       externals: {
-        'cheerio': 'window',
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': true
+        'react/lib/ReactContext': 'window'
       },
 
       plugins: [
