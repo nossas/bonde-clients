@@ -44,7 +44,7 @@ export default class DonationWidgetSettings extends React.Component {
       hasSubmitted: false,
       error: null,
       displayColorPicker: false,
-      selectedColorPicker: '#ffffff'
+      selectedColorPicker: '#54d0f6'
     }
 
     this.handleColorClick = this.handleColorClick.bind(this)
@@ -52,14 +52,14 @@ export default class DonationWidgetSettings extends React.Component {
     this.props.initializeForm({
       title_text: '',
       button_text: '',
-      main_color: '#ffffff',
+      main_color: '#54d0f6',
       default_donation_value: 1,
       donation_value1: '',
       donation_value2: '',
       donation_value3: '',
       donation_value4: '',
       donation_value5: '',
-      recurring_period: 1,
+      recurring_period: 30,
       payment_type: 'unique',
       payment_methods: 'false'})
   }
@@ -85,14 +85,14 @@ export default class DonationWidgetSettings extends React.Component {
         } = (widget.settings || {
           title_text: '',
           button_text: '',
-          main_color: '#ffffff',
+          main_color: '#54d0f6',
           default_donation_value: 1,
           donation_value1: '',
           donation_value2: '',
           donation_value3: '',
           donation_value4: '',
           donation_value5: '',
-          recurring_period: 1,
+          recurring_period: 30,
           payment_type: 'unique',
           payment_methods: 'false'
         })
@@ -226,7 +226,19 @@ export default class DonationWidgetSettings extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <div className="sm-col sm-col-10">
+        <div className="sm-col sm-col-12">
+          <Label htmlFor="title_text">Título do bloco de doação</Label>
+          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
+          <input
+            id="title_text"
+            type="text"
+            className="field-light block h3 full-width mt1 mb3"
+            placeholder="Ex.: Escolha um valor e contribua agora!"
+            style={{height: '48px'}}
+            value={title_text}
+            onChange={handleChange('title_text')}
+            onBlur={handleBlur('title_text')} />
+
           <Label htmlFor="payment_type">Tipo de doação</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <p className=" mt1 mb3">
@@ -256,7 +268,7 @@ export default class DonationWidgetSettings extends React.Component {
         </div>
 
         {(payment_type == 'recurring' || payment_type == 'users_choice') ?
-        <div className="sm-col sm-col-10">
+        <div className="sm-col sm-col-12">
           <Label htmlFor="recurring_period">Intervalo da recorrência</Label>
           {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
           <p className=" mt1 mb3">
@@ -285,25 +297,13 @@ export default class DonationWidgetSettings extends React.Component {
           </p>
         </div> : ''}
 
-        <Label htmlFor="title_text">Título do bloco de doação</Label>
-        {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-        <input
-          id="title_text"
-          type="text"
-          className="field-light block h3 full-width mt1 mb3"
-          placeholder="Ex.: Escolha um valor e contribua agora!"
-          style={{height: '48px'}}
-          value={title_text}
-          onChange={handleChange('title_text')}
-          onBlur={handleBlur('title_text')} />
-
         <div className="clearfix full-width meurio-scheme mb3">
           <Label htmlFor="main_color">Defina a cor da página de pagamento</Label>
+          <p><small className="muted"><em>Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE. </em></small></p>
           <div className="clearfix"></div>
-          {callToActionError && callToActionTouched && <span className="red ml2">{callToActionError}</span>}
-          <input
+            <input
             id="main_color"
-            type="text"
+            type="hidden"
             className="field-light inline-block h3 mt1"
             value={selectedColorPicker}
             onChange={handleChange('main_color')}
@@ -331,7 +331,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value1"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$20"
+              placeholder="Ex.: R$20"
               style={{height: '48px', width: '90%'}}
               value={donation_value1}
               onChange={handleChange('donation_value1')}
@@ -351,7 +351,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value2"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$50"
+              placeholder="Ex.: R$50"
               style={{height: '48px', width: '90%'}}
               value={donation_value2}
               onChange={handleChange('donation_value2')}
@@ -371,7 +371,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value3"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$100"
+              placeholder="Ex.: R$100"
               style={{height: '48px', width: '90%'}}
               value={donation_value3}
               onChange={handleChange('donation_value3')}
@@ -391,7 +391,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value4"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$200"
+              placeholder="Ex.: R$200"
               style={{height: '48px', width: '90%'}}
               value={donation_value4}
               onChange={handleChange('donation_value4')}
@@ -411,7 +411,7 @@ export default class DonationWidgetSettings extends React.Component {
               id="donation_value5"
               type="number"
               className="field-light block h3 mt1 mb3"
-              placeholder="R$500"
+              placeholder="Ex.: R$500"
               style={{height: '48px', width: '90%'}}
               value={donation_value5}
               onChange={handleChange('donation_value5')}
