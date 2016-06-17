@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
+// import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
 import * as DonationActions from './../actions/DonationActions'
 import TellAFriend from './shared/TellAFriend.jsx'
-import DonationWidgetValues from './DonationWidgetValues.jsx'
 
 @reactMixin.decorate(Navigation)
+// @connect(state => ({ auth: state.auth, form: state.loginForm }))
 
 export default class DonationWidget extends React.Component {
   static propTypes = {
@@ -24,6 +25,7 @@ export default class DonationWidget extends React.Component {
       hasMouseOver: false,
       loading: false,
       success: false,
+      selected_value: 1,
       errors: []
     }
   }
@@ -32,6 +34,9 @@ export default class DonationWidget extends React.Component {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
+    const { widget } = this.props
+    const default_donation_value = (widget.settings ? widget.settings.default_donation_value : 1)
+    this.setState({selected_value: Number(default_donation_value)})
   }
 
   handleMouseEnter() {
@@ -47,6 +52,10 @@ export default class DonationWidget extends React.Component {
     if (editable) {
       this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
     }
+  }
+
+  handleClickSetValueDonation(v) {
+    this.setState({selected_value: Number(v)})
   }
 
   handleClickDonate() {
@@ -79,10 +88,15 @@ export default class DonationWidget extends React.Component {
 
   renderButton() {
     const { configurable, widget } = this.props
-    const { loading, success } = this.state
+    const { loading, success, selected_value } = this.state
 
     const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
     const title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
+    const donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
+    const donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
+    const donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
+    const donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
+    const donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
 
     if (!configurable) {
       return (
@@ -94,7 +108,11 @@ export default class DonationWidget extends React.Component {
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
 
-          <DonationWidgetValues configurable={configurable} widget={widget}  />
+          {donation_value1 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 1)} className={selected_value === 1 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value1}</a> : ''}
+          {donation_value2 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 2)} className={selected_value === 2 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value2}</a> : ''}
+          {donation_value3 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 3)} className={selected_value === 3 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value3}</a> : ''}
+          {donation_value4 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 4)} className={selected_value === 4 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value4}</a> : ''}
+          {donation_value5 > 0 ? <a href="#" onClick={::this.handleClickSetValueDonation.bind(this, 5)} className={selected_value === 5 ? 'p1 mx-auto block mb2 col-10 bold bg-darken-3' : 'p1 mx-auto block mb2 col-10 bold bg-darken-2'}>{"R$ " + donation_value5}</a> : ''}
 
           <a href="#" onClick={::this.handleClickDonate} className="caps button bg-darken-4 p2 full-width mt1 mb1 ">{button_text}</a>
         </div>
