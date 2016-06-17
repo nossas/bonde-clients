@@ -96,6 +96,7 @@ export default class DonationWidgetSettings extends React.Component {
           payment_type: 'unique',
           payment_methods: 'false'
         })
+        this.setState({initializing: false, selectedColorPicker: main_color})
         this.props.initializeForm({
           title_text,
           button_text,
@@ -110,8 +111,8 @@ export default class DonationWidgetSettings extends React.Component {
           payment_type,
           payment_methods
         })
-        this.setState({initializing: false, selectedColorPicker: main_color})
       }
+
       this.state.submitting && this.setState({submitting: false})
       this.state.submitting && this.setState({hasSubmitted: true})
     }
@@ -132,6 +133,7 @@ export default class DonationWidgetSettings extends React.Component {
     const widget = this.widget()
     const { settings } = widget
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
+    const { selectedColorPicker } = this.state
     this.setState({ submitting: true, hasSubmitted: false, error: null })
     if (valid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -142,7 +144,7 @@ export default class DonationWidgetSettings extends React.Component {
         widget: { settings: {
           title_text: data.title_text,
           button_text: data.button_text,
-          main_color: data.main_color,
+          main_color: selectedColorPicker,
           default_donation_value: data.default_donation_value,
           donation_value1: data.donation_value1,
           donation_value2: data.donation_value2,
