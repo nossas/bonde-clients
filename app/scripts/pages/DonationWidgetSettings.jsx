@@ -262,21 +262,21 @@ export default class DonationWidgetSettings extends React.Component {
               name="recurring_period"
               type="radio"
               value="1"
-              checked={recurring_period == 1}
+              checked={recurring_period == 30}
               onChange={handleChange('recurring_period')}
               onBlur={handleBlur('recurring_period')} />
             Mensal&nbsp;&nbsp;
             <input
               name="recurring_period"
               type="radio"
-              checked={recurring_period == 6}
+              checked={recurring_period == 180}
               value="6"
               onChange={handleChange('recurring_period')} />
             Semestral&nbsp;&nbsp;
             <input
               name="recurring_period"
               type="radio"
-              checked={recurring_period == 12}
+              checked={recurring_period == 365}
               value="12"
               onChange={handleChange('recurring_period')} />
             Anual
