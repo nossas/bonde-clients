@@ -106,15 +106,18 @@ export default class DonationWidget extends React.Component {
 
     const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
     const title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
+
     const donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
     const donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
     const donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
     const donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
     const donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
     const main_color = (widget.settings ? widget.settings.main_color : '#54d0f6')
+
     const payment_type = (widget.settings ? widget.settings.payment_type : 'unique')
     const recurring_period = (widget.settings ? widget.settings.recurring_period : 1)
-    const periodLabel = (payment_type === 'unique' || selected_payment_type === 'unique' ? '' : ' / mês')
+    const periodLabelOptions = {30:' / mês', 180: ' / semestral', 365: ' / anual'}
+    const periodLabel = (payment_type === 'unique' || selected_payment_type === 'unique' ? '' : periodLabelOptions[recurring_period])
 
     if (!configurable) {
       return (
