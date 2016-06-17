@@ -11,9 +11,7 @@ export function finishTransaction (params) {
           card_hash: params.card_hash,
           payment_method: params.payment_method,
           amount: params.amount,
-          customer: params.customer,
-          subscription: (params.payment_type !== 'unique' ? true : false),
-          period: params.recurring_period
+          customer: params.customer
         }
       },
       success: function (data, textStatus, jqXHR) {
