@@ -5,11 +5,11 @@ import * as WidgetActions from './../actions/WidgetActions'
 
 export default class DraftWidget extends React.Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired
+    dispatch     : PropTypes.func.isRequired,
+    auth         : PropTypes.object.isRequired,
+    mobilization : PropTypes.object.isRequired,
+    widget       : PropTypes.object.isRequired,
+    editable     : PropTypes.bool.isRequired
   }
 
   constructor(props, context) {
