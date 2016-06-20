@@ -31,6 +31,11 @@ describe('DraftWidget', () => {
 
     describe('#render', () => {
       it('should render a draft widget containing html elements passing editable prop enabled', () => {
+<<<<<<< HEAD
+=======
+        props.editable = true
+
+>>>>>>> Add tests and change file name.
         expect(wrapper.find('div.widget').length).to.equal(1)
         expect(wrapper.find('div.widget h4').length).to.equal(1)
         expect(wrapper.find('div.widget button').length).to.equal(3)
@@ -70,6 +75,7 @@ describe('DraftWidget', () => {
         expect(wrapper.state().loading).to.equal(true)
       })
     })
+<<<<<<< HEAD
 
     describe('#renderLoading', () => {
       it('should return rendered Loading component if `state.loading` is true', () => {
@@ -92,5 +98,7 @@ describe('DraftWidget', () => {
         expect(wrapper.find('div.widget button').length).to.equal(0)
       })
     })
+=======
+>>>>>>> Add tests and change file name.
   })
 })
