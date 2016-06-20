@@ -68,7 +68,6 @@ describe('FormWidgetInput', () => {
       props.field = { kind: 'greetings', placeholder: 'new message' }
 
       let wrapper = shallow(<FormWidgetInput {...props} />)
-      console.log(wrapper.find('p'))
       expect(wrapper.find('p')).to.have.length(1)
 
       let node = wrapper.find('p').at(0)
