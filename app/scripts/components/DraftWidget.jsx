@@ -80,13 +80,19 @@ export default class DraftWidget extends React.Component {
       return (
         <div className="widget border center p2" style={{borderStyle: 'dashed'}}>
           <h4>Escolha uma das opções abaixo</h4>
-          <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleContentClick}>
+          <button
+            className="caps button bg-darken-4 mt1 p2 full-width btn-content"
+            onClick={::this.handleContentClick}>
             Texto
           </button>
-          <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleFormClick}>
+          <button
+            className="caps button bg-darken-4 mt1 p2 full-width btn-form"
+            onClick={::this.handleFormClick}>
             Formulário
           </button>
-          <button className="caps button bg-darken-4 mt1 p2 full-width" onClick={::this.handleDonationClick}>
+          <button
+            className="caps button bg-darken-4 mt1 p2 full-width btn-donation"
+            onClick={::this.handleDonationClick}>
             Doação
           </button>
         </div>
