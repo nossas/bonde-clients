@@ -2,7 +2,7 @@ import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
 import { render, mount, shallow } from 'enzyme'
-import { DraftWidget } from './../../components'
+import { DraftWidget, Loading } from './../../components'
 import * as Paths from './../../Paths'
 
 let wrapper
@@ -31,8 +31,6 @@ describe('DraftWidget', () => {
 
     describe('#render', () => {
       it('should render a draft widget containing html elements passing editable prop enabled', () => {
-        props.editable = true
-
         expect(wrapper.find('div.widget').length).to.equal(1)
         expect(wrapper.find('div.widget h4').length).to.equal(1)
         expect(wrapper.find('div.widget button').length).to.equal(3)
@@ -70,6 +68,28 @@ describe('DraftWidget', () => {
         expect(updateKind.called).to.equal(true)
         expect(updateKind.calledWith('donation')).to.equal(true)
         expect(wrapper.state().loading).to.equal(true)
+      })
+    })
+
+    describe('#renderLoading', () => {
+      it('should return rendered Loading component if `state.loading` is true', () => {
+        wrapper.setState({ loading: true })
+        expect(wrapper.contains(<Loading />)).to.be.true
+      })
+    })
+  })
+
+  context('when it isn\'t editable', () => {
+    before(() => {
+      wrapper = shallow(<DraftWidget {...props} editable={false} />)
+    })
+
+    describe('#render', () => {
+      it('should render an empty div', () => {
+        expect(wrapper.contains(<div></div>)).to.be.true
+        expect(wrapper.find('div.widget').length).to.equal(0)
+        expect(wrapper.find('div.widget h4').length).to.equal(0)
+        expect(wrapper.find('div.widget button').length).to.equal(0)
       })
     })
   })
