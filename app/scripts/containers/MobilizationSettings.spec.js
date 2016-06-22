@@ -9,7 +9,7 @@ import MobilizationSettings from './MobilizationSettings'
 describe('MobilizationSettings', () => {
   let props = {
     mobilization: {},
-    location: '',
+    location: {},
     children: <div>Test</div>
   }
 
