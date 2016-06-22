@@ -19,8 +19,8 @@ export default class NavbarForm extends React.Component {
   }
 
   componentDidMount() {
-    this.refs.nameInput.focus()
-    this.refs.nameInput.select()
+    this.refs.nameInput.getDOMNode().focus()
+    this.refs.nameInput.getDOMNode().select()
     window.addEventListener('keyup', this.handleKeyUp)
   }
 

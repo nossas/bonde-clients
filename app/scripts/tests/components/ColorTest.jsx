@@ -1,11 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import TestUtils from 'react-addons-test-utils'
+import React from 'react/addons'
 import { Color } from './../../components'
+
+const { TestUtils } = React.addons
 
 let component
 
-const onClick = () => true
+const onClick = () => { alert('color was clicked!') }
 const props = {bgClass: 'bg-black', selectedClass: 'bg-white', onClick: onClick.bind(component)}
 
 describe('Color', () => {
@@ -14,7 +14,7 @@ describe('Color', () => {
       component = TestUtils.renderIntoDocument(
         <Color {...props} />
       )
-      const container = ReactDOM.findDOMNode(component).childNodes[0]
+      const container = React.findDOMNode(component).childNodes[0]
       expect(container.getAttribute('style')).to.be.null
       expect(component.props.onClick.toString()).to.equal(onClick.bind(component).toString())
     })
@@ -23,7 +23,7 @@ describe('Color', () => {
       component = TestUtils.renderIntoDocument(
         <Color {...props} selectedClass={'bg-black'} />
       )
-      const container = ReactDOM.findDOMNode(component).childNodes[0]
+      const container = React.findDOMNode(component).childNodes[0]
       expect(container.getAttribute('style')).to.contain('box-shadow')
     })
   })

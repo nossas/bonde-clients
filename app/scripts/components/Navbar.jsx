@@ -6,8 +6,8 @@ export default class Navbar extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.func,
-    auth: PropTypes.object,
+    auth: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     editable: PropTypes.bool
   }
 
@@ -26,9 +26,9 @@ export default class Navbar extends React.Component {
     })
 
     return (
-      visibleBlocks.map((block, i) => {
+      visibleBlocks.map((block) => {
         return (
-          <div key={i} className={classnames({'inline-block': !mobile})}>
+          <div className={classnames({'inline-block': !mobile})}>
             <NavbarEditionWrapper
               {...this.props}
               key={`navbar-edition-wrapper-${block.id}`}

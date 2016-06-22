@@ -1,26 +1,16 @@
-import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import React from 'react/addons'
 import ContentWidget from './../../components/ContentWidget.jsx'
 import classnames from 'classnames'
 
+const { TestUtils } = React.addons
 const mobilization = { header_font: 'ubuntu', body_font: 'open-sans' }
 const widget = {settings: {content: 'Clique aqui para editar...'}}
 let component
 
 describe('ContentWidget', function() {
-  const props = {
-    widget: widget,
-    editable: true,
-    mobilization: mobilization,
-    onEdit: () => {},
-    onCancelEdit: () => {},
-    dispatch: () => {},
-    auth: {}
-  }
-
   context('when it is editable', function() {
     before(function() {
-      component = TestUtils.renderIntoDocument(<ContentWidget {...props} />)
+      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable mobilization={mobilization} />)
     })
 
     describe('#enableEditor', function() {
@@ -83,10 +73,7 @@ describe('ContentWidget', function() {
     describe('#render', function() {
       it('should apply mobilization classes', () => {
         const { header_font: headerFont, body_font: bodyFont } = mobilization
-        const div = TestUtils.scryRenderedDOMComponentsWithClass(
-          component,
-          classnames(`${headerFont}-header`, `${bodyFont}-body`)
-        )
+        const div = TestUtils.scryRenderedDOMComponentsWithClass(component, classnames(`${headerFont}-header`, `${bodyFont}-body`))
         expect(div).to.have.length(1)
       })
     })
@@ -94,7 +81,7 @@ describe('ContentWidget', function() {
 
   context('when it is not editable', function() {
     it('should not initialize editor when the widget is not editable', function() {
-      component = TestUtils.renderIntoDocument(<ContentWidget {...props} editable={false} />)
+      component = TestUtils.renderIntoDocument(<ContentWidget widget={widget} editable={false} mobilization={mobilization} />)
       expect(component.state.editor).to.be.eql(null)
     })
   })
