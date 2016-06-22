@@ -1,6 +1,6 @@
-import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import React from 'react/addons'
 import { NavbarEditionWrapper, NavbarForm, NavbarButton } from './../../components'
+const { TestUtils } = React.addons
 
 const block = {}
 const mobilization = {}

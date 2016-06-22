@@ -1,7 +1,9 @@
 import React from 'react'
 
 export default function stubRouterContext(Component, props, stubs) {
-  const RouterStub = Object.assign({}, {
+  function RouterStub() { }
+
+  Object.assign(RouterStub, {
     makePath() {},
     makeHref() {},
     transitionTo() {},
@@ -19,7 +21,7 @@ export default function stubRouterContext(Component, props, stubs) {
 
   return React.createClass({
     childContextTypes: {
-      router: React.PropTypes.object,
+      router: React.PropTypes.func,
       routeDepth: React.PropTypes.number
     },
 

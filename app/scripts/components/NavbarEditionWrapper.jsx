@@ -7,8 +7,8 @@ export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
     block: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.func,
-    auth: PropTypes.object,
+    auth: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
     className: PropTypes.string
   }
 

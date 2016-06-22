@@ -1,33 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-
-const FormWidgetButton = ({ success, buttonText, loading, handleClick, mobilization: { body_font: bodyFont }  }) => {
-  return (
-    <div className={classnames(`${bodyFont}-body`)}>
-      <button
-        disabled={loading}
-        className="caps button bg-darken-4 p2 full-width mt1 mb2"
-        onClick={handleClick}>
-        {loading ? 'Enviando...' : buttonText }
-      </button>
-      { success &&
-        <div className="center">Sua ação foi registrada com sucesso!</div> }
-    </div>
-  )
-}
-
-FormWidgetButton.propTypes = {
-  success: PropTypes.bool.isRequired,
-  buttonText: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  mobilization: PropTypes.object.isRequired
-}
-
-export default FormWidgetButton
-
-/*export default class FormWidgetButton extends React.Component {
+export default class FormWidgetButton extends React.Component {
   static propTypes = {
     success: PropTypes.bool.isRequired,
     buttonText: PropTypes.string,
@@ -37,7 +11,13 @@ export default FormWidgetButton
   }
 
   render() {
-    const  = this.props
+    const {
+      success,
+      buttonText,
+      loading,
+      handleClick,
+      mobilization: { body_font: bodyFont }
+    } = this.props
 
     return (
       <div className={classnames(`${bodyFont}-body`)}>
@@ -53,4 +33,3 @@ export default FormWidgetButton
     )
   }
 }
-*/
