@@ -4,46 +4,8 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 import { render, mount, shallow } from 'enzyme'
 
-import MobilizationBasicsForm from './MobilizationBasicsForm'
-import * as Paths from '../Paths'
-
-var ReactRouterContext = function ReactRouterContext(Component, props, stubs) {
-  function RouterStub() {}
-
-  objectAssign(RouterStub, {
-    makePath: function makePath() {},
-    makeHref: function makeHref() {},
-    transitionTo: function transitionTo() {},
-    replaceWith: function replaceWith() {},
-    goBack: function goBack() {},
-    getCurrentPath: function getCurrentPath() {},
-    getCurrentRoutes: function getCurrentRoutes() {},
-    getCurrentPathname: function getCurrentPathname() {},
-    getCurrentParams: function getCurrentParams() {},
-    getCurrentQuery: function getCurrentQuery() {},
-    isActive: function isActive() {},
-    getRouteAtDepth: function getRouteAtDepth() {},
-    setRouteComponentAtDepth: function setRouteComponentAtDepth() {}
-  }, stubs)
-
-  return React.createClass({
-    childContextTypes: {
-      router: React.PropTypes.func,
-      routeDepth: React.PropTypes.number
-    },
-
-    getChildContext: function getChildContext() {
-      return {
-        router: RouterStub,
-        routeDepth: 0
-      }
-    },
-
-    render: function render() {
-      return React.createElement(Component, props)
-    }
-  })
-}
+import MobilizationBasicsForm from './MobilizationBasicsForm.jsx'
+import * as Paths from '../../Paths'
 
 describe('MobilizationBasicsForm', () => {
   const state = {
@@ -76,8 +38,12 @@ describe('MobilizationBasicsForm', () => {
 
   describe('initial state rendering', () => {
 
-    beforeEach(function() {
+    beforeEach(() => {
       wrapper = mount(<MobilizationBasicsForm { ...props } />)
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
     })
 
     context('when it is waiting for initialization', () => {
@@ -109,13 +75,6 @@ describe('MobilizationBasicsForm', () => {
       })
 
       context('form elements', () => {
-        beforeEach(() => {
-
-        })
-        afterEach(() => {
-
-        })
-
         it('should contains 2 `label`s inside form', () => {
           expect(wrapper.find('form label').length).to.equal(2)
         })
