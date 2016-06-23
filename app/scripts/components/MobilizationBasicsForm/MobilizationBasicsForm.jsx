@@ -8,7 +8,7 @@ import * as MobilizationActions from './../../actions/MobilizationActions'
 import * as Paths from './../../Paths'
 import { CloseButton } from './../'
 
-import { RenderInputLength } from './../FormUtils'
+import { RenderInputLength, RenderInputError } from './../FormUtils'
 
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
@@ -124,7 +124,7 @@ export default class MobilizationBasicsForm extends React.Component {
       <form onSubmit={::this.handleSubmit}>
         <label className="block h4 caps bold mb1 left">Nome</label>
         <RenderInputLength value={name} limit={100} />
-        {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
+        <RenderInputError error={nameError} touched={nameTouched} />
         <input
           type="text"
           className="field-light block h3 full-width mt1 mb2"
@@ -136,7 +136,7 @@ export default class MobilizationBasicsForm extends React.Component {
 
         <label className="block h4 caps bold mb1 left">Objetivo</label>
         <RenderInputLength value={name} limit={500} />
-        {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
+        <RenderInputError error={goalError} touched={goalTouched} />
         <textarea
           className="field-light block h3 full-width mt1 mb2"
           placeholder="Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois."
