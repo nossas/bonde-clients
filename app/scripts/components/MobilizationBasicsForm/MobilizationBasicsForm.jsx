@@ -8,7 +8,7 @@ import * as MobilizationActions from './../../actions/MobilizationActions'
 import * as Paths from './../../Paths'
 import { CloseButton } from './../'
 
-import { RenderInputLength, RenderInputError } from './../FormUtils'
+import { RenderInputLength, RenderInputError, RenderErrorMessage } from './../FormUtils'
 
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
@@ -88,14 +88,6 @@ export default class MobilizationBasicsForm extends React.Component {
     this.goBack()
   }
 
-  renderErrorMessage() {
-    if (this.state.error) {
-      return (
-        <div className="red center mt2">{this.state.error}</div>
-      )
-    }
-  }
-
   renderCancelButton() {
     if(this.props.mobilization) {
       return (
@@ -155,7 +147,7 @@ export default class MobilizationBasicsForm extends React.Component {
             value={this.state.submitting ? "Salvando..." : submitText} />
         </div>
 
-        {::this.renderErrorMessage()}
+        <RenderErrorMessage error={this.state.error} />
       </form>
     )
   }
