@@ -8,6 +8,8 @@ import * as MobilizationActions from './../../actions/MobilizationActions'
 import * as Paths from './../../Paths'
 import { CloseButton } from './../'
 
+import { RenderInputLength } from './../FormUtils'
+
 function mobilizationBasicsValidation(data) {
   const errors = { valid: true }
   if (!data.name) {
@@ -107,24 +109,6 @@ export default class MobilizationBasicsForm extends React.Component {
     }
   }
 
-  renderNameLength() {
-    const { data: {name} } = this.props
-    if(name && name.length > 0) {
-      return(
-        <div className={classnames('right h3', (name.length > 90 ? 'red' : null))}>{100 - name.length}</div>
-      )
-    }
-  }
-
-  renderGoalLength() {
-    const { data: {goal} } = this.props
-    if(goal && goal.length > 0) {
-      return(
-        <div className={classnames('right h3', (goal.length > 490 ? 'red' : null))}>{500 - goal.length}</div>
-      )
-    }
-  }
-
   renderForm() {
     const {
       data: { name, goal },
@@ -139,7 +123,7 @@ export default class MobilizationBasicsForm extends React.Component {
     return (
       <form onSubmit={::this.handleSubmit}>
         <label className="block h4 caps bold mb1 left">Nome</label>
-        { this.renderNameLength() }
+        <RenderInputLength value={name} limit={100} />
         {nameError && nameTouched && <span className="red ml2">{nameError}</span>}
         <input
           type="text"
@@ -151,7 +135,7 @@ export default class MobilizationBasicsForm extends React.Component {
           onBlur={handleBlur('name')} />
 
         <label className="block h4 caps bold mb1 left">Objetivo</label>
-        { this.renderGoalLength() }
+        <RenderInputLength value={name} limit={500} />
         {goalError && goalTouched && <span className="red ml2">{goalError}</span>}
         <textarea
           className="field-light block h3 full-width mt1 mb2"
