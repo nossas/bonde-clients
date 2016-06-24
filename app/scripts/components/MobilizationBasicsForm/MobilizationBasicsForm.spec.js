@@ -4,7 +4,7 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 import { render, mount, shallow } from 'enzyme'
 
-import MobilizationBasicsForm from './MobilizationBasicsForm.jsx'
+import MobilizationBasicsForm from './MobilizationBasicsForm'
 import * as Paths from '../../Paths'
 
 describe('MobilizationBasicsForm', () => {
