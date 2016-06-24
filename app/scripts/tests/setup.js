@@ -14,3 +14,10 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js'
 };
+
+////
+// Ignore specified extension types.
+////
+const noop = () => null
+require.extensions['.scss'] = noop
+require.extensions['.png'] = noop
