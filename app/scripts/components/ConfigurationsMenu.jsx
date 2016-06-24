@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import * as Paths from '../Paths'
-import { TabMenuItem } from './'
+import TabMenuItem from './TabMenuItem.jsx'
 
 
 const ConfigurationsMenu = ({ mobilization, location }) => {
