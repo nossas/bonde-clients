@@ -1,26 +1,17 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import reactMixin from 'react-mixin'
-import { Navigation } from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as Paths from './../Paths'
 import * as DonationActions from './../actions/DonationActions'
 import TellAFriend from './shared/TellAFriend.jsx'
 
-@reactMixin.decorate(Navigation)
-//@connect(state => ({ auth: state.auth, form: state.loginForm }))
 
-export default class DonationWidget extends React.Component {
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    configurable: PropTypes.bool,
-    hasNewField: PropTypes.bool
-  }
+class DonationWidget extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+    this.context = context
     this.state = {
       hasMouseOver: false,
       loading: false,
@@ -48,7 +39,7 @@ export default class DonationWidget extends React.Component {
 
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
+      this.context.router.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
@@ -57,6 +48,8 @@ export default class DonationWidget extends React.Component {
   }
 
   handleClickDonate() {
+    // Validar esse comportamente, talvez seja interessante separá-lo
+    // para que seja possivel testá-lo
     const { mobilization, widget, dispatch } = this.props;
     const { success, selected_value } = this.state;
     let that = this;
@@ -161,7 +154,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { success } = this.state
 
     return (
-      <div>
         <div
           className={`widget ${headerFont}-header`}
           style={(editable ? {cursor: 'pointer'} : null)}
@@ -170,7 +162,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           onClick={::this.handleClick}>
           { success ? this.renderThankyouText() : this.renderForm() }
         </div>
-      </div>
     )
   }
 }
+
+DonationWidget.contextTypes = {
+  router: PropTypes.object.isRequired,
+}
+
+DonationWidget.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool.isRequired,
+  configurable: PropTypes.bool,
+  hasNewField: PropTypes.bool
+}
+
+export default DonationWidget
