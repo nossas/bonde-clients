@@ -65,4 +65,20 @@ describe('DonationWidget', () => {
       expect(context.router.transitionTo.calledOnce).to.equal(true)
     })
   })
+
+  describe('overlay states', () => {
+
+    it('should change state.hasMouseOver when mouseEnter div', () => {
+      let wrapper = shallow(<DonationWidget {...props} />)
+      wrapper.simulate('mouseEnter')
+      expect(wrapper.state().hasMouseOver).to.equal(true)
+    })
+
+    it('should change state.hasMouseOver when mouseLeave div', () => {
+      let wrapper = shallow(<DonationWidget {...props} />)
+      wrapper.setState({ hasMouseOver: true })
+      wrapper.simulate('mouseLeave')
+      expect(wrapper.state().hasMouseOver).to.equal(false)
+    })
+  })
 })
