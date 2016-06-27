@@ -12,8 +12,8 @@ const RenderInputLength = ({ value, limit }) => {
 }
 
 RenderInputLength.propTypes = {
-  value: PropTypes.string.isRequired,
-  limit: PropTypes.number.isRequired
+  limit: PropTypes.number.isRequired,
+  value: PropTypes.string
 }
 
 export default RenderInputLength
