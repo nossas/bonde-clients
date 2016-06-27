@@ -11,9 +11,14 @@ describe('CloseButton', () => {
     dirty: undefined,
     path: undefined
   }
+  let context = {
+    router: {
+      transitionTo: sinon.spy()
+    }
+  }
 
   it('should render button with onClick', () => {
-    let wrapper = shallow(<CloseButton {...props} />)
+    let wrapper = shallow(<CloseButton {...props} />, { context })
     let node = wrapper.find('button').at(0)
     expect(node.props().onClick).to.be.ok
   })
@@ -24,7 +29,7 @@ describe('CloseButton', () => {
       let spy = sinon.spy(window, 'confirm')
 
       props.dirty = true
-      let wrapper = shallow(<CloseButton {...props} />)
+      let wrapper = shallow(<CloseButton {...props} />, { context })
 
       let node = wrapper.find('button').at(0)
       node.simulate('click')
@@ -40,11 +45,7 @@ describe('CloseButton', () => {
       props.dirty = true
       props.path = '/'
 
-      let context = {
-        router: {
-          transitionTo: sinon.spy()
-        }
-      }
+
       let wrapper = shallow(<CloseButton {...props} />, { context })
       let node = wrapper.find('button').at(0)
       node.simulate('click')
