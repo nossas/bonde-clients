@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
+import classnames from 'classnames'
 
 
-const RenderErrorMessage = ({ error }) => {
+const RenderErrorMessage = ({ error, className }) => {
   if (error) {
     return (
-      <div className="red center mt2">{ error }</div>
+      <div className={classnames("red center mt2", className)}>{ error }</div>
     )
   }
   return <noscript></noscript>
@@ -12,6 +13,7 @@ const RenderErrorMessage = ({ error }) => {
 
 RenderErrorMessage.propTypes = {
   error: PropTypes.string,
+  className: PropTypes.string
 }
 
 export default RenderErrorMessage

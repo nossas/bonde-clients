@@ -28,4 +28,10 @@ describe('RenderErrorMessage', () => {
     let wrapper = shallow(<RenderErrorMessage {...props} />)
     expect(wrapper.find('div.red').text()).to.equal(props.error)
   })
+
+  it('should add className if passed by props', () => {
+    props.className = 'h5 animated'
+    let wrapper = shallow(<RenderErrorMessage {...props} />)
+    expect(wrapper.find('div.h5.animated').length).to.equal(1)
+  })
 })

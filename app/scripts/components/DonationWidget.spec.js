@@ -27,14 +27,14 @@ describe('DonationWidget', () => {
     })
 
     it('should render TellAFriend when state.success is true', () => {
-      let wrapper = shallow(<DonationWidget {...props} />)
+      let wrapper = shallow(<DonationWidget {...props} />, { context })
       wrapper.setState({ success: true })
 
       expect(wrapper.find('TellAFriend').length).to.equal(1)
     })
 
     it('should add script pagar.me when props.configurable is false', () => {
-      let wrapper = shallow(<DonationWidget {...props} />)
+      let wrapper = shallow(<DonationWidget {...props} />, { context })
       let script = wrapper.find('script').at(0)
       expect(
         script.props().dangerouslySetInnerHTML.__html
@@ -47,7 +47,7 @@ describe('DonationWidget', () => {
       props.editable = true
       props.configurable = false
 
-      let wrapper = shallow(<DonationWidget {...props} />)
+      let wrapper = shallow(<DonationWidget {...props} />, { context })
       wrapper.setState({ hasMouseOver: true })
 
       expect(wrapper.find('div.absolute').length).to.equal(1)
@@ -69,13 +69,13 @@ describe('DonationWidget', () => {
   describe('overlay states', () => {
 
     it('should change state.hasMouseOver when mouseEnter div', () => {
-      let wrapper = shallow(<DonationWidget {...props} />)
+      let wrapper = shallow(<DonationWidget {...props} />, { context })
       wrapper.simulate('mouseEnter')
       expect(wrapper.state().hasMouseOver).to.equal(true)
     })
 
     it('should change state.hasMouseOver when mouseLeave div', () => {
-      let wrapper = shallow(<DonationWidget {...props} />)
+      let wrapper = shallow(<DonationWidget {...props} />, { context })
       wrapper.setState({ hasMouseOver: true })
       wrapper.simulate('mouseLeave')
       expect(wrapper.state().hasMouseOver).to.equal(false)
