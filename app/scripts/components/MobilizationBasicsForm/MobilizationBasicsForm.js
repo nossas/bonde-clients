@@ -127,7 +127,7 @@ export default class MobilizationBasicsForm extends React.Component {
           onBlur={handleBlur('name')} />
 
         <label className="block h4 caps bold mb1 left">Objetivo</label>
-        <RenderInputLength value={name} limit={500} />
+        <RenderInputLength value={goal} limit={500} />
         <RenderInputError error={goalError} touched={goalTouched} />
         <textarea
           className="field-light block h3 full-width mt1 mb2"
