@@ -12,7 +12,7 @@ const RenderInputError = ({ error, touched }) => {
 
 RenderInputError.propTypes = {
   error: PropTypes.string,
-  touched: PropTypes.bool.isRequired
+  touched: PropTypes.bool
 }
 
 export default RenderInputError
