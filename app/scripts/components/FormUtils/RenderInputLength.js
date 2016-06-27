@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 
 const RenderInputLength = ({ value, limit }) => {
-  if (value.length > 0) {
+  if (value && value.length > 0) {
     return (
       <div className={classnames('right h3', (value.length > limit - 10 ? 'red' : null))}>{limit - value.length}</div>
     )
