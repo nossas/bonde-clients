@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import { DraftWidget, ContentWidget, FormWidget, DonationWidget } from './'
+import DraftWidget from './DraftWidget.jsx'
+import ContentWidget from './ContentWidget.jsx'
+import FormWidget from './FormWidget/FormWidget.jsx'
+import DonationWidget from './DonationWidget.jsx'
 
 
 const Widget = (props) => {
