@@ -2,8 +2,8 @@ import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
 import { render, mount, shallow } from 'enzyme'
-import { DraftWidget, Loading } from './../../components'
-import * as Paths from './../../Paths'
+import { DraftWidget, Loading } from './'
+import * as Paths from './../Paths'
 
 let wrapper
 
