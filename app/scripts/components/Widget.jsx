@@ -1,49 +1,40 @@
 import React, { PropTypes } from 'react'
-import { DraftWidget, ContentWidget, FormWidget, DonationWidget } from './'
 import classnames from 'classnames'
 
-export default class Widget extends React.Component {
-  static propTypes = {
-    widget: PropTypes.object.isRequired
+import DraftWidget from './DraftWidget.jsx'
+import ContentWidget from './ContentWidget.jsx'
+import FormWidget from './FormWidget/FormWidget.jsx'
+import DonationWidget from './DonationWidget.jsx'
+
+
+const Widget = (props) => {
+  let { widget } = props
+  let className = classnames(
+    'px2', 'col', 'mb4', 'md-mb0',
+    'col-' + widget.sm_size,
+    'sm-col-' + widget.sm_size,
+    'md-col-' + widget.md_size,
+    'lg-col-' + widget.lg_size
+  )
+
+  let child = null
+  if (widget.kind === 'content') {
+    child = <ContentWidget {...props} />
+  } else if (widget.kind === 'form') {
+    child = <FormWidget {...props} />
+  } else if (widget.kind === 'donation') {
+    child = <DonationWidget {...props} />
+  } else {
+    child = <DraftWidget {...props} />
   }
 
-  renderWidget() {
-    const { widget } = this.props
-    switch (widget.kind) {
-      case 'draft':
-        return (
-          <DraftWidget {...this.props} />
-        )
-      case 'content':
-        return (
-          <ContentWidget {...this.props} />
-        )
-      case 'form':
-        return (
-          <FormWidget {...this.props} />
-        )
-      case 'donation':
-        return (
-          <DonationWidget {...this.props} />
-        )
-      default:
-        return (
-          <DraftWidget {...this.props} />
-        )
-    }
-  }
-
-  render() {
-    const className = classnames(
-      'px2', 'col', 'mb4', 'md-mb0',
-      'col-' + this.props.widget.sm_size,
-      'sm-col-' + this.props.widget.sm_size,
-      'md-col-' + this.props.widget.md_size,
-      'lg-col-' + this.props.widget.lg_size
-    )
-
-    return (
-      <div className={className}>{this.renderWidget()}</div>
-    )
-  }
+  return (
+    <div className={className}>{child}</div>
+  )
 }
+
+Widget.propTypes = {
+  widget: PropTypes.object.isRequired,
+}
+
+export default Widget
