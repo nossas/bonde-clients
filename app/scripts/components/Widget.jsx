@@ -5,7 +5,7 @@ import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
 import FormWidget from './FormWidget/FormWidget.jsx'
 import DonationWidget from './DonationWidget.jsx'
-
+import { MatchWidget } from './MatchWidget'
 
 const Widget = (props) => {
   let { widget } = props
@@ -24,6 +24,11 @@ const Widget = (props) => {
     child = <FormWidget {...props} />
   } else if (widget.kind === 'donation') {
     child = <DonationWidget {...props} />
+  } else if (widget.kind === 'match') {
+    child = <MatchWidget {...props}
+      numberChoices={['Framboesa', 'Caviar']}
+      letterChoices={['Auxílio terno', 'Auxílio motorista', 'Auxílio viagem']}
+    />
   } else {
     child = <DraftWidget {...props} />
   }
