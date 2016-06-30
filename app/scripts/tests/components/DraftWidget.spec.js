@@ -71,6 +71,17 @@ describe('DraftWidget', () => {
       })
     })
 
+    describe('#handleMatchClick', () => {
+      it('should call updateKind with `match` parameter', () => {
+        wrapper.find('button').at(3).simulate('click', { preventDefault() {} })
+
+        const updateKind = DraftWidget.prototype.updateKind
+        expect(updateKind.called).to.equal(true)
+        expect(updateKind.calledWith('match')).to.equal(true)
+        expect(wrapper.state().loading).to.equal(true)
+      })
+    })
+
     describe('#renderLoading', () => {
       it('should return rendered Loading component if `state.loading` is true', () => {
         wrapper.setState({ loading: true })
