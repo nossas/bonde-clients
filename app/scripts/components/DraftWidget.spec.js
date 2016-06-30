@@ -33,7 +33,7 @@ describe('DraftWidget', () => {
       it('should render a draft widget containing html elements passing editable prop enabled', () => {
         expect(wrapper.find('div.widget').length).to.equal(1)
         expect(wrapper.find('div.widget h4').length).to.equal(1)
-        expect(wrapper.find('div.widget button').length).to.equal(3)
+        expect(wrapper.find('div.widget button').length).to.equal(4)
         expect(wrapper.state().loading).to.equal(false)
       })
     })
@@ -67,6 +67,17 @@ describe('DraftWidget', () => {
         const updateKind = DraftWidget.prototype.updateKind
         expect(updateKind.called).to.equal(true)
         expect(updateKind.calledWith('donation')).to.equal(true)
+        expect(wrapper.state().loading).to.equal(true)
+      })
+    })
+
+    describe('#handleMatchClick', () => {
+      it('should call updateKind with `match` parameter', () => {
+        wrapper.find('button').at(3).simulate('click', { preventDefault() {} })
+
+        const updateKind = DraftWidget.prototype.updateKind
+        expect(updateKind.called).to.equal(true)
+        expect(updateKind.calledWith('match')).to.equal(true)
         expect(wrapper.state().loading).to.equal(true)
       })
     })
