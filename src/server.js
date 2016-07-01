@@ -1,3 +1,4 @@
+import newrelic from 'newrelic';
 import Express from 'express';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';

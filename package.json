@@ -81,6 +81,7 @@
     "lolex": "1.4.0",
     "mocha": "^2.3.3",
     "net": "^1.0.2",
+    "newrelic": "^1.28.1",
     "node-sass": "^3.1.2",
     "piping": "^0.3.0",
     "postcss-loader": "^0.5.1",
