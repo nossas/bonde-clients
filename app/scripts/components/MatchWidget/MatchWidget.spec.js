@@ -31,7 +31,7 @@ describe('MatchWidget', () => {
     }
 
     before(() => {
-      component = mount(<MatchWidget {...props  } />)
+      component = mount(<MatchWidget {...props} />)
     })
 
     it('should render two <Choices> component', () => {
@@ -44,6 +44,11 @@ describe('MatchWidget', () => {
         letterSelected: 'Hospital'
       })
       expect(component.find('button.match').props().disabled).to.equal(false)
+    })
+
+    it('should enable edit overlay block when mouseEnter', () => {
+      component.simulate('mouseEnter')
+      expect(component.find(''))
     })
   })
 })
