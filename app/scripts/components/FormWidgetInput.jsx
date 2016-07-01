@@ -20,10 +20,8 @@ export default class FormWidgetInput extends React.Component {
     this.setState({hasMouseOver: false})
   }
 
-  handleClick(event) {
+  handleClick() {
     if (this.props.configurable) {
-      event.stopPropagation()
-      event.preventDefault()
       this.setState({editing: true})
     }
   }

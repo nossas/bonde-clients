@@ -19,8 +19,14 @@ export default class MobilizationCard extends React.Component {
   render() {
     const { mobilization } = this.props
     return(
-      <Link to={Paths.editMobilization(mobilization.id)} style={{textDecoration: 'none'}} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
-        <div className="bg-white p2 border mb2 rounded" style={(this.state.hasMouseOver ? {borderColor: '#ccc'} : null)}>
+      <Link
+        to={Paths.editMobilization(mobilization.id)}
+        style={{textDecoration: 'none'}}
+        onMouseOver={::this.handleMouseOver}
+        onMouseOut={::this.handleMouseOut}>
+        <div
+          className="bg-white p2 border mb2 rounded"
+          style={(this.state.hasMouseOver ? {borderColor: '#ccc'} : null)}>
           <h3 className="bold gray">{ mobilization.name }</h3>
           <p className="gray">{ mobilization.goal }</p>
         </div>

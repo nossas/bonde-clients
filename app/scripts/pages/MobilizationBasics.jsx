@@ -1,5 +1,5 @@
 import React from 'react'
-import { MobilizationBasicsForm } from './../components'
+import { MobilizationBasicsForm } from './../components/MobilizationBasicsForm'
 
 export default class MobilizationBasics extends React.Component {
   render() {
