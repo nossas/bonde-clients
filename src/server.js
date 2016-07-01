@@ -30,6 +30,16 @@ app.use('/api', (req, res) => {
   proxy.web(req, res);
 });
 
+app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
+  res.redirect('/')
+});
+
+app.get('/robots.txt', function(req, res) {
+  res.send('User-Agent: * \n'+
+    'Allow: /')
+});
+
+
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
 proxy.on('error', (error, req, res) => {
   let json;
