@@ -73,3 +73,11 @@ export function autofireMobilizationWidget(mobilization_id, widget_id) {
 export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
+
+export function matchChoicesMobilizationWidget(mobilization_id, widget_id) {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/choices`
+}
+
+export function matchGoalsMobilizationWidget(mobilization_id, widget_id) {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/goals`
+}
