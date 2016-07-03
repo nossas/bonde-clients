@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../actions/WidgetActions'
 import { TabMenu, TabMenuItem, FormWidget, Loading, CloseButton } from './../components'
 import * as Paths from './../Paths'
 
-export default class MatchWidgetChoices extends React.Component {
+class MatchWidgetChoices extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -13,8 +13,10 @@ export default class MatchWidgetChoices extends React.Component {
   }
 
   widget(props = this.props) {
-    const { widgets } = props
-    return widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
+    const { widgets, params } = props
+    const widgetsStringId = widgets.data.map(widget => widget.id.toString())
+    const widgetIndex = widgetsStringId.indexOf(params.widget_id)
+    return widgets.data[widgetIndex]
   }
 
   render() {
@@ -43,3 +45,16 @@ export default class MatchWidgetChoices extends React.Component {
     )
   }
 }
+
+MatchWidgetChoices.propTypes = {
+  params: PropTypes.object.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  widgets: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
+}
+
+MatchWidgetChoices.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+export default MatchWidgetChoices
