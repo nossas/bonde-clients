@@ -185,7 +185,7 @@ export default class DonationWidgetSettings extends React.Component {
   }
 
   handleColorClick(color) {
-    this.setState({selectedColorPicker: '#' + color.hex})
+    this.setState({selectedColorPicker: color.hex})
   }
 
   renderButtonTextLength() {
