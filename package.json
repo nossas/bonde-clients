@@ -89,7 +89,7 @@
     "query-string": "^2.4.0",
     "react": "^0.14.7",
     "react-addons-transition-group": "^0.14.7",
-    "react-color": "^2.0.0",
+    "react-color": "^2.2.0",
     "react-colors-picker": "2.1.1",
     "react-document-meta": "^2.0.2",
     "react-dom": "^0.14.7",
