@@ -5,7 +5,8 @@ import {
   Application,
   UserDashboard,
   MobilizationDashboard,
-  MobilizationSettings
+  MobilizationSettings,
+  NotFound
 } from '../../app/scripts/containers'
 
 import {
@@ -60,6 +61,7 @@ export default function(store, host) {
             </Route>
           </Route>
         </Route>
+		<Route path="*" component={NotFound} status={404} />
       </Route>
     )
   }
@@ -67,6 +69,7 @@ export default function(store, host) {
   return (
     <Route component={Application}>
       <Route path="/" component={CustomDomainWrapper} />
+	  <Route path="*" component={NotFound} status={404} />
     </Route>
   )
 }
