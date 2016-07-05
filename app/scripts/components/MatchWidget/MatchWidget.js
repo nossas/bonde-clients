@@ -70,8 +70,7 @@ class MatchWidget extends Component {
           />
           <button
             className="match caps button bg-darken-4 p2 full-width mt1 mb2"
-            disabled={loading || (!this.state.numberSelected && !this.state.letterSelected)}
-            disabled={!(selectedChoice1 && selectedChoiceA)}>
+            disabled={loading || !(selectedChoice1 && selectedChoiceA)}>
             {loading ? 'Combinando...' : 'Combinar' }
           </button>
         </div>
