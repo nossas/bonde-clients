@@ -4,10 +4,10 @@ import sinon from 'sinon'
 import { render, shallow, mount } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from './../Paths'
-import MatchWidgetChoices from './MatchWidgetChoices'
+import * as Paths from './../../Paths'
+import Choices from './Choices'
 
-describe('MatchWidgetChoices', () => {
+describe('Choices', () => {
   let wrapper
 
   let props = {
@@ -28,12 +28,12 @@ describe('MatchWidgetChoices', () => {
   const GOALS_TABMENUITEM = 1
 
   beforeEach(() => {
-    wrapper = mount(<MatchWidgetChoices { ...props } />, { context: _context })
+    wrapper = mount(<Choices { ...props } />, { context: _context })
   })
 
   describe('#render', () => {
-    it('should render one <div>.flex-auto component wrapper', () => {
-      expect(wrapper.find('div.flex-auto').length).to.equal(1)
+    it('should render two <div>.flex-auto component wrapper', () => {
+      expect(wrapper.find('div.flex-auto').length).to.equal(2)
     })
 
     context('TabMenu', () => {
@@ -119,20 +119,20 @@ describe('MatchWidgetChoices', () => {
 
   describe('#widget', () => {
     before(() => {
-      MatchWidgetChoices.prototype.props = props
+      Choices.prototype.props = props
     })
 
     after(() => {
-      MatchWidgetChoices.prototype.props = undefined
+      Choices.prototype.props = undefined
     })
 
     it('should return current widget object', () => {
-      let result = MatchWidgetChoices.prototype.widget(props)
+      let result = Choices.prototype.widget(props)
       let expectedWidget = props.widgets.data[0]
       expect(result).to.deep.equal(expectedWidget)
     })
     it('should return current widget object if not pass any param', () => {
-      let result = MatchWidgetChoices.prototype.widget()
+      let result = Choices.prototype.widget()
       let expectedWidget = props.widgets.data[0]
       expect(result).to.deep.equal(expectedWidget)
     })
