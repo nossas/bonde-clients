@@ -42,8 +42,8 @@ describe('MatchWidget', () => {
 
       it('should enable match button when combine choices', () => {
         component.setState({
-          numberSelected: 'Framboesa',
-          letterSelected: 'Hospital'
+          selectedChoice1: 'Framboesa',
+          selectedChoiceA: 'Hospital'
         })
         expect(component.find('button.match').props().disabled).to.equal(false)
       })
@@ -52,7 +52,7 @@ describe('MatchWidget', () => {
         component.simulate('mouseEnter')
         expect(component.find(''))
       })
-      
+
       it('should render default list when settings choices1 or choicesA undefined', () => {
         component.setProps({
           widget: { settings: {} }
