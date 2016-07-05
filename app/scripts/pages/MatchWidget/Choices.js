@@ -78,7 +78,7 @@ class Choices extends React.Component {
               }} {...this.props} />
             <AddChoiceForm
               title='Lado B'
-              choices={this.state.choices1}
+              choices={this.state.choicesA}
               label={this.state.labelChoicesA}
               onChangeLabel={(label) => {
                 this.setState({labelChoicesA: label})

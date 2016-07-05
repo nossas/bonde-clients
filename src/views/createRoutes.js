@@ -28,7 +28,8 @@ import {
   CustomDomainWrapper,
   MobilizationCustomDomain,
   DonationWidgetSettings,
-  Choices
+  Choices,
+  Goals
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
@@ -52,6 +53,7 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/autofire" component={AutoFireForm} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/donation" component={DonationWidgetSettings} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/choices" component={Choices} />
+              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/goals" component={Goals} />
               <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
               <Route component={MobilizationSettings} >
                 <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasics} />

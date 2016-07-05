@@ -19,3 +19,4 @@ export { default as CustomDomainWrapper } from './CustomDomainWrapper/CustomDoma
 export { default as MobilizationCustomDomain } from './MobilizationCustomDomain.jsx'
 
 export { default as Choices } from './MatchWidget/Choices'
+export { default as Goals } from './MatchWidget/Goals'
