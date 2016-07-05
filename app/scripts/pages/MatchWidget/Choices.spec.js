@@ -13,7 +13,7 @@ describe('Choices', () => {
   let props = {
     params: { widget_id: '1' },
     mobilization: { id: 1 },
-    widgets: { data: [{ id: 1 }] },
+    widgets: { data: [{ id: 1, settings: {} }] },
     location: { pathname: Paths.matchChoicesMobilizationWidget(1, 1) }
   }
 
