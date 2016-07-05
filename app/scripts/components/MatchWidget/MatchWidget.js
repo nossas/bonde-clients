@@ -27,20 +27,21 @@ class MatchWidget extends Component {
   render() {
     // store state
     const { editable } = this.props
-    const { numberChoices, letterChoices } = this.props
+    const { widget: { settings } } = this.props
+    
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
         <div className="match-widget p3 bg-darken-3 relative">
           <Choices
             selected={this.state.numberSelected}
-            options={numberChoices}
+            options={settings.choices1 ? settings.choices1.split(',') : []}
             onSelected={(selected) => {
               this.setState({numberSelected: selected})
             }}
           />
           <Choices
             selected={this.state.letterSelected}
-            options={letterChoices}
+            options={settings.choicesA ? settings.choicesA.split(',') : []}
             onSelected={(selected) => {
               this.setState({letterSelected: selected})
             }}
@@ -54,11 +55,6 @@ class MatchWidget extends Component {
       </OverlayWidget>
     )
   }
-}
-
-MatchWidget.defaultProps = {
-  numberChoices: [],
-  letterChoices: []
 }
 
 MatchWidget.propTypes = {

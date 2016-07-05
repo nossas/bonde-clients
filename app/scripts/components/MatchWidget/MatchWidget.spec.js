@@ -16,11 +16,9 @@ describe('MatchWidget', () => {
   }
 
   let props = {
-    numberChoices: ['Framboesa', 'Auxílio Terno'],
-    letterChoices: ['Hospital', 'Escola'],
     editable: true,
     mobilization: { id: 1 },
-    widget: { widget: 1 }
+    widget: { widget: 1, settings: { choices1: 'Framboesa,Auxílio Terno', choicesA: 'Hospital,Escola' } }
   }
 
   before(() => {
@@ -36,20 +34,6 @@ describe('MatchWidget', () => {
   })
 
   describe('#render', () => {
-    context('when not passing props', () => {
-      before(() => {
-        component = shallow(<MatchWidget />, { context: mockContext })
-      })
-
-      it('should render MatchWidget empty if not pass choices as props', () => {
-        component = shallow(<MatchWidget />, { context: mockContext })
-        expect(component).to.be.ok
-      })
-
-      it('should render match button disabled', () => {
-        expect(component.find('button.match').props().disabled).to.equal(true)
-      })
-    })
 
     context('when passing props', () => {
       it('should render two <Choices> component', () => {
@@ -67,6 +51,13 @@ describe('MatchWidget', () => {
       it('should enable edit overlay block when mouseEnter', () => {
         component.simulate('mouseEnter')
         expect(component.find(''))
+      })
+      
+      it('should render default list when settings choices1 or choicesA undefined', () => {
+        component.setProps({
+          widget: { settings: {} }
+        })
+        expect(component).to.be.ok
       })
     })
   })

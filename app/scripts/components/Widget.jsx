@@ -26,10 +26,7 @@ const Widget = (props) => {
   } else if (widget.kind === 'donation') {
     child = <DonationWidget {...props} />
   } else if (widget.kind === 'match') {
-    child = <MatchWidget {...props}
-      numberChoices={['Framboesa', 'Caviar']}
-      letterChoices={['Auxílio terno', 'Auxílio motorista', 'Auxílio viagem']}
-    />
+    child = <MatchWidget {...props} />
   } else {
     child = <DraftWidget {...props} />
   }
