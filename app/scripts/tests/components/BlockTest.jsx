@@ -1,5 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
+import { shallow } from 'enzyme'
 import * as BlockActions from './../../actions/BlockActions'
 import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
 
@@ -285,9 +286,8 @@ describe('Block', () => {
 
   describe('#render', () => {
     it('should render filtered widgets components', () => {
-      const component = TestUtils.renderIntoDocument(<Block {...props} blocks={{}} />)
-      const widgetsComponents = TestUtils.scryRenderedComponentsWithType(component, Widget)
-      expect(widgetsComponents).to.have.length(blockWidgets.length)
+      const wrapper = shallow(<Block {...props} blocks={{}} />)
+      expect(wrapper.find('Widget')).to.have.length(blockWidgets.length)
     })
 
     it('should render DropDownMenu with display-none when mouse is out', () => {
