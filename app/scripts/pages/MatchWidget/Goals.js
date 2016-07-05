@@ -5,7 +5,8 @@ import * as WidgetActions from './../../actions/WidgetActions'
 import MatchPage from './MatchPage'
 import ChoiceCombined from './ChoiceCombined'
 
-class Choices extends React.Component {
+
+class Goals extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -18,32 +19,41 @@ class Choices extends React.Component {
     return widgets.data[widgetIndex]
   }
 
+  combineChoices() {
+    const { settings: { choices1, choicesA } } = this.widget()
+    const choicesZ = choices1 ? choices1.split(',') : []
+    const choicesY = choicesA ? choicesA.split(',') : []
+
+    return choicesZ.map((a) => {
+      return choicesY.map((b) => {
+        return <ChoiceCombined a={a} b={b} />
+      })
+    })
+  }
+
   render() {
     const { mobilization, location } = this.props
     const widget = this.widget()
-    const { settings: { choices1, choicesA } } = widget
 
     return(
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
-          {choices1 && choices1.map((choice, index) => {
-            return <ChoiceCombined a={choice} b={choicesA[index]} />
-          })}
+          {::this.combineChoices()}
         </div>
       </MatchPage>
     )
   }
 }
 
-// Choices.propTypes = {
-//   params: PropTypes.object.isRequired,
-//   mobilization: PropTypes.object.isRequired,
-//   widgets: PropTypes.object.isRequired,
-//   location: PropTypes.object.isRequired
-// }
+Goals.propTypes = {
+  params: PropTypes.object.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  widgets: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
+}
 
-// Choices.contextTypes = {
-//   router: PropTypes.object.isRequired
-// }
+Goals.contextTypes = {
+  router: PropTypes.object.isRequired
+}
 
-export default Choices
+export default Goals
