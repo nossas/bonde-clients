@@ -15,7 +15,7 @@ class MatchWidget extends Component {
   render() {
     const { numberChoices, letterChoices } = this.props
     return (
-      <div className="match-widget">
+      <div className="match-widget p3 bg-darken-3 relative">
         <Choices selected={this.state.numberSelected} options={numberChoices} onSelected={(selected) => {
           this.setState({numberSelected: selected})
         }}/>
