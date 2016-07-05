@@ -12,6 +12,16 @@ class AddChoiceForm extends Component {
     this.setState({ value: e.target.value})
   }
 
+  handleUpdateChoices(e) {
+    if (e) e.preventDefault()
+
+    const { choices, updateChoices } = this.props
+    if (this.state.value.length > 0 && choices.indexOf(this.state.value) === -1) {
+      updateChoices([...choices, this.state.value])
+    }
+    this.setState({ value: '' })
+  }
+
   render() {
     const { titleForm, choices, updateChoices } = this.props
     return (
@@ -23,21 +33,26 @@ class AddChoiceForm extends Component {
             onChange={::this.handleChange}
             type="text"
             className="field-light block h3 full-width mt1 mb3"
-            placeholder="Escolha" />
+            placeholder="Escolha"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                this.handleUpdateChoices()
+              }
+            }} />
         </div>
         <div className="sm-col sm-col-3">
-          <button className="button bg-aqua caps p2" style={{marginTop: "32px"}} onClick={(e) => {
-            if (e) e.preventDefault()
-              updateChoices([...choices, this.state.value])
-              this.setState({ value: '' })
-          }}>
+          <button className="button bg-aqua caps p2"
+                  disabled={this.state.value.length === 0 ? true : null}
+                  style={{marginTop: "32px"}}
+                  onClick={::this.handleUpdateChoices}>
             <i class="fa fa-plus mr2"></i> Adicionar
           </button>
         </div>
         <table className="choices-block sm-col sm-col-11">
-          {choices.map((choice) => {
+          <tbody>
+          {choices.map((choice, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td><span>{choice}</span></td>
                 <td><a href="#" onClick={(e) => {
                   if (e) e.preventDefault()
@@ -48,6 +63,7 @@ class AddChoiceForm extends Component {
               </tr>
             )
           })}
+          </tbody>
         </table>
       </div>
     )
