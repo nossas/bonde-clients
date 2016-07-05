@@ -1,24 +1,29 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-const Choices = ({ options=[], selected, onSelected }) => {
+const Choices = ({ options=[], onChange, title, classNames, disabled }) => {
   return (
-    <ul className={classnames('choices', { 'disabled': !!selected })}>
-      {options.map(option => {
-        return <li 
-          className={classnames({ 'selected': selected === option })}
-          onClick={() => onSelected(option)}>
-          {option}
-        </li>
-      })}
-    </ul>
+    <div className={classnames(classNames)}>
+      <label className="h4 caps bold mb1">{title}*</label>
+      <select
+        className="choices field-light block full-width h3"
+        disabled={disabled}
+        onChange={onChange}>
+        <option>Selecione...</option>
+        {options.map(option => {
+          return <option value={option}>{option}</option>
+        })}
+      </select>
+    </div>
   )
 }
 
 Choices.propTypes = {
-  options: PropTypes.array,
-  selected: PropTypes.string,
-  onSelected: PropTypes.func.isRequired
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  classNames: PropTypes.array
 }
 
 export default Choices

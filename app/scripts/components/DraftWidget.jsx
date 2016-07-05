@@ -65,7 +65,11 @@ export default class DraftWidget extends React.Component {
     if (kind === 'match') {
       widgetParams = {
         ...widgetParams,
-        settings: {content: 'Clique aqui para configurar seu MatchWidget...'}
+        settings: {
+          title: 'Clique para configurar suas combinações...',
+          labelChoices1: 'Primeira opção',
+          labelChoicesA: 'Segunda opção'
+        }
       }
     }
 
