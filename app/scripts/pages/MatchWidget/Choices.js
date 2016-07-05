@@ -7,15 +7,23 @@ import AddChoiceForm from './AddChoiceForm'
 
 
 class Choices extends React.Component {
-  
+
   constructor(props, context) {
     super(props, context)
-    
-    const widget = this.widget()
+
+    const {
+      settings: {
+        choicesA, labelChoicesA,
+        choices1, labelChoices1,
+      }
+    } = this.widget()
+
     this.state = {
       loading: false,
-      choicesA: widget.settings.choicesA ? widget.settings.choicesA.split(',') : [],
-      choices1: widget.settings.choices1 ? widget.settings.choices1.split(',') : [],
+      choicesA: choicesA ? choicesA.split(',') : [],
+      labelChoicesA: labelChoicesA ? labelChoicesA : '',
+      choices1: choices1 ? choices1.split(',') : [],
+      labelChoices1: labelChoices1 ? labelChoices1 : ''
     }
   }
 
@@ -31,14 +39,18 @@ class Choices extends React.Component {
 
     const widget = this.widget()
     const { dispatch, mobilization, auth } = this.props
-    if (this.state.choicesA.length > 0 && this.state.choices1.length > 0) {
+    const labelValid = this.state.labelChoices1.length > 0 && this.state.labelChoicesA.length > 0
+    const choicesValid = this.state.choicesA.length > 0 && this.state.choices1.length > 0
+    if (labelValid && choicesValid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidget({
         mobilization_id: mobilization.id,
         widget_id: widget.id,
         credentials: auth.credentials,
         widget: { settings: {
+          labelChoicesA: this.state.labelChoicesA,
           choicesA: this.state.choicesA.toString(),
+          labelChoices1: this.state.labelChoices1,
           choices1: this.state.choices1.toString()
         }}
       })
@@ -53,14 +65,27 @@ class Choices extends React.Component {
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
           <form onSubmit={::this.handleSubmit}>
-            <AddChoiceForm titleForm="Bloco 1"
-                           choices={this.state.choices1}
-                           updateChoices={(choices) => {this.setState({choices1: choices})}}
-                           {...this.props} />
-            <AddChoiceForm titleForm="Bloco A"
-                           choices={this.state.choicesA}
-                           updateChoices={(choices) => {this.setState({choicesA: choices})}}
-                           {...this.props} />
+
+            <AddChoiceForm
+              title='Lado A'
+              choices={this.state.choices1}
+              label={this.state.labelChoices1}
+              onChangeLabel={(label) => {
+                this.setState({labelChoices1: label})
+              }}
+              updateChoices={(choices) => {
+                this.setState({choices1: choices})
+              }} {...this.props} />
+            <AddChoiceForm
+              title='Lado B'
+              choices={this.state.choices1}
+              label={this.state.labelChoicesA}
+              onChangeLabel={(label) => {
+                this.setState({labelChoicesA: label})
+              }}
+              updateChoices={(choices) => {
+                this.setState({choicesA: choices})
+              }} {...this.props} />
             <button type="submit">Combinar</button>
           </form>
         </div>

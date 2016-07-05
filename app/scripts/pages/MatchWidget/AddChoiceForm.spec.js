@@ -10,7 +10,7 @@ import AddChoiceForm from './AddChoiceForm'
 describe('AddChoiceForm', () => {
   let component
   let props = {
-    titleForm: '',
+    title: '',
     choices: [],
     updateChoices: (choices) => {}
   }
@@ -78,7 +78,7 @@ describe('AddChoiceForm', () => {
       }
     })
     component.setState({ value: 'Item1' })
-    component.find('input').simulate('keypress', { key: 'Enter' })
+    component.find('input').at(1).simulate('keypress', { key: 'Enter' })
     expect(expected.length).to.equal(1)
   })
 })

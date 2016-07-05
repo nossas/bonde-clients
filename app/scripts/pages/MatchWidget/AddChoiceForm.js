@@ -8,10 +8,6 @@ class AddChoiceForm extends Component {
     this.state = { value: '' }
   }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value})
-  }
-
   handleUpdateChoices(e) {
     if (e) e.preventDefault()
 
@@ -23,14 +19,26 @@ class AddChoiceForm extends Component {
   }
 
   render() {
-    const { titleForm, choices, updateChoices } = this.props
+    const { title, choices, updateChoices, label, onChangeLabel } = this.props
     return (
       <div className="sm-col sm-col-6">
+        <div className="sm-col sm-col-11">
+          <label>{title}</label>
+          <input
+            type="text"
+            placeholder="Label"
+            value={label}
+            className="field-light block h3 full-width mt1 mb3"
+            onChange={(e) => {
+              onChangeLabel(e.target.value)
+            }} />
+        </div>
         <div className="sm-col sm-col-8">
-          <label>{titleForm}</label>
           <input
             value={this.state.value}
-            onChange={::this.handleChange}
+            onChange={(e) => {
+              this.setState({ value: e.target.value })
+            }}
             type="text"
             className="field-light block h3 full-width mt1 mb3"
             placeholder="Escolha"
@@ -43,7 +51,7 @@ class AddChoiceForm extends Component {
         <div className="sm-col sm-col-3">
           <button className="button bg-aqua caps p2"
                   disabled={this.state.value.length === 0 ? true : null}
-                  style={{marginTop: "32px"}}
+                  style={{marginTop: "8px"}}
                   onClick={::this.handleUpdateChoices}>
             <i class="fa fa-plus mr2"></i> Adicionar
           </button>
