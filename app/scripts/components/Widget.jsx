@@ -38,3 +38,5 @@ const Widget = (props) => {
     <div className={className}>{child}</div>
   )
 }
+
+export default Widget
