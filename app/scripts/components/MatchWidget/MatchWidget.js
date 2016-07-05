@@ -28,7 +28,7 @@ class MatchWidget extends Component {
     const { selectedChoice1, selectedChoiceA } = this.state
     const { editable, loading } = this.props
     const { widget: { settings: {
-        title,
+        title_text,
         labelChoices1,
         labelChoicesA,
         choices1,
@@ -46,7 +46,7 @@ class MatchWidget extends Component {
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
         <div className="match-widget p3 bg-darken-3 relative">
-          <h2 className="mt0 mb3 center">{title}</h2>
+          <h2 className="mt0 mb3 center">{title_text}</h2>
           <Choices
             title={labelChoices1}
             selected={this.state.numberSelected}
