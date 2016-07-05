@@ -78,13 +78,13 @@ describe('MatchWidget', () => {
       })
 
       it('should call transitionTo', () => {
-        expect(mockContext.router.transitionTo).to.have.been.called
+        expect(mockContext.router.transitionTo.calledOnce).to.equal(true)
       })
 
       it('should transitionTo called with correct params', () => {
         const { mobilization, widget } = props
         const path = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
-        expect(mockContext.router.transitionTo).to.have.been.calledWith(path)
+        expect(mockContext.router.transitionTo.calledWith(path)).to.equal(true)
       })
     })
   })
