@@ -25,8 +25,9 @@ class Goals extends React.Component {
     const choicesY = choicesA ? choicesA.split(',') : []
 
     return choicesZ.map((a) => {
-      return choicesY.map((b) => {
-        return <ChoiceCombined a={a} b={b} />
+      return choicesY.map((b, index) => {
+        const classNames = index === choicesY.length-1 ? ['mb3'] : []
+        return <ChoiceCombined a={a} b={b} classNames={classNames} />
       })
     })
   }
@@ -38,6 +39,7 @@ class Goals extends React.Component {
     return(
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
+          <h3 className="mb3">Combinações</h3>
           {::this.combineChoices()}
         </div>
       </MatchPage>
@@ -47,9 +49,9 @@ class Goals extends React.Component {
 
 Goals.propTypes = {
   params: PropTypes.object.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  widgets: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  mobilization: PropTypes.object,
+  widgets: PropTypes.object
 }
 
 Goals.contextTypes = {

@@ -192,7 +192,10 @@ export default class FormWidget extends React.Component {
       }
     })
     if (message === '') {
-      return <TellAFriend {...this.props} message="Formulário submetido com sucesso!" />
+      const { mobilization } = this.props
+      return <TellAFriend {...this.props}
+        message="Formulário submetido com sucesso!"
+        href={Paths.mobilization(mobilization)} />
     } else {
       return <p className="center p2 bg-darken-3">{message}</p>
     }

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import * as Paths from './../../Paths'
 import { OverlayWidget } from '../OverlayWidget'
+import { TellAFriend } from './../'
 import Choices from './Choices'
 
 class MatchWidget extends Component {
@@ -10,7 +11,8 @@ class MatchWidget extends Component {
     super(props, context)
     this.state = {
       numberSelected: undefined,
-      letterSelected: undefined
+      letterSelected: undefined,
+      combined: false,
     }
   }
 
@@ -24,7 +26,12 @@ class MatchWidget extends Component {
     }
   }
 
-  render() {
+  handleCombineClick(e) {
+    if (e) e.preventDefault()
+    this.setState({ combined: true })
+  }
+
+  renderChoices() {
     const { selectedChoice1, selectedChoiceA } = this.state
     const { editable, loading } = this.props
     const { widget: { settings: {
@@ -38,11 +45,6 @@ class MatchWidget extends Component {
     const optionsChoices1 = choices1 ? choices1.split(',') : []
     const optionsChoicesA = choicesA ? choicesA.split(',') : []
 
-    ////
-    // @todo
-    // - texto do heading <h2> deve ser configurável;
-    // - prop `title` do componente <Choices> deve ser configurável.
-    ////
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
         <div className="match-widget p3 bg-darken-3 relative">
@@ -70,11 +72,37 @@ class MatchWidget extends Component {
           />
           <button
             className="match caps button bg-darken-4 p2 full-width mt1 mb2"
+            onClick={::this.handleCombineClick}
             disabled={loading || !(selectedChoice1 && selectedChoiceA)}>
             {loading ? 'Combinando...' : 'Combinar' }
           </button>
         </div>
       </OverlayWidget>
+    )
+  }
+
+  renderShareButtons() {
+    ////
+    // @todo
+    // - talvez prop `message` configurável?
+    // - injetar caminho da imagem da combinação de acordo com as opções
+    //   selecionadas (selectedChoice1 + selectedChoiceA).
+    ////
+    const combinationImageUrl = 'https://s3.amazonaws.com/hub-central-dev/uploads/1467831827_nossascidades.jpg'
+    const { selectedChoice1, selectedChoiceA } = this.state
+    return <TellAFriend {...this.props}
+      message="Resultado da sua combinação"
+      href={combinationImageUrl}
+      imageUrl={combinationImageUrl}
+      imageWidth="100%" />
+  }
+
+  render() {
+    const { combined } = this.state
+    return (
+      <div>
+        { combined ? this.renderShareButtons() : this.renderChoices() }
+      </div>
     )
   }
 }

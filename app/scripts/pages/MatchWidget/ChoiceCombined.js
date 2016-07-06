@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
+import classnames from 'classnames'
 
 class ChoiceCombined extends Component {
   constructor(props) {
@@ -20,14 +21,14 @@ class ChoiceCombined extends Component {
   }
 
   render() {
-    const { a, b } = this.props
+    const { a, b, classNames } = this.props
     return (
-      <div>
+      <div className={classnames('mb1', classNames)}>
         <span className="border rounded p1 m1 border-navy navy">{a}</span>
         <span className="m1 navy">+</span>
         <span className="border rounded p1 m1 border-navy navy">{b}</span>
         <ReactS3Uploader
-          className="button bg-gray m2"
+          className="button bg-gray ml2"
           signingUrl={`${process.env.API_URL}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
@@ -36,6 +37,12 @@ class ChoiceCombined extends Component {
       </div>
     )
   }
+}
+
+ChoiceCombined.propTypes = {
+  a: PropTypes.string.isRequired,
+  b: PropTypes.string.isRequired,
+  classNames: PropTypes.array
 }
 
 export default ChoiceCombined
