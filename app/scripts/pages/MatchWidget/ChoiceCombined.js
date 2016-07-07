@@ -23,7 +23,7 @@ class ChoiceCombined extends Component {
   }
 
   handleUploadFinish(image) {
-    const { firstChoice, secondChoice, handleUploadFinish } = this.props
+    const { match, handleUploadFinish } = this.props
     const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
     this.setState({
       bgImage: imageUrl,
@@ -32,14 +32,14 @@ class ChoiceCombined extends Component {
     })
 
     handleUploadFinish({
-      first_choice: firstChoice,
-      second_choice: secondChoice,
+      first_choice: match.firstChoice,
+      second_choice: match.secondChoice,
       goal_image: imageUrl
     })
   }
 
   render() {
-    const { firstChoice, secondChoice, classes } = this.props
+    const { match, classes } = this.props
 
     const {
       uploadProgress,
@@ -49,8 +49,10 @@ class ChoiceCombined extends Component {
     const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive' : 'bg-gray'
 
     return (
-      <div className={classnames('clearfix mb1', classes)}>
-        <div className="md-col md-col-3 px1">
+      <div className={classnames('clearfix mb1 md-col md-col-3 px1', classes)}>
+        {match.goalImage || this.state.bgImage ? <img src={match.goalImage||this.state.bgImage} className="md-col md-col-12 px-1" style={{maxHeight: "80px"}}/> : null}
+        <div className="clearfix"></div>
+        <div className="md-col md-col-12">
           <ReactS3Uploader
             className={classnames('md-col md-col-12 button', uploadButtonColor)}
             signingUrl={`${process.env.API_URL}/uploads`}
@@ -67,10 +69,10 @@ class ChoiceCombined extends Component {
                 style={{ height: '6px' }} /> }
           </div>
         </div>
-        <div className="md-col md-col-9 px1">
-          <span className="col border rounded p1 ml1 mr1 border-navy navy">{firstChoice}</span>
+        <div className="md-col md-col-12 mt1">
+          <span className="col border rounded p1 mr1 border-navy navy">{match.firstChoice}</span>
           <span className="col m1 navy">+</span>
-          <span className="col border rounded p1 ml1 mr1 border-navy navy">{secondChoice}</span>
+          <span className="col border rounded p1 ml1 border-navy navy">{match.secondChoice}</span>
         </div>
       </div>
     )
@@ -78,8 +80,7 @@ class ChoiceCombined extends Component {
 }
 
 ChoiceCombined.propTypes = {
-  firstChoice: PropTypes.string.isRequired,
-  secondChoice: PropTypes.string.isRequired,
+  match: PropTypes.object.isRequired,
   classes: PropTypes.array
 }
 

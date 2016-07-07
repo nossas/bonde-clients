@@ -6,7 +6,6 @@ import widgets from './../../app/scripts/reducers/widgets'
 import auth from './../../app/scripts/reducers/auth'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 import organizations from './../../app/scripts/reducers/organizations'
-import match from './../../app/scripts/reducers/match'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
@@ -36,6 +35,5 @@ export default combineReducers({
   widgetForm,
   auth,
   mobilizationEditor,
-  organizations,
-  match
+  organizations
 })
