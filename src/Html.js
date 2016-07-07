@@ -2,6 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOMServer from 'react-dom/server'
 import serialize from 'serialize-javascript'
 import DocumentMeta from 'react-document-meta'
+import Raven from 'raven-js'
+Raven
+    .config('https://27ca3f291894466997ae1a5c78b70673@app.getsentry.com/86009')
+    .install()
 
 /**
  * Wrapper component containing HTML metadata and boilerplate tags.
