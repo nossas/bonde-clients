@@ -13,7 +13,9 @@ describe('Goals', () => {
     params: { widget_id: '1' },
     mobilization: { id: 1 },
     widgets: { data: [{ id: 1, settings: {} }] },
-    location: { pathname: '' }
+    location: { pathname: '' },
+    auth: { credentials: {} },
+    dispatch: sinon.spy()
   }
 
   const mockContext = {

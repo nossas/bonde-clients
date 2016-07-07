@@ -45,8 +45,13 @@ export default class Goals extends React.Component {
     const choicesY = choicesA ? choicesA.split(',') : []
 
     return choicesZ.map((a) => {
-      return choicesY.map((b) => {
-        return <ChoiceCombined firstChoice={a} secondChoice={b} handleUploadFinish={::this.finishedUploadFile} />
+      return choicesY.map((b, index) => {
+        const isLast = index === choicesY.length-1
+        return <ChoiceCombined
+          firstChoice={a}
+          secondChoice={b}
+          classes={isLast ? ['mb3'] : []}
+          handleUploadFinish={::this.finishedUploadFile} />
       })
     })
   }
@@ -54,7 +59,6 @@ export default class Goals extends React.Component {
   render() {
     const { mobilization, location } = this.props
     const widget = this.widget()
-    console.log(this.props)
     return(
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
