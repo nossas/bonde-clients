@@ -23,7 +23,7 @@ const proxy = httpProxy.createProxyServer({
 });
 
 
-if (app.get('env') !== 'development') {
+if ( (app.get('env') === 'production') || (app.get('env') === 'staging') {
   // The request handler must be the first item
   app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN));
 }
@@ -94,7 +94,7 @@ app.use((req, res) => {
   }
 });
 
-if (app.get('env') != 'development') {
+if ( (app.get('env') === 'production') || (app.get('env') === 'staging') {
   // The error handler must be before any other error middleware
   app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
 }
