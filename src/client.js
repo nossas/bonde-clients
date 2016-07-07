@@ -13,7 +13,7 @@ import universalRouter from './universalRouter';
 import Raven from 'raven-js'
 
 Raven
-    .config('https://27ca3f291894466997ae1a5c78b70673@app.getsentry.com/86009')
+    .config('https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008')
     .install()
 
 const history = new BrowserHistory();
