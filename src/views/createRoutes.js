@@ -1,5 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router'
+import Raven from 'raven-js'
+Raven
+    .config('https://27ca3f291894466997ae1a5c78b70673@app.getsentry.com/86009')
+    .install()
 
 import {
   Application,
