@@ -41,6 +41,9 @@ export default function widgets(state = initialState, action) {
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
         )
       }
+    case ADD_MATCH:
+      return {...state,
+        match_list:
     default:
       return state
   }

@@ -1,15 +1,18 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../../actions/WidgetActions'
+import { connect } from 'react-redux'
+import * as MatchActions from './../../actions/MatchActions'
 
 import MatchPage from './MatchPage'
 import ChoiceCombined from './ChoiceCombined'
 
 
-class Goals extends React.Component {
+/*@connect(state => ({ match: state.match }))*/
+export default class Goals extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+    this.bindMatchActions = bindActionCreators(MatchActions, props.dispatch)
   }
 
   widget(props = this.props) {
@@ -19,14 +22,31 @@ class Goals extends React.Component {
     return widgets.data[widgetIndex]
   }
 
-  combineChoices() {
+  componentDidMount() {
+    const { auth } = this.props
+    this.bindMatchActions.fetchMatch({
+      widget_id: this.widget().id,
+      credentials: auth.credentials
+    })
+  }
+
+  finishedUploadFile(goal) {
+    const { auth } = this.props
+    this.bindMatchActions.addMatch({
+      widget_id: this.widget().id,
+      credentials: auth.credentials,
+      match: goal
+    })
+  }
+
+  renderCombineChoices() {
     const { settings: { choices1, choicesA } } = this.widget()
     const choicesZ = choices1 ? choices1.split(',') : []
     const choicesY = choicesA ? choicesA.split(',') : []
 
     return choicesZ.map((a) => {
       return choicesY.map((b) => {
-        return <ChoiceCombined a={a} b={b} />
+        return <ChoiceCombined firstChoice={a} secondChoice={b} handleUploadFinish={::this.finishedUploadFile} />
       })
     })
   }
@@ -34,11 +54,11 @@ class Goals extends React.Component {
   render() {
     const { mobilization, location } = this.props
     const widget = this.widget()
-
+    console.log(this.props)
     return(
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
-          {::this.combineChoices()}
+          {::this.renderCombineChoices()}
         </div>
       </MatchPage>
     )
@@ -55,5 +75,3 @@ Goals.propTypes = {
 Goals.contextTypes = {
   router: PropTypes.object.isRequired
 }
-
-export default Goals
