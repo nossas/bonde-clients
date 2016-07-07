@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../../actions/WidgetActions'
 
+import * as Paths from './../../Paths'
 import MatchPage from './MatchPage'
 import AddChoiceForm from './AddChoiceForm'
 
@@ -23,7 +24,8 @@ class Choices extends React.Component {
       choicesA: choicesA ? choicesA.split(',') : [],
       labelChoicesA: labelChoicesA ? labelChoicesA : '',
       choices1: choices1 ? choices1.split(',') : [],
-      labelChoices1: labelChoices1 ? labelChoices1 : ''
+      labelChoices1: labelChoices1 ? labelChoices1 : '',
+      choicesChanged: false
     }
   }
 
@@ -54,39 +56,65 @@ class Choices extends React.Component {
           choices1: this.state.choices1.toString()
         }}
       })
+      this.setState({ choicesChanged: false })
+      this.context.router.transitionTo(
+        Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
+      )
     }
   }
 
+  handleChangeLabelChoices1(label) {
+    this.setState({ labelChoices1: label, choicesChanged: true })
+  }
+
+  handleUpdateChoices1(choices) {
+    this.setState({ choices1: choices, choicesChanged: true })
+  }
+
+  handleChangeLabelChoicesA(label) {
+    this.setState({ labelChoicesA: label, choicesChanged: true })
+  }
+
+  handleUpdateChoicesA(choices) {
+    this.setState({ choicesA: choices, choicesChanged: true})
+  }
+
   render() {
-    const { mobilization, location } = this.props
     const widget = this.widget()
+    const { mobilization, location } = this.props
+    const {
+      choicesChanged,
+      choices1,
+      choicesA,
+      labelChoices1,
+      labelChoicesA
+    } = this.state
 
     return(
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
           <form onSubmit={::this.handleSubmit}>
+            <div className="clearfix mb3">
+              <AddChoiceForm { ...this.props }
+                title='Lado A'
+                choices={ choices1 }
+                label={ labelChoices1 }
+                onChangeLabel={ ::this.handleChangeLabelChoices1 }
+                updateChoices={ ::this.handleUpdateChoices1 } />
 
-            <AddChoiceForm
-              title='Lado A'
-              choices={this.state.choices1}
-              label={this.state.labelChoices1}
-              onChangeLabel={(label) => {
-                this.setState({labelChoices1: label})
-              }}
-              updateChoices={(choices) => {
-                this.setState({choices1: choices})
-              }} {...this.props} />
-            <AddChoiceForm
-              title='Lado B'
-              choices={this.state.choicesA}
-              label={this.state.labelChoicesA}
-              onChangeLabel={(label) => {
-                this.setState({labelChoicesA: label})
-              }}
-              updateChoices={(choices) => {
-                this.setState({choicesA: choices})
-              }} {...this.props} />
-            <button type="submit">Combinar</button>
+              <AddChoiceForm { ...this.props }
+                title='Lado B'
+                choices={ choicesA }
+                label={ labelChoicesA }
+                onChangeLabel={ ::this.handleChangeLabelChoicesA }
+                updateChoices={ ::this.handleUpdateChoicesA } />
+            </div>
+            <button
+              type="submit"
+              disabled={!choicesChanged}
+              className="button bg-aqua caps p2">
+              Combinar e Salvar
+            </button>
           </form>
         </div>
       </MatchPage>
