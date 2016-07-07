@@ -31,7 +31,7 @@ describe('Goals', () => {
 
   it('should render ChoiceCombined itens equals possible match', () => {
     wrapper.setProps({
-      widgets: { data: [{ id: 1, settings: {
+      widgets: { data: [{ id: 1, match_list: [], settings: {
         choices1: '1,2,3',
         choicesA: '4,5'
       } }]}
