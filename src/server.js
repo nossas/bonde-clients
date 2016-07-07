@@ -43,7 +43,7 @@ app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
 });
 
 app.get('/robots.txt', function(req, res) {
-  res.send('User-Agent: * \n'+
+  res.send('User-Agent: * \n' +
     'Allow: /')
 });
 
@@ -59,6 +59,12 @@ proxy.on('error', (error, req, res) => {
   json = { error: 'proxy_error', reason: error.message };
   res.end(JSON.stringify(json));
 });
+
+
+if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
+  // The error handler must be before any other error middleware
+  app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
+}
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
@@ -93,11 +99,6 @@ app.use((req, res) => {
       });
   }
 });
-
-if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
-  // The error handler must be before any other error middleware
-  app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
-}
 
 if (config.port) {
   app.listen(config.port, (err) => {

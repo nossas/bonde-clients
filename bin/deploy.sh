@@ -11,6 +11,8 @@ fi
 REPO_URI="dokku@$DOKKU_HOST:000-client"
 # REPO_SSL="dokku@$DOKKU_HOST:000-client-ssl"
 
+git fetch --unshallow origin
+
 git remote add dokku $REPO_URI
 # git remote add dokku-ssl $REPO_SSL
 
