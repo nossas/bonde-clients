@@ -42,3 +42,19 @@ body {
 textarea {
   resize: none;
 }
+
+.square {
+  width: 100%;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.coverImage {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}

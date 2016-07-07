@@ -40,19 +40,18 @@ class ChoiceCombined extends Component {
 
   render() {
     const { match, classes } = this.props
-
-    const {
-      uploadProgress,
-      uploadFinished
-    } = this.state
-
-    const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive' : 'bg-gray'
+    const { uploadProgress, uploadFinished, bgImage } = this.state
+    const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive' : null
+    const placeholderImage = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C55&txt=300%C3%97300&w=300&h=300&txt=Carregue%20uma%20imagem'
+    const image = bgImage ? bgImage : (match.goalImage ? match.goalImage : placeholderImage)
 
     return (
-      <div className={classnames('clearfix mb1 md-col md-col-3 px1', classes)}>
-        {match.goalImage || this.state.bgImage ? <img src={match.goalImage||this.state.bgImage} className="md-col md-col-12 px-1" style={{maxHeight: "80px"}}/> : null}
-        <div className="clearfix"></div>
-        <div className="md-col md-col-12">
+      <div className={classnames('clearfix mb3 md-col md-col-3 px1', classes)}>
+        <div
+          className="square coverImage clearfix mb1"
+          style={{ backgroundImage: `url('${image}')` }}>
+        </div>
+        <div className="md-col md-col-12 mb1">
           <ReactS3Uploader
             className={classnames('md-col md-col-12 button', uploadButtonColor)}
             signingUrl={`${process.env.API_URL}/uploads`}
@@ -60,19 +59,19 @@ class ChoiceCombined extends Component {
             onProgress={::this.handleUploadProgress}
             onError={::this.handleUploadError}
             onFinish={::this.handleUploadFinish} />
+
           <div className="md-col md-col-12" style={{ marginTop: '3px' }}>
-            { !uploadFinished
-              && !!uploadProgress
+            { !uploadFinished && !!uploadProgress
               && <Progress
                 className="bg-olive"
                 percent={this.state.uploadProgress}
                 style={{ height: '6px' }} /> }
           </div>
         </div>
-        <div className="md-col md-col-12 mt1">
-          <span className="col border rounded p1 mr1 border-navy navy">{match.firstChoice}</span>
-          <span className="col m1 navy">+</span>
-          <span className="col border rounded p1 ml1 border-navy navy">{match.secondChoice}</span>
+        <div className="md-col md-col-12 center">
+          <div className="border rounded p1 border-navy navy">{match.firstChoice}</div>
+          <div className="navy">+</div>
+          <div className="border rounded p1 border-navy navy">{match.secondChoice}</div>
         </div>
       </div>
     )
