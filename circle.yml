@@ -4,10 +4,6 @@ machine:
   node:
     version: 6.2.1
 
-test:
-  pre:
-    - bundle exec rake db:migrate
-
 deployment:
   production:
     branch: master
