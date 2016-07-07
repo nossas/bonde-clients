@@ -10,6 +10,12 @@ import queryString from 'query-string';
 import createStore from './redux/create';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
+import Raven from 'raven-js'
+
+Raven
+    .config('https://27ca3f291894466997ae1a5c78b70673@app.getsentry.com/86009')
+    .install()
+
 const history = new BrowserHistory();
 const client = new ApiClient();
 

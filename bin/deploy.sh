@@ -14,5 +14,4 @@ REPO_URI="dokku@$DOKKU_HOST:000-client"
 git remote add dokku $REPO_URI
 # git remote add dokku-ssl $REPO_SSL
 
-git push dokku $CIRCLE_BRANCH:master
-# git push dokku-ssl $CIRCLE_BRANCH:master
+git push -f dokku $CIRCLE_SHA1:refs/heads/master
