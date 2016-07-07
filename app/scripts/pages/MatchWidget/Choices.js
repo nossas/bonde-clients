@@ -96,9 +96,9 @@ class Choices extends React.Component {
 
 Choices.propTypes = {
   params: PropTypes.object.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  widgets: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  mobilization: PropTypes.object,
+  widgets: PropTypes.object
 }
 
 Choices.contextTypes = {

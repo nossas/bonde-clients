@@ -231,8 +231,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   }
 
   renderThankyouText() {
+    const { mobilization }  = this.props
     return (
-      <TellAFriend {...this.props} message={"Doação registrada!"} />
+      <TellAFriend {...this.props}
+        message={"Doação registrada!"}
+        href={Paths.mobilization(mobilization)} />
     )
   }
 
