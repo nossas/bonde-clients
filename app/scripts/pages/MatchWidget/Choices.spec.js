@@ -36,6 +36,10 @@ describe('Choices', () => {
       expect(wrapper.find('div.flex-auto').length).to.equal(2)
     })
 
+    it('should render one <MatchPage> component', () => {
+      expect(wrapper.find('MatchPage')).to.have.length(1)
+    })
+
     context('TabMenu', () => {
       it('should render one <TabMenu> component', () => {
         expect(wrapper.find('TabMenu').length).to.equal(1)

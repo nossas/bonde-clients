@@ -29,9 +29,7 @@ class AddChoiceForm extends Component {
             placeholder="Label"
             value={label}
             className="field-light block h3 full-width mt1 mb3"
-            onChange={(e) => {
-              onChangeLabel(e.target.value)
-            }} />
+            onChange={(e) => { onChangeLabel(e.target.value) }} />
         </div>
         <div className="sm-col sm-col-8">
           <input

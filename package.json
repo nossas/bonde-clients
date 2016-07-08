@@ -33,7 +33,8 @@
         "NODE_ENV": "development",
         "API_URL": "http://localhost:3000",
         "APP_DOMAIN": "localhost.dev:3001",
-        "PAGARME_KEY": "ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV"
+        "PAGARME_KEY": "ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV",
+        "NEW_RELIC_HOME": "./src"
       }
     },
     "watch-client": {

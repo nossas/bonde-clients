@@ -14,6 +14,7 @@ class Choices extends React.Component {
 
     const {
       settings: {
+        title_text,
         choicesA, labelChoicesA,
         choices1, labelChoices1,
       }
@@ -21,9 +22,10 @@ class Choices extends React.Component {
 
     this.state = {
       loading: false,
+      title_text,
       choicesA: choicesA ? choicesA.split(',') : [],
-      labelChoicesA: labelChoicesA ? labelChoicesA : '',
       choices1: choices1 ? choices1.split(',') : [],
+      labelChoicesA: labelChoicesA ? labelChoicesA : '',
       labelChoices1: labelChoices1 ? labelChoices1 : '',
       choicesChanged: false
     }
@@ -41,19 +43,30 @@ class Choices extends React.Component {
 
     const widget = this.widget()
     const { dispatch, mobilization, auth } = this.props
-    const labelValid = this.state.labelChoices1.length > 0 && this.state.labelChoicesA.length > 0
-    const choicesValid = this.state.choicesA.length > 0 && this.state.choices1.length > 0
-    if (labelValid && choicesValid) {
+    const {
+      title_text,
+      labelChoices1,
+      labelChoicesA,
+      choicesA,
+      choices1
+    } = this.state
+
+    const titleTextValid = title_text.length
+    const labelValid = labelChoices1.length && labelChoicesA.length
+    const choicesValid = choicesA.length && choices1.length
+
+    if (titleTextValid && labelValid && choicesValid) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidget({
         mobilization_id: mobilization.id,
         widget_id: widget.id,
         credentials: auth.credentials,
         widget: { settings: {
-          labelChoicesA: this.state.labelChoicesA,
-          choicesA: this.state.choicesA.toString(),
-          labelChoices1: this.state.labelChoices1,
-          choices1: this.state.choices1.toString()
+          title_text,
+          labelChoicesA,
+          labelChoices1,
+          choicesA: choicesA.toString(),
+          choices1: choices1.toString()
         }}
       })
       this.setState({ choicesChanged: false })
@@ -79,10 +92,15 @@ class Choices extends React.Component {
     this.setState({ choicesA: choices, choicesChanged: true})
   }
 
+  handleTitleTextChange(e) {
+    this.setState({ title_text: e.target.value, choicesChanged: true })
+  }
+
   render() {
     const widget = this.widget()
     const { mobilization, location } = this.props
     const {
+      title_text,
       choicesChanged,
       choices1,
       choicesA,
@@ -94,6 +112,18 @@ class Choices extends React.Component {
       <MatchPage mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
           <form onSubmit={::this.handleSubmit}>
+            <div className="sm-col sm-col-12">
+              <label for="title_text">Título do bloco de combinações</label>
+              <input
+                id="title_text"
+                type="text"
+                className="field-light block h3 full-width mt1 mb3"
+                placeholder={"Ex.: Combine assuntos e compartilhe memes."}
+                style={{height: '48px'}}
+                value={title_text}
+                onChange={::this.handleTitleTextChange} />
+            </div>
+
             <div className="clearfix mb3">
               <AddChoiceForm { ...this.props }
                 title='Lado A'
