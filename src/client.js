@@ -12,9 +12,15 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Raven from 'raven-js'
 
-Raven
-    .config('https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008')
-    .install()
+// See: https://github.com/getsentry/raven-js/issues/73
+const ravenOptions = {
+  ignoreErrors: [ 'WRONG_DOCUMENT_ERR' ]
+}
+
+Raven.config(
+  'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008',
+  ravenOptions
+).install()
 
 const history = new BrowserHistory();
 const client = new ApiClient();
