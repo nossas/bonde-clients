@@ -1,3 +1,4 @@
+import raven from 'raven';
 import newrelic from 'newrelic';
 import Express from 'express';
 import ReactDOMServer from 'react-dom/server';
@@ -21,6 +22,12 @@ const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort
 });
 
+
+if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
+  // The request handler must be the first item
+  app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN));
+}
+
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 
@@ -36,7 +43,7 @@ app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
 });
 
 app.get('/robots.txt', function(req, res) {
-  res.send('User-Agent: * \n'+
+  res.send('User-Agent: * \n' +
     'Allow: /')
 });
 
@@ -52,6 +59,12 @@ proxy.on('error', (error, req, res) => {
   json = { error: 'proxy_error', reason: error.message };
   res.end(JSON.stringify(json));
 });
+
+
+if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
+  // The error handler must be before any other error middleware
+  app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
+}
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {

@@ -1,0 +1,15 @@
+machine:
+  timezone:
+    America/Sao_Paulo # Set the timezone
+  node:
+    version: 6.2.1
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./bin/deploy.sh
+  feature:
+    branch: /add-.*/
+    commands:
+      - ./bin/deploy.sh
