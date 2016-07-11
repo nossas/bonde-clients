@@ -41,7 +41,7 @@ export const addMatch = (params) => {
       success: function(data, textStatus, jqXHR){
         dispatch({
           type: ADD_MATCH,
-          match: data.match
+          match: data
         })
       }
     })

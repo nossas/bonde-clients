@@ -67,7 +67,7 @@ export default class Goals extends React.Component {
         handleUploadFinish: this.finishedUploadFile.bind(this)
       }
       if (combined && combined.length > 0) {
-        props.match.goalImage = combined[0].goal_image
+        props.match.goalImage = combined.slice(-1)[0].goal_image
       }
       return <ChoiceCombined {...props} />
     })

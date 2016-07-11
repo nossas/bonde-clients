@@ -1,5 +1,7 @@
 import superagent from 'superagent'
 
+import { ADD_MATCH } from '../constants/ActionTypes'
+
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
 const FETCH_WIDGETS_FAILURE = 'FETCH_WIDGETS_FAILURE'
@@ -10,6 +12,7 @@ const FAILURE_FIND_WIDGETS = 'FAILURE_FIND_WIDGETS'
 
 const EDIT_WIDGET = 'EDIT_WIDGET'
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
+
 
 const initialState = {
   loaded: false,
@@ -39,6 +42,18 @@ export default function widgets(state = initialState, action) {
       return {...state,
         data: state.data.map(
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
+        )
+      }
+    case ADD_MATCH:
+      return {
+        ...state,
+        data: state.data.map(
+          widget => {
+            if (widget.id === action.match.widget_id) {
+              widget.match_list.push(action.match)
+            }
+            return widget
+          }
         )
       }
     default:
