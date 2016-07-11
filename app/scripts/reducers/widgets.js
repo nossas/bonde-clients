@@ -1,6 +1,6 @@
 import superagent from 'superagent'
 
-import { ADD_MATCH } from '../constants/ActionTypes'
+import { ADD_MATCH, UPDATE_MATCH } from '../constants/ActionTypes'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
@@ -51,6 +51,18 @@ export default function widgets(state = initialState, action) {
           widget => {
             if (widget.id === action.match.widget_id) {
               widget.match_list.push(action.match)
+            }
+            return widget
+          }
+        )
+      }
+    case UPDATE_MATCH:
+      return {
+        ...state,
+        data: state.data.map(
+          widget => {
+            if (widget.id === action.match.widget_id) {
+              widget.match_list = widget.match_list.map(match => match.id === action.match.id ? action.match : match)
             }
             return widget
           }

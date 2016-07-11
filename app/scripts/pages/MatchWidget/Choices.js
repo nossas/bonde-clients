@@ -118,7 +118,7 @@ class Choices extends React.Component {
                 id="title_text"
                 type="text"
                 className="field-light block h3 full-width mt1 mb3"
-                placeholder={"Ex.: Combine assuntos e compartilhe memes."}
+                placeholder="Ex.: Combine assuntos e compartilhe memes."
                 style={{height: '48px'}}
                 value={title_text}
                 onChange={::this.handleTitleTextChange} />

@@ -9,7 +9,7 @@ import ChoiceCombined from './ChoiceCombined'
 describe('ChoiceCombined', () => {
   let wrapper
   let props = {
-    firstChoice: 'ChoiceA', secondChoice: 'ChoiceB',
+    first_choice: 'ChoiceA', second_choice: 'ChoiceB',
     handleFinishUpload: () => {}
   }
 

@@ -30,10 +30,10 @@ class ChoiceCombined extends Component {
       uploadProgress: 'success',
       uploadFinished: true
     })
-
+    console.log('Debugging ChoiceCombined.handleUploadFinish')
+    console.log(match)
     handleUploadFinish({
-      first_choice: match.firstChoice,
-      second_choice: match.secondChoice,
+      ...match,
       goal_image: imageUrl
     })
   }
@@ -43,7 +43,7 @@ class ChoiceCombined extends Component {
     const { uploadProgress, uploadFinished, bgImage } = this.state
     const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive' : null
     const placeholderImage = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C55&txt=300%C3%97300&w=300&h=300&txt=Carregue%20uma%20imagem'
-    const image = bgImage ? bgImage : (match.goalImage ? match.goalImage : placeholderImage)
+    const image = bgImage ? bgImage : (match.goal_image ? match.goal_image : placeholderImage)
 
     return (
       <div className={classnames('clearfix mb3 md-col md-col-3 px1', classes)}>
@@ -69,9 +69,9 @@ class ChoiceCombined extends Component {
           </div>
         </div>
         <div className="md-col md-col-12 center">
-          <div className="border rounded p1 border-navy navy">{match.firstChoice}</div>
+          <div className="border rounded p1 border-navy navy">{match.first_choice}</div>
           <div className="navy">+</div>
-          <div className="border rounded p1 border-navy navy">{match.secondChoice}</div>
+          <div className="border rounded p1 border-navy navy">{match.second_choice}</div>
         </div>
       </div>
     )

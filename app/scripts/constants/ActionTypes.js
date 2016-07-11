@@ -46,3 +46,4 @@ export const FAILURE_FETCH_ORGANIZATIONS = 'FAILURE_FETCH_ORGANIZATIONS'
 
 // Match actions
 export const ADD_MATCH = 'ADD_MATCH'
+export const UPDATE_MATCH = 'UPDATE_MATCH'

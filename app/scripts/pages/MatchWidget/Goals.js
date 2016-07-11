@@ -23,17 +23,24 @@ export default class Goals extends React.Component {
 
   finishedUploadFile(goal) {
     const { auth } = this.props
-    this.bindWidgetActions.addMatch({
+    this.bindWidgetActions.createOrUpdateMatch({
       widget_id: this.widget().id,
       credentials: auth.credentials,
       match: goal
     })
   }
 
-  findMatchList(widget, firstChoice, secondChoice) {
-    return widget.match_list.filter((match) => {
-      return match.first_choice == firstChoice && match.second_choice == secondChoice
+  getOrCreateMatch(widget, first_choice, second_choice) {
+    const combineds = widget.match_list.filter((match) => {
+      return match.first_choice == first_choice && match.second_choice == second_choice
     })
+    if (combineds && combineds.length > 0) {
+      return combineds.slice(-1)[0]
+    }
+    return {
+      first_choice: first_choice,
+      second_choice: second_choice
+    }
   }
 
   renderCombineChoices() {
@@ -57,17 +64,11 @@ export default class Goals extends React.Component {
 
     return secondChoices.map((b, index) => {
       const isLast = index === secondChoices.length-1
-      const combined = this.findMatchList(widget, a, b)
+      const match = this.getOrCreateMatch(widget, a, b)
       let props = {
-        match: {
-          firstChoice: a,
-          secondChoice: b,
-        },
+        match: match,
         classes: isLast ? ['mb3'] : [],
         handleUploadFinish: this.finishedUploadFile.bind(this)
-      }
-      if (combined && combined.length > 0) {
-        props.match.goalImage = combined.slice(-1)[0].goal_image
       }
       return <ChoiceCombined {...props} />
     })
