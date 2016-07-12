@@ -95,18 +95,17 @@ class MatchWidget extends Component {
     ////
     // @todo
     // - talvez prop `message` configurável?
-    // - injetar caminho da imagem da combinação de acordo com as opções
-    //   selecionadas (selectedChoice1 + selectedChoiceA).
     ////
     const matchItem = this.findMatchItem()
-    let combinationImageUrl = 'https://s3.amazonaws.com/hub-central-dev/uploads/1467831827_nossascidades.jpg'
-    if (matchItem) {
-      combinationImageUrl = matchItem.goal_image
-    }
     const { selectedChoice1, selectedChoiceA } = this.state
+    const combinationImageUrl = matchItem
+      ? matchItem.goal_image
+      : 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
+    const share = Paths.shareMatchWrapper(matchItem.widget_id, matchItem.id)
+
     return <TellAFriend {...this.props}
       message="Resultado da sua combinação"
-      href={combinationImageUrl}
+      href={ window.location.origin + share }
       imageUrl={combinationImageUrl}
       imageWidth="100%" />
   }
