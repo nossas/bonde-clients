@@ -28,7 +28,7 @@ export const showMatch = (params = {}) => {
   return {
     types: [SHOW_MATCH_REQUEST, SHOW_MATCH_SUCCESS, SHOW_MATCH_FAILURE],
     promise: () => new Promise((resolve, reject) => {
-      superagent.get(`${process.env.API_URL}/matches/65`)
+      superagent.get(`${process.env.API_URL}/widgets/${params.widget_id}/match/${params.match_id}`)
       .end(handleError(resolve, reject))
     })
   }

@@ -21,7 +21,7 @@ export class MatchShareWrapper extends React.Component {
     const { matches: { data } } = props
     return { meta: { name: {
       'og:title': `${data.first_choice} + ${data.second_choice}`,
-      'og:description': 'Subtítulo deve ser configurável.',
+      'og:description': data.widget_title,
       'og:image': data.goal_image
     }}}
   }
