@@ -14,7 +14,8 @@ describe('MatchShareWrapper', () => {
     data: {
       first_choice: 'Foo Choice',
       second_choice: 'Bar Choice',
-      goal_image: 'foo-bar-image.jpg'
+      goal_image: 'foo-bar-image.jpg',
+      widget_title: "Foo Bar Widget Title!"
     }
   }
   let props = { matches, params }
@@ -72,8 +73,7 @@ describe('MatchShareWrapper', () => {
         expect(result.meta.name['og:title']).to.equal(expected)
       })
       it('og:description prop should be equal as passed', () => {
-        const expected = 'Subtítulo deve ser configurável.'
-        expect(result.meta.name['og:description']).to.equal(expected)
+        expect(result.meta.name['og:description']).to.equal(matches.data.widget_title)
       })
       it('og:image prop should be equal as passed', () => {
         expect(result.meta.name['og:image']).to.equal(matches.data.goal_image)
