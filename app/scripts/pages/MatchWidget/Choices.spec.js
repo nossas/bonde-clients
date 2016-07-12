@@ -141,4 +141,12 @@ describe('Choices', () => {
       expect(result).to.deep.equal(expectedWidget)
     })
   })
+
+  describe('validate', () => {
+    it('should render error when submit form and title_text empty', () => {
+      wrapper.setProps({ title_text: '' })
+      wrapper.find('form').simulate('submit')
+      expect(wrapper.find('span.red').length).to.equal(1)
+    })
+  })
 })

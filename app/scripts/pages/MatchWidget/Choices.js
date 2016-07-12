@@ -51,7 +51,7 @@ class Choices extends React.Component {
       choices1
     } = this.state
 
-    const titleTextValid = title_text.length
+    const titleTextValid = title_text && title_text.length && title_text.length > 0
     const labelValid = labelChoices1.length && labelChoicesA.length
     const choicesValid = choicesA.length && choices1.length
 
@@ -73,6 +73,9 @@ class Choices extends React.Component {
       this.context.router.transitionTo(
         Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
       )
+    }
+    if (!titleTextValid) {
+      this.setState({titleTextValid: false})
     }
   }
 
@@ -114,6 +117,7 @@ class Choices extends React.Component {
           <form onSubmit={::this.handleSubmit}>
             <div className="sm-col sm-col-12">
               <label for="title_text">Título do bloco de combinações</label>
+              {this.state.titleTextValid === false ? <span className="red ml2">Insira o titulo do bloco</span> : null}
               <input
                 id="title_text"
                 type="text"
