@@ -26,6 +26,8 @@ describe('MatchWidget', () => {
       labelChoices1: 'Foo Bar Choice1 Label!',
       labelChoicesA: 'Foo Bar ChoiceA Label!'
     }, match_list: [{
+      id: 1,
+      widget_id: 1,
       first_choice: 'Framboesa',
       second_choice: 'Hospital',
       goal_image: 'test.img'
@@ -51,7 +53,11 @@ describe('MatchWidget', () => {
     })
 
     it(`should call renderShareButtons method when it is combined`, () => {
-      component.setState({ combined: true })
+      component.setState({
+        combined: true,
+        selectedChoice1: props.widget.settings.choices1.split(',')[0],
+        selectedChoiceA: props.widget.settings.choicesA.split(',')[0]
+      })
       spy.renderShareButtons = sandbox.spy(MatchWidget.prototype, 'renderShareButtons')
       expect(spy.renderShareButtons).to.have.been.called
     })
@@ -93,8 +99,8 @@ describe('MatchWidget', () => {
       it('should change combined state to true after match button is clicked', () => {
         const { widget: { settings: { choices1, choicesA } } } = props
         component.setState({
-          selectedChoice1: choices1.split(',')[2],
-          selectedChoiceA: choicesA.split(',')[1]
+          selectedChoice1: choices1.split(',')[0],
+          selectedChoiceA: choicesA.split(',')[0]
         })
         spy.setState = sandbox.spy(MatchWidget.prototype, 'setState')
         component.find('button.match').simulate('click')
@@ -108,7 +114,10 @@ describe('MatchWidget', () => {
       })
 
       it('should render default list when settings choices1 or choicesA undefined', () => {
-        component.setProps({ widget: { settings: {} } })
+        component.setProps({ widget: { settings: {
+          labelChoices1: 'Foo Bar Choice1 Label!',
+          labelChoicesA: 'Foo Bar ChoiceA Label!'}
+        } })
         expect(component).to.be.ok
       })
     })
@@ -134,13 +143,23 @@ describe('MatchWidget', () => {
 
   describe('#renderShareButtons', () => {
     it('should render one <TellAFriend> component if choices it is combined', () => {
-      component.setState({ combined: true })
+      const { widget: { settings: { choices1, choicesA } } } = props
+      component.setState({
+        combined: true,
+        selectedChoice1: choices1.split(',')[0],
+        selectedChoiceA: choicesA.split(',')[0]
+      })
       expect(component.find('TellAFriend')).to.have.length(1)
     })
 
     it('should render goal_image when match choices', () => {
       const match = props.widget.match_list[0]
-      component.setState({ combined: true, selectedChoice1: match.first_choice, selectedChoiceA: match.second_choice})
+      const { widget: { settings: { choices1, choicesA } } } = props
+      component.setState({
+        combined: true,
+        selectedChoice1: choices1.split(',')[0],
+        selectedChoiceA: choicesA.split(',')[0]
+      })
       expect(component.find('TellAFriend').at(0).props().imageUrl).to.equal(match.goal_image)
     })
   })
