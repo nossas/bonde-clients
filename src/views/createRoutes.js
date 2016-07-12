@@ -29,7 +29,8 @@ import {
   MobilizationCustomDomain,
   DonationWidgetSettings,
   Choices,
-  Goals
+  Goals,
+  MatchShareWrapper
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
@@ -40,6 +41,7 @@ export default function(store, host) {
       <Route component={Application}>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        <Route path="/match/share/:match_id" component={MatchShareWrapper} />
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
           <Route component={UserDashboard}>
             <Route path="/" component={ListMobilizations} />
@@ -65,7 +67,7 @@ export default function(store, host) {
             </Route>
           </Route>
         </Route>
-		<Route path="*" component={NotFound} status={404} />
+        <Route path="*" component={NotFound} status={404} />
       </Route>
     )
   }
@@ -73,7 +75,8 @@ export default function(store, host) {
   return (
     <Route component={Application}>
       <Route path="/" component={CustomDomainWrapper} />
-	  <Route path="*" component={NotFound} status={404} />
+      <Route path="*" component={NotFound} status={404} />
+      <Route path="/match/share/:match_id" component={MatchShareWrapper} />
     </Route>
   )
 }
