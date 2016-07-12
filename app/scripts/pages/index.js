@@ -20,3 +20,4 @@ export { default as MobilizationCustomDomain } from './MobilizationCustomDomain.
 
 export { default as Choices } from './MatchWidget/Choices'
 export { default as Goals } from './MatchWidget/Goals'
+export { default as MatchShareWrapper } from './MatchShareWrapper'
