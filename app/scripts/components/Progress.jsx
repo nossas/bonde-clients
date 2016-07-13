@@ -4,7 +4,8 @@ import classnames from 'classnames'
 export default class Progress extends React.Component {
   static propTypes = {
     percent: PropTypes.number.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    style: PropTypes.object
   }
 
   render() {
@@ -13,7 +14,7 @@ export default class Progress extends React.Component {
         <div
           ref='progress'
           className={this.props.className}
-          style={{width: `${this.props.percent}%`}} >
+          style={{ ...this.props.style, width: `${this.props.percent}%` }} >
           <br />
         </div>
       </div>

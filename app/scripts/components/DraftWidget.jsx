@@ -34,6 +34,11 @@ export default class DraftWidget extends React.Component {
     this.updateKind('donation')
   }
 
+  handleMatchClick(event) {
+    event.preventDefault()
+    this.updateKind('match')
+  }
+
   updateKind(kind) {
     const { dispatch, auth } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -54,6 +59,15 @@ export default class DraftWidget extends React.Component {
       widgetParams = {
         ...widgetParams,
         settings: {content: 'Clique aqui para editar...'}
+      }
+    }
+
+    if (kind === 'match') {
+      widgetParams = {
+        ...widgetParams,
+        settings: {
+          title_text: 'Clique para configurar suas combinações...',
+        }
       }
     }
 
@@ -94,6 +108,11 @@ export default class DraftWidget extends React.Component {
             className="caps button bg-darken-4 mt1 p2 full-width btn-donation"
             onClick={::this.handleDonationClick}>
             Doação
+          </button>
+          <button
+            className="caps button bg-darken-4 mt1 p2 full-width btn-donation"
+            onClick={::this.handleMatchClick}>
+            Match
           </button>
         </div>
       )

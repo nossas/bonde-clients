@@ -48,7 +48,7 @@ export function fetchOrganizations() {
         superagent.get(`${process.env.API_URL}/organizations`)
         .end((err, res) => {
           if (err) {
-            reject(res.body || err)
+            reject(err)
           } else {
             resolve(res.body)
           }

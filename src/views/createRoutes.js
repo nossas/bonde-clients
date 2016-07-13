@@ -27,7 +27,10 @@ import {
   RequireLogin,
   CustomDomainWrapper,
   MobilizationCustomDomain,
-  DonationWidgetSettings
+  DonationWidgetSettings,
+  Choices,
+  Goals,
+  MatchShareWrapper
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
@@ -50,6 +53,8 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/autofire" component={AutoFireForm} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/donation" component={DonationWidgetSettings} />
+              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/choices" component={Choices} />
+              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/goals" component={Goals} />
               <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
               <Route component={MobilizationSettings} >
                 <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasics} />
@@ -61,7 +66,7 @@ export default function(store, host) {
             </Route>
           </Route>
         </Route>
-		<Route path="*" component={NotFound} status={404} />
+        <Route path="*" component={NotFound} status={404} />
       </Route>
     )
   }
@@ -69,7 +74,8 @@ export default function(store, host) {
   return (
     <Route component={Application}>
       <Route path="/" component={CustomDomainWrapper} />
-	  <Route path="*" component={NotFound} status={404} />
+      <Route path="/share/widget/:widget_id/match/:match_id" component={MatchShareWrapper} />
+      <Route path="*" component={NotFound} status={404} />
     </Route>
   )
 }

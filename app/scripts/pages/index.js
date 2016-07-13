@@ -17,3 +17,7 @@ export { default as DonationWidgetSettings } from './DonationWidgetSettings.jsx'
 export { default as RequireLogin } from './RequireLogin.js'
 export { default as CustomDomainWrapper } from './CustomDomainWrapper/CustomDomainWrapper.jsx'
 export { default as MobilizationCustomDomain } from './MobilizationCustomDomain.jsx'
+
+export { default as Choices } from './MatchWidget/Choices'
+export { default as Goals } from './MatchWidget/Goals'
+export { default as MatchShareWrapper } from './MatchShareWrapper'

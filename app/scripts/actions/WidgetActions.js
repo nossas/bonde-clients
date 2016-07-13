@@ -1,4 +1,4 @@
-import { EDIT_WIDGET, FETCH_WIDGETS } from '../constants/ActionTypes'
+import { EDIT_WIDGET, FETCH_WIDGETS, ADD_MATCH, UPDATE_MATCH, FETCH_MATCH } from '../constants/ActionTypes'
 import $ from 'jquery'
 
 export function editWidget(params) {
@@ -30,4 +30,43 @@ export function fetchWidgets(params) {
       }
     })
   }
+}
+
+const addMatch = (params) => {
+  return dispatch => {
+    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match`, {
+      method: 'post',
+      data: { match: params.match },
+      headers: params.credentials,
+      success: function(data, textStatus, jqXHR){
+        dispatch({
+          type: ADD_MATCH,
+          match: data
+        })
+      }
+    })
+  }
+}
+
+const updateMatch = (params) => {
+  return dispatch => {
+    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/${params.match.id}`, {
+      method: 'put',
+      data: { match: params.match },
+      headers: params.credentials,
+      success: (data, textStatus, jqXHR) => {
+        dispatch({
+          type: UPDATE_MATCH,
+          match: data
+        })
+      }
+    })
+  }
+}
+
+export const createOrUpdateMatch = (params) => {
+  if (params.match.id) {
+    return updateMatch(params)
+  }
+  return addMatch(params)
 }
