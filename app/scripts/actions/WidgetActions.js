@@ -65,8 +65,6 @@ const updateMatch = (params) => {
 }
 
 export const createOrUpdateMatch = (params) => {
-  console.log('Debugging createOrUpdateMatch')
-  console.log(params)
   if (params.match.id) {
     return updateMatch(params)
   }

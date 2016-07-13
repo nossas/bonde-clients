@@ -40,7 +40,7 @@ class MatchWidget extends Component {
         labelChoicesA,
         choices1,
         choicesA
-      } }
+      }}
     } = this.props
     const optionsChoices1 = choices1 ? choices1.split(',') : []
     const optionsChoicesA = choicesA ? choicesA.split(',') : []

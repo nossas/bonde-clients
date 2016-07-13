@@ -67,8 +67,6 @@ export default class DraftWidget extends React.Component {
         ...widgetParams,
         settings: {
           title_text: 'Clique para configurar suas combinações...',
-          labelChoices1: 'Primeira opção',
-          labelChoicesA: 'Segunda opção'
         }
       }
     }

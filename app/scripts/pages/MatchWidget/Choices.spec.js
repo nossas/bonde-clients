@@ -142,11 +142,61 @@ describe('Choices', () => {
     })
   })
 
-  describe('validate', () => {
+  describe('#validate', () => {
+
+    it('should remove item on state when clicked column', () => {
+      props.widgets = {
+        data: [{
+          id: 1, settings: { 'title_text': '', 'choices1': '1,2,3', 'choicesA': 'A,B' }
+        }]
+      }
+      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper.find('.choices-block a').at(0).simulate('click')
+      expect(wrapper.instance().state.choicesa.length).to.equal(2)
+    })
+
     it('should render error when submit form and title_text empty', () => {
-      wrapper.setProps({ title_text: '' })
+      props.widgets = {
+        data: [{
+          id: 1, settings: { 'title_text': '', 'choices1': '1', 'choicesA': 'A' }
+        }]
+      }
+      wrapper = mount(<Choices {...props}  />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
+    })
+
+    it('should render error when submit form and side a empty', () => {
+      props.widgets = {
+        data: [{
+          id: 1,
+          settings: { 'title_text': 'lorem', 'choices1': '', 'choicesA': 'A' }
+        }]
+      }
+      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper.find('form').simulate('submit')
+      expect(wrapper.find('span.red').length).to.equal(1)
+    })
+
+    it('should render error when submit form and side b is empty', () => {
+      props.widgets = {
+        data: [{
+          id: 1,
+          settings: { 'title_text': 'lorem', 'choices1': '1', 'choicesA': '' }
+        }]
+      }
+      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper.find('form').simulate('submit')
+      expect(wrapper.find('span.red').length).to.equal(1)
+    })
+
+    it('should render all the errors when submit form and empty states', () => {
+      props.widgets = {
+        data: [{id: 1, settings: {}}]
+      }
+      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper.find('form').simulate('submit')
+      expect(wrapper.find('span.red').length).to.equal(3)
     })
   })
 })

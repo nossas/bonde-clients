@@ -23,11 +23,11 @@ class Choices extends React.Component {
     this.state = {
       loading: false,
       title_text,
-      choicesA: choicesA ? choicesA.split(',') : [],
-      choices1: choices1 ? choices1.split(',') : [],
-      labelChoicesA: labelChoicesA ? labelChoicesA : '',
-      labelChoices1: labelChoices1 ? labelChoices1 : '',
-      choicesChanged: false
+      labela: labelChoices1 ? labelChoices1 : '',
+      choicesa: choices1 ? choices1.split(',') : [],
+      labelb: labelChoicesA ? labelChoicesA : '',
+      choicesb: choicesA ? choicesA.split(',') : [],
+      errors: {}
     }
   }
 
@@ -35,7 +35,40 @@ class Choices extends React.Component {
     const { widgets, params } = props
     const widgetsStringId = widgets.data.map(widget => widget.id.toString())
     const widgetIndex = widgetsStringId.indexOf(params.widget_id)
-    return widgets.data[widgetIndex]
+    const widget = widgets.data[widgetIndex]
+    return widget
+  }
+
+  isValidForm() {
+    const {
+      title_text,
+      labela, choicesa,
+      labelb, choicesb,
+    } = this.state
+
+    const isEmptyTitle = (title_text === undefined || title_text.length === 0)
+    const isEmptySideA = (choicesa === undefined || choicesa.length === 0)
+    const isEmptySideB = (choicesb === undefined || choicesb.length === 0)
+
+    let errors = {}
+    if (isEmptyTitle) {
+      errors.isEmptyTitle = 'Insira o titulo do bloco'
+    }
+    if (isEmptySideA) {
+      errors.isEmptySideA = 'Insira ao menos uma opção de escolha'
+    }
+    if (isEmptySideB) {
+      errors.isEmptySideB = 'Insira ao menos uma opção de escolha'
+    }
+    return {
+      validForm: !(isEmptyTitle || isEmptySideA || isEmptySideB),
+      errors: errors
+    }
+  }
+
+  isDisableButon() {
+    const { validForm } = this.isValidForm()
+    return !validForm
   }
 
   handleSubmit(e) {
@@ -45,17 +78,12 @@ class Choices extends React.Component {
     const { dispatch, mobilization, auth } = this.props
     const {
       title_text,
-      labelChoices1,
-      labelChoicesA,
-      choicesA,
-      choices1
+      labela, choicesa,
+      labelb, choicesb,
     } = this.state
 
-    const titleTextValid = title_text && title_text.length && title_text.length > 0
-    const labelValid = labelChoices1.length && labelChoicesA.length
-    const choicesValid = choicesA.length && choices1.length
-
-    if (titleTextValid && labelValid && choicesValid) {
+    const { validForm, errors } = this.isValidForm()
+    if (validForm) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidget({
         mobilization_id: mobilization.id,
@@ -63,40 +91,51 @@ class Choices extends React.Component {
         credentials: auth.credentials,
         widget: { settings: {
           title_text,
-          labelChoicesA,
-          labelChoices1,
-          choicesA: choicesA.toString(),
-          choices1: choices1.toString()
+          labelChoices1: labela,
+          choices1: choicesa.toString(),
+          labelChoicesA: labelb,
+          choicesA: choicesb.toString(),
         }}
       })
       this.setState({ choicesChanged: false })
       this.context.router.transitionTo(
         Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
       )
+    } else {
+      this.setState({errors: errors})
     }
-    if (!titleTextValid) {
-      this.setState({titleTextValid: false})
+  }
+
+  onChangeLabel(attr, label) {
+    let newState = {}
+    newState[attr] = label
+    this.setState(newState)
+  }
+
+  onAddItem(attr, choice) {
+    let newState = {}
+
+    let choices = this.state[attr]
+    choices.push(choice)
+
+    newState[attr] = choices
+    this.setState(newState)
+  }
+
+  onRemoveItem(attr, choice) {
+    let newState = {}
+    let choices = this.state[attr]
+    const index = choices.indexOf(choice)
+    if (index > -1) {
+      choices.splice(index, 1)
     }
-  }
 
-  handleChangeLabelChoices1(label) {
-    this.setState({ labelChoices1: label, choicesChanged: true })
-  }
-
-  handleUpdateChoices1(choices) {
-    this.setState({ choices1: choices, choicesChanged: true })
-  }
-
-  handleChangeLabelChoicesA(label) {
-    this.setState({ labelChoicesA: label, choicesChanged: true })
-  }
-
-  handleUpdateChoicesA(choices) {
-    this.setState({ choicesA: choices, choicesChanged: true})
+    newState[attr] = choices
+    this.setState(newState)
   }
 
   handleTitleTextChange(e) {
-    this.setState({ title_text: e.target.value, choicesChanged: true })
+    this.setState({ title_text: e.target.value })
   }
 
   render() {
@@ -105,10 +144,8 @@ class Choices extends React.Component {
     const {
       title_text,
       choicesChanged,
-      choices1,
-      choicesA,
-      labelChoices1,
-      labelChoicesA
+      choicesa, choicesb,
+      labela, labelb
     } = this.state
 
     return(
@@ -117,7 +154,7 @@ class Choices extends React.Component {
           <form onSubmit={::this.handleSubmit}>
             <div className="sm-col sm-col-12">
               <label for="title_text">Título do bloco de combinações</label>
-              {this.state.titleTextValid === false ? <span className="red ml2">Insira o titulo do bloco</span> : null}
+              {this.state.errors.isEmptyTitle ? <span className="red ml2">{this.state.errors.isEmptyTitle}</span> : null}
               <input
                 id="title_text"
                 type="text"
@@ -131,21 +168,24 @@ class Choices extends React.Component {
             <div className="clearfix mb3">
               <AddChoiceForm { ...this.props }
                 title='Lado A'
-                choices={ choices1 }
-                label={ labelChoices1 }
-                onChangeLabel={ ::this.handleChangeLabelChoices1 }
-                updateChoices={ ::this.handleUpdateChoices1 } />
-
+                choices={ choicesa }
+                label={ labela }
+                handleChangeLabel={(label) => this.onChangeLabel('labela', label) }
+                handleAddItem={(choice) => this.onAddItem('choicesa', choice)}
+                handleRemoveItem={(choice) => this.onRemoveItem('choicesa', choice)}/>
+              {this.state.errors.isEmptySideA ? <span className="red ml2">{this.state.errors.isEmptySideA}</span> : null}
               <AddChoiceForm { ...this.props }
                 title='Lado B'
-                choices={ choicesA }
-                label={ labelChoicesA }
-                onChangeLabel={ ::this.handleChangeLabelChoicesA }
-                updateChoices={ ::this.handleUpdateChoicesA } />
+                choices={ choicesb }
+                label={ labelb }
+                handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
+                handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
+                handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}/>
+              {this.state.errors.isEmptySideB ? <span className="red ml2">{this.state.errors.isEmptySideB}</span> : null}
             </div>
             <button
               type="submit"
-              disabled={!choicesChanged}
+              disabled={this.isDisableButon()}
               className="button bg-aqua caps p2">
               Combinar e Salvar
             </button>

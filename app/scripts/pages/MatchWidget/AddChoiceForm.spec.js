@@ -10,9 +10,12 @@ import AddChoiceForm from './AddChoiceForm'
 describe('AddChoiceForm', () => {
   let component
   let props = {
-    title: '',
+    title: undefined,
+    label: undefined,
     choices: [],
-    updateChoices: (choices) => {}
+    handleAddItem: (choice) => {},
+    handleRemoveItem: (choice) => {},
+    handleChangeLabel: (label) => {}
   }
 
   beforeEach(() => {
@@ -22,26 +25,26 @@ describe('AddChoiceForm', () => {
   it('should add choices state when clicked add choice', () => {
     let expected
     component.setProps({
-      updateChoices: (choices) => {
-        expected = choices
+      handleAddItem: (choice) => {
+        expected = choice
       }
     })
     component.setState({'value': 'teste'})
     component.find('button').simulate('click')
-    expect(expected.length).to.equal(1)
+    expect(expected).to.equal('teste')
   })
 
   it('should remove choices state when clicked remove choice', () => {
     let expected
     component.setProps({
       choices: ['Item1', 'Item2'],
-      updateChoices: (choices) => {
-        expected = choices
+      handleRemoveItem: (choice) => {
+        expected = choice
       }
     })
     const row1 = component.find('.choices-block a').at(0)
     row1.simulate('click')
-    expect(expected.length).to.equal(1)
+    expect(expected).to.equal('Item1')
   })
 
   it('should clear input when clicked button', () => {
@@ -57,28 +60,28 @@ describe('AddChoiceForm', () => {
   })
 
   it('should not add choice when choice exists in list', () => {
-    let callUpdateChoices = false
+    let expected = undefined
     component.setProps({
       choices: ['Item1'],
-      updateChoices: (choices) => {
-        callUpdateChoices = true
+      handleAddItem: (choice) => {
+        expected = choice
       }
     })
     component.setState({ value: 'Item1' })
     component.find('button').simulate('click')
-    expect(callUpdateChoices).to.equal(false)
+    expect(expected).to.equal(undefined)
   })
 
   it('should add choice when keypress [Enter]', () => {
-    let expected = []
+    let expected
     component.setProps({
       choices: [],
-      updateChoices: (choices) => {
-        expected = choices
+      handleAddItem: (choice) => {
+        expected = choice
       }
     })
     component.setState({ value: 'Item1' })
     component.find('input').at(1).simulate('keypress', { key: 'Enter' })
-    expect(expected.length).to.equal(1)
+    expect(expected).to.equal('Item1')
   })
 })
