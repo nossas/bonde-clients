@@ -71,7 +71,6 @@ app.use((req, res, next) => {
   const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
   const www = host.match(/^www\./)
 
-  console.log(host)
   if (!isAppSubdomain && !__DISABLE_SSR__ && !www) {
     res.redirect(301, `${req.protocol}://www.${host}`)
     return
