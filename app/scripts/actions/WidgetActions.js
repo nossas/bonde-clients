@@ -1,4 +1,4 @@
-import { EDIT_WIDGET, FETCH_WIDGETS, ADD_MATCH, UPDATE_MATCH, FETCH_MATCH } from '../constants/ActionTypes'
+import { EDIT_WIDGET, FETCH_WIDGETS, ADD_MATCH, UPDATE_MATCH, DELETE_MATCH, FETCH_MATCH } from '../constants/ActionTypes'
 import $ from 'jquery'
 
 export function editWidget(params) {
@@ -69,4 +69,25 @@ export const createOrUpdateMatch = (params) => {
     return updateMatch(params)
   }
   return addMatch(params)
+}
+
+export const deleteMatch = (params) => {
+  return dispatch => {
+    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/delete_where`, {
+      method: 'delete',
+      data: params.match_where,
+      headers: params.credentials,
+      success: (data, textStatus, jqXHR) => {
+        if (data.ok) {
+          dispatch({
+            ...data.ok,
+            type: DELETE_MATCH
+          })
+        } else {
+          // Fix message or error
+          console.error('request pattern not equals')
+        }
+      }
+    })
+  }
 }

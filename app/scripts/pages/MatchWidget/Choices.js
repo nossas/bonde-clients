@@ -124,6 +124,10 @@ class Choices extends React.Component {
 
   onRemoveItem(attr, choice) {
     let newState = {}
+    const { dispatch, auth } = this.props
+    const widget = this.widget()
+    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+
     let choices = this.state[attr]
     const index = choices.indexOf(choice)
     if (index > -1) {
@@ -132,6 +136,15 @@ class Choices extends React.Component {
 
     newState[attr] = choices
     this.setState(newState)
+
+    const attrRemove = attr === 'choicesa' ? 'first_choice' : 'second_choice'
+    let match = {}
+    match[attrRemove] = choice
+    bindedWidgetActions.deleteMatch({
+      widget_id: widget.id,
+      credentials: auth.credentials,
+      match_where: { match: match }
+    })
   }
 
   handleTitleTextChange(e) {
