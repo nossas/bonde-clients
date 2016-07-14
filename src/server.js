@@ -66,6 +66,19 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
 }
 
+app.use((req, res, next) => {
+  const host = req.headers.host
+  const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
+  const www = host.match(/^www\./)
+
+  console.log(host)
+  if (!isAppSubdomain && !__DISABLE_SSR__ && !www) {
+    res.redirect(301, `${req.protocol}://www.${host}`)
+    return
+  }
+  next()
+})
+
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
