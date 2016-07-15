@@ -30,8 +30,6 @@ class ChoiceCombined extends Component {
       uploadProgress: 'success',
       uploadFinished: true
     })
-    console.log('Debugging ChoiceCombined.handleUploadFinish')
-    console.log(match)
     handleUploadFinish({
       ...match,
       goal_image: imageUrl
