@@ -50,5 +50,5 @@ export const makeExcelFile = (sheetName, data) => {
   workbook.Sheets[sheetName] = workbookSheet
 
   const type = 'base64'
-  return (workbook, { type })
+  return XLSX.write(workbook, { type })
 }
