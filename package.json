@@ -67,6 +67,7 @@
     "concurrently": "^0.1.1",
     "console": "^0.5.2",
     "css-loader": "^0.16.0",
+    "downloadjs": "^1.4.4",
     "drmonty-chosen": "^1.4.2",
     "enzyme": "^2.3.0",
     "expose-loader": "^0.7.0",
