@@ -42,10 +42,18 @@ module.exports = {
     ],
     extensions: ['', '.json', '.js']
   },
+  node: { fs: 'empty' },
+  externals: [
+    {
+      './cptable': 'var cptable',
+      './jszip': 'jszip'
+    }
+  ],
   plugins: [
     // hot reload
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/\.json$/),
+    new webpack.IgnorePlugin(/cptable/),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

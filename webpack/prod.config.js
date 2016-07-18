@@ -42,6 +42,13 @@ module.exports = {
     ],
     extensions: ['', '.json', '.js']
   },
+  node: { fs: 'empty' },
+  externals: [
+    {
+      './cptable': 'var cptable',
+      './jszip': 'jszip'
+    }
+  ],
   plugins: [
     new CleanPlugin([relativeAssetsPath]),
 
@@ -56,6 +63,7 @@ module.exports = {
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+    new webpack.IgnorePlugin(/cptable/),
 
     // set global vars
     new webpack.DefinePlugin({

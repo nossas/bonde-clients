@@ -31,11 +31,19 @@ module.exports = function(config) {
         ]
       },
 
-      externals: {
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': 'window'
-      },
+      node: { fs: 'empty' },
+
+      externals: [
+        {
+          './cptable': 'var cptable',
+          './jszip': 'jszip'
+        },
+        {
+          'react/addons': true,
+          'react/lib/ExecutionEnvironment': true,
+          'react/lib/ReactContext': 'window'
+        }
+      ],
 
       plugins: [
         new webpack.DefinePlugin({
@@ -44,6 +52,7 @@ module.exports = function(config) {
             'NODE_ENV': '"test"'
           }
         }),
+        new webpack.IgnorePlugin(/cptable/),
         new webpack.DefinePlugin({
           __CLIENT__: true,
           __SERVER__: false,
