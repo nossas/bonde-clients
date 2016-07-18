@@ -1,6 +1,6 @@
 import superagent from 'superagent'
 
-import { ADD_MATCH, UPDATE_MATCH } from '../constants/ActionTypes'
+import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from '../constants/ActionTypes'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
@@ -50,7 +50,9 @@ export default function widgets(state = initialState, action) {
         data: state.data.map(
           widget => {
             if (widget.id === action.match.widget_id) {
-              widget.match_list.push(action.match)
+              if (!widget.match_list.includes(action.match)) {
+                widget.match_list.push(action.match)
+              }
             }
             return widget
           }
@@ -67,6 +69,18 @@ export default function widgets(state = initialState, action) {
             return widget
           }
         )
+      }
+    case DELETE_MATCH:
+      return {
+        ...state,
+        data: state.data.map(widget => {
+          if (widget.id === parseInt(action.widget_id)) {
+            widget.match_list = widget.match_list.filter(match => {
+              return !action.deleted_matches.includes(match.id)
+            })
+          }
+          return widget
+        })
       }
     default:
       return state
