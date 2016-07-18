@@ -70,6 +70,10 @@ export function autofireMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/autofire`
 }
 
+export const exportWidgetData = (mobilization_id, widget_id) => {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/export`
+}
+
 export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
