@@ -2,26 +2,37 @@ import superagent from 'superagent'
 import download from 'downloadjs'
 import XLSX from 'xlsx'
 
-export const XLSX_CONTENT_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+export const EXPORT_DATACLIP_REQUEST = 'EXPORT_DATACLIP_REQUEST'
+export const EXPORT_DATACLIP_SUCCESS = 'EXPORT_DATACLIP_SUCCESS'
+export const EXPORT_DATACLIP_FAILURE = 'EXPORT_DATACLIP_FAILURE'
+export const EXPORT_DATACLIP_FORCE_DOWNLOAD = 'EXPORT_DATACLIP_FORCE_DOWNLOAD'
 
-export const downloadFormEntries = () => {
-  const filename = 'form-export.xlsx'
-  const sheetName = 'Mobilizations Workbook Name'
+export const exportDataClipByEndpoint = (endpoint, filename) => {
+  return dispatch => {
 
-  return () => {
-    superagent.get(`${process.env.API_URL}/mobilizations`)
-    .end((err, res) => {
-      if (err) return console.log(res.body || err)
+    dispatch({ type: EXPORT_DATACLIP_REQUEST })
 
-      const data = res.body.map(mobilization => Object.values(mobilization))
-      const workbookBase64 = makeExcelFile(sheetName, data)
-      const workbookBuffer = new Buffer(workbookBase64, 'base64')
-      download(workbookBuffer, filename, XLSX_CONTENT_TYPE)
-    })
+    superagent
+      .get(endpoint)
+      .end((err, res) => {
+        if (err || !res.ok) {
+          dispatch({ type: EXPORT_DATACLIP_FAILURE, error: err || res.body})
+        } else {
+          forceDownloadFile(makeExcelFile(res.body))
+          dispatch({ type: EXPORT_DATACLIP_SUCCESS })
+        }
+      })
   }
 }
 
-export const makeExcelFile = (sheetName, data) => {
+export const forceDownloadFile = (workbookBase64) => {
+  const workbookBuffer = new Buffer(workbookBase64, 'base64')
+  download(workbookBuffer, filename, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  dispatch({ type: EXPORT_DATACLIP_FORCE_DOWNLOAD })
+}
+
+export const makeExcelFile = (data, sheetName = 'Sheet 1') => {
+  console.log(data)
   let workbook = { Sheets: {}, Props: {}, SSF: {}, SheetNames: [] }
   let workbookSheet = {}
   let range = { s: {c:0, r:0}, e: {c:0, r:0} }

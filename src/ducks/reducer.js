@@ -7,6 +7,7 @@ import auth from './../../app/scripts/reducers/auth'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 import organizations from './../../app/scripts/reducers/organizations'
 import matches from './../../app/scripts/reducers/matches'
+import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
@@ -37,5 +38,6 @@ export default combineReducers({
   auth,
   mobilizationEditor,
   organizations,
-  matches
+  matches,
+  exportDataClip
 })

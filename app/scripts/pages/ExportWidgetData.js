@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from './../Paths'
-import * as ExportActions from './../actions/ExportActions'
+import { exportDataClipByEndpoint } from './../actions/ExportActions'
 import {
   FormWidgetMenu,
   DonationWidgetMenu,
@@ -11,15 +11,15 @@ import {
   CloseButton
 } from './../components'
 
-export default class ExportWidgetData extends React.Component {
+
+class ExportWidgetData extends React.Component {
 
   static propTypes = {
-    params: PropTypes.object.isRequired
-  }
-
-  constructor (props) {
-    super(props)
-    this.bindedExportActions = bindActionCreators(ExportActions, props.dispatch)
+    params: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    exportDataClipByEndpoint: PropTypes.func.isRequired,
+    exported: PropTypes.bool,
+    error: PropTypes.object
   }
 
   widget (props = this.props) {
@@ -29,14 +29,13 @@ export default class ExportWidgetData extends React.Component {
     return widgets.data[currentWidgetIndex]
   }
 
-  handleDownloadClick(event) {
-    event.preventDefault()
-    this.bindedExportActions.downloadFormEntries()
-  }
-
   renderPage() {
-    const { mobilization } = this.props
-    const widget = this.widget()
+    const { mobilization, loading, error, exported, exportDataClipByEndpoint } = this.props
+
+    const widget = this.widget()    
+    const endpoint = widget.kind === 'donation' ? 'http://api.donations' : `${process.env.API_URL}/mobilizations`
+    const filename = widget.kind === 'donation' ? 'donation_list.xlsx' : 'form_entries.xlsx'
+
     return (
       <div className='flex-auto flex flex-column bg-silver gray relative'>
         {( widget.kind === 'donation'
@@ -54,10 +53,13 @@ export default class ExportWidgetData extends React.Component {
           </p>
           <p className="mb3">
             <button
+              disabled={loading}
               className='button bg-aqua caps p2'
-              onClick={::this.handleDownloadClick}>
+              onClick={() => exportDataClipByEndpoint(endpoint, filename)}>
               Clique para baixar a planilha completa.
             </button>
+            {(exported ? <span className="green">Exportado com sucesso.</span> : null)}
+            {(error ? <span className="red">{error}</span> : null)}
           </p>
         </div>
         <CloseButton path={ Paths.editMobilization(mobilization.id) } />
@@ -74,3 +76,17 @@ export default class ExportWidgetData extends React.Component {
     return (data.length ? this.renderPage() : this.renderLoading())
   }
 }
+
+const mapStateToProps = (globalState) => {
+  return {
+    loading: globalState.exportDataClip.loading,
+    exported: globalState.exportDataClip.exported,
+    error: globalState.exportDataClip.error
+  }
+}
+
+const mapActionCreators = {
+  exportDataClipByEndpoint: exportDataClipByEndpoint
+}
+
+export default connect(mapStateToProps, mapActionCreators)(ExportWidgetData)
