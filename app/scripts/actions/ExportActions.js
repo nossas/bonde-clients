@@ -9,7 +9,6 @@ export const EXPORT_DATACLIP_FORCE_DOWNLOAD = 'EXPORT_DATACLIP_FORCE_DOWNLOAD'
 
 export const exportDataClipByEndpoint = (endpoint, filename) => {
   return dispatch => {
-
     dispatch({ type: EXPORT_DATACLIP_REQUEST })
 
     superagent
@@ -18,21 +17,25 @@ export const exportDataClipByEndpoint = (endpoint, filename) => {
         if (err || !res.ok) {
           dispatch({ type: EXPORT_DATACLIP_FAILURE, error: err || res.body})
         } else {
-          forceDownloadFile(makeExcelFile(res.body))
+          forceDownloadFile(makeExcelFile(res.body), filename)
           dispatch({ type: EXPORT_DATACLIP_SUCCESS })
         }
       })
   }
 }
 
-export const forceDownloadFile = (workbookBase64) => {
+export const forceDownloadFile = (workbookBase64, filename) => {
   const workbookBuffer = new Buffer(workbookBase64, 'base64')
-  download(workbookBuffer, filename, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-  dispatch({ type: EXPORT_DATACLIP_FORCE_DOWNLOAD })
+  const contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  download(workbookBuffer, filename, contentType)
+
+  return dispatch => { dispatch({ type: EXPORT_DATACLIP_FORCE_DOWNLOAD }) }
 }
 
 export const makeExcelFile = (data, sheetName = 'Sheet 1') => {
-  console.log(data)
+  const mapObjectToValues = d => Object.values(d)
+  data = data.map(mapObjectToValues)
+
   let workbook = { Sheets: {}, Props: {}, SSF: {}, SheetNames: [] }
   let workbookSheet = {}
   let range = { s: {c:0, r:0}, e: {c:0, r:0} }
