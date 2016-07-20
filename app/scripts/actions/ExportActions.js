@@ -7,17 +7,34 @@ export const EXPORT_DATACLIP_SUCCESS = 'EXPORT_DATACLIP_SUCCESS'
 export const EXPORT_DATACLIP_FAILURE = 'EXPORT_DATACLIP_FAILURE'
 export const EXPORT_DATACLIP_FORCE_DOWNLOAD = 'EXPORT_DATACLIP_FORCE_DOWNLOAD'
 
-export const exportDataClipByEndpoint = (endpoint, filename) => {
+
+export const exportDataClipByEndpoint = (options) => {
   return dispatch => {
     dispatch({ type: EXPORT_DATACLIP_REQUEST })
 
     superagent
-      .get(endpoint)
+      .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/form_entries`)
+      .set(options.credentials)
       .end((err, res) => {
         if (err || !res.ok) {
           dispatch({ type: EXPORT_DATACLIP_FAILURE, error: err || res.body})
         } else {
-          forceDownloadFile(makeExcelFile(res.body), filename)
+
+          const data = res.body.length && res.body.map(entity => {
+            const fields = JSON.parse(entity.fields)
+            return fields.map(field => {
+              const { label, value } = field
+              return { label: label, value: value }
+            })
+          })
+
+          const matriz = [
+            data.length && data[0].map(entity => entity.label),
+          ].concat(data.map(row => row.map(entity => entity.value)))
+
+          console.log(matriz)
+
+          forceDownloadFile(makeExcelFile(matriz), options.filename || 'export.xls')
           dispatch({ type: EXPORT_DATACLIP_SUCCESS })
         }
       })
@@ -33,9 +50,6 @@ export const forceDownloadFile = (workbookBase64, filename) => {
 }
 
 export const makeExcelFile = (data, sheetName = 'Sheet 1') => {
-  const mapObjectToValues = d => Object.values(d)
-  data = data.map(mapObjectToValues)
-
   let workbook = { Sheets: {}, Props: {}, SSF: {}, SheetNames: [] }
   let workbookSheet = {}
   let range = { s: {c:0, r:0}, e: {c:0, r:0} }

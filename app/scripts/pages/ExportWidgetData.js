@@ -30,11 +30,10 @@ class ExportWidgetData extends React.Component {
   }
 
   renderPage() {
-    const { mobilization, loading, error, exported, exportDataClipByEndpoint } = this.props
+    const { mobilization, loading, error, exported, exportDataClipByEndpoint, params, auth: { credentials } } = this.props
 
-    const widget = this.widget()    
-    const endpoint = widget.kind === 'donation' ? 'http://api.donations' : `${process.env.API_URL}/mobilizations`
-    const filename = widget.kind === 'donation' ? 'donation_list.xlsx' : 'form_entries.xlsx'
+    const widget = this.widget()
+    const filename = mobilization.name + '.xls'
 
     return (
       <div className='flex-auto flex flex-column bg-silver gray relative'>
@@ -55,7 +54,7 @@ class ExportWidgetData extends React.Component {
             <button
               disabled={loading}
               className='button bg-aqua caps p2'
-              onClick={() => exportDataClipByEndpoint(endpoint, filename)}>
+              onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, filename, credentials })}>
               Clique para baixar a planilha completa.
             </button>
             {(exported ? <span className="green">Exportado com sucesso.</span> : null)}
