@@ -29,6 +29,12 @@ class ExportWidgetData extends React.Component {
     return widgets.data[currentWidgetIndex]
   }
 
+  format(datetime) {
+    const date = datetime.getDate() + '/' + datetime.getMonth() + '/' + datetime.getFullYear()
+    const time = datetime.getHours() + ':' + datetime.getMinutes()
+    return date + ' às ' + time
+  }
+
   renderPage() {
     const { mobilization, loading, error, exported, exportDataClipByEndpoint, params, auth: { credentials } } = this.props
 
@@ -57,7 +63,9 @@ class ExportWidgetData extends React.Component {
               onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, filename, credentials })}>
               Clique para baixar a planilha completa.
             </button>
-            {(exported ? <span className="green">Exportado com sucesso.</span> : null)}
+          </p>
+          <p>
+            {(exported ? <span className="green">Exportado às {this.format(exported)}.</span> : null)}
             {(error ? <span className="red">{error}</span> : null)}
           </p>
         </div>

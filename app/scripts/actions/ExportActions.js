@@ -32,8 +32,6 @@ export const exportDataClipByEndpoint = (options) => {
             data.length && data[0].map(entity => entity.label),
           ].concat(data.map(row => row.map(entity => entity.value)))
 
-          console.log(matriz)
-
           forceDownloadFile(makeExcelFile(matriz), options.filename || 'export.xls')
           dispatch({ type: EXPORT_DATACLIP_SUCCESS })
         }
