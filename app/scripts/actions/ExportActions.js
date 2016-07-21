@@ -13,7 +13,7 @@ export const exportDataClipByEndpoint = (options) => {
     dispatch({ type: EXPORT_DATACLIP_REQUEST })
 
     superagent
-      .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/form_entries`)
+      .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/form_entries/?widget_id=${options.widget_id}`)
       .set(options.credentials)
       .end((err, res) => {
         if (err || !res.ok) {

@@ -60,7 +60,7 @@ class ExportWidgetData extends React.Component {
             <button
               disabled={loading}
               className='button bg-aqua caps p2'
-              onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, filename, credentials })}>
+              onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, widget_id: widget.id, filename, credentials })}>
               Clique para baixar a planilha completa.
             </button>
           </p>
