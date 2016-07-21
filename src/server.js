@@ -15,7 +15,6 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Html from './Html';
 import PrettyError from 'pretty-error';
-import fs from 'fs'
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -66,21 +65,6 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   // The error handler must be before any other error middleware
   app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
 }
-
-app.use((req, res, next) => {
-  const host = req.headers.host
-  const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
-  const www = host.match(/^www\./)
-  const domains = fs.readFileSync('./src/redirect.blacklist')
-  const lines = domains.toString().split('\n')
-  const blacklist = lines.some(line => { if (line) return host.match(line) })
-
-  if (!isAppSubdomain && !__DISABLE_SSR__ && !www && !blacklist) {
-    res.redirect(301, `${req.protocol}://www.${host}`)
-    return
-  }
-  next()
-})
 
 app.use((req, res) => {
   if (__DEVELOPMENT__) {
