@@ -26,7 +26,7 @@ export class CustomDomainWrapper extends React.Component {
     let findParams
 
     if (regex) {
-      findParams = { slug: regex[1] }
+      findParams = { slug: regex[1].replace(/^www\./, '') }
     } else {
       findParams = { custom_domain: host }
     }
