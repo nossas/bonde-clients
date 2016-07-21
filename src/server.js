@@ -70,7 +70,7 @@ app.use((req, res, next) => {
   const host = req.headers.host
   const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
   const www = host.match(/^www\./)
-  const domains = fs.readFileSync('./src/redirect.blacklist')
+  const domains = require('fs').readFileSync('./src/redirect.blacklist')
   const lines = domains.toString().split('\n')
   const blacklist = lines.some(line => { if (line) return host.match(line) })
 
