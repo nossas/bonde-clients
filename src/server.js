@@ -69,13 +69,19 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
 app.use((req, res, next) => {
   const host = req.headers.host
   const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
-  const www = host.match(/^www\./)
+  const www = host.match(/^www\.(.*)/)
   const domains = require('fs').readFileSync('./src/redirect.blacklist')
   const lines = domains.toString().split('\n')
   const blacklist = lines.some(line => { if (line) return host.match(line) })
 
+  console.log(www);
+
   if (!isAppSubdomain && !__DISABLE_SSR__ && !www && !blacklist) {
     res.redirect(301, `${req.protocol}://www.${host}`)
+    return
+  }
+  else if (!isAppSubdomain && !__DISABLE_SSR__ && www && blacklist) {
+    res.redirect(301, `${req.protocol}://${www[1]}`)
     return
   }
   next()
