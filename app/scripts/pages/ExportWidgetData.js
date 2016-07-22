@@ -29,9 +29,15 @@ class ExportWidgetData extends React.Component {
     return widgets.data[currentWidgetIndex]
   }
 
-  format(datetime) {
-    const date = datetime.getDate() + '/' + datetime.getMonth() + '/' + datetime.getFullYear()
-    const time = datetime.getHours() + ':' + datetime.getMinutes()
+  fixzero(value) {
+    let valueToString = value.toString()
+    return valueToString.length === 1 ? '0' + valueToString : valueToString
+  }
+
+  formatExportAt(widget) {
+    let datetime = new Date(String(widget.exported_at))
+    const date = this.fixzero(datetime.getDate()) + '/' + this.fixzero(datetime.getMonth()) + '/' + datetime.getFullYear()
+    const time = this.fixzero(datetime.getHours()) + ':' + this.fixzero(datetime.getMinutes())
     return date + ' às ' + time
   }
 
@@ -65,7 +71,7 @@ class ExportWidgetData extends React.Component {
             </button>
           </p>
           <p>
-            {(widget.exported_at ? <span className="green">Exportado às {this.format(widget.exported_at)}.</span> : null)}
+            {(widget.exported_at ? <span className="green">Exportado às {this.formatExportAt(widget)}.</span> : null)}
             {(error ? <span className="red">{error}</span> : null)}
           </p>
         </div>
