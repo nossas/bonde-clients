@@ -41,11 +41,29 @@ class ExportWidgetData extends React.Component {
     return date + ' às ' + time
   }
 
+  renderLoadingMessage() {
+    return <span>
+      <i className="fa fa-circle-o-notch fa-spin fa-w m1" />
+      Aguarde enquanto estamos processando...
+    </span>
+  }
+
+  renderExportedMessage(widget = this.widget()) {
+    return <span className="olive">
+      Última exportação: {this.formatExportAt(widget)}.
+      <i className="fa fa-calendar-check-o m1" />
+    </span>
+  }
+
+  renderErrorMessage() {
+    return <span className="red">{error}</span>
+  }
+
   renderPage() {
     const { mobilization, loading, error, exported, exportDataClipByEndpoint, params, auth: { credentials } } = this.props
 
     const widget = this.widget()
-    const filename = mobilization.name + '.xls'
+    const filename = mobilization.name + '.xlsx'
 
     return (
       <div className='flex-auto flex flex-column bg-silver gray relative'>
@@ -69,10 +87,11 @@ class ExportWidgetData extends React.Component {
               onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, widget_id: widget.id, filename, credentials })}>
               Clique para baixar a planilha completa.
             </button>
-          </p>
-          <p>
-            {(widget.exported_at ? <span className="green">Exportado às {this.formatExportAt(widget)}.</span> : null)}
-            {(error ? <span className="red">{error}</span> : null)}
+            <span className="px2">
+              {(loading ? this.renderLoadingMessage() : null)}
+              {(widget.exported_at && !loading ? this.renderExportedMessage() : null)}
+              {(error ? this.renderErrorMessage() : null)}
+            </span>
           </p>
         </div>
         <CloseButton path={ Paths.editMobilization(mobilization.id) } />
