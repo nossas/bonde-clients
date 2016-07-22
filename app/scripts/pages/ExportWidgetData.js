@@ -53,8 +53,8 @@ class ExportWidgetData extends React.Component {
             <span>Exportar</span>
           </div>
           <p className="h5 mb2">
-            Clique no botão abaixo para baixar o relatório completo de
-            assinaturas em formato excel.
+            Clique no botão abaixo para baixar o relatório completo do
+            formulário em formato excel.
           </p>
           <p className="mb3">
             <button
