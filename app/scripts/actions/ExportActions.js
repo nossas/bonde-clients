@@ -41,8 +41,12 @@ export const exportDataClipByEndpoint = (options) => {
 
 export const forceDownloadFile = (workbookBase64, filename) => {
   const workbookBuffer = new Buffer(workbookBase64, 'base64')
-  const contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  download(workbookBuffer, filename, contentType)
+  const contentTypes = {
+    xls: 'application/vnd.ms-excel',
+    xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  }
+  const extension = filename.match(/.*\.(.+)/)[1]
+  download(workbookBuffer, filename, contentTypes[extension])
 
   return dispatch => { dispatch({ type: EXPORT_DATACLIP_FORCE_DOWNLOAD }) }
 }
