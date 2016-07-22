@@ -33,7 +33,7 @@ export const exportDataClipByEndpoint = (options) => {
           ].concat(data.map(row => row.map(entity => entity.value)))
 
           forceDownloadFile(makeExcelFile(matriz), options.filename || 'export.xls')
-          dispatch({ type: EXPORT_DATACLIP_SUCCESS })
+          dispatch({ type: EXPORT_DATACLIP_SUCCESS, widget_id: options.widget_id })
         }
       })
   }

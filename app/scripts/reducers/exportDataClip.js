@@ -25,8 +25,7 @@ export default function exportDataClip(state=initialState, action) {
     case EXPORT_DATACLIP_SUCCESS:
       return {
         ...state,
-        loading: false,
-        exported: new Date()
+        loading: false
       }
     default:
       return state

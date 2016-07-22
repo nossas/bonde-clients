@@ -65,7 +65,7 @@ class ExportWidgetData extends React.Component {
             </button>
           </p>
           <p>
-            {(exported ? <span className="green">Exportado às {this.format(exported)}.</span> : null)}
+            {(widget.exported_at ? <span className="green">Exportado às {this.format(widget.exported_at)}.</span> : null)}
             {(error ? <span className="red">{error}</span> : null)}
           </p>
         </div>
@@ -87,7 +87,6 @@ class ExportWidgetData extends React.Component {
 const mapStateToProps = (globalState) => {
   return {
     loading: globalState.exportDataClip.loading,
-    exported: globalState.exportDataClip.exported,
     error: globalState.exportDataClip.error
   }
 }

@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from '../constants/ActionTypes'
+import { EXPORT_DATACLIP_SUCCESS } from '../actions/ExportActions'
 import reducer from './widgets'
 
 
@@ -80,6 +81,24 @@ describe('widgets reducers', () => {
               id: 1, first_choice: "framboesa", second_choice: "lula", goal_image: 'test.png'
             }
           ]
+        }]
+      })
+    })
+
+    it('should update widget.exported_at when download report', () => {
+      initialState = {
+        data: [{
+          id: 1,
+          kind: 'form_entry',
+        }]
+      }
+      const action = { type: EXPORT_DATACLIP_SUCCESS, widget_id: 1 }
+      const nextState = reducer(initialState, action)
+      expect(nextState).to.deep.equal({
+        data: [{
+          id: 1,
+          kind: 'form_entry',
+          exported_at: new Date()
         }]
       })
     })
