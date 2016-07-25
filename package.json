@@ -86,6 +86,8 @@
     "karma-sinon-chai": "^1.0.0",
     "lolex": "1.4.0",
     "mocha": "^2.5.3",
+    "modernizr": "^3.3.1",
+    "modernizr-loader": "0.0.5",
     "net": "^1.0.2",
     "newrelic": "^1.28.1",
     "node-sass": "^3.7.0",
