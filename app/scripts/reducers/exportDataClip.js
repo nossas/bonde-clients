@@ -1,7 +1,8 @@
 import {
   EXPORT_DATACLIP_REQUEST,
   EXPORT_DATACLIP_FAILURE,
-  EXPORT_DATACLIP_SUCCESS
+  EXPORT_DATACLIP_SUCCESS,
+  EXPORT_DATACLIP_MOUNT
 } from '../actions/ExportActions'
 
 
@@ -25,8 +26,11 @@ export default function exportDataClip(state=initialState, action) {
     case EXPORT_DATACLIP_SUCCESS:
       return {
         ...state,
-        loading: false
+        loading: false,
+        success: true
       }
+    case EXPORT_DATACLIP_MOUNT:
+      return initialState
     default:
       return state
   }
