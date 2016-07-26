@@ -82,7 +82,7 @@ class ExportWidgetData extends React.Component {
       <ul className="h5">
         <li>
           Clique com o botão direito do mouse no botão abaixo e selecione
-          a opção <span className="bold">"Transferir Arquivo Vinculado Como..."</span><br />
+          a opção <span className="bold">"Transferir Arquivo Vinculado Como..."</span>
         </li>
         <li>
           Salve o arquivo com o nome desejado e a extensão <span className="bold">.xlsx</span>

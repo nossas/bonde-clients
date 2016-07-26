@@ -13,18 +13,18 @@ export const exportDataClipByEndpoint = (options) => {
     dispatch({ type: EXPORT_DATACLIP_REQUEST })
 
     superagent
-      .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/form_entries/?widget_id=${options.widget_id}`)
+      .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/form_entries`)
+      .query(options)
       .set(options.credentials)
       .end((err, res) => {
         if (err || !res.ok) {
           dispatch({ type: EXPORT_DATACLIP_FAILURE, error: err || res.body})
         } else {
-
           const data = res.body.length && res.body.map(entity => {
             const fields = JSON.parse(entity.fields)
             return fields.map(field => {
               const { label, value } = field
-              return { label: label, value: value }
+              return { label, value }
             })
           })
 
@@ -65,11 +65,11 @@ const safariCallback = (dataBase64) => {
     const url = `data:${strMimeType};base64,${dataBase64}`
     const anchor = document.createElement('a')
     anchor.href = url
-    anchor.className = 'button bg-aqua caps p2'
+    anchor.className = 'button button-outline mb1 aqua caps p2'
     anchor.setAttribute('download', fileName)
     anchor.appendChild(icon)
     anchor.appendChild(text)
-    anchor.onClick = function() { return false }
+    anchor.onclick = e => false
     document.getElementById('saveAs').innerHTML = ''
     document.getElementById('saveAs').appendChild(anchor)
   }
