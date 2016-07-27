@@ -3,6 +3,8 @@ import classnames from 'classnames'
 
 import BlockContainer from '../../Block/containers/BlockContainer'
 
+import { getBlocks } from '../../Block/BlockSelectors'
+
 
 class ShowMobilizationContainer extends Component {
 
@@ -61,6 +63,13 @@ ShowMobilizationContainer.propTypes = {
     position: PropTypes.number
   })),
   editable: PropTypes.bool
+}
+
+
+const mapStateToProps = (globalState, props) => {
+  return {
+    blocks: getBlocks(globalState, props.mobilization.id)
+  }
 }
 
 export default ShowMobilizationContainer
