@@ -10,8 +10,7 @@ describe('<Widget />', () => {
 
   let props = {
     widget: {
-      id: 1,
-      kind: 'draft'
+      id: 1
     }
   }
   let widget
@@ -21,7 +20,7 @@ describe('<Widget />', () => {
   })
 
   it('should render DrafWidget by default', () => {
-    expect(widget.find('.draft-widget').length).to.equal(1)
+    expect(widget.find('.widget').length).to.equal(1)
   })
 
   it('should throw Error when kind not exists in Widget/src', () => {

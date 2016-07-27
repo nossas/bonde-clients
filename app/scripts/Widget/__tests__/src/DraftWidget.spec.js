@@ -10,8 +10,8 @@ import * as WidgetComponents from '../../src'
 
 describe('<DraftWidget />', () => {
   // Remove draft to simulate render menu
-  const componentes = Object.assign({}, WidgetComponents)
-  delete componentes['draft']
+  const components = Object.assign({}, WidgetComponents)
+  delete components['draft']
 
   let props = {
     widget: {
@@ -26,14 +26,15 @@ describe('<DraftWidget />', () => {
   })
 
   it('should render menu with options of Widget/src', () => {
-    expect(draft.find('button').length).to.equal(Object.keys(componentes).length)
+    expect(draft.find('button').length).to.equal(Object.keys(components).length)
   })
 
   it('should setWidget when click button', () => {
-    const firstKind = Object.keys(componentes)[0]
+    const firstKind = Object.keys(components)[0]
 
     let clickedKind
     draft.setProps({
+      ...props,
       setWidget: kind => clickedKind = kind
     })
 
