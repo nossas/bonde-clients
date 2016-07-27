@@ -31,7 +31,8 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.(otf.*|woff.*|eot.*|ttf.*|svg.*)$/, loader: 'url?limit=100000' },
       { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
+      { test: /\.modernizrrc$/, loader: 'modernizr' }
     ]
   },
   progress: true,
@@ -40,8 +41,18 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js']
+    extensions: ['', '.json', '.js'],
+    alias: {
+      modernizr$: path.resolve(__dirname, '.modernizrrc')
+    }
   },
+  node: { fs: 'empty' },
+  externals: [
+    {
+      './cptable': 'var cptable',
+      './jszip': 'jszip'
+    }
+  ],
   plugins: [
     new CleanPlugin([relativeAssetsPath]),
 
@@ -56,6 +67,7 @@ module.exports = {
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+    new webpack.IgnorePlugin(/cptable/),
 
     // set global vars
     new webpack.DefinePlugin({

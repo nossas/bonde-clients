@@ -30,7 +30,8 @@ import {
   DonationWidgetSettings,
   Choices,
   Goals,
-  MatchShareWrapper
+  MatchShareWrapper,
+  ExportWidgetData
 } from '../../app/scripts/pages'
 
 export default function(store, host) {
@@ -52,6 +53,7 @@ export default function(store, host) {
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/autofire" component={AutoFireForm} />
+              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/export" component={ExportWidgetData} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/donation" component={DonationWidgetSettings} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/choices" component={Choices} />
               <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/goals" component={Goals} />

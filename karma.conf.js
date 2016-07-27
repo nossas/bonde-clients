@@ -3,6 +3,7 @@
 var webpack = require('webpack');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack/webpack-isomorphic-tools'))
+var path = require('path')
 
 module.exports = function(config) {
   config.set({
@@ -20,22 +21,34 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
 
       resolve: {
-        extensions: [ '', '.js', '.jsx', '.json' ]
+        extensions: [ '', '.js', '.jsx', '.json' ],
+        alias: {
+          modernizr$: path.resolve(__dirname, 'webpack/.modernizrrc')
+        }
       },
 
       module: {
         loaders: [
           { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader?optional=runtime' },
           { test: /\.json$/, loader: 'json' },
-          { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
+          { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
+          { test: /\.modernizrrc$/, loader: 'modernizr' }
         ]
       },
 
-      externals: {
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': 'window'
-      },
+      node: { fs: 'empty' },
+
+      externals: [
+        {
+          './cptable': 'var cptable',
+          './jszip': 'jszip'
+        },
+        {
+          'react/addons': true,
+          'react/lib/ExecutionEnvironment': true,
+          'react/lib/ReactContext': 'window'
+        }
+      ],
 
       plugins: [
         new webpack.DefinePlugin({
@@ -44,6 +57,7 @@ module.exports = function(config) {
             'NODE_ENV': '"test"'
           }
         }),
+        new webpack.IgnorePlugin(/cptable/),
         new webpack.DefinePlugin({
           __CLIENT__: true,
           __SERVER__: false,

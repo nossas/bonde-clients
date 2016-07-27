@@ -74,8 +74,6 @@ app.use((req, res, next) => {
   const lines = domains.toString().split('\n')
   const blacklist = lines.some(line => { if (line) return host.match(line) })
 
-  console.log(www);
-
   if (!isAppSubdomain && !__DISABLE_SSR__ && !www && !blacklist) {
     res.redirect(301, `${req.protocol}://www.${host}`)
     return
