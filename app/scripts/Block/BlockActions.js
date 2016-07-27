@@ -5,6 +5,8 @@ import request from 'superagent'
 export const REQUEST_FETCH_BLOCKS = 'REQUEST_FETCH_BLOCKS'
 export const SUCCESS_FETCH_BLOCKS = 'SUCCESS_FETCH_BLOCKS'
 export const FAILURE_FETCH_BLOCKS = 'FAILURE_FETCH_BLOCKS'
+
+// TODO: Refatorar constantes abaixo
 export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
 export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
@@ -33,6 +35,7 @@ export function fetchBlocks(params) {
   }
 }
 
+// TODO: Refatorar funções abaixo
 export function addBlock(params) {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
