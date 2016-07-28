@@ -46,6 +46,6 @@ describe('<MobilizationCard />', () => {
       }
     ]
     mobilizationCard.setProps({ mobilizations, editMobilizationURL})
-    expect(mobilizationCard.find('Link').props().to()).to.equal('/edit/1')
+    expect(mobilizationCard.find('Link').props().to).to.equal('/edit/1')
   })
 })

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import * as Paths from '../../Paths'
-import Loading from '../../components/Loading'
+import { Loading } from '../../components'
 
 import MobilizationList from '../components/MobilizationList'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
@@ -13,9 +13,7 @@ class MobilizationListPage extends Component {
   // Esse comportamente é especifico desta aplicação
   // TODO: Migrar para o boilerplate Mern
   static fetchData({ dispatch, getState }) {
-    console.log('enter fetchData')
     const promises = []
-
     if (!mobilizationsIsLoaded(getState())) {
       promises.push(dispatch(fetchMobilizations()))
     }
@@ -36,7 +34,6 @@ class MobilizationListPage extends Component {
     return (!loading && loaded ?
       <MobilizationList
         newMobilizationURL={Paths.newMobilization}
-        editMobilizationURL={(id) => Paths.editMobilization(id)}
         mobilizations={mobilizations} /> :
       <Loading />
     )

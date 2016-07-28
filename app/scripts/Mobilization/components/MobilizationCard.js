@@ -23,10 +23,12 @@ class MobilizationCard extends React.Component {
   render() {
     const { mobilization, editMobilizationURL } = this.props
     // TODO: Verificar se não deve ser um selector
-    const editURL = Paths.editMobilization(mobilization.id)
+    /*const editURL = Paths.editMobilization(mobilization.id)*/
+
+    const editUrlIsFunction = editMobilizationURL !== undefined && typeof editMobilizationURL === 'function'
 
     return (
-      <Link to={() => editMobilizationURL && editMobilizationURL(mobilization.id)} disabled={editMobilizationURL !== undefined && typeof editMobilizationURL === 'function' ? false : true} style={{textDecoration: 'none'}} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
+      <Link to={editUrlIsFunction ? editMobilizationURL(mobilization.id) : ''} disabled={editUrlIsFunction ? false : true} style={{textDecoration: 'none'}} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
         <div className="bg-white p2 border mb2 rounded" style={(this.state.hasMouseOver ? {borderColor: '#ccc'} : null)}>
           <h3 className="bold gray">{ mobilization.name }</h3>
           <p className="gray">{ mobilization.goal }</p>

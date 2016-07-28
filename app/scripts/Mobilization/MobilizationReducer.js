@@ -28,6 +28,8 @@ const MobilizationReducer = (state = initialState, action) => {
         loaded: true,
         error: action.error
       }
+    default:
+      return state
   }
 }
 
