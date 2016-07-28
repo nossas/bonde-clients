@@ -33,6 +33,9 @@ import {
   MatchShareWrapper
 } from '../../app/scripts/pages'
 
+// New route pages
+import MobilizationRoute from '../../app/scripts/Mobilization/routes'
+
 export default function(store, host) {
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
 
@@ -43,7 +46,8 @@ export default function(store, host) {
         <Route path="/logout" component={Logout} />
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
           <Route component={UserDashboard}>
-            <Route path="/" component={ListMobilizations} />
+            {MobilizationRoute}
+            {/*<Route path="/" component={ListMobilizations} />
             <Route path="/mobilizations/new" component={NewMobilization} />
             <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
             <Route component={MobilizationDashboard} >
@@ -63,7 +67,7 @@ export default function(store, host) {
                 <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
                 <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
               </Route>
-            </Route>
+            </Route>*/}
           </Route>
         </Route>
         <Route path="*" component={NotFound} status={404} />

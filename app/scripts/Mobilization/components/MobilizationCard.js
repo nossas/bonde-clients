@@ -21,14 +21,12 @@ class MobilizationCard extends React.Component {
   }
 
   render() {
-    const { mobilization, editMobilizationURL } = this.props
-    // TODO: Verificar se não deve ser um selector
-    /*const editURL = Paths.editMobilization(mobilization.id)*/
+    const { mobilization, redirectToEdit } = this.props
 
-    const editUrlIsFunction = editMobilizationURL !== undefined && typeof editMobilizationURL === 'function'
+    const editUrlIsFunction = redirectToEdit !== undefined && typeof redirectToEdit === 'function'
 
     return (
-      <Link to={editUrlIsFunction ? editMobilizationURL(mobilization.id) : ''} disabled={editUrlIsFunction ? false : true} style={{textDecoration: 'none'}} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
+      <Link to={editUrlIsFunction ? redirectToEdit(mobilization.id) : ''} disabled={editUrlIsFunction ? false : true} style={{textDecoration: 'none'}} onMouseOver={::this.handleMouseOver} onMouseOut={::this.handleMouseOut}>
         <div className="bg-white p2 border mb2 rounded" style={(this.state.hasMouseOver ? {borderColor: '#ccc'} : null)}>
           <h3 className="bold gray">{ mobilization.name }</h3>
           <p className="gray">{ mobilization.goal }</p>
@@ -44,7 +42,7 @@ MobilizationCard.propTypes = {
     name: PropTypes.string.isRequired,
     goal: PropTypes.string
   }),
-  editMobilizationURL: PropTypes.func
+  redirectToEdit: PropTypes.func
 }
 
 export default MobilizationCard

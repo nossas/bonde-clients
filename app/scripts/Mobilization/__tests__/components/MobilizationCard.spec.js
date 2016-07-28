@@ -35,8 +35,8 @@ describe('<MobilizationCard />', () => {
     expect(link.props().disabled).to.equal(true)
   })
 
-  it('should enabled Link and call editMobilizationURL if passed', () => {
-    const editMobilizationURL = (id) => {
+  it('should enabled Link and call redirectToEdit if passed', () => {
+    const redirectToEdit = (id) => {
       return `/edit/${id}`
     }
     const mobilizations = [
@@ -45,7 +45,7 @@ describe('<MobilizationCard />', () => {
         name: 'Lorem ipsum'
       }
     ]
-    mobilizationCard.setProps({ mobilizations, editMobilizationURL})
+    mobilizationCard.setProps({ mobilizations, redirectToEdit})
     expect(mobilizationCard.find('Link').props().to).to.equal('/edit/1')
   })
 })

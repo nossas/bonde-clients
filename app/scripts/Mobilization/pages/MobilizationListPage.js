@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
 
-import MobilizationList from '../components/MobilizationList'
+import { MobilizationList, MobilizationListHeader }  from '../components'
+
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
 
 
@@ -31,11 +32,16 @@ class MobilizationListPage extends Component {
 
   render() {
     const { mobilizations, loading, loaded } = this.props
-    return (!loading && loaded ?
-      <MobilizationList
-        newMobilizationURL={Paths.newMobilization}
-        mobilizations={mobilizations} /> :
-      <Loading />
+    return (
+      <div className="flex-auto bg-silver gray">
+        <MobilizationListHeader redirectToAdd={() => Paths.newMobilization()} />
+        {(!loading && loaded ?
+          <MobilizationList
+            redirectToEdit={id => Paths.editMobilization(id)}
+            mobilizations={mobilizations} /> :
+          <Loading />
+        )}
+      </div>
     )
   }
 }

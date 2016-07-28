@@ -29,11 +29,18 @@ describe('<MobilizationList />', () => {
     expect(mobilizationList.find('MobilizationCard').length).to.equal(2)
   })
 
-  it('should render button ADD NEW only passed newMobilizationURL', () => {
-    mobilizationList.setProps({newMobilizationURL: () => '/newMob'})
-    expect(mobilizationList.find('Link').length).to.equal(1)
-
-    mobilizationList.setProps({newMobilizationURL: undefined})
-    expect(mobilizationList.find('Link').length).to.equal(0)
+  it('should pass redirectTo to children MobilizationCard', () => {
+    const mobilizations = [
+      {
+        id: 1,
+        name: 'Lorem ipsum'
+      }
+    ]
+    const redirectToEdit = (id) => { return `/${id}` }
+    mobilizationList.setProps({
+      mobilizations: mobilizations,
+      redirectToEdit: redirectToEdit
+    })
+    expect(mobilizationList.find('MobilizationCard').props().redirectToEdit).to.equal(redirectToEdit)
   })
 })
