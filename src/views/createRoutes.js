@@ -4,36 +4,18 @@ import { Route } from 'react-router'
 import {
   Application,
   UserDashboard,
-  MobilizationDashboard,
-  MobilizationSettings,
   NotFound
 } from '../../app/scripts/containers'
 
 import {
   Login,
   Logout,
-  ListMobilizations,
-  NewMobilization,
-  EditMobilization,
-  MobilizationBasics,
-  MobilizationCity,
-  MobilizationAnalytics,
-  NewBlock,
-  FormWidgetFields,
-  FormWidgetForm,
-  AutoFireForm,
-  MobilizationFonts,
-  MobilizationSharing,
   RequireLogin,
   CustomDomainWrapper,
-  MobilizationCustomDomain,
-  DonationWidgetSettings,
-  Choices,
-  Goals,
-  MatchShareWrapper
+  MatchShareWrapper,
 } from '../../app/scripts/pages'
 
-// New route pages
+// Modules routes
 import MobilizationRoute from '../../app/scripts/Mobilization/routes'
 
 export default function(store, host) {

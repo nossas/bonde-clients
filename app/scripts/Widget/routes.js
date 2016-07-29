@@ -5,7 +5,8 @@ import {
   AutoFireForm,
   DonationWidgetSettings,
   Choices,
-  Goals
+  Goals,
+  ExportWidgetData
 } from './../pages'
 
 import { pages as FormWidgetPages } from './modules/Form'
@@ -18,6 +19,7 @@ const current = `${path}${param}`
 const WidgetRoutes = parent => [
   ...FormWidgetRoutes(`${parent}${current}`),
   r(`${parent}${current}/autofire`, AutoFireForm),
+  r(`${parent}${current}/export`, ExportWidgetData),
   r(`${parent}${current}/donation`, DonationWidgetSettings),
   r(`${parent}${current}/match/choices`, Choices),
   r(`${parent}${current}/match/goals`, Goals)

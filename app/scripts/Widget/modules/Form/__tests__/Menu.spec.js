@@ -14,10 +14,10 @@ describe('FormWidget/components/Menu', () => {
     location: {}
   }
 
-  it('should render 3 <TabMenuItem /> in childrens', () => {
+  it('should render 4 <TabMenuItem /> in childrens', () => {
     let wrapper = shallow(<Menu {...props} />)
     let node = wrapper.find('ul').at(0)
-    expect(node.find('TabMenuItem')).to.have.length(3)
+    expect(node.find('TabMenuItem')).to.have.length(4)
   })
 
   context('when active menu with pathname equals location', () => {
