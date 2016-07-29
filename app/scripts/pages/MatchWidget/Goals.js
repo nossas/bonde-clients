@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as WidgetActions from './../../actions/WidgetActions'
+import * as WidgetActions from './../../Widget/actions'
 
 import MatchPage from './MatchPage'
 import ChoiceCombined from './ChoiceCombined'

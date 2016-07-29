@@ -1,6 +1,6 @@
 import superagent from 'superagent'
 
-import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from '../constants/ActionTypes'
+import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
@@ -19,7 +19,7 @@ const initialState = {
   data: []
 }
 
-export default function widgets(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WIDGETS_REQUEST:
       return {...state, loaded: false}

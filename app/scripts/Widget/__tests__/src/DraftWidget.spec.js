@@ -3,9 +3,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import DraftWidget from '../../src/DraftWidget'
+import DraftWidget from '../../modules/DraftWidget'
 
-import * as WidgetComponents from '../../src'
+import * as WidgetComponents from '../../modules'
 
 
 describe('<DraftWidget />', () => {
@@ -25,7 +25,7 @@ describe('<DraftWidget />', () => {
     draft = mount(<DraftWidget {...props} />)
   })
 
-  it('should render menu with options of Widget/src', () => {
+  it('should render menu with options of Widget/modules', () => {
     expect(draft.find('button').length).to.equal(Object.keys(components).length)
   })
 

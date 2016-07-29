@@ -1,5 +1,5 @@
 import { EDIT_WIDGET, FETCH_WIDGETS } from '../../constants/ActionTypes'
-import * as WidgetActions from './../../actions/WidgetActions'
+import * as WidgetActions from './../../Widget/actions'
 import $ from 'jquery'
 
 describe('WidgetActions', () => {

@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
-import * as Paths from '../Paths'
-import { Label, FormWidgetMenu, DonationWidgetMenu, Loading, CloseButton } from './../components'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as WidgetActions from './../actions/WidgetActions'
 import reduxForm from 'redux-form'
+import classnames from 'classnames'
+
+import * as Paths from './../Paths'
+import * as WidgetActions from './../Widget/actions'
+import { Label, DonationWidgetMenu, Loading, CloseButton } from './../components'
+import { Menu as FormWidgetMenu } from './../Widget/modules/Form/components'
 
 function widgetFormValidation(data) {
   const errors = { valid: true }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
-import { fetchWidgets, isWidgetsLoaded } from './../reducers/widgets'
+import { fetchWidgets, isWidgetsLoaded } from './../Widget/reducer'
 import { MobilizationMenu } from './../components'
 
 @connect(state => ({

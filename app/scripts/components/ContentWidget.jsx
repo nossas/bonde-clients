@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { WYSIHTMLToolbar, Loading } from './'
 import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
+import * as WidgetActions from './../Widget/actions'
 import $ from 'jquery'
 
 export default class ContentWidget extends React.Component {

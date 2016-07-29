@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { Navigation } from 'react-router'
+import reactMixin from 'react-mixin'
 import classnames from 'classnames'
 import $ from 'jquery'
-import reactMixin from 'react-mixin'
-import * as Paths from './../../Paths'
-import { Navigation } from 'react-router'
-import { bindActionCreators } from 'redux'
-import * as FormEntryActions from './../../actions/FormEntryActions'
-import { FormWidgetInput, FormWidgetButton } from './../'
-import TellAFriend from './../shared/TellAFriend.jsx'
+
+import * as Paths from './../../../../Paths'
+import * as FormEntryActions from './../../../../actions/FormEntryActions'
+import { Input, Button } from './'
+import TellAFriend from './../../../../components/shared/TellAFriend.jsx'
 
 // Unrestrictive email regex. See http://is.gd/7n5YOk
 const emailRegEx = /[^@]+@[^@]+/
@@ -109,7 +110,7 @@ export default class FormWidget extends React.Component {
     const fields = this.fields()
     return fields.map((field, index) => {
       return (
-        <FormWidgetInput
+        <Input
           {...this.props}
           key={field.uid}
           uid={field.uid}
@@ -127,7 +128,7 @@ export default class FormWidget extends React.Component {
 
     if (!configurable) {
       return (
-        <FormWidgetButton
+        <Button
           buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
           handleClick={::this.submit}
           loading={loading}

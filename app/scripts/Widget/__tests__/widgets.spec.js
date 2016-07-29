@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from '../constants/ActionTypes'
-import reducer from './widgets'
+import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../../constants/ActionTypes'
+import reducer from './../reducer'
 
 
 describe('widgets reducers', () => {

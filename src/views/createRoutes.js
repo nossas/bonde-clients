@@ -47,27 +47,6 @@ export default function(store, host) {
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
           <Route component={UserDashboard}>
             {MobilizationRoute}
-            {/*<Route path="/" component={ListMobilizations} />
-            <Route path="/mobilizations/new" component={NewMobilization} />
-            <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
-            <Route component={MobilizationDashboard} >
-              <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilization} />
-              <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/fields" component={FormWidgetFields} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/form" component={FormWidgetForm} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/autofire" component={AutoFireForm} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/donation" component={DonationWidgetSettings} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/choices" component={Choices} />
-              <Route path="/mobilizations/:mobilization_id/widgets/:widget_id/match/goals" component={Goals} />
-              <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
-              <Route component={MobilizationSettings} >
-                <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasics} />
-                <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCity} />
-                <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
-                <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
-                <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
-              </Route>
-            </Route>*/}
           </Route>
         </Route>
         <Route path="*" component={NotFound} status={404} />

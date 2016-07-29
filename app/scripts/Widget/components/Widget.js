@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import * as WidgetComponents from '../src'
-
+import * as WidgetComponents from '../modules'
 
 const Widget = ({ widget }) => {
 

@@ -5,7 +5,7 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
-import { fetchWidgets } from './../reducers/widgets'
+import { fetchWidgets } from './../Widget/reducer'
 
 @connect(state => ({
   scrolledToBottom: false,
