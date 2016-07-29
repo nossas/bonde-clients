@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react'
 import * as Paths from './../../../../Paths'
 import { TabMenuItem } from './../../../../components'
 
-
 const Menu = ({ mobilization, widget, location }) => {
   const fieldsPath = Paths.fieldsMobilizationWidget(mobilization.id, widget.id)
   const formPath = Paths.formMobilizationWidget(mobilization.id, widget.id)
   const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
+  const exportPath = Paths.exportWidgetData(mobilization.id, widget.id)
 
   return (
     <div className='bg-white px3 clearfix'>
@@ -25,6 +25,10 @@ const Menu = ({ mobilization, widget, location }) => {
             path={autofirePath}
             text='Mensagem agradecimento'
             isActive={autofirePath === location.pathname} />
+          <TabMenuItem
+            path={exportPath}
+            text='Relatório'
+            isActive={exportPath === location.pathname} />
         </ul>
       </div>
     </div>

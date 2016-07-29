@@ -12,7 +12,7 @@ import {
   Logout,
   RequireLogin,
   CustomDomainWrapper,
-  MatchShareWrapper,
+  MatchShareWrapper
 } from '../../app/scripts/pages'
 
 // Modules routes

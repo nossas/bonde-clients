@@ -1,8 +1,7 @@
 import superagent from 'superagent'
 
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
-
-import { EXPORT_DATACLIP_SUCCESS } from '../actions/ExportActions'
+import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
