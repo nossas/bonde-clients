@@ -70,7 +70,7 @@ app.use((req, res, next) => {
   const host = req.headers.host
   const isAppDomain = host === process.env.APP_DOMAIN
   if (isAppDomain) {
-    res.redirect(301, `${req.protocol}://app.${host}`)
+    res.redirect(301, `${req.protocol}://app.${host}${req.originalUrl}`)
     return
   }
   next()
