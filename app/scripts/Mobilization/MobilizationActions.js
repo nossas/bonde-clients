@@ -29,5 +29,6 @@ export const fetchMobilizations = () => {
 }
 
 export const mobilizationsIsLoaded = (globalState) => {
-  return globalState.mobilizations.loaded
+  const { mobilization: { objects } } = globalState
+  return objects.loaded
 }

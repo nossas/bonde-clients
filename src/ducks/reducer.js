@@ -8,7 +8,7 @@ import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 import organizations from './../../app/scripts/reducers/organizations'
 import matches from './../../app/scripts/reducers/matches'
 
-import mobilizations from './../../app/scripts/Mobilization/MobilizationReducer'
+import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
@@ -25,7 +25,7 @@ const mobilizationSharing = createFormReducer('mobilizationSharing', [
 ])
 
 export default combineReducers({
-  mobilizations,
+  mobilization,
   mobilizationBasics,
   mobilizationCity,
   mobilizationAnalytics,

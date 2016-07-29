@@ -1,36 +1,14 @@
-import { REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS } from './MobilizationActions'
+import { combineReducers } from 'redux'
+import { createFormReducer } from 'redux-form'
 
-const initialState = {
-  loading: false,
-  loaded: false,
-  data: []
-}
+import * as MobilizationReducer from './reducers'
 
-const MobilizationReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case REQUEST_FETCH_MOBILIZATIONS:
-      return {
-        ...state,
-        loading: true,
-        loaded: false
-      }
-    case SUCCESS_FETCH_MOBILIZATIONS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        data: action.result
-      }
-    case FAILURE_FETCH_MOBILIZATIONS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        error: action.error
-      }
-    default:
-      return state
+
+
+// TODO: Check if it is a good idea
+export default combineReducers({
+  ...MobilizationReducer,
+  forms: {
+    basics: createFormReducer('basics', ['name', 'goal']),
   }
-}
-
-export default MobilizationReducer
+})

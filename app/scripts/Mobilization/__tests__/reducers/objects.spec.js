@@ -1,11 +1,12 @@
+import { fromJS } from 'immutable'
 import { expect } from 'chai'
 
-import { SUCCESS_FETCH_MOBILIZATIONS } from '../MobilizationActions'
+import { SUCCESS_FETCH_MOBILIZATIONS } from '../../MobilizationActions'
 
-import reducer from '../MobilizationReducer'
+import reducer from '../../reducers/objects'
 
 
-describe('MobilizationReducer', () => {
+describe('MobilizationReducer #objects', () => {
 
   it('should load mobilizations in data', () => {
     const action = {
@@ -15,12 +16,12 @@ describe('MobilizationReducer', () => {
       ]
     }
     const nextState = reducer(undefined, action)
-    expect(nextState).to.deep.equal({
+    expect(nextState).to.deep.equal(fromJS({
       loading: false,
       loaded: true,
       data: [
         { id: 1 }
       ]
-    })
+    }))
   })
 })
