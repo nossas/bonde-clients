@@ -1,9 +1,11 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
+
+import * as Paths from './../../../../Paths'
 import * as WidgetActions from './../../../actions'
 import { Loading, CloseButton } from './../../../../components'
-import { Menu, FormWidget } from './../components'
-import * as Paths from './../../../../Paths'
+import FormWidget from './../'
+import { Menu } from './../components'
 
 export default class Fields extends React.Component {
   constructor(props, context) {

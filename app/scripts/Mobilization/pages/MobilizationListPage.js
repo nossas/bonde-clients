@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
-
 import { MobilizationList, MobilizationListHeader }  from '../components'
-
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
-
 
 class MobilizationListPage extends Component {
 

@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
-import { FormWidget } from './../Widget/modules/Form/components'
+import { Form as FormWidget } from './../Widget'
 import DonationWidget from './DonationWidget.jsx'
 import { MatchWidget } from './MatchWidget'
 

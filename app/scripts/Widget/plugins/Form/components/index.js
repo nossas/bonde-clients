@@ -1,4 +1,3 @@
-export { default as FormWidget } from './FormWidget'
 export { default as Button } from './Button'
 export { default as Input } from './Input'
 export { default as InputForm } from './InputForm'

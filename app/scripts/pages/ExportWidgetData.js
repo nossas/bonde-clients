@@ -11,14 +11,14 @@ import {
 } from './../actions/ExportActions'
 
 import {
-  FormWidgetMenu,
   DonationWidgetMenu,
   Loading,
   CloseButton
 } from './../components'
 
-class ExportWidgetData extends React.Component {
+import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 
+class ExportWidgetData extends React.Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -141,7 +141,14 @@ class ExportWidgetData extends React.Component {
             <button
               disabled={loading}
               className='button bg-aqua caps p2'
-              onClick={() => exportDataClipByEndpoint({ mobilization_id: mobilization.id, widget_id: widget.id, filename, credentials })}>
+              onClick={() => exportDataClipByEndpoint(
+                {
+                  mobilization_id: mobilization.id,
+                  widget_id: widget.id,
+                  filename,
+                  credentials
+                }
+              )}>
               {Modernizr.adownload
                 ? 'Clique para baixar a planilha completa.'
                 : 'Clique para processar a planilha completa.'
@@ -157,6 +164,7 @@ class ExportWidgetData extends React.Component {
 
           {(!Modernizr.adownload && !loading && success ? this.renderDisclaimer() : null)}
           {(!Modernizr.adownload ? this.renderSaveAsContainer() : null)}
+
         </div>
         <CloseButton path={ Paths.editMobilization(mobilization.id) } />
       </div>

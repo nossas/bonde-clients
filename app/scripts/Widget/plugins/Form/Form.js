@@ -5,17 +5,17 @@ import reactMixin from 'react-mixin'
 import classnames from 'classnames'
 import $ from 'jquery'
 
-import * as Paths from './../../../../Paths'
-import * as FormEntryActions from './../../../../actions/FormEntryActions'
-import { Input, Button } from './'
-import TellAFriend from './../../../../components/shared/TellAFriend.jsx'
+import * as Paths from './../../../Paths'
+import * as FormEntryActions from './../../../actions/FormEntryActions'
+import TellAFriend from './../../../components/shared/TellAFriend.jsx'
+import { Input, Button } from './components'
 
 // Unrestrictive email regex. See http://is.gd/7n5YOk
 const emailRegEx = /[^@]+@[^@]+/
 
 @reactMixin.decorate(Navigation)
 
-export default class FormWidget extends React.Component {
+export default class Form extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     widget: PropTypes.object.isRequired,

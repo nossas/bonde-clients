@@ -1,6 +1,6 @@
 import React from 'react'
+import { Route } from 'react-router'
 
-import { r } from './../../util/short-aliases'
 import {
   AutoFireForm,
   DonationWidgetSettings,
@@ -8,21 +8,19 @@ import {
   Goals,
   ExportWidgetData
 } from './../pages'
-
-import { pages as FormWidgetPages } from './modules/Form'
-import FormWidgetRoutes from './modules/Form/routes'
+import FormWidgetRoutes from './plugins/Form/routes'
 
 const path = '/widgets'
 const param = '/:widget_id'
-const current = `${path}${param}`
+const defaultPath = `${path}${param}`
 
 const WidgetRoutes = parent => [
-  ...FormWidgetRoutes(`${parent}${current}`),
-  r(`${parent}${current}/autofire`, AutoFireForm),
-  r(`${parent}${current}/export`, ExportWidgetData),
-  r(`${parent}${current}/donation`, DonationWidgetSettings),
-  r(`${parent}${current}/match/choices`, Choices),
-  r(`${parent}${current}/match/goals`, Goals)
+  ...FormWidgetRoutes(`${parent}${defaultPath}`),
+  <Route path={`${parent}${defaultPath}/autofire`} component={AutoFireForm} />,
+  <Route path={`${parent}${defaultPath}/export`} component={ExportWidgetData} />,
+  <Route path={`${parent}${defaultPath}/donation`} component={DonationWidgetSettings} />,
+  <Route path={`${parent}${defaultPath}/match/choices`} component={Choices} />,
+  <Route path={`${parent}${defaultPath}/match/goals`} component={Goals} />
 ]
 
 export default WidgetRoutes

@@ -3,11 +3,11 @@ import { Route, IndexRoute } from 'react-router'
 
 import { MobilizationDashboard } from './../containers'
 import { MobilizationListPage, WrapperMobilizationApp } from './pages'
-import WidgetRoutes from './../Widget/routes'
+import widget from './../Widget/routes'
 
 const path = '/mobilizations'
 const param = '/:mobilization_id'
-const current = `${path}${param}`
+const defaultPath = `${path}${param}`
 
 export default (
   <Route component={WrapperMobilizationApp}>
@@ -22,7 +22,7 @@ export default (
         // <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilization} />
         // <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
       }
-      {WidgetRoutes(current)}
+      { widget(defaultPath) }
       {
         // <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
         // <Route component={MobilizationSettings} >
