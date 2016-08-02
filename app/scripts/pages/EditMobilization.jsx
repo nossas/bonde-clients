@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
-import { Block, Loading, Navbar } from './../components'
-import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import * as Paths from '../Paths'
+import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
+
+import * as Paths from '../Paths'
+import { Block, Loading, Navbar } from './../components'
 import { fetchWidgets } from './../Widget/reducer'
 
 @connect(state => ({

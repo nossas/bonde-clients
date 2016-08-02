@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
-import ReactS3Uploader from 'react-s3-uploader'
 import { bindActionCreators } from 'redux'
+import ReactS3Uploader from 'react-s3-uploader'
 import classnames from 'classnames'
-import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
+
 import * as BlockActions from './../actions/BlockActions'
 import { startEditingBlock, stopEditingBlock } from './../reducers/mobilizationEditor'
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
 
 export default class Block extends React.Component {
   static propTypes = {
