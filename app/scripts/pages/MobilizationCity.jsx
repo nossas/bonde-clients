@@ -6,9 +6,9 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import { CloseButton } from './../components'
+import { CloseButton, Loading } from './../components'
 
-import { getMobilization } from '../Mobilization/MobilizationSelectors'
+import * as Selectors from '../Mobilization/MobilizationSelectors'
 
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
@@ -20,12 +20,15 @@ function mobilizationCityValidation(data) {
 }
 
 
-@connect(globalState => ({
-  form: globalState.mobilizationCity,
-  auth: globalState.auth,
-  // TODO: Change store state by selectors
-  mobilization: globalState.mobilization.current
-}))
+@connect((globalState, ownProps) => {
+  return {
+    form: globalState.mobilizationCity,
+    auth: globalState.auth,
+    saving: globalState.mobilization.saving,
+    // TODO: Change store state by selectors
+    mobilization: Selectors.getMobilization(globalState, ownProps)
+  }
+})
 @reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
@@ -38,7 +41,9 @@ export default class MobilizationCity extends React.Component {
       submitting: false,
       error: null
     }
-    props.initializeForm({organizationId: props.mobilization.organization_id})
+    if (props.mobilization !== undefined) {
+      props.initializeForm({organizationId: props.mobilization.organization_id})
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +55,8 @@ export default class MobilizationCity extends React.Component {
   }
 
   static propTypes = {
-    mobilization: PropTypes.object.isRequired,
+    mobilization: PropTypes.object,
+    saving: PropTypes.bool.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,
@@ -67,6 +73,7 @@ export default class MobilizationCity extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    console.log(this.props)
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null })
     if (valid) {
@@ -173,8 +180,13 @@ export default class MobilizationCity extends React.Component {
   }
 
   render(){
-    const { mobilization, dirty } = this.props
-    return(
+    const { mobilization, dirty, saving } = this.props
+
+    if (saving) {
+      return <Loading />
+    }
+
+    return (
       <div>
         { this.renderMenu() }
         <div className="py3 px4">

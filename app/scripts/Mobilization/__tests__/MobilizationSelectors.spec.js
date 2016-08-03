@@ -25,4 +25,16 @@ describe('MobilizationSelectors', () => {
       id: 2, name: 'Ipsum', goal: 'Ipsum dolor'
     })
   })
+
+  it('should get mobilization by mobilization_id typeof string', () => {
+    const ownProps = {
+      params: {
+        mobilization_id: "2"
+      }
+    }
+    const mobilization = getMobilization(state, ownProps)
+    expect(mobilization).to.deep.equal({
+      id: 2, name: 'Ipsum', goal: 'Ipsum dolor'
+    })
+  })
 })
