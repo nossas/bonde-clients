@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import * as Paths from '../Paths'
 import { Label, SaveButton, CloseButton } from './../components'
-import { editMobilization } from './../reducers/mobilizations'
+
+import { editMobilization } from '../Mobilization/MobilizationActions'
+import * as Selectors from '../Mobilization/MobilizationSelectors'
 
 const validateCustomDomain = (data) => {
   const errors = { valid: true }
@@ -15,7 +17,11 @@ const validateCustomDomain = (data) => {
   return errors
 }
 
-@connect(state => ({ form: state.mobilizationCustomDomain }))
+@connect((state, ownProps) => ({
+  form: state.mobilizationCustomDomain,
+  editing: state.mobilization.saving,
+  mobilization: Selectors.getMobilization(state, ownProps)
+}))
 @reduxForm('mobilizationCustomDomain', validateCustomDomain)
 
 export default class MobilizationCustomDomain extends React.Component {
@@ -27,7 +33,7 @@ export default class MobilizationCustomDomain extends React.Component {
     initializeForm: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
-    mobilizations: PropTypes.object.isRequired,
+    editing: PropTypes.bool.isRequired,
     dirty: PropTypes.bool.isRequired,
     valid: PropTypes.bool.isRequired,
     touchAll: PropTypes.func.isRequired
@@ -40,10 +46,10 @@ export default class MobilizationCustomDomain extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { mobilizations } = this.props
-    if (mobilizations.editing !== nextProps.mobilizations.editing) {
+    const { editing } = this.props
+    if (editing !== nextProps.editing) {
       this.setState({
-        edited: mobilizations.editing && !nextProps.mobilizations.editing
+        edited: editing && !nextProps.editing
       })
     }
   }
@@ -71,7 +77,7 @@ export default class MobilizationCustomDomain extends React.Component {
       handleChange,
       handleBlur,
       data,
-      mobilizations,
+      editing,
       mobilization,
       dirty,
       errors,
@@ -97,7 +103,7 @@ export default class MobilizationCustomDomain extends React.Component {
               value={data.customDomain}
             />
             <SaveButton
-              saving={mobilizations.editing}
+              saving={editing}
               saved={this.state.edited && !dirty}
               handleClick={::this.handleSubmit}
             />
