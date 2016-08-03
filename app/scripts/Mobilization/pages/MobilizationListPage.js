@@ -3,12 +3,9 @@ import { connect } from 'react-redux'
 
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
-
 import { MobilizationList, MobilizationListHeader }  from '../components'
-
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
 import { getObjectsStateToProps } from '../MobilizationSelectors'
-
 
 class MobilizationListPage extends Component {
 
@@ -53,5 +50,11 @@ MobilizationListPage.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
+const mapStateToProps = (globalState) => ({
+  data: globalState.mobilization.data,
+  loaded: globalState.mobilization.loaded,
+  loading: globalState.mobilization.loading
+})
+
 // Mapped only state for work list of mobilizations
-export default connect(globalState => getObjectsStateToProps(globalState))(MobilizationListPage)
+export default connect(mapStateToProps)(MobilizationListPage)

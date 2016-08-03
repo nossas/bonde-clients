@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import Widget from '../../Widget/components/Widget'
-
+import Widget from './../../Widget'
 
 const BlockWidgets = ({ widgets }) => {
   return (

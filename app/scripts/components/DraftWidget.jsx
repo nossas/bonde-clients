@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Loading } from './'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
+import * as WidgetActions from './../Widget/actions'
 
 export default class DraftWidget extends React.Component {
   static propTypes = {

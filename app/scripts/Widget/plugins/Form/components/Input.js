@@ -1,9 +1,9 @@
 import React from 'react'
 import TransitionGroup from 'react-addons-transition-group'
 import classnames from 'classnames'
-import { FormWidgetInputForm } from './'
+import { InputForm } from './'
 
-export default class FormWidgetInput extends React.Component {
+export default class Input extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -34,7 +34,7 @@ export default class FormWidgetInput extends React.Component {
     const { uid } = this.props
     return (
       <TransitionGroup>
-        <FormWidgetInputForm {...this.props} onClose={::this.handleCloseForm} key={'form-' + uid} />
+        <InputForm {...this.props} onClose={::this.handleCloseForm} key={'form-' + uid} />
       </TransitionGroup>
     )
   }

@@ -1,10 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
-import { FormWidgetMenu, FormWidget, Loading, CloseButton } from './../components'
-import * as Paths from '../Paths'
 
-export default class FormWidgetFields extends React.Component {
+import * as Paths from './../../../../Paths'
+import * as WidgetActions from './../../../actions'
+import { Loading, CloseButton } from './../../../../components'
+import FormWidget from './../'
+import { Menu } from './../components'
+
+export default class Fields extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -60,7 +63,7 @@ export default class FormWidgetFields extends React.Component {
     const widget = this.widget()
     return(
       <div className="flex-auto flex flex-column bg-silver gray relative">
-        <FormWidgetMenu {...this.props} widget={widget} />
+        <Menu {...this.props} widget={widget} />
         <div className="p3 flex-auto overflow-scroll">
           <p className="h5 mb3">
             { this.fields().length == 0 ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.' : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.' }

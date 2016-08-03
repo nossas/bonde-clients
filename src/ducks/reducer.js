@@ -1,12 +1,14 @@
 import { createFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form';
 /*import mobilizations from './../../app/scripts/reducers/mobilizations'*/
 import blocks from './../../app/scripts/reducers/blocks'
-import widgets from './../../app/scripts/reducers/widgets'
+import widgets from './../../app/scripts/Widget/reducer'
 import auth from './../../app/scripts/reducers/auth'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 import organizations from './../../app/scripts/reducers/organizations'
 import matches from './../../app/scripts/reducers/matches'
+import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 
 import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'
 
@@ -39,5 +41,6 @@ export default combineReducers({
   auth,
   mobilizationEditor,
   organizations,
-  matches
+  matches,
+  exportDataClip
 })

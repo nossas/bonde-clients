@@ -8,6 +8,8 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { CloseButton } from './../components'
 
+import { getMobilization } from '../Mobilization/MobilizationSelectors'
+
 function mobilizationCityValidation(data) {
   const errors = { valid: true }
   if (!data.organizationId) {
@@ -17,7 +19,13 @@ function mobilizationCityValidation(data) {
   return errors
 }
 
-@connect(state => ({ form: state.mobilizationCity, auth: state.auth }))
+
+@connect(globalState => ({
+  form: globalState.mobilizationCity,
+  auth: globalState.auth,
+  // TODO: Change store state by selectors
+  mobilization: globalState.mobilization.current
+}))
 @reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
 
@@ -42,6 +50,7 @@ export default class MobilizationCity extends React.Component {
   }
 
   static propTypes = {
+    mobilization: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     handleBlur: PropTypes.func.isRequired,

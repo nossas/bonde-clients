@@ -3,9 +3,9 @@ import classnames from 'classnames'
 import $ from 'jquery'
 import { Loading } from './'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../actions/WidgetActions'
+import * as WidgetActions from './../../../actions'
 
-export default class FormWidgetInput extends React.Component {
+export default class InputForm extends React.Component {
   constructor(props, context) {
     super(props, context)
     const { field } = this.props

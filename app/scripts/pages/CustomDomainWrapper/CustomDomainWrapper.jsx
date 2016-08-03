@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'
 import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
-import { findWidgets, isWidgetsLoaded } from './../../reducers/widgets'
+import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
 import { ShowMobilization } from './../'
 
 const mapStateToProps = (state) => {

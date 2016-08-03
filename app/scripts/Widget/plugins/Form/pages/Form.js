@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as WidgetActions from './../actions/WidgetActions'
-import * as Paths from '../Paths'
-import { FormWidgetMenu, Loading, CloseButton, Label } from './../components'
 import reduxForm from 'redux-form'
+import classnames from 'classnames'
+
+import * as WidgetActions from './../../../actions'
+import * as Paths from './../../../../Paths'
+import { Loading, CloseButton, Label } from './../../../../components'
+import { Menu } from './../components'
 
 function widgetFormValidation() {
   const errors = { valid: true }
@@ -161,7 +163,7 @@ export default class FormWidgetForm extends React.Component {
     const widget = widgets.data[widgets.data.map((w) => { return w.id.toString()}).indexOf(this.props.params.widget_id)]
     return (
       <div className="flex-auto flex flex-column bg-silver gray relative">
-        <FormWidgetMenu {...this.props} widget={widget} />
+        <Menu {...this.props} widget={widget} />
         <div className="p3 flex-auto overflow-scroll">
           { !this.state.initializing && this.renderForm() }
         </div>

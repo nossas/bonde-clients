@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../../actions/WidgetActions'
+import * as WidgetActions from './../../Widget/actions'
 
 import * as Paths from './../../Paths'
 import MatchPage from './MatchPage'

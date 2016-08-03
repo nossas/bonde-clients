@@ -1,6 +1,7 @@
 import superagent from 'superagent'
 
-import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from '../constants/ActionTypes'
+import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
+import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
@@ -19,7 +20,7 @@ const initialState = {
   data: []
 }
 
-export default function widgets(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WIDGETS_REQUEST:
       return {...state, loaded: false}
@@ -57,6 +58,16 @@ export default function widgets(state = initialState, action) {
             return widget
           }
         )
+      }
+    case EXPORT_DATACLIP_SUCCESS:
+      return {
+        ...state,
+        data: state.data.map(widget => {
+          if (widget.id === action.widget_id) {
+            widget.exported_at = new Date()
+          }
+          return widget
+        })
       }
     case UPDATE_MATCH:
       return {
