@@ -9,11 +9,14 @@ import { Block, Loading, Navbar } from './../components'
 
 import { fetchWidgets } from './../Widget/reducer'
 
+import * as Selectors from '../Mobilization/MobilizationSelectors'
 
-@connect(state => ({
+
+@connect((state, ownProps) => ({
   scrolledToBottom: false,
   widgetsCount: state.widgets.length,
-  mobilizationEditor: state.mobilizationEditor
+  mobilizationEditor: state.mobilizationEditor,
+  mobilization: Selectors.getMobilization(state, ownProps)
 }))
 @reactMixin.decorate(Navigation)
 
