@@ -5,7 +5,6 @@ import * as Paths from '../../Paths'
 import { Loading } from '../../components'
 import { MobilizationList, MobilizationListHeader }  from '../components'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
-import { getObjectsStateToProps } from '../MobilizationSelectors'
 
 class MobilizationListPage extends Component {
 

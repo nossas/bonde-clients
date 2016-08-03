@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import * as MobilizationActions from './../actions/MobilizationActions'
 import * as Paths from '../Paths'
 import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
@@ -8,6 +7,7 @@ import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { CloseButton, Loading } from './../components'
 
+import * as MobilizationActions from '../Mobilization/MobilizationActions'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 
 function mobilizationCityValidation(data) {
@@ -73,8 +73,8 @@ export default class MobilizationCity extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log(this.props)
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
+    console.log(data)
     this.setState({ submitting: true, error: null })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({
@@ -182,7 +182,7 @@ export default class MobilizationCity extends React.Component {
   render(){
     const { mobilization, dirty, saving } = this.props
 
-    if (saving) {
+    if (saving && !mobilization) {
       return <Loading />
     }
 

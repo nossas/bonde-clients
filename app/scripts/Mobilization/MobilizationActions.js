@@ -12,16 +12,21 @@ export const REQUEST_ADD_MOBILIZATION = 'REQUEST_ADD_MOBILIZATION'
 export const SUCCESS_ADD_MOBILIZATION = 'SUCCESS_ADD_MOBILIZATION'
 export const FAILURE_ADD_MOBILIZATION = 'FAILURE_ADD_MOBILIZATION'
 
+export const REQUEST_EDIT_MOBILIZATION = 'REQUEST_EDIT_MOBILIZATION'
+export const SUCCESS_EDIT_MOBILIZATION = 'SUCCESS_EDIT_MOBILIZATION'
+export const FAILURE_EDIT_MOBILIZATION = 'FAILURE_EDIT_MOBILIZATION'
+
 // Actions
 // TODO: Buscar uma maneira mais clara de fazer isso
 
-export const fetchMobilizations = () => {
+export const fetchMobilizations = (queryFilter = {}) => {
   return {
     types: [REQUEST_FETCH_MOBILIZATIONS, SUCCESS_FETCH_MOBILIZATIONS, FAILURE_FETCH_MOBILIZATIONS],
     promise: () => {
       return new Promise((resolve, reject) => {
         request
           .get(`${process.env.API_URL}/mobilizations`)
+          .send(queryFilter)
           .end((err, res) => {
             if (err || !res.ok) {
               reject(err || res.body)
@@ -55,6 +60,27 @@ export const addMobilization = ({ credentials, mobilization, transitionTo }) => 
               if (res.body.id) {
                 transitionTo(Paths.cityNewMobilization(res.body.id))
               }
+            }
+          })
+      })
+    }
+  }
+}
+
+export const editMobilization = ({ credentials, mobilization, id }) => {
+  return {
+    types: [REQUEST_EDIT_MOBILIZATION, SUCCESS_EDIT_MOBILIZATION, FAILURE_EDIT_MOBILIZATION],
+    promise: () => {
+      return new Promise((resolve, reject) => {
+        request
+          .put(`${process.env.API_URL}/mobilizations/${id}`)
+          .set(credentials)
+          .send({ mobilization })
+          .end((err, res) => {
+            if (err || !res.ok) {
+              reject(err || res.body)
+            } else {
+              resolve(res.body)
             }
           })
       })

@@ -10,12 +10,18 @@ import {
   FAILURE_ADD_MOBILIZATION
 } from './MobilizationActions'
 
+import {
+  REQUEST_EDIT_MOBILIZATION,
+  SUCCESS_EDIT_MOBILIZATION,
+  FAILURE_EDIT_MOBILIZATION
+} from './MobilizationActions'
+
 const initialState = {
   loading: false,
   loaded: false,
   data: [],
   // save mobilization
-  saving: false,
+  saving: false
 }
 
 const MobilizationReducer = (state = initialState, action) => {
@@ -40,10 +46,16 @@ const MobilizationReducer = (state = initialState, action) => {
         loaded: true,
         error: action.error
       }
-    case REQUEST_ADD_MOBILIZATION:
+    case REQUEST_ADD_MOBILIZATION, REQUEST_EDIT_MOBILIZATION:
       return {
         ...state,
         saving: true
+      }
+    case FAILURE_ADD_MOBILIZATION, FAILURE_EDIT_MOBILIZATION:
+      return {
+        ...state,
+        saving: false,
+        error: action.error
       }
     case SUCCESS_ADD_MOBILIZATION:
     // Update list with new mobilization added
@@ -52,11 +64,13 @@ const MobilizationReducer = (state = initialState, action) => {
         saving: false,
         data: [action.result, ...state.data]
       }
-    case FAILURE_ADD_MOBILIZATION:
+    case SUCCESS_EDIT_MOBILIZATION:
       return {
         ...state,
         saving: false,
-        error: action.error
+        data: state.data.map(
+          mob => mob.id === action.result.id ? action.result : mob
+        )
       }
     default:
       return state
