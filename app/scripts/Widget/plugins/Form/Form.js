@@ -1,21 +1,20 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
-import classnames from 'classnames'
+import { bindActionCreators } from 'redux'
 import $ from 'jquery'
+import classnames from 'classnames'
 
-import * as Paths from './../../../Paths'
-import * as FormEntryActions from './../../../actions/FormEntryActions'
-import TellAFriend from './../../../components/shared/TellAFriend.jsx'
-import { Input, Button } from './components'
-
-// Unrestrictive email regex. See http://is.gd/7n5YOk
-const emailRegEx = /[^@]+@[^@]+/
+import { isValidEmail } from './../../../util/validation-helper'
+import { Error } from './../../../components/FormUtil'
+import * as Paths from './../../Paths'
+import * as FormEntryActions from './../../actions/FormEntryActions'
+import TellAFriend from './../shared/TellAFriend.jsx'
+import { FormWidgetInput, FormWidgetButton } from './../'
 
 @reactMixin.decorate(Navigation)
 
-export default class Form extends React.Component {
+export default class FormWidget extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     widget: PropTypes.object.isRequired,
@@ -90,7 +89,7 @@ export default class Form extends React.Component {
     fieldsWithValue.forEach((field) => {
       if (field.required === 'true' && field.value === '') {
         errors.push(`${field.label} não pode ficar em branco`)
-      } else if (field.value !== '' && field.kind === 'email' && !field.value.match(emailRegEx)) {
+      } else if (field.value !== '' && field.kind === 'email' && !isValidEmail(field.value)) {
         errors.push(`${field.label} inválido`)
       }
     })
@@ -110,7 +109,7 @@ export default class Form extends React.Component {
     const fields = this.fields()
     return fields.map((field, index) => {
       return (
-        <Input
+        <FormWidgetInput
           {...this.props}
           key={field.uid}
           uid={field.uid}
@@ -128,7 +127,7 @@ export default class Form extends React.Component {
 
     if (!configurable) {
       return (
-        <Button
+        <FormWidgetButton
           buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
           handleClick={::this.submit}
           loading={loading}
@@ -167,20 +166,8 @@ export default class Form extends React.Component {
     const { errors } = this.state
 
     return (
-      errors.length > 0 &&
-      <div className="red bold mb1">
-        {
-          errors.map((error) => {
-            return(
-              <div
-                className="p1 border-left border-red mb1 rounded-right"
-                style={{backgroundColor: '#F9CACE', borderWidth: '8px'}}>
-                {error}
-              </div>
-            )
-          })
-        }
-      </div>
+      errors.length > 0
+      && <div>{errors.map(error => <Error message={error} />)}</div>
     )
   }
 

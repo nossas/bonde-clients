@@ -83,6 +83,19 @@ describe('MatchWidget', () => {
         expect(component.find('Choices').at(1).props().disabled).to.equal(false)
       })
 
+      it('should show user capture data form after selects first and second choices', () => {
+        const { widget: { settings: { choices1, choicesA } } } = props
+
+        let target
+        target = { value: choices1.split(',')[1] }
+        component.find('Choices').at(0).simulate('change', { target })
+
+        target = { value: choicesA.split(',')[0] }
+        component.find('Choices').at(1).simulate('change', { target })
+
+        expect(component.find('Input')).to.length(2)
+      })
+
       it('should enable match button after selects first and second choices', () => {
         const { widget: { settings: { choices1, choicesA } } } = props
 
@@ -96,11 +109,13 @@ describe('MatchWidget', () => {
         expect(component.find('button.match').props().disabled).to.equal(false)
       })
 
-      it('should change combined state to true after match button is clicked', () => {
+      it('should change combined state to true if dont have errors after match button is clicked', () => {
         const { widget: { settings: { choices1, choicesA } } } = props
         component.setState({
           selectedChoice1: choices1.split(',')[0],
-          selectedChoiceA: choicesA.split(',')[0]
+          selectedChoiceA: choicesA.split(',')[0],
+          name: 'Foo Name',
+          email: 'bar@email.com'
         })
         spy.setState = sandbox.spy(MatchWidget.prototype, 'setState')
         component.find('button.match').simulate('click')

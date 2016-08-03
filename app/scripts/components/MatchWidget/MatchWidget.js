@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 
 import * as Paths from './../../Paths'
+import { isValidEmail } from './../../../util/validation-helper'
+import { Error, Input } from './../../../components/FormUtil'
 import { OverlayWidget } from '../OverlayWidget'
 import { TellAFriend } from './../'
-import Choices from './Choices'
+import { Choices } from './'
 
 class MatchWidget extends Component {
 
@@ -13,6 +15,7 @@ class MatchWidget extends Component {
       numberSelected: undefined,
       letterSelected: undefined,
       combined: false,
+      errors: []
     }
   }
 
@@ -26,20 +29,48 @@ class MatchWidget extends Component {
     }
   }
 
+  formIsValid() {
+    const { name, email } = this.state
+    let errors = []
+
+    if (!name) errors.push('O campo Nome não pode ficar em branco.')
+    if (!email) errors.push('O campo Email não pode ficar em branco.')
+    else if (!isValidEmail(email)) errors.push('Email inválido.')
+
+    const hasErrors = errors.length !== 0
+    if (hasErrors) this.setState({ errors })
+    return !hasErrors
+  }
+
   handleCombineClick(e) {
     if (e) e.preventDefault()
-    this.setState({ combined: true })
+    if (this.formIsValid()) this.setState({ combined: true })
+  }
+
+  enableMatchButton() {
+    const { selectedChoice1, selectedChoiceA } = this.state
+    return selectedChoice1 && selectedChoiceA
+  }
+
+  renderErrors() {
+    const { errors } = this.state
+    return (
+      errors.length > 0
+      && <div>{errors.map(error => <Error message={error} />)}</div>
+    )
   }
 
   renderChoices() {
-    const { selectedChoice1, selectedChoiceA } = this.state
+    const {
+      selectedChoice1, selectedChoiceA,
+      name, email,
+      numberSelected, letterSelected
+    } = this.state
     const { editable, loading } = this.props
     const { widget: { settings: {
         title_text,
-        labelChoices1,
-        labelChoicesA,
-        choices1,
-        choicesA
+        labelChoices1, labelChoicesA,
+        choices1, choicesA
       }}
     } = this.props
     const optionsChoices1 = choices1 ? choices1.split(',') : []
@@ -53,7 +84,6 @@ class MatchWidget extends Component {
             title={labelChoices1}
             selected={this.state.numberSelected}
             options={optionsChoices1}
-            disabled={false}
             onChange={(option) => {
               this.setState({ selectedChoice1: option.target.value })
             }}
@@ -70,10 +100,32 @@ class MatchWidget extends Component {
             }}
             classNames={['mb2']}
           />
+          <Input
+            uid="input-match-name"
+            type="text"
+            label="Nome completo"
+            placeholder="Insira aqui seu nome"
+            required={true}
+            onChange={e => { this.setState({ name: e.target.value }) }}
+            show={!!selectedChoiceA}
+          />
+          <Input
+            uid="input-match-email"
+            type="email"
+            label="Email"
+            placeholder="Insira aqui seu email"
+            required={true}
+            onChange={e => {
+              console.log(e.target.errors);
+              this.setState({ email: e.target.value })
+            }}
+            show={!!selectedChoiceA}
+          />
+          {this.renderErrors()}
           <button
             className="match caps button bg-darken-4 p2 full-width mt1 mb2"
             onClick={::this.handleCombineClick}
-            disabled={loading || !(selectedChoice1 && selectedChoiceA)}>
+            disabled={loading || !(this.enableMatchButton())}>
             {loading ? 'Combinando...' : 'Combinar' }
           </button>
         </div>
@@ -83,8 +135,10 @@ class MatchWidget extends Component {
 
   findMatchItem() {
     const { widget } = this.props
-    const matchList = widget.match_list.filter((match) => {
-      return match.first_choice === this.state.selectedChoice1 && match.second_choice === this.state.selectedChoiceA
+    const matchList = widget.match_list.filter(match => {
+      const { first_choice, second_choice } = match
+      const { selectedChoice1, selectedChoiceA } = this.state
+      return first_choice === selectedChoice1 && second_choice === selectedChoiceA
     })
     if (matchList && matchList.length > 0) {
       return matchList[0]
@@ -92,20 +146,20 @@ class MatchWidget extends Component {
   }
 
   renderShareButtons() {
-    ////
-    // @todo
-    // - talvez prop `message` configurável?
-    ////
     const matchItem = this.findMatchItem()
     const { selectedChoice1, selectedChoiceA } = this.state
-    let combinationImageUrl = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
+    let combinationImageUrl = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C'
+      +'55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
     let share = ''
     if (matchItem) {
       combinationImageUrl = matchItem.goal_image
       share = Paths.shareMatchWrapper(matchItem.widget_id, matchItem.id)
     }
 
-
+    ////
+    // @todo
+    // - talvez prop `message` configurável?
+    ////
     return <TellAFriend {...this.props}
       message="Resultado da sua combinação"
       href={ window.location.origin + share }
