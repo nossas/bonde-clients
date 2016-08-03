@@ -1,6 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
-import MobilizationSettings from './../../containers/MobilizationSettings'
+import { MobilizationSettings } from './../../containers/MobilizationSettings'
 import ConfigurationsMenu from './../../components/ConfigurationsMenu'
 
 import stubRouterContext from './../stubRouterContext'

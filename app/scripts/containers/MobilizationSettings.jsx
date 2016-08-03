@@ -5,7 +5,7 @@ import { ConfigurationsMenu } from './../components'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 
 
-class MobilizationSettings extends React.Component {
+export class MobilizationSettings extends React.Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired
