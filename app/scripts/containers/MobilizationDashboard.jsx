@@ -4,13 +4,9 @@ import { fetchBlocks, isBlocksLoaded } from './../reducers/blocks'
 import { fetchWidgets, isWidgetsLoaded } from './../Widget/reducer'
 import { MobilizationMenu } from './../components'
 
-@connect(state => ({
-  auth: state.auth,
-  blocks: state.blocks,
-  widgets: state.widgets
-}))
+import * as Selectors from '../Mobilization/MobilizationSelectors'
 
-export default class MobilizationDashboard extends React.Component {
+class MobilizationDashboard extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
     widgets: PropTypes.object.isRequired,
@@ -55,3 +51,12 @@ export default class MobilizationDashboard extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (globalState, ownProps) => ({
+  auth: globalState.auth,
+  blocks: globalState.blocks,
+  widgets: globalState.widgets,
+  mobilization: Selectors.getMobilization(globalState, ownProps)
+})
+
+export default connect(mapStateToProps)(MobilizationDashboard)

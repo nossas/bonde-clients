@@ -1,5 +1,6 @@
 import { createFormReducer } from 'redux-form'
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form';
 /*import mobilizations from './../../app/scripts/reducers/mobilizations'*/
 import blocks from './../../app/scripts/reducers/blocks'
 import widgets from './../../app/scripts/Widget/reducer'
@@ -9,7 +10,7 @@ import organizations from './../../app/scripts/reducers/organizations'
 import matches from './../../app/scripts/reducers/matches'
 import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 
-import mobilizations from './../../app/scripts/Mobilization/MobilizationReducer'
+import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'
 
 const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
@@ -26,7 +27,7 @@ const mobilizationSharing = createFormReducer('mobilizationSharing', [
 ])
 
 export default combineReducers({
-  mobilizations,
+  mobilization,
   mobilizationBasics,
   mobilizationCity,
   mobilizationAnalytics,

@@ -28,14 +28,14 @@ class MobilizationListPage extends Component {
   }
 
   render() {
-    const { mobilizations, loading, loaded } = this.props
+    const { data, loading, loaded } = this.props
     return (
       <div className="flex-auto bg-silver gray">
         <MobilizationListHeader redirectToAdd={() => Paths.newMobilization()} />
         {(!loading && loaded ?
           <MobilizationList
             redirectToEdit={id => Paths.editMobilization(id)}
-            mobilizations={mobilizations} /> :
+            mobilizations={data} /> :
           <Loading />
         )}
       </div>
@@ -44,17 +44,16 @@ class MobilizationListPage extends Component {
 }
 
 MobilizationListPage.propTypes = {
-  mobilizations: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   loaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired
 }
 
-export const mapStateToProps = (globalState) => {
-  return {
-    mobilizations: globalState.mobilizations.data,
-    loaded: globalState.mobilizations.loaded,
-    loading: globalState.mobilizations.loading
-  }
-}
+const mapStateToProps = (globalState) => ({
+  data: globalState.mobilization.data,
+  loaded: globalState.mobilization.loaded,
+  loading: globalState.mobilization.loading
+})
 
+// Mapped only state for work list of mobilizations
 export default connect(mapStateToProps)(MobilizationListPage)

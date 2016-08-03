@@ -6,7 +6,9 @@ import classnames from 'classnames'
 
 import * as Paths from '../Paths'
 import { Block, Loading, Navbar } from './../components'
+
 import { fetchWidgets } from './../Widget/reducer'
+
 
 @connect(state => ({
   scrolledToBottom: false,

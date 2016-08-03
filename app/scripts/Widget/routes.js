@@ -8,6 +8,7 @@ import {
   Goals,
   ExportWidgetData
 } from './../pages'
+
 import FormWidgetRoutes from './plugins/Form/routes'
 
 const path = '/widgets'

@@ -1,1 +1,1 @@
-export { default as WrapperMobilizationApp } from './WrapperMobilizationApp'
+export { default as MobilizationBasicFormContainer } from './MobilizationBasicFormContainer'

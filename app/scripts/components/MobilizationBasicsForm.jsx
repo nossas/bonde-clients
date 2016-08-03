@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import * as MobilizationActions from './../actions/MobilizationActions'
+import * as MobilizationActions from '../Mobilization/MobilizationActions'
 import * as Paths from '../Paths'
 import { CloseButton } from './'
 

@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import * as WidgetPlugins from '../plugins'
 
+
 const Widget = ({ widget }) => {
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
   const Wrapper = WidgetPlugins[kind]

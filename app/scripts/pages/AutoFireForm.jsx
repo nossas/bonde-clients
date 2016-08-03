@@ -9,6 +9,7 @@ import * as WidgetActions from './../Widget/actions'
 import { Label, DonationWidgetMenu, Loading, CloseButton } from './../components'
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 
+
 function widgetFormValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
