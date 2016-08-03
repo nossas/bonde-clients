@@ -74,7 +74,7 @@ export default class MobilizationCity extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
-    console.log(data)
+
     this.setState({ submitting: true, error: null })
     if (valid) {
       dispatch(MobilizationActions.editMobilization({

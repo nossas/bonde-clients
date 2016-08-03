@@ -14,7 +14,7 @@ import {
   MobilizationSharing,
   MobilizationCustomDomain
 } from './../pages'
-import { MobilizationSettings } from './../containers'
+import { MobilizationSettings, UserDashboard } from './../containers'
 import widget from './../Widget/routes'
 
 const path = '/mobilizations'
@@ -22,7 +22,7 @@ const param = '/:mobilization_id'
 const defaultPath = `${path}${param}`
 
 export default (
-  <Route component={WrapperMobilizationApp}>
+  <Route component={UserDashboard}>
     <Route path="/" component={MobilizationListPage} />
     <Route path="/mobilizations/new" component={NewMobilization} />
     <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
