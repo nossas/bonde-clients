@@ -24,12 +24,11 @@ class MobilizationListPage extends Component {
   }
 }
 
+// UserDashboardContainer
 MobilizationListPage.propTypes = {
-  mobilization: PropTypes.shape({
-    data: PropTypes.array.isRequired,
-    loaded: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired
-  }).isRequired,  // UserDashboardContainer
+  data: PropTypes.array,
+  loaded: PropTypes.bool,
+  loading: PropTypes.bool
 }
 
 export default MobilizationListPage
