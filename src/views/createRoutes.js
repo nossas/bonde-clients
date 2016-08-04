@@ -28,8 +28,6 @@ export default function(store, host) {
         <Route path="/logout" component={Logout} />
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
           {MobilizationRoute}
-          {/*<Route component={UserDashboard}>
-          </Route>*/}
         </Route>
         <Route path="*" component={NotFound} status={404} />
       </Route>

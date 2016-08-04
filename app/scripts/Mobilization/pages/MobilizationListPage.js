@@ -8,27 +8,8 @@ import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationAction
 
 class MobilizationListPage extends Component {
 
-  // Esse comportamente é especifico desta aplicação
-  // TODO: Migrar para o boilerplate Mern
-  static fetchData({ dispatch, getState }) {
-    const promises = []
-    if (!mobilizationsIsLoaded(getState())) {
-      promises.push(dispatch(fetchMobilizations()))
-    }
-
-    return Promise.all(promises)
-  }
-
-  componentDidMount() {
-    const { loaded, dispatch } = this.props
-    if (!loaded) {
-      // TODO: Entender padrão dessa chamada
-      dispatch(fetchMobilizations())
-    }
-  }
-
   render() {
-    const { data, loading, loaded } = this.props
+    const { mobilization: { data, loading, loaded } } = this.props
     return (
       <div className="flex-auto bg-silver gray">
         <MobilizationListHeader redirectToAdd={() => Paths.newMobilization()} />
@@ -44,16 +25,11 @@ class MobilizationListPage extends Component {
 }
 
 MobilizationListPage.propTypes = {
-  data: PropTypes.array.isRequired,
-  loaded: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired
+  mobilization: PropTypes.shape({
+    data: PropTypes.array.isRequired,
+    loaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired
+  }).isRequired,  // UserDashboardContainer
 }
 
-const mapStateToProps = (globalState) => ({
-  data: globalState.mobilization.data,
-  loaded: globalState.mobilization.loaded,
-  loading: globalState.mobilization.loading
-})
-
-// Mapped only state for work list of mobilizations
-export default connect(mapStateToProps)(MobilizationListPage)
+export default MobilizationListPage

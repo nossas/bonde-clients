@@ -14,7 +14,11 @@ import {
   MobilizationSharing,
   MobilizationCustomDomain
 } from './../pages'
-import { MobilizationSettings, UserDashboard } from './../containers'
+
+import { MobilizationSettings} from './../containers'
+
+import { UserDashboardContainer } from './containers'
+
 import widget from './../Widget/routes'
 
 const path = '/mobilizations'
@@ -22,8 +26,9 @@ const param = '/:mobilization_id'
 const defaultPath = `${path}${param}`
 
 export default (
-  <Route component={UserDashboard}>
+  <Route component={UserDashboardContainer}>
     <Route path="/" component={MobilizationListPage} />
+    {/* TODO: Refactor pages */}
     <Route path="/mobilizations/new" component={NewMobilization} />
     <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
 

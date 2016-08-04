@@ -63,7 +63,7 @@ export default class MobilizationAnalytics extends React.Component {
     const { data, touchAll, valid, dispatch, mobilization, auth } = this.props
     this.setState({ submitting: true, error: null, hasSubmitted: false })
     if (valid) {
-      dispatch(MobilizationActions.editMobilization({
+      dispatch(editMobilization({
         id: mobilization.id,
         mobilization: {google_analytics_code: data.id},
         credentials: auth.credentials
