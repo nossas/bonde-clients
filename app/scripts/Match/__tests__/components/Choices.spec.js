@@ -1,13 +1,11 @@
 import React from 'react'
-
 import sinon from 'sinon'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import Choices from './Choices'
+import { Choices } from '../../components'
 
-
-describe('Choices', () => {
+describe('Match/components/Choices', () => {
   let wrapper
   let sandbox
   const props = {

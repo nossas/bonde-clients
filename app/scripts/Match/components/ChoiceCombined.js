@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 import classnames from 'classnames'
 
-import { Progress } from './../../components'
+import { Progress } from '../../components'
 
 class ChoiceCombined extends Component {
-
   constructor(props) {
     super(props)
     this.state = {

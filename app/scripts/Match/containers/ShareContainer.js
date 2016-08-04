@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
 import DocumentMeta from 'react-document-meta'
-import { showMatch } from './../reducers/matches'
+import { connect } from 'react-redux'
 
-const mapStateToProps = state => ({ matches: state.matches })
+import { showMatch } from '../reducer'
 
-export class MatchShareWrapper extends React.Component {
+export class ShareContainer extends React.Component {
   static propTypes = {
     matches: PropTypes.object,
     params: PropTypes.object
@@ -31,4 +30,6 @@ export class MatchShareWrapper extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(MatchShareWrapper)
+const mapStateToProps = state => ({ matches: state.matches })
+
+export default connect(mapStateToProps)(ShareContainer)

@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as WidgetActions from './../../Widget/actions'
 
-import MatchPage from './MatchPage'
-import ChoiceCombined from './ChoiceCombined'
+import * as WidgetActions from '../../actions/WidgetActions'
+import { Page, ChoiceCombined } from '../components'
 
-
-export default class Goals extends React.Component {
-
+export default class GoalsPage extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.bindWidgetActions = bindActionCreators(WidgetActions, props.dispatch)
@@ -78,23 +75,23 @@ export default class Goals extends React.Component {
     const { mobilization, location } = this.props
     const widget = this.widget()
     return(
-      <MatchPage mobilization={mobilization} location={location} widget={widget}>
+      <Page mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
           <h1>Combinações</h1>
           { this.renderCombineChoices() }
         </div>
-      </MatchPage>
+      </Page>
     )
   }
 }
 
-Goals.propTypes = {
+GoalsPage.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
   widgets: PropTypes.object
 }
 
-Goals.contextTypes = {
+GoalsPage.contextTypes = {
   router: PropTypes.object.isRequired
 }

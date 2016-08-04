@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
-import * as Paths from './../../Paths'
-import { isValidEmail } from './../../../util/validation-helper'
-import { Error, Input } from './../../../components/FormUtil'
-import { OverlayWidget } from '../OverlayWidget'
-import { TellAFriend } from './../'
-import { Choices } from './'
+import * as Paths from '../Paths'
+import { isValidEmail } from '../../util/validation-helper'
+import { Error, Input } from '../../components/FormUtil'
+import { TellAFriend, OverlayWidget } from '../components'
+import { Choices } from './components'
 
-class MatchWidget extends Component {
-
+class Match extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -177,13 +175,13 @@ class MatchWidget extends Component {
   }
 }
 
-MatchWidget.propTypes = {
+Match.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired
 }
 
-MatchWidget.contextTypes = {
+Match.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-export default MatchWidget
+export default Match

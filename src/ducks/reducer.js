@@ -7,7 +7,7 @@ import widgets from './../../app/scripts/Widget/reducer'
 import auth from './../../app/scripts/reducers/auth'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
 import organizations from './../../app/scripts/reducers/organizations'
-import matches from './../../app/scripts/reducers/matches'
+import matches from './../../app/scripts/Match/reducer'
 import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 
 import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'

@@ -6,7 +6,7 @@ import ContentWidget from './ContentWidget.jsx'
 
 import { Form as FormWidget } from './../Widget'
 import DonationWidget from './DonationWidget.jsx'
-import { MatchWidget } from './MatchWidget'
+import Match from '../Match'
 
 
 const Widget = (props) => {
@@ -27,7 +27,7 @@ const Widget = (props) => {
   } else if (widget.kind === 'donation') {
     child = <DonationWidget {...props} />
   } else if (widget.kind === 'match') {
-    child = <MatchWidget {...props} />
+    child = <Match {...props} />
   } else {
     child = <DraftWidget {...props} />
   }

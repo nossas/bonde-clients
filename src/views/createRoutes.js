@@ -11,12 +11,12 @@ import {
   Login,
   Logout,
   RequireLogin,
-  CustomDomainWrapper,
-  MatchShareWrapper
+  CustomDomainWrapper
 } from '../../app/scripts/pages'
 
 // Modules routes
 import MobilizationRoute from '../../app/scripts/Mobilization/routes'
+import { MatchShareContainerRoute } from '../../app/scripts/Match/routes'
 
 export default function(store, host) {
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
@@ -37,7 +37,7 @@ export default function(store, host) {
   return (
     <Route component={Application}>
       <Route path="/" component={CustomDomainWrapper} />
-      <Route path="/share/widget/:widget_id/match/:match_id" component={MatchShareWrapper} />
+      {MatchShareContainerRoute('/widgets/:widget_id')}
       <Route path="*" component={NotFound} status={404} />
     </Route>
   )

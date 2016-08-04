@@ -1,12 +1,10 @@
 import React from 'react'
-
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import ChoiceCombined from './ChoiceCombined'
+import { ChoiceCombined } from '../../components'
 
-
-describe('ChoiceCombined', () => {
+describe('Match/components/ChoiceCombined', () => {
   let wrapper
   let props = {
     first_choice: 'ChoiceA', second_choice: 'ChoiceB',
