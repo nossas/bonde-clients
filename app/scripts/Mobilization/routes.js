@@ -4,7 +4,6 @@ import { Route, IndexRoute } from 'react-router'
 import { MobilizationListPage, WrapperMobilizationApp } from './pages'
 import {
   NewMobilization,
-  EditMobilization,
   NewBlock,
   MobilizationFonts,
   MobilizationBasics,
@@ -23,10 +22,11 @@ import {
 
 import {
   MobilizationBasicsFormPage,
-  MobilizationCityPage
+  MobilizationCityPage,
+  EditMobilizationPage
 } from './pages'
 
-import widget from './../Widget/routes'
+import widgetRoutes from './../Widget/routes'
 
 const path = '/mobilizations'
 const param = '/:mobilization_id'
@@ -42,9 +42,9 @@ export default (
     </Route>
 
     <Route component={MobilizationDashboardContainer}>
-      <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilization} />
+      <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilizationPage} />
       <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
-      { widget(defaultPath) }
+      { widgetRoutes(defaultPath) }
       <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
       <Route component={MobilizationSettingsContainer} >
         <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasicsFormPage} />

@@ -280,6 +280,7 @@ export default class Block extends React.Component {
     // TODO: change widgets constant name to reflex the object that is returned
     // by the reducer
     const { widgets, block, canMoveUp, canMoveDown } = this.props
+
     const filteredWidgets = this.filterWidgets(widgets.data, block)
     const wrapperClassName = classnames(
       'm1 absolute bottom-0 right-0 z2',
