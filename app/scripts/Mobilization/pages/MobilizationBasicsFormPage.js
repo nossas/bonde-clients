@@ -182,7 +182,9 @@ class MobilizationBasicsFormPage extends React.Component {
     const { mobilization, dirty } = this.props
     return(
       <div className="p3">
-        <h3 className="h2 mt0 mb3 center">Qual o objetivo da sua mobilização?</h3>
+        {(mobilization === undefined ?
+          <h3 className="h2 mt0 mb3 center">Qual o objetivo da sua mobilização?</h3> :
+          null)}
         <div className="bg-white border rounded lg-col-6 mx-auto p3">
           { !this.state.initializing && this.renderForm() }
           { mobilization && <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} /> }
