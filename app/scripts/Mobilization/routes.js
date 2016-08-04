@@ -17,7 +17,12 @@ import {
 
 import { MobilizationSettings} from './../containers'
 
-import { UserDashboardContainer } from './containers'
+import { UserDashboardContainer, NewMobilizationContainer } from './containers'
+
+import {
+  MobilizationBasicsFormPage,
+  MobilizationCityPage
+} from './pages'
 
 import widget from './../Widget/routes'
 
@@ -29,8 +34,10 @@ export default (
   <Route component={UserDashboardContainer}>
     <Route path="/" component={MobilizationListPage} />
     {/* TODO: Refactor pages */}
-    <Route path="/mobilizations/new" component={NewMobilization} />
-    <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCity} />
+    <Route component={NewMobilizationContainer}>
+      <Route path="/mobilizations/new" component={MobilizationBasicsFormPage} />
+      <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCityPage} />
+    </Route>
 
     <Route component={MobilizationDashboard}>
       <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilization} />
