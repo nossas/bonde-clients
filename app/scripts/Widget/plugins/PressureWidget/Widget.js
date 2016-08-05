@@ -15,12 +15,12 @@ const PressureWidget = () => {
     height: '2rem'
   }
   /* TODO: support all browser
-   * -webkit-box-shadow: inset 0px 4px 5px -2px rgba(235,235,235,1);
-   * -moz-box-shadow: inset 0px 4px 5px -2px rgba(235,235,235,1);
-   * box-shadow: inset 0px 4px 5px -2px rgba(235,235,235,1);
+   * -webkit-box-shadow: inset 0px 15px 18px -10px rgba(227,224,227,1);
+   * -moz-box-shadow: inset 0px 15px 18px -10px rgba(227,224,227,1);
+   * box-shadow: inset 0px 15px 18px -10px rgba(227,224,227,1);
    */
   const pressureCount = {
-    boxShadow: "inset 0px 4px 5px -2px rgba(235,235,235,1)",
+    boxShadow: "inset 0px 15px 18px -10px rgba(227,224,227,1)",
   }
 
   const targetList = {
@@ -79,12 +79,42 @@ const PressureWidget = () => {
           <button className="caps white col-12 py2 rounded" style={{backgroundColor: bgColor}}>Enviar email</button>
         </div>
       </form>
-    {/* TODO: Change HTML by PressureCount */}
-    <div className="pressure-count p3 bg-white rounded-bottom" style={pressureCount}>
-      <p className="center m0">
-        <span style={{color: bgColor}}>12.234</span>&nbsp;<span>pressões feitas</span>
-      </p>
-    </div>
+      {/* TODO: Change HTML by PressureCount */}
+      <div className="pressure-count p3 bg-white rounded-bottom" style={pressureCount}>
+        <p className="center m0">
+          <span style={{color: bgColor}}>12.234</span>&nbsp;<span>pressões feitas</span>
+        </p>
+      </div>
+      {/* TODO: Change HTML by PressureForm */}
+      <div className="pressure-form mt2">
+        <h3 className="rounded-top m0 center py1" style={{backgroundColor: '#222'}}>
+          <span className="white bold">Texto do e-mail</span>
+        </h3>
+        <form className="bg-white rounded-bottom">
+          <div className={controlClassname}>
+            <label className="flex p1 gray" htmlFor="subjectId">Assunto</label>
+            <input className="col-12" style={inputReset} id="subjectId" type="text" name="subject" />
+          </div>
+          <div className={controlClassname}>
+            <label className="flex p1 gray" htmlFor="bodyId">E-mail</label>
+            <textarea className="col-12" style={{...inputReset, height: '13rem'}} id="bodyId" name="body">
+            Prezadas, Lúcia Regina Espagolla e Vera Lucia Benfica da Costa,
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lectus tortor.
+            Vivamus ac lorem at magna aliquam vestibulum. Sed scelerisque
+            nibh ac sapien pharetra porttitor. Donec mi dui, accumsan eget
+            molestie quis, sollicitudin sit amet nibh. Nam in odio eros.
+            Phasellus pellentesque pharetra magna non finibus.
+            Nulla luctus erat nec fermentum euismod.
+            </textarea>
+          </div>
+        </form>
+        <div className="bg-black mt1 rounded py1 px3">
+          <p className="white m0">Caso você seja o alvo dessa mobilização,
+          dê uma resposta publica clicando <a href="#" style={{color: bgColor}}>aqui</a>.
+          Ela será publicada nesta página</p>
+        </div>
+      </div>
     </div>
   )
 }
