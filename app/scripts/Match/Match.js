@@ -4,6 +4,7 @@ import * as Paths from '../Paths'
 import { isValidEmail } from '../../util/validation-helper'
 import { Error, Input } from '../../components/FormUtil'
 import { TellAFriend, OverlayWidget } from '../components'
+import { addActivistMatch } from './actions'
 import { Choices } from './components'
 
 class Match extends Component {
@@ -13,6 +14,7 @@ class Match extends Component {
       numberSelected: undefined,
       letterSelected: undefined,
       combined: false,
+      saved: false,
       errors: []
     }
   }
@@ -42,7 +44,15 @@ class Match extends Component {
 
   handleCombineClick(e) {
     if (e) e.preventDefault()
-    if (this.formIsValid()) this.setState({ combined: true })
+    if (this.formIsValid()) {
+      const { dispatch }  = this.props
+      const { name, email, saved } = this.state
+      const matchId = this.findMatchItem().id
+      const activist = { name, email }
+
+      dispatch(addActivistMatch({ matchId, activist }))
+      this.setState({ combined: true })
+    }
   }
 
   enableMatchButton() {
@@ -113,10 +123,7 @@ class Match extends Component {
             label="Email"
             placeholder="Insira aqui seu email"
             required={true}
-            onChange={e => {
-              console.log(e.target.errors);
-              this.setState({ email: e.target.value })
-            }}
+            onChange={e => { this.setState({ email: e.target.value }) }}
             show={!!selectedChoiceA}
           />
           {this.renderErrors()}
@@ -147,7 +154,7 @@ class Match extends Component {
     const matchItem = this.findMatchItem()
     const { selectedChoice1, selectedChoiceA } = this.state
     let combinationImageUrl = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C'
-      +'55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
+      + '55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
     let share = ''
     if (matchItem) {
       combinationImageUrl = matchItem.goal_image

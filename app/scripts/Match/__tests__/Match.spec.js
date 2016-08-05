@@ -30,7 +30,8 @@ describe('Match', () => {
       first_choice: 'Framboesa',
       second_choice: 'Hospital',
       goal_image: 'test.img'
-    }] }
+    }] },
+    dispatch: sinon.spy()
   }
 
   before(() => {
