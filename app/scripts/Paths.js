@@ -78,4 +78,4 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
 
-export * from './Match/paths'
+export * from './Widget/plugins/Match/paths'

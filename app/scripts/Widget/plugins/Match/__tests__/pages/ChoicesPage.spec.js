@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from '../../../Paths'
+import * as Paths from '../../../../../Paths'
 import { ChoicesPage } from '../../pages'
 
 describe('Match/pages/ChoicesPage', () => {

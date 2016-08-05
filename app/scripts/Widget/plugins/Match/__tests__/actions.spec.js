@@ -4,8 +4,8 @@ import superagent from 'superagent'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
+import * as Paths from '../../../../Paths'
 import { addActivistMatch } from '../actions'
-import * as Paths from '../../Paths'
 
 describe('Match/actions', () => {
   let sandbox

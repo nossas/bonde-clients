@@ -12,8 +12,8 @@ export const MatchShareContainerRoute = parentPath => (
   <Route path={`${parentPath}${defaultPath}/share`} component={containers.ShareContainer} />
 )
 
-const MatchRoutes = parentPath => [
+const MatchWidgetRoutes = parentPath => [
   <Route path={`${parentPath}${path}/choices`} component={pages.ChoicesPage} />,
   <Route path={`${parentPath}${path}/goals`} component={pages.GoalsPage} />
 ]
-export default MatchRoutes
+export default MatchWidgetRoutes

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 
-import * as Paths from '../Paths'
-import { isValidEmail } from '../../util/validation-helper'
-import { Error, Input } from '../../components/FormUtil'
-import { TellAFriend, OverlayWidget } from '../components'
+import * as Paths from '../../../Paths'
+import { isValidEmail } from '../../../../util/validation-helper'
+import { Error, Input } from '../../../../components/FormUtil'
+import { TellAFriend, OverlayWidget } from '../../../components'
 import { addActivistMatch } from './actions'
 import { Choices } from './components'
 

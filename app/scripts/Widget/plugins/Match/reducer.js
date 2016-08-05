@@ -4,7 +4,7 @@ import {
   SHOW_MATCH_REQUEST,
   SHOW_MATCH_SUCCESS,
   SHOW_MATCH_FAILURE,
-} from '../constants/ActionTypes'
+} from '../../../constants/ActionTypes'
 import {
   REQUEST_ADD_ACTIVIST_MATCH,
   SUCCESS_ADD_ACTIVIST_MATCH,

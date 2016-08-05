@@ -4,9 +4,8 @@ import classnames from 'classnames'
 import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
 
-import { Form as FormWidget } from './../Widget'
+import { Form as FormWidget, Match as MatchWidget } from '../Widget/plugins'
 import DonationWidget from './DonationWidget.jsx'
-import Match from '../Match'
 
 
 const Widget = (props) => {
@@ -27,7 +26,7 @@ const Widget = (props) => {
   } else if (widget.kind === 'donation') {
     child = <DonationWidget {...props} />
   } else if (widget.kind === 'match') {
-    child = <Match {...props} />
+    child = <MatchWidget {...props} />
   } else {
     child = <DraftWidget {...props} />
   }

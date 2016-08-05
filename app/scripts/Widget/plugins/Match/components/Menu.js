@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { TabMenu, TabMenuItem } from '../../components'
-import * as Paths from '../../Paths'
+import * as Paths from '../../../../Paths'
+import { TabMenu, TabMenuItem } from '../../../../components'
 
 const Menu = ({ mobilization, widget, location }) => {
   const choicesPath = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)

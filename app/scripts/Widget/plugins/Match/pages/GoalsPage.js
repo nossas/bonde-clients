@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as WidgetActions from '../../actions/WidgetActions'
+import * as WidgetActions from '../../../actions'
 import { Page, ChoiceCombined } from '../components'
 
 export default class GoalsPage extends React.Component {

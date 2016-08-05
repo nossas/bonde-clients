@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 
-import * as WidgetActions from '../../actions/WidgetActions'
-import * as Paths from '../../Paths'
+import * as Paths from '../../../../Paths'
+import * as WidgetActions from '../../../actions'
 import { Page, AddChoiceForm } from '../components'
 
 class ChoicesPage extends React.Component {

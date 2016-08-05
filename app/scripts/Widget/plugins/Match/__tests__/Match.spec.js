@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from '../../Paths'
+import * as Paths from '../../../../Paths'
 import Match from '../'
 
 describe('Match', () => {

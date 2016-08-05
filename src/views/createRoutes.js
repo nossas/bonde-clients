@@ -16,7 +16,7 @@ import {
 
 // Modules routes
 import MobilizationRoute from '../../app/scripts/Mobilization/routes'
-import { MatchShareContainerRoute } from '../../app/scripts/Match/routes'
+import { MatchShareContainerRoute } from '../../app/scripts/Widget/plugins/Match/routes'
 
 export default function(store, host) {
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)

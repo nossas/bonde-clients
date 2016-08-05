@@ -1,7 +1,7 @@
 import React from 'react'
 
-import * as Paths from '../../Paths'
-import { CloseButton } from '../../components'
+import * as Paths from '../../../../Paths'
+import { CloseButton } from '../../../../components'
 import { Menu } from './'
 
 
