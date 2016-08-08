@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import * as Paths from './../../Paths'
-import { OverlayWidget } from '../OverlayWidget'
+import { OverlayWidget } from '../../Widget/components'
 import { TellAFriend } from './../'
 import Choices from './Choices'
 
