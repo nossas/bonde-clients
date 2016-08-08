@@ -33,8 +33,7 @@ const Widget = (props) => {
   } else if (widget.kind === 'pressure') {
     child = <PressureWidget {...props} />
   } else {
-    child = <PressureWidget {...props} />
-    /*child = <DraftWidget {...props} />*/
+    child = <DraftWidget {...props} />
   }
 
   return (
