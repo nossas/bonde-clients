@@ -41,11 +41,11 @@ class UserDashboard extends Component {
   }
 
   render() {
-    const { children, auth, ...otherProps } = this.props
+    const { children, ...otherProps } = this.props
 
     return (
       <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
-        <TopMenu auth={auth} />
+        <TopMenu auth={otherProps.auth} />
         {
           React.cloneElement(children, {...otherProps})
         }
