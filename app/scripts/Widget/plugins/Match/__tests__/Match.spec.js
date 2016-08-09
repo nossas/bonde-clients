@@ -93,7 +93,7 @@ describe('Match', () => {
         target = { value: choicesA.split(',')[0] }
         wrapper.find('Choices').at(1).simulate('change', { target })
 
-        expect(wrapper.find('Input')).to.length(2)
+        expect(wrapper.find('Input')).to.length(3)
       })
 
       it('should enable match button after selects first and second choices', () => {
@@ -114,7 +114,8 @@ describe('Match', () => {
         wrapper.setState({
           selectedChoice1: choices1.split(',')[0],
           selectedChoiceA: choicesA.split(',')[0],
-          name: 'Foo Name',
+          firstname: 'Foo Firstname',
+          lastname: 'Foo Lastname',
           email: 'bar@email.com'
         })
         spy.setState = sandbox.spy(Match.prototype, 'setState')

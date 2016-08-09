@@ -14,7 +14,6 @@ class Match extends Component {
       numberSelected: undefined,
       letterSelected: undefined,
       combined: false,
-      saved: false,
       errors: []
     }
   }
@@ -30,10 +29,11 @@ class Match extends Component {
   }
 
   formIsValid() {
-    const { name, email } = this.state
+    const { firstname, lastname, email } = this.state
     let errors = []
 
-    if (!name) errors.push('O campo Nome não pode ficar em branco.')
+    if (!firstname) errors.push('O campo Nome não pode ficar em branco.')
+    if (!lastname) errors.push('O campo Sobrenome não pode ficar em branco.')
     if (!email) errors.push('O campo Email não pode ficar em branco.')
     else if (!isValidEmail(email)) errors.push('Email inválido.')
 
@@ -46,10 +46,11 @@ class Match extends Component {
     if (e) e.preventDefault()
     if (this.formIsValid()) {
       const { dispatch }  = this.props
-      const { name, email, saved } = this.state
+      const { firstname, lastname, email } = this.state
       const matchId = this.findMatchItem().id
-      const activist = { name, email }
+      const activist = { firstname, lastname, email }
 
+      console.log({ matchId, activist });
       dispatch(addActivistMatch({ matchId, activist }))
       this.setState({ combined: true })
     }
@@ -109,12 +110,21 @@ class Match extends Component {
             classNames={['mb2']}
           />
           <Input
-            uid="input-match-name"
+            uid="input-match-firstname"
             type="text"
-            label="Nome completo"
+            label="Nome"
             placeholder="Insira aqui seu nome"
             required={true}
-            onChange={e => { this.setState({ name: e.target.value }) }}
+            onChange={e => { this.setState({ firstname: e.target.value }) }}
+            show={!!selectedChoiceA}
+          />
+          <Input
+            uid="input-match-lastname"
+            type="text"
+            label="Sobrenome"
+            placeholder="Insira aqui seu sobrenome"
+            required={true}
+            onChange={e => { this.setState({ lastname: e.target.value }) }}
             show={!!selectedChoiceA}
           />
           <Input
