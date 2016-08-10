@@ -50,7 +50,6 @@ class Match extends Component {
       const matchId = this.findMatchItem().id
       const activist = { firstname, lastname, email }
 
-      console.log({ matchId, activist });
       dispatch(addActivistMatch({ matchId, activist }))
       this.setState({ combined: true })
     }
