@@ -3,10 +3,16 @@ import reduxForm from 'redux-form'
 import {connect} from 'react-redux'
 import ReactS3Uploader from 'react-s3-uploader'
 import {CloseButton, Label, InputCounter, SaveButton} from './../components'
-import {editMobilization} from './../reducers/mobilizations'
 import * as Paths from '../Paths'
 
-@connect(state => ({ form: state.mobilizationSharing }))
+import * as Selectors from '../Mobilization/MobilizationSelectors'
+import { editMobilization } from '../Mobilization/MobilizationActions'
+
+@connect((state, ownProps) => ({
+  form: state.mobilizationSharing,
+  editing: state.mobilization.saving,
+  mobilization: Selectors.getMobilization(state, ownProps)
+}))
 @reduxForm('mobilizationSharing')
 
 export default class MobilizationSharing extends React.Component {
@@ -19,7 +25,7 @@ export default class MobilizationSharing extends React.Component {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
-    mobilizations: PropTypes.object.isRequired,
+    editing: PropTypes.bool.isRequired,
     initializeForm: PropTypes.func.isRequired,
     dirty: PropTypes.bool.isRequired
   }
@@ -42,10 +48,10 @@ export default class MobilizationSharing extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {mobilizations} = this.props
-    if (mobilizations.editing !== nextProps.mobilizations.editing) {
+    const { editing } = this.props
+    if (editing !== nextProps.editing) {
       this.setState({
-        edited: mobilizations.editing && !nextProps.mobilizations.editing
+        edited: editing && !nextProps.editing
       })
     }
   }
@@ -92,7 +98,7 @@ export default class MobilizationSharing extends React.Component {
         facebook_share_description: facebookShareDescription,
         twitter_share_text: twitterShareText
       },
-      handleBlur, handleChange, mobilizations, dirty
+      handleBlur, handleChange, editing, dirty
     } = this.props
 
     const { isFacebookShareImageUploading } = this.state
@@ -191,7 +197,7 @@ export default class MobilizationSharing extends React.Component {
 
           <div>
             <SaveButton
-              saving={mobilizations.editing}
+              saving={editing}
               saved={this.state.edited && !dirty}
               handleClick={::this.handleSubmit}
             />

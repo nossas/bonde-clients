@@ -1,13 +1,16 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'
+/*import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'*/
 import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
-import { findWidgets, isWidgetsLoaded } from './../../reducers/widgets'
+import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
 import { ShowMobilization } from './../'
+
+import { fetchMobilizations, mobilizationsIsLoaded } from '../../Mobilization/MobilizationActions'
+
 
 const mapStateToProps = (state) => {
   return ({
-    mobilizations: state.mobilizations,
+    mobilizations: state.mobilization.data,
     blocks: state.blocks,
     widgets: state.widgets
   })
@@ -33,7 +36,7 @@ export class CustomDomainWrapper extends React.Component {
 
     const promises = []
 
-    if (!isMobilizationsLoaded(store.getState())) {
+    if (!mobilizationsIsLoaded(store.getState())) {
       const action = fetchMobilizations(findParams)
       const dispatch = store.dispatch(action)
       promises.push(dispatch)
@@ -56,10 +59,9 @@ export class CustomDomainWrapper extends React.Component {
 
   renderMobilization() {
     const { mobilizations, blocks, widgets } = this.props
-
     return (
       <ShowMobilization
-        mobilization={mobilizations.data[0]}
+        mobilization={mobilizations[0]}
         blocks={blocks}
         widgets={widgets}
         {...this.props}
@@ -79,7 +81,7 @@ export class CustomDomainWrapper extends React.Component {
 
   render() {
     return (
-      this.props.mobilizations.data.length === 0
+      this.props.mobilizations.length === 0
        ? this.renderMobilizationNotFound()
        : this.renderMobilization()
     )

@@ -1,16 +1,22 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
-import { Block, Loading, Navbar } from './../components'
-import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-import * as Paths from '../Paths'
+import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
-import { fetchWidgets } from './../reducers/widgets'
+import classnames from 'classnames'
 
-@connect(state => ({
+import * as Paths from '../Paths'
+import { Block, Loading, Navbar } from './../components'
+
+import { fetchWidgets } from './../Widget/reducer'
+
+import * as Selectors from '../Mobilization/MobilizationSelectors'
+
+
+@connect((state, ownProps) => ({
   scrolledToBottom: false,
   widgetsCount: state.widgets.length,
-  mobilizationEditor: state.mobilizationEditor
+  mobilizationEditor: state.mobilizationEditor,
+  mobilization: Selectors.getMobilization(state, ownProps)
 }))
 @reactMixin.decorate(Navigation)
 

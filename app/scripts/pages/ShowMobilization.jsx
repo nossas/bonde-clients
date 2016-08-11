@@ -40,7 +40,6 @@ export default class ShowMobilization extends React.Component {
 
   render() {
     const { mobilization, blocks, widgets } = this.props
-
     const {
       color_scheme: colorScheme,
       header_font: headerFont,

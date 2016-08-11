@@ -1,1 +1,1 @@
-export { default as OverlayWidget } from './OverlayWidget'
+export { default } from './OverlayWidget'

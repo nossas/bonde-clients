@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { ConfigurationsMenu } from './../components'
 
-export default class MobilizationSettings extends React.Component {
+import * as Selectors from '../Mobilization/MobilizationSelectors'
+
+
+export class MobilizationSettings extends React.Component {
   static propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    mobilization: PropTypes.object.isRequired
   }
 
   render() {
@@ -19,3 +24,11 @@ export default class MobilizationSettings extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (globalState, ownProps) => {
+  return {
+    mobilization: Selectors.getMobilization(globalState, ownProps)
+  }
+}
+
+export default connect(mapStateToProps)(MobilizationSettings)

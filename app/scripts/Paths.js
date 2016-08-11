@@ -78,14 +78,4 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
 
-export function matchChoicesMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/choices`
-}
-
-export function matchGoalsMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/goals`
-}
-
-export const shareMatchWrapper = (widget_id, match_id) => {
-  return `/share/widget/${widget_id}/match/${match_id}`
-}
+export * from './Widget/plugins/Match/paths'

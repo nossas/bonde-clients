@@ -1,4 +1,4 @@
-import widgets from './../../reducers/widgets'
+import reducer from './../../Widget/reducer'
 import { EDIT_WIDGET } from './../../constants/ActionTypes'
 
 describe('widgets', () => {
@@ -24,7 +24,7 @@ describe('widgets', () => {
           settings: { content: newContent }
         }
       }
-      const newState = widgets(initialState, action)
+      const newState = reducer(initialState, action)
       expect(newState.data[0].settings.content).to.equal(newContent)
     })
   })

@@ -7,7 +7,7 @@ describe('CustomDomainWrapper', () => {
   const props = {
     blocks: {data: []},
     widgets: {data: []},
-    mobilizations: {data: []},
+    mobilizations: [],
     auth: {},
     dispatch: () => {}
   }
@@ -20,7 +20,7 @@ describe('CustomDomainWrapper', () => {
 
   it('should render ShowMobilization when there is a mobilization', () => {
     const component = TestUtils.renderIntoDocument(
-      <CustomDomainWrapper {...props} mobilizations={{data: [{id: 1}]}} />
+      <CustomDomainWrapper {...props} mobilizations={[{id: 1}]} />
     )
 
     const divs = TestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
