@@ -90,6 +90,10 @@ export const shareMatchWrapper = (widget_id, match_id) => {
   return `/share/widget/${widget_id}/match/${match_id}`
 }
 
-export const formPressureWidget = (mobilization_id, widget_id) => {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure/form`
+const makePressureWidget = (mobilization_id, widget_id, path) => {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
 }
+
+export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, "/form")
+
+export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, "/email")
