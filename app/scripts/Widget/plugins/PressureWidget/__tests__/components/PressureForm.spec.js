@@ -52,4 +52,11 @@ describe('<PressureForm />', () => {
     expect(component.instance().state.subject).to.equal('subject default')
     expect(component.instance().state.body).to.equal('body default')
   })
+
+  it('should change text of button when buttonText passed', () => {
+    component.setProps({
+      buttonText: 'Enviar e-mail para o alvo'
+    })
+    expect(component.find('button').text()).to.equal('Enviar e-mail para o alvo')
+  })
 })

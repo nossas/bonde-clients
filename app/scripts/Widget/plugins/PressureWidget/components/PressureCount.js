@@ -13,7 +13,8 @@ const PressureCount = ({ total, totalColor }) => {
   return (
     <div className="pressure-count p3 bg-white rounded-bottom" style={pressureCount}>
       <p className="center m0">
-        <span style={{color: totalColor}}>{total}</span>&nbsp;<span>pressões feitas</span>
+        <span className="h1" style={{color: totalColor}}>{total}</span>
+        <span className="black bold h3 ml1">pressões feitas</span>
       </p>
     </div>
   )

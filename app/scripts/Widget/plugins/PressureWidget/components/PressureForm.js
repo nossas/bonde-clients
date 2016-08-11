@@ -37,7 +37,7 @@ class PressureForm extends Component {
   }
 
   render() {
-    const { buttonColor, children } = this.props
+    const { buttonColor, buttonText, children } = this.props
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
@@ -72,7 +72,7 @@ class PressureForm extends Component {
               onChange={e => this.setState({lastName: e.target.value})} />
           </div>
           <div className="p3 border-top">
-            <button type="submit" className="caps white col-12 py2 rounded" style={{backgroundColor: buttonColor}}>Enviar email</button>
+            <button type="submit" className="caps white col-12 py2 rounded" style={{backgroundColor: buttonColor}}>{buttonText}</button>
           </div>
         </div>
         {children}
@@ -97,14 +97,6 @@ class PressureForm extends Component {
                 style={{...inputReset, height: '13rem'}}
                 value={this.state.body}
                 onChange={e => this.setState({body: e.target.value})} />
-                {/*Prezadas, Lúcia Regina Espagolla e Vera Lucia Benfica da Costa,
-
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lectus tortor.
-                Vivamus ac lorem at magna aliquam vestibulum. Sed scelerisque
-                nibh ac sapien pharetra porttitor. Donec mi dui, accumsan eget
-                molestie quis, sollicitudin sit amet nibh. Nam in odio eros.
-                Phasellus pellentesque pharetra magna non finibus.
-                Nulla luctus erat nec fermentum euismod.*/}
             </div>
           </div>
         </div>
@@ -116,6 +108,7 @@ class PressureForm extends Component {
 PressureForm.propTypes = {
   onSubmit: PropTypes.func,
   buttonColor: PropTypes.string,
+  buttonText: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string
 }
