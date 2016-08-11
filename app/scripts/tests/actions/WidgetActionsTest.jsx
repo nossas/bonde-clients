@@ -1,5 +1,6 @@
-import { EDIT_WIDGET, FETCH_WIDGETS } from '../../constants/ActionTypes'
+import { FETCH_WIDGETS } from '../../constants/ActionTypes'
 import * as WidgetActions from './../../Widget/actions'
+import { SUCCESS_EDIT_WIDGET } from './../../Widget/actions'
 import $ from 'jquery'
 
 describe('WidgetActions', () => {
@@ -29,6 +30,7 @@ describe('WidgetActions', () => {
       WidgetActions.editWidget({
         mobilization_id: 1,
         widget_id: 2,
+        credentials: {},
         widget
       })(dispatch)
       const request = requests[0]
@@ -37,7 +39,7 @@ describe('WidgetActions', () => {
       expect(request.requestBody).to.equal(JSON.stringify({widget}))
       request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widget))
       expect(dispatch).to.have.been.calledWith({
-        type: EDIT_WIDGET,
+        type: SUCCESS_EDIT_WIDGET,
         widget
       })
     })

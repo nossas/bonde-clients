@@ -1,5 +1,6 @@
 import reducer from './../../Widget/reducer'
-import { EDIT_WIDGET } from './../../constants/ActionTypes'
+
+import { SUCCESS_EDIT_WIDGET } from '../../Widget/actions'
 
 describe('widgets', () => {
   describe('EDIT_WIDGET', () => {
@@ -18,7 +19,7 @@ describe('widgets', () => {
         ]
       }
       const action = {
-        type: EDIT_WIDGET,
+        type: SUCCESS_EDIT_WIDGET,
         widget: {
           id: 1,
           settings: { content: newContent }
