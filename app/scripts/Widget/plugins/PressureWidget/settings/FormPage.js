@@ -5,7 +5,7 @@ import reduxForm from 'redux-form'
 import { editWidget } from '../../../actions'
 import { Control, Input, RadioButton, ColorInput } from '../../../components/FormUtils'
 
-import SettingsMenu from './SettingsMenu'
+import { Base as PressureBase } from '../components/settings'
 
 
 const widgetFormValidation = (data) => {
@@ -35,8 +35,10 @@ class FormPage extends Component {
   constructor(props, context) {
     super(props, context)
 
+    const { title_text, button_text, show_counter, main_color } = this.props.widget.settings
+
     this.props.initializeForm(
-      this.props.widget.settings || {
+      {title_text, button_text, show_counter, main_color} || {
         title_text: '',
         button_text: '',
         show_counter: 'false',
@@ -55,7 +57,10 @@ class FormPage extends Component {
         mobilization_id: mobilization.id,
         widget_id: widget.id,
         credentials: auth.credentials,
-        widget: { settings: {...data} }
+        widget: { settings: {
+          ...widget.settings,
+          ...data
+        }}
       })
     } else {
       touchAll()
@@ -71,35 +76,29 @@ class FormPage extends Component {
     } = this.props
 
     return (
-      <div className="flex-auto flex flex-column bg-silver gray relative">
-        <SettingsMenu
-          location={location}
-          mobilization_id={mobilization.id}
-          widget_id={widget.id} />
-        <div className="p3 flex-auto overflow-scroll">
-          <form onSubmit={::this.handleSubmit}>
-            <Control id="title-text-id" label="Título do formulário" name="title_text" {...inputProps}>
-              <Input type="text" value={title_text} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
-            </Control>
-            <Control id="button-text-id" label="Texto do botão" name='button_text' {...inputProps}>
-              <Input type="text" value={button_text} placeholder='Enviar e-mail' />
-            </Control>
-            <Control id="main-color-id" label="Cor do formulário" name="main_color" {...inputProps}>
-              <ColorInput value={main_color} />
-            </Control>
-            <Control label="Mostrar contador de pessão" name='show_counter' {...inputProps}>
-              <Input type="radio" value={show_counter}>
-                <RadioButton className="mr1 caps" value="true">Sim</RadioButton>
-                <RadioButton value="false" className="caps">Não</RadioButton>
-              </Input>
-            </Control>
-            <div className="sm-col sm-col-10">
-              <button className="caps button bg-darken-3 h3 mt1 mr2">Cancelar</button>
-              <input type="submit" className="caps button bg-aqua h3 mt1" disabled={saving} value={(saving ? "Enviando" : "Salvar")} />
-            </div>
-          </form>
-        </div>
-      </div>
+      <PressureBase location={location} mobilization={mobilization} widget={widget}>
+        <form onSubmit={::this.handleSubmit}>
+          <Control id="title-text-id" label="Título do formulário" name="title_text" {...inputProps}>
+            <Input type="text" value={title_text} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
+          </Control>
+          <Control id="button-text-id" label="Texto do botão" name='button_text' {...inputProps}>
+            <Input type="text" value={button_text} placeholder='Enviar e-mail' />
+          </Control>
+          <Control id="main-color-id" label="Cor do formulário" name="main_color" {...inputProps}>
+            <ColorInput value={main_color} />
+          </Control>
+          <Control label="Mostrar contador de pessão" name='show_counter' {...inputProps}>
+            <Input type="radio" value={show_counter}>
+              <RadioButton className="mr1 caps" value="true">Sim</RadioButton>
+              <RadioButton value="false" className="caps">Não</RadioButton>
+            </Input>
+          </Control>
+          <div className="sm-col sm-col-10">
+            <button className="caps button bg-darken-3 h3 mt1 mr2">Cancelar</button>
+            <input type="submit" className="caps button bg-aqua h3 mt1" disabled={saving} value={(saving ? "Enviando" : "Salvar")} />
+          </div>
+        </form>
+      </PressureBase>
     )
   }
 }
