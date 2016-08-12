@@ -16,8 +16,7 @@ const PressureCount = ({ total, totalColor }) => {
   }
   const pressureSpanStyle = {
     color: '#555353',
-    lineHeight: '54px',
-    fontSize: '1.15em'
+    lineHeight: '54px'
   }
   return (
     <div className="pressure-count p2 bg-white rounded-bottom clearfix" style={pressureCount}>
