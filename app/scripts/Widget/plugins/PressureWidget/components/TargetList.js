@@ -3,6 +3,10 @@ import React, { PropTypes } from 'react'
 
 const TargetList = ({ targets }) => {
   // TODO: add sheet css
+  const targetListContainerStyle = {
+    overflowX: 'auto',
+    height: '95px'
+  }
   const targetListStyle = {
     backgroundColor: '#eee'
   }
@@ -11,11 +15,17 @@ const TargetList = ({ targets }) => {
     height: '75px',
     float: 'left'
   }
+  const targetLabelStyle = {
+    color: '#4c4c4c',
+    fontSize: '.8em',
+    marginTop: '5px',
+    marginBottom: '12px'
+  }
 
   return (
     <div className="target-list px2 py1" style={targetListStyle}>
-      <p className="bold">Quem você pode pressionar</p>
-      <div style={{overflowX: 'auto', height: '115px'}} className="clearfix">
+      <p className="bold" style={targetLabelStyle}>Quem você vai pressionar</p>
+      <div style={targetListContainerStyle} className="clearfix">
         <div style={{ width: `${240 * targets.length}px` }}>
           {/* TODO: Change HTML by TargetListItem */}
           {targets.map(target => (
