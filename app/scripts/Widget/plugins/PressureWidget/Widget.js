@@ -59,7 +59,7 @@ class PressureWidget extends Component {
               console.log(data)
               alert(data)
             }}>
-            <PressureCount total={12234} totalColor={bgColor} />
+            <PressureCount total={12.234} totalColor={bgColor} />
           </PressureForm>
           <div className="bg-black mt1 rounded py1 px3">
             <p className="white m0">Caso você seja o alvo dessa mobilização,

@@ -10,11 +10,19 @@ const PressureCount = ({ total, totalColor }) => {
   const pressureCount = {
     boxShadow: "inset 0px 15px 18px -10px rgba(227,224,227,1)",
   }
+  const pressureCountSpanStyle = {
+    color: totalColor,
+    fontSize: '2.3em'
+  }
+  const pressureSpanStyle = {
+    color: '#555353',
+    lineHeight: '54px',
+    fontSize: '1.15em'
+  }
   return (
-    <div className="pressure-count p3 bg-white rounded-bottom" style={pressureCount}>
-      <p className="center m0">
-        <span style={{color: totalColor}}>{total}</span>&nbsp;<span>pressões feitas</span>
-      </p>
+    <div className="pressure-count p2 bg-white rounded-bottom clearfix" style={pressureCount}>
+      <span className="md-col md-col-6 px1 bold right-align" style={pressureCountSpanStyle}>{total}</span>
+      <span className="md-col md-col-6 px1 bold" style={pressureSpanStyle}>pressões feitas</span>
     </div>
   )
 }

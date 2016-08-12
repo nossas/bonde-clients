@@ -43,6 +43,10 @@ class PressureForm extends Component {
       fontSize: '.85em',
       marginTop: '6px'
     }
+    const formSubmitContainerStyle = {
+      paddingBottom: '1.4rem',
+      paddingTop: '1.4rem'
+    }
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
@@ -76,7 +80,7 @@ class PressureForm extends Component {
               value={this.state.lastName}
               onChange={e => this.setState({lastName: e.target.value})} />
           </div>
-          <div className="p3 border-top">
+          <div className="px3 border-top" style={formSubmitContainerStyle}>
             <button type="submit" className="caps white col-12 py2 rounded" style={{backgroundColor: buttonColor}}>Enviar email</button>
           </div>
         </div>
