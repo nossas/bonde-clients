@@ -5,9 +5,9 @@ const controlClassname = 'px3 py1 border-top'
 const inputReset = {
   border: 'none',
   padding: '0',
-  height: '2rem'
+  height: '2rem',
+  fontSize: '1.1em'
 }
-
 
 class PressureForm extends Component {
 
@@ -38,11 +38,16 @@ class PressureForm extends Component {
 
   render() {
     const { buttonColor, children } = this.props
+    const inputLabelStyle = {
+      color: '#4f4f4f',
+      fontSize: '.85em',
+      marginTop: '6px'
+    }
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
           <div className={controlClassname}>
-            <label className="flex">E-mail</label>
+            <label className="flex" style={inputLabelStyle}>Seu email</label>
             <input
               className="col-12"
               style={inputReset}
@@ -52,7 +57,7 @@ class PressureForm extends Component {
               onChange={e => this.setState({email: e.target.value})} />
           </div>
           <div className={controlClassname}>
-            <label className="flex">Seu nome</label>
+            <label className="flex" style={inputLabelStyle}>Seu nome</label>
             <input
               className="col-12"
               style={inputReset}
@@ -62,7 +67,7 @@ class PressureForm extends Component {
               onChange={e => this.setState({name: e.target.value})} />
           </div>
           <div className={controlClassname}>
-            <label className="flex" htmlFor="last_nameId">Seu sobrenome</label>
+            <label className="flex" htmlFor="last_nameId" style={inputLabelStyle}>Seu sobrenome</label>
             <input
               className="col-12"
               style={inputReset}
