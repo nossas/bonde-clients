@@ -14,7 +14,7 @@ const TargetList = ({ targets }) => {
 
   return (
     <div className="target-list px2 py1" style={targetListStyle}>
-      <p className="bold">Quem você pode pressionar</p>
+      <p className="bold">Quem você vai pressionar</p>
       <div style={{overflowX: 'auto', height: '115px'}} className="clearfix">
         <div style={{ width: `${240 * targets.length}px` }}>
           {/* TODO: Change HTML by TargetListItem */}
