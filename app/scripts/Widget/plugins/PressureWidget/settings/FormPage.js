@@ -35,16 +35,14 @@ class FormPage extends Component {
   constructor(props, context) {
     super(props, context)
 
-    const { title_text, button_text, show_counter, main_color } = this.props.widget.settings
+    const { title_text, button_text, show_counter, main_color } = this.props.widget.settings || {
+      title_text: '',
+      button_text: '',
+      show_counter: 'false',
+      main_color: '#f23392'
+    }
 
-    this.props.initializeForm(
-      {title_text, button_text, show_counter, main_color} || {
-        title_text: '',
-        button_text: '',
-        show_counter: 'false',
-        main_color: '#f23392'
-      }
-    )
+    this.props.initializeForm({ title_text, button_text, show_counter, main_color })
   }
 
   handleSubmit(e) {

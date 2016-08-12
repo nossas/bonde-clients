@@ -42,15 +42,13 @@ class EmailPage extends Component {
   constructor(props) {
     super(props)
 
-    const { email_subject, email_text, email_done } = this.props.widget.settings
+    const { email_subject, email_text, email_done } = this.props.widget.settings || {
+      email_subject: '',
+      email_text: '',
+      email_done: ''
+    }
 
-    this.props.initializeForm(
-      {email_subject, email_text, email_done} || {
-        email_subject: '',
-        email_text: '',
-        email_done: ''
-      }
-    )
+    this.props.initializeForm({ email_subject, email_text, email_done })
   }
 
   handleSubmit(e) {
