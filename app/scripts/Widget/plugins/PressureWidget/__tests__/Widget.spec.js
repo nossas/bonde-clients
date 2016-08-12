@@ -49,4 +49,9 @@ describe('<PressureWidget />', () => {
 
     expect(widget.find('PressureForm').props().buttonText).to.equal(button_text)
   })
+
+  it('should render ok with values default when settings is undefined', () => {
+    widget.setProps({ widget: { id: 1, settings: undefined } })
+    expect(widget).to.be.ok
+  })
 })

@@ -18,7 +18,11 @@ class PressureWidget extends Component {
 
   render() {
     const { mobilization, widget, editable } = this.props
-    const { main_color, title_text, button_text, email_subject, email_text } = widget.settings
+    const { main_color, title_text, button_text, email_subject, email_text } = widget.settings || {
+      main_color: '#f23392',
+      title_text: 'Envie um e-mail para quem pode tomar essa decisão',
+      button_text: 'Enviar e-mail'
+    }
 
     const targets = Array(3).fill({
       image: 'https://placeholdit.imgix.net/~text?txtsize=8&txt=50%C3%9750&w=50&h=50',
