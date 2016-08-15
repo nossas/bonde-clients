@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 
 import { editWidget } from '../../../actions'
+import { FormFooter } from '../../../components'
 import { Control, Input, Textarea } from '../../../components/FormUtils'
 
 import { Base as PressureBase } from '../components/settings'
@@ -13,16 +14,12 @@ const EMAIL_TEXT_PLACEHOLDER = "Obrigado por apostar na força da ação coletiv
 
 const widgetFormValidation = (data) => {
   const errors = { valid: true }
-  if (!data.email_subject) {
-    errors.email_subject = 'Insira um assunto para o e-mail'
+  if (!data.pressure_subject) {
+    errors.pressure_subject = 'Insira um assunto para o e-mail'
     errors.valid = false
   }
-  if (!data.email_text) {
-    errors.email_text = 'Insira um corpo para o e-mail'
-    errors.valid = false
-  }
-  if (!data.email_done) {
-    errors.email_done = 'Insira uma mensagem de agradecimento para o e-mail'
+  if (!data.pressure_body) {
+    errors.pressure_body = 'Insira um corpo para o e-mail'
     errors.valid = false
   }
   return errors
@@ -31,7 +28,8 @@ const widgetFormValidation = (data) => {
 const mapStateToProps = state => (
   {
     form: state.widgetForm,
-    saving: state.widgets.saving
+    saving: state.widgets.saving,
+    requestError: state.widgets.error
   }
 )
 
@@ -42,13 +40,20 @@ class EmailPage extends Component {
   constructor(props) {
     super(props)
 
-    const { email_subject, email_text, email_done } = this.props.widget.settings || {
-      email_subject: '',
-      email_text: '',
-      email_done: ''
+    this.state = { submitted: false }
+
+    const { pressure_subject, pressure_body } = this.props.widget.settings || {
+      pressure_subject: '',
+      pressure_body: ''
     }
 
-    this.props.initializeForm({ email_subject, email_text, email_done })
+    this.props.initializeForm({ pressure_subject, pressure_body })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.saving && nextProps.saving && !nextProps.requestError) {
+      this.setState({ submitted: true })
+    }
   }
 
   handleSubmit(e) {
@@ -74,25 +79,23 @@ class EmailPage extends Component {
   render() {
     const {
       location, mobilization, widget, saving,
-      data: { email_subject, email_text, email_done },
+      data: { pressure_subject, pressure_body },
       ...inputProps
     } = this.props
     return (
       <PressureBase location={location} mobilization={mobilization} widget={widget}>
         <form onSubmit={::this.handleSubmit}>
-          <Control id="email-subject-id" label="Assunto do email" name="email_subject" {...inputProps}>
-            <Input type="text" value={email_subject} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
+          <Control id="email-subject-id" label="Assunto do email" name="pressure_subject" {...inputProps}>
+            <Input type="text" value={pressure_subject} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
           </Control>
-          <Control id="email-subject-id" label="Corpo do email que será enviado para o alvo" name="email_text" {...inputProps}>
-            <Textarea value={email_text} placeholder={EMAIL_TEXT_PLACEHOLDER} />
+          <Control id="email-subject-id" label="Corpo do email que será enviado para o alvo" name="pressure_body" {...inputProps}>
+            <Textarea value={pressure_body} placeholder={EMAIL_TEXT_PLACEHOLDER} />
           </Control>
-          <Control id="email-done-id" label="Email de autofire (Agradecimento de quem apoiou)" name="email_done" {...inputProps}>
-            <Textarea value={email_done} placeholder={EMAIL_TEXT_PLACEHOLDER} />
-          </Control>
-          <div className="block">
+          <FormFooter submitted={this.state.submitted} saving={saving} />
+          {/*<div className="block">
             <button className="caps button bg-darken-3 h3 mt1 mr2">Cancelar</button>
             <input type="submit" className="caps button bg-aqua h3 mt1" disabled={saving} value={(saving ? "Enviando" : "Salvar")} />
-          </div>
+          </div>*/}
         </form>
       </PressureBase>
     )

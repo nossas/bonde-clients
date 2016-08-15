@@ -18,7 +18,7 @@ class PressureWidget extends Component {
 
   render() {
     const { mobilization, widget, editable } = this.props
-    const { main_color, title_text, button_text, show_counter, count_text, email_subject, email_text } = widget.settings || {
+    const { main_color, title_text, button_text, show_counter, count_text, pressure_subject, pressure_body } = widget.settings || {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
       button_text: 'Enviar e-mail'
@@ -45,8 +45,8 @@ class PressureWidget extends Component {
           <PressureForm
             buttonText={button_text}
             buttonColor={main_color}
-            subject={email_subject}
-            body={email_text}
+            subject={pressure_subject}
+            body={pressure_body}
             onSubmit={data => {
               console.log(data)
               alert(data)

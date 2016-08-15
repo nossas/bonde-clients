@@ -25,7 +25,8 @@ const widgetFormValidation = (data) => {
 const mapStateToProps = state => (
   {
     form: state.widgetForm,
-    saving: state.widgets.saving
+    saving: state.widgets.saving,
+    requestError: state.widgets.error
   }
 )
 
@@ -52,7 +53,7 @@ class FormPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.saving && nextProps.saving) {
+    if (this.props.saving && nextProps.saving && !nextProps.requestError) {
       this.setState({ submitted: true })
     }
   }

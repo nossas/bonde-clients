@@ -34,13 +34,13 @@ describe('<PressureWidget />', () => {
     expect(widget.find('h2').text()).to.equal(title_text)
   })
 
-  it('should render PressureForm with email_subject and email_text', () => {
-    const email_subject = 'Não derrubem a escola'
-    const email_text = 'Sra. Renata da Costa, favor não derrubar...'
-    widget.setProps({ widget: { id: 1, settings: { email_subject, email_text } } })
+  it('should render PressureForm with pressure_subject and pressure_body', () => {
+    const pressure_subject = 'Não derrubem a escola'
+    const pressure_body = 'Sra. Renata da Costa, favor não derrubar...'
+    widget.setProps({ widget: { id: 1, settings: { pressure_subject, pressure_body } } })
 
-    expect(widget.find('PressureForm').props().subject).to.equal(email_subject)
-    expect(widget.find('PressureForm').props().body).to.equal(email_text)
+    expect(widget.find('PressureForm').props().subject).to.equal(pressure_subject)
+    expect(widget.find('PressureForm').props().body).to.equal(pressure_body)
   })
 
   it('should render PressureForm with button_text', () => {

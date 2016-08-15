@@ -9,6 +9,7 @@ const Menu = ({ location, mobilization_id, widget_id }) => {
 
   const formPath = Paths.formPressureWidget(mobilization_id, widget_id)
   const emailPath = Paths.emailPressureWidget(mobilization_id, widget_id)
+  const autofirePath = Paths.autofireMobilizationWidget(mobilization_id, widget_id)
 
   return (
     <TabMenu title="Configure seu formulário de pressão">
@@ -18,8 +19,12 @@ const Menu = ({ location, mobilization_id, widget_id }) => {
         isActive={formPath === location.pathname} />
       <TabMenuItem
         path={emailPath}
-        text='E-mail'
+        text='E-mail para alvo'
         isActive={emailPath === location.pathname} />
+      <TabMenuItem
+        path={autofirePath}
+        text='Mensagem de agradecimento'
+        isActive={autofirePath === location.pathname} />
     </TabMenu>
   )
 }
