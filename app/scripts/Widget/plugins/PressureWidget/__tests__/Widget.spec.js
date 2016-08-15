@@ -19,12 +19,12 @@ describe('<PressureWidget />', () => {
   })
 
   it('should color with main_color, h2, a, PressureForm, PressureCount', () => {
-    widget.setProps({ widget: { id: 1, settings: { main_color: '#fff' } } })
+    widget.setProps({ widget: { id: 1, settings: { main_color: '#fff', show_counter: "true" } } })
 
     expect(widget.find('h2').props().style.backgroundColor).to.equal('#fff')
     expect(widget.find('a').props().style.color).to.equal('#fff')
     expect(widget.find('PressureForm').props().buttonColor).to.equal('#fff')
-    expect(widget.find('PressureCount').props().totalColor).to.equal('#fff')
+    expect(widget.find('PressureCount').props().color).to.equal('#fff')
   })
 
   it('should render h2 with title_text', () => {
@@ -53,5 +53,10 @@ describe('<PressureWidget />', () => {
   it('should render ok with values default when settings is undefined', () => {
     widget.setProps({ widget: { id: 1, settings: undefined } })
     expect(widget).to.be.ok
+  })
+
+  it('should hide PressureCount when show_counter is "false"', () => {
+    widget.setProps({ widget: { id: 1, settings: { show_counter: "false" }} })
+    expect(widget.find('PressureCount').length).to.equal(0)
   })
 })

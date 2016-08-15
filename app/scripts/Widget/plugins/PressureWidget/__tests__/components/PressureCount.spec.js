@@ -17,15 +17,25 @@ describe('<PressureCount />', () => {
     expect(totalSpan.text()).to.equal('0')
   })
 
-  it('should paint number with totalColor', () => {
-    componet.setProps({ totalColor: '#444' })
+  it('should paint number with color', () => {
+    componet.setProps({ color: '#444' })
     const totalSpan = componet.find('span').at(0)
     expect(totalSpan.props().style.color).to.equal('#444')
   })
 
-  it('should render total according total passed', () => {
-    componet.setProps({ total: 420 })
+  it('should render total according value passed', () => {
+    componet.setProps({ value: 420 })
     const totalSpan = componet.find('span').at(0)
     expect(totalSpan.text()).to.equal('420')
+  })
+
+  it('should render text default pressões feitas', () => {
+    componet.setProps({ text: undefined })
+    expect(componet.find('span.bold').text()).to.equal('pressões feitas')
+  })
+
+  it('should render text passed', () => {
+    componet.setProps({ text: 'pressões' })
+    expect(componet.find('span.bold').text()).to.equal('pressões')
   })
 })
