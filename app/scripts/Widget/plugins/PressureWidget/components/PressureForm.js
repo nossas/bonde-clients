@@ -42,7 +42,6 @@ class PressureForm extends Component {
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
           <div className={controlClassname}>
-            <label className="flex">E-mail</label>
             <input
               className="col-12"
               style={inputReset}
@@ -52,7 +51,6 @@ class PressureForm extends Component {
               onChange={e => this.setState({email: e.target.value})} />
           </div>
           <div className={controlClassname}>
-            <label className="flex">Seu nome</label>
             <input
               className="col-12"
               style={inputReset}
@@ -62,7 +60,6 @@ class PressureForm extends Component {
               onChange={e => this.setState({name: e.target.value})} />
           </div>
           <div className={controlClassname}>
-            <label className="flex" htmlFor="last_nameId">Seu sobrenome</label>
             <input
               className="col-12"
               style={inputReset}
