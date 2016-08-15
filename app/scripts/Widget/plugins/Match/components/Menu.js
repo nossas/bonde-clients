@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { TabMenu, TabMenuItem } from './../../components'
-import * as Paths from './../../Paths'
+import * as Paths from '../../../../Paths'
+import { TabMenu, TabMenuItem } from '../../../../components'
 
-
-const MatchWidgetMenu = ({ mobilization, widget, location }) => {
+const Menu = ({ mobilization, widget, location }) => {
   const choicesPath = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
   const goalsPath = Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
 
@@ -22,4 +21,4 @@ const MatchWidgetMenu = ({ mobilization, widget, location }) => {
   )
 }
 
-export default MatchWidgetMenu
+export default Menu

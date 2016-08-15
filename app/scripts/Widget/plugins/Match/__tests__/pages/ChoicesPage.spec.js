@@ -1,13 +1,12 @@
 import React from 'react'
-
 import sinon from 'sinon'
-import { render, shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from './../../Paths'
-import Choices from './Choices'
+import * as Paths from '../../../../../Paths'
+import { ChoicesPage } from '../../pages'
 
-describe('Choices', () => {
+describe('Match/pages/ChoicesPage', () => {
   let wrapper
 
   let props = {
@@ -30,7 +29,7 @@ describe('Choices', () => {
   const GOALS_TABMENUITEM = 1
 
   beforeEach(() => {
-    wrapper = mount(<Choices { ...props } />, { context: _context })
+    wrapper = mount(<ChoicesPage { ...props } />, { context: _context })
   })
 
   describe('#render', () => {
@@ -125,20 +124,20 @@ describe('Choices', () => {
 
   describe('#widget', () => {
     before(() => {
-      Choices.prototype.props = props
+      ChoicesPage.prototype.props = props
     })
 
     after(() => {
-      Choices.prototype.props = undefined
+      ChoicesPage.prototype.props = undefined
     })
 
     it('should return current widget object', () => {
-      let result = Choices.prototype.widget(props)
+      let result = ChoicesPage.prototype.widget(props)
       let expectedWidget = props.widgets.data[0]
       expect(result).to.deep.equal(expectedWidget)
     })
     it('should return current widget object if not pass any param', () => {
-      let result = Choices.prototype.widget()
+      let result = ChoicesPage.prototype.widget()
       let expectedWidget = props.widgets.data[0]
       expect(result).to.deep.equal(expectedWidget)
     })
@@ -152,7 +151,7 @@ describe('Choices', () => {
           id: 1, settings: { 'title_text': '', 'choices1': '1,2,3', 'choicesA': 'A,B' }
         }]
       }
-      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper = mount(<ChoicesPage {...props}  />, { context: _context })
       wrapper.find('.choices-block a').at(0).simulate('click')
       expect(wrapper.instance().state.choicesa.length).to.equal(2)
     })
@@ -163,7 +162,7 @@ describe('Choices', () => {
           id: 1, settings: { 'title_text': '', 'choices1': '1', 'choicesA': 'A' }
         }]
       }
-      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper = mount(<ChoicesPage {...props}  />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
@@ -175,7 +174,7 @@ describe('Choices', () => {
           settings: { 'title_text': 'lorem', 'choices1': '', 'choicesA': 'A' }
         }]
       }
-      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper = mount(<ChoicesPage {...props}  />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
@@ -187,7 +186,7 @@ describe('Choices', () => {
           settings: { 'title_text': 'lorem', 'choices1': '1', 'choicesA': '' }
         }]
       }
-      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper = mount(<ChoicesPage {...props}  />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
@@ -196,7 +195,7 @@ describe('Choices', () => {
       props.widgets = {
         data: [{id: 1, settings: {}}]
       }
-      wrapper = mount(<Choices {...props}  />, { context: _context })
+      wrapper = mount(<ChoicesPage {...props}  />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(3)
     })

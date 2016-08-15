@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../../Widget/actions'
 
-import * as Paths from './../../Paths'
-import MatchPage from './MatchPage'
-import AddChoiceForm from './AddChoiceForm'
+import * as Paths from '../../../../Paths'
+import * as WidgetActions from '../../../actions'
+import { Page, AddChoiceForm } from '../components'
 
-
-class Choices extends React.Component {
-
+class ChoicesPage extends React.Component {
   constructor(props, context) {
     super(props, context)
 
@@ -162,7 +159,7 @@ class Choices extends React.Component {
     } = this.state
 
     return(
-      <MatchPage mobilization={mobilization} location={location} widget={widget}>
+      <Page mobilization={mobilization} location={location} widget={widget}>
         <div className="p3 flex-auto overflow-scroll">
           <form onSubmit={::this.handleSubmit}>
             <div className="sm-col sm-col-12">
@@ -204,20 +201,20 @@ class Choices extends React.Component {
             </button>
           </form>
         </div>
-      </MatchPage>
+      </Page>
     )
   }
 }
 
-Choices.propTypes = {
+ChoicesPage.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
   widgets: PropTypes.object
 }
 
-Choices.contextTypes = {
+ChoicesPage.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default Choices
+export default ChoicesPage

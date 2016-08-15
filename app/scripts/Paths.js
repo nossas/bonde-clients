@@ -78,22 +78,10 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
 
-export function matchChoicesMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/choices`
-}
+export * from './Widget/plugins/Match/paths'
 
-export function matchGoalsMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/goals`
-}
+const makePressureWidget = (mobilization_id, widget_id, path) =>
+  `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
 
-export const shareMatchWrapper = (widget_id, match_id) => {
-  return `/share/widget/${widget_id}/match/${match_id}`
-}
-
-const makePressureWidget = (mobilization_id, widget_id, path) => {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
-}
-
-export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, "/form")
-
-export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, "/email")
+export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
+export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')

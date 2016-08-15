@@ -1,13 +1,11 @@
 import React from 'react'
-
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
-import Goals from './Goals'
+import { GoalsPage } from '../../pages'
 
-
-describe('Goals', () => {
+describe('Match/pages/GoalsPage', () => {
   let wrapper
   let match_list = [
     {
@@ -47,7 +45,7 @@ describe('Goals', () => {
   }
 
   before(() => {
-    wrapper = mount(<Goals {...props} />, { context: mockContext })
+    wrapper = mount(<GoalsPage {...props} />, { context: mockContext })
   })
 
   it('should render ChoiceCombined itens equals possible match', () => {
