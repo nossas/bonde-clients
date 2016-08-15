@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 
 import { editWidget } from '../../../actions'
+import { FormFooter } from '../../../components'
 import { Control, Input, RadioButton, ColorInput } from '../../../components/FormUtils'
 
 import { Base as PressureBase } from '../components/settings'
@@ -10,7 +11,7 @@ import { Base as PressureBase } from '../components/settings'
 
 const widgetFormValidation = (data) => {
   const errors = { valid: true }
-  if (!data.title_text) {
+  if (!data.title_text || data.title_text === "") {
     errors.title_text = 'Insira um título para o formulário'
     errors.valid = false
   }
@@ -24,7 +25,8 @@ const widgetFormValidation = (data) => {
 const mapStateToProps = state => (
   {
     form: state.widgetForm,
-    saving: state.widgets.saving
+    saving: state.widgets.saving,
+    requestError: state.widgets.error
   }
 )
 
@@ -35,14 +37,25 @@ class FormPage extends Component {
   constructor(props, context) {
     super(props, context)
 
-    const { title_text, button_text, show_counter, main_color } = this.props.widget.settings || {
+    this.state = {
+      submitted: false,
+    }
+
+    const { title_text, button_text, show_counter, count_text, main_color } = this.props.widget.settings || {
       title_text: '',
       button_text: '',
       show_counter: 'false',
+      count_text: 'pressões feitas',
       main_color: '#f23392'
     }
 
-    this.props.initializeForm({ title_text, button_text, show_counter, main_color })
+    this.props.initializeForm({ title_text, button_text, show_counter, count_text, main_color })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.saving && nextProps.saving && !nextProps.requestError) {
+      this.setState({ submitted: true })
+    }
   }
 
   handleSubmit(e) {
@@ -69,7 +82,7 @@ class FormPage extends Component {
 
     const {
       children, location, mobilization, widget, saving,
-      data: { title_text, button_text, show_counter, main_color },
+      data: { title_text, button_text, show_counter, count_text, main_color },
       ...inputProps
     } = this.props
 
@@ -91,10 +104,12 @@ class FormPage extends Component {
               <RadioButton value="false" className="caps">Não</RadioButton>
             </Input>
           </Control>
-          <div className="sm-col sm-col-10">
-            <button className="caps button bg-darken-3 h3 mt1 mr2">Cancelar</button>
-            <input type="submit" className="caps button bg-aqua h3 mt1" disabled={saving} value={(saving ? "Enviando" : "Salvar")} />
-          </div>
+          {(show_counter === 'true' ? (
+            <Control label="Texto do contador" name="count_text" {...inputProps}>
+              <Input type="text" value={count_text} placeholder="pressões feitas" />
+            </Control>
+          ) : null)}
+          <FormFooter submitted={this.state.submitted} saving={saving} />
         </form>
       </PressureBase>
     )

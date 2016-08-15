@@ -27,7 +27,7 @@ class ColorInput extends Component {
 
 ColorInput.propTypes = {
   value: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func,
 }
 
 export default ColorInput
