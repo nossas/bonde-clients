@@ -4,9 +4,8 @@ import classnames from 'classnames'
 import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
 
-import { Form as FormWidget } from './../Widget'
+import { Form as FormWidget, Match as MatchWidget } from '../Widget/plugins'
 import DonationWidget from './DonationWidget.jsx'
-import { MatchWidget } from './MatchWidget'
 
 import { PressureWidget } from '../Widget/plugins'
 

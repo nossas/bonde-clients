@@ -3,9 +3,9 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MatchShareWrapper } from './MatchShareWrapper'
+import { ShareContainer } from '../../containers/ShareContainer'
 
-describe('MatchShareWrapper', () => {
+describe('Match/containers/ShareContainer', () => {
   let wrapper
   let sandbox
   let spy = {}
@@ -28,7 +28,7 @@ describe('MatchShareWrapper', () => {
 
   before(() => {
     sandbox = sinon.sandbox.create()
-    wrapper = shallow(<MatchShareWrapper { ...props } />)
+    wrapper = shallow(<ShareContainer { ...props } />)
   })
 
   afterEach(() => {
@@ -37,7 +37,7 @@ describe('MatchShareWrapper', () => {
 
   describe('#render', () => {
     before(() => {
-      spy.metaData = sandbox.spy(MatchShareWrapper.prototype, 'metaData')
+      spy.metaData = sandbox.spy(ShareContainer.prototype, 'metaData')
     })
 
     it('should render one empty <noscript> component', () => {
@@ -50,7 +50,7 @@ describe('MatchShareWrapper', () => {
 
   describe('#metaData', () => {
     describe('meta objects', () => {
-      const result = MatchShareWrapper.prototype.metaData(props)
+      const result = ShareContainer.prototype.metaData(props)
 
       it('should have meta prop', () => {
         expect(result).to.have.key('meta')
@@ -82,7 +82,7 @@ describe('MatchShareWrapper', () => {
   })
 
   describe('#fetchData', () => {
-    const result = MatchShareWrapper.fetchData(store, params)
+    const result = ShareContainer.fetchData(store, params)
 
     it('should returns resolved promises', () => {
       expect(result.constructor).to.be.a.Promise

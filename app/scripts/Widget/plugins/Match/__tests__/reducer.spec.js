@@ -3,12 +3,7 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import matches, {
-  handleError,
-  showMatch,
-  initialState,
-  initialAction
-} from './matches'
+import reducer, { handleError, showMatch, initialState, initialAction } from '../reducer'
 
 describe('Matches Reducer', () => {
   let wrapper
@@ -25,13 +20,13 @@ describe('Matches Reducer', () => {
 
   describe('#default', () => {
     it('should returns the initial state if it not passing any arguments', () => {
-      expect(matches()).to.be.deep.equal(initialState)
+      expect(reducer()).to.be.deep.equal(initialState)
     })
     it('should returns the initial state if it passing undefined state', () => {
-      expect(matches(undefined)).to.be.deep.equal(initialState)
+      expect(reducer(undefined)).to.be.deep.equal(initialState)
     })
     it('should returns the initial state if it passing unknown action type', () => {
-      expect(matches(undefined, 'FOO_BAR')).to.be.deep.equal(initialState)
+      expect(reducer(undefined, 'FOO_BAR')).to.be.deep.equal(initialState)
     })
   })
 })
