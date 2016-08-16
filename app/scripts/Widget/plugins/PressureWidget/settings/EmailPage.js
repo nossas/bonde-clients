@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 
 import { editWidget } from '../../../actions'
-import { FormFooter } from '../../../components'
+import { FormFooter, InputTag } from '../../../components'
 import { Control, Input, Textarea } from '../../../components/FormUtils'
 
 import { Base as PressureBase } from '../components/settings'
@@ -11,6 +11,8 @@ import { Base as PressureBase } from '../components/settings'
 
 const EMAIL_TEXT_PLACEHOLDER = "Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização.\nCompartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço."
 
+// Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
+const patternTarget = /[\w ]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
 const widgetFormValidation = (data) => {
   const errors = { valid: true }
@@ -40,7 +42,7 @@ class EmailPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { submitted: false }
+    this.state = { submitted: false, tags: [] }
 
     const { pressure_subject, pressure_body } = this.props.widget.settings || {
       pressure_subject: '',
@@ -85,6 +87,20 @@ class EmailPage extends Component {
     return (
       <PressureBase location={location} mobilization={mobilization} widget={widget}>
         <form onSubmit={::this.handleSubmit}>
+          <InputTag
+            label="Alvos"
+            values={this.state.tags}
+            onInsertTag={value => this.setState({ tags: [...this.state.tags, value] })}
+            onRemoveTag={value => this.setState({ tags: this.state.tags.filter(tag => tag !== value) })}
+            validate={value => {
+              const errors = { valid: true }
+              if (!value.match(patternTarget)) {
+                errors.valid = false
+                errors.message = 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+              }
+              return errors
+            }}
+          />
           <Control id="email-subject-id" label="Assunto do email" name="pressure_subject" {...inputProps}>
             <Input type="text" value={pressure_subject} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
           </Control>
@@ -92,10 +108,6 @@ class EmailPage extends Component {
             <Textarea value={pressure_body} placeholder={EMAIL_TEXT_PLACEHOLDER} />
           </Control>
           <FormFooter submitted={this.state.submitted} saving={saving} />
-          {/*<div className="block">
-            <button className="caps button bg-darken-3 h3 mt1 mr2">Cancelar</button>
-            <input type="submit" className="caps button bg-aqua h3 mt1" disabled={saving} value={(saving ? "Enviando" : "Salvar")} />
-          </div>*/}
         </form>
       </PressureBase>
     )
