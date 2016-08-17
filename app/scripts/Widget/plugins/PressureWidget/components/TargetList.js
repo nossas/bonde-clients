@@ -32,14 +32,6 @@ const TargetList = ({ targets }) => {
       <p className="bold" style={targetLabelStyle}>Quem você vai pressionar</p>
       <div style={targetListContainerStyle} className="clearfix">
         <div style={{ width: `${180 * targets.length}px` }}>
-          {/* TODO: Change HTML by TargetListItem */}
-          {/*<div className='target-item py1 px2 mr1 bg-white rounded' style={targetItemStyle}>
-            <img className='left circle mr2' src={target.image} height="55" width="55" />
-            <p className="black h6">
-              <span className="bold flex">{target.name}</span>
-              <span>{target.office}</span>
-            </p>
-          </div>*/}
           {targets.map(obj => {
             const target = parseTarget(obj)
             return (
@@ -58,11 +50,7 @@ const TargetList = ({ targets }) => {
 }
 
 TargetList.propTypes = {
-  targets: PropTypes.arrayOf({
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    office: PropTypes.string.isRequired
-  }),
+  targets: PropTypes.arrayOf(PropTypes.string),
 }
 
 TargetList.defaultProps = {

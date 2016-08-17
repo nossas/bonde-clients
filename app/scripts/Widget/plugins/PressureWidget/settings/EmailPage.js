@@ -104,7 +104,7 @@ class EmailPage extends Component {
             label="Alvos"
             values={this.state.targets}
             onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
-            onRemoveTag={value => this.setState({ targets: targets.filter(tag => tag !== value) })}
+            onRemoveTag={value => this.setState({ targets: this.state.targets.filter(tag => tag !== value) })}
             validate={value => {
               const errors = { valid: true }
               if (!value.match(patternTarget)) {
