@@ -42,7 +42,7 @@ class EmailPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { submitted: false, tags: [] }
+    this.state = { submitted: false, targets: this.getTargetList() || [] }
 
     const { pressure_subject, pressure_body } = this.props.widget.settings || {
       pressure_subject: '',
@@ -58,19 +58,31 @@ class EmailPage extends Component {
     }
   }
 
+  getTargetList() {
+    const { targets } = this.props.widget.settings || { targets: '' }
+    return targets && targets.split(';')
+  }
+
+  getTargetString() {
+    const { targets } = this.state
+    return targets.join(';')
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     const { data, valid, touchAll } = this.props      // redux form
     const { auth, mobilization, widget } = this.props // containers
     const { editWidgetAction } = this.props           // connect actions
     if (valid) {
+      const targets = this.getTargetString()
       editWidgetAction({
         mobilization_id: mobilization.id,
         widget_id: widget.id,
         credentials: auth.credentials,
         widget: { settings: {
           ...widget.settings,
-          ...data
+          ...data,
+          targets
         }}
       })
     } else {
@@ -84,14 +96,15 @@ class EmailPage extends Component {
       data: { pressure_subject, pressure_body },
       ...inputProps
     } = this.props
+    const { handleChange } = this.props
     return (
       <PressureBase location={location} mobilization={mobilization} widget={widget}>
         <form onSubmit={::this.handleSubmit}>
           <InputTag
             label="Alvos"
-            values={this.state.tags}
-            onInsertTag={value => this.setState({ tags: [...this.state.tags, value] })}
-            onRemoveTag={value => this.setState({ tags: this.state.tags.filter(tag => tag !== value) })}
+            values={this.state.targets}
+            onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
+            onRemoveTag={value => this.setState({ targets: targets.filter(tag => tag !== value) })}
             validate={value => {
               const errors = { valid: true }
               if (!value.match(patternTarget)) {
