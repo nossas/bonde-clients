@@ -8,6 +8,10 @@ export const REQUEST_EDIT_WIDGET = 'REQUEST_EDIT_WIDGET'
 export const SUCCESS_EDIT_WIDGET = 'SUCCESS_EDIT_WIDGET'
 export const FAILURE_EDIT_WIDGET = 'FAILURE_EDIT_WIDGET'
 
+export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
+export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
+export const FAILURE_FILL_WIDGET = 'FAILURE_FILL_WIDGET'
+
 
 const editWidgetRequest = () => {
   return {
@@ -42,6 +46,51 @@ export const editWidget = ({ mobilization_id, widget_id, credentials, widget }) 
           dispatch(editWidgetFailure(err || res.body))
         } else {
           dispatch(editWidgetSuccess(res.body))
+        }
+      })
+  }
+}
+
+const fillWidgetRequest = () => {
+  return {
+    type: REQUEST_FILL_WIDGET
+  }
+}
+
+const fillWidgetSuccess = (data) => {
+  /** {
+    *   "id": "(int)",
+    *   "activist_id": "(int)",
+    *   "widget_id": "(int)",
+    *   "created_at": "(string:timestamp)",
+    *   "updated_at": "(string:timestamp)",
+    *   "count": "(int)"
+    * }
+    */
+  return {
+    type: SUCCESS_FILL_WIDGET,
+    counter: { id: data.widget_id, count: data.count }
+  }
+}
+
+const fillWidgetFailure = (error) => {
+  return {
+    type: FAILURE_FILL_WIDGET,
+    error: error
+  }
+}
+
+export const fillWidget = (widget_id, fill) => {
+  return dispatch => {
+    dispatch(fillWidgetRequest())
+    request
+      .post(`${process.env.API_URL}/widgets/${widget_id}/fill`)
+      .send({ fill })
+      .end((err, res) => {
+        if (err || !res.ok) {
+          dispatch(fillWidgetFailure(err || res.body))
+        } else {
+          dispatch(fillWidgetSuccess(res.body))
         }
       })
   }
