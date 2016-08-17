@@ -16,60 +16,98 @@ class PressureForm extends Component {
     this.state = {
       email: '',
       name: '',
-      lastName: '',
+      lastname: '',
       subject: props.subject,
-      body: props.body,
+      body: props.body
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.subject || nextProps.body) {
-      const updateState = {}
-      Object.keys(nextProps).map(key => key === 'subject' || key === 'body' ? updateState[key] = nextProps[key] : null)
-      this.setState(updateState)
+  validate() {
+    const requiredMsg = 'Preenchimento obrigatório'
+    const errors = { valid: true }
+    if (!this.state.email) {
+      errors.valid = false
+      errors.email = requiredMsg
     }
+    if (!this.state.name) {
+      errors.valid = false
+      errors.name = requiredMsg
+    }
+    if (!this.state.lastname) {
+      errors.valid = false
+      errors.lastname = requiredMsg
+    }
+    if (!this.state.subject) {
+      errors.valid = false
+      errors.subject = requiredMsg
+    }
+    if (!this.state.body) {
+      errors.valid = false
+      errors.body = requiredMsg
+    }
+    return errors
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    console.log('handleSubmit')
     const { onSubmit } = this.props
-    onSubmit && onSubmit(this.state)
+    const errors = this.validate()
+    if (!errors.valid) {
+      this.setState({ errors })
+    } else {
+      onSubmit && onSubmit(this.state)
+    }
   }
 
   render() {
     const { buttonColor, buttonText, children } = this.props
+    const { email, name, lastname, subject, body, errors } = this.state
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
           <div className={controlClassname}>
+            {(errors && errors['email'] && <span className="red">{errors['email']}</span>)}
             <input
               className="col-12"
               style={inputReset}
               type="email"
               placeholder="Seu e-mail"
-              value={this.state.email}
-              onChange={e => this.setState({email: e.target.value})} />
+              value={email}
+              onChange={e => this.setState({ email: e.target.value })}
+            />
           </div>
           <div className={controlClassname}>
+            {(errors && errors['name'] && <span className="red">{errors['name']}</span>)}
             <input
               className="col-12"
               style={inputReset}
               type="text"
               placeholder="Seu nome"
-              value={this.state.name}
-              onChange={e => this.setState({name: e.target.value})} />
+              value={name}
+              onChange={e => this.setState({ name: e.target.value })}
+            />
           </div>
           <div className={controlClassname}>
+            {(errors && errors['lastname'] && <span className="red">{errors['lastname']}</span>)}
             <input
               className="col-12"
               style={inputReset}
               type="text"
               placeholder="Seu sobrenome"
-              value={this.state.lastName}
-              onChange={e => this.setState({lastName: e.target.value})} />
+              value={lastname}
+              onChange={e => this.setState({ lastname: e.target.value })}
+            />
           </div>
           <div className="p3 border-top">
-            <button type="submit" className="caps white col-12 py2 rounded" style={{backgroundColor: buttonColor}}>{buttonText}</button>
+            <button
+              type="submit"
+              onClick={::this.handleSubmit} // TODO: I don't undestand "the because" this line
+              className="caps white col-12 py2 rounded"
+              style={{backgroundColor: buttonColor}}
+            >
+              {buttonText}
+            </button>
           </div>
         </div>
         {children}
@@ -79,21 +117,27 @@ class PressureForm extends Component {
           </h4>
           <div className="bg-white rounded-bottom">
             <div className={controlClassname}>
-              <label className="flex p1 gray" htmlFor="subjectId">Assunto</label>
+              <label className="p1 gray" htmlFor="pressure-subject-id">Assunto</label>
+              {(errors && errors['subject'] && <span className="red ml1">{errors['subject']}</span>)}
               <input
+                id="pressure-subject-id"
                 className="col-12"
                 style={inputReset}
                 type="text"
-                value={this.state.subject}
-                onChange={e => this.setState({subject: e.target.value})} />
+                value={subject}
+                onChange={e => this.setState({ subject: e.target.value })}
+              />
             </div>
             <div className={controlClassname}>
-              <label className="flex p1 gray" htmlFor="bodyId">E-mail</label>
+              <label className="p1 gray" htmlFor="pressure-body-id">E-mail</label>
+              {(errors && errors['body'] && <span className="red ml1">{errors['body']}</span>)}
               <textarea
+                id="pressure-body-id"
                 className="col-12"
                 style={{...inputReset, height: '13rem'}}
-                value={this.state.body}
-                onChange={e => this.setState({body: e.target.value})} />
+                value={body}
+                onChange={e => this.setState({ body: e.target.value })}
+              />
             </div>
           </div>
         </div>

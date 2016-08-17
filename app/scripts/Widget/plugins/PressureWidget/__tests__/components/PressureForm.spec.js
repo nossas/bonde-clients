@@ -14,6 +14,8 @@ describe('<PressureForm />', () => {
 
   it('should render ok by default', () => {
     expect(component).to.be.ok
+    // check if errors not render without submit
+    expect(component.find('span.red').length).to.equal(0)
   })
 
   it('should render buttonColor according passed in props', () => {
@@ -26,7 +28,7 @@ describe('<PressureForm />', () => {
     const state = {
       email: 'igor@local.cc',
       name: 'igor',
-      lastName: 'santos',
+      lastname: 'santos',
       subject: 'subject',
       body: 'body'
     }
@@ -45,12 +47,9 @@ describe('<PressureForm />', () => {
   })
 
   it('should set default subject and body by props', () => {
-    component.setProps({
-      subject: 'subject default',
-      body: 'body default'
-    })
-    expect(component.instance().state.subject).to.equal('subject default')
-    expect(component.instance().state.body).to.equal('body default')
+    const wrapper = mount(<PressureForm subject='subject default' body='body default' />)
+    expect(wrapper.instance().state.subject).to.equal('subject default')
+    expect(wrapper.instance().state.body).to.equal('body default')
   })
 
   it('should change text of button when buttonText passed', () => {
@@ -58,5 +57,15 @@ describe('<PressureForm />', () => {
       buttonText: 'Enviar e-mail para o alvo'
     })
     expect(component.find('button').text()).to.equal('Enviar e-mail para o alvo')
+  })
+
+  it('should render error and not call onSubmit if any field not fill', () => {
+    let submitted
+    component.setProps({
+      onSubmit: data => submitted = data
+    })
+    component.find('form').simulate('submit')
+    expect(component.find('span.red').length).to.equal(5)
+    expect(submitted).to.equal(undefined)
   })
 })
