@@ -117,7 +117,7 @@ class EmailPage extends Component {
           <Control id="email-subject-id" label="Assunto do email" name="pressure_subject" {...inputProps}>
             <Input type="text" value={pressure_subject} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
           </Control>
-          <Control id="email-subject-id" label="Corpo do email que será enviado para o alvo" name="pressure_body" {...inputProps}>
+          <Control id="email-body-id" label="Corpo do email que será enviado para o alvo" name="pressure_body" {...inputProps}>
             <Textarea value={pressure_body} placeholder={EMAIL_TEXT_PLACEHOLDER} />
           </Control>
           <FormFooter submitted={this.state.submitted} saving={saving} />
