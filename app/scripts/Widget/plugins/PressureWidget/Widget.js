@@ -16,6 +16,11 @@ class PressureWidget extends Component {
     super(props, context)
   }
 
+  getTargetList() {
+    const { targets } = this.props.widget.settings || { targets: '' }
+    return targets && targets.split(';')
+  }
+
   render() {
     const { mobilization, widget, editable } = this.props
     const { main_color, title_text, button_text, show_counter, count_text, pressure_subject, pressure_body } = widget.settings || {
@@ -41,7 +46,7 @@ class PressureWidget extends Component {
       }}>
         <div className="pressure-widget">
           <h2 className="center py2 px3 m0 white rounded-top" style={{backgroundColor: main_color}}>{title_text}</h2>
-          <TargetList targets={targets} />
+          <TargetList targets={::this.getTargetList() || []} />
           <PressureForm
             buttonText={button_text}
             buttonColor={main_color}

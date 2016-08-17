@@ -59,4 +59,19 @@ describe('<PressureWidget />', () => {
     widget.setProps({ widget: { id: 1, settings: { show_counter: "false" }} })
     expect(widget.find('PressureCount').length).to.equal(0)
   })
+
+  it('should render targets received by settings with type string', () => {
+    widget.setProps({ widget: { id: 1, settings: { targets: 'Igor Santos <igor@nossascidades.org>' }} })
+    expect(widget.find('TargetList').props().targets).to.deep.equal(['Igor Santos <igor@nossascidades.org>'])
+
+    widget.setProps({
+      widget: {
+        id: 1,
+        settings: {
+          targets: 'Igor Santos <igor@nossascidades.org>;Lucas Pirola <pirola@nossascidades.org>'
+        }
+      }
+    })
+    expect(widget.find('TargetList').props().targets).to.deep.equal(['Igor Santos <igor@nossascidades.org>', 'Lucas Pirola <pirola@nossascidades.org>'])
+  })
 })
