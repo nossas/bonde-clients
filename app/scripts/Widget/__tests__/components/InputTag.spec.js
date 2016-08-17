@@ -54,4 +54,14 @@ describe('<InputTag />', () => {
     expect(wrapper.instance().state.value).to.equal('Tag 1')
     expect(wrapper.props().values).to.deep.equal(['Tag 2'])
   })
+
+  it('should insert failure if value exists in values', () => {
+    // prepare values
+    wrapper.setProps({ values: ['Igor Santos <igor@nossascidades.org>'] })
+    // set value to insert
+    wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
+    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
+
+    expect(wrapper.props().values.length).to.equal(1)
+  })
 })

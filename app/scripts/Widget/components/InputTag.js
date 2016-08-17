@@ -10,10 +10,10 @@ class InputTag extends Component {
   }
 
   handleKeyUp(e) {
-    const { onInsertTag, validate, name } = this.props
+    const { values, onInsertTag, validate, name } = this.props
     const value = e.target.value
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && values.indexOf(value) === -1) {
       const errors = validate && validate(e.target.value)
       if (errors && !errors.valid) {
         this.setState({ error: errors.message })
