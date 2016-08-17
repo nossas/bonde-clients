@@ -56,7 +56,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         data: state.data.map(
-          widget => widget.id === action.counter.id ? {...widget, ...action.counter} : widget
+          widget => widget.id === action.counter.id ? {...widget, ...action.counter, filled: true} : widget
         ),
         saving: false
       }

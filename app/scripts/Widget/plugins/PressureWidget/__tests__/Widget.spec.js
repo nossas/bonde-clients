@@ -74,4 +74,9 @@ describe('<PressureWidget />', () => {
     })
     expect(widget.find('TargetList').props().targets).to.deep.equal(['Igor Santos <igor@nossascidades.org>', 'Lucas Pirola <pirola@nossascidades.org>'])
   })
+
+  it('should render TellAFriend when widget.filled', () => {
+    widget.setProps({ widget: {...props.widget, filled: true } })
+    expect(widget.find('TellAFriend').length).to.equal(1)
+  })
 })

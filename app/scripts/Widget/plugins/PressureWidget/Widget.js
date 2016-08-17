@@ -6,7 +6,7 @@ import * as Paths from '../../../Paths'
 
 import { OverlayWidget } from '../../components'
 import { PressureForm, TargetList, PressureCount } from './components'
-import { Loading } from '../../../components'
+import { TellAFriend } from '../../../components'
 
 import { fillWidget } from '../../actions'
 
@@ -18,6 +18,11 @@ export class PressureWidget extends Component {
 
   constructor(props, context) {
     super(props, context)
+    this.state = { filled: false }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ filled: this.props.saving && !nextProps.saving })
   }
 
   getTargetList() {
@@ -64,23 +69,30 @@ export class PressureWidget extends Component {
           )
         }
       }}>
-        <div className="pressure-widget">
-          <h2 className="center py2 px3 m0 white rounded-top" style={{backgroundColor: main_color}}>{title_text}</h2>
-          <TargetList targets={::this.getTargetList() || []} />
-          <PressureForm
-            buttonText={(saving && !editable ? 'Enviando...' : button_text)}
-            buttonColor={main_color}
-            subject={pressure_subject}
-            body={pressure_body}
-            onSubmit={::this.handleSubmit}>
-            {(show_counter && show_counter === "true" ? <PressureCount value={widget.count || 0} color={main_color} text={count_text} /> : null)}
-          </PressureForm>
-          <div className="bg-black mt1 rounded py1 px3">
-            <p className="white m0">Caso você seja o alvo dessa mobilização,
-            dê uma resposta publica clicando <a href="#" style={{color: main_color}}>aqui</a>.
-            Ela será publicada nesta página</p>
+        {(widget.filled ?
+          <TellAFriend {...this.props}
+            message={title_text}
+            href={window.location.origin}
+          />
+        :
+          <div className="pressure-widget">
+            <h2 className="center py2 px3 m0 white rounded-top" style={{backgroundColor: main_color}}>{title_text}</h2>
+            <TargetList targets={::this.getTargetList() || []} />
+            <PressureForm
+              buttonText={(saving && !editable ? 'Enviando...' : button_text)}
+              buttonColor={main_color}
+              subject={pressure_subject}
+              body={pressure_body}
+              onSubmit={::this.handleSubmit}>
+              {(show_counter && show_counter === "true" ? <PressureCount value={widget.count || 0} color={main_color} text={count_text} /> : null)}
+            </PressureForm>
+            <div className="bg-black mt1 rounded py1 px3">
+              <p className="white m0">Caso você seja o alvo dessa mobilização,
+              dê uma resposta publica clicando <a href="#" style={{color: main_color}}>aqui</a>.
+              Ela será publicada nesta página</p>
+            </div>
           </div>
-        </div>
+        )}
       </OverlayWidget>
     )
   }
@@ -92,6 +104,7 @@ PressureWidget.propTypes = {
   widget: PropTypes.object.isRequired,
   // Use in fillWidget
   saving: PropTypes.bool,
+  filled: PropTypes.bool,
   fill: PropTypes.func
 }
 

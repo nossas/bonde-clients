@@ -20,7 +20,7 @@ describe('WidgetReducers', () => {
 
     expect(nextState).to.deep.equal({
       data: [
-        { id: 1, settings: {}, count: 2 }
+        { id: 1, settings: {}, count: 2, filled: true }
       ],
       saving: false
     })

@@ -50,7 +50,6 @@ class PressureForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('handleSubmit')
     const { onSubmit } = this.props
     const errors = this.validate()
     if (!errors.valid) {
