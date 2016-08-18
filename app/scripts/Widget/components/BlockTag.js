@@ -9,7 +9,7 @@ const BlockTag = (props) => {
 
   return (
     <div className="mb1 flex flex-wrap">
-      {tags.map(tag => <Tag value={tag} {...otherProps} />)}
+      {tags.map((tag, index) => <Tag key={`${tag}-${index}`} value={tag} {...otherProps} />)}
     </div>
   )
 }

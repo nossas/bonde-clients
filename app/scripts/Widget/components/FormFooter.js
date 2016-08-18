@@ -11,7 +11,7 @@ const FormFooter = ({ submitted, saving, ...props }) => {
         value={(saving ? "Salvando..." : "Salvar")}
         {...props}
       />
-      { !saving && submitted && <div className="green h4 px2 mt2">Configurações atualizadas!</div> }
+      { !saving && submitted && <div className="green h4 px2 mt2">Configurações do formulário atualizadas!</div> }
     </div>
   )
 }

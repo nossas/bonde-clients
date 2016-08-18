@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
+import { isValidEmail } from '../../../../../util/validation-helper'
+
 // TODO: Reusable Input
 const controlClassname = 'px3 py1 border-top'
 const inputReset = {
@@ -28,6 +30,9 @@ class PressureForm extends Component {
     if (!this.state.email) {
       errors.valid = false
       errors.email = requiredMsg
+    } else if (!isValidEmail(this.state.email)) {
+      errors.valid = false
+      errors.email = 'E-mail inválido'
     }
     if (!this.state.name) {
       errors.valid = false

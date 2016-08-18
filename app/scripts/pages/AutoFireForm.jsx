@@ -11,11 +11,18 @@ import { Label, DonationWidgetMenu, Loading, CloseButton } from './../components
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 import { Menu as PressureWidgetMenu } from './../Widget/plugins/PressureWidget/components/settings'
 
+import * as validator from '../../util/validation-helper'
+
+
 
 function widgetFormValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
     errors.id = 'Informe uma ID válida'
+    errors.valid = false
+  }
+  if (!validator.isValidEmail(data.senderEmail)) {
+    errors.senderEmail = 'Informe um e-mail inválido'
     errors.valid = false
   }
   return errors
@@ -117,7 +124,7 @@ export default class AutoFireForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <Label htmlFor="buttonText">Nome remetente</Label>
+        <Label htmlFor="buttonText">Nome do remetente</Label>
         {senderNameError && senderNameTouched && <span className="red ml2">{senderNameError}</span>}
         <input
           id="senderName"

@@ -9,19 +9,17 @@ import { Control, Input, Textarea } from '../../../components/FormUtils'
 import { Base as PressureBase } from '../components/settings'
 
 
-const EMAIL_TEXT_PLACEHOLDER = "Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização.\nCompartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço."
-
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
 const widgetFormValidation = (data) => {
   const errors = { valid: true }
   if (!data.pressure_subject) {
-    errors.pressure_subject = 'Insira um assunto para o e-mail'
+    errors.pressure_subject = 'Preenchimento obrigatório'
     errors.valid = false
   }
   if (!data.pressure_body) {
-    errors.pressure_body = 'Insira um corpo para o e-mail'
+    errors.pressure_body = 'Preenchimento obrigatório'
     errors.valid = false
   }
   return errors
@@ -91,6 +89,7 @@ class EmailPage extends Component {
   }
 
   render() {
+
     const {
       location, mobilization, widget, saving,
       data: { pressure_subject, pressure_body },

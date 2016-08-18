@@ -53,7 +53,7 @@ class FormPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.saving && nextProps.saving && !nextProps.requestError) {
+    if (this.props.saving && !nextProps.saving && !nextProps.requestError) {
       this.setState({ submitted: true })
     }
   }

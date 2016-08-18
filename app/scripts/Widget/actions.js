@@ -83,7 +83,8 @@ const fillWidgetFailure = (error) => {
 export const fillWidget = (widget_id, fill) => {
   return dispatch => {
     dispatch(fillWidgetRequest())
-    request
+    dispatch(fillWidgetSuccess({ id: 1, count: 1, widget_id }))
+    /*request
       .post(`${process.env.API_URL}/widgets/${widget_id}/fill`)
       .send({ fill })
       .end((err, res) => {
@@ -92,7 +93,7 @@ export const fillWidget = (widget_id, fill) => {
         } else {
           dispatch(fillWidgetSuccess(res.body))
         }
-      })
+      })*/
   }
 }
 

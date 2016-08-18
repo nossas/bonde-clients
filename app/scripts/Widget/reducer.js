@@ -39,7 +39,12 @@ export default function reducer(state = initialState, action) {
     case FAILURE_FIND_WIDGETS:
       return {...state, loaded: true}
 
-    case REQUEST_EDIT_WIDGET, REQUEST_FILL_WIDGET:
+    case REQUEST_EDIT_WIDGET:
+      return {
+        ...state,
+        saving: true
+      }
+    case REQUEST_FILL_WIDGET:
       return {
         ...state,
         saving: true
