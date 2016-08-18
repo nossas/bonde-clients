@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import * as Paths from '../Paths'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { CloseButton } from './../components'
@@ -9,23 +8,8 @@ import { CloseButton } from './../components'
 import { editMobilization } from '../Mobilization/MobilizationActions'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 
-function mobilizationAnalyticsValidation(data) {
-  const errors = { valid: true }
-  if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
-    errors.id = 'Informe uma ID válida'
-    errors.valid = false
-  }
-  return errors
-}
-
-@connect((state, ownProps) => ({
-  form: state.mobilizationAnalytics,
-  mobilization: Selectors.getMobilization(state, ownProps)
-}))
-@reduxForm('mobilizationAnalytics', mobilizationAnalyticsValidation)
 @reactMixin.decorate(Navigation)
-
-export default class MobilizationAnalytics extends React.Component {
+class MobilizationAnalytics extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -41,21 +25,6 @@ export default class MobilizationAnalytics extends React.Component {
     this.state.initializing && this.setState({initializing: false})
     this.state.submitting && this.setState({submitting: false})
     this.state.submitting && this.setState({hasSubmitted: true})
-  }
-
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    touched: PropTypes.object.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    mobilization: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
   }
 
   handleSubmit(event) {
@@ -157,3 +126,38 @@ export default class MobilizationAnalytics extends React.Component {
     )
   }
 }
+
+MobilizationAnalytics.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  dirty: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const fields = ['id']
+
+const validate = values => {
+  const errors = {}
+  if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
+    errors.id = 'Informe uma ID válida'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'mobilizationAnalytics',
+  fields,
+  validate,
+},
+(state, ownProps) => {
+  const mobilization = Selectors.getMobilization(state, ownProps)
+  return {
+    form: state.mobilizationAnalytics,
+    mobilization: mobilization,
+    initialValues: { id: mobilization.google_analytics_code }
+  }
+})(MobilizationAnalytics)

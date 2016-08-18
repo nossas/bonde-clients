@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import * as Paths from '../Paths'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { CloseButton, Loading } from './../components'
@@ -10,29 +9,9 @@ import { CloseButton, Loading } from './../components'
 import * as MobilizationActions from '../Mobilization/MobilizationActions'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 
-function mobilizationCityValidation(data) {
-  const errors = { valid: true }
-  if (!data.organizationId) {
-    errors.organizationId = 'Você deve escolher uma cidade'
-    errors.valid = false
-  }
-  return errors
-}
 
-
-@connect((globalState, ownProps) => {
-  return {
-    form: globalState.mobilizationCity,
-    auth: globalState.auth,
-    saving: globalState.mobilization.saving,
-    // TODO: Change store state by selectors
-    mobilization: Selectors.getMobilization(globalState, ownProps)
-  }
-})
-@reduxForm('mobilizationCity', mobilizationCityValidation)
 @reactMixin.decorate(Navigation)
-
-export default class MobilizationCity extends React.Component {
+class MobilizationCity extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -52,19 +31,6 @@ export default class MobilizationCity extends React.Component {
       this.newMobilization() && this.transitionTo(Paths.editMobilization(this.props.mobilization.id))
       this.setState({submitting: false})
     }
-  }
-
-  static propTypes = {
-    mobilization: PropTypes.object,
-    saving: PropTypes.bool.isRequired,
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired,
-    organizations: PropTypes.object.isRequired
   }
 
   newMobilization() {
@@ -200,3 +166,39 @@ export default class MobilizationCity extends React.Component {
     )
   }
 }
+
+MobilizationCity.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  mobilization: PropTypes.object,
+  saving: PropTypes.bool.isRequired,
+  organizations: PropTypes.object.isRequired
+}
+
+const fields = ['organizationId']
+
+const validate = values => {
+  const errors = {}
+  if (!values.organizationId) {
+    errors.organizationId = 'Você deve escolher uma cidade'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'mobilizationCity',
+  fields,
+  validate
+},
+(state, ownProps) => {
+  const mobilization = Selectors.getMobilization(state, ownProps)
+  return {
+    auth: state.auth,
+    saving: state.mobilization.saving,
+    // TODO: Change store state by selectors
+    mobilization: mobilization,
+    initialValues: { organizationId: mobilization.organization_id }
+  }
+})(MobilizationCity)

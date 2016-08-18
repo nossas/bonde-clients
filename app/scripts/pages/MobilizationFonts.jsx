@@ -1,43 +1,14 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 import * as Paths from '../Paths'
 import * as MobilizationActions from './../actions/MobilizationActions'
 import { TabMenuItem, CloseButton } from '../components'
 
-function mobilizationFontsValidation(data) {
-  const errors = { valid: true }
-  if (!data.headerFont) {
-    errors.headerFont = 'Você deve escolher uma fonte para títulos'
-    errors.valid = false
-  }
-  if (!data.bodyFont) {
-    errors.bodyFont = 'Você deve escolher uma fonte para textos'
-    errors.valid = false
-  }
-  return errors
-}
+import * as Selectors from '../Mobilization/MobilizationSelectors'
 
-@connect(state => ({ form: state.mobilizationFonts }))
-@reduxForm('mobilizationFonts', mobilizationFontsValidation)
 
-export default class MobilizationFonts extends React.Component {
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    touched: PropTypes.bool.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
-  }
+class MobilizationFonts extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -203,3 +174,41 @@ export default class MobilizationFonts extends React.Component {
     )
   }
 }
+
+MobilizationFonts.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  mobilization: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  dirty: PropTypes.bool.isRequired
+}
+
+const fields = ['headerFont', 'bodyFont']
+
+const validate = values => {
+  const errors = {}
+  if (!values.headerFont) {
+    errors.headerFont = 'Você deve escolher uma fonte para títulos'
+  }
+  if (!values.bodyFont) {
+    errors.bodyFont = 'Você deve escolher uma fonte para textos'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'mobilizationFonts',
+  fields,
+  validate,
+},
+(state, ownProps) => {
+  const mobilization = Selectors.getMobilization(state, ownProps)
+  return {
+    mobilization: mobilization,
+    initialValues: { headerFont: mobilization.header_font, bodyFont: mobilization.body_font }
+  }
+})(MobilizationFonts)

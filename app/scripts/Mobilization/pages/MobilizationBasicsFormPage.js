@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 
@@ -10,31 +9,9 @@ import * as Paths from '../../Paths'
 
 import { CloseButton } from '../../components'
 
-function mobilizationBasicsValidation(data) {
-  const errors = { valid: true }
-  if (!data.name) {
-    errors.name = 'Insira o nome da mobilização'
-    errors.valid = false
-  } else if (data.name.length > 100) {
-    errors.name = 'Seu título está muito longo!'
-    errors.valid = false
-  }
 
-  if (!data.goal) {
-    errors.goal = 'Insira o objetivo da mobilização'
-    errors.valid = false
-  } else if (data.goal.length > 500) {
-    errors.goal = 'O limite de caracteres foi atingido.'
-    errors.valid = false
-  }
-  return errors
-}
-
-@connect(state => ({ form: state.mobilizationBasics, auth: state.auth }))
-@reduxForm('mobilizationBasics', mobilizationBasicsValidation)
 @reactMixin.decorate(Navigation)
-
-class MobilizationBasicsFormPage extends React.Component {
+export class MobilizationBasicsFormPage extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -49,17 +26,6 @@ class MobilizationBasicsFormPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.state.initializing && this.setState({initializing: false})
     this.state.submitting && this.setState({submitting: false})
-  }
-
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
   }
 
   handleSubmit(event) {
@@ -196,6 +162,36 @@ class MobilizationBasicsFormPage extends React.Component {
 
 MobilizationBasicsFormPage.propTypes = {
   mobilization: PropTypes.object,  // NewMobilizationContainer
+  dirty: PropTypes.bool.isRequired,
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
 }
 
-export default MobilizationBasicsFormPage
+const fields = ['name', 'goal']
+
+const validate = values => {
+  const errors = {}
+  if (!values.name) {
+    errors.name = 'Insira o nome da mobilização'
+  } else if (values.name.length > 100) {
+    errors.name = 'Seu título está muito longo!'
+  }
+
+  if (!values.goal) {
+    errors.goal = 'Insira o objetivo da mobilização'
+  } else if (values.goal.length > 500) {
+    errors.goal = 'O limite de caracteres foi atingido.'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'mobilizationBasics',
+  fields,
+  validate
+},
+(state, ownProps) => ({
+  initialValues: ownProps.mobilization || {},
+  auth: state.auth
+}), { ...MobilizationActions })(MobilizationBasicsFormPage)

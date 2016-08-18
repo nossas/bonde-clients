@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import { editWidget } from '../../../actions'
 import { FormFooter, InputTag } from '../../../components'
@@ -12,29 +11,6 @@ import { Base as PressureBase } from '../components/settings'
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
-const widgetFormValidation = (data) => {
-  const errors = { valid: true }
-  if (!data.pressure_subject) {
-    errors.pressure_subject = 'Preenchimento obrigatório'
-    errors.valid = false
-  }
-  if (!data.pressure_body) {
-    errors.pressure_body = 'Preenchimento obrigatório'
-    errors.valid = false
-  }
-  return errors
-}
-
-const mapStateToProps = state => (
-  {
-    form: state.widgetForm,
-    saving: state.widgets.saving,
-    requestError: state.widgets.error
-  }
-)
-
-@connect(mapStateToProps, { editWidgetAction: editWidget })
-@reduxForm('widgetForm', widgetFormValidation)
 class EmailPage extends Component {
 
   constructor(props) {
@@ -54,11 +30,6 @@ class EmailPage extends Component {
     if (this.props.saving && nextProps.saving && !nextProps.requestError) {
       this.setState({ submitted: true })
     }
-  }
-
-  getTargetList() {
-    const { targets } = this.props.widget.settings || { targets: '' }
-    return targets && targets.split(';')
   }
 
   getTargetString() {
@@ -136,13 +107,37 @@ EmailPage.propTypes = {
   saving: PropTypes.bool.isRequired, // connect redux
   editWidgetAction: PropTypes.func.isRequired,
   // Redux form
-  data: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  touchAll: PropTypes.func.isRequired,
-  initializeForm: PropTypes.func.isRequired,
-  valid: PropTypes.bool.isRequired
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
 }
 
-export default EmailPage
+const fields = ['pressure_subject', 'pressure_body', 'targets']
+
+const validate = values => {
+  const errors = {}
+  if (!values.pressure_subject) {
+    errors.pressure_subject = 'Preenchimento obrigatório'
+  }
+  if (!values.pressure_body) {
+    errors.pressure_body = 'Preenchimento obrigatório'
+  }
+  return errors
+}
+
+const parseTargetList = (targets = '') => targets.split(';')
+
+export default reduxForm({
+  form: 'widgetForm',
+  fields,
+  validate
+},
+(state, ownProps) => ({
+  initialValues: {
+    ...ownProps.widget.settings || {},
+    targets: parseTargetList(ownProps.widget.settings && ownProps.widget.settings.targets)
+  },
+  form: state.widgetForm,
+  saving: state.widgets.saving,
+  requestError: state.widgets.error
+}), { editWidget })(EmailPage)

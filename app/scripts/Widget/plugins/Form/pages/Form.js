@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
 import * as WidgetActions from './../../../actions'
@@ -9,24 +7,8 @@ import * as Paths from './../../../../Paths'
 import { Loading, CloseButton, Label } from './../../../../components'
 import { Menu } from './../components'
 
-function widgetFormValidation() {
-  const errors = { valid: true }
-  return errors
-}
 
-@connect(state => ({ form: state.widgetForm }))
-@reduxForm('widgetForm', widgetFormValidation)
-export default class FormWidgetForm extends React.Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
-  }
+class FormWidgetForm extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -182,3 +164,21 @@ export default class FormWidgetForm extends React.Component {
     return (this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
   }
 }
+
+FormWidgetForm.propTypes = {
+  dirty: PropTypes.bool.isRequired,
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
+}
+
+const fields = ['call_to_action', 'button_text', 'count_text']
+
+export default reduxForm({
+  form: 'widgetForm',
+  fields
+},
+(state, ownProps) => ({
+  initialValues: ownProps.widget.settings || {},
+  auth: state.auth
+}), { ...WidgetActions })(FormWidgetForm)

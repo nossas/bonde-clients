@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react'
-import reduxForm from 'redux-form'
-import {connect} from 'react-redux'
+import { reduxForm } from 'redux-form'
 import ReactS3Uploader from 'react-s3-uploader'
 import {CloseButton, Label, InputCounter, SaveButton} from './../components'
 import * as Paths from '../Paths'
@@ -8,27 +7,8 @@ import * as Paths from '../Paths'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 import { editMobilization } from '../Mobilization/MobilizationActions'
 
-@connect((state, ownProps) => ({
-  form: state.mobilizationSharing,
-  editing: state.mobilization.saving,
-  mobilization: Selectors.getMobilization(state, ownProps)
-}))
-@reduxForm('mobilizationSharing')
 
-export default class MobilizationSharing extends React.Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    editing: PropTypes.bool.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired
-  }
+class MobilizationSharing extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -58,13 +38,13 @@ export default class MobilizationSharing extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const { data, dispatch, mobilization, auth } = this.props
+    const { data, editMobilization, mobilization, auth } = this.props
 
-    dispatch(editMobilization({
+    editMobilization({
       id: mobilization.id,
       credentials: auth.credentials,
       mobilization: {...data}
-    }))
+    })
 
     this.props.initializeForm(this.props.data)
   }
@@ -208,3 +188,31 @@ export default class MobilizationSharing extends React.Component {
     )
   }
 }
+
+MobilizationSharing.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  mobilization: PropTypes.object.isRequired,
+  handleEdit: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  editing: PropTypes.bool.isRequired,
+  dirty: PropTypes.bool.isRequired
+}
+
+const fields = ['facebook_share_title', 'facebook_share_description', 'facebook_share_image', 'twitter_share_text']
+
+export default reduxForm({
+  form: 'mobilizationSharing',
+  fields
+},
+(state, ownProps) => {
+  const mobilization = Selectors.getMobilization(state, ownProps)
+  return {
+    mobilization: mobilization,
+    editing: state.mobilization.saving,
+    initialValues: mobilization || {}
+  }
+},
+{ editMobilization })(MobilizationSharing)

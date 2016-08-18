@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import classnames from 'classnames'
@@ -8,35 +7,11 @@ import classnames from 'classnames'
 import * as Paths from '../Paths'
 import * as AuthActions from './../actions/AuthActions'
 
-function loginValidation(data) {
-  const errors = { valid: true }
-  if (!data.email) {
-    errors.email = 'Informe o e-mail'
-    errors.valid = false
-  } else if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(data.email)) {
-    errors.email = 'E-mail inválido'
-    errors.valid = false
-  }
-  if (!data.password) {
-    errors.password = 'Informe a senha'
-    errors.valid = false
-  }
-  return errors
-}
+import * as validation from '../../util/validation-helper'
 
-@connect(state => ({ auth: state.auth, form: state.loginForm }))
-@reduxForm('loginForm', loginValidation)
+
 @reactMixin.decorate(Navigation)
-
-export default class LoginForm extends React.Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    valid: PropTypes.bool.isRequired
-  }
+class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
@@ -103,3 +78,31 @@ export default class LoginForm extends React.Component {
     )
   }
 }
+
+LoginForm.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
+}
+
+const fields = ['email', 'password']
+
+const validate = values => {
+  const errors = {}
+  if (!values.email) {
+    errors.email = 'Informe o e-mail'
+  } else if (!validation.isValidEmail(values.email)) {
+    values.email = 'E-mail inválido'
+  }
+  if (!values.password) {
+    errors.password = 'Informe a senha'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'loginForm', fields, validate
+},
+(state, ownProps) => ({ // mapStateToProps
+  auth: state.auth
+}))(LoginForm)

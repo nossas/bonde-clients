@@ -1,39 +1,14 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { reduxForm } from 'redux-form'
+
 import * as WidgetActions from './../Widget/actions'
 import * as Paths from '../Paths'
 import { DonationWidgetMenu, Loading, CloseButton, Label} from './../components'
-import reduxForm from 'redux-form'
-import ColorPicker from 'react-color';
+import ColorPicker from 'react-color'
 
-function widgetFormValidation(data) {
-  const errors = { valid: true }
 
-  if (!data.button_text) {
-    errors.buttonText = 'Insira o texto do botão'
-    errors.valid = false
-  } else if (data.button_text.length > 50) {
-    errors.buttonText = 'O limite de caracteres foi atingido.'
-    errors.valid = false
-  }
-  return errors
-}
-
-@connect(state => ({ form: state.widgetForm }))
-@reduxForm('widgetForm', widgetFormValidation)
-export default class DonationWidgetSettings extends React.Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
-  }
+class DonationWidgetSettings extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -505,3 +480,42 @@ export default class DonationWidgetSettings extends React.Component {
     return (this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
   }
 }
+
+DonationWidgetSettings.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  dirty: PropTypes.bool.isRequired
+}
+
+const fields = [
+  'title_text', 'button_text', 'main_color', 'default_donation_value',
+  'donation_value1', 'donation_value2', 'donation_value3', 'donation_value4',
+  'donation_value5', 'recurring_period', 'payment_type', 'payment_methods'
+]
+
+const validate = values => {
+  const errors = {}
+  if (!values.button_text) {
+    errors.button_text = 'Insira o texto do botão'
+  } else if (values.button_text.length > 50) {
+    errors.button_text = 'O limite de caracteres foi atingido.'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'widgetForm',
+  validate
+},
+(state, ownProps) => ({
+  initialValues: {
+    default_donation_value: 1,
+    main_color: '#54d0f6',
+    recurring_period: 30,
+    payment_type: 'unique',
+    payment_methods: 'false',
+    ...ownProps.widget.settings || {}
+  }
+}))(DonationWidgetSettings)
