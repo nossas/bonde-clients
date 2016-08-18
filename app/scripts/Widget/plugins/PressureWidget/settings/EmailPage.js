@@ -12,7 +12,7 @@ import { Base as PressureBase } from '../components/settings'
 const EMAIL_TEXT_PLACEHOLDER = "Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização.\nCompartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço."
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
-const patternTarget = /[\w ]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
+const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
 const widgetFormValidation = (data) => {
   const errors = { valid: true }
@@ -115,10 +115,10 @@ class EmailPage extends Component {
             }}
           />
           <Control id="email-subject-id" label="Assunto do email" name="pressure_subject" {...inputProps}>
-            <Input type="text" value={pressure_subject} placeholder="Envie um e-mail para quem pode tomar essa decisão" />
+            <Input type="text" value={pressure_subject} />
           </Control>
-          <Control id="email-body-id" label="Corpo do email que será enviado para o alvo" name="pressure_body" {...inputProps}>
-            <Textarea value={pressure_body} placeholder={EMAIL_TEXT_PLACEHOLDER} />
+          <Control id="email-body-id" label="Corpo do email que será enviado" name="pressure_body" {...inputProps}>
+            <Textarea value={pressure_body} />
           </Control>
           <FormFooter submitted={this.state.submitted} saving={saving} />
         </form>
