@@ -19,10 +19,10 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { fields: { email, password }, handleSubmit, error, submitting, login } = this.props
+    const { fields: { email, password }, handleSubmit, error, submitting } = this.props
 
     return (
-      <form onSubmit={handleSubmit(login)} noValidate>
+      <form onSubmit={handleSubmit} noValidate>
 
         <label htmlFor="email" className="block h5 caps bold mb1">E-mail</label>
         <input
@@ -79,4 +79,4 @@ export default reduxForm({
 },
 (state, ownProps) => ({ // mapStateToProps
   user: state.auth.user
-}), { login })(LoginForm)
+}), { onSubmit: login })(LoginForm)

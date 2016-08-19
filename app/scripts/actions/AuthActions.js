@@ -28,11 +28,11 @@ export const login = (values, dispatch) => {
           reject({ _error: `Response Error: ${err.status}` })
         } else {
           const credentials = {
-            "Access-Token": res.header['Access-Token'],
-            "Expiry": res.header['Expiry'],
-            "Token-Type": res.header['Token-Type'],
-            "Uid": res.header['Uid'],
-            "Client": res.header['Client']
+            "Access-Token": res.header['access-token'],
+            "Expiry": res.header['expiry'],
+            "Token-Type": res.header['token-type'],
+            "Uid": res.header['uid'],
+            "Client": res.header['client']
           }
           const user = res.body.data
 

@@ -33,7 +33,6 @@ export default function auth(state = initialState, action = {}) {
         error: action.error
       }
     case AUTH_LOGIN_SUCCESS:
-      console.log(action)
       return {
         ...state,
         user: action.user,
