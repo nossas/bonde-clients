@@ -19,7 +19,6 @@ const TargetList = ({ targets }) => {
   }
   const targetItemStyle = {
     width: '140px',
-    // height: '35px',
     float: 'left'
   }
   const targetLabelStyle = {
