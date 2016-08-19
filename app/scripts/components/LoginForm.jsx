@@ -5,75 +5,48 @@ import { Navigation } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../Paths'
-import * as AuthActions from './../actions/AuthActions'
+import { login } from './../actions/AuthActions'
 
 import * as validation from '../../util/validation-helper'
-
 
 @reactMixin.decorate(Navigation)
 class LoginForm extends React.Component {
 
-  handleSubmit(event) {
-    event.preventDefault()
-    const { data, touchAll, valid, dispatch } = this.props
-
-    if (valid)
-      dispatch(AuthActions.login(data))
-    else
-      touchAll()
-  }
-
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.user){
+    if(nextProps.user){
       this.transitionTo(Paths.mobilizations())
     }
   }
 
-  renderErrorMessage() {
-    if (this.props.auth.error) {
-      return (
-        <div className="h5 red bold center mt2 animated shake">{this.props.auth.error}</div>
-      )
-    }
-  }
-
   render() {
-    const {
-      data: { email, password },
-      errors: { email: emailError, password: passwordError },
-      touched: { email: emailTouched, password: passwordTouched },
-      handleChange,
-      handleBlur
-    } = this.props
+    const { fields: { email, password }, handleSubmit, error, submitting, login } = this.props
 
     return (
-      <form onSubmit={::this.handleSubmit} noValidate>
+      <form onSubmit={handleSubmit(login)} noValidate>
 
         <label htmlFor="email" className="block h5 caps bold mb1">E-mail</label>
         <input
           type="email" id="email"
-          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((emailTouched && emailError) ? 'has-error' : null))}
-          value={email}
-          onChange={handleChange('email')}
-          onBlur={handleBlur('email')} />
-        <span className="h5 red bold">{emailTouched && emailError}</span>
+          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((email.touched && email.error) ? 'has-error' : null))}
+          {...email}
+        />
+        {email.touched && email.error && <span className="h5 red bold">{email.error}</span>}
 
         <label htmlFor="password" className="block h5 caps bold mt1 mb1">Senha</label>
         <input
           type="password" id="password"
-          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((passwordTouched && passwordError) ? 'has-error' : null))}
-          value={password}
-          onChange={handleChange('password')}
-          onBlur={handleBlur('password')} />
-        <span className="h5 red bold">{passwordTouched && passwordError}</span>
+          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((password.touched && password.error) ? 'has-error' : null))}
+          {...password}
+        />
+        {password.touched && password.error && <span className="h5 red bold">{password.error}</span>}
 
         <input
           type="submit"
           className="button full-width bg-aqua mt2 h3"
-          disabled={this.props.auth.submitting}
-          value={this.props.auth.submitting ? "ENTRANDO..." : "ENTRAR"} />
+          disabled={submitting}
+          value={submitting ? "ENTRANDO..." : "ENTRAR"} />
 
-        {::this.renderErrorMessage()}
+        {error && <div className="h5 red bold center mt2 animated shake">{error}</div>}
       </form>
     )
   }
@@ -82,7 +55,8 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string
 }
 
 const fields = ['email', 'password']
@@ -104,5 +78,5 @@ export default reduxForm({
   form: 'loginForm', fields, validate
 },
 (state, ownProps) => ({ // mapStateToProps
-  auth: state.auth
-}))(LoginForm)
+  user: state.auth.user
+}), { login })(LoginForm)
