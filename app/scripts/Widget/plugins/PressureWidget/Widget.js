@@ -63,7 +63,7 @@ export class PressureWidget extends Component {
   }
 
   render() {
-    const { widget, editable, saving } = this.props
+    const { widget, editable, saving, mobilization: { header_font: headerFont } } = this.props
     const {
       main_color,
       title_text,
@@ -87,7 +87,7 @@ export class PressureWidget extends Component {
             href={window.location.origin}
           />
         :
-          <div className="pressure-widget">
+          <div className={`pressure-widget ${headerFont}-header`}>
             <h2 className="center py2 px3 m0 white rounded-top" style={{backgroundColor: main_color}}>{title_text}</h2>
             <TargetList targets={::this.getTargetList() || []} />
             <PressureForm

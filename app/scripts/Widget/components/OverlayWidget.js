@@ -23,10 +23,6 @@ class OverlayWidget extends Component {
 
   render() {
     const { children, editable, onClick } = this.props
-    /*const children = this.props.children.map(component => {
-      return React.cloneElement(component, {...this.props})
-    })*/
-    {/*<div className={`widget ${headerFont}-header`}*/}
     return (
       <div className="widget relative"
            style={(editable ? {cursor: 'pointer'} : null)}

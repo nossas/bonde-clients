@@ -133,6 +133,8 @@ export default class MobilizationFonts extends React.Component {
         <option value="armata">Armata</option>
         <option value="arvo">Arvo</option>
         <option value="dosis">Dosis</option>
+        <option value="droid-sans">Droid Sans</option>
+        <option value="fjalla-one">Fjalla One</option>
         <option value="glegoo">Glegoo</option>
         <option value="lato">Lato</option>
         <option value="merriweather">Merriweather</option>
