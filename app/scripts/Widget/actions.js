@@ -51,50 +51,25 @@ export const editWidget = ({ mobilization_id, widget_id, credentials, widget }) 
   }
 }
 
-const fillWidgetRequest = () => {
-  return {
-    type: REQUEST_FILL_WIDGET
-  }
-}
+const fillWidgetRequest = () => ({ type: REQUEST_FILL_WIDGET })
+const fillWidgetFailure = error => ({ type: FAILURE_FILL_WIDGET, error })
+const fillWidgetSuccess = data => ({
+  //
+  // For endpoint reference, see: https://github.com/ourcities/hub-api/issues/39
+  //
+  type: SUCCESS_FILL_WIDGET,
+  counter: { id: data.widget_id, count: data.count }
+})
 
-const fillWidgetSuccess = (data) => {
-  /** {
-    *   "id": "(int)",
-    *   "activist_id": "(int)",
-    *   "widget_id": "(int)",
-    *   "created_at": "(string:timestamp)",
-    *   "updated_at": "(string:timestamp)",
-    *   "count": "(int)"
-    * }
-    */
-  return {
-    type: SUCCESS_FILL_WIDGET,
-    counter: { id: data.widget_id, count: data.count }
-  }
-}
-
-const fillWidgetFailure = (error) => {
-  return {
-    type: FAILURE_FILL_WIDGET,
-    error: error
-  }
-}
-
-export const fillWidget = (widget_id, fill) => {
-  return dispatch => {
-    dispatch(fillWidgetRequest())
-    dispatch(fillWidgetSuccess({ id: 1, count: 1, widget_id }))
-    /*request
-      .post(`${process.env.API_URL}/widgets/${widget_id}/fill`)
-      .send({ fill })
-      .end((err, res) => {
-        if (err || !res.ok) {
-          dispatch(fillWidgetFailure(err || res.body))
-        } else {
-          dispatch(fillWidgetSuccess(res.body))
-        }
-      })*/
-  }
+export const fillWidget = (widget_id, fill) => dispatch => {
+  dispatch(fillWidgetRequest())
+  request
+    .post(`${process.env.API_URL}/widgets/${widget_id}/fill`)
+    .send({ fill })
+    .end((err, res) => {
+      if (err || !res.ok) dispatch(fillWidgetFailure(err || res.body))
+      else dispatch(fillWidgetSuccess(res.body))
+    })
 }
 
 export function fetchWidgets(params) {
