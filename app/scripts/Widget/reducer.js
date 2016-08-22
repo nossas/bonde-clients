@@ -3,6 +3,9 @@ import superagent from 'superagent'
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
 import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 
+import { REQUEST_EDIT_WIDGET, SUCCESS_EDIT_WIDGET, FAILURE_EDIT_WIDGET } from './actions'
+import { REQUEST_FILL_WIDGET, SUCCESS_FILL_WIDGET, FAILURE_FILL_WIDGET } from './actions'
+
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
 const FETCH_WIDGETS_FAILURE = 'FETCH_WIDGETS_FAILURE'
@@ -17,7 +20,8 @@ const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
 const initialState = {
   loaded: false,
-  data: []
+  data: [],
+  saving: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -34,11 +38,40 @@ export default function reducer(state = initialState, action) {
       return {...state, loaded: true, data: action.result }
     case FAILURE_FIND_WIDGETS:
       return {...state, loaded: true}
-    case EDIT_WIDGET:
-      return {...state,
+
+    case REQUEST_EDIT_WIDGET:
+      return {
+        ...state,
+        saving: true
+      }
+    case REQUEST_FILL_WIDGET:
+      return {
+        ...state,
+        saving: true
+      }
+    case SUCCESS_EDIT_WIDGET:
+      return {
+        ...state,
         data: state.data.map(
           widget => widget.id === action.widget.id ? action.widget : widget
-        )}
+        ),
+        saving: false
+      }
+    case SUCCESS_FILL_WIDGET:
+      return {
+        ...state,
+        data: state.data.map(
+          widget => widget.id === action.counter.id ? {...widget, ...action.counter, filled: true} : widget
+        ),
+        saving: false
+      }
+    case FAILURE_EDIT_WIDGET, FAILURE_FILL_WIDGET:
+      return {
+        ...state,
+        saving: false,
+        error: action.error
+      }
+
     case ADD_FORM_ENTRY:
       return {...state,
         data: state.data.map(

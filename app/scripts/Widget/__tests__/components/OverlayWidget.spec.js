@@ -3,7 +3,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import OverlayWidget from './OverlayWidget'
+import { OverlayWidget } from '../../components'
 
 
 describe('OverlayWidget', () => {

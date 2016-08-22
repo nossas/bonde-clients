@@ -79,3 +79,9 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
 }
 
 export * from './Widget/plugins/Match/paths'
+
+const makePressureWidget = (mobilization_id, widget_id, path) =>
+  `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
+
+export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
+export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')

@@ -1,3 +1,4 @@
+// TODO: Refactor auto fire, because this is used more Widget settings
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,12 +9,20 @@ import * as Paths from './../Paths'
 import * as WidgetActions from './../Widget/actions'
 import { Label, DonationWidgetMenu, Loading, CloseButton } from './../components'
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
+import { Menu as PressureWidgetMenu } from './../Widget/plugins/PressureWidget/components/settings'
+
+import * as validator from '../../util/validation-helper'
+
 
 
 function widgetFormValidation(data) {
   const errors = { valid: true }
   if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
     errors.id = 'Informe uma ID válida'
+    errors.valid = false
+  }
+  if (!validator.isValidEmail(data.senderEmail)) {
+    errors.senderEmail = 'Informe um e-mail inválido'
     errors.valid = false
   }
   return errors
@@ -115,7 +124,7 @@ export default class AutoFireForm extends React.Component {
 
     return (
       <form onSubmit={::this.handleSubmit}>
-        <Label htmlFor="buttonText">Nome remetente</Label>
+        <Label htmlFor="buttonText">Nome do remetente</Label>
         {senderNameError && senderNameTouched && <span className="red ml2">{senderNameError}</span>}
         <input
           id="senderName"
@@ -179,10 +188,14 @@ export default class AutoFireForm extends React.Component {
   renderPage () {
     const { widgets, dirty } = this.props
     const widget = this.widget()
+
     return (
       <div className='flex-auto flex flex-column bg-silver gray relative'>
+        {/* TODO: Render menu */}
         {(widget.kind === 'donation'
           ? <DonationWidgetMenu {...this.props} widget={widget} />
+          : widget.kind === 'pressure'
+          ? <PressureWidgetMenu mobilization_id={this.props.mobilization.id} widget_id={widget.id} {...this.props} />
           : <FormWidgetMenu {...this.props} widget={widget} />
         )}
         <div className='p3 flex-auto overflow-scroll'>

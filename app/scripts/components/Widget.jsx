@@ -7,6 +7,8 @@ import ContentWidget from './ContentWidget.jsx'
 import { Form as FormWidget, Match as MatchWidget } from '../Widget/plugins'
 import DonationWidget from './DonationWidget.jsx'
 
+import { PressureWidget } from '../Widget/plugins'
+
 
 const Widget = (props) => {
   let { widget } = props
@@ -27,6 +29,8 @@ const Widget = (props) => {
     child = <DonationWidget {...props} />
   } else if (widget.kind === 'match') {
     child = <MatchWidget {...props} />
+  } else if (widget.kind === 'pressure') {
+    child = <PressureWidget {...props} />
   } else {
     child = <DraftWidget {...props} />
   }

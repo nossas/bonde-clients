@@ -19,26 +19,6 @@ export default class DraftWidget extends React.Component {
     }
   }
 
-  handleContentClick(event) {
-    event.preventDefault()
-    this.updateKind('content')
-  }
-
-  handleFormClick(event) {
-    event.preventDefault()
-    this.updateKind('form')
-  }
-
-  handleDonationClick(event) {
-    event.preventDefault()
-    this.updateKind('donation')
-  }
-
-  handleMatchClick(event) {
-    event.preventDefault()
-    this.updateKind('match')
-  }
-
   updateKind(kind) {
     const { dispatch, auth } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
@@ -71,6 +51,19 @@ export default class DraftWidget extends React.Component {
       }
     }
 
+    if (kind === 'pressure') {
+      const { auth: { user } } = this.props
+      widgetParams = {
+        ...widgetParams,
+        settings: {
+          main_color: '#f23392',
+          title_text: 'Envie um e-mail para quem pode tomar essa decisão',
+          button_text: 'Enviar e-mail',
+          reply_email: user.email
+        }
+      }
+    }
+
     this.setState({loading: true})
     // TODO: change it to use the new pattern for reducer actions
     bindedWidgetActions.editWidget({
@@ -96,23 +89,28 @@ export default class DraftWidget extends React.Component {
           <h4>Escolha uma das opções abaixo</h4>
           <button
             className="caps button bg-darken-4 mt1 p2 full-width btn-content"
-            onClick={::this.handleContentClick}>
+            onClick={() => this.updateKind('content')}>
             Texto
           </button>
           <button
             className="caps button bg-darken-4 mt1 p2 full-width btn-form"
-            onClick={::this.handleFormClick}>
+            onClick={() => this.updateKind('form')}>
             Formulário
           </button>
           <button
             className="caps button bg-darken-4 mt1 p2 full-width btn-donation"
-            onClick={::this.handleDonationClick}>
+            onClick={() => this.updateKind('donation')}>
             Doação
           </button>
           <button
-            className="caps button bg-darken-4 mt1 p2 full-width btn-donation"
-            onClick={::this.handleMatchClick}>
+            className="caps button bg-darken-4 mt1 p2 full-width btn-match"
+            onClick={() => this.updateKind('match')}>
             Match
+          </button>
+          <button
+            className="caps button bg-darken-4 mt1 p2 full-width btn-pressure"
+            onClick={() => this.updateKind('pressure')}>
+            Pressão
           </button>
         </div>
       )
