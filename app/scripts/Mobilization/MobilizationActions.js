@@ -37,7 +37,6 @@ const addMobilizationSuccess = (mobilization) => ({ type: SUCCESS_ADD_MOBILIZATI
 export const add = (credentials, mobilization, next) => {
 
   return dispatch => {
-
     return new Promise((resolve, reject) => {
       request
         .post(`${process.env.API_URL}/mobilizations`)
@@ -62,7 +61,6 @@ const editMobilizationSuccess = (mobilization) => ({ type: SUCCESS_EDIT_MOBILIZA
 export const edit = (credentials, mobilization, next) => {
 
   return dispatch => {
-
     return new Promise((resolve, reject) => {
       request
         .put(`${process.env.API_URL}/mobilizations/${mobilization.id}`)

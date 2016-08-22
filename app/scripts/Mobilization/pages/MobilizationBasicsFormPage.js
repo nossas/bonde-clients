@@ -65,7 +65,7 @@ export class MobilizationBasicsFormPage extends React.Component {
               <input
                 type="submit"
                 className={classnames("caps button bg-aqua h3 mt1 p2", (mobilization ? null : 'full-width'))}
-                disabled={submitting}
+                disabled={submitting || !props.dirty}
                 value={submitting ? "Salvando..." : (mobilization ? 'Salvar' : 'Continuar')}
               />
             </div>
@@ -108,7 +108,7 @@ const validate = values => {
 }
 
 export default reduxForm({
-  form: 'mobilizationBasics',
+  form: 'mobilizationForm',
   fields,
   validate
 },

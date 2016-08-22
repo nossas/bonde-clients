@@ -51,26 +51,28 @@ class MobilizationCityPage extends React.Component {
               <input
                 type="submit"
                 className={classnames("caps button bg-aqua h3 mt1 p2", (isNewMobilization ? 'full-width' : null))}
-                disabled={submitting}
+                disabled={submitting || !props.dirty}
                 value={submitting ? "Salvando..." : (isNewMobilization ? 'Continuar' : 'Salvar')}
               />
             </div>
             {error && <div className="red center mt2">{error}</div>}
           </form>
         </div>
-        {!isNewMobilization && <CloseButton dirty={dirty} path={Paths.editMobilization(mobilization.id)} />}
+        {!isNewMobilization && <CloseButton dirty={props.dirty} path={Paths.editMobilization(mobilization.id)} />}
       </div>
     )
   }
 }
 
 MobilizationCityPage.propTypes = {
-  mobilization: PropTypes.object,
-  organizations: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+
+  mobilization: PropTypes.object,
+  organizations: PropTypes.object.isRequired,
+  credentials: PropTypes.object.isRequired,
 }
 
 const fields = ['organization_id']
@@ -84,7 +86,7 @@ const validate = values => {
 }
 
 export default reduxForm({
-  form: 'mobilizationCity',
+  form: 'mobilizationForm',
   fields,
   validate
 },

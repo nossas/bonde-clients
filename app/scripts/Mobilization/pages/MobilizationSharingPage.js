@@ -1,25 +1,18 @@
 import React, {PropTypes} from 'react'
 import { reduxForm } from 'redux-form'
 import ReactS3Uploader from 'react-s3-uploader'
-import {CloseButton, Label, InputCounter, SaveButton} from './../components'
-import * as Paths from '../Paths'
 
-import * as Selectors from '../Mobilization/MobilizationSelectors'
-import { editMobilization } from '../Mobilization/MobilizationActions'
+import { CloseButton, Label, InputCounter, SaveButton } from '../../components'
+
+import * as Paths from '../../Paths'
+import * as Selectors from '../MobilizationSelectors'
+import * as MobilizationActions from '../MobilizationActions'
 
 
-class MobilizationSharing extends React.Component {
+class MobilizationSharingPage extends React.Component {
 
   constructor(props, context) {
     super(props, context)
-
-    const {initializeForm, mobilization} = props
-    initializeForm({
-      facebook_share_title: mobilization.facebook_share_title,
-      facebook_share_description: mobilization.facebook_share_description,
-      facebook_share_image: mobilization.facebook_share_image,
-      twitter_share_text: mobilization.twitter_share_text
-    })
 
     this.state = {
       isFacebookShareImageUploading: false,
@@ -28,58 +21,20 @@ class MobilizationSharing extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { editing } = this.props
-    if (editing !== nextProps.editing) {
+    const { submitting } = this.props
+    if (submitting !== nextProps.submitting) {
       this.setState({
-        edited: editing && !nextProps.editing
+        edited: submitting && !nextProps.submitting
       })
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    const { data, editMobilization, mobilization, auth } = this.props
-
-    editMobilization({
-      id: mobilization.id,
-      credentials: auth.credentials,
-      mobilization: {...data}
-    })
-
-    this.props.initializeForm(this.props.data)
-  }
-
-  handleFacebookShareImageUploadProgress() {
-    if (!this.state.isFacebookShareImageUploading) {
-      this.setState({isFacebookShareImageUploading: true})
-    }
-  }
-
-  handleFacebookShareImageUploadFinish(image) {
-    const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
-    this.props.handleBlur('facebook_share_image')({target: {value: imageUrl}})
-    this.setState({isFacebookShareImageUploading: false})
-  }
-
-  renderFacebookImage() {
-    const {data} = this.props
-
-    return (
-      data.facebook_share_image
-        ? <img src={data.facebook_share_image} />
-        : <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />
-    )
-  }
-
   render() {
     const {
-      data: {
-        facebook_share_title: facebookShareTitle,
-        facebook_share_description: facebookShareDescription,
-        twitter_share_text: twitterShareText
-      },
-      handleBlur, handleChange, editing, dirty
+      fields: { facebook_share_image, facebook_share_title, facebook_share_description, twitter_share_text },
+      handleSubmit, submitting, error
     } = this.props
+    const { mobilization, credentials, edit, ...props } = this.props
 
     const { isFacebookShareImageUploading } = this.state
 
@@ -93,11 +48,11 @@ class MobilizationSharing extends React.Component {
           Configure as informações do post que será publicado no Facebook
           sempre que alguém compartilhar a ação.
         </p>
-        <form onSubmit={::this.handleSubmit}>
+        <form onSubmit={handleSubmit((values, dispatch) => dispatch(edit(credentials, { ...mobilization, ...values })))}>
           <div className="mb3">
             <Label htmlFor="facebookShareImage">Imagem</Label>
             <div className="border rounded p2 bg-white center">
-              { this.renderFacebookImage() }
+              {facebook_share_image.value ? <img src={facebook_share_image.value} /> : <i className="fa fa-image silver mb2" style={{fontSize: '5em'}} />}
               <div className="mb1">Sua imagem deve ter 470x270 pixels</div>
               <div className="overflow-hidden">
                 { isFacebookShareImageUploading
@@ -106,8 +61,12 @@ class MobilizationSharing extends React.Component {
                     id="facebookShareImage"
                     signingUrl={`${process.env.API_URL}/uploads`}
                     accept="image/*"
-                    onProgress={::this.handleFacebookShareImageUploadProgress}
-                    onFinish={::this.handleFacebookShareImageUploadFinish}
+                    onProgress={() => !isFacebookShareImageUploading && this.setState({ isFacebookShareImageUploading: true })}
+                    onFinish={(image) => {
+                      const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+                      facebook_share_image.onChange(imageUrl)
+                      this.setState({ isFacebookShareImageUploading: false })
+                    }}
                   />
                 }
               </div>
@@ -117,7 +76,7 @@ class MobilizationSharing extends React.Component {
             <Label htmlFor="facebookShareTitle">Título</Label>
             <InputCounter
               maxLength={70}
-              length={facebookShareTitle ? facebookShareTitle.length : 0}
+              length={facebook_share_title.value ? facebook_share_title.value.length : 0}
               classNames={['right']}
             />
             <input
@@ -125,27 +84,23 @@ class MobilizationSharing extends React.Component {
               maxLength={70}
               type="text"
               className="field-light block full-width"
-              value={facebookShareTitle}
-              onChange={handleChange('facebook_share_title')}
-              onBlur={handleBlur('facebook_share_title')}
               placeholder="Um título direto que passe a ideia da sua mobilização"
+              {...facebook_share_title}
             />
           </div>
           <div className="mb3">
             <Label htmlFor="facebookShareDescription">Subtítulo</Label>
-              <InputCounter
-                maxLength={90}
-                length={facebookShareDescription ? facebookShareDescription.length : 0}
-                classNames={['right']}
-              />
+            <InputCounter
+              maxLength={90}
+              length={facebook_share_description.value ? facebook_share_description.value.length : 0}
+              classNames={['right']}
+            />
             <textarea
               id="facebookShareDescription"
               maxLength={90}
               className="field-light block full-width"
-              value={facebookShareDescription}
-              onChange={handleChange('facebook_share_description')}
-              onBlur={handleBlur('facebook_share_description')}
               placeholder="Complete a informação do título e chame o leitor para a mobilização"
+              {...facebook_share_description}
             />
           </div>
 
@@ -161,58 +116,55 @@ class MobilizationSharing extends React.Component {
             <Label htmlFor="twitterShareText">Texto do Tweet</Label>
               <InputCounter
                 maxLength={140}
-                length={twitterShareText ? twitterShareText.length : 0}
+                length={twitter_share_text.value ? twitter_share_text.value.length : 0}
                 classNames={['right']}
               />
             <textarea
               id="twitterShareText"
               maxLength={140}
               className="field-light block full-width"
-              value={ twitterShareText }
-              onChange={handleChange('twitter_share_text')}
-              onBlur={handleBlur('twitter_share_text')}
               placeholder={ "Insira uma frase e chame o leitor para a mobilização" }
+              {...twitter_share_text}
             />
           </div>
 
           <div>
-            <SaveButton
-              saving={editing}
-              saved={this.state.edited && !dirty}
-              handleClick={::this.handleSubmit}
+            <input
+              type="submit"
+              className="caps button bg-aqua h3 mt1 p2"
+              disabled={submitting || !props.dirty}
+              value={submitting ? 'Salvando...' : 'Salvar'}
             />
           </div>
         </form>
-        <CloseButton dirty={this.props.dirty} path={Paths.editMobilization(this.props.mobilization.id)} />
+        <CloseButton dirty={props.dirty} path={Paths.editMobilization(mobilization.id)} />
       </div>
     )
   }
 }
 
-MobilizationSharing.propTypes = {
+MobilizationSharingPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 
   mobilization: PropTypes.object.isRequired,
-  handleEdit: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  editing: PropTypes.bool.isRequired,
-  dirty: PropTypes.bool.isRequired
+  edit: PropTypes.func.isRequired
 }
 
 const fields = ['facebook_share_title', 'facebook_share_description', 'facebook_share_image', 'twitter_share_text']
 
 export default reduxForm({
-  form: 'mobilizationSharing',
+  form: 'mobilizationForm',
   fields
 },
 (state, ownProps) => {
   const mobilization = Selectors.getMobilization(state, ownProps)
   return {
     mobilization: mobilization,
-    editing: state.mobilization.saving,
-    initialValues: mobilization || {}
+    initialValues: mobilization || {},
+    credentials: state.auth.credentials
   }
-},
-{ editMobilization })(MobilizationSharing)
+}, { ...MobilizationActions })(MobilizationSharingPage)

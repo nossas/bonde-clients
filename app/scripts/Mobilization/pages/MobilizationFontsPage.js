@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
-import { TabMenuItem, CloseButton } from '../components'
+import { TabMenuItem, CloseButton } from '../../components'
 
-import * as Paths from '../Paths'
-import * as Selectors from '../Mobilization/MobilizationSelectors'
+import * as Paths from '../../Paths'
+import * as Selectors from '../MobilizationSelectors'
 import * as MobilizationActions from '../MobilizationActions'
 
 
@@ -53,7 +53,7 @@ class MobilizationFontsPage extends React.Component {
               style={{height: '48px'}}
               {...header_font}
             >
-              {fonts.map(font => <option key={`${font[0]}-header`} value={font[0]}>font[1]</option>)}
+              {fonts.map(font => <option key={`${font[0]}-header`} value={font[0]}>{font[1]}</option>)}
             </select>
             <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${header_font.value}-header`)}>
               <h1 className="m0">Os títulos ficarão assim</h1>
@@ -66,7 +66,7 @@ class MobilizationFontsPage extends React.Component {
               style={{height: '48px'}}
               {...body_font}
             >
-              {fonts.map(font => <option key={`${font[0]}-body`} value={font[0]}>font[1]</option>)}
+              {fonts.map(font => <option key={`${font[0]}-body`} value={font[0]}>{font[1]}</option>)}
             </select>
             <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${body_font.value}-body`)}>
               <p className="m0">Os textos ficarão assim.</p>
@@ -99,7 +99,7 @@ MobilizationFontsPage.propTypes = {
   dirty: PropTypes.bool.isRequired
 }
 
-const fields = ['headerFont', 'bodyFont']
+const fields = ['header_font', 'body_font']
 
 const validate = values => {
   const errors = {}
@@ -124,4 +124,4 @@ export default reduxForm({
     initialValues: mobilization || {},
     credentials: state.auth.credentials,
   }
-}, { ...MobilizationActions })(MobilizationFonts)
+}, { ...MobilizationActions })(MobilizationFontsPage)

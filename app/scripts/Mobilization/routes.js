@@ -2,16 +2,7 @@ import React, { Component } from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import { MobilizationListPage, WrapperMobilizationApp } from './pages'
-import {
-  NewMobilization,
-  NewBlock,
-  MobilizationFonts,
-  MobilizationBasics,
-  MobilizationCity,
-  MobilizationAnalytics,
-  MobilizationSharing,
-  MobilizationCustomDomain
-} from './../pages'
+import { NewBlock } from './../pages'
 
 import {
   UserDashboardContainer,
@@ -23,6 +14,10 @@ import {
 import {
   MobilizationBasicsFormPage,
   MobilizationCityPage,
+  MobilizationAnalyticsPage,
+  MobilizationSharingPage,
+  MobilizationCustomDomainPage,
+  MobilizationFontsPage,
   EditMobilizationPage
 } from './pages'
 
@@ -45,13 +40,13 @@ export default (
       <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilizationPage} />
       <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
       { widgetRoutes(defaultPath) }
-      <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
+      <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFontsPage} />
       <Route component={MobilizationSettingsContainer} >
         <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasicsFormPage} />
-        <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCity} />
-        <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
-        <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
-        <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
+        <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCityPage} />
+        <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalyticsPage} />
+        <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharingPage} />
+        <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomainPage} />
       </Route>
     </Route>
   </Route>

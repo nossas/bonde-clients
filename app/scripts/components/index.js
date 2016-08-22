@@ -3,8 +3,6 @@ export { default as MobilizationMenu } from './MobilizationMenu.jsx'
 export { default as MobilizationsMenu } from './MobilizationsMenu.jsx'
 export { default as MobilizationCard } from './MobilizationCard.jsx'
 
-export { default as MobilizationBasicsForm } from './MobilizationBasicsForm.jsx'
-
 export { default as LoginForm } from './LoginForm.jsx'
 export { default as Widget } from './Widget.jsx'
 export { default as DraftWidget } from './DraftWidget.jsx'
