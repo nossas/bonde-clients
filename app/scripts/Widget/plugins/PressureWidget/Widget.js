@@ -53,7 +53,7 @@ export class PressureWidget extends Component {
   }
 
   handleOverlayOnClick(e) {
-    const { editable } = this.props
+    const { mobilization, widget, editable } = this.props
     if (editable) {
       if (e) e.preventDefault()
       this.context.router.transitionTo(
@@ -63,7 +63,7 @@ export class PressureWidget extends Component {
   }
 
   render() {
-    const { mobilization, widget, editable, saving } = this.props
+    const { widget, editable, saving } = this.props
     const {
       main_color,
       title_text,
