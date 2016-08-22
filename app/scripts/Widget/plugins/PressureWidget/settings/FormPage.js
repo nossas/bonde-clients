@@ -98,7 +98,7 @@ class FormPage extends Component {
           <Control id="main-color-id" label="Cor do formulário" name="main_color" {...inputProps}>
             <ColorInput value={main_color} />
           </Control>
-          <Control label="Mostrar contador de pessão" name='show_counter' {...inputProps}>
+          <Control label="Mostrar contador de pressão" name='show_counter' {...inputProps}>
             <Input type="radio" value={show_counter}>
               <RadioButton className="mr1 caps" value="true">Sim</RadioButton>
               <RadioButton value="false" className="caps">Não</RadioButton>
