@@ -7,7 +7,8 @@ const controlClassname = 'px3 py1 border-top'
 const inputReset = {
   border: 'none',
   padding: '0',
-  height: '2rem'
+  height: '2rem',
+  outline: 'none'
 }
 
 
@@ -67,6 +68,9 @@ class PressureForm extends Component {
   render() {
     const { buttonColor, buttonText, children } = this.props
     const { email, name, lastname, subject, body, errors } = this.state
+    const errorSpanStyle = {
+      fontSize: '.95em'
+    }
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
@@ -121,8 +125,8 @@ class PressureForm extends Component {
           </h4>
           <div className="bg-white rounded-bottom">
             <div className={controlClassname}>
-              <label className="p1 gray" htmlFor="pressure-subject-id">Assunto</label>
-              {(errors && errors['subject'] && <span className="red ml1">{errors['subject']}</span>)}
+              <label className="py1 gray" htmlFor="pressure-subject-id">Assunto</label>
+              {(errors && errors['subject'] && <span className="red ml1" style={errorSpanStyle}>{errors['subject']}</span>)}
               <input
                 id="pressure-subject-id"
                 className="col-12"
@@ -133,8 +137,8 @@ class PressureForm extends Component {
               />
             </div>
             <div className={controlClassname}>
-              <label className="p1 gray" htmlFor="pressure-body-id">E-mail</label>
-              {(errors && errors['body'] && <span className="red ml1">{errors['body']}</span>)}
+              <label className="py1 gray" htmlFor="pressure-body-id">E-mail</label>
+              {(errors && errors['body'] && <span className="red ml1" style={errorSpanStyle}>{errors['body']}</span>)}
               <textarea
                 id="pressure-body-id"
                 className="col-12"
