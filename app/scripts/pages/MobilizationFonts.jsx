@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import reduxForm from 'redux-form'
 import classnames from 'classnames'
 import * as Paths from '../Paths'
-import * as MobilizationActions from './../actions/MobilizationActions'
+import { editMobilization } from './../reducers/mobilizations'
 import { TabMenuItem, CloseButton } from '../components'
 
 function mobilizationFontsValidation(data) {
@@ -74,7 +74,7 @@ export default class MobilizationFonts extends React.Component {
     this.setState({ submitting: true, hasSubmitted: false, error: null })
 
     if (valid) {
-      dispatch(MobilizationActions.editMobilization({
+      dispatch(editMobilization({
         id: mobilization.id,
         credentials: auth.credentials,
         mobilization: {
@@ -133,6 +133,8 @@ export default class MobilizationFonts extends React.Component {
         <option value="armata">Armata</option>
         <option value="arvo">Arvo</option>
         <option value="dosis">Dosis</option>
+        <option value="droid-sans">Droid Sans</option>
+        <option value="fjalla-one">Fjalla One</option>
         <option value="glegoo">Glegoo</option>
         <option value="lato">Lato</option>
         <option value="merriweather">Merriweather</option>
