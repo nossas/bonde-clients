@@ -44,7 +44,7 @@ export const add = (credentials, mobilization, next) => {
         .send({ mobilization })
         .end((err, res) => {
           if (err || !res.ok) {
-            reject({ _error: `Responder Error: ${err.status}` })
+            reject({ _error: `Response Error: ${err.status}` })
           } else {
             dispatch(addMobilizationSuccess(res.body))
             // TODO: I don't know if the better place.

@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
-import { editWidget } from '../../../actions'
+import * as WidgetActions from '../../../actions'
 import { FormFooter, InputTag } from '../../../components'
-import { Control, Input, Textarea } from '../../../components/FormUtils'
+import {
+  FormRedux,
+  FormGroup,
+  ControlLabel,
+  FormControl
+} from '../../../../Dashboard/Forms'
 
 import { Base as PressureBase } from '../components/settings'
-
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
@@ -15,21 +19,7 @@ class EmailPage extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = { submitted: false, targets: this.getTargetList() || [] }
-
-    const { pressure_subject, pressure_body } = this.props.widget.settings || {
-      pressure_subject: '',
-      pressure_body: ''
-    }
-
-    this.props.initializeForm({ pressure_subject, pressure_body })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.saving && nextProps.saving && !nextProps.requestError) {
-      this.setState({ submitted: true })
-    }
+    this.state = { targets: this.getTargetList() || [] }
   }
 
   getTargetString() {
@@ -37,39 +27,26 @@ class EmailPage extends Component {
     return targets.join(';')
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-    const { data, valid, touchAll } = this.props      // redux form
-    const { auth, mobilization, widget } = this.props // containers
-    const { editWidgetAction } = this.props           // connect actions
-    if (valid) {
-      const targets = this.getTargetString()
-      editWidgetAction({
-        mobilization_id: mobilization.id,
-        widget_id: widget.id,
-        credentials: auth.credentials,
-        widget: { settings: {
-          ...widget.settings,
-          ...data,
-          targets
-        }}
-      })
-    } else {
-      touchAll()
-    }
+  getTargetList() {
+    const { targets } = this.props
+    return targets && targets.split(';')
+  }
+
+  handleSubmit(values, dispatch) {
+    const { widget, credentials, editWidget, ...props } = this.props
+    const targets = this.getTargetString()
+    const settings = widget.settings || {}
+
+    const data = { ...widget, settings: { ...settings, ...values, targets } }
+    const params = { credentials, mobilization_id: props.mobilization.id }
+    return dispatch(editWidget(data, params))
   }
 
   render() {
-
-    const {
-      location, mobilization, widget, saving,
-      data: { pressure_subject, pressure_body },
-      ...inputProps
-    } = this.props
-    const { handleChange } = this.props
+    const { fields: { pressure_subject, pressure_body }, ...props } = this.props
     return (
-      <PressureBase location={location} mobilization={mobilization} widget={widget}>
-        <form onSubmit={::this.handleSubmit}>
+      <PressureBase location={props.location} mobilization={props.mobilization} widget={props.widget}>
+        <FormRedux onSubmit={::this.handleSubmit} {...props}>
           <InputTag
             label="Alvos"
             values={this.state.targets}
@@ -84,28 +61,25 @@ class EmailPage extends Component {
               return errors
             }}
           />
-          <Control id="email-subject-id" label="Assunto do email" name="pressure_subject" {...inputProps}>
-            <Input type="text" value={pressure_subject} />
-          </Control>
-          <Control id="email-body-id" label="Corpo do email que será enviado" name="pressure_body" {...inputProps}>
-            <Textarea value={pressure_body} />
-          </Control>
-          <FormFooter submitted={this.state.submitted} saving={saving} />
-        </form>
+          <FormGroup controlId="email-subject-id" {...pressure_subject}>
+            <ControlLabel>Assunto do email</ControlLabel>
+            <FormControl type="text" />
+          </FormGroup>
+          <FormGroup controlId="email-body-id" {...pressure_body}>
+            <ControlLabel>Corpo do email que será enviado</ControlLabel>
+            <FormControl type="text" style={{height: '20rem'}} componentClass="textarea" />
+          </FormGroup>
+        </FormRedux>
       </PressureBase>
     )
   }
 }
 
 EmailPage.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired,
-  mobilization: PropTypes.object.isRequired, // MobilizationDashboardContainer
-  widget: PropTypes.object.isRequired, // MobilizationDashboardContainer
-  auth: PropTypes.object.isRequired, // UserDashboardContainer
-  saving: PropTypes.bool.isRequired, // connect redux
-  editWidgetAction: PropTypes.func.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  credentials: PropTypes.object.isRequired,
+  editWidget: PropTypes.func.isRequired,
   // Redux form
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -137,7 +111,5 @@ export default reduxForm({
     ...ownProps.widget.settings || {},
     targets: parseTargetList(ownProps.widget.settings && ownProps.widget.settings.targets)
   },
-  form: state.widgetForm,
-  saving: state.widgets.saving,
-  requestError: state.widgets.error
-}), { editWidget })(EmailPage)
+  credentials: state.auth.credentials,
+}), { ...WidgetActions })(EmailPage)

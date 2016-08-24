@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import BlockTag from './BlockTag'
 
+
 class InputTag extends Component {
 
   constructor(props) {
@@ -9,12 +10,29 @@ class InputTag extends Component {
     this.state = { error: undefined, value: '' }
   }
 
-  handleKeyUp(e) {
-    const { values, onInsertTag, validate, name } = this.props
-    const value = e.target.value
+  componentDidMount() {
+    // Direct reference to autocomplete DOM node
+    // (e.g. <input ref="insert" ... />
+    const node = React.findDOMNode(this.refs.insert)
+    // Evergreen event listener || IE8 event listener
+    const addEvent = node.addEventListener || node.attachEvent
+    addEvent("keypress", this.handleKeyPress.bind(this), false)
+  }
 
-    if (e.key === 'Enter' && values.indexOf(value) === -1) {
-      const errors = validate && validate(e.target.value)
+  componentWillUnmount() {
+    const removeEvent = node.removeEventListener || node.detachEvent
+    // Reduce any memory leaks
+    removeEvent("keypress", this.handleKeyPress.bind(this))
+  }
+
+  handleKeyPress(event) {
+    // [Enter] should not submit the form when choosing an address.
+    if (event.keyCode === 13) {
+      event.preventDefault()
+      const { values, onInsertTag, validate, name } = this.props
+      const value = event.target.value
+      const errors = validate && validate(value)
+
       if (errors && !errors.valid) {
         this.setState({ error: errors.message })
       } else {
@@ -38,12 +56,13 @@ class InputTag extends Component {
         {(label && <label style={{ cursor: "pointer" }} className="h5 bold caps" htmlFor="insert-tag-id">{label}</label>)}
         {(this.state.error && <span className="h5 red ml2">{this.state.error}</span>)}
         <input
+          ref="insert"
           id="insert-tag-id"
           type="text"
           className="field-light block h3 full-width mt1 px1"
           value={this.state.value}
           onChange={(e) => this.setState({ value: e.target.value })}
-          onKeyUp={::this.handleKeyUp}
+          onKeyPress={this.handleKeyPress.bind(this)}
         />
         <BlockTag
           tags={values}
