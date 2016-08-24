@@ -7,10 +7,13 @@ import Raise from './Raise'
 class FormGroup extends Component {
 
   getChildContext() {
-    const { controlId } = this.props
+    const { controlId, layout, value, onChange, onBlur } = this.props
     return {
       $formGroup: {
-        controlId
+        controlId,
+        value,
+        onChange,
+        onBlur
       }
     }
   }

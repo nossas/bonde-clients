@@ -1,20 +1,25 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import ReactColorPicker from 'react-color'
 
 
-const ColorPicker = ({ className, value, onChange, ...props }) => {
+class ColorPicker extends Component {
 
-  return (
-    <div className={classnames("mt1 mb3", className)}>
-      <ReactColorPicker color={value} onChangeComplete={color => onChange(color.hex)} type="sketch" />
-    </div>
-  )
+  render() {
+    const formGroup = this.context.$formGroup
+    const { value, onChange } = formGroup || {}
+    const { className, ...props } = this.props
+
+    return (
+      <div className={classnames("mt1 mb3", className)}>
+        <ReactColorPicker color={value} onChangeComplete={color => onChange(color.hex)} type="sketch" />
+      </div>
+    )
+  }
 }
 
-ColorPicker.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+ColorPicker.contextTypes = {
+  $formGroup: PropTypes.object,
 }
 
 export default ColorPicker

@@ -24,4 +24,19 @@ describe('<FormControl />', () => {
     })
     expect(wrapper.find('input').props().id).to.equal('form-group-id')
   })
+
+  it('should set props field redux-form passed by context', () => {
+    const onChange = () => {}
+    const onBlur = () => {}
+    wrapper.setContext({
+      $formGroup: {
+        value: 'Form Control',
+        onChange: onChange,
+        onBlur: onBlur
+      }
+    })
+    expect(wrapper.find('input').props().value).to.equal('Form Control')
+    expect(wrapper.find('input').props().onChange).to.equal(onChange)
+    expect(wrapper.find('input').props().onBlur).to.equal(onBlur)
+  })
 })

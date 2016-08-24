@@ -5,16 +5,22 @@ import classnames from 'classnames'
 class RadioGroup extends Component {
 
   render() {
-    const { children, className, value, ...props } = this.props
+    const formGroup = this.context.$formGroup
+    const { value, ...field } = formGroup || {}
+    const { children, className } = this.props
 
     return (
       <p className={classnames("mt1", className)}>
         {children && children.map(child => {
-          return React.cloneElement(child, { checked: value, ...props })
+          return React.cloneElement(child, { checked: value, ...field })
         })}
       </p>
     )
   }
+}
+
+RadioGroup.contextTypes = {
+  $formGroup: PropTypes.object,
 }
 
 RadioGroup.propTypes = {
