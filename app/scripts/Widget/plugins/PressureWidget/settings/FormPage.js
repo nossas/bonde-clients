@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import { editWidget } from '../../../actions'
 import { FormFooter } from '../../../components'
@@ -9,29 +8,6 @@ import { Control, Input, RadioButton, ColorInput } from '../../../components/For
 import { Base as PressureBase } from '../components/settings'
 
 
-const widgetFormValidation = (data) => {
-  const errors = { valid: true }
-  if (!data.title_text || data.title_text === "") {
-    errors.title_text = 'Insira um título para o formulário'
-    errors.valid = false
-  }
-  if (!data.button_text) {
-    errors.button_text = 'Insira um texto para o botão'
-    errors.valid = false
-  }
-  return errors
-}
-
-const mapStateToProps = state => (
-  {
-    form: state.widgetForm,
-    saving: state.widgets.saving,
-    requestError: state.widgets.error
-  }
-)
-
-@connect(mapStateToProps, { editWidgetAction: editWidget })
-@reduxForm('widgetForm', widgetFormValidation)
 class FormPage extends Component {
 
   constructor(props, context) {
@@ -126,13 +102,37 @@ FormPage.propTypes = {
   saving: PropTypes.bool.isRequired, // connect redux
   editWidgetAction: PropTypes.func.isRequired,
   // Redux form
-  data: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  touchAll: PropTypes.func.isRequired,
-  initializeForm: PropTypes.func.isRequired,
-  valid: PropTypes.bool.isRequired
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
 }
 
-export default FormPage
+const fields = ['title_text', 'button_text', 'show_counter', 'count_text', 'main_color']
+
+const validate = values => {
+  const errors = {}
+  if (!values.title_text || values.title_text === "") {
+    errors.title_text = 'Insira um título para o formulário'
+  }
+  if (!values.button_text) {
+    errors.button_text = 'Insira um texto para o botão'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'widgetForm',
+  fields,
+  validate
+},
+(state, ownProps) => ({
+  initialValues: {
+    show_counter: 'false',
+    count_text: 'pressões feitas',
+    main_color: '#f23392',
+    ...ownProps.widget.settings || {}
+  },
+  form: state.widgetForm,
+  saving: state.widgets.saving,
+  requestError: state.widgets.error
+}), { editWidget })(FormPage)

@@ -2,26 +2,15 @@ import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
-import { TabMenuItem, CloseButton } from '../components'
+import { TabMenuItem, CloseButton } from '../../components'
 
-import * as Paths from '../Paths'
-import * as Selectors from '../Mobilization/MobilizationSelectors'
+import * as Paths from '../../Paths'
+import * as Selectors from '../MobilizationSelectors'
 import * as MobilizationActions from '../MobilizationActions'
 
-function mobilizationFontsValidation(data) {
-  const errors = { valid: true }
-  if (!data.headerFont) {
-    errors.headerFont = 'Você deve escolher uma fonte para títulos'
-    errors.valid = false
-  }
-  if (!data.bodyFont) {
-    errors.bodyFont = 'Você deve escolher uma fonte para textos'
-    errors.valid = false
-  }
-  return errors
-}
 
-export default class MobilizationFonts extends React.Component {
+class MobilizationFontsPage extends React.Component {
+
   renderMenu() {
     const { mobilization, location } = this.props
     const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
@@ -44,11 +33,10 @@ export default class MobilizationFonts extends React.Component {
 
   render() {
     const fonts = [
-      ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['droid-sans', 'Droid Sans'],
-      ['fjalla-one', 'Fjalla One'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
-      ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'],
-      ['open-sans', 'Open Sans'], ['oswald', 'Oswald'], ['pfdin', 'PF Din'],
-      ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'], ['ubuntu', 'Ubuntu'],
+      ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
+      ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'], ['open-sans', 'Open Sans'],
+      ['oswald', 'Oswald'], ['pfdin', 'PF Din'], ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'],
+      ['ubuntu', 'Ubuntu'],
     ]
     const { fields: { header_font, body_font }, handleSubmit, submitting, error } = this.props
     const { mobilization, credentials, edit, ...props } = this.props
@@ -65,7 +53,7 @@ export default class MobilizationFonts extends React.Component {
               style={{height: '48px'}}
               {...header_font}
             >
-              {fonts.map(font => <option key={`${font[0]}-header`} value={font[0]}>font[1]</option>)}
+              {fonts.map(font => <option key={`${font[0]}-header`} value={font[0]}>{font[1]}</option>)}
             </select>
             <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${header_font.value}-header`)}>
               <h1 className="m0">Os títulos ficarão assim</h1>
@@ -78,7 +66,7 @@ export default class MobilizationFonts extends React.Component {
               style={{height: '48px'}}
               {...body_font}
             >
-              {fonts.map(font => <option key={`${font[0]}-body`} value={font[0]}>font[1]</option>)}
+              {fonts.map(font => <option key={`${font[0]}-body`} value={font[0]}>{font[1]}</option>)}
             </select>
             <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${body_font.value}-body`)}>
               <p className="m0">Os textos ficarão assim.</p>
@@ -111,7 +99,7 @@ MobilizationFontsPage.propTypes = {
   dirty: PropTypes.bool.isRequired
 }
 
-const fields = ['headerFont', 'bodyFont']
+const fields = ['header_font', 'body_font']
 
 const validate = values => {
   const errors = {}
@@ -136,4 +124,4 @@ export default reduxForm({
     initialValues: mobilization || {},
     credentials: state.auth.credentials,
   }
-}, { ...MobilizationActions })(MobilizationFonts)
+}, { ...MobilizationActions })(MobilizationFontsPage)

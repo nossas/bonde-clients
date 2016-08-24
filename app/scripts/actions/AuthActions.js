@@ -1,53 +1,49 @@
 import $ from 'jquery'
 
+import request from 'superagent'
+
 import {
-  AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
   AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE
 } from '../constants/ActionTypes'
 
-export function login(data) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/auth/sign_in`, {
-      method: 'post',
-      data: { ...data },
-      beforeSend: function(jqXHR, settings){
-        dispatch({
-          type: AUTH_LOGIN_REQUEST
-        })
-      },
-      success: function(data, textStatus, jqXHR){
-        const credentials = {
-          "Access-Token": jqXHR.getResponseHeader('Access-Token'),
-          "Expiry": jqXHR.getResponseHeader('Expiry'),
-          "Token-Type": jqXHR.getResponseHeader('Token-Type'),
-          "Uid": jqXHR.getResponseHeader('Uid'),
-          "Client": jqXHR.getResponseHeader('Client')
+
+export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS'
+
+
+const loginSuccess = (user, credentials) => ({ type: AUTH_LOGIN_SUCCESS, user, credentials })
+
+export const login = (values, dispatch) => {
+  /*
+   * this action apply behavior of redux-form 5.3.1 to asyncronos validation
+   * http://redux-form.com/5.3.1/#/examples/submit-validation?_k=kld09s
+   */
+  return new Promise((resolve, reject) => {
+    request
+      .post(`${process.env.API_URL}/auth/sign_in`)
+      .send({...values})
+      .end((err, res) => {
+        if (err && err.status === 401) {
+          reject({ _error: res.body.errors.join('') })
+        } else if (err) {
+          reject({ _error: `Response Error: ${err.status}` })
+        } else {
+          const credentials = {
+            "Access-Token": res.header['access-token'],
+            "Expiry": res.header['expiry'],
+            "Token-Type": res.header['token-type'],
+            "Uid": res.header['uid'],
+            "Client": res.header['client']
+          }
+          const user = res.body.data
+
+          // Create a session into the server-side rendering server
+          request.post(`/api/login`).send({ credentials, user })
+
+          dispatch(loginSuccess(user, credentials))
+          resolve()
         }
-
-        // Create a session into the server-side rendering server
-        $.ajax(`/api/login`, {
-          method: 'post',
-          contentType: "application/json",
-          data: JSON.stringify({
-            credentials: credentials,
-            user: data.data
-          })
-        })
-
-        dispatch({
-          type: AUTH_LOGIN_SUCCESS,
-          user: data.data,
-          credentials: credentials
-        })
-      },
-      error: function(jqXHR, textStatus, errorThrown){
-        dispatch({
-          type: AUTH_LOGIN_FAILURE,
-          error: jqXHR.responseJSON.errors[0]
-        })
-      }
-    })
-  }
+      })
+  })
 }
 
 export function logout() {

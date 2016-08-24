@@ -12,7 +12,7 @@ import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 
 import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'
 
-const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
+/*const mobilizationBasics = createFormReducer('mobilizationBasics', ['name', 'goal'])
 const mobilizationCity = createFormReducer('mobilizationCity', ['colorScheme'])
 const mobilizationAnalytics = createFormReducer('mobilizationAnalytics', ['id'])
 const mobilizationFonts = createFormReducer('mobilizationFonts', ['headerFont', 'bodyFont'])
@@ -24,20 +24,21 @@ const mobilizationSharing = createFormReducer('mobilizationSharing', [
   'facebook_share_title',
   'facebook_share_description',
   'facebook_share_image'
-])
+])*/
 
 export default combineReducers({
+  form: formReducer,
   mobilization,
-  mobilizationBasics,
+  /*mobilizationBasics,
   mobilizationCity,
   mobilizationAnalytics,
   mobilizationFonts,
   mobilizationSharing,
-  mobilizationCustomDomain,
+  mobilizationCustomDomain,*/
   blocks,
   widgets,
-  loginForm,
-  widgetForm,
+  /*loginForm,
+  widgetForm,*/
   auth,
   mobilizationEditor,
   organizations,

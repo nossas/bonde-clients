@@ -24,7 +24,6 @@ describe('MobilizationReducer', () => {
       expect(nextState).to.deep.equal({
         loading: false,
         loaded: true,
-        saving: false,
         data: [
           { id: 1 }
         ]
@@ -36,13 +35,12 @@ describe('MobilizationReducer', () => {
     it('should add mobilization in data', () => {
       const action = {
         type: SUCCESS_ADD_MOBILIZATION,
-        result: { id: 1 }
+        mobilization: { id: 1 }
       }
       const nextState = reducer(undefined, action)
       expect(nextState).to.deep.equal({
         loading: false,
         loaded: false,
-        saving: false,
         data: [ { id: 1 } ]
       })
     })
@@ -53,18 +51,16 @@ describe('MobilizationReducer', () => {
       const initialState = {
         loading: false,
         loaded: true,
-        saving: true,
         data: [ { id: 1 } ]
       }
       const action = {
         type: SUCCESS_EDIT_MOBILIZATION,
-        result: { id: 1, name: 'Lorem' }
+        mobilization: { id: 1, name: 'Lorem' }
       }
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({
         loading: false,
         loaded: true,
-        saving: false,
         data: [ { id: 1, name: 'Lorem' } ]
       })
     })

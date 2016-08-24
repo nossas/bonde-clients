@@ -1,52 +1,42 @@
 import {
-  AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
+  AUTH_LOGIN_REQUEST, AUTH_LOGIN_FAILURE,
   AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE,
   AUTH_LOAD, AUTH_LOAD_SUCCESS, AUTH_LOAD_FAIL
 } from './../constants/ActionTypes'
+
+import { AUTH_LOGIN_SUCCESS } from '../actions/AuthActions'
 
 const initialState = {
   loaded: false
 }
 
 export default function auth(state = initialState, action = {}) {
-  const { type, error } = action
-
-  switch (type) {
+  switch (action.type) {
     case AUTH_LOAD:
-      return {...state,
+      return {
+        ...state,
         loading: true
       }
     case AUTH_LOAD_SUCCESS:
-      return {...state,
+      return {
+        ...state,
         loading: false,
         loaded: true,
         user: action.result && action.result.user,
         credentials: action.result && action.result.credentials
       }
     case AUTH_LOAD_FAIL:
-      return {...state,
+      return {
+        ...state,
         loading: false,
         loaded: false,
         error: action.error
       }
-    case AUTH_LOGIN_REQUEST:
-      return {...state,
-        user: null,
-        submitting: true,
-        error: null
-      }
     case AUTH_LOGIN_SUCCESS:
-      return {...state,
+      return {
+        ...state,
         user: action.user,
-        credentials: action.credentials,
-        submitting: false,
-        error: null
-      }
-    case AUTH_LOGIN_FAILURE:
-      return {...state,
-        user: null,
-        submitting: false,
-        error: error
+        credentials: action.credentials
       }
     case AUTH_LOGOUT_REQUEST:
       return {...state,
@@ -62,7 +52,7 @@ export default function auth(state = initialState, action = {}) {
     case AUTH_LOGOUT_FAILURE:
       return {...state,
         submitting: false,
-        error: error
+        error: action.error
       }
     default:
       return state

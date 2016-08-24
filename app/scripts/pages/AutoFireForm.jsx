@@ -1,8 +1,7 @@
 // TODO: Refactor auto fire, because this is used more Widget settings
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import reduxForm from 'redux-form'
+import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
 import * as Paths from './../Paths'
@@ -14,34 +13,7 @@ import { Menu as PressureWidgetMenu } from './../Widget/plugins/PressureWidget/c
 import * as validator from '../../util/validation-helper'
 
 
-
-function widgetFormValidation(data) {
-  const errors = { valid: true }
-  if (data.id && !/(UA|YT|MO)-\d+-\d+/i.test(data.id)) {
-    errors.id = 'Informe uma ID válida'
-    errors.valid = false
-  }
-  if (!validator.isValidEmail(data.senderEmail)) {
-    errors.senderEmail = 'Informe um e-mail inválido'
-    errors.valid = false
-  }
-  return errors
-}
-
-@connect(state => ({ form: state.widgetForm }))
-@reduxForm('widgetForm', widgetFormValidation)
-export default class AutoFireForm extends React.Component {
-
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    touchAll: PropTypes.func.isRequired,
-    initializeForm: PropTypes.func.isRequired,
-    dirty: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
-  }
+class AutoFireForm extends React.Component {
 
   constructor (props, context) {
     super(props, context)
@@ -216,3 +188,35 @@ export default class AutoFireForm extends React.Component {
     return (this.props.widgets.data.length > 0 ? this.renderPage() : this.renderLoading())
   }
 }
+
+AutoFireForm.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+
+  dirty: PropTypes.bool.isRequired
+}
+
+const fields = ['senderName', 'senderEmail', 'emailSubject', 'emailText']
+
+const validate = values => {
+  const errors = {}
+  if (values.id && !/(UA|YT|MO)-\d+-\d+/i.test(values.id)) {
+    errors.id = 'Informe uma ID válida'
+  }
+  if (!validator.isValidEmail(values.senderEmail)) {
+    errors.senderEmail = 'Informe um e-mail inválido'
+  }
+  return errors
+}
+
+export default reduxForm({
+  form: 'widgetForm',
+  fields,
+  validate
+},
+(state, ownProps) => {
+  return {
+    initialValues: ownProps.widget.settings || {}
+  }
+})(AutoFireForm)
