@@ -13,12 +13,6 @@ export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
 export const FAILURE_FILL_WIDGET = 'FAILURE_FILL_WIDGET'
 
 
-const editWidgetRequest = () => {
-  return {
-    type: REQUEST_EDIT_WIDGET
-  }
-}
-
 const editWidgetSuccess = (data) => {
   return {
     type: SUCCESS_EDIT_WIDGET,
@@ -26,28 +20,22 @@ const editWidgetSuccess = (data) => {
   }
 }
 
-const editWidgetFailure = (error) => {
-  return {
-    type: FAILURE_EDIT_WIDGET,
-    error: error
-  }
-}
-
-
-export const editWidget = ({ mobilization_id, widget_id, credentials, widget }) => {
+export const editWidget = (widget, { credentials, mobilization_id }) => {
   return dispatch => {
-    dispatch(editWidgetRequest())
-    request
-      .put(`${process.env.API_URL}/mobilizations/${mobilization_id}/widgets/${widget_id}`)
-      .set(credentials)
-      .send({ widget })
-      .end((err, res) => {
-        if (err || !res.ok) {
-          dispatch(editWidgetFailure(err || res.body))
-        } else {
-          dispatch(editWidgetSuccess(res.body))
-        }
-      })
+    return new Promise((resolve, reject) => {
+      request
+        .put(`${process.env.API_URL}/mobilizations/${mobilization_id}/widgets/${widget.id}`)
+        .set(credentials)
+        .send({ widget })
+        .end((err, res) => {
+          if (err || !res.ok) {
+            reject({ _error: `Response Error: ${err.status}` })
+          } else {
+            dispatch(editWidgetSuccess(res.body))
+            resolve()
+          }
+        })
+    })
   }
 }
 
