@@ -5,19 +5,20 @@ const parseTarget = target => {
   return { name: targetSplit[0].trim(), email: targetSplit[1].replace('>', '') }
 }
 
-
 const TargetList = ({ targets }) => {
   // TODO: add sheet css
   const targetListContainerStyle = {
-    overflowX: 'auto',
-    height: '75px'
+    overflowX: 'auto'
+  }
+  const targetListWrapperStyle = {
+    width: `${180 * targets.length}px`,
+    display: 'flex'
   }
   const targetListStyle = {
     backgroundColor: '#eee'
   }
   const targetItemStyle = {
     width: '140px',
-    height: '35px',
     float: 'left'
   }
   const targetLabelStyle = {
@@ -30,13 +31,13 @@ const TargetList = ({ targets }) => {
   return (
     <div className="target-list px2 py1" style={targetListStyle}>
       <p className="bold" style={targetLabelStyle}>Quem você vai pressionar</p>
-      <div style={targetListContainerStyle} className="clearfix">
-        <div style={{ width: `${180 * targets.length}px` }}>
+      <div className="clearfix" style={targetListContainerStyle}>
+        <div className="clearfix" style={targetListWrapperStyle}>
           {targets.map(obj => {
             const target = parseTarget(obj)
             return (
               <div className='target-item py1 px2 mr1 bg-white rounded' style={targetItemStyle}>
-                <p className="black h6">
+                <p className="black h6 mb0">
                   <span className="bold flex">{target.name}</span>
                   <span>{target.email}</span>
                 </p>

@@ -51,6 +51,19 @@ export default class DraftWidget extends React.Component {
       }
     }
 
+    if (kind === 'pressure') {
+      const { auth: { user } } = this.props
+      widgetParams = {
+        ...widgetParams,
+        settings: {
+          main_color: '#f23392',
+          title_text: 'Envie um e-mail para quem pode tomar essa decisão',
+          button_text: 'Enviar e-mail',
+          reply_email: user.email
+        }
+      }
+    }
+
     this.setState({loading: true})
     // TODO: change it to use the new pattern for reducer actions
     bindedWidgetActions.editWidget({

@@ -8,9 +8,20 @@ import * as Paths from '../Paths'
 import * as Selectors from '../Mobilization/MobilizationSelectors'
 import * as MobilizationActions from '../MobilizationActions'
 
+function mobilizationFontsValidation(data) {
+  const errors = { valid: true }
+  if (!data.headerFont) {
+    errors.headerFont = 'Você deve escolher uma fonte para títulos'
+    errors.valid = false
+  }
+  if (!data.bodyFont) {
+    errors.bodyFont = 'Você deve escolher uma fonte para textos'
+    errors.valid = false
+  }
+  return errors
+}
 
-class MobilizationFontsPage extends React.Component {
-
+export default class MobilizationFonts extends React.Component {
   renderMenu() {
     const { mobilization, location } = this.props
     const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
@@ -33,10 +44,11 @@ class MobilizationFontsPage extends React.Component {
 
   render() {
     const fonts = [
-      ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
-      ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'], ['open-sans', 'Open Sans'],
-      ['oswald', 'Oswald'], ['pfdin', 'PF Din'], ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'],
-      ['ubuntu', 'Ubuntu'],
+      ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['droid-sans', 'Droid Sans'],
+      ['fjalla-one', 'Fjalla One'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
+      ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'],
+      ['open-sans', 'Open Sans'], ['oswald', 'Oswald'], ['pfdin', 'PF Din'],
+      ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'], ['ubuntu', 'Ubuntu'],
     ]
     const { fields: { header_font, body_font }, handleSubmit, submitting, error } = this.props
     const { mobilization, credentials, edit, ...props } = this.props

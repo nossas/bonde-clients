@@ -80,14 +80,15 @@ class Match extends Component {
         title_text,
         labelChoices1, labelChoicesA,
         choices1, choicesA
-      }}
+      }},
+      mobilization: { header_font: headerFont }
     } = this.props
     const optionsChoices1 = choices1 ? choices1.split(',') : []
     const optionsChoicesA = choicesA ? choicesA.split(',') : []
 
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
-        <div className="match-widget p3 bg-darken-3 relative">
+        <div className={`match-widget p3 bg-darken-3 relative ${headerFont}-header`}>
           <h2 className="mt0 mb3 center">{title_text}</h2>
           <Choices
             title={labelChoices1}
