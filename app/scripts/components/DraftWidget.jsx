@@ -20,14 +20,14 @@ export default class DraftWidget extends React.Component {
   }
 
   updateKind(kind) {
-    const { dispatch, auth } = this.props
+    const { dispatch, auth, widget: widgetOriginal } = this.props
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    let widgetParams = { kind }
+    let widget = { ...widgetOriginal, kind }
+    let assignments = {}
 
     if (kind === 'form') {
-      widgetParams = {
-        ...widgetParams,
-        settings: {email_text: 'Obrigado por apostar na força da ação coletiva '
+      assignments = {
+        settings: { email_text: 'Obrigado por apostar na força da ação coletiva '
           + 'em rede. Sua participação é muito importante e, agora, precisamos da '
           + 'sua ajuda para que mais gente colabore com esta mobilização. '
           + 'Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço'
@@ -36,15 +36,13 @@ export default class DraftWidget extends React.Component {
     }
 
     if (kind === 'content') {
-      widgetParams = {
-        ...widgetParams,
-        settings: {content: 'Clique aqui para editar...'}
+      assignments = {
+        settings: { content: 'Clique aqui para editar...' }
       }
     }
 
     if (kind === 'match') {
-      widgetParams = {
-        ...widgetParams,
+      assignments = {
         settings: {
           title_text: 'Clique para configurar suas combinações...',
         }
@@ -53,8 +51,7 @@ export default class DraftWidget extends React.Component {
 
     if (kind === 'pressure') {
       const { auth: { user } } = this.props
-      widgetParams = {
-        ...widgetParams,
+      assignments = {
         settings: {
           main_color: '#f23392',
           title_text: 'Envie um e-mail para quem pode tomar essa decisão',
@@ -63,15 +60,12 @@ export default class DraftWidget extends React.Component {
         }
       }
     }
-
+    Object.assign(widget, assignments)
     this.setState({loading: true})
+
     // TODO: change it to use the new pattern for reducer actions
-    bindedWidgetActions.editWidget({
-      mobilization_id: this.props.mobilization.id,
-      widget_id: this.props.widget.id,
-      widget: widgetParams,
-      credentials: auth.credentials
-    })
+    const params = { mobilization_id: this.props.mobilization.id, credentials: auth.credentials }
+    bindedWidgetActions.editWidget(widget, params)
   }
 
   renderLoading() {
