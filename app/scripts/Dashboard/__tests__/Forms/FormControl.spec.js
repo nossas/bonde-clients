@@ -39,4 +39,9 @@ describe('<FormControl />', () => {
     expect(wrapper.find('input').props().onChange).to.equal(onChange)
     expect(wrapper.find('input').props().onBlur).to.equal(onBlur)
   })
+
+  it('should resize to 20rem when componentClass is textarea', () => {
+    wrapper.setProps({ componentClass: 'textarea' })
+    expect(wrapper.find('textarea').props().style.height).to.equal('20rem')
+  })
 })

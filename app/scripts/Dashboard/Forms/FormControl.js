@@ -15,11 +15,13 @@ class FormControl extends Component {
       ...props
     } = this.props
 
+    const componentStyle = { height: Component === 'textarea' ? '20rem' : '48px' }
+
     return (
       <Component
         id={id}
         className={classnames('field-light block h3 mt1 px1 full-width', className)}
-        style={{height: '48px'}}
+        style={componentStyle}
         {...props}
         // passed by $formGroup with redux-form field props
         {...field}
