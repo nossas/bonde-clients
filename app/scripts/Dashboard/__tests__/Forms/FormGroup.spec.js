@@ -67,4 +67,11 @@ describe('<FormGroup />', () => {
     expect(label.props().onChange).to.equal(onChange)
     expect(label.props().onBlur).to.equal(onBlur)
   })
+
+  it('should render with padding right if passed layout is inline', () => {
+    wrapper.setProps({ layout: 'inline' })
+    expect(wrapper.find('div').props().style).to.deep.equal({
+      paddingRight: '1rem'
+    })
+  })
 })

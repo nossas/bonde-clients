@@ -19,10 +19,11 @@ class FormGroup extends Component {
   }
 
   render() {
-    const { children, className, error, touched } = this.props
+    const { children, className, error, touched, layout } = this.props
+    const styleGroup = layout === 'inline' ? { paddingRight: '1rem' } : null
 
     return (
-      <div className={classnames('mt1 mb2', className)}>
+      <div className={classnames(className, 'mt1 mb2')} style={styleGroup}>
         {children}
         {error && touched && <Raise error={error} />}
       </div>
@@ -31,10 +32,15 @@ class FormGroup extends Component {
 }
 
 FormGroup.propTypes = {
-  controlId: PropTypes.string.isRequired,
+  controlId: PropTypes.string,
   className: PropTypes.string,
   error: PropTypes.string,
-  touched: PropTypes.bool
+  touched: PropTypes.bool,
+  layout: PropTypes.oneOf(['inline', 'block'])
+}
+
+FormGroup.defaultProps = {
+  layout: 'block'
 }
 
 FormGroup.childContextTypes = {
