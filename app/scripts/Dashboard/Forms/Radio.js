@@ -6,7 +6,7 @@ class Radio extends Component {
 
   render() {
     const { children, layout, className, checked, value, onChange, ...props } = this.props
-    const id = `${value}-id`
+    const id = `radio-${value}-id`
 
     const classes = layout === 'horizontal' ? 'mr1' : layout === 'vertical' ? 'block' : null
 
