@@ -67,7 +67,7 @@ class EmailPage extends Component {
           </FormGroup>
           <FormGroup controlId="email-body-id" {...pressure_body}>
             <ControlLabel>Corpo do email que será enviado</ControlLabel>
-            <FormControl type="text" style={{height: '20rem'}} componentClass="textarea" />
+            <FormControl type="text" componentClass="textarea" />
           </FormGroup>
         </FormRedux>
       </PressureBase>
