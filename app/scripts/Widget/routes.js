@@ -4,10 +4,13 @@ import { Route } from 'react-router'
 import { SettingsContainer } from './containers'
 
 import {
-  AutoFireForm,
   DonationWidgetSettings,
   ExportWidgetData
-} from './../pages'
+} from '../pages'
+
+import {
+  AutoFireForm
+} from './settings'
 
 import FormWidgetRoutes from './plugins/Form/routes'
 import MatchWidgetRoutes from './plugins/Match/routes'
