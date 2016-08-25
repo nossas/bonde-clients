@@ -12,15 +12,14 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Raven from 'raven-js'
 
-// See: https://github.com/getsentry/raven-js/issues/73
-const ravenOptions = {
-  ignoreErrors: [ 'WRONG_DOCUMENT_ERR' ]
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  // See: https://github.com/getsentry/raven-js/issues/73
+  const ravenOptions = { ignoreErrors: ['WRONG_DOCUMENT_ERR'] }
+  const sentryApp = 'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008'
+  Raven.config(sentryApp, ravenOptions).install()
+} else {
+  console.log('Supress errors tracking on sentry when development environment.');
 }
-
-Raven.config(
-  'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008',
-  ravenOptions
-).install()
 
 const history = new BrowserHistory();
 const client = new ApiClient();
