@@ -4,10 +4,12 @@ import classnames from 'classnames'
 import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
 
-import { Form as FormWidget, Match as MatchWidget } from '../Widget/plugins'
-import DonationWidget from './DonationWidget.jsx'
-
-import { PressureWidget } from '../Widget/plugins'
+import {
+  Form as FormWidget,
+  Match as MatchWidget,
+  Donation as DonationWidget,
+  PressureWidget
+} from '../Widget/plugins'
 
 
 const Widget = (props) => {

@@ -15,6 +15,7 @@ import {
 import FormWidgetRoutes from './plugins/Form/routes'
 import MatchWidgetRoutes from './plugins/Match/routes'
 import PressureRoutes from './plugins/PressureWidget/routes'
+import DonationRoutes from './plugins/Donation/routes'
 
 const path = '/widgets'
 const param = '/:widget_id'
@@ -26,6 +27,7 @@ const WidgetRoutes = parent => {
       {FormWidgetRoutes(`${parent}${defaultPath}`)}
       {MatchWidgetRoutes(`${parent}${defaultPath}`)}
       {PressureRoutes(`${parent}${defaultPath}`)}
+      {DonationRoutes(`${parent}${defaultPath}`)}
 
       <Route path={`${parent}${defaultPath}/autofire`} component={AutoFireFormPage} />
       <Route path={`${parent}${defaultPath}/export`} component={ExportWidgetData} />

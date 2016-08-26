@@ -12,7 +12,7 @@
 
   .icon-payment-recurring,
   .icon-payment-unique {
-    background: 50% 50% url('./../scripts/components/DonationWidget/donation-recurring.png') transparent no-repeat;
+    background: 50% 50% url('./../scripts/Widget/plugins/Donation/assets/donation-recurring.png') transparent no-repeat;
     background-size: contain;
     width: 2.2rem;
     height: 2.2rem;
@@ -24,7 +24,7 @@
 
   }
   .icon-payment-unique {
-    background-image: url('./../scripts/components/DonationWidget/donation-unique.png');
+    background-image: url('./../scripts/Widget/plugins/Donation/assets/donation-unique.png');
   }
 
 

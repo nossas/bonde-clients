@@ -1,4 +1,4 @@
-import { TRANSACTION_DONE } from '../constants/ActionTypes'
+import { TRANSACTION_DONE } from '../../../constants/ActionTypes'
 import $ from 'jquery'
 
 export function finishTransaction (params) {

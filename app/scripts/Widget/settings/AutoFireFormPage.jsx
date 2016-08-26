@@ -6,9 +6,10 @@ import { reduxForm } from 'redux-form'
 // This is required to "abstract" the strategy of which Menu is needs to be shown.
 // And remove the conditions in lines between 48 and 53. May be isolate it in container.
 //
-import { DonationWidgetMenu, Loading } from '../../components'
+import { Loading } from '../../components'
 import { Menu as FormWidgetMenu } from '../plugins/Form/components'
 import { Menu as PressureWidgetMenu } from '../plugins/PressureWidget/components/settings'
+import { Menu as DonationWidgetMenu } from '../plugins/Donation/components/settings'
 
 import * as validator from '../../../util/validation-helper'
 import * as WidgetActions from '../actions'

@@ -1,25 +1,18 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
 import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-// import { bindActionCreators } from 'redux'
-import * as Paths from './../Paths'
-import * as DonationActions from './../actions/DonationActions'
-import TellAFriend from './shared/TellAFriend.jsx'
+import { connect } from 'react-redux'
+import classnames from 'classnames'
+
+import * as Paths from '../../../Paths'
+import * as DonationActions from './actions'
+import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 
 @reactMixin.decorate(Navigation)
 
 // @connect(state => ({ auth: state.auth, form: state.loginForm }))
 
-export default class DonationWidget extends React.Component {
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    configurable: PropTypes.bool,
-    hasNewField: PropTypes.bool
-  }
-
+class Donation extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -261,3 +254,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     )
   }
 }
+
+Donation.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool.isRequired,
+  configurable: PropTypes.bool,
+  hasNewField: PropTypes.bool
+}
+
+export default Donation

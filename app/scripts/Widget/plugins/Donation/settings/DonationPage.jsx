@@ -2,10 +2,11 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { reduxForm } from 'redux-form'
 
-import * as WidgetActions from './../Widget/actions'
-import * as Paths from '../Paths'
+import * as WidgetActions from '../../../actions'
+import * as Paths from '../../../../Paths'
 
-import { DonationWidgetMenu, Loading, CloseButton, Label} from './../components'
+import { Loading, CloseButton } from '../../../../components'
+import Menu from '../components/settings/Menu.jsx'
 
 import {
   FormRedux,
@@ -16,14 +17,14 @@ import {
   ColorPicker,
   RadioGroup,
   Radio
-} from '../Dashboard/Forms'
+} from '../../../../Dashboard/Forms'
 
 import {
   HorizontalLayout
-} from '../Dashboard/Grids'
+} from '../../../../Dashboard/Grids'
 
 
-class DonationWidgetSettings extends React.Component {
+class DonationPage extends React.Component {
 
   handleSubmit(values, dispatch) {
     const { widget, credentials, editWidget, ...props } = this.props
@@ -45,7 +46,7 @@ class DonationWidgetSettings extends React.Component {
 
     return (
       <div className="flex-auto flex flex-column bg-silver gray relative">
-        <DonationWidgetMenu mobilization={props.mobilization} widget={props.widget} {...props} />
+        <Menu mobilization={props.mobilization} widget={props.widget} {...props} />
         <div className="p3 flex-auto overflow-scroll">
           <FormRedux onSubmit={::this.handleSubmit} {...props}>
             <FormGroup controlId="title-text-id" {...title_text}>
@@ -131,7 +132,6 @@ class DonationWidgetSettings extends React.Component {
               <ControlLabel>Conta bancária</ControlLabel>
               <HelpBlock className="mb3">Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</HelpBlock>
             </FormGroup>
-
           </FormRedux>
         </div>
         <CloseButton dirty={props.dirty} path={Paths.editMobilization(props.mobilization.id)} />
@@ -140,7 +140,7 @@ class DonationWidgetSettings extends React.Component {
   }
 }
 
-DonationWidgetSettings.propTypes = {
+DonationPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -182,4 +182,4 @@ export default reduxForm({
     ...ownProps.widget.settings || {}
   },
   credentials: state.auth.credentials,
-}), { ...WidgetActions })(DonationWidgetSettings)
+}), { ...WidgetActions })(DonationPage)

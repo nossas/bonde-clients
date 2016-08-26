@@ -11,12 +11,12 @@ import {
 } from './../actions/ExportActions'
 
 import {
-  DonationWidgetMenu,
   Loading,
   CloseButton
 } from './../components'
 
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
+import { Menu as DonationWidgetMenu } from '../Widget/plugins/Donation/components/settings'
 
 class ExportWidgetData extends React.Component {
   static propTypes = {
