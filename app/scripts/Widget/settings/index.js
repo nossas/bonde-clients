@@ -1,1 +1,1 @@
-export { default as AutoFireForm } from './AutoFireForm.jsx'
+export { default as AutoFireFormPage } from './AutoFireFormPage.jsx'

@@ -9,7 +9,7 @@ import {
 } from '../pages'
 
 import {
-  AutoFireForm
+  AutoFireFormPage
 } from './settings'
 
 import FormWidgetRoutes from './plugins/Form/routes'
@@ -27,7 +27,7 @@ const WidgetRoutes = parent => {
       {MatchWidgetRoutes(`${parent}${defaultPath}`)}
       {PressureRoutes(`${parent}${defaultPath}`)}
 
-      <Route path={`${parent}${defaultPath}/autofire`} component={AutoFireForm} />
+      <Route path={`${parent}${defaultPath}/autofire`} component={AutoFireFormPage} />
       <Route path={`${parent}${defaultPath}/export`} component={ExportWidgetData} />
       <Route path={`${parent}${defaultPath}/donation`} component={DonationWidgetSettings} />
     </Route>

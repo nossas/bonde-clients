@@ -28,12 +28,12 @@ Settings.propTypes = {
   children: PropTypes.object,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
+  credentials: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (globalState, ownProps) => {
-  return {
-    widget: WidgetSelectors.getWidget(globalState, ownProps),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  widget: WidgetSelectors.getWidget(state, ownProps),
+  credentials: state.auth.credentials
+})
 
 export default connect(mapStateToProps)(Settings)

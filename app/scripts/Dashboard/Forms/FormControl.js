@@ -36,7 +36,7 @@ FormControl.contextTypes = {
 
 FormControl.propTypes = {
   id: PropTypes.string,
-  componentClass: PropTypes.element,
+  componentClass: PropTypes.string,
 }
 
 FormControl.defaultProps = {
