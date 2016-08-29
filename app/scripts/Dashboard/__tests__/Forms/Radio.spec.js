@@ -18,9 +18,9 @@ describe('<Radio />', () => {
 
   it('should mount id with `$radio-{value}-id` passed to set label and input', () => {
     wrapper.setProps({ value: 'dummy' })
-    expect(wrapper.find('label').props().htmlFor).to.equal('dummy-id')
+    expect(wrapper.find('label').props().htmlFor).to.equal('radio-dummy-id')
     const input = wrapper.find('label').find('input')
-    expect(input.props().id).to.equal('dummy-id')
+    expect(input.props().id).to.equal('radio-dummy-id')
   })
 
   it('should mark checked is true when props.checked equals props.value', () => {

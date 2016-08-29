@@ -32,16 +32,14 @@ describe('<InputTag />', () => {
   })
 
   it('should render error when keyUp Enter and validade return is false', () => {
-    // simulate click with input empty
-    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
-
-    expect(wrapper.find('span.red').text()).to.equal('Dismatch error')
+    wrapper.find('input').simulate('keyPress', { charCode: 13 })
+    expect(wrapper.find('.red').text()).to.equal('Dismatch error')
   })
 
   it('should clean and call onInsertTag when keyUp Enter and validade return is true', () => {
     // simulate click with fill input
     wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
-    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
+    wrapper.find('input').simulate('keyPress', { charCode: 13 })
 
     expect(wrapper.props().values).to.deep.equal(['Tag 1', 'Tag 2', 'Igor Santos <igor@nossascidades.org>'])
     expect(wrapper.instance().state.value).to.equal('')
