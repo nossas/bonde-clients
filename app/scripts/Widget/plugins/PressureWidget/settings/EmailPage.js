@@ -28,8 +28,8 @@ class EmailPage extends Component {
   }
 
   getTargetList() {
-    const { targets } = this.props
-    return targets && targets.split(';')
+    const { fields: { targets } } = this.props
+    return targets && targets.value.split(';')
   }
 
   handleSubmit(values, dispatch) {
@@ -99,8 +99,6 @@ const validate = values => {
   return errors
 }
 
-const parseTargetList = (targets = '') => targets.split(';')
-
 export default reduxForm({
   form: 'widgetForm',
   fields,
@@ -109,7 +107,7 @@ export default reduxForm({
 (state, ownProps) => ({
   initialValues: {
     ...ownProps.widget.settings || {},
-    targets: parseTargetList(ownProps.widget.settings && ownProps.widget.settings.targets)
+    targets: ownProps.widget.settings && ownProps.widget.settings.targets
   },
   credentials: state.auth.credentials,
 }), { ...WidgetActions })(EmailPage)
