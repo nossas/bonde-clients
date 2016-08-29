@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import ReactS3Uploader from 'react-s3-uploader'
 
