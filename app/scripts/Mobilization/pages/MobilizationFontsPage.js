@@ -1,21 +1,45 @@
-import React, { PropTypes } from 'react'
+import { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
-
-import { TabMenuItem, CloseButton } from '../../components'
 
 import * as Paths from '../../Paths'
 import * as Selectors from '../MobilizationSelectors'
 import * as MobilizationActions from '../MobilizationActions'
+import { TabMenuItem } from '../../components'
+import { FontPreview } from '../components/settings'
+import {
+  FormRedux,
+  FormGroup,
+  ControlLabel,
+  FormDropdown
+} from '../../Dashboard/Forms'
 
+const fonts = [
+  ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['droid-sans', 'Droid Sans'],
+  ['fjalla-one', 'Fjalla One'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
+  ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'],
+  ['open-sans', 'Open Sans'], ['oswald', 'Oswald'], ['pfdin', 'PF Din'],
+  ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'], ['ubuntu', 'Ubuntu'],
+]
 
-class MobilizationFontsPage extends React.Component {
+const MobilizationFontsPage = ({
+  ...rest,
+  fields: {
+    header_font: headerFont,
+    body_font: bodyFont
+  },
+  mobilization,
+  credentials,
+  location,
+  // Actions
+  edit
+}) => {
+  const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
+  const handleSubmit = (values, dispatch) =>
+    dispatch(edit(credentials, { ...mobilization, ...values }))
 
-  renderMenu() {
-    const { mobilization, location } = this.props
-    const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
-
-    return (
+  return (
+    <div className="flex-auto bg-silver gray relative">
       <div className="bg-white px3 clearfix">
         <h2 className="mb3">Estilo da Página</h2>
         <div>
@@ -28,80 +52,56 @@ class MobilizationFontsPage extends React.Component {
           </ul>
         </div>
       </div>
-    )
-  }
 
-  render() {
-    const fonts = [
-      ['armata', 'Armata'], ['arvo', 'Arvo'], ['dosis', 'Dosis'], ['droid-sans', 'Droid Sans'],
-      ['fjalla-one', 'Fjalla One'], ['glegoo', 'Glegoo'], ['lato', 'Lato'],
-      ['merriweather', 'Merriweather'], ['merriweather-sans', 'Merriweather Sans'],
-      ['open-sans', 'Open Sans'], ['oswald', 'Oswald'], ['pfdin', 'PF Din'],
-      ['proxima-nova', 'Proxima Nova'], ['pt-mono', 'PT Mono'], ['ubuntu', 'Ubuntu'],
-    ]
-    const { fields: { header_font, body_font }, handleSubmit, submitting, error } = this.props
-    const { mobilization, credentials, edit, ...props } = this.props
+      <div className="py3 px4">
+        <FormRedux onSubmit={handleSubmit} {...rest}>
+          <FormGroup controlId="headerFont" {...headerFont}>
+            <ControlLabel>Fonte dos títulos</ControlLabel>
+            <FormDropdown>
+              {fonts.map(font =>
+                <option key={`${font[0]}-header`} value={font[0]}>{font[1]}</option>
+              )}
+            </FormDropdown>
+          </FormGroup>
+          <FontPreview
+            text="Os títulos ficarão assim"
+            classNames={[`${headerFont.value}-header`]}
+          />
 
-    return (
-      <div className="flex-auto bg-silver gray relative">
-        { this.renderMenu() }
-        <div className="py3 px4">
-          <form onSubmit={handleSubmit((values, dispatch) => dispatch(edit(credentials, { ...mobilization, ...values })))}>
-            <label className="block h4 caps bold mb1">Fonte dos títulos</label>
-            { header_font.error && header_font.touched && <span className="h5 red bold">{header_font.error}</span> }
-            <select
-              className="field-light block h3 mt1 mb2"
-              style={{height: '48px'}}
-              {...header_font}
-            >
-              {fonts.map(font => <option key={`${font[0]}-header`} value={font[0]}>{font[1]}</option>)}
-            </select>
-            <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${header_font.value}-header`)}>
-              <h1 className="m0">Os títulos ficarão assim</h1>
-            </div>
-
-            <label className="block h4 caps bold mb1">Fonte do texto</label>
-            { body_font.error && body_font.touched && <span className="h5 red bold">{body_font.error}</span> }
-            <select
-              className="field-light block h3 mt1 mb2"
-              style={{height: '48px'}}
-              {...body_font}
-            >
-              {fonts.map(font => <option key={`${font[0]}-body`} value={font[0]}>{font[1]}</option>)}
-            </select>
-            <div className={classnames('bg-white border rounded p2 mb3 lg-col-6', `${body_font.value}-body`)}>
-              <p className="m0">Os textos ficarão assim.</p>
-            </div>
-
-            <div className="clearfix">
-              <input
-                type="submit"
-                className="caps button bg-aqua h3 mt1"
-                disabled={submitting || !props.dirty}
-                value={submitting ? 'Salvando...' : 'Salvar'} />
-            </div>
-          </form>
-        </div>
-        <CloseButton dirty={props.dirty} path={Paths.editMobilization(mobilization.id)} />
+          <FormGroup controlId="bodyFont" {...bodyFont}>
+            <ControlLabel>Fonte do texto</ControlLabel>
+            <FormDropdown>
+              {fonts.map(
+                font => <option key={`${font[0]}-body`} value={font[0]}>{font[1]}</option>
+              )}
+            </FormDropdown>
+          </FormGroup>
+          <FontPreview
+            componentClass='p'
+            text="Os títulos ficarão assim"
+            classNames={[`${bodyFont.value}-body`]}
+          />
+        </FormRedux>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 MobilizationFontsPage.propTypes = {
-  fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-
   mobilization: PropTypes.object.isRequired,
   credentials: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  dirty: PropTypes.bool.isRequired
+  fields: PropTypes.shape({
+    header_font: PropTypes.object.isRequired,
+    body_font: PropTypes.object.isRequired
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  // Actions
+  edit: PropTypes.func.isRequired
 }
 
 const fields = ['header_font', 'body_font']
-
 const validate = values => {
   const errors = {}
   if (!values.header_font) {
@@ -112,17 +112,17 @@ const validate = values => {
   }
   return errors
 }
-
-export default reduxForm({
-  form: 'mobilizationForm',
-  fields,
-  validate
-},
-(state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   const mobilization = Selectors.getMobilization(state, ownProps)
   return {
-    mobilization: mobilization,
+    mobilization,
     initialValues: mobilization || {},
-    credentials: state.auth.credentials,
+    credentials: state.auth.credentials
   }
-}, { ...MobilizationActions })(MobilizationFontsPage)
+}
+
+export default reduxForm(
+  { form: 'mobilizationForm', fields, validate },
+  mapStateToProps,
+  { ...MobilizationActions }
+)(MobilizationFontsPage)
