@@ -1,82 +1,92 @@
-import React, { PropTypes } from 'react'
-import classnames from 'classnames'
+import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
-
-import { CloseButton, Loading } from '../../components'
+import reactMixin from 'react-mixin'
 
 import * as Paths from '../../Paths'
 import * as MobilizationActions from '../MobilizationActions'
+import { Loading } from '../../components'
+import {
+  FormRedux,
+  FormGroup,
+  ControlLabel,
+  FormDropdown
+} from '../../Dashboard/Forms'
 
-
+//
+// TODO: To decorate page with Navigation without class statement, is need to upgrade react-router.
+// See: http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
+// This is used to navigate back to history. This is still be necessary? Or manipulate
+// it from <FormRedux> component may be contemplates it?
+//
 @reactMixin.decorate(Navigation)
-class MobilizationCityPage extends React.Component {
+class MobilizationCityPage extends Component {
+  render() {
+    const {
+      ...rest,
+      fields: { organization_id: organizationId },
+      submitting,
+      credentials,
+      mobilization,
+      organizations,
+      location,
+      // Actions
+      edit
+    } = this.props
 
-  handleCancelClick(event) {
-    event.preventDefault()
-    this.goBack()
-  }
+    const isNewMobilization = /cityNew/.test(location.pathname)
+    const next = !isNewMobilization ? undefined :
+      mobilization => this.transitionTo(Paths.editMobilization(mobilization.id))
+    const handleSubmit = (values, dispatch) =>
+      dispatch(edit(credentials, { ...mobilization, ...values }, next))
 
-  render(){
-    const { fields: { organization_id }, submitting, handleSubmit, error } = this.props
-    const { edit, credentials, mobilization, organizations, ...props } = this.props
-
-    const isNewMobilization = /cityNew/.test(props.location.pathname)
-    const next = isNewMobilization ? (mobilization) => this.transitionTo(Paths.editMobilization(mobilization.id)) : undefined
-
-    if (submitting && !mobilization) {
-      return <Loading />
-    }
-
-    return (
+    return submitting && !mobilization ? <Loading /> : (
       <div className="p3">
         {isNewMobilization ? <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3> : null}
         <div className="bg-white border rounded lg-col-6 mx-auto p3">
-          <form onSubmit={handleSubmit((values, dispatch) => dispatch(edit(credentials, { ...mobilization, ...values }, next)))}>
-            <label className="block h4 caps bold mb1">Cidade</label>
-            {organization_id.error && organization_id.touched && <span className="red ml2">{organization_id.error}</span>}
-            <select
-              className="field-light block h3 full-width mt1 mb2"
-              style={{height: '48px'}}
-              {...organization_id}
-            >
-              {organizations.data.map((organization) => <option key={organization.id} value={organization.id}>{organization.city}</option>)}
-            </select>
-            <div className="clearfix">
-              {!isNewMobilization ?
-                <button className="caps button bg-darken-3 h3 mt1 p2 mr2" disabled={submitting} onClick={::this.handleCancelClick}>Cancelar</button>
-                : null
-              }
-              <input
-                type="submit"
-                className={classnames("caps button bg-aqua h3 mt1 p2", (isNewMobilization ? 'full-width' : null))}
-                disabled={submitting || !props.dirty}
-                value={submitting ? "Salvando..." : (isNewMobilization ? 'Continuar' : 'Salvar')}
-              />
-            </div>
-            {error && <div className="red center mt2">{error}</div>}
-          </form>
+          <FormRedux onSubmit={handleSubmit} {...rest}>
+            <FormGroup controlId="organizationId" {...organizationId}>
+              <ControlLabel>Cidade</ControlLabel>
+              <FormDropdown>
+                {organizations.data.map(organization =>
+                  <option key={organization.id} value={organization.id}>
+                    {organization.city}
+                  </option>
+                )}
+              </FormDropdown>
+            </FormGroup>
+          </FormRedux>
         </div>
-        {!isNewMobilization && <CloseButton dirty={props.dirty} path={Paths.editMobilization(mobilization.id)} />}
       </div>
     )
   }
 }
 
 MobilizationCityPage.propTypes = {
-  fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-
-  mobilization: PropTypes.object,
-  organizations: PropTypes.object.isRequired,
   credentials: PropTypes.object.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  mobilization: PropTypes.shape({
+    id: PropTypes.number.isRequired
+  }),
+  fields: PropTypes.shape({
+    organization_id: PropTypes.object.isRequired
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  organizations: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        city: PropTypes.string.isRequired
+      }).isRequired
+    )
+  }).isRequired,
+  // Actions
+  edit: PropTypes.func.isRequired
 }
 
 const fields = ['organization_id']
-
 const validate = values => {
   const errors = {}
   if (!values.organization_id) {
@@ -84,13 +94,13 @@ const validate = values => {
   }
   return errors
 }
+const mapStateToProps = (state, onwProps) => ({
+  initialValues: onwProps.mobilization || {},
+  credentials: state.auth.credentials
+})
 
 export default reduxForm({
   form: 'mobilizationForm',
   fields,
   validate
-},
-(state, onwProps) => ({
-  initialValues: onwProps.mobilization || {},
-  credentials: state.auth.credentials
-}), { ...MobilizationActions })(MobilizationCityPage)
+}, mapStateToProps, MobilizationActions)(MobilizationCityPage)
