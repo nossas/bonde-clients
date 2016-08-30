@@ -1,21 +1,21 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { FormRedux } from '../../Forms'
 
-
-describe('<FormRedux />', () => {
+describe('Dashboard/Forms/FormRedux', () => {
   let wrapper
-  const stubProps = {
+  const props = {
     onSubmit: (values, dispatch) => {},
     handleSubmit: (values, dispatch) => {},
     submitting: false,
-    submitFailed: false
+    submitFailed: false,
+    dirty: false
   }
 
   beforeEach(() => {
-    wrapper = mount(<FormRedux {...stubProps} />)
+    wrapper = shallow(<FormRedux {...props} />)
   })
 
   it('should render ok by default', () => {
@@ -26,5 +26,26 @@ describe('<FormRedux />', () => {
     wrapper.setProps({ submitting: true })
     wrapper.setProps({ submitting: false, submitFailed: false })
     expect(wrapper.instance().state.submitted).to.equal(true)
+  })
+
+  describe('default', () => {
+    it('className prop should be a string', () => {
+      expect(wrapper.props().className).to.be.a.string
+    })
+    it('should contains className prop as empty string', () => {
+      expect(wrapper.props().className).to.equal('')
+    })
+  })
+
+  describe('when pass className prop', () => {
+    const className = 'foo bar'
+    const cloneProps = props
+    const customProps = { className }
+    before(() => {
+      wrapper = shallow(<FormRedux {...Object.assign(cloneProps, customProps)} />)
+    })
+    it('should contains className prop as empty string', () => {
+      expect(wrapper.props().className).to.equal(className)
+    })
   })
 })

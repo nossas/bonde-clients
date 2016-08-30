@@ -25,11 +25,11 @@ class FormRedux extends Component {
   }
 
   render() {
-    const { children, onSubmit, handleSubmit, submitting, dirty, inline } = this.props
+    const { children, onSubmit, handleSubmit, submitting, dirty, inline, className } = this.props
     const { submitted } = this.state
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={className}>
         {children}
         {!inline && <ControlButtons {...{ submitted, submitting, dirty }} />}
       </form>
@@ -38,6 +38,7 @@ class FormRedux extends Component {
 }
 
 FormRedux.propTypes = {
+  className: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   // redux-form props
   handleSubmit: PropTypes.func.isRequired,
@@ -49,7 +50,8 @@ FormRedux.propTypes = {
 
 FormRedux.defaultProps = {
   submitting: false,
-  inline: false
+  inline: false,
+  className: ''
 }
 
 FormRedux.childContextTypes = {
