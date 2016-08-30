@@ -1,12 +1,16 @@
 import {
   REQUEST_FETCH_MOBILIZATIONS,
   SUCCESS_FETCH_MOBILIZATIONS,
-  FAILURE_FETCH_MOBILIZATIONS
+  FAILURE_FETCH_MOBILIZATIONS,
+
+  SUCCESS_ADD_MOBILIZATION,
+  SUCCESS_EDIT_MOBILIZATION,
+
+  PROGRESS_UPLOAD_FACEBOOK_IMAGE,
+  FINISH_UPLOAD_FACEBOOK_IMAGE
 } from './MobilizationActions'
 
-import { SUCCESS_ADD_MOBILIZATION, SUCCESS_EDIT_MOBILIZATION } from './MobilizationActions'
-
-const initialState = {
+export const initialState = {
   loading: false,
   loaded: false,
   data: []
@@ -46,6 +50,16 @@ const MobilizationReducer = (state = initialState, action) => {
         data: state.data.map(
           mob => mob.id === action.mobilization.id ? action.mobilization : mob
         )
+      }
+    case PROGRESS_UPLOAD_FACEBOOK_IMAGE:
+      return {
+        ...state,
+        isFacebookShareImageUploading: true
+      }
+    case FINISH_UPLOAD_FACEBOOK_IMAGE:
+      return {
+        ...state,
+        isFacebookShareImageUploading: false
       }
     default:
       return state
