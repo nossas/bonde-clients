@@ -28,17 +28,12 @@ const MobilizationCustomDomainPage = ({
         Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
         campo abaixo e clique em Salvar.
       </p>
-
       <FormRedux inline={true} onSubmit={handleSubmit} {...rest}>
         <FormGroup controlId="customDomain" {...customDomain}>
           <ControlLabel>Domínio personalizado</ControlLabel>
-          <FormControl
-            type='text'
-            placeholder='www.meudominio.com.br'
-          />
+          <FormControl type='text' placeholder='www.meudominio.com.br' />
         </FormGroup>
       </FormRedux>
-
       <p>
         <strong>Atenção</strong>: você ainda precisa configurar o seu domínio no servidor de
         registro para que ele seja redirecionado para a página da sua mobilização. Para isso,
