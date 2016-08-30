@@ -1,4 +1,5 @@
 export { default as FormGroup } from './FormGroup'
+export { default as ControlButtons } from './ControlButtons'
 export { default as ControlLabel } from './ControlLabel'
 export { default as FormControl } from './FormControl'
 export { default as ColorPicker } from './ColorPicker'

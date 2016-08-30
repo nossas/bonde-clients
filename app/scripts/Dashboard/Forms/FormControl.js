@@ -1,46 +1,63 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
+import { ControlButtons } from './'
 
 class FormControl extends Component {
-
   render() {
-    const formGroup = this.context.$formGroup
-    const { controlId, ...field } = formGroup || {}
-
+    const { ...props, componentClass: Component, className, style, submitted } = this.props
     const {
-      componentClass: Component,
-      id = controlId,
-      className,
-      ...props
-    } = this.props
+      $formRedux: { formInline, submitting, dirty },
+      $formGroup: { controlId, ...field }
+    } = this.context
 
-    const componentStyle = { height: Component === 'textarea' ? '20rem' : '48px' }
+    const componentStyle = {
+      height: Component === 'textarea' ? '20rem' : '48px',
+      width: formInline ? '250px' : null
+    }
+    const componentClassNames = formInline ?
+      'field-light h3 px1 inline-block' :
+      'field-light block h3 px1 full-width'
 
     return (
-      <Component
-        id={id}
-        className={classnames('field-light block h3 mt1 px1 full-width', className)}
-        style={componentStyle}
-        {...props}
-        // passed by $formGroup with redux-form field props
-        {...field}
-      />
+      <div className='mt1'>
+        <Component
+          {...props}
+          {...field}
+          id={controlId}
+          className={classnames('form-control-input', componentClassNames, className)}
+          style={{ ...componentStyle, ...style }}
+          />
+        {
+          formInline &&
+          <ControlButtons {...{ submitted, submitting, dirty, showCancel: false, formInline }} />
+        }
+      </div>
     )
   }
 }
 
 FormControl.contextTypes = {
-  $formGroup: PropTypes.object,
+  $formRedux: PropTypes.shape({
+    formInline: PropTypes.bool,
+    submitting: PropTypes.bool,
+    dirty: PropTypes.bool
+  }),
+  $formGroup: PropTypes.shape({
+    controlId: PropTypes.string
+  })
 }
 
 FormControl.propTypes = {
-  id: PropTypes.string,
-  componentClass: PropTypes.string,
+  submitted: PropTypes.bool.isRequired,
+  componentClass: PropTypes.string.isRequired,
+  style: PropTypes.object
 }
 
 FormControl.defaultProps = {
-  componentClass: 'input'
+  componentClass: 'input',
+  submitting: false,
+  submitted: false
 }
 
 export default FormControl
