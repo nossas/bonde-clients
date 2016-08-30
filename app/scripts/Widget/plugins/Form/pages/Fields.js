@@ -1,5 +1,5 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 import * as Paths from './../../../../Paths'
 import * as WidgetActions from './../../../actions'
@@ -7,20 +7,20 @@ import { Loading, CloseButton } from './../../../../components'
 import FormWidget from './../'
 import { Menu } from './../components'
 
-export default class Fields extends React.Component {
+
+class Fields extends Component {
+
   constructor(props, context) {
     super(props, context)
-    this.state = {
-      loading: false,
-      hasNewField: false
-    }
+    this.state = { loading: false, hasNewField: false }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.loading && this.widget() != this.widget(nextProps)) {
-      this.setState({loading: false, hasNewField: true})
+    const { widget } = this.props
+    if (this.state.loading && widget != this.widget(nextProps)) {
+      this.setState({ loading: false, hasNewField: true })
     } else {
-      this.setState({hasNewField: false})
+      this.setState({ hasNewField: false })
     }
   }
 
@@ -34,54 +34,60 @@ export default class Fields extends React.Component {
   }
 
   fields() {
-    const { settings } = this.widget()
+    const { widget: { settings } } = this.props
     return (settings && settings.fields ? settings.fields : [])
   }
 
   addField(kind) {
-    const { dispatch, mobilization, auth } = this.props
-    const widget = this.widget()
+    const { mobilization, widget, credentials, editWidget, dispatch, ...props } = this.props
     const { settings } = widget
     const fields = this.fields()
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({loading: true})
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      credentials: auth.credentials,
-      widget: { settings: {...settings, fields: [...fields, {
-        uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)),
-        kind: 'text',
-        label: '',
-        placeholder: '',
-        required: 'false'
-      }]} }
-    })
+    this.setState({ loading: true })
+
+    const data = {
+      ...widget,
+      settings: {
+        ...settings,
+        fields: [
+          ...fields,
+          {
+            uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)),
+            kind: 'text',
+            label: '',
+            placeholder: '',
+            required: 'false'
+          }
+        ]
+      }
+    }
+    const params = { mobilization_id: mobilization.id, credentials }
+
+    dispatch(editWidget(data, params))
   }
 
   renderFields() {
-    const widget = this.widget()
+    const { widget, ...props } = this.props
     return(
       <div className="flex-auto flex flex-column bg-silver gray relative">
-        <Menu {...this.props} widget={widget} />
+        <Menu widget={widget} {...props} />
         <div className="p3 flex-auto overflow-scroll">
           <p className="h5 mb3">
             { this.fields().length == 0 ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.' : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.' }
           </p>
-          <FormWidget {...this.props} widget={widget} configurable={true} hasNewField={this.state.hasNewField} />
+          <FormWidget widget={widget} configurable={true} hasNewField={this.state.hasNewField} {...props} />
           <button className="button bg-aqua caps p2" onClick={::this.handleAddTextField}>
             <i className="fa fa-plus mr2" />
             Adicionar um campo
           </button>
         </div>
         { this.renderLoading() }
-        <CloseButton dirty={false} path={Paths.editMobilization(this.props.mobilization.id)} />
+        <CloseButton dirty={false} path={Paths.editMobilization(props.mobilization.id)} />
       </div>
     )
   }
 
   renderLoading(){
-    if(this.state.loading || this.props.widgets.data.length == 0) {
+    if(this.state.loading || this.props.widget === undefined) {
       return(
         <Loading />
       )
@@ -89,6 +95,21 @@ export default class Fields extends React.Component {
   }
 
   render() {
-    return(this.props.widgets.data.length > 0 ? this.renderFields() : this.renderLoading())
+    const { widget, ...props } = this.props
+    return(widget !== undefined ? this.renderFields() : this.renderLoading())
   }
 }
+
+Fields.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  credentials: PropTypes.object.isRequired,
+  editWidget: PropTypes.func.isRequired
+}
+
+export default connect(
+(state, ownProps) => {
+  return {
+    credentials: state.auth.credentials,
+  }
+}, { ...WidgetActions })(Fields)

@@ -5,6 +5,7 @@ import { Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../../../actions'
 
+
 export default class InputForm extends React.Component {
   constructor(props, context) {
     super(props, context)
@@ -59,22 +60,16 @@ export default class InputForm extends React.Component {
   }
 
   updateSettings(newFields) {
-    const { dispatch, mobilization, widget, auth } = this.props
+    const { dispatch, mobilization, widget, auth: { credentials } } = this.props
     const { settings } = widget
     const { fields } = settings
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({
-      loading: true
-    })
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      credentials: auth.credentials,
-      widget: { settings: {
-        ...settings,
-        fields: newFields
-      } }
-    })
+    this.setState({ loading: true })
+
+    const data = { ...widget, settings: { ...settings, fields: newFields } }
+    const params = { credentials, mobilization_id: mobilization.id }
+
+    bindedWidgetActions.editWidget(data, params)
   }
 
   handleCancel(event) {
