@@ -31,6 +31,10 @@ class FormGroup extends Component {
   }
 }
 
+FormGroup.contextTypes = {
+  $formRedux: PropTypes.object
+}
+
 FormGroup.propTypes = {
   controlId: PropTypes.string,
   className: PropTypes.string,
@@ -44,7 +48,7 @@ FormGroup.defaultProps = {
 }
 
 FormGroup.childContextTypes = {
-  $formGroup: React.PropTypes.object.isRequired,
+  $formGroup: PropTypes.object.isRequired
 }
 
 export default FormGroup

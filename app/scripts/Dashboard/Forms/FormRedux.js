@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
+import { ControlButtons } from './'
 
 class FormRedux extends Component {
-
   constructor(props) {
     super(props)
     this.state = { submitted: false }
@@ -14,18 +14,24 @@ class FormRedux extends Component {
     }
   }
 
+  getChildContext() {
+    const { inline, ...rest } = this.props
+    return {
+      $formRedux: {
+        ...rest,
+        formInline: inline
+      }
+    }
+  }
+
   render() {
-    const { children, onSubmit, handleSubmit, submitting, ...props } = this.props
+    const { children, onSubmit, handleSubmit, submitting, dirty, inline } = this.props
     const { submitted } = this.state
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         {children}
-        <div className="flex flex-wrap mt1">
-          <button className="caps button bg-darken-3 h3 mr2">Cancelar</button>
-          <input type="submit" className="caps button bg-aqua h3" value={(submitting ? "Salvando..." : "Salvar")} />
-          {submitted && <div className="green h4 px2 mt2">Formulário atualizado com sucesso!</div>}
-        </div>
+        {!inline && <ControlButtons {...{ submitted, submitting, dirty }} />}
       </form>
     )
   }
@@ -37,10 +43,17 @@ FormRedux.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   submitFailed: PropTypes.bool.isRequired,
+  dirty: PropTypes.bool.isRequired,
+  inline: PropTypes.bool.isRequired
 }
 
 FormRedux.defaultProps = {
   submitting: false,
+  inline: false
+}
+
+FormRedux.childContextTypes = {
+  $formRedux: PropTypes.object.isRequired
 }
 
 export default FormRedux
