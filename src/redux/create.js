@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createMiddleware from './clientMiddleware';
 
-export default function createApiClientStore(client, data) {
+export default function createApiClientStore(client, initialState) {
   const middleware = createMiddleware(client);
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
@@ -10,14 +10,13 @@ export default function createApiClientStore(client, data) {
       applyMiddleware(middleware),
       devTools(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-      createStore
-    );
+    )(createStore);
   } else {
     finalCreateStore = applyMiddleware(middleware)(createStore);
   }
 
-  const reducer = require('../ducks/reducer');
-  const store = finalCreateStore(reducer, data);
+  const rootReducer = require('../ducks/reducer');
+  const store = finalCreateStore(rootReducer, initialState);
   store.client = client;
 
   if (__DEVELOPMENT__ && module.hot) {
