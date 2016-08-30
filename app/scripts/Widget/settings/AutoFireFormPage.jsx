@@ -1,4 +1,4 @@
-import { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { reduxForm } from 'redux-form'
 
 //
