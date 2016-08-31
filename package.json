@@ -54,6 +54,7 @@
     "autoprefixer": "^6.3.6",
     "autoprefixer-core": "^5.2.0",
     "autoprefixer-loader": "^2.0.0",
+    "axios": "^0.14.0",
     "babel": "^5.8.38",
     "babel-loader": "^5.3.2",
     "babel-plugin-typecheck": "^1.2.0",
