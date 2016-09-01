@@ -28,7 +28,7 @@ export const login = values => dispatch => loginRequest(values)
   })
   .catch(error => {
     if (error.response) {
-      const { response: { data: { errors }, status, headers } } = error
+      const { response: { data: { errors }, status } } = error
       if (status === 401) return Promise.reject({ _error: errors.join('') })
     }
     return Promise.reject({ _error: `Response ${error}` })

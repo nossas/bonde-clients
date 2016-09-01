@@ -7,7 +7,10 @@ import {
   SUCCESS_EDIT_MOBILIZATION,
 
   PROGRESS_UPLOAD_FACEBOOK_IMAGE,
-  FINISH_UPLOAD_FACEBOOK_IMAGE
+  FINISH_UPLOAD_FACEBOOK_IMAGE,
+
+  SET_CURRENT_MOBILIZATION,
+  SET_MOUSE_OVER
 } from './MobilizationActions'
 
 export const initialState = {
@@ -60,6 +63,16 @@ const MobilizationReducer = (state = initialState, action) => {
       return {
         ...state,
         isFacebookShareImageUploading: false
+      }
+    case SET_CURRENT_MOBILIZATION:
+      return {
+        ...state,
+        currentId: action.currentId
+      }
+    case SET_MOUSE_OVER:
+      return {
+        ...state,
+        status: action.status
       }
     default:
       return state
