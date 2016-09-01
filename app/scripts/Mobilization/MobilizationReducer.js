@@ -69,11 +69,6 @@ const MobilizationReducer = (state = initialState, action) => {
         ...state,
         currentId: action.currentId
       }
-    case SET_MOUSE_OVER:
-      return {
-        ...state,
-        status: action.status
-      }
     default:
       return state
   }

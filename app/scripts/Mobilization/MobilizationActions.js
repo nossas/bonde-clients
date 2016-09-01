@@ -17,8 +17,6 @@ export const SUCCESS_EDIT_MOBILIZATION = 'SUCCESS_EDIT_MOBILIZATION'
 export const PROGRESS_UPLOAD_FACEBOOK_IMAGE = 'PROGRESS_UPLOAD_FACEBOOK_IMAGE'
 export const FINISH_UPLOAD_FACEBOOK_IMAGE = 'FINISH_UPLOAD_FACEBOOK_IMAGE'
 
-export const SET_MOUSE_OVER = 'SET_MOUSE_OVER'
-
 const instance = axios.create({ baseURL: '/api/mobilizations' })
 
 // Actions
@@ -84,5 +82,3 @@ export const edit = (credentials, mobilization, next) => (dispatch, getState) =>
 export const mobilizationsIsLoaded = state => state.mobilization.loaded
 export const progressUploadFacebookImage = () => ({ type: PROGRESS_UPLOAD_FACEBOOK_IMAGE })
 export const finishUploadFacebookImage = () => ({ type: FINISH_UPLOAD_FACEBOOK_IMAGE })
-
-export const setMouseOver = status => ({ type: SET_MOUSE_OVER, status })
