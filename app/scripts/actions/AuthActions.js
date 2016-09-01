@@ -1,77 +1,46 @@
-import $ from 'jquery'
-
-import request from 'superagent'
+import axios from 'axios'
 
 import {
-  AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAILURE
 } from '../constants/ActionTypes'
-
 
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS'
 
-
 const loginSuccess = (user, credentials) => ({ type: AUTH_LOGIN_SUCCESS, user, credentials })
+const loginRequest = values => axios.post(`${process.env.API_URL}/auth/sign_in`, values)
+export const login = values => dispatch => loginRequest(values)
+  .then(response => {
+    const { headers, data: { data: user } } = response
+    const credentials = {
+      'Access-Token': headers['access-token'],
+      'Token-Type': headers['token-type'],
+      Expiry: headers['expiry'],
+      Uid: headers['uid'],
+      Client: headers['client']
+    }
 
-export const login = (values, dispatch) => {
-  /*
-   * this action apply behavior of redux-form 5.3.1 to asyncronos validation
-   * http://redux-form.com/5.3.1/#/examples/submit-validation?_k=kld09s
-   */
-  return new Promise((resolve, reject) => {
-    request
-      .post(`${process.env.API_URL}/auth/sign_in`)
-      .send({...values})
-      .end((err, res) => {
-        if (err && err.status === 401) {
-          reject({ _error: res.body.errors.join('') })
-        } else if (err) {
-          reject({ _error: `Response Error: ${err.status}` })
-        } else {
-          const credentials = {
-            "Access-Token": res.header['access-token'],
-            "Expiry": res.header['expiry'],
-            "Token-Type": res.header['token-type'],
-            "Uid": res.header['uid'],
-            "Client": res.header['client']
-          }
-          const user = res.body.data
+    // Create a session into the server-side rendering server
+    axios.post(`/api/login`, { credentials, user })
 
-          // Create a session into the server-side rendering server
-          request.post(`/api/login`).send({ credentials, user })
-
-          dispatch(loginSuccess(user, credentials))
-          resolve()
-        }
-      })
+    dispatch(loginSuccess(user, credentials))
   })
-}
+  .catch(error => {
+    if (error.response) {
+      const { response: { data: { errors }, status, headers } } = error
+      if (status === 401) return Promise.reject({ _error: errors.join('') })
+    }
+    return Promise.reject({ _error: `Response ${error}` })
+  })
 
-export function logout() {
-  return function (dispatch) {
-    dispatch(logoutRequest())
-
-    return Auth.signOut().then(
-      user => dispatch(logoutSuccess()),
-      error => dispatch(logoutFailure(error.data.errors[0]))
-    )
-  }
-}
-
-export function logoutRequest() {
-  return {
-    type: AUTH_LOGOUT_REQUEST
-  }
-}
-
-export function logoutSuccess() {
-  return {
-    type: AUTH_LOGOUT_SUCCESS
-  }
-}
-
-export function logoutFailure(error) {
-  return {
-    type: AUTH_LOGOUT_FAILURE,
-    error
-  }
+export const logoutRequest = () => ({ type: AUTH_LOGOUT_REQUEST })
+export const logoutSuccess = () => ({ type: AUTH_LOGOUT_SUCCESS })
+export const logoutFailure = error => ({ type: AUTH_LOGOUT_FAILURE, error })
+export const logout = () => dispatch => {
+  dispatch(logoutRequest())
+  return Auth.signOut().then(
+    user => dispatch(logoutSuccess()),
+    error => dispatch(logoutFailure(error.data.errors[0]))
+  )
 }
