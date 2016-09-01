@@ -44,8 +44,8 @@ class ApiClient_ {
       // Prepend host and port of the API server to the path.
       return 'http://localhost:' + config.apiPort + adjustedPath;
     }
-    // Prepend `/api` to relative URL, to proxy to API server.
-    return '/api' + adjustedPath;
+    // Prepend `/auth` to relative URL, to proxy to auth API server.
+    return '/auth' + adjustedPath;
   }
 }
 const ApiClient = ApiClient_;

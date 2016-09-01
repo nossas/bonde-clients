@@ -7,7 +7,7 @@ import Location from 'react-router/lib/Location';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
-import httpProxy from 'http-proxy';
+import proxy from 'http-proxy-middleware';
 import path from 'path';
 import createStore from './redux/create';
 import authApi from './api/api';
@@ -26,14 +26,20 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
-
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
-// Proxy to API server
-const proxyAuth = httpProxy.createProxyServer({ target: `http://localhost:${config.apiPort}` })
-const proxyApi = httpProxy.createProxyServer({ target: process.env.API_URL })
-app.use('/auth', (req, res) => { proxyAuth.web(req, res) })
-app.use('/api', (req, res) => { proxyApi.web(req, res) });
+//
+// Proxies
+//
+app.use('/auth', proxy({
+  target: `http://localhost:${config.apiPort}`,
+  pathRewrite: { '^/auth': '' }
+}))
+app.use('/api', proxy({
+  target: process.env.API_URL,
+  pathRewrite: { '^/api': '' },
+  changeOrigin: true
+}))
 
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')
@@ -43,17 +49,6 @@ app.get('/robots.txt', function(req, res) {
   res.send('User-Agent: * \n' +
     'Allow: /')
 });
-
-
-// added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-const handleProxyError = (error, res, name) => {
-  console.log(name, error)
-  if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json' })
-  res.end(JSON.stringify({ error: name, reason: error.message }))
-}
-proxyAuth.on('error', (error, req, res) => { handleProxyError(error, res, 'auth_proxy_error') })
-proxyApi.on('error', (error, req, res) => { handleProxyError(error, res, 'api_proxy_error') })
-
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   // The error handler must be before any other error middleware
