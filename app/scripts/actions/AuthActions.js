@@ -22,7 +22,7 @@ export const login = values => dispatch => loginRequest(values)
     }
 
     // Create a session into the server-side rendering server
-    axios.post(`/api/login`, { credentials, user })
+    axios.post(`/auth/login`, { credentials, user })
 
     dispatch(loginSuccess(user, credentials))
   })

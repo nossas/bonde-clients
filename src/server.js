@@ -10,7 +10,7 @@ import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
-import api from './api/api';
+import authApi from './api/api';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Html from './Html';
@@ -18,10 +18,6 @@ import PrettyError from 'pretty-error';
 
 const pretty = new PrettyError();
 const app = new Express();
-const proxy = httpProxy.createProxyServer({
-  target: 'http://localhost:' + config.apiPort
-});
-
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   // The request handler must be the first item
@@ -34,9 +30,10 @@ app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
 
 // Proxy to API server
-app.use('/api', (req, res) => {
-  proxy.web(req, res);
-});
+const proxyAuth = httpProxy.createProxyServer({ target: `http://localhost:${config.apiPort}` })
+const proxyApi = httpProxy.createProxyServer({ target: process.env.API_URL })
+app.use('/auth', (req, res) => { proxyAuth.web(req, res) })
+app.use('/api', (req, res) => { proxyApi.web(req, res) });
 
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')
@@ -49,16 +46,13 @@ app.get('/robots.txt', function(req, res) {
 
 
 // added the error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
-proxy.on('error', (error, req, res) => {
-  let json;
-  console.log('proxy error', error);
-  if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
-  }
-
-  json = { error: 'proxy_error', reason: error.message };
-  res.end(JSON.stringify(json));
-});
+const handleProxyError = (error, res, name) => {
+  console.log(name, error)
+  if (!res.headersSent) res.writeHead(500, { 'content-type': 'application/json' })
+  res.end(JSON.stringify({ error: name, reason: error.message }))
+}
+proxyAuth.on('error', (error, req, res) => { handleProxyError(error, res, 'auth_proxy_error') })
+proxyApi.on('error', (error, req, res) => { handleProxyError(error, res, 'api_proxy_error') })
 
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
@@ -134,10 +128,10 @@ if (config.port) {
     if (err) {
       console.error(err);
     } else {
-      api().then(() => {
+      authApi().then(() => {
         console.info('==> ✅  Server is listening');
         console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
-        console.info('----------\n==> 💻  Open http://localhost:%s in a browser to view the app.', config.port);
+        console.info('----------\n==> 🚀  Open http://%s in a browser to view the app.', process.env.APP_DOMAIN);
       });
     }
   });

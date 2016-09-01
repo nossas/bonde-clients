@@ -4,7 +4,7 @@ module.exports = {
     port: 3001,
     apiPort: 3030,
     app: {
-      name: 'React Redux Example Development'
+      name: 'Reboo Nossas Cidades Development'
     }
   },
   production: {
@@ -12,7 +12,7 @@ module.exports = {
     port: process.env.PORT,
     apiPort: 3030,
     app: {
-      name: 'React Redux Example Production'
+      name: 'Reboo Nossas Cidades Production'
     }
   }
 }[process.env.NODE_ENV || 'development'];
