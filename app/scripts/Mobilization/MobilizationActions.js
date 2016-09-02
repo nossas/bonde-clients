@@ -34,22 +34,17 @@ export const fetchMobilizations = (queryFilter = {}) => ({
 })
 
 const addMobilizationSuccess = mobilization => ({ type: SUCCESS_ADD_MOBILIZATION, mobilization })
-export const addMobilization = (credentials, mobilization, next) => dispatch =>
-  new Promise((resolve, reject) => {
-    request
-      .post(`${process.env.API_URL}/mobilizations`)
-      .set(credentials)
-      .send({ mobilization })
-      .end((err, res) => {
-        if (err || !res.ok) reject({ _error: `Response Error: ${err.status}` })
-        else {
-          dispatch(addMobilizationSuccess(res.body))
-          // TODO: I don't know if the better place.
-          next && next(res.body)
-          resolve()
-        }
-      })
-  })
+export const addMobilization = (mobilization, next = null) => (dispatch, getState, request) =>
+  request.addMobilization(mobilization, getState().auth.credentials)
+    .then(response => {
+        const { data: newMobilization } = response
+        dispatch(addMobilizationSuccess(newMobilization))
+        // TODO: Update react-router and install react-router-redux to make only a push in history.
+        // See: https://github.com/reactjs/react-router-redux#pushlocation-replacelocation-gonumber-goback-goforward
+        next && typeof next === 'function' && next(newMobilization)
+        Promise.resolve()
+    })
+    .catch(error => Promise.reject({ _error: `Response ${error}` }))
 
 export const setCurrentMobilizationId = currentId => ({
   type: SET_CURRENT_MOBILIZATION,
@@ -65,7 +60,7 @@ export const editMobilization = (mobilization, next = null) => (dispatch, getSta
       next && typeof next === 'function' && next(updatedMobilization)
       return Promise.resolve()
     })
-    .catch(error => Promise.reject({ _error: error.response.data.errors.join('') }))
+    .catch(error => Promise.reject({ _error: `Response ${error}` }))
 
 export const mobilizationsIsLoaded = state => state.mobilization.loaded
 export const progressUploadFacebookImage = () => ({ type: PROGRESS_UPLOAD_FACEBOOK_IMAGE })
