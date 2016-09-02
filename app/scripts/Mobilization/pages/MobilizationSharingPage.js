@@ -22,15 +22,14 @@ const MobilizationSharingPage = ({
   },
   dispatch,
   mobilization,
-  credentials,
   isFacebookShareImageUploading,
   // Actions
-  edit,
+  editMobilization,
   progressUploadFacebookImage,
   finishUploadFacebookImage
 }) => {
   const handleSubmit = (values, dispatch) =>
-    dispatch(edit(credentials, { ...mobilization, ...values }))
+    dispatch(editMobilization({ ...mobilization, ...values }))
 
   return (
     <div className="p3 col col-8">
@@ -146,7 +145,7 @@ MobilizationSharingPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFacebookShareImageUploading: PropTypes.bool.isRequired,
   // Actions
-  edit: PropTypes.func.isRequired,
+  editMobilization: PropTypes.func.isRequired,
   progressUploadFacebookImage: PropTypes.func.isRequired,
   finishUploadFacebookImage: PropTypes.func.isRequired
 }
@@ -166,7 +165,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     mobilization,
     initialValues: mobilization || {},
-    credentials: state.auth.credentials,
     isFacebookShareImageUploading: state.mobilization.isFacebookShareImageUploading
   }
 }

@@ -15,12 +15,11 @@ const MobilizationAnalyticsPage = ({
   ...rest,
   fields: { google_analytics_code: googleAnalyticsCode },
   mobilization,
-  credentials,
   // Actions
-  edit
+  editMobilization
 }) => {
   const handleSubmit = (values, dispatch) =>
-    dispatch(edit(credentials, { ...mobilization, ...values }))
+    dispatch(editMobilization({ ...mobilization, ...values }))
 
   return (
     <div className="py3 px3 col col-8">
@@ -60,9 +59,8 @@ MobilizationAnalyticsPage.propTypes = {
     google_analytics_code: PropTypes.object.isRequired
   }).isRequired,
   mobilization: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
   // Actions
-  edit: PropTypes.func.isRequired
+  editMobilization: PropTypes.func.isRequired
 }
 
 const fields = ['google_analytics_code']
@@ -77,8 +75,7 @@ const mapStateToProps = (state, ownProps) => {
   const mobilization = Selectors.getMobilization(state, ownProps)
   return {
     initialValues: mobilization || {},
-    mobilization,
-    credentials: state.auth.credentials
+    mobilization
   }
 }
 

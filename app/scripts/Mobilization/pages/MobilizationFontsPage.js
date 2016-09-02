@@ -29,14 +29,13 @@ const MobilizationFontsPage = ({
     body_font: bodyFont
   },
   mobilization,
-  credentials,
   location,
   // Actions
-  edit
+  editMobilization
 }) => {
   const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
   const handleSubmit = (values, dispatch) =>
-    dispatch(edit(credentials, { ...mobilization, ...values }))
+    dispatch(editMobilization({ ...mobilization, ...values }))
 
   return (
     <div className="flex-auto bg-silver gray relative">
@@ -89,7 +88,6 @@ const MobilizationFontsPage = ({
 
 MobilizationFontsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
   fields: PropTypes.shape({
     header_font: PropTypes.object.isRequired,
     body_font: PropTypes.object.isRequired
@@ -98,7 +96,7 @@ MobilizationFontsPage.propTypes = {
     pathname: PropTypes.string.isRequired
   }).isRequired,
   // Actions
-  edit: PropTypes.func.isRequired
+  editMobilization: PropTypes.func.isRequired
 }
 
 const fields = ['header_font', 'body_font']
@@ -116,8 +114,7 @@ const mapStateToProps = (state, ownProps) => {
   const mobilization = Selectors.getMobilization(state, ownProps)
   return {
     mobilization,
-    initialValues: mobilization || {},
-    credentials: state.auth.credentials
+    initialValues: mobilization || {}
   }
 }
 

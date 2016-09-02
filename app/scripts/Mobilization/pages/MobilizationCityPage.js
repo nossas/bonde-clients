@@ -26,19 +26,18 @@ class MobilizationCityPage extends Component {
       ...rest,
       fields: { organization_id: organizationId },
       submitting,
-      credentials,
       mobilization,
       organizations,
       location,
       // Actions
-      edit
+      editMobilization
     } = this.props
 
     const isNewMobilization = /cityNew/.test(location.pathname)
     const next = !isNewMobilization ? undefined :
       mobilization => this.transitionTo(Paths.editMobilization(mobilization.id))
     const handleSubmit = (values, dispatch) =>
-      dispatch(edit(credentials, { ...mobilization, ...values }, next))
+      dispatch(editMobilization({ ...mobilization, ...values }, next))
 
     return submitting && !mobilization ? <Loading /> : (
       <div className="p3">
@@ -63,7 +62,6 @@ class MobilizationCityPage extends Component {
 }
 
 MobilizationCityPage.propTypes = {
-  credentials: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
   mobilization: PropTypes.shape({
     id: PropTypes.number.isRequired
@@ -83,7 +81,7 @@ MobilizationCityPage.propTypes = {
     )
   }).isRequired,
   // Actions
-  edit: PropTypes.func.isRequired
+  editMobilization: PropTypes.func.isRequired
 }
 
 const fields = ['organization_id']
@@ -95,8 +93,7 @@ const validate = values => {
   return errors
 }
 const mapStateToProps = (state, onwProps) => ({
-  initialValues: onwProps.mobilization || {},
-  credentials: state.auth.credentials
+  initialValues: onwProps.mobilization || {}
 })
 
 export default reduxForm({

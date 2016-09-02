@@ -20,17 +20,16 @@ export class MobilizationBasicsFormPage extends Component {
       ...rest,
       fields: { name, goal },
       mobilization,
-      credentials,
       // Actions
-      edit,
-      add
+      editMobilization,
+      addMobilization
     } = this.props
 
-    const submitStrategy = mobilization ? edit : add
+    const submitStrategy = mobilization ? editMobilization : addMobilization
     const next = mobilization ? undefined :
       mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
     const handleSubmit = (values, dispatch) =>
-      dispatch(submitStrategy(credentials, { ...mobilization, ...values }, next))
+      dispatch(submitStrategy({ ...mobilization, ...values }, next))
 
     return (
       <div className="p3">
@@ -79,9 +78,8 @@ export class MobilizationBasicsFormPage extends Component {
 }
 
 MobilizationBasicsFormPage.propTypes = {
-  credentials: PropTypes.object.isRequired,
-  edit: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired,
+  editMobilization: PropTypes.func.isRequired,
+  addMobilization: PropTypes.func.isRequired,
   mobilization: PropTypes.shape({
     id: PropTypes.number
   }),
@@ -108,8 +106,7 @@ const validate = values => {
   return errors
 }
 const mapStateToProps = (state, ownProps) => ({
-  initialValues: ownProps.mobilization || { color_scheme: 'meurio-scheme' },
-  credentials: state.auth.credentials
+  initialValues: ownProps.mobilization || { color_scheme: 'meurio-scheme' }
 })
 
 export default reduxForm({

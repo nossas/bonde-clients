@@ -32,7 +32,7 @@ describe('MobilizationReducer', () => {
     })
   })
 
-  describe('#add', () => {
+  describe('#addMobilization', () => {
     it('should add mobilization in data', () => {
       const action = {
         type: SUCCESS_ADD_MOBILIZATION,
@@ -47,7 +47,7 @@ describe('MobilizationReducer', () => {
     })
   })
 
-  describe('#edit', () => {
+  describe('#editMobilization', () => {
     it('should edit mobilization ind data', () => {
       const previousState = {
         loading: false,

@@ -1,8 +1,4 @@
 import request from 'superagent'
-import axios from 'axios'
-import { history } from 'react-router'
-
-import * as Paths from '../Paths'
 
 // Constants
 
@@ -16,8 +12,6 @@ export const SUCCESS_EDIT_MOBILIZATION = 'SUCCESS_EDIT_MOBILIZATION'
 
 export const PROGRESS_UPLOAD_FACEBOOK_IMAGE = 'PROGRESS_UPLOAD_FACEBOOK_IMAGE'
 export const FINISH_UPLOAD_FACEBOOK_IMAGE = 'FINISH_UPLOAD_FACEBOOK_IMAGE'
-
-const instance = axios.create({ baseURL: '/api/mobilizations' })
 
 // Actions
 // TODO: Buscar uma maneira mais clara de fazer isso
@@ -40,7 +34,7 @@ export const fetchMobilizations = (queryFilter = {}) => ({
 })
 
 const addMobilizationSuccess = mobilization => ({ type: SUCCESS_ADD_MOBILIZATION, mobilization })
-export const add = (credentials, mobilization, next) => dispatch =>
+export const addMobilization = (credentials, mobilization, next) => dispatch =>
   new Promise((resolve, reject) => {
     request
       .post(`${process.env.API_URL}/mobilizations`)
@@ -57,27 +51,21 @@ export const add = (credentials, mobilization, next) => dispatch =>
       })
   })
 
-export const setCurrentMobilizationId = currentId => ({ type: SET_CURRENT_MOBILIZATION, currentId })
+export const setCurrentMobilizationId = currentId => ({
+  type: SET_CURRENT_MOBILIZATION,
+  currentId: parseInt(currentId, 10)
+})
 
-const editSuccess = mobilization => ({ type: SUCCESS_EDIT_MOBILIZATION, mobilization })
-const editRequest = (mobilization, headers) =>
-  instance.put(`/${mobilization.id}`, { mobilization }, { headers })
-
-export const edit = (credentials, mobilization, next) => (dispatch, getState) =>
-  editRequest(mobilization, credentials)
+const editMobilizationSuccess = mobilization => ({ type: SUCCESS_EDIT_MOBILIZATION, mobilization })
+export const editMobilization = (mobilization, next = null) => (dispatch, getState, request) =>
+  request.editMobilization(mobilization, getState().auth.credentials)
     .then(response => {
-      console.log(getState());
       const { data: updatedMobilization } = response
-      dispatch(editSuccess(updatedMobilization))
-      next && next(updatedMobilization)
+      dispatch(editMobilizationSuccess(updatedMobilization))
+      next && typeof next === 'function' && next(updatedMobilization)
+      return Promise.resolve()
     })
-    .catch(error => {
-      if (error.response && error.response.status === 401) {
-        const { response: { status, data: { errors } } } = error
-        if (status === 401) return Promise.reject({ _error: errors.join('') })
-      }
-      return Promise.reject({ _error: error })
-    })
+    .catch(error => Promise.reject({ _error: error.response.data.errors.join('') }))
 
 export const mobilizationsIsLoaded = state => state.mobilization.loaded
 export const progressUploadFacebookImage = () => ({ type: PROGRESS_UPLOAD_FACEBOOK_IMAGE })
