@@ -35,14 +35,13 @@ export const fetchMobilizations = (queryFilter = {}) => ({
 
 const addMobilizationSuccess = mobilization => ({ type: SUCCESS_ADD_MOBILIZATION, mobilization })
 export const addMobilization = (mobilization, next = null) => (dispatch, getState, request) =>
-  request.addMobilization(mobilization, getState().auth.credentials)
+  dispatch => request.addMobilization(mobilization, getState().auth.credentials)
     .then(response => {
         const { data: newMobilization } = response
         dispatch(addMobilizationSuccess(newMobilization))
         // TODO: Update react-router and install react-router-redux to make only a push in history.
         // See: https://github.com/reactjs/react-router-redux#pushlocation-replacelocation-gonumber-goback-goforward
         next && typeof next === 'function' && next(newMobilization)
-        Promise.resolve()
     })
     .catch(error => Promise.reject({ _error: `Response ${error}` }))
 
@@ -53,12 +52,11 @@ export const setCurrentMobilizationId = currentId => ({
 
 const editMobilizationSuccess = mobilization => ({ type: SUCCESS_EDIT_MOBILIZATION, mobilization })
 export const editMobilization = (mobilization, next = null) => (dispatch, getState, request) =>
-  request.editMobilization(mobilization, getState().auth.credentials)
+  dispatch => request.editMobilization(mobilization, getState().auth.credentials)
     .then(response => {
       const { data: updatedMobilization } = response
       dispatch(editMobilizationSuccess(updatedMobilization))
       next && typeof next === 'function' && next(updatedMobilization)
-      return Promise.resolve()
     })
     .catch(error => Promise.reject({ _error: `Response ${error}` }))
 
