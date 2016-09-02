@@ -1,9 +1,7 @@
+export const getMobilization = (state, props) => {
+  const { mobilization: { data: mobilizations }, currentId } = state
+  const { params: { mobilization_id: mobilizationId } } = props
 
-export const getMobilization = (globalState, props) => {
-  const { mobilization: { data } } = globalState
-  let { params: { mobilization_id } } = props
-  if (typeof mobilization_id === 'string') {
-    mobilization_id = parseInt(mobilization_id)
-  }
-  return data.filter(mob => mob.id === mobilization_id)[0]
+  const id = currentId ? currentId : parseInt(mobilizationId, 10)
+  return mobilizations.filter(mobilization => mobilization.id === id)[0]
 }
