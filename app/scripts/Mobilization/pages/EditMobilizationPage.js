@@ -24,16 +24,15 @@ class EditMobilization extends Component {
       scrolledToBottom: props.scrolledToBottom,
       widgetsCount: props.widgetsCount
     }
-    const { setCurrentMobilizationId, mobilization: { id } } = props
-    setCurrentMobilizationId(id)
   }
 
   componentDidMount() {
     // TODO: Melhorar a chamada desse metódo
     // responsável por recarregar os widgets, trocar action
     // por reducer
-    const {dispatch, mobilization} = this.props
-    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
+    const { dispatch, mobilization: { id }, setCurrentMobilizationId} = this.props
+    dispatch(fetchWidgets({mobilization_id: id}))
+    dispatch(setCurrentMobilizationId(id))
   }
 
   componentDidUpdate() {
