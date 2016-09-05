@@ -18,7 +18,7 @@ const MobilizationCustomDomainPage = ({
   // Actions
   editMobilizationAsync
 }) => {
-  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
+  const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="py3 px3 col col-8">

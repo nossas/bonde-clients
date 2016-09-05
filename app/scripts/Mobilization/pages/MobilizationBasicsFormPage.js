@@ -29,7 +29,7 @@ export class MobilizationBasicsFormPage extends Component {
     const next = mobilization ? undefined :
       mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
 
-    const handleSubmit = (values, dispatch) => submitStrategy({ ...mobilization, ...values }, next)
+    const handleSubmit = values => submitStrategy({ ...mobilization, ...values }, next)
 
     return (
       <div className="p3">

@@ -28,7 +28,7 @@ const MobilizationSharingPage = ({
   progressUploadFacebookImage,
   finishUploadFacebookImage
 }) => {
-  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
+  const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="p3 col col-8">

@@ -34,7 +34,7 @@ const MobilizationFontsPage = ({
   editMobilizationAsync
 }) => {
   const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
-  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
+  const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="flex-auto bg-silver gray relative">

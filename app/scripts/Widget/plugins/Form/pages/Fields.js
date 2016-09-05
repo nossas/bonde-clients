@@ -60,7 +60,7 @@ class Fields extends Component {
         ]
       }
     }
-    dispatch(editWidgetAsync(data))
+    editWidgetAsync(data)
   }
 
   renderFields() {

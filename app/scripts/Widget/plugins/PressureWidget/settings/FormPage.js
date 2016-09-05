@@ -18,11 +18,11 @@ import { Base as PressureBase } from '../components/settings'
 
 class FormPage extends Component {
 
-  handleSubmit(values, dispatch) {
+  handleSubmit(values) {
     const { widget, credentials, editWidgetAsync, ...props } = this.props
     const settings = widget.settings || {}
     const data = { ...widget, settings: { ...settings, ...values } }
-    return dispatch(editWidgetAsync(data))
+    return editWidgetAsync(data)
   }
 
   render() {

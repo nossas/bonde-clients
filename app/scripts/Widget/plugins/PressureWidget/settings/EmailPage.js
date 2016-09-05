@@ -32,13 +32,13 @@ class EmailPage extends Component {
     return targets && targets.value.split(';')
   }
 
-  handleSubmit(values, dispatch) {
+  handleSubmit(values) {
     const { widget, credentials, editWidgetAsync, ...props } = this.props
     const targets = this.getTargetString()
     const settings = widget.settings || {}
 
     const data = { ...widget, settings: { ...settings, ...values, targets } }
-    return dispatch(editWidgetAsync(data))
+    return editWidgetAsync(data)
   }
 
   render() {
