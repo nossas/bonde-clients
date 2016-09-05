@@ -33,14 +33,13 @@ const AutoFireFormPage = (props) => {
     widget,
     mobilization,
     credentials,
-    editWidget
+    editWidgetAsync
   } = props
 
   const handleSubmit = (values, dispatch) => {
     const settings = widget.settings || {}
     const data = { ...widget, settings: { ...settings, ...values } }
-    const params = { credentials, mobilization_id: mobilization.id }
-    return dispatch(editWidget(data, params))
+    return dispatch(editWidgetAsync(data))
   }
 
   return (

@@ -13,4 +13,9 @@ export default class Request extends Axios {
   editMobilization(mobilization, headers) {
     return this.put(`/mobilizations/${mobilization.id}`, { mobilization }, { headers })
   }
+
+  editWidget(widget, mobilization, headers) {
+    const endpoint = `/mobilizations/${mobilization.id}/widgets/${widget.id}`
+    return this.put(endpoint, { widget }, { headers })
+  }
 }

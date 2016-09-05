@@ -62,10 +62,7 @@ export default class DraftWidget extends React.Component {
     }
     Object.assign(widget, assignments)
     this.setState({loading: true})
-
-    // TODO: change it to use the new pattern for reducer actions
-    const params = { mobilization_id: this.props.mobilization.id, credentials: auth.credentials }
-    bindedWidgetActions.editWidget(widget, params)
+    bindedWidgetActions.editWidgetAsync(widget)
   }
 
   renderLoading() {

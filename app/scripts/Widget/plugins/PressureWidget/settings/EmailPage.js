@@ -33,13 +33,12 @@ class EmailPage extends Component {
   }
 
   handleSubmit(values, dispatch) {
-    const { widget, credentials, editWidget, ...props } = this.props
+    const { widget, credentials, editWidgetAsync, ...props } = this.props
     const targets = this.getTargetString()
     const settings = widget.settings || {}
 
     const data = { ...widget, settings: { ...settings, ...values, targets } }
-    const params = { credentials, mobilization_id: props.mobilization.id }
-    return dispatch(editWidget(data, params))
+    return dispatch(editWidgetAsync(data))
   }
 
   render() {
@@ -79,7 +78,7 @@ EmailPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   credentials: PropTypes.object.isRequired,
-  editWidget: PropTypes.func.isRequired,
+  editWidgetAsync: PropTypes.func.isRequired,
   // Redux form
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,

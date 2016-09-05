@@ -67,9 +67,7 @@ export default class InputForm extends React.Component {
     this.setState({ loading: true })
 
     const data = { ...widget, settings: { ...settings, fields: newFields } }
-    const params = { credentials, mobilization_id: mobilization.id }
-
-    bindedWidgetActions.editWidget(data, params)
+    bindedWidgetActions.editWidgetAsync(data)
   }
 
   handleCancel(event) {

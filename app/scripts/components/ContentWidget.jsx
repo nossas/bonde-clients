@@ -105,8 +105,7 @@ export default class ContentWidget extends React.Component {
       this.setState({loading: true})
 
       const data = { ...widget, settings: { content: this.state.editor.getValue() } }
-      const params = { credentials, mobilization_id: mobilization.id, }
-      bindedWidgetActions.editWidget(data, params)
+      bindedWidgetActions.editWidgetAsync(data)
     }
   }
 

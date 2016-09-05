@@ -37,11 +37,11 @@ const addMobilizationSuccess = mobilization => ({ type: SUCCESS_ADD_MOBILIZATION
 export const addMobilization = (mobilization, next = null) => (dispatch, getState, request) =>
   dispatch => request.addMobilization(mobilization, getState().auth.credentials)
     .then(response => {
-        const { data: newMobilization } = response
-        dispatch(addMobilizationSuccess(newMobilization))
-        // TODO: Update react-router and install react-router-redux to make only a push in history.
-        // See: https://github.com/reactjs/react-router-redux#pushlocation-replacelocation-gonumber-goback-goforward
-        next && typeof next === 'function' && next(newMobilization)
+      const { data: newMobilization } = response
+      dispatch(addMobilizationSuccess(newMobilization))
+      // TODO: Update react-router and install react-router-redux to make only a push in history.
+      // See: https://github.com/reactjs/react-router-redux#pushlocation-replacelocation-gonumber-goback-goforward
+      next && typeof next === 'function' && next(newMobilization)
     })
     .catch(error => Promise.reject({ _error: `Response ${error}` }))
 

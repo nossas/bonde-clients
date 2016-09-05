@@ -82,7 +82,7 @@ class ChoicesPage extends React.Component {
     const { validForm, errors } = this.isValidForm()
     if (validForm) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-      bindedWidgetActions.editWidget({
+      bindedWidgetActions.editWidgetAsync({
         mobilization_id: mobilization.id,
         widget_id: widget.id,
         credentials: auth.credentials,
