@@ -2,13 +2,15 @@ import React from 'react'
 import { expect } from 'chai'
 
 import {
-  progressUploadFacebookImage,
-  finishUploadFacebookImage
+  ADD_MOBILIZATION,
+  EDIT_MOBILIZATION
 } from '../MobilizationActions'
+
+import * as MobilizationActions from '../MobilizationActions'
 
 describe('MobilizationActions', () => {
   describe('#progressUploadFacebookImage', () => {
-    const result = progressUploadFacebookImage()
+    const result = MobilizationActions.progressUploadFacebookImage()
 
     it('should return an object', () => {
       expect(result).to.be.an.object
@@ -22,7 +24,7 @@ describe('MobilizationActions', () => {
   })
 
   describe('#finishUploadFacebookImage', () => {
-    const result = finishUploadFacebookImage()
+    const result = MobilizationActions.finishUploadFacebookImage()
 
     it('should return an object', () => {
       expect(result).to.be.an.object
@@ -34,4 +36,25 @@ describe('MobilizationActions', () => {
       expect(result).to.have.property('type', 'FINISH_UPLOAD_FACEBOOK_IMAGE')
     })
   })
+
+  describe('#addMobilization', () => {
+    it('should return action to add', () => {
+      const mobilization = { id: 1, name: 'Lorem', 'goal': 'Savings' }
+      expect(MobilizationActions.addMobilization(mobilization)).to.deep.equal({
+        type: ADD_MOBILIZATION,
+        mobilization
+      })
+    })
+  })
+
+  describe('#editMobilization', () => {
+    it('should return action to edit', () => {
+      const mobilization = { id: 1, name: 'Lorem', 'goal': 'Savings' }
+      expect(MobilizationActions.editMobilization(mobilization)).to.deep.equal({
+        type: EDIT_MOBILIZATION,
+        mobilization
+      })
+    })
+  })
+
 })

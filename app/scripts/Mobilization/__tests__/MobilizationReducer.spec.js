@@ -3,8 +3,8 @@ import { expect } from 'chai'
 
 import {
   SUCCESS_FETCH_MOBILIZATIONS,
-  SUCCESS_ADD_MOBILIZATION,
-  SUCCESS_EDIT_MOBILIZATION,
+  ADD_MOBILIZATION,
+  EDIT_MOBILIZATION,
 
   PROGRESS_UPLOAD_FACEBOOK_IMAGE,
   FINISH_UPLOAD_FACEBOOK_IMAGE
@@ -35,7 +35,7 @@ describe('MobilizationReducer', () => {
   describe('#addMobilization', () => {
     it('should add mobilization in data', () => {
       const action = {
-        type: SUCCESS_ADD_MOBILIZATION,
+        type: ADD_MOBILIZATION,
         mobilization: { id: 1 }
       }
       const nextState = reducer(undefined, action)
@@ -55,7 +55,7 @@ describe('MobilizationReducer', () => {
         data: [ { id: 1 } ]
       }
       const action = {
-        type: SUCCESS_EDIT_MOBILIZATION,
+        type: EDIT_MOBILIZATION,
         mobilization: { id: 1, name: 'Lorem' }
       }
       const nextState = reducer(previousState, action)

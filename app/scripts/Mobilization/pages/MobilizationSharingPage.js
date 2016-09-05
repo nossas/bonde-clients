@@ -24,12 +24,11 @@ const MobilizationSharingPage = ({
   mobilization,
   isFacebookShareImageUploading,
   // Actions
-  editMobilization,
+  editMobilizationAsync,
   progressUploadFacebookImage,
   finishUploadFacebookImage
 }) => {
-  const handleSubmit = (values, dispatch) =>
-    dispatch(editMobilization({ ...mobilization, ...values }))
+  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="p3 col col-8">
@@ -145,7 +144,7 @@ MobilizationSharingPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFacebookShareImageUploading: PropTypes.bool.isRequired,
   // Actions
-  editMobilization: PropTypes.func.isRequired,
+  editMobilizationAsync: PropTypes.func.isRequired,
   progressUploadFacebookImage: PropTypes.func.isRequired,
   finishUploadFacebookImage: PropTypes.func.isRequired
 }

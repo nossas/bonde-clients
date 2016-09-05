@@ -30,14 +30,13 @@ class MobilizationCityPage extends Component {
       organizations,
       location,
       // Actions
-      editMobilization
+      editMobilizationAsync
     } = this.props
 
     const isNewMobilization = /cityNew/.test(location.pathname)
     const next = !isNewMobilization ? undefined :
       mobilization => this.transitionTo(Paths.editMobilization(mobilization.id))
-    const handleSubmit = (values, dispatch) =>
-      dispatch(editMobilization({ ...mobilization, ...values }, next))
+    const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values }, next)
 
     return submitting && !mobilization ? <Loading /> : (
       <div className="p3">

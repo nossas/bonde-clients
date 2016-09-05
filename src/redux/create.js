@@ -1,5 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import axios from 'axios'
 import createMiddleware from './clientMiddleware'
+
 import thunk from 'redux-thunk'
 import { Request } from '../api'
 
@@ -27,6 +29,7 @@ export default function createApiClientStore(client, initialState) {
   const rootReducer = require('../ducks/reducer')
   const store = finalCreateStore(rootReducer, initialState)
   store.client = client
+  store.request = request
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('../ducks/reducer', () => {

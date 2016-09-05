@@ -12,14 +12,13 @@ import {
 } from '../../Dashboard/Forms'
 
 const MobilizationAnalyticsPage = ({
-  ...rest,
   fields: { google_analytics_code: googleAnalyticsCode },
   mobilization,
   // Actions
-  editMobilization
+  editMobilizationAsync,
+  ...props
 }) => {
-  const handleSubmit = (values, dispatch) =>
-    dispatch(editMobilization({ ...mobilization, ...values }))
+  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="py3 px3 col col-8">
@@ -38,7 +37,7 @@ const MobilizationAnalyticsPage = ({
         </li>
         <li>
           Copie a ID de acompanhamento e cole no campo abaixo:
-          <FormRedux inline={true} onSubmit={handleSubmit} className='mt2 mb4' {...rest}>
+          <FormRedux inline={true} onSubmit={handleSubmit} className='mt2 mb4' {...props}>
             <FormGroup controlId="googleAnalyticsCode" {...googleAnalyticsCode}>
               <ControlLabel>ID do Google Analytics</ControlLabel>
               <FormControl type='text' placeholder="UA-00000000-0" />
@@ -55,12 +54,10 @@ const MobilizationAnalyticsPage = ({
 }
 
 MobilizationAnalyticsPage.propTypes = {
-  fields: PropTypes.shape({
-    google_analytics_code: PropTypes.object.isRequired
-  }).isRequired,
+  fields: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
   // Actions
-  editMobilization: PropTypes.func.isRequired
+  editMobilizationAsync: PropTypes.func.isRequired
 }
 
 const fields = ['google_analytics_code']

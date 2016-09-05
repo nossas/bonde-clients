@@ -21,15 +21,15 @@ export class MobilizationBasicsFormPage extends Component {
       fields: { name, goal },
       mobilization,
       // Actions
-      editMobilization,
-      addMobilization
+      editMobilizationAsync,
+      addMobilizationAsync
     } = this.props
 
-    const submitStrategy = mobilization ? editMobilization : addMobilization
+    const submitStrategy = mobilization ? editMobilizationAsync : addMobilizationAsync
     const next = mobilization ? undefined :
       mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
-    const handleSubmit = (values, dispatch) =>
-      dispatch(submitStrategy({ ...mobilization, ...values }, next))
+
+    const handleSubmit = (values, dispatch) => submitStrategy({ ...mobilization, ...values }, next)
 
     return (
       <div className="p3">
@@ -78,15 +78,11 @@ export class MobilizationBasicsFormPage extends Component {
 }
 
 MobilizationBasicsFormPage.propTypes = {
-  editMobilization: PropTypes.func.isRequired,
-  addMobilization: PropTypes.func.isRequired,
-  mobilization: PropTypes.shape({
-    id: PropTypes.number
-  }),
-  fields: PropTypes.shape({
-    name: PropTypes.object.isRequired,
-    goal: PropTypes.object.isRequired
-  }).isRequired
+  fields: PropTypes.object.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  // Actions
+  editMobilizationAsync: PropTypes.func.isRequired,
+  addMobilizationAsync: PropTypes.func.isRequired
 }
 
 const fields = ['name', 'goal']

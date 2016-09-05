@@ -31,11 +31,10 @@ const MobilizationFontsPage = ({
   mobilization,
   location,
   // Actions
-  editMobilization
+  editMobilizationAsync
 }) => {
   const fontsMobilizationPath = Paths.fontsMobilization(mobilization.id)
-  const handleSubmit = (values, dispatch) =>
-    dispatch(editMobilization({ ...mobilization, ...values }))
+  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="flex-auto bg-silver gray relative">
@@ -87,16 +86,11 @@ const MobilizationFontsPage = ({
 }
 
 MobilizationFontsPage.propTypes = {
+  fields: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
-  fields: PropTypes.shape({
-    header_font: PropTypes.object.isRequired,
-    body_font: PropTypes.object.isRequired
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired,
+  location: PropTypes.object.isRequired,
   // Actions
-  editMobilization: PropTypes.func.isRequired
+  editMobilizationAsync: PropTypes.func.isRequired
 }
 
 const fields = ['header_font', 'body_font']

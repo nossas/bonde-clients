@@ -16,10 +16,9 @@ const MobilizationCustomDomainPage = ({
   fields: { custom_domain: customDomain },
   mobilization,
   // Actions
-  editMobilization
+  editMobilizationAsync
 }) => {
-  const handleSubmit = (values, dispatch) =>
-    dispatch(editMobilization({ ...mobilization, ...values }))
+  const handleSubmit = (values, dispatch) => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
     <div className="py3 px3 col col-8">
@@ -57,14 +56,10 @@ const MobilizationCustomDomainPage = ({
 }
 
 MobilizationCustomDomainPage.propTypes = {
-  fields: PropTypes.shape({
-    custom_domain: PropTypes.object.isRequired
-  }).isRequired,
-  mobilization: PropTypes.shape({
-    slug: PropTypes.string.isRequired
-  }).isRequired,
+  fields: PropTypes.object.isRequired,
+  mobilization: PropTypes.object.isRequired,
   // Actions
-  editMobilization: PropTypes.func.isRequired
+  editMobilizationAsync: PropTypes.func.isRequired
 }
 
 const fields = ['custom_domain']

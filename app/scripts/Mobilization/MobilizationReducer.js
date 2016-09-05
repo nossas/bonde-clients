@@ -3,8 +3,8 @@ import {
   SUCCESS_FETCH_MOBILIZATIONS,
   FAILURE_FETCH_MOBILIZATIONS,
 
-  SUCCESS_ADD_MOBILIZATION,
-  SUCCESS_EDIT_MOBILIZATION,
+  ADD_MOBILIZATION,
+  EDIT_MOBILIZATION,
 
   PROGRESS_UPLOAD_FACEBOOK_IMAGE,
   FINISH_UPLOAD_FACEBOOK_IMAGE,
@@ -41,19 +41,6 @@ const MobilizationReducer = (state = initialState, action) => {
         loaded: true,
         error: action.error
       }
-    case SUCCESS_ADD_MOBILIZATION:
-    // Update list with new mobilization added
-      return {
-        ...state,
-        data: [action.mobilization, ...state.data]
-      }
-    case SUCCESS_EDIT_MOBILIZATION:
-      return {
-        ...state,
-        data: state.data.map(
-          mob => mob.id === action.mobilization.id ? action.mobilization : mob
-        )
-      }
     case PROGRESS_UPLOAD_FACEBOOK_IMAGE:
       return {
         ...state,
@@ -63,6 +50,19 @@ const MobilizationReducer = (state = initialState, action) => {
       return {
         ...state,
         isFacebookShareImageUploading: false
+      }
+    case ADD_MOBILIZATION:
+    // Update list with new mobilization added
+      return {
+        ...state,
+        data: [action.mobilization, ...state.data]
+      }
+    case EDIT_MOBILIZATION:
+      return {
+        ...state,
+        data: state.data.map(
+          mob => mob.id === action.mobilization.id ? action.mobilization : mob
+        )
       }
     case SET_CURRENT_MOBILIZATION:
       return {
