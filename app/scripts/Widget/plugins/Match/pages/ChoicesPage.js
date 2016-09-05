@@ -83,16 +83,14 @@ class ChoicesPage extends React.Component {
     if (validForm) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       bindedWidgetActions.editWidgetAsync({
-        mobilization_id: mobilization.id,
-        widget_id: widget.id,
-        credentials: auth.credentials,
-        widget: { settings: {
+        ... widget,
+        settings: {
           title_text,
           labelChoices1: labela,
           choices1: choicesa.toString(),
           labelChoicesA: labelb,
           choicesA: choicesb.toString(),
-        }}
+        }
       })
       this.setState({ choicesChanged: false })
       this.context.router.transitionTo(
