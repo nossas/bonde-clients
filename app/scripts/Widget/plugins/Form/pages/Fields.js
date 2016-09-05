@@ -39,7 +39,7 @@ class Fields extends Component {
   }
 
   addField(kind) {
-    const { mobilization, widget, credentials, editWidget, dispatch, ...props } = this.props
+    const { mobilization, widget, credentials, editWidgetAsync, dispatch, ...props } = this.props
     const { settings } = widget
     const fields = this.fields()
     this.setState({ loading: true })
@@ -60,9 +60,7 @@ class Fields extends Component {
         ]
       }
     }
-    const params = { mobilization_id: mobilization.id, credentials }
-
-    dispatch(editWidget(data, params))
+    dispatch(editWidgetAsync(data))
   }
 
   renderFields() {
@@ -104,7 +102,7 @@ Fields.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   credentials: PropTypes.object.isRequired,
-  editWidget: PropTypes.func.isRequired
+  editWidgetAsync: PropTypes.func.isRequired
 }
 
 export default connect(

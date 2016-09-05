@@ -17,12 +17,11 @@ import { Menu } from './../components'
 class FormWidgetForm extends React.Component {
 
   handleSubmit(values, dispatch) {
-    const { widget, credentials, editWidget, ...props } = this.props
+    const { widget, credentials, editWidgetAsync, ...props } = this.props
     const settings = widget.settings || {}
 
     const data = { ...widget, settings: { ...settings, ...values } }
-    const params = { credentials, mobilization_id: props.mobilization.id }
-    return dispatch(editWidget(data, params))
+    return dispatch(editWidgetAsync(data))
   }
 
   render() {
