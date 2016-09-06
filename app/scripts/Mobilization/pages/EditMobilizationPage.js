@@ -30,9 +30,14 @@ class EditMobilization extends Component {
     // TODO: Melhorar a chamada desse metódo
     // responsável por recarregar os widgets, trocar action
     // por reducer
-    const { dispatch, mobilization: { id }, setCurrentMobilizationId} = this.props
+    const {
+      mobilization: { id },
+      params: { mobilization_id: mobilizationId },
+      dispatch,
+      setCurrentMobilizationId,
+    } = this.props
     dispatch(fetchWidgets({mobilization_id: id}))
-    dispatch(setCurrentMobilizationId(id))
+    dispatch(setCurrentMobilizationId(mobilizationId))
   }
 
   componentDidUpdate() {
@@ -102,6 +107,7 @@ EditMobilization.propTypes = {
   mobilization: PropTypes.object.isRequired,
   blocks: PropTypes.object.isRequired,
   widgets: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
   // actions
   setCurrentMobilizationId: PropTypes.func.isRequired
 }

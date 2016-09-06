@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import { fetchBlocks, isBlocksLoaded } from '../../reducers/blocks'
 import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
 import { MobilizationMenu } from '../../components'
-
 import { getMobilization } from '../MobilizationSelectors'
-
+import { setCurrentMobilizationId } from '../MobilizationActions'
 
 class MobilizationDashboard extends React.Component {
   static propTypes = {
@@ -40,6 +39,7 @@ class MobilizationDashboard extends React.Component {
     const {dispatch, mobilization} = this.props
     dispatch(fetchBlocks({mobilization_id: mobilization.id}))
     dispatch(fetchWidgets({mobilization_id: mobilization.id}))
+    dispatch(setCurrentMobilizationId(mobilization.id))
   }
 
   render() {
