@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 
 const parseTarget = target => {
   const targetSplit = target.split('<')
-  return { name: targetSplit[0].trim(), email: targetSplit[1].replace('>', '') }
+  const valid = targetSplit.length === 2
+  return valid ? { name: targetSplit[0].trim(), email: targetSplit[1].replace('>', '') } : null
 }
 
 const TargetList = ({ targets }) => {
@@ -33,9 +34,9 @@ const TargetList = ({ targets }) => {
       <p className="bold" style={targetLabelStyle}>Quem você vai pressionar</p>
       <div className="clearfix" style={targetListContainerStyle}>
         <div className="clearfix" style={targetListWrapperStyle}>
-          {targets.map(obj => {
+          {targets.length > 0 && targets.map(obj => {
             const target = parseTarget(obj)
-            return (
+            return !target ? null : (
               <div className='target-item py1 px2 mr1 bg-white rounded' style={targetItemStyle}>
                 <p className="black h6 mb0">
                   <span className="bold flex">{target.name}</span>

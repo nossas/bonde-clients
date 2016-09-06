@@ -2,14 +2,13 @@ import React, { PropTypes } from 'react'
 
 import Tag from './Tag'
 
-
 const BlockTag = (props) => {
-
-  const { tags, ...otherProps } = props
+  const { tags, ...rest } = props
+  const filtered = tags.filter(tag => !!tag.trim())
 
   return (
     <div className="mb1 flex flex-wrap">
-      {tags.map((tag, index) => <Tag key={`${tag}-${index}`} value={tag} {...otherProps} />)}
+      {filtered.map((tag, index) => <Tag key={`${tag}-${index}`} value={tag} {...rest} />)}
     </div>
   )
 }
