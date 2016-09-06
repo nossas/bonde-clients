@@ -24,7 +24,7 @@ class EmailPage extends Component {
 
   getTargetString() {
     const { targets } = this.state
-    return targets.join(';')
+    return targets.filter(target => !!target.trim()).join(';')
   }
 
   getTargetList() {

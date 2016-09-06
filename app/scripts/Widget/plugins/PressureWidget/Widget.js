@@ -27,7 +27,7 @@ export class PressureWidget extends Component {
 
   getTargetList() {
     const { targets } = this.props.widget.settings || { targets: '' }
-    return targets && targets.split(';')
+    return targets && targets.split(';').filter(target => !!target.trim())
   }
 
   getEmailTarget(target) {
