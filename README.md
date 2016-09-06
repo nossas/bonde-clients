@@ -60,4 +60,4 @@ git push production master
 [depstatus]: https://david-dm.org/ourcities/hub-client
 [devdepstatusimg]: https://img.shields.io/david/dev/ourcities/hub-client.svg?style=flat-square
 [devdepstatus]: https://david-dm.org/ourcities/hub-client#info=devDependencies
-[dockerautoimg]: https://img.shields.io/badge/docker-automated%20deploy-blue.svg?style=flat-square
+[dockerautoimg]: https://img.shields.io/badge/dokku-auto%20deploy-blue.svg?style=flat-square
