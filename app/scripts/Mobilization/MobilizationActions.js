@@ -35,7 +35,7 @@ export const fetchMobilizations = (queryFilter = {}) => ({
 
 export const setCurrentMobilizationId = currentId => ({
   type: SET_CURRENT_MOBILIZATION,
-  currentId: parseInt(currentId, 10)
+  currentId: !isNaN(parseInt(currentId, 10)) ? parseInt(currentId, 10) : undefined
 })
 
 export const addMobilization = mobilization => ({ type: ADD_MOBILIZATION, mobilization })

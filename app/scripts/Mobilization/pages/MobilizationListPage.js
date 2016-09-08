@@ -4,9 +4,13 @@ import { connect } from 'react-redux'
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
 import { MobilizationList, MobilizationListHeader }  from '../components'
-import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
+import { setCurrentMobilizationId } from '../MobilizationActions'
 
 class MobilizationListPage extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(setCurrentMobilizationId(null))
+  }
 
   render() {
     const { mobilization: { data, loading, loaded } } = this.props
@@ -28,7 +32,8 @@ class MobilizationListPage extends Component {
 MobilizationListPage.propTypes = {
   data: PropTypes.array,
   loaded: PropTypes.bool,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default MobilizationListPage
