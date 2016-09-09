@@ -58,12 +58,6 @@ module.exports = {
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
-    new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEVELOPMENT__: false,
-      __DEVTOOLS__: false
-    }),
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
@@ -76,8 +70,13 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_URL: JSON.stringify(process.env.API_URL),
         APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
-        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY)
-      }
+        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+        GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY)
+      },
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false
     }),
 
     // optimizations

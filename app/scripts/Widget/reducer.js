@@ -3,7 +3,15 @@ import superagent from 'superagent'
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
 import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 
-import { REQUEST_EDIT_WIDGET, SUCCESS_EDIT_WIDGET, FAILURE_EDIT_WIDGET } from './actions'
+import {
+  REQUEST_EDIT_WIDGET,
+  SUCCESS_EDIT_WIDGET,
+  FAILURE_EDIT_WIDGET,
+
+  REQUEST_FETCH_GOOGLE_FONTS,
+  SUCCESS_FETCH_GOOGLE_FONTS,
+  FAILURE_FETCH_GOOGLE_FONTS
+} from './actions'
 import { REQUEST_FILL_WIDGET, SUCCESS_FILL_WIDGET, FAILURE_FILL_WIDGET } from './actions'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
@@ -38,7 +46,6 @@ export default function reducer(state = initialState, action) {
       return {...state, loaded: true, data: action.result }
     case FAILURE_FIND_WIDGETS:
       return {...state, loaded: true}
-
     case REQUEST_EDIT_WIDGET:
       return {
         ...state,
@@ -126,6 +133,12 @@ export default function reducer(state = initialState, action) {
           return widget
         })
       }
+    case REQUEST_FETCH_GOOGLE_FONTS:
+      return { ...state, loaded: false, loading: true }
+    case SUCCESS_FETCH_GOOGLE_FONTS:
+      return { ...state, loaded: true, loading: false, googleFonts: action.fonts }
+    case FAILURE_FETCH_GOOGLE_FONTS:
+      return { ...state, loaded: true, loading: false, error: action.error }
     default:
       return state
   }

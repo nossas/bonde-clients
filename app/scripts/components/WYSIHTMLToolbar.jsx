@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import classnames from 'classnames'
 
 import {
   WYSIHTMLToolbarInsertImage,
@@ -8,82 +10,64 @@ import {
   DropDownMenu,
   DropDownMenuItem
 } from './'
+import * as WidgetActions from '../Widget/actions'
 
-export default class WYSIHTMLToolbar extends React.Component {
-  static propTypes = {
-    elementId: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    buttonClassName: PropTypes.string
+export class WYSIHTMLToolbar extends Component {
+  componentDidMount() {
+    const { fetchGoogleFonts } = this.props
+    fetchGoogleFonts()
   }
 
   render() {
-    const { elementId, className, style, buttonClassName } = this.props
+    const { elementId, className, style, buttonClassName, googleFonts } = this.props
     return (
-      <div id={elementId} className={className} style={style}>
-        <a
-          data-wysihtml5-command="createLink"
-          className={buttonClassName}>
+      <div id={elementId} className={classnames('wysihtml-toolbar', className)} style={style}>
+        {!googleFonts.items.length ? null : (
+          <div className="google-fonts inline">
+            <select className="ml1 field-light h4 px1" style={{ height: '30px' }}>
+              {googleFonts.items.map(({ family }) => (
+                <option key={family} value={family}>{family}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        <a className={buttonClassName} data-wysihtml5-command="createLink">
           <i className="fa fa-link" />
         </a>
-        <a
-          data-wysihtml5-command="removeLink"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="removeLink">
           <i className="fa fa-unlink" />
         </a>
-        <a
-          data-wysihtml5-command="insertImage"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="insertImage">
           <i className="fa fa-image" />
         </a>
-        <a
-          data-wysihtml5-command="insertHTMLForm"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="insertHTMLForm">
           <i className="fa fa-code" />
         </a>
-        <a
-          data-wysihtml5-command="insertUnorderedList"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="insertUnorderedList">
           <i className="fa fa-list-ul" />
         </a>
-        <a
-          data-wysihtml5-command="insertOrderedList"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="insertOrderedList">
           <i className="fa fa-list-ol" />
         </a>
-        <a
-          data-wysihtml5-command="alignLeftStyle"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="alignLeftStyle">
           <i className="fa fa-align-left" />
         </a>
-        <a
-          data-wysihtml5-command="alignCenterStyle"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="alignCenterStyle">
           <i className="fa fa-align-center" />
         </a>
-        <a
-          data-wysihtml5-command="alignRightStyle"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="alignRightStyle">
           <i className="fa fa-align-right regular" />
         </a>
-        <a
-          data-wysihtml5-command="undo"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="undo">
           <i className="fa fa-undo regular" />
         </a>
-        <a
-          data-wysihtml5-command="redo"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="redo">
           <i className="fa fa-repeat regular" />
         </a>
-        <a
-          data-wysihtml5-command="bold"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="bold">
           <i className="fa fa-bold" />
         </a>
-        <a
-          data-wysihtml5-command="italic"
-          className={buttonClassName}>
+        <a className={buttonClassName} data-wysihtml5-command="italic">
           <i className="fa fa-italic" />
         </a>
         <DropDownMenu
@@ -153,3 +137,23 @@ export default class WYSIHTMLToolbar extends React.Component {
     )
   }
 }
+
+WYSIHTMLToolbar.propTypes = {
+  elementId: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  buttonClassName: PropTypes.string,
+  googleFonts: PropTypes.object.isRequired,
+  // Actions
+  fetchGoogleFonts: PropTypes.func.isRequired
+}
+
+WYSIHTMLToolbar.defaultProps = {
+  googleFonts: { items: [] }
+}
+
+const mapStateToProps = state => ({
+  googleFonts: state.widgets.googleFonts
+})
+
+export default connect(mapStateToProps, WidgetActions)(WYSIHTMLToolbar)

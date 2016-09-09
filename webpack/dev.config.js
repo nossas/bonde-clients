@@ -64,6 +64,7 @@ module.exports = {
         API_URL: JSON.stringify(process.env.API_URL),
         APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
         PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+        GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY)
       },
       __CLIENT__: true,
       __SERVER__: false,
