@@ -14,8 +14,8 @@ import * as WidgetActions from '../Widget/actions'
 
 export class WYSIHTMLToolbar extends Component {
   componentDidMount() {
-    const { fetchGoogleFonts } = this.props
-    fetchGoogleFonts()
+    const { googleFonts, fetchGoogleFonts } = this.props
+    if (!googleFonts.items.length) fetchGoogleFonts()
   }
 
   render() {
