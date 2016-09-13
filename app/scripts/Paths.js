@@ -46,10 +46,6 @@ export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
 }
 
-export function fontsMobilization(id) {
-  return `/mobilizations/${id}/fonts`
-}
-
 export function customDomainMobilization(id) {
   return `/mobilizations/${id}/customDomain`
 }
