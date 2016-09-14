@@ -1,29 +1,14 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-/*import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'*/
+
 import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
 import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
 import { ShowMobilization } from './../'
-
 import { fetchMobilizations, mobilizationsIsLoaded } from '../../Mobilization/MobilizationActions'
-
-
-const mapStateToProps = (state) => {
-  return ({
-    mobilizations: state.mobilization.data,
-    blocks: state.blocks,
-    widgets: state.widgets
-  })
-}
+import { GoogleFontsLoader } from '../../../components/Fonts'
+import * as arrayUtil from '../../../util/array'
 
 export class CustomDomainWrapper extends React.Component {
-  static propTypes = {
-    mobilizations: PropTypes.object.isRequired,
-    blocks: PropTypes.object.isRequired,
-    widgets: PropTypes.object.isRequired,
-    params: PropTypes.object
-  }
-
   static fetchData(store, params, query, host) {
     const regex = host.match(`(.+)\.${process.env.APP_DOMAIN}`)
     let findParams
@@ -59,13 +44,19 @@ export class CustomDomainWrapper extends React.Component {
 
   renderMobilization() {
     const { mobilizations, blocks, widgets } = this.props
+    const { header_font: headerFont, body_font: bodyFont } = mobilizations[0]
+    const fonts = [headerFont, bodyFont].filter(arrayUtil.distinct)
+
     return (
-      <ShowMobilization
-        mobilization={mobilizations[0]}
-        blocks={blocks}
-        widgets={widgets}
-        {...this.props}
-      />
+      <div>
+        <ShowMobilization
+          mobilization={mobilizations[0]}
+          blocks={blocks}
+          widgets={widgets}
+          {...this.props}
+        />
+        <GoogleFontsLoader fonts={fonts} />
+      </div>
     )
   }
 
@@ -73,7 +64,10 @@ export class CustomDomainWrapper extends React.Component {
     return (
       <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-gray'>
         <div className='center flex-auto white'>
-          <div className='h1'>Ops! Estamos com um problema técnico. Em caso de dúvida, escreva para <a href="mailto:contato@nossascidades.org">contato@nossascidades.org</a>.</div>
+          <div className='h1'>
+            Ops! Estamos com um problema técnico. Em caso de dúvida, escreva para
+            <a href="mailto:contato@nossascidades.org">contato@nossascidades.org</a>.
+          </div>
         </div>
       </div>
     )
@@ -87,5 +81,18 @@ export class CustomDomainWrapper extends React.Component {
     )
   }
 }
+
+CustomDomainWrapper.propTypes = {
+  mobilizations: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  blocks: PropTypes.object.isRequired,
+  widgets: PropTypes.object.isRequired,
+  params: PropTypes.object
+}
+
+const mapStateToProps = state => ({
+  mobilizations: state.mobilization.data,
+  blocks: state.blocks,
+  widgets: state.widgets
+})
 
 export default connect(mapStateToProps)(CustomDomainWrapper)

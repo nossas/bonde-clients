@@ -6,6 +6,8 @@ import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
 import { MobilizationMenu } from '../../components'
 import { getMobilization } from '../MobilizationSelectors'
 import { setCurrentMobilizationId } from '../MobilizationActions'
+import { GoogleFontsLoader } from '../../../components/Fonts'
+import * as arrayUtil from '../../../util/array'
 
 class MobilizationDashboard extends React.Component {
   static propTypes = {
@@ -44,11 +46,14 @@ class MobilizationDashboard extends React.Component {
 
   render() {
     const { children, ...otherProps } = this.props
+    const { mobilization: { header_font: headerFont, body_font: bodyFont } } = otherProps
+    const fonts = [headerFont, bodyFont].filter(arrayUtil.distinct)
 
     return (
       <div className='flex flex-auto overflow-hidden'>
         <MobilizationMenu {...otherProps} />
         {React.cloneElement(children, {...otherProps})}
+        <GoogleFontsLoader fonts={fonts} />
       </div>
     )
   }
