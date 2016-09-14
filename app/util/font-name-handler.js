@@ -39,7 +39,9 @@ export const fontsData = {
   }
 }
 
-export const normalizeFontsToLinkStyle = names => names.map(fontname => {
+const excludeLocalFonts = font => !['PF Din', 'Proxima Nova'].includes(font)
+
+export const normalizeFontsToLinkStyle = names => names.filter(excludeLocalFonts).map(fontname => {
   const sanitizedFontName = fontname.replace(/\s/g, '').toLowerCase()
   const font = fontsData[sanitizedFontName]
   if (!font) return null
@@ -57,3 +59,6 @@ export const getGoogleFontsLoadURL = fonts => {
   const fontFamiliesQueryParam = normalizeFontsToLinkStyle(fontsArray)
   return `${GOOGLE_FONTS_API_CSS_URL}?family=${fontFamiliesQueryParam}`
 }
+
+export const needsToLoadGoogleFonts = fonts =>
+  fonts.constructor === Array ? fonts.filter(excludeLocalFonts).length > 0 : false

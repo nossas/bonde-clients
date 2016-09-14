@@ -4,13 +4,17 @@ import {
   GOOGLE_FONTS_API_CSS_URL,
   fontsData,
   normalizeFontsToLinkStyle,
-  getGoogleFontsLoadURL
+  getGoogleFontsLoadURL,
+  needsToLoadGoogleFonts
 } from './font-name-handler'
 
 describe('app/util/font-name-handler', () => {
   describe('#normalizeFontsToLinkStyle', () => {
     it('should return empty string if passed font name that does not exists', () => {
       expect(normalizeFontsToLinkStyle(['foo'])).to.be.empty
+    })
+    it('should return empty string if passed a local font name', () => {
+      expect(normalizeFontsToLinkStyle(['PF Din', 'Proxima Nova'])).to.be.empty
     })
     it('should return `Ubuntu` font name with weight options concatenated', () => {
       const ubuntu = `${fontsData['ubuntu'].name}:${fontsData['ubuntu'].weight.join(',')}`
@@ -38,6 +42,18 @@ describe('app/util/font-name-handler', () => {
       const normalizedFontLink = normalizeFontsToLinkStyle(['Source Sans Pro', 'Merriweather Sans'])
       const url = getGoogleFontsLoadURL(['Source Sans Pro', 'Merriweather Sans'])
       expect(url).to.have.string(normalizedFontLink)
+    })
+  })
+
+  describe('#needsToLoadGoogleFonts', () => {
+    it('should return false with only local fonts', () => {
+      expect(needsToLoadGoogleFonts(['PF Din', 'Proxima Nova'])).to.be.false
+    })
+    it('should return true with local fonts and Google Web Fonts font included', () => {
+      expect(needsToLoadGoogleFonts(['PF Din', 'Proxima Nova', 'Armata'])).to.be.true
+    })
+    it('should return true with only Google Web Fonts font included', () => {
+      expect(needsToLoadGoogleFonts(['PF Din', 'Proxima Nova', 'Armata'])).to.be.true
     })
   })
 })
