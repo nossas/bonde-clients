@@ -99,7 +99,7 @@ class Donation extends React.Component {
   }
 
   renderButton() {
-    const { configurable, widget } = this.props
+    const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
     const { loading, success, selected_value, selected_payment_type } = this.state
 
     const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
@@ -125,7 +125,12 @@ class Donation extends React.Component {
     if (!configurable) {
       return (
         <div className="donation center clearfix">
-          <h2 className="p2 m0" style={{backgroundColor: main_color}}>{title_text}</h2>
+          <h2
+            className="p2 m0"
+            style={{ fontFamily: headerFont, backgroundColor: main_color }}
+          >
+            {title_text}
+          </h2>
           <script dangerouslySetInnerHTML={{__html: `
 (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -233,17 +238,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   }
 
   render() {
-    const {
-      editable,
-      mobilization: { header_font: headerFont }
-    } = this.props
-
+    const { editable } = this.props
     const { success } = this.state
 
     return (
       <div>
         <div
-          className={`bg-white widget ${headerFont}-header`}
+          className="bg-white widget"
           style={(editable ? {cursor: 'pointer'} : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
