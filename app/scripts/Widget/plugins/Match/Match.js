@@ -88,8 +88,8 @@ class Match extends Component {
 
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
-        <div className={`match-widget p3 bg-darken-3 relative ${headerFont}-header`}>
-          <h2 className="mt0 mb3 center">{title_text}</h2>
+        <div className="match-widget p3 bg-darken-3 relative">
+          <h2 className="mt0 mb3 center" style={{ fontFamily: headerFont }}>{title_text}</h2>
           <Choices
             title={labelChoices1}
             selected={this.state.numberSelected}
