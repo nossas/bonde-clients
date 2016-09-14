@@ -5,6 +5,7 @@ import ga from 'react-ga'
 
 import '../../styles/main.scss'
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
+import { GoogleFontsLoader } from '../../components/Fonts'
 
 @connect(state => ({ auth: state.auth }))
 
@@ -39,10 +40,7 @@ export default class Application extends React.Component {
     return (
       <div>
         {React.cloneElement(this.props.children, {auth: this.props.auth})}
-        <link
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700"
-          rel="stylesheet"
-        />
+        <GoogleFontsLoader fonts="Source Sans Pro" />
       </div>
     )
   }
