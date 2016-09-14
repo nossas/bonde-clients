@@ -65,8 +65,8 @@ export class CustomDomainWrapper extends React.Component {
       <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-gray'>
         <div className='center flex-auto white'>
           <div className='h1'>
-            Ops! Estamos com um problema técnico. Em caso de dúvida, escreva para
-            <a href="mailto:contato@nossascidades.org">contato@nossascidades.org</a>.
+            Ops! Estamos com um problema técnico. Em caso de dúvida, escreva
+            para <a href="mailto:contato@nossascidades.org">contato@nossascidades.org</a>.
           </div>
         </div>
       </div>
