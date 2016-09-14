@@ -16,6 +16,9 @@ describe('app/util/font-name-handler', () => {
     it('should return empty string if passed a local font name', () => {
       expect(normalizeFontsToLinkStyle(['PF Din', 'Proxima Nova'])).to.be.empty
     })
+    it('should return empty string if passed an empty array', () => {
+      expect(normalizeFontsToLinkStyle([])).to.be.empty
+    })
     it('should return `Ubuntu` font name with weight options concatenated', () => {
       const ubuntu = `${fontsData['ubuntu'].name}:${fontsData['ubuntu'].weight.join(',')}`
       expect(normalizeFontsToLinkStyle(['Ubuntu'])).to.be.equal(ubuntu)
@@ -42,6 +45,9 @@ describe('app/util/font-name-handler', () => {
       const normalizedFontLink = normalizeFontsToLinkStyle(['Source Sans Pro', 'Merriweather Sans'])
       const url = getGoogleFontsLoadURL(['Source Sans Pro', 'Merriweather Sans'])
       expect(url).to.have.string(normalizedFontLink)
+    })
+    it('should return null when pass an array of null', () => {
+      expect(getGoogleFontsLoadURL([null])).to.be.null
     })
   })
 
