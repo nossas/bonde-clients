@@ -1,8 +1,14 @@
 .bg-reboo {
-  background-image: url("./../scripts/pages/Login/reboo-bg-login.png");
+  background-image: url('./../scripts/pages/Login/reboo-bg-login.png');
   color: $darkGray;
 
   h1 {
     font-weight: normal;
+  }
+
+  .form {
+    input[type="submit"] {
+      font-size: 1.15rem;
+    }
   }
 }

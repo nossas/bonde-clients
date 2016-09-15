@@ -1,0 +1,46 @@
+
+.form {
+  .input-container {
+    border-bottom: 1px solid #eee;
+    padding-top: $space-2;
+    padding-bottom: $space-1;
+    padding-left: $space-3;
+    padding-right: $space-3;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: .75rem;
+    }
+
+    & > label {
+      margin-bottom: 0;
+      font-size: .75rem;
+      font-weight: bold;
+      color: $gray;
+      display: inline;
+
+      & > .error {
+        margin-left: $space-1;
+        color: $red;
+        font-weight: bold;
+      }
+    }
+
+    & > .input {
+      border: none;
+      color: $black;
+      margin: 0;
+      padding: 0;
+      height: 30px;
+      display: block;
+
+      &::-webkit-input-placeholder,
+      &:-moz-placeholder,
+      &::-moz-placeholder,
+      &:-ms-input-placeholder {
+         color: $lightGray;
+      }
+      &:focus { outline: none; }
+    }
+  }
+}

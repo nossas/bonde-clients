@@ -19,6 +19,7 @@
 @import './../scripts/components/TopMenu/top_menu.scss';
 @import './../scripts/Widget/plugins/Donation/assets/donation_widget.scss';
 @import './../scripts/components/Editor/color-picker.scss';
+@import './forms.scss';
 
 body {
   -webkit-overflow-scrolling: touch;
@@ -26,6 +27,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: $silver;
   font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background: #fff;
+  -webkit-text-fill-color: $black !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
 textarea {

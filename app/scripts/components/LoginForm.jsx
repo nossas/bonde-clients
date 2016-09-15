@@ -6,45 +6,72 @@ import classnames from 'classnames'
 
 import * as Paths from '../Paths'
 import { login } from './../actions/AuthActions'
-
-import * as validation from '../../util/validation-helper'
+import { isValidEmail } from '../../util/validation-helper'
 
 @reactMixin.decorate(Navigation)
 class LoginForm extends React.Component {
-
   componentWillReceiveProps(nextProps) {
-    if(nextProps.user){
+    if(nextProps.auth.user){
       this.transitionTo(Paths.mobilizations())
     }
   }
 
   render() {
     const { fields: { email, password }, handleSubmit, error, submitting } = this.props
+    const {
+      data: { email, password },
+      errors: { email: emailError, password: passwordError },
+      touched: { email: emailTouched, password: passwordTouched },
+      className,
+      handleChange,
+      handleBlur
+    } = this.props
 
     return (
-      <form onSubmit={handleSubmit} noValidate>
+      <form
+        className={classnames('form', className)}
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <div className="bg-white rounded-top">
+          <div className="input-container">
+            <label htmlFor="email">
+              Seu email
+              <span className="error">{email.touched && email.error}</span>
+            </label>
+            <input
+              id="email"
+              type="email"
+              className={classnames(
+                'input block lightestgray',
+                email.touched && email.error ? 'has-error' : null
+              )}
+              placeholder="exemplo@email.com"
+              {...email}
+            />
+          </div>
 
-        <label htmlFor="email" className="block h5 caps bold mb1">E-mail</label>
-        <input
-          type="email" id="email"
-          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((email.touched && email.error) ? 'has-error' : null))}
-          {...email}
-        />
-        {email.touched && email.error && <span className="h5 red bold">{email.error}</span>}
-
-        <label htmlFor="password" className="block h5 caps bold mt1 mb1">Senha</label>
-        <input
-          type="password" id="password"
-          className={classnames("field-light", "block", "full-width", "mt1", "mb1", ((password.touched && password.error) ? 'has-error' : null))}
-          {...password}
-        />
-        {password.touched && password.error && <span className="h5 red bold">{password.error}</span>}
+          <div className="input-container">
+            <label htmlFor="password">
+              Senha
+              <span className="error">{password.touched && password.error}</span>
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="input"
+              placeholder="••••••••••"
+              {...password}
+            />
+          </div>
+        </div>
 
         <input
           type="submit"
-          className="button full-width bg-aqua mt2 h3"
+          className="btn white bg-pagenta col-12 rounded-bottom py2 caps"
           disabled={submitting}
-          value={submitting ? "ENTRANDO..." : "ENTRAR"} />
+          value={submitting ? "Entrando..." : "Entrar"}
+        />
 
         {error && <div className="h5 red bold center mt2 animated shake">{error}</div>}
       </form>
@@ -56,7 +83,8 @@ LoginForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  className: PropTypes.string
 }
 
 const fields = ['email', 'password']
@@ -64,12 +92,15 @@ const fields = ['email', 'password']
 const validate = values => {
   const errors = {}
   if (!values.email) {
-    errors.email = 'Informe o e-mail'
-  } else if (!validation.isValidEmail(values.email)) {
-    values.email = 'E-mail inválido'
+    errors.email = 'Informe seu email'
+    errors.valid = false
+  } else if (!isValidEmail(values.email)) {
+    errors.email = 'Email inválido'
+    errors.valid = false
   }
   if (!values.password) {
-    errors.password = 'Informe a senha'
+    errors.password = 'Informe sua senha'
+    errors.valid = false
   }
   return errors
 }

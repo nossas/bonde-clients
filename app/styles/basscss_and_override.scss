@@ -1,9 +1,10 @@
-$blue: #215D7A;
-$aqua: #2FBEE6;
-$gray: #364C55;
-$darkGray: #4A4A4A;
+$blue: #215d7a;
+$aqua: #2fbee6;
+$darkGray: #4a4a4a;
 $lightGray: #999999;
-$silver: #F7F7F7;
+$lightestGray: #ccc;
+$silver: #f7f7f7;
+$pagenta: #ff0099;
 $font-family: 'Proxima Nova', sans-serif;
 $form-field-height: 3rem;
 $link-color: $aqua;
@@ -82,3 +83,13 @@ transition: .1s ease-in-out;
 transform: scale(1.01);
 box-shadow: 0px 0px 15px rgba(0,0,0,.4)
 }
+
+// Additional Colors
+.lightgray  { color: $lightGray; }
+.lightestgray  { color: $lightestGray; }
+.pagenta  { color: $pagenta; }
+
+// Additional Background Colors
+.bg-lightgray  { background-color: $lightGray; }
+.bg-lightestgray  { background-color: $lightestGray; }
+.bg-pagenta  { background-color: $pagenta; }
