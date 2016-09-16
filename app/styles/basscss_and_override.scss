@@ -1,27 +1,25 @@
 $blue: #215d7a;
 $aqua: #2fbee6;
 $darkGray: #4a4a4a;
+$darkenGray: #222;
+$gray20: #333;
 $lightGray: #999999;
 $lightestGray: #ccc;
 $silver: #f7f7f7;
 $pagenta: #ff0099;
+$darkenMediumBlue: #031092;
 $font-family: 'Proxima Nova', sans-serif;
 $form-field-height: 3rem;
 $link-color: $aqua;
+$space-5: 8rem !default;
 
-@import '../../node_modules/basscss-sass/scss/align';
-@import '../../node_modules/basscss-sass/scss/all';
-@import '../../node_modules/basscss-sass/scss/background-colors';
-@import '../../node_modules/basscss-sass/scss/background-images';
-@import '../../node_modules/basscss-sass/scss/border-colors';
-@import '../../node_modules/basscss-sass/scss/border';
 @import '../../node_modules/basscss-sass/scss/btn-outline';
 @import '../../node_modules/basscss-sass/scss/btn-primary';
 @import '../../node_modules/basscss-sass/scss/btn';
-@import '../../node_modules/basscss-sass/scss/colors';
-@import '../../node_modules/basscss-sass/scss/darken';
-@import '../../node_modules/basscss-sass/scss/flexbox';
 @import '../../node_modules/basscss-sass/scss/forms';
+@import '../../node_modules/basscss-sass/scss/align';
+@import '../../node_modules/basscss-sass/scss/all';
+@import '../../node_modules/basscss-sass/scss/border';
 @import '../../node_modules/basscss-sass/scss/grid';
 @import '../../node_modules/basscss-sass/scss/hide';
 @import '../../node_modules/basscss-sass/scss/highlight-dark';
@@ -38,6 +36,12 @@ $link-color: $aqua;
 @import '../../node_modules/basscss-sass/scss/responsive-padding';
 @import '../../node_modules/basscss-sass/scss/type-scale';
 @import '../../node_modules/basscss-sass/scss/typography';
+@import '../../node_modules/basscss-sass/scss/background-colors';
+@import '../../node_modules/basscss-sass/scss/background-images';
+@import '../../node_modules/basscss-sass/scss/border-colors';
+@import '../../node_modules/basscss-sass/scss/colors';
+@import '../../node_modules/basscss-sass/scss/darken';
+@import '../../node_modules/basscss-sass/scss/flexbox';
 
 .caps { letter-spacing: 0; }
 form .button { height: 3rem; }
@@ -46,50 +50,82 @@ form .button { height: 3rem; }
 .field-light.has-error { border-color: $red !important; }
 .button.is-disabled, .button:disabled { opacity: .25; }
 
-.hover {
-  opacity: 0.8;
-}
-
-.hover:hover {
-  opacity: 1;
-}
+.hover { opacity: 0.8; }
+.hover:hover { opacity: 1; }
 
 // ESTILO DOS BOTÕES DE MENU
-
-.button-menu{
-font-weight:lighter;
-display:block;
-padding:0px;
-padding:.5em 2em;
-border-left: 3px solid rgba(0,0,0,0);
-box-sizing: border-box;
+.button-menu {
+  font-weight: lighter;
+  display: block;
+  padding: 0px;
+  padding: .5em 2em;
+  border-left: 3px solid rgba(0,0,0,0);
+  box-sizing: border-box;
 }
 
-.button-menu:hover{
-	text-decoration:none;
-	border-left:3px solid #20BDE9;
+.button-menu:hover {
+  text-decoration: none;
+  border-left: 3px solid #20BDE9;
 }
-.button.col.is-active{
-background-color:#CAEFF2;
-}
+.button.col.is-active { background-color:#CAEFF2; }
 
 // DÁ EFEITO EM BOTÕES COM IMAGEM
 
-.widget a img{
-transition: .1s ease-in-out;
-
-}
-.widget a img:hover{
-transform: scale(1.01);
-box-shadow: 0px 0px 15px rgba(0,0,0,.4)
+.widget a img { transition: .1s ease-in-out; }
+.widget a img:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 0px 15px rgba(0,0,0,.4)
 }
 
 // Additional Colors
-.lightgray  { color: $lightGray; }
-.lightestgray  { color: $lightestGray; }
-.pagenta  { color: $pagenta; }
+.lightgray          { color: $lightGray; }
+.lightestgray       { color: $lightestGray; }
+.gray20             { color: $gray20; }
+.darkengray         { color: $darkenGray; }
+.pagenta            { color: $pagenta; }
+.darken-medium-blue { color: $darkenMediumBlue; }
 
 // Additional Background Colors
-.bg-lightgray  { background-color: $lightGray; }
-.bg-lightestgray  { background-color: $lightestGray; }
-.bg-pagenta  { background-color: $pagenta; }
+.bg-lightgray          { background-color: $lightGray; }
+.bg-lightestgray       { background-color: $lightestGray; }
+.bg-gray20             { background-color: $gray20; }
+.bg-darkengray         { background-color: $darkenGray; }
+.bg-pagenta            { background-color: $pagenta; }
+.bg-darken-medium-blue { background-color: $darkenMediumBlue; }
+
+// Additional Border Colors
+.border-lightgray          { border-color: $lightGray; }
+.border-lightestgray       { border-color: $lightestGray; }
+.border-gray20             { border-color: $gray20; }
+.border-darkengray         { border-color: $darkenGray; }
+.border-pagenta            { border-color: $pagenta; }
+.border-darken-medium-blue { border-color: $darkenMediumBlue; }
+
+.border-darken-1 { border-color: $darken-1; }
+.border-darken-2 { border-color: $darken-2; }
+.border-darken-3 { border-color: $darken-3; }
+.border-darken-4 { border-color: $darken-4; }
+
+// Additional Border Options
+.border-only-bottom {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+// Headers
+.h1 {
+  font-weight: 300;
+  font-size: 2.15rem;
+  color: $darkenGray;
+}
+
+// Padding
+.p5  { padding        : $space-5; padding-right : $space-5; }
+.px5 { padding-left   : $space-5; padding-right : $space-5; }
+.pl5 { padding-left   : $space-5; }
+.pr5 { padding-right  : $space-5; }
+.pt5 { padding-top    : $space-5; }
+.pb5 { padding-bottom : $space-5; }

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
 import ga from 'react-ga'
 
-import '../../styles/main.scss'
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
+import '../../styles/main.scss'
 import { GoogleFontsLoader } from '../../components/Fonts'
 
 @connect(state => ({ auth: state.auth }))

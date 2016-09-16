@@ -1,30 +1,37 @@
 import React, { PropTypes } from 'react'
-
 import { Link } from 'react-router'
 
-
 const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
-  const menuStyle = {
-    marginTop: '12px',
-    borderColor: '#2FBEE6',
-    borderWidth: '4px'
-  }
-
   return (
-    <h2 className="bg-white mt0 px4 clearfix align-middle">
-      <div className="left border-bottom py2" style={menuStyle}>
-        <i className="fa fa-flag-o mr2 aqua" />
-        Suas Mobilizações
-      </div>
-      {(redirectToAdd !== undefined && typeof redirectToAdd === 'function' ?
-        <Link
-          to={redirectToAdd()}
-          className="button bg-aqua caps h4 py2 right mt2">
-          <i className="fa fa-plus mr2" />
-          Nova mobilização
-        </Link>
-      : null)}
-    </h2>
+    <div className="bg-white pl5 pr4">
+      <h1 className="mobilization-list-header m0 table col-12">
+        <span className="py3 h1 table-cell align-middle">
+          Suas Mobilizações
+        </span>
+        {(
+          !(redirectToAdd !== undefined && typeof redirectToAdd === 'function') ? null : (
+            <span className="table-cell align-middle">
+              <Link
+                to={redirectToAdd()}
+                className="btn white bg-pagenta caps h4 py2 right rounded"
+              >
+                <i className="fa fa-plus mr2" style={{ fontSize: '.75rem' }} />
+                Nova mobilização
+              </Link>
+            </span>
+          )
+        )}
+      </h1>
+      <nav className="gray20">
+        <a
+          href="#"
+          className="btn border-only-bottom border-pagenta h4 px0 py2 mr3 inline-block"
+          style={{ borderBottomWidth: '3px' }}
+        >
+          Ativas
+        </a>
+      </nav>
+    </div>
   )
 }
 
