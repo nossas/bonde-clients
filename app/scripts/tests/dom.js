@@ -24,3 +24,7 @@ function propagateToGlobal (window) {
     global[key] = window[key]
   }
 }
+
+function noop() { return null }
+require.extensions['.scss'] = noop;
+require.extensions['.png'] = noop;

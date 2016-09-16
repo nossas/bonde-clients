@@ -1,0 +1,54 @@
+@import '../../../../../node_modules/basscss-sass/scss/darken';
+
+$avatarWidth  : 90px;
+$avatarHeight : 90px;
+
+.mobilization-list {
+  .mobilization-list-items-header {
+    font-size: .75rem;
+    font-weight: 600;
+
+    .list-items-header-avatar {
+      width: $avatarWidth;
+      height: 1px;
+    }
+
+    .list-items-header-more {
+      font-size: 1.5rem;
+      height: 1px;
+      visibility: hidden;
+    }
+  }
+
+  .mobilization-list-item {
+    cursor: pointer;
+
+    &:hover {
+      z-index: 1;
+      position: relative;
+      box-shadow: 0 0 10px $darken-3;
+    }
+
+    .avatar-width  { width  : $avatarWidth; }
+    .avatar-height { height : $avatarHeight; }
+
+    .list-item-avatar {
+      .fa-picture-o { font-size: 3rem; }
+    }
+
+    .list-item-name {
+      .table { height: $avatarHeight; }
+    }
+
+    .list-item-created-at,
+    .list-item-users,
+    .list-item-fund-raising {
+      line-height: $avatarHeight;
+    }
+
+    .list-item-more {
+      line-height: $avatarHeight;
+      font-size: 1.5rem;
+    }
+  }
+}

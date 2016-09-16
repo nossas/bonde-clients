@@ -17,11 +17,12 @@ class MobilizationListPage extends Component {
     return (
       <div className="flex-auto bg-silver gray">
         <MobilizationListHeader redirectToAdd={() => Paths.newMobilization()} />
-        {(!loading && loaded ?
+        {(
+          loading && !loaded ? <Loading /> :
           <MobilizationList
             redirectToEdit={id => Paths.editMobilization(id)}
-            mobilizations={data} /> :
-          <Loading />
+            mobilizations={data}
+          />
         )}
       </div>
     )

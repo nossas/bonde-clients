@@ -122,6 +122,9 @@ form .button { height: 3rem; }
   color: $darkenGray;
 }
 
+// Additional Layouts
+.content-box { box-sizing: content-box; }
+
 // Padding
 .p5  { padding        : $space-5; padding-right : $space-5; }
 .px5 { padding-left   : $space-5; padding-right : $space-5; }
