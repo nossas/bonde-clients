@@ -1,25 +1,7 @@
 @import '../../../../../node_modules/basscss-sass/scss/darken';
-
-$avatarWidth  : 90px;
-$avatarHeight : 90px;
+@import './_mobilization-list-variables';
 
 .mobilization-list {
-  .mobilization-list-items-header {
-    font-size: .75rem;
-    font-weight: 600;
-
-    .list-items-header-avatar {
-      width: $avatarWidth;
-      height: 1px;
-    }
-
-    .list-items-header-more {
-      font-size: 1.5rem;
-      height: 1px;
-      visibility: hidden;
-    }
-  }
-
   .mobilization-list-item {
     cursor: pointer;
 
@@ -46,7 +28,7 @@ $avatarHeight : 90px;
       line-height: $avatarHeight;
     }
 
-    .list-item-more {
+    .list-item-more-menu {
       line-height: $avatarHeight;
       font-size: 1.5rem;
     }
