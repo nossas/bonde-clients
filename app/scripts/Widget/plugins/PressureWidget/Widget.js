@@ -83,7 +83,7 @@ export class PressureWidget extends Component {
       <OverlayWidget editable={editable} onClick={::this.handleOverlayOnClick}>
         {(widget.filled ?
           <TellAFriend {...this.props}
-            message={title_text}
+            message="E-mail enviado"
             href={window.location.origin}
           />
         :
