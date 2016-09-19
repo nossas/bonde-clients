@@ -17,15 +17,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { fields: { email, password }, handleSubmit, error, submitting } = this.props
-    const {
-      data: { email, password },
-      errors: { email: emailError, password: passwordError },
-      touched: { email: emailTouched, password: passwordTouched },
-      className,
-      handleChange,
-      handleBlur
-    } = this.props
+    const { fields: { email, password }, handleSubmit, error, submitting, className } = this.props
 
     return (
       <form
@@ -73,7 +65,7 @@ class LoginForm extends React.Component {
           value={submitting ? "Entrando..." : "Entrar"}
         />
 
-        {error && <div className="h5 red bold center mt2 animated shake">{error}</div>}
+        {error && <div className="h5 h5 white bold center mt2 animated shake">{error}</div>}
       </form>
     )
   }

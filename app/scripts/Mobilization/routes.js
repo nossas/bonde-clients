@@ -2,19 +2,7 @@ import React, { Component } from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import { MobilizationListPage, WrapperMobilizationApp } from './pages'
-<<<<<<< HEAD
 import { NewBlock } from './../pages'
-=======
-import {
-  NewMobilization,
-  NewBlock,
-  MobilizationBasics,
-  MobilizationCity,
-  MobilizationAnalytics,
-  MobilizationSharing,
-  MobilizationCustomDomain
-} from './../pages'
->>>>>>> Remove mobilization fonts page. #188 [ci skip]
 
 import {
   UserDashboardContainer,
@@ -52,10 +40,6 @@ export default (
       <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilizationPage} />
       <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
       { widgetRoutes(defaultPath) }
-<<<<<<< HEAD
-      <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFontsPage} />
-=======
->>>>>>> Remove mobilization fonts page. #188 [ci skip]
       <Route component={MobilizationSettingsContainer} >
         <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasicsFormPage} />
         <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCityPage} />

@@ -21,6 +21,10 @@ export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
 export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
 export const FAILURE_FILL_WIDGET = 'FAILURE_FILL_WIDGET'
 
+export const REQUEST_FETCH_GOOGLE_FONTS = 'REQUEST_FETCH_GOOGLE_FONTS'
+export const SUCCESS_FETCH_GOOGLE_FONTS = 'SUCCESS_FETCH_GOOGLE_FONTS'
+export const FAILURE_FETCH_GOOGLE_FONTS = 'FAILURE_FETCH_GOOGLE_FONTS'
+
 const editWidgetSuccess = widget => ({ type: SUCCESS_EDIT_WIDGET, widget })
 export const editWidgetAsync = widget => (dispatch, getState, request) => {
   const state = getState()
@@ -124,4 +128,18 @@ export const deleteMatch = (params) => {
       }
     })
   }
+}
+
+const fetchGoogleFontsRequest = () => ({ type: REQUEST_FETCH_GOOGLE_FONTS })
+const fetchGoogleFontsSuccess = fonts => ({ type: SUCCESS_FETCH_GOOGLE_FONTS, fonts })
+const fetchGoogleFontsFailure = error => ({ type: FAILURE_FETCH_GOOGLE_FONTS, error })
+export const fetchGoogleFonts = () => dispatch => {
+  dispatch(fetchGoogleFontsRequest())
+  request
+    .get('https://www.googleapis.com/webfonts/v1/webfonts')
+    .query({ key: process.env.GOOGLE_FONTS_API_KEY })
+    .end((err, res) => {
+      if (err || !res.ok) dispatch(fetchGoogleFontsFailure(err || res.body))
+      else dispatch(fetchGoogleFontsSuccess(res.body))
+    })
 }
