@@ -98,13 +98,6 @@ export class PressureWidget extends Component {
               onSubmit={::this.handleSubmit}>
               {(show_counter && show_counter === "true" ? <PressureCount value={widget.count || 0} color={main_color} text={count_text} /> : null)}
             </PressureForm>
-            <div className="bg-black mt1 rounded py1 px3">
-              <p className="white m0">
-                Caso você seja o alvo dessa mobilização, dê uma resposta pública
-                 clicando <a href={`mailto:${reply_email}`} target="_blank" style={{color: main_color}}>aqui</a>.
-                 Ela será publicada nesta página.
-              </p>
-            </div>
           </div>
         )}
       </OverlayWidget>

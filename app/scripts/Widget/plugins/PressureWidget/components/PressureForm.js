@@ -107,19 +107,6 @@ class PressureForm extends Component {
               onChange={e => this.setState({ lastname: e.target.value })}
             />
           </div>
-          <div className="p3 border-top">
-            <button
-              type="submit"
-              onClick={::this.handleSubmit} // TODO: I don't undestand "the because" this line
-              className="caps white col-12 py2 rounded"
-              style={{backgroundColor: buttonColor}}
-            >
-              {buttonText}
-            </button>
-          </div>
-        </div>
-        {children}
-        <div className="pressure-form mt3">
           <h4 className="rounded-top m0 center py1" style={{backgroundColor: '#222'}}>
             <span className="white bold">Texto do e-mail</span>
           </h4>
@@ -142,12 +129,25 @@ class PressureForm extends Component {
               <textarea
                 id="pressure-body-id"
                 className="col-12"
-                style={{...inputReset, height: '13rem'}}
+                style={{...inputReset, height: '10rem'}}
                 value={body}
                 onChange={e => this.setState({ body: e.target.value })}
               />
             </div>
           </div>
+          <div className="p3 border-top">
+            <button
+              type="submit"
+              onClick={::this.handleSubmit} // TODO: I don't undestand "the because" this line
+              className="caps white col-12 py2 rounded"
+              style={{backgroundColor: buttonColor}}
+            >
+              {buttonText}
+            </button>
+          </div>
+        </div>
+        {children}
+        <div className="pressure-form mt3">
         </div>
       </form>
     )
