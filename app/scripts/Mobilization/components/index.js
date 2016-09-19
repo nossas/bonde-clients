@@ -8,4 +8,5 @@ export { default as MobilizationListItemCreatedAt } from './MobilizationListItem
 export { default as MobilizationListItemUsers } from './MobilizationListItemUsers'
 export { default as MobilizationListItemFundRaising } from './MobilizationListItemFundRaising'
 export { default as MobilizationListItemMoreMenu } from './MobilizationListItemMoreMenu'
-export { default as NewMobilizationHeader } from './NewMobilizationHeader'
+export { NewMobilizationHeader } from './NewMobilizationHeader'
+export { NewMobilizationHeaderSteps } from './NewMobilizationHeader'

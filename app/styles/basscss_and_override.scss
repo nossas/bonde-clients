@@ -3,6 +3,7 @@ $aqua: #2fbee6;
 $darkGray: #4a4a4a;
 $darkenGray: #222;
 $gray20: #333;
+$gray94: #eee;
 $lightGray: #999999;
 $lightestGray: #ccc;
 $silver: #f7f7f7;
@@ -81,6 +82,7 @@ form .button { height: 3rem; }
 .lightgray          { color: $lightGray; }
 .lightestgray       { color: $lightestGray; }
 .gray20             { color: $gray20; }
+.gray94             { color: $gray94; }
 .darkengray         { color: $darkenGray; }
 .pagenta            { color: $pagenta; }
 .darken-medium-blue { color: $darkenMediumBlue; }
@@ -89,6 +91,7 @@ form .button { height: 3rem; }
 .bg-lightgray          { background-color: $lightGray; }
 .bg-lightestgray       { background-color: $lightestGray; }
 .bg-gray20             { background-color: $gray20; }
+.bg-gray94             { background-color: $gray94; }
 .bg-darkengray         { background-color: $darkenGray; }
 .bg-pagenta            { background-color: $pagenta; }
 .bg-darken-medium-blue { background-color: $darkenMediumBlue; }
@@ -97,6 +100,7 @@ form .button { height: 3rem; }
 .border-lightgray          { border-color: $lightGray; }
 .border-lightestgray       { border-color: $lightestGray; }
 .border-gray20             { border-color: $gray20; }
+.border-gray94             { border-color: $gray94; }
 .border-darkengray         { border-color: $darkenGray; }
 .border-pagenta            { border-color: $pagenta; }
 .border-darken-medium-blue { border-color: $darkenMediumBlue; }
