@@ -19,14 +19,11 @@ describe('Dashboard/Forms/ControlButtons', () => {
     it('should render buttons without form inline style', () => {
       expect(wrapper.find('.control-buttons').props().className).to.have.string('flex')
     })
-    it('should render cancel button', () => {
-      expect(wrapper.find('button')).to.have.length(1)
-    })
     it('should render submit button as disabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.true
     })
-    it('should render submit button with its text as "Salvar"', () => {
-      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Salvar')
+    it('should render submit button with its text as "Continuar"', () => {
+      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Continuar')
     })
     it('should not render form submit success message', () => {
       expect(wrapper.find('.success-message')).to.have.length(0)
@@ -70,8 +67,8 @@ describe('Dashboard/Forms/ControlButtons', () => {
     it('should render form submit success message', () => {
       expect(wrapper.find('.success-message')).to.have.length(1)
     })
-    it('should render submit button with its text as "Salvar..."', () => {
-      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Salvar')
+    it('should render submit button with its text as "Continuar"', () => {
+      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Continuar')
     })
     it('should render submit button as disabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.true
@@ -80,7 +77,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('with dirty status', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, dirty: true }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, dirty: true, valid: true }} />)
     })
     it('should render submit button as enabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.false

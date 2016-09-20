@@ -41,9 +41,9 @@ describe('<FormControl />', () => {
     expect(wrapper.find('input').props().onBlur).to.equal(onBlur)
   })
 
-  it('should resize to 20rem when componentClass is textarea', () => {
-    wrapper.setProps({ componentClass: 'textarea' })
-    expect(wrapper.find('textarea').props().style.height).to.equal('20rem')
+  it('should render element with passed rows props when componentClass is textarea', () => {
+    wrapper.setProps({ componentClass: 'textarea', rows: '4' })
+    expect(wrapper.find('textarea').props().rows).to.equal('4')
   })
 
   describe('when it is form inline style', () => {
@@ -54,12 +54,6 @@ describe('<FormControl />', () => {
     })
     it('should render <ControlButtons> component', () => {
       expect(wrapper.find('ControlButtons')).to.have.length(1)
-    })
-    it('should render input with width in its style', () => {
-      expect(wrapper.find('.form-control-input').props().style).to.have.property('width')
-    })
-    it('should render input with 250px of width in its style', () => {
-      expect(wrapper.find('.form-control-input').props().style).to.have.property('width', '250px')
     })
     it('should render input with form inline style specific className', () => {
       expect(wrapper.find('.form-control-input').props().className).to.have.string('inline-block')

@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
         noValidate
       >
         <div className="bg-white rounded-top">
-          <div className="input-container">
+          <div className="form-group">
             <label htmlFor="email">
               Seu email
               <span className="error">{email.touched && email.error}</span>
@@ -43,7 +43,7 @@ class LoginForm extends React.Component {
             />
           </div>
 
-          <div className="input-container">
+          <div className="form-group">
             <label htmlFor="password">
               Senha
               <span className="error">{password.touched && password.error}</span>

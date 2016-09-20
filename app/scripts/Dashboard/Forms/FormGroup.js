@@ -1,31 +1,21 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
-import Raise from './Raise'
-
-
 class FormGroup extends Component {
-
   getChildContext() {
-    const { controlId, layout, value, onChange, onBlur } = this.props
+    const { controlId, layout, value, onChange, onBlur, error, touched, valid } = this.props
     return {
-      $formGroup: {
-        controlId,
-        value,
-        onChange,
-        onBlur
-      }
+      $formGroup: { controlId, layout, value, onChange, onBlur, error, touched, valid }
     }
   }
 
   render() {
-    const { children, className, error, touched, layout } = this.props
+    const { children, className, layout } = this.props
     const styleGroup = layout === 'inline' ? { paddingRight: '1rem' } : null
 
     return (
-      <div className={classnames(className, 'mt1 mb2')} style={styleGroup}>
+      <div className={classnames('form-group', className)} style={styleGroup}>
         {children}
-        {error && touched && <Raise error={error} />}
       </div>
     )
   }

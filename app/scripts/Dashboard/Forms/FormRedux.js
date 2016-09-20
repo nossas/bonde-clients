@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
 import { ControlButtons } from './'
 
@@ -25,13 +26,25 @@ class FormRedux extends Component {
   }
 
   render() {
-    const { children, onSubmit, handleSubmit, submitting, dirty, inline, className } = this.props
+    const {
+      children,
+      onSubmit,
+      handleSubmit,
+      submitting,
+      dirty,
+      valid,
+      inline,
+      className
+    } = this.props
     const { submitted } = this.state
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)} className={className}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={classnames('form bg-white rounded', className)}
+      >
         {children}
-        {!inline && <ControlButtons {...{ submitted, submitting, dirty }} />}
+        {!inline && <ControlButtons {...{ submitted, submitting, dirty, valid }} />}
       </form>
     )
   }
@@ -45,6 +58,7 @@ FormRedux.propTypes = {
   submitting: PropTypes.bool.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
   inline: PropTypes.bool.isRequired
 }
 

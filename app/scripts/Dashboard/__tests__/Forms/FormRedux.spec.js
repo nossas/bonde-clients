@@ -11,7 +11,8 @@ describe('Dashboard/Forms/FormRedux', () => {
     handleSubmit: (values, dispatch) => {},
     submitting: false,
     submitFailed: false,
-    dirty: false
+    dirty: false,
+    valid: false
   }
 
   beforeEach(() => {
@@ -29,11 +30,11 @@ describe('Dashboard/Forms/FormRedux', () => {
   })
 
   describe('default', () => {
-    it('className prop should be a string', () => {
+    it('className prop should be as default', () => {
       expect(wrapper.props().className).to.be.a.string
     })
     it('should contains className prop as empty string', () => {
-      expect(wrapper.props().className).to.equal('')
+      expect(wrapper.props().className).to.equal('form bg-white rounded')
     })
   })
 
@@ -45,7 +46,7 @@ describe('Dashboard/Forms/FormRedux', () => {
       wrapper = shallow(<FormRedux {...Object.assign(cloneProps, customProps)} />)
     })
     it('should contains className prop as empty string', () => {
-      expect(wrapper.props().className).to.equal(className)
+      expect(wrapper.props().className).to.equal(`form bg-white rounded ${className}`)
     })
   })
 })

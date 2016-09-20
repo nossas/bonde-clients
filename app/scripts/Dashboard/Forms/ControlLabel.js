@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
+import Raise from './Raise'
 
 class ControlLabel extends Component {
 
   render() {
     const formGroup = this.context.$formGroup
     const controlId = formGroup && formGroup.controlId
+    const error = formGroup && formGroup.error
+    const touched = formGroup && formGroup.touched
 
     const { children, htmlFor = controlId, className, ...props } = this.props
 
@@ -14,10 +17,10 @@ class ControlLabel extends Component {
       <label
         style={{ cursor: 'pointer' }}
         htmlFor={htmlFor}
-        className={classnames("h5 bold caps", className)}
         {...props}
       >
-        {children}
+        <span className={classnames('caps', className)}>{children}</span>
+        {error && touched && <Raise error={error} />}
       </label>
     )
   }

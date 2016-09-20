@@ -11,22 +11,19 @@ class FormControl extends Component {
       $formGroup: { controlId, ...field }
     } = this.context
 
-    const componentStyle = {
-      height: Component === 'textarea' ? '20rem' : '48px',
-      width: formInline ? '250px' : null
-    }
-    const componentClassNames = formInline ?
-      'field-light h3 px1 inline-block' :
-      'field-light block h3 px1 full-width'
-
     return (
-      <div className='mt1'>
+      <div>
         <Component
           {...props}
           {...field}
           id={controlId}
-          className={classnames('form-control-input', componentClassNames, className)}
-          style={{ ...componentStyle, ...style }}
+          className={classnames(
+            'form-control-input block lightestgray',
+            Component,
+            formInline ? 'inline-block' : '',
+            className
+          )}
+          style={style}
           />
         {
           formInline &&

@@ -1,21 +1,20 @@
-
 .form {
-  .input-container {
+  .form-group {
     border-bottom: 1px solid #eee;
     padding-top: $space-2;
     padding-bottom: $space-1;
     padding-left: $space-3;
     padding-right: $space-3;
 
-    &:last-child {
+    &:last-of-type {
       border-bottom: none;
       padding-bottom: .75rem;
     }
 
-    & > label {
+    label {
       margin-bottom: 0;
       font-size: .75rem;
-      font-weight: bold;
+      font-weight: 600;
       color: $gray;
       display: inline;
 
@@ -26,21 +25,29 @@
       }
     }
 
-    & > .input {
+    .input,
+    .textarea {
       border: none;
       color: $black;
       margin: 0;
       padding: 0;
-      height: 30px;
       display: block;
 
-      &::-webkit-input-placeholder,
-      &:-moz-placeholder,
-      &::-moz-placeholder,
-      &:-ms-input-placeholder {
-         color: $lightGray;
-      }
       &:focus { outline: none; }
+    }
+
+    .input {
+      height: 30px;
+    }
+
+    .textarea {
+      margin-top: .3rem;
+    }
+  }
+
+  .control-buttons {
+    input[type="submit"] {
+      font-size: 1.3rem;
     }
   }
 }

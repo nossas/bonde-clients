@@ -40,17 +40,12 @@ describe('<FormGroup />', () => {
       controlId: 'form-group-id',
       value: undefined,
       onChange: undefined,
-      onBlur: undefined
+      onBlur: undefined,
+      error: undefined,
+      layout: 'block',
+      touched: undefined,
+      valid: undefined
     })
-  })
-
-  it('should render <Raise /> when error and touched passed', () => {
-    wrapper.setProps({
-      error: 'Required field',
-      touched: true
-    })
-    expect(wrapper.find('Raise').length).to.equal(1)
-    expect(wrapper.find('Raise').props().error).to.equal('Required field')
   })
 
   it('should pass to context child props redux-form field', () => {

@@ -1,20 +1,19 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-const ControlButtons = ({ submitting, submitted, dirty, showCancel, formInline }) => (
+const ControlButtons = ({ submitting, submitted, dirty, formInline, valid, ...props }) => (
   <div className={classnames(
       'control-buttons',
       formInline ? 'inline-block ml1' : 'flex flex-wrap mt1'
   )}>
-    {
-      showCancel &&
-      <button className="caps button bg-darken-3 h3 mr2">Cancelar</button>
-    }
     <input
       type="submit"
-      className="caps button bg-aqua h3"
-      disabled={submitting || !dirty}
-      value={(submitting ? "Salvando..." : "Salvar")}
+      className={classnames(
+        'btn h3 col-12 mt1 mb2 mx2 white p2 rounded',
+        !valid ? 'bg-gray95' : 'bg-pagenta'
+      )}
+      disabled={!valid || submitting || !dirty}
+      value={(submitting ? "Salvando..." : "Continuar")}
     />
     {
       submitted &&
@@ -27,12 +26,11 @@ ControlButtons.propTypes = {
   submitting: PropTypes.bool.isRequired,
   submitted: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
-  showCancel: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
   formInline: PropTypes.bool.isRequired
 }
 
 ControlButtons.defaultProps = {
-  showCancel: true,
   formInline: false
 }
 

@@ -44,6 +44,11 @@ select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
+::-webkit-input-placeholder { color: $lightestGray; }
+:-moz-placeholder { color: $lightestGray; }
+::-moz-placeholder { color: $lightestGray; }
+:-ms-input-placeholder { color: $lightestGray; }
+
 textarea {
   resize: none;
 }

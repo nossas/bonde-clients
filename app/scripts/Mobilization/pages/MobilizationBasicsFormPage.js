@@ -32,46 +32,53 @@ export class MobilizationBasicsFormPage extends Component {
     const handleSubmit = values => submitStrategy({ ...mobilization, ...values }, next)
 
     return (
-      <div className="p3">
+      <div className="p3 lg-col-5 mx-auto">
         {(
           !!mobilization ? null :
-          <h3 className="h2 mt0 mb3 center">Qual o objetivo da sua mobilização?</h3>
+          <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
         )}
-        <div className="bg-white border rounded lg-col-6 mx-auto p3">
-          <FormRedux onSubmit={handleSubmit} {...rest}>
-            <FormGroup controlId="name" {...name}>
-              <ControlLabel>
-                Nome
-                <InputCounter
-                  maxLength={100}
-                  length={name.value ? name.value.length : 0}
-                  classNames={['right', 'regular']}
-                />
-              </ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Ex: Pela criação de uma delegacia de desaparecidos"
+        <FormRedux onSubmit={handleSubmit} {...rest}>
+          <FormGroup controlId="name" {...name}>
+            <ControlLabel>
+              Nome
+              <InputCounter
                 maxLength={100}
+                length={name.value ? name.value.length : 0}
+                classNames={['right', 'regular']}
               />
-            </FormGroup>
-            <FormGroup controlId="goal" {...goal}>
-              <ControlLabel>
-                Objetivo
-                <InputCounter
-                  maxLength={500}
-                  length={goal.value ? goal.value.length : 0}
-                  classNames={['right', 'regular']}
-                />
-              </ControlLabel>
-              <FormControl
-                componentClass='textarea'
-                placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à'
-                  + ' sua mobilização. Você poderá alterar este texto depois.'}
+            </ControlLabel>
+            <FormControl
+              type="text"
+              placeholder="Ex: Pela criação de uma delegacia de desaparecidos"
+              maxLength={100}
+            />
+          </FormGroup>
+          <FormGroup controlId="goal" {...goal}>
+            <ControlLabel>
+              Objetivo
+              <InputCounter
                 maxLength={500}
+                length={goal.value ? goal.value.length : 0}
+                classNames={['right', 'regular']}
               />
-            </FormGroup>
-          </FormRedux>
-        </div>
+            </ControlLabel>
+            <FormControl
+              componentClass='textarea'
+              placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à'
+                + ' sua mobilização. Você poderá alterar este texto depois.'}
+              maxLength={500}
+              rows="4"
+            />
+          </FormGroup>
+        </FormRedux>
+
+        {(
+          !!mobilization ? null : (
+            <p className="lightgray center" style={{ fontSize: '.9rem', marginTop: '1.5rem' }}>
+              Fique tranquil@ vc poderá editar depois se achar necessário.
+            </p>
+          )
+        )}
       </div>
     )
   }
