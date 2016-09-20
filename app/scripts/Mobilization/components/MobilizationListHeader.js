@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
+import { Tabs } from '../../../components/Navigation'
+
 const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
   return (
     <div className="bg-white pl5 pr4">
@@ -22,15 +24,7 @@ const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
           )
         )}
       </h1>
-      <nav className="gray20">
-        <a
-          href="#"
-          className="btn border-only-bottom border-pagenta h4 px0 py2 mr3 inline-block"
-          style={{ borderBottomWidth: '3px' }}
-        >
-          Ativas
-        </a>
-      </nav>
+      <Tabs items={['Ativas']} />
     </div>
   )
 }
