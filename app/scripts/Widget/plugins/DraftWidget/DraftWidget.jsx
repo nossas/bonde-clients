@@ -7,7 +7,7 @@ import { DraftWidgetButton } from './'
 
 import './draft-widget.scss'
 
-class DraftWidget extends React.Component {
+export class DraftWidget extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
