@@ -126,12 +126,14 @@ export default class ContentWidget extends React.Component {
           <WYSIHTMLToolbar
             elementId={toolbarId}
             className="absolute full-width top-0 left-0 bg-darken-4"
-            buttonClassName="button button-transparent white p2"
-            style={{zIndex: 10000}}/>
+            buttonClassName="btn white p2"
+            style={{ zIndex: 10000 }}
+          />
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
             onClick={::this.handleOverlayClick}
-            style={{zIndex: 9998}} />
+            style={{zIndex: 9998}}
+          />
         </div>
         <div style={{zIndex: editing ? 9999 : 0}} className="relative">
           <div

@@ -10,7 +10,9 @@ import {
 
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
-  FAILURE_FETCH_GOOGLE_FONTS
+  FAILURE_FETCH_GOOGLE_FONTS,
+
+  TOOLBAR_SET_LINK_OPEN_STRATEGY
 } from './actions'
 import { REQUEST_FILL_WIDGET, SUCCESS_FILL_WIDGET, FAILURE_FILL_WIDGET } from './actions'
 
@@ -139,6 +141,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, loaded: true, loading: false, googleFonts: action.fonts }
     case FAILURE_FETCH_GOOGLE_FONTS:
       return { ...state, loaded: true, loading: false, error: action.error }
+    case TOOLBAR_SET_LINK_OPEN_STRATEGY:
+      return { ...state, toolbarLinkOpenStrategy: action.strategy }
     default:
       return state
   }

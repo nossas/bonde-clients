@@ -5,9 +5,9 @@ $form-field-height: 3rem;
 $link-color: $aqua;
 $space-5: 8rem !default;
 
+@import '../../node_modules/basscss-sass/scss/btn';
 @import '../../node_modules/basscss-sass/scss/btn-outline';
 @import '../../node_modules/basscss-sass/scss/btn-primary';
-@import '../../node_modules/basscss-sass/scss/btn';
 @import '../../node_modules/basscss-sass/scss/forms';
 @import '../../node_modules/basscss-sass/scss/align';
 @import '../../node_modules/basscss-sass/scss/all';

@@ -25,6 +25,8 @@ export const REQUEST_FETCH_GOOGLE_FONTS = 'REQUEST_FETCH_GOOGLE_FONTS'
 export const SUCCESS_FETCH_GOOGLE_FONTS = 'SUCCESS_FETCH_GOOGLE_FONTS'
 export const FAILURE_FETCH_GOOGLE_FONTS = 'FAILURE_FETCH_GOOGLE_FONTS'
 
+export const TOOLBAR_SET_LINK_OPEN_STRATEGY = 'TOOLBAR_SET_LINK_OPEN_STRATEGY'
+
 const editWidgetSuccess = widget => ({ type: SUCCESS_EDIT_WIDGET, widget })
 export const editWidgetAsync = widget => (dispatch, getState, request) => {
   const state = getState()
@@ -143,3 +145,6 @@ export const fetchGoogleFonts = () => dispatch => {
       else dispatch(fetchGoogleFontsSuccess(res.body))
     })
 }
+
+export const setToolbarLinkOpenStrategy = strategy =>
+  ({ type: TOOLBAR_SET_LINK_OPEN_STRATEGY, strategy })
