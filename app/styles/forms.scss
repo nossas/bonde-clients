@@ -1,3 +1,5 @@
+@import '../../node_modules/basscss-sass/scss/background-colors';
+
 .form {
   .form-group {
     border-bottom: 1px solid #eee;
@@ -26,7 +28,8 @@
     }
 
     .input,
-    .textarea {
+    .textarea,
+    .select {
       border: none;
       color: $black;
       margin: 0;
@@ -42,6 +45,11 @@
 
     .textarea {
       margin-top: .3rem;
+    }
+
+    .select {
+      margin-top: .3rem;
+      background-color: $white;
     }
   }
 

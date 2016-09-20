@@ -39,22 +39,20 @@ class MobilizationCityPage extends Component {
     const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values }, next)
 
     return submitting && !mobilization ? <Loading /> : (
-      <div className="p3">
-        {isNewMobilization ? <h3 className="h2 mt0 mb3 center">Qual é a sua cidade?</h3> : null}
-        <div className="bg-white border rounded lg-col-6 mx-auto p3">
-          <FormRedux onSubmit={handleSubmit} {...rest}>
-            <FormGroup controlId="organizationId" {...organizationId}>
-              <ControlLabel>Cidade</ControlLabel>
-              <FormDropdown>
-                {organizations.data.map(organization =>
-                  <option key={organization.id} value={organization.id}>
-                    {organization.city}
-                  </option>
-                )}
-              </FormDropdown>
-            </FormGroup>
-          </FormRedux>
-        </div>
+      <div className="p3 lg-col-5 mx-auto">
+        {isNewMobilization ? <h3 className="h1 mt0 mb3 center">Qual é a sua cidade?</h3> : null}
+        <FormRedux onSubmit={handleSubmit} {...rest}>
+          <FormGroup controlId="organizationId" {...organizationId}>
+            <ControlLabel>Cidade</ControlLabel>
+            <FormDropdown>
+              {organizations.data.map(organization =>
+                <option key={organization.id} value={organization.id}>
+                  {organization.city}
+                </option>
+              )}
+            </FormDropdown>
+          </FormGroup>
+        </FormRedux>
       </div>
     )
   }

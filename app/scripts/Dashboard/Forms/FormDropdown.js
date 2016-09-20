@@ -11,7 +11,7 @@ class FormDropdown extends Component {
     return (
       <select
         id={controlId}
-        className={classnames('field-light block h3 mt1 px1 full-width', classNames)}
+        className={classnames('select col-12', classNames)}
         {...props}
         {...field}
       >
