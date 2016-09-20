@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form';
 /*import mobilizations from './../../app/scripts/reducers/mobilizations'*/
 import blocks from './../../app/scripts/reducers/blocks'
+import blockReducer from '../../app/scripts/Block/BlockReducer'
 import widgets from './../../app/scripts/Widget/reducer'
 import auth from './../../app/scripts/reducers/auth'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
@@ -36,6 +37,7 @@ export default combineReducers({
   mobilizationSharing,
   mobilizationCustomDomain,*/
   blocks,
+  blockReducer,
   widgets,
   /*loginForm,
   widgetForm,*/

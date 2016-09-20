@@ -4,11 +4,10 @@ import classnames from 'classnames'
 import './scss/block-miniature.scss'
 
 const isActive = (selected, layout) => JSON.stringify(selected) === JSON.stringify(layout)
-
 const BlockMiniature = ({ selectedLayout, layout, onClick }) => (
   <div
     className="block-miniature col col-4 mb3 px1"
-    onClick={() => { onClick(layout) }}
+    onClick={onClick}
   >
     <div
       className={classnames(
@@ -35,9 +34,9 @@ const BlockMiniature = ({ selectedLayout, layout, onClick }) => (
 )
 
 BlockMiniature.propTypes = {
-  selectedLayout: PropTypes.array,
-  layout: PropTypes.array,
-  onClick: PropTypes.func
+  selectedLayout: PropTypes.array.isRequired,
+  layout: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default BlockMiniature

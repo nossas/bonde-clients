@@ -1,4 +1,10 @@
-import { REQUEST_FETCH_BLOCKS, SUCCESS_FETCH_BLOCKS, FAILURE_FETCH_BLOCKS } from './BlockActions'
+import {
+  REQUEST_FETCH_BLOCKS,
+  SUCCESS_FETCH_BLOCKS,
+  FAILURE_FETCH_BLOCKS,
+
+  SET_SELECTED_LAYOUT
+} from './BlockActions'
 
 const initialState = {
   loading: false,
@@ -27,6 +33,11 @@ const BlockReducer = (state = initialState, action) => {
         loading: false,
         loaded: true,
         error: action.error
+      }
+    case SET_SELECTED_LAYOUT:
+      return {
+        ...state,
+        selectedLayout: action.layout
       }
     default:
       return state

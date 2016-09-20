@@ -6,6 +6,8 @@ export const REQUEST_FETCH_BLOCKS = 'REQUEST_FETCH_BLOCKS'
 export const SUCCESS_FETCH_BLOCKS = 'SUCCESS_FETCH_BLOCKS'
 export const FAILURE_FETCH_BLOCKS = 'FAILURE_FETCH_BLOCKS'
 
+export const SET_SELECTED_LAYOUT = 'SET_SELECTED_LAYOUT'
+
 // TODO: Refatorar constantes abaixo
 export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
@@ -34,6 +36,8 @@ export function fetchBlocks(params) {
     }
   }
 }
+
+export const setSelectedLayout = layout => ({ type: SET_SELECTED_LAYOUT, layout })
 
 // TODO: Refatorar funções abaixo
 export function addBlock(params) {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Route, IndexRoute } from 'react-router'
 
-import { MobilizationListPage, WrapperMobilizationApp } from './pages'
-import { NewBlock } from './../pages'
+import { NewBlockPage } from './../Block/pages'
 
 import {
   UserDashboardContainer,
@@ -12,6 +11,8 @@ import {
 } from './containers'
 
 import {
+  WrapperMobilizationApp,
+  MobilizationListPage,
   MobilizationBasicsFormPage,
   MobilizationCityPage,
   MobilizationAnalyticsPage,
@@ -38,7 +39,7 @@ export default (
 
     <Route component={MobilizationDashboardContainer}>
       <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilizationPage} />
-      <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
+      <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlockPage} />
       { widgetRoutes(defaultPath) }
       <Route component={MobilizationSettingsContainer} >
         <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasicsFormPage} />
