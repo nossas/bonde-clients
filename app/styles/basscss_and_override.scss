@@ -1,15 +1,5 @@
-$blue: #215d7a;
-$aqua: #2fbee6;
-$darkGray: #4a4a4a;
-$darkenGray: #222;
-$gray20: #333;
-$gray94: #eee;
-$gray95: #f2f2f2;
-$lightGray: #999999;
-$lightestGray: #ccc;
-$silver: #f7f7f7;
-$pagenta: #ff0099;
-$darkenMediumBlue: #031092;
+@import './color-variables';
+
 $font-family: 'Proxima Nova', sans-serif;
 $form-field-height: 3rem;
 $link-color: $aqua;
@@ -87,6 +77,7 @@ form .button { height: 3rem; }
 .gray95             { color: $gray95; }
 .darkengray         { color: $darkenGray; }
 .pagenta            { color: $pagenta; }
+.lavender-pink      { color: $lavenderPink; }
 .darken-medium-blue { color: $darkenMediumBlue; }
 
 // Additional Background Colors
@@ -97,6 +88,7 @@ form .button { height: 3rem; }
 .bg-gray95             { background-color: $gray95; }
 .bg-darkengray         { background-color: $darkenGray; }
 .bg-pagenta            { background-color: $pagenta; }
+.bg-lavender-pink      { background-color: $lavenderPink; }
 .bg-darken-medium-blue { background-color: $darkenMediumBlue; }
 
 // Additional Border Colors
@@ -107,6 +99,7 @@ form .button { height: 3rem; }
 .border-gray95             { border-color: $gray95; }
 .border-darkengray         { border-color: $darkenGray; }
 .border-pagenta            { border-color: $pagenta; }
+.border-lavender-pink      { border-color: $lavenderPink; }
 .border-darken-medium-blue { border-color: $darkenMediumBlue; }
 
 .border-darken-1 { border-color: $darken-1; }
