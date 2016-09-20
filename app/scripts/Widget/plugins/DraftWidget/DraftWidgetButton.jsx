@@ -1,0 +1,30 @@
+import React, { PropTypes } from 'react'
+import classnames from 'classnames'
+
+import './draft-widget-button.scss'
+
+class DraftWidgetButton extends React.Component {
+  render() {
+    const { label, icon, onClick } = this.props
+    return (
+      <div className="draft-widget-button col col-4 p1">
+        <button
+          className="btn col-12"
+          onClick={onClick}>
+          <span className="content">
+            <i className={`fa fa-${icon} block white`} />
+            {label}
+          </span>
+        </button>
+      </div>
+    )
+  }
+}
+
+DraftWidgetButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
+export default DraftWidgetButton

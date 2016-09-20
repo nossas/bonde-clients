@@ -1,0 +1,28 @@
+@import '../../../../styles/color-variables';
+
+.draft-widget-button {
+  .btn {
+    border: 1px solid $darkenGray;
+    color: $lightGray;
+    border-radius: 2px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: 600;
+    height: 100px;
+    transition: .3s;
+
+    &:hover {
+      background-color: rgba(255,255,255,.02);
+    }
+
+    .content {
+      position: relative;
+      top: 5px;
+
+      i.fa {
+        font-size: 2rem;
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import DraftWidget from './DraftWidget.jsx'
 import ContentWidget from './ContentWidget.jsx'
 
 import {
+  Draft as DraftWidget,
   Form as FormWidget,
   Match as MatchWidget,
   Donation as DonationWidget,
