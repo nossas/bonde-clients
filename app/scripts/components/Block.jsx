@@ -293,22 +293,24 @@ export default class Block extends React.Component {
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
-        style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
-        <div className="container">
-          { this.renderColorPicker() }
-          <div className="clearfix" style={{padding: '5em 0'}}>
-            { this.renderWidgets(filteredWidgets) }
+        style={(block.bg_image ? { backgroundImage: `url(${block.bg_image})` } : null)}
+      >
+        <div className="col-9 mx-auto">
+          {this.renderColorPicker()}
+          <div className="clearfix" style={{ padding: '5em 0' }}>
+            {this.renderWidgets(filteredWidgets)}
           </div>
           <div className="relative">
-            { this.renderHiddenTag() }
+            {this.renderHiddenTag()}
           </div>
-          { this.renderLoading() }
+          {this.renderLoading()}
           <div className='relative'>
             <DropDownMenu
               wrapperClassName={wrapperClassName}
               menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
               buttonClassName='button bg-darken-4 white'
-              icon="cog">
+              icon="cog"
+            >
               <DropDownMenuItem
                 onClick={::this.handleEditBackgroundClick}
                 className="button button-transparent">
