@@ -16,7 +16,7 @@ export default class TellAFriend extends React.Component {
     const checkMarkImage = imageUrl || require('./checkMarkImage.png')
 
     return (
-      <div className='center p3 bg-white darkengray'>
+      <div className='center p3 bg-white darkengray rounded'>
         <div className='m0 h3 bold'>{message}</div>
         <div className='py2'>
           <img src={checkMarkImage} style={{width: imageWidth || '100px'}} />

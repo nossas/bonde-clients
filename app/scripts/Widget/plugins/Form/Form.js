@@ -209,11 +209,15 @@ export default class FormWidget extends React.Component {
 
   renderForm() {
     const { editable, configurable } = this.props
-    const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
 
     return (
       <div>
-        <div className={className}>
+        <div
+          className={classnames(
+            'rounded',
+            { 'p3 bg-darken-3 relative': editable || !configurable }
+          )}
+        >
           {this.renderCallToAction()}
           {this.renderFields()}
           {this.renderErrors()}
