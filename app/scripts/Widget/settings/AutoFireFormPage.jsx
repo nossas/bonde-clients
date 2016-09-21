@@ -51,8 +51,13 @@ const AutoFireFormPage = (props) => {
         ? <PressureWidgetMenu mobilization_id={mobilization.id} widget_id={widget.id} {...props} />
       : <FormWidgetMenu {...props} widget={widget} />
       )}
-      <div className='p3 flex-auto overflow-scroll'>
-        <FormRedux onSubmit={handleSubmit} {...rest}>
+      <div className='p3 overflow-auto'>
+        <FormRedux
+          {...rest}
+          className="transparent col-6"
+          floatButton="Salvar"
+          onSubmit={handleSubmit}
+        >
           <FormGroup controlId="senderName" {...senderName}>
             <ControlLabel>Nome do remetente</ControlLabel>
             <FormControl
@@ -78,6 +83,7 @@ const AutoFireFormPage = (props) => {
             <ControlLabel>Email de agradecimento</ControlLabel>
             <FormControl
               componentClass="textarea"
+              rows="6"
               placeholder={'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua'
                 + ' participação é muito importante e, agora, precisamos da sua ajuda para que mais'
                 + ' gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um'

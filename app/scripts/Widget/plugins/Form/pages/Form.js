@@ -32,7 +32,7 @@ class FormWidgetForm extends React.Component {
           <FormRedux
             {...props}
             onSubmit={::this.handleSubmit}
-            className="transparent col-6 btn-float"
+            className="transparent col-6"
             floatButton="Salvar"
           >
             <FormGroup controlId="call-to-action-id" {...call_to_action}>
