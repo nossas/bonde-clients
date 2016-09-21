@@ -62,7 +62,7 @@ export class CustomDomainWrapper extends React.Component {
 
   renderMobilizationNotFound() {
     return (
-      <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-gray'>
+      <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-atomic'>
         <div className='center flex-auto white'>
           <div className='h1'>
             Ops! Estamos com um problema técnico. Em caso de dúvida, escreva

@@ -11,7 +11,7 @@ export default class MobilizationMenu extends React.Component {
     const { user } = this.props
     const style = { minWidth: "300px" }
     return(
-      <div style={style} className="bg-gray p2 white">
+      <div style={style} className="bg-atomic p2 white">
         <h6 className="silver caps muted">Mobilizações</h6>
         <Link
           to={Paths.newMobilization()}
