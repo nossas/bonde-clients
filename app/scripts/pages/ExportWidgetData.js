@@ -3,17 +3,17 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import Modernizr from 'modernizr'
 
-import * as Paths from './../Paths'
+import * as Paths from '../Paths'
 
 import {
   exportDataClipByEndpoint,
   mountExportDataclip
-} from './../actions/ExportActions'
+} from '../actions/ExportActions'
 
 import {
   Loading,
   CloseButton
-} from './../components'
+} from '../components'
 
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 import { Menu as DonationWidgetMenu } from '../Widget/plugins/Donation/components/settings'
@@ -97,7 +97,7 @@ class ExportWidgetData extends React.Component {
     const { loading } = this.props
     return <div id="saveAs" style={{display: loading ? 'none' : 'block'}}></div>
     return <div id="saveAs" style={{display: loading ? 'none' : 'block'}}>
-      <a href="#" className="button button-outline mb1 aqua caps p2">
+      <a href="#" className="btn btn-outline mb1 bg-pagenta white caps p2">
         <i className="fa fa-download mr1" />
         Salvar planilha
       </a>
@@ -127,12 +127,12 @@ class ExportWidgetData extends React.Component {
         )}
 
         <div className="p3">
-          <div className="h5 caps bold flex flex-center mb2">
-            <i className="fa fa-file-excel-o mr1" style={{fontSize: '1.8em'}} />
-            <span>Exportar</span>
+          <div className="table caps bold mb2 darkengray h6">
+            <i className="fa fa-file-excel-o darkengray table-cell align-middle h2" />
+            <span className="table-cell align-middle pl1">Exportar</span>
           </div>
 
-          <p className="h5 mb2">
+          <p className="h5 mb2 darkengray">
             Clique no botão abaixo para baixar o relatório completo do
             formulário em formato excel.
           </p>
@@ -140,7 +140,7 @@ class ExportWidgetData extends React.Component {
           <p className="mb2">
             <button
               disabled={loading}
-              className='button bg-aqua caps p2'
+              className='btn bg-pagenta white caps p2 rounded'
               onClick={() => exportDataClipByEndpoint(
                 {
                   mobilization_id: mobilization.id,
