@@ -102,8 +102,9 @@ export default class WYSIHTMLToolbar extends React.Component {
         <DropDownMenu
           icon="text-height"
           wrapperClassName="inline"
-          buttonClassName="button-transparent white p2"
-          menuClassName="bg-darken-4 left-0">
+          buttonClassName="btn btn-transparent white p2"
+          menuClassName="bg-darken-4 left-0"
+        >
           <DropDownMenuItem>
             <span
               className="block button button-transparent white h6 p2"
