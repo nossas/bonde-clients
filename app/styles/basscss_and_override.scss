@@ -125,6 +125,9 @@ form .button { height: 3rem; }
   font-size: 2.15rem;
   color: $darkenGray;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
 
 // Sizes
 .full-height { height: 100%; }

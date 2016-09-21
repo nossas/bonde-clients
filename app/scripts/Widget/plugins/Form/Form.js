@@ -136,10 +136,16 @@ export default class FormWidget extends React.Component {
     if (!configurable) {
       return (
         <Button
-          buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
+          {...this.props}
+          buttonText={(
+            widget.settings ?
+            (widget.settings.button_text || 'Enviar') :
+            'Enviar'
+          )}
           handleClick={::this.submit}
           loading={loading}
-          success={success} />
+          success={success}
+        />
       )
     }
   }
@@ -162,9 +168,14 @@ export default class FormWidget extends React.Component {
     if (editable && !configurable && this.state.hasMouseOver) {
       return (
         <div
-          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
-          style={{zIndex: 9998}}>
-          <div className="center full-width white">Clique para editar</div>
+          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold"
+          style={{ zIndex: 9998 }}
+        >
+          <div className="table full-height col-12 center">
+            <div className="white table-cell align-middle">
+              Clique para editar
+            </div>
+          </div>
         </div>
       )
     }

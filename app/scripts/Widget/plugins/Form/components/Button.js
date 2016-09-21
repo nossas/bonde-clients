@@ -7,20 +7,20 @@ const Button = ({
   loading,
   handleClick,
   mobilization: { body_font: bodyFont }
-}) => {
-  return (
-    <div className={classnames(`${bodyFont}-body`)}>
-      <button
-        disabled={loading}
-        className="caps button bg-darken-4 p2 full-width mt1 mb2"
-        onClick={handleClick}>
-        {loading ? 'Enviando...' : buttonText }
-      </button>
-      { success &&
-        <div className="center">Sua ação foi registrada com sucesso!</div> }
-    </div>
-  )
-}
+}) => (
+  <div className={classnames(`${bodyFont}-body`)}>
+    <button
+      disabled={loading}
+      className="caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded"
+      onClick={handleClick}>
+      {loading ? 'Enviando...' : buttonText}
+    </button>
+    {
+      success &&
+      <div className="center">Sua ação foi registrada com sucesso!</div>
+    }
+  </div>
+)
 
 Button.propTypes = {
   success: PropTypes.bool.isRequired,
