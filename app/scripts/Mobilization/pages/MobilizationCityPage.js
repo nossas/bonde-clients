@@ -41,7 +41,7 @@ class MobilizationCityPage extends Component {
     return submitting && !mobilization ? <Loading /> : (
       <div className="p3 lg-col-5 mx-auto">
         {isNewMobilization ? <h3 className="h1 mt0 mb3 center">Qual é a sua cidade?</h3> : null}
-        <FormRedux onSubmit={handleSubmit} {...rest}>
+        <FormRedux onSubmit={handleSubmit} {...rest} className="bg-white">
           <FormGroup controlId="organizationId" {...organizationId}>
             <ControlLabel>Cidade</ControlLabel>
             <FormDropdown>

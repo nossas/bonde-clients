@@ -57,8 +57,14 @@ export default class Input extends React.Component {
     if (field.kind === 'dropdown') {
       return (<select
         id={'input-' + uid}
-        className="select block h3"
-        style={(editable || configurable ? {cursor: 'pointer'} : null)}
+        className="select block border border-gray94"
+        style={{
+          cursor: editable || configurable ? 'pointer' : null,
+          borderRadius: '2px',
+          padding: '1rem',
+          display: 'inline-block',
+          height: 'inherit'
+        }}
       >
         <option value="">Selecione...</option>
         {
@@ -69,21 +75,28 @@ export default class Input extends React.Component {
       </select>)
     } else if (field.kind === 'greetings') {
       return (
-        editable || configurable
-        ? <p className="block full-width">
-          <strong>Mensagem de sucesso alterada para:</strong>
-          <br/>{field.placeholder}
+        editable || configurable ? (
+          <p className="block full-width">
+            <strong>Mensagem de sucesso alterada para:</strong><br />
+            {field.placeholder}
           </p>
+        )
         : null
       )
     } else {
-      return (<input
-        id={'input-' + uid}
-        className="input block h3"
-        style={(editable || configurable ? {cursor: 'pointer'} : null)}
-        placeholder={field.placeholder}
-        type='text'
-      />)
+      return (
+        <input
+          id={`input-${uid}`}
+          className="input block border border-gray94"
+          style={{
+            cursor: editable || configurable ? 'pointer' : null,
+            borderRadius: '2px',
+            padding: '1.5rem 1rem'
+          }}
+          placeholder={field.placeholder}
+          type='text'
+        />
+      )
     }
   }
 
@@ -105,10 +118,18 @@ export default class Input extends React.Component {
         style={(editable || configurable ? {cursor: 'pointer'} : null)}
         onClick={::this.handleClick}>
         <label
-          className="h4 caps bold mb1 inline-block"
-          style={(editable || configurable ? {cursor: 'pointer'} : null)}
+          className={classnames(
+            'caps bold mb1 inline-block',
+            configurable ? 'darkengray' : null
+          )}
+          style={{
+            cursor: editable || configurable ? 'pointer' : null,
+            fontSize: '.75rem',
+            fontWeight: 600,
+            marginBottom: '1rem'
+          }}
         >
-          {field.label} {field.required === 'true' ? '*' : null}
+          {field.label}{field.required === 'true' ? '*' : null}
         </label>
         { this.renderInstructions() }
         { this.renderFieldKind() }

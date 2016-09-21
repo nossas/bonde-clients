@@ -7,7 +7,7 @@ import * as Paths from '../../../Paths'
 import { Settings } from '../../containers/SettingsContainer'
 
 
-describe('<SettingsContainer />', () => {
+describe('app/scripts/Widget/containers/SettingsContainer', () => {
   let settings
   const props = {
     mobilization: { id: 1 },
@@ -16,11 +16,6 @@ describe('<SettingsContainer />', () => {
 
   beforeEach(() => {
     settings = mount(<Settings {...props} />)
-  })
-
-  it('should closed button with path edit mobilization receive', () => {
-    const editMobilizationURL = Paths.editMobilization(props.mobilization.id)
-    expect(settings.find('CloseButton').props().path).to.equal(editMobilizationURL)
   })
 
   it('should render children with props received', () => {

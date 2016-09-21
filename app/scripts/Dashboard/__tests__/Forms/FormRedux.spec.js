@@ -33,9 +33,6 @@ describe('Dashboard/Forms/FormRedux', () => {
     it('className prop should be as default', () => {
       expect(wrapper.props().className).to.be.a.string
     })
-    it('should contains className prop as empty string', () => {
-      expect(wrapper.props().className).to.equal('form bg-white rounded')
-    })
   })
 
   describe('when pass className prop', () => {
@@ -44,9 +41,6 @@ describe('Dashboard/Forms/FormRedux', () => {
     const customProps = { className }
     before(() => {
       wrapper = shallow(<FormRedux {...Object.assign(cloneProps, customProps)} />)
-    })
-    it('should contains className prop as empty string', () => {
-      expect(wrapper.props().className).to.equal(`form bg-white rounded ${className}`)
     })
   })
 })

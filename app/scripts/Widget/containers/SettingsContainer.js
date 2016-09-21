@@ -4,20 +4,13 @@ import { connect } from 'react-redux'
 import * as Paths from '../../Paths'
 import * as WidgetSelectors from '../WidgetSelectors'
 
-import { CloseButton } from '../../components'
-
-
 export class Settings extends Component {
-
   render() {
     const { children, ...otherProps } = this.props
 
     return (
       <div className="flex-auto flex flex-column bg-silver gray relative">
         {children && React.cloneElement(children, {...otherProps})}
-        <CloseButton
-          dirty={false}
-          path={Paths.editMobilization(this.props.mobilization.id)} />
       </div>
     )
   }

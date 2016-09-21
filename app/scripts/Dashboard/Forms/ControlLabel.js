@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import Raise from './Raise'
 
 class ControlLabel extends Component {
-
   render() {
     const formGroup = this.context.$formGroup
     const controlId = formGroup && formGroup.controlId

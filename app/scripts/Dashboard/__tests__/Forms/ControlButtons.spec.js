@@ -6,6 +6,7 @@ import { ControlButtons } from '../../Forms'
 
 describe('Dashboard/Forms/ControlButtons', () => {
   let wrapper
+  const context = { $formRedux: { floatButton: '' } }
   const props = {
     submitting: false,
     submitted: false,
@@ -14,7 +15,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('default', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...props} />)
+      wrapper = shallow(<ControlButtons {...props} />, { context })
     })
     it('should render buttons without form inline style', () => {
       expect(wrapper.find('.control-buttons').props().className).to.have.string('flex')
@@ -32,7 +33,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('without cancel button', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, showCancel: false }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, showCancel: false }} />, { context })
     })
     it('should not render cancel button', () => {
       expect(wrapper.find('button')).to.have.length(0)
@@ -41,7 +42,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('with form inline style', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, formInline: true }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, formInline: true }} />, { context })
     })
     it('should render buttons with form inline style', () => {
       expect(wrapper.find('.control-buttons').props().className).to.have.string('inline-block')
@@ -50,7 +51,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('with submitting status', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, submitting: true }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, submitting: true }} />, { context })
     })
     it('should render submit button with its text as "Salvando..."', () => {
       expect(wrapper.find('input[type="submit"]').props().value).to.equal('Salvando...')
@@ -62,7 +63,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('with submitted status', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, submitted: true }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, submitted: true }} />, { context })
     })
     it('should render form submit success message', () => {
       expect(wrapper.find('.success-message')).to.have.length(1)
@@ -77,7 +78,7 @@ describe('Dashboard/Forms/ControlButtons', () => {
 
   describe('with dirty status', () => {
     before(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, dirty: true, valid: true }} />)
+      wrapper = shallow(<ControlButtons {...{ ...props, dirty: true, valid: true }} />, { context })
     })
     it('should render submit button as enabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.false

@@ -3,6 +3,8 @@ import classnames from 'classnames'
 
 import { ControlButtons } from './'
 
+import './scss/form-redux.scss'
+
 class FormRedux extends Component {
   constructor(props) {
     super(props)
@@ -16,11 +18,12 @@ class FormRedux extends Component {
   }
 
   getChildContext() {
-    const { inline, ...rest } = this.props
+    const { inline, floatButton, ...rest } = this.props
     return {
       $formRedux: {
         ...rest,
-        formInline: inline
+        formInline: inline,
+        floatButton
       }
     }
   }
@@ -34,14 +37,19 @@ class FormRedux extends Component {
       dirty,
       valid,
       inline,
-      className
+      className,
+      floatButton
     } = this.props
     const { submitted } = this.state
 
     return (
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={classnames('form bg-white rounded', className)}
+        className={classnames(
+          'form-redux form rounded',
+          floatButton ? 'btn-float' : null,
+          className
+        )}
       >
         {children}
         {!inline && <ControlButtons {...{ submitted, submitting, dirty, valid }} />}
@@ -59,13 +67,15 @@ FormRedux.propTypes = {
   submitFailed: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
-  inline: PropTypes.bool.isRequired
+  inline: PropTypes.bool.isRequired,
+  floatButton: PropTypes.string.isRequired
 }
 
 FormRedux.defaultProps = {
   submitting: false,
   inline: false,
-  className: ''
+  className: '',
+  floatButton: ''
 }
 
 FormRedux.childContextTypes = {

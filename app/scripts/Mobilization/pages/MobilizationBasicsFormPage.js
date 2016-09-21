@@ -37,7 +37,7 @@ export class MobilizationBasicsFormPage extends Component {
           !!mobilization ? null :
           <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
         )}
-        <FormRedux onSubmit={handleSubmit} {...rest}>
+        <FormRedux onSubmit={handleSubmit} {...rest} className="bg-white">
           <FormGroup controlId="name" {...name}>
             <ControlLabel>
               Nome
