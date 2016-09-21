@@ -13,7 +13,6 @@ import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 import { Input, Button } from './components'
 
 @reactMixin.decorate(Navigation)
-
 export default class FormWidget extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
@@ -215,11 +214,11 @@ export default class FormWidget extends React.Component {
     return (
       <div>
         <div className={className}>
-          { this.renderCallToAction() }
-          { this.renderFields() }
-          { this.renderErrors() }
-          { this.renderButton() }
-          { this.renderOverlay() }
+          {this.renderCallToAction()}
+          {this.renderFields()}
+          {this.renderErrors()}
+          {this.renderButton()}
+          {this.renderOverlay()}
         </div>
       </div>
     )

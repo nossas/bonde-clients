@@ -44,14 +44,16 @@ select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
+.select { background-color: $white; }
+
 input, textarea, select {
   &:focus { outline: none; }
 }
 
 ::-webkit-input-placeholder { color: $lightestGray; }
-:-moz-placeholder { color: $lightestGray; }
-::-moz-placeholder { color: $lightestGray; }
-:-ms-input-placeholder { color: $lightestGray; }
+:-moz-placeholder           { color: $lightestGray; }
+::-moz-placeholder          { color: $lightestGray; }
+:-ms-input-placeholder      { color: $lightestGray; }
 
 textarea {
   resize: none;

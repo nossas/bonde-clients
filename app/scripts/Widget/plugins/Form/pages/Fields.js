@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 
 import * as Paths from './../../../../Paths'
 import * as WidgetActions from './../../../actions'
-import { Loading, CloseButton } from './../../../../components'
-import FormWidget from './../'
-import { Menu } from './../components'
-
+import { Loading } from './../../../../components'
+import FormWidget from '../'
+import { Menu } from '../components'
 
 class Fields extends Component {
-
   constructor(props, context) {
     super(props, context)
     this.state = { loading: false, hasNewField: false }
@@ -69,27 +67,40 @@ class Fields extends Component {
       <div className="flex-auto flex flex-column bg-silver gray relative">
         <Menu widget={widget} {...props} />
         <div className="p3 flex-auto overflow-scroll">
-          <p className="h5 mb3">
-            { this.fields().length == 0 ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.' : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.' }
+          <p className="h5 mb3 darkengray">
+            {
+              this.fields().length == 0 ?
+              'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a'
+                + ' adicionar campos.' :
+              'Adicione, remova, edite e ordene os campos do formulário de acordo com as'
+                + ' necessidades da sua ação.'
+            }
           </p>
-          <FormWidget widget={widget} configurable={true} hasNewField={this.state.hasNewField} {...props} />
-          <button className="button bg-aqua caps p2" onClick={::this.handleAddTextField}>
+
+          <FormWidget
+            {...props}
+            widget={widget}
+            configurable={true}
+            hasNewField={this.state.hasNewField}
+          />
+
+          <button
+            className="btn white bg-pagenta caps p2 rounded"
+            onClick={::this.handleAddTextField}
+          >
             <i className="fa fa-plus mr2" />
             Adicionar um campo
           </button>
         </div>
-        { this.renderLoading() }
-        <CloseButton dirty={false} path={Paths.editMobilization(props.mobilization.id)} />
+        {this.renderLoading()}
       </div>
     )
   }
 
   renderLoading(){
-    if(this.state.loading || this.props.widget === undefined) {
-      return(
-        <Loading />
-      )
-    }
+    const { loading } = this.state
+    const { widget } = this.props
+    return loading || widget === undefined ? <Loading /> : null
   }
 
   render() {

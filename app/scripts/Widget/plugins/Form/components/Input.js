@@ -57,7 +57,7 @@ export default class Input extends React.Component {
     if (field.kind === 'dropdown') {
       return (<select
         id={'input-' + uid}
-        className="field-light block full-width h3"
+        className="select block h3"
         style={(editable || configurable ? {cursor: 'pointer'} : null)}
       >
         <option value="">Selecione...</option>
@@ -79,7 +79,7 @@ export default class Input extends React.Component {
     } else {
       return (<input
         id={'input-' + uid}
-        className="field-light block full-width h3"
+        className="input block h3"
         style={(editable || configurable ? {cursor: 'pointer'} : null)}
         placeholder={field.placeholder}
         type='text'
@@ -99,15 +99,16 @@ export default class Input extends React.Component {
 
     return (
       <div
-        className={classnames('mb3', `${bodyFont}-form`)}
+        className={classnames('mb2', `${bodyFont}-form`)}
         onMouseEnter={::this.handleMouseOver}
         onMouseLeave={::this.handleMouseOut}
         style={(editable || configurable ? {cursor: 'pointer'} : null)}
         onClick={::this.handleClick}>
         <label
-          className="h4 caps bold mb1"
-          style={(editable || configurable ? {cursor: 'pointer'} : null)}>
-          {field.label}{field.required === 'true' ? ' *' : null}
+          className="h4 caps bold mb1 inline-block"
+          style={(editable || configurable ? {cursor: 'pointer'} : null)}
+        >
+          {field.label} {field.required === 'true' ? '*' : null}
         </label>
         { this.renderInstructions() }
         { this.renderFieldKind() }
