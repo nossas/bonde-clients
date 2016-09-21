@@ -7,7 +7,7 @@ import { BLOCK_LAYOUTS } from '../../constants/BlockLayouts'
 import { setSelectedLayout } from '../BlockActions'
 import { addBlock } from '../../reducers/blocks'
 import { BlockMiniature } from '../components'
-import { Tabs } from '../../../components/Navigation'
+import { Tabs, Tab } from '../../../components/Navigation'
 
 import './scss/new-block-page.scss'
 
@@ -29,7 +29,9 @@ export class NewBlockPage extends Component {
       <div className={classnames('new-block-page flex-auto bg-silver gray relative', colorScheme)}>
         <div className="new-block-header bg-white pt3 px4">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
-          <Tabs items={['Blocos em branco']} />
+          <Tabs>
+            <Tab text="Blocos em branco" isActive={true} />
+          </Tabs>
         </div>
 
         <div className="py3 px4 col-6">

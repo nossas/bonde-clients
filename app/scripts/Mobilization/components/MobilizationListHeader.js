@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import { Tabs } from '../../../components/Navigation'
+import { Tabs, Tab } from '../../../components/Navigation'
 
 const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
   return (
@@ -24,7 +24,9 @@ const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
           )
         )}
       </h1>
-      <Tabs items={['Ativas']} />
+      <Tabs>
+        <Tab text="Ativas" isActive={true} />
+      </Tabs>
     </div>
   )
 }
