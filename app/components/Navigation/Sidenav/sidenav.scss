@@ -1,8 +1,8 @@
+@import '../../../../node_modules/basscss-sass/scss/colors';
 @import '../../../styles/color-variables';
 
 .sidenav {
   width: 80px;
-  padding: 0 20px;
   background-color: $darkblue;
   box-sizing: border-box;
   position: fixed;
@@ -23,36 +23,48 @@
     display: block;
     width: 40px;
     height: 40px;
-    margin-top: 20px;
+    margin: 20px 20px 5rem 20px;
   }
 
   .items {
-    margin-top: 5rem;
+    padding-left: 0;
+    text-align: center;
 
     .item {
+      display: table;
       color: $lightGray;
       font-weight: 600;
       position: relative;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+
+      &:hover {
+        background-color: rgba(255,255,255,.05);
+      }
 
       .item-icon {
-        width: 40px;
-        font-size: 1.5rem;
-        position: absolute;
-        left: 0;
-        top: 0;
+        display: table-cell;
+        vertical-align: middle;;
+        height: 100%;
+        font-size: 1.3rem;
         text-align: center;
+        color: $white;
+
+        i {
+          width: 80px;
+        }
       }
 
       .item-content {
+        display: table-cell;
         white-space: nowrap;
-        padding-left: 60px;
+        padding: 10px 20px 10px 0;
+      }
 
-        a {
-          color: $lightGray;
-          text-decoration: none;
-
-          &:hover { text-decoration: underline; }
-        }
+      a {
+        color: $lightGray;
+        text-decoration: none;
       }
     }
   }

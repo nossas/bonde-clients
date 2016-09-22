@@ -1,3 +1,5 @@
 export { Tabs } from './Tabs'
 export { Tab } from './Tabs'
 export { Sidenav } from './Sidenav'
+export { SidenavList } from './Sidenav'
+export { SidenavListItem } from './Sidenav'
