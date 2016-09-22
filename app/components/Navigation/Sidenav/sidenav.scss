@@ -1,0 +1,59 @@
+@import '../../../styles/color-variables';
+
+.sidenav {
+  width: 80px;
+  padding: 0 20px;
+  background-color: $darkblue;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  transition: .5s;
+
+  &:hover {
+    width: 257px;
+  }
+
+  .logo-icon {
+    background-image: url('./logo-icon.svg');
+    fill: #fff;
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+  }
+
+  .items {
+    margin-top: 5rem;
+
+    .item {
+      color: $lightGray;
+      font-weight: 600;
+      position: relative;
+
+      .item-icon {
+        width: 40px;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        text-align: center;
+      }
+
+      .item-content {
+        white-space: nowrap;
+        padding-left: 60px;
+
+        a {
+          color: $lightGray;
+          text-decoration: none;
+
+          &:hover { text-decoration: underline; }
+        }
+      }
+    }
+  }
+}

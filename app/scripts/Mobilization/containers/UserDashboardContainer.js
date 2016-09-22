@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Loading, TopMenu } from '../../components'
-
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
 // TODO: Refactor actions to module
 import { fetchOrganizations, isOrganizationsLoaded } from '../../reducers/organizations'
-
+import { Sidenav } from '../../../components/Navigation'
 
 class UserDashboard extends Component {
 
@@ -45,7 +43,7 @@ class UserDashboard extends Component {
 
     return (
       <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
-        <TopMenu auth={otherProps.auth} />
+        <Sidenav user={otherProps.auth.user} />
         {
           React.cloneElement(children, {...otherProps})
         }
