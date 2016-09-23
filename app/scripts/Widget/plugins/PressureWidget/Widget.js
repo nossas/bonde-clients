@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from '../../../Paths'
-
 import { OverlayWidget } from '../../components'
 import { PressureForm, TargetList, PressureCount } from './components'
 import { TellAFriend } from '../../../components'
-
 import { fillWidget } from '../../actions'
 
 /* TODO: Change static content by props
@@ -15,7 +13,6 @@ import { fillWidget } from '../../actions'
  * - bgColor
  */
 export class PressureWidget extends Component {
-
   constructor(props, context) {
     super(props, context)
     this.state = { filled: false }

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
 import { isValidEmail } from '../../../../../util/validation-helper'
 
 // TODO: Reusable Input
-const controlClassname = 'px3 py1 border-top'
+const controlClassname = 'px3 py1'
 const inputReset = {
   border: 'none',
   padding: '0',
@@ -11,9 +12,7 @@ const inputReset = {
   outline: 'none'
 }
 
-
 class PressureForm extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -74,7 +73,7 @@ class PressureForm extends Component {
     return (
       <form onSubmit={::this.handleSubmit}>
         <div className="ativist-form bg-white">
-          <div className={controlClassname}>
+          <div className={classnames('border-bottom border-gray94', controlClassname)}>
             {(errors && errors['email'] && <span className="red">{errors['email']}</span>)}
             <input
               className="col-12"
@@ -85,7 +84,7 @@ class PressureForm extends Component {
               onChange={e => this.setState({ email: e.target.value })}
             />
           </div>
-          <div className={controlClassname}>
+          <div className={classnames('border-bottom border-gray94', controlClassname)}>
             {(errors && errors['name'] && <span className="red">{errors['name']}</span>)}
             <input
               className="col-12"
@@ -96,7 +95,7 @@ class PressureForm extends Component {
               onChange={e => this.setState({ name: e.target.value })}
             />
           </div>
-          <div className={controlClassname}>
+          <div className={classnames('border-bottom border-gray94', controlClassname)}>
             {(errors && errors['lastname'] && <span className="red">{errors['lastname']}</span>)}
             <input
               className="col-12"
@@ -107,8 +106,8 @@ class PressureForm extends Component {
               onChange={e => this.setState({ lastname: e.target.value })}
             />
           </div>
-          <div className="bg-white rounded-bottom" style={{'border-top':'1px solid #ccc'}}>
-            <div className={controlClassname}>
+          <div className="form bg-white rounded-bottom">
+            <div className={classnames('form-group', controlClassname)}>
               <label className="py1 gray" htmlFor="pressure-subject-id">Assunto</label>
               {(errors && errors['subject'] && <span className="red ml1" style={errorSpanStyle}>{errors['subject']}</span>)}
               <input
@@ -120,9 +119,13 @@ class PressureForm extends Component {
                 onChange={e => this.setState({ subject: e.target.value })}
               />
             </div>
-            <div className={controlClassname}>
+            <div className={classnames('form-group', controlClassname)}>
               <label className="py1 gray" htmlFor="pressure-body-id">E-mail</label>
-              {(errors && errors['body'] && <span className="red ml1" style={errorSpanStyle}>{errors['body']}</span>)}
+              {
+                errors && errors['body'] && (
+                  <span className="red ml1" style={errorSpanStyle}>{errors['body']}</span>
+                )
+              }
               <textarea
                 id="pressure-body-id"
                 className="col-12"
@@ -136,8 +139,8 @@ class PressureForm extends Component {
             <button
               type="submit"
               onClick={::this.handleSubmit} // TODO: I don't undestand "the because" this line
-              className="caps white col-12 py2 rounded"
-              style={{backgroundColor: buttonColor}}
+              className="btn caps white col-12 py2 rounded"
+              style={{ backgroundColor: buttonColor }}
             >
               {buttonText}
             </button>
