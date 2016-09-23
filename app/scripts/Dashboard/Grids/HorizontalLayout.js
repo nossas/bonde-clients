@@ -11,8 +11,12 @@ const HorizontalLayout = ({ children, className, cols, ...props }) => {
   }
 
   return (
-    <div className="flex flex-wrap">
-      {children && children.map(child => React.cloneElement(child, { ...childProps }))}
+    <div className="form-horizontal-layout flex flex-wrap">
+      {
+        children && children.map(
+          child => React.cloneElement(child, {...childProps})
+        )
+      }
     </div>
   )
 }

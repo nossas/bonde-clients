@@ -10,14 +10,14 @@
     .form-group {
       border: none;
 
-      label {
+      & > label {
         color: $darkenGray;
         margin-bottom: 1rem;
         display: block;
       }
 
-      input[type="text"],
-      textarea {
+      .input,
+      .textarea {
         border: 1px solid $gray94;
         border-radius: 2px;
         padding: 1.5rem 1rem;
@@ -34,5 +34,17 @@
       text-transform: uppercase;
       margin: 0;
     }
+  }
+
+  .form-group {
+    .form-horizontal-layout {
+      .form-group {
+        padding: 0;
+      }
+    }
+  }
+
+  .form-radio {
+    margin: 0;
   }
 }

@@ -28,13 +28,13 @@ describe('<Radio />', () => {
     expect(wrapper.find('label').find('input').props().checked).to.equal(true)
   })
 
-  it('should add class mr1 if layout is horizontal', () => {
-    wrapper.setProps({ layout: 'horizontal' })
-    expect(wrapper.find('label').props().className).to.contain('mr1')
+  it('should add class pr2 if alignment is horizontal', () => {
+    wrapper.setProps({ alignment: 'horizontal' })
+    expect(wrapper.find('label').props().className).to.contain('pr2')
   })
 
-  it('should add class block if layout is vertical', () => {
-    wrapper.setProps({ layout: 'vertical' })
+  it('should add class block if alignment is vertical', () => {
+    wrapper.setProps({ alignment: 'vertical' })
     expect(wrapper.find('label').props().className).to.contain('block')
   })
 })

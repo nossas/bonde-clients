@@ -42,13 +42,19 @@ class DonationPage extends React.Component {
       },
       ...props
     } = this.props
+    const donationValueTitle = 'Clique para definir este valor como padrão.'
 
     return (
       <div className="flex-auto flex flex-column bg-silver gray relative">
         <Menu mobilization={props.mobilization} widget={props.widget} {...props} />
         <div className="clearfix overflow-auto">
-          <div className="col-6 clearfix py3 pr4 pl5">
-            <FormRedux onSubmit={::this.handleSubmit} {...props}>
+          <div className="col-7 clearfix py3 pr4 pl5">
+            <FormRedux
+              {...props}
+              className="transparent"
+              floatButton="Salvar"
+              onSubmit={::this.handleSubmit}
+            >
               <FormGroup controlId="title-text-id" {...title_text}>
                 <ControlLabel>Título do bloco de doação</ControlLabel>
                 <FormControl type="text" placeholder="Ex.: Escolha um valor e contribua agora!" />
@@ -75,41 +81,46 @@ class DonationPage extends React.Component {
 
               <FormGroup controlId="main-color-id" {...main_color}>
                 <ControlLabel>Defina a cor da página de pagamento</ControlLabel>
-                <HelpBlock>Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.</HelpBlock>
+                <HelpBlock>
+                  Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
+                </HelpBlock>
                 <ColorPicker />
               </FormGroup>
 
               <FormGroup controlId="default-donation-value" {...default_donation_value}>
                 <ControlLabel>Defina os valores para o bloco de doação</ControlLabel>
-                <HelpBlock>Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)</HelpBlock>
+                <HelpBlock>
+                  Você pode ter até 5 valores por bloco de doação. Preencha apenas com números
+                  inteiros (Ex: 50)
+                </HelpBlock>
                 <HorizontalLayout cols={5}>
                   <FormGroup controlId="donation-value1-id" {...donation_value1}>
                     <ControlLabel>Valor 1</ControlLabel>
-                    <FormControl type="number" placeholder="Ex.: R$20" />
+                    <FormControl type="number" placeholder="R$20" />
                   </FormGroup>
                   <FormGroup controlId="donation-value2-id" {...donation_value2}>
                     <ControlLabel>Valor 2</ControlLabel>
-                    <FormControl type="number" placeholder="Ex.: R$50" />
+                    <FormControl type="number" placeholder="R$50" />
                   </FormGroup>
                   <FormGroup controlId="donation-value3-id" {...donation_value3}>
                     <ControlLabel>Valor 3</ControlLabel>
-                    <FormControl type="number" placeholder="Ex.: R$100" />
+                    <FormControl type="number" placeholder="R$100" />
                   </FormGroup>
                   <FormGroup controlId="donation-value4-id" {...donation_value4}>
                     <ControlLabel>Valor 4</ControlLabel>
-                    <FormControl type="number" placeholder="Ex.: R$200" />
+                    <FormControl type="number" placeholder="R$200" />
                   </FormGroup>
                   <FormGroup controlId="donation-value5-id" {...donation_value5}>
                     <ControlLabel>Valor 5</ControlLabel>
-                    <FormControl type="number" placeholder="Ex.: R$500" />
+                    <FormControl type="number" placeholder="R$500" />
                   </FormGroup>
                 </HorizontalLayout>
                 <RadioGroup className="flex flex-wrap" style={{marginTop: '-1rem' }}>
-                  <Radio className="sm-col sm-col-2" title="Clique para definir este valor como padrão." value="1">Definir como padrão</Radio>
-                  <Radio className="sm-col sm-col-2" title="Clique para definir este valor como padrão." value="2">Definir como padrão</Radio>
-                  <Radio className="sm-col sm-col-2" title="Clique para definir este valor como padrão." value="3">Definir como padrão</Radio>
-                  <Radio className="sm-col sm-col-2" title="Clique para definir este valor como padrão." value="4">Definir como padrão</Radio>
-                  <Radio className="sm-col sm-col-2" title="Clique para definir este valor como padrão." value="5">Definir como padrão</Radio>
+                  <Radio className="col col-2" title={donationValueTitle} value="1">Default</Radio>
+                  <Radio className="col col-2" title={donationValueTitle} value="2">Default</Radio>
+                  <Radio className="col col-2" title={donationValueTitle} value="3">Default</Radio>
+                  <Radio className="col col-2" title={donationValueTitle} value="4">Default</Radio>
+                  <Radio className="col col-2" title={donationValueTitle} value="5">Default</Radio>
                 </RadioGroup>
                 <HelpBlock>*todos os valores são em reais</HelpBlock>
               </FormGroup>
@@ -130,7 +141,9 @@ class DonationPage extends React.Component {
 
               <FormGroup>
                 <ControlLabel>Conta bancária</ControlLabel>
-                <HelpBlock className="mb3">Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.</HelpBlock>
+                <HelpBlock>
+                  Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.
+                </HelpBlock>
               </FormGroup>
             </FormRedux>
           </div>
