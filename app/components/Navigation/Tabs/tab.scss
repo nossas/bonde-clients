@@ -1,5 +1,8 @@
+@import '../../../styles/color-variables';
+
 .tab {
   &:focus {
     box-shadow: none;
+    border-color: $pagenta;
   }
 }

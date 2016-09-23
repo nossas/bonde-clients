@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
+
 import * as Paths from '../Paths'
-import { TabMenuItem } from './'
+import { Tabs, Tab } from '../../components/Navigation'
 
 export default class ConfigurationsMenu extends React.Component {
   static propTypes = {
@@ -17,37 +18,35 @@ export default class ConfigurationsMenu extends React.Component {
     const customDomainMobilizationPath = Paths.customDomainMobilization(mobilization.id)
 
     return (
-      <div className="bg-white px3 clearfix">
-        <h2 className="mb3">Configure sua mobilização</h2>
-        <div>
-          <ul className="list-reset mb0">
-            <TabMenuItem
-              path={basicsMobilizationPath}
-              text="Informações básicas"
-              isActive={basicsMobilizationPath === location.pathname}
-            />
-            <TabMenuItem
-              path={cityMobilizationPath}
-              text="Cidade"
-              isActive={cityMobilizationPath === location.pathname}
-            />
-            <TabMenuItem
-              path={sharingMobilizationPath}
-              text="Compartilhamento"
-              isActive={sharingMobilizationPath === location.pathname}
-            />
-            <TabMenuItem
-              path={analyticsMobilizationPath}
-              text="Google Analytics"
-              isActive={analyticsMobilizationPath === location.pathname}
-            />
-            <TabMenuItem
-              path={customDomainMobilizationPath}
-              text="Domínio"
-              isActive={customDomainMobilizationPath === location.pathname}
-            />
-          </ul>
-        </div>
+      <div className="bg-white pt3 pr4 pl5">
+        <h1 className="h1 mt0 mb3">Configure sua mobilização</h1>
+        <Tabs>
+          <Tab
+            text="Informações básicas"
+            path={basicsMobilizationPath}
+            isActive={basicsMobilizationPath === location.pathname}
+          />
+          <Tab
+            text="Cidade"
+            path={cityMobilizationPath}
+            isActive={cityMobilizationPath === location.pathname}
+          />
+          <Tab
+            text="Compartilhamento"
+            path={sharingMobilizationPath}
+            isActive={sharingMobilizationPath === location.pathname}
+          />
+          <Tab
+            text="Google Analytics"
+            path={analyticsMobilizationPath}
+            isActive={analyticsMobilizationPath === location.pathname}
+          />
+          <Tab
+            text="Domínio"
+            path={customDomainMobilizationPath}
+            isActive={customDomainMobilizationPath === location.pathname}
+          />
+        </Tabs>
       </div>
     )
   }
