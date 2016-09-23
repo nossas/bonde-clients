@@ -4,10 +4,21 @@ import classnames from 'classnames'
 
 class SidenavListItem extends Component {
   render() {
-    const { text, icon, children, className, ...rest } = this.props
+    const { text, icon, linkType, children, className, href, target } = this.props
+
+    const elementTypes = {
+      router: { component: Link, props: { to: href } },
+      anchor: { component: 'a', props: { href, target } }
+    }
+    const current = elementTypes[linkType]
+    const Component = current.component
+
     return (
       <div className={classnames('item', className)}>
-        <a {...rest} className="block clearfix">
+        <Component
+          className="block clearfix"
+          {...current.props}
+        >
           <div className="item-icon">
             <i className={`fa fa-${icon}`} />
           </div>
@@ -15,7 +26,7 @@ class SidenavListItem extends Component {
             <div>{text}</div>
             <div className="item-content-children">{children}</div>
           </div>
-        </a>
+        </Component>
       </div>
     )
   }
@@ -23,6 +34,11 @@ class SidenavListItem extends Component {
 
 SidenavListItem.contextTypes = {
   router: PropTypes.object
+}
+
+SidenavListItem.defaultProps = {
+  linkType: 'anchor',
+  target: '_self'
 }
 
 export default SidenavListItem
