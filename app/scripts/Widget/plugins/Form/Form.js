@@ -166,10 +166,7 @@ export default class FormWidget extends React.Component {
     const { editable, configurable } = this.props
     if (editable && !configurable && this.state.hasMouseOver) {
       return (
-        <div
-          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded"
-          style={{ zIndex: 9998 }}
-        >
+        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1">
           <div className="table full-height col-12 center">
             <div className="white table-cell align-middle">
               Clique para editar
