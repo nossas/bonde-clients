@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form'
 import * as WidgetActions from '../../../actions'
 import * as Paths from '../../../../Paths'
 
-import { Loading, CloseButton } from '../../../../components'
+import { Loading } from '../../../../components'
 import Menu from '../components/settings/Menu.jsx'
 
 import {
@@ -133,7 +133,6 @@ class DonationPage extends React.Component {
             </FormGroup>
           </FormRedux>
         </div>
-        <CloseButton dirty={props.dirty} path={Paths.editMobilization(props.mobilization.id)} />
       </div>
     )
   }
