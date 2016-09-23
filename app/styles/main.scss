@@ -83,6 +83,10 @@ textarea {
   background-color: #ff0099;
 }
 
+a.no-underscore {
+  &, &:hover { text-decoration: none; }
+}
+
 .coverImage {
   overflow: hidden;
   background-size: cover;

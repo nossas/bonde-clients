@@ -153,36 +153,56 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               </a>
             </div> : ''}
 
-          {donation_value1 > 0 ? <a href="#"
-            onClick={::this.handleClickSetValueDonation.bind(this, 1)}
-            style={selected_value === 1 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
-            className={selected_value === 1 ? 'value-option block mb1 py1 full-width bold active' : 'value-option block mb1 py1 full-width bold bg-darken-1'}>
-            {"R$ " + donation_value1 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
-            : ''}
-          {donation_value2 > 0 ? <a href="#"
-            onClick={::this.handleClickSetValueDonation.bind(this, 2)}
-            style={selected_value === 2 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
-            className={selected_value === 2 ? 'value-option block mb1 py1 full-width bold active' : 'value-option block mb1 py1 full-width bold bg-darken-1'}>
-            {"R$ " + donation_value2 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
-            : ''}
-          {donation_value3 > 0 ? <a href="#"
-            onClick={::this.handleClickSetValueDonation.bind(this, 3)}
-            style={selected_value === 3 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
-            className={selected_value === 3 ? 'value-option block mb1 py1 full-width bold active' : 'value-option block mb1 py1 full-width bold bg-darken-1'}>
-            {"R$ " + donation_value3 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
-            : ''}
-          {donation_value4 > 0 ? <a href="#"
-            onClick={::this.handleClickSetValueDonation.bind(this, 4)}
-            style={selected_value === 4 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
-            className={selected_value === 4 ? 'value-option block mb1 py1 full-width bold active' : 'value-option block mb1 py1 full-width bold bg-darken-1'}>
-            {"R$ " + donation_value4 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
-            : ''}
-          {donation_value5 > 0 ? <a href="#"
-            onClick={::this.handleClickSetValueDonation.bind(this, 5)}
-            style={selected_value === 5 ? {borderColor: main_color, backgroundColor: this.convertHex(main_color, 35), color: main_color} : {}}
-            className={selected_value === 5 ? 'value-option block mb1 py1 full-width bold active' : 'value-option block mb1 py1 full-width bold bg-darken-1'}>
-            {"R$ " + donation_value5 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
-            : ''}
+          {donation_value1 <= 0 ? null : (
+            <a
+              href="#"
+              onClick={::this.handleClickSetValueDonation.bind(this, 1)}
+              style={selected_value !== 1 ? {} : { backgroundColor: this.convertHex(main_color, 35), color: main_color }}
+              className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selected_value === 1 ? 'active' : 'bg-darken-1')}
+            >
+              {"R$ " + donation_value1 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}
+            </a>
+          )}
+          {donation_value2 <= 0 ? null : (
+            <a
+              href="#"
+              onClick={::this.handleClickSetValueDonation.bind(this, 2)}
+              style={selected_value !== 2 ? {} : { backgroundColor: this.convertHex(main_color, 35), color: main_color }}
+              className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selected_value === 2 ? 'active' : 'bg-darken-1')}
+            >
+              {"R$ " + donation_value2 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}
+            </a>
+          )}
+          {donation_value3 <= 0 ? null : (
+            <a
+              href="#"
+              onClick={::this.handleClickSetValueDonation.bind(this, 3)}
+              style={selected_value !== 3 ? {} : { backgroundColor: this.convertHex(main_color, 35), color: main_color }}
+              className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selected_value === 3 ? 'active' : 'bg-darken-1')}
+            >
+              {"R$ " + donation_value3 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}
+            </a>
+          )}
+          {donation_value4 <= 0 ? null : (
+            <a
+              href="#"
+              onClick={::this.handleClickSetValueDonation.bind(this, 4)}
+              style={selected_value !== 4 ? {} : { backgroundColor: this.convertHex(main_color, 35), color: main_color }}
+              className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selected_value === 4 ? 'active' : 'bg-darken-1')}
+            >
+              {"R$ " + donation_value4 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}
+            </a>
+          )}
+          {donation_value5 <= 0 ? null : (
+            <a
+              href="#"
+              onClick={::this.handleClickSetValueDonation.bind(this, 5)}
+              style={selected_value !== 5 ? {} : { backgroundColor: this.convertHex(main_color, 35), color: main_color }}
+              className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selected_value === 5 ? 'active' : 'bg-darken-1')}
+            >
+              {"R$ " + donation_value5 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}
+            </a>
+          )}
 
           <a
             href="#"
