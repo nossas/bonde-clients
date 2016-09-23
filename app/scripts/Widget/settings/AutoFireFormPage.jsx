@@ -51,46 +51,48 @@ const AutoFireFormPage = (props) => {
         ? <PressureWidgetMenu mobilization_id={mobilization.id} widget_id={widget.id} {...props} />
       : <FormWidgetMenu {...props} widget={widget} />
       )}
-      <div className='p3 overflow-auto'>
-        <FormRedux
-          {...rest}
-          className="transparent col-6"
-          floatButton="Salvar"
-          onSubmit={handleSubmit}
-        >
-          <FormGroup controlId="senderName" {...senderName}>
-            <ControlLabel>Nome do remetente</ControlLabel>
-            <FormControl
-              type="text"
-              placeholder="Defina o nome que irá aparecer na mensagem enviada."
-            />
-          </FormGroup>
-          <FormGroup controlId="senderEmail" {...senderEmail}>
-            <ControlLabel>E-mail remetente</ControlLabel>
-            <FormControl
-              type="text"
-              placeholder="Defina o e-mail que irá aparecer na mensagem enviada."
-            />
-          </FormGroup>
-          <FormGroup controlId="emailSubject" {...emailSubject}>
-            <ControlLabel>Assunto do e-mail</ControlLabel>
-            <FormControl
-              type="text"
-              placeholder="Defina o assunto que irá aparecer na mensagem enviada."
-            />
-          </FormGroup>
-          <FormGroup controlId="emailText" {...emailText}>
-            <ControlLabel>Email de agradecimento</ControlLabel>
-            <FormControl
-              componentClass="textarea"
-              rows="6"
-              placeholder={'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua'
-                + ' participação é muito importante e, agora, precisamos da sua ajuda para que mais'
-                + ' gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um'
-                + ' dos links abaixo. Um abraço.'}
-            />
-          </FormGroup>
-        </FormRedux>
+      <div className="clearfix overflow-auto">
+        <div className="col-6 clearfix py3 pr4 pl5">
+          <FormRedux
+            {...rest}
+            className="transparent"
+            floatButton="Salvar"
+            onSubmit={handleSubmit}
+          >
+            <FormGroup controlId="senderName" {...senderName}>
+              <ControlLabel>Nome do remetente</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Defina o nome que irá aparecer na mensagem enviada."
+              />
+            </FormGroup>
+            <FormGroup controlId="senderEmail" {...senderEmail}>
+              <ControlLabel>E-mail remetente</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Defina o e-mail que irá aparecer na mensagem enviada."
+              />
+            </FormGroup>
+            <FormGroup controlId="emailSubject" {...emailSubject}>
+              <ControlLabel>Assunto do e-mail</ControlLabel>
+              <FormControl
+                type="text"
+                placeholder="Defina o assunto que irá aparecer na mensagem enviada."
+              />
+            </FormGroup>
+            <FormGroup controlId="emailText" {...emailText}>
+              <ControlLabel>Email de agradecimento</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                rows="6"
+                placeholder={'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua'
+                  + ' participação é muito importante e, agora, precisamos da sua ajuda para que mais'
+                  + ' gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um'
+                  + ' dos links abaixo. Um abraço.'}
+              />
+            </FormGroup>
+          </FormRedux>
+        </div>
       </div>
     </div> :
     <Loading />
