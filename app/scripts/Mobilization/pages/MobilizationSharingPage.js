@@ -31,7 +31,7 @@ const MobilizationSharingPage = ({
   const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
-    <div className="p3 col col-8">
+    <div className="col-6 clearfix py3 pr4 pl5">
       <div className="h5 caps bold flex flex-center mb2">
         <i className="fa fa-facebook-square mr1" style={{ fontSize: '2em' }} />
         <span>Postagem de Facebook</span>
