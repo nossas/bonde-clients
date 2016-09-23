@@ -56,7 +56,7 @@ class UserDashboard extends Component {
         <Sidenav user={otherProps.auth.user}>
           {
             !currentId ? null : (
-              <SidenavList className="bg-lighten-1">
+              <SidenavList className="bg-lighten-2">
                 <SidenavListItem
                   linkType="router"
                   text="Editar mobilização"
