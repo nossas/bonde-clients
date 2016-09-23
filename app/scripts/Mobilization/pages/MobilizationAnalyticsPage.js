@@ -21,7 +21,7 @@ const MobilizationAnalyticsPage = ({
   const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
-    <div className="py3 px3 col col-8">
+    <div className="col-6 clearfix py3 pr4 pl5">
       <p className="h5">
         Para acompanhar os resultados da sua mobilização, você precisa configurar
         uma conta no Google Analytics. Siga os passos abaixo:
