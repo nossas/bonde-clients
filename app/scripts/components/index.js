@@ -1,6 +1,4 @@
 export { default as Block } from './Block.jsx'
-export { default as MobilizationMenu } from './MobilizationMenu.jsx'
-export { default as MobilizationsMenu } from './MobilizationsMenu.jsx'
 export { default as LoginForm } from './LoginForm.jsx'
 export { default as Widget } from './Widget.jsx'
 export { default as ContentWidget } from './ContentWidget.jsx'

@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 
 import { fetchBlocks, isBlocksLoaded } from '../../reducers/blocks'
 import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
-import { MobilizationMenu } from '../../components'
 import { getMobilization } from '../MobilizationSelectors'
 import { setCurrentMobilizationId } from '../MobilizationActions'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
 
-class MobilizationDashboard extends React.Component {
+class MobilizationDashboardContainer extends React.Component {
   static propTypes = {
     blocks: PropTypes.object.isRequired,
     widgets: PropTypes.object.isRequired,
@@ -51,7 +50,6 @@ class MobilizationDashboard extends React.Component {
 
     return (
       <div className='flex flex-auto overflow-hidden'>
-        <MobilizationMenu {...otherProps} />
         {React.cloneElement(children, {...otherProps})}
         <GoogleFontsLoader fonts={fonts} />
       </div>
@@ -66,4 +64,4 @@ const mapStateToProps = (globalState, ownProps) => ({
   mobilization: getMobilization(globalState, ownProps)
 })
 
-export default connect(mapStateToProps)(MobilizationDashboard)
+export default connect(mapStateToProps)(MobilizationDashboardContainer)
