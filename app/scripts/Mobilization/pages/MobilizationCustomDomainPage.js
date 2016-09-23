@@ -21,7 +21,7 @@ const MobilizationCustomDomainPage = ({
   const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
-    <div className="py3 px3 col col-8">
+    <div className="col-6 clearfix py3 pr4 pl5">
       <p className="h5">
         Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
         campo abaixo e clique em Salvar.
