@@ -72,7 +72,7 @@ class PressureForm extends Component {
     }
     return (
       <form onSubmit={::this.handleSubmit}>
-        <div className="ativist-form bg-white">
+        <div className="activist-form bg-white rounded-bottom">
           <div className={classnames('border-bottom border-gray94', controlClassname)}>
             {(errors && errors['email'] && <span className="red">{errors['email']}</span>)}
             <input
@@ -128,17 +128,17 @@ class PressureForm extends Component {
               }
               <textarea
                 id="pressure-body-id"
-                className="col-12"
+                className="col-12 mt1"
                 style={{...inputReset, height: '7rem'}}
                 value={body}
                 onChange={e => this.setState({ body: e.target.value })}
               />
             </div>
           </div>
-          <div className="p1 border-top">
+          <div className="p1 border-top rounded-bottom">
             <button
               type="submit"
-              onClick={::this.handleSubmit} // TODO: I don't undestand "the because" this line
+              onClick={::this.handleSubmit}
               className="btn caps white col-12 py2 rounded"
               style={{ backgroundColor: buttonColor }}
             >
