@@ -72,6 +72,18 @@ textarea {
   }
 }
 
+.float-btn-menu {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 1.05rem;
+  padding: .7rem 1.6rem;
+  color: #fff;
+  background-color: #ff0099;
+}
+
 .coverImage {
   overflow: hidden;
   background-size: cover;

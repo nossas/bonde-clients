@@ -11,7 +11,7 @@
   height: 100%;
   z-index: 5;
   overflow: hidden;
-  transition: .5s;
+  transition: width .3s ease;
 
   &:hover {
     width: 257px;

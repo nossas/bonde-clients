@@ -26,15 +26,20 @@ export class NewBlockPage extends Component {
     const { color_scheme: colorScheme } = mobilization
 
     return (
-      <div className={classnames('new-block-page flex-auto bg-silver gray relative', colorScheme)}>
-        <div className="new-block-header bg-white pt3 px4">
+      <div
+        className={classnames(
+          'new-block-page flex-auto bg-silver gray relative pl4',
+          colorScheme
+        )}
+      >
+        <div className="new-block-header bg-white pt3 pr4 pl5">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
           <Tabs>
             <Tab text="Blocos em branco" isActive={true} />
           </Tabs>
         </div>
 
-        <div className="py3 px4 col-6">
+        <div className="col-6 clearfix py3 pr4 pl5">
           <p className="lightgray mb2">
             Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a
             qualquer momento
@@ -54,7 +59,7 @@ export class NewBlockPage extends Component {
             ))}
           </div>
           <button
-            className="new-block-button btn bg-pagenta white rounded"
+            className="new-block-button btn float-btn-menu rounded"
             onClick={() => {
               const action = addBlock({
                 mobilization_id: mobilization.id,
