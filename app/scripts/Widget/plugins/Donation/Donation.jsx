@@ -8,10 +8,9 @@ import * as Paths from '../../../Paths'
 import * as DonationActions from './actions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 
+import './assets/donation_widget.scss'
+
 @reactMixin.decorate(Navigation)
-
-// @connect(state => ({ auth: state.auth, form: state.loginForm }))
-
 class Donation extends React.Component {
   constructor(props, context) {
     super(props, context)
@@ -115,18 +114,19 @@ class Donation extends React.Component {
     const payment_type = (widget.settings ? widget.settings.payment_type : 'unique')
     const recurring_period = (widget.settings ? widget.settings.recurring_period : 30)
 
-    const periodLabelOptions = {30:' mês', 180: ' semestre', 365: ' ano'}
+    const periodLabelOptions = { 30:' mês', 180: ' semestre', 365: ' ano' }
     const periodLabelCurrent = periodLabelOptions[recurring_period]
-    const periodLabel = (payment_type === 'unique' || selected_payment_type === 'unique' ? '' : periodLabelCurrent)
-
-    // const donationRecurringImage = require('./DonationWidget/donation-recurring.svg')
-    // const donationUniqueImage = require('./DonationWidget/donation-unique.svg')
+    const periodLabel = (
+      payment_type === 'unique' ||
+      selected_payment_type === 'unique'
+        ? ''  : periodLabelCurrent
+    )
 
     if (!configurable) {
       return (
         <div className="donation center clearfix">
           <h2
-            className="p2 m0"
+            className="p2 m0 rounded-top"
             style={{ fontFamily: headerFont, backgroundColor: main_color }}
           >
             {title_text}
@@ -184,7 +184,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             {"R$ " + donation_value5 + (payment_type === 'recurring' || selected_payment_type === 'recurring' ? ' /' : '') + periodLabel}</a>
             : ''}
 
-          <a href="#" onClick={::this.handleClickDonate} style={{backgroundColor: main_color}} className="caps button bg-darken-4 p2 mt1 full-width">{button_text}</a>
+          <a
+            href="#"
+            onClick={::this.handleClickDonate}
+            style={{ backgroundColor: main_color }}
+            className="btn white caps bg-darken-4 p2 mt1 col-12 rounded"
+          >
+            {button_text}
+          </a>
           </div>
         </div>
       )
@@ -221,7 +228,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
   renderForm() {
     const { editable, configurable } = this.props
-    const className = classnames({'relative': editable || !configurable})
+    const className = classnames({ 'relative': editable || !configurable })
 
     return (
       <div>
@@ -249,12 +256,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     return (
       <div>
         <div
-          className="bg-white widget"
-          style={(editable ? {cursor: 'pointer'} : null)}
+          className="bg-white widget rounded"
+          style={(editable ? { cursor: 'pointer' } : null)}
           onMouseEnter={::this.handleMouseEnter}
           onMouseLeave={::this.handleMouseLeave}
-          onClick={::this.handleClick}>
-          { success ? this.renderThankyouText() : this.renderForm() }
+          onClick={::this.handleClick}
+        >
+          {success ? this.renderThankyouText() : this.renderForm()}
         </div>
       </div>
     )

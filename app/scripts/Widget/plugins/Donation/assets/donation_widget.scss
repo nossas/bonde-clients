@@ -1,18 +1,15 @@
 
 #content .widget .donation {
-  a:hover {
-    text-decoration: none;
-  }
   a {
     color: #b0b0b0;
-    &.button {
-      color: #fff;
-    }
+
+    &:hover { text-decoration: none; }
+    &.btn { color: #fff; }
   }
 
   .icon-payment-recurring,
   .icon-payment-unique {
-    background: 50% 50% url('./../scripts/Widget/plugins/Donation/assets/donation-recurring.png') transparent no-repeat;
+    background: 50% 50% url('./donation-recurring.png') transparent no-repeat;
     background-size: contain;
     width: 2.2rem;
     height: 2.2rem;
@@ -24,7 +21,7 @@
 
   }
   .icon-payment-unique {
-    background-image: url('./../scripts/Widget/plugins/Donation/assets/donation-unique.png');
+    background-image: url('./donation-unique.png');
   }
 
 
