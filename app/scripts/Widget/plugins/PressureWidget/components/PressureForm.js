@@ -135,7 +135,7 @@ class PressureForm extends Component {
               />
             </div>
           </div>
-          <div className="p1 border-top rounded-bottom">
+          <div className="p1 rounded-bottom">
             <button
               type="submit"
               onClick={::this.handleSubmit}
