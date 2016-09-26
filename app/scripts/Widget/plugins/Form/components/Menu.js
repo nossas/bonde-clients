@@ -11,7 +11,7 @@ const Menu = ({ mobilization, widget, location }) => {
 
   return (
     <div className="bg-white pt3 pr4 pl5">
-      <h1 className='h1 mb3'>Configure o formulário da sua ação</h1>
+      <h1 className='h1 mt0 mb3'>Configure o formulário da sua ação</h1>
       <Tabs>
         <Tab
           path={fieldsPath}
