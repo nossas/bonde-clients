@@ -164,8 +164,7 @@ export default class InputForm extends React.Component {
       <div>
         <div
           id={`form-${uid}`}
-          className="p2 mb3 bg-white clearfix relative rounded"
-          style={{zIndex: 9999}}
+          className="p2 mb3 bg-white border border-gray94 clearfix relative rounded z1"
         >
           <div className="col col-6">
             <div className="table col-12 mb2">
