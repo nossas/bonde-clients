@@ -3,17 +3,12 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import Modernizr from 'modernizr'
 
-import * as Paths from '../Paths'
-
 import {
   exportDataClipByEndpoint,
   mountExportDataclip
 } from '../actions/ExportActions'
 
-import {
-  Loading,
-  CloseButton
-} from '../components'
+import { Loading } from '../components'
 
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 import { Menu as DonationWidgetMenu } from '../Widget/plugins/Donation/components/settings'
@@ -166,7 +161,6 @@ class ExportWidgetData extends React.Component {
           {(!Modernizr.adownload ? this.renderSaveAsContainer() : null)}
 
         </div>
-        <CloseButton path={ Paths.editMobilization(mobilization.id) } />
       </div>
     )
   }

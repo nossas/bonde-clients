@@ -164,7 +164,7 @@ export default class InputForm extends React.Component {
       <div>
         <div
           id={`form-${uid}`}
-          className="p2 mb3 bg-white border border-gray94 clearfix relative rounded z1"
+          className="p2 mb3 bg-white border border-gray94 clearfix relative rounded z5"
         >
           <div className="col col-6">
             <div className="table col-12 mb2">
@@ -295,7 +295,7 @@ export default class InputForm extends React.Component {
               </button>
               <button
                 disabled={this.state.loading}
-                className="btn white caps bg-aqua p2 mr2 rounded"
+                className="btn white caps bg-aqua p2 mr2 rounded z5"
                 onClick={::this.handleSave}
               >
                 {this.state.loading ? 'Salvando...' : 'Salvar'}
@@ -305,9 +305,8 @@ export default class InputForm extends React.Component {
         </div>
 
         <div
-          className="fixed top-0 right-0 bottom-0 left-0"
+          className="fixed top-0 right-0 bottom-0 left-0 z4"
           onClick={::this.handleOverlayClick}
-          style={{zIndex: 9998}}
         />
       </div>
     )
