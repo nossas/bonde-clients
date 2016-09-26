@@ -255,7 +255,7 @@ export default class InputForm extends React.Component {
             <div>
               <button
                 disabled={!canMoveUp}
-                className="btn hover"
+                className="btn btn-no-focus hover"
                 style={{ backgroundColor: 'white' }}
                 onClick={::this.handleMoveUp}
               >
@@ -267,7 +267,7 @@ export default class InputForm extends React.Component {
             <div>
               <button
                 disabled={!canMoveDown}
-                className="btn hover"
+                className="btn btn-no-focus hover"
                 style={{ backgroundColor: 'white' }}
                 onClick={::this.handleMoveDown}
               >
@@ -278,7 +278,7 @@ export default class InputForm extends React.Component {
 
             <div>
               <button
-                className="btn hover"
+                className="btn btn-no-focus hover"
                 style={{ backgroundColor: 'white' }}
                 onClick={::this.handleRemove}
               >

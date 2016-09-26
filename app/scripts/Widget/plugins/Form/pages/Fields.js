@@ -66,39 +66,40 @@ class Fields extends Component {
     return(
       <div className="flex-auto flex flex-column bg-silver gray relative">
         <Menu widget={widget} {...props} />
-        <div className="p3 flex-auto overflow-scroll">
-          <p className="h5 mb3 darkengray">
-            {
-              this.fields().length == 0 ?
-              'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a'
-                + ' adicionar campos.' :
-              'Adicione, remova, edite e ordene os campos do formulário de acordo com as'
-                + ' necessidades da sua ação.'
-            }
-          </p>
+        <button
+          className="btn white bg-pagenta caps p2 rounded"
+          onClick={::this.handleAddTextField}
+          style={{
+            position: 'absolute',
+            top: '1.45rem',
+            right: '2rem',
+            textTransform: 'uppercase',
+            margin: '0',
+            padding: '.7rem 1.6rem'
+          }}
+        >
+          <i className="fa fa-plus mr2" />
+          Adicionar um campo
+        </button>
+        <div className="clearfix overflow-auto">
+          <div className="col-8 clearfix py3 pr4 pl5">
+            <p className="h5 mb3 darkengray">
+              {
+                this.fields().length == 0 ?
+                'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a'
+                  + ' adicionar campos.' :
+                'Adicione, remova, edite e ordene os campos do formulário de acordo com as'
+                  + ' necessidades da sua ação.'
+              }
+            </p>
 
-          <FormWidget
-            {...props}
-            widget={widget}
-            configurable={true}
-            hasNewField={this.state.hasNewField}
-          />
-
-          <button
-            className="btn white bg-pagenta caps p2 rounded"
-            onClick={::this.handleAddTextField}
-            style={{
-              position: 'absolute',
-              top: '1.45rem',
-              right: '2rem',
-              width: 'inherit',
-              textTransform: 'uppercase',
-              margin: '0'
-            }}
-          >
-            <i className="fa fa-plus mr2" />
-            Adicionar um campo
-          </button>
+            <FormWidget
+              {...props}
+              widget={widget}
+              configurable={true}
+              hasNewField={this.state.hasNewField}
+            />
+          </div>
         </div>
         {this.renderLoading()}
       </div>

@@ -10,7 +10,7 @@ const Menu = ({ mobilization, widget, location }) => {
   const exportPath = Paths.exportWidgetData(mobilization.id, widget.id)
 
   return (
-    <div className='bg-white px3 clearfix'>
+    <div className="bg-white pt3 pr4 pl5">
       <h1 className='h1 mb3'>Configure o formulário da sua ação</h1>
       <Tabs>
         <Tab

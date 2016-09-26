@@ -28,35 +28,37 @@ class FormWidgetForm extends React.Component {
     return (
       <div className="flex-auto flex flex-column bg-silver atomic relative">
         <Menu mobilization={props.mobilization} widget={props.widget} location={props.location} />
-        <div className="p3 flex-auto overflow-auto">
-          <FormRedux
-            {...props}
-            onSubmit={::this.handleSubmit}
-            className="transparent col-6"
-            floatButton="Salvar"
-          >
-            <FormGroup controlId="call-to-action-id" {...call_to_action}>
-              <ControlLabel>Título do formulário</ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Ex: Preencha o formulário abaixo para assinar a petição."
-              />
-            </FormGroup>
-            <FormGroup controlId="button-text-id" {...button_text}>
-              <ControlLabel>Botão</ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Defina o texto do botão de confirmação do formulário."
-              />
-            </FormGroup>
-            <FormGroup controlId="count-text-id" {...count_text}>
-              <ControlLabel>Contador</ControlLabel>
-              <FormControl
-                type="text"
-                placeholder="Defina o texto que ficará ao lado do número de pessoas que agiram."
-              />
-            </FormGroup>
-          </FormRedux>
+        <div className="clearfix overflow-auto">
+          <div className="col-6 clearfix py3 pr4 pl5">
+            <FormRedux
+              {...props}
+              onSubmit={::this.handleSubmit}
+              className="transparent"
+              floatButton="Salvar"
+            >
+              <FormGroup controlId="call-to-action-id" {...call_to_action}>
+                <ControlLabel>Título do formulário</ControlLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Ex: Preencha o formulário abaixo para assinar a petição."
+                />
+              </FormGroup>
+              <FormGroup controlId="button-text-id" {...button_text}>
+                <ControlLabel>Botão</ControlLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Defina o texto do botão de confirmação do formulário."
+                />
+              </FormGroup>
+              <FormGroup controlId="count-text-id" {...count_text}>
+                <ControlLabel>Contador</ControlLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Defina o texto que ficará ao lado do número de pessoas que agiram."
+                />
+              </FormGroup>
+            </FormRedux>
+          </div>
         </div>
       </div>
     )

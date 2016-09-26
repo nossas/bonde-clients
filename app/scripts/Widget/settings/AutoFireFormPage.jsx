@@ -44,7 +44,7 @@ const AutoFireFormPage = (props) => {
 
   return (
     widgets.data.length > 0 ?
-    <div>
+    <div className="flex-auto flex flex-column">
       {(widget.kind === 'donation'
         ? <DonationWidgetMenu {...props} widget={widget} />
         : widget.kind === 'pressure'

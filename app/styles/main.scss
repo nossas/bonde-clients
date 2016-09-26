@@ -87,6 +87,16 @@ a.no-underscore {
   &, &:hover { text-decoration: none; }
 }
 
+.btn {
+  &.btn-no-focus:focus {
+    box-shadow: none;
+    border-color: transparent;
+  }
+}
+.btn-no-focus:focus {
+
+}
+
 .coverImage {
   overflow: hidden;
   background-size: cover;

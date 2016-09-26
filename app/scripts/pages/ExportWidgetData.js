@@ -126,7 +126,7 @@ class ExportWidgetData extends React.Component {
           : <FormWidgetMenu {...this.props} widget={widget} />
         )}
 
-        <div className="p3">
+        <div className="col-6 clearfix py3 pr4 pl5">
           <div className="table caps bold mb2 darkengray h6">
             <i className="fa fa-file-excel-o darkengray table-cell align-middle h2" />
             <span className="table-cell align-middle pl1">Exportar</span>
