@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-import colorPlugin, { ColorControls } from './ColorControls'
-import fontPlugin, { FontControls } from './FontControls'
+import createColorPlugin, { ColorControls } from './ColorControls'
+import createFontPlugin, { FontControls } from './FontControls'
+import { HistoryControls } from './HistoryControls'
 /*import styles from './styles.css'*/
 
 
@@ -16,6 +17,7 @@ class Toolbar extends Component {
       <div className="absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap" style={{ zIndex: 10000 }}>
         <ColorControls buttonClassName="btn white p2" {...controlsProps} />
         <FontControls initialValue={{ fontSize: 15, fontFamily: '' }} {...controlsProps} />
+        <HistoryControls buttonClassName="btn white p2" {...controlsProps} />
       </div>
     )
   }
@@ -26,7 +28,10 @@ Toolbar.propTypes = {
   setEditorState: PropTypes.func.isRequired
 }
 
-const plugins = [colorPlugin(), fontPlugin()]
+const plugins = [
+  createColorPlugin(),
+  createFontPlugin()
+]
 
 export const customStyleFn = (style) => {
   let output = {}
