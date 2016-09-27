@@ -7,7 +7,7 @@ const BlockTag = (props) => {
   const filtered = tags.filter(tag => !!tag.trim())
 
   return (
-    <div className="mb1 flex flex-wrap">
+    <div className="mb1 flex flex-wrap h5">
       {filtered.map((tag, index) => <Tag key={`${tag}-${index}`} value={tag} {...rest} />)}
     </div>
   )
