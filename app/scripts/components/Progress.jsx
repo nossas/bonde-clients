@@ -10,7 +10,7 @@ export default class Progress extends React.Component {
 
   render() {
     return (
-      <div className={classnames('full-width', 'border')} >
+      <div className={classnames('col-12 border rounded border-darken-4')} >
         <div
           ref='progress'
           className={this.props.className}

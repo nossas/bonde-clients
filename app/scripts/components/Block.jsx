@@ -74,22 +74,40 @@ export default class Block extends React.Component {
     if (this.state.editingBackground) {
       return (
         <div>
-          <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
-            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <div className="absolute col-12 top-0 bg-darken-4 z5" style={{ left: '80px' }}>
+            <div className="col-7">
+              <ColorPicker
+                {...this.props}
+                selectedClass={this.state.bgClass}
+                onClick={::this.handleColorClick}
+              />
+            </div>
             {this.renderBgImage()}
-            <div className="col col-2 p1" style={{overflow: 'hidden'}}>
+            <div className="col col-2 p1" style={{ overflow: 'hidden' }}>
               {this.renderUploader()}
               {this.renderProgress()}
             </div>
           </div>
-          <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
-            <button className="btn caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
-            <button className="btn caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
+          <div className="absolute right-0 mt2 mr2 nowrap z5" style={{ top: '3em' }}>
+            <button
+              className="btn caps bg-darken-4 white rounded mr1"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleSaveEdit}
+            >
+              Salvar
+            </button>
+            <button
+              className="btn caps bg-darken-4 white rounded"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleCancelEdit}
+            >
+              Cancelar
+            </button>
           </div>
           <div
-            className="fixed top-0 right-0 bottom-0 left-0"
+            className="fixed top-0 right-0 bottom-0 left-0 z4"
             onClick={::this.handleCancelEdit}
-            style={{zIndex: 9998}} />
+          />
         </div>
       )
     }
@@ -112,6 +130,7 @@ export default class Block extends React.Component {
     if (!this.state.uploadProgress) {
       return (
         <ReactS3Uploader
+          className="input border-none white m0 bg-darken-4"
           signingUrl={`${process.env.API_URL}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
@@ -122,11 +141,13 @@ export default class Block extends React.Component {
   }
 
   renderProgress() {
-    if (this.state.uploadProgress) {
-      return (
-        <Progress className="bg-blue" percent={this.state.uploadProgress} />
-      )
-    }
+    return !this.state.uploadProgress ? null : (
+      <Progress
+        className="bg-pagenta full-height rounded"
+        percent={this.state.uploadProgress}
+        style={{ height: '34px' }}
+      />
+    )
   }
 
   renderHiddenTag() {
@@ -143,11 +164,11 @@ export default class Block extends React.Component {
   renderBgImage() {
     if (this.state.bgImage) {
       return (
-        <div>
-          <div className="col col-1 p1">
-            <img src={this.state.bgImage} style={{maxHeight: '36px'}} />
+        <div className="col col-1">
+          <div className="col col-6 p1">
+            <img src={this.state.bgImage} style={{ maxHeight: '36px' }} />
           </div>
-          <div className="col col-1 p1">
+          <div className="col col-6 p1">
             <button className="btn bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
           </div>
         </div>
