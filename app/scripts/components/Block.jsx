@@ -83,8 +83,8 @@ export default class Block extends React.Component {
             </div>
           </div>
           <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
-            <button className="button button-transparent caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
-            <button className="button button-transparent caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
+            <button className="btn caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
+            <button className="btn caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
           </div>
           <div
             className="fixed top-0 right-0 bottom-0 left-0"
@@ -148,7 +148,7 @@ export default class Block extends React.Component {
             <img src={this.state.bgImage} style={{maxHeight: '36px'}} />
           </div>
           <div className="col col-1 p1">
-            <button className="button button-transparent bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
+            <button className="btn bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
           </div>
         </div>
       )
@@ -308,19 +308,19 @@ export default class Block extends React.Component {
             <DropDownMenu
               wrapperClassName={wrapperClassName}
               menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
-              buttonClassName='button bg-darken-4 white'
+              buttonClassName="btn bg-darken-4 white rounded"
               icon="cog"
             >
               <DropDownMenuItem
                 onClick={::this.handleEditBackgroundClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-picture-o" /> Alterar fundo
                 </span>
               </DropDownMenuItem>
               <DropDownMenuItem
                 onClick={::this.handleToggleHiddenClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} />
                   {(block.hidden ? ' Mostrar' : ' Esconder')}
@@ -328,7 +328,7 @@ export default class Block extends React.Component {
               </DropDownMenuItem>
               <DropDownMenuItem
                 onClick={::this.handleRemoveClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-trash" /> Remover
                 </span>
@@ -336,7 +336,7 @@ export default class Block extends React.Component {
               <DropDownMenuItem
                 disabled={!canMoveUp}
                 onClick={::this.handleMoveUpClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-chevron-up" /> Mover para cima
                 </span>
@@ -344,7 +344,7 @@ export default class Block extends React.Component {
               <DropDownMenuItem
                 disabled={!canMoveDown}
                 onClick={::this.handleMoveDownClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-chevron-down" /> Mover para baixo
                 </span>
