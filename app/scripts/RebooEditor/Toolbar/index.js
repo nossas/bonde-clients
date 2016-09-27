@@ -14,6 +14,11 @@ class Toolbar extends Component {
     setEditorState(RichUtils.toggleInlineStyle(editorState, style))
   }
 
+  toggleBlockType(blockType) {
+    const { editorState, setEditorState } = this.props
+    setEditorState(RichUtils.toggleBlockType(editorState, blockType))
+  }
+
   render() {
 
     const { editorState, setEditorState, buttonClassName } = this.props
@@ -30,6 +35,13 @@ class Toolbar extends Component {
         </button>
         <button type="button" className={buttonClassName} onClick={() => this.toggleInlineStyle('UNDERLINE')}>
           <i className="fa fa-underline" />
+        </button>
+        {/* BlockType buttons */}
+        <button type="button" className={buttonClassName} onClick={() => this.toggleBlockType('ordered-list-item')}>
+          <i className="fa fa-list-ol" />
+        </button>
+        <button type="button" className={buttonClassName} onClick={() => this.toggleBlockType('unordered-list-item')}>
+          <i className="fa fa-list-ul" />
         </button>
         <ColorControls buttonClassName={buttonClassName} {...controlsProps} />
         <FontControls initialValue={{ fontSize: 15, fontFamily: '' }} {...controlsProps} />
