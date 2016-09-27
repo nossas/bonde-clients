@@ -11,6 +11,7 @@ import * as Paths from '../../../Paths'
 import * as FormEntryActions from '../../../actions/FormEntryActions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 import { Input, Button } from './components'
+import { OverlayWidget } from '../../components'
 
 @reactMixin.decorate(Navigation)
 export default class FormWidget extends React.Component {
@@ -43,15 +44,7 @@ export default class FormWidget extends React.Component {
     return (settings && settings.fields ? settings.fields : [])
   }
 
-  handleMouseEnter() {
-    this.setState({hasMouseOver: true})
-  }
-
-  handleMouseLeave() {
-    this.setState({hasMouseOver: false})
-  }
-
-  handleClick() {
+  handleOverlayOnClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
       this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
@@ -234,17 +227,16 @@ export default class FormWidget extends React.Component {
     const { success } = this.state
 
     return (
-      <div>
-        <div
-          className={`widget ${headerFont}-header`}
-          style={(editable ? {cursor: 'pointer'} : null)}
-          onMouseEnter={::this.handleMouseEnter}
-          onMouseLeave={::this.handleMouseLeave}
-          onClick={::this.handleClick}>
-          { success ? this.renderShareButtons() : this.renderForm() }
-          { this.renderCount() }
+      <OverlayWidget
+        editable={editable}
+        onClick={::this.handleOverlayOnClick}
+        text="Clique para configurar o formulário de inscrição"
+      >
+        <div className={`widget ${headerFont}-header`}>
+          {success ? this.renderShareButtons() : this.renderForm()}
+          {this.renderCount()}
         </div>
-      </div>
+      </OverlayWidget>
     )
   }
 }

@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import * as Paths from '../../../Paths'
 import * as DonationActions from './actions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
+import { OverlayWidget } from '../../components'
 
 import './assets/donation_widget.scss'
 
@@ -36,15 +37,7 @@ class Donation extends React.Component {
     }
   }
 
-  handleMouseEnter() {
-    this.setState({hasMouseOver: true})
-  }
-
-  handleMouseLeave() {
-    this.setState({hasMouseOver: false})
-  }
-
-  handleClick() {
+  handleOverlayOnClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
       this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
@@ -248,11 +241,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const className = classnames({ 'relative': editable || !configurable })
 
     return (
-      <div>
-        <div className={className}>
-          { this.renderButton() }
-          { this.renderOverlay() }
-        </div>
+      <div className={className}>
+        {this.renderButton()}
       </div>
     )
   }
@@ -271,17 +261,15 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { success } = this.state
 
     return (
-      <div>
-        <div
-          className="bg-white widget rounded"
-          style={(editable ? { cursor: 'pointer' } : null)}
-          onMouseEnter={::this.handleMouseEnter}
-          onMouseLeave={::this.handleMouseLeave}
-          onClick={::this.handleClick}
-        >
+      <OverlayWidget
+        editable={editable}
+        onClick={::this.handleOverlayOnClick}
+        text="Clique para configurar o formulário de doação"
+      >
+        <div className="bg-white widget rounded">
           {success ? this.renderThankyouText() : this.renderForm()}
         </div>
-      </div>
+      </OverlayWidget>
     )
   }
 }

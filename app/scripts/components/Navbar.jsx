@@ -43,7 +43,7 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className="absolute col-12 z1">
+      <div className="absolute col-12 z2">
         <div className="lg-show center">
           <div className="bg-darken-4">
             {this.renderNavbarButtons(false)}
