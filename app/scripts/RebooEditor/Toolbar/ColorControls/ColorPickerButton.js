@@ -17,8 +17,6 @@ class ColorPickerButton extends Component {
   }
 
   toggleColorPicker(e) {
-    e && e.preventDefault()
-
     this.setState({ showColorPicker: !this.state.showColorPicker })
   }
 
@@ -39,9 +37,9 @@ class ColorPickerButton extends Component {
 
     return (
       <div>
-        <a className={className} onClick={this.toggleColorPicker.bind(this)}>
+        <button type="button" className={className} onClick={this.toggleColorPicker.bind(this)}>
           <i className="fa fa-eyedropper" />
-        </a>
+        </button>
         {(showColorPicker ? (
           <div>
             <SketchPicker
