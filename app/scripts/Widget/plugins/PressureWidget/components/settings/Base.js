@@ -10,7 +10,8 @@ const Base = ({ children, location, mobilization, widget }) => {
       <Menu
         location={location}
         mobilization_id={mobilization.id}
-        widget_id={widget.id} />
+        widget_id={widget.id}
+      />
       <div className="p3 flex-auto overflow-scroll">
         {children}
       </div>

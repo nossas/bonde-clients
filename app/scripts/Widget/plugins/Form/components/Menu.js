@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
+
 import * as Paths from './../../../../Paths'
-import { TabMenuItem } from './../../../../components'
 import { Tabs, Tab } from '../../../../../components/Navigation'
 
 const Menu = ({ mobilization, widget, location }) => {
