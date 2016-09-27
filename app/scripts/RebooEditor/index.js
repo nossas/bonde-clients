@@ -66,6 +66,7 @@ class RebooEditor extends Component {
         {!readOnly ? (
           <div style={toolbarStyle}>
             <Toolbar
+              buttonClassName="btn white p2"
               editorState={this.state.editorState}
               setEditorState={this.onChangeEditorState.bind(this)}
             />
