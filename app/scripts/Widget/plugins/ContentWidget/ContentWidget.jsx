@@ -123,28 +123,29 @@ export default class ContentWidget extends React.Component {
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     return (
       <div>
-        <div className={classnames('content-widget full-width', {'display-none': !editing})}>
+        <div className={classnames('content-widget col-12', {'display-none': !editing})}>
           <WYSIHTMLToolbar
             elementId={toolbarId}
-            className="absolute full-width top-0 left-0 bg-darken-4"
+            className="absolute col-12 top-0 bg-darken-4 z7"
             buttonClassName="btn white p2"
-            style={{ zIndex: 10000 }}
+            style={{ left: '80px' }}
           />
           <div
-            className="fixed top-0 right-0 bottom-0 left-0"
+            className="fixed top-0 right-0 bottom-0 left-0 z5"
             onClick={::this.handleOverlayClick}
-            style={{zIndex: 9998}}
           />
         </div>
-        <div style={{zIndex: editing ? 9999 : 0}} className="relative">
+        <div className={classnames('relative', editing ? 'z6' : 'z0')}>
           <div
             className={classnames('widget', `${headerFont}-header`, `${bodyFont}-body`)}
             dangerouslySetInnerHTML={{__html: this.state.content}}
-            ref="content" />
+            ref="content"
+          />
           <div className={classnames('right mt1', {'display-none': !editing})}>
             <button
               onClick={::this.save}
-              className="button button-transparent caps bg-darken-4 white rounded">
+              className="btn caps bg-darken-4 white rounded"
+            >
               Salvar
             </button>
           </div>
