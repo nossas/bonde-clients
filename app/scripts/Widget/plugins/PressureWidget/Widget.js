@@ -77,7 +77,11 @@ export class PressureWidget extends Component {
     }
 
     return (
-      <OverlayWidget editable={editable} onClick={::this.handleOverlayOnClick}>
+      <OverlayWidget
+        editable={editable}
+        onClick={::this.handleOverlayOnClick}
+        text="Clique para configurar o formulário de pressão direta"
+      >
         {(widget.filled ?
           <TellAFriend {...this.props}
             message="E-mail enviado"

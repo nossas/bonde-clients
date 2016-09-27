@@ -20,7 +20,7 @@ class OverlayWidget extends Component {
   }
 
   render() {
-    const { children, editable, onClick } = this.props
+    const { children, editable, onClick, text } = this.props
     return (
       <div className="relative"
         style={editable ? { cursor: 'pointer' } : null}
@@ -31,10 +31,10 @@ class OverlayWidget extends Component {
         {children}
         {
           !editable || !this.state.hasMouseOver ? null : (
-            <div className="overlay h1 rounded z1 border border-pagenta">
+            <div className="overlay h1 rounded z1 border border-pagenta px2">
               <div className="table full-height col-12 center">
                 <div className="white table-cell align-middle">
-                  Clique para editar
+                  {text || 'Clique para editar'}
                 </div>
               </div>
             </div>
@@ -48,7 +48,8 @@ class OverlayWidget extends Component {
 OverlayWidget.propTypes = {
   editable: PropTypes.bool.isRequired,
   children: PropTypes.object.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  text: PropTypes.string
 }
 
 OverlayWidget.defaultProps = {
