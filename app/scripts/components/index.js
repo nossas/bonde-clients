@@ -1,7 +1,6 @@
 export { default as Block } from './Block.jsx'
 export { default as LoginForm } from './LoginForm.jsx'
 export { default as Widget } from './Widget.jsx'
-export { default as ContentWidget } from './ContentWidget.jsx'
 export { default as ColorPicker } from './ColorPicker.jsx'
 export { default as Color } from './Color.jsx'
 export { default as DropDownMenu } from './DropDownMenu.jsx'

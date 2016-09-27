@@ -12,7 +12,8 @@ describe('<BlockContainer />', () => {
       id: 1,
       bg_class: 'bg-1'
     },
-    editable: true
+    editable: true,
+    mobilization: { header_font: 'Bar' }
   }
   let blockContainer
 
@@ -28,19 +29,11 @@ describe('<BlockContainer />', () => {
         sm_size: '12',
         md_size: '6',
         lg_size: '6'
-      },
-      {
-        id: 2,
-        kind: 'content',
-        sm_size: '12',
-        md_size: '6',
-        lg_size: '6'
-      },
+      }
     ]
     blockContainer.setProps({ widgets: widgets })
 
     expect(blockContainer.find('DraftWidget').length).to.equal(1)
-    expect(blockContainer.find('ContentWidget').length).to.equal(1)
   })
 
   it('should not render <DropDownMenu /> if editable is false', () => {

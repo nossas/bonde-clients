@@ -1,44 +1,40 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import ContentWidget from './ContentWidget.jsx'
-
 import {
   Draft as DraftWidget,
+  Content as ContentWidget,
   Form as FormWidget,
   Match as MatchWidget,
   Donation as DonationWidget,
   PressureWidget
 } from '../Widget/plugins'
 
-
-const Widget = (props) => {
-  let { widget } = props
-  let className = classnames(
-    'px2', 'col', 'mb4', 'md-mb0',
-    'col-' + widget.sm_size,
-    'sm-col-' + widget.sm_size,
-    'md-col-' + widget.md_size,
-    'lg-col-' + widget.lg_size
-  )
-
-  let child = null
-  if (widget.kind === 'content') {
-    child = <ContentWidget {...props} />
-  } else if (widget.kind === 'form') {
-    child = <FormWidget {...props} />
-  } else if (widget.kind === 'donation') {
-    child = <DonationWidget {...props} />
-  } else if (widget.kind === 'match') {
-    child = <MatchWidget {...props} />
-  } else if (widget.kind === 'pressure') {
-    child = <PressureWidget {...props} />
-  } else {
-    child = <DraftWidget {...props} />
+const widgetStrategy = (kind, props) => {
+  switch (kind) {
+    case 'content': return <ContentWidget {...props} />
+    case 'form': return <FormWidget {...props} />
+    case 'donation': return <DonationWidget {...props} />
+    case 'match': return <MatchWidget {...props} />
+    case 'pressure': return <PressureWidget {...props} />
+    default: return <DraftWidget {...props} />
   }
+}
 
+const Widget = props => {
+  const { widget } = props
   return (
-    <div className={className}>{child}</div>
+    <div
+      className={classnames(
+        'px2 col mb4 md-mb0',
+        `col-${widget.sm_size}`,
+        `sm-col-${widget.sm_size}`,
+        `md-col-${widget.md_size}`,
+        `lg-col-${widget.lg_size}`
+      )}
+    >
+      {widgetStrategy(widget.kind, props)}
+    </div>
   )
 }
 

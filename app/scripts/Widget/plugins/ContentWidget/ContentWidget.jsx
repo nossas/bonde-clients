@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-import { WYSIHTMLToolbar, Loading } from './'
-import classnames from 'classnames'
 import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../Widget/actions'
 import $ from 'jquery'
+import classnames from 'classnames'
+
+import { WYSIHTMLToolbar, Loading } from '../../../components'
+import * as WidgetActions from '../../actions'
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
