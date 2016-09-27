@@ -29,34 +29,50 @@ class FormPage extends Component {
     const { fields: { title_text, button_text, show_counter, count_text, main_color }, ...props } = this.props
 
     return (
-      <PressureBase location={props.location} mobilization={props.mobilization} widget={props.widget}>
-        <FormRedux onSubmit={::this.handleSubmit} {...props}>
-          <FormGroup controlId="title-text-id" {...title_text}>
-            <ControlLabel>Título do formulário</ControlLabel>
-            <FormControl type="text" placeholder="Envie um e-mail para quem pode tomar essa decisão" />
-          </FormGroup>
-          <FormGroup controlId="button-text-id" {...button_text}>
-            <ControlLabel>Texto do botão</ControlLabel>
-            <FormControl type="text" placeholder="Enviar e-mail" />
-          </FormGroup>
-          <FormGroup controlId="main-color-id" {...main_color}>
-            <ControlLabel>Cor do formulário</ControlLabel>
-            <ColorPicker />
-          </FormGroup>
-          <FormGroup controlId="show-counter-id" {...show_counter}>
-            <ControlLabel>Mostrar contador de pressão</ControlLabel>
-            <RadioGroup>
-              <Radio value="true">Sim</Radio>
-              <Radio value="false">Não</Radio>
-            </RadioGroup>
-          </FormGroup>
-          {(show_counter.value === 'true' ? (
-            <FormGroup controlId="count-text-id" {...count_text}>
-              <ControlLabel>Texto do contador</ControlLabel>
-              <FormControl type="text" placeholder="pressões feitas" />
-            </FormGroup>
-          ) : null)}
-        </FormRedux>
+      <PressureBase
+        location={props.location}
+        mobilization={props.mobilization}
+        widget={props.widget}
+      >
+        <div className="clearfix overflow-auto">
+          <div className="col-6 clearfix py3 pr4 pl5">
+            <FormRedux
+              {...props}
+              onSubmit={::this.handleSubmit}
+              className="transparent"
+              floatButton="Salvar"
+            >
+              <FormGroup controlId="title-text-id" {...title_text}>
+                <ControlLabel>Título do formulário</ControlLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Envie um e-mail para quem pode tomar essa decisão"
+                />
+              </FormGroup>
+              <FormGroup controlId="button-text-id" {...button_text}>
+                <ControlLabel>Texto do botão</ControlLabel>
+                <FormControl type="text" placeholder="Enviar e-mail" />
+              </FormGroup>
+              <FormGroup controlId="main-color-id" {...main_color}>
+                <ControlLabel>Cor do formulário</ControlLabel>
+                <ColorPicker />
+              </FormGroup>
+              <FormGroup controlId="show-counter-id" {...show_counter}>
+                <ControlLabel>Mostrar contador de pressão</ControlLabel>
+                <RadioGroup>
+                  <Radio value="true">Sim</Radio>
+                  <Radio value="false">Não</Radio>
+                </RadioGroup>
+              </FormGroup>
+              {(show_counter.value === 'true' ? (
+                <FormGroup controlId="count-text-id" {...count_text}>
+                  <ControlLabel>Texto do contador</ControlLabel>
+                  <FormControl type="text" placeholder="pressões feitas" />
+                </FormGroup>
+              ) : null)}
+            </FormRedux>
+          </div>
+        </div>
       </PressureBase>
     )
   }
