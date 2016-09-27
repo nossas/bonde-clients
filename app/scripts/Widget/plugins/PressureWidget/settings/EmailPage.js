@@ -45,30 +45,44 @@ class EmailPage extends Component {
     const { fields: { pressure_subject, pressure_body }, ...props } = this.props
     return (
       <PressureBase location={props.location} mobilization={props.mobilization} widget={props.widget}>
-        <FormRedux onSubmit={::this.handleSubmit} {...props}>
-          <InputTag
-            label="Alvos"
-            values={this.state.targets}
-            onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
-            onRemoveTag={value => this.setState({ targets: this.state.targets.filter(tag => tag !== value) })}
-            validate={value => {
-              const errors = { valid: true }
-              if (!value.match(patternTarget)) {
-                errors.valid = false
-                errors.message = 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
-              }
-              return errors
-            }}
-          />
-          <FormGroup controlId="email-subject-id" {...pressure_subject}>
-            <ControlLabel>Assunto do email</ControlLabel>
-            <FormControl type="text" />
-          </FormGroup>
-          <FormGroup controlId="email-body-id" {...pressure_body}>
-            <ControlLabel>Corpo do email que será enviado</ControlLabel>
-            <FormControl type="text" componentClass="textarea" />
-          </FormGroup>
-        </FormRedux>
+        <div className="clearfix overflow-auto">
+          <div className="col-6 clearfix py3 pr4 pl5">
+            <FormRedux
+              {...props}
+              onSubmit={::this.handleSubmit}
+              className="transparent"
+              floatButton="Salvar"
+            >
+              <div className="form-group">
+                <InputTag
+                  label="Alvos"
+                  values={this.state.targets}
+                  onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
+                  onRemoveTag={value => this.setState({
+                    targets: this.state.targets.filter(tag => tag !== value)
+                  })}
+                  validate={value => {
+                    const errors = { valid: true }
+                    if (!value.match(patternTarget)) {
+                      errors.valid = false
+                      errors.message = 'Alvo fora do formato padrão. Ex.: Nome do alvo'
+                        + ' <alvo@provedor.com>'
+                    }
+                    return errors
+                  }}
+                />
+              </div>
+              <FormGroup controlId="email-subject-id" {...pressure_subject}>
+                <ControlLabel>Assunto do email</ControlLabel>
+                <FormControl type="text" />
+              </FormGroup>
+              <FormGroup controlId="email-body-id" {...pressure_body}>
+                <ControlLabel>Corpo do email que será enviado</ControlLabel>
+                <FormControl type="text" componentClass="textarea" />
+              </FormGroup>
+            </FormRedux>
+          </div>
+        </div>
       </PressureBase>
     )
   }

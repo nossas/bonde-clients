@@ -10,10 +10,12 @@
     .form-group {
       border: none;
 
-      & > label {
-        color: $darkenGray;
-        margin-bottom: 1rem;
-        display: block;
+      &, .input-tag {
+        & > label {
+          color: $darkenGray;
+          margin-bottom: 1rem;
+          display: block;
+        }
       }
 
       .input,

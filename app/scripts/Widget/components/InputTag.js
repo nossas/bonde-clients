@@ -37,14 +37,14 @@ class InputTag extends Component {
     const { values, label, onRemoveTag } = this.props
 
     return (
-      <div className="mt1 mb3">
+      <div className="input-tag">
         {(label && <label style={{ cursor: "pointer" }} className="h5 bold caps" htmlFor="insert-tag-id">{label}</label>)}
         {(this.state.error && <span className="h5 red ml2">{this.state.error}</span>)}
         <input
           ref="insert"
           id="insert-tag-id"
           type="text"
-          className="field-light block h3 full-width mt1 px1"
+          className="input block h3 col-12 mt1 px1"
           value={this.state.value}
           onChange={(e) => this.setState({ value: e.target.value })}
           onKeyPress={::this.handleKeyPress}
