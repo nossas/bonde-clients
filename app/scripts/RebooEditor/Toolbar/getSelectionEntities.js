@@ -4,7 +4,6 @@ import { Entity } from 'draft-js'
 const getSelectionEntities = (editorState, entityType) => {
   // Selection cursor
   const targetSelection = editorState.getSelection()
-  const startOffset = targetSelection.getStartOffset()
   const endOffset = targetSelection.getEndOffset()
 
   const currentContent = editorState.getCurrentContent()
@@ -17,7 +16,10 @@ const getSelectionEntities = (editorState, entityType) => {
     const entityKey = character.getEntity()
     return entityKey !== null && Entity.get(entityKey).getType() === entityType
   }, (start, end) => {
-    if (start >= startOffset && end <= endOffset) {
+
+    const isSelected = end >= endOffset && start <= endOffset
+
+    if (isSelected) {
       entitiesSelection.push({
         blockKey: block.getKey(),
         entityKey: block.getEntityAt(start),
