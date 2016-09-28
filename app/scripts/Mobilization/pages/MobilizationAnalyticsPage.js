@@ -11,47 +11,52 @@ import {
   FormControl
 } from '../../Dashboard/Forms'
 
+import './scss/mobilization-analytics-page.scss'
+
 const MobilizationAnalyticsPage = ({
   fields: { google_analytics_code: googleAnalyticsCode },
   mobilization,
   // Actions
   editMobilizationAsync,
   ...props
-}) => {
-  const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
-
-  return (
-    <div className="col-6 clearfix py3 pr4 pl5">
-      <p className="h5">
-        Para acompanhar os resultados da sua mobilização, você precisa configurar
-        uma conta no Google Analytics. Siga os passos abaixo:
-      </p>
-      <ol className="h5">
-        <li>
-          Crie uma conta no Google Analytics
-          <a href="http://www.google.com/analytics/" target="_blank"> clicando aqui</a>
-        </li>
-        <li>
-          Obtenha sua ID de acompanhamento no Google Analytics. É um código
-          que começa sempre com as letras UA, que você verá após criar sua conta lá.
-        </li>
-        <li>
-          Copie a ID de acompanhamento e cole no campo abaixo:
-          <FormRedux inline={true} onSubmit={handleSubmit} className='mt2 mb4' {...props}>
-            <FormGroup controlId="googleAnalyticsCode" {...googleAnalyticsCode}>
-              <ControlLabel>ID do Google Analytics</ControlLabel>
-              <FormControl type='text' placeholder="UA-00000000-0" />
-            </FormGroup>
-          </FormRedux>
-        </li>
-        <li>
-          Pronto! Você já pode acompanhar as estatísticas da sua mobilização
-          no Google Analytics!
-        </li>
-      </ol>
-    </div>
-  )
-}
+}) => (
+  <div className="mobilization-analytics-page col-6 clearfix py3 pr4 pl5 darkengray">
+    <p className="h5">
+      Para acompanhar os resultados da sua mobilização, você precisa configurar
+      uma conta no Google Analytics. Siga os passos abaixo:
+    </p>
+    <ol className="h5">
+      <li>
+        Crie uma conta no Google
+        Analytics <a href="http://www.google.com/analytics/" target="_blank">
+          clicando aqui
+        </a>
+      </li>
+      <li>
+        Obtenha sua ID de acompanhamento no Google Analytics. É um código
+        que começa sempre com as letras UA, que você verá após criar sua conta lá.
+      </li>
+      <li className="m0">
+        Copie a ID de acompanhamento e cole no campo abaixo:
+        <FormRedux
+          {...props}
+          onSubmit={values => editMobilizationAsync({ ...mobilization, ...values })}
+          className="transparent"
+          floatButton="Salvar"
+        >
+          <FormGroup controlId="googleAnalyticsCode" {...googleAnalyticsCode}>
+            <ControlLabel>ID do Google Analytics</ControlLabel>
+            <FormControl type='text' placeholder="UA-00000000-0" />
+          </FormGroup>
+        </FormRedux>
+      </li>
+      <li>
+        Pronto! Você já pode acompanhar as estatísticas da sua mobilização
+        no Google Analytics!
+      </li>
+    </ol>
+  </div>
+)
 
 MobilizationAnalyticsPage.propTypes = {
   fields: PropTypes.object.isRequired,

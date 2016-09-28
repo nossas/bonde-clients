@@ -24,7 +24,7 @@ class FormControl extends Component {
             className
           )}
           style={style}
-          />
+        />
         {
           formInline &&
           <ControlButtons {...{ submitted, submitting, dirty, showCancel: false, formInline }} />
