@@ -18,13 +18,9 @@ class FormRedux extends Component {
   }
 
   getChildContext() {
-    const { inline, floatButton, ...rest } = this.props
+    const { inline, floatButton, successMessage, ...rest } = this.props
     return {
-      $formRedux: {
-        ...rest,
-        formInline: inline,
-        floatButton
-      }
+      $formRedux: { ...rest, formInline: inline, floatButton, successMessage }
     }
   }
 
@@ -68,7 +64,8 @@ FormRedux.propTypes = {
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   inline: PropTypes.bool.isRequired,
-  floatButton: PropTypes.string.isRequired
+  floatButton: PropTypes.string.isRequired,
+  successMessage: PropTypes.string
 }
 
 FormRedux.defaultProps = {

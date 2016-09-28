@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 class ControlButtons extends Component {
   render() {
-    const { $formRedux: { floatButton } } = this.context
+    const { $formRedux: { floatButton, successMessage } } = this.context
     const { submitting, submitted, dirty, formInline, valid, ...props } = this.props
     return (
       <div className={classnames(
@@ -20,9 +20,9 @@ class ControlButtons extends Component {
           value={(submitting ? 'Salvando...' : (floatButton || 'Continuar'))}
         />
         {
-          submitted &&
+          submitted && !!successMessage &&
           <div className="success-message green h4 px2 mt2">
-            Formulário atualizado com sucesso!
+            {successMessage}
           </div>
         }
       </div>
