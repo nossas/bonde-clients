@@ -16,6 +16,7 @@ import {
   MobilizationBasicsNewFormPage,
   MobilizationBasicsEditFormPage,
   MobilizationCityNewPage,
+  MobilizationCityEditPage,
   MobilizationAnalyticsPage,
   MobilizationSharingPage,
   MobilizationCustomDomainPage,
@@ -44,7 +45,7 @@ export default (
       { widgetRoutes(defaultPath) }
       <Route component={MobilizationSettingsContainer} >
         <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
-        <Route path={`/${defaultPath}/city`} component={MobilizationCityNewPage} />
+        <Route path={`/${defaultPath}/city`} component={MobilizationCityEditPage} />
         <Route path={`/${defaultPath}/analytics`} component={MobilizationAnalyticsPage} />
         <Route path={`/${defaultPath}/sharing`} component={MobilizationSharingPage} />
         <Route path={`/${defaultPath}/customDomain`} component={MobilizationCustomDomainPage} />
