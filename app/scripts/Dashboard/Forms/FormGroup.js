@@ -10,11 +10,14 @@ class FormGroup extends Component {
   }
 
   render() {
-    const { children, className, layout } = this.props
-    const styleGroup = layout === 'inline' ? { paddingRight: '1rem' } : null
+    const { children, className, layout, style } = this.props
+    const styleGroup = layout === 'inline' ? { paddingRight: '1rem' } : {}
 
     return (
-      <div className={classnames('form-group', className)} style={styleGroup}>
+      <div
+        className={classnames('form-group', className)}
+        style={Object.assign(styleGroup, style)}
+      >
         {children}
       </div>
     )

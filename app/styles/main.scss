@@ -61,13 +61,17 @@ textarea {
   resize: none;
 }
 
-.square {
+.square, .square-float {
   width: 100%;
 
   &:before {
     content: '';
     display: block;
     padding-top: 100%;
+  }
+
+  &.square-float:before {
+    float: left;
   }
 }
 
