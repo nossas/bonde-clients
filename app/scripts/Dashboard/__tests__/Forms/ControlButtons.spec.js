@@ -6,7 +6,7 @@ import { ControlButtons } from '../../Forms'
 
 describe('Dashboard/Forms/ControlButtons', () => {
   let wrapper
-  const context = { $formRedux: { floatButton: '' } }
+  const context = { $formRedux: { floatButton: '', successMessage: 'Foo Bar!' } }
   const props = {
     submitting: false,
     submitted: false,
