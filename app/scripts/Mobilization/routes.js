@@ -15,7 +15,7 @@ import {
   MobilizationListPage,
   MobilizationBasicsNewFormPage,
   MobilizationBasicsEditFormPage,
-  MobilizationCityPage,
+  MobilizationCityNewPage,
   MobilizationAnalyticsPage,
   MobilizationSharingPage,
   MobilizationCustomDomainPage,
@@ -35,7 +35,7 @@ export default (
     {/* TODO: Refactor pages */}
     <Route component={NewMobilizationContainer}>
       <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
-      <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityPage} />
+      <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityNewPage} />
     </Route>
 
     <Route component={MobilizationDashboardContainer}>
@@ -44,7 +44,7 @@ export default (
       { widgetRoutes(defaultPath) }
       <Route component={MobilizationSettingsContainer} >
         <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
-        <Route path={`/${defaultPath}/city`} component={MobilizationCityPage} />
+        <Route path={`/${defaultPath}/city`} component={MobilizationCityNewPage} />
         <Route path={`/${defaultPath}/analytics`} component={MobilizationAnalyticsPage} />
         <Route path={`/${defaultPath}/sharing`} component={MobilizationSharingPage} />
         <Route path={`/${defaultPath}/customDomain`} component={MobilizationCustomDomainPage} />
