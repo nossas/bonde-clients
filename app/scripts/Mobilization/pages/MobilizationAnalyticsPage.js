@@ -23,12 +23,15 @@ const MobilizationAnalyticsPage = ({
   <div className="mobilization-analytics-page col-6 clearfix py3 pr4 pl5 darkengray">
     <p className="h5">
       Para acompanhar os resultados da sua mobilização, você precisa configurar
-      uma conta no Google Analytics. Siga os passos abaixo:
+      uma conta no Google Analytics.
+    </p>
+    <p className="h5">
+      Siga os passos abaixo:
     </p>
     <ol className="h5">
       <li>
         Crie uma conta no Google
-        Analytics <a href="http://www.google.com/analytics/" target="_blank">
+        Analytics <a href="http://www.google.com/analytics/" target="_blank" className="link">
           clicando aqui
         </a>
       </li>

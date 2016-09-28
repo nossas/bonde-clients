@@ -17,43 +17,44 @@ const MobilizationCustomDomainPage = ({
   mobilization,
   // Actions
   editMobilizationAsync
-}) => {
-  const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
-
-  return (
-    <div className="col-6 clearfix py3 pr4 pl5">
-      <p className="h5">
-        Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
-        campo abaixo e clique em Salvar.
-      </p>
-      <FormRedux inline={true} onSubmit={handleSubmit} {...rest}>
-        <FormGroup controlId="customDomain" {...customDomain}>
-          <ControlLabel>Domínio personalizado</ControlLabel>
-          <FormControl type='text' placeholder='www.meudominio.com.br' />
-        </FormGroup>
-      </FormRedux>
-      <p>
-        <strong>Atenção</strong>: você ainda precisa configurar o seu domínio no servidor de
-        registro para que ele seja redirecionado para a página da sua mobilização. Para isso,
-        utilize as informações abaixo.
-      </p>
-      <table>
-        <tbody>
-          <tr>
-            <th>Nome</th>
-            <th>Tipo</th>
-            <th>Dados</th>
-          </tr>
-          <tr>
-            <td><code>{customDomain.value}</code></td>
-            <td><code>CNAME</code></td>
-            <td><code>{mobilization.slug}.reboo.org</code></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
-}
+}) => (
+  <div className="col-6 clearfix py3 pr4 pl5 darkengray">
+    <p className="h5">
+      Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
+      campo abaixo e clique em Salvar.
+    </p>
+    <FormRedux
+      {...rest}
+      onSubmit={values => editMobilizationAsync({ ...mobilization, ...values })}
+      className="transparent"
+      floatButton="Salvar"
+    >
+      <FormGroup controlId="customDomain" {...customDomain}>
+        <ControlLabel>Domínio personalizado</ControlLabel>
+        <FormControl type="text" placeholder="www.meudominio.com.br" />
+      </FormGroup>
+    </FormRedux>
+    <p>
+      <strong>Atenção</strong>: você ainda precisa configurar o seu domínio no servidor de
+      registro para que ele seja redirecionado para a página da sua mobilização. Para isso,
+      utilize as informações abaixo.
+    </p>
+    <table className="col-12 left-align">
+      <tbody>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Dados</th>
+        </tr>
+        <tr>
+          <td><code>{customDomain.value}</code></td>
+          <td><code>CNAME</code></td>
+          <td><code>{mobilization.slug}.reboo.org</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+)
 
 MobilizationCustomDomainPage.propTypes = {
   fields: PropTypes.object.isRequired,
