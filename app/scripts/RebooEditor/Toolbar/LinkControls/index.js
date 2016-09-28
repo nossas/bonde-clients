@@ -1,8 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { Entity, RichUtils } from 'draft-js'
+import { Entity, RichUtils, SelectionState } from 'draft-js'
 
 import Link from './Link'
 import linkStrategy from './linkStrategy'
+
+import getSelectionEntities from '../getSelectionEntities'
+
+
+const getSelectionLink = (editorState) => {
+  // Return entity when one and only one selected
+  const entities = getSelectionEntities(editorState, 'LINK')
+  return entities.length === 1 ? entities[0] : undefined
+}
 
 
 export class LinkControls extends Component {
@@ -15,6 +24,21 @@ export class LinkControls extends Component {
     this.state = { showInput: false, href: '', target: '_self' }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { editorState } = nextProps
+    if (editorState !== this.props.editorState) {
+      const entityLink = getSelectionLink(this.props.editorState)
+      const nextEntityLink = getSelectionLink(editorState)
+      if (nextEntityLink && nextEntityLink !== entityLink) {
+        const entityInstance = Entity.get(nextEntityLink.entityKey)
+        const { href, target } = entityInstance.getData()
+        this.setState({ href, target })
+      } else {
+        this.setState({ href: '', target: '_self' })
+      }
+    }
+  }
+
   handleToggleInput() {
     this.setState({ showInput: !this.state.showInput })
   }
@@ -24,11 +48,33 @@ export class LinkControls extends Component {
       const { editorState, setEditorState } = this.props
       const { href, target } = this.state
 
-      const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
-      setEditorState(RichUtils.toggleLink(editorState, editorState.getSelection(), entityKey))
+      const entitySelection = getSelectionLink(editorState)
+
+      if (!editorState.getSelection().isCollapsed()) {
+        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
+        const targetSelection = editorState.getSelection()
+
+        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
+      } else if (entitySelection) {
+        // Make selection to apply entity
+        const selection = SelectionState.createEmpty(
+          editorState.getCurrentContent().getBlockForKey(
+            editorState.getSelection().getStartKey()
+          )
+        )
+
+        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
+        const targetSelection = selection.merge({
+          anchorKey: editorState.getSelection().getAnchorKey(),
+          focusKey: editorState.getSelection().getFocusKey(),
+          anchorOffset: entitySelection.start,
+          focusOffset: entitySelection.end
+        })
+
+        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
+      }
     }
-    // reset component
-    this.setState({ showInput: false, href: '', target: '_self' })
+    this.setState({ showInput: false })
   }
 
   handleChangeTarget(e) {
@@ -60,6 +106,7 @@ export class LinkControls extends Component {
                 type="checkbox"
                 onChange={this.handleChangeTarget.bind(this) }
                 value={this.state.target}
+                checked={this.state.target === '_blank'}
                 data-wysihtml5-dialog-field="target"
               />
               <label htmlFor="targetId" style={{ cursor: 'pointer', lineHeight: 'normal' }}>Abrir link em nova aba</label>
