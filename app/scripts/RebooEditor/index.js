@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor'
-import Toolbar, { customStyleFn } from './Toolbar'
+import Toolbar, { plugins, customStyleFn } from './Toolbar'
 /*import styles from './styles.css'*/
 
 const styles = {
@@ -66,7 +66,8 @@ class RebooEditor extends Component {
         {!readOnly ? (
           <div style={toolbarStyle}>
             <Toolbar
-              buttonClassName="btn white p2"
+              buttonClassName="button button-transparent white p2"
+              popoverClassName="white p2 bg-darken-3"
               editorState={this.state.editorState}
               setEditorState={this.onChangeEditorState.bind(this)}
             />
@@ -79,6 +80,7 @@ class RebooEditor extends Component {
             editorState={this.state.editorState}
             onChange={this.onChangeEditorState.bind(this)}
             customStyleFn={customStyleFn}
+            plugins={plugins}
             readOnly={readOnly}
           />
         </div>

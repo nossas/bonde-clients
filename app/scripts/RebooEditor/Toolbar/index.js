@@ -4,6 +4,7 @@ import { RichUtils } from 'draft-js'
 import createColorPlugin, { ColorControls } from './ColorControls'
 import createFontPlugin, { FontControls } from './FontControls'
 import { HistoryControls } from './HistoryControls'
+import createLinkPlugin, { LinkControls } from './LinkControls'
 /*import styles from './styles.css'*/
 
 
@@ -21,7 +22,7 @@ class Toolbar extends Component {
 
   render() {
 
-    const { editorState, setEditorState, buttonClassName } = this.props
+    const { editorState, setEditorState, buttonClassName, popoverClassName } = this.props
     const controlsProps = { editorState, setEditorState }
 
     return (
@@ -43,6 +44,7 @@ class Toolbar extends Component {
         <button type="button" className={buttonClassName} onClick={() => this.toggleBlockType('unordered-list-item')}>
           <i className="fa fa-list-ul" />
         </button>
+        <LinkControls buttonClassName={buttonClassName} popoverClassName={popoverClassName} {...controlsProps} />
         <ColorControls buttonClassName={buttonClassName} {...controlsProps} />
         <FontControls initialValue={{ fontSize: 15, fontFamily: '' }} {...controlsProps} />
         <HistoryControls buttonClassName={buttonClassName} {...controlsProps} />
@@ -54,12 +56,14 @@ class Toolbar extends Component {
 Toolbar.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string
+  buttonClassName: PropTypes.string,
+  popoverClassName: PropTypes.string
 }
 
-const plugins = [
+export const plugins = [
   createColorPlugin(),
-  createFontPlugin()
+  createFontPlugin(),
+  createLinkPlugin()
 ]
 
 export const customStyleFn = (style) => {
