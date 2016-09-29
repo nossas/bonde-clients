@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 export default class WYSIHTMLToolbarInsertHTML extends React.Component {
   constructor(props, context) {
@@ -13,7 +14,7 @@ export default class WYSIHTMLToolbarInsertHTML extends React.Component {
   handleInsertHTMLClick() {
     // When the insert button is pressed, the insertHTML dialog is not being closed. So we are forcing it
     // by simulating a click in the cancel button
-    React.findDOMNode(this.refs.cancelButton).click()
+    ReactDOM.findDOMNode(this.refs.cancelButton).click()
   }
 
   render(){
