@@ -6,6 +6,7 @@ import createFontPlugin, { FontControls } from './FontControls'
 import { HistoryControls } from './HistoryControls'
 import createLinkPlugin, { LinkControls } from './LinkControls'
 import { AlignmentControls } from './AlignmentControls'
+import createMediaPlugins, { MediaControls } from './MediaControls'
 /*import styles from './styles.css'*/
 
 
@@ -50,6 +51,7 @@ class Toolbar extends Component {
         <FontControls initialValue={{ fontSize: 15, fontFamily: '' }} {...controlsProps} />
         <HistoryControls buttonClassName={buttonClassName} {...controlsProps} />
         <AlignmentControls buttonClassName={buttonClassName} {...controlsProps} />
+        <MediaControls buttonClassName={buttonClassName} {...controlsProps} />
       </div>
     )
   }
@@ -65,7 +67,8 @@ Toolbar.propTypes = {
 export const plugins = [
   createColorPlugin(),
   createFontPlugin(),
-  createLinkPlugin()
+  createLinkPlugin(),
+  createMediaPlugins()
 ]
 
 export const customStyleFn = (style) => {
