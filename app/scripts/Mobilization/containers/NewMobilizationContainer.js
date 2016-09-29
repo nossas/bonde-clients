@@ -4,35 +4,28 @@ import { connect } from 'react-redux'
 import { NewMobilizationHeader } from '../components'
 import { getMobilization } from '../MobilizationSelectors'
 
-
-class NewMobilization extends Component {
-
+class NewMobilizationContainer extends Component {
   render() {
-    const { children, ...otherProps } = this.props
+    const { children, ...rest } = this.props
     return (
       <div className="flex-auto bg-silver gray">
-        <NewMobilizationHeader location={otherProps.location} />
+        <NewMobilizationHeader location={rest.location} />
         {
-          React.cloneElement(children, {...otherProps})
+          React.cloneElement(children, {...rest})
         }
       </div>
     )
   }
 }
 
-NewMobilization.propTypes = {
-  mobilization: PropTypes.object,
-  saving: PropTypes.bool.isRequired,
+NewMobilizationContainer.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  })
+  }).isRequired
 }
 
-const mapStateToProps = (globalState, ownProps) => {
-  return {
-    saving: globalState.mobilization.saving,
-    mobilization: getMobilization(globalState, ownProps)
-  }
-}
+const mapStateToProps = (state, props) => ({
+  mobilization: getMobilization(state, props)
+})
 
-export default connect(mapStateToProps)(NewMobilization)
+export default connect(mapStateToProps)(NewMobilizationContainer)

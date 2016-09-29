@@ -76,7 +76,7 @@ MobilizationBasicsForm.contextTypes = {
 
 MobilizationBasicsForm.propTypes = {
   fields: PropTypes.object.isRequired,
-  mobilization: PropTypes.object.isRequired,
+  mobilization: PropTypes.object,
   // Actions
   editMobilizationAsync: PropTypes.func.isRequired,
   addMobilizationAsync: PropTypes.func.isRequired

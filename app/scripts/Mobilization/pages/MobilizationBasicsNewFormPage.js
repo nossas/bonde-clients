@@ -24,8 +24,4 @@ const MobilizationBasicsNewFormPage = props => (
   </div>
 )
 
-MobilizationBasicsNewFormPage.propTypes = {
-  mobilization: PropTypes.object.isRequired
-}
-
 export default MobilizationBasicsNewFormPage
