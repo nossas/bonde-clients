@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "autoprefixer": "^6.4.1",
-    "autoprefixer-core": "^5.2.0",
     "autoprefixer-loader": "^2.0.0",
     "axios": "^0.14.0",
     "babel": "^5.8.38",
