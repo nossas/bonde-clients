@@ -14,6 +14,7 @@ var webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
 
 var webpackUniversalLoaders = require('./universal.loaders.config')
+var webpackUniversalPostCSS = require('./universal.postcss.config')
 var styleModulesRegex = webpackIsomorphicToolsPlugin.regular_expression('style_modules')
 
 module.exports = {
@@ -37,12 +38,13 @@ module.exports = {
           loader: ExtractTextPlugin.extract(
             'style',
             'css?importLoaders=2&sourceMap'
-              + '!autoprefixer?browsers=last 2 version'
+              + '!postcss'
               + '!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
           )
         },
       ])
   },
+  postcss: webpackUniversalPostCSS,
   progress: true,
   resolve: {
     modulesDirectories: [

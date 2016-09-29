@@ -10,6 +10,7 @@ var webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
 
 var webpackUniversalLoaders = require('./universal.loaders.config')
+var webpackUniversalPostCSS = require('./universal.postcss.config')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -30,6 +31,7 @@ module.exports = {
   module: {
     loaders: webpackUniversalLoaders
   },
+  postcss: webpackUniversalPostCSS,
   progress: true,
   resolve: {
     modulesDirectories: [
