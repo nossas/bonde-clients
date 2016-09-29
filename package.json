@@ -77,7 +77,6 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "font-awesome": "^4.6.3",
-    "fs": "0.0.2",
     "http-proxy-middleware": "^0.17.1",
     "immutable": "^3.8.1",
     "jquery": "^2.2.4",
