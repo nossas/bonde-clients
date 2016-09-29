@@ -13,8 +13,8 @@ const HorizontalLayout = ({ children, className, cols, ...props }) => {
   return (
     <div className="form-horizontal-layout flex flex-wrap">
       {
-        children && children.map(
-          child => React.cloneElement(child, {...childProps})
+        children && children.map((child, index) =>
+          React.cloneElement(child, { ...childProps, key: `h-layout-${index}` })
         )
       }
     </div>
