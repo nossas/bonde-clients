@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
   const sentryApp = 'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008'
   Raven.config(sentryApp, ravenOptions).install()
 } else {
-  console.log('Supress errors tracking on sentry when development environment.');
+  console.info('Suppress sending errors to sentry when environment is development.');
 }
 
 const history = new BrowserHistory();

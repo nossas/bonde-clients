@@ -42,7 +42,7 @@ export default (
     <Route component={MobilizationDashboardContainer}>
       <Route path={`/${defaultPath}/edit`} component={EditMobilizationPage} />
       <Route path={`/${defaultPath}/blocks/new`} component={NewBlockPage} />
-      { widgetRoutes(defaultPath) }
+      {widgetRoutes(defaultPath)}
       <Route component={MobilizationSettingsContainer} >
         <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
         <Route path={`/${defaultPath}/city`} component={MobilizationCityEditPage} />
