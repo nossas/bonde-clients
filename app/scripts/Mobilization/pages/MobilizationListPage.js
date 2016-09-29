@@ -29,12 +29,11 @@ class MobilizationListPage extends Component {
   }
 }
 
-// UserDashboardContainer
 MobilizationListPage.propTypes = {
   data: PropTypes.array,
   loaded: PropTypes.bool,
   loading: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func
 }
 
 export default MobilizationListPage
