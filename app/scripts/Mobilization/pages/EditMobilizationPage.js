@@ -9,15 +9,8 @@ import { Block, Loading, Navbar } from '../../components'
 import { fetchWidgets } from '../../Widget/reducer'
 import * as MobilizationActions from '../MobilizationActions'
 
-const mapStateToProps = globalState => ({
-  scrolledToBottom: false,
-  widgetsCount: globalState.widgets.length,
-  mobilizationEditor: globalState.mobilizationEditor
-})
-
-@connect(mapStateToProps, MobilizationActions)
 @reactMixin.decorate(Navigation)
-class EditMobilization extends Component {
+class EditMobilizationPage extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -102,14 +95,26 @@ class EditMobilization extends Component {
   }
 }
 
-EditMobilization.propTypes = {
+EditMobilizationPage.propTypes = {
   // mapped by MobilizationDashboardContainer
-  mobilization: PropTypes.object.isRequired,
-  blocks: PropTypes.object.isRequired,
-  widgets: PropTypes.object.isRequired,
+  mobilization: PropTypes.object,
+  blocks: PropTypes.object,
+  widgets: PropTypes.object,
   params: PropTypes.object.isRequired,
+  scrolledToBottom: PropTypes.bool.isRequired,
+  widgetsCount: PropTypes.number,
+  mobilizationEditor: PropTypes.object.isRequired,
   // actions
-  setCurrentMobilizationId: PropTypes.func.isRequired
+  setCurrentMobilizationId: PropTypes.func
 }
 
-export default EditMobilization
+EditMobilizationPage.defaultProps = {
+  scrolledToBottom: false
+}
+
+const mapStateToProps = state => ({
+  widgetsCount: state.widgets.length,
+  mobilizationEditor: state.mobilizationEditor
+})
+
+export default connect(mapStateToProps, MobilizationActions)(EditMobilizationPage)

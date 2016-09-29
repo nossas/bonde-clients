@@ -82,7 +82,6 @@ class UserDashboard extends Component {
                   href={Paths.basicsMobilization(currentId)}
                 />
                 <SidenavListItem
-                  linkType="router"
                   text="Lançar mobilização"
                   icon="flag"
                 />
