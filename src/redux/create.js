@@ -5,7 +5,6 @@ import thunk from 'redux-thunk'
 import { Request } from '../api'
 import rootReducer from '../ducks/reducer'
 import createMiddleware from './clientMiddleware'
-import DevTools from './DevTools'
 
 const getDebugSessionKey = () => {
   // You can write custom logic here!
@@ -22,6 +21,7 @@ export default function createApiClientStore(client, initialState) {
 
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools')
+    const DevTools = require('DevTools')
     enhancer = compose(
       applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware),
