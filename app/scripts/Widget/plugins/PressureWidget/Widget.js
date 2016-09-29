@@ -101,8 +101,17 @@ export class PressureWidget extends Component {
               buttonColor={main_color}
               subject={pressure_subject}
               body={pressure_body}
-              onSubmit={::this.handleSubmit}>
-              {(show_counter && show_counter === "true" ? <PressureCount value={widget.count || 0} color={main_color} text={count_text} /> : null)}
+              onSubmit={::this.handleSubmit}
+            >
+              {
+                !show_counter || show_counter !== 'true' ? null : (
+                  <PressureCount
+                    value={widget.count || 0}
+                    color={main_color}
+                    text={count_text}
+                  />
+                )
+              }
             </PressureForm>
           </div>
         )}

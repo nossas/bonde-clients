@@ -5,7 +5,7 @@ import { shallow } from 'enzyme'
 import { PressureWidget } from '../Widget'
 
 
-describe('<PressureWidget />', () => {
+describe('app/scripts/Widget/plugins/PressureWidget/Widget', () => {
   let widget
   const props = {
     editable: false,

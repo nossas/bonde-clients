@@ -71,8 +71,8 @@ class PressureForm extends Component {
       fontSize: '.95em'
     }
     return (
-      <form onSubmit={::this.handleSubmit}>
-        <div className="activist-form bg-white rounded-bottom">
+      <form className="pressure-form" onSubmit={::this.handleSubmit}>
+        <div className={classnames('activist-form bg-white', !children ? 'rounded-bottom': null)}>
           <div className={classnames('border-bottom border-gray94', controlClassname)}>
             {(errors && errors['email'] && <span className="red">{errors['email']}</span>)}
             <input
@@ -135,7 +135,7 @@ class PressureForm extends Component {
               />
             </div>
           </div>
-          <div className="pt1 pb3 px3 rounded-bottom">
+          <div className="pt1 pb3 px3">
             <button
               type="submit"
               onClick={::this.handleSubmit}
@@ -147,8 +147,6 @@ class PressureForm extends Component {
           </div>
         </div>
         {children}
-        <div className="pressure-form mt3">
-        </div>
       </form>
     )
   }
