@@ -21,7 +21,7 @@ export default function createApiClientStore(client, initialState) {
 
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools')
-    const DevTools = require('DevTools')
+    const DevTools = require('./DevTools')
     enhancer = compose(
       applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware),
