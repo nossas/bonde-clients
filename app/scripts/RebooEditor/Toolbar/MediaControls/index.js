@@ -1,28 +1,32 @@
 import React, { Component, PropTypes } from 'react'
+
 import { Entity, AtomicBlockUtils } from 'draft-js'
 import Media from './Media'
+
+import InsertImageButton from './InsertImageButton'
 
 
 export class MediaControls extends Component {
 
-  handleInsertMedia(mediaType) {
+  handleInsertMedia(mediaType, source) {
     const { editorState, setEditorState } = this.props
-    const src = "https://s-media-cache-ak0.pinimg.com/originals/93/ad/dd/93adddb93a157f48b7df3bd0b1d95253.jpg"
 
-    const entityKey = Entity.create(mediaType, 'IMMUTABLE', { src })
+    const entityKey = Entity.create(mediaType, 'IMMUTABLE', { src: source })
     const editorStateWithMedia = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ')
     setEditorState(editorStateWithMedia)
   }
 
   render() {
 
-    const { buttonClassName } = this.props
+    const { buttonClassName, popoverClassName } = this.props
 
     return (
       <div className="mediaControls">
-        <button className={buttonClassName} onClick={() => this.handleInsertMedia('image')}>
-          <i className="fa fa-image" />
-        </button>
+        <InsertImageButton
+          buttonClassName={buttonClassName}
+          popoverClassName={popoverClassName}
+          handleUploadFinish={source => this.handleInsertMedia('image', source)}
+        />
       </div>
     )
   }
@@ -31,7 +35,8 @@ export class MediaControls extends Component {
 MediaControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string
+  buttonClassName: PropTypes.string,
+  popoverClassName: PropTypes.string
 }
 
 
