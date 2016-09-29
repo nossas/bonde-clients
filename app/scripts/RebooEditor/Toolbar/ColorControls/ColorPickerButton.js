@@ -46,8 +46,8 @@ class ColorPickerButton extends Component {
               color={color}
               onChangeComplete={this.handleChange.bind(this)}
             />
-            <button onClick={this.handleChangeColor.bind(this)}>Ok</button>
-            <button onClick={onRemoveColor}>Remove</button>
+            <button className="button button-outline white mr1" onClick={this.handleChangeColor.bind(this)}>Ok</button>
+            <button className="button button-outline white mr1" onClick={onRemoveColor}>Remove</button>
           </div>
         ) : null)}
       </div>

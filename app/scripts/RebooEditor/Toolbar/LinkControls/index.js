@@ -91,14 +91,14 @@ export class LinkControls extends Component {
           <i className="fa fa-link" />
         </button>
         {this.state.showInput && (
-          <div className={popoverClassName} style={{ position: 'absolute' }}>
+          <div className={popoverClassName}>
             <div className="flex flex-wrap">
               <input
                 type="text"
                 value={this.state.href}
                 onChange={e => this.setState({ href: e.target.value })}
               />
-              <button className="button" onClick={this.confirmLink.bind(this)}><i className="fa fa-check" /></button>
+              <button className="button button-outline white mr1" onClick={this.confirmLink.bind(this)}><i className="fa fa-check" /></button>
             </div>
             <div className="flex flex-wrap mt1">
               <input

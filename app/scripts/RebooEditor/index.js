@@ -79,7 +79,7 @@ class RebooEditor extends Component {
           <div style={toolbarStyle}>
             <Toolbar
               buttonClassName="button button-transparent white p2"
-              popoverClassName="white p2 bg-darken-3"
+              popoverClassName="absolute white p2 bg-darken-3"
               editorState={this.state.editorState}
               setEditorState={this.onChangeEditorState.bind(this)}
             />
