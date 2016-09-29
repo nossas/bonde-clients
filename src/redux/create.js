@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import axios from 'axios'
 import thunk from 'redux-thunk'
-import { persistState } from 'redux-devtools'
 
 import { Request } from '../api'
 import rootReducer from '../ducks/reducer'
@@ -22,6 +21,7 @@ export default function createApiClientStore(client, initialState) {
   let enhancer
 
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
+    const { persistState } = require('redux-devtools')
     enhancer = compose(
       applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware),
