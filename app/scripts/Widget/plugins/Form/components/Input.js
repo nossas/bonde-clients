@@ -68,8 +68,8 @@ export default class Input extends React.Component {
       >
         <option value="">Selecione...</option>
         {
-          field.placeholder.split(',').map(function(v) {
-            return <option>{v}</option>
+          field.placeholder.split(',').map(function(v, index) {
+            return <option key={`dropdown-option-${index}`}>{v}</option>
           })
         }
       </select>)
