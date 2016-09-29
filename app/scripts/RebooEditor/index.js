@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor'
-import Toolbar, { plugins, customStyleFn } from './Toolbar'
+import Toolbar, { plugins, customStyleFn, getBlockAlignment } from './Toolbar'
 /*import styles from './styles.css'*/
 
 const styles = {
@@ -52,6 +52,18 @@ class RebooEditor extends Component {
     this.setState({ editorState })
   }
 
+  blockStyleFn(block) {
+    // TODO: Move to control and receive like plugin
+    let alignment = getBlockAlignment(block)
+    if (!block.getText()) {
+      let previousBlock = this.state.editorState.getCurrentContent().getBlockBefore(block.getKey())
+      if (previousBlock) {
+        alignment = getBlockAlignment(previousBlock)
+      }
+    }
+    return `alignment--${alignment}`
+  }
+
   render() {
 
     const { readOnly } = this.props
@@ -80,6 +92,7 @@ class RebooEditor extends Component {
             editorState={this.state.editorState}
             onChange={this.onChangeEditorState.bind(this)}
             customStyleFn={customStyleFn}
+            blockStyleFn={this.blockStyleFn.bind(this)}
             plugins={plugins}
             readOnly={readOnly}
           />

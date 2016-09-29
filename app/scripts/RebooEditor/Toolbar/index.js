@@ -5,6 +5,7 @@ import createColorPlugin, { ColorControls } from './ColorControls'
 import createFontPlugin, { FontControls } from './FontControls'
 import { HistoryControls } from './HistoryControls'
 import createLinkPlugin, { LinkControls } from './LinkControls'
+import { AlignmentControls } from './AlignmentControls'
 /*import styles from './styles.css'*/
 
 
@@ -48,6 +49,7 @@ class Toolbar extends Component {
         <ColorControls buttonClassName={buttonClassName} {...controlsProps} />
         <FontControls initialValue={{ fontSize: 15, fontFamily: '' }} {...controlsProps} />
         <HistoryControls buttonClassName={buttonClassName} {...controlsProps} />
+        <AlignmentControls buttonClassName={buttonClassName} {...controlsProps} />
       </div>
     )
   }
@@ -67,6 +69,7 @@ export const plugins = [
 ]
 
 export const customStyleFn = (style) => {
+  // TODO: Move to control and receive like plugin
   let output = {}
   plugins.map(plugin => {
     if (typeof plugin.customStyleFn === "function") {
@@ -76,5 +79,7 @@ export const customStyleFn = (style) => {
   })
   return output
 }
+
+export { default as getBlockAlignment } from './AlignmentControls/getBlockAlignment'
 
 export default Toolbar

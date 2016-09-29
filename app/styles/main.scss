@@ -60,3 +60,20 @@ textarea {
   background-size: cover;
   background-position: center;
 }
+
+// Toolbar alignment
+.alignment--left {
+  .public-DraftStyleDefault-block {
+    text-align: left;
+  }
+}
+.alignment--center {
+  .public-DraftStyleDefault-block {
+    text-align: center;
+  }
+}
+.alignment--right {
+  .public-DraftStyleDefault-block {
+    text-align: right;
+  }
+}
