@@ -3,6 +3,14 @@ import { connect } from 'react-redux'
 
 import { setToolbarLinkOpenStrategy } from '../Widget/actions'
 
+// You may will see the warning below:
+// Warning: Stateless function components cannot be given refs (See ref "wrappedInstance" in
+// MobilizationSettingsContainer created by Connect(MobilizationSettingsContainer)). Attempts to
+// access this ref will fail.
+//
+// Upgrade React Redux to version 4 will should go away this warning.
+// See: https://github.com/reactjs/react-redux/issues/141#issuecomment-148358733
+
 const WYSIHTMLToolbarCreateLink = ({ dispatch, toolbarLinkOpenStrategy }) => (
   <div
     data-wysihtml5-dialog="createLink"

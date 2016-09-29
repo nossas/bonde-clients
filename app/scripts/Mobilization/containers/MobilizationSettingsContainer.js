@@ -4,31 +4,34 @@ import { connect } from 'react-redux'
 import { ConfigurationsMenu } from '../../components'
 import { getMobilization } from '../MobilizationSelectors'
 
-export class MobilizationSettingsContainer extends Component {
-  render() {
-    const { children, ...otherProps } = this.props
+// You may will see the warning below:
+// Warning: Stateless function components cannot be given refs (See ref "wrappedInstance" in
+// MobilizationSettingsContainer created by Connect(MobilizationSettingsContainer)). Attempts to
+// access this ref will fail.
+//
+// Upgrade React Redux to version 4 will should go away this warning.
+// See: https://github.com/reactjs/react-redux/issues/141#issuecomment-148358733
 
-    return (
-      <div className="flex-auto flex flex-column bg-silver gray relative">
-        <ConfigurationsMenu {...this.props} />
-        <div className='flex-auto' style={{ overflowY: 'scroll' }}>
-          {
-            React.cloneElement(children, {...otherProps})
-          }
-        </div>
+export const MobilizationSettingsContainer = props => {
+  const { children, ...rest } = props
+  return (
+    <div className="flex-auto flex flex-column bg-silver gray relative">
+      <ConfigurationsMenu {...props} />
+      <div className="flex-auto" style={{ overflowY: 'scroll' }}>
+        {
+          React.cloneElement(children, {...rest})
+        }
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 MobilizationSettingsContainer.propTypes = {
-  saving: PropTypes.bool.isRequired,
   mobilization: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (globalState, ownProps) => ({
-  saving: globalState.mobilization.saving,
-  mobilization: getMobilization(globalState, ownProps)
+const mapStateToProps = (state, props) => ({
+  mobilization: getMobilization(state, props)
 })
 
 export default connect(mapStateToProps)(MobilizationSettingsContainer)

@@ -13,10 +13,13 @@ const TargetList = ({ targets }) => (
     <p className="target-list-label bold">Quem você vai pressionar</p>
     <div className="target-list-container clearfix">
       <div className="target-list-wrapper clearfix">
-        {targets.length > 0 && targets.map(obj => {
+        {targets.length > 0 && targets.map((obj, index) => {
           const target = parseTarget(obj)
           return !target ? null : (
-            <div className='target-item left py1 px2 mr1 bg-white rounded'>
+            <div
+              key={`target-item-${index}`}
+              className="target-item left py1 px2 mr1 bg-white rounded"
+            >
               <p className="black h6 m0">
                 <span className="bold flex">{target.name}</span>
                 <span>{target.email}</span>

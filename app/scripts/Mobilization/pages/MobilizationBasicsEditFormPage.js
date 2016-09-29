@@ -14,8 +14,4 @@ const MobilizationBasicsEditFormPage = props => (
   </div>
 )
 
-MobilizationBasicsEditFormPage.propTypes = {
-  mobilization: PropTypes.object.isRequired
-}
-
 export default MobilizationBasicsEditFormPage
