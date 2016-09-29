@@ -9,9 +9,12 @@ var strip = require('strip-loader');
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'))
+var webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
+
+var webpackUniversalLoaders = require('./universal.loaders.config')
+var styleModulesRegex = webpackIsomorphicToolsPlugin.regular_expression('style_modules')
 
 module.exports = {
   devtool: 'source-map',
@@ -26,15 +29,19 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel?stage=0&optional=runtime&plugins=typecheck']},
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.(otf.*|woff.*|eot.*|ttf.*|svg.+)$/, loader: 'url?limit=100000' },
-      { test: /\.svg$/, loader: 'svg-url?noquotes' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
-      { test: /\.modernizrrc$/, loader: 'modernizr' }
-    ]
+    loaders: webpackUniversalLoaders
+      .filter(loader => loader.test.toString() !== styleModulesRegex.toString())
+      .concat([
+        {
+          test: styleModulesRegex,
+          loader: ExtractTextPlugin.extract(
+            'style',
+            'css?importLoaders=2&sourceMap'
+              + '!autoprefixer?browsers=last 2 version'
+              + '!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+          )
+        },
+      ])
   },
   progress: true,
   resolve: {

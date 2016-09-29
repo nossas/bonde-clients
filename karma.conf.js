@@ -1,9 +1,8 @@
 // Karma configuration
 // Generated on Fri Jul 03 2015 10:56:54 GMT-0300 (BRT)
 var webpack = require('webpack');
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack/webpack-isomorphic-tools'))
 var path = require('path')
+var webpackUniversalLoaders = require('./webpack/universal.loaders.config')
 
 module.exports = function(config) {
   config.set({
@@ -28,13 +27,7 @@ module.exports = function(config) {
       },
 
       module: {
-        loaders: [
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader?optional=runtime' },
-          { test: /\.json$/, loader: 'json' },
-          { test: /\.scss$/, loader: 'style!css!sass' },
-          { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
-          { test: /\.modernizrrc$/, loader: 'modernizr' }
-        ]
+        loaders: webpackUniversalLoaders
       },
 
       node: { fs: 'empty' },
