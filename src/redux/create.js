@@ -1,33 +1,41 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import axios from 'axios'
-import createMiddleware from './clientMiddleware'
-
 import thunk from 'redux-thunk'
+import { persistState } from 'redux-devtools'
+
 import { Request } from '../api'
+import rootReducer from '../ducks/reducer'
+import createMiddleware from './clientMiddleware'
+import DevTools from './DevTools'
+
+const getDebugSessionKey = () => {
+  // You can write custom logic here!
+  // By default we try to read the key from ?debug_session=<key> in the address bar
+  const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/)
+  return (matches && matches.length > 0)? matches[1] : null
+}
 
 export default function createApiClientStore(client, initialState) {
   const request = new Request()
   const thunkWithExtraArgument = thunk.withExtraArgument(request)
   const middleware = createMiddleware(client)
-  let finalCreateStore
+  let enhancer
 
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
-    const { devTools, persistState } = require('redux-devtools')
-    finalCreateStore = compose(
+    enhancer = compose(
       applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware),
-      devTools(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
+      DevTools.instrument(),
+      persistState(getDebugSessionKey())
     )(createStore)
   } else {
-    finalCreateStore = compose(
+    enhancer = compose(
       applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware)
     )(createStore)
   }
 
-  const rootReducer = require('../ducks/reducer')
-  const store = finalCreateStore(rootReducer, initialState)
+  const store = enhancer(rootReducer, initialState)
   store.client = client
   store.request = request
 

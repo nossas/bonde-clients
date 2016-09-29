@@ -11,6 +11,7 @@ import createStore from './redux/create';
 import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Raven from 'raven-js'
+import DevTools from './redux/DevTools'
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   // See: https://github.com/getsentry/raven-js/issues/73
@@ -34,15 +35,17 @@ const host = document.location.host
 universalRouter(location, history, store, host)
   .then(({component}) => {
     if (__DEVTOOLS__) {
-      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-      console.info('You will see a "Warning: React attempted to reuse markup in a container but the checksum was' +
-        ' invalid." message. That\'s because the redux-devtools are enabled.');
-      ReactDOM.render(<div>
-        {component}
-        <DebugPanel top right bottom key="debugPanel">
-          <DevTools store={store} monitor={LogMonitor}/>
-        </DebugPanel>
-      </div>, dest);
+      console.info(
+        'You will see a "Warning: React attempted to reuse markup in a container but the checksum'
+          + ' was invalid." message. That\'s because the redux-devtools are enabled.'
+        )
+      ReactDOM.render(
+        <div>
+          {component}
+          <DevTools store={store} />
+        </div>,
+        dest
+      );
     } else {
       ReactDOM.render(component, dest);
     }
