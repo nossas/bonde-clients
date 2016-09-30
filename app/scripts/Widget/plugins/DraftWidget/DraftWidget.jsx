@@ -54,14 +54,15 @@ export class DraftWidget extends React.Component {
   }
 
   render() {
-    const { loading, editable } = this.state
+    const { loading } = this.state
+    const { editable } = this.props
     const updateContent = () => this.updateKind('content')
     const updateForm = () => this.updateKind('form')
     const updateDonation = () => this.updateKind('donation')
     const updateMatch = () => this.updateKind('match')
     const updatePressure = () => this.updateKind('pressure')
 
-    return loading && !editable ? <Loading /> : (
+    return loading ? <Loading /> : (!editable ? null : (
       <div className="draft-widget widget center rounded lightgray clearfix">
         <div className="title">Escolha um tipo de widget</div>
 
@@ -71,7 +72,7 @@ export class DraftWidget extends React.Component {
         <DraftWidgetButton onClick={updateMatch} icon="compress" label="Match" />
         <DraftWidgetButton onClick={updatePressure} icon="bullseye" label="Pressão" />
       </div>
-    )
+    ))
   }
 }
 
