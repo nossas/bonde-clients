@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
 
 
@@ -29,32 +30,31 @@ class InsertImageButton extends Component {
     handleUploadFinish(imgUrl)
   }
 
+  handleOpenDialog() {
+    ReactDOM.findDOMNode(this.inputFile).click()
+  }
+
   render() {
 
     const { buttonClassName, popoverClassName } = this.props
 
     return (
       <div>
-        <button className={buttonClassName} onClick={this.handleToggleDialog.bind(this)}>
+        <button className={buttonClassName} onClick={this.handleOpenDialog.bind(this)}>
           <i className="fa fa-image" />
         </button>
-        {this.state.showInsertDialog && (
-          <div className={popoverClassName}>
-            <ReactS3Uploader
-              signingUrl={`${process.env.API_URL}/uploads`}
-              accept="image/*"
-              onProgress={::this.handleUploadProgress}
-              onError={::this.handleUploadError}
-              onFinish={::this.handleUploadFinish}
-            />
-            <button
-              disabled={this.state.image ? false : true}
-              className="button button-outline white mr1"
-              onClick={() => this.setState({ showInsertDialog: false, image: null })}>
-              <i className="fa fa-check" />
-            </button>
-          </div>
-        )}
+        <ReactS3Uploader
+          signingUrl={`${process.env.API_URL}/uploads`}
+          accept="image/*"
+          onProgress={::this.handleUploadProgress}
+          onError={::this.handleUploadError}
+          onFinish={::this.handleUploadFinish}
+          ref={input => this.inputFile = input}
+          style={{
+            position: 'absolute',
+            visibility: 'hidden'
+          }}
+        />
       </div>
     )
 
