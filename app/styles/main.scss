@@ -92,14 +92,14 @@ a.no-underscore {
   &, &:hover { text-decoration: none; }
 }
 
-a.link {
+.link a {
   text-decoration: none;
   color: $lightGray;
   padding: 3px 0;
   position: relative;
 }
 
-a.link::after {
+.link a::after {
   position: absolute;
   top: 100%;
   left: 0;
@@ -112,8 +112,8 @@ a.link::after {
   transform: translateY(5px);
 }
 
-a.link:hover::after,
-a.link:focus::after {
+.link a:hover::after,
+.link a:focus::after {
   opacity: 1;
   transform: translateY(0px);
 }

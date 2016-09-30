@@ -135,7 +135,7 @@ export default class ContentWidget extends React.Component {
             onClick={::this.handleOverlayClick}
           />
         </div>
-        <div className={classnames('relative', editing ? 'z6' : 'z0')}>
+        <div className={classnames('link relative', editing ? 'z6' : 'z0')}>
           <div
             className={classnames('widget', `${headerFont}-header`, `${bodyFont}-body`)}
             dangerouslySetInnerHTML={{__html: this.state.content}}
