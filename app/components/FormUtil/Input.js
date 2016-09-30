@@ -2,11 +2,21 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
 const Input = ({ uid, type, label, placeholder, onChange, required, show, classes }) => (
-  <div className="mb2" style={{ display: !show ? 'none' : 'block' }}>
-    <label className="h4 caps bold mb1">{label}{required ? ' *' : ''}</label>
+  <div className="mb2 form-group" style={{ display: !show ? 'none' : 'block' }}>
+    <label
+      className="caps bold mb1 inline-block"
+      style={{
+        fontSize: '.75rem',
+        fontWeight: 600,
+        marginBottom: '1rem',
+        color: 'white'
+      }}
+    >
+      {label}{required ? ' *' : ''}
+    </label>
     <input
       id={'input-'+uid}
-      className={classnames('field-light block full-width h3', classes)}
+      className={classnames('input block border border-gray94', classes)}
       onChange={onChange}
       placeholder={placeholder}
       type={type}
