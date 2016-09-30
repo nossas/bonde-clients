@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor'
 import Toolbar, { plugins, customStyleFn, getBlockAlignment } from './Toolbar'
@@ -41,7 +42,7 @@ class RebooEditor extends Component {
   focusEditor() {
     this.setState({
       hasFocus: true,
-    }, () => setTimeout(() => this.refs.editor.focus()))
+    }, () => setTimeout(() => ReactDOM.findDOMNode(this.editor).focus()))
   }
 
   outsideClick() {
@@ -88,7 +89,7 @@ class RebooEditor extends Component {
         ) : null}
         <div style={styles.editor} onClick={this.focusEditor.bind(this)}>
           <Editor
-            ref="editor"
+            ref={input => this.editor = input}
             editorState={this.state.editorState}
             onChange={this.onChangeEditorState.bind(this)}
             customStyleFn={customStyleFn}
