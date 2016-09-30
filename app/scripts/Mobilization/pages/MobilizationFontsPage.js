@@ -63,7 +63,7 @@ const MobilizationFontsPage = ({
           </FormGroup>
           <FontPreview
             text="Os títulos ficarão assim"
-            classNames={[`${headerFont.value}-header`]}
+            className={`${headerFont.value}-header`}
           />
 
           <FormGroup controlId="bodyFont" {...bodyFont}>
@@ -77,7 +77,7 @@ const MobilizationFontsPage = ({
           <FontPreview
             componentClass='p'
             text="Os títulos ficarão assim"
-            classNames={[`${bodyFont.value}-body`]}
+            className={`${bodyFont.value}-body`}
           />
         </FormRedux>
       </div>

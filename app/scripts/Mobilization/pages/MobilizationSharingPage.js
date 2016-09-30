@@ -113,7 +113,7 @@ const MobilizationSharingPage = ({
               <InputCounter
                 maxLength={70}
                 length={facebookShareTitle.value ? facebookShareTitle.value.length : 0}
-                classNames={['right', 'regular']}
+                className="right regular"
               />
             </ControlLabel>
             <FormControl
@@ -135,7 +135,7 @@ const MobilizationSharingPage = ({
               <InputCounter
                 maxLength={90}
                 length={facebookShareDescription.value ? facebookShareDescription.value.length : 0}
-                classNames={['right', 'regular']}
+                className="right regular"
               />
             </ControlLabel>
             <FormControl
@@ -164,7 +164,7 @@ const MobilizationSharingPage = ({
               <InputCounter
                 maxLength={140}
                 length={twitterShareText.value ? twitterShareText.value.length : 0}
-                classNames={['right', 'regular']}
+                className="right regular"
               />
             </ControlLabel>
             <FormControl

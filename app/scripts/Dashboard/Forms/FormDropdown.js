@@ -6,12 +6,12 @@ class FormDropdown extends Component {
   render() {
     const formGroup = this.context.$formGroup
     const { controlId, ...field } = formGroup || {}
-    const { ...props, classNames, children } = this.props
+    const { ...props, className, children } = this.props
 
     return (
       <select
         id={controlId}
-        className={classnames('select col-12', classNames)}
+        className={classnames('select col-12', className)}
         {...props}
         {...field}
       >
@@ -27,7 +27,7 @@ FormDropdown.contextTypes = {
 
 FormDropdown.propTypes = {
   id: PropTypes.string,
-  classNames: PropTypes.array
+  className: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
 }
 
 export default FormDropdown

@@ -5,15 +5,15 @@ export default class InputCounter extends React.Component {
   static propTypes = {
     maxLength: PropTypes.number.isRequired,
     length: PropTypes.number,
-    classNames: PropTypes.array
+    className: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
   }
 
   render() {
-    const {maxLength, length, classNames} = this.props
+    const {maxLength, length, className} = this.props
     const dif = maxLength - length
 
     return (
-      <span className={classnames(classNames, {red: dif < 11})}>{ dif }</span>
+      <span className={classnames(className, {red: dif < 11})}>{ dif }</span>
     )
   }
 }

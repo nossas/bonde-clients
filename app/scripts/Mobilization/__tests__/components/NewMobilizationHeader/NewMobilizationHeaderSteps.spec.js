@@ -37,16 +37,16 @@ describe('app/scripts/Mobilization/components/NewMobilizationHeader/NewMobilizat
           it('should render element that contains "Foo" text', () => {
             expect(firstStep.text()).to.have.string('Foo')
           })
-          it('should render with classNames that contains "bold black" classes', () => {
+          it('should render with className that contains "bold black" classes', () => {
             expect(firstStep.props().className).to.have.string('bold black')
           })
           it('should render <i> element that contains "1"', () => {
             expect(firstStep.find('i').text()).to.be.equal('1')
           })
-          it('should render <i> element with classNames that contains "bg-pagenta"', () => {
+          it('should render <i> element with className that contains "bg-pagenta"', () => {
             expect(firstStep.find('i').props().className).to.have.string('bg-pagenta')
           })
-          it('should render <i> element with classNames that not contains "bg-gray94"', () => {
+          it('should render <i> element with className that not contains "bg-gray94"', () => {
             expect(firstStep.find('i').props().className).to.have.not.string('bg-gray94')
           })
         })
@@ -60,16 +60,16 @@ describe('app/scripts/Mobilization/components/NewMobilizationHeader/NewMobilizat
           it('should render element that contains "Bar" text', () => {
             expect(secondStep.text()).to.have.string('Bar')
           })
-          it('should render with classNames that not contains "bold black" classes', () => {
+          it('should render with className that not contains "bold black" classes', () => {
             expect(secondStep.props().className).to.not.have.string('bold black')
           })
           it('should render first <i> element inside <li> contains "1"', () => {
             expect(secondStep.find('i').text()).to.be.equal('2')
           })
-          it('should render <i> element with classNames that contains "bg-gray94"', () => {
+          it('should render <i> element with className that contains "bg-gray94"', () => {
             expect(secondStep.find('i').props().className).to.have.string('bg-gray94')
           })
-          it('should render <i> element with classNames that not contains "bg-pagenta"', () => {
+          it('should render <i> element with className that not contains "bg-pagenta"', () => {
             expect(secondStep.find('i').props().className).to.not.have.string('bg-pagenta')
           })
         })
@@ -90,13 +90,13 @@ describe('app/scripts/Mobilization/components/NewMobilizationHeader/NewMobilizat
             firstStep = wrapper.find('li').at(0)
           })
 
-          it('should render with classNames that not contains "bold black" classes', () => {
+          it('should render with className that not contains "bold black" classes', () => {
             expect(firstStep.props().className).to.have.not.string('bold black')
           })
-          it('should render <i> element with classNames that contains "bg-gray94"', () => {
+          it('should render <i> element with className that contains "bg-gray94"', () => {
             expect(firstStep.find('i').props().className).to.have.string('bg-gray94')
           })
-          it('should render <i> element with classNames that not contains "bg-pagenta"', () => {
+          it('should render <i> element with className that not contains "bg-pagenta"', () => {
             expect(firstStep.find('i').props().className).to.have.not.string('bg-pagenta')
           })
         })
@@ -107,13 +107,13 @@ describe('app/scripts/Mobilization/components/NewMobilizationHeader/NewMobilizat
             secondStep = wrapper.find('li').at(1)
           })
 
-          it('should render with classNames that contains "bold black" classes', () => {
+          it('should render with className that contains "bold black" classes', () => {
             expect(secondStep.props().className).to.have.string('bold black')
           })
-          it('should render <i> element with classNames that contains "bg-pagenta"', () => {
+          it('should render <i> element with className that contains "bg-pagenta"', () => {
             expect(secondStep.find('i').props().className).to.have.string('bg-pagenta')
           })
-          it('should render <i> element with classNames that not contains "bg-gray94"', () => {
+          it('should render <i> element with className that not contains "bg-gray94"', () => {
             expect(secondStep.find('i').props().className).to.have.not.string('bg-gray94')
           })
         })

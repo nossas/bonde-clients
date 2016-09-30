@@ -18,7 +18,7 @@ describe('Mobilization/components/settings/FontPreview', () => {
     it('should have one <h1> element', () => {
       expect(wrapper.find('h1')).to.have.lengthOf(1)
     })
-    it('should render with expected classNames', () => {
+    it('should render with expected className', () => {
       expect(wrapper.props().className).to.equal('bg-white border rounded p2 mb3')
     })
     it('should render with expected text', () => {
@@ -31,8 +31,8 @@ describe('Mobilization/components/settings/FontPreview', () => {
       wrapper.setProps({ componentClass: 'p' })
       expect(wrapper.find('p')).to.have.lengthOf(1)
     })
-    it('should render with expected classNames', () => {
-      wrapper.setProps({ classNames: ['bar', 'foo'] })
+    it('should render with expected className', () => {
+      wrapper.setProps({ className: ['bar', 'foo'] })
       expect(wrapper.props().className).to.have.string('bar foo')
     })
     it('should render with expected text', () => {

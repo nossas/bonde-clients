@@ -39,7 +39,7 @@ class MobilizationBasicsForm extends Component {
             <InputCounter
               maxLength={100}
               length={name.value ? name.value.length : 0}
-              classNames={['right', 'regular']}
+              className="right regular"
             />
           </ControlLabel>
           <FormControl
@@ -54,7 +54,7 @@ class MobilizationBasicsForm extends Component {
             <InputCounter
               maxLength={500}
               length={goal.value ? goal.value.length : 0}
-              classNames={['right', 'regular']}
+              className="right regular"
             />
           </ControlLabel>
           <FormControl
