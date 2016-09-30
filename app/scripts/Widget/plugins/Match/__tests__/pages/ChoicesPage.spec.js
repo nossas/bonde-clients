@@ -25,9 +25,6 @@ describe('Match/pages/ChoicesPage', () => {
     }
   }
 
-  const CHOICES_TABMENUITEM = 0
-  const GOALS_TABMENUITEM = 1
-
   beforeEach(() => {
     wrapper = mount(<ChoicesPage { ...props } />, { context: _context })
   })
@@ -41,70 +38,19 @@ describe('Match/pages/ChoicesPage', () => {
       expect(wrapper.find('MatchPage')).to.have.length(1)
     })
 
-    context('TabMenu', () => {
-      it('should render one <TabMenu> component', () => {
-        expect(wrapper.find('TabMenu').length).to.equal(1)
+    context('Title', () => {
+      it('should render <h1>', () => {
+        expect(wrapper.find('h1')).to.have.length(1)
       })
-      it('should render <TabMenu> with expected title prop', () => {
+      it('should render <h1> with expected content', () => {
         const expectedTitle = 'Configure as combinações da sua ação'
-        expect(wrapper.find('TabMenu').props().title).to.equal(expectedTitle)
+        expect(wrapper.find('h1').text()).to.equal(expectedTitle)
       })
     })
 
-    context('TabMenuItem', () => {
-      let node
-      beforeEach(() => {
-        node = wrapper.find('TabMenuItem')
-      })
-
-      it('should render two <TabMenuItem> components', () => {
-        expect(node.length).to.equal(2)
-      })
-
-      context('Choices Tab', () => {
-        it('should render with choices path as path prop', () => {
-          const expectedPath = Paths.matchChoicesMobilizationWidget(1, 1)
-          expect(node.at(CHOICES_TABMENUITEM).props().path).to.equal(expectedPath)
-        })
-        it('should render with expected text prop', () => {
-          const expectedText = 'Opções de combinação'
-          expect(node.at(CHOICES_TABMENUITEM).props().text).to.equal(expectedText)
-        })
-        it('should render isActive prop as true if current location is equal to choices tab path', () => {
-          wrapper.setProps({
-            location: { pathname: Paths.matchChoicesMobilizationWidget(1, 1) }
-          })
-          expect(node.at(CHOICES_TABMENUITEM).props().isActive).to.be.true
-        })
-        it('should render isActive prop as false if current location is different to choices tab path', () => {
-          wrapper.setProps({
-            location: { pathname: Paths.matchGoalsMobilizationWidget(1, 1) }
-          })
-          expect(node.at(CHOICES_TABMENUITEM).props().isActive).to.be.false
-        })
-      })
-
-      context('Goals Tab', () => {
-        it('should render with goals path as path prop', () => {
-          const expectedPath = Paths.matchGoalsMobilizationWidget(1, 1)
-          expect(node.at(GOALS_TABMENUITEM).props().path).to.equal(expectedPath)
-        })
-        it('should render with expected text prop', () => {
-          const expectedText = 'Resultados das combinações'
-          expect(node.at(GOALS_TABMENUITEM).props().text).to.equal(expectedText)
-        })
-        it('should render isActive prop as true if current location is equal to choices tab path', () => {
-          wrapper.setProps({
-            location: { pathname: Paths.matchGoalsMobilizationWidget(1, 1) }
-          })
-          expect(node.at(GOALS_TABMENUITEM).props().isActive).to.be.true
-        })
-        it('should render isActive prop as false if current location is different to choices tab path', () => {
-          wrapper.setProps({
-            location: { pathname: Paths.matchChoicesMobilizationWidget(1, 1) }
-          })
-          expect(node.at(GOALS_TABMENUITEM).props().isActive).to.be.false
-        })
+    context('Tabs', () => {
+      it('should render one <Tabs> component', () => {
+        expect(wrapper.find('Tabs').length).to.equal(1)
       })
     })
 
