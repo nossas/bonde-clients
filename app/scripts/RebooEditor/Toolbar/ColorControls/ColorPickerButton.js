@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { SketchPicker } from 'react-color'
 
+import themes from '../themes'
+
 
 class ColorPickerButton extends Component {
 
@@ -33,7 +35,15 @@ class ColorPickerButton extends Component {
   render() {
 
     const { showColorPicker, color } = this.state
-    const { className, onRemoveColor } = this.props
+    const { className, theme } = this.props
+
+    const presetColors = theme ? themes[theme] : []
+
+    const colorPickerProps = {
+      color,
+      presetColors,
+      onChangeComplete: this.handleChange.bind(this)
+    }
 
     return (
       <div>
@@ -42,12 +52,8 @@ class ColorPickerButton extends Component {
         </button>
         {(showColorPicker ? (
           <div>
-            <SketchPicker
-              color={color}
-              onChangeComplete={this.handleChange.bind(this)}
-            />
-            <button className="button button-outline white mr1" onClick={this.handleChangeColor.bind(this)}>Ok</button>
-            <button className="button button-outline white mr1" onClick={onRemoveColor}>Remove</button>
+            <SketchPicker {...colorPickerProps} />
+            <button className="button button-outline white mr1" onClick={this.handleChangeColor.bind(this)}>Aplicar</button>
           </div>
         ) : null)}
       </div>
@@ -60,6 +66,7 @@ ColorPickerButton.propTypes = {
   onRemoveColor: PropTypes.func.isRequired,
   onChangeColor: PropTypes.func.isRequired,
   className: PropTypes.string,
+  theme: PropTypes.string
 }
 
 export default ColorPickerButton

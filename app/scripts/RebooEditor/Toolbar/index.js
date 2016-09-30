@@ -24,7 +24,7 @@ class Toolbar extends Component {
 
   render() {
 
-    const { editorState, setEditorState, buttonClassName, popoverClassName } = this.props
+    const { editorState, setEditorState, buttonClassName, popoverClassName, theme } = this.props
     const controlsProps = { editorState, setEditorState }
 
     return (
@@ -54,6 +54,7 @@ class Toolbar extends Component {
           {...controlsProps}
         />
         <ColorControls
+          theme={theme}
           buttonClassName={buttonClassName}
           {...controlsProps}
         />
@@ -83,7 +84,8 @@ Toolbar.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string
+  popoverClassName: PropTypes.string,
+  theme: PropTypes.string
 }
 
 export const plugins = [

@@ -41,11 +41,12 @@ export class ColorControls extends Component {
 
   render() {
 
-    const { buttonClassName } = this.props
+    const { buttonClassName, theme } = this.props
 
     return (
       <div className="colorControls">
         <ColorPickerButton
+          theme={theme}
           className={buttonClassName}
           color={this.state.color}
           onRemoveColor={() => {}}
@@ -60,6 +61,7 @@ ColorControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
+  theme: PropTypes.string,
 }
 
 

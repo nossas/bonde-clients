@@ -67,7 +67,7 @@ class RebooEditor extends Component {
 
   render() {
 
-    const { readOnly } = this.props
+    const { readOnly, theme } = this.props
 
     const toolbarStyle = {
       ...styles.toolbar,
@@ -79,6 +79,7 @@ class RebooEditor extends Component {
         {!readOnly ? (
           <div style={toolbarStyle}>
             <Toolbar
+              theme={theme}
               buttonClassName="button button-transparent white p2"
               popoverClassName="absolute white p2 bg-darken-3"
               editorState={this.state.editorState}
@@ -106,6 +107,7 @@ class RebooEditor extends Component {
 
 RebooEditor.propTypes = {
   readOnly: PropTypes.bool.isRequired,
+  theme: PropTypes.string
 }
 
 RebooEditor.defaultProps = {
