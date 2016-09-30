@@ -14,7 +14,8 @@ import { setToolbarLinkOpenStrategy } from '../Widget/actions'
 const WYSIHTMLToolbarCreateLink = ({ dispatch, toolbarLinkOpenStrategy }) => (
   <div
     data-wysihtml5-dialog="createLink"
-    className="white p2 bg-darken-3 display-none"
+    className="white p2 bg-darken-3"
+    style={{ display: 'none' }}
   >
     <input
       type="text"
