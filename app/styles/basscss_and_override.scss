@@ -159,3 +159,6 @@ h1, h2, h3, h4, h5, h6 {
 .pr5 { padding-right  : $space-5; }
 .pt5 { padding-top    : $space-5; }
 .pb5 { padding-bottom : $space-5; }
+
+// Image
+img { max-width: 100% }
