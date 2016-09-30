@@ -295,7 +295,7 @@ export default class InputForm extends React.Component {
               </button>
               <button
                 disabled={this.state.loading}
-                className="btn white caps bg-aqua p2 mr2 rounded z5"
+                className="btn white caps bg-pagenta p2 mr2 rounded z5"
                 onClick={::this.handleSave}
               >
                 {this.state.loading ? 'Salvando...' : 'Salvar'}
