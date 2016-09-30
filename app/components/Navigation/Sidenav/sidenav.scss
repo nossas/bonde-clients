@@ -17,13 +17,32 @@
     width: 257px;
   }
 
+  .logo {
+    background-image: url('../../../scripts/pages/Login/logo-nossas.svg');
+    fill: #fff;
+    display: inline-block;
+    width: 95.2380952380952px;
+    height: 40px;
+    margin-left: 8px;
+  }
+
   .logo-icon {
     background-image: url('./logo-icon.svg');
     fill: #fff;
-    display: block;
+    display: inline-block;
     width: 40px;
     height: 40px;
-    margin: 20px 20px 5rem 20px;
+    margin: 0 20px;
+  }
+
+  .items-logo {
+    margin-top: 20px;
+    margin-bottom: 5rem;
+
+    .item-content {
+      padding: 0;
+      padding-right: 100%;
+    }
   }
 
   .items {

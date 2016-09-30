@@ -6,7 +6,7 @@ export function logout() {
   return `/logout`
 }
 
-export function mobilizations(id) {
+export function mobilizations() {
   return `/`
 }
 

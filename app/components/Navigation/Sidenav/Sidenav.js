@@ -10,7 +10,20 @@ class Sidenav extends Component {
     const { user, children } = this.props
     return (
       <nav className="sidenav clearfix">
-        <Link className="logo-icon" to="/" />
+        <div className="items items-logo">
+          <Link to={Paths.mobilizations()}>
+            <div className="item">
+              <div className="item-icon">
+                <u className="logo-icon" />
+              </div>
+              <div className="item-content">
+                <div className="table-cell align-middle">
+                  <u className="logo" />
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
         {children}
       </nav>
     )
