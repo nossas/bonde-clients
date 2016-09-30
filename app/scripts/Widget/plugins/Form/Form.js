@@ -146,7 +146,7 @@ export default class FormWidget extends React.Component {
     const { configurable, widget, mobilization: { body_font: bodyFont }} = this.props
     if (!configurable) {
       return (
-        <div className={classnames('mt2 h3 center', `${bodyFont}-body`)}>
+        <div className="mt2 h3 center" style={{ fontFamily: bodyFont }}>
           {widget.form_entries_count}
           &nbsp;
           {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}

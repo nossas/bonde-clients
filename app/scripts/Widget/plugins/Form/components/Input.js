@@ -112,10 +112,13 @@ export default class Input extends React.Component {
 
     return (
       <div
-        className={classnames('mb2', `${bodyFont}-form`)}
+        className="mb2"
         onMouseEnter={::this.handleMouseOver}
         onMouseLeave={::this.handleMouseOut}
-        style={(editable || configurable ? {cursor: 'pointer'} : null)}
+        style={{
+          cursor: editable || configurable ? 'pointer' : null,
+          fontFamily: bodyFont
+        }}
         onClick={::this.handleClick}>
         <label
           className={classnames(

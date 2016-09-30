@@ -8,7 +8,7 @@ const Button = ({
   handleClick,
   mobilization: { body_font: bodyFont }
 }) => (
-  <div className={classnames(`${bodyFont}-body`)}>
+  <div style={{ fontFamily: bodyFont }}>
     <button
       disabled={loading}
       className="caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded"
