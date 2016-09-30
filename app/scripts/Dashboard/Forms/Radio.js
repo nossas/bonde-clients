@@ -20,9 +20,9 @@ class Radio extends Component {
           type="radio"
           id={id}
           className="mr1"
-          checked={checked === value}
           value={value}
           onChange={onChange}
+          checked={checked === value}
         />
         {children}
       </label>

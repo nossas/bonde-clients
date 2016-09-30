@@ -1,15 +1,15 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { Radio } from '../../Forms'
 
 
-describe('<Radio />', () => {
+describe('app/scripts/Dashboard/Forms/Radio', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(<Radio />)
+    wrapper = shallow(<Radio />)
   })
 
   it('should render ok by default', () => {

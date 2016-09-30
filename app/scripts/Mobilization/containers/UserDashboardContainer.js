@@ -81,10 +81,10 @@ class UserDashboard extends Component {
                   icon="cog"
                   href={Paths.basicsMobilization(currentId)}
                 />
-                <SidenavListItem
+                {/*<SidenavListItem
                   text="Lançar mobilização"
                   icon="flag"
-                />
+                />*/}
               </SidenavList>
             )
           }

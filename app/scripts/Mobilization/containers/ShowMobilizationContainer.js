@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import BlockContainer from '../../Block/containers/BlockContainer'
-
 import { getBlocks } from '../../Block/BlockSelectors'
 
-
 class ShowMobilizationContainer extends Component {
-
   render() {
-    const { color_scheme, header_font, body_font } = this.props.mobilization
+    const {
+      widgets,
+      mobilization: { color_scheme, header_font, body_font }
+    } = this.props
     const pageClass = classnames(
       color_scheme,
       `${header_font}-header`,
@@ -28,11 +28,18 @@ class ShowMobilizationContainer extends Component {
     return (
       <div className={pageClass}  style={{top: 0, bottom: 0, left: 0, right: 0}}>
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
-          {blocks && blocks.map(block => {
+          {blocks && blocks.map((block, index) => {
             if (!editable && block.hidden) {
               return null
             }
-            return <BlockContainer block={block} editable={editable}/>
+            return (
+              <BlockContainer
+                key={`block-container-${index}`}
+                block={block}
+                editable={editable}
+                widgets={widgets}
+              />
+            )
           })}
         </div>
       </div>
@@ -62,7 +69,8 @@ ShowMobilizationContainer.propTypes = {
     hidden: PropTypes.bool,
     position: PropTypes.number
   })),
-  editable: PropTypes.bool
+  editable: PropTypes.bool,
+  widgets: PropTypes.array.isRequired
 }
 
 

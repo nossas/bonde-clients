@@ -47,7 +47,10 @@ class OverlayWidget extends Component {
 
 OverlayWidget.propTypes = {
   editable: PropTypes.bool.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
   onClick: PropTypes.func,
   text: PropTypes.string
 }

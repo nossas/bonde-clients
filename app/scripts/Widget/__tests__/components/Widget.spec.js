@@ -1,23 +1,28 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import Widget from './../../'
 
-describe('<Widget />', () => {
+describe('app/scripts/Widget/components/Widget', () => {
   let widget
   let props = {
     widget: {
-      id: 1
-    }
+      id: 1,
+      kind: 'draft'
+    },
+    dispatch: () => {},
+    auth: {},
+    mobilization: {},
+    editable: true
   }
 
   beforeEach(() => {
-    widget = mount(<Widget {...props} />)
+    widget = shallow(<Widget {...props} />)
   })
 
   it('should render DrafWidget by default', () => {
-    expect(widget.find('.widget').length).to.equal(1)
+    expect(widget.find('DraftWidget')).to.have.length(1)
   })
 
   it('should throw Error when kind not exists in Widget/plugins', () => {

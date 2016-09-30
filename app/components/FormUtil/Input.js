@@ -20,10 +20,10 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.string,
-  required: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  required: PropTypes.bool,
   show: PropTypes.bool,
-  classes: PropTypes.string
+  classes: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 Input.defaultProps = {

@@ -10,7 +10,8 @@ describe('Dashboard/Forms/ControlButtons', () => {
   const props = {
     submitting: false,
     submitted: false,
-    dirty: false
+    dirty: false,
+    valid: false
   }
 
   describe('default', () => {

@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { DropDownMenu, DropDownMenuItem } from '../../components'
-
 import BlockWidgets from '../components/BlockWidgets'
-
 
 class BlockContainer extends Component {
 
@@ -37,24 +35,22 @@ class BlockContainer extends Component {
                 )}
                 menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
                 buttonClassName='button bg-darken-4 white'
-                icon="cog">
+                icon="cog"
+              >
                 {/* Change background */}
-                <DropDownMenuItem
-                  className="button button-transparent">
+                <DropDownMenuItem className="button button-transparent">
                   <span>
                     <i className="fa fa-picture-o" /> Alterar fundo
                   </span>
                 </DropDownMenuItem>
                 {/* Toggle block  */}
-                <DropDownMenuItem
-                  className="button button-transparent">
+                <DropDownMenuItem className="button button-transparent">
                   <span>
                     <i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} />
                     {(block.hidden ? ' Mostrar' : ' Esconder')}
                   </span>
                 </DropDownMenuItem>
-                <DropDownMenuItem
-                  className="button button-transparent">
+                <DropDownMenuItem className="button button-transparent">
                   <span>
                     <i className="fa fa-trash" /> Remover
                   </span>

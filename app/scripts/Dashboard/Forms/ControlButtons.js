@@ -35,10 +35,10 @@ ControlButtons.contextTypes = {
 }
 
 ControlButtons.propTypes = {
-  submitting: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool,
   submitted: PropTypes.bool.isRequired,
-  dirty: PropTypes.bool.isRequired,
-  valid: PropTypes.bool.isRequired,
+  dirty: PropTypes.bool,
+  valid: PropTypes.bool,
   formInline: PropTypes.bool.isRequired
 }
 

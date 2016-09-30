@@ -4,16 +4,20 @@ import { mount } from 'enzyme'
 
 import { FormControl } from '../../Forms'
 
-
-describe('<FormControl />', () => {
+describe('app/scripts/Dashboard/Forms/FormControl', () => {
   let wrapper
   const context = {
     $formRedux: { formInline: false, submitting: false, dirty: false },
     $formGroup: { controlId: 'form-group-id' }
   }
+  const props = {
+    submitting: false,
+    dirty: false,
+    valid: false
+  }
 
   beforeEach(() => {
-    wrapper = mount(<FormControl />, { context })
+    wrapper = mount(<FormControl {...props} />, { context })
   })
 
   it('should render ok by default', () => {
