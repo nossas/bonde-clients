@@ -15,32 +15,35 @@ describe('app/components/ColorPicker/ColorPicker', () => {
   })
 
   describe('#render', () => {
+    it('should render one .color-picker-container div', () => {
+      expect(wrapper.find('.color-picker-container')).to.have.length(1)
+    })
     it('should render the component without error by default', () => {
       expect(wrapper).to.be.ok
     })
     it('should render with "color" prop as #333 by default', () => {
-      expect(wrapper.props().color).to.be.equal('#333')
+      expect(wrapper.children().props().color).to.be.equal('#333')
     })
     it('should render with "presetColors" prop as an empty array by default', () => {
-      expect(wrapper.props().presetColors).to.be.an.emptyArray
+      expect(wrapper.children().props().presetColors).to.be.deep.equal([])
     })
     it('should render with "onChangeComplete" prop as a function by default', () => {
-      expect(wrapper.props().onChangeComplete).to.be.a.function
+      expect(wrapper.children().props().onChangeComplete).to.be.a.function
     })
     it('should render with "className" prop as custom', () => {
       const customClassName = 'Foo Bar'
       wrapper.setProps({ ...props, className: customClassName })
-      expect(wrapper.props().className).to.be.equal(customClassName)
+      expect(wrapper.children().props().className).to.be.equal(customClassName)
     })
     it('should render with "presetColors" prop as a not empty array if it is a valid theme', () => {
       const theme = 'meurio'
       wrapper.setProps({ ...props, theme })
-      expect(wrapper.props().presetColors).to.not.be.an.emptyArray
+      expect(wrapper.children().props().presetColors).to.not.be.equal([])
     })
     it('should render with "presetColors" prop as an empty array if it is a invalid theme', () => {
       const theme = 'foo'
       wrapper.setProps({ ...props, theme })
-      expect(wrapper.props().presetColors).to.be.an.emptyArray
+      expect(wrapper.children().props().presetColors).to.be.deep.equal([])
     })
   })
 })

@@ -77,7 +77,10 @@ export class NewBlockPage extends Component {
               Fundo
             </label>
             <div className="col-12">
-              <ColorPicker dispatch={dispatch} theme={colorScheme.replace('-scheme', '')} />
+              <ColorPicker
+                dispatch={dispatch}
+                theme={colorScheme.replace('-scheme', '')}
+              />
               <div
                 className={
                   'border border-gray94 rounded p2 bg-white center relative'
