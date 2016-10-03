@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor'
+import Editor from 'draft-js-plugins-editor'
+import { EditorState, ContentState, convertFromHTML } from 'draft-js'
 import Toolbar, { plugins, customStyleFn, getBlockAlignment } from './Toolbar'
 /*import styles from './styles.css'*/
 
@@ -24,17 +25,20 @@ const styles = {
   }
 }
 
-
-const text = `#TIL: This editor can have all sorts of #hashtags. Pretty #cool :)
-Try it yourself by starting a word with a # (hash character) …
-`
-
 class RebooEditor extends Component {
 
   constructor(props) {
     super(props)
+
+    let editorState = EditorState.createEmpty()
+    if (this.props.value) {
+      // initialValue is a string with syntax HTML, we need transform in contentState
+      const contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.value))
+      editorState = EditorState.createWithContent(contentState)
+    }
+
     this.state = {
-      editorState: createEditorStateWithText(text),
+      editorState: editorState,
       hasFocus: false
     }
   }
@@ -107,6 +111,7 @@ class RebooEditor extends Component {
 
 RebooEditor.propTypes = {
   readOnly: PropTypes.bool.isRequired,
+  value: PropTypes.string,
   theme: PropTypes.string
 }
 
