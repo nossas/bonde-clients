@@ -4,7 +4,7 @@ import { EditorState, Modifier } from 'draft-js'
 import ColorPickerButton from './ColorPickerButton'
 
 
-export class ColorControls extends Component {
+export default class ColorControls extends Component {
 
   constructor(props) {
     super(props)
@@ -65,17 +65,11 @@ ColorControls.propTypes = {
 }
 
 
-const colorPlugin = (theme = {}) => {
-  return {
-    customStyleFn: (style) => {
-      const output = {}
-      const color = style.filter(value => value.startsWith('color#')).last()
-      if (color) {
-        output.color = color.replace('color#', '')
-      }
-      return output
-    }
+export const customStyleFn = (style) => {
+  const output = {}
+  const color = style.filter(value => value.startsWith('color#')).last()
+  if (color) {
+    output.color = color.replace('color#', '')
   }
+  return output
 }
-
-export default colorPlugin

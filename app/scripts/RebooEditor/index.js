@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
-import Editor from 'draft-js-plugins-editor'
-import { EditorState, ContentState, convertFromHTML } from 'draft-js'
-import { stateToHTML } from 'draft-js-export-html'
+import { Editor, EditorState, ContentState, convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js'
 
-import Toolbar, { plugins, customStyleFn, getBlockAlignment } from './Toolbar'
-/*import styles from './styles.css'*/
+import Toolbar, { toolbarEditorProps, decorator, getBlockAlignment } from './Toolbar'
 
 const styles = {
   editor: {
@@ -32,17 +29,22 @@ class RebooEditor extends Component {
   constructor(props) {
     super(props)
 
-    let editorState = EditorState.createEmpty()
+    let editorState = EditorState.createEmpty(decorator)
     if (this.props.value) {
-      // initialValue is a string with syntax HTML, we need transform in contentState
-      const contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.value))
-      editorState = EditorState.createWithContent(contentState)
+      let contentState
+      if (typeof this.props.value === 'string') {
+        // initialValue is a string with syntax HTML, we need transform in contentState
+        contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.value))
+      } else if (typeof this.props.value === "object") {
+        contentState = convertFromRaw(this.props.value)
+      } else {
+        throw new Error('Value invalid')
+      }
+
+      editorState = EditorState.createWithContent(contentState, decorator)
     }
 
-    this.state = {
-      editorState: editorState,
-      hasFocus: false
-    }
+    this.state = { editorState, hasFocus: false }
   }
 
   focusEditor() {
@@ -71,15 +73,9 @@ class RebooEditor extends Component {
     return `alignment--${alignment}`
   }
 
-  handleSaveHTML() {
-    const { editorState } = this.state
-    const html = stateToHTML(editorState.getCurrentContent())
-
-    if (this.props.value !== html) {
-      // Call handleSave when edit content
-      this.props.handleSave(html)
-      this.setState({ hasFocus: false })
-    }
+  handleSaveButton() {
+    this.props.handleSave(convertToRaw(this.state.editorState.getCurrentContent()))
+    this.setState({ hasFocus: false })
   }
 
   render() {
@@ -109,17 +105,16 @@ class RebooEditor extends Component {
           <div onClick={this.focusEditor.bind(this)}>
             <Editor
               ref={input => this.editor = input}
+              readOnly={readOnly}
               editorState={this.state.editorState}
               onChange={this.onChangeEditorState.bind(this)}
-              customStyleFn={customStyleFn}
               blockStyleFn={this.blockStyleFn.bind(this)}
-              plugins={plugins}
-              readOnly={readOnly}
+              {...toolbarEditorProps}
             />
           </div>
           {!readOnly ? (
             <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
-              <button className="button button-transparent caps bg-darken-4 white rounded" onClick={this.handleSaveHTML.bind(this)}>Salvar</button>
+              <button className="button button-transparent caps bg-darken-4 white rounded" onClick={this.handleSaveButton.bind(this)}>Salvar</button>
             </div>
           ) : null}
         </div>
@@ -133,7 +128,7 @@ class RebooEditor extends Component {
 RebooEditor.propTypes = {
   handleSave: PropTypes.func.isRequired,
   readOnly: PropTypes.bool.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.any,
   theme: PropTypes.string
 }
 

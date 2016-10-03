@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { EditorState, Modifier, RichUtils } from 'draft-js'
 
 
-export class FontControls extends Component {
+export default class FontControls extends Component {
 
   constructor(props) {
     super(props)
@@ -93,21 +93,15 @@ FontControls.propTypes = {
 }
 
 
-const fontPlugin = (theme = {}) => {
-  return {
-    customStyleFn: (style) => {
-      const output = {}
-      const fontSize = style.filter(value => value.startsWith('fontSize#')).last()
-      if (fontSize) {
-        output.fontSize = fontSize.replace('fontSize#', '')
-      }
-      const fontFamily = style.filter(value => value.startsWith('fontFamily#')).last()
-      if (fontFamily) {
-        output.fontFamily = fontFamily.replace('fontFamily#', '')
-      }
-      return output
-    },
+export const customStyleFn = (style) => {
+  const output = {}
+  const fontSize = style.filter(value => value.startsWith('fontSize#')).last()
+  if (fontSize) {
+    output.fontSize = fontSize.replace('fontSize#', '')
   }
+  const fontFamily = style.filter(value => value.startsWith('fontFamily#')).last()
+  if (fontFamily) {
+    output.fontFamily = fontFamily.replace('fontFamily#', '')
+  }
+  return output
 }
-
-export default fontPlugin

@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { RichUtils } from 'draft-js'
+import { RichUtils, CompositeDecorator } from 'draft-js'
 
-import createColorPlugin, { ColorControls } from './ColorControls'
-import createFontPlugin, { FontControls } from './FontControls'
-import { HistoryControls } from './HistoryControls'
-import createLinkPlugin, { LinkControls } from './LinkControls'
-import { AlignmentControls } from './AlignmentControls'
-import createMediaPlugins, { MediaControls } from './MediaControls'
-/*import styles from './styles.css'*/
+import ColorControls, { customStyleFn as colorCustomStyleFn } from './ColorControls'
+import FontControls, { customStyleFn as fontCustomStyleFn } from './FontControls'
+import HistoryControls from './HistoryControls'
+import LinkControls, { decorator as linkDecorator } from './LinkControls'
+import AlignmentControls from './AlignmentControls'
+import MediaControls, { blockRendererFn as mediaBlockRendererFn } from './MediaControls'
 
 
 class Toolbar extends Component {
@@ -88,24 +87,19 @@ Toolbar.propTypes = {
   theme: PropTypes.string
 }
 
-export const plugins = [
-  createColorPlugin(),
-  createFontPlugin(),
-  createLinkPlugin(),
-  createMediaPlugins()
-]
-
-export const customStyleFn = (style) => {
-  // TODO: Move to control and receive like plugin
-  let output = {}
-  plugins.map(plugin => {
-    if (typeof plugin.customStyleFn === "function") {
-      const customStyle = plugin.customStyleFn(style)
-      output = {...output, ...customStyle}
+export const toolbarEditorProps = {
+  blockRendererFn: mediaBlockRendererFn,
+  customStyleFn: (style) => {
+    return {
+      ...fontCustomStyleFn(style),
+      ...colorCustomStyleFn(style)
     }
-  })
-  return output
+  }
 }
+
+export const decorator = new CompositeDecorator([
+  linkDecorator,
+])
 
 export { default as getBlockAlignment } from './AlignmentControls/getBlockAlignment'
 

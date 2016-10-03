@@ -14,7 +14,7 @@ const getSelectionLink = (editorState) => {
 }
 
 
-export class LinkControls extends Component {
+export default class LinkControls extends Component {
 
   constructor(props) {
     super(props)
@@ -125,15 +125,7 @@ LinkControls.propTypes = {
   popoverClassName: PropTypes.string
 }
 
-const createLinkPlugin = (config = {}) => {
-  return {
-    decorators: [
-      {
-        strategy: linkStrategy,
-        component: Link,
-      }
-    ]
-  }
+export const decorator = {
+  strategy: linkStrategy,
+  component: Link
 }
-
-export default createLinkPlugin

@@ -6,7 +6,7 @@ import Media from './Media'
 import InsertImageButton from './InsertImageButton'
 
 
-export class MediaControls extends Component {
+export default class MediaControls extends Component {
 
   handleInsertMedia(mediaType, source) {
     const { editorState, setEditorState } = this.props
@@ -40,17 +40,11 @@ MediaControls.propTypes = {
 }
 
 
-const createMediaPlugins = (config = {}) => {
-  return {
-    blockRendererFn: (block) => {
-      if (block.getType() === 'atomic') {
-        return {
-          component: Media,
-          editable: false
-        }
-      }
+export const blockRendererFn = (block) => {
+  if (block.getType() === 'atomic') {
+    return {
+      component: Media,
+      editable: false
     }
   }
 }
-
-export default createMediaPlugins

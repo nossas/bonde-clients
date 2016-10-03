@@ -5,7 +5,7 @@ import styleWholeSelectedBlocksModifier from './styleWholeSelectedBlocksModifier
 const alignments = ['left', 'center', 'right']
 
 
-export class AlignmentControls extends Component {
+export default class AlignmentControls extends Component {
 
   handleToggleAlign(alignment) {
     const { editorState, setEditorState } = this.props
