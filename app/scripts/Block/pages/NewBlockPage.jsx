@@ -1,10 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import ReactS3Uploader from 'react-s3-uploader'
 
 import * as Paths from '../../Paths'
 import { BLOCK_LAYOUTS } from '../../constants/BlockLayouts'
-import { setSelectedLayout, setSelectedColor } from '../BlockActions'
+import {
+  setSelectedLayout,
+  progressUploadBlockBackgroundImage,
+  finishUploadBlockBackgroundImage,
+  setUploadedBlockBackgroundImage
+} from '../BlockActions'
 import { addBlock } from '../../reducers/blocks'
 import { BlockMiniature } from '../components'
 import { Tabs, Tab } from '../../../components/Navigation'
@@ -23,7 +29,16 @@ export class NewBlockPage extends Component {
   }
 
   render() {
-    const { dispatch, auth, selectedColor, bgImage, mobilization, selectedLayout } = this.props
+    const {
+      dispatch,
+      auth,
+      selectedColor,
+      mobilization,
+      selectedLayout,
+      bgImage,
+      uploadedBackgroundImage,
+      isBlockBackgroundImageUploading
+    } = this.props
     const { color_scheme: colorScheme } = mobilization
 
     return (
@@ -61,7 +76,64 @@ export class NewBlockPage extends Component {
             <label className="block-type bold mb1 block gray20">
               Fundo
             </label>
-            <ColorPicker dispatch={dispatch} theme={colorScheme.replace('-scheme', '')} />
+            <div className="col-12">
+              <ColorPicker dispatch={dispatch} theme={colorScheme.replace('-scheme', '')} />
+              <div
+                className={
+                  'border border-gray94 rounded p2 bg-white center relative'
+                  + ' overflow-hidden inline-block'
+                }
+              >
+                <div className="clearfix" style={{ width: '240px' }}>
+                  {
+                    bgImage || uploadedBackgroundImage ? (
+                      <div
+                        className="bg-cover square"
+                        style={{ backgroundImage: `url(${bgImage || uploadedBackgroundImage})` }}
+                      />
+                    ) : (
+                      <div className="square-float">
+                        <i
+                          className="fa fa-image silver"
+                          style={{ fontSize: '7em', marginTop: '2.5rem' }}
+                        />
+                      </div>
+                    )
+                  }
+                  <div className={bgImage || uploadedBackgroundImage ? 'hide' : null}>
+                    <div className="mb1 gray">Selecione a imagem de fundo</div>
+                  </div>
+                  <div className="overflow-hidden">
+                    {
+                      isBlockBackgroundImageUploading
+                      ? <i className="fa fa-spin fa-refresh" />
+                      : <ReactS3Uploader
+                        id="blockBackgroundImage"
+                        signingUrl={`${process.env.API_URL}/uploads`}
+                        accept="image/*"
+                        onProgress={() =>
+                          !isBlockBackgroundImageUploading &&
+                            dispatch(progressUploadBlockBackgroundImage())
+                        }
+                        onFinish={image => {
+                          const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+                          dispatch(setUploadedBlockBackgroundImage(imageUrl))
+                          dispatch(finishUploadBlockBackgroundImage())
+                        }}
+                        className="border-none bg-darken-4 rounded p1 white"
+                        style={{
+                          position: 'absolute',
+                          left: '50%',
+                          bottom: '1rem',
+                          width: '80%',
+                          marginLeft: '-40%'
+                        }}
+                      />
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <button
               className="new-block-button btn float-btn-menu rounded"
@@ -71,11 +143,12 @@ export class NewBlockPage extends Component {
                   credentials: auth.credentials,
                   block: {
                     bg_class: JSON.stringify(selectedColor),
-                    bg_image: bgImage,
+                    bg_image: uploadedBackgroundImage || bgImage,
                     widgets_attributes: selectedLayout.map(column => ({ kind: 'draft', ...column }))
                   }
                 })
                 dispatch(action)
+                dispatch(setUploadedBlockBackgroundImage(null))
               }}
             >
               Adicionar
@@ -109,7 +182,9 @@ NewBlockPage.defaultProps = {
 
 const mapStateToProps = state => ({
   selectedLayout: state.blockReducer.selectedLayout,
-  selectedColor: state.colorPicker.color
+  isBlockBackgroundImageUploading: state.blockReducer.isBlockBackgroundImageUploading,
+  selectedColor: state.colorPicker.color,
+  uploadedBackgroundImage: state.blockReducer.uploadedBackgroundImage
 })
 
 export default connect(mapStateToProps)(NewBlockPage)

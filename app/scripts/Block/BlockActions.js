@@ -1,23 +1,29 @@
 import request from 'superagent'
 
+//
 // Constants
-
+//
 export const REQUEST_FETCH_BLOCKS = 'REQUEST_FETCH_BLOCKS'
 export const SUCCESS_FETCH_BLOCKS = 'SUCCESS_FETCH_BLOCKS'
 export const FAILURE_FETCH_BLOCKS = 'FAILURE_FETCH_BLOCKS'
 
 export const SET_SELECTED_LAYOUT = 'SET_SELECTED_LAYOUT'
 
-// TODO: Refatorar constantes abaixo
+export const PROGRESS_UPLOAD_BLOCK_BG_IMAGE = 'PROGRESS_UPLOAD_BLOCK_BG_IMAGE'
+export const FINISH_UPLOAD_BLOCK_BG_IMAGE = 'FINISH_UPLOAD_BLOCK_BG_IMAGE'
+export const SET_UPLOADED_BLOCK_BACKGROUND_IMAGE = 'SET_UPLOADED_BLOCK_BACKGROUND_IMAGE'
+
 export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
 export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
 
-
+//
 // Actions
-// TODO: Buscar uma maneira mais clara de fazer isso
-
+// TODO:
+//    Refactoring actions to use axios thunk middleware extra argument.
+//    Use of `superagent` package is deprecated.
+//
 export function fetchBlocks(params) {
   return {
     types: [REQUEST_FETCH_BLOCKS, SUCCESS_FETCH_BLOCKS, FAILURE_FETCH_BLOCKS],
@@ -38,6 +44,17 @@ export function fetchBlocks(params) {
 }
 
 export const setSelectedLayout = layout => ({ type: SET_SELECTED_LAYOUT, layout })
+
+export const progressUploadBlockBackgroundImage = () => ({
+  type: PROGRESS_UPLOAD_BLOCK_BG_IMAGE
+})
+export const finishUploadBlockBackgroundImage = () => ({
+  type: FINISH_UPLOAD_BLOCK_BG_IMAGE
+})
+export const setUploadedBlockBackgroundImage = image => ({
+  type: SET_UPLOADED_BLOCK_BACKGROUND_IMAGE,
+  image
+})
 
 // TODO: Refatorar funções abaixo
 export function addBlock(params) {
