@@ -165,7 +165,9 @@ class ChoicesPage extends React.Component {
               onSubmit={::this.handleSubmit}
             >
               <div className="form-group sm-col sm-col-12">
-                <label htmlFor="title_text">Título do bloco de combinações</label>
+                <label htmlFor="title_text">
+                  Título do bloco de combinações
+                </label>
                 {
                   !this.state.errors.isEmptyTitle ? null : (
                     <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
@@ -179,6 +181,7 @@ class ChoicesPage extends React.Component {
                   style={{ height: '48px' }}
                   value={title_text}
                   onChange={::this.handleTitleTextChange}
+                  tabIndex="1"
                 />
               </div>
 
@@ -191,6 +194,8 @@ class ChoicesPage extends React.Component {
                   handleChangeLabel={label => this.onChangeLabel('labela', label) }
                   handleAddItem={choice => this.onAddItem('choicesa', choice)}
                   handleRemoveItem={choice => this.onRemoveItem('choicesa', choice)}
+                  tabindexTitle="2"
+                  tabindex="4"
                 />
                 {
                   !this.state.errors.isEmptySideA ? null : (
@@ -203,7 +208,10 @@ class ChoicesPage extends React.Component {
                   label={ labelb }
                   handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
                   handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
-                  handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}/>
+                  handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}
+                  tabindexTitle="3"
+                  tabindex="5"
+                />
                 {
                   !this.state.errors.isEmptySideB ? null : (
                     <span className="red ml2">{this.state.errors.isEmptySideB}</span>

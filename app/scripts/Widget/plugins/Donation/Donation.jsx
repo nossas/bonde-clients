@@ -119,7 +119,7 @@ class Donation extends React.Component {
       return (
         <div className="donation center clearfix">
           <h2
-            className="p2 m0 rounded-top"
+            className="p2 m0 white rounded-top"
             style={{ fontFamily: headerFont, backgroundColor: main_color }}
           >
             {title_text}

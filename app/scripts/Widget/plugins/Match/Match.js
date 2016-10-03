@@ -89,7 +89,9 @@ class Match extends Component {
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
         <div className="match-widget widget form-redux transparent p3 bg-darken-3 relative rounded">
-          <h2 className="mt0 mb3 center" style={{ fontFamily: headerFont }}>{title_text}</h2>
+          <h2 className="mt0 mb3 center white" style={{ fontFamily: headerFont }}>
+            {title_text}
+          </h2>
           <Choices
             className="form-group"
             title={labelChoices1}
@@ -141,7 +143,7 @@ class Match extends Component {
           />
           {this.renderErrors()}
           <button
-            className="match caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded"
+            className="match caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white"
             onClick={::this.handleCombineClick}
             disabled={loading || !(this.enableMatchButton())}>
             {loading ? 'Combinando...' : 'Combinar' }

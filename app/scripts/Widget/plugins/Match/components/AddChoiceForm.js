@@ -29,7 +29,15 @@ class AddChoiceForm extends Component {
   }
 
   render() {
-    const { title, choices, label, handleChangeLabel, handleRemoveItem } = this.props
+    const {
+      title,
+      choices,
+      label,
+      handleChangeLabel,
+      handleRemoveItem,
+      tabindexTitle,
+      tabindex
+    } = this.props
     return (
       <div className="sm-col sm-col-6">
         <div className="sm-col sm-col-11">
@@ -40,6 +48,7 @@ class AddChoiceForm extends Component {
             value={label}
             className="input block h3 col-12 mt1 mb3"
             onChange={e => { handleChangeLabel(e.target.value) }}
+            tabIndex={tabindexTitle}
           />
         </div>
         <div className="sm-col sm-col-8">
@@ -50,6 +59,7 @@ class AddChoiceForm extends Component {
             className="input block h3 col-12 mt1 mb3"
             placeholder="Escolha"
             onKeyPress={e => e.key === 'Enter' ? this.onAddItem(e) : null}
+            tabIndex={tabindex}
           />
         </div>
         <div className="sm-col sm-col-3">
@@ -91,7 +101,9 @@ AddChoiceForm.propTypes = {
   choices: PropTypes.array.isRequired,
   handleAddItem: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
-  handleChangeLabel: PropTypes.func.isRequired
+  handleChangeLabel: PropTypes.func.isRequired,
+  tabindexTitle: PropTypes.string,
+  tabindex: PropTypes.string
 }
 
 AddChoiceForm.defaultProps = {
