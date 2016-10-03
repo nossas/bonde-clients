@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 
 import Editor from 'draft-js-plugins-editor'
 import { EditorState, ContentState, convertFromHTML } from 'draft-js'
+import { stateToHTML } from 'draft-js-export-html'
+
 import Toolbar, { plugins, customStyleFn, getBlockAlignment } from './Toolbar'
 /*import styles from './styles.css'*/
 
@@ -69,6 +71,17 @@ class RebooEditor extends Component {
     return `alignment--${alignment}`
   }
 
+  handleSaveHTML() {
+    const { editorState } = this.state
+    const html = stateToHTML(editorState.getCurrentContent())
+
+    if (this.props.value !== html) {
+      // Call handleSave when edit content
+      this.props.handleSave(html)
+      this.setState({ hasFocus: false })
+    }
+  }
+
   render() {
 
     const { readOnly, theme } = this.props
@@ -92,17 +105,25 @@ class RebooEditor extends Component {
             <div style={styles.outside} onClick={this.outsideClick.bind(this)} />
           </div>
         ) : null}
-        <div style={styles.editor} onClick={this.focusEditor.bind(this)}>
-          <Editor
-            ref={input => this.editor = input}
-            editorState={this.state.editorState}
-            onChange={this.onChangeEditorState.bind(this)}
-            customStyleFn={customStyleFn}
-            blockStyleFn={this.blockStyleFn.bind(this)}
-            plugins={plugins}
-            readOnly={readOnly}
-          />
+        <div style={styles.editor}>
+          <div onClick={this.focusEditor.bind(this)}>
+            <Editor
+              ref={input => this.editor = input}
+              editorState={this.state.editorState}
+              onChange={this.onChangeEditorState.bind(this)}
+              customStyleFn={customStyleFn}
+              blockStyleFn={this.blockStyleFn.bind(this)}
+              plugins={plugins}
+              readOnly={readOnly}
+            />
+          </div>
+          {!readOnly ? (
+            <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
+              <button className="button button-transparent caps bg-darken-4 white rounded" onClick={this.handleSaveHTML.bind(this)}>Salvar</button>
+            </div>
+          ) : null}
         </div>
+
       </div>
     )
   }
@@ -110,6 +131,7 @@ class RebooEditor extends Component {
 
 
 RebooEditor.propTypes = {
+  handleSave: PropTypes.func.isRequired,
   readOnly: PropTypes.bool.isRequired,
   value: PropTypes.string,
   theme: PropTypes.string
