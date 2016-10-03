@@ -98,7 +98,7 @@ class Match extends Component {
             onChange={(option) => {
               this.setState({ selectedChoice1: option.target.value })
             }}
-            className="mb2"
+            className="form-group mb2"
           />
           <Choices
             { ...this.props }
@@ -110,7 +110,7 @@ class Match extends Component {
             onChange={(option) => {
               this.setState({ selectedChoiceA: option.target.value })
             }}
-            className="mb2"
+            className="form-group mb2"
           />
           <Input
             uid="input-match-firstname"
