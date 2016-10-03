@@ -58,6 +58,7 @@ const AutoFireFormPage = (props) => {
             className="transparent"
             floatButton="Salvar"
             onSubmit={handleSubmit}
+            successMessage="Mensagem de agradecimento configurada com sucesso!"
           >
             <FormGroup controlId="senderName" {...senderName}>
               <ControlLabel>Nome do remetente</ControlLabel>

@@ -41,6 +41,7 @@ class FormPage extends Component {
               onSubmit={::this.handleSubmit}
               className="transparent"
               floatButton="Salvar"
+              successMessage="Formulário de pressão configurado com sucesso!"
             >
               <FormGroup controlId="title-text-id" {...title_text}>
                 <ControlLabel>Título do formulário</ControlLabel>

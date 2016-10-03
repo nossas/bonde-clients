@@ -52,6 +52,7 @@ class EmailPage extends Component {
               onSubmit={::this.handleSubmit}
               className="transparent"
               floatButton="Salvar"
+              successMessage="Email para alvo configurado com sucesso!"
             >
               <div className="form-group">
                 <InputTag
