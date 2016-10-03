@@ -54,6 +54,7 @@ class DonationPage extends React.Component {
               className="transparent"
               floatButton="Salvar"
               onSubmit={::this.handleSubmit}
+              successMessage="Formulário de doação configurado com sucesso!"
             >
               <FormGroup controlId="title-text-id" {...title_text}>
                 <ControlLabel>Título do bloco de doação</ControlLabel>
