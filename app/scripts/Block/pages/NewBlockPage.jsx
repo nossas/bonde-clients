@@ -107,12 +107,9 @@ NewBlockPage.defaultProps = {
   bgImage: null
 }
 
-const mapStateToProps = state => {
-  console.log(state)
-  return {
-    selectedLayout: state.blockReducer.selectedLayout,
-    selectedColor: state.colorPicker.color
-  }
-}
+const mapStateToProps = state => ({
+  selectedLayout: state.blockReducer.selectedLayout,
+  selectedColor: state.colorPicker.color
+})
 
 export default connect(mapStateToProps)(NewBlockPage)
