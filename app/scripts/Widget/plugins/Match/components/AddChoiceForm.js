@@ -33,48 +33,53 @@ class AddChoiceForm extends Component {
     return (
       <div className="sm-col sm-col-6">
         <div className="sm-col sm-col-11">
-          <label>{title}</label>
+          <label className="darkengray">{title}</label>
           <input
             type="text"
             placeholder="Label"
             value={label}
-            className="field-light block h3 full-width mt1 mb3"
-            onChange={(e) => { handleChangeLabel(e.target.value) }} />
+            className="input block h3 col-12 mt1 mb3"
+            onChange={e => { handleChangeLabel(e.target.value) }}
+          />
         </div>
         <div className="sm-col sm-col-8">
           <input
             value={this.state.value}
-            onChange={(e) => {
-              this.setState({ value: e.target.value })
-            }}
+            onChange={e => { this.setState({ value: e.target.value }) }}
             type="text"
-            className="field-light block h3 full-width mt1 mb3"
+            className="input block h3 col-12 mt1 mb3"
             placeholder="Escolha"
-            onKeyPress={e => e.key === 'Enter' ? this.onAddItem(e) : null} />
+            onKeyPress={e => e.key === 'Enter' ? this.onAddItem(e) : null}
+          />
         </div>
         <div className="sm-col sm-col-3">
-          <button className="button bg-aqua caps p2"
-                  disabled={this.state.value.length === 0 ? true : null}
-                  style={{marginTop: "8px"}}
-                  onClick={::this.onAddItem}>
-            <i class="fa fa-plus mr2"></i> Adicionar
+          <button
+            className="btn caps p2 rounded"
+            disabled={!this.state.value.length}
+            style={{ marginTop: '8px' }}
+            onClick={::this.onAddItem}
+          >
+            Adicionar
           </button>
         </div>
-        <table className="choices-block sm-col sm-col-11">
-          <tbody>
-          {choices.map((choice, index) => {
-            return (
-              <tr key={index}>
-                <td><span>{choice}</span></td>
-                <td><a href="#" onClick={(e) => {
-                  if (e) e.preventDefault()
-                  handleRemoveItem(choice)
-                }}>Remover</a></td>
-              </tr>
-            )
-          })}
-          </tbody>
-        </table>
+        <div className="choices-block sm-col sm-col-11">
+          {
+            choices.map((choice, index) => (
+              <div className="col-12" key={index}>
+                <div className="col col-10 darkengray">{choice}</div>
+                <div className="col col-2 link">
+                  <a
+                    href="#"
+                    className="h6 caps"
+                    onClick={e => { if (e) { e.preventDefault() } handleRemoveItem(choice) }}
+                  >
+                    Remover
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     )
   }

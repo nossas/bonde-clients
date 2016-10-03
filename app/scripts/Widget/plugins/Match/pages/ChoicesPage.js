@@ -158,46 +158,66 @@ class ChoicesPage extends React.Component {
 
     return(
       <Page mobilization={mobilization} location={location} widget={widget}>
-        <div className="p3 flex-auto overflow-scroll">
-          <form onSubmit={::this.handleSubmit}>
-            <div className="sm-col sm-col-12">
-              <label for="title_text">Título do bloco de combinações</label>
-              {this.state.errors.isEmptyTitle ? <span className="red ml2">{this.state.errors.isEmptyTitle}</span> : null}
-              <input
-                id="title_text"
-                type="text"
-                className="field-light block h3 full-width mt1 mb3"
-                placeholder="Ex.: Combine assuntos e compartilhe memes."
-                style={{height: '48px'}}
-                value={title_text}
-                onChange={::this.handleTitleTextChange} />
-            </div>
+        <div className="clearfix overflow-auto">
+          <div className="col-8 clearfix py3 pr4 pl5">
+            <form
+              className="form-redux transparent btn-float"
+              onSubmit={::this.handleSubmit}
+            >
+              <div className="form-group sm-col sm-col-12">
+                <label for="title_text">Título do bloco de combinações</label>
+                {
+                  !this.state.errors.isEmptyTitle ? null : (
+                    <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
+                  )
+                }
+                <input
+                  id="title_text"
+                  type="text"
+                  className="input block h3 col-12 mt1 mb3"
+                  placeholder="Ex.: Combine assuntos e compartilhe memes."
+                  style={{ height: '48px' }}
+                  value={title_text}
+                  onChange={::this.handleTitleTextChange}
+                />
+              </div>
 
-            <div className="clearfix mb3">
-              <AddChoiceForm { ...this.props }
-                title='Lado A'
-                choices={ choicesa }
-                label={ labela }
-                handleChangeLabel={(label) => this.onChangeLabel('labela', label) }
-                handleAddItem={(choice) => this.onAddItem('choicesa', choice)}
-                handleRemoveItem={(choice) => this.onRemoveItem('choicesa', choice)}/>
-              {this.state.errors.isEmptySideA ? <span className="red ml2">{this.state.errors.isEmptySideA}</span> : null}
-              <AddChoiceForm { ...this.props }
-                title='Lado B'
-                choices={ choicesb }
-                label={ labelb }
-                handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
-                handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
-                handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}/>
-              {this.state.errors.isEmptySideB ? <span className="red ml2">{this.state.errors.isEmptySideB}</span> : null}
-            </div>
-            <button
-              type="submit"
-              disabled={this.isDisableButon()}
-              className="button bg-aqua caps p2">
-              Combinar e Salvar
-            </button>
-          </form>
+              <div className="form-group clearfix mb3">
+                <AddChoiceForm
+                  {...this.props}
+                  title="Lado A"
+                  choices={choicesa}
+                  label={labela}
+                  handleChangeLabel={label => this.onChangeLabel('labela', label) }
+                  handleAddItem={choice => this.onAddItem('choicesa', choice)}
+                  handleRemoveItem={choice => this.onRemoveItem('choicesa', choice)}
+                />
+                {
+                  !this.state.errors.isEmptySideA ? null : (
+                    <span className="red ml2">{this.state.errors.isEmptySideA}</span>
+                  )
+                }
+                <AddChoiceForm { ...this.props }
+                  title='Lado B'
+                  choices={ choicesb }
+                  label={ labelb }
+                  handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
+                  handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
+                  handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}/>
+                {
+                  !this.state.errors.isEmptySideB ? null : (
+                    <span className="red ml2">{this.state.errors.isEmptySideB}</span>
+                  )
+                }
+              </div>
+              <input
+                type="submit"
+                disabled={this.isDisableButon()}
+                className="btn bg-pagenta white caps p2 rounded"
+                value="Combinar e Salvar"
+              />
+            </form>
+          </div>
         </div>
       </Page>
     )
