@@ -21,8 +21,9 @@ class ControlButtons extends Component {
         />
         {
           submitted && !!successMessage &&
-          <div className="success-message green h4 px2 mt2">
+          <div className="success-message olive h4 px2 mt2">
             {successMessage}
+            <i className="fa fa-check-circle olive" />
           </div>
         }
       </div>
