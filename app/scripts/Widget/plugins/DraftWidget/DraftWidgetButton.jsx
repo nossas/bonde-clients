@@ -10,7 +10,7 @@ const DraftWidgetButton = ({ label, icon, onClick }) => (
       onClick={onClick}>
       <span className="content">
         <i className={`fa fa-${icon} block white`} />
-        {label}
+        <span className="text">{label}</span>
       </span>
     </button>
   </div>
