@@ -301,6 +301,13 @@ export default class Block extends React.Component {
     // TODO: change widgets constant name to reflex the object that is returned
     // by the reducer
     const { widgets, block, canMoveUp, canMoveDown } = this.props
+    const {
+      bg_class: bgClass,
+      bg_image: bgImage
+    } = block
+    const isBackgroundClass = /^bg\-\d+/.test(bgClass)
+    const isBackgroundObject = !isBackgroundClass && /^{.*}$/.test(bgClass)
+    const bg = isBackgroundObject ? JSON.parse(bgClass) : null
 
     const filteredWidgets = this.filterWidgets(widgets.data, block)
     const wrapperClassName = classnames(
@@ -310,11 +317,18 @@ export default class Block extends React.Component {
     return (
       <div
         id={'block-' + block.id}
-        className={classnames('clearfix', block.bg_class, (block.bg_image ? 'bg-cover' : null))}
+        className={classnames(
+          'clearfix',
+          isBackgroundClass ? bgClass : null,
+          bgImage ? 'bg-cover' : null
+        )}
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
-        style={(block.bg_image ? { backgroundImage: `url(${block.bg_image})` } : null)}
+        style={{
+          backgroundImage: bgImage ? `url(${bgImage})` : null,
+          backgroundColor: isBackgroundObject ? `rgba(${bg.r},${bg.g},${bg.b},${bg.a})` : null
+        }}
       >
         <div className="col-9 mx-auto">
           {this.renderColorPicker()}
