@@ -37,7 +37,7 @@ Choices.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   className: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
 }
 

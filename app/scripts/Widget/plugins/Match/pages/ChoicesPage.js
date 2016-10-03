@@ -165,7 +165,7 @@ class ChoicesPage extends React.Component {
               onSubmit={::this.handleSubmit}
             >
               <div className="form-group sm-col sm-col-12">
-                <label for="title_text">Título do bloco de combinações</label>
+                <label htmlFor="title_text">Título do bloco de combinações</label>
                 {
                   !this.state.errors.isEmptyTitle ? null : (
                     <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
