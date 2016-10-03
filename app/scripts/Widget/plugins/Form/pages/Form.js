@@ -35,6 +35,7 @@ class FormWidgetForm extends React.Component {
               onSubmit={::this.handleSubmit}
               className="transparent"
               floatButton="Salvar"
+              successMessage="Formulário configurado com sucesso!"
             >
               <FormGroup controlId="call-to-action-id" {...call_to_action}>
                 <ControlLabel>Título do formulário</ControlLabel>
