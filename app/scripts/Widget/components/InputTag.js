@@ -38,7 +38,16 @@ class InputTag extends Component {
 
     return (
       <div className="input-tag">
-        {(label && <label style={{ cursor: "pointer" }} className="h5 bold caps" htmlFor="insert-tag-id">{label}</label>)}
+        {
+          label &&
+          <label
+            style={{ cursor: 'pointer' }}
+            className="h5 bold caps"
+            htmlFor="insert-tag-id"
+          >
+            {label}
+          </label>
+        }
         {(this.state.error && <span className="h5 red ml2">{this.state.error}</span>)}
         <input
           ref="insert"
@@ -53,7 +62,11 @@ class InputTag extends Component {
           tags={values}
           onClick={::this.handleEdit}
           onRemove={onRemoveTag} />
-        <span className="h5">{"Pressione <Enter> para adicionar mais alvos"}</span>
+        <span className="h5">{'Pressione <Enter> para adicionar mais alvos.'}</span>
+        <p className="h5 mt1">
+          *** Ao adicionar um novo alvo, é necessário alterar um dos outros dois campos
+          abaixo para salvar.
+        </p>
       </div>
     )
   }
