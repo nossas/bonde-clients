@@ -6,6 +6,7 @@ import * as WidgetActions from './../../../actions'
 import { Loading } from './../../../../components'
 import FormWidget from '../'
 import { Menu } from '../components'
+import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
 
 class Fields extends Component {
   constructor(props, context) {
@@ -63,8 +64,8 @@ class Fields extends Component {
 
   renderFields() {
     const { widget, ...props } = this.props
-    return(
-      <div className="flex-auto flex flex-column bg-silver gray relative">
+    return (
+      <SettingsPageLayout>
         <Menu widget={widget} {...props} />
         <button
           className="btn white bg-pagenta caps p2 rounded"
@@ -81,28 +82,26 @@ class Fields extends Component {
           <i className="fa fa-plus mr2" />
           Adicionar um campo
         </button>
-        <div className="clearfix overflow-auto">
-          <div className="col-8 clearfix py3 pr4 pl5">
-            <p className="h5 mb3 darkengray">
-              {
-                this.fields().length == 0 ?
-                'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a'
-                  + ' adicionar campos.' :
-                'Adicione, remova, edite e ordene os campos do formulário de acordo com as'
-                  + ' necessidades da sua ação.'
-              }
-            </p>
+        <SettingsPageContentLayout>
+          <p className="h5 mb3 darkengray">
+            {
+              this.fields().length == 0 ?
+              'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a'
+                + ' adicionar campos.' :
+              'Adicione, remova, edite e ordene os campos do formulário de acordo com as'
+                + ' necessidades da sua ação.'
+            }
+          </p>
 
-            <FormWidget
-              {...props}
-              widget={widget}
-              configurable={true}
-              hasNewField={this.state.hasNewField}
-            />
-          </div>
-        </div>
+          <FormWidget
+            {...props}
+            widget={widget}
+            configurable={true}
+            hasNewField={this.state.hasNewField}
+          />
+          </SettingsPageContentLayout>
         {this.renderLoading()}
-      </div>
+      </SettingsPageLayout>
     )
   }
 
