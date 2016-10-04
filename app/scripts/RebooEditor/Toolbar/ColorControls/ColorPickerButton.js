@@ -23,13 +23,13 @@ class ColorPickerButton extends Component {
   }
 
   handleChange(color) {
+    const { onChangeColor } = this.props
     this.setState({ color: color.rgb })
+    onChangeColor(this.state.color)
   }
 
   handleChangeColor(color) {
-    const { onChangeColor } = this.props
     this.setState({ showColorPicker: false })
-    onChangeColor(this.state.color)
   }
 
   render() {
@@ -51,13 +51,13 @@ class ColorPickerButton extends Component {
           <i className="fa fa-eyedropper" />
         </button>
         {(showColorPicker ? (
-          <div className="absolute left-0 center">
+          <div className="absolute left-0">
             <SketchPicker {...colorPickerProps} />
             <button
-              className="btn bg-darken-4 white mt1 rounded"
+              className="btn bg-darken-4 white col-12 rounded-bottom"
               onClick={this.handleChangeColor.bind(this)}
             >
-              Aplicar
+              Fechar
             </button>
           </div>
         ) : null)}
