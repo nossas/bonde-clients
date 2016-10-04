@@ -9,9 +9,6 @@ import * as WidgetActions from '../../actions'
 
 import Editor from '../../../RebooEditor'
 
-const text = `#TIL: This editor can have all sorts of #hashtags. Pretty #cool :)
-Try it yourself by <a href="http://google.com.br" target="_blank">starting</a> a word with a # (hash character) …
-`
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
@@ -77,12 +74,14 @@ export default class ContentWidget extends React.Component {
     }
 
     return (
-      <Editor
-        value={content}
-        theme={theme}
-        readOnly={!editable}
-        handleSave={this.handleSave.bind(this)}
-      />
+      <div className={classnames('widget', `${mobilization.headerFont}-header`, `${mobilization.bodyFont}-body`)}>
+        <Editor
+          value={content}
+          theme={theme}
+          readOnly={!editable}
+          handleSave={this.handleSave.bind(this)}
+        />
+      </div>
     )
   }
 }
