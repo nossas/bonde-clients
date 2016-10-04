@@ -26,7 +26,7 @@ class SelectFontFamily extends Component {
     const { value, onChange } = this.props
 
     return (
-      <select {...this.props}>
+      <select {...this.props} className="font-controls-family select col col-8 h5">
         <option value="">Selecione uma fonte</option>
         {fonts.map(
           font => <option key={font} value={font}>{font}</option>

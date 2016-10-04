@@ -3,12 +3,11 @@ import { EditorState, Modifier, RichUtils } from 'draft-js'
 
 import SelectFontFamily from './SelectFontFamily'
 
+import './styles.scss'
 
 export default class FontControls extends Component {
-
   constructor(props) {
     super(props)
-
     this.state = { ...this.props.initialValue }
   }
 
@@ -68,11 +67,18 @@ export default class FontControls extends Component {
   }
 
   render() {
-
     return (
-      <div className="fontControls">
-        <input type="number" value={this.state.fontSize} onChange={this.handleChangeSize.bind(this)} />
-        <SelectFontFamily onChange={this.handleChangeFont.bind(this)} value={this.state.fontFamily} />
+      <div className="font-controls">
+        <input
+          type="number"
+          value={this.state.fontSize}
+          onChange={this.handleChangeSize.bind(this)}
+          className="font-controls-size input col col-3 h5 mx1"
+        />
+        <SelectFontFamily
+          onChange={this.handleChangeFont.bind(this)}
+          value={this.state.fontFamily}
+        />
       </div>
     )
   }

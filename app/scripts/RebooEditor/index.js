@@ -1,31 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
+import {
+  Editor,
+  EditorState,
+  ContentState,
+  convertFromHTML,
+  convertToRaw,
+  convertFromRaw
+} from 'draft-js'
 
-import { Editor, EditorState, ContentState, convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js'
+import Toolbar, {
+  toolbarEditorProps,
+  decorator,
+  getBlockAlignment
+} from './Toolbar'
 
-import Toolbar, { toolbarEditorProps, decorator, getBlockAlignment } from './Toolbar'
-
-const styles = {
-  editor: {
-    position: "relative",
-    zIndex: 9999,
-  },
-  toolbar: {
-    display: "block",
-    width: "100%",
-  },
-  outside: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    zIndex: 9998,
-  }
-}
+import './styles.scss'
 
 class RebooEditor extends Component {
-
   constructor(props) {
     super(props)
 
@@ -79,29 +71,26 @@ class RebooEditor extends Component {
   }
 
   render() {
-
     const { readOnly, theme } = this.props
 
-    const toolbarStyle = {
-      ...styles.toolbar,
-      display: this.state.hasFocus ? 'block' : 'none'
-    }
-
     return (
-      <div>
+      <div className="reboo-editor">
         {!readOnly ? (
-          <div style={toolbarStyle}>
+          <div
+            className="toolbar-container"
+            style={{ display: this.state.hasFocus ? 'block' : 'none' }}
+          >
             <Toolbar
               theme={theme}
-              buttonClassName="button button-transparent white p2"
+              buttonClassName="btn white p2"
               popoverClassName="absolute white p2 bg-darken-3"
               editorState={this.state.editorState}
               setEditorState={this.onChangeEditorState.bind(this)}
             />
-            <div style={styles.outside} onClick={this.outsideClick.bind(this)} />
+            <div className="outside" onClick={this.outsideClick.bind(this)} />
           </div>
         ) : null}
-        <div style={styles.editor}>
+        <div className="editor">
           <div onClick={this.focusEditor.bind(this)}>
             <Editor
               ref={input => this.editor = input}
@@ -114,7 +103,12 @@ class RebooEditor extends Component {
           </div>
           {!readOnly ? (
             <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
-              <button className="button button-transparent caps bg-darken-4 white rounded" onClick={this.handleSaveButton.bind(this)}>Salvar</button>
+              <button
+                className="btn caps bg-darken-4 white rounded"
+                onClick={this.handleSaveButton.bind(this)}
+              >
+                Salvar
+              </button>
             </div>
           ) : null}
         </div>

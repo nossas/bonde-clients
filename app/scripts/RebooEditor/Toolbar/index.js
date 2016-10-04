@@ -8,9 +8,9 @@ import LinkControls, { decorator as linkDecorator } from './LinkControls'
 import AlignmentControls from './AlignmentControls'
 import MediaControls, { blockRendererFn as mediaBlockRendererFn } from './MediaControls'
 
+import './styles.scss'
 
 class Toolbar extends Component {
-
   toggleInlineStyle(style) {
     const { editorState, setEditorState } = this.props
     setEditorState(RichUtils.toggleInlineStyle(editorState, style))
@@ -22,28 +22,50 @@ class Toolbar extends Component {
   }
 
   render() {
-
     const { editorState, setEditorState, buttonClassName, popoverClassName, theme } = this.props
     const controlsProps = { editorState, setEditorState }
 
     return (
-      <div className="absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap" style={{ zIndex: 10000 }}>
+      <div
+        className="toolbar absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap"
+        style={{ zIndex: 10000 }}
+      >
         <div>
           {/* InlineStyle buttons */}
-          <button type="button" className={buttonClassName} onClick={() => this.toggleInlineStyle('BOLD')}>
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => this.toggleInlineStyle('BOLD')}
+          >
             <i className="fa fa-bold" />
           </button>
-          <button type="button" className={buttonClassName} onClick={() => this.toggleInlineStyle('ITALIC')}>
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => this.toggleInlineStyle('ITALIC')}
+          >
             <i className="fa fa-italic" />
           </button>
-          <button type="button" className={buttonClassName} onClick={() => this.toggleInlineStyle('UNDERLINE')}>
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => this.toggleInlineStyle('UNDERLINE')}
+          >
             <i className="fa fa-underline" />
           </button>
           {/* BlockType buttons */}
-          <button type="button" className={buttonClassName} onClick={() => this.toggleBlockType('ordered-list-item')}>
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => this.toggleBlockType('ordered-list-item')}
+          >
             <i className="fa fa-list-ol" />
           </button>
-          <button type="button" className={buttonClassName} onClick={() => this.toggleBlockType('unordered-list-item')}>
+          <button
+            type="button"
+            className={buttonClassName}
+            onClick={() => this.toggleBlockType('unordered-list-item')}
+          >
             <i className="fa fa-list-ul" />
           </button>
         </div>
