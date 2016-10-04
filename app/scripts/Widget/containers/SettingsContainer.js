@@ -3,19 +3,13 @@ import { connect } from 'react-redux'
 
 import * as Paths from '../../Paths'
 import * as WidgetSelectors from '../WidgetSelectors'
+import { SettingsPageLayout } from '../../../components/Layout'
 
-export class Settings extends Component {
-  render() {
-    const { children, ...otherProps } = this.props
-
-    return (
-      <div className="flex-auto flex flex-column bg-silver gray relative">
-        {children && React.cloneElement(children, {...otherProps})}
-      </div>
-    )
-  }
-}
-
+export const Settings = ({ children, ...rest }) => (
+  <SettingsPageLayout>
+    {children && React.cloneElement(children, {...rest})}
+  </SettingsPageLayout>
+)
 
 Settings.propTypes = {
   children: PropTypes.object,

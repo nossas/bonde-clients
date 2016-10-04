@@ -7,11 +7,10 @@ import {
   exportDataClipByEndpoint,
   mountExportDataclip
 } from '../actions/ExportActions'
-
 import { Loading } from '../components'
-
 import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
 import { Menu as DonationWidgetMenu } from '../Widget/plugins/Donation/components/settings'
+import { SettingsPageLayout, SettingsPageContentLayout } from '../../components/Layout'
 
 class ExportWidgetData extends React.Component {
   static propTypes = {
@@ -115,13 +114,13 @@ class ExportWidgetData extends React.Component {
     const filename = mobilization.name + '.xlsx'
 
     return (
-      <div className='flex-auto flex flex-column bg-silver gray relative'>
+      <SettingsPageLayout>
         {( widget.kind === 'donation'
           ? <DonationWidgetMenu {...this.props} widget={widget} />
           : <FormWidgetMenu {...this.props} widget={widget} />
         )}
 
-        <div className="col-6 clearfix py3 pr4 pl5">
+        <SettingsPageContentLayout>
           <div className="table caps bold mb2 darkengray h6">
             <i className="fa fa-file-excel-o darkengray table-cell align-middle h2" />
             <span className="table-cell align-middle pl1">Exportar</span>
@@ -159,9 +158,8 @@ class ExportWidgetData extends React.Component {
 
           {(!Modernizr.adownload && !loading && success ? this.renderDisclaimer() : null)}
           {(!Modernizr.adownload ? this.renderSaveAsContainer() : null)}
-
-        </div>
-      </div>
+        </SettingsPageContentLayout>
+      </SettingsPageLayout>
     )
   }
 

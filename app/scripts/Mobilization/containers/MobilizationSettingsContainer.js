@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { ConfigurationsMenu } from '../../components'
+import { Menu as MobilizationSettingsMenu } from '../components/settings'
 import { getMobilization } from '../MobilizationSelectors'
+import { SettingsPageLayout } from '../../../components/Layout'
 
 // You may will see the warning below:
 // Warning: Stateless function components cannot be given refs (See ref "wrappedInstance" in
@@ -12,19 +13,12 @@ import { getMobilization } from '../MobilizationSelectors'
 // Upgrade React Redux to version 4 will should go away this warning.
 // See: https://github.com/reactjs/react-redux/issues/141#issuecomment-148358733
 
-export const MobilizationSettingsContainer = props => {
-  const { children, ...rest } = props
-  return (
-    <div className="flex-auto flex flex-column bg-silver gray relative">
-      <ConfigurationsMenu {...props} />
-      <div className="flex-auto" style={{ overflowY: 'scroll' }}>
-        {
-          React.cloneElement(children, {...rest})
-        }
-      </div>
-    </div>
-  )
-}
+export const MobilizationSettingsContainer = ({ children, ...props }) => (
+  <SettingsPageLayout>
+    <MobilizationSettingsMenu {...props} />
+    {React.cloneElement(children, {...props})}
+  </SettingsPageLayout>
+)
 
 MobilizationSettingsContainer.propTypes = {
   mobilization: PropTypes.object.isRequired
