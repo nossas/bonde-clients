@@ -132,3 +132,31 @@ a.no-underscore {
   background-size: cover;
   background-position: center;
 }
+
+// Toolbar alignment
+.alignment--left {
+  .public-DraftStyleDefault-block {
+    text-align: left;
+  }
+  img {
+    float: left;
+  }
+}
+
+.alignment--center {
+  .public-DraftStyleDefault-block {
+    text-align: center;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+.alignment--right {
+  .public-DraftStyleDefault-block {
+    text-align: right;
+  }
+  img {
+    float: right;
+  }
+}
