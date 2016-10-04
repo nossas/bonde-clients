@@ -1,21 +1,18 @@
 import React, { PropTypes } from 'react'
 
 import Menu from './Menu'
+import { SettingsPageLayout } from '../../../../../../components/Layout'
 
-
-const Base = ({ children, location, mobilization, widget }) => {
-
-  return (
-    <div className="flex-auto flex flex-column bg-silver gray relative">
-      <Menu
-        location={location}
-        mobilization_id={mobilization.id}
-        widget_id={widget.id}
-      />
-      {children}
-    </div>
-  )
-}
+const Base = ({ children, location, mobilization, widget }) => (
+  <SettingsPageLayout>
+    <Menu
+      location={location}
+      mobilization_id={mobilization.id}
+      widget_id={widget.id}
+    />
+    {children}
+  </SettingsPageLayout>
+)
 
 Base.propTypes = {
   location: PropTypes.shape({

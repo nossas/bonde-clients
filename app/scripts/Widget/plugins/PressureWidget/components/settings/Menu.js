@@ -1,20 +1,17 @@
 import React, { PropTypes } from 'react'
 
 import * as Paths from '../../../../../Paths'
-
 import { TabMenu, TabMenuItem } from '../../../../../components'
 import { Tabs, Tab } from '../../../../../../components/Navigation'
-
+import { SettingsPageMenuLayout } from '../../../../../../components/Layout'
 
 const Menu = ({ location, mobilization_id, widget_id }) => {
-
   const formPath = Paths.formPressureWidget(mobilization_id, widget_id)
   const emailPath = Paths.emailPressureWidget(mobilization_id, widget_id)
   const autofirePath = Paths.autofireMobilizationWidget(mobilization_id, widget_id)
 
   return (
-    <div className="bg-white pt3 pr4 pl5">
-      <h1 className='h1 mt0 mb3'>Configure seu formulário de pressão</h1>
+    <SettingsPageMenuLayout title="Configure seu formulário de pressão">
       <Tabs>
         <Tab
           path={formPath}
@@ -32,7 +29,7 @@ const Menu = ({ location, mobilization_id, widget_id }) => {
           isActive={autofirePath === location.pathname}
         />
       </Tabs>
-    </div>
+    </SettingsPageMenuLayout>
   )
 }
 

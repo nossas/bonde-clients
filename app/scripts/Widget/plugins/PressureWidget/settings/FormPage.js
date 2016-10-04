@@ -12,71 +12,72 @@ import {
   RadioGroup,
   Radio
 } from '../../../../Dashboard/Forms'
-
 import { Base as PressureBase } from '../components/settings'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
-
-class FormPage extends Component {
-
-  handleSubmit(values) {
-    const { widget, credentials, editWidgetAsync, ...props } = this.props
+const FormPage = ({
+  ...props,
+  fields: {
+    title_text,
+    button_text,
+    show_counter,
+    count_text,
+    main_color
+  }
+}) => {
+  const handleSubmit = values => {
+    const { widget, credentials, editWidgetAsync } = props
     const settings = widget.settings || {}
     const data = { ...widget, settings: { ...settings, ...values } }
     return editWidgetAsync(data)
   }
 
-  render() {
-    const { fields: { title_text, button_text, show_counter, count_text, main_color }, ...props } = this.props
-
-    return (
-      <PressureBase
-        location={props.location}
-        mobilization={props.mobilization}
-        widget={props.widget}
-      >
-        <div className="clearfix overflow-auto">
-          <div className="col-6 clearfix py3 pr4 pl5">
-            <FormRedux
-              {...props}
-              onSubmit={::this.handleSubmit}
-              className="transparent"
-              floatButton="Salvar"
-              successMessage="Formulário de pressão configurado com sucesso!"
-            >
-              <FormGroup controlId="title-text-id" {...title_text}>
-                <ControlLabel>Título do formulário</ControlLabel>
-                <FormControl
-                  type="text"
-                  placeholder="Envie um e-mail para quem pode tomar essa decisão"
-                />
-              </FormGroup>
-              <FormGroup controlId="button-text-id" {...button_text}>
-                <ControlLabel>Texto do botão</ControlLabel>
-                <FormControl type="text" placeholder="Enviar e-mail" />
-              </FormGroup>
-              <FormGroup controlId="main-color-id" {...main_color}>
-                <ControlLabel>Cor do formulário</ControlLabel>
-                <ColorPicker />
-              </FormGroup>
-              <FormGroup controlId="show-counter-id" {...show_counter}>
-                <ControlLabel>Mostrar contador de pressão</ControlLabel>
-                <RadioGroup>
-                  <Radio value="true">Sim</Radio>
-                  <Radio value="false">Não</Radio>
-                </RadioGroup>
-              </FormGroup>
-              {(show_counter.value === 'true' ? (
-                <FormGroup controlId="count-text-id" {...count_text}>
-                  <ControlLabel>Texto do contador</ControlLabel>
-                  <FormControl type="text" placeholder="pressões feitas" />
-                </FormGroup>
-              ) : null)}
-            </FormRedux>
-          </div>
-        </div>
-      </PressureBase>
-    )
-  }
+  return (
+    <PressureBase
+      location={props.location}
+      mobilization={props.mobilization}
+      widget={props.widget}
+    >
+      <SettingsPageContentLayout>
+        <FormRedux
+          {...props}
+          onSubmit={handleSubmit}
+          className="transparent"
+          floatButton="Salvar"
+          successMessage="Formulário de pressão configurado com sucesso!"
+        >
+          <FormGroup controlId="title-text-id" {...title_text}>
+            <ControlLabel>Título do formulário</ControlLabel>
+            <FormControl
+              type="text"
+              placeholder="Envie um e-mail para quem pode tomar essa decisão"
+            />
+          </FormGroup>
+          <FormGroup controlId="button-text-id" {...button_text}>
+            <ControlLabel>Texto do botão</ControlLabel>
+            <FormControl type="text" placeholder="Enviar e-mail" />
+          </FormGroup>
+          <FormGroup controlId="main-color-id" {...main_color}>
+            <ControlLabel>Cor do formulário</ControlLabel>
+            <ColorPicker />
+          </FormGroup>
+          <FormGroup controlId="show-counter-id" {...show_counter}>
+            <ControlLabel>Mostrar contador de pressão</ControlLabel>
+            <RadioGroup>
+              <Radio value="true">Sim</Radio>
+              <Radio value="false">Não</Radio>
+            </RadioGroup>
+          </FormGroup>
+          {(show_counter.value === 'true' ? (
+            <FormGroup controlId="count-text-id" {...count_text}>
+              <ControlLabel>Texto do contador</ControlLabel>
+              <FormControl type="text" placeholder="pressões feitas" />
+            </FormGroup>
+          ) : null)}
+        </FormRedux>
+      </SettingsPageContentLayout>
+    </PressureBase>
+  )
 }
 
 FormPage.propTypes = {
@@ -88,10 +89,16 @@ FormPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.string
 }
 
-const fields = ['title_text', 'button_text', 'show_counter', 'count_text', 'main_color']
+const fields = [
+  'title_text',
+  'button_text',
+  'show_counter',
+  'count_text',
+  'main_color'
+]
 
 const validate = values => {
   const errors = {}
@@ -104,17 +111,18 @@ const validate = values => {
   return errors
 }
 
-export default reduxForm({
-  form: 'widgetForm',
-  fields,
-  validate
-},
-(state, ownProps) => ({
+const mapStateToProps = (state, props) => ({
   initialValues: {
     show_counter: 'false',
     count_text: 'pressões feitas',
     main_color: '#f23392',
-    ...ownProps.widget.settings || {}
+    ...props.widget.settings || {}
   },
-  credentials: state.auth.credentials,
-}), { ...WidgetActions })(FormPage)
+  credentials: state.auth.credentials
+})
+
+export default reduxForm({
+  form: 'widgetForm',
+  fields,
+  validate
+}, mapStateToProps, WidgetActions)(FormPage)
