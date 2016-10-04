@@ -3,12 +3,9 @@ import { EditorState, Modifier } from 'draft-js'
 
 import ColorPickerButton from './ColorPickerButton'
 
-
 export default class ColorControls extends Component {
-
   constructor(props) {
     super(props)
-
     this.state = { color: null }
   }
 

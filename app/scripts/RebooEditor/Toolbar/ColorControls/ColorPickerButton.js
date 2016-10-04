@@ -51,10 +51,10 @@ class ColorPickerButton extends Component {
           <i className="fa fa-eyedropper" />
         </button>
         {(showColorPicker ? (
-          <div>
+          <div className="absolute left-0 center">
             <SketchPicker {...colorPickerProps} />
             <button
-              className="btn btn-outline white mr1"
+              className="btn bg-darken-4 white mt1 rounded"
               onClick={this.handleChangeColor.bind(this)}
             >
               Aplicar
