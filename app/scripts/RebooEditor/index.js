@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
 import { Editor, EditorState, ContentState, convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js'
+import { stateFromHTML } from 'draft-js-import-html'
 
 import Toolbar, { toolbarEditorProps, decorator, getBlockAlignment } from './Toolbar'
 
@@ -34,7 +35,7 @@ class RebooEditor extends Component {
       let contentState
       if (typeof this.props.value === 'string') {
         // initialValue is a string with syntax HTML, we need transform in contentState
-        contentState = ContentState.createFromBlockArray(convertFromHTML(this.props.value))
+        contentState = stateFromHTML(this.props.value)
       } else if (typeof this.props.value === "object") {
         contentState = convertFromRaw(this.props.value)
       } else {

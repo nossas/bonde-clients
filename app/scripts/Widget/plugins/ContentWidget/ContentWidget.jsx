@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import { bindActionCreators } from 'redux'
-import $ from 'jquery'
 import classnames from 'classnames'
 
 import { WYSIHTMLToolbar, Loading } from '../../../components'
@@ -74,7 +72,7 @@ export default class ContentWidget extends React.Component {
     }
 
     return (
-      <div className={classnames('widget', `${mobilization.headerFont}-header`, `${mobilization.bodyFont}-body`)}>
+      <div className={classnames('widget', `${mobilization.header_font}-header`, `${mobilization.body_font}-body`)}>
         <Editor
           value={content}
           theme={theme}
