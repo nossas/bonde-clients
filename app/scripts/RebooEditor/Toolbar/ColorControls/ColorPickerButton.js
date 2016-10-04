@@ -53,7 +53,12 @@ class ColorPickerButton extends Component {
         {(showColorPicker ? (
           <div>
             <SketchPicker {...colorPickerProps} />
-            <button className="button button-outline white mr1" onClick={this.handleChangeColor.bind(this)}>Aplicar</button>
+            <button
+              className="btn btn-outline white mr1"
+              onClick={this.handleChangeColor.bind(this)}
+            >
+              Aplicar
+            </button>
           </div>
         ) : null)}
       </div>

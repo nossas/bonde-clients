@@ -97,8 +97,14 @@ export default class LinkControls extends Component {
                 type="text"
                 value={this.state.href}
                 onChange={e => this.setState({ href: e.target.value })}
+                className="input col-8 m0"
               />
-              <button className="button button-outline white mr1" onClick={this.confirmLink.bind(this)}><i className="fa fa-check" /></button>
+              <button
+                className="btn btn-outline white mx1"
+                onClick={this.confirmLink.bind(this)}
+              >
+                <i className="fa fa-check" />
+              </button>
             </div>
             <div className="flex flex-wrap mt1">
               <input
