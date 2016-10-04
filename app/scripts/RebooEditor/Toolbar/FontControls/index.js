@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { EditorState, Modifier, RichUtils } from 'draft-js'
 
+import SelectFontFamily from './SelectFontFamily'
+
 
 export default class FontControls extends Component {
 
@@ -57,14 +59,12 @@ export default class FontControls extends Component {
     const { editorState, setEditorState } = this.props
     const fontFamily = e.target.value
 
-    if (fontFamily) {
-      const editorStateWithFontFamily = RichUtils.toggleInlineStyle(
-        editorState,
-        `fontFamily#${fontFamily}`
-      )
-      setEditorState(editorStateWithFontFamily)
-      this.setState({ fontFamily })
-    }
+    const editorStateWithFontFamily = RichUtils.toggleInlineStyle(
+      editorState,
+      `fontFamily#${fontFamily}`
+    )
+    setEditorState(editorStateWithFontFamily)
+    this.setState({ fontFamily })
   }
 
   render() {
@@ -72,11 +72,7 @@ export default class FontControls extends Component {
     return (
       <div className="fontControls">
         <input type="number" value={this.state.fontSize} onChange={this.handleChangeSize.bind(this)} />
-        <select onChange={this.handleChangeFont.bind(this)} value={this.state.fontFamily}>
-          <option value="">Select your font</option>
-          <option value="Inconsolata">Inconsolata</option>
-          <option value="Open Sans">Open sans</option>
-        </select>
+        <SelectFontFamily onChange={this.handleChangeFont.bind(this)} value={this.state.fontFamily} />
       </div>
     )
   }
