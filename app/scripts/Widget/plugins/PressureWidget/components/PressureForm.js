@@ -79,7 +79,7 @@ class PressureForm extends Component {
               className="col-12"
               style={inputReset}
               type="email"
-              placeholder="Seu e-mail"
+              placeholder="Insira seu e-mail"
               value={email}
               onChange={e => this.setState({ email: e.target.value })}
             />
@@ -90,7 +90,7 @@ class PressureForm extends Component {
               className="col-12"
               style={inputReset}
               type="text"
-              placeholder="Seu nome"
+              placeholder="Insira seu nome"
               value={name}
               onChange={e => this.setState({ name: e.target.value })}
             />
@@ -101,7 +101,7 @@ class PressureForm extends Component {
               className="col-12"
               style={inputReset}
               type="text"
-              placeholder="Seu sobrenome"
+              placeholder="Insira seu sobrenome"
               value={lastname}
               onChange={e => this.setState({ lastname: e.target.value })}
             />
