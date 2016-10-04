@@ -11,11 +11,12 @@ export function mobilizations() {
 }
 
 export function mobilization(mobilization, domain = process.env.APP_DOMAIN) {
-  return (
-    mobilization.custom_domain
+  if (process.env.APP_DOMAIN.indexOf('staging') !== -1)
+    return `http://${mobilization.slug}.${domain}`
+
+  return mobilization.custom_domain
     ? `http://${mobilization.custom_domain}`
     : `http://${mobilization.slug}.${domain}`
-  )
 }
 
 export function newMobilization() {
