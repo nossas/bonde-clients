@@ -35,6 +35,11 @@ describe('app/components/ColorPicker/ColorPicker', () => {
       wrapper.setProps({ ...props, className: customClassName })
       expect(wrapper.children().props().className).to.be.equal(customClassName)
     })
+    it('should render with "color" prop as custom', () => {
+      const customColor = '#666'
+      wrapper.setProps({ ...props, color: customColor })
+      expect(wrapper.children().props().color).to.be.equal(customColor)
+    })
     it('should render with "presetColors" prop as a not empty array if it is a valid theme', () => {
       const theme = 'meurio'
       wrapper.setProps({ ...props, theme })

@@ -12,19 +12,21 @@ export const ColorPicker = ({
   showColorPicker,
   onChangeColor,
   selectedColor,
+  color,
   // Actions
   setSelectedColor
 }) => {
   const hasTheme = theme && themes[theme]
   const defaultAction = color => dispatch(setSelectedColor(color.rgb))
+  const colorStrategy = selectedColor ? selectedColor : (hasTheme ? themes[theme][0] : '#333')
 
   return !showColorPicker ? null : (
     <div className="color-picker-container inline-block">
       <SketchPicker
         {...{
           className,
+          color: color || colorStrategy,
           onChangeComplete: onChangeColor || defaultAction,
-          color: selectedColor ? selectedColor : (hasTheme ? themes[theme][0] : '#333'),
           presetColors: hasTheme ? themes[theme] : []
         }}
       />
@@ -35,10 +37,10 @@ export const ColorPicker = ({
 ColorPicker.propTypes = {
   dispatch: PropTypes.func.isRequired,
   showColorPicker: PropTypes.bool.isRequired,
-  color: PropTypes.object,
   onChangeColor: PropTypes.func,
   className: PropTypes.string,
-  theme: PropTypes.string
+  theme: PropTypes.string,
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }
 
 ColorPicker.defaultProps = {

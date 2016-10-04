@@ -12,9 +12,9 @@ import {
   ControlLabel,
   HelpBlock,
   FormControl,
-  ColorPicker,
   RadioGroup,
-  Radio
+  Radio,
+  ColorPicker
 } from '../../../../Dashboard/Forms'
 import { HorizontalLayout } from '../../../../Dashboard/Grids'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
@@ -30,6 +30,7 @@ class DonationPage extends React.Component {
 
   render() {
     const {
+      dispatch,
       fields: {
         title_text, button_text, main_color, default_donation_value, donation_value1,
         donation_value2, donation_value3, donation_value4, donation_value5, recurring_period,
@@ -37,6 +38,7 @@ class DonationPage extends React.Component {
       },
       ...props
     } = this.props
+    const { mobilization: { color_scheme: colorScheme } } = this.props
     const donationValueTitle = 'Clique para definir este valor como padrão.'
 
     return (
@@ -83,7 +85,10 @@ class DonationPage extends React.Component {
               <HelpBlock>
                 Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
               </HelpBlock>
-              <ColorPicker />
+              <ColorPicker
+                dispatch={dispatch}
+                theme={colorScheme.replace('-scheme', '')}
+              />
             </FormGroup>
 
             <FormGroup controlId="default-donation-value" {...default_donation_value}>

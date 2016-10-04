@@ -1,15 +1,18 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { ColorPicker } from '../../Forms'
 
 
-describe('<ColorPicker />', () => {
+describe('app/scripts/Dashboard/Forms/ColorPicker', () => {
   let wrapper
+  const props = {
+    dispatch: () => {}
+  }
 
   beforeEach(() => {
-    wrapper = mount(<ColorPicker />, { context: {} })
+    wrapper = shallow(<ColorPicker {...props} />, { context: {} })
   })
 
   it('should render ok by default', () => {
@@ -22,6 +25,6 @@ describe('<ColorPicker />', () => {
         value: '#fff'
       }
     })
-    expect(wrapper.find('ColorPicker').at(1).props().color).to.equal('#fff')
+    expect(wrapper.children().props().color).to.equal('#fff')
   })
 })
