@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as WidgetActions from '../../../actions'
 import { Page, ChoiceCombined } from '../components'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 export default class GoalsPage extends React.Component {
   constructor(props, context) {
@@ -76,12 +77,9 @@ export default class GoalsPage extends React.Component {
     const widget = this.widget()
     return(
       <Page mobilization={mobilization} location={location} widget={widget}>
-        <div className="clearfix overflow-auto">
-          <div className="col-8 clearfix py3 pr4 pl5">
-            <h1>Combinações</h1>
-            {this.renderCombineChoices()}
-          </div>
-        </div>
+        <SettingsPageContentLayout>
+          {this.renderCombineChoices()}
+        </SettingsPageContentLayout>
       </Page>
     )
   }

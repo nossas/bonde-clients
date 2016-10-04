@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux'
 import * as Paths from '../../../../Paths'
 import * as WidgetActions from '../../../actions'
 import { Page, AddChoiceForm } from '../components'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 class ChoicesPage extends React.Component {
   constructor(props, context) {
     super(props, context)
-
     const {
       settings: {
         title_text,
@@ -157,76 +157,79 @@ class ChoicesPage extends React.Component {
     } = this.state
 
     return(
-      <Page mobilization={mobilization} location={location} widget={widget}>
-        <div className="clearfix overflow-auto">
-          <div className="col-8 clearfix py3 pr4 pl5">
-            <form
-              className="form-redux transparent btn-float"
-              onSubmit={::this.handleSubmit}
-            >
-              <div className="form-group sm-col sm-col-12">
-                <label htmlFor="title_text">
-                  Título do bloco de combinações
-                </label>
-                {
-                  !this.state.errors.isEmptyTitle ? null : (
-                    <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
-                  )
-                }
-                <input
-                  id="title_text"
-                  type="text"
-                  className="input block h3 col-12 mt1 mb3"
-                  placeholder="Ex.: Combine assuntos e compartilhe memes."
-                  style={{ height: '48px' }}
-                  value={title_text}
-                  onChange={::this.handleTitleTextChange}
-                  tabIndex="1"
-                />
-              </div>
-
-              <div className="form-group clearfix mb3">
-                <AddChoiceForm
-                  {...this.props}
-                  title="Lado A"
-                  choices={choicesa}
-                  label={labela}
-                  handleChangeLabel={label => this.onChangeLabel('labela', label) }
-                  handleAddItem={choice => this.onAddItem('choicesa', choice)}
-                  handleRemoveItem={choice => this.onRemoveItem('choicesa', choice)}
-                  tabindexTitle="2"
-                  tabindex="4"
-                />
-                {
-                  !this.state.errors.isEmptySideA ? null : (
-                    <span className="red ml2">{this.state.errors.isEmptySideA}</span>
-                  )
-                }
-                <AddChoiceForm { ...this.props }
-                  title='Lado B'
-                  choices={ choicesb }
-                  label={ labelb }
-                  handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
-                  handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
-                  handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}
-                  tabindexTitle="3"
-                  tabindex="5"
-                />
-                {
-                  !this.state.errors.isEmptySideB ? null : (
-                    <span className="red ml2">{this.state.errors.isEmptySideB}</span>
-                  )
-                }
-              </div>
+      <Page
+        mobilization={mobilization}
+        location={location}
+        widget={widget}
+      >
+        <SettingsPageContentLayout>
+          <form
+            className="form-redux transparent btn-float"
+            onSubmit={::this.handleSubmit}
+          >
+            <div className="form-group sm-col sm-col-12">
+              <label htmlFor="title_text">
+                Título do bloco de combinações
+              </label>
+              {
+                !this.state.errors.isEmptyTitle ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
+                )
+              }
               <input
-                type="submit"
-                disabled={this.isDisableButon()}
-                className="btn bg-pagenta white caps p2 rounded"
-                value="Combinar e Salvar"
+                id="title_text"
+                type="text"
+                className="input block h3 col-12 mt1 mb3 h5"
+                placeholder="Ex.: Combine assuntos e compartilhe memes."
+                style={{ height: '48px' }}
+                value={title_text}
+                onChange={::this.handleTitleTextChange}
+                tabIndex="1"
               />
-            </form>
-          </div>
-        </div>
+            </div>
+
+            <div className="form-group clearfix mb3">
+              <AddChoiceForm
+                {...this.props}
+                title="Lado A"
+                choices={choicesa}
+                label={labela}
+                handleChangeLabel={label => this.onChangeLabel('labela', label)}
+                handleAddItem={choice => this.onAddItem('choicesa', choice)}
+                handleRemoveItem={choice => this.onRemoveItem('choicesa', choice)}
+                tabindexTitle="2"
+                tabindex="4"
+                className="pr2"
+              />
+              {
+                !this.state.errors.isEmptySideA ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptySideA}</span>
+                )
+              }
+              <AddChoiceForm {...this.props}
+                title='Lado B'
+                choices={choicesb}
+                label={labelb}
+                handleChangeLabel={label => this.onChangeLabel('labelb', label)}
+                handleAddItem={choice => this.onAddItem('choicesb', choice)}
+                handleRemoveItem={choice => this.onRemoveItem('choicesb', choice)}
+                tabindexTitle="3"
+                tabindex="5"
+              />
+              {
+                !this.state.errors.isEmptySideB ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptySideB}</span>
+                )
+              }
+            </div>
+            <input
+              type="submit"
+              disabled={this.isDisableButon()}
+              className="btn bg-pagenta white caps p2 rounded"
+              value="Combinar e Salvar"
+            />
+          </form>
+        </SettingsPageContentLayout>
       </Page>
     )
   }

@@ -36,7 +36,7 @@ const Choices = ({ options=[], onChange, title, className, disabled }) => {
 Choices.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
 }
