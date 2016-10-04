@@ -84,7 +84,7 @@ export class PressureWidget extends Component {
       >
         {(widget.filled ?
           <TellAFriend {...this.props}
-            message="E-mail enviado"
+            message="Pressão enviada"
             href={window.location.origin}
           />
         :
