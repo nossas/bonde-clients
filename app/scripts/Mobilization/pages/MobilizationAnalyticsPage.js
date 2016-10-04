@@ -10,6 +10,7 @@ import {
   ControlLabel,
   FormControl
 } from '../../Dashboard/Forms'
+import { SettingsPageContentLayout } from '../../../components/Layout'
 
 import './scss/mobilization-analytics-page.scss'
 
@@ -20,7 +21,7 @@ const MobilizationAnalyticsPage = ({
   editMobilizationAsync,
   ...props
 }) => (
-  <div className="mobilization-analytics-page col-6 clearfix py3 pr4 pl5 darkengray">
+  <SettingsPageContentLayout className="mobilization-analytics-page darkengray">
     <p className="h5">
       Para acompanhar os resultados da sua mobilização, você precisa configurar
       uma conta no Google Analytics.
@@ -58,7 +59,7 @@ const MobilizationAnalyticsPage = ({
         no Google Analytics!
       </li>
     </ol>
-  </div>
+  </SettingsPageContentLayout>
 )
 
 MobilizationAnalyticsPage.propTypes = {

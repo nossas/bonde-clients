@@ -13,7 +13,6 @@ export { default as WYSIHTMLToolbarInsertImage } from './WYSIHTMLToolbarInsertIm
 export { default as WYSIHTMLToolbarInsertHTML } from './WYSIHTMLToolbarInsertHTML.jsx'
 export { default as WYSIHTMLToolbarCreateLink } from './WYSIHTMLToolbarCreateLink.jsx'
 export { default as WYSIHTMLToolbarColorPicker } from './WYSIHTMLToolbarColorPicker.jsx'
-export { default as ConfigurationsMenu } from './ConfigurationsMenu.jsx'
 export { default as TabMenu } from './TabMenu/TabMenu'
 export { default as TabMenuItem } from './TabMenuItem.jsx'
 export { default as CloseButton } from './CloseButton.jsx'

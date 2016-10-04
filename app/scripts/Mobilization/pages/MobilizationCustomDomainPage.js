@@ -10,6 +10,7 @@ import {
   ControlLabel,
   FormControl
 } from '../../Dashboard/Forms'
+import { SettingsPageContentLayout } from '../../../components/Layout'
 
 const MobilizationCustomDomainPage = ({
   ...rest,
@@ -18,7 +19,7 @@ const MobilizationCustomDomainPage = ({
   // Actions
   editMobilizationAsync
 }) => (
-  <div className="col-6 clearfix py3 pr4 pl5 darkengray">
+  <SettingsPageContentLayout className="darkengray">
     <p className="h5">
       Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
       campo abaixo e clique em Salvar.
@@ -53,7 +54,7 @@ const MobilizationCustomDomainPage = ({
         </tr>
       </tbody>
     </table>
-  </div>
+  </SettingsPageContentLayout>
 )
 
 MobilizationCustomDomainPage.propTypes = {

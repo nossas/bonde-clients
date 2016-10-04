@@ -1,17 +1,18 @@
 import React, { PropTypes } from 'react'
 
-import * as Paths from '../Paths'
-import { Tabs, Tab } from '../../components/Navigation'
+import * as Paths from '../../../Paths'
+import { Tabs, Tab } from '../../../../components/Navigation'
+import { SettingsPageMenuLayout } from '../../../../components/Layout'
 
-const ConfigurationsMenu = ({ mobilization, location }) => {
+const MobilizationSettingsMenu = ({ mobilization, location }) => {
   const basicsMobilizationPath = Paths.basicsMobilization(mobilization.id)
   const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
   const sharingMobilizationPath = Paths.sharingMobilization(mobilization.id)
   const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
   const customDomainMobilizationPath = Paths.customDomainMobilization(mobilization.id)
+
   return (
-    <div className="bg-white pt3 pr4 pl5">
-      <h1 className="h1 mt0 mb3">Configure sua mobilização</h1>
+    <SettingsPageMenuLayout title="Configure sua mobilização">
       <Tabs>
         <Tab
           text="Informações básicas"
@@ -39,13 +40,13 @@ const ConfigurationsMenu = ({ mobilization, location }) => {
           isActive={customDomainMobilizationPath === location.pathname}
         />
       </Tabs>
-    </div>
+    </SettingsPageMenuLayout>
   )
 }
 
-ConfigurationsMenu.propTypes = {
+MobilizationSettingsMenu.propTypes = {
   mobilization: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
 
-export default ConfigurationsMenu
+export default MobilizationSettingsMenu

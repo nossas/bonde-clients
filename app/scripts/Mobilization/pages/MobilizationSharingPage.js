@@ -11,6 +11,7 @@ import {
   ControlLabel,
   FormControl
 } from '../../Dashboard/Forms'
+import { SettingsPageContentLayout } from '../../../components/Layout'
 import iconFacebook from './images/facebook.svg'
 import iconTwitter from './images/twitter.svg'
 
@@ -33,7 +34,7 @@ const MobilizationSharingPage = ({
   const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values })
 
   return (
-    <div className="col-6 clearfix py3 pr4 pl5 darkengray">
+    <SettingsPageContentLayout className="darkengray">
       <FormRedux
         {...rest}
         onSubmit={handleSubmit}
@@ -175,7 +176,7 @@ const MobilizationSharingPage = ({
           </FormGroup>
         </div>
       </FormRedux>
-    </div>
+    </SettingsPageContentLayout>
   )
 }
 
