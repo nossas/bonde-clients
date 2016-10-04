@@ -29,6 +29,7 @@ const MobilizationCustomDomainPage = ({
       onSubmit={values => editMobilizationAsync({ ...mobilization, ...values })}
       className="transparent"
       floatButton="Salvar"
+      successMessage="Formulário atualizado com sucesso!"
     >
       <FormGroup controlId="customDomain" {...customDomain}>
         <ControlLabel>Domínio personalizado</ControlLabel>

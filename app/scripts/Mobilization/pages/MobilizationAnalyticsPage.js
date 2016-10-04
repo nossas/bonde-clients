@@ -47,6 +47,7 @@ const MobilizationAnalyticsPage = ({
           onSubmit={values => editMobilizationAsync({ ...mobilization, ...values })}
           className="transparent"
           floatButton="Salvar"
+          successMessage="Formulário atualizado com sucesso!"
         >
           <FormGroup controlId="googleAnalyticsCode" {...googleAnalyticsCode}>
             <ControlLabel>ID do Google Analytics</ControlLabel>

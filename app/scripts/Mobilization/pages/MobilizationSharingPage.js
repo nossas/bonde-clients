@@ -40,6 +40,7 @@ const MobilizationSharingPage = ({
         onSubmit={handleSubmit}
         className="transparent clearfix"
         floatButton="Salvar"
+        successMessage="Furmlário atualizado com sucesso!"
       >
         <div className="h5 caps bold mb2 inline">
           <img className="align-middle" src={iconFacebook} width="32" height="32" />
