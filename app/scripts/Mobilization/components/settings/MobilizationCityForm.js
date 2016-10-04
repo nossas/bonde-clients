@@ -31,11 +31,14 @@ class MobilizationCityForm extends Component {
         <FormGroup controlId="organizationId" {...organizationId}>
           <ControlLabel>Cidade</ControlLabel>
           <FormDropdown>
-            {organizations.data.map(organization => (
-              <option key={organization.id} value={organization.id}>
-                {organization.city}
-              </option>
-            ))}
+            <option value="0">Selecione uma cidade...</option>
+            {
+              organizations.data.map(organization => (
+                <option key={organization.id} value={organization.id}>
+                  {organization.city}
+                </option>
+              ))
+            }
           </FormDropdown>
         </FormGroup>
       </FormRedux>
@@ -64,7 +67,7 @@ MobilizationCityForm.propTypes = {
 const fields = ['organization_id']
 const validate = values => {
   const errors = {}
-  if (!values.organization_id) {
+  if (!parseInt(values.organization_id, 10)) {
     errors.organization_id = 'Você deve escolher uma cidade'
   }
   return errors
