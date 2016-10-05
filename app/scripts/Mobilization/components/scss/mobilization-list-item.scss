@@ -4,6 +4,8 @@
 .mobilization-list {
   .mobilization-list-item {
     cursor: pointer;
+    box-shadow: 0 0 0 $darken-3;
+    transition: box-shadow .2s ease;
 
     &:hover {
       z-index: 1;
