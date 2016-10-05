@@ -11,6 +11,7 @@ describe('<InputTag />', () => {
   const tags = ['Tag 1', 'Tag 2']
   const props = {
     values: tags,
+    label: 'Foo',
     onInsertTag: value => {
       wrapper.setProps({ values: [...tags, value] })
     },
@@ -31,9 +32,17 @@ describe('<InputTag />', () => {
     wrapper = mount(<InputTag {...props} />)
   })
 
+  it('should render one <label> element', () => {
+    expect(wrapper.find('label')).to.have.length(1)
+  })
+
+  it('should render one <label> element with its content as passed label prop value', () => {
+    expect(wrapper.find('label').text()).to.be.equal(props.label)
+  })
+
   it('should render error when keyUp Enter and validade return is false', () => {
     wrapper.find('input').simulate('keyPress', { charCode: 13 })
-    expect(wrapper.find('.red').text()).to.equal('Dismatch error')
+    expect(wrapper.find('.red').text()).to.have.string('Dismatch error')
   })
 
   it('should clean and call onInsertTag when keyUp Enter and validade return is true', () => {
