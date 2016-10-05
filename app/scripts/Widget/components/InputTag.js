@@ -46,9 +46,9 @@ class InputTag extends Component {
             htmlFor="insert-tag-id"
           >
             {label}
+            {(this.state.error && <span className="red"> - {this.state.error}</span>)}
           </label>
         }
-        {(this.state.error && <span className="h5 red ml2">{this.state.error}</span>)}
         <input
           ref="insert"
           id="insert-tag-id"
