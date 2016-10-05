@@ -4,7 +4,7 @@ import classnames from 'classnames'
 const Input = ({ uid, type, label, placeholder, onChange, required, show, classes }) => (
   <div className="mb2 form-group" style={{ display: !show ? 'none' : 'block' }}>
     <label
-      className="caps bold mb1 inline-block"
+      className="caps bold mb1 inline-block white"
       style={{
         fontSize: '.75rem',
         fontWeight: 600,
