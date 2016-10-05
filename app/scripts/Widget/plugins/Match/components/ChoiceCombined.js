@@ -38,7 +38,7 @@ class ChoiceCombined extends Component {
   render() {
     const { match, classes } = this.props
     const { uploadProgress, uploadFinished, bgImage } = this.state
-    const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive' : null
+    const uploadButtonColor = uploadProgress === 'success' ? 'bg-olive white' : null
     const placeholderImage = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C55&txt=300%C3%97300&w=300&h=300&txt=Carregue%20uma%20imagem'
     const image = bgImage ? bgImage : (match.goal_image ? match.goal_image : placeholderImage)
 
@@ -50,7 +50,7 @@ class ChoiceCombined extends Component {
         </div>
         <div className="md-col md-col-12 mb1">
           <ReactS3Uploader
-            className={classnames('md-col md-col-12 button', uploadButtonColor)}
+            className={classnames('md-col md-col-12 btn h5 rounded', uploadButtonColor)}
             signingUrl={`${process.env.API_URL}/uploads`}
             accept="image/*"
             onProgress={::this.handleUploadProgress}
