@@ -3,7 +3,7 @@ import { Link, Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 import classnames from 'classnames'
 
-import './tab.scss'
+import './scss/tab.scss'
 
 @reactMixin.decorate(Navigation)
 class Tab extends Component {
@@ -13,10 +13,9 @@ class Tab extends Component {
       <Link
         to={path}
         className={classnames(
-          'tab btn border-only-bottom border-pagenta px0 py2 mr3 inline-block',
-          isActive ? 'h4' : 'regular lightgray'
+          'tab btn border-only-bottom px0 py2 mr3 inline-block',
+          isActive ? 'h4' : null
         )}
-        style={{ borderBottomWidth: isActive ? '3px' : 0 }}
       >
         {text}
       </Link>

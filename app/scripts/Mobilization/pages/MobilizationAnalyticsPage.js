@@ -30,9 +30,9 @@ const MobilizationAnalyticsPage = ({
       Siga os passos abaixo:
     </p>
     <ol className="h5">
-      <li>
+      <li className="link">
         Crie uma conta no Google
-        Analytics <a href="http://www.google.com/analytics/" target="_blank" className="link">
+        Analytics <a href="http://www.google.com/analytics/" target="_blank">
           clicando aqui
         </a>
       </li>
