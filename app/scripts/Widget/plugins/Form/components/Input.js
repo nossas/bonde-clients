@@ -122,7 +122,7 @@ export default class Input extends React.Component {
         onClick={::this.handleClick}>
         <label
           className={classnames(
-            'caps bold mb1 inline-block',
+            'caps bold mb1 inline-block white',
             configurable ? 'darkengray' : null
           )}
           style={{
