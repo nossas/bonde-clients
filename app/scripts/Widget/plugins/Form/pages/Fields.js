@@ -71,15 +71,16 @@ class Fields extends Component {
           className="btn white bg-pagenta caps p2 rounded"
           onClick={::this.handleAddTextField}
           style={{
-            position: 'absolute',
-            top: '1.45rem',
-            right: '2rem',
+            position: 'fixed',
+            top: '2rem',
+            right: '4rem',
+            width: 'inherit',
             textTransform: 'uppercase',
             margin: '0',
+            fontSize: '1.1rem',
             padding: '.7rem 1.6rem'
           }}
         >
-          <i className="fa fa-plus mr2" />
           Adicionar um campo
         </button>
         <SettingsPageContentLayout>
