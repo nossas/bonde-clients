@@ -88,7 +88,7 @@ class UserDashboard extends Component {
               </SidenavList>
             )
           }
-          <SidenavList>
+          <SidenavList style={{ position: 'absolute', bottom: '0' }}>
             <SidenavListItem
               text="Minha Conta"
               icon="user"
