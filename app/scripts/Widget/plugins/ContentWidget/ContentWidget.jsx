@@ -71,14 +71,20 @@ export default class ContentWidget extends React.Component {
       content = settings.content
     }
 
+    const isHTML = typeof content === 'string' && !editable
+
     return (
       <div className={classnames('widget', `${mobilization.header_font}-header`, `${mobilization.body_font}-body`)}>
-        <Editor
-          value={content}
-          theme={theme}
-          readOnly={!editable}
-          handleSave={this.handleSave.bind(this)}
-        />
+        {isHTML ? (
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        ) : (
+          <Editor
+            value={content}
+            theme={theme}
+            readOnly={!editable}
+            handleSave={this.handleSave.bind(this)}
+          />
+        )}
       </div>
     )
   }
