@@ -21,23 +21,11 @@ describe('app/components/Navigation/Tab', () => {
     })
 
     describe('when isActive is false', () => {
-      it('should render a tab with regular and lightgray className', () => {
-        expect(wrapper.props().className).to.have.string('regular lightgray')
-      })
-      it('should render a tab with border-bottom-width as 0', () => {
-        expect(wrapper.props().style.borderBottomWidth).to.be.equal(0)
-      })
-    })
-
-    describe('when isActive is false', () => {
       before(() => {
         wrapper.setProps({ ...props, isActive: true })
       })
       it('should render a tab with h4 className', () => {
         expect(wrapper.props().className).to.have.string('h4')
-      })
-      it('should render a tab with border-bottom-width as 0', () => {
-        expect(wrapper.props().style.borderBottomWidth).to.be.equal('3px')
       })
     })
   })

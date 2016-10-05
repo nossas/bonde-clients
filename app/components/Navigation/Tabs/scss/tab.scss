@@ -1,0 +1,22 @@
+@import '../../../../styles/color-variables';
+
+.tab {
+  border-bottom-width: 3px;
+  border-color: transparent;
+  font-weight: normal;
+  color: $lightGray;
+
+  &:focus {
+    box-shadow: none;
+    border-color: $pagenta;
+  }
+
+  &.active,
+  &.active:hover {
+    border-color: $pagenta;
+  }
+
+  &:hover {
+    border-color: $lightGray;
+  }
+}

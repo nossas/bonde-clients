@@ -108,10 +108,11 @@ form .button { height: 3rem; }
 .border-darken-medium-blue { border-color: $darkenMediumBlue; }
 .border-atomic             { border-color: $atomic; }
 
-.border-darken-1 { border-color: $darken-1; }
-.border-darken-2 { border-color: $darken-2; }
-.border-darken-3 { border-color: $darken-3; }
-.border-darken-4 { border-color: $darken-4; }
+.border-transparent { border-color: transparent; }
+.border-darken-1    { border-color: $darken-1; }
+.border-darken-2    { border-color: $darken-2; }
+.border-darken-3    { border-color: $darken-3; }
+.border-darken-4    { border-color: $darken-4; }
 
 // Additional Border Options
 .border-only-bottom {
