@@ -7,7 +7,7 @@ const MobilizationListItemsHeader = () => (
     <div className="list-items-header-avatar avatar-width left pr3" />
     <i className="list-items-header-more fa fa-ellipsis-h right pr3" />
     <div className="list-items-table-header-container overflow-hidden">
-      <div className="list-items-header-name px3 col col-4">
+      <div className="list-items-header-name px3 col col-6">
         Nome <i className="fa fa-long-arrow-down ml1" />
       </div>
       <div className="list-items-header-created-at px3 col col-2">

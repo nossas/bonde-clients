@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 
-const TRUNCATE_MAX_LENGTH = 50
+const TRUNCATE_MAX_LENGTH = 60
 const truncate = value => `${value.substring(0, TRUNCATE_MAX_LENGTH).trim()}...`
 
 const MobilizationListItemName = ({ name, goal }) => (
-  <div className="list-item-name px3 col col-4">
+  <div className="list-item-name px3 col col-6">
     <div className="table">
       <div className="table-cell align-middle">
         <b className="block mb1">
