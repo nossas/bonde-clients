@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import { bindActionCreators } from 'redux'
-import $ from 'jquery'
 import classnames from 'classnames'
 
 import { WYSIHTMLToolbar, Loading } from '../../../components'
@@ -73,14 +71,20 @@ export default class ContentWidget extends React.Component {
       content = settings.content
     }
 
+    const isHTML = typeof content === 'string' && !editable
+
     return (
-      <div className={classnames('widget', `${mobilization.headerFont}-header`, `${mobilization.bodyFont}-body`)}>
-        <Editor
-          value={content}
-          theme={theme}
-          readOnly={!editable}
-          handleSave={this.handleSave.bind(this)}
-        />
+      <div className={classnames('widget', `${mobilization.header_font}-header`, `${mobilization.body_font}-body`)}>
+        {isHTML ? (
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        ) : (
+          <Editor
+            value={content}
+            theme={theme}
+            readOnly={!editable}
+            handleSave={this.handleSave.bind(this)}
+          />
+        )}
       </div>
     )
   }
