@@ -76,7 +76,7 @@ export default class ContentWidget extends React.Component {
     return (
       <div
         className={classnames(
-          'widget content-widget',
+          'widget content-widget link',
           `${mobilization.header_font}-header`,
           `${mobilization.body_font}-body`
         )}
