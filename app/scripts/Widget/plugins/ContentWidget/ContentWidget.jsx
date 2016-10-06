@@ -57,6 +57,7 @@ export default class ContentWidget extends React.Component {
 
   render() {
     const { editable, mobilization, widget: { settings } } = this.props
+    const { body_font: bodyFont } = mobilization
 
     const theme = (
       mobilization && mobilization.color_scheme ?
@@ -75,11 +76,8 @@ export default class ContentWidget extends React.Component {
 
     return (
       <div
-        className={classnames(
-          'widget content-widget link',
-          `${mobilization.header_font}-header`,
-          `${mobilization.body_font}-body`
-        )}
+        className="widget content-widget link"
+        style={{ fontFamily: bodyFont }}
       >
         {isHTML ? (
           <div dangerouslySetInnerHTML={{ __html: content }} />
