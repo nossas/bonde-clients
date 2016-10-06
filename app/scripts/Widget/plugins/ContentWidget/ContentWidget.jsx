@@ -4,9 +4,9 @@ import classnames from 'classnames'
 
 import { WYSIHTMLToolbar, Loading } from '../../../components'
 import * as WidgetActions from '../../actions'
-
 import Editor from '../../../RebooEditor'
 
+import './scss/content-widget.scss'
 
 export default class ContentWidget extends React.Component {
   static propTypes = {
@@ -74,7 +74,13 @@ export default class ContentWidget extends React.Component {
     const isHTML = typeof content === 'string' && !editable
 
     return (
-      <div className={classnames('widget', `${mobilization.header_font}-header`, `${mobilization.body_font}-body`)}>
+      <div
+        className={classnames(
+          'widget content-widget',
+          `${mobilization.header_font}-header`,
+          `${mobilization.body_font}-body`
+        )}
+      >
         {isHTML ? (
           <div dangerouslySetInnerHTML={{ __html: content }} />
         ) : (
