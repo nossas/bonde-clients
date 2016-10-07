@@ -53,14 +53,7 @@ select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
-.select {
-  background-color: $white;
-  appearance: none;
-}
-
 input, textarea, select {
-  box-sizing: border-box;
-
   &:focus { outline: none; }
 }
 

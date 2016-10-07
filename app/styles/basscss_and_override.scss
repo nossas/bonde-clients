@@ -163,3 +163,13 @@ h1, h2, h3, h4, h5, h6 {
 
 // Image
 img { max-width: 100% }
+
+// Form
+.select {
+  background-color: $white;
+  appearance: none;
+}
+
+.input, .textarea, .select {
+  box-sizing: border-box;
+}
