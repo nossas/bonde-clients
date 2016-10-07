@@ -63,8 +63,7 @@ export default class Input extends React.Component {
           borderRadius: '2px',
           padding: '1rem',
           display: 'inline-block',
-          height: 'inherit',
-          fontSize: '.75rem'
+          height: 'inherit'
         }}
       >
         <option value="">Selecione...</option>
@@ -93,8 +92,7 @@ export default class Input extends React.Component {
             cursor: editable || configurable ? 'pointer' : null,
             borderRadius: '2px',
             padding: '1.5rem 1rem',
-            boxSizing: 'border-box',
-            fontSize: '.75rem'
+            boxSizing: 'border-box'
           }}
           placeholder={field.placeholder}
           type='text'
