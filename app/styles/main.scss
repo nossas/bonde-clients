@@ -19,6 +19,19 @@
 @import './../scripts/components/Editor/color-picker.scss';
 @import './forms.scss';
 
+//
+// Documentation:
+//
+// z-index:
+//    Sidenav          5
+//    NavBar           3
+//    Loading          9
+//    ContentWidget
+//         - Outside   1
+//         - Editor    2
+//         - Toolbar   4
+//
+
 body {
   -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
@@ -46,6 +59,8 @@ select:-webkit-autofill {
 }
 
 input, textarea, select {
+  box-sizing: border-box;
+
   &:focus { outline: none; }
 }
 
