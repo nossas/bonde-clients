@@ -28,7 +28,6 @@ class Toolbar extends Component {
     return (
       <div
         className="toolbar absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap"
-        style={{ zIndex: 10000 }}
       >
         <div>
           {/* InlineStyle buttons */}
