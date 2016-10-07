@@ -34,19 +34,25 @@ export class NewBlockPage extends Component {
       auth,
       selectedColor,
       mobilization,
+      location,
       selectedLayout,
       bgImage,
       uploadedBackgroundImage,
       isBlockBackgroundImageUploading
     } = this.props
     const { color_scheme: colorScheme } = mobilization
+    const newBlockPath = Paths.newMobilizationBlock(mobilization.id)
 
     return (
       <div className="new-block-page col-12 flex flex-column bg-silver gray relative pl4">
         <div className="new-block-header bg-white pt3 pr4 pl5">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
           <Tabs>
-            <Tab text="Blocos em branco" isActive={true} />
+            <Tab
+              path={newBlockPath}
+              text="Blocos em branco"
+              isActive={newBlockPath === location.pathname}
+            />
           </Tabs>
         </div>
 
@@ -169,6 +175,9 @@ NewBlockPage.contextTypes = {
 }
 
 NewBlockPage.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   blocks: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,

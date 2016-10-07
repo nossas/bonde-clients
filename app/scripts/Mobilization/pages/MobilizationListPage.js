@@ -16,7 +16,10 @@ class MobilizationListPage extends Component {
     const { mobilization: { data, loading, loaded } } = this.props
     return (
       <div className="flex-auto bg-silver gray">
-        <MobilizationListHeader redirectToAdd={() => Paths.newMobilization()} />
+        <MobilizationListHeader
+          {...this.props}
+          redirectToAdd={() => Paths.newMobilization()}
+        />
         {(
           loading && !loaded ? <Loading /> :
           <MobilizationList

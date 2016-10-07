@@ -9,9 +9,12 @@ import MobilizationListHeader from '../../components/MobilizationListHeader'
 describe('<MobilizationListHeader />', () => {
   const context = { router: {} }
   let wrapper
+  const props = {
+    location: { pathname: '' }
+  }
 
   beforeEach(() => {
-    wrapper = shallow(<MobilizationListHeader />, { context })
+    wrapper = shallow(<MobilizationListHeader {...props} />, { context })
   })
 
   it('should hide button add mob by default', () => {
