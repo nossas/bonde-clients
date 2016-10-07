@@ -45,10 +45,6 @@ class RebooEditor extends Component {
     }, () => setTimeout(() => ReactDOM.findDOMNode(this.editor).focus()))
   }
 
-  outsideClick() {
-    this.setState({ hasFocus: false })
-  }
-
   onChangeEditorState(editorState) {
     this.setState({ editorState })
   }
@@ -65,7 +61,7 @@ class RebooEditor extends Component {
     return `alignment--${alignment}`
   }
 
-  handleSaveButton() {
+  save() {
     this.props.handleSave(convertToRaw(this.state.editorState.getCurrentContent()))
     this.setState({ hasFocus: false })
   }
@@ -85,19 +81,19 @@ class RebooEditor extends Component {
               buttonClassName="btn white p2"
               popoverClassName="absolute white p2 bg-darken-4 rounded-bottom"
               editorState={this.state.editorState}
-              setEditorState={this.onChangeEditorState.bind(this)}
+              setEditorState={::this.onChangeEditorState}
             />
-            <div className="outside" onClick={this.outsideClick.bind(this)} />
+            <div className="outside" onClick={::this.save} />
           </div>
         ) : null}
         <div className="editor">
-          <div onClick={this.focusEditor.bind(this)}>
+          <div onClick={::this.focusEditor}>
             <Editor
               ref={input => this.editor = input}
               readOnly={readOnly}
               editorState={this.state.editorState}
-              onChange={this.onChangeEditorState.bind(this)}
-              blockStyleFn={this.blockStyleFn.bind(this)}
+              onChange={::this.onChangeEditorState}
+              blockStyleFn={::this.blockStyleFn}
               {...toolbarEditorProps}
             />
           </div>
@@ -105,7 +101,7 @@ class RebooEditor extends Component {
             <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
               <button
                 className="btn caps bg-darken-4 white rounded"
-                onClick={this.handleSaveButton.bind(this)}
+                onClick={::this.save}
               >
                 Salvar
               </button>
