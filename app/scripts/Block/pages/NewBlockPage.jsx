@@ -80,6 +80,7 @@ export class NewBlockPage extends Component {
               <ColorPicker
                 dispatch={dispatch}
                 theme={colorScheme.replace('-scheme', '')}
+                className="left"
               />
               <div
                 className={
