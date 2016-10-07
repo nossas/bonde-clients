@@ -6,7 +6,7 @@ import './scss/block-miniature.scss'
 const isActive = (selected, layout) => JSON.stringify(selected) === JSON.stringify(layout)
 const BlockMiniature = ({ selectedLayout, layout, onClick }) => (
   <div
-    className="block-miniature col col-4 mb3 px1"
+    className="block-miniature col col-3 mb3 px1"
     onClick={onClick}
   >
     <div
