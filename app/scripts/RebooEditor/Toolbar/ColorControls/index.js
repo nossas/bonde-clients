@@ -13,9 +13,14 @@ export default class ColorControls extends Component {
     const { editorState } = nextProps
     if (editorState !== this.props.editorState) {
       const currentStyle = editorState.getCurrentInlineStyle()
-      const color = currentStyle.filter(value => value.startsWith('color#')).last()
+      const color = currentStyle.filter(value => value.startsWith('color')).last()
       if (color) {
-        this.setState({ color: color.replace('color#') })
+        this.setState({
+          color: color
+            .replace('color:')
+            .replace(';', '')
+            .trim()
+          })
       }
     }
   }
@@ -28,7 +33,7 @@ export default class ColorControls extends Component {
       const contentWithColor = Modifier.applyInlineStyle(
         editorState.getCurrentContent(),
         targetSelection,
-        `color#rgba(${color.r},${color.g},${color.b},${color.a})`
+        `color: rgba(${color.r},${color.g},${color.b},${color.a});`
       )
 
       const editorStateWithColor = EditorState.push(editorState, contentWithColor, 'change-inline-style')
@@ -64,9 +69,12 @@ ColorControls.propTypes = {
 
 export const customStyleFn = (style) => {
   const output = {}
-  const color = style.filter(value => value.startsWith('color#')).last()
+  const color = style.filter(value => value.startsWith('color')).last()
   if (color) {
-    output.color = color.replace('color#', '')
+    output.color = color
+      .replace('color:', '')
+      .replace(';', '')
+      .trim()
   }
   return output
 }
