@@ -12,6 +12,7 @@ describe('app/scripts/Block/components/NewBlockPage', () => {
     blocks: {},
     auth: { credentials: {} },
     mobilization: { id: 1, color_scheme: 'meurio-scheme' },
+    location: { pathname: '' }
   }
 
   describe('#render', () => {

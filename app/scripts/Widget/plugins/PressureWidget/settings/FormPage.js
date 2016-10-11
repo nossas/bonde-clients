@@ -31,6 +31,10 @@ const FormPage = ({
     const data = { ...widget, settings: { ...settings, ...values } }
     return editWidgetAsync(data)
   }
+  const {
+    dispatch,
+    mobilization: { color_scheme: colorScheme }
+  } = props
 
   return (
     <PressureBase
@@ -59,7 +63,10 @@ const FormPage = ({
           </FormGroup>
           <FormGroup controlId="main-color-id" {...main_color}>
             <ControlLabel>Cor do formulário</ControlLabel>
-            <ColorPicker />
+            <ColorPicker
+              dispatch={dispatch}
+              theme={colorScheme.replace('-scheme', '')}
+            />
           </FormGroup>
           <FormGroup controlId="show-counter-id" {...show_counter}>
             <ControlLabel>Mostrar contador de pressão</ControlLabel>

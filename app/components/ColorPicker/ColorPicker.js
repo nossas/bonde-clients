@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SketchPicker } from 'react-color'
+import classnames from 'classnames'
 
 import themes from './themes'
 import * as ColorPickerActions from './ColorPickerActions'
@@ -21,14 +22,11 @@ export const ColorPicker = ({
   const colorStrategy = selectedColor ? selectedColor : (hasTheme ? themes[theme][0] : '#333')
 
   return !showColorPicker ? null : (
-    <div className="color-picker-container inline-block">
+    <div className={classnames('color-picker-container', className)}>
       <SketchPicker
-        {...{
-          className,
-          color: color || colorStrategy,
-          onChangeComplete: onChangeColor || defaultAction,
-          presetColors: hasTheme ? themes[theme] : []
-        }}
+        color={color || colorStrategy}
+        onChangeComplete={onChangeColor || defaultAction}
+        presetColors={hasTheme ? themes[theme] : []}
       />
     </div>
   )
@@ -38,7 +36,7 @@ ColorPicker.propTypes = {
   dispatch: PropTypes.func.isRequired,
   showColorPicker: PropTypes.bool.isRequired,
   onChangeColor: PropTypes.func,
-  className: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   theme: PropTypes.string,
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 }

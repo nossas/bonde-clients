@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
+import * as Paths from '../../Paths'
 import { Tabs, Tab } from '../../../components/Navigation'
 
-const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
+const MobilizationListHeader = ({ hideButton, redirectToAdd, location }) => {
+  const activeMobilizationsListPath = Paths.mobilizations()
   return (
     <div className="bg-white pl5 pr4">
       <h1 className="mobilization-list-header m0 table col-12">
@@ -25,14 +27,21 @@ const MobilizationListHeader = ({ hideButton, redirectToAdd }) => {
         )}
       </h1>
       <Tabs>
-        <Tab text="Ativas" isActive={true} />
+        <Tab
+          path={activeMobilizationsListPath}
+          text="Ativas"
+          isActive={activeMobilizationsListPath === location.pathname}
+        />
       </Tabs>
     </div>
   )
 }
 
 MobilizationListHeader.propTypes = {
-  redirectToAdd: PropTypes.func
+  redirectToAdd: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default MobilizationListHeader

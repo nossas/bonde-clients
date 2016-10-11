@@ -91,7 +91,8 @@ export default class Input extends React.Component {
           style={{
             cursor: editable || configurable ? 'pointer' : null,
             borderRadius: '2px',
-            padding: '1.5rem 1rem'
+            padding: '1.5rem 1rem',
+            boxSizing: 'border-box'
           }}
           placeholder={field.placeholder}
           type='text'

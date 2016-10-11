@@ -33,7 +33,7 @@ describe('app/components/ColorPicker/ColorPicker', () => {
     it('should render with "className" prop as custom', () => {
       const customClassName = 'Foo Bar'
       wrapper.setProps({ ...props, className: customClassName })
-      expect(wrapper.children().props().className).to.be.equal(customClassName)
+      expect(wrapper.props().className).to.have.string(customClassName)
     })
     it('should render with "color" prop as custom', () => {
       const customColor = '#666'

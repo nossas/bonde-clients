@@ -19,6 +19,19 @@
 @import './../scripts/components/Editor/color-picker.scss';
 @import './forms.scss';
 
+//
+// Documentation:
+//
+// z-index:
+//    Sidenav          5
+//    NavBar           3
+//    Loading          9
+//    ContentWidget
+//         - Outside   1
+//         - Editor    2
+//         - Toolbar   4
+//
+
 body {
   -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
@@ -31,9 +44,6 @@ body {
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
-  box-sizing: inherit;
-}
 
 input:-webkit-autofill,
 textarea:-webkit-autofill,
@@ -41,11 +51,6 @@ select:-webkit-autofill {
   background: #fff;
   -webkit-text-fill-color: $black !important;
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
-}
-
-.select {
-  background-color: $white;
-  appearance: none;
 }
 
 input, textarea, select {
