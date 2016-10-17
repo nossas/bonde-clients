@@ -7,17 +7,24 @@ import { setMobilizationMoreMenuActiveIndex } from '../MobilizationActions'
 
 import './scss/mobilization-list-item-more.scss'
 
-export const MobilizationListItemMore = ({ mobilizationMoreMenuActiveIndex, index, dispatch }) => (
+export const MobilizationListItemMore = ({
+  mobilizationMoreMenuActiveIndex,
+  index,
+  dispatch,
+  mobilization
+}) => (
   <div className="list-item-more right pr3">
     <i
       className="fa fa-ellipsis-h"
       onClick={(e) => {
-        e.preventDefault()
+        if (e) e.preventDefault()
         dispatch(setMobilizationMoreMenuActiveIndex(index))
-        console.log(e.target)
       }}
     />
-    <MobilizationListItemMoreMenu active={mobilizationMoreMenuActiveIndex === index} />
+    <MobilizationListItemMoreMenu
+      active={mobilizationMoreMenuActiveIndex === index}
+      mobilization={mobilization}
+    />
   </div>
 )
 
