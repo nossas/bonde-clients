@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
@@ -15,8 +16,19 @@ const MobilizationListItemMoreMenu = ({ active, mobilization }) => (
       <i className="fa fa-external-link" />
       <span>Abrir página</span>
     </a>
+    <Link
+      to={Paths.mobilizationTemplatesCreate(mobilization)}
+      className="gray20"
+    >
+      <i className="fa fa-star" />
+      <span>Criar template</span>
+    </Link>
   </div>
 )
+
+MobilizationListItemMoreMenu.contextTypes = {
+  router: PropTypes.object.isRequired
+}
 
 MobilizationListItemMoreMenu.propTypes = {
   active: PropTypes.bool.isRequired
