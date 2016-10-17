@@ -10,7 +10,8 @@ import {
   FINISH_UPLOAD_FACEBOOK_IMAGE,
 
   SET_CURRENT_MOBILIZATION,
-  SET_MOUSE_OVER
+  SET_MOUSE_OVER,
+  SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX
 } from './MobilizationActions'
 
 export const initialState = {
@@ -68,6 +69,11 @@ const MobilizationReducer = (state = initialState, action) => {
       return {
         ...state,
         currentId: action.currentId
+      }
+    case SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX:
+      return {
+        ...state,
+        mobilizationMoreMenuActiveIndex: action.index
       }
     default:
       return state

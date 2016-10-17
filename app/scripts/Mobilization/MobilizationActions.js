@@ -13,6 +13,8 @@ export const EDIT_MOBILIZATION = 'EDIT_MOBILIZATION'
 export const PROGRESS_UPLOAD_FACEBOOK_IMAGE = 'PROGRESS_UPLOAD_FACEBOOK_IMAGE'
 export const FINISH_UPLOAD_FACEBOOK_IMAGE = 'FINISH_UPLOAD_FACEBOOK_IMAGE'
 
+export const SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX = 'SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX'
+
 // Actions
 // TODO: Buscar uma maneira mais clara de fazer isso
 
@@ -81,3 +83,7 @@ export const editMobilizationAsync = (mobilization, next = null) => (dispatch, g
 export const mobilizationsIsLoaded = state => state.mobilization.loaded
 export const progressUploadFacebookImage = () => ({ type: PROGRESS_UPLOAD_FACEBOOK_IMAGE })
 export const finishUploadFacebookImage = () => ({ type: FINISH_UPLOAD_FACEBOOK_IMAGE })
+export const setMobilizationMoreMenuActiveIndex = index => ({
+  type: SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX,
+  index
+})

@@ -23,6 +23,7 @@ class MobilizationListPage extends Component {
         {(
           loading && !loaded ? <Loading /> :
           <MobilizationList
+            {...this.props}
             redirectToEdit={id => Paths.editMobilization(id)}
             mobilizations={data}
           />
