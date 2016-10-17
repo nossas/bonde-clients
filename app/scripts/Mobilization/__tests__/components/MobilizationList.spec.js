@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import MobilizationList from '../../components/MobilizationList'
+import { MobilizationList } from '../../components/MobilizationList'
 
 describe('app/scripts/Mobilization/components/MobilizationList', () => {
   let wrapper

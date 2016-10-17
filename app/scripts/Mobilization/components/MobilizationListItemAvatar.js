@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
 
-const MobilizationListItemAvatar = ({ image, facebook_share_image }) => (
+import './scss/mobilization-list-item-avatar.scss'
+
+const MobilizationListItemAvatar = ({ image, facebook_share_image, imageSize }) => (
   <div className="list-item-avatar left pr3">
     {
       image || facebook_share_image ? (
         <div
           className="avatar-width avatar-height bg-cover bg-center overflow-hidden"
           style={{
-            backgroundImage: `url(${image || facebook_share_image})`
+            backgroundImage: `url(${image || facebook_share_image})`,
+            width: imageSize.width,
+            height: imageSize.height
           }}
         />
       ) : (
@@ -21,7 +25,12 @@ const MobilizationListItemAvatar = ({ image, facebook_share_image }) => (
 
 MobilizationListItemAvatar.propTypes = {
   image: PropTypes.string,
-  facebook_share_image: PropTypes.string
+  facebook_share_image: PropTypes.string,
+  imageSize: PropTypes.shape({ width: PropTypes.string, height: PropTypes.string })
+}
+
+MobilizationListItemAvatar.defaultProps = {
+  imageSize: { width: '90px', height: '90px' }
 }
 
 export default MobilizationListItemAvatar

@@ -30,7 +30,8 @@ export const MobilizationListItemMore = ({
 
 MobilizationListItemMore.propTypes = {
   index: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  mobilization: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
