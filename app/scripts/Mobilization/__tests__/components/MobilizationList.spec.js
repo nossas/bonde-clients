@@ -26,27 +26,5 @@ describe('app/scripts/Mobilization/components/MobilizationList', () => {
         expect(wrapper.find('MobilizationListItemsHeader')).to.have.length(1)
       })
     })
-
-    describe('component MobilizationListItem', () => {
-      let listItem
-      beforeEach(() => {
-        wrapper = shallow(<MobilizationList {...props} />, { context })
-        listItem = wrapper.find('MobilizationListItem')
-      })
-
-      it('should render two MobilizationListItem component', () => {
-        wrapper.setProps({ ...props, mobilizations: [{ id: 1 }, { id: 2 }] })
-        expect(wrapper.find('MobilizationListItem')).to.have.length(2)
-      })
-      it('should render one MobilizationListItem component', () => {
-        expect(listItem).to.have.length(1)
-      })
-      it('should render MobilizationListItem with mobilization prop properly', () => {
-        expect(listItem.props().mobilization).to.be.deep.equal(props.mobilizations[0])
-      })
-      it('should render MobilizationListItem with redirectToEdit prop as a function', () => {
-        expect(listItem.props().redirectToEdit).to.be.a.function
-      })
-    })
   })
 })

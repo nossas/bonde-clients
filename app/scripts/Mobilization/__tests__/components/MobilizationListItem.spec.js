@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationListItem } from '../../components'
+import { MobilizationListItem } from '../../components/MobilizationListItem'
 
 describe('app/scripts/Mobilization/components/MobilizationListItem', () => {
   let wrapper
@@ -21,9 +21,6 @@ describe('app/scripts/Mobilization/components/MobilizationListItem', () => {
     })
     it('should render one MobilizationListItemAvatar component', () => {
       expect(wrapper.find('MobilizationListItemAvatar')).to.have.length(1)
-    })
-    it('should render one MobilizationListItemMore component', () => {
-      expect(wrapper.find('MobilizationListItemMore')).to.have.length(1)
     })
 
     describe('list item table container', () => {
