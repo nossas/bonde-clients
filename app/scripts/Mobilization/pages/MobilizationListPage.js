@@ -4,16 +4,25 @@ import { connect } from 'react-redux'
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
 import { MobilizationList, MobilizationListHeader }  from '../components'
-import { setCurrentMobilizationId } from '../MobilizationActions'
+import {
+  setCurrentMobilizationId,
+  setMobilizationMoreMenuActiveIndex
+} from '../MobilizationActions'
 
-class MobilizationListPage extends Component {
+export class MobilizationListPage extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(setCurrentMobilizationId(null))
+    dispatch(setMobilizationMoreMenuActiveIndex(undefined))
   }
 
   render() {
-    const { mobilization: { data, loading, loaded } } = this.props
+    const {
+      mobilization: { data, loading, loaded },
+      mobilizationMoreMenuActiveIndex,
+      dispatch
+    } = this.props
+
     return (
       <div className="flex-auto bg-silver gray">
         <MobilizationListHeader
@@ -28,6 +37,15 @@ class MobilizationListPage extends Component {
             mobilizations={data}
           />
         )}
+        {
+          typeof mobilizationMoreMenuActiveIndex !== 'undefined' && (
+            <div
+              className="mobilization-list-more-menu-cancel-overlay z1"
+              style={{ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0 }}
+              onClick={() => { dispatch(setMobilizationMoreMenuActiveIndex(undefined)) }}
+            />
+          )
+        }
       </div>
     )
   }
@@ -40,4 +58,8 @@ MobilizationListPage.propTypes = {
   dispatch: PropTypes.func
 }
 
-export default MobilizationListPage
+const mapStateToProps = state => ({
+  mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex
+})
+
+export default connect(mapStateToProps)(MobilizationListPage)

@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import classnames from 'classnames'
 
 import {
   MobilizationListItemAvatar,
@@ -12,9 +14,20 @@ import {
 
 import './scss/mobilization-list-item.scss'
 
-const MobilizationListItem = ({ mobilization, redirectToEdit, index, ...props }) =>
+export const MobilizationListItem = ({
+  ...props,
+  mobilization,
+  redirectToEdit,
+  index,
+  mobilizationMoreMenuActiveIndex
+}) =>
   !mobilization ? null : (
-    <div className="mobilization-list-item bg-white block clearfix hover relative">
+    <div
+      className={classnames(
+        'mobilization-list-item bg-white block clearfix hover relative',
+        { 'z2': mobilizationMoreMenuActiveIndex === index }
+      )}
+    >
       <Link
         className="gray20"
         to={typeof redirectToEdit === 'function' ? redirectToEdit(mobilization.id) : ''}
@@ -37,4 +50,8 @@ MobilizationListItem.propTypes = {
   index: PropTypes.number.isRequired
 }
 
-export default MobilizationListItem
+const mapStateToProps = state => ({
+  mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex
+})
+
+export default connect(mapStateToProps)(MobilizationListItem)

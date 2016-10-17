@@ -23,13 +23,18 @@
 // Documentation:
 //
 // z-index:
-//    Sidenav          5
-//    NavBar           3
-//    Loading          9
+//    Sidenav                   5
+//    NavBar                    3
+//    Loading                   9
+//    MobilizationList
+//         - List Item          1
+//         - Active List Item   2
+//         - More Menu          3
+//         - More Menu Cancel   1
 //    ContentWidget
-//         - Outside   1
-//         - Editor    2
-//         - Toolbar   4
+//         - Outside            1
+//         - Editor             2
+//         - Toolbar            4
 //
 
 body {
