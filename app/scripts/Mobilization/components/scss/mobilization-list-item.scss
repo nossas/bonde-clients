@@ -7,6 +7,8 @@
     box-shadow: 0 0 0 $darken-3;
     transition: box-shadow .2s ease;
 
+    &.hover { opacity: 1 }
+
     &:hover {
       z-index: 1;
       position: relative;
@@ -30,11 +32,6 @@
     .list-item-users,
     .list-item-fund-raising {
       line-height: $avatarHeight;
-    }
-
-    .list-item-more-menu {
-      line-height: $avatarHeight;
-      font-size: 1.5rem;
     }
   }
 }

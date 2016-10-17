@@ -7,26 +7,28 @@ import {
   MobilizationListItemCreatedAt,
   MobilizationListItemUsers,
   MobilizationListItemFundRaising,
-  MobilizationListItemMoreMenu
+  MobilizationListItemMore
 } from './'
 
 import './scss/mobilization-list-item.scss'
 
 const MobilizationListItem = ({ mobilization, redirectToEdit }) => !mobilization ? null : (
-  <Link
-    className="mobilization-list-item bg-white gray20 block clearfix hover"
-    to={typeof redirectToEdit === 'function' ? redirectToEdit(mobilization.id) : ''}
-  >
-    <MobilizationListItemAvatar {...mobilization} />
-    <MobilizationListItemMoreMenu />
+  <div className="mobilization-list-item bg-white block clearfix hover relative">
+    <Link
+      className="gray20"
+      to={typeof redirectToEdit === 'function' ? redirectToEdit(mobilization.id) : ''}
+    >
+      <MobilizationListItemAvatar {...mobilization} />
 
-    <div className="list-item-table-container overflow-hidden">
-      <MobilizationListItemName {...mobilization} />
-      <MobilizationListItemCreatedAt {...mobilization} />
-      <MobilizationListItemUsers {...mobilization} />
-      <MobilizationListItemFundRaising {...mobilization} />
-    </div>
-  </Link>
+      <div className="list-item-table-container overflow-hidden">
+        <MobilizationListItemName {...mobilization} />
+        <MobilizationListItemCreatedAt {...mobilization} />
+        <MobilizationListItemUsers {...mobilization} />
+        <MobilizationListItemFundRaising {...mobilization} />
+      </div>
+    </Link>
+    <MobilizationListItemMore />
+  </div>
 )
 
 MobilizationListItem.propTypes = {

@@ -22,8 +22,8 @@ describe('app/scripts/Mobilization/components/MobilizationListItem', () => {
     it('should render one MobilizationListItemAvatar component', () => {
       expect(wrapper.find('MobilizationListItemAvatar')).to.have.length(1)
     })
-    it('should render one MobilizationListItemMoreMenu component', () => {
-      expect(wrapper.find('MobilizationListItemMoreMenu')).to.have.length(1)
+    it('should render one MobilizationListItemMore component', () => {
+      expect(wrapper.find('MobilizationListItemMore')).to.have.length(1)
     })
 
     describe('list item table container', () => {
