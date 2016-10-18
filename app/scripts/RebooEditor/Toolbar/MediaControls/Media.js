@@ -8,12 +8,14 @@ class Media extends Component {
     const { block } = this.props
 
     const entity = Entity.get(block.getEntityAt(0))
-    const { src } = entity.getData()
+    const { src, ...extraProps } = entity.getData()
     const type = entity.getType()
 
     let media
     if (type === 'image') {
-      media = <img src={src} />
+      media = <img src={src} {...extraProps} />
+    } else if (type == 'iframe') {
+      media = <iframe src={src} {...extraProps} />
     }
 
     return media

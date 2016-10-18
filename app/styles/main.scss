@@ -150,7 +150,7 @@ a.no-underscore {
   .public-DraftStyleDefault-block {
     text-align: left;
   }
-  img {
+  img, iframe {
     float: left;
   }
 }
@@ -159,7 +159,7 @@ a.no-underscore {
   .public-DraftStyleDefault-block {
     text-align: center;
   }
-  img {
+  img, iframe {
     display: block;
     margin: 0 auto;
   }
@@ -168,7 +168,7 @@ a.no-underscore {
   .public-DraftStyleDefault-block {
     text-align: right;
   }
-  img {
+  img, iframe {
     float: right;
   }
 }
