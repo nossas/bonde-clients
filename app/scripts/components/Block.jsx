@@ -330,7 +330,7 @@ export default class Block extends React.Component {
           backgroundColor: isBackgroundObject ? `rgba(${bg.r},${bg.g},${bg.b},${bg.a})` : null
         }}
       >
-        <div className="col-8 mx-auto">
+        <div className="col-10 mx-auto">
           {this.renderColorPicker()}
           <div className="clearfix" style={{ padding: '5em 0' }}>
             {this.renderWidgets(filteredWidgets)}
