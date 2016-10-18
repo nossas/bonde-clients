@@ -11,6 +11,7 @@ describe('<InputTag />', () => {
   const tags = ['Tag 1', 'Tag 2']
   const props = {
     values: tags,
+    label: 'Foo',
     onInsertTag: value => {
       wrapper.setProps({ values: [...tags, value] })
     },
@@ -31,17 +32,23 @@ describe('<InputTag />', () => {
     wrapper = mount(<InputTag {...props} />)
   })
 
-  it('should render error when keyUp Enter and validade return is false', () => {
-    // simulate click with input empty
-    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
+  it('should render one <label> element', () => {
+    expect(wrapper.find('label')).to.have.length(1)
+  })
 
-    expect(wrapper.find('span.red').text()).to.equal('Dismatch error')
+  it('should render one <label> element with its content as passed label prop value', () => {
+    expect(wrapper.find('label').text()).to.be.equal(props.label)
+  })
+
+  it('should render error when keyUp Enter and validade return is false', () => {
+    wrapper.find('input').simulate('keyPress', { charCode: 13 })
+    expect(wrapper.find('.red').text()).to.have.string('Dismatch error')
   })
 
   it('should clean and call onInsertTag when keyUp Enter and validade return is true', () => {
     // simulate click with fill input
     wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
-    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
+    wrapper.find('input').simulate('keyPress', { charCode: 13 })
 
     expect(wrapper.props().values).to.deep.equal(['Tag 1', 'Tag 2', 'Igor Santos <igor@nossascidades.org>'])
     expect(wrapper.instance().state.value).to.equal('')

@@ -3,11 +3,9 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from '../../../Paths'
-
 import { OverlayWidget } from '../../components'
 import { PressureForm, TargetList, PressureCount } from './components'
 import { TellAFriend } from '../../../components'
-
 import { fillWidget } from '../../actions'
 
 /* TODO: Change static content by props
@@ -15,7 +13,6 @@ import { fillWidget } from '../../actions'
  * - bgColor
  */
 export class PressureWidget extends Component {
-
   constructor(props, context) {
     super(props, context)
     this.state = { filled: false }
@@ -27,7 +24,7 @@ export class PressureWidget extends Component {
 
   getTargetList() {
     const { targets } = this.props.widget.settings || { targets: '' }
-    return targets && targets.split(';')
+    return targets && targets.split(';').filter(target => !!target.trim())
   }
 
   getEmailTarget(target) {
@@ -80,31 +77,42 @@ export class PressureWidget extends Component {
     }
 
     return (
-      <OverlayWidget editable={editable} onClick={::this.handleOverlayOnClick}>
+      <OverlayWidget
+        editable={editable}
+        onClick={::this.handleOverlayOnClick}
+        text="Clique para configurar o formulário de pressão direta"
+      >
         {(widget.filled ?
           <TellAFriend {...this.props}
-            message={title_text}
+            message="Pressão enviada"
             href={window.location.origin}
           />
         :
-          <div className={`pressure-widget ${headerFont}-header`}>
-            <h2 className="center py2 px3 m0 white rounded-top" style={{backgroundColor: main_color}}>{title_text}</h2>
+          <div className="pressure-widget">
+            <h2
+              className="center py2 px3 m0 white rounded-top"
+              style={{ backgroundColor: main_color, fontFamily: headerFont }}
+            >
+              {title_text}
+            </h2>
             <TargetList targets={::this.getTargetList() || []} />
             <PressureForm
               buttonText={(saving && !editable ? 'Enviando...' : button_text)}
               buttonColor={main_color}
               subject={pressure_subject}
               body={pressure_body}
-              onSubmit={::this.handleSubmit}>
-              {(show_counter && show_counter === "true" ? <PressureCount value={widget.count || 0} color={main_color} text={count_text} /> : null)}
+              onSubmit={::this.handleSubmit}
+            >
+              {
+                !show_counter || show_counter !== 'true' ? null : (
+                  <PressureCount
+                    value={widget.count || 0}
+                    color={main_color}
+                    text={count_text}
+                  />
+                )
+              }
             </PressureForm>
-            <div className="bg-black mt1 rounded py1 px3">
-              <p className="white m0">
-                Caso você seja o alvo dessa mobilização, dê uma resposta pública
-                 clicando <a href={`mailto:${reply_email}`} target="_blank" style={{color: main_color}}>aqui</a>.
-                 Ela será publicada nesta página.
-              </p>
-            </div>
           </div>
         )}
       </OverlayWidget>

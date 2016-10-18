@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import * as WidgetActions from '../../../actions'
 import { Page, ChoiceCombined } from '../components'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 export default class GoalsPage extends React.Component {
   constructor(props, context) {
@@ -44,14 +45,14 @@ export default class GoalsPage extends React.Component {
     const { settings: { choices1 } } = this.widget()
     const firstChoices = choices1 ? choices1.split(',') : []
 
-    return firstChoices.map((a) => {
-      return <div>
+    return firstChoices.map((a, index) => (
+      <div key={index}>
         <h2>{a}</h2>
         <div className="clearfix">
           { this.renderSecondChoices(a) }
         </div>
       </div>
-    })
+    ))
   }
 
   renderSecondChoices(a) {
@@ -67,7 +68,7 @@ export default class GoalsPage extends React.Component {
         classes: isLast ? ['mb3'] : [],
         handleUploadFinish: this.finishedUploadFile.bind(this)
       }
-      return <ChoiceCombined {...props} />
+      return <ChoiceCombined key={index} {...props} />
     })
   }
 
@@ -76,10 +77,9 @@ export default class GoalsPage extends React.Component {
     const widget = this.widget()
     return(
       <Page mobilization={mobilization} location={location} widget={widget}>
-        <div className="p3 flex-auto overflow-scroll">
-          <h1>Combinações</h1>
-          { this.renderCombineChoices() }
-        </div>
+        <SettingsPageContentLayout>
+          {this.renderCombineChoices()}
+        </SettingsPageContentLayout>
       </Page>
     )
   }

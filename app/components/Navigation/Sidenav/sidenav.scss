@@ -1,0 +1,91 @@
+@import '../../../../node_modules/basscss-sass/scss/colors';
+@import '../../../styles/color-variables';
+
+.sidenav {
+  width: 80px;
+  background-color: $darkblue;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  transition: width .3s ease;
+
+  &:hover {
+    width: 257px;
+  }
+
+  .logo {
+    background-image: url('../../../scripts/pages/Login/logo-nossas.svg');
+    fill: #fff;
+    display: inline-block;
+    width: 95.2380952380952px;
+    height: 40px;
+    margin-left: 8px;
+  }
+
+  .logo-icon {
+    background-image: url('./logo-icon.svg');
+    fill: #fff;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 0 20px;
+  }
+
+  .items-logo {
+    margin-top: 20px;
+    margin-bottom: 5rem;
+
+    .item-content {
+      padding: 0;
+      padding-right: 100%;
+    }
+  }
+
+  .items {
+    padding-left: 0;
+    text-align: center;
+    color: $white;
+
+    .item {
+      display: table;
+      font-weight: 600;
+      position: relative;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+      padding-top: .2rem;
+      padding-bottom: .2rem;
+
+      &:hover {
+        background-color: rgba(255,255,255,.05);
+      }
+
+      .item-icon {
+        display: table-cell;
+        vertical-align: middle;;
+        height: 100%;
+        font-size: 1.3rem;
+        text-align: center;
+
+        i {
+          width: 80px;
+        }
+      }
+
+      .item-content {
+        display: table-cell;
+        white-space: nowrap;
+        padding: 10px 100% 10px 0;
+      }
+
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -1,46 +1,30 @@
 import React from 'react'
-
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import MobilizationList from '../../components/MobilizationList'
 
+describe('app/scripts/Mobilization/components/MobilizationList', () => {
+  let wrapper
+  const context = { router: {} }
+  const props = {
+    mobilizations: [{ id: 1 }],
+    redirectToEdit: () => {}
+  }
 
-describe('<MobilizationList />', () => {
-  let context = { router: {} }
-  let mobilizationList
-
-  beforeEach(() => {
-    mobilizationList = shallow(<MobilizationList />, { context })
+  before(() => {
+    wrapper = shallow(<MobilizationList {...props} />, { context })
   })
 
-  it('should total MobilizationCard render equals mobilization passed', () => {
-    const mobilizations = [
-      {
-        id: 1,
-        name: 'Lorem ipsum'
-      },
-      {
-        id: 2,
-        name: 'Dolor pus'
-      }
-    ]
-    mobilizationList.setProps({mobilizations: mobilizations})
-    expect(mobilizationList.find('MobilizationCard').length).to.equal(2)
-  })
-
-  it('should pass redirectTo to children MobilizationCard', () => {
-    const mobilizations = [
-      {
-        id: 1,
-        name: 'Lorem ipsum'
-      }
-    ]
-    const redirectToEdit = (id) => { return `/${id}` }
-    mobilizationList.setProps({
-      mobilizations: mobilizations,
-      redirectToEdit: redirectToEdit
+  describe('#render', () => {
+    it('should render one div.mobilization-list', () => {
+      expect(wrapper.find('div.mobilization-list')).to.have.length(1)
     })
-    expect(mobilizationList.find('MobilizationCard').props().redirectToEdit).to.equal(redirectToEdit)
+
+    describe('component MobilizationListItemsHeader', () => {
+      it('should render one MobilizationListItemsHeader component', () => {
+        expect(wrapper.find('MobilizationListItemsHeader')).to.have.length(1)
+      })
+    })
   })
 })

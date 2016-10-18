@@ -1,30 +1,49 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import createMiddleware from './clientMiddleware';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import axios from 'axios'
+import thunk from 'redux-thunk'
 
-export default function createApiClientStore(client, data) {
-  const middleware = createMiddleware(client);
-  let finalCreateStore;
+import { Request } from '../api'
+import rootReducer from '../ducks/reducer'
+import createMiddleware from './clientMiddleware'
+
+const getDebugSessionKey = () => {
+  // You can write custom logic here!
+  // By default we try to read the key from ?debug_session=<key> in the address bar
+  const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/)
+  return (matches && matches.length > 0)? matches[1] : null
+}
+
+export default function createApiClientStore(client, initialState) {
+  const request = new Request()
+  const thunkWithExtraArgument = thunk.withExtraArgument(request)
+  const middleware = createMiddleware(client)
+  let enhancer
+
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
-    const { devTools, persistState } = require('redux-devtools');
-    finalCreateStore = compose(
+    const { persistState } = require('redux-devtools')
+    const DevTools = require('./DevTools')
+    enhancer = compose(
+      applyMiddleware(thunkWithExtraArgument),
       applyMiddleware(middleware),
-      devTools(),
-      persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
-      createStore
-    );
+      DevTools.instrument(),
+      persistState(getDebugSessionKey())
+    )(createStore)
   } else {
-    finalCreateStore = applyMiddleware(middleware)(createStore);
+    enhancer = compose(
+      applyMiddleware(thunkWithExtraArgument),
+      applyMiddleware(middleware)
+    )(createStore)
   }
 
-  const reducer = require('../ducks/reducer');
-  const store = finalCreateStore(reducer, data);
-  store.client = client;
+  const store = enhancer(rootReducer, initialState)
+  store.client = client
+  store.request = request
 
   if (__DEVELOPMENT__ && module.hot) {
     module.hot.accept('../ducks/reducer', () => {
-      store.replaceReducer(require('../ducks/reducer'));
-    });
+      store.replaceReducer(require('../ducks/reducer'))
+    })
   }
 
-  return store;
+  return store
 }

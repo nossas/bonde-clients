@@ -5,6 +5,7 @@ node_modules
 =0.0.4
 *.sublime-project
 *.sublime-workspace
+webpack-assets.json
 webpack-stats.json
 static/dist
 .DS_Store

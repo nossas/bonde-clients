@@ -1,26 +1,31 @@
 import React, { PropTypes } from 'react'
 
-import MobilizationCard from './MobilizationCard'
+import {
+  MobilizationListItemsHeader,
+  MobilizationListItem
+} from './'
 
-
-const MobilizationList = ({ mobilizations, redirectToEdit }) => {
-
+const MobilizationList = ({ mobilizations, redirectToEdit, ...props }) => {
   return (
-    <div className="col-6 mx-auto py3 px4">
-      {mobilizations && mobilizations.map((mobilization) => {
-          return <MobilizationCard
-                    key={'mobilization-' + mobilization.id}
-                    redirectToEdit={redirectToEdit}
-                    mobilization={mobilization} />
-        })
-      }
+    <div className="mobilization-list gray20 pl5 pr4 py4 content-box">
+      <MobilizationListItemsHeader />
+
+      {mobilizations && mobilizations.map((mobilization, index) => (
+        <MobilizationListItem
+          {...props}
+          key={`mobilization-${mobilization.id}`}
+          mobilization={mobilization}
+          redirectToEdit={redirectToEdit}
+          index={index}
+        />
+      ))}
     </div>
   )
 }
 
 MobilizationList.propTypes = {
   mobilizations: PropTypes.array.isRequired,
-  redirectToEdit: PropTypes.func
+  redirectToEdit: PropTypes.func.isRequired
 }
 
 export default MobilizationList

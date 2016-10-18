@@ -1,19 +1,7 @@
+export const getMobilization = (state, props = { params: { mobilization_id: null } }) => {
+  const { mobilization: { data: mobilizations, currentId } } = state
+  const { params: { mobilization_id: mobilizationId } } = props
 
-export const getObjectsStateToProps = (globalState) => {
-  const { mobilization: { objects } } = globalState
-  return objects
-}
-
-export const getFormsStateToProps = (globalState, reduxMountPoint) => {
-  const { mobilization: { forms } } = globalState
-  return forms[reduxMountPoint]
-}
-
-export const getMobilization = (globalState, props) => {
-  const { mobilization: { data } } = globalState
-  let { params: { mobilization_id } } = props
-  if (typeof mobilization_id === 'string') {
-    mobilization_id = parseInt(mobilization_id)
-  }
-  return data.filter(mob => mob.id === mobilization_id)[0]
+  const id = currentId ? currentId : parseInt(mobilizationId, 10)
+  return mobilizations.filter(mobilization => mobilization.id === id)[0]
 }

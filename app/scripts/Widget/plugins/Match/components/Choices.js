@@ -1,18 +1,33 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-const Choices = ({ options=[], onChange, title, classNames, disabled }) => {
+const Choices = ({ options=[], onChange, title, className, disabled }) => {
   return (
-    <div className={classnames(classNames)}>
-      <label className="h4 caps bold mb1">{title}*</label>
+    <div className={classnames(className)}>
+      <label
+        className="caps bold mb1"
+        style={{
+          fontSize: '.75rem',
+          fontWeight: 600,
+          marginBottom: '1rem',
+          color: 'white'
+        }}
+      >
+        {title}*
+      </label>
       <select
-        className="choices field-light block full-width h3"
+        className="choices select block col-12"
         disabled={disabled}
         onChange={onChange}>
         <option>Selecione...</option>
-        {options.map(option => {
-          return <option value={option}>{option}</option>
-        })}
+        {options.map((option, index) => (
+          <option
+            key={`choice-${index}`}
+            value={option}
+          >
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   )
@@ -21,9 +36,9 @@ const Choices = ({ options=[], onChange, title, classNames, disabled }) => {
 Choices.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  classNames: PropTypes.array
+  title: PropTypes.string,
+  disabled: PropTypes.bool,
+  className: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
 }
 
 export default Choices

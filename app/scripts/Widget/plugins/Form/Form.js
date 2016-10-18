@@ -11,14 +11,14 @@ import * as Paths from '../../../Paths'
 import * as FormEntryActions from '../../../actions/FormEntryActions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 import { Input, Button } from './components'
+import { OverlayWidget } from '../../components'
 
 @reactMixin.decorate(Navigation)
-
 export default class FormWidget extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
     widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
+    editable: PropTypes.bool,
     configurable: PropTypes.bool,
     hasNewField: PropTypes.bool
   }
@@ -44,15 +44,7 @@ export default class FormWidget extends React.Component {
     return (settings && settings.fields ? settings.fields : [])
   }
 
-  handleMouseEnter() {
-    this.setState({hasMouseOver: true})
-  }
-
-  handleMouseLeave() {
-    this.setState({hasMouseOver: false})
-  }
-
-  handleClick() {
+  handleOverlayOnClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
       this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
@@ -97,12 +89,20 @@ export default class FormWidget extends React.Component {
   }
 
   renderCallToAction() {
-    const { configurable, widget } = this.props
-    let callToAction = widget.settings && widget.settings.call_to_action ? widget.settings.call_to_action : 'Clique para configurar seu formulário...'
-    callToAction = callToAction.replace('\n', '<br/><br/>')
-    if (!configurable) {
-      return <h2 className="mt0 mb3 center" dangerouslySetInnerHTML={{__html: callToAction}} />
-    }
+    const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
+    const callToAction = (
+      widget.settings && widget.settings.call_to_action
+        ? widget.settings.call_to_action
+        : 'Clique para configurar seu formulário...'
+    ).replace('\n', '<br/><br/>')
+
+    return configurable ? null : (
+      <h2
+        className="mt0 mb3 center white"
+        dangerouslySetInnerHTML={{__html: callToAction}}
+        style={{ fontFamily: headerFont }}
+      />
+    )
   }
 
   renderFields() {
@@ -128,10 +128,16 @@ export default class FormWidget extends React.Component {
     if (!configurable) {
       return (
         <Button
-          buttonText={(widget.settings ? (widget.settings.button_text || 'Enviar') : 'Enviar')} {...this.props}
+          {...this.props}
+          buttonText={(
+            widget.settings ?
+            (widget.settings.button_text || 'Enviar') :
+            'Enviar'
+          )}
           handleClick={::this.submit}
           loading={loading}
-          success={success} />
+          success={success}
+        />
       )
     }
   }
@@ -140,7 +146,7 @@ export default class FormWidget extends React.Component {
     const { configurable, widget, mobilization: { body_font: bodyFont }} = this.props
     if (!configurable) {
       return (
-        <div className={classnames('mt2 h3 center', `${bodyFont}-body`)}>
+        <div className="mt2 h3 center white" style={{ fontFamily: bodyFont }}>
           {widget.form_entries_count}
           &nbsp;
           {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
@@ -153,10 +159,12 @@ export default class FormWidget extends React.Component {
     const { editable, configurable } = this.props
     if (editable && !configurable && this.state.hasMouseOver) {
       return (
-        <div
-          className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
-          style={{zIndex: 9998}}>
-          <div className="center full-width white">Clique para editar</div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1">
+          <div className="table full-height col-12 center">
+            <div className="white table-cell align-middle">
+              Clique para editar
+            </div>
+          </div>
         </div>
       )
     }
@@ -191,16 +199,20 @@ export default class FormWidget extends React.Component {
 
   renderForm() {
     const { editable, configurable } = this.props
-    const className = classnames({'p3 bg-darken-3 relative': editable || !configurable})
 
     return (
       <div>
-        <div className={className}>
-          { this.renderCallToAction() }
-          { this.renderFields() }
-          { this.renderErrors() }
-          { this.renderButton() }
-          { this.renderOverlay() }
+        <div
+          className={classnames(
+            'rounded',
+            { 'p3 bg-darken-3 relative': editable || !configurable }
+          )}
+        >
+          {this.renderCallToAction()}
+          {this.renderFields()}
+          {this.renderErrors()}
+          {this.renderButton()}
+          {this.renderOverlay()}
         </div>
       </div>
     )
@@ -215,17 +227,16 @@ export default class FormWidget extends React.Component {
     const { success } = this.state
 
     return (
-      <div>
-        <div
-          className={`widget ${headerFont}-header`}
-          style={(editable ? {cursor: 'pointer'} : null)}
-          onMouseEnter={::this.handleMouseEnter}
-          onMouseLeave={::this.handleMouseLeave}
-          onClick={::this.handleClick}>
-          { success ? this.renderShareButtons() : this.renderForm() }
-          { this.renderCount() }
+      <OverlayWidget
+        editable={editable}
+        onClick={::this.handleOverlayOnClick}
+        text="Clique para configurar o formulário de inscrição"
+      >
+        <div className={`widget ${headerFont}-header`}>
+          {success ? this.renderShareButtons() : this.renderForm()}
+          {this.renderCount()}
         </div>
-      </div>
+      </OverlayWidget>
     )
   }
 }

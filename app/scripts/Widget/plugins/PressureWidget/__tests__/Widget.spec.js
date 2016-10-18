@@ -5,7 +5,7 @@ import { shallow } from 'enzyme'
 import { PressureWidget } from '../Widget'
 
 
-describe('<PressureWidget />', () => {
+describe('app/scripts/Widget/plugins/PressureWidget/Widget', () => {
   let widget
   const props = {
     editable: false,
@@ -19,10 +19,9 @@ describe('<PressureWidget />', () => {
   })
 
   it('should color with main_color, h2, a, PressureForm, PressureCount', () => {
-    widget.setProps({ widget: { id: 1, settings: { main_color: '#fff', show_counter: "true" } } })
+    widget.setProps({ widget: { id: 1, settings: { main_color: '#fff', show_counter: 'true' } } })
 
     expect(widget.find('h2').props().style.backgroundColor).to.equal('#fff')
-    expect(widget.find('a').props().style.color).to.equal('#fff')
     expect(widget.find('PressureForm').props().buttonColor).to.equal('#fff')
     expect(widget.find('PressureCount').props().color).to.equal('#fff')
   })

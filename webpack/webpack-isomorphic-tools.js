@@ -3,7 +3,9 @@ var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 // see this link for more info on what all of this means
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 module.exports = {
-  webpack_assets_file_path: 'webpack-stats.json',
+  // debug: true,
+  webpack_assets_file_path: 'webpack-assets.json',
+  webpack_stats_file_path: 'webpack-stats.json',
 
   assets: {
     images: {
@@ -11,40 +13,56 @@ module.exports = {
         'jpeg',
         'jpg',
         'png',
-        'gif',
-        'svg'
+        'gif'
       ],
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser
+    },
+    fonts: {
+      extensions: [
+        'otf',
+        'woff',
+        'woff2',
+        'eot',
+        'ttf'
+      ],
+      regular_expression: /\.(otf.*|woff.*|eot.*|ttf.*)$/,
+      parser: WebpackIsomorphicToolsPlugin.url_loader_parser
+    },
+    svg: {
+      extension: 'svg',
+      regular_expression: /\.(svg.*)$/,
       parser: WebpackIsomorphicToolsPlugin.url_loader_parser
     },
     style_modules: {
       extension: 'scss',
-      development: true,
-      filter: function(m, regex, options) {
-        if (options.environment === 'production') {
-          return regex.test(m.name);
+      filter: function(module, regex, options, log) {
+        if (options.development) {
+          // in development mode there's webpack "style-loader",
+          // so the module.name is not equal to module.name
+          return WebpackIsomorphicToolsPlugin.style_loader_filter(module, regex, options, log);
+        } else {
+          // in production mode there's no webpack "style-loader",
+          // so the module.name will be equal to the asset path
+          return regex.test(module.name);
         }
-        //filter by modules with '.scss' inside name string, that also have name and moduleName that end with 'ss'(allows for css, less, sass, and scss extensions)
-        //this ensures that the proper scss module is returned, so that namePrefix variable is no longer needed
-        return (regex.test(m.name) && m.name.slice(-2) === 'ss' && m.reasons[0].moduleName.slice(-2) === 'ss');
       },
-      naming: function(m) {
-        //find index of '/src' inside the module name, slice it and resolve path
-        var srcIndex = m.name.indexOf('/src');
-        var name = '.' + m.name.slice(srcIndex);
-        if (name) {
-          // Resolve the e.g.: "C:\"  issue on windows
-          const i = name.indexOf(':');
-          if (i >= 0) {
-            name = name.slice(i + 1);
-          }
+      path: function(module, options, log) {
+        if (options.development) {
+          // in development mode there's webpack "style-loader",
+          // so the module.name is not equal to module.name
+          return WebpackIsomorphicToolsPlugin.style_loader_path_extractor(module, options, log);
+        } else {
+          // in production mode there's no webpack "style-loader",
+          // so the module.name will be equal to the asset path
+          return module.name;
         }
-        return name;
       },
-      parser: function(m, options) {
-        if (m.source) {
-          var regex = options.environment === 'production' ? /module\.exports = ((.|\n)+);/ : /exports\.locals = ((.|\n)+);/;
-          var match = m.source.match(regex);
-          return match ? JSON.parse(match[1]) : {};
+      parser: function(module, options, log) {
+        if (options.development) {
+          return WebpackIsomorphicToolsPlugin.css_modules_loader_parser(module, options, log);
+        } else {
+          // in production mode there's Extract Text Loader which extracts CSS text away
+          return module.source;
         }
       }
     }

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
 class AddChoiceForm extends Component {
   constructor(props) {
@@ -29,52 +30,68 @@ class AddChoiceForm extends Component {
   }
 
   render() {
-    const { title, choices, label, handleChangeLabel, handleRemoveItem } = this.props
+    const {
+      title,
+      choices,
+      label,
+      handleChangeLabel,
+      handleRemoveItem,
+      tabindexTitle,
+      tabindex,
+      className
+    } = this.props
     return (
-      <div className="sm-col sm-col-6">
-        <div className="sm-col sm-col-11">
-          <label>{title}</label>
+      <div className={classnames('sm-col sm-col-6', className)}>
+        <div className="sm-col sm-col-12">
+          <label className="darkengray">{title}</label>
           <input
             type="text"
             placeholder="Label"
             value={label}
-            className="field-light block h3 full-width mt1 mb3"
-            onChange={(e) => { handleChangeLabel(e.target.value) }} />
+            className="input block h3 col-12 mt1 mb3 h5"
+            onChange={e => { handleChangeLabel(e.target.value) }}
+            tabIndex={tabindexTitle}
+          />
         </div>
-        <div className="sm-col sm-col-8">
+        <div className="sm-col sm-col-10 pr2">
           <input
             value={this.state.value}
-            onChange={(e) => {
-              this.setState({ value: e.target.value })
-            }}
+            onChange={e => { this.setState({ value: e.target.value }) }}
             type="text"
-            className="field-light block h3 full-width mt1 mb3"
+            className="input block h3 col-12 mt1 mb3 h5"
             placeholder="Escolha"
-            onKeyPress={e => e.key === 'Enter' ? this.onAddItem(e) : null} />
+            onKeyPress={e => e.key === 'Enter' ? this.onAddItem(e) : null}
+            tabIndex={tabindex}
+          />
         </div>
-        <div className="sm-col sm-col-3">
-          <button className="button bg-aqua caps p2"
-                  disabled={this.state.value.length === 0 ? true : null}
-                  style={{marginTop: "8px"}}
-                  onClick={::this.onAddItem}>
-            <i class="fa fa-plus mr2"></i> Adicionar
+        <div className="sm-col sm-col-2 right-align">
+          <button
+            className="btn caps py2 px1 rounded h5 bg-pagenta white"
+            disabled={!this.state.value.length}
+            style={{ marginTop: '8px' }}
+            onClick={::this.onAddItem}
+          >
+            Adicionar
           </button>
         </div>
-        <table className="choices-block sm-col sm-col-11">
-          <tbody>
-          {choices.map((choice, index) => {
-            return (
-              <tr key={index}>
-                <td><span>{choice}</span></td>
-                <td><a href="#" onClick={(e) => {
-                  if (e) e.preventDefault()
-                  handleRemoveItem(choice)
-                }}>Remover</a></td>
-              </tr>
-            )
-          })}
-          </tbody>
-        </table>
+        <div className="choices-block sm-col sm-col-12">
+          {
+            choices.map((choice, index) => (
+              <div className="col-12 clearfix" key={index}>
+                <div className="col col-10 darkengray">{choice}</div>
+                <div className="col col-2 link center">
+                  <a
+                    href="#"
+                    className="h6 caps"
+                    onClick={e => { if (e) { e.preventDefault() } handleRemoveItem(choice) }}
+                  >
+                    Remover
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
       </div>
     )
   }
@@ -86,7 +103,10 @@ AddChoiceForm.propTypes = {
   choices: PropTypes.array.isRequired,
   handleAddItem: PropTypes.func.isRequired,
   handleRemoveItem: PropTypes.func.isRequired,
-  handleChangeLabel: PropTypes.func.isRequired
+  handleChangeLabel: PropTypes.func.isRequired,
+  tabindexTitle: PropTypes.string,
+  tabindex: PropTypes.string,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 AddChoiceForm.defaultProps = {

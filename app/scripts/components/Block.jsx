@@ -74,22 +74,40 @@ export default class Block extends React.Component {
     if (this.state.editingBackground) {
       return (
         <div>
-          <div className="absolute full-width top-0 left-0 bg-darken-4" style={{zIndex: 9999}}>
-            <ColorPicker {...this.props} selectedClass={this.state.bgClass} onClick={::this.handleColorClick} />
+          <div className="absolute col-12 top-0 bg-darken-4 z5" style={{ left: '80px' }}>
+            <div className="col-7">
+              <ColorPicker
+                {...this.props}
+                selectedClass={this.state.bgClass}
+                onClick={::this.handleColorClick}
+              />
+            </div>
             {this.renderBgImage()}
-            <div className="col col-2 p1" style={{overflow: 'hidden'}}>
+            <div className="col col-2 p1" style={{ overflow: 'hidden' }}>
               {this.renderUploader()}
               {this.renderProgress()}
             </div>
           </div>
-          <div className="absolute right-0 mt2 mr2 nowrap" style={{top: '3em', zIndex: 9999}}>
-            <button className="button button-transparent caps bg-darken-4 white rounded mr1" disabled={!!this.state.uploadProgress} onClick={::this.handleSaveEdit}>Salvar</button>
-            <button className="button button-transparent caps bg-darken-4 white rounded" disabled={!!this.state.uploadProgress} onClick={::this.handleCancelEdit}>Cancelar</button>
+          <div className="absolute right-0 mt2 mr2 nowrap z5" style={{ top: '3em' }}>
+            <button
+              className="btn caps bg-darken-4 white rounded mr1"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleSaveEdit}
+            >
+              Salvar
+            </button>
+            <button
+              className="btn caps bg-darken-4 white rounded"
+              disabled={!!this.state.uploadProgress}
+              onClick={::this.handleCancelEdit}
+            >
+              Cancelar
+            </button>
           </div>
           <div
-            className="fixed top-0 right-0 bottom-0 left-0"
+            className="fixed top-0 right-0 bottom-0 left-0 z4"
             onClick={::this.handleCancelEdit}
-            style={{zIndex: 9998}} />
+          />
         </div>
       )
     }
@@ -112,6 +130,7 @@ export default class Block extends React.Component {
     if (!this.state.uploadProgress) {
       return (
         <ReactS3Uploader
+          className="input border-none white m0 bg-darken-4"
           signingUrl={`${process.env.API_URL}/uploads`}
           accept="image/*"
           onProgress={::this.handleUploadProgress}
@@ -122,11 +141,13 @@ export default class Block extends React.Component {
   }
 
   renderProgress() {
-    if (this.state.uploadProgress) {
-      return (
-        <Progress className="bg-blue" percent={this.state.uploadProgress} />
-      )
-    }
+    return !this.state.uploadProgress ? null : (
+      <Progress
+        className="bg-pagenta full-height rounded"
+        percent={this.state.uploadProgress}
+        style={{ height: '34px' }}
+      />
+    )
   }
 
   renderHiddenTag() {
@@ -143,12 +164,12 @@ export default class Block extends React.Component {
   renderBgImage() {
     if (this.state.bgImage) {
       return (
-        <div>
-          <div className="col col-1 p1">
-            <img src={this.state.bgImage} style={{maxHeight: '36px'}} />
+        <div className="col col-1">
+          <div className="col col-6 p1">
+            <img src={this.state.bgImage} style={{ maxHeight: '36px' }} />
           </div>
-          <div className="col col-1 p1">
-            <button className="button button-transparent bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
+          <div className="col col-6 p1">
+            <button className="btn bg-darken-4 white rounded" onClick={::this.handleClearBgImage}><i className="fa fa-trash" /></button>
           </div>
         </div>
       )
@@ -280,6 +301,13 @@ export default class Block extends React.Component {
     // TODO: change widgets constant name to reflex the object that is returned
     // by the reducer
     const { widgets, block, canMoveUp, canMoveDown } = this.props
+    const {
+      bg_class: bgClass,
+      bg_image: bgImage
+    } = block
+    const isBackgroundClass = /^bg\-\d+/.test(bgClass)
+    const isBackgroundObject = !isBackgroundClass && /^{.*}$/.test(bgClass)
+    const bg = isBackgroundObject ? JSON.parse(bgClass) : null
 
     const filteredWidgets = this.filterWidgets(widgets.data, block)
     const wrapperClassName = classnames(
@@ -289,36 +317,45 @@ export default class Block extends React.Component {
     return (
       <div
         id={'block-' + block.id}
-        className={classnames('clearfix', block.bg_class, (block.bg_image ? 'bg-cover' : null))}
+        className={classnames(
+          'clearfix',
+          isBackgroundClass ? bgClass : null,
+          bgImage ? 'bg-cover' : null
+        )}
         onKeyUp={::this.handleKeyUp}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}
-        style={(block.bg_image ? {backgroundImage: `url(${block.bg_image})`} : null)}>
-        <div className="container">
-          { this.renderColorPicker() }
-          <div className="clearfix" style={{padding: '5em 0'}}>
-            { this.renderWidgets(filteredWidgets) }
+        style={{
+          backgroundImage: bgImage ? `url(${bgImage})` : null,
+          backgroundColor: isBackgroundObject ? `rgba(${bg.r},${bg.g},${bg.b},${bg.a})` : null
+        }}
+      >
+        <div className="col-8 mx-auto">
+          {this.renderColorPicker()}
+          <div className="clearfix" style={{ padding: '5em 0' }}>
+            {this.renderWidgets(filteredWidgets)}
           </div>
           <div className="relative">
-            { this.renderHiddenTag() }
+            {this.renderHiddenTag()}
           </div>
-          { this.renderLoading() }
+          {this.renderLoading()}
           <div className='relative'>
             <DropDownMenu
               wrapperClassName={wrapperClassName}
               menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
-              buttonClassName='button bg-darken-4 white'
-              icon="cog">
+              buttonClassName="btn bg-darken-4 white rounded"
+              icon="cog"
+            >
               <DropDownMenuItem
                 onClick={::this.handleEditBackgroundClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-picture-o" /> Alterar fundo
                 </span>
               </DropDownMenuItem>
               <DropDownMenuItem
                 onClick={::this.handleToggleHiddenClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} />
                   {(block.hidden ? ' Mostrar' : ' Esconder')}
@@ -326,7 +363,7 @@ export default class Block extends React.Component {
               </DropDownMenuItem>
               <DropDownMenuItem
                 onClick={::this.handleRemoveClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-trash" /> Remover
                 </span>
@@ -334,7 +371,7 @@ export default class Block extends React.Component {
               <DropDownMenuItem
                 disabled={!canMoveUp}
                 onClick={::this.handleMoveUpClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-chevron-up" /> Mover para cima
                 </span>
@@ -342,7 +379,7 @@ export default class Block extends React.Component {
               <DropDownMenuItem
                 disabled={!canMoveDown}
                 onClick={::this.handleMoveDownClick}
-                className="button button-transparent">
+                className="btn">
                 <span>
                   <i className="fa fa-chevron-down" /> Mover para baixo
                 </span>

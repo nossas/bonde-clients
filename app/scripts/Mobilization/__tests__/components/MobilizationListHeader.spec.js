@@ -8,30 +8,37 @@ import MobilizationListHeader from '../../components/MobilizationListHeader'
 
 describe('<MobilizationListHeader />', () => {
   const context = { router: {} }
-  let header
+  let wrapper
+  const props = {
+    location: { pathname: '' }
+  }
 
   beforeEach(() => {
-    header = shallow(<MobilizationListHeader />, { context })
+    wrapper = shallow(<MobilizationListHeader {...props} />, { context })
   })
 
   it('should hide button add mob by default', () => {
-    expect(header.find('Link').length).to.equal(0)
+    expect(wrapper.find('Link').length).to.equal(0)
   })
 
   it('should show add button when redirectToAdd pass', () => {
-    header.setProps({
+    wrapper.setProps({
       redirectToAdd: () => {
         return '/mobilization'
       }
     })
-    expect(header.find('Link').length).to.equal(1)
-    expect(header.find('Link').props().to).to.equal('/mobilization')
+    expect(wrapper.find('Link').length).to.equal(1)
+    expect(wrapper.find('Link').props().to).to.equal('/mobilization')
   })
 
   it('should hide add button when redirectToAdd not is passed', () => {
-    header.setProps({
+    wrapper.setProps({
       redirectToAdd: undefined,
     })
-    expect(header.find('Link').length).to.equal(0)
+    expect(wrapper.find('Link').length).to.equal(0)
+  })
+
+  it('should render one <Tabs> component', () => {
+    expect(wrapper.find('Tabs')).to.have.length(1)
   })
 })

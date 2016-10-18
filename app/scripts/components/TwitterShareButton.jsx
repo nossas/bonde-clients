@@ -20,13 +20,14 @@ export default class TwitterShareButton extends React.Component {
     )
   }
 
-  render(){
+  render() {
     return(
       <button
-        ref='button'
-        className='button h3 p3 full-width caps h5 not-rounded'
+        ref="button"
+        className="btn white h3 p3 col-12 caps h5 rounded"
         onClick={::this.handleClick}
-        style={{backgroundColor: '#3DD1F4'}}>
+        style={{backgroundColor: '#3DD1F4'}}
+      >
         Compartilhar no Twitter
       </button>
     )

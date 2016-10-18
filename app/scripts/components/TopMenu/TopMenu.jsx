@@ -16,7 +16,7 @@ export default class TopMenu extends React.Component {
           <DropDownMenu
             wrapperClassName='ml1'
             menuClassName='right-0 bg-topMenu mt2 rounded'
-            buttonClassName='bg-topMenu white button'
+            buttonClassName='bg-topMenu white btn'
             icon="user">
             <DropDownMenuItem
               className='block button button-transparent white p1'

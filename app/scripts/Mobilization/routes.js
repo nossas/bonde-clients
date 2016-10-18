@@ -1,17 +1,7 @@
 import React, { Component } from 'react'
 import { Route, IndexRoute } from 'react-router'
 
-import { MobilizationListPage, WrapperMobilizationApp } from './pages'
-import {
-  NewMobilization,
-  NewBlock,
-  MobilizationFonts,
-  MobilizationBasics,
-  MobilizationCity,
-  MobilizationAnalytics,
-  MobilizationSharing,
-  MobilizationCustomDomain
-} from './../pages'
+import { NewBlockPage } from './../Block/pages'
 
 import {
   UserDashboardContainer,
@@ -21,8 +11,16 @@ import {
 } from './containers'
 
 import {
-  MobilizationBasicsFormPage,
-  MobilizationCityPage,
+  WrapperMobilizationApp,
+  MobilizationListPage,
+  MobilizationBasicsNewFormPage,
+  MobilizationBasicsEditFormPage,
+  MobilizationCityNewPage,
+  MobilizationCityEditPage,
+  MobilizationAnalyticsPage,
+  MobilizationSharingPage,
+  MobilizationCustomDomainPage,
+  MobilizationFontsPage,
   EditMobilizationPage
 } from './pages'
 
@@ -37,21 +35,20 @@ export default (
     <Route path="/" component={MobilizationListPage} />
     {/* TODO: Refactor pages */}
     <Route component={NewMobilizationContainer}>
-      <Route path="/mobilizations/new" component={MobilizationBasicsFormPage} />
-      <Route path="/mobilizations/:mobilization_id/cityNew" component={MobilizationCityPage} />
+      <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
+      <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityNewPage} />
     </Route>
 
     <Route component={MobilizationDashboardContainer}>
-      <Route path="/mobilizations/:mobilization_id/edit" component={EditMobilizationPage} />
-      <Route path="/mobilizations/:mobilization_id/blocks/new" component={NewBlock} />
-      { widgetRoutes(defaultPath) }
-      <Route path="/mobilizations/:mobilization_id/fonts" component={MobilizationFonts} />
+      <Route path={`/${defaultPath}/edit`} component={EditMobilizationPage} />
+      <Route path={`/${defaultPath}/blocks/new`} component={NewBlockPage} />
+      {widgetRoutes(defaultPath)}
       <Route component={MobilizationSettingsContainer} >
-        <Route path="/mobilizations/:mobilization_id/basics" component={MobilizationBasicsFormPage} />
-        <Route path="/mobilizations/:mobilization_id/city" component={MobilizationCity} />
-        <Route path="/mobilizations/:mobilization_id/analytics" component={MobilizationAnalytics} />
-        <Route path="/mobilizations/:mobilization_id/sharing" component={MobilizationSharing} />
-        <Route path="/mobilizations/:mobilization_id/customDomain" component={MobilizationCustomDomain} />
+        <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
+        <Route path={`/${defaultPath}/city`} component={MobilizationCityEditPage} />
+        <Route path={`/${defaultPath}/analytics`} component={MobilizationAnalyticsPage} />
+        <Route path={`/${defaultPath}/sharing`} component={MobilizationSharingPage} />
+        <Route path={`/${defaultPath}/customDomain`} component={MobilizationCustomDomainPage} />
       </Route>
     </Route>
   </Route>

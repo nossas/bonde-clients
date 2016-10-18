@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Loading, TopMenu } from '../../components'
-
 import { fetchMobilizations, mobilizationsIsLoaded } from '../MobilizationActions'
 // TODO: Refactor actions to module
 import { fetchOrganizations, isOrganizationsLoaded } from '../../reducers/organizations'
-
+import * as Paths from '../../Paths'
+import {
+  Sidenav,
+  SidenavList,
+  SidenavListItem
+} from '../../../components/Navigation'
+import { getMobilization } from '../MobilizationSelectors'
 
 class UserDashboard extends Component {
 
@@ -42,10 +46,62 @@ class UserDashboard extends Component {
 
   render() {
     const { children, ...otherProps } = this.props
+    const {
+      mobilization: { currentId },
+      auth: { user }
+    } = otherProps
 
     return (
       <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
-        <TopMenu auth={otherProps.auth} />
+        <Sidenav user={otherProps.auth.user}>
+          {
+            !currentId ? null : (
+              <SidenavList className="bg-lighten-2">
+                <SidenavListItem
+                  linkType="router"
+                  text="Editar mobilização"
+                  icon="pencil"
+                  href={Paths.editMobilization(currentId)}
+                />
+                <SidenavListItem
+                  linkType="router"
+                  text="Adicionar conteúdo"
+                  icon="plus"
+                  href={Paths.newMobilizationBlock(currentId)}
+                />
+                <SidenavListItem
+                  text="Ver em uma nova aba"
+                  icon="external-link"
+                  href={Paths.mobilization(getMobilization(otherProps))}
+                  target="_blank"
+                />
+                <SidenavListItem
+                  linkType="router"
+                  text="Configurações"
+                  icon="cog"
+                  href={Paths.basicsMobilization(currentId)}
+                />
+                {/*<SidenavListItem
+                  text="Lançar mobilização"
+                  icon="flag"
+                />*/}
+              </SidenavList>
+            )
+          }
+          <SidenavList style={{ position: 'absolute', bottom: '0' }}>
+            <SidenavListItem
+              text="Minha Conta"
+              icon="user"
+            >
+              <div className="white h6">{user.email}</div>
+            </SidenavListItem>
+            <SidenavListItem
+              text="Sair"
+              className="caps"
+              href={Paths.logout()}
+            />
+          </SidenavList>
+        </Sidenav>
         {
           React.cloneElement(children, {...otherProps})
         }

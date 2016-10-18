@@ -24,7 +24,7 @@ describe('Color', () => {
         <Color {...props} selectedClass={'bg-black'} />
       )
       const container = ReactDOM.findDOMNode(component).childNodes[0]
-      expect(container.getAttribute('style')).to.contain('box-shadow')
+      expect(container.getAttribute('style')).to.contain('border-width')
     })
   })
 })

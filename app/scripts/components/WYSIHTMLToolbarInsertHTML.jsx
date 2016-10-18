@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 export default class WYSIHTMLToolbarInsertHTML extends React.Component {
   constructor(props, context) {
@@ -13,31 +14,33 @@ export default class WYSIHTMLToolbarInsertHTML extends React.Component {
   handleInsertHTMLClick() {
     // When the insert button is pressed, the insertHTML dialog is not being closed. So we are forcing it
     // by simulating a click in the cancel button
-    React.findDOMNode(this.refs.cancelButton).click()
+    ReactDOM.findDOMNode(this.refs.cancelButton).click()
   }
 
   render(){
     return(
       <div data-wysihtml5-dialog="insertHTMLForm" style={{display: "none"}} className="white p2 bg-darken-3">
-        <label>
+        <label className="col mr1" htmlFor="embed" style={{ lineHeight: '40px' }}>
           Incorporar
-          <input
-            type="text"
-            className="field-light mr2 ml1"
-            value={this.state.insertHTMLContent}
-            onChange={::this.handleInsertHTMLChange} />
         </label>
+        <input
+          type="text"
+          name="embed"
+          className="input mr2 ml1 col col-7"
+          value={this.state.insertHTMLContent}
+          onChange={::this.handleInsertHTMLChange}
+        />
         <a
           data-wysihtml5-command="insertHTML"
           data-wysihtml5-command-value={this.state.insertHTMLContent}
           onClick={::this.handleInsertHTMLClick}
-          className="button button-outline mr1">
+          className="btn btn-outline mr1">
           Inserir
         </a>
         <a
           ref="cancelButton"
           data-wysihtml5-dialog-action="cancel"
-          className="button button-transparent">
+          className="btn btn-transparent">
           Cancelar
         </a>
       </div>

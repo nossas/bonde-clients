@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux'
 import * as Paths from '../../../../Paths'
 import * as WidgetActions from '../../../actions'
 import { Page, AddChoiceForm } from '../components'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 class ChoicesPage extends React.Component {
   constructor(props, context) {
     super(props, context)
-
     const {
       settings: {
         title_text,
@@ -82,17 +82,15 @@ class ChoicesPage extends React.Component {
     const { validForm, errors } = this.isValidForm()
     if (validForm) {
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-      bindedWidgetActions.editWidget({
-        mobilization_id: mobilization.id,
-        widget_id: widget.id,
-        credentials: auth.credentials,
-        widget: { settings: {
+      bindedWidgetActions.editWidgetAsync({
+        ... widget,
+        settings: {
           title_text,
           labelChoices1: labela,
           choices1: choicesa.toString(),
           labelChoicesA: labelb,
           choicesA: choicesb.toString(),
-        }}
+        }
       })
       this.setState({ choicesChanged: false })
       this.context.router.transitionTo(
@@ -159,48 +157,79 @@ class ChoicesPage extends React.Component {
     } = this.state
 
     return(
-      <Page mobilization={mobilization} location={location} widget={widget}>
-        <div className="p3 flex-auto overflow-scroll">
-          <form onSubmit={::this.handleSubmit}>
-            <div className="sm-col sm-col-12">
-              <label for="title_text">Título do bloco de combinações</label>
-              {this.state.errors.isEmptyTitle ? <span className="red ml2">{this.state.errors.isEmptyTitle}</span> : null}
+      <Page
+        mobilization={mobilization}
+        location={location}
+        widget={widget}
+      >
+        <SettingsPageContentLayout>
+          <form
+            className="form-redux transparent btn-float"
+            onSubmit={::this.handleSubmit}
+          >
+            <div className="form-group sm-col sm-col-12">
+              <label htmlFor="title_text">
+                Título do bloco de combinações
+              </label>
+              {
+                !this.state.errors.isEmptyTitle ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptyTitle}</span>
+                )
+              }
               <input
                 id="title_text"
                 type="text"
-                className="field-light block h3 full-width mt1 mb3"
+                className="input block h3 col-12 mt1 mb3 h5"
                 placeholder="Ex.: Combine assuntos e compartilhe memes."
-                style={{height: '48px'}}
+                style={{ height: '48px' }}
                 value={title_text}
-                onChange={::this.handleTitleTextChange} />
+                onChange={::this.handleTitleTextChange}
+                tabIndex="1"
+              />
             </div>
 
-            <div className="clearfix mb3">
-              <AddChoiceForm { ...this.props }
-                title='Lado A'
-                choices={ choicesa }
-                label={ labela }
-                handleChangeLabel={(label) => this.onChangeLabel('labela', label) }
-                handleAddItem={(choice) => this.onAddItem('choicesa', choice)}
-                handleRemoveItem={(choice) => this.onRemoveItem('choicesa', choice)}/>
-              {this.state.errors.isEmptySideA ? <span className="red ml2">{this.state.errors.isEmptySideA}</span> : null}
-              <AddChoiceForm { ...this.props }
+            <div className="form-group clearfix mb3">
+              <AddChoiceForm
+                {...this.props}
+                title="Lado A"
+                choices={choicesa}
+                label={labela}
+                handleChangeLabel={label => this.onChangeLabel('labela', label)}
+                handleAddItem={choice => this.onAddItem('choicesa', choice)}
+                handleRemoveItem={choice => this.onRemoveItem('choicesa', choice)}
+                tabindexTitle="2"
+                tabindex="4"
+                className="pr2"
+              />
+              {
+                !this.state.errors.isEmptySideA ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptySideA}</span>
+                )
+              }
+              <AddChoiceForm {...this.props}
                 title='Lado B'
-                choices={ choicesb }
-                label={ labelb }
-                handleChangeLabel={(label) => this.onChangeLabel('labelb', label) }
-                handleAddItem={(choice) => this.onAddItem('choicesb', choice)}
-                handleRemoveItem={(choice) => this.onRemoveItem('choicesb', choice)}/>
-              {this.state.errors.isEmptySideB ? <span className="red ml2">{this.state.errors.isEmptySideB}</span> : null}
+                choices={choicesb}
+                label={labelb}
+                handleChangeLabel={label => this.onChangeLabel('labelb', label)}
+                handleAddItem={choice => this.onAddItem('choicesb', choice)}
+                handleRemoveItem={choice => this.onRemoveItem('choicesb', choice)}
+                tabindexTitle="3"
+                tabindex="5"
+              />
+              {
+                !this.state.errors.isEmptySideB ? null : (
+                  <span className="red ml2">{this.state.errors.isEmptySideB}</span>
+                )
+              }
             </div>
-            <button
+            <input
               type="submit"
               disabled={this.isDisableButon()}
-              className="button bg-aqua caps p2">
-              Combinar e Salvar
-            </button>
+              className="btn bg-pagenta white caps p2 rounded"
+              value="Combinar e Salvar"
+            />
           </form>
-        </div>
+        </SettingsPageContentLayout>
       </Page>
     )
   }

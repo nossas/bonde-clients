@@ -42,12 +42,12 @@ describe('Match/components/Choices', () => {
     expect(children.at(2).text()).to.equal('Auxílio Terno')
   })
 
-  it('should render one <label>.h4', () => {
-    expect(wrapper.find('label.h4')).to.have.length(1)
+  it('should render one <label>', () => {
+    expect(wrapper.find('label')).to.have.length(1)
   })
 
-  it('should render <label>.h4 with passed title prop', () => {
-    expect(wrapper.find('label.h4').text()).to.have.string(props.title)
+  it('should render <label> with passed title prop', () => {
+    expect(wrapper.find('label').text()).to.have.string(props.title)
   })
 
   it('should disable <select> when passing disabled prop as true', () => {

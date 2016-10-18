@@ -1,19 +1,25 @@
 import React from 'react'
-
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import ShowMobilizationContainer from '../../containers/ShowMobilizationContainer'
 
-
-describe('<ShowMobilizationContainer />', () => {
+describe('app/scripts/Mobilization/containers/ShowMobilizationContainer', () => {
   let props = {
-    mobilization: {}
+    mobilization: {
+      id: 1,
+      name: 'Foo Name',
+      color_scheme: 'Bar Color Scheme',
+      header_font: 'Baz Header Font',
+      body_font: 'Foo Body Font'
+    },
+    widgets: [],
+    editable: false
   }
   let showMobilizationContainer
 
   beforeEach(() => {
-    showMobilizationContainer = mount(<ShowMobilizationContainer {...props} />)
+    showMobilizationContainer = shallow(<ShowMobilizationContainer {...props} />)
   })
 
   it('should render its ok', () => {
@@ -23,6 +29,7 @@ describe('<ShowMobilizationContainer />', () => {
   it('should contain style header and body agree mobilization', () => {
     showMobilizationContainer.setProps({
       mobilization: {
+        ...props.mobilization,
         header_font: 'ubuntu',
         body_font: 'open-sans'
       }
@@ -36,6 +43,7 @@ describe('<ShowMobilizationContainer />', () => {
   it('should contain colorScheme agree mobilization', () => {
     showMobilizationContainer.setProps({
       mobilization: {
+        ...props.mobilization,
         color_scheme: 'meurio-scheme',
       }
     })
@@ -54,7 +62,7 @@ describe('<ShowMobilizationContainer />', () => {
         bg_class: 'bg-1'
       },
     ]
-    showMobilizationContainer.setProps({blocks: blocksProps})
+    showMobilizationContainer.setProps({ widgets: [], blocks: blocksProps })
     const blocks = showMobilizationContainer.find('BlockContainer')
     expect(blocks.length).to.equal(2)
   })

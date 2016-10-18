@@ -9,9 +9,13 @@ var strip = require('strip-loader');
 var relativeAssetsPath = '../static/dist';
 var assetsPath = path.join(__dirname, relativeAssetsPath);
 
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack-isomorphic-tools'))
+var webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
+var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
+
+var webpackUniversalLoaders = require('./universal.loaders.config')
+var webpackUniversalPostCSS = require('./universal.postcss.config')
+var styleModulesRegex = webpackIsomorphicToolsPlugin.regular_expression('style_modules')
 
 module.exports = {
   devtool: 'source-map',
@@ -26,15 +30,21 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel?stage=0&optional=runtime&plugins=typecheck']},
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.(otf.*|woff.*|eot.*|ttf.*|svg.*)$/, loader: 'url?limit=100000' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
-      { test: /\.modernizrrc$/, loader: 'modernizr' }
-    ]
+    loaders: webpackUniversalLoaders
+      .filter(loader => loader.test.toString() !== styleModulesRegex.toString())
+      .concat([
+        {
+          test: styleModulesRegex,
+          loader: ExtractTextPlugin.extract(
+            'style',
+            'css?importLoaders=2&sourceMap'
+              + '!postcss'
+              + '!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+          )
+        },
+      ])
   },
+  postcss: webpackUniversalPostCSS,
   progress: true,
   resolve: {
     modulesDirectories: [
@@ -58,12 +68,6 @@ module.exports = {
 
     // css files from the extract-text-plugin loader
     new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true}),
-    new webpack.DefinePlugin({
-      __CLIENT__: true,
-      __SERVER__: false,
-      __DEVELOPMENT__: false,
-      __DEVTOOLS__: false
-    }),
 
     // ignore dev config
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
@@ -76,8 +80,13 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_URL: JSON.stringify(process.env.API_URL),
         APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
-        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY)
-      }
+        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+        GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY)
+      },
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false
     }),
 
     // optimizations

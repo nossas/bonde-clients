@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
+import './scss/overlay.scss'
 
 class OverlayWidget extends Component {
-
   constructor(props, context) {
     super(props)
     this.context = context
-    this.state = {
-      hasMouseOver: false,
-    }
+    this.state = { hasMouseOver: false }
   }
 
   handleMouseEnter(e) {
@@ -22,20 +20,26 @@ class OverlayWidget extends Component {
   }
 
   render() {
-    const { children, editable, onClick } = this.props
+    const { children, editable, onClick, text } = this.props
     return (
-      <div className="widget relative"
-           style={(editable ? {cursor: 'pointer'} : null)}
-           onMouseEnter={::this.handleMouseEnter}
-           onMouseLeave={::this.handleMouseLeave}
-           onClick={onClick}>
+      <div className="relative"
+        style={editable ? { cursor: 'pointer' } : null}
+        onMouseEnter={::this.handleMouseEnter}
+        onMouseLeave={::this.handleMouseLeave}
+        onClick={onClick}
+      >
         {children}
-        {editable && this.state.hasMouseOver ?
-          <div
-            className="overlay absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold flex flex-center"
-            style={{zIndex: 9998}}>
-            <div className="center full-width white">Clique para editar</div>
-          </div> : null}
+        {
+          !editable || !this.state.hasMouseOver ? null : (
+            <div className="overlay h1 rounded z1 border border-pagenta px2">
+              <div className="table full-height col-12 center">
+                <div className="white table-cell align-middle">
+                  {text || 'Clique para editar'}
+                </div>
+              </div>
+            </div>
+          )
+        }
       </div>
     )
   }
@@ -43,8 +47,12 @@ class OverlayWidget extends Component {
 
 OverlayWidget.propTypes = {
   editable: PropTypes.bool.isRequired,
-  children: PropTypes.object.isRequired,
-  onClick: PropTypes.func
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
+  onClick: PropTypes.func,
+  text: PropTypes.string
 }
 
 OverlayWidget.defaultProps = {

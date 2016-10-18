@@ -5,6 +5,7 @@ import { Loading } from './'
 import { bindActionCreators } from 'redux'
 import * as WidgetActions from './../../../actions'
 
+
 export default class InputForm extends React.Component {
   constructor(props, context) {
     super(props, context)
@@ -59,22 +60,14 @@ export default class InputForm extends React.Component {
   }
 
   updateSettings(newFields) {
-    const { dispatch, mobilization, widget, auth } = this.props
+    const { dispatch, mobilization, widget, auth: { credentials } } = this.props
     const { settings } = widget
     const { fields } = settings
     const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({
-      loading: true
-    })
-    bindedWidgetActions.editWidget({
-      mobilization_id: mobilization.id,
-      widget_id: widget.id,
-      credentials: auth.credentials,
-      widget: { settings: {
-        ...settings,
-        fields: newFields
-      } }
-    })
+    this.setState({ loading: true })
+
+    const data = { ...widget, settings: { ...settings, fields: newFields } }
+    bindedWidgetActions.editWidgetAsync(data)
   }
 
   handleCancel(event) {
@@ -169,44 +162,54 @@ export default class InputForm extends React.Component {
     const { canMoveUp, canMoveDown, uid } = this.props
     return(
       <div>
-        <div id={"form-" + uid} className={classnames("border p2 mb3 bg-white clearfix relative")} style={{zIndex: 9999}}>
+        <div
+          id={`form-${uid}`}
+          className="p2 mb3 bg-white border border-gray94 clearfix relative rounded z5"
+        >
           <div className="col col-6">
-            <div className="flex flex-center mb2">
-              <div className="col col-4">
-                <label className="h5 bold">Título do campo</label>
+            <div className="table col-12 mb2">
+              <div className="col-3 table-cell align-middle">
+                <label className="h5 bold">
+                  Título do campo
+                </label>
               </div>
-              <div className="col col-8">
+              <div className="col-9 table-cell">
                 <input
-                  className="field-light block full-width"
+                  className="input m0"
                   placeholder="Ex: Email"
-                  style={{height: '52px'}}
                   type="text"
                   value={this.state.label}
-                  onChange={::this.handleLabelChange} />
+                  onChange={::this.handleLabelChange}
+                />
               </div>
             </div>
-            <div className="flex flex-center mb2">
-              <div className="col col-4">
-                <label className="h5 bold">Texto de ajuda</label>
+
+            <div className="table col-12 mb2">
+              <div className="col-3 table-cell align-middle">
+                <label className="h5 bold">
+                  Texto de ajuda
+                </label>
               </div>
-              <div className="col col-8">
+              <div className="col-9 table-cell">
                 <input
-                  className="field-light block full-width"
+                  className="input m0"
                   placeholder="Ex: Insira aqui o seu email"
-                  style={{height: '52px'}}
                   type="text"
                   value={this.state.placeholder}
-                  onChange={::this.handlePlaceholderChange} />
+                  onChange={::this.handlePlaceholderChange}
+                />
               </div>
             </div>
-            <div className="flex flex-center mb2">
-              <div className="col col-4">
-                <label className="h5 bold">Tipo de campo</label>
+
+            <div className="table col-12 mb2">
+              <div className="col-3 table-cell align-middle">
+                <label className="h5 bold">
+                  Tipo de campo
+                </label>
               </div>
-              <div className="col col-8">
+              <div className="col-9 table-cell">
                 <select
-                  className="field-light block full-width"
-                  style={{height: '52px'}}
+                  className="select m0"
                   onChange={::this.handleKindChange}
                   value={this.state.kind}>
                   <option value="text">Texto</option>
@@ -217,51 +220,94 @@ export default class InputForm extends React.Component {
                 </select>
               </div>
             </div>
-            <div className="flex flex-center mb2">
-              <div className="col col-4">
-                <label className="h5 bold">Obrigatório</label>
+
+            <div className="table col-12 mb2">
+              <div className="col-3 table-cell align-meiddle">
+                <label className="h5 bold">
+                  Obrigatório
+                </label>
               </div>
-              <div className="col col-8">
-                <input id={"required-true-" + uid} type="radio" name={"required-" + uid} value='true' checked={this.state.required == 'true'} onChange={::this.handleRequiredChange} />
-                <label className="mr2" htmlFor={"required-true-" + uid}>Sim</label>
-                <input id={"required-false-" + uid} type="radio" name={"required-" + uid} value='false' checked={this.state.required == 'false'} onChange={::this.handleRequiredChange} />
-                <label htmlFor={"required-false-" + uid}>Não</label>
+              <div className="col-9 table-cell">
+                <input
+                  id={`required-true-${uid}`}
+                  type="radio"
+                  name={`required-${uid}`}
+                  value="true"
+                  checked={this.state.required == 'true'}
+                  onChange={::this.handleRequiredChange}
+                />
+                <label className="ml1 mr2" htmlFor={`required-true-${uid}`}>Sim</label>
+                <input
+                  id={`required-false-${uid}`}
+                  type="radio"
+                  name={`required-${uid}`}
+                  value="false"
+                  checked={this.state.required == 'false'}
+                  onChange={::this.handleRequiredChange}
+                />
+                <label className="ml1" htmlFor={`required-false-${uid}`}>Não</label>
               </div>
             </div>
           </div>
+
           <div className="col col-6 px3">
             <div>
-              <button disabled={!canMoveUp} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveUp}>
+              <button
+                disabled={!canMoveUp}
+                className="btn btn-no-focus hover"
+                style={{ backgroundColor: 'white' }}
+                onClick={::this.handleMoveUp}
+              >
                 <i className="fa fa-chevron-up mr1" />
                 Mover para cima
               </button>
             </div>
+
             <div>
-              <button disabled={!canMoveDown} className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleMoveDown}>
+              <button
+                disabled={!canMoveDown}
+                className="btn btn-no-focus hover"
+                style={{ backgroundColor: 'white' }}
+                onClick={::this.handleMoveDown}
+              >
                 <i className="fa fa-chevron-down mr1" />
                 Mover para baixo
               </button>
             </div>
+
             <div>
-              <button className="hover" style={{backgroundColor: 'white'}} onClick={::this.handleRemove}>
+              <button
+                className="btn btn-no-focus hover"
+                style={{ backgroundColor: 'white' }}
+                onClick={::this.handleRemove}
+              >
                 <i className="fa fa-trash mr1" />
                 Remover
               </button>
             </div>
+
             <div className="mt1 ml2">
-              <button className="button caps bg-darken-3 p2 mr2" onClick={::this.handleCancel}>
+              <button
+                className="btn white caps bg-darken-3 p2 mr2 rounded"
+                onClick={::this.handleCancel}
+              >
                 Cancelar
               </button>
-              <button disabled={this.state.loading} className="button caps bg-aqua p2 mr2" onClick={::this.handleSave}>
+              <button
+                disabled={this.state.loading}
+                className="btn white caps bg-pagenta p2 mr2 rounded z5"
+                onClick={::this.handleSave}
+              >
                 {this.state.loading ? 'Salvando...' : 'Salvar'}
               </button>
             </div>
           </div>
         </div>
+
         <div
-          className="fixed top-0 right-0 bottom-0 left-0"
+          className="fixed top-0 right-0 bottom-0 left-0 z4"
           onClick={::this.handleOverlayClick}
-          style={{zIndex: 9998}} />
+        />
       </div>
     )
   }

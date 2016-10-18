@@ -56,11 +56,11 @@ export default class NavbarForm extends React.Component {
 
   render() {
     return (
-      <form className='inline-block' onSubmit={::this.submit}>
+      <form className="inline-block" onSubmit={::this.submit}>
         <input
-          type='text'
-          ref='nameInput'
-          className='field-light z2 relative'
+          type="text"
+          ref="nameInput"
+          className="input z2 relative"
           value={this.state.name}
           onChange={::this.handleChangeName}
         />

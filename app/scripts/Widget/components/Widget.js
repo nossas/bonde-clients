@@ -3,8 +3,7 @@ import classnames from 'classnames'
 
 import * as WidgetPlugins from '../plugins'
 
-
-const Widget = ({ widget }) => {
+const Widget = ({ widget, ...rest }) => {
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
   const Wrapper = WidgetPlugins[kind]
 
@@ -20,7 +19,7 @@ const Widget = ({ widget }) => {
   return (
     <div className={className}>
       {Wrapper ?
-        <Wrapper widget={widget} /> :
+        <Wrapper {...rest} widget={widget} /> :
         <span className="red">Widget {widget.kind} not found</span>
       }
     </div>

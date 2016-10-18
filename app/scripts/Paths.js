@@ -6,16 +6,17 @@ export function logout() {
   return `/logout`
 }
 
-export function mobilizations(id) {
+export function mobilizations() {
   return `/`
 }
 
 export function mobilization(mobilization, domain = process.env.APP_DOMAIN) {
-  return (
-    mobilization.custom_domain
+  if (domain.indexOf('staging') !== -1)
+    return `http://${mobilization.slug}.${domain}`
+
+  return mobilization.custom_domain
     ? `http://${mobilization.custom_domain}`
     : `http://${mobilization.slug}.${domain}`
-  )
 }
 
 export function newMobilization() {
@@ -44,10 +45,6 @@ export function sharingMobilization(id) {
 
 export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
-}
-
-export function fontsMobilization(id) {
-  return `/mobilizations/${id}/fonts`
 }
 
 export function customDomainMobilization(id) {

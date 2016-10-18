@@ -6,19 +6,11 @@ import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
 import { Block, Loading, Navbar } from '../../components'
-
 import { fetchWidgets } from '../../Widget/reducer'
+import * as MobilizationActions from '../MobilizationActions'
 
-
-const mapStateToProps = globalState => ({
-  scrolledToBottom: false,
-  widgetsCount: globalState.widgets.length,
-  mobilizationEditor: globalState.mobilizationEditor
-})
-
-@connect(mapStateToProps)
 @reactMixin.decorate(Navigation)
-class EditMobilization extends Component {
+class EditMobilizationPage extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -31,13 +23,19 @@ class EditMobilization extends Component {
     // TODO: Melhorar a chamada desse metódo
     // responsável por recarregar os widgets, trocar action
     // por reducer
-    const {dispatch, mobilization} = this.props
-    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
+    const {
+      mobilization: { id },
+      params: { mobilization_id: mobilizationId },
+      dispatch,
+      setCurrentMobilizationId,
+    } = this.props
+    dispatch(fetchWidgets({mobilization_id: id}))
+    dispatch(setCurrentMobilizationId(mobilizationId))
   }
 
   componentDidUpdate() {
     const { mobilization, blocks, widgets } = this.props
-    if (!this.newBlock() && blocks.data.length === 0 && blocks.loaded === true) {
+    if (blocks.data.length === 0 && blocks.loaded === true) {
       this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
     }
     if (!this.state.scrolledToBottom &&
@@ -97,11 +95,26 @@ class EditMobilization extends Component {
   }
 }
 
-EditMobilization.propTypes = {
+EditMobilizationPage.propTypes = {
   // mapped by MobilizationDashboardContainer
-  mobilization: PropTypes.object.isRequired,
-  blocks: PropTypes.object.isRequired,
-  widgets: PropTypes.object.isRequired
+  mobilization: PropTypes.object,
+  blocks: PropTypes.object,
+  widgets: PropTypes.object,
+  params: PropTypes.object.isRequired,
+  scrolledToBottom: PropTypes.bool.isRequired,
+  widgetsCount: PropTypes.number,
+  mobilizationEditor: PropTypes.object.isRequired,
+  // actions
+  setCurrentMobilizationId: PropTypes.func
 }
 
-export default EditMobilization
+EditMobilizationPage.defaultProps = {
+  scrolledToBottom: false
+}
+
+const mapStateToProps = state => ({
+  widgetsCount: state.widgets.length,
+  mobilizationEditor: state.mobilizationEditor
+})
+
+export default connect(mapStateToProps, MobilizationActions)(EditMobilizationPage)

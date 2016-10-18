@@ -88,19 +88,23 @@ class Match extends Component {
 
     return (
       <OverlayWidget editable={editable} onClick={::this.redirectTo}>
-        <div className={`match-widget p3 bg-darken-3 relative ${headerFont}-header`}>
-          <h2 className="mt0 mb3 center">{title_text}</h2>
+        <div className="match-widget widget form-redux transparent p3 bg-darken-3 relative rounded">
+          <h2 className="mt0 mb3 center white" style={{ fontFamily: headerFont }}>
+            {title_text}
+          </h2>
           <Choices
+            className="form-group"
             title={labelChoices1}
             selected={this.state.numberSelected}
             options={optionsChoices1}
             onChange={(option) => {
               this.setState({ selectedChoice1: option.target.value })
             }}
-            classNames={['mb2']}
+            className="form-group mb2"
           />
           <Choices
             { ...this.props }
+            className="form-group"
             title={labelChoicesA}
             selected={this.state.letterSelected}
             options={optionsChoicesA}
@@ -108,7 +112,7 @@ class Match extends Component {
             onChange={(option) => {
               this.setState({ selectedChoiceA: option.target.value })
             }}
-            classNames={['mb2']}
+            className="form-group mb2"
           />
           <Input
             uid="input-match-firstname"
@@ -139,7 +143,7 @@ class Match extends Component {
           />
           {this.renderErrors()}
           <button
-            className="match caps button bg-darken-4 p2 full-width mt1 mb2"
+            className="match caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white"
             onClick={::this.handleCombineClick}
             disabled={loading || !(this.enableMatchButton())}>
             {loading ? 'Combinando...' : 'Combinar' }

@@ -67,7 +67,7 @@ export default class NavbarEditionWrapper extends React.Component {
       marginTop: '4px'
     }
 
-    const editingButtonsClassName = 'button white bg-darken-4 circle'
+    const editingButtonsClassName = 'btn white bg-darken-4 circle'
 
     const hideButtonClassName = classnames(
       'fa',
@@ -81,14 +81,16 @@ export default class NavbarEditionWrapper extends React.Component {
           <button
             className={editingButtonsClassName}
             style={editingButtonsStyle}
-            onClick={::this.handleEditButtonClick}>
+            onClick={::this.handleEditButtonClick}
+          >
             <i className='fa fa-pencil' />
           </button>
           <button
             ref='hideButton'
             className={editingButtonsClassName}
             style={editingButtonsStyle}
-            onClick={::this.handleHideButtonClick}>
+            onClick={::this.handleHideButtonClick}
+          >
             <i className={hideButtonClassName} />
           </button>
         </div>

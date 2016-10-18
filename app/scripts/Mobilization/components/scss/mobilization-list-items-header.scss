@@ -1,0 +1,19 @@
+@import './_mobilization-list-variables';
+
+.mobilization-list {
+  .mobilization-list-items-header {
+    font-size: .75rem;
+    font-weight: 600;
+
+    .list-items-header-avatar {
+      width: $avatarWidth;
+      height: 1px;
+    }
+
+    .list-items-header-more {
+      font-size: 1.5rem;
+      height: 1px;
+      visibility: hidden;
+    }
+  }
+}
