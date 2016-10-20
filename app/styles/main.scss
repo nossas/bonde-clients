@@ -186,3 +186,17 @@ a.no-underscore {
   transform: rotate(-45deg);
   display: inline-block;
 }
+
+// Media queries
+.lg-show {
+  display: none;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+}
+.lg-hide {
+  display: block;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+}
