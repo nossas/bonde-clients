@@ -15,6 +15,7 @@ var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomo
 
 var webpackUniversalLoaders = require('./universal.loaders.config')
 var webpackUniversalPostCSS = require('./universal.postcss.config')
+var webpackUniversalResolveAlias = require('./universal.resolve-alias.config')
 var styleModulesRegex = webpackIsomorphicToolsPlugin.regular_expression('style_modules')
 
 module.exports = {
@@ -52,9 +53,7 @@ module.exports = {
       'node_modules'
     ],
     extensions: ['', '.json', '.js'],
-    alias: {
-      modernizr$: path.resolve(__dirname, '.modernizrrc')
-    }
+    alias: webpackUniversalResolveAlias,
   },
   node: { fs: 'empty' },
   externals: [

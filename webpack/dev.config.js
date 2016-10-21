@@ -11,6 +11,7 @@ var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomo
 
 var webpackUniversalLoaders = require('./universal.loaders.config')
 var webpackUniversalPostCSS = require('./universal.postcss.config')
+var webpackUniversalResolveAlias = require('./universal.resolve-alias.config')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -39,9 +40,7 @@ module.exports = {
       'node_modules'
     ],
     extensions: ['', '.json', '.js'],
-    alias: {
-      modernizr$: path.resolve(__dirname, '.modernizrrc')
-    }
+    alias: webpackUniversalResolveAlias,
   },
   node: { fs: 'empty' },
   externals: [
