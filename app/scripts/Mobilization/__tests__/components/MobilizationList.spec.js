@@ -6,25 +6,24 @@ import { MobilizationList } from '../../components/MobilizationList'
 
 describe('app/scripts/Mobilization/components/MobilizationList', () => {
   let wrapper
-  const context = { router: {} }
-  const props = {
-    mobilizations: [{ id: 1 }],
-    redirectToEdit: () => {}
-  }
 
   before(() => {
-    wrapper = shallow(<MobilizationList {...props} />, { context })
+    wrapper = shallow(
+      <MobilizationList>
+        <h1>Foo Bar</h1>
+      </MobilizationList>
+    )
   })
 
   describe('#render', () => {
     it('should render one div.mobilization-list', () => {
       expect(wrapper.find('div.mobilization-list')).to.have.length(1)
     })
-
-    describe('component MobilizationListItemsHeader', () => {
-      it('should render one MobilizationListItemsHeader component', () => {
-        expect(wrapper.find('MobilizationListItemsHeader')).to.have.length(1)
-      })
+    it('should render one <h1> children element as passed', () => {
+      expect(wrapper.find('div.mobilization-list h1')).to.have.length(1)
+    })
+    it('should render one <h1> children element with its content properly', () => {
+      expect(wrapper.find('div.mobilization-list h1').text()).to.be.equal('Foo Bar')
     })
   })
 })

@@ -1,13 +1,31 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
-import { MobilizationList, MobilizationListHeader }  from '../components'
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '~Layout'
+import {
+  MobilizationList,
+  MobilizationListHeader,
+  MobilizationListItemsHeader,
+  MobilizationListItem,
+  MobilizationListItemAvatar,
+  MobilizationListItemName,
+  MobilizationListItemCreatedAt,
+  MobilizationListItemUsers,
+  MobilizationListItemFundRaising,
+  MobilizationListItemMore
+}  from '~Mobilization/components'
 import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
-} from '../MobilizationActions'
+} from '~Mobilization/MobilizationActions'
 
 export class MobilizationListPage extends Component {
   componentDidMount() {
@@ -18,24 +36,43 @@ export class MobilizationListPage extends Component {
 
   render() {
     const {
-      mobilization: { data, loading, loaded },
+      mobilization: { data: mobilizations, loading, loaded },
       mobilizationMoreMenuActiveIndex,
       dispatch
     } = this.props
 
     return (
-      <div className="flex-auto bg-silver gray">
-        <MobilizationListHeader
-          {...this.props}
-          redirectToAdd={() => Paths.newMobilization()}
-        />
+      <SettingsPageLayout>
+        <SettingsPageMenuLayout title="Suas Mobilizações">
+          <MobilizationListHeader {...this.props} />
+        </SettingsPageMenuLayout>
         {(
           loading && !loaded ? <Loading /> :
-          <MobilizationList
-            {...this.props}
-            redirectToEdit={id => Paths.editMobilization(id)}
-            mobilizations={data}
-          />
+          <MobilizationList>
+            <MobilizationListItemsHeader />
+
+            {mobilizations && mobilizations.map((mobilization, index) => (
+              <MobilizationListItem
+                key={`mobilization-${mobilization.id}`}
+                className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
+              >
+                <Link
+                  className="gray20"
+                  to={Paths.editMobilization(mobilization.id)}
+                >
+                  <MobilizationListItemAvatar {...mobilization} />
+
+                  <div className="list-item-table-container overflow-hidden">
+                    <MobilizationListItemName {...mobilization} />
+                    <MobilizationListItemCreatedAt {...mobilization} />
+                    <MobilizationListItemUsers {...mobilization} />
+                    <MobilizationListItemFundRaising {...mobilization} />
+                  </div>
+                </Link>
+                <MobilizationListItemMore {...this.props} mobilization={mobilization} index={index} />
+              </MobilizationListItem>
+            ))}
+          </MobilizationList>
         )}
         {
           typeof mobilizationMoreMenuActiveIndex !== 'undefined' && (
@@ -46,7 +83,7 @@ export class MobilizationListPage extends Component {
             />
           )
         }
-      </div>
+      </SettingsPageLayout>
     )
   }
 }
