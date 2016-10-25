@@ -85,4 +85,8 @@ export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/
 
 export const mobilizationTemplatesCreate = mobilization =>
   `/mobilizations/${mobilization.id}/templates/create`
-export const mobilizationTemplatesList = mobilization => '/mobilizations/templates/list'
+export const mobilizationTemplatesList = () => '/mobilizations/templates/list'
+export const mobilizationTemplatesUpdate = templateId =>
+  `/mobilizations/templates/${templateId}/update`
+export const mobilizationTemplatesDestroy = templateId =>
+  `/mobilizations/templates/${templateId}/destroy`

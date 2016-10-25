@@ -25,7 +25,7 @@ const MobilizationListItemMoreMenuAction = ({
 }
 
 MobilizationListItemMoreMenuAction.propTypes = {
-  componentClass: PropTypes.oneOf(['Link', 'a']),
+  componentClass: PropTypes.oneOf(['Link', 'a', 'div']),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,

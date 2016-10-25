@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
+import * as Paths from '../../../../Paths'
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
@@ -16,7 +17,9 @@ import {
   MobilizationListItemCreatedAt,
   MobilizationListItemCopyNumber,
   MobilizationListItemFundRaising,
-  MobilizationListItemMore
+  MobilizationListItemMore,
+  MobilizationListItemMoreMenu,
+  MobilizationListItemMoreMenuAction
 }  from '../../../components/MobilizationList/MobilizationListItem'
 import {
   MobilizationListItemHeader,
@@ -162,7 +165,7 @@ export class MobilizationTemplatesListPage extends Component {
     ]
     return (
       <SettingsPageLayout>
-        <SettingsPageMenuLayout title="Suas Mobilizações@@@@@">
+        <SettingsPageMenuLayout title="Suas Mobilizações">
           <MobilizationsHeader {...this.props} />
         </SettingsPageMenuLayout>
 
@@ -188,7 +191,25 @@ export class MobilizationTemplatesListPage extends Component {
                   <MobilizationListItemCopyNumber {...mobilization} />
                   <MobilizationListItemFundRaising {...mobilization} />
                 </div>
-                <MobilizationListItemMore {...this.props} mobilization={mobilization} index={index} />
+
+                <MobilizationListItemMore dispatch={dispatch} index={index}>
+                  <MobilizationListItemMoreMenu
+                    active={mobilizationMoreMenuActiveIndex === index}
+                  >
+                    <MobilizationListItemMoreMenuAction
+                      componentClass="div"
+                      text="Editar"
+                      path={Paths.mobilizationTemplatesUpdate(1)}
+                      icon="pencil-square-o"
+                    />
+                    <MobilizationListItemMoreMenuAction
+                      componentClass="div"
+                      text="Remover"
+                      path={Paths.mobilizationTemplatesDestroy(1)}
+                      icon="trash-o"
+                    />
+                  </MobilizationListItemMoreMenu>
+                </MobilizationListItemMore>
               </MobilizationListItem>
             ))}
           </MobilizationList>
