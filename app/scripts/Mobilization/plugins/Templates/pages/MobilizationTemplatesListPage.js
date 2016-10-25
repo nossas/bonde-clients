@@ -6,9 +6,9 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '../../../../../components/Layout'
-import { MobilizationsHeader } from '../../../components'
-import MobilizationList from '../../../components/MobilizationList'
+} from '~Layout'
+import { MobilizationsHeader } from '~Mobilization/components'
+import MobilizationList from '~Mobilization/components/MobilizationList'
 import {
   MobilizationListItem,
   MobilizationListItemAvatar,
@@ -17,18 +17,18 @@ import {
   MobilizationListItemCopyNumber,
   MobilizationListItemFundRaising,
   MobilizationListItemMore
-}  from '../../../components/MobilizationList/MobilizationListItem'
+}  from '~Mobilization/components/MobilizationList/MobilizationListItem'
 import {
   MobilizationListItemHeader,
   MobilizationListItemHeaderName,
   MobilizationListItemHeaderCreatedAt,
   MobilizationListItemHeaderCopyNumber,
   MobilizationListItemHeaderFundRaising
-}  from '../../../components/MobilizationList/MobilizationListItemHeader'
+}  from '~Mobilization/components/MobilizationList/MobilizationListItemHeader'
 import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
-} from '../../../MobilizationActions'
+} from '~Mobilization/MobilizationActions'
 
 export class MobilizationTemplatesListPage extends Component {
   componentDidMount() {
@@ -162,7 +162,7 @@ export class MobilizationTemplatesListPage extends Component {
     ]
     return (
       <SettingsPageLayout>
-        <SettingsPageMenuLayout title="Suas Mobilizações">
+        <SettingsPageMenuLayout title="Suas Mobilizações@@@@@">
           <MobilizationsHeader {...this.props} />
         </SettingsPageMenuLayout>
 

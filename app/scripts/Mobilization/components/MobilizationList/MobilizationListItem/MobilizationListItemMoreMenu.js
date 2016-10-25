@@ -3,26 +3,24 @@ import { Link } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../../../../Paths'
+import { MobilizationListItemMoreMenuAction } from './'
 
 import './scss/mobilization-list-item-more-menu.scss'
 
 const MobilizationListItemMoreMenu = ({ active, mobilization }) => (
   <div className={classnames('list-item-more-menu', { 'show': active })}>
-    <a
-      href={Paths.mobilization(mobilization)}
+    <MobilizationListItemMoreMenuAction
+      componentClass="a"
       target="_blank"
-      className="gray20"
-    >
-      <i className="fa fa-external-link" />
-      <span>Abrir página</span>
-    </a>
-    <Link
-      to={Paths.mobilizationTemplatesCreate(mobilization)}
-      className="gray20"
-    >
-      <i className="fa fa-star" />
-      <span>Criar template</span>
-    </Link>
+      text="Abrir página"
+      path={Paths.mobilization(mobilization)}
+      icon="external-link"
+    />
+    <MobilizationListItemMoreMenuAction
+      text="Criar template"
+      path={Paths.mobilizationTemplatesCreate(mobilization)}
+      icon="star"
+    />
   </div>
 )
 

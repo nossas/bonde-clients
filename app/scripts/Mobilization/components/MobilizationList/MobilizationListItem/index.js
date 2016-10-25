@@ -6,4 +6,5 @@ export { default as MobilizationListItemUsers } from './MobilizationListItemUser
 export { default as MobilizationListItemFundRaising } from './MobilizationListItemFundRaising'
 export { default as MobilizationListItemMore } from './MobilizationListItemMore'
 export { default as MobilizationListItemMoreMenu } from './MobilizationListItemMoreMenu'
+export { default as MobilizationListItemMoreMenuAction } from './MobilizationListItemMoreMenuAction'
 export { default as MobilizationListItemCopyNumber } from './MobilizationListItemCopyNumber'
