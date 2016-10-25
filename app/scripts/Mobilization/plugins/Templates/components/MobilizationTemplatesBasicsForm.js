@@ -15,7 +15,7 @@ import {
 import {
   MobilizationListItemAvatar,
   MobilizationListItemName
-} from '../../../components'
+} from '../../../components/MobilizationList/MobilizationListItem'
 
 @reactMixin.decorate(Navigation)
 export class MobilizationTemplatesBasicsForm extends Component {
@@ -48,7 +48,7 @@ export class MobilizationTemplatesBasicsForm extends Component {
           <MobilizationListItemName
             {...mobilization}
             className="lg-col-8 darkengray"
-            style={{ padding: 0, paddingTop: '20px', fontSize: '1.1rem' }}
+            style={{ padding: 0, paddingTop: '15px', fontSize: '1.1rem' }}
           />
         </div>
 
@@ -107,13 +107,13 @@ const fields = ['name', 'description']
 const validate = values => {
   const errors = {}
   if (!values.name) {
-    errors.name = 'Insira o nome da mobilização'
+    errors.name = 'Insira o nome do seu template'
   } else if (values.name.length > 100) {
-    errors.name = 'Seu título está muito longo!'
+    errors.name = 'O nome do seu template está muito longo!'
   }
 
   if (!values.description) {
-    errors.description = 'Insira o objetivo da mobilização'
+    errors.description = 'Insira a descrição do seu template'
   } else if (values.description.length > 500) {
     errors.description = 'O limite de caracteres foi atingido.'
   }
