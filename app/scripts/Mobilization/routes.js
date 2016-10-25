@@ -39,6 +39,7 @@ export default (
     <Route component={NewMobilizationContainer}>
       <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
       <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityNewPage} />
+      {mobilizationTemplatesRoutes.newMobilization(defaultPath)}
     </Route>
 
     <Route component={MobilizationDashboardContainer}>

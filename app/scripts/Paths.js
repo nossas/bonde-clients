@@ -90,3 +90,5 @@ export const mobilizationTemplatesUpdate = templateId =>
   `/mobilizations/templates/${templateId}/update`
 export const mobilizationTemplatesDestroy = templateId =>
   `/mobilizations/templates/${templateId}/destroy`
+export const mobilizationTemplatesChoose = mobilization =>
+  `/mobilizations/${mobilization.id}/templates/choose`
