@@ -19,7 +19,8 @@ import {
   MobilizationListItemCreatedAt,
   MobilizationListItemUsers,
   MobilizationListItemFundRaising,
-  MobilizationListItemMore
+  MobilizationListItemMore,
+  MobilizationListItemMoreMenu
 }  from '../components/MobilizationList/MobilizationListItem'
 import {
   MobilizationListItemHeader,
@@ -82,7 +83,12 @@ export class MobilizationListPage extends Component {
                       <MobilizationListItemFundRaising {...mobilization} />
                     </div>
                   </Link>
-                  <MobilizationListItemMore {...this.props} mobilization={mobilization} index={index} />
+                  <MobilizationListItemMore dispatch={dispatch} index={index}>
+                    <MobilizationListItemMoreMenu
+                      active={mobilizationMoreMenuActiveIndex === index}
+                      mobilization={mobilization}
+                    />
+                  </MobilizationListItemMore>
                 </MobilizationListItem>
               ))}
             </MobilizationList>

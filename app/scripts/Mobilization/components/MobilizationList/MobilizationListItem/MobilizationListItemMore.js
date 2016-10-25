@@ -1,20 +1,10 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import classnames from 'classnames'
 
-import {
-  MobilizationListItemMoreMenu
-} from '~Mobilization/components/MobilizationList/MobilizationListItem'
-import { setMobilizationMoreMenuActiveIndex } from '~Mobilization/MobilizationActions'
+import { setMobilizationMoreMenuActiveIndex } from '../../../MobilizationActions'
 
 import './scss/mobilization-list-item-more.scss'
 
-export const MobilizationListItemMore = ({
-  mobilizationMoreMenuActiveIndex,
-  index,
-  dispatch,
-  mobilization
-}) => (
+export const MobilizationListItemMore = ({ index, dispatch, children }) => (
   <div className="list-item-more right pr3">
     <i
       className="fa fa-ellipsis-h"
@@ -23,21 +13,14 @@ export const MobilizationListItemMore = ({
         dispatch(setMobilizationMoreMenuActiveIndex(index))
       }}
     />
-    <MobilizationListItemMoreMenu
-      active={mobilizationMoreMenuActiveIndex === index}
-      mobilization={mobilization}
-    />
+    {children}
   </div>
 )
 
 MobilizationListItemMore.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   index: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  mobilization: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-  mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex
-})
-
-export default connect(mapStateToProps)(MobilizationListItemMore)
+export default MobilizationListItemMore
