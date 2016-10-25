@@ -10,10 +10,9 @@ import {
   SettingsPageMenuLayout,
   SettingsPageContentLayout
 } from '~Layout'
+import { MobilizationsHeader } from '~Mobilization/components'
+import MobilizationList from '~Mobilization/components/MobilizationList'
 import {
-  MobilizationList,
-  MobilizationListHeader,
-  MobilizationListItemsHeader,
   MobilizationListItem,
   MobilizationListItemAvatar,
   MobilizationListItemName,
@@ -21,7 +20,14 @@ import {
   MobilizationListItemUsers,
   MobilizationListItemFundRaising,
   MobilizationListItemMore
-}  from '~Mobilization/components'
+}  from '~Mobilization/components/MobilizationList/MobilizationListItem'
+import {
+  MobilizationListItemHeader,
+  MobilizationListItemHeaderName,
+  MobilizationListItemHeaderCreatedAt,
+  MobilizationListItemHeaderUsers,
+  MobilizationListItemHeaderFundRaising
+}  from '~Mobilization/components/MobilizationList/MobilizationListItemHeader'
 import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
@@ -44,36 +50,44 @@ export class MobilizationListPage extends Component {
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title="Suas Mobilizações">
-          <MobilizationListHeader {...this.props} />
+          <MobilizationsHeader {...this.props} />
         </SettingsPageMenuLayout>
-        {(
-          loading && !loaded ? <Loading /> :
-          <MobilizationList>
-            <MobilizationListItemsHeader />
 
-            {mobilizations && mobilizations.map((mobilization, index) => (
-              <MobilizationListItem
-                key={`mobilization-${mobilization.id}`}
-                className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
-              >
-                <Link
-                  className="gray20"
-                  to={Paths.editMobilization(mobilization.id)}
+        <SettingsPageContentLayout containerClassName="lg-col-12">
+          {(
+            loading && !loaded ? <Loading /> :
+            <MobilizationList>
+              <MobilizationListItemHeader>
+                <MobilizationListItemHeaderName />
+                <MobilizationListItemHeaderCreatedAt />
+                <MobilizationListItemHeaderUsers />
+                <MobilizationListItemHeaderFundRaising />
+              </MobilizationListItemHeader>
+
+              {mobilizations && mobilizations.map((mobilization, index) => (
+                <MobilizationListItem
+                  key={`mobilization-${mobilization.id}`}
+                  className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
                 >
-                  <MobilizationListItemAvatar {...mobilization} />
+                  <Link
+                    className="gray20"
+                    to={Paths.editMobilization(mobilization.id)}
+                  >
+                    <MobilizationListItemAvatar {...mobilization} />
 
-                  <div className="list-item-table-container overflow-hidden">
-                    <MobilizationListItemName {...mobilization} />
-                    <MobilizationListItemCreatedAt {...mobilization} />
-                    <MobilizationListItemUsers {...mobilization} />
-                    <MobilizationListItemFundRaising {...mobilization} />
-                  </div>
-                </Link>
-                <MobilizationListItemMore {...this.props} mobilization={mobilization} index={index} />
-              </MobilizationListItem>
-            ))}
-          </MobilizationList>
-        )}
+                    <div className="list-item-table-container overflow-hidden">
+                      <MobilizationListItemName {...mobilization} />
+                      <MobilizationListItemCreatedAt {...mobilization} />
+                      <MobilizationListItemUsers {...mobilization} />
+                      <MobilizationListItemFundRaising {...mobilization} />
+                    </div>
+                  </Link>
+                  <MobilizationListItemMore {...this.props} mobilization={mobilization} index={index} />
+                </MobilizationListItem>
+              ))}
+            </MobilizationList>
+          )}
+        </SettingsPageContentLayout>
         {
           typeof mobilizationMoreMenuActiveIndex !== 'undefined' && (
             <div

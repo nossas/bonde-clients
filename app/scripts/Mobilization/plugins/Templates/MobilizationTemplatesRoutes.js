@@ -2,15 +2,21 @@ import React from 'react'
 import { Route } from 'react-router'
 
 import {
-  MobilizationTemplatesCreatePage
+  MobilizationTemplatesCreatePage,
+  MobilizationTemplatesListPage
 } from './pages'
 
 const path = '/templates'
 const param = '/:template_id'
 const defaultPath = `${path}${param}`
 
-const MobilizationTemplatesRoutes = parent => [
-  <Route path={`/${parent}/${path}/create`} component={MobilizationTemplatesCreatePage} />
-]
+const MobilizationTemplatesRoutes = {
+  user: parent => [
+    <Route path={`/mobilizations/${path}/list`} component={MobilizationTemplatesListPage} />
+  ],
+  dashboard: parent => [
+    <Route path={`/${parent}/${path}/create`} component={MobilizationTemplatesCreatePage} />
+  ]
+}
 
 export default MobilizationTemplatesRoutes

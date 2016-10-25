@@ -200,3 +200,13 @@ a.no-underscore {
     display: none;
   }
 }
+
+// Button
+.float-button {
+  position: fixed;
+  top: 2rem;
+  right: 4rem;
+  width: inherit;
+  text-transform: uppercase;
+  margin: 0;
+}

@@ -34,6 +34,7 @@ const defaultPath = `${path}${param}`
 export default (
   <Route component={UserDashboardContainer}>
     <Route path="/" component={MobilizationListPage} />
+    {mobilizationTemplatesRoutes.user(path)}
     {/* TODO: Refactor pages */}
     <Route component={NewMobilizationContainer}>
       <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
@@ -43,7 +44,7 @@ export default (
     <Route component={MobilizationDashboardContainer}>
       <Route path={`/${defaultPath}/edit`} component={EditMobilizationPage} />
       <Route path={`/${defaultPath}/blocks/new`} component={NewBlockPage} />
-      {mobilizationTemplatesRoutes(defaultPath)}
+      {mobilizationTemplatesRoutes.dashboard(defaultPath)}
       {widgetRoutes(defaultPath)}
       <Route component={MobilizationSettingsContainer} >
         <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
