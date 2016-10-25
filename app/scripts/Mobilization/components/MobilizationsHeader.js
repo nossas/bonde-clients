@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import * as Paths from '~scripts/Paths'
-import { Tabs, Tab } from '~Navigation'
+import * as Paths from '../../Paths'
+import { Tabs, Tab } from '../../../components/Navigation'
 
 const MobilizationsHeader = ({ location, mobilization }) => {
   const activeMobilizationsListPath = Paths.mobilizations()

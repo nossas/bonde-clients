@@ -9,9 +9,9 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~Layout'
-import { MobilizationsHeader } from '~Mobilization/components'
-import MobilizationList from '~Mobilization/components/MobilizationList'
+} from '../../../components/Layout'
+import { MobilizationsHeader } from '../components'
+import MobilizationList from '../components/MobilizationList'
 import {
   MobilizationListItem,
   MobilizationListItemAvatar,
@@ -20,18 +20,18 @@ import {
   MobilizationListItemUsers,
   MobilizationListItemFundRaising,
   MobilizationListItemMore
-}  from '~Mobilization/components/MobilizationList/MobilizationListItem'
+}  from '../components/MobilizationList/MobilizationListItem'
 import {
   MobilizationListItemHeader,
   MobilizationListItemHeaderName,
   MobilizationListItemHeaderCreatedAt,
   MobilizationListItemHeaderUsers,
   MobilizationListItemHeaderFundRaising
-}  from '~Mobilization/components/MobilizationList/MobilizationListItemHeader'
+}  from '../components/MobilizationList/MobilizationListItemHeader'
 import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
-} from '~Mobilization/MobilizationActions'
+} from '../MobilizationActions'
 
 export class MobilizationListPage extends Component {
   componentDidMount() {

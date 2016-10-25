@@ -4,8 +4,8 @@ import classnames from 'classnames'
 
 import {
   MobilizationListItemMoreMenu
-} from '~Mobilization/components/MobilizationList/MobilizationListItem'
-import { setMobilizationMoreMenuActiveIndex } from '~Mobilization/MobilizationActions'
+} from '../../../components/MobilizationList/MobilizationListItem'
+import { setMobilizationMoreMenuActiveIndex } from '../../../MobilizationActions'
 
 import './scss/mobilization-list-item-more.scss'
 
