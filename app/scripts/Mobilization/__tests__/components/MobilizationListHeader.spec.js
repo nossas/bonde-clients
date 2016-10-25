@@ -2,9 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import MobilizationListHeader from '../../components/MobilizationListHeader'
+import MobilizationsHeader from '../../components/MobilizationsHeader'
 
-describe('app/scripts/Mobilization/components/MobilizationListHeader', () => {
+describe('app/scripts/Mobilization/components/MobilizationsHeader', () => {
   const context = { router: {} }
   let wrapper
   const props = {
@@ -13,7 +13,7 @@ describe('app/scripts/Mobilization/components/MobilizationListHeader', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<MobilizationListHeader {...props} />, { context })
+    wrapper = shallow(<MobilizationsHeader {...props} />, { context })
   })
 
   describe('#render', () => {

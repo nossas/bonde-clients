@@ -1,16 +1,16 @@
-@import './_mobilization-list-variables';
+@import '../_mobilization-list-variables';
 
 .mobilization-list {
-  .mobilization-list-items-header {
+  .mobilization-list-item-header {
     font-size: .75rem;
     font-weight: 600;
 
-    .list-items-header-avatar {
+    .list-item-header-avatar {
       width: $avatarWidth;
       height: 1px;
     }
 
-    .list-items-header-more {
+    .list-item-header-more {
       font-size: 1.5rem;
       height: 1px;
       visibility: hidden;

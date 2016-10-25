@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import { MobilizationListItemMoreMenu } from './'
-import { setMobilizationMoreMenuActiveIndex } from '../MobilizationActions'
+import {
+  MobilizationListItemMoreMenu
+} from '~Mobilization/components/MobilizationList/MobilizationListItem'
+import { setMobilizationMoreMenuActiveIndex } from '~Mobilization/MobilizationActions'
 
 import './scss/mobilization-list-item-more.scss'
 

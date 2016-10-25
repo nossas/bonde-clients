@@ -1,5 +1,5 @@
-@import '../../../../../node_modules/basscss-sass/scss/darken';
-@import './_mobilization-list-variables';
+@import '../../../../../../../node_modules/basscss-sass/scss/darken';
+@import '../../_mobilization-list-variables';
 
 .mobilization-list {
   .mobilization-list-item {
@@ -13,19 +13,6 @@
       z-index: 2;
       position: relative;
       box-shadow: 0 0 10px $darken-3;
-    }
-
-    .avatar-width  { width  : $avatarWidth; }
-    .avatar-height { height : $avatarHeight; }
-
-    .list-item-avatar {
-      .fa-picture-o { font-size: 3rem; }
-    }
-
-    .list-item-name {
-      font-size: .95vw;
-
-      .table { height: $avatarHeight; }
     }
 
     .list-item-created-at,

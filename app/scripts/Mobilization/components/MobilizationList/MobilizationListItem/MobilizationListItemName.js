@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
+import './scss/mobilization-list-item-name.scss'
+
 const TRUNCATE_MAX_LENGTH = 60
 const truncate = value => `${value.substring(0, TRUNCATE_MAX_LENGTH).trim()}...`
 

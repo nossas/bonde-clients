@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import * as Paths from '../../Paths'
-import { Tabs, Tab } from '../../../components/Navigation'
+import * as Paths from '~scripts/Paths'
+import { Tabs, Tab } from '~Navigation'
 
-const MobilizationListHeader = ({ location, mobilization }) => {
+const MobilizationsHeader = ({ location, mobilization }) => {
   const activeMobilizationsListPath = Paths.mobilizations()
   const mobilizationsTemplatesListPath = Paths.mobilizationTemplatesList(mobilization)
   return (
@@ -32,9 +32,9 @@ const MobilizationListHeader = ({ location, mobilization }) => {
   )
 }
 
-MobilizationListHeader.propTypes = {
+MobilizationsHeader.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
   mobilization: PropTypes.object.isRequired
 }
 
-export default MobilizationListHeader
+export default MobilizationsHeader
