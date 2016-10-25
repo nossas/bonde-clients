@@ -6,7 +6,7 @@ class FormDropdown extends Component {
   render() {
     const formGroup = this.context.$formGroup
     const { controlId, ...field } = formGroup || {}
-    const { ...props, className, children } = this.props
+    const { className, children, ...props } = this.props
 
     return (
       <select
