@@ -7,20 +7,9 @@ import { MobilizationListItemMoreMenuAction } from './'
 
 import './scss/mobilization-list-item-more-menu.scss'
 
-const MobilizationListItemMoreMenu = ({ active, mobilization }) => (
+const MobilizationListItemMoreMenu = ({ active, children }) => (
   <div className={classnames('list-item-more-menu', { 'show': active })}>
-    <MobilizationListItemMoreMenuAction
-      componentClass="a"
-      target="_blank"
-      text="Abrir página"
-      path={Paths.mobilization(mobilization)}
-      icon="external-link"
-    />
-    <MobilizationListItemMoreMenuAction
-      text="Criar template"
-      path={Paths.mobilizationTemplatesCreate(mobilization)}
-      icon="star"
-    />
+    {children}
   </div>
 )
 
@@ -29,7 +18,8 @@ MobilizationListItemMoreMenu.contextTypes = {
 }
 
 MobilizationListItemMoreMenu.propTypes = {
-  active: PropTypes.bool.isRequired
+  active: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired
 }
 
 MobilizationListItemMoreMenu.defaultProps = {

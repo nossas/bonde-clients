@@ -20,7 +20,8 @@ import {
   MobilizationListItemUsers,
   MobilizationListItemFundRaising,
   MobilizationListItemMore,
-  MobilizationListItemMoreMenu
+  MobilizationListItemMoreMenu,
+  MobilizationListItemMoreMenuAction
 }  from '../components/MobilizationList/MobilizationListItem'
 import {
   MobilizationListItemHeader,
@@ -86,8 +87,20 @@ export class MobilizationListPage extends Component {
                   <MobilizationListItemMore dispatch={dispatch} index={index}>
                     <MobilizationListItemMoreMenu
                       active={mobilizationMoreMenuActiveIndex === index}
-                      mobilization={mobilization}
-                    />
+                    >
+                      <MobilizationListItemMoreMenuAction
+                        componentClass="a"
+                        target="_blank"
+                        text="Abrir página"
+                        path={Paths.mobilization(mobilization)}
+                        icon="external-link"
+                      />
+                      <MobilizationListItemMoreMenuAction
+                        text="Criar template"
+                        path={Paths.mobilizationTemplatesCreate(mobilization)}
+                        icon="star"
+                      />
+                    </MobilizationListItemMoreMenu>
                   </MobilizationListItemMore>
                 </MobilizationListItem>
               ))}
