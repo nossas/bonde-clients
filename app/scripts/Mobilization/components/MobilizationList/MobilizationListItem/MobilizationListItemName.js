@@ -24,8 +24,8 @@ const MobilizationListItemName = ({ name, goal, className, style }) => (
 MobilizationListItemName.propTypes = {
   name: PropTypes.string.isRequired,
   goal: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object
 }
 
 export default MobilizationListItemName
