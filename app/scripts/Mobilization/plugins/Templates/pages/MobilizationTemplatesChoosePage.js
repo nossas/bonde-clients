@@ -3,6 +3,7 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 
 import * as Paths from '../../../../Paths'
+import { SelectableList, SelectableListItem } from '../../../../../components/SelectableList'
 
 //
 // TODO: To decorate page with Navigation without class statement, is need to upgrade react-router.
@@ -16,6 +17,11 @@ class MobilizationTemplatesChoosePage extends Component {
     return (
       <div className="p3 lg-col-5 mx-auto">
         <h3 className="h1 mt0 mb3 center">Como você deseja começar?</h3>
+        <SelectableList>
+          <SelectableListItem leftIcon="plus-square-o" title="Criar mobilização do zero" />
+          <SelectableListItem leftIcon="columns" title="Meus templates" subtitle="18" />
+          <SelectableListItem leftIcon="globe" title="Templates globais" subtitle="34" />
+        </SelectableList>
       </div>
     )
   }
