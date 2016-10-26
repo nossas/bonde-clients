@@ -11,7 +11,6 @@ export class FilterableSearchBar extends Component {
 
   render() {
     const { list, dispatch } = this.props
-    console.log(list)
     return (
       <div
         className="bg-white rounded-top border-only-bottom border-whisper"

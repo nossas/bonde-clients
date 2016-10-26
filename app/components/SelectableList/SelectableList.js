@@ -13,18 +13,17 @@ import { setSelectedIndex } from './SelectableListActions'
 
 class SelectableList extends Component {
   render() {
-    const { list, dispatch, selectedIndex } = this.props
+    const { list, dispatch, selectedIndex, onClick, activeCondition } = this.props
     return (
       <div className="selectable-list col-12">
         <MobilizationList>
           {list.map((item, index) => (
             <MobilizationListItem
+              key={`template-${index}`}
+              onClick={() => { onClick(item, index) }}
               className={classnames(
                 'border border-whisper',
-                { 'border-pagenta': selectedIndex === index }
-              )}
-              onClick={() => dispatch(
-                setSelectedIndex(selectedIndex === index ? undefined : index)
+                { 'border-pagenta': activeCondition(item, index) }
               )}
             >
               <MobilizationListItemAvatar {...item} />
