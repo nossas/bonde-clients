@@ -8,14 +8,23 @@ class Media extends Component {
     const { block } = this.props
 
     const entity = Entity.get(block.getEntityAt(0))
-    const { src, ...extraProps } = entity.getData()
-    const type = entity.getType()
+    const {
+      // Inside tag a
+      href,
+      target,
+      // Image or Iframe
+      ...mediaProps
+    } = entity.getData()
 
-    let media
-    if (type === 'image') {
-      media = <img src={src} {...extraProps} />
-    } else if (type == 'iframe') {
-      media = <iframe src={src} {...extraProps} />
+    const media = React.createElement(
+      entity.getType(),
+      {...mediaProps}
+    )
+
+    if (href) {
+      return (
+        <a href={href} target={target||'_blank'}>{media}</a>
+      )
     }
 
     return media
