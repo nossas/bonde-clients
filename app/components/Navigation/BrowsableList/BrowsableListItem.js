@@ -2,16 +2,10 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-import * as Paths from '../../scripts/Paths'
+import './scss/browsable-list-item.scss'
 
-import './scss/selectable-list-item.scss'
-
-const SelectableListItem = ({ className, style, leftIcon, title, subtitle, rightIcon }) => (
-  <Link
-    className={classnames('selectable-list-item', className)}
-    style={style}
-    to={Paths.mobilizations()}
-  >
+const BrowsableListItem = ({ className, style, leftIcon, title, subtitle, rightIcon, path }) => (
+  <Link className={classnames('browsable-list-item', className)} style={style} to={path}>
     <i className={`bg-animation-icon fa fa-${rightIcon}`} />
     <i className={`icon left-icon fa fa-${leftIcon}`} />
     <span className="title">{title}</span>
@@ -20,18 +14,19 @@ const SelectableListItem = ({ className, style, leftIcon, title, subtitle, right
   </Link>
 )
 
-SelectableListItem.propTypes = {
+BrowsableListItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   style: PropTypes.object,
   leftIcon: PropTypes.string,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
   rightIcon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 }
 
-SelectableListItem.defaultProps = {
+BrowsableListItem.defaultProps = {
   rightIcon: 'arrow-circle-o-right'
 }
 
-export default SelectableListItem
+export default BrowsableListItem
