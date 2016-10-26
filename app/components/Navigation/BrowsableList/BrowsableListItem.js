@@ -21,8 +21,8 @@ BrowsableListItem.propTypes = {
   leftIcon: PropTypes.string,
   rightIcon: PropTypes.string,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  path: PropTypes.string,
 }
 
 BrowsableListItem.defaultProps = {

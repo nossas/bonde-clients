@@ -22,8 +22,8 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
 }
 
 MobilizationTemplatesChooseCustomListPage.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  mobilizationTemplates: PropTypes.object.isRequired,
+  mobilization: PropTypes.object,
+  mobilizationTemplates: PropTypes.object,
 }
 
 export default MobilizationTemplatesChooseCustomListPage

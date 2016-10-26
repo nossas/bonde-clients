@@ -31,7 +31,7 @@ const MobilizationTemplatesChoosePage = ({ mobilization }) => (
 )
 
 MobilizationTemplatesChoosePage.propTypes = {
-  mobilization: PropTypes.object.isRequired
+  mobilization: PropTypes.object
 }
 
 export default MobilizationTemplatesChoosePage
