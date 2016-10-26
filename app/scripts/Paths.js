@@ -92,3 +92,5 @@ export const mobilizationTemplatesDestroy = templateId =>
   `/mobilizations/templates/${templateId}/destroy`
 export const mobilizationTemplatesChoose = mobilization =>
   `/mobilizations/${mobilization.id}/templates/choose`
+export const mobilizationTemplatesChooseCustomList = mobilization =>
+  `/mobilizations/${mobilization.id}/templates/choose/custom/list`

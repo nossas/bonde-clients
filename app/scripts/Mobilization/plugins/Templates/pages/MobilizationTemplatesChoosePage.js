@@ -19,6 +19,7 @@ const MobilizationTemplatesChoosePage = ({ mobilization }) => (
         leftIcon="columns"
         title="Meus templates"
         subtitle="18"
+        path={Paths.mobilizationTemplatesChooseCustomList(mobilization)}
       />
       <BrowsableListItem
         leftIcon="globe"

@@ -2,9 +2,10 @@ import React from 'react'
 import { Route } from 'react-router'
 
 import {
-  MobilizationTemplatesCreatePage,
-  MobilizationTemplatesListPage,
-  MobilizationTemplatesChoosePage
+  MobilizationTemplatesCreatePage as CreatePage,
+  MobilizationTemplatesListPage as ListPage,
+  MobilizationTemplatesChoosePage as ChoosePage,
+  MobilizationTemplatesChooseCustomListPage as ChooseCustomListPage,
 } from './pages'
 
 const path = '/templates'
@@ -13,13 +14,14 @@ const defaultPath = `${path}${param}`
 
 const MobilizationTemplatesRoutes = {
   user: parent => [
-    <Route path={`/mobilizations/${path}/list`} component={MobilizationTemplatesListPage} />
+    <Route path={`/mobilizations/${path}/list`} component={ListPage} />
   ],
   newMobilization: parent => [
-    <Route path={`/${parent}/${path}/choose`} component={MobilizationTemplatesChoosePage} />
+    <Route path={`/${parent}/${path}/choose`} component={ChoosePage} />,
+    <Route path={`/${parent}/${path}/choose/custom/list`} component={ChooseCustomListPage} />
   ],
   dashboard: parent => [
-    <Route path={`/${parent}/${path}/create`} component={MobilizationTemplatesCreatePage} />
+    <Route path={`/${parent}/${path}/create`} component={CreatePage} />
   ]
 }
 
