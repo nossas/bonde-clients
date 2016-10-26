@@ -35,6 +35,7 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
             onClick={(item, index) => {
               dispatch(setSelectedIndex(item.id === selectedIndex ? undefined : item.id))
             }}
+            emptyListText="Não existe nenhum template com esse nome"
           />
           <button
             disabled={buttonDisabled}
