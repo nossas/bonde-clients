@@ -6,20 +6,15 @@ import './scss/mobilization-list-item-name.scss'
 const TRUNCATE_MAX_LENGTH = 60
 const truncate = value => `${value.substring(0, TRUNCATE_MAX_LENGTH).trim()}...`
 
-const MobilizationListItemName = ({ name, goal, className, style }) => (
-  <div className={classnames('list-item-name px3 col col-5', className)} style={style}>
-    <div className="table">
-      <div className="table-cell align-middle">
-        <b className="block mb1">
-          {name.length <= TRUNCATE_MAX_LENGTH ? name : truncate(name)}
-        </b>
-        <span>
-          {goal.length <= TRUNCATE_MAX_LENGTH ? goal : truncate(goal)}
-        </span>
-      </div>
+const MobilizationListItemName = ({ name, goal, className, style, maxLength }) => {
+  const truncateLength = maxLength || TRUNCATE_MAX_LENGTH
+  return (
+    <div className={classnames('list-item-name px3 py2 col col-5', className)} style={style}>
+      <b className="block mb1 truncate">{name}</b>
+      <div className="truncate">{goal}</div>
     </div>
-  </div>
-)
+  )
+}
 
 MobilizationListItemName.propTypes = {
   name: PropTypes.string.isRequired,

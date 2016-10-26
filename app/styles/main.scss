@@ -210,3 +210,9 @@ a.no-underscore {
   text-transform: uppercase;
   margin: 0;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
