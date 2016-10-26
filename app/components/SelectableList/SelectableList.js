@@ -11,6 +11,8 @@ import {
 import MobilizationList from '../../scripts/Mobilization/components/MobilizationList'
 import { setSelectedIndex } from './SelectableListActions'
 
+import './selectable-list.scss'
+
 export const SelectableList = ({
   list,
   dispatch,
