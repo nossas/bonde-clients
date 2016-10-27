@@ -13,7 +13,7 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
       <div className="p3 lg-col-5 mx-auto">
         <h3 className="h1 mt0 mb3 center">Meus Templates</h3>
         <MobilizationTemplatesSelectableList
-          list={mobilizationTemplates.list}
+          list={mobilizationTemplates.custom}
           onClickButton={() => this.transitionTo(Paths.editMobilization(mobilization.id))}
         />
       </div>

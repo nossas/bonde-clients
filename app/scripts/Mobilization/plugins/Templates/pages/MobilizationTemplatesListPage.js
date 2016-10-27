@@ -40,129 +40,8 @@ export class MobilizationTemplatesListPage extends Component {
   }
 
   render() {
-    const { dispatch, mobilizationMoreMenuActiveIndex } = this.props
-    const mobilizations = [
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 219,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 220,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 221,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 222,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 223,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-      {
-        body_font: null,
-        color_scheme: "meurio-scheme",
-        created_at: "2016-08-23T18:23:37.325-03:00",
-        custom_domain: "www.escolainclusiva.meurio.org.br",
-        facebook_share_description: "Pela convocação imediata dos mediadores de alunos com deficiência",
-        facebook_share_image: "https://s3.amazonaws.com/hub-central/uploads/1476194369_Escolas-inclusivas_34.png",
-        facebook_share_title: "Pressione a Prefeitura do Rio por escolas inclusivas de verdade!",
-        goal: "Pelo direito das 13mil crianças com deficiência  na rede municipal aos agentes de apoio à educação especial",
-        google_analytics_code: null,
-        header_font: null,
-        id: 224,
-        name: "Por escolas inclusivas de verdade no Rio",
-        organization_id: 8,
-        slug: "175-por-escolas-inclusivas-de-verdade-no-rio",
-        twitter_share_text: "Acabei de colaborar com Por escolas inclusivas de verdade no Rio. Participe você também: ",
-        updated_at: "2016-10-11T10:59:37.610-03:00",
-        user_id: 35,
-        copy_number: 1223
-      },
-    ]
+    const { dispatch, mobilizationMoreMenuActiveIndex, mobilizationTemplates } = this.props
+
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title="Suas Mobilizações">
@@ -178,40 +57,43 @@ export class MobilizationTemplatesListPage extends Component {
               <MobilizationListItemHeaderFundRaising />
             </MobilizationListItemHeader>
 
-            {mobilizations && mobilizations.map((mobilization, index) => (
-              <MobilizationListItem
-                key={`mobilization-${mobilization.id}`}
-                className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
-              >
-                <MobilizationListItemAvatar {...mobilization} />
+            {
+              mobilizationTemplates.custom &&
+              mobilizationTemplates.custom.map((mobilization, index) => (
+                <MobilizationListItem
+                  key={`mobilization-${mobilization.id}`}
+                  className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
+                >
+                  <MobilizationListItemAvatar {...mobilization} />
 
-                <div className="list-item-table-container overflow-hidden">
-                  <MobilizationListItemName {...mobilization} />
-                  <MobilizationListItemCreatedAt {...mobilization} />
-                  <MobilizationListItemCopyNumber {...mobilization} />
-                  <MobilizationListItemFundRaising {...mobilization} />
-                </div>
+                  <div className="list-item-table-container overflow-hidden">
+                    <MobilizationListItemName {...mobilization} />
+                    <MobilizationListItemCreatedAt {...mobilization} />
+                    <MobilizationListItemCopyNumber {...mobilization} />
+                    <MobilizationListItemFundRaising {...mobilization} />
+                  </div>
 
-                <MobilizationListItemMore dispatch={dispatch} index={index}>
-                  <MobilizationListItemMoreMenu
-                    active={mobilizationMoreMenuActiveIndex === index}
-                  >
-                    <MobilizationListItemMoreMenuAction
-                      componentClass="div"
-                      text="Editar"
-                      path={Paths.mobilizationTemplatesUpdate(1)}
-                      icon="pencil-square-o"
-                    />
-                    <MobilizationListItemMoreMenuAction
-                      componentClass="div"
-                      text="Remover"
-                      path={Paths.mobilizationTemplatesDestroy(1)}
-                      icon="trash-o"
-                    />
-                  </MobilizationListItemMoreMenu>
-                </MobilizationListItemMore>
-              </MobilizationListItem>
-            ))}
+                  <MobilizationListItemMore dispatch={dispatch} index={index}>
+                    <MobilizationListItemMoreMenu
+                      active={mobilizationMoreMenuActiveIndex === index}
+                    >
+                      <MobilizationListItemMoreMenuAction
+                        componentClass="div"
+                        text="Editar"
+                        path={Paths.mobilizationTemplatesUpdate(1)}
+                        icon="pencil-square-o"
+                      />
+                      <MobilizationListItemMoreMenuAction
+                        componentClass="div"
+                        text="Remover"
+                        path={Paths.mobilizationTemplatesDestroy(1)}
+                        icon="trash-o"
+                      />
+                    </MobilizationListItemMoreMenu>
+                  </MobilizationListItemMore>
+                </MobilizationListItem>
+              ))
+            }
           </MobilizationList>
         </SettingsPageContentLayout>
         {
@@ -231,7 +113,8 @@ export class MobilizationTemplatesListPage extends Component {
 MobilizationTemplatesListPage.propTypes = {}
 
 const mapStateToProps = state => ({
-  mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex
+  mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex,
+  mobilizationTemplates: state.mobilizationTemplates
 })
 
 export default connect(mapStateToProps)(MobilizationTemplatesListPage)
