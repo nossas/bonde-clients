@@ -106,11 +106,17 @@ export const customStyleFn = (style) => {
   const output = {}
   const fontSize = style.filter(value => value.startsWith('font-size')).last()
   if (fontSize) {
-    output.fontSize = fontSize.replace('font-size:', '').trim()
+    output.fontSize = fontSize
+      .replace('font-size:', '')
+      .replace(';', '')
+      .trim()
   }
   const fontFamily = style.filter(value => value.startsWith('font-family')).last()
   if (fontFamily) {
-    output.fontFamily = fontFamily.replace('font-family:', '').trim()
+    output.fontFamily = fontFamily
+      .replace('font-family:', '')
+      .replace(';', '')
+      .trim()
   }
   return output
 }
