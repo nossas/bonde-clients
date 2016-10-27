@@ -33,7 +33,7 @@ export class MobilizationTemplatesBasicsForm extends Component {
       ? undefined
       : mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
 
-    const handleSubmit = values => submitStrategy({ ...mobilization, ...values }, next)
+    const handleSubmit = () => this.transitionTo(Paths.mobilizationTemplatesList())
 
     return (
       <div
