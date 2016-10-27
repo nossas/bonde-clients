@@ -76,6 +76,7 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
 }
 
 export * from './Widget/plugins/Match/paths'
+export * from './Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 
 const makePressureWidget = (mobilization_id, widget_id, path) =>
   `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
@@ -83,14 +84,3 @@ const makePressureWidget = (mobilization_id, widget_id, path) =>
 export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
 export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')
 
-export const mobilizationTemplatesCreate = mobilization =>
-  `/mobilizations/${mobilization.id}/templates/create`
-export const mobilizationTemplatesList = () => '/mobilizations/templates/list'
-export const mobilizationTemplatesUpdate = templateId =>
-  `/mobilizations/templates/${templateId}/update`
-export const mobilizationTemplatesDestroy = templateId =>
-  `/mobilizations/templates/${templateId}/destroy`
-export const mobilizationTemplatesChoose = mobilization =>
-  `/mobilizations/${mobilization.id}/templates/choose`
-export const mobilizationTemplatesChooseCustomList = mobilization =>
-  `/mobilizations/${mobilization.id}/templates/choose/custom/list`

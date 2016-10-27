@@ -25,6 +25,7 @@ const MobilizationTemplatesChoosePage = ({ mobilization }) => (
         leftIcon="globe"
         title="Templates globais"
         subtitle="34"
+        path={Paths.mobilizationTemplatesChooseGlobalList(mobilization)}
       />
     </BrowsableList>
   </div>

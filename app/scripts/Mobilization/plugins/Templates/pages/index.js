@@ -2,3 +2,4 @@ export { default as MobilizationTemplatesCreatePage } from './MobilizationTempla
 export { default as MobilizationTemplatesListPage } from './MobilizationTemplatesListPage'
 export { default as MobilizationTemplatesChoosePage } from './MobilizationTemplatesChoosePage'
 export { default as MobilizationTemplatesChooseCustomListPage } from './MobilizationTemplatesChooseCustomListPage'
+export { default as MobilizationTemplatesChooseGlobalListPage } from './MobilizationTemplatesChooseGlobalListPage'
