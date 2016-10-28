@@ -32,6 +32,7 @@ import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
 } from '../../../MobilizationActions'
+import { Loading } from '../../../../components'
 
 export class MobilizationTemplatesListPage extends Component {
   componentDidMount() {
@@ -41,8 +42,9 @@ export class MobilizationTemplatesListPage extends Component {
 
   render() {
     const { dispatch, mobilizationMoreMenuActiveIndex, mobilizationTemplates } = this.props
+    const { loading } = mobilizationTemplates
 
-    return (
+    return loading ? <Loading /> : (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title="Suas Mobilizações">
           <MobilizationsHeader {...this.props} />
@@ -114,7 +116,7 @@ MobilizationTemplatesListPage.propTypes = {}
 
 const mapStateToProps = state => ({
   mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex,
-  mobilizationTemplates: state.mobilizationTemplates
+  mobilizationTemplates: state.mobilizationTemplates,
 })
 
 export default connect(mapStateToProps)(MobilizationTemplatesListPage)

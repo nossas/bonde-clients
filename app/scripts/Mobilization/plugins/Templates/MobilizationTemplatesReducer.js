@@ -3,7 +3,11 @@ import * as templates from './mock-templates'
 import {
   REQUEST_TEMPLATE_CREATE,
   SUCCESS_TEMPLATE_CREATE,
-  FAILURE_TEMPLATE_CREATE
+  FAILURE_TEMPLATE_CREATE,
+
+  REQUEST_TEMPLATE_FETCH,
+  SUCCESS_TEMPLATE_FETCH,
+  FAILURE_TEMPLATE_FETCH,
 } from './MobilizationTemplatesActions'
 
 export const initialState = {
@@ -23,6 +27,18 @@ const MobilizationTemplatesReducer = (state = initialState, action) => {
 
       return { ...state, loading: false, loaded: true }
     case FAILURE_TEMPLATE_CREATE:
+      return { ...state, loading: false, error: action.error }
+
+    case REQUEST_TEMPLATE_FETCH:
+      return { ...state, loading: true }
+    case SUCCESS_TEMPLATE_FETCH:
+      if (action.templates) {
+        state.global = action.templates.filter(template => template.global)
+        state.custom = action.templates.filter(template => !template.global)
+      }
+
+      return { ...state, loading: false, loaded: true }
+    case FAILURE_TEMPLATE_FETCH:
       return { ...state, loading: false, error: action.error }
     default:
       return state

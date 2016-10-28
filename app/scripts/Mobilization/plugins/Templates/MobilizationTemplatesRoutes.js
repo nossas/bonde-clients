@@ -9,14 +9,13 @@ import {
   MobilizationTemplatesChooseGlobalListPage as ChooseGlobalListPage,
 } from './pages'
 
+import { MobilizationTemplatesContainer } from './containers'
+
 const path = '/templates'
 const param = '/:template_id'
 const defaultPath = `${path}${param}`
 
 const MobilizationTemplatesRoutes = {
-  user: parent => [
-    <Route path={`/mobilizations/${path}/list`} component={ListPage} />
-  ],
   newMobilization: parent => [
     <Route path={`/${parent}/${path}/choose`} component={ChoosePage} />,
     <Route path={`/${parent}/${path}/choose/custom/list`} component={ChooseCustomListPage} />,
@@ -24,6 +23,11 @@ const MobilizationTemplatesRoutes = {
   ],
   dashboard: parent => [
     <Route path={`/${parent}/${path}/create`} component={CreatePage} />
+  ],
+  container: () => [
+    <Route component={MobilizationTemplatesContainer}>
+      <Route path={`/mobilizations/${path}/list`} component={ListPage} />
+    </Route>
   ]
 }
 

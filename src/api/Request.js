@@ -15,6 +15,10 @@ class Request extends Axios {
   createTemplate(body, headers) {
     return this.post('/templates', body, { headers })
   }
+
+  fetchTemplates(headers) {
+    return this.get('/templates', { headers })
+  }
 }
 
 export default Request

@@ -23,3 +23,25 @@ export const createTemplateAsync = (template, next) =>
         return Promise.reject({ _error: `Response ${error}` })
       })
 }
+
+export const REQUEST_TEMPLATE_FETCH = 'REQUEST_TEMPLATE_FETCH'
+export const SUCCESS_TEMPLATE_FETCH = 'SUCCESS_TEMPLATE_FETCH'
+export const FAILURE_TEMPLATE_FETCH = 'FAILURE_TEMPLATE_FETCH'
+const fetchTemplatesRequest = () => ({ type: REQUEST_TEMPLATE_FETCH })
+const fetchTemplatesSuccess = templates => ({ type: SUCCESS_TEMPLATE_FETCH, templates })
+const fetchTemplatesFailure = error => ({ type: FAILURE_TEMPLATE_FETCH, error })
+export const fetchTemplatesAsync = () =>
+  (dispatch, getState, request) => {
+    const { auth: { credentials } } = getState()
+
+    dispatch(fetchTemplatesRequest())
+    return request.fetchTemplates(credentials)
+      .then(response => {
+        dispatch(fetchTemplatesSuccess(response.data))
+        return Promise.resolve()
+      })
+      .catch(error => {
+        dispatch(createTemplateFailure(error))
+        return Promise.reject({ _error: `Response ${error}` })
+      })
+}
