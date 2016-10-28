@@ -4,7 +4,6 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 
 import * as Paths from '../../../../Paths'
-import * as MobilizationActions from '../../../MobilizationActions'
 import { InputCounter } from '../../../../components'
 import {
   FormRedux,
@@ -16,24 +15,23 @@ import {
   MobilizationListItemAvatar,
   MobilizationListItemName
 } from '../../../components/MobilizationList/MobilizationListItem'
+import * as MobilizationTemplatesActions from '../MobilizationTemplatesActions'
 
 @reactMixin.decorate(Navigation)
 export class MobilizationTemplatesBasicsForm extends Component {
   render () {
     const {
-      fields: { name, description },
+      fields: { name, goal },
       mobilization,
-      // Actions
-      addMobilizationAsync,
-      editMobilizationAsync,
+      createTemplateAsync,
       ...rest
     } = this.props
-    const submitStrategy = mobilization ? editMobilizationAsync : addMobilizationAsync
-    const next = mobilization
-      ? undefined
-      : mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
 
-    const handleSubmit = () => this.transitionTo(Paths.mobilizationTemplatesList())
+    const next = () => this.transitionTo(Paths.mobilizationTemplatesList())
+
+    const handleSubmit = values =>
+      createTemplateAsync({ ...values, mobilization, global: false }, next)
+
 
     return (
       <div
@@ -72,12 +70,12 @@ export class MobilizationTemplatesBasicsForm extends Component {
               maxLength={100}
             />
           </FormGroup>
-          <FormGroup controlId="description" {...description}>
+          <FormGroup controlId="goal" {...goal}>
             <ControlLabel>
               Descrição
               <InputCounter
                 maxLength={500}
-                length={description.value ? description.value.length : 0}
+                length={goal.value ? goal.value.length : 0}
                 className="right regular"
               />
             </ControlLabel>
@@ -98,12 +96,10 @@ export class MobilizationTemplatesBasicsForm extends Component {
 MobilizationTemplatesBasicsForm.propTypes = {
   fields: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
-  // Actions
-  editMobilizationAsync: PropTypes.func.isRequired,
-  addMobilizationAsync: PropTypes.func.isRequired
+  createTemplateAsync: PropTypes.func.isRequired
 }
 
-const fields = ['name', 'description']
+const fields = ['name', 'goal']
 const validate = values => {
   const errors = {}
   if (!values.name) {
@@ -112,10 +108,10 @@ const validate = values => {
     errors.name = 'O nome do seu template está muito longo!'
   }
 
-  if (!values.description) {
-    errors.description = 'Insira a descrição do seu template'
-  } else if (values.description.length > 500) {
-    errors.description = 'O limite de caracteres foi atingido.'
+  if (!values.goal) {
+    errors.goal = 'Insira a descrição do seu template'
+  } else if (values.goal.length > 500) {
+    errors.goal = 'O limite de caracteres foi atingido.'
   }
   return errors
 }
@@ -127,4 +123,4 @@ export default reduxForm({
   form: 'mobilizationTemplatesBasicsForm',
   fields,
   validate
-}, mapStateToProps, MobilizationActions)(MobilizationTemplatesBasicsForm)
+}, mapStateToProps, MobilizationTemplatesActions)(MobilizationTemplatesBasicsForm)

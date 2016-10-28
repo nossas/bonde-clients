@@ -11,6 +11,10 @@ class Request extends Axios {
     const endpoint = `/mobilizations/${mobilization.id}/widgets/${widget.id}`
     return this.put(endpoint, { widget }, { headers })
   }
+
+  createTemplate(body, headers) {
+    return this.post('/templates', body, { headers })
+  }
 }
 
 export default Request
