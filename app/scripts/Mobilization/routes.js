@@ -38,15 +38,13 @@ export default (
     <Route component={NewMobilizationContainer}>
       <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
       <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityNewPage} />
-      {mobilizationTemplatesRoutes.newMobilization(defaultPath)}
     </Route>
 
-    {mobilizationTemplatesRoutes.container(defaultPath)}
+    {mobilizationTemplatesRoutes(defaultPath)}
 
     <Route component={MobilizationDashboardContainer}>
       <Route path={`/${defaultPath}/edit`} component={EditMobilizationPage} />
       <Route path={`/${defaultPath}/blocks/new`} component={NewBlockPage} />
-      {mobilizationTemplatesRoutes.dashboard(defaultPath)}
       {widgetRoutes(defaultPath)}
       <Route component={MobilizationSettingsContainer} >
         <Route path={`/${defaultPath}/basics`} component={MobilizationBasicsEditFormPage} />
