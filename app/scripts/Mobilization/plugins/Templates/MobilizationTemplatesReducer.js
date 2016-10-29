@@ -26,10 +26,10 @@ const MobilizationTemplatesReducer = (state = initialState, action) => {
     case REQUEST_TEMPLATE_CREATE:
       return { ...state, loading: true }
     case SUCCESS_TEMPLATE_CREATE:
-      if (action.template.global) state.global.push(action.template)
-      else state.custom.push(action.template)
-
-      return { ...state, loading: false, loaded: true }
+      const templates = action.template.global ?
+        { global: [...state.global, action.template] } :
+        { custom: [...state.custom, action.template] }
+      return { ...state, loading: false, loaded: true, ...templates }
     case FAILURE_TEMPLATE_CREATE:
       return { ...state, loading: false, error: action.error }
 
