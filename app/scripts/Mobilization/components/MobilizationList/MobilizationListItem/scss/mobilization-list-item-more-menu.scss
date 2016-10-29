@@ -3,6 +3,14 @@
 
 .mobilization-list {
   .mobilization-list-item {
+    &:last-of-type {
+      .list-item-more {
+        .list-item-more-menu {
+          top: -5px;
+          right: 70px;
+        }
+      }
+    }
     .list-item-more {
       .list-item-more-menu {
         position: absolute;
