@@ -4,9 +4,9 @@ import { Link } from 'react-router'
 import * as Paths from '../../Paths'
 import { Tabs, Tab } from '../../../components/Navigation'
 
-const MobilizationsHeader = ({ location, mobilization }) => {
+const MobilizationsHeader = ({ location }) => {
   const activeMobilizationsListPath = Paths.mobilizations()
-  const mobilizationsTemplatesListPath = Paths.mobilizationTemplatesList(mobilization)
+  const mobilizationsTemplatesListPath = Paths.mobilizationTemplatesList()
   return (
     <div>
       <Link
@@ -34,7 +34,6 @@ const MobilizationsHeader = ({ location, mobilization }) => {
 
 MobilizationsHeader.propTypes = {
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
-  mobilization: PropTypes.object.isRequired
 }
 
 export default MobilizationsHeader
