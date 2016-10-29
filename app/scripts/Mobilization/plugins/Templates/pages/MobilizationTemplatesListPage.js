@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../../../../Paths'
@@ -34,6 +35,7 @@ import {
 } from '../../../MobilizationActions'
 import * as MobilizationTemplatesActions from '../MobilizationTemplatesActions'
 import { Loading } from '../../../../components'
+import EmptyList from '../../../../../components/EmptyList'
 
 export class MobilizationTemplatesListPage extends Component {
   componentDidMount() {
@@ -58,57 +60,72 @@ export class MobilizationTemplatesListPage extends Component {
         </SettingsPageMenuLayout>
 
         <SettingsPageContentLayout containerClassName="lg-col-12">
-          <MobilizationList>
-            <MobilizationListItemHeader>
-              <MobilizationListItemHeaderName />
-              <MobilizationListItemHeaderCreatedAt />
-              <MobilizationListItemHeaderCopyNumber />
-              <MobilizationListItemHeaderFundRaising />
-            </MobilizationListItemHeader>
-
-            {
-              mobilizationTemplates.custom &&
-              mobilizationTemplates.custom.map((template, index) => (
-                <MobilizationListItem
-                  key={`mobilization-${template.id}`}
-                  className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
+          {
+            !mobilizationTemplates.custom.length ? (
+              <EmptyList>
+                Nenhum template criado. <br />
+                Crie a partir de uma mobilização. <br />
+                <Link
+                  className="bg-pagenta btn caps h3 rounded white py2 px3 mt3"
+                  to={Paths.mobilizations()}
                 >
-                  <MobilizationListItemAvatar {...template} />
+                  Lista de mobilizações
+                </Link>
+              </EmptyList>
+            ) : (
+              <MobilizationList>
+                <MobilizationListItemHeader>
+                  <MobilizationListItemHeaderName />
+                  <MobilizationListItemHeaderCreatedAt />
+                  <MobilizationListItemHeaderCopyNumber />
+                  <MobilizationListItemHeaderFundRaising />
+                </MobilizationListItemHeader>
 
-                  <div className="list-item-table-container overflow-hidden">
-                    <MobilizationListItemName {...template} />
-                    <MobilizationListItemCreatedAt {...template} />
-                    <MobilizationListItemCopyNumber {...template} />
-                    <MobilizationListItemFundRaising {...template} />
-                  </div>
-
-                  <MobilizationListItemMore dispatch={dispatch} index={index}>
-                    <MobilizationListItemMoreMenu
-                      active={mobilizationMoreMenuActiveIndex === index}
+                {
+                  mobilizationTemplates.custom &&
+                  mobilizationTemplates.custom.map((template, index) => (
+                    <MobilizationListItem
+                      key={`mobilization-${template.id}`}
+                      className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
                     >
-                      <MobilizationListItemMoreMenuAction
-                        componentClass="div"
-                        text="Editar"
-                        path={Paths.mobilizationTemplatesUpdate(1)}
-                        icon="pencil-square-o"
-                      />
-                      <MobilizationListItemMoreMenuAction
-                        componentClass="div"
-                        text="Remover"
-                        path={Paths.mobilizationTemplatesDestroy(1)}
-                        icon="trash-o"
-                        onClick={() => {
-                          const confirmMessage = 'Tem certeza que deseja remover este template? Ao'
-                            + ' confirmar, não é possível desfazer esta ação.'
-                          if (window.confirm(confirmMessage)) destroyTemplateAsync(template)
-                        }}
-                      />
-                    </MobilizationListItemMoreMenu>
-                  </MobilizationListItemMore>
-                </MobilizationListItem>
-              ))
-            }
-          </MobilizationList>
+                      <MobilizationListItemAvatar {...template} />
+
+                      <div className="list-item-table-container overflow-hidden">
+                        <MobilizationListItemName {...template} />
+                        <MobilizationListItemCreatedAt {...template} />
+                        <MobilizationListItemCopyNumber {...template} />
+                        <MobilizationListItemFundRaising {...template} />
+                      </div>
+
+                      <MobilizationListItemMore dispatch={dispatch} index={index}>
+                        <MobilizationListItemMoreMenu
+                          active={mobilizationMoreMenuActiveIndex === index}
+                        >
+                          <MobilizationListItemMoreMenuAction
+                            componentClass="div"
+                            text="Editar"
+                            path={Paths.mobilizationTemplatesUpdate(1)}
+                            icon="pencil-square-o"
+                          />
+                          <MobilizationListItemMoreMenuAction
+                            componentClass="div"
+                            text="Remover"
+                            path={Paths.mobilizationTemplatesDestroy(1)}
+                            icon="trash-o"
+                            onClick={() => {
+                              const confirmMessage = 'Tem certeza que deseja remover este template? Ao'
+                                + ' confirmar, não é possível desfazer esta ação.'
+                              if (window.confirm(confirmMessage)) destroyTemplateAsync(template)
+                            }}
+                          />
+                        </MobilizationListItemMoreMenu>
+                      </MobilizationListItemMore>
+                    </MobilizationListItem>
+                  ))
+                }
+              </MobilizationList>
+            )
+          }
         </SettingsPageContentLayout>
         {
           typeof mobilizationMoreMenuActiveIndex !== 'undefined' && (
