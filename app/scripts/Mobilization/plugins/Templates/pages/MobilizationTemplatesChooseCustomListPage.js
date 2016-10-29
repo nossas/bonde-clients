@@ -6,11 +6,13 @@ import reactMixin from 'react-mixin'
 import * as Paths from '../../../../Paths'
 import { MobilizationTemplatesSelectableList } from '../components'
 import * as MobilizationActions from '../../../MobilizationActions'
+import { NewMobilizationHeader } from '../../../components'
 
 @reactMixin.decorate(Navigation)
 export class MobilizationTemplatesChooseCustomListPage extends Component {
   render() {
     const {
+      location,
       mobilization,
       mobilizationTemplates,
       selectedIndex: mobilizationTemplateId,
@@ -20,22 +22,26 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
     const next = () => this.transitionTo(Paths.editMobilization(mobilization.id))
 
     return (
-      <div className="p3 lg-col-5 mx-auto">
-        <h3 className="h1 mt0 mb3 center">Meus Templates</h3>
-        <MobilizationTemplatesSelectableList
-          list={mobilizationTemplates.custom}
-          onClickButton={() => createMobilizationFromTemplateAsync(
-            mobilizationTemplateId,
-            mobilization.id,
-            next
-          )}
-        />
+      <div className="flex-auto bg-silver gray">
+        <NewMobilizationHeader location={location} />
+        <div className="p3 lg-col-5 mx-auto">
+          <h3 className="h1 mt0 mb3 center">Meus Templates</h3>
+          <MobilizationTemplatesSelectableList
+            list={mobilizationTemplates.custom}
+            onClickButton={() => createMobilizationFromTemplateAsync(
+              mobilizationTemplateId,
+              mobilization.id,
+              next
+            )}
+          />
+        </div>
       </div>
     )
   }
 }
 
 MobilizationTemplatesChooseCustomListPage.propTypes = {
+  location: PropTypes.object,
   mobilization: PropTypes.object,
   mobilizationTemplates: PropTypes.object,
   createMobilizationFromTemplateAsync: PropTypes.func
