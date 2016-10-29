@@ -41,7 +41,7 @@ export const fetchTemplatesAsync = () =>
         return Promise.resolve()
       })
       .catch(error => {
-        dispatch(createTemplateFailure(error))
+        dispatch(fetchTemplatesFailure(error))
         return Promise.reject({ _error: `Response ${error}` })
       })
 }

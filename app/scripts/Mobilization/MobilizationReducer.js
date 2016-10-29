@@ -11,7 +11,11 @@ import {
 
   SET_CURRENT_MOBILIZATION,
   SET_MOUSE_OVER,
-  SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX
+  SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX,
+
+  REQUEST_CREATE_MOBILIZATION_FROM_TEMPLATE,
+  SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE,
+  FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE
 } from './MobilizationActions'
 
 export const initialState = {
@@ -75,6 +79,12 @@ const MobilizationReducer = (state = initialState, action) => {
         ...state,
         mobilizationMoreMenuActiveIndex: action.index
       }
+    case REQUEST_CREATE_MOBILIZATION_FROM_TEMPLATE:
+      return { ...state, loading: true }
+    case SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE:
+      return { ...state, loading: false, loaded: false }
+    case FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE:
+      return { ...state, loading: false, error: action.error }
     default:
       return state
   }

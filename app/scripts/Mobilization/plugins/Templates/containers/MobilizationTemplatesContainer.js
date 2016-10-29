@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import * as MobilizationTemplatesActions from '../MobilizationTemplatesActions'
+import { getMobilization } from '../../../MobilizationSelectors'
 
 class MobilizationTemplatesContainer extends React.Component {
   static propTypes = {
@@ -23,6 +24,7 @@ class MobilizationTemplatesContainer extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  mobilization: getMobilization(state, props),
   mobilizationTemplates: state.mobilizationTemplates,
   loaded: state.mobilizationTemplates.loaded,
   loading: state.mobilizationTemplates.loading,

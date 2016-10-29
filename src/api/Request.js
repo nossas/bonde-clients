@@ -19,6 +19,10 @@ class Request extends Axios {
   fetchTemplates(headers) {
     return this.get('/templates', { headers })
   }
+
+  createMobilizationFromTemplate(body, mobilization_id, headers) {
+    return this.put(`/mobilizations/${mobilization_id}`, body, { headers })
+  }
 }
 
 export default Request
