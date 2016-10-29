@@ -7,7 +7,7 @@ import {
 } from '../../../../../components/Navigation/BrowsableList'
 import { NewMobilizationHeader } from '../../../components'
 
-const MobilizationTemplatesChoosePage = ({ mobilization, location }) => (
+const MobilizationTemplatesChoosePage = ({ mobilization, location, mobilizationTemplates }) => (
   <div className="flex-auto bg-silver gray">
     <NewMobilizationHeader location={location} />
     <div className="p3 lg-col-5 mx-auto">
@@ -21,13 +21,13 @@ const MobilizationTemplatesChoosePage = ({ mobilization, location }) => (
         <BrowsableListItem
           leftIcon="columns"
           title="Meus templates"
-          subtitle="18"
+          subtitle={mobilizationTemplates.custom.length}
           path={Paths.mobilizationTemplatesChooseCustomList(mobilization)}
         />
         <BrowsableListItem
           leftIcon="globe"
           title="Templates globais"
-          subtitle="34"
+          subtitle={mobilizationTemplates.global.length}
           path={Paths.mobilizationTemplatesChooseGlobalList(mobilization)}
         />
       </BrowsableList>
@@ -36,7 +36,9 @@ const MobilizationTemplatesChoosePage = ({ mobilization, location }) => (
 )
 
 MobilizationTemplatesChoosePage.propTypes = {
-  mobilization: PropTypes.object
+  mobilization: PropTypes.object,
+  location: PropTypes.object,
+  mobilizationTemplates: PropTypes.object,
 }
 
 export default MobilizationTemplatesChoosePage
