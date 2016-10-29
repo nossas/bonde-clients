@@ -16,6 +16,10 @@ class Request extends Axios {
     return this.post('/templates', body, { headers })
   }
 
+  destroyTemplate(template, headers) {
+    return this.delete(`/templates/${template.id}`, { headers })
+  }
+
   fetchTemplates(headers) {
     return this.get('/templates', { headers })
   }

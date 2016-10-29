@@ -45,3 +45,25 @@ export const fetchTemplatesAsync = () =>
         return Promise.reject({ _error: `Response ${error}` })
       })
 }
+
+export const REQUEST_TEMPLATE_DESTROY = 'REQUEST_TEMPLATE_DESTROY'
+export const SUCCESS_TEMPLATE_DESTROY = 'SUCCESS_TEMPLATE_DESTROY'
+export const FAILURE_TEMPLATE_DESTROY = 'FAILURE_TEMPLATE_DESTROY'
+const destroyTemplateRequest = () => ({ type: REQUEST_TEMPLATE_DESTROY })
+const destroyTemplateSuccess = template => ({ type: SUCCESS_TEMPLATE_DESTROY, template })
+const destroyTemplateFailure = error => ({ type: FAILURE_TEMPLATE_DESTROY, error })
+export const destroyTemplateAsync = template =>
+  (dispatch, getState, request) => {
+    const { auth: { credentials } } = getState()
+
+    dispatch(destroyTemplateRequest())
+    return request.destroyTemplate(template, credentials)
+      .then(response => {
+        dispatch(destroyTemplateSuccess(template))
+        return Promise.resolve()
+      })
+      .catch(error => {
+        dispatch(destroyTemplateFailure(error))
+        return Promise.reject({ _error: `Response ${error}` })
+      })
+}

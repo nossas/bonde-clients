@@ -8,6 +8,10 @@ import {
   REQUEST_TEMPLATE_FETCH,
   SUCCESS_TEMPLATE_FETCH,
   FAILURE_TEMPLATE_FETCH,
+
+  REQUEST_TEMPLATE_DESTROY,
+  SUCCESS_TEMPLATE_DESTROY,
+  FAILURE_TEMPLATE_DESTROY,
 } from './MobilizationTemplatesActions'
 
 export const initialState = {
@@ -36,10 +40,22 @@ const MobilizationTemplatesReducer = (state = initialState, action) => {
         state.global = action.templates.filter(template => template.global)
         state.custom = action.templates.filter(template => !template.global)
       }
-
       return { ...state, loading: false, loaded: true }
     case FAILURE_TEMPLATE_FETCH:
       return { ...state, loading: false, error: action.error }
+
+    case REQUEST_TEMPLATE_DESTROY:
+      return { ...state, loading: true }
+    case SUCCESS_TEMPLATE_DESTROY:
+      const index = state.custom.findIndex(template => template.id === action.template.id)
+      return {
+        ...state,
+        loading: false,
+        custom: [...state.custom.slice(0, index), ...state.custom.slice(index + 1)]
+      }
+    case FAILURE_TEMPLATE_DESTROY:
+      return { ...state, loading: false, error: action.error }
+
     default:
       return state
   }

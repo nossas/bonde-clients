@@ -32,6 +32,7 @@ import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
 } from '../../../MobilizationActions'
+import * as MobilizationTemplatesActions from '../MobilizationTemplatesActions'
 import { Loading } from '../../../../components'
 
 export class MobilizationTemplatesListPage extends Component {
@@ -41,11 +42,17 @@ export class MobilizationTemplatesListPage extends Component {
   }
 
   render() {
-    const { dispatch, mobilizationMoreMenuActiveIndex, mobilizationTemplates } = this.props
+    const {
+      dispatch,
+      mobilizationMoreMenuActiveIndex,
+      mobilizationTemplates,
+      destroyTemplateAsync
+    } = this.props
     const { loading } = mobilizationTemplates
 
-    return loading ? <Loading /> : (
+    return (
       <SettingsPageLayout>
+        {loading && <Loading />}
         <SettingsPageMenuLayout title="Suas Mobilizações">
           <MobilizationsHeader {...this.props} />
         </SettingsPageMenuLayout>
@@ -61,18 +68,18 @@ export class MobilizationTemplatesListPage extends Component {
 
             {
               mobilizationTemplates.custom &&
-              mobilizationTemplates.custom.map((mobilization, index) => (
+              mobilizationTemplates.custom.map((template, index) => (
                 <MobilizationListItem
-                  key={`mobilization-${mobilization.id}`}
+                  key={`mobilization-${template.id}`}
                   className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
                 >
-                  <MobilizationListItemAvatar {...mobilization} />
+                  <MobilizationListItemAvatar {...template} />
 
                   <div className="list-item-table-container overflow-hidden">
-                    <MobilizationListItemName {...mobilization} />
-                    <MobilizationListItemCreatedAt {...mobilization} />
-                    <MobilizationListItemCopyNumber {...mobilization} />
-                    <MobilizationListItemFundRaising {...mobilization} />
+                    <MobilizationListItemName {...template} />
+                    <MobilizationListItemCreatedAt {...template} />
+                    <MobilizationListItemCopyNumber {...template} />
+                    <MobilizationListItemFundRaising {...template} />
                   </div>
 
                   <MobilizationListItemMore dispatch={dispatch} index={index}>
@@ -90,6 +97,11 @@ export class MobilizationTemplatesListPage extends Component {
                         text="Remover"
                         path={Paths.mobilizationTemplatesDestroy(1)}
                         icon="trash-o"
+                        onClick={() => {
+                          const confirmMessage = 'Tem certeza que deseja remover este template? Ao'
+                            + ' confirmar, não é possível desfazer esta ação.'
+                          if (window.confirm(confirmMessage)) destroyTemplateAsync(template)
+                        }}
                       />
                     </MobilizationListItemMoreMenu>
                   </MobilizationListItemMore>
@@ -112,11 +124,17 @@ export class MobilizationTemplatesListPage extends Component {
   }
 }
 
-MobilizationTemplatesListPage.propTypes = {}
+MobilizationTemplatesListPage.propTypes = {
+  dispatch: PropTypes.func,
+  destroyTemplateAsync: PropTypes.func,
+}
 
 const mapStateToProps = state => ({
   mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex,
   mobilizationTemplates: state.mobilizationTemplates,
 })
 
-export default connect(mapStateToProps)(MobilizationTemplatesListPage)
+export default connect(
+  mapStateToProps,
+  MobilizationTemplatesActions
+)(MobilizationTemplatesListPage)
