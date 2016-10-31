@@ -4,6 +4,7 @@ import { Entity, RichUtils, SelectionState } from 'draft-js'
 import Link from './Link'
 import linkStrategy from './linkStrategy'
 
+import EditorUtils from '../EditorUtils'
 import getSelectionEntities from '../getSelectionEntities'
 
 
@@ -48,31 +49,9 @@ export default class LinkControls extends Component {
       const { editorState, setEditorState } = this.props
       const { href, target } = this.state
 
-      const entitySelection = getSelectionLink(editorState)
-
-      if (!editorState.getSelection().isCollapsed()) {
-        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
-        const targetSelection = editorState.getSelection()
-
-        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
-      } else if (entitySelection) {
-        // Make selection to apply entity
-        const selection = SelectionState.createEmpty(
-          editorState.getCurrentContent().getBlockForKey(
-            editorState.getSelection().getStartKey()
-          )
-        )
-
-        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
-        const targetSelection = selection.merge({
-          anchorKey: editorState.getSelection().getAnchorKey(),
-          focusKey: editorState.getSelection().getFocusKey(),
-          anchorOffset: entitySelection.start,
-          focusOffset: entitySelection.end
-        })
-
-        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
-      }
+      setEditorState(EditorUtils.toggleLink(editorState, { href, target }))
+    } else {
+      setEditorState(EditorUtils.toggleLink(editorState, null))
     }
     this.setState({ showInput: false })
   }
