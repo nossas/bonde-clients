@@ -123,10 +123,10 @@ export default {
             );
           }
         }
-      } else {
+      } else if (block.getText().length > 0) {
         if (!entityKey) {
           // Ensure only a entity been created
-          entityKey = Entity.create('LINK', 'MUTABLE', data);
+          entityKey = data ? Entity.create('LINK', 'MUTABLE', data) : null;
         }
 
         // Toggle link
