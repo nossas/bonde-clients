@@ -33,12 +33,4 @@ describe('Navbar', () => {
       expect(navbarButtons).to.have.length(visibleBlocks.length)
     })
   })
-
-  describe('#render', () => {
-    it('should render a DropDownMenu', () => {
-      expect(
-        TestUtils.scryRenderedComponentsWithType(navbarComponent, DropDownMenu)
-      ).to.have.length(1)
-    })
-  })
 })

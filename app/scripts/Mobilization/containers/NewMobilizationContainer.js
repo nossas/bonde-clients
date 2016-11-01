@@ -25,7 +25,8 @@ NewMobilizationContainer.propTypes = {
 }
 
 const mapStateToProps = (state, props) => ({
-  mobilization: getMobilization(state, props)
+  mobilization: getMobilization(state, props),
+  mobilizationTemplates: state.mobilizationTemplates
 })
 
 export default connect(mapStateToProps)(NewMobilizationContainer)

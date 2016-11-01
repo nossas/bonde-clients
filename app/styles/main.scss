@@ -172,3 +172,47 @@ a.no-underscore {
     float: right;
   }
 }
+
+// Standalone Elements
+.arrow-down {
+  width: 15px;
+  height: 15px;
+  border-bottom-width: 5px;
+  border-left-width: 5px;
+  border-bottom-color: rgb(173,173,173);
+  border-left-color: rgb(173,173,173);
+  border-bottom-style: solid;
+  border-left-style: solid;
+  transform: rotate(-45deg);
+  display: inline-block;
+}
+
+// Media queries
+.lg-show {
+  display: none;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+}
+.lg-hide {
+  display: block;
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+}
+
+// Button
+.float-button {
+  position: fixed;
+  top: 2rem;
+  right: 4rem;
+  width: inherit;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -87,3 +87,31 @@ export const setMobilizationMoreMenuActiveIndex = index => ({
   type: SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX,
   index
 })
+
+export const REQUEST_CREATE_MOBILIZATION_FROM_TEMPLATE = 'REQUEST_CREATE_MOBILIZATION_FROM_TEMPLATE'
+export const SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE = 'SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE'
+export const FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE = 'FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE'
+const createMobilizationFromTemplateRequest = () =>
+  ({ type: REQUEST_CREATE_MOBILIZATION_FROM_TEMPLATE })
+const createMobilizationFromTemplateSuccess = mobilization =>
+  ({ type: SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE, mobilization })
+const createMobilizationFromTemplateFailure = error =>
+  ({ type: FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE, error })
+export const createMobilizationFromTemplateAsync = (template_mobilization_id, mobilization_id, next) =>
+  (dispatch, getState, request) => {
+    const { auth: { credentials } } = getState()
+    const body = { template_mobilization_id }
+
+    dispatch(createMobilizationFromTemplateRequest())
+    return request
+      .createMobilizationFromTemplate(body, mobilization_id, credentials)
+      .then(response => {
+        dispatch(createMobilizationFromTemplateSuccess(response.data))
+        next()
+        return Promise.resolve()
+      })
+      .catch(error => {
+        dispatch(createMobilizationFromTemplateFailure(error))
+        return Promise.reject({ _error: `Response ${error}` })
+      })
+}

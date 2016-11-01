@@ -57,11 +57,11 @@ class MobilizationDashboardContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (globalState, ownProps) => ({
-  auth: globalState.auth,
-  blocks: globalState.blocks,
-  widgets: globalState.widgets,
-  mobilization: getMobilization(globalState, ownProps)
+const mapStateToProps = (state, props) => ({
+  auth: state.auth,
+  blocks: state.blocks,
+  widgets: state.widgets,
+  mobilization: getMobilization(state, props)
 })
 
 export default connect(mapStateToProps)(MobilizationDashboardContainer)

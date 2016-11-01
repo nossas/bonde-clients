@@ -23,7 +23,6 @@ import { SettingsPageContentLayout } from '../../../components/Layout'
 
 const AutoFireFormPage = (props) => {
   const {
-    ...rest,
     fields: {
       sender_name: senderName,
       sender_email: senderEmail,
@@ -34,7 +33,8 @@ const AutoFireFormPage = (props) => {
     widget,
     mobilization,
     credentials,
-    editWidgetAsync
+    editWidgetAsync,
+    ...rest
   } = props
 
   const handleSubmit = values => {
