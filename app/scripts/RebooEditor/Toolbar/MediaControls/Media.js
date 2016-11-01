@@ -17,7 +17,7 @@ class Media extends Component {
     } = entity.getData()
 
     const media = React.createElement(
-      entity.getType(),
+      entity.getType() === 'image' ? 'img' : entity.getType(),
       {...mediaProps}
     )
 
@@ -34,7 +34,6 @@ class Media extends Component {
 Media.propTypes = {
   // Injected by draft-js in blockRendererFn
   block: PropTypes.object.isRequired,
-  contentState: PropTypes.object.isRequired
 }
 
 export default Media
