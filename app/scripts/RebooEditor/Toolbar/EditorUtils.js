@@ -1,4 +1,4 @@
-import { EditorState, Entity, RichUtils, SelectionState } from 'draft-js';
+import { EditorState, Entity, Modifier, RichUtils, SelectionState } from 'draft-js';
 
 
 export const getEntitySelectionState = (editorState, selectionState, entityType) => {
@@ -82,6 +82,31 @@ const getBlockSelectionState = (contentBlock, selectionState) => {
  * - toggleLink(editorState: EditorState, data: object)
  */
 export default {
+
+  toggleInlineStyle: (editorState, inlineStyle) => {
+    if (inlineStyle.indexOf(':') > 0) {  // remove and add new custom inline style
+      let contentWithoutStyle = editorState.getCurrentContent();
+
+      const prefix = inlineStyle.replace(':')[0];
+      const styles = editorState.getCurrentInlineStyle().filter(style => style.startsWith(prefix));
+      if (styles.size > 0) {
+        styles.forEach(style => {
+          contentWithoutStyle = Modifier.removeInlineStyle(
+            contentWithoutStyle,
+            editorState.getSelection(),
+            style
+          );
+        })
+        return RichUtils.toggleInlineStyle(
+          // apply custom inline style in content without style
+          EditorState.push(editorState, contentWithoutStyle, 'change-inline-style'),
+          inlineStyle
+        );
+      }
+    }
+
+    return RichUtils.toggleInlineStyle(editorState, inlineStyle);
+  },
 
   toggleLink: (editorState, data) => {
     // Save editorState then apply link in loop

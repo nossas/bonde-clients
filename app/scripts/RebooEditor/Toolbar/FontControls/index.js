@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { EditorState, Modifier, RichUtils } from 'draft-js'
+
+import EditorUtils from '../EditorUtils'
 
 import SelectFontFamily from './SelectFontFamily'
 
@@ -52,7 +53,7 @@ export default class FontControls extends Component {
     const fontSize = e.target.value
 
     if (fontSize) {
-      const editorStateWithFontSize = RichUtils.toggleInlineStyle(
+      const editorStateWithFontSize = EditorUtils.toggleInlineStyle(
         editorState,
         `font-size: ${fontSize}px;`
       )
@@ -65,7 +66,7 @@ export default class FontControls extends Component {
     const { editorState, setEditorState } = this.props
     const fontFamily = e.target.value
 
-    const editorStateWithFontFamily = RichUtils.toggleInlineStyle(
+    const editorStateWithFontFamily = EditorUtils.toggleInlineStyle(
       editorState,
       `font-family: ${fontFamily};`
     )

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { EditorState, Modifier } from 'draft-js'
 
+import EditorUtils from '../EditorUtils'
 import ColorPickerButton from './ColorPickerButton'
 
 export default class ColorControls extends Component {
@@ -30,13 +30,10 @@ export default class ColorControls extends Component {
 
     const targetSelection = editorState.getSelection()
     if (!targetSelection.isCollapsed()) {
-      const contentWithColor = Modifier.applyInlineStyle(
-        editorState.getCurrentContent(),
-        targetSelection,
+      const editorStateWithColor = EditorUtils.toggleInlineStyle(
+        editorState,
         `color: rgba(${color.r},${color.g},${color.b},${color.a});`
-      )
-
-      const editorStateWithColor = EditorState.push(editorState, contentWithColor, 'change-inline-style')
+      );
       setEditorState(editorStateWithColor)
     }
   }
