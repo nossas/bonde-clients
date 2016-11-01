@@ -45,14 +45,15 @@ export default class LinkControls extends Component {
   }
 
   confirmLink() {
-    if (this.state.href) {
-      const { editorState, setEditorState } = this.props
-      const { href, target } = this.state
+    const { editorState, setEditorState } = this.props
 
+    if (this.state.href) {
+      const { href, target } = this.state
       setEditorState(EditorUtils.toggleLink(editorState, { href, target }))
     } else {
       setEditorState(EditorUtils.toggleLink(editorState, null))
     }
+
     this.setState({ showInput: false })
   }
 

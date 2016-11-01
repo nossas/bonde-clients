@@ -1,9 +1,40 @@
-import { EditorState, Entity, Modifier, SelectionState } from 'draft-js';
+import { EditorState, Entity, RichUtils, SelectionState } from 'draft-js';
+
+
+export const getEntitySelectionState = (editorState, selectionState, entityType) => {
+  // Selection cursor
+  const currentContent = editorState.getCurrentContent();
+  const endOffset = selectionState.getEndOffset()
+
+  const block = currentContent.getBlockForKey(selectionState.getStartKey())
+
+  let entitySelectionState;
+
+  block.findEntityRanges(character => {
+    const entityKey = character.getEntity();
+    return entityKey && Entity.get(entityKey).getType() === entityType;
+  }, (start, end) => {
+
+    const isSelected = end >= endOffset && start <= endOffset
+
+    if (isSelected) {
+      entitySelectionState = selectionState.merge({
+        anchorOffset: start,
+        focusOffset: end
+      })
+    }
+  })
+
+  return entitySelectionState
+}
 
 /*
  * getSelectedBlocks
  */
-export const getSelectedBlocks = (contentState, anchorKey, focusKey) => {
+export const getSelectedBlocks = (contentState, selectionState) => {
+  const anchorKey = selectionState.getStartKey();
+  const focusKey = selectionState.getEndKey();
+
   const isSameBlock = anchorKey === focusKey;
   const startingBlock = contentState.getBlockForKey(anchorKey);
 
@@ -30,6 +61,21 @@ export const getSelectedBlocks = (contentState, anchorKey, focusKey) => {
   return selectedBlocks;
 };
 
+const getBlockSelectionState = (contentBlock, selectionState) => {
+  const anchorKey = selectionState.getStartKey();
+  const focusKey = selectionState.getEndKey();
+
+  // Selection for this block
+  const blockKey = contentBlock.getKey();
+  const startOffset = blockKey === anchorKey ? selectionState.getStartOffset() : 0;
+  const endOffset = blockKey === focusKey ? selectionState.getEndOffset() : contentBlock.getText().length;
+
+  return SelectionState.createEmpty(blockKey).merge({
+    anchorOffset: startOffset,
+    focusOffset: endOffset
+  });
+}
+
 /*
  * Utils.js
  *
@@ -44,57 +90,77 @@ export default {
     const selection = editorState.getSelection();
     const contentState = editorState.getCurrentContent();
 
-    const anchorKey = selection.getStartKey();
-    const focusKey = selection.getEndKey();
-
-    const arrayBlocks = getSelectedBlocks(contentState, anchorKey, focusKey);
+    const arrayBlocks = getSelectedBlocks(contentState, selection);
 
     // Should create entity when text select
     // and merge entity data when block type selected is atomic
-    let entityKey = '';
+    let entityKey;
 
     arrayBlocks.forEach(block => {
-      // When block is atomic, only has entity
       const entity = block.getEntityAt(0);
-      if (entity) {
-        Entity.mergeData(entity, data);
+      if (entity) {  // When has entity selected
+        if (block.getType() === 'atomic') {
+          if (!data) {  // Remove
+            Entity.mergeData(entity, { href: null });
+          } else {  // Update
+            Entity.mergeData(entity, data);
+          }
+        } else {
+          const blockSelectionState = getBlockSelectionState(block, selection);
+          const entitySelectionState = getEntitySelectionState(editorState, blockSelectionState, 'LINK')
+
+          if (entitySelectionState && data) {
+            editorStateMutable = RichUtils.toggleLink(
+              editorStateMutable,
+              blockSelectionState,
+              Entity.create('LINK', 'MUTABLE', data)
+            );
+          } else {
+            editorStateMutable = RichUtils.toggleLink(
+              editorStateMutable,
+              blockSelectionState,
+              null
+            );
+          }
+        }
       } else {
-        if (entityKey === '') {
-          // If not pass data, remove entity applying null
-          entityKey = data ? Entity.create('LINK', 'MUTABLE', data) : undefined;
+        if (!entityKey) {
+          // Ensure only a entity been created
+          entityKey = Entity.create('LINK', 'MUTABLE', data);
         }
 
-        // Selection for this block
-        const blockKey = block.getKey();
-        const startOffset = blockKey === anchorKey ? selection.getStartOffset() : 0;
-        const endOffset = blockKey === focusKey ? selection.getEndOffset() : block.getText().length;
-
-        const blockSelectionState = SelectionState
-          .createEmpty(blockKey)
-          .merge({
-            anchorOffset: startOffset,
-            focusOffset: endOffset
-          });
-
         // Toggle link
-
-        const contentStateWithLink = Modifier.applyEntity(
+        const blockSelectionState = getBlockSelectionState(block, selection);
+        editorStateMutable = RichUtils.toggleLink(
           // Apply entity in content mutable to ensure
           // that link before loop has been applied
-          editorStateMutable.getCurrentContent(),
+          editorStateMutable,
           blockSelectionState,
           entityKey
-        );
-
-        editorStateMutable = EditorState.push(
-          editorStateMutable,
-          contentStateWithLink,
-          'apply-entity'
         );
       }
     });
 
     return editorStateMutable;
+  },
+
+  getEntityInstance: (editorState, selectionState, entityType) => {
+    const entitySelectionState = getEntitySelectionState(
+      editorState,
+      selectionState,
+      entityType
+    );
+
+    if (entitySelectionState) {
+      const block = editorState
+        .getCurrentContent()
+        .getBlockForKey(
+          entitySelectionState.getStartKey()
+        );
+
+      const entityKey = block.getEntityAt(entitySelectionState.getStartOffset());
+      return entityKey ? Entity.get(entityKey) : undefined;
+    }
   },
 
 };
