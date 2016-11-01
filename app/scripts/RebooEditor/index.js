@@ -18,6 +18,7 @@ import Toolbar, {
 import './styles.scss'
 
 class RebooEditor extends Component {
+
   constructor(props) {
     super(props)
 
