@@ -14,14 +14,14 @@ import {
 class MobilizationCityForm extends Component {
   render() {
     const {
-      ...rest,
       fields: { organization_id: organizationId },
       submitting,
       mobilization,
       organizations,
       next,
       // Actions
-      editMobilizationAsync
+      editMobilizationAsync,
+      ...rest
     } = this.props
 
     const handleSubmit = values => editMobilizationAsync({ ...mobilization, ...values }, next)

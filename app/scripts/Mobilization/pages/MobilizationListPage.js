@@ -1,9 +1,35 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
-import { MobilizationList, MobilizationListHeader }  from '../components'
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '../../../components/Layout'
+import { MobilizationsHeader } from '../components'
+import MobilizationList from '../components/MobilizationList'
+import {
+  MobilizationListItem,
+  MobilizationListItemAvatar,
+  MobilizationListItemName,
+  MobilizationListItemCreatedAt,
+  MobilizationListItemUsers,
+  MobilizationListItemFundRaising,
+  MobilizationListItemMore,
+  MobilizationListItemMoreMenu,
+  MobilizationListItemMoreMenuAction
+}  from '../components/MobilizationList/MobilizationListItem'
+import {
+  MobilizationListItemHeader,
+  MobilizationListItemHeaderName,
+  MobilizationListItemHeaderCreatedAt,
+  MobilizationListItemHeaderUsers,
+  MobilizationListItemHeaderFundRaising
+}  from '../components/MobilizationList/MobilizationListItemHeader'
 import {
   setCurrentMobilizationId,
   setMobilizationMoreMenuActiveIndex
@@ -18,25 +44,69 @@ export class MobilizationListPage extends Component {
 
   render() {
     const {
-      mobilization: { data, loading, loaded },
+      mobilization: { data: mobilizations, loading, loaded },
       mobilizationMoreMenuActiveIndex,
       dispatch
     } = this.props
 
     return (
-      <div className="flex-auto bg-silver gray">
-        <MobilizationListHeader
-          {...this.props}
-          redirectToAdd={() => Paths.newMobilization()}
-        />
-        {(
-          loading && !loaded ? <Loading /> :
-          <MobilizationList
-            {...this.props}
-            redirectToEdit={id => Paths.editMobilization(id)}
-            mobilizations={data}
-          />
-        )}
+      <SettingsPageLayout>
+        <SettingsPageMenuLayout title="Suas Mobilizações">
+          <MobilizationsHeader {...this.props} />
+        </SettingsPageMenuLayout>
+
+        <SettingsPageContentLayout containerClassName="lg-col-12">
+          {(
+            loading && !loaded ? <Loading /> :
+            <MobilizationList>
+              <MobilizationListItemHeader>
+                <MobilizationListItemHeaderName />
+                <MobilizationListItemHeaderCreatedAt />
+                <MobilizationListItemHeaderUsers />
+                <MobilizationListItemHeaderFundRaising />
+              </MobilizationListItemHeader>
+
+              {mobilizations && mobilizations.map((mobilization, index) => (
+                <MobilizationListItem
+                  key={`mobilization-${mobilization.id}`}
+                  className={classnames({ 'z2': mobilizationMoreMenuActiveIndex === index })}
+                >
+                  <Link
+                    className="gray20"
+                    to={Paths.editMobilization(mobilization.id)}
+                  >
+                    <MobilizationListItemAvatar {...mobilization} />
+
+                    <div className="list-item-table-container overflow-hidden">
+                      <MobilizationListItemName {...mobilization} />
+                      <MobilizationListItemCreatedAt {...mobilization} />
+                      <MobilizationListItemUsers {...mobilization} />
+                      <MobilizationListItemFundRaising {...mobilization} />
+                    </div>
+                  </Link>
+                  <MobilizationListItemMore dispatch={dispatch} index={index}>
+                    <MobilizationListItemMoreMenu
+                      active={mobilizationMoreMenuActiveIndex === index}
+                    >
+                      <MobilizationListItemMoreMenuAction
+                        componentClass="a"
+                        target="_blank"
+                        text="Abrir página"
+                        path={Paths.mobilization(mobilization)}
+                        icon="external-link"
+                      />
+                      <MobilizationListItemMoreMenuAction
+                        text="Criar template"
+                        path={Paths.mobilizationTemplatesCreate(mobilization)}
+                        icon="star"
+                      />
+                    </MobilizationListItemMoreMenu>
+                  </MobilizationListItemMore>
+                </MobilizationListItem>
+              ))}
+            </MobilizationList>
+          )}
+        </SettingsPageContentLayout>
         {
           typeof mobilizationMoreMenuActiveIndex !== 'undefined' && (
             <div
@@ -46,7 +116,7 @@ export class MobilizationListPage extends Component {
             />
           )
         }
-      </div>
+      </SettingsPageLayout>
     )
   }
 }

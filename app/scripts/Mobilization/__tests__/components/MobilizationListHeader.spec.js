@@ -1,44 +1,33 @@
 import React from 'react'
-
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import MobilizationListHeader from '../../components/MobilizationListHeader'
+import MobilizationsHeader from '../../components/MobilizationsHeader'
 
-
-describe('<MobilizationListHeader />', () => {
+describe('app/scripts/Mobilization/components/MobilizationsHeader', () => {
   const context = { router: {} }
   let wrapper
   const props = {
-    location: { pathname: '' }
+    location: { pathname: '' },
+    mobilization: { id: 1 }
   }
 
   beforeEach(() => {
-    wrapper = shallow(<MobilizationListHeader {...props} />, { context })
+    wrapper = shallow(<MobilizationsHeader {...props} />, { context })
   })
 
-  it('should hide button add mob by default', () => {
-    expect(wrapper.find('Link').length).to.equal(0)
-  })
-
-  it('should show add button when redirectToAdd pass', () => {
-    wrapper.setProps({
-      redirectToAdd: () => {
-        return '/mobilization'
-      }
+  describe('#render', () => {
+    it('should render add new mobilization button', () => {
+      expect(wrapper.find('Link').length).to.equal(1)
     })
-    expect(wrapper.find('Link').length).to.equal(1)
-    expect(wrapper.find('Link').props().to).to.equal('/mobilization')
-  })
 
-  it('should hide add button when redirectToAdd not is passed', () => {
-    wrapper.setProps({
-      redirectToAdd: undefined,
+    describe('tabs', () => {
+      it('should render one <Tabs> parent component', () => {
+        expect(wrapper.find('Tabs')).to.have.length(1)
+      })
+      it('should render 2 <Tab> children component', () => {
+        expect(wrapper.find('Tab')).to.have.length(2)
+      })
     })
-    expect(wrapper.find('Link').length).to.equal(0)
-  })
-
-  it('should render one <Tabs> component', () => {
-    expect(wrapper.find('Tabs')).to.have.length(1)
   })
 })

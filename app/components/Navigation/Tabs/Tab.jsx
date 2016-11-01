@@ -14,7 +14,7 @@ class Tab extends Component {
         to={path}
         className={classnames(
           'tab btn border-only-bottom px0 py2 mr3 inline-block',
-          isActive ? 'h4' : null
+          isActive ? 'h4 is-active' : null
         )}
       >
         {text}

@@ -201,7 +201,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             href="#"
             onClick={::this.handleClickDonate}
             style={{ backgroundColor: main_color }}
-            className="btn white caps bg-darken-4 p2 mt1 col-12 rounded"
+            className="btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box"
           >
             {button_text}
           </a>

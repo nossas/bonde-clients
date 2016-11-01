@@ -49,11 +49,12 @@ export default class Navbar extends React.Component {
             {this.renderNavbarButtons(false)}
           </div>
         </div>
-        <div className="lg-hide show">
+        <div className="lg-hide">
           <DropDownMenu
             wrapperClassName='absolute right-0 top-0 m1'
-            buttonClassName='bg-darken-4 white rounded'
-            menuClassName="rounded bg-darken-4 white top-0 right-0 mt4"
+            buttonClassName='btn bg-darken-4 white rounded'
+            menuClassName="rounded bg-darken-4 white top-0 right-0"
+            menuStyle={{ marginTop: '40px' }}
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>

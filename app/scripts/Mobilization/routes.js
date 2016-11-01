@@ -24,6 +24,7 @@ import {
   EditMobilizationPage
 } from './pages'
 
+import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
 import widgetRoutes from './../Widget/routes'
 
 const path = '/mobilizations'
@@ -38,6 +39,8 @@ export default (
       <Route path={`/${path}/new`} component={MobilizationBasicsNewFormPage} />
       <Route path={`/${defaultPath}/cityNew`} component={MobilizationCityNewPage} />
     </Route>
+
+    {mobilizationTemplatesRoutes(defaultPath)}
 
     <Route component={MobilizationDashboardContainer}>
       <Route path={`/${defaultPath}/edit`} component={EditMobilizationPage} />

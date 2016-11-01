@@ -20,7 +20,7 @@ class MobilizationCityNewPage extends Component {
         <MobilizationCityForm
           {...this.props}
           className="bg-white"
-          next={mobilization => this.transitionTo(Paths.editMobilization(mobilization.id))}
+          next={mobilization => this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))}
         />
       </div>
     )
