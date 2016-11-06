@@ -87,7 +87,7 @@ export default {
     if (inlineStyle.indexOf(':') > 0) {  // remove and add new custom inline style
       let contentWithoutStyle = editorState.getCurrentContent();
 
-      const prefix = inlineStyle.replace(':')[0];
+      const prefix = inlineStyle.split(':')[0];
       const styles = editorState.getCurrentInlineStyle().filter(style => style.startsWith(prefix));
       if (styles.size > 0) {
         styles.forEach(style => {
