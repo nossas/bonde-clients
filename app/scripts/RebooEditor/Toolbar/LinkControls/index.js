@@ -57,6 +57,11 @@ export default class LinkControls extends Component {
     this.setState({ showInput: false })
   }
 
+  removeLink() {
+    const { editorState, setEditorState } = this.props
+    setEditorState(EditorUtils.toggleLink(editorState, null))
+  }
+
   handleChangeTarget(e) {
     this.setState({ target: e.target.checked ? '_blank' : '_self' })
   }
@@ -99,6 +104,9 @@ export default class LinkControls extends Component {
             </div>
           </div>
         )}
+        <button className={buttonClassName} onClick={this.removeLink.bind(this)}>
+          <i className="fa fa-unlink" />
+        </button>
       </div>
     )
   }
