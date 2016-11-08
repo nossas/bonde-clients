@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 import { Entity, RichUtils, SelectionState } from 'draft-js'
 
 import Link from './Link'
@@ -33,9 +34,9 @@ export default class LinkControls extends Component {
       if (nextEntityLink && nextEntityLink !== entityLink) {
         const entityInstance = Entity.get(nextEntityLink.entityKey)
         const { href, target } = entityInstance.getData()
-        this.setState({ href, target })
+        this.setState({ href, target, hasLink: true })
       } else {
-        this.setState({ href: '', target: '_self' })
+        this.setState({ href: '', target: '_self', hasLink: false })
       }
     }
   }
@@ -74,7 +75,7 @@ export default class LinkControls extends Component {
 
     return (
       <div className="linkControls">
-        <button className={buttonClassName} onClick={this.handleToggleInput.bind(this)}>
+        <button className={classnames(buttonClassName, this.state.hasLink ? 'active' : null)} onClick={this.handleToggleInput.bind(this)}>
           <i className="fa fa-link" />
         </button>
         {this.state.showInput && (

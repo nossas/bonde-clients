@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
+
 import { RichUtils, CompositeDecorator } from 'draft-js'
 
 import ColorControls, { customStyleFn as colorCustomStyleFn } from './ColorControls'
@@ -25,6 +27,19 @@ class Toolbar extends Component {
     this.props.focusEditor()
   }
 
+  hasInlineStyle(inlineStyle) {
+    const { editorState } = this.props
+    const hasStyle = editorState.getCurrentInlineStyle().filter(style => style === inlineStyle)
+    return hasStyle.size > 0 ? 'active' : null
+  }
+
+  hasBlockType(blockType) {
+    const { editorState } = this.props
+    const selectionState = editorState.getSelection()
+    const block = editorState.getCurrentContent().getBlockForKey(selectionState.getStartKey())
+    return block.getType() === blockType ? 'active' : null
+  }
+
   render() {
     const { editorState, setEditorState, focusEditor, buttonClassName, popoverClassName, theme } = this.props
     const controlsProps = { editorState, setEditorState, focusEditor }
@@ -37,21 +52,21 @@ class Toolbar extends Component {
           {/* InlineStyle buttons */}
           <button
             type="button"
-            className={buttonClassName}
+            className={classnames(buttonClassName, this.hasInlineStyle('BOLD'))}
             onClick={() => this.toggleInlineStyle('BOLD')}
           >
             <i className="fa fa-bold" />
           </button>
           <button
             type="button"
-            className={buttonClassName}
+            className={classnames(buttonClassName, this.hasInlineStyle('ITALIC'))}
             onClick={() => this.toggleInlineStyle('ITALIC')}
           >
             <i className="fa fa-italic" />
           </button>
           <button
             type="button"
-            className={buttonClassName}
+            className={classnames(buttonClassName, this.hasInlineStyle('UNDERLINE'))}
             onClick={() => this.toggleInlineStyle('UNDERLINE')}
           >
             <i className="fa fa-underline" />
@@ -59,14 +74,14 @@ class Toolbar extends Component {
           {/* BlockType buttons */}
           <button
             type="button"
-            className={buttonClassName}
+            className={classnames(buttonClassName, this.hasBlockType('ordered-list-item'))}
             onClick={() => this.toggleBlockType('ordered-list-item')}
           >
             <i className="fa fa-list-ol" />
           </button>
           <button
             type="button"
-            className={buttonClassName}
+            className={classnames(buttonClassName, this.hasBlockType('unordered-list-item'))}
             onClick={() => this.toggleBlockType('unordered-list-item')}
           >
             <i className="fa fa-list-ul" />

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
 import EditorUtils from '../EditorUtils'
 import ColorPickerButton from './ColorPickerButton'
@@ -38,6 +39,12 @@ export default class ColorControls extends Component {
     }
   }
 
+  hasColorStyle() {
+    const { editorState } = this.props
+    const hasStyle = editorState.getCurrentInlineStyle().filter(style => style.startsWith('color'))
+    return hasStyle.size > 0 ? 'active' : null
+  }
+
   render() {
 
     const { buttonClassName, theme } = this.props
@@ -46,7 +53,7 @@ export default class ColorControls extends Component {
       <div className="colorControls">
         <ColorPickerButton
           theme={theme}
-          className={buttonClassName}
+          className={classnames(buttonClassName, this.hasColorStyle())}
           color={this.state.color}
           onRemoveColor={() => {}}
           onChangeColor={this.onChangeColor.bind(this)}
