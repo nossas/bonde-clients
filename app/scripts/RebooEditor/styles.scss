@@ -18,4 +18,15 @@
     right: 0;
     z-index: 1;
   }
+
+  // Align editor content
+  .alignment--left {
+    text-align: left;
+  }
+  .alignment--center {
+    text-align: center;
+  }
+  .alignment--right {
+    text-align: left;
+  }
 }
