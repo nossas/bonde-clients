@@ -10,20 +10,24 @@ import MediaControls, { blockRendererFn as mediaBlockRendererFn } from './MediaC
 
 import './styles.scss'
 
+
 class Toolbar extends Component {
+
   toggleInlineStyle(style) {
     const { editorState, setEditorState } = this.props
     setEditorState(RichUtils.toggleInlineStyle(editorState, style))
+    this.props.focusEditor()
   }
 
   toggleBlockType(blockType) {
     const { editorState, setEditorState } = this.props
     setEditorState(RichUtils.toggleBlockType(editorState, blockType))
+    this.props.focusEditor()
   }
 
   render() {
-    const { editorState, setEditorState, buttonClassName, popoverClassName, theme } = this.props
-    const controlsProps = { editorState, setEditorState }
+    const { editorState, setEditorState, focusEditor, buttonClassName, popoverClassName, theme } = this.props
+    const controlsProps = { editorState, setEditorState, focusEditor }
 
     return (
       <div
@@ -103,6 +107,7 @@ class Toolbar extends Component {
 Toolbar.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   popoverClassName: PropTypes.string,
   theme: PropTypes.string

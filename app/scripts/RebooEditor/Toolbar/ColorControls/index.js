@@ -50,6 +50,7 @@ export default class ColorControls extends Component {
           color={this.state.color}
           onRemoveColor={() => {}}
           onChangeColor={this.onChangeColor.bind(this)}
+          focusEditor={this.props.focusEditor}
         />
       </div>
     )
@@ -59,6 +60,7 @@ export default class ColorControls extends Component {
 ColorControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   theme: PropTypes.string,
 }

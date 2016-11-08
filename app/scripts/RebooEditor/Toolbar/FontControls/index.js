@@ -59,6 +59,8 @@ export default class FontControls extends Component {
       )
       setEditorState(editorStateWithFontSize)
       this.setState({ fontSize })
+
+      this.props.focusEditor()
     }
   }
 
@@ -72,6 +74,8 @@ export default class FontControls extends Component {
     )
     setEditorState(editorStateWithFontFamily)
     this.setState({ fontFamily })
+
+    this.props.focusEditor()
   }
 
   render() {
@@ -95,6 +99,7 @@ export default class FontControls extends Component {
 FontControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   initialValue: PropTypes.shape({
     fontSize: PropTypes.number,
     fontFamily: PropTypes.string

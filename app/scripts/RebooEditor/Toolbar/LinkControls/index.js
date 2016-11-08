@@ -55,11 +55,13 @@ export default class LinkControls extends Component {
     }
 
     this.setState({ showInput: false })
+    this.props.focusEditor()
   }
 
   removeLink() {
     const { editorState, setEditorState } = this.props
     setEditorState(EditorUtils.toggleLink(editorState, null))
+    this.props.focusEditor()
   }
 
   handleChangeTarget(e) {
@@ -115,6 +117,7 @@ export default class LinkControls extends Component {
 LinkControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   popoverClassName: PropTypes.string
 }

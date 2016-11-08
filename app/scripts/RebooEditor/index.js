@@ -40,10 +40,10 @@ class RebooEditor extends Component {
     this.state = { editorState, hasFocus: false }
   }
 
-  focusEditor() {
+  focus() {
     this.setState({
       hasFocus: true,
-    }, () => setTimeout(() => ReactDOM.findDOMNode(this.editor).focus()))
+    }, () => setTimeout(() => this.refs.editor.focus()))
   }
 
   onChangeEditorState(editorState) {
@@ -82,15 +82,16 @@ class RebooEditor extends Component {
               buttonClassName="btn white p2"
               popoverClassName="absolute white p2 bg-darken-4 rounded-bottom"
               editorState={this.state.editorState}
-              setEditorState={::this.onChangeEditorState}
+              setEditorState={this.onChangeEditorState.bind(this)}
+              focusEditor={this.focus.bind(this)}
             />
             <div className="outside" onClick={::this.save} />
           </div>
         ) : null}
-        <div className="editor">
-          <div onClick={::this.focusEditor}>
+        <div className="editor" style={{ outline: this.state.hasFocus ? '1px solid blue' : 'none' }}>
+          <div onClick={this.focus.bind(this)}>
             <Editor
-              ref={input => this.editor = input}
+              ref="editor"
               readOnly={readOnly}
               editorState={this.state.editorState}
               onChange={::this.onChangeEditorState}
@@ -128,3 +129,5 @@ RebooEditor.defaultProps = {
 }
 
 export default RebooEditor
+
+export { default as createEditorContent } from './createEditorContent'

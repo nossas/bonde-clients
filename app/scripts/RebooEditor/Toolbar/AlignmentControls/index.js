@@ -15,6 +15,8 @@ export default class AlignmentControls extends Component {
       alignments.filter(align => alignment !== align)
     )
     setEditorState(editorStateWithAlignment)
+
+    this.props.focusEditor()
   }
 
   render() {
@@ -49,5 +51,6 @@ export default class AlignmentControls extends Component {
 AlignmentControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string
 }

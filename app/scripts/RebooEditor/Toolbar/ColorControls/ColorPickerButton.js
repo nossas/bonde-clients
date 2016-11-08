@@ -30,6 +30,7 @@ class ColorPickerButton extends Component {
 
   handleChangeColor(color) {
     this.setState({ showColorPicker: false })
+    this.props.focusEditor()
   }
 
   render() {
@@ -70,6 +71,7 @@ ColorPickerButton.propTypes = {
   color: PropTypes.object,
   onRemoveColor: PropTypes.func.isRequired,
   onChangeColor: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   className: PropTypes.string,
   theme: PropTypes.string
 }

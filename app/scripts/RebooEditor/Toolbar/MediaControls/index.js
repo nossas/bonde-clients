@@ -14,6 +14,8 @@ export default class MediaControls extends Component {
     const entityKey = Entity.create(mediaType, 'IMMUTABLE', { src: source })
     const editorStateWithMedia = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ')
     setEditorState(editorStateWithMedia)
+
+    this.props.focusEditor()
   }
 
   render() {
@@ -35,6 +37,7 @@ export default class MediaControls extends Component {
 MediaControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   popoverClassName: PropTypes.string
 }
