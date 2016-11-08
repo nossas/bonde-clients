@@ -14,9 +14,29 @@ describe('TwitterShareButton', () => {
     window.open = stubOpen
 
     TestUtils.Simulate.click(button)
+    const expectedText = encodeURIComponent('Change the world!')
 
     expect(stubOpen).to.have.been.calledWith(
-      'https://twitter.com/intent/tweet?text=Change the world!&url=http://meurio.org.br',
+      `https://twitter.com/intent/tweet?text=${expectedText}&url=http://meurio.org.br`,
+      'Compartilhar no Twitter',
+      'width=800,height=600'
+    )
+  })
+
+  it('should render text that contains hashtag and at mention chars', () => {
+    const component = TestUtils.renderIntoDocument(
+      <TwitterShareButton href='http://meurio.org.br' text='Change the world! #foo @bar' />
+    )
+
+    const button = ReactDOM.findDOMNode(component.refs.button)
+    const stubOpen = sinon.spy()
+    window.open = stubOpen
+
+    TestUtils.Simulate.click(button)
+    const expectedText = encodeURIComponent('Change the world! #foo @bar')
+
+    expect(stubOpen).to.have.been.calledWith(
+      `https://twitter.com/intent/tweet?text=${expectedText}&url=http://meurio.org.br`,
       'Compartilhar no Twitter',
       'width=800,height=600'
     )
