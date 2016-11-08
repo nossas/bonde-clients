@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var path = require('path')
 var webpackUniversalLoaders = require('./webpack/universal.loaders.config')
 var webpackUniversalPostCSS = require('./webpack/universal.postcss.config')
+var webpackUniversalResolveAlias = require('./webpack/universal.resolve-alias.config')
 
 module.exports = function(config) {
   config.set({
@@ -22,9 +23,7 @@ module.exports = function(config) {
 
       resolve: {
         extensions: [ '', '.js', '.jsx', '.json' ],
-        alias: {
-          modernizr$: path.resolve(__dirname, 'webpack/.modernizrrc')
-        }
+        alias: webpackUniversalResolveAlias,
       },
 
       module: {

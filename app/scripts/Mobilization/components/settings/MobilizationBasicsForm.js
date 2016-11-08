@@ -17,12 +17,12 @@ import {
 class MobilizationBasicsForm extends Component {
   render() {
     const {
-      ...rest,
       fields: { name, goal },
       mobilization,
       // Actions
       addMobilizationAsync,
-      editMobilizationAsync
+      editMobilizationAsync,
+      ...rest
     } = this.props
 
     const submitStrategy = mobilization ? editMobilizationAsync : addMobilizationAsync

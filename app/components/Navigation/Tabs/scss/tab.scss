@@ -11,8 +11,8 @@
     border-color: $pagenta;
   }
 
-  &.active,
-  &.active:hover {
+  &.is-active,
+  &.is-active:hover {
     border-color: $pagenta;
     font-weight: bold;
     color: $darkenGray;

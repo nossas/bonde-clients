@@ -5,7 +5,7 @@ import { ControlButtons } from './'
 
 class FormControl extends Component {
   render() {
-    const { ...props, componentClass: Component, className, style, submitted } = this.props
+    const { componentClass: Component, className, style, submitted, ...props } = this.props
     const {
       $formRedux: { formInline, submitting, dirty },
       $formGroup: { controlId, ...field }
