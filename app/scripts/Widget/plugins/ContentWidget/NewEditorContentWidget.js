@@ -9,7 +9,7 @@ import Editor from '../../../RebooEditor'
 
 import './scss/content-widget.scss'
 
-export default class ContentWidget extends React.Component {
+export default class NewEditorContentWidget extends React.Component {
 
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
@@ -50,7 +50,7 @@ export default class ContentWidget extends React.Component {
     if (settings.content !== rawContent) {
       const { dispatch, widget } = this.props
       const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-      this.setState({loading: true})
+      this.setState({ loading: true })
 
       const data = { ...widget, settings: { content: JSON.stringify(rawContent) } }
       bindedWidgetActions.editWidgetAsync(data)
@@ -67,30 +67,14 @@ export default class ContentWidget extends React.Component {
       null
     )
 
-    let content
-    try {
-      content = JSON.parse(settings.content)
-    } catch (e) {
-      content = settings.content
-    }
-
-    const isHTML = typeof content === 'string' && !editable
-
     return (
-      <div
-        className="widget content-widget link"
-        style={{ fontFamily: bodyFont }}
-      >
-        {isHTML ? (
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-        ) : (
-          <Editor
-            value={content}
-            theme={theme}
-            readOnly={!editable}
-            handleSave={this.handleSave.bind(this)}
-          />
-        )}
+      <div className="widget content-widget link" style={{ fontFamily: bodyFont }}>
+        <Editor
+          value={JSON.parse(settings.content)}
+          theme={theme}
+          readOnly={!editable}
+          handleSave={this.handleSave.bind(this)}
+        />
       </div>
     )
   }
