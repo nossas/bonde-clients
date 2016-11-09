@@ -68,7 +68,7 @@ class ColorPickerButton extends Component {
 }
 
 ColorPickerButton.propTypes = {
-  color: PropTypes.object,
+  color: PropTypes.string,
   onRemoveColor: PropTypes.func.isRequired,
   onChangeColor: PropTypes.func.isRequired,
   focusEditor: PropTypes.func.isRequired,

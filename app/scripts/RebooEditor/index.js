@@ -4,9 +4,11 @@ import {
   Editor,
   EditorState,
   ContentState,
+  RichUtils,
   convertFromHTML,
   convertToRaw,
-  convertFromRaw
+  convertFromRaw,
+  getDefaultKeyBinding
 } from 'draft-js'
 
 import Toolbar, {
@@ -49,6 +51,19 @@ class RebooEditor extends Component {
   onChangeEditorState(editorState) {
     this.setState({ editorState })
   }
+
+  handleKeyCommand(command) {
+    const newState = RichUtils.handleKeyCommand(
+      this.state.editorState,
+      command
+    )
+    if (newState) {
+      this.onChangeEditorState(newState);
+      return 'handled'
+    }
+    return 'not-handled'
+  }
+
 
   blockStyleFn(block) {
     // TODO: Move to control and receive like plugin
@@ -94,8 +109,9 @@ class RebooEditor extends Component {
               ref="editor"
               readOnly={readOnly}
               editorState={this.state.editorState}
-              onChange={::this.onChangeEditorState}
-              blockStyleFn={::this.blockStyleFn}
+              onChange={this.onChangeEditorState.bind(this)}
+              blockStyleFn={this.blockStyleFn.bind(this)}
+              handleKeyCommand={this.handleKeyCommand.bind(this)}
               {...toolbarEditorProps}
             />
           </div>
