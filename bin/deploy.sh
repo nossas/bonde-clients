@@ -8,7 +8,7 @@ if [[ "$CIRCLE_BRANCH" == "master" ]]; then
   DOKKU_HOST="reboo.org"
 fi
 
-REPO_URI="dokku@$DOKKU_HOST:000-client"
+REPO_URI="dokku@$DOKKU_HOST:0-client"
 # REPO_SSL="dokku@$DOKKU_HOST:000-client-ssl"
 
 git fetch --unshallow origin
