@@ -4,6 +4,9 @@ import { Entity, AtomicBlockUtils } from 'draft-js'
 import Media from './Media'
 
 import InsertImageButton from './InsertImageButton'
+import InsertScriptButton from './InsertScriptButton'
+
+import './styles.scss'
 
 
 export default class MediaControls extends Component {
@@ -28,6 +31,11 @@ export default class MediaControls extends Component {
           buttonClassName={buttonClassName}
           popoverClassName={popoverClassName}
           handleUploadFinish={source => this.handleInsertMedia('image', source)}
+        />
+        <InsertScriptButton
+          buttonClassName={buttonClassName}
+          popoverClassName={popoverClassName}
+          handleInsertScript={this.handleInsertMedia.bind(this)}
         />
       </div>
     )

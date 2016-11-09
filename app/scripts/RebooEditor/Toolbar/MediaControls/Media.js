@@ -16,18 +16,24 @@ class Media extends Component {
       ...mediaProps
     } = entity.getData()
 
-    const media = React.createElement(
-      entity.getType() === 'image' ? 'img' : entity.getType(),
-      {...mediaProps}
-    )
+    if (entity.getType() === 'image') {
+      const media = <img {...mediaProps} />
 
-    if (href) {
+      if (href) {
+        return (
+          <a href={href} target={target||'_blank'}>{media}</a>
+        )
+      }
+      return media
+
+    } else if (entity.getType() === 'iframe' || entity.getType() === 'script') {
+      // insert script or iframe in div
       return (
-        <a href={href} target={target||'_blank'}>{media}</a>
+        <div className="noscript" dangerouslySetInnerHTML={{__html: mediaProps.src }} />
       )
+    } else {
+      throw "Sorry, media type not found."
     }
-
-    return media
   }
 }
 
