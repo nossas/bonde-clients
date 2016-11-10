@@ -14,7 +14,7 @@ export default class TwitterShareButton extends React.Component {
 
     const { href, text } = this.props
     window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${href}`,
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${href}`,
       'Compartilhar no Twitter',
       'width=800,height=600'
     )
