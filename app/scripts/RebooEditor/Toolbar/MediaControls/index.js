@@ -54,8 +54,7 @@ MediaControls.propTypes = {
 export const blockRendererFn = (block) => {
   if (block.getType() === 'atomic') {
     return {
-      component: Media,
-      editable: false
+      component: Media
     }
   }
 }
