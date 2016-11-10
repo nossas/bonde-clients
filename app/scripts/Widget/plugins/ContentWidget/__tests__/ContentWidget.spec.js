@@ -43,4 +43,15 @@ describe('<ContentWidget />', () => {
     contentWidget.setProps({ widget })
     expect(contentWidget.find('OldEditorContentWidget').length).to.equal(1)
   })
+
+  it('should render new editor when forceRenderNewEditor is true', () => {
+    const widget = {
+      settings: {
+        content: "<div style=\"text-align: center;\"><span>Clique aqui para editar o text...</span></div>"
+      }
+    }
+    contentWidget.setProps({ widget })
+    contentWidget.setState({ forceRenderNewEditor: true })
+    expect(contentWidget.find('NewEditorContentWidget').length).to.equal(1)
+  })
 })

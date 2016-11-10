@@ -16,13 +16,15 @@ export default class ContentWidget extends Component {
   }
 
   render() {
+    const { widget: { settings } } = this.props
+
     try {
       // If parse content is RebooEditor
       JSON.parse(settings.content)
       return <NewEditorContentWidget {...this.props} />
     } catch (e) {
       // Else is old editor
-      if (!this.state.forceRenderNewEditor) {
+      if (this.state.forceRenderNewEditor) {
         return <NewEditorContentWidget {...this.props} />
       } else {
         return (
