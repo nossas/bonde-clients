@@ -119,9 +119,19 @@ export default class OldEditorContentWidget extends React.Component {
     }
   }
 
+  handleRenderNewEditor() {
+    const { handleForceRender } = this.props
+    if (window.confirm(`Ao converter seu conteúdo para o novo editor
+      algumas informações podem ser perdidas,
+      tem certeza que você quer alterar para o novo editor?`)) {
+      handleForceRender()
+    }
+  }
+
   render() {
     const { toolbarId, editing } = this.state
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
+    const { handleForceRender } = this.props
     return (
       <div>
         <div className={classnames('content-widget col-12', {'display-none': !editing})}>
@@ -143,6 +153,14 @@ export default class OldEditorContentWidget extends React.Component {
             ref="content"
           />
           <div className={classnames('right mt1', {'display-none': !editing})}>
+            {handleForceRender ? (
+              <button
+                onClick={this.handleRenderNewEditor.bind(this)}
+                className="btn caps bg-darken-4 white rounded mr1"
+              >
+                Alterar editor
+              </button>
+            ) : null}
             <button
               onClick={::this.save}
               className="btn caps bg-darken-4 white rounded"

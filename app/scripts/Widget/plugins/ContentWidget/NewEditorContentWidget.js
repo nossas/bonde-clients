@@ -67,10 +67,17 @@ export default class NewEditorContentWidget extends React.Component {
       null
     )
 
+    let value
+    try {
+      value = JSON.parse(settings.content)
+    } catch (e) {
+      value = settings.content
+    }
+
     return (
       <div className="widget content-widget link" style={{ fontFamily: bodyFont }}>
         <Editor
-          value={JSON.parse(settings.content)}
+          value={value}
           theme={theme}
           readOnly={!editable}
           handleSave={this.handleSave.bind(this)}

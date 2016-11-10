@@ -6,15 +6,32 @@ import OldEditorContentWidget from './OldEditorContentWidget'
 
 export default class ContentWidget extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = { forceRenderNewEditor: false }
+  }
+
+  handleForceRender() {
+    this.setState({ forceRenderNewEditor: true })
+  }
+
   render() {
-    const { widget: { settings } } = this.props
     try {
       // If parse content is RebooEditor
       JSON.parse(settings.content)
       return <NewEditorContentWidget {...this.props} />
     } catch (e) {
       // Else is old editor
-      return <OldEditorContentWidget {...this.props} />
+      if (!this.state.forceRenderNewEditor) {
+        return <NewEditorContentWidget {...this.props} />
+      } else {
+        return (
+          <OldEditorContentWidget
+            handleForceRender={this.handleForceRender.bind(this)}
+            {...this.props}
+          />
+        )
+      }
     }
 
   }

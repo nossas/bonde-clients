@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import {
   Editor,
   EditorState,
@@ -7,8 +6,7 @@ import {
   RichUtils,
   convertFromHTML,
   convertToRaw,
-  convertFromRaw,
-  getDefaultKeyBinding
+  convertFromRaw
 } from 'draft-js'
 
 import Toolbar, {
@@ -18,6 +16,7 @@ import Toolbar, {
 } from './Toolbar'
 
 import './styles.scss'
+
 
 class RebooEditor extends Component {
 
