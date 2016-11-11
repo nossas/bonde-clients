@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
 import { Block, Navbar } from './../components'
-import ga from 'react-ga'
+import ReactGA from 'react-ga'
 
 export default class ShowMobilization extends React.Component {
   static propTypes = {
@@ -14,12 +14,15 @@ export default class ShowMobilization extends React.Component {
   componentDidMount() {
     let mob = this.props.mobilization
 
-    ga.initialize('UA-26278513-30')
-    ga.pageview('/' + mob.slug)
+    ReactGA.initialize('UA-26278513-30')
+    ReactGA.pageview('/' + mob.slug)
 
     if (mob.google_analytics_code) {
-      ga.initialize(mob.google_analytics_code)
-      ga.pageview('/')
+      ReactGA.initialize(
+        mob.google_analytics_code,
+        { gaOptions: { name: 'MobilizationTracker' } }
+      )
+      ReactGA.ga('MobilizationTracker.send', 'pageview', '/')
     }
   }
 
