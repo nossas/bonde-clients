@@ -23,10 +23,21 @@
   .alignment--left {
     text-align: left;
   }
+  figure.alignment--left {
+    float: left;
+    margin: .5rem;
+  }
   .alignment--center {
     text-align: center;
   }
+  figure.alignment--center {
+    margin: .5rem auto;
+  }
   .alignment--right {
     text-align: right;
+  }
+  figure.alignment--right {
+    float: right;
+    margin: .5rem;
   }
 }

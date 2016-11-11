@@ -66,9 +66,11 @@ class RebooEditor extends Component {
 
   blockStyleFn(block) {
     // TODO: Move to control and receive like plugin
+    const { editorState } = this.state
+
     let alignment = getBlockAlignment(block)
     if (!block.getText()) {
-      let previousBlock = this.state.editorState.getCurrentContent().getBlockBefore(block.getKey())
+      let previousBlock = editorState.getCurrentContent().getBlockBefore(block.getKey())
       if (previousBlock) {
         alignment = getBlockAlignment(previousBlock)
       }
