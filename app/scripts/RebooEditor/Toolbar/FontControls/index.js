@@ -59,8 +59,6 @@ export default class FontControls extends Component {
       )
       setEditorState(editorStateWithFontSize)
       this.setState({ fontSize })
-
-      this.props.focusEditor()
     }
   }
 
@@ -74,7 +72,9 @@ export default class FontControls extends Component {
     )
     setEditorState(editorStateWithFontFamily)
     this.setState({ fontFamily })
+  }
 
+  handleMouseOut() {
     this.props.focusEditor()
   }
 
@@ -85,11 +85,13 @@ export default class FontControls extends Component {
           type="number"
           value={this.state.fontSize}
           onChange={this.handleChangeSize.bind(this)}
+          onMouseOut={this.handleMouseOut.bind(this)}
           className="font-controls-size input col col-3 h5 mx1"
         />
         <SelectFontFamily
           onChange={this.handleChangeFont.bind(this)}
           value={this.state.fontFamily}
+          onMouseOut={this.handleMouseOut.bind(this)}
         />
       </div>
     )
