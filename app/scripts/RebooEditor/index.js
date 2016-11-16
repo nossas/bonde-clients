@@ -167,6 +167,7 @@ class RebooEditor extends Component {
               handleKeyCommand={this.handleKeyCommand.bind(this)}
               {...toolbarEditorProps}
             />
+            <div style={{ 'clear': 'both' }} />
           </div>
           {!readOnly ? (
             <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
