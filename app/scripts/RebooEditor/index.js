@@ -2,12 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import {
   Editor,
   EditorState,
+  ContentBlock,
   ContentState,
   RichUtils,
   convertFromHTML,
   convertToRaw,
-  convertFromRaw
+  convertFromRaw,
+  genKey
 } from 'draft-js'
+import { OrderedMap } from 'immutable'
 
 import Toolbar, {
   toolbarEditorProps,
@@ -52,15 +55,64 @@ class RebooEditor extends Component {
   }
 
   handleKeyCommand(command) {
-    const newState = RichUtils.handleKeyCommand(
-      this.state.editorState,
-      command
-    )
-    if (newState) {
-      this.onChangeEditorState(newState);
-      return 'handled'
+    const { editorState } = this.state;
+    const currentBlock = editorState
+      .getCurrentContent()
+      .getBlockForKey(editorState.getSelection().getStartKey());
+
+    // Modify behavior to insert new line
+    if (command === 'split-block' && currentBlock.getType() === 'atomic') {
+      // Create a contentBlock done to be insert
+      const contentBlock = new ContentBlock({
+        key: genKey(),
+        type: 'unstyled'
+      });
+      const contentBlockMap = new OrderedMap([
+        [contentBlock.getKey(), contentBlock]
+      ])
+
+      const currentContent = editorState.getCurrentContent();
+      const currentBlockMap = currentContent.getBlockMap();
+
+      // split blocks with current block
+      const skipCurrent = block => block === currentBlock;
+      const beforeBlocks = currentBlockMap.toSeq().takeUntil(skipCurrent);
+      const afterBlocks = currentBlockMap
+        .toSeq()
+        .skipUntil(skipCurrent)
+        .rest();
+
+      let blockMap;
+      if (editorState.getSelection().getAnchorOffset() < editorState.getSelection().getFocusOffset()) {
+        // mount block map with new block to insert in place of old block
+        blockMap = beforeBlocks.concat(
+          contentBlockMap.toSeq(),
+          afterBlocks
+        ).toOrderedMap();
+      } else {
+        // mount block map with new block to insert before
+        blockMap = beforeBlocks.concat(
+          new OrderedMap([[currentBlock.getKey(), currentBlock]]).toSeq(),
+          contentBlockMap.toSeq(),
+          afterBlocks
+        ).toOrderedMap();
+      }
+
+      const content = currentContent.merge({ blockMap })
+      const editorStateWithLineBreak = EditorState.push(editorState, content, 'insert-new-line')
+
+      this.onChangeEditorState(EditorState.forceSelection(
+        editorStateWithLineBreak,
+        editorStateWithLineBreak.getSelection().merge({
+          anchorKey: contentBlock.getKey(),
+          anchorOffset: 0,
+          isBackward: false
+        })
+      ))
+
+      return true
     }
-    return 'not-handled'
+    return false
   }
 
 
