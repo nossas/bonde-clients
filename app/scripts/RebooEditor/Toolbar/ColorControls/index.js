@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { EditorState, Modifier } from 'draft-js'
+import classnames from 'classnames'
 
+import EditorUtils from '../EditorUtils'
 import ColorPickerButton from './ColorPickerButton'
 
 export default class ColorControls extends Component {
@@ -30,15 +31,18 @@ export default class ColorControls extends Component {
 
     const targetSelection = editorState.getSelection()
     if (!targetSelection.isCollapsed()) {
-      const contentWithColor = Modifier.applyInlineStyle(
-        editorState.getCurrentContent(),
-        targetSelection,
+      const editorStateWithColor = EditorUtils.toggleInlineStyle(
+        editorState,
         `color: rgba(${color.r},${color.g},${color.b},${color.a});`
-      )
-
-      const editorStateWithColor = EditorState.push(editorState, contentWithColor, 'change-inline-style')
+      );
       setEditorState(editorStateWithColor)
     }
+  }
+
+  hasColorStyle() {
+    const { editorState } = this.props
+    const hasStyle = editorState.getCurrentInlineStyle().filter(style => style.startsWith('color'))
+    return hasStyle.size > 0 ? 'active' : null
   }
 
   render() {
@@ -49,10 +53,11 @@ export default class ColorControls extends Component {
       <div className="colorControls">
         <ColorPickerButton
           theme={theme}
-          className={buttonClassName}
+          className={classnames(buttonClassName, this.hasColorStyle())}
           color={this.state.color}
           onRemoveColor={() => {}}
           onChangeColor={this.onChangeColor.bind(this)}
+          focusEditor={this.props.focusEditor}
         />
       </div>
     )
@@ -62,6 +67,7 @@ export default class ColorControls extends Component {
 ColorControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   theme: PropTypes.string,
 }

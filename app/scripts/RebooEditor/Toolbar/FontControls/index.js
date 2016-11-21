@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { EditorState, Modifier, RichUtils } from 'draft-js'
+
+import EditorUtils from '../EditorUtils'
 
 import SelectFontFamily from './SelectFontFamily'
 
@@ -52,7 +53,7 @@ export default class FontControls extends Component {
     const fontSize = e.target.value
 
     if (fontSize) {
-      const editorStateWithFontSize = RichUtils.toggleInlineStyle(
+      const editorStateWithFontSize = EditorUtils.toggleInlineStyle(
         editorState,
         `font-size: ${fontSize}px;`
       )
@@ -65,12 +66,16 @@ export default class FontControls extends Component {
     const { editorState, setEditorState } = this.props
     const fontFamily = e.target.value
 
-    const editorStateWithFontFamily = RichUtils.toggleInlineStyle(
+    const editorStateWithFontFamily = EditorUtils.toggleInlineStyle(
       editorState,
       `font-family: ${fontFamily};`
     )
     setEditorState(editorStateWithFontFamily)
     this.setState({ fontFamily })
+  }
+
+  handleMouseOut() {
+    this.props.focusEditor()
   }
 
   render() {
@@ -80,11 +85,13 @@ export default class FontControls extends Component {
           type="number"
           value={this.state.fontSize}
           onChange={this.handleChangeSize.bind(this)}
+          onMouseOut={this.handleMouseOut.bind(this)}
           className="font-controls-size input col col-3 h5 mx1"
         />
         <SelectFontFamily
           onChange={this.handleChangeFont.bind(this)}
           value={this.state.fontFamily}
+          onMouseOut={this.handleMouseOut.bind(this)}
         />
       </div>
     )
@@ -94,6 +101,7 @@ export default class FontControls extends Component {
 FontControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   initialValue: PropTypes.shape({
     fontSize: PropTypes.number,
     fontFamily: PropTypes.string
@@ -106,11 +114,17 @@ export const customStyleFn = (style) => {
   const output = {}
   const fontSize = style.filter(value => value.startsWith('font-size')).last()
   if (fontSize) {
-    output.fontSize = fontSize.replace('font-size:', '').trim()
+    output.fontSize = fontSize
+      .replace('font-size:', '')
+      .replace(';', '')
+      .trim()
   }
   const fontFamily = style.filter(value => value.startsWith('font-family')).last()
   if (fontFamily) {
-    output.fontFamily = fontFamily.replace('font-family:', '').trim()
+    output.fontFamily = fontFamily
+      .replace('font-family:', '')
+      .replace(';', '')
+      .trim()
   }
   return output
 }

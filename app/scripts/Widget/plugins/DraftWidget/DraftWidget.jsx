@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import * as WidgetActions from '../../actions'
 import { DraftWidgetButton } from './'
 
+import { createEditorContent } from '../../../RebooEditor'
+
 import './draft-widget.scss'
 
 export class DraftWidget extends React.Component {
@@ -30,7 +32,7 @@ export class DraftWidget extends React.Component {
     }
 
     if (kind === 'content') {
-      assignments = { settings: { content: 'Clique aqui para editar...' } }
+      assignments = { settings: { content: createEditorContent('Clique aqui para editar...') } }
     }
 
     if (kind === 'match') {
