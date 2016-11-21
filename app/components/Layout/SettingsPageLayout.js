@@ -1,0 +1,20 @@
+import React, { PropTypes } from 'react'
+import classnames from 'classnames'
+
+const SettingsPageLayout = ({ children, className }) => (
+  <div
+    className={classnames(
+      'settings-page-layout flex-auto flex flex-column bg-silver gray relative',
+      className
+    )}
+  >
+    {children}
+  </div>
+)
+
+SettingsPageLayout.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+}
+
+export default SettingsPageLayout

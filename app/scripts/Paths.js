@@ -6,16 +6,17 @@ export function logout() {
   return `/logout`
 }
 
-export function mobilizations(id) {
+export function mobilizations() {
   return `/`
 }
 
 export function mobilization(mobilization, domain = process.env.APP_DOMAIN) {
-  return (
-    mobilization.custom_domain
+  if (domain.indexOf('staging') !== -1)
+    return `http://${mobilization.slug}.${domain}`
+
+  return mobilization.custom_domain
     ? `http://${mobilization.custom_domain}`
     : `http://${mobilization.slug}.${domain}`
-  )
 }
 
 export function newMobilization() {
@@ -46,10 +47,6 @@ export function analyticsMobilization(id) {
   return `/mobilizations/${id}/analytics`
 }
 
-export function fontsMobilization(id) {
-  return `/mobilizations/${id}/fonts`
-}
-
 export function customDomainMobilization(id) {
   return `/mobilizations/${id}/customDomain`
 }
@@ -70,18 +67,20 @@ export function autofireMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/autofire`
 }
 
+export const exportWidgetData = (mobilization_id, widget_id) => {
+  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/export`
+}
+
 export function donationMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/donation`
 }
 
-export function matchChoicesMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/choices`
-}
+export * from './Widget/plugins/Match/paths'
+export * from './Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 
-export function matchGoalsMobilizationWidget(mobilization_id, widget_id) {
-  return `/mobilizations/${mobilization_id}/widgets/${widget_id}/match/goals`
-}
+const makePressureWidget = (mobilization_id, widget_id, path) =>
+  `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
 
-export const shareMatchWrapper = (widget_id, match_id) => {
-  return `/share/widget/${widget_id}/match/${match_id}`
-}
+export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
+export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')
+

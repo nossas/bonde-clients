@@ -21,7 +21,6 @@ export const ADD_MOBILIZATION = 'ADD_MOBILIZATION'
 
 // Widget actions
 export const FETCH_WIDGETS = 'FETCH_WIDGETS'
-export const EDIT_WIDGET = 'EDIT_WIDGET'
 
 // Block actions
 export const FETCH_BLOCKS = 'FETCH_BLOCKS'
@@ -47,6 +46,7 @@ export const FAILURE_FETCH_ORGANIZATIONS = 'FAILURE_FETCH_ORGANIZATIONS'
 // Match actions
 export const ADD_MATCH = 'ADD_MATCH'
 export const UPDATE_MATCH = 'UPDATE_MATCH'
+export const DELETE_MATCH = 'DELETE_MATCH'
 export const SHOW_MATCH_REQUEST = 'SHOW_MATCH_REQUEST'
 export const SHOW_MATCH_SUCCESS = 'SHOW_MATCH_SUCCESS'
 export const SHOW_MATCH_FAILURE = 'SHOW_MATCH_FAILURE'

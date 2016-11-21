@@ -26,7 +26,8 @@
 .minhacampinas-scheme .bg-6,
 .minhacampinas-scheme .bg-7,
 .minhacampinas-scheme .bg-8 {
-  .widget h1 { color: white }
-  .widget h2 { color: white }
-  .widget { color: white }
+  .widget {
+    color: white;
+    h1, h2, h3, h4, h5, h6 { color: white }
+  }
 }

@@ -12,15 +12,14 @@ import ApiClient from './ApiClient';
 import universalRouter from './universalRouter';
 import Raven from 'raven-js'
 
-// See: https://github.com/getsentry/raven-js/issues/73
-const ravenOptions = {
-  ignoreErrors: [ 'WRONG_DOCUMENT_ERR' ]
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+  // See: https://github.com/getsentry/raven-js/issues/73
+  const ravenOptions = { ignoreErrors: ['WRONG_DOCUMENT_ERR'] }
+  const sentryApp = 'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008'
+  Raven.config(sentryApp, ravenOptions).install()
+} else {
+  console.info('Suppress sending errors to sentry when environment is development.');
 }
-
-Raven.config(
-  'https://551d08d954074dddb605f9043706ecd8@app.getsentry.com/86008',
-  ravenOptions
-).install()
 
 const history = new BrowserHistory();
 const client = new ApiClient();
@@ -35,15 +34,18 @@ const host = document.location.host
 universalRouter(location, history, store, host)
   .then(({component}) => {
     if (__DEVTOOLS__) {
-      const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-      console.info('You will see a "Warning: React attempted to reuse markup in a container but the checksum was' +
-        ' invalid." message. That\'s because the redux-devtools are enabled.');
-      ReactDOM.render(<div>
-        {component}
-        <DebugPanel top right bottom key="debugPanel">
-          <DevTools store={store} monitor={LogMonitor}/>
-        </DebugPanel>
-      </div>, dest);
+      const DevTools = require('./redux/DevTools')
+      console.info(
+        'You will see a "Warning: React attempted to reuse markup in a container but the checksum'
+          + ' was invalid." message. That\'s because the redux-devtools are enabled.'
+        )
+      ReactDOM.render(
+        <div>
+          {component}
+          <DevTools store={store} />
+        </div>,
+        dest
+      );
     } else {
       ReactDOM.render(component, dest);
     }

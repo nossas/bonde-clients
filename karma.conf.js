@@ -1,8 +1,10 @@
 // Karma configuration
 // Generated on Fri Jul 03 2015 10:56:54 GMT-0300 (BRT)
 var webpack = require('webpack');
-var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack/webpack-isomorphic-tools'))
+var path = require('path')
+var webpackUniversalLoaders = require('./webpack/universal.loaders.config')
+var webpackUniversalPostCSS = require('./webpack/universal.postcss.config')
+var webpackUniversalResolveAlias = require('./webpack/universal.resolve-alias.config')
 
 module.exports = function(config) {
   config.set({
@@ -20,22 +22,29 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
 
       resolve: {
-        extensions: [ '', '.js', '.jsx', '.json' ]
+        extensions: [ '', '.js', '.jsx', '.json' ],
+        alias: webpackUniversalResolveAlias,
       },
 
       module: {
-        loaders: [
-          { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader?optional=runtime' },
-          { test: /\.json$/, loader: 'json' },
-          { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' }
-        ]
+        loaders: webpackUniversalLoaders
       },
 
-      externals: {
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': 'window'
-      },
+      postcss: webpackUniversalPostCSS,
+
+      node: { fs: 'empty' },
+
+      externals: [
+        {
+          './cptable': 'var cptable',
+          './jszip': 'jszip'
+        },
+        {
+          'react/addons': true,
+          'react/lib/ExecutionEnvironment': true,
+          'react/lib/ReactContext': 'window'
+        }
+      ],
 
       plugins: [
         new webpack.DefinePlugin({
@@ -44,6 +53,7 @@ module.exports = function(config) {
             'NODE_ENV': '"test"'
           }
         }),
+        new webpack.IgnorePlugin(/cptable/),
         new webpack.DefinePlugin({
           __CLIENT__: true,
           __SERVER__: false,

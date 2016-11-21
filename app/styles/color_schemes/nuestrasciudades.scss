@@ -199,15 +199,17 @@
   background-color: #ffffff;
 }
 
-  .widget h1 { color: white }
-  .widget h2 { color: white }
-  .widget { color: white }
+  .widget {
+    color: white;
+    h1, h2, h3, h4, h5, h6 { color: white }
+  }
 }
 
 .nuestrasciudades-scheme .bg-4,
 .nuestrasciudades-scheme .bg-8,
 .nuestrasciudades-scheme .bg-40 {
-  .widget h1 { color: #444 }
-  .widget h2 { color: #444 }
-  .widget { color: #444 }
+  .widget {
+    color: #444;
+    h1, h2, h3, h4, h5, h6 { color: #444 }
+  }
 }

@@ -19,8 +19,21 @@ export default class WYSIHTMLToolbar extends React.Component {
 
   render() {
     const { elementId, className, style, buttonClassName } = this.props
+    //
+    // Implement Google Web Fonts fetch action.
+    //
+    const googleFonts = undefined
     return (
       <div id={elementId} className={className} style={style}>
+        {!googleFonts || !googleFonts.items.length ? null : (
+          <div className="google-fonts inline">
+            <select className="select ml1 h4 px1" style={{ height: '30px' }}>
+              {googleFonts.items.map(({ family }) => (
+                <option key={family} value={family}>{family}</option>
+              ))}
+            </select>
+          </div>
+        )}
         <a
           data-wysihtml5-command="createLink"
           className={buttonClassName}>
@@ -89,8 +102,9 @@ export default class WYSIHTMLToolbar extends React.Component {
         <DropDownMenu
           icon="text-height"
           wrapperClassName="inline"
-          buttonClassName="button-transparent white p2"
-          menuClassName="bg-darken-4 left-0">
+          buttonClassName="btn btn-transparent white p2"
+          menuClassName="bg-darken-4 left-0"
+        >
           <DropDownMenuItem>
             <span
               className="block button button-transparent white h6 p2"

@@ -1,39 +1,28 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchMobilizations, isMobilizationsLoaded } from './../../reducers/mobilizations'
-import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
-import { findWidgets, isWidgetsLoaded } from './../../reducers/widgets'
-import { ShowMobilization } from './../'
 
-const mapStateToProps = (state) => {
-  return ({
-    mobilizations: state.mobilizations,
-    blocks: state.blocks,
-    widgets: state.widgets
-  })
-}
+import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
+import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
+import { ShowMobilization } from './../'
+import { fetchMobilizations, mobilizationsIsLoaded } from '../../Mobilization/MobilizationActions'
+import { GoogleFontsLoader } from '../../../components/Fonts'
+import * as arrayUtil from '../../../util/array'
+import { TechnicalIssues } from '../../../components/Error'
 
 export class CustomDomainWrapper extends React.Component {
-  static propTypes = {
-    mobilizations: PropTypes.object.isRequired,
-    blocks: PropTypes.object.isRequired,
-    widgets: PropTypes.object.isRequired,
-    params: PropTypes.object
-  }
-
   static fetchData(store, params, query, host) {
     const regex = host.match(`(.+)\.${process.env.APP_DOMAIN}`)
     let findParams
 
     if (regex) {
-      findParams = { slug: regex[1] }
+      findParams = { slug: regex[1].replace(/^www\./, '') }
     } else {
       findParams = { custom_domain: host }
     }
 
     const promises = []
 
-    if (!isMobilizationsLoaded(store.getState())) {
+    if (!mobilizationsIsLoaded(store.getState())) {
       const action = fetchMobilizations(findParams)
       const dispatch = store.dispatch(action)
       promises.push(dispatch)
@@ -56,34 +45,42 @@ export class CustomDomainWrapper extends React.Component {
 
   renderMobilization() {
     const { mobilizations, blocks, widgets } = this.props
+    const { header_font: headerFont, body_font: bodyFont } = mobilizations[0]
+    const fonts = [headerFont, bodyFont].filter(arrayUtil.distinct)
 
     return (
-      <ShowMobilization
-        mobilization={mobilizations.data[0]}
-        blocks={blocks}
-        widgets={widgets}
-        {...this.props}
-      />
-    )
-  }
-
-  renderMobilizationNotFound() {
-    return (
-      <div className='absolute top-0 bottom-0 left-0 right-0 flex flex-center bg-gray'>
-        <div className='center flex-auto white'>
-          <div className='h1'>Ops! Estamos com um problema técnico. Em caso de dúvida, escreva para <a href="mailto:contato@nossascidades.org">contato@nossascidades.org</a>.</div>
-        </div>
+      <div>
+        <ShowMobilization
+          mobilization={mobilizations[0]}
+          blocks={blocks}
+          widgets={widgets}
+          {...this.props}
+        />
+        <GoogleFontsLoader fonts={fonts} />
       </div>
     )
   }
 
   render() {
     return (
-      this.props.mobilizations.data.length === 0
-       ? this.renderMobilizationNotFound()
+      this.props.mobilizations.length === 0
+       ? <TechnicalIssues />
        : this.renderMobilization()
     )
   }
 }
+
+CustomDomainWrapper.propTypes = {
+  mobilizations: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  blocks: PropTypes.object.isRequired,
+  widgets: PropTypes.object.isRequired,
+  params: PropTypes.object
+}
+
+const mapStateToProps = state => ({
+  mobilizations: state.mobilization.data,
+  blocks: state.blocks,
+  widgets: state.widgets
+})
 
 export default connect(mapStateToProps)(CustomDomainWrapper)

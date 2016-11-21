@@ -16,7 +16,7 @@ export default class Navbar extends React.Component {
     const { header_font: headerFont, body_font: bodyFont } = mobilization
 
     const className = classnames(
-      'button button-transparent block white p2',
+      'btn btn-transparent block white p2',
       `${headerFont}-header`,
       `${bodyFont}-body`
     )
@@ -43,17 +43,18 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div className="absolute full-width z1">
+      <div className="absolute col-12 z3">
         <div className="lg-show center">
           <div className="bg-darken-4">
             {this.renderNavbarButtons(false)}
           </div>
         </div>
-        <div className="lg-hide show">
+        <div className="lg-hide">
           <DropDownMenu
             wrapperClassName='absolute right-0 top-0 m1'
-            buttonClassName='bg-darken-4 white rounded'
-            menuClassName="rounded bg-darken-4 white top-0 right-0 mt4"
+            buttonClassName='btn bg-darken-4 white rounded'
+            menuClassName="rounded bg-darken-4 white top-0 right-0"
+            menuStyle={{ marginTop: '40px' }}
             icon="bars">
             {this.renderNavbarButtons(true)}
           </DropDownMenu>

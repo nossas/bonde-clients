@@ -21,13 +21,18 @@ describe('Paths', () => {
 
   describe('#mobilization', () => {
     it('should return the custom domain when it is set', () => {
-      expect(Paths.mobilization({custom_domain: 'meurio.org.br'}))
+      expect(Paths.mobilization({custom_domain: 'meurio.org.br'}, 'reboo.org'))
         .to.equal('http://meurio.org.br')
     })
 
     it('should return the subdomain address when custom domain is not set', () => {
       expect(Paths.mobilization({slug: 'meurio'}, 'reboo.org'))
         .to.equal('http://meurio.reboo.org')
+    })
+
+    it('should return the slug address when custom domain is set and app domain is staging', () => {
+      expect(Paths.mobilization({slug: 'meurio'}, 'reboo-staging.org'))
+        .to.equal('http://meurio.reboo-staging.org')
     })
   })
 

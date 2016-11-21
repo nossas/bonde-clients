@@ -1,81 +1,46 @@
-import $ from 'jquery'
+import axios from 'axios'
 
 import {
-  AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
-  AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAILURE
 } from '../constants/ActionTypes'
 
-export function login(data) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/auth/sign_in`, {
-      method: 'post',
-      data: { ...data },
-      beforeSend: function(jqXHR, settings){
-        dispatch({
-          type: AUTH_LOGIN_REQUEST
-        })
-      },
-      success: function(data, textStatus, jqXHR){
-        const credentials = {
-          "Access-Token": jqXHR.getResponseHeader('Access-Token'),
-          "Expiry": jqXHR.getResponseHeader('Expiry'),
-          "Token-Type": jqXHR.getResponseHeader('Token-Type'),
-          "Uid": jqXHR.getResponseHeader('Uid'),
-          "Client": jqXHR.getResponseHeader('Client')
-        }
+export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS'
 
-        // Create a session into the server-side rendering server
-        $.ajax(`/api/login`, {
-          method: 'post',
-          contentType: "application/json",
-          data: JSON.stringify({
-            credentials: credentials,
-            user: data.data
-          })
-        })
+const loginSuccess = (user, credentials) => ({ type: AUTH_LOGIN_SUCCESS, user, credentials })
+const loginRequest = values => axios.post(`${process.env.API_URL}/auth/sign_in`, values)
+export const login = values => dispatch => loginRequest(values)
+  .then(response => {
+    const { headers, data: { data: user } } = response
+    const credentials = {
+      'Access-Token': headers['access-token'],
+      'Token-Type': headers['token-type'],
+      Expiry: headers['expiry'],
+      Uid: headers['uid'],
+      Client: headers['client']
+    }
 
-        dispatch({
-          type: AUTH_LOGIN_SUCCESS,
-          user: data.data,
-          credentials: credentials
-        })
-      },
-      error: function(jqXHR, textStatus, errorThrown){
-        dispatch({
-          type: AUTH_LOGIN_FAILURE,
-          error: jqXHR.responseJSON.errors[0]
-        })
-      }
-    })
-  }
-}
+    // Create a session into the server-side rendering server
+    axios.post(`/auth/login`, { credentials, user })
 
-export function logout() {
-  return function (dispatch) {
-    dispatch(logoutRequest())
+    dispatch(loginSuccess(user, credentials))
+  })
+  .catch(error => {
+    if (error.response) {
+      const { response: { data: { errors }, status } } = error
+      if (status === 401) return Promise.reject({ _error: errors.join('') })
+    }
+    return Promise.reject({ _error: `Response ${error}` })
+  })
 
-    return Auth.signOut().then(
-      user => dispatch(logoutSuccess()),
-      error => dispatch(logoutFailure(error.data.errors[0]))
-    )
-  }
-}
-
-export function logoutRequest() {
-  return {
-    type: AUTH_LOGOUT_REQUEST
-  }
-}
-
-export function logoutSuccess() {
-  return {
-    type: AUTH_LOGOUT_SUCCESS
-  }
-}
-
-export function logoutFailure(error) {
-  return {
-    type: AUTH_LOGOUT_FAILURE,
-    error
-  }
+export const logoutRequest = () => ({ type: AUTH_LOGOUT_REQUEST })
+export const logoutSuccess = () => ({ type: AUTH_LOGOUT_SUCCESS })
+export const logoutFailure = error => ({ type: AUTH_LOGOUT_FAILURE, error })
+export const logout = () => dispatch => {
+  dispatch(logoutRequest())
+  return Auth.signOut().then(
+    user => dispatch(logoutSuccess()),
+    error => dispatch(logoutFailure(error.data.errors[0]))
+  )
 }

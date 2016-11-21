@@ -1,0 +1,5 @@
+{
+  "minify": true,
+  "options": [],
+  "feature-detects": ["a/download"]
+}

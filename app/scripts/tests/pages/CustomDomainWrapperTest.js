@@ -1,5 +1,6 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import { shallow } from 'enzyme'
+
 import { CustomDomainWrapper } from '../../pages/CustomDomainWrapper/CustomDomainWrapper'
 import ShowMobilization from '../../pages/ShowMobilization'
 
@@ -7,23 +8,30 @@ describe('CustomDomainWrapper', () => {
   const props = {
     blocks: {data: []},
     widgets: {data: []},
-    mobilizations: {data: []},
+    mobilizations: [],
     auth: {},
     dispatch: () => {}
   }
 
-  it('should not render ShowMobilization when there is no mobilization', () => {
-    const component = TestUtils.renderIntoDocument(<CustomDomainWrapper {...props} />)
-    const divs = TestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
-    expect(divs.length).to.be.eql(0)
-  })
+  describe('#render', () => {
+    it('should not render ShowMobilization when there is no mobilization', () => {
+      const component = shallow(<CustomDomainWrapper {...props} />)
+      expect(component.find('ShowMobilization')).to.have.length(0)
+    })
 
-  it('should render ShowMobilization when there is a mobilization', () => {
-    const component = TestUtils.renderIntoDocument(
-      <CustomDomainWrapper {...props} mobilizations={{data: [{id: 1}]}} />
-    )
+    it('should render ShowMobilization when there is a mobilization', () => {
+      const component = shallow(<CustomDomainWrapper {...props} mobilizations={[{id: 1}]} />)
+      expect(component.find('ShowMobilization')).to.have.length(1)
+    })
 
-    const divs = TestUtils.scryRenderedComponentsWithType(component, ShowMobilization)
-    expect(divs.length).to.be.eql(1)
+    it('should render GoogleFontsLoader when there is a mobilization', () => {
+      const component = shallow(<CustomDomainWrapper {...props} mobilizations={[{id: 1}]} />)
+      expect(component.find('GoogleFontsLoader')).to.have.length(1)
+    })
+
+    it('should render TechnicalIssues error page when there is no mobilizations', () => {
+      const component = shallow(<CustomDomainWrapper {...props} mobilizations={[]} />)
+      expect(component.find('TechnicalIssues')).to.have.length(1)
+    })
   })
 })

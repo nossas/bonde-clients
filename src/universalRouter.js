@@ -47,7 +47,7 @@ export default function universalRouter(location, history, store, host) {
 
       const component = (
         <Provider store={store} key="provider">
-          {() => <Router {...initialState} children={routes}/>}
+          <Router {...initialState} children={routes}/>
         </Provider>
       );
 
