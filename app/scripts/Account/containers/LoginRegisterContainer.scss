@@ -3,6 +3,7 @@
 .bg-reboo {
   background-image: url('../assets/bg-login.png');
   color: $darkGray;
+  font-family: SourceSansPro;
 
   h1 {
     font-weight: 300;
@@ -13,11 +14,11 @@
   }
 
   form {
-
     .form-group {
       padding: 10px;
       padding: 10px 20px;
-      border-bottom: 1px solid #eee!important;
+      background-color: white;
+      border-bottom: 1px solid #eee;
     }
     .flex {
       .form-group:not(:last-child) {
