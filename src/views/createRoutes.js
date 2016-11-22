@@ -16,6 +16,7 @@ import {
 
 // Modules routes
 import MobilizationRoute from '../../app/scripts/Mobilization/routes'
+import AccountRoute from '../../app/scripts/Account/routes'
 import { MatchShareContainerRoute } from '../../app/scripts/Widget/plugins/Match/routes'
 
 export default function(store, host) {
@@ -26,6 +27,7 @@ export default function(store, host) {
       <Route component={Application}>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        {AccountRoute}
         <Route component={RequireLogin} onEnter={RequireLogin.onEnter(store)}>
           {MobilizationRoute}
         </Route>
