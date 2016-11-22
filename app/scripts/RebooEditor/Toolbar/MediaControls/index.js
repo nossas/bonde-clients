@@ -4,6 +4,9 @@ import { Entity, AtomicBlockUtils } from 'draft-js'
 import Media from './Media'
 
 import InsertImageButton from './InsertImageButton'
+import InsertScriptButton from './InsertScriptButton'
+
+import './styles.scss'
 
 
 export default class MediaControls extends Component {
@@ -14,6 +17,8 @@ export default class MediaControls extends Component {
     const entityKey = Entity.create(mediaType, 'IMMUTABLE', { src: source })
     const editorStateWithMedia = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ')
     setEditorState(editorStateWithMedia)
+
+    this.props.focusEditor()
   }
 
   render() {
@@ -27,6 +32,11 @@ export default class MediaControls extends Component {
           popoverClassName={popoverClassName}
           handleUploadFinish={source => this.handleInsertMedia('image', source)}
         />
+        <InsertScriptButton
+          buttonClassName={buttonClassName}
+          popoverClassName={popoverClassName}
+          handleInsertScript={this.handleInsertMedia.bind(this)}
+        />
       </div>
     )
   }
@@ -35,6 +45,7 @@ export default class MediaControls extends Component {
 MediaControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   popoverClassName: PropTypes.string
 }
@@ -43,8 +54,7 @@ MediaControls.propTypes = {
 export const blockRendererFn = (block) => {
   if (block.getType() === 'atomic') {
     return {
-      component: Media,
-      editable: false
+      component: Media
     }
   }
 }

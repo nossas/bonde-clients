@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 import { Entity, RichUtils, SelectionState } from 'draft-js'
 
 import Link from './Link'
 import linkStrategy from './linkStrategy'
 
+import EditorUtils from '../EditorUtils'
 import getSelectionEntities from '../getSelectionEntities'
 
 
@@ -32,9 +34,9 @@ export default class LinkControls extends Component {
       if (nextEntityLink && nextEntityLink !== entityLink) {
         const entityInstance = Entity.get(nextEntityLink.entityKey)
         const { href, target } = entityInstance.getData()
-        this.setState({ href, target })
+        this.setState({ href, target, hasLink: true })
       } else {
-        this.setState({ href: '', target: '_self' })
+        this.setState({ href: '', target: '_self', hasLink: false })
       }
     }
   }
@@ -44,37 +46,23 @@ export default class LinkControls extends Component {
   }
 
   confirmLink() {
+    const { editorState, setEditorState } = this.props
+
     if (this.state.href) {
-      const { editorState, setEditorState } = this.props
       const { href, target } = this.state
-
-      const entitySelection = getSelectionLink(editorState)
-
-      if (!editorState.getSelection().isCollapsed()) {
-        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
-        const targetSelection = editorState.getSelection()
-
-        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
-      } else if (entitySelection) {
-        // Make selection to apply entity
-        const selection = SelectionState.createEmpty(
-          editorState.getCurrentContent().getBlockForKey(
-            editorState.getSelection().getStartKey()
-          )
-        )
-
-        const entityKey = Entity.create('LINK', 'MUTABLE', { href, target })
-        const targetSelection = selection.merge({
-          anchorKey: editorState.getSelection().getAnchorKey(),
-          focusKey: editorState.getSelection().getFocusKey(),
-          anchorOffset: entitySelection.start,
-          focusOffset: entitySelection.end
-        })
-
-        setEditorState(RichUtils.toggleLink(editorState, targetSelection, entityKey))
-      }
+      setEditorState(EditorUtils.toggleLink(editorState, { href, target }))
+    } else {
+      setEditorState(EditorUtils.toggleLink(editorState, null))
     }
+
     this.setState({ showInput: false })
+    this.props.focusEditor()
+  }
+
+  removeLink() {
+    const { editorState, setEditorState } = this.props
+    setEditorState(EditorUtils.toggleLink(editorState, null))
+    this.props.focusEditor()
   }
 
   handleChangeTarget(e) {
@@ -87,7 +75,7 @@ export default class LinkControls extends Component {
 
     return (
       <div className="linkControls">
-        <button className={buttonClassName} onClick={this.handleToggleInput.bind(this)}>
+        <button className={classnames(buttonClassName, this.state.hasLink ? 'active' : null)} onClick={this.handleToggleInput.bind(this)}>
           <i className="fa fa-link" />
         </button>
         {this.state.showInput && (
@@ -119,6 +107,9 @@ export default class LinkControls extends Component {
             </div>
           </div>
         )}
+        <button className={buttonClassName} onClick={this.removeLink.bind(this)}>
+          <i className="fa fa-unlink" />
+        </button>
       </div>
     )
   }
@@ -127,6 +118,7 @@ export default class LinkControls extends Component {
 LinkControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string,
   popoverClassName: PropTypes.string
 }

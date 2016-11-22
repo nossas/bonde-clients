@@ -9,6 +9,7 @@ export default class HistoryControls extends Component {
 
     if (!editorState.getUndoStack().isEmpty()) {
       setEditorState(EditorState.undo(editorState))
+      this.props.focusEditor()
     }
   }
 
@@ -16,6 +17,7 @@ export default class HistoryControls extends Component {
     const { editorState, setEditorState } = this.props
     if (!editorState.getRedoStack().isEmpty()) {
       setEditorState(EditorState.redo(editorState))
+      this.props.focusEditor()
     }
   }
 
@@ -39,5 +41,6 @@ export default class HistoryControls extends Component {
 HistoryControls.propTypes = {
   editorState: PropTypes.object.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  focusEditor: PropTypes.func.isRequired,
   buttonClassName: PropTypes.string
 }

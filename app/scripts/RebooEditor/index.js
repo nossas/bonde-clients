@@ -1,13 +1,16 @@
 import React, { Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import {
   Editor,
   EditorState,
+  ContentBlock,
   ContentState,
+  RichUtils,
   convertFromHTML,
   convertToRaw,
-  convertFromRaw
+  convertFromRaw,
+  genKey
 } from 'draft-js'
+import { OrderedMap } from 'immutable'
 
 import Toolbar, {
   toolbarEditorProps,
@@ -17,7 +20,9 @@ import Toolbar, {
 
 import './styles.scss'
 
+
 class RebooEditor extends Component {
+
   constructor(props) {
     super(props)
 
@@ -39,21 +44,85 @@ class RebooEditor extends Component {
     this.state = { editorState, hasFocus: false }
   }
 
-  focusEditor() {
+  focus() {
     this.setState({
       hasFocus: true,
-    }, () => setTimeout(() => ReactDOM.findDOMNode(this.editor).focus()))
+    }, () => setTimeout(() => this.refs.editor.focus()))
   }
 
   onChangeEditorState(editorState) {
     this.setState({ editorState })
   }
 
+  handleKeyCommand(command) {
+    const { editorState } = this.state;
+    const currentBlock = editorState
+      .getCurrentContent()
+      .getBlockForKey(editorState.getSelection().getStartKey());
+
+    // Modify behavior to insert new line
+    if (command === 'split-block' && currentBlock.getType() === 'atomic') {
+      // Create a contentBlock done to be insert
+      const contentBlock = new ContentBlock({
+        key: genKey(),
+        type: 'unstyled'
+      });
+      const contentBlockMap = new OrderedMap([
+        [contentBlock.getKey(), contentBlock]
+      ])
+
+      const currentContent = editorState.getCurrentContent();
+      const currentBlockMap = currentContent.getBlockMap();
+
+      // split blocks with current block
+      const skipCurrent = block => block === currentBlock;
+      const beforeBlocks = currentBlockMap.toSeq().takeUntil(skipCurrent);
+      const afterBlocks = currentBlockMap
+        .toSeq()
+        .skipUntil(skipCurrent)
+        .rest();
+
+      let blockMap;
+      if (editorState.getSelection().getAnchorOffset() < editorState.getSelection().getFocusOffset()) {
+        // mount block map with new block to insert in place of old block
+        blockMap = beforeBlocks.concat(
+          contentBlockMap.toSeq(),
+          afterBlocks
+        ).toOrderedMap();
+      } else {
+        // mount block map with new block to insert before
+        blockMap = beforeBlocks.concat(
+          new OrderedMap([[currentBlock.getKey(), currentBlock]]).toSeq(),
+          contentBlockMap.toSeq(),
+          afterBlocks
+        ).toOrderedMap();
+      }
+
+      const content = currentContent.merge({ blockMap })
+      const editorStateWithLineBreak = EditorState.push(editorState, content, 'insert-new-line')
+
+      this.onChangeEditorState(EditorState.forceSelection(
+        editorStateWithLineBreak,
+        editorStateWithLineBreak.getSelection().merge({
+          anchorKey: contentBlock.getKey(),
+          anchorOffset: 0,
+          isBackward: false
+        })
+      ))
+
+      return true
+    }
+    return false
+  }
+
+
   blockStyleFn(block) {
     // TODO: Move to control and receive like plugin
+    const { editorState } = this.state
+
     let alignment = getBlockAlignment(block)
     if (!block.getText()) {
-      let previousBlock = this.state.editorState.getCurrentContent().getBlockBefore(block.getKey())
+      let previousBlock = editorState.getCurrentContent().getBlockBefore(block.getKey())
       if (previousBlock) {
         alignment = getBlockAlignment(previousBlock)
       }
@@ -81,21 +150,24 @@ class RebooEditor extends Component {
               buttonClassName="btn white p2"
               popoverClassName="absolute white p2 bg-darken-4 rounded-bottom"
               editorState={this.state.editorState}
-              setEditorState={::this.onChangeEditorState}
+              setEditorState={this.onChangeEditorState.bind(this)}
+              focusEditor={this.focus.bind(this)}
             />
             <div className="outside" onClick={::this.save} />
           </div>
         ) : null}
-        <div className="editor">
-          <div onClick={::this.focusEditor}>
+        <div className="editor" style={{ outline: this.state.hasFocus ? '1px solid blue' : 'none' }}>
+          <div onClick={this.focus.bind(this)}>
             <Editor
-              ref={input => this.editor = input}
+              ref="editor"
               readOnly={readOnly}
               editorState={this.state.editorState}
-              onChange={::this.onChangeEditorState}
-              blockStyleFn={::this.blockStyleFn}
+              onChange={this.onChangeEditorState.bind(this)}
+              blockStyleFn={this.blockStyleFn.bind(this)}
+              handleKeyCommand={this.handleKeyCommand.bind(this)}
               {...toolbarEditorProps}
             />
+            <div style={{ 'clear': 'both' }} />
           </div>
           {!readOnly ? (
             <div className="right mt1" style={{ display: this.state.hasFocus ? 'block' : 'none' }}>
@@ -127,3 +199,5 @@ RebooEditor.defaultProps = {
 }
 
 export default RebooEditor
+
+export { default as createEditorContent } from './createEditorContent'

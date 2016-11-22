@@ -251,7 +251,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { mobilization }  = this.props
     return (
       <TellAFriend {...this.props}
-        message={"Doação registrada!"}
+        message={"Oba, doação registrada! Sua doação é via boleto? Verifique seu email."}
         href={Paths.mobilization(mobilization)} />
     )
   }
