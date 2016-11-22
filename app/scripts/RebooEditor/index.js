@@ -156,7 +156,7 @@ class RebooEditor extends Component {
             <div className="outside" onClick={::this.save} />
           </div>
         ) : null}
-        <div className="editor" style={{ outline: this.state.hasFocus ? '1px solid blue' : 'none' }}>
+        <div className="editor" style={{ outline: this.state.hasFocus && !readOnly ? '1px solid blue' : 'none' }}>
           <div onClick={this.focus.bind(this)}>
             <Editor
               ref="editor"
