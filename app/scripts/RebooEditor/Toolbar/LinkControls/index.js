@@ -11,8 +11,7 @@ import getSelectionEntities from '../getSelectionEntities'
 
 const getSelectionLink = (editorState) => {
   // Return entity when one and only one selected
-  const entities = getSelectionEntities(editorState, 'LINK')
-  return entities.length === 1 ? entities[0] : undefined
+  return getSelectionEntities(editorState, 'LINK').last()
 }
 
 
