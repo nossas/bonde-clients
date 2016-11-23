@@ -59,7 +59,6 @@ class RebooEditor extends Component {
     const currentBlock = editorState
       .getCurrentContent()
       .getBlockForKey(editorState.getSelection().getStartKey());
-
     // Modify behavior to insert new line
     if (command === 'split-block' && currentBlock.getType() === 'atomic') {
       // Create a contentBlock done to be insert
@@ -130,6 +129,17 @@ class RebooEditor extends Component {
     return `alignment--${alignment}`
   }
 
+  handleBeforeInput(chars) {
+    const { editorState } = this.state
+    const selection = editorState.getSelection()
+    const block = editorState.getCurrentContent().getBlockForKey(selection.getStartKey())
+    if (chars === " " && block.getType() === 'atomic') {
+      this.handleKeyCommand('split-block')
+      return true
+    }
+    return false
+  }
+
   save() {
     this.props.handleSave(convertToRaw(this.state.editorState.getCurrentContent()))
     this.setState({ hasFocus: false })
@@ -165,6 +175,7 @@ class RebooEditor extends Component {
               onChange={this.onChangeEditorState.bind(this)}
               blockStyleFn={this.blockStyleFn.bind(this)}
               handleKeyCommand={this.handleKeyCommand.bind(this)}
+              handleBeforeInput={this.handleBeforeInput.bind(this)}
               {...toolbarEditorProps}
             />
             <div style={{ 'clear': 'both' }} />
