@@ -7,7 +7,15 @@ class Media extends Component {
   render() {
     const { block } = this.props
 
-    const entity = Entity.get(block.getEntityAt(0))
+    const entityKey = block.getEntityAt(0)
+    const entity = entityKey ? Entity.get(entityKey) : undefined
+
+    if (!entity) {
+      // TODO: Remove behavior this code implemented because wasn't
+      // control for media block
+      return <span className="remove-block" />
+    }
+
     const {
       // Inside tag a
       href,

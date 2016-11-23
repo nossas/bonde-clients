@@ -1,4 +1,5 @@
 import { Entity } from 'draft-js'
+import { OrderedSet } from 'immutable'
 
 
 const getSelectionEntities = (editorState, entityType) => {
@@ -10,7 +11,7 @@ const getSelectionEntities = (editorState, entityType) => {
 
   const block = currentContent.getBlockForKey(targetSelection.getStartKey())
 
-  const entitiesSelection = []
+  let selectionEntitySet = new OrderedSet()
 
   block.findEntityRanges(character => {
     const entityKey = character.getEntity()
@@ -20,7 +21,7 @@ const getSelectionEntities = (editorState, entityType) => {
     const isSelected = end >= endOffset && start <= endOffset
 
     if (isSelected) {
-      entitiesSelection.push({
+      selectionEntitySet = selectionEntitySet.add({
         blockKey: block.getKey(),
         entityKey: block.getEntityAt(start),
         start,
@@ -29,7 +30,7 @@ const getSelectionEntities = (editorState, entityType) => {
     }
   })
 
-  return entitiesSelection
+  return selectionEntitySet
 }
 
 export default getSelectionEntities
