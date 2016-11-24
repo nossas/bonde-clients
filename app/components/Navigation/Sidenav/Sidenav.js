@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import classnames from 'classnames'
 
 import * as Paths from '../../../scripts/Paths'
 
@@ -15,9 +16,9 @@ class Sidenav extends Component {
             <div className="item-icon">
               <Link to={Paths.mobilizations()} style={{ height: '43px', display: 'block' }}>
                 <u
-                  className="logo-icon"
+                  className={classnames('logo-icon', { 'nossas': true })}
                   style={{
-                    backgroundImage: user.community_avatar || 'url(http://placeholdit.imgix.net/~text?txtsize=14&txt=50x50&w=50&h=50&txttrack=0)'
+                    backgroundImage: `url(${user.community_avatar}`
                   }}
                 />
               </Link>
