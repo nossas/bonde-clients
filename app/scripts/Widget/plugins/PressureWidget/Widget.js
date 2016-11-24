@@ -39,7 +39,7 @@ export class PressureWidget extends Component {
         firstname: data.name,
         lastname: data.lastname,
         email: data.email,
-        city: data.city
+        city: !!data.city ? data.city : null
       },
       mail: {
         cc: this.getTargetList().map(target => this.getEmailTarget(target)),
