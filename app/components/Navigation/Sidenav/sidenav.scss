@@ -3,6 +3,7 @@
 
 .sidenav {
   width: 80px;
+  // width: 280px;
   background-color: $darkblue;
   box-sizing: border-box;
   position: fixed;
@@ -14,7 +15,7 @@
   transition: width .3s ease;
 
   &:hover {
-    width: 257px;
+    width: 280px;
   }
 
   .logo {
@@ -30,19 +31,12 @@
     background-image: url('./logo-icon.svg');
     fill: #fff;
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 43px;
+    height: 43px;
     margin: 0 20px;
-  }
-
-  .items-logo {
-    margin-top: 20px;
-    margin-bottom: 5rem;
-
-    .item-content {
-      padding: 0;
-      padding-right: 100%;
-    }
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.7);
   }
 
   a.has-hover:hover {
@@ -84,12 +78,43 @@
         display: table-cell;
         white-space: nowrap;
         padding: 10px 100% 10px 0;
+        font-weight: normal;
+
+        .item-community-name {
+          width: 170px;
+          white-space: normal;
+          font-size: 1.3rem;
+        }
+
+        .item-community-change {
+          font-size: .75rem;
+          font-weight: normal;
+          margin-top: 0;
+
+          a {
+            color: rgba(255,255,255,.7);
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
 
       a {
         color: $white;
         text-decoration: none;
       }
+    }
+  }
+
+  .items-logo {
+    margin-top: 20px;
+    margin-bottom: 1rem;
+
+    .item-content {
+      padding: 0;
+      padding-right: 100%;
     }
   }
 }
