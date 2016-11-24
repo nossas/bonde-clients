@@ -7,9 +7,10 @@ import { PressureForm, PressureCount } from '../../components'
 
 describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', () => {
   let component
+  const widget = { settings: {} }
 
   beforeEach(() => {
-    component = mount(<PressureForm />)
+    component = mount(<PressureForm widget={widget} />)
   })
 
   it('should render ok by default', () => {
@@ -29,6 +30,7 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
       email: 'igor@local.cc',
       name: 'igor',
       lastname: 'santos',
+      city: '',
       subject: 'subject',
       body: 'body'
     }
@@ -47,7 +49,13 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
   })
 
   it('should set default subject and body by props', () => {
-    const wrapper = mount(<PressureForm subject='subject default' body='body default' />)
+    const wrapper = mount(
+      <PressureForm
+        widget={widget}
+        subject='subject default'
+        body='body default'
+      />
+    )
     expect(wrapper.instance().state.subject).to.equal('subject default')
     expect(wrapper.instance().state.body).to.equal('body default')
   })

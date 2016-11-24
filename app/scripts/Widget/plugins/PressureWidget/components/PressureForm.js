@@ -20,12 +20,14 @@ class PressureForm extends Component {
       email: '',
       name: '',
       lastname: '',
+      city: '',
       subject: props.subject,
       body: props.body
     }
   }
 
   validate() {
+    const { widget: { settings: { show_city } } } = this.props
     const requiredMsg = 'Preenchimento obrigatório'
     const errors = { valid: true }
     if (!this.state.email) {
@@ -42,6 +44,10 @@ class PressureForm extends Component {
     if (!this.state.lastname) {
       errors.valid = false
       errors.lastname = requiredMsg
+    }
+    if (show_city === 'city-true' && !this.state.city) {
+      errors.valid = false
+      errors.city = requiredMsg
     }
     if (!this.state.subject) {
       errors.valid = false
@@ -66,8 +72,8 @@ class PressureForm extends Component {
   }
 
   render() {
-    const { buttonColor, buttonText, children } = this.props
-    const { email, name, lastname, subject, body, errors } = this.state
+    const { buttonColor, buttonText, children, widget } = this.props
+    const { email, name, lastname, city, subject, body, errors } = this.state
     return (
       <form className="pressure-form" onSubmit={::this.handleSubmit}>
         <div className={classnames('activist-form bg-white', !children ? 'rounded-bottom': null)}>
@@ -115,6 +121,24 @@ class PressureForm extends Component {
                 onChange={e => this.setState({ lastname: e.target.value })}
               />
             </div>
+            {
+              !widget.settings.show_city || widget.settings.show_city !== 'city-true' ? null : (
+                <div className={classnames('form-group', controlClassname)}>
+                  <label className="py1 gray" htmlFor="pressure-sender-city-id">
+                    Cidade
+                    {(errors && errors['city'] && <span className="error">{errors['city']}</span>)}
+                  </label>
+                  <input
+                    className="col-12"
+                    style={inputReset}
+                    type="text"
+                    placeholder="Insira seu cidade"
+                    value={city}
+                    onChange={e => this.setState({ city: e.target.value })}
+                  />
+                </div>
+              )
+            }
             <div className={classnames('form-group', controlClassname)}>
               <label className="py1 gray" htmlFor="pressure-subject-id">
                 Assunto
@@ -165,7 +189,8 @@ PressureForm.propTypes = {
   buttonColor: PropTypes.string,
   buttonText: PropTypes.string,
   subject: PropTypes.string,
-  body: PropTypes.string
+  body: PropTypes.string,
+  widget: PropTypes.object
 }
 
 PressureForm.defaultProps = {
