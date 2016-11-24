@@ -13,3 +13,6 @@ static/dist
 # floobits file
 .floo
 .flooignore
+
+# yarn (temporarily)
+yarn.lock
