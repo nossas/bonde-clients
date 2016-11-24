@@ -1,23 +1,35 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
+import { decorate } from 'react-mixin'
+import { Navigation } from 'react-router'
 
-import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../Dashboard/Forms'
+import * as AccountActions from '../AccountActions'
+import { FormRedux, FormGroup, ControlLabel, FormControl, SubmitButton } from '../../Dashboard/Forms'
+import * as Paths from '../../Paths'
 import { isValidEmail } from '../../../util/validation-helper'
 
 
+@decorate(Navigation)
 class RegisterPage extends Component {
 
-  handleSubmit(values) {
-    // TODO: Send values to API
-    console.log(values)
+  componentWillReceiveProps(nextProps) {
+    const { submitting } = this.props
+    if (submitting && (!nextProps.submitting && !nextProps.submitFailed)) {
+      this.transitionTo(Paths.login())
+    }
   }
 
   render() {
-    const { fields: { name, last_name, email, password, password2 }, ...formProps } = this.props
+    const { register, fields: { name, last_name, email, password, password2 }, ...formProps } = this.props
     return (
       <div>
         <h1>Crie sua conta no Nossas.</h1>
-        <FormRedux className="rounded" onSubmit={this.handleSubmit.bind(this)} {...formProps}>
+        <FormRedux
+          nosubmit
+          className="rounded"
+          onSubmit={({ password2, ...values }) => register(values)}
+          {...formProps}
+        >
           <div className="flex">
             <FormGroup className="col-6" controlId="nameId" {...name}>
               <ControlLabel>Nome</ControlLabel>
@@ -40,7 +52,9 @@ class RegisterPage extends Component {
             <ControlLabel>Confirme sua senha</ControlLabel>
             <FormControl type="password" placeholder="********" />
           </FormGroup>
-          <button type="submit" className="btn white bg-pagenta col-12 rounded-bottom py2 caps">Criar conta</button>
+          <SubmitButton className="white col-12 rounded-bottom">
+            {formProps.submitting ? 'Salvando...' : 'Criar conta'}
+          </SubmitButton>
         </FormRedux>
       </div>
     )
@@ -48,6 +62,7 @@ class RegisterPage extends Component {
 }
 
 RegisterPage.propTypes = {
+  register: PropTypes.func.isRequired,
   // Injected by redux-form
   fields: PropTypes.object.isRequired
 }
@@ -65,6 +80,8 @@ const validate = values => {
   }
   if (!values.password) {
     errors.password = 'Informe uma senha'
+  } else if (values.password.length < 8) {
+    errors.password = 'Sua senha precisa ter um minímo de 8 caracteres.'
   }
   if (values.password && values.password !== values.password2) {
     errors.password2 = 'Senha não confere'
@@ -76,4 +93,4 @@ export default reduxForm({
   form: 'registerUser',
   fields,
   validate
-})(RegisterPage)
+}, null, AccountActions)(RegisterPage)
