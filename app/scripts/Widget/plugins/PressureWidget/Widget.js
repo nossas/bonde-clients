@@ -38,7 +38,8 @@ export class PressureWidget extends Component {
       activist: {
         firstname: data.name,
         lastname: data.lastname,
-        email: data.email
+        email: data.email,
+        city: data.city
       },
       mail: {
         cc: this.getTargetList().map(target => this.getEmailTarget(target)),
@@ -97,6 +98,7 @@ export class PressureWidget extends Component {
             </h2>
             <TargetList targets={::this.getTargetList() || []} />
             <PressureForm
+              widget={widget}
               buttonText={(saving && !editable ? 'Enviando...' : button_text)}
               buttonColor={main_color}
               subject={pressure_subject}
