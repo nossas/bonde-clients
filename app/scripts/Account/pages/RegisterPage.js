@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { decorate } from 'react-mixin'
 import { Navigation } from 'react-router'
 
-import * as AccountActions from '../AccountActions'
+import * as AccountActions from '../actions'
 import { FormRedux, FormGroup, ControlLabel, FormControl, SubmitButton } from '../../Dashboard/Forms'
 import * as Paths from '../../Paths'
 import { isValidEmail } from '../../../util/validation-helper'
@@ -26,7 +26,7 @@ class RegisterPage extends Component {
         <h1>Crie sua conta no Nossas.</h1>
         <FormRedux
           nosubmit
-          className="rounded"
+          className="bg-white rounded"
           onSubmit={({ password2, ...values }) => register(values)}
           {...formProps}
         >
@@ -90,7 +90,7 @@ const validate = values => {
 }
 
 export default reduxForm({
-  form: 'registerUser',
+  form: 'registerForm',
   fields,
   validate
 }, null, AccountActions)(RegisterPage)
