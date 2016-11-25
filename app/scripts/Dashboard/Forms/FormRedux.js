@@ -43,7 +43,7 @@ class FormRedux extends Component {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={classnames(
-          'form-redux form rounded',
+          'form-redux form',
           floatButton ? 'btn-float' : null,
           className
         )}

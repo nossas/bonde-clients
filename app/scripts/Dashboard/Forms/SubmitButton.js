@@ -5,14 +5,14 @@ import classnames from 'classnames'
 class SubmitButton extends Component {
 
   render() {
-    const { $formRedux: { submitted, submitting, dirty, valid } } = this.context
+    const { $formRedux: { submitting } } = this.context
     const { children, className } = this.props
 
     return (
       <button
         type="submit"
-        disabled={!valid || submitting || !dirty}
-        className={classnames("btn py2 caps", className, !valid ? 'bg-gray95' : 'bg-pagenta')}
+        disabled={submitting}
+        className={classnames("btn py2 caps", className, submitting ? 'bg-gray95' : 'bg-pagenta')}
       >
         {children}
       </button>
