@@ -1,5 +1,5 @@
 #!/bin/bash -e
-REPO_URI="https://git.v6jv.flynnhub.com/ourcities-rebu-client-develop.git"
+REPO_URI="https://ubuntu:$FLYNN_KEY@git.v6jv.flynnhub.com/ourcities-rebu-client-develop.git"
 if [[ "$CIRCLE_BRANCH" == "master" ]]; then
   REPO_URI="dokku@reboo.org:0-client"
 fi
