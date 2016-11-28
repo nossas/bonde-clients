@@ -48,13 +48,9 @@ export const login = values => dispatch => loginRequest(values)
     return Promise.reject({ _error: `Response ${error}` })
   })
 
-export const logoutRequest = () => ({ type: AUTH_LOGOUT_REQUEST })
-export const logoutSuccess = () => ({ type: AUTH_LOGOUT_SUCCESS })
-export const logoutFailure = error => ({ type: AUTH_LOGOUT_FAILURE, error })
-export const logout = () => dispatch => {
-  dispatch(logoutRequest())
-  return Auth.signOut().then(
-    user => dispatch(logoutSuccess()),
-    error => dispatch(logoutFailure(error.data.errors[0]))
-  )
-}
+
+// Use clientMiddleware pattern
+export const logout = () => ({
+  types: [AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS, AUTH_LOGOUT_FAILURE],
+  promise: client => client.get('/logout')
+})
