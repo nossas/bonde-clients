@@ -21,6 +21,7 @@ const FormPage = ({
     title_text,
     button_text,
     show_counter,
+    show_city,
     count_text,
     main_color
   }
@@ -81,6 +82,13 @@ const FormPage = ({
               <FormControl type="text" placeholder="pressões feitas" />
             </FormGroup>
           ) : null)}
+          <FormGroup controlId="show-city-field-id" {...show_city}>
+            <ControlLabel>Mostrar campo de cidade</ControlLabel>
+            <RadioGroup>
+              <Radio value="city-true">Sim</Radio>
+              <Radio value="city-false">Não</Radio>
+            </RadioGroup>
+          </FormGroup>
         </FormRedux>
       </SettingsPageContentLayout>
     </PressureBase>
@@ -103,6 +111,7 @@ const fields = [
   'title_text',
   'button_text',
   'show_counter',
+  'show_city',
   'count_text',
   'main_color'
 ]
@@ -121,6 +130,7 @@ const validate = values => {
 const mapStateToProps = (state, props) => ({
   initialValues: {
     show_counter: 'false',
+    show_city: 'city-false',
     count_text: 'pressões feitas',
     main_color: '#f23392',
     ...props.widget.settings || {}
