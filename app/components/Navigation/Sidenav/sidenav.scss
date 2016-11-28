@@ -48,6 +48,10 @@
     }
   }
 
+  a.has-hover:hover {
+    text-decoration: underline !important;
+  }
+
   .items {
     padding-left: 0;
     text-align: center;
