@@ -1,19 +1,12 @@
 #!/bin/bash -e
 
-rm -rf ~/.dokku
-git clone https://github.com/dokku/dokku.git ~/.dokku
-
-DOKKU_HOST="reboo-staging.org"
+REPO_URI="dokku@reboo.org:0-client"
 if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-  DOKKU_HOST="reboo.org"
+  REPO_URI="https://git.v6jv.flynnhub.com/ourcities-rebu-client-develop.git"
 fi
-
-REPO_URI="dokku@$DOKKU_HOST:0-client"
-# REPO_SSL="dokku@$DOKKU_HOST:000-client-ssl"
 
 git fetch --unshallow origin
 
-git remote add dokku $REPO_URI
-# git remote add dokku-ssl $REPO_SSL
+git remote add deploy $REPO_URI
 
-git push -f dokku $CIRCLE_SHA1:refs/heads/master
+git push -f deploy $CIRCLE_SHA1:refs/heads/master
