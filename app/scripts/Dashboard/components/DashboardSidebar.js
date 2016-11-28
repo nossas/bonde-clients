@@ -5,6 +5,7 @@ import {
   SidenavList,
   SidenavListItem
 } from '../../../components/Navigation'
+import { getMobilization } from '../../Mobilization/MobilizationSelectors'
 import * as Paths from '../../Paths'
 
 
