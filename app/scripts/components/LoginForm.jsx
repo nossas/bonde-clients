@@ -10,6 +10,7 @@ import { isValidEmail } from '../../util/validation-helper'
 
 @reactMixin.decorate(Navigation)
 class LoginForm extends React.Component {
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.auth.user){
       this.transitionTo(Paths.mobilizations())
@@ -101,5 +102,5 @@ export default reduxForm({
   form: 'loginForm', fields, validate
 },
 (state, ownProps) => ({ // mapStateToProps
-  user: state.auth.user
+  auth: state.auth
 }), { onSubmit: login })(LoginForm)
