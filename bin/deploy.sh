@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-REPO_URI="dokku@reboo.org:0-client"
+REPO_URI="https://git.v6jv.flynnhub.com/ourcities-rebu-client-develop.git"
 if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-  REPO_URI="https://git.v6jv.flynnhub.com/ourcities-rebu-client-develop.git"
+  REPO_URI="dokku@reboo.org:0-client"
 fi
 
 git fetch --unshallow origin
