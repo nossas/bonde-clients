@@ -52,7 +52,7 @@ class RegisterPage extends Component {
             <ControlLabel>Confirme sua senha</ControlLabel>
             <FormControl type="password" placeholder="********" />
           </FormGroup>
-          <SubmitButton className="white col-12 rounded-bottom">
+          <SubmitButton className="col-12 rounded-bottom">
             {formProps.submitting ? 'Salvando...' : 'Criar conta'}
           </SubmitButton>
         </FormRedux>
