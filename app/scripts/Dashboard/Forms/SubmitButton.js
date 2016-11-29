@@ -6,13 +6,13 @@ class SubmitButton extends Component {
 
   render() {
     const { $formRedux: { submitting } } = this.context
-    const { children, className } = this.props
+    const { children, className, position } = this.props
 
     return (
       <button
         type="submit"
         disabled={submitting}
-        className={classnames("btn py2 caps", className, submitting ? 'bg-gray95' : 'bg-pagenta')}
+        className={classnames("btn py2 caps white", className, position, submitting ? 'bg-gray95' : 'bg-pagenta')}
       >
         {children}
       </button>
@@ -27,6 +27,7 @@ SubmitButton.contextTypes = {
 SubmitButton.propTypes = {
   children: PropTypes.any.isRequired,
   className: PropTypes.string,
+  position: PropTypes.oneOf(['floatTopRight', 'floatTopLeft'])
 }
 
 export default SubmitButton
