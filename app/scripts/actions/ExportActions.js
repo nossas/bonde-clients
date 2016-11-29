@@ -65,7 +65,7 @@ const safariCallback = (dataBase64) => {
     const url = `data:${strMimeType};base64,${dataBase64}`
     const anchor = document.createElement('a')
     anchor.href = url
-    anchor.className = 'button button-outline mb1 aqua caps p2'
+    anchor.className = 'btn btn-outline mb1 aqua caps p2'
     anchor.setAttribute('download', fileName)
     anchor.appendChild(icon)
     anchor.appendChild(text)
