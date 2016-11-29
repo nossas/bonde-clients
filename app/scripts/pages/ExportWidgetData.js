@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
-import Modernizr from 'modernizr'
 
 import {
   exportDataClipByEndpoint,
@@ -112,6 +111,7 @@ class ExportWidgetData extends React.Component {
 
     const widget = this.widget()
     const filename = mobilization.name + '.xlsx'
+    const adownloadSupport = ("download" in document.createElement("a"))
 
     return (
       <SettingsPageLayout>
@@ -143,7 +143,7 @@ class ExportWidgetData extends React.Component {
                   credentials
                 }
               )}>
-              {Modernizr.adownload
+              {adownloadSupport
                 ? 'Clique para baixar a planilha completa.'
                 : 'Clique para processar a planilha completa.'
               }
@@ -156,8 +156,8 @@ class ExportWidgetData extends React.Component {
             {(error ? this.renderErrorMessage() : null)}
           </div>
 
-          {(!Modernizr.adownload && !loading && success ? this.renderDisclaimer() : null)}
-          {(!Modernizr.adownload ? this.renderSaveAsContainer() : null)}
+          {(!adownloadSupport && !loading && success ? this.renderDisclaimer() : null)}
+          {(!adownloadSupport ? this.renderSaveAsContainer() : null)}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
