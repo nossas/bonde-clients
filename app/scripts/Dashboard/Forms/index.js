@@ -8,6 +8,7 @@ export { default as RadioGroup } from './RadioGroup'
 export { default as HelpBlock } from './HelpBlock'
 export { default as FormRedux } from './FormRedux'
 export { default as FormDropdown } from './FormDropdown'
+export { default as UploadImageField } from './UploadImageField'
 
 export { default as SubmitButton } from './SubmitButton'
 export { default as FormError } from './FormError'
