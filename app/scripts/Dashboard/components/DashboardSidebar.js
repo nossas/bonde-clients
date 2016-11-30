@@ -52,10 +52,7 @@ class DashboardSidebar extends Component {
           )
         }
         <SidenavList style={{ position: 'absolute', bottom: '0' }}>
-          <SidenavListItem
-            text="Minha Conta"
-            icon="user"
-          >
+          <SidenavListItem text="Minha Conta" icon="user" href={Paths.editAccount()}>
             <div className="white h6">{auth.user.email}</div>
           </SidenavListItem>
           <SidenavListItem

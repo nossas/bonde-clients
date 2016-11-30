@@ -9,7 +9,8 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  UploadImageField
+  UploadImageField,
+  SuccessMessage
 } from '../../Dashboard/Forms'
 import { FloatLayout } from '../../Dashboard/Grids'
 import { edit } from '../actions'
@@ -55,6 +56,7 @@ class EditUserPage extends Component {
 
             <FloatLayout position="floatTopRight">
               <SubmitButton>Salvar</SubmitButton>
+              <SuccessMessage text="Dados editados com sucesso." />
             </FloatLayout>
           </FormRedux>
         </SettingsPageContentLayout>
