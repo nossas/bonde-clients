@@ -27,7 +27,7 @@ class Donation extends React.Component {
 
   componentDidMount() {
     const { widget } = this.props
-    const default_donation_value = (widget.settings ? widget.settings.default_donation_value : 1)
+    const default_donation_value = (widget.settings && widget.settings.default_donation_value ? widget.settings.default_donation_value : 1)
     this.setState({selected_value: Number(default_donation_value)})
   }
 
@@ -59,7 +59,7 @@ class Donation extends React.Component {
 
     const payment_type = widget.settings.payment_type
     const recurring_period = widget.settings.recurring_period
-    const main_color = (widget.settings ? widget.settings.main_color : '#43a2cc')
+    const main_color = (widget.settings.main_color ? widget.settings.main_color : '#43a2cc')
     const encryption_key = process.env.PAGARME_KEY || 'setup env var'
 
     let checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
@@ -94,18 +94,18 @@ class Donation extends React.Component {
     const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
     const { loading, success, selected_value, selected_payment_type } = this.state
 
-    const button_text = (widget.settings ? widget.settings.button_text : 'Doar agora')
-    const title_text = (widget.settings ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
+    const button_text = ((widget.settings && widget.settings.button_text) ? widget.settings.button_text : 'Doar agora')
+    const title_text = ((widget.settings && widget.settings.title_text) ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
 
-    const donation_value1 = (widget.settings ? widget.settings.donation_value1 : 0)
-    const donation_value2 = (widget.settings ? widget.settings.donation_value2 : 0)
-    const donation_value3 = (widget.settings ? widget.settings.donation_value3 : 0)
-    const donation_value4 = (widget.settings ? widget.settings.donation_value4 : 0)
-    const donation_value5 = (widget.settings ? widget.settings.donation_value5 : 0)
-    const main_color = (widget.settings ? widget.settings.main_color : '#54d0f6')
+    const donation_value1 = ((widget.settings && widget.settings.donation_value1) ? widget.settings.donation_value1 : 0)
+    const donation_value2 = ((widget.settings && widget.settings.donation_value2) ? widget.settings.donation_value2 : 0)
+    const donation_value3 = ((widget.settings && widget.settings.donation_value3) ? widget.settings.donation_value3 : 0)
+    const donation_value4 = ((widget.settings && widget.settings.donation_value4) ? widget.settings.donation_value4 : 0)
+    const donation_value5 = ((widget.settings && widget.settings.donation_value5) ? widget.settings.donation_value5 : 0)
+    const main_color = ((widget.settings && widget.settings.main_color) ? widget.settings.main_color : '#54d0f6')
 
-    const payment_type = (widget.settings ? widget.settings.payment_type : 'unique')
-    const recurring_period = (widget.settings ? widget.settings.recurring_period : 30)
+    const payment_type = ((widget.settings && widget.settings.payment_type) ? widget.settings.payment_type : 'unique')
+    const recurring_period = ((widget.settings && widget.settings.recurring_period) ? widget.settings.recurring_period : 30)
 
     const periodLabelOptions = { 30:' mês', 180: ' semestre', 365: ' ano' }
     const periodLabelCurrent = periodLabelOptions[recurring_period]
