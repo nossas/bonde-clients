@@ -40,6 +40,27 @@
     border-radius: 45px;
   }
 
+  .uploadImageFile input[type="file"] {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .uploadImageFile button {
+    width: 69px;
+    height: 69px;
+    font-size: 35px;
+    color: #ececec;
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    border-radius: 45px;
+  }
+  .uploadImageFile button img {
+    width: 60px;
+    height: 60px;
+    border-radius: 45px;
+  }
+
   label {
     text-transform: uppercase;
     font-size: .75rem;

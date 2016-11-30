@@ -31,7 +31,11 @@ class UploadImageField extends Component {
 
     return (
       <div className="uploadImageFile">
-        <button type="button" className={className} onClick={this.onClick.bind(this)}>
+        <button
+          type="button"
+          className={className}
+          onClick={this.onClick.bind(this)}
+        >
           {value ? <img src={value} /> : <i className="fa fa-image" />}
         </button>
         <ReactS3Uploader
