@@ -12,3 +12,4 @@ export { default as UploadImageField } from './UploadImageField'
 
 export { default as SubmitButton } from './SubmitButton'
 export { default as FormError } from './FormError'
+export { default as SuccessMessage } from './SuccessMessage'

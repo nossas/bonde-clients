@@ -10,11 +10,13 @@
     position: fixed;
     top: 2rem;
     right: 4rem;
+    text-align: right;
   }
   div.floatTopLeft {
     position: fixed;
     top: 2rem;
     left: 4rem;
+    text-align: left;
   }
 
   .uploadImageFile input[type="file"] {

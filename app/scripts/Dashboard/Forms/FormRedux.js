@@ -20,7 +20,13 @@ class FormRedux extends Component {
   getChildContext() {
     const { inline, floatButton, successMessage, ...rest } = this.props
     return {
-      $formRedux: { ...rest, formInline: inline, floatButton, successMessage }
+      $formRedux: {
+        ...rest,
+        formInline: inline,
+        floatButton,
+        successMessage,
+        submitted: this.state.submitted
+      }
     }
   }
 
