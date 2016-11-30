@@ -11,11 +11,12 @@ import {
   ControlLabel,
   UploadImageField
 } from '../../Dashboard/Forms'
+import { edit } from '../actions'
 
 class EditUserPage extends Component {
 
   render() {
-    const { fields: { picture, first_name, last_name, email }, ...formProps } = this.props
+    const { editAccount, fields: { avatar_url, first_name, last_name, email }, ...formProps } = this.props
 
     return (
       <div>
@@ -28,11 +29,8 @@ class EditUserPage extends Component {
           </Tabs>
         </SettingsPageMenuLayout>
         <SettingsPageContentLayout>
-          <FormRedux
-            nosubmit
-            onSubmit={values => console.log(values)}
-            {...formProps}>
-            <FormGroup controlId="pictureId" {...picture}>
+          <FormRedux nosubmit onSubmit={values => editAccount(values)} {...formProps}>
+            <FormGroup controlId="avatarId" {...avatar_url}>
               <UploadImageField signingUrl={`${process.env.API_URL}/uploads`} />
             </FormGroup>
             <FormGroup controlId="firstNameId" {...first_name}>
@@ -60,11 +58,11 @@ EditUserPage.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-const fields = ['picture', 'first_name', 'last_name', 'email']
+const fields = ['id', 'avatar_url', 'first_name', 'last_name', 'email']
 
 export default reduxForm({
   form: 'editUserForm',
   fields
 }, (state, ownProps) => ({
   initialValues: state.auth.user,
-}))(EditUserPage)
+}), { editAccount: edit })(EditUserPage)
