@@ -12,7 +12,7 @@ class SubmitButton extends Component {
       <button
         type="submit"
         disabled={submitting}
-        className={classnames("btn py2 caps white", className, position, submitting ? 'bg-gray95' : 'bg-pagenta')}
+        className={classnames("btn py2 caps white", className, submitting ? 'bg-gray95' : 'bg-pagenta')}
       >
         {children}
       </button>
@@ -26,8 +26,7 @@ SubmitButton.contextTypes = {
 
 SubmitButton.propTypes = {
   children: PropTypes.any.isRequired,
-  className: PropTypes.string,
-  position: PropTypes.oneOf(['floatTopRight', 'floatTopLeft'])
+  className: PropTypes.string
 }
 
 export default SubmitButton

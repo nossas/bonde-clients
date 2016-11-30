@@ -6,12 +6,12 @@
     padding: .7rem 1.6rem;
   }
 
-  button[type="submit"].floatTopRight {
+  div.floatTopRight {
     position: fixed;
     top: 2rem;
     right: 4rem;
   }
-  button[type="submit"].floatTopLeft {
+  div.floatTopLeft {
     position: fixed;
     top: 2rem;
     left: 4rem;

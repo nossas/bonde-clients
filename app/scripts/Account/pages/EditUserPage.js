@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 import { Tabs, Tab } from '../../../components/Navigation'
-import { SettingsPageMenuLayout, SettingsPageContentLayout } from '../../../components/Layout'
+import { SettingsPageLayout, SettingsPageMenuLayout, SettingsPageContentLayout } from '../../../components/Layout'
 import {
   FormRedux,
   SubmitButton,
@@ -11,15 +11,16 @@ import {
   ControlLabel,
   UploadImageField
 } from '../../Dashboard/Forms'
+import { FloatLayout } from '../../Dashboard/Grids'
 import { edit } from '../actions'
 
 class EditUserPage extends Component {
 
   render() {
-    const { editAccount, fields: { avatar_url, first_name, last_name, email }, ...formProps } = this.props
+    const { editAccount, fields: { avatar, first_name, last_name, email }, ...formProps } = this.props
 
     return (
-      <div>
+      <SettingsPageLayout>
         <SettingsPageMenuLayout title="Minha conta">
           <Tabs>
             <Tab
@@ -29,8 +30,14 @@ class EditUserPage extends Component {
           </Tabs>
         </SettingsPageMenuLayout>
         <SettingsPageContentLayout>
-          <FormRedux nosubmit onSubmit={values => editAccount(values)} {...formProps}>
-            <FormGroup controlId="avatarId" {...avatar_url}>
+          {/* TODO: Change FormRedux to be transparent by default */}
+          <FormRedux
+            nosubmit
+            className="transparent"
+            successMessage="Dados atualizados com sucesso."
+            onSubmit={values => editAccount(values)} {...formProps}
+          >
+            <FormGroup controlId="avatarId" {...avatar}>
               <UploadImageField signingUrl={`${process.env.API_URL}/uploads`} />
             </FormGroup>
             <FormGroup controlId="firstNameId" {...first_name}>
@@ -45,10 +52,13 @@ class EditUserPage extends Component {
               <ControlLabel>E-mail</ControlLabel>
               <FormControl type="email" />
             </FormGroup>
-            <SubmitButton position="floatTopRight">Salvar</SubmitButton>
+
+            <FloatLayout position="floatTopRight">
+              <SubmitButton>Salvar</SubmitButton>
+            </FloatLayout>
           </FormRedux>
         </SettingsPageContentLayout>
-      </div>
+      </SettingsPageLayout>
     )
   }
 }
@@ -58,11 +68,14 @@ EditUserPage.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-const fields = ['id', 'avatar_url', 'first_name', 'last_name', 'email']
+const fields = ['id', 'avatar', 'first_name', 'last_name', 'email']
 
 export default reduxForm({
   form: 'editUserForm',
   fields
 }, (state, ownProps) => ({
-  initialValues: state.auth.user,
+  initialValues: {  // gambiarra para ajudar o amigo do backend
+    ...state.auth.user,
+    avatar: state.auth.user.avatar_url
+  },
 }), { editAccount: edit })(EditUserPage)
