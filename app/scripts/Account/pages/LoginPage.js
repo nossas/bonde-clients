@@ -29,20 +29,18 @@ class LoginPage extends Component {
         <div className="col-8 mb3 mx-auto">
           <img src={logo} alt="Logo Nossas" />
         </div>
-        <FormRedux nosubmit onSubmit={login} {...formProps}>
-          <div className="bg-white rounded">
-            <FormGroup controlId="emailId" {...email}>
-              <ControlLabel>E-mail</ControlLabel>
-              <FormControl type="email" placeholder="exemplo@email.com" />
-            </FormGroup>
-            <FormGroup controlId="passwordId" {...password}>
-              <ControlLabel>Senha</ControlLabel>
-              <FormControl type="password" placeholder="••••••••••" />
-            </FormGroup>
-            <SubmitButton className="white col-12 rounded-bottom">
-              {formProps.submitting ? 'Carregando...' : 'Entrar'}
-            </SubmitButton>
-          </div>
+        <FormRedux nosubmit className="bg-white rounded" onSubmit={login} {...formProps}>
+          <FormGroup controlId="emailId" {...email}>
+            <ControlLabel>E-mail</ControlLabel>
+            <FormControl type="email" placeholder="exemplo@email.com" />
+          </FormGroup>
+          <FormGroup controlId="passwordId" {...password}>
+            <ControlLabel>Senha</ControlLabel>
+            <FormControl type="password" placeholder="••••••••••" />
+          </FormGroup>
+          <SubmitButton className="white col-12 rounded-bottom">
+            {formProps.submitting ? 'Carregando...' : 'Entrar'}
+          </SubmitButton>
           <FormError className="mt2" />
         </FormRedux>
       </div>
