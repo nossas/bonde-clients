@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {isLoaded as isAuthLoaded, load as loadAuth} from './../reducers/auth'
 import ga from 'react-ga'
 
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 import '../../styles/main.scss'
 import { GoogleFontsLoader } from '../../components/Fonts'
+import { actions as AccountActions } from '../Account'
+
 
 @connect(state => ({ auth: state.auth }))
-
 export default class Application extends React.Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -20,8 +20,8 @@ export default class Application extends React.Component {
 
   static fetchData(store) {
     const promises = []
-    if (!isAuthLoaded(store.getState())) {
-      promises.push(store.dispatch(loadAuth()))
+    if (!AccountActions.isLoaded(store.getState())) {
+      promises.push(store.dispatch(AccountActions.load()))
     }
     return Promise.all(promises)
   }
