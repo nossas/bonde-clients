@@ -45,7 +45,7 @@ class FormRedux extends Component {
         className={classnames(
           'form-redux form',
           floatButton ? 'btn-float' : null,
-          className
+          className || 'transparent'
         )}
       >
         {children}
