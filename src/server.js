@@ -15,9 +15,11 @@ import authApi from './api/api'
 import ApiClient from './ApiClient'
 import universalRouter from './universalRouter'
 import Html from './Html'
-import PrettyError from 'pretty-error'
+import responseTime from 'response-time'
+import winston from 'winston'
+import expressWinston from 'express-winston'
+import NewrelicWinston from 'newrelic-winston'
 
-const pretty = new PrettyError()
 const app = new Express()
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
@@ -25,6 +27,20 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN))
 }
 
+winston.add(NewrelicWinston, {})
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console({
+      colorize: true
+    })
+  ],
+  meta: true, // optional: control whether you want to log the meta data about the request (default to true)
+  msg: 'HTTP {{req.method}} {{req.url}}', // optional: customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
+  expressFormat: true, // Use the default Express/morgan request formatting, with the same colors. Enabling this will override any msg and colorStatus if true. Will only output colors on transports with colorize set to true
+  colorStatus: true // Color the status code, using the Express/morgan color palette (default green, 3XX cyan, 4XX yellow, 5XX red). Will not be recognized if expressFormat is true
+}))
+
+app.use(responseTime())
 app.use(compression())
 app.use(helmet())
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
@@ -114,24 +130,33 @@ app.use((req, res) => {
           res.redirect(error.redirect)
           return
         }
-        console.error('ROUTER ERROR:', pretty.render(error))
+        winston.error('ROUTER ERROR:', error)
         res.status(500).send({error: error.stack})
       })
   }
 })
 
+// express-winston errorLogger makes sense AFTER the router.
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      colorize: true
+    })
+  ]
+}))
+
 if (config.port) {
   app.listen(config.port, (err) => {
     if (err) {
-      console.error(err)
+      winston.error(err)
     } else {
       authApi().then(() => {
-        console.info('==> ✅  Server is listening')
-        console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort)
-        console.info('----------\n==> 🚀  Open http://%s in a browser to view the app.', process.env.APP_DOMAIN)
+        winston.info('==> ✅  Server is listening')
+        winston.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort)
+        winston.info('----------\n==> 🚀  Open http://%s in a browser to view the app.', process.env.APP_DOMAIN)
       })
     }
   })
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified')
+  winston.error('==>     ERROR: No PORT environment variable has been specified')
 }
