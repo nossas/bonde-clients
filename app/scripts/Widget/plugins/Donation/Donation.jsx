@@ -27,8 +27,11 @@ class Donation extends React.Component {
 
   componentDidMount() {
     const { widget } = this.props
-    const default_donation_value = (widget.settings && widget.settings.default_donation_value ? widget.settings.default_donation_value : 1)
-    this.setState({selected_value: Number(default_donation_value)})
+    const defaultDonationValue = (
+      widget.settings && widget.settings.defaultDonationValue ?
+      widget.settings.defaultDonationValue : 1
+    )
+    this.setState({selected_value: Number(defaultDonationValue)})
   }
 
   componentWillReceiveProps() {

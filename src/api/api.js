@@ -2,7 +2,6 @@ import express from 'express'
 import session from 'express-session'
 import bodyParser from 'body-parser'
 import config from '../config'
-import * as actions from './routes/index'
 import winston from 'winston'
 
 const app = express()
