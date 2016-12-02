@@ -46,6 +46,9 @@ app.use(require('serve-static')(path.join(__dirname, '..', 'static')))
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')
 })
+app.get('/loaderio-0890f8aed482c4f4ca747f6c676be629.txt', function(req, res) {
+  res.send('loaderio-0890f8aed482c4f4ca747f6c676be629')
+})
 
 app.get('/robots.txt', function(req, res) {
   res.send('User-Agent: * \n' +
