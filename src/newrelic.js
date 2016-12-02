@@ -10,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['Website Reboo'],
+  app_name: ['Website Reboo - ' + process.env.NODE_ENV],
   /**
    * Your New Relic license key.
    */

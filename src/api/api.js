@@ -12,6 +12,21 @@ app.use(session({
 }))
 app.use(bodyParser.json())
 
+function loadAuth(req) {
+  return Promise.resolve(req.session.auth || null)
+}
+
+function logout(req) {
+  return new Promise((resolve) => {
+    req.session.destroy(() => {
+      req.session = null
+      return resolve(null)
+    })
+  })
+}
+
+const actions = [loadAuth, logout]
+
 export default function api() {
   return new Promise((resolve) => {
     app.use((req, res) => {
