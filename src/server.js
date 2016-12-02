@@ -8,7 +8,6 @@ import config from './config'
 import favicon from 'serve-favicon'
 import compression from 'compression'
 import helmet from 'helmet'
-import proxy from 'http-proxy-middleware'
 import path from 'path'
 import createStore from './redux/create'
 import authApi from './api/api'
@@ -45,19 +44,6 @@ app.use(compression())
 app.use(helmet())
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')))
-
-//
-// Proxies
-//
-app.use('/auth', proxy({
-  target: `http://localhost:${config.apiPort}`,
-  pathRewrite: { '^/auth': '' }
-}))
-app.use('/api', proxy({
-  target: process.env.API_URL,
-  pathRewrite: { '^/api': '' },
-  changeOrigin: true
-}))
 
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')

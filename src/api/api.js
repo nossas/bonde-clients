@@ -19,6 +19,7 @@ export default function api() {
       const matcher = req.url.split('?')[0].split('/')
       const action = matcher && actions[matcher[1]]
       if (action) {
+        winston.info('API PROMISE:', matcher)
         action(req, matcher.slice(2))
           .then((result) => {
             res.json(result)
