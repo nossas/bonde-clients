@@ -14,7 +14,7 @@ module.exports = {
     name: 'reboo-client',
     script: './bin/server.js',
     instances: WEB_CONCURRENCY,
-    max_memory_restart: `${WEB_MEMORY} M`,
+    max_memory_restart: WEB_MEMORY + 'M',
     exec_mode: 'cluster',
     watch: WATCH,
     env: {
