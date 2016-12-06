@@ -20,7 +20,13 @@ class FormRedux extends Component {
   getChildContext() {
     const { inline, floatButton, successMessage, ...rest } = this.props
     return {
-      $formRedux: { ...rest, formInline: inline, floatButton, successMessage }
+      $formRedux: {
+        ...rest,
+        formInline: inline,
+        floatButton,
+        successMessage,
+        submitted: this.state.submitted
+      }
     }
   }
 
@@ -34,7 +40,8 @@ class FormRedux extends Component {
       valid,
       inline,
       className,
-      floatButton
+      floatButton,
+      nosubmit
     } = this.props
     const { submitted } = this.state
 
@@ -42,13 +49,13 @@ class FormRedux extends Component {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={classnames(
-          'form-redux form rounded',
+          'form-redux form',
           floatButton ? 'btn-float' : null,
-          className
+          className || 'transparent'
         )}
       >
         {children}
-        {!inline && <ControlButtons {...{ submitted, submitting, dirty, valid }} />}
+        {!inline && !nosubmit && <ControlButtons {...{ submitted, submitting, dirty, valid }} />}
       </form>
     )
   }
