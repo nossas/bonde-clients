@@ -11,6 +11,7 @@ import {
   SidenavListItem
 } from '../../../components/Navigation'
 import { getMobilization } from '../MobilizationSelectors'
+import logoIcon from '../../../components/Navigation/Sidenav/logo-icon-letters.svg'
 
 class UserDashboard extends Component {
 
@@ -56,7 +57,7 @@ class UserDashboard extends Component {
         <Sidenav user={otherProps.auth.user}>
           {
             !currentId ? null : (
-              <SidenavList className="bg-lighten-2">
+              <SidenavList style={{ backgroundColor: 'rgba(255,255,255,.18)' }}>
                 <SidenavListItem
                   linkType="router"
                   text="Editar mobilização"
@@ -88,17 +89,41 @@ class UserDashboard extends Component {
               </SidenavList>
             )
           }
-          <SidenavList style={{ position: 'absolute', bottom: '0' }}>
+          <SidenavList style={{ position: 'absolute', bottom: '0', paddingBottom: 0 }}>
             <SidenavListItem
               text="Minha Conta"
-              icon="user"
-            >
-              <div className="white h6">{user.email}</div>
-            </SidenavListItem>
+              icon="user-circle-o"
+            />
             <SidenavListItem
+              linkType="router"
               text="Sair"
-              className="caps"
+              icon="arrow-left"
               href={Paths.logout()}
+            />
+            <SidenavListItem
+              style={{
+                borderTop: '1px solid rgba(255,255,255,.2)',
+                paddingTop: '1rem',
+                paddingBottom: '1rem',
+                marginTop: '.5rem',
+              }}
+              customContent={(
+                <div style={{ width: '180px', fontSize: '.75rem', color: 'rgba(255,255,255,.5)' }}>
+                  {/*<div className="col col-5">Sobre Nós</div>*/}
+                  <div className="col col-4">
+                    <a href="https://nossas.zendesk.com/" target="_blank" className="has-hover">
+                      Suporte
+                    </a>
+                  </div>
+                  {/*<div className="col col-3">Doe</div>*/}
+                </div>
+              )}
+              customIcon={(
+                <img
+                  src={logoIcon}
+                  style={{ width: '39px', display: 'table-cell', margin: 'auto' }}
+                />
+              )}
             />
           </SidenavList>
         </Sidenav>
