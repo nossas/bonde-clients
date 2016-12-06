@@ -27,6 +27,7 @@ class Donation extends React.Component {
 
   componentDidMount() {
     const { widget } = this.props
+
     const defaultDonationValue = (
       widget.settings && widget.settings.defaultDonationValue ?
       widget.settings.defaultDonationValue : 1
