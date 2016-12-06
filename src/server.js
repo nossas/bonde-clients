@@ -18,7 +18,7 @@ import responseTime from 'response-time'
 import winston from 'winston'
 import expressWinston from 'express-winston'
 import NewrelicWinston from 'newrelic-winston'
-
+import WinstonCloudWatch from 'winston-cloudwatch'
 const app = new Express()
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
@@ -27,6 +27,11 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
 }
 
 winston.add(NewrelicWinston, {})
+winston.add(WinstonCloudWatch, {
+  logGroupName: 'Reboo',
+  logStreamName: 'Website - ' + process.env.NODE_ENV
+})
+
 app.use(expressWinston.logger({
   transports: [
     new winston.transports.Console({
