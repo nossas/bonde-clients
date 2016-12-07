@@ -1,7 +1,9 @@
 import * as t from './actionTypes'
 
 const initialState = {
-  loaded: false
+  loaded: false,
+  user: undefined,
+  credentials: undefined
 }
 
 export default (state = initialState, action = {}) => {
