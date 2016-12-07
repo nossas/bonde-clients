@@ -7,5 +7,12 @@ export default {
   createRoutes,
   createContainer,
   actions,
-  reducers
+  reducers,
+  requireLoginWrapper: (store, redirectUrl) => (nextState, transition) => {
+    // Redirect to LOGIN when not user authenticated
+    const { auth } = store.getState()
+    if (!auth.user && redirectUrl) {
+      transition.to(redirectUrl)
+    }
+  }
 }
