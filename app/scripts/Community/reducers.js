@@ -28,6 +28,11 @@ export default (state = initialState, action = {}) => {
         isLoaded: false,
         error: action.error
       }
+    case t.ADD:
+      return {
+        ...state,
+        data: [...state.data, action.community]
+      }
     default:
       return state
   }

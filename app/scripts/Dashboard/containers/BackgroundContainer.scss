@@ -5,8 +5,14 @@
   color: $darkGray;
 
   h1 {
-    font-weight: 300;
     font-size: 36px;
+    line-height: 1.25;
+    text-align: center;
+    color: white;
+  }
+
+  h2 {
+    font-size: 22px;
     line-height: 1.25;
     text-align: center;
     color: white;

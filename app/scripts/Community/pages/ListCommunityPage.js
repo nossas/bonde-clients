@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { decorate } from 'react-mixin'
 import { Navigation } from 'react-router'
+import { Loading } from '../../Dashboard/components'
+
 import { fetch } from '../actions'
 
 
@@ -23,7 +25,7 @@ class ListCommunityPage extends Component {
 
     const { loading, isLoaded, data } = this.props
 
-    return (
+    return loading ? <Loading /> : (
       <div>
         <h2>{loading ? 'Fetching...' : 'Community List'}</h2>
         {isLoaded ? (
