@@ -36,17 +36,18 @@ import {
 } from '../MobilizationActions'
 
 export class MobilizationListPage extends Component {
+
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(setCurrentMobilizationId(null))
-    dispatch(setMobilizationMoreMenuActiveIndex(undefined))
+    const { setCurrentMobilizationId, setMobilizationMoreMenuActiveIndex } = this.props
+    setCurrentMobilizationId(null)
+    setMobilizationMoreMenuActiveIndex(undefined)
   }
 
   render() {
     const {
       mobilization: { data: mobilizations, loading, loaded },
-      mobilizationMoreMenuActiveIndex,
-      dispatch
+      setMobilizationMoreMenuActiveIndex,
+      mobilizationMoreMenuActiveIndex
     } = this.props
 
     return (
@@ -84,7 +85,7 @@ export class MobilizationListPage extends Component {
                       <MobilizationListItemFundRaising {...mobilization} />
                     </div>
                   </Link>
-                  <MobilizationListItemMore dispatch={dispatch} index={index}>
+                  <MobilizationListItemMore onClick={setMobilizationMoreMenuActiveIndex} index={index}>
                     <MobilizationListItemMoreMenu
                       active={mobilizationMoreMenuActiveIndex === index}
                     >
@@ -112,7 +113,7 @@ export class MobilizationListPage extends Component {
             <div
               className="mobilization-list-more-menu-cancel-overlay z1"
               style={{ position: 'fixed', top: 0, right: 0, bottom: 0, left: 0 }}
-              onClick={() => { dispatch(setMobilizationMoreMenuActiveIndex(undefined)) }}
+              onClick={() => { setMobilizationMoreMenuActiveIndex(undefined) }}
             />
           )
         }
@@ -122,14 +123,19 @@ export class MobilizationListPage extends Component {
 }
 
 MobilizationListPage.propTypes = {
-  data: PropTypes.array,
-  loaded: PropTypes.bool,
-  loading: PropTypes.bool,
-  dispatch: PropTypes.func
+  mobilization: PropTypes.object.isRequired,
+  setMobilizationMoreMenuActiveIndex: PropTypes.func,
+  setCurrentMobilizationId: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
+  mobilization: state.mobilization,
   mobilizationMoreMenuActiveIndex: state.mobilization.mobilizationMoreMenuActiveIndex
 })
 
-export default connect(mapStateToProps)(MobilizationListPage)
+const mapActionsToProps = {
+  setCurrentMobilizationId,
+  setMobilizationMoreMenuActiveIndex
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(MobilizationListPage)

@@ -11,9 +11,7 @@ import {
 import {
   MobilizationListPage,
   MobilizationBasicsNewFormPage,
-  MobilizationCityNewPage,
   MobilizationBasicsEditFormPage,
-  MobilizationCityEditPage,
   MobilizationAnalyticsPage,
   MobilizationSharingPage,
   MobilizationCustomDomainPage,
@@ -25,13 +23,34 @@ import { NewBlockPage } from '../Block/pages'
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
+import { fetch as fetchMobilizations } from './MobilizationActions'
 
-export default (store, AccountContainer) => (
-  <Route component={AccountContainer} onEnter={AccountContainer.onEnter(store)}>
+import { SidebarContainerWrapper } from '../Dashboard/containers'
+
+
+const mapStateToProps = (state, ownProps) => ({
+  mobilization: state.mobilization,
+  auth: state.auth,
+  community: state.community
+})
+
+const mapActionsToProps = {
+  fetch: props => dispacth => {
+    const { mobilization: { loaded }, community: { currentId } } = props
+    if (!loaded && currentId) {
+      dispacth(fetchMobilizations(currentId))
+    }
+  }
+}
+
+const SidebarContainer = SidebarContainerWrapper(mapStateToProps, mapActionsToProps)
+
+
+export default requiredLogin => (
+  <Route component={SidebarContainer} onEnter={requiredLogin}>
     <Route path="/" component={MobilizationListPage} />
     <Route path="/mobilizations" component={NewMobilizationContainer}>
       <Route path="/new" component={MobilizationBasicsNewFormPage} />
-      <Route path="/:mobilization_id/cityNew" component={MobilizationCityNewPage} />
     </Route>
     {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
     <Route path="/mobilizations/:mobilization_id" component={MobilizationDashboardContainer}>
@@ -40,7 +59,6 @@ export default (store, AccountContainer) => (
       {widgetCreateRoutes()}
       <Route component={MobilizationSettingsContainer}>
         <Route path="/basics" component={MobilizationBasicsEditFormPage} />
-        <Route path="/city" component={MobilizationCityEditPage} />
         <Route path="/analytics" component={MobilizationAnalyticsPage} />
         <Route path="/sharing" component={MobilizationSharingPage} />
         <Route path="/customDomain" component={MobilizationCustomDomainPage} />

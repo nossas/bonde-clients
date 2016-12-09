@@ -10,10 +10,6 @@ import { CustomDomainWrapper } from '../../app/scripts/pages'
 
 import * as Paths from '../../app/scripts/Paths'
 
-import { fetchMobilizations, mobilizationsIsLoaded } from '../../app/scripts/Mobilization/MobilizationActions'
-// TODO: Refactor actions to module
-import { fetchOrganizations, isOrganizationsLoaded } from '../../app/scripts/reducers/organizations'
-
 import { createExternalRoutes as matchCreateExternalRoutes } from '../../app/scripts/Widget/plugins/Match'
 
 import { DashboardSidebar } from '../../app/scripts/Dashboard/components'
@@ -24,41 +20,17 @@ import {
   createRoutes as accountCreateRoutes,
   requireLoginWrapper
 } from '../../app/scripts/Account'
-import {
-  createRoutes as communityCreateRoutes,
-  fetch as fetchCommunity
-} from '../../app/scripts/Community'
+import { createRoutes as communityCreateRoutes } from '../../app/scripts/Community'
 
 
 
 const fetchData = ({ dispatch, getState }) => {
   const promises = []
 
-  // TODO: When filter mobilization by user owner, make code here
-  if (!mobilizationsIsLoaded(getState())) {
-    promises.push(dispatch(fetchMobilizations()))
-  }
-
-  if (!isOrganizationsLoaded(getState())) {
-    promises.push(dispatch(fetchOrganizations()))
-  }
-
   return Promise.all(promises)
 }
 
 const componentDidMount = (props) => {
-  // TODO this callback is a workaround to load mobilizations in client-side
-  // but it should be replaced by the static fetchData method that is fetching
-  // mobilizations only in the server-side for now
-  const { organizations, mobilization, dispatch } = props
-
-  if (!organizations.loaded) {
-    dispatch(fetchOrganizations())
-  }
-
-  if (!mobilization.loaded) {
-    dispatch(fetchMobilizations())
-  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -88,7 +60,7 @@ export default function(store, host) {
     return (
       <Route component={Application}>
         {accountCreateRoutes(AccountContainer, requiredLogin, '/community')}
-        {mobilizationCreateRoutes(store, AccountContainer)}
+        {mobilizationCreateRoutes(requiredLogin)}
         {communityCreateRoutes(requiredLogin)}
         <Route path="*" component={NotFound} status={404} />
       </Route>
