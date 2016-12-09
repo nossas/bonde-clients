@@ -21,8 +21,13 @@ import { DashboardSidebar } from '../../app/scripts/Dashboard/components'
 import { createRoutes as mobilizationCreateRoutes } from '../../app/scripts/Mobilization'
 import {
   createContainer as accountCreateContainer,
-  createRoutes as accountCreateRoutes
+  createRoutes as accountCreateRoutes,
+  requireLoginWrapper
 } from '../../app/scripts/Account'
+import {
+  createRoutes as communityCreateRoutes,
+  fetch as fetchCommunity
+} from '../../app/scripts/Community'
 
 
 
@@ -59,7 +64,8 @@ const componentDidMount = (props) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     organizations: state.organizations,
-    mobilization: state.mobilization
+    mobilization: state.mobilization,
+    community: state.community
   }
 }
 
@@ -76,10 +82,14 @@ export default function(store, host) {
   const isAppSubdomain = (host === `app.${process.env.APP_DOMAIN}`)
 
   if (isAppSubdomain) {
+
+    const requiredLogin = requireLoginWrapper(store, Paths.login())
+
     return (
       <Route component={Application}>
-        {accountCreateRoutes(store, AccountContainer)}
+        {accountCreateRoutes(store, AccountContainer, '/community')}
         {mobilizationCreateRoutes(store, AccountContainer)}
+        {communityCreateRoutes(requiredLogin)}
         <Route path="*" component={NotFound} status={404} />
       </Route>
     )
