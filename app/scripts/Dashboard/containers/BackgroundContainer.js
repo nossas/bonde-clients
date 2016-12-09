@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import './LoginRegisterContainer.scss'
+import './BackgroundContainer.scss'
 
 
-class LoginRegisterContainer extends Component {
+class BackgroundContainer extends Component {
 
   render() {
     const { children } = this.props;
@@ -20,4 +20,4 @@ class LoginRegisterContainer extends Component {
   }
 }
 
-export default LoginRegisterContainer
+export default BackgroundContainer

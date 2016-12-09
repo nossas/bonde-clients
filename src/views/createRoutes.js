@@ -87,7 +87,7 @@ export default function(store, host) {
 
     return (
       <Route component={Application}>
-        {accountCreateRoutes(store, AccountContainer, '/community')}
+        {accountCreateRoutes(AccountContainer, requiredLogin, '/community')}
         {mobilizationCreateRoutes(store, AccountContainer)}
         {communityCreateRoutes(requiredLogin)}
         <Route path="*" component={NotFound} status={404} />

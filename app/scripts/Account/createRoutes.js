@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import { LoginRegisterContainer } from './containers'
+import { BackgroundContainer } from '../Dashboard/containers'
 import {
   EditUserPage,
   LoginPageWrapper,
@@ -10,13 +10,13 @@ import {
 } from './pages'
 
 
-export default (store, AccountContainer, redirect_uri) => [
-  <Route key="account" component={LoginRegisterContainer}>
-    <Route path="/login" component={LoginPageWrapper(redirect_uri)} />
+export default (AccountContainer, requiredLogin, redirectUrl) => [
+  <Route key="account" component={BackgroundContainer}>
+    <Route path="/login" component={LoginPageWrapper(redirectUrl)} />
     <Route path="/logout" component={LogoutPage} />
     <Route path="/register" component={RegisterPage} />
   </Route>,
-  <Route key="account-logged" path="/account" component={AccountContainer} onEnter={AccountContainer.onEnter(store)}>
+  <Route key="account-logged" path="/account" component={AccountContainer} onEnter={requiredLogin}>
     <Route path="/edit" component={EditUserPage} />
   </Route>
 ]
