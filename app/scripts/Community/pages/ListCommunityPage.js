@@ -4,6 +4,7 @@ import { decorate } from 'react-mixin'
 import { Link, Navigation } from 'react-router'
 import { Loading } from '../../Dashboard/components'
 
+import * as paths from '../paths'
 import { fetch } from '../actions'
 import { ListItem } from '../components'
 
@@ -18,7 +19,7 @@ class ListCommunityPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoaded && nextProps.data.length === 0) {
-      this.transitionTo('/community/new')
+      this.transitionTo(paths.add())
     }
 
     if (nextProps.currentId) {
@@ -39,7 +40,7 @@ class ListCommunityPage extends Component {
             {data && data.map(community => <ListItem community={community} />)}
           </div>
         ) : null}
-        <p className="white center">ou <Link to="/community/add">Crie uma nova comunidade</Link></p>
+        <p className="white center">ou <Link to={paths.add()}>Crie uma nova comunidade</Link></p>
       </div>
     ) : <Loading />
   }

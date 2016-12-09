@@ -3,12 +3,16 @@ import { Link } from 'react-router'
 import classnames from 'classnames'
 
 import * as Paths from '../../../scripts/Paths'
+import { paths as communityPaths } from '../../../scripts/Community'
 
 import './sidenav.scss'
 
 class Sidenav extends Component {
+
   render() {
-    const { user, children } = this.props
+    const { children, community: { data, currentId } } = this.props
+    const community = data.filter(c => c.id === currentId)[0]
+
     return (
       <nav className="sidenav clearfix">
         <div className="items items-logo">
@@ -17,22 +21,16 @@ class Sidenav extends Component {
               <Link to={Paths.mobilizations()} style={{ height: '43px', display: 'block' }}>
                 <u
                   className={classnames('logo-icon', { 'nossas': true })}
-                  style={{
-                    backgroundImage: `url(${user.community_avatar}`
-                  }}
+                  style={{ backgroundImage: community.avatar_url ? `url(${community.avatar_url}` : undefined }}
                 />
               </Link>
             </div>
             <div className="item-content">
               <div className="table-cell align-middle">
                 <div>
-                  <div className="item-community-name">Nossas</div>
+                  <div className="item-community-name">{community.name}</div>
                   <div className="item-community-change">
-                    <Link to={Paths.mobilizations()} className="col col-8">
-                      <i className="fa fa-cog mr1" />
-                      <span>Configurações</span>
-                    </Link>
-                    <Link to={Paths.mobilizations()} className="col col-4">
+                    <Link to={communityPaths.list()} className="col col-4">
                       <i className="fa fa-refresh mr1" />
                       <span>Trocar</span>
                     </Link>

@@ -31,10 +31,10 @@
     &.nossas {
       background-color: #ff0099;
       position: relative;
+      background-image: url('./logo-icon-white-strokes.svg');
 
       &:after {
         content: '';
-        background-image: url('./logo-icon-white-strokes.svg');
         fill: #fff;
         display: inline-block;
         width: 35px;

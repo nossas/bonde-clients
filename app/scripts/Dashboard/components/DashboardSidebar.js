@@ -16,7 +16,7 @@ class DashboardSidebar extends Component {
     const { auth, mobilization: { currentId } } = this.props
 
     return (
-      <Sidenav user={auth.user}>
+      <Sidenav {...this.props}>
         {
           !currentId ? null : (
             <SidenavList className="bg-lighten-2">
@@ -56,6 +56,7 @@ class DashboardSidebar extends Component {
             <div className="white h6">{auth.user.email}</div>
           </SidenavListItem>
           <SidenavListItem
+            icon="sign-out"
             text="Sair"
             className="caps"
             href={Paths.logout()}

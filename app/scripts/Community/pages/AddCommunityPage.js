@@ -5,6 +5,7 @@ import { Navigation } from 'react-router'
 import { FormRedux, FormGroup, ControlLabel, FormControl, SubmitButton, FormError } from '../../Dashboard/Forms'
 
 import * as actions from '../actions'
+import * as paths from '../paths'
 
 
 @decorate(Navigation)
@@ -13,7 +14,7 @@ class AddCommunityPage extends Component {
   componentWillReceiveProps(nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
-      this.transitionTo('/community')
+      this.transitionTo(paths.list())
     }
   }
 
