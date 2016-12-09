@@ -33,6 +33,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         data: [...state.data, action.community]
       }
+    case t.SELECT:
+      return {
+        ...state,
+        currentId: action.id
+      }
     default:
       return state
   }

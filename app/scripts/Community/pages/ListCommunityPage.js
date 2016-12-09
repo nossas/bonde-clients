@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { decorate } from 'react-mixin'
-import { Navigation } from 'react-router'
+import { Link, Navigation } from 'react-router'
 import { Loading } from '../../Dashboard/components'
 
 import { fetch } from '../actions'
+import { ListItem } from '../components'
 
 
 @decorate(Navigation)
@@ -19,29 +20,37 @@ class ListCommunityPage extends Component {
     if (nextProps.isLoaded && nextProps.data.length === 0) {
       this.transitionTo('/community/new')
     }
+
+    if (nextProps.currentId) {
+      this.transitionTo('/')
+    }
   }
 
   render() {
 
-    const { loading, isLoaded, data } = this.props
+    const { loading, isLoaded, data, user } = this.props
 
-    return loading ? <Loading /> : (
+    return !loading ? (
       <div>
-        <h2>{loading ? 'Fetching...' : 'Community List'}</h2>
+        <h1>Olá {user.first_name},</h1>
+        <h2>Escolha uma das suas comunidades</h2>
         {isLoaded ? (
-          <ul>
-            {data.map(c => <li>{c.name}</li>)}
-          </ul>
-        ) : <span>Can't loaded.</span>}
+          <div className="rounded bg-white">
+            {data && data.map(community => <ListItem community={community} />)}
+          </div>
+        ) : null}
+        <p className="white center">ou <Link to="/community/add">Crie uma nova comunidade</Link></p>
       </div>
-    )
+    ) : <Loading />
   }
 }
 
 const mapStateToProps = state => ({
+  user: state.auth.user,
   loading: state.community.loading,
   isLoaded: state.community.isLoaded,
   data: state.community.data,
+  currentId: state.community.currentId,
   credentials: state.auth.credentials
 })
 

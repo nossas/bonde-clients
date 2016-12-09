@@ -18,6 +18,16 @@
     color: white;
   }
 
+  a {
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   form {
 
     .form-group {
@@ -42,5 +52,24 @@
       border: none;
       height: 20px;
     }
+  }
+
+  .ListItem {
+    padding: 1rem;
+    border-top: 1px solid #ccc;
+  }
+
+  .ListItem:first-child {
+    border-top: none;
+  }
+
+  .ListItem img {
+    width: 42px;
+    height: 42px;
+    border-radius: 40px;
+  }
+
+  .ListItem p {
+    vertical-align: middle;
   }
 }

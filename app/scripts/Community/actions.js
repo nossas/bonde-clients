@@ -1,6 +1,9 @@
 import * as t from './actionTypes'
 import superagent from 'superagent'
 
+export const select = id => dispatch => {
+  return dispatch({ type: t.SELECT, id })
+}
 
 export const create = community => (dispatch, getState, request) => {
 
