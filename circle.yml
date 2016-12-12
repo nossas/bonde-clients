@@ -1,8 +1,22 @@
 machine:
   timezone:
     America/Sao_Paulo # Set the timezone
+  pre:
+    - mkdir ~/.yarn-cache
   node:
-    version: 6.2.1
+    version: stable
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  cache_directories:
+    - ~/.yarn-cache
+  override:
+    - yarn install
+
+test:
+  override:
+    - yarn test
 
 deployment:
   production:
