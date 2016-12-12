@@ -8,6 +8,7 @@ const PAGARME_KEY = process.env.PAGARME_KEY || 'ek_test_PYsS1XrZsCCF7wynC67YEi5R
 const NEW_RELIC_HOME = process.env.NEW_RELIC_HOME || './src'
 const NEW_RELIC_LICENSE_KEY = process.env.NEW_RELIC_LICENSE_KEY || ''
 const WATCH = process.env.WATCH || false
+const PORT = process.env.PORT || '3009'
 
 module.exports = {
   apps: [{
@@ -18,6 +19,7 @@ module.exports = {
     exec_mode: 'cluster',
     watch: WATCH,
     env: {
+      PORT: PORT,
       NODE_PATH: NODE_PATH,
       NODE_ENV: NODE_ENV,
       API_URL: API_URL,
