@@ -124,7 +124,6 @@
     "webpack-dev-server": "^1.9.0",
     "webpack-isomorphic-tools": "^2.5.8",
     "winston": "^2.3.0",
-    "winston-cloudwatch": "^1.9.0",
     "xlsx": "^0.8.0"
   },
   "devDependencies": {
