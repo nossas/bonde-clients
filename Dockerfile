@@ -6,12 +6,9 @@ WORKDIR /usr/src/app
 
 RUN npm install yarn -g
 
-
 # Bundle app source
 COPY . /usr/src/app
 
 RUN yarn
 
-
-EXPOSE 3000
-CMD [ "node", "./bin/server" ]
+CMD [ "./node_modules/.bin/pm2-docker", "./ecosystem.config.js" ]
