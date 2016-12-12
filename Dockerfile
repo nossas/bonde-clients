@@ -44,6 +44,7 @@ RUN echo \
 RUN npm install yarn pm2 -g
 
 WORKDIR /app
+
 ADD . ./
 
 RUN yarn
@@ -52,4 +53,4 @@ RUN yarn
 EXPOSE 5000
 
 # Start process.yml
-CMD ["pm2-docker", "start", "--auto-exit", "--env", "production", "ecosystem.config.js"]
+CMD ["pm2-docker", "ecosystem.config.js"]
