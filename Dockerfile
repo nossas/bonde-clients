@@ -1,14 +1,15 @@
-FROM node:argon
+FROM mhart/alpine-node:latest
+MAINTAINER Nossas <tech@nossas.org>
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN npm install yarn pm2 -g
 
-RUN npm install yarn -g
-
-# Bundle app source
-COPY . /usr/src/app
+WORKDIR /app
+COPY . ./
 
 RUN yarn
 
-CMD [ "./node_modules/.bin/pm2", "start", "ecosystem.config.js" ]
+# Expose ports
+EXPOSE 5000 3001
+
+# Start process.yml
+CMD ["pm2-docker", "start", "--auto-exit", "--env", "production", "ecosystem.config.js"]
