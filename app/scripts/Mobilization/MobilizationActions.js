@@ -12,6 +12,23 @@ export const FINISH_UPLOAD_FACEBOOK_IMAGE = 'FINISH_UPLOAD_FACEBOOK_IMAGE'
 
 export const SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX = 'SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX'
 
+export const fetchMobilizations = (queryFilter = {}) => ({
+  types: [
+    t.REQUEST_FETCH_MOBILIZATIONS,
+    t.SUCCESS_FETCH_MOBILIZATIONS,
+    t.FAILURE_FETCH_MOBILIZATIONS
+  ],
+  promise: () => new Promise((resolve, reject) => {
+    superagent
+      .get(`${process.env.API_URL}/mobilizations`)
+      .send(queryFilter)
+      .end((err, res) => {
+        if (err || !res.ok) reject(err || res.body)
+        else resolve(res.body)
+      })
+  })
+})
+
 export const fetch = communityId => (dispatch, getState, request) => {
   const { auth: { credentials } } = getState()
   dispatch({ type: t.FETCH, communityId })
