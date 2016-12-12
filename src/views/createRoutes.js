@@ -11,43 +11,9 @@ import { CustomDomainWrapper } from '../../app/scripts/pages'
 import * as Paths from '../../app/scripts/Paths'
 
 import { createExternalRoutes as matchCreateExternalRoutes } from '../../app/scripts/Widget/plugins/Match'
-
-import { DashboardSidebar } from '../../app/scripts/Dashboard/components'
-
-import { createRoutes as mobilizationCreateRoutes } from '../../app/scripts/Mobilization'
-import {
-  createContainer as accountCreateContainer,
-  createRoutes as accountCreateRoutes,
-  requireLoginWrapper
-} from '../../app/scripts/Account'
+import { createRoutes as accountCreateRoutes, requireLoginWrapper } from '../../app/scripts/Account'
 import { createRoutes as communityCreateRoutes } from '../../app/scripts/Community'
-
-
-
-const fetchData = ({ dispatch, getState }) => {
-  const promises = []
-
-  return Promise.all(promises)
-}
-
-const componentDidMount = (props) => {
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    organizations: state.organizations,
-    mobilization: state.mobilization,
-    community: state.community
-  }
-}
-
-const AccountContainer = accountCreateContainer({
-  sidebarComponentRender: <DashboardSidebar />,
-  loginRedirectUrl: Paths.login(),
-  fetchData,
-  componentDidMount,
-  mapStateToProps,
-})
+import { createRoutes as mobilizationCreateRoutes } from '../../app/scripts/Mobilization'
 
 
 export default function(store, host) {
@@ -59,7 +25,7 @@ export default function(store, host) {
 
     return (
       <Route component={Application}>
-        {accountCreateRoutes(AccountContainer, requiredLogin, '/community')}
+        {accountCreateRoutes(requiredLogin, '/community')}
         {mobilizationCreateRoutes(requiredLogin)}
         {communityCreateRoutes(requiredLogin)}
         <Route path="*" component={NotFound} status={404} />

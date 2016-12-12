@@ -29,6 +29,7 @@ const MobilizationReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         loaded: false,
+        communityId: action.communityId
       }
     case t.FETCH_SUCCESS:
       return {

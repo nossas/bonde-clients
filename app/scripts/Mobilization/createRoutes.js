@@ -4,6 +4,7 @@ import { Route } from 'react-router'
 import Container from '../Dashboard/Container'
 
 import {
+  MobilizationContainer,
   NewMobilizationContainer,
   MobilizationDashboardContainer,
   MobilizationSettingsContainer
@@ -23,31 +24,9 @@ import { NewBlockPage } from '../Block/pages'
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
-import { fetch as fetchMobilizations } from './MobilizationActions'
-
-import { SidebarContainerWrapper } from '../Dashboard/containers'
-
-
-const mapStateToProps = (state, ownProps) => ({
-  mobilization: state.mobilization,
-  auth: state.auth,
-  community: state.community
-})
-
-const mapActionsToProps = {
-  fetch: props => dispacth => {
-    const { mobilization: { loaded }, community: { currentId } } = props
-    if (!loaded && currentId) {
-      dispacth(fetchMobilizations(currentId))
-    }
-  }
-}
-
-const SidebarContainer = SidebarContainerWrapper(mapStateToProps, mapActionsToProps)
-
 
 export default requiredLogin => (
-  <Route component={SidebarContainer} onEnter={requiredLogin}>
+  <Route component={MobilizationContainer} onEnter={requiredLogin}>
     <Route path="/" component={MobilizationListPage} />
     <Route path="/mobilizations" component={NewMobilizationContainer}>
       <Route path="/new" component={MobilizationBasicsNewFormPage} />

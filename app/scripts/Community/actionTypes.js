@@ -7,3 +7,5 @@ export const FETCH_FAIL = 'community/FETCH_FAIL'
 export const ADD = 'community/ADD'
 
 export const SELECT = 'community/SELECT'
+
+export const UNSET = 'community/UNSET'

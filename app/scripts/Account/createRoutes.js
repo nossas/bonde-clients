@@ -8,9 +8,10 @@ import {
   LogoutPage,
   RegisterPage
 } from './pages'
+import { AccountContainer } from './containers'
 
 
-export default (AccountContainer, requiredLogin, redirectUrl) => [
+export default (requiredLogin, redirectUrl) => [
   <Route key="account" component={BackgroundContainer}>
     <Route path="/login" component={LoginPageWrapper(redirectUrl)} />
     <Route path="/logout" component={LogoutPage} />

@@ -38,6 +38,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         currentId: action.id
       }
+    case t.UNSET:
+      return {
+        ...state,
+        currentId: null
+      }
     default:
       return state
   }

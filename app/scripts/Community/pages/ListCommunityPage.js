@@ -5,7 +5,7 @@ import { Link, Navigation } from 'react-router'
 import { Loading } from '../../Dashboard/components'
 
 import * as paths from '../paths'
-import { fetch } from '../actions'
+import { fetch, unset } from '../actions'
 import { ListItem } from '../components'
 
 
@@ -55,12 +55,13 @@ const mapStateToProps = state => ({
   credentials: state.auth.credentials
 })
 
-const mapDispatchToProps = { fetch }
+const mapActionsToProps = { fetch }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
+  ...dispatchProps,
   fetch: () => dispatchProps.fetch(stateProps.credentials)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ListCommunityPage)
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(ListCommunityPage)

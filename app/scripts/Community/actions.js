@@ -32,3 +32,5 @@ export const fetch = credentials => dispatch => {
       else dispatch({ type: t.FETCH_SUCCESS, data: res.body })
     })
 }
+
+export const unset = dispatch => dispatch({ type: t.UNSET })

@@ -14,7 +14,7 @@ export const SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX = 'SET_MOBILIZATION_MORE_ME
 
 export const fetch = communityId => (dispatch, getState, request) => {
   const { auth: { credentials } } = getState()
-  dispatch({ type: t.FETCH })
+  dispatch({ type: t.FETCH, communityId })
   return request
     .get(`/communities/${communityId}/mobilizations`, {}, { headers: credentials })
     .then(({ status, data }) => {
@@ -27,6 +27,10 @@ export const fetch = communityId => (dispatch, getState, request) => {
     })
     .catch(error => Promise.reject(error))
 }
+
+export const reset = () => dispatch => ({
+  type: t.RESET
+})
 
 export const setCurrentMobilizationId = currentId => dispatch => dispatch({
   type: SET_CURRENT_MOBILIZATION,
