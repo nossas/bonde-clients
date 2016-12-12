@@ -27,7 +27,12 @@ if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
 }
 
 winston.add(NewrelicWinston, {})
+
 winston.add(WinstonCloudWatch, {
+  awsRegion: 'us-west-1',
+  awsOptions: {
+    logStreamName: 'us-east-1'
+  },
   logGroupName: 'Reboo',
   logStreamName: 'Website - ' + process.env.NODE_ENV
 })
