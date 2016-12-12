@@ -107,6 +107,29 @@ class UserDashboard extends Component {
                 paddingBottom: '1rem',
                 marginTop: '.5rem',
               }}
+              linkType="router"
+              customContent={(
+                <div style={{ width: '180px', fontSize: '.75rem', color: 'rgba(255,255,255,.5)' }}>
+                  <div className="col col-5">Sobre Nós</div>
+                  <div className="col col-4">Suporte</div>
+                  <div className="col col-3">Doe</div>
+                </div>
+              )}
+              customIcon={(
+                <img
+                  src={logoIcon}
+                  style={{ width: '39px', display: 'table-cell', margin: 'auto' }}
+                />
+              )}
+              href={Paths.logout()}
+            />
+            <SidenavListItem
+              style={{
+                borderTop: '1px solid rgba(255,255,255,.2)',
+                paddingTop: '1rem',
+                paddingBottom: '1rem',
+                marginTop: '.5rem',
+              }}
               customContent={(
                 <div style={{ width: '180px', fontSize: '.75rem', color: 'rgba(255,255,255,.5)' }}>
                   {/*<div className="col col-5">Sobre Nós</div>*/}
