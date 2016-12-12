@@ -43,7 +43,7 @@ SidenavListItem.contextTypes = {
 }
 
 SidenavListItem.defaultProps = {
-  linkType: 'anchor',
+  linkType: 'router',
   target: '_self'
 }
 

@@ -66,7 +66,7 @@ class EditUserPage extends Component {
 }
 
 EditUserPage.propTypes = {
-  // Injected by RequireLogin.js
+  // Injected by react-redux
   auth: PropTypes.object.isRequired
 }
 
@@ -76,6 +76,7 @@ export default reduxForm({
   form: 'editUserForm',
   fields
 }, (state, ownProps) => ({
+  auth: state.auth,
   initialValues: {  // gambiarra para ajudar o amigo do backend
     ...state.auth.user,
     avatar: state.auth.user.avatar_url

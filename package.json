@@ -82,6 +82,7 @@
     "lolex": "1.4.0",
     "modernizr": "^3.3.1",
     "modernizr-loader": "0.0.5",
+    "mocha": "^2.5.3",
     "moment": "^2.15.0",
     "net": "^1.0.2",
     "newrelic": "^1.30.1",

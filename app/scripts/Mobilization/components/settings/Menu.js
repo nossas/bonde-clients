@@ -6,7 +6,6 @@ import { SettingsPageMenuLayout } from '../../../../components/Layout'
 
 const MobilizationSettingsMenu = ({ mobilization, location }) => {
   const basicsMobilizationPath = Paths.basicsMobilization(mobilization.id)
-  const cityMobilizationPath = Paths.cityMobilization(mobilization.id)
   const sharingMobilizationPath = Paths.sharingMobilization(mobilization.id)
   const analyticsMobilizationPath = Paths.analyticsMobilization(mobilization.id)
   const customDomainMobilizationPath = Paths.customDomainMobilization(mobilization.id)
@@ -18,11 +17,6 @@ const MobilizationSettingsMenu = ({ mobilization, location }) => {
           text="Informações básicas"
           path={basicsMobilizationPath}
           isActive={basicsMobilizationPath === location.pathname}
-        />
-        <Tab
-          text="Cidade"
-          path={cityMobilizationPath}
-          isActive={cityMobilizationPath === location.pathname}
         />
         <Tab
           text="Compartilhamento"

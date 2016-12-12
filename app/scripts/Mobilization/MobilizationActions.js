@@ -1,11 +1,8 @@
 import superagent from 'superagent'
 
+import * as t from './actionTypes'
+
 // Constants
-
-export const REQUEST_FETCH_MOBILIZATIONS = 'REQUEST_FETCH_MOBILIZATIONS'
-export const SUCCESS_FETCH_MOBILIZATIONS = 'SUCCESS_FETCH_MOBILIZATIONS'
-export const FAILURE_FETCH_MOBILIZATIONS = 'FAILURE_FETCH_MOBILIZATIONS'
-
 export const SET_CURRENT_MOBILIZATION = 'SET_CURRENT_MOBILIZATION'
 export const ADD_MOBILIZATION = 'ADD_MOBILIZATION'
 export const EDIT_MOBILIZATION = 'EDIT_MOBILIZATION'
@@ -15,27 +12,27 @@ export const FINISH_UPLOAD_FACEBOOK_IMAGE = 'FINISH_UPLOAD_FACEBOOK_IMAGE'
 
 export const SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX = 'SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX'
 
-// Actions
-// TODO: Buscar uma maneira mais clara de fazer isso
+export const fetch = communityId => (dispatch, getState, request) => {
+  const { auth: { credentials } } = getState()
+  dispatch({ type: t.FETCH, communityId })
+  return request
+    .get(`/communities/${communityId}/mobilizations`, {}, { headers: credentials })
+    .then(({ status, data }) => {
+      if (status === 200) {
+        dispatch({ type: t.FETCH_SUCCESS, result: data })
+        return Promise.resolve()
+      } else {
+        return Promise.reject({ error: data })
+      }
+    })
+    .catch(error => Promise.reject(error))
+}
 
-export const fetchMobilizations = (queryFilter = {}) => ({
-  types: [
-    REQUEST_FETCH_MOBILIZATIONS,
-    SUCCESS_FETCH_MOBILIZATIONS,
-    FAILURE_FETCH_MOBILIZATIONS
-  ],
-  promise: () => new Promise((resolve, reject) => {
-    superagent
-      .get(`${process.env.API_URL}/mobilizations`)
-      .send(queryFilter)
-      .end((err, res) => {
-        if (err || !res.ok) reject(err || res.body)
-        else resolve(res.body)
-      })
-  })
+export const reset = () => dispatch => ({
+  type: t.RESET
 })
 
-export const setCurrentMobilizationId = currentId => ({
+export const setCurrentMobilizationId = currentId => dispatch => dispatch({
   type: SET_CURRENT_MOBILIZATION,
   currentId: !isNaN(parseInt(currentId, 10)) ? parseInt(currentId, 10) : undefined
 })
@@ -83,7 +80,7 @@ export const editMobilizationAsync = (mobilization, next = null) => (dispatch, g
 export const mobilizationsIsLoaded = state => state.mobilization.loaded
 export const progressUploadFacebookImage = () => ({ type: PROGRESS_UPLOAD_FACEBOOK_IMAGE })
 export const finishUploadFacebookImage = () => ({ type: FINISH_UPLOAD_FACEBOOK_IMAGE })
-export const setMobilizationMoreMenuActiveIndex = index => ({
+export const setMobilizationMoreMenuActiveIndex = index => dispatch => dispatch({
   type: SET_MOBILIZATION_MORE_MENU_ACTIVE_INDEX,
   index
 })

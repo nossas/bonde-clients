@@ -22,14 +22,15 @@ class MobilizationBasicsForm extends Component {
       // Actions
       addMobilizationAsync,
       editMobilizationAsync,
+      community_id,
       ...rest
     } = this.props
 
     const submitStrategy = mobilization ? editMobilizationAsync : addMobilizationAsync
     const next = mobilization ? undefined :
-      mobilization => this.transitionTo(Paths.cityNewMobilization(mobilization.id))
+      mobilization => this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))
 
-    const handleSubmit = values => submitStrategy({ ...mobilization, ...values }, next)
+    const handleSubmit = values => submitStrategy({ ...mobilization, ...values, community_id }, next)
 
     return (
       <FormRedux {...rest} onSubmit={handleSubmit}>
@@ -98,9 +99,12 @@ const validate = values => {
   }
   return errors
 }
-const mapStateToProps = (state, props) => ({
-  initialValues: props.mobilization || { color_scheme: 'meurio-scheme' }
-})
+const mapStateToProps = (state, props) => {
+  return {
+    initialValues: props.mobilization || { color_scheme: 'meurio-scheme' },
+    community_id: state.community.currentId,
+  }
+}
 
 export default reduxForm({
   form: 'mobilizationForm',

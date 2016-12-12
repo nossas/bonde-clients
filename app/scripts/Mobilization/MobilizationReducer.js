@@ -1,8 +1,4 @@
 import {
-  REQUEST_FETCH_MOBILIZATIONS,
-  SUCCESS_FETCH_MOBILIZATIONS,
-  FAILURE_FETCH_MOBILIZATIONS,
-
   ADD_MOBILIZATION,
   EDIT_MOBILIZATION,
 
@@ -18,6 +14,8 @@ import {
   FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE
 } from './MobilizationActions'
 
+import * as t from './actionTypes'
+
 export const initialState = {
   loading: false,
   loaded: false,
@@ -26,25 +24,19 @@ export const initialState = {
 
 const MobilizationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_FETCH_MOBILIZATIONS:
+    case t.FETCH:
       return {
         ...state,
         loading: true,
         loaded: false,
+        communityId: action.communityId
       }
-    case SUCCESS_FETCH_MOBILIZATIONS:
+    case t.FETCH_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         data: action.result
-      }
-    case FAILURE_FETCH_MOBILIZATIONS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        error: action.error
       }
     case PROGRESS_UPLOAD_FACEBOOK_IMAGE:
       return {

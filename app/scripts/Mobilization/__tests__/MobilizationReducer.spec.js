@@ -2,7 +2,6 @@ import { fromJS } from 'immutable'
 import { expect } from 'chai'
 
 import {
-  SUCCESS_FETCH_MOBILIZATIONS,
   ADD_MOBILIZATION,
   EDIT_MOBILIZATION,
 
@@ -10,13 +9,15 @@ import {
   FINISH_UPLOAD_FACEBOOK_IMAGE
 } from '../MobilizationActions'
 
+import * as t from '../actionTypes'
+
 import reducer, { initialState } from '../MobilizationReducer'
 
 describe('MobilizationReducer', () => {
   describe('#list', () => {
     it('should load mobilizations in data', () => {
       const action = {
-        type: SUCCESS_FETCH_MOBILIZATIONS,
+        type: t.FETCH_SUCCESS,
         result: [
           { id: 1 }
         ]

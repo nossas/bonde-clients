@@ -15,6 +15,7 @@ import selectableList from './../../app/components/SelectableList/SelectableList
 import filterableSearchBar from './../../app/components/FilterableSearchBar/FilterableSearchBarReducer'
 
 import { reducers as auth } from './../../app/scripts/Account'
+import { reducers as community } from './../../app/scripts/Community'
 
 export default combineReducers({
   form: formReducer,
@@ -29,6 +30,7 @@ export default combineReducers({
   auth,
   mobilizationEditor,
   organizations,
+  community,
   matches,
   exportDataClip
 })
