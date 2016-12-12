@@ -11,4 +11,4 @@ COPY . /usr/src/app
 
 RUN yarn
 
-CMD [ "./node_modules/.bin/pm2-docker", "./ecosystem.config.js" ]
+CMD [ "./node_modules/.bin/pm2-docker", "ecosystem.config.js" ]
