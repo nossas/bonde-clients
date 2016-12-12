@@ -4,7 +4,8 @@ import classnames from 'classnames'
 
 class SidenavListItem extends Component {
   render() {
-    const { text, icon, linkType, children, className, href, target } = this.props
+    const { text, icon, linkType, children, className, href, target, style } = this.props
+    const { customIcon, customContent } = this.props
 
     const elementTypes = {
       router: { component: Link, props: { to: href } },
@@ -14,17 +15,22 @@ class SidenavListItem extends Component {
     const Component = current.component
 
     return (
-      <div className={classnames('item', className)}>
+      <div className={classnames('item', className)} style={style}>
         <Component
           className="block clearfix"
           {...current.props}
         >
+
           <div className="item-icon">
-            <i className={`fa fa-${icon}`} />
+            {!!customIcon && customIcon}
+            {!!icon && (<i className={`fa fa-${icon}`} />)}
           </div>
           <div className="item-content">
-            <div>{text}</div>
-            <div className="item-content-children">{children}</div>
+            <div className="item-content-wrapper">
+              {!!customContent && customContent}
+              {!!text && (<div>{text}</div>)}
+              {!!children && (<div className="item-content-children">{children}</div>)}
+            </div>
           </div>
         </Component>
       </div>

@@ -50,7 +50,7 @@ class MobilizationDashboardContainer extends React.Component {
 
     return (
       <div className='flex flex-auto overflow-hidden'>
-        {React.cloneElement(children, {...otherProps})}
+        {children && React.cloneElement(children, {...otherProps})}
         <GoogleFontsLoader fonts={fonts} />
       </div>
     )

@@ -3,6 +3,7 @@
 
 .sidenav {
   width: 80px;
+  // width: 280px;
   background-color: $darkblue;
   box-sizing: border-box;
   position: fixed;
@@ -14,11 +15,11 @@
   transition: width .3s ease;
 
   &:hover {
-    width: 257px;
+    width: 280px;
   }
 
   .logo {
-    background-image: url('../../../scripts/pages/Login/logo-nossas.svg');
+    background-image: url('../../../scripts/Account/assets/logo-nossas.svg');
     fill: #fff;
     display: inline-block;
     width: 95.2380952380952px;
@@ -27,22 +28,37 @@
   }
 
   .logo-icon {
-    background-image: url('./logo-icon.svg');
     fill: #fff;
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: 0 20px;
+    width: 43px;
+    height: 43px;
+    margin: 0 18.5px;
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.7);
+
+    &.nossas {
+      background-color: #ff0099;
+      position: relative;
+
+      &:after {
+        content: '';
+        background-image: url('./logo-icon-white-strokes.svg');
+        fill: #fff;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -17.5px;
+        margin-top: -17.5px;
+      }
+    }
   }
 
-  .items-logo {
-    margin-top: 20px;
-    margin-bottom: 5rem;
-
-    .item-content {
-      padding: 0;
-      padding-right: 100%;
-    }
+  a.has-hover:hover {
+    text-decoration: underline !important;
   }
 
   .items {
@@ -70,6 +86,7 @@
         height: 100%;
         font-size: 1.3rem;
         text-align: center;
+        width: 80px;
 
         i {
           width: 80px;
@@ -79,13 +96,49 @@
       .item-content {
         display: table-cell;
         white-space: nowrap;
-        padding: 10px 100% 10px 0;
+        padding: 10px 0 10px 0;
+        font-weight: normal;
+
+        .item-content-wrapper {
+          width: 200px;
+          overflow: hidden;
+        }
+
+        .item-community-name {
+          width: 170px;
+          white-space: normal;
+          font-size: 1.3rem;
+        }
+
+        .item-community-change {
+          font-size: .75rem;
+          font-weight: normal;
+          margin-top: 0;
+
+          a {
+            color: rgba(255,255,255,.7);
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
 
       a {
         color: $white;
         text-decoration: none;
       }
+    }
+  }
+
+  .items-logo {
+    background-color: rgba(255,255,255,.1);
+    padding-bottom: .5rem;
+
+    .item-content {
+      padding: 0;
+      padding-right: 100%;
     }
   }
 }

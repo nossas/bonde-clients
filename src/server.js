@@ -1,58 +1,68 @@
-import raven from 'raven';
-import newrelic from 'newrelic';
-import Express from 'express';
-import ReactDOMServer from 'react-dom/server';
-import React from 'react';
-import Location from 'react-router/lib/Location';
-import config from './config';
-import favicon from 'serve-favicon';
-import compression from 'compression';
-import proxy from 'http-proxy-middleware';
-import path from 'path';
-import createStore from './redux/create';
-import authApi from './api/api';
-import ApiClient from './ApiClient';
-import universalRouter from './universalRouter';
-import Html from './Html';
-import PrettyError from 'pretty-error';
-
-const pretty = new PrettyError();
-const app = new Express();
+import raven from 'raven'
+import newrelic from 'newrelic'
+import Express from 'express'
+import ReactDOMServer from 'react-dom/server'
+import React from 'react'
+import Location from 'react-router/lib/Location'
+import config from './config'
+import favicon from 'serve-favicon'
+import compression from 'compression'
+import helmet from 'helmet'
+import path from 'path'
+import createStore from './redux/create'
+import authApi from './api/api'
+import ApiClient from './ApiClient'
+import universalRouter from './universalRouter'
+import Html from './Html'
+import responseTime from 'response-time'
+import winston from 'winston'
+import expressWinston from 'express-winston'
+import NewrelicWinston from 'newrelic-winston'
+import WinstonCloudWatch from 'winston-cloudwatch'
+const app = new Express()
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   // The request handler must be the first item
-  app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN));
+  app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN))
 }
 
-app.use(compression());
-app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
-app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
+winston.add(NewrelicWinston, {})
+winston.add(WinstonCloudWatch, {
+  logGroupName: 'Reboo',
+  logStreamName: 'Website - ' + process.env.NODE_ENV
+})
 
-//
-// Proxies
-//
-app.use('/auth', proxy({
-  target: `http://localhost:${config.apiPort}`,
-  pathRewrite: { '^/auth': '' }
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console({
+      colorize: true
+    })
+  ],
+  expressFormat: true,
+  colorStatus: true
 }))
-app.use('/api', proxy({
-  target: process.env.API_URL,
-  pathRewrite: { '^/api': '' },
-  changeOrigin: true
-}))
+
+app.use(responseTime())
+app.use(compression())
+app.use(helmet())
+app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
+app.use(require('serve-static')(path.join(__dirname, '..', 'static')))
 
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')
-});
+})
+app.get('/loaderio-42ce84db6a3f1cdd9ba65c26474fa39c.txt', function(req, res) {
+  res.send('loaderio-42ce84db6a3f1cdd9ba65c26474fa39c')
+})
 
 app.get('/robots.txt', function(req, res) {
   res.send('User-Agent: * \n' +
     'Allow: /')
-});
+})
 
 if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
   // The error handler must be before any other error middleware
-  app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN));
+  app.use(raven.middleware.express.errorHandler(process.env.SENTRY_DSN))
 }
 
 app.use((req, res, next) => {
@@ -88,48 +98,57 @@ app.use((req, res) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
-    webpackIsomorphicTools.refresh();
+    webpackIsomorphicTools.refresh()
   }
 
-  const client = new ApiClient(req);
-  const store = createStore(client);
-  const location = new Location(req.path, req.query);
+  const client = new ApiClient(req)
+  const store = createStore(client)
+  const location = new Location(req.path, req.query)
   if (__DISABLE_SSR__) {
     res.send('<!doctype html>\n' +
-      ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>));
+      ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={<div/>} store={store}/>))
   } else {
     universalRouter(location, undefined, store, req.headers.host)
       .then(({component, transition, isRedirect}) => {
         if (isRedirect) {
-          res.redirect(transition.redirectInfo.pathname);
-          return;
+          res.redirect(transition.redirectInfo.pathname)
+          return
         }
         res.send('<!doctype html>\n' +
-          ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOMServer.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>))
       })
       .catch((error) => {
         if (error.redirect) {
-          res.redirect(error.redirect);
-          return;
+          res.redirect(error.redirect)
+          return
         }
-        console.error('ROUTER ERROR:', pretty.render(error));
-        res.status(500).send({error: error.stack});
-      });
+        winston.error('ROUTER ERROR:', error)
+        res.status(500).send({error: error.stack})
+      })
   }
-});
+})
+
+// express-winston errorLogger makes sense AFTER the router.
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      colorize: true
+    })
+  ]
+}))
 
 if (config.port) {
   app.listen(config.port, (err) => {
     if (err) {
-      console.error(err);
+      winston.error(err)
     } else {
       authApi().then(() => {
-        console.info('==> ✅  Server is listening');
-        console.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort);
-        console.info('----------\n==> 🚀  Open http://%s in a browser to view the app.', process.env.APP_DOMAIN);
-      });
+        winston.info('==> ✅  Server is listening')
+        winston.info('==> 🌎  %s running on port %s, API on port %s', config.app.name, config.port, config.apiPort)
+        winston.info('----------\n==> 🚀  Open http://%s in a browser to view the app.', process.env.APP_DOMAIN)
+      })
     }
-  });
+  })
 } else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
+  winston.error('==>     ERROR: No PORT environment variable has been specified')
 }
