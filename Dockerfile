@@ -44,12 +44,12 @@ RUN echo \
 RUN npm install yarn pm2 -g
 
 WORKDIR /app
-COPY . ./
+ADD . ./
 
 RUN yarn
 
 # Expose ports
-EXPOSE 5000 3001
+EXPOSE 5000
 
 # Start process.yml
 CMD ["pm2-docker", "start", "--auto-exit", "--env", "production", "ecosystem.config.js"]
