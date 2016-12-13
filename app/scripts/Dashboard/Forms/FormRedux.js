@@ -34,6 +34,7 @@ class FormRedux extends Component {
     const {
       children,
       onSubmit,
+      submit,
       handleSubmit,
       submitting,
       dirty,
@@ -47,7 +48,7 @@ class FormRedux extends Component {
 
     return (
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submit || onSubmit)}
         className={classnames(
           'form-redux form',
           floatButton ? 'btn-float' : null,
@@ -63,7 +64,8 @@ class FormRedux extends Component {
 
 FormRedux.propTypes = {
   className: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
+  submit: PropTypes.func,
   // redux-form props
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,

@@ -21,13 +21,11 @@ class DashboardSidebar extends Component {
           !currentId ? null : (
             <SidenavList className="bg-lighten-2">
               <SidenavListItem
-                linkType="router"
                 text="Editar mobilização"
                 icon="pencil"
                 href={Paths.editMobilization(currentId)}
               />
               <SidenavListItem
-                linkType="router"
                 text="Adicionar conteúdo"
                 icon="plus"
                 href={Paths.newMobilizationBlock(currentId)}
@@ -35,11 +33,11 @@ class DashboardSidebar extends Component {
               <SidenavListItem
                 text="Ver em uma nova aba"
                 icon="external-link"
+                linkType="anchor"
                 href={Paths.mobilization(getMobilization(this.props))}
                 target="_blank"
               />
               <SidenavListItem
-                linkType="router"
                 text="Configurações"
                 icon="cog"
                 href={Paths.basicsMobilization(currentId)}

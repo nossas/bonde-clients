@@ -9,7 +9,7 @@ module.exports = {
   },
   production: {
     isProduction: true,
-    port: process.env.PORT,
+    port: 5000,
     apiPort: 3030,
     app: {
       name: 'Reboo Nossas Cidades Production'
