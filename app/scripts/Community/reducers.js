@@ -33,6 +33,13 @@ export default (state = initialState, action = {}) => {
         ...state,
         data: [...state.data, action.community]
       }
+    case t.EDIT:
+      return {
+        ...state,
+        data: state.data.map(
+          c => c.id === action.community.id ? action.community : c
+        )
+      }
     case t.SELECT:
       return {
         ...state,

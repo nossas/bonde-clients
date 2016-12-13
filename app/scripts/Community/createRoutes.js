@@ -1,13 +1,19 @@
 import React from 'react'
 import { Route } from 'react-router'
-import { BackgroundContainer } from '../Dashboard/containers'
+import { BackgroundContainer, SidebarContainer } from '../Dashboard/containers'
 
-import { AddCommunityPage, ListCommunityPage } from './pages'
+import { EditCommunityContainer } from './containers'
+import { AddCommunityPage, ListCommunityPage, EditInfoCommunityPage } from './pages'
 
 
-export default requiredLogin => (
+export default requiredLogin => [
   <Route component={BackgroundContainer} onEnter={requiredLogin}>
-    <Route path="/community" component={ListCommunityPage} />,
+    <Route path="/community" component={ListCommunityPage} />
     <Route path="/community/new" component={AddCommunityPage} />
+  </Route>,
+  <Route component={SidebarContainer} onEnter={requiredLogin}>
+    <Route component={EditCommunityContainer}>
+      <Route path="/community/info/edit" component={EditInfoCommunityPage} />
+    </Route>
   </Route>
-)
+]

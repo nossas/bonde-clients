@@ -1,3 +1,7 @@
-export const add = () => '/community/new'
+const namespace = '/community'
 
-export const list = () => '/community'
+export const add = () => `${namespace}/new`
+
+export const list = () => `${namespace}`
+
+export const editInfo = () => `${namespace}/info/edit`
