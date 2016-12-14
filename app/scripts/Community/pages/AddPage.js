@@ -9,7 +9,7 @@ import * as paths from '../paths'
 
 
 @decorate(Navigation)
-class AddCommunityPage extends Component {
+class AddPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { submitting } = this.props
@@ -66,4 +66,4 @@ export default reduxForm({
   form: 'addCommunityForm',
   fields,
   validate
-}, null, actions)(AddCommunityPage)
+}, null, actions)(AddPage)

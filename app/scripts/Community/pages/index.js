@@ -1,3 +1,4 @@
-export { default as ListCommunityPage } from './ListCommunityPage'
-export { default as AddCommunityPage } from './AddCommunityPage'
-export { default as EditInfoCommunityPage } from './EditInfoCommunityPage'
+export { default as ListPage } from './ListPage'
+export { default as AddPage } from './AddPage'
+export { default as InfoPage } from './InfoPage'
+export { default as MailchimpPage } from './MailchimpPage'

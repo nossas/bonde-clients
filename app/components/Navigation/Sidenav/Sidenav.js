@@ -32,7 +32,7 @@ class Sidenav extends Component {
                     <Link to={Paths.mobilizations()}>{community.name || 'Nossas'}</Link>
                   </div>
                   <div className="item-community-change">
-                    <Link to={communityPaths.editInfo()} className="col col-8">
+                    <Link to={communityPaths.edit('info')} className="col col-8">
                       <i className="fa fa-cog mr1" />
                       <span>Configurações</span>
                     </Link>

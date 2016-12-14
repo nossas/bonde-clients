@@ -1,1 +1,1 @@
-export { default as EditCommunityContainer } from './EditCommunityContainer'
+export { default as EditContainer } from './EditContainer'

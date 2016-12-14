@@ -14,7 +14,7 @@ import {
 import { FloatLayout } from '../../Dashboard/Grids'
 
 
-class EditInfoCommunityPage extends Component {
+class InfoPage extends Component {
 
   render() {
     const { fields: { image, name, city, description }, ...formProps } = this.props
@@ -72,4 +72,4 @@ export default reduxForm({
   form: 'editCommunityForm',
   fields,
   validate
-}, mapStateToProps, { submit: edit })(EditInfoCommunityPage)
+}, mapStateToProps, { submit: edit })(InfoPage)

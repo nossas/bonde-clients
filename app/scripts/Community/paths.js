@@ -4,4 +4,4 @@ export const add = () => `${namespace}/new`
 
 export const list = () => `${namespace}`
 
-export const editInfo = () => `${namespace}/info/edit`
+export const edit = page => `${namespace}/${page}`

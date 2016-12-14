@@ -10,7 +10,7 @@ import { ListItem } from '../components'
 
 
 @decorate(Navigation)
-class ListCommunityPage extends Component {
+class ListPage extends Component {
 
   componentDidMount() {
     const { isLoaded, fetch } = this.props
@@ -64,4 +64,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   fetch: () => dispatchProps.fetch(stateProps.credentials)
 })
 
-export default connect(mapStateToProps, mapActionsToProps, mergeProps)(ListCommunityPage)
+export default connect(mapStateToProps, mapActionsToProps, mergeProps)(ListPage)

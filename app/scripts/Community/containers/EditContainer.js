@@ -3,21 +3,24 @@ import { connect } from 'react-redux'
 import { Tabs, Tab } from '../../../components/Navigation'
 import { SettingsPageLayout, SettingsPageMenuLayout, SettingsPageContentLayout } from '../../../components/Layout'
 
+import * as paths from '../paths'
 
 
-class EditCommunityContainer extends Component {
+class EditContainer extends Component {
 
   render() {
 
-    const { children, community } = this.props
+    const { children, community, location: { pathname } } = this.props
+
+    const editPath = paths.edit('info')
+    const mailchimpPath = paths.edit('mailchimp')
 
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title="Configurações da comunidade">
           <Tabs>
-            <Tab text="Informações" isActive={true} />
-            <Tab text="Membros" />
-            <Tab text="Pagamento" />
+            <Tab text="Informações" path={editPath} isActive={editPath === pathname} />
+            <Tab text="Mailchimp" path={mailchimpPath} isActive={mailchimpPath === pathname} />
           </Tabs>
         </SettingsPageMenuLayout>
         <SettingsPageContentLayout>
@@ -32,4 +35,4 @@ const mapStateToProps = ({ community }) => ({
   community: community.data.filter(c => c.id === community.currentId)[0],
 })
 
-export default connect(mapStateToProps)(EditCommunityContainer)
+export default connect(mapStateToProps)(EditContainer)
