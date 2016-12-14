@@ -30,6 +30,10 @@ class Sidenav extends Component {
                 <div>
                   <div className="item-community-name">{community.name}</div>
                   <div className="item-community-change">
+                    <Link to={communityPaths.editInfo()} className="col col-8">
+                      <i className="fa fa-cog mr1" />
+                      <span>Configurações</span>
+                    </Link>
                     <Link to={communityPaths.list()} className="col col-4">
                       <i className="fa fa-refresh mr1" />
                       <span>Trocar</span>

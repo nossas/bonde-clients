@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import Container from '../Dashboard/Container'
+import { SidebarContainer } from '../Dashboard/containers'
 
 import {
   MobilizationContainer,

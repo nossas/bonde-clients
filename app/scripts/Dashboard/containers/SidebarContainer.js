@@ -17,4 +17,10 @@ class SidebarContainer extends Component {
   }
 }
 
-export default SidebarContainer
+const mapStateToProps = state => ({
+  mobilization: state.mobilization,
+  auth: state.auth,
+  community: state.community
+})
+
+export default connect(mapStateToProps)(SidebarContainer)

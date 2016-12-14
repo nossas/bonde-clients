@@ -22,6 +22,22 @@ export const create = community => (dispatch, getState, request) => {
     .catch(error => Promise.reject(error))
 }
 
+export const edit = ({ id, ...community }) => (dispatch, getState, request) => {
+  const { auth: { credentials } } = getState()
+
+  return request
+    .put(`/communities/${id}`, { community }, { headers: credentials })
+    .then(({ status, data }) => {
+      if (status === 400 && data.errors) {
+        return Promise.reject({ ...data.errors })
+      } else if (status === 200) {
+        dispatch({ type: t.EDIT, community: data })
+        return Promise.resolve()
+      }
+    })
+    .catch(error => Promise.reject(error))
+}
+
 export const fetch = credentials => dispatch => {
   dispatch({ type: t.FETCH })
   superagent
