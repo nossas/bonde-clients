@@ -20,11 +20,7 @@ class EditInfoCommunityPage extends Component {
     const { fields: { image, name, city, description }, ...formProps } = this.props
 
     return (
-      <FormRedux
-        nosubmit
-        className="transparent"
-        {...formProps}
-      >
+      <FormRedux nosubmit {...formProps}>
         <FormGroup controlId="imageId" {...image}>
           <UploadImageField signingUrl={`${process.env.API_URL}/uploads`} />
         </FormGroup>
@@ -34,7 +30,7 @@ class EditInfoCommunityPage extends Component {
         </FormGroup>
         <FormGroup controlId="descriptionId" {...description}>
           <ControlLabel>Descrição</ControlLabel>
-          <FormControl type="text" />
+          <FormControl componentClass="textarea" />
         </FormGroup>
         <FormGroup controlId="cityId" {...city}>
           <ControlLabel>Cidade</ControlLabel>

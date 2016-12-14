@@ -216,3 +216,33 @@ a.no-underscore {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.logo-icon {
+    fill: #fff;
+    display: inline-block;
+    width: 43px;
+    height: 43px;
+    margin: 0 18.5px;
+    background-size: cover;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0,0,0,.7);
+
+    &.nossas {
+      background-color: #ff0099;
+      position: relative;
+      background-image: url('./logo-icon-white-strokes.svg');
+
+      &:after {
+        content: '';
+        fill: #fff;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -17.5px;
+        margin-top: -17.5px;
+      }
+    }
+  }

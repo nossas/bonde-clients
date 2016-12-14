@@ -6,7 +6,7 @@ import blockReducer from '../../app/scripts/Block/BlockReducer'
 import colorPicker from '../../app/components/ColorPicker/ColorPickerReducer'
 import widgets from './../../app/scripts/Widget/reducer'
 import mobilizationEditor from './../../app/scripts/reducers/mobilizationEditor'
-import organizations from './../../app/scripts/reducers/organizations'
+/*import organizations from './../../app/scripts/reducers/organizations'*/
 import matches from './../../app/scripts/Widget/plugins/Match/reducer'
 import exportDataClip from './../../app/scripts/reducers/exportDataClip'
 import mobilization from './../../app/scripts/Mobilization/MobilizationReducer'
@@ -29,7 +29,6 @@ export default combineReducers({
   widgets,
   auth,
   mobilizationEditor,
-  organizations,
   community,
   matches,
   exportDataClip

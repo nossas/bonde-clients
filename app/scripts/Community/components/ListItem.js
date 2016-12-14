@@ -5,10 +5,16 @@ import { select } from '../actions'
 
 const ListItem = props => {
 
-  const { select, community: { id, name } } = props
+  const { select, community: { id, name, image } } = props
   return (
     <div className="ListItem" onClick={() => select(id)} style={{ cursor: "pointer" }}>
-      <img className="left mr2" role="presentation" src="" title={name} />
+      <u
+        className="logo-icon nossas left"
+        style={{
+          backgroundImage: image ? `url('${image}');` : undefined,
+          boxShadow: 'none',
+        }}
+      />
       <p>
         <span>{name}</span>
         <i className="fa fa-arrow-right gray right" aria-hidden="true" />

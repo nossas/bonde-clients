@@ -11,7 +11,7 @@ class Sidenav extends Component {
 
   render() {
     const { children, community: { data, currentId } } = this.props
-    const community = data.filter(c => c.id === currentId)[0]
+    const community = data.filter(c => c.id === currentId)[0] || {}
 
     return (
       <nav className="sidenav clearfix">
@@ -20,15 +20,17 @@ class Sidenav extends Component {
             <div className="item-icon">
               <Link to={Paths.mobilizations()} style={{ height: '43px', display: 'block' }}>
                 <u
-                  className={classnames('logo-icon', { 'nossas': true })}
-                  style={{ backgroundImage: community.avatar_url ? `url(${community.avatar_url}` : undefined }}
+                  className="logo-icon nossas"
+                  style={{ backgroundImage: community.image ? `url('${community.image}');` : undefined }}
                 />
               </Link>
             </div>
             <div className="item-content">
               <div className="table-cell align-middle">
                 <div>
-                  <div className="item-community-name">{community.name}</div>
+                  <div className="item-community-name">
+                    <Link to={Paths.mobilizations()}>{community.name || 'Nossas'}</Link>
+                  </div>
                   <div className="item-community-change">
                     <Link to={communityPaths.editInfo()} className="col col-8">
                       <i className="fa fa-cog mr1" />
