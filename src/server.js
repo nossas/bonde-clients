@@ -18,25 +18,9 @@ import responseTime from 'response-time'
 import winston from 'winston'
 import expressWinston from 'express-winston'
 import NewrelicWinston from 'newrelic-winston'
+import proxy from 'http-proxy-middleware'
 
 const app = new Express()
-
-if ( (app.get('env') === 'production') || (app.get('env') === 'staging') ) {
-  // The request handler must be the first item
-  app.use(raven.middleware.express.requestHandler(process.env.SENTRY_DSN))
-}
-
-winston.add(NewrelicWinston, {})
-
-app.use(expressWinston.logger({
-  transports: [
-    new winston.transports.Console({
-      colorize: true
-    })
-  ],
-  expressFormat: true,
-  colorStatus: true
-}))
 
 app.use(responseTime())
 app.use(compression())
@@ -44,11 +28,13 @@ app.use(helmet())
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')))
 app.use(require('serve-static')(path.join(__dirname, '..', 'static')))
 
+app.use('/auth', proxy({
+  target: `http://localhost:${config.apiPort}`,
+  pathRewrite: { '^/auth': '' }
+}))
+
 app.get(/\/users|\/pt\/users|\/membros/, function(req, res) {
   res.redirect('/')
-})
-app.get('/loaderio-42ce84db6a3f1cdd9ba65c26474fa39c.txt', function(req, res) {
-  res.send('loaderio-42ce84db6a3f1cdd9ba65c26474fa39c')
 })
 
 app.get('/robots.txt', function(req, res) {
@@ -125,12 +111,16 @@ app.use((req, res) => {
 })
 
 // express-winston errorLogger makes sense AFTER the router.
-app.use(expressWinston.errorLogger({
+winston.add(NewrelicWinston, {})
+
+app.use(expressWinston.logger({
   transports: [
     new winston.transports.Console({
       colorize: true
     })
-  ]
+  ],
+  expressFormat: true,
+  colorStatus: true
 }))
 
 if (config.port) {
