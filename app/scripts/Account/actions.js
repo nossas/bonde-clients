@@ -1,5 +1,5 @@
-import axios from 'axios'
 import * as t from './actionTypes'
+import axios from 'axios'
 
 // redux-form action
 export const register = user => (dispatch, getState, request) => {
@@ -16,9 +16,7 @@ export const register = user => (dispatch, getState, request) => {
 }
 
 export const edit = ({ id, ...user }) => (dispatch, getState, request) => {
-  const headers = {
-    ...getState().auth.credentials,
-  }
+  const headers = { ...getState().auth.credentials }
   return request
     .put(`/users/${id}`, { user }, { headers })
     .then(({ status, data }) => {
@@ -32,45 +30,50 @@ export const edit = ({ id, ...user }) => (dispatch, getState, request) => {
     .catch(error => Promise.reject(error))
 }
 
-const loginSuccess = (user, credentials) => ({ type: t.LOGIN_SUCCESS, user, credentials })
-const loginRequest = values => axios.post(`${process.env.API_URL}/auth/sign_in`, values)
-export const login = values => dispatch => loginRequest(values)
-  .then(response => {
-    const { headers, data: { data: user } } = response
-    const credentials = {
-      'Access-Token': headers['access-token'],
-      'Token-Type': headers['token-type'],
-      Expiry: headers['expiry'],
-      Uid: headers['uid'],
-      Client: headers['client']
-    }
+export const login = values => (dispatch, getState, request) => {
+  dispatch({ type: t.SIGNIN })
+  return request
+    .post('/auth/sign_in', values)
+    .then(({ headers, data }) => {
+      const { data: user } = data
+      const credentials = {
+        'Access-Token': headers['access-token'],
+        'Token-Type': headers['token-type'],
+        'Expiry': headers['expiry'],
+        'Uid': headers['uid'],
+        'Client': headers['client']
+      }
 
-    // Create a session into the server-side rendering server
-    axios.post(`/auth/login`, { credentials, user })
+      // Create a session into the server-side rendering server
+      // Use axios to replace request api to request proxy server
+      // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
+      axios.post('/auth/login', { credentials, user })
 
-    dispatch(loginSuccess(user, credentials))
-  })
-  .catch(error => {
-    if (error.response) {
-      const { response: { data: { errors }, status } } = error
-      if (status === 401) return Promise.reject({ _error: errors.join('') })
-    }
-    return Promise.reject({ _error: `Response ${error}` })
-  })
-
-
-// Use clientMiddleware pattern
-export const logout = () => ({
-  types: [t.LOGOUT_REQUEST, t.LOGOUT_SUCCESS, t.LOGOUT_FAILURE],
-  promise: client => client.get('/logout')
-})
-
-// Selector
-export const isLoaded = globalState => {
-  return globalState.auth && globalState.auth.loaded
+      dispatch({ type: t.LOGIN, user, credentials })
+    })
+    .catch(({ message, response }) => {
+      if (response) {
+        const { data: { errors }, status } = response
+        if (status === 401) return Promise.reject({ _error: errors.join('') })
+      }
+      return Promise.reject({ _error: `${message}` })
+    })
 }
 
-export const load = () => ({
-  types: [t.LOAD, t.LOAD_SUCCESS, t.LOAD_FAIL],
-  promise: (client) => client.get('/loadAuth')
-})
+export const logout = () => dispatch => {
+  // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
+  return axios.get('/auth/logout').then(() => dispatch({ type: t.LOGOUT }))
+}
+
+export const load = () => dispatch => {
+  // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
+  dispatch({ type: t.FETCH })
+  return axios.get('/auth/load').then(({ result }) => {
+    dispatch({
+      type: t.FETCH_SUCCESS,
+      user: result.user,
+      credentials: result.credentials
+    })
+    return Promise.resolve()
+  })
+}

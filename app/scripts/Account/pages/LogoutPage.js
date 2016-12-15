@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 
-import * as AccountActions from '../actions'
+import { logout } from '../actions'
 import { Loading } from '../../Dashboard/components'
 import * as Paths from '../../Paths'
 
@@ -12,20 +12,21 @@ import * as Paths from '../../Paths'
 class LogoutPage extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(AccountActions.logout()).then(() => this.transitionTo(Paths.login()))
+    const { logout } = this.props
+    logout()
+      .then(() => this.transitionTo(Paths.login()))
   }
 
   render() {
-    return (
-      <Loading />
-    )
+    return <Loading />
   }
 }
 
 LogoutPage.propTypes = {
   // Injected by react-redux
-  dispatch: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 }
 
-export default connect()(LogoutPage)
+const mapActionsToProps = { logout }
+
+export default connect(null, mapActionsToProps)(LogoutPage)
