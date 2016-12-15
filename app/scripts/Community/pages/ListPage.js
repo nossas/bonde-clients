@@ -5,7 +5,7 @@ import { Link, Navigation } from 'react-router'
 import { Loading } from '../../Dashboard/components'
 
 import * as paths from '../paths'
-import { fetch, unset } from '../actions'
+import { fetch, select } from '../actions'
 import { ListItem } from '../components'
 
 
@@ -21,10 +21,11 @@ class ListPage extends Component {
     if (nextProps.isLoaded && nextProps.data.length === 0) {
       this.transitionTo(paths.add())
     }
+  }
 
-    if (nextProps.currentId) {
-      this.transitionTo('/')
-    }
+  onClickItem(id) {
+    this.props.select(id)
+    this.transitionTo('/')
   }
 
   render() {
@@ -37,7 +38,7 @@ class ListPage extends Component {
         <h2>Escolha uma das suas comunidades</h2>
         {isLoaded ? (
           <div className="rounded bg-white">
-            {data && data.map(community => <ListItem community={community} />)}
+            {data && data.map(community => <ListItem onClick={this.onClickItem.bind(this)} community={community} />)}
           </div>
         ) : null}
         <p className="white center">ou <Link to={paths.add()}>Crie uma nova comunidade</Link></p>
@@ -55,7 +56,7 @@ const mapStateToProps = state => ({
   credentials: state.auth.credentials
 })
 
-const mapActionsToProps = { fetch }
+const mapActionsToProps = { fetch, select }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,

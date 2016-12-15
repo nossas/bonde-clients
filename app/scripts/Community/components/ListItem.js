@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { select } from '../actions'
 
 
 const ListItem = props => {
 
-  const { select, community: { id, name, image } } = props
+  const { onClick, community: { id, name, image } } = props
   return (
-    <div className="ListItem" onClick={() => select(id)} style={{ cursor: "pointer" }}>
+    <div className="ListItem" onClick={() => onClick(id)} style={{ cursor: "pointer" }}>
       <u
         className="logo-icon nossas left"
         style={{
@@ -27,4 +25,4 @@ ListItem.propTypes = {
   community: PropTypes.object.isRequired,
 }
 
-export default connect(null, { select })(ListItem)
+export default ListItem
