@@ -1,9 +1,9 @@
 import { expect } from 'chai'
 
 import {
-  REQUEST_FETCH_BLOCKS,
-  SUCCESS_FETCH_BLOCKS,
-  FAILURE_FETCH_BLOCKS,
+  REQUEST_ASYNC_BLOCK_FETCH,
+  SUCCESS_ASYNC_BLOCK_FETCH,
+  FAILURE_ASYNC_BLOCK_FETCH,
 } from '../../../modules/mobilizations/blocks/action-types'
 
 import reducer from '../../reducers/blocks'
@@ -12,7 +12,7 @@ describe('BlockReducer', () => {
 
   it('should load blocks in data', () => {
     const action = {
-      type: SUCCESS_FETCH_BLOCKS,
+      type: SUCCESS_ASYNC_BLOCK_FETCH,
       payload: [{ id: 1 }]
     }
     const nextState = reducer(undefined, action)

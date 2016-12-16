@@ -1,9 +1,9 @@
 import superagent from 'superagent'
 
 import {
-  REQUEST_FETCH_BLOCKS,
-  SUCCESS_FETCH_BLOCKS,
-  FAILURE_FETCH_BLOCKS,
+  REQUEST_ASYNC_BLOCK_FETCH,
+  SUCCESS_ASYNC_BLOCK_FETCH,
+  FAILURE_ASYNC_BLOCK_FETCH,
 } from '../../modules/mobilizations/blocks/action-types'
 
 const REQUEST_ADD_BLOCK = 'REQUEST_ADD_BLOCK'
@@ -30,11 +30,11 @@ const initialState = {
 
 export default function blocks(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_FETCH_BLOCKS:
+    case REQUEST_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: false, loading: true }
-    case SUCCESS_FETCH_BLOCKS:
+    case SUCCESS_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: true, loading: false, data: action.payload }
-    case FAILURE_FETCH_BLOCKS:
+    case FAILURE_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: true, loading: false, error: action.payload }
 
     case REQUEST_FIND_BLOCKS:
