@@ -4,11 +4,11 @@ import {
   REQUEST_ASYNC_BLOCK_FETCH,
   SUCCESS_ASYNC_BLOCK_FETCH,
   FAILURE_ASYNC_BLOCK_FETCH,
-} from '../../modules/mobilizations/blocks/action-types'
 
-const REQUEST_ADD_BLOCK = 'REQUEST_ADD_BLOCK'
-const SUCCESS_ADD_BLOCK = 'SUCCESS_ADD_BLOCK'
-const FAILURE_ADD_BLOCK = 'FAILURE_ADD_BLOCK'
+  REQUEST_ASYNC_BLOCK_CREATE,
+  SUCCESS_ASYNC_BLOCK_CREATE,
+  FAILURE_ASYNC_BLOCK_CREATE,
+} from '../../modules/mobilizations/blocks/action-types'
 
 const REQUEST_EDIT_BLOCK = 'REQUEST_EDIT_BLOCK'
 const SUCCESS_EDIT_BLOCK = 'SUCCESS_EDIT_BLOCK'
@@ -31,11 +31,18 @@ const initialState = {
 export default function blocks(state = initialState, action) {
   switch (action.type) {
     case REQUEST_ASYNC_BLOCK_FETCH:
-      return { ...state, loaded: false, loading: true }
+      return { ...state, loaded: false }
     case SUCCESS_ASYNC_BLOCK_FETCH:
-      return { ...state, loaded: true, loading: false, data: action.payload }
+      return { ...state, loaded: true, data: action.payload }
     case FAILURE_ASYNC_BLOCK_FETCH:
-      return { ...state, loaded: true, loading: false, error: action.payload }
+      return { ...state, loaded: true, error: action.payload }
+
+    case REQUEST_ASYNC_BLOCK_CREATE:
+      return { ...state, loaded: false }
+    case SUCCESS_ASYNC_BLOCK_CREATE:
+      return { ...state, loaded: true, data: state.data.concat([action.payload]) }
+    case FAILURE_ASYNC_BLOCK_CREATE:
+      return { ...state, loaded: true }
 
     case REQUEST_FIND_BLOCKS:
       return {...state, loaded: false}
@@ -57,13 +64,6 @@ export default function blocks(state = initialState, action) {
           block => block.id === action.block.id ? action.block : block
         )
       }
-
-    case REQUEST_ADD_BLOCK:
-      return {...state, loaded: false}
-    case SUCCESS_ADD_BLOCK:
-      return {...state, loaded: true, data: state.data.concat([action.result])}
-    case FAILURE_ADD_BLOCK:
-      return {...state, loaded: true}
 
     case MOVE_BLOCK_UP:
       return {...state,
@@ -111,27 +111,6 @@ export function findBlocks(options) {
         superagent
         .get(`${process.env.API_URL}/blocks`)
         .send(options)
-        .end((err, res) => {
-          if (err) {
-            reject(res.body || err)
-          } else {
-            resolve(res.body)
-          }
-        })
-      })
-    }
-  }
-}
-
-export function addBlock(params) {
-  return {
-    types: [REQUEST_ADD_BLOCK, SUCCESS_ADD_BLOCK, FAILURE_ADD_BLOCK],
-    promise: function() {
-      return new Promise(function(resolve, reject) {
-        superagent
-        .post(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`)
-        .set(params.credentials)
-        .send({block: params.block})
         .end((err, res) => {
           if (err) {
             reject(res.body || err)

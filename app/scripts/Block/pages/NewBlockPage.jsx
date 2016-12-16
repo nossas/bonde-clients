@@ -11,10 +11,12 @@ import {
   finishUploadBlockBackgroundImage,
   setUploadedBlockBackgroundImage
 } from '../BlockActions'
-import { addBlock } from '../../reducers/blocks'
+import { actions as blockActions } from '../../../modules/mobilizations/blocks'
 import { BlockMiniature } from '../components'
 import { Tabs, Tab } from '../../../components/Navigation'
 import ColorPicker from '../../../components/ColorPicker'
+
+const { asyncBlockCreate } = blockActions
 
 import './scss/new-block-page.scss'
 
@@ -148,9 +150,8 @@ export class NewBlockPage extends Component {
             <button
               className="new-block-button btn float-btn-menu rounded"
               onClick={() => {
-                const action = addBlock({
-                  mobilization_id: mobilization.id,
-                  credentials: auth.credentials,
+                const action = asyncBlockCreate({
+                  mobilization,
                   block: {
                     bg_class: JSON.stringify(selectedColor),
                     bg_image: uploadedBackgroundImage || bgImage,
