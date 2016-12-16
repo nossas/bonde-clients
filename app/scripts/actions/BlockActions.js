@@ -2,19 +2,6 @@ import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN 
 import * as Paths from '../Paths'
 import $ from 'jquery'
 
-export function fetchBlocks(params) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: FETCH_BLOCKS,
-          blocks: data
-        })
-      }
-    })
-  }
-}
-
 export function addBlock(params) {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {

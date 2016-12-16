@@ -2,11 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import { fetchBlocks, isBlocksLoaded } from '../../reducers/blocks'
+import { actions as blockActions } from '../../../modules/mobilizations/blocks'
 import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
 import { getMobilization } from '../MobilizationSelectors'
 import { setCurrentMobilizationId } from '../MobilizationActions'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
+
+const { asyncBlockFetch } = blockActions
 
 class MobilizationDashboardContainer extends React.Component {
   static propTypes = {
@@ -21,7 +24,7 @@ class MobilizationDashboardContainer extends React.Component {
   static fetchData(store, params) {
     const promises = []
     if (!isBlocksLoaded(store.getState())) {
-      const action = fetchBlocks({mobilization_id: params.mobilization_id})
+      const action = asyncBlockFetch(params.mobilization_id)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
@@ -38,7 +41,7 @@ class MobilizationDashboardContainer extends React.Component {
     // but it should be replaced by the static fetchData method that is fetching
     // data only in the server-side for now
     const {dispatch, mobilization} = this.props
-    dispatch(fetchBlocks({mobilization_id: mobilization.id}))
+    dispatch(asyncBlockFetch(mobilization.id))
     dispatch(fetchWidgets({mobilization_id: mobilization.id}))
     dispatch(setCurrentMobilizationId(mobilization.id))
   }
