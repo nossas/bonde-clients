@@ -2,19 +2,6 @@ import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN 
 import * as Paths from '../Paths'
 import $ from 'jquery'
 
-export function addBlock(params) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks`, {
-      method: 'post',
-      data: { block: params.block },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        params.router.transitionTo(Paths.editMobilization(params.mobilization_id) + '?newBlock=true')
-      }
-    })
-  }
-}
-
 export function editBlock(params) {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {

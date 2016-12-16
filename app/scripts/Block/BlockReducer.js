@@ -1,8 +1,4 @@
 import {
-  REQUEST_FETCH_BLOCKS,
-  SUCCESS_FETCH_BLOCKS,
-  FAILURE_FETCH_BLOCKS,
-
   SET_SELECTED_LAYOUT,
   PROGRESS_UPLOAD_BLOCK_BG_IMAGE,
   FINISH_UPLOAD_BLOCK_BG_IMAGE,
@@ -17,26 +13,6 @@ const initialState = {
 
 const BlockReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_FETCH_BLOCKS:
-      return {
-        ...state,
-        loading: true,
-        loaded: false
-      }
-    case SUCCESS_FETCH_BLOCKS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        data: action.result
-      }
-    case FAILURE_FETCH_BLOCKS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        error: action.error
-      }
     case SET_SELECTED_LAYOUT:
       return {
         ...state,
