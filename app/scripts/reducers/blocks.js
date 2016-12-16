@@ -1,8 +1,10 @@
 import superagent from 'superagent'
 
-const REQUEST_FETCH_BLOCKS = 'REQUEST_FETCH_BLOCKS'
-const SUCCESS_FETCH_BLOCKS = 'SUCCESS_FETCH_BLOCKS'
-const FAILURE_FETCH_BLOCKS = 'FAILURE_FETCH_BLOCKS'
+import {
+  REQUEST_FETCH_BLOCKS,
+  SUCCESS_FETCH_BLOCKS,
+  FAILURE_FETCH_BLOCKS,
+} from '../../modules/mobilizations/blocks/action-types'
 
 const REQUEST_ADD_BLOCK = 'REQUEST_ADD_BLOCK'
 const SUCCESS_ADD_BLOCK = 'SUCCESS_ADD_BLOCK'
@@ -29,25 +31,24 @@ const initialState = {
 export default function blocks(state = initialState, action) {
   switch (action.type) {
     case REQUEST_FETCH_BLOCKS:
-      return {...state, loaded: false}
+      return { ...state, loaded: false, loading: true }
     case SUCCESS_FETCH_BLOCKS:
-      return {...state, loaded: true, data: action.result }
+      return { ...state, loaded: true, loading: false, data: action.payload }
     case FAILURE_FETCH_BLOCKS:
-      return {...state, loaded: true}
+      return { ...state, loaded: true, loading: false, error: action.payload }
+
     case REQUEST_FIND_BLOCKS:
       return {...state, loaded: false}
     case SUCCESS_FIND_BLOCKS:
       return {...state, loaded: true, data: action.result }
     case FAILURE_FIND_BLOCKS:
       return {...state, loaded: true}
+
     case REQUEST_EDIT_BLOCK:
       return {...state}
     case SUCCESS_EDIT_BLOCK:
-      return {...state,
-        data: state.data.map(
-          block => block.id === action.result.id ? action.result : block
-        )
-      }
+      const data = state.data.map(block => block.id === action.result.id ? action.result : block)
+      return {...state, data}
     case FAILURE_EDIT_BLOCK:
       return {...state}
     case EDIT_BLOCK:
@@ -56,12 +57,14 @@ export default function blocks(state = initialState, action) {
           block => block.id === action.block.id ? action.block : block
         )
       }
+
     case REQUEST_ADD_BLOCK:
       return {...state, loaded: false}
     case SUCCESS_ADD_BLOCK:
       return {...state, loaded: true, data: state.data.concat([action.result])}
     case FAILURE_ADD_BLOCK:
       return {...state, loaded: true}
+
     case MOVE_BLOCK_UP:
       return {...state,
         data: state.data.map((block, index) => {
@@ -73,6 +76,7 @@ export default function blocks(state = initialState, action) {
           return block
         })
       }
+
     case MOVE_BLOCK_DOWN:
       return {...state,
         data: state.data.map((block, index) => {
@@ -84,10 +88,12 @@ export default function blocks(state = initialState, action) {
           return block
         })
       }
+
     case REMOVE_BLOCK:
       return {...state,
         data: state.data.filter(block => action.block.id !== block.id)
       }
+
     default:
       return state
   }
@@ -95,23 +101,6 @@ export default function blocks(state = initialState, action) {
 
 export function isBlocksLoaded(globalState) {
   return globalState.blocks.loaded
-}
-
-export function fetchBlocks(options) {
-  return {
-    types: [REQUEST_FETCH_BLOCKS, SUCCESS_FETCH_BLOCKS, FAILURE_FETCH_BLOCKS],
-    promise: function() {
-      return new Promise(function(resolve, reject) {
-        superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/blocks`).end((err, res) => {
-          if (err) {
-            reject(res.body || err)
-          } else {
-            resolve(res.body)
-          }
-        })
-      })
-    }
-  }
 }
 
 export function findBlocks(options) {

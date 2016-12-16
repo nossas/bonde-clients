@@ -3,10 +3,6 @@ import request from 'superagent'
 //
 // Constants
 //
-export const REQUEST_FETCH_BLOCKS = 'REQUEST_FETCH_BLOCKS'
-export const SUCCESS_FETCH_BLOCKS = 'SUCCESS_FETCH_BLOCKS'
-export const FAILURE_FETCH_BLOCKS = 'FAILURE_FETCH_BLOCKS'
-
 export const SET_SELECTED_LAYOUT = 'SET_SELECTED_LAYOUT'
 
 export const PROGRESS_UPLOAD_BLOCK_BG_IMAGE = 'PROGRESS_UPLOAD_BLOCK_BG_IMAGE'
@@ -17,31 +13,6 @@ export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
 export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
-
-//
-// Actions
-// TODO:
-//    Refactoring actions to use axios thunk middleware extra argument.
-//    Use of `superagent` package is deprecated.
-//
-export function fetchBlocks(params) {
-  return {
-    types: [REQUEST_FETCH_BLOCKS, SUCCESS_FETCH_BLOCKS, FAILURE_FETCH_BLOCKS],
-    promise: () => {
-      return new Promise((resolve, reject) => {
-        request
-          .get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/blocks`)
-          .end((err, res) => {
-            if (err || !res.ok) {
-              reject(err || res.body)
-            } else {
-              resolve(res.body)
-            }
-          })
-      })
-    }
-  }
-}
 
 export const setSelectedLayout = layout => ({ type: SET_SELECTED_LAYOUT, layout })
 
