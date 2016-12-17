@@ -1,22 +1,6 @@
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../constants/ActionTypes'
+import { FETCH_BLOCKS, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../constants/ActionTypes'
 import * as Paths from '../Paths'
 import $ from 'jquery'
-
-export function editBlock(params) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
-      method: 'put',
-      data: { block: params.block },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: EDIT_BLOCK,
-          block: data
-        })
-      }
-    })
-  }
-}
 
 export function removeBlock(params) {
   return dispatch => {
