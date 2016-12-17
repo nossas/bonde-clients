@@ -9,7 +9,6 @@ export const PROGRESS_UPLOAD_BLOCK_BG_IMAGE = 'PROGRESS_UPLOAD_BLOCK_BG_IMAGE'
 export const FINISH_UPLOAD_BLOCK_BG_IMAGE = 'FINISH_UPLOAD_BLOCK_BG_IMAGE'
 export const SET_UPLOADED_BLOCK_BACKGROUND_IMAGE = 'SET_UPLOADED_BLOCK_BACKGROUND_IMAGE'
 
-export const EDIT_BLOCK = 'EDIT_BLOCK'
 export const REMOVE_BLOCK = 'REMOVE_BLOCK'
 export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
@@ -28,22 +27,6 @@ export const setUploadedBlockBackgroundImage = image => ({
 })
 
 // TODO: Refatorar funções abaixo
-export function editBlock(params) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
-      method: 'put',
-      data: { block: params.block },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: EDIT_BLOCK,
-          block: data
-        })
-      }
-    })
-  }
-}
-
 export function removeBlock(params) {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${params.block_id}`, {
