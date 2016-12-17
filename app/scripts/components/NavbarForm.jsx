@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
-import { editBlock } from './../reducers/blocks'
+import { actions as blockActions } from '../../modules/mobilizations/blocks'
+
+const { asyncBlockUpdate } = blockActions
 
 export default class NavbarForm extends React.Component {
   static propTypes = {
@@ -40,17 +42,14 @@ export default class NavbarForm extends React.Component {
 
   submit(e) {
     e.preventDefault()
-    const { mobilization, block, dispatch, auth } = this.props
+    const { mobilization, block, dispatch } = this.props
 
     dispatch(
-      editBlock({
-        mobilization_id: mobilization.id,
-        id: block.id,
-        block: {name: this.state.name},
-        credentials: auth.credentials
+      asyncBlockUpdate({
+        mobilization,
+        block: { ...block, name: this.state.name },
       })
     )
-
     this.props.handleCloseForm()
   }
 
