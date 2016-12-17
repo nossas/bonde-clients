@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchBlocks, isBlocksLoaded } from '../../reducers/blocks'
+import { isBlocksLoaded } from '../../reducers/blocks'
 import { actions as blockActions } from '../../../modules/mobilizations/blocks'
 import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
 import { getMobilization } from '../MobilizationSelectors'
