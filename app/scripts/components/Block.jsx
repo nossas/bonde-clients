@@ -4,6 +4,7 @@ import ReactS3Uploader from 'react-s3-uploader'
 import classnames from 'classnames'
 
 import * as BlockActions from './../actions/BlockActions'
+import { actions as blockActions } from '../../modules/mobilizations/blocks'
 import { startEditingBlock, stopEditingBlock } from './../reducers/mobilizationEditor'
 import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
 
@@ -33,6 +34,7 @@ export default class Block extends React.Component {
     }
     const { dispatch } = this.props
     this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
+    this.newBindedBlockActions = bindActionCreators(blockActions, dispatch)
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -209,13 +211,12 @@ export default class Block extends React.Component {
   }
 
   handleSaveEdit() {
-    const { mobilization, block, auth } = this.props
+    const { mobilization, block } = this.props
     this.setState({editingBackground: false, loading: true})
-    this.bindedBlockActions.editBlock({
-      mobilization_id: mobilization.id,
-      block_id: block.id,
-      credentials: auth.credentials,
+    this.newBindedBlockActions.asyncBlockUpdate({
+      mobilization,
       block: {
+        ...block,
         bg_class: this.state.bgClass,
         bg_image: this.state.bgImage
       }
@@ -257,13 +258,11 @@ export default class Block extends React.Component {
   }
 
   handleToggleHiddenClick() {
-    const { mobilization, block, auth } = this.props
+    const { mobilization, block } = this.props
     this.setState({loading: true})
-    this.bindedBlockActions.editBlock({
-      mobilization_id: mobilization.id,
-      block_id: block.id,
-      credentials: auth.credentials,
-      block: { hidden: !block.hidden }
+    this.newBindedBlockActions.asyncBlockUpdate({
+      mobilization,
+      block: { ...block, hidden: !block.hidden }
     })
   }
 
