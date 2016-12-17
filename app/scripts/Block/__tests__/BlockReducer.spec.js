@@ -18,7 +18,6 @@ describe('BlockReducer', () => {
     const nextState = reducer(undefined, action)
     expect(nextState).to.deep.equal({
       loaded: true,
-      loading: false,
       data: [{ id: 1 }]
     })
   })
