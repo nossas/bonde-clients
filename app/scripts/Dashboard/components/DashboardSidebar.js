@@ -16,18 +16,16 @@ class DashboardSidebar extends Component {
     const { auth, mobilization: { currentId } } = this.props
 
     return (
-      <Sidenav user={auth.user}>
+      <Sidenav {...this.props}>
         {
           !currentId ? null : (
             <SidenavList className="bg-lighten-2">
               <SidenavListItem
-                linkType="router"
                 text="Editar mobilização"
                 icon="pencil"
                 href={Paths.editMobilization(currentId)}
               />
               <SidenavListItem
-                linkType="router"
                 text="Adicionar conteúdo"
                 icon="plus"
                 href={Paths.newMobilizationBlock(currentId)}
@@ -35,11 +33,11 @@ class DashboardSidebar extends Component {
               <SidenavListItem
                 text="Ver em uma nova aba"
                 icon="external-link"
+                linkType="anchor"
                 href={Paths.mobilization(getMobilization(this.props))}
                 target="_blank"
               />
               <SidenavListItem
-                linkType="router"
                 text="Configurações"
                 icon="cog"
                 href={Paths.basicsMobilization(currentId)}
@@ -56,6 +54,7 @@ class DashboardSidebar extends Component {
             <div className="white h6">{auth.user.email}</div>
           </SidenavListItem>
           <SidenavListItem
+            icon="sign-out"
             text="Sair"
             className="caps"
             href={Paths.logout()}

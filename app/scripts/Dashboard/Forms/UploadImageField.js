@@ -5,15 +5,24 @@ import ReactS3Uploader from 'react-s3-uploader'
 
 class UploadImageField extends Component {
 
-  onProgress() {
+  constructor(props) {
+    super(props)
+    this.state = { loading: false }
+  }
 
+  onProgress() {
+    if (!this.state.loading) {
+      this.setState({ loading: true })
+    }
   }
 
   onError(error) {
     console.log('error', error)
+    this.setState({ loading: false })
   }
 
   onFinish(image) {
+    this.setState({ loading: false })
     const { $formGroup: { onChange } } = this.context
     const e = {
       value: image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
@@ -26,13 +35,21 @@ class UploadImageField extends Component {
   }
 
   render() {
+    const { loading } = this.state
     const { className, signingUrl } = this.props
     const { $formGroup: { value } } = this.context
 
+    let content = (<i className="fa fa-image" />)
+    if (loading) {
+      content = <i className="fa fa-circle-o-notch fa-spin fa-w" />
+    } else if (value) {
+      content = <img src={value} role="presentation" />
+    }
+
     return (
       <div className="uploadImageFile">
-        <button type="button" className={className} onClick={this.onClick.bind(this)}>
-          {value ? <img src={value} /> : <i className="fa fa-image" />}
+        <button type="button" disable={loading} className={className} onClick={this.onClick.bind(this)}>
+          {content}
         </button>
         <ReactS3Uploader
           signingUrl={signingUrl}

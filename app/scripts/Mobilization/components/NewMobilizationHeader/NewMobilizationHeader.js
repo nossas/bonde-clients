@@ -12,7 +12,6 @@ const NewMobilizationHeader = ({ location }) => (
     <NewMobilizationHeaderSteps
       steps={[
         { name: 'Objetivo', active: location && location.pathname === Paths.newMobilization() },
-        { name: 'Cidade', active: location && /\/\w+\/[0-9]+\/cityNew/.test(location.pathname) },
         { name: 'Templates', active: location && /\/\w+\/[0-9]+\/templates\/choose/.test(location.pathname) }
       ]}
     />

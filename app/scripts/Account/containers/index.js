@@ -1,1 +1,1 @@
-export { default as LoginRegisterContainer } from './LoginRegisterContainer'
+export { default as AccountContainer } from './AccountContainer'
