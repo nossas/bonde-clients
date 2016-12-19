@@ -1,5 +1,5 @@
 import * as t from './actionTypes'
-import axios from 'axios'
+import superagent from 'superagent'
 
 // redux-form action
 export const register = user => (dispatch, getState, request) => {
@@ -47,7 +47,7 @@ export const login = values => (dispatch, getState, request) => {
       // Create a session into the server-side rendering server
       // Use axios to replace request api to request proxy server
       // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
-      axios.post('/auth/login', { credentials, user })
+      superagent.post('/auth/login', { credentials, user })
 
       dispatch({ type: t.LOGIN, user, credentials })
     })
@@ -62,18 +62,26 @@ export const login = values => (dispatch, getState, request) => {
 
 export const logout = () => dispatch => {
   // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
-  return axios.get('/auth/logout').then(() => dispatch({ type: t.LOGOUT }))
+  return new Promise((resolve, reject) => {
+    superagent.get('/auth/logout')
+    dispatch({ type: t.LOGOUT })
+    return resolve()
+  })
 }
 
 export const load = () => dispatch => {
   // TODO: Change axios to proxy argument (dispatch, getState, { request, proxy })
   dispatch({ type: t.FETCH })
-  return axios.get('/auth/load').then(({ result }) => {
-    dispatch({
-      type: t.FETCH_SUCCESS,
-      user: result.user,
-      credentials: result.credentials
-    })
-    return Promise.resolve()
+  return new Promise((resolve, reject) => {
+    superagent
+      .get('/auth/load')
+      .end((err, res) => {
+        dispatch({
+          type: t.FETCH_SUCCESS,
+          user: res.user,
+          credentials: res.credentials
+        })
+        return resolve()
+      })
   })
 }
