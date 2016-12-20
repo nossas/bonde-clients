@@ -1,5 +1,3 @@
-import request from 'superagent'
-
 //
 // Constants
 //
@@ -23,25 +21,3 @@ export const setUploadedBlockBackgroundImage = image => ({
   type: SET_UPLOADED_BLOCK_BACKGROUND_IMAGE,
   image
 })
-
-// TODO: Refatorar funções abaixo
-export function moveBlockDown(params) {
-  const { block, blocks } = params
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
-      method: 'put',
-      data: {
-        block: {
-          position: blocks.data[blocks.data.indexOf(block) + 1].position
-        }
-      },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: MOVE_BLOCK_DOWN,
-          block: data
-        })
-      }
-    })
-  }
-}

@@ -244,12 +244,7 @@ export default class Block extends React.Component {
   handleMoveDownClick() {
     const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
-    this.bindedBlockActions.moveBlockDown({
-      credentials: auth.credentials,
-      mobilization_id: mobilization.id,
-      block: block,
-      blocks: blocks
-    })
+    this.newBindedBlockActions.asyncBlockMoveDown({ mobilization, block, blocks })
   }
 
   handleToggleHiddenClick() {
