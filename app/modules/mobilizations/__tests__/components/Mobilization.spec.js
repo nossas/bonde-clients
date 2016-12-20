@@ -9,10 +9,24 @@ describe('<Mobilization />', () => {
   let wrapper
   const props = {
     mobilization: {
+      id: 1,
       color_scheme: 'meu-rio',
       header_font: 'headerFont',
       body_font: 'bodyFont',
-    }
+      name: 'Lorem',
+      goal: 'Lorem ipsum dolor',
+      facebook_share_title: 'Facebook share title',
+      facebook_share_description: 'Facebook share description',
+      facebook_share_image: 'http://facebook.com/share-image.png'
+    },
+    blocks: [
+      { id: 1, hidden: false, menu_hidden: false, mobilization_id: 1 },
+      { id: 2, hidden: true, menu_hidden: true, mobilization_id: 1 },
+    ],
+    widgets: [
+      { id: 1, block_id: 1 },
+      { id: 2, block_id: 2 },
+    ]
   }
 
   beforeEach(() => {
@@ -29,6 +43,11 @@ describe('<Mobilization />', () => {
     expect(wrapper.find(`div${themeClassName}`).length).to.equal(1)
   })
 
+  it('renders Navbar with blocks and editable props passed', () => {
+    expect(wrapper.find('Navbar').props().blocks).to.equal(props.blocks)
+    expect(wrapper.find('Navbar').props().editable).to.equal(props.editable || false)
+  })
+
   describe('when is editable', () => {
 
     beforeEach(() => {
@@ -39,6 +58,14 @@ describe('<Mobilization />', () => {
       const layoutClassName = '.flex-auto.relative'
       expect(wrapper.find(`div${layoutClassName}`).length).to.equal(1)
     })
+
+    it('should not render DocumentMeta', () => {
+      expect(wrapper.find('DocumentMeta').length).to.equal(0)
+    })
+
+    it('should render all blocks', () => {
+      expect(wrapper.find('Block').length).to.equal(props.blocks.length)
+    })
   })
 
   describe('when isnt editable', () => {
@@ -48,8 +75,38 @@ describe('<Mobilization />', () => {
     })
 
     it('should renders absolute layout classNames', () => {
-      const layoutClassName = '.absolute'
+      const layoutClassName = '.absolute.flex'
       expect(wrapper.find(`div${layoutClassName}`).length).to.equal(1)
+    })
+
+    it('should render DocumentMeta with mobilization infos', () => {
+      const meta = wrapper.find('DocumentMeta')
+      const {
+        name,
+        goal,
+        facebook_share_title,
+        facebook_share_description,
+        facebook_share_image
+      } = props.mobilization
+
+      const expected = {
+        title: name,
+        description: goal,
+        meta: {
+          name: {
+            'viewport': 'width=device-width, initial-scale=1',
+            'og:title': facebook_share_title,
+            'og:description': facebook_share_description,
+            'og:image': facebook_share_image
+          }
+        }
+      }
+      expect(meta.props()).to.deep.equal(expected)
+    })
+
+    it('should render only visible blocks', () => {
+      const visibleBlocks = props.blocks.filter(b => !b.hidden)
+      expect(wrapper.find('Block').length).to.equal(visibleBlocks.length)
     })
   })
 })
