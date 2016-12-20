@@ -6,7 +6,7 @@ import {
   NotFound
 } from '../../app/scripts/containers'
 
-import { CustomDomainWrapper } from '../../app/scripts/pages'
+import { CustomDomainPage } from '../../app/modules/mobilizations/pages'
 
 import * as Paths from '../../app/scripts/Paths'
 
@@ -35,7 +35,7 @@ export default function(store, host) {
 
   return (
     <Route component={Application}>
-      <Route path="/" component={CustomDomainWrapper} />
+      <Route path="/" component={CustomDomainPage} />
       {matchCreateExternalRoutes({ prefix: '/widgets/:widget_id' })}
       <Route path="*" component={NotFound} status={404} />
     </Route>
