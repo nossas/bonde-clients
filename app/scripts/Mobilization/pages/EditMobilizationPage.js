@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
-import { Block, Loading, Navbar } from '../../components'
+import { Loading, Navbar } from '../../components'
 import { fetchWidgets } from '../../Widget/reducer'
 import * as MobilizationActions from '../MobilizationActions'
+import Block from '../../../modules/mobilizations/blocks/components'
 
 @reactMixin.decorate(Navigation)
 class EditMobilizationPage extends Component {
@@ -70,7 +71,7 @@ class EditMobilizationPage extends Component {
               return (
                 <Block
                   {...this.props}
-                  key={'block-' + block.id}
+                  key={`block-${block.id}`}
                   block={block}
                   canMoveUp={index !== 0}
                   canMoveDown={index !== blocks.length - 1}
