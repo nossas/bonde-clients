@@ -2,8 +2,8 @@ import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { Navbar, DropDownMenu } from './../../components'
 
-const blocks = {data: [{}, {}, {}, {hidden: true}]}
-const visibleBlocks = blocks.data.filter((b) => {return !b.hidden})
+const blocks = [{}, {}, {}, {hidden: true}]
+const visibleBlocks = blocks.filter((b) => {return !b.hidden})
 const auth = {}
 const dispatch = () => {}
 

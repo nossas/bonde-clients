@@ -22,8 +22,8 @@ const mobilization = {
 const block1 = { hidden: false, id: 1 }
 const block2 = { hidden: false, id: 2 }
 const block3 = { hidden: true, id: 3 }
-const blocks = { data: [block1, block2, block3] }
-const widgets = { data: [{}, {}] }
+const blocks = [block1, block2, block3]
+const widgets = [{}, {}]
 
 describe('ShowMobilization', () => {
   before(() => {

@@ -7,8 +7,8 @@ import ReactGA from 'react-ga'
 export default class ShowMobilization extends React.Component {
   static propTypes = {
     mobilization: PropTypes.object.isRequired,
-    blocks: PropTypes.object.isRequired,
-    widgets: PropTypes.object.isRequired
+    blocks: PropTypes.array.isRequired,
+    widgets: PropTypes.array.isRequired
   }
 
   componentDidMount() {
@@ -63,7 +63,7 @@ export default class ShowMobilization extends React.Component {
         <Navbar blocks={blocks} mobilization={mobilization} />
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
-            blocks.data.map((block) => {
+            blocks.map((block) => {
               if (!block.hidden) {
                 return (
                   <Block
