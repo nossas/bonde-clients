@@ -26,11 +26,12 @@ const Mobilization = props => {
 
   const themeClassName = `${color_scheme} ${header_font}-header ${body_font}-body`
   const layoutClassName = editable ? 'flex-auto relative' : 'absolute'
+  const layoutStyle = !editable ? { top: 0, bottom: 0, left: 0, right: 0 } : undefined
 
   const visibleBlocks = blocks.filter(block => !editable ? !block.hidden : true)
 
   return (
-    <div className={classnames('flex flex-column', themeClassName, layoutClassName)}>
+    <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
       <Navbar blocks={blocks} editable={editable} />
       {/* render blocks */}
       <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>

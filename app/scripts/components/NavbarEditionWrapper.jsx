@@ -6,7 +6,6 @@ import { editBlock } from './../reducers/blocks'
 export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
     block: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired,
     dispatch: PropTypes.func,
     auth: PropTypes.object,
     className: PropTypes.string
@@ -29,11 +28,11 @@ export default class NavbarEditionWrapper extends React.Component {
 
   handleHideButtonClick() {
     this.refs.hideButton.getDOMNode().blur()
-    const { dispatch, mobilization, block, auth } = this.props
+    const { dispatch, block, auth } = this.props
 
     dispatch(
       editBlock({
-        mobilization_id: mobilization.id,
+        mobilization_id: block.mobilization_id,
         id: block.id,
         block: {menu_hidden: !block.menu_hidden},
         credentials: auth.credentials
