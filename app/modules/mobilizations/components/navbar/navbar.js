@@ -25,7 +25,6 @@ const Navbar = props => {
 
 Navbar.propTypes = {
   editable: PropTypes.bool.isRequired,
-  mobilization: PropTypes.object.isRequired,
   blocks: PropTypes.array,
 }
 

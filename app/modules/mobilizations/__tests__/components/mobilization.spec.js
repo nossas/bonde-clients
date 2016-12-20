@@ -56,7 +56,9 @@ describe('<Mobilization />', () => {
 
     it('should renders relative layout classNames', () => {
       const layoutClassName = '.flex-auto.relative'
-      expect(wrapper.find(`div${layoutClassName}`).length).to.equal(1)
+      const main = wrapper.find(`div${layoutClassName}`)
+      expect(main.length).to.equal(1)
+      expect(main.props().style).to.equal(undefined)
     })
 
     it('should not render DocumentMeta', () => {
@@ -76,7 +78,9 @@ describe('<Mobilization />', () => {
 
     it('should renders absolute layout classNames', () => {
       const layoutClassName = '.absolute.flex'
-      expect(wrapper.find(`div${layoutClassName}`).length).to.equal(1)
+      const main = wrapper.find(`div${layoutClassName}`)
+      expect(main.length).to.equal(1)
+      expect(main.props().style).to.deep.equal({ top:0, bottom:0, left:0, right:0 })
     })
 
     it('should render DocumentMeta with mobilization infos', () => {
