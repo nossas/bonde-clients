@@ -238,12 +238,7 @@ export default class Block extends React.Component {
   handleMoveUpClick() {
     const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
-    this.bindedBlockActions.moveBlockUp({
-      credentials: auth.credentials,
-      mobilization_id: mobilization.id,
-      block: block,
-      blocks: blocks
-    })
+    this.newBindedBlockActions.asyncBlockMoveUp({ mobilization, block, blocks })
   }
 
   handleMoveDownClick() {

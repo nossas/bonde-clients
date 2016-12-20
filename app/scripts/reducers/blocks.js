@@ -20,9 +20,12 @@ import {
   REQUEST_ASYNC_BLOCK_DESTROY,
   SUCCESS_ASYNC_BLOCK_DESTROY,
   FAILURE_ASYNC_BLOCK_DESTROY,
+
+  REQUEST_ASYNC_BLOCK_MOVE_UP,
+  SUCCESS_ASYNC_BLOCK_MOVE_UP,
+  FAILURE_ASYNC_BLOCK_MOVE_UP,
 } from '../../modules/mobilizations/blocks/action-types'
 
-const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
 
 const initialState = {
@@ -63,7 +66,6 @@ export default function blocks(state = initialState, action) {
     case FAILURE_ASYNC_BLOCK_SELECT:
       return { ...state, loaded: true, error: action.payload }
 
-
     case REQUEST_ASYNC_BLOCK_DESTROY:
       return { ...state, loaded: false }
     case SUCCESS_ASYNC_BLOCK_DESTROY:
@@ -72,18 +74,22 @@ export default function blocks(state = initialState, action) {
     case FAILURE_ASYNC_BLOCK_DESTROY:
       return { ...state, loaded: true, error: action.payload }
 
+    case REQUEST_ASYNC_BLOCK_MOVE_UP:
+      return { ...state, loaded: false }
+    case SUCCESS_ASYNC_BLOCK_MOVE_UP:
+      data = state.data.map((block, index) => {
+        if (index + 1 < state.data.length && state.data[index + 1].id === action.payload.id) {
+          return action.payload
+        } else if (block.id === action.payload.id) {
+          return state.data[index - 1]
+        }
+        return block
+      })
+      return { ...state, loaded: true, data }
+    case FAILURE_ASYNC_BLOCK_MOVE_UP:
+      return { ...state, loaded: true, error: action.payload }
+
     // Needs to migrate reducers below
-    case MOVE_BLOCK_UP:
-      return {...state,
-        data: state.data.map((block, index) => {
-          if (index + 1 < state.data.length && state.data[index + 1].id === action.block.id) {
-            return action.block
-          } else if (block.id === action.block.id) {
-            return state.data[index - 1]
-          }
-          return block
-        })
-      }
 
     case MOVE_BLOCK_DOWN:
       return {...state,
