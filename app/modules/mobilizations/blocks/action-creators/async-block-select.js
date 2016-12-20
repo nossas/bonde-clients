@@ -17,7 +17,7 @@ const asyncBlockSelect = where => (dispatch, getState, axios) => {
   // Maybe needs to refact the API endpoint.
   //
   dispatch({ type: REQUEST_ASYNC_BLOCK_SELECT })
-  return axios.get(endpoint, config, where)
+  return axios.get(endpoint, config)
     .then(response => {
       dispatch(createAction(SUCCESS_ASYNC_BLOCK_SELECT, response.data))
       return Promise.resolve()
