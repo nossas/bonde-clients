@@ -4,7 +4,8 @@ import React from 'react'
 import { expect } from 'chai'
 
 import { actions as blockActions } from '../../../modules/mobilizations/blocks'
-import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
+import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
+import { Block } from '../../../modules/mobilizations/blocks/components/block'
 
 const widget1 = { block_id: 1, id: 1, settings: { content: 'My widget1' } }
 const widget2 = { block_id: 2, id: 2, settings: { content: 'My widget2' } }
