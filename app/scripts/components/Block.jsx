@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux'
 import ReactS3Uploader from 'react-s3-uploader'
 import classnames from 'classnames'
 
-import * as BlockActions from './../actions/BlockActions'
 import { actions as blockActions } from '../../modules/mobilizations/blocks'
 import { startEditingBlock, stopEditingBlock } from './../reducers/mobilizationEditor'
 import { Widget, ColorPicker, DropDownMenu, DropDownMenuItem, Progress, Loading } from './'
@@ -33,8 +32,7 @@ export default class Block extends React.Component {
       loading: false
     }
     const { dispatch } = this.props
-    this.bindedBlockActions = bindActionCreators(BlockActions, dispatch)
-    this.newBindedBlockActions = bindActionCreators(blockActions, dispatch)
+    this.bindedBlockActions = bindActionCreators(blockActions, dispatch)
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -213,7 +211,7 @@ export default class Block extends React.Component {
   handleSaveEdit() {
     const { mobilization, block } = this.props
     this.setState({editingBackground: false, loading: true})
-    this.newBindedBlockActions.asyncBlockUpdate({
+    this.bindedBlockActions.asyncBlockUpdate({
       mobilization,
       block: {
         ...block,
@@ -238,19 +236,19 @@ export default class Block extends React.Component {
   handleMoveUpClick() {
     const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
-    this.newBindedBlockActions.asyncBlockMoveUp({ mobilization, block, blocks })
+    this.bindedBlockActions.asyncBlockMoveUp({ mobilization, block, blocks })
   }
 
   handleMoveDownClick() {
     const { mobilization, block, blocks, auth } = this.props
     this.setState({loading: true})
-    this.newBindedBlockActions.asyncBlockMoveDown({ mobilization, block, blocks })
+    this.bindedBlockActions.asyncBlockMoveDown({ mobilization, block, blocks })
   }
 
   handleToggleHiddenClick() {
     const { mobilization, block } = this.props
     this.setState({loading: true})
-    this.newBindedBlockActions.asyncBlockUpdate({
+    this.bindedBlockActions.asyncBlockUpdate({
       mobilization,
       block: { ...block, hidden: !block.hidden }
     })
@@ -260,7 +258,7 @@ export default class Block extends React.Component {
     const { mobilization, block, auth } = this.props
     if (confirm('Você tem certeza que quer remover este bloco?')) {
       this.setState({ loading: true })
-      this.newBindedBlockActions.asyncBlockDestroy({ mobilization, block })
+      this.bindedBlockActions.asyncBlockDestroy({ mobilization, block })
     }
   }
 

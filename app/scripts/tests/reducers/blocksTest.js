@@ -1,5 +1,5 @@
 import blocks from './../../reducers/blocks'
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from './../../constants/ActionTypes'
+import { actionTypes } from '../../../modules/mobilizations/blocks'
 
 let initialState
 
