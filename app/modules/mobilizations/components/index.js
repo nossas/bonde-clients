@@ -1,1 +1,1 @@
-export { default as Mobilization } from './Mobilization'
+export { default as Mobilization } from './mobilization'

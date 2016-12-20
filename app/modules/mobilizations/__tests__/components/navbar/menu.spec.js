@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Menu } from '../../../components/Navbar'
+import { Menu } from '../../../components/navbar'
 
 describe('<Menu />', () => {
   let wrapper

@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Navbar } from '../../../components/Navbar'
+import { Navbar } from '../../../components/navbar'
 
 
 describe('<Navbar />', () => {

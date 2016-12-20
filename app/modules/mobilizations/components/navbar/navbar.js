@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Menu from './Menu'
+import Menu from './menu'
 
 
 const Navbar = props => {

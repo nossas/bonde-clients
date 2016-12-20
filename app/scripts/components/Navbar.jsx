@@ -4,8 +4,8 @@ import { DropDownMenu, NavbarEditionWrapper } from './'
 
 export default class Navbar extends React.Component {
   static propTypes = {
-    blocks: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired,
+    blocks: PropTypes.array.isRequired,
+    mobilization: PropTypes.array.isRequired,
     dispatch: PropTypes.func,
     auth: PropTypes.object,
     editable: PropTypes.bool
@@ -21,7 +21,7 @@ export default class Navbar extends React.Component {
       `${bodyFont}-body`
     )
 
-    const visibleBlocks = blocks.data.filter((b) => {
+    const visibleBlocks = blocks.filter((b) => {
       return editable ? !b.hidden : !b.hidden && !b.menu_hidden
     })
 

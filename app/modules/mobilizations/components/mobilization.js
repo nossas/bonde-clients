@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
 
-import { Navbar } from './Navbar'
+import { Navbar } from './navbar'
 import { Block } from '../../../scripts/components'
 
 
