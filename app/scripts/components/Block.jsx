@@ -269,12 +269,8 @@ export default class Block extends React.Component {
   handleRemoveClick() {
     const { mobilization, block, auth } = this.props
     if (confirm('Você tem certeza que quer remover este bloco?')) {
-      this.setState({loading: true})
-      this.bindedBlockActions.removeBlock({
-        mobilization_id: mobilization.id,
-        block_id: block.id,
-        credentials: auth.credentials
-      })
+      this.setState({ loading: true })
+      this.newBindedBlockActions.asyncBlockDestroy({ mobilization, block })
     }
   }
 

@@ -16,18 +16,23 @@ import {
   REQUEST_ASYNC_BLOCK_SELECT,
   SUCCESS_ASYNC_BLOCK_SELECT,
   FAILURE_ASYNC_BLOCK_SELECT,
+
+  REQUEST_ASYNC_BLOCK_DESTROY,
+  SUCCESS_ASYNC_BLOCK_DESTROY,
+  FAILURE_ASYNC_BLOCK_DESTROY,
 } from '../../modules/mobilizations/blocks/action-types'
 
-const REMOVE_BLOCK = 'REMOVE_BLOCK'
 const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
 
 const initialState = {
   loaded: false,
-  data: []
+  data: [],
 }
 
 export default function blocks(state = initialState, action) {
+  let data
+
   switch (action.type) {
     case REQUEST_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: false }
@@ -46,7 +51,7 @@ export default function blocks(state = initialState, action) {
     case REQUEST_ASYNC_BLOCK_UPDATE:
       return { ...state, loaded: false }
     case SUCCESS_ASYNC_BLOCK_UPDATE:
-      const data = state.data.map(block => block.id === action.payload.id ? action.payload : block)
+      data = state.data.map(block => block.id === action.payload.id ? action.payload : block)
       return { ...state, loaded: true, data }
     case FAILURE_ASYNC_BLOCK_UPDATE:
       return { ...state, loaded: true, error: action.payload }
@@ -56,6 +61,15 @@ export default function blocks(state = initialState, action) {
     case SUCCESS_ASYNC_BLOCK_SELECT:
       return { ...state, loaded: true, data: action.payload  }
     case FAILURE_ASYNC_BLOCK_SELECT:
+      return { ...state, loaded: true, error: action.payload }
+
+
+    case REQUEST_ASYNC_BLOCK_DESTROY:
+      return { ...state, loaded: false }
+    case SUCCESS_ASYNC_BLOCK_DESTROY:
+      data = state.data.filter(block => action.payload.id !== block.id)
+      return { ...state, loaded: true, data }
+    case FAILURE_ASYNC_BLOCK_DESTROY:
       return { ...state, loaded: true, error: action.payload }
 
     // Needs to migrate reducers below
@@ -81,11 +95,6 @@ export default function blocks(state = initialState, action) {
           }
           return block
         })
-      }
-
-    case REMOVE_BLOCK:
-      return {...state,
-        data: state.data.filter(block => action.block.id !== block.id)
       }
 
     default:
