@@ -1,12 +1,11 @@
-import { FETCH_BLOCKS, EDIT_BLOCK, REMOVE_BLOCK, MOVE_BLOCK_UP, MOVE_BLOCK_DOWN } from '../../constants/ActionTypes'
-import * as BlockActions from './../../actions/BlockActions'
+import { actions as blockActions, actionTypes } from '../../../modules/mobilizations/blocks'
 import $ from 'jquery'
 
-describe.skip('BlockActions', () => {
+describe.skip('blockActions', () => {
   describe('#fetchBlocks', () => {
     it('should GET blocks using correct URL and dispatch action', () => {
       const dispatch = sandbox.spy()
-      BlockActions.fetchBlocks({ mobilization_id: 1 })(dispatch)
+      blockActions.fetchBlocks({ mobilization_id: 1 })(dispatch)
       const request = requests[0]
       const blocks = [{id: 1}, {id: 2}]
       expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/blocks`)
@@ -28,7 +27,7 @@ describe.skip('BlockActions', () => {
         bg_class: 'bg-test',
         widgets_attributes: [{kind: 'draft', size: 68}, {kind: 'draft', size: 69}]
       }
-      BlockActions.addBlock({
+      blockActions.addBlock({
         router,
         mobilization_id: 1,
         block
@@ -49,7 +48,7 @@ describe.skip('BlockActions', () => {
         id: 2,
         bg_class: 'bg-test'
       }
-      BlockActions.editBlock({
+      blockActions.editBlock({
         mobilization_id: 1,
         block_id: 2,
         block
@@ -69,7 +68,7 @@ describe.skip('BlockActions', () => {
   describe('#removeBlock', () => {
     it('should DELETE block using correct URL and dispatch action', () => {
       const dispatch = sandbox.spy()
-      BlockActions.removeBlock({
+      blockActions.removeBlock({
         mobilization_id: 1,
         block_id: 2
       })(dispatch)
@@ -93,7 +92,7 @@ describe.skip('BlockActions', () => {
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
       const blocks = {data: [block1, block2, block3]}
-      BlockActions.moveBlockUp({
+      blockActions.moveBlockUp({
         mobilization_id: 1,
         blocks,
         block: block3
@@ -118,7 +117,7 @@ describe.skip('BlockActions', () => {
       const block2 = { id: 2, position: 6 }
       const block3 = { id: 3, position: 9 }
       const blocks = {data: [block1, block2, block3]}
-      BlockActions.moveBlockDown({
+      blockActions.moveBlockDown({
         mobilization_id: 1,
         blocks,
         block: block2

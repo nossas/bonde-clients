@@ -3,7 +3,7 @@ import React from 'react'
 // import { shallow, render } from 'enzyme'
 import { expect } from 'chai'
 
-import * as BlockActions from './../../actions/BlockActions'
+import { actions as blockActions } from '../../../modules/mobilizations/blocks'
 import { Block, Widget, ColorPicker, DropDownMenu, DropDownMenuItem } from './../../components'
 
 const widget1 = { block_id: 1, id: 1, settings: { content: 'My widget1' } }
@@ -102,7 +102,7 @@ describe('Block', () => {
 
   describe.skip('#handleSaveEdit', () => {
     it('should dispatch edit block action', () => {
-      const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
+      const editBlockStub = sandbox.stub(blockActions, 'editBlock')
       const component = render(
         <Block {...props} mobilization={{id: 1}} />
       )
@@ -172,7 +172,7 @@ describe('Block', () => {
 
   describe.skip('#handleMoveUpClick', () => {
     it('should dispatch move block up action', () => {
-      const moveBlockUpStub = sandbox.stub(BlockActions, 'moveBlockUp')
+      const moveBlockUpStub = sandbox.stub(blockActions, 'moveBlockUp')
       const component = render(
         <Block {...props} dispatch={() => {}} mobilization={{id: 1}} />
       )
@@ -188,7 +188,7 @@ describe('Block', () => {
 
   describe.skip('#handleMoveDownClick', () => {
     it('should dispatch move block down action', () => {
-      const moveBlockDownStub = sandbox.stub(BlockActions, 'moveBlockDown')
+      const moveBlockDownStub = sandbox.stub(blockActions, 'moveBlockDown')
       const component = render(
         <Block {...props} dispatch={() => {}} mobilization={{id: 1}} />
       )
@@ -204,7 +204,7 @@ describe('Block', () => {
 
   describe.skip('#handleToggleHiddenClick', () => {
     it('should dispatch edit block action when visible', () => {
-      const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
+      const editBlockStub = sandbox.stub(blockActions, 'editBlock')
       const component = render(
         <Block
           {...props}
@@ -223,7 +223,7 @@ describe('Block', () => {
     })
 
     it('should dispatch edit block action when hidden', () => {
-      const editBlockStub = sandbox.stub(BlockActions, 'editBlock')
+      const editBlockStub = sandbox.stub(blockActions, 'editBlock')
       const component = render(
         <Block
           {...props}
@@ -245,7 +245,7 @@ describe('Block', () => {
   describe.skip('#handleRemoveClick', () => {
     it('should dispatch remove block action when confirmed', () => {
       sandbox.stub(window, 'confirm').returns(true)
-      const removeBlockStub = sandbox.stub(BlockActions, 'removeBlock')
+      const removeBlockStub = sandbox.stub(blockActions, 'removeBlock')
       const component = render(
         <Block {...props} dispatch={() => {}} mobilization={{id: 1}} />
       )
@@ -259,7 +259,7 @@ describe('Block', () => {
 
     it('should not dispatch remove block action when not confirmed', () => {
       sandbox.stub(window, 'confirm').returns(false)
-      const removeBlockStub = sandbox.stub(BlockActions, 'removeBlock')
+      const removeBlockStub = sandbox.stub(blockActions, 'removeBlock')
       const component = render(
         <Block {...props} dispatch={() => {}} mobilization={{id: 1}} />
       )
