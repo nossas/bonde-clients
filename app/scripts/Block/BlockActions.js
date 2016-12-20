@@ -9,8 +9,6 @@ export const PROGRESS_UPLOAD_BLOCK_BG_IMAGE = 'PROGRESS_UPLOAD_BLOCK_BG_IMAGE'
 export const FINISH_UPLOAD_BLOCK_BG_IMAGE = 'FINISH_UPLOAD_BLOCK_BG_IMAGE'
 export const SET_UPLOADED_BLOCK_BACKGROUND_IMAGE = 'SET_UPLOADED_BLOCK_BACKGROUND_IMAGE'
 
-export const REMOVE_BLOCK = 'REMOVE_BLOCK'
-export const MOVE_BLOCK_UP = 'MOVE_BLOCK_UP'
 export const MOVE_BLOCK_DOWN = 'MOVE_BLOCK_DOWN'
 
 export const setSelectedLayout = layout => ({ type: SET_SELECTED_LAYOUT, layout })
@@ -27,28 +25,6 @@ export const setUploadedBlockBackgroundImage = image => ({
 })
 
 // TODO: Refatorar funções abaixo
-
-export function moveBlockUp(params) {
-  const { block, blocks } = params
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/blocks/${block.id}`, {
-      method: 'put',
-      data: {
-        block: {
-          position: blocks.data[blocks.data.indexOf(block) - 1].position
-        }
-      },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: MOVE_BLOCK_UP,
-          block: data
-        })
-      }
-    })
-  }
-}
-
 export function moveBlockDown(params) {
   const { block, blocks } = params
   return dispatch => {
