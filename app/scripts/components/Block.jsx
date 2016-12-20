@@ -11,9 +11,9 @@ export default class Block extends React.Component {
   static propTypes = {
     block: PropTypes.object.isRequired,
     mobilization: PropTypes.object.isRequired,
-    blocks: PropTypes.object.isRequired,
+    blocks: PropTypes.array.isRequired,
     editable: PropTypes.bool.isRequired,
-    widgets: PropTypes.object.isRequired,
+    widgets: PropTypes.array.isRequired,
     auth: PropTypes.object,
     canMoveUp: PropTypes.bool,
     canMoveDown: PropTypes.bool,
@@ -292,7 +292,7 @@ export default class Block extends React.Component {
     const isBackgroundObject = !isBackgroundClass && /^{.*}$/.test(bgClass)
     const bg = isBackgroundObject ? JSON.parse(bgClass) : null
 
-    const filteredWidgets = this.filterWidgets(widgets.data, block)
+    const filteredWidgets = this.filterWidgets(widgets, block)
     const wrapperClassName = classnames(
       'm1 absolute bottom-0 right-0 z2',
       {'display-none': !this.displayDropDownMenu()}
