@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { NewBlockPage } from '../../pages/NewBlockPage'
-import { BLOCK_LAYOUTS } from '../../../constants/BlockLayouts'
+import { BlockCreate } from '../../../mobilizations/blocks/pages/block-create'
+import { BLOCK_LAYOUTS } from '../../../../scripts/constants/BlockLayouts'
 
-describe('app/scripts/Block/components/NewBlockPage', () => {
+describe('app/modules/mobilizations/blocks/pages/block-create', () => {
   let wrapper
   const props = {
     dispatch: () => {},
@@ -17,7 +17,7 @@ describe('app/scripts/Block/components/NewBlockPage', () => {
 
   describe('#render', () => {
     beforeEach(() => {
-      wrapper = shallow(<NewBlockPage {...props} />)
+      wrapper = shallow(<BlockCreate {...props} />)
     })
 
     it('should render root .new-block-page <div>', () => {

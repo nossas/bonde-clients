@@ -3,24 +3,24 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import ReactS3Uploader from 'react-s3-uploader'
 
-import * as Paths from '../../Paths'
-import { BLOCK_LAYOUTS } from '../../constants/BlockLayouts'
+import * as Paths from '../../../../scripts/Paths'
+import { BLOCK_LAYOUTS } from '../../../../scripts/constants/BlockLayouts'
 import {
   setSelectedLayout,
   progressUploadBlockBackgroundImage,
   finishUploadBlockBackgroundImage,
   setUploadedBlockBackgroundImage
-} from '../BlockActions'
-import { actions as blockActions } from '../../../modules/mobilizations/blocks'
-import { BlockMiniature } from '../components'
-import { Tabs, Tab } from '../../../components/Navigation'
-import ColorPicker from '../../../components/ColorPicker'
+} from '../../../../scripts/Block/BlockActions'
+import { actions as blockActions } from '../../../mobilizations/blocks'
+import { BlockMiniature } from '../../../../scripts/Block/components'
+import { Tabs, Tab } from '../../../../components/Navigation'
+import ColorPicker from '../../../../components/ColorPicker'
 
 const { asyncBlockCreate } = blockActions
 
-import './scss/new-block-page.scss'
+import '../../../mobilizations/blocks/pages/scss/block-create.scss'
 
-export class NewBlockPage extends Component {
+export class BlockCreate extends Component {
   componentWillReceiveProps(nextProps) {
     const { blocks, mobilization } = this.props
 
@@ -46,7 +46,7 @@ export class NewBlockPage extends Component {
     const newBlockPath = Paths.newMobilizationBlock(mobilization.id)
 
     return (
-      <div className="new-block-page col-12 flex flex-column bg-silver gray relative pl4">
+      <div className="block-create col-12 flex flex-column bg-silver gray relative pl4">
         <div className="new-block-header bg-white pt3 pr4 pl5">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
           <Tabs>
@@ -171,11 +171,11 @@ export class NewBlockPage extends Component {
   }
 }
 
-NewBlockPage.contextTypes = {
+BlockCreate.contextTypes = {
   router: React.PropTypes.object
 }
 
-NewBlockPage.propTypes = {
+BlockCreate.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired,
@@ -188,7 +188,7 @@ NewBlockPage.propTypes = {
   selectedLayout: PropTypes.array.isRequired
 }
 
-NewBlockPage.defaultProps = {
+BlockCreate.defaultProps = {
   selectedLayout: BLOCK_LAYOUTS[0],
   selectedColor: { r: 51, g: 51, b: 51, a: 1 },
   bgImage: null
@@ -201,4 +201,4 @@ const mapStateToProps = state => ({
   uploadedBackgroundImage: state.blockReducer.uploadedBackgroundImage
 })
 
-export default connect(mapStateToProps)(NewBlockPage)
+export default connect(mapStateToProps)(BlockCreate)
