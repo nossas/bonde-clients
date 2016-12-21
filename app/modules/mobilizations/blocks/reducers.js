@@ -97,7 +97,3 @@ export default function BlockReducers(state = initialState, action) {
       return state
   }
 }
-
-export function isBlocksLoaded(globalState) {
-  return globalState.blocks.loaded
-}
