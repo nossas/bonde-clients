@@ -2,7 +2,6 @@ import React from 'react'
 import { Route } from 'react-router'
 
 import { SidebarContainer } from '../Dashboard/containers'
-
 import {
   MobilizationContainer,
   NewMobilizationContainer,
@@ -18,10 +17,9 @@ import {
   MobilizationCustomDomainPage,
   EditMobilizationPage,
 } from './pages'
-import { BlockCreate } from '../../modules/mobilizations/blocks/pages'
-
 
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
+import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
 
@@ -34,7 +32,7 @@ export default requiredLogin => (
     {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
     <Route path="/mobilizations/:mobilization_id" component={MobilizationDashboardContainer}>
       <Route path="/edit" component={EditMobilizationPage} />
-      <Route path="/blocks/new" component={BlockCreate} />
+      {blocksCreateRoutes()}
       {widgetCreateRoutes()}
       <Route component={MobilizationSettingsContainer}>
         <Route path="/basics" component={MobilizationBasicsEditFormPage} />
