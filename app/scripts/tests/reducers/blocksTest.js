@@ -1,5 +1,5 @@
 import blocks from './../../reducers/blocks'
-import { actionTypes } from '../../../modules/mobilizations/blocks'
+import { constants as c } from '../../../modules/mobilizations/blocks'
 
 let initialState
 
@@ -17,7 +17,7 @@ describe.skip('blocks', () => {
   describe('FETCH_BLOCKS', () => {
     it('should return the mobilizations', () => {
       const action = {
-        type: FETCH_BLOCKS,
+        type: c.FETCH_BLOCKS,
         blocks: [{id: 1}, {id: 2}]
       }
       const newState = blocks(initialState, action)
@@ -28,7 +28,7 @@ describe.skip('blocks', () => {
   describe('EDIT_BLOCK', () => {
     it('should return the mobilizations with edited block', () => {
       const action = {
-        type: EDIT_BLOCK,
+        type: c.EDIT_BLOCK,
         block: {id: 1, bg_color: 'bg-foo'}
       }
       const newState = blocks(initialState, action)
@@ -43,7 +43,7 @@ describe.skip('blocks', () => {
   describe('MOVE_BLOCK_UP', () => {
     it('should return the mobilizations with new order', () => {
       const action = {
-        type: MOVE_BLOCK_UP,
+        type: c.MOVE_BLOCK_UP,
         block: {id: 2, bg_color: 'bg-2'}
       }
       const newState = blocks(initialState, action)
@@ -58,7 +58,7 @@ describe.skip('blocks', () => {
   describe('MOVE_BLOCK_DOWN', () => {
     it('should return the mobilizations with new order', () => {
       const action = {
-        type: MOVE_BLOCK_DOWN,
+        type: c.MOVE_BLOCK_DOWN,
         block: {id: 2, bg_color: 'bg-2'}
       }
       const newState = blocks(initialState, action)
@@ -73,7 +73,7 @@ describe.skip('blocks', () => {
   describe('REMOVE_BLOCK', () => {
     it('should return the mobilizations without removed block', () => {
       const action = {
-        type: REMOVE_BLOCK,
+        type: c.REMOVE_BLOCK,
         block: {id: 2}
       }
       const newState = blocks(initialState, action)

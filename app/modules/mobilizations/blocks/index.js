@@ -1,11 +1,11 @@
 import * as actionCreators from './action-creators'
-import * as actionTypes from './action-types'
+import constants from './constants'
 import * as utils from './utils'
 import * as selectors from './selectors'
 
 export default {
   actions: actionCreators,
-  actionTypes,
+  constants,
   utils,
   selectors,
 }

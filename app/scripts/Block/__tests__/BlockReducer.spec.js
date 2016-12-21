@@ -1,13 +1,13 @@
 import { expect } from 'chai'
 
-import { actionTypes as types } from '../../../modules/mobilizations/blocks'
+import { constants as c } from '../../../modules/mobilizations/blocks'
 import reducer from '../../reducers/blocks'
 
 describe('BlockReducer', () => {
 
   it('should load blocks in data', () => {
     const action = {
-      type: types.SUCCESS_ASYNC_BLOCK_FETCH,
+      type: c.SUCCESS_ASYNC_BLOCK_FETCH,
       payload: [{ id: 1 }]
     }
     const nextState = reducer(undefined, action)

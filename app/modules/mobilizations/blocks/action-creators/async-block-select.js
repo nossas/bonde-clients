@@ -1,10 +1,5 @@
-import 'babel/polyfill'
 import { createAction } from './create-action'
-import {
-  REQUEST_ASYNC_BLOCK_SELECT,
-  SUCCESS_ASYNC_BLOCK_SELECT,
-  FAILURE_ASYNC_BLOCK_SELECT,
-} from '../action-types'
+import c from '../../../mobilizations/blocks/constants'
 
 const asyncBlockSelect = where => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
@@ -16,14 +11,14 @@ const asyncBlockSelect = where => (dispatch, getState, axios) => {
   // HTTP GET method passing body?
   // Maybe needs to refact the API endpoint.
   //
-  dispatch({ type: REQUEST_ASYNC_BLOCK_SELECT })
+  dispatch({ type: c.REQUEST_ASYNC_BLOCK_SELECT })
   return axios.get(endpoint, config)
     .then(response => {
-      dispatch(createAction(SUCCESS_ASYNC_BLOCK_SELECT, response.data))
+      dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_SELECT, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(FAILURE_ASYNC_BLOCK_SELECT, failure))
+      dispatch(createAction(c.FAILURE_ASYNC_BLOCK_SELECT, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }

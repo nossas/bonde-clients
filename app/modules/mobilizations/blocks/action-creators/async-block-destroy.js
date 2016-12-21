@@ -1,9 +1,5 @@
 import { createAction } from './create-action'
-import {
-  REQUEST_ASYNC_BLOCK_DESTROY,
-  SUCCESS_ASYNC_BLOCK_DESTROY,
-  FAILURE_ASYNC_BLOCK_DESTROY,
-} from '../action-types'
+import c from '../../../mobilizations/blocks/constants'
 
 const asyncBlockDestroy = ({ block, mobilization }) => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
@@ -11,14 +7,14 @@ const asyncBlockDestroy = ({ block, mobilization }) => (dispatch, getState, axio
   const endpoint = `/mobilizations/${mobilization.id}/blocks/${block.id}`
   const config = { headers: credentials }
 
-  dispatch({ type: REQUEST_ASYNC_BLOCK_DESTROY })
+  dispatch({ type: c.REQUEST_ASYNC_BLOCK_DESTROY })
   return axios.delete(endpoint, config)
     .then(response => {
-      dispatch(createAction(SUCCESS_ASYNC_BLOCK_DESTROY, response.data))
+      dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_DESTROY, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(FAILURE_ASYNC_BLOCK_DESTROY, failure))
+      dispatch(createAction(c.FAILURE_ASYNC_BLOCK_DESTROY, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
