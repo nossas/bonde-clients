@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { BLOCK_LAYOUTS } from '../../../../modules/mobilizations/blocks/constants'
-import { BlockMiniature } from '../../../../modules/mobilizations/blocks/components'
+import { BLOCK_LAYOUTS } from '../../../../mobilizations/blocks/constants'
+import { BlockMiniature } from '../../../../mobilizations/blocks/components'
 
 describe('app/scripts/Block/components/BlockMiniature', () => {
   let wrapper

@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { BlockCreate } from '../../../mobilizations/blocks/pages/block-create'
-import { BLOCK_LAYOUTS } from '../../../mobilizations/blocks/constants'
+import { BlockCreate } from '../../../../mobilizations/blocks/pages/block-create'
+import { BLOCK_LAYOUTS } from '../../../../mobilizations/blocks/constants'
 
 describe('app/modules/mobilizations/blocks/pages/block-create', () => {
   let wrapper
@@ -20,24 +20,24 @@ describe('app/modules/mobilizations/blocks/pages/block-create', () => {
       wrapper = shallow(<BlockCreate {...props} />)
     })
 
-    it('should render root .new-block-page <div>', () => {
-      expect(wrapper.find('div.new-block-page')).to.have.length(1)
+    it('should render root .block-create <div>', () => {
+      expect(wrapper.find('div.block-create')).to.have.length(1)
     })
 
     describe('new block header', () => {
-      it('should render one .new-block-header <div>', () => {
-        expect(wrapper.find('div.new-block-header')).to.have.length(1)
+      it('should render one .block-create-header <div>', () => {
+        expect(wrapper.find('div.block-create-header')).to.have.length(1)
       })
       it('should render one <h1>', () => {
-        expect(wrapper.find('div.new-block-header h1')).to.have.length(1)
+        expect(wrapper.find('div.block-create-header h1')).to.have.length(1)
       })
       it('should render one <h1> with its content properly', () => {
         const text = 'Adicione um bloco de conteúdo'
-        expect(wrapper.find('div.new-block-header h1').text()).to.be.equal(text)
+        expect(wrapper.find('div.block-create-header h1').text()).to.be.equal(text)
       })
       it('should render one <Tabs> component', () => {
         const text = 'Adicione um bloco de conteúdo'
-        expect(wrapper.find('div.new-block-header Tabs')).to.have.length(1)
+        expect(wrapper.find('div.block-create-header Tabs')).to.have.length(1)
       })
     })
 
@@ -48,8 +48,8 @@ describe('app/modules/mobilizations/blocks/pages/block-create', () => {
     })
 
     describe('new block button', () => {
-      it('should render one .new-block-button button', () => {
-        expect(wrapper.find('button.new-block-button')).to.have.length(1)
+      it('should render one .block-create-button button', () => {
+        expect(wrapper.find('button.block-create-button')).to.have.length(1)
       })
     })
   })

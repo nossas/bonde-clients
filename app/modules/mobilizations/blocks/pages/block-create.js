@@ -46,7 +46,7 @@ export class BlockCreate extends Component {
 
     return (
       <div className="block-create col-12 flex flex-column bg-silver gray relative pl4">
-        <div className="new-block-header bg-white pt3 pr4 pl5">
+        <div className="block-create-header bg-white pt3 pr4 pl5">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
           <Tabs>
             <Tab
@@ -147,7 +147,7 @@ export class BlockCreate extends Component {
             </div>
 
             <button
-              className="new-block-button btn float-btn-menu rounded"
+              className="block-create-button btn float-btn-menu rounded"
               onClick={() => {
                 const action = asyncBlockCreate({
                   mobilization,
