@@ -6,6 +6,7 @@ export const initialState = {
   error: undefined,
   uploadingBackgroundImage: false,
   uploadedBackgroundImage: undefined,
+  editionMode: false,
 }
 
 //
@@ -99,6 +100,9 @@ export default function BlockReducers(state = initialState, action) {
       return { ...state, uploadingBackgroundImage: action.uploading }
     case c.BLOCK_BACKGROUND_IMAGE_UPLOADED:
       return { ...state, uploadedBackgroundImage: action.image }
+
+    case c.BLOCK_EDITION_MODE:
+      return { ...state, editionMode: action.payload }
 
     default:
       return state

@@ -8,3 +8,4 @@ export { default as asyncBlockMoveDown } from './async-block-move-down'
 
 export * from './background-image'
 export * from './grid-layout'
+export * from './edition-mode'
