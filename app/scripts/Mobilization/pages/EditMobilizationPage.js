@@ -37,7 +37,7 @@ class EditMobilizationPage extends Component {
   componentDidUpdate() {
     const { mobilization, blocks, widgets } = this.props
     if (blocks.data.length === 0 && blocks.loaded === true) {
-      this.transitionTo(Paths.newMobilizationBlock(mobilization.id))
+      this.transitionTo(Paths.createBlock(mobilization))
     }
     if (!this.state.scrolledToBottom &&
         this.newBlock() &&

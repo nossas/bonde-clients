@@ -39,7 +39,7 @@ export class BlockCreate extends Component {
       setSelectedLayout,
     } = this.props
     const { color_scheme: colorScheme } = mobilization
-    const newBlockPath = Paths.newMobilizationBlock(mobilization.id)
+    const newBlockPath = Paths.createBlock(mobilization)
 
     return (
       <div className="block-create col-12 flex flex-column bg-silver gray relative pl4">
