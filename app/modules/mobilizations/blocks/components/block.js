@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import { startEditingBlock, stopEditingBlock } from '../../../../scripts/reducers/mobilizationEditor'
 import { Loading } from '../../../../scripts/components'
 import { actions, utils, selectors } from '../../../mobilizations/blocks'
 import {
@@ -29,12 +28,12 @@ export class Block extends Component {
 
   componentWillUpdate(props, state) {
     const { editingBackground, editingWidget } = this.state
-    const { dispatch } = this.props
+    const { dispatch, setEditionMode } = this.props
 
-    if (editingBackground && !state.editingBackground) dispatch(stopEditingBlock())
-    else if (!editingBackground && state.editingBackground) dispatch(startEditingBlock())
-    else if (editingWidget && !state.editingWidget) dispatch(stopEditingBlock())
-    else if (!editingWidget && state.editingWidget) dispatch(startEditingBlock())
+    if (editingBackground && !state.editingBackground) dispatch(setEditionMode(false))
+    else if (!editingBackground && state.editingBackground) dispatch(setEditionMode(true))
+    else if (editingWidget && !state.editingWidget) dispatch(setEditionMode(false))
+    else if (!editingWidget && state.editingWidget) dispatch(setEditionMode(true))
   }
 
   onChange(state) {
@@ -102,7 +101,9 @@ Block.propTypes = {
   auth: PropTypes.object,
   canMoveUp: PropTypes.bool,
   canMoveDown: PropTypes.bool,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  // Actions
+  setEditionMode: PropTypes.func,
 }
 
 const mapStateToProps = state => ({})

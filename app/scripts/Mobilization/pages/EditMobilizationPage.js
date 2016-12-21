@@ -56,15 +56,14 @@ class EditMobilizationPage extends Component {
   }
 
   renderBlocks() {
-    const { mobilization, blocks, mobilizationEditor } = this.props
+    const { mobilization, blocks, blockEditionMode } = this.props
     const { color_scheme: colorScheme } = mobilization
 
     return (
       <div className={classnames(colorScheme, 'flex flex-column flex-auto relative')}>
-        {
-          !mobilizationEditor.isEditingBlock
-            && <Navbar {...this.props} editable />
-        }
+        {!blockEditionMode && (
+          <Navbar {...this.props} editable />
+        )}
         <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
           {
             blocks.data.map(function(block, index) {
@@ -104,7 +103,7 @@ EditMobilizationPage.propTypes = {
   params: PropTypes.object.isRequired,
   scrolledToBottom: PropTypes.bool.isRequired,
   widgetsCount: PropTypes.number,
-  mobilizationEditor: PropTypes.object.isRequired,
+  blockEditionMode: PropTypes.bool,
   // actions
   setCurrentMobilizationId: PropTypes.func
 }
@@ -115,7 +114,7 @@ EditMobilizationPage.defaultProps = {
 
 const mapStateToProps = state => ({
   widgetsCount: state.widgets.length,
-  mobilizationEditor: state.mobilizationEditor
+  blockEditionMode: state.blocks.editionMode,
 })
 
 export default connect(mapStateToProps, MobilizationActions)(EditMobilizationPage)
