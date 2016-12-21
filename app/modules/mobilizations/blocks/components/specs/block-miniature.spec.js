@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import { BLOCK_LAYOUTS } from '../../../../modules/mobilizations/blocks/constants'
-import { BlockMiniature } from '../../components'
+import { BlockMiniature } from '../../../../modules/mobilizations/blocks/components'
 
 describe('app/scripts/Block/components/BlockMiniature', () => {
   let wrapper
