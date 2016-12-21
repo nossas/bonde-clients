@@ -27,7 +27,7 @@ export default combineReducers({
   widgets,
   mobilizationEditor,
   matches,
-  exportDataClip
+  exportDataClip,
 
   blocks,
   auth,
