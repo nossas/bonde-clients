@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form';
 
-import blocks from './../../app/scripts/reducers/blocks'
+import { reducers as blocks } from '../../app/modules/mobilizations/blocks'
 import blockReducer from '../../app/scripts/Block/BlockReducer'
 import colorPicker from '../../app/components/ColorPicker/ColorPickerReducer'
 import widgets from './../../app/scripts/Widget/reducer'

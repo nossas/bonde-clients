@@ -1,11 +1,11 @@
-import { constants as c } from '../../modules/mobilizations/blocks'
+import c from '../../mobilizations/blocks/constants'
 
 const initialState = {
   loaded: false,
   data: [],
 }
 
-export default function BlockReducer(state = initialState, action) {
+export default function BlockReducers(state = initialState, action) {
   let data
 
   switch (action.type) {

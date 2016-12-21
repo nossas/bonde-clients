@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { isBlocksLoaded } from './../../reducers/blocks'
+import { isBlocksLoaded } from '../../../modules/mobilizations/blocks/reducers'
 import { actions as blockActions } from '../../../modules/mobilizations/blocks'
 import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
 import { ShowMobilization } from './../'

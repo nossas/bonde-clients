@@ -1,9 +1,9 @@
-import blocks from './../../reducers/blocks'
+import { reducers as BlockReducers } from '../../../modules/mobilizations/blocks'
 import { constants as c } from '../../../modules/mobilizations/blocks'
 
 let initialState
 
-describe.skip('blocks', () => {
+describe.skip('BlockReducers', () => {
   before(() => {
     initialState = {
       data: [
@@ -20,7 +20,7 @@ describe.skip('blocks', () => {
         type: c.FETCH_BLOCKS,
         blocks: [{id: 1}, {id: 2}]
       }
-      const newState = blocks(initialState, action)
+      const newState = BlockReducers(initialState, action)
       expect(newState).to.eql(action.blocks)
     })
   })
@@ -31,7 +31,7 @@ describe.skip('blocks', () => {
         type: c.EDIT_BLOCK,
         block: {id: 1, bg_color: 'bg-foo'}
       }
-      const newState = blocks(initialState, action)
+      const newState = BlockReducers(initialState, action)
       expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-foo' },
         { id: 2, bg_color: 'bg-2' },
@@ -46,7 +46,7 @@ describe.skip('blocks', () => {
         type: c.MOVE_BLOCK_UP,
         block: {id: 2, bg_color: 'bg-2'}
       }
-      const newState = blocks(initialState, action)
+      const newState = BlockReducers(initialState, action)
       expect(newState.data).to.eql([
         { id: 2, bg_color: 'bg-2' },
         { id: 1, bg_color: 'bg-1' },
@@ -61,7 +61,7 @@ describe.skip('blocks', () => {
         type: c.MOVE_BLOCK_DOWN,
         block: {id: 2, bg_color: 'bg-2'}
       }
-      const newState = blocks(initialState, action)
+      const newState = BlockReducers(initialState, action)
       expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-1' },
         { id: 3, bg_color: 'bg-3' },
@@ -76,7 +76,7 @@ describe.skip('blocks', () => {
         type: c.REMOVE_BLOCK,
         block: {id: 2}
       }
-      const newState = blocks(initialState, action)
+      const newState = BlockReducers(initialState, action)
       expect(newState.data).to.eql([
         { id: 1, bg_color: 'bg-1' },
         { id: 3, bg_color: 'bg-3' }
