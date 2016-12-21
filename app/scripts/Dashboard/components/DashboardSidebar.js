@@ -12,7 +12,6 @@ import * as Paths from '../../Paths'
 class DashboardSidebar extends Component {
 
   render() {
-
     const { auth, mobilization: { currentId } } = this.props
 
     return (
@@ -28,7 +27,7 @@ class DashboardSidebar extends Component {
               <SidenavListItem
                 text="Adicionar conteúdo"
                 icon="plus"
-                href={Paths.newMobilizationBlock(currentId)}
+                href={Paths.createBlock({ id: currentId })}
               />
               <SidenavListItem
                 text="Ver em uma nova aba"

@@ -51,10 +51,6 @@ export function customDomainMobilization(id) {
   return `/mobilizations/${id}/customDomain`
 }
 
-export function newMobilizationBlock(mobilization_id) {
-  return `/mobilizations/${mobilization_id}/blocks/new`
-}
-
 export function fieldsMobilizationWidget(mobilization_id, widget_id) {
   return `/mobilizations/${mobilization_id}/widgets/${widget_id}/fields`
 }
@@ -77,6 +73,7 @@ export function donationMobilizationWidget(mobilization_id, widget_id) {
 
 export * from './Widget/plugins/Match/paths'
 export * from './Mobilization/plugins/Templates/MobilizationTemplatesPaths'
+export * from '../modules/mobilizations/blocks/paths'
 
 const makePressureWidget = (mobilization_id, widget_id, path) =>
   `/mobilizations/${mobilization_id}/widgets/${widget_id}/pressure${path}`
