@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import { actions as blockActions } from '../../modules/mobilizations/blocks'
 
-const { asyncBlockUpdate } = blockActions
+import { actions as BlockActions } from '../../modules/mobilizations/blocks'
+
 
 export default class NavbarForm extends React.Component {
   static propTypes = {
@@ -45,7 +45,7 @@ export default class NavbarForm extends React.Component {
     const { mobilization, block, dispatch } = this.props
 
     dispatch(
-      asyncBlockUpdate({
+      BlockActions.asyncBlockUpdate({
         mobilization,
         block: { ...block, name: this.state.name },
       })

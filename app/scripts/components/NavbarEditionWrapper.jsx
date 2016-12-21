@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { NavbarButton, NavbarForm } from './'
-import { actions as blockActions } from '../../modules/mobilizations/blocks'
 
-const { asyncBlockUpdate } = blockActions
+import { NavbarButton, NavbarForm } from './'
+import { actions as BlockActions } from '../../modules/mobilizations/blocks'
+
 
 export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
@@ -34,7 +34,7 @@ export default class NavbarEditionWrapper extends React.Component {
     const { dispatch, mobilization, block } = this.props
 
     dispatch(
-      asyncBlockUpdate({
+      BlockActions.asyncBlockUpdate({
         mobilization,
         block: { ...block, menu_hidden: !block.menu_hidden },
       })
