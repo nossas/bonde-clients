@@ -9,6 +9,9 @@ export default function BlockReducers(state = initialState, action) {
   let data
 
   switch (action.type) {
+    //
+    // Async Actions
+    //
     case c.REQUEST_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: false }
     case c.SUCCESS_ASYNC_BLOCK_FETCH:
@@ -75,6 +78,19 @@ export default function BlockReducers(state = initialState, action) {
       return { ...state, loaded: true, data }
     case c.FAILURE_ASYNC_BLOCK_MOVE_DOWN:
       return { ...state, loaded: true, error: action.payload }
+
+    //
+    // Sync Actions
+    //
+    case c.BLOCK_SELECTED_LAYOUT:
+      return { ...state, selectedLayout: action.layout }
+
+    case c.BLOCK_BACKGROUND_IMAGE_UPLOAD_PROGRESS:
+      return { ...state, isBlockBackgroundImageUploading: true }
+    case c.BLOCK_BACKGROUND_IMAGE_UPLOAD_FINISH:
+      return { ...state, isBlockBackgroundImageUploading: false }
+    case c.BLOCK_BACKGROUND_IMAGE_UPLOADED:
+      return { ...state, uploadedBackgroundImage: action.image }
 
     default:
       return state

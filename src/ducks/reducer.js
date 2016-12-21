@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form';
 
-import blockReducer from '../../app/scripts/Block/BlockReducer'
 import colorPicker from '../../app/components/ColorPicker/ColorPickerReducer'
 import widgets from '../../app/scripts/Widget/reducer'
 import mobilizationEditor from '../../app/scripts/reducers/mobilizationEditor'
@@ -24,7 +23,6 @@ export default combineReducers({
   selectableList,
   filterableSearchBar,
   blocks,
-  blockReducer,
   colorPicker,
   widgets,
   auth,
