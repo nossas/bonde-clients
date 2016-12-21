@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import { BlockCreate } from '../../../mobilizations/blocks/pages/block-create'
-import { BLOCK_LAYOUTS } from '../../../../scripts/constants/BlockLayouts'
+import { BLOCK_LAYOUTS } from '../../../mobilizations/blocks/constants'
 
 describe('app/modules/mobilizations/blocks/pages/block-create', () => {
   let wrapper

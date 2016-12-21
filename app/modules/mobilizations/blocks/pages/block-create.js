@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import * as Paths from '../../../../scripts/Paths'
-import { BLOCK_LAYOUTS } from '../../../../scripts/constants/BlockLayouts'
+import { BLOCK_LAYOUTS } from '../../../mobilizations/blocks/constants'
 import {
   setSelectedLayout,
   progressUploadBlockBackgroundImage,
