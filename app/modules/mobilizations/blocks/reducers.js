@@ -3,6 +3,9 @@ import c from '../../mobilizations/blocks/constants'
 const initialState = {
   loaded: false,
   data: [],
+  error: undefined,
+  uploadingBackgroundImage: false,
+  uploadedBackgroundImage: undefined,
 }
 
 export default function BlockReducers(state = initialState, action) {
@@ -85,10 +88,8 @@ export default function BlockReducers(state = initialState, action) {
     case c.BLOCK_SELECTED_LAYOUT:
       return { ...state, selectedLayout: action.layout }
 
-    case c.BLOCK_BACKGROUND_IMAGE_UPLOAD_PROGRESS:
-      return { ...state, isBlockBackgroundImageUploading: true }
-    case c.BLOCK_BACKGROUND_IMAGE_UPLOAD_FINISH:
-      return { ...state, isBlockBackgroundImageUploading: false }
+    case c.BLOCK_BACKGROUND_IMAGE_UPLOADING:
+      return { ...state, uploadingBackgroundImage: action.uploading }
     case c.BLOCK_BACKGROUND_IMAGE_UPLOADED:
       return { ...state, uploadedBackgroundImage: action.image }
 

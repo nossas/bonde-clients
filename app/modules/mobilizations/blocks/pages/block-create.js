@@ -31,12 +31,11 @@ export class BlockCreate extends Component {
       selectedLayout,
       bgImage,
       uploadedBackgroundImage,
-      isBlockBackgroundImageUploading,
+      uploadingBackgroundImage,
       // Actions
       asyncBlockCreate,
-      backgroundImageUploadProgress,
-      backgroundImageUploadFinish,
-      backgroundImageUploaded,
+      setBackgroundImageUploading,
+      setBackgroundImageUploaded,
       setSelectedLayout,
     } = this.props
     const { color_scheme: colorScheme } = mobilization
@@ -114,20 +113,19 @@ export class BlockCreate extends Component {
                   </div>
                   <div className="overflow-hidden">
                     {
-                      isBlockBackgroundImageUploading
+                      uploadingBackgroundImage
                       ? <i className="fa fa-spin fa-refresh" />
                       : <ReactS3Uploader
                         id="blockBackgroundImage"
                         signingUrl={`${process.env.API_URL}/uploads`}
                         accept="image/*"
                         onProgress={() =>
-                          !isBlockBackgroundImageUploading &&
-                            dispatch(backgroundImageUploadProgress())
+                          !uploadingBackgroundImage && dispatch(setBackgroundImageUploading(true))
                         }
                         onFinish={image => {
                           const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
-                          dispatch(backgroundImageUploaded(imageUrl))
-                          dispatch(backgroundImageUploadFinish())
+                          dispatch(setBackgroundImageUploaded(imageUrl))
+                          dispatch(setBackgroundImageUploading(false))
                         }}
                         className="border-none bg-darken-4 rounded p1 white"
                         style={{
@@ -156,7 +154,7 @@ export class BlockCreate extends Component {
                   }
                 })
                 dispatch(action)
-                dispatch(backgroundImageUploaded(null))
+                dispatch(setBackgroundImageUploaded(null))
               }}
             >
               Adicionar
@@ -193,7 +191,7 @@ BlockCreate.defaultProps = {
 
 const mapStateToProps = state => ({
   selectedLayout: state.blocks.selectedLayout,
-  isBlockBackgroundImageUploading: state.blocks.isBlockBackgroundImageUploading,
+  uploadingBackgroundImage: state.blocks.uploadingBackgroundImage,
   uploadedBackgroundImage: state.blocks.uploadedBackgroundImage,
   selectedColor: state.colorPicker.color,
 })
