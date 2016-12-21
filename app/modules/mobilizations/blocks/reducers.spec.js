@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
 import { constants as c } from '../../mobilizations/blocks'
-import { reducers } from '../../mobilizations/blocks'
+import reducers, { initialState } from '../../mobilizations/blocks/reducers'
 
 describe('BlockReducer', () => {
 
@@ -12,6 +12,7 @@ describe('BlockReducer', () => {
     }
     const nextState = reducers(undefined, action)
     expect(nextState).to.deep.equal({
+      ...initialState,
       loaded: true,
       data: [{ id: 1 }]
     })

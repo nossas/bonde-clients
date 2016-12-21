@@ -1,6 +1,6 @@
 import c from '../../mobilizations/blocks/constants'
 
-const initialState = {
+export const initialState = {
   loaded: false,
   data: [],
   error: undefined,
