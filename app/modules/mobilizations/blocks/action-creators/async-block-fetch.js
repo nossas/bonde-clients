@@ -1,20 +1,16 @@
 import { createAction } from './create-action'
-import {
-  REQUEST_ASYNC_BLOCK_FETCH,
-  SUCCESS_ASYNC_BLOCK_FETCH,
-  FAILURE_ASYNC_BLOCK_FETCH,
-} from '../action-types'
+import c from '../../../mobilizations/blocks/constants'
 
 const asyncBlockFetch = mobilizationId => (dispatch, getState, axios) => {
   const { auth: { credentials: headers } } = getState()
-  dispatch({ type: REQUEST_ASYNC_BLOCK_FETCH })
+  dispatch({ type: c.REQUEST_ASYNC_BLOCK_FETCH })
   return axios.get(`/mobilizations/${mobilizationId}/blocks`, { headers })
     .then(response => {
-      dispatch(createAction(SUCCESS_ASYNC_BLOCK_FETCH, response.data))
+      dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_FETCH, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(FAILURE_ASYNC_BLOCK_FETCH, failure))
+      dispatch(createAction(c.FAILURE_ASYNC_BLOCK_FETCH, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }

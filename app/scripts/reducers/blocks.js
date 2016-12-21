@@ -1,4 +1,4 @@
-import { actionTypes as t } from '../../modules/mobilizations/blocks'
+import { constants as c } from '../../modules/mobilizations/blocks'
 
 const initialState = {
   loaded: false,
@@ -9,46 +9,46 @@ export default function BlockReducer(state = initialState, action) {
   let data
 
   switch (action.type) {
-    case t.REQUEST_ASYNC_BLOCK_FETCH:
+    case c.REQUEST_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_FETCH:
+    case c.SUCCESS_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: true, data: action.payload }
-    case t.FAILURE_ASYNC_BLOCK_FETCH:
+    case c.FAILURE_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_CREATE:
+    case c.REQUEST_ASYNC_BLOCK_CREATE:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_CREATE:
+    case c.SUCCESS_ASYNC_BLOCK_CREATE:
       return { ...state, loaded: true, data: state.data.concat([action.payload]) }
-    case t.FAILURE_ASYNC_BLOCK_CREATE:
+    case c.FAILURE_ASYNC_BLOCK_CREATE:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_UPDATE:
+    case c.REQUEST_ASYNC_BLOCK_UPDATE:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_UPDATE:
+    case c.SUCCESS_ASYNC_BLOCK_UPDATE:
       data = state.data.map(block => block.id === action.payload.id ? action.payload : block)
       return { ...state, loaded: true, data }
-    case t.FAILURE_ASYNC_BLOCK_UPDATE:
+    case c.FAILURE_ASYNC_BLOCK_UPDATE:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_SELECT:
+    case c.REQUEST_ASYNC_BLOCK_SELECT:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_SELECT:
+    case c.SUCCESS_ASYNC_BLOCK_SELECT:
       return { ...state, loaded: true, data: action.payload  }
-    case t.FAILURE_ASYNC_BLOCK_SELECT:
+    case c.FAILURE_ASYNC_BLOCK_SELECT:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_DESTROY:
+    case c.REQUEST_ASYNC_BLOCK_DESTROY:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_DESTROY:
+    case c.SUCCESS_ASYNC_BLOCK_DESTROY:
       data = state.data.filter(block => action.payload.id !== block.id)
       return { ...state, loaded: true, data }
-    case t.FAILURE_ASYNC_BLOCK_DESTROY:
+    case c.FAILURE_ASYNC_BLOCK_DESTROY:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_MOVE_UP:
+    case c.REQUEST_ASYNC_BLOCK_MOVE_UP:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_MOVE_UP:
+    case c.SUCCESS_ASYNC_BLOCK_MOVE_UP:
       data = state.data.map((block, index) => {
         if (index + 1 < state.data.length && state.data[index + 1].id === action.payload.id) {
           return action.payload
@@ -58,12 +58,12 @@ export default function BlockReducer(state = initialState, action) {
         return block
       })
       return { ...state, loaded: true, data }
-    case t.FAILURE_ASYNC_BLOCK_MOVE_UP:
+    case c.FAILURE_ASYNC_BLOCK_MOVE_UP:
       return { ...state, loaded: true, error: action.payload }
 
-    case t.REQUEST_ASYNC_BLOCK_MOVE_DOWN:
+    case c.REQUEST_ASYNC_BLOCK_MOVE_DOWN:
       return { ...state, loaded: false }
-    case t.SUCCESS_ASYNC_BLOCK_MOVE_DOWN:
+    case c.SUCCESS_ASYNC_BLOCK_MOVE_DOWN:
       data = state.data.map((block, index) => {
         if (index > 0 && state.data[index - 1].id === action.payload.id) {
           return action.payload
@@ -73,7 +73,7 @@ export default function BlockReducer(state = initialState, action) {
         return block
       })
       return { ...state, loaded: true, data }
-    case t.FAILURE_ASYNC_BLOCK_MOVE_DOWN:
+    case c.FAILURE_ASYNC_BLOCK_MOVE_DOWN:
       return { ...state, loaded: true, error: action.payload }
 
     default:

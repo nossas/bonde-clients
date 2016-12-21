@@ -1,9 +1,5 @@
 import { createAction } from './create-action'
-import {
-  REQUEST_ASYNC_BLOCK_UPDATE,
-  SUCCESS_ASYNC_BLOCK_UPDATE,
-  FAILURE_ASYNC_BLOCK_UPDATE,
-} from '../action-types'
+import c from '../../../mobilizations/blocks/constants'
 
 const asyncBlockUpdate = ({ block, mobilization }) => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
@@ -12,14 +8,14 @@ const asyncBlockUpdate = ({ block, mobilization }) => (dispatch, getState, axios
   const body = { block }
   const config = { headers: credentials }
 
-  dispatch({ type: REQUEST_ASYNC_BLOCK_UPDATE })
+  dispatch({ type: c.REQUEST_ASYNC_BLOCK_UPDATE })
   return axios.put(endpoint, body, config)
     .then(response => {
-      dispatch(createAction(SUCCESS_ASYNC_BLOCK_UPDATE, response.data))
+      dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_UPDATE, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(FAILURE_ASYNC_BLOCK_UPDATE, failure))
+      dispatch(createAction(c.FAILURE_ASYNC_BLOCK_UPDATE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
