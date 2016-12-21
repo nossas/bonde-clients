@@ -4,17 +4,16 @@ import classnames from 'classnames'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import * as Paths from '../../../../scripts/Paths'
-import { BLOCK_LAYOUTS } from '../../../mobilizations/blocks/constants'
 import {
   setSelectedLayout,
   progressUploadBlockBackgroundImage,
   finishUploadBlockBackgroundImage,
   setUploadedBlockBackgroundImage
 } from '../../../../scripts/Block/BlockActions'
-import { actions as blockActions } from '../../../mobilizations/blocks'
-import { BlockMiniature } from '../../../../scripts/Block/components'
 import { Tabs, Tab } from '../../../../components/Navigation'
 import ColorPicker from '../../../../components/ColorPicker'
+import { actions as blockActions, constants as c } from '../../../mobilizations/blocks'
+import { BlockMiniature } from '../../../mobilizations/blocks/components'
 
 const { asyncBlockCreate } = blockActions
 
@@ -70,7 +69,7 @@ export class BlockCreate extends Component {
               Tipo de bloco
             </label>
             <div className="mxn1 clearfix">
-              {BLOCK_LAYOUTS.map((layout, index) => (
+              {c.BLOCK_LAYOUTS.map((layout, index) => (
                 <BlockMiniature
                   key={index}
                   layout={layout}
@@ -189,7 +188,7 @@ BlockCreate.propTypes = {
 }
 
 BlockCreate.defaultProps = {
-  selectedLayout: BLOCK_LAYOUTS[0],
+  selectedLayout: c.BLOCK_LAYOUTS[0],
   selectedColor: { r: 51, g: 51, b: 51, a: 1 },
   bgImage: null
 }
