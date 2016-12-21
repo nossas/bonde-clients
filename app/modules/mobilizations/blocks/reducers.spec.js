@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import { constants as c } from '../../../modules/mobilizations/blocks'
-import reducer from '../../reducers/blocks'
+import { constants as c } from '../../mobilizations/blocks'
+import { reducers } from '../../mobilizations/blocks'
 
 describe('BlockReducer', () => {
 
@@ -10,7 +10,7 @@ describe('BlockReducer', () => {
       type: c.SUCCESS_ASYNC_BLOCK_FETCH,
       payload: [{ id: 1 }]
     }
-    const nextState = reducer(undefined, action)
+    const nextState = reducers(undefined, action)
     expect(nextState).to.deep.equal({
       loaded: true,
       data: [{ id: 1 }]

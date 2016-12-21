@@ -5,3 +5,6 @@ export { default as asyncBlockSelect } from './async-block-select'
 export { default as asyncBlockDestroy } from './async-block-destroy'
 export { default as asyncBlockMoveUp } from './async-block-move-up'
 export { default as asyncBlockMoveDown } from './async-block-move-down'
+
+export * from './background-image'
+export * from './grid-layout'

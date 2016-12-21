@@ -4,18 +4,10 @@ import classnames from 'classnames'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import * as Paths from '../../../../scripts/Paths'
-import {
-  setSelectedLayout,
-  progressUploadBlockBackgroundImage,
-  finishUploadBlockBackgroundImage,
-  setUploadedBlockBackgroundImage
-} from '../../../../scripts/Block/BlockActions'
 import { Tabs, Tab } from '../../../../components/Navigation'
 import ColorPicker from '../../../../components/ColorPicker'
-import { actions as blockActions, constants as c } from '../../../mobilizations/blocks'
+import { actions, constants as c } from '../../../mobilizations/blocks'
 import { BlockMiniature } from '../../../mobilizations/blocks/components'
-
-const { asyncBlockCreate } = blockActions
 
 import '../../../mobilizations/blocks/pages/scss/block-create.scss'
 
@@ -39,7 +31,13 @@ export class BlockCreate extends Component {
       selectedLayout,
       bgImage,
       uploadedBackgroundImage,
-      isBlockBackgroundImageUploading
+      isBlockBackgroundImageUploading,
+      // Actions
+      asyncBlockCreate,
+      backgroundImageUploadProgress,
+      backgroundImageUploadFinish,
+      backgroundImageUploaded,
+      setSelectedLayout,
     } = this.props
     const { color_scheme: colorScheme } = mobilization
     const newBlockPath = Paths.newMobilizationBlock(mobilization.id)
@@ -124,12 +122,12 @@ export class BlockCreate extends Component {
                         accept="image/*"
                         onProgress={() =>
                           !isBlockBackgroundImageUploading &&
-                            dispatch(progressUploadBlockBackgroundImage())
+                            dispatch(backgroundImageUploadProgress())
                         }
                         onFinish={image => {
                           const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
-                          dispatch(setUploadedBlockBackgroundImage(imageUrl))
-                          dispatch(finishUploadBlockBackgroundImage())
+                          dispatch(backgroundImageUploaded(imageUrl))
+                          dispatch(backgroundImageUploadFinish())
                         }}
                         className="border-none bg-darken-4 rounded p1 white"
                         style={{
@@ -158,7 +156,7 @@ export class BlockCreate extends Component {
                   }
                 })
                 dispatch(action)
-                dispatch(setUploadedBlockBackgroundImage(null))
+                dispatch(backgroundImageUploaded(null))
               }}
             >
               Adicionar
@@ -194,10 +192,10 @@ BlockCreate.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  selectedLayout: state.blockReducer.selectedLayout,
-  isBlockBackgroundImageUploading: state.blockReducer.isBlockBackgroundImageUploading,
+  selectedLayout: state.blocks.selectedLayout,
+  isBlockBackgroundImageUploading: state.blocks.isBlockBackgroundImageUploading,
+  uploadedBackgroundImage: state.blocks.uploadedBackgroundImage,
   selectedColor: state.colorPicker.color,
-  uploadedBackgroundImage: state.blockReducer.uploadedBackgroundImage
 })
 
-export default connect(mapStateToProps)(BlockCreate)
+export default connect(mapStateToProps, actions)(BlockCreate)
