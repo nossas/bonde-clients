@@ -8,6 +8,11 @@ export const initialState = {
   uploadedBackgroundImage: undefined,
 }
 
+//
+// TODO: Maybe split these reducers into separated files
+// to turns more explicit what is its responsibility and let
+// the code more cleaner
+//
 export default function BlockReducers(state = initialState, action) {
   let data
 
@@ -15,6 +20,8 @@ export default function BlockReducers(state = initialState, action) {
     //
     // Async Actions
     //
+    // @suggestion: Maybe this block of code turns
+    // into a file called `async-block-fetch-reducer`?
     case c.REQUEST_ASYNC_BLOCK_FETCH:
       return { ...state, loaded: false }
     case c.SUCCESS_ASYNC_BLOCK_FETCH:
