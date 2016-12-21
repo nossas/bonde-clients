@@ -1,10 +1,11 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import keycode from 'keycode'
 
 import { startEditingBlock, stopEditingBlock } from '../../../../scripts/reducers/mobilizationEditor'
 import { Loading } from '../../../../scripts/components'
-import { actions } from '../../../mobilizations/blocks'
+import { actions, utils, selectors } from '../../../mobilizations/blocks'
 import {
   BlockColorPicker,
   BlockWidgets,
@@ -26,42 +27,14 @@ export class Block extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (this.state.editingBackground && !nextState.editingBackground) {
-      this.props.dispatch(stopEditingBlock())
-    } else if (!this.state.editingBackground && nextState.editingBackground) {
-      this.props.dispatch(startEditingBlock())
-    } else if (this.state.editingWidget && !nextState.editingWidget) {
-      this.props.dispatch(stopEditingBlock())
-    } else if (!this.state.editingWidget && nextState.editingWidget) {
-      this.props.dispatch(startEditingBlock())
-    }
-  }
+  componentWillUpdate(props, state) {
+    const { editingBackground, editingWidget } = this.state
+    const { dispatch } = this.props
 
-  componentWillReceiveProps() {
-    if (this.state.loading) {
-      this.setState({loading: false})
-    }
-  }
-
-  filterWidgets(widgets, block) {
-    return widgets.filter(function(widget) {
-      return widget.block_id === block.id
-    })
-  }
-
-  handleKeyUp(event) {
-    if (event.keyCode === 27) {
-      this.setState({editingBackground: false})
-    }
-  }
-
-  handleMouseOver() {
-    this.setState({ hasMouseOver: true })
-  }
-
-  handleMouseOut() {
-    this.setState({ hasMouseOver: false })
+    if (editingBackground && !state.editingBackground) dispatch(stopEditingBlock())
+    else if (!editingBackground && state.editingBackground) dispatch(startEditingBlock())
+    else if (editingWidget && !state.editingWidget) dispatch(stopEditingBlock())
+    else if (!editingWidget && state.editingWidget) dispatch(startEditingBlock())
   }
 
   onChange(state) {
@@ -69,32 +42,19 @@ export class Block extends Component {
   }
 
   render() {
-    // TODO: change widgets constant name to reflex the object that is returned
-    // by the reducer
     const { widgets, block } = this.props
-    const {
-      bg_class: bgClass,
-      bg_image: bgImage
-    } = block
-    const isBackgroundClass = /^bg\-\d+/.test(bgClass)
-    const isBackgroundObject = !isBackgroundClass && /^{.*}$/.test(bgClass)
-    const bg = isBackgroundObject ? JSON.parse(bgClass) : null
 
-    const filteredWidgets = this.filterWidgets(widgets.data, block)
     return (
       <div
         id={`block-${block.id}`}
-        className={classnames(
-          'clearfix',
-          isBackgroundClass ? bgClass : null,
-          bgImage ? 'bg-cover' : null
-        )}
-        onKeyUp={::this.handleKeyUp}
-        onMouseOver={::this.handleMouseOver}
-        onMouseOut={::this.handleMouseOut}
-        style={{
-          backgroundImage: bgImage ? `url(${bgImage})` : null,
-          backgroundColor: isBackgroundObject ? `rgba(${bg.r},${bg.g},${bg.b},${bg.a})` : null
+        style={{ ...utils.generateStyle(block) }}
+        className={classnames('clearfix', utils.generateClassName(block))}
+        onMouseOver={() => ::this.onChange({ hasMouseOver: true })}
+        onMouseOut={() => ::this.onChange({ hasMouseOver: false })}
+        onKeyUp={event => {
+          if (keycode(event.keyCode) === 'esc') {
+            ::this.onChange({ editingBackground: false })
+          }
         }}
       >
         <div className="col-10 mx-auto">
@@ -110,7 +70,7 @@ export class Block extends Component {
               state={this.state}
               props={this.props}
               onChange={::this.onChange}
-              widgets={filteredWidgets}
+              widgets={selectors.getWidgets({ widgets, block })}
             />
           </div>
           <div className="relative">
