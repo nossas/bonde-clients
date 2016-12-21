@@ -1,4 +1,4 @@
-import { actions, constants as c } from '../../../modules/mobilizations/blocks'
+import { actions, constants as c } from '../../../../mobilizations/blocks'
 import $ from 'jquery'
 
 describe.skip('Block Actions', () => {
