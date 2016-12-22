@@ -1,4 +1,4 @@
-export const getWidgets = ({ widgets, block }) => widgets.data.filter(
+export const getWidgets = ({ widgets, block }) => widgets.filter(
   widget => widget.block_id === block.id
 )
 

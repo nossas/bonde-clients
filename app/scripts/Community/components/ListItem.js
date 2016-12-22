@@ -9,7 +9,7 @@ const ListItem = props => {
       <u
         className="logo-icon nossas left"
         style={{
-          backgroundImage: image ? `url(${image});` : undefined,
+          backgroundImage: image ? `url(${image})` : undefined,
           boxShadow: 'none',
         }}
       />

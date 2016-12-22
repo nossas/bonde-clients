@@ -5,8 +5,10 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
-import { Loading, Navbar } from '../../components'
+import { Loading } from '../../components'
 import { fetchWidgets } from '../../Widget/reducer'
+
+import { Mobilization } from '../../../modules/mobilizations/components'
 import * as MobilizationActions from '../MobilizationActions'
 import Block from '../../../modules/mobilizations/blocks/components'
 
@@ -56,31 +58,15 @@ class EditMobilizationPage extends Component {
   }
 
   renderBlocks() {
-    const { mobilization, blocks, blockEditionMode } = this.props
-    const { color_scheme: colorScheme } = mobilization
-
+    const { blocks, widgets } = this.props
+    // Override blocks and widgets to list
     return (
-      <div className={classnames(colorScheme, 'flex flex-column flex-auto relative')}>
-        {!blockEditionMode && (
-          <Navbar {...this.props} editable />
-        )}
-        <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
-          {
-            blocks.data.map(function(block, index) {
-              return (
-                <Block
-                  {...this.props}
-                  key={`block-${block.id}`}
-                  block={block}
-                  canMoveUp={index !== 0}
-                  canMoveDown={index !== blocks.length - 1}
-                  editable
-                />
-              )
-            }.bind(this))
-          }
-        </div>
-      </div>
+      <Mobilization
+        {...this.props}
+        blocks={blocks.data}
+        widgets={widgets.data}
+        editable={true}
+      />
     )
   }
 
@@ -103,7 +89,6 @@ EditMobilizationPage.propTypes = {
   params: PropTypes.object.isRequired,
   scrolledToBottom: PropTypes.bool.isRequired,
   widgetsCount: PropTypes.number,
-  blockEditionMode: PropTypes.bool,
   // actions
   setCurrentMobilizationId: PropTypes.func
 }
