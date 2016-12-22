@@ -14,6 +14,7 @@ class EditContainer extends Component {
 
     const editPath = paths.edit('info')
     const mailchimpPath = paths.edit('mailchimp')
+    const recipientPath = paths.edit('recipient')
 
     return (
       <SettingsPageLayout>
@@ -21,6 +22,7 @@ class EditContainer extends Component {
           <Tabs>
             <Tab text="Informações" path={editPath} isActive={editPath === pathname} />
             <Tab text="Mailchimp" path={mailchimpPath} isActive={mailchimpPath === pathname} />
+            <Tab text="Recebedor" path={recipientPath} isActive={recipientPath === pathname} />
           </Tabs>
         </SettingsPageMenuLayout>
         <SettingsPageContentLayout>

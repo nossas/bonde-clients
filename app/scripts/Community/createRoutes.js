@@ -3,7 +3,7 @@ import { Route } from 'react-router'
 import { BackgroundContainer, SidebarContainer } from '../Dashboard/containers'
 
 import { EditContainer } from './containers'
-import { AddPage, ListPage, InfoPage, MailchimpPage } from './pages'
+import { AddPage, ListPage, InfoPage, MailchimpPage, RecipientPage } from './pages'
 
 
 export default requiredLogin => [
@@ -15,6 +15,7 @@ export default requiredLogin => [
     <Route component={EditContainer}>
       <Route path="/community/info" component={InfoPage} />
       <Route path="/community/mailchimp" component={MailchimpPage} />
+      <Route path="/community/recipient" component={RecipientPage} />
     </Route>
   </Route>
 ]
