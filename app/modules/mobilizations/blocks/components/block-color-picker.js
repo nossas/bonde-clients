@@ -2,8 +2,12 @@ import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import { ColorPicker } from '../../../../scripts/components'
+import { actions as BlockActions } from '../../../mobilizations/blocks'
 
 const BlockColorPicker = ({ state, props, onChange }) => {
+  const { mobilization, block, dispatch } = props
+  const { asyncBlockUpdate } = BlockActions
+
   return (
     <div>
       <div className="absolute col-12 top-0 bg-darken-4 z5" style={{ left: '80px' }}>
@@ -65,7 +69,6 @@ const BlockColorPicker = ({ state, props, onChange }) => {
           className="btn caps bg-darken-4 white rounded mr1"
           disabled={!!state.uploadProgress}
           onClick={() => {
-            const { mobilization, block, asyncBlockUpdate, dispatch } = props
             onChange({ editingBackground: false, loading: true })
             dispatch(
               asyncBlockUpdate({

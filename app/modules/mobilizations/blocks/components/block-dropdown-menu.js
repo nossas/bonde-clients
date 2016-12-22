@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { DropDownMenu, DropDownMenuItem } from '../../../../scripts/components'
+import { actions as BlockActions } from '../../../mobilizations/blocks'
 
 
 const displayDropDownMenu = ({ state, props }) => (
@@ -20,11 +21,14 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
     mobilization,
     block,
     blocks,
+  } = props
+
+  const {
     asyncBlockUpdate,
     asyncBlockDestroy,
     asyncBlockMoveUp,
     asyncBlockMoveDown,
-  } = props
+  } = BlockActions
 
   return (
     <DropDownMenu

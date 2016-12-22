@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { Loading } from '../../../../scripts/components'
-import { actions, utils, selectors } from '../../../mobilizations/blocks'
+import { actions as BlockActions, utils, selectors } from '../../../mobilizations/blocks'
 import {
   BlockColorPicker,
   BlockWidgets,
@@ -12,7 +12,7 @@ import {
   BlockDropdownMenu,
 } from '../../../mobilizations/blocks/components'
 
-export class Block extends Component {
+class Block extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -28,7 +28,8 @@ export class Block extends Component {
 
   componentWillUpdate(props, state) {
     const { editingBackground, editingWidget } = this.state
-    const { dispatch, setEditionMode } = this.props
+    const { dispatch } = this.props
+    const { setEditionMode } = BlockActions
 
     if (editingBackground && !state.editingBackground) dispatch(setEditionMode(false))
     else if (!editingBackground && state.editingBackground) dispatch(setEditionMode(true))
@@ -102,10 +103,8 @@ Block.propTypes = {
   canMoveUp: PropTypes.bool,
   canMoveDown: PropTypes.bool,
   dispatch: PropTypes.func,
-  // Actions
-  setEditionMode: PropTypes.func,
 }
 
 const mapStateToProps = state => ({})
 
-export default connect(mapStateToProps, actions)(Block)
+export default Block
