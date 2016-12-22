@@ -6,21 +6,12 @@ import ReactS3Uploader from 'react-s3-uploader'
 import * as Paths from '../../../../scripts/Paths'
 import { Tabs, Tab } from '../../../../components/Navigation'
 import ColorPicker from '../../../../components/ColorPicker'
-import { actions, constants as c } from '../../../mobilizations/blocks'
+import { actions as BlockActions, constants as c } from '../../../mobilizations/blocks'
 import { BlockMiniature } from '../../../mobilizations/blocks/components'
 
 import '../../../mobilizations/blocks/pages/scss/block-create.scss'
 
 export class BlockCreate extends Component {
-  componentWillReceiveProps(nextProps) {
-    const { blocks, mobilization } = this.props
-
-    if (blocks.data.length !== nextProps.blocks.data.length) {
-      const { router } = this.context
-      router.transitionTo(`${Paths.editMobilization(mobilization.id)}?newBlock=true`)
-    }
-  }
-
   render() {
     const {
       dispatch,
@@ -32,11 +23,6 @@ export class BlockCreate extends Component {
       bgImage,
       uploadedBackgroundImage,
       uploadingBackgroundImage,
-      // Actions
-      asyncBlockCreate,
-      setBackgroundImageUploading,
-      setBackgroundImageUploaded,
-      setSelectedLayout,
     } = this.props
     const { color_scheme: colorScheme } = mobilization
     const newBlockPath = Paths.createBlock(mobilization)
@@ -71,7 +57,7 @@ export class BlockCreate extends Component {
                   key={index}
                   layout={layout}
                   selectedLayout={selectedLayout}
-                  onClick={() => { dispatch(setSelectedLayout(layout)) }}
+                  onClick={() => { dispatch(BlockActions.setSelectedLayout(layout)) }}
                 />
               ))}
             </div>
@@ -120,12 +106,12 @@ export class BlockCreate extends Component {
                         signingUrl={`${process.env.API_URL}/uploads`}
                         accept="image/*"
                         onProgress={() =>
-                          !uploadingBackgroundImage && dispatch(setBackgroundImageUploading(true))
+                          !uploadingBackgroundImage && dispatch(BlockActions.setBackgroundImageUploading(true))
                         }
                         onFinish={image => {
                           const imageUrl = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
-                          dispatch(setBackgroundImageUploaded(imageUrl))
-                          dispatch(setBackgroundImageUploading(false))
+                          dispatch(BlockActions.setBackgroundImageUploaded(imageUrl))
+                          dispatch(BlockActions.setBackgroundImageUploading(false))
                         }}
                         className="border-none bg-darken-4 rounded p1 white"
                         style={{
@@ -145,16 +131,20 @@ export class BlockCreate extends Component {
             <button
               className="block-create-button btn float-btn-menu rounded"
               onClick={() => {
-                const action = asyncBlockCreate({
+                dispatch(BlockActions.asyncBlockCreate({
                   mobilization,
                   block: {
                     bg_class: JSON.stringify(selectedColor),
                     bg_image: uploadedBackgroundImage || bgImage,
                     widgets_attributes: selectedLayout.map(column => ({ kind: 'draft', ...column }))
-                  }
-                })
-                dispatch(action)
-                dispatch(setBackgroundImageUploaded(null))
+                  },
+                  next: () => {
+                    this.context.router.transitionTo(
+                      `${Paths.editMobilization(mobilization.id)}?newBlock=true`
+                    )
+                  }.bind(this)
+                }))
+                dispatch(BlockActions.setBackgroundImageUploaded(null))
               }}
             >
               Adicionar
@@ -196,4 +186,4 @@ const mapStateToProps = state => ({
   selectedColor: state.colorPicker.color,
 })
 
-export default connect(mapStateToProps, actions)(BlockCreate)
+export default connect(mapStateToProps)(BlockCreate)
