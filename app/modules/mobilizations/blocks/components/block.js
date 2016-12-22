@@ -95,16 +95,8 @@ class Block extends Component {
 
 Block.propTypes = {
   block: PropTypes.object.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  blocks: PropTypes.object.isRequired,
-  editable: PropTypes.bool.isRequired,
   widgets: PropTypes.object.isRequired,
-  auth: PropTypes.object,
-  canMoveUp: PropTypes.bool,
-  canMoveDown: PropTypes.bool,
   dispatch: PropTypes.func,
 }
-
-const mapStateToProps = state => ({})
 
 export default Block

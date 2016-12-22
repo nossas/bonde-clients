@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import { Widget } from '../../../../scripts/components'
 
-const BlockWidgets = ({ widgets, props, state, onChange }) => {
+const BlockWidgets = ({ widgets, props, onChange }) => {
   return <div>
     {widgets.map(widget => (
       <Widget
@@ -14,6 +14,12 @@ const BlockWidgets = ({ widgets, props, state, onChange }) => {
       />
     ))}
   </div>
+}
+
+BlockWidgets.propTypes = {
+  widgets: PropTypes.array,
+  props: PropTypes.object,
+  onChange: PropTypes.func,
 }
 
 export default BlockWidgets

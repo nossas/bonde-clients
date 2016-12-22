@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import { ColorPicker } from '../../../../scripts/components'
@@ -106,6 +106,20 @@ const handleCancelEdit = ({ props, onChange }) => {
     bgClass: props.block.bg_class,
     bgImage: props.block.bg_image
   })
+}
+
+BlockColorPicker.propTypes = {
+  props: PropTypes.shape({
+    mobilization: PropTypes.object,
+    block: PropTypes.object,
+    dispatch: PropTypes.func,
+  }),
+  state: PropTypes.shape({
+    bgClass: PropTypes.string,
+    bgImage: PropTypes.string,
+    uploadProgress: PropTypes.number,
+  }),
+  onChange: PropTypes.func,
 }
 
 export default BlockColorPicker

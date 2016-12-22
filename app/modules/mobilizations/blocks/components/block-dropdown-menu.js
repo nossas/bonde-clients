@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { DropDownMenu, DropDownMenuItem } from '../../../../scripts/components'
@@ -97,6 +97,27 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
       </DropDownMenuItem>
     </DropDownMenu>
   )
+}
+
+BlockDropdownMenu.propTypes = {
+  state: PropTypes.shape({
+    hasMouseOver: PropTypes.bool,
+    editingBackground: PropTypes.bool,
+    editingWidget: PropTypes.bool,
+    loading: PropTypes.bool,
+  }),
+  props: PropTypes.shape({
+    editable: PropTypes.bool,
+    dispatch: PropTypes.func,
+    canMoveUp: PropTypes.bool,
+    canMoveDown: PropTypes.bool,
+    mobilization: PropTypes.object,
+    blocks: PropTypes.object,
+    block: PropTypes.shape({
+      hidden: PropTypes.bool,
+    }),
+  }),
+  onChange: PropTypes.func,
 }
 
 export default BlockDropdownMenu
