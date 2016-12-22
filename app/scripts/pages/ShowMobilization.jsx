@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
-import { Block, Navbar } from './../components'
 import ReactGA from 'react-ga'
+
+import { Navbar } from './../components'
+import Block from '../../modules/mobilizations/blocks/components'
+
 
 export default class ShowMobilization extends React.Component {
   static propTypes = {
@@ -67,7 +70,7 @@ export default class ShowMobilization extends React.Component {
               if (!block.hidden) {
                 return (
                   <Block
-                    key={'block-' + block.id}
+                    key={`block-${block.id}`}
                     block={block}
                     editable={false}
                     mobilization={mobilization}

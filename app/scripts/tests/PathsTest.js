@@ -48,9 +48,10 @@ describe('Paths', () => {
     })
   })
 
-  describe('#newMobilizationBlock', () => {
+  describe('#createBlock', () => {
     it('should return the path', () => {
-      expect(Paths.newMobilizationBlock(1)).to.equal('/mobilizations/1/blocks/new')
+      const mobilization = { id: 1 }
+      expect(Paths.createBlock(mobilization)).to.equal('/mobilizations/1/blocks/create')
     })
   })
 

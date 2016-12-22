@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { findBlocks, isBlocksLoaded } from './../../reducers/blocks'
 import { findWidgets, isWidgetsLoaded } from './../../Widget/reducer'
 import { ShowMobilization } from './../'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../../Mobilization/MobilizationActions'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
 import { TechnicalIssues } from '../../../components/Error'
+import {
+  actions as BlockActions,
+  selectors as BlockSelectors,
+} from '../../../modules/mobilizations/blocks'
+
 
 export class CustomDomainWrapper extends React.Component {
   static fetchData(store, params, query, host) {
@@ -28,8 +32,8 @@ export class CustomDomainWrapper extends React.Component {
       promises.push(dispatch)
     }
 
-    if (!isBlocksLoaded(store.getState())) {
-      const action = findBlocks(findParams)
+    if (!BlockSelectors.isLoaded(store.getState())) {
+      const action = BlockActions.asyncBlockSelect(findParams)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
