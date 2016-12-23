@@ -3,7 +3,6 @@ import $ from 'jquery'
 import request from 'superagent'
 
 import {
-  EDIT_WIDGET,
   FETCH_WIDGETS,
 
   ADD_MATCH,
@@ -12,10 +11,6 @@ import {
   FETCH_MATCH
 } from '../constants/ActionTypes'
 import { getMobilization } from '../Mobilization/MobilizationSelectors'
-
-export const REQUEST_EDIT_WIDGET = 'REQUEST_EDIT_WIDGET'
-export const SUCCESS_EDIT_WIDGET = 'SUCCESS_EDIT_WIDGET'
-export const FAILURE_EDIT_WIDGET = 'FAILURE_EDIT_WIDGET'
 
 export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
 export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
@@ -26,19 +21,6 @@ export const SUCCESS_FETCH_GOOGLE_FONTS = 'SUCCESS_FETCH_GOOGLE_FONTS'
 export const FAILURE_FETCH_GOOGLE_FONTS = 'FAILURE_FETCH_GOOGLE_FONTS'
 
 export const TOOLBAR_SET_LINK_OPEN_STRATEGY = 'TOOLBAR_SET_LINK_OPEN_STRATEGY'
-
-const editWidgetSuccess = widget => ({ type: SUCCESS_EDIT_WIDGET, widget })
-export const editWidgetAsync = widget => (dispatch, getState, request) => {
-  const state = getState()
-  const mobilization = getMobilization(state)
-  const { auth: { credentials } } = state
-  return request.editWidget(widget, mobilization, credentials)
-    .then(response => {
-      dispatch(editWidgetSuccess(response.data))
-      return Promise.resolve()
-    })
-    .catch(error => Promise.reject({ _error: `Response ${error}` }))
-}
 
 const fillWidgetRequest = () => ({ type: REQUEST_FILL_WIDGET })
 const fillWidgetFailure = error => ({ type: FAILURE_FILL_WIDGET, error })

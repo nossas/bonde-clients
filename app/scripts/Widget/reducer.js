@@ -5,17 +5,16 @@ import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 import * as t from '../../modules/widgets/action-types'
 
 import {
-  REQUEST_EDIT_WIDGET,
-  SUCCESS_EDIT_WIDGET,
-  FAILURE_EDIT_WIDGET,
-
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
   FAILURE_FETCH_GOOGLE_FONTS,
 
-  TOOLBAR_SET_LINK_OPEN_STRATEGY
+  TOOLBAR_SET_LINK_OPEN_STRATEGY,
+
+  REQUEST_FILL_WIDGET,
+  SUCCESS_FILL_WIDGET,
+  FAILURE_FILL_WIDGET,
 } from './actions'
-import { REQUEST_FILL_WIDGET, SUCCESS_FILL_WIDGET, FAILURE_FILL_WIDGET } from './actions'
 
 const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
 const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
@@ -25,9 +24,7 @@ const REQUEST_FIND_WIDGETS = 'REQUEST_FIND_WIDGETS'
 const SUCCESS_FIND_WIDGETS = 'SUCCESS_FIND_WIDGETS'
 const FAILURE_FIND_WIDGETS = 'FAILURE_FIND_WIDGETS'
 
-const EDIT_WIDGET = 'EDIT_WIDGET'
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
-
 
 const initialState = {
   loaded: false,
@@ -39,27 +36,9 @@ export default function reducer(state = initialState, action) {
   let data
 
   switch (action.type) {
-    case FETCH_WIDGETS_REQUEST:
-      return {...state, loaded: false}
-    case FETCH_WIDGETS_SUCCESS:
-      return {...state, loaded: true, data: action.result }
-    case FETCH_WIDGETS_FAILURE:
-      return {...state, loaded: true}
-    case REQUEST_FIND_WIDGETS:
-      return {...state, loaded: false}
-    case SUCCESS_FIND_WIDGETS:
-      return {...state, loaded: true, data: action.result }
-    case FAILURE_FIND_WIDGETS:
-      return {...state, loaded: true}
-
-    case REQUEST_EDIT_WIDGET:
-      return { ...state, saving: true }
-    case SUCCESS_EDIT_WIDGET:
-      data = state.data.map(widget => widget.id === action.widget.id ? action.widget : widget)
-      return { ...state, data, saving: false }
-    case FAILURE_EDIT_WIDGET:
-      return { ...state, saving: false, error: action.error }
-
+    //
+    // Async Actions
+    //
     case t.REQUEST_WIDGET_UPDATE:
       return { ...state, saving: true }
     case t.SUCCESS_WIDGET_UPDATE:
@@ -67,6 +46,23 @@ export default function reducer(state = initialState, action) {
       return { ...state, data, saving: false }
     case t.FAILURE_WIDGET_UPDATE:
       return { ...state, saving: false, error: action.payload }
+
+    //
+    // Needs refactoring
+    //
+    case FETCH_WIDGETS_REQUEST:
+      return {...state, loaded: false}
+    case FETCH_WIDGETS_SUCCESS:
+      return {...state, loaded: true, data: action.result }
+    case FETCH_WIDGETS_FAILURE:
+      return {...state, loaded: true}
+
+    case REQUEST_FIND_WIDGETS:
+      return {...state, loaded: false}
+    case SUCCESS_FIND_WIDGETS:
+      return {...state, loaded: true, data: action.result }
+    case FAILURE_FIND_WIDGETS:
+      return {...state, loaded: true}
 
     case REQUEST_FILL_WIDGET:
       return { ...state, saving: true }
