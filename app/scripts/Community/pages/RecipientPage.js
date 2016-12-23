@@ -15,21 +15,26 @@ import {
 import { getCodeBanks } from '../utils'
 import { FloatLayout } from '../../Dashboard/Grids'
 
+import { edit } from '../actions'
+
 
 class RecipientPage extends Component {
 
   render() {
     const {
       fields: {
-        transfer_interval,
-        transfer_day,
-        bank_account
+        recipient: {
+          transfer_interval,
+          transfer_day,
+          transfer_enabled,
+          bank_account
+        }
       },
       ...formProps
     } = this.props
 
     return (
-      <FormRedux nosubmit onSubmit={values => console.log(values)} {...formProps}>
+      <FormRedux nosubmit {...formProps}>
 
         <FormGroup controlId="transferIntervalId" {...transfer_interval}>
           <ControlLabel>Intervalo</ControlLabel>
@@ -122,36 +127,47 @@ class RecipientPage extends Component {
 }
 
 const fields = [
-  'transfer_interval',
-  'transfer_day',
-  'transfer_enabled',
-  'bank_account.bank_code',
-  'bank_account.agencia',
-  'bank_account.agencia_dv',
-  'bank_account.conta',
-  'bank_account.conta_dv',
-  'bank_account.type',
-  'bank_account.legal_name',
-  'bank_account.document_number',
+  'id',
+  'recipient.transfer_interval',
+  'recipient.transfer_day',
+  'recipient.transfer_enabled',
+  'recipient.bank_account.bank_code',
+  'recipient.bank_account.agencia',
+  'recipient.bank_account.agencia_dv',
+  'recipient.bank_account.conta',
+  'recipient.bank_account.conta_dv',
+  'recipient.bank_account.type',
+  'recipient.bank_account.legal_name',
+  'recipient.bank_account.document_number',
 ]
 
-const mapStateToProps = state => ({
-  initialValues: {
-    transfer_interval: 'monthly',
-    transfer_day: 5,
-    transfer_enabled: true,
-  },
-})
+const mapStateToProps = (state, ownProps) => {
+
+  const { community: { id, recipient } } = ownProps
+  const values = recipient ? recipient : {}
+
+  return {
+    initialValues: {
+      id,
+      recipient: {
+        ...values,
+        transfer_interval: values.transfer_interval || 'monthly',
+        transfer_day: values.transfer_day || 5,
+        transfer_enabled: values.transfer_enabled || true,
+      },
+    },
+  }
+}
 
 export default reduxForm({
   form: 'recipientForm',
   fields
-}, mapStateToProps)(RecipientPage)
+}, mapStateToProps, { submit: edit })(RecipientPage)
 
 /*"transfer_interval": "weekly",
       "transfer_day": 5,
       "transfer_enabled": true,
-      "bank_account": {
+      "recipient": {
           :bank_code => '237',
           :agencia => '1935',
           :agencia_dv => '9',
