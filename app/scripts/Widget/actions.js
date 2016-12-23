@@ -3,14 +3,11 @@ import $ from 'jquery'
 import request from 'superagent'
 
 import {
-  FETCH_WIDGETS,
-
   ADD_MATCH,
   UPDATE_MATCH,
   DELETE_MATCH,
   FETCH_MATCH
 } from '../constants/ActionTypes'
-import { getMobilization } from '../Mobilization/MobilizationSelectors'
 
 export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
 export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
@@ -39,19 +36,6 @@ export const fillWidget = (widget_id, fill) => dispatch => {
       if (err || !res.ok) dispatch(fillWidgetFailure(err || res.body))
       else dispatch(fillWidgetSuccess(res.body))
     })
-}
-
-export function fetchWidgets(params) {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/mobilizations/${params.mobilization_id}/widgets`, {
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: FETCH_WIDGETS,
-          widgets: data
-        })
-      }
-    })
-  }
 }
 
 const addMatch = (params) => {

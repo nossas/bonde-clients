@@ -16,10 +16,6 @@ import {
   FAILURE_FILL_WIDGET,
 } from './actions'
 
-const FETCH_WIDGETS_REQUEST = 'FETCH_WIDGETS_REQUEST'
-const FETCH_WIDGETS_SUCCESS = 'FETCH_WIDGETS_SUCCESS'
-const FETCH_WIDGETS_FAILURE = 'FETCH_WIDGETS_FAILURE'
-
 const REQUEST_FIND_WIDGETS = 'REQUEST_FIND_WIDGETS'
 const SUCCESS_FIND_WIDGETS = 'SUCCESS_FIND_WIDGETS'
 const FAILURE_FIND_WIDGETS = 'FAILURE_FIND_WIDGETS'
@@ -29,7 +25,8 @@ const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 const initialState = {
   loaded: false,
   data: [],
-  saving: false
+  saving: false,
+  error: undefined,
 }
 
 export default function reducer(state = initialState, action) {
@@ -47,16 +44,16 @@ export default function reducer(state = initialState, action) {
     case t.FAILURE_WIDGET_UPDATE:
       return { ...state, saving: false, error: action.payload }
 
+    case t.REQUEST_WIDGET_FETCH:
+      return { ...state, loaded: false }
+    case t.SUCCESS_WIDGET_FETCH:
+      return { ...state, loaded: true, data: action.payload  }
+    case t.FAILURE_WIDGET_FETCH:
+      return { ...state, loaded: true, error: action.payload }
+
     //
     // Needs refactoring
     //
-    case FETCH_WIDGETS_REQUEST:
-      return {...state, loaded: false}
-    case FETCH_WIDGETS_SUCCESS:
-      return {...state, loaded: true, data: action.result }
-    case FETCH_WIDGETS_FAILURE:
-      return {...state, loaded: true}
-
     case REQUEST_FIND_WIDGETS:
       return {...state, loaded: false}
     case SUCCESS_FIND_WIDGETS:
@@ -143,23 +140,6 @@ export default function reducer(state = initialState, action) {
 
 export function isWidgetsLoaded(globalState) {
   return globalState.blocks.loaded
-}
-
-export function fetchWidgets(options) {
-  return {
-    types: [FETCH_WIDGETS_REQUEST, FETCH_WIDGETS_SUCCESS, FETCH_WIDGETS_FAILURE],
-    promise: function() {
-      return new Promise(function(resolve, reject) {
-        superagent.get(`${process.env.API_URL}/mobilizations/${options.mobilization_id}/widgets`).end((err, res) => {
-          if (err) {
-            reject(res.body || err)
-          } else {
-            resolve(res.body)
-          }
-        })
-      })
-    }
-  }
 }
 
 export function findWidgets(options) {

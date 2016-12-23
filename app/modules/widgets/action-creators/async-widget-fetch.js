@@ -8,8 +8,6 @@ const asyncWidgetFetch = mobilizationId => (dispatch, getState, axios) => {
   const endpoint = `/mobilizations/${mobilizationId}/widgets`
   const config = { headers: credentials }
 
-  console.log('[asyncWidgetFetch] yup, passed here (;')
-
   dispatch({ type: t.REQUEST_WIDGET_FETCH })
   return axios.get(endpoint, config)
     .then(response => {

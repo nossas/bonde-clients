@@ -8,9 +8,6 @@ export const FAILURE_EDIT_MOBILIZATION = 'FAILURE_EDIT_MOBILIZATION'
 export const EDIT_MOBILIZATION = 'EDIT_MOBILIZATION'
 export const ADD_MOBILIZATION = 'ADD_MOBILIZATION'
 
-// Widget actions
-export const FETCH_WIDGETS = 'FETCH_WIDGETS'
-
 // Form entries actions
 export const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
