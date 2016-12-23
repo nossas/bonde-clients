@@ -7,12 +7,15 @@ import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
 import { Mobilization } from '../components'
 
-import { findWidgets, isWidgetsLoaded } from '../../../scripts/Widget/reducer'
+import { isWidgetsLoaded } from '../../../scripts/Widget/reducer'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../../../scripts/Mobilization/MobilizationActions'
 import {
   actions as BlockActions,
   selectors as BlockSelectors,
-} from '../../mobilizations/blocks'
+} from '../../../modules/mobilizations/blocks'
+import {
+  actions as WidgetActions,
+} from '../../../modules/widgets'
 
 
 export class CustomDomainPage extends Component {
@@ -36,7 +39,7 @@ export class CustomDomainPage extends Component {
     }
 
     if (!isWidgetsLoaded(store.getState())) {
-      const action = findWidgets(findParams)
+      const action = WidgetActions.asyncWidgetSelect(findParams)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
