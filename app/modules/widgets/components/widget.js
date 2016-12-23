@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import * as WidgetPlugins from '../plugins'
+import * as WidgetPlugins from '../../../scripts/Widget/plugins'
 
 const Widget = ({ widget, ...rest }) => {
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
-  const Wrapper = WidgetPlugins[kind]
+  const Plugin = WidgetPlugins[kind]
 
   const { sm_size, md_size, lg_size } = widget
   const className = classnames(
@@ -18,9 +18,9 @@ const Widget = ({ widget, ...rest }) => {
 
   return (
     <div className={className}>
-      {Wrapper ?
-        <Wrapper {...rest} widget={widget} /> :
-        <span className="red">Widget {widget.kind} not found</span>
+      {Plugin ?
+        <Plugin {...rest} widget={widget} /> :
+        <span className="red">Widget {kind} not found</span>
       }
     </div>
   )

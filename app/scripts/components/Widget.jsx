@@ -7,7 +7,7 @@ import {
   Form as FormWidget,
   Match as MatchWidget,
   Donation as DonationWidget,
-  PressureWidget
+  Pressure as PressureWidget,
 } from '../Widget/plugins'
 
 const widgetStrategy = (kind, props) => {
