@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { isWidgetsLoaded } from '../../Widget/reducer'
-import { actions as WidgetActions } from '../../../modules/widgets'
 import { getMobilization } from '../MobilizationSelectors'
 import { setCurrentMobilizationId } from '../MobilizationActions'
 import { GoogleFontsLoader } from '../../../components/Fonts'
@@ -11,6 +9,10 @@ import {
   actions as BlockActions,
   selectors as BlockSelectors,
 } from '../../../modules/mobilizations/blocks'
+import {
+  actions as WidgetActions,
+  selectors as WidgetSelectors,
+} from '../../../modules/widgets'
 
 
 class MobilizationDashboardContainer extends React.Component {
@@ -30,7 +32,7 @@ class MobilizationDashboardContainer extends React.Component {
       const promise = store.dispatch(action)
       promises.push(promise)
     }
-    if (!isWidgetsLoaded(store.getState())) {
+    if (!WidgetSelectors.isLoaded(store.getState())) {
       const action = WidgetActions.asyncWidgetFetch(params.mobilization_id)
       const promise = store.dispatch(action)
       promises.push(promise)
