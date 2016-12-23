@@ -12,7 +12,7 @@ describe.skip('async-widget-fetch', () => {
     expect(request.method).to.equal('GET')
     request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widgets))
     expect(dispatch).to.have.been.calledWith(
-      createAction(t.SUCCESS_WIDGET_FETCH, widgets)
+      createAction(t.SUCCESS_ASYNC_WIDGET_FETCH, widgets)
     )
   })
 })

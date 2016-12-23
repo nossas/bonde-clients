@@ -12,12 +12,12 @@ describe.skip('async-widget-update', () => {
     expect(request.requestBody).to.equal(JSON.stringify({widget}))
     request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widget))
     expect(dispatch).to.have.been.calledWith({
-      type: t.SUCCESS_WIDGET_UPDATE,
+      type: t.SUCCESS_ASYNC_WIDGET_UPDATE,
       widget
     })
   })
 
-  describe('SUCCESS_WIDGET_UPDATE', () => {
+  describe('SUCCESS_ASYNC_WIDGET_UPDATE', () => {
     it('should return the edited widget', () => {
       const newContent = 'My widget content'
       const initialState = {
@@ -33,7 +33,7 @@ describe.skip('async-widget-update', () => {
         ]
       }
       const action = {
-        type: SUCCESS_WIDGET_UPDATE,
+        type: SUCCESS_ASYNC_WIDGET_UPDATE,
         widget: {
           id: 1,
           settings: { content: newContent }

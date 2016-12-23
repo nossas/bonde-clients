@@ -12,14 +12,14 @@ const asyncWidgetUpdate = widget => (dispatch, getState, axios) => {
   const body = { widget }
   const config = { headers: credentials }
 
-  dispatch({ type: t.REQUEST_WIDGET_UPDATE })
+  dispatch({ type: t.REQUEST_ASYNC_WIDGET_UPDATE })
   return axios.put(endpoint, body, config)
     .then(response => {
-      dispatch(createAction(t.SUCCESS_WIDGET_UPDATE, response.data))
+      dispatch(createAction(t.SUCCESS_ASYNC_WIDGET_UPDATE, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(t.FAILURE_WIDGET_UPDATE, failure))
+      dispatch(createAction(t.FAILURE_ASYNC_WIDGET_UPDATE, failure))
       Promise.reject({ _error: `Response ${failure}` })
     })
 }
