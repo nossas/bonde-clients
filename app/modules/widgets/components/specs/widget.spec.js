@@ -2,7 +2,8 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import Widget from './../../'
+import Widget from '../../../../modules/widgets/components'
+
 
 describe('app/scripts/Widget/components/Widget', () => {
   let widget
