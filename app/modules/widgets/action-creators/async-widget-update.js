@@ -18,9 +18,9 @@ const asyncWidgetUpdate = widget => (dispatch, getState, axios) => {
       dispatch(createAction(t.SUCCESS_WIDGET_UPDATE, response.data))
       return Promise.resolve()
     })
-    .catch(error => {
-      dispatch(createAction(t.FAILURE_WIDGET_UPDATE, error))
-      Promise.reject({ _error: `Response ${error}` })
+    .catch(failure => {
+      dispatch(createAction(t.FAILURE_WIDGET_UPDATE, failure))
+      Promise.reject({ _error: `Response ${failure}` })
     })
 }
 
