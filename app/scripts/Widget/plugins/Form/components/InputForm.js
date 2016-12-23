@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 import $ from 'jquery'
+
 import { Loading } from './'
-import { bindActionCreators } from 'redux'
-import * as WidgetActions from './../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 
 export default class InputForm extends React.Component {
@@ -60,14 +60,14 @@ export default class InputForm extends React.Component {
   }
 
   updateSettings(newFields) {
-    const { dispatch, mobilization, widget, auth: { credentials } } = this.props
+    const { dispatch, widget } = this.props
     const { settings } = widget
-    const { fields } = settings
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-    this.setState({ loading: true })
 
-    const data = { ...widget, settings: { ...settings, fields: newFields } }
-    bindedWidgetActions.editWidgetAsync(data)
+    this.setState({ loading: true })
+    dispatch(WidgetActions.asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, fields: newFields },
+    }))
   }
 
   handleCancel(event) {

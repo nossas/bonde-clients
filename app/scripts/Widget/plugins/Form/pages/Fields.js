@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import * as Paths from './../../../../Paths'
-import * as WidgetActions from './../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { Loading } from './../../../../components'
 import FormWidget from '../'
 import { Menu } from '../components'
@@ -38,28 +38,27 @@ class Fields extends Component {
   }
 
   addField(kind) {
-    const { mobilization, widget, credentials, editWidgetAsync, dispatch, ...props } = this.props
+    const { widget, asyncWidgetUpdate } = this.props
     const { settings } = widget
     const fields = this.fields()
-    this.setState({ loading: true })
 
-    const data = {
+    this.setState({ loading: true })
+    asyncWidgetUpdate({
       ...widget,
       settings: {
         ...settings,
         fields: [
           ...fields,
           {
-            uid: ('field-' + Date.now().toString() + '-' + Math.floor((Math.random() * 100) + 1)),
+            uid: `field-${Date.now().toString()}-${Math.floor((Math.random() * 100) + 1)}`,
             kind: 'text',
             label: '',
             placeholder: '',
-            required: 'false'
+            required: 'false',
           }
         ]
       }
-    }
-    editWidgetAsync(data)
+    })
   }
 
   renderFields() {
@@ -121,13 +120,7 @@ class Fields extends Component {
 Fields.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
-  editWidgetAsync: PropTypes.func.isRequired
+  asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default connect(
-(state, ownProps) => {
-  return {
-    credentials: state.auth.credentials,
-  }
-}, { ...WidgetActions })(Fields)
+export default connect(undefined, WidgetActions)(Fields)

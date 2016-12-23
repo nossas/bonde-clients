@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
-import * as WidgetActions from '../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { FormFooter } from '../../../components'
 import {
   FormRedux,
@@ -23,15 +23,19 @@ const FormPage = ({
     show_counter,
     show_city,
     count_text,
-    main_color
+    main_color,
   }
 }) => {
   const handleSubmit = values => {
-    const { widget, credentials, editWidgetAsync } = props
+    const { widget, asyncWidgetUpdate } = props
     const settings = widget.settings || {}
-    const data = { ...widget, settings: { ...settings, ...values } }
-    return editWidgetAsync(data)
+
+    return asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, ...values },
+    })
   }
+
   const {
     dispatch,
     mobilization: { color_scheme: colorScheme }
@@ -98,8 +102,8 @@ const FormPage = ({
 FormPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
-  editWidgetAsync: PropTypes.func.isRequired,
+  // Actions
+  asyncWidgetUpdate: PropTypes.func.isRequired,
   // Redux form
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -135,7 +139,6 @@ const mapStateToProps = (state, props) => ({
     main_color: '#f23392',
     ...props.widget.settings || {}
   },
-  credentials: state.auth.credentials
 })
 
 export default reduxForm({

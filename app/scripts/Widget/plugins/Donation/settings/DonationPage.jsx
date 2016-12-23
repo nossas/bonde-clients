@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { reduxForm } from 'redux-form'
 
 import * as WidgetActions from '../../../actions'
+import { actions as _WidgetActions } from '../../../../../modules/widgets'
 import * as Paths from '../../../../Paths'
 import { Loading } from '../../../../components'
 import Menu from '../components/settings/Menu.jsx'
@@ -22,10 +23,12 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../co
 class DonationPage extends React.Component {
 
   handleSubmit(values) {
-    const { widget, credentials, editWidgetAsync, ...props } = this.props
+    const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
-    const data = { ...widget, settings: { ...settings, ...values } }
-    return editWidgetAsync(data)
+    return asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, ...values },
+    })
   }
 
   render() {
@@ -198,4 +201,4 @@ export default reduxForm({
     ...ownProps.widget.settings || {}
   },
   credentials: state.auth.credentials,
-}), { ...WidgetActions })(DonationPage)
+}), { ...WidgetActions, ..._WidgetActions })(DonationPage)

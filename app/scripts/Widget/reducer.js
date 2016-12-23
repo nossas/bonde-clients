@@ -2,6 +2,7 @@ import superagent from 'superagent'
 
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
 import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
+import * as t from '../../modules/widgets/action-types'
 
 import {
   REQUEST_EDIT_WIDGET,
@@ -35,6 +36,8 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
+  let data
+
   switch (action.type) {
     case FETCH_WIDGETS_REQUEST:
       return {...state, loaded: false}
@@ -48,38 +51,32 @@ export default function reducer(state = initialState, action) {
       return {...state, loaded: true, data: action.result }
     case FAILURE_FIND_WIDGETS:
       return {...state, loaded: true}
+
     case REQUEST_EDIT_WIDGET:
-      return {
-        ...state,
-        saving: true
-      }
-    case REQUEST_FILL_WIDGET:
-      return {
-        ...state,
-        saving: true
-      }
+      return { ...state, saving: true }
     case SUCCESS_EDIT_WIDGET:
-      return {
-        ...state,
-        data: state.data.map(
-          widget => widget.id === action.widget.id ? action.widget : widget
-        ),
-        saving: false
-      }
+      data = state.data.map(widget => widget.id === action.widget.id ? action.widget : widget)
+      return { ...state, data, saving: false }
+    case FAILURE_EDIT_WIDGET:
+      return { ...state, saving: false, error: action.error }
+
+    case t.REQUEST_WIDGET_UPDATE:
+      return { ...state, saving: true }
+    case t.SUCCESS_WIDGET_UPDATE:
+      data = state.data.map(widget => widget.id === action.payload.id ? action.payload : widget)
+      return { ...state, data, saving: false }
+    case t.FAILURE_WIDGET_UPDATE:
+      return { ...state, saving: false, error: action.payload }
+
+    case REQUEST_FILL_WIDGET:
+      return { ...state, saving: true }
     case SUCCESS_FILL_WIDGET:
-      return {
-        ...state,
-        data: state.data.map(
-          widget => widget.id === action.counter.id ? {...widget, ...action.counter, filled: true} : widget
-        ),
-        saving: false
-      }
-    case FAILURE_EDIT_WIDGET, FAILURE_FILL_WIDGET:
-      return {
-        ...state,
-        saving: false,
-        error: action.error
-      }
+      data = state.data.map(widget => widget.id === action.counter.id ?
+        { ...widget, ...action.counter, filled: true } : widget
+      )
+      return { ...state, data, saving: false }
+    case FAILURE_FILL_WIDGET:
+      return { ...state, saving: false, error: action.error }
 
     case ADD_FORM_ENTRY:
       return {...state,

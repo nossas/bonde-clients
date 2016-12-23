@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
-import * as WidgetActions from './../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 import * as Paths from './../../../../Paths'
 import {
   FormRedux,
@@ -13,14 +13,17 @@ import {
 import { Menu } from './../components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
+
 class FormWidgetForm extends React.Component {
 
   handleSubmit(values) {
-    const { widget, credentials, editWidgetAsync, ...props } = this.props
+    const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
 
-    const data = { ...widget, settings: { ...settings, ...values } }
-    return editWidgetAsync(data)
+    return asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, ...values },
+    })
   }
 
   render() {
@@ -71,16 +74,18 @@ FormWidgetForm.propTypes = {
   error: PropTypes.string,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
+  // Actions
+  asyncWidgetUpdate: PropTypes.func.isRequired,
 }
 
 const fields = ['call_to_action', 'button_text', 'count_text']
 
-export default reduxForm({
-  form: 'widgetForm',
-  fields
-},
-(state, ownProps) => ({
-  initialValues: ownProps.widget.settings || {},
-  credentials: state.auth.credentials
-}), { ...WidgetActions })(FormWidgetForm)
+const mapStateToProps = (state, props) => ({
+  initialValues: props.widget.settings || {},
+})
+
+export default reduxForm(
+  { form: 'widgetForm', fields },
+  mapStateToProps,
+  WidgetActions
+)(FormWidgetForm)

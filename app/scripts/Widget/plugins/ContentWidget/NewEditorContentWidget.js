@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux'
 import classnames from 'classnames'
 
 import { Loading } from '../../../components'
-import * as WidgetActions from '../../actions'
-
+import { actions as WidgetActions } from '../../../../modules/widgets'
 import Editor from '../../../RebooEditor'
 
 import './scss/content-widget.scss'
@@ -49,11 +48,12 @@ export default class NewEditorContentWidget extends React.Component {
 
     if (settings.content !== rawContent) {
       const { dispatch, widget } = this.props
-      const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
       this.setState({ loading: true })
 
-      const data = { ...widget, settings: { content: JSON.stringify(rawContent) } }
-      bindedWidgetActions.editWidgetAsync(data)
+      dispatch(WidgetActions.asyncWidgetUpdate({
+        ...widget,
+        settings: { content: JSON.stringify(rawContent) },
+      }))
     }
   }
 

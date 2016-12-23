@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react'
+
+import { actions as WidgetActions } from '../../../../modules/widgets'
 import { Loading } from './'
-import { bindActionCreators } from 'redux'
-
-import * as WidgetActions from '../../actions'
 import { DraftWidgetButton } from './'
-
 import { createEditorContent } from '../../../RebooEditor'
 
 import './draft-widget.scss'
@@ -18,8 +16,7 @@ export class DraftWidget extends React.Component {
   }
 
   updateKind(kind) {
-    const { dispatch, auth, widget: widgetOriginal } = this.props
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+    const { dispatch, widget: widgetOriginal } = this.props
     let widget = { ...widgetOriginal, kind }
     let assignments = {}
 
@@ -52,7 +49,7 @@ export class DraftWidget extends React.Component {
     }
     Object.assign(widget, assignments)
     this.setState({ loading: true })
-    bindedWidgetActions.editWidgetAsync(widget)
+    dispatch(WidgetActions.asyncWidgetUpdate(widget))
   }
 
   render() {

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 
 import * as Paths from '../../../../Paths'
 import * as WidgetActions from '../../../actions'
+import { actions as _WidgetActions } from '../../../../../modules/widgets'
 import { Page, AddChoiceForm } from '../components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
@@ -72,17 +73,12 @@ class ChoicesPage extends React.Component {
     if (e) e.preventDefault()
 
     const widget = this.widget()
-    const { dispatch, mobilization, auth } = this.props
-    const {
-      title_text,
-      labela, choicesa,
-      labelb, choicesb,
-    } = this.state
-
+    const { dispatch, mobilization } = this.props
+    const { title_text, labela, choicesa, labelb, choicesb } = this.state
     const { validForm, errors } = this.isValidForm()
+
     if (validForm) {
-      const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-      bindedWidgetActions.editWidgetAsync({
+      dispatch(_WidgetActions.asyncWidgetUpdate({
         ... widget,
         settings: {
           title_text,
@@ -91,13 +87,13 @@ class ChoicesPage extends React.Component {
           labelChoicesA: labelb,
           choicesA: choicesb.toString(),
         }
-      })
+      }))
       this.setState({ choicesChanged: false })
       this.context.router.transitionTo(
         Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
       )
     } else {
-      this.setState({errors: errors})
+      this.setState({ errors })
     }
   }
 

@@ -4,24 +4,18 @@ import { reduxForm } from 'redux-form'
 //
 // TODO: The DonationWidgetMenu needs to be refactored to modularized structure.
 // This is required to "abstract" the strategy of which Menu is needs to be shown.
-// And remove the conditions in lines between 48 and 53. May be isolate it in container.
+// And remove the conditions in lines between 45 and 50. May be isolate it in a container.
 //
 import { Loading } from '../../components'
 import { Menu as FormWidgetMenu } from '../plugins/Form/components'
 import { Menu as PressureWidgetMenu } from '../plugins/PressureWidget/components/settings'
 import { Menu as DonationWidgetMenu } from '../plugins/Donation/components/settings'
-
 import * as validator from '../../../util/validation-helper'
-import * as WidgetActions from '../actions'
-import {
-  FormRedux,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from '../../Dashboard/Forms'
+import { actions as WidgetActions } from '../../../modules/widgets'
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../Dashboard/Forms'
 import { SettingsPageContentLayout } from '../../../components/Layout'
 
-const AutoFireFormPage = (props) => {
+const AutoFireFormPage = props => {
   const {
     fields: {
       sender_name: senderName,
@@ -32,15 +26,16 @@ const AutoFireFormPage = (props) => {
     widgets,
     widget,
     mobilization,
-    credentials,
-    editWidgetAsync,
-    ...rest
+    asyncWidgetUpdate,
+    ...rest,
   } = props
 
   const handleSubmit = values => {
     const settings = widget.settings || {}
-    const data = { ...widget, settings: { ...settings, ...values } }
-    return editWidgetAsync(data)
+    return asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, ...values },
+    })
   }
 
   return (
@@ -99,7 +94,9 @@ const AutoFireFormPage = (props) => {
 }
 
 AutoFireFormPage.propTypes = {
-  fields: PropTypes.object.isRequired
+  fields: PropTypes.object.isRequired,
+  // Actions
+  asyncWidgetUpdate: PropTypes.func.isRequired,
 }
 
 const fields = ['sender_name', 'sender_email', 'email_subject', 'email_text']
@@ -115,11 +112,12 @@ const validate = values => {
   return errors
 }
 
+const mapStateToProps = (state, props) => ({
+  initialValues: props.widget.settings || {}
+})
+
 export default reduxForm({
   form: 'widgetForm',
   fields,
   validate
-},
-(state, ownProps) => ({
-  initialValues: ownProps.widget.settings || {}
-}), { ...WidgetActions })(AutoFireFormPage)
+}, mapStateToProps, WidgetActions)(AutoFireFormPage)

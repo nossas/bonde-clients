@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
-import * as WidgetActions from '../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { FormFooter, InputTag } from '../../../components'
 import {
   FormRedux,
@@ -32,12 +32,14 @@ class EmailPage extends Component {
   }
 
   handleSubmit(values) {
-    const { widget, credentials, editWidgetAsync, ...props } = this.props
-    const targets = this.getTargetString()
+    const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
+    const targets = this.getTargetString()
 
-    const data = { ...widget, settings: { ...settings, ...values, targets } }
-    return editWidgetAsync(data)
+    return asyncWidgetUpdate({
+      ...widget,
+      settings: { ...settings, ...values, targets },
+    })
   }
 
   render() {
@@ -93,8 +95,8 @@ class EmailPage extends Component {
 EmailPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
-  editWidgetAsync: PropTypes.func.isRequired,
+  // Actions
+  asyncWidgetUpdate: PropTypes.func.isRequired,
   // Redux form
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -114,15 +116,15 @@ const validate = values => {
   return errors
 }
 
-export default reduxForm({
-  form: 'widgetForm',
-  fields,
-  validate
-},
-(state, ownProps) => ({
+const mapStateToProps = (state, props) => ({
   initialValues: {
-    ...ownProps.widget.settings || {},
-    targets: ownProps.widget.settings && ownProps.widget.settings.targets
+    ...props.widget.settings || {},
+    targets: props.widget.settings && props.widget.settings.targets
   },
-  credentials: state.auth.credentials,
-}), { ...WidgetActions })(EmailPage)
+})
+
+export default reduxForm(
+  { form: 'widgetForm', fields, validate },
+  mapStateToProps,
+  WidgetActions
+)(EmailPage)

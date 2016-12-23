@@ -5,7 +5,7 @@ import $ from 'jquery'
 import classnames from 'classnames'
 
 import { WYSIHTMLToolbar, Loading } from '../../../components'
-import * as WidgetActions from '../../actions'
+import { actions as WidgetActions } from '../../../../modules/widgets'
 
 export default class OldEditorContentWidget extends React.Component {
 
@@ -102,12 +102,13 @@ export default class OldEditorContentWidget extends React.Component {
     this.disableEditor()
 
     if (hasChanged) {
-      const { dispatch, widget, mobilization, auth: { credentials } } = this.props
-      const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
-      this.setState({loading: true})
+      const { dispatch, widget } = this.props
 
-      const data = { ...widget, settings: { content: this.state.editor.getValue() } }
-      bindedWidgetActions.editWidgetAsync(data)
+      this.setState({loading: true})
+      dispatch(WidgetActions.asyncWidgetUpdate({
+        ...widget,
+        settings: { content: this.state.editor.getValue() },
+      }))
     }
   }
 
