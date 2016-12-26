@@ -1,6 +1,6 @@
 import * as t from './actionTypes'
 import superagent from 'superagent'
-import download from 'downloadjs'
+import downloadjs from 'downloadjs'
 
 export const select = id => dispatch => {
   return dispatch({ type: t.SELECT, id })
@@ -39,28 +39,22 @@ export const edit = ({ id, ...community }) => (dispatch, getState, request) => {
     .catch(error => Promise.reject(error))
 }
 
-export const downloadActivists = ({ id, ...community }) => (dispatch, getState, request) => {
+export const downloadActivists = ({ id, name, ...community }) => (dispatch, getState, request) => {
   const { auth: { credentials } } = getState()
-  superagent
-    .get(`${process.env.API_URL}/communities/9/activists.csv`, { community_id : id})
-    .set(credentials)
-    .end((err, res) => {
-      console.log(res)
-      if (err) console.log(err)
-      else download(res.body, 'arquivo.csv', 'text/csv')
-    })
 
-  // return request
-  //   .get(`/communities/${id}/activists.csv`, { headers: credentials })
-  //   .then(({ status, data }) => {
-  //     if (status === 400 && data.errors) {
-  //       return Promise.reject({ ...data.errors })
-  //     } else if (status === 200) {
-  //       download(data, 'text/csv', 'arquivo.csv')
-  //       return Promise.resolve()
-  //     }
-  //   })
-  //   .catch(error => Promise.reject(error))
+  return request
+    .get(`/communities/${id}/activists.csv`, { headers: credentials })
+    .then(({ status, data }) => {
+      if (status === 400 && data.errors) {
+        return Promise.reject({ ...data.errors })
+      } else if (status === 200) {
+          if (data.length > 0) {
+              downloadjs(new Blob([data]), `relatorio-ativistas-${name}.csv`,  'text/csv')
+            return Promise.resolve()
+          }
+      }
+    })
+    .catch(error => Promise.reject(error))
 }
 
 export const fetch = credentials => dispatch => {

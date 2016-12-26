@@ -17,8 +17,8 @@ import { FloatLayout } from '../../Dashboard/Grids'
 
 class InfoPage extends Component {
 
-  onClickItem(id) {
-    this.props.downloadActivists(id)
+  onClickItem(community) {
+    this.props.downloadActivists(community)
   }
 
   render() {
@@ -43,9 +43,8 @@ class InfoPage extends Component {
         </FormGroup>
 
         <ForceDownloadViaAjax
-          href="/communities/${id}/activists.csv"
           title="Baixar resumo de ações dos ativistas"
-          onClick={this.onClickItem.bind(this)} community={community}
+          onClick={this.onClickItem.bind(this, community)}
         />
 
         <FloatLayout position="floatTopRight">
