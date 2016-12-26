@@ -1,4 +1,4 @@
-export default () => [
+export default (filter_reduce) => [
   {"code": "654", "name": "Banco A.J.Renner S.A."},
   {"code": "246", "name": "Banco ABC Brasil S.A."},
   {"code": "025", "name": "Banco Alfa S.A."},
@@ -175,4 +175,4 @@ export default () => [
   {"code": "230", "name": "Unicard Banco Múltiplo S.A."},
   {"code": "091-4", "name": "Unicred Central do Rio Grande do Sul"},
   {"code": "084", "name": "Unicred Norte do Paraná"}
-]
+].filter(filter_reduce)

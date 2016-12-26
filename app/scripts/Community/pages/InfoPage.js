@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
-import { edit } from '../actions'
+import { edit, downloadActivists } from '../actions'
 
+import ForceDownloadViaAjax from '../components/ForceDownloadViaAjax'
 import {
   FormRedux,
   SubmitButton,
@@ -16,8 +17,12 @@ import { FloatLayout } from '../../Dashboard/Grids'
 
 class InfoPage extends Component {
 
+  onClickItem(community) {
+    this.props.downloadActivists(community)
+  }
+
   render() {
-    const { fields: { image, name, city, description }, ...formProps } = this.props
+    const { community, fields: { image, name, city, description }, ...formProps } = this.props
 
     return (
       <FormRedux nosubmit {...formProps}>
@@ -36,6 +41,11 @@ class InfoPage extends Component {
           <ControlLabel>Cidade</ControlLabel>
           <FormControl type="text" />
         </FormGroup>
+
+        <ForceDownloadViaAjax
+          title="Baixar resumo de ações dos ativistas"
+          onClick={this.onClickItem.bind(this, community)}
+        />
 
         <FloatLayout position="floatTopRight">
           <SubmitButton>Salvar</SubmitButton>
@@ -64,7 +74,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     initialValues: {
       ...ownProps.community
-    },
+    }
   }
 }
 
@@ -72,4 +82,4 @@ export default reduxForm({
   form: 'editCommunityForm',
   fields,
   validate
-}, mapStateToProps, { submit: edit })(InfoPage)
+}, mapStateToProps, { submit: edit, downloadActivists })(InfoPage)

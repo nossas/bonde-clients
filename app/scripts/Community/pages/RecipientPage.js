@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
+import { generateValidation } from 'redux-form-validation'
 
 import {
   FormRedux,
@@ -63,7 +64,7 @@ class RecipientPage extends Component {
                 <ControlLabel>Banco</ControlLabel>
                 <FormControl componentClass="select">
                   <option value="">Selecione o banco</option>
-                  {getCodeBanks().map(bank => (
+                  {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3).map(bank => (
                     <option value={bank.code}>{`${bank.code} - ${bank.name}`}</option>
                   ))}
                 </FormControl>
@@ -141,6 +142,72 @@ const fields = [
   'recipient.bank_account.document_number',
 ]
 
+const validate = values => {
+  const errors = { recipient: { bank_account: {} } }
+  const {
+    recipient: {
+      transfer_day,
+      bank_account: {
+        bank_code,
+        agencia,
+        agencia_dv,
+        conta,
+        conta_dv,
+        type,
+        legal_name,
+        document_number
+      }
+    }
+  } = values
+
+  if (!transfer_day) {
+    errors.recipient.transfer_day = 'Campo obrigatório'
+  }
+
+  if (!bank_code) {
+    errors.recipient.bank_account.bank_code = 'Campo obrigatório'
+
+  }
+
+  if (!agencia) {
+    errors.recipient.bank_account.agencia = 'Campo obrigatório'
+  } else if (agencia.length > 5) {
+    errors.recipient.bank_account.agencia = 'Deve conter no máximo 5 digitos'
+  }
+  if (agencia_dv && agencia_dv.length > 1) {
+    errors.recipient.bank_account.agencia_dv = 'Deve conter apenas 1 digito'
+  }
+
+  if (!conta) {
+    errors.recipient.bank_account.conta = 'Campo obrigatório'
+  } else if (conta.length > 13) {
+    errors.recipient.bank_account.conta = 'Deve conter no máximo 13 digitos'
+  }
+  if (!conta_dv) {
+    errors.recipient.bank_account.conta_dv = 'Campo obrigatório'
+  } else if (conta_dv.length > 2) {
+    errors.recipient.bank_account.conta_dv = 'Deve conter no máximo 2 caracteres'
+  }
+
+  if (!type) {
+    errors.recipient.bank_account.type = 'Campo obrigatório'
+  }
+
+  if (!legal_name) {
+    errors.recipient.bank_account.legal_name = 'Campo obrigatório'
+  }
+
+  if (!document_number) {
+    errors.recipient.bank_account.document_number = 'Campo obrigatório'
+  } else if (document_number.length > 11 && document_number.length !== 14) {
+    errors.recipient.bank_account.document_number = 'CNPJ deve conter 14 digitos'
+  } else if (document_number.length < 11) {
+    errors.recipient.bank_account.document_number = 'CPF deve conter 11 digitos'
+  }
+
+  return errors
+}
+
 const mapStateToProps = (state, ownProps) => {
 
   const { community: { id, recipient } } = ownProps
@@ -161,7 +228,8 @@ const mapStateToProps = (state, ownProps) => {
 
 export default reduxForm({
   form: 'recipientForm',
-  fields
+  fields,
+  validate
 }, mapStateToProps, { submit: edit })(RecipientPage)
 
 /*"transfer_interval": "weekly",
