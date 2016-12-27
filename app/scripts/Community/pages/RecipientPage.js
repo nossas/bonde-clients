@@ -82,13 +82,13 @@ class RecipientPage extends Component {
           </div>
           <div className="flex flex-wrap">
             <div className="col col-10 pr1">
-              <FormGroup controlId="bankAgencyId" {...bank_account.agencia}>
+              <FormGroup controlId="bankAgencyId" {...bank_account.agency}>
                 <ControlLabel>Agência</ControlLabel>
                 <FormControl type="text" />
               </FormGroup>
             </div>
             <div className="col col-2">
-              <FormGroup controlId="bankAgencyDvId" {...bank_account.agencia_dv}>
+              <FormGroup controlId="bankAgencyDvId" {...bank_account.agency_dig}>
                 <ControlLabel>Digíto</ControlLabel>
                 <FormControl type="text" />
               </FormGroup>
@@ -96,13 +96,13 @@ class RecipientPage extends Component {
           </div>
           <div className="flex flex-wrap">
             <div className="col col-10 pr1">
-              <FormGroup controlId="bankAccountId" {...bank_account.conta}>
+              <FormGroup controlId="bankAccountId" {...bank_account.account}>
                 <ControlLabel>Conta</ControlLabel>
                 <FormControl type="text" />
               </FormGroup>
             </div>
             <div className="col col-2">
-              <FormGroup controlId="bankAccountDvId" {...bank_account.conta_dv}>
+              <FormGroup controlId="bankAccountDvId" {...bank_account.account_dig}>
                 <ControlLabel>Digíto</ControlLabel>
                 <FormControl type="text" />
               </FormGroup>
@@ -133,10 +133,10 @@ const fields = [
   'recipient.transfer_day',
   'recipient.transfer_enabled',
   'recipient.bank_account.bank_code',
-  'recipient.bank_account.agencia',
-  'recipient.bank_account.agencia_dv',
-  'recipient.bank_account.conta',
-  'recipient.bank_account.conta_dv',
+  'recipient.bank_account.agency',
+  'recipient.bank_account.agency_dig',
+  'recipient.bank_account.account',
+  'recipient.bank_account.account_dig',
   'recipient.bank_account.type',
   'recipient.bank_account.legal_name',
   'recipient.bank_account.document_number',
@@ -149,8 +149,8 @@ const validate = values => {
       transfer_day,
       bank_account: {
         bank_code,
-        agencia,
-        agencia_dv,
+        agency,
+        agency_dig,
         conta,
         conta_dv,
         type,
@@ -169,24 +169,24 @@ const validate = values => {
 
   }
 
-  if (!agencia) {
-    errors.recipient.bank_account.agencia = 'Campo obrigatório'
-  } else if (agencia.length > 5) {
-    errors.recipient.bank_account.agencia = 'Deve conter no máximo 5 digitos'
+  if (!agency) {
+    errors.recipient.bank_account.agency = 'Campo obrigatório'
+  } else if (agency.length > 5) {
+    errors.recipient.bank_account.agency = 'Deve conter no máximo 5 digitos'
   }
-  if (agencia_dv && agencia_dv.length > 1) {
-    errors.recipient.bank_account.agencia_dv = 'Deve conter apenas 1 digito'
+  if (agency_dig && agency_dig.length > 1) {
+    errors.recipient.bank_account.agency_dig = 'Deve conter apenas 1 digito'
   }
 
   if (!conta) {
-    errors.recipient.bank_account.conta = 'Campo obrigatório'
+    errors.recipient.bank_account.account = 'Campo obrigatório'
   } else if (conta.length > 13) {
-    errors.recipient.bank_account.conta = 'Deve conter no máximo 13 digitos'
+    errors.recipient.bank_account.account = 'Deve conter no máximo 13 digitos'
   }
   if (!conta_dv) {
-    errors.recipient.bank_account.conta_dv = 'Campo obrigatório'
+    errors.recipient.bank_account.account_dig = 'Campo obrigatório'
   } else if (conta_dv.length > 2) {
-    errors.recipient.bank_account.conta_dv = 'Deve conter no máximo 2 caracteres'
+    errors.recipient.bank_account.account_dig = 'Deve conter no máximo 2 caracteres'
   }
 
   if (!type) {
@@ -231,17 +231,3 @@ export default reduxForm({
   fields,
   validate
 }, mapStateToProps, { submit: edit })(RecipientPage)
-
-/*"transfer_interval": "weekly",
-      "transfer_day": 5,
-      "transfer_enabled": true,
-      "recipient": {
-          :bank_code => '237',
-          :agencia => '1935',
-          :agencia_dv => '9',
-          :conta => '23398',
-          :conta_dv => '9',
-          :type => 'conta_corrente',
-          :legal_name => 'foo bar loem',
-          :document_number => '111.111.111-11'
-        }*/
