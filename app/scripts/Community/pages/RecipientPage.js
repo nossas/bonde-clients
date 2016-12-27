@@ -151,8 +151,8 @@ const validate = values => {
         bank_code,
         agency,
         agency_dig,
-        conta,
-        conta_dv,
+        account,
+        account_dig,
         type,
         legal_name,
         document_number
@@ -178,14 +178,14 @@ const validate = values => {
     errors.recipient.bank_account.agency_dig = 'Deve conter apenas 1 digito'
   }
 
-  if (!conta) {
+  if (!account) {
     errors.recipient.bank_account.account = 'Campo obrigatório'
-  } else if (conta.length > 13) {
+  } else if (account.length > 13) {
     errors.recipient.bank_account.account = 'Deve conter no máximo 13 digitos'
   }
-  if (!conta_dv) {
+  if (!account_dig) {
     errors.recipient.bank_account.account_dig = 'Campo obrigatório'
-  } else if (conta_dv.length > 2) {
+  } else if (account_dig.length > 2) {
     errors.recipient.bank_account.account_dig = 'Deve conter no máximo 2 caracteres'
   }
 
