@@ -112,7 +112,7 @@ BlockDropdownMenu.propTypes = {
     canMoveUp: PropTypes.bool,
     canMoveDown: PropTypes.bool,
     mobilization: PropTypes.object,
-    blocks: PropTypes.object,
+    blocks: PropTypes.array,
     block: PropTypes.shape({
       hidden: PropTypes.bool,
     }),

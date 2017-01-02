@@ -95,7 +95,7 @@ class Block extends Component {
 
 Block.propTypes = {
   block: PropTypes.object.isRequired,
-  widgets: PropTypes.object.isRequired,
+  widgets: PropTypes.array.isRequired,
   dispatch: PropTypes.func,
 }
 

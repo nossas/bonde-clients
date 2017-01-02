@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
 
 import { Navbar } from './navbar'
-import { Block } from '../../../scripts/components'
+import Block from '../../mobilizations/blocks/components'
 
 
 const Mobilization = props => {
@@ -21,7 +21,8 @@ const Mobilization = props => {
     },
     blocks,
     widgets,
-    editable
+    editable,
+    blockEditionMode,
   } = props
 
   const themeClassName = `${color_scheme} ${header_font}-header ${body_font}-body`
@@ -32,12 +33,14 @@ const Mobilization = props => {
 
   return (
     <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
-      <Navbar blocks={blocks} editable={editable} />
+      {!blockEditionMode && (
+        <Navbar blocks={blocks} editable={editable} />
+      )}
       {/* render blocks */}
       <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
         {visibleBlocks.map((block, index) => (
           <Block
-            key={'block-' + block.id}
+            key={`block-${block.id}`}
             editable={editable}
             block={block}
             canMoveUp={index !== 0}
@@ -69,7 +72,8 @@ Mobilization.propTypes = {
   editable: PropTypes.bool.isRequired,
   mobilization: PropTypes.object.isRequired,
   blocks: PropTypes.array.isRequired,
-  widgets: PropTypes.array.isRequired
+  widgets: PropTypes.array.isRequired,
+  blockEditionMode: PropTypes.bool,
 }
 
 Mobilization.defaultProps = {

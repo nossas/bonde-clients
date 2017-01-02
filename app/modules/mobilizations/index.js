@@ -1,7 +1,2 @@
-import blocks from './blocks'
-import * as selectors from './selectors'
-
-export default {
-  blocks,
-  selectors
-}
+export { default as blocks } from './blocks'
+export { default as selectors } from './selectors'

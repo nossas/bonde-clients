@@ -10,6 +10,7 @@ import { fetchWidgets } from '../../Widget/reducer'
 
 import { Mobilization } from '../../../modules/mobilizations/components'
 import * as MobilizationActions from '../MobilizationActions'
+import Block from '../../../modules/mobilizations/blocks/components'
 
 @reactMixin.decorate(Navigation)
 class EditMobilizationPage extends Component {
@@ -59,7 +60,14 @@ class EditMobilizationPage extends Component {
   renderBlocks() {
     const { blocks, widgets } = this.props
     // Override blocks and widgets to list
-    return <Mobilization {...this.props} blocks={blocks.data} widgets={widgets.data} editable={true} />
+    return (
+      <Mobilization
+        {...this.props}
+        blocks={blocks.data}
+        widgets={widgets.data}
+        editable={true}
+      />
+    )
   }
 
   renderLoader() {
@@ -81,7 +89,6 @@ EditMobilizationPage.propTypes = {
   params: PropTypes.object.isRequired,
   scrolledToBottom: PropTypes.bool.isRequired,
   widgetsCount: PropTypes.number,
-  mobilizationEditor: PropTypes.object.isRequired,
   // actions
   setCurrentMobilizationId: PropTypes.func
 }
@@ -92,7 +99,7 @@ EditMobilizationPage.defaultProps = {
 
 const mapStateToProps = state => ({
   widgetsCount: state.widgets.length,
-  mobilizationEditor: state.mobilizationEditor
+  blockEditionMode: state.blocks.editionMode,
 })
 
 export default connect(mapStateToProps, MobilizationActions)(EditMobilizationPage)

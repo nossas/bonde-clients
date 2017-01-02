@@ -5,7 +5,7 @@ const asyncBlockMoveUp = ({ block, blocks, mobilization }) => (dispatch, getStat
   const { auth: { credentials } } = getState()
 
   const endpoint = `/mobilizations/${mobilization.id}/blocks/${block.id}`
-  const body = { block: { position: blocks.data[blocks.data.indexOf(block) - 1].position } }
+  const body = { block: { position: blocks[blocks.indexOf(block) - 1].position } }
   const config = { headers: credentials }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_MOVE_UP })
