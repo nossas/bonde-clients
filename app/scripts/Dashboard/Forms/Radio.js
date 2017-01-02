@@ -7,13 +7,18 @@ class Radio extends Component {
     const id = `radio-${value}-id`
     const current = {
       horizontal: { classes: 'pr2' },
-      vertical: { classes: 'block' }
+      vertical: { classes: 'block pb1' }
     }[alignment]
+
+    const style = { cursor: 'pointer' }
+    if (alignment === 'vertical') {
+      style.display = 'block'
+    }
 
     return (
       <label
         className={classnames('form-radio', className, current.classes)}
-        style={{ cursor: 'pointer' }}
+        style={style}
         htmlFor={id}
       >
         <input

@@ -5367,6 +5367,13 @@ redux-devtools@^3.3.1:
     redux "^3.5.2"
     redux-devtools-instrument "^1.0.1"
 
+redux-form-validation@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/redux-form-validation/-/redux-form-validation-0.0.8.tgz#db1d638fbb195a3f9a5e06f3103bbb93157ff57f"
+  dependencies:
+    is-promise "^2.1.0"
+    valid-url "^1.0.9"
+
 redux-form@^5.3.2:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-5.3.3.tgz#e65e995095c739f068a7c2adfd8229d966a43af8"
@@ -6337,6 +6344,10 @@ uuid@^2.0.2, uuid@^2.0.3:
 uuid@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.0.tgz#6728fc0459c450d796a99c31837569bdf672d728"
+
+valid-url@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/valid-url/-/valid-url-1.0.9.tgz#1c14479b40f1397a75782f115e4086447433a200"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"

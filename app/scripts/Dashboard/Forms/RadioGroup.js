@@ -7,12 +7,17 @@ class RadioGroup extends Component {
   render() {
     const formGroup = this.context.$formGroup
     const { value, ...field } = formGroup || {}
-    const { children, className } = this.props
+    const { children, className, layout } = this.props
 
     return (
       <p className={classnames("mt1", className)}>
         {children && children.map((child, index) => {
-          return React.cloneElement(child, { key: `radio-${index}`, checked: value, ...field })
+          return React.cloneElement(child, {
+            key: `radio-${index}`,
+            checked: value,
+            alignment: layout,
+            ...field
+          })
         })}
       </p>
     )
