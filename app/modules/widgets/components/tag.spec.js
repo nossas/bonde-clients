@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Tag } from '../../components'
+import { Tag } from '../../../modules/widgets/components'
 
 
 describe('<Tag />', () => {
