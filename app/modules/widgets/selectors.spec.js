@@ -1,12 +1,10 @@
 import { expect } from 'chai'
 
-import * as WidgetSelectors from '../WidgetSelectors'
+import { selectors as WidgetSelectors } from '../../modules/widgets'
 
 
-describe('WidgetSelectors', () => {
-
+describe('app/modules/widgets/selectors', () => {
   context('#getWidget', () => {
-
     it('should return widget to params url widget_id', () => {
       // Url params in props
       const props = { params: { widget_id: 2 } }

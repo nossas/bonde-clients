@@ -1,26 +1,25 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import * as Paths from '../../Paths'
-import * as WidgetSelectors from '../WidgetSelectors'
+import { selectors as WidgetSelectors } from '../../../modules/widgets'
 import { SettingsPageLayout } from '../../../components/Layout'
 
-export const Settings = ({ children, ...rest }) => (
+export const SettingsContainer = ({ children, ...rest }) => (
   <SettingsPageLayout>
     {children && React.cloneElement(children, {...rest})}
   </SettingsPageLayout>
 )
 
-Settings.propTypes = {
+SettingsContainer.propTypes = {
   children: PropTypes.object,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   credentials: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  widget: WidgetSelectors.getWidget(state, ownProps),
+const mapStateToProps = (state, props) => ({
+  widget: WidgetSelectors.getWidget(state, props),
   credentials: state.auth.credentials
 })
 
-export default connect(mapStateToProps)(Settings)
+export default connect(mapStateToProps)(SettingsContainer)
