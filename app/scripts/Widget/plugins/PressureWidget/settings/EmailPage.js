@@ -2,14 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 import { actions as WidgetActions } from '../../../../../modules/widgets'
-import { FormFooter } from '../../../../../modules/widgets/components'
-import { InputTag } from '../../../components'
-import {
-  FormRedux,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from '../../../../Dashboard/Forms'
+import { FormFooter, InputTag } from '../../../../../modules/widgets/components'
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../../Dashboard/Forms'
 import { Base as PressureBase } from '../components/settings'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 

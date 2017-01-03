@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import { BlockTag } from '../../../modules/widgets/components'
 
+
 class InputTag extends Component {
 
   constructor(props) {
