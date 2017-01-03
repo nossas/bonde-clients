@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import Tag from './Tag'
+import Tag from '../../../scripts/Widget/components/Tag'
 
 const BlockTag = (props) => {
   const { tags, ...rest } = props

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
-import BlockTag from './BlockTag'
+import { BlockTag } from '../../../modules/widgets/components'
 
 class InputTag extends Component {
 
