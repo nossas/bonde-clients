@@ -1,17 +1,17 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import {
   exportDataClipByEndpoint,
   mountExportDataclip
-} from '../actions/ExportActions'
-import { Loading } from '../components'
-import { Menu as FormWidgetMenu } from './../Widget/plugins/Form/components'
-import { Menu as DonationWidgetMenu } from '../Widget/plugins/Donation/components/settings'
-import { SettingsPageLayout, SettingsPageContentLayout } from '../../components/Layout'
+} from '../../../scripts/actions/ExportActions'
+import { Loading } from '../../../scripts/components'
+import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
+import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
+import { SettingsPageLayout, SettingsPageContentLayout } from '../../../components/Layout'
 
-class ExportWidgetData extends React.Component {
+class DataExportPage extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -186,4 +186,4 @@ const mapActionCreators = {
   mountExportDataclip
 }
 
-export default connect(mapStateToProps, mapActionCreators)(ExportWidgetData)
+export default connect(mapStateToProps, mapActionCreators)(DataExportPage)
