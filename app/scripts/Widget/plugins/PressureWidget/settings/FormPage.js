@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 import { actions as WidgetActions } from '../../../../../modules/widgets'
-import { FormFooter } from '../../../components'
+import { FormFooter } from '../../../../../modules/widgets/components'
 import {
   FormRedux,
   FormGroup,

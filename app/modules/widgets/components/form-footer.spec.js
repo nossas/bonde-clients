@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 
 
-import { FormFooter } from '../../components'
+import { FormFooter } from '../../../modules/widgets/components'
 
 
 describe('<FormFooter />', () => {

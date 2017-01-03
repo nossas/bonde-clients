@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 import { actions as WidgetActions } from '../../../../../modules/widgets'
-import { FormFooter, InputTag } from '../../../components'
+import { FormFooter } from '../../../../../modules/widgets/components'
+import { InputTag } from '../../../components'
 import {
   FormRedux,
   FormGroup,
