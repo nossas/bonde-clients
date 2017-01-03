@@ -21,6 +21,7 @@ import {
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
 import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
+import newStructureWidgetCreateRoutes from '../../modules/widgets/routes'
 
 
 export default requiredLogin => (
@@ -34,6 +35,7 @@ export default requiredLogin => (
       <Route path="/edit" component={EditMobilizationPage} />
       {blocksCreateRoutes()}
       {widgetCreateRoutes()}
+      {newStructureWidgetCreateRoutes()}
       <Route component={MobilizationSettingsContainer}>
         <Route path="/basics" component={MobilizationBasicsEditFormPage} />
         <Route path="/analytics" component={MobilizationAnalyticsPage} />

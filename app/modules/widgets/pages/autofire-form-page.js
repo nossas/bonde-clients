@@ -6,16 +6,16 @@ import { reduxForm } from 'redux-form'
 // This is required to "abstract" the strategy of which Menu is needs to be shown.
 // And remove the conditions in lines between 45 and 50. May be isolate it in a container.
 //
-import { Loading } from '../../components'
-import { Menu as FormWidgetMenu } from '../plugins/Form/components'
-import { Menu as PressureWidgetMenu } from '../plugins/PressureWidget/components/settings'
-import { Menu as DonationWidgetMenu } from '../plugins/Donation/components/settings'
+import { Loading } from '../../../scripts/components'
+import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
+import { Menu as PressureWidgetMenu } from '../../../scripts/Widget/plugins/PressureWidget/components/settings'
+import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 import * as validator from '../../../util/validation-helper'
 import { actions as WidgetActions } from '../../../modules/widgets'
-import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../Dashboard/Forms'
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../scripts/Dashboard/Forms'
 import { SettingsPageContentLayout } from '../../../components/Layout'
 
-const AutoFireFormPage = props => {
+const AutofireFormPage = props => {
   const {
     fields: {
       sender_name: senderName,
@@ -93,7 +93,7 @@ const AutoFireFormPage = props => {
   )
 }
 
-AutoFireFormPage.propTypes = {
+AutofireFormPage.propTypes = {
   fields: PropTypes.object.isRequired,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired,
@@ -120,4 +120,4 @@ export default reduxForm({
   form: 'widgetForm',
   fields,
   validate
-}, mapStateToProps, WidgetActions)(AutoFireFormPage)
+}, mapStateToProps, WidgetActions)(AutofireFormPage)

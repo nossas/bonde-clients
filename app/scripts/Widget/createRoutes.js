@@ -8,10 +8,6 @@ import {
   ExportWidgetData
 } from '../pages'
 
-import {
-  AutoFireFormPage
-} from './settings'
-
 import { createRoutes as matchCreateRoutes } from './plugins/Match'
 import { createRoutes as pressureCreateRoutes } from './plugins/PressureWidget'
 import { createRoutes as formCreateRoutes } from './plugins/Form'
@@ -26,7 +22,6 @@ export default () => (
     {formCreateRoutes()}
     {matchCreateRoutes()}
     {donationCreateRoutes()}
-    <Route path="/autofire" component={AutoFireFormPage} />
     <Route path="/export" component={ExportWidgetData} />
     <Route path="/donation" component={DonationWidgetSettings} />
   </Route>
