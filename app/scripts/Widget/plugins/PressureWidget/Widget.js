@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import * as Paths from '../../../Paths'
-import { OverlayWidget } from '../../components'
+import { WidgetOverlay } from '../../../../modules/widgets/components'
 import { PressureForm, TargetList, PressureCount } from './components'
 import { TellAFriend } from '../../../components'
 import { fillWidget } from '../../actions'
@@ -78,7 +78,7 @@ export class PressureWidget extends Component {
     }
 
     return (
-      <OverlayWidget
+      <WidgetOverlay
         editable={editable}
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de pressão direta"
@@ -117,7 +117,7 @@ export class PressureWidget extends Component {
             </PressureForm>
           </div>
         )}
-      </OverlayWidget>
+      </WidgetOverlay>
     )
   }
 }

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-import './scss/overlay.scss'
+import '../../../modules/widgets/components/scss/widget-overlay.scss'
 
-class OverlayWidget extends Component {
+class WidgetOverlay extends Component {
   constructor(props, context) {
     super(props)
     this.context = context
@@ -31,7 +31,7 @@ class OverlayWidget extends Component {
         {children}
         {
           !editable || !this.state.hasMouseOver ? null : (
-            <div className="overlay h1 rounded z1 border border-pagenta px2">
+            <div className="widget-overlay h1 rounded z1 border border-pagenta px2">
               <div className="table full-height col-12 center">
                 <div className="white table-cell align-middle">
                   {text || 'Clique para editar'}
@@ -45,7 +45,7 @@ class OverlayWidget extends Component {
   }
 }
 
-OverlayWidget.propTypes = {
+WidgetOverlay.propTypes = {
   editable: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,
@@ -55,8 +55,8 @@ OverlayWidget.propTypes = {
   text: PropTypes.string
 }
 
-OverlayWidget.defaultProps = {
+WidgetOverlay.defaultProps = {
   editable: false,
 }
 
-export default OverlayWidget
+export default WidgetOverlay

@@ -3,17 +3,17 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import { OverlayWidget } from '../../components'
+import { WidgetOverlay } from '../../../modules/widgets/components'
 
 
-describe('OverlayWidget', () => {
+describe('app/modules/widgets/components/widget-overlay', () => {
   let component
   let props = {
     children: [],
   }
 
   before(() => {
-    component = mount(<OverlayWidget {...props} />)
+    component = mount(<WidgetOverlay {...props} />)
   })
 
   context('when editable is true', () => {
@@ -24,7 +24,7 @@ describe('OverlayWidget', () => {
 
     it('should render overlay div if mouseEnter', () => {
       component.simulate('mouseEnter')
-      expect(component.find('div.overlay').length).to.equal(1)
+      expect(component.find('div.widget-overlay').length).to.equal(1)
     })
 
     it('should not render overlay div if mounseLeave', () => {
@@ -34,7 +34,7 @@ describe('OverlayWidget', () => {
     })
 
     it('should render children', () => {
-      component = mount(<OverlayWidget><div className="teste">dassa</div></OverlayWidget>)
+      component = mount(<WidgetOverlay><div className="teste">dassa</div></WidgetOverlay>)
       expect(component.find('.teste').length).to.equal(1)
     })
 

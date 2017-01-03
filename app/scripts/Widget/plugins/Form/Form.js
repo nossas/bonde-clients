@@ -11,7 +11,7 @@ import * as Paths from '../../../Paths'
 import * as FormEntryActions from '../../../actions/FormEntryActions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
 import { Input, Button } from './components'
-import { OverlayWidget } from '../../components'
+import { WidgetOverlay } from '../../../../modules/widgets/components'
 
 @reactMixin.decorate(Navigation)
 export default class FormWidget extends React.Component {
@@ -227,7 +227,7 @@ export default class FormWidget extends React.Component {
     const { success } = this.state
 
     return (
-      <OverlayWidget
+      <WidgetOverlay
         editable={editable}
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de inscrição"
@@ -236,7 +236,7 @@ export default class FormWidget extends React.Component {
           {success ? this.renderShareButtons() : this.renderForm()}
           {this.renderCount()}
         </div>
-      </OverlayWidget>
+      </WidgetOverlay>
     )
   }
 }

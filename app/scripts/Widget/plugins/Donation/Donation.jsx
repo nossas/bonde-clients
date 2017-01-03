@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import * as Paths from '../../../Paths'
 import * as DonationActions from './actions'
 import TellAFriend from '../../../components/shared/TellAFriend.jsx'
-import { OverlayWidget } from '../../components'
+import { WidgetOverlay } from '../../../../modules/widgets/components'
 
 import './assets/donation_widget.scss'
 
@@ -265,7 +265,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { success } = this.state
 
     return (
-      <OverlayWidget
+      <WidgetOverlay
         editable={editable}
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de doação"
@@ -273,7 +273,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         <div className="bg-white widget rounded">
           {success ? this.renderThankyouText() : this.renderForm()}
         </div>
-      </OverlayWidget>
+      </WidgetOverlay>
     )
   }
 }

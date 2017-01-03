@@ -4,7 +4,7 @@ import * as Paths from '../../../Paths'
 import { isValidEmail } from '../../../../util/validation-helper'
 import { Error, Input } from '../../../../components/FormUtil'
 import { TellAFriend } from '../../../components'
-import { OverlayWidget } from '../../components'
+import { WidgetOverlay } from '../../../../modules/widgets/components'
 import { addActivistMatch } from './actions'
 import { Choices } from './components'
 
@@ -87,7 +87,7 @@ class Match extends Component {
     const optionsChoicesA = choicesA ? choicesA.split(',') : []
 
     return (
-      <OverlayWidget editable={editable} onClick={::this.redirectTo}>
+      <WidgetOverlay editable={editable} onClick={::this.redirectTo}>
         <div className="match-widget widget form-redux transparent p3 bg-darken-3 relative rounded">
           <h2 className="mt0 mb3 center white" style={{ fontFamily: headerFont }}>
             {title_text}
@@ -149,7 +149,7 @@ class Match extends Component {
             {loading ? 'Combinando...' : 'Combinar' }
           </button>
         </div>
-      </OverlayWidget>
+      </WidgetOverlay>
     )
   }
 

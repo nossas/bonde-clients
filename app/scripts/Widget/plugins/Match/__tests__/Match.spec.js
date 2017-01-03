@@ -142,7 +142,7 @@ describe('Match', () => {
   describe('#redirectTo', () => {
     context('when overlay widget was clicked and it is editable', () => {
       before(() => {
-        wrapper.find('OverlayWidget').simulate('click')
+        wrapper.find('WidgetOverlay').simulate('click')
       })
 
       it('should call transitionTo', () => {
