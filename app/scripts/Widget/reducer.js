@@ -1,7 +1,6 @@
 import superagent from 'superagent'
 
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
-import { EXPORT_DATACLIP_SUCCESS } from './../actions/ExportActions'
 import * as t from '../../modules/widgets/action-types'
 
 import {
@@ -54,6 +53,13 @@ export default function reducer(state = initialState, action) {
     case t.FAILURE_ASYNC_WIDGET_SELECT:
       return { ...state, loaded: true, error: action.payload }
 
+    case t.EXPORT_DATACLIP_SUCCESS:
+      data = state.data.map(widget => {
+        const exported_at = widget.id === action.payload.widget.id ? new Date() : undefined
+        return { ...widget, exported_at }
+      })
+      return { ...state, data }
+
     //
     // Needs refactoring
     //
@@ -87,16 +93,6 @@ export default function reducer(state = initialState, action) {
           }
         )
       }
-    case EXPORT_DATACLIP_SUCCESS:
-      return {
-        ...state,
-        data: state.data.map(widget => {
-          if (widget.id === action.widget_id) {
-            widget.exported_at = new Date()
-          }
-          return widget
-        })
-      }
     case UPDATE_MATCH:
       return {
         ...state,
@@ -121,6 +117,7 @@ export default function reducer(state = initialState, action) {
           return widget
         })
       }
+
     case REQUEST_FETCH_GOOGLE_FONTS:
       return { ...state, loaded: false, loading: true }
     case SUCCESS_FETCH_GOOGLE_FONTS:

@@ -1,11 +1,11 @@
 import { expect } from 'chai'
 
 import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../../constants/ActionTypes'
-import { EXPORT_DATACLIP_SUCCESS } from './../../actions/ExportActions'
+import * as t from '../../../modules/widgets/action-types'
+import { createAction } from '../../../modules/widgets/action-creators/create-action'
 import reducer from './../reducer'
 
 describe('Widget/reducer', () => {
-
   context('kind equals match', () => {
     let initialState
 
@@ -83,27 +83,20 @@ describe('Widget/reducer', () => {
         }]
       })
     })
-
     it('should update state widget.exported_at when download report', () => {
-      initialState = {
-        data: [{
-          id: 1,
-          kind: 'form_entry',
-        }]
+      const initialState = {
+        data: [{ id: 1, kind: 'form_entry' }]
       }
-      const action = { type: EXPORT_DATACLIP_SUCCESS, widget_id: 1 }
+      const action = createAction(t.EXPORT_DATACLIP_SUCCESS, { widget: { id: 1 } })
       const nextState = reducer(initialState, action)
       expect(nextState).to.have.deep.property('data[0].exported_at')
     })
 
     it('widget.exported_at state property should be Date type', () => {
-      initialState = {
-        data: [{
-          id: 1,
-          kind: 'form_entry',
-        }]
+      const initialState = {
+        data: [{ id: 1, kind: 'form_entry' }]
       }
-      const action = { type: EXPORT_DATACLIP_SUCCESS, widget_id: 1 }
+      const action = createAction(t.EXPORT_DATACLIP_SUCCESS, { widget: { id: 1 } })
       const nextState = reducer(initialState, action)
       expect(nextState.data[0].exported_at).to.be.Date
     })

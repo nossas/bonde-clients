@@ -2,28 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import {
-  exportDataClipByEndpoint,
-  mountExportDataclip
-} from '../../../scripts/actions/ExportActions'
+import { actions as widgetActions } from '../../../modules/widgets'
 import { Loading } from '../../../scripts/components'
 import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
 import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../components/Layout'
 
 class DataExportPage extends Component {
-  static propTypes = {
-    params: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    exportDataClipByEndpoint: PropTypes.func.isRequired,
-    mountExportDataclip: PropTypes.func.isRequired,
-    exported: PropTypes.bool,
-    success: PropTypes.bool,
-    error: PropTypes.object
-  }
-
   componentDidMount() {
-    this.props.mountExportDataclip()
+    const { dataExportMount } = this.props
+    dataExportMount()
   }
 
   widget (props = this.props) {
@@ -40,7 +28,7 @@ class DataExportPage extends Component {
 
   formatExportAt(widget) {
     let datetime = new Date(String(widget.exported_at))
-    const date = this.fixzero(datetime.getDate()) + '/' + this.fixzero(datetime.getMonth()) + '/' + datetime.getFullYear()
+    const date = this.fixzero(datetime.getDate()) + '/' + this.fixzero(datetime.getMonth()+1) + '/' + datetime.getFullYear()
     const time = this.fixzero(datetime.getHours()) + ':' + this.fixzero(datetime.getMinutes())
     return date + ' às ' + time
   }
@@ -60,6 +48,7 @@ class DataExportPage extends Component {
   }
 
   renderErrorMessage() {
+    const { error } = this.props
     return <span className="red">{error}</span>
   }
 
@@ -102,11 +91,10 @@ class DataExportPage extends Component {
       mobilization,
       loading,
       error,
-      exported,
       success,
-      exportDataClipByEndpoint,
       params,
-      auth: { credentials }
+      // Actions
+      asyncWidgetDataExport,
     } = this.props
 
     const widget = this.widget()
@@ -135,14 +123,8 @@ class DataExportPage extends Component {
             <button
               disabled={loading}
               className='btn bg-pagenta white caps p2 rounded'
-              onClick={() => exportDataClipByEndpoint(
-                {
-                  mobilization_id: mobilization.id,
-                  widget_id: widget.id,
-                  filename,
-                  credentials
-                }
-              )}>
+              onClick={() => asyncWidgetDataExport({ mobilization, widget, filename })}
+            >
               {adownloadSupport
                 ? 'Clique para baixar a planilha completa.'
                 : 'Clique para processar a planilha completa.'
@@ -163,27 +145,26 @@ class DataExportPage extends Component {
     )
   }
 
-  renderLoading() {
-    return <Loading />
-  }
-
   render () {
     const { widgets: { data } } = this.props
-    return (data.length ? this.renderPage() : this.renderLoading())
+    return (data.length ? this.renderPage() : <Loading />)
   }
 }
 
-const mapStateToProps = (globalState) => {
-  return {
-    loading: globalState.exportDataClip.loading,
-    error: globalState.exportDataClip.error,
-    success: globalState.exportDataClip.success
-  }
+DataExportPage.propTypes = {
+  params: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  success: PropTypes.bool,
+  error: PropTypes.object,
+  // Actions
+  asyncWidgetDataExport: PropTypes.func.isRequired,
+  dataExportMount: PropTypes.func.isRequired,
 }
 
-const mapActionCreators = {
-  exportDataClipByEndpoint,
-  mountExportDataclip
-}
+const mapStateToProps = state => ({
+  loading: state.widgetsReducer.dataExport.loading,
+  error: state.widgetsReducer.dataExport.error,
+  success: state.widgetsReducer.dataExport.success,
+})
 
-export default connect(mapStateToProps, mapActionCreators)(DataExportPage)
+export default connect(mapStateToProps, widgetActions)(DataExportPage)
