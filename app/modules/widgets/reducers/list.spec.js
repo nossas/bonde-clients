@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { UPDATE_MATCH, DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
+import { DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
 import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import { createAction } from '../../../modules/widgets/action-creators/create-action'
@@ -45,19 +45,19 @@ describe('app/modules/widgets/reducers/list', () => {
     })
 
     it('should update match saved in match_list', () => {
-      initialState.data[0].match_list.push({
-        id: 1, goal_image: 'test.png'
-      })
-      const action = {
-        type: UPDATE_MATCH,
-        match: {widget_id: 1, id: 1, goal_image: 'changed.png'}
-      }
+      initialState.data[0].match_list.push(
+        { id: 1, goal_image: 'test.png' }
+      )
+      const action = createAction(
+        matchActionTypes.WIDGET_MATCH_UPDATE_SUCCESS,
+        { widget_id: 1, id: 1, goal_image: 'changed.png' }
+      )
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({
         data: [{
           id: 1,
           kind: 'match',
-          match_list: [{widget_id: 1, id: 1, goal_image: 'changed.png'}]
+          match_list: [{ widget_id: 1, id: 1, goal_image: 'changed.png' }]
         }]
       })
     })

@@ -3,7 +3,6 @@ import $ from 'jquery'
 import request from 'superagent'
 
 import {
-  UPDATE_MATCH,
   DELETE_MATCH,
   FETCH_MATCH
 } from '../constants/ActionTypes'
@@ -39,25 +38,9 @@ export const fillWidget = (widget_id, fill) => dispatch => {
     })
 }
 
-const updateMatch = (params) => {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/${params.match.id}`, {
-      method: 'put',
-      data: { match: params.match },
-      headers: params.credentials,
-      success: (data, textStatus, jqXHR) => {
-        dispatch({
-          type: UPDATE_MATCH,
-          match: data
-        })
-      }
-    })
-  }
-}
-
 export const createOrUpdateMatch = params => {
   return params.match.id ?
-    updateMatch(params) :
+    matchActions.asyncMatchUpdate(params) :
     matchActions.asyncMatchCreate(params)
 }
 

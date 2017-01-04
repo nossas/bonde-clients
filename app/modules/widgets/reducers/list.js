@@ -1,4 +1,4 @@
-import { UPDATE_MATCH, DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
+import { DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
 import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import {
@@ -69,6 +69,15 @@ export default function reducer(state = initialState, action) {
         return widget
       })
       return { ...state, data }
+    case matchActionTypes.WIDGET_MATCH_UPDATE_SUCCESS:
+      data = state.data.map(widget => {
+        if (widget.id === action.payload.widget_id) {
+          const mapMatch = match => match.id === action.payload.id ? action.payload : match
+          widget.match_list = widget.match_list.map(mapMatch)
+        }
+        return widget
+      })
+      return { ...state, data }
 
     //
     // Needs refactoring
@@ -87,18 +96,6 @@ export default function reducer(state = initialState, action) {
       return {...state,
         data: state.data.map(
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
-        )
-      }
-    case UPDATE_MATCH:
-      return {
-        ...state,
-        data: state.data.map(
-          widget => {
-            if (widget.id === action.match.widget_id) {
-              widget.match_list = widget.match_list.map(match => match.id === action.match.id ? action.match : match)
-            }
-            return widget
-          }
         )
       }
     case DELETE_MATCH:
