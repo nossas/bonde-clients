@@ -1,7 +1,8 @@
 import superagent from 'superagent'
 
-import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
+import { UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
 import * as t from '../../modules/widgets/action-types'
+import * as matchActionTypes from '../../modules/widgets/__plugins__/match/action-types'
 
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
@@ -60,6 +61,17 @@ export default function reducer(state = initialState, action) {
       })
       return { ...state, data }
 
+    case matchActionTypes.WIDGET_MATCH_CREATE_SUCCESS:
+      data = state.data.map(widget => {
+        if (widget.id === action.payload.widget_id) {
+          if (!widget.match_list.includes(action.payload)) {
+            widget.match_list.push(action.payload)
+          }
+        }
+        return widget
+      })
+      return { ...state, data }
+
     //
     // Needs refactoring
     //
@@ -77,20 +89,6 @@ export default function reducer(state = initialState, action) {
       return {...state,
         data: state.data.map(
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
-        )
-      }
-    case ADD_MATCH:
-      return {
-        ...state,
-        data: state.data.map(
-          widget => {
-            if (widget.id === action.match.widget_id) {
-              if (!widget.match_list.includes(action.match)) {
-                widget.match_list.push(action.match)
-              }
-            }
-            return widget
-          }
         )
       }
     case UPDATE_MATCH:

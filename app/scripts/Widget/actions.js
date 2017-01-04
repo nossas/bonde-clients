@@ -3,7 +3,6 @@ import $ from 'jquery'
 import request from 'superagent'
 
 import {
-  ADD_MATCH,
   UPDATE_MATCH,
   DELETE_MATCH,
   FETCH_MATCH

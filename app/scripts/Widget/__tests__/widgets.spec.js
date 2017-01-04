@@ -1,7 +1,8 @@
 import { expect } from 'chai'
 
-import { ADD_MATCH, UPDATE_MATCH, DELETE_MATCH } from './../../constants/ActionTypes'
+import { UPDATE_MATCH, DELETE_MATCH } from './../../constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
+import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import { createAction } from '../../../modules/widgets/action-creators/create-action'
 import reducer from './../reducer'
 
@@ -12,26 +13,15 @@ describe('Widget/reducer', () => {
     beforeEach(() => {
       // init global state all the tests
       initialState = {
-        data: [{
-          id: 1,
-          kind: 'match',
-          match_list: []
-        }]
+        data: [{ id: 1, kind: 'match', match_list: [] }]
       }
     })
 
     it('should add match saved in match_list', () => {
-      const action = {
-        type: ADD_MATCH,
-        match: {widget_id: 1}
-      }
+      const action = createAction(matchActionTypes.WIDGET_MATCH_CREATE_SUCCESS, { widget_id: 1 })
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({
-        data: [{
-          id: 1,
-          kind: 'match',
-          match_list: [{widget_id: 1}]
-        }]
+        data: [{ id: 1, kind: 'match', match_list: [{ widget_id: 1 }] }]
       })
     })
 

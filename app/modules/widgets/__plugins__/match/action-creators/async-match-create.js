@@ -1,6 +1,7 @@
 import { createAction } from './create-action'
 import t from '../../../../../modules/widgets/__plugins__/match/action-types'
 
+
 const asyncMatchCreate = params => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
 
@@ -11,9 +12,7 @@ const asyncMatchCreate = params => (dispatch, getState, axios) => {
   dispatch({ type: t.WIDGET_MATCH_CREATE_REQUEST })
   return axios.post(endpoint, body, config)
     .then(response => {
-      // dispatch(createAction(t.WIDGET_MATCH_CREATE_SUCCESS, response.data))
-      dispatch(createAction('ADD_MATCH', response.data))
-      next()
+      dispatch(createAction(t.WIDGET_MATCH_CREATE_SUCCESS, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
