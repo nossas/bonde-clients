@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as WidgetActions from '../../../actions'
 import { Page, ChoiceCombined } from '../components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
+import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
 
 export default class GoalsPage extends React.Component {
   constructor(props, context) {
@@ -19,13 +20,13 @@ export default class GoalsPage extends React.Component {
     return widgets.data[widgetIndex]
   }
 
-  finishedUploadFile(goal) {
-    const { auth } = this.props
-    this.bindWidgetActions.createOrUpdateMatch({
-      widget_id: this.widget().id,
-      credentials: auth.credentials,
-      match: goal
-    })
+  finishedUploadFile(match) {
+    const { dispatch } = this.props
+    const actionStrategy = match.id ?
+      MatchActions.asyncMatchUpdate :
+      MatchActions.asyncMatchCreate
+
+    dispatch(actionStrategy({ match, props: this.props }))
   }
 
   getOrCreateMatch(widget, first_choice, second_choice) {

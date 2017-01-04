@@ -1,12 +1,15 @@
 import { createAction } from './create-action'
 import t from '../../../../../modules/widgets/__plugins__/match/action-types'
+import WidgetsSelectors from '../../../../../modules/widgets/selectors'
 
 
-const asyncMatchUpdate = params => (dispatch, getState, axios) => {
-  const { auth: { credentials } } = getState()
+const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
+  const state = getState()
+  const { auth: { credentials } } = state
+  const widget = WidgetsSelectors.getWidget(state, props)
 
-  const endpoint = `/widgets/${params.widget_id}/match/${params.match.id}`
-  const body = { match: params.match }
+  const endpoint = `/widgets/${widget.id}/match/${match.id}`
+  const body = { match }
   const config = { headers: credentials }
 
   dispatch({ type: t.WIDGET_MATCH_UPDATE_REQUEST })

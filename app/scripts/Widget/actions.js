@@ -38,12 +38,6 @@ export const fillWidget = (widget_id, fill) => dispatch => {
     })
 }
 
-export const createOrUpdateMatch = params => {
-  return params.match.id ?
-    matchActions.asyncMatchUpdate(params) :
-    matchActions.asyncMatchCreate(params)
-}
-
 export const deleteMatch = (params) => {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/delete_where`, {
