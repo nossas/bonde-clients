@@ -1,4 +1,4 @@
-import * as t from '../../action-types'
+import * as t from '../action-types'
 
 
 export default query => (dispatch, getState, axios) => {

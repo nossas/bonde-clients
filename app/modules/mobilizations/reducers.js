@@ -1,48 +1,51 @@
 import * as t from './action-types'
 
-
 const initialState = {
-  loading: false,
   isLoaded: false,
+  loading: false,
   data: [],
-  relationshipId: undefined,
-  currentId: undefined
+  currentId: undefined,
+  menuActiveIndex: undefined
 }
 
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case t.REQUEST_FETCH:
+    case t.ADD:
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+        currentId: action.payload.id
+      }
+    case t.FETCH:
       return {
         ...state,
         loading: true,
-        relationshipId: action.relationshipId
+        data: [],
+        currentId: undefined
       }
-    case t.REQUEST_FILTER:
+    case t.LOAD:
       return {
         ...state,
-        loading: true
-      }
-    case t.SUCCESS_FETCH:
-    case t.SUCCESS_FILTER:
-      return {
-        ...state,
-        loading: false,
         isLoaded: true,
-        data: action.data
-      }
-    case t.FAILURE_FETCH:
-    case t.FAILURE_FILTER:
-      return {
-        ...state,
         loading: false,
-        isLoaded: false,
-        error: action.error
+        data: action.payload,
+        currentId: undefined
       }
     case t.SELECT:
       return {
         ...state,
-        currentId: action.currentId
+        currentId: action.payload
+      }
+    case t.UNSELECT:
+      return {
+        ...state,
+        currentId: undefined
+      }
+    case t.TOGGLE_MENU:
+      return {
+        ...state,
+        menuActiveIndex: action.payload === state.menuActiveIndex ? undefined : action.payload
       }
     default:
       return state

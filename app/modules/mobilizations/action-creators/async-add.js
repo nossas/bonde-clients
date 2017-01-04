@@ -1,15 +1,13 @@
 import * as t from '../action-types'
 
-
-export default relationshipId => (dispatch, getState, axios) => {
-  dispatch({ type: t.FETCH })
-
+export default mobilization => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
+
   return axios
-    .get(`/communities/${relationshipId}/mobilizations`)
+    .post('/mobilizations', { mobilization }, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 200) {
-        dispatch({ type: t.LOAD, payload: data })
+        dispatch({ type: t.ADD, payload: data })
         return Promise.resolve()
       } else {
         return Promise.reject({ error: `Response code ${status}` })

@@ -1,15 +1,13 @@
-export const NAMESPACE = 'mobilizations'
+const withPrefix = prefix => `mobilizations/${prefix}`
 
-export const REQUEST_FETCH = `${NAMESPACE}/REQUEST_FETCH`
+export const ADD = withPrefix('ADD')
 
-export const SUCCESS_FETCH = `${NAMESPACE}/SUCCESS_FETCH`
+export const FETCH = withPrefix('FETCH')
 
-export const FAILURE_FETCH = `${NAMESPACE}/FAILURE_FETCH`
+export const LOAD = withPrefix('LOAD')
 
-export const REQUEST_FILTER = `${NAMESPACE}/REQUEST_FILTER`
+export const SELECT = withPrefix('SELECT')
 
-export const SUCCESS_FILTER = `${NAMESPACE}/SUCCESS_FILTER`
+export const UNSELECT = withPrefix('UNSELECT')
 
-export const FAILURE_FILTER = `${NAMESPACE}/FAILURE_FILTER`
-
-export const SELECT = `${NAMESPACE}/SELECT`
+export const TOGGLE_MENU = withPrefix('TOGGLE_MENU')

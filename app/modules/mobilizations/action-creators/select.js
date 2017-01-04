@@ -1,8 +1,5 @@
-import * as t from '../action'
+import * as t from '../action-types'
 
 export default id => dispatch => {
-  dispatch({
-    type: t.SELECT,
-    currentId: !isNaN(parseInt(id, 10)) ? parseInt(id, 10) : undefined
-  })
+  dispatch({ type: t.SELECT, payload: id })
 }

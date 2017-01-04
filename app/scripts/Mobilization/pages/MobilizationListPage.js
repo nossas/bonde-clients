@@ -50,6 +50,8 @@ export class MobilizationListPage extends Component {
       mobilizationMoreMenuActiveIndex
     } = this.props
 
+    debugger
+
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title="Suas Mobilizações">

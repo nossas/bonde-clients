@@ -11,7 +11,7 @@ export function mobilizations() {
 }
 
 export function mobilization(mobilization, domain = process.env.APP_DOMAIN) {
-  if (domain.indexOf('staging') !== -1)
+  if (domain && domain.indexOf('staging') !== -1)
     return `http://${mobilization.slug}.${domain}`
 
   return mobilization.custom_domain
