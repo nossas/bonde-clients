@@ -3,7 +3,6 @@ import $ from 'jquery'
 import request from 'superagent'
 
 import {
-  DELETE_MATCH,
   FETCH_MATCH
 } from '../constants/ActionTypes'
 
@@ -36,27 +35,6 @@ export const fillWidget = (widget_id, fill) => dispatch => {
       if (err || !res.ok) dispatch(fillWidgetFailure(err || res.body))
       else dispatch(fillWidgetSuccess(res.body))
     })
-}
-
-export const deleteMatch = (params) => {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/delete_where`, {
-      method: 'delete',
-      data: params.match_where,
-      headers: params.credentials,
-      success: (data, textStatus, jqXHR) => {
-        if (data.ok) {
-          dispatch({
-            ...data.ok,
-            type: DELETE_MATCH
-          })
-        } else {
-          // Fix message or error
-          console.error('request pattern not equals')
-        }
-      }
-    })
-  }
 }
 
 const fetchGoogleFontsRequest = () => ({ type: REQUEST_FETCH_GOOGLE_FONTS })

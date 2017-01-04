@@ -1,12 +1,12 @@
 import { createAction } from './create-action'
-import t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import WidgetsSelectors from '../../../../../modules/widgets/selectors'
+import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
+import { getWidget } from '../../../../../modules/widgets/selectors'
 
 
 const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
   const state = getState()
   const { auth: { credentials } } = state
-  const widget = WidgetsSelectors.getWidget(state, props)
+  const widget = getWidget(state, props)
 
   const endpoint = `/widgets/${widget.id}/match/${match.id}`
   const body = { match }

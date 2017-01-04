@@ -1,4 +1,3 @@
-import { DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
 import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import {
@@ -78,6 +77,16 @@ export default function reducer(state = initialState, action) {
         return widget
       })
       return { ...state, data }
+    case matchActionTypes.WIDGET_MATCH_DESTROY_SUCCESS:
+      data = state.data.map(widget => {
+        if (widget.id === parseInt(action.payload.widget_id)) {
+          widget.match_list = widget.match_list.filter(match => {
+            return !action.payload.deleted_matches.includes(match.id)
+          })
+        }
+        return widget
+      })
+      return { ...state, data }
 
     //
     // Needs refactoring
@@ -97,18 +106,6 @@ export default function reducer(state = initialState, action) {
         data: state.data.map(
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
         )
-      }
-    case DELETE_MATCH:
-      return {
-        ...state,
-        data: state.data.map(widget => {
-          if (widget.id === parseInt(action.widget_id)) {
-            widget.match_list = widget.match_list.filter(match => {
-              return !action.deleted_matches.includes(match.id)
-            })
-          }
-          return widget
-        })
       }
 
     case REQUEST_FETCH_GOOGLE_FONTS:

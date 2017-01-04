@@ -3,25 +3,24 @@ import * as t from '../../../../../modules/widgets/__plugins__/match/action-type
 import { getWidget } from '../../../../../modules/widgets/selectors'
 
 
-const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
+const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
   const state = getState()
   const { auth: { credentials } } = state
   const widget = getWidget(state, props)
 
-  const endpoint = `/widgets/${widget.id}/match`
-  const body = { match }
-  const config = { headers: credentials }
+  const endpoint = `/widgets/${widget.id}/match/delete_where`
+  const config = { headers: credentials, params: where }
 
-  dispatch({ type: t.WIDGET_MATCH_CREATE_REQUEST })
-  return axios.post(endpoint, body, config)
+  dispatch({ type: t.WIDGET_MATCH_DESTROY_REQUEST })
+  return axios.delete(endpoint, config)
     .then(response => {
-      dispatch(createAction(t.WIDGET_MATCH_CREATE_SUCCESS, response.data))
+      dispatch(createAction(t.WIDGET_MATCH_DESTROY_SUCCESS, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(t.WIDGET_MATCH_CREATE_FAILURE, failure))
+      dispatch(createAction(t.WIDGET_MATCH_DESTROY_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
 
-export default asyncMatchCreate
+export default asyncMatchDestroy

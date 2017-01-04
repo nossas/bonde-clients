@@ -2,10 +2,11 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as Paths from '../../../../Paths'
-import * as WidgetActions from '../../../actions'
-import { actions as _WidgetActions } from '../../../../../modules/widgets'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
+import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
 import { Page, AddChoiceForm } from '../components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
+
 
 class ChoicesPage extends React.Component {
   constructor(props, context) {
@@ -78,7 +79,7 @@ class ChoicesPage extends React.Component {
     const { validForm, errors } = this.isValidForm()
 
     if (validForm) {
-      dispatch(_WidgetActions.asyncWidgetUpdate({
+      dispatch(WidgetActions.asyncWidgetUpdate({
         ... widget,
         settings: {
           title_text,
@@ -115,9 +116,7 @@ class ChoicesPage extends React.Component {
 
   onRemoveItem(attr, choice) {
     let newState = {}
-    const { dispatch, auth } = this.props
-    const widget = this.widget()
-    const bindedWidgetActions = bindActionCreators(WidgetActions, dispatch)
+    const { dispatch } = this.props
 
     let choices = this.state[attr]
     const index = choices.indexOf(choice)
@@ -131,11 +130,7 @@ class ChoicesPage extends React.Component {
     const attrRemove = attr === 'choicesa' ? 'first_choice' : 'second_choice'
     let match = {}
     match[attrRemove] = choice
-    bindedWidgetActions.deleteMatch({
-      widget_id: widget.id,
-      credentials: auth.credentials,
-      match_where: { match: match }
-    })
+    dispatch(MatchActions.asyncMatchDestroy({ where: match, props: this.props }))
   }
 
   handleTitleTextChange(e) {

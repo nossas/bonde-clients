@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 
-import { DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
 import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import { createAction } from '../../../modules/widgets/action-creators/create-action'
@@ -57,7 +56,9 @@ describe('app/modules/widgets/reducers/list', () => {
         data: [{
           id: 1,
           kind: 'match',
-          match_list: [{ widget_id: 1, id: 1, goal_image: 'changed.png' }]
+          match_list: [
+            { widget_id: 1, id: 1, goal_image: 'changed.png' }
+          ]
         }]
       })
     })
@@ -74,24 +75,22 @@ describe('app/modules/widgets/reducers/list', () => {
           ]
         }]
       }
-      const action = {
-        type: DELETE_MATCH,
-        widget_id: 1,
-        deleted_matches: [2, 3]
-      }
+      const action = createAction(
+        matchActionTypes.WIDGET_MATCH_DESTROY_SUCCESS,
+        { widget_id: 1, deleted_matches: [2, 3] }
+      )
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({
         data: [{
           id: 1,
           kind: 'match',
           match_list: [
-            {
-              id: 1, first_choice: "framboesa", second_choice: "lula", goal_image: 'test.png'
-            }
+            { id: 1, first_choice: "framboesa", second_choice: "lula", goal_image: 'test.png' }
           ]
         }]
       })
     })
+
     it('should update state widget.exported_at when download report', () => {
       const initialState = {
         data: [{ id: 1, kind: 'form_entry' }]
