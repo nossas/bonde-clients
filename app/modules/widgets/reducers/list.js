@@ -1,5 +1,4 @@
 import * as t from '../../../modules/widgets/action-types'
-import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
@@ -11,6 +10,7 @@ import {
   SUCCESS_FILL_WIDGET,
   FAILURE_FILL_WIDGET,
 } from '../../../scripts/Widget/actions'
+import { reducers as MatchReducers } from '../../../modules/widgets/__plugins__/match'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
@@ -24,6 +24,14 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   let data
+
+  //
+  // FIXME
+  // Needs to refactor the function below. Understand how to
+  // change the list of widgets through Match widget reducers
+  // without duplicating switch case action type verification.
+  //
+  MatchReducers(state, action)
 
   switch (action.type) {
     //
@@ -55,36 +63,6 @@ export default function reducer(state = initialState, action) {
       data = state.data.map(widget => {
         const exported_at = widget.id === action.payload.widget.id ? new Date() : undefined
         return { ...widget, exported_at }
-      })
-      return { ...state, data }
-
-    case matchActionTypes.WIDGET_MATCH_CREATE_SUCCESS:
-      data = state.data.map(widget => {
-        if (widget.id === action.payload.widget_id) {
-          if (!widget.match_list.includes(action.payload)) {
-            widget.match_list.push(action.payload)
-          }
-        }
-        return widget
-      })
-      return { ...state, data }
-    case matchActionTypes.WIDGET_MATCH_UPDATE_SUCCESS:
-      data = state.data.map(widget => {
-        if (widget.id === action.payload.widget_id) {
-          const mapMatch = match => match.id === action.payload.id ? action.payload : match
-          widget.match_list = widget.match_list.map(mapMatch)
-        }
-        return widget
-      })
-      return { ...state, data }
-    case matchActionTypes.WIDGET_MATCH_DESTROY_SUCCESS:
-      data = state.data.map(widget => {
-        if (widget.id === parseInt(action.payload.widget_id)) {
-          widget.match_list = widget.match_list.filter(match => {
-            return !action.payload.deleted_matches.includes(match.id)
-          })
-        }
-        return widget
       })
       return { ...state, data }
 
