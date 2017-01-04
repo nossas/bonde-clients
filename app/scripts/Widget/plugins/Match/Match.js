@@ -48,11 +48,16 @@ class Match extends Component {
     if (this.formIsValid()) {
       const { dispatch }  = this.props
       const { firstname, lastname, email } = this.state
-      const matchId = this.findMatchItem().id
+      const matchItem = this.findMatchItem()
       const activist = { firstname, lastname, email }
 
-      dispatch(addActivistMatch({ matchId, activist }))
-      this.setState({ combined: true })
+      if (matchItem) {
+        const matchId = matchItem.id
+        dispatch(addActivistMatch({ matchId, activist }))
+        this.setState({ combined: true })
+      } else {
+        window.alert('Nenhuma imagem foi configurada para a combinação.')
+      }
     }
   }
 
