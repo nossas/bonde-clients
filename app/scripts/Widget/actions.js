@@ -9,6 +9,8 @@ import {
   FETCH_MATCH
 } from '../constants/ActionTypes'
 
+import { actions as matchActions } from '../../modules/widgets/__plugins__/match'
+
 export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
 export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
 export const FAILURE_FILL_WIDGET = 'FAILURE_FILL_WIDGET'
@@ -38,22 +40,6 @@ export const fillWidget = (widget_id, fill) => dispatch => {
     })
 }
 
-const addMatch = (params) => {
-  return dispatch => {
-    $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match`, {
-      method: 'post',
-      data: { match: params.match },
-      headers: params.credentials,
-      success: function(data, textStatus, jqXHR){
-        dispatch({
-          type: ADD_MATCH,
-          match: data
-        })
-      }
-    })
-  }
-}
-
 const updateMatch = (params) => {
   return dispatch => {
     $.ajax(`${process.env.API_URL}/widgets/${params.widget_id}/match/${params.match.id}`, {
@@ -70,11 +56,10 @@ const updateMatch = (params) => {
   }
 }
 
-export const createOrUpdateMatch = (params) => {
-  if (params.match.id) {
-    return updateMatch(params)
-  }
-  return addMatch(params)
+export const createOrUpdateMatch = params => {
+  return params.match.id ?
+    updateMatch(params) :
+    matchActions.asyncMatchCreate(params)
 }
 
 export const deleteMatch = (params) => {
