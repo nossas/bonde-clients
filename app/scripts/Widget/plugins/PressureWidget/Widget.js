@@ -136,11 +136,9 @@ PressureWidget.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (globalState) => {
-  return {
-    saving: globalState.widgets.saving,
-  }
-}
+const mapStateToProps = state => ({
+  saving: state.widgets.list.saving,
+})
 
 const mapActionsToProps = {
   fill: fillWidget,

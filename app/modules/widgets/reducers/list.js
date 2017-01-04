@@ -1,9 +1,6 @@
-import superagent from 'superagent'
-
-import { UPDATE_MATCH, DELETE_MATCH } from './../constants/ActionTypes'
-import * as t from '../../modules/widgets/action-types'
-import * as matchActionTypes from '../../modules/widgets/__plugins__/match/action-types'
-
+import { UPDATE_MATCH, DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
+import * as t from '../../../modules/widgets/action-types'
+import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
@@ -14,7 +11,7 @@ import {
   REQUEST_FILL_WIDGET,
   SUCCESS_FILL_WIDGET,
   FAILURE_FILL_WIDGET,
-} from './actions'
+} from '../../../scripts/Widget/actions'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
@@ -24,6 +21,7 @@ const initialState = {
   saving: false,
   error: undefined,
 }
+
 
 export default function reducer(state = initialState, action) {
   let data
@@ -122,8 +120,10 @@ export default function reducer(state = initialState, action) {
       return { ...state, loaded: true, loading: false, googleFonts: action.fonts }
     case FAILURE_FETCH_GOOGLE_FONTS:
       return { ...state, loaded: true, loading: false, error: action.error }
+
     case TOOLBAR_SET_LINK_OPEN_STRATEGY:
       return { ...state, toolbarLinkOpenStrategy: action.strategy }
+
     default:
       return state
   }

@@ -91,7 +91,7 @@ CustomDomainPage.propTypes = {
 const mapStateToProps = state => ({
   mobilization: state.mobilization.data[0],
   blocks: state.blocks.data,
-  widgets: state.widgets.data
+  widgets: state.widgets.list.data
 })
 
 export default connect(mapStateToProps)(CustomDomainPage)

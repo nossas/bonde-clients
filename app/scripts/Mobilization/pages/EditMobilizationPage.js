@@ -97,7 +97,7 @@ EditMobilizationPage.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  widgetsCount: state.widgets.length,
+  widgetsCount: state.widgets.list.length,
   blockEditionMode: state.blocks.editionMode,
 })
 

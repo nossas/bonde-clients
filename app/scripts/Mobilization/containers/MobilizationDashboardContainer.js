@@ -67,7 +67,7 @@ class MobilizationDashboardContainer extends React.Component {
 const mapStateToProps = (state, props) => ({
   auth: state.auth,
   blocks: state.blocks,
-  widgets: state.widgets,
+  widgets: state.widgets.list,
   mobilization: getMobilization(state, props)
 })
 

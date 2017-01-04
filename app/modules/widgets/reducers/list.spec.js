@@ -1,12 +1,31 @@
 import { expect } from 'chai'
 
-import { UPDATE_MATCH, DELETE_MATCH } from './../../constants/ActionTypes'
+import { UPDATE_MATCH, DELETE_MATCH } from '../../../scripts/constants/ActionTypes'
 import * as t from '../../../modules/widgets/action-types'
 import * as matchActionTypes from '../../../modules/widgets/__plugins__/match/action-types'
 import { createAction } from '../../../modules/widgets/action-creators/create-action'
-import reducer from './../reducer'
+import reducer from '../../../modules/widgets/reducers/list'
+import { SUCCESS_FILL_WIDGET } from '../../../scripts/Widget/actions'
 
-describe('Widget/reducer', () => {
+describe('app/modules/widgets/reducers/list', () => {
+
+  describe('Fill Widget', () => {
+    it('should add count in success fill widget', () => {
+      // state while requesting
+      const initialState = {
+        data: [{ id: 1, settings: {} }],
+        saving: true
+      }
+      const action = { type: SUCCESS_FILL_WIDGET, counter: { id: 1, count: 2 } }
+      const nextState = reducer(initialState, action)
+
+      expect(nextState).to.deep.equal({
+        data: [{ id: 1, settings: {}, count: 2, filled: true }],
+        saving: false
+      })
+    })
+  })
+
   context('kind equals match', () => {
     let initialState
 

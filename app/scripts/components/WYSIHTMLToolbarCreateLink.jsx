@@ -50,7 +50,7 @@ WYSIHTMLToolbarCreateLink.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  toolbarLinkOpenStrategy: state.widgets.toolbarLinkOpenStrategy
+  toolbarLinkOpenStrategy: state.widgets.list.toolbarLinkOpenStrategy
 })
 
 export default connect(mapStateToProps)(WYSIHTMLToolbarCreateLink)

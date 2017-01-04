@@ -162,9 +162,9 @@ DataExportPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  loading: state.widgetsReducer.dataExport.loading,
-  error: state.widgetsReducer.dataExport.error,
-  success: state.widgetsReducer.dataExport.success,
+  loading: state.widgets.dataExport.loading,
+  error: state.widgets.dataExport.error,
+  success: state.widgets.dataExport.success,
 })
 
 export default connect(mapStateToProps, widgetActions)(DataExportPage)
