@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import classnames from 'classnames'
+import { Navigation } from 'react-router'
+import reactMixin from 'react-mixin'
 
 import {
   SettingsPageLayout,
@@ -30,16 +32,22 @@ import {
 import { MobilizationsHeader } from '../../../scripts/Mobilization/components'
 import * as Paths from '../../../scripts/Paths'
 
-import { unselect, toggleMenu } from '../action-creators'
+import { select, toggleMenu } from '../action-creators'
 import * as MobilizationSelectors from '../selectors'
 
 
+@reactMixin.decorate(Navigation)
 export class ListMobilizationPage extends Component {
 
   componentDidMount() {
-    const { unselect, toggleMenu } = this.props
-    unselect()
+    const { select, toggleMenu } = this.props
+    select(undefined)
     toggleMenu(undefined)
+  }
+
+  handleSelectItem(mobilization) {
+    this.props.select(mobilization.id)
+    this.transitionTo(Paths.editMobilization(mobilization.id))
   }
 
   render() {
@@ -70,7 +78,7 @@ export class ListMobilizationPage extends Component {
                 key={`mobilization-${mobilization.id}`}
                 className={classnames({ 'z2': menuActiveIndex === index })}
               >
-                <Link className="gray20" to={Paths.editMobilization(mobilization.id)}>
+                <div className="gray20" onClick={() => this.handleSelectItem(mobilization)}>
                   <MobilizationListItemAvatar {...mobilization} />
 
                   <div className="list-item-table-container overflow-hidden">
@@ -79,7 +87,7 @@ export class ListMobilizationPage extends Component {
                     <MobilizationListItemUsers {...mobilization} />
                     <MobilizationListItemFundRaising {...mobilization} />
                   </div>
-                </Link>
+                </div>
                 <MobilizationListItemMore onClick={toggleMenu} index={index}>
                   <MobilizationListItemMoreMenu active={menuActiveIndex === index}>
                     <MobilizationListItemMoreMenuAction
@@ -108,7 +116,7 @@ export class ListMobilizationPage extends Component {
 ListMobilizationPage.propTypes = {
   mobilizations: PropTypes.array.isRequired,
   toggleMenu: PropTypes.func.isRequired,
-  unselect: PropTypes.func.isRequired,
+  select: PropTypes.func.isRequired,
   menuActiveIndex: PropTypes.number,
   // Injected by react-router
   location: PropTypes.object.isRequired
@@ -119,6 +127,6 @@ const mapStateToProps = state => ({
   menuActiveIndex: MobilizationSelectors.getMenuActiveIndex(state)
 })
 
-const mapActionCretorsToProps = { toggleMenu, unselect }
+const mapActionCretorsToProps = { select, toggleMenu }
 
 export default connect(mapStateToProps, mapActionCretorsToProps)(ListMobilizationPage)

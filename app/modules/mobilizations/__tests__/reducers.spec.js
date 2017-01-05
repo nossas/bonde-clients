@@ -80,17 +80,6 @@ describe('MobilizationReducers / entities', () => {
     })
   })
 
-  describe('t.UNSELECT', () => {
-
-    beforeEach(() => {
-      nextState = reducer(undefined, { type: t.UNSELECT })
-    })
-
-    it('should remove current mobilization', () => {
-      expect(nextState.currentId).to.equal(undefined)
-    })
-  })
-
   describe('t.TOGGLE_MENU', () => {
 
     beforeEach(() => {

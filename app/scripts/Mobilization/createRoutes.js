@@ -25,7 +25,8 @@ import {
 
 import {
   MobilizationListPage,
-  MobilizationAddPage
+  MobilizationAddPage,
+  MobilizationEditPage
 } from '../../modules/mobilizations/pages'
 
 

@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { fetchWidgets, isWidgetsLoaded } from '../../../scripts/Widget/reducer'
 import * as MobilizationSelectors from '../selectors'
 import { GoogleFontsLoader } from '../../../components/Fonts'
-import * as arrayUtil from '../../../util/array'
-import { actions as BlockActions, selectors as BlockSelectors } from '../blocks'
-
 import { Loading } from '../../../scripts/Dashboard/components'
+import * as arrayUtil from '../../../util/array'
+import {
+  actions as BlockActions,
+  selectors as BlockSelectors,
+} from '../blocks'
 
 
-class MobilizationEditContainer extends React.Component {
+class MobilizationContainer extends React.Component {
 
   static fetchData(store, params) {
     const promises = []
@@ -33,19 +35,20 @@ class MobilizationEditContainer extends React.Component {
     // data only in the server-side for now
     const { mobilization, asyncBlockFetch, fetchWidgets, select } = this.props
     asyncBlockFetch(mobilization.id)
-    fetchWidgets({ mobilization_id: mobilization.id })
+    fetchWidgets({mobilization_id: mobilization.id})
   }
 
   render() {
-    const { children, blocks, widgets, mobilization } = this.props
+    const { children, blockIsLoaded, widgetIsLoaded, mobilization } = this.props
+    const { header_font, body_font } = mobilization
+    const fonts = [header_font, body_font].filter(arrayUtil.distinct)
 
-    if (blocks.loaded && widgets.loaded) {
-      const { header_font, body_font } = mobilization
-      const fonts = [header_font, body_font].filter(arrayUtil.distinct)
-
+    // TODO: Make tests to render container if blocks and widgets loaded
+    if (blockIsLoaded && widgetIsLoaded) {
+      // TODO: Make tests to check if mobilization is passed
       return (
         <div className='flex flex-auto overflow-hidden'>
-          {children && React.cloneElement(children, { mobilization })}
+          {children}
           <GoogleFontsLoader fonts={fonts} />
         </div>
       )
@@ -56,9 +59,9 @@ class MobilizationEditContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  blocks: state.blocks,
-  widgets: state.widgets,
-  mobilization: MobilizationSelectors.getCurrent(state)
+  mobilization: MobilizationSelectors.getCurrent(state),
+  widgetIsLoaded: isWidgetsLoaded(state),
+  blockIsLoaded: BlockSelectors.isLoaded(state)
 })
 
 const mapActionCreatorsToProps = {
@@ -66,4 +69,4 @@ const mapActionCreatorsToProps = {
   fetchWidgets
 }
 
-export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationEditContainer)
+export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationContainer)

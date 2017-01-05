@@ -1,11 +1,13 @@
 export const getCurrent = (state, ownProps) => {
-  const { current, data } = state.mobilization
-  return data.filter(mob => mob.id === current)[0]
+  const { currentId, data } = state.mobilization
+  return data.filter(mob => mob.id === currentId)[0]
 }
 
-export const getList = (state, ownProps) => {
-  return state.mobilization.data
-}
+export const getList = (state, ownProps) => state.mobilization.data
+
+export const getBlocks = (state, ownProps) => state.blocks.data
+
+export const getWidgets = (state, ownProps) => state.widgets.data
 
 export const getMenuActiveIndex = (state, ownProps) => {
   return state.mobilization.menuActiveIndex

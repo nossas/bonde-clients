@@ -4,4 +4,3 @@ export { default as asyncAdd } from './async-add'
 
 export { default as toggleMenu } from './toggle-menu'
 export { default as select } from './select'
-export { default as unselect } from './unselect'
