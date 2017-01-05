@@ -10,7 +10,7 @@ import { actions as BlockActions, selectors as BlockSelectors } from '../blocks'
 import { Loading } from '../../../scripts/Dashboard/components'
 
 
-class MobilizationContainer extends React.Component {
+class MobilizationEditContainer extends React.Component {
 
   static fetchData(store, params) {
     const promises = []
@@ -67,4 +67,4 @@ const mapActionCreatorsToProps = {
   fetchWidgets
 }
 
-export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationContainer)
+export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationEditContainer)

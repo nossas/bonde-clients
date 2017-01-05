@@ -10,7 +10,7 @@ import * as Paths from '../../../scripts/Paths'
 
 
 @reactMixin.decorate(Navigation)
-class MobilizationEditPage extends Component {
+class MobilizationPage extends Component {
 
   componentDidUpdate() {
     const { mobilization, blocks } = this.props
@@ -24,7 +24,7 @@ class MobilizationEditPage extends Component {
   }
 }
 
-MobilizationEditPage.propTypes = {
+MobilizationPage.propTypes = {
   mobilization: PropTypes.object,
   blocks: PropTypes.array,
   blockEditionMode: PropTypes.bool,
@@ -39,4 +39,4 @@ const mapStateToProps = state => ({
   blockEditionMode: state.blocks.editionMode
 })
 
-export default connect(mapStateToProps)(MobilizationEditPage)
+export default connect(mapStateToProps)(MobilizationPage)
