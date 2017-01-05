@@ -19,14 +19,14 @@ import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
 import {
-  MobilizationDashboardContainer,
-  MobilizationEditContainer
+  MobilizationContainer,
+  MobilizationDashboardContainer
 } from '../../modules/mobilizations/containers'
 
 import {
-  MobilizationListPage,
   MobilizationAddPage,
-  MobilizationEditPage
+  MobilizationEditPage,
+  MobilizationListPage
 } from '../../modules/mobilizations/pages'
 
 
@@ -35,8 +35,8 @@ export default requiredLogin => (
     <Route path="/" component={MobilizationListPage} />
     <Route path="/mobilizations/new" component={MobilizationAddPage} />
     {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
-    <Route path="/mobilizations/:mobilization_id" component={MobilizationEditContainer}>
-      <Route path="/edit" component={EditMobilizationPage} />
+    <Route path="/mobilizations/:mobilization_id" component={MobilizationContainer}>
+      <Route path="/edit" component={MobilizationEditPage} />
       {blocksCreateRoutes()}
       {widgetCreateRoutes()}
       <Route component={MobilizationSettingsContainer}>
