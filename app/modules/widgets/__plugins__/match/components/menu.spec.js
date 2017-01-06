@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from '../../../../../Paths'
-import { Menu } from '../../components'
+import * as Paths from '../../../../../scripts/Paths'
+import Menu from './menu'
 
 describe('Match/components/Menu', () => {
   let wrapper
@@ -18,7 +18,7 @@ describe('Match/components/Menu', () => {
   const GOALS_TAB = 1
 
   beforeEach(() => {
-    wrapper = shallow(<Menu { ...props } />)
+    wrapper = shallow(<Menu {...props} />)
   })
 
   describe('#render', () => {
