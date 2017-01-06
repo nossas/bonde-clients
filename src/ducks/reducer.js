@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 import { reducer as form } from 'redux-form'
 
 import colorPicker from '../../app/components/ColorPicker/ColorPickerReducer'
-import matches from '../../app/scripts/Widget/plugins/Match/reducer'
 import mobilization from '../../app/scripts/Mobilization/MobilizationReducer'
 import mobilizationTemplates from '../../app/scripts/Mobilization/plugins/Templates/MobilizationTemplatesReducer'
 import selectableList from '../../app/components/SelectableList/SelectableListReducer'
@@ -26,6 +25,5 @@ export default combineReducers({
   mobilizationTemplates,
   selectableList,
   filterableSearchBar,
-  colorPicker,
-  matches
+  colorPicker
 })
