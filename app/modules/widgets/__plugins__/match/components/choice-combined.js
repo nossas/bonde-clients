@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 import classnames from 'classnames'
 
-import { Progress } from '../../../../components'
+import { Progress } from '../../../../../scripts/components'
 
 class ChoiceCombined extends Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class ChoiceCombined extends Component {
       uploadProgress: 'success',
       uploadFinished: true
     })
+    console.log('handleUploadFinish', handleUploadFinish)
     handleUploadFinish({
       ...match,
       goal_image: imageUrl
