@@ -1,14 +1,10 @@
-import React from 'react'
 import sinon from 'sinon'
-import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import reducer, { handleError, showMatch, initialState, initialAction } from '../reducer'
+import reducer, { initialState } from '../reducer'
 
 describe('Matches Reducer', () => {
-  let wrapper
   let sandbox
-  let spy = {}
 
   before(() => {
     sandbox = sinon.sandbox.create()
