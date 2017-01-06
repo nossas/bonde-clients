@@ -5,7 +5,7 @@ import { expect } from 'chai'
 
 import Choices from './choices'
 
-describe('Match/components/Choices', () => {
+describe('app/modules/widgets/__plugins__/match/components/choices', () => {
   let wrapper
   let sandbox
   const props = {

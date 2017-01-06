@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import * as Paths from '../../../../../scripts/Paths'
 import Menu from './menu'
 
-describe('Match/components/Menu', () => {
+describe('app/modules/widgets/__plugins__/match/components/menu', () => {
   let wrapper
 
   const props = {

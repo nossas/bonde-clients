@@ -3,10 +3,10 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as Paths from '../../../../Paths'
-import Match from '../'
+import * as Paths from '../../../../../scripts/Paths'
+import Match from './__match__'
 
-describe('Match', () => {
+describe('app/modules/widgets/__plugins__/match/components/__match__', () => {
   let wrapper
   let sandbox
   let spy = {}
@@ -18,19 +18,23 @@ describe('Match', () => {
   let props = {
     editable: true,
     mobilization: { id: 1 },
-    widget: { widget: 1, settings: {
-      choices1: 'Framboesa,Auxílio Terno',
-      choicesA: 'Hospital,Escola',
-      title_text: 'Foo Bar Widget Title!',
-      labelChoices1: 'Foo Bar Choice1 Label!',
-      labelChoicesA: 'Foo Bar ChoiceA Label!'
-    }, match_list: [{
-      id: 1,
-      widget_id: 1,
-      first_choice: 'Framboesa',
-      second_choice: 'Hospital',
-      goal_image: 'test.img'
-    }] },
+    widget: {
+      widget: 1,
+      settings: {
+        choices1: 'Framboesa,Auxílio Terno',
+        choicesA: 'Hospital,Escola',
+        title_text: 'Foo Bar Widget Title!',
+        labelChoices1: 'Foo Bar Choice1 Label!',
+        labelChoicesA: 'Foo Bar ChoiceA Label!'
+      },
+      match_list: [{
+        id: 1,
+        widget_id: 1,
+        first_choice: 'Framboesa',
+        second_choice: 'Hospital',
+        goal_image: 'test.img'
+      }]
+    },
     dispatch: sinon.spy()
   }
 
@@ -47,7 +51,7 @@ describe('Match', () => {
   })
 
   describe('#render', () => {
-    it(`should call renderChoices method when it isn\'t combined`, () => {
+    it(`should call renderChoices method when it isn't combined`, () => {
       spy.renderChoices = sandbox.spy(Match.prototype, 'renderChoices')
       expect(spy.renderChoices).to.have.been.called
     })
