@@ -8,7 +8,7 @@ import {
 
   REQUEST_FILL_WIDGET,
   SUCCESS_FILL_WIDGET,
-  FAILURE_FILL_WIDGET,
+  FAILURE_FILL_WIDGET
 } from '../../../scripts/Widget/actions'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
@@ -17,11 +17,10 @@ const initialState = {
   loaded: false,
   data: [],
   saving: false,
-  error: undefined,
+  error: undefined
 }
 
-
-export default function reducer(state = initialState, action) {
+export default function reducer (state = initialState, action) {
   let data
 
   switch (action.type) {
@@ -39,21 +38,21 @@ export default function reducer(state = initialState, action) {
     case t.REQUEST_ASYNC_WIDGET_FETCH:
       return { ...state, loaded: false }
     case t.SUCCESS_ASYNC_WIDGET_FETCH:
-      return { ...state, loaded: true, data: action.payload  }
+      return { ...state, loaded: true, data: action.payload }
     case t.FAILURE_ASYNC_WIDGET_FETCH:
       return { ...state, loaded: true, error: action.payload }
 
     case t.REQUEST_ASYNC_WIDGET_SELECT:
       return { ...state, loaded: false }
     case t.SUCCESS_ASYNC_WIDGET_SELECT:
-      return { ...state, loaded: true, data: action.payload  }
+      return { ...state, loaded: true, data: action.payload }
     case t.FAILURE_ASYNC_WIDGET_SELECT:
       return { ...state, loaded: true, error: action.payload }
 
     case t.EXPORT_DATACLIP_SUCCESS:
       data = state.data.map(widget => {
-        const exported_at = widget.id === action.payload.widget.id ? new Date() : undefined
-        return { ...widget, exported_at }
+        const exportedAt = widget.id === action.payload.widget.id ? new Date() : undefined
+        return { ...widget, exported_at: exportedAt }
       })
       return { ...state, data }
 
@@ -69,8 +68,9 @@ export default function reducer(state = initialState, action) {
     case REQUEST_FILL_WIDGET:
       return { ...state, saving: true }
     case SUCCESS_FILL_WIDGET:
-      data = state.data.map(widget => widget.id === action.counter.id ?
-        { ...widget, ...action.counter, filled: true } : widget
+      data = state.data.map(widget => widget.id === action.counter.id
+        ? { ...widget, ...action.counter, filled: true }
+        : widget
       )
       return { ...state, data, saving: false }
     case FAILURE_FILL_WIDGET:
