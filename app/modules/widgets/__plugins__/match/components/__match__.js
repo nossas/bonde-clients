@@ -4,9 +4,11 @@ import * as Paths from '../../../../../scripts/Paths'
 import { isValidEmail } from '../../../../../util/validation-helper'
 import { Error, Input } from '../../../../../components/FormUtil'
 import { TellAFriend } from '../../../../../scripts/components'
+
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
-import { actions as WidgetsMatchActions } from '../../../../../modules/widgets/__plugins__/match'
-import { Choices } from '../../../../../modules/widgets/__plugins__/match/components'
+
+import * as MatchActions from '../action-creators'
+import { Choices } from './'
 
 class Match extends Component {
   constructor(props, context) {
@@ -53,7 +55,7 @@ class Match extends Component {
 
       if (matchItem) {
         const matchId = matchItem.id
-        dispatch(WidgetsMatchActions.asyncMatchActivistCreate({ matchId, activist }))
+        dispatch(MatchActions.asyncMatchActivistCreate({ matchId, activist }))
         this.setState({ combined: true })
       } else {
         window.alert('Nenhuma imagem foi configurada para a combinação.')

@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 
+// Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
-import { actions as WidgetActions } from '../../../../../modules/widgets'
-import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
-import { AddChoiceForm, Page } from '../../../../../modules/widgets/__plugins__/match/components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Parent module dependencies
+import * as WidgetActions from '../../../../../modules/widgets/action-creators'
+
+// Current module dependencies
+import * as MatchActions from '../action-creators'
+import { AddChoiceForm, Page } from '../components'
 
 
 class ChoicesPage extends React.Component {

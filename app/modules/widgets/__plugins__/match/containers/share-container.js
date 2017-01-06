@@ -2,11 +2,11 @@ import React, { PropTypes } from 'react'
 import DocumentMeta from 'react-document-meta'
 import { connect } from 'react-redux'
 
-import { actions as WidgetsMatchActions } from '../../../../../modules/widgets/__plugins__/match'
+import * as MatchActions from '../action-creators'
 
 export class ShareContainer extends React.Component {
   static fetchData (store, params) {
-    const action = WidgetsMatchActions.asyncMatchShow(params)
+    const action = MatchActions.asyncMatchShow(params)
     const promise = store.dispatch(action)
     return Promise.all([promise])
   }

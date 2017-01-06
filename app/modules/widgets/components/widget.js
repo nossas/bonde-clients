@@ -7,20 +7,18 @@ const Widget = ({ widget, ...rest }) => {
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
   const Plugin = WidgetPlugins[kind]
 
-  const { sm_size, md_size, lg_size } = widget
+  const { sm_size: smSize, md_size: mdSize, lg_size: lgSize } = widget
   const className = classnames(
-    'px2', 'col', 'mb4', 'md-mb0',
-    'col-' + sm_size,
-    'sm-col-' + sm_size,
-    'md-col-' + md_size,
-    'lg-col-' + lg_size
+    'px2 col mb4 md-mb0',
+    `col-${smSize} sm-col-${smSize} md-col-${mdSize} lg-col-${lgSize}`
   )
 
   return (
     <div className={className}>
-      {Plugin ?
-        <Plugin {...rest} widget={widget} /> :
-        <span className="red">Widget {kind} not found</span>
+      {
+        Plugin
+        ? <Plugin {...rest} widget={widget} />
+        : <span className='red'>Widget {kind} not found</span>
       }
     </div>
   )

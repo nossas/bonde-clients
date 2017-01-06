@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react'
 
-import { ChoiceCombined, Page } from '../../../../../modules/widgets/__plugins__/match/components'
+// Global module dependencies
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
-import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
+
+// Current module dependencies
+import { ChoiceCombined, Page } from '../components'
+import * as MatchActions from '../action-creators'
 
 export default class GoalsPage extends React.Component {
   widget (props = this.props) {

@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Menu } from '../../../../../modules/widgets/__plugins__/match/components'
 import { SettingsPageLayout } from '../../../../../components/Layout'
+
+import { Menu } from '../components'
 
 const MatchPage = ({ widget, mobilization, location, children }) => (
   <SettingsPageLayout>
