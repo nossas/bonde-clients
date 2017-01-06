@@ -1,11 +1,10 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
-import sinon from 'sinon'
 
-import { AddChoiceForm } from '../../components/'
+import AddChoiceForm from './add-choice-form'
 
-describe('Match/components/AddChoiceForm', () => {
+describe('app/modules/widgets/__plugins__/match/components/add-choice-form', () => {
   let wrapper
   let props = {
     title: undefined,
@@ -58,7 +57,7 @@ describe('Match/components/AddChoiceForm', () => {
   })
 
   it('should not add choice when choice exists in list', () => {
-    let expected = undefined
+    let expected
     wrapper.setProps({
       choices: ['Item1'],
       handleAddItem: (choice) => {

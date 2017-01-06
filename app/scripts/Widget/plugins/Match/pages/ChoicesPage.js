@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux'
 import * as Paths from '../../../../Paths'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
-import { Page, AddChoiceForm } from '../components'
+import { Page } from '../components'
+import { AddChoiceForm } from '../../../../../modules/widgets/__plugins__/match/components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 
