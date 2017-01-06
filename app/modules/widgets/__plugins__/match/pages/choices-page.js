@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 
-import * as Paths from '../../../../Paths'
+import * as Paths from '../../../../../scripts/Paths'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
 import { AddChoiceForm, Page } from '../../../../../modules/widgets/__plugins__/match/components'
