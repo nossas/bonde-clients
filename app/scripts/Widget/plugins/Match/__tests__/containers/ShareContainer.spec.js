@@ -10,25 +10,24 @@ describe('Match/containers/ShareContainer', () => {
   let sandbox
   let spy = {}
   let params = { id: 65, widget_id: 96 }
-  let matches = {
+  let match = {
     data: {
       first_choice: 'Foo Choice',
       second_choice: 'Bar Choice',
       goal_image: 'foo-bar-image.jpg',
-      widget_title: "Foo Bar Widget Title!"
+      widget_title: 'Foo Bar Widget Title!'
     }
   }
-  let props = { matches, params }
+  let props = { match, params }
   let store = {
-    getState() { return matches },
+    getState () { return match },
     subscribe: sinon.spy(),
     dispatch: sinon.spy()
   }
-  let context = { store }
 
   before(() => {
     sandbox = sinon.sandbox.create()
-    wrapper = shallow(<ShareContainer { ...props } />)
+    wrapper = shallow(<ShareContainer {...props} />)
   })
 
   afterEach(() => {
@@ -69,14 +68,14 @@ describe('Match/containers/ShareContainer', () => {
         expect(result.meta.name).to.have.all.keys(keys)
       })
       it('og:title prop should be concatenation of first and second choices', () => {
-        const expected = `${matches.data.first_choice} + ${matches.data.second_choice}`
+        const expected = `${match.data.first_choice} + ${match.data.second_choice}`
         expect(result.meta.name['og:title']).to.equal(expected)
       })
       it('og:description prop should be equal as passed', () => {
-        expect(result.meta.name['og:description']).to.equal(matches.data.widget_title)
+        expect(result.meta.name['og:description']).to.equal(match.data.widget_title)
       })
       it('og:image prop should be equal as passed', () => {
-        expect(result.meta.name['og:image']).to.equal(matches.data.goal_image)
+        expect(result.meta.name['og:image']).to.equal(match.data.goal_image)
       })
     })
   })

@@ -12,7 +12,7 @@ export class ShareContainer extends React.Component {
   }
 
   metaData (props = this.props) {
-    const { matches: { data } } = props
+    const { match: { data } } = props
     return { meta: { name: {
       'og:title': `${data.first_choice} + ${data.second_choice}`,
       'og:description': data.widget_title,
@@ -26,10 +26,10 @@ export class ShareContainer extends React.Component {
 }
 
 ShareContainer.propTypes = {
-  matches: PropTypes.object,
+  match: PropTypes.object,
   params: PropTypes.object
 }
 
-const mapStateToProps = state => ({ matches: state.matches })
+const mapStateToProps = state => ({ match: state.widgets.match })
 
 export default connect(mapStateToProps)(ShareContainer)

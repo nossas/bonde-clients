@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form'
 
 import colorPicker from '../../app/components/ColorPicker/ColorPickerReducer'
 import matches from '../../app/scripts/Widget/plugins/Match/reducer'
@@ -14,7 +14,12 @@ import { reducers as community } from '../../app/scripts/Community'
 import { reducers as widgets } from '../../app/modules/widgets'
 
 export default combineReducers({
-  form: formReducer,
+  form,
+
+  blocks,
+  auth,
+  community,
+  widgets,
 
   // Need some refact
   mobilization,
@@ -22,10 +27,5 @@ export default combineReducers({
   selectableList,
   filterableSearchBar,
   colorPicker,
-  matches,
-
-  blocks,
-  auth,
-  community,
-  widgets,
+  matches
 })

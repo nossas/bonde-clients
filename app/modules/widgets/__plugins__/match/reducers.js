@@ -2,7 +2,8 @@ import * as t from '../../../../modules/widgets/__plugins__/match/action-types'
 
 const initialState = {
   loading: false,
-  error: undefined
+  error: undefined,
+  data: []
 }
 
 export default function MatchReducers (state = initialState, action) {
@@ -26,6 +27,13 @@ export default function MatchReducers (state = initialState, action) {
     case t.WIDGET_MATCH_DESTROY_SUCCESS:
       return { ...state, loading: false }
     case t.WIDGET_MATCH_DESTROY_FAILURE:
+      return { ...state, loading: false, error: action.payload }
+
+    case t.WIDGET_MATCH_SHOW_REQUEST:
+      return { ...state, loading: true }
+    case t.WIDGET_MATCH_SHOW_SUCCESS:
+      return { ...state, loading: false, data: action.payload }
+    case t.WIDGET_MATCH_SHOW_FAILURE:
       return { ...state, loading: false, error: action.payload }
 
     default:
