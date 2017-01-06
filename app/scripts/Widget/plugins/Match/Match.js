@@ -5,7 +5,7 @@ import { isValidEmail } from '../../../../util/validation-helper'
 import { Error, Input } from '../../../../components/FormUtil'
 import { TellAFriend } from '../../../components'
 import { WidgetOverlay } from '../../../../modules/widgets/components'
-import { addActivistMatch } from './actions'
+import { actions as WidgetsMatchActions } from '../../../../modules/widgets/__plugins__/match'
 import { Choices } from './components'
 
 class Match extends Component {
@@ -53,7 +53,7 @@ class Match extends Component {
 
       if (matchItem) {
         const matchId = matchItem.id
-        dispatch(addActivistMatch({ matchId, activist }))
+        dispatch(WidgetsMatchActions.asyncMatchActivistCreate({ matchId, activist }))
         this.setState({ combined: true })
       } else {
         window.alert('Nenhuma imagem foi configurada para a combinação.')
