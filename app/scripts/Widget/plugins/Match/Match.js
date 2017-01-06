@@ -6,7 +6,7 @@ import { Error, Input } from '../../../../components/FormUtil'
 import { TellAFriend } from '../../../components'
 import { WidgetOverlay } from '../../../../modules/widgets/components'
 import { actions as WidgetsMatchActions } from '../../../../modules/widgets/__plugins__/match'
-import { Choices } from './components'
+import { Choices } from '../../../../modules/widgets/__plugins__/match/components'
 
 class Match extends Component {
   constructor(props, context) {
