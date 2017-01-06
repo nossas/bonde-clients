@@ -4,19 +4,18 @@ import {
   FormRedux,
   FormGroup,
   ControlLabel,
-  FormControl,
-  SubmitButton,
-  SuccessMessage
+  FormControl
 } from '../../../scripts/Dashboard/Forms'
-
-import { FloatLayout } from '../../../scripts/Dashboard/Grids'
+import MobilizationSettingsForm from './mobilization-settings-form'
 
 
 export default (props) => {
   const { floatSubmit, fields: { name, goal }, ...formProps } = props
 
+  const ComponentForm = floatSubmit ? MobilizationSettingsForm : FormRedux
+
   return (
-    <FormRedux nosubmit={floatSubmit} {...formProps}>
+    <ComponentForm {...formProps}>
       <FormGroup controlId="name" {...name}>
         <ControlLabel maxLength={100}>Nome</ControlLabel>
         <FormControl
@@ -35,13 +34,7 @@ export default (props) => {
           rows="4"
         />
       </FormGroup>
-      {floatSubmit ? (
-        <FloatLayout position="floatTopRight">
-          <SubmitButton>Salvar</SubmitButton>
-          <SuccessMessage text="Dados editados com sucesso." />
-        </FloatLayout>
-      ) : null}
-    </FormRedux>
+    </ComponentForm>
   )
 }
 

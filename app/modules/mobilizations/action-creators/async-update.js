@@ -6,7 +6,6 @@ export default ({ id, ...mobilization }) => (dispatch, getState, axios) => {
   return axios
     .put(`/mobilizations/${id}`, { mobilization }, { headers: credentials })
     .then(({ status, data }) => {
-      debugger
       if (status === 200) {
         dispatch({ type: t.UPDATE, payload: data })
         return Promise.resolve()
