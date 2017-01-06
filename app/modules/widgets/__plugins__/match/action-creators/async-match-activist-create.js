@@ -8,14 +8,14 @@ const asyncMatchActivistCreate = ({ matchId, activist }) => (dispatch, getState,
   const body = { activist_match: { match_id: matchId, activist } }
   const config = { headers: credentials }
 
-  dispatch({ type: t.REQUEST_ADD_ACTIVIST_MATCH })
+  dispatch({ type: t.WIDGET_MATCH_ACTIVIST_CREATE_REQUEST })
   return axios.post(endpoint, body, config)
     .then(response => {
-      dispatch(createAction(t.SUCCESS_ADD_ACTIVIST_MATCH, response.data))
+      dispatch(createAction(t.WIDGET_MATCH_ACTIVIST_CREATE_SUCCESS, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(t.FAILURE_ADD_ACTIVIST_MATCH, failure))
+      dispatch(createAction(t.WIDGET_MATCH_ACTIVIST_CREATE_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
