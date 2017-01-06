@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 
 import * as WidgetActions from '../../../actions'
-import { ChoiceCombined } from '../../../../../modules/widgets/__plugins__/match/components'
-import { Page } from '../components'
+import { ChoiceCombined, Page } from '../../../../../modules/widgets/__plugins__/match/components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
 
