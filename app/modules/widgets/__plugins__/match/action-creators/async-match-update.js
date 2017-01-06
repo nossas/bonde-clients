@@ -1,6 +1,7 @@
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget } from '../../../../../modules/widgets/selectors'
+import { getWidget, getWidgetList } from '../../../../../modules/widgets/selectors'
+import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
 
 
 const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
@@ -15,13 +16,26 @@ const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
   dispatch({ type: t.WIDGET_MATCH_UPDATE_REQUEST })
   return axios.put(endpoint, body, config)
     .then(response => {
-      dispatch(createAction(t.WIDGET_MATCH_UPDATE_SUCCESS, response.data))
+      dispatch({ type: t.WIDGET_MATCH_UPDATE_SUCCESS })
+      dispatch(WidgetsActions.setWidgetList(
+        updateWidgetList(state, response.data)
+      ))
       return Promise.resolve()
     })
     .catch(failure => {
       dispatch(createAction(t.WIDGET_MATCH_UPDATE_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
+}
+
+const updateWidgetList = (state, match) => {
+  return getWidgetList(state).map(widget => {
+    if (widget.id === match.widget_id) {
+      const mapMatch = entity => entity.id === match.id ? match : entity
+      widget.match_list = widget.match_list.map(mapMatch)
+    }
+    return widget
+  })
 }
 
 export default asyncMatchUpdate

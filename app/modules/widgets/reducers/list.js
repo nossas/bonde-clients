@@ -10,7 +10,6 @@ import {
   SUCCESS_FILL_WIDGET,
   FAILURE_FILL_WIDGET,
 } from '../../../scripts/Widget/actions'
-import { reducers as MatchReducers } from '../../../modules/widgets/__plugins__/match'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
@@ -24,14 +23,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   let data
-
-  //
-  // FIXME
-  // Needs to refactor the function below. Understand how to
-  // change the list of widgets through Match widget reducers
-  // without duplicating switch case action type verification.
-  //
-  MatchReducers(state, action)
 
   switch (action.type) {
     //
@@ -65,6 +56,12 @@ export default function reducer(state = initialState, action) {
         return { ...widget, exported_at }
       })
       return { ...state, data }
+
+    //
+    // Sync Actions
+    //
+    case t.SET_WIDGET_LIST:
+      return { ...state, data: action.payload }
 
     //
     // Needs refactoring
