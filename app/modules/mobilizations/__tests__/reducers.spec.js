@@ -80,6 +80,19 @@ describe('MobilizationReducers / entities', () => {
     })
   })
 
+  describe('t.UPDATE', () => {
+
+    beforeEach(() => {
+      payload = { id: 1, name: 'Replaced' }
+      nextState = reducer(undefined, { type: t.LOAD, payload: [{ id: 1, name: 'Lorem' }] })
+      nextState = reducer(nextState, { type: t.UPDATE, payload })
+    })
+
+    it('should replace payload in data list', () => {
+      expect(nextState.data).to.deep.equal([payload])
+    })
+  })
+
   describe('t.TOGGLE_MENU', () => {
 
     beforeEach(() => {

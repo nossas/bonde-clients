@@ -4,16 +4,19 @@ import {
   FormRedux,
   FormGroup,
   ControlLabel,
-  FormControl
+  FormControl,
+  SubmitButton,
+  SuccessMessage
 } from '../../../scripts/Dashboard/Forms'
+
+import { FloatLayout } from '../../../scripts/Dashboard/Grids'
 
 
 export default (props) => {
-
-  const { fields: { name, goal }, ...formProps } = props
+  const { floatSubmit, fields: { name, goal }, ...formProps } = props
 
   return (
-    <FormRedux {...formProps}>
+    <FormRedux nosubmit={floatSubmit} {...formProps}>
       <FormGroup controlId="name" {...name}>
         <ControlLabel maxLength={100}>Nome</ControlLabel>
         <FormControl
@@ -32,6 +35,12 @@ export default (props) => {
           rows="4"
         />
       </FormGroup>
+      {floatSubmit ? (
+        <FloatLayout position="floatTopRight">
+          <SubmitButton>Salvar</SubmitButton>
+          <SuccessMessage text="Dados editados com sucesso." />
+        </FloatLayout>
+      ) : null}
     </FormRedux>
   )
 }

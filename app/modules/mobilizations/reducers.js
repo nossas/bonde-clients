@@ -17,6 +17,11 @@ export default (state = initialState, action) => {
         data: [...state.data, action.payload],
         currentId: action.payload.id
       }
+    case t.UPDATE:
+      return {
+        ...state,
+        data: state.data.map(m => m.id === action.payload.id ? action.payload : m)
+      }
     case t.FETCH:
       return {
         ...state,

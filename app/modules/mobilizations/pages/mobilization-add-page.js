@@ -4,7 +4,7 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 import * as MobilizationSelectors from '../selectors'
 import { asyncAdd } from '../action-creators'
-import MobilizationForm, { fields, validate } from '../components/mobilization-form'
+import MobilizationBasicsForm, { fields, validate } from '../components/mobilization-basics-form'
 
 import { NewMobilizationHeader } from '../../../scripts/Mobilization/components'
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
@@ -31,7 +31,7 @@ class MobilizationAddPage extends Component {
         <div className="clearfix overflow-auto">
           <div className="p3 lg-col-5 mx-auto">
             <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
-            <MobilizationForm
+            <MobilizationBasicsForm
               className="bg-white"
               onFinishSubmit={this.onFinishSubmit.bind(this)}
               {...formProps}

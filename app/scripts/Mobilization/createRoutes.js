@@ -29,6 +29,10 @@ import {
   MobilizationListPage
 } from '../../modules/mobilizations/pages'
 
+import {
+  MobilizationBasicsPage
+} from '../../modules/mobilizations/pages/settings'
+
 
 export default requiredLogin => (
   <Route component={MobilizationDashboardContainer} onEnter={requiredLogin}>
@@ -37,14 +41,14 @@ export default requiredLogin => (
     {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
     <Route path="/mobilizations/:mobilization_id" component={MobilizationEditContainer}>
       <Route path="/edit" component={MobilizationPage} />
-      {blocksCreateRoutes()}
-      {widgetCreateRoutes()}
       <Route component={MobilizationSettingsContainer}>
-        <Route path="/basics" component={MobilizationBasicsEditFormPage} />
+        <Route path="/basics" component={MobilizationBasicsPage} />
         <Route path="/analytics" component={MobilizationAnalyticsPage} />
         <Route path="/sharing" component={MobilizationSharingPage} />
         <Route path="/customDomain" component={MobilizationCustomDomainPage} />
       </Route>
+      {blocksCreateRoutes()}
+      {widgetCreateRoutes()}
     </Route>
   </Route>
 )

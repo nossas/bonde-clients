@@ -3,18 +3,22 @@ import { connect } from 'react-redux'
 
 import * as MobilizationSelectors from '../selectors'
 
-import { SettingsPageLayout, SettingsPageMenuLayout } from '../../../components/Layout'
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '../../../components/Layout'
 import { Tabs, Tab } from '../../../components/Navigation'
 import * as Paths from '../../../scripts/Paths'
 
 
 const MobilizationSettingsContainer = (props) => {
-  const { children, mobilization, location: { pathname } } = props
+  const { children, mobilization: { id }, location: { pathname } } = props
 
-  const basicsPath = Paths.basicsMobilization(mobilization.id)
-  const sharingPath = Paths.sharingMobilization(mobilization.id)
-  const analyticsPath = Paths.analyticsMobilization(mobilization.id)
-  const customDomainPath = Paths.customDomainMobilization(mobilization.id)
+  const basicsPath = Paths.basicsMobilization(id)
+  const sharingPath = Paths.sharingMobilization(id)
+  const analyticsPath = Paths.analyticsMobilization(id)
+  const customDomainPath = Paths.customDomainMobilization(id)
 
   return (
     <SettingsPageLayout>
@@ -42,7 +46,9 @@ const MobilizationSettingsContainer = (props) => {
           />
         </Tabs>
       </SettingsPageMenuLayout>
-      {children}
+      <SettingsPageContentLayout>
+        {children}
+      </SettingsPageContentLayout>
     </SettingsPageLayout>
   )
 }

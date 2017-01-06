@@ -10,7 +10,7 @@ import * as Paths from '../../../scripts/Paths'
 
 
 @reactMixin.decorate(Navigation)
-class MobilizationPage extends Component {
+export class MobilizationPage extends Component {
 
   componentDidUpdate() {
     const { mobilization, blocks } = this.props
