@@ -3,9 +3,9 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { ShareContainer } from '../../containers/ShareContainer'
+import { ShareContainer } from './share-container'
 
-describe('Match/containers/ShareContainer', () => {
+describe('app/modules/widgets/__plugins__/match/containers/share-container', () => {
   let wrapper
   let sandbox
   let spy = {}
