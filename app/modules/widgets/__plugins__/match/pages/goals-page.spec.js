@@ -3,11 +3,11 @@ import { mount } from 'enzyme'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
-import { GoalsPage } from '../../pages'
+import GoalsPage from './goals-page'
 
-describe('Match/pages/GoalsPage', () => {
+describe('app/modules/widgets/__plugins__/match/pages/goals-page', () => {
   let wrapper
-  let match_list = [
+  let matchList = [
     {
       id: 43,
       widget_id: 93,
@@ -31,7 +31,7 @@ describe('Match/pages/GoalsPage', () => {
   let props = {
     params: { widget_id: '1' },
     mobilization: { id: 1 },
-    widgets: { data: [{ id: 1, settings: {}, match_list }] },
+    widgets: { data: [{ id: 1, settings: {}, match_list: matchList }] },
     location: { pathname: '' },
     auth: { credentials: {} },
     dispatch: sinon.spy()
@@ -50,11 +50,15 @@ describe('Match/pages/GoalsPage', () => {
 
   it('should render ChoiceCombined itens equals possible match', () => {
     wrapper.setProps({
-      widgets: { data: [{ id: 1, match_list, settings: {
-        choices1: '1,2,3',
-        choicesA: '4,5'
-      } }]}
+      widgets: { data: [{
+        id: 1,
+        match_list: matchList,
+        settings: {
+          choices1: '1,2,3',
+          choicesA: '4,5'
+        }
+      }]}
     })
-    expect(wrapper.find('ChoiceCombined').length).to.equal(3*2)
+    expect(wrapper.find('ChoiceCombined').length).to.equal(3 * 2)
   })
 })

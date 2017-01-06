@@ -1,17 +1,10 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 
-import * as WidgetActions from '../../../actions'
 import { ChoiceCombined, Page } from '../../../../../modules/widgets/__plugins__/match/components'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 import { actions as MatchActions } from '../../../../../modules/widgets/__plugins__/match'
 
 export default class GoalsPage extends React.Component {
-  constructor (props, context) {
-    super(props, context)
-    this.bindWidgetActions = bindActionCreators(WidgetActions, props.dispatch)
-  }
-
   widget (props = this.props) {
     const { widgets, params } = props
     const widgetsStringId = widgets.data.map(widget => widget.id.toString())
