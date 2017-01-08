@@ -1,19 +1,10 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import {
-  NewMobilizationContainer
-} from './containers'
-import {
-  /*MobilizationSharingPage,*/
-  MobilizationCustomDomainPage,
-  EditMobilizationPage,
-} from './pages'
-
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
-import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
+import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
 import {
   MobilizationEditContainer,
   MobilizationDashboardContainer,
