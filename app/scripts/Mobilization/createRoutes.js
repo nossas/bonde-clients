@@ -29,7 +29,8 @@ import {
 import {
   MobilizationBasicsPage,
   MobilizationAnalyticsPage,
-  MobilizationSharingPage
+  MobilizationSharingPage,
+  MobilizationDomainPage
 } from '../../modules/mobilizations/pages/settings'
 
 
@@ -44,7 +45,7 @@ export default requiredLogin => (
         <Route path="/basics" component={MobilizationBasicsPage} />
         <Route path="/analytics" component={MobilizationAnalyticsPage} />
         <Route path="/sharing" component={MobilizationSharingPage} />
-        <Route path="/customDomain" component={MobilizationCustomDomainPage} />
+        <Route path="/customDomain" component={MobilizationDomainPage} />
       </Route>
       {blocksCreateRoutes()}
       {widgetCreateRoutes()}
