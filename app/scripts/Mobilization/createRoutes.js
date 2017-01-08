@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import { SidebarContainer } from '../Dashboard/containers'
 import {
   MobilizationContainer,
   NewMobilizationContainer,
@@ -15,32 +14,29 @@ import {
   MobilizationAnalyticsPage,
   MobilizationSharingPage,
   MobilizationCustomDomainPage,
-  EditMobilizationPage,
+  EditMobilizationPage
 } from './pages'
 
 import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
 import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
-import { createRoutes as widgetCreateRoutes } from './../Widget'
-import newStructureWidgetCreateRoutes from '../../modules/widgets/routes'
-
+import widgetsRoutes from '../../modules/widgets/routes'
 
 export default requiredLogin => (
   <Route component={MobilizationContainer} onEnter={requiredLogin}>
-    <Route path="/" component={MobilizationListPage} />
-    <Route path="/mobilizations" component={NewMobilizationContainer}>
-      <Route path="/new" component={MobilizationBasicsNewFormPage} />
+    <Route path='/' component={MobilizationListPage} />
+    <Route path='/mobilizations' component={NewMobilizationContainer}>
+      <Route path='/new' component={MobilizationBasicsNewFormPage} />
     </Route>
-    {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
-    <Route path="/mobilizations/:mobilization_id" component={MobilizationDashboardContainer}>
-      <Route path="/edit" component={EditMobilizationPage} />
+    {mobilizationTemplatesRoutes('/mobilizations/:mobilization_id')}
+    <Route path='/mobilizations/:mobilization_id' component={MobilizationDashboardContainer}>
+      <Route path='/edit' component={EditMobilizationPage} />
       {blocksCreateRoutes()}
-      {widgetCreateRoutes()}
-      {newStructureWidgetCreateRoutes()}
+      {widgetsRoutes()}
       <Route component={MobilizationSettingsContainer}>
-        <Route path="/basics" component={MobilizationBasicsEditFormPage} />
-        <Route path="/analytics" component={MobilizationAnalyticsPage} />
-        <Route path="/sharing" component={MobilizationSharingPage} />
-        <Route path="/customDomain" component={MobilizationCustomDomainPage} />
+        <Route path='/basics' component={MobilizationBasicsEditFormPage} />
+        <Route path='/analytics' component={MobilizationAnalyticsPage} />
+        <Route path='/sharing' component={MobilizationSharingPage} />
+        <Route path='/customDomain' component={MobilizationCustomDomainPage} />
       </Route>
     </Route>
   </Route>

@@ -1,12 +1,4 @@
-// TODO: Remove jquery
-import $ from 'jquery'
 import request from 'superagent'
-
-import {
-  FETCH_MATCH
-} from '../constants/ActionTypes'
-
-import { actions as matchActions } from '../../modules/widgets/__plugins__/match'
 
 export const REQUEST_FILL_WIDGET = 'REQUEST_FILL_WIDGET'
 export const SUCCESS_FILL_WIDGET = 'SUCCESS_FILL_WIDGET'
@@ -26,10 +18,10 @@ const fillWidgetSuccess = data => ({
   counter: { id: data.widget_id, count: data.count }
 })
 
-export const fillWidget = (widget_id, fill) => dispatch => {
+export const fillWidget = (widgetId, fill) => dispatch => {
   dispatch(fillWidgetRequest())
   request
-    .post(`${process.env.API_URL}/widgets/${widget_id}/fill`)
+    .post(`${process.env.API_URL}/widgets/${widgetId}/fill`)
     .send({ fill })
     .end((err, res) => {
       if (err || !res.ok) dispatch(fillWidgetFailure(err || res.body))
