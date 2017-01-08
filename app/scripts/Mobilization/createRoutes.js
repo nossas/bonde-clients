@@ -5,7 +5,7 @@ import {
   NewMobilizationContainer
 } from './containers'
 import {
-  MobilizationSharingPage,
+  /*MobilizationSharingPage,*/
   MobilizationCustomDomainPage,
   EditMobilizationPage,
 } from './pages'
@@ -28,7 +28,8 @@ import {
 
 import {
   MobilizationBasicsPage,
-  MobilizationAnalyticsPage
+  MobilizationAnalyticsPage,
+  MobilizationSharingPage
 } from '../../modules/mobilizations/pages/settings'
 
 
