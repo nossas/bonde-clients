@@ -80,7 +80,7 @@ class Donation extends React.Component {
       that.setState({success: true})
       dispatch(DonationActions.finishTransaction(data))
     }, error: function(err) {
-      console.log(err)
+      console.error(err)
     }})
 
     const params = {

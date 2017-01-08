@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 
+// Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
 import { isValidEmail } from '../../../../../util/validation-helper'
 import { Error, Input } from '../../../../../components/FormUtil'
 import { TellAFriend } from '../../../../../scripts/components'
 
+// Parent module dependencies
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
+// Current module dependencies
 import * as MatchActions from '../action-creators'
-import { Choices } from './'
+import { Choices } from '../components'
 
 class Match extends Component {
   constructor(props, context) {

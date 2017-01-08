@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
