@@ -2,10 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { BlockTag } from '../../../modules/widgets/components'
+import { BlockTag } from '../components'
 
-
-describe('<BlockTag />', () => {
+describe('app/modules/widgets/components/block-tag', () => {
   let component
 
   beforeEach(() => {

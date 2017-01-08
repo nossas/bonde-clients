@@ -2,10 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Tag } from '../../../modules/widgets/components'
+import { Tag } from '../components'
 
-
-describe('<Tag />', () => {
+describe('app/modules/widgets/components/tag', () => {
   let component
   const props = {
     value: 'Igor Santos <igor@nossascidades.org>'
@@ -25,7 +24,7 @@ describe('<Tag />', () => {
   it('should render close icon clicable when onRemove passed', () => {
     let removed
     component.setProps({
-      onRemove: value => removed = value
+      onRemove: value => { removed = value }
     })
     component.find('i').simulate('click')
     expect(removed).to.equal(props.value)
@@ -34,7 +33,7 @@ describe('<Tag />', () => {
   it('should clickable when onClick passed', () => {
     let clicked
     component.setProps({
-      onClick: value => clicked = value
+      onClick: value => { clicked = value }
     })
     component.find('span').at(1).simulate('click')
     expect(clicked).to.equal(props.value)

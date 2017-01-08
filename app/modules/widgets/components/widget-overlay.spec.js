@@ -3,13 +3,12 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import { WidgetOverlay } from '../../../modules/widgets/components'
-
+import { WidgetOverlay } from '../components'
 
 describe('app/modules/widgets/components/widget-overlay', () => {
   let component
   let props = {
-    children: [],
+    children: []
   }
 
   before(() => {
@@ -17,7 +16,6 @@ describe('app/modules/widgets/components/widget-overlay', () => {
   })
 
   context('when editable is true', () => {
-
     before(() => {
       component.setProps({ editable: true })
     })
@@ -34,7 +32,7 @@ describe('app/modules/widgets/components/widget-overlay', () => {
     })
 
     it('should render children', () => {
-      component = mount(<WidgetOverlay><div className="teste">dassa</div></WidgetOverlay>)
+      component = mount(<WidgetOverlay><div className='teste'>dassa</div></WidgetOverlay>)
       expect(component.find('.teste').length).to.equal(1)
     })
 
@@ -45,7 +43,7 @@ describe('app/modules/widgets/components/widget-overlay', () => {
     it('should call onClick when clicked overlay', () => {
       let clicked = false
       component.setProps({
-        onClick: () => clicked = true
+        onClick: () => { clicked = true }
       })
       component.simulate('click')
       expect(clicked).to.equal(true)

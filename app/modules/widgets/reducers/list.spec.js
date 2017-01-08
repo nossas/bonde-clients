@@ -1,12 +1,11 @@
 import { expect } from 'chai'
 
-import * as t from '../../../modules/widgets/action-types'
-import reducer from '../../../modules/widgets/reducers/list'
-import { createAction } from '../../../modules/widgets/action-creators/create-action'
+import * as t from '../action-types'
+import reducer from './list'
+import { createAction } from '../action-creators/create-action'
 import { SUCCESS_FILL_WIDGET } from '../../../scripts/Widget/actions'
 
 describe('app/modules/widgets/reducers/list', () => {
-
   describe('Fill Widget', () => {
     it('should add count in success fill widget', () => {
       // state while requesting
@@ -41,5 +40,4 @@ describe('app/modules/widgets/reducers/list', () => {
     const nextState = reducer(initialState, action)
     expect(nextState.data[0].exported_at).to.be.Date
   })
-
 })

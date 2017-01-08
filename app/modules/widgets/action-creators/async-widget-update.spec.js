@@ -1,6 +1,12 @@
-import * as t from '../../../../modules/widgets/action-types'
+import { expect } from 'chai'
+
+import * as t from '../action-types'
+import * as WidgetActions from '../action-creators'
+import reducers from '../reducers'
 
 describe.skip('async-widget-update', () => {
+  const sandbox = {}
+  const requests = []
   it('should PUT widget using correct URL and dispatch action', () => {
     const dispatch = sandbox.spy()
     const widget = { id: 2, settings: {content: 'text'} }
@@ -10,7 +16,7 @@ describe.skip('async-widget-update', () => {
     expect(request.url).to.equal(`${process.env.API_URL}/mobilizations/1/widgets/2`)
     expect(request.method).to.equal('PUT')
     expect(request.requestBody).to.equal(JSON.stringify({widget}))
-    request.respond(200, { "Content-Type": "application/json" }, JSON.stringify(widget))
+    request.respond(200, { 'Content-Type': 'application/json' }, JSON.stringify(widget))
     expect(dispatch).to.have.been.calledWith({
       type: t.SUCCESS_ASYNC_WIDGET_UPDATE,
       widget
@@ -33,13 +39,13 @@ describe.skip('async-widget-update', () => {
         ]
       }
       const action = {
-        type: SUCCESS_ASYNC_WIDGET_UPDATE,
+        type: t.SUCCESS_ASYNC_WIDGET_UPDATE,
         widget: {
           id: 1,
           settings: { content: newContent }
         }
       }
-      const newState = reducer(initialState, action)
+      const newState = reducers(initialState, action)
       expect(newState.data[0].settings.content).to.equal(newContent)
     })
   })

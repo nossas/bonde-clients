@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 
-import { selectors as WidgetSelectors } from '../../modules/widgets'
-
+import * as WidgetSelectors from './selectors'
 
 describe('app/modules/widgets/selectors', () => {
   context('#getWidget', () => {
@@ -11,9 +10,9 @@ describe('app/modules/widgets/selectors', () => {
           data: [
             { id: 1, kind: 'donation' },
             { id: 2, kind: 'form' }
-          ],
-        },
-      },
+          ]
+        }
+      }
     }
 
     it('should return widget to params url widget_id', () => {

@@ -1,13 +1,12 @@
-import * as t from '../../../modules/widgets/action-types'
-
+import * as t from '../action-types'
 
 const initialState = {
   loading: false,
   success: false,
-  error: undefined,
+  error: undefined
 }
 
-export default function dataExport(state = initialState, action) {
+export default function dataExport (state = initialState, action) {
   switch (action.type) {
     case t.EXPORT_DATACLIP_REQUEST:
       return { ...state, loading: true }

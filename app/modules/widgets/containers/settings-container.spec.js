@@ -2,10 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { SettingsContainer } from '../../../../modules/widgets/containers/settings-container'
+import { SettingsContainer } from './settings-container'
 
-
-describe('app/scripts/Widget/containers/SettingsContainer', () => {
+describe('app/modules/widgets/containers/settings-container', () => {
   const props = {
     mobilization: { id: 1 },
     widget: { id: 1 }

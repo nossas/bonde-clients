@@ -1,15 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import classnames from 'classnames'
 
-import { actions as widgetActions } from '../../../modules/widgets'
+// Global module dependencies
 import { Loading } from '../../../scripts/components'
-import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
-import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../components/Layout'
 
+// Children modules dependencies
+import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
+import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
+
+// Current module dependencies
+import * as WidgetActions from '../action-creators'
+
 class DataExportPage extends Component {
-  componentDidMount() {
+  componentDidMount () {
     const { dataExportMount } = this.props
     dataExportMount()
   }
@@ -21,105 +25,98 @@ class DataExportPage extends Component {
     return widgets.data[currentWidgetIndex]
   }
 
-  fixzero(value) {
+  fixzero (value) {
     let valueToString = value.toString()
     return valueToString.length === 1 ? '0' + valueToString : valueToString
   }
 
-  formatExportAt(widget) {
+  formatExportAt (widget) {
     let datetime = new Date(String(widget.exported_at))
-    const date = this.fixzero(datetime.getDate()) + '/' + this.fixzero(datetime.getMonth()+1) + '/' + datetime.getFullYear()
+    const date = this.fixzero(datetime.getDate()) + '/' + this.fixzero(datetime.getMonth() + 1) + '/' + datetime.getFullYear()
     const time = this.fixzero(datetime.getHours()) + ':' + this.fixzero(datetime.getMinutes())
     return date + ' às ' + time
   }
 
-  renderLoadingMessage() {
+  renderLoadingMessage () {
     return <span>
-      <i className="fa fa-circle-o-notch fa-spin fa-w mr1" />
+      <i className='fa fa-circle-o-notch fa-spin fa-w mr1' />
       Aguarde enquanto estamos processando...
     </span>
   }
 
-  renderExportedMessage(widget = this.widget()) {
-    return <span className="olive">
+  renderExportedMessage (widget = this.widget()) {
+    return <span className='olive'>
       Última exportação: {this.formatExportAt(widget)}.
-      <i className="fa fa-calendar-check-o ml1" />
+      <i className='fa fa-calendar-check-o ml1' />
     </span>
   }
 
-  renderErrorMessage() {
+  renderErrorMessage () {
     const { error } = this.props
-    return <span className="red">{error}</span>
+    return <span className='red'>{error}</span>
   }
 
-  renderDisclaimer() {
-    return <div className="disclaimer clearfix">
-      <p className="mb1">
-        <span className="h2 orange">
-          <i className="fa fa-exclamation mr1" /> Atenção
+  renderDisclaimer () {
+    return <div className='disclaimer clearfix'>
+      <p className='mb1'>
+        <span className='h2 orange'>
+          <i className='fa fa-exclamation mr1' /> Atenção
         </span>
       </p>
-      <p className="h5">
+      <p className='h5'>
         Você está utilizando o navegador Safari. Os passos a seguir são
         necessários devido a uma incompatibilidade.
       </p>
-      <ul className="h5">
+      <ul className='h5'>
         <li>
           Clique com o botão direito do mouse no botão abaixo e selecione
-          a opção <span className="bold">"Transferir Arquivo Vinculado Como..."</span>
+          a opção <span className='bold'>"Transferir Arquivo Vinculado Como..."</span>
         </li>
         <li>
-          Salve o arquivo com o nome desejado e a extensão <span className="bold">.xlsx</span>
+          Salve o arquivo com o nome desejado e a extensão <span className='bold'>.xlsx</span>
         </li>
       </ul>
     </div>
   }
 
-  renderSaveAsContainer() {
+  renderSaveAsContainer () {
     const { loading } = this.props
-    return <div id="saveAs" style={{display: loading ? 'none' : 'block'}}></div>
-    return <div id="saveAs" style={{display: loading ? 'none' : 'block'}}>
-      <a href="#" className="btn btn-outline mb1 bg-pagenta white caps p2">
-        <i className="fa fa-download mr1" />
-        Salvar planilha
-      </a>
-    </div>
+    return <div id='saveAs' style={{display: loading ? 'none' : 'block'}} />
   }
 
-  renderPage() {
+  renderPage () {
     const {
       mobilization,
       loading,
       error,
       success,
-      params,
       // Actions
-      asyncWidgetDataExport,
+      asyncWidgetDataExport
     } = this.props
 
     const widget = this.widget()
     const filename = mobilization.name + '.xlsx'
-    const adownloadSupport = ("download" in document.createElement("a"))
+    const adownloadSupport = ('download' in document.createElement('a'))
 
     return (
       <SettingsPageLayout>
-        {( widget.kind === 'donation'
+        {(widget.kind === 'donation'
           ? <DonationWidgetMenu {...this.props} widget={widget} />
           : <FormWidgetMenu {...this.props} widget={widget} />
         )}
 
         <SettingsPageContentLayout>
-          <div className="table caps bold mb2 darkengray h6">
-            <i className="fa fa-file-excel-o darkengray table-cell align-middle h2" />
-            <span className="table-cell align-middle pl1">Exportar</span>
+          <div className='table caps bold mb2 darkengray h6'>
+            <i className='fa fa-file-excel-o darkengray table-cell align-middle h2' />
+            <span className='table-cell align-middle pl1'>Exportar</span>
           </div>
 
-          <p className="h5 mb2 darkengray">
+          <p className='h5 mb2 darkengray'>
             Clique no botão abaixo para baixar o relatório completo do
             formulário em formato excel.
           </p>
 
-          <p className="mb2">
+          <p className='mb2'>
             <button
               disabled={loading}
               className='btn bg-pagenta white caps p2 rounded'
@@ -132,7 +129,7 @@ class DataExportPage extends Component {
             </button>
           </p>
 
-          <div className="mb3">
+          <div className='mb3'>
             {(loading ? this.renderLoadingMessage() : null)}
             {(widget.exported_at && !loading ? this.renderExportedMessage() : null)}
             {(error ? this.renderErrorMessage() : null)}
@@ -158,13 +155,13 @@ DataExportPage.propTypes = {
   error: PropTypes.object,
   // Actions
   asyncWidgetDataExport: PropTypes.func.isRequired,
-  dataExportMount: PropTypes.func.isRequired,
+  dataExportMount: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   loading: state.widgets.dataExport.loading,
   error: state.widgets.dataExport.error,
-  success: state.widgets.dataExport.success,
+  success: state.widgets.dataExport.success
 })
 
-export default connect(mapStateToProps, widgetActions)(DataExportPage)
+export default connect(mapStateToProps, WidgetActions)(DataExportPage)

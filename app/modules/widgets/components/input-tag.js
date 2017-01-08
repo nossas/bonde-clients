@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
-import { BlockTag } from '../../../modules/widgets/components'
-
+import { BlockTag } from '../components'
 
 class InputTag extends Component {
-
   constructor(props) {
     super(props)
-    this.state = { error: undefined, value: '' }
+    this.state = {
+      error: undefined,
+      value: ''
+    }
   }
 
   handleKeyPress(event) {
@@ -38,23 +39,23 @@ class InputTag extends Component {
     const { values, label, onRemoveTag } = this.props
 
     return (
-      <div className="input-tag">
+      <div className='input-tag'>
         {
           label &&
           <label
             style={{ cursor: 'pointer' }}
-            className="h5 bold caps"
-            htmlFor="insert-tag-id"
+            className='h5 bold caps'
+            htmlFor='insert-tag-id'
           >
             {label}
-            {(this.state.error && <span className="red"> - {this.state.error}</span>)}
+            {(this.state.error && <span className='red'> - {this.state.error}</span>)}
           </label>
         }
         <input
-          ref="insert"
-          id="insert-tag-id"
-          type="text"
-          className="input block h3 col-12 mt1 px1"
+          ref='insert'
+          id='insert-tag-id'
+          type='text'
+          className='input block h3 col-12 mt1 px1'
           value={this.state.value}
           onChange={(e) => this.setState({ value: e.target.value })}
           onKeyPress={::this.handleKeyPress}
@@ -62,9 +63,12 @@ class InputTag extends Component {
         <BlockTag
           tags={values}
           onClick={::this.handleEdit}
-          onRemove={onRemoveTag} />
-        <span className="h5">{'Pressione <Enter> para adicionar mais alvos.'}</span>
-        <p className="h5 mt1">
+          onRemove={onRemoveTag}
+        />
+        <span className='h5'>
+          {'Pressione <Enter> para adicionar mais alvos.'}
+        </span>
+        <p className='h5 mt1'>
           *** Ao adicionar um novo alvo, é necessário alterar um dos outros dois campos
           abaixo para salvar.
         </p>

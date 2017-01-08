@@ -1,4 +1,4 @@
-import * as t from '../../../modules/widgets/action-types'
+import * as t from '../action-types'
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,

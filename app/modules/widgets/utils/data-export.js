@@ -1,6 +1,7 @@
 import download from 'downloadjs'
 import XLSX from 'xlsx'
 
+import * as t from '../action-types'
 
 const safariCallback = dataBase64 => (fileName, strMimeType) => {
   const icon = document.createElement('span')
@@ -31,18 +32,18 @@ export const forceDownloadFile = (workbookBase64, filename) => {
   const options = { safariCallback: safariCallback(workbookBase64) }
 
   download(workbook, filename, contentType, options)
-  return dispatch => { dispatch({ type: EXPORT_DATACLIP_FORCE_DOWNLOAD }) }
+  return dispatch => { dispatch({ type: t.EXPORT_DATACLIP_FORCE_DOWNLOAD }) }
 }
 
 export const makeExcelFile = (data, sheetName = 'Sheet 1') => {
   let workbook = { Sheets: {}, Props: {}, SSF: {}, SheetNames: [] }
   let workbookSheet = {}
-  let range = { s: {c:0, r:0}, e: {c:0, r:0} }
+  let range = { s: {c: 0, r: 0}, e: {c: 0, r: 0} }
 
-  for (let r = 0; r != data.length; ++r) {
+  for (let r = 0; r !== data.length; ++r) {
     if (range.e.r < r) range.e.r = r
 
-    for (let c = 0; c != data[r].length; ++c) {
+    for (let c = 0; c !== data[r].length; ++c) {
       if (range.e.c < c) range.e.c = c
 
       const v = data[r][c]
@@ -53,8 +54,8 @@ export const makeExcelFile = (data, sheetName = 'Sheet 1') => {
 
       if (cell.v == null) continue
 
-      const cell_ref = XLSX.utils.encode_cell({ c, r })
-      workbookSheet[cell_ref] = cell
+      const cellRef = XLSX.utils.encode_cell({ c, r })
+      workbookSheet[cellRef] = cell
     }
   }
   workbookSheet['!ref'] = XLSX.utils.encode_range(range)

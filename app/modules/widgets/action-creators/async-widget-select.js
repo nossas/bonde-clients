@@ -1,7 +1,6 @@
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
-
 const asyncWidgetSelect = where => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
 

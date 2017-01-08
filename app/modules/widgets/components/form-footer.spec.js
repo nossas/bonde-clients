@@ -2,11 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
+import { FormFooter } from '../components'
 
-import { FormFooter } from '../../../modules/widgets/components'
-
-
-describe('<FormFooter />', () => {
+describe('app/modules/widgets/components/form-footer', () => {
   let component
 
   beforeEach(() => {

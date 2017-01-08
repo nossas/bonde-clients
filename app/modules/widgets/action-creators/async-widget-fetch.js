@@ -1,7 +1,6 @@
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
-
 const asyncWidgetFetch = mobilizationId => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
 

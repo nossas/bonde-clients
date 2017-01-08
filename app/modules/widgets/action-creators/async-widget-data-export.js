@@ -1,7 +1,6 @@
-import * as t from '../../../modules/widgets/action-types'
-import { forceDownloadFile, makeExcelFile } from '../../../modules/widgets/utils/data-export'
-import { createAction } from '../../../modules/widgets/action-creators/create-action'
-
+import * as t from '../action-types'
+import { forceDownloadFile, makeExcelFile } from '../utils/data-export'
+import { createAction } from './create-action'
 
 const asyncWidgetDataExport = params => (dispatch, getState, axios) => {
   const { auth: { credentials } } = getState()
@@ -17,7 +16,7 @@ const asyncWidgetDataExport = params => (dispatch, getState, axios) => {
         return JSON.parse(fields).map(({ label, value }) => ({ label, value }))
       })
       const matrix = [
-        data.length && data[0].map(entity => entity.label),
+        data.length && data[0].map(entity => entity.label)
       ].concat(data.map(row => row.map(entity => entity.value)))
 
       forceDownloadFile(

@@ -1,9 +1,8 @@
 import { expect } from 'chai'
 
-import * as t from '../../../modules/widgets/action-types'
-import { createAction } from '../../../modules/widgets/action-creators/create-action'
-import reducer from '../../../modules/widgets/reducers/data-export'
-
+import * as t from '../action-types'
+import { createAction } from '../action-creators/create-action'
+import reducer from './data-export'
 
 describe('app/modules/widgets/reducers/data-export', () => {
   it('should update state with loading property as true', () => {

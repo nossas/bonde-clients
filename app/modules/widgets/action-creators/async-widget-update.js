@@ -2,7 +2,6 @@ import * as MobilizationSelectors from '../../../scripts/Mobilization/Mobilizati
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
-
 const asyncWidgetUpdate = widget => (dispatch, getState, axios) => {
   const state = getState()
   const mobilization = MobilizationSelectors.getMobilization(state)

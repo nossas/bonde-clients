@@ -2,11 +2,11 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { InputTag } from '../../../modules/widgets/components'
+import { InputTag } from '../components'
 
-
-describe('<InputTag />', () => {
+describe('app/modules/widgets/components/input-tag', () => {
   let wrapper
+  // eslint-disable-next-line
   const re = /[\w ]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
   const tags = ['Tag 1', 'Tag 2']
   const props = {

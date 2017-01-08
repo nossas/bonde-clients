@@ -2,10 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import Widget from '../../../../modules/widgets/components'
+import Widget from './__widget__'
 
-
-describe('app/scripts/Widget/components/Widget', () => {
+describe('app/modules/widgets/components/__widget__', () => {
   let widget
   let props = {
     widget: {

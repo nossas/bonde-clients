@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import '../../../modules/widgets/components/scss/widget-overlay.scss'
+import './widget-overlay.scss'
 
 class WidgetOverlay extends Component {
   constructor(props, context) {
