@@ -54,13 +54,17 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case formActionTypes.ADD_FORM_ENTRY:
+    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_REQUEST:
+      return { ...state, saving: true }
+    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_SUCCESS:
       data = state.data.map(widget =>
         widget.id === action.payload.widget_id
           ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
           : widget
       )
-      return { ...state, data }
+      return { ...state, saving: false, data }
+    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_FAILURE:
+      return { ...state, saving: false, error: action.payload }
 
     case TOOLBAR_SET_LINK_OPEN_STRATEGY:
       return { ...state, toolbarLinkOpenStrategy: action.strategy }

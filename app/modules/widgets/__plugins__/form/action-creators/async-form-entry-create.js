@@ -5,12 +5,14 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
   const endpoint = `/mobilizations/${mobilization.id}/form_entries`
   const body = { form_entry: formEntry }
 
+  dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_REQUEST })
   return axios.post(endpoint, body)
     .then(response => {
-      dispatch(createAction(t.ADD_FORM_ENTRY, response.data))
+      dispatch(createAction(t.WIDGET_FORM_ENTRY_CREATE_SUCCESS, response.data))
       return Promise.resolve()
     })
     .catch(failure => {
+      dispatch(createAction(t.WIDGET_FORM_ENTRY_CREATE_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
