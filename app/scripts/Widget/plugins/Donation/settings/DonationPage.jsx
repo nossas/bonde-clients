@@ -2,11 +2,9 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { reduxForm } from 'redux-form'
 
-import * as WidgetActions from '../../../actions'
-import { actions as _WidgetActions } from '../../../../../modules/widgets'
+// Global module dependencies
 import * as Paths from '../../../../Paths'
 import { Loading } from '../../../../components'
-import Menu from '../components/settings/Menu.jsx'
 import {
   FormRedux,
   FormGroup,
@@ -19,6 +17,13 @@ import {
 } from '../../../../Dashboard/Forms'
 import { HorizontalLayout } from '../../../../Dashboard/Grids'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Parent module dependencies
+import { actions as _WidgetActions } from '../../../../../modules/widgets'
+import * as WidgetActions from '../../../actions'
+
+// Current module dependencies
+import { SettingsMenu } from '../../../../../modules/widgets/__plugins__/donation/components'
 
 class DonationPage extends React.Component {
 
@@ -46,7 +51,7 @@ class DonationPage extends React.Component {
 
     return (
       <SettingsPageLayout>
-        <Menu
+        <SettingsMenu
           {...props}
           mobilization={props.mobilization}
           widget={props.widget}

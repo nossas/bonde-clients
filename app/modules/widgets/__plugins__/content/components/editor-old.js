@@ -120,7 +120,6 @@ class EditorOld extends React.Component {
   }
 
   render() {
-    console.log('EditorOld')
     const { toolbarId, editing } = this.state
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     const { handleForceRender } = this.props

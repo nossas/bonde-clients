@@ -10,7 +10,7 @@ import { SettingsPageContentLayout } from '../../../components/Layout'
 // Children modules dependencies
 import { SettingsMenu as PressureSettingsMenu } from '../__plugins__/pressure/components'
 import { SettingsMenu as FormSettingsMenu } from '../__plugins__/form/components'
-import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
+import { SettingsMenu as DonationSettingsMenu } from '../__plugins__/donation/components'
 
 // Current module dependencies
 import * as WidgetActions from '../action-creators'
@@ -49,7 +49,7 @@ const AutofireFormPage = props => {
       <div className='flex-auto flex flex-column'>
         {/* refact */}
         {(widget.kind === 'donation'
-          ? <DonationWidgetMenu {...props} widget={widget} />
+          ? <DonationSettingsMenu {...props} widget={widget} />
           : widget.kind === 'pressure'
             ? <PressureSettingsMenu
               mobilization_id={mobilization.id}
