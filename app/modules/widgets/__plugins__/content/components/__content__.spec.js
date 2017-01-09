@@ -2,9 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import ContentWidget from '../'
+import Content from './__content__'
 
-describe('<ContentWidget />', () => {
+describe('app/modules/widgets/__plugins__/content/components/__content__', () => {
   let contentWidget
   const stubContext = { store: {} }
   const props = {
@@ -20,7 +20,7 @@ describe('<ContentWidget />', () => {
   }
 
   beforeEach(() => {
-    contentWidget = shallow(<ContentWidget {...props} />, { context: stubContext })
+    contentWidget = shallow(<Content {...props} />, { context: stubContext })
   })
 
   it('should render new editor when settings content is JSON', () => {

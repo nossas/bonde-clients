@@ -51,7 +51,7 @@ describe('app/modules/widgets/components/__widget__', () => {
   it('should render Content widget component if widget kind it is "content"', () => {
     metamorphicProps = changeKind({ props, kind: 'content' })
     wrapper.setProps({ ...metamorphicProps, onEdit: noop, onCancelEdit: noop })
-    expect(wrapper.find('ContentWidget')).to.have.length(1)
+    expect(wrapper.find('Content')).to.have.length(1)
   })
 
   it('should render Match widget component if widget kind it is "match"', () => {

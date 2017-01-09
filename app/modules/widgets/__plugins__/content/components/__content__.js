@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 
-import {
-  ContentOldEditor,
-  ContentNewEditor
-} from '../../../../modules/widgets/__plugins__/content/components'
+// Current module depepdencies
+import { ContentOldEditor, ContentNewEditor } from '../components'
 
-class ContentWidget extends Component {
-
+class Content extends Component {
   constructor (props) {
     super(props)
     this.state = { forceRenderNewEditor: false }
@@ -39,7 +36,7 @@ class ContentWidget extends Component {
   }
 }
 
-ContentWidget.propTypes = {
+Content.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired,
@@ -49,4 +46,4 @@ ContentWidget.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-export default ContentWidget
+export default Content
