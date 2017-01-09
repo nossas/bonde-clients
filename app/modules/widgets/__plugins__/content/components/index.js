@@ -1,3 +1,3 @@
 export { default } from './__content__'
-export { default as ContentOldEditor } from './content-old-editor'
-export { default as ContentNewEditor } from './content-new-editor'
+export { default as EditorOld } from './editor-old'
+export { default as EditorNew } from './editor-new'

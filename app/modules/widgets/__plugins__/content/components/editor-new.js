@@ -7,9 +7,9 @@ import Editor from '../../../../../scripts/RebooEditor'
 // Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
-import './content-new-editor.scss'
+import './editor-new.scss'
 
-class ContentNewEditor extends React.Component {
+class EditorNew extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
@@ -65,7 +65,7 @@ class ContentNewEditor extends React.Component {
     }
 
     return (
-      <div className='widget content-new-editor link' style={{ fontFamily: bodyFont }}>
+      <div className='widget editor-new link' style={{ fontFamily: bodyFont }}>
         <Editor
           value={value}
           theme={theme}
@@ -77,7 +77,7 @@ class ContentNewEditor extends React.Component {
   }
 }
 
-ContentNewEditor.propTypes = {
+EditorNew.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired,
@@ -87,4 +87,4 @@ ContentNewEditor.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-export default ContentNewEditor
+export default EditorNew

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Current module depepdencies
-import { ContentOldEditor, ContentNewEditor } from '../components'
+import { EditorOld, EditorNew } from '../components'
 
 class Content extends Component {
   constructor (props) {
@@ -19,14 +19,14 @@ class Content extends Component {
     try {
       // If parse content is RebooEditor
       JSON.parse(settings.content)
-      return <ContentNewEditor {...this.props} />
+      return <EditorNew {...this.props} />
     } catch (e) {
       // Else is old editor
       if (this.state.forceRenderNewEditor) {
-        return <ContentNewEditor {...this.props} />
+        return <EditorNew {...this.props} />
       } else {
         return (
-          <ContentOldEditor
+          <EditorOld
             handleForceRender={this.handleForceRender.bind(this)}
             {...this.props}
           />

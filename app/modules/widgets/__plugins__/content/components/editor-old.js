@@ -8,7 +8,7 @@ import { WYSIHTMLToolbar, Loading } from '../../../../../scripts/components'
 // Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
-class ContentOldEditor extends React.Component {
+class EditorOld extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -120,7 +120,7 @@ class ContentOldEditor extends React.Component {
   }
 
   render() {
-    console.log('ContentOldEditor')
+    console.log('EditorOld')
     const { toolbarId, editing } = this.state
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     const { handleForceRender } = this.props
@@ -167,7 +167,7 @@ class ContentOldEditor extends React.Component {
   }
 }
 
-ContentOldEditor.propTypes = {
+EditorOld.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired,
@@ -177,4 +177,4 @@ ContentOldEditor.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-export default ContentOldEditor
+export default EditorOld

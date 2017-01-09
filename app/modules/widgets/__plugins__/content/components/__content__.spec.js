@@ -30,7 +30,7 @@ describe('app/modules/widgets/__plugins__/content/components/__content__', () =>
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('ContentNewEditor').length).to.equal(1)
+    expect(contentWidget.find('EditorNew').length).to.equal(1)
   })
 
   it('should render old editor when settings content is HTML', () => {
@@ -40,7 +40,7 @@ describe('app/modules/widgets/__plugins__/content/components/__content__', () =>
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('ContentOldEditor').length).to.equal(1)
+    expect(contentWidget.find('EditorOld').length).to.equal(1)
   })
 
   it('should render new editor when forceRenderNewEditor is true', () => {
@@ -51,6 +51,6 @@ describe('app/modules/widgets/__plugins__/content/components/__content__', () =>
     }
     contentWidget.setProps({ widget })
     contentWidget.setState({ forceRenderNewEditor: true })
-    expect(contentWidget.find('ContentNewEditor').length).to.equal(1)
+    expect(contentWidget.find('EditorNew').length).to.equal(1)
   })
 })
