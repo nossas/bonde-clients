@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import TransitionGroup from 'react-addons-transition-group'
 import classnames from 'classnames'
 import { InputForm } from './'
 
-export default class Input extends React.Component {
+class Input extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -144,3 +144,5 @@ export default class Input extends React.Component {
     return (this.state.editing ? this.renderForm() : this.renderInput())
   }
 }
+
+export default Input

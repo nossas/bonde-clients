@@ -1,12 +1,11 @@
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { render, mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { Input } from './../components'
 
 describe('FormWidget/components/Input', () => {
-
   context('when render form edit input settings', () => {
     let props = {
       uid: '',
@@ -19,9 +18,9 @@ describe('FormWidget/components/Input', () => {
     }
 
     it('should call renderForm when initialize editable', () => {
-      sinon.spy(Input.prototype, 'renderForm');
+      sinon.spy(Input.prototype, 'renderForm')
 
-      let wrapper = shallow(<Input {...props} />)
+      shallow(<Input {...props} />)
       expect(Input.prototype.renderForm.calledOnce).to.equal(true)
     })
   })
@@ -40,11 +39,11 @@ describe('FormWidget/components/Input', () => {
     it('should call renderInput, renderInstructions, renderFieldKind when not initialize editable', () => {
       props.field = { }
 
-      sinon.spy(Input.prototype, 'renderInput');
-      sinon.spy(Input.prototype, 'renderInstructions');
-      sinon.spy(Input.prototype, 'renderFieldKind');
+      sinon.spy(Input.prototype, 'renderInput')
+      sinon.spy(Input.prototype, 'renderInstructions')
+      sinon.spy(Input.prototype, 'renderFieldKind')
 
-      let wrapper = shallow(<Input {...props} />)
+      shallow(<Input {...props} />)
       expect(Input.prototype.renderInput.calledOnce).to.equal(true)
       expect(Input.prototype.renderInstructions.calledOnce).to.equal(true)
       expect(Input.prototype.renderFieldKind.calledOnce).to.equal(true)
