@@ -18,7 +18,7 @@ import { WidgetOverlay } from '../../../../../modules/widgets/components'
 import { Button, Input } from '../components'
 import * as FormEntryActions from '../../../../../scripts/actions/FormEntryActions'
 
-// @reactMixin.decorate(Navigation)
+@reactMixin.decorate(Navigation)
 class Form extends React.Component {
   constructor(props, context) {
     super(props, context)

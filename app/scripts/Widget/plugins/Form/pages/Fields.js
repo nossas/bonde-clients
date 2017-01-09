@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+// Global module dependencies
 import * as Paths from './../../../../Paths'
-import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { Loading } from './../../../../components'
-import FormWidget from '../'
-import { Menu } from '../components'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Parent module dependencies
+import { actions as WidgetActions } from '../../../../../modules/widgets'
+
+// Current module dependencies
+import { Menu } from '../components'
+import FormWidget from '../../../../../modules/widgets/__plugins__/form/components'
 
 class Fields extends Component {
   constructor(props, context) {
