@@ -2,9 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { TargetList } from '../../components'
+import TargetList from './target-list'
 
-describe('<TargetList />', () => {
+describe('app/modules/widgets/__plugins__/pressure/components/target-list', () => {
   let wrapper
 
   beforeEach(() => {

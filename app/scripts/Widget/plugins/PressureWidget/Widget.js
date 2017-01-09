@@ -10,10 +10,10 @@ import { TellAFriend } from '../../../components'
 import { WidgetOverlay } from '../../../../modules/widgets/components'
 
 // Current module dependencies
-import { TargetList } from './components'
 import {
   PressureCount,
-  PressureForm
+  PressureForm,
+  TargetList
 } from '../../../../modules/widgets/__plugins__/pressure/components'
 import { actions as PressureActions } from '../../../../modules/widgets/__plugins__/pressure'
 
