@@ -3,25 +3,25 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 // Global module dependencies
-import * as Paths from '../../../Paths'
-import { TellAFriend } from '../../../components'
+import * as Paths from '../../../../../scripts/Paths'
+import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../modules/widgets/components'
+import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import {
   PressureCount,
   PressureForm,
   TargetList
-} from '../../../../modules/widgets/__plugins__/pressure/components'
-import { actions as PressureActions } from '../../../../modules/widgets/__plugins__/pressure'
+} from '../components'
+import * as PressureActions from '../action-creators'
 
 /* TODO: Change static content by props
  * - title
  * - bgColor
  */
-export class PressureWidget extends Component {
+export class Pressure extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = { filled: false }
@@ -137,7 +137,7 @@ export class PressureWidget extends Component {
   }
 }
 
-PressureWidget.propTypes = {
+Pressure.propTypes = {
   editable: PropTypes.bool,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
@@ -147,7 +147,7 @@ PressureWidget.propTypes = {
   asyncFillWidget: PropTypes.func
 }
 
-PressureWidget.contextTypes = {
+Pressure.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
@@ -156,4 +156,4 @@ const mapStateToProps = ({ widgets: { plugins: { pressure } } }) => ({
   filled: pressure.filled
 })
 
-export default connect(mapStateToProps, PressureActions)(PressureWidget)
+export default connect(mapStateToProps, PressureActions)(Pressure)

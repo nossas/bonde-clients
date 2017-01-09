@@ -4,8 +4,11 @@ import { shallow } from 'enzyme'
 
 import Widget from './__widget__'
 
+const noop = () => {}
+
 describe('app/modules/widgets/components/__widget__', () => {
-  let widget
+  let metamorphicProps
+  let wrapper
   let props = {
     widget: {
       id: 1,
@@ -18,15 +21,50 @@ describe('app/modules/widgets/components/__widget__', () => {
   }
 
   beforeEach(() => {
-    widget = shallow(<Widget {...props} />)
+    wrapper = shallow(<Widget {...props} />)
   })
 
   it('should render DrafWidget by default', () => {
-    expect(widget.find('DraftWidget')).to.have.length(1)
+    expect(wrapper.find('DraftWidget')).to.have.length(1)
+  })
+
+  it('should render connected Pressure widget component if kind it is "pressure"', () => {
+    wrapper.setProps(changeKind({ props, kind: 'pressure' }))
+    expect(wrapper.find('Connect(Pressure)')).to.have.length(1)
+  })
+
+  it('should render Form widget component if widget kind it is "form"', () => {
+    wrapper.setProps(changeKind({ props, kind: 'form' }))
+    expect(wrapper.find('FormWidget')).to.have.length(1)
+  })
+
+  it('should render Draft widget component if widget kind it is "draft"', () => {
+    wrapper.setProps(changeKind({ props, kind: 'draft' }))
+    expect(wrapper.find('DraftWidget')).to.have.length(1)
+  })
+
+  it('should render Donation widget component if widget kind it is "donation"', () => {
+    wrapper.setProps(changeKind({ props, kind: 'donation' }))
+    expect(wrapper.find('Donation')).to.have.length(1)
+  })
+
+  it('should render Content widget component if widget kind it is "content"', () => {
+    metamorphicProps = changeKind({ props, kind: 'content' })
+    wrapper.setProps({ ...metamorphicProps, onEdit: noop, onCancelEdit: noop })
+    expect(wrapper.find('ContentWidget')).to.have.length(1)
+  })
+
+  it('should render Match widget component if widget kind it is "match"', () => {
+    wrapper.setProps(changeKind({ props, kind: 'match' }))
+    expect(wrapper.find('Match')).to.have.length(1)
   })
 
   it('should throw Error when kind not exists in Widget/plugins', () => {
-    widget.setProps({ widget: { id: 1, kind: 'non' } })
-    expect(widget.find('span').text()).to.contain('not found')
+    wrapper.setProps({ widget: { id: 1, kind: 'non' } })
+    expect(wrapper.find('span').text()).to.contain('not found')
   })
 })
+
+const changeKind = ({ props, kind }) => {
+  return { ...props, widget: { ...props.widget, kind } }
+}
