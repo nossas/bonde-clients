@@ -6,7 +6,7 @@ import * as Paths from '../../../Paths'
 import { WidgetOverlay } from '../../../../modules/widgets/components'
 import { PressureForm, TargetList, PressureCount } from './components'
 import { TellAFriend } from '../../../components'
-import { fillWidget } from '../../actions'
+import { actions as PressureActions } from '../../../../modules/widgets/__plugins__/pressure'
 
 /* TODO: Change static content by props
  * - title
@@ -33,7 +33,7 @@ export class PressureWidget extends Component {
   }
 
   handleSubmit(data) {
-    const { widget, fill } = this.props
+    const { widget, asyncFillWidget } = this.props
     const payload = {
       activist: {
         firstname: data.name,
@@ -47,7 +47,7 @@ export class PressureWidget extends Component {
         body: data.body
       }
     }
-    fill(widget.id, payload)
+    asyncFillWidget(widget.id, payload)
   }
 
   handleOverlayOnClick(e) {
@@ -126,10 +126,10 @@ PressureWidget.propTypes = {
   editable: PropTypes.bool,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  // Use in fillWidget
   saving: PropTypes.bool,
   filled: PropTypes.bool,
-  fill: PropTypes.func
+  // Actions
+  asyncFillWidget: PropTypes.func
 }
 
 PressureWidget.contextTypes = {
@@ -140,8 +140,4 @@ const mapStateToProps = state => ({
   saving: state.widgets.list.saving,
 })
 
-const mapActionsToProps = {
-  fill: fillWidget,
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(PressureWidget)
+export default connect(mapStateToProps, PressureActions)(PressureWidget)

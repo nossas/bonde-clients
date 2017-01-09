@@ -1,14 +1,11 @@
 import * as t from '../action-types'
+import * as pressureActionTypes from '../__plugins__/pressure/action-types'
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
   FAILURE_FETCH_GOOGLE_FONTS,
 
-  TOOLBAR_SET_LINK_OPEN_STRATEGY,
-
-  REQUEST_FILL_WIDGET,
-  SUCCESS_FILL_WIDGET,
-  FAILURE_FILL_WIDGET
+  TOOLBAR_SET_LINK_OPEN_STRATEGY
 } from '../../../scripts/Widget/actions'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
@@ -65,16 +62,16 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case REQUEST_FILL_WIDGET:
+    case pressureActionTypes.REQUEST_FILL_WIDGET:
       return { ...state, saving: true }
-    case SUCCESS_FILL_WIDGET:
-      data = state.data.map(widget => widget.id === action.counter.id
-        ? { ...widget, ...action.counter, filled: true }
+    case pressureActionTypes.SUCCESS_FILL_WIDGET:
+      data = state.data.map(widget => widget.id === action.payload.counter.id
+        ? { ...widget, ...action.payload.counter, filled: true }
         : widget
       )
       return { ...state, data, saving: false }
-    case FAILURE_FILL_WIDGET:
-      return { ...state, saving: false, error: action.error }
+    case pressureActionTypes.FAILURE_FILL_WIDGET:
+      return { ...state, saving: false, error: action.payload.error }
 
     case ADD_FORM_ENTRY:
       return {...state,
