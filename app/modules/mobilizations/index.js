@@ -1,9 +1,16 @@
+import { combineReducers } from 'redux'
+
 import * as selectors from './selectors'
 import * as actionCreators from './action-creators'
-import reducers from './reducers'
+
+import mobilizationReducers from './reducers'
+import { reducers as templateReducers } from './templates'
 
 export default {
   selectors,
-  reducers,
+  reducers: combineReducers({
+    list: mobilizationReducers,
+    templates: templateReducers
+  }),
   actionCreators
 }

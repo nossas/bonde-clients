@@ -26,21 +26,17 @@ class MobilizationAddPage extends Component {
     const { location, ...formProps } = this.props
 
     return (
-      <MobilizationAddLayout location={location}>
-        <div className="clearfix overflow-auto">
-          <div className="p3 lg-col-5 mx-auto">
-            <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
-            <MobilizationBasicsForm
-              className="bg-white"
-              onFinishSubmit={this.onFinishSubmit.bind(this)}
-              {...formProps}
-            />
-            <p className="lightgray center" style={{ fontSize: '.9rem', marginTop: '1.5rem' }}>
-              Fique tranquil@ vc poderá editar depois se achar necessário.
-            </p>
-          </div>
-        </div>
-      </MobilizationAddLayout>
+      <div className="page-add">
+        <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
+        <MobilizationBasicsForm
+          className="bg-white"
+          onFinishSubmit={this.onFinishSubmit.bind(this)}
+          {...formProps}
+        />
+        <p className="lightgray center" style={{ fontSize: '.9rem', marginTop: '1.5rem' }}>
+          Fique tranquil@ vc poderá editar depois se achar necessário.
+        </p>
+      </div>
     )
   }
 }

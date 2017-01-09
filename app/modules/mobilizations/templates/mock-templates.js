@@ -1,4 +1,4 @@
-export const customTemplates = [
+export const custom = [
   {
     "body_font": "Proxima Nova",
     "color_scheme": "minhaportoalegre-scheme",
@@ -92,7 +92,7 @@ export const customTemplates = [
   }
 ]
 
-export const globalTemplates = [
+export const global = [
   {
     "body_font": null,
     "color_scheme": "meurecife-scheme",

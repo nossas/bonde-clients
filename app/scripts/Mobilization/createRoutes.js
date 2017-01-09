@@ -5,11 +5,21 @@ import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplat
 import { createRoutes as widgetCreateRoutes } from './../Widget'
 
 import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
+
 import {
+  MobilizationAddContainer,
   MobilizationEditContainer,
   MobilizationDashboardContainer,
   MobilizationSettingsContainer
 } from '../../modules/mobilizations/containers'
+
+import {
+  FetchTemplatesContainer
+} from '../../modules/mobilizations/templates/containers'
+
+import {
+  TemplateChoosePage
+} from '../../modules/mobilizations/templates/pages'
 
 import {
   MobilizationPage,
@@ -28,8 +38,13 @@ import {
 export default requiredLogin => (
   <Route component={MobilizationDashboardContainer} onEnter={requiredLogin}>
     <Route path="/" component={MobilizationListPage} />
-    <Route path="/mobilizations/new" component={MobilizationAddPage} />
-    {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
+    <Route path="/mobilizations" component={MobilizationAddContainer}>
+      <Route path="/new" component={MobilizationAddPage} />
+      <Route path="/:mobilization_id" component={FetchTemplatesContainer}>
+        <Route path="/templates/choose" component={TemplateChoosePage} />
+      </Route>
+      {mobilizationTemplatesRoutes("/mobilizations/:mobilization_id")}
+    </Route>
     <Route path="/mobilizations/:mobilization_id" component={MobilizationEditContainer}>
       <Route path="/edit" component={MobilizationPage} />
       <Route component={MobilizationSettingsContainer}>

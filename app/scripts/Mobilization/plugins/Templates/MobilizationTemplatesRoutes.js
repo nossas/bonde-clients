@@ -19,7 +19,7 @@ const MobilizationTemplatesRoutes = parent => [
   <Route component={MobilizationTemplatesContainer}>
     <Route path={`/mobilizations/${path}/list`} component={ListPage} />,
     <Route path={`/${parent}/${path}/create`} component={CreatePage} />,
-    <Route path={`/${parent}/${path}/choose`} component={ChoosePage} />,
+{/*    <Route path={`/${parent}/${path}/choose`} component={ChoosePage} />,*/}
     <Route path={`/${parent}/${path}/choose/custom/list`} component={ChooseCustomListPage} />,
     <Route path={`/${parent}/${path}/choose/global/list`} component={ChooseGlobalListPage} />
   </Route>
