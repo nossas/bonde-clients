@@ -8,7 +8,7 @@ import { Loading } from '../../../../../scripts/components'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import { DraftWidgetButton } from '../../../../../scripts/Widget/plugins/DraftWidget'
+import { DraftWidgetButton } from '../components'
 
 import './__draft__.scss'
 
