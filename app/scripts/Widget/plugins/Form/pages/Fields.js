@@ -10,8 +10,7 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../co
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import { Menu } from '../components'
-import FormWidget from '../../../../../modules/widgets/__plugins__/form/components'
+import FormWidget, { SettingsMenu } from '../../../../../modules/widgets/__plugins__/form/components'
 
 class Fields extends Component {
   constructor(props, context) {
@@ -70,7 +69,7 @@ class Fields extends Component {
     const { widget, ...props } = this.props
     return (
       <SettingsPageLayout>
-        <Menu widget={widget} {...props} />
+        <SettingsMenu widget={widget} {...props} />
         <button
           className="btn white bg-pagenta caps p2 rounded"
           onClick={::this.handleAddTextField}

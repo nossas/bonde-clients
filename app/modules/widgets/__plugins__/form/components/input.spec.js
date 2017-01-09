@@ -5,7 +5,7 @@ import { shallow } from 'enzyme'
 
 import { Input } from './../components'
 
-describe('FormWidget/components/Input', () => {
+describe('app/modules/widgets/__plugins__/form/components/input', () => {
   context('when render form edit input settings', () => {
     let props = {
       uid: '',

@@ -6,7 +6,7 @@ import { Loading } from '../../../scripts/components'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../components/Layout'
 
 // Children modules dependencies
-import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
+import { SettingsMenu as FormSettingsMenu } from '../__plugins__/form/components'
 import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 
 // Current module dependencies
@@ -102,7 +102,7 @@ class DataExportPage extends Component {
       <SettingsPageLayout>
         {(widget.kind === 'donation'
           ? <DonationWidgetMenu {...this.props} widget={widget} />
-          : <FormWidgetMenu {...this.props} widget={widget} />
+          : <FormSettingsMenu {...this.props} widget={widget} />
         )}
 
         <SettingsPageContentLayout>

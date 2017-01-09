@@ -9,7 +9,7 @@ import { SettingsPageContentLayout } from '../../../components/Layout'
 
 // Children modules dependencies
 import { SettingsMenu as PressureSettingsMenu } from '../__plugins__/pressure/components'
-import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
+import { SettingsMenu as FormSettingsMenu } from '../__plugins__/form/components'
 import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 
 // Current module dependencies
@@ -55,7 +55,7 @@ const AutofireFormPage = props => {
               mobilization_id={mobilization.id}
               widget_id={widget.id} {...props}
             />
-            : <FormWidgetMenu {...props} widget={widget} />
+            : <FormSettingsMenu {...props} widget={widget} />
         )}
         {/* refact */}
         <SettingsPageContentLayout>

@@ -1,12 +1,14 @@
 import React from 'react'
-import sinon from 'sinon'
 import { expect } from 'chai'
-import { render, mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 
-import { Menu } from './../components'
-import * as Paths from './../../../../Paths'
+// Global module dependencies
+import * as Paths from '../../../../../scripts/Paths'
 
-describe('FormWidget/components/Menu', () => {
+// Current module dependencies
+import SettingsMenu from './settings-menu'
+
+describe('app/modules/widgets/__plugins__/form/components/settings-menu', () => {
   let props = {
     mobilization: {},
     widget: {},
@@ -15,11 +17,11 @@ describe('FormWidget/components/Menu', () => {
 
   describe('tabs', () => {
     it('should render 1 <Tabs /> component', () => {
-      const wrapper = shallow(<Menu {...props} />)
+      const wrapper = shallow(<SettingsMenu {...props} />)
       expect(wrapper.find('Tabs')).to.have.length(1)
     })
     it('should render 4 <Tab /> in childrens', () => {
-      const wrapper = shallow(<Menu {...props} />)
+      const wrapper = shallow(<SettingsMenu {...props} />)
       expect(wrapper.find('Tab')).to.have.length(4)
     })
   })
@@ -32,7 +34,7 @@ describe('FormWidget/components/Menu', () => {
     it('should active tab Campos do formulário (fields settings)', () => {
       props.location.pathname = Paths.fieldsMobilizationWidget(dummyId, dummyId)
 
-      let wrapper = shallow(<Menu {...props} />)
+      let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(0)
       expect(node.props().isActive).to.equals(true)
     })
@@ -40,7 +42,7 @@ describe('FormWidget/components/Menu', () => {
     it('should active tab Ajustes (form settings)', () => {
       props.location.pathname = Paths.formMobilizationWidget(dummyId, dummyId)
 
-      let wrapper = shallow(<Menu {...props} />)
+      let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(1)
       expect(node.props().isActive).to.equals(true)
     })
@@ -48,7 +50,7 @@ describe('FormWidget/components/Menu', () => {
     it('should active tab Mensagem agradecimento (autofire)', () => {
       props.location.pathname = Paths.autofireMobilizationWidget(dummyId, dummyId)
 
-      let wrapper = shallow(<Menu {...props} />)
+      let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(2)
       expect(node.props().isActive).to.equals(true)
     })

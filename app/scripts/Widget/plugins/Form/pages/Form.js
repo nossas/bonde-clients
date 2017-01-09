@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
-import { actions as WidgetActions } from '../../../../../modules/widgets'
+// Global module dependencies
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
 import * as Paths from './../../../../Paths'
 import {
   FormRedux,
@@ -10,8 +11,12 @@ import {
   ControlLabel,
   FormControl
 } from '../../../../Dashboard/Forms'
-import { Menu } from './../components'
-import { SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Parent module dependencies
+import { actions as WidgetActions } from '../../../../../modules/widgets'
+
+// Current module dependencies
+import { SettingsMenu } from '../../../../../modules/widgets/__plugins__/form/components'
 
 
 class FormWidgetForm extends React.Component {
@@ -30,7 +35,7 @@ class FormWidgetForm extends React.Component {
     const { fields: { call_to_action, button_text, count_text }, ...props } = this.props
     return (
       <div className="flex-auto flex flex-column bg-silver atomic relative">
-        <Menu mobilization={props.mobilization} widget={props.widget} location={props.location} />
+        <SettingsMenu mobilization={props.mobilization} widget={props.widget} location={props.location} />
         <SettingsPageContentLayout>
           <FormRedux
             {...props}
