@@ -1,11 +1,11 @@
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { render, mount, shallow } from 'enzyme'
+import { render, shallow } from 'enzyme'
 
-import { Button } from './../components'
+import Button from './button'
 
-describe('FormWidget/components/Button', () => {
+describe('app/modules/widgets/__plugins__/form/components/button', () => {
   let props = {
     success: false,
     buttonText: 'Salvar',
@@ -15,7 +15,6 @@ describe('FormWidget/components/Button', () => {
   }
 
   context('when it static', () => {
-
     it('should render with buttonText label', () => {
       let wrapper = render(<Button {...props} />)
 

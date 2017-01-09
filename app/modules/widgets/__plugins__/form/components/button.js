@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
 
 const Button = ({
   success,
@@ -11,13 +10,13 @@ const Button = ({
   <div style={{ fontFamily: bodyFont }}>
     <button
       disabled={loading}
-      className="caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white"
+      className='caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white'
       onClick={handleClick}>
       {loading ? 'Enviando...' : buttonText}
     </button>
     {
       success &&
-      <div className="center">Sua ação foi registrada com sucesso!</div>
+      <div className='center'>Sua ação foi registrada com sucesso!</div>
     }
   </div>
 )

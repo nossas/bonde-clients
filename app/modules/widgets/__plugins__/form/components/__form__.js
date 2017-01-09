@@ -15,7 +15,8 @@ import { TellAFriend } from '../../../../../scripts/components'
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
-import { Input, Button } from '../../../../../scripts/Widget/plugins/Form/components'
+import { Input } from '../../../../../scripts/Widget/plugins/Form/components'
+import { Button } from '../components'
 import * as FormEntryActions from '../../../../../scripts/actions/FormEntryActions'
 
 // @reactMixin.decorate(Navigation)
