@@ -12,7 +12,7 @@ import * as Paths from '../../../scripts/Paths'
 @reactMixin.decorate(Navigation)
 export class MobilizationPage extends Component {
 
-  componentDidUpdate() {
+  componentDidMount() {
     const { mobilization, blocks } = this.props
     if (blocks.length === 0) {
       this.transitionTo(Paths.createBlock(mobilization))

@@ -9,6 +9,8 @@ import ColorPicker from '../../../../components/ColorPicker'
 import { actions as BlockActions, constants as c } from '../../../mobilizations/blocks'
 import { BlockMiniature } from '../../../mobilizations/blocks/components'
 
+import * as MobilizationSelectors from '../../selectors'
+
 import '../../../mobilizations/blocks/pages/scss/block-create.scss'
 
 export class BlockCreate extends Component {
@@ -165,9 +167,9 @@ BlockCreate.propTypes = {
     pathname: PropTypes.string.isRequired
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  blocks: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
+  blocks: PropTypes.array.isRequired,
+  auth: PropTypes.object.isRequired,
   selectedColor: PropTypes.object.isRequired,
   bgImage: PropTypes.string,
   selectedLayout: PropTypes.array.isRequired
@@ -180,6 +182,8 @@ BlockCreate.defaultProps = {
 }
 
 const mapStateToProps = state => ({
+  mobilization: MobilizationSelectors.getCurrent(state),
+  blocks: MobilizationSelectors.getBlocks(state),
   selectedLayout: state.blocks.selectedLayout,
   uploadingBackgroundImage: state.blocks.uploadingBackgroundImage,
   uploadedBackgroundImage: state.blocks.uploadedBackgroundImage,
