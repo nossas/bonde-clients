@@ -62,15 +62,15 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case pressureActionTypes.REQUEST_FILL_WIDGET:
+    case pressureActionTypes.WIDGET_PRESSURE_FILL_REQUEST:
       return { ...state, saving: true }
-    case pressureActionTypes.SUCCESS_FILL_WIDGET:
+    case pressureActionTypes.WIDGET_PRESSURE_FILL_SUCCESS:
       data = state.data.map(widget => widget.id === action.payload.counter.id
         ? { ...widget, ...action.payload.counter, filled: true }
         : widget
       )
       return { ...state, data, saving: false }
-    case pressureActionTypes.FAILURE_FILL_WIDGET:
+    case pressureActionTypes.WIDGET_PRESSURE_FILL_FAILURE:
       return { ...state, saving: false, error: action.payload.error }
 
     case ADD_FORM_ENTRY:

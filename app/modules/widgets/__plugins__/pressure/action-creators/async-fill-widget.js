@@ -11,16 +11,16 @@ const asyncFillWidget = (widgetId, fill) => (dispatch, getState, axios) => {
   const endpoint = `/widgets/${widgetId}/fill`
   const body = { fill }
 
-  dispatch({ type: t.REQUEST_FILL_WIDGET })
+  dispatch({ type: t.WIDGET_PRESSURE_FILL_REQUEST })
   return axios.post(endpoint, body)
     .then(response => {
       const { widget_id: id, count } = response.data
       const payload = { counter: { id, count } }
-      dispatch(createAction(t.SUCCESS_FILL_WIDGET, payload))
+      dispatch(createAction(t.WIDGET_PRESSURE_FILL_SUCCESS, payload))
       return Promise.resolve()
     })
     .catch(failure => {
-      dispatch(createAction(t.FAILURE_FILL_WIDGET, failure))
+      dispatch(createAction(t.WIDGET_PRESSURE_FILL_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
