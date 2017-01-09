@@ -11,15 +11,15 @@ import {
   ColorPicker,
   RadioGroup,
   Radio
-} from '../../../../Dashboard/Forms'
+} from '../../../../../scripts/Dashboard/Forms'
 
 // Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import { SettingsBase } from '../../../../../modules/widgets/__plugins__/pressure/components'
+import { SettingsBase } from '../components'
 
-const FormPage = ({
+const SettingsFormPage = ({
   ...props,
   fields: {
     title_text: titleText,
@@ -103,7 +103,7 @@ const FormPage = ({
   )
 }
 
-FormPage.propTypes = {
+SettingsFormPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -149,4 +149,4 @@ export default reduxForm({
   form: 'widgetForm',
   fields,
   validate
-}, mapStateToProps, WidgetActions)(FormPage)
+}, mapStateToProps, WidgetActions)(SettingsFormPage)
