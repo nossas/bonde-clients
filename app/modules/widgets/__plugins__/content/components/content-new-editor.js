@@ -1,26 +1,16 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import classnames from 'classnames'
 
-import { Loading } from '../../../components'
-import { actions as WidgetActions } from '../../../../modules/widgets'
-import Editor from '../../../RebooEditor'
+// Global module dependencies
+import { Loading } from '../../../../../scripts/components'
+import Editor from '../../../../../scripts/RebooEditor'
 
-import './scss/content-widget.scss'
+// Parent module dependencies
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 
-export default class NewEditorContentWidget extends React.Component {
+import './content-new-editor.scss'
 
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onCancelEdit: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-  }
-
-  constructor(props, context) {
+class ContentNewEditor extends React.Component {
+  constructor (props, context) {
     super(props, context)
     this.state = {
       editing: false,
@@ -29,13 +19,13 @@ export default class NewEditorContentWidget extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.state.loading && this.props.widget.settings.content !== nextProps.widget.settings.content) {
       this.setState({ loading: false })
     }
   }
 
-  renderLoading() {
+  renderLoading () {
     if (this.state.loading) {
       return (
         <Loading />
@@ -43,7 +33,7 @@ export default class NewEditorContentWidget extends React.Component {
     }
   }
 
-  handleSave(rawContent) {
+  handleSave (rawContent) {
     const { widget: { settings } } = this.props
 
     if (settings.content !== rawContent) {
@@ -52,19 +42,19 @@ export default class NewEditorContentWidget extends React.Component {
 
       dispatch(WidgetActions.asyncWidgetUpdate({
         ...widget,
-        settings: { content: JSON.stringify(rawContent) },
+        settings: { content: JSON.stringify(rawContent) }
       }))
     }
   }
 
-  render() {
+  render () {
     const { editable, mobilization, widget: { settings } } = this.props
     const { body_font: bodyFont } = mobilization
 
     const theme = (
-      mobilization && mobilization.color_scheme ?
-      mobilization.color_scheme.replace('-scheme', '') :
-      null
+      mobilization && mobilization.color_scheme
+        ? mobilization.color_scheme.replace('-scheme', '')
+        : null
     )
 
     let value
@@ -75,7 +65,7 @@ export default class NewEditorContentWidget extends React.Component {
     }
 
     return (
-      <div className="widget content-widget link" style={{ fontFamily: bodyFont }}>
+      <div className='widget content-new-editor link' style={{ fontFamily: bodyFont }}>
         <Editor
           value={value}
           theme={theme}
@@ -86,3 +76,15 @@ export default class NewEditorContentWidget extends React.Component {
     )
   }
 }
+
+ContentNewEditor.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onCancelEdit: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+export default ContentNewEditor

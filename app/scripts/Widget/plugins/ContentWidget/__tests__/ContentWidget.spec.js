@@ -30,7 +30,7 @@ describe('<ContentWidget />', () => {
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('NewEditorContentWidget').length).to.equal(1)
+    expect(contentWidget.find('ContentNewEditor').length).to.equal(1)
   })
 
   it('should render old editor when settings content is HTML', () => {
@@ -51,6 +51,6 @@ describe('<ContentWidget />', () => {
     }
     contentWidget.setProps({ widget })
     contentWidget.setState({ forceRenderNewEditor: true })
-    expect(contentWidget.find('NewEditorContentWidget').length).to.equal(1)
+    expect(contentWidget.find('ContentNewEditor').length).to.equal(1)
   })
 })

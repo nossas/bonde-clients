@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 
-import NewEditorContentWidget from './NewEditorContentWidget'
-import { ContentOldEditor } from '../../../../modules/widgets/__plugins__/content/components'
+import {
+  ContentOldEditor,
+  ContentNewEditor
+} from '../../../../modules/widgets/__plugins__/content/components'
 
 class ContentWidget extends Component {
 
@@ -20,11 +22,11 @@ class ContentWidget extends Component {
     try {
       // If parse content is RebooEditor
       JSON.parse(settings.content)
-      return <NewEditorContentWidget {...this.props} />
+      return <ContentNewEditor {...this.props} />
     } catch (e) {
       // Else is old editor
       if (this.state.forceRenderNewEditor) {
-        return <NewEditorContentWidget {...this.props} />
+        return <ContentNewEditor {...this.props} />
       } else {
         return (
           <ContentOldEditor
