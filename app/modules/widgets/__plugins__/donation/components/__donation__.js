@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react'
-import reactMixin from 'react-mixin'
 import { Navigation } from 'react-router'
 import { connect } from 'react-redux'
+import reactMixin from 'react-mixin'
 import classnames from 'classnames'
 
-import * as Paths from '../../../Paths'
-import * as DonationActions from './actions'
-import TellAFriend from '../../../components/shared/TellAFriend.jsx'
-import { WidgetOverlay } from '../../../../modules/widgets/components'
+// Global module dependencies
+import * as Paths from '../../../../../scripts/Paths'
+import { TellAFriend } from '../../../../../scripts/components'
 
-import './assets/donation_widget.scss'
+// Parent module dependencies
+import { WidgetOverlay } from '../../../../../modules/widgets/components'
+
+// Current module dependencies
+import * as DonationActions from '../../../../../scripts/Widget/plugins/Donation/actions'
+import './__donation__.scss'
 
 @reactMixin.decorate(Navigation)
 class Donation extends React.Component {
@@ -49,11 +53,11 @@ class Donation extends React.Component {
   }
 
   handleClickSetTypeDonation(v) {
-    this.setState({selected_payment_type: v})
+    this.setState({ selected_payment_type: v })
   }
 
   handleClickSetValueDonation(v) {
-    this.setState({selected_value: Number(v)})
+    this.setState({ selected_value: Number(v) })
   }
 
   handleClickDonate() {
@@ -84,12 +88,12 @@ class Donation extends React.Component {
     }})
 
     const params = {
-      'createToken': 'false',
-      'amount': widget.settings['donation_value' + selected_value] + '00',
-      'customerData': 'true',
-      'paymentMethods': widget.settings.payment_methods === 'true' ? 'credit_card,boleto' : 'credit_card',
-      'uiColor': main_color,
-      'paymentButtonText': widget.settings.button_text
+      createToken: 'false',
+      amount: widget.settings['donation_value' + selected_value] + '00',
+      customerData: 'true',
+      paymentMethods: widget.settings.payment_methods === 'true' ? 'credit_card,boleto' : 'credit_card',
+      uiColor: main_color,
+      paymentButtonText: widget.settings.button_text
     }
     checkout.open(params)
   }

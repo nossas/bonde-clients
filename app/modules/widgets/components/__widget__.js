@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import * as WidgetPlugins from '../../../scripts/Widget/plugins'
-import * as NewWidgetPlugins from '../__plugins__'
+import * as Plugins from '../__plugins__'
 
 const Widget = ({ widget, ...rest }) => {
-  const mergedWidgetPlugins = { ...WidgetPlugins, ...NewWidgetPlugins }
   const kind = widget.kind ? widget.kind.charAt(0).toUpperCase() + widget.kind.slice(1) : 'Draft'
-  const Plugin = mergedWidgetPlugins[kind]
+  const Plugin = Plugins[kind]
 
   const { sm_size: smSize, md_size: mdSize, lg_size: lgSize } = widget
   const className = classnames(
