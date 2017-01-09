@@ -3,8 +3,8 @@ import classnames from 'classnames'
 import { reduxForm } from 'redux-form'
 
 // Global module dependencies
-import * as Paths from '../../../../Paths'
-import { Loading } from '../../../../components'
+import * as Paths from '../../../../../scripts/Paths'
+import { Loading } from '../../../../../scripts/components'
 import {
   FormRedux,
   FormGroup,
@@ -14,19 +14,17 @@ import {
   RadioGroup,
   Radio,
   ColorPicker
-} from '../../../../Dashboard/Forms'
-import { HorizontalLayout } from '../../../../Dashboard/Grids'
+} from '../../../../../scripts/Dashboard/Forms'
+import { HorizontalLayout } from '../../../../../scripts/Dashboard/Grids'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
 
 // Parent module dependencies
-import { actions as _WidgetActions } from '../../../../../modules/widgets'
-import * as WidgetActions from '../../../actions'
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import { SettingsMenu } from '../../../../../modules/widgets/__plugins__/donation/components'
+import { SettingsMenu } from '../components'
 
-class DonationPage extends React.Component {
-
+class SettingsDonationPage extends React.Component {
   handleSubmit(values) {
     const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
@@ -164,7 +162,7 @@ class DonationPage extends React.Component {
   }
 }
 
-DonationPage.propTypes = {
+SettingsDonationPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -172,7 +170,8 @@ DonationPage.propTypes = {
 
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  credentials: PropTypes.object.isRequired,
+  // Actions
+  asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
 const fields = [
@@ -191,19 +190,19 @@ const validate = values => {
   return errors
 }
 
-export default reduxForm({
-  form: 'widgetForm',
-  fields,
-  validate
-},
-(state, ownProps) => ({
+const mapStateToProps = (state, props) => ({
   initialValues: {
     default_donation_value: 1,
     main_color: '#54d0f6',
     recurring_period: 30,
     payment_type: 'unique',
     payment_methods: 'false',
-    ...ownProps.widget.settings || {}
-  },
-  credentials: state.auth.credentials,
-}), { ...WidgetActions, ..._WidgetActions })(DonationPage)
+    ...props.widget.settings || {}
+  }
+})
+
+export default reduxForm(
+  { form: 'widgetForm', fields, validate },
+  mapStateToProps,
+  WidgetActions
+)(SettingsDonationPage)
