@@ -2,17 +2,17 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 // Global module dependencies
-import * as Paths from './../../../../Paths'
-import { Loading } from './../../../../components'
+import * as Paths from '../../../../../scripts/Paths'
+import { Loading } from '../../../../../scripts/components'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
 
 // Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import FormWidget, { SettingsMenu } from '../../../../../modules/widgets/__plugins__/form/components'
+import Form, { SettingsMenu } from '../components'
 
-class Fields extends Component {
+class SettingsFieldsPage extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = { loading: false, hasNewField: false }
@@ -97,7 +97,7 @@ class Fields extends Component {
             }
           </p>
 
-          <FormWidget
+          <Form
             {...props}
             widget={widget}
             configurable={true}
@@ -121,10 +121,11 @@ class Fields extends Component {
   }
 }
 
-Fields.propTypes = {
+SettingsFieldsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
+  // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default connect(undefined, WidgetActions)(Fields)
+export default connect(undefined, WidgetActions)(SettingsFieldsPage)
