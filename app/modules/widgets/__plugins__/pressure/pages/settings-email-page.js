@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 // Global module dependencies
-import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../../Dashboard/Forms'
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../../../scripts/Dashboard/Forms'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
 
 // Parent module dependencies
@@ -10,12 +10,12 @@ import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { FormFooter, InputTag } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
-import { SettingsBase } from '../../../../../modules/widgets/__plugins__/pressure/components'
+import { SettingsBase } from '../components'
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
-class EmailPage extends Component {
+class SettingsEmailPage extends Component {
   constructor(props) {
     super(props)
     this.state = { targets: this.getTargetList() || [] }
@@ -92,7 +92,7 @@ class EmailPage extends Component {
   }
 }
 
-EmailPage.propTypes = {
+SettingsEmailPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -127,4 +127,4 @@ export default reduxForm(
   { form: 'widgetForm', fields, validate },
   mapStateToProps,
   WidgetActions
-)(EmailPage)
+)(SettingsEmailPage)
