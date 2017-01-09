@@ -47,7 +47,7 @@ export class PressureWidget extends Component {
         body: data.body
       }
     }
-    asyncFillWidget(widget.id, payload)
+    asyncFillWidget({ payload, widget })
   }
 
   handleOverlayOnClick(e) {
@@ -61,7 +61,13 @@ export class PressureWidget extends Component {
   }
 
   render() {
-    const { widget, editable, saving, mobilization: { header_font: headerFont } } = this.props
+    const {
+      widget,
+      editable,
+      saving,
+      filled,
+      mobilization: { header_font: headerFont }
+    } = this.props
     const {
       main_color,
       title_text,
@@ -83,7 +89,7 @@ export class PressureWidget extends Component {
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de pressão direta"
       >
-        {(widget.filled ?
+        {(filled ?
           <TellAFriend {...this.props}
             message="Pressão enviada"
             href={window.location.origin}
@@ -136,8 +142,9 @@ PressureWidget.contextTypes = {
   router: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({
-  saving: state.widgets.list.saving,
+const mapStateToProps = ({ widgets: { plugins: { pressure } } }) => ({
+  saving: pressure.saving,
+  filled: pressure.filled
 })
 
 export default connect(mapStateToProps, PressureActions)(PressureWidget)

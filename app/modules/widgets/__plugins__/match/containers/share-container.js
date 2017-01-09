@@ -30,6 +30,6 @@ ShareContainer.propTypes = {
   params: PropTypes.object
 }
 
-const mapStateToProps = state => ({ match: state.widgets.match })
+const mapStateToProps = state => ({ match: state.widgets.plugins.match })
 
 export default connect(mapStateToProps)(ShareContainer)

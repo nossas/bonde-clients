@@ -2,10 +2,10 @@ import { combineReducers } from 'redux'
 
 import dataExport from './data-export'
 import list from './list'
-import match from '../__plugins__/match/reducers'
+import plugins from '../__plugins__/reducers'
 
 export default combineReducers({
   dataExport,
   list,
-  match
+  plugins
 })

@@ -1,5 +1,4 @@
 import * as t from '../action-types'
-import * as pressureActionTypes from '../__plugins__/pressure/action-types'
 import {
   REQUEST_FETCH_GOOGLE_FONTS,
   SUCCESS_FETCH_GOOGLE_FONTS,
@@ -62,24 +61,12 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case pressureActionTypes.WIDGET_PRESSURE_FILL_REQUEST:
-      return { ...state, saving: true }
-    case pressureActionTypes.WIDGET_PRESSURE_FILL_SUCCESS:
-      data = state.data.map(widget => widget.id === action.payload.counter.id
-        ? { ...widget, ...action.payload.counter, filled: true }
-        : widget
-      )
-      return { ...state, data, saving: false }
-    case pressureActionTypes.WIDGET_PRESSURE_FILL_FAILURE:
-      return { ...state, saving: false, error: action.payload.error }
-
     case ADD_FORM_ENTRY:
       return {...state,
         data: state.data.map(
           widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
         )
       }
-
     case REQUEST_FETCH_GOOGLE_FONTS:
       return { ...state, loaded: false, loading: true }
     case SUCCESS_FETCH_GOOGLE_FONTS:
