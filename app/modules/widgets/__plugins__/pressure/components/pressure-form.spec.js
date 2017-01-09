@@ -4,7 +4,7 @@ import { mount } from 'enzyme'
 
 import PressureForm from './pressure-form'
 
-describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', () => {
+describe('app/modules/widgets/__plugins__/pressure/components/pressure-form', () => {
   let wrapper
   const widget = { settings: {} }
 

@@ -3,7 +3,7 @@ import { Route } from 'react-router'
 
 // Children modules dependencies
 import matchRoutes from './__plugins__/match/routes'
-import { createRoutes as pressureCreateRoutes } from '../../scripts/Widget/plugins/PressureWidget'
+import pressureRoutes from './__plugins__/pressure/routes'
 import { createRoutes as formCreateRoutes } from '../../scripts/Widget/plugins/Form'
 import { createRoutes as donationCreateRoutes } from '../../scripts/Widget/plugins/Donation'
 
@@ -19,7 +19,7 @@ export default () => (
     <Route path='/export' component={DataExportPage} />
 
     {matchRoutes()}
-    {pressureCreateRoutes()}
+    {pressureRoutes()}
     {formCreateRoutes()}
     {donationCreateRoutes()}
   </Route>

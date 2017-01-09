@@ -3,7 +3,6 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { Loading } from '../../../../components'
 import DraftWidget from '../DraftWidget.jsx'
 
 describe('DraftWidget', () => {
@@ -40,7 +39,7 @@ describe('DraftWidget', () => {
           expect(wrapper.find('DraftWidgetButton')).to.have.length(5)
         })
 
-        describe('ContentWidget button', () => {
+        describe('Content widget button', () => {
           let button
           before(() => {
             button = wrapper.find('DraftWidgetButton').at(0)
@@ -57,7 +56,7 @@ describe('DraftWidget', () => {
           })
         })
 
-        describe('FormWidget button', () => {
+        describe('Form widget button', () => {
           let button
           before(() => {
             button = wrapper.find('DraftWidgetButton').at(1)
@@ -74,7 +73,7 @@ describe('DraftWidget', () => {
           })
         })
 
-        describe('DonationWidget button', () => {
+        describe('Donation widget button', () => {
           let button
           before(() => {
             button = wrapper.find('DraftWidgetButton').at(2)
@@ -91,7 +90,7 @@ describe('DraftWidget', () => {
           })
         })
 
-        describe('MatchWidget button', () => {
+        describe('Match widget button', () => {
           let button
           before(() => {
             button = wrapper.find('DraftWidgetButton').at(3)
@@ -108,7 +107,7 @@ describe('DraftWidget', () => {
           })
         })
 
-        describe('PressureWidget button', () => {
+        describe('Pressure widget button', () => {
           let button
           before(() => {
             button = wrapper.find('DraftWidgetButton').at(4)
