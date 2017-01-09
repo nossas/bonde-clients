@@ -1,21 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 
 import NewEditorContentWidget from './NewEditorContentWidget'
-import OldEditorContentWidget from './OldEditorContentWidget'
+import { ContentOldEditor } from '../../../../modules/widgets/__plugins__/content/components'
 
+class ContentWidget extends Component {
 
-export default class ContentWidget extends Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { forceRenderNewEditor: false }
   }
 
-  handleForceRender() {
+  handleForceRender () {
     this.setState({ forceRenderNewEditor: true })
   }
 
-  render() {
+  render () {
     const { widget: { settings } } = this.props
 
     try {
@@ -28,14 +27,13 @@ export default class ContentWidget extends Component {
         return <NewEditorContentWidget {...this.props} />
       } else {
         return (
-          <OldEditorContentWidget
+          <ContentOldEditor
             handleForceRender={this.handleForceRender.bind(this)}
             {...this.props}
           />
         )
       }
     }
-
   }
 }
 
@@ -48,3 +46,5 @@ ContentWidget.propTypes = {
   dispatch: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }
+
+export default ContentWidget

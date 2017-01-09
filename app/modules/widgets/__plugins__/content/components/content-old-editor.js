@@ -1,31 +1,21 @@
 import React, { PropTypes } from 'react'
-import ReactDOM from 'react-dom'
-import { bindActionCreators } from 'redux'
 import $ from 'jquery'
 import classnames from 'classnames'
 
-import { WYSIHTMLToolbar, Loading } from '../../../components'
-import { actions as WidgetActions } from '../../../../modules/widgets'
+// Global module dependencies
+import { WYSIHTMLToolbar, Loading } from '../../../../../scripts/components'
 
-export default class OldEditorContentWidget extends React.Component {
+// Parent module dependencies
+import { actions as WidgetActions } from '../../../../../modules/widgets'
 
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onCancelEdit: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-  }
-
+class ContentOldEditor extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
       editing: false,
       editor: null,
       content: props.widget.settings.content,
-      toolbarId: 'wysihtml5-toolbar-' + this.props.widget.id,
+      toolbarId: `wysihtml5-toolbar-${this.props.widget.id}`,
       loading: false
     }
   }
@@ -130,6 +120,7 @@ export default class OldEditorContentWidget extends React.Component {
   }
 
   render() {
+    console.log('ContentOldEditor')
     const { toolbarId, editing } = this.state
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     const { handleForceRender } = this.props
@@ -175,3 +166,15 @@ export default class OldEditorContentWidget extends React.Component {
     )
   }
 }
+
+ContentOldEditor.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onCancelEdit: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+export default ContentOldEditor
