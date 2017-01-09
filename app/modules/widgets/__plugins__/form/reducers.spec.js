@@ -14,16 +14,16 @@ describe('app/modules/widgets/__plugins__/form/reducers', () => {
 
     expect(nextState).to.have.property('saving', true)
   })
-  it('should change saving state to false and filled state to true when succeeded', () => {
-    const currentInitialState = { ...initialState, saving: true, filled: false }
+  it('should change saving state to false when succeeded', () => {
+    const currentInitialState = { ...initialState, saving: true }
     const action = { type: t.WIDGET_FORM_ENTRY_CREATE_SUCCESS }
     const nextState = reducers(currentInitialState, action)
 
     expect(nextState).to.have.property('saving', false)
   })
   it('should change saving state to false and error state with message when failed', () => {
-    const currentInitialState = { ...initialState, saving: true, filled: false }
-    const failurePayload = { error: 'Foo Bar error message!' }
+    const currentInitialState = { ...initialState, saving: true }
+    const failurePayload = { error: 'Form widget entry create request error message!' }
     const action = createAction(t.WIDGET_FORM_ENTRY_CREATE_FAILURE, failurePayload)
     const nextState = reducers(currentInitialState, action)
 

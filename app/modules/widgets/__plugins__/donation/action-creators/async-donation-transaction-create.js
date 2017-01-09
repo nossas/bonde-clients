@@ -5,12 +5,14 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, axios) => 
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`
   const body = { donation: genRequestPayload(params) }
 
+  dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_REQUEST })
   return axios.post(endpoint, body)
     .then(response => {
-      dispatch(createAction(t.TRANSACTION_DONE, response.data))
+      dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_SUCCESS })
       return Promise.resolve()
     })
     .catch(failure => {
+      dispatch(createAction(t.ASYNC_DONATION_TRANSACTION_CREATE_FAILURE, failure))
       return Promise.reject({ _error: `Response ${failure}` })
     })
 }
