@@ -3,24 +3,22 @@ import { reduxForm } from 'redux-form'
 import classnames from 'classnames'
 
 // Global module dependencies
+import * as Paths from '../../../../../scripts/Paths'
 import { SettingsPageContentLayout } from '../../../../../components/Layout'
-import * as Paths from './../../../../Paths'
 import {
   FormRedux,
   FormGroup,
   ControlLabel,
   FormControl
-} from '../../../../Dashboard/Forms'
+} from '../../../../../scripts/Dashboard/Forms'
 
 // Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
-import { SettingsMenu } from '../../../../../modules/widgets/__plugins__/form/components'
+import { SettingsMenu } from '../components'
 
-
-class FormWidgetForm extends React.Component {
-
+class SettingsFormPage extends React.Component {
   handleSubmit(values) {
     const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
@@ -72,7 +70,7 @@ class FormWidgetForm extends React.Component {
   }
 }
 
-FormWidgetForm.propTypes = {
+SettingsFormPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -93,4 +91,4 @@ export default reduxForm(
   { form: 'widgetForm', fields },
   mapStateToProps,
   WidgetActions
-)(FormWidgetForm)
+)(SettingsFormPage)
