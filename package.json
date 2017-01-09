@@ -16,6 +16,7 @@
     "url": "https://github.com/meurio/hub-client/issues"
   },
   "scripts": {
+    "coverage": "nyc report -r=html",
     "build": "webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "watch-client": "NODE_ENV=development UV_THREADPOOL_SIZE=100 NODE_PATH='./src' API_URL='http://localhost:3000' APP_DOMAIN='localhost.dev:3001' PAGARME_KEY='ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV' node webpack/webpack-dev-server.js",
     "start-dev": "NODE_ENV=development NODE_PATH=./src API_URL=http://localhost:3000 APP_DOMAIN=localhost.dev:3001 PAGARME_KEY=ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV NEW_RELIC_HOME=./src node ./bin/server.js",
@@ -90,6 +91,7 @@
     "newrelic": "^1.30.1",
     "newrelic-winston": "0.0.1",
     "node-sass": "^3.9.3",
+    "nyc": "^10.0.0",
     "piping": "^0.3.2",
     "pm2": "^2.1.6",
     "postcss-loader": "^0.13.0",
