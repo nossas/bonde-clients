@@ -16,7 +16,7 @@ import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import { Button, Input } from '../components'
-import * as FormEntryActions from '../../../../../scripts/actions/FormEntryActions'
+import * as FormActions from '../action-creators'
 
 @reactMixin.decorate(Navigation)
 class Form extends React.Component {
@@ -51,24 +51,22 @@ class Form extends React.Component {
   submit() {
     if (!this.props.editable) {
       const { dispatch, mobilization, widget } = this.props
-      const { settings } = widget
-      const { fields } = settings
-      const bindedFormEntryActions = bindActionCreators(FormEntryActions, dispatch)
-      const fieldsWithValue = fields.map((field) => {
-        return {...field, value: $('#input-' + field.uid).val()}
-      })
+      const bindedFormEntryActions = bindActionCreators(FormActions, dispatch)
+
+      const fieldsWithValue = widget.settings.fields.map(field => ({
+        ...field,
+        value: $(`#input-${field.uid}`).val()
+      }))
       const errors = this.validate(fieldsWithValue)
-      this.setState({errors: errors})
+      this.setState({ errors })
 
       if (errors.length === 0) {
-        this.setState({loading: true})
-        bindedFormEntryActions.addFormEntry({
-          mobilization_id: mobilization.id,
-          form_entry: {
-            widget_id: widget.id,
-            fields: JSON.stringify(fieldsWithValue)
-          }
-        })
+        this.setState({ loading: true })
+        const formEntry = {
+          widget_id: widget.id,
+          fields: JSON.stringify(fieldsWithValue)
+        }
+        bindedFormEntryActions.asyncFormEntryCreate({ mobilization, formEntry })
       }
     }
   }

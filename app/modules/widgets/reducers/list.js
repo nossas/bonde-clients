@@ -1,7 +1,6 @@
 import * as t from '../action-types'
 import { TOOLBAR_SET_LINK_OPEN_STRATEGY } from '../../../scripts/Widget/actions'
-
-const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
+import * as formActionTypes from '../__plugins__/form/action-types'
 
 const initialState = {
   loaded: false,
@@ -55,9 +54,9 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case ADD_FORM_ENTRY:
+    case formActionTypes.ADD_FORM_ENTRY:
       data = state.data.map(widget =>
-        widget.id === action.form_entry.widget_id
+        widget.id === action.payload.widget_id
           ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
           : widget
       )
