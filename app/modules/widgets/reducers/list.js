@@ -1,6 +1,5 @@
 import * as t from '../action-types'
 import { TOOLBAR_SET_LINK_OPEN_STRATEGY } from '../../../scripts/Widget/actions'
-import * as formActionTypes from '../__plugins__/form/action-types'
 
 const initialState = {
   loaded: false,
@@ -20,7 +19,7 @@ export default function reducer (state = initialState, action) {
       return { ...state, saving: true }
     case t.SUCCESS_ASYNC_WIDGET_UPDATE:
       data = state.data.map(widget => widget.id === action.payload.id ? action.payload : widget)
-      return { ...state, data, saving: false }
+      return { ...state, saving: false, data }
     case t.FAILURE_ASYNC_WIDGET_UPDATE:
       return { ...state, saving: false, error: action.payload }
 
@@ -54,18 +53,6 @@ export default function reducer (state = initialState, action) {
     //
     // Needs refactoring
     //
-    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_REQUEST:
-      return { ...state, saving: true }
-    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_SUCCESS:
-      data = state.data.map(widget =>
-        widget.id === action.payload.widget_id
-          ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
-          : widget
-      )
-      return { ...state, saving: false, data }
-    case formActionTypes.WIDGET_FORM_ENTRY_CREATE_FAILURE:
-      return { ...state, saving: false, error: action.payload }
-
     case TOOLBAR_SET_LINK_OPEN_STRATEGY:
       return { ...state, toolbarLinkOpenStrategy: action.strategy }
 
