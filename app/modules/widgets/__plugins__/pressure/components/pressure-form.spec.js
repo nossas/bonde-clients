@@ -2,26 +2,25 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { PressureForm } from '../../components'
-import { PressureCount } from '../../../../../../modules/widgets/__plugins__/pressure/components'
+import PressureForm from './pressure-form'
 
 describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', () => {
-  let component
+  let wrapper
   const widget = { settings: {} }
 
   beforeEach(() => {
-    component = mount(<PressureForm widget={widget} />)
+    wrapper = mount(<PressureForm widget={widget} />)
   })
 
   it('should render ok by default', () => {
-    expect(component).to.be.ok
+    expect(wrapper).to.be.ok
     // check if errors not render without submit
-    expect(component.find('span.red').length).to.equal(0)
+    expect(wrapper.find('span.red').length).to.equal(0)
   })
 
   it('should render buttonColor according passed in props', () => {
-    component.setProps({ buttonColor: '#fff' })
-    expect(component.find('button').props().style.backgroundColor).to.equal('#fff')
+    wrapper.setProps({ buttonColor: '#fff' })
+    expect(wrapper.find('button').props().style.backgroundColor).to.equal('#fff')
   })
 
   it('should return onSubmit values of state when clicked button', () => {
@@ -34,18 +33,18 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
       subject: 'subject',
       body: 'body'
     }
-    component.setProps({ onSubmit: data => { returned = data } })
-    component.setState(state)
+    wrapper.setProps({ onSubmit: data => { returned = data } })
+    wrapper.setState(state)
 
-    component.find('form').simulate('submit')
+    wrapper.find('form').simulate('submit')
     expect(returned).to.deep.equal(state)
   })
 
   it('should render children', () => {
-    component.setProps({
-      children: <PressureCount />
+    wrapper.setProps({
+      children: <div className='foo-bar-children' />
     })
-    expect(component.find('PressureCount').length).to.equal(1)
+    expect(wrapper.find('.foo-bar-children').length).to.equal(1)
   })
 
   it('should set default subject and body by props', () => {
@@ -61,19 +60,19 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
   })
 
   it('should change text of button when buttonText passed', () => {
-    component.setProps({
+    wrapper.setProps({
       buttonText: 'Enviar e-mail para o alvo'
     })
-    expect(component.find('button').text()).to.equal('Enviar e-mail para o alvo')
+    expect(wrapper.find('button').text()).to.equal('Enviar e-mail para o alvo')
   })
 
   it('should render error and not call onSubmit if any field not fill', () => {
     let submitted
-    component.setProps({
+    wrapper.setProps({
       onSubmit: data => { submitted = data }
     })
-    component.find('form').simulate('submit')
-    expect(component.find('span.error').length).to.equal(5)
+    wrapper.find('form').simulate('submit')
+    expect(wrapper.find('span.error').length).to.equal(5)
     expect(submitted).to.equal(undefined)
   })
 })

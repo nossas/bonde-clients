@@ -10,8 +10,11 @@ import { TellAFriend } from '../../../components'
 import { WidgetOverlay } from '../../../../modules/widgets/components'
 
 // Current module dependencies
-import { PressureForm, TargetList } from './components'
-import { PressureCount } from '../../../../modules/widgets/__plugins__/pressure/components'
+import { TargetList } from './components'
+import {
+  PressureCount,
+  PressureForm
+} from '../../../../modules/widgets/__plugins__/pressure/components'
 import { actions as PressureActions } from '../../../../modules/widgets/__plugins__/pressure'
 
 /* TODO: Change static content by props
