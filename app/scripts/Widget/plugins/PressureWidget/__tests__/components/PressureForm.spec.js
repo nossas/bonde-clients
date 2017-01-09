@@ -2,8 +2,8 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { PressureForm, PressureCount } from '../../components'
-
+import { PressureForm } from '../../components'
+import { PressureCount } from '../../../../../../modules/widgets/__plugins__/pressure/components'
 
 describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', () => {
   let component
@@ -25,7 +25,7 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
   })
 
   it('should return onSubmit values of state when clicked button', () => {
-    let returned = undefined
+    let returned
     const state = {
       email: 'igor@local.cc',
       name: 'igor',
@@ -34,7 +34,7 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
       subject: 'subject',
       body: 'body'
     }
-    component.setProps({ onSubmit: data => returned = data})
+    component.setProps({ onSubmit: data => { returned = data } })
     component.setState(state)
 
     component.find('form').simulate('submit')
@@ -70,7 +70,7 @@ describe('app/scripts/Widget/plugins/PressureWidget/components/PressureForm', ()
   it('should render error and not call onSubmit if any field not fill', () => {
     let submitted
     component.setProps({
-      onSubmit: data => submitted = data
+      onSubmit: data => { submitted = data }
     })
     component.find('form').simulate('submit')
     expect(component.find('span.error').length).to.equal(5)

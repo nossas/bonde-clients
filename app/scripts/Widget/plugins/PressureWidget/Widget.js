@@ -2,10 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
+// Global module dependencies
 import * as Paths from '../../../Paths'
-import { WidgetOverlay } from '../../../../modules/widgets/components'
-import { PressureForm, TargetList, PressureCount } from './components'
 import { TellAFriend } from '../../../components'
+
+// Parent module dependencies
+import { WidgetOverlay } from '../../../../modules/widgets/components'
+
+// Current module dependencies
+import { PressureForm, TargetList } from './components'
+import { PressureCount } from '../../../../modules/widgets/__plugins__/pressure/components'
 import { actions as PressureActions } from '../../../../modules/widgets/__plugins__/pressure'
 
 /* TODO: Change static content by props
