@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
+// Global module dependencies
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../../Dashboard/Forms'
+import { SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 import { FormFooter, InputTag } from '../../../../../modules/widgets/components'
-import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../../Dashboard/Forms'
-import { Base as PressureBase } from '../components/settings'
-import { SettingsPageContentLayout } from '../../../../../components/Layout'
+
+// Current module dependencies
+import { SettingsBase } from '../../../../../modules/widgets/__plugins__/pressure/components'
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
@@ -40,7 +45,7 @@ class EmailPage extends Component {
   render() {
     const { fields: { pressure_subject, pressure_body }, ...props } = this.props
     return (
-      <PressureBase
+      <SettingsBase
         location={props.location}
         mobilization={props.mobilization}
         widget={props.widget}
@@ -49,13 +54,13 @@ class EmailPage extends Component {
           <FormRedux
             {...props}
             onSubmit={::this.handleSubmit}
-            className="transparent"
-            floatButton="Salvar"
-            successMessage="Email para alvo configurado com sucesso!"
+            className='transparent'
+            floatButton='Salvar'
+            successMessage='Email para alvo configurado com sucesso!'
           >
-            <div className="form-group">
+            <div className='form-group'>
               <InputTag
-                label="Alvos"
+                label='Alvos'
                 values={this.state.targets}
                 onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
                 onRemoveTag={value => this.setState({
@@ -72,17 +77,17 @@ class EmailPage extends Component {
                 }}
               />
             </div>
-            <FormGroup controlId="email-subject-id" {...pressure_subject}>
+            <FormGroup controlId='email-subject-id' {...pressure_subject}>
               <ControlLabel>Assunto do email</ControlLabel>
-              <FormControl type="text" />
+              <FormControl type='text' />
             </FormGroup>
-            <FormGroup controlId="email-body-id" {...pressure_body}>
+            <FormGroup controlId='email-body-id' {...pressure_body}>
               <ControlLabel>Corpo do email que será enviado</ControlLabel>
-              <FormControl type="text" componentClass="textarea" />
+              <FormControl type='text' componentClass='textarea' />
             </FormGroup>
           </FormRedux>
         </SettingsPageContentLayout>
-      </PressureBase>
+      </SettingsBase>
     )
   }
 }

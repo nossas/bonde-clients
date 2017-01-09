@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react'
 
-import Menu from './Menu'
-import { SettingsPageLayout } from '../../../../../../components/Layout'
+// Global module dependencies
+import { SettingsPageLayout } from '../../../../../components/Layout'
 
-const Base = ({ children, location, mobilization, widget }) => (
+// Current module dependencies
+import { Menu } from '../../../../../scripts/Widget/plugins/PressureWidget/components/settings'
+
+const SettingsBase = ({ children, location, mobilization, widget }) => (
   <SettingsPageLayout>
     <Menu
       location={location}
@@ -14,7 +17,7 @@ const Base = ({ children, location, mobilization, widget }) => (
   </SettingsPageLayout>
 )
 
-Base.propTypes = {
+SettingsBase.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string
   }).isRequired,
@@ -22,4 +25,4 @@ Base.propTypes = {
   widget: PropTypes.object.isRequired
 }
 
-export default Base
+export default SettingsBase
