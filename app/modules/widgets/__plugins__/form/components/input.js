@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import TransitionGroup from 'react-addons-transition-group'
 import classnames from 'classnames'
-import { InputForm } from './'
+
+// Current module dependencies
+import { InputForm } from '../components'
 
 class Input extends Component {
   constructor(props, context) {

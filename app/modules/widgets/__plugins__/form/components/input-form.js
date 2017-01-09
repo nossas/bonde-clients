@@ -1,12 +1,10 @@
-import React from 'react'
-import classnames from 'classnames'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
-import { Loading } from './'
+// Parent module dependencies
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
-
-export default class InputForm extends React.Component {
+class InputForm extends Component {
   constructor(props, context) {
     super(props, context)
     const { field } = this.props
@@ -312,3 +310,5 @@ export default class InputForm extends React.Component {
     )
   }
 }
+
+export default InputForm
