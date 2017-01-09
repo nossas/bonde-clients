@@ -1,5 +1,4 @@
 import * as t from '../action-types'
-import { TOOLBAR_SET_LINK_OPEN_STRATEGY } from '../../../scripts/Widget/actions'
 
 const initialState = {
   loaded: false,
@@ -49,12 +48,6 @@ export default function reducer (state = initialState, action) {
     //
     case t.SET_WIDGET_LIST:
       return { ...state, data: action.payload }
-
-    //
-    // Needs refactoring
-    //
-    case TOOLBAR_SET_LINK_OPEN_STRATEGY:
-      return { ...state, toolbarLinkOpenStrategy: action.strategy }
 
     default:
       return state
