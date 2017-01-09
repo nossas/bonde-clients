@@ -1,0 +1,1 @@
+export const TRANSACTION_DONE = 'TRANSACTION_DONE'

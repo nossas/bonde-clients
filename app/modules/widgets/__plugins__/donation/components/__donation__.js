@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { Navigation } from 'react-router'
-import { connect } from 'react-redux'
 import reactMixin from 'react-mixin'
 import classnames from 'classnames'
 
@@ -12,7 +11,7 @@ import { TellAFriend } from '../../../../../scripts/components'
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
-import * as DonationActions from '../../../../../scripts/Widget/plugins/Donation/actions'
+import * as DonationActions from '../action-creators'
 import './__donation__.scss'
 
 @reactMixin.decorate(Navigation)
@@ -68,24 +67,24 @@ class Donation extends React.Component {
     const payment_type = widget.settings.payment_type
     const recurring_period = widget.settings.recurring_period
     const main_color = (widget.settings.main_color ? widget.settings.main_color : '#43a2cc')
-    const encryption_key = process.env.PAGARME_KEY || 'setup env var'
 
-    let checkout = new PagarMeCheckout.Checkout({"encryption_key": encryption_key, success: (data) => {
-      if (payment_type === 'users_choice' ) {
-        data.subscription = (selected_payment_type === 'unique' ? false : true)
-      } else {
-        data.subscription = (payment_type === 'unique' ? false : true)
-      }
-      data.recurring_period = recurring_period
-      data.mobilization_id = this.props.mobilization.id
-      data.widget_id = this.props.widget.id
-      data.amount = widget.settings['donation_value' + selected_value] + "00"
+    let checkout = new PagarMeCheckout.Checkout({
+      encryption_key: process.env.PAGARME_KEY || 'setup env var',
+      success: data => {
+        data.subscription = payment_type === 'users_choice'
+          ? (selected_payment_type === 'unique' ? false : true)
+          : data.subscription = (payment_type === 'unique' ? false : true)
 
-      that.setState({success: true})
-      dispatch(DonationActions.finishTransaction(data))
-    }, error: function(err) {
-      console.error(err)
-    }})
+        data.recurring_period = recurring_period
+        data.mobilization_id = this.props.mobilization.id
+        data.widget_id = this.props.widget.id
+        data.amount = widget.settings['donation_value' + selected_value] + "00"
+
+        that.setState({ success: true })
+        dispatch(DonationActions.asyncDonationTransactionCreate(data))
+      },
+      error: err => { console.error(err) }
+    })
 
     const params = {
       createToken: 'false',
