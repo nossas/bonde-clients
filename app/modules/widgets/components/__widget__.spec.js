@@ -24,8 +24,8 @@ describe('app/modules/widgets/components/__widget__', () => {
     wrapper = shallow(<Widget {...props} />)
   })
 
-  it('should render DrafWidget by default', () => {
-    expect(wrapper.find('DraftWidget')).to.have.length(1)
+  it('should render Draf widget component by default', () => {
+    expect(wrapper.find('Draft')).to.have.length(1)
   })
 
   it('should render connected Pressure widget component if kind it is "pressure"', () => {
@@ -40,7 +40,7 @@ describe('app/modules/widgets/components/__widget__', () => {
 
   it('should render Draft widget component if widget kind it is "draft"', () => {
     wrapper.setProps(changeKind({ props, kind: 'draft' }))
-    expect(wrapper.find('DraftWidget')).to.have.length(1)
+    expect(wrapper.find('Draft')).to.have.length(1)
   })
 
   it('should render Donation widget component if widget kind it is "donation"', () => {
