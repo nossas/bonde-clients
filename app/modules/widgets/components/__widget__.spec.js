@@ -35,7 +35,7 @@ describe('app/modules/widgets/components/__widget__', () => {
 
   it('should render Form widget component if widget kind it is "form"', () => {
     wrapper.setProps(changeKind({ props, kind: 'form' }))
-    expect(wrapper.find('FormWidget')).to.have.length(1)
+    expect(wrapper.find('Form')).to.have.length(1)
   })
 
   it('should render Draft widget component if widget kind it is "draft"', () => {

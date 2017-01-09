@@ -1,28 +1,25 @@
 import React, { PropTypes } from 'react'
 import { Navigation } from 'react-router'
-import reactMixin from 'react-mixin'
 import { bindActionCreators } from 'redux'
+import reactMixin from 'react-mixin'
 import $ from 'jquery'
 import classnames from 'classnames'
 
-import { isValidEmail } from '../../../../util/validation-helper'
-import { Error } from '../../../../components/FormUtil'
-import * as Paths from '../../../Paths'
-import * as FormEntryActions from '../../../actions/FormEntryActions'
-import TellAFriend from '../../../components/shared/TellAFriend.jsx'
-import { Input, Button } from './components'
-import { WidgetOverlay } from '../../../../modules/widgets/components'
+// Global module dependencies
+import * as Paths from '../../../../../scripts/Paths'
+import { Error } from '../../../../../components/FormUtil'
+import { isValidEmail } from '../../../../../util/validation-helper'
+import { TellAFriend } from '../../../../../scripts/components'
 
-@reactMixin.decorate(Navigation)
-export default class FormWidget extends React.Component {
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool,
-    configurable: PropTypes.bool,
-    hasNewField: PropTypes.bool
-  }
+// Parent module dependencies
+import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
+// Current module dependencies
+import { Input, Button } from '../../../../../scripts/Widget/plugins/Form/components'
+import * as FormEntryActions from '../../../../../scripts/actions/FormEntryActions'
+
+// @reactMixin.decorate(Navigation)
+class Form extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -240,3 +237,13 @@ export default class FormWidget extends React.Component {
     )
   }
 }
+
+Form.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  editable: PropTypes.bool,
+  configurable: PropTypes.bool,
+  hasNewField: PropTypes.bool
+}
+
+export default Form
