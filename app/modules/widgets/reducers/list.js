@@ -1,11 +1,5 @@
 import * as t from '../action-types'
-import {
-  REQUEST_FETCH_GOOGLE_FONTS,
-  SUCCESS_FETCH_GOOGLE_FONTS,
-  FAILURE_FETCH_GOOGLE_FONTS,
-
-  TOOLBAR_SET_LINK_OPEN_STRATEGY
-} from '../../../scripts/Widget/actions'
+import { TOOLBAR_SET_LINK_OPEN_STRATEGY } from '../../../scripts/Widget/actions'
 
 const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
@@ -62,17 +56,12 @@ export default function reducer (state = initialState, action) {
     // Needs refactoring
     //
     case ADD_FORM_ENTRY:
-      return {...state,
-        data: state.data.map(
-          widget => widget.id === action.form_entry.widget_id ? {...widget, form_entries_count: widget.form_entries_count + 1} : widget
-        )
-      }
-    case REQUEST_FETCH_GOOGLE_FONTS:
-      return { ...state, loaded: false, loading: true }
-    case SUCCESS_FETCH_GOOGLE_FONTS:
-      return { ...state, loaded: true, loading: false, googleFonts: action.fonts }
-    case FAILURE_FETCH_GOOGLE_FONTS:
-      return { ...state, loaded: true, loading: false, error: action.error }
+      data = state.data.map(widget =>
+        widget.id === action.form_entry.widget_id
+          ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
+          : widget
+      )
+      return { ...state, data }
 
     case TOOLBAR_SET_LINK_OPEN_STRATEGY:
       return { ...state, toolbarLinkOpenStrategy: action.strategy }
