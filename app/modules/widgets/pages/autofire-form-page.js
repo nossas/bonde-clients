@@ -8,8 +8,8 @@ import { FormRedux, FormGroup, ControlLabel, FormControl } from '../../../script
 import { SettingsPageContentLayout } from '../../../components/Layout'
 
 // Children modules dependencies
+import { SettingsMenu as PressureSettingsMenu } from '../__plugins__/pressure/components'
 import { Menu as FormWidgetMenu } from '../../../scripts/Widget/plugins/Form/components'
-import { Menu as PressureWidgetMenu } from '../../../scripts/Widget/plugins/PressureWidget/components/settings'
 import { Menu as DonationWidgetMenu } from '../../../scripts/Widget/plugins/Donation/components/settings'
 
 // Current module dependencies
@@ -51,8 +51,11 @@ const AutofireFormPage = props => {
         {(widget.kind === 'donation'
           ? <DonationWidgetMenu {...props} widget={widget} />
           : widget.kind === 'pressure'
-          ? <PressureWidgetMenu mobilization_id={mobilization.id} widget_id={widget.id} {...props} />
-        : <FormWidgetMenu {...props} widget={widget} />
+            ? <PressureSettingsMenu
+              mobilization_id={mobilization.id}
+              widget_id={widget.id} {...props}
+            />
+            : <FormWidgetMenu {...props} widget={widget} />
         )}
         {/* refact */}
         <SettingsPageContentLayout>

@@ -4,11 +4,11 @@ import React, { PropTypes } from 'react'
 import { SettingsPageLayout } from '../../../../../components/Layout'
 
 // Current module dependencies
-import { Menu } from '../../../../../scripts/Widget/plugins/PressureWidget/components/settings'
+import { SettingsMenu } from '../../../../../modules/widgets/__plugins__/pressure/components'
 
 const SettingsBase = ({ children, location, mobilization, widget }) => (
   <SettingsPageLayout>
-    <Menu
+    <SettingsMenu
       location={location}
       mobilization_id={mobilization.id}
       widget_id={widget.id}
