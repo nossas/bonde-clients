@@ -4,7 +4,7 @@ import classnames from 'classnames'
 const SettingsPageContentLayout = ({ children, className, containerClassName }) => (
   <div
     className={classnames(
-      'settings-page-content-layout clearfix overflow-auto py3 pr4 pl5',
+      'settings-page-content-layout clearfix overflow-auto py3 pr4 pl3',
       className
     )}
   >

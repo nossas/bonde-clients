@@ -30,8 +30,8 @@ export class BlockCreate extends Component {
     const newBlockPath = Paths.createBlock(mobilization)
 
     return (
-      <div className="block-create col-12 flex flex-column bg-silver gray relative pl4">
-        <div className="block-create-header bg-white pt3 pr4 pl5">
+      <div className="block-create col-12 flex flex-column bg-silver gray relative">
+        <div className="block-create-header bg-white pt3 pr4 pl3">
           <h1 className="h1 mt0 mb3">Adicione um bloco de conteúdo</h1>
           <Tabs>
             <Tab
@@ -44,7 +44,7 @@ export class BlockCreate extends Component {
 
 
         <div className="clearfix overflow-auto">
-          <div className="col-6 clearfix py3 pr4 pl5">
+          <div className="col-6 clearfix py3 pr4 pl3">
             <p className="lightgray mb2">
               Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a
               qualquer momento

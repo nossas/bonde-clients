@@ -45,7 +45,7 @@ class MobilizationEditContainer extends React.Component {
 
       // TODO: Remove inline style
       return (
-        <div className='flex flex-auto overflow-hidden' style={{ marginLeft: '80px' }}>
+        <div className='flex flex-auto overflow-hidden'>
           {children}
           <GoogleFontsLoader fonts={fonts} />
         </div>
