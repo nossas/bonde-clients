@@ -4,9 +4,9 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 import * as MobilizationSelectors from '../selectors'
 import { asyncAdd } from '../action-creators'
+import { MobilizationAddLayout } from '../components'
 import MobilizationBasicsForm, { fields, validate } from '../components/mobilization-basics-form'
 
-import { NewMobilizationHeader } from '../../../scripts/Mobilization/components'
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 import { selectors as CommunitySelectors } from '../../community'
 
@@ -26,8 +26,7 @@ class MobilizationAddPage extends Component {
     const { location, ...formProps } = this.props
 
     return (
-      <div className="flex-auto bg-silver gray">
-        <NewMobilizationHeader location={location} />
+      <MobilizationAddLayout location={location}>
         <div className="clearfix overflow-auto">
           <div className="p3 lg-col-5 mx-auto">
             <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
@@ -41,7 +40,7 @@ class MobilizationAddPage extends Component {
             </p>
           </div>
         </div>
-      </div>
+      </MobilizationAddLayout>
     )
   }
 }

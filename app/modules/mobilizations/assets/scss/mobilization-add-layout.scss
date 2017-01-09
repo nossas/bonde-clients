@@ -1,6 +1,12 @@
 @import '../../../../../node_modules/basscss-sass/scss/colors';
 
 .new-mobilization-header {
+  padding-bottom: .7rem;
+
+  .h1 {
+    margin-bottom: 3rem;
+  }
+
   .list-reset {
     font-size: .98rem;
 

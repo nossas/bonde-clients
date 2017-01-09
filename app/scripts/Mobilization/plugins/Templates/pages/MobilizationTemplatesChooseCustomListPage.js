@@ -6,7 +6,8 @@ import reactMixin from 'react-mixin'
 import * as Paths from '../../../../Paths'
 import { MobilizationTemplatesSelectableList } from '../components'
 import * as MobilizationActions from '../../../MobilizationActions'
-import { NewMobilizationHeader } from '../../../components'
+
+import { MobilizationAddLayout } from '../../../../../modules/mobilizations/components'
 
 @reactMixin.decorate(Navigation)
 export class MobilizationTemplatesChooseCustomListPage extends Component {
@@ -22,8 +23,7 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
     const next = () => this.transitionTo(Paths.editMobilization(mobilization.id))
 
     return (
-      <div className="flex-auto bg-silver gray">
-        <NewMobilizationHeader location={location} />
+      <MobilizationAddLayout location={location}>
         <div className="p3 lg-col-5 mx-auto">
           <h3 className="h1 mt0 mb3 center">Meus Templates</h3>
           <MobilizationTemplatesSelectableList
@@ -35,7 +35,7 @@ export class MobilizationTemplatesChooseCustomListPage extends Component {
             )}
           />
         </div>
-      </div>
+      </MobilizationAddLayout>
     )
   }
 }
