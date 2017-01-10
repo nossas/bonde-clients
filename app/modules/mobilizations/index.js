@@ -1,2 +1,9 @@
-export { default as blocks } from './blocks'
-export { default as selectors } from './selectors'
+import * as selectors from './selectors'
+import * as actionCreators from './action-creators'
+import reducers from './reducers'
+
+export default {
+  selectors,
+  reducers,
+  actionCreators
+}

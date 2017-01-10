@@ -5,11 +5,10 @@ import {
   BrowsableList,
   BrowsableListItem
 } from '../../../../../components/Navigation/BrowsableList'
-import { NewMobilizationHeader } from '../../../components'
+import { MobilizationAddLayout } from '../../../../../modules/mobilizations/components'
 
 const MobilizationTemplatesChoosePage = ({ mobilization, location, mobilizationTemplates }) => (
-  <div className="flex-auto bg-silver gray">
-    <NewMobilizationHeader location={location} />
+  <MobilizationAddLayout location={location}>
     <div className="p3 lg-col-5 mx-auto">
       <h3 className="h1 mt0 mb3 center">Como você deseja começar?</h3>
       <BrowsableList>
@@ -32,7 +31,7 @@ const MobilizationTemplatesChoosePage = ({ mobilization, location, mobilizationT
         />
       </BrowsableList>
     </div>
-  </div>
+  </MobilizationAddLayout>
 )
 
 MobilizationTemplatesChoosePage.propTypes = {

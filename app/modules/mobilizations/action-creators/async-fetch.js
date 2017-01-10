@@ -1,19 +1,19 @@
-import * as t from '../../action-types'
+import * as t from '../action-types'
 
 
 export default relationshipId => (dispatch, getState, axios) => {
+  dispatch({ type: t.FETCH })
+
   const { auth: { credentials } } = getState()
-
-  dispatch({ type: t.REQUEST_FETCH, relationshipId })
-
   return axios
     .get(`/communities/${relationshipId}/mobilizations`)
     .then(({ status, data }) => {
       if (status === 200) {
-        dispatch({ type: t.SUCCESS_FETCH, data })
+        dispatch({ type: t.LOAD, payload: data })
         return Promise.resolve()
+      } else {
+        return Promise.reject({ error: `Response code ${status}` })
       }
-      return Promise.reject({ message: `Response code ${status}` })
     })
-    .catch(err => dispatch({ type: t.FAILURE_FETCH, error: err.message }))
+    .catch(error => console.error('AsyncRequestError', error))
 }

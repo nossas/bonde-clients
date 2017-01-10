@@ -4,80 +4,109 @@ import * as t from '../action-types'
 import reducer from '../reducers'
 
 const initialState = {
-  loading: false,
   isLoaded: false,
+  loading: false,
   data: [],
-  relationshipId: undefined,
-  currentId: undefined
+  currentId: undefined,
+  menuActiveIndex: undefined
 }
 
-describe('MobilizationsReducers', () => {
+describe('MobilizationReducers / entities', () => {
 
-  describe('#asyncFilter', () => {
+  let payload
+  let nextState
 
-    it('should loading request', () => {
-      const action = { type: t.REQUEST_FILTER }
-      const nextState = reducer(undefined, action)
+  describe('t.ADD', () => {
 
-      expect(nextState).to.deep.equal({
-        ...initialState,
-        loading: true
-      })
+    beforeEach(() => {
+      payload = { id: 1, name: 'Lorem', goal: 'Dolor sit' }
+      nextState = reducer(undefined, { type: t.ADD, payload })
     })
 
-    it('should loaded finish request with success', () => {
-      const data = [{ id: 1 }]
-      const action = { type: t.SUCCESS_FILTER, data }
-      const nextState = reducer(undefined, action)
+    it('should insert payload in data list', () => {
+      expect(nextState.data).to.deep.equal([...initialState.data, payload])
+    })
 
-      expect(nextState).to.deep.equal({
-        ...initialState,
-        loading: false,
-        isLoaded: true,
-        data
-      })
+    it('should set current mobilization', () => {
+      expect(nextState.currentId).to.equal(payload.id)
     })
   })
 
-  describe('#asyncFetch', () => {
+  describe('t.FETCH', () => {
 
-    it('shoud loading request with relationshipId', () => {
-      const relationshipId = 1
-      const action = { type: t.REQUEST_FETCH, relationshipId }
-      const nextState = reducer(undefined, action)
-
-      expect(nextState).to.deep.equal({
-        ...initialState,
-        loading: true,
-        relationshipId
-      })
+    beforeEach(() => {
+      nextState = reducer(undefined, { type: t.FETCH })
     })
 
-    it('should loaded finish request with success', () => {
-      const data = [{ id: 1 }]
-      const action = { type: t.SUCCESS_FETCH, data }
-      const nextState = reducer(undefined, action)
+    it('should change loading to true', () => {
+      expect(nextState.loading).to.equal(true)
+    })
 
-      expect(nextState).to.deep.equal({
-        ...initialState,
-        loading: false,
-        isLoaded: true,
-        data
-      })
+    it('should reset data and current mobilization', () => {
+      expect(nextState.data).to.deep.equal([])
+      expect(nextState.currentId).to.equal(undefined)
     })
   })
 
-  describe('#select', () => {
+  describe('t.LOAD', () => {
 
-    it('should set currentId in mobilizations store', () => {
-      const currentId = 1
-      const action = { type: t.SELECT, currentId }
-      const nextState = reducer(undefined, action)
-      expect(nextState).to.deep.equal({
-        ...initialState,
-        currentId
-      })
+    beforeEach(() => {
+      payload = [
+        { id: 1, name: 'Lorem', goal: 'Dolor caem' },
+        { id: 2, name: 'Sit', goal: 'Spsum inte' },
+      ]
+      nextState = reducer(undefined, { type: t.LOAD, payload })
+    })
+
+    it('should load payload in data', () => {
+      expect(nextState.data).to.deep.equal(payload)
+    })
+
+    it('should finish fetching', () => {
+      expect(nextState.loading).to.equal(false)
+      expect(nextState.isLoaded).to.equal(true)
     })
   })
 
+  describe('t.SELECT', () => {
+
+    beforeEach(() => {
+      payload = 1
+      nextState = reducer(undefined, { type: t.SELECT, payload })
+    })
+
+    it('should set current mobilization', () => {
+      expect(nextState.currentId).to.equal(payload)
+    })
+  })
+
+  describe('t.UPDATE', () => {
+
+    beforeEach(() => {
+      payload = { id: 1, name: 'Replaced' }
+      nextState = reducer(undefined, { type: t.LOAD, payload: [{ id: 1, name: 'Lorem' }] })
+      nextState = reducer(nextState, { type: t.UPDATE, payload })
+    })
+
+    it('should replace payload in data list', () => {
+      expect(nextState.data).to.deep.equal([payload])
+    })
+  })
+
+  describe('t.TOGGLE_MENU', () => {
+
+    beforeEach(() => {
+      payload = 1
+      nextState = reducer(undefined, { type: t.TOGGLE_MENU, payload })
+    })
+
+    it('should menuActiveIndex to open menu', () => {
+      expect(nextState.menuActiveIndex).to.equal(payload)
+    })
+
+    it('should remove menuActiveIndex when equals previous index', () => {
+      nextState = reducer(nextState, { type: t.TOGGLE_MENU, payload })
+      expect(nextState.menuActiveIndex).to.equal(undefined)
+    })
+  })
 })
