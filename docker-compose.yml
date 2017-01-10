@@ -52,7 +52,7 @@ services:
     build:
       context: ./../rebu-server/
       dockerfile: Dockerfile.dev
-    entrypoint: ./development-entrypoint
+    # entrypoint: ./development-entrypoint
 
     # The command this container will run - in this case, this container will run our sidekiq
     # process:
