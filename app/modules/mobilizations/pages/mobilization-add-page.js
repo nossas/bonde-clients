@@ -4,7 +4,6 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 import * as MobilizationSelectors from '../selectors'
 import { asyncAdd } from '../action-creators'
-import { MobilizationAddLayout } from '../components'
 import MobilizationBasicsForm, { fields, validate } from '../components/mobilization-basics-form'
 
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
