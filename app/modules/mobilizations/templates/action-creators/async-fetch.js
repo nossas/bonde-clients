@@ -7,7 +7,7 @@ export default () => (dispatch, getState, axios) => {
   return axios
     .get('/templates', { headers: credentials })
     .then(({ status, data }) => {
-      dispatch({ type: t.REQUEST_TEMPLATE_FETCH, templates: data })
+      dispatch({ type: t.SUCCESS_TEMPLATE_FETCH, templates: data })
       return Promise.resolve()
     })
     .catch(error => {
