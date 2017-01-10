@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     case t.ADD:
       return {
         ...state,
-        data: [...state.data, action.payload],
+        data: [action.payload, ...state.data],
         currentId: action.payload.id
       }
     case t.UPDATE:
