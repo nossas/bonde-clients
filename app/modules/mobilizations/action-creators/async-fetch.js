@@ -1,10 +1,7 @@
 import * as t from '../action-types'
 
-
 export default relationshipId => (dispatch, getState, axios) => {
   dispatch({ type: t.FETCH })
-
-  const { auth: { credentials } } = getState()
   return axios
     .get(`/communities/${relationshipId}/mobilizations`)
     .then(({ status, data }) => {

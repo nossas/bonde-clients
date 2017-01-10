@@ -4,13 +4,10 @@ import { Loading } from '../../../scripts/Dashboard/components'
 import { Sidebar, getSidebarProps } from '../../../scripts/Dashboard/Sidebar'
 
 import * as MobilizationSelectors from '../selectors'
-import { selectors as CommunitySelectors } from '../../../scripts/Community'
 import { asyncFetch } from '../action-creators'
 
-
 export class MobilizationDashboardContainer extends Component {
-
-  static fetchData(store) {
+  static fetchData (store) {
     const promises = []
     if (!MobilizationSelectors.isLoaded(store.getState())) {
       const { community: { currentId } } = store.getState()
@@ -19,12 +16,12 @@ export class MobilizationDashboardContainer extends Component {
     return Promise.all(promises)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { asyncFetch, relationshipId } = this.props
     asyncFetch(relationshipId)
   }
 
-  render() {
+  render () {
     const { children, loading, sidebarProps } = this.props
 
     if (loading) return <Loading />

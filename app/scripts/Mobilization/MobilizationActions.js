@@ -29,22 +29,6 @@ export const fetchMobilizations = (queryFilter = {}) => ({
   })
 })
 
-export const fetch = communityId => (dispatch, getState, request) => {
-  const { auth: { credentials } } = getState()
-  dispatch({ type: t.FETCH, communityId })
-  return request
-    .get(`/communities/${communityId}/mobilizations`, {}, { headers: credentials })
-    .then(({ status, data }) => {
-      if (status === 200) {
-        dispatch({ type: t.FETCH_SUCCESS, result: data })
-        return Promise.resolve()
-      } else {
-        return Promise.reject({ error: data })
-      }
-    })
-    .catch(error => Promise.reject(error))
-}
-
 export const reset = () => dispatch => ({
   type: t.RESET
 })
@@ -63,12 +47,12 @@ export const addMobilizationAsync = (mobilization, next = null) => (dispatch, ge
     request
       .post(`/mobilizations`, { mobilization }, { headers: credentials })
       .then(response => {
-          const { data } = response
-          dispatch(addMobilization(data))
+        const { data } = response
+        dispatch(addMobilization(data))
           // TODO: Update react-router and install react-router-redux to make only a push in history.
           // See: https://github.com/reactjs/react-router-redux#pushlocation-replacelocation-gonumber-goback-goforward
-          next && typeof next === 'function' && next(data)
-          return resolve()
+        next && typeof next === 'function' && next(data)
+        return resolve()
       })
       .catch(error => reject({ _error: `Response ${error}` }))
   })
@@ -111,14 +95,14 @@ const createMobilizationFromTemplateSuccess = mobilization =>
   ({ type: SUCCESS_CREATE_MOBILIZATION_FROM_TEMPLATE, mobilization })
 const createMobilizationFromTemplateFailure = error =>
   ({ type: FAILURE_CREATE_MOBILIZATION_FROM_TEMPLATE, error })
-export const createMobilizationFromTemplateAsync = (template_mobilization_id, mobilization_id, next) =>
+export const createMobilizationFromTemplateAsync = (templateMobilizationId, mobilizationId, next) =>
   (dispatch, getState, request) => {
     const { auth: { credentials } } = getState()
-    const body = { template_mobilization_id }
+    const body = { template_mobilization_id: templateMobilizationId }
 
     dispatch(createMobilizationFromTemplateRequest())
     return request
-      .createMobilizationFromTemplate(body, mobilization_id, credentials)
+      .createMobilizationFromTemplate(body, mobilizationId, credentials)
       .then(response => {
         dispatch(createMobilizationFromTemplateSuccess(response.data))
         next()
@@ -128,4 +112,4 @@ export const createMobilizationFromTemplateAsync = (template_mobilization_id, mo
         dispatch(createMobilizationFromTemplateFailure(error))
         return Promise.reject({ _error: `Response ${error}` })
       })
-}
+  }
