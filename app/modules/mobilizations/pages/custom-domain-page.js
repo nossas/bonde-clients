@@ -7,12 +7,15 @@ import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
 import { Mobilization } from '../components'
 
-import { findWidgets, isWidgetsLoaded } from '../../../scripts/Widget/reducer'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../../../scripts/Mobilization/MobilizationActions'
 import {
   actions as BlockActions,
   selectors as BlockSelectors,
-} from '../../mobilizations/blocks'
+} from '../../../modules/mobilizations/blocks'
+import {
+  actions as WidgetActions,
+  selectors as WidgetSelectors,
+} from '../../../modules/widgets'
 
 
 export class CustomDomainPage extends Component {
@@ -35,8 +38,8 @@ export class CustomDomainPage extends Component {
       promises.push(promise)
     }
 
-    if (!isWidgetsLoaded(store.getState())) {
-      const action = findWidgets(findParams)
+    if (!WidgetSelectors.isLoaded(store.getState())) {
+      const action = WidgetActions.asyncWidgetSelect(findParams)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
@@ -88,7 +91,7 @@ CustomDomainPage.propTypes = {
 const mapStateToProps = state => ({
   mobilization: state.mobilization.data[0],
   blocks: state.blocks.data,
-  widgets: state.widgets.data
+  widgets: state.widgets.list.data
 })
 
 export default connect(mapStateToProps)(CustomDomainPage)

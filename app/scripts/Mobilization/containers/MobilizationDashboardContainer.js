@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchWidgets, isWidgetsLoaded } from '../../Widget/reducer'
 import { getMobilization } from '../MobilizationSelectors'
 import { setCurrentMobilizationId } from '../MobilizationActions'
 import { GoogleFontsLoader } from '../../../components/Fonts'
@@ -10,6 +9,10 @@ import {
   actions as BlockActions,
   selectors as BlockSelectors,
 } from '../../../modules/mobilizations/blocks'
+import {
+  actions as WidgetActions,
+  selectors as WidgetSelectors,
+} from '../../../modules/widgets'
 
 
 class MobilizationDashboardContainer extends React.Component {
@@ -29,8 +32,8 @@ class MobilizationDashboardContainer extends React.Component {
       const promise = store.dispatch(action)
       promises.push(promise)
     }
-    if (!isWidgetsLoaded(store.getState())) {
-      const action = fetchWidgets({mobilization_id: params.mobilization_id})
+    if (!WidgetSelectors.isLoaded(store.getState())) {
+      const action = WidgetActions.asyncWidgetFetch(params.mobilization_id)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
@@ -43,7 +46,7 @@ class MobilizationDashboardContainer extends React.Component {
     // data only in the server-side for now
     const {dispatch, mobilization} = this.props
     dispatch(BlockActions.asyncBlockFetch(mobilization.id))
-    dispatch(fetchWidgets({mobilization_id: mobilization.id}))
+    dispatch(WidgetActions.asyncWidgetFetch(mobilization.id))
     dispatch(setCurrentMobilizationId(mobilization.id))
   }
 
@@ -64,7 +67,7 @@ class MobilizationDashboardContainer extends React.Component {
 const mapStateToProps = (state, props) => ({
   auth: state.auth,
   blocks: state.blocks,
-  widgets: state.widgets,
+  widgets: state.widgets.list,
   mobilization: getMobilization(state, props)
 })
 

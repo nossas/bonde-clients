@@ -6,8 +6,7 @@ import classnames from 'classnames'
 
 import * as Paths from '../../Paths'
 import { Loading } from '../../components'
-import { fetchWidgets } from '../../Widget/reducer'
-
+import { actions as WidgetActions } from '../../../modules/widgets'
 import { Mobilization } from '../../../modules/mobilizations/components'
 import * as MobilizationActions from '../MobilizationActions'
 import Block from '../../../modules/mobilizations/blocks/components'
@@ -32,7 +31,7 @@ class EditMobilizationPage extends Component {
       dispatch,
       setCurrentMobilizationId,
     } = this.props
-    dispatch(fetchWidgets({mobilization_id: id}))
+    dispatch(WidgetActions.asyncWidgetFetch(id))
     dispatch(setCurrentMobilizationId(mobilizationId))
   }
 
@@ -98,7 +97,7 @@ EditMobilizationPage.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  widgetsCount: state.widgets.length,
+  widgetsCount: state.widgets.list.length,
   blockEditionMode: state.blocks.editionMode,
 })
 
