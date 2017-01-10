@@ -26,7 +26,7 @@ class MobilizationAddPage extends Component {
 
     return (
       <div className="page-add">
-        <h2 className="h1 mt0 mb3 center px5">Qual o objetivo da sua mobilização?</h2>
+        <h2 className="h1 mt0 mb3 center">Qual o objetivo da sua mobilização?</h2>
         <MobilizationBasicsForm
           className="bg-white"
           onFinishSubmit={this.onFinishSubmit.bind(this)}

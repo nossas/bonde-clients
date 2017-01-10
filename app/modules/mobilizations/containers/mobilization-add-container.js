@@ -2,7 +2,14 @@ import React from 'react'
 import classnames from 'classnames'
 import * as Paths from '../../../scripts/Paths'
 
-import '../assets/scss/mobilization-add.scss'
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '../../../components/Layout'
+import { Tabs, Tab } from '../../../components/Navigation/Tabs'
+
+/*import '../assets/scss/mobilization-add.scss'*/
 
 
 export default ({ children, location }) => {
@@ -12,6 +19,20 @@ export default ({ children, location }) => {
   const templateIsActive = location && /\/\w+\/[0-9]+\/templates\/choose/.test(location.pathname)
 
   return (
+    <SettingsPageLayout>
+      <SettingsPageMenuLayout title='Nova mobilização'>
+        <Tabs>
+          <Tab text='Objetivo' isActive={goalIsActive} index={1} />
+          <Tab text='Templates' isActive={templateIsActive} index={2} />
+        </Tabs>
+      </SettingsPageMenuLayout>
+      <SettingsPageContentLayout wrapClassName='md-col-12 lg-col-5 mx-auto'>
+        {children}
+      </SettingsPageContentLayout>
+    </SettingsPageLayout>
+  )
+
+  /*return (
     <div className='flex-auto bg-silver gray'>
       <div className='new-mobilization-header bg-white pr4 pl3 pt3 pb1 clearfix'>
         <h1 className='h1 mt0'>Nova mobilização</h1>
@@ -32,5 +53,5 @@ export default ({ children, location }) => {
         </div>
       </div>
     </div>
-  )
+  )*/
 }
