@@ -20,7 +20,7 @@ class MobilizationEditContainer extends React.Component {
       promises.push(promise)
     }
     if (!isWidgetsLoaded(store.getState())) {
-      const action = fetchWidgets({mobilization_id: params.mobilization_id})
+      const action = fetchWidgets({ mobilization_id: params.mobilization_id })
       const promise = store.dispatch(action)
       promises.push(promise)
     }
@@ -37,9 +37,16 @@ class MobilizationEditContainer extends React.Component {
   }
 
   render() {
-    const { children, blocks, widgets, mobilization } = this.props
+    const {
+      children,
+      blocksIsLoaded,
+      blocksIsLoading,
+      widgetsIsLoaded,
+      widgetsIsLoading,
+      mobilization
+    } = this.props
 
-    if (blocks.loaded && widgets.loaded) {
+    if (blocksIsLoaded && widgetsIsLoaded && !blocksIsLoading && !widgetsIsLoading) {
       const { header_font, body_font } = mobilization
       const fonts = [header_font, body_font].filter(arrayUtil.distinct)
 
@@ -57,8 +64,10 @@ class MobilizationEditContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  blocks: state.blocks,
-  widgets: state.widgets,
+  blocksIsLoaded: state.blocks.loaded,
+  blocksIsLoading: state.blocks.loading,
+  widgetsIsLoaded: state.widgets.loaded,
+  widgetsIsLoading: state.widgets.loading,
   mobilization: MobilizationSelectors.getCurrent(state)
 })
 

@@ -30,6 +30,7 @@ const ADD_FORM_ENTRY = 'ADD_FORM_ENTRY'
 
 const initialState = {
   loaded: false,
+  loading: false,
   data: [],
   saving: false
 }
@@ -37,11 +38,11 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WIDGETS_REQUEST:
-      return {...state, loaded: false}
+      return {...state, loaded: false, loading: true}
     case FETCH_WIDGETS_SUCCESS:
-      return {...state, loaded: true, data: action.result }
+      return {...state, loaded: true, loading: false, data: action.result }
     case FETCH_WIDGETS_FAILURE:
-      return {...state, loaded: true}
+      return {...state, loaded: true, loading: false, error: action.error}
     case REQUEST_FIND_WIDGETS:
       return {...state, loaded: false}
     case SUCCESS_FIND_WIDGETS:

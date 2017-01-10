@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import * as MobilizationSelectors from '../selectors'
 import { Mobilization } from '../components'
 
-import * as Paths from '../../../scripts/Paths'
+import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 
 
 @reactMixin.decorate(Navigation)
@@ -15,7 +15,7 @@ export class MobilizationPage extends Component {
   componentDidMount() {
     const { mobilization, blocks } = this.props
     if (blocks.length === 0) {
-      this.transitionTo(Paths.createBlock(mobilization))
+      this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 

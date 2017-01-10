@@ -26,7 +26,7 @@ export default ({ children, location }) => {
           <Tab text='Templates' isActive={templateIsActive} index={2} />
         </Tabs>
       </SettingsPageMenuLayout>
-      <SettingsPageContentLayout wrapClassName='md-col-12 lg-col-5 mx-auto'>
+      <SettingsPageContentLayout wrapClassName='md-col-12 lg-col-6 mx-auto'>
         {children}
       </SettingsPageContentLayout>
     </SettingsPageLayout>

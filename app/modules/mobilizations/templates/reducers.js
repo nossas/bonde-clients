@@ -1,7 +1,5 @@
 import * as templates from './mock-templates'
-
 import * as t from './action-types'
-
 import {
   REQUEST_TEMPLATE_CREATE,
   SUCCESS_TEMPLATE_CREATE,
@@ -15,6 +13,7 @@ import {
   SUCCESS_TEMPLATE_DESTROY,
   FAILURE_TEMPLATE_DESTROY,
 } from './action-types'
+
 
 export const initialState = {
   loading: false,
