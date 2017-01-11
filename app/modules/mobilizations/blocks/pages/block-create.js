@@ -3,15 +3,22 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import ReactS3Uploader from 'react-s3-uploader'
 
+// Global module dependencies
 import * as Paths from '../../../../scripts/Paths'
 import { Tabs, Tab } from '../../../../components/Navigation'
 import ColorPicker from '../../../../components/ColorPicker'
-import { actions as BlockActions, constants as c } from '../../../mobilizations/blocks'
-import { BlockMiniature } from '../../../mobilizations/blocks/components'
 
+// Parent module dependencies
 import * as MobilizationSelectors from '../../selectors'
 
-import '../../../mobilizations/blocks/pages/scss/block-create.scss'
+// Current module dependencies
+import { BlockMiniature } from '../components'
+import {
+  actions as BlockActions,
+  selectors as BlockSelectors,
+  constants as c
+} from '../'
+import './scss/block-create.scss'
 
 export class BlockCreate extends Component {
   render() {
@@ -183,7 +190,7 @@ BlockCreate.defaultProps = {
 
 const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
-  blocks: MobilizationSelectors.getBlocks(state),
+  blocks: BlockSelectors.getList(state),
   selectedLayout: state.blocks.selectedLayout,
   uploadingBackgroundImage: state.blocks.uploadingBackgroundImage,
   uploadedBackgroundImage: state.blocks.uploadedBackgroundImage,

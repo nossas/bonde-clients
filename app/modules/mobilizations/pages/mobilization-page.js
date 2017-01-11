@@ -25,24 +25,24 @@ export class MobilizationPage extends Component {
   }
 
   render() {
-    return <Mobilization {...this.props} editable={true} />
+    return <Mobilization {...this.props} editable />
   }
 }
 
 MobilizationPage.propTypes = {
   mobilization: PropTypes.object,
   blocks: PropTypes.array,
+  blocksIsLoaded: PropTypes.bool,
   blockEditionMode: PropTypes.bool,
   widgets: PropTypes.array
 }
 
 const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
+  blocks: BlockSelectors.getList(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
-  blocks: MobilizationSelectors.getBlocks(state),
-  widgets: WidgetSelectors.getList(state),
-  // TODO: Refactor to selectors
-  blockEditionMode: state.blocks.editionMode
+  blockEditionMode: BlockSelectors.isEditionMode(state),
+  widgets: WidgetSelectors.getList(state)
 })
 
 export default connect(mapStateToProps)(MobilizationPage)

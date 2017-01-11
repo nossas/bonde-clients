@@ -6,9 +6,6 @@ import { Loading } from '../../../scripts/Dashboard/components'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
 
-// Current module dependencies
-import * as MobilizationSelectors from '../selectors'
-
 // Children modules dependencies
 import {
   actions as BlockActions,
@@ -18,6 +15,9 @@ import {
   actions as WidgetActions,
   selectors as WidgetSelectors
 } from '../../widgets'
+
+// Current module dependencies
+import * as MobilizationSelectors from '../selectors'
 
 class MobilizationEditContainer extends Component {
   static fetchData (store, params) {
@@ -45,7 +45,7 @@ class MobilizationEditContainer extends Component {
     asyncWidgetFetch(mobilization.id)
   }
 
-  render() {
+  render () {
     const {
       children,
       blocksIsLoaded,
@@ -87,10 +87,10 @@ MobilizationEditContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  blocksIsLoaded: MobilizationSelectors.blocksIsLoaded(state),
-  blocksIsLoading: state.blocks.loading,
-  widgetsIsLoaded: state.widgets.list.loaded,
-  mobilization: MobilizationSelectors.getCurrent(state)
+  mobilization: MobilizationSelectors.getCurrent(state),
+  blocksIsLoaded: BlockSelectors.isLoaded(state),
+  blocksIsLoading: BlockSelectors.isLoading(state),
+  widgetsIsLoaded: WidgetSelectors.isLoaded(state)
 })
 
 const mapActionCreatorsToProps = {

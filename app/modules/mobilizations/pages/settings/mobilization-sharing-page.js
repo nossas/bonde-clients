@@ -6,21 +6,19 @@ import {
   FormControl,
   UploadImageField
 } from '../../../../scripts/Dashboard/Forms'
-import iconFacebook from '../../assets/images/facebook.svg'
-import iconTwitter from '../../assets/images/twitter.svg'
+import iconFacebook from '../../images/facebook.svg'
+import iconTwitter from '../../images/twitter.svg'
 
 import { MobilizationSettingsForm } from '../../components'
 import { mapStateToProps, mapActionCreatorsToProps } from './map-to-props'
 
-
 const MobilizationSharingPage = props => {
-
   const {
     fields: {
-      facebook_share_image,
-      facebook_share_title,
-      facebook_share_description,
-      twitter_share_text
+      facebook_share_image: facebookShareImage,
+      facebook_share_title: facebookShareTitle,
+      facebook_share_description: facebookShareDescription,
+      twitter_share_text: twitterShareText
     },
     ...formProps
   } = props
@@ -40,7 +38,7 @@ const MobilizationSharingPage = props => {
         contorlId='facebookShareImage'
         className='form-group col col-5 mb3'
         style={{ paddingRight: '.7rem' }}
-        {...facebook_share_image}
+        {...facebookShareImage}
       >
         <ControlLabel>Imagem</ControlLabel>
         <div
@@ -49,10 +47,10 @@ const MobilizationSharingPage = props => {
         >
           <div className='clearfix'>
             {
-              facebook_share_image.value ? (
+              facebookShareImage.value ? (
                 <div
                   className='bg-cover square'
-                  style={{ backgroundImage: `url(${facebook_share_image.value})` }}
+                  style={{ backgroundImage: `url(${facebookShareImage.value})` }}
                 />
               ) : (
                 <div className='square-float'>
@@ -60,7 +58,7 @@ const MobilizationSharingPage = props => {
                 </div>
               )
             }
-            <div className={facebook_share_image.value ? 'hide' : null}>
+            <div className={facebookShareImage.value ? 'hide' : null}>
               <div className='mb1 gray'>Sua imagem deve ter 470x270 pixels</div>
             </div>
             <div className='overflow-hidden'>
@@ -72,7 +70,7 @@ const MobilizationSharingPage = props => {
 
       <div className='col col-7'>
         <FormGroup
-          {...facebook_share_title}
+          {...facebookShareTitle}
           controlId='facebookShareTitle'
           style={{ paddingLeft: '0' }}
         >
@@ -86,7 +84,7 @@ const MobilizationSharingPage = props => {
         <FormGroup
           controlId='facebookShareDescription'
           style={{ paddingLeft: '0' }}
-          {...facebook_share_description}
+          {...facebookShareDescription}
         >
           <ControlLabel className='ml1' maxLength={90}>Subtítulo do post</ControlLabel>
           <FormControl
@@ -108,7 +106,7 @@ const MobilizationSharingPage = props => {
           sempre que alguém compartilhar sua mobilização.
         </p>
 
-        <FormGroup controlId='twitterShareText' {...twitter_share_text}>
+        <FormGroup controlId='twitterShareText' {...twitterShareText}>
           <ControlLabel maxLength={140}>Texto do Tweet</ControlLabel>
           <FormControl
             componentClass='textarea'

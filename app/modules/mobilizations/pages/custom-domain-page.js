@@ -10,17 +10,16 @@ import { Mobilization } from '../components'
 import { fetchMobilizations, mobilizationsIsLoaded } from '../../../scripts/Mobilization/MobilizationActions'
 import {
   actions as BlockActions,
-  selectors as BlockSelectors,
+  selectors as BlockSelectors
 } from '../../../modules/mobilizations/blocks'
 import {
   actions as WidgetActions,
-  selectors as WidgetSelectors,
+  selectors as WidgetSelectors
 } from '../../../modules/widgets'
-
 
 export class CustomDomainPage extends Component {
 
-  static fetchData(store, params, query, host) {
+  static fetchData (store, params, query, host) {
     const regex = host.match(`(.+)\.${process.env.APP_DOMAIN}`)
     const findParams = regex ? { slug: regex[1].replace(/^www\./, '') } : { custom_domain: host }
 
@@ -47,7 +46,7 @@ export class CustomDomainPage extends Component {
     return Promise.all(promises)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'
     if (!isTest) {
       const { mobilization } = this.props
@@ -65,7 +64,7 @@ export class CustomDomainPage extends Component {
     }
   }
 
-  render() {
+  render () {
     const { mobilization } = this.props
 
     if (mobilization) {
