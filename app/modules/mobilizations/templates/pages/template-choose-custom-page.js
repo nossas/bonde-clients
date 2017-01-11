@@ -10,7 +10,6 @@ import { actionCreators as SelectableActions } from '../../../../components/Sele
 import { TemplateSelectableList } from '../components'
 
 import * as TemplateSelectors from '../selectors'
-import { createMobilizationFromTemplateAsync } from '../action-creators'
 import * as MobilizationSelectors from '../../selectors'
 
 
@@ -29,7 +28,7 @@ class TemplateChooseCustomPage extends Component {
           handleSelectItem={({ id: template_mobilization_id }) => {
             createMobilizationFromTemplate({ id: mobilization.id, template_mobilization_id })
               .then(() => {
-                this.transitionTo(Paths.editMobilization(mobilization))
+                this.transitionTo(Paths.editMobilization(mobilization.id))
                 return Promise.resolve()
               })
               .catch(error => console.error('CreateMobilizationFromTemplateAsyncError', error))

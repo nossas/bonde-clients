@@ -8,7 +8,9 @@ import {
   BrowsableList,
   BrowsableListItem
 } from '../../../../components/Navigation/BrowsableList'
+
 import * as Paths from '../../../../scripts/Paths'
+import { paths as BlockPaths } from '../../blocks'
 
 
 const TemplateChoosePage = props => {
@@ -22,7 +24,7 @@ const TemplateChoosePage = props => {
         <BrowsableListItem
           leftIcon="plus-square-o"
           title="Criar mobilização do zero"
-          path={Paths.editMobilization(mobilization.id)}
+          path={BlockPaths.createBlock(mobilization)}
         />
         <BrowsableListItem
           leftIcon="columns"

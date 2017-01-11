@@ -13,8 +13,8 @@ import * as Paths from '../../../scripts/Mobilization/plugins/Templates/Mobiliza
 export class MobilizationPage extends Component {
 
   componentDidMount() {
-    const { mobilization, blocks } = this.props
-    if (blocks.length === 0) {
+    const { mobilization, blocksIsLoaded, blocks } = this.props
+    if (blocksIsLoaded && blocks.length === 0) {
       this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))
     }
   }
@@ -33,6 +33,7 @@ MobilizationPage.propTypes = {
 
 const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
+  blocksIsLoaded: MobilizationSelectors.blocksIsLoaded(state),
   blocks: MobilizationSelectors.getBlocks(state),
   widgets: MobilizationSelectors.getWidgets(state),
   // TODO: Refactor to selectors
