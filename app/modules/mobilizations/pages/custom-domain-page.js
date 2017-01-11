@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import ReactGA from 'react-ga'
 import { connect } from 'react-redux'
 
+// Global module dependencies
 import { TechnicalIssues } from '../../../components/Error'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
-import { Mobilization } from '../components'
 
-import { fetchMobilizations, mobilizationsIsLoaded } from '../../../scripts/Mobilization/MobilizationActions'
+// Children modules dependencies
 import {
   actions as BlockActions,
   selectors as BlockSelectors
@@ -17,16 +17,22 @@ import {
   selectors as WidgetSelectors
 } from '../../../modules/widgets'
 
+// Current module dependencies
+import * as MobilizationSelectors from '../selectors'
+import * as MobilizationActions from '../action-creators'
+import { Mobilization } from '../components'
+
 export class CustomDomainPage extends Component {
 
   static fetchData (store, params, query, host) {
+    // eslint-disable-next-line
     const regex = host.match(`(.+)\.${process.env.APP_DOMAIN}`)
     const findParams = regex ? { slug: regex[1].replace(/^www\./, '') } : { custom_domain: host }
 
     const promises = []
 
-    if (!mobilizationsIsLoaded(store.getState())) {
-      const action = fetchMobilizations(findParams)
+    if (!MobilizationSelectors.isLoaded(store.getState())) {
+      const action = MobilizationActions.asyncFilter(findParams)
       const dispatch = store.dispatch(action)
       promises.push(dispatch)
     }
@@ -68,12 +74,12 @@ export class CustomDomainPage extends Component {
     const { mobilization } = this.props
 
     if (mobilization) {
-      const { header_font, body_font } = mobilization
+      const { header_font: headerFont, body_font: bodyFont } = mobilization
 
       return (
         <div>
           <Mobilization {...this.props} />
-          <GoogleFontsLoader fonts={[header_font, body_font].filter(arrayUtil.distinct)} />
+          <GoogleFontsLoader fonts={[headerFont, bodyFont].filter(arrayUtil.distinct)} />
         </div>
       )
     }
@@ -88,7 +94,7 @@ CustomDomainPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  mobilization: state.mobilization.list.data[0],
+  mobilization: state.mobilization,
   blocks: state.blocks.data,
   widgets: state.widgets.list.data
 })
