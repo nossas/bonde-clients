@@ -1,6 +1,7 @@
 export const getCurrent = (state, ownProps) => {
-  const { currentId, data } = state.mobilization.list
-  return data.filter(mob => mob.id === currentId)[0]
+  const { params: { mobilization_id } } = ownProps || { params: {} }
+  const { list: { currentId, data } } = state.mobilization
+  return data.filter(mob => mob.id === currentId || mobilization_id)[0]
 }
 
 export const getList = state => state.mobilization.list.data
