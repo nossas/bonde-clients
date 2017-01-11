@@ -2,9 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Menu } from '../../../components/navbar'
+import Menu from './menu'
 
-describe('<Menu />', () => {
+describe('app/modules/mobilizations/components/navbar/menu', () => {
   let wrapper
   const props = {
     blocks: [

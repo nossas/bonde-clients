@@ -2,10 +2,9 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { Navbar } from '../../../components/navbar'
+import Navbar from './navbar'
 
-
-describe('<Navbar />', () => {
+describe('app/modules/mobilizations/components/navbar/navbar', () => {
   let wrapper
   const props = {
     mobilization: {},
@@ -41,7 +40,6 @@ describe('<Navbar />', () => {
   })
 
   describe('when is editable', () => {
-
     beforeEach(() => {
       wrapper.setProps({ editable: true })
     })
@@ -55,7 +53,6 @@ describe('<Navbar />', () => {
   })
 
   describe('when isnt editable', () => {
-
     beforeEach(() => {
       wrapper.setProps({ editable: false })
     })
