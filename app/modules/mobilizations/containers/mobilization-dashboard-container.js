@@ -28,7 +28,7 @@ export class MobilizationDashboardContainer extends Component {
 
     return (
       <Sidebar {...sidebarProps}>
-        <div style={{ marginLeft: '80px' }}>
+        <div className="flex" style={{ marginLeft: '80px' }}>
           {children && React.cloneElement(children)}
         </div>
       </Sidebar>
