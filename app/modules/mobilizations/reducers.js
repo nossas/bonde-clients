@@ -1,13 +1,13 @@
 import * as t from './action-types'
 
-const initialState = {
+export const initialState = {
   isLoaded: false,
   loading: false,
   data: [],
   currentId: undefined,
-  menuActiveIndex: undefined
+  menuActiveIndex: undefined,
+  error: undefined
 }
-
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -52,6 +52,14 @@ export default (state = initialState, action) => {
         ...state,
         menuActiveIndex: action.payload === state.menuActiveIndex ? undefined : action.payload
       }
+
+    case t.ASYNC_FILTER_REQUEST:
+      return { ...state, loading: true }
+    case t.ASYNC_FILTER_SUCCESS:
+      return { ...state, loading: false, isLoaded: true, data: action.payload }
+    case t.ASYNC_FILTER_FAILURE:
+      return { ...state, loading: false, error: action.payload }
+
     default:
       return state
   }
