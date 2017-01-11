@@ -2,11 +2,10 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
-import { CustomDomainPage } from '../../pages/custom-domain-page'
-import * as arrayUtil from '../../../../util/array'
+import { CustomDomainPage } from './custom-domain-page'
+import * as arrayUtil from '../../../util/array'
 
-
-describe('<CustomDomainPage />', () => {
+describe('app/modules/mobilizations/pages/custom-domain-page', () => {
   let wrapper
   const props = {
     mobilization: {
@@ -35,8 +34,8 @@ describe('<CustomDomainPage />', () => {
   })
 
   it('should render GoogleFontsLoader with mobilization fonts', () => {
-    const { mobilization: { header_font, body_font } } = props
-    const fonts = [header_font, body_font]
+    const { mobilization } = props
+    const fonts = [mobilization.header_font, mobilization.body_font]
     const fontsLoader = wrapper.find('GoogleFontsLoader')
     expect(fontsLoader.props().fonts).to.deep.equal(fonts)
   })

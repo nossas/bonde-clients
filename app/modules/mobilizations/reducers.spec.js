@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import * as t from '../action-types'
-import reducer from '../reducers'
+import * as t from './action-types'
+import reducer from './reducers'
 
 const initialState = {
   isLoaded: false,
@@ -11,13 +11,11 @@ const initialState = {
   menuActiveIndex: undefined
 }
 
-describe('MobilizationReducers / entities', () => {
-
+describe('app/modules/mobilizations/reducers', () => {
   let payload
   let nextState
 
   describe('t.ADD', () => {
-
     beforeEach(() => {
       payload = { id: 1, name: 'Lorem', goal: 'Dolor sit' }
       nextState = reducer(undefined, { type: t.ADD, payload })
@@ -33,7 +31,6 @@ describe('MobilizationReducers / entities', () => {
   })
 
   describe('t.FETCH', () => {
-
     beforeEach(() => {
       nextState = reducer(undefined, { type: t.FETCH })
     })
@@ -49,11 +46,10 @@ describe('MobilizationReducers / entities', () => {
   })
 
   describe('t.LOAD', () => {
-
     beforeEach(() => {
       payload = [
         { id: 1, name: 'Lorem', goal: 'Dolor caem' },
-        { id: 2, name: 'Sit', goal: 'Spsum inte' },
+        { id: 2, name: 'Sit', goal: 'Spsum inte' }
       ]
       nextState = reducer(undefined, { type: t.LOAD, payload })
     })
@@ -69,7 +65,6 @@ describe('MobilizationReducers / entities', () => {
   })
 
   describe('t.SELECT', () => {
-
     beforeEach(() => {
       payload = 1
       nextState = reducer(undefined, { type: t.SELECT, payload })
@@ -81,7 +76,6 @@ describe('MobilizationReducers / entities', () => {
   })
 
   describe('t.UPDATE', () => {
-
     beforeEach(() => {
       payload = { id: 1, name: 'Replaced' }
       nextState = reducer(undefined, { type: t.LOAD, payload: [{ id: 1, name: 'Lorem' }] })
@@ -94,7 +88,6 @@ describe('MobilizationReducers / entities', () => {
   })
 
   describe('t.TOGGLE_MENU', () => {
-
     beforeEach(() => {
       payload = 1
       nextState = reducer(undefined, { type: t.TOGGLE_MENU, payload })
