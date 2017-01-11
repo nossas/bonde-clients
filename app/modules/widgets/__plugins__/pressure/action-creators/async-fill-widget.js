@@ -1,6 +1,6 @@
 import * as t from '../action-types'
 import { createAction } from './create-action'
-import { getWidgets } from '../../../../../modules/widgets/selectors'
+import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
 import { actions as WidgetsActions } from '../../../../../modules/widgets'
 
 //
@@ -33,7 +33,7 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, axio
 const updateWidgetList = (state, payload) => {
   const { widget_id: id, count } = payload
 
-  return getWidgets(state).map(
+  return WidgetSelectors.getList(state).map(
     widget => widget.id === id
       ? { ...widget, count }
       : widget

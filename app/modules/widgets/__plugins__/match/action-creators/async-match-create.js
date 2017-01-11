@@ -1,13 +1,15 @@
+// Parent module dependencies
+import { actions as WidgetsActions } from '../../../../../modules/widgets'
+import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
+
+// Current module dependencies
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget, getWidgets } from '../../../../../modules/widgets/selectors'
-import { actions as WidgetsActions } from '../../../../../modules/widgets'
-
 
 const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
   const state = getState()
   const { auth: { credentials } } = state
-  const widget = getWidget(state, props)
+  const widget = WidgetSelectors.getWidget(state, props)
 
   const endpoint = `/widgets/${widget.id}/match`
   const body = { match }
@@ -29,7 +31,7 @@ const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
 }
 
 const updateWidgetList = (state, match) => {
-  return getWidgets(state).map(widget => {
+  return WidgetSelectors.getWidgets(state).map(widget => {
     if (widget.id === match.widget_id) {
       if (!widget.match_list.includes(match)) {
         widget.match_list.push(match)

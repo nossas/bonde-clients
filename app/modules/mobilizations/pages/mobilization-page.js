@@ -3,12 +3,16 @@ import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
 
-import * as MobilizationSelectors from '../selectors'
-import { selectors as WidgetSelectors } from '../../../modules/widgets'
-import { Mobilization } from '../components'
-
+// Global module dependencies
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 
+// Children module dependencies
+import { selectors as BlockSelectors } from '../../../modules/mobilizations/blocks'
+import { selectors as WidgetSelectors } from '../../../modules/widgets'
+
+// Current module dependencies
+import * as MobilizationSelectors from '../selectors'
+import { Mobilization } from '../components'
 
 @reactMixin.decorate(Navigation)
 export class MobilizationPage extends Component {
@@ -34,9 +38,9 @@ MobilizationPage.propTypes = {
 
 const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
-  blocksIsLoaded: MobilizationSelectors.blocksIsLoaded(state),
+  blocksIsLoaded: BlockSelectors.isLoaded(state),
   blocks: MobilizationSelectors.getBlocks(state),
-  widgets: WidgetSelectors.getWidgets(state),
+  widgets: WidgetSelectors.getList(state),
   // TODO: Refactor to selectors
   blockEditionMode: state.blocks.editionMode
 })
