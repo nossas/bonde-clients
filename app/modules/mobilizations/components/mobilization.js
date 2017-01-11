@@ -37,7 +37,7 @@ const Mobilization = props => {
         <Navbar blocks={blocks} editable={editable} />
       )}
       {/* render blocks */}
-      <div id='blocks-list' className='flex-auto' style={{overflowY: 'scroll'}}>
+      <div id='blocks-list' className='flex-auto' style={{ overflowY: 'scroll' }}>
         {visibleBlocks.map((block, index) => (
           <Block
             key={`block-${block.id}`}

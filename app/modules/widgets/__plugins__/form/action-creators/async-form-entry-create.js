@@ -1,5 +1,5 @@
 // Parent module dependencies
-import { getWidgetList } from '../../../../../modules/widgets/selectors'
+import { getWidgets } from '../../../../../modules/widgets/selectors'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
 
 // Current module dependencies
@@ -28,7 +28,7 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
 }
 
 const updateWidgetList = (state, payload) => {
-  return getWidgetList(state).map(widget =>
+  return getWidgets(state).map(widget =>
     widget.id === payload.widget_id
       ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
       : widget

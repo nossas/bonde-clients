@@ -51,13 +51,17 @@ class MobilizationEditContainer extends Component {
       blocksIsLoaded,
       blocksIsLoading,
       widgetsIsLoaded,
-      widgetsIsLoading,
       mobilization
     } = this.props
 
-    if (blocksIsLoaded && widgetsIsLoaded && !blocksIsLoading && !widgetsIsLoading) {
-      const { header_font, body_font } = mobilization
-      const fonts = [header_font, body_font].filter(arrayUtil.distinct)
+    const isLoaded = blocksIsLoaded && widgetsIsLoaded
+    const isntLoading = !blocksIsLoading
+
+    if (isLoaded && isntLoading) {
+      const fonts = [
+        mobilization.header_font,
+        mobilization.body_font
+      ].filter(arrayUtil.distinct)
 
       return (
         <div className='flex flex-auto overflow-hidden'>
@@ -72,24 +76,20 @@ class MobilizationEditContainer extends Component {
 }
 
 MobilizationEditContainer.propTypes = {
-  blocks: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired
-  }).isRequired,
-  widgets: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired
-  }).isRequired,
+  blocksIsLoaded: PropTypes.bool.isRequired,
+  blocksIsLoading: PropTypes.bool.isRequired,
+  widgetsIsLoaded: PropTypes.bool.isRequired,
   mobilization: PropTypes.shape({
-    id: PropTypes.string.number,
-    header_font: PropTypes.string.isRequired,
-    body_font: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired,
+    header_font: PropTypes.string,
+    body_font: PropTypes.string
   }).isRequired
 }
 
 const mapStateToProps = (state) => ({
-  blocksIsLoaded: state.blocks.loaded,
+  blocksIsLoaded: MobilizationSelectors.blocksIsLoaded(state),
   blocksIsLoading: state.blocks.loading,
   widgetsIsLoaded: state.widgets.list.loaded,
-  widgetsIsLoading: state.widgets.list.loading,
   mobilization: MobilizationSelectors.getCurrent(state)
 })
 

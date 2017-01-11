@@ -15,5 +15,5 @@ export default (template) => (dispatch, getState, axios) => {
         return Promise.reject({ _error: `Response code ${status}` })
       }
     })
-    .catch(error => console.log('CreateTemplateAsyncError', error))
+    .catch(error => console.error('CreateTemplateAsyncError', error))
 }
