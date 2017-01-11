@@ -1,39 +1,48 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchWidgets, isWidgetsLoaded } from '../../../scripts/Widget/reducer'
-import * as MobilizationSelectors from '../selectors'
+// Global module dependencies
+import { Loading } from '../../../scripts/Dashboard/components'
 import { GoogleFontsLoader } from '../../../components/Fonts'
 import * as arrayUtil from '../../../util/array'
-import { actions as BlockActions, selectors as BlockSelectors } from '../blocks'
 
-import { Loading } from '../../../scripts/Dashboard/components'
+// Current module dependencies
+import * as MobilizationSelectors from '../selectors'
 
+// Children modules dependencies
+import {
+  actions as BlockActions,
+  selectors as BlockSelectors
+} from '../blocks'
+import {
+  actions as WidgetActions,
+  selectors as WidgetSelectors
+} from '../../widgets'
 
-class MobilizationEditContainer extends React.Component {
-
-  static fetchData(store, params) {
+class MobilizationEditContainer extends Component {
+  static fetchData (store, params) {
     const promises = []
     if (!BlockSelectors.isLoaded(store.getState())) {
       const action = BlockActions.asyncBlockFetch(params.mobilization_id)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
-    if (!isWidgetsLoaded(store.getState())) {
-      const action = fetchWidgets({ mobilization_id: params.mobilization_id })
+
+    if (!WidgetSelectors.isLoaded(store.getState())) {
+      const action = WidgetActions.asyncWidgetFetch(params.mobilization_id)
       const promise = store.dispatch(action)
       promises.push(promise)
     }
     return Promise.all(promises)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // TODO this callback is a workaround to load data in client-side
     // but it should be replaced by the static fetchData method that is fetching
     // data only in the server-side for now
-    const { mobilization, asyncBlockFetch, fetchWidgets, select } = this.props
+    const { mobilization, asyncBlockFetch, asyncWidgetFetch } = this.props
     asyncBlockFetch(mobilization.id)
-    fetchWidgets({ mobilization_id: mobilization.id })
+    asyncWidgetFetch(mobilization.id)
   }
 
   render() {
@@ -50,7 +59,6 @@ class MobilizationEditContainer extends React.Component {
       const { header_font, body_font } = mobilization
       const fonts = [header_font, body_font].filter(arrayUtil.distinct)
 
-      // TODO: Remove inline style
       return (
         <div className='flex flex-auto overflow-hidden'>
           {children}
@@ -63,17 +71,31 @@ class MobilizationEditContainer extends React.Component {
   }
 }
 
+MobilizationEditContainer.propTypes = {
+  blocks: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired
+  }).isRequired,
+  widgets: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired
+  }).isRequired,
+  mobilization: PropTypes.shape({
+    id: PropTypes.string.number,
+    header_font: PropTypes.string.isRequired,
+    body_font: PropTypes.string.isRequired
+  }).isRequired
+}
+
 const mapStateToProps = (state) => ({
   blocksIsLoaded: state.blocks.loaded,
   blocksIsLoading: state.blocks.loading,
-  widgetsIsLoaded: state.widgets.loaded,
-  widgetsIsLoading: state.widgets.loading,
+  widgetsIsLoaded: state.widgets.list.loaded,
+  widgetsIsLoading: state.widgets.list.loading,
   mobilization: MobilizationSelectors.getCurrent(state)
 })
 
 const mapActionCreatorsToProps = {
   asyncBlockFetch: BlockActions.asyncBlockFetch,
-  fetchWidgets
+  asyncWidgetFetch: WidgetActions.asyncWidgetFetch
 }
 
 export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationEditContainer)

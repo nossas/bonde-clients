@@ -1,11 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import mobilizationTemplatesRoutes from './plugins/Templates/MobilizationTemplatesRoutes'
-import { createRoutes as widgetCreateRoutes } from './../Widget'
-
-import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
-
 import {
   MobilizationAddContainer,
   MobilizationEditContainer,
@@ -37,12 +32,12 @@ import {
   MobilizationDomainPage
 } from '../../modules/mobilizations/pages/settings'
 
+import blocksCreateRoutes from '../../modules/mobilizations/blocks/routes'
+import widgetsRoutes from '../../modules/widgets/routes'
 
 export default requiredLogin => (
   <Route component={MobilizationDashboardContainer} onEnter={requiredLogin}>
-
     <Route path="/" component={MobilizationListPage} />
-
     <Route path="/mobilizations" component={MobilizationAddContainer}>
       <Route path="/new" component={MobilizationAddPage} />
       <Route path="/:mobilization_id" component={FetchTemplatesContainer}>
@@ -52,7 +47,6 @@ export default requiredLogin => (
       </Route>
     </Route>
     <Route path="/mobilizations/:mobilization_id/templates/create" component={TemplateCreatePage} />
-
     <Route path="/mobilizations/:mobilization_id" component={MobilizationEditContainer}>
       <Route path="/edit" component={MobilizationPage} />
       <Route component={MobilizationSettingsContainer}>
@@ -62,7 +56,7 @@ export default requiredLogin => (
         <Route path="/customDomain" component={MobilizationDomainPage} />
       </Route>
       {blocksCreateRoutes()}
-      {widgetCreateRoutes()}
+      {widgetsRoutes()}
     </Route>
   </Route>
 )

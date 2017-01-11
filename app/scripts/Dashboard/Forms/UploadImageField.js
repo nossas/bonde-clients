@@ -17,7 +17,6 @@ class UploadImageField extends Component {
   }
 
   onError(error) {
-    console.log('error', error)
     this.setState({ loading: false })
   }
 
