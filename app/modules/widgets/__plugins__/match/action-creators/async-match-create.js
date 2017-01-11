@@ -1,6 +1,6 @@
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget, getWidgetList } from '../../../../../modules/widgets/selectors'
+import { getWidget, getWidgets } from '../../../../../modules/widgets/selectors'
 import { actions as WidgetsActions } from '../../../../../modules/widgets'
 
 
@@ -29,7 +29,7 @@ const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
 }
 
 const updateWidgetList = (state, match) => {
-  return getWidgetList(state).map(widget => {
+  return getWidgets(state).map(widget => {
     if (widget.id === match.widget_id) {
       if (!widget.match_list.includes(match)) {
         widget.match_list.push(match)

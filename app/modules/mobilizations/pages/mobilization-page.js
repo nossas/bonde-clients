@@ -4,6 +4,7 @@ import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
 
 import * as MobilizationSelectors from '../selectors'
+import { selectors as WidgetSelectors } from '../../../modules/widgets'
 import { Mobilization } from '../components'
 
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
@@ -35,7 +36,7 @@ const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocksIsLoaded: MobilizationSelectors.blocksIsLoaded(state),
   blocks: MobilizationSelectors.getBlocks(state),
-  widgets: MobilizationSelectors.getWidgets(state),
+  widgets: WidgetSelectors.getWidgets(state),
   // TODO: Refactor to selectors
   blockEditionMode: state.blocks.editionMode
 })

@@ -1,6 +1,6 @@
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget, getWidgetList } from '../../../../../modules/widgets/selectors'
+import { getWidget, getWidgets } from '../../../../../modules/widgets/selectors'
 import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
 
 
@@ -28,7 +28,7 @@ const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
 }
 
 const updateWidgetList = (state, match) => {
-  return getWidgetList(state).map(widget => {
+  return getWidgets(state).map(widget => {
     if (widget.id === parseInt(match.widget_id)) {
       widget.match_list = widget.match_list.filter(match => {
         return !match.deleted_matches.includes(match.id)

@@ -10,8 +10,6 @@ export const getBlocks = state => state.blocks.data
 
 export const blocksIsLoaded = state => state.blocks.loaded
 
-export const getWidgets = state => state.widgets.data
-
 export const getMenuActiveIndex = state => state.mobilization.list.menuActiveIndex
 
 export const isLoading = state => state.mobilization.list.loading
