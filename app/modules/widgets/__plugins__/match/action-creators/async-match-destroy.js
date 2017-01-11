@@ -1,13 +1,16 @@
+// Parent module dependencies
+import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
+import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
+
+// Current module dependencies
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget, getWidgets } from '../../../../../modules/widgets/selectors'
-import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
 
 
 const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
   const state = getState()
   const { auth: { credentials } } = state
-  const widget = getWidget(state, props)
+  const widget = WidgetSelectors.getWidget(state, props)
 
   const endpoint = `/widgets/${widget.id}/match/delete_where`
   const config = { headers: credentials, params: where }
@@ -28,7 +31,7 @@ const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
 }
 
 const updateWidgetList = (state, match) => {
-  return getWidgets(state).map(widget => {
+  return WidgetSelectors.getList(state).map(widget => {
     if (widget.id === parseInt(match.widget_id)) {
       widget.match_list = widget.match_list.filter(match => {
         return !match.deleted_matches.includes(match.id)

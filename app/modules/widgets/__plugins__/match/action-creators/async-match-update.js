@@ -1,13 +1,16 @@
+// Parent module dependencies
+import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
+import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
+
+// Current module dependencies
 import { createAction } from './create-action'
 import * as t from '../../../../../modules/widgets/__plugins__/match/action-types'
-import { getWidget, getWidgets } from '../../../../../modules/widgets/selectors'
-import * as WidgetsActions from '../../../../../modules/widgets/action-creators'
 
 
 const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
   const state = getState()
   const { auth: { credentials } } = state
-  const widget = getWidget(state, props)
+  const widget = WidgetSelectors.getWidget(state, props)
 
   const endpoint = `/widgets/${widget.id}/match/${match.id}`
   const body = { match }
@@ -29,7 +32,7 @@ const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
 }
 
 const updateWidgetList = (state, match) => {
-  return getWidgets(state).map(widget => {
+  return WidgetSelectors.getList(state).map(widget => {
     if (widget.id === match.widget_id) {
       const mapMatch = entity => entity.id === match.id ? match : entity
       widget.match_list = widget.match_list.map(mapMatch)
