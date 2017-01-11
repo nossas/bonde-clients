@@ -82,7 +82,6 @@ export class Draft extends React.Component {
 
 Draft.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired

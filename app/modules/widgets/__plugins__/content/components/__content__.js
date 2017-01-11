@@ -43,7 +43,6 @@ Content.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
 }
 
 export default Content

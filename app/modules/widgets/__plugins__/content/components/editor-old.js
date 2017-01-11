@@ -172,8 +172,7 @@ EditorOld.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 export default EditorOld

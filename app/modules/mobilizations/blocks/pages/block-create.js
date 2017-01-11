@@ -176,7 +176,6 @@ BlockCreate.propTypes = {
   dispatch: PropTypes.func.isRequired,
   mobilization: PropTypes.object.isRequired,
   blocks: PropTypes.array.isRequired,
-  auth: PropTypes.object.isRequired,
   selectedColor: PropTypes.object.isRequired,
   bgImage: PropTypes.string,
   selectedLayout: PropTypes.array.isRequired
