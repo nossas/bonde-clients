@@ -24,7 +24,7 @@ SettingsContainer.propTypes = {
 }
 
 const mapStateToProps = (state, props) => ({
-  mobilization: MobilizationSelectors.getCurrent(state, props),
+  mobilization: MobilizationSelectors.getCurrent(state),
   widget: WidgetSelectors.getWidget(state, props),
   widgets: WidgetSelectors.getList(state)
 })
