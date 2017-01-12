@@ -16,7 +16,8 @@ import {
   TemplateCreatePage,
   TemplateChoosePage,
   TemplateChooseGlobalPage,
-  TemplateChooseCustomPage
+  TemplateChooseCustomPage,
+  TemplateListPage
 } from '../../modules/mobilizations/templates/pages'
 
 import {
@@ -47,6 +48,9 @@ export default requiredLogin => (
       </Route>
     </Route>
     <Route path="/mobilizations/:mobilization_id/templates/create" component={TemplateCreatePage} />
+    <Route component={FetchTemplatesContainer}>
+      <Route path="/mobilizations/templates/list" component={TemplateListPage} />
+    </Route>
     <Route path="/mobilizations/:mobilization_id" component={MobilizationEditContainer}>
       <Route path="/edit" component={MobilizationPage} />
       <Route component={MobilizationSettingsContainer}>
