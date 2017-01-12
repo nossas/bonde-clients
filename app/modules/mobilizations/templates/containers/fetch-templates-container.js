@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { asyncFetch } from '../action-creators'
 import * as TemplateSelectors from '../selectors'
+import { Loading } from '../../../../scripts/Dashboard/components'
 
 
 class FetchTemplatesContainer extends Component {
@@ -19,10 +20,12 @@ class FetchTemplatesContainer extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, loading } = this.props
+
+    if (loading) return <Loading />
 
     return (
-      <div>
+      <div className="flex flex-auto">
         {children && React.cloneElement(children)}
       </div>
     )
