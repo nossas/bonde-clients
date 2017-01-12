@@ -19,12 +19,14 @@ export const SettingsContainer = ({ children, ...rest }) => (
 SettingsContainer.propTypes = {
   children: PropTypes.object,
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired
+  widget: PropTypes.object.isRequired,
+  widgets: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state, props) => ({
   mobilization: MobilizationSelectors.getCurrent(state, props),
-  widget: WidgetSelectors.getWidget(state, props)
+  widget: WidgetSelectors.getWidget(state, props),
+  widgets: WidgetSelectors.getList(state)
 })
 
 export default connect(mapStateToProps)(SettingsContainer)

@@ -21,8 +21,8 @@ class DataExportPage extends Component {
   widget (props = this.props) {
     const { widgets, params: { widget_id } } = props
     const idStringify = widget => widget.id.toString()
-    const currentWidgetIndex = widgets.data.map(idStringify).indexOf(widget_id)
-    return widgets.data[currentWidgetIndex]
+    const currentWidgetIndex = widgets.map(idStringify).indexOf(widget_id)
+    return widgets[currentWidgetIndex]
   }
 
   fixzero (value) {
@@ -143,8 +143,7 @@ class DataExportPage extends Component {
   }
 
   render () {
-    const { widgets: { data } } = this.props
-    return (data.length ? this.renderPage() : <Loading />)
+    return (this.props.widgets.length ? this.renderPage() : <Loading />)
   }
 }
 
@@ -153,6 +152,7 @@ DataExportPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool,
   error: PropTypes.object,
+  widgets: PropTypes.array.isRequired,
   // Actions
   asyncWidgetDataExport: PropTypes.func.isRequired,
   dataExportMount: PropTypes.func.isRequired
