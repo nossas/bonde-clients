@@ -2,6 +2,7 @@ import * as t from '../action-types'
 
 const initialState = {
   loaded: false,
+  loading: false,
   data: [],
   saving: false,
   error: undefined
@@ -23,11 +24,11 @@ export default function reducer (state = initialState, action) {
       return { ...state, saving: false, error: action.payload }
 
     case t.REQUEST_ASYNC_WIDGET_FETCH:
-      return { ...state, loaded: false }
+      return { ...state, loaded: false, loading: true }
     case t.SUCCESS_ASYNC_WIDGET_FETCH:
-      return { ...state, loaded: true, data: action.payload }
+      return { ...state, loaded: true, loading: false, data: action.payload }
     case t.FAILURE_ASYNC_WIDGET_FETCH:
-      return { ...state, loaded: true, error: action.payload }
+      return { ...state, loaded: true, loading: false, error: action.payload }
 
     case t.REQUEST_ASYNC_WIDGET_SELECT:
       return { ...state, loaded: false }

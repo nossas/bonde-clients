@@ -51,11 +51,12 @@ class MobilizationEditContainer extends Component {
       blocksIsLoaded,
       blocksIsLoading,
       widgetsIsLoaded,
+      widgetsIsLoading,
       mobilization
     } = this.props
 
     const isLoaded = blocksIsLoaded && widgetsIsLoaded
-    const isntLoading = !blocksIsLoading
+    const isntLoading = !blocksIsLoading && !widgetsIsLoading
 
     if (isLoaded && isntLoading) {
       const fonts = [
@@ -78,6 +79,7 @@ class MobilizationEditContainer extends Component {
 MobilizationEditContainer.propTypes = {
   blocksIsLoaded: PropTypes.bool.isRequired,
   blocksIsLoading: PropTypes.bool.isRequired,
+  widgetsIsLoading: PropTypes.bool.isRequired,
   widgetsIsLoaded: PropTypes.bool.isRequired,
   mobilization: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -90,7 +92,8 @@ const mapStateToProps = (state) => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
   blocksIsLoading: BlockSelectors.isLoading(state),
-  widgetsIsLoaded: WidgetSelectors.isLoaded(state)
+  widgetsIsLoaded: WidgetSelectors.isLoaded(state),
+  widgetsIsLoading: WidgetSelectors.isLoading(state)
 })
 
 const mapActionCreatorsToProps = {
