@@ -15,5 +15,4 @@ export default relationshipId => (dispatch, getState, axios) => {
       })
       .catch(error => dispatch({ type: 'LOG', error }))
   }
-  return Promise.reject({ error: `relationshipId is undefined` })
 }
