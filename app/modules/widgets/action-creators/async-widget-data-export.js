@@ -12,7 +12,12 @@ const asyncWidgetDataExport = params => (dispatch, getState, axios) => {
   dispatch({ type: t.EXPORT_DATACLIP_REQUEST })
   return axios.get(endpoint, config)
     .then(response => {
-      const data = response.data.length && response.data.map(({ fields }) => {
+      if (!response.data.length) {
+        window.alert('Nao foi encontrado nenhum dado para ser exportado')
+        dispatch({ type: t.EXPORT_DATACLIP_NO_DATA_FOUND })
+        return Promise.resolve()
+      }
+      const data = response.data.map(({ fields }) => {
         return JSON.parse(fields).map(({ label, value }) => ({ label, value }))
       })
       const matrix = [
