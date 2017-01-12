@@ -15,6 +15,8 @@ export default function dataExport (state = initialState, action) {
     case t.EXPORT_DATACLIP_FAILURE:
       return { ...state, loading: false, error: action.payload }
 
+    case t.EXPORT_DATACLIP_NO_DATA_FOUND:
+      return initialState
     case t.EXPORT_DATACLIP_MOUNT:
       return initialState
 
