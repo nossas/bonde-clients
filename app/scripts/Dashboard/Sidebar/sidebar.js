@@ -58,7 +58,9 @@ const Sidebar = props => {
           />
         </SidenavList>
       </Sidenav>
-      {children && React.cloneElement(children)}
+      <div className="flex flex-auto" style={{ marginLeft: '80px' }}>
+        {children && React.cloneElement(children)}
+      </div>
     </div>
   )
 }
