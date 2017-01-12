@@ -43,7 +43,7 @@ const AutofireFormPage = props => {
   // This is required to "abstract" the strategy of which Menu is needs to be shown.
   // And remove the conditions in lines between "refact" comments. May be isolate it in a container.
   //
-  return widgets.data.length === 0
+  return widgets.length === 0
     ? <Loading />
     : (
       <div className='flex-auto flex flex-column'>
@@ -106,6 +106,8 @@ const AutofireFormPage = props => {
 
 AutofireFormPage.propTypes = {
   fields: PropTypes.object.isRequired,
+  mobilization: PropTypes.object.isRequired,
+  widgets: PropTypes.array.isRequired,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
@@ -114,9 +116,6 @@ const fields = ['sender_name', 'sender_email', 'email_subject', 'email_text']
 
 const validate = values => {
   const errors = {}
-  if (values.id && !/(UA|YT|MO)-\d+-\d+/i.test(values.id)) {
-    errors.id = 'Informe uma ID válida'
-  }
   if (!validator.isValidEmail(values.sender_email)) {
     errors.sender_email = 'Informe um e-mail inválido'
   }
@@ -127,8 +126,8 @@ const mapStateToProps = (state, props) => ({
   initialValues: props.widget.settings || {}
 })
 
-export default reduxForm({
-  form: 'widgetForm',
-  fields,
-  validate
-}, mapStateToProps, WidgetActions)(AutofireFormPage)
+export default reduxForm(
+  { form: 'widgetForm', fields, validate },
+  mapStateToProps,
+  WidgetActions
+)(AutofireFormPage)
