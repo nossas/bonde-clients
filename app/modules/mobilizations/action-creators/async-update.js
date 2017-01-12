@@ -13,5 +13,5 @@ export default ({ id, template_mobilization_id, ...mobilization }) => (dispatch,
         return Promise.reject({ error: `Response code ${status}` })
       }
     })
-    .catch(error => Promise.reject({ error }))
+    .catch(error => dispatch({ type: 'LOG', error }))
 }
