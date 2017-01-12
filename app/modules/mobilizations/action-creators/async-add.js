@@ -13,5 +13,5 @@ export default mobilization => (dispatch, getState, axios) => {
         return Promise.reject({ error: `Response code ${status}` })
       }
     })
-    .catch(error => console.error('AsyncRequestError', error))
+    .catch(error => Promise.reject({ error }))
 }

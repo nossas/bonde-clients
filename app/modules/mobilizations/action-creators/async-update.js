@@ -13,5 +13,5 @@ export default ({ id, template_mobilization_id, ...mobilization }) => (dispatch,
         return Promise.reject({ error: `Response code ${status}` })
       }
     })
-    .catch(error => console.error('AsyncRequestError', error))
+    .catch(error => Promise.reject({ error }))
 }
