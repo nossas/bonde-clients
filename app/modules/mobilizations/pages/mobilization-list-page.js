@@ -32,6 +32,7 @@ import {
 import { MobilizationsHeader } from '../../../scripts/Mobilization/components'
 import * as Paths from '../../../scripts/Paths'
 
+import { actionCreators as TemplateActions } from '../templates'
 import { select, toggleMenu } from '../action-creators'
 import * as MobilizationSelectors from '../selectors'
 
@@ -39,7 +40,7 @@ import * as MobilizationSelectors from '../selectors'
 @reactMixin.decorate(Navigation)
 export class ListMobilizationPage extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     const { select, toggleMenu } = this.props
     select(undefined)
     toggleMenu(undefined)
@@ -48,6 +49,11 @@ export class ListMobilizationPage extends Component {
   handleSelectItem(mobilization) {
     this.props.select(mobilization.id)
     this.transitionTo(Paths.editMobilization(mobilization.id))
+  }
+
+  handleCreateTemplate(mobilization) {
+    this.props.selectTemplate(mobilization.id)
+    this.transitionTo(Paths.mobilizationTemplatesCreate(mobilization))
   }
 
   render() {
@@ -98,8 +104,9 @@ export class ListMobilizationPage extends Component {
                       icon="external-link"
                     />
                     <MobilizationListItemMoreMenuAction
+                      componentClass="a"
                       text="Criar template"
-                      path={Paths.mobilizationTemplatesCreate(mobilization)}
+                      onClick={() => this.handleCreateTemplate(mobilization)}
                       icon="star"
                     />
                   </MobilizationListItemMoreMenu>
@@ -127,6 +134,10 @@ const mapStateToProps = state => ({
   menuActiveIndex: MobilizationSelectors.getMenuActiveIndex(state)
 })
 
-const mapActionCretorsToProps = { select, toggleMenu }
+const mapActionCretorsToProps = {
+  select,
+  toggleMenu,
+  selectTemplate: TemplateActions.selectTemplate
+}
 
 export default connect(mapStateToProps, mapActionCretorsToProps)(ListMobilizationPage)
