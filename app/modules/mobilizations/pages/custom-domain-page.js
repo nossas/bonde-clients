@@ -94,7 +94,7 @@ CustomDomainPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  mobilization: state.mobilization,
+  mobilization: state.mobilization.list.data[0],
   blocks: state.blocks.data,
   widgets: state.widgets.list.data
 })
