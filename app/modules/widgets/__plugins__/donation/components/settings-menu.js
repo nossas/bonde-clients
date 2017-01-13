@@ -6,8 +6,9 @@ import { Tabs, Tab } from '../../../../../components/Navigation'
 import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
-  const donationPath = Paths.donationMobilizationWidget(mobilization.id, widget.id)
+  const donationPath = Paths.donation(mobilization.id, widget.id)
   const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
+  const donationFinishPath = Paths.donationFinish(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure o bloco de doação'>
@@ -21,6 +22,11 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           text='Mensagem agradecimento'
           path={autofirePath}
           isActive={autofirePath === location.pathname}
+        />
+        <Tab
+          text='Pós-doação'
+          path={donationFinishPath}
+          isActive={donationFinishPath === location.pathname}
         />
       </Tabs>
     </SettingsPageMenuLayout>

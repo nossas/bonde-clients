@@ -147,9 +147,14 @@ class RebooEditor extends Component {
 
   render() {
     const { readOnly, theme } = this.props
+    const { containerStyle, toolbarStyle, editorStyle, focusStyle, blurStyle } = this.props
+
+    const hasFocusStyle = this.state.hasFocus && !readOnly
+      ? focusStyle || { outline: '1px solid blue' }
+      : {}
 
     return (
-      <div className="reboo-editor">
+      <div className="reboo-editor" style={containerStyle}>
         {!readOnly ? (
           <div
             className="toolbar-container"
@@ -162,11 +167,15 @@ class RebooEditor extends Component {
               editorState={this.state.editorState}
               setEditorState={this.onChangeEditorState.bind(this)}
               focusEditor={this.focus.bind(this)}
+              style={toolbarStyle}
             />
             <div className="outside" onClick={::this.save} />
           </div>
         ) : null}
-        <div className="editor" style={{ outline: this.state.hasFocus && !readOnly ? '1px solid blue' : 'none' }}>
+        <div
+          className="editor"
+          style={{ ...editorStyle, ...hasFocusStyle }}
+        >
           <div onClick={this.focus.bind(this)}>
             <Editor
               ref="editor"

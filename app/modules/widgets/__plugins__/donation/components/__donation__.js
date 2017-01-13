@@ -47,7 +47,7 @@ class Donation extends React.Component {
   handleOverlayOnClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
+      this.transitionTo(Paths.donation(mobilization.id, widget.id))
     }
   }
 

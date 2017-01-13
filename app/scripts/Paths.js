@@ -68,10 +68,6 @@ export const exportWidgetData = (mobilizationId, widgetId) => {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/export`
 }
 
-export function donationMobilizationWidget (mobilizationId, widgetId) {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/donation`
-}
-
 const makePressureWidget = (mobilizationId, widgetId, path) =>
   `/mobilizations/${mobilizationId}/widgets/${widgetId}/pressure${path}`
 
