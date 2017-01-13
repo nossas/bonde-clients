@@ -97,7 +97,8 @@ const fields = ['name', 'goal', 'mobilization_id', 'global']
 
 const mapStateToProps = (state, ownProps) => {
 
-  const mobilization = MobilizationSelectors.getCurrent(state, ownProps)
+  const mobilization = MobilizationSelectors.getTemplate(state)
+
   return {
     mobilization,
     initialValues: {

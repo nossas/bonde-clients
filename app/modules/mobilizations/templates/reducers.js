@@ -12,6 +12,8 @@ import {
   REQUEST_TEMPLATE_DESTROY,
   SUCCESS_TEMPLATE_DESTROY,
   FAILURE_TEMPLATE_DESTROY,
+
+  SELECT_TEMPLATE
 } from './action-types'
 
 
@@ -19,7 +21,8 @@ export const initialState = {
   loading: false,
   loaded: false,
   global: [],
-  custom: []
+  custom: [],
+  templateId: undefined
 }
 
 const MobilizationTemplatesReducer = (state = initialState, action) => {
@@ -56,7 +59,11 @@ const MobilizationTemplatesReducer = (state = initialState, action) => {
       }
     case FAILURE_TEMPLATE_DESTROY:
       return { ...state, loading: false, error: action.error }
-
+    case SELECT_TEMPLATE:
+      return {
+        ...state,
+        templateId: action.payload
+      }
     default:
       return state
   }
