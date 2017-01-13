@@ -1,10 +1,10 @@
-import * as MobilizationSelectors from '../../../scripts/Mobilization/MobilizationSelectors'
+import { selectors as MobilizationSelectors } from '../../mobilizations'
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
 const asyncWidgetUpdate = widget => (dispatch, getState, axios) => {
   const state = getState()
-  const mobilization = MobilizationSelectors.getMobilization(state)
+  const mobilization = MobilizationSelectors.getCurrent(state)
   const { auth: { credentials } } = state
 
   const endpoint = `/mobilizations/${mobilization.id}/widgets/${widget.id}`
