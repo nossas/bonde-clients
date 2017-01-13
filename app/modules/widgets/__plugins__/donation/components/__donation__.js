@@ -6,6 +6,7 @@ import classnames from 'classnames'
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
 import { TellAFriend } from '../../../../../scripts/components'
+import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
@@ -255,11 +256,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   }
 
   renderThankyouText() {
-    const { mobilization }  = this.props
+    const { mobilization, widget: { settings } }  = this.props
+
+    if (settings.finish_message_type && settings.finish_message_type === 'custom') {
+      return <Editor readOnly value={JSON.parse(settings.finish_message)} />
+    }
+
     return (
       <TellAFriend {...this.props}
         message={"Oba, doação registrada! Sua doação é via boleto? Verifique seu email."}
-        href={Paths.mobilization(mobilization)} />
+        href={Paths.mobilization(mobilization)}
+      />
     )
   }
 
