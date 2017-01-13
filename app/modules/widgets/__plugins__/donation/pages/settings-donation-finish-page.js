@@ -15,7 +15,9 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../co
 import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
-import { actions as WidgetActions } from '../../../../../modules/widgets'
+import {
+  actions as WidgetActions
+} from '../../../../../modules/widgets'
 
 // Current module dependencies
 import { SettingsMenu } from '../components'
@@ -23,21 +25,20 @@ import { SettingsMenu } from '../components'
 const SettingsDonationFinishPage = props => {
   const {
     fields: {
-      post_donation_template_type: postDonationTemplateType
-      // post_donation_template_message
+      donation_finish_message_type: donationFinishMessageType
     },
     mobilization,
     widget,
+    donationFinishMessage,
     ...rest
   } = props
   const { color_scheme: colorScheme } = mobilization
 
   const handleSubmit = values => {
-    const { widget, asyncWidgetUpdate } = props
-    const settings = widget.settings || {}
-    return asyncWidgetUpdate({
+    const { asyncWidgetUpdate, widget } = props
+    asyncWidgetUpdate({
       ...widget,
-      settings: { ...settings, ...values }
+      settings: { ...widget.settings, ...values }
     })
   }
 
@@ -56,7 +57,7 @@ const SettingsDonationFinishPage = props => {
           onSubmit={handleSubmit}
           successMessage='Formulário de doação configurado com sucesso!'
         >
-          <FormGroup controlId='payment-type-id' {...postDonationTemplateType}>
+          <FormGroup controlId='payment-type-id' {...donationFinishMessageType}>
             <ControlLabel>Tipo de doação</ControlLabel>
             <RadioGroup>
               <Radio value='share'>Compartilhar</Radio>
@@ -65,17 +66,17 @@ const SettingsDonationFinishPage = props => {
           </FormGroup>
 
           <label className='h5 darkengray caps mb1 block'>Preview</label>
-          {postDonationTemplateType.value === 'share' && (
+          {donationFinishMessageType.value === 'share' && (
             <TellAFriend
               mobilization={mobilization}
               message={'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.'}
               href={Paths.mobilization(mobilization)}
             />
           )}
-          {postDonationTemplateType.value === 'custom' && (
+          {donationFinishMessageType.value === 'custom' && (
             <div className='relative'>
               <Editor
-                value={'Clique para editar...'}
+                value={JSON.parse(donationFinishMessage)}
                 theme={colorScheme.replace('-scheme', '')}
                 toolbarStyle={{ left: 0 }}
                 containerStyle={{ minHeight: 130 }}
@@ -90,7 +91,18 @@ const SettingsDonationFinishPage = props => {
                   backgroundColor: '#fff',
                   border: '1px solid #efefef'
                 }}
-                handleSave={rawContent => {}}
+                handleSave={rawContent => {
+                  const { widget, asyncWidgetUpdate } = props
+                  const settings = widget.settings || {}
+                  asyncWidgetUpdate({
+                    ...widget,
+                    settings: {
+                      ...settings,
+                      donation_finish_message: JSON.stringify(rawContent),
+                      donation_finish_message_type: donationFinishMessageType.value
+                    }
+                  })
+                }}
               />
             </div>
           )}
@@ -106,35 +118,32 @@ SettingsDonationFinishPage.propTypes = {
   error: PropTypes.string,
 
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired
+  widget: PropTypes.object.isRequired,
   // Actions
-  // asyncWidgetUpdate: PropTypes.func.isRequired
+  asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
 const fields = [
-  'post_donation_template_type',
-  'post_donation_template_message'
+  'donation_finish_message_type'
 ]
 
 const validate = values => {
   const errors = {}
-  if (!values.button_text) {
-    errors.button_text = 'Insira o texto do botão'
-  } else if (values.button_text.length > 50) {
-    errors.button_text = 'O limite de caracteres foi atingido.'
+  if (!values.donation_finish_message_type) {
+    errors.donation_finish_message_type = 'Nenhum tipo de mensagem foi selecionado'
   }
   return errors
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, { widget: { settings } }) => ({
   initialValues: {
-    post_donation_template_type: 'share',
-    ...props.widget.settings || {}
-  }
+    donation_finish_message_type: settings.donation_finish_message_type || 'custom'
+  },
+  donationFinishMessage: settings.donation_finish_message || 'Clique aqui para editar...'
 })
 
 export default reduxForm(
-  { form: 'settingsPostDonationForm', fields, validate },
+  { form: 'settingsDonationFinishPage', fields, validate },
   mapStateToProps,
   WidgetActions
 )(SettingsDonationFinishPage)
