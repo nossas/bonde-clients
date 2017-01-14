@@ -13,7 +13,6 @@ import {
 } from '../../../../../scripts/Dashboard/Forms'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
 import Editor from '../../../../../scripts/RebooEditor'
-import ColorPicker from '../../../../../components/ColorPicker'
 
 // Parent module dependencies
 import {
@@ -23,12 +22,6 @@ import {
 // Current module dependencies
 import { SettingsMenu } from '../components'
 
-const convertColorObjectToString = ({ rgba }) => {
-  if (rgba.constructor !== Object) return rgba
-  const { r, g, b, a } = rgba
-  return `rgba(${r}, ${g}, ${b}, ${a})`
-}
-
 const SettingsDonationFinishPage = props => {
   const {
     fields: {
@@ -37,18 +30,17 @@ const SettingsDonationFinishPage = props => {
     mobilization,
     widget,
     finishMessage,
-    dispatch,
-    finishMessageBackground,
-    ...rest
+    ...rest,
+    // Actions
+    asyncWidgetUpdate
   } = props
   const { color_scheme: colorScheme } = mobilization
 
-  const handleSubmit = values => {
-    const { asyncWidgetUpdate, widget } = props
-    asyncWidgetUpdate({
-      ...widget,
-      settings: { ...widget.settings, ...values }
-    })
+  let value
+  try {
+    value = JSON.parse(finishMessage)
+  } catch (e) {
+    value = finishMessage
   }
 
   return (
@@ -63,7 +55,12 @@ const SettingsDonationFinishPage = props => {
           {...rest}
           className='transparent'
           floatButton='Salvar'
-          onSubmit={handleSubmit}
+          onSubmit={values => {
+            asyncWidgetUpdate({
+              ...widget,
+              settings: { ...widget.settings, ...values }
+            })
+          }}
           successMessage='Formulário de doação configurado com sucesso!'
         >
           <FormGroup controlId='payment-type-id' {...finishMessageType}>
@@ -86,10 +83,10 @@ const SettingsDonationFinishPage = props => {
             <div className='widget-finish-message-custom'>
               <div className='relative'>
                 <Editor
-                  value={JSON.parse(finishMessage)}
+                  value={value}
                   theme={colorScheme.replace('-scheme', '')}
                   toolbarStyle={{ left: 0 }}
-                  containerStyle={{ minHeight: 130 }}
+                  containerStyle={{ minHeight: 315 }}
                   focusStyle={{
                     border: '1px solid #51a7e8',
                     outline: 'none',
@@ -98,7 +95,7 @@ const SettingsDonationFinishPage = props => {
                   }}
                   editorStyle={{
                     borderRadius: 3,
-                    backgroundColor: convertColorObjectToString({ rgba: finishMessageBackground }),
+                    backgroundColor: '#fff',
                     border: '1px solid #efefef'
                   }}
                   handleSave={rawContent => {
@@ -115,14 +112,6 @@ const SettingsDonationFinishPage = props => {
                   }}
                 />
               </div>
-
-              <label className='h5 darkengray caps my2 block'>Cor de fundo</label>
-              <ColorPicker
-                dispatch={dispatch}
-                theme={colorScheme.replace('-scheme', '')}
-                className='left'
-                color={finishMessageBackground}
-              />
             </div>
           )}
         </FormRedux>
@@ -143,8 +132,7 @@ SettingsDonationFinishPage.propTypes = {
 }
 
 const fields = [
-  'finish_message_type',
-  'finish_message_background'
+  'finish_message_type'
 ]
 
 const validate = values => {
@@ -157,12 +145,9 @@ const validate = values => {
 
 const mapStateToProps = (state, { widget: { settings } }) => ({
   initialValues: {
-    finish_message_type: settings.finish_message_type || 'custom'
+    finish_message_type: settings.finish_message_type || 'share'
   },
-  finishMessage: settings.finish_message || 'Clique aqui para editar...',
-  finishMessageBackground: state.colorPicker.color ||
-    settings.finish_message_background ||
-    { r: 255, g: 255, b: 255, a: 255 }
+  finishMessage: settings.finish_message || 'Clique aqui para editar...'
 })
 
 export default reduxForm(

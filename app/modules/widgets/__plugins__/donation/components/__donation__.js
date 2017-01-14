@@ -259,15 +259,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { mobilization, widget: { settings } }  = this.props
 
     if (settings.finish_message_type && settings.finish_message_type === 'custom') {
-      return (
-        <Editor
-          readOnly
-          value={JSON.parse(settings.finish_message)}
-          editorStyle={{
-            backgroundColor: `rgba(${settings.finish_message_background.replace(/[{}]/g, '')})`
-          }}
-        />
-      )
+      return <Editor readOnly value={JSON.parse(settings.finish_message)} />
     }
 
     return (
