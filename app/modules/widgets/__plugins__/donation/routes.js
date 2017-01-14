@@ -4,12 +4,12 @@ import { Route } from 'react-router'
 // Current module dependencies
 import {
   SettingsDonationPage,
-  SettingsDonationFinishPage
+  SettingsFinishMessagePage
 } from './pages'
 
 const namespace = '/donation'
 
 export default () => [
   <Route path={namespace} component={SettingsDonationPage} />,
-  <Route path={`${namespace}/finish`} component={SettingsDonationFinishPage} />
+  <Route path={`${namespace}/finish`} component={SettingsFinishMessagePage} />
 ]

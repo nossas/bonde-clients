@@ -13,6 +13,7 @@ import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import * as DonationActions from '../action-creators'
+import { DonationTellAFriend } from '../components'
 import './__donation__.scss'
 
 @reactMixin.decorate(Navigation)
@@ -262,12 +263,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       return <Editor readOnly value={JSON.parse(settings.finish_message)} />
     }
 
-    return (
-      <TellAFriend {...this.props}
-        message={"Oba, doação registrada! Sua doação é via boleto? Verifique seu email."}
-        href={Paths.mobilization(mobilization)}
-      />
-    )
+    return <DonationTellAFriend mobilization={mobilization} />
   }
 
   render() {
