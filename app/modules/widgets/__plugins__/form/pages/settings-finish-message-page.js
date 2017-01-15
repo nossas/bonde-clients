@@ -12,6 +12,7 @@ const SettingsFinishMessagePage = props => {
       {...props}
       SettingsMenu={SettingsMenu}
       TellAFriend={FormTellAFriend}
+      successMessage='Formulário de pós-inscrição salvo com sucesso!'
     />
   )
 }

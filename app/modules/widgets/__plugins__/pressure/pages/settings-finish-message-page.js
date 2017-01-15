@@ -12,6 +12,7 @@ const SettingsFinishMessagePage = props => {
       {...props}
       SettingsMenu={SettingsMenu}
       TellAFriend={PressureTellAFriend}
+      successMessage='Formulário de pós-pressão salvo com sucesso!'
     />
   )
 }

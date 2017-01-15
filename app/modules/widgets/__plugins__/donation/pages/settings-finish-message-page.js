@@ -12,6 +12,7 @@ const SettingsFinishMessagePage = props => {
       {...props}
       SettingsMenu={SettingsMenu}
       TellAFriend={DonationTellAFriend}
+      successMessage='Formulário de pós-doação salvo com sucesso!'
     />
   )
 }

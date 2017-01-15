@@ -17,7 +17,7 @@ import * as styles from './form-finish-message.scss'
 import * as WidgetActions from '../action-creators'
 
 export const FormFinishMessage = props => {
-  const { mobilization, widget, location, fields, ...rest } = props
+  const { mobilization, widget, location, fields, successMessage, ...rest } = props
   const { color_scheme: colorScheme } = mobilization
   const { TellAFriend, SettingsMenu } = props
 
@@ -39,7 +39,7 @@ export const FormFinishMessage = props => {
           className='transparent'
           floatButton='Salvar'
           onSubmit={onSubmit(props)}
-          successMessage='Formulário de doação configurado com sucesso!'
+          successMessage={successMessage || 'Formulário salvo com sucesso!'}
         >
           <FormGroup controlId='payment-type-id' {...finishMessageType}>
             <ControlLabel>Tipo de mensagem</ControlLabel>
@@ -133,6 +133,7 @@ FormFinishMessage.propTypes = {
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  successMessage: PropTypes.string,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
