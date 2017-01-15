@@ -11,7 +11,7 @@ import { Error } from '../../../../../components/FormUtil'
 import { isValidEmail } from '../../../../../util/validation-helper'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'
@@ -182,8 +182,13 @@ class Form extends React.Component {
       }
     })
     if (message === '') {
-      const { mobilization } = this.props
-      return <FormTellAFriend mobilization={mobilization} />
+      const { mobilization, widget } = this.props
+      const { settings: { finish_message_type: finishMessageType } } = widget
+      return finishMessageType === 'custom' ? (
+        <FinishMessageCustom widget={widget} />
+      ) : (
+        <FormTellAFriend mobilization={mobilization} />
+      )
     } else {
       return <p className="center p2 bg-darken-3">{message}</p>
     }

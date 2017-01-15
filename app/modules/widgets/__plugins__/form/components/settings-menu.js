@@ -36,7 +36,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
         />
         <Tab
           path={finishPath}
-          text='Pós-inscriçãp'
+          text='Pós-inscrição'
           isActive={finishPath === location.pathname}
         />
       </Tabs>
