@@ -36,9 +36,9 @@ class ChoicesPage extends React.Component {
 
   widget(props = this.props) {
     const { widgets, params } = props
-    const widgetsStringId = widgets.data.map(widget => widget.id.toString())
+    const widgetsStringId = widgets.map(widget => widget.id.toString())
     const widgetIndex = widgetsStringId.indexOf(params.widget_id)
-    const widget = widgets.data[widgetIndex]
+    const widget = widgets[widgetIndex]
     return widget
   }
 
@@ -234,7 +234,7 @@ ChoicesPage.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
-  widgets: PropTypes.object
+  widgets: PropTypes.array
 }
 
 ChoicesPage.contextTypes = {

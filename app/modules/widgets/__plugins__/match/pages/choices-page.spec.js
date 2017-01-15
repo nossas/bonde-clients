@@ -14,7 +14,7 @@ describe('app/modules/widgets/__plugins__/match/pages/choices-page', () => {
     auth: { credentials: {} },
     dispatch: () => {},
     mobilization: { id: 1 },
-    widgets: { data: [{ id: 1, settings: {} }] },
+    widgets: [{ id: 1, settings: {} }],
     location: { pathname: Paths.matchChoicesMobilizationWidget(1, 1) }
   }
 
@@ -50,56 +50,48 @@ describe('app/modules/widgets/__plugins__/match/pages/choices-page', () => {
 
     it('should return current widget object', () => {
       let result = ChoicesPage.prototype.widget(props)
-      let expectedWidget = props.widgets.data[0]
+      let expectedWidget = props.widgets[0]
       expect(result).to.deep.equal(expectedWidget)
     })
     it('should return current widget object if not pass any param', () => {
       let result = ChoicesPage.prototype.widget()
-      let expectedWidget = props.widgets.data[0]
+      let expectedWidget = props.widgets[0]
       expect(result).to.deep.equal(expectedWidget)
     })
   })
 
   describe('#validate', () => {
     it('should render error when submit form and title_text empty', () => {
-      props.widgets = {
-        data: [{
-          id: 1, settings: { 'title_text': '', 'choices1': '1', 'choicesA': 'A' }
-        }]
-      }
+      props.widgets = [{
+        id: 1, settings: { 'title_text': '', 'choices1': '1', 'choicesA': 'A' }
+      }]
       wrapper = shallow(<ChoicesPage {...props} />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
 
     it('should render error when submit form and side a empty', () => {
-      props.widgets = {
-        data: [{
-          id: 1,
-          settings: { 'title_text': 'lorem', 'choices1': '', 'choicesA': 'A' }
-        }]
-      }
+      props.widgets = [{
+        id: 1,
+        settings: { 'title_text': 'lorem', 'choices1': '', 'choicesA': 'A' }
+      }]
       wrapper = shallow(<ChoicesPage {...props} />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
 
     it('should render error when submit form and side b is empty', () => {
-      props.widgets = {
-        data: [{
-          id: 1,
-          settings: { 'title_text': 'lorem', 'choices1': '1', 'choicesA': '' }
-        }]
-      }
+      props.widgets = [{
+        id: 1,
+        settings: { 'title_text': 'lorem', 'choices1': '1', 'choicesA': '' }
+      }]
       wrapper = shallow(<ChoicesPage {...props} />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(1)
     })
 
     it('should render all the errors when submit form and empty states', () => {
-      props.widgets = {
-        data: [{id: 1, settings: {}}]
-      }
+      props.widgets = [{ id: 1, settings: {} }]
       wrapper = shallow(<ChoicesPage {...props} />, { context: _context })
       wrapper.find('form').simulate('submit')
       expect(wrapper.find('span.red').length).to.equal(3)

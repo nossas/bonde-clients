@@ -10,9 +10,9 @@ import * as MatchActions from '../action-creators'
 export default class GoalsPage extends React.Component {
   widget (props = this.props) {
     const { widgets, params } = props
-    const widgetsStringId = widgets.data.map(widget => widget.id.toString())
+    const widgetsStringId = widgets.map(widget => widget.id.toString())
     const widgetIndex = widgetsStringId.indexOf(params.widget_id)
-    return widgets.data[widgetIndex]
+    return widgets[widgetIndex]
   }
 
   finishedUploadFile (match) {
@@ -85,7 +85,7 @@ GoalsPage.propTypes = {
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
-  widgets: PropTypes.object
+  widgets: PropTypes.array
 }
 
 GoalsPage.contextTypes = {
