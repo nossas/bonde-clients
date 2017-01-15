@@ -16,8 +16,8 @@ import Editor from '../../../scripts/RebooEditor'
 import * as styles from './form-finish-message.scss'
 import * as WidgetActions from '../action-creators'
 
-const FormFinishMessage = props => {
-  const { mobilization, widget, fields, ...rest } = props
+export const FormFinishMessage = props => {
+  const { mobilization, widget, location, fields, ...rest } = props
   const { color_scheme: colorScheme } = mobilization
   const { TellAFriend, SettingsMenu } = props
 
@@ -29,9 +29,9 @@ const FormFinishMessage = props => {
   return (
     <SettingsPageLayout>
       <SettingsMenu
-        {...rest}
         mobilization={mobilization}
         widget={widget}
+        location={location}
       />
       <SettingsPageContentLayout>
         <FormRedux
@@ -42,10 +42,10 @@ const FormFinishMessage = props => {
           successMessage='Formulário de doação configurado com sucesso!'
         >
           <FormGroup controlId='payment-type-id' {...finishMessageType}>
-            <ControlLabel>Tipo de doação</ControlLabel>
+            <ControlLabel>Tipo de mensagem</ControlLabel>
             <RadioGroup>
               <Radio value='share'>Compartilhar</Radio>
-              <Radio value='custom'>Customizado</Radio>
+              <Radio value='custom'>Customizar</Radio>
             </RadioGroup>
           </FormGroup>
 
@@ -121,12 +121,15 @@ const mapStateToProps = (state, { widget: { settings } }) => ({
 // PropTypes
 //
 FormFinishMessage.propTypes = {
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  // Injected components
+  TellAFriend: PropTypes.element.isRequired,
+  SettingsMenu: PropTypes.element.isRequired,
+  // Form Redux
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
   error: PropTypes.string,
-
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
