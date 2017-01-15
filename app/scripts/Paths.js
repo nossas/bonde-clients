@@ -56,10 +56,6 @@ export function fieldsMobilizationWidget (mobilizationId, widgetId) {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/fields`
 }
 
-export function formMobilizationWidget (mobilizationId, widgetId) {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/form`
-}
-
 export function autofireMobilizationWidget (mobilizationId, widgetId) {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/autofire`
 }

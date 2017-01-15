@@ -9,6 +9,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
   const formPath = Paths.formMobilizationWidget(mobilization.id, widget.id)
   const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
   const exportPath = Paths.exportWidgetData(mobilization.id, widget.id)
+  const finishPath = Paths.widgetFormSettingsFinish(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure o formulário da sua ação'>
@@ -32,6 +33,11 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           path={exportPath}
           text='Relatório'
           isActive={exportPath === location.pathname}
+        />
+        <Tab
+          path={finishPath}
+          text='Pós-inscriçãp'
+          isActive={finishPath === location.pathname}
         />
       </Tabs>
     </SettingsPageMenuLayout>
