@@ -96,8 +96,8 @@ describe('app/modules/widgets/__plugins__/pressure/components/__pressure__', () 
       ])
   })
 
-  it('should render TellAFriend when filled prop is true', () => {
+  it('should render PressureTellAFriend when filled prop is true', () => {
     wrapper.setProps({ widget: { ...props.widget }, filled: true })
-    expect(wrapper.find('TellAFriend').length).to.equal(1)
+    expect(wrapper.find('PressureTellAFriend').length).to.equal(1)
   })
 })

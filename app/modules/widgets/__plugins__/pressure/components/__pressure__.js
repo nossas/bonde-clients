@@ -4,7 +4,6 @@ import classnames from 'classnames'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
-import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
@@ -13,7 +12,8 @@ import { WidgetOverlay } from '../../../../../modules/widgets/components'
 import {
   PressureCount,
   PressureForm,
-  TargetList
+  TargetList,
+  PressureTellAFriend
 } from '../components'
 import * as PressureActions from '../action-creators'
 
@@ -75,8 +75,9 @@ export class Pressure extends Component {
       editable,
       saving,
       filled,
-      mobilization: { header_font: headerFont }
+      mobilization
     } = this.props
+    const { header_font: headerFont } = mobilization
     const {
       main_color,
       title_text,
@@ -98,12 +99,9 @@ export class Pressure extends Component {
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de pressão direta"
       >
-        {(filled ?
-          <TellAFriend {...this.props}
-            message="Pressão enviada"
-            href={window.location.origin}
-          />
-        :
+        {filled ? (
+          <PressureTellAFriend mobilization={mobilization} />
+        ) : (
           <div className="pressure-widget">
             <h2
               className="center py2 px3 m0 white rounded-top"
@@ -120,15 +118,13 @@ export class Pressure extends Component {
               body={pressure_body}
               onSubmit={::this.handleSubmit}
             >
-              {
-                !show_counter || show_counter !== 'true' ? null : (
-                  <PressureCount
-                    value={widget.count || 0}
-                    color={main_color}
-                    text={count_text}
-                  />
-                )
-              }
+              {!show_counter || show_counter !== 'true' ? null : (
+                <PressureCount
+                  value={widget.count || 0}
+                  color={main_color}
+                  text={count_text}
+                />
+              )}
             </PressureForm>
           </div>
         )}
