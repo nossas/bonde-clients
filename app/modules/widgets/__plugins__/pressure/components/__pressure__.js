@@ -7,7 +7,7 @@ import * as Paths from '../../../../../scripts/Paths'
 import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import {
@@ -105,14 +105,7 @@ export class Pressure extends Component {
       >
         {filled ? (
           finish_message_type === 'custom' ? (
-            <Editor
-              readOnly
-              value={JSON.parse(finish_message)}
-              editorStyle={{
-                backgroundColor: `rgba(${finish_message_background})`,
-                borderRadius: 3
-              }}
-            />
+            <FinishMessageCustom widget={widget} />
           ) : (
             <PressureTellAFriend mobilization={mobilization} />
           )

@@ -5,11 +5,9 @@ import classnames from 'classnames'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
-import { TellAFriend } from '../../../../../scripts/components'
-import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import * as DonationActions from '../action-creators'
@@ -257,13 +255,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   }
 
   renderThankyouText() {
-    const { mobilization, widget: { settings } }  = this.props
+    const { mobilization, widget }  = this.props
+    const { settings: { finish_message_type: finishMessageType } } = widget
 
-    if (settings.finish_message_type && settings.finish_message_type === 'custom') {
-      return <Editor readOnly value={JSON.parse(settings.finish_message)} />
-    }
-
-    return <DonationTellAFriend mobilization={mobilization} />
+    return finishMessageType === 'custom' ? (
+      <FinishMessageCustom widget={widget} />
+    ) : (
+      <DonationTellAFriend mobilization={mobilization} />
+    )
   }
 
   render() {
