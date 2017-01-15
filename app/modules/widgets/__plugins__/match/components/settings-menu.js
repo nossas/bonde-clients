@@ -4,7 +4,7 @@ import * as Paths from '../../../../../scripts/Paths'
 import { Tabs, Tab } from '../../../../../components/Navigation'
 import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 
-const Menu = ({ mobilization, widget, location }) => {
+const SettingsMenu = ({ mobilization, widget, location }) => {
   const choicesPath = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
   const goalsPath = Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
 
@@ -26,4 +26,4 @@ const Menu = ({ mobilization, widget, location }) => {
   )
 }
 
-export default Menu
+export default SettingsMenu

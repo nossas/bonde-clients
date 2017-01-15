@@ -1,12 +1,14 @@
 import React from 'react'
 
+// Global module dependencies
 import { SettingsPageLayout } from '../../../../../components/Layout'
 
-import { Menu } from '../components'
+// Current module dependencies
+import { SettingsMenu } from '../components'
 
 const MatchPage = ({ widget, mobilization, location, children }) => (
   <SettingsPageLayout>
-    <Menu
+    <SettingsMenu
       widget={widget}
       mobilization={mobilization}
       location={location}
