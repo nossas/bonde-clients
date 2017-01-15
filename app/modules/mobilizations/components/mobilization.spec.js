@@ -2,6 +2,10 @@ import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 
+// Global module dependencies
+import * as mock from '../../../util/mock'
+
+// Current module dependencies
 import Mobilization from './mobilization'
 
 describe('app/modules/mobilizations/components/mobilization', () => {
@@ -23,9 +27,10 @@ describe('app/modules/mobilizations/components/mobilization', () => {
       { id: 2, hidden: true, menu_hidden: true, mobilization_id: 1 }
     ],
     widgets: [
-      { id: 1, block_id: 1 },
-      { id: 2, block_id: 2 }
-    ]
+      { id: 1, block_id: 1, kind: 'draft' },
+      { id: 2, block_id: 2, kind: 'draft' }
+    ],
+    store: mock.store({ auth: { user: { email: 'foo@bar.com' } } })
   }
 
   beforeEach(() => {
