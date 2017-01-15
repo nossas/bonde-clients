@@ -9,13 +9,12 @@ import classnames from 'classnames'
 import * as Paths from '../../../../../scripts/Paths'
 import { Error } from '../../../../../components/FormUtil'
 import { isValidEmail } from '../../../../../util/validation-helper'
-import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
-import { Button, Input } from '../components'
+import { Button, Input, FormTellAFriend } from '../components'
 import * as FormActions from '../action-creators'
 
 @reactMixin.decorate(Navigation)
@@ -184,9 +183,7 @@ class Form extends React.Component {
     })
     if (message === '') {
       const { mobilization } = this.props
-      return <TellAFriend {...this.props}
-        message="Formulário submetido com sucesso!"
-        href={Paths.mobilization(mobilization)} />
+      return <FormTellAFriend mobilization={mobilization} />
     } else {
       return <p className="center p2 bg-darken-3">{message}</p>
     }
