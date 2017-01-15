@@ -68,12 +68,6 @@ export const exportWidgetData = (mobilizationId, widgetId) => {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/export`
 }
 
-const makePressureWidget = (mobilizationId, widgetId, path) =>
-  `/mobilizations/${mobilizationId}/widgets/${widgetId}/pressure${path}`
-
-export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
-export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')
-
 export function editAccount () {
   return `/account/edit`
 }

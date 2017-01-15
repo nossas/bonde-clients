@@ -57,6 +57,7 @@ export const FormFinishMessage = props => {
             <div className='widget-finish-message-custom'>
               <div className='relative'>
                 <input type='hidden' name='finish_message' />
+                <input type='hidden' name='finish_message_background' />
                 <Editor
                   value={editorValue(finishMessage.value)}
                   theme={colorScheme.replace('-scheme', '')}
@@ -99,7 +100,8 @@ const editorValue = message => {
 //
 const fields = [
   'finish_message_type',
-  'finish_message'
+  'finish_message',
+  'finish_message_background'
 ]
 
 const validate = values => {
@@ -113,7 +115,8 @@ const validate = values => {
 const mapStateToProps = (state, { widget: { settings } }) => ({
   initialValues: {
     finish_message_type: settings.finish_message_type || 'share',
-    finish_message: settings.finish_message || 'Clique aqui para editar...'
+    finish_message: settings.finish_message || 'Clique aqui para editar...',
+    finish_message_background: settings.finish_message_background || '255,255,255,1'
   }
 })
 

@@ -8,6 +8,7 @@ import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 const SettingsMenu = ({ location, mobilization_id, widget_id }) => {
   const formPath = Paths.formPressureWidget(mobilization_id, widget_id)
   const emailPath = Paths.emailPressureWidget(mobilization_id, widget_id)
+  const finishPath = Paths.finishPressureWidget(mobilization_id, widget_id)
   const autofirePath = Paths.autofireMobilizationWidget(mobilization_id, widget_id)
 
   return (
@@ -27,6 +28,11 @@ const SettingsMenu = ({ location, mobilization_id, widget_id }) => {
           path={autofirePath}
           text='Mensagem de agradecimento'
           isActive={autofirePath === location.pathname}
+        />
+        <Tab
+          path={finishPath}
+          text='Pós-pressão'
+          isActive={finishPath === location.pathname}
         />
       </Tabs>
     </SettingsPageMenuLayout>

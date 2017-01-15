@@ -208,7 +208,7 @@ class RebooEditor extends Component {
 
 
 RebooEditor.propTypes = {
-  handleSave: PropTypes.func.isRequired,
+  handleSave: PropTypes.func,
   readOnly: PropTypes.bool.isRequired,
   value: PropTypes.any,
   theme: PropTypes.string

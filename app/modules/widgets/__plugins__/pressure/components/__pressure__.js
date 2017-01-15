@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
+import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
 import { WidgetOverlay } from '../../../../../modules/widgets/components'
@@ -86,7 +87,10 @@ export class Pressure extends Component {
       show_counter,
       count_text,
       pressure_subject,
-      pressure_body
+      pressure_body,
+      finish_message_type,
+      finish_message,
+      finish_message_background
     } = widget.settings || {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
@@ -100,7 +104,18 @@ export class Pressure extends Component {
         text="Clique para configurar o formulário de pressão direta"
       >
         {filled ? (
-          <PressureTellAFriend mobilization={mobilization} />
+          finish_message_type === 'custom' ? (
+            <Editor
+              readOnly
+              value={JSON.parse(finish_message)}
+              editorStyle={{
+                backgroundColor: `rgba(${finish_message_background})`,
+                borderRadius: 3
+              }}
+            />
+          ) : (
+            <PressureTellAFriend mobilization={mobilization} />
+          )
         ) : (
           <div className="pressure-widget">
             <h2
@@ -136,7 +151,13 @@ export class Pressure extends Component {
 Pressure.propTypes = {
   editable: PropTypes.bool,
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string.isRequired,
+      finish_message: PropTypes.string.isRequired,
+      finish_message_background: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
   saving: PropTypes.bool,
   filled: PropTypes.bool,
   // Actions
