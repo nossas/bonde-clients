@@ -88,7 +88,7 @@ MobilizationEditContainer.propTypes = {
   }).isRequired
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
   blocksIsLoading: BlockSelectors.isLoading(state),

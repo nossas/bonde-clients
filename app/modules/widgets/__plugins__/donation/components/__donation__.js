@@ -5,13 +5,13 @@ import classnames from 'classnames'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
-import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import * as DonationActions from '../action-creators'
+import { DonationTellAFriend } from '../components'
 import './__donation__.scss'
 
 @reactMixin.decorate(Navigation)
@@ -47,7 +47,7 @@ class Donation extends React.Component {
   handleOverlayOnClick() {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(Paths.donationMobilizationWidget(mobilization.id, widget.id))
+      this.transitionTo(Paths.donation(mobilization.id, widget.id))
     }
   }
 
@@ -255,11 +255,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   }
 
   renderThankyouText() {
-    const { mobilization }  = this.props
-    return (
-      <TellAFriend {...this.props}
-        message={"Oba, doação registrada! Sua doação é via boleto? Verifique seu email."}
-        href={Paths.mobilization(mobilization)} />
+    const { mobilization, widget }  = this.props
+    const { settings: { finish_message_type: finishMessageType } } = widget
+
+    return finishMessageType === 'custom' ? (
+      <FinishMessageCustom widget={widget} />
+    ) : (
+      <DonationTellAFriend mobilization={mobilization} />
     )
   }
 

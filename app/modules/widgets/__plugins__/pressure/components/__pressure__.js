@@ -4,16 +4,17 @@ import classnames from 'classnames'
 
 // Global module dependencies
 import * as Paths from '../../../../../scripts/Paths'
-import { TellAFriend } from '../../../../../scripts/components'
+import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
 import {
   PressureCount,
   PressureForm,
-  TargetList
+  TargetList,
+  PressureTellAFriend
 } from '../components'
 import * as PressureActions from '../action-creators'
 
@@ -75,8 +76,9 @@ export class Pressure extends Component {
       editable,
       saving,
       filled,
-      mobilization: { header_font: headerFont }
+      mobilization
     } = this.props
+    const { header_font: headerFont } = mobilization
     const {
       main_color,
       title_text,
@@ -85,7 +87,10 @@ export class Pressure extends Component {
       show_counter,
       count_text,
       pressure_subject,
-      pressure_body
+      pressure_body,
+      finish_message_type,
+      finish_message,
+      finish_message_background
     } = widget.settings || {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
@@ -98,12 +103,13 @@ export class Pressure extends Component {
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de pressão direta"
       >
-        {(filled ?
-          <TellAFriend {...this.props}
-            message="Pressão enviada"
-            href={window.location.origin}
-          />
-        :
+        {filled ? (
+          finish_message_type === 'custom' ? (
+            <FinishMessageCustom widget={widget} />
+          ) : (
+            <PressureTellAFriend mobilization={mobilization} />
+          )
+        ) : (
           <div className="pressure-widget">
             <h2
               className="center py2 px3 m0 white rounded-top"
@@ -120,15 +126,13 @@ export class Pressure extends Component {
               body={pressure_body}
               onSubmit={::this.handleSubmit}
             >
-              {
-                !show_counter || show_counter !== 'true' ? null : (
-                  <PressureCount
-                    value={widget.count || 0}
-                    color={main_color}
-                    text={count_text}
-                  />
-                )
-              }
+              {!show_counter || show_counter !== 'true' ? null : (
+                <PressureCount
+                  value={widget.count || 0}
+                  color={main_color}
+                  text={count_text}
+                />
+              )}
             </PressureForm>
           </div>
         )}
@@ -140,7 +144,13 @@ export class Pressure extends Component {
 Pressure.propTypes = {
   editable: PropTypes.bool,
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string,
+      finish_message: PropTypes.string,
+      finish_message_background: PropTypes.string
+    }).isRequired
+  }).isRequired,
   saving: PropTypes.bool,
   filled: PropTypes.bool,
   // Actions

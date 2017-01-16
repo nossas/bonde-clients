@@ -93,8 +93,8 @@ CustomDomainPage.propTypes = {
   widgets: PropTypes.array.isRequired
 }
 
-const mapStateToProps = state => ({
-  mobilization: state.mobilization.list.data[0],
+const mapStateToProps = (state, props) => ({
+  mobilization: MobilizationSelectors.getList(state)[0],
   blocks: state.blocks.data,
   widgets: state.widgets.list.data
 })

@@ -42,7 +42,8 @@ const mapStateToProps = state => ({
   blocks: BlockSelectors.getList(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
   blockEditionMode: BlockSelectors.isEditionMode(state),
-  widgets: WidgetSelectors.getList(state)
+  widgets: WidgetSelectors.getList(state),
+  auth: state.auth
 })
 
 export default connect(mapStateToProps)(MobilizationPage)

@@ -56,10 +56,6 @@ export function fieldsMobilizationWidget (mobilizationId, widgetId) {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/fields`
 }
 
-export function formMobilizationWidget (mobilizationId, widgetId) {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/form`
-}
-
 export function autofireMobilizationWidget (mobilizationId, widgetId) {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/autofire`
 }
@@ -67,16 +63,6 @@ export function autofireMobilizationWidget (mobilizationId, widgetId) {
 export const exportWidgetData = (mobilizationId, widgetId) => {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/export`
 }
-
-export function donationMobilizationWidget (mobilizationId, widgetId) {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/donation`
-}
-
-const makePressureWidget = (mobilizationId, widgetId, path) =>
-  `/mobilizations/${mobilizationId}/widgets/${widgetId}/pressure${path}`
-
-export const formPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/form')
-export const emailPressureWidget = (mid, wid) => makePressureWidget(mid, wid, '/email')
 
 export function editAccount () {
   return `/account/edit`

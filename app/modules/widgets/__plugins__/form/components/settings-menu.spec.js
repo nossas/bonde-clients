@@ -20,9 +20,9 @@ describe('app/modules/widgets/__plugins__/form/components/settings-menu', () => 
       const wrapper = shallow(<SettingsMenu {...props} />)
       expect(wrapper.find('Tabs')).to.have.length(1)
     })
-    it('should render 4 <Tab /> in childrens', () => {
+    it('should render 5 <Tab /> components as a children', () => {
       const wrapper = shallow(<SettingsMenu {...props} />)
-      expect(wrapper.find('Tab')).to.have.length(4)
+      expect(wrapper.find('Tab')).to.have.length(5)
     })
   })
 

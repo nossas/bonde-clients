@@ -162,25 +162,14 @@ describe('app/modules/widgets/__plugins__/match/components/__match__', () => {
   })
 
   describe('#renderShareButtons', () => {
-    it('should render one <TellAFriend> component if choices it is combined', () => {
+    it('should render one <MatchTellAFriend> component if choices it is combined', () => {
       const { widget: { settings: { choices1, choicesA } } } = props
       wrapper.setState({
         combined: true,
         selectedChoice1: choices1.split(',')[0],
         selectedChoiceA: choicesA.split(',')[0]
       })
-      expect(wrapper.find('TellAFriend')).to.have.length(1)
-    })
-
-    it('should render goal_image when match choices', () => {
-      const match = props.widget.match_list[0]
-      const { widget: { settings: { choices1, choicesA } } } = props
-      wrapper.setState({
-        combined: true,
-        selectedChoice1: choices1.split(',')[0],
-        selectedChoiceA: choicesA.split(',')[0]
-      })
-      expect(wrapper.find('TellAFriend').at(0).props().imageUrl).to.equal(match.goal_image)
+      expect(wrapper.find('MatchTellAFriend')).to.have.length(1)
     })
   })
 })

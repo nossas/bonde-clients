@@ -4,9 +4,10 @@ import * as Paths from '../../../../../scripts/Paths'
 import { Tabs, Tab } from '../../../../../components/Navigation'
 import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 
-const Menu = ({ mobilization, widget, location }) => {
+const SettingsMenu = ({ mobilization, widget, location }) => {
   const choicesPath = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
   const goalsPath = Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
+  const finishPath = Paths.matchWidgetFinish(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure as combinações da sua ação'>
@@ -21,9 +22,14 @@ const Menu = ({ mobilization, widget, location }) => {
           text='Resultados das combinações'
           isActive={goalsPath === location.pathname}
         />
+        <Tab
+          path={finishPath}
+          text='Pós-combinação'
+          isActive={finishPath === location.pathname}
+        />
       </Tabs>
     </SettingsPageMenuLayout>
   )
 }
 
-export default Menu
+export default SettingsMenu

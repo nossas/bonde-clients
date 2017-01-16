@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import Draft from './__draft__'
+import { Draft } from './__draft__'
 
 describe('app/modules/widgets/__plugins__/draft/components/__draft__', () => {
   let wrapper

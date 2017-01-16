@@ -9,13 +9,12 @@ import classnames from 'classnames'
 import * as Paths from '../../../../../scripts/Paths'
 import { Error } from '../../../../../components/FormUtil'
 import { isValidEmail } from '../../../../../util/validation-helper'
-import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
 // Current module dependencies
-import { Button, Input } from '../components'
+import { Button, Input, FormTellAFriend } from '../components'
 import * as FormActions from '../action-creators'
 
 @reactMixin.decorate(Navigation)
@@ -183,10 +182,13 @@ class Form extends React.Component {
       }
     })
     if (message === '') {
-      const { mobilization } = this.props
-      return <TellAFriend {...this.props}
-        message="Formulário submetido com sucesso!"
-        href={Paths.mobilization(mobilization)} />
+      const { mobilization, widget } = this.props
+      const { settings: { finish_message_type: finishMessageType } } = widget
+      return finishMessageType === 'custom' ? (
+        <FinishMessageCustom widget={widget} />
+      ) : (
+        <FormTellAFriend mobilization={mobilization} />
+      )
     } else {
       return <p className="center p2 bg-darken-3">{message}</p>
     }
@@ -238,7 +240,11 @@ class Form extends React.Component {
 
 Form.propTypes = {
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
   editable: PropTypes.bool,
   configurable: PropTypes.bool,
   hasNewField: PropTypes.bool

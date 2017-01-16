@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as Paths from '../../../../../scripts/Paths'
-import Menu from './menu'
+import SettingsMenu from './settings-menu'
 
-describe('app/modules/widgets/__plugins__/match/components/menu', () => {
+describe('app/modules/widgets/__plugins__/match/components/settings-menu', () => {
   let wrapper
 
   const props = {
@@ -18,16 +18,16 @@ describe('app/modules/widgets/__plugins__/match/components/menu', () => {
   const GOALS_TAB = 1
 
   beforeEach(() => {
-    wrapper = shallow(<Menu {...props} />)
+    wrapper = shallow(<SettingsMenu {...props} />)
   })
 
   describe('#render', () => {
     context('Tabs', () => {
-      it('should render one <Tabs> component', () => {
+      it('should render one <Tabs /> component', () => {
         expect(wrapper.find('Tabs')).to.have.length(1)
       })
-      it('should render two <Tab> components', () => {
-        expect(wrapper.find('Tab').length).to.equal(2)
+      it('should render 3 <Tab /> components', () => {
+        expect(wrapper.find('Tab').length).to.equal(3)
       })
 
       context('Choices Tab', () => {

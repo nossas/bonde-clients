@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 
 // Global module dependencies
 import { createEditorContent } from '../../../../../scripts/RebooEditor'
@@ -12,7 +12,7 @@ import { DraftWidgetButton } from '../components'
 
 import './__draft__.scss'
 
-export class Draft extends React.Component {
+export class Draft extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
@@ -84,7 +84,12 @@ Draft.propTypes = {
   dispatch: PropTypes.func.isRequired,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  editable: PropTypes.bool.isRequired
+  editable: PropTypes.bool.isRequired,
+  auth: PropTypes.shape({
+    user: PropTypes.shape({
+      email: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 }
 
 export default Draft

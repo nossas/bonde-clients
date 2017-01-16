@@ -1,11 +1,14 @@
-export const matchChoicesMobilizationWidget = (mobilizationId, widgetId) => {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/matches/choices`
-}
+const prefix = (mobilizationId, widgetId, path) =>
+  `/mobilizations/${mobilizationId}/widgets/${widgetId}/matches${path}`
 
-export const matchGoalsMobilizationWidget = (mobilizationId, widgetId) => {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/matches/goals`
-}
+export const matchChoicesMobilizationWidget = (...args) =>
+  prefix(...args, '/choices')
 
-export const shareMatchWrapper = (widgetId, matchId) => {
-  return `/widgets/${widgetId}/matches/${matchId}/share`
-}
+export const matchGoalsMobilizationWidget = (...args) =>
+  prefix(...args, '/goals')
+
+export const matchWidgetFinish = (...args) =>
+  prefix(...args, '/finish')
+
+export const shareMatchWrapper = (widgetId, matchId) =>
+  `/widgets/${widgetId}/matches/${matchId}/share`

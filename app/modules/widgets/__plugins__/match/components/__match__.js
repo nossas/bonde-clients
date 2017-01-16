@@ -4,14 +4,13 @@ import React, { Component, PropTypes } from 'react'
 import * as Paths from '../../../../../scripts/Paths'
 import { isValidEmail } from '../../../../../util/validation-helper'
 import { Error, Input } from '../../../../../components/FormUtil'
-import { TellAFriend } from '../../../../../scripts/components'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../components'
 
 // Current module dependencies
 import * as MatchActions from '../action-creators'
-import { Choices } from '../components'
+import { Choices, MatchTellAFriend } from '../components'
 
 class Match extends Component {
   constructor(props, context) {
@@ -176,25 +175,16 @@ class Match extends Component {
   }
 
   renderShareButtons() {
-    const matchItem = this.findMatchItem()
-    const { selectedChoice1, selectedChoiceA } = this.state
-    let combinationImageUrl = 'https://placeholdit.imgix.net/~text?txtsize=28&bg=e9e9e9&txtclr=364C'
-      + '55&txt=300%C3%97300&w=300&h=300&txt=Imagem%20n%C3%A3o%20configurada'
-    let share = ''
-    if (matchItem) {
-      combinationImageUrl = matchItem.goal_image
-      share = Paths.shareMatchWrapper(matchItem.widget_id, matchItem.id)
-    }
-
-    ////
-    // @todo
-    // - talvez prop `message` configurável?
-    ////
-    return <TellAFriend {...this.props}
-      message="Resultado da sua combinação"
-      href={ window.location.origin + share }
-      imageUrl={combinationImageUrl}
-      imageWidth="100%" />
+    const { mobilization, widget } = this.props
+    const { settings: { finish_message_type: finishMessageType } } = widget
+    return finishMessageType === 'custom' ? (
+      <FinishMessageCustom widget={widget} />
+    ) : (
+      <MatchTellAFriend
+        mobilization={mobilization}
+        matchItem={this.findMatchItem()}
+      />
+    )
   }
 
   render() {
@@ -209,7 +199,11 @@ class Match extends Component {
 
 Match.propTypes = {
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 }
 
 Match.contextTypes = {

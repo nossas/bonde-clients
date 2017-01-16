@@ -31,7 +31,7 @@ describe('app/modules/widgets/__plugins__/match/pages/goals-page', () => {
   let props = {
     params: { widget_id: '1' },
     mobilization: { id: 1 },
-    widgets: { data: [{ id: 1, settings: {}, match_list: matchList }] },
+    widgets: [{ id: 1, settings: {}, match_list: matchList }],
     location: { pathname: '' },
     auth: { credentials: {} },
     dispatch: sinon.spy()
@@ -50,14 +50,14 @@ describe('app/modules/widgets/__plugins__/match/pages/goals-page', () => {
 
   it('should render ChoiceCombined itens equals possible match', () => {
     wrapper.setProps({
-      widgets: { data: [{
+      widgets: [{
         id: 1,
         match_list: matchList,
         settings: {
           choices1: '1,2,3',
           choicesA: '4,5'
         }
-      }]}
+      }]
     })
     expect(wrapper.find('ChoiceCombined').length).to.equal(3 * 2)
   })
