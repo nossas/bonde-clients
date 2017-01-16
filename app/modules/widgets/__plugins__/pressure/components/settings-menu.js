@@ -5,11 +5,11 @@ import * as Paths from '../../../../../scripts/Paths'
 import { Tabs, Tab } from '../../../../../components/Navigation'
 import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 
-const SettingsMenu = ({ location, mobilization_id, widget_id }) => {
-  const formPath = Paths.formPressureWidget(mobilization_id, widget_id)
-  const emailPath = Paths.emailPressureWidget(mobilization_id, widget_id)
-  const finishPath = Paths.finishPressureWidget(mobilization_id, widget_id)
-  const autofirePath = Paths.autofireMobilizationWidget(mobilization_id, widget_id)
+const SettingsMenu = ({ location, mobilization, widget }) => {
+  const formPath = Paths.formPressureWidget(mobilization.id, widget.id)
+  const emailPath = Paths.emailPressureWidget(mobilization.id, widget.id)
+  const finishPath = Paths.finishPressureWidget(mobilization.id, widget.id)
+  const autofirePath = Paths.autofireMobilizationWidget(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure seu formulário de pressão'>
@@ -43,8 +43,12 @@ SettingsMenu.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string
   }).isRequired,
-  mobilization_id: PropTypes.number.isRequired,
-  widget_id: PropTypes.number.isRequired
+  mobilization: PropTypes.shape({
+    id: PropTypes.number.isRequired
+  }).isRequired,
+  widget: PropTypes.shape({
+    id: PropTypes.number.isRequired
+  }).isRequired
 }
 
 export default SettingsMenu

@@ -10,8 +10,8 @@ const SettingsBase = ({ children, location, mobilization, widget }) => (
   <SettingsPageLayout>
     <SettingsMenu
       location={location}
-      mobilization_id={mobilization.id}
-      widget_id={widget.id}
+      mobilization={mobilization}
+      widget={widget}
     />
     {children}
   </SettingsPageLayout>
