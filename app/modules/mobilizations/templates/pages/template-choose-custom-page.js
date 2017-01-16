@@ -3,25 +3,25 @@ import { connect } from 'react-redux'
 import { Navigation } from 'react-router'
 import reactMixin from 'react-mixin'
 
+// Global module dependencies
 import * as Paths from '../../../../scripts/Paths'
-
-import * as MobilizationActions from '../../action-creators'
 import { actionCreators as SelectableActions } from '../../../../components/SelectableList'
-import { TemplateSelectableList } from '../components'
 
-import * as TemplateSelectors from '../selectors'
+// Parent module dependencies
+import * as MobilizationActions from '../../action-creators'
 import * as MobilizationSelectors from '../../selectors'
 
+// Current module dependencies
+import { TemplateSelectableList } from '../components'
+import * as TemplateSelectors from '../selectors'
 
 @reactMixin.decorate(Navigation)
 class TemplateChooseCustomPage extends Component {
-
   render() {
-
     const { mobilization, createMobilizationFromTemplate, ...listableProps } = this.props
 
     return (
-      <div className='choose-custom-page'>
+      <div className='choose-custom-page col-12'>
         <h3 className='h1 mt0 mb3 center'>Meus Templates</h3>
         <TemplateSelectableList
           {...listableProps}
