@@ -32,13 +32,13 @@ class Donation extends React.Component {
     const { widget } = this.props
 
     const defaultDonationValue = (
-      widget.settings && widget.settings.defaultDonationValue ?
-      widget.settings.defaultDonationValue : 1
+      widget.settings && widget.settings.default_donation_value ?
+      widget.settings.default_donation_value : 1
     )
     this.setState({selected_value: Number(defaultDonationValue)})
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
