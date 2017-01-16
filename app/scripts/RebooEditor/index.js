@@ -146,8 +146,12 @@ class RebooEditor extends Component {
   }
 
   render() {
-    const { readOnly, theme } = this.props
-    const { containerStyle, toolbarStyle, editorStyle, focusStyle, blurStyle } = this.props
+    // Injected root container props
+    const { containerStyle } = this.props
+    // Injected Toolbar props
+    const { toolbarStyle, toolbarContainerStyle, theme } = this.props
+    // Injected Editor props
+    const { editorStyle, focusStyle, blurStyle, readOnly } = this.props
 
     const hasFocusStyle = this.state.hasFocus && !readOnly
       ? focusStyle || { outline: '1px solid blue' }
@@ -158,7 +162,7 @@ class RebooEditor extends Component {
         {!readOnly ? (
           <div
             className="toolbar-container"
-            style={{ display: this.state.hasFocus ? 'block' : 'none' }}
+            style={{ ...toolbarContainerStyle, display: this.state.hasFocus ? 'block' : 'none' }}
           >
             <Toolbar
               theme={theme}

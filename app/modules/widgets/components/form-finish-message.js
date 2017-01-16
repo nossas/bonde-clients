@@ -61,6 +61,7 @@ export const FormFinishMessage = props => {
                 <Editor
                   value={editorValue(finishMessage.value)}
                   theme={colorScheme.replace('-scheme', '')}
+                  toolbarContainerStyle={styles.editorToolbarContainer}
                   toolbarStyle={styles.editorToolbar}
                   containerStyle={styles.editorContainer}
                   focusStyle={styles.editorFocus}

@@ -8,11 +8,16 @@ export const editorFocus = ({
   border: '1px solid #51a7e8',
   outline: 'none',
   boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5)',
-  top: 58
+  marginTop: 10
+})
+
+export const editorToolbarContainer = ({
+  position: 'relative'
 })
 
 export const editorToolbar = ({
-  left: 0
+  left: 0,
+  position: 'inherit'
 })
 
 export const editorContainer = ({
