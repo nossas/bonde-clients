@@ -146,9 +146,9 @@ Pressure.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.shape({
     settings: PropTypes.shape({
-      finish_message_type: PropTypes.string.isRequired,
-      finish_message: PropTypes.string.isRequired,
-      finish_message_background: PropTypes.string.isRequired
+      finish_message_type: PropTypes.string,
+      finish_message: PropTypes.string,
+      finish_message_background: PropTypes.string
     }).isRequired
   }).isRequired,
   saving: PropTypes.bool,

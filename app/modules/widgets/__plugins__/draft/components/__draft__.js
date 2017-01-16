@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
 
 // Global module dependencies
 import { createEditorContent } from '../../../../../scripts/RebooEditor'
@@ -81,10 +80,6 @@ export class Draft extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth
-})
-
 Draft.propTypes = {
   dispatch: PropTypes.func.isRequired,
   mobilization: PropTypes.object.isRequired,
@@ -97,4 +92,4 @@ Draft.propTypes = {
   }).isRequired
 }
 
-export default connect(mapStateToProps)(Draft)
+export default Draft
