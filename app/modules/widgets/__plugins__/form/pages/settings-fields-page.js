@@ -7,7 +7,13 @@ import { Loading } from '../../../../../scripts/components'
 import { SettingsPageLayout, SettingsPageContentLayout } from '../../../../../components/Layout'
 
 // Parent module dependencies
-import { actions as WidgetActions } from '../../../../../modules/widgets'
+import {
+  actions as WidgetActions,
+  selectors as WidgetSelectors
+} from '../../../../../modules/widgets'
+import {
+  selectors as MobilizationSelectors
+} from '../../../../../modules/mobilizations'
 
 // Current module dependencies
 import Form, { SettingsMenu } from '../components'
@@ -20,7 +26,7 @@ class SettingsFieldsPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { widget } = this.props
-    if (this.state.loading && widget != this.widget(nextProps)) {
+    if (this.state.loading && widget != nextProps.widget) {
       this.setState({ loading: false, hasNewField: true })
     } else {
       this.setState({ hasNewField: false })
@@ -29,11 +35,6 @@ class SettingsFieldsPage extends Component {
 
   handleAddTextField() {
     this.addField('text')
-  }
-
-  widget(props = this.props) {
-    const { widgets } = props
-    return widgets.data[widgets.data.map((widget) => { return widget.id.toString()}).indexOf(this.props.params.widget_id)]
   }
 
   fields() {
@@ -128,4 +129,9 @@ SettingsFieldsPage.propTypes = {
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default connect(undefined, WidgetActions)(SettingsFieldsPage)
+const mapStateToProps = (state, ownProps) => ({
+  widget: WidgetSelectors.getWidget(state, ownProps),
+  mobilization: MobilizationSelectors.getCurrent(state)
+})
+
+export default connect(mapStateToProps, WidgetActions)(SettingsFieldsPage)
