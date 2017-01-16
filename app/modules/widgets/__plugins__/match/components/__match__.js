@@ -6,7 +6,7 @@ import { isValidEmail } from '../../../../../util/validation-helper'
 import { Error, Input } from '../../../../../components/FormUtil'
 
 // Parent module dependencies
-import { WidgetOverlay } from '../../../components'
+import { WidgetOverlay, FinishMessageCustom } from '../../../components'
 
 // Current module dependencies
 import * as MatchActions from '../action-creators'
@@ -175,8 +175,11 @@ class Match extends Component {
   }
 
   renderShareButtons() {
-    const { mobilization } = this.props
-    return (
+    const { mobilization, widget } = this.props
+    const { settings: { finish_message_type: finishMessageType } } = widget
+    return finishMessageType === 'custom' ? (
+      <FinishMessageCustom widget={widget} />
+    ) : (
       <MatchTellAFriend
         mobilization={mobilization}
         matchItem={this.findMatchItem()}
@@ -196,7 +199,11 @@ class Match extends Component {
 
 Match.propTypes = {
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 }
 
 Match.contextTypes = {

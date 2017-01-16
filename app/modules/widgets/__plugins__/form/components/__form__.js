@@ -240,7 +240,11 @@ class Form extends React.Component {
 
 Form.propTypes = {
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
+  widget: PropTypes.shape({
+    settings: PropTypes.shape({
+      finish_message_type: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
   editable: PropTypes.bool,
   configurable: PropTypes.bool,
   hasNewField: PropTypes.bool
