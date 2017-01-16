@@ -23,11 +23,11 @@ describe('app/modules/widgets/__plugins__/match/components/settings-menu', () =>
 
   describe('#render', () => {
     context('Tabs', () => {
-      it('should render one <Tabs> component', () => {
+      it('should render one <Tabs /> component', () => {
         expect(wrapper.find('Tabs')).to.have.length(1)
       })
-      it('should render two <Tab> components', () => {
-        expect(wrapper.find('Tab').length).to.equal(2)
+      it('should render 3 <Tab /> components', () => {
+        expect(wrapper.find('Tab').length).to.equal(3)
       })
 
       context('Choices Tab', () => {

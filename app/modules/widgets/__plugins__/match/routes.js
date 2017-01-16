@@ -1,9 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-import { ChoicesPage, GoalsPage } from './pages'
+// Current module dependencies
+import { ChoicesPage, GoalsPage, SettingsFinishMessagePage } from './pages'
+
+const namespace = '/matches'
 
 export default () => [
-  <Route path='/matches/choices' component={ChoicesPage} />,
-  <Route path='/matches/goals' component={GoalsPage} />
+  <Route path={`${namespace}/choices`} key='match-choices' component={ChoicesPage} />,
+  <Route path={`${namespace}/goals`} key='match-goals' component={GoalsPage} />,
+  <Route path={`${namespace}/finish`} key='match-finish' component={SettingsFinishMessagePage} />
 ]

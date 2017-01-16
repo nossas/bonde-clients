@@ -7,6 +7,7 @@ import { SettingsPageMenuLayout } from '../../../../../components/Layout'
 const SettingsMenu = ({ mobilization, widget, location }) => {
   const choicesPath = Paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
   const goalsPath = Paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
+  const finishPath = Paths.matchWidgetFinish(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure as combinações da sua ação'>
@@ -20,6 +21,11 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           path={goalsPath}
           text='Resultados das combinações'
           isActive={goalsPath === location.pathname}
+        />
+        <Tab
+          path={finishPath}
+          text='Pós-combinação'
+          isActive={finishPath === location.pathname}
         />
       </Tabs>
     </SettingsPageMenuLayout>
