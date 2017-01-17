@@ -55,7 +55,7 @@ class TemplateCreatePage extends Component {
             <MobilizationListItemName
               {...mobilization}
               className="lg-col-8 darkengray"
-              style={{ padding: 0, paddingTop: '15px', fontSize: '1.1rem' }}
+              style={{ fontSize: '1.1rem' }}
             />
           </div>
 
