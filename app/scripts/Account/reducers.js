@@ -2,6 +2,7 @@ import * as t from './actionTypes'
 
 const initialState = {
   loaded: false,
+  loading: false,
   user: undefined,
   credentials: undefined
 }
@@ -28,27 +29,32 @@ export default (state = initialState, action = {}) => {
         loaded: false,
         error: action.error
       }
-    case t.LOGIN_SUCCESS:
+
+    case t.FETCH:
+      return {
+        ...state,
+        loading: true
+      }
+    case t.FETCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        user: action.result && action.result.user,
+        credentials: action.result && action.result.credentials
+      }
+    case t.LOGIN:
       return {
         ...state,
         user: action.user,
         credentials: action.credentials
       }
-    case t.LOGOUT_REQUEST:
-      return {...state,
-        submitting: true,
-        error: null
-      }
-    case t.LOGOUT_SUCCESS:
-      return {...state,
-        user: null,
-        submitting: false,
-        error: null
-      }
-    case t.LOGOUT_FAILURE:
-      return {...state,
-        submitting: false,
-        error: action.error
+    case t.LOGOUT:
+      return {
+        ...state,
+        loaded: false,
+        user: undefined,
+        credentials: undefined
       }
     case t.UPDATE:
       return {

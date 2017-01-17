@@ -5,7 +5,7 @@ import ga from 'react-ga'
 import '../../../node_modules/font-awesome/scss/font-awesome.scss'
 import '../../styles/main.scss'
 import { GoogleFontsLoader } from '../../components/Fonts'
-import { actions as AccountActions } from '../Account'
+import { actions as AccountActions, selectors as AccountSelectors } from '../Account'
 
 
 @connect(state => ({ auth: state.auth }))
@@ -20,7 +20,7 @@ export default class Application extends React.Component {
 
   static fetchData(store) {
     const promises = []
-    if (!AccountActions.isLoaded(store.getState())) {
+    if (!AccountSelectors.isLoaded(store.getState())) {
       promises.push(store.dispatch(AccountActions.load()))
     }
     return Promise.all(promises)
