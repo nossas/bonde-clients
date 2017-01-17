@@ -1,19 +1,15 @@
 export const UPDATE = 'account/UPDATE'
 
-export const LOGIN_REQUEST = 'account/LOGIN_REQUEST'
+export const SIGNIN = 'account/SIGNIN'
 
-export const LOGIN_SUCCESS = 'account/LOGIN_SUCCESS'
+export const LOGIN = 'account/LOGIN'
 
-export const LOGIN_FAILURE = 'account/LOGIN_FAILURE'
+export const LOGOUT = 'account/LOGOUT'
 
-export const LOGOUT_REQUEST = 'account/LOGOUT_REQUEST'
+export const FETCH = 'account/FETCH'
 
-export const LOGOUT_SUCCESS = 'account/LOGOUT_SUCCESS'
-
-export const LOGOUT_FAILURE = 'account/LOGOUT_FAILURE'
+export const FETCH_SUCCESS = 'account/FETCH_SUCCESS'
 
 export const LOAD = 'account/LOAD'
-
 export const LOAD_SUCCESS = 'account/LOAD_SUCCESS'
-
 export const LOAD_FAIL = 'account/LOAD_FAIL'

@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
+
 import { NavbarButton, NavbarForm } from './'
-import { editBlock } from './../reducers/blocks'
+import { actions as BlockActions } from '../../modules/mobilizations/blocks'
+
 
 export default class NavbarEditionWrapper extends React.Component {
   static propTypes = {
     block: PropTypes.object.isRequired,
-    mobilization: PropTypes.object.isRequired,
     dispatch: PropTypes.func,
     auth: PropTypes.object,
     className: PropTypes.string
@@ -29,14 +30,12 @@ export default class NavbarEditionWrapper extends React.Component {
 
   handleHideButtonClick() {
     this.refs.hideButton.getDOMNode().blur()
-    const { dispatch, mobilization, block, auth } = this.props
+    const { dispatch, mobilization, block } = this.props
 
     dispatch(
-      editBlock({
-        mobilization_id: mobilization.id,
-        id: block.id,
-        block: {menu_hidden: !block.menu_hidden},
-        credentials: auth.credentials
+      BlockActions.asyncBlockUpdate({
+        mobilization,
+        block: { ...block, menu_hidden: !block.menu_hidden },
       })
     )
   }
