@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as Paths from '../../../scripts/Mobilization/plugins/Templates/MobilizationTemplatesPaths'
 
 // Children module dependencies
+<<<<<<< HEAD
 import {
   selectors as BlockSelectors,
   actions as BlockActions
@@ -15,6 +16,10 @@ import {
   selectors as WidgetSelectors,
   actions as WidgetActions
 } from '../../../modules/widgets'
+=======
+import { selectors as BlockSelectors } from '../../../modules/mobilizations/blocks'
+import { selectors as WidgetSelectors } from '../../../modules/widgets'
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 
 // Current module dependencies
 import * as MobilizationSelectors from '../selectors'
@@ -40,7 +45,10 @@ MobilizationPage.propTypes = {
   blocks: PropTypes.array,
   blocksIsLoaded: PropTypes.bool,
   blockEditionMode: PropTypes.bool,
+<<<<<<< HEAD
   blockUpdate: PropTypes.func,
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   widgets: PropTypes.array
 }
 
@@ -48,12 +56,16 @@ const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocks: BlockSelectors.getList(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
+<<<<<<< HEAD
   blockIsRequest: BlockSelectors.isRequesting(state),
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   blockEditionMode: BlockSelectors.isEditionMode(state),
   widgets: WidgetSelectors.getList(state),
   auth: state.auth
 })
 
+<<<<<<< HEAD
 const mapActionCreatorsToProps = {
   blockUpdate: BlockActions.asyncBlockUpdate,
   setEditionMode: BlockActions.setEditionMode,
@@ -69,3 +81,6 @@ const mapActionCreatorsToProps = {
 }
 
 export default connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationPage)
+=======
+export default connect(mapStateToProps)(MobilizationPage)
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316

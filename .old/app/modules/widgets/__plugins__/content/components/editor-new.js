@@ -37,6 +37,7 @@ class EditorNew extends React.Component {
     const { widget: { settings } } = this.props
 
     if (settings.content !== rawContent) {
+<<<<<<< HEAD
       const { widgetUpdate, widget } = this.props
       this.setState({ loading: true })
 
@@ -44,6 +45,15 @@ class EditorNew extends React.Component {
         ...widget,
         settings: { content: JSON.stringify(rawContent) }
       })
+=======
+      const { dispatch, widget } = this.props
+      this.setState({ loading: true })
+
+      dispatch(WidgetActions.asyncWidgetUpdate({
+        ...widget,
+        settings: { content: JSON.stringify(rawContent) }
+      }))
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
     }
   }
 
@@ -83,7 +93,11 @@ EditorNew.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
+<<<<<<< HEAD
   widgetUpdate: PropTypes.func,
+=======
+  dispatch: PropTypes.func.isRequired,
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 }
 
 export default EditorNew

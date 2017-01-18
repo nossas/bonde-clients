@@ -2,7 +2,10 @@ import * as t from '../action-types'
 import { createAction } from './create-action'
 import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
 import { actions as WidgetsActions } from '../../../../../modules/widgets'
+<<<<<<< HEAD
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 
 //
 // The name of this action needs to be refactored to make more sense.
@@ -23,9 +26,12 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, axio
       dispatch(WidgetsActions.setWidgetList(
         updateWidgetList(state, response.data)
       ))
+<<<<<<< HEAD
 
       AnalyticsEvents.pressureSavedData()
 
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
       return Promise.resolve()
     })
     .catch(failure => {

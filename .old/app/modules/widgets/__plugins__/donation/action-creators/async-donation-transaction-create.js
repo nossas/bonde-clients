@@ -1,6 +1,9 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
+<<<<<<< HEAD
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, axios) => {
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`
@@ -10,9 +13,12 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, axios) => 
   return axios.post(endpoint, body)
     .then(response => {
       dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_SUCCESS })
+<<<<<<< HEAD
 
       AnalyticsEvents.donationFinishRequest()
 
+=======
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
       return Promise.resolve()
     })
     .catch(failure => {

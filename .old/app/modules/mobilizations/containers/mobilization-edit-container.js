@@ -49,6 +49,7 @@ class MobilizationEditContainer extends Component {
     const {
       children,
       blocksIsLoaded,
+<<<<<<< HEAD
       widgetsIsLoaded,
       widgetsIsSaving,
       blockIsRequesting,
@@ -70,13 +71,44 @@ class MobilizationEditContainer extends Component {
         <GoogleFontsLoader fonts={fonts} />
       </div>
     )
+=======
+      blocksIsLoading,
+      widgetsIsLoaded,
+      widgetsIsLoading,
+      mobilization
+    } = this.props
+
+    const isLoaded = blocksIsLoaded && widgetsIsLoaded
+    const isntLoading = !blocksIsLoading && !widgetsIsLoading
+
+    if (isLoaded && isntLoading) {
+      const fonts = [
+        mobilization.header_font,
+        mobilization.body_font
+      ].filter(arrayUtil.distinct)
+
+      return (
+        <div className='flex flex-auto overflow-hidden'>
+          {children}
+          <GoogleFontsLoader fonts={fonts} />
+        </div>
+      )
+    }
+
+    return <Loading />
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   }
 }
 
 MobilizationEditContainer.propTypes = {
   blocksIsLoaded: PropTypes.bool.isRequired,
+<<<<<<< HEAD
   blocksIsRequesting: PropTypes.bool.isRequired,
   widgetsIsSaving: PropTypes.bool.isRequired,
+=======
+  blocksIsLoading: PropTypes.bool.isRequired,
+  widgetsIsLoading: PropTypes.bool.isRequired,
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   widgetsIsLoaded: PropTypes.bool.isRequired,
   mobilization: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -89,9 +121,14 @@ const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
   blocksIsLoading: BlockSelectors.isLoading(state),
+<<<<<<< HEAD
   blockIsRequesting: BlockSelectors.isRequesting(state),
   widgetsIsLoaded: WidgetSelectors.isLoaded(state),
   widgetsIsSaving: WidgetSelectors.isSaving(state)
+=======
+  widgetsIsLoaded: WidgetSelectors.isLoaded(state),
+  widgetsIsLoading: WidgetSelectors.isLoading(state)
+>>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 })
 
 const mapActionCreatorsToProps = {
