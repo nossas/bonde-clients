@@ -1,10 +1,9 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 
 import './technical-issues.scss'
-import logoIcon from '../../../.old/app/components/Navigation/Sidenav/logo-icon.svg'
 
 class TechnicalIssues extends Component {
-  render() {
+  render () {
     return (
       <div className="errors-technical-issues lg-col-9 sm-col-12">
         <div className="container">
