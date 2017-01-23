@@ -1,21 +1,10 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import { NavbarButton, NavbarForm } from './'
+import { NavbarButton, NavbarForm } from '~components/navigation/navbar'
 
-
-export default class NavbarEditionWrapper extends React.Component {
-
-  static propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    block: PropTypes.object.isRequired,
-    blockUpdate: PropTypes.func,
-    auth: PropTypes.object,
-    className: PropTypes.string
-  }
-
-  constructor(props, context) {
+class NavbarEditionWrapper extends React.Component {
+  constructor (props, context) {
     super(props, context)
     this.state = {
       isEditing: false,
@@ -23,36 +12,36 @@ export default class NavbarEditionWrapper extends React.Component {
     }
   }
 
-  handleEditButtonClick() {
+  handleEditButtonClick () {
     this.setState({
       isEditing: true,
       isMouseOver: false
     })
   }
 
-  handleHideButtonClick() {
+  handleHideButtonClick () {
     this.refs.hideButton.blur()
     const { blockUpdate, mobilization, block } = this.props
-    
+
     blockUpdate({
       mobilization,
-      block: { ...block, menu_hidden: !block.menu_hidden },
+      block: { ...block, menu_hidden: !block.menu_hidden }
     })
   }
 
-  handleCloseForm() {
+  handleCloseForm () {
     this.setState({isEditing: false})
   }
 
-  handleMouseOver() {
+  handleMouseOver () {
     this.setState({isMouseOver: true})
   }
 
-  handleMouseOut() {
+  handleMouseOut () {
     this.setState({isMouseOver: false})
   }
 
-  renderEditingButtons() {
+  renderEditingButtons () {
     const buttonsWrapperClassName = classnames(
       'absolute z1 right-align full-width top-0',
       { hide: this.state && !this.state.isMouseOver }
@@ -97,11 +86,11 @@ export default class NavbarEditionWrapper extends React.Component {
     )
   }
 
-  blockName(block) {
+  blockName (block) {
     return block.name || `Bloco ${block.position}`
   }
 
-  renderNavbarButton() {
+  renderNavbarButton () {
     const { block, className } = this.props
 
     return (
@@ -120,7 +109,7 @@ export default class NavbarEditionWrapper extends React.Component {
     )
   }
 
-  renderNavbarForm() {
+  renderNavbarForm () {
     const { block } = this.props
 
     return (
@@ -132,9 +121,18 @@ export default class NavbarEditionWrapper extends React.Component {
     )
   }
 
-  render() {
+  render () {
     return (
       this.state.isEditing ? this.renderNavbarForm() : this.renderNavbarButton()
     )
   }
 }
+
+NavbarEditionWrapper.propTypes = {
+  block: PropTypes.object.isRequired,
+  dispatch: PropTypes.func,
+  auth: PropTypes.object,
+  className: PropTypes.string
+}
+
+export default NavbarEditionWrapper
