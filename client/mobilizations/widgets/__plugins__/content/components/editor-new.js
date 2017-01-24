@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react'
 
 // Global module dependencies
-import { Loading } from '../../../../../scripts/components'
-import Editor from '../../../../../scripts/RebooEditor'
-
-// Parent module dependencies
-import { actions as WidgetActions } from '../../../../../modules/widgets'
+import { Loading } from '~components/await'
+import Editor from '~tmp-reboo-editor'
 
 import './editor-new.scss'
 
@@ -37,7 +34,6 @@ class EditorNew extends React.Component {
     const { widget: { settings } } = this.props
 
     if (settings.content !== rawContent) {
-<<<<<<< HEAD
       const { widgetUpdate, widget } = this.props
       this.setState({ loading: true })
 
@@ -45,15 +41,6 @@ class EditorNew extends React.Component {
         ...widget,
         settings: { content: JSON.stringify(rawContent) }
       })
-=======
-      const { dispatch, widget } = this.props
-      this.setState({ loading: true })
-
-      dispatch(WidgetActions.asyncWidgetUpdate({
-        ...widget,
-        settings: { content: JSON.stringify(rawContent) }
-      }))
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
     }
   }
 
@@ -93,11 +80,7 @@ EditorNew.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-<<<<<<< HEAD
-  widgetUpdate: PropTypes.func,
-=======
-  dispatch: PropTypes.func.isRequired,
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
+  widgetUpdate: PropTypes.func
 }
 
 export default EditorNew

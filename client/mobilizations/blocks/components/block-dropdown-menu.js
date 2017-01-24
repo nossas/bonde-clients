@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-import { DropDownMenu, DropDownMenuItem } from '../../../../scripts/components'
+// Global module dependencies
+import { DropdownMenu, DropdownMenuItem } from '~components/dropdown-menu'
 
 const displayDropDownMenu = ({ state, props }) => {
   return (
@@ -23,26 +24,27 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
   } = props
 
   return (
-    <DropDownMenu
+    <DropdownMenu
       wrapperClassName={classnames(
         'm1 absolute bottom-0 right-0 z2',
-        {'display-none': !displayDropDownMenu({ state, props })}
+        {'display-none': !displayDropdownMenu({ state, props })}
       )}
       menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
       buttonClassName='btn bg-darken-4 white rounded'
       icon='cog'
     >
-      <DropDownMenuItem
+      <DropdownMenuItem
         onClick={() => {
           onChange({ editingBackground: true })
           props.setEditionMode(true)
         }}
-        className="btn">
+        className="btn"
+      >
         <span>
           <i className='fa fa-picture-o' /> Alterar fundo
         </span>
-      </DropDownMenuItem>
-      <DropDownMenuItem
+      </DropdownMenuItem>
+      <DropdownMenuItem
         onClick={() => {
           // onChange({ loading: true })
           props.blockUpdate({
@@ -55,8 +57,8 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
           <i className={classnames('fa', (block.hidden ? 'fa-eye' : 'fa-eye-slash'))} />
           {(block.hidden ? ' Mostrar' : ' Esconder')}
         </span>
-      </DropDownMenuItem>
-      <DropDownMenuItem
+      </DropdownMenuItem>
+      <DropdownMenuItem
         onClick={() => {
           if (window.confirm('Você tem certeza que quer remover este bloco?')) {
             // onChange({ loading: true })
@@ -67,8 +69,8 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
         <span>
           <i className='fa fa-trash' /> Remover
         </span>
-      </DropDownMenuItem>
-      <DropDownMenuItem
+      </DropdownMenuItem>
+      <DropdownMenuItem
         disabled={!canMoveUp}
         onClick={() => {
           // onChange({ loading: true })
@@ -78,8 +80,8 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
         <span>
           <i className='fa fa-chevron-up' /> Mover para cima
         </span>
-      </DropDownMenuItem>
-      <DropDownMenuItem
+      </DropdownMenuItem>
+      <DropdownMenuItem
         disabled={!canMoveDown}
         onClick={() => {
           // onChange({ loading: true })
@@ -89,8 +91,8 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
         <span>
           <i className='fa fa-chevron-down' /> Mover para baixo
         </span>
-      </DropDownMenuItem>
-    </DropDownMenu>
+      </DropdownMenuItem>
+    </DropdownMenu>
   )
 }
 

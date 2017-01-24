@@ -2,16 +2,17 @@ import React, { PropTypes } from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 
 // Global module dependencies
-import { ColorPicker, Progress } from '../../../../scripts/components'
+import { BasicColorPicker } from '~components/basic-color-picker'
+import { Progress } from '~components/await'
 
 const BlockColorPicker = ({ state, props, onChange }) => {
   const { mobilization, block, blockUpdate } = props
 
   return (
     <div>
-      <div className="absolute col-12 top-0 bg-darken-4 z5" style={{ left: '0px' }}>
-        <div className="col-7">
-          <ColorPicker
+      <div className='absolute col-12 top-0 bg-darken-4 z5' style={{ left: '80px' }}>
+        <div className='col-7'>
+          <BasicColorPicker
             {...props}
             selectedClass={state.bgClass}
             onClick={event => {
@@ -110,7 +111,7 @@ BlockColorPicker.propTypes = {
   props: PropTypes.shape({
     mobilization: PropTypes.object,
     block: PropTypes.object,
-    blockUpdate: PropTypes.func,
+    blockUpdate: PropTypes.func
   }),
   state: PropTypes.shape({
     bgClass: PropTypes.string,

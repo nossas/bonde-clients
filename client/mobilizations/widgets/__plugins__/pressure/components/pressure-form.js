@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
+// Global module dependencies
+import { isValidEmail } from '~utils/validation-helper'
+
+// Current module dependencies
 import './pressure-form.scss'
-import { isValidEmail } from '../../../../../util/validation-helper'
 
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
@@ -16,7 +19,7 @@ const inputReset = {
 }
 
 class PressureForm extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       email: '',
@@ -28,7 +31,7 @@ class PressureForm extends Component {
     }
   }
 
-  validate() {
+  validate () {
     const { widget: { settings: { show_city } } } = this.props
     const requiredMsg = 'Preenchimento obrigatório'
     const errors = { valid: true }
@@ -73,7 +76,7 @@ class PressureForm extends Component {
     }
   }
 
-  render() {
+  render () {
     const { buttonColor, buttonText, children, widget } = this.props
     const { email, name, lastname, city, subject, body, errors } = this.state
     return (

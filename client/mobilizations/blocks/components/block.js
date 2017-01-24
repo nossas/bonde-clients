@@ -2,19 +2,16 @@ import React, { PropTypes, Component } from 'react'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-// Global module dependencies
-import { Loading } from '../../../../scripts/components'
-
 // Sibling module dependencies
-import { selectors as WidgetSelectors } from '../../../../modules/widgets'
+import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 
 // Current module dependencies
 import {
   BlockColorPicker,
   BlockWidgets,
   BlockHiddenTag,
-  BlockDropdownMenu,
-} from '../../../mobilizations/blocks/components'
+  BlockDropdownMenu
+} from '../components'
 
 import { generateClassName, generateStyle } from '../utils'
 
@@ -37,7 +34,7 @@ class Block extends Component {
     this.setState({ ...this.state, ...state })
   }
 
-  render() {
+  render () {
     const { widgets, block } = this.props
 
     return (
@@ -53,7 +50,7 @@ class Block extends Component {
           }
         }}
       >
-        <div className="col-10 mx-auto">
+        <div className='col-10 mx-auto'>
           {this.state.editingBackground && (
             <BlockColorPicker
               state={this.state}
@@ -61,7 +58,7 @@ class Block extends Component {
               onChange={::this.onChange}
             />
           )}
-          <div className="clearfix" style={{ padding: '5em 0' }}>
+          <div className='clearfix' style={{ padding: '5em 0' }}>
             <BlockWidgets
               state={this.state}
               props={this.props}
@@ -69,13 +66,13 @@ class Block extends Component {
               widgets={WidgetSelectors.getBlockWidgets({ widgets, block })}
             />
           </div>
-          <div className="relative">
+          <div className='relative'>
             {this.props.block.hidden && (
               <BlockHiddenTag />
             )}
           </div>
 
-          <div className="relative">
+          <div className='relative'>
             <BlockDropdownMenu
               state={this.state}
               props={this.props}

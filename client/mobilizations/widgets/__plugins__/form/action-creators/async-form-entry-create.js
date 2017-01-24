@@ -1,10 +1,7 @@
 // Parent module dependencies
-import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
-import { actions as WidgetActions } from '../../../../../modules/widgets'
-<<<<<<< HEAD
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
-=======
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
+import * as WidgetSelectors from '~mobilizations/widgets/selectors'
+import { actions as WidgetActions } from '~mobilizations/widgets'
 
 // Current module dependencies
 import * as t from '../action-types'
@@ -23,12 +20,9 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
       dispatch(WidgetActions.setWidgetList(
         updateWidgetList(state, response.data)
       ))
-<<<<<<< HEAD
 
       AnalyticsEvents.formSavedData()
 
-=======
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
       return Promise.resolve()
     })
     .catch(failure => {

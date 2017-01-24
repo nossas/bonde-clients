@@ -3,8 +3,11 @@ import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
 import { Link } from 'react-router'
 
+// Children module dependencies
+import Block from '~mobilizations/blocks/components'
+
+// Current module dependencies
 import { Navbar } from './navbar'
-import Block from '../../mobilizations/blocks/components'
 
 import logoIcon from '../../../components/Navigation/Sidenav/logo-icon-no-border.svg'
 

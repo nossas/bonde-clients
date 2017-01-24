@@ -6,12 +6,12 @@ import $ from 'jquery'
 import classnames from 'classnames'
 
 // Global module dependencies
-import * as Paths from '../../../../../scripts/Paths'
-import { Error } from '../../../../../components/FormUtil'
-import { isValidEmail } from '../../../../../util/validation-helper'
+import * as paths from '~client/paths'
+import { Error } from '~components/form-util'
+import { isValidEmail } from '~utils/validation-helper'
 
 // Parent module dependencies
-import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
+import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
@@ -20,7 +20,7 @@ import * as FormActions from '../action-creators'
 
 @reactMixin.decorate(Navigation)
 class Form extends React.Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
     this.state = {
       hasMouseOver: false,
@@ -30,25 +30,25 @@ class Form extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     if (this.state.loading) {
       this.setState({loading: false, success: true})
     }
   }
 
-  fields() {
+  fields () {
     const { settings } = this.props.widget
     return (settings && settings.fields ? settings.fields : [])
   }
 
-  handleOverlayOnClick() {
+  handleOverlayOnClick () {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(Paths.fieldsMobilizationWidget(mobilization.id, widget.id))
+      this.transitionTo(paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
-  submit() {
+  submit () {
     if (!this.props.editable) {
       const { dispatch, mobilization, widget } = this.props
       const bindedFormEntryActions = bindActionCreators(FormActions, dispatch)
@@ -71,7 +71,7 @@ class Form extends React.Component {
     }
   }
 
-  validate(fieldsWithValue) {
+  validate (fieldsWithValue) {
     const errors = []
     fieldsWithValue.forEach((field) => {
       if (field.required === 'true' && field.value === '') {
@@ -83,7 +83,7 @@ class Form extends React.Component {
     return errors
   }
 
-  renderCallToAction() {
+  renderCallToAction () {
     const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
     const callToAction = (
       widget.settings && widget.settings.call_to_action
@@ -93,14 +93,14 @@ class Form extends React.Component {
 
     return configurable ? null : (
       <h2
-        className="mt0 mb3 center white"
+        className='mt0 mb3 center white'
         dangerouslySetInnerHTML={{__html: callToAction}}
         style={{ fontFamily: headerFont }}
       />
     )
   }
 
-  renderFields() {
+  renderFields () {
     const fields = this.fields()
     return fields.map((field, index) => {
       return (
@@ -108,7 +108,7 @@ class Form extends React.Component {
           {...this.props}
           key={field.uid}
           uid={field.uid}
-          onBlur={(Number(index) === 0 ? AnalyticsEvents.formIsFilled.bind(AnalyticsEvents) : ()=>{})}
+          onBlur={(Number(index) === 0 ? AnalyticsEvents.formIsFilled.bind(AnalyticsEvents) : () => {})}
           canMoveUp={index !== 0}
           canMoveDown={index !== fields.length - 1}
           initializeEditing={this.props.hasNewField && index === fields.length - 1}
@@ -117,7 +117,7 @@ class Form extends React.Component {
     })
   }
 
-  renderButton() {
+  renderButton () {
     const { configurable, widget } = this.props
     const { loading, success } = this.state
 
@@ -126,9 +126,9 @@ class Form extends React.Component {
         <Button
           {...this.props}
           buttonText={(
-            widget.settings ?
-            (widget.settings.button_text || 'Enviar') :
-            'Enviar'
+            widget.settings
+              ? (widget.settings.button_text || 'Enviar')
+              : 'Enviar'
           )}
           handleClick={::this.submit}
           loading={loading}
@@ -138,11 +138,11 @@ class Form extends React.Component {
     }
   }
 
-  renderCount() {
-    const { configurable, widget, mobilization: { body_font: bodyFont }} = this.props
+  renderCount () {
+    const { configurable, widget, mobilization: { body_font: bodyFont } } = this.props
     if (!configurable) {
       return (
-        <div className="mt2 h3 center white" style={{ fontFamily: bodyFont }}>
+        <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
           {widget.form_entries_count}
           &nbsp;
           {widget.settings && widget.settings.count_text ? widget.settings.count_text : 'assinaturas'}
@@ -151,13 +151,13 @@ class Form extends React.Component {
     }
   }
 
-  renderOverlay() {
+  renderOverlay () {
     const { editable, configurable } = this.props
     if (editable && !configurable && this.state.hasMouseOver) {
       return (
-        <div className="absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1">
-          <div className="table full-height col-12 center">
-            <div className="white table-cell align-middle">
+        <div className='absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1'>
+          <div className='table full-height col-12 center'>
+            <div className='white table-cell align-middle'>
               Clique para editar
             </div>
           </div>
@@ -166,16 +166,15 @@ class Form extends React.Component {
     }
   }
 
-  renderErrors() {
+  renderErrors () {
     const { errors } = this.state
 
-    return (
-      errors.length > 0
-      && <div>{errors.map(error => <Error message={error} />)}</div>
+    return errors.length > 0 && (
+      <div>{errors.map(error => <Error message={error} />)}</div>
     )
   }
 
-  renderShareButtons() {
+  renderShareButtons () {
     const fields = this.fields()
     let message = ''
     fields.map((field) => {
@@ -192,11 +191,11 @@ class Form extends React.Component {
         <FormTellAFriend mobilization={mobilization} />
       )
     } else {
-      return <p className="center p2 bg-darken-3">{message}</p>
+      return <p className='center p2 bg-darken-3'>{message}</p>
     }
   }
 
-  renderForm() {
+  renderForm () {
     const { editable, configurable } = this.props
 
     return (
@@ -217,7 +216,7 @@ class Form extends React.Component {
     )
   }
 
-  render() {
+  render () {
     const {
       editable,
       mobilization: { header_font: headerFont }
@@ -229,7 +228,7 @@ class Form extends React.Component {
       <WidgetOverlay
         editable={editable}
         onClick={::this.handleOverlayOnClick}
-        text="Clique para configurar o formulário de inscrição"
+        text='Clique para configurar o formulário de inscrição'
       >
         <div onKeyDown={(e) => e.stopPropagation()} />
         <div className={`widget ${headerFont}-header`}>
