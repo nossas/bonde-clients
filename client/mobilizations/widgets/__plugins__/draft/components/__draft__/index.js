@@ -11,10 +11,10 @@ import { actions as WidgetActions } from '~mobilizations/widgets'
 
 >>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 // Current module dependencies
-import { DraftWidgetButton } from '../components'
-import './__draft__.scss'
+import { DraftWidgetButton } from '../../components'
+import './index.scss'
 
-export class Draft extends Component {
+class Draft extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
