@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react'
 import { Loading } from '~components/await'
 import Editor from '~components/editor-draft-js'
 
-import './editor-new.scss'
+import './index.scss'
 
 class EditorNew extends React.Component {
   constructor (props, context) {
