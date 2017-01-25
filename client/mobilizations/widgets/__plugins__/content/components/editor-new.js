@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 // Global module dependencies
 import { Loading } from '~components/await'
-import Editor from '~tmp-reboo-editor'
+import Editor from '~components/editor-draft-js'
 
 import './editor-new.scss'
 
