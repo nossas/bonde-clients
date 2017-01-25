@@ -4,7 +4,7 @@ import reactMixin from 'react-mixin'
 import { connect } from 'react-redux'
 
 // Global module dependencies
-import * as Paths from '~tmp-mobilizations/plugins/Templates/MobilizationTemplatesPaths'
+import * as paths from '~client/paths'
 
 // Children module dependencies
 import {
@@ -26,7 +26,7 @@ export class MobilizationPage extends Component {
   componentDidMount () {
     const { mobilization, blocksIsLoaded, blocks } = this.props
     if (blocksIsLoaded && blocks.length === 0) {
-      this.transitionTo(Paths.mobilizationTemplatesChoose(mobilization))
+      this.transitionTo(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 
