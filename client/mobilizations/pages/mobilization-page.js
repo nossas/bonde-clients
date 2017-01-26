@@ -20,7 +20,7 @@ import {
 import * as MobilizationSelectors from '../selectors'
 import { Mobilization } from '../components'
 
-@reactMixin.decorate(Navigation)
+// @revert @reactMixin.decorate(Navigation)
 export class MobilizationPage extends Component {
 
   componentDidMount () {

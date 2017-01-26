@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { isValidEmail } from '~utils/validation-helper'
 
 // Current module dependencies
-import './index.scss'
+if (process.env.BROWSER) require('./index.scss')
 
 import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 

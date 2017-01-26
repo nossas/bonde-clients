@@ -14,9 +14,9 @@ import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-even
 // Current module dependencies
 import * as DonationActions from '../../action-creators'
 import { DonationTellAFriend } from '../../components'
-import './index.scss'
+if (process.env.BROWSER) require('./index.scss')
 
-@reactMixin.decorate(Navigation)
+// @revert @reactMixin.decorate(Navigation)
 class Donation extends React.Component {
   constructor (props, context) {
     super(props, context)

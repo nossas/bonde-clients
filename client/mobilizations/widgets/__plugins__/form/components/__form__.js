@@ -18,7 +18,7 @@ import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-even
 import { Button, Input, FormTellAFriend } from '../components'
 import * as FormActions from '../action-creators'
 
-@reactMixin.decorate(Navigation)
+// @revert @reactMixin.decorate(Navigation)
 class Form extends React.Component {
   constructor (props, context) {
     super(props, context)
