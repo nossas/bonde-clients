@@ -12,7 +12,7 @@ import { isValidEmail } from '../../../../../util/validation-helper'
 
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
-import { AnalyticsEvents } from '../../../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'
@@ -100,8 +100,6 @@ class Form extends React.Component {
     )
   }
 
-
-
   renderFields() {
     const fields = this.fields()
     return fields.map((field, index) => {
@@ -110,6 +108,7 @@ class Form extends React.Component {
           {...this.props}
           key={field.uid}
           uid={field.uid}
+          onBlur={(Number(index) === 0 ? AnalyticsEvents.formIsFilled.bind(AnalyticsEvents) : ()=>{})}
           canMoveUp={index !== 0}
           canMoveDown={index !== fields.length - 1}
           initializeEditing={this.props.hasNewField && index === fields.length - 1}
@@ -241,10 +240,6 @@ class Form extends React.Component {
     )
   }
 }
-
-document.addEventListener('keydown', () => {
-  AnalyticsEvents.formIsFilled()
-})
 
 Form.propTypes = {
   mobilization: PropTypes.object.isRequired,

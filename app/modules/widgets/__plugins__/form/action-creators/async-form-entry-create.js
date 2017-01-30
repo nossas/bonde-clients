@@ -1,7 +1,7 @@
 // Parent module dependencies
 import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
-import { AnalyticsEvents } from '../../../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
 import * as t from '../action-types'

@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga'
 
-export default class AnalyticsEvents {
+class AnalyticsEvents {
   constructor () {
     this.FORM_FILLED = { category: 'Formulário', action: 'Preenchimento Iniciado' }
     this.FORM_SAVED = { category: 'Formulário', action: 'Dados Salvos com Sucesso' }
@@ -48,3 +48,5 @@ export default class AnalyticsEvents {
     return this.sendEvent(evt)
   }
 }
+
+export default new AnalyticsEvents()

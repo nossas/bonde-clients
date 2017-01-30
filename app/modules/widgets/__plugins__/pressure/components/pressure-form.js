@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import './pressure-form.scss'
 import { isValidEmail } from '../../../../../util/validation-helper'
 
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+
 // TODO: Reusable Input
 const controlClassname = 'px3 py1'
 const inputReset = {
@@ -87,6 +89,7 @@ class PressureForm extends Component {
                 id="pressure-sender-email-id"
                 className="col-12"
                 style={inputReset}
+                onBlur={::AnalyticsEvents.pressureIsFilled}
                 type="email"
                 placeholder="Insira seu e-mail"
                 value={email}
