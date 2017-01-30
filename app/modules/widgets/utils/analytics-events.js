@@ -1,57 +1,51 @@
 import ReactGA from 'react-ga'
 
-const FORM_FILLED = { category: 'Formulário', action: 'Preenchimento Iniciado' }
-const FORM_SAVED = { category: 'Formulário', action: 'Dados Salvos com Sucesso' }
-const FORM_SHARED = { category: 'Formulário', action: 'Social' }
-
-const DONATION_STARTED = { category: 'Doação', action: 'Escolheu Valor' }
-const DONATION_FINISHED = { category: 'Doação', action: 'Servidor Recebeu Dados' }
-const DONATION_SHARED = { category: 'Doação', action: 'Social' }
-
-const PRESSURE_FILLED = { category: 'Pressão', action: 'Preenchimento Iniciado' }
-const PRESSURE_SAVED = { category: 'Pressão', action: 'Dados Salvos com Sucesso' }
-const PRESSURE_SHARED = { category: 'Pressão', action: 'Social' }
-
 class AnalyticsEvents {
+  constructor () {
+    this.FORM_FILLED = { category: 'Formulário', action: 'Preenchimento Iniciado' }
+    this.FORM_SAVED = { category: 'Formulário', action: 'Dados Salvos com Sucesso' }
 
+    this.DONATION_STARTED = { category: 'Doação', action: 'Escolheu Valor' }
+    this.DONATION_FINISHED = { category: 'Doação', action: 'Servidor Recebeu Dados' }
+
+    this.PRESSURE_FILLED = { category: 'Pressão', action: 'Preenchimento Iniciado' }
+    this.PRESSURE_SAVED = { category: 'Pressão', action: 'Dados Salvos com Sucesso' }
+
+    this.SOCIAL_SHARED = { category: 'Redes Sociais', action: 'Compartilhou no ' }
+  }
   static sendEvent (event) {
     return ReactGA.event(event)
   }
 
   static formIsFilled () {
-    return this.sendEvent(FORM_FILLED)
+    return this.sendEvent(this.FORM_FILLED)
   }
 
   static formSavedData () {
-    return this.sendEvent(FORM_SAVED)
-  }
-
-  static formSocialShare (source) {
-    return this.sendEvent({...FORM_SHARED, label: source})
+    return this.sendEvent(this.FORM_SAVED)
   }
 
   static donationSetValue () {
-    return this.sendEvent(DONATION_STARTED)
+    return this.sendEvent(this.DONATION_STARTED)
   }
 
   static donationFinishRequest (value) {
-    return this.sendEvent({...DONATION_FINISHED, label: value})
-  }
-
-  static donationSocialShare (source) {
-    return this.sendEvent({...DONATION_SHARED, label: source})
+    return this.sendEvent({...this.DONATION_FINISHED, label: value})
   }
 
   static pressureIsFilled () {
-    return this.sendEvent(PRESSURE_FILLED)
+    return this.sendEvent(this.PRESSURE_FILLED)
   }
 
   static pressureSavedData () {
-    return this.sendEvent(PRESSURE_SAVED)
+    return this.sendEvent(this.PRESSURE_SAVED)
   }
 
-  static pressureSocialShare (source) {
-    return this.sendEvent({...PRESSURE_SHARED, label: source})
+  static socialShared (source, text) {
+    let evt = { ...this.SOCIAL_SHARED }
+    evt.action = evt.action + source
+    evt.label = text
+    return this.sendEvent(evt)
   }
 }
 
