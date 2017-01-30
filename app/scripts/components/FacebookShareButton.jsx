@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react'
+import AnalyticsEvents from '../../app/modules/widgets/utils/analytics-events'
 
 export default class FacebookShareButton extends React.Component {
   static propTypes = {
-    href: PropTypes.string.isRequired
+    href: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
   }
 
   handleClick() {
-    const { href } = this.props
+    const { text, href } = this.props
+
+    AnalyticsEvents.socialShared('Facebook', text)
 
     window.open(
       `http://www.facebook.com/sharer.php?u=${href}`,
