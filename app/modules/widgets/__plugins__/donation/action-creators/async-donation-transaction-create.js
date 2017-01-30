@@ -1,6 +1,6 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
-import { AnalyticsEvents } from '../../../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, axios) => {
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`

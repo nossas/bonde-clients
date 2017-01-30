@@ -8,7 +8,6 @@ import Editor from '../../../../../scripts/RebooEditor'
 
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
-import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
 import {
@@ -142,10 +141,6 @@ export class Pressure extends Component {
     )
   }
 }
-
-document.addEventListener('keydown', () => {
-  AnalyticsEvents.pressureIsFilled()
-})
 
 Pressure.propTypes = {
   editable: PropTypes.bool,

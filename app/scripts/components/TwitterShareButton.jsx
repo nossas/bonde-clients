@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import AnalyticsEvents from '../../app/modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '../../modules/widgets/utils/analytics-events'
 
 export default class TwitterShareButton extends React.Component {
   static propTypes = {
