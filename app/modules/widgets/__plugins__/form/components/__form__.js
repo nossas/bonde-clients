@@ -12,6 +12,7 @@ import { isValidEmail } from '../../../../../util/validation-helper'
 
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
+import { AnalyticsEvents } from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'
@@ -98,6 +99,8 @@ class Form extends React.Component {
       />
     )
   }
+
+
 
   renderFields() {
     const fields = this.fields()
@@ -229,6 +232,7 @@ class Form extends React.Component {
         onClick={::this.handleOverlayOnClick}
         text="Clique para configurar o formulário de inscrição"
       >
+        <div onKeyDown={(e) => e.stopPropagation()} />
         <div className={`widget ${headerFont}-header`}>
           {success ? this.renderShareButtons() : this.renderForm()}
           {this.renderCount()}
@@ -237,6 +241,10 @@ class Form extends React.Component {
     )
   }
 }
+
+document.addEventListener('keydown', () => {
+  AnalyticsEvents.formIsFilled()
+})
 
 Form.propTypes = {
   mobilization: PropTypes.object.isRequired,
