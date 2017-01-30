@@ -12,39 +12,47 @@ const PRESSURE_FILLED = { category: 'Pressão', action: 'Preenchimento Iniciado'
 const PRESSURE_SAVED = { category: 'Pressão', action: 'Dados Salvos com Sucesso' }
 const PRESSURE_SHARED = { category: 'Pressão', action: 'Social' }
 
-const sendEvent = (event) => {
-  ReactGA.event(event)
+class AnalyticsEvents {
+
+  static sendEvent (event) {
+    return ReactGA.event(event)
+  }
+
+  static formIsFilled () {
+    return this.sendEvent(FORM_FILLED)
+  }
+
+  static formSavedData () {
+    return this.sendEvent(FORM_SAVED)
+  }
+
+  static formSocialShare (source) {
+    return this.sendEvent({...FORM_SHARED, label: source})
+  }
+
+  static donationSetValue () {
+    return this.sendEvent(DONATION_STARTED)
+  }
+
+  static donationFinishRequest (value) {
+    return this.sendEvent({...DONATION_FINISHED, label: value})
+  }
+
+  static donationSocialShare (source) {
+    return this.sendEvent({...DONATION_SHARED, label: source})
+  }
+
+  static pressureIsFilled () {
+    return this.sendEvent(PRESSURE_FILLED)
+  }
+
+  static pressureSavedData () {
+    return this.sendEvent(PRESSURE_SAVED)
+  }
+
+  static pressureSocialShare (source) {
+    return this.sendEvent({...PRESSURE_SHARED, label: source})
+  }
 }
 
-const formIsFilled = () => { sendEvent(FORM_FILLED) }
-const formSavedData = () => { sendEvent(FORM_SAVED) }
-const formSocialShare = (source) => {
-  sendEvent({...FORM_SHARED, label: source})
-}
-
-const donationSetValue = () => { sendEvent(DONATION_STARTED) }
-const donationFinishRequest = (value) => {
-  sendEvent({...DONATION_FINISHED, label: value})
-}
-
-const donationSocialShare = (source) => {
-  sendEvent({...DONATION_SHARED, label: source})
-}
-
-const pressureIsFilled = () => { sendEvent(PRESSURE_FILLED) }
-const pressureSavedData = () => { sendEvent(PRESSURE_SAVED) }
-const pressureSocialShare = (source) => {
-  sendEvent({...PRESSURE_SHARED, label: source})
-}
-
-export default {
-  formIsFilled,
-  formSavedData,
-  formSocialShare,
-  donationSetValue,
-  donationFinishRequest,
-  donationSocialShare,
-  pressureIsFilled,
-  pressureSavedData,
-  pressureSocialShare
-}
+export default AnalyticsEvents
