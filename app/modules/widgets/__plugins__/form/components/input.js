@@ -54,7 +54,7 @@ class Input extends Component {
   }
 
   renderFieldKind() {
-    const { field, uid, editable, configurable } = this.props
+    const { field, uid, editable, configurable, onBlur } = this.props
 
     if (field.kind === 'dropdown') {
       return (<select
@@ -95,6 +95,7 @@ class Input extends Component {
             borderRadius: '2px',
             padding: '1rem',
           }}
+          onBlur={onBlur}
           placeholder={field.placeholder}
           type='text'
         />

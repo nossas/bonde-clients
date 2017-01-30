@@ -1,6 +1,7 @@
 // Parent module dependencies
 import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
 import { actions as WidgetActions } from '../../../../../modules/widgets'
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 // Current module dependencies
 import * as t from '../action-types'
@@ -19,6 +20,9 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
       dispatch(WidgetActions.setWidgetList(
         updateWidgetList(state, response.data)
       ))
+
+      AnalyticsEvents.formSavedData()
+
       return Promise.resolve()
     })
     .catch(failure => {

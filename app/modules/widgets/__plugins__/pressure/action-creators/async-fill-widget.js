@@ -2,6 +2,7 @@ import * as t from '../action-types'
 import { createAction } from './create-action'
 import * as WidgetSelectors from '../../../../../modules/widgets/selectors'
 import { actions as WidgetsActions } from '../../../../../modules/widgets'
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
 
 //
 // The name of this action needs to be refactored to make more sense.
@@ -22,6 +23,9 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, axio
       dispatch(WidgetsActions.setWidgetList(
         updateWidgetList(state, response.data)
       ))
+
+      AnalyticsEvents.pressureSavedData()
+
       return Promise.resolve()
     })
     .catch(failure => {

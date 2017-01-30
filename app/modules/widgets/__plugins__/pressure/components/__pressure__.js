@@ -111,6 +111,7 @@ export class Pressure extends Component {
           )
         ) : (
           <div className="pressure-widget">
+            <div onKeyDown={(e) => e.stopPropagation()} />
             <h2
               className="center py2 px3 m0 white rounded-top"
               style={{ backgroundColor: main_color, fontFamily: headerFont }}

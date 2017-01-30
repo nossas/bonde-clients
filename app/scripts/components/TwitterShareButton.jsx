@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import AnalyticsEvents from '../../modules/widgets/utils/analytics-events'
 
 export default class TwitterShareButton extends React.Component {
   static propTypes = {
@@ -13,6 +14,9 @@ export default class TwitterShareButton extends React.Component {
     // hashtags: comma-separated list without #
 
     const { href, text } = this.props
+
+    AnalyticsEvents.socialShared('Twitter', text)
+
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${href}`,
       'Compartilhar no Twitter',

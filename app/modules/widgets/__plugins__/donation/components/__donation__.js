@@ -9,6 +9,8 @@ import * as Paths from '../../../../../scripts/Paths'
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widgets/components'
 
+import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+
 // Current module dependencies
 import { DonationTellAFriend } from '../components'
 import * as DonationActions from '../action-creators'
@@ -94,6 +96,9 @@ class Donation extends React.Component {
       uiColor: main_color,
       paymentButtonText: widget.settings.button_text
     }
+
+    AnalyticsEvents.donationSetValue()
+
     checkout.open(params)
   }
 
