@@ -11,6 +11,7 @@ import { WidgetOverlay, FinishMessageCustom } from '../../../../../modules/widge
 
 // Current module dependencies
 import { DonationTellAFriend } from '../components'
+import * as DonationActions from '../action-creators'
 import './__donation__.scss'
 
 @reactMixin.decorate(Navigation)
@@ -59,7 +60,7 @@ class Donation extends React.Component {
   }
 
   handleClickDonate() {
-    const { widget, asyncDonationTransactionCreate } = this.props
+    const { widget, dispatch } = this.props
     const { success, selected_value, selected_payment_type } = this.state
     const that = this
 
@@ -80,7 +81,7 @@ class Donation extends React.Component {
         data.amount = widget.settings['donation_value' + selected_value] + "00"
 
         that.setState({ success: true })
-        asyncDonationTransactionCreate(data)
+        dispatch(DonationActions.asyncDonationTransactionCreate(data))
       },
       error: err => { console.error(err) }
     })
