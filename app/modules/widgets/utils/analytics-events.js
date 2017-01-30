@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga'
 
-class AnalyticsEvents {
+export default class AnalyticsEvents {
   constructor () {
     this.FORM_FILLED = { category: 'Formulário', action: 'Preenchimento Iniciado' }
     this.FORM_SAVED = { category: 'Formulário', action: 'Dados Salvos com Sucesso' }
@@ -13,40 +13,38 @@ class AnalyticsEvents {
 
     this.SOCIAL_SHARED = { category: 'Redes Sociais', action: 'Compartilhou no ' }
   }
-  static sendEvent (event) {
+  sendEvent (event) {
     return ReactGA.event(event)
   }
 
-  static formIsFilled () {
+  formIsFilled () {
     return this.sendEvent(this.FORM_FILLED)
   }
 
-  static formSavedData () {
+  formSavedData () {
     return this.sendEvent(this.FORM_SAVED)
   }
 
-  static donationSetValue () {
+  donationSetValue () {
     return this.sendEvent(this.DONATION_STARTED)
   }
 
-  static donationFinishRequest (value) {
+  donationFinishRequest (value) {
     return this.sendEvent({...this.DONATION_FINISHED, label: value})
   }
 
-  static pressureIsFilled () {
+  pressureIsFilled () {
     return this.sendEvent(this.PRESSURE_FILLED)
   }
 
-  static pressureSavedData () {
+  pressureSavedData () {
     return this.sendEvent(this.PRESSURE_SAVED)
   }
 
-  static socialShared (source, text) {
+  socialShared (source, text) {
     let evt = { ...this.SOCIAL_SHARED }
     evt.action = evt.action + source
     evt.label = text
     return this.sendEvent(evt)
   }
 }
-
-export default AnalyticsEvents
