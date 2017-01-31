@@ -76,12 +76,14 @@ Mobilization.propTypes = {
   mobilization: PropTypes.object.isRequired,
   blocks: PropTypes.array.isRequired,
   blockUpdate: PropTypes.func,
+  blockIsRequest: PropTypes.bool,
   widgets: PropTypes.array.isRequired,
   blockEditionMode: PropTypes.bool
 }
 
 Mobilization.defaultProps = {
   editable: false,
+  blockIsRequest: false,
   blocks: [],
   widgets: []
 }

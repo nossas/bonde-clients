@@ -30,7 +30,6 @@ class Block extends Component {
       bgClass: props.block.bg_class,
       bgImage: props.block.bg_image,
       uploadProgress: null,
-      loading: false
     }
   }
 
@@ -91,6 +90,7 @@ class Block extends Component {
 
 Block.propTypes = {
   block: PropTypes.object.isRequired,
+  blockIsRequest: PropTypes.bool,
   widgets: PropTypes.array.isRequired,
   widgetUpdate: PropTypes.func,
   setEditionMode: PropTypes.func
