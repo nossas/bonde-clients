@@ -5,13 +5,15 @@ import { DropDownMenu, DropDownMenuItem } from '../../../../scripts/components'
 import { actions as BlockActions } from '../../../mobilizations/blocks'
 
 
-const displayDropDownMenu = ({ state, props }) => (
-  state.hasMouseOver &&
-  !state.editingBackground &&
-  !state.editingWidget &&
-  !state.loading &&
-  props.editable
-)
+const displayDropDownMenu = ({ state, props }) => {
+  return (
+    state.hasMouseOver &&
+    !state.editingBackground &&
+    !state.editingWidget &&
+    !props.blockIsRequest &&
+    props.editable
+  )
+}
 
 const BlockDropdownMenu = ({ state, props, onChange }) => {
   const {
@@ -51,7 +53,7 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
       </DropDownMenuItem>
       <DropDownMenuItem
         onClick={() => {
-          onChange({ loading: true })
+          // onChange({ loading: true })
           props.blockUpdate({
             mobilization,
             block: { ...block, hidden: !block.hidden }
@@ -66,7 +68,7 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
       <DropDownMenuItem
         onClick={() => {
           if (confirm('Você tem certeza que quer remover este bloco?')) {
-            onChange({ loading: true })
+            // onChange({ loading: true })
             props.blockDestroy({ mobilization, block })
           }
         }}
@@ -78,7 +80,7 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
       <DropDownMenuItem
         disabled={!canMoveUp}
         onClick={() => {
-          onChange({ loading: true })
+          // onChange({ loading: true })
           props.blockMove('up', { mobilization, block, blocks })
         }}
         className="btn">
@@ -89,7 +91,7 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
       <DropDownMenuItem
         disabled={!canMoveDown}
         onClick={() => {
-          onChange({ loading: true })
+          // onChange({ loading: true })
           props.blockMove('down', { mobilization, block, blocks })
         }}
         className="btn">
@@ -106,7 +108,6 @@ BlockDropdownMenu.propTypes = {
     hasMouseOver: PropTypes.bool,
     editingBackground: PropTypes.bool,
     editingWidget: PropTypes.bool,
-    loading: PropTypes.bool,
   }),
   props: PropTypes.shape({
     editable: PropTypes.bool,
@@ -115,6 +116,7 @@ BlockDropdownMenu.propTypes = {
     canMoveDown: PropTypes.bool,
     mobilization: PropTypes.object,
     blocks: PropTypes.array,
+    blockIsRequest: PropTypes.bool,
     block: PropTypes.shape({
       hidden: PropTypes.bool,
     }),

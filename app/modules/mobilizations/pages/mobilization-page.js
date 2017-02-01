@@ -48,6 +48,7 @@ const mapStateToProps = state => ({
   mobilization: MobilizationSelectors.getCurrent(state),
   blocks: BlockSelectors.getList(state),
   blocksIsLoaded: BlockSelectors.isLoaded(state),
+  blockIsRequest: BlockSelectors.isRequesting(state),
   blockEditionMode: BlockSelectors.isEditionMode(state),
   widgets: WidgetSelectors.getList(state),
   auth: state.auth
