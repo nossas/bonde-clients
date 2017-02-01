@@ -134,7 +134,7 @@ services:
       - "3002:3002"
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     restart: always
     links:
       - api:api.reboo.local

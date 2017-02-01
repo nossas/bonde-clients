@@ -38,6 +38,9 @@ git clone git@github.com:nossas/bonde-client.git
 git clone git@github.com:nossas/bonde-server.git
 cd bonde-client
 docker-compose up -d && docker-compose restart
+sudo su
+echo '127.0.0.1 app.reboo.local reboo.local db.local keyval.local api.reboo.local' >> /etc/hosts
+exit
 ```
 
 When container start from the first time, you need to run migrate and seed because database are not yet
@@ -126,6 +129,7 @@ Add staging and production environments into your list of remote repos:
 ```
 git remote add dokku dokku@server:0-client
 git remote add dokku-prod dokku@server:0-client
+git remote add dokku-prod-ssl dokku@server:0-client-ssl
 ```
 
 Commit your changes to the desired environment:
@@ -135,8 +139,6 @@ git push dokku-prod commithash:master
 ```
 
 ## Links
-- [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/888220)
-- [Invision](https://projects.invisionapp.com/share/763UO3YDT#/screens)
 - [Zeplin](https://app.zeplin.io/project.html#pid=55d1d57e14a5317a0e909551)
 
 [circleimg]: https://img.shields.io/circleci/project/nossas/bonde-client.svg?style=flat-square

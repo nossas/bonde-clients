@@ -15,3 +15,6 @@ coverage
 # floobits file
 .floo
 .flooignore
+
+.env.*
+.elasticbeanstalk/
