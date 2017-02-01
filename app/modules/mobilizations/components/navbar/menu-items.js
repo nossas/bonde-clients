@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { DropDownMenu, NavbarEditionWrapper } from '../../../../scripts/components'
 
-const MenuItems = ({ blocks, mobile, menuProps }) => {
+const MenuItems = ({ blocks, mobile, ...menuProps }) => {
   const items = blocks.map(block => (
     <div key={block.id} className={classnames({ 'menu-item inline-block': !mobile })}>
       <NavbarEditionWrapper
