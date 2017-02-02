@@ -6,7 +6,7 @@ import { shallow } from 'enzyme'
 import * as arrayUtil from '~utils/array'
 
 // Current module dependencies
-import CustomDomain from '~mobilizations/pages/custom-domain/page'
+import CustomDomainPage from '~routes/custom-domain/page'
 
 describe('client/mobilizations/pages/custom-domain', () => {
   let wrapper
@@ -20,7 +20,7 @@ describe('client/mobilizations/pages/custom-domain', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<CustomDomain {...props} />)
+    wrapper = shallow(<CustomDomainPage {...props} />)
   })
 
   it('render without crashed', () => {

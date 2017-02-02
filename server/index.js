@@ -22,7 +22,7 @@ import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client.dev'
 import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../common/store'
-import createRoutes from '../common/routes/root'
+import createRoutes from '../routes'
 import { startServer as authStartServer } from '../authenticate'
 import AuthClient from '../authenticate/client'
 
