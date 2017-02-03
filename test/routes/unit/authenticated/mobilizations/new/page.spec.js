@@ -2,14 +2,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationAddPage } from '~mobilizations/pages/mobilization-add-page'
+import NewMobilizationPage from '~routes/authenticated/mobilizations/new/page'
 
-describe('client/mobilizations/pages/mobilization-add-page', () => {
+describe('routes/authenticated/mobilizations/new/page', () => {
   let wrapper
-  const props = {}
+  const props = {
+    mobilization: { id: 1 }
+  }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationAddPage {...props} />)
+    wrapper = shallow(<NewMobilizationPage {...props} />)
   })
 
   describe('#render', () => {

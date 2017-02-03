@@ -1,24 +1,31 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 // Global module dependencies
-import { Loading } from '~components/await'
-import Sidebar from '~components/navigation/sidebar/sidebar'
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '~components/layout'
+import * as paths from '~client/paths'
+import { Tabs, Tab } from '~components/navigation/tabs'
 
-const MobilizationDashboardContainer = ({ children, loading, sidebarProps }) => {
-  return loading ? <Loading /> : (
-    <Sidebar {...sidebarProps}>
-      {children && React.cloneElement(children)}
-    </Sidebar>
+const MobilizationAddContainer = ({ children, location }) => {
+  const goalIsActive = location && location.pathname === paths.newMobilization()
+  const templateIsActive = location && /\/\w+\/[0-9]+\/templates\/choose/.test(location.pathname)
+
+  return (
+    <SettingsPageLayout>
+      <SettingsPageMenuLayout title='Nova mobilização'>
+        <Tabs>
+          <Tab text='Objetivo' isActive={goalIsActive} index={1} />
+          <Tab text='Templates' isActive={templateIsActive} index={2} />
+        </Tabs>
+      </SettingsPageMenuLayout>
+      <SettingsPageContentLayout wrapClassName='md-col-12 lg-col-6 mx-auto'>
+        {children}
+      </SettingsPageContentLayout>
+    </SettingsPageLayout>
   )
 }
 
-MobilizationDashboardContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  loading: PropTypes.bool,
-  sidebarProps: PropTypes.object.isRequired,
-  relationshipId: PropTypes.number.isRequired,
-  // Actions
-  asyncFetch: PropTypes.func.isRequired
-}
-
-export default MobilizationDashboardContainer
+export default MobilizationAddContainer

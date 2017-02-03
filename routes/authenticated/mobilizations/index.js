@@ -1,28 +1,18 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
-import { injectAsyncReducer } from '~common/store'
 
-const RoutesMobilizations = store => ({
-  path: '/',
+export default store => ({
+  path: 'mobilizations',
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      injectAsyncReducer(store, 'mobilizations', require('~mobilizations/reducers').default)
-      callback(null, require('./container.connected').default)
+      callback(null, require('./container').default)
     })
   },
-  getIndexRoute (location, cb) {
+  getChildRoutes (location, cb) {
     require.ensure([], (require) => {
-      cb(null, {
-        component: require('./list/page.connected').default
-      })
+      cb(null, [
+        { path: 'new', component: require('./new/page.connected').default }
+      ])
     })
   }
-  // getChildRoutes (location, cb) {
-  //   require.ensure([], (require) => {
-  //     cb(null, [
-  //     ])
-  //   })
-  // }
 })
-
-export default RoutesMobilizations
