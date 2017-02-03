@@ -1,6 +1,6 @@
-import { selectors as AccountSelectors } from '~account'
-import { selectors as CommunitySelectors } from '~community'
-import { selectors as MobilizationSelectors } from '~mobilizations'
+import * as AccountSelectors from '~account/selectors'
+import * as CommunitySelectors from '~community/selectors'
+import * as MobilizationSelectors from '~mobilizations/selectors'
 
 export default (state, ownProps) => ({
   loading: MobilizationSelectors.isLoading(state),

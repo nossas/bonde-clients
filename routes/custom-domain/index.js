@@ -2,7 +2,7 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { injectAsyncReducer } from '~common/store'
 
-const CustomDomainPageRoute = store => ({
+const RoutesCustomDomain = store => ({
   path: '/',
   getIndexRoute(location, cb) {
     require.ensure([], (require) => {
@@ -16,4 +16,4 @@ const CustomDomainPageRoute = store => ({
   }
 })
 
-export default CustomDomainPageRoute
+export default RoutesCustomDomain

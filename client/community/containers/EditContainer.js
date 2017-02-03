@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import { Tabs, Tab } from '~components/navigation'
 import { SettingsPageLayout, SettingsPageMenuLayout, SettingsPageContentLayout } from '~components/layout'
 
-import Sidebar from '~dashboard/Sidebar/sidebar'
-import getSidebarProps from '~dashboard/Sidebar/map-state-to-props'
+import Sidebar from '~components/navigation/sidebar'
+import getSidebarProps from '~components/navigation/sidebar/map-state-to-props'
 
 import * as selectors from '../selectors'
 import * as paths from '../paths'
 
 class EditContainer extends Component {
 
-  render() {
-
+  render () {
     const { children, community, location: { pathname }, sidebarProps } = this.props
 
     const editPath = paths.edit('info')
@@ -22,11 +21,11 @@ class EditContainer extends Component {
     return (
       <Sidebar {...sidebarProps}>
         <SettingsPageLayout>
-          <SettingsPageMenuLayout title="Configurações da comunidade">
+          <SettingsPageMenuLayout title='Configurações da comunidade'>
             <Tabs>
-              <Tab text="Informações" path={editPath} isActive={editPath === pathname} />
-              <Tab text="Mailchimp" path={mailchimpPath} isActive={mailchimpPath === pathname} />
-              <Tab text="Recebedor" path={recipientPath} isActive={recipientPath === pathname} />
+              <Tab text='Informações' path={editPath} isActive={editPath === pathname} />
+              <Tab text='Mailchimp' path={mailchimpPath} isActive={mailchimpPath === pathname} />
+              <Tab text='Recebedor' path={recipientPath} isActive={recipientPath === pathname} />
             </Tabs>
           </SettingsPageMenuLayout>
           <SettingsPageContentLayout>

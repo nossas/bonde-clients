@@ -5,5 +5,5 @@ import SidebarContainer from './container'
 export default {
   Sidebar,
   SidebarContainer,
-  getSidebarProps: mapStateToProps,
+  getSidebarProps: mapStateToProps
 }

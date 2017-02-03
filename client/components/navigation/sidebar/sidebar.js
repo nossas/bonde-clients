@@ -6,9 +6,9 @@ import {
   Sidenav,
   SidenavList,
   SidenavListItem
-} from '~components/navigation'
-import * as Paths from '~client/paths'
-import { paths as BlockPaths } from '~mobilizations/blocks'
+} from '~components/navigation/sidenav'
+import * as paths from '~client/paths'
+import * as BlockPaths from '~mobilizations/blocks/paths'
 
 const Sidebar = props => {
   const { children, loading, mobilization, user, community } = props
@@ -24,7 +24,7 @@ const Sidebar = props => {
               <SidenavListItem
                 text='Editar mobilização'
                 icon='pencil'
-                href={Paths.editMobilization(mobilization.id)}
+                href={paths.editMobilization(mobilization.id)}
               />
               <SidenavListItem
                 text='Adicionar conteúdo'
@@ -35,26 +35,26 @@ const Sidebar = props => {
                 text='Ver em uma nova aba'
                 icon='external-link'
                 linkType='anchor'
-                href={Paths.mobilization(mobilization)}
+                href={paths.mobilization(mobilization)}
                 target='_blank'
               />
               <SidenavListItem
                 text='Configurações'
                 icon='cog'
-                href={Paths.basicsMobilization(mobilization.id)}
+                href={paths.basicsMobilization(mobilization.id)}
               />
             </SidenavList>
           )
         }
         <SidenavList style={{ position: 'absolute', bottom: '0' }}>
-          <SidenavListItem text='Minha Conta' icon='user' href={Paths.editAccount()}>
+          <SidenavListItem text='Minha Conta' icon='user' href={paths.editAccount()}>
             <div className='white h6'>{user.email}</div>
           </SidenavListItem>
           <SidenavListItem
             icon='sign-out'
             text='Sair'
             className='caps'
-            href={Paths.logout()}
+            href={paths.logout()}
           />
         </SidenavList>
       </Sidenav>

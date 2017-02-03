@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router'
 
 import { BackgroundContainer } from '../Dashboard/containers'
-import { SidebarContainer } from '../Dashboard/Sidebar'
+import { SidebarContainer } from '~components/navigation/sidebar'
 
 import {
   EditUserPage,

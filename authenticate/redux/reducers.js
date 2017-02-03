@@ -3,7 +3,8 @@ import * as t from './action-types'
 const initialState = {
   isLoaded: false,
   isLoading: false,
-  user: undefined,
+  // @revert To undefined
+  user: { email: 'foo@bar.com' },
   credentials: undefined,
   error: undefined
 }

@@ -4,6 +4,7 @@ import { reducer as authReducer } from '../authenticate/redux'
 import mobilizations from '~mobilizations/reducers'
 import blocks from '~mobilizations/blocks/reducers'
 import widgets from '~mobilizations/widgets/reducers'
+import community from '~community/reducers'
 const initialState = {
   host: '',
   protocol: ''
@@ -21,6 +22,7 @@ export default function createReducer (asyncReducers) {
     mobilizations,
     blocks,
     widgets,
+    community,
     ...asyncReducers
   })
 }

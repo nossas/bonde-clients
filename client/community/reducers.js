@@ -3,7 +3,8 @@ import * as t from './actionTypes'
 
 const initialState = {
   isLoaded: false,
-  data: [],
+  // @revert To empty array
+  data: [{ id: 1 }],
   currentId: undefined
 }
 

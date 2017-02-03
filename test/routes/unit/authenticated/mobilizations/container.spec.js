@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { MobilizationDashboardContainer } from '~mobilizations/containers/mobilization-dashboard-container'
+import MobilizationContainer from '~routes/authenticated/mobilizations/container'
 
 const setup = (props = {}) => {
   const initialProps = {
@@ -21,7 +21,7 @@ const setup = (props = {}) => {
   return {
     props: initialProps,
     wrapper: shallow(
-      <MobilizationDashboardContainer {...initialProps} />
+      <MobilizationContainer {...initialProps} />
     )
   }
 }
