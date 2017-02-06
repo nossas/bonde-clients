@@ -9,7 +9,7 @@ import {
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~components/navigation/tabs'
 
-const MobilizationAddContainer = ({ children, location }) => {
+const PageTabLayout = ({ children, location }) => {
   const goalIsActive = location && location.pathname === paths.newMobilization()
   const templateIsActive = location && /\/\w+\/[0-9]+\/templates\/choose/.test(location.pathname)
 
@@ -28,4 +28,4 @@ const MobilizationAddContainer = ({ children, location }) => {
   )
 }
 
-export default MobilizationAddContainer
+export default PageTabLayout

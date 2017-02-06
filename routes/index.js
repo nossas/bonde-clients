@@ -3,7 +3,7 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
 import serverConfig from '~server/config'
 import CustomDomain from '~routes/custom-domain'
-import Authenticated from '~routes/authenticated'
+import Application from '~routes/application'
 import { showMobilizationPublicView } from '~routes/utils'
 
 export default function createRoutes (store) {
@@ -12,5 +12,5 @@ export default function createRoutes (store) {
 
   return showMobilizationPublicView({ host, domain })
     ? CustomDomain(store)
-    : Authenticated(store)
+    : Application(store)
 }

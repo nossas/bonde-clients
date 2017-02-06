@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import AuthenticatedContainer from '~routes/authenticated/container'
+import ApplicationContainer from '~routes/application/container'
 
 const setup = (props = {}) => {
   const initialProps = {
@@ -21,7 +21,7 @@ const setup = (props = {}) => {
   return {
     props: initialProps,
     wrapper: shallow(
-      <AuthenticatedContainer {...initialProps} />
+      <ApplicationContainer {...initialProps} />
     )
   }
 }

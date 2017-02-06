@@ -13,14 +13,15 @@ export default store => ({
   getIndexRoute (location, cb) {
     require.ensure([], (require) => {
       cb(null, {
-        component: require('./mobilizations/list/page.connected').default
+        component: require('./mobilizations-list/page.connected').default
       })
     })
   },
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./mobilizations').default(store),
+        require('./mobilizations-list').default(store),
+        require('./mobilizations-new').default(store),
 
         require('~common/routes/not-found').default
       ])
