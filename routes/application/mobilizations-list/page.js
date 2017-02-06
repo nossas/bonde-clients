@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
-// import { Navigation } from 'react-router'
-// import reactMixin from 'react-mixin'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import {
@@ -30,7 +29,6 @@ import {
 import { PageHeader } from '~mobilizations/components'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-// @revert @reactMixin.decorate(Navigation)
 export class MobilizationListPage extends Component {
   componentWillMount () {
     const { dispatch } = this.props
@@ -41,13 +39,13 @@ export class MobilizationListPage extends Component {
   handleSelectItem (mobilization) {
     const { dispatch } = this.props
     dispatch(MobilizationActions.select(mobilization.id))
-    this.transitionTo(paths.editMobilization(mobilization.id))
+    browserHistory.push(paths.editMobilization(mobilization.id))
   }
 
   handleCreateTemplate (mobilization) {
     const { dispatch } = this.props
     dispatch(TemplateActions.selectTemplate(mobilization.id))
-    this.transitionTo(paths.mobilizationTemplatesCreate(mobilization))
+    browserHistory.push(paths.mobilizationTemplatesCreate(mobilization))
   }
 
   render () {

@@ -2,16 +2,18 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationListPage } from '~mobilizations/pages/mobilization-list-page'
+import * as mock from '~utils/mock'
+import MobilizationListPage from '~routes/application/mobilizations-list/page'
 
-describe('client/mobilizations/pages/mobilization-list-page', () => {
+describe('routes/application/mobilization-list/page', () => {
   let wrapper
   const props = {
     mobilizations: [{ id: 1 }, { id: 2 }],
     toggleMenu: () => {},
-    select: () => {},
+    select: mock.noop,
     menuActiveIndex: 1,
-    location: {}
+    location: {},
+    dispatch: mock.noop
   }
   const context = { router: {} }
 

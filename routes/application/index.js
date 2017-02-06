@@ -22,6 +22,7 @@ export default store => ({
       cb(null, [
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),
+        require('./mobilizations-edit').default(store),
 
         require('~common/routes/not-found').default
       ])

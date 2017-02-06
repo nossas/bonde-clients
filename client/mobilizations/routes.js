@@ -34,22 +34,22 @@
 
 export default requiredLogin => ({})
 
-// <Route component={MobilizationDashboardContainer} onEnter={requiredLogin}> <~ Migrated!
-//   <Route path='/' component={MobilizationListPage} /> <~ Migrated!
-//   <Route path='/mobilizations' component={MobilizationAddContainer}> <~ Migrated!
-//     <Route path='/new' component={MobilizationAddPage} /> <~ Migrated!
+// <Route component={MobilizationDashboardContainer} onEnter={requiredLogin}>                             <~ Migrated!
+//   <Route path='/' component={MobilizationListPage} />                                                  <~ Migrated!
+//   <Route path='/mobilizations' component={MobilizationAddContainer}>                                   <~ Migrated!
+//     <Route path='/new' component={MobilizationAddPage} />                                              <~ Migrated!
 //     <Route path='/:mobilization_id' component={FetchTemplatesContainer}>
 //       <Route path='/templates/choose' component={TemplateChoosePage} />
 //       <Route path='/templates/choose/custom' component={TemplateChooseCustomPage} />
 //       <Route path='/templates/choose/global' component={TemplateChooseGlobalPage} />
 //     </Route>
-//   </Route> <~ Migrated!
+//   </Route>                                                                                             <~ Migrated!
 //   <Route path='/mobilizations/:mobilization_id/templates/create' component={TemplateCreatePage} />
 //   <Route component={FetchTemplatesContainer}>
 //     <Route path='/mobilizations/templates/list' component={TemplateListPage} />
 //   </Route>
-//   <Route path='/mobilizations/:mobilization_id' component={MobilizationEditContainer}>
-//     <Route path='/edit' component={MobilizationPage} />
+//   <Route path='/mobilizations/:mobilization_id' component={MobilizationEditContainer}>                 <~ Migration In Progress
+//     <Route path='/edit' component={MobilizationPage} />                                                <~ Migration In Progress
 //     <Route component={MobilizationSettingsContainer}>
 //       <Route path='/basics' component={MobilizationBasicsPage} />
 //       <Route path='/analytics' component={MobilizationAnalyticsPage} />
