@@ -27,16 +27,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        data: [],
-        currentId: undefined
+        data: []
       }
     case t.LOAD:
       return {
         ...state,
         isLoaded: true,
         loading: false,
-        data: action.payload,
-        currentId: undefined
+        data: action.payload
       }
     case t.SELECT:
       return {

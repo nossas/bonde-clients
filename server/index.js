@@ -164,8 +164,8 @@ export const createServer = (config) => {
                 <div id="root">${data.html}</div>
                 <script>window.renderedClassNames = ${JSON.stringify(data.css.renderedClassNames)};</script>
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
-                <script src="/wysihtml/advanced_and_extended.js"></script>
                 <script src="/wysihtml/wysihtml-toolbar.min.js"></script>
+                <script src="/wysihtml/advanced_and_extended.js"></script>
                 <script src="${__PROD__ ? assets.vendor.js : '/vendor.js'}"></script>
                 <script async src="${__PROD__ ? assets.main.js : '/main.js'}" ></script>
               </body>

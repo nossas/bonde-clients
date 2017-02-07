@@ -1,6 +1,7 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
+import * as MobilizationActions from '~mobilizations/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as BlockActions from '~mobilizations/blocks/action-creators'
 import * as BlockSelectors from '~mobilizations/blocks/selectors'
@@ -13,11 +14,17 @@ const redial = {
     const state = getState()
     const promises = []
 
+    !MobilizationSelectors.isLoaded(state) && promises.push(
+      dispatch(MobilizationActions.asyncFetch(state.community.currentId))
+    )
     !BlockSelectors.isLoaded(state) && promises.push(
       dispatch(BlockActions.asyncBlockFetch(params.mobilization_id))
     )
     !WidgetSelectors.isLoaded(state) && promises.push(
       dispatch(WidgetActions.asyncWidgetFetch(params.mobilization_id))
+    )
+    !MobilizationSelectors.hasCurrent(state) && promises.push(
+      dispatch(MobilizationActions.select(params.mobilization_id))
     )
     return Promise.all(promises)
   }

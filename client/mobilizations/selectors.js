@@ -15,3 +15,5 @@ export const getMenuActiveIndex = state => state.mobilizations.list.menuActiveIn
 export const isLoading = state => state.mobilizations.list.loading
 
 export const isLoaded = state => state.mobilizations.list.isLoaded
+
+export const hasCurrent = state => !!state.mobilizations.list.currentId
