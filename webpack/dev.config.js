@@ -14,6 +14,9 @@ var webpackUniversalPostCSS = require('./universal.postcss.config')
 var webpackUniversalResolveAlias = require('./universal.resolve-alias.config')
 
 module.exports = {
+  watchOptions: {
+      poll: 1000 // <-- it's worth setting a timeout to prevent high CPU load
+  },
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, '..'),
   entry: {
