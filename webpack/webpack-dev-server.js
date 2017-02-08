@@ -4,6 +4,9 @@ var WebpackDevServer = require('webpack-dev-server'),
   host = process.env.HOST || 'localhost',
   port = parseInt(process.env.PORT) + 1 || 3002,
   serverOptions = {
+    watchOptions: {
+        poll: 1000 // <-- it's worth setting a timeout to prevent high CPU load
+    },
     contentBase: 'http://' + host + ':' + port,
     quiet: true,
     noInfo: true,
