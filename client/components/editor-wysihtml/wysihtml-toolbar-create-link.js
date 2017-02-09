@@ -9,7 +9,7 @@ import * as ContentActions from '~mobilizations/widgets/__plugins__/content/acti
 
 // You may will see the warning below:
 // Warning: Stateless function components cannot be given refs (See ref "wrappedInstance" in
-// MobilizationSettingsContainer created by Connect(MobilizationSettingsContainer)). Attempts to
+// WYSIHTMLToolbarCreateLink created by Connect(WYSIHTMLToolbarCreateLink)). Attempts to
 // access this ref will fail.
 //
 // Upgrade React Redux to version 4 will should go away this warning.

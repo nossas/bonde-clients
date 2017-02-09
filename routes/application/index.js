@@ -23,6 +23,7 @@ export default store => ({
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),
         require('./mobilizations-edit').default(store),
+        require('./mobilizations-settings-basics').default(store),
 
         require('~common/routes/not-found').default
       ])

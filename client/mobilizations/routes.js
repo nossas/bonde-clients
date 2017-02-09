@@ -48,10 +48,10 @@ export default requiredLogin => ({})
 //   <Route component={FetchTemplatesContainer}>
 //     <Route path='/mobilizations/templates/list' component={TemplateListPage} />
 //   </Route>
-//   <Route path='/mobilizations/:mobilization_id' component={MobilizationEditContainer}>                 <~ Migration In Progress
-//     <Route path='/edit' component={MobilizationPage} />                                                <~ Migration In Progress
-//     <Route component={MobilizationSettingsContainer}>
-//       <Route path='/basics' component={MobilizationBasicsPage} />
+//   <Route path='/mobilizations/:mobilization_id' component={MobilizationEditContainer}>                 <~ Migrated
+//     <Route path='/edit' component={MobilizationPage} />                                                <~ Migrated
+//     <Route component={MobilizationSettingsContainer}>                                                  <~ Migration In Progress
+//       <Route path='/basics' component={MobilizationBasicsPage} />                                      <~ Migration In Progress
 //       <Route path='/analytics' component={MobilizationAnalyticsPage} />
 //       <Route path='/sharing' component={MobilizationSharingPage} />
 //       <Route path='/customDomain' component={MobilizationDomainPage} />

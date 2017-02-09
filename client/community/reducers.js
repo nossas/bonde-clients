@@ -5,7 +5,8 @@ const initialState = {
   isLoaded: false,
   // @revert To empty array
   data: [{ id: 1 }],
-  currentId: undefined
+  // @revert To undefined
+  currentId: 1
 }
 
 export default (state = initialState, action = {}) => {

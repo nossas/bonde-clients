@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationBasicsPage } from '~mobilizations/pages/settings'
+import MobilizationBasicsPage from '~routes/application/mobilizations-settings-basics/page'
 
 describe('client/mobilizations/pages/settings/mobilization-basics-page', () => {
   let wrapper

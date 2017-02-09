@@ -10,9 +10,7 @@ const redial = {
   fetch: ({ dispatch, getState }) => {
     const state = getState()
     if (!MobilizationSelectors.isLoaded(state)) {
-      const { community: { currentId } } = state
-      // @revert the "|| 1"
-      return dispatch(MobilizationActions.asyncFetch(currentId || 1))
+      return dispatch(MobilizationActions.asyncFetch(state.community.currentId))
     }
   }
 }

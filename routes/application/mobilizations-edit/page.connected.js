@@ -14,9 +14,6 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !MobilizationSelectors.isLoaded(state) && promises.push(
-      dispatch(MobilizationActions.asyncFetch(state.community.currentId))
-    )
     !BlockSelectors.isLoaded(state) && promises.push(
       dispatch(BlockActions.asyncBlockFetch(params.mobilization_id))
     )

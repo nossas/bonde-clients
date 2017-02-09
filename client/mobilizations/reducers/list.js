@@ -26,8 +26,7 @@ export default (state = initialState, action) => {
     case t.FETCH:
       return {
         ...state,
-        loading: true,
-        data: []
+        loading: true
       }
     case t.LOAD:
       return {
