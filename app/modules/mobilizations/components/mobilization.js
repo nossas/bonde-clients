@@ -55,22 +55,21 @@ const Mobilization = props => {
           />
         ))}
         <div className="col-10 mx-auto">
-          <div className="col col-8">
-            <p className="mt3 ml2">Feito pra causar. Feito com <strong>
-              <a
-                href="http://www.bonde.org/"
-                style={{ 'color': '#000', 'text-decoration': 'none' }}
-                target="_blank">
-                BONDE.
-              </a></strong>
-            </p>
-          </div>
-          <div className="col col-4">
+          <div className="col col-10">
             <a
               href="http://www.bonde.org/"
-              className="right my2 mr2"
+              style={{ 'color': '#000', 'text-decoration': 'none', 'line-height': '85px' }}
               target="_blank">
-              <img src={logoIcon} alt="B"   style={{ height: '43px' }} />
+              Feito pra causar. Feito com
+              <strong> BONDE.</strong>
+            </a>
+          </div>
+          <div className="col col-2">
+            <a
+              href="http://www.bonde.org/"
+              className="right my2"
+              target="_blank">
+              <img src={logoIcon} alt="B"   style={{ width: '45px' }} />
             </a>
           </div>
         </div>
