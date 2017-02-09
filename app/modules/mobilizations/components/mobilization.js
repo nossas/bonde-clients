@@ -59,7 +59,7 @@ const Mobilization = props => {
             <p className="mt3 ml2">Feito pra causar. Feito com <strong>
               <a
                 href="http://www.bonde.org/"
-                className="right my2 mr2"
+                style={{ 'color': '#000', 'text-decoration': 'none' }}
                 target="_blank">
                 BONDE.
               </a></strong>
