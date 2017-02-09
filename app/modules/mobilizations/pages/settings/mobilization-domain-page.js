@@ -40,7 +40,7 @@ const MobilizationDomainPage = props => {
           <tr>
             <td><code>{custom_domain.value}</code></td>
             <td><code>CNAME</code></td>
-            <td><code>{mobilization.slug}.reboo.org</code></td>
+            <td><code>{mobilization.slug}.bonde.org</code></td>
           </tr>
         </tbody>
       </table>

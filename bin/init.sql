@@ -1,2 +1,2 @@
-create database reboo;
-create database reboo_test;
+create database bonde;
+create database bonde_test;

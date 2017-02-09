@@ -12,7 +12,7 @@ const PORT = process.env.PORT || '3001'
 
 module.exports = {
   apps: [{
-    name: 'reboo-client',
+    name: 'bonde-client',
     script: './bin/server.js',
     instances: WEB_CONCURRENCY,
     max_memory_restart: WEB_MEMORY + 'M',
