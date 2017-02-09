@@ -12,7 +12,6 @@ describe.skip('app/modules/widgets/utils/analytics-events', () => {
   })
 
   context('#formIsFilled', () => {
-    console.log(AnalyticsEvents)
     it('should return true when form is filled', () => {
       expect(AnalyticsEvents.formIsFilled()).to.be.true
     })
