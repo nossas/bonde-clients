@@ -125,7 +125,7 @@ services:
     depends_on:
       - api
     #command: './node_modules/.bin/concurrently --kill-others "node webpack/webpack-dev-server.js" "node ./bin/server.js"'
-    command: yarn run dev
+    command: npm run dev
     volumes:
       - ./:/code:Z
       - node-modules:/code/node_modules
