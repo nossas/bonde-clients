@@ -20,9 +20,10 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./mobilizations-edit').default(store),
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),
-        require('./mobilizations-edit').default(store),
+        require('./mobilizations-settings-analytics').default(store),
         require('./mobilizations-settings-basics').default(store),
 
         require('~common/routes/not-found').default

@@ -50,9 +50,9 @@ export default requiredLogin => ({})
 //   </Route>
 //   <Route path='/mobilizations/:mobilization_id' component={MobilizationEditContainer}>                 <~ Migrated
 //     <Route path='/edit' component={MobilizationPage} />                                                <~ Migrated
-//     <Route component={MobilizationSettingsContainer}>                                                  <~ Migration In Progress
-//       <Route path='/basics' component={MobilizationBasicsPage} />                                      <~ Migration In Progress
-//       <Route path='/analytics' component={MobilizationAnalyticsPage} />
+//     <Route component={MobilizationSettingsContainer}>                                                  <~ Migrated
+//       <Route path='/basics' component={MobilizationBasicsPage} />                                      <~ Migrated
+//       <Route path='/analytics' component={MobilizationAnalyticsPage} />                                <~ Migration In Progress
 //       <Route path='/sharing' component={MobilizationSharingPage} />
 //       <Route path='/customDomain' component={MobilizationDomainPage} />
 //     </Route>

@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import MobilizationBasicsPage from '~routes/application/mobilizations-settings-basics/page'
 
-describe('client/mobilizations/pages/settings/mobilization-basics-page', () => {
+describe('routes/application/mobilizations-settings-basics/page', () => {
   let wrapper
   const props = {}
 

@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationAnalyticsPage } from '~mobilizations/pages/settings/mobilization-analytics-page'
+import MobilizationAnalyticsPage from '~routes/application/mobilizations-settings-analytics/page'
 
-describe('client/mobilizations/pages/settings/mobilization-analytics-page', () => {
+describe('routes/application/mobilizations-settings-analytics/page', () => {
   let wrapper
   const props = {
     fields: {
