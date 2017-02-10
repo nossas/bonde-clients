@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationSharingPage } from '~mobilizations/pages/settings/mobilization-sharing-page'
+import MobilizationSharingPage from '~routes/application/mobilizations-settings-sharing/page'
 
-describe('client/mobilizations/pages/settings/mobilization-sharing-page', () => {
+describe('routes/application/mobilizations-settings-sharing/page', () => {
   let wrapper
   const props = {
     fields: {

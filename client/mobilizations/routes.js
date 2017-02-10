@@ -52,8 +52,8 @@ export default requiredLogin => ({})
 //     <Route path='/edit' component={MobilizationPage} />                                                <~ Migrated
 //     <Route component={MobilizationSettingsContainer}>                                                  <~ Migrated
 //       <Route path='/basics' component={MobilizationBasicsPage} />                                      <~ Migrated
-//       <Route path='/analytics' component={MobilizationAnalyticsPage} />                                <~ Migration In Progress
-//       <Route path='/sharing' component={MobilizationSharingPage} />
+//       <Route path='/analytics' component={MobilizationAnalyticsPage} />                                <~ Migrated
+//       <Route path='/sharing' component={MobilizationSharingPage} />                                    <~ Migrated
 //       <Route path='/customDomain' component={MobilizationDomainPage} />
 //     </Route>
 //     {blocksCreateRoutes()}
