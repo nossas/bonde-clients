@@ -25,6 +25,7 @@ export default store => ({
         require('./mobilizations-new').default(store),
         require('./mobilizations-settings-analytics').default(store),
         require('./mobilizations-settings-basics').default(store),
+        require('./mobilizations-settings-domain').default(store),
         require('./mobilizations-settings-sharing').default(store),
 
         require('~common/routes/not-found').default

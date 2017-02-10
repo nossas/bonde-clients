@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { MobilizationDomainPage } from '~mobilizations/pages/settings/mobilization-domain-page'
+import MobilizationDomainPage from '~routes/application/mobilizations-settings-domain/page'
 
-describe('client/mobilizations/pages/settings/mobilization-domain-page', () => {
+describe('routes/application/mobilizations-settings-domain/page', () => {
   let wrapper
   const props = {
     mobilization: {
