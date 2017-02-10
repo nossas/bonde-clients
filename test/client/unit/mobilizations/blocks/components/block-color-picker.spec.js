@@ -10,7 +10,8 @@ const props = {
   props: {
     mobilization: { id: 1 },
     block: {},
-    dispatch: () => {}
+    blockUpdate: () => {},
+    setEditionMode: () => {}
   },
   state: {
     bgClass: 'bgClass',

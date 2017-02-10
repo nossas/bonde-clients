@@ -127,11 +127,11 @@ describe('BlockReducer', () => {
         action = { type: c.REQUEST_ASYNC_BLOCK_CREATE }
         newState = reducers(initialState, action)
       })
-      it('should set loaded property to false', () => {
+      it('should set requesting property to true', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(false)
+          .that.deep.equals(true)
       })
     })
 
@@ -152,11 +152,11 @@ describe('BlockReducer', () => {
           .that.is.an('array')
           .that.deep.equals([action.payload])
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
 
@@ -177,11 +177,11 @@ describe('BlockReducer', () => {
           .that.is.an('string')
           .that.deep.equals(action.payload)
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
   })
@@ -195,11 +195,11 @@ describe('BlockReducer', () => {
         action = { type: c.REQUEST_ASYNC_BLOCK_UPDATE }
         newState = reducers(initialState, action)
       })
-      it('should set loaded property to false', () => {
+      it('should set requesting property to true', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(false)
+          .that.deep.equals(true)
       })
     })
 
@@ -220,11 +220,11 @@ describe('BlockReducer', () => {
           .that.is.an('array')
           .that.deep.equals([action.payload])
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
 
@@ -245,11 +245,11 @@ describe('BlockReducer', () => {
           .that.is.an('string')
           .that.deep.equals(action.payload)
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
   })
@@ -331,11 +331,11 @@ describe('BlockReducer', () => {
         action = { type: c.REQUEST_ASYNC_BLOCK_DESTROY }
         newState = reducers(initialState, action)
       })
-      it('should set loaded property to false', () => {
+      it('should set requesting property to true', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(false)
+          .that.deep.equals(true)
       })
     })
 
@@ -356,11 +356,11 @@ describe('BlockReducer', () => {
           .that.is.an('array')
           .that.deep.equals([{ id: 1 }, { id: 3 }])
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
 
@@ -381,11 +381,11 @@ describe('BlockReducer', () => {
           .that.is.an('string')
           .that.deep.equals(action.payload)
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
   })
@@ -399,11 +399,11 @@ describe('BlockReducer', () => {
         action = { type: c.REQUEST_ASYNC_BLOCK_MOVE_UP }
         newState = reducers(initialState, action)
       })
-      it('should set loaded property to false', () => {
+      it('should set requesting property to true', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(false)
+          .that.deep.equals(true)
       })
     })
 
@@ -424,11 +424,11 @@ describe('BlockReducer', () => {
           .that.is.an('array')
           .that.deep.equals([{ id: 2 }, { id: 1 }, { id: 3 }])
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
 
@@ -449,11 +449,11 @@ describe('BlockReducer', () => {
           .that.is.an('string')
           .that.deep.equals(action.payload)
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
   })
@@ -467,11 +467,11 @@ describe('BlockReducer', () => {
         action = { type: c.REQUEST_ASYNC_BLOCK_MOVE_DOWN }
         newState = reducers(initialState, action)
       })
-      it('should set loaded property to false', () => {
+      it('should set requesting property to true', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(false)
+          .that.deep.equals(true)
       })
     })
 
@@ -492,11 +492,11 @@ describe('BlockReducer', () => {
           .that.is.an('array')
           .that.deep.equals([{ id: 1 }, { id: 3 }, { id: 2 }])
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
 
@@ -517,11 +517,11 @@ describe('BlockReducer', () => {
           .that.is.an('string')
           .that.deep.equals(action.payload)
       })
-      it('should set loaded property to true', () => {
+      it('should set requesting property to false', () => {
         expect(newState)
-          .to.have.property('loaded')
+          .to.have.property('requesting')
           .that.is.an('boolean')
-          .that.deep.equals(true)
+          .that.deep.equals(false)
       })
     })
   })

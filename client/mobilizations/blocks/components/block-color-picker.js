@@ -111,7 +111,8 @@ BlockColorPicker.propTypes = {
   props: PropTypes.shape({
     mobilization: PropTypes.object,
     block: PropTypes.object,
-    blockUpdate: PropTypes.func
+    blockUpdate: PropTypes.func,
+    setEditionMode: PropTypes.func
   }),
   state: PropTypes.shape({
     bgClass: PropTypes.string,

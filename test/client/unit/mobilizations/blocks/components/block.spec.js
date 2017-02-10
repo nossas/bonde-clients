@@ -36,8 +36,7 @@ describe('Block', () => {
         editingWidget: false,
         bgClass: block.bg_class,
         bgImage: block.bg_image,
-        uploadProgress: null,
-        loading: false
+        uploadProgress: null
       })
     })
   })

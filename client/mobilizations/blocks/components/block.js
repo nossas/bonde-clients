@@ -15,10 +15,8 @@ import {
 
 import { generateClassName, generateStyle } from '../utils'
 
-
 class Block extends Component {
-
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
     this.state = {
       hasMouseOver: false,
@@ -26,11 +24,11 @@ class Block extends Component {
       editingWidget: false,
       bgClass: props.block.bg_class,
       bgImage: props.block.bg_image,
-      uploadProgress: null,
+      uploadProgress: null
     }
   }
 
-  onChange(state) {
+  onChange (state) {
     this.setState({ ...this.state, ...state })
   }
 
