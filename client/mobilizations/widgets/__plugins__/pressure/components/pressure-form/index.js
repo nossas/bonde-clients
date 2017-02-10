@@ -7,7 +7,7 @@ import { isValidEmail } from '~utils/validation-helper'
 // Current module dependencies
 if (process.env.BROWSER) require('./index.scss')
 
-import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 
 // TODO: Reusable Input
 const controlClassname = 'px3 py1'

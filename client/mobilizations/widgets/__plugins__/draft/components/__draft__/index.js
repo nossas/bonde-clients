@@ -4,12 +4,6 @@ import React, { PropTypes, Component } from 'react'
 import { createEditorContent } from '~components/editor-draft-js'
 import { Loading } from '~components/await'
 
-<<<<<<< HEAD
-=======
-// Parent module dependencies
-import { actions as WidgetActions } from '~mobilizations/widgets'
-
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
 // Current module dependencies
 import { DraftWidgetButton } from '../../components'
 if (process.env.BROWSER) require('./index.scss')
@@ -23,11 +17,7 @@ class Draft extends Component {
   }
 
   updateKind (kind) {
-<<<<<<< HEAD
     const { widgetUpdate, widget: widgetOriginal } = this.props
-=======
-    const { dispatch, widget: widgetOriginal } = this.props
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
     let widget = { ...widgetOriginal, kind }
     let assignments = {}
 
@@ -60,11 +50,7 @@ class Draft extends Component {
     }
     Object.assign(widget, assignments)
     this.setState({ loading: true })
-<<<<<<< HEAD
     widgetUpdate(widget)
-=======
-    dispatch(WidgetActions.asyncWidgetUpdate(widget))
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   }
 
   render () {
@@ -91,15 +77,9 @@ class Draft extends Component {
 }
 
 Draft.propTypes = {
-<<<<<<< HEAD
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   widgetUpdate: PropTypes.func,
-=======
-  dispatch: PropTypes.func.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
   editable: PropTypes.bool.isRequired,
   auth: PropTypes.shape({
     user: PropTypes.shape({

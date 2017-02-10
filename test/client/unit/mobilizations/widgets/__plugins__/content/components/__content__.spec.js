@@ -15,11 +15,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
     editable: true,
     onEdit: () => {},
     onCancelEdit: () => {},
-<<<<<<< HEAD
     widgetUpdate: () => {},
-=======
-    dispatch: () => {},
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316
     auth: {}
   }
 

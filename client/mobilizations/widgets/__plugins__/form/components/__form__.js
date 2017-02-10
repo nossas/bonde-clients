@@ -12,7 +12,7 @@ import { isValidEmail } from '~utils/validation-helper'
 
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
-import AnalyticsEvents from '../../../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 
 // Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'

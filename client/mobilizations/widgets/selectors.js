@@ -12,8 +12,5 @@ export const getBlockWidgets = ({ widgets, block }) => widgets.filter(
 export const isLoaded = state => state.widgets.list.loaded
 
 export const isLoading = state => state.widgets.list.loading
-<<<<<<< HEAD
 
 export const isSaving = state => state.widgets.list.saving
-=======
->>>>>>> d93940b3... Merge app structure of branch develop into .old directory #316

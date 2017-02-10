@@ -1,9 +1,9 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
 
-import AnalyticsEvents from '../../../modules/widgets/utils/analytics-events'
+import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 
-describe.skip('app/modules/widgets/utils/analytics-events', () => {
+describe.skip('client/mobilizations/widgets/utils/analytics-events', () => {
   let sandbox
 
   before(() => {
