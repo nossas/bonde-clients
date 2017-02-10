@@ -4,16 +4,6 @@ import classnames from 'classnames'
 // Global module dependencies
 import { DropdownMenu, DropdownMenuItem } from '~components/dropdown-menu'
 
-const displayDropDownMenu = ({ state, props }) => {
-  return (
-    state.hasMouseOver &&
-    !state.editingBackground &&
-    !state.editingWidget &&
-    !props.blockIsRequest &&
-    props.editable
-  )
-}
-
 const BlockDropdownMenu = ({ state, props, onChange }) => {
   const {
     canMoveUp,
@@ -27,7 +17,13 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
     <DropdownMenu
       wrapperClassName={classnames(
         'm1 absolute bottom-0 right-0 z2',
-        {'display-none': !displayDropdownMenu({ state, props })}
+        {'display-none': !(
+          state.hasMouseOver &&
+          !state.editingBackground &&
+          !state.editingWidget &&
+          !props.blockIsRequest &&
+          props.editable
+        )}
       )}
       menuClassName='bg-darken-4 rounded white right-0 top-0 mr4'
       buttonClassName='btn bg-darken-4 white rounded'
@@ -38,7 +34,7 @@ const BlockDropdownMenu = ({ state, props, onChange }) => {
           onChange({ editingBackground: true })
           props.setEditionMode(true)
         }}
-        className="btn"
+        className='btn'
       >
         <span>
           <i className='fa fa-picture-o' /> Alterar fundo
@@ -100,7 +96,7 @@ BlockDropdownMenu.propTypes = {
   state: PropTypes.shape({
     hasMouseOver: PropTypes.bool,
     editingBackground: PropTypes.bool,
-    editingWidget: PropTypes.bool,
+    editingWidget: PropTypes.bool
   }),
   props: PropTypes.shape({
     editable: PropTypes.bool,
