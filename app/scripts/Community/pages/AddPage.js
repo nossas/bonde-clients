@@ -24,7 +24,7 @@ class AddPage extends Component {
     return (
       <div>
         <h1>Crie uma comunidade</h1>
-        <h2>Comunidades do Nossas são grupos de ação que trabalham juntos por uma causa.</h2>
+        <h2>Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.</h2>
         <FormRedux
           nosubmit
           className="bg-white rounded"

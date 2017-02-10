@@ -29,7 +29,7 @@ export default redirectUrl => {
       return (
         <div>
           <div className="col-8 mb3 mx-auto">
-            <img src={logo} alt="Logo Nossas" />
+            <img src={logo} alt="Logo Bonde" />
           </div>
           <FormRedux nosubmit className="bg-white rounded" onSubmit={login} {...formProps}>
             <FormGroup controlId="emailId" {...email}>

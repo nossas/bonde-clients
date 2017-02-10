@@ -23,7 +23,7 @@ class RegisterPage extends Component {
     const { register, fields: { name, last_name, email, password, password2 }, ...formProps } = this.props
     return (
       <div>
-        <h1>Crie sua conta no Nossas.</h1>
+        <h1>Crie sua conta no Bonde.</h1>
         <FormRedux
           nosubmit
           className="bg-white rounded"

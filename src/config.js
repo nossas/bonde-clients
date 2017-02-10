@@ -4,7 +4,7 @@ module.exports = {
     port: 3001,
     apiPort: 3030,
     app: {
-      name: 'Reboo Nossas Cidades Development'
+      name: 'Bonde Development'
     }
   },
   staging: {
@@ -12,7 +12,7 @@ module.exports = {
     port: 5000,
     apiPort: 3030,
     app: {
-      name: 'Reboo Nossas Cidades Staging'
+      name: 'Bonde Staging'
     }
   },
   production: {
@@ -20,7 +20,7 @@ module.exports = {
     port: 5000,
     apiPort: 3030,
     app: {
-      name: 'Reboo Nossas Cidades Production'
+      name: 'Bonde Production'
     }
   }
 }[process.env.NODE_ENV || 'development'];
