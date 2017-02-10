@@ -45,7 +45,7 @@ export default redirectUrl => {
             </SubmitButton>
             <FormError className="mt2" />
           </FormRedux>
-          <p className="white center">Ainda não é cadastrado? <Link to={Paths.createAccount()}><br>Clique para criar uma conta.</Link></p>
+          <p className="white center">Ainda não é cadastrado? <Link to={Paths.createAccount()}><br />Clique para criar uma conta.</Link></p>
         </div>
       )
     }
