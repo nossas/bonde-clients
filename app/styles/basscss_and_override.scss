@@ -84,6 +84,7 @@ form .button { height: 3rem; }
 .lavender-pink      { color: $lavenderPink; }
 .darken-medium-blue { color: $darkenMediumBlue; }
 .atomic             { color: $atomic; }
+.blacker            { color: $blacker; }
 
 // Additional Background Colors
 .bg-lightgray          { background-color: $lightGray; }
@@ -96,7 +97,7 @@ form .button { height: 3rem; }
 .bg-whisper            { background-color: $whisper; }
 .bg-gray95             { background-color: $gray95; }
 .bg-darkengray         { background-color: $darkenGray; }
-.bg-pagenta            { background-color: $pagenta; }
+.bg-pagenta            { background-color: $blacker; }
 .bg-lavender-pink      { background-color: $lavenderPink; }
 .bg-darken-medium-blue { background-color: $darkenMediumBlue; }
 .bg-atomic             { background-color: $atomic; }
@@ -112,7 +113,7 @@ form .button { height: 3rem; }
 .border-whisper            { border-color: $whisper; }
 .border-gray95             { border-color: $gray95; }
 .border-darkengray         { border-color: $darkenGray; }
-.border-pagenta            { border-color: $pagenta; }
+.border-pagenta            { border-color: $blacker; }
 .border-lavender-pink      { border-color: $lavenderPink; }
 .border-darken-medium-blue { border-color: $darkenMediumBlue; }
 .border-atomic             { border-color: $atomic; }

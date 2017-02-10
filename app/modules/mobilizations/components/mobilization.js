@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import DocumentMeta from 'react-document-meta'
+import { Link } from 'react-router'
 
 import { Navbar } from './navbar'
 import Block from '../../mobilizations/blocks/components'
+
+import logoIcon from '../../../components/Navigation/Sidenav/logo-icon-no-border.svg'
 
 const Mobilization = props => {
   const {
@@ -51,6 +54,25 @@ const Mobilization = props => {
             {...props}
           />
         ))}
+        <div className="col-10 mx-auto">
+          <div className="col col-10">
+            <a
+              href="http://www.bonde.org/"
+              style={{ 'color': '#000', 'text-decoration': 'none', 'line-height': '85px' }}
+              target="_blank">
+              Feito pra causar. Feito com
+              <strong> BONDE.</strong>
+            </a>
+          </div>
+          <div className="col col-2">
+            <a
+              href="http://www.bonde.org/"
+              className="right my2"
+              target="_blank">
+              <img src={logoIcon} alt="B"   style={{ width: '45px' }} />
+            </a>
+          </div>
+        </div>
       </div>
       {/* render document met to show mobilzation */}
       {!editable ? (

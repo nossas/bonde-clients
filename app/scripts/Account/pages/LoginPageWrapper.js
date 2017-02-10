@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { decorate } from 'react-mixin'
-import { Navigation } from 'react-router'
+import { Navigation, Link } from 'react-router'
 
 import * as AccountActions from '../actions'
 import logo from '../assets/logo-nossas.svg'
@@ -29,7 +29,7 @@ export default redirectUrl => {
       return (
         <div>
           <div className="col-8 mb3 mx-auto">
-            <img src={logo} alt="Logo Nossas" />
+            <img src={logo} alt="Logo Bonde" />
           </div>
           <FormRedux nosubmit className="bg-white rounded" onSubmit={login} {...formProps}>
             <FormGroup controlId="emailId" {...email}>
@@ -45,6 +45,7 @@ export default redirectUrl => {
             </SubmitButton>
             <FormError className="mt2" />
           </FormRedux>
+          <p className="white center">Ainda não é cadastrado? <Link to={Paths.createAccount()}><br />Clique para criar uma conta.</Link></p>
         </div>
       )
     }

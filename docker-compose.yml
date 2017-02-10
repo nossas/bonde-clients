@@ -75,20 +75,20 @@ services:
       # We'll include a link to the 'db' (postgres) container, making it visible from the container
       # using the 'postgres.local' hostname (which is not necessary, but I'm doing it here to
       # illustrate that you can play with this):
-      - postgres:db.local
+      - postgres:db.devel
 
       # We'll include a link to the 'keyval' (redis) container, making it
       # visible from the container using the 'keyval.local' hostname:
-      - redis:keyval.local
+      - redis:keyval.devel
 
     environment: &app_environment
       # The postgres database URL:
-      DATABASE_URL: postgres://postgres:3x4mpl3@db.local:5432/reboo
+      DATABASE_URL: postgres://postgres:3x4mpl3@db.devel:5432/bonde
 
       QUEUE: "*"
 
       # The redis URL:
-      REDIS_URL: redis://keyval.local:6379
+      REDIS_URL: redis://keyval.devel:6379
 
       # Sidekiq configuration:
       WEB_CONCURRENCY: 1
@@ -116,7 +116,7 @@ services:
     environment:
       <<: *app_environment
       # PostgreSQL Test Database:
-      DATABASE_URL: postgres://postgres:3x4mpl3@db.local:5432/reboo_test
+      DATABASE_URL: postgres://postgres:3x4mpl3@db.devel:5432/bonde_test
       # Run the app in the 'test' environment, instead of the default 'developent'
       RACK_ENV: test
       RAILS_ENV: test
@@ -125,7 +125,7 @@ services:
     depends_on:
       - api
     #command: './node_modules/.bin/concurrently --kill-others "node webpack/webpack-dev-server.js" "node ./bin/server.js"'
-    command: yarn run dev
+    command: npm run dev
     volumes:
       - ./:/code:Z
       - node-modules:/code/node_modules
@@ -137,9 +137,9 @@ services:
       dockerfile: Dockerfile.dev
     restart: always
     links:
-      - api:api.reboo.local
-      - redis:keyval.local
+      - api:api.bonde.devel
+      - redis:keyval.devel
     extra_hosts:
-      - "app.reboo.local:127.0.0.1"
+      - "app.bonde.devel:127.0.0.1"
     env_file:
       - .env

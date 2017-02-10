@@ -68,6 +68,10 @@ export function editAccount () {
   return `/account/edit`
 }
 
+export function createAccount () {
+  return `/register`
+}
+
 //
 // Interface to modules paths
 //
