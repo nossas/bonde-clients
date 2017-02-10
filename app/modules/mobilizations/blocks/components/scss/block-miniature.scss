@@ -26,12 +26,12 @@
     }
 
     &.is-active {
-      border-color: $pagenta;
+      border-color: $blacker;
       border-width: 3px;
 
       .lines {
         .line {
-          background-color: $lavenderPink;
+          background-color: $darkGray;
         }
       }
     }
