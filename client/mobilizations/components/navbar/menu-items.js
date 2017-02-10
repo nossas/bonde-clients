@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { DropDownMenu, NavbarEditionWrapper } from '../../../../scripts/components'
+import { DropdownMenu } from '~components/dropdown-menu'
+import { NavbarEditionWrapper } from '~components/navigation/navbar'
 
 const MenuItems = ({ blocks, mobile, ...menuProps }) => {
   const items = blocks.map(block => (
@@ -22,7 +23,7 @@ const MenuItems = ({ blocks, mobile, ...menuProps }) => {
     </div>
   ) : (
     <div className='lg-hide'>
-      <DropDownMenu
+      <DropdownMenu
         wrapperClassName='absolute right-0 top-0 m1'
         buttonClassName='btn bg-darken-4 white rounded'
         menuClassName='rounded bg-darken-4 white top-0 right-0'
@@ -30,7 +31,7 @@ const MenuItems = ({ blocks, mobile, ...menuProps }) => {
         icon='bars'
       >
         {items}
-      </DropDownMenu>
+      </DropdownMenu>
     </div>
   )
 }
@@ -47,3 +48,4 @@ MenuItems.propTypes = {
 }
 
 export default MenuItems
+MenuItems.displayName = 'MenuItems'

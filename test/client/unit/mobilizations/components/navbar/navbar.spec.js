@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { Navbar } from '~mobilizations/components/navbar'
 
@@ -28,7 +28,7 @@ describe('client/mobilizations/components/navbar/navbar', () => {
   }
 
   beforeEach(() => {
-    wrapper = mount(<Navbar {...props} />)
+    wrapper = shallow(<Navbar {...props} />)
   })
 
   it('renders absolute layout by default', () => {
@@ -36,8 +36,8 @@ describe('client/mobilizations/components/navbar/navbar', () => {
   })
 
   it('should render desktop and mobile version', () => {
-    expect(wrapper.find('div.lg-show.center').length).to.equal(1)
-    expect(wrapper.find('div.lg-hide').length).to.equal(1)
+    expect(wrapper.find('MenuDesktop').length).to.equal(1)
+    expect(wrapper.find('MenuMobile').length).to.equal(1)
   })
 
   describe('when is editable', () => {

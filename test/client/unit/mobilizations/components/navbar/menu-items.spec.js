@@ -2,16 +2,16 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { MenuItems } from './'
+import { MenuItems } from '~mobilizations/components/navbar'
 
-describe('app/modules/mobilizations/components/navbar/menu-items', () => {
+describe('client/mobilizations/components/navbar/menu-items', () => {
   let wrapper
   const props = {
     blocks: [{ id: 1 }, { id: 2 }],
     mobilization: { id: 1 }
   }
 
-  before(() => {
+  beforeAll(() => {
     wrapper = shallow(<MenuItems {...props} />)
   })
 
@@ -36,11 +36,11 @@ describe('app/modules/mobilizations/components/navbar/menu-items', () => {
   })
 
   describe('mobile prop enabled', () => {
-    before(() => {
+    beforeAll(() => {
       wrapper = shallow(<MenuItems {...props} mobile />)
     })
 
-    after(() => {
+    afterAll(() => {
       wrapper = wrapper.setProps(props)
     })
 
@@ -50,8 +50,8 @@ describe('app/modules/mobilizations/components/navbar/menu-items', () => {
       })
     })
 
-    it('should render <DropDownMenu /> component properly', () => {
-      expect(wrapper.find('DropDownMenu')).to.have.length(1)
+    it('should render <DropdownMenu /> component properly', () => {
+      expect(wrapper.find('DropdownMenu')).to.have.length(1)
     })
 
     it('should render mobile version', () => {

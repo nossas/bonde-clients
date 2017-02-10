@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuItems } from './'
+import { MenuItems } from '~mobilizations/components/navbar'
 
 const MenuMobile = props => <MenuItems {...props} mobile />
 
