@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import MobilizationSharingPage from '~routes/application/mobilizations-settings-sharing/page'
+import MobilizationsSettingsSharingPage from '~routes/application/mobilizations-settings-sharing/page'
 
 describe('routes/application/mobilizations-settings-sharing/page', () => {
   let wrapper
@@ -16,7 +16,7 @@ describe('routes/application/mobilizations-settings-sharing/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationSharingPage {...props} />)
+    wrapper = shallow(<MobilizationsSettingsSharingPage {...props} />)
   })
 
   describe('#render', () => {

@@ -1,11 +1,10 @@
 import React from 'react'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { BrowsableList, BrowsableListItem } from '~components/navigation/browsable-list'
 import { PageTabLayout } from '~mobilizations/components'
 
-const TemplateChoosePage = ({
+const TemplatesChoosePage = ({
   mobilization,
   templatesGlobalLength,
   templatesCustomLength,
@@ -37,4 +36,4 @@ const TemplateChoosePage = ({
   </PageTabLayout>
 )
 
-export default TemplateChoosePage
+export default TemplatesChoosePage

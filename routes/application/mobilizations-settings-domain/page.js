@@ -1,13 +1,10 @@
 import React from 'react'
 
-// Global module dependencies
 import { FormGroup, ControlLabel, FormControl } from '~components/forms'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-
-// Current module dependencies
 import { SettingsMenu, MobilizationSettingsForm } from '~mobilizations/components'
 
-export const MobilizationDomainPage = props => {
+const MobilizationsSettingsDomainPage = props => {
   const { mobilization, fields: { custom_domain: customDomain }, ...formProps } = props
 
   return (
@@ -16,8 +13,8 @@ export const MobilizationDomainPage = props => {
       <SettingsPageContentLayout>
         <MobilizationSettingsForm {...formProps}>
           <p className='h5'>
-            Você pode personalizar o endereço da sua mobilização caso já tenha um domínio. Preencha o
-            campo abaixo e clique em Salvar.
+            Você pode personalizar o endereço da sua mobilização caso já tenha um domínio.
+            Preencha o campo abaixo e clique em Salvar.
           </p>
           <FormGroup controlId='customDomain' {...customDomain}>
             <ControlLabel>Domínio personalizado</ControlLabel>
@@ -48,4 +45,4 @@ export const MobilizationDomainPage = props => {
   )
 }
 
-export default MobilizationDomainPage
+export default MobilizationsSettingsDomainPage

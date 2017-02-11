@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import TemplateChooseCustomPage from '~routes/application/templates-choose-custom/page'
+import TemplatesChooseCustomPage from '~routes/application/templates-choose-custom/page'
 
 describe('routes/application/templates-choose-custom/page', () => {
   let wrapper
@@ -12,7 +12,7 @@ describe('routes/application/templates-choose-custom/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<TemplateChooseCustomPage {...props} />)
+    wrapper = shallow(<TemplatesChooseCustomPage {...props} />)
   })
 
   describe('#render', () => {

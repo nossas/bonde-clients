@@ -1,10 +1,12 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 import { isValidDomain } from '~utils/validation-helper'
-import MobilizationDomainPage from './page'
+
+import MobilizationsSettingsDomainPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -30,8 +32,6 @@ const mapActionCreatorsToProps = {
   submit: MobilizationActions.asyncUpdate
 }
 
-const fields = ['id', 'custom_domain']
-
 const validate = values => {
   const errors = {}
   if (values.custom_domain && !isValidDomain(values.custom_domain)) {
@@ -44,8 +44,8 @@ export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
     reduxForm({
       form: 'mobilizationDomainForm',
-      fields,
+      fields: ['id', 'custom_domain'],
       validate
-    })(MobilizationDomainPage)
+    })(MobilizationsSettingsDomainPage)
   )
 )

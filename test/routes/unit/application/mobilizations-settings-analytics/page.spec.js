@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import MobilizationAnalyticsPage from '~routes/application/mobilizations-settings-analytics/page'
+import MobilizationsSettingsAnalyticsPage from '~routes/application/mobilizations-settings-analytics/page'
 
 describe('routes/application/mobilizations-settings-analytics/page', () => {
   let wrapper
@@ -14,7 +14,7 @@ describe('routes/application/mobilizations-settings-analytics/page', () => {
   const context = { router: {} }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationAnalyticsPage {...props} />, { context })
+    wrapper = shallow(<MobilizationsSettingsAnalyticsPage {...props} />, { context })
   })
 
   describe('#render', () => {

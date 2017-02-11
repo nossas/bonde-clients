@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import MobilizationListPage from '~routes/application/mobilizations-list/page'
+import MobilizationsListPage from '~routes/application/mobilizations-list/page'
 
 describe('routes/application/mobilization-list/page', () => {
   let wrapper
@@ -18,7 +18,7 @@ describe('routes/application/mobilization-list/page', () => {
   const context = { router: {} }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationListPage {...props} />, { context })
+    wrapper = shallow(<MobilizationsListPage {...props} />, { context })
   })
 
   describe('#render', () => {

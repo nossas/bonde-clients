@@ -12,7 +12,7 @@ import * as arrayUtil from '~utils/array'
 import { Mobilization } from '~mobilizations/components'
 
 // @revert @reactMixin.decorate(Navigation)
-export class MobilizationEditPage extends Component {
+export class MobilizationsEditPage extends Component {
   // componentDidMount () {
   //   const { mobilization, blocksIsLoaded, blocks } = this.props
   //   if (blocksIsLoaded && blocks.length === 0) {
@@ -44,7 +44,7 @@ export class MobilizationEditPage extends Component {
   }
 }
 
-MobilizationEditPage.propTypes = {
+MobilizationsEditPage.propTypes = {
   mobilization: PropTypes.shape({
     id: PropTypes.number.isRequired,
     header_font: PropTypes.string,
@@ -59,4 +59,4 @@ MobilizationEditPage.propTypes = {
   widgetsIsLoaded: PropTypes.bool.isRequired
 }
 
-export default MobilizationEditPage
+export default MobilizationsEditPage

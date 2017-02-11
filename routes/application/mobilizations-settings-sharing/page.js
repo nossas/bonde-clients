@@ -16,7 +16,7 @@ if (process.env.BROSER) {
 }
 import { SettingsMenu, MobilizationSettingsForm } from '~mobilizations/components'
 
-const MobilizationSharingPage = props => {
+const MobilizationsSettingsSharingPage = props => {
   const {
     fields: {
       facebook_share_image: facebookShareImage,
@@ -127,4 +127,4 @@ const MobilizationSharingPage = props => {
   )
 }
 
-export default MobilizationSharingPage
+export default MobilizationsSettingsSharingPage

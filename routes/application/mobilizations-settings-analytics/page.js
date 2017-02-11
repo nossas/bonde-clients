@@ -4,7 +4,7 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layou
 import { FormGroup, FormControl, ControlLabel } from '~components/forms'
 import { SettingsMenu, MobilizationSettingsForm } from '~mobilizations/components'
 
-const MobilizationAnalyticsPage = props => {
+const MobilizationsSettingsAnalyticsPage = props => {
   const { fields: { google_analytics_code: googleAnalyticsCode }, ...formProps } = props
   return (
     <SettingsPageLayout>
@@ -47,4 +47,4 @@ const MobilizationAnalyticsPage = props => {
   )
 }
 
-export default MobilizationAnalyticsPage
+export default MobilizationsSettingsAnalyticsPage

@@ -1,7 +1,6 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import {
   SettingsPageLayout,
@@ -11,7 +10,7 @@ import {
 import { Avatar, Name } from '~mobilizations/components/list/items'
 import { FormRedux, FormGroup, FormControl, ControlLabel } from '~components/forms'
 
-const TemplateCreatePage = ({ mobilization, fields: { name, goal }, ...formProps }) => (
+const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, ...formProps }) => (
   <SettingsPageLayout>
     <SettingsPageMenuLayout
       title='Crie um template a partir da mobilização'
@@ -67,4 +66,4 @@ const TemplateCreatePage = ({ mobilization, fields: { name, goal }, ...formProps
   </SettingsPageLayout>
 )
 
-export default TemplateCreatePage
+export default TemplatesCreatePage

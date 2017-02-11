@@ -1,10 +1,12 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
+
 import * as MobilizationActions from '~mobilizations/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
-import TemplateChoosePage from './page'
+
+import TemplatesChoosePage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -27,4 +29,4 @@ const mapStateToProps = state => ({
   templatesCustomLength: TemplateSelectors.getCustomTemplates(state).length
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(TemplateChoosePage))
+export default provideHooks(redial)(connect(mapStateToProps)(TemplatesChoosePage))

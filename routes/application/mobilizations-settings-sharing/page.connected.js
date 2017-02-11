@@ -1,9 +1,11 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
-import MobilizationSharingPage from './page'
+
+import MobilizationsSettingsSharingPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -17,14 +19,6 @@ const redial = {
   }
 }
 
-const fields = [
-  'id',
-  'facebook_share_image',
-  'facebook_share_title',
-  'facebook_share_description',
-  'twitter_share_text'
-]
-
 const mapStateToProps = state => {
   const mobilization = MobilizationSelectors.getCurrent(state)
   return {
@@ -37,11 +31,19 @@ const mapActionCreatorsToProps = {
   submit: MobilizationActions.asyncUpdate
 }
 
+const fields = [
+  'id',
+  'facebook_share_image',
+  'facebook_share_title',
+  'facebook_share_description',
+  'twitter_share_text'
+]
+
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
     reduxForm({
       form: 'mobilizationSharingForm',
       fields
-    })(MobilizationSharingPage)
+    })(MobilizationsSettingsSharingPage)
   )
 )

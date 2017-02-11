@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 import Sidebar from '~components/navigation/sidebar'
-import MobilizationContainer from './container'
+
+import ApplicationContainer from './container'
 
 const redial = {
   fetch: ({ dispatch, getState }) => {
@@ -22,5 +23,5 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, MobilizationActions)(MobilizationContainer)
+  connect(mapStateToProps, MobilizationActions)(ApplicationContainer)
 )

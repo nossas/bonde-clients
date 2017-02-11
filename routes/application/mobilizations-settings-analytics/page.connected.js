@@ -1,10 +1,12 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+
 import { isValidCodeGA } from '~utils/validation-helper'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
-import MobilizationAnalyticsPage from './page'
+
+import MobilizationsSettingsAnalyticsPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -16,16 +18,6 @@ const redial = {
     )
     return Promise.all(promises)
   }
-}
-
-const fields = ['id', 'google_analytics_code']
-
-const validate = values => {
-  const errors = {}
-  if (values.google_analytics_code && !isValidCodeGA(values.google_analytics_code)) {
-    errors.google_analytics_code = 'Informe uma ID válida'
-  }
-  return errors
 }
 
 const mapStateToProps = state => {
@@ -40,12 +32,20 @@ const mapActionCreatorsToProps = {
   submit: MobilizationActions.asyncUpdate
 }
 
+const validate = values => {
+  const errors = {}
+  if (values.google_analytics_code && !isValidCodeGA(values.google_analytics_code)) {
+    errors.google_analytics_code = 'Informe uma ID válida'
+  }
+  return errors
+}
+
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
     reduxForm({
       form: 'mobilizationAnalyticsForm',
-      fields,
+      fields: ['id', 'google_analytics_code'],
       validate
-    })(MobilizationAnalyticsPage)
+    })(MobilizationsSettingsAnalyticsPage)
   )
 )

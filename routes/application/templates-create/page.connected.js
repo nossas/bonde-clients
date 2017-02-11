@@ -6,7 +6,7 @@ import * as MobilizationActions from '~mobilizations/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 
-import TemplateCreatePage from './page'
+import TemplatesCreatePage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -19,8 +19,6 @@ const redial = {
     return Promise.all(promises)
   }
 }
-
-const fields = ['name', 'goal', 'mobilization_id', 'global']
 
 const mapStateToProps = state => {
   const mobilization = MobilizationSelectors.getCurrent(state)
@@ -39,6 +37,9 @@ const mapActionCreatorsToProps = {
 
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({ form: 'templateCreateForm', fields })(TemplateCreatePage)
+    reduxForm({
+      form: 'templateCreateForm',
+      fields: ['name', 'goal', 'mobilization_id', 'global']
+    })(TemplatesCreatePage)
   )
 )

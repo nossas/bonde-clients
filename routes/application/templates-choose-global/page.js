@@ -5,7 +5,7 @@ import * as paths from '~client/paths'
 import { PageTabLayout } from '~mobilizations/components'
 import { TemplateSelectableList } from '~mobilizations/templates/components'
 
-const TemplateChooseGlobalPage = ({
+const TemplatesChooseGlobalPage = ({
   mobilization,
   createMobilizationFromTemplate,
   location,
@@ -29,4 +29,4 @@ const TemplateChooseGlobalPage = ({
   </PageTabLayout>
 )
 
-export default TemplateChooseGlobalPage
+export default TemplatesChooseGlobalPage

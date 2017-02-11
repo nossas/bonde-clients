@@ -2,7 +2,7 @@ import React from 'react'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 import { SettingsMenu, MobilizationBasicsForm } from '~mobilizations/components'
 
-const MobilizationBasicsPage = props => (
+const MobilizationsSettingsBasicsPage = props => (
   <SettingsPageLayout>
     <SettingsMenu {...props} />
     <SettingsPageContentLayout>
@@ -11,4 +11,4 @@ const MobilizationBasicsPage = props => (
   </SettingsPageLayout>
 )
 
-export default MobilizationBasicsPage
+export default MobilizationsSettingsBasicsPage

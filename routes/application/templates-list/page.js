@@ -2,21 +2,28 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-// Global module dependencies
-import {
-  SettingsPageLayout, SettingsPageMenuLayout, SettingsPageContentLayout
-} from '~components/layout'
 import * as paths from '~client/paths'
 import EmptyList from '~components/empty-list'
-
-// Parent module dependencies
+import {
+  SettingsPageLayout,
+  SettingsPageMenuLayout,
+  SettingsPageContentLayout
+} from '~components/layout'
 import { PageHeader } from '~mobilizations/components'
 import List from '~mobilizations/components/list'
 import {
-  Item, Avatar, Name, CreatedAt, FundRaising, More, MoreMenu, MoreMenuAction, CopyNumber
+  Item,
+  Avatar,
+  Name,
+  CreatedAt,
+  FundRaising,
+  More,
+  MoreMenu,
+  MoreMenuAction,
+  CopyNumber
 } from '~mobilizations/components/list/items'
 
-const TemplateListPage = ({
+const TemplatesListPage = ({
   menuActiveIndex,
   mobilizationTemplates,
   location,
@@ -98,11 +105,11 @@ const TemplateListPage = ({
   </SettingsPageLayout>
 )
 
-TemplateListPage.propTypes = {
+TemplatesListPage.propTypes = {
   menuActiveIndex: PropTypes.number,
   mobilizationTemplates: PropTypes.array,
   asyncDestroyTemplate: PropTypes.func,
   toggleMenu: PropTypes.func
 }
 
-export default TemplateListPage
+export default TemplatesListPage

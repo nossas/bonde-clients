@@ -7,7 +7,8 @@ import * as BlockActions from '~mobilizations/blocks/action-creators'
 import * as BlockSelectors from '~mobilizations/blocks/selectors'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
-import MobilizationEditPage from './page'
+
+import MobilizationsEditPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -39,4 +40,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(MobilizationEditPage))
+export default provideHooks(redial)(connect(mapStateToProps)(MobilizationsEditPage))

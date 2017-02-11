@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react'
-// import { Navigation } from 'react-router'
-// import reactMixin from 'react-mixin'
+import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
 import { PageTabLayout } from '~mobilizations/components'
 import MobilizationBasicsForm from '~mobilizations/components/mobilization-basics-form'
 
-// @revert @reactMixin.decorate(Navigation)
-const NewMobilizationPage = props => (
+const MobilizationsNewPage = props => (
   <PageTabLayout location={props.location}>
     <div className='page-add'>
       <h2 className='h1 mt0 mb3 center'>Qual o objetivo da sua mobilização?</h2>
@@ -15,7 +13,7 @@ const NewMobilizationPage = props => (
         className='bg-white'
         onFinishSubmit={() => {
           const { mobilization } = props
-          mobilization && this.transitionTo(
+          mobilization && browserHistory.push(
             paths.mobilizationTemplatesChoose(mobilization)
           )
         }}
@@ -28,8 +26,8 @@ const NewMobilizationPage = props => (
   </PageTabLayout>
 )
 
-NewMobilizationPage.propTypes = {
+MobilizationsNewPage.propTypes = {
   mobilization: PropTypes.object.isRequired
 }
 
-export default NewMobilizationPage
+export default MobilizationsNewPage

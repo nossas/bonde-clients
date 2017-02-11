@@ -1,20 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import ReactGA from 'react-ga'
 
+import * as arrayUtil from '~utils/array'
+import { TechnicalIssues } from '~components/error'
+import { GoogleFontsLoader } from '~components/fonts'
+import { Mobilization } from '~mobilizations/components'
+
 if (process.env.BROWSER) {
   require('~node_modules/font-awesome/scss/font-awesome.scss')
   require('~client/styles/main.scss')
 }
 
-// Global module dependencies
-import { TechnicalIssues } from '~components/error'
-import { GoogleFontsLoader } from '~components/fonts'
-import * as arrayUtil from '~utils/array'
-
-// Current module dependencies
-import { Mobilization } from '~mobilizations/components'
-
-export class CustomDomainPage extends Component {
+class CustomDomainPage extends Component {
   componentDidMount () {
     const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'
     if (!isTest) {

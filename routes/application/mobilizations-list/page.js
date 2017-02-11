@@ -29,7 +29,7 @@ import {
 import { PageHeader } from '~mobilizations/components'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-export class MobilizationListPage extends Component {
+export class MobilizationsListPage extends Component {
   componentWillMount () {
     const { dispatch } = this.props
     dispatch(MobilizationActions.select(undefined))
@@ -107,11 +107,11 @@ export class MobilizationListPage extends Component {
   }
 }
 
-MobilizationListPage.propTypes = {
+MobilizationsListPage.propTypes = {
   mobilizations: PropTypes.array.isRequired,
   menuActiveIndex: PropTypes.number,
   // Injected by react-router
   location: PropTypes.object.isRequired
 }
 
-export default MobilizationListPage
+export default MobilizationsListPage

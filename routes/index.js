@@ -6,7 +6,7 @@ import CustomDomain from '~routes/custom-domain'
 import Application from '~routes/application'
 import { showMobilizationPublicView } from '~routes/utils'
 
-export default function createRoutes (store) {
+export default store => {
   const { sourceRequest: { host } } = store.getState()
   const domain = serverConfig.appDomain
 

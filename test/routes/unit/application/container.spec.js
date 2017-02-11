@@ -26,7 +26,7 @@ const setup = (props = {}) => {
   }
 }
 
-describe('client/mobilizations/containers/mobilization-dashboard-container', () => {
+describe('routes/application/container', () => {
   it.skip('render without crashed', () => {
     const { wrapper } = setup()
     expect(wrapper).to.be.ok

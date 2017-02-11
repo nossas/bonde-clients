@@ -7,7 +7,7 @@ import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
 
-import TemplateChooseCustomPage from './page'
+import TemplatesChooseCustomPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -37,5 +37,5 @@ const mapActionCreatorsToProps = {
 }
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(TemplateChooseCustomPage)
+  connect(mapStateToProps, mapActionCreatorsToProps)(TemplatesChooseCustomPage)
 )

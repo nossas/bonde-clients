@@ -1,7 +1,7 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
-const RoutesMobilizations = store => ({
+export default store => ({
   path: 'mobilizations/:mobilization_id/sharing',
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
@@ -9,5 +9,3 @@ const RoutesMobilizations = store => ({
     })
   }
 })
-
-export default RoutesMobilizations

@@ -2,13 +2,10 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-// Global module dependencies
 import * as arrayUtil from '~utils/array'
-
-// Current module dependencies
 import CustomDomainPage from '~routes/custom-domain/page'
 
-describe('client/mobilizations/pages/custom-domain', () => {
+describe('routes/custom-domain/page', () => {
   let wrapper
   const props = {
     mobilization: {
