@@ -7,7 +7,7 @@ import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
 
-import TemplateChooseCustomPage from './page'
+import TemplateChooseGlobalPage from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -26,7 +26,7 @@ const redial = {
 
 const mapStateToProps = (state) => ({
   mobilization: MobilizationSelectors.getCurrent(state),
-  templates: TemplateSelectors.getCustomTemplates(state),
+  templates: TemplateSelectors.getGlobalTemplates(state),
   filterableTemplates: TemplateSelectors.getFilterableTemplates(state),
   selectedIndex: TemplateSelectors.getSelectableIndex(state)
 })
@@ -37,5 +37,5 @@ const mapActionCreatorsToProps = {
 }
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(TemplateChooseCustomPage)
+  connect(mapStateToProps, mapActionCreatorsToProps)(TemplateChooseGlobalPage)
 )
