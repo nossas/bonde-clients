@@ -29,7 +29,7 @@ class Sidenav extends Component {
               <div className='table-cell align-middle'>
                 <div>
                   <div className="item-community-name">
-                    <Link to={Paths.mobilizations()}>{community.name || 'Bonde'}</Link>
+                    <Link to={paths.mobilizations()}>{community.name || 'Bonde'}</Link>
                   </div>
                   <div className='item-community-change'>
                     <Link to={communityPaths.edit('info')} className='col col-8'>

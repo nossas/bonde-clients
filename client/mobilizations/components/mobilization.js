@@ -9,7 +9,9 @@ import Block from '~mobilizations/blocks/components'
 // Current module dependencies
 import { Navbar } from './navbar'
 
-import logoIcon from '../../../components/Navigation/Sidenav/logo-icon-no-border.svg'
+if (process.env.BROWSER) {
+  var logoIcon = require('~components/navigation/sidenav/logo-icon-no-border.svg')
+}
 
 const Mobilization = props => {
   const {
