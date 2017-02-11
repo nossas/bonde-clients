@@ -4,6 +4,11 @@ import {
 
 export const initialState = {}
 
+//
+// @todo: Make this reducer reusable, accepting a parameter with a prefix of
+//        action to differs each other. For now, it will be used only inside
+//        mobilization's templates reducers.
+//
 const SelectableListReducer = (state = initialState, action) => {
   switch (action.type) {
     case SELECTABLE_LIST_SET_SELECTED_INDEX:

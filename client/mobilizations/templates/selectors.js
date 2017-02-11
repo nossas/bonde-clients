@@ -1,10 +1,10 @@
-export const isLoading = state => state.mobilizations.templates.loading
+export const isLoading = state => state.mobilizations.templates.list.loading
 
-export const isLoaded = state => state.mobilizations.templates.isLoaded
+export const isLoaded = state => state.mobilizations.templates.list.isLoaded
 
-export const getGlobalTemplates = state => state.mobilizations.templates.global
+export const getGlobalTemplates = state => state.mobilizations.templates.list.global
 
-export const getCustomTemplates = state => state.mobilizations.templates.custom
+export const getCustomTemplates = state => state.mobilizations.templates.list.custom
 
 export const getFilterableTemplates = state => state.mobilizations.templates.filterable.list
 

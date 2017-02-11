@@ -8,7 +8,7 @@ import MobilizationBasicsForm from '~mobilizations/components/mobilization-basic
 
 // @revert @reactMixin.decorate(Navigation)
 const NewMobilizationPage = props => (
-  <PageTabLayout>
+  <PageTabLayout location={props.location}>
     <div className='page-add'>
       <h2 className='h1 mt0 mb3 center'>Qual o objetivo da sua mobilização?</h2>
       <MobilizationBasicsForm

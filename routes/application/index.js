@@ -28,6 +28,7 @@ export default store => ({
         require('./mobilizations-settings-domain').default(store),
         require('./mobilizations-settings-sharing').default(store),
         require('./templates-choose').default(store),
+        require('./templates-choose-custom').default(store),
 
         require('~common/routes/not-found').default
       ])
