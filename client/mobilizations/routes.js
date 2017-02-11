@@ -40,11 +40,11 @@ export default requiredLogin => ({})
 //     <Route path='/new' component={MobilizationAddPage} />                                              <~ Migrated!
 //     <Route path='/:mobilization_id' component={FetchTemplatesContainer}>                               <~ Migrated!
 //       <Route path='/templates/choose' component={TemplateChoosePage} />                                <~ Migrated!
-//       <Route path='/templates/choose/custom' component={TemplateChooseCustomPage} />                   <~ Migration In Progress
-//       <Route path='/templates/choose/global' component={TemplateChooseGlobalPage} />
+//       <Route path='/templates/choose/custom' component={TemplateChooseCustomPage} />                   <~ Migrated!
+//       <Route path='/templates/choose/global' component={TemplateChooseGlobalPage} />                   <~ Migrated!
 //     </Route>
 //   </Route>                                                                                             <~ Migrated!
-//   <Route path='/mobilizations/:mobilization_id/templates/create' component={TemplateCreatePage} />
+//   <Route path='/mobilizations/:mobilization_id/templates/create' component={TemplateCreatePage} />     <~ Migration In Progress
 //   <Route component={FetchTemplatesContainer}>
 //     <Route path='/mobilizations/templates/list' component={TemplateListPage} />
 //   </Route>

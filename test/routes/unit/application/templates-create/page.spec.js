@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { TemplateCreatePage } from '~mobilizations/templates/pages/template-create-page'
+import TemplateCreatePage from '~routes/application/templates-create/page'
 
-describe('client/mobilizations/templates/pages/template-create-page', () => {
+describe('routes/application/templates-create/page', () => {
   let wrapper
   const props = {
     mobilization: { id: 1 },
