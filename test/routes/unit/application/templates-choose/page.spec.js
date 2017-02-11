@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { TemplateChoosePage } from '~mobilizations/templates/pages/template-choose-page'
+import TemplateChoosePage from '~routes/application/templates-choose/page'
 
-describe('client/mobilizations/templates/pages/template-choose-page', () => {
+describe('routes/application/templates-choose/page', () => {
   let wrapper
   const props = {
     mobilization: { id: 1 },

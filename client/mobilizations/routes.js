@@ -38,8 +38,8 @@ export default requiredLogin => ({})
 //   <Route path='/' component={MobilizationListPage} />                                                  <~ Migrated!
 //   <Route path='/mobilizations' component={MobilizationAddContainer}>                                   <~ Migrated!
 //     <Route path='/new' component={MobilizationAddPage} />                                              <~ Migrated!
-//     <Route path='/:mobilization_id' component={FetchTemplatesContainer}>
-//       <Route path='/templates/choose' component={TemplateChoosePage} />
+//     <Route path='/:mobilization_id' component={FetchTemplatesContainer}>                               <~ Migration In Progress
+//       <Route path='/templates/choose' component={TemplateChoosePage} />                                <~ Migration In Progress
 //       <Route path='/templates/choose/custom' component={TemplateChooseCustomPage} />
 //       <Route path='/templates/choose/global' component={TemplateChooseGlobalPage} />
 //     </Route>

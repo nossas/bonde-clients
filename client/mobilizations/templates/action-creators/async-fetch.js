@@ -1,10 +1,10 @@
 import * as t from '../action-types'
 
-const AsyncFetch = () => (dispatch, getState, axios) => {
+const AsyncFetch = () => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   dispatch({ type: t.REQUEST_TEMPLATE_FETCH })
-  return axios
+  return api
     .get('/templates', { headers: credentials })
     .then(({ status, data }) => {
       dispatch({ type: t.SUCCESS_TEMPLATE_FETCH, templates: data })
