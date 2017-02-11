@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { TemplateListPage } from '~mobilizations/templates/pages/template-list-page'
+import TemplateListPage from '~routes/application/templates-list/page'
 
-describe('client/mobilizations/templates/pages/template-list-page', () => {
+describe('routes/application/templates-list/page', () => {
   let wrapper
   const props = {
     toggleMenu: () => {},

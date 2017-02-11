@@ -31,6 +31,7 @@ export default store => ({
         require('./templates-choose-custom').default(store),
         require('./templates-choose-global').default(store),
         require('./templates-create').default(store),
+        require('./templates-list').default(store),
 
         require('~common/routes/not-found').default
       ])
