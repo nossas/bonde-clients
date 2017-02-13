@@ -2,7 +2,7 @@
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockUpdate = ({ block, mobilization }) => (dispatch, getState, axios) => {
+const asyncBlockUpdate = ({ block, mobilization }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   const endpoint = `/mobilizations/${mobilization.id}/blocks/${block.id}`
@@ -10,7 +10,7 @@ const asyncBlockUpdate = ({ block, mobilization }) => (dispatch, getState, axios
   const config = { headers: credentials }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_UPDATE })
-  return axios.put(endpoint, body, config)
+  return api.put(endpoint, body, config)
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_UPDATE, response.data))
       return Promise.resolve()

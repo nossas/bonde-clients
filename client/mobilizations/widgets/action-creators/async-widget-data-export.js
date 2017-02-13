@@ -2,7 +2,7 @@ import * as t from '../action-types'
 import { forceDownloadFile, makeExcelFile } from '../utils/data-export'
 import { createAction } from './create-action'
 
-const asyncWidgetDataExport = params => (dispatch, getState, axios) => {
+const asyncWidgetDataExport = params => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
   const { mobilization, widget, filename } = params
 
@@ -10,7 +10,7 @@ const asyncWidgetDataExport = params => (dispatch, getState, axios) => {
   const config = { headers: credentials, params }
 
   dispatch({ type: t.EXPORT_DATACLIP_REQUEST })
-  return axios.get(endpoint, config)
+  return api.get(endpoint, config)
     .then(response => {
       if (!response.data.length) {
         window.alert('Nao foi encontrado nenhum dado para ser exportado')

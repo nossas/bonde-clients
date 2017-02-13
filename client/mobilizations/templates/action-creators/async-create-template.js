@@ -1,10 +1,10 @@
 import * as t from '../action-types'
 
-const AsyncCreateTemplate = template => (dispatch, getState, axios) => {
+const AsyncCreateTemplate = template => (dispatch, getState, { api }) => {
   dispatch({ type: t.REQUEST_TEMPLATE_CREATE })
 
   const { auth: { credentials } } = getState()
-  return axios
+  return api
     .post('/templates', template, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 200) {

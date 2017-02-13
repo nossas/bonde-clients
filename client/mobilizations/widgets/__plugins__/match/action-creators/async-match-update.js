@@ -6,7 +6,7 @@ import * as WidgetsActions from '~mobilizations/widgets/action-creators'
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
-const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
+const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, { api }) => {
   const state = getState()
   const { auth: { credentials } } = state
   const widget = WidgetSelectors.getWidget(state, props)
@@ -16,7 +16,7 @@ const asyncMatchUpdate = ({ match, props }) => (dispatch, getState, axios) => {
   const config = { headers: credentials }
 
   dispatch({ type: t.WIDGET_MATCH_UPDATE_REQUEST })
-  return axios.put(endpoint, body, config)
+  return api.put(endpoint, body, config)
     .then(response => {
       dispatch({ type: t.WIDGET_MATCH_UPDATE_SUCCESS })
       dispatch(WidgetsActions.setWidgetList(

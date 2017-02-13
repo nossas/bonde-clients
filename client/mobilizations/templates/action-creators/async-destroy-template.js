@@ -1,10 +1,10 @@
 import * as t from '../action-types'
 
-const AsyncDestroyTemplate = template => (dispatch, getState, axios) => {
+const AsyncDestroyTemplate = template => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   dispatch({ type: t.REQUEST_TEMPLATE_DESTROY })
-  return axios
+  return api
       .delete(`/templates/${template.id}`, { headers: credentials })
       .then(() => {
         dispatch({ type: t.SUCCESS_TEMPLATE_DESTROY, template })
