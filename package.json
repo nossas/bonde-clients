@@ -90,7 +90,7 @@
     "react-test-renderer": "^15.4.2",
     "redial": "^0.4.1",
     "redux": "^3.3.1",
-    "redux-form": "^6.2.0",
+    "redux-form": "^5.3.2",
     "redux-form-validation": "^0.0.8",
     "redux-logger": "^2.7.4",
     "redux-promise": "^0.5.3",
