@@ -5,7 +5,7 @@ import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockCreate = ({ block, mobilization, next }) => (dispatch, getState, axios) => {
+const asyncBlockCreate = ({ block, mobilization, next }) => (dispatch, getState, { api }) => {
   const state = getState()
   const { auth: { credentials } } = state
 
@@ -14,7 +14,7 @@ const asyncBlockCreate = ({ block, mobilization, next }) => (dispatch, getState,
   const config = { headers: credentials }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_CREATE })
-  return axios.post(endpoint, body, config)
+  return api.post(endpoint, body, config)
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_CREATE, response.data))
       dispatch(WidgetActions.asyncWidgetFetch(mobilization.id))

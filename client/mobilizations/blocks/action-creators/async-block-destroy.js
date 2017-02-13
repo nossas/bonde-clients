@@ -2,14 +2,14 @@
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockDestroy = ({ block, mobilization }) => (dispatch, getState, axios) => {
+const asyncBlockDestroy = ({ block, mobilization }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   const endpoint = `/mobilizations/${mobilization.id}/blocks/${block.id}`
   const config = { headers: credentials }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_DESTROY })
-  return axios.delete(endpoint, config)
+  return api.delete(endpoint, config)
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_DESTROY, response.data))
       return Promise.resolve()

@@ -12,7 +12,7 @@ import { createAction } from './create-action'
 // Besides to have to refact this action name, needs to refact
 // API endpoint too.
 //
-const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, axios) => {
+const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, { api }) => {
   const state = getState()
 
   // For endpoint reference, see: https://github.com/ourcities/hub-api/issues/39
@@ -20,7 +20,7 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, axio
   const body = { fill }
 
   dispatch({ type: t.WIDGET_PRESSURE_FILL_REQUEST })
-  return axios.post(endpoint, body)
+  return api.post(endpoint, body)
     .then(response => {
       dispatch({ type: t.WIDGET_PRESSURE_FILL_SUCCESS })
       dispatch(WidgetsActions.setWidgetList(

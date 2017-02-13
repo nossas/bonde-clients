@@ -2,7 +2,7 @@
 import { createAction } from './create-action'
 import c from '../constants'
 
-const asyncBlockMoveDown = ({ block, blocks, mobilization }) => (dispatch, getState, axios) => {
+const asyncBlockMoveDown = ({ block, blocks, mobilization }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
   const endpoint = `/mobilizations/${mobilization.id}/blocks/${block.id}`
@@ -10,7 +10,7 @@ const asyncBlockMoveDown = ({ block, blocks, mobilization }) => (dispatch, getSt
   const config = { headers: credentials }
 
   dispatch({ type: c.REQUEST_ASYNC_BLOCK_MOVE_DOWN })
-  return axios.put(endpoint, body, config)
+  return api.put(endpoint, body, config)
     .then(response => {
       dispatch(createAction(c.SUCCESS_ASYNC_BLOCK_MOVE_DOWN, response.data))
       return Promise.resolve()

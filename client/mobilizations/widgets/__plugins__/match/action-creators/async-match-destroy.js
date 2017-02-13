@@ -6,7 +6,7 @@ import * as WidgetsActions from '~mobilizations/widgets/action-creators'
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
-const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
+const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, { api }) => {
   const state = getState()
   const { auth: { credentials } } = state
   const widget = WidgetSelectors.getWidget(state, props)
@@ -15,7 +15,7 @@ const asyncMatchDestroy = ({ props, where }) => (dispatch, getState, axios) => {
   const config = { headers: credentials, params: where }
 
   dispatch({ type: t.WIDGET_MATCH_DESTROY_REQUEST })
-  return axios.delete(endpoint, config)
+  return api.delete(endpoint, config)
     .then(response => {
       dispatch({ type: t.WIDGET_MATCH_DESTROY_SUCCESS })
       dispatch(WidgetsActions.setWidgetList(
