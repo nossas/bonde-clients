@@ -12,6 +12,6 @@ RUN npm install
 COPY . /code
 RUN npm run build
 
-CMD ["node", "./bin/server"]
+CMD ["node", "-r", "babel-register", "./server"]
 
 EXPOSE 5001 3030
