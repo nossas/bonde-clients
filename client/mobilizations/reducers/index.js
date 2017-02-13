@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import widgetsReducer from '~client/mobrender/reducers/widgets'
+import widgetsReducer from '~client/mobrender/redux/reducers/widgets'
 import templates from '../templates/reducers'
 import list from './list'
 
