@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Universal JS app",
   "scripts": {
-    "test": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/jest --config ./tools/jest.config.json --runInBand",
+    "test": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/jest --config ./tools/jest.config.json -w=1",
     "test:a": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/jest --config ./tools/jest.config.json",
     "test:w": "yarn test:a -- --watch",
     "coverage": "nyc npm test",
