@@ -1,35 +1,38 @@
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import { BasicColorPickerItem } from '~components/basic-color-picker'
 
 describe('client/components/basic-color-picker/basic-color-picker-item', () => {
-  let wrapper
-  const onClick = () => true
+  let pickerItem
   const props = {
-    bgClass: 'bg-black',
-    selectedClass: 'bg-white',
-    onClick: onClick.bind(wrapper)
+    color: 'bg-1',
+    isSelected: false,
+    onSelectColor: color => {}
   }
 
-  beforeAll(() => {
-    wrapper = shallow(<BasicColorPickerItem {...props} />)
+  beforeEach(() => {
+    pickerItem = mount(<BasicColorPickerItem {...props} />)
   })
 
-  describe('#render', () => {
-    afterEach(() => {
-      wrapper.setProps(props)
-    })
+  it('should render with props.color', () => {
+    expect(pickerItem.find('div').at(1).props().className).to.contains(props.color)
+  })
 
-    it('should render unselected and bind onClick event', () => {
-      expect(wrapper.instance().props.style).to.be.undefined
-      expect(wrapper.instance().props.onClick.toString()).to.equal(onClick.bind(wrapper).toString())
-    })
+  it('should render without style when isnt selected', () => {
+    expect(pickerItem.instance().props.style).to.equal(undefined)
+  })
 
-    it('should render selected', () => {
-      wrapper.setProps({ ...props, selectedClass: 'bg-black' })
-      expect(wrapper.props().children.props.style).to.have.property('borderWidth')
-    })
+  it('should render select style when is selected', () => {
+    pickerItem.setProps({ isSelected: true })
+    expect(pickerItem.find('div').at(1).props().style).to.deep.equal({ borderWidth: '5px' })
+  })
+
+  it('should call onSelectColor when click with color passed by props', () => {
+    let result
+    pickerItem.setProps({ onSelectColor: color => result = color })
+    pickerItem.find('div').at(1).simulate('click')
+    expect(result).to.equal(props.color)
   })
 })

@@ -1,37 +1,39 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import { expect } from 'chai'
-
 import { BasicColorPicker } from '~components/basic-color-picker'
 
 describe('BasicColorPicker', () => {
-  let wrapper
-  const onClick = () => { window.alert('color was clicked!') }
 
-  beforeAll(() => {
-    wrapper = shallow(
-      <BasicColorPicker
-        selectedClass='bg-white '
-        onClick={onClick.bind(wrapper)}
-        colorScheme='nossascidades'
-      />
-    )
+  let colorPicker
+  const props = {
+    colors: ['bg-1', 'bg-2', 'bg-3'],
+    selected: 'bg-2',
+    onSelectColor: color => {}
+  }
+
+  beforeEach(() => {
+    colorPicker = mount(<BasicColorPicker {...props} />)
   })
 
-  describe('#renderColors', () => {
-    it('should render with passed colors and bind onClick event', () => {
-      const colors = wrapper.instance().renderColors(['foo', 'bar'])
-      expect(colors).to.have.length(2)
-      expect(colors[0].props.bgClass).to.equal('foo')
-      expect(colors[1].props.bgClass).to.equal('bar')
-      expect(colors[0].props.onClick.toString()).to.equal(onClick.bind(wrapper).toString())
-      expect(colors[1].props.onClick.toString()).to.equal(onClick.bind(wrapper).toString())
-    })
+  it('should render without crashed', () => {
+    expect(colorPicker).to.be.ok
   })
 
-  describe('#render', () => {
-    it('should render with all colors', () => {
-      expect(wrapper.find('BasicColorPickerItem')).to.have.length(40)
+  it('should render a list of color items according colors passed by props', () => {
+    expect(colorPicker.find('BasicColorPickerItem').length).to.equal(props.colors.length)
+  })
+
+  it('should pass isSelected when selected equals color render in item', () => {
+    const index = props.colors.indexOf(props.selected)
+    expect(colorPicker.find('BasicColorPickerItem').at(index).props().isSelected).to.equal(true)
+  })
+
+  it('should call onSelectColor when click in color-picker-item', () => {
+    const onSelectColor = color => {}
+    colorPicker.setProps({ onSelectColor })
+    colorPicker.find('BasicColorPickerItem').forEach(item => {
+      expect(item.props().onSelectColor).to.equal(onSelectColor)
     })
   })
 })
