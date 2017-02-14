@@ -40,4 +40,20 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(MobilizationsEditPage))
+const mapActionCreatorsToProps = {
+  blockUpdate: BlockActions.asyncBlockUpdate,
+  setEditionMode: BlockActions.setEditionMode,
+  blockDestroy: BlockActions.asyncBlockDestroy,
+  blockMove: (direction, payload) => dispatch => {
+    if (direction === 'up') {
+      dispatch(BlockActions.asyncBlockMoveUp(payload))
+    } else if (direction === 'down') {
+      dispatch(BlockActions.asyncBlockMoveDown(payload))
+    }
+  },
+  widgetUpdate: WidgetActions.asyncWidgetUpdate
+}
+
+export default provideHooks(redial)(
+  connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationsEditPage)
+)
