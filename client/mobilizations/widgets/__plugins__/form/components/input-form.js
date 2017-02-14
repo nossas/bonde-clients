@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import $ from 'jquery'
 
-// Parent module dependencies
-import { actions as WidgetActions } from '~mobilizations/widgets'
+import * as WidgetActions from '~mobilizations/widgets/action-creators'
 
-class InputForm extends Component {
+export class InputForm extends Component {
   constructor (props, context) {
     super(props, context)
     const { field } = this.props
@@ -311,4 +311,4 @@ class InputForm extends Component {
   }
 }
 
-export default InputForm
+export default connect()(InputForm)
