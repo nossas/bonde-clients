@@ -84,7 +84,6 @@
     "react-ga": "^2.1.2",
     "react-grid-system": "^2.0.2",
     "react-helmet": "^3.1.0",
-    "react-mixin": "^3.0.5",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "react-s3-uploader": "^3.4.0",
