@@ -4,7 +4,8 @@ import {
 
 const initialState = {
   loading: false,
-  loaded: false
+  loaded: false,
+  color: undefined
 }
 
 const ColorPickerReducer = (state = initialState, action) => {
