@@ -128,8 +128,8 @@ FormFinishMessage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Injected components
-  TellAFriend: PropTypes.element.isRequired,
-  SettingsMenu: PropTypes.element.isRequired,
+  TellAFriend: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  SettingsMenu: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   // Form Redux
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,

@@ -3,13 +3,13 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 // Current module dependencies
-import { SettingsFinishMessagePage } from '~widget-plugins/donation/pages'
+import WidgetsDonationSettingsFinish from '~routes/application/widgets-donation-settings-finish/page'
 
-describe('client/mobilizations/widgets/__plugins__/donation/pages/settings-finish-message-page', () => {
+describe('routes/application/widgets-donation-settings-finish/page', () => {
   let wrapper
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsFinishMessagePage />)
+    wrapper = shallow(<WidgetsDonationSettingsFinish />)
   })
 
   describe('#render', () => {
