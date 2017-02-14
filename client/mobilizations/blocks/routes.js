@@ -4,7 +4,7 @@ import { Route } from 'react-router'
 import { BlockCreate } from './pages'
 
 const BlocksRoutes = () => [
-  <Route path='/blocks/create' component={BlockCreate} />
+  <Route path='/blocks/create' component={BlockCreate} /> // <~ Migrated!
 ]
 
 export default BlocksRoutes

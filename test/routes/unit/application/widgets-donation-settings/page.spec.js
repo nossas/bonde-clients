@@ -6,9 +6,9 @@ import { expect } from 'chai'
 import * as mock from '~utils/mock'
 
 // Current module dependencies
-import { SettingsDonationPage } from '~widget-plugins/donation/pages/settings-donation-page'
+import WidgetsDonationSettingsPage from '~routes/application/widgets-donation-settings/page'
 
-describe('client/mobilizations/widgets/__plugins__/donation/pages/settings-donation-page', () => {
+describe('routes/application/widgets-donation-settings/page', () => {
   let wrapper
   const props = {
     dispatch: mock.noop,
@@ -30,7 +30,7 @@ describe('client/mobilizations/widgets/__plugins__/donation/pages/settings-donat
   }
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsDonationPage {...props} />)
+    wrapper = shallow(<WidgetsDonationSettingsPage {...props} />)
   })
 
   describe('#render', () => {

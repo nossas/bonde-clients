@@ -10,6 +10,6 @@ import {
 const namespace = '/donation'
 
 export default () => [
-  <Route path={namespace} component={SettingsDonationPage} />,
+  <Route path={namespace} component={SettingsDonationPage} />,                  // <~ Migration In Progress
   <Route path={`${namespace}/finish`} component={SettingsFinishMessagePage} />
 ]
