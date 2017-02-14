@@ -2,7 +2,6 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-// Current module dependencies
 import { FormFinishMessage } from '~mobilizations/widgets/components/form-finish-message'
 
 const TellAFriend = props => (
