@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { BlockCreate } from '~mobilizations/blocks/pages/block-create'
 import { BLOCK_LAYOUTS } from '~mobilizations/blocks/constants'
+import BlocksCreatePage from '~routes/application/blocks-create/page'
 
-describe('client/mobilizations/blocks/pages/block-create', () => {
+describe('routes/application/blocks-create/page', () => {
   let wrapper
   const props = {
     dispatch: () => {},
@@ -17,7 +17,7 @@ describe('client/mobilizations/blocks/pages/block-create', () => {
 
   describe('#render', () => {
     beforeEach(() => {
-      wrapper = shallow(<BlockCreate {...props} />)
+      wrapper = shallow(<BlocksCreatePage {...props} />)
     })
 
     it('should render root .block-create <div>', () => {
@@ -36,7 +36,6 @@ describe('client/mobilizations/blocks/pages/block-create', () => {
         expect(wrapper.find('div.block-create-header h1').text()).to.be.equal(text)
       })
       it('should render one <Tabs> component', () => {
-        const text = 'Adicione um bloco de conteúdo'
         expect(wrapper.find('div.block-create-header Tabs')).to.have.length(1)
       })
     })

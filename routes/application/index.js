@@ -20,6 +20,7 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./blocks-create').default(store),
         require('./mobilizations-edit').default(store),
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),

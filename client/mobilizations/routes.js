@@ -33,7 +33,7 @@ export default requiredLogin => ({})
 //       <Route path='/sharing' component={MobilizationSharingPage} />                                              <~ Migrated!
 //       <Route path='/customDomain' component={MobilizationDomainPage} />                                          <~ Migrated!
 //     </Route>                                                                                         <~ Removed!
-//     {blocksCreateRoutes()}
+//     {blocksCreateRoutes()}                                                                                       <~ Migration In Progress
 //     {widgetsRoutes()}
 //   </Route>                                                                                           <~ Removed!
 // </Route>                                                                                                         <~ Migrated!
