@@ -1,9 +1,9 @@
 import * as t from '../action-types'
 
-export default ({ id, template_mobilization_id, ...mobilization }) => (dispatch, getState, axios) => {
+export default ({ id, template_mobilization_id, ...mobilization }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
-  return axios
+  return api
     .put(`/mobilizations/${id}`, { mobilization, template_mobilization_id }, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 200) {

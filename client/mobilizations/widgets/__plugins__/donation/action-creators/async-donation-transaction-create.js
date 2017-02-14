@@ -2,12 +2,12 @@ import { createAction } from './create-action'
 import * as t from '../action-types'
 import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 
-const asyncDonationTransactionCreate = params => (dispatch, getState, axios) => {
+const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) => {
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`
   const body = { donation: genRequestPayload(params) }
 
   dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_REQUEST })
-  return axios.post(endpoint, body)
+  return api.post(endpoint, body)
     .then(response => {
       dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_SUCCESS })
 

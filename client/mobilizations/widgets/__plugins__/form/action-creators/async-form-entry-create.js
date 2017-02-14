@@ -7,14 +7,14 @@ import { actions as WidgetActions } from '~mobilizations/widgets'
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
-const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getState, axios) => {
+const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getState, { api }) => {
   const state = getState()
 
   const endpoint = `/mobilizations/${mobilization.id}/form_entries`
   const body = { form_entry: formEntry }
 
   dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_REQUEST })
-  return axios.post(endpoint, body)
+  return api.post(endpoint, body)
     .then(response => {
       dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_SUCCESS })
       dispatch(WidgetActions.setWidgetList(

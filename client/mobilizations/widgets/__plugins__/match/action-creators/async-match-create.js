@@ -6,7 +6,7 @@ import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
-const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
+const asyncMatchCreate = ({ match, props }) => (dispatch, getState, { api }) => {
   const state = getState()
   const { auth: { credentials } } = state
   const widget = WidgetSelectors.getWidget(state, props)
@@ -16,7 +16,7 @@ const asyncMatchCreate = ({ match, props }) => (dispatch, getState, axios) => {
   const config = { headers: credentials }
 
   dispatch({ type: t.WIDGET_MATCH_CREATE_REQUEST })
-  return axios.post(endpoint, body, config)
+  return api.post(endpoint, body, config)
     .then(response => {
       dispatch({ type: t.WIDGET_MATCH_CREATE_SUCCESS })
       dispatch(WidgetsActions.setWidgetList(
