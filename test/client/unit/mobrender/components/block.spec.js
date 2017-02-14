@@ -3,12 +3,13 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import Block from '~client/mobrender/components/block'
+import Widget from '~client/mobrender/components/widget.connected'
 
 describe('~client/mobrender/components/block', () => {
 
   let block
   const props = {
-    block: { id: 1, bg_class: 'bg-1' },
+    block: { id: 1, bg_class: 'bg-1', hidden: false },
   }
   const blockSelector = `#block-${props.block.id}`
 
@@ -43,5 +44,32 @@ describe('~client/mobrender/components/block', () => {
     block.setProps({ onCancelEdit: () => result = true })
     block.find(blockSelector).simulate('keyup', { keyCode: 27 })
     expect(result).to.equal(true)
+  })
+
+  it('should render hidden tag when block is hidden', () => {
+    expect(block.find('div.hidden-tag').length).to.equal(0)
+    block.setProps({ block: {...props.block, hidden: true } })
+    expect(block.find('div.hidden-tag').length).to.equal(1)
+    expect(block.find('div.hidden-tag').text()).to.equal(' Escondido')
+  })
+
+  describe('render widgets', () => {
+  
+    const widgets = [
+      { id: 1, kind: 'draft' },
+      { id: 2, kind: 'draft' }
+    ]
+    
+    beforeEach(() => {
+      block.setProps({ widgets })
+    })
+
+    it('should render widgets passing widget loop', () => {
+      expect(block.find(Widget).length).to.equal(2)
+      widgets.forEach((w, i) => {
+        const widget = block.find(Widget).at(i)
+        expect(widget.props().widget).to.deep.equal(w)
+      })
+    })
   })
 })
