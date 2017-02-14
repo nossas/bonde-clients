@@ -1,24 +1,22 @@
 import React, { Component, PropTypes } from 'react'
-// import { Navigation } from 'react-router'
-// import reactMixin from 'react-mixin'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import { Loading } from '~components/await'
 import { GoogleFontsLoader } from '~components/fonts'
 import * as arrayUtil from '~utils/array'
-// import * as paths from '~client/paths'
+import * as paths from '~client/paths'
 
 // Current module dependencies
 import { Mobilization } from '~mobilizations/components'
 
-// @revert @reactMixin.decorate(Navigation)
 export class MobilizationsEditPage extends Component {
-  // componentDidMount () {
-  //   const { mobilization, blocksIsLoaded, blocks } = this.props
-  //   if (blocksIsLoaded && blocks.length === 0) {
-  //     this.transitionTo(paths.mobilizationTemplatesChoose(mobilization))
-  //   }
-  // }
+  componentDidMount () {
+    const { mobilization, blocksIsLoaded, blocks } = this.props
+    if (blocksIsLoaded && blocks.length === 0) {
+      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
+    }
+  }
 
   render () {
     const {

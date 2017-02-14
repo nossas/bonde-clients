@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Link, Navigation } from 'react-router'
-import reactMixin from 'react-mixin'
+import { Link } from 'react-router'
 import classnames from 'classnames'
 
 if (process.env.BROWSER) require('./tab.scss')
 
-// @revert @reactMixin.decorate(Navigation)
 class Tab extends Component {
   render () {
     const { text, index, path, isActive } = this.props

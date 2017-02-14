@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
-import { decorate } from 'react-mixin'
-import { Navigation } from 'react-router'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import {
@@ -17,12 +16,11 @@ import {
 import * as actions from '../actions'
 import * as paths from '../paths'
 
-// @revert @decorate(Navigation)
 class AddPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
-      this.transitionTo(paths.list())
+      browserHistory.push(paths.list())
     }
   }
 

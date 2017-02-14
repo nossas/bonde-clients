@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Navigation } from 'react-router'
-import reactMixin from 'react-mixin'
+import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
 // Global module dependencies
@@ -16,7 +15,6 @@ import * as DonationActions from '../../action-creators'
 import { DonationTellAFriend } from '../../components'
 if (process.env.BROWSER) require('./index.scss')
 
-// @revert @reactMixin.decorate(Navigation)
 class Donation extends React.Component {
   constructor (props, context) {
     super(props, context)
@@ -50,7 +48,7 @@ class Donation extends React.Component {
   handleOverlayOnClick () {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(paths.donation(mobilization.id, widget.id))
+      browserHistory.push(paths.donation(mobilization.id, widget.id))
     }
   }
 

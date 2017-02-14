@@ -1,30 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Navigation } from 'react-router'
-import reactMixin from 'react-mixin'
+import { browserHistory } from 'react-router'
 
 import { logout } from '../actions'
 import { Loading } from '../../Dashboard/components'
 import * as Paths from '../../Paths'
 
-
-// @revert @reactMixin.decorate(Navigation)
 class LogoutPage extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     const { logout } = this.props
-    logout()
-      .then(() => this.transitionTo(Paths.login()))
+    logout().then(() => browserHistory.push(Paths.login()))
   }
 
-  render() {
+  render () {
     return <Loading />
   }
 }
 
 LogoutPage.propTypes = {
   // Injected by react-redux
-  logout: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
 const mapActionsToProps = { logout }
