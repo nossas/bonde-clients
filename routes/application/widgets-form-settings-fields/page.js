@@ -1,23 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 
 // Global module dependencies
 import { Loading } from '~components/await'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 
-// Parent module dependencies
-import {
-  actions as WidgetActions,
-  selectors as WidgetSelectors
-} from '~mobilizations/widgets'
-import {
-  selectors as MobilizationSelectors
-} from '~mobilizations'
-
 // Current module dependencies
-import Form, { SettingsMenu } from '../components'
+import Form, { SettingsMenu } from '~widget-plugins/form/components'
 
-export class SettingsFieldsPage extends Component {
+class WidgetsFormSettingsPage extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = { loading: false, hasNewField: false }
@@ -121,16 +111,11 @@ export class SettingsFieldsPage extends Component {
   }
 }
 
-SettingsFieldsPage.propTypes = {
+WidgetsFormSettingsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  widget: WidgetSelectors.getWidget(state, ownProps),
-  mobilization: MobilizationSelectors.getCurrent(state)
-})
-
-export default connect(mapStateToProps, WidgetActions)(SettingsFieldsPage)
+export default WidgetsFormSettingsPage

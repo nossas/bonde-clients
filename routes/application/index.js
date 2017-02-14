@@ -36,6 +36,7 @@ export default store => ({
         require('./widgets-donation-settings').default(store),
         require('./widgets-donation-settings-finish').default(store),
         require('./widgets-form-settings').default(store),
+        require('./widgets-form-settings-fields').default(store),
 
         require('~common/routes/not-found').default
       ])
