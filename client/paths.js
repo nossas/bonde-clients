@@ -21,9 +21,6 @@ export const sharingMobilization = id => `/mobilizations/${id}/sharing`
 export const analyticsMobilization = id => `/mobilizations/${id}/analytics`
 export const customDomainMobilization = id => `/mobilizations/${id}/customDomain`
 
-export const fieldsMobilizationWidget = (mobilizationId, widgetId) => {
-  return `/mobilizations/${mobilizationId}/widgets/${widgetId}/fields`
-}
 export const autofireMobilizationWidget = (mobilizationId, widgetId) => {
   return `/mobilizations/${mobilizationId}/widgets/${widgetId}/autofire`
 }
