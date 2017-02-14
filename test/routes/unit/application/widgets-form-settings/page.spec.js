@@ -2,13 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~utils/mock'
+import WidgetsFormSettingsPage from '~routes/application/widgets-form-settings/page'
 
-// Current module dependencies
-import { SettingsFormPage } from '~widget-plugins/form/pages'
-
-describe('client/mobilizations/widgets/__plugins__/form/pages/settings-form-page', () => {
+describe('routes/application/widgets-form-settings/page', () => {
   let wrapper
   const props = {
     fields: {
@@ -25,7 +22,7 @@ describe('client/mobilizations/widgets/__plugins__/form/pages/settings-form-page
   }
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsFormPage {...props} />)
+    wrapper = shallow(<WidgetsFormSettingsPage {...props} />)
   })
 
   describe('#render', () => {

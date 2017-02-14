@@ -242,7 +242,7 @@ Form.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.shape({
     settings: PropTypes.shape({
-      finish_message_type: PropTypes.string.isRequired
+      finish_message_type: PropTypes.string
     }).isRequired
   }).isRequired,
   editable: PropTypes.bool,

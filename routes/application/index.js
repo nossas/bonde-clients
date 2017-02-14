@@ -35,6 +35,7 @@ export default store => ({
         require('./templates-list').default(store),
         require('./widgets-donation-settings').default(store),
         require('./widgets-donation-settings-finish').default(store),
+        require('./widgets-form-settings').default(store),
 
         require('~common/routes/not-found').default
       ])
