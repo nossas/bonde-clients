@@ -5,6 +5,6 @@ import { SettingsFieldsPage, SettingsFormPage, SettingsFinishMessagePage } from 
 
 export default () => [
   <Route path='/form' key='settings-form' component={SettingsFormPage} />,                            // <~ Migrated!
-  <Route path='/fields' key='settings-fields' component={SettingsFieldsPage} />,                      // <~ Migration In Progress
-  <Route path='/finish' key='settings-finish-message-page' component={SettingsFinishMessagePage} />
+  <Route path='/fields' key='settings-fields' component={SettingsFieldsPage} />,                      // <~ Migrated!
+  <Route path='/finish' key='settings-finish-message-page' component={SettingsFinishMessagePage} />   // <~ Migration In Progress
 ]
