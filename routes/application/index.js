@@ -35,6 +35,7 @@ export default store => ({
         require('./templates-list').default(store),
         require('./widgets-donation-settings').default(store),
         require('./widgets-donation-settings-autofire').default(store),
+        require('./widgets-donation-settings-export').default(store),
         require('./widgets-donation-settings-finish').default(store),
         require('./widgets-form-settings').default(store),
         require('./widgets-form-settings-autofire').default(store),
