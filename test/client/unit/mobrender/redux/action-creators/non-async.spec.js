@@ -47,4 +47,22 @@ describe('client/mobrender/redux/action-creators (non-async)', () => {
       expect(store.getActions()[0]).to.deep.equal(expected)
     })
   })
+
+  describe('doing upload (handleUploadFile)', () => {
+    
+    it('should dispatch LOADING_FILE when passed key and progress', () => {
+      const expected = createAction(t.LOADING_FILE, { key: 'bg', progress: 10 })
+      store.dispatch(MobActions.handleUploadFile('bg', 10))
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
+
+    it('should dispatch FINISH_LOADING_FILE when passed only key', () => {
+      const expected = createAction(t.FINISH_LOADING_FILE, 'bg')
+      store.dispatch(MobActions.handleUploadFile('bg'))
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
+
+  })
 })

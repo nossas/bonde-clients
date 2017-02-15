@@ -10,3 +10,5 @@ export { default as asyncUpdateBlock } from './async-update-block'
 
 export { default as handleEdit } from './handle-edit'
 export { default as handleCancelEdit } from './handle-cancel-edit'
+
+export { default as handleUploadFile } from './handle-upload-file'
