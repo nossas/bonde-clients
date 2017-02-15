@@ -48,7 +48,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/settings-menu
     })
 
     it('should active tab Mensagem agradecimento (autofire)', () => {
-      props.location.pathname = paths.autofireMobilizationWidget(dummyId, dummyId)
+      props.location.pathname = paths.formAutofire(dummyId, dummyId)
 
       let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(2)

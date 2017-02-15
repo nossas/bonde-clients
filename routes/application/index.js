@@ -37,6 +37,7 @@ export default store => ({
         require('./widgets-donation-settings-autofire').default(store),
         require('./widgets-donation-settings-finish').default(store),
         require('./widgets-form-settings').default(store),
+        require('./widgets-form-settings-autofire').default(store),
         require('./widgets-form-settings-fields').default(store),
         require('./widgets-form-settings-finish').default(store),
         require('./widgets-pressure-settings').default(store),

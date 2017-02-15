@@ -1,11 +1,7 @@
 const prefix = (mobilizationId, widgetId, slug) =>
   `/mobilizations/${mobilizationId}/widgets/${widgetId}/${slug}`
 
-export const fieldsMobilizationWidget = (mobilizationId, widgetId) =>
-  prefix(mobilizationId, widgetId, 'form/fields')
-
-export const formMobilizationWidget = (mobilizationId, widgetId) =>
-  prefix(mobilizationId, widgetId, 'form')
-
-export const widgetFormSettingsFinish = (mobilizationId, widgetId) =>
-  prefix(mobilizationId, widgetId, 'form/finish')
+export const formMobilizationWidget = (mid, wid) => prefix(mid, wid, 'form')
+export const formAutofire = (mid, wid) => prefix(mid, wid, 'form/autofire')
+export const fieldsMobilizationWidget = (mid, wid) => prefix(mid, wid, 'form/fields')
+export const widgetFormSettingsFinish = (mid, wid) => prefix(mid, wid, 'form/finish')
