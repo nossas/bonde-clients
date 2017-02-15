@@ -12,7 +12,6 @@ import rootReducer from '../mock-reducers/root-reducer'
 
 // Mock axios
 const mockAxios = new MockAdapter(axios)
-const mobilization = { id: 1, name: 'Lorem' }
 const data = [
   { id: 1, name: 'Lorem', position: 1 },
   { id: 2, name: 'Ipsum', position: 2 },
