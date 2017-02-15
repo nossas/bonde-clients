@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { DropdownMenu, DropdownMenuItem } from '~client/components/dropdown-menu'
 
-const BlockConfigMenu = ({ block, update, destroy, turnEditing, canMoveUp, moveUp, canMoveDown, moveDown, display }) => (
+const BlockConfigMenu = ({ block, update, destroy, onEdit, canMoveUp, moveUp, canMoveDown, moveDown, display }) => (
   <DropdownMenu
     wrapperClassName={classnames(
       'm1 absolute bottom-0 right-0 z2',
@@ -14,7 +14,7 @@ const BlockConfigMenu = ({ block, update, destroy, turnEditing, canMoveUp, moveU
   >
     <DropdownMenuItem
       className='btn'
-      onClick={() => turnEditing(true)}
+      onClick={() => onEdit('background')}
     >
       <span>
         <i className='fa fa-picture-o' /> Alterar fundo
@@ -70,7 +70,7 @@ BlockConfigMenu.propTypes = {
   canMoveDown: PropTypes.bool,
   moveDown: PropTypes.func,
   update: PropTypes.func,
-  turnEditing: PropTypes.func
+  onEdit: PropTypes.func
 }
 
 export default BlockConfigMenu

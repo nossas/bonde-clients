@@ -39,11 +39,11 @@ describe('~client/mobrender/components/block-config-menu', () => {
         menu = menuConfig.find('DropdownMenuItem').at(0)
       })
 
-      it('should call turnEditing(true) when clicked', () => {
+      it('should call onEdit("background") when clicked', () => {
         let result
-        menuConfig.setProps({ turnEditing: turn => result = turn })
+        menuConfig.setProps({ onEdit: turn => result = turn })
         menu.simulate('click')
-        expect(result).to.equal(true)
+        expect(result).to.equal('background')
       })
 
       it('should custom style to item', () => {
