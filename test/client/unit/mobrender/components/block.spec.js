@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 
 import Block from '~client/mobrender/components/block'
 import Widget from '~client/mobrender/components/widget.connected'
+import BlockConfigMenu from '~client/mobrender/components/block-config-menu.connected'
 
 describe('~client/mobrender/components/block', () => {
 
@@ -53,8 +54,34 @@ describe('~client/mobrender/components/block', () => {
     expect(block.find('div.hidden-tag').text()).to.equal(' Escondido')
   })
 
+  describe('render config menu', () => {
+    
+    it('should render config menu passing block', () => {
+      expect(block.find(BlockConfigMenu).length).to.equal(1)
+      expect(block.find(BlockConfigMenu).props().block).to.deep.equal(props.block)
+    })
+
+    it('should show when hasMouseOver and editable', () => {
+      expect(block.find(BlockConfigMenu).props().display).to.equal(false)
+      
+      block.setProps({ hasMouseOver: true, editable: true })
+      expect(block.find(BlockConfigMenu).props().display).to.equal(true)
+    })
+
+    it('should hide when editing or saving block even with hasMouseOver and editable are true', () => {
+      block.setProps({ hasMouseOver: true, editable: true })
+      expect(block.find(BlockConfigMenu).props().display).to.equal(true)
+
+      block.setProps({ editing: 'background', saving: false })
+      expect(block.find(BlockConfigMenu).props().display).to.equal(false)
+
+      block.setProps({ editing: undefined, saving: true })
+      expect(block.find(BlockConfigMenu).props().display).to.equal(false)
+    })
+  })
+
   describe('render widgets', () => {
-  
+
     const widgets = [
       { id: 1, kind: 'draft' },
       { id: 2, kind: 'draft' }

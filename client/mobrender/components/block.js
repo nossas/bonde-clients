@@ -1,8 +1,9 @@
 import React from 'react'
 import Widget from './widget.connected'
+import BlockConfigMenu from './block-config-menu.connected'
 
 
-const Block = ({ block, widgets, onMouseOver, onMouseOut, onCancelEdit }) => (
+const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
     onMouseOver={() => onMouseOver('block', block.id)}
@@ -27,6 +28,12 @@ const Block = ({ block, widgets, onMouseOver, onMouseOut, onCancelEdit }) => (
           </div>
         </div>
       )}
+      <div className='relative'>
+        <BlockConfigMenu
+          block={block}
+          display={editable && hasMouseOver && !editing && !saving ? true : false}
+        />
+      </div>
     </div>
   </div>
 )
@@ -34,10 +41,14 @@ const Block = ({ block, widgets, onMouseOver, onMouseOut, onCancelEdit }) => (
 Block.propTypes = {
   block: PropTypes.object.isRequired,
   widgets: PropTypes.array.isRequired,
+  editable: PropTypes.bool,
   // Injected by redux
+  hasMouseOver: PropTypes.bool,
   onMouseOver: PropTypes.func,
   onMouseOut: PropTypes.func,
-  onCancelEdit: PropTypes.func
+  onCancelEdit: PropTypes.func,
+  editing: PropTypes.string,
+  saving: PropTypes.bool
 }
 
 export default Block
