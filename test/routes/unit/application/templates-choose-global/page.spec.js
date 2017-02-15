@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import TemplatesChooseGlobalPage from '~routes/application/templates-choose-global/page'
+import Page from '~routes/application/templates-choose-global/page'
 
 describe('routes/application/templates-choose-global/page', () => {
   let wrapper
@@ -12,7 +12,7 @@ describe('routes/application/templates-choose-global/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<TemplatesChooseGlobalPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

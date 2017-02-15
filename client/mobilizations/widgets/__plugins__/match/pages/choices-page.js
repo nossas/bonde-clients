@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import * as paths from '~client/paths'
@@ -89,7 +90,7 @@ class ChoicesPage extends React.Component {
         }
       }))
       this.setState({ choicesChanged: false })
-      this.context.router.transitionTo(
+      browserHistory.push(
         paths.matchGoalsMobilizationWidget(mobilization.id, widget.id)
       )
     } else {
@@ -225,10 +226,6 @@ ChoicesPage.propTypes = {
   location: PropTypes.object.isRequired,
   mobilization: PropTypes.object,
   widgets: PropTypes.array
-}
-
-ChoicesPage.contextTypes = {
-  router: PropTypes.object.isRequired
 }
 
 export default ChoicesPage

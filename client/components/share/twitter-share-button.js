@@ -17,7 +17,6 @@ const TwitterShareButton = props => {
 
   return (
     <button
-      ref='button'
       className='btn white h3 p3 col-12 caps h5 rounded'
       onClick={handleClick}
       style={{backgroundColor: '#3DD1F4'}}

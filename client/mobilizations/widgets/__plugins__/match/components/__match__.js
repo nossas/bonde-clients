@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import * as paths from '~client/paths'
@@ -13,8 +14,8 @@ import * as MatchActions from '../action-creators'
 import { Choices, MatchTellAFriend } from '../components'
 
 class Match extends Component {
-  constructor (props, context) {
-    super(props, context)
+  constructor (props) {
+    super(props)
     this.state = {
       numberSelected: undefined,
       letterSelected: undefined,
@@ -27,7 +28,7 @@ class Match extends Component {
     const { mobilization, widget, editable } = this.props
     if (e) e.preventDefault()
     if (editable) {
-      this.context.router.transitionTo(
+      browserHistory.push(
         paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
       )
     }
@@ -198,10 +199,6 @@ Match.propTypes = {
       finish_message_type: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
-}
-
-Match.contextTypes = {
-  router: PropTypes.object.isRequired
 }
 
 export default Match

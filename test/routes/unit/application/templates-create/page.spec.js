@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import TemplatesCreatePage from '~routes/application/templates-create/page'
+import Page from '~routes/application/templates-create/page'
 
 describe('routes/application/templates-create/page', () => {
   let wrapper
@@ -15,7 +15,7 @@ describe('routes/application/templates-create/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<TemplatesCreatePage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

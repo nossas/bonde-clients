@@ -1,6 +1,5 @@
 import React from 'react'
 
-// Global module dependencies
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,

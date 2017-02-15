@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { decorate } from 'react-mixin'
-import { Link, Navigation } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
 // Global module dependencies
 import * as paths from '../paths'
@@ -11,7 +10,6 @@ import { Loading } from '~components/await'
 import { fetch, select } from '../actions'
 import { ListItem } from '../components'
 
-// @revert @decorate(Navigation)
 class ListPage extends Component {
   componentDidMount () {
     const { isLoaded, fetch } = this.props
@@ -20,13 +18,13 @@ class ListPage extends Component {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLoaded && nextProps.data.length === 0) {
-      this.transitionTo(paths.add())
+      browserHistory.push(paths.add())
     }
   }
 
   onClickItem (id) {
     this.props.select(id)
-    this.transitionTo('/')
+    browserHistory.push('/')
   }
 
   render () {

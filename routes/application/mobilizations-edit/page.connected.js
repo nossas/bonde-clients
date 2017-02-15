@@ -8,7 +8,7 @@ import * as BlockSelectors from '~mobilizations/blocks/selectors'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 
-import MobilizationsEditPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -40,4 +40,20 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(MobilizationsEditPage))
+const mapActionCreatorsToProps = {
+  blockUpdate: BlockActions.asyncBlockUpdate,
+  setEditionMode: BlockActions.setEditionMode,
+  blockDestroy: BlockActions.asyncBlockDestroy,
+  blockMove: (direction, payload) => dispatch => {
+    if (direction === 'up') {
+      dispatch(BlockActions.asyncBlockMoveUp(payload))
+    } else if (direction === 'down') {
+      dispatch(BlockActions.asyncBlockMoveDown(payload))
+    }
+  },
+  widgetUpdate: WidgetActions.asyncWidgetUpdate
+}
+
+export default provideHooks(redial)(
+  connect(mapStateToProps, mapActionCreatorsToProps)(Page)
+)

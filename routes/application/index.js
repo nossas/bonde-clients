@@ -20,6 +20,7 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./blocks-create').default(store),
         require('./mobilizations-edit').default(store),
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),
@@ -32,6 +33,19 @@ export default store => ({
         require('./templates-choose-global').default(store),
         require('./templates-create').default(store),
         require('./templates-list').default(store),
+        require('./widgets-donation-settings').default(store),
+        require('./widgets-donation-settings-autofire').default(store),
+        require('./widgets-donation-settings-export').default(store),
+        require('./widgets-donation-settings-finish').default(store),
+        require('./widgets-form-settings').default(store),
+        require('./widgets-form-settings-autofire').default(store),
+        require('./widgets-form-settings-export').default(store),
+        require('./widgets-form-settings-fields').default(store),
+        require('./widgets-form-settings-finish').default(store),
+        require('./widgets-pressure-settings').default(store),
+        require('./widgets-pressure-settings-autofire').default(store),
+        require('./widgets-pressure-settings-email').default(store),
+        require('./widgets-pressure-settings-finish').default(store),
 
         require('~common/routes/not-found').default
       ])

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
-import { Navigation } from 'react-router'
+import { browserHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
-import reactMixin from 'react-mixin'
 import $ from 'jquery'
 import classnames from 'classnames'
 
@@ -18,7 +17,6 @@ import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 import { Button, Input, FormTellAFriend } from '../components'
 import * as FormActions from '../action-creators'
 
-// @revert @reactMixin.decorate(Navigation)
 class Form extends React.Component {
   constructor (props, context) {
     super(props, context)
@@ -44,7 +42,7 @@ class Form extends React.Component {
   handleOverlayOnClick () {
     const { mobilization, widget, editable } = this.props
     if (editable) {
-      this.transitionTo(paths.fieldsMobilizationWidget(mobilization.id, widget.id))
+      browserHistory.push(paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
@@ -244,7 +242,7 @@ Form.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.shape({
     settings: PropTypes.shape({
-      finish_message_type: PropTypes.string.isRequired
+      finish_message_type: PropTypes.string
     }).isRequired
   }).isRequired,
   editable: PropTypes.bool,

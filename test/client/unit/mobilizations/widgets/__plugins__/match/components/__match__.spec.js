@@ -2,11 +2,9 @@ import React from 'react'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
+import { browserHistory } from 'react-router'
 
-// Global module dependencies
 import * as paths from '~client/paths'
-
-// Current module dependencies
 import Match from '~widget-plugins/match/components'
 
 describe('client/mobilizations/widgets/__plugins__/match/components/__match__', () => {
@@ -14,9 +12,7 @@ describe('client/mobilizations/widgets/__plugins__/match/components/__match__', 
   let sandbox
   let spy = {}
 
-  let context = {
-    router: { transitionTo: sinon.spy() }
-  }
+  browserHistory.push = sinon.spy()
 
   let props = {
     editable: true,
@@ -46,7 +42,7 @@ describe('client/mobilizations/widgets/__plugins__/match/components/__match__', 
   })
 
   beforeEach(() => {
-    wrapper = shallow(<Match {...props} />, { context })
+    wrapper = shallow(<Match {...props} />)
   })
 
   afterEach(() => {
@@ -152,14 +148,14 @@ describe('client/mobilizations/widgets/__plugins__/match/components/__match__', 
         wrapper.find('WidgetOverlay').simulate('click')
       })
 
-      it('should call transitionTo', () => {
-        expect(context.router.transitionTo.calledOnce).to.equal(true)
+      it('should call `react-router` browserHistory.push method', () => {
+        expect(browserHistory.push.calledOnce).to.equal(true)
       })
 
-      it('should transitionTo called with correct params', () => {
+      it('should browserHistory.push called with correct params', () => {
         const { mobilization, widget } = props
         const path = paths.matchChoicesMobilizationWidget(mobilization.id, widget.id)
-        expect(context.router.transitionTo.calledWith(path)).to.equal(true)
+        expect(browserHistory.push.calledWith(path)).to.equal(true)
       })
     })
   })

@@ -5,6 +5,8 @@ import mobilizations from '~mobilizations/reducers'
 import blocks from '~mobilizations/blocks/reducers'
 import widgets from '~mobilizations/widgets/reducers'
 import community from '~community/reducers'
+import colorPicker from '~components/color-picker/reducers'
+
 const initialState = {
   host: '',
   protocol: ''
@@ -23,6 +25,7 @@ export default function createReducer (asyncReducers) {
     blocks,
     widgets,
     community,
+    colorPicker,
     ...asyncReducers
   })
 }

@@ -5,7 +5,7 @@ import { fields, validate } from '~mobilizations/components/mobilization-basics-
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-import MobilizationsNewPage from './page'
+import Page from './page'
 
 const mapStateToProps = state => {
   const mobilization = MobilizationSelectors.getCurrent(state) || {}
@@ -27,4 +27,4 @@ export default reduxForm(
   { form: 'newMobilizationForm', fields, validate },
   mapStateToProps,
   mapActionCreatorsToProps
-)(MobilizationsNewPage)
+)(Page)

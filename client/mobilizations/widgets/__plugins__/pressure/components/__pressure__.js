@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 // Global module dependencies
 import * as paths from '~client/paths'
@@ -63,8 +64,8 @@ export class Pressure extends Component {
     const { mobilization, widget, editable } = this.props
     if (editable) {
       if (e) e.preventDefault()
-      this.context.router.transitionTo(
-        paths.formPressureWidget(mobilization.id, widget.id)
+      browserHistory.push(
+        paths.pressure(mobilization.id, widget.id)
       )
     }
   }
@@ -155,10 +156,6 @@ Pressure.propTypes = {
   filled: PropTypes.bool,
   // Actions
   asyncFillWidget: PropTypes.func
-}
-
-Pressure.contextTypes = {
-  router: PropTypes.object.isRequired
 }
 
 // const mapStateToProps = ({ widgets: { plugins: { pressure } } }) => ({
