@@ -30,4 +30,21 @@ describe('client/mobrender/redux/action-creators (non-async)', () => {
       expect(store.getActions()[0]).to.deep.equal(expected)
     })
   })
+
+  describe('doing edition', () => {
+    
+    it('handleEdit', () => {
+      const expected = createAction(t.TURN_ON_EDITION, 'background')
+      store.dispatch(MobActions.handleEdit('background'))
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
+
+    it('handleCancelEdit', () => {
+      const expected = createAction(t.TURN_OFF_EDITION)
+      store.dispatch(MobActions.handleCancelEdit())
+      expect(store.getActions().length).to.equal(1)
+      expect(store.getActions()[0]).to.deep.equal(expected)
+    })
+  })
 })

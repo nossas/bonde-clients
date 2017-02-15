@@ -5,10 +5,10 @@ import reducer, { initialState } from '~client/mobrender/redux/reducers/edition'
 
 describe('~client/mobrender/redux/reducers/edition', () => {
   
-  describe('TURN_ON_EDITION_MODE', () => {
+  describe('TURN_ON_EDITION', () => {
     
     it('should turn on edition mode', () => {
-      const action = { type: t.TURN_ON_EDITION_MODE }
+      const action = { type: t.TURN_ON_EDITION }
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({...initialState,
         isEditing: true
@@ -16,7 +16,7 @@ describe('~client/mobrender/redux/reducers/edition', () => {
     })
 
     it('should set payload like mode', () => {
-      const action = { type: t.TURN_ON_EDITION_MODE, payload: 'widget' }
+      const action = { type: t.TURN_ON_EDITION, payload: 'widget' }
       const nextState = reducer(initialState, action)
       expect(nextState).to.deep.equal({...initialState,
         isEditing: true,
@@ -25,7 +25,7 @@ describe('~client/mobrender/redux/reducers/edition', () => {
     })
   })
 
-  describe('TURN_OFF_EDITION_MODE', () => {
+  describe('TURN_OFF_EDITION', () => {
     
     const turnOnState = {...initialState,
       isEditing: true,
@@ -33,7 +33,7 @@ describe('~client/mobrender/redux/reducers/edition', () => {
     }
 
     it('should turn off edition mode', () => {
-      const action = { type: t.TURN_OFF_EDITION_MODE }
+      const action = { type: t.TURN_OFF_EDITION }
       const nextState = reducer(turnOnState, action)
       expect(nextState).to.deep.equal(initialState)
     })
