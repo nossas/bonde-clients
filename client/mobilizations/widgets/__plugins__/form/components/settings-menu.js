@@ -8,7 +8,7 @@ import { SettingsPageMenuLayout } from '~components/layout'
 const SettingsMenu = ({ mobilization, widget, location }) => {
   const fieldsPath = paths.fieldsMobilizationWidget(mobilization.id, widget.id)
   const formPath = paths.formMobilizationWidget(mobilization.id, widget.id)
-  const autofirePath = paths.autofireMobilizationWidget(mobilization.id, widget.id)
+  const formAutofirePath = paths.formAutofire(mobilization.id, widget.id)
   const exportPath = paths.exportWidgetData(mobilization.id, widget.id)
   const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id)
 
@@ -26,9 +26,9 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={formPath === location.pathname}
         />
         <Tab
-          path={autofirePath}
+          path={formAutofirePath}
           text='Mensagem agradecimento'
-          isActive={autofirePath === location.pathname}
+          isActive={formAutofirePath === location.pathname}
         />
         <Tab
           path={exportPath}
