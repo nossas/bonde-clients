@@ -4,7 +4,7 @@ import blocksReducer from './blocks'
 import widgetsReducer from './widgets'
 import editionReducer from './edition'
 import hoverReducer from './hover'
-import uploaderReducer from './uploaderReducer'
+import uploaderReducer from './uploader'
 
 export default combineReducers({
   blocks: blocksReducer,

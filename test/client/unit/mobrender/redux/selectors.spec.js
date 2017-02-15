@@ -106,4 +106,25 @@ describe('~client/mobrender/redux/selectors', () => {
       expect(selectors.getBlocks()).to.deep.equal(data)
     })
   })
+
+  describe('#getUploadProgress(key)', () => {
+    
+    const nextState = state.mergeDeep(fromJS({
+      mobilizations: {
+        uploader: {
+          bgBlock: 50
+        }
+      }
+    })).toJS()
+
+    const selectors = Selectors(nextState)
+    
+    it('should return undefined when not exists key to upload', () => {
+      expect(selectors.getUploadProgress('header')).to.equal(undefined)
+    })
+
+    it('should return progress when exists key to upload', () => {
+      expect(selectors.getUploadProgress('bgBlock')).to.equal(50)
+    })
+  })
 })

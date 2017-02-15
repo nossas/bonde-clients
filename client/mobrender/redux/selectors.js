@@ -28,6 +28,11 @@ export default (state, props) => ({
     const { blocks: { data } } = state.mobilizations
     const index = data.length-1
     return data[index] && data[index].id !== block.id
+  },
+
+  getUploadProgress: (key) => {
+    const { uploader } = state.mobilizations
+    return uploader[key]
   }
 })
 
