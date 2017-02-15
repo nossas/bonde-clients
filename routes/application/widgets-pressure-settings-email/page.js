@@ -1,22 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import { reduxForm } from 'redux-form'
 
-// Global module dependencies
 import { FormRedux, FormGroup, ControlLabel, FormControl } from '~components/forms'
 import { SettingsPageContentLayout } from '~components/layout'
-
-// Parent module dependencies
-import { actions as WidgetActions } from '~mobilizations/widgets'
 import { InputTag } from '~mobilizations/widgets/components'
-
-// Current module dependencies
-import { SettingsBase } from '../components'
+import { SettingsBase } from '~widget-plugins/pressure/components'
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 // eslint-disable-next-line
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
-export class SettingsEmailPage extends Component {
+class WidgetsPressureSettingsEmailPage extends Component {
   constructor (props) {
     super(props)
     this.state = { targets: this.getTargetList() || [] }
@@ -99,7 +92,7 @@ export class SettingsEmailPage extends Component {
   }
 }
 
-SettingsEmailPage.propTypes = {
+WidgetsPressureSettingsEmailPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -110,28 +103,4 @@ SettingsEmailPage.propTypes = {
   submitting: PropTypes.bool.isRequired
 }
 
-const fields = ['pressure_subject', 'pressure_body', 'targets']
-
-const validate = values => {
-  const errors = {}
-  if (!values.pressure_subject) {
-    errors.pressure_subject = 'Preenchimento obrigatório'
-  }
-  if (!values.pressure_body) {
-    errors.pressure_body = 'Preenchimento obrigatório'
-  }
-  return errors
-}
-
-const mapStateToProps = (state, props) => ({
-  initialValues: {
-    ...props.widget.settings || {},
-    targets: props.widget.settings && props.widget.settings.targets
-  }
-})
-
-export default reduxForm(
-  { form: 'widgetForm', fields, validate },
-  mapStateToProps,
-  WidgetActions
-)(SettingsEmailPage)
+export default WidgetsPressureSettingsEmailPage
