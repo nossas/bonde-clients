@@ -12,8 +12,8 @@ const namespace = '/widgets/:widget_id'
 
 export default () => (
   <Route path={namespace} component={SettingsContainer}>
-    <Route path='/autofire' key='autofire-form-page' component={AutofireFormPage} /> {/* <~ Migration In Progress */}
-    <Route path='/export' key='data-export-page' component={DataExportPage} />
+    <Route path='/autofire' key='autofire-form-page' component={AutofireFormPage} /> {/* <~ Migrated! */}
+    <Route path='/export' key='data-export-page' component={DataExportPage} /> {/* <~ Migration In Progress */}
     {PluginsRoutes()}
   </Route>
 )
