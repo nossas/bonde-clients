@@ -1,18 +1,10 @@
 import React, { PropTypes } from 'react'
 
-// Global module dependencies
 import { SettingsPageContentLayout } from '~components/layout'
-import {
-  FormRedux,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from '~components/forms'
-
-// Current module dependencies
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '~components/forms'
 import { SettingsMenu } from '~widget-plugins/form/components'
 
-const WidgetsFormSettingsPage = ({
+const FormSettingsPage = ({
   fields: {
     call_to_action: callToAction,
     button_text: buttonText,
@@ -64,7 +56,7 @@ const WidgetsFormSettingsPage = ({
   </div>
 )
 
-WidgetsFormSettingsPage.propTypes = {
+FormSettingsPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -75,4 +67,4 @@ WidgetsFormSettingsPage.propTypes = {
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default WidgetsFormSettingsPage
+export default FormSettingsPage

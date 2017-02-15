@@ -8,7 +8,7 @@ import * as BlockSelectors from '~mobilizations/blocks/selectors'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 
-import MobilizationsEditPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -55,5 +55,5 @@ const mapActionCreatorsToProps = {
 }
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(MobilizationsEditPage)
+  connect(mapStateToProps, mapActionCreatorsToProps)(Page)
 )

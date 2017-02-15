@@ -6,7 +6,7 @@ import * as MobilizationActions from '~mobilizations/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 
-import TemplatesCreatePage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -40,6 +40,6 @@ export default provideHooks(redial)(
     reduxForm({
       form: 'templateCreateForm',
       fields: ['name', 'goal', 'mobilization_id', 'global']
-    })(TemplatesCreatePage)
+    })(Page)
   )
 )

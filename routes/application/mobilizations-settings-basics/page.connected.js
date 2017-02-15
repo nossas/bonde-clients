@@ -6,7 +6,7 @@ import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 import { fields, validate } from '~mobilizations/components/mobilization-basics-form'
 
-import MobilizationsSettingsBasicsPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -38,6 +38,6 @@ export default provideHooks(redial)(
       form: 'mobilizationBasicsForm',
       fields: [...fields, 'id'],
       validate
-    })(MobilizationsSettingsBasicsPage)
+    })(Page)
   )
 )

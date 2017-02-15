@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
-// Global module dependencies
 import { Loading } from '~components/await'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-
-// Current module dependencies
 import Form, { SettingsMenu } from '~widget-plugins/form/components'
 
-class WidgetsFormSettingsPage extends Component {
+class FormSettingsFieldsPage extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = { loading: false, hasNewField: false }
@@ -111,11 +108,11 @@ class WidgetsFormSettingsPage extends Component {
   }
 }
 
-WidgetsFormSettingsPage.propTypes = {
+FormSettingsFieldsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default WidgetsFormSettingsPage
+export default FormSettingsFieldsPage

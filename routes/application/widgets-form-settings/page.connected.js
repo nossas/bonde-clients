@@ -7,7 +7,7 @@ import * as MobilizationActions from '~mobilizations/action-creators'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 
-import WidgetsFormSettingsPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -37,6 +37,6 @@ const mapStateToProps = (state, props) => {
 
 export default provideHooks(redial)(
   connect(mapStateToProps, WidgetActions)(
-    reduxForm({ form: 'widgetsFormSettingsPageForm', fields })(WidgetsFormSettingsPage)
+    reduxForm({ form: 'widgetsFormSettingsPageForm', fields })(Page)
   )
 )

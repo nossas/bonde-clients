@@ -5,7 +5,7 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layou
 import { SettingsMenu } from '~widget-plugins/pressure/components'
 import { FormAutofire } from '~mobilizations/widgets/components'
 
-const WidgetsPressureSettingsAutofirePage = props => !props.widget ? (
+const PressureSettingsAutofirePage = props => !props.widget ? (
   <Loading />
 ) : (
   <SettingsPageLayout>
@@ -16,7 +16,7 @@ const WidgetsPressureSettingsAutofirePage = props => !props.widget ? (
   </SettingsPageLayout>
 )
 
-WidgetsPressureSettingsAutofirePage.propTypes = {
+PressureSettingsAutofirePage.propTypes = {
   fields: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
@@ -24,4 +24,4 @@ WidgetsPressureSettingsAutofirePage.propTypes = {
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default WidgetsPressureSettingsAutofirePage
+export default PressureSettingsAutofirePage

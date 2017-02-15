@@ -5,7 +5,7 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layou
 import { SettingsMenu as DonationSettingsMenu } from '~widget-plugins/donation/components'
 import { FormAutofire } from '~mobilizations/widgets/components'
 
-const WidgetsDonationSettingsAutofirePage = props => !props.widget ? (
+const DonationSettingsAutofirePage = props => !props.widget ? (
   <Loading />
 ) : (
   <SettingsPageLayout>
@@ -16,7 +16,7 @@ const WidgetsDonationSettingsAutofirePage = props => !props.widget ? (
   </SettingsPageLayout>
 )
 
-WidgetsDonationSettingsAutofirePage.propTypes = {
+DonationSettingsAutofirePage.propTypes = {
   fields: PropTypes.object.isRequired,
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
@@ -24,4 +24,4 @@ WidgetsDonationSettingsAutofirePage.propTypes = {
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default WidgetsDonationSettingsAutofirePage
+export default DonationSettingsAutofirePage

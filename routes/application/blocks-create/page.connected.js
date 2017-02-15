@@ -5,7 +5,7 @@ import * as MobilizationActions from '~mobilizations/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as BlockSelectors from '~mobilizations/blocks/selectors'
 
-import BlocksCreatePage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -28,4 +28,4 @@ const mapStateToProps = state => ({
   selectedColor: state.colorPicker.color
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(BlocksCreatePage))
+export default provideHooks(redial)(connect(mapStateToProps)(Page))

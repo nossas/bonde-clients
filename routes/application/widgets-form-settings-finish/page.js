@@ -3,7 +3,7 @@ import React from 'react'
 import { FormFinishMessage } from '~mobilizations/widgets/components'
 import { FormTellAFriend, SettingsMenu } from '~widget-plugins/form/components'
 
-const WidgetsFormSettingsFinishPage = props => (
+const FormSettingsFinishPage = props => (
   <FormFinishMessage
     {...props}
     SettingsMenu={SettingsMenu}
@@ -12,4 +12,4 @@ const WidgetsFormSettingsFinishPage = props => (
   />
 )
 
-export default WidgetsFormSettingsFinishPage
+export default FormSettingsFinishPage

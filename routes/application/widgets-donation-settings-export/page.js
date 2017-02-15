@@ -5,7 +5,7 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layou
 import { SettingsMenu } from '~widget-plugins/donation/components'
 import { DataExport } from '~mobilizations/widgets/components'
 
-const WidgetsFormSettingsExportPage = props => !props.widget ? <Loading /> : (
+const DonationSettingsExportPage = props => !props.widget ? <Loading /> : (
   <SettingsPageLayout>
     <SettingsMenu {...props} />
     <SettingsPageContentLayout>
@@ -14,7 +14,7 @@ const WidgetsFormSettingsExportPage = props => !props.widget ? <Loading /> : (
   </SettingsPageLayout>
 )
 
-WidgetsFormSettingsExportPage.propTypes = {
+DonationSettingsExportPage.propTypes = {
   params: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool,
@@ -26,4 +26,4 @@ WidgetsFormSettingsExportPage.propTypes = {
   dataExportMount: PropTypes.func.isRequired
 }
 
-export default WidgetsFormSettingsExportPage
+export default DonationSettingsExportPage

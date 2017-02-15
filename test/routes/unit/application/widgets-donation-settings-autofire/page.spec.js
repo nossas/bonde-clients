@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import WidgetsDonationSettingsAutofirePage from '~routes/application/widgets-donation-settings-autofire/page'
+import Page from '~routes/application/widgets-donation-settings-autofire/page'
 
 describe('routes/application/widgets-donation-settings-autofire/page', () => {
   let wrapper
@@ -21,7 +21,7 @@ describe('routes/application/widgets-donation-settings-autofire/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsDonationSettingsAutofirePage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

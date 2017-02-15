@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import WidgetsDonationSettingsExportPage from '~routes/application/widgets-donation-settings-export/page'
+import Page from '~routes/application/widgets-donation-settings-export/page'
 
 describe('routes/application/widgets-donation-settings-export/page', () => {
   let wrapper
@@ -20,7 +20,7 @@ describe('routes/application/widgets-donation-settings-export/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsDonationSettingsExportPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

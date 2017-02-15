@@ -7,7 +7,7 @@ import * as MobilizationActions from '~mobilizations/action-creators'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 
-import WidgetsPressureSettingsEmailPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -53,6 +53,6 @@ export default provideHooks(redial)(
       form: 'widgetsPressureSettingsEmailForm',
       fields: ['pressure_subject', 'pressure_body', 'targets'],
       validate
-    })(WidgetsPressureSettingsEmailPage)
+    })(Page)
   )
 )

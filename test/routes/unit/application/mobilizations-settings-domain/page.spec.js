@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import MobilizationsSettingsDomainPage from '~routes/application/mobilizations-settings-domain/page'
+import Page from '~routes/application/mobilizations-settings-domain/page'
 
 describe('routes/application/mobilizations-settings-domain/page', () => {
   let wrapper
@@ -15,7 +15,7 @@ describe('routes/application/mobilizations-settings-domain/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationsSettingsDomainPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

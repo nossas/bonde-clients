@@ -1,12 +1,9 @@
 import React from 'react'
 
-// Parent module dependencies
 import { FormFinishMessage } from '~mobilizations/widgets/components'
-
-// Current module dependencies
 import { DonationTellAFriend, SettingsMenu } from '~widget-plugins/donation/components'
 
-const WidgetsDonationSettingsFinish = props => (
+const DonationSettingsFinish = props => (
   <FormFinishMessage
     {...props}
     SettingsMenu={SettingsMenu}
@@ -15,4 +12,4 @@ const WidgetsDonationSettingsFinish = props => (
   />
 )
 
-export default WidgetsDonationSettingsFinish
+export default DonationSettingsFinish

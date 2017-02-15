@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-import MobilizationsSettingsSharingPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -44,6 +44,6 @@ export default provideHooks(redial)(
     reduxForm({
       form: 'mobilizationSharingForm',
       fields
-    })(MobilizationsSettingsSharingPage)
+    })(Page)
   )
 )

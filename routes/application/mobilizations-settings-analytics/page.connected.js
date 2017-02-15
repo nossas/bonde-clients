@@ -6,7 +6,7 @@ import { isValidCodeGA } from '~utils/validation-helper'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-import MobilizationsSettingsAnalyticsPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -46,6 +46,6 @@ export default provideHooks(redial)(
       form: 'mobilizationAnalyticsForm',
       fields: ['id', 'google_analytics_code'],
       validate
-    })(MobilizationsSettingsAnalyticsPage)
+    })(Page)
   )
 )

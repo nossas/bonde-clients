@@ -2,14 +2,13 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Current module dependencies
-import WidgetsPressureSettingsFinishPage from '~routes/application/widgets-pressure-settings-finish/page'
+import Page from '~routes/application/widgets-pressure-settings-finish/page'
 
 describe('routes/application/widgets-pressure-settings-finish/page', () => {
   let wrapper
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsPressureSettingsFinishPage />)
+    wrapper = shallow(<Page />)
   })
 
   describe('#render', () => {
