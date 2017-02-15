@@ -7,7 +7,7 @@ import { SettingsEmailPage, SettingsFormPage, SettingsFinishMessagePage } from '
 const namespace = '/pressure'
 
 export default () => [
-  <Route path={`${namespace}`} component={SettingsFormPage} />,                 // <~ Migration In Progress
-  <Route path={`${namespace}/email`} component={SettingsEmailPage} />,
+  <Route path={`${namespace}`} component={SettingsFormPage} />,                 // <~ Migrated!
+  <Route path={`${namespace}/email`} component={SettingsEmailPage} />,          // <~ Migration In Progress
   <Route path={`${namespace}/finish`} component={SettingsFinishMessagePage} />
 ]

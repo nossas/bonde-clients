@@ -2,13 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~utils/mock'
+import WidgetsPressureSettingsEmailPage from '~routes/application/widgets-pressure-settings-email/page'
 
-// Current module dependencies
-import { SettingsEmailPage } from '~widget-plugins/pressure/pages/settings-email-page'
-
-describe('client/mobilizations/widgets/__plugins__/pressure/pages/settings-email-page', () => {
+describe('routes/application/widgets-pressure-settings-email/page', () => {
   let wrapper
   const props = {
     mobilization: {},
@@ -20,7 +17,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/pages/settings-email
   }
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsEmailPage {...props} />)
+    wrapper = shallow(<WidgetsPressureSettingsEmailPage {...props} />)
   })
 
   describe('#render', () => {
