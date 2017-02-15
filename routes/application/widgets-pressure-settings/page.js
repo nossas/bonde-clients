@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import { reduxForm } from 'redux-form'
 
-// Global module dependencies
 import { SettingsPageContentLayout } from '~components/layout'
 import {
   FormRedux,
@@ -12,14 +10,9 @@ import {
   RadioGroup,
   Radio
 } from '~components/forms'
+import { SettingsBase } from '~widget-plugins/pressure/components'
 
-// Parent module dependencies
-import { actions as WidgetActions } from '~mobilizations/widgets'
-
-// Current module dependencies
-import { SettingsBase } from '../components'
-
-export const SettingsFormPage = ({
+const WidgetsPressureSettingsPage = ({
   ...props,
   fields: {
     title_text: titleText,
@@ -103,7 +96,7 @@ export const SettingsFormPage = ({
   )
 }
 
-SettingsFormPage.propTypes = {
+WidgetsPressureSettingsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -115,38 +108,4 @@ SettingsFormPage.propTypes = {
   error: PropTypes.string
 }
 
-const fields = [
-  'title_text',
-  'button_text',
-  'show_counter',
-  'show_city',
-  'count_text',
-  'main_color'
-]
-
-const validate = values => {
-  const errors = {}
-  if (!values.title_text || values.title_text === '') {
-    errors.title_text = 'Insira um título para o formulário'
-  }
-  if (!values.button_text) {
-    errors.button_text = 'Insira um texto para o botão'
-  }
-  return errors
-}
-
-const mapStateToProps = (state, props) => ({
-  initialValues: {
-    show_counter: 'false',
-    show_city: 'city-false',
-    count_text: 'pressões feitas',
-    main_color: '#f23392',
-    ...props.widget.settings || {}
-  }
-})
-
-export default reduxForm({
-  form: 'widgetForm',
-  fields,
-  validate
-}, mapStateToProps, WidgetActions)(SettingsFormPage)
+export default WidgetsPressureSettingsPage

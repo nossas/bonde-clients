@@ -2,13 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~utils/mock'
+import WidgetsPressureSettingsPage from '~routes/application/widgets-pressure-settings/page'
 
-// Current module dependencies
-import { SettingsFormPage } from '~widget-plugins/pressure/pages/settings-form-page'
-
-describe('client/mobilizations/widgets/__plugins__/pressure/pages/settings-form-page', () => {
+describe('routes/application/widgets-pressure-settings/page', () => {
   let wrapper
   const props = {
     mobilization: { color_scheme: 'meurio-scheme' },
@@ -23,7 +20,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/pages/settings-form-
   }
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsFormPage {...props} />)
+    wrapper = shallow(<WidgetsPressureSettingsPage {...props} />)
   })
 
   describe('#render', () => {
