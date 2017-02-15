@@ -124,7 +124,7 @@ DataExport.propTypes = {
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool,
   error: PropTypes.object,
-  widgets: PropTypes.array.isRequired,
+  widget: PropTypes.object.isRequired,
   // Actions
   asyncWidgetDataExport: PropTypes.func.isRequired,
   dataExportMount: PropTypes.func.isRequired
