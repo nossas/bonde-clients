@@ -9,7 +9,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
   const fieldsPath = paths.fieldsMobilizationWidget(mobilization.id, widget.id)
   const formPath = paths.formMobilizationWidget(mobilization.id, widget.id)
   const formAutofirePath = paths.formAutofire(mobilization.id, widget.id)
-  const exportPath = paths.exportWidgetData(mobilization.id, widget.id)
+  const formExportPath = paths.formExport(mobilization.id, widget.id)
   const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id)
 
   return (
@@ -31,9 +31,9 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={formAutofirePath === location.pathname}
         />
         <Tab
-          path={exportPath}
+          path={formExportPath}
           text='Relatório'
-          isActive={exportPath === location.pathname}
+          isActive={formExportPath === location.pathname}
         />
         <Tab
           path={finishPath}
