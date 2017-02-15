@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 
-// Global module dependencies
 import {
   FormRedux,
   FormGroup,
@@ -13,11 +12,9 @@ import {
 } from '~components/forms'
 import { HorizontalLayout } from '~components/grids'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-
-// Current module dependencies
 import { SettingsMenu } from '~widget-plugins/donation/components'
 
-const WidgetsDonationSettingsPage = props => {
+const DonationSettingsPage = props => {
   const {
     dispatch,
     fields: {
@@ -151,7 +148,7 @@ const WidgetsDonationSettingsPage = props => {
   )
 }
 
-WidgetsDonationSettingsPage.propTypes = {
+DonationSettingsPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
@@ -163,4 +160,4 @@ WidgetsDonationSettingsPage.propTypes = {
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
-export default WidgetsDonationSettingsPage
+export default DonationSettingsPage

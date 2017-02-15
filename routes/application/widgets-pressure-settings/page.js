@@ -12,7 +12,7 @@ import {
 } from '~components/forms'
 import { SettingsBase } from '~widget-plugins/pressure/components'
 
-const WidgetsPressureSettingsPage = ({
+const PressureSettingsPage = ({
   ...props,
   fields: {
     title_text: titleText,
@@ -96,7 +96,7 @@ const WidgetsPressureSettingsPage = ({
   )
 }
 
-WidgetsPressureSettingsPage.propTypes = {
+PressureSettingsPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -108,4 +108,4 @@ WidgetsPressureSettingsPage.propTypes = {
   error: PropTypes.string
 }
 
-export default WidgetsPressureSettingsPage
+export default PressureSettingsPage

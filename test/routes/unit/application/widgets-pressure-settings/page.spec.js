@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import WidgetsPressureSettingsPage from '~routes/application/widgets-pressure-settings/page'
+import Page from '~routes/application/widgets-pressure-settings/page'
 
 describe('routes/application/widgets-pressure-settings/page', () => {
   let wrapper
@@ -20,7 +20,7 @@ describe('routes/application/widgets-pressure-settings/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsPressureSettingsPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

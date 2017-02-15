@@ -6,7 +6,7 @@ import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 import { isValidDomain } from '~utils/validation-helper'
 
-import MobilizationsSettingsDomainPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -46,6 +46,6 @@ export default provideHooks(redial)(
       form: 'mobilizationDomainForm',
       fields: ['id', 'custom_domain'],
       validate
-    })(MobilizationsSettingsDomainPage)
+    })(Page)
   )
 )

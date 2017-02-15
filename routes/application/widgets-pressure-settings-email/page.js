@@ -9,7 +9,7 @@ import { SettingsBase } from '~widget-plugins/pressure/components'
 // eslint-disable-next-line
 const patternTarget = /[\w]+[ ]*<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 
-class WidgetsPressureSettingsEmailPage extends Component {
+class PressureSettingsEmailPage extends Component {
   constructor (props) {
     super(props)
     this.state = { targets: this.getTargetList() || [] }
@@ -92,7 +92,7 @@ class WidgetsPressureSettingsEmailPage extends Component {
   }
 }
 
-WidgetsPressureSettingsEmailPage.propTypes = {
+PressureSettingsEmailPage.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   // Actions
@@ -103,4 +103,4 @@ WidgetsPressureSettingsEmailPage.propTypes = {
   submitting: PropTypes.bool.isRequired
 }
 
-export default WidgetsPressureSettingsEmailPage
+export default PressureSettingsEmailPage

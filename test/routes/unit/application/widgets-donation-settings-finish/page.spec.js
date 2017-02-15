@@ -2,14 +2,13 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Current module dependencies
-import WidgetsDonationSettingsFinish from '~routes/application/widgets-donation-settings-finish/page'
+import Page from '~routes/application/widgets-donation-settings-finish/page'
 
 describe('routes/application/widgets-donation-settings-finish/page', () => {
   let wrapper
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsDonationSettingsFinish />)
+    wrapper = shallow(<Page />)
   })
 
   describe('#render', () => {

@@ -7,7 +7,7 @@ import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
-import CustomDomainPage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, host }) => {
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
   widgets: state.widgets.list.data
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(CustomDomainPage))
+export default provideHooks(redial)(connect(mapStateToProps)(Page))

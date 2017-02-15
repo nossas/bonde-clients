@@ -8,7 +8,7 @@ import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
 import { fields, validate } from '~mobilizations/widgets/components/form-autofire'
 
-import WidgetsDonationSettingsAutofirePage from './page'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
@@ -40,6 +40,6 @@ export default provideHooks(redial)(
       form: 'donationAutofireForm',
       fields,
       validate
-    })(WidgetsDonationSettingsAutofirePage)
+    })(Page)
   )
 )

@@ -2,11 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~utils/mock'
-
-// Current module dependencies
-import WidgetsDonationSettingsPage from '~routes/application/widgets-donation-settings/page'
+import Page from '~routes/application/widgets-donation-settings/page'
 
 describe('routes/application/widgets-donation-settings/page', () => {
   let wrapper
@@ -30,7 +27,7 @@ describe('routes/application/widgets-donation-settings/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsDonationSettingsPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

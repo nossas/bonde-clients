@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import WidgetsFormSettingsPage from '~routes/application/widgets-form-settings-fields/page'
+import Page from '~routes/application/widgets-form-settings-fields/page'
 
 describe('routes/application/widgets-form-settings-fields/page', () => {
   let wrapper
@@ -14,7 +14,7 @@ describe('routes/application/widgets-form-settings-fields/page', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WidgetsFormSettingsPage {...props} />)
+    wrapper = shallow(<Page {...props} />)
   })
 
   describe('#render', () => {

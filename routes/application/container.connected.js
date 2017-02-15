@@ -5,7 +5,7 @@ import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
 import Sidebar from '~components/navigation/sidebar'
 
-import ApplicationContainer from './container'
+import Container from './container'
 
 const redial = {
   fetch: ({ dispatch, getState }) => {
@@ -23,5 +23,5 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, MobilizationActions)(ApplicationContainer)
+  connect(mapStateToProps, MobilizationActions)(Container)
 )

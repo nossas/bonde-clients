@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import { BLOCK_LAYOUTS } from '~mobilizations/blocks/constants'
-import BlocksCreatePage from '~routes/application/blocks-create/page'
+import Page from '~routes/application/blocks-create/page'
 
 describe('routes/application/blocks-create/page', () => {
   let wrapper
@@ -17,7 +17,7 @@ describe('routes/application/blocks-create/page', () => {
 
   describe('#render', () => {
     beforeEach(() => {
-      wrapper = shallow(<BlocksCreatePage {...props} />)
+      wrapper = shallow(<Page {...props} />)
     })
 
     it('should render root .block-create <div>', () => {
