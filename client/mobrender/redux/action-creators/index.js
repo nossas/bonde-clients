@@ -12,3 +12,4 @@ export { default as handleEdit } from './handle-edit'
 export { default as handleCancelEdit } from './handle-cancel-edit'
 
 export { default as handleUploadFile } from './handle-upload-file'
+export { default as handleChangeBackground } from './handle-change-background'

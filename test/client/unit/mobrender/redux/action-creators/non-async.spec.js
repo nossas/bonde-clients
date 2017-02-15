@@ -65,4 +65,12 @@ describe('client/mobrender/redux/action-creators (non-async)', () => {
     })
 
   })
+
+  it('#handleChangeBackground(block)', () => {
+    const block = { id: 1, bg_image: 'tmp://old.png' }
+    const expected = createAction(t.CHANGE_BLOCK_BACKGROUND, block)
+    store.dispatch(MobActions.handleChangeBackground(block))
+    expect(store.getActions().length).to.equal(1)
+    expect(store.getActions()[0]).to.deep.equal(expected)
+  })
 })

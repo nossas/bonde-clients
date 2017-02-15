@@ -110,4 +110,24 @@ describe('~client/mobrender/redux/reducers/blocks', () => {
       })
     })
   })
+
+  describe('doing update block', () => {
+    const data = [
+      { id: 1, name: 'Lorem', bg_image: 'tmp://old.png' },
+      { id: 2, name: 'Ipsum', bg_class: 'bg-5' }
+    ]
+    const fetchState = {...initialState,
+      isLoaded: true,
+      data
+    }
+
+    it('change background', () => {
+      const payload = {...data[0], bg_image: 'tmp://new.png'}
+      const action = { type: t.CHANGE_BLOCK_BACKGROUND, payload }
+      const nextState = reducer(fetchState, action)
+      expect(nextState).to.deep.equal({...nextState,
+        data: [payload, data[1]]
+      })
+    })
+  })
 })

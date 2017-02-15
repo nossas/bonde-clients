@@ -37,6 +37,12 @@ export default (state = initialState, action = {}) => {
           b => b.id === action.payload.id ? action.payload : b
         )
       }
+    case t.CHANGE_BLOCK_BACKGROUND:
+      return {...state,
+        data: state.data.map(
+          b => b.id === action.payload.id ? action.payload : b
+        )
+      }
     case t.UPDATE_BLOCK_FAILURE:
       return {...state,
         saving: false,
