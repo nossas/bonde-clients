@@ -65,7 +65,7 @@ export class Pressure extends Component {
     if (editable) {
       if (e) e.preventDefault()
       browserHistory.push(
-        paths.formPressureWidget(mobilization.id, widget.id)
+        paths.pressure(mobilization.id, widget.id)
       )
     }
   }
