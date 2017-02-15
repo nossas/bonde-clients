@@ -3,7 +3,7 @@ import { BasicColorPicker } from '~components/basic-color-picker'
 import FileUploader from './file-uploader'
 
 
-const BlockChangeBackground = ({ block, onChangeBackground, progress, onProgress, onCancelEdit, update }) => (
+const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFile, onCancelEdit, update }) => (
   <div className='absolute col-12 top-0 z5 bg-darken-4'>
     <BasicColorPicker
       colors={['bg-1', 'bg-2', 'bg-3', 'bg-4']}
@@ -15,10 +15,10 @@ const BlockChangeBackground = ({ block, onChangeBackground, progress, onProgress
     <FileUploader
       file={block.bg_image}
       progress={progress}
-      onProgress={onProgress}
+      onProgress={progress => onUploadFile('bgBlock', progress)}
       onRemove={() => onChangeBackground({...block, bg_image: undefined})}
       onFinish={file => {
-        onProgress(undefined)
+        onUploadFile('bgBlock')
         onChangeBackground({...block, bg_image: file})  
       }}
     />
@@ -50,8 +50,8 @@ BlockChangeBackground.propTypes = {
   update: PropTypes.func.isRequired,
   onChangeBackground: PropTypes.func,
   onCancelEdit: PropTypes.func,
-  progress: PropTypes.number,
-  onProgress: PropTypes.func,
+  onUploadFile: PropTypes.func,
+  progress: PropTypes.number
 }
 
 export default BlockChangeBackground

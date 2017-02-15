@@ -59,29 +59,32 @@ describe('~client/mobrender/components/block-change-background', () => {
       })
     })
 
-    it('should call onChangeBackground and onProgress(undefined) when onFinish is called', () => {
+    it('should call onChangeBackground and uploadFile("bgBlock") when onFinish is called', () => {
       let result
-      let resultProgress = 99
+      let resultProgress
       changeBackground.setProps({
         onChangeBackground: block => result = block,
-        onProgress: progress => resultProgress = progress
+        onUploadFile: key => resultProgress = key
       })
       const newBgFile = 'tmp://new-bg.png'
       changeBackground.find('FileUploader').props().onFinish(newBgFile)
       expect(result).to.deep.equal({...props.block,
         bg_image: newBgFile
       })
-      expect(resultProgress).to.equal(undefined)
+      expect(resultProgress).to.equal('bgBlock')
     })
 
-    it('should pass progress props to uploader', () => {
-      const progressProps = {
-        onProgress: progress => {},
-        progress: 25
-      }
-      changeBackground.setProps(progressProps)
-      const result = changeBackground.find('FileUploader').props()
-      expect(result).to.deep.contains(progressProps)
+    it('should pass progress to file uploader', () => {
+      changeBackground.setProps({ progress: 25 })
+      const result = changeBackground.find('FileUploader').props().progress
+      expect(result).to.equal(25)
+    })
+
+    it('should call onUploadFile("bgBlock", progres) while loading', () => {
+      let result
+      changeBackground.setProps({ onUploadFile: (key, progress) => result = {key, progress} })
+      changeBackground.find('FileUploader').props().onProgress(59)
+      expect(result).to.deep.equal({ key: 'bgBlock', progress: 59 })
     })
   })
 
