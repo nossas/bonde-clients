@@ -2,13 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~utils/mock'
+import WidgetsDonationSettingsAutofirePage from '~routes/application/widgets-donation-settings-autofire/page'
 
-// Current module dependencies
-import { AutofireFormPage } from '~mobilizations/widgets/pages/autofire-form-page'
-
-describe('client/mobilizations/widgets/pages/autofire-form-page', () => {
+describe('routes/application/widgets-donation-settings-autofire/page', () => {
   let wrapper
   const props = {
     fields: {
@@ -18,14 +15,13 @@ describe('client/mobilizations/widgets/pages/autofire-form-page', () => {
       email_text: {}
     },
     mobilization: { id: 1 },
-    widgets: [{ id: 1 }],
     widget: { kind: 'donation' },
     // Actions
     asyncWidgetUpdate: mock.noop
   }
 
   beforeAll(() => {
-    wrapper = shallow(<AutofireFormPage {...props} />)
+    wrapper = shallow(<WidgetsDonationSettingsAutofirePage {...props} />)
   })
 
   describe('#render', () => {

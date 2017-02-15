@@ -7,7 +7,7 @@ import { SettingsPageMenuLayout } from '~components/layout'
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
   const donationPath = paths.donation(mobilization.id, widget.id)
-  const autofirePath = paths.autofireMobilizationWidget(mobilization.id, widget.id)
+  const donationAutofirePath = paths.donationAutofire(mobilization.id, widget.id)
   const donationFinishPath = paths.donationFinish(mobilization.id, widget.id)
 
   return (
@@ -20,8 +20,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
         />
         <Tab
           text='Mensagem agradecimento'
-          path={autofirePath}
-          isActive={autofirePath === location.pathname}
+          path={donationAutofirePath}
+          isActive={donationAutofirePath === location.pathname}
         />
         <Tab
           text='Pós-doação'
