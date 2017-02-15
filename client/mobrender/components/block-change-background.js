@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { BasicColorPicker } from '~components/basic-color-picker'
 import FileUploader from './file-uploader'
 
+export const BLOCK_UPLOAD_KEY = 'bgBlock'
 
 const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFile, onCancelEdit, update }) => (
   <div className='absolute col-12 top-0 z5 bg-darken-4'>
@@ -15,10 +16,10 @@ const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFi
     <FileUploader
       file={block.bg_image}
       progress={progress}
-      onProgress={progress => onUploadFile('bgBlock', progress)}
+      onProgress={progress => onUploadFile(BLOCK_UPLOAD_KEY, progress)}
       onRemove={() => onChangeBackground({...block, bg_image: undefined})}
       onFinish={file => {
-        onUploadFile('bgBlock')
+        onUploadFile(BLOCK_UPLOAD_KEY)
         onChangeBackground({...block, bg_image: file})  
       }}
     />
