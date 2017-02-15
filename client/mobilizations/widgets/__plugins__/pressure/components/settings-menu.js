@@ -6,33 +6,33 @@ import { Tabs, Tab } from '~components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~components/layout'
 
 const SettingsMenu = ({ location, mobilization, widget }) => {
-  const formPath = paths.formPressureWidget(mobilization.id, widget.id)
-  const emailPath = paths.emailPressureWidget(mobilization.id, widget.id)
-  const finishPath = paths.finishPressureWidget(mobilization.id, widget.id)
-  const autofirePath = paths.autofireMobilizationWidget(mobilization.id, widget.id)
+  const pressurePath = paths.pressure(mobilization.id, widget.id)
+  const pressureEmailPath = paths.pressureEmail(mobilization.id, widget.id)
+  const pressureAutofirePath = paths.pressureAutofire(mobilization.id, widget.id)
+  const pressureFinishPath = paths.pressureFinish(mobilization.id, widget.id)
 
   return (
     <SettingsPageMenuLayout title='Configure seu formulário de pressão'>
       <Tabs>
         <Tab
-          path={formPath}
+          path={pressurePath}
           text='Formulário'
-          isActive={formPath === location.pathname}
+          isActive={pressurePath === location.pathname}
         />
         <Tab
-          path={emailPath}
+          path={pressureEmailPath}
           text='E-mail para alvo'
-          isActive={emailPath === location.pathname}
+          isActive={pressureEmailPath === location.pathname}
         />
         <Tab
-          path={autofirePath}
+          path={pressureAutofirePath}
           text='Mensagem de agradecimento'
-          isActive={autofirePath === location.pathname}
+          isActive={pressureAutofirePath === location.pathname}
         />
         <Tab
-          path={finishPath}
+          path={pressureFinishPath}
           text='Pós-pressão'
-          isActive={finishPath === location.pathname}
+          isActive={pressureFinishPath === location.pathname}
         />
       </Tabs>
     </SettingsPageMenuLayout>

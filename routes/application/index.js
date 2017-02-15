@@ -41,6 +41,7 @@ export default store => ({
         require('./widgets-form-settings-fields').default(store),
         require('./widgets-form-settings-finish').default(store),
         require('./widgets-pressure-settings').default(store),
+        require('./widgets-pressure-settings-autofire').default(store),
         require('./widgets-pressure-settings-email').default(store),
         require('./widgets-pressure-settings-finish').default(store),
 

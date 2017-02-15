@@ -1,6 +1,7 @@
 const prefix = (mobilizationId, widgetId, path) =>
   `/mobilizations/${mobilizationId}/widgets/${widgetId}/${path}`
 
-export const formPressureWidget = (mid, wid) => prefix(mid, wid, 'pressure')
-export const emailPressureWidget = (mid, wid) => prefix(mid, wid, 'pressure/email')
-export const finishPressureWidget = (mid, wid) => prefix(mid, wid, 'pressure/finish')
+export const pressure = (mid, wid) => prefix(mid, wid, 'pressure')
+export const pressureAutofire = (mid, wid) => prefix(mid, wid, 'pressure/autofire')
+export const pressureEmail = (mid, wid) => prefix(mid, wid, 'pressure/email')
+export const pressureFinish = (mid, wid) => prefix(mid, wid, 'pressure/finish')
