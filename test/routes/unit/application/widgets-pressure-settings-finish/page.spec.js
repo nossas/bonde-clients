@@ -3,13 +3,13 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 // Current module dependencies
-import { SettingsFinishMessagePage } from '~widget-plugins/pressure/pages'
+import WidgetsPressureSettingsFinishPage from '~routes/application/widgets-pressure-settings-finish/page'
 
-describe('client/mobilizations/widgets/__plugins__/pressure/pages/settings-email-page', () => {
+describe('routes/application/widgets-pressure-settings-finish/page', () => {
   let wrapper
 
   beforeAll(() => {
-    wrapper = shallow(<SettingsFinishMessagePage />)
+    wrapper = shallow(<WidgetsPressureSettingsFinishPage />)
   })
 
   describe('#render', () => {

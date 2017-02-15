@@ -1,12 +1,9 @@
 import React from 'react'
 
-// Parent module dependencies
 import { FormFinishMessage } from '~mobilizations/widgets/components'
+import { PressureTellAFriend, SettingsMenu } from '~widget-plugins/pressure/components'
 
-// Current module dependencies
-import { PressureTellAFriend, SettingsMenu } from '../components'
-
-const SettingsFinishMessagePage = props => (
+const WidgetsPressureSettingsFinishPage = props => (
   <FormFinishMessage
     {...props}
     SettingsMenu={SettingsMenu}
@@ -15,4 +12,4 @@ const SettingsFinishMessagePage = props => (
   />
 )
 
-export default SettingsFinishMessagePage
+export default WidgetsPressureSettingsFinishPage
