@@ -4,14 +4,14 @@ import { handleMouseOver, handleMouseOut, handleCancelEdit } from '../redux/acti
 import Block, { HOVER_MOUSE_KEY } from './block'
 
 
-const mapStateToProps = (state, props) => (
+const mapStateToProps = (state, props) => {
   const selectors = Selectors(state)
   return {
     editing: selectors.getEditing(),
     saving: selectors.getBlockSaving(),
     hasMouseOver: selectors.hasMouseOver(HOVER_MOUSE_KEY, props.block.id)
   }
-)
+}
 
 const mapActionsToProps = {
   onMouseOver: handleMouseOver,
