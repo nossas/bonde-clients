@@ -33,6 +33,16 @@ export default (state, props) => ({
   getUploadProgress: (key) => {
     const { uploader } = state.mobilizations
     return uploader[key]
+  },
+
+  getEditing: () => {
+    const { edition } = state.mobilizations
+    return edition.isEditing ? edition.mode : undefined 
+  },
+
+  getBlockSaving: () => {
+    const { blocks: { saving } } = state.mobilizations
+    return saving
   }
 })
 

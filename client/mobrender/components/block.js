@@ -4,12 +4,14 @@ import BlockConfigMenu from './block-config-menu.connected'
 import { EDIT_KEY } from './block-config-menu'
 import BlockChangeBackground from './block-change-background.connected'
 
+export const HOVER_MOUSE_KEY = 'block'
+
 
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
-    onMouseOver={() => onMouseOver('block', block.id)}
-    onMouseOut={() => onMouseOut('block')}
+    onMouseOver={() => onMouseOver(HOVER_MOUSE_KEY, block.id)}
+    onMouseOut={() => onMouseOut(HOVER_MOUSE_KEY)}
     onKeyUp={evt => {
       // ESC keycode
       if (evt.keyCode === 27) {

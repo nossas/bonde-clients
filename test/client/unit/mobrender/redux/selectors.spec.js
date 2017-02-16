@@ -127,4 +127,25 @@ describe('~client/mobrender/redux/selectors', () => {
       expect(selectors.getUploadProgress('bgBlock')).to.equal(50)
     })
   })
+
+  describe('about block edition', () => {
+    const getSelector = merge => Selectors(state.mergeDeep(fromJS({
+      mobilizations: { ...merge }
+    })).toJS())
+
+
+    it('#getEditing', () => {
+      const s = getSelector({ edition: { isEditing: true, mode: 'background' } })
+      expect(s.getEditing()).to.equal('background')
+    }) 
+
+    it('#getBlockSaving', () => { 
+      let s = getSelector({ blocks: { saving: true } })
+      expect(s.getBlockSaving()).to.equal(true)
+      
+      s = getSelector({ blocks: { saving: false } })
+      expect(s.getBlockSaving()).to.equal(false)
+
+    })
+  })
 })
