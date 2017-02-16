@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import { reducer as authReducer } from '../authenticate/redux'
+import auth from '~authenticate/redux/reducers'
 import mobilizations from '~mobilizations/reducers'
 import blocks from '~mobilizations/blocks/reducers'
 import widgets from '~mobilizations/widgets/reducers'
@@ -20,7 +20,7 @@ export default function createReducer (asyncReducers) {
   return combineReducers({
     sourceRequest,
     form: formReducer,
-    auth: authReducer,
+    auth,
     mobilizations,
     blocks,
     widgets,
