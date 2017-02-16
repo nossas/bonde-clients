@@ -4,7 +4,9 @@ import { shallow } from 'enzyme'
 
 import Block from '~client/mobrender/components/block'
 import Widget from '~client/mobrender/components/widget.connected'
+import BlockChangeBackground from '~client/mobrender/components/block-change-background.connected'
 import BlockConfigMenu from '~client/mobrender/components/block-config-menu.connected'
+import { EDIT_KEY } from '~client/mobrender/components/block-config-menu'
 
 describe('~client/mobrender/components/block', () => {
 
@@ -52,6 +54,20 @@ describe('~client/mobrender/components/block', () => {
     block.setProps({ block: {...props.block, hidden: true } })
     expect(block.find('div.hidden-tag').length).to.equal(1)
     expect(block.find('div.hidden-tag').text()).to.equal(' Escondido')
+  })
+
+  describe('render change background', () => {
+    
+    it('should show when only editing is block-config-menu.EDIT_KEY', () => {
+      expect(block.find(BlockChangeBackground).length).to.equal(0)
+      block.setProps({ editing: EDIT_KEY })
+      expect(block.find(BlockChangeBackground).length).to.equal(1)
+    })
+
+    it('should pass block like props', () => {
+      block.setProps({ editing: EDIT_KEY })
+      expect(block.find(BlockChangeBackground).props().block).to.deep.equal(props.block)
+    })
   })
 
   describe('render config menu', () => {

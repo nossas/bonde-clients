@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { DropdownMenu, DropdownMenuItem } from '~client/components/dropdown-menu'
 
+export const EDIT_KEY = 'background'
+
 const BlockConfigMenu = ({ block, update, destroy, onEdit, canMoveUp, moveUp, canMoveDown, moveDown, display }) => (
   <DropdownMenu
     wrapperClassName={classnames(
@@ -14,7 +16,7 @@ const BlockConfigMenu = ({ block, update, destroy, onEdit, canMoveUp, moveUp, ca
   >
     <DropdownMenuItem
       className='btn'
-      onClick={() => onEdit('background')}
+      onClick={() => onEdit(EDIT_KEY)}
     >
       <span>
         <i className='fa fa-picture-o' /> Alterar fundo

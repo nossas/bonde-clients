@@ -1,6 +1,8 @@
 import React from 'react'
 import Widget from './widget.connected'
 import BlockConfigMenu from './block-config-menu.connected'
+import { EDIT_KEY } from './block-config-menu'
+import BlockChangeBackground from './block-change-background.connected'
 
 
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
@@ -16,6 +18,7 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
     }}
   >
     <div className='col-10 mx-auto'>
+      {editing === EDIT_KEY ? <BlockChangeBackground block={block} /> : null}
       <div className='clearfix' style={{ padding: '5em 0' }}>
         {widgets && widgets.map(widget => (
           <Widget widget={widget} />
