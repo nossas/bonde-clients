@@ -1,6 +1,5 @@
 import * as t from './actionTypes'
 
-
 const initialState = {
   isLoaded: false,
   // @revert To empty array
@@ -21,7 +20,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         isLoaded: true,
-        data: action.data,
+        data: action.data
       }
     case t.FETCH_FAIL:
       return {
