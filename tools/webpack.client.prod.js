@@ -1,13 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const AssetsPlugin = require('assets-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const CONFIG = require('./webpack.base')
 const { CLIENT_ENTRY, CLIENT_OUTPUT, PUBLIC_PATH } = CONFIG
 
-const inlinesvg = require('postcss-inline-svg');
-const autoprefixer = require('autoprefixer');
+const inlinesvg = require('postcss-inline-svg')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
   devtool: false,
@@ -20,7 +20,7 @@ module.exports = {
       'redux',
       'react-redux',
       'aphrodite'
-    ],
+    ]
   },
   output: {
     filename: '[name]_[chunkhash].js',
@@ -28,16 +28,22 @@ module.exports = {
     publicPath: PUBLIC_PATH,
     path: CLIENT_OUTPUT
   },
-  postcss: function() {
-    return [autoprefixer, inlinesvg];
+  postcss: function () {
+    return [autoprefixer, inlinesvg]
   },
   sassLoader: {
     includePaths: [path.join(__dirname, '.scss')]
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-      '__DEV__': false
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
+        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+        GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+        '__DEV__': false
+      }
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
@@ -69,7 +75,7 @@ module.exports = {
         loader: 'babel',
         query: {
           cacheDirectory: true,
-          presets: ["es2015", "react", "stage-0", "react-optimize"],
+          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
         },
         exclude: /(node_modules)/
       },
