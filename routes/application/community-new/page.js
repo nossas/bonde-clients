@@ -1,22 +1,18 @@
-import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
+import React, { PropTypes, Component } from 'react'
 import { browserHistory } from 'react-router'
 
-// Global module dependencies
+import { Background } from '~components/layout'
 import {
   FormRedux,
   FormGroup,
   ControlLabel,
   FormControl,
-  SubmitButton,
+  Button,
   FormError
 } from '~components/forms'
+import * as paths from '~community/paths'
 
-// Current module dependencies
-import * as actions from '../actions'
-import * as paths from '../paths'
-
-class AddPage extends Component {
+class CommunityNewPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
@@ -25,9 +21,14 @@ class AddPage extends Component {
   }
 
   render () {
-    const { create, fields: { name, city }, ...formProps } = this.props
+    const {
+      fields: { name, city },
+      // Actions
+      create,
+      ...formProps
+    } = this.props
     return (
-      <div>
+      <Background>
         <h1>Crie uma comunidade</h1>
         <h2>Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.</h2>
         <FormRedux
@@ -44,31 +45,24 @@ class AddPage extends Component {
             <ControlLabel>Cidade da comunidade</ControlLabel>
             <FormControl type='text' placeholder='Exemplo: São Paulo' />
           </FormGroup>
-          <SubmitButton className='col-12 rounded-bottom'>
+          <Button type='submit' className='col-12 rounded-bottom'>
             {formProps.submitting ? 'Salvando...' : 'Criar comunidade'}
-          </SubmitButton>
+          </Button>
           <FormError className='mt2' />
         </FormRedux>
-      </div>
+      </Background>
     )
   }
 }
 
-const fields = ['name', 'city']
-
-const validate = (values) => {
-  const error = {}
-  if (!values.name) {
-    error.name = 'Informe o nome da comunidade'
-  }
-  if (!values.city) {
-    error.city = 'Informe em qual cidade sua comunidade atua'
-  }
-  return error
+CommunityNewPage.propTypes = {
+  fields: PropTypes.shape({
+    name: PropTypes.object,
+    city: PropTypes.object
+  }).isRequired,
+  submitting: PropTypes.bool,
+  // Actions
+  create: PropTypes.func.isRequired
 }
 
-export default reduxForm({
-  form: 'addCommunityForm',
-  fields,
-  validate
-}, null, actions)(AddPage)
+export default CommunityNewPage
