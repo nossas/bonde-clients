@@ -7,7 +7,7 @@ export const select = id => dispatch => {
 }
 
 export const create = community => (dispatch, getState, request) => {
-
+  console.log('community', community)
   const { auth: { credentials } } = getState()
 
   return request

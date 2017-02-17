@@ -14,8 +14,8 @@ export default () => []
 
 // export default requiredLogin => [
 //   <Route component={Background} onEnter={requiredLogin}>
-//     <Route path={`${namespace}`} component={ListPage} />                 <~ Migration In Progress
-//     <Route path={`${namespace}/new`} component={AddPage} />
+//     <Route path={`${namespace}`} component={ListPage} />                 <~ Migrated!
+//     <Route path={`${namespace}/new`} component={AddPage} />              <~ Migration In Progress
 //   </Route>,
 //   <Route component={EditContainer} onEnter={requiredLogin}>
 //     <Route path={`${namespace}/info`} component={InfoPage} />
