@@ -12,8 +12,9 @@ const redial = {
     const promises = []
 
     !CommunitySelectors.isLoaded(state) && promises.push(
-      CommunityActions.fetch(state.auth.credentials)
+      dispatch(CommunityActions.fetch())
     )
+    return promises
   }
 }
 

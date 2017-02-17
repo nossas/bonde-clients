@@ -24,7 +24,7 @@ class CommunityNewPage extends Component {
     const {
       fields: { name, city },
       // Actions
-      create,
+      asyncCreate,
       ...formProps
     } = this.props
     return (
@@ -34,7 +34,7 @@ class CommunityNewPage extends Component {
         <FormRedux
           nosubmit
           className='bg-white rounded'
-          onSubmit={values => create(values)}
+          onSubmit={values => asyncCreate(values)}
           {...formProps}
         >
           <FormGroup controlId='nameId' {...name}>
@@ -62,7 +62,7 @@ CommunityNewPage.propTypes = {
   }).isRequired,
   submitting: PropTypes.bool,
   // Actions
-  create: PropTypes.func.isRequired
+  asyncCreate: PropTypes.func.isRequired
 }
 
 export default CommunityNewPage

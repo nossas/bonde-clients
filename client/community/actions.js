@@ -1,26 +1,9 @@
-import * as t from './actionTypes'
+import * as t from './action-types'
 import superagent from 'superagent'
 import downloadjs from 'downloadjs'
 
 export const select = id => dispatch => {
   return dispatch({ type: t.SELECT, id })
-}
-
-export const create = community => (dispatch, getState, request) => {
-  console.log('community', community)
-  const { auth: { credentials } } = getState()
-
-  return request
-    .post('/communities', { community }, { headers: credentials })
-    .then(({ status, data }) => {
-      if (status === 400 && data.errors) {
-        return Promise.reject({ ...data.errors })
-      } else if (status === 200) {
-        dispatch({ type: t.ADD, community: data })
-        return Promise.resolve()
-      }
-    })
-    .catch(error => Promise.reject(error))
 }
 
 export const edit = ({ id, ...community }) => (dispatch, getState, request) => {
@@ -48,23 +31,32 @@ export const downloadActivists = ({ id, name, ...community }) => (dispatch, getS
       if (status === 400 && data.errors) {
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-          if (data.length > 0) {
-              downloadjs(new Blob([data]), `relatorio-ativistas-${name}.csv`,  'text/csv')
-            return Promise.resolve()
-          }
+        if (data.length > 0) {
+          downloadjs(new Blob([data]), `relatorio-ativistas-${name}.csv`, 'text/csv')
+          return Promise.resolve()
+        }
       }
     })
     .catch(error => Promise.reject(error))
 }
 
-export const fetch = credentials => dispatch => {
+export const fetch = () => (dispatch, getState, { api }) => {
+  const { auth: { credentials } } = getState()
+
+  const endpoint = '/communities'
+  const config = { headers: credentials }
+
   dispatch({ type: t.FETCH })
-  superagent
-    .get(`${process.env.API_URL}/communities`)
-    .set(credentials)
-    .end((err, res) => {
-      if (err || !res.ok) dispatch({ type: t.FETCH_FAIL, error: err || res.body })
-      else dispatch({ type: t.FETCH_SUCCESS, data: res.body })
+  return api
+    .get(endpoint, config)
+    .then(({ status, data }) => {
+      if (status === 400 && data.errors) {
+        dispatch({ type: t.FETCH_FAIL, error: data.errors })
+        return Promise.reject({ ...data.errors })
+      } else if (status === 200) {
+        dispatch({ type: t.FETCH_SUCCESS, data })
+        return Promise.resolve()
+      }
     })
 }
 

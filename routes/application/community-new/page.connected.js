@@ -1,7 +1,6 @@
 import { reduxForm } from 'redux-form'
 
-import * as CommunityActions from '~community/actions'
-console.log('CommunityActions', CommunityActions)
+import * as CommunityActions from '~community/action-creators'
 
 import Page from './page'
 
