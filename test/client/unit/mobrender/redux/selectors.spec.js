@@ -148,4 +148,19 @@ describe('~client/mobrender/redux/selectors', () => {
 
     })
   })
+
+  it('#getWidgets', () => {
+    const widgets = [
+      { id: 1, kind: 'draft' },
+      { id: 2, kind: 'draft' }
+    ]
+    const getState = () => state.mergeDeep(fromJS({
+      mobilizations: {
+        widgets: { data: widgets }
+      }
+    })).toJS()
+
+    const selector = Selectors(getState())
+    expect(selector.getWidgets()).to.deep.equal(widgets)
+  })
 })

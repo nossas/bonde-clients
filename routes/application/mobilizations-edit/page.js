@@ -7,8 +7,7 @@ import { GoogleFontsLoader } from '~components/fonts'
 import * as arrayUtil from '~utils/array'
 import * as paths from '~client/paths'
 
-// Current module dependencies
-import { Mobilization } from '~mobilizations/components'
+import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
   componentDidMount () {
@@ -33,7 +32,7 @@ export class MobilizationsEditPage extends Component {
       const fonts = [mobilization.header_font, mobilization.body_font].filter(arrayUtil.distinct)
       return (
         <div className='flex flex-auto overflow-hidden'>
-          <Mobilization {...this.props} editable />
+          <Mobilization editable={true} />
           <GoogleFontsLoader fonts={fonts} />
         </div>
       )
@@ -51,7 +50,6 @@ MobilizationsEditPage.propTypes = {
   blocks: PropTypes.array,
   blocksIsLoaded: PropTypes.bool,
   blocksIsLoading: PropTypes.bool.isRequired,
-  blockEditionMode: PropTypes.bool,
   widgets: PropTypes.array,
   widgetsIsLoading: PropTypes.bool.isRequired,
   widgetsIsLoaded: PropTypes.bool.isRequired

@@ -43,6 +43,11 @@ export default (state, props) => ({
   getBlockSaving: () => {
     const { blocks: { saving } } = state.mobilizations
     return saving
+  },
+
+  getWidgets: () => {
+    const { widgets: { data } } = state.mobilizations
+    return data
   }
 })
 
