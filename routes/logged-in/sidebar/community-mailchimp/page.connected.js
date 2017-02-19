@@ -22,35 +22,19 @@ const redial = {
   }
 }
 
-const mapStateToProps = state => {
-  const community = CommunitySelectors.getCurrent(state)
-  return {
-    community,
-    initialValues: { ...community }
-  }
-}
+const mapStateToProps = state => ({
+  initialValues: { ...CommunitySelectors.getCurrent(state) }
+})
 
 const mapDispatchToProps = {
-  submit: CommunityActions.edit,
-  downloadActivists: CommunityActions.downloadActivists
-}
-
-const fields = ['id', 'image', 'name', 'city', 'description']
-
-const validate = values => {
-  const errors = {}
-
-  if (!values.name) {
-    errors.name = 'Informe o nome da comunidade'
-  }
-  if (!values.city) {
-    errors.city = 'Informe em qual cidade sua comunidade atua'
-  }
-  return errors
+  submit: CommunityActions.edit
 }
 
 export default provideHooks(redial)(
   connect(mapStateToProps, mapDispatchToProps)(
-    reduxForm({ form: 'communityInfoForm', fields, validate })(Page)
+    reduxForm({
+      form: 'mailchimpForm',
+      fields: ['id', 'mailchimp_api_key', 'mailchimp_list_id', 'mailchimp_group_id']
+    })(Page)
   )
 )

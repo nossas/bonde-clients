@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import {
-  SettingsPageLayout,
-  SettingsPageContentLayout
-} from '~components/layout'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 import {
   FormRedux,
   Button,
