@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import * as mock from '~utils/mock'
-import Page from '~routes/logged-in/sidebar/community-info/page'
+import Page from '~routes/logged-in/sidebar/community-settings-info/page'
 
-describe('routes/application/community-info/page', () => {
+describe('routes/logged-in/sidebar/community-settings-info/page', () => {
   const props = {
     fields: {
       image: {},
