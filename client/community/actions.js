@@ -6,10 +6,10 @@ export const select = id => dispatch => {
   return dispatch({ type: t.SELECT, id })
 }
 
-export const edit = ({ id, ...community }) => (dispatch, getState, request) => {
+export const edit = ({ id, ...community }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
-  return request
+  return api
     .put(`/communities/${id}`, { community }, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 400 && data.errors) {
@@ -22,10 +22,10 @@ export const edit = ({ id, ...community }) => (dispatch, getState, request) => {
     .catch(error => Promise.reject(error))
 }
 
-export const downloadActivists = ({ id, name, ...community }) => (dispatch, getState, request) => {
+export const downloadActivists = ({ id, name, ...community }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
 
-  return request
+  return api
     .get(`/communities/${id}/activists.csv`, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 400 && data.errors) {
