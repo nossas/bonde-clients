@@ -15,10 +15,10 @@ export default () => []
 // export default requiredLogin => [
 //   <Route component={Background} onEnter={requiredLogin}>
 //     <Route path={`${namespace}`} component={ListPage} />                 <~ Migrated!
-//     <Route path={`${namespace}/new`} component={AddPage} />              <~ Migration In Progress
+//     <Route path={`${namespace}/new`} component={AddPage} />              <~ Migrated!
 //   </Route>,
 //   <Route component={EditContainer} onEnter={requiredLogin}>
-//     <Route path={`${namespace}/info`} component={InfoPage} />
+//     <Route path={`${namespace}/info`} component={InfoPage} />            <~ Migration In Progress
 //     <Route path={`${namespace}/mailchimp`} component={MailchimpPage} />
 //     <Route path={`${namespace}/recipient`} component={RecipientPage} />
 //   </Route>
