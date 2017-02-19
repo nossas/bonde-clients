@@ -22,6 +22,7 @@ export default store => ({
       cb(null, [
         require('./blocks-create').default(store),
         require('./community-info').default(store),
+        require('./community-mailchimp').default(store),
         require('./mobilizations-edit').default(store),
         require('./mobilizations-list').default(store),
         require('./mobilizations-new').default(store),
