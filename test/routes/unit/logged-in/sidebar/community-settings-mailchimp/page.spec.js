@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import * as mock from '~utils/mock'
-import Page from '~routes/logged-in/sidebar/community-mailchimp/page'
+import Page from '~routes/logged-in/sidebar/community-settings-mailchimp/page'
 
-describe('routes/application/community-mailchimp/page', () => {
+describe('routes/application/community-settings-mailchimp/page', () => {
   const props = {
     fields: {
       mailchimp_api_key: {},
