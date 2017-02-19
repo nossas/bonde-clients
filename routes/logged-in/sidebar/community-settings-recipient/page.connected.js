@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { CPF, CNPJ } from 'cpf_cnpj'
 
-import * as CommunityActions from '~community/actions'
+import * as CommunityActions from '~community/action-creators'
 import * as CommunitySelectors from '~community/selectors'
 
 import Page from './page'
@@ -14,7 +14,7 @@ const redial = {
     const promises = []
 
     !CommunitySelectors.isLoaded(state) && promises.push(
-      dispatch(CommunityActions.fetch())
+      dispatch(CommunityActions.asyncFetch())
     )
     !CommunitySelectors.getCurrentId(state) && promises.push(
       dispatch(CommunityActions.select(1))
@@ -41,7 +41,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = {
-  submit: CommunityActions.edit
+  submit: CommunityActions.asyncEdit
 }
 
 const fields = [
