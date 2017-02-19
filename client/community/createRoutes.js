@@ -19,7 +19,7 @@ export default () => []
 //   </Route>,
 //   <Route component={EditContainer} onEnter={requiredLogin}>
 //     <Route path={`${namespace}/info`} component={InfoPage} />            <~ Migrated!
-//     <Route path={`${namespace}/mailchimp`} component={MailchimpPage} />  <~ Migration In Progress
-//     <Route path={`${namespace}/recipient`} component={RecipientPage} />
+//     <Route path={`${namespace}/mailchimp`} component={MailchimpPage} />  <~ Migrated!
+//     <Route path={`${namespace}/recipient`} component={RecipientPage} />  <~ Migrated!
 //   </Route>
 // ]
