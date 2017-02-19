@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   user: state.auth.user,
   isLoading: CommunitySelectors.isLoading(state),
   isLoaded: CommunitySelectors.isLoaded(state),
-  communities: CommunitySelectors.getCommunities(state)
+  communities: CommunitySelectors.getList(state)
 })
 
 export default provideHooks(redial)(
