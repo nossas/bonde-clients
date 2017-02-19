@@ -5,7 +5,7 @@ import { edit } from '../actions'
 // Global module dependencies
 import {
   FormRedux,
-  SubmitButton,
+  Button,
   FormGroup,
   FormControl,
   ControlLabel,
@@ -36,7 +36,7 @@ const MailchimpPage = ({
     </FormGroup>
 
     <FloatLayout position='floatTopRight'>
-      <SubmitButton>Salvar</SubmitButton>
+      <Button>Salvar</Button>
       <SuccessMessage text='Dados editados com sucesso.' />
     </FloatLayout>
   </FormRedux>

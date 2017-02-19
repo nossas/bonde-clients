@@ -3,12 +3,11 @@ import { reduxForm } from 'redux-form'
 import { browserHistory } from 'react-router'
 
 import * as AccountActions from '../actions'
-import { FormRedux, FormGroup, ControlLabel, FormControl, SubmitButton } from '../../Dashboard/Forms'
+import { FormRedux, FormGroup, ControlLabel, FormControl, Button } from '../../Dashboard/Forms'
 import * as Paths from '../../Paths'
 import { isValidEmail } from '../../../util/validation-helper'
 
 class RegisterPage extends Component {
-
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && (!nextProps.submitting && !nextProps.submitFailed)) {
@@ -17,7 +16,16 @@ class RegisterPage extends Component {
   }
 
   render () {
-    const { register, fields: { name, last_name, email, password, password2 }, ...formProps } = this.props
+    const {
+      register,
+      fields: {
+        name,
+        last_name: lastName,
+        email,
+        password,
+        password2 },
+      ...formProps
+    } = this.props
     return (
       <div>
         <h1>Crie sua conta no Bonde.</h1>
@@ -32,7 +40,7 @@ class RegisterPage extends Component {
               <ControlLabel>Nome</ControlLabel>
               <FormControl type='text' placeholder='Seu nome' />
             </FormGroup>
-            <FormGroup className='col-6' controlId='lastNameId' {...last_name}>
+            <FormGroup className='col-6' controlId='lastNameId' {...lastName}>
               <ControlLabel>Sobrenome</ControlLabel>
               <FormControl type='text' placeholder='Sobrenome' />
             </FormGroup>
@@ -49,9 +57,9 @@ class RegisterPage extends Component {
             <ControlLabel>Confirme sua senha</ControlLabel>
             <FormControl type='password' placeholder='********' />
           </FormGroup>
-          <SubmitButton className='col-12 rounded-bottom'>
+          <Button className='col-12 rounded-bottom'>
             {formProps.submitting ? 'Salvando...' : 'Criar conta'}
-          </SubmitButton>
+          </Button>
         </FormRedux>
       </div>
     )
