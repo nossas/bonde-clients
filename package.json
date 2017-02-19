@@ -107,6 +107,7 @@
     "svg-url-loader": "^1.1.1",
     "testdouble": "^1.9.1",
     "throng": "^4.0.0",
+    "uuid": "^3.0.1",
     "webpack": "^1.14",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0",
