@@ -1,1 +1,1 @@
-export { default as getCodeBanks } from './getCodeBanks'
+export { default as getCodeBanks } from './get-code-banks'

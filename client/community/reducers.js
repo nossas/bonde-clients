@@ -1,10 +1,8 @@
-import * as t from './actionTypes'
-
+import * as t from './action-types'
 
 const initialState = {
   isLoaded: false,
-  // @revert To empty array
-  data: [{ id: 1 }],
+  data: [],
   // @revert To undefined
   currentId: 1
 }
@@ -21,7 +19,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         isLoaded: true,
-        data: action.data,
+        data: action.data
       }
     case t.FETCH_FAIL:
       return {

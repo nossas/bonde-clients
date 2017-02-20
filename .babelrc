@@ -9,6 +9,7 @@
         "~server": "./server",
         "~routes": "./routes",
         "~tools": "./tools",
+        "~authenticate": "./authenticate",
         "~client": "./client",
         "~account": "./client/account",
         "~components": "./client/components",

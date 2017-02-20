@@ -46,7 +46,12 @@ class UploadImageField extends Component {
     if (theme === 'icon') {
       return (
         <div className='uploadImageFile'>
-          <button type='button' disable={loading} className={className} onClick={this.onClick.bind(this)}>
+          <button
+            type='button'
+            disabled={loading}
+            className={className}
+            onClick={this.onClick.bind(this)}
+          >
             {content}
           </button>
           <ReactS3Uploader

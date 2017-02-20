@@ -6,7 +6,7 @@ import * as AccountActions from '../actions'
 import logo from '../assets/logo-nossas.svg'
 
 import * as Paths from '../../Paths'
-import { FormRedux, FormError, FormGroup, ControlLabel, FormControl, SubmitButton } from '../../Dashboard/Forms'
+import { FormRedux, FormError, FormGroup, ControlLabel, FormControl, Button } from '../../Dashboard/Forms'
 import { isValidEmail } from '../../../util/validation-helper'
 
 export default redirectUrl => {
@@ -36,9 +36,9 @@ export default redirectUrl => {
               <ControlLabel>Senha</ControlLabel>
               <FormControl type='password' placeholder='••••••••••' />
             </FormGroup>
-            <SubmitButton className='white col-12 rounded-bottom'>
+            <Button className='white col-12 rounded-bottom'>
               {formProps.submitting ? 'Carregando...' : 'Entrar'}
-            </SubmitButton>
+            </Button>
             <FormError className='mt2' />
           </FormRedux>
           <p className='white center'>Ainda não é cadastrado? <Link to={Paths.createAccount()}><br />Clique para criar uma conta.</Link></p>
