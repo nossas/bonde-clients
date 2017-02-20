@@ -14,7 +14,7 @@ const redial = {
     !CommunitySelectors.isLoaded(state) && promises.push(
       dispatch(CommunityActions.asyncFetch())
     )
-    return promises
+    return Promise.all(promises)
   }
 }
 
