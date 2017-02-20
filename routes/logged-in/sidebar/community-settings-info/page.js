@@ -13,7 +13,7 @@ import {
 import { FloatLayout } from '~components/grids'
 import { SettingsMenu, ForceDownloadViaAjax } from '~community/components'
 
-const InfoPage = ({
+const CommunitySettingsInfoPage = ({
   fields: { image, name, city, description },
   location,
   community,
@@ -56,7 +56,7 @@ const InfoPage = ({
   </SettingsPageLayout>
 )
 
-InfoPage.propTypes = {
+CommunitySettingsInfoPage.propTypes = {
   fields: PropTypes.shape({
     image: PropTypes.object.isRequired,
     name: PropTypes.object.isRequired,
@@ -69,4 +69,4 @@ InfoPage.propTypes = {
   downloadActivists: PropTypes.func.isRequired
 }
 
-export default InfoPage
+export default CommunitySettingsInfoPage

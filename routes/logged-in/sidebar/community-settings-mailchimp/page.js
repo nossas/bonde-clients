@@ -12,7 +12,7 @@ import {
 import { FloatLayout } from '~components/grids'
 import { SettingsMenu } from '~community/components'
 
-const MailchimpPage = ({
+const CommunitySettingsMailchimpPage = ({
   fields: {
     mailchimp_api_key: mailchimpApiKey,
     mailchimp_list_id: mailchimpListId,
@@ -49,7 +49,7 @@ const MailchimpPage = ({
   </SettingsPageLayout>
 )
 
-MailchimpPage.propTypes = {
+CommunitySettingsMailchimpPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
     mailchimp_list_id: PropTypes.object.isRequired,
@@ -60,4 +60,4 @@ MailchimpPage.propTypes = {
   submit: PropTypes.func.isRequired
 }
 
-export default MailchimpPage
+export default CommunitySettingsMailchimpPage
