@@ -3,9 +3,9 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import * as arrayUtil from '~utils/array'
-import CustomDomainPage from '~routes/custom-domain/page'
+import CustomDomainPage from '~routes/logged-out/custom-domain/page'
 
-describe('routes/custom-domain/page', () => {
+describe('routes/logged-out/custom-domain/page', () => {
   let wrapper
   const props = {
     mobilization: {

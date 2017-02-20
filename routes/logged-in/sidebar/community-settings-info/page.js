@@ -46,7 +46,9 @@ const InfoPage = ({
         />
 
         <FloatLayout position='floatTopRight'>
-          <Button>Salvar</Button>
+          <Button type='submit' className='btn bg-blacker rounded caps white'>
+            Salvar
+          </Button>
           <SuccessMessage text='Dados editados com sucesso.' />
         </FloatLayout>
       </FormRedux>

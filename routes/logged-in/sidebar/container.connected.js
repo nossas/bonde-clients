@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
+import * as CommunitySelectors from '~community/selectors'
+import * as CommunityActions from '~community/action-creators'
 import Sidebar from '~components/navigation/sidebar'
 
 import Container from './container'
@@ -10,9 +12,14 @@ import Container from './container'
 const redial = {
   fetch: ({ dispatch, getState }) => {
     const state = getState()
-    if (!MobilizationSelectors.isLoaded(state)) {
-      return dispatch(MobilizationActions.asyncFetch(state.community.currentId))
-    }
+    const promises = []
+    !MobilizationSelectors.isLoaded(state) && promises.push(
+      dispatch(MobilizationActions.asyncFetch(state.community.currentId))
+    )
+    !CommunitySelectors.getList(state).length && promises.push(
+      dispatch(CommunityActions.asyncFetch())
+    )
+    return Promise.all(promises)
   }
 }
 

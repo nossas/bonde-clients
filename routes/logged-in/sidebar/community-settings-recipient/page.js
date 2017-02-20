@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import uuid from 'uuid'
-console.log('uuid', uuid())
 
 import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 import {
@@ -117,7 +116,9 @@ const RecipientPage = ({
         </div>
 
         <FloatLayout position='floatTopRight'>
-          <Button>Salvar</Button>
+          <Button type='submit' className='btn bg-blacker rounded caps white'>
+            Salvar
+          </Button>
           <SuccessMessage text='Dados editados com sucesso.' />
         </FloatLayout>
       </FormRedux>

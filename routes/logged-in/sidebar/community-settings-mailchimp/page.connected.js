@@ -18,7 +18,7 @@ const redial = {
     !CommunitySelectors.getCurrentId(state) && promises.push(
       dispatch(CommunityActions.select(1))
     )
-    return promises
+    return Promise.all(promises)
   }
 }
 
