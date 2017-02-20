@@ -23,12 +23,13 @@ export class MobilizationsEditPage extends Component {
       blocksIsLoading,
       widgetsIsLoaded,
       widgetsIsLoading,
-      mobilization
+      mobilization,
+      renderIsLoading
     } = this.props
     const isLoaded = blocksIsLoaded && widgetsIsLoaded
     const isntLoading = !blocksIsLoading && !widgetsIsLoading
 
-    if (isLoaded && isntLoading) {
+    if (!renderIsLoading) {
       const fonts = [mobilization.header_font, mobilization.body_font].filter(arrayUtil.distinct)
       return (
         <div className='flex flex-auto overflow-hidden'>
@@ -49,8 +50,8 @@ MobilizationsEditPage.propTypes = {
   }).isRequired,
   blocks: PropTypes.array,
   blocksIsLoaded: PropTypes.bool,
+  renderIsLoading: PropTypes.bool,
   blocksIsLoading: PropTypes.bool.isRequired,
-  widgets: PropTypes.array,
   widgetsIsLoading: PropTypes.bool.isRequired,
   widgetsIsLoaded: PropTypes.bool.isRequired
 }

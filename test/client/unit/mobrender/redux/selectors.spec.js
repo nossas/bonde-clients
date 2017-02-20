@@ -27,6 +27,37 @@ describe('~client/mobrender/redux/selectors', () => {
     })
   })
 
+  describe('#renderIsLoading', () => {
+    
+    it('should return false when loaded widgets and block', () => { 
+      const getState = () => state.mergeDeep(fromJS({
+        mobilizations: {
+          widgets: { isLoaded: true, fetching: false },
+          blocks: { isLoaded: true, fetching: false }
+        }
+      })).toJS()
+      expect(Selectors(getState()).renderIsLoading()).to.equal(false)
+    })
+    
+    it('should return true when fetching widgets or block', () => { 
+      let getState = () => state.mergeDeep(fromJS({
+        mobilizations: {
+          widgets: { isLoaded: true, fetching: true },
+          blocks: { isLoaded: true, fetching: false }
+        }
+      })).toJS()
+      expect(Selectors(getState()).renderIsLoading()).to.equal(true)
+
+      getState = () => state.mergeDeep(fromJS({
+        mobilizations: {
+          widgets: { isLoaded: true, fetching: false },
+          blocks: { isLoaded: true, fetching: true }
+        }
+      })).toJS()
+      expect(Selectors(getState()).renderIsLoading()).to.equal(true)
+    })
+  })
+
   describe('#hasMouseOver', () => {
     const widget = { id: 1, kind: 'draft' }
     const nextState = state.mergeDeep(fromJS({

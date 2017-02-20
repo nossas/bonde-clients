@@ -48,6 +48,23 @@ export default (state, props) => ({
   getWidgets: () => {
     const { widgets: { data } } = state.mobilizations
     return data
+  },
+
+  renderIsLoading: () => {
+    const {
+      widgets: {
+        isLoaded: widgetsIsLoaded,
+        fetching: widgetsIsLoading
+      },
+      blocks: {
+        isLoaded: blocksIsLoaded,
+        fetching: blocksIsLoading
+      }
+    } = state.mobilizations
+
+    const isLoaded = blocksIsLoaded && widgetsIsLoaded
+    const isntLoading = !blocksIsLoading && !widgetsIsLoading
+    return !(isLoaded && isntLoading)
   }
 })
 

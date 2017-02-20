@@ -10,11 +10,6 @@ describe('routes/application/mobilizations-edit/page', () => {
   let page
   const defaultProps = {
     mobilization: {},
-    blocksIsLoaded: true,
-    blocksIsLoading: false,
-    widgetsIsLoaded: true,
-    widgetsIsLoading: false,
-    blocks: []
   }
   const context = { router: {} }
 
@@ -28,5 +23,10 @@ describe('routes/application/mobilizations-edit/page', () => {
 
   it('should render mobilization with editable true', () => {
     expect(page.find(Mobilization).props()).to.deep.equal({ editable: true })
+  })
+
+  it('should render loading when renderIsLoading is true', () => {
+    page.setProps({ renderIsLoading: true })
+    expect(page.find(Loading).length).to.equal(1)
   })
 })
