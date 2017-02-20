@@ -16,7 +16,7 @@ import { FloatLayout } from '~components/grids'
 import { getCodeBanks } from '~community/utils'
 import { SettingsMenu } from '~community/components'
 
-const RecipientPage = ({
+const CommunitySettingsRecipientPage = ({
   fields: {
     recipient: {
       transfer_interval: transferInterval,
@@ -126,7 +126,7 @@ const RecipientPage = ({
   </SettingsPageLayout>
 )
 
-RecipientPage.propTypes = {
+CommunitySettingsRecipientPage.propTypes = {
   fields: PropTypes.shape({
     recipient: PropTypes.shape({
       transfer_interval: PropTypes.object.isRequired,
@@ -139,4 +139,4 @@ RecipientPage.propTypes = {
   submit: PropTypes.func.isRequired
 }
 
-export default RecipientPage
+export default CommunitySettingsRecipientPage
