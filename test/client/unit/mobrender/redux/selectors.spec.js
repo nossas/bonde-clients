@@ -27,6 +27,38 @@ describe('~client/mobrender/redux/selectors', () => {
     })
   })
 
+  it('#mobilizationsIsLoading', () => {
+    const getState = loading => state.mergeDeep(fromJS({
+      mobilizations: { list: { fetching: loading } }
+    })).toJS()
+    expect(Selectors(getState(true)).mobilizationsIsLoading()).to.equal(true)
+    expect(Selectors(getState(false)).mobilizationsIsLoading()).to.equal(false)
+  })
+
+  it('#mobilizationsIsLoaded', () => {
+    const getState = loading => state.mergeDeep(fromJS({
+      mobilizations: { list: { isLoaded: loading } }
+    })).toJS()
+    expect(Selectors(getState(true)).mobilizationsIsLoaded()).to.equal(true)
+    expect(Selectors(getState(false)).mobilizationsIsLoaded()).to.equal(false)
+  })
+
+  it('#getMobilizationMenuActive', () => {
+    const menuActiveIndex = 4
+    const getState = () => state.mergeDeep(fromJS({
+      mobilizations: { list: { menuActiveIndex } }
+    })).toJS()
+    expect(Selectors(getState()).getMobilizationMenuActive()).to.equal(menuActiveIndex)
+  })
+
+  it('#getMobilizations', () => {
+    const data = [ { id: 1, name: 'Lorem' }, { id: 2, name: 'Ipsum' } ]
+    const getState = () => state.mergeDeep(fromJS({
+      mobilizations: { list: { data } }
+    })).toJS()
+    expect(Selectors(getState()).getMobilizations()).to.deep.equal(data)
+  })
+
   describe('#renderIsLoading', () => {
     
     it('should return false when loaded widgets and block', () => { 

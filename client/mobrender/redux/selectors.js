@@ -6,6 +6,23 @@ export default (state, props) => ({
     return data.filter(mob => mob.id === currentId)[0]
   },
 
+  mobilizationsIsLoading: () => {
+    return state.mobilizations.list.fetching
+  },
+
+  mobilizationsIsLoaded: () => {
+    return state.mobilizations.list.isLoaded
+  },
+
+  getMobilizationMenuActive: () => {
+    return state.mobilizations.list.menuActiveIndex
+  },
+
+  getMobilizations: () => {
+    const { list: { data } } = state.mobilizations
+    return data
+  },
+
   hasMouseOver: (key, id) => {
     const { hover } = state.mobilizations
     if (key in hover) return hover[key] === id
