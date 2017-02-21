@@ -59,6 +59,17 @@ module.exports = {
         ])
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', [
+          'css-loader?sourceMap',
+          'postcss-loader',
+        ])
+      },
+      {
+        test: /\.json/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
         loader: 'file?name=[path][sha512:hash:base64:7].[ext]'
       },
