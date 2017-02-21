@@ -13,3 +13,5 @@ export { default as handleCancelEdit } from './handle-cancel-edit'
 
 export { default as handleUploadFile } from './handle-upload-file'
 export { default as handleChangeBackground } from './handle-change-background'
+
+export { default as asyncFetchMobilizations } from './async-fetch-mobilizations'
