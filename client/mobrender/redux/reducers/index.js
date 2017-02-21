@@ -5,8 +5,10 @@ import widgetsReducer from './widgets'
 import editionReducer from './edition'
 import hoverReducer from './hover'
 import uploaderReducer from './uploader'
+import mobilizationsReducer from './mobilizations'
 
 export default combineReducers({
+  list: mobilizationsReducer,
   blocks: blocksReducer,
   widgets: widgetsReducer,
   edition: editionReducer,
