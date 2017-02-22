@@ -6,7 +6,7 @@ import { expect } from 'chai'
 import * as mock from '~utils/mock'
 
 // Current module dependencies
-import { EditorOld } from '~widget-plugins/content/components'
+import EditorOld from '~widget-plugins/content/components/editor-old'
 
 describe('client/mobilizations/widgets/__plugins__/content/components/editor-old', () => {
   let wrapper

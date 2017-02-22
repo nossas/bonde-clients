@@ -3,6 +3,8 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import Content from '~widget-plugins/content/components'
+import EditorNew from '~widget-plugins/content/components/editor-new.connected'
+import EditorOld from '~widget-plugins/content/components/editor-old.connected'
 
 describe('client/mobilizations/widgets/__plugins__/content/components/__content__', () => {
   let contentWidget
@@ -30,7 +32,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('EditorNew').length).to.equal(1)
+    expect(contentWidget.find(EditorNew).length).to.equal(1)
   })
 
   it('should render old editor when settings content is HTML', () => {
@@ -40,7 +42,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('EditorOld').length).to.equal(1)
+    expect(contentWidget.find(EditorOld).length).to.equal(1)
   })
 
   it('should render new editor when forceRenderNewEditor is true', () => {
@@ -51,6 +53,6 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
     }
     contentWidget.setProps({ widget })
     contentWidget.setState({ forceRenderNewEditor: true })
-    expect(contentWidget.find('EditorNew').length).to.equal(1)
+    expect(contentWidget.find(EditorNew).length).to.equal(1)
   })
 })
