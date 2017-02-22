@@ -11,12 +11,11 @@ const Widget = ({ editable, widget, update, saving }) => {
     `px2 col mb4 md-mb0 col-${sm_size}`,
     `sm-col-${sm_size} md-col-${md_size} lg-col-${lg_size}`
   )
-  
+
   const widgetConfig = widgets.filter(w => w.kind === widget.kind)[0]
   const { component: Component, redirect } = widgetConfig
 
   const widgetComponent = <Component widget={widget} update={update} />
- 
   return (
     <div className={className}>
       {saving && <Loading />}

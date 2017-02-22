@@ -20,7 +20,7 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
   >
     <div className='col-10 mx-auto'>
       {editing === EDIT_KEY ? <BlockChangeBackground block={block} /> : null}
-      <div className='clearfix' style={{ padding: '5em 0' }}>
+      <div className='clearfix widgets' style={{ padding: '5em 0' }}>
         {widgets && widgets.map(widget => (
           <Widget widget={widget} />
         ))}

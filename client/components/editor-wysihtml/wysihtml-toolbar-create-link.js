@@ -48,9 +48,9 @@ export const WYSIHTMLToolbarCreateLink = ({ editorLinkTargetType, setEditorLinkT
 WYSIHTMLToolbarCreateLink.propTypes = {
   editorLinkTargetType: PropTypes.string.isRequired
 }
-
+// TODO: Replace by selectors
 const mapStateToProps = state => ({
-  editorLinkTargetType: state.widgets.plugins.content.editorLinkTargetType
+  editorLinkTargetType: state.mobilizations.plugins.content.editorLinkTargetType
 })
 
 export default connect(mapStateToProps, ContentActions)(WYSIHTMLToolbarCreateLink)

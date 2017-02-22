@@ -75,6 +75,10 @@ export default (state, props) => ({
     return state.mobilizations.widgets.isLoaded
   },
 
+  widgetsIsLoading: () => {
+    return state.mobilizations.widgets.saving
+  },
+
   renderIsLoading: () => {
     const {
       widgets: {

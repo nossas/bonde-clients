@@ -8,6 +8,7 @@ import uploaderReducer from './uploader'
 import mobilizationsReducer from './mobilizations'
 // TODO: Move reducer to mobrender module
 import templatesReducer from '~client/mobilizations/templates/reducers'
+import pluginsReducer from '~client/mobilizations/widgets/__plugins__/reducers'
 
 export default combineReducers({
   list: mobilizationsReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   widgets: widgetsReducer,
   edition: editionReducer,
   hover: hoverReducer,
-  uploader: uploaderReducer
+  uploader: uploaderReducer,
+  plugins: pluginsReducer
 })

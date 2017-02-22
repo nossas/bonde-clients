@@ -43,6 +43,14 @@ describe('~client/mobrender/redux/selectors', () => {
     expect(Selectors(getState(false)).mobilizationsIsLoaded()).to.equal(false)
   })
 
+  it('#widgtesIsLoading', () => {
+    const getState = loading => state.mergeDeep(fromJS({
+      mobilizations: { widgets: { saving: loading } }
+    })).toJS()
+    expect(Selectors(getState(true)).widgetsIsLoading()).to.equal(true)
+    expect(Selectors(getState(false)).widgetsIsLoading()).to.equal(false)
+  })
+
   it('#getMobilizationMenuActive', () => {
     const menuActiveIndex = 4
     const getState = () => state.mergeDeep(fromJS({
