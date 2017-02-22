@@ -27,6 +27,7 @@ export default (state = initialState, action = {}) => {
         error: action.payload
       }
     case t.UPDATE_BLOCK_REQUEST:
+    case t.DESTROY_BLOCK_REQUEST:
       return {...state,
         saving: true
       }
@@ -37,6 +38,11 @@ export default (state = initialState, action = {}) => {
           b => b.id === action.payload.id ? action.payload : b
         )
       }
+    case t.DESTROY_BLOCK_SUCCESS:
+      return {...state,
+        saving: false,
+        data: state.data.filter(b => b.id !== action.payload.id)
+      }
     case t.CHANGE_BLOCK_BACKGROUND:
       return {...state,
         data: state.data.map(
@@ -44,6 +50,7 @@ export default (state = initialState, action = {}) => {
         )
       }
     case t.UPDATE_BLOCK_FAILURE:
+    case t.DESTROY_BLOCK_FAILURE:
       return {...state,
         saving: false,
         error: action.payload
