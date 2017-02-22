@@ -3,12 +3,12 @@ import * as t from '../action-types'
 
 import AuthSelectors from '~authenticate/redux/selectors'
 
-export default mobilization => (dispatch, getState, { api }) => {
+export default mobilizationId => (dispatch, getState, { api }) => {
   const headers = AuthSelectors(getState()).getCredentials()
-  
+
   dispatch(createAction(t.FETCH_WIDGETS_REQUEST))
   return api
-    .get(`/mobilizations/${mobilization.id}/widgets`, { headers })
+    .get(`/mobilizations/${mobilizationId}/widgets`, { headers })
     .then(res => {
       dispatch(createAction(t.FETCH_WIDGETS_SUCCESS, res.data))
     })
