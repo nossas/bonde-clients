@@ -28,17 +28,23 @@ mockAxios.onDelete(
 const store = configureStore(
   [thunk.withExtraArgument({ api: axios })]
 )(fromJS(rootReducer).mergeDeep({
-  mobilizations: { blocks: { data } }
+  mobilizations: {
+    list: {
+      data: [ mobilization ],
+      currentId: mobilization.id
+    },
+    blocks: { data }
+  }
 }).toJS())
 
 describe('~client/mobrender/redux/action-creators/async-destroy-block', () => {
-  
+
   it('should dispatch actions to destroy block', () => {
     const expectedActions = [
       createAction(t.DESTROY_BLOCK_REQUEST),
       createAction(t.DESTROY_BLOCK_SUCCESS, block),
     ]
-    return store.dispatch(asyncDestroyBlock({ mobilization, block }))
+    return store.dispatch(asyncDestroyBlock(block))
       .then(() => {
         expect(store.getActions().length).to.equal(2)
         expect(store.getActions()[0]).to.deep.equal(expectedActions[0])

@@ -1,9 +1,11 @@
 import * as t from '../action-types'
 import { createAction } from './create-action'
 import AuthSelectors from '~authenticate/redux/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
 
-export default ({ block, mobilization }) => (dispatch, getState, { api }) => {
+export default (block) => (dispatch, getState, { api }) => {
   const headers = AuthSelectors(getState()).getCredentials()
+  const mobilization = MobSelectors(getState()).getMobilization()
 
   dispatch(createAction(t.DESTROY_BLOCK_REQUEST))
   return api
