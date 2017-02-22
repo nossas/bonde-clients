@@ -34,6 +34,10 @@ export default (state, props) => ({
     return data
   },
 
+  blocksIsLoaded: () => {
+    return state.mobilizations.blocks.isLoaded
+  },
+
   canMoveUp: () => {
     const { block } = props
     const { blocks: { data } } = state.mobilizations
@@ -54,7 +58,7 @@ export default (state, props) => ({
 
   getEditing: () => {
     const { edition } = state.mobilizations
-    return edition.isEditing ? edition.mode : undefined 
+    return edition.isEditing ? edition.mode : undefined
   },
 
   getBlockSaving: () => {
@@ -65,6 +69,10 @@ export default (state, props) => ({
   getWidgets: () => {
     const { widgets: { data } } = state.mobilizations
     return data
+  },
+
+  widgetsIsLoaded: () => {
+    return state.mobilizations.widgets.isLoaded
   },
 
   renderIsLoading: () => {
@@ -89,11 +97,3 @@ export const getTemplate = (state, ownProps) => {
   const { list: { data }, templates: { list: { templateId } } } = state.mobilizations
   return data.filter(mob => mob.id === templateId)[0]
 }
-
-export const getList = state => state.mobilizations.list.data
-
-export const getMenuActiveIndex = state => state.mobilizations.list.menuActiveIndex
-
-export const isLoading = state => state.mobilizations.list.loading
-
-export const isLoaded = state => state.mobilizations.list.isLoaded

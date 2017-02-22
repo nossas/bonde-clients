@@ -59,6 +59,22 @@ describe('~client/mobrender/redux/selectors', () => {
     expect(Selectors(getState()).getMobilizations()).to.deep.equal(data)
   })
 
+  it('#blocksIsLoaded', () => {
+    const getState = loaded => state.mergeDeep(fromJS({
+      mobilizations: { blocks: { isLoaded: loaded } }
+    })).toJS()
+    expect(Selectors(getState(true)).blocksIsLoaded()).to.equal(true)
+    expect(Selectors(getState(false)).blocksIsLoaded()).to.equal(false)
+  })
+
+  it('#widgetsIsLoaded', () => {
+    const getState = loaded => state.mergeDeep(fromJS({
+      mobilizations: { widgets: { isLoaded: loaded } }
+    })).toJS()
+    expect(Selectors(getState(true)).widgetsIsLoaded()).to.equal(true)
+    expect(Selectors(getState(false)).widgetsIsLoaded()).to.equal(false)
+  })
+
   describe('#renderIsLoading', () => {
     
     it('should return false when loaded widgets and block', () => { 
