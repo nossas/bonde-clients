@@ -17,6 +17,8 @@ import {
   UnderlinePlugin, UnderlineButton
 } from 'slate-editor'
 
+import { ActionButton } from '~widget-plugins/content/components'
+
 if (process.env.BROWSER) require('./index.scss')
 
 const fontSizePluginOptions = { initialFontSize: 16 }
@@ -126,29 +128,13 @@ class EditorSlate extends Component {
           style={{ minHeight: 150 }}
           onSelectionChange={() => { this.setState({ editing: true }) }}
         />
-        <div className='mt2'>
-          <button
-            className='btn bg-blacker rounded'
+        <div className='mt2 right-align'>
+          <ActionButton
+            editing={this.state.editing}
             onClick={() => { this.setState({ editing: false }) }}
-            style={{
-              position: 'relative',
-              zIndex: this.state.editing ? 4 : 'inherit',
-              display: this.state.editing ? 'inline-block' : 'none'
-            }}
-          >
-            Cancelar
-          </button>
-          <button
-            className='btn bg-blacker rounded ml1'
-            onClick={() => { this.setState({ editing: false }) }}
-            style={{
-              position: 'relative',
-              zIndex: this.state.editing ? 4 : 'inherit',
-              display: this.state.editing ? 'inline-block' : 'none'
-            }}
           >
             Salvar
-          </button>
+          </ActionButton>
         </div>
         <div
           style={{
