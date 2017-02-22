@@ -1,15 +1,22 @@
 const path = require('path')
 const webpack = require('webpack')
 const AssetsPlugin = require('assets-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const CONFIG = require('./webpack.base')
 const { CLIENT_ENTRY, CLIENT_OUTPUT, PUBLIC_PATH } = CONFIG
 
-const inlinesvg = require('postcss-inline-svg');
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
+  node: {
+    fs: 'empty'
+  },
+  externals: [
+    {
+      './cptable': 'var cptable'
+    }
+  ],
   devtool: false,
   entry: {
     main: [CLIENT_ENTRY],
@@ -19,20 +26,15 @@ module.exports = {
       'react-router',
       'redux',
       'react-redux',
-      'aphrodite'
-    ],
+      'aphrodite',
+      'xlsx'
+    ]
   },
   output: {
     filename: '[name]_[chunkhash].js',
     chunkFilename: '[name]_[chunkhash].js',
     publicPath: PUBLIC_PATH,
     path: CLIENT_OUTPUT
-  },
-  postcss: function() {
-    return [autoprefixer, inlinesvg];
-  },
-  sassLoader: {
-    includePaths: [path.join(__dirname, '.scss')]
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -41,9 +43,8 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor_[hash].js', 2),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor_[hash].js'}),
     new AssetsPlugin({ filename: 'assets.json' }),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
@@ -57,31 +58,44 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('[name].css', {
-      allChunks: true
-    })
+    new ExtractTextPlugin({filename: '[name].css', allChunks: true})
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           cacheDirectory: true,
-          presets: ["es2015", "react", "stage-0", "react-optimize"],
+          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
         },
         exclude: /(node_modules)/
       },
       {
         test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract('style-loader', ['css-loader?sourceMap', 'postcss-loader?parser=postcss-scss', 'sass-loader?sourceMap'])
+        use: ExtractTextPlugin.extract({
+          use: 'style-loader',
+          use: [
+            'css-loader?sourceMap',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function () {
+                  return [
+                    autoprefixer()
+                  ]
+                }
+              }
+            },
+            'sass-loader?sourceMap'
+          ]
+        })
       },
       {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        loader: 'file?name=[path][sha512:hash:base64:7].[ext]'
+        use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
       },
-      { test: /\.svg/, loader: 'svg-url' }
+      { test: /\.svg/, use: 'svg-url-loader' }
 
     ]
   }

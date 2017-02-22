@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const CONFIG = require('./webpack.base')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const inlinesvg = require('postcss-inline-svg')
 const autoprefixer = require('autoprefixer')
 
 const { CLIENT_ENTRY, CLIENT_OUTPUT } = CONFIG
@@ -22,7 +21,8 @@ module.exports = {
       'react-router',
       'redux',
       'react-redux',
-      'aphrodite'
+      'aphrodite',
+      'xlsx'
     ]
   },
   output: {
@@ -32,18 +32,17 @@ module.exports = {
     path: CLIENT_OUTPUT
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         // set up standard-loader as a preloader
         test: /\.jsx?$/,
-        loader: 'standard',
-        exclude: /(node_modules)/
-      }
-    ],
-    loaders: [
+        use: 'standard',
+        exclude: /(node_modules)/,
+        enforce: 'pre'
+      },
       {
         test: /\.js$/,
-        loader: 'babel',
+        use: 'babel',
         exclude: /(node_modules|server)/,
         query: {
           cacheDirectory: true,
@@ -52,17 +51,29 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract('style-loader', [
-          'css-loader?sourceMap',
-          'postcss-loader?parser=postcss-scss',
-          'sass-loader?sourceMap'
-        ])
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?sourceMap',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function () {
+                  return [
+                    autoprefixer()
+                  ]
+                }
+              }
+            },
+            'sass-loader?sourceMap'
+          ]
+        })
       },
       {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        loader: 'file?name=[path][sha512:hash:base64:7].[ext]'
+        use: 'file?name=[path][sha512:hash:base64:7].[ext]'
       },
-      { test: /\.svg/, loader: 'svg-url' }
+      { test: /\.svg/, use: 'svg-url' }
     ]
   },
   node: {
@@ -73,12 +84,6 @@ module.exports = {
       './cptable': 'var cptable'
     }
   ],
-  postcss: function () {
-    return [autoprefixer, inlinesvg]
-  },
-  sassLoader: {
-    includePaths: [path.join(__dirname, '.scss')]
-  },
   standard: {
     // config options to be passed through to standard e.g.
     parser: 'babel-eslint'
@@ -89,10 +94,8 @@ module.exports = {
       '__DEV__': true
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', 2),
-    new ExtractTextPlugin('[name].css', {
-      allChunks: true
-    }),
+    new webpack.optimize.CommonsChunkPlugin({filename: 'vendor_[hash].js'}),
+    new ExtractTextPlugin({filename: '[name].css', allChunks: true}),
     new webpack.NoErrorsPlugin()
   ]
 }

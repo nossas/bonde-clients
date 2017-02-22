@@ -1,13 +1,12 @@
 const webpack = require('webpack')
-const fs =  require('fs')
+const fs = require('fs')
 const path = require('path')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const CONFIG = require('./webpack.base')
-const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH }  = CONFIG
+const { SERVER_ENTRY, SERVER_OUTPUT, PUBLIC_PATH } = CONFIG
 
-const inlinesvg = require('postcss-inline-svg');
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer')
 
 function getExternals () {
   const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
@@ -25,55 +24,59 @@ module.exports = {
     path: SERVER_OUTPUT,
     filename: 'server.js'
   },
-  externals: getExternals(),
+  externals: [
+    {'./cptable': 'var cptable'},
+    getExternals()
+  ],
   node: {
+    fs: 'empty',
     __filename: true,
     __dirname: true
   },
   module: {
-    loaders: [
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
+    rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ["es2015", "react", "stage-0", "react-optimize"],
+          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
         },
         exclude: /(node_modules)/
       },
       {
         test: /\.(scss|sass)$/,
-        loader: ExtractTextPlugin.extract('style-loader', ['css-loader?sourceMap', 'postcss-loader?parser=postcss-scss', 'sass-loader?sourceMap'])
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: function () {
+                  return [
+                    autoprefixer()
+                  ]
+                }
+              }
+            },
+            'sass-loader'
+          ]
+        })
       },
       {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        loader: 'file?name=[path][sha512:hash:base64:7].[ext]'
+        use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
       },
-      { test: /\.svg/, loader: 'svg-url' }
+      { test: /\.svg/, use: 'svg-url-loader' }
     ]
   },
-  postcss: function() {
-    return [autoprefixer, inlinesvg];
-  },
-  sassLoader: {
-    includePaths: [path.join(__dirname, 'scss')]
-  },
   plugins: [
-    new webpack.BannerPlugin(
-        'require("source-map-support").install();',
-        { raw: true, entryOnly: false }
-    ),
-    new webpack.IgnorePlugin(/\.(css|less|png|jpe?g|png)$/),
+    new webpack.IgnorePlugin(/\.(css|scss|svg|jpe?g|png)$/),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('styles.css', {
-      allChunks: true
-    })
+    new ExtractTextPlugin({filename: 'styles.css', allChunks: true})
   ]
 }
