@@ -3,13 +3,6 @@ import { connect } from 'react-redux'
 
 import * as MobActions from '~client/mobrender/redux/action-creators'
 import MobSelectors from '~client/mobrender/redux/selectors'
-import { EDIT_KEY } from '~client/mobrender/components/block-config-menu'
-/*
-import * as BlockActions from '~mobilizations/blocks/action-creators'
-import * as BlockSelectors from '~mobilizations/blocks/selectors'
-import * as WidgetActions from '~mobilizations/widgets/action-creators'
-import * as WidgetSelectors from '~mobilizations/widgets/selectors'
-*/
 
 import Page from './page'
 
@@ -38,7 +31,6 @@ const mapStateToProps = (state, props) => {
   return {
     mobilization: selectors.getMobilization(),
     blocks: selectors.getBlocks(),
-    blockEditionMode: selectors.getEditing() === EDIT_KEY,
     blocksIsLoaded: selectors.blocksIsLoaded(),
     renderIsLoading: selectors.renderIsLoading(),
     widgets: selectors.getWidgets(),
