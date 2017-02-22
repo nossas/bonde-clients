@@ -1,11 +1,19 @@
 import * as t from './action-types'
 
 const initialState = {
-  isLoaded: false,
+  isLoaded: true,
   isLoading: false,
   // @revert To undefined
-  user: { email: 'foo@bar.com' },
-  credentials: undefined,
+  user: {
+    email: 'foo@bar.com'
+  },
+  credentials: {
+    'Access-Token': '9pG-E14a2QD_2AMrf_5aPQ',
+    'Token-Type': 'Bearer',
+    'Expiry': '1488920190',
+    'Uid': 'foo@bar.com',
+    'Client': 'YKjNtT_50fW-h7cmzXSx3Q'
+  },
   error: undefined
 }
 

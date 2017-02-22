@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Widget from './widget.connected'
 import BlockConfigMenu from './block-config-menu.connected'
 import { EDIT_KEY } from './block-config-menu'
 import BlockChangeBackground from './block-change-background.connected'
 
 export const HOVER_MOUSE_KEY = 'block'
-
 
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div

@@ -1,12 +1,21 @@
 import { connect } from 'react-redux'
 
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 
-const mapStateToProps = state => ({
-  mobilizations: MobilizationSelectors.getList(state),
-  menuActiveIndex: MobilizationSelectors.getMenuActiveIndex(state)
-})
+const mapStateToProps = (state, props) => {
+  const selectors = MobSelectors(state, props)
+  return {
+    mobilizations: selectors.getMobilizations(),
+    menuActiveIndex: selectors.getMobilizationMenuActive()
+  }
+}
 
-export default connect(mapStateToProps)(Page)
+const mapActionsToProps = {
+  select: MobActions.selectMobilization,
+  toggleMenu: MobActions.toggleMobilizationMenu
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Page)

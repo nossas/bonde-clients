@@ -30,15 +30,14 @@ import { PageHeader } from '~mobilizations/components'
 import * as MobilizationActions from '~mobilizations/action-creators'
 
 export class MobilizationsListPage extends Component {
+
   componentWillMount () {
-    const { dispatch } = this.props
-    dispatch(MobilizationActions.select(undefined))
-    dispatch(MobilizationActions.toggleMenu(undefined))
+    this.props.select(undefined)
+    this.props.toggleMenu(undefined)
   }
 
   handleSelectItem (mobilization) {
-    const { dispatch } = this.props
-    dispatch(MobilizationActions.select(mobilization.id))
+    this.props.select(mobilization.id)
     browserHistory.push(paths.editMobilization(mobilization.id))
   }
 
@@ -110,6 +109,8 @@ export class MobilizationsListPage extends Component {
 MobilizationsListPage.propTypes = {
   mobilizations: PropTypes.array.isRequired,
   menuActiveIndex: PropTypes.number,
+  select: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
   // Injected by react-router
   location: PropTypes.object.isRequired
 }

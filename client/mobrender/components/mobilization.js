@@ -59,7 +59,7 @@ const Mobilization = props => {
           <div className="col col-10">
             <a
               href="http://www.bonde.org/"
-              style={{ 'color': '#000', 'text-decoration': 'none', 'line-height': '85px' }}
+              style={{ 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' }}
               target="_blank">
               Feito pra causar. Feito com
               <strong> BONDE.</strong>

@@ -13,7 +13,7 @@ export default store => ({
   },
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      injectAsyncReducer(store, 'mobilizations', require('~client/mobilizations/reducers').default)
+      injectAsyncReducer(store, 'mobilizations', require('~client/mobrender/redux/reducers').default)
       callback(null, require('./container.connected').default)
     })
   },

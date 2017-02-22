@@ -18,16 +18,7 @@ export class MobilizationsEditPage extends Component {
   }
 
   render () {
-    const {
-      blocksIsLoaded,
-      blocksIsLoading,
-      widgetsIsLoaded,
-      widgetsIsLoading,
-      mobilization,
-      renderIsLoading
-    } = this.props
-    const isLoaded = blocksIsLoaded && widgetsIsLoaded
-    const isntLoading = !blocksIsLoading && !widgetsIsLoading
+    const { mobilization, renderIsLoading } = this.props
 
     if (!renderIsLoading) {
       const fonts = [mobilization.header_font, mobilization.body_font].filter(arrayUtil.distinct)
@@ -50,10 +41,7 @@ MobilizationsEditPage.propTypes = {
   }).isRequired,
   blocks: PropTypes.array,
   blocksIsLoaded: PropTypes.bool,
-  renderIsLoading: PropTypes.bool,
-  blocksIsLoading: PropTypes.bool.isRequired,
-  widgetsIsLoading: PropTypes.bool.isRequired,
-  widgetsIsLoaded: PropTypes.bool.isRequired
+  renderIsLoading: PropTypes.bool
 }
 
 export default MobilizationsEditPage

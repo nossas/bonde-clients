@@ -1,12 +1,15 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import * as MobActions from '~client/mobrender/redux/action-creators'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { EDIT_KEY } from '~client/mobrender/components/block-config-menu'
+/*
 import * as BlockActions from '~mobilizations/blocks/action-creators'
 import * as BlockSelectors from '~mobilizations/blocks/selectors'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
+*/
 
 import Page from './page'
 
@@ -15,45 +18,31 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !BlockSelectors.isLoaded(state) && promises.push(
-      dispatch(BlockActions.asyncBlockFetch(params.mobilization_id))
+    const selectors = MobSelectors(getState())
+
+    !selectors.blocksIsLoaded() && promises.push(
+      dispatch(MobActions.asyncFetchBlocks(params.mobilization_id))
     )
-    !WidgetSelectors.isLoaded(state) && promises.push(
-      dispatch(WidgetActions.asyncWidgetFetch(params.mobilization_id))
+    !selectors.widgetsIsLoaded() && promises.push(
+      dispatch(MobActions.asyncFetchWidgets(params.mobilization_id))
     )
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !selectors.getMobilization() && promises.push(
+      dispatch(MobActions.selectMobilization(params.mobilization_id))
     )
     return Promise.all(promises)
   }
 }
 
-const mapStateToProps = state => ({
-  mobilization: MobilizationSelectors.getCurrent(state),
-  blocks: BlockSelectors.getList(state),
-  blockEditionMode: BlockSelectors.isEditionMode(state),
-  blocksIsLoaded: BlockSelectors.isLoaded(state),
-  blocksIsLoading: BlockSelectors.isLoading(state),
-  widgets: WidgetSelectors.getList(state),
-  widgetsIsLoaded: WidgetSelectors.isLoaded(state),
-  widgetsIsLoading: WidgetSelectors.isLoading(state),
-  auth: state.auth
-})
-
-const mapActionCreatorsToProps = {
-  blockUpdate: BlockActions.asyncBlockUpdate,
-  setEditionMode: BlockActions.setEditionMode,
-  blockDestroy: BlockActions.asyncBlockDestroy,
-  blockMove: (direction, payload) => dispatch => {
-    if (direction === 'up') {
-      dispatch(BlockActions.asyncBlockMoveUp(payload))
-    } else if (direction === 'down') {
-      dispatch(BlockActions.asyncBlockMoveDown(payload))
-    }
-  },
-  widgetUpdate: WidgetActions.asyncWidgetUpdate
+const mapStateToProps = (state, props) => {
+  const selectors = MobSelectors(state, props)
+  return {
+    mobilization: selectors.getMobilization(),
+    blocks: selectors.getBlocks(),
+    blockEditionMode: selectors.getEditing() === EDIT_KEY,
+    blocksIsLoaded: selectors.blocksIsLoaded(),
+    renderIsLoading: selectors.renderIsLoading(),
+    widgets: selectors.getWidgets(),
+  }
 }
 
-export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(Page)
-)
+export default provideHooks(redial)(connect(mapStateToProps)(Page))
