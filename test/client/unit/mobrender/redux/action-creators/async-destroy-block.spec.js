@@ -4,7 +4,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { asyncUpdateBlock } from '~client/mobrender/redux/action-creators'
+import { asyncDestroyBlock } from '~client/mobrender/redux/action-creators'
 import { createAction } from '~client/mobrender/redux/action-creators/create-action'
 import * as t from '~client/mobrender/redux/action-types'
 
@@ -17,33 +17,28 @@ const data = [
   { id: 2, name: 'Ipsum', position: 2 },
   { id: 3, name: 'Dolor', position: 3 }
 ]
+const mobilization = { id: 1 }
+const block = data[0]
 
-const block = {...data[1], name: 'Ipsum updated'}
-mockAxios.onPut(
-  `/mobilizations/1/blocks/2`, { block }
+mockAxios.onDelete(
+  `/mobilizations/${mobilization.id}/blocks/${block.id}`,
 ).reply(200, block)
 
 // Mock store
 const store = configureStore(
   [thunk.withExtraArgument({ api: axios })]
 )(fromJS(rootReducer).mergeDeep({
-  mobilizations: {
-    list: {
-      data: [ { id: 1, name: 'Mob' } ],
-      currentId: 1
-    },
-    blocks: { data }
-  }
+  mobilizations: { blocks: { data } }
 }).toJS())
 
-describe('~client/mobrender/redux/action-creators/async-update-block', () => {
+describe('~client/mobrender/redux/action-creators/async-destroy-block', () => {
   
-  it('should dispatch actions to move up block', () => {
+  it('should dispatch actions to destroy block', () => {
     const expectedActions = [
-      createAction(t.UPDATE_BLOCK_REQUEST),
-      createAction(t.UPDATE_BLOCK_SUCCESS, block),
+      createAction(t.DESTROY_BLOCK_REQUEST),
+      createAction(t.DESTROY_BLOCK_SUCCESS, block),
     ]
-    return store.dispatch(asyncUpdateBlock(block))
+    return store.dispatch(asyncDestroyBlock({ mobilization, block }))
       .then(() => {
         expect(store.getActions().length).to.equal(2)
         expect(store.getActions()[0]).to.deep.equal(expectedActions[0])

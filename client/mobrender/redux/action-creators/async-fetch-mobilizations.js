@@ -8,6 +8,7 @@ export default relationshipId => (dispatch, getState, { api }) => {
       .get(`/communities/${relationshipId}/mobilizations`)
       .then(({ status, data }) => {
         dispatch(createAction(t.FETCH_MOBILIZATIONS_SUCCESS, data))
+        return Promise.resolve()
       })
       .catch(ex => {
         dispatch(createAction(t.FETCH_MOBILIZATIONS_FAILURE, ex))
