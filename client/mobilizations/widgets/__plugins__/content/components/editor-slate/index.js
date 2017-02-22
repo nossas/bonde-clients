@@ -17,7 +17,8 @@ import {
   UnderlinePlugin, UnderlineButton
 } from 'slate-editor'
 
-import { ActionButton } from '~widget-plugins/content/components'
+import { Loading } from '~components/await'
+import { ActionButton, Layer } from '~widget-plugins/content/components'
 
 if (process.env.BROWSER) require('./index.scss')
 
@@ -101,61 +102,69 @@ class EditorSlate extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      editing: false
+      editing: false,
+      loading: false
     }
   }
-  render () {
-    return (
-      <SlateEditor plugins={plugins} style={{ color: '#fff' }}>
-        <SlateToolbar style={{ ...styles.toolbar, display: this.state.editing ? 'block' : 'none' }}>
-          <BoldButton className={classNames.button} />
-          <ItalicButton className={classNames.button} />
-          <UnderlineButton className={classNames.button} />
-          <StrikethroughButton className={classNames.button} />
-          <AlignmentButtonBar className={classNames.button} />
-          <LinkButton className={classNames.button} />
-          <ListButtonBar className={classNames.button} />
-          <FontFamilyDropdown className={classNames.dropdown} style={styles.dropdown} />
-          <FontSizeInput className={classNames.input} {...fontSizePluginOptions} style={styles.input} />
-          <ImageButton className={classNames.button} />
-          <ColorButton className={classNames.button} initialState={colorPluginOptions} pickerDefaultPosition={{ x: -520, y: 17 }} />
-          <GridButtonBar className={classNames.button} />
-          <EmbedButton className={classNames.button} />
-        </SlateToolbar>
 
-        <SlateContent
-          wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
-          style={{ minHeight: 150 }}
-          onSelectionChange={() => { this.setState({ editing: true }) }}
-        />
-        <div className='mt2 right-align'>
+  handleSave (state) {
+    const { widget: { settings } } = this.props
+    const raw = JSON.stringify(Raw.serialize(state))
+
+    if (settings.content !== raw) {
+      const { widgetUpdate, widget } = this.props
+      widgetUpdate({ ...widget, settings: { content: raw } })
+    }
+    this.setState({ editing: false })
+  }
+
+  render () {
+    const { widget: { settings: { content } } } = this.props
+    const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
+    return (
+      <div>
+        <SlateEditor plugins={plugins} initialState={initialState} style={{ color: '#fff' }}>
+          <SlateToolbar style={{ ...styles.toolbar, display: this.state.editing ? 'block' : 'none' }}>
+            <BoldButton className={classNames.button} />
+            <ItalicButton className={classNames.button} />
+            <UnderlineButton className={classNames.button} />
+            <StrikethroughButton className={classNames.button} />
+            <AlignmentButtonBar className={classNames.button} />
+            <LinkButton className={classNames.button} />
+            <ListButtonBar className={classNames.button} />
+            <FontFamilyDropdown className={classNames.dropdown} style={styles.dropdown} />
+            <FontSizeInput className={classNames.input} {...fontSizePluginOptions} style={styles.input} />
+            <ImageButton className={classNames.button} />
+            <ColorButton className={classNames.button} initialState={colorPluginOptions} pickerDefaultPosition={{ x: -520, y: 17 }} />
+            <GridButtonBar className={classNames.button} />
+            <EmbedButton className={classNames.button} />
+          </SlateToolbar>
+
+          <SlateContent
+            wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
+            style={{ minHeight: 150 }}
+            onSelectionChange={() => { this.setState({ editing: true }) }}
+          />
           <ActionButton
             editing={this.state.editing}
-            onClick={() => { this.setState({ editing: false }) }}
+            className='mt2 right-align'
+            onClick={::this.handleSave}
           >
             Salvar
           </ActionButton>
-        </div>
-        <div
-          style={{
-            display: this.state.editing ? 'block' : 'none',
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            bottom: 0,
-            right: 0,
-            backgroundColor: 'rgba(0,0,0,.3)',
-            zIndex: 3
-          }}
-          onClick={() => { this.setState({ editing: false }) }}
-        />
-      </SlateEditor>
+          <Layer
+            editing={this.state.editing}
+            onClick={::this.handleSave}
+          />
+        </SlateEditor>
+        {this.state.loading && <Loading />}
+      </div>
     )
   }
 }
 
 export const createEditorContent = content => JSON.stringify(
-  Raw.serialize(Plain.deserialize(content))
+  Raw.serialize(Plain.deserialize(content), { terse: true })
 )
 
 export default EditorSlate

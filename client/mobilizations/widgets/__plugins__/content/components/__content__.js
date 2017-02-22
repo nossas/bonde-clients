@@ -22,7 +22,7 @@ class Content extends Component {
       return content.entityMap ? (
         <EditorNew {...this.props} />
       ) : (
-        <EditorSlate />
+        <EditorSlate {...this.props} />
       )
     } catch (e) {
       // Else is old editor

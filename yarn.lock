@@ -6399,7 +6399,7 @@ slash@^1.0.0:
 
 slate-editor@nossas/slate-editor:
   version "2.1.0"
-  resolved "https://codeload.github.com/nossas/slate-editor/tar.gz/96e5a12117d85446269eb983d6d4a28b6f52532d"
+  resolved "https://codeload.github.com/nossas/slate-editor/tar.gz/562b809811c5130f10b3bc64ea3f7b05a11b6df9"
   dependencies:
     classnames "^2.2.5"
     json-beautify "^1.0.1"
