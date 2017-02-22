@@ -66,6 +66,22 @@ describe('client/mobrender/redux/action-creators (non-async)', () => {
 
   })
 
+  it('#selectMobilization(mobilizationId)', () => {
+    const mobilizationId = 10
+    const expected = createAction(t.SELECT_MOBILIZATION, mobilizationId)
+    store.dispatch(MobActions.selectMobilization(mobilizationId))
+    expect(store.getActions().length).to.equal(1)
+    expect(store.getActions()[0]).to.deep.equal(expected)
+  })
+
+  it('#toggleMobilizationMenu(mobilizationId)', () => {
+    const mobilizationId = 9
+    const expected = createAction(t.TOGGLE_MOBILIZATION_MENU, mobilizationId)
+    store.dispatch(MobActions.toggleMobilizationMenu(mobilizationId))
+    expect(store.getActions().length).to.equal(1)
+    expect(store.getActions()[0]).to.deep.equal(expected)
+  })
+
   it('#handleChangeBackground(block)', () => {
     const block = { id: 1, bg_image: 'tmp://old.png' }
     const expected = createAction(t.CHANGE_BLOCK_BACKGROUND, block)
