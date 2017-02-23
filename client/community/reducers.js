@@ -2,6 +2,7 @@ import * as t from './action-types'
 
 const initialState = {
   isLoaded: true,
+  data: [],
   // @revert To undefined
   data: [
     {
