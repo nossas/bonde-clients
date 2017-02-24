@@ -5881,6 +5881,14 @@ react-s3-uploader@^3.4.0:
     object-assign "^2.0.0"
     unorm "1.4.x"
 
+react-s3-uploader@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.0.1.tgz#55902e7633e939d83b2c419e07f66b7e25ed7b9e"
+  dependencies:
+    aws-sdk "2.x"
+    node-uuid "1.x"
+    object-assign "^2.0.0"
+
 react-side-effect@1.0.2, react-side-effect@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-1.0.2.tgz#98e354decdbf0281e4223d87852d33e345eda561"
@@ -6397,9 +6405,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-editor@nossas/slate-editor:
-  version "2.1.0"
-  resolved "https://codeload.github.com/nossas/slate-editor/tar.gz/562b809811c5130f10b3bc64ea3f7b05a11b6df9"
+slate-editor@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-2.2.1.tgz#539e684302c41cc3133a7fdc45b23d20e925a9ed"
   dependencies:
     classnames "^2.2.5"
     json-beautify "^1.0.1"
@@ -6407,11 +6415,12 @@ slate-editor@nossas/slate-editor:
     react-color "^2.10.0"
     react-draggable "^2.2.3"
     react-fontawesome "^1.4.0"
+    react-s3-uploader "^4.0.1"
     slate "^0.16.1"
 
 slate@^0.16.1:
-  version "0.16.19"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.16.19.tgz#ebcc439bc87dee981b1e85c04b7a1b8948c5e786"
+  version "0.16.25"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.16.25.tgz#4b8e98da5228a5f4f257883419ff9dff36532b8d"
   dependencies:
     cheerio "^0.22.0"
     debug "^2.3.2"
