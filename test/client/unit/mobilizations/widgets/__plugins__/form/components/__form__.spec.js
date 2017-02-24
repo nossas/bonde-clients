@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 // Current module dependencies
-import Form from '~widget-plugins/form/components/__form__'
+import { Form } from '~widget-plugins/form/components/__form__'
 
 describe('client/mobilizations/widgets/__plugins__/form/components/__form__', () => {
   let wrapper

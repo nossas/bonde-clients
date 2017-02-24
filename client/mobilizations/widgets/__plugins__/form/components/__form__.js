@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import $ from 'jquery'
@@ -8,6 +9,7 @@ import classnames from 'classnames'
 import * as paths from '~client/paths'
 import { Error } from '~components/form-util'
 import { isValidEmail } from '~utils/validation-helper'
+import MobSelectors from '~client/mobrender/redux/selectors'
 
 // Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
@@ -17,7 +19,7 @@ import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 import { Button, Input, FormTellAFriend } from '../components'
 import * as FormActions from '../action-creators'
 
-class Form extends React.Component {
+export class Form extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
@@ -250,4 +252,8 @@ Form.propTypes = {
   hasNewField: PropTypes.bool
 }
 
-export default Form
+const mapStateToProps = (state, props) => ({
+  mobilization: MobSelectors(state, props).getMobilization()
+})
+
+export default connect(mapStateToProps)(Form)
