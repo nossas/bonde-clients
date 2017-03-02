@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
 // Global module dependencies
-import { createEditorContent } from '~components/editor-draft-js'
+import { createEditorContent } from '~widget-plugins/content/components/editor-slate'
 import { Loading } from '~components/await'
 
 // Current module dependencies

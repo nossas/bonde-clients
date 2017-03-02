@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Current module depepdencies
-import { EditorOld, EditorNew } from '../components'
+import { EditorOld, EditorNew, EditorSlate } from '../components'
 
 class Content extends Component {
   constructor (props) {
@@ -18,8 +18,12 @@ class Content extends Component {
 
     try {
       // If parse content is RebooEditor
-      JSON.parse(settings.content)
-      return <EditorNew {...this.props} />
+      const content = JSON.parse(settings.content)
+      return content.entityMap ? (
+        <EditorNew {...this.props} />
+      ) : (
+        <EditorSlate {...this.props} />
+      )
     } catch (e) {
       // Else is old editor
       if (this.state.forceRenderNewEditor) {
@@ -42,7 +46,7 @@ Content.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  widgetUpdate: PropTypes.func,
+  widgetUpdate: PropTypes.func
 }
 
 export default Content

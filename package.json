@@ -9,7 +9,7 @@
     "test:a": "BABEL_DISABLE_CACHE=1 ./node_modules/.bin/jest --config ./tools/jest.config.json",
     "test:w": "yarn test:a -- --watch",
     "coverage": "nyc npm test",
-    "start": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon -r 'babel-register' --watch ./server ./server",
+    "start": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon -r 'babel-register' --watch ./server --watch ./tools ./server",
     "build": "./node_modules/.bin/webpack -p --config ./tools/webpack.client.prod.js && ./node_modules/.bin/webpack -p --config ./tools/webpack.server.prod.js",
     "clean": "rm -rf build"
   },
@@ -100,6 +100,7 @@
     "request-promise": "^4.1.1",
     "sass-loader": "^4.1.1",
     "sinon": "^1.17.7",
+    "slate-editor": "2.2.1",
     "source-map-support": "^0.4.0",
     "standard": "^8.0.0",
     "standard-loader": "^5.0.0",
