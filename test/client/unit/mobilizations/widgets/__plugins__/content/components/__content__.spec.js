@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import Content from '~widget-plugins/content/components'
+import Content, { EditorNew } from '~widget-plugins/content/components'
 
 describe('client/mobilizations/widgets/__plugins__/content/components/__content__', () => {
   let contentWidget
@@ -30,7 +30,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('EditorNew').length).to.equal(1)
+    expect(contentWidget.find(EditorNew).length).to.equal(1)
   })
 
   it('should render wysihtml editor when settings content is HTML', () => {
@@ -51,6 +51,6 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
     }
     contentWidget.setProps({ widget })
     contentWidget.setState({ forceRenderNewEditor: true })
-    expect(contentWidget.find('EditorNew').length).to.equal(1)
+    expect(contentWidget.find(EditorNew).length).to.equal(1)
   })
 })

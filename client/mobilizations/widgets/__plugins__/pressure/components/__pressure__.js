@@ -2,12 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
-// Global module dependencies
 import * as paths from '~client/paths'
-import * as mock from '~utils/mock'
-
-// Parent module dependencies
 import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
+import MobSelectors from '~client/mobrender/redux/selectors'
 
 // Current module dependencies
 import {
@@ -49,7 +46,7 @@ export class Pressure extends Component {
         firstname: data.name,
         lastname: data.lastname,
         email: data.email,
-        city: !!data.city ? data.city : null
+        city: data.city ? data.city : null
       },
       mail: {
         cc: this.getTargetList().map(target => this.getEmailTarget(target)),
@@ -80,17 +77,16 @@ export class Pressure extends Component {
     } = this.props
     const { header_font: headerFont } = mobilization
     const {
-      main_color,
-      title_text,
-      button_text,
-      reply_email,
-      show_counter,
-      count_text,
-      pressure_subject,
-      pressure_body,
-      finish_message_type,
-      finish_message,
-      finish_message_background
+      main_color: mainColor,
+      title_text: titleText,
+      button_text: buttonText,
+      // Maybe `reply_email` is necessary...
+      // reply_email,
+      show_counter: showCounter,
+      count_text: countText,
+      pressure_subject: pressureSubject,
+      pressure_body: pressureBody,
+      finish_message_type: finishMessageType
     } = widget.settings || {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
@@ -101,37 +97,37 @@ export class Pressure extends Component {
       <WidgetOverlay
         editable={editable}
         onClick={::this.handleOverlayOnClick}
-        text="Clique para configurar o formulário de pressão direta"
+        text='Clique para configurar o formulário de pressão direta'
       >
         {filled ? (
-          finish_message_type === 'custom' ? (
+          finishMessageType === 'custom' ? (
             <FinishMessageCustom widget={widget} />
           ) : (
             <PressureTellAFriend mobilization={mobilization} />
           )
         ) : (
-          <div className="pressure-widget">
+          <div className='pressure-widget'>
             <div onKeyDown={(e) => e.stopPropagation()} />
             <h2
-              className="center py2 px3 m0 white rounded-top"
-              style={{ backgroundColor: main_color, fontFamily: headerFont }}
+              className='center py2 px3 m0 white rounded-top'
+              style={{ backgroundColor: mainColor, fontFamily: headerFont }}
             >
-              {title_text}
+              {titleText}
             </h2>
             <TargetList targets={::this.getTargetList() || []} />
             <PressureForm
               widget={widget}
-              buttonText={(saving && !editable ? 'Enviando...' : button_text)}
-              buttonColor={main_color}
-              subject={pressure_subject}
-              body={pressure_body}
+              buttonText={(saving && !editable ? 'Enviando...' : buttonText)}
+              buttonColor={mainColor}
+              subject={pressureSubject}
+              body={pressureBody}
               onSubmit={::this.handleSubmit}
             >
-              {!show_counter || show_counter !== 'true' ? null : (
+              {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount
                   value={widget.count || 0}
-                  color={main_color}
-                  text={count_text}
+                  color={mainColor}
+                  text={countText}
                 />
               )}
             </PressureForm>
@@ -158,15 +154,11 @@ Pressure.propTypes = {
   asyncFillWidget: PropTypes.func
 }
 
-// const mapStateToProps = ({ widgets: { plugins: { pressure } } }) => ({
-//   saving: pressure.saving,
-//   filled: pressure.filled
-// })
-
-// @revert
-const mapStateToProps = () => {
-  const { widgets: { plugins: { pressure } } } = mock.state
+const mapStateToProps = (state, props) => {
+  const selectors = MobSelectors(state, props)
+  const pressure = selectors.getPlugin('pressure')
   return {
+    mobilization: selectors.getMobilization(),
     saving: pressure.saving,
     filled: pressure.filled
   }

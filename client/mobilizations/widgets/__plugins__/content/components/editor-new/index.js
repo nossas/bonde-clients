@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react'
 
-// Global module dependencies
 import { Loading } from '~components/await'
 import Editor from '~components/editor-draft-js'
-
-// Current module dependencies
 if (process.env.BROWSER) require('./index.scss')
 
 class EditorNew extends React.Component {

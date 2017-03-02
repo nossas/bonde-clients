@@ -47,7 +47,7 @@ export default (state, props) => ({
   canMoveDown: () => {
     const { block } = props
     const { blocks: { data } } = state.mobilizations
-    const index = data.length-1
+    const index = data.length - 1
     return data[index] && data[index].id !== block.id
   },
 
@@ -94,6 +94,14 @@ export default (state, props) => ({
     const isLoaded = blocksIsLoaded && widgetsIsLoaded
     const isntLoading = !blocksIsLoading && !widgetsIsLoading
     return !(isLoaded && isntLoading)
+  },
+
+  getPlugin: plugin => {
+    if (!(plugin in state.mobilizations.plugins)) {
+      console.error(`The [${plugin}] is not an available plugin`)
+      return {}
+    }
+    return state.mobilizations.plugins[plugin]
   }
 })
 
