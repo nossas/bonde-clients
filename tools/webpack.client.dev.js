@@ -70,6 +70,17 @@ module.exports = {
         })
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', [
+          'css-loader?sourceMap',
+          'postcss-loader',
+        ])
+      },
+      {
+        test: /\.json/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
         use: 'file?name=[path][sha512:hash:base64:7].[ext]'
       },
@@ -90,8 +101,14 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-      '__DEV__': true
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
+        APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
+        PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+        GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+        '__DEV__': true
+      }
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({filename: 'vendor_[hash].js'}),
