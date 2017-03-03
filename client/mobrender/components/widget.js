@@ -17,7 +17,7 @@ const Widget = ({ editable, widget, update, saving }) => {
   const widgetConfig = widgets.filter(w => w.kind === widget.kind)[0]
   const { component: Component, redirect } = widgetConfig
 
-  const widgetComponent = <Component widget={widget} update={update} />
+  const widgetComponent = <Component widget={widget} update={update} editable={editable} />
   return (
     <div className={className}>
       {saving && <Loading />}

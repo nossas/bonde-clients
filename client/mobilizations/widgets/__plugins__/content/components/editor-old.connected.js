@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import EditorOld from './editor-old'
 import MobSelectors from '~client/mobrender/redux/selectors'
+import { handleEdit, handleCancelEdit } from '~client/mobrender/redux/action-creators'
 
 
 const mapStateToProps = (state, props) => {
@@ -10,4 +11,9 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export default connect(mapStateToProps)(EditorOld)
+const mapActionsToProps = {
+  onEdit: () => handleEdit('widget'),
+  onCancelEdit: () => handleCancelEdit('widget')
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(EditorOld)
