@@ -46,12 +46,13 @@ export const createServer = (config) => {
     app.use(morgan('dev'))
     const compiler = compileDev((webpack(webpackConfig)), config.port)
     app.use(webpackDevMiddleware(compiler, {
-      quiet: true,
+      // quiet: true,
       watchOptions: {
         ignored: /node_modules/
-      }
+      },
+      publicPath: '/assets/'
     }))
-    app.use(webpackHotMiddleware(compiler, { log: console.log }))
+    app.use(webpackHotMiddleware(compiler))
   }
 
   app.use(express.static('public'))
@@ -157,7 +158,7 @@ export const createServer = (config) => {
                     padding: 0;
                   }
                 </style>
-                <link href="/main.css" media="all" rel="stylesheet" />
+                <link href="/assets/main.css" media="all" rel="stylesheet" />
                 <style data-aphrodite>${data.css.content}</style>
               </head>
               <body>

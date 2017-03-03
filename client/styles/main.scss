@@ -1,6 +1,10 @@
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
 @import './basscss_and_override';
 @import './animations.scss';
 @import './wysihtml5.scss';
+
 @import './color_schemes/meurio.scss';
 @import './color_schemes/minhasampa.scss';
 @import './color_schemes/minhaportoalegre.scss';
@@ -13,8 +17,9 @@
 @import './color_schemes/nossascidades.scss';
 @import './color_schemes/nuestrasciudades.scss';
 @import './color_schemes/ourcities.scss';
-@import './font-sets/proxima-nova/font-face.scss';
-@import './font-sets/pf-din/font-face.scss';
+
+// @import './font-sets/proxima-nova/font-face.scss';
+// @import './font-sets/pf-din/font-face.scss';
 @import './forms.scss';
 // @import '../components/edito-wysihtml/color-picker.scss';
 

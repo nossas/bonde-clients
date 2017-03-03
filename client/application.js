@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import ga from 'react-ga'
 
 if (process.env.BROWSER) {
-  require('~node_modules/font-awesome/scss/font-awesome.scss')
   require('~client/styles/main.scss')
 }
 import { GoogleFontsLoader } from '~components/fonts'

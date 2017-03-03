@@ -7,7 +7,6 @@ import { GoogleFontsLoader } from '~components/fonts'
 import { Mobilization } from '~mobilizations/components'
 
 if (process.env.BROWSER) {
-  require('~node_modules/font-awesome/scss/font-awesome.scss')
   require('~client/styles/main.scss')
 }
 
