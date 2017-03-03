@@ -37,18 +37,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
-        },
-        exclude: /(node_modules)/
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
       },
       {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
           use: [
-            'css-loader',
+            'style-loader',
+            'css-loader?sourceMap',
             {
               loader: 'postcss-loader',
               options: {
@@ -59,7 +56,7 @@ module.exports = {
                 }
               }
             },
-            'sass-loader'
+            'sass-loader?sourceMap'
           ]
         })
       },
@@ -73,6 +70,8 @@ module.exports = {
   plugins: [
     new webpack.IgnorePlugin(/\.(css|scss|svg|jpe?g|png)$/),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: false,
+      mangle: false,
       compress: {
         warnings: false
       }

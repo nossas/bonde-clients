@@ -8,7 +8,7 @@ const autoprefixer = require('autoprefixer')
 const { CLIENT_ENTRY, CLIENT_OUTPUT } = CONFIG
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   entry: {
     main: [
       'webpack/hot/only-dev-server',
@@ -17,12 +17,36 @@ module.exports = {
     ],
     vendor: [
       'react',
+      'axios',
+      'cpf_cnpj',
+      'downloadjs',
+      'draft-js',
+      'jquery',
+      'react-addons-test-utils',
+      'react-addons-transition-group',
+      'react-color',
+      'react-colors-picker',
+      'react-cookie',
+      'react-document-meta',
       'react-dom',
-      'react-router',
-      'redux',
+      'react-ga',
+      'react-grid-system',
+      'react-helmet',
       'react-redux',
+      'react-router',
+      'react-s3-uploader',
+      'react-test-renderer',
+      'redial',
+      'redux',
+      'redux-form',
+      'redux-form-validation',
+      'redux-logger',
+      'redux-promise',
+      'redux-thunk',
       'aphrodite',
-      'xlsx'
+      'xlsx',
+      'superagent',
+      'slate-editor'
     ]
   },
   output: {
@@ -34,57 +58,45 @@ module.exports = {
   module: {
     rules: [
       {
-        // set up standard-loader as a preloader
-        test: /\.jsx?$/,
-        use: 'standard',
-        exclude: /(node_modules)/,
-        enforce: 'pre'
-      },
-      {
         test: /\.js$/,
-        use: 'babel',
-        exclude: /(node_modules|server)/,
-        query: {
-          cacheDirectory: true,
-          presets: ['es2015', 'react', 'stage-0']
-        }
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
       },
       {
-        test: /\.(scss|sass)$/,
-        use: ExtractTextPlugin.extract({
+        test: /\.(css|scss|sass)$/,
+        loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            'css-loader?sourceMap',
             {
-              loader: 'postcss-loader',
+              loader: 'css-loader',
               options: {
-                plugins: function () {
-                  return [
-                    autoprefixer()
-                  ]
+                sourceMap: true,
+                minimize: true,
+                discardComments: {
+                  removeAll: true
                 }
               }
             },
-            'sass-loader?sourceMap'
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [autoprefixer]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         })
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', [
-          'css-loader?sourceMap',
-          'postcss-loader',
-        ])
-      },
-      {
-        test: /\.json/,
-        loader: 'json-loader'
-      },
-      {
         test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        use: 'file?name=[path][sha512:hash:base64:7].[ext]'
+        use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
       },
-      { test: /\.svg/, use: 'svg-url' }
+      { test: /\.svg/, use: 'svg-url-loader' }
     ]
   },
   node: {
@@ -95,10 +107,10 @@ module.exports = {
       './cptable': 'var cptable'
     }
   ],
-  standard: {
-    // config options to be passed through to standard e.g.
-    parser: 'babel-eslint'
-  },
+  // standard: {
+  //   // config options to be passed through to standard e.g.-]
+  //   parser: 'babel-eslint'
+  // },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -111,8 +123,7 @@ module.exports = {
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({filename: 'vendor_[hash].js'}),
-    new ExtractTextPlugin({filename: '[name].css', allChunks: true}),
-    new webpack.NoErrorsPlugin()
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor_[hash].js'}),
+    new ExtractTextPlugin({filename: '[name].css', allChunks: true})
   ]
 }

@@ -22,12 +22,36 @@ module.exports = {
     main: [CLIENT_ENTRY],
     vendor: [
       'react',
+      'axios',
+      'cpf_cnpj',
+      'downloadjs',
+      'draft-js',
+      'jquery',
+      'react-addons-test-utils',
+      'react-addons-transition-group',
+      'react-color',
+      'react-colors-picker',
+      'react-cookie',
+      'react-document-meta',
       'react-dom',
-      'react-router',
-      'redux',
+      'react-ga',
+      'react-grid-system',
+      'react-helmet',
       'react-redux',
+      'react-router',
+      'react-s3-uploader',
+      'react-test-renderer',
+      'redial',
+      'redux',
+      'redux-form',
+      'redux-form-validation',
+      'redux-logger',
+      'redux-promise',
+      'redux-thunk',
       'aphrodite',
-      'xlsx'
+      'xlsx',
+      'superagent',
+      'slate-editor'
     ]
   },
   output: {
@@ -52,16 +76,20 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor_[hash].js'}),
     new AssetsPlugin({ filename: 'assets.json' }),
     new webpack.optimize.UglifyJsPlugin({
-      compressor: {
+      compress: {
+        warnings: false,
         screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        screw_ie8: true
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        join_vars: true,
+        if_return: true
       },
       output: {
-        comments: false,
-        screw_ie8: true
+        comments: false
       }
     }),
     new ExtractTextPlugin({filename: '[name].css', allChunks: true})
@@ -70,30 +98,36 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
-          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
-        },
-        exclude: /(node_modules)/
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
       },
       {
-        test: /\.(scss|sass)$/,
-        use: ExtractTextPlugin.extract({
-          use: 'style-loader',
+        test: /\.(css|scss|sass)$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
           use: [
-            'css-loader?sourceMap',
             {
-              loader: 'postcss-loader',
+              loader: 'css-loader',
               options: {
-                plugins: function () {
-                  return [
-                    autoprefixer()
-                  ]
+                sourceMap: true,
+                minimize: true,
+                discardComments: {
+                  removeAll: true
                 }
               }
             },
-            'sass-loader?sourceMap'
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [autoprefixer]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         })
       },
@@ -102,7 +136,6 @@ module.exports = {
         use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
       },
       { test: /\.svg/, use: 'svg-url-loader' }
-
     ]
   }
 }
