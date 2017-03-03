@@ -21,6 +21,19 @@ const Sidebar = props => {
         {
           !mobilization ? null : (
             <SidenavList className='bg-lighten-2'>
+              {!mobilization.custom_domain ? (
+                <SidenavListItem
+                  text='PUBLICAR BONDE'
+                  icon='rocket'
+                  href={paths.editMobilization(mobilization.id)}
+                />
+              ) : (
+                <SidenavListItem
+                  text='BONDE público'
+                  icon='pencil'
+                  href={paths.editMobilization(mobilization.id)}
+                />
+              )}
               <SidenavListItem
                 text='Editar mobilização'
                 icon='pencil'
