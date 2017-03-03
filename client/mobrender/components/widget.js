@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import { Loading } from '~client/components/await'
 import WidgetOverlay from './widget-overlay.connected'
+
 import widgets from '../widgets/config'
+
 
 const Widget = ({ editable, widget, update, saving }) => {
   // Resize column widget
@@ -19,7 +21,7 @@ const Widget = ({ editable, widget, update, saving }) => {
   return (
     <div className={className}>
       {saving && <Loading />}
-      {editable ? (
+      {editable && redirect ? (
         <WidgetOverlay
           widget={widget}
           onClick={() => {
