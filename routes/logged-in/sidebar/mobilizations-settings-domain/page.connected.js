@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form'
 
 import * as MobilizationSelectors from '~mobilizations/selectors'
 import * as MobilizationActions from '~mobilizations/action-creators'
-import { isValidDomain } from '~utils/validation-helper'
+import { fields, validate } from '~mobilizations/components/form-custom-domain'
 
 import Page from './page'
 
@@ -32,20 +32,8 @@ const mapActionCreatorsToProps = {
   submit: MobilizationActions.asyncUpdate
 }
 
-const validate = values => {
-  const errors = {}
-  if (values.custom_domain && !isValidDomain(values.custom_domain)) {
-    errors.custom_domain = 'Informe um domínio válido'
-  }
-  return errors
-}
-
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({
-      form: 'mobilizationDomainForm',
-      fields: ['id', 'custom_domain'],
-      validate
-    })(Page)
+    reduxForm({ form: 'mobilizationSettingsDomainForm', fields, validate })(Page)
   )
 )
