@@ -40,7 +40,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
       }
     }
     contentWidget.setProps({ widget })
-    expect(contentWidget.find('EditorOld').length).to.equal(1)
+    expect(contentWidget.find('Connect(EditorOld)').length).to.equal(1)
   })
 
   it('should render draft.js editor when forceRenderNewEditor is true', () => {
