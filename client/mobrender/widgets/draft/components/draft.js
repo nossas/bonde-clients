@@ -2,10 +2,10 @@ import React from 'react'
 import DraftButton from './draft-button'
 import widgets from '~client/mobrender/widgets/config'
 
-const Draft = ({ widget, update }) => {
+const Draft = ({ mobilization, widget, update }) => {
 
   const updateKind = props => update({...widget, ...props})
-  const widgetsConfig = widgets.filter(w => w.kind !== 'draft')
+  const widgetsConfig = widgets(mobilization, widget).filter(w => w.kind !== 'draft')
 
   return (
     <div className='draft-widget widget center rounded lightgray clearfix'>

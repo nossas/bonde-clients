@@ -15,8 +15,8 @@ DraftButton.propTypes = {
   label: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   kind: PropTypes.string.isRequired,
-  settings: PropTypes.object.isRequired,
-  updateKind: PropTypes.func.isRequired
+  updateKind: PropTypes.func.isRequired,
+  settings: PropTypes.object
 }
 
 export default DraftButton

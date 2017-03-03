@@ -7,8 +7,9 @@ import {
   Donation
 } from '~client/mobilizations/widgets/__plugins__'
 import { createEditorContent } from '~client/components/editor-draft-js'
+import * as Paths from '~client/paths'
 
-export default [
+export default (mobilization, widget) => [
   {
     component: Draft,
     kind: 'draft',
@@ -24,15 +25,6 @@ export default [
     }
   },
   {
-    component: Match,
-    kind: 'match',
-    icon: 'compress',
-    label: 'Match',
-    settings: {
-      title_text: 'Clique para configurar suas combinações...'
-    }
-  },
-  {
     component: Form,
     kind: 'form',
     icon: 'list',
@@ -42,7 +34,8 @@ export default [
       rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que
       mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um
       dos links abaixo.\n\nUm abraço`
-    }
+    },
+    redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
   },
   {
     component: Pressure,
@@ -54,12 +47,14 @@ export default [
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
       button_text: 'Enviar e-mail',
       /* reply_email: user.email */
-    }
+    },
+    redirect: Paths.pressure(mobilization.id, widget.id)
   },
   {
     component: Donation,
     kind: 'donation',
     icon: 'money',
     label: 'Doação',
+    redirect: Paths.donation(mobilization.id, widget.id)
   }
 ]
