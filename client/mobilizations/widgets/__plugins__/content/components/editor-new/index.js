@@ -32,10 +32,10 @@ class EditorNew extends React.Component {
     const { widget: { settings } } = this.props
 
     if (settings.content !== rawContent) {
-      const { widgetUpdate, widget } = this.props
+      const { update, widget } = this.props
       this.setState({ loading: true })
 
-      widgetUpdate({
+      update({
         ...widget,
         settings: { content: JSON.stringify(rawContent) }
       })
@@ -78,7 +78,7 @@ EditorNew.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  widgetUpdate: PropTypes.func
+  update: PropTypes.func
 }
 
 export default EditorNew

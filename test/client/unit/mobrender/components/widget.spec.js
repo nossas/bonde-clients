@@ -35,7 +35,8 @@ describe('mobrender/components/widget', () => {
 
   it('should passed widget and update to children', () => {
     const widget = mount(<Widget {...props} />)
-    expect(widget.find('Draft').props()).to.deep.equal(props)
+    expect(widget.find('Draft').props().widget).to.deep.equal(props.widget)
+    expect(widget.find('Draft').props().update).to.equal(props.update)
   })
 
   /*
