@@ -3,8 +3,6 @@ const webpack = require('webpack')
 const CONFIG = require('./webpack.base')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const autoprefixer = require('autoprefixer')
-
 const { CLIENT_ENTRY, CLIENT_OUTPUT } = CONFIG
 
 module.exports = {
@@ -45,8 +43,7 @@ module.exports = {
       'redux-thunk',
       'aphrodite',
       'xlsx',
-      'superagent',
-      'slate-editor'
+      'superagent'
     ]
   },
   output: {
@@ -59,44 +56,56 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules|bower_components|server)/,
         loader: 'babel-loader'
       },
       {
-        test: /\.(css|scss|sass)$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                minimize: true,
-                discardComments: {
-                  removeAll: true
-                }
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [autoprefixer]
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            }
+        test: /\.(scss|sass)$/,
+        use: [
+          'style-loader',
+          // Using source maps breaks urls in the CSS loader
+          // https://github.com/webpack/css-loader/issues/232
+          // This comment solves it, but breaks testing from a local network
+          // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
+          // 'css-loader?sourceMap',
+          'css-loader?importLoaders=1',
+          'postcss-loader',
+          'sass-loader?sourceMap=true&includePaths[]=' + [
+              // Some dependencies might be installed inside the settings directory, this
+              // is useful when changes are made to this project locally.
+            // path.resolve(__dirname, '../client/'),
+            path.resolve(__dirname, '../node_modules/')
           ]
-        })
+        ]
       },
       {
-        test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          // Using source maps breaks urls in the CSS loader
+          // https://github.com/webpack/css-loader/issues/232
+          // This comment solves it, but breaks testing from a local network
+          // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
+          // 'css-loader?sourceMap',
+          'css-loader?importLoaders=1',
+          'postcss-loader'
+        ]
       },
-      { test: /\.svg/, use: 'svg-url-loader' }
+      {
+        test: /\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'
+      }, // end otf, woff and woff2 test
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader?limit=10000&name=assets/fonts/[name].[ext]'
+      }, // end ttf , eot and svg test
+      {
+        test: /\.(png|jpg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: { limit: 10000 } // Convert images < 10k to base64 strings
+        }]
+      }
     ]
   },
   node: {

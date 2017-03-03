@@ -104,38 +104,15 @@ module.exports = {
       {
         test: /\.(css|scss|sass)$/,
         loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                minimize: true,
-                discardComments: {
-                  removeAll: true
-                }
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [autoprefixer]
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader'
         })
       },
       {
-        test: /\.(png|otf.*|eot.*|ttf.*|woff.*|woff2.*)$/,
-        use: 'file-loader?name=[path][sha512:hash:base64:7].[ext]'
-      },
-      { test: /\.svg/, use: 'svg-url-loader' }
+        test: /\.(png|gif|jpg|svg)$/,
+        include: imgPath,
+        use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
+      }
     ]
   }
 }
