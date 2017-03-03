@@ -17,8 +17,8 @@ const WidgetOverlay = ({ children, widget, onClick, onMouseOver, onMouseOut, has
   <div
     className='relative overlay'
     style={{ cursor: 'pointer' }}
-    onMouseOver={() => onMouseOver('widget', widget.id)}
-    onMouseOut={() => onMouseOut('widget')}
+    onMouseEnter={() => onMouseOver('widget', widget.id)}
+    onMouseLeave={() => onMouseOut('widget')}
     onClick={() => onClick()}
   >
     {children}
