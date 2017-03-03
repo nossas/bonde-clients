@@ -6,11 +6,13 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
     case t.MOUSE_OVER:
       return {
+        ...state,
         [action.payload.key]: action.payload.id
       }
     case t.MOUSE_OUT:
       if (action.payload.key in state) {
         return {
+          ...state,
           [action.payload.key]: undefined
         }
       } else {
