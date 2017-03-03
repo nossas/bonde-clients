@@ -9,8 +9,8 @@ export const HOVER_MOUSE_KEY = 'block'
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
-    onMouseOver={() => onMouseOver(HOVER_MOUSE_KEY, block.id)}
-    onMouseOut={() => onMouseOut(HOVER_MOUSE_KEY)}
+    onMouseEnter={() => onMouseOver(HOVER_MOUSE_KEY, block.id)}
+    onMouseLeave={() => onMouseOut(HOVER_MOUSE_KEY)}
     onKeyUp={evt => {
       // ESC keycode
       if (evt.keyCode === 27) {
