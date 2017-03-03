@@ -24,7 +24,14 @@ const SectionButton = ({ sectionTitle, helperText, buttonTitle, onClick, wrapper
   </div>
 )
 
-const CommunitySettingsReportPage = ({ location }) => (
+const CommunitySettingsReportPage = ({
+  location,
+  community,
+  // Actions
+  asyncDownloadActivistActions,
+  asyncDownloadAggActivists,
+  asyncDownloadDonations
+}) => (
   <SettingsPageLayout>
     <SettingsMenu {...{ location }} />
     <SettingsPageContentLayout wrapClassName='lg-col-12'>
@@ -36,7 +43,7 @@ const CommunitySettingsReportPage = ({ location }) => (
           `}
           sectionTitle='Relatório de doações'
           buttonTitle='Baixar'
-          onClick={() => { console.info('[TODO] Relatório de doações') }}
+          onClick={() => asyncDownloadDonations(community)}
         />
         <SectionButton
           helperText={`
@@ -45,8 +52,7 @@ const CommunitySettingsReportPage = ({ location }) => (
           `}
           sectionTitle='Relatório de ações dos ativistas'
           buttonTitle='Baixar'
-          onClick={() => { console.info('[TODO] Relatório de ações dos ativistas') }}
-          wrapperStyle={{ marginTop: 40 }}
+          onClick={() => asyncDownloadActivistActions(community)}
         />
         <SectionButton
           helperText={`
@@ -55,8 +61,7 @@ const CommunitySettingsReportPage = ({ location }) => (
           `}
           sectionTitle='Relatório consolidado de ações dos ativistas'
           buttonTitle='Baixar'
-          onClick={() => { console.info('[TODO] Relatório consolidado de ações dos ativistas') }}
-          wrapperStyle={{ marginTop: 40 }}
+          onClick={() => asyncDownloadAggActivists(community)}
         />
       </div>
     </SettingsPageContentLayout>
@@ -64,7 +69,12 @@ const CommunitySettingsReportPage = ({ location }) => (
 )
 
 CommunitySettingsReportPage.propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  community: PropTypes.object.isRequired,
+  // Actions
+  asyncDownloadActivistActions: PropTypes.func.isRequired,
+  asyncDownloadAggActivists: PropTypes.func.isRequired,
+  asyncDownloadDonations: PropTypes.func.isRequired
 }
 
 export default CommunitySettingsReportPage

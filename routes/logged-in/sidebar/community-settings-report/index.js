@@ -5,7 +5,7 @@ export default store => ({
   path: 'community/report',
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      callback(null, require('./page').default)
+      callback(null, require('./page.connected').default)
     })
   }
 })
