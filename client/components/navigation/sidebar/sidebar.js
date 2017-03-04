@@ -26,12 +26,13 @@ const Sidebar = props => {
                   text='PUBLICAR BONDE'
                   icon='rocket'
                   href={paths.mobilizationLaunch(mobilization.id)}
+                  className='launch-button rounded'
                 />
               ) : (
                 <SidenavListItem
                   text='BONDE público'
-                  icon='pencil'
-                  href={paths.mobilizationLaunch(mobilization.id)}
+                  icon='check'
+                  className='launched-item'
                 />
               )}
               <SidenavListItem
