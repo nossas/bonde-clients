@@ -9,8 +9,8 @@ export const HOVER_MOUSE_KEY = 'block'
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
-    onMouseEnter={() => onMouseOver(HOVER_MOUSE_KEY, block.id)}
-    onMouseLeave={() => onMouseOut(HOVER_MOUSE_KEY)}
+    onMouseEnter={() => !editing && onMouseOver(HOVER_MOUSE_KEY, block.id)}
+    onMouseLeave={() => !editing && onMouseOut(HOVER_MOUSE_KEY)}
     onKeyUp={evt => {
       // ESC keycode
       if (evt.keyCode === 27) {
@@ -22,7 +22,7 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
       {editing === EDIT_KEY ? <BlockChangeBackground block={block} /> : null}
       <div className='clearfix widgets' style={{ padding: '5em 0' }}>
         {widgets && widgets.map(widget => (
-          <Widget widget={widget} editable={editable} />
+          <Widget key={`widget-${widget.id}`} widget={widget} editable={editable} />
         ))}
       </div>
       {block.hidden && (
