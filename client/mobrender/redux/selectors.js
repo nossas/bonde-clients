@@ -31,7 +31,7 @@ export default (state, props) => ({
 
   getBlocks: () => {
     const { blocks: { data } } = state.mobilizations
-    return data
+    return data.sort((a, b) => a.position - b.position)
   },
 
   blocksIsLoaded: () => {

@@ -84,8 +84,8 @@ describe('~client/mobrender/redux/selectors', () => {
   })
 
   describe('#renderIsLoading', () => {
-    
-    it('should return false when loaded widgets and block', () => { 
+
+    it('should return false when loaded widgets and block', () => {
       const getState = () => state.mergeDeep(fromJS({
         mobilizations: {
           widgets: { isLoaded: true, fetching: false },
@@ -94,8 +94,8 @@ describe('~client/mobrender/redux/selectors', () => {
       })).toJS()
       expect(Selectors(getState()).renderIsLoading()).to.equal(false)
     })
-    
-    it('should return true when fetching widgets or block', () => { 
+
+    it('should return true when fetching widgets or block', () => {
       let getState = () => state.mergeDeep(fromJS({
         mobilizations: {
           widgets: { isLoaded: true, fetching: true },
@@ -162,7 +162,7 @@ describe('~client/mobrender/redux/selectors', () => {
         expect(selectors.canMoveUp()).to.equal(false)
       })
     })
-    
+
     describe('#canMoveDown', () => {
 
       it('should be true if props.block isnt last of data', () => {
@@ -178,7 +178,11 @@ describe('~client/mobrender/redux/selectors', () => {
   })
 
   describe('#getBlocks', () => {
-    const data = [{ id: 1, name: 'Lorem' }]
+    const data = [
+      { id: 1, name: 'Lorem', position: 2 },
+      { id: 2, name: 'Ipsum', position: 3 },
+      { id: 3, name: 'Dolor', position: 1 }
+    ]
     const nextState = state.mergeDeep(fromJS({
       mobilizations: {
         blocks: {
@@ -188,14 +192,15 @@ describe('~client/mobrender/redux/selectors', () => {
       }
     })).toJS()
 
-    it('should return blocks loaded', () => {
+    it('should return blocks loaded in order', () => {
       const selectors = Selectors(nextState)
-      expect(selectors.getBlocks()).to.deep.equal(data)
+      const ordered = data.sort((a, b) => a.position - b.position)
+      expect(selectors.getBlocks()).to.deep.equal(ordered)
     })
   })
 
   describe('#getUploadProgress(key)', () => {
-    
+
     const nextState = state.mergeDeep(fromJS({
       mobilizations: {
         uploader: {
@@ -205,7 +210,7 @@ describe('~client/mobrender/redux/selectors', () => {
     })).toJS()
 
     const selectors = Selectors(nextState)
-    
+
     it('should return undefined when not exists key to upload', () => {
       expect(selectors.getUploadProgress('header')).to.equal(undefined)
     })
@@ -224,12 +229,12 @@ describe('~client/mobrender/redux/selectors', () => {
     it('#getEditing', () => {
       const s = getSelector({ edition: { isEditing: true, mode: 'background' } })
       expect(s.getEditing()).to.equal('background')
-    }) 
+    })
 
-    it('#getBlockSaving', () => { 
+    it('#getBlockSaving', () => {
       let s = getSelector({ blocks: { saving: true } })
       expect(s.getBlockSaving()).to.equal(true)
-      
+
       s = getSelector({ blocks: { saving: false } })
       expect(s.getBlockSaving()).to.equal(false)
 

@@ -63,6 +63,14 @@ export default (state = initialState, action = {}) => {
           else return b
         })
       }
+    case t.MOVE_BLOCK_DOWN:
+      return {...state,
+        data: state.data.map((b, index) => {
+          if (index > 0 && state.data[index - 1].id === action.payload.id) return action.payload
+          else if (b.id === action.payload.id) return state.data[index + 1]
+          else return b
+        })
+      }
     default:
       return state
     }
