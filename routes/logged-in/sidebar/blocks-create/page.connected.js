@@ -1,9 +1,8 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as MobilizationSelectors from '~mobilizations/selectors'
-import * as BlockSelectors from '~mobilizations/blocks/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { selectMobilization, asyncAddBlock } from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 
@@ -12,20 +11,17 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !MobSelectors(state).getMobilization() && promises.push(
+      dispatch(selectMobilization(params.mobilization_id))
     )
     return Promise.all(promises)
   }
 }
 
 const mapStateToProps = state => ({
-  mobilization: MobilizationSelectors.getCurrent(state),
-  blocks: BlockSelectors.getList(state),
-  selectedLayout: state.blocks.selectedLayout,
-  uploadingBackgroundImage: state.blocks.uploadingBackgroundImage,
-  uploadedBackgroundImage: state.blocks.uploadedBackgroundImage,
-  selectedColor: state.colorPicker.color
+  mobilization: MobSelectors(state).getMobilization(),
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(Page))
+const mapActionsToProps = { onCreateBlock: asyncAddBlock }
+
+export default provideHooks(redial)(connect(mapStateToProps, mapActionsToProps)(Page))
