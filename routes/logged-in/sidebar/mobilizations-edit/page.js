@@ -10,11 +10,11 @@ import * as paths from '~client/paths'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
+
   componentDidMount () {
-    const { mobilization, blocksIsLoaded, blocks } = this.props
-    if (blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
-    }
+    const { mobilization, fetchBlocks, fetchWidgets } = this.props
+    fetchBlocks(mobilization.id)
+    fetchWidgets(mobilization.id)
   }
 
   render () {
@@ -39,8 +39,6 @@ MobilizationsEditPage.propTypes = {
     header_font: PropTypes.string,
     body_font: PropTypes.string
   }).isRequired,
-  blocks: PropTypes.array,
-  blocksIsLoaded: PropTypes.bool,
   renderIsLoading: PropTypes.bool
 }
 
