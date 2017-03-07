@@ -41,12 +41,6 @@ export class MobilizationsListPage extends Component {
     browserHistory.push(paths.editMobilization(mobilization.id))
   }
 
-  handleCreateTemplate (mobilization) {
-    const { dispatch } = this.props
-    dispatch(TemplateActions.selectTemplate(mobilization.id))
-    browserHistory.push(paths.mobilizationTemplatesCreate(mobilization))
-  }
-
   render () {
     const { location, mobilizations, menuActiveIndex } = this.props
 
@@ -80,7 +74,7 @@ export class MobilizationsListPage extends Component {
                   </div>
                 </div>
 
-                <More onClick={MobilizationActions.toggleMenu} index={index}>
+                <More onClick={() => this.props.toggleMenu(index)} index={index}>
                   <MoreMenu active={menuActiveIndex === index}>
                     <MoreMenuAction
                       componentClass='a'
@@ -90,9 +84,8 @@ export class MobilizationsListPage extends Component {
                       icon='external-link'
                     />
                     <MoreMenuAction
-                      componentClass='a'
                       text='Criar template'
-                      onClick={() => this.handleCreateTemplate(mobilization)}
+                      path={paths.mobilizationTemplatesCreate(mobilization)}
                       icon='star'
                     />
                   </MoreMenu>
