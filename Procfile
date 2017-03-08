@@ -1,1 +1,1 @@
-web: node -r 'babel-register' ./server
+web: npm run start:prod

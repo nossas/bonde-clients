@@ -49,7 +49,7 @@ export const compileDev = (compiler, port) => {
     if (!hasErrors && !hasWarnings) {
       console.log(chalk.green('Compiled successfully!'))
       console.log()
-      console.log('The app is running at http://localhost:' + port + '/')
+      console.log('The app is running at http://bonde.devel:' + port + '/')
       console.log()
       console.log(chalk.gray('Note that the development build is not optimized.'))
       console.log(chalk.gray('To create a production build, use ' + chalk.cyan('npm run build') + '.'))

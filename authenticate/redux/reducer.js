@@ -3,9 +3,14 @@ import * as t from './action-types'
 const initialState = {
   isLoaded: false,
   isLoading: false,
-  // @revert To undefined
-  user: { email: 'foo@bar.com' },
-  credentials: undefined,
+  user: { email: 'foo@bar.com', first_name: 'Foo Bar' },
+  credentials: {
+    'access-token': 'QFrr9zA1-wnGcvE624WUjg',
+    'client': '7Wb0PWycB1y8ac34I28PWg',
+    'expiry': ':1490213663',
+    'token-type': 'Bearer',
+    'uid': 'foo@bar.com'
+  },
   error: undefined
 }
 
