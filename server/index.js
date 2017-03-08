@@ -19,7 +19,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import proxy from 'http-proxy-middleware' // used in authenticate
 
 import DefaultServerConfig from './config'
-import webpackConfig from '../tools/webpack.client.dev'
+import webpackConfig from '../tools/webpack.client'
 import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../common/store'
 import createRoutes from '../routes'

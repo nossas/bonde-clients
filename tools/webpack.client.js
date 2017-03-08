@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 // const DashboardPlugin = require('webpack-dashboard/plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
 
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
@@ -31,6 +32,8 @@ module.exports = function (env) {
 
   if (isProd) {
     plugins.push(
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false
@@ -51,7 +54,8 @@ module.exports = function (env) {
         output: {
           comments: false
         }
-      })
+      }),
+       new AssetsPlugin({ filename: 'assets.json' })
     )
   } else {
     plugins.push(
