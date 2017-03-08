@@ -2,44 +2,44 @@ import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import * as MobilizationSelectors from '~mobilizations/selectors'
-import * as MobilizationActions from '~mobilizations/action-creators'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { selectMobilization, asyncFetchWidgets, asyncUpdateWidget } from '~client/mobrender/redux/action-creators'
 import * as WidgetActions from '~mobilizations/widgets/action-creators'
 import * as WidgetSelectors from '~mobilizations/widgets/selectors'
-import { fields, validate } from '~mobilizations/widgets/components/form-autofire'
 
+import { fields, validate } from '~mobilizations/widgets/components/form-autofire'
 import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
-    const state = getState()
     const promises = []
+    const selectors = MobSelectors(getState())
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !selectors.getMobilization() && promises.push(
+      dispatch(selectMobilization(params.mobilization_id))
     )
-    !WidgetSelectors.isLoaded(state) && promises.push(
-      dispatch(WidgetActions.asyncWidgetFetch(params.mobilization_id))
+    !selectors.widgetsIsLoaded() && promises.push(
+      dispatch(asyncFetchWidgets(params.mobilization_id))
     )
     return Promise.all(promises)
   }
 }
 
 const mapStateToProps = (state, props) => {
-  const widget = WidgetSelectors.getWidget(state, props)
+  const { params: { widget_id } } = props
+  const selectors = MobSelectors(state, props)
+  const widget = selectors.getWidget(widget_id)
   return {
+    mobilization: selectors.getMobilization(),
     widget,
-    mobilization: MobilizationSelectors.getCurrent(state),
     initialValues: widget.settings || {}
   }
 }
 
+const mapActionsToProps = { asyncWidgetUpdate: asyncUpdateWidget }
+
 export default provideHooks(redial)(
-  connect(mapStateToProps, WidgetActions)(
-    reduxForm({
-      form: 'formAutofireForm',
-      fields,
-      validate
-    })(Page)
+  connect(mapStateToProps, mapActionsToProps)(
+    reduxForm({ form: 'formAutofireForm', fields, validate })(Page)
   )
 )

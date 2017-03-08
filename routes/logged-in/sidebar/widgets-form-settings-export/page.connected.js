@@ -1,36 +1,45 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
-import * as MobilizationSelectors from '~mobilizations/selectors'
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as WidgetActions from '~mobilizations/widgets/action-creators'
-import * as WidgetSelectors from '~mobilizations/widgets/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { selectMobilization, asyncFetchWidgets, asyncUpdateWidget } from '~client/mobrender/redux/action-creators'
+import { asyncWidgetDataExport, dataExportMount } from '~client/mobilizations/widgets/action-creators'
 
 import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
-    const state = getState()
+    const selectors = MobSelectors(getState())
     const promises = []
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !selectors.getMobilization() && promises.push(
+      dispatch(selectMobilization(params.mobilization_id))
     )
-    !WidgetSelectors.isLoaded(state) && promises.push(
-      dispatch(WidgetActions.asyncWidgetFetch(params.mobilization_id))
+    !selectors.widgetsIsLoaded() && promises.push(
+      dispatch(asyncFetchWidgets(params.mobilization_id))
     )
     return Promise.all(promises)
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  widget: WidgetSelectors.getWidget(state, props),
-  mobilization: MobilizationSelectors.getCurrent(state),
-  loading: state.widgets.dataExport.loading,
-  error: state.widgets.dataExport.error,
-  success: state.widgets.dataExport.success
-})
+const mapStateToProps = (state, props) => {
+  const { params: { widget_id } } = props
+  const selectors = MobSelectors(state, props)
+  return {
+    mobilization: selectors.getMobilization(),
+    widget: selectors.getWidget(widget_id),
+    loading: state.mobilizations.dataExport.loading,
+    error: state.mobilizations.dataExport.error,
+    success: state.mobilizations.dataExport.success
+  }
+}
+
+const mapActionsToProps = {
+  asyncWidgetUpdate: asyncUpdateWidget,
+  asyncWidgetDataExport,
+  dataExportMount
+}
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, WidgetActions)(Page)
+  connect(mapStateToProps, mapActionsToProps)(Page)
 )
