@@ -1,6 +1,5 @@
 import { Draft } from './draft/components'
 import {
-  Match,
   Pressure,
   Form,
   Content,
@@ -45,7 +44,7 @@ export default (mobilization, widget) => [
     settings: {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
-      button_text: 'Enviar e-mail',
+      button_text: 'Enviar e-mail'
       /* reply_email: user.email */
     },
     redirect: Paths.pressure(mobilization.id, widget.id)
