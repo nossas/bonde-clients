@@ -7,7 +7,8 @@ export const initialState = {
   data: [],
   currentId: undefined,
   menuActiveIndex: undefined,
-  error: undefined
+  error: undefined,
+  reload: false
 }
 
 export default (state = initialState, action) => {
@@ -55,7 +56,13 @@ export default (state = initialState, action) => {
       }
     case t.SELECT_MOBILIZATION:
       return {...state,
-        currentId: action.payload
+        currentId: action.payload,
+        reload: action.payload !== state.currentId ? true : state.reload
+      }
+    case t.FETCH_BLOCKS_SUCCESS:
+    case t.FETCH_WIDGETS_SUCCESS:
+      return {...state,
+        reload: false
       }
     case t.TOGGLE_MOBILIZATION_MENU:
       return {...state,

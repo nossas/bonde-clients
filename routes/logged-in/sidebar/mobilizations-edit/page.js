@@ -11,12 +11,6 @@ import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
 
-  componentDidMount () {
-    const { mobilization, fetchBlocks, fetchWidgets } = this.props
-    fetchBlocks(mobilization.id)
-    fetchWidgets(mobilization.id)
-  }
-
   render () {
     const { mobilization, renderIsLoading } = this.props
 

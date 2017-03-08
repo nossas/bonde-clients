@@ -76,6 +76,11 @@ export default (state, props) => ({
     return data.filter(w => w.id === parseInt(widget_id))[0]
   },
 
+  mobilizationIsNeedReload: () => {
+    const { list : { reload } } = state.mobilizations
+    return reload
+  },
+
   widgetsIsLoaded: () => {
     return state.mobilizations.widgets.isLoaded
   },

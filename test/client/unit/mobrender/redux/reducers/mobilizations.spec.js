@@ -6,7 +6,7 @@ import reducer, { initialState } from '~client/mobrender/redux/reducers/mobiliza
 describe('~client/mobrender/redux/reducers/mobilizations', () => {
 
   describe('doing add', () => {
-    
+
     it('#ADD_MOBILIZATION_REQUEST', () => {
       const state = { ...initialState, isLoaded: true }
       const action = { type: t.ADD_MOBILIZATION_REQUEST }
@@ -79,7 +79,7 @@ describe('~client/mobrender/redux/reducers/mobilizations', () => {
   })
 
   describe('doing select', () => {
-    
+
     it('#SELECT_MOBILIZATION', () => {
       const state = {
         ...initialState,
@@ -91,9 +91,10 @@ describe('~client/mobrender/redux/reducers/mobilizations', () => {
       }
       const payload = 1
       const action = { type: t.SELECT_MOBILIZATION, payload }
-      const nextState = reducer(state, action)
+      let nextState = reducer(state, action)
       expect(nextState).to.deep.equal({...state,
-        currentId: payload
+        currentId: payload,
+        reload: true
       })
     })
   })
@@ -158,7 +159,7 @@ describe('~client/mobrender/redux/reducers/mobilizations', () => {
   })
 
   describe('doing filter', () => {
-    
+
     it('#FILTER_MOBILIZATIONS_REQUEST', () => {
       const action = { type: t.FILTER_MOBILIZATIONS_REQUEST }
       const nextState = reducer(initialState, action)
@@ -190,6 +191,27 @@ describe('~client/mobrender/redux/reducers/mobilizations', () => {
         fetching: false,
         isLoaded: true,
         error: payload
+      })
+    })
+  })
+
+  describe('finish fetch widgets and blocks', () => {
+
+    const state = { ...initialState, reload: true }
+
+    it('#FETCH_BLOCKS_SUCCESS', () => {
+      const action = { type: t.FETCH_BLOCKS_SUCCESS }
+      const nextState = reducer(state, action)
+      expect(nextState).to.deep.equal({...state,
+        reload: false
+      })
+    })
+
+    it('#FETCH_WIDGETS_SUCCESS', () => {
+      const action = { type: t.FETCH_WIDGETS_SUCCESS }
+      const nextState = reducer(state, action)
+      expect(nextState).to.deep.equal({...state,
+        reload: false
       })
     })
   })
