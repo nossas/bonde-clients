@@ -12,7 +12,7 @@ import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { trigger } from 'redial'
 import { StyleSheetServer } from 'aphrodite'
-import Helm from 'react-helmet' // because we are already using helmet
+import Helm from 'react-helmet'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -44,14 +44,8 @@ export const createServer = (config) => {
     }
   } else {
     app.use(morgan('dev'))
-    const compiler = compileDev((webpack(webpackConfig)), config.port)
-    app.use(webpackDevMiddleware(compiler, {
-      // quiet: true,
-      watchOptions: {
-        ignored: /node_modules/
-      },
-      publicPath: '/assets/'
-    }))
+    const compiler = compileDev((webpack(webpackConfig('development'))), config.port)
+    app.use(webpackDevMiddleware(compiler))
     app.use(webpackHotMiddleware(compiler))
   }
 
@@ -158,7 +152,7 @@ export const createServer = (config) => {
                     padding: 0;
                   }
                 </style>
-                <link href="/assets/main.css" media="all" rel="stylesheet" />
+                <link href="/main.css" media="all" rel="stylesheet" />
                 <style data-aphrodite>${data.css.content}</style>
               </head>
               <body>
@@ -167,8 +161,8 @@ export const createServer = (config) => {
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
                 <script src="/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="/wysihtml/advanced_and_extended.js"></script>
-                <script src="${__PROD__ ? assets.vendor.js : '/vendor.js'}"></script>
-                <script async src="${__PROD__ ? assets.main.js : '/main.js'}" ></script>
+                <script src="${__PROD__ ? assets.vendor.js : '/vendor.bundle.js'}"></script>
+                <script async src="${__PROD__ ? assets.main.js : '/main.bundle.js'}" ></script>
               </body>
             </html>
           `)
