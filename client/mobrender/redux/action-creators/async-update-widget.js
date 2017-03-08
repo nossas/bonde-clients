@@ -15,7 +15,7 @@ export default widget => (dispatch, getState, { api }) => {
       dispatch(createAction(t.UPDATE_WIDGET_SUCCESS, res.data))
     })
     .catch(ex => {
-      dispatch(createAction(t.UPDATE_WIDGET_FAILURE, error))
+      dispatch(createAction(t.UPDATE_WIDGET_FAILURE, ex))
       return Promise.reject(ex)
     })
 }
