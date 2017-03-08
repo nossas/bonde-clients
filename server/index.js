@@ -40,7 +40,7 @@ export const createServer = (config) => {
     app.use(hpp())
     app.use(compression())
     if (__PROD__) {
-      assets = require('../assets.json')
+      assets = require('./../assets.json')
     }
   } else {
     app.use(morgan('dev'))
@@ -161,8 +161,8 @@ export const createServer = (config) => {
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
                 <script src="/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="/wysihtml/advanced_and_extended.js"></script>
-                <script src="${__PROD__ ? assets.vendor.js : '/vendor.bundle.js'}"></script>
-                <script async src="${__PROD__ ? assets.main.js : '/main.bundle.js'}" ></script>
+                <script src="${__PROD__ ? assets.vendor.bundle.js : '/vendor.bundle.js'}"></script>
+                <script async src="${__PROD__ ? assets.main.bundle.js : '/main.bundle.js'}" ></script>
               </body>
             </html>
           `)
