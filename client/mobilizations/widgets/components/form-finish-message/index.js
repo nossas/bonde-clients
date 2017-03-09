@@ -9,7 +9,6 @@ import {
   Radio,
   ControlLabel
 } from '~components/forms'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
 import Editor from '~components/editor-draft-js'
 
 // Current module dependencies
@@ -19,7 +18,7 @@ import * as WidgetActions from '../../action-creators'
 export const FormFinishMessage = props => {
   const { mobilization, widget, location, fields, successMessage, ...rest } = props
   const { color_scheme: colorScheme } = mobilization
-  const { TellAFriend, SettingsMenu } = props
+  const { TellAFriend } = props
 
   const {
     finish_message_type: finishMessageType,
@@ -27,53 +26,44 @@ export const FormFinishMessage = props => {
   } = fields
 
   return (
-    <SettingsPageLayout>
-      <SettingsMenu
-        mobilization={mobilization}
-        widget={widget}
-        location={location}
-      />
-      <SettingsPageContentLayout>
-        <FormRedux
-          {...rest}
-          className='transparent'
-          floatButton='Salvar'
-          onSubmit={onSubmit(props)}
-          successMessage={successMessage || 'Formulário salvo com sucesso!'}
-        >
-          <FormGroup controlId='payment-type-id' {...finishMessageType}>
-            <ControlLabel>Tipo de mensagem</ControlLabel>
-            <RadioGroup>
-              <Radio value='share'>Compartilhar</Radio>
-              <Radio value='custom'>Customizar</Radio>
-            </RadioGroup>
-          </FormGroup>
+    <FormRedux
+      {...rest}
+      className='transparent'
+      floatButton='Salvar'
+      onSubmit={onSubmit(props)}
+      successMessage={successMessage || 'Formulário salvo com sucesso!'}
+    >
+      <FormGroup controlId='payment-type-id' {...finishMessageType}>
+        <ControlLabel>Tipo de mensagem</ControlLabel>
+        <RadioGroup>
+          <Radio value='share'>Compartilhar</Radio>
+          <Radio value='custom'>Customizar</Radio>
+        </RadioGroup>
+      </FormGroup>
 
-          <label className='h5 darkengray caps mb1 block'>Preview</label>
-          {finishMessageType.value === 'share' && (
-            <TellAFriend mobilization={mobilization} />
-          )}
-          {finishMessageType.value === 'custom' && (
-            <div className='widget-finish-message-custom'>
-              <div className='relative'>
-                <input type='hidden' name='finish_message' />
-                <input type='hidden' name='finish_message_background' />
-                <Editor
-                  value={editorValue(finishMessage.value)}
-                  theme={colorScheme.replace('-scheme', '')}
-                  toolbarContainerStyle={styles.editorToolbarContainer}
-                  toolbarStyle={styles.editorToolbar}
-                  containerStyle={styles.editorContainer}
-                  focusStyle={styles.editorFocus}
-                  editorStyle={styles.editor}
-                  handleSave={rawContent => { finishMessage.onChange(JSON.stringify(rawContent)) }}
-                />
-              </div>
-            </div>
-          )}
-        </FormRedux>
-      </SettingsPageContentLayout>
-    </SettingsPageLayout>
+      <label className='h5 darkengray caps mb1 block'>Preview</label>
+      {finishMessageType.value === 'share' && (
+        <TellAFriend mobilization={mobilization} />
+      )}
+      {finishMessageType.value === 'custom' && (
+        <div className='widget-finish-message-custom'>
+          <div className='relative'>
+            <input type='hidden' name='finish_message' />
+            <input type='hidden' name='finish_message_background' />
+            <Editor
+              value={editorValue(finishMessage.value)}
+              theme={colorScheme.replace('-scheme', '')}
+              toolbarContainerStyle={styles.editorToolbarContainer}
+              toolbarStyle={styles.editorToolbar}
+              containerStyle={styles.editorContainer}
+              focusStyle={styles.editorFocus}
+              editorStyle={styles.editor}
+              handleSave={rawContent => { finishMessage.onChange(JSON.stringify(rawContent)) }}
+            />
+          </div>
+        </div>
+      )}
+    </FormRedux>
   )
 }
 
@@ -125,22 +115,20 @@ const mapStateToProps = (state, { widget: { settings } }) => ({
 // PropTypes
 //
 FormFinishMessage.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
   // Injected components
   TellAFriend: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-  SettingsMenu: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   // Form Redux
   fields: PropTypes.object.isRequired,
   submitting: PropTypes.bool.isRequired,
   error: PropTypes.string,
   successMessage: PropTypes.string,
-  // Actions
+  // Injected by components
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 
 export default reduxForm(
   { form: 'formFinishMessage', fields, validate },
-  mapStateToProps,
-  WidgetActions
+  mapStateToProps
 )(FormFinishMessage)
