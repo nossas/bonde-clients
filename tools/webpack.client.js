@@ -78,7 +78,7 @@ module.exports = {
   ],
   entry: {
     main: [
-      'webpack-hot-middleware/client',
+      !isProd ? 'webpack-hot-middleware/client' : '',
       './index.js'
     ],
     vendor: [
