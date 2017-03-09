@@ -3,16 +3,13 @@ import * as t from './action-types'
 const initialState = {
   isLoaded: true,
   isLoading: false,
-  // @revert To undefined
-  user: {
-    email: 'foo@bar.com'
-  },
+  user: { email: 'foo@bar.com', first_name: 'Foo Bar' },
   credentials: {
-    'Access-Token': '9pG-E14a2QD_2AMrf_5aPQ',
-    'Token-Type': 'Bearer',
-    'Expiry': '1488920190',
-    'Uid': 'foo@bar.com',
-    'Client': 'YKjNtT_50fW-h7cmzXSx3Q'
+    'access-token': 'QFrr9zA1-wnGcvE624WUjg',
+    'client': '7Wb0PWycB1y8ac34I28PWg',
+    'expiry': ':1490213663',
+    'token-type': 'Bearer',
+    'uid': 'foo@bar.com'
   },
   error: undefined
 }

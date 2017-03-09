@@ -135,7 +135,9 @@ services:
       dockerfile: Dockerfile.dev
     restart: always
     links:
+      - api
       - api:api.bonde.devel
+      - redis
       - redis:keyval.devel
     extra_hosts:
       - "app.bonde.devel:127.0.0.1"

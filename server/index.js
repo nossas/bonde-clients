@@ -12,14 +12,14 @@ import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { trigger } from 'redial'
 import { StyleSheetServer } from 'aphrodite'
-import Helm from 'react-helmet' // because we are already using helmet
+import Helm from 'react-helmet'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import proxy from 'http-proxy-middleware' // used in authenticate
 
 import DefaultServerConfig from './config'
-import webpackConfig from '../tools/webpack.client.dev'
+import webpackConfig from '../tools/webpack.client'
 import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../common/store'
 import createRoutes from '../routes'
@@ -40,18 +40,13 @@ export const createServer = (config) => {
     app.use(hpp())
     app.use(compression())
     if (__PROD__) {
-      assets = require('../assets.json')
+      assets = require('./../assets.json')
     }
   } else {
     app.use(morgan('dev'))
     const compiler = compileDev((webpack(webpackConfig)), config.port)
-    app.use(webpackDevMiddleware(compiler, {
-      quiet: true,
-      watchOptions: {
-        ignored: /node_modules/
-      }
-    }))
-    app.use(webpackHotMiddleware(compiler, { log: console.log }))
+    app.use(webpackDevMiddleware(compiler))
+    app.use(webpackHotMiddleware(compiler))
   }
 
   app.use(express.static('public'))
@@ -166,8 +161,8 @@ export const createServer = (config) => {
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
                 <script src="/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="/wysihtml/advanced_and_extended.js"></script>
-                <script src="${__PROD__ ? assets.vendor.js : '/vendor.js'}"></script>
-                <script async src="${__PROD__ ? assets.main.js : '/main.js'}" ></script>
+                <script src="${__PROD__ ? assets.vendor.bundle.js : '/vendor.bundle.js'}"></script>
+                <script async src="${__PROD__ ? assets.main.bundle.js : '/main.bundle.js'}" ></script>
               </body>
             </html>
           `)
