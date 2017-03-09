@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import Page from '~routes/logged-in/sidebar/widgets-form-settings/page'
+import Page from '~routes/logged-in/sidebar/widgets-form-settings/form/page'
 
-describe('routes/application/widgets-form-settings/page', () => {
+describe('routes/application/widgets-form-settings/form/page', () => {
   let wrapper
   const props = {
     fields: {

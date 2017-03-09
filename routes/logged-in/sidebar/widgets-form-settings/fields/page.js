@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import { Loading } from '~components/await'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import Form, { SettingsMenu } from '~widget-plugins/form/components'
+import Form from '~widget-plugins/form/components'
 
 class FormSettingsFieldsPage extends Component {
   constructor (props, context) {
@@ -55,8 +54,7 @@ class FormSettingsFieldsPage extends Component {
   renderFields () {
     const { widget, ...props } = this.props
     return (
-      <SettingsPageLayout>
-        <SettingsMenu widget={widget} {...props} />
+      <div>
         <button
           className='btn white bg-pagenta caps p2 rounded'
           onClick={::this.handleAddTextField}
@@ -73,26 +71,25 @@ class FormSettingsFieldsPage extends Component {
         >
           Adicionar um campo
         </button>
-        <SettingsPageContentLayout>
-          <p className='h5 mb3 darkengray'>
-            {
-              ~this.fields().length
-                ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a' +
-                  ' adicionar campos.'
-                : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as' +
-                  ' necessidades da sua ação.'
-            }
-          </p>
 
-          <Form
-            {...props}
-            widget={widget}
-            configurable
-            hasNewField={this.state.hasNewField}
-          />
-        </SettingsPageContentLayout>
+        <p className='h5 mb3 darkengray'>
+          {
+            ~this.fields().length
+              ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a' +
+                ' adicionar campos.'
+              : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as' +
+                ' necessidades da sua ação.'
+          }
+        </p>
+
+        <Form
+          {...props}
+          widget={widget}
+          configurable
+          hasNewField={this.state.hasNewField}
+        />
         {this.renderLoading()}
-      </SettingsPageLayout>
+      </div>
     )
   }
 
