@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-// const DashboardPlugin = require('webpack-dashboard/plugin')
+const Visualizer = require('webpack-visualizer-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const AssetsPlugin = require('assets-webpack-plugin')
 
@@ -54,15 +54,14 @@ if (isProd) {
         comments: false
       }
     }),
-     new AssetsPlugin({ filename: 'assets.json' })
+    new AssetsPlugin({ filename: 'assets.json' }),
+    new Visualizer({
+      filename: './main.stats.html'
+    })
   )
 } else {
   plugins.push(
     new webpack.HotModuleReplacementPlugin()
-    // new DashboardPlugin()
-    // new Visualizer({
-    //     filename: clientName + '.stats.html'
-    // })
   )
 }
 
@@ -78,7 +77,10 @@ module.exports = {
     }
   ],
   entry: {
-    main: './index.js',
+    main: [
+      'webpack-hot-middleware/client',
+      './index.js'
+    ],
     vendor: [
       'react',
       'axios',
