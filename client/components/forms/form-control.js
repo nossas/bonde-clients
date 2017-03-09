@@ -12,7 +12,7 @@ class FormControl extends Component {
     } = this.context
 
     const fieldProps = Object.assign({}, field)
-    if (Component === 'input') {
+    if (Component === 'input' || Component === 'textarea') {
       delete fieldProps.layout
       delete fieldProps.error
       delete fieldProps.touched
