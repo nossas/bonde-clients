@@ -1,5 +1,7 @@
+import DefaultConfigServer from '~server/config'
+
 export const mobilizations = () => '/'
-export const mobilization = (mobilization, domain = process.env.APP_DOMAIN) => {
+export const mobilization = (mobilization, domain = DefaultConfigServer.appDomain) => {
   if (domain && domain.indexOf('staging') !== -1) {
     return `http://${mobilization.slug}.${domain}`
   }
