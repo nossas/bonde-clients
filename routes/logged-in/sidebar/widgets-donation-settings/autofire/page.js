@@ -1,26 +1,20 @@
 import React, { PropTypes } from 'react'
 
 import { Loading } from '~components/await'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import { SettingsMenu as DonationSettingsMenu } from '~widget-plugins/donation/components'
 import { FormAutofire } from '~mobilizations/widgets/components'
 
 const DonationSettingsAutofirePage = props => !props.widget ? (
   <Loading />
 ) : (
-  <SettingsPageLayout>
-    <DonationSettingsMenu {...props} />
-    <SettingsPageContentLayout>
-      <FormAutofire {...props} />
-    </SettingsPageContentLayout>
-  </SettingsPageLayout>
+  <FormAutofire {...props} />
 )
 
 DonationSettingsAutofirePage.propTypes = {
+  // Injected by redux-form
   fields: PropTypes.object.isRequired,
+  // Injected by container
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  // Actions
   asyncWidgetUpdate: PropTypes.func.isRequired
 }
 

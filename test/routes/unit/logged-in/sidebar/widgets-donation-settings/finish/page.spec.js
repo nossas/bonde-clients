@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import Page from '~routes/logged-in/sidebar/widgets-donation-settings-finish/page'
+import Page from '~routes/logged-in/sidebar/widgets-donation-settings/finish/page'
 
-describe('routes/application/widgets-donation-settings-finish/page', () => {
+describe('routes/application/widgets-donation-settings/finish/page', () => {
   let wrapper
 
   beforeAll(() => {

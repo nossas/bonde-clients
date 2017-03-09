@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import Page from '~routes/logged-in/sidebar/widgets-donation-settings-export/page'
+import Page from '~routes/logged-in/sidebar/widgets-donation-settings/export/page'
 
-describe('routes/application/widgets-donation-settings-export/page', () => {
+describe('routes/application/widgets-donation-settings/export/page', () => {
   let wrapper
   const props = {
     params: { widget_id: '1' },
