@@ -77,7 +77,10 @@ module.exports = {
     }
   ],
   entry: {
-    main: './index.js',
+    main: [
+      'webpack-hot-middleware/client',
+      './index.js'
+    ],
     vendor: [
       'react',
       'axios',
