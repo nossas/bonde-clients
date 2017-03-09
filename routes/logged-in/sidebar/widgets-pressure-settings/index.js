@@ -4,11 +4,26 @@ import { injectAsyncReducer } from '~common/store'
 
 export default store => ({
   path: 'mobilizations/:mobilization_id/widgets/:widget_id/pressure',
+  getIndexRoute (location, cb) {
+    require.ensure([], (require) => {
+      cb(null, {
+        component: require('./pressure/page.connected').default
+      })
+    })
+  },
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      injectAsyncReducer(store, 'mobilizations', require('~mobilizations/reducers').default)
-      injectAsyncReducer(store, 'widgets', require('~mobilizations/widgets/reducers').default)
-      callback(null, require('./page.connected').default)
+      injectAsyncReducer(store, 'mobilizations', require('~client/mobrender/redux/reducers').default)
+      callback(null, require('./container.connected').default)
+    })
+  },
+  getChildRoutes (location, cb) {
+    require.ensure([], require => {
+      cb(null, [
+        require('./email').default(store),
+        require('./autofire').default(store),
+        require('./finish').default(store)
+      ])
     })
   }
 })

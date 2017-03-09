@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~utils/mock'
-import Page from '~routes/logged-in/sidebar/widgets-pressure-settings/page'
+import Page from '~routes/logged-in/sidebar/widgets-pressure-settings/pressure/page'
 
-describe('routes/application/widgets-pressure-settings/page', () => {
+describe('routes/application/widgets-pressure-settings/preesure/page', () => {
   let wrapper
   const props = {
     mobilization: { color_scheme: 'meurio-scheme' },
