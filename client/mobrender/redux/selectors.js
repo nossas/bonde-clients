@@ -77,8 +77,12 @@ export default (state, props) => ({
   },
 
   mobilizationIsNeedReload: () => {
-    const { list : { reload } } = state.mobilizations
-    return reload
+    const {
+      list : { reload },
+      blocks: { isLoaded: blocksIsLoaded },
+      widgets: { isLoaded: widgetsIsLoaded },
+    } = state.mobilizations
+    return !blocksIsLoaded || !widgetsIsLoaded ? true : reload
   },
 
   widgetsIsLoaded: () => {
