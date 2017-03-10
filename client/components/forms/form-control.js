@@ -11,11 +11,19 @@ class FormControl extends Component {
       $formGroup: { controlId, ...field }
     } = this.context
 
+    const fieldProps = Object.assign({}, field)
+    if (Component === 'input' || Component === 'textarea') {
+      delete fieldProps.layout
+      delete fieldProps.error
+      delete fieldProps.touched
+      delete fieldProps.valid
+    }
+
     return (
       <div>
         <Component
           {...props}
-          {...field}
+          {...fieldProps}
           id={controlId}
           className={classnames(
             'form-control-input block lightestgray',

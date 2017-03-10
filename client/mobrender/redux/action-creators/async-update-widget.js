@@ -1,18 +1,21 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
+import AuthSelectors from '~authenticate/redux/selectors'
+import Selectors from '../selectors'
+
 export default widget => (dispatch, getState, { api }) => {
   dispatch(createAction(t.UPDATE_WIDGET_REQUEST))
-  const { auth: { credentials }, mobilization } = getState()
+  const credentials = AuthSelectors(getState()).getCredentials()
+  const mobilization = Selectors(getState()).getMobilization()
 
   return api
-    .put(`/widgets`, { widget }, { headers: credentials })
+    .put(`/mobilizations/${mobilization.id}/widgets/${widget.id}`, { widget }, { headers: credentials })
     .then(res => {
-      //dispatch(createAction(t.UPDATE_WIDGET_SUCCESS, res.data))
-      return Promise.resolve()
+      dispatch(createAction(t.UPDATE_WIDGET_SUCCESS, res.data))
     })
-    .catch(error => {
-      dispatch(createAction(t.UPDATE_WIDGET_FAILURE, error))
-      return Promise.reject({ _error: error })
+    .catch(ex => {
+      dispatch(createAction(t.UPDATE_WIDGET_FAILURE, ex))
+      return Promise.reject(ex)
     })
 }

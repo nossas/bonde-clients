@@ -1,10 +1,14 @@
-import * as AccountSelectors from '~account/selectors'
 import * as CommunitySelectors from '~community/selectors'
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import AuthSelectors from '~authenticate/redux/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
 
-export default (state, ownProps) => ({
-  loading: MobilizationSelectors.isLoading(state),
-  user: AccountSelectors.getUser(state),
-  mobilization: MobilizationSelectors.getCurrent(state),
-  community: CommunitySelectors.getCurrent(state)
-})
+export default (state, ownProps) => {
+  const mob = MobSelectors(state, ownProps)
+  const auth = AuthSelectors(state, ownProps)
+  return {
+    loading: mob.mobilizationsIsLoading(),
+    user: auth.getUser(),
+    mobilization: mob.getMobilization(),
+    community: CommunitySelectors.getCurrent(state)
+  }
+}

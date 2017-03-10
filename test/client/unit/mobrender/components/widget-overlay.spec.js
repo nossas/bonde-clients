@@ -8,8 +8,8 @@ describe('mobrender/components/widget-overlay', () => {
     widget: { id: 1, kind: 'content' },
     hasMouseOver: false,
     onClick: () => {},
-    onMouseOver: () => {},
-    onMouseOut: () => {}
+    onMouseEnter: () => {},
+    onMouseLeave: () => {}
   }
   let over
 
@@ -30,17 +30,17 @@ describe('mobrender/components/widget-overlay', () => {
     expect(over2.find('h1').length).to.equal(1)
   })
 
-  it('should call onMouseOver passing ("widget", widget.id) when mouse over', () => {
+  it('should call onMouseOver passing ("widget", widget.id) when mouse enter', () => {
     let result
     over.setProps({ onMouseOver: (key, id) => result = [key, id] })
-    over.find('div.relative').simulate('mouseover')
+    over.find('div.relative').simulate('mouseenter')
     expect(result).to.deep.equal(['widget', props.widget.id])
   })
 
-  it('should call onMouseOut passing ("widget") when mouse out', () => {
+  it('should call onMouseOut passing ("widget") when mouse leave', () => {
     let result
     over.setProps({ onMouseOut: key => result = [key, ] })
-    over.find('div.relative').simulate('mouseout')
+    over.find('div.relative').simulate('mouseleave')
     expect(result).to.deep.equal(['widget'])
   })
 

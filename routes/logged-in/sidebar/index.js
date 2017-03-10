@@ -13,7 +13,7 @@ export default store => ({
   },
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      injectAsyncReducer(store, 'mobilizations', require('~client/mobilizations/reducers').default)
+      injectAsyncReducer(store, 'mobilizations', require('~client/mobrender/redux/reducers').default)
       callback(null, require('./container.connected').default)
     })
   },
@@ -38,18 +38,8 @@ export default store => ({
         require('./templates-create').default(store),
         require('./templates-list').default(store),
         require('./widgets-donation-settings').default(store),
-        require('./widgets-donation-settings-autofire').default(store),
-        require('./widgets-donation-settings-export').default(store),
-        require('./widgets-donation-settings-finish').default(store),
         require('./widgets-form-settings').default(store),
-        require('./widgets-form-settings-autofire').default(store),
-        require('./widgets-form-settings-export').default(store),
-        require('./widgets-form-settings-fields').default(store),
-        require('./widgets-form-settings-finish').default(store),
         require('./widgets-pressure-settings').default(store),
-        require('./widgets-pressure-settings-autofire').default(store),
-        require('./widgets-pressure-settings-email').default(store),
-        require('./widgets-pressure-settings-finish').default(store),
 
         require('~common/routes/not-found').default
       ])

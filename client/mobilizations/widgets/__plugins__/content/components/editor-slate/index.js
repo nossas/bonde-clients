@@ -113,8 +113,8 @@ class EditorSlate extends Component {
     const raw = JSON.stringify(Raw.serialize(state))
 
     if (settings.content !== raw) {
-      const { widgetUpdate, widget } = this.props
-      widgetUpdate({ ...widget, settings: { content: raw } })
+      const { update, widget } = this.props
+      update({ ...widget, settings: { content: raw } })
     }
     this.setState({ editing: false })
   }

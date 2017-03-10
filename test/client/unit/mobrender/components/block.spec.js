@@ -1,5 +1,5 @@
 import React from 'react'
-import { expect } from 'chai' 
+import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import Block from '~client/mobrender/components/block'
@@ -31,14 +31,14 @@ describe('~client/mobrender/components/block', () => {
   it('should call onMouseOver passing key:block id:block.id', () => {
     let result
     block.setProps({ onMouseOver: (key, id) => result = { key, id } })
-    block.find(blockSelector).simulate('mouseover')
+    block.find(blockSelector).simulate('mouseenter')
     expect(result).to.deep.equal({ key: 'block', id: props.block.id })
   })
 
   it('should call onMouseOut passing key:block', () => {
     let result
     block.setProps({ onMouseOut: key => result = key })
-    block.find(blockSelector).simulate('mouseout')
+    block.find(blockSelector).simulate('mouseleave')
     expect(result).to.equal('block')
   })
 
@@ -57,7 +57,7 @@ describe('~client/mobrender/components/block', () => {
   })
 
   describe('render change background', () => {
-    
+
     it('should show when only editing is block-config-menu.EDIT_KEY', () => {
       expect(block.find(BlockChangeBackground).length).to.equal(0)
       block.setProps({ editing: EDIT_KEY })
@@ -71,7 +71,7 @@ describe('~client/mobrender/components/block', () => {
   })
 
   describe('render config menu', () => {
-    
+
     it('should render config menu passing block', () => {
       expect(block.find(BlockConfigMenu).length).to.equal(1)
       expect(block.find(BlockConfigMenu).props().block).to.deep.equal(props.block)
@@ -79,7 +79,7 @@ describe('~client/mobrender/components/block', () => {
 
     it('should show when hasMouseOver and editable', () => {
       expect(block.find(BlockConfigMenu).props().display).to.equal(false)
-      
+
       block.setProps({ hasMouseOver: true, editable: true })
       expect(block.find(BlockConfigMenu).props().display).to.equal(true)
     })
@@ -102,7 +102,7 @@ describe('~client/mobrender/components/block', () => {
       { id: 1, kind: 'draft' },
       { id: 2, kind: 'draft' }
     ]
-    
+
     beforeEach(() => {
       block.setProps({ widgets })
     })

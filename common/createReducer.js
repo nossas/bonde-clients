@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import auth from '~authenticate/redux/reducer'
+import mobilizations from '~client/mobrender/redux/reducers'
+/*
 import mobilizations from '~mobilizations/reducers'
 import blocks from '~mobilizations/blocks/reducers'
 import widgets from '~mobilizations/widgets/reducers'
+*/
 import community from '~community/reducers'
 import colorPicker from '~components/color-picker/reducers'
 
@@ -22,8 +25,6 @@ export default function createReducer (asyncReducers) {
     form: formReducer,
     auth,
     mobilizations,
-    blocks,
-    widgets,
     community,
     colorPicker,
     ...asyncReducers

@@ -29,6 +29,45 @@ const plugins = [
   new ExtractTextPlugin({filename: '[name].css', allChunks: true})
 ]
 
+const entry = {
+  main: [
+    './index.js'
+  ],
+  vendor: [
+    'react',
+    'axios',
+    'cpf_cnpj',
+    'downloadjs',
+    'draft-js',
+    'jquery',
+    'react-addons-test-utils',
+    'react-addons-transition-group',
+    'react-color',
+    'react-colors-picker',
+    'react-cookie',
+    'react-document-meta',
+    'react-dom',
+    'react-ga',
+    'react-grid-system',
+    'react-helmet',
+    'react-redux',
+    'react-router',
+    'react-s3-uploader',
+    'react-test-renderer',
+    'redial',
+    'redux',
+    'redux-form',
+    'redux-form-validation',
+    'redux-logger',
+    'redux-promise',
+    'redux-thunk',
+    'aphrodite',
+    // 'font-awesome',
+    // 'xlsx',
+    'superagent'
+  ]
+}
+
 if (isProd) {
   plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -60,6 +99,10 @@ if (isProd) {
     })
   )
 } else {
+  entry.main.push(
+    'webpack-hot-middleware/client'
+  )
+
   plugins.push(
     new webpack.HotModuleReplacementPlugin()
   )
@@ -76,42 +119,7 @@ module.exports = {
       './cptable': 'var cptable'
     }
   ],
-  entry: {
-    main: './index.js',
-    vendor: [
-      'react',
-      'axios',
-      'cpf_cnpj',
-      'downloadjs',
-      'draft-js',
-      'jquery',
-      'react-addons-test-utils',
-      'react-addons-transition-group',
-      'react-color',
-      'react-colors-picker',
-      'react-cookie',
-      'react-document-meta',
-      'react-dom',
-      'react-ga',
-      'react-grid-system',
-      'react-helmet',
-      'react-redux',
-      'react-router',
-      'react-s3-uploader',
-      'react-test-renderer',
-      'redial',
-      'redux',
-      'redux-form',
-      'redux-form-validation',
-      'redux-logger',
-      'redux-promise',
-      'redux-thunk',
-      'aphrodite',
-      // 'font-awesome',
-      // 'xlsx',
-      'superagent'
-    ]
-  },
+  entry: entry,
   output: {
     path: staticsPath,
     filename: '[name].bundle.js',

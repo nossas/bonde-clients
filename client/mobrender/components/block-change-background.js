@@ -10,17 +10,17 @@ const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFi
       colors={['bg-1', 'bg-2', 'bg-3', 'bg-4']}
       selected={block.bg_class}
       onSelectColor={color => {
-        onChangeBackground({...block, bg_class: color})
+        onChangeBackground({ ...block, bg_class: color })
       }}
     />
     <FileUploader
       file={block.bg_image}
       progress={progress}
       onProgress={progress => onUploadFile(BLOCK_UPLOAD_KEY, progress)}
-      onRemove={() => onChangeBackground({...block, bg_image: undefined})}
+      onRemove={() => onChangeBackground({ ...block, bg_image: undefined })}
       onFinish={file => {
         onUploadFile(BLOCK_UPLOAD_KEY)
-        onChangeBackground({...block, bg_image: file})  
+        onChangeBackground({...block, bg_image: file})
       }}
     />
     <div className='absolute right-0 mt2 mr2 nowrap z5'>

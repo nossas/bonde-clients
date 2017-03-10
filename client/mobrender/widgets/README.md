@@ -11,7 +11,8 @@ props = {
     kind: PropTypes.string,
     settings: PropTypes.object
   }),
-  update: PropTypes.func
+  update: PropTypes.func,
+  editable: PropTypes.bool
 }
 ```
 
@@ -26,6 +27,7 @@ configuration file in `widgets/config.js`
   label: 'Texto',
   settings: {
     content: 'Clique aqui para editar'
-  }
+  },
+  redirect: '/content/edit'  // optional, not render widget overlay if pass this config
 }
 ```

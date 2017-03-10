@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Widget from './widget.connected'
 import BlockConfigMenu from './block-config-menu.connected'
 import { EDIT_KEY } from './block-config-menu'
@@ -6,12 +6,11 @@ import BlockChangeBackground from './block-change-background.connected'
 
 export const HOVER_MOUSE_KEY = 'block'
 
-
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
-    onMouseOver={() => onMouseOver(HOVER_MOUSE_KEY, block.id)}
-    onMouseOut={() => onMouseOut(HOVER_MOUSE_KEY)}
+    onMouseEnter={() => !editing && onMouseOver(HOVER_MOUSE_KEY, block.id)}
+    onMouseLeave={() => !editing && onMouseOut(HOVER_MOUSE_KEY)}
     onKeyUp={evt => {
       // ESC keycode
       if (evt.keyCode === 27) {
@@ -21,9 +20,9 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
   >
     <div className='col-10 mx-auto'>
       {editing === EDIT_KEY ? <BlockChangeBackground block={block} /> : null}
-      <div className='clearfix' style={{ padding: '5em 0' }}>
+      <div className='clearfix widgets' style={{ padding: '5em 0' }}>
         {widgets && widgets.map(widget => (
-          <Widget widget={widget} />
+          <Widget key={`widget-${widget.id}`} widget={widget} editable={editable} />
         ))}
       </div>
       {block.hidden && (

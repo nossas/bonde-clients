@@ -1,16 +1,29 @@
 import React, { PropTypes } from 'react'
 
+const overlayStyle = {
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  left: '0',
+  fontWeight: 'bold',
+  borderWidth: '6px',
+  opacity: '.82',
+  backgroundColor: '#222222',
+  fontSize: '1.8rem'
+}
+
 const WidgetOverlay = ({ children, widget, onClick, onMouseOver, onMouseOut, hasMouseOver }) => (
   <div
-    className='relative'
+    className='relative overlay'
     style={{ cursor: 'pointer' }}
-    onMouseOver={() => onMouseOver('widget', widget.id)}
-    onMouseOut={() => onMouseOut('widget')}
+    onMouseEnter={() => onMouseOver('widget', widget.id)}
+    onMouseLeave={() => onMouseOut('widget')}
     onClick={() => onClick()}
   >
     {children}
     {hasMouseOver ? (
-      <div className='overlay h1 rounded z1 border border-pagenta px2'>
+      <div className='h1 rounded z1 border border-pagenta px2' style={overlayStyle}>
         <div className='table full-height col-12 center'>
           <div className='white table-cell align-middle'>
             {'Clique para editar'}

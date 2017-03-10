@@ -42,6 +42,10 @@ export default (state = initialState, action = {}) => {
         saving: false,
         error: action.payload
       }
+    case t.ADD_WIDGETS_SUCCESS:
+      return {...state,
+        data: [...state.data, ...action.payload]
+      }
     default:
       return state
     }

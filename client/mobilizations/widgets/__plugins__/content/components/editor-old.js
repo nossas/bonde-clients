@@ -90,10 +90,10 @@ class EditorOld extends React.Component {
     this.disableEditor()
 
     if (hasChanged) {
-      const { widgetUpdate, widget } = this.props
+      const { update, widget } = this.props
 
       this.setState({loading: true})
-      widgetUpdate({
+      update({
         ...widget,
         settings: { content: this.state.editor.getValue() }
       })
@@ -170,7 +170,7 @@ EditorOld.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  widgetUpdate: PropTypes.func
+  update: PropTypes.func
 }
 
 export default EditorOld

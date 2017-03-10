@@ -8,10 +8,6 @@ const TellAFriend = props => (
   <div className='tell-a-friend' />
 )
 
-const SettingsMenu = props => (
-  <div className='settings-menu' />
-)
-
 describe('client/mobilizations/widgets/components/form-finish-message', () => {
   let wrapper
   const props = {
@@ -23,7 +19,6 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
     },
     // Injected components
     TellAFriend,
-    SettingsMenu,
     // Form Redux props
     submitting: false,
     handleSubmit: () => {},
@@ -48,9 +43,6 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
     describe('preview', () => {
       it('should render TellAFriend component by default', () => {
         expect(wrapper.find('TellAFriend')).to.have.length(1)
-      })
-      it('should render SettingsMenu component if the `finish_message_type` field is "custom"', () => {
-        expect(wrapper.find('SettingsMenu')).to.have.length(1)
       })
     })
   })

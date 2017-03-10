@@ -1,8 +1,8 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { selectMobilization } from '~client/mobrender/redux/action-creators'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
 
@@ -13,8 +13,9 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    // TODO: Check if this code is necessary
+    !MobSelectors(getState()).getMobilization() && promises.push(
+      dispatch(selectMobilization(params.mobilization_id))
     )
     !TemplateSelectors.isLoaded(state) && promises.push(
       dispatch(TemplateActions.asyncFetch())
@@ -24,7 +25,7 @@ const redial = {
 }
 
 const mapStateToProps = state => ({
-  mobilization: MobilizationSelectors.getCurrent(state),
+  mobilization: MobSelectors(state).getMobilization(),
   templatesGlobalLength: TemplateSelectors.getGlobalTemplates(state).length,
   templatesCustomLength: TemplateSelectors.getCustomTemplates(state).length
 })

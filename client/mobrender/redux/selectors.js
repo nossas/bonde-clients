@@ -6,6 +6,23 @@ export default (state, props) => ({
     return data.filter(mob => mob.id === currentId)[0]
   },
 
+  mobilizationsIsLoading: () => {
+    return state.mobilizations.list.fetching
+  },
+
+  mobilizationsIsLoaded: () => {
+    return state.mobilizations.list.isLoaded
+  },
+
+  getMobilizationMenuActive: () => {
+    return state.mobilizations.list.menuActiveIndex
+  },
+
+  getMobilizations: () => {
+    const { list: { data } } = state.mobilizations
+    return data
+  },
+
   hasMouseOver: (key, id) => {
     const { hover } = state.mobilizations
     if (key in hover) return hover[key] === id
@@ -14,7 +31,11 @@ export default (state, props) => ({
 
   getBlocks: () => {
     const { blocks: { data } } = state.mobilizations
-    return data
+    return data.sort((a, b) => a.position - b.position)
+  },
+
+  blocksIsLoaded: () => {
+    return state.mobilizations.blocks.isLoaded
   },
 
   canMoveUp: () => {
@@ -26,7 +47,7 @@ export default (state, props) => ({
   canMoveDown: () => {
     const { block } = props
     const { blocks: { data } } = state.mobilizations
-    const index = data.length-1
+    const index = data.length - 1
     return data[index] && data[index].id !== block.id
   },
 
@@ -37,12 +58,60 @@ export default (state, props) => ({
 
   getEditing: () => {
     const { edition } = state.mobilizations
-    return edition.isEditing ? edition.mode : undefined 
+    return edition.isEditing ? edition.mode : undefined
   },
 
   getBlockSaving: () => {
     const { blocks: { saving } } = state.mobilizations
     return saving
+  },
+
+  getWidgets: () => {
+    const { widgets: { data } } = state.mobilizations
+    return data
+  },
+
+  getWidget: (widget_id) => {
+    const { widgets: { data } } = state.mobilizations
+    return data.filter(w => w.id === parseInt(widget_id))[0]
+  },
+
+  mobilizationIsNeedReload: () => {
+    const { list : { reload } } = state.mobilizations
+    return reload
+  },
+
+  widgetsIsLoaded: () => {
+    return state.mobilizations.widgets.isLoaded
+  },
+
+  widgetsIsLoading: () => {
+    return state.mobilizations.widgets.saving
+  },
+
+  renderIsLoading: () => {
+    const {
+      widgets: {
+        isLoaded: widgetsIsLoaded,
+        fetching: widgetsIsLoading
+      },
+      blocks: {
+        isLoaded: blocksIsLoaded,
+        fetching: blocksIsLoading
+      }
+    } = state.mobilizations
+
+    const isLoaded = blocksIsLoaded && widgetsIsLoaded
+    const isntLoading = !blocksIsLoading && !widgetsIsLoading
+    return !(isLoaded && isntLoading)
+  },
+
+  getPlugin: plugin => {
+    if (!(plugin in state.mobilizations.plugins)) {
+      console.error(`The [${plugin}] is not an available plugin`)
+      return {}
+    }
+    return state.mobilizations.plugins[plugin]
   }
 })
 
@@ -50,11 +119,3 @@ export const getTemplate = (state, ownProps) => {
   const { list: { data }, templates: { list: { templateId } } } = state.mobilizations
   return data.filter(mob => mob.id === templateId)[0]
 }
-
-export const getList = state => state.mobilizations.list.data
-
-export const getMenuActiveIndex = state => state.mobilizations.list.menuActiveIndex
-
-export const isLoading = state => state.mobilizations.list.loading
-
-export const isLoaded = state => state.mobilizations.list.isLoaded

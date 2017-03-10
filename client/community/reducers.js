@@ -1,10 +1,22 @@
 import * as t from './action-types'
 
 const initialState = {
-  isLoaded: false,
+  isLoaded: true,
   data: [],
   // @revert To undefined
-  currentId: 1
+  data: [
+    {
+      id: 15,
+      name: 'BH 90º',
+      city: 'Belo Horizonte - MG',
+      mailchimp_api_key: undefined,
+      mailchimp_list_id: undefined,
+      mailchimp_group_id: undefined,
+      image: undefined,
+      description: undefined,
+      recipient: undefined},
+  ],
+  currentId: 15
 }
 
 export default (state = initialState, action = {}) => {

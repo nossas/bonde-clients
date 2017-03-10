@@ -26,9 +26,16 @@ export default (state = initialState, action = {}) => {
         fetching: false,
         error: action.payload
       }
+    case t.ADD_BLOCK_REQUEST:
     case t.UPDATE_BLOCK_REQUEST:
+    case t.DESTROY_BLOCK_REQUEST:
       return {...state,
         saving: true
+      }
+    case t.ADD_BLOCK_SUCCESS:
+      return {...state,
+        saving: false,
+        data: [...state.data, action.payload]
       }
     case t.UPDATE_BLOCK_SUCCESS:
       return {...state,
@@ -37,13 +44,20 @@ export default (state = initialState, action = {}) => {
           b => b.id === action.payload.id ? action.payload : b
         )
       }
+    case t.DESTROY_BLOCK_SUCCESS:
+      return {...state,
+        saving: false,
+        data: state.data.filter(b => b.id !== action.payload.id)
+      }
     case t.CHANGE_BLOCK_BACKGROUND:
       return {...state,
         data: state.data.map(
           b => b.id === action.payload.id ? action.payload : b
         )
       }
+    case t.ADD_BLOCK_FAILURE:
     case t.UPDATE_BLOCK_FAILURE:
+    case t.DESTROY_BLOCK_FAILURE:
       return {...state,
         saving: false,
         error: action.payload
@@ -53,6 +67,14 @@ export default (state = initialState, action = {}) => {
         data: state.data.map((b, index) => {
           if (index + 1 < state.data.length && state.data[index + 1].id === action.payload.id) return action.payload
           else if (b.id === action.payload.id) return state.data[index - 1]
+          else return b
+        })
+      }
+    case t.MOVE_BLOCK_DOWN:
+      return {...state,
+        data: state.data.map((b, index) => {
+          if (index > 0 && state.data[index - 1].id === action.payload.id) return action.payload
+          else if (b.id === action.payload.id) return state.data[index + 1]
           else return b
         })
       }

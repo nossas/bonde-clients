@@ -1,7 +1,7 @@
 import * as t from './action-types'
 
 const initialState = {
-  isLoaded: false,
+  isLoaded: true,
   isLoading: false,
   user: { email: 'foo@bar.com', first_name: 'Foo Bar' },
   credentials: {

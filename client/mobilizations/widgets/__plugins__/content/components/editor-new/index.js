@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react'
 
-// Global module dependencies
 import { Loading } from '~components/await'
 import Editor from '~components/editor-draft-js'
-
-// Current module dependencies
 if (process.env.BROWSER) require('./index.scss')
 
 class EditorNew extends React.Component {
@@ -35,10 +32,10 @@ class EditorNew extends React.Component {
     const { widget: { settings } } = this.props
 
     if (settings.content !== rawContent) {
-      const { widgetUpdate, widget } = this.props
+      const { update, widget } = this.props
       this.setState({ loading: true })
 
-      widgetUpdate({
+      update({
         ...widget,
         settings: { content: JSON.stringify(rawContent) }
       })
@@ -81,7 +78,7 @@ EditorNew.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  widgetUpdate: PropTypes.func
+  update: PropTypes.func
 }
 
 export default EditorNew

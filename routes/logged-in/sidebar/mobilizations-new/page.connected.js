@@ -2,13 +2,13 @@ import { reduxForm } from 'redux-form'
 
 import * as CommunitySelectors from '~community/selectors'
 import { fields, validate } from '~mobilizations/components/mobilization-basics-form'
-import * as MobilizationSelectors from '~mobilizations/selectors'
-import * as MobilizationActions from '~mobilizations/action-creators'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import { asyncAddMobilization } from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 
-const mapStateToProps = state => {
-  const mobilization = MobilizationSelectors.getCurrent(state) || {}
+const mapStateToProps = (state, props) => {
+  const mobilization = MobSelectors(state, props).getMobilization() || {}
   const community = CommunitySelectors.getCurrent(state)
   return {
     mobilization,
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 }
 
 const mapActionCreatorsToProps = {
-  submit: MobilizationActions.asyncAdd
+  submit: asyncAddMobilization
 }
 
 export default reduxForm(

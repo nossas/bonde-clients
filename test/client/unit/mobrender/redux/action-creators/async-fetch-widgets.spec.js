@@ -11,12 +11,12 @@ import rootReducer from '../mock-reducers/root-reducer'
 
 // Mock axios
 const mockAxios = new MockAdapter(axios)
-const mobilization = { id: 1, name: 'Lorem' }
+const mobilizationId = 1
 const data = [
   { id: 1, kind: 'draft' },
   { id: 2, kind: 'draft' }
 ]
-mockAxios.onGet(`/mobilizations/${mobilization.id}/widgets`).reply(200, data)
+mockAxios.onGet(`/mobilizations/${mobilizationId}/widgets`).reply(200, data)
 
 // Mock store
 const store = configureStore(
@@ -25,13 +25,13 @@ const store = configureStore(
 
 
 describe('client/morender/async-creators/async-fetch-widget', () => {
-    
+
   it('should dispatch actions to fetching widgets', () => {
     const expectedActions = [
       createAction(t.FETCH_WIDGETS_REQUEST),
       createAction(t.FETCH_WIDGETS_SUCCESS, data)
     ]
-    return store.dispatch(asyncFetchWidgets(mobilization))
+    return store.dispatch(asyncFetchWidgets(mobilizationId))
       .then(() => {
         expect(store.getActions().length).to.equal(2)
         expect(store.getActions()[0]).to.deep.equal(expectedActions[0])

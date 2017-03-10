@@ -7,33 +7,18 @@ import { GoogleFontsLoader } from '~components/fonts'
 import * as arrayUtil from '~utils/array'
 import * as paths from '~client/paths'
 
-// Current module dependencies
-import { Mobilization } from '~mobilizations/components'
+import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
-  componentDidMount () {
-    const { mobilization, blocksIsLoaded, blocks } = this.props
-    if (blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
-    }
-  }
 
   render () {
-    const {
-      blocksIsLoaded,
-      blocksIsLoading,
-      widgetsIsLoaded,
-      widgetsIsLoading,
-      mobilization
-    } = this.props
-    const isLoaded = blocksIsLoaded && widgetsIsLoaded
-    const isntLoading = !blocksIsLoading && !widgetsIsLoading
+    const { mobilization, renderIsLoading } = this.props
 
-    if (isLoaded && isntLoading) {
+    if (!renderIsLoading) {
       const fonts = [mobilization.header_font, mobilization.body_font].filter(arrayUtil.distinct)
       return (
         <div className='flex flex-auto overflow-hidden'>
-          <Mobilization {...this.props} editable />
+          <Mobilization editable={true} />
           <GoogleFontsLoader fonts={fonts} />
         </div>
       )
@@ -48,13 +33,7 @@ MobilizationsEditPage.propTypes = {
     header_font: PropTypes.string,
     body_font: PropTypes.string
   }).isRequired,
-  blocks: PropTypes.array,
-  blocksIsLoaded: PropTypes.bool,
-  blocksIsLoading: PropTypes.bool.isRequired,
-  blockEditionMode: PropTypes.bool,
-  widgets: PropTypes.array,
-  widgetsIsLoading: PropTypes.bool.isRequired,
-  widgetsIsLoaded: PropTypes.bool.isRequired
+  renderIsLoading: PropTypes.bool
 }
 
 export default MobilizationsEditPage

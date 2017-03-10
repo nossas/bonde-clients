@@ -9,7 +9,7 @@ const ApplicationContainer = ({ children, loading, sidebarProps }) => {
   return loading ? <Loading /> : (
     <div>
       <ZendeskWidget />
-      (process.env.NODE_ENV === 'development' ? <DevTools /> : '')
+      {process.env.NODE_ENV === 'development' ? <DevTools /> : ''}
       <Sidebar {...sidebarProps}>
         {children && React.cloneElement(children)}
       </Sidebar>
@@ -21,9 +21,7 @@ ApplicationContainer.propTypes = {
   children: PropTypes.node.isRequired,
   loading: PropTypes.bool,
   sidebarProps: PropTypes.object.isRequired,
-  relationshipId: PropTypes.number.isRequired,
-  // Actions
-  asyncFetch: PropTypes.func.isRequired
+  relationshipId: PropTypes.number.isRequired
 }
 
 export default ApplicationContainer

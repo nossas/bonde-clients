@@ -3,9 +3,9 @@ import * as t from '~client/mobrender/redux/action-types'
 import reducer, { initialState } from '~client/mobrender/redux/reducers/widgets'
 
 describe('~client/mobrender/redux/reducers/widgets', () => {
-  
+
   describe('doing fetch', () => {
-    
+
     it('request', () => {
       const action = { type: t.FETCH_WIDGETS_REQUEST }
       const nextState = reducer(initialState, action)
@@ -60,7 +60,7 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
     const fetchRequestState = {...fetchState,
       saving: true
     }
-    
+
     it('request', () => {
       const action = { type: t.UPDATE_WIDGET_REQUEST }
       const nextState = reducer(fetchState, action)
@@ -87,6 +87,25 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
       expect(nextState).to.deep.equal({...fetchRequestState,
         saving: false,
         error
+      })
+    })
+  })
+
+  describe('doing add widgets', () => {
+
+    it('success', () => {
+      const fetchState = {...initialState,
+        isLoaded: true,
+        data: [
+          { id: 1, kind: 'draft', block_id: 2 },
+          { id: 2, kind: 'draft', block_id: 2 }
+        ]
+      }
+      const payload = [ { id: 3, kind: 'draft', block_id: 3 } ]
+      const action = { type: t.ADD_WIDGETS_SUCCESS, payload }
+      const nextState = reducer(fetchState, action)
+      expect(nextState).to.deep.equal({...fetchState,
+        data: [...fetchState.data, ...payload]
       })
     })
   })
