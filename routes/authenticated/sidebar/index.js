@@ -1,6 +1,6 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
-import { injectAsyncReducer } from '~client/store'
+// import { injectAsyncReducer } from '~client/store'
 
 import * as CommunitySelectors from '~client/community/selectors'
 import * as Paths from '~client/community/paths'
@@ -51,8 +51,6 @@ export default store => ({
         require('./widgets-donation-settings').default(store),
         require('./widgets-form-settings').default(store),
         require('./widgets-pressure-settings').default(store),
-
-        require('~routes/not-found').default
       ])
     })
   }
