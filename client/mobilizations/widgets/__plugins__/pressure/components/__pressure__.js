@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
 import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
-import MobSelectors from '~client/mobrender/redux/selectors'
 
 // Current module dependencies
 import {
@@ -13,7 +11,6 @@ import {
   TargetList,
   PressureTellAFriend
 } from '../components'
-import * as PressureActions from '../action-creators'
 
 /* TODO: Change static content by props
  * - title
@@ -154,14 +151,4 @@ Pressure.propTypes = {
   asyncFillWidget: PropTypes.func
 }
 
-const mapStateToProps = (state, props) => {
-  const selectors = MobSelectors(state, props)
-  const pressure = selectors.getPlugin('pressure')
-  return {
-    mobilization: selectors.getMobilization(),
-    saving: pressure.saving,
-    filled: pressure.filled
-  }
-}
-
-export default connect(mapStateToProps, PressureActions)(Pressure)
+export default Pressure
