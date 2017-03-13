@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import * as PressureActions from '../action-creators'
 import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
 
 // Current module dependencies
@@ -151,4 +154,12 @@ Pressure.propTypes = {
   asyncFillWidget: PropTypes.func
 }
 
-export default Pressure
+const mapStateToProps = (state, props) => {
+  const pressure = MobSelectors(state, props).getPlugin('pressure')
+  return {
+    saving: pressure.saving,
+    filled: pressure.filled
+  }
+}
+
+export default connect(mapStateToProps, PressureActions)(Pressure)
