@@ -6,9 +6,7 @@ export default store => ({
   path: '/',
   getIndexRoute (location, cb) {
     require.ensure([], (require) => {
-      injectAsyncReducer(store, 'mobilizations', require('~mobilizations/reducers').default)
-      injectAsyncReducer(store, 'blocks', require('~mobilizations/blocks/reducers').default)
-      injectAsyncReducer(store, 'widgets', require('~mobilizations/widgets/reducers').default)
+      injectAsyncReducer(store, 'mobilizations', require('~client/mobrender/redux/reducers').default)
       cb(null, {
         component: require('./page.connected').default
       })

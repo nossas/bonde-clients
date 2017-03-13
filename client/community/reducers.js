@@ -4,19 +4,7 @@ const initialState = {
   isLoaded: true,
   data: [],
   // @revert To undefined
-  data: [
-    {
-      id: 15,
-      name: 'BH 90º',
-      city: 'Belo Horizonte - MG',
-      mailchimp_api_key: undefined,
-      mailchimp_list_id: undefined,
-      mailchimp_group_id: undefined,
-      image: undefined,
-      description: undefined,
-      recipient: undefined}
-  ],
-  currentId: 15
+  currentId: 9
 }
 
 export default (state = initialState, action = {}) => {
