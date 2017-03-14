@@ -21,7 +21,7 @@ class Sidenav extends Component {
               <Link to={paths.mobilizations()} style={{ height: '43px', display: 'block' }}>
                 <u
                   className='logo-icon nossas'
-                  style={{ backgroundImage: community.image ? `url(${community.image});` : undefined }}
+                  style={{ backgroundImage: community.image ? `url(${community.image})` : undefined }}
                 />
               </Link>
             </div>
