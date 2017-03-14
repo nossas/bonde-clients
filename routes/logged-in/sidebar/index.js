@@ -2,6 +2,9 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { injectAsyncReducer } from '~client/store'
 
+import * as CommunitySelectors from '~client/community/selectors'
+import * as Paths from '~client/community/paths'
+
 export default store => ({
   path: '/',
   getIndexRoute (location, cb) {
@@ -10,6 +13,13 @@ export default store => ({
         component: require('./mobilizations-list/page.connected').default
       })
     })
+  },
+  onEnter (nextState, replace) {
+    const community = CommunitySelectors.getCurrent(store.getState())
+    if (!community) {
+      // Redirect for selection of community
+      replace(Paths.list())
+    }
   },
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
