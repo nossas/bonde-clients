@@ -29,7 +29,7 @@ const CommunitySettingsReportPage = ({
   community,
   // Actions
   asyncDownloadActivistActions,
-  asyncDownloadAggActivists,
+  asyncDownloadActivists,
   asyncDownloadDonations
 }) => (
   <SettingsPageLayout>
@@ -61,7 +61,7 @@ const CommunitySettingsReportPage = ({
           `}
           sectionTitle='Relatório consolidado de ações dos ativistas'
           buttonTitle='Baixar'
-          onClick={() => asyncDownloadAggActivists(community)}
+          onClick={() => asyncDownloadActivists(community)}
         />
       </div>
     </SettingsPageContentLayout>
@@ -73,7 +73,7 @@ CommunitySettingsReportPage.propTypes = {
   community: PropTypes.object.isRequired,
   // Actions
   asyncDownloadActivistActions: PropTypes.func.isRequired,
-  asyncDownloadAggActivists: PropTypes.func.isRequired,
+  asyncDownloadActivists: PropTypes.func.isRequired,
   asyncDownloadDonations: PropTypes.func.isRequired
 }
 
