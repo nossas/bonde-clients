@@ -106,13 +106,14 @@ export const compileDev = (compiler, port) => {
 function openBrowser (port) {
   if (process.platform === 'darwin') {
     try {
+      const appDomain = process.env.APP_DOMAIN || `localhost:${port}`
       // Try our best to reuse existing tab
       // on OS X Google Chrome with AppleScript
       execSync('ps cax | grep "Google Chrome"')
       execSync(
         'osascript ' +
         path.resolve(__dirname, 'chrome.applescript') +
-        ' http://localhost:' + port + '/'
+        ` http://${appDomain}/`
       )
       return
     } catch (err) {
