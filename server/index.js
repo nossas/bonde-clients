@@ -17,11 +17,13 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import proxy from 'http-proxy-middleware' // used in authenticate
+import cookieParser from 'cookie-parser'
+import reactCookie from 'react-cookie'
 
 import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client'
 import { compileDev, startDev } from '../tools/dx'
-import { configureStore } from '../common/store'
+import { configureStore } from '../client/store'
 import createRoutes from '../routes'
 import { startServer as authStartServer } from '../authenticate'
 import AuthClient from '../authenticate/client'
@@ -50,6 +52,7 @@ export const createServer = (config) => {
   }
 
   app.use(express.static('public'))
+  app.use(cookieParser())
 
   // proxy for authentication server
   app.use('/auth', proxy({
@@ -58,11 +61,16 @@ export const createServer = (config) => {
   }))
 
   app.get('*', (req, res) => {
+    reactCookie.plugToRequest(req, res)
+
+    const state = reactCookie.load('state') || {}
+
     const store = configureStore({
       sourceRequest: {
         protocol: req.headers['x-forwarded-proto'] || req.protocol,
         host: req.headers.host
-      }
+      },
+      ...state
     }, { auth: new AuthClient(req) })
     const routes = createRoutes(store)
     const history = createMemoryHistory(req.originalUrl)
@@ -72,6 +80,12 @@ export const createServer = (config) => {
       if (err) {
         console.error(err)
         return res.status(500).send('Internal server error')
+      }
+
+      if (redirectLocation) {
+        // we haven't talked about `onEnter` hooks on routes, but before a
+        // route is entered, it can redirect. Here we handle on the server.
+        res.redirect(302, redirectLocation.pathname + redirectLocation.search)
       }
 
       if (!renderProps) {
