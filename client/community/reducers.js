@@ -1,10 +1,10 @@
+import reactCookie from 'react-cookie'
 import * as t from './action-types'
 
 const initialState = {
-  isLoaded: true,
+  isLoaded: false,
   data: [],
-  // @revert To undefined
-  currentId: 9
+  currentId: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -41,6 +41,10 @@ export default (state = initialState, action = {}) => {
         )
       }
     case t.SELECT:
+      if (state.currentId !== action.id) {
+        const persistedState = { community: {...state, currentId: action.id } }
+        reactCookie.save('state', persistedState)
+      }
       return {
         ...state,
         currentId: action.id
