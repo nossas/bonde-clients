@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { Link, browserHistory } from 'react-router'
-
+import * as paths from '~client/paths'
 import { Loading } from '~components/await'
-import * as paths from '~community/paths'
 import { ListItem } from '~community/components'
 
 class CommunityListPage extends Component {
@@ -14,7 +13,7 @@ class CommunityListPage extends Component {
 
   onClickItem (id) {
     this.props.select(id)
-    browserHistory.push('/')
+    browserHistory.push(paths.mobilizations())
   }
 
   render () {

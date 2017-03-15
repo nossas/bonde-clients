@@ -16,13 +16,27 @@ export const getDomain = (store, serverConfig) => {
   return { domain, host }
 }
 
-export const UserIsLogged = (store) => (nextState, replace) => {
-  const user = AccountSelectors(store.getState()).getUser()
-  if (!user) {
-    replace(Paths.login())
-  } else if (!CommunitySelectors.getCurrent(store.getState())) {
-    replace(Paths.list())
+export const isIndexRedirected = (store) => (nextState, replace) => {
+  const credentials = AccountSelectors(store.getState()).getCredentials()
+
+  if (!credentials) {
+    UserIsLogged(store)(nextState, replace)
   } else {
-    replace(Paths.mobilizations())
+    IsCommunitySelected(store)(nextState, replace)
+  }
+}
+
+export const IsCommunitySelected = (store) => (nextState, replace) => {
+  const community = CommunitySelectors.getCurrent(store.getState())
+  if (!community) {
+    replace(Paths.list())
+  }
+}
+
+export const UserIsLogged = (store) => (nextState, replace) => {
+  const credentials = AccountSelectors(store.getState()).getCredentials()
+
+  if (!credentials) {
+    replace(Paths.login())
   }
 }

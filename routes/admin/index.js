@@ -2,13 +2,13 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 // import { injectAsyncReducer } from '~client/store'
 // import { showMobilizationPublicView, getDomain } from '~routes/utils'
-import { UserIsLogged } from '~routes/utils'
+import { isIndexRedirected } from '~routes/utils'
 
 export default store => ({
   path: '/',
-
+  //
   indexRoute: {
-    onEnter: UserIsLogged(store)
+    onEnter: isIndexRedirected(store)
   },
 
   getComponent (nextState, callback) {
