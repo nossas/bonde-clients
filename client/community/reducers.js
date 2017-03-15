@@ -42,7 +42,7 @@ export default (state = initialState, action = {}) => {
       }
     case t.SELECT:
       if (state.currentId !== action.id) {
-        const persistedState = { community: {...state, currentId: action.id } }
+        const persistedState = { community: { ...state, currentId: action.id } }
         reactCookie.save('state', persistedState)
       }
       return {

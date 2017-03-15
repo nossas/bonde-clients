@@ -2,13 +2,13 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import BackgroundContainer from '~routes/logged-in/background/container'
+import Container from '~routes/admin/container'
 
 describe('routes/application/container', () => {
   let wrapper = shallow(
-    <BackgroundContainer>
+    <Container>
       <h1>Foo Bar</h1>
-    </BackgroundContainer>
+    </Container>
   )
 
   it('render without crashed', () => {
@@ -17,5 +17,9 @@ describe('routes/application/container', () => {
 
   it('should render a zendesk widget component', () => {
     expect(wrapper.find('ZendeskWidget')).to.have.length(1)
+  })
+
+  it('should render a google fonts component', () => {
+    expect(wrapper.find('GoogleFontsLoader')).to.have.length(1)
   })
 })

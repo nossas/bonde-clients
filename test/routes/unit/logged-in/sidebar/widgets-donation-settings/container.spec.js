@@ -1,9 +1,9 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import Container from '~routes/logged-in/sidebar/widgets-donation-settings/container'
+import Container from '~routes/admin/authenticated/sidebar/widgets-donation-settings/container'
 
-describe('routes/logged-in/sidebar/widgets-donation-settings/container', () => {
+describe('routes/admin/authenticated/sidebar/widgets-donation-settings/container', () => {
   const props = {
     mobilization: { id: 1, name: 'Lorem' },
     location: {},
