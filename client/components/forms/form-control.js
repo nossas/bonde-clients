@@ -3,6 +3,8 @@ import classnames from 'classnames'
 
 import { ControlButtons } from './'
 
+const tagsShouldCleanup =  ['input', 'textarea', 'select']
+
 class FormControl extends Component {
   render () {
     const { componentClass: Component, className, style, submitted, ...props } = this.props
@@ -12,7 +14,7 @@ class FormControl extends Component {
     } = this.context
 
     const fieldProps = Object.assign({}, field)
-    if (Component === 'input' || Component === 'textarea') {
+    if (tagsShouldCleanup.indexOf(Component) !== -1) {
       delete fieldProps.layout
       delete fieldProps.error
       delete fieldProps.touched
