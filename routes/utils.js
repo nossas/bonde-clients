@@ -18,11 +18,14 @@ export const getDomain = (store, serverConfig) => {
 
 export const isIndexRedirected = (store) => (nextState, replace) => {
   const credentials = AccountSelectors(store.getState()).getCredentials()
+  const community = CommunitySelectors.getCurrent(store.getState())
 
   if (!credentials) {
-    UserIsLogged(store)(nextState, replace)
+    replace(Paths.login())
+  } else if (!community) {
+    replace(Paths.list())
   } else {
-    IsCommunitySelected(store)(nextState, replace)
+    replace(Paths.mobilizations())
   }
 }
 
