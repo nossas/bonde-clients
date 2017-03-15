@@ -17,7 +17,7 @@ describe('client/paths', () => {
 
   describe('#mobilizations', () => {
     it('should return the path', () => {
-      expect(paths.mobilizations()).to.equal('/')
+      expect(paths.mobilizations()).to.equal('/mobilizations')
     })
   })
 

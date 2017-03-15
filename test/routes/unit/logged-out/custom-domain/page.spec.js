@@ -2,10 +2,10 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import * as arrayUtil from '~utils/array'
-import CustomDomainPage from '~routes/not-authenticated/custom-domain/page'
+import * as arrayUtil from '~client/utils/array'
+import CustomDomainPage from '~routes/custom-domain/page'
 
-describe('routes/not-authenticated/custom-domain/page', () => {
+describe('routes//custom-domain/page', () => {
   let wrapper
   const props = {
     mobilization: {

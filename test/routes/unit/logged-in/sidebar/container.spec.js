@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import ApplicationContainer from '~routes/authenticated/container'
+import ApplicationContainer from '~routes/admin/container'
 
 const setup = (props = {}) => {
   const initialProps = {
