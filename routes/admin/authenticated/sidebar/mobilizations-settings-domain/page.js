@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Button, SuccessMessage } from '~components/forms'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import { SettingsMenu, FormCustomDomain } from '~mobilizations/components'
-import { FloatLayout } from '~components/grids'
+import { Button, SuccessMessage } from '~client/components/forms'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { SettingsMenu, FormCustomDomain } from '~client/mobilizations/components'
+import { FloatLayout } from '~client/components/grids'
 
 const MobilizationsSettingsDomainPage = props => {
   const { mobilization, fields, ...formProps } = props

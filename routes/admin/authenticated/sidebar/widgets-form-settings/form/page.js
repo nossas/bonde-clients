@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react'
-
-import { SettingsPageContentLayout } from '~components/layout'
 import { FormRedux, FormGroup, ControlLabel, FormControl } from '~components/forms'
-import { SettingsMenu } from '~widget-plugins/form/components'
 
 const FormSettingsPage = ({
   fields: {

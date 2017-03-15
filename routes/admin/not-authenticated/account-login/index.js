@@ -2,13 +2,6 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { injectAsyncReducer } from '~client/store'
 
-// import {
-//   EditUserPage,
-//   LoginPageWrapper,
-//   LogoutPage,
-//   RegisterPage
-// } from '~client/accounts/components'
-
 export default store => ({
   path: 'login',
   getComponent (nextState, callback) {
@@ -18,7 +11,6 @@ export default store => ({
     })
   }
 })
-
 
 // import React from 'react'
 // import { Route } from 'react-router'
