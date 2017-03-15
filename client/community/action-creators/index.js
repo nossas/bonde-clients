@@ -1,5 +1,7 @@
 export { default as asyncCreate } from './async-create'
 export { default as asyncDownloadActivists } from './async-download-activists'
+export { default as asyncDownloadActivistActions } from './async-download-activist-actions'
+export { default as asyncDownloadDonations } from './async-download-donations'
 export { default as asyncEdit } from './async-edit'
 export { default as asyncFetch } from './async-fetch'
 export { default as select } from './select'
