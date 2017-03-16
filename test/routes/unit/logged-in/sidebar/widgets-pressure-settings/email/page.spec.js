@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as mock from '~utils/mock'
+import * as mock from '~client/utils/mock'
 import Page from '~routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page'
 
-describe('routes/application/widgets-pressure-settings/email/page', () => {
+describe('routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page', () => {
   let wrapper
   const props = {
     mobilization: {},

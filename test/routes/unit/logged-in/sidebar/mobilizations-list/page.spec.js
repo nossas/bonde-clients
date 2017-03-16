@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as mock from '~utils/mock'
+import * as mock from '~client/utils/mock'
 import Page from '~routes/admin/authenticated/sidebar/mobilizations-list/page'
 
-describe('routes/application/mobilization-list/page', () => {
+describe('routes/admin/authenticated/sidebar/mobilizations-list/page', () => {
   let wrapper
   const props = {
     mobilizations: [{ id: 1 }, { id: 2 }],

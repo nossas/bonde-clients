@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
-import { Loading } from '~components/await'
-import Form from '~widget-plugins/form/components'
+import { Loading } from '~client/components/await'
+import Form from '~client/mobilizations/widgets/__plugins__/form/components'
 
 class FormSettingsFieldsPage extends Component {
   constructor (props, context) {

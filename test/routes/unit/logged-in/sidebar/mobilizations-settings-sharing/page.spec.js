@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import Page from '~routes/admin/authenticated/sidebar/mobilizations-settings-sharing/page'
 
-describe('routes/application/mobilizations-settings-sharing/page', () => {
+describe('routes/admin/authenticated/sidebar/mobilizations-settings-sharing/page', () => {
   let wrapper
   const props = {
     fields: {

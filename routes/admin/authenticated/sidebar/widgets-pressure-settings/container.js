@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import { SettingsPageContentLayout } from '~components/layout'
-import { SettingsBase } from '~widget-plugins/pressure/components'
+import { SettingsPageContentLayout } from '~client/components/layout'
+import { SettingsBase } from '~client/mobilizations/widgets/__plugins__/pressure/components'
 
 const Container = ({ children, ...props }) => (
   <SettingsBase mobilization={props.mobilization} widget={props.widget} location={props.location}>

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
-import { Loading } from '~components/await'
-import { DataExport } from '~mobilizations/widgets/components'
+import { Loading } from '~client/components/await'
+import { DataExport } from '~client/mobilizations/widgets/components'
 
 const DonationSettingsExportPage = props => !props.widget ? <Loading /> : <DataExport {...props} />
 

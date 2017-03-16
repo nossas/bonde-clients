@@ -6,9 +6,9 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~components/layout'
-import { Avatar, Name } from '~mobilizations/components/list/items'
-import { FormRedux, FormGroup, FormControl, ControlLabel } from '~components/forms'
+} from '~client/components/layout'
+import { Avatar, Name } from '~client/mobilizations/components/list/items'
+import { FormRedux, FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 
 const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, ...formProps }) => (
   <SettingsPageLayout>

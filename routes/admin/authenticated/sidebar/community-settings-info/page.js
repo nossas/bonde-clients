@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import {
   FormRedux,
   Button,
@@ -9,9 +9,9 @@ import {
   ControlLabel,
   UploadImageField,
   SuccessMessage
-} from '~components/forms'
-import { FloatLayout } from '~components/grids'
-import { SettingsMenu, ForceDownloadViaAjax } from '~community/components'
+} from '~client/components/forms'
+import { FloatLayout } from '~client/components/grids'
+import { SettingsMenu, ForceDownloadViaAjax } from '~client/community/components'
 
 const CommunitySettingsInfoPage = ({
   fields: { image, name, city, description },

@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
 import Mobilization from '~client/mobrender/components/mobilization.connected'
-import { Loading } from '~components/await'
+import { Loading } from '~client/components/await'
 import Page from '~routes/admin/authenticated/sidebar/mobilizations-edit/page'
 
-describe('routes/application/mobilizations-edit/page', () => {
+describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   let page
   const defaultProps = {
     mobilization: {}

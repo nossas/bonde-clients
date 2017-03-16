@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import * as mock from '~utils/mock'
 import Page from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page'
 
-describe('routes/application/widgets-donation-settings/donation/page', () => {
+describe('routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page', () => {
   let wrapper
   const props = {
     dispatch: mock.noop,

@@ -6,15 +6,15 @@ import {
   ControlLabel,
   FormControl,
   UploadImageField
-} from '~components/forms'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
+} from '~client/components/forms'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 
 // Current module dependencies
 if (process.env.BROSER) {
-  var iconFacebook = require('~mobilizations/images/facebook.svg')
-  var iconTwitter = require('~mobilizations/images/twitter.svg')
+  var iconFacebook = require('~client/mobilizations/images/facebook.svg')
+  var iconTwitter = require('~client/mobilizations/images/twitter.svg')
 }
-import { SettingsMenu, MobilizationSettingsForm } from '~mobilizations/components'
+import { SettingsMenu, MobilizationSettingsForm } from '~client/mobilizations/components'
 
 const MobilizationsSettingsSharingPage = props => {
   const {

@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import Page from '~routes/admin/authenticated/sidebar/templates-list/page'
 
-describe('routes/application/templates-list/page', () => {
+describe('routes/admin/authenticated/sidebar/templates-list/page', () => {
   let wrapper
   const props = {
     toggleMenu: () => {},

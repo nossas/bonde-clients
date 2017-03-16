@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import { SettingsPageContentLayout } from '~components/layout'
-import { SettingsMenu } from '~widget-plugins/form/components'
+import { SettingsPageContentLayout } from '~client/components/layout'
+import { SettingsMenu } from '~client/mobilizations/widgets/__plugins__/form/components'
 
 const Container = ({ children, ...props }) => (
   <div className='flex-auto flex flex-column bg-silver atomic relative'>

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import ReactGA from 'react-ga'
 
-import * as arrayUtil from '~utils/array'
-import { TechnicalIssues } from '~components/error'
-import { GoogleFontsLoader } from '~components/fonts'
+import * as arrayUtil from '~client/utils/array'
+import { TechnicalIssues } from '~client/components/error'
+import { GoogleFontsLoader } from '~client/components/fonts'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 if (process.env.BROWSER) {

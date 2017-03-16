@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import uuid from 'uuid'
 
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import {
   FormRedux,
   Button,
@@ -11,10 +11,10 @@ import {
   SuccessMessage,
   RadioGroup,
   Radio
-} from '~components/forms'
-import { FloatLayout } from '~components/grids'
-import { getCodeBanks } from '~community/utils'
-import { SettingsMenu } from '~community/components'
+} from '~client/components/forms'
+import { FloatLayout } from '~client/components/grids'
+import { getCodeBanks } from '~client/community/utils'
+import { SettingsMenu } from '~client/community/components'
 
 const CommunitySettingsRecipientPage = ({
   fields: {

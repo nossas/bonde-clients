@@ -7,7 +7,7 @@ import {
   ColorPicker,
   RadioGroup,
   Radio
-} from '~components/forms'
+} from '~client/components/forms'
 
 const PressureSettingsPage = ({
   ...props,

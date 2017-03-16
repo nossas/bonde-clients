@@ -5,7 +5,7 @@ import { expect } from 'chai'
 import * as mock from '~utils/mock'
 import Page from '~routes/admin/authenticated/sidebar/widgets-donation-settings/autofire/page'
 
-describe('routes/application/widgets-donation-settings/autofire/page', () => {
+describe('routes/admin/authenticated/sidebar/widgets-donation-settings/autofire/page', () => {
   let wrapper
   const props = {
     fields: {

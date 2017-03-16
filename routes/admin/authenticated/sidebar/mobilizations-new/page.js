@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
-import { PageTabLayout } from '~mobilizations/components'
-import MobilizationBasicsForm from '~mobilizations/components/mobilization-basics-form'
+import { PageTabLayout } from '~client/mobilizations/components'
+import MobilizationBasicsForm from '~client/mobilizations/components/mobilization-basics-form'
 
 const MobilizationsNewPage = props => (
   <PageTabLayout location={props.location}>

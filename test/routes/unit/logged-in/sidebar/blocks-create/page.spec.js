@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { BLOCK_LAYOUTS } from '~mobilizations/blocks/constants'
+import { BLOCK_LAYOUTS } from '~client/mobilizations/blocks/constants'
 import Page from '~routes/admin/authenticated/sidebar/blocks-create/page'
 
-describe('routes/application/blocks-create/page', () => {
+describe('routes/admin/authenticated/sidebar/blocks-create/page', () => {
   let wrapper
   const props = {
     dispatch: () => {},

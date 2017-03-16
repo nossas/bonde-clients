@@ -4,11 +4,11 @@ import ReactS3Uploader from 'react-s3-uploader'
 
 import DefaultServerConfig from '~server/config'
 import * as paths from '~client/paths'
-import { Tabs, Tab } from '~components/navigation'
-import ColorPicker from '~components/color-picker'
-import { BlockMiniature } from '~mobilizations/blocks/components'
-import { BLOCK_LAYOUTS } from '~mobilizations/blocks/constants'
-import * as BlockActions from '~mobilizations/blocks/action-creators'
+import { Tabs, Tab } from '~client/components/navigation'
+import ColorPicker from '~client/components/color-picker'
+import { BlockMiniature } from '~client/mobilizations/blocks/components'
+import { BLOCK_LAYOUTS } from '~client/mobilizations/blocks/constants'
+import * as BlockActions from '~client/mobilizations/blocks/action-creators'
 
 if (process.env.BROWSER) require('./page.scss')
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { FormFinishMessage } from '~mobilizations/widgets/components'
-import { FormTellAFriend } from '~widget-plugins/form/components'
+import { FormFinishMessage } from '~client/mobilizations/widgets/components'
+import { FormTellAFriend } from '~client/mobilizations/widgets/__plugins__/form/components'
 
 const FormSettingsFinishPage = props => (
   <FormFinishMessage

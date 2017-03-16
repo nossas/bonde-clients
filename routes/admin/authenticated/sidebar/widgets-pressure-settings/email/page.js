@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
-import { FormRedux, FormGroup, ControlLabel, FormControl } from '~components/forms'
-import { InputTag } from '~mobilizations/widgets/components'
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import { InputTag } from '~client/mobilizations/widgets/components'
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 // eslint-disable-next-line

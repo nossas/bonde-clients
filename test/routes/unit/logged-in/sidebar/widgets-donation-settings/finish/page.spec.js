@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import Page from '~routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page'
 
-describe('routes/application/widgets-donation-settings/finish/page', () => {
+describe('routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page', () => {
   let wrapper
 
   beforeAll(() => {

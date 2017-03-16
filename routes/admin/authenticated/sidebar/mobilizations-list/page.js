@@ -7,14 +7,14 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~components/layout'
+} from '~client/components/layout'
 import * as paths from '~client/paths'
 
 // Children module dependencies
-import * as TemplateActions from '~mobilizations/templates/action-creators'
+import * as TemplateActions from '~client/mobilizations/templates/action-creators'
 
 // Current module dependencies
-import List from '~mobilizations/components/list'
+import List from '~client/mobilizations/components/list'
 import {
   Item,
   Avatar,
@@ -25,9 +25,9 @@ import {
   More,
   MoreMenu,
   MoreMenuAction
-} from '~mobilizations/components/list/items'
-import { PageHeader } from '~mobilizations/components'
-import * as MobilizationActions from '~mobilizations/action-creators'
+} from '~client/mobilizations/components/list/items'
+import { PageHeader } from '~client/mobilizations/components'
+import * as MobilizationActions from '~client/mobilizations/action-creators'
 
 export class MobilizationsListPage extends Component {
 

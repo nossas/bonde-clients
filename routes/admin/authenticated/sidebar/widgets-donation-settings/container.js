@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import { SettingsMenu } from '~widget-plugins/donation/components'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { SettingsMenu } from '~client/mobilizations/widgets/__plugins__/donation/components'
 
 const Container = ({ children, ...props }) => (
   <SettingsPageLayout>

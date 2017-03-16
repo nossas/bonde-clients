@@ -2,10 +2,10 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as mock from '~utils/mock'
+import * as mock from '~client/utils/mock'
 import Page from '~routes/admin/authenticated/sidebar/widgets-form-settings/autofire/page'
 
-describe('routes/application/widgets-form-settings/autofire/page', () => {
+describe('routes/admin/authenticated/sidebar/widgets-form-settings/autofire/page', () => {
   let wrapper
   const props = {
     fields: {

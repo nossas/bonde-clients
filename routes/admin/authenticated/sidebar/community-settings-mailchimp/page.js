@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import {
   FormRedux,
   Button,
@@ -8,9 +8,9 @@ import {
   FormControl,
   ControlLabel,
   SuccessMessage
-} from '~components/forms'
-import { FloatLayout } from '~components/grids'
-import { SettingsMenu } from '~community/components'
+} from '~client/components/forms'
+import { FloatLayout } from '~client/components/grids'
+import { SettingsMenu } from '~client/community/components'
 
 const CommunitySettingsMailchimpPage = ({
   fields: {

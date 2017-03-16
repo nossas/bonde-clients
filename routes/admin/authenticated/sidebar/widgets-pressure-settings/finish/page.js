@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { FormFinishMessage } from '~mobilizations/widgets/components'
-import { PressureTellAFriend } from '~widget-plugins/pressure/components'
+import { FormFinishMessage } from '~client/mobilizations/widgets/components'
+import { PressureTellAFriend } from '~client/mobilizations/widgets/__plugins__/pressure/components'
 
 const PressureSettingsFinishPage = props => (
   <FormFinishMessage

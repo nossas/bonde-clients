@@ -9,8 +9,8 @@ import {
   RadioGroup,
   Radio,
   ColorPicker
-} from '~components/forms'
-import { HorizontalLayout } from '~components/grids'
+} from '~client/components/forms'
+import { HorizontalLayout } from '~client/components/grids'
 
 const DonationSettingsPage = props => {
   const {

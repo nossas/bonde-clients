@@ -1,6 +1,6 @@
 import React from 'react'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import { SettingsMenu, MobilizationBasicsForm } from '~mobilizations/components'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { SettingsMenu, MobilizationBasicsForm } from '~client/mobilizations/components'
 
 const MobilizationsSettingsBasicsPage = props => (
   <SettingsPageLayout>

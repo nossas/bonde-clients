@@ -1,8 +1,8 @@
 import React from 'react'
 
 import * as paths from '~client/paths'
-import { BrowsableList, BrowsableListItem } from '~components/navigation/browsable-list'
-import { PageTabLayout } from '~mobilizations/components'
+import { BrowsableList, BrowsableListItem } from '~client/components/navigation/browsable-list'
+import { PageTabLayout } from '~client/mobilizations/components'
 
 const TemplatesChoosePage = ({
   mobilization,

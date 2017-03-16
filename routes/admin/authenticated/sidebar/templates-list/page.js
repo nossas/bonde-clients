@@ -3,14 +3,14 @@ import { Link } from 'react-router'
 import classnames from 'classnames'
 
 import * as paths from '~client/paths'
-import EmptyList from '~components/empty-list'
+import EmptyList from '~client/components/empty-list'
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~components/layout'
-import { PageHeader } from '~mobilizations/components'
-import List from '~mobilizations/components/list'
+} from '~client/components/layout'
+import { PageHeader } from '~client/mobilizations/components'
+import List from '~client/mobilizations/components/list'
 import {
   Item,
   Avatar,
@@ -21,7 +21,7 @@ import {
   MoreMenu,
   MoreMenuAction,
   CopyNumber
-} from '~mobilizations/components/list/items'
+} from '~client/mobilizations/components/list/items'
 
 const TemplatesListPage = ({
   menuActiveIndex,

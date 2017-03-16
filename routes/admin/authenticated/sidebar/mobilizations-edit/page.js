@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 
 // Global module dependencies
-import { Loading } from '~components/await'
-import { GoogleFontsLoader } from '~components/fonts'
-import * as arrayUtil from '~utils/array'
+import { Loading } from '~client/components/await'
+import { GoogleFontsLoader } from '~client/components/fonts'
+import * as arrayUtil from '~client/utils/array'
 import * as paths from '~client/paths'
 
 import Mobilization from '~client/mobrender/components/mobilization.connected'

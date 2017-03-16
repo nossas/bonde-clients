@@ -2,8 +2,8 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
-import { PageTabLayout } from '~mobilizations/components'
-import { TemplateSelectableList } from '~mobilizations/templates/components'
+import { PageTabLayout } from '~client/mobilizations/components'
+import { TemplateSelectableList } from '~client/mobilizations/templates/components'
 
 const TemplatesChooseCustomPage = ({
   mobilization,

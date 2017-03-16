@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import Page from '~routes/admin/authenticated/sidebar/templates-create/page'
 
-describe('routes/application/templates-create/page', () => {
+describe('routes/admin/authenticated/sidebar/templates-create/page', () => {
   let wrapper
   const props = {
     mobilization: { id: 1 },

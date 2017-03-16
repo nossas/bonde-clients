@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { SettingsPageLayout, SettingsPageContentLayout } from '~components/layout'
-import { FormGroup, FormControl, ControlLabel } from '~components/forms'
-import { SettingsMenu, MobilizationSettingsForm } from '~mobilizations/components'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
+import { SettingsMenu, MobilizationSettingsForm } from '~client/mobilizations/components'
 
 const MobilizationsSettingsAnalyticsPage = props => {
   const { fields: { google_analytics_code: googleAnalyticsCode }, ...formProps } = props
