@@ -5,9 +5,6 @@ import { Link } from 'react-router'
 import Block from './block.connected'
 import { Navbar } from '~client/mobilizations/components/navbar'
 
-if (process.env.BROWSER) {
-  var logoIcon = require('~components/navigation/sidenav/logo-icon-no-border.svg')
-}
 
 class Mobilization extends React.Component {
 
@@ -78,7 +75,11 @@ class Mobilization extends React.Component {
                 href='http://www.bonde.org/'
                 className='right my2'
                 target='_blank'>
-                <img src={logoIcon} alt='B' style={{ width: '45px' }} />
+                <img
+                  src={require('~client/components/navigation/sidenav/logo-icon-no-border.svg')}
+                  alt='B'
+                  style={{ width: '45px' }}
+                />
               </a>
             </div>
           </div>
