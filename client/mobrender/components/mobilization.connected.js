@@ -7,11 +7,12 @@ import Mobilization from './mobilization'
 
 const mapStateToProps = (state, props) => {
   const selectors = Selectors(state, props)
+  const editing = selectors.getEditing()
   return {
     mobilization: selectors.getMobilization() || selectors.getMobilizations()[0],
     blocks: selectors.getBlocks(),
     widgets: selectors.getWidgets(),
-    blockEditionMode: selectors.getEditing() == EDIT_KEY
+    blockEditionMode: editing ? editing.indexOf(EDIT_KEY) !== -1 : false
   }
 }
 

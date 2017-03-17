@@ -16,7 +16,7 @@ const BlockConfigMenu = ({ block, update, destroy, onEdit, canMoveUp, moveUp, ca
   >
     <DropdownMenuItem
       className='btn'
-      onClick={() => onEdit(EDIT_KEY)}
+      onClick={() => onEdit(`${EDIT_KEY}-${block.id}`)}
     >
       <span>
         <i className='fa fa-picture-o' /> Alterar fundo

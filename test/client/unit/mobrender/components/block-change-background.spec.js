@@ -7,7 +7,8 @@ import BlockChangeBackground from '~client/mobrender/components/block-change-bac
 describe('~client/mobrender/components/block-change-background', () => {
   let changeBackground
   const props = {
-    block: { id: 1, bg_class: 'bg-1', bg_image: 'tmp://bg.png' }
+    block: { id: 1, bg_class: 'bg-1', bg_image: 'tmp://bg.png' },
+    onCancelEdit: () => {}
   }
 
   beforeEach(() => {
@@ -90,12 +91,12 @@ describe('~client/mobrender/components/block-change-background', () => {
 
     it('should has custom style for render to top', () => {
       const main = changeBackground.find('div').at(0)
-      expect(main.props().className).to.contains('absolute col-12 top-0 z5')
+      expect(main.props().className).to.contains('absolute col-12 top-0 left-0 bg-darken-4 z5')
     })
 
     it('should render div wrapper to cancel edit when clicked out navbar', () => {
       const wrapper = changeBackground.find('div.fixed')
-      expect(wrapper.props().className).to.contains('fixed top-0 right-0 bottom-0 left-0 z4')
+      expect(wrapper.props().className).to.contains('fixed top-0 right-0 bottom-0 left-0')
     })
 
     it('should call onCancelEdit when clicked in wrapper', () => {
