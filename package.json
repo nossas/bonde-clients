@@ -38,6 +38,7 @@
     "dotenv": "^2.0.0",
     "downloadjs": "*",
     "draft-js": "^0.10",
+    "exenv": "^1.2.1",
     "express": "^4.13.4",
     "express-session": "^1.14.2",
     "express-winston": "^2.3.0",
