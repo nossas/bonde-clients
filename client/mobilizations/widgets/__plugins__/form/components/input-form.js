@@ -253,7 +253,7 @@ export class InputForm extends Component {
               <button
                 disabled={!canMoveUp}
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleMoveUp}
               >
                 <i className='fa fa-chevron-up mr1' />
@@ -265,7 +265,7 @@ export class InputForm extends Component {
               <button
                 disabled={!canMoveDown}
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleMoveDown}
               >
                 <i className='fa fa-chevron-down mr1' />
@@ -276,7 +276,7 @@ export class InputForm extends Component {
             <div>
               <button
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleRemove}
               >
                 <i className='fa fa-trash mr1' />
