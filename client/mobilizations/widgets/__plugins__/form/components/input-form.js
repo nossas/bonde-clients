@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
-import * as WidgetActions from '~mobilizations/widgets/action-creators'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 
 export class InputForm extends Component {
   constructor (props, context) {
@@ -26,7 +26,7 @@ export class InputForm extends Component {
   componentWillReceiveProps (nextProps) {
     const { uid } = this.props
     if (this.state.loading && this.props.field != nextProps.field) {
-      this.setState({loading: false})
+      this.setState({ loading: false })
       $('#form-' + uid).slideUp(200, () => {
         this.props.onClose && this.props.onClose()
       })
@@ -62,7 +62,7 @@ export class InputForm extends Component {
     const { settings } = widget
 
     this.setState({ loading: true })
-    dispatch(WidgetActions.asyncWidgetUpdate({
+    dispatch(MobActions.asyncUpdateWidget({
       ...widget,
       settings: { ...settings, fields: newFields }
     }))
