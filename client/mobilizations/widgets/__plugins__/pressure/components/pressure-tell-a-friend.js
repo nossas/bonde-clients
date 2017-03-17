@@ -6,7 +6,6 @@ const PressureTellAFriend = ({ mobilization }) => (
   <TellAFriend
     mobilization={mobilization}
     message='Pressão enviada'
-    href={process.env.BROWSER ? window.location.origin : ''}
   />
 )
 
