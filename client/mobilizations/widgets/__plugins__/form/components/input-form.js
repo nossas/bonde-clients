@@ -162,7 +162,7 @@ export class InputForm extends Component {
       <div>
         <div
           id={`form-${uid}`}
-          className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z5'
+          className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'
         >
           <div className='col col-6'>
             <div className='table col-12 mb2'>
@@ -293,7 +293,7 @@ export class InputForm extends Component {
               </button>
               <button
                 disabled={this.state.loading}
-                className='btn white caps bg-pagenta p2 mr2 rounded z5'
+                className='btn white caps bg-pagenta p2 mr2 rounded'
                 onClick={::this.handleSave}
               >
                 {this.state.loading ? 'Salvando...' : 'Salvar'}
@@ -303,7 +303,7 @@ export class InputForm extends Component {
         </div>
 
         <div
-          className='fixed top-0 right-0 bottom-0 left-0 z4'
+          className='fixed top-0 right-0 bottom-0 left-0 z3'
           onClick={::this.handleOverlayClick}
         />
       </div>
