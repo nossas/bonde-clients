@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactGA from 'react-ga'
+import Helmet from 'react-helmet'
 
 import * as arrayUtil from '~client/utils/array'
 import { TechnicalIssues } from '~client/components/error'
@@ -33,10 +34,27 @@ class CustomDomainPage extends Component {
     const { mobilization } = this.props
 
     if (mobilization) {
-      const { header_font: headerFont, body_font: bodyFont } = mobilization
+      const {
+        name,
+        goal,
+        facebook_share_title: facebookShareTitle,
+        facebook_share_description: facebookShareDescription,
+        facebook_share_image: facebookShareImage,
+        header_font: headerFont,
+        body_font: bodyFont
+      } = mobilization
 
       return (
         <div>
+          <Helmet
+            title={name}
+            meta={[
+              { name: 'description', content: goal },
+              { property: 'og:title', content: facebookShareTitle },
+              { property: 'og:description', content: facebookShareDescription },
+              { property: 'og:image', content: facebookShareImage }
+            ]}
+          />
           <Mobilization />
           <GoogleFontsLoader fonts={[headerFont, bodyFont].filter(arrayUtil.distinct)} />
         </div>

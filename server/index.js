@@ -147,7 +147,7 @@ export const createServer = (config) => {
           const head = Helm.rewind()
           res.status(200).send(`
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="pt-br">
               <head>
                 <meta charSet="utf-8">
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge">

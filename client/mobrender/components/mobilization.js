@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import DocumentMeta from 'react-document-meta'
 import { Link } from 'react-router'
 
 import Block from './block.connected'
@@ -84,21 +83,6 @@ class Mobilization extends React.Component {
             </div>
           </div>
         </div>
-        {/* render document met to show mobilzation */}
-        {!editable ? (
-          <DocumentMeta
-            title={name}
-            description={goal}
-            meta={{
-              name: {
-                'viewport': 'width=device-width, initial-scale=1',
-                'og:title': facebook_share_title,
-                'og:description': facebook_share_description,
-                'og:image': facebook_share_image
-              }
-            }}
-          />
-        ) : null}
       </div>
     )
   }
