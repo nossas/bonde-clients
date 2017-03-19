@@ -1,7 +1,7 @@
 import reactCookie from 'react-cookie'
 import * as t from './action-types'
 
-const initialState = {
+export const initialState = {
   isLoaded: false,
   isLoading: false,
   user: undefined,
@@ -23,17 +23,14 @@ export default (state = initialState, action = {}) => {
         isLoading: false
       }
     case t.LOGIN_SUCCESS:
-      const newState = {
-        ...state,
+      reactCookie.save('auth', { auth: { ...action.payload } })
+      return {...state,
         isLoading: false,
-        ...action.payload  // insert user and credentials
+        ...action.payload
       }
-      reactCookie.save('auth', newState)
-
-      return newState
     case t.LOGOUT_SUCCESS:
       reactCookie.remove('auth')
-      reactCookie.remove('state')
+      reactCookie.remove('community')
       return {
         ...state,
         isLoaded: false,

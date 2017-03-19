@@ -30,7 +30,9 @@ import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client'
 import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../client/store'
+import createReducer from '../client/createReducer'
 import createRoutes from '../routes'
+import loadState from './load-state'
 
 export const createServer = (config) => {
   const __PROD__ = config.nodeEnv === 'production'
@@ -79,16 +81,20 @@ export const createServer = (config) => {
   app.get('*', (req, res) => {
     reactCookie.plugToRequest(req, res)
 
-    const state = reactCookie.load('state') || {}
+    const community = reactCookie.load('community') || {}
     const auth = reactCookie.load('auth') || {}
 
+    const state = loadState()
+      .mergeDeep(community)
+      .mergeDeep(auth)
+      .toJS()
+
     const store = configureStore({
+      ...state,
       sourceRequest: {
         protocol: req.headers['x-forwarded-proto'] || req.protocol,
         host: req.headers.host
-      },
-      ...state,
-      auth
+      }
     })
     const routes = createRoutes(store)
     const history = createMemoryHistory(req.originalUrl)
