@@ -30,10 +30,12 @@ export default (state = initialState, action = {}) => {
         error: action.payload
       }
     case t.UPDATE_WIDGET_REQUEST:
+    case t.WIDGET_FORM_ENTRY_CREATE_REQUEST:
       return {...state,
         saving: true
       }
     case t.UPDATE_WIDGET_SUCCESS:
+    case t.WIDGET_FORM_ENTRY_CREATE_SUCCESS:
       return {...state,
         saving: false,
         data: state.data.map(
@@ -41,6 +43,7 @@ export default (state = initialState, action = {}) => {
         )
       }
     case t.UPDATE_WIDGET_FAILURE:
+    case t.WIDGET_FORM_ENTRY_CREATE_FAILURE:
       return {...state,
         saving: false,
         error: action.payload
@@ -49,6 +52,10 @@ export default (state = initialState, action = {}) => {
       return {...state,
         data: [...state.data, ...action.payload]
       }
+
+    case t.SET_WIDGET_LIST:
+      return { ...state, data: action.payload }
+
     default:
       return state
   }
