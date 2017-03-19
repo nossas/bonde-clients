@@ -67,7 +67,7 @@ describe('mobrender/components/widget', () => {
     it('should render form widget component', () => {
       const widget = shallow(<Widget {...props} editable={false} />)
       widget.setProps({ ...props, widget: { ...props.widget, kind: 'form' } })
-      expect(widget.find('Form').length).to.equal(1)
+      expect(widget.find('Connect(Form)').length).to.equal(1)
     })
 
     it('should render donation widget component', () => {
