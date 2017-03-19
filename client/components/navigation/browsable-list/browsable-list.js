@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('./browsable-list.scss')
 }
 

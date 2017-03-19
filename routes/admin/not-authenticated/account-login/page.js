@@ -5,7 +5,7 @@ import * as Paths from '~client/paths'
 import { FormRedux, FormError, FormGroup, ControlLabel, FormControl, Button } from '~client/components/forms'
 
 let logo
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   logo = require('~client/images/logo-nossas.svg')
 }
 

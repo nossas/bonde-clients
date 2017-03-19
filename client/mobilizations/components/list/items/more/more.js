@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 // Current module dependencies
-if (process.env.BROWSER) require('./more.scss')
+if (require('exenv').canUseDOM) require('./more.scss')
 
 export const More = ({ index, onClick, children }) => (
   <div className='more right pr3'>

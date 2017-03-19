@@ -10,7 +10,7 @@ import { BlockMiniature } from '~client/mobilizations/blocks/components'
 import { BLOCK_LAYOUTS } from '~client/mobilizations/blocks/constants'
 import * as BlockActions from '~client/mobilizations/blocks/action-creators'
 
-if (process.env.BROWSER) require('./page.scss')
+if (require('exenv').canUseDOM) require('./page.scss')
 
 class BlocksCreatePage extends Component {
 

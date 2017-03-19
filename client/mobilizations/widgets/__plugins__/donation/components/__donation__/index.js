@@ -13,7 +13,7 @@ import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 // Current module dependencies
 import * as DonationActions from '../../action-creators'
 import { DonationTellAFriend } from '../../components'
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class Donation extends React.Component {
   constructor (props, context) {

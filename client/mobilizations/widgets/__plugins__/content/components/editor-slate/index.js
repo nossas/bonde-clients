@@ -21,7 +21,7 @@ import DefaultServerConfig from '~server/config'
 import { Loading } from '~components/await'
 import { ActionButton, Layer } from '~widget-plugins/content/components'
 
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-if (process.env.BROWSER) require('./tab.scss')
+if (require('exenv').canUseDOM) require('./tab.scss')
 
 class Tab extends Component {
   render () {

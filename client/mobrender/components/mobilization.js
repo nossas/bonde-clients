@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 import classnames from 'classnames'
-import exenv from 'exenv'
 
 import Block from './block.connected'
 import { Navbar } from '~client/mobilizations/components/navbar'
@@ -73,7 +72,7 @@ class Mobilization extends React.Component {
                 target='_blank'>
                 <img
                   src={
-                    exenv.canUseDOM &&
+                    require('exenv').canUseDOM &&
                     require('~client/components/navigation/sidenav/logo-icon-no-border.svg')
                   }
                   alt='B'

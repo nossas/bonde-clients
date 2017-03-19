@@ -7,7 +7,7 @@ import { TechnicalIssues } from '~client/components/error'
 import { GoogleFontsLoader } from '~client/components/fonts'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
 }
 

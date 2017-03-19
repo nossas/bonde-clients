@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 const Background = ({ children, contentSize, image }) => {
   const bgStyle = {

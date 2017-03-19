@@ -6,7 +6,7 @@ import Media from './Media'
 import InsertImageButton from './InsertImageButton'
 import InsertScriptButton from './InsertScriptButton'
 
-if (process.env.BROWSER) require('./styles.scss')
+if (require('exenv').canUseDOM) require('./styles.scss')
 
 export default class MediaControls extends Component {
 

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
 // Current module dependencies
-if (process.env.BROWSER) require('./menu.scss')
+if (require('exenv').canUseDOM) require('./menu.scss')
 
 const Menu = ({ active, children }) => (
   <div className={classnames('more-menu', { 'show': active })}>

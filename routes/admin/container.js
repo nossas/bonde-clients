@@ -3,7 +3,7 @@ import DevTools from '~client/components/dev-tools'
 import { ZendeskWidget } from '~client/components/external-services'
 import ga from 'react-ga'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
 }
 import { GoogleFontsLoader } from '~client/components/fonts'

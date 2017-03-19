@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import classnames from 'classnames'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('./browsable-list-item.scss')
 }
 

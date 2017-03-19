@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 // Current module dependencies
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class WidgetOverlay extends Component {
   constructor (props, context) {

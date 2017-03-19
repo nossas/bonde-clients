@@ -9,7 +9,7 @@ import Block from '~mobilizations/blocks/components'
 // Current module dependencies
 import { Navbar } from './navbar'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   var logoIcon = require('~components/navigation/sidenav/logo-icon-no-border.svg')
 }
 

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import { Loading } from '~components/await'
 import Editor from '~components/editor-draft-js'
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class EditorNew extends React.Component {
   constructor (props, context) {
