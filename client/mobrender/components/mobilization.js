@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 import classnames from 'classnames'
-import { Link } from 'react-router'
+import exenv from 'exenv'
 
 import Block from './block.connected'
 import { Navbar } from '~client/mobilizations/components/navbar'
-
+import * as paths from '~client/paths'
 
 class Mobilization extends React.Component {
 
@@ -18,11 +19,6 @@ class Mobilization extends React.Component {
   render () {
     const {
       mobilization: {
-        name,
-        goal,
-        facebook_share_title,
-        facebook_share_description,
-        facebook_share_image,
         color_scheme: colorScheme,
         header_font: headerFont,
         body_font: bodyFont
@@ -76,7 +72,10 @@ class Mobilization extends React.Component {
                 className='right my2'
                 target='_blank'>
                 <img
-                  src={require('~client/components/navigation/sidenav/logo-icon-no-border.svg')}
+                  src={
+                    exenv.canUseDOM &&
+                    require('~client/components/navigation/sidenav/logo-icon-no-border.svg')
+                  }
                   alt='B'
                   style={{ width: '45px' }}
                 />
