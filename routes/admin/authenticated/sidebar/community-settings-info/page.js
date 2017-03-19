@@ -11,7 +11,7 @@ import {
   SuccessMessage
 } from '~client/components/forms'
 import { FloatLayout } from '~client/components/grids'
-import { SettingsMenu, ForceDownloadViaAjax } from '~client/community/components'
+import { SettingsMenu } from '~client/community/components'
 
 const CommunitySettingsInfoPage = ({
   fields: { image, name, city, description },
@@ -39,12 +39,6 @@ const CommunitySettingsInfoPage = ({
           <ControlLabel>Cidade</ControlLabel>
           <FormControl type='text' />
         </FormGroup>
-
-        <ForceDownloadViaAjax
-          title='Baixar resumo de ações dos ativistas'
-          onClick={() => downloadActivists(community)}
-        />
-
         <FloatLayout position='floatTopRight'>
           <Button type='submit' className='btn bg-blacker rounded caps white'>
             Salvar
@@ -64,9 +58,7 @@ CommunitySettingsInfoPage.propTypes = {
     description: PropTypes.object.isRequired
   }),
   location: PropTypes.object.isRequired,
-  community: PropTypes.object.isRequired,
-  // Actions
-  downloadActivists: PropTypes.func.isRequired
+  community: PropTypes.object.isRequired
 }
 
 export default CommunitySettingsInfoPage

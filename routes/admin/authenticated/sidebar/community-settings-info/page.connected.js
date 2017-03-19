@@ -31,8 +31,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  submit: CommunityActions.asyncEdit,
-  downloadActivists: CommunityActions.asyncDownloadActivists
+  submit: CommunityActions.asyncEdit
 }
 
 const fields = ['id', 'image', 'name', 'city', 'description']
