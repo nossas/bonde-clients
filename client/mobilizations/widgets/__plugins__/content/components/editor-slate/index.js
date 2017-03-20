@@ -160,6 +160,10 @@ class EditorSlate extends Component {
   }
 }
 
+EditorSlate.defaultProps = {
+  handleSave: () => {}
+}
+
 export const createEditorContent = content => JSON.stringify(
   Raw.serialize(Plain.deserialize(content), { terse: true })
 )
