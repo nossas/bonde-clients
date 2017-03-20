@@ -10,7 +10,8 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./account-login').default(store)
+        require('./account-login').default(store),
+        require('./account-register').default(store)
       ])
     })
   }
