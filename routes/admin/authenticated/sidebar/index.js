@@ -16,6 +16,7 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./account-edit').default(store),
         require('./blocks-create').default(store),
         require('./community-settings-info').default(store),
         require('./community-settings-mailchimp').default(store),
