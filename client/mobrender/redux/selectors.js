@@ -23,6 +23,10 @@ export default (state, props) => ({
     return data
   },
 
+  hasCurrentMobilization: () => {
+    return state.mobilizations.list.currentId
+  },
+
   hasMouseOver: (key, id) => {
     const { hover } = state.mobilizations
     if (key in hover) return hover[key] === id
@@ -78,9 +82,9 @@ export default (state, props) => ({
 
   mobilizationIsNeedReload: () => {
     const {
-      list : { reload },
+      list: { reload },
       blocks: { isLoaded: blocksIsLoaded },
-      widgets: { isLoaded: widgetsIsLoaded },
+      widgets: { isLoaded: widgetsIsLoaded }
     } = state.mobilizations
     return !blocksIsLoaded || !widgetsIsLoaded ? true : reload
   },

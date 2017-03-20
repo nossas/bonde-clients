@@ -22,6 +22,7 @@ export { default as handleUploadFile } from './handle-upload-file'
 export { default as handleChangeBackground } from './handle-change-background'
 
 export { default as asyncAddMobilization } from './async-add-mobilization'
+export { default as asyncUpdateMobilization } from './async-update-mobilization'
 export { default as asyncFetchMobilizations } from './async-fetch-mobilizations'
 export { default as selectMobilization } from './select-mobilization'
 export { default as toggleMobilizationMenu } from './toggle-mobilization-menu'
