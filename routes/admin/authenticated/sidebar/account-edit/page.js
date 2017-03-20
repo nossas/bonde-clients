@@ -15,6 +15,7 @@ import {
   SuccessMessage
 } from '~client/components/forms'
 import { FloatLayout } from '~client/components/grids'
+import * as Paths from '~client/paths'
 
 const EditUserPage = ({
   fields: {
@@ -28,7 +29,7 @@ const EditUserPage = ({
   <SettingsPageLayout>
     <SettingsPageMenuLayout title='Minha conta'>
       <Tabs>
-        <Tab text='Usuário' isActive />
+        <Tab text='Usuário' path={Paths.editAccount()} isActive />
       </Tabs>
     </SettingsPageMenuLayout>
     <SettingsPageContentLayout>
