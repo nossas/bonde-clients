@@ -108,19 +108,8 @@ class EditorSlate extends Component {
     }
   }
 
-  handleSave (state) {
-    const { widget: { settings } } = this.props
-    const raw = JSON.stringify(Raw.serialize(state))
-
-    if (settings.content !== raw) {
-      const { update, widget } = this.props
-      update({ ...widget, settings: { content: raw } })
-    }
-    this.setState({ editing: false })
-  }
-
   render () {
-    const { widget: { settings: { content } } } = this.props
+    const { content, handleSave } = this.props
     const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
     return (
       <div>
@@ -149,13 +138,19 @@ class EditorSlate extends Component {
           <ActionButton
             editing={this.state.editing}
             className='mt2 right-align'
-            onClick={::this.handleSave}
+            onClick={state => {
+              this.setState({ editing: false })
+              handleSave(state)
+            }}
           >
             Salvar
           </ActionButton>
           <Layer
             editing={this.state.editing}
-            onClick={::this.handleSave}
+            onClick={state => {
+              this.setState({ editing: false })
+              handleSave(state)
+            }}
           />
         </SlateEditor>
         {this.state.loading && <Loading />}
