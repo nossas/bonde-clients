@@ -47,7 +47,7 @@ describe('client/mobilizations/widgets/components/__widget__', () => {
 
   it('should render Donation widget component if widget kind it is "donation"', () => {
     wrapper.setProps(changeKind({ props, kind: 'donation' }))
-    expect(wrapper.find('Donation')).to.have.length(1)
+    expect(wrapper.find('Connect(Donation)')).to.have.length(1)
   })
 
   it('should render Content widget component if widget kind it is "content"', () => {

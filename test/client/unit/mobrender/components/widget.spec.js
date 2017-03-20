@@ -73,7 +73,7 @@ describe('mobrender/components/widget', () => {
     it('should render donation widget component', () => {
       const widget = shallow(<Widget {...props} editable={false} />)
       widget.setProps({ ...props, widget: { ...props.widget, kind: 'donation' } })
-      expect(widget.find('Donation').length).to.equal(1)
+      expect(widget.find('Connect(Donation)').length).to.equal(1)
     })
   })
 })
