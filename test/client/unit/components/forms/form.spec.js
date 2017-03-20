@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { Form } from '~components/forms'
 
 const Button = (props) => (
-  <button>Done!</button>
+  <button {...props}>Done!</button>
 )
 
 Button.propTypes = {
@@ -15,28 +15,28 @@ Button.propTypes = {
 
 describe('client/components/forms/form', () => {
   it('should render without crashed', () => {
-    const form = mount(<Form />)
+    const form = shallow(<Form />)
     expect(form).to.be.ok
   })
 
   it('should render children', () => {
-    const form = mount(
+    const form = shallow(
       <Form>
-        <button type='button' />
+        <Button type='button' />
       </Form>
     )
-    expect(form.find('button').length).to.equal(1)
+    expect(form.find('Button').length).to.equal(1)
   })
 
   it('should call handleSubmit when submit form', () => {
     let handleSubmitCalled = false
-    const form = mount(<Form handleSubmit={() => handleSubmitCalled = true} />)
+    const form = shallow(<Form handleSubmit={() => { handleSubmitCalled = true }} />)
     form.simulate('submit')
     expect(handleSubmitCalled).to.equal(true)
   })
 
   it('should pass pristine and submitting to children', () => {
-    const form = mount(
+    const form = shallow(
       <Form pristine={false} submitting>
         <Button />
       </Form>
