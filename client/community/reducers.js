@@ -1,5 +1,6 @@
 import reactCookie from 'react-cookie'
 import * as t from './action-types'
+import * as authT from '~client/account/redux/action-types'
 
 export const initialState = {
   isLoaded: false,
@@ -58,6 +59,9 @@ export default (state = initialState, action = {}) => {
         ...state,
         currentId: null
       }
+    case authT.LOGOUT_SUCCESS:
+      // reset info to make redirect correctly
+      return initialState
     default:
       return state
   }

@@ -9,7 +9,8 @@ export default store => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./external').default(store),
-        require('./sidebar').default(store)
+        require('./sidebar').default(store),
+        require('./logout').default(store)
       ])
     })
   }
