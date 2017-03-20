@@ -6,6 +6,7 @@ import Widget from './widget'
 const mapStateToProps = (state, props) => {
   const selectors = MobSelectors(state, props)
   return {
+    sourceRequest: state.sourceRequest,
     saving: selectors.widgetsIsLoading(),
     mobilization: selectors.getMobilization() || selectors.getMobilizations()[0]
   }

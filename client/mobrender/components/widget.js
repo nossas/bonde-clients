@@ -6,7 +6,7 @@ import WidgetOverlay from './widget-overlay.connected'
 
 import widgets from '../widgets/config'
 
-const Widget = ({ saving, mobilization, widget, update, editable }) => {
+const Widget = ({ saving, mobilization, widget, update, editable, sourceRequest }) => {
   // Resize column widget
   const { sm_size: smSize, md_size: mdSize, lg_size: lgSize } = widget
   const className = classnames(
@@ -17,7 +17,7 @@ const Widget = ({ saving, mobilization, widget, update, editable }) => {
   const widgetConfig = widgets(mobilization, widget).filter(w => w.kind === widget.kind)[0]
   const { component: Component, redirect } = widgetConfig
 
-  const widgetComponent = <Component {...{ mobilization, widget, update, editable }} />
+  const widgetComponent = <Component {...{ mobilization, widget, update, editable, sourceRequest }} />
   return (
     <div className={className}>
       {saving && <Loading />}
@@ -43,7 +43,8 @@ Widget.propTypes = {
   editable: PropTypes.bool,
   // Injected by redux
   update: PropTypes.func.isRequired,
-  saving: PropTypes.bool
+  saving: PropTypes.bool,
+  sourceRequest: PropTypes.object.isRequired
 }
 
 export default Widget

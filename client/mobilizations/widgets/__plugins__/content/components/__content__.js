@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Raw } from 'slate'
 
-// Current module depepdencies
 import { EditorOld, EditorNew, EditorSlate } from '../components'
 
 class Content extends Component {
@@ -15,7 +14,7 @@ class Content extends Component {
   }
 
   render () {
-    const { widget: { settings } } = this.props
+    const { widget: { settings }, editable } = this.props
 
     try {
       // If parse content is RebooEditor
@@ -26,6 +25,7 @@ class Content extends Component {
         <EditorSlate
           {...this.props}
           content={settings.content}
+          readOnly={!editable}
           handleSave={state => {
             const raw = JSON.stringify(Raw.serialize(state))
 

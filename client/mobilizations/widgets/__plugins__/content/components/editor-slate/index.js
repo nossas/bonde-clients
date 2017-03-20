@@ -109,7 +109,7 @@ class EditorSlate extends Component {
   }
 
   render () {
-    const { content, handleSave } = this.props
+    const { content, handleSave, readOnly } = this.props
     const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
     return (
       <div>
@@ -134,6 +134,7 @@ class EditorSlate extends Component {
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150 }}
             onSelectionChange={() => { this.setState({ editing: true }) }}
+            readOnly={readOnly}
           />
           <ActionButton
             editing={this.state.editing}
