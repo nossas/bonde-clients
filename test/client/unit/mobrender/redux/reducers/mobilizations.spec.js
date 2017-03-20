@@ -172,7 +172,8 @@ describe('~client/mobrender/redux/reducers/mobilizations', () => {
       expect(nextState).to.deep.equal({...state,
         fetching: false,
         isLoaded: true,
-        data: payload
+        data: payload,
+        currentId: payload[0].id
       })
     })
 
