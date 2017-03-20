@@ -15,7 +15,7 @@ describe('~routes/admin/authenticated/sidebar/account-edit/page', () => {
 
   const props = {
     auth: {},
-    onSubmit: () => {},
+    submit: () => {},
     fields: {
       avatar: dummy_field('avatar'),
       first_name: dummy_field('first_name'),

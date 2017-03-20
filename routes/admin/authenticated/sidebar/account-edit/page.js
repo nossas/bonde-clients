@@ -67,7 +67,7 @@ const EditUserPage = ({
 
 EditUserPage.propTypes = {
   // Injected by react-redux
-  submit: PropTypes.object.isRequired,
+  submit: PropTypes.func.isRequired,
   // Injected by redux-form
   fields: PropTypes.object.isRequired
 }

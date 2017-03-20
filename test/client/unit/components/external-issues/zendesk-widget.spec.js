@@ -12,8 +12,8 @@ describe('client/components/external-services/zendesk-widget', () => {
       expect(wrapper).to.be.ok
     })
 
-    it('should render root <script /> tag element', () => {
-      expect(wrapper.find('script')).to.have.length(1)
+    it('should render an empty <span /> tag element', () => {
+      expect(wrapper.find('span')).to.have.length(1)
     })
   })
 })
