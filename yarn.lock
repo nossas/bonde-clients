@@ -3878,6 +3878,10 @@ is-glob@^2.0.0, is-glob@^2.0.1:
   dependencies:
     is-extglob "^1.0.0"
 
+is-in-browser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/is-in-browser/-/is-in-browser-1.1.3.tgz#56ff4db683a078c6082eb95dad7dc62e1d04f835"
+
 is-ip@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-ip/-/is-ip-1.0.0.tgz#2bb6959f797ccd6f9fdc812758bcbc87c4c59074"
@@ -6199,6 +6203,10 @@ react-lazy-cache@^3.0.1:
   dependencies:
     deep-equal "^1.0.1"
 
+react-portal@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-3.0.0.tgz#9304fce836e8a3216b22588f8dc91b447728f0ae"
+
 react-pure-render@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-pure-render/-/react-pure-render-1.0.2.tgz#9d8a928c7f2c37513c2d064e57b3e3c356e9fabb"
@@ -6713,6 +6721,10 @@ sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
 
+selection-is-backward@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/selection-is-backward/-/selection-is-backward-1.0.0.tgz#97a54633188a511aba6419fc5c1fa91b467e6be1"
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"
@@ -6824,9 +6836,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-editor@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-2.2.5.tgz#3b921f9e1f78d073182b4f71ef30d61510bd2471"
+slate-editor@2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-2.2.6.tgz#b9b059db21b4049a5265bccc0970288b579ae72b"
   dependencies:
     classnames "^2.2.5"
     exenv "^1.2.1"
@@ -6836,11 +6848,11 @@ slate-editor@2.2.5:
     react-draggable "^2.2.3"
     react-fontawesome "^1.4.0"
     react-s3-uploader "^4.0.1"
-    slate "^0.16.1"
+    slate "^0.19.3"
 
-slate@^0.16.1:
-  version "0.16.25"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.16.25.tgz#4b8e98da5228a5f4f257883419ff9dff36532b8d"
+slate@^0.19.3:
+  version "0.19.3"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.19.3.tgz#da9bf378e0dd641b4d68f7cdf68f291791fc2364"
   dependencies:
     cheerio "^0.22.0"
     debug "^2.3.2"
@@ -6850,7 +6862,10 @@ slate@^0.16.1:
     get-window "^1.1.1"
     immutable "^3.8.1"
     is-empty "^1.0.0"
+    is-in-browser "^1.1.3"
     keycode "^2.1.2"
+    react-portal "^3.0.0"
+    selection-is-backward "^1.0.0"
     type-of "^2.0.1"
 
 slice-ansi@0.0.4:
