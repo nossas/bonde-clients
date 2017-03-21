@@ -7,7 +7,7 @@ import BlockChangeBackground from './block-change-background.connected'
 export const HOVER_MOUSE_KEY = 'block'
 
 const getBackgroundStyle = block => {
-  if (block.bg_image) return { background: `url('${block.bg_image}')` }
+  if (block.bg_image) return { background: `url('${block.bg_image}') no-repeat`, backgroundSize: 'cover' }
   else if (block.bg_class) {
     try {
       const rgba = JSON.parse(block.bg_class)
