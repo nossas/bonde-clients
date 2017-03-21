@@ -134,6 +134,7 @@ class EditorSlate extends Component {
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150 }}
             onSelectionChange={() => { this.setState({ editing: true }) }}
+            className={!readOnly ? 'editable' : ''}
             readOnly={readOnly}
           />
           <ActionButton

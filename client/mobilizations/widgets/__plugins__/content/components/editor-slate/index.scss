@@ -24,3 +24,17 @@
 .editor--toolbar .input {
   max-width: 100px;
 }
+
+.editor--content.editable table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.editor--content.editable table > tbody > tr {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.editor--content.editable table > tbody >tr > td {
+  border-right: 1px solid black;
+}
