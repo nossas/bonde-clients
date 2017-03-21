@@ -72,8 +72,9 @@ class Mobilization extends React.Component {
                 target='_blank'>
                 <img
                   src={
-                    require('exenv').canUseDOM &&
-                    require('~client/components/navigation/sidenav/logo-icon-no-border.svg')
+                    require('exenv').canUseDOM ?
+                    require('~client/components/navigation/sidenav/logo-icon-no-border.svg') :
+                    ''
                   }
                   alt='B'
                   style={{ width: '45px' }}
