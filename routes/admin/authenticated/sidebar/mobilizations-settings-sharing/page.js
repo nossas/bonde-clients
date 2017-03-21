@@ -11,9 +11,11 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~client/component
 import DefaultServerConfig from '~server/config'
 
 // Current module dependencies
-if (process.env.BROSER) {
-  var iconFacebook = require('~client/mobilizations/images/facebook.svg')
-  var iconTwitter = require('~client/mobilizations/images/twitter.svg')
+let iconFacebook, iconTwitter
+
+if (require('exenv').canUseDOM) {
+  iconFacebook = require('~client/mobilizations/images/facebook.svg')
+  iconTwitter = require('~client/mobilizations/images/twitter.svg')
 }
 import { SettingsMenu, MobilizationSettingsForm } from '~client/mobilizations/components'
 
