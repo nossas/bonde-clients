@@ -49,7 +49,7 @@ export const FormFinishMessage = props => {
 
       <label className='h5 darkengray caps mb1 block'>Preview</label>
       {finishMessageType.value === 'share' && (
-        <TellAFriend mobilization={mobilization} />
+        <TellAFriend preview mobilization={mobilization} />
       )}
       {finishMessageType.value === 'custom' && (
         <div className='widget-finish-message-custom'>
