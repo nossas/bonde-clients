@@ -1,10 +1,7 @@
-// Parent module dependencies
 import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
-import * as WidgetSelectors from '~mobilizations/widgets/selectors'
-import { actions as WidgetsActions } from '~mobilizations/widgets'
-
-// Current module dependencies
+import MobSelectors from '~client/mobrender/redux/selectors'
 import * as t from '../action-types'
+import * as MobActionTypes from '~client/mobrender/redux/action-types'
 import { createAction } from './create-action'
 
 //
@@ -23,8 +20,9 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, { ap
   return api.post(endpoint, body)
     .then(response => {
       dispatch({ type: t.WIDGET_PRESSURE_FILL_SUCCESS })
-      dispatch(WidgetsActions.setWidgetList(
-        updateWidgetList(state, response.data)
+      dispatch(createAction(
+        MobActionTypes.UPDATE_WIDGET_SUCCESS,
+        updateWidget(state, response.data)
       ))
 
       AnalyticsEvents.pressureSavedData()
@@ -37,14 +35,10 @@ const asyncFillWidget = ({ payload: fill, widget }) => (dispatch, getState, { ap
     })
 }
 
-const updateWidgetList = (state, payload) => {
+const updateWidget = (state, payload) => {
   const { widget_id: id, count } = payload
-
-  return WidgetSelectors.getList(state).map(
-    widget => widget.id === id
-      ? { ...widget, count }
-      : widget
-  )
+  const widget = MobSelectors(state).getWidget(id)
+  return { ...widget, count }
 }
 
 export default asyncFillWidget
