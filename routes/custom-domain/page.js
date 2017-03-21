@@ -31,7 +31,7 @@ class CustomDomainPage extends Component {
   }
 
   render () {
-    const { mobilization } = this.props
+    const { host, mobilization } = this.props
 
     if (mobilization) {
       const {
@@ -50,6 +50,7 @@ class CustomDomainPage extends Component {
             title={name}
             meta={[
               { name: 'description', content: goal },
+              { property: 'og:url', content: host },
               { property: 'og:title', content: facebookShareTitle },
               { property: 'og:description', content: facebookShareDescription },
               { property: 'og:image', content: facebookShareImage }
@@ -65,6 +66,7 @@ class CustomDomainPage extends Component {
 }
 
 CustomDomainPage.propTypes = {
+  host: PropTypes.string,
   mobilization: PropTypes.object,
   blocks: PropTypes.array.isRequired,
   widgets: PropTypes.array.isRequired
