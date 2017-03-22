@@ -9,6 +9,7 @@ export const initialState = {
   credentials: undefined,
   error: undefined
 }
+const UNIX_TIMESTAMP_MILLISECONDS_FIX = 1000
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -24,7 +25,10 @@ export default (state = initialState, action = {}) => {
         isLoading: false
       }
     case t.LOGIN_SUCCESS:
-      reactCookie.save('auth', { auth: { ...action.payload } })
+      reactCookie.save('auth',
+        { auth: action.payload },
+        { expires: new Date(action.payload.credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }
+      )
       return {...state,
         isLoading: false,
         ...action.payload
