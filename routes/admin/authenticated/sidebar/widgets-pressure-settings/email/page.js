@@ -13,8 +13,7 @@ class PressureSettingsEmailPage extends Component {
     this.state = { targets: this.getTargetList() || [] }
   }
 
-  getTargetString () {
-    const { targets } = this.state
+  getTargetString (targets) {
     return targets.filter(target => !!target.trim()).join(';')
   }
 
@@ -26,7 +25,7 @@ class PressureSettingsEmailPage extends Component {
   handleSubmit (values) {
     const { widget, asyncWidgetUpdate } = this.props
     const settings = widget.settings || {}
-    const targets = this.getTargetString()
+    const targets = this.getTargetString(this.state.targets)
 
     return asyncWidgetUpdate({
       ...widget,
@@ -38,7 +37,8 @@ class PressureSettingsEmailPage extends Component {
     const {
       fields: {
         pressure_subject: pressureSubject,
-        pressure_body: pressureBody
+        pressure_body: pressureBody,
+        targets: targetsField
       },
       ...props
     } = this.props
@@ -54,10 +54,16 @@ class PressureSettingsEmailPage extends Component {
           <InputTag
             label='Alvos'
             values={this.state.targets}
-            onInsertTag={value => this.setState({ targets: [...this.state.targets, value] })}
-            onRemoveTag={value => this.setState({
-              targets: this.state.targets.filter(tag => tag !== value)
-            })}
+            onInsertTag={value => {
+              const targets = [...this.state.targets, value]
+              this.setState({ targets })
+              targetsField.onChange(this.getTargetString(targets))
+            }}
+            onRemoveTag={value => {
+              const targets = this.state.targets.filter(tag => tag !== value)
+              this.setState({ targets })
+              targetsField.onChange(this.getTargetString(targets))
+            }}
             validate={value => {
               const errors = { valid: true }
               if (!value.match(patternTarget)) {
