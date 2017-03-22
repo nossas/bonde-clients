@@ -5,13 +5,18 @@ import classnames from 'classnames'
 import SelectableList from '~components/selectable-list'
 import FilterableSearchBar from '~components/filterable-search-bar'
 
+const btnStyle = {
+  width: '100%'
+}
+
 const TemplateSelectableList = props => {
   const {
     templates,
     filterableTemplates,
     setSelectedIndex,
     selectedIndex,
-    handleSelectItem
+    handleSelectItem,
+    handleGoBack
   } = props
 
   const item = filterableTemplates.filter(item => item.id === selectedIndex)[0]
@@ -27,17 +32,32 @@ const TemplateSelectableList = props => {
           list={filterableTemplates}
           emptyListText='Não existe nenhum template com esse nome'
         />
-        <button
-          disabled={!item}
-          style={{ marginTop: '1.6rem' }}
-          onClick={() => handleSelectItem(item)}
-          className={classnames(
-            'btn h3 col-12 white p2 rounded',
-            !item ? 'bg-gray95' : 'bg-pagenta'
-          )}
-        >
-          Continuar
-        </button>
+        <div className='flex flex-wrap' style={{ marginTop: '1.6rem' }}>
+          {handleGoBack !== undefined ? (
+            <div className='col-4'>
+              <button
+                style={btnStyle}
+                onClick={() => handleGoBack()}
+                className={classnames('btn h3 white p2 rounded bg-gray')}
+              >
+                Voltar
+              </button>
+            </div>
+          ) : undefined}
+          <div className={classnames(!handleGoBack ? 'col-12' : 'col-8 pl1')}>
+            <button
+              style={btnStyle}
+              disabled={!item}
+              onClick={() => handleSelectItem(item)}
+              className={classnames(
+                'btn h3 white p2 rounded',
+                !item ? 'bg-gray95' : 'bg-pagenta'
+              )}
+            >
+              Continuar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -48,7 +68,8 @@ TemplateSelectableList.propTypes = {
   filterableTemplates: PropTypes.array.isRequired,
   selectedIndex: PropTypes.number,
   setSelectedIndex: PropTypes.func.isRequired,
-  handleSelectItem: PropTypes.func.isRequired
+  handleSelectItem: PropTypes.func.isRequired,
+  handleGoBack: PropTypes.func
 }
 
 export default TemplateSelectableList
