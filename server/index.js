@@ -189,11 +189,6 @@ export const createServer = (config) => {
                     -moz-osx-font-smoothing: grayscale;
                     font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
                   }
-
-                  h1,h2,h3,h4,h5,h6 {
-                    margin: 0;
-                    padding: 0;
-                  }
                 </style>
                 <link href="/main.css" media="all" rel="stylesheet" />
                 <style data-aphrodite>${data.css.content}</style>
