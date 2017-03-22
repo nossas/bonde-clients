@@ -17,7 +17,7 @@ const MobilizationsSettingsDomainPage = props => {
         {...{ mobilization, fields, ...formProps }}
         formReduxClassName='bg-white rounded left-align'
         helperTextClassName='mx3'
-        title='Configura o domínio'
+        title='Configure seu domínio'
         submit={values => submit({
           ...values,
           next: browserHistory.push(paths.editMobilization(mobilization.id))
