@@ -18,7 +18,7 @@ const SectionButton = ({ sectionTitle, helperText, buttonTitle, onClick, wrapper
     <ForceDownloadViaAjax
       title={buttonTitle}
       onClick={onClick}
-      className='btn bg-blacker white rounded col-12 center'
+      className='btn bg-blacker white rounded border-box col-12 center'
       icon='download'
     />
   </div>
@@ -37,29 +37,20 @@ const CommunitySettingsReportPage = ({
     <SettingsPageContentLayout wrapClassName='lg-col-12'>
       <div className='mxn2'>
         <SectionButton
-          helperText={`
-            Clique no botão abaixo para baixar o relatório
-            de doações da comunidade.
-          `}
-          sectionTitle='Relatório de doações'
+          sectionTitle='RELATÓRIO DE DOAÇÕES'
+          helperText='Clique no botão abaixo para baixar o relatório de doações da comunidade.'
           buttonTitle='Baixar'
           onClick={() => asyncDownloadDonations(community)}
         />
         <SectionButton
-          helperText={`
-            Clique no botão abaixo para baixar o relatório
-            de ações dos ativistas da comunidade.
-          `}
-          sectionTitle='Relatório de ações dos ativistas'
+          sectionTitle='RELATÓRIO DE AÇÕES'
+          helperText='Clique no botão abaixo para baixar o relatório de ações feitas na comunidade.'
           buttonTitle='Baixar'
           onClick={() => asyncDownloadActivistActions(community)}
         />
         <SectionButton
-          helperText={`
-            Clique no botão abaixo para baixar o relatório consolidado
-            de ações dos ativistas da comunidade.
-          `}
-          sectionTitle='Relatório consolidado de ações dos ativistas'
+          sectionTitle='RELATÓRIO DE ATIVISTAS'
+          helperText='Clique no botão abaixo para baixar o relatório dos ativistas da comunidade.'
           buttonTitle='Baixar'
           onClick={() => asyncDownloadActivists(community)}
         />
