@@ -16,6 +16,7 @@ const TemplatesChooseCustomPage = ({
       <h3 className='h1 mt0 mb3 center'>Meus Templates</h3>
       <TemplateSelectableList
         {...listableProps}
+        handleGoBack={() => browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))}
         handleSelectItem={({ id: template_mobilization_id }) => {
           createMobilizationFromTemplate({ id: mobilization.id, template_mobilization_id })
             .then(() => {

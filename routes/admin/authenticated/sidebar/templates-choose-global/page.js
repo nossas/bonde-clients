@@ -1,5 +1,5 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 import * as paths from '~client/paths'
 import { PageTabLayout } from '~client/mobilizations/components'
@@ -16,6 +16,7 @@ const TemplatesChooseGlobalPage = ({
       <h3 className='h1 mt0 mb3 center'>Meus Templates</h3>
       <TemplateSelectableList
         {...listableProps}
+        handleGoBack={() => browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))}
         handleSelectItem={({ id: template_mobilization_id }) => {
           createMobilizationFromTemplate({ id: mobilization.id, template_mobilization_id })
             .then(() => {
