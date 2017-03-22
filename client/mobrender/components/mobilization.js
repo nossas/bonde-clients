@@ -58,7 +58,7 @@ class Mobilization extends React.Component {
           <div className='col-10 mx-auto'>
             <div className='col col-10'>
               <a
-                href='http://www.bonde.org/'
+                href='http://www.bonde.org/?utm_source=footer-logo'
                 style={{ 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' }}
                 target='_blank'>
                 Feito pra causar. Feito com
@@ -67,14 +67,14 @@ class Mobilization extends React.Component {
             </div>
             <div className='col col-2'>
               <a
-                href='http://www.bonde.org/'
+                href='http://www.bonde.org/?utm_source=footer-slogan'
                 className='right my2'
                 target='_blank'>
                 <img
                   src={
-                    require('exenv').canUseDOM ?
-                    require('~client/components/navigation/sidenav/logo-icon-no-border.svg') :
-                    ''
+                    require('exenv').canUseDOM
+                    ? require('~client/components/navigation/sidenav/logo-icon-no-border.svg')
+                    : ''
                   }
                   alt='B'
                   style={{ width: '45px' }}
