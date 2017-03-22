@@ -51,6 +51,8 @@ class InputTag extends Component {
             {(this.state.error && <span className='red'> - {this.state.error}</span>)}
           </label>
         }
+        <p className='h5'>{'1. Informe nome e email. Ex.: Nome <email@provedor.com>'}</p>
+        <p className='h5'>{'2. Pressione <Enter> para adicionar mais alvos.'}</p>
         <input
           ref='insert'
           id='insert-tag-id'
@@ -65,13 +67,6 @@ class InputTag extends Component {
           onClick={::this.handleEdit}
           onRemove={onRemoveTag}
         />
-        <span className='h5'>
-          {'Pressione <Enter> para adicionar mais alvos.'}
-        </span>
-        <p className='h5 mt1'>
-          *** Ao adicionar um novo alvo, é necessário alterar um dos outros dois campos
-          abaixo para salvar.
-        </p>
       </div>
     )
   }
