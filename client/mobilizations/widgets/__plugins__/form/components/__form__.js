@@ -1,6 +1,5 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
-import { bindActionCreators } from 'redux'
 import $ from 'jquery'
 import classnames from 'classnames'
 
@@ -15,9 +14,8 @@ import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
 
 // Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'
-import * as FormActions from '../action-creators'
 
-export class Form extends React.Component {
+class Form extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
@@ -48,8 +46,7 @@ export class Form extends React.Component {
 
   submit () {
     if (!this.props.editable) {
-      const { dispatch, mobilization, widget } = this.props
-      const bindedFormEntryActions = bindActionCreators(FormActions, dispatch)
+      const { asyncFormEntryCreate, mobilization, widget } = this.props
 
       const fieldsWithValue = widget.settings.fields.map(field => ({
         ...field,
@@ -64,7 +61,7 @@ export class Form extends React.Component {
           widget_id: widget.id,
           fields: JSON.stringify(fieldsWithValue)
         }
-        bindedFormEntryActions.asyncFormEntryCreate({ mobilization, formEntry })
+        asyncFormEntryCreate({ mobilization, formEntry })
       }
     }
   }

@@ -1,13 +1,15 @@
 import reactCookie from 'react-cookie'
 import * as t from './action-types'
 
-const initialState = {
+export const initialState = {
   isLoaded: false,
   isLoading: false,
+  saving: false,
   user: undefined,
   credentials: undefined,
   error: undefined
 }
+const UNIX_TIMESTAMP_MILLISECONDS_FIX = 1000
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -23,17 +25,17 @@ export default (state = initialState, action = {}) => {
         isLoading: false
       }
     case t.LOGIN_SUCCESS:
-      const newState = {
-        ...state,
+      reactCookie.save('auth',
+        { auth: action.payload },
+        { expires: new Date(action.payload.credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }
+      )
+      return {...state,
         isLoading: false,
-        ...action.payload  // insert user and credentials
+        ...action.payload
       }
-      reactCookie.save('auth', newState)
-
-      return newState
     case t.LOGOUT_SUCCESS:
       reactCookie.remove('auth')
-      reactCookie.remove('state')
+      reactCookie.remove('community')
       return {
         ...state,
         isLoaded: false,
@@ -45,6 +47,26 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         isLoading: false,
+        error: action.payload
+      }
+    case t.UPDATE_USER_REQUEST:
+      return {...state,
+        saving: true
+      }
+    case t.UPDATE_USER_SUCCESS:
+      reactCookie.save('auth', {
+        auth: {
+          credentials: state.credentials,
+          user: action.payload
+        }
+      })
+      return {...state,
+        saving: false,
+        user: action.payload
+      }
+    case t.UPDATE_USER_FAILURE:
+      return {...state,
+        saving: false,
         error: action.payload
       }
     default:

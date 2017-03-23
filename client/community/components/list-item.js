@@ -21,7 +21,7 @@ ListItem.propTypes = {
   community: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired
+    image: PropTypes.string
   })
 }
 

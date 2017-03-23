@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('./technical-issues.scss')
 }
 

@@ -1,14 +1,7 @@
 import { expect } from 'chai'
-import authReducer from '~client/account/redux/reducers'
+import authReducer, { initialState } from '~client/account/redux/reducers'
 import * as t from '~client/account/redux/action-types'
 
-const initialState = {
-  isLoaded: false,
-  isLoading: false,
-  user: undefined,
-  credentials: undefined,
-  error: undefined
-}
 
 describe('AuthReducer', () => {
   it('auth/LOAD_SUCCESS', () => {
@@ -65,6 +58,38 @@ describe('AuthReducer', () => {
       isLoading: false,
       user: undefined,
       credentials: undefined
+    })
+  })
+
+  it('auth/UPDATE_USER_REQUEST', () => {
+    const action = { type: t.UPDATE_USER_REQUEST }
+    const nextState = authReducer(initialState, action)
+    expect(nextState).to.deep.equal({...initialState,
+      saving: true
+    })
+  })
+
+  it('auth/UPDATE_USER_SUCCESS', () => {
+    const requestState = { ...initialState, saving: true }
+
+    const payload = { first_name: 'Foo', last_name: 'Bar', email: 'foo@bar.com' }
+    const action = { type: t.UPDATE_USER_SUCCESS, payload }
+    const nextState = authReducer(requestState, action)
+    expect(nextState).to.deep.equal({...requestState,
+      saving: false,
+      user: payload,
+    })
+  })
+
+  it('auth/UPDATE_USER_FAILURE', () => {
+    const requestState = { ...initialState, saving: true }
+
+    const payload = '500 Internal Server Error'
+    const action = { type: t.UPDATE_USER_FAILURE, payload }
+    const nextState = authReducer(requestState, action)
+    expect(nextState).to.deep.equal({...requestState,
+      saving: false,
+      error: payload
     })
   })
 })

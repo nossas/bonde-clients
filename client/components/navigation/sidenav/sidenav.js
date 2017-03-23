@@ -6,7 +6,7 @@ import * as paths from '~client/paths'
 import * as communityPaths from '~community/paths'
 
 // Current module dependencies
-if (process.env.BROWSER) require('./sidenav.scss')
+if (require('exenv').canUseDOM) require('./sidenav.scss')
 
 class Sidenav extends Component {
 

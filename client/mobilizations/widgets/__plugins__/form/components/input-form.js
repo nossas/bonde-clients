@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
-import * as WidgetActions from '~mobilizations/widgets/action-creators'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 
 export class InputForm extends Component {
   constructor (props, context) {
@@ -26,7 +26,7 @@ export class InputForm extends Component {
   componentWillReceiveProps (nextProps) {
     const { uid } = this.props
     if (this.state.loading && this.props.field != nextProps.field) {
-      this.setState({loading: false})
+      this.setState({ loading: false })
       $('#form-' + uid).slideUp(200, () => {
         this.props.onClose && this.props.onClose()
       })
@@ -62,7 +62,7 @@ export class InputForm extends Component {
     const { settings } = widget
 
     this.setState({ loading: true })
-    dispatch(WidgetActions.asyncWidgetUpdate({
+    dispatch(MobActions.asyncUpdateWidget({
       ...widget,
       settings: { ...settings, fields: newFields }
     }))
@@ -162,7 +162,7 @@ export class InputForm extends Component {
       <div>
         <div
           id={`form-${uid}`}
-          className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z5'
+          className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'
         >
           <div className='col col-6'>
             <div className='table col-12 mb2'>
@@ -253,7 +253,7 @@ export class InputForm extends Component {
               <button
                 disabled={!canMoveUp}
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleMoveUp}
               >
                 <i className='fa fa-chevron-up mr1' />
@@ -265,7 +265,7 @@ export class InputForm extends Component {
               <button
                 disabled={!canMoveDown}
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleMoveDown}
               >
                 <i className='fa fa-chevron-down mr1' />
@@ -276,7 +276,7 @@ export class InputForm extends Component {
             <div>
               <button
                 className='btn btn-no-focus hover'
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white', color: '#bbb' }}
                 onClick={::this.handleRemove}
               >
                 <i className='fa fa-trash mr1' />
@@ -293,7 +293,7 @@ export class InputForm extends Component {
               </button>
               <button
                 disabled={this.state.loading}
-                className='btn white caps bg-pagenta p2 mr2 rounded z5'
+                className='btn white caps bg-pagenta p2 mr2 rounded'
                 onClick={::this.handleSave}
               >
                 {this.state.loading ? 'Salvando...' : 'Salvar'}
@@ -303,7 +303,7 @@ export class InputForm extends Component {
         </div>
 
         <div
-          className='fixed top-0 right-0 bottom-0 left-0 z4'
+          className='fixed top-0 right-0 bottom-0 left-0 z3'
           onClick={::this.handleOverlayClick}
         />
       </div>

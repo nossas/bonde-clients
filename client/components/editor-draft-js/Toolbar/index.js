@@ -10,7 +10,7 @@ import LinkControls, { decorator as linkDecorator } from './LinkControls'
 import AlignmentControls from './AlignmentControls'
 import MediaControls, { blockRendererFn as mediaBlockRendererFn } from './MediaControls'
 
-if (process.env.BROWSER) require('./styles.scss')
+if (require('exenv').canUseDOM) require('./styles.scss')
 
 class Toolbar extends Component {
 

@@ -42,11 +42,17 @@ export default (state = initialState, action) => {
         fetching: true
       }
     case t.FETCH_MOBILIZATIONS_SUCCESS:
-    case t.FILTER_MOBILIZATIONS_SUCCESS:
       return {...state,
         isLoaded: true,
         fetching: false,
         data: action.payload
+      }
+    case t.FILTER_MOBILIZATIONS_SUCCESS:
+      return {...state,
+        isLoaded: true,
+        fetching: false,
+        data: action.payload,
+        currentId: action.payload.length === 1 ? action.payload[0].id : undefined
       }
     case t.FETCH_MOBILIZATIONS_FAILURE:
     case t.FILTER_MOBILIZATIONS_FAILURE:

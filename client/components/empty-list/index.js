@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class EmptyList extends Component {
   render () {

@@ -4,8 +4,9 @@ import React, { PropTypes } from 'react'
 import * as paths from '~client/paths'
 import { TellAFriend } from '~components/share'
 
-const FormTellAFriend = ({ mobilization }) => (
+const FormTellAFriend = ({ preview, mobilization }) => (
   <TellAFriend
+    preview={preview}
     mobilization={mobilization}
     message='Formulário submetido com sucesso!'
     href={paths.mobilization(mobilization)}
@@ -13,6 +14,7 @@ const FormTellAFriend = ({ mobilization }) => (
 )
 
 FormTellAFriend.propTypes = {
+  preview: PropTypes.bool,
   mobilization: PropTypes.object.isRequired
 }
 

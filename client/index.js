@@ -45,19 +45,25 @@ const render = () => {
     // Match routes based on location object:
     match({ routes, location }, (error, redirectLocation, renderProps) => {
       if (error) console.log(error)
-      // Get array of route handler components:
-      const { components } = renderProps
 
-      // Define locals to be provided to all lifecycle hooks:
-      const locals = {
-        path: renderProps.location.pathname,
-        query: renderProps.location.query,
-        params: renderProps.params,
-        host: window.location.host,
-
+      let locals = {
         // Allow lifecycle hooks to dispatch Redux actions:
         dispatch,
         getState
+      }
+      let components
+
+      if (renderProps) {
+        // Get array of route handler components:
+        components = renderProps.components
+
+        // Define locals to be provided to all lifecycle hooks:
+        locals = {...locals,
+          path: renderProps.location.pathname,
+          query: renderProps.location.query,
+          params: renderProps.params,
+          host: window.location.host,
+        }
       }
 
       // Don't fetch data for initial route, server has already done the work:

@@ -1,7 +1,6 @@
 // Parent module dependencies
-import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
-import * as WidgetSelectors from '~mobilizations/widgets/selectors'
-import * as WidgetActions from '~mobilizations/widgets/action-creators'
+import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
+import MobSelectors from '~client/mobrender/redux/selectors'
 
 // Current module dependencies
 import * as t from '../action-types'
@@ -15,14 +14,9 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
 
   dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_REQUEST })
   return api.post(endpoint, body)
-    .then(response => {
-      dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_SUCCESS })
-      dispatch(WidgetActions.setWidgetList(
-        updateWidgetList(state, response.data)
-      ))
-
+    .then(({ data }) => {
+      dispatch(createAction(t.WIDGET_FORM_ENTRY_CREATE_SUCCESS, updateWidget(state, data.errors)))
       AnalyticsEvents.formSavedData()
-
       return Promise.resolve()
     })
     .catch(failure => {
@@ -31,12 +25,9 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
     })
 }
 
-const updateWidgetList = (state, payload) => {
-  return WidgetSelectors.getList(state).map(widget =>
-    widget.id === payload.widget_id
-      ? { ...widget, form_entries_count: widget.form_entries_count + 1 }
-      : widget
-  )
+const updateWidget = (state, payload) => {
+  const widget = MobSelectors(state).getWidget(payload.widget_id)
+  return { ...widget, form_entries_count: widget.form_entries_count + 1 }
 }
 
 export default asyncFormEntryCreate

@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 // Current module dependencies
 import { ControlButtons } from '../'
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class FormRedux extends Component {
   constructor (props) {

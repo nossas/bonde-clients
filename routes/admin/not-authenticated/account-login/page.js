@@ -5,7 +5,7 @@ import * as Paths from '~client/paths'
 import { FormRedux, FormError, FormGroup, ControlLabel, FormControl, Button } from '~client/components/forms'
 
 let logo
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   logo = require('~client/images/logo-nossas.svg')
 }
 
@@ -20,12 +20,6 @@ class LoginPage extends Component {
 
   render () {
     const { login, fields: { email, password }, ...formProps } = this.props
-    // const submitSuccess = (values) => {
-    //   const redirectUrl = (params.redirect_to || '/')
-    //   login(values, () => {
-    //     browserHistory.push(redirectUrl)
-    //   }
-    // }
 
     return (
       <div>
@@ -41,7 +35,7 @@ class LoginPage extends Component {
             <ControlLabel>Senha</ControlLabel>
             <FormControl type='password' placeholder='••••••••••' />
           </FormGroup>
-          <Button type='submit' className='white col-12 rounded-bottom'>
+          <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
             {formProps.submitting ? 'Carregando...' : 'Entrar'}
           </Button>
           <FormError className='mt2' />

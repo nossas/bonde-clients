@@ -10,7 +10,7 @@ export default ({ mobilization_id, ...block }) => (dispatch, getState, { api }) 
     .then(res => {
       const { widgets_attributes, ...data } = res.data
       dispatch(createAction(t.ADD_BLOCK_SUCCESS, data))
-      dispatch(createAction(t.ADD_WIDGETS_SUCCESS, widgets_attributes))
+      dispatch(createAction(t.ADD_WIDGETS_SUCCESS, widgets_attributes.sort((a, b) => a.id - b.id)))
     })
     .catch(ex => {
       dispatch(createAction(t.ADD_BLOCK_FAILURE, ex))

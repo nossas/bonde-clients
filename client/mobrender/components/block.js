@@ -6,6 +6,20 @@ import BlockChangeBackground from './block-change-background.connected'
 
 export const HOVER_MOUSE_KEY = 'block'
 
+const getBackgroundStyle = block => {
+  if (block.bg_image) return { background: `url('${block.bg_image}') no-repeat`, backgroundSize: 'cover' }
+  else if (block.bg_class) {
+    try {
+      const rgba = JSON.parse(block.bg_class)
+      return {
+        backgroundColor: `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`
+      }
+    } catch (ex) {
+      // Silent error because use className
+    }
+  }
+}
+
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
@@ -17,9 +31,11 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
         onCancelEdit(block)
       }
     }}
+    className={block.bg_class && block.bg_class.indexOf('{') === -1 ? block.bg_class : undefined}
+    style={getBackgroundStyle(block)}
   >
     <div className='col-10 mx-auto'>
-      {editing === EDIT_KEY ? <BlockChangeBackground block={block} /> : null}
+      {editing === `${EDIT_KEY}-${block.id}` ? <BlockChangeBackground block={block} /> : null}
       <div className='clearfix widgets' style={{ padding: '5em 0' }}>
         {widgets && widgets.map(widget => (
           <Widget key={`widget-${widget.id}`} widget={widget} editable={editable} />

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
 // Current module dependencies
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('./index.scss')
 }
 

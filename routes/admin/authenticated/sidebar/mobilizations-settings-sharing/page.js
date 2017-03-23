@@ -8,11 +8,14 @@ import {
   UploadImageField
 } from '~client/components/forms'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import DefaultServerConfig from '~server/config'
 
 // Current module dependencies
-if (process.env.BROSER) {
-  var iconFacebook = require('~client/mobilizations/images/facebook.svg')
-  var iconTwitter = require('~client/mobilizations/images/twitter.svg')
+let iconFacebook, iconTwitter
+
+if (require('exenv').canUseDOM) {
+  iconFacebook = require('~client/mobilizations/images/facebook.svg')
+  iconTwitter = require('~client/mobilizations/images/twitter.svg')
 }
 import { SettingsMenu, MobilizationSettingsForm } from '~client/mobilizations/components'
 
@@ -67,7 +70,7 @@ const MobilizationsSettingsSharingPage = props => {
                   <div className='mb1 gray'>Sua imagem deve ter 470x270 pixels</div>
                 </div>
                 <div className='overflow-hidden'>
-                  <UploadImageField theme='classic' signingUrl={`${process.env.API_URL}/uploads`} />
+                  <UploadImageField theme='classic' signingUrl={`${DefaultServerConfig.apiUrl}/uploads`} />
                 </div>
               </div>
             </div>

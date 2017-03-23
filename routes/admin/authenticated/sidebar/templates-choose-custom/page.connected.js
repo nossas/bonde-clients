@@ -2,8 +2,8 @@ import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 
 import * as SelectableActions from '~components/selectable-list/actions'
-import * as MobilizationActions from '~mobilizations/action-creators'
-import * as MobilizationSelectors from '~mobilizations/selectors'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 import * as TemplateActions from '~mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~mobilizations/templates/selectors'
 
@@ -14,8 +14,8 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !MobSelectors(state).hasCurrentMobilization() && promises.push(
+      dispatch(MobActions.selectMobilization(params.mobilization_id))
     )
     !TemplateSelectors.isLoaded(state) && promises.push(
       dispatch(TemplateActions.asyncFetch())
@@ -25,7 +25,7 @@ const redial = {
 }
 
 const mapStateToProps = (state) => ({
-  mobilization: MobilizationSelectors.getCurrent(state),
+  mobilization: MobSelectors(state).getMobilization(),
   templates: TemplateSelectors.getCustomTemplates(state),
   filterableTemplates: TemplateSelectors.getFilterableTemplates(state),
   selectedIndex: TemplateSelectors.getSelectableIndex(state)
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionCreatorsToProps = {
   setSelectedIndex: SelectableActions.setSelectedIndex,
-  createMobilizationFromTemplate: MobilizationActions.asyncUpdate
+  createMobilizationFromTemplate: MobActions.asyncUpdateMobilization
 }
 
 export default provideHooks(redial)(

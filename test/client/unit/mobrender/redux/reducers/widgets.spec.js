@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import * as t from '~client/mobrender/redux/action-types'
 import reducer, { initialState } from '~client/mobrender/redux/reducers/widgets'
+import { createAction } from '~client/mobrender/redux/action-creators/create-action'
 
 describe('~client/mobrender/redux/reducers/widgets', () => {
   describe('doing fetch', () => {
@@ -103,6 +104,34 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
       expect(nextState).to.deep.equal({...fetchState,
         data: [...fetchState.data, ...payload]
       })
+    })
+  })
+
+  describe('add form entries', () => {
+    it('should change saving state to true when requesting', () => {
+      const action = { type: t.WIDGET_FORM_ENTRY_CREATE_REQUEST }
+      const nextState = reducer(initialState, action)
+
+      expect(nextState).to.have.property('saving', true)
+    })
+    it('should change saving state to false when succeeded', () => {
+      const currentInitialState = { ...initialState, saving: true }
+      const action = { type: t.WIDGET_FORM_ENTRY_CREATE_SUCCESS }
+      const nextState = reducer(currentInitialState, action)
+
+      expect(nextState).to.have.property('saving', false)
+    })
+    it('should change saving state to false and error state with message when failed', () => {
+      const currentInitialState = { ...initialState, saving: true }
+      const failurePayload = { error: 'Form widget entry create request error message!' }
+      const action = createAction(t.WIDGET_FORM_ENTRY_CREATE_FAILURE, failurePayload)
+      const nextState = reducer(currentInitialState, action)
+
+      expect(nextState).to.have.property('saving', false)
+      expect(nextState)
+        .to.have.property('error')
+        .that.is.an('object')
+        .that.deep.equals(failurePayload)
     })
   })
 })

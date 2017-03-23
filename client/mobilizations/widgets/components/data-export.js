@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import exenv from 'exenv'
 
 class DataExport extends Component {
   componentDidMount () {
@@ -77,7 +78,7 @@ class DataExport extends Component {
     } = this.props
 
     const filename = mobilization.name + '.xlsx'
-    const adownloadSupport = process.env.BROWSER
+    const adownloadSupport = exenv.canUseDOM
       ? ('download' in document.createElement('a'))
       : false
 

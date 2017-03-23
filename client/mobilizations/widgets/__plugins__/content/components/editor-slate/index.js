@@ -21,7 +21,7 @@ import DefaultServerConfig from '~server/config'
 import { Loading } from '~components/await'
 import { ActionButton, Layer } from '~widget-plugins/content/components'
 
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
@@ -108,19 +108,8 @@ class EditorSlate extends Component {
     }
   }
 
-  handleSave (state) {
-    const { widget: { settings } } = this.props
-    const raw = JSON.stringify(Raw.serialize(state))
-
-    if (settings.content !== raw) {
-      const { update, widget } = this.props
-      update({ ...widget, settings: { content: raw } })
-    }
-    this.setState({ editing: false })
-  }
-
   render () {
-    const { widget: { settings: { content } } } = this.props
+    const { content, handleSave, readOnly } = this.props
     const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
     return (
       <div>
@@ -136,7 +125,7 @@ class EditorSlate extends Component {
             <FontFamilyDropdown className={classNames.dropdown} style={styles.dropdown} />
             <FontSizeInput className={classNames.input} {...fontSizePluginOptions} style={styles.input} />
             <ImageButton className={classNames.button} signingUrl={`${DefaultServerConfig.apiUrl}/uploads`} />
-            <ColorButton className={classNames.button} initialState={colorPluginOptions} pickerDefaultPosition={{ x: -520, y: 17 }} />
+            <ColorButton className={classNames.button} initialState={colorPluginOptions} pickerDefaultPosition={{ x: 0, y: 17 }} />
             <GridButtonBar className={classNames.button} />
             <EmbedButton className={classNames.button} />
           </SlateToolbar>
@@ -145,23 +134,35 @@ class EditorSlate extends Component {
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150 }}
             onSelectionChange={() => { this.setState({ editing: true }) }}
+            className={!readOnly ? 'editable' : ''}
+            readOnly={readOnly}
           />
           <ActionButton
             editing={this.state.editing}
             className='mt2 right-align'
-            onClick={::this.handleSave}
+            onClick={state => {
+              this.setState({ editing: false })
+              handleSave(state)
+            }}
           >
             Salvar
           </ActionButton>
           <Layer
             editing={this.state.editing}
-            onClick={::this.handleSave}
+            onClick={state => {
+              this.setState({ editing: false })
+              handleSave(state)
+            }}
           />
         </SlateEditor>
         {this.state.loading && <Loading />}
       </div>
     )
   }
+}
+
+EditorSlate.defaultProps = {
+  handleSave: () => {}
 }
 
 export const createEditorContent = content => JSON.stringify(

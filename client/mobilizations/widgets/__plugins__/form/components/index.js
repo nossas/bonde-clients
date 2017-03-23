@@ -1,4 +1,4 @@
-export { default } from './__form__'
+export { default } from './__form__.connected'
 export { default as Button } from './button'
 export { default as Input } from './input'
 export { default as InputForm } from './input-form'

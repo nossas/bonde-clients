@@ -44,12 +44,6 @@ export default function reducer (state = initialState, action) {
       })
       return { ...state, data }
 
-    //
-    // Sync Actions
-    //
-    case t.SET_WIDGET_LIST:
-      return { ...state, data: action.payload }
-
     default:
       return state
   }

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import { Raw } from 'slate'
 
-// Current module depepdencies
 import { EditorOld, EditorNew, EditorSlate } from '../components'
 
 class Content extends Component {
@@ -14,7 +14,7 @@ class Content extends Component {
   }
 
   render () {
-    const { widget: { settings } } = this.props
+    const { widget: { settings }, editable } = this.props
 
     try {
       // If parse content is RebooEditor
@@ -22,7 +22,19 @@ class Content extends Component {
       return content.entityMap ? (
         <EditorNew {...this.props} />
       ) : (
-        <EditorSlate {...this.props} />
+        <EditorSlate
+          {...this.props}
+          content={settings.content}
+          readOnly={!editable}
+          handleSave={state => {
+            const raw = JSON.stringify(Raw.serialize(state))
+
+            if (settings.content !== raw) {
+              const { update, widget } = this.props
+              update({ ...widget, settings: { content: raw } })
+            }
+          }}
+        />
       )
     } catch (e) {
       // Else is old editor
@@ -46,7 +58,7 @@ Content.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  widgetUpdate: PropTypes.func
+  update: PropTypes.func
 }
 
 export default Content

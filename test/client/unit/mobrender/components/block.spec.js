@@ -56,14 +56,14 @@ describe('~client/mobrender/components/block', () => {
   })
 
   describe('render change background', () => {
-    it('should show when only editing is block-config-menu.EDIT_KEY', () => {
+    it('should show when only editing is block-config-menu.EDIT_KEY-{block_id}', () => {
       expect(block.find(BlockChangeBackground).length).to.equal(0)
-      block.setProps({ editing: EDIT_KEY })
+      block.setProps({ editing: `${EDIT_KEY}-${props.block.id}` })
       expect(block.find(BlockChangeBackground).length).to.equal(1)
     })
 
     it('should pass block like props', () => {
-      block.setProps({ editing: EDIT_KEY })
+      block.setProps({ editing: `${EDIT_KEY}-${props.block.id}` })
       expect(block.find(BlockChangeBackground).props().block).to.deep.equal(props.block)
     })
   })

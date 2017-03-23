@@ -1,26 +1,35 @@
 import React, { PropTypes } from 'react'
+import { Raw } from 'slate'
 
 // Global module dependencies
-import Editor from '~components/editor-draft-js'
+import EditorDraft from '~components/editor-draft-js'
+import { EditorSlate } from '~client/mobilizations/widgets/__plugins__/content/components'
 
-const FinishMessageCustom = ({
-  readOnly,
-  widget: {
+const FinishMessageCustom = ({ readOnly, widget }) => {
+  const {
     settings: {
       finish_message: finishMessage,
       finish_message_background: finishMessageBackground
     }
-  }
-}) => (
-  <Editor
-    readOnly={readOnly}
-    value={valueParse(finishMessage)}
-    editorStyle={{
-      backgroundColor: `rgba(${finishMessageBackground})`,
-      borderRadius: 3
-    }}
-  />
-)
+  } = widget
+  const content = valueParse(finishMessage)
+
+  return content.entityMap ? (
+    <EditorDraft
+      readOnly={readOnly}
+      value={content}
+      editorStyle={{
+        backgroundColor: `rgba(${finishMessageBackground})`,
+        borderRadius: 3
+      }}
+    />
+  ) : (
+    <EditorSlate
+      content={finishMessage}
+      readOnly={readOnly}
+    />
+  )
+}
 
 //
 // Helper functions

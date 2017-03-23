@@ -2,9 +2,9 @@ import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import * as MobilizationSelectors from '~mobilizations/selectors'
-import * as MobilizationActions from '~mobilizations/action-creators'
-import { fields, validate } from '~mobilizations/components/form-custom-domain'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import * as MobActions from '~client/mobrender/redux/action-creators'
+import { fields, validate } from '~client/mobilizations/components/form-custom-domain'
 
 import Page from './page'
 
@@ -13,15 +13,15 @@ const redial = {
     const state = getState()
     const promises = []
 
-    !MobilizationSelectors.hasCurrent(state) && promises.push(
-      dispatch(MobilizationActions.select(params.mobilization_id))
+    !MobSelectors(state).hasCurrentMobilization() && promises.push(
+      dispatch(MobActions.selectMobilization(params.mobilization_id))
     )
     return Promise.all(promises)
   }
 }
 
 const mapStateToProps = state => {
-  const mobilization = MobilizationSelectors.getCurrent(state)
+  const mobilization = MobSelectors(state).getMobilization()
   return {
     initialValues: mobilization,
     mobilization
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 }
 
 const mapActionCreatorsToProps = {
-  submit: MobilizationActions.asyncUpdate
+  submit: MobActions.asyncUpdateMobilization
 }
 
 export default provideHooks(redial)(

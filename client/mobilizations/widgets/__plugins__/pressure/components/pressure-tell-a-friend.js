@@ -2,15 +2,16 @@ import React, { PropTypes } from 'react'
 
 import { TellAFriend } from '~components/share'
 
-const PressureTellAFriend = ({ mobilization }) => (
+const PressureTellAFriend = ({ preview, mobilization }) => (
   <TellAFriend
+    preview={preview}
     mobilization={mobilization}
     message='Pressão enviada'
-    href={process.env.BROWSER ? window.location.origin : ''}
   />
 )
 
 PressureTellAFriend.propTypes = {
+  preview: PropTypes.bool,
   mobilization: PropTypes.object.isRequired
 }
 

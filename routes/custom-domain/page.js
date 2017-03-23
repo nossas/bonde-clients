@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import ReactGA from 'react-ga'
+import Helmet from 'react-helmet'
 
 import * as arrayUtil from '~client/utils/array'
 import { TechnicalIssues } from '~client/components/error'
 import { GoogleFontsLoader } from '~client/components/fonts'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
-if (process.env.BROWSER) {
+if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
 }
 
@@ -30,13 +31,31 @@ class CustomDomainPage extends Component {
   }
 
   render () {
-    const { mobilization } = this.props
+    const { host, mobilization } = this.props
 
     if (mobilization) {
-      const { header_font: headerFont, body_font: bodyFont } = mobilization
+      const {
+        name,
+        goal,
+        facebook_share_title: facebookShareTitle,
+        facebook_share_description: facebookShareDescription,
+        facebook_share_image: facebookShareImage,
+        header_font: headerFont,
+        body_font: bodyFont
+      } = mobilization
 
       return (
         <div>
+          <Helmet
+            title={name}
+            meta={[
+              { name: 'description', content: goal },
+              { property: 'og:url', content: host },
+              { property: 'og:title', content: facebookShareTitle },
+              { property: 'og:description', content: facebookShareDescription },
+              { property: 'og:image', content: facebookShareImage }
+            ]}
+          />
           <Mobilization />
           <GoogleFontsLoader fonts={[headerFont, bodyFont].filter(arrayUtil.distinct)} />
         </div>
@@ -47,6 +66,7 @@ class CustomDomainPage extends Component {
 }
 
 CustomDomainPage.propTypes = {
+  host: PropTypes.string,
   mobilization: PropTypes.object,
   blocks: PropTypes.array.isRequired,
   widgets: PropTypes.array.isRequired

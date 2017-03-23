@@ -6,14 +6,14 @@ import classnames from 'classnames'
 import * as paths from '~client/paths'
 
 // Parent module dependencies
-import { WidgetOverlay, FinishMessageCustom } from '~mobilizations/widgets/components'
+import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
 
-import AnalyticsEvents from '~mobilizations/widgets/utils/analytics-events'
+import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
 // Current module dependencies
 import * as DonationActions from '../../action-creators'
 import { DonationTellAFriend } from '../../components'
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class Donation extends React.Component {
   constructor (props, context) {
@@ -61,7 +61,7 @@ class Donation extends React.Component {
   }
 
   handleClickDonate () {
-    const { widget, dispatch } = this.props
+    const { widget, handleDonationTransactionCreate } = this.props
     const { success, selected_value, selected_payment_type } = this.state
     const that = this
 
@@ -82,7 +82,7 @@ class Donation extends React.Component {
         data.amount = widget.settings['donation_value' + selected_value] + '00'
 
         that.setState({ success: true })
-        dispatch(DonationActions.asyncDonationTransactionCreate(data))
+        handleDonationTransactionCreate(data)
       },
       error: err => { console.error(err) }
     })
@@ -274,15 +274,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     const { success } = this.state
 
     return (
-      <WidgetOverlay
-        editable={editable}
-        onClick={::this.handleOverlayOnClick}
-        text='Clique para configurar o formulário de doação'
-      >
-        <div className='bg-white widget rounded'>
-          {success ? this.renderThankyouText() : this.renderForm()}
-        </div>
-      </WidgetOverlay>
+      <div className='bg-white widget rounded'>
+        {success ? this.renderThankyouText() : this.renderForm()}
+      </div>
     )
   }
 }
@@ -292,7 +286,8 @@ Donation.propTypes = {
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired,
   configurable: PropTypes.bool,
-  hasNewField: PropTypes.bool
+  hasNewField: PropTypes.bool,
+  handleDonationTransactionCreate: PropTypes.func
 }
 
 export default Donation

@@ -1,14 +1,10 @@
 import React, { PropTypes } from 'react'
+import { browserHistory } from 'react-router'
 import classnames from 'classnames'
-import DocumentMeta from 'react-document-meta'
-import { Link } from 'react-router'
 
 import Block from './block.connected'
 import { Navbar } from '~client/mobilizations/components/navbar'
-
-if (process.env.BROWSER) {
-  var logoIcon = require('~components/navigation/sidenav/logo-icon-no-border.svg')
-}
+import * as paths from '~client/paths'
 
 class Mobilization extends React.Component {
 
@@ -22,11 +18,6 @@ class Mobilization extends React.Component {
   render () {
     const {
       mobilization: {
-        name,
-        goal,
-        facebook_share_title,
-        facebook_share_description,
-        facebook_share_image,
         color_scheme: colorScheme,
         header_font: headerFont,
         body_font: bodyFont
@@ -67,7 +58,7 @@ class Mobilization extends React.Component {
           <div className='col-10 mx-auto'>
             <div className='col col-10'>
               <a
-                href='http://www.bonde.org/'
+                href='http://www.bonde.org/?utm_source=footer-logo'
                 style={{ 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' }}
                 target='_blank'>
                 Feito pra causar. Feito com
@@ -76,29 +67,22 @@ class Mobilization extends React.Component {
             </div>
             <div className='col col-2'>
               <a
-                href='http://www.bonde.org/'
+                href='http://www.bonde.org/?utm_source=footer-slogan'
                 className='right my2'
                 target='_blank'>
-                <img src={logoIcon} alt='B' style={{ width: '45px' }} />
+                <img
+                  src={
+                    require('exenv').canUseDOM
+                    ? require('~client/components/navigation/sidenav/logo-icon-no-border.svg')
+                    : ''
+                  }
+                  alt='B'
+                  style={{ width: '45px' }}
+                />
               </a>
             </div>
           </div>
         </div>
-        {/* render document met to show mobilzation */}
-        {!editable ? (
-          <DocumentMeta
-            title={name}
-            description={goal}
-            meta={{
-              name: {
-                'viewport': 'width=device-width, initial-scale=1',
-                'og:title': facebook_share_title,
-                'og:description': facebook_share_description,
-                'og:image': facebook_share_image
-              }
-            }}
-          />
-        ) : null}
       </div>
     )
   }

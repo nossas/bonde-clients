@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
+import { Raw } from 'slate'
 
 // Global module dependencies
 import {
@@ -10,6 +11,9 @@ import {
   ControlLabel
 } from '~components/forms'
 import Editor from '~components/editor-draft-js'
+import EditorSlate, {
+  createEditorContent
+} from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'
 
 // Current module dependencies
 import * as styles from './index-scss'
@@ -24,6 +28,8 @@ export const FormFinishMessage = props => {
     finish_message_type: finishMessageType,
     finish_message: finishMessage
   } = fields
+
+  const parsedFinishMessage = editorValue(finishMessage.value)
 
   return (
     <FormRedux
@@ -43,23 +49,33 @@ export const FormFinishMessage = props => {
 
       <label className='h5 darkengray caps mb1 block'>Preview</label>
       {finishMessageType.value === 'share' && (
-        <TellAFriend mobilization={mobilization} />
+        <TellAFriend preview mobilization={mobilization} />
       )}
       {finishMessageType.value === 'custom' && (
         <div className='widget-finish-message-custom'>
           <div className='relative'>
             <input type='hidden' name='finish_message' />
             <input type='hidden' name='finish_message_background' />
-            <Editor
-              value={editorValue(finishMessage.value)}
-              theme={colorScheme.replace('-scheme', '')}
-              toolbarContainerStyle={styles.editorToolbarContainer}
-              toolbarStyle={styles.editorToolbar}
-              containerStyle={styles.editorContainer}
-              focusStyle={styles.editorFocus}
-              editorStyle={styles.editor}
-              handleSave={rawContent => { finishMessage.onChange(JSON.stringify(rawContent)) }}
-            />
+            {parsedFinishMessage.constructor === Object && parsedFinishMessage.entityMap ? (
+              <Editor
+                value={parsedFinishMessage}
+                theme={colorScheme.replace('-scheme', '')}
+                toolbarContainerStyle={styles.editorToolbarContainer}
+                toolbarStyle={styles.editorToolbar}
+                containerStyle={styles.editorContainer}
+                focusStyle={styles.editorFocus}
+                editorStyle={styles.editor}
+                handleSave={rawContent => { finishMessage.onChange(JSON.stringify(rawContent)) }}
+              />
+            ) : (
+              <EditorSlate
+                content={finishMessage.value}
+                handleSave={state => {
+                  const raw = JSON.stringify(Raw.serialize(state))
+                  if (finishMessage.value !== raw) finishMessage.onChange(raw)
+                }}
+              />
+            )}
           </div>
         </div>
       )}
@@ -106,7 +122,7 @@ const validate = values => {
 const mapStateToProps = (state, { widget: { settings } }) => ({
   initialValues: {
     finish_message_type: settings.finish_message_type || 'share',
-    finish_message: settings.finish_message || 'Clique aqui para editar...',
+    finish_message: settings.finish_message || createEditorContent('Clique aqui para editar...'),
     finish_message_background: settings.finish_message_background || '255,255,255,1'
   }
 })

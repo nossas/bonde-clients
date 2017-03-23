@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { TellAFriend } from '~components/share'
+import { TellAFriend } from '~components/share/tell-a-friend.connected'
 
 describe('client/components/share/tell-a-friend', () => {
   let wrapper

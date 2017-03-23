@@ -30,7 +30,9 @@ const Widget = ({ saving, mobilization, widget, update, editable }) => {
         >
           {widgetComponent}
         </WidgetOverlay>
-      ) : widgetComponent}
+      ) : (!editable && widget.kind === 'draft' ? null : (
+        widgetComponent
+      ))}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import EditorUtils from '../EditorUtils'
 
 import SelectFontFamily from './SelectFontFamily'
 
-if (process.env.BROWSER) require('./styles.scss')
+if (require('exenv').canUseDOM) require('./styles.scss')
 
 export default class FontControls extends Component {
   constructor (props) {

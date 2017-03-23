@@ -6,7 +6,7 @@ import { Loading } from '~components/await'
 
 // Current module dependencies
 import { DraftWidgetButton } from '../../components'
-if (process.env.BROWSER) require('./index.scss')
+if (require('exenv').canUseDOM) require('./index.scss')
 
 class Draft extends Component {
   constructor (props, context) {
