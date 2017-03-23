@@ -23,7 +23,7 @@ services:
       # our database IDEs with it:
       - 5432:5432
     volumes:
-      - ./bin/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./tools/init.sql:/docker-entrypoint-initdb.d/init.sql
       # We'll mount the 'postgres-data' volume into the location Postgres stores it's data:
       - postgres-data:/var/lib/postgresql/data
     environment:
@@ -52,7 +52,7 @@ services:
     # The command this container will run - in this case, this container will run our sidekiq
     # process:
 
-    command: bundle exec rake environment resque:work
+    command: bundle exec sidekiq -c 5
 
     volumes:
       # Mount our app code directory (".") into our app containers at the
@@ -124,8 +124,6 @@ services:
   client:
     depends_on:
       - api
-    #command: './node_modules/.bin/concurrently --kill-others "node webpack/webpack-dev-server.js" "node ./bin/server.js"'
-    command: npm run dev
     volumes:
       - ./:/code:Z
       - node-modules:/code/node_modules
@@ -137,7 +135,9 @@ services:
       dockerfile: Dockerfile.dev
     restart: always
     links:
+      - api
       - api:api.bonde.devel
+      - redis
       - redis:keyval.devel
     extra_hosts:
       - "app.bonde.devel:127.0.0.1"
