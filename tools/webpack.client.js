@@ -108,7 +108,7 @@ if (isProd) {
         region: 'sa-east-1'
       },
       s3UploadOptions: {
-        Bucket: 'bonde-assets'
+        Bucket: isProd ? 'bonde-assets' : 'bonde-assets-dev'
       },
       ContentEncoding (fileName) {
         if (/\.gz/.test(fileName)) {
