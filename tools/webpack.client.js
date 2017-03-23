@@ -4,6 +4,7 @@ const Visualizer = require('webpack-visualizer-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const AssetsPlugin = require('assets-webpack-plugin')
 const S3Plugin = require('webpack-s3-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
 
@@ -85,6 +86,13 @@ if (isProd) {
         comments: false
       }
     }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.svg$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     new AssetsPlugin({ filename: 'assets.json' }),
     new Visualizer({
       filename: './main.stats.html'
@@ -101,6 +109,20 @@ if (isProd) {
       },
       s3UploadOptions: {
         Bucket: 'bonde-assets'
+      },
+      ContentEncoding (fileName) {
+        if (/\.gz/.test(fileName)) {
+          return 'gzip'
+        }
+      },
+      ContentType (fileName) {
+        if (/\.js/.test(fileName)) {
+          return 'application/javascript'
+        } else if (/\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/.test(fileName)) {
+          return 'application/font-woff'
+        } else {
+          return 'text/plain'
+        }
       }
     })
   )
