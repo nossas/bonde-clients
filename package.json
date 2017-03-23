@@ -84,6 +84,7 @@
     "throng": "^4.0.0",
     "url-loader": "^0.5.8",
     "uuid": "^3.0.1",
+    "webpack-s3-plugin": "^1.0.0-rc.0",
     "winston": "^2.3.1",
     "xlsx": "^0.8.1",
     "xlsx.js": "^2.3.1"

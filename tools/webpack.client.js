@@ -3,7 +3,7 @@ const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const AssetsPlugin = require('assets-webpack-plugin')
-
+const S3Plugin = require('webpack-s3-plugin')
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
 
@@ -88,6 +88,20 @@ if (isProd) {
     new AssetsPlugin({ filename: 'assets.json' }),
     new Visualizer({
       filename: './main.stats.html'
+    }),
+    new S3Plugin({
+      // Only upload css and js
+      exclude: /.*\.html/,
+      directory: './public',
+      // s3Options are required
+      s3Options: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: 'sa-east-1'
+      },
+      s3UploadOptions: {
+        Bucket: 'bonde-assets'
+      }
     })
   )
 } else {
@@ -115,7 +129,7 @@ module.exports = {
   output: {
     path: staticsPath,
     filename: '[name].bundle.js',
-    publicPath: '/'
+    publicPath: isProd ? 'https://bonde-assets.s3-website-sa-east-1.amazonaws.com/public/' : '/'
   },
   module: {
     rules: [
