@@ -129,7 +129,7 @@ module.exports = {
   output: {
     path: staticsPath,
     filename: '[name].bundle.js',
-    publicPath: isProd ? 'https://bonde-assets.s3-website-sa-east-1.amazonaws.com/public/' : '/'
+    publicPath: isProd ? 'https://s3-sa-east-1.amazonaws.com/bonde-assets/public/' : '/'
   },
   module: {
     rules: [
