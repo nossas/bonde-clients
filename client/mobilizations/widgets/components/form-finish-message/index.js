@@ -74,6 +74,8 @@ export const FormFinishMessage = props => {
                   const raw = JSON.stringify(Raw.serialize(state))
                   if (finishMessage.value !== raw) finishMessage.onChange(raw)
                 }}
+                toolbarStyles={{ position: 'relative', marginBottom: 10 }}
+                contentStyles={{ border: '1px solid #e1e1e1', color: '#666', padding: 10 }}
               />
             )}
           </div>

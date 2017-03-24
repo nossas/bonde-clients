@@ -109,12 +109,16 @@ class EditorSlate extends Component {
   }
 
   render () {
-    const { content, handleSave, readOnly } = this.props
+    const { content, handleSave, readOnly, toolbarStyles, contentStyles } = this.props
     const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
     return (
       <div>
         <SlateEditor plugins={plugins} initialState={initialState} style={{ color: '#fff' }}>
-          <SlateToolbar style={{ ...styles.toolbar, display: this.state.editing ? 'block' : 'none' }}>
+          <SlateToolbar style={{
+            ...styles.toolbar,
+            display: this.state.editing ? 'block' : 'none',
+            ...toolbarStyles
+          }}>
             <BoldButton className={classNames.button} />
             <ItalicButton className={classNames.button} />
             <UnderlineButton className={classNames.button} />
@@ -132,7 +136,7 @@ class EditorSlate extends Component {
 
           <SlateContent
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
-            style={{ minHeight: 150 }}
+            style={{ minHeight: 150, ...contentStyles }}
             onSelectionChange={() => { this.setState({ editing: true }) }}
             className={!readOnly ? 'editable' : ''}
             readOnly={readOnly}
