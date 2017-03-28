@@ -18,8 +18,8 @@ import {
 } from 'slate-editor'
 
 import DefaultServerConfig from '~server/config'
-import { Loading } from '~components/await'
-import { ActionButton, Layer } from '~widget-plugins/content/components'
+import { Loading } from '~client/components/await'
+import { ActionButton, Layer } from '~client/mobilizations/widgets/__plugins__/content/components'
 
 if (require('exenv').canUseDOM) require('./index.scss')
 
@@ -137,10 +137,13 @@ class EditorSlate extends Component {
           <SlateContent
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150, ...contentStyles }}
-            onSelectionChange={() => { this.setState({ editing: true }) }}
+            onSelectionChange={() => {
+              if (!readOnly) this.setState({ editing: true })
+            }}
             className={!readOnly ? 'editable' : ''}
             readOnly={readOnly}
           />
+
           <ActionButton
             editing={this.state.editing}
             className='mt2 right-align'
