@@ -27,18 +27,32 @@ describe('~client/mobrender/components/block', () => {
     expect(block.find(blockSelector).length).to.equal(1)
   })
 
-  it('should call onMouseOver passing key:block id:block.id', () => {
+  it('should call onMouseOver passing key:block id:block.id only when is editable', () => {
     let result
-    block.setProps({ onMouseOver: (key, id) => result = { key, id } })
+    block.setProps({ editable: true, onMouseOver: (key, id) => result = { key, id } })
     block.find(blockSelector).simulate('mouseenter')
     expect(result).to.deep.equal({ key: 'block', id: props.block.id })
   })
 
-  it('should call onMouseOut passing key:block', () => {
+  it('should not call onMouseOver passing key:block id:block.id only when isnt editable', () => {
     let result
-    block.setProps({ onMouseOut: key => result = key })
+    block.setProps({ editable: false, onMouseOver: (key, id) => result = { key, id } })
+    block.find(blockSelector).simulate('mouseenter')
+    expect(result).to.equal(undefined)
+  })
+
+  it('should call onMouseOut passing key:block only when is editable', () => {
+    let result
+    block.setProps({ editable: true, onMouseOut: key => result = key })
     block.find(blockSelector).simulate('mouseleave')
     expect(result).to.equal('block')
+  })
+
+  it('should not call onMouseOut passing key:block only when isnt editable', () => {
+    let result
+    block.setProps({ editable: false, onMouseOut: key => result = key })
+    block.find(blockSelector).simulate('mouseleave')
+    expect(result).to.equal(undefined)
   })
 
   it('should call onCancelEdit when press esc', () => {

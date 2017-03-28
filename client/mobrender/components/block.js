@@ -23,8 +23,12 @@ const getBackgroundStyle = block => {
 const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
   <div
     id={`block-${block.id}`}
-    onMouseEnter={() => !editing && onMouseOver(HOVER_MOUSE_KEY, block.id)}
-    onMouseLeave={() => !editing && onMouseOut(HOVER_MOUSE_KEY)}
+    onMouseEnter={() => {
+      if (editable && !editing) onMouseOver(HOVER_MOUSE_KEY, block.id)
+    }}
+    onMouseLeave={() => {
+      if (editable && !editing) onMouseOut(HOVER_MOUSE_KEY)
+    }}
     onKeyUp={evt => {
       // ESC keycode
       if (evt.keyCode === 27) {
