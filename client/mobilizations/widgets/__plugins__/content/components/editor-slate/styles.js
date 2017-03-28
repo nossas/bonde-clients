@@ -1,7 +1,4 @@
 export default {
-  button: {
-    borderRight: '1px solid #fff'
-  },
   dropdown: {
     position: 'relative',
     top: 1,
@@ -30,21 +27,6 @@ export default {
     left: 0,
     width: '100%',
     zIndex: 4,
-    display: 'none'
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#222',
-    color: '#fff',
-    borderRadius: 3,
-    opacity: '.82',
-    fontWeight: 300,
-    fontSize: '2.15rem',
-    cursor: 'pointer',
     display: 'none'
   }
 }

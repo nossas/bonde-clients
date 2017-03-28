@@ -46,8 +46,7 @@ const plugins = [
 const classNames = {
   button: 'btn btn-primary not-rounded border border-gray',
   dropdown: 'select col-3 inline-block mx1 not-rounded',
-  input: 'input col-3 inline-block mr1',
-  lastButton: 'btn btn-primary not-rounded border border-gray linebreak'
+  input: 'input col-3 inline-block mr1'
 }
 
 class EditorSlate extends Component {
