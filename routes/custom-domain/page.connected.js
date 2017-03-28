@@ -8,18 +8,20 @@ import * as MobActions from '~client/mobrender/redux/action-creators'
 import Page from './page'
 
 const redial = {
-  fetch: ({ dispatch, host }) => {
+  fetch: ({ dispatch, getState, host }) => {
     // eslint-disable-next-line
     const regex = host.match(`(.+)\.${DefaultServerConfig.appDomain}`)
     const where = regex
       ? { slug: regex[1].replace(/^www\./, '') }
       : { custom_domain: host }
 
-    return Promise.all([
-      dispatch(MobActions.asyncFilterMobilization(where)),
-      dispatch(MobActions.asyncFilterBlock(where)),
-      dispatch(MobActions.asyncFilterWidget(where))
-    ])
+    const promises = []
+    if (!MobSelectors(getState()).mobilizationsIsLoaded()) {
+      promises.push(dispatch(MobActions.asyncFilterMobilization(where)))
+      promises.push(dispatch(MobActions.asyncFilterBlock(where)))
+      promises.push(dispatch(MobActions.asyncFilterWidget(where)))
+    }
+    return Promise.all(promises)
   }
 }
 
