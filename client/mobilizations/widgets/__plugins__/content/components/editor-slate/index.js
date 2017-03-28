@@ -22,6 +22,7 @@ import { Loading } from '~client/components/await'
 import { ActionButton, Layer } from '~client/mobilizations/widgets/__plugins__/content/components'
 
 if (require('exenv').canUseDOM) require('./index.scss')
+import styles from './styles'
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
@@ -47,56 +48,6 @@ const classNames = {
   dropdown: 'select col-3 inline-block mx1 not-rounded',
   input: 'input col-3 inline-block mr1',
   lastButton: 'btn btn-primary not-rounded border border-gray linebreak'
-}
-const styles = {
-  button: {
-    borderRight: '1px solid #fff'
-  },
-  dropdown: {
-    position: 'relative',
-    top: 1,
-    backgroundColor: 'white',
-    height: 38,
-    paddingLeft: 20,
-    border: '3px solid #0275d8',
-    color: '#0275d8',
-    margin: '0',
-    WebkitAppearance: 'none',
-    padding: '0 10px 0 15px'
-  },
-  input: {
-    position: 'relative',
-    top: 1,
-    backgroundColor: 'white',
-    borderRadius: 0,
-    height: 16,
-    margin: 0,
-    color: '#0275d8',
-    border: '3px solid #0275d8'
-  },
-  toolbar: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 4,
-    display: 'none'
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#222',
-    color: '#fff',
-    borderRadius: 3,
-    opacity: '.82',
-    fontWeight: 300,
-    fontSize: '2.15rem',
-    cursor: 'pointer',
-    display: 'none'
-  }
 }
 
 class EditorSlate extends Component {
