@@ -1,6 +1,6 @@
 {
   "name": "bonde-client",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "[Nossas][Bonde] Node.js Server and React + Redux Progressive Web App",
   "author": "nossas",
   "homepage": "http://bonde.org",
