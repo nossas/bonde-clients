@@ -26,6 +26,7 @@ export default {
     top: 0,
     left: 0,
     width: '100%',
+    zIndex: 5,
     display: 'none'
   }
 }
