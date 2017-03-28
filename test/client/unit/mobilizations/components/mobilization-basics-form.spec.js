@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
+import * as mock from '~client/utils/mock'
 import { MobilizationBasicsForm } from '~mobilizations/components'
 
 describe('client/mobilizations/components/mobilization-basics-form', () => {
@@ -11,7 +12,11 @@ describe('client/mobilizations/components/mobilization-basics-form', () => {
     fields: {
       name: {},
       goal: {}
-    }
+    },
+    handleSubmit: mock.noop,
+    submitFailed: false,
+    dirty: false,
+    valid: false
   }
 
   beforeAll(() => {
