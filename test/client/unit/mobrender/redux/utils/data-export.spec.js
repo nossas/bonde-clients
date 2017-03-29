@@ -2,7 +2,7 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 
 // Current module dependencies
-import { forceDownloadFile, makeExcelFile } from '~mobilizations/widgets/utils/data-export'
+import { forceDownloadFile, makeExcelFile } from '~client/mobrender/redux/utils/data-export'
 
 describe.skip('client/mobilizations/widgets/utils/data-export', () => {
   let sandbox

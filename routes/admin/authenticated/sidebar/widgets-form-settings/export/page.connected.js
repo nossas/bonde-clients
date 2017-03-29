@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { asyncWidgetDataExport, dataExportMount } from '~client/mobilizations/widgets/action-creators'
+import { asyncWidgetDataExport, dataExportMount } from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 

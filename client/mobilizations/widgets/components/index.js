@@ -1,4 +1,3 @@
-export { default } from './__widget__'
 export { default as BlockTag } from './block-tag'
 export { default as InputTag } from './input-tag'
 export { default as Tag } from './tag'

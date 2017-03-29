@@ -11,7 +11,7 @@ import {
   ControlLabel,
   FormControl
 } from '~components/forms'
-import Editor from '~components/editor-draft-js'
+import Editor from '~client/components/editor-draft-js'
 import EditorSlate, {
   createEditorContent
 } from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'

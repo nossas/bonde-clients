@@ -3,6 +3,8 @@ export { default as asyncFetchWidgets } from './async-fetch-widgets'
 export { default as asyncFilterWidget } from './async-filter-widget'
 export { default as asyncFormEntryCreate } from './async-form-entry-create'
 export { default as setWidgetList } from './set-widget-list'
+export { default as asyncWidgetDataExport } from './async-widget-data-export'
+export { default as dataExportMount } from './data-export-mount'
 
 export { default as handleMouseOver } from './handle-mouse-over'
 export { default as handleMouseOut } from './handle-mouse-out'

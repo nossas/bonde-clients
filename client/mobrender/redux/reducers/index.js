@@ -6,10 +6,10 @@ import editionReducer from './edition'
 import hoverReducer from './hover'
 import uploaderReducer from './uploader'
 import mobilizationsReducer from './mobilizations'
+import dataExportReducer from './data-export'
 // TODO: Move reducer to mobrender module
 import templatesReducer from '~client/mobilizations/templates/reducers'
 import pluginsReducer from '~client/mobilizations/widgets/__plugins__/reducers'
-import dataExportReducer from '~client/mobilizations/widgets/reducers/data-export'
 
 export default combineReducers({
   list: mobilizationsReducer,
