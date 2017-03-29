@@ -8,7 +8,8 @@ import {
   FormGroup,
   RadioGroup,
   Radio,
-  ControlLabel
+  ControlLabel,
+  FormControl
 } from '~components/forms'
 import Editor from '~components/editor-draft-js'
 import EditorSlate, {
@@ -25,7 +26,8 @@ export const FormFinishMessage = props => {
 
   const {
     finish_message_type: finishMessageType,
-    finish_message: finishMessage
+    finish_message: finishMessage,
+    whatsapp_text: whatsappText
   } = fields
 
   const parsedFinishMessage = editorValue(finishMessage.value)
@@ -45,6 +47,23 @@ export const FormFinishMessage = props => {
           <Radio value='custom'>Customizar</Radio>
         </RadioGroup>
       </FormGroup>
+
+      {finishMessageType.value === 'share' && (
+        <div>
+          <FormGroup controlId='whatsapp-text-id' {...whatsappText}>
+            <ControlLabel>
+              <i className='fa fa-whatsapp mr1' />
+              WhatsApp
+            </ControlLabel>
+            <FormControl
+              rows='4'
+              componentClass='textarea'
+              placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à' +
+                ' sua mobilização. Você poderá alterar este texto depois.'}
+            />
+          </FormGroup>
+        </div>
+      )}
 
       <label className='h5 darkengray caps mb1 block'>Preview</label>
       {finishMessageType.value === 'share' && (
@@ -109,7 +128,8 @@ const editorValue = message => {
 const fields = [
   'finish_message_type',
   'finish_message',
-  'finish_message_background'
+  'finish_message_background',
+  'whatsapp_text'
 ]
 
 const validate = values => {
@@ -124,7 +144,8 @@ const mapStateToProps = (state, { widget: { settings } }) => ({
   initialValues: {
     finish_message_type: settings.finish_message_type || 'share',
     finish_message: settings.finish_message || createEditorContent('Clique aqui para editar...'),
-    finish_message_background: settings.finish_message_background || '255,255,255,1'
+    finish_message_background: settings.finish_message_background || '255,255,255,1',
+    whatsapp_text: settings.whatsapp_text || ''
   }
 })
 
