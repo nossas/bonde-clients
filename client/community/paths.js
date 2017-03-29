@@ -1,7 +1,8 @@
 const namespace = '/community'
 
-export const add = () => `${namespace}/new`
-
-export const list = () => `${namespace}`
-
-export const edit = page => `${namespace}/${page}`
+export const communityList = () => namespace
+export const communityAdd = () => `${namespace}/new`
+export const communityInfo = () => `${namespace}/info`
+export const communityMailchimp = () => `${namespace}/mailchimp`
+export const communityRecipient = () => `${namespace}/recipient`
+export const communityReport = () => `${namespace}/report`

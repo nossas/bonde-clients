@@ -7,7 +7,7 @@ import { ListItem } from '~community/components'
 class CommunityListPage extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLoaded && nextProps.communities.length === 0) {
-      browserHistory.push(paths.add())
+      browserHistory.push(paths.communityAdd())
     }
   }
 
@@ -35,7 +35,7 @@ class CommunityListPage extends Component {
           </div>
         ) : null}
         <p className='white center'>
-          ou <Link to={paths.add()}>Crie uma nova comunidade</Link>
+          ou <Link to={paths.communityAdd()}>Crie uma nova comunidade</Link>
         </p>
       </div>
     )

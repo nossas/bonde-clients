@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { browserHistory } from 'react-router'
 
-import { Background } from '~components/layout'
+import { Background } from '~client/components/layout'
 import {
   FormRedux,
   FormGroup,
@@ -9,14 +9,14 @@ import {
   FormControl,
   Button,
   FormError
-} from '~components/forms'
-import * as paths from '~community/paths'
+} from '~client/components/forms'
+import * as paths from '~client/paths'
 
 class CommunityNewPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
-      browserHistory.push(paths.list())
+      browserHistory.push(paths.communityList())
     }
   }
 
