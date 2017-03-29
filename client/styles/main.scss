@@ -26,7 +26,7 @@ $fa-font-path: "~font-awesome/fonts";
 // Documentation:
 //
 // z-index:
-//    Sidenav                   5
+//    Sidenav                   6
 //    NavBar                    3
 //    Loading                   9
 //    MobilizationList
@@ -35,9 +35,14 @@ $fa-font-path: "~font-awesome/fonts";
 //         - More Menu          3
 //         - More Menu Cancel   1
 //    Widgets - Content Plugin
-//         - Outside            1
-//         - Editor             2
-//         - Toolbar            4
+//         - WYSIHTML editor
+//             - Outside        1
+//             - Editor         2
+//             - Toolbar        4
+//         - SlateJS editor
+//             - Toolbar        5
+//             - Content        4
+//             - Layer          3
 //
 
 body {
