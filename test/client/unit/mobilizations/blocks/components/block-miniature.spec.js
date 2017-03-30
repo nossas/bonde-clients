@@ -2,9 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Current module dependencies
-import { BLOCK_LAYOUTS } from '~mobilizations/blocks/constants'
-import { BlockMiniature } from '~mobilizations/blocks/components'
+import BLOCK_LAYOUTS from '~client/mobilizations/blocks/constants/block-layouts'
+import BlockMiniature from '~client/mobilizations/blocks/components/block-miniature'
 
 describe('client/mobilizations/blocks/components/block-miniature', () => {
   let wrapper

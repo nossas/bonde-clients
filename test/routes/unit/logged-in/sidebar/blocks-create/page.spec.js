@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { BLOCK_LAYOUTS } from '~client/mobilizations/blocks/constants'
+import BLOCK_LAYOUTS from '~client/mobilizations/blocks/constants/block-layouts'
 import Page from '~routes/admin/authenticated/sidebar/blocks-create/page'
 
 describe('routes/admin/authenticated/sidebar/blocks-create/page', () => {

@@ -6,8 +6,9 @@ import DefaultServerConfig from '~server/config'
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~client/components/navigation'
 import ColorPicker from '~client/components/color-picker'
-import { BlockMiniature } from '~client/mobilizations/blocks/components'
-import { BLOCK_LAYOUTS } from '~client/mobilizations/blocks/constants'
+
+import BlockMiniature from '~client/mobilizations/blocks/components/block-miniature'
+import BLOCK_LAYOUTS from '~client/mobilizations/blocks/constants/block-layouts'
 
 if (require('exenv').canUseDOM) require('./page.scss')
 
