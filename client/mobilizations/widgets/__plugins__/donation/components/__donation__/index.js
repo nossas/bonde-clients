@@ -262,7 +262,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     return finishMessageType === 'custom' ? (
       <FinishMessageCustom widget={widget} />
     ) : (
-      <DonationTellAFriend mobilization={mobilization} />
+      <DonationTellAFriend mobilization={mobilization} widget={widget} />
     )
   }
 

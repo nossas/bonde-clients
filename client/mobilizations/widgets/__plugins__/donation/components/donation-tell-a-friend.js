@@ -4,11 +4,12 @@ import React, { PropTypes } from 'react'
 import * as paths from '~client/paths'
 import { TellAFriend } from '~components/share'
 
-const DonationTellAFriend = ({ preview, mobilization }) => {
+const DonationTellAFriend = ({ preview, mobilization, widget }) => {
   return (
     <TellAFriend
       preview={preview}
       mobilization={mobilization}
+      widget={widget}
       message={'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.'}
       href={paths.mobilization(mobilization)}
     />
@@ -17,7 +18,8 @@ const DonationTellAFriend = ({ preview, mobilization }) => {
 
 DonationTellAFriend.propTypes = {
   preview: PropTypes.bool,
-  mobilization: PropTypes.object.isRequired
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired
 }
 
 export default DonationTellAFriend
