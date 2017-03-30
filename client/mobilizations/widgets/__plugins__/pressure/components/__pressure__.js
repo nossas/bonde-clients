@@ -103,7 +103,7 @@ export class Pressure extends Component {
           finishMessageType === 'custom' ? (
             <FinishMessageCustom widget={widget} />
           ) : (
-            <PressureTellAFriend mobilization={mobilization} />
+            <PressureTellAFriend mobilization={mobilization} widget={widget} />
           )
         ) : (
           <div className='pressure-widget'>

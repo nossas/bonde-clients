@@ -2,17 +2,19 @@ import React, { PropTypes } from 'react'
 
 import { TellAFriend } from '~components/share'
 
-const PressureTellAFriend = ({ preview, mobilization }) => (
+const PressureTellAFriend = ({ preview, mobilization, widget }) => (
   <TellAFriend
     preview={preview}
     mobilization={mobilization}
+    widget={widget}
     message='Pressão enviada'
   />
 )
 
 PressureTellAFriend.propTypes = {
   preview: PropTypes.bool,
-  mobilization: PropTypes.object.isRequired
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired
 }
 
 export default PressureTellAFriend
