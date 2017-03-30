@@ -3,6 +3,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 
 import Navbar from '~client/mobrender/components/navbar'
+import MenuItems from '~client/mobrender/components/navbar/menu-items'
 
 describe('mobrender/navbar', () => {
   let wrapper
@@ -36,8 +37,8 @@ describe('mobrender/navbar', () => {
   })
 
   it('should render desktop and mobile version', () => {
-    expect(wrapper.find('MenuItems').at(0).props().mobile).to.equal(false)
-    expect(wrapper.find('MenuItems').at(1).props().mobile).to.equal(true)
+    expect(wrapper.find(MenuItems).at(0).props().mobile).to.equal(false)
+    expect(wrapper.find(MenuItems).at(1).props().mobile).to.equal(true)
   })
 
   describe('when is editable', () => {
@@ -47,7 +48,7 @@ describe('mobrender/navbar', () => {
 
     it('should passed to <Menu /> visible blocks', () => {
       const blocks = props.blocks.filter(b => !b.hidden)
-      wrapper.find('MenuItems').map(menu => {
+      wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })
     })
@@ -60,7 +61,7 @@ describe('mobrender/navbar', () => {
 
     it('should passed to <Menu /> only visible blocks menu', () => {
       const blocks = props.blocks.filter(b => !b.hidden && !b.menu_hidden)
-      wrapper.find('MenuItems').map(menu => {
+      wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })
     })
