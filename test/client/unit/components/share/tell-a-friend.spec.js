@@ -10,7 +10,8 @@ describe('client/components/share/tell-a-friend', () => {
     dispatch: () => {},
     href: 'http://foo.bar',
     message: 'Foo Bar Message',
-    mobilization: { twitter_share_text: 'Twitter Share Text' }
+    mobilization: { twitter_share_text: 'Twitter Share Text' },
+    widget: { settings: { whatsapp_text: 'Foo Bar' } }
   }
 
   beforeAll(() => {

@@ -23,3 +23,9 @@ export const editorToolbar = ({
 export const editorContainer = ({
   minHeight: 315
 })
+
+export const whatsappControlLabel = ({
+  fontSize: '32px',
+  verticalAlign: 'middle',
+  color: '#005E52'
+})

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 
-const WhatsAppShareButton = ({ preview, href, mobilization }) => {
+const WhatsAppShareButton = ({ preview, whatsappText, mobilization }) => {
   return (
     <a
       className={classnames('btn white h3 p3 col-12 caps h5 rounded', { 'lg-hide': !preview })}
-      href={`whatsapp://send?text=${href}`}
+      href={`whatsapp://send?text=${encodeURIComponent(whatsappText)}`}
       style={{ backgroundColor: '#4CEC68', color: '#fff' }}
     >
       Compartilhar no WhatsApp
@@ -15,7 +15,8 @@ const WhatsAppShareButton = ({ preview, href, mobilization }) => {
 
 WhatsAppShareButton.propTypes = {
   href: PropTypes.string.isRequired,
-  preview: PropTypes.bool
+  preview: PropTypes.bool,
+  whatsappText: PropTypes.string
 }
 
 export default WhatsAppShareButton

@@ -183,7 +183,7 @@ class Form extends Component {
       return finishMessageType === 'custom' ? (
         <FinishMessageCustom widget={widget} />
       ) : (
-        <FormTellAFriend mobilization={mobilization} />
+        <FormTellAFriend mobilization={mobilization} widget={widget} />
       )
     } else {
       return <p className='center p2 bg-darken-3'>{message}</p>

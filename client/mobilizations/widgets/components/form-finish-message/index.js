@@ -20,7 +20,7 @@ import EditorSlate, {
 import * as styles from './index-scss'
 
 export const FormFinishMessage = props => {
-  const { mobilization, fields, successMessage, ...rest } = props
+  const { mobilization, fields, successMessage, widget, ...rest } = props
   const { color_scheme: colorScheme } = mobilization
   const { TellAFriend } = props
 
@@ -52,8 +52,8 @@ export const FormFinishMessage = props => {
         <div>
           <FormGroup controlId='whatsapp-text-id' {...whatsappText}>
             <ControlLabel>
-              <i className='fa fa-whatsapp mr1' />
-              WhatsApp
+              <i className='fa fa-whatsapp mr2' style={styles.whatsappControlLabel} />
+              Texto do WhatsApp
             </ControlLabel>
             <FormControl
               rows='4'
@@ -67,7 +67,7 @@ export const FormFinishMessage = props => {
 
       <label className='h5 darkengray caps mb1 block'>Preview</label>
       {finishMessageType.value === 'share' && (
-        <TellAFriend preview mobilization={mobilization} />
+        <TellAFriend preview mobilization={mobilization} widget={widget} />
       )}
       {finishMessageType.value === 'custom' && (
         <div className='widget-finish-message-custom'>
