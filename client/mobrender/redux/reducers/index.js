@@ -7,7 +7,8 @@ import hoverReducer from './hover'
 import uploaderReducer from './uploader'
 import mobilizationsReducer from './mobilizations'
 import dataExportReducer from './data-export'
-// TODO: Move reducer to mobrender module
+
+// Dependency modules
 import templatesReducer from '~client/mobilizations/templates/reducers'
 import pluginsReducer from '~client/mobilizations/widgets/__plugins__/reducers'
 

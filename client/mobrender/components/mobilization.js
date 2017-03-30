@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
 import Block from './block.connected'
-import { Navbar } from '~client/mobilizations/components/navbar'
+import Navbar from './navbar'
 import * as paths from '~client/paths'
 
 class Mobilization extends React.Component {
