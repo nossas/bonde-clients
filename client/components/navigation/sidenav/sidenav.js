@@ -24,9 +24,13 @@ const Sidenav = ({ children, community }) => (
                 <Link to={paths.mobilizations()}>{community.name || 'Bonde'}</Link>
               </div>
               <div className='item-community-change'>
+                <Link to={paths.communityInfo()} className='col col-8'>
+                  <i className='fa fa-cog mr1' />
+                  <span>Configurações</span>
+                </Link>
                 <Link to={paths.communityList()} className='col col-4'>
                   <i className='fa fa-refresh mr1' />
-                  <span>Trocar de comunidade</span>
+                  <span>Trocar</span>
                 </Link>
               </div>
             </div>
