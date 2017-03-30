@@ -1,25 +1,19 @@
 import React, { PropTypes } from 'react'
-import { MenuDesktop, MenuMobile } from './'
+
+import Menu from './menu-items'
 
 const Navbar = props => {
-  const { blocks, editable, ...menuProps } = props
+  const { blocks, editable } = props
 
   const onlyVisibleBlocks = blocks.filter(
     block => editable ? !block.hidden : !block.hidden && !block.menu_hidden
   )
+  const menuProps = { ...props, blocks: onlyVisibleBlocks }
 
   return (
     <div className='absolute col-12 z3'>
-      <MenuDesktop
-        {...menuProps}
-        blocks={onlyVisibleBlocks}
-        editable={editable}
-      />
-      <MenuMobile
-        {...menuProps}
-        blocks={onlyVisibleBlocks}
-        editable={editable}
-      />
+      <Menu {...menuProps} />
+      <Menu {...menuProps} mobile={true} />
     </div>
   )
 }

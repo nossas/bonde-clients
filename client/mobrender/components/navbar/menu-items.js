@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
-import { DropdownMenu } from '~components/dropdown-menu'
-import { NavbarEditionWrapper } from '~components/navigation/navbar'
+
+// Dependency modules
+import { DropdownMenu } from '~client/components/dropdown-menu'
+import { NavbarEditionWrapper } from '~client/components/navigation/navbar'
 
 const MenuItems = ({ blocks, mobile, ...menuProps }) => {
   const items = blocks.map(block => (
@@ -48,4 +50,3 @@ MenuItems.propTypes = {
 }
 
 export default MenuItems
-MenuItems.displayName = 'MenuItems'

@@ -1,10 +1,10 @@
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
-import { Navbar } from '~mobilizations/components/navbar'
+import Navbar from '~client/mobrender/components/navbar'
 
-describe('client/mobilizations/components/navbar/navbar', () => {
+describe('mobrender/navbar', () => {
   let wrapper
   const props = {
     editable: false,
@@ -28,7 +28,7 @@ describe('client/mobilizations/components/navbar/navbar', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<Navbar {...props} />)
+    wrapper = mount(<Navbar {...props} />)
   })
 
   it('renders absolute layout by default', () => {
@@ -36,8 +36,8 @@ describe('client/mobilizations/components/navbar/navbar', () => {
   })
 
   it('should render desktop and mobile version', () => {
-    expect(wrapper.find('MenuDesktop').length).to.equal(1)
-    expect(wrapper.find('MenuMobile').length).to.equal(1)
+    expect(wrapper.find('MenuItems').at(0).props().mobile).to.equal(false)
+    expect(wrapper.find('MenuItems').at(1).props().mobile).to.equal(true)
   })
 
   describe('when is editable', () => {
@@ -47,7 +47,7 @@ describe('client/mobilizations/components/navbar/navbar', () => {
 
     it('should passed to <Menu /> visible blocks', () => {
       const blocks = props.blocks.filter(b => !b.hidden)
-      wrapper.find('Menu').map(menu => {
+      wrapper.find('MenuItems').map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })
     })
@@ -60,7 +60,7 @@ describe('client/mobilizations/components/navbar/navbar', () => {
 
     it('should passed to <Menu /> only visible blocks menu', () => {
       const blocks = props.blocks.filter(b => !b.hidden && !b.menu_hidden)
-      wrapper.find('Menu').map(menu => {
+      wrapper.find('MenuItems').map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })
     })
