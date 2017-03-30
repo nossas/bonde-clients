@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 
+if (require('exenv').canUseDOM) require('./draft-button.scss')
+
 const DraftButton = ({ icon, label, updateKind, ...props }) => (
   <div className='draft-widget-button col col-4 p1'>
     <button className='btn col-12' onClick={() => updateKind(props)}>

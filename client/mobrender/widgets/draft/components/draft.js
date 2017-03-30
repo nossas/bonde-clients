@@ -2,6 +2,8 @@ import React from 'react'
 import DraftButton from './draft-button'
 import widgets from '~client/mobrender/widgets/config'
 
+if (require('exenv').canUseDOM) require('./draft.scss')
+
 const Draft = ({ mobilization, widget, update }) => {
   const updateKind = props => update({...widget, ...props})
   const widgetsConfig = widgets(mobilization, widget).filter(w => w.kind !== 'draft')
