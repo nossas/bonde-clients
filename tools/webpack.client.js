@@ -97,26 +97,30 @@ if (isProd) {
     new AssetsPlugin({ filename: 'assets.json' }),
     new Visualizer({
       filename: './main.stats.html'
-    }),
-    new S3Plugin({
-      // Only upload css and js
-      include: /\.js$|\.css$|\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      // s3Options are required
-      s3Options: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: 'sa-east-1'
-      },
-      s3UploadOptions: {
-        Bucket: s3BucketName,
-        ContentEncoding (fileName) {
-          if (/\.js$|\.css$|\.svg$/.test(fileName)) {
-            return 'gzip'
-          }
-        }
-      }
     })
   )
+  if ('AWS_ACCESS_KEY_ID' in process.env) {
+    plugins.push(
+      new S3Plugin({
+        // Only upload css and js
+        include: /\.js$|\.css$|\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        // s3Options are required
+        s3Options: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+          region: 'sa-east-1'
+        },
+        s3UploadOptions: {
+          Bucket: s3BucketName,
+          ContentEncoding (fileName) {
+            if (/\.js$|\.css$|\.svg$/.test(fileName)) {
+              return 'gzip'
+            }
+          }
+        }
+      })
+    )
+  }
 } else {
   entry.main.push(
     'webpack-hot-middleware/client'
