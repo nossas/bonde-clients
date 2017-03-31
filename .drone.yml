@@ -13,7 +13,7 @@ pipeline:
       - ${DRONE_BRANCH}
     when:
       status: success
-      branch: /(hotfix|release|feature)(-|\/).*/
+      branch: [hotfix-*, release-*, feature-*, develop]
   deploy-staging:
     image: appleboy/drone-ssh
     host: reboo-staging.org
@@ -25,7 +25,7 @@ pipeline:
       - dokku tags:deploy bonde-client ${DRONE_BRANCH}
     when:
       status: success
-      branch: /(hotfix|release|feature)(-|\/).*/
+      branch: [hotfix-*, release-*, feature-*, develop]
   notify:
     image: plugins/slack
     webhook: https://hooks.slack.com/services/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
