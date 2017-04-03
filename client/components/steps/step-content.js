@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import StepButton from './step-button'
 import StepForm from './step-form'
 
+if (require('exenv').canUseDOM) require('./step-content.scss')
+
 
 const cloneStepChildren = (child, props) => {
   if (child.type === StepButton || child.type === StepForm) {
@@ -15,8 +17,8 @@ class StepContent extends Component {
 
   renderIcon () {
     const { isDone, position } = this.props
-    if (isDone) return <i className='fa fa-check' />
-    else return <span className='circle'>{position}</span>
+    if (isDone) return <span className='ic-step bg-pagenta'><i className='fa fa-check' /></span>
+    else return <span className='ic-step bg-pagenta'>{position}</span>
   }
 
   render () {
@@ -24,10 +26,14 @@ class StepContent extends Component {
 
     return (
       <div className='step bg-white'>
+        <div className='header'>
         {title ? <h3>{this.renderIcon()}{title}</h3> : null}
-        {children && children.length ?
-          children.map(child => cloneStepChildren(child, { onNextStep })) :
-          cloneStepChildren(children, { onNextStep })}
+        </div>
+        <div className='content'>
+          {children && children.length ?
+            children.map(child => cloneStepChildren(child, { onNextStep })) :
+            cloneStepChildren(children, { onNextStep })}
+        </div>
       </div>
     )
   }
