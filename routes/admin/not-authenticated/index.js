@@ -11,7 +11,8 @@ export default store => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./account-login').default(store),
-        require('./account-register').default(store)
+        require('./account-register').default(store),
+        require('./playground-js').default(store)
       ])
     })
   }
