@@ -110,6 +110,8 @@ describe('client/components/navigation/sidebar/sidebar', () => {
     })
 
     describe('when is not editing a mobilization', () => {
+      let itemIndex = -1
+      const incrementIndex = () => { itemIndex++ }
       beforeAll(() => {
         wrapper.setProps({ ...props, mobilization: undefined })
       })
@@ -118,63 +120,88 @@ describe('client/components/navigation/sidebar/sidebar', () => {
       })
 
       describe('community settings navbar items', () => {
+        describe('- minhas mobilizações', () => {
+          beforeAll(incrementIndex)
+
+          it('should render with its text properly', () => {
+            const text = 'Minhas Mobilizações'
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
+          })
+          it('should render with its icon properly', () => {
+            const icon = 'list'
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
+          })
+          it('should render with its href properly', () => {
+            const href = paths.mobilizations()
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
+          })
+        })
+
         describe('- informações', () => {
+          beforeAll(incrementIndex)
+
           it('should render with its text properly', () => {
             const text = 'Informações'
-            expect(wrapper.find('SidenavListItem').at(0).props().text).to.be.equal(text)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
           })
           it('should render with its icon properly', () => {
             const icon = 'info-circle'
-            expect(wrapper.find('SidenavListItem').at(0).props().icon).to.be.equal(icon)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
           })
           it('should render with its href properly', () => {
             const href = paths.communityInfo()
-            expect(wrapper.find('SidenavListItem').at(0).props().href).to.be.equal(href)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
           })
         })
 
         describe('- mailchimp', () => {
+          beforeAll(incrementIndex)
+
           it('should render with its text properly', () => {
             const text = 'Mailchimp'
-            expect(wrapper.find('SidenavListItem').at(1).props().text).to.be.equal(text)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
           })
           it('should render with its icon properly', () => {
             const icon = 'envelope-o'
-            expect(wrapper.find('SidenavListItem').at(1).props().icon).to.be.equal(icon)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
           })
           it('should render with its href properly', () => {
             const href = paths.communityMailchimp()
-            expect(wrapper.find('SidenavListItem').at(1).props().href).to.be.equal(href)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
           })
         })
 
         describe('- recebedor', () => {
+          beforeAll(incrementIndex)
+
           it('should render with its text properly', () => {
             const text = 'Recebedor'
-            expect(wrapper.find('SidenavListItem').at(2).props().text).to.be.equal(text)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
           })
           it('should render with its icon properly', () => {
             const icon = 'money'
-            expect(wrapper.find('SidenavListItem').at(2).props().icon).to.be.equal(icon)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
           })
           it('should render with its href properly', () => {
             const href = paths.communityRecipient()
-            expect(wrapper.find('SidenavListItem').at(2).props().href).to.be.equal(href)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
           })
         })
 
         describe('- relatório', () => {
+          beforeAll(incrementIndex)
+
           it('should render with its text properly', () => {
             const text = 'Relatório'
-            expect(wrapper.find('SidenavListItem').at(3).props().text).to.be.equal(text)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
           })
           it('should render with its icon properly', () => {
             const icon = 'file-excel-o'
-            expect(wrapper.find('SidenavListItem').at(3).props().icon).to.be.equal(icon)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
           })
           it('should render with its href properly', () => {
             const href = paths.communityReport()
-            expect(wrapper.find('SidenavListItem').at(3).props().href).to.be.equal(href)
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
           })
         })
       })

@@ -10,6 +10,11 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
       {!mobilization ? (
         <SidenavList className='bg-lighten-2'>
           <SidenavListItem
+            text='Minhas Mobilizações'
+            icon='list'
+            href={paths.mobilizations()}
+          />
+          <SidenavListItem
             text='Informações'
             icon='info-circle'
             href={paths.communityInfo()}
