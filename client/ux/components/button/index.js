@@ -8,7 +8,7 @@ import { Link } from 'react-router'
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 // TODO: Change to style component
-const basscss = 'btn white bg-pagenta caps p2 rounded h4'
+const basscss = 'ux--button btn white bg-pagenta caps p2 rounded h4'
 
 const Button = ({ children, type, disabled, to, onClick }) => {
 
