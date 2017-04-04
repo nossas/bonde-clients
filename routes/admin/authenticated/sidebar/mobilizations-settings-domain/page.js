@@ -13,14 +13,12 @@ import {
 import { SettingsForm } from '~client/ux/components'
 import { isValidDomain } from '~client/utils/validation-helper'
 
-
 const MobilizationsSettingsDomainPage = ({
   mobilization,
   location,
   fields: { custom_domain: customDomain },
   ...formProps
 }) => {
-
   if (!mobilization.custom_domain) {
     formProps.buttonText = 'Lançar mobilização'
   } else {

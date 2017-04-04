@@ -1,28 +1,16 @@
 import React from 'react'
-import { SettingsMenu } from '~client/mobilizations/components'
 
-import {
-  FormRedux,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from '~client/components/forms'
-import {
-  SettingsPageLayout,
-  SettingsPageContentLayout
-} from '~client/components/layout'
+import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { FlatForm } from '~client/ux/components'
 import { isValidDomain } from '~client/utils/validation-helper'
-import { PageCentralizedStepsLayout } from '~client/mobilizations/components'
+import { PageCentralizedLayout, PageCentralizedLayoutTitle } from '~client/components/layout'
 
-
-const MobilizationsSettingsDomainPage = ({
+const MobilizationsLaunchPage = ({
   mobilization,
   location,
   fields: { custom_domain: customDomain },
   ...formProps
 }) => {
-
   if (!mobilization.custom_domain) {
     formProps.buttonText = 'Lançar mobilização'
   } else {
@@ -30,20 +18,20 @@ const MobilizationsSettingsDomainPage = ({
   }
 
   return (
-    <PageCentralizedStepsLayout
-      title='Lançando sua mobilização'
-      {...{ mobilization, location }}
-    >
+    <PageCentralizedLayout>
+      <PageCentralizedLayoutTitle>
+        Lançando sua mobilização
+      </PageCentralizedLayoutTitle>
       <FlatForm {...{ formProps }} buttonText='Continuar'>
-        <h2 className='center bold m0 pt3 pb1'>
+        <h2 className='center bold m0 pb1'>
           Configure seu domínio
         </h2>
-        <p className='h5 form-group'>
+        <p className='h5'>
           Aqui você pode personalizar o endereço da sua mobilização caso já tenha um domínio próprio.
           Por exemplo, se você já comprou www.nomedoseuprojeto.com.br, você pode usá-lo para este BONDE.
           Demais, né?
         </p>
-        <FormGroup controlId='customDomain' {...customDomain}>
+        <FormGroup controlId='customDomain' className='mxn3' {...customDomain}>
           <ControlLabel>Domínio personalizado</ControlLabel>
           <FormControl
             type='text'
@@ -51,7 +39,7 @@ const MobilizationsSettingsDomainPage = ({
             style={{ height: 40 }}
           />
         </FormGroup>
-        <div className='h5 form-group'>
+        <div className='h5'>
           <p>
             <strong>Não esqueça</strong>: você vai precisar configurar este domínio no servidor de
             registro para que ele redirecione a URL para a página da sua mobilização no BONDE.
@@ -79,7 +67,7 @@ const MobilizationsSettingsDomainPage = ({
           </p>
         </div>
       </FlatForm>
-    </PageCentralizedStepsLayout>
+    </PageCentralizedLayout>
   )
 }
 
@@ -93,4 +81,4 @@ export const validate = values => {
   return errors
 }
 
-export default MobilizationsSettingsDomainPage
+export default MobilizationsLaunchPage
