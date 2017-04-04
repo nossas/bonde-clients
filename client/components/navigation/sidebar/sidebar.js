@@ -41,7 +41,7 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
             <SidenavListItem
               text='PUBLICAR BONDE'
               icon='rocket'
-              href={paths.customDomainMobilization(mobilization.id)}
+              href={paths.mobilizationLaunch(mobilization.id)}
               className='launch-button rounded'
             />
           ) : (
