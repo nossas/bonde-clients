@@ -1,5 +1,5 @@
 export { default as MobilizationBasicsForm } from './mobilization-basics-form'
 export { default as SettingsMenu } from './settings-menu'
-export { default as PageCentralizedStepsLayout } from './page-centralized-steps-layout'
+export { default as PageCentralizedStepsLayout } from './page-centralized-steps-layout/index'
 export { default as PageTabLayout } from './page-tab-layout'
 export { default as PageHeader } from './page-header'

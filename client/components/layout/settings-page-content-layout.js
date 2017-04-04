@@ -10,6 +10,7 @@ const SettingsPageContentLayout = ({ children, className, containerClassName, wr
   >
     <div
       className={classnames(
+        'settings-page-content-layout-container',
         'clearfix',
         containerClassName,
         wrapClassName || 'md-col-12 lg-col-9'
