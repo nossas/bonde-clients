@@ -4,7 +4,8 @@ import { reduxForm } from 'redux-form'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import Page, { fields, validate } from './page'
+import { fields, validate } from '~client/mobilizations/components/form-domain'
+import Page from './page'
 
 const redial = {
   fetch: ({ dispatch, getState, params }) => {
