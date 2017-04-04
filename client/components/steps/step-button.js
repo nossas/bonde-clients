@@ -15,6 +15,7 @@ const StepButton = ({ children, onClick, onNextStep, ...props }) => (
 )
 
 StepButton.propTypes = {
+  onClick: PropTypes.func,
   onNextStep: PropTypes.func
 }
 

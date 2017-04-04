@@ -28,7 +28,7 @@ class StepsContainer extends Component {
           if (position <= this.state.step) {
             return React.cloneElement(child, {
               position,
-              isDone: position < this.state.step,
+              step: this.state.step,
               onNextStep: () => this.nextStep(position)
             })
           }

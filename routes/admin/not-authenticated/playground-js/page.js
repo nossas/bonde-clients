@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { StepsContainer, StepContent, StepButton } from '~client/components/steps'
-import StepForm from '~client/components/steps/step-form'
-
+import { StepsContainer, StepContent, StepForm, StepButton } from '~client/components/steps'
 import { ControlLabel, FormControl, FormGroup } from '~client/components/forms'
 import { Button } from '~client/ux/components'
 

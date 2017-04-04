@@ -16,13 +16,13 @@ const cloneStepChildren = (child, props) => {
 class StepContent extends Component {
 
   renderIcon () {
-    const { isDone, position } = this.props
-    if (isDone) return <span className='ic-step bg-pagenta'><i className='fa fa-check' /></span>
+    const { step, position } = this.props
+    if (position < step) return <span className='ic-step bg-pagenta'><i className='fa fa-check' /></span>
     else return <span className='ic-step bg-pagenta'>{position}</span>
   }
 
   render () {
-    const { children, position, title, onNextStep, isDone } = this.props
+    const { children, position, title, onNextStep } = this.props
 
     return (
       <div className='step bg-white'>
@@ -41,7 +41,8 @@ class StepContent extends Component {
 
 StepContent.propTypes = {
   title: PropTypes.string,
-  position: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  position: PropTypes.number,
+  step: PropTypes.number,
   onNextStep: PropTypes.func
 }
 
