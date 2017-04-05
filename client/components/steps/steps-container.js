@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import StepContent from './step-content'
-
 
 class StepsContainer extends Component {
-
   constructor (props) {
     super(props)
     this.state = { step: 1 }
