@@ -31,6 +31,8 @@ class StepContent extends Component {
     const {
       children,
       title,
+      styleFromParent,
+      style,
       onNextStep,
       propsPropagationDefaultWhitelist,
       propsPropagationWhitelist
@@ -39,7 +41,10 @@ class StepContent extends Component {
     const componentsWhitelist = [...propsPropagationDefaultWhitelist, ...propsPropagationWhitelist]
 
     return (
-      <div className='components--step-content bg-white'>
+      <div
+        className='components--step-content bg-white'
+        style={{ ...styleFromParent, ...style }}
+      >
         {!title ? null : (
           <div className='header'>
             <h3>{this.renderIcon()}{title}</h3>
@@ -61,11 +66,15 @@ StepContent.propTypes = {
   position: PropTypes.number,
   step: PropTypes.number,
   onNextStep: PropTypes.func,
+  styleFromParent: PropTypes.object.isRequired,
+  style: PropTypes.object,
   propsPropagationDefaultWhitelist: PropTypes.array.isRequired,
   propsPropagationWhitelist: PropTypes.array
 }
 
 StepContent.defaultProps = {
+  styleFromParent: {},
+  style: {},
   propsPropagationDefaultWhitelist: [StepButton, StepForm],
   propsPropagationWhitelist: [],
   validate: () => true

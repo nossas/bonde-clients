@@ -12,6 +12,28 @@ class StepsContainerStack extends Component {
       this.props.pointerChildrenProps
   }
 
+  componentWillMount () {
+    const { children } = this.props
+
+    //
+    // Check if the childrens validation pass. (children: <StepContent />.validate)
+    // If it pass, jump to the next step.
+    // If not, define it as current.
+    //
+    children && children.length && children.map((child, index) => {
+      const { step } = this.state
+      const { props: { validate } } = child
+      const position = index + 1
+
+      const isCurrent = step === position
+      const isLast = children.length === position
+
+      if (isCurrent && !isLast && validate()) {
+        this.setState({ ...this.state, step: position + 1 })
+      }
+    })
+  }
+
   render () {
     const {
       ComponentPointerContainer,
@@ -38,18 +60,18 @@ class StepsContainerStack extends Component {
 
         {/* Render StepContent with position */}
         {children && children.length ? children.map((child, index) => {
+          const { step } = this.state
           const position = index + 1
-          if (position <= this.state.step) {
-            return React.cloneElement(child, {
-              position,
-              step: this.state.step,
-              onNextStep: () => {
-                const { props: { validate } } = child
-                if (this.state.step === position && validate()) {
-                  this.setState({ step: this.state.step + 1 })
-                }
-              }
-            })
+          const isCurrentStep = position === step
+          const incrementStep = () => this.setState({ step: step + 1 })
+
+          if (position <= step) {
+            const { validate } = child.props
+            const styleFromParent = { display: isCurrentStep ? 'block' : 'none' }
+            const onNextStep = () => isCurrentStep && validate() && incrementStep()
+            const propagateProps = { position, step, styleFromParent, onNextStep }
+
+            return React.cloneElement(child, propagateProps)
           }
         }) : children ? React.cloneElement(children, { position: 1 }) : null}
       </div>

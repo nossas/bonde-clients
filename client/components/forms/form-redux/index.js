@@ -14,10 +14,6 @@ class FormRedux extends Component {
   componentWillReceiveProps (nextProps) {
     const { onFinishSubmit } = this.props
 
-    console.log('this.props.submitting', this.props.submitting)
-    console.log('!nextProps.submitting', !nextProps.submitting)
-    console.log('!nextProps.submitFailed', !nextProps.submitFailed)
-
     if (this.props.submitting && !nextProps.submitting && !nextProps.submitFailed) {
       this.setState({ submitted: true })
       onFinishSubmit && onFinishSubmit()
