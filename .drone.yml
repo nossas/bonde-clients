@@ -18,6 +18,7 @@ pipeline:
     image: appleboy/drone-ssh
     host: reboo-staging.org
     username: ubuntu
+    command_timeout: 120
     port: 22
     script:
       - sudo docker pull nossas/bonde-client:${DRONE_BRANCH}
