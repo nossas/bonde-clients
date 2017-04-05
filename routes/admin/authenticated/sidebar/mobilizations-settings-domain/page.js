@@ -19,8 +19,8 @@ const MobilizationsSettingsDomainPage = ({ mobilization, location, fields, ...fo
       <SettingsMenu mobilization={mobilization} location={location} />
       <SettingsPageContentLayout>
         <FormDomain
+          {...formProps}
           FormComponent={SettingsForm}
-          formProps={formProps}
           fields={fields}
           mobilization={mobilization}
         />

@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import { fields, validate } from '~client/mobilizations/components/form-domain'
+import { fields, validate as abstractValidate } from '~client/mobilizations/components/form-domain'
 import Page from './page'
 
 const redial = {
@@ -29,6 +29,16 @@ const mapStateToProps = state => {
 
 const mapActionCreatorsToProps = {
   submit: MobActions.asyncUpdateMobilization
+}
+
+const validate = values => {
+  const errors = abstractValidate(values)
+  if (Object.keys(errors).length) return errors
+
+  if (!values.custom_domain) {
+    errors.custom_domain = 'Campo obrigatório'
+  }
+  return errors
 }
 
 export default provideHooks(redial)(

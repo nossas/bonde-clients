@@ -5,9 +5,9 @@ import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 
 const FormDomain = ({
   FormComponent,
-  formProps,
   fields: { custom_domain: customDomain },
-  mobilization
+  mobilization,
+  ...formProps
 }) => (
   <FormComponent {...formProps} buttonText='Continuar'>
     <p className='h5'>

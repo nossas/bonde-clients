@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { FlatForm } from '~client/ux/components'
 import { PageCentralizedLayout, PageCentralizedLayoutTitle } from '~client/components/layout'
-import { FormDomain } from '~client/mobilizations/components'
+import { PageDomain } from '~client/mobilizations/components'
 
-const MobilizationsLaunchPage = ({ mobilization, fields, ...formProps }) => {
+const MobilizationsLaunchPage = props => {
+  const { mobilization, fields, ...formProps } = props
+
   if (!mobilization.custom_domain) {
     formProps.buttonText = 'Lançar mobilização'
   } else {
@@ -19,12 +20,7 @@ const MobilizationsLaunchPage = ({ mobilization, fields, ...formProps }) => {
         Lançando sua mobilização
       </PageCentralizedLayoutTitle>
 
-      <FormDomain
-        FormComponent={FlatForm}
-        formProps={formProps}
-        fields={fields}
-        mobilization={mobilization}
-      />
+      <PageDomain {...props} {...formProps} />
     </PageCentralizedLayout>
   )
 }
