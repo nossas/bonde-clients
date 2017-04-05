@@ -5,9 +5,7 @@ import { FlatForm } from '~client/ux/components'
 import { StepsContainerStack, StepContent, StepButton, StepForm } from '~client/components/steps'
 import { FormDomain } from '~client/mobilizations/components'
 
-const PageDomain = ({ mobilization, fields, ...formProps }) => {
-  console.log('[client/mobilizations/components/page-domain.js] formProps', formProps)
-  return (
+const PageDomain = ({ mobilization, fields, ...formProps }) => (
   <StepsContainerStack
     ComponentPointerContainer={Tabs}
     ComponentPointerChildren={Tab}
@@ -25,7 +23,10 @@ const PageDomain = ({ mobilization, fields, ...formProps }) => {
       />
     </StepContent>
 
-    <StepContent title='Insira o domínio desejado'>
+    <StepContent
+      title='Insira o domínio desejado'
+      validate={() => false}
+    >
       <div>
         <p>1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)</p>
         <p>2. Encontre a página de <b>gerenciador de DNS</b>, e altere os <b>nomes de servidor</b> para os servidores do Bonde:</p>
@@ -49,6 +50,6 @@ const PageDomain = ({ mobilization, fields, ...formProps }) => {
       <StepButton>Continuar</StepButton>
     </StepContent>
   </StepsContainerStack>
-)}
+)
 
 export default PageDomain
