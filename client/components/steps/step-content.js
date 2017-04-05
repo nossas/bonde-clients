@@ -67,7 +67,8 @@ StepContent.propTypes = {
 
 StepContent.defaultProps = {
   propsPropagationDefaultWhitelist: [StepButton, StepForm],
-  propsPropagationWhitelist: []
+  propsPropagationWhitelist: [],
+  validate: () => true
 }
 
 export default StepContent

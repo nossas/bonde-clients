@@ -6,12 +6,6 @@ class StepsContainerStack extends Component {
     this.state = { step: 1 }
   }
 
-  nextStep (index) {
-    if (this.state.step === index) {
-      this.setState({ step: this.state.step + 1 })
-    }
-  }
-
   hasPointer () {
     return this.props.ComponentPointerContainer &&
       this.props.ComponentPointerChildren &&
@@ -49,7 +43,12 @@ class StepsContainerStack extends Component {
             return React.cloneElement(child, {
               position,
               step: this.state.step,
-              onNextStep: () => this.nextStep(position)
+              onNextStep: () => {
+                const { props: { validate } } = child
+                if (this.state.step === position && validate()) {
+                  this.setState({ step: this.state.step + 1 })
+                }
+              }
             })
           }
         }) : children ? React.cloneElement(children, { position: 1 }) : null}
