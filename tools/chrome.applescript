@@ -21,7 +21,15 @@ on run argv
       set theTabIndex to 0
       repeat with theTab in every tab of theWindow
         set theTabIndex to theTabIndex + 1
-        if theTab's URL is theURL then
+
+        -- Find by tab URL regex match
+        set tabURL to theTab's URL as string
+        set escaped to do shell script "echo '" & theURL & "' | sed 's/\\//\\\\\\//g'"
+        set regex to "echo '" & tabURL & "' | sed 's/.*" & escaped & ".*/*match*(&)/'" as string
+        set execShell to do shell script regex
+        set match to execShell starts with "*match*"
+
+        if match then
           set found to true
           exit repeat
         end if
