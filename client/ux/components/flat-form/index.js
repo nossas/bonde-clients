@@ -15,7 +15,7 @@ const FlatForm = ({ formClassNames, children, titleText, buttonText, ...formProp
     nosubmit
     className={classnames('ux--flat-form', formClassNames)}
   >
-    <h2 className='center bold m0 pb1'>
+    <h2 className='center bold m0 mb3'>
       {titleText}
     </h2>
     {children}

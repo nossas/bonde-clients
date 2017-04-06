@@ -1,6 +1,5 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
@@ -18,31 +17,8 @@ const redial = {
   }
 }
 
-const mapStateToProps = state => {
-  const mobilization = MobSelectors(state).getMobilization()
-  return {
-    initialValues: mobilization,
-    mobilization
-  }
-}
+const mapStateToProps = state => ({
+  mobilization: MobSelectors(state).getMobilization()
+})
 
-const mapActionCreatorsToProps = {
-  submit: MobActions.asyncUpdateMobilization
-}
-
-const fields = [
-  'id',
-  'facebook_share_image',
-  'facebook_share_title',
-  'facebook_share_description',
-  'twitter_share_text'
-]
-
-export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({
-      form: 'mobilizationSharingForm',
-      fields
-    })(Page)
-  )
-)
+export default provideHooks(redial)(connect(mapStateToProps)(Page))

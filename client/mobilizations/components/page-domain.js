@@ -4,7 +4,7 @@ import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { FlatForm } from '~client/ux/components'
-import { StepsContainerStack, StepContent, StepButton } from '~client/components/steps'
+import { StepsContainerStack, StepContent } from '~client/components/steps'
 import { FormDomain, FormShare } from '~client/mobilizations/components'
 
 const FormDomainImplementation = FormDomain({
@@ -22,6 +22,30 @@ const FormDomainImplementation = FormDomain({
   mapActionCreatorsToProps: { submit: MobActions.asyncUpdateMobilization }
 })
 
+const FormShareImplementation = FormShare(
+  state => ({ initialValues: MobSelectors(state).getMobilization() }),
+  { submit: MobActions.asyncUpdateMobilization },
+  values => {
+    const errors = {}
+    if (!values.id) {
+      errors.id = 'Campo obrigatório'
+    }
+    if (!values.facebook_share_image) {
+      errors.facebook_share_image = 'Campo obrigatório'
+    }
+    if (!values.facebook_share_title) {
+      errors.facebook_share_title = 'Campo obrigatório'
+    }
+    if (!values.facebook_share_description) {
+      errors.facebook_share_description = 'Campo obrigatório'
+    }
+    if (!values.twitter_share_text) {
+      errors.twitter_share_text = 'Campo obrigatório'
+    }
+    return errors
+  }
+)
+
 const PageDomain = ({ mobilization, ...formProps }) => {
   return (
     <StepsContainerStack
@@ -30,7 +54,7 @@ const PageDomain = ({ mobilization, ...formProps }) => {
       pointerChildrenProps={({ index, step }) => ({ isActive: index === step, index })}
     >
       <StepContent
-        propsPropagationWhitelist={[FormDomain]}
+        propsPropagationWhitelist={[FormDomainImplementation]}
         validate={() => mobilization.custom_domain}
       >
         <FormDomainImplementation
@@ -41,36 +65,15 @@ const PageDomain = ({ mobilization, ...formProps }) => {
       </StepContent>
 
       <StepContent
-        title='Insira o domínio desejado'
+        propsPropagationWhitelist={[FormShareImplementation]}
         validate={() => false}
       >
-        {/*<FormShare
+        <FormShareImplementation
           {...formProps}
           FormComponent={FlatForm}
-          fields={fields}
-          mobilization={mobilization}
-        />*/}
-        <div>
-          <p>1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)</p>
-          <p>2. Encontre a página de <b>gerenciador de DNS</b>, e altere os <b>nomes de servidor</b> para os servidores do Bonde:</p>
-          <br />
-          <p>ns1.1098.19872.0871.98</p>
-          <p>ns2.1098.19872.0871.98</p>
-          <p>ns3.1098.19872.0871.98</p>
-        </div>
-        <StepButton>Continuar</StepButton>
-      </StepContent>
-
-      <StepContent title='Altere os servidores no seu provedor DNS'>
-        <div>
-          <p>1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)</p>
-          <p>2. Encontre a página de <b>gerenciador de DNS</b>, e altere os <b>nomes de servidor</b> para os servidores do Bonde:</p>
-          <br />
-          <p>ns1.1098.19872.0871.98</p>
-          <p>ns2.1098.19872.0871.98</p>
-          <p>ns3.1098.19872.0871.98</p>
-        </div>
-        <StepButton>Continuar</StepButton>
+          titleText='Configure as informações de compartilhamento'
+          formClassNames='mobilization-launch--form-share'
+        />
       </StepContent>
     </StepsContainerStack>
   )

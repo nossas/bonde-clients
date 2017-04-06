@@ -5,6 +5,20 @@
 }
 
 .ux--flat-form .form-group {
-  margin-left: -2rem !important;
-  margin-right: -2rem !important;
+  border: none !important;
+}
+
+.ux--flat-form .form-group .label {
+  color: #aaa;
+}
+
+.ux--flat-form .separator {
+  display: block;
+  width: 500px;
+  height: 1px;
+  background-color: #eee;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
 }

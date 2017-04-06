@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
 import { isValidDomain } from '~client/utils/validation-helper'
@@ -53,6 +53,14 @@ const FormDomain = ({
     </div>
   </FormComponent>
 )
+
+FormDomain.propTypes = {
+  FormComponent: PropTypes.node.isRequired,
+  fields: PropTypes.shape({
+    custom_domain: PropTypes.object.isRequired
+  }).isRequired,
+  mobilization: PropTypes.object.isRequired
+}
 
 export const fields = ['id', 'custom_domain']
 
