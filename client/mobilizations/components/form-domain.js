@@ -1,4 +1,5 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
 
 import { isValidDomain } from '~client/utils/validation-helper'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
@@ -9,7 +10,7 @@ const FormDomain = ({
   mobilization,
   ...formProps
 }) => (
-  <FormComponent {...formProps} buttonText='Continuar'>
+  <FormComponent {...formProps}>
     <p className='h5'>
       Aqui você pode personalizar o endereço da sua mobilização caso já tenha um domínio próprio.
       Por exemplo, se você já comprou www.nomedoseuprojeto.com.br, você pode usá-lo para este BONDE.
@@ -55,7 +56,7 @@ const FormDomain = ({
 
 export const fields = ['id', 'custom_domain']
 
-export const validate = values => {
+export const abstractValidate = values => {
   const errors = {}
   if (values.custom_domain && !isValidDomain(values.custom_domain)) {
     errors.custom_domain = 'Informe um domínio válido'
@@ -63,4 +64,16 @@ export const validate = values => {
   return errors
 }
 
-export default FormDomain
+export default ({ customValidate, mapStateToProps, mapActionCreatorsToProps }) => reduxForm({
+  form: 'mobilizationLaunchForm',
+  fields,
+  validate: values => {
+    // Default validation
+    let errors = abstractValidate(values)
+    if (Object.keys(errors).length) return errors
+
+    // Custom injected validation
+    errors = customValidate ? customValidate(values) : {}
+    return errors
+  }
+}, mapStateToProps, mapActionCreatorsToProps)(FormDomain)

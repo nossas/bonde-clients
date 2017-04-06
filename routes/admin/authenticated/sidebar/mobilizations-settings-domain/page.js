@@ -1,28 +1,28 @@
 import React from 'react'
 
-import {
-  SettingsPageLayout,
-  SettingsPageContentLayout
-} from '~client/components/layout'
+import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import MobSelectors from '~client/mobrender/redux/selectors'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 import { SettingsForm } from '~client/ux/components'
 import { FormDomain, SettingsMenu } from '~client/mobilizations/components'
 
-const MobilizationsSettingsDomainPage = ({ mobilization, location, fields, ...formProps }) => {
-  if (!mobilization.custom_domain) {
-    formProps.buttonText = 'Lançar mobilização'
-  } else {
-    formProps.successMessage = `${mobilization.name} lançada com sucesso.`
-  }
+const FormDomainImplementation = FormDomain({
+  mapStateToProps: state => {
+    const mobilization = MobSelectors(state).getMobilization()
+    return { initialValues: mobilization, mobilization }
+  },
+  mapActionCreatorsToProps: { submit: MobActions.asyncUpdateMobilization }
+})
 
+const MobilizationsSettingsDomainPage = ({ location, mobilization, ...formProps }) => {
   return (
     <SettingsPageLayout>
       <SettingsMenu mobilization={mobilization} location={location} />
       <SettingsPageContentLayout>
-        <FormDomain
+        <FormDomainImplementation
           {...formProps}
           FormComponent={SettingsForm}
-          fields={fields}
-          mobilization={mobilization}
+          successMessage='Dados de domínio salvos com sucesso'
         />
       </SettingsPageContentLayout>
     </SettingsPageLayout>

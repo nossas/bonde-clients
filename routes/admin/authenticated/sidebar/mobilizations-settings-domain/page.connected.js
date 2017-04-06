@@ -1,10 +1,8 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import { fields, validate } from '~client/mobilizations/components/form-domain'
 import Page from './page'
 
 const redial = {
@@ -19,20 +17,10 @@ const redial = {
   }
 }
 
-const mapStateToProps = state => {
-  const mobilization = MobSelectors(state).getMobilization()
-  return {
-    initialValues: mobilization,
-    mobilization
-  }
-}
-
-const mapActionCreatorsToProps = {
-  submit: MobActions.asyncUpdateMobilization
-}
+const mapStateToProps = state => ({
+  mobilization: MobSelectors(state).getMobilization()
+})
 
 export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({ form: 'mobilizationSettingsDomainForm', fields, validate })(Page)
-  )
+  connect(mapStateToProps)(Page)
 )
