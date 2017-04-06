@@ -47,16 +47,20 @@ const FormShareImplementation = FormShare(
 )
 
 const PageDomain = ({ mobilization, ...formProps }) => {
+  const stepDomainValidation = () => mobilization.custom_domain
+  const stepShareValidation = () => false
+
   return (
     <StepsContainerStack
       ComponentPointerContainer={Tabs}
       ComponentPointerChildren={Tab}
       pointerChildrenProps={({ index, step }) => ({ isActive: index === step, index })}
+      progressValidations={[
+        stepDomainValidation,
+        stepShareValidation
+      ]}
     >
-      <StepContent
-        propsPropagationWhitelist={[FormDomainImplementation]}
-        validate={() => mobilization.custom_domain}
-      >
+      <StepContent>
         <FormDomainImplementation
           {...formProps}
           FormComponent={FlatForm}
@@ -64,10 +68,7 @@ const PageDomain = ({ mobilization, ...formProps }) => {
         />
       </StepContent>
 
-      <StepContent
-        propsPropagationWhitelist={[FormShareImplementation]}
-        validate={() => false}
-      >
+      <StepContent>
         <FormShareImplementation
           {...formProps}
           FormComponent={FlatForm}
