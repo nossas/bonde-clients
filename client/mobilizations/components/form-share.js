@@ -28,7 +28,6 @@ const FormShare = ({
       <FormGroup
         contorlId='facebookShareImage'
         className='facebook-share-image col col-5'
-        style={{ paddingRight: '.7rem' }}
         {...facebookShareImage}
       >
         <ControlLabel>Imagem</ControlLabel>
