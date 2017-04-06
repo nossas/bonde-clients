@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 
-import DefaultServerConfig from '~server/config'
+import serverConfig from '~server/config'
 import { FormGroup, ControlLabel, FormControl, UploadImageField } from '~client/components/forms'
 
 const FormShare = ({
@@ -15,59 +15,37 @@ const FormShare = ({
   ...formProps
 }) => (
   <FormComponent {...formProps}>
-    <div className='h5 caps bold mb2 inline'>
-      <i className='fa fa-facebook-square align-middle' style={{ fontSize: 32 }} />
-      <span className='align-middle pl2 h6'>Share de Facebook</span>
+    <div className='h6 caps bold mb2 inline'>
+      <i className='fa fa-facebook-square align-middle' style={{ color: '#3b5998' }} />
+      <span className='align-middle pl2'>Share de Facebook</span>
     </div>
     <p className='mb2 lightgray'>
       Configure o post que será publicado no Facebook sempre que alguém compartilhar a ação.
       É importante que esses textos sejam cativantes e curtos para não aparecerem cortados. :)
     </p>
 
-    <div className='col-12'>
+    <div className='clearfix col-12'>
       <FormGroup
         contorlId='facebookShareImage'
-        className='form-group col col-5 mb3'
+        className='facebook-share-image col col-5'
         style={{ paddingRight: '.7rem' }}
         {...facebookShareImage}
       >
         <ControlLabel>Imagem</ControlLabel>
-        <div
-          className='border border-gray94 rounded p2 bg-white center relative overflow-hidden'
-          style={{ height: '220px' }}
-        >
-          <div className='clearfix'>
-            {facebookShareImage ? (
-              <div
-                className='bg-cover square'
-                style={{ backgroundImage: `url(${facebookShareImage.value})` }}
-              />
-            ) : (
-              <div className='square-float'>
-                <i className='fa fa-image silver mt2 mb1' style={{ fontSize: '5em' }} />
-              </div>
-            )}
-            <div className={facebookShareImage ? 'hide' : null}>
-              <div className='mb1 gray'>Sua imagem deve ter 470x270 pixels</div>
-            </div>
-            <div className='overflow-hidden'>
-              <UploadImageField
-                theme='classic'
-                signingUrl={`${DefaultServerConfig.apiUrl}/uploads`}
-              />
-            </div>
-          </div>
-        </div>
+        <UploadImageField signingUrl={`${serverConfig.apiUrl}/uploads`} />
       </FormGroup>
 
-      <div className='col col-7'>
+      <div className='facebook-share-title-container col col-7'>
         <FormGroup
           {...facebookShareTitle}
           controlId='facebookShareTitle'
+          className='facebook-share-title'
           style={{ paddingLeft: '0' }}
         >
           <ControlLabel className='ml1' maxLength={70}>Título do post</ControlLabel>
           <FormControl
+            componentClass='textarea'
+            rows={2}
             maxLength={70}
             placeholder='Um título direto que passe a ideia da sua mobilização'
           />
@@ -75,13 +53,14 @@ const FormShare = ({
 
         <FormGroup
           controlId='facebookShareDescription'
+          className='facebook-share-description'
           style={{ paddingLeft: '0' }}
           {...facebookShareDescription}
         >
           <ControlLabel className='ml1' maxLength={90}>Subtítulo do post</ControlLabel>
           <FormControl
             componentClass='textarea'
-            rows={7}
+            rows={4}
             maxLength={90}
             placeholder='Complete a informação do título e chame o leitor para a mobilização'
           />
@@ -91,17 +70,20 @@ const FormShare = ({
 
     <div className='separator' />
 
-    <div className='col col-12'>
-      <div className='h5 caps bold mb2 inline'>
-        <i className='fa fa-twitter  align-middle' style={{ fontSize: 32 }} />
-        <span className='align-middle pl2 h6'>Share de Twitter</span>
+    <div className='clearfix col col-12'>
+      <div className='h6 caps bold mb2 inline'>
+        <i className='fa fa-twitter align-middle' style={{ color: '#1da1f2' }} />
+        <span className='align-middle pl2'>Share de Twitter</span>
       </div>
       <p className='mb2 lightgray'>
         Configure a mensagem que será publicada no Twitter
         sempre que alguém compartilhar sua mobilização.
       </p>
 
-      <FormGroup controlId='twitterShareText' {...twitterShareText}>
+      <FormGroup
+        controlId='twitterShareText' {...twitterShareText}
+        className='twitter-share-text'
+      >
         <ControlLabel maxLength={140}>Texto do Tweet</ControlLabel>
         <FormControl
           componentClass='textarea'

@@ -21,9 +21,11 @@ const FormDomain = ({
       <FormControl
         type='text'
         placeholder='www.meudominio.com.br'
-        style={{ height: 40 }}
       />
     </FormGroup>
+
+    <div className='separator' />
+
     <div className='h5'>
       <p>
         <strong>Não esqueça</strong>: você vai precisar configurar este domínio no servidor de

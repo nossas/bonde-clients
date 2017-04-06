@@ -18,12 +18,17 @@
     text-align: left;
   }
 
-  .uploadImageFile input[type="file"] {
+  .upload-image-file input[type="file"] {
     position: absolute;
     visibility: hidden;
   }
 
-  .uploadImageFile button {
+  .upload-image-file input[type="file"] {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .upload-image-file button {
     width: 69px;
     height: 69px;
     font-size: 35px;
@@ -32,32 +37,15 @@
     border: 0;
     cursor: pointer;
     border-radius: 45px;
-  }
-  .uploadImageFile button img {
-    width: 60px;
-    height: 60px;
-    border-radius: 45px;
+    padding: 0;
+    overflow: hidden;
   }
 
-  .uploadImageFile input[type="file"] {
-    position: absolute;
-    visibility: hidden;
-  }
-
-  .uploadImageFile button {
-    width: 69px;
-    height: 69px;
-    font-size: 35px;
-    color: #ececec;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
+  .upload-image-file button img {
+    width: 100%;
+    height: 100%;
     border-radius: 45px;
-  }
-  .uploadImageFile button img {
-    width: 60px;
-    height: 60px;
-    border-radius: 45px;
+    vertical-align: middle;
   }
 
   label {

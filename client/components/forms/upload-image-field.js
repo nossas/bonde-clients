@@ -45,7 +45,7 @@ class UploadImageField extends Component {
 
     if (theme === 'icon') {
       return (
-        <div className='uploadImageFile'>
+        <div className='upload-image-file'>
           <button
             type='button'
             disabled={loading}

@@ -11,7 +11,7 @@ const FormDomainImplementation = FormDomain({
   customValidate: values => {
     const errors = {}
     if (!values.custom_domain) {
-      errors.custom_domain = 'Campo obrigatório'
+      errors.custom_domain = 'Obrigatório'
     }
     return errors
   },
@@ -27,20 +27,17 @@ const FormShareImplementation = FormShare(
   { submit: MobActions.asyncUpdateMobilization },
   values => {
     const errors = {}
-    if (!values.id) {
-      errors.id = 'Campo obrigatório'
-    }
     if (!values.facebook_share_image) {
-      errors.facebook_share_image = 'Campo obrigatório'
+      errors.facebook_share_image = 'Obrigatório'
     }
     if (!values.facebook_share_title) {
-      errors.facebook_share_title = 'Campo obrigatório'
+      errors.facebook_share_title = 'Obrigatório'
     }
     if (!values.facebook_share_description) {
-      errors.facebook_share_description = 'Campo obrigatório'
+      errors.facebook_share_description = 'Obrigatório'
     }
     if (!values.twitter_share_text) {
-      errors.twitter_share_text = 'Campo obrigatório'
+      errors.twitter_share_text = 'Obrigatório'
     }
     return errors
   }
