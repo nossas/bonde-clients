@@ -12,21 +12,20 @@ class StepsContainerStack extends Component {
       this.props.pointerChildrenProps
   }
 
-  componentWillMount () {
-    const { children } = this.props
-
+  refreshStepsProgress (props = this.props) {
+    const { progressValidations: validations } = props
     //
-    // Check if the childrens validation pass. (children: <StepContent />.validate)
+    // Check if the childrens validation pass.
     // If it pass, jump to the next step.
     // If not, define it as current.
     //
-    children && children.length && children.map((child, index) => {
+    validations && validations.length && validations.map((validate, index) => {
+      console.log('validate', validate())
       const { step } = this.state
-      const { props: { validate } } = child
       const position = index + 1
 
       const isCurrent = step === position
-      const isLast = children.length === position
+      const isLast = validations.length === position
 
       if (isCurrent && !isLast && validate()) {
         this.setState({ ...this.state, step: position + 1 })
@@ -34,11 +33,21 @@ class StepsContainerStack extends Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.refreshStepsProgress(nextProps)
+  }
+
+  componentWillMount () {
+    this.refreshStepsProgress()
+  }
+
   render () {
     const {
       ComponentPointerContainer,
       ComponentPointerChildren,
       pointerChildrenProps,
+      progressValidations,
+      propsPropagationWhitelist,
       children
     } = this.props
 
@@ -66,10 +75,16 @@ class StepsContainerStack extends Component {
           const incrementStep = () => this.setState({ step: step + 1 })
 
           if (position <= step) {
-            const { validate } = child.props
+            const validate = progressValidations[index]
             const styleFromParent = { display: isCurrentStep ? 'block' : 'none' }
             const onNextStep = () => isCurrentStep && validate() && incrementStep()
-            const propagateProps = { position, step, styleFromParent, onNextStep }
+            const propagateProps = {
+              position,
+              step,
+              styleFromParent,
+              onNextStep,
+              propsPropagationWhitelist
+            }
 
             return React.cloneElement(child, propagateProps)
           }
@@ -82,7 +97,13 @@ class StepsContainerStack extends Component {
 StepsContainerStack.propTypes = {
   ComponentPointerContainer: PropTypes.node,
   ComponentPointerChildren: PropTypes.node,
-  pointerChildrenProps: PropTypes.func
+  pointerChildrenProps: PropTypes.func,
+  progressValidations: PropTypes.array.isRequired,
+  propsPropagationWhitelist: PropTypes.array
+}
+
+StepsContainerStack.defaultProps = {
+  propsPropagationWhitelist: []
 }
 
 export default StepsContainerStack

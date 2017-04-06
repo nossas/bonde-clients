@@ -34,11 +34,10 @@ class StepContent extends Component {
       styleFromParent,
       style,
       onNextStep,
-      propsPropagationDefaultWhitelist,
-      propsPropagationWhitelist
+      propsPropagationDefaultWhitelist
     } = this.props
     const cloneProps = { onNextStep, onFinishSubmit: onNextStep }
-    const componentsWhitelist = [...propsPropagationDefaultWhitelist, ...propsPropagationWhitelist]
+    const componentsWhitelist = [...propsPropagationDefaultWhitelist]
 
     return (
       <div
@@ -68,16 +67,13 @@ StepContent.propTypes = {
   onNextStep: PropTypes.func,
   styleFromParent: PropTypes.object.isRequired,
   style: PropTypes.object,
-  propsPropagationDefaultWhitelist: PropTypes.array.isRequired,
-  propsPropagationWhitelist: PropTypes.array
+  propsPropagationDefaultWhitelist: PropTypes.array.isRequired
 }
 
 StepContent.defaultProps = {
   styleFromParent: {},
   style: {},
-  propsPropagationDefaultWhitelist: [StepButton, StepForm],
-  propsPropagationWhitelist: [],
-  validate: () => true
+  propsPropagationDefaultWhitelist: [StepButton, StepForm]
 }
 
 export default StepContent
