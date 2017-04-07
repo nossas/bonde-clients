@@ -35,27 +35,32 @@ Rendering the steps content sequentially.
 ```jsx
 import React from 'react'
 
-import { StepsContainerStack, StepContent } from '~client/components/steps'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { FlatForm } from '~client/ux/components'
-import { FormDomain } from '~client/mobilizations/components'
+import { StepsContainerStack, StepContent } from '~client/components/steps'
+import { FormDomain, FormShare } from '~client/mobilizations/components'
 
-export default ({ mobilization, fields, ...formProps }) => (
-  <StepsContainerStack
-    ComponentPointerContainer={Tabs}
-    ComponentPointerChildren={Tab}
-    pointerChildrenProps={({ index, step }) => ({ isActive: index === step, index })}
-  >
-    <StepContent propsPropagationWhitelist={[FormDomain]}>
-      <FormDomain
-        {...formProps}
-        FormComponent={FlatForm}
-        fields={fields}
-        mobilization={mobilization}
-      />
-    </StepContent>
-  </StepsContainerStack>
-)
+export default ({ mobilization, ...formProps }) => {
+  const stepDomainValidation = () => true
+  const stepShareValidation = () => true
+
+  return (
+    <StepsContainerStack
+      ComponentPointerContainer={Tabs}
+      ComponentPointerChildren={Tab}
+      pointerChildrenProps={({ index, step }) => ({ isActive: index === step, index })}
+      progressValidations={[stepDomainValidation, stepShareValidation]}
+    >
+      <StepContent>
+        <FormDomain {...formProps} FormComponent={FlatForm} />
+      </StepContent>
+
+      <StepContent>
+        <FormShare {...formProps} FormComponent={FlatForm} />
+      </StepContent>
+    </StepsContainerStack>
+  )
+}
 ```
 
 ---
