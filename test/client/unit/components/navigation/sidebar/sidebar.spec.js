@@ -33,7 +33,14 @@ describe('client/components/navigation/sidebar/sidebar', () => {
           expect(wrapper.find('SidenavListItem').at(0).props().text).to.be.equal('PUBLICAR BONDE')
         })
         it('should render an item with "BONDE público" text if it already have a custom domain', () => {
-          const mobilization = { ...props.mobilization, custom_domain: 'foo.bar' }
+          const mobilization = {
+            ...props.mobilization,
+            custom_domain: 'foo.bar',
+            facebook_share_image: 'http://foobar.png',
+            facebook_share_title: 'Facebook Title',
+            facebook_share_description: 'Facebook Description',
+            twitter_share_text: 'Twitter Title'
+          }
           wrapper.setProps({ ...props, mobilization })
           expect(wrapper.find('SidenavListItem').at(0).props().text).to.be.equal('BONDE público')
           wrapper.setProps(props)
