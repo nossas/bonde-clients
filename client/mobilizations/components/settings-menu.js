@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
-// Global module dependencies
 import * as paths from '~client/paths'
+import * as mobilizationUtils from '~client/mobilizations/utils'
 import { Tabs, Tab } from '~components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~components/layout'
 
@@ -29,11 +29,13 @@ const SettingsMenu = ({ mobilization, location }) => {
           path={analyticsMobilizationPath}
           isActive={analyticsMobilizationPath === location.pathname}
         />
-        <Tab
-          text='Domínio'
-          path={customDomainMobilizationPath}
-          isActive={customDomainMobilizationPath === location.pathname}
-        />
+        {!mobilizationUtils.isLaunched(mobilization) ? null : (
+          <Tab
+            text='Domínio'
+            path={customDomainMobilizationPath}
+            isActive={customDomainMobilizationPath === location.pathname}
+          />
+        )}
       </Tabs>
     </SettingsPageMenuLayout>
   )
