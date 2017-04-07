@@ -1,7 +1,7 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
-export default ({ id, template_mobilization_id, ...mobilization }) =>
+export default ({ id, template_mobilization_id, next, ...mobilization }) =>
   (dispatch, getState, { api }) => {
     const { auth: { credentials } } = getState()
 
@@ -14,6 +14,7 @@ export default ({ id, template_mobilization_id, ...mobilization }) =>
       .put(endpoint, body, config)
       .then(({ status, data }) => {
         dispatch({ type: t.UPDATE_MOBILIZATION_SUCCESS, payload: data })
+        next && next()
         return Promise.resolve()
       })
       .catch(failure => {

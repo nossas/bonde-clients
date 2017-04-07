@@ -5,7 +5,7 @@ const config = {
   apiUrl: process.env.API_URL || 'http://localhost:3000',
   authPort: process.env.AUTH_PORT || 3005,
   appDomain: process.env.APP_DOMAIN || 'localhost',
-  timeout: 60000
+  timeout: 120000
 }
 
 module.exports = config

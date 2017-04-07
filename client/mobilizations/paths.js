@@ -11,6 +11,7 @@ export const mobilization = (mobilization, domain = DefaultConfigServer.appDomai
     : `http://${mobilization.slug}.${domain}`
 }
 export const mobilizationLaunch = id => `/mobilizations/${id}/launch`
+export const mobilizationLaunchEnd = id => `/mobilizations/${id}/launch/end`
 export const newMobilization = () => '/mobilizations/new'
 export const editMobilization = id => `/mobilizations/${id}/edit`
 export const basicsMobilization = id => `/mobilizations/${id}/basics`

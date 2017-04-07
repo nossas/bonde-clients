@@ -8,5 +8,3 @@ export { default as PageHeader } from './page-header'
 //
 export { default as FormDomain } from './form-domain'
 export { default as FormShare } from './form-share'
-
-export { default as PageDomain } from './page-domain'
