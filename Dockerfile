@@ -10,6 +10,7 @@ WORKDIR /code
 COPY package.json yarn.lock /code/
 RUN yarn
 COPY . /code
+RUN touch .env
 RUN yarn heroku-postbuild
 CMD ["yarn", "start:prod"]
 

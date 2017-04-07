@@ -11,6 +11,6 @@ COPY package.json yarn.lock /code/
 RUN yarn
 COPY . /code
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
 
 EXPOSE 5001 3030
