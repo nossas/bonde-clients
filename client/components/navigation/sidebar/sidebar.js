@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import * as paths from '~client/paths'
+import * as mobilizationUtils from '~client/mobilizations/utils'
 import { Loading } from '~components/await'
 import { Sidenav, SidenavList, SidenavListItem } from '~components/navigation/sidenav'
 
@@ -37,7 +38,7 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
         </SidenavList>
       ) : (
         <SidenavList className='bg-lighten-2'>
-          {!mobilization.custom_domain ? (
+          {!mobilizationUtils.isLaunched(mobilization) ? (
             <SidenavListItem
               text='PUBLICAR BONDE'
               icon='rocket'

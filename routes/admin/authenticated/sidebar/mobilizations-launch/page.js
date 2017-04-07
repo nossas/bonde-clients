@@ -61,7 +61,7 @@ const FormShareImplementation = FormShare(
 
 const MobilizationsLaunchPage = ({ mobilization, isSaving, ...formProps }) => {
   const buttonText = isSaving ? 'Salvando...' : 'Continuar'
-  const stepDomainValidation = () => mobilization.custom_domain
+  const stepDomainValidation = () => !!mobilization.custom_domain
   const stepShareValidation = () => (
     !!mobilization.facebook_share_image &&
     !!mobilization.facebook_share_title &&
