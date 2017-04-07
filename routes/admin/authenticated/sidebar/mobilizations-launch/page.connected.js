@@ -17,9 +17,13 @@ const redial = {
   }
 }
 
-const mapStateToProps = state => ({
-  mobilization: MobSelectors(state).getMobilization()
-})
+const mapStateToProps = state => {
+  const selectors = MobSelectors(state)
+  return {
+    mobilization: selectors.getMobilization(),
+    isSaving: selectors.mobilizationIsSaving()
+  }
+}
 
 export default provideHooks(redial)(
   connect(mapStateToProps)(Page)

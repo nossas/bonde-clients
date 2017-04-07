@@ -3,6 +3,7 @@ import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
 import * as MobActions from '~client/mobrender/redux/action-creators'
+import { Loading } from '~client/components/await'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import { PageCentralizedLayout, PageCentralizedLayoutTitle } from '~client/components/layout'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
@@ -58,7 +59,8 @@ const FormShareImplementation = FormShare(
   }
 )
 
-const MobilizationsLaunchPage = ({ mobilization, ...formProps }) => {
+const MobilizationsLaunchPage = ({ mobilization, isSaving, ...formProps }) => {
+  const buttonText = isSaving ? 'Salvando...' : 'Continuar'
   const stepDomainValidation = () => mobilization.custom_domain
   const stepShareValidation = () => (
     !!mobilization.facebook_share_image &&
@@ -84,7 +86,7 @@ const MobilizationsLaunchPage = ({ mobilization, ...formProps }) => {
             {...formProps}
             FormComponent={FlatForm}
             titleText='Configure seu domínio'
-            buttonText='Continuar'
+            buttonText={buttonText}
           />
         </StepContent>
 
@@ -94,10 +96,12 @@ const MobilizationsLaunchPage = ({ mobilization, ...formProps }) => {
             FormComponent={FlatForm}
             formClassNames='mobilization-launch--form-share'
             titleText='Configure as informações de compartilhamento'
-            buttonText='Continuar'
+            buttonText={buttonText}
           />
         </StepContent>
       </StepsContainerStack>
+
+      {isSaving && <Loading />}
     </PageCentralizedLayout>
   )
 }

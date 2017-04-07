@@ -14,6 +14,10 @@ export default (state, props) => ({
     return state.mobilizations.list.isLoaded
   },
 
+  mobilizationIsSaving: () => {
+    return state.mobilizations.list.saving
+  },
+
   getMobilizationMenuActive: () => {
     return state.mobilizations.list.menuActiveIndex
   },
