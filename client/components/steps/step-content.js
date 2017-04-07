@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import uuid from 'uuid'
 import StepButton from './step-button'
 import StepForm from './step-form'
 
@@ -6,7 +7,7 @@ if (require('exenv').canUseDOM) require('./step-content.scss')
 
 const cloneStepChildren = (child, props, whitelist) => {
   return whitelist.includes(child.type)
-    ? React.cloneElement(child, props)
+    ? React.cloneElement(child, { ...props, key: uuid() })
     : child
 }
 
@@ -50,7 +51,7 @@ class StepContent extends Component {
           </div>
         )}
         <div className='content'>
-          {children && children.length
+          {!children ? null : children.length
             ? children.map(child => cloneStepChildren(child, cloneProps, componentsWhitelist))
             : cloneStepChildren(children, cloneProps, componentsWhitelist)
           }

@@ -1,27 +1,25 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { StepsContainer, StepContent } from '~client/components/steps'
 
-
 describe('~client/components/steps/steps-container', () => {
-
   it('should render without crashed', () => {
-    const container = mount(<StepsContainer />)
+    const container = shallow(<StepsContainer />)
     expect(container).to.be.ok
   })
 
   it('should render header when title is passed', () => {
     const title = 'Domínio da comunidade'
-    const container = mount(
+    const container = shallow(
       <StepsContainer title={title} />
     )
     expect(container.find('h2').text()).to.equal(title)
   })
 
   it('should render only steps with index minor than step saved in state', () => {
-    const container = mount(
+    const container = shallow(
       <StepsContainer>
         <StepContent />
         <StepContent />
@@ -31,7 +29,7 @@ describe('~client/components/steps/steps-container', () => {
   })
 
   it('should pass position in render for <StepContent />', () => {
-    const container = mount(
+    const container = shallow(
       <StepsContainer>
         <StepContent />
         <StepContent />
@@ -43,7 +41,7 @@ describe('~client/components/steps/steps-container', () => {
   })
 
   it('should pass position 1 when only one <StepContent />', () => {
-    const container = mount(
+    const container = shallow(
       <StepsContainer>
         <StepContent />
       </StepsContainer>
