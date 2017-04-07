@@ -31,6 +31,7 @@ export default (state = initialState, action = {}) => {
       )
       return {...state,
         isLoading: false,
+        error: undefined,
         ...action.payload
       }
     case t.LOGOUT_SUCCESS:

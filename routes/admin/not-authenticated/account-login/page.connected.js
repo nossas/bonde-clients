@@ -1,4 +1,5 @@
 import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 import * as AccountActions from '~client/account/redux/action-creators'
 import AccountSelectors from '~client/account/redux/selectors'
@@ -25,13 +26,15 @@ const validate = values => {
 }
 
 const mapStateToProps = state => {
+  const selectors = AccountSelectors(state)
   return {
-    user: AccountSelectors(state).getUser()
+    user: selectors.getUser(),
+    errorMessage: selectors.getError()
   }
 }
 
-export default reduxForm({
-  form: 'loginForm',
-  fields,
-  validate
-}, mapStateToProps, AccountActions)(FormLogin)
+export default reduxForm(
+  { form: 'loginForm', fields, validate },
+  mapStateToProps,
+  AccountActions
+)(FormLogin)

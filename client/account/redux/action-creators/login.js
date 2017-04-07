@@ -14,8 +14,11 @@ export default ({ email, password }) => (dispatch, getState, { api, auth }) => {
         'Client': headers['client']
       }
       dispatch(createAction(t.LOGIN_SUCCESS, { user, credentials }))
+      return Promise.resolve()
     })
-    .catch(error => {
-      dispatch(createAction(t.LOGIN_FAILURE, error))
+    .catch(failure => {
+      const errorMessage = 'Ops, o email e/ou senha estão incorretos.'
+      dispatch(createAction(t.LOGIN_FAILURE, errorMessage))
+      return Promise.reject(new Error(failure))
     })
 }

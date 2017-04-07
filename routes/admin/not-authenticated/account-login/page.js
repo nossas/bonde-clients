@@ -1,16 +1,16 @@
 import React, { PropTypes, Component } from 'react'
 import { Link, browserHistory } from 'react-router'
 
-import * as Paths from '~client/paths'
-import { FormRedux, FormError, FormGroup, ControlLabel, FormControl, Button } from '~client/components/forms'
-
-let logo
-if (require('exenv').canUseDOM) {
-  logo = require('~client/images/logo-nossas.svg')
-}
+import * as paths from '~client/paths'
+import {
+  FormRedux,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button
+} from '~client/components/forms'
 
 class LoginPage extends Component {
-
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && (!nextProps.submitting && !nextProps.submitFailed) && nextProps.user) {
@@ -19,14 +19,28 @@ class LoginPage extends Component {
   }
 
   render () {
-    const { login, fields: { email, password }, ...formProps } = this.props
+    const {
+      fields: { email, password },
+      login,
+      errorMessage,
+      ...formProps
+    } = this.props
 
     return (
       <div>
         <div className='col-8 mb3 mx-auto'>
-          <img src={logo} alt='Logo Bonde' />
+          <img alt='Logo Bonde' src={
+            require('exenv').canUseDOM
+              ? require('~client/images/logo-nossas.svg')
+              : null
+          } />
         </div>
-        <FormRedux nosubmit className='bg-white rounded' onSubmit={(values) => login(values)} {...formProps}>
+        <FormRedux
+          nosubmit
+          className='bg-white rounded'
+          onSubmit={values => login(values)}
+          {...formProps}
+        >
           <FormGroup controlId='emailId' {...email}>
             <ControlLabel>E-mail</ControlLabel>
             <FormControl type='email' placeholder='exemplo@email.com' />
@@ -38,9 +52,20 @@ class LoginPage extends Component {
           <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
             {formProps.submitting ? 'Carregando...' : 'Entrar'}
           </Button>
-          <FormError className='mt2' />
         </FormRedux>
-        <p className='white center'>Ainda não é cadastrado? <Link to={Paths.createAccount()}><br />Clique para criar uma conta.</Link></p>
+
+        {!errorMessage || formProps.submitting ? null : (
+          <div className='h5 white bold center animated shake mt2'>
+            {errorMessage}
+          </div>
+        )}
+
+        <p className='white center'>
+          Ainda não é cadastrado?<br />
+          <Link to={paths.createAccount()}>
+            Clique para criar uma conta.
+          </Link>
+        </p>
       </div>
     )
   }

@@ -6,11 +6,11 @@ class FormError extends Component {
     const { $formRedux: { error } } = this.context
     const { className } = this.props
 
-    return error ? (
+    return !error ? null : (
       <div className={classnames('h5 white bold center animated shake', className)}>
         {error}
       </div>
-      ) : <noscript />
+    )
   }
 }
 
