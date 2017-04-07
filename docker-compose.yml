@@ -44,9 +44,10 @@ services:
   # Application: -----------------------------------------------------------------
   # We'll also use this configuration (&app_base) for the web and test containers:
   jobs: &app_base
+    image: nossas/bonde-server
     build:
       context: ./../bonde-server/
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     # entrypoint: ./development-entrypoint
 
     # The command this container will run - in this case, this container will run our sidekiq
@@ -122,6 +123,7 @@ services:
       RAILS_ENV: test
 
   client:
+    image: nossas/bonde-client
     depends_on:
       - api
     volumes:

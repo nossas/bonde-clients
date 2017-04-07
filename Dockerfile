@@ -13,4 +13,4 @@ COPY . /code
 RUN yarn heroku-postbuild
 CMD ["yarn", "start:prod"]
 
-EXPOSE 5001 3030
+EXPOSE 5001
