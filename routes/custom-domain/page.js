@@ -54,6 +54,11 @@ class CustomDomainPage extends Component {
             title={name}
             meta={[
               { name: 'description', content: goal },
+              { name: 'twitter:card', content: 'summary_large_image' },
+              { name: 'twitter:title', content: facebookShareTitle },
+              { name: 'twitter:description', content: facebookShareDescription },
+              { name: 'twitter:image', content: facebookShareImage },
+              { property: 'twitter:url', content: host },
               { property: 'og:url', content: host },
               { property: 'og:title', content: facebookShareTitle },
               { property: 'og:description', content: facebookShareDescription },
