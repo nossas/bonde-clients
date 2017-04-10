@@ -11,9 +11,25 @@ pipeline:
     password: ${DOCKER_PASSWORD}
     tags:
       - ${DRONE_BRANCH}
+    build_args:
+      - AWS_BUCKET=bonde-assets-staging
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-frontend-staging:
+    image: plugins/s3
+    acl: public-read
+    bucket: bonde-assets-staging
+    source: release/**/*.*
+    target: /0.6.0/
+    access_key: ${AWS_ACCESS_KEY_ID}
+    secret_key: ${AWS_SECRET_ACCESS_KEY}
+    when:
+      event: push
+      branch: master
   deploy-staging:
     image: appleboy/drone-ssh
     host: staging.bonde.org
