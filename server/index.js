@@ -34,7 +34,7 @@ import createRoutes from '../routes'
 import loadState from './load-state'
 
 export const createServer = (config) => {
-  const __PROD__ = config.nodeEnv === 'production'
+  const __PROD__ = config.nodeEnv === 'production' || config.nodeEnv === 'staging' ? true : false
   const __TEST__ = config.nodeEnv === 'test'
 
   const app = express()
