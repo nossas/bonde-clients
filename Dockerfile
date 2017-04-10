@@ -4,9 +4,9 @@ MAINTAINER Nossas <tech@nossas.org>
 ARG AWS_BUCKET=bonde-assets-staging
 ARG AWS_ACCESS_KEY_ID=1
 ARG AWS_SECRET_ACCESS_KEY=1
-ARG NODE_ENV=staging
+ARG NODE_ENV=production
 ARG APP_DOMAIN=staging.bonde.org
-ARG API_URL=http://server.staging.bonde.org
+ARG API_URL=http://api.staging.bonde.org
 ARG GOOGLE_FONTS_API_KEY=1
 ARG PAGARME_KEY=1
 
