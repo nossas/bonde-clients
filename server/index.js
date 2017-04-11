@@ -23,12 +23,13 @@ import Helm from 'react-helmet'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+const DashboardPlugin = require('webpack-dashboard/plugin')
+
 import cookieParser from 'cookie-parser'
 import reactCookie from 'react-cookie'
 
 import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client'
-import { compileDev, startDev } from '../tools/dx'
 import { configureStore } from '../client/store'
 import createRoutes from '../routes'
 import loadState from './load-state'
@@ -50,7 +51,8 @@ export const createServer = (config) => {
     Raven.config(config.sentryDns).install()
     app.use(Raven.requestHandler())
   } else {
-    const compiler = compileDev((webpack(webpackConfig)), config.port)
+    const compiler = webpack(webpackConfig)
+    compiler.apply(new DashboardPlugin())
     app.use(webpackDevMiddleware(compiler))
     app.use(webpackHotMiddleware(compiler))
   }
@@ -245,7 +247,10 @@ const startServer = (serverConfig) => {
     if (config.nodeEnv === 'production' || config.nodeEnv === 'test') {
       winston.info(`server ${config.id} listening on port ${config.port}`)
     } else {
-      startDev(config.port, err)
+      if (err) {
+        console.log(err)
+      }
+      console.log('Starting development server...' + config.port)
     }
   })
 }
