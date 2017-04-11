@@ -32,15 +32,14 @@ const FormDomainImplementation = FormDomain({
 
 const FormShareImplementation = FormShare(
   state => ({ initialValues: MobSelectors(state).getMobilization() }),
-  { submit: values => {
-    console.log('[routes/admin/authenticated/sidebar/mobilizations-launch/page.js] values', values)
-    return MobActions.asyncUpdateMobilization({
+  {
+    submit: values => MobActions.asyncUpdateMobilization({
       ...values,
       next: () => browserHistory.push(
         paths.mobilizationLaunchEnd(values.id)
       )
     })
-  }},
+  },
   values => {
     const errors = {}
     if (!values.facebook_share_image) {
