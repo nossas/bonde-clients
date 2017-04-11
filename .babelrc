@@ -1,10 +1,11 @@
 {
   "presets": [
-    "es2015",
-    "react",
-    "stage-0"
+    "env",
+    "stage-2",
+    "react"
   ],
   "plugins": [
+    "transform-function-bind",
     "transform-decorators-legacy",
     ["module-resolver", {
       "alias": {
