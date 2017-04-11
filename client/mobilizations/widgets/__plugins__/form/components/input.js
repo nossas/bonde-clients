@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TransitionGroup from 'react-addons-transition-group'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
 import classnames from 'classnames'
 
 // Current module dependencies
