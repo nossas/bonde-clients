@@ -196,8 +196,7 @@ export const createServer = (config) => {
                 <link href="${__PROD__ ? assets.main.css : '/main.css'}" media="all" rel="stylesheet" />
               </head>
               <body>
-                <div id="root">${data.html}</div>
-                <script>window.renderedClassNames = ${JSON.stringify(data.css.renderedClassNames)};</script>
+                <div id="root">${data}</div>
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
                 <script src="${__PROD__ ? 'https://s3-sa-east-1.amazonaws.com/bonde-assets/public' : ''}/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="${__PROD__ ? assets.vendor.js : '/vendor.bundle.js'}"></script>

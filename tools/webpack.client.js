@@ -45,7 +45,6 @@ const entry = {
     'react-cookie',
     'react-dom',
     'react-ga',
-    'react-grid-system',
     'react-helmet',
     'react-redux',
     'react-router',
