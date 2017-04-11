@@ -42,10 +42,7 @@ const entry = {
     'cpf_cnpj',
     'draft-js',
     'slate-editor',
-    // 'wysihtml',
-    'jquery',
     'react-cookie',
-    'react-document-meta',
     'react-dom',
     'react-ga',
     'react-grid-system',
@@ -187,9 +184,6 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        options: {
-          presets: ['es2015', 'react', 'stage-0', 'react-optimize']
-        },
         exclude: /(node_modules|server)/
       },
       {
