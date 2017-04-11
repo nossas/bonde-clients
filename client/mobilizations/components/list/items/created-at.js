@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
 const CreatedAt = ({ created_at }) => (
-  <div className='created-at px3 col col-2'>
-    {created_at}
+  <div className='created-at px3 col col-3'>
+    {new Date(Date.parse(created_at)).toLocaleString()}
   </div>
 )
 
