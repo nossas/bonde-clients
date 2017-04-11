@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react'
-import moment from 'moment'
 
 const CreatedAt = ({ created_at }) => (
   <div className='created-at px3 col col-2'>
-    {moment(created_at).format('DD/MM/YYYY')}
+    {created_at}
   </div>
 )
 
