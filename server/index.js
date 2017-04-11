@@ -53,7 +53,9 @@ export const createServer = (config) => {
   } else {
     const compiler = webpack(webpackConfig)
     compiler.apply(new DashboardPlugin())
-    app.use(webpackDevMiddleware(compiler))
+    app.use(webpackDevMiddleware(compiler, {
+      noInfo: true, publicPath: webpackConfig.output.publicPath
+    }))
     app.use(webpackHotMiddleware(compiler))
   }
 
