@@ -15,16 +15,17 @@ const FlatForm = ({ formClassNames, children, titleText, buttonText, ...formProp
     nosubmit
     className={classnames('ux--flat-form', formClassNames)}
   >
-    <h1 className='center bold m0 mb3'>
-      {titleText}
-    </h1>
+    {titleText && (
+      <h1 className='center bold m0 mb3'>
+        {titleText}
+      </h1>
+    )}
     {children}
     <Button type='submit'>{buttonText}</Button>
   </FormRedux>
 )
 
 FlatForm.propTypes = {
-  formProps: PropTypes.object.isRequired,
   formClassNames: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.node.isRequired,
   buttonText: PropTypes.string.isRequired,

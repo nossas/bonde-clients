@@ -1,4 +1,5 @@
 import 'newrelic'
+import url from 'url'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -123,7 +124,8 @@ export const createServer = (config) => {
       ...state,
       sourceRequest: {
         protocol: req.headers['x-forwarded-proto'] || req.protocol,
-        host: req.headers.host
+        host: req.headers.host,
+        url: url.parse(req.url)
       }
     })
     const routes = createRoutes(store)

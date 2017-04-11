@@ -3,12 +3,20 @@ if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { showMobilizationPublicView, getDomain } from '~routes/utils'
 import serverConfig from '~server/config'
 
+const whitelistedPublicRoutes = [
+  '/subscription/edit'
+]
+
 export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
-      if (showMobilizationPublicView(getDomain(store, serverConfig))) {
+      const { sourceRequest: { url } } = store.getState()
+      const isPublicView = showMobilizationPublicView(getDomain(store, serverConfig))
+      const isPublicWhitelisted = whitelistedPublicRoutes.includes(url.pathname)
+
+      if (isPublicView || isPublicWhitelisted) {
         cb(null, [
-          require('./custom-domain').default(store)
+          require('./public').default(store)
         ])
       } else {
         cb(null, [
