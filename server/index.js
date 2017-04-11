@@ -18,7 +18,6 @@ import ReactDOM from 'react-dom/server'
 import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { Provider } from 'react-redux'
 import { trigger } from 'redial'
-import { StyleSheetServer } from 'aphrodite'
 import Helm from 'react-helmet'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -178,9 +177,8 @@ export const createServer = (config) => {
           // just call html = ReactDOM.renderToString(InitialView)
           // to if you don't want Aphrodite. Also change renderFullPage
           // accordingly
-          const data = StyleSheetServer.renderStatic(
-            () => ReactDOM.renderToString(InitialView)
-          )
+          const data = ReactDOM.renderToString(InitialView)
+
           const head = Helm.rewind()
           /* eslint-disable no-useless-escape */
           res.status(200).send(`
@@ -196,7 +194,6 @@ export const createServer = (config) => {
                 ${head.meta.toString()}
                 ${head.link.toString()}
                 <link href="${__PROD__ ? assets.main.css : '/main.css'}" media="all" rel="stylesheet" />
-                <style data-aphrodite>${data.css.content}</style>
               </head>
               <body>
                 <div id="root">${data.html}</div>

@@ -7,7 +7,6 @@ import Router from 'react-router/lib/Router'
 import match from 'react-router/lib/match'
 import browserHistory from 'react-router/lib/browserHistory'
 import { Provider } from 'react-redux'
-import { StyleSheet } from 'aphrodite'
 
 import { configureStore } from './store'
 const initialState = window.INITIAL_STATE || {}
@@ -16,8 +15,6 @@ const store = configureStore(initialState)
 const { dispatch, getState } = store
 
 const container = document.getElementById('root')
-
-StyleSheet.rehydrate(window.renderedClassNames)
 
 const render = () => {
   const { pathname, search, hash } = window.location
