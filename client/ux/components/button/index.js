@@ -11,7 +11,6 @@ if (require('exenv').canUseDOM) require('./styles.scss')
 const basscss = 'ux--button btn white bg-pagenta caps p2 rounded h4'
 
 const Button = ({ children, type, disabled, to, onClick }) => {
-
   const className = classnames(
     basscss,
     disabled ? 'disabled' : null

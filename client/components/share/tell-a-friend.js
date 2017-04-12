@@ -13,7 +13,6 @@ const TellAFriend = ({
   imageWidth,
   widget
 }) => {
-
   const settings = widget.settings || {}
 
   return (

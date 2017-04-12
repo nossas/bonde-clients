@@ -7,9 +7,7 @@ import classnames from 'classnames'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
-
 const DivFloat = ({ children, horizontal, vertical }) => {
-
   return (
     <div className={classnames('float', horizontal, vertical)}>
       {children}

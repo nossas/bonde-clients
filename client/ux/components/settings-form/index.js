@@ -6,7 +6,6 @@ import Button from '../button'
 // Dependency module
 import { FormRedux, SuccessMessage } from '~client/components/forms'
 
-
 const SettingsForm = ({ children, buttonText, successMessage, ...formProps }) => (
   <FormRedux nosubmit {...formProps}>
     {children}
