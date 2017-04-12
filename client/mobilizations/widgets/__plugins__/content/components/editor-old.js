@@ -122,7 +122,7 @@ class EditorOld extends React.Component {
     const { mobilization: { header_font: headerFont, body_font: bodyFont } } = this.props
     const { handleForceRender } = this.props
     return (
-      <div>
+      <div className='widgets--content-plugin'>
         <div className={classnames('content-widget col-12', {'display-none': !editing})}>
           <WYSIHTMLToolbar
             elementId={toolbarId}

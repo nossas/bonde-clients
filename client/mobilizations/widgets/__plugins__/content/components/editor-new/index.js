@@ -60,7 +60,7 @@ class EditorNew extends React.Component {
     }
 
     return (
-      <div className='widget editor-new' style={{ fontFamily: bodyFont }}>
+      <div className='widgets--content-plugin widget editor-new' style={{ fontFamily: bodyFont }}>
         <Editor
           value={value}
           theme={theme}

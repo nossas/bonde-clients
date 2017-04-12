@@ -63,7 +63,7 @@ class EditorSlate extends Component {
     const { content, handleSave, readOnly, toolbarStyles, contentStyles } = this.props
     const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
     return (
-      <div>
+      <div className='widgets--content-plugin'>
         <SlateEditor plugins={plugins} initialState={initialState} style={{ color: '#fff' }}>
           <SlateToolbar style={{
             ...styles.toolbar,
