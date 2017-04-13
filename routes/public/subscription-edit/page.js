@@ -3,10 +3,11 @@ import { Background } from '~client/components/layout'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { FlatForm } from '~client/ux/components'
 import { Tabs, TabBorder } from '~client/components/navigation/tabs'
+import { Pagarme } from '~client/components/external-services'
 
 const SubscriptionEditPage = ({ fields: { creditcard, name, expiration, cvv }, ...formProps }) => (
   <Background image={require('exenv').canUseDOM ? require('~client/images/bg-login.png') : ''}>
-    <script dangerouslySetInnerHTML={{__html: 'https://assets.pagar.me/js/pagarme.min.js'}} />
+    <Pagarme />
     <FlatForm
       {...formProps}
       buttonText='Salvar'
