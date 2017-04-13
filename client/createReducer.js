@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { reducer as form } from 'redux-form'
 import { reducer as notificationsReducer } from 'reapop'
 import auth from '~client/account/redux/reducers'
 import mobilizations from '~client/mobrender/redux/reducers'
@@ -10,6 +10,8 @@ import widgets from '~mobilizations/widgets/reducers'
 */
 import community from '~community/reducers'
 import colorPicker from '~components/color-picker/reducers'
+
+import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const initialState = {
   host: '',
@@ -23,7 +25,11 @@ const sourceRequest = (state = initialState, action) => state
 export default function createReducer (asyncReducers) {
   return combineReducers({
     sourceRequest,
-    form: formReducer,
+    form: form.normalize({
+      subscriptionEditForm: {
+        creditcard: normalizers.creditcard
+      }
+    }),
     notifications: notificationsReducer(),
     auth,
     mobilizations,
