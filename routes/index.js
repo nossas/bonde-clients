@@ -4,7 +4,7 @@ import { showMobilizationPublicView, getDomain } from '~routes/utils'
 import serverConfig from '~server/config'
 
 const whitelistedPublicRoutes = [
-  '/subscription/edit'
+  /^\/subscriptions\/\d+\/edit$/ // /subscriptions/:id/edit
 ]
 
 export default store => ({
@@ -12,7 +12,7 @@ export default store => ({
     require.ensure([], (require) => {
       const { sourceRequest: { url } } = store.getState()
       const isPublicView = showMobilizationPublicView(getDomain(store, serverConfig))
-      const isPublicWhitelisted = whitelistedPublicRoutes.includes(url.pathname)
+      const isPublicWhitelisted = whitelistedPublicRoutes.some(regex => regex.test(url.pathname))
 
       if (isPublicView || isPublicWhitelisted) {
         cb(null, [
