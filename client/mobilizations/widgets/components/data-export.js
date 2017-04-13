@@ -10,11 +10,11 @@ class DataExport extends Component {
 
   formatExportAt (widget) {
     const { exported_at: exportedAt } = widget
-    const { getDate, getMonth, getFullYear, getHours, getMinutes } = new Date(String(exportedAt))
+    const d = new Date(String(exportedAt))
 
     const pad = value => (`00${value}`).slice(-2)
-    const date = `${pad(getDate())}/${pad(getMonth() + 1)}/${getFullYear()}`
-    const time = `${pad(getHours())}:${pad(getMinutes())}`
+    const date = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`
+    const time = `${pad(d.getHours())}:${pad(d.getMinutes())}`
     return `${date} às ${time}`
   }
 
