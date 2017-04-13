@@ -23,7 +23,9 @@ class Media extends Component {
       ...mediaProps
     } = entity.getData()
 
-    if (entity.getType() === 'image') {
+    const entityType = entity.getType().toLowerCase()
+
+    if (entityType === 'image') {
       const media = <img {...mediaProps} />
 
       if (href) {
@@ -32,11 +34,9 @@ class Media extends Component {
         )
       }
       return media
-    } else if (entity.getType() === 'iframe' || entity.getType() === 'script') {
+    } else if (entityType === 'iframe' || entityType === 'script') {
       // insert script or iframe in div
-      return (
-        <div className='noscript' dangerouslySetInnerHTML={{ __html: mediaProps.src }} />
-      )
+      return <div className='noscript' dangerouslySetInnerHTML={{ __html: mediaProps.src }} />
     } else {
       throw new Error('Sorry, media type not found.')
     }
