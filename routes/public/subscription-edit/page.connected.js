@@ -2,12 +2,21 @@ import { reduxForm } from 'redux-form'
 
 import Page from './page'
 
-const fields = ['dummy']
+const fields = ['creditcard', 'name', 'expiration', 'cvv']
 
 const validate = values => {
   const errors = {}
-  if (!values.dummy) {
-    errors.dummy = 'Dummy data validation 😜'
+  if (!values.creditcard) {
+    errors.creditcard = 'Obrigatório'
+  }
+  if (!values.name) {
+    errors.name = 'Obrigatório'
+  }
+  if (!values.expiration) {
+    errors.expiration = 'Obrigatório'
+  }
+  if (!values.cvv) {
+    errors.cvv = 'Obrigatório'
   }
   return errors
 }
