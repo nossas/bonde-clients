@@ -9,14 +9,27 @@ if (require('exenv').canUseDOM) {
   require('./button.scss')
 }
 
-const FlatForm = ({ formClassNames, children, titleText, buttonText, ...formProps }) => (
+const FlatForm = ({
+  formClassNames,
+  children,
+  titleText,
+  titleSmallMargin,
+  titleMediumMargin,
+  titleBigMargin,
+  buttonText,
+  ...formProps
+}) => (
   <FormRedux
     {...formProps}
     nosubmit
     className={classnames('ux--flat-form', formClassNames)}
   >
     {titleText && (
-      <h1 className='center bold m0 mb3'>
+      <h1 className={classnames({
+        'sm-margin': titleSmallMargin,
+        'md-margin': titleMediumMargin,
+        'lg-margin': titleBigMargin
+      })}>
         {titleText}
       </h1>
     )}
@@ -29,7 +42,10 @@ FlatForm.propTypes = {
   formClassNames: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.node.isRequired,
   buttonText: PropTypes.string.isRequired,
-  titleText: PropTypes.string.isRequired
+  titleText: PropTypes.string,
+  titleSmallMargin: PropTypes.bool,
+  titleMediumMargin: PropTypes.bool,
+  titleBigMargin: PropTypes.bool
 }
 
 export default FlatForm

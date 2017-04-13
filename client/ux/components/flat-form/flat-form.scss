@@ -5,6 +5,23 @@
   font-size: 0.875rem;
 }
 
+.ux--flat-form h1 {
+  color: #222 !important;
+  line-height: 1.5 !important;
+  font-size: 2em !important;
+  margin: 0 0 2rem !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ux--flat-form h1.sm-margin {
+  margin-bottom: 1rem !important;
+}
+
+.ux--flat-form h1.lg-margin {
+  margin-bottom: 4rem !important;
+}
+
 .ux--flat-form .form-group {
   border: none !important;
 }
