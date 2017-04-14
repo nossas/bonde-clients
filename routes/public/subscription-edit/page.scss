@@ -44,14 +44,13 @@
   transition-property: color;
   transition-duration: 0.5s;
 }
-.routes--subscription-edit-page .button:hover,
-.routes--subscription-edit-page .button:focus,
-.routes--subscription-edit-page .button:active {
-  background-color: #ddd;
-  color: white;
-}
 .routes--subscription-edit-page .button:last-of-type {
   margin-right: 0;
+}
+.routes--subscription-edit-page .button:hover,
+.routes--subscription-edit-page .button:active,
+.routes--subscription-edit-page .button:focus {
+  background-color: #ddd;
 }
 .routes--subscription-edit-page .button:before {
   content: "";
@@ -68,9 +67,11 @@
   transition-duration: 0.5s;
   transition-timing-function: ease-out;
 }
-.routes--subscription-edit-page .button:hover:before,
-.routes--subscription-edit-page .button:focus:before,
-.routes--subscription-edit-page .button:active:before {
+.routes--subscription-edit-page .button.active {
+  background-color: #ddd;
+  color: white;
+}
+.routes--subscription-edit-page .button.active:before {
   transform: scaleX(1);
   transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
