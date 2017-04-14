@@ -3,37 +3,42 @@ import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { Background } from '~client/components/layout'
-import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import { CreditCardForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
-import { Tabs, TabBorder } from '~client/components/navigation/tabs'
-import { Pagarme } from '~client/components/external-services'
 
 if (require('exenv').canUseDOM) {
   require('./page.scss')
 }
+
+const CreditCardFormImplementation = CreditCardForm({
+  mapDispatchToProps: {
+    submit: values => (dispatch, getState, { api }) => {
+      console.log('[routes/public/subscription-edit/page.connected.js] values', values)
+    }
+  }
+})
 
 class SubscriptionEditPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
       modificationType: undefined,
-      items: [],
       animatedFormStack: []
     }
     this.handleAdd = this.handleAdd.bind(this)
   }
 
   handleAdd (item = uuid()) {
-    const newItems = this.state.items.concat([
+    const newItems = this.state.animatedFormStack.concat([
       item
     ])
-    this.setState({items: newItems})
+    this.setState({animatedFormStack: newItems})
   }
 
   handleRemove (i) {
-    let newItems = this.state.items.slice()
+    let newItems = this.state.animatedFormStack.slice()
     newItems.splice(i, 1)
-    this.setState({items: newItems})
+    this.setState({animatedFormStack: newItems})
   }
 
   displayForm ({ form, modificationType }) {
@@ -41,81 +46,22 @@ class SubscriptionEditPage extends Component {
       this.setState({ modificationType })
       this.handleAdd(form)
     }
-    if (this.state.items.length) {
+    if (this.state.animatedFormStack.length) {
       this.handleRemove(0)
       setTimeout(add, 1000)
     } else add()
   }
 
   render () {
-    const { fields: { creditcard, name, expiration, cvv }, ...formProps } = this.props
     const { modificationType } = this.state
 
-    const CreditCardForm = (
-      <div>
-        <Pagarme />
-        <FlatForm
-          {...formProps}
-          buttonText='Salvar'
-        >
-          {/*<Tabs className='mb3 center'>
-            <TabBorder Component='span' isActive>
-              <i className='flat-mastercard' />Cartão de crédito
-            </TabBorder>
-            <TabBorder Component='span'>
-              Data da recorrência
-            </TabBorder>
-          </Tabs>*/}
-
-          <p className='mb3 lightgray'>
-            Altere os dados do seu cartão de crédito preenchendo o formulário abaixo. A sua assinatura
-            permanecerá a mesma porém, à partir do momento que você salvar o formulário abaixo, o valor
-            será cobrado no seu novo cartão.
-          </p>
-
-          <FormGroup className='mb2' controlId='creditcard' {...creditcard}>
-            <ControlLabel>Número</ControlLabel>
-            <FormControl
-              type='text'
-              placeholder='Ex: 0000 0000 0000 0000'
-            />
-          </FormGroup>
-
-          <FormGroup className='mb2' controlId='name' {...name}>
-            <ControlLabel>Nome</ControlLabel>
-            <FormControl
-              type='text'
-              placeholder='(igual no cartão)'
-            />
-          </FormGroup>
-
-          <div className='clearfix col-12 mb3'>
-            <FormGroup className='col col-6' controlId='expiration' {...expiration}>
-              <ControlLabel>Validade</ControlLabel>
-              <FormControl
-                type='text'
-                placeholder='00/00'
-              />
-            </FormGroup>
-
-            <FormGroup className='col col-4 ml3' controlId='cvv' {...cvv}>
-              <ControlLabel>CVV</ControlLabel>
-              <FormControl
-                type='text'
-                placeholder='Ex: 000'
-              />
-            </FormGroup>
-          </div>
-        </FlatForm>
-      </div>
-    )
-    const RecurringForm = (
+    const RecurringForm = props => (
       <b className='h1 p3 center block'>RecurringForm</b>
     )
 
-    const items = this.state.items.map(item => (
+    const animatedFormStack = this.state.animatedFormStack.map(ItemComponent => (
       <div key={uuid()} style={{ overflowY: 'hidden' }}>
-        {item}
+        <ItemComponent {...this.props} FormComponent={FlatForm} />
       </div>
     ))
 
@@ -145,7 +91,7 @@ class SubscriptionEditPage extends Component {
                   { active: modificationType === 'creditcard' }
                 )}
                 onClick={() => this.displayForm({
-                  form: CreditCardForm,
+                  form: CreditCardFormImplementation,
                   modificationType: 'creditcard'
                 })}
               >
@@ -169,7 +115,7 @@ class SubscriptionEditPage extends Component {
               transitionEnterTimeout={1000}
               transitionLeaveTimeout={1000}
             >
-              {items}
+              {animatedFormStack}
             </CSSTransitionGroup>
           </section>
         </Background>
