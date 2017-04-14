@@ -6,7 +6,8 @@ import Page from './page'
 const mapStateToProps = state => {
   const selectors = SubscriptionEditSelectors(state)
   return {
-    modificationType: selectors.getModificationType()
+    modificationType: selectors.getModificationType(),
+    animationStack: selectors.getAnimationStack()
   }
 }
 
