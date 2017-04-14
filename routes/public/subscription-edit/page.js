@@ -22,7 +22,6 @@ class SubscriptionEditPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      modificationType: undefined,
       animatedFormStack: []
     }
     this.handleAdd = this.handleAdd.bind(this)
@@ -43,7 +42,8 @@ class SubscriptionEditPage extends Component {
 
   displayForm ({ form, modificationType }) {
     const add = () => {
-      this.setState({ modificationType })
+      const { setModificationType } = this.props
+      setModificationType(modificationType)
       this.handleAdd(form)
     }
     if (this.state.animatedFormStack.length) {
@@ -53,7 +53,7 @@ class SubscriptionEditPage extends Component {
   }
 
   render () {
-    const { modificationType } = this.state
+    const { modificationType } = this.props
 
     const RecurringForm = props => (
       <b className='h1 p3 center block'>RecurringForm</b>

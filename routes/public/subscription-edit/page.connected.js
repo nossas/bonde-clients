@@ -1,3 +1,15 @@
+import { connect } from 'react-redux'
+import * as SubscriptionActions from '~client/subscriptions/redux/action-creators'
+import SubscriptionEditSelectors from '~client/subscriptions/redux/selectors/edit'
 import Page from './page'
 
-export default Page
+const mapStateToProps = state => {
+  const selectors = SubscriptionEditSelectors(state)
+  return {
+    modificationType: selectors.getModificationType()
+  }
+}
+
+const mapDispatchToProps = SubscriptionActions
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page)
