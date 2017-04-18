@@ -47,7 +47,7 @@ pipeline:
       - PAGARME_KEY=${PROD_PAGARME_KEY}
       - GOOGLE_FONTS_API_KEY=${PROD_GOOGLE_FONTS_API_KEY}
       - APP_DOMAIN=bonde.org
-      - API_URL=http://api.bonde.org
+      - API_URL=https://api.bonde.org
       - AWS_BUCKET=bonde-assets
       - AWS_ACCESS_KEY_ID=${PROD_AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${PROD_AWS_SECRET_ACCESS_KEY}
