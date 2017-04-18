@@ -2,6 +2,11 @@ import * as t from '~client/subscriptions/redux/action-types'
 
 export const initialState = {
   //
+  // Store the status of an async request that tells if it is on progress or not.
+  // @type Boolean
+  //
+  isLoading: false,
+  //
   // Store the modification type that the user wants to do in the subscription like,
   // change the credit card data or, the recurring date of charging.
   // @type String
@@ -12,7 +17,12 @@ export const initialState = {
   // transition animation using CSSTransitionGroup.
   // @type Array -> PropTypes.element
   //
-  animationStack: []
+  animationStack: [],
+  //
+  // Store the error message.
+  // @type String
+  //
+  error: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -34,6 +44,14 @@ export default (state = initialState, action = {}) => {
           ...state.animationStack.slice(index + 1)
         ]
       }
+
+    case t.ASYNC_RECHARGE_REQUEST:
+      return { ...state, isLoading: true }
+    case t.ASYNC_RECHARGE_SUCCESS:
+      return { ...state, isLoading: false }
+    case t.ASYNC_RECHARGE_FAILURE:
+      return { ...state, isLoading: false, error: action.payload }
+
     default:
       return state
   }

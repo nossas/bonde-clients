@@ -3,8 +3,9 @@ import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { Background } from '~client/components/layout'
-import { CreditCardForm } from '~client/subscriptions/forms'
+import { CreditCardForm, RecurringForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
+import * as SubscriptionActions from '~client/subscriptions/redux/action-creators'
 
 if (require('exenv').canUseDOM) {
   require('./page.scss')
@@ -12,9 +13,13 @@ if (require('exenv').canUseDOM) {
 
 const CreditCardFormImplementation = CreditCardForm({
   mapDispatchToProps: {
-    submit: values => (dispatch, getState, { api }) => {
-      console.log('[routes/public/subscription-edit/page.connected.js] values', values)
-    }
+    submit: SubscriptionActions.asyncSubscriptionRecharge
+  }
+})
+
+const RecurringFormImplementation = RecurringForm({
+  mapDispatchToProps: {
+    submit: SubscriptionActions.asyncSubscriptionRecharge
   }
 })
 
@@ -26,6 +31,7 @@ const SubscriptionEditPage = props => {
     appendAnimationStack,
     removeAnimationStack
   } = props
+
   const displayForm = (form, type) => {
     const append = () => {
       setModificationType(type)
@@ -37,10 +43,6 @@ const SubscriptionEditPage = props => {
       setTimeout(append, 1000)
     } else append()
   }
-
-  const RecurringForm = props => (
-    <b className='h1 p3 center block'>RecurringForm</b>
-  )
 
   return (
     <div className='routes--subscription-edit-page'>
@@ -76,7 +78,7 @@ const SubscriptionEditPage = props => {
                 'button--recurring button',
                 { active: modificationType === 'recurring' }
               )}
-              onClick={() => displayForm(RecurringForm, 'recurring')}
+              onClick={() => displayForm(RecurringFormImplementation, 'recurring')}
             >
               Data da doação
             </button>

@@ -110,14 +110,14 @@
 
   &.transition--form-recurring-enter-active {
     opacity: 1;
-    max-height: 115px;
+    max-height: 302px;
     transition: all 1s cubic-bezier(.4,0,0,1);
   }
 }
 
 .transition--form-recurring-leave {
   opacity: 1;
-  max-height: 115px;
+  max-height: 302px;
 
   &.transition--form-recurring-leave-active {
     opacity: 0.01;
