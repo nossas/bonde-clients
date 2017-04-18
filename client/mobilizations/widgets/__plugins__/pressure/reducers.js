@@ -19,7 +19,6 @@ export default function PressureReducers (state = initialState, action = initial
     case t.WIDGET_PRESSURE_FILL_REQUEST:
       return { ...state, saving: true }
     case t.WIDGET_PRESSURE_FILL_SUCCESS:
-      console.log('[client/mobilizations/widgets/__plugins__/pressure/reducers.js] action.payload', action.payload)
       return {
         ...state,
         saving: false,
