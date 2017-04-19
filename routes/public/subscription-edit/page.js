@@ -1,6 +1,5 @@
 import React from 'react'
 import query from 'querystring'
-import pagarme from 'pagarme'
 import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
@@ -14,29 +13,53 @@ if (require('exenv').canUseDOM) {
 }
 
 const CreditCardFormImplementation = CreditCardForm({
-  mapDispatchToProps: dispatch => ({
+  mapDispatchToProps: {
     submit: values => {
-      const card = {
-        card_number: values.creditcard,
-        card_holder_name: values.name,
-        card_expiration_date: values.expiration,
-        card_cvv: values.cvv
-      }
+      //
+      // The `PagarMe` object is injected into the global scope by the <Pagarme /> component
+      // located in `client/components/external-services/pagarme.js`. By default, the
+      // `<CreditCardForm />` component renders that component, so, we can use it here.
+      //
+      // It needs to use some other approach instead of inject the .min file of the library
+      // directly into the DOM. I tried to use the official CJS module package provided by the
+      // Pagarme team https://github.com/pagarme/pagarme-js but, it's bundle size is too big.
+      // It have an issue that may will enhance the bundle size a litte, see:
+      // https://github.com/pagarme/pagarme-js/issues/35
+      //
+      const promise = new Promise((resolve, reject) => {
+        // eslint-disable-next-line
+        PagarMe.encryption_key = process.env.PAGARME_KEY
 
-      const promise = pagarme.client
-        .connect({ encryption_key: process.env.PAGARME_KEY || 'setup env var' })
-        .then(client => client.security.encrypt(card))
-        .then(hash => dispatch(
-          SubscriptionActions.asyncSubscriptionRecharge({
-            id: values.id,
-            token: values.token,
-            card_hash: hash
+        // eslint-disable-next-line
+        const card = new PagarMe.creditCard()
+        const expiration = values.expiration.match(/(\d{2})\/(\d{2})/)
+        card.cardHolderName = values.name
+        card.cardExpirationMonth = expiration[1]
+        card.cardExpirationYear = expiration[2]
+        card.cardNumber = values.creditcard
+        card.cardCVV = values.cvv
+
+        const errors = card.fieldErrors()
+
+        Object.keys(errors).length > 0
+          ? reject({
+            cvv: errors.card_cvv,
+            expiration: errors.card_expiration_month,
+            name: errors.card_holder_name,
+            creditcard: errors.card_number
           })
-        ))
+          : card.generateHash(cardHash => {
+            resolve(SubscriptionActions.asyncSubscriptionRecharge({
+              id: values.id,
+              token: values.token,
+              card_hash: cardHash
+            }))
+          })
+      })
 
       return Promise.resolve(promise).then(action => action)
     }
-  })
+  }
 })
 
 const RecurringFormImplementation = RecurringForm({

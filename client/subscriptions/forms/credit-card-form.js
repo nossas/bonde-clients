@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import { Pagarme } from '~client/components/external-services'
 import * as validators from '~client/utils/redux-form/validators'
 
 const CreditCardForm = ({
@@ -16,6 +17,7 @@ const CreditCardForm = ({
   ...formProps
 }) => (
   <div>
+    <Pagarme />
     <FormComponent
       {...formProps}
       buttonText='Salvar'

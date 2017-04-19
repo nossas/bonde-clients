@@ -5625,10 +5625,6 @@ package-json@^1.0.0:
     got "^3.2.0"
     registry-url "^3.0.0"
 
-pagarme@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/pagarme/-/pagarme-3.0.2.tgz#4ff05cd9234abbadb95d71cfa6c935650e9a8a90"
-
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
