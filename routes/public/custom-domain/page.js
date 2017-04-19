@@ -7,12 +7,8 @@ import { TechnicalIssues } from '~client/components/error'
 import { GoogleFontsLoader } from '~client/components/fonts'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
-var NotificationsSystem = () => <div />
-
 if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
-  var theme = require('reapop-theme-wybo')
-  NotificationsSystem = require('reapop').default
 }
 
 class CustomDomainPage extends Component {
@@ -88,7 +84,6 @@ class CustomDomainPage extends Component {
               { property: 'og:image', content: facebookShareImage }
             ]}
           />
-          <NotificationsSystem theme={theme} />
           <Mobilization />
           <GoogleFontsLoader fonts={[headerFont, bodyFont].filter(arrayUtil.distinct)} />
         </div>
