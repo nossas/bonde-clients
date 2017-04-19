@@ -64,7 +64,11 @@ const CreditCardFormImplementation = CreditCardForm({
 
 const RecurringFormImplementation = RecurringForm({
   mapDispatchToProps: {
-    submit: SubscriptionActions.asyncSubscriptionRecharge
+    submit: values => SubscriptionActions.asyncSubscriptionRecharge({
+      id: values.id,
+      token: values.token,
+      process_at: values.process_at
+    })
   }
 })
 

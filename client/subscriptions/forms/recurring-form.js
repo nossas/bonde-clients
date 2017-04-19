@@ -3,10 +3,13 @@ import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Pagarme } from '~client/components/external-services'
 import * as validators from '~client/utils/redux-form/validators'
+import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const RecurringForm = ({
   FormComponent,
   fields: {
+    id,
+    token,
     process_at: processAt
   },
   ...formProps
@@ -17,6 +20,8 @@ const RecurringForm = ({
       {...formProps}
       buttonText='Salvar'
     >
+      <input type='hidden' name='id' value={id.value} />
+      <input type='hidden' name='token' value={token.value} />
       <p className='mb3 lightgray'>
         Altere a data da sua doação preenchendo o formulário abaixo. A sua assinatura
         permanecerá a mesma porém, à partir do momento em que você salvar o formulário abaixo,
@@ -34,7 +39,7 @@ const RecurringForm = ({
   </div>
 )
 
-const fields = ['process_at']
+const fields = ['id', 'token', 'process_at']
 
 const abstractValidate = values => {
   const errors = {}
@@ -51,8 +56,12 @@ RecurringForm.propTypes = {
   ]).isRequired
 }
 
+export const normalizer = {
+  process_at: normalizers.date.ddmmyyyy
+}
+
 export default ({ validate, mapStateToProps, mapDispatchToProps }) => reduxForm({
-  form: 'subscriptionEditForm',
+  form: 'recurringForm',
   fields,
   validate: validators.abstractValidate({ abstractValidate, validate })
 }, mapStateToProps, mapDispatchToProps)(RecurringForm)
