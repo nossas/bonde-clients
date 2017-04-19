@@ -46,6 +46,7 @@
     "morgan": "^1.6.1",
     "newrelic": "^1.37.2",
     "opn": "^4.0.2",
+    "pagarme": "^3.0.2",
     "raven": "^1.1.4",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.5.1",

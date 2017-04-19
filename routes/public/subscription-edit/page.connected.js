@@ -7,7 +7,8 @@ const mapStateToProps = state => {
   const selectors = SubscriptionEditSelectors(state)
   return {
     modificationType: selectors.getModificationType(),
-    animationStack: selectors.getAnimationStack()
+    animationStack: selectors.getAnimationStack(),
+    url: state.sourceRequest.url
   }
 }
 

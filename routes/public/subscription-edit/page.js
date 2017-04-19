@@ -1,4 +1,6 @@
 import React from 'react'
+import query from 'querystring'
+import pagarme from 'pagarme'
 import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
@@ -12,9 +14,29 @@ if (require('exenv').canUseDOM) {
 }
 
 const CreditCardFormImplementation = CreditCardForm({
-  mapDispatchToProps: {
-    submit: SubscriptionActions.asyncSubscriptionRecharge
-  }
+  mapDispatchToProps: dispatch => ({
+    submit: values => {
+      const card = {
+        card_number: values.creditcard,
+        card_holder_name: values.name,
+        card_expiration_date: values.expiration,
+        card_cvv: values.cvv
+      }
+
+      const promise = pagarme.client
+        .connect({ encryption_key: process.env.PAGARME_KEY || 'setup env var' })
+        .then(client => client.security.encrypt(card))
+        .then(hash => dispatch(
+          SubscriptionActions.asyncSubscriptionRecharge({
+            id: values.id,
+            token: values.token,
+            card_hash: hash
+          })
+        ))
+
+      return Promise.resolve(promise).then(action => action)
+    }
+  })
 })
 
 const RecurringFormImplementation = RecurringForm({
@@ -25,6 +47,8 @@ const RecurringFormImplementation = RecurringForm({
 
 const SubscriptionEditPage = props => {
   const {
+    params,
+    url,
     modificationType,
     animationStack,
     setModificationType,
@@ -42,6 +66,11 @@ const SubscriptionEditPage = props => {
       removeAnimationStack(0)
       setTimeout(append, 1000)
     } else append()
+  }
+
+  const initialValues = {
+    id: params.id,
+    token: query.parse(url.query).token
   }
 
   return (
@@ -90,7 +119,7 @@ const SubscriptionEditPage = props => {
           >
             {animationStack.map(ItemComponent => (
               <div key={uuid()} style={{ overflowY: 'hidden' }}>
-                <ItemComponent {...props} FormComponent={FlatForm} />
+                <ItemComponent {...props} {...{ initialValues }} FormComponent={FlatForm} />
               </div>
             ))}
           </CSSTransitionGroup>

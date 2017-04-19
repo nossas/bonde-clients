@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
-import { Pagarme } from '~client/components/external-services'
 import * as validators from '~client/utils/redux-form/validators'
 
 const CreditCardForm = ({
   FormComponent,
   fields: {
+    id,
+    token,
     creditcard,
     name,
     expiration,
@@ -15,11 +16,12 @@ const CreditCardForm = ({
   ...formProps
 }) => (
   <div>
-    <Pagarme />
     <FormComponent
       {...formProps}
       buttonText='Salvar'
     >
+      <input type='hidden' name='id' value={id.value} />
+      <input type='hidden' name='token' value={token.value} />
       <p className='mb3 lightgray'>
         Altere os dados do seu cartão de crédito preenchendo o formulário abaixo. A sua assinatura
         permanecerá a mesma porém, à partir do momento que você salvar o formulário abaixo, o valor
@@ -63,7 +65,7 @@ const CreditCardForm = ({
   </div>
 )
 
-const fields = ['creditcard', 'name', 'expiration', 'cvv']
+const fields = ['id', 'token', 'creditcard', 'name', 'expiration', 'cvv']
 
 const abstractValidate = values => {
   const errors = {}
