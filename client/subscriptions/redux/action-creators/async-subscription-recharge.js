@@ -2,6 +2,7 @@ import { addNotification } from 'reapop'
 import * as notifications from '~client/utils/notifications'
 import * as t from '~client/subscriptions/redux/action-types'
 import { createAction } from '~client/utils/redux'
+import * as AwaitActions from '~client/components/await/redux/action-creators'
 
 //
 // Action to update the user subscription data and recharge it.
@@ -17,13 +18,17 @@ export default values => (dispatch, getState, { api }) => {
   const endpoint = `/subscriptions/${values.id}/recharge`
   const body = values
 
+  dispatch(AwaitActions.setLoading(true))
   dispatch(createAction(t.ASYNC_RECHARGE_REQUEST))
   return api
     .post(endpoint, body)
     .then(({ data }) => {
+      dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_SUCCESS, data))
+      dispatch(addNotification(notifications.genericRequestSuccess()))
     })
     .catch(e => {
+      dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_FAILURE, e))
       dispatch(addNotification(notifications.genericRequestError()))
       return Promise.reject(e)

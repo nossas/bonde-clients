@@ -8,3 +8,12 @@ export const genericRequestError = () => ({
   dismissible: true,
   closeButton: false
 })
+
+export const genericRequestSuccess = () => ({
+  title: 'Oba!',
+  status: 'success',
+  message: 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
+  dismissAfter: 0,
+  dismissible: true,
+  closeButton: false
+})

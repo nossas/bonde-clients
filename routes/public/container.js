@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { Loading } from '~client/components/await'
 
-var NotificationsSystem = () => <div />
+const NotificationsSystem = require('exenv').canUseDOM
+  ? require('reapop').default
+  : () => <div />
 
 if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
   var theme = require('reapop-theme-wybo')
-  NotificationsSystem = require('reapop').default
 }
 
-const PublicContainer = ({ children }) => (
+const PublicContainer = ({ children, loading }) => (
   <div>
     {children}
     <NotificationsSystem {...{ theme }} />
+    {loading && <Loading />}
   </div>
 )
+
+PublicContainer.propTypes = {
+  loading: PropTypes.bool.isRequired
+}
 
 export default PublicContainer

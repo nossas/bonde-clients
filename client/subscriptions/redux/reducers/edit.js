@@ -48,7 +48,7 @@ export default (state = initialState, action = {}) => {
     case t.ASYNC_RECHARGE_REQUEST:
       return { ...state, isLoading: true }
     case t.ASYNC_RECHARGE_SUCCESS:
-      return { ...state, isLoading: false }
+      return { ...state, ...initialState }
     case t.ASYNC_RECHARGE_FAILURE:
       return { ...state, isLoading: false, error: action.payload }
 
