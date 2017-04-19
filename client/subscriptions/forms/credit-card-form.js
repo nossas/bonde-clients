@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Pagarme } from '~client/components/external-services'
 import * as validators from '~client/utils/redux-form/validators'
+import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const CreditCardForm = ({
   FormComponent,
@@ -93,8 +94,14 @@ CreditCardForm.propTypes = {
   ]).isRequired
 }
 
+export const normalizer = {
+  creditcard: normalizers.creditcard,
+  expiration: normalizers.date.mmyy,
+  cvv: normalizers.number.max(3)
+}
+
 export default ({ validate, mapStateToProps, mapDispatchToProps }) => reduxForm({
-  form: 'subscriptionEditForm',
+  form: 'creditCardForm',
   fields,
   validate: validators.abstractValidate({ abstractValidate, validate })
 }, mapStateToProps, mapDispatchToProps)(CreditCardForm)

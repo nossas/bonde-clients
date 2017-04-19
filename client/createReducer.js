@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 // Redux Form
 import { reducer as form } from 'redux-form'
-import * as normalizers from '~client/utils/redux-form/normalizers'
+import { normalizer as creditCardForm } from '~client/subscriptions/forms/credit-card-form'
 
 // Reapop
 import { reducer as notificationsReducer } from 'reapop'
@@ -26,13 +26,7 @@ const sourceRequest = (state = initialState, action) => state
 export default function createReducer (asyncReducers) {
   return combineReducers({
     sourceRequest,
-    form: form.normalize({
-      subscriptionEditForm: {
-        creditcard: normalizers.creditcard,
-        expiration: normalizers.date.mmyy,
-        cvv: normalizers.number.max(3)
-      }
-    }),
+    form: form.normalize({ creditCardForm }),
     notifications: notificationsReducer(),
     auth,
     mobilizations,
