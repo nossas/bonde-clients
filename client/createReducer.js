@@ -28,7 +28,8 @@ export default function createReducer (asyncReducers) {
     sourceRequest,
     form: form.normalize({
       subscriptionEditForm: {
-        creditcard: normalizers.creditcard
+        creditcard: normalizers.creditcard,
+        expiration: normalizers.date.mmyy
       }
     }),
     notifications: notificationsReducer(),
