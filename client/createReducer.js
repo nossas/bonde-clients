@@ -10,6 +10,7 @@ import { reducer as notificationsReducer } from 'reapop'
 
 // Application
 import auth from '~client/account/redux/reducers'
+import wait from '~client/components/await/redux/reducers'
 import mobilizations from '~client/mobrender/redux/reducers'
 import community from '~community/reducers'
 import colorPicker from '~components/color-picker/reducers'
@@ -33,6 +34,7 @@ export default function createReducer (asyncReducers) {
     }),
     notifications: notificationsReducer(),
     auth,
+    wait,
     mobilizations,
     community,
     colorPicker,
