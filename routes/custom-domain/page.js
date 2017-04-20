@@ -17,13 +17,25 @@ if (require('exenv').canUseDOM) {
 
 class CustomDomainPage extends Component {
   componentDidMount () {
-    //
-    // Fix scroll when loads the client bundle.
-    // After the initial render that the server responds.
-    //
-    if (require('exenv').canUseDOM && window.location.hash) {
-      const target = document.querySelector(window.location.hash)
-      target && target.scrollIntoView()
+    if (require('exenv').canUseDOM) {
+      //
+      // Fix scroll when loads the client bundle.
+      // After the initial render that the server responds.
+      //
+      if (window.location.hash) {
+        const hashTarget = document.querySelector(window.location.hash)
+        hashTarget && hashTarget.scrollIntoView()
+      }
+
+      //
+      // Get the current scroll position from the initial render
+      // to prevent the browser rescroll to top when the client bundle loads.
+      //
+      if (window.scrollPosition) {
+        const blocksList = document.getElementById('blocks-list')
+        const propagateScroll = target => { target.scrollTop = window.scrollPosition }
+        blocksList && propagateScroll(blocksList)
+      }
     }
 
     const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'

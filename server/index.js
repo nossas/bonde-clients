@@ -34,7 +34,7 @@ import createRoutes from '../routes'
 import loadState from './load-state'
 
 export const createServer = (config) => {
-  const __PROD__ = config.nodeEnv === 'production' || config.nodeEnv === 'staging' ? true : false
+  const __PROD__ = config.nodeEnv === 'production' || config.nodeEnv === 'staging'
   const __TEST__ = config.nodeEnv === 'test'
 
   const app = express()
@@ -198,6 +198,11 @@ export const createServer = (config) => {
               <body>
                 <div id="root">${data}</div>
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
+                <script type="text/javascript">
+                  document.getElementById('blocks-list').onscroll = function() {
+                    window.scrollPosition = document.getElementById('blocks-list').scrollTop
+                  };
+                </script/>
                 <script src="${__PROD__ ? 'https://s3-sa-east-1.amazonaws.com/bonde-assets/public' : ''}/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="${__PROD__ ? assets.vendor.js : '/vendor.bundle.js'}"></script>
                 <script async src="${__PROD__ ? assets.main.js : '/main.bundle.js'}" ></script>
