@@ -48,6 +48,8 @@ class CustomDomainPage extends Component {
         body_font: bodyFont
       } = mobilization
 
+      const url = mobilization.custom_domain || host
+
       return (
         <div>
           <Helmet
@@ -58,8 +60,8 @@ class CustomDomainPage extends Component {
               { name: 'twitter:title', content: facebookShareTitle },
               { name: 'twitter:description', content: facebookShareDescription },
               { name: 'twitter:image', content: facebookShareImage },
-              { property: 'twitter:url', content: host },
-              { property: 'og:url', content: host },
+              { property: 'twitter:url', content: url },
+              { property: 'og:url', content: url },
               { property: 'og:title', content: facebookShareTitle },
               { property: 'og:description', content: facebookShareDescription },
               { property: 'og:image', content: facebookShareImage }
