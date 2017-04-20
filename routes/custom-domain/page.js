@@ -17,6 +17,15 @@ if (require('exenv').canUseDOM) {
 
 class CustomDomainPage extends Component {
   componentDidMount () {
+    //
+    // Fix scroll when loads the client bundle.
+    // After the initial render that the server responds.
+    //
+    if (require('exenv').canUseDOM && window.location.hash) {
+      const target = document.querySelector(window.location.hash)
+      target && target.scrollIntoView()
+    }
+
     const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'
     if (!isTest) {
       const { mobilization } = this.props
