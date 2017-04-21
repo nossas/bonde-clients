@@ -34,9 +34,9 @@ const CreditCardForm = ({
       <input type='hidden' name='token' value={token.value} />
 
       <p className='mb3 lightgray'>
-        Altere os dados do seu cartão de crédito preenchendo o formulário abaixo. A sua assinatura
-        permanecerá a mesma porém, à partir do momento que você salvar o formulário abaixo, o valor
-        será cobrado no seu novo cartão.
+        Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação
+        continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor
+        será cobrado neste novo cartão ; )
       </p>
 
       <div className='mb3 lightgray'>
@@ -61,7 +61,7 @@ const CreditCardForm = ({
         <ControlLabel>Nome</ControlLabel>
         <FormControl
           type='text'
-          placeholder='(igual no cartão)'
+          placeholder='(igual ao que aparece no cartão)'
         />
       </FormGroup>
 

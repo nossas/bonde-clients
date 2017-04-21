@@ -114,10 +114,10 @@ const SubscriptionEditPage = props => {
             fontWeight: 'bold',
             fontSize: '2em'
           }}>
-            Dados da Assinatura
+            Dados da Doação
           </h1>
           <p className='paragraph--helper-text'>
-            Selecione abaixo qual informação da sua assinatura você quer alterar.
+            Selecione abaixo qual informação da sua doação quer alterar:
           </p>
           <div className='container--tab-buttons'>
             <button

@@ -23,13 +23,13 @@ const RecurringForm = ({
       <input type='hidden' name='id' value={id.value} />
       <input type='hidden' name='token' value={token.value} />
       <p className='mb3 lightgray'>
-        Altere a data da sua doação preenchendo o formulário abaixo. A sua assinatura
-        permanecerá a mesma porém, à partir do momento em que você salvar o formulário abaixo,
-        a data da sua doação será a que você definir.
+        Preencha os campos abaixo para alterar a data em que a cobrança da sua doação é efetuada.
+        Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo,
+        o valor será cobrado neste novo cartão ; )
       </p>
 
       <FormGroup className='mb2' controlId='processAt' {...processAt}>
-        <ControlLabel>Nova data da doação</ControlLabel>
+        <ControlLabel>Nova data de cobrança</ControlLabel>
         <FormControl
           type='text'
           placeholder='Ex: DD/MM/AAAA'
