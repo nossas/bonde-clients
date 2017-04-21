@@ -85,14 +85,14 @@
 
   &.transition--form-creditcard-enter-active {
     opacity: 1;
-    max-height: 454px;
+    max-height: 557px;
     transition: all 1s cubic-bezier(.4,0,0,1);
   }
 }
 
 .transition--form-creditcard-leave {
   opacity: 1;
-  max-height: 454px;
+  max-height: 557px;
 
   &.transition--form-creditcard-leave-active {
     opacity: 0.01;
