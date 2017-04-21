@@ -9,11 +9,11 @@ export const genericRequestError = () => ({
   closeButton: false
 })
 
-export const genericRequestSuccess = () => ({
+export const genericSaveSuccess = () => ({
   title: 'Oba!',
   status: 'success',
   message: 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
-  dismissAfter: 0,
+  dismissAfter: 7000,
   dismissible: true,
   closeButton: false
 })

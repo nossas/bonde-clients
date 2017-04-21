@@ -25,7 +25,7 @@ export default values => (dispatch, getState, { api }) => {
     .then(({ data }) => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_SUCCESS, data))
-      dispatch(addNotification(notifications.genericRequestSuccess()))
+      dispatch(addNotification(notifications.genericSaveSuccess()))
     })
     .catch(e => {
       dispatch(AwaitActions.setLoading(false))
