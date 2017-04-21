@@ -122,7 +122,7 @@ CreditCardForm.propTypes = {
 export const normalizer = {
   creditcard: normalizers.creditcard,
   expiration: normalizers.date.mmyy,
-  cvv: normalizers.number.max(3),
+  cvv: normalizers.number.max(4),
   name: normalizers.string.onlyWords
 }
 
