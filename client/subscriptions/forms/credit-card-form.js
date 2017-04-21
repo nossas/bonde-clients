@@ -15,6 +15,13 @@ const CreditCardForm = ({
     expiration,
     cvv
   },
+  card: {
+    brand,
+    first_digits: firstDigits,
+    last_digits: lastDigits,
+    holder_name: holderName,
+    expiration_date: expirationDate
+  },
   ...formProps
 }) => (
   <div>
@@ -25,11 +32,22 @@ const CreditCardForm = ({
     >
       <input type='hidden' name='id' value={id.value} />
       <input type='hidden' name='token' value={token.value} />
+
       <p className='mb3 lightgray'>
         Altere os dados do seu cartão de crédito preenchendo o formulário abaixo. A sua assinatura
         permanecerá a mesma porém, à partir do momento que você salvar o formulário abaixo, o valor
         será cobrado no seu novo cartão.
       </p>
+
+      <div className='mb3 lightgray'>
+        <b className='block mb1'>Dados do último cartão</b>
+        <div>
+          <span className='caps'>{brand}: </span>
+          {firstDigits.slice(0, 4)} {firstDigits.slice(4, 6)}XX XXXX {lastDigits}
+        </div>
+        <div>Nome: <span className='caps'>{holderName}</span></div>
+        <div>Validade: {expirationDate.slice(0, 2)}/{expirationDate.slice(2, 4)}</div>
+      </div>
 
       <FormGroup className='mb2' controlId='creditcard' {...creditcard}>
         <ControlLabel>Número</ControlLabel>
@@ -91,7 +109,14 @@ CreditCardForm.propTypes = {
   FormComponent: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.func
-  ]).isRequired
+  ]).isRequired,
+  card: PropTypes.shape({
+    brand: PropTypes.string.isRequired,
+    first_digits: PropTypes.string.isRequired,
+    last_digits: PropTypes.string.isRequired,
+    holder_name: PropTypes.string.isRequired,
+    expiration_date: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export const normalizer = {

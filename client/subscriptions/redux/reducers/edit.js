@@ -22,7 +22,12 @@ export const initialState = {
   // Store the error message.
   // @type String
   //
-  error: undefined
+  error: undefined,
+  //
+  // Store the subscription data.
+  // @type Object
+  //
+  data: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -48,9 +53,20 @@ export default (state = initialState, action = {}) => {
     case t.ASYNC_RECHARGE_REQUEST:
       return { ...state, isLoading: true }
     case t.ASYNC_RECHARGE_SUCCESS:
-      return { ...state, ...initialState }
+      return {
+        ...state,
+        isLoading: false,
+        modificationType: undefined,
+        animationStack: [],
+        error: undefined
+      }
     case t.ASYNC_RECHARGE_FAILURE:
       return { ...state, isLoading: false, error: action.payload }
+
+    case t.ASYNC_FETCH_SUCCESS:
+      return { ...state, data: action.payload }
+    case t.ASYNC_FETCH_FAILURE:
+      return { ...state, error: action.payload }
 
     default:
       return state

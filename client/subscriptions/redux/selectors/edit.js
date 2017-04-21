@@ -3,6 +3,7 @@ export default (state, props) => {
 
   return {
     getModificationType: () => edit.modificationType,
-    getAnimationStack: () => edit.animationStack
+    getAnimationStack: () => edit.animationStack,
+    getCard: () => edit.data.last_donation.gateway_data.card
   }
 }
