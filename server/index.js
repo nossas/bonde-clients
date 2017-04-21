@@ -201,9 +201,12 @@ export const createServer = (config) => {
                 <div id="root">${data}</div>
                 <script>window.INITIAL_STATE = ${JSON.stringify(initialState)};</script>
                 <script type="text/javascript">
-                  document.getElementById('blocks-list').onscroll = function() {
-                    window.scrollPosition = document.getElementById('blocks-list').scrollTop
-                  };
+                  var blocksList = document.getElementById('blocks-list')
+                  if (blocksList) {
+                    blocksList.onscroll = function() {
+                      window.scrollPosition = document.getElementById('blocks-list').scrollTop
+                    }
+                  }
                 </script/>
                 <script src="${__PROD__ ? 'https://s3-sa-east-1.amazonaws.com/bonde-assets/public' : ''}/wysihtml/wysihtml-toolbar.min.js"></script>
                 <script src="${__PROD__ ? assets.vendor.js : '/vendor.bundle.js'}"></script>
