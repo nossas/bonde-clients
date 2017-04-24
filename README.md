@@ -2,12 +2,11 @@
 
 # Bonde Client
 
-[![Build Status][circleimg]][circle]
-[![Docker Automated Deploy][dockerautoimg]][circle]
-[![Code Climate](https://codeclimate.com/github/nossas/bonde-client/badges/gpa.svg)](https://codeclimate.com/github/nossas/bonde-client)
-
-[![Test Coverage](https://codeclimate.com/github/nossas/bonde-client/badges/coverage.svg)](https://codeclimate.com/github/nossas/bonde-client/coverage)
-[![Issue Count](https://codeclimate.com/github/nossas/bonde-client/badges/issue_count.svg)](https://codeclimate.com/github/nossas/bonde-client)
+[![Build Status][droneImage]][drone]
+[![Opened Issues Count][issuesImage]][issues]
+[![Docker Automated Deploy][dockerAutomatedImage]][docker]
+[![Docker Build Status][dockerBuildImage]][dockerBuilds]
+[![Licence][licenceImage]][licence]
 
 ---
 
@@ -126,6 +125,13 @@ git push dokku-prod commithash:master
 - [Invision](https://projects.invisionapp.com/share/763UO3YDT#/screens)
 - [Zeplin](https://app.zeplin.io/project.html#pid=55d1d57e14a5317a0e909551)
 
-[circleimg]: https://img.shields.io/circleci/project/nossas/bonde-client.svg?style=flat-square
-[circle]: https://circleci.com/gh/nossas/bonde-client
-[dockerautoimg]: https://img.shields.io/badge/dokku-auto%20deploy-blue.svg?style=flat-square
+[drone]: http://ci.bonde.org/nossas/bonde-client
+[droneImage]: http://ci.bonde.org/api/badges/nossas/bonde-client/status.svg
+[issues]: https://github.com/nossas/bonde-client/issues
+[issuesImage]: https://img.shields.io/github/issues-raw/nossas/bonde-client.svg
+[docker]: https://hub.docker.com/r/nossas/bonde-client/
+[dockerBuilds]: https://hub.docker.com/r/nossas/bonde-client/builds/
+[dockerAutomatedImage]: https://img.shields.io/docker/automated/nossas/bonde-client.svg
+[dockerBuildImage]: https://img.shields.io/docker/build/nossas/bonde-client.svg
+[licence]: https://img.shields.io/github/license/nossas/bonde-client/blob/master/LICENSE
+[licenceImage]: https://img.shields.io/github/license/nossas/bonde-client.svg
