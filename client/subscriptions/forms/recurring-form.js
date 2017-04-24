@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Pagarme } from '~client/components/external-services'
+import * as validationHelper from '~client/utils/validation-helper'
 import * as validators from '~client/utils/redux-form/validators'
 import * as normalizers from '~client/utils/redux-form/normalizers'
 
@@ -45,6 +46,8 @@ const abstractValidate = values => {
   const errors = {}
   if (!values.process_at) {
     errors.process_at = 'Obrigatório'
+  } else if (!validationHelper.date(values.process_at).ddmmyyyy) {
+    errors.process_at = 'Formato de data inválido'
   }
   return errors
 }
