@@ -102,7 +102,7 @@ const SubscriptionEditPage = props => {
 
   return (
     <div className='routes--subscription-edit-page'>
-      <Background image={
+      <Background contentSize={0} image={
         require('exenv').canUseDOM
           ? require('~client/images/bg-login.png')
           : ''
