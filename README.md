@@ -30,6 +30,15 @@ $ docker-compose -v
 docker-compose version 1.10.0-rc1, build ecff6f1
 ```
 
+### One-line installation
+```
+# Install
+sh <(curl -s https://raw.githubusercontent.com/nossas/bonde-install/master/install.sh)
+
+# Uninstall
+sh <(curl -s https://raw.githubusercontent.com/nossas/bonde-install/master/uninstall.sh)
+```
+
 ### Install
 ```
 mkdir code/ && cd code/
