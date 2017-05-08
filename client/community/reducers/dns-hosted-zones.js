@@ -53,6 +53,11 @@ export default (state = initialState, action = {}) => {
         saving: false,
         error: action.payload
       }
+    case t.SELECT:
+      // Force reload community when select new community
+      return {...state,
+        isLoaded: false
+      }
     default:
       return state
   }
