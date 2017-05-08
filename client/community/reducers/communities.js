@@ -37,6 +37,15 @@ export default (state = initialState, action = {}) => {
         data: [...state.data, action.community]
       }
     case t.EDIT:
+      // update community in cache
+      reactCookie.save('community', {
+        community: {
+          list: {
+            currentId: action.community.id,
+            data: [action.community]
+          }
+        }
+      })
       return {
         ...state,
         data: state.data.map(
