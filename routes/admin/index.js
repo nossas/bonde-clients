@@ -1,12 +1,13 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
-// import { injectAsyncReducer } from '~client/store'
-// import { showMobilizationPublicView, getDomain } from '~routes/utils'
 import { isIndexRedirected } from '~routes/utils'
 
+//
+// @path (admin) /
+//
 export default store => ({
   path: '/',
-  //
+
   indexRoute: {
     onEnter: isIndexRedirected(store)
   },

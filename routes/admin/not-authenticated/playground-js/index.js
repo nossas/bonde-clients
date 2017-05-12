@@ -1,6 +1,9 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
+//
+// @path (admin) /playground-js
+//
 export default store => ({
   path: 'playground-js',
   getComponent (nextState, callback) {

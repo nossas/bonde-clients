@@ -1,6 +1,9 @@
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
+//
+// @path (admin) /community/report
+//
 export default store => ({
   path: 'report',
   getComponent (nextState, callback) {

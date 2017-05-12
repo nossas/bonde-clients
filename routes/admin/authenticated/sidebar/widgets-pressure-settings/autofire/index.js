@@ -2,6 +2,9 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { injectAsyncReducer } from '~client/store'
 
+//
+// @path (admin) /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+//
 export default store => ({
   path: 'autofire',
   getComponent (nextState, callback) {

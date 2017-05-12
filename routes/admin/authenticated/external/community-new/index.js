@@ -2,6 +2,9 @@
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { injectAsyncReducer } from '~client/store'
 
+//
+// @path (admin) /community/new
+//
 export default store => ({
   path: 'community/new',
   getComponent (nextState, callback) {
