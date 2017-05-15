@@ -11,6 +11,23 @@
     z-index: 1;
     right: 0;
 
+    &.inline {
+      display: block;
+      position: relative;
+      box-shadow: none;
+      background-color: #fff;
+      min-width: initial;
+      
+      .dropdown--item {
+        display: inline-block;
+        margin-left: 10px;
+
+        span {
+          display: none;
+        }
+      }
+    }
+
     .dropdown--item {
       padding: 12px 16px;
       font-size: 16px;

@@ -3,12 +3,17 @@ import React from 'react'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
-const DropdownMenu = ({ items }) => (
+const DropdownMenu = ({ inline, items }) => (
   <div className='dropdown--menu'>
-    <i className='fa fa-ellipsis-h' />
-    <div className='dropdown--content'>
+    {!inline && <i className='fa fa-ellipsis-h' />}
+    <div className={`dropdown--content${inline ? ' inline' : ''}`}>
       {items.map((item, index) => (
-        <div key={`dropdown-item-${index}`} className='dropdown--item' onClick={item.onClick}>
+        <div
+          key={`dropdown-item-${index}`}
+          className='dropdown--item'
+          onClick={item.onClick}
+          title={item.text}
+        >
           {item.icon && (<i className={item.icon} />)}
           <span>{item.text}</span>
         </div>
@@ -18,6 +23,7 @@ const DropdownMenu = ({ items }) => (
 )
 
 DropdownMenu.propTypes = {
+  inline: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.shape({
     icon: PropTypes.string,
     text: PropTypes.text,
