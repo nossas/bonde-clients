@@ -60,19 +60,20 @@ class Page extends Component {
     const { checkHostedZone } = this.props
     const items = [
       { icon: 'fa fa-bars', text: 'Subdomínios', onClick: () => this.toggleDNSRecords(dnsHostedZone) },
-      { icon: 'fa fa-trash', text: 'Remover', onClick: () => this.setState({ deletedHostedZone: dnsHostedZone }) }
+      { icon: 'fa fa-trash', text: 'Remover domínio', onClick: () => this.setState({ deletedHostedZone: dnsHostedZone }) }
     ]
     if (!dnsHostedZone.ns_ok) {
       items.splice(0, 0, { icon: 'fa fa-refresh', text: 'Verificar DNS', onClick: () => checkHostedZone(dnsHostedZone) })
     }
-    return <DropdownMenu items={items} />
+    return <DropdownMenu inline items={items} />
   }
 
   dnsRecordMenu (dnsRecord) {
     return (
       <DropdownMenu
+        inline
         items={[
-          { icon: 'fa fa-trash', text: 'Remover', onClick: () => this.setState({ deletedDNSRecord: dnsRecord }) }
+          { icon: 'fa fa-trash', text: 'Remover subdomínio', onClick: () => this.setState({ deletedDNSRecord: dnsRecord }) }
         ]}
       />
     )
