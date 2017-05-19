@@ -33,12 +33,15 @@ const mapStateToProps = (state, props) => {
   const { custom_domain: customDomain } = props.mobilization
   if (customDomain) {
     // eslint-disable-next-line
-    const domain = customDomain.replace(/^[\w\-]+\./, '')
-    const subdomain = customDomain.replace(`.${domain}`, '')
-
-    if (props.hostedZones.filter(hosted => hosted.domain_name === domain)[0]) {
+    const hasWWW = customDomain.startsWith('www.')
+    const reDomain = hasWWW ? /^www.[\w\-]+\.(.*)/ : /^[\w\-]+\.(.*)/
+    const reSubdomain = hasWWW ? /^www\.([\w-]*).[\w-.]*/ : /^([\w-]*).[\w-.]*/
+    
+    const domain = customDomain.match(reDomain)[1] 
+    const subdomain = customDomain.match(reSubdomain)[1]
+    if (props.hostedZones.find(h => h.domain_name === domain) !== undefined) {
       return {
-        initialValues: { domain, subdomain }
+        initialValues: { domain, subdomain, advancedConfig: false }
       }
     }
     return {
@@ -57,9 +60,11 @@ const mapActionsToProps = (dispatch, props) => ({
   submit: ({ advancedConfig, domain, subdomain, externalDomain }) => {
     const mobilization = { ...props.mobilization, custom_domain: null }
     if (advancedConfig && externalDomain) {
-      mobilization.custom_domain = externalDomain
+      const www = externalDomain.startsWith('www.')
+      mobilization.custom_domain = www ? externalDomain : `www.${externalDomain}`
     } else if (!advancedConfig && subdomain) {
-      mobilization.custom_domain = `${subdomain}.${domain}`
+      const www = subdomain.startsWith('www.')
+      mobilization.custom_domain = www ? `${subdomain}.${domain}` : `www.${subdomain}.${domain}`
     }
     return dispatch(asyncUpdateMobilization(mobilization))
   }

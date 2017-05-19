@@ -78,14 +78,20 @@ class FormDomain extends Component {
                   configurar como endereço da sua mobilização
                 </p>
                 <div className='flex flex-wrap'>
-                  <FormGroup controlId='subdomain' className='col col-6' {...subdomain}>
+                  <div className='prefix'>
+                    <strong>www.</strong>
+                  </div>
+                  <FormGroup controlId='subdomain' {...subdomain}>
                     <ControlLabel>Subdomínio</ControlLabel>
                     <FormControl
                       type='text'
                       placeholder='nomedamob'
                     />
                   </FormGroup>
-                  <FormGroup controlId='domain' className='col col-6' {...domain}>
+                  <div className='delimiter'>
+                    <strong>.</strong>
+                  </div>
+                  <FormGroup controlId='domain' {...domain}>
                     <ControlLabel>Domínio Principal</ControlLabel>
                     <FormDropdown>
                       {hostedZones.map((obj, i) => (
@@ -125,9 +131,10 @@ class FormDomain extends Component {
               </p>
               <FormGroup controlId='externalDomain' {...externalDomain}>
                 <ControlLabel>Domínio personalizado</ControlLabel>
+                <div>www.</div>
                 <FormControl
                   type='text'
-                  placeholder='www.meudominio.com.br'
+                  placeholder='meudominio.com.br'
                 />
               </FormGroup>
 
