@@ -97,7 +97,7 @@ class Input extends Component {
           }}
           onBlur={onBlur}
           placeholder={field.placeholder}
-          type='text'
+          type={field.kind === 'email' ? 'email' : 'text'}
         />
       )
     }
