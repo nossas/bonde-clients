@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import ServerConfig from '~server/config'
 import { FormGroup, ControlLabel, FormControl, FormDropdown } from '~client/components/forms'
 
+if (require('exenv').canUseDOM) require('./form-domain.scss')
+
 const HeaderToggle = ({ children, show, onToggle }) => (
   <h3 onClick={onToggle} style={{ cursor: 'pointer' }}>
     <i
@@ -102,92 +104,92 @@ class FormDomain extends Component {
       ...formProps
     } = this.props
     return (
-      <FormComponent {...formProps}>
-        <div className='basic-config' style={{ marginBottom: '1rem' }}>
-          <HeaderToggle
-            onToggle={() => this.toggle('showSubdomain', !this.state.showSubdomain)}
-            show={this.state.showSubdomain}
-          >
-            {hostedZones.length > 0
-              ? `Quero usar o domínio principal da minha comunidade`
-              : `Quero cadastrar um domínio principal na minha comunidade`}
-          </HeaderToggle>
-          {this.state.showSubdomain && (
-            hostedZones.length > 0 ? (
-              <div>
-                <p className='h5'>
-                  Preencha abaixo o subdomínio e escolha o domínio que deseja
-                  configurar como endereço da sua mobilização
-                </p>
-                <div className='flex flex-wrap'>
-                  <div className='prefix'>
-                    <strong>www.</strong>
+      <div className="components--form-domain">
+        <FormComponent {...formProps}>
+          <div className='basic-config' style={{ marginBottom: '1rem' }}>
+            <HeaderToggle
+              onToggle={() => this.toggle('showSubdomain', !this.state.showSubdomain)}
+              show={this.state.showSubdomain}
+            >
+              {hostedZones.length > 0
+                ? `Quero usar o domínio principal da minha comunidade`
+                : `Quero cadastrar um domínio principal na minha comunidade`}
+            </HeaderToggle>
+            {this.state.showSubdomain && (
+              hostedZones.length > 0 ? (
+                <div>
+                  <p className='h5'>
+                    Preencha abaixo o subdomínio e escolha o domínio que deseja
+                    configurar como endereço da sua mobilização
+                  </p>
+                  <div className='form-groups-container flex flex-wrap'>
+                    <div className='prefix'>www.</div>
+                    <FormGroup controlId='subdomain' {...subdomain}>
+                      <ControlLabel>Subdomínio</ControlLabel>
+                      <FormControl
+                        type='text'
+                        placeholder='nomedamob'
+                      />
+                    </FormGroup>
+                    <div className='delimiter'>
+                      <strong>.</strong>
+                    </div>
+                    <FormGroup controlId='domain' {...domain}>
+                      <ControlLabel>Domínio Principal</ControlLabel>
+                      <FormDropdown>
+                        {hostedZones.map((obj, i) => (
+                          <option key={`hostedZone-${i}`} value={obj.domain_name}>
+                            {obj.domain_name}
+                          </option>
+                        ))}
+                      </FormDropdown>
+                    </FormGroup>
                   </div>
-                  <FormGroup controlId='subdomain' {...subdomain}>
-                    <ControlLabel>Subdomínio</ControlLabel>
-                    <FormControl
-                      type='text'
-                      placeholder='nomedamob'
-                    />
-                  </FormGroup>
-                  <div className='delimiter'>
-                    <strong>.</strong>
-                  </div>
-                  <FormGroup controlId='domain' {...domain}>
-                    <ControlLabel>Domínio Principal</ControlLabel>
-                    <FormDropdown>
-                      {hostedZones.map((obj, i) => (
-                        <option key={`hostedZone-${i}`} value={obj.domain_name}>
-                          {obj.domain_name}
-                        </option>
-                      ))}
-                    </FormDropdown>
-                  </FormGroup>
                 </div>
-              </div>
-            ) : (
+              ) : (
+                <div>
+                  <p className='h5'>
+                    Ops, você ainda não tem um domínio configurado na sua comunidade. Se quiser
+                    cadastar, <a href='#' onClick={this.clickHere.bind(this)} target='_self'>clique aqui</a>.
+                    Senão você pode, abaixo, usar um domínio externo para configurar o endereço
+                    da sua mobilização.
+                  </p>
+                </div>
+              )
+            )}
+          </div>
+          <div className='advanced-config'>
+            <HeaderToggle
+              onToggle={() => this.toggle('showExternalDomain', !this.state.showExternalDomain)}
+              show={this.state.showExternalDomain}
+            >
+              Quero usar um domínio externo
+            </HeaderToggle>
+
+            {this.state.showExternalDomain && (
               <div>
                 <p className='h5'>
-                  Ops, você ainda não tem um domínio configurado na sua comunidade. Se quiser
-                  cadastar, <a href='#' onClick={this.clickHere.bind(this)} target='_self'>clique aqui</a>.
-                  Senão você pode, abaixo, usar um domínio externo para configurar o endereço
-                  da sua mobilização.
+                  Se você quer usar um domínio que comprou mas não está cadastrado na sua comunidade
+                  aqui, pode fazer isso. Por exemplo, se você já comprou www.meudominio.com.br você
+                  pode usá-lo para este BONDE. Demais, né? Preencha o campo abaixo e siga as orientações:
                 </p>
-              </div>
-            )
-          )}
-        </div>
-        <div className='advanced-config'>
-          <HeaderToggle
-            onToggle={() => this.toggle('showExternalDomain', !this.state.showExternalDomain)}
-            show={this.state.showExternalDomain}
-          >
-            Quero usar um domínio externo
-          </HeaderToggle>
-          {this.state.showExternalDomain && (
-            <div>
-              <p className='h5'>
-                Se você quer usar um domínio que comprou mas não está cadastrado na sua comunidade
-                aqui, pode fazer isso. Por exemplo, se você já comprou www.meudominio.com.br você
-                pode usá-lo para este BONDE. Demais, né? Preencha o campo abaixo e siga as orientações:
-              </p>
-              <FormGroup controlId='externalDomain' {...externalDomain}>
-                <ControlLabel>Domínio personalizado</ControlLabel>
-                <div>www.</div>
-                <FormControl
-                  type='text'
-                  placeholder='meudominio.com.br'
-                />
-              </FormGroup>
+                <FormGroup controlId='externalDomain' {...externalDomain}>
+                  <ControlLabel>Domínio personalizado</ControlLabel>
+                  <div className='prefix'>www.</div>
+                  <FormControl
+                    type='text'
+                    placeholder='meudominio.com.br'
+                  />
+                </FormGroup>
 
-              <div className='separator' />
-              
-              {this.renderCNAMETable()}
-               
-            </div>
-          )}
-        </div>
-      </FormComponent>
+                <div className='separator' />
+
+                {this.renderCNAMETable()}
+              </div>
+            )}
+          </div>
+        </FormComponent>
+      </div>
     )
   }
 }

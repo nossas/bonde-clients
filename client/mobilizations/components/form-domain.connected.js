@@ -36,8 +36,8 @@ const mapStateToProps = (state, props) => {
     const hasWWW = customDomain.startsWith('www.')
     const reDomain = hasWWW ? /^www.[\w\-]+\.(.*)/ : /^[\w\-]+\.(.*)/
     const reSubdomain = hasWWW ? /^www\.([\w-]*).[\w-.]*/ : /^([\w-]*).[\w-.]*/
-    
-    const domain = customDomain.match(reDomain)[1] 
+
+    const domain = customDomain.match(reDomain)[1]
     const subdomain = customDomain.match(reSubdomain)[1]
     if (props.hostedZones.find(h => h.domain_name === domain) !== undefined) {
       return {

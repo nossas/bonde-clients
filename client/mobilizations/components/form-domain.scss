@@ -1,0 +1,48 @@
+.components--form-domain {
+
+  .prefix,
+  .delimiter {
+    font-weight: bold;
+  }
+
+  .basic-config {
+
+    .form-groups-container {
+      align-items: flex-end;
+    }
+
+    .form-groups-container .prefix {
+      margin:  20px 15px;
+      margin-left: 0;
+    }
+
+    .form-groups-container .delimiter {
+      margin:  20px 10px;
+    }
+
+    .form-group {
+      padding-bottom: 0.5rem;
+    }
+
+  }
+
+
+  .ux--flat-form {
+
+    .basic-config {
+
+      .form-groups-container .prefix {
+        line-height: 14px;
+        margin-bottom: 0;
+      }
+
+      .form-groups-container .delimiter {
+        line-height: 14px;
+        margin: 0 15px;
+      }
+
+    }
+
+  }
+
+}
