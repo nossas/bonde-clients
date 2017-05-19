@@ -8,7 +8,14 @@ const tagsShouldCleanup = ['input', 'textarea', 'select']
 
 class FormControl extends Component {
   render () {
-    const { componentClass: Component, className, style, submitted, ...props } = this.props
+    const {
+      componentClass: Component,
+      containerClassName,
+      className,
+      style,
+      submitted,
+      ...props
+    } = this.props
     const {
       $formRedux: { formInline, submitting, dirty },
       $formGroup: { controlId, ...field }
@@ -23,7 +30,7 @@ class FormControl extends Component {
     }
 
     return (
-      <div>
+      <div className={containerClassName}>
         <Component
           {...props}
           {...fieldProps}

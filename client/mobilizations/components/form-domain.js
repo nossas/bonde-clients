@@ -104,7 +104,7 @@ class FormDomain extends Component {
       ...formProps
     } = this.props
     return (
-      <div className="components--form-domain">
+      <div className='components--form-domain'>
         <FormComponent {...formProps}>
           <div className='basic-config' style={{ marginBottom: '1rem' }}>
             <HeaderToggle
@@ -175,11 +175,14 @@ class FormDomain extends Component {
                 </p>
                 <FormGroup controlId='externalDomain' {...externalDomain}>
                   <ControlLabel>Domínio personalizado</ControlLabel>
-                  <div className='prefix'>www.</div>
-                  <FormControl
-                    type='text'
-                    placeholder='meudominio.com.br'
-                  />
+                  <div className='form-control-container--external-domain'>
+                    <div className='prefix'>www.</div>
+                    <FormControl
+                      containerClassName='form-control--external-domain'
+                      type='text'
+                      placeholder='meudominio.com.br'
+                    />
+                  </div>
                 </FormGroup>
 
                 <div className='separator' />
