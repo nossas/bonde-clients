@@ -51,6 +51,48 @@ class FormDomain extends Component {
     }
   }
 
+  renderCNAMETable () {
+    const { mobilization, fields: { externalDomain } } = this.props
+    let host = externalDomain ? externalDomain.value : ''
+    if (host.startsWith('www.')) {
+      host = host.replace('www.', '')
+    }
+    return (
+      <div className='h5'>
+        <p>
+          <strong>Não esqueça</strong>: você vai precisar configurar este domínio no seu
+          servidor de registro para que o endereço seja redirecionado à página da sua mobilização.
+          Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:
+        </p>
+        <table className='col-12 left-align'>
+          <tbody>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Dados</th>
+            </tr>
+            <tr>
+              <td><code>{host}</code></td>
+              <td><code>CNAME</code></td>
+              <td><code>{mobilization.slug}.{ServerConfig.appDomain}</code></td>
+            </tr>
+            <tr>
+              <td><code>{`www.${host}`}</code></td>
+              <td><code>CNAME</code></td>
+              <td><code>{mobilization.slug}.{ServerConfig.appDomain}</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE",
+          no nosso tutorial, o <a href='https://trilho.bonde.org' target='_blank'>
+            Trilho <i className='fa fa-external-link' style={{ fontSize: '.7rem' }} />
+          </a>.
+        </p>
+      </div>
+    )
+  }
+
   render () {
     const {
       formComponent: FormComponent,
@@ -139,34 +181,9 @@ class FormDomain extends Component {
               </FormGroup>
 
               <div className='separator' />
-
-              <div className='h5'>
-                <p>
-                  <strong>Não esqueça</strong>: você vai precisar configurar este domínio no seu
-                  servidor de registro para que o endereço seja redirecionado à página da sua mobilização.
-                  Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:
-                </p>
-                <table className='col-12 left-align'>
-                  <tbody>
-                    <tr>
-                      <th>Nome</th>
-                      <th>Tipo</th>
-                      <th>Dados</th>
-                    </tr>
-                    <tr>
-                      <td><code>{externalDomain ? externalDomain.value : ''}</code></td>
-                      <td><code>CNAME</code></td>
-                      <td><code>{mobilization.slug}.{ServerConfig.appDomain}</code></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p>
-                  Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE",
-                  no nosso tutorial, o <a href='https://trilho.bonde.org' target='_blank'>
-                    Trilho <i className='fa fa-external-link' style={{ fontSize: '.7rem' }} />
-                  </a>.
-                </p>
-              </div>
+              
+              {this.renderCNAMETable()}
+               
             </div>
           )}
         </div>

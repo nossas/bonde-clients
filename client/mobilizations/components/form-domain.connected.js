@@ -45,7 +45,10 @@ const mapStateToProps = (state, props) => {
       }
     }
     return {
-      initialValues: { externalDomain: customDomain, advancedConfig: true }
+      initialValues: {
+        externalDomain: hasWWW ? customDomain.replace('www.', '') : customDomain,
+        advancedConfig: true
+      }
     }
   }
   return {
