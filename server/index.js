@@ -97,15 +97,9 @@ export const createServer = (config) => {
     const host = req.headers.host
     const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
     const www = host.match(/^www\.(.*)/)
-    const domains = require('fs').readFileSync('./server/redirect.blacklist')
-    const lines = domains.toString().split('\n')
-    const blacklist = lines.some(line => { if (line) return host.match(line) })
 
-    if (!isAppSubdomain && !www && !blacklist) {
+    if (!isAppSubdomain && !www) {
       res.redirect(301, `${req.protocol}://www.${host}`)
-      return
-    } else if (!isAppSubdomain && www && blacklist) {
-      res.redirect(301, `${req.protocol}://${www[1]}`)
       return
     }
     next()
