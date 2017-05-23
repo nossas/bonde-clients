@@ -78,7 +78,7 @@ class CustomDomainPage extends Component {
               { name: 'twitter:title', content: facebookShareTitle },
               { name: 'twitter:description', content: facebookShareDescription },
               { name: 'twitter:image', content: facebookShareImage },
-              { property: 'twitter:url', content: url },
+              { property: 'twitter:url', content: `${window.location.protocol}//${url}` },
               { property: 'og:url', content: url },
               { property: 'og:title', content: facebookShareTitle },
               { property: 'og:description', content: facebookShareDescription },
