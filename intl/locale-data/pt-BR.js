@@ -78,4 +78,28 @@ export default {
   'community.components--settings-menu.tabs.recipient': 'Recebedor',
   'community.components--settings-menu.tabs.report': 'Relatório',
   'community.components--settings-menu.tabs.domains': 'Domínios',
+
+  // component community domain preview
+  'community.components--domain-preview.li.domain.header': 'Domínio da comunidade',
+
+  // component community subdomain preview
+  'community.components--subdomain-preview.li.subdomain.header': 'Subdomínio',
+  'community.components--subdomain-preview.li.record-type.header': 'Tipo',
+  'community.components--subdomain-preview.li.redirect-to.header': 'Redirecionar para',
+
+  // page community domain
+  'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
+  'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
+  'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
+  'page--community-domain.section--dns-hosted-zone.menu.remove': 'Remover domínio',
+  'page--community-domain.section--dns-hosted-zone.menu.remove.dialog.text': 'Tem certeza que deseja remover o domínio {domainName}?',
+  'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Verificar DNS',
+  'page--community-domain.section--dns-records.title': 'Subdomínios externos',
+  'page--community-domain.section--dns-records.add': 'Adicionar novo subdomínio externo',
+  'page--community-domain.section--dns-records.menu.remove': 'Remover subdomínio',
+  'page--community-domain.section--dns-records.menu.remove.dialog.text': 'Tem certeza que deseja remover o subdomínio {subdomainName}?',
+
+  // component dialog
+  'ux.components--dialog.button.confirm.text': 'Confirmar',
+  'ux.components--dialog.button.cancel.text': 'Cancelar',
 }
