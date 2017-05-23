@@ -35,4 +35,20 @@ export default {
   'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
   'page--subscription-edit.button.recurring': 'Data da doação',
+
+  // form subscription credit card
+  'form--subscription-creditcard.helper-text': 'Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
+  'form--subscription-creditcard.previous-data.title': 'Dados do último cartão',
+  'form--subscription-creditcard.previous-data.name': 'Nome',
+  'form--subscription-creditcard.previous-data.expiration-date': 'Validade',
+  'form--subscription-creditcard.form.number.label': 'Número',
+  'form--subscription-creditcard.form.number.placeholder': 'Ex: 0000 0000 0000 0000',
+  'form--subscription-creditcard.form.name.label': 'Nome',
+  'form--subscription-creditcard.form.name.placeholder': '(igual ao que aparece no cartão)',
+  'form--subscription-creditcard.form.expiration-date.label': 'Validade',
+  'form--subscription-creditcard.form.expiration-date.placeholder': '00/00',
+  'form--subscription-creditcard.form.cvv.label': 'CVV',
+  'form--subscription-creditcard.form.cvv.placeholder': 'Ex: 000',
+  'form--subscription-creditcard.form.submit-button.text': 'Salvar',
+  'form--subscription-creditcard.form.validation.required': 'Obrigatório',
 }
