@@ -48,6 +48,7 @@
     "opn": "^4.0.2",
     "prop-types": "^15.5.8",
     "raven": "^1.1.4",
+    "raven-js": "^3.15.0",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
     "react-color": "^2.11.1",
