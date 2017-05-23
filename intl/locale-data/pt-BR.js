@@ -59,4 +59,10 @@ export default {
   'form--subscription-recurring.form.submit-button.text': 'Salvar',
   'form--subscription-recurring.form.validation.required': 'Obrigatório',
   'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de data inválido',
+
+  // notifications
+  'notification--generic-request-error.title': 'Ops!',
+  'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
+  'notification--generic-save-success.title': 'Oba!',
+  'notification--generic-save-success.message': 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
 }
