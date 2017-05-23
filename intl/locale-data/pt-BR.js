@@ -51,4 +51,12 @@ export default {
   'form--subscription-creditcard.form.cvv.placeholder': 'Ex: 000',
   'form--subscription-creditcard.form.submit-button.text': 'Salvar',
   'form--subscription-creditcard.form.validation.required': 'Obrigatório',
+
+  // form subscription recurring
+  'form--subscription-recurring.helper-text': 'Preencha os campos abaixo para alterar a data em que a cobrança da sua doação é efetuada. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
+  'form--subscription-recurring.form.process-at.label': 'Nova data de cobrança',
+  'form--subscription-recurring.form.process-at.placeholder': 'Ex: DD/MM/AAAA',
+  'form--subscription-recurring.form.submit-button.text': 'Salvar',
+  'form--subscription-recurring.form.validation.required': 'Obrigatório',
+  'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de data inválido',
 }
