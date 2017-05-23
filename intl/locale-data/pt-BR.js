@@ -70,4 +70,12 @@ export default {
   'page--community-list.title': 'Olá {userFirstName},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
   'page--community-list.new': 'Crie uma nova comunidade',
+
+  // component community settings menu
+  'community.components--settings-menu.title': 'Configurações da comunidade',
+  'community.components--settings-menu.tabs.info': 'Informações',
+  'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
+  'community.components--settings-menu.tabs.recipient': 'Recebedor',
+  'community.components--settings-menu.tabs.report': 'Relatório',
+  'community.components--settings-menu.tabs.domains': 'Domínios',
 }
