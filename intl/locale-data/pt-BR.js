@@ -38,9 +38,11 @@ export default {
 
   // form subscription credit card
   'form--subscription-creditcard.helper-text': 'Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
+
   'form--subscription-creditcard.previous-data.title': 'Dados do último cartão',
   'form--subscription-creditcard.previous-data.name': 'Nome',
   'form--subscription-creditcard.previous-data.expiration-date': 'Validade',
+
   'form--subscription-creditcard.form.number.label': 'Número',
   'form--subscription-creditcard.form.number.placeholder': 'Ex: 0000 0000 0000 0000',
   'form--subscription-creditcard.form.name.label': 'Nome',
@@ -94,6 +96,7 @@ export default {
   'page--community-domain.section--dns-hosted-zone.menu.remove': 'Remover domínio',
   'page--community-domain.section--dns-hosted-zone.menu.remove.dialog.text': 'Tem certeza que deseja remover o domínio {domainName}?',
   'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Verificar DNS',
+
   'page--community-domain.section--dns-records.title': 'Subdomínios externos',
   'page--community-domain.section--dns-records.add': 'Adicionar novo subdomínio externo',
   'page--community-domain.section--dns-records.menu.remove': 'Remover subdomínio',
@@ -102,4 +105,24 @@ export default {
   // component dialog
   'ux.components--dialog.button.confirm.text': 'Confirmar',
   'ux.components--dialog.button.cancel.text': 'Cancelar',
+
+  // page community create
+  'page--community-domain-create.title': 'Domínio da comunidade',
+
+  'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
+  'page--community-domain-create.step-add.form.domain-name.label': 'Domínio da sua comunidade',
+  'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ex. minhacomunidade.org',
+  'page--community-domain-create.step-add.form.button.text': 'Adicionar',
+
+  'page--community-domain-create.step-dns-servers.title': 'Altere os servidores do seu provedor DNS',
+  'page--community-domain-create.step-dns-servers.first-paragraph': '1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)',
+  'page--community-domain-create.step-dns-servers.second-paragraph': '2. Encontre a página de {dnsManager}, e altere os {serversName} para os servidores do Bonde:',
+  'page--community-domain-create.step-dns-servers.second-paragraph.dns-manager': 'gerenciador de DNS',
+  'page--community-domain-create.step-dns-servers.second-paragraph.servers-name': 'nomes de servidor',
+  'page--community-domain-create.step-dns-servers.button.text': 'Continuar',
+
+  'page--community-domain-create.step-check.title': 'Teste a conexão',
+  'page--community-domain-create.step-check.first-paragraph': 'Clique no botão abaixo para verificar se tudo está certo.',
+  'page--community-domain-create.step-check.second-paragraph': 'Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.',
+  'page--community-domain-create.step-check.button.text': 'Testar',
 }
