@@ -29,4 +29,10 @@ export default {
   'page--account-edit.form.email.label': 'E-mail',
   'page--account-edit.form.submit-button.default': 'Salvar',
   'page--account-edit.form.submit-button.success-message': 'Dados editados com sucesso.',
+
+  // page subscription edit
+  'page--subscription-edit.title': 'Dados da Doação',
+  'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
+  'page--subscription-edit.button.creditcard': 'Cartão de crédito',
+  'page--subscription-edit.button.recurring': 'Data da doação',
 }
