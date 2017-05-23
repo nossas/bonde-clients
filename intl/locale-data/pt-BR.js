@@ -20,4 +20,13 @@ export default {
   'page--account-register.form.password-confirm.label': 'Confirme sua senha',
   'page--account-register.form.submit-button.default': 'Criar conta',
   'page--account-register.form.submit-button.saving': 'Salvando...',
+
+  // page account edit
+  'page--account-edit.header.title': 'Minha conta',
+  'page--account-edit.header.tabs.user': 'Usuário',
+  'page--account-edit.form.name.label': 'Nome',
+  'page--account-edit.form.lastname.label': 'Sobrenome',
+  'page--account-edit.form.email.label': 'E-mail',
+  'page--account-edit.form.submit-button.default': 'Salvar',
+  'page--account-edit.form.submit-button.success-message': 'Dados editados com sucesso.',
 }
