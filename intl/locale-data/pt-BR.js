@@ -65,4 +65,9 @@ export default {
   'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
   'notification--generic-save-success.title': 'Oba!',
   'notification--generic-save-success.message': 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
+
+  // page community list
+  'page--community-list.title': 'Olá {userFirstName},',
+  'page--community-list.subtitle': 'Escolha uma das suas comunidades',
+  'page--community-list.new': 'Crie uma nova comunidade',
 }
