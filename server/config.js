@@ -1,4 +1,5 @@
 const config = {
+  sentryDsn: process.env.SENTRY_DSN || 'https://1111:2222@sentry.io/86182',
   nodeEnv: process.env.NODE_ENV,
   webConcurrency: process.env.WEB_CONCURRENCY || 1,
   port: process.env.PORT || 1337,
