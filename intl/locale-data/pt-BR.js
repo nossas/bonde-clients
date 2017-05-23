@@ -1,5 +1,6 @@
 export default {
   // page account login
+  // filepath: /routes/admin/not-authenticated/account-login/page.js
   'page--account-login.label.email': 'E-mail',
   'page--account-login.label.password': 'Senha',
   'page--account-login.placeholder.email': 'exemplo@email.com',
@@ -9,6 +10,7 @@ export default {
   'page--account-login.cta-signup': 'Clique para criar uma conta.',
 
   // page account register
+  // filepath: /routes/admin/not-authenticated/account-register/page.js
   'page--account-register.title': 'Crie sua conta no Bonde.',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
@@ -28,6 +30,7 @@ export default {
   'page--account-register.form.submit-button.saving': 'Salvando...',
 
   // page account edit
+  // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
   'page--account-edit.header.title': 'Minha conta',
   'page--account-edit.header.tabs.user': 'Usuário',
   'page--account-edit.form.name.label': 'Nome',
@@ -37,12 +40,14 @@ export default {
   'page--account-edit.form.submit-button.success-message': 'Dados editados com sucesso.',
 
   // page subscription edit
+  // filepath: /routes/public/subscription-edit/page.js
   'page--subscription-edit.title': 'Dados da Doação',
   'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
   'page--subscription-edit.button.recurring': 'Data da doação',
 
   // form subscription credit card
+  // filepath: /client/subscriptions/forms/credit-card-form.js
   'form--subscription-creditcard.helper-text': 'Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
 
   'form--subscription-creditcard.previous-data.title': 'Dados do último cartão',
@@ -61,6 +66,7 @@ export default {
   'form--subscription-creditcard.form.validation.required': 'Obrigatório',
 
   // form subscription recurring
+  // filepath: /client/subscriptions/forms/recurring-form.js
   'form--subscription-recurring.helper-text': 'Preencha os campos abaixo para alterar a data em que a cobrança da sua doação é efetuada. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
   'form--subscription-recurring.form.process-at.label': 'Nova data de cobrança',
   'form--subscription-recurring.form.process-at.placeholder': 'Ex: DD/MM/AAAA',
@@ -69,17 +75,20 @@ export default {
   'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de data inválido',
 
   // notifications
+  // filepath: /client/utils/notifications.js
   'notification--generic-request-error.title': 'Ops!',
   'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
   'notification--generic-save-success.title': 'Oba!',
   'notification--generic-save-success.message': 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
 
   // page community list
+  // filepath: /routes/admin/authenticated/external/community-list/page.js
   'page--community-list.title': 'Olá {userFirstName},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
   'page--community-list.new': 'Crie uma nova comunidade',
 
   // component community settings menu
+  // filepath: /client/community/components/settings-menu.js
   'community.components--settings-menu.title': 'Configurações da comunidade',
   'community.components--settings-menu.tabs.info': 'Informações',
   'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
@@ -88,20 +97,24 @@ export default {
   'community.components--settings-menu.tabs.domains': 'Domínios',
 
   // component community domain preview
+  // filepath: /client/community/components/dns/dns-preview/domain-preview.js
   'community.components--domain-preview.li.domain.header': 'Domínio da comunidade',
 
   // component community subdomain preview
+  // filepath: /client/community/components/dns/dns-preview/subdomain-preview.js
   'community.components--subdomain-preview.li.subdomain.header': 'Subdomínio',
   'community.components--subdomain-preview.li.record-type.header': 'Tipo',
   'community.components--subdomain-preview.li.redirect-to.header': 'Redirecionar para',
 
   // component community subdomain form
+  // filepath: /client/community/components/dns/subdomain-form/index.js
   'community.components--subdomain-form.subdomain.label': 'Subdomínio',
   'community.components--subdomain-form.record-type.label': 'Tipo',
   'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
   'community.components--subdomain-form.button.text': 'Adicionar',
 
   // page community domain
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
 
   'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
@@ -117,10 +130,12 @@ export default {
   'page--community-domain.section--dns-records.menu.remove.dialog.text': 'Tem certeza que deseja remover o subdomínio {subdomainName}?',
 
   // component dialog
+  // filepath: /client/ux/components/dialog/index.js
   'ux.components--dialog.button.confirm.text': 'Confirmar',
   'ux.components--dialog.button.cancel.text': 'Cancelar',
 
-  // page community create
+  // page community domain create
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/domain-create/page.js
   'page--community-domain-create.title': 'Domínio da comunidade',
 
   'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
@@ -143,6 +158,7 @@ export default {
   'page--community-domain-create.step-check.button.text': 'Testar',
 
   // page community info
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   'page--community-info.form.name.label': 'Nome',
   'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-info.form.description.label': 'Descrição',
@@ -153,10 +169,12 @@ export default {
   'page--community-info.form.custom-from-email.validation.invalid-email-format': 'E-mail de resposta fora do formato padrão',
 
   // component settings form
+  // filepath: /client/ux/components/settings-form/index.js
   'ux.components--settings-form.button.text': 'Salvar',
   'ux.components--settings-form.success-message': 'Dados editados com sucesso',
 
   // page community mailchimp
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
   'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
