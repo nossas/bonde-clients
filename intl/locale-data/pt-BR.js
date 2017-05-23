@@ -132,5 +132,10 @@ export default {
   'page--community-domain-create.step-check.second-paragraph': 'Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.',
   'page--community-domain-create.step-check.button.text': 'Testar',
 
-
+  // page community info
+  'page--community-info.form.name.label': 'Nome',
+  'page--community-info.form.description.label': 'Descrição',
+  'page--community-info.form.city.label': 'Cidade',
+  'page--community-info.form.custom-from-email.label': 'E-mail de resposta para notificações',
+  'page--community-info.form.custom-from-email.helper-text': 'Você deve preencher seguindo o formato padrão: Nome do contato <contato@provedor.com>',
 }
