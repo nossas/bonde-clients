@@ -53,7 +53,7 @@ class CustomDomainPage extends Component {
   }
 
   render () {
-    const { host, mobilization } = this.props
+    const { host, mobilization, protocol } = this.props
 
     if (mobilization) {
       const {
@@ -66,7 +66,7 @@ class CustomDomainPage extends Component {
         body_font: bodyFont
       } = mobilization
 
-      const url = mobilization.custom_domain || host
+      const url = `${protocol}//${mobilization.custom_domain}` || host
 
       return (
         <div>
@@ -78,7 +78,7 @@ class CustomDomainPage extends Component {
               { name: 'twitter:title', content: facebookShareTitle },
               { name: 'twitter:description', content: facebookShareDescription },
               { name: 'twitter:image', content: facebookShareImage },
-              { property: 'twitter:url', content: `${window.location.protocol}//${url}` },
+              { property: 'twitter:url', content: url },
               { property: 'og:url', content: url },
               { property: 'og:title', content: facebookShareTitle },
               { property: 'og:description', content: facebookShareDescription },
@@ -96,6 +96,7 @@ class CustomDomainPage extends Component {
 
 CustomDomainPage.propTypes = {
   host: PropTypes.string,
+  protocol: PropTypes.string,
   mobilization: PropTypes.object,
   blocks: PropTypes.array.isRequired,
   widgets: PropTypes.array.isRequired
