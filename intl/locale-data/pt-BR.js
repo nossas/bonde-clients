@@ -178,4 +178,21 @@ export default {
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
   'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
+
+  // page community new
+  // filepath: /routes/admin/authenticated/external/community-new/page.js
+  'page--community-new.title': 'Crie uma comunidade',
+  'page--community-new.subtitle': 'Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.',
+
+  'page--community-new.form.name.label': 'Nome da comunidade',
+  'page--community-new.form.name.placeholder': 'Exemplo: Movimento 90º São Paulo',
+  'page--community-new.form.city.label': 'Cidade da comunidade',
+  'page--community-new.form.city.placeholder': 'Exemplo: São Paulo',
+  'page--community-new.form.submit-button.text.default': 'Criar comunidade',
+  'page--community-new.form.submit-button.text.saving': 'Salvando...',
+
+  // page community new (connected)
+  // filepath: /routes/admin/authenticated/external/community-new/page.connected.js
+  'page--community-new.form.name.validation.required': 'Informe o nome da comunidade',
+  'page--community-new.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
 }
