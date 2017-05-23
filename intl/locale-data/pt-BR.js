@@ -6,7 +6,7 @@ export default {
   'page--account-login.loading': 'Carregando...',
   'page--account-login.signin': 'Entrar',
   'page--account-login.ask-register': 'Ainda não é cadastrado?',
-  'page--account-login.cta-signup': 'Clique para criar uma conta.'
+  'page--account-login.cta-signup': 'Clique para criar uma conta.',
 
   // page account register
   'page--account-register.title': 'Crie sua conta no Bonde.',
@@ -155,4 +155,9 @@ export default {
   // component settings form
   'ux.components--settings-form.button.text': 'Salvar',
   'ux.components--settings-form.success-message': 'Dados editados com sucesso',
+
+  // page community mailchimp
+  'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
+  'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
+  'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
 }
