@@ -89,6 +89,12 @@ export default {
   'community.components--subdomain-preview.li.record-type.header': 'Tipo',
   'community.components--subdomain-preview.li.redirect-to.header': 'Redirecionar para',
 
+  // component community subdomain form
+  'community.components--subdomain-form.subdomain.label': 'Subdomínio',
+  'community.components--subdomain-form.record-type.label': 'Tipo',
+  'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
+  'community.components--subdomain-form.button.text': 'Adicionar',
+
   // page community domain
   'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
   'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
@@ -125,4 +131,6 @@ export default {
   'page--community-domain-create.step-check.first-paragraph': 'Clique no botão abaixo para verificar se tudo está certo.',
   'page--community-domain-create.step-check.second-paragraph': 'Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.',
   'page--community-domain-create.step-check.button.text': 'Testar',
+
+
 }
