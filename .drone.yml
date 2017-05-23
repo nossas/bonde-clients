@@ -29,8 +29,9 @@ pipeline:
     port: 22
     script:
       - sudo docker pull nossas/bonde-client:${DRONE_BRANCH}
-      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/client:latest
-      - dokku tags:deploy client latest
+      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/0-client:latest
+      - dokku tags:deploy 0-client latest
+      - dokku tags:deploy app-client latest
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -63,8 +64,10 @@ pipeline:
     port: 22
     script:
       - sudo docker pull nossas/bonde-client:${DRONE_TAG##v}
-      - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/client:latest
-      - dokku tags:deploy client latest
+      - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/0-client:latest
+      - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
+      - dokku tags:deploy 0-client latest
+      - dokku tags:deploy app-client latest
     when:
       status: success
       event: tag
