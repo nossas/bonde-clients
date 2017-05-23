@@ -12,12 +12,18 @@ export default {
   'page--account-register.title': 'Crie sua conta no Bonde.',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
+  'page--account-register.form.name.validation.required': 'Informe seu nome',
   'page--account-register.form.lastname.label': 'Sobrenome',
   'page--account-register.form.lastname.placeholder': 'Sobrenome',
   'page--account-register.form.email.label': 'E-mail',
   'page--account-register.form.email.placeholder': 'exemplo@email.com.br',
+  'page--account-register.form.email.validation.required': 'Informe seu e-mail',
+  'page--account-register.form.email.validation.invalid-email-format': 'E-mail inválido',
   'page--account-register.form.password.label': 'Senha',
+  'page--account-register.form.password.label.validation.required': 'Informe uma senha',
+  'page--account-register.form.password.label.validation.min-length': 'Sua senha precisa ter um minímo de 8 caracteres.',
   'page--account-register.form.password-confirm.label': 'Confirme sua senha',
+  'page--account-register.form.password-confirm.label.validation.match': 'Senha não confere',
   'page--account-register.form.submit-button.default': 'Criar conta',
   'page--account-register.form.submit-button.saving': 'Salvando...',
 
@@ -96,6 +102,8 @@ export default {
   'community.components--subdomain-form.button.text': 'Adicionar',
 
   // page community domain
+  'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
+
   'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
   'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
   'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
@@ -118,6 +126,8 @@ export default {
   'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
   'page--community-domain-create.step-add.form.domain-name.label': 'Domínio da sua comunidade',
   'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ex. minhacomunidade.org',
+  'page--community-domain-create.step-add.form.domain-name.validation.required': 'Domínio é obrigatório.',
+  'page--community-domain-create.step-add.form.domain-name.validation.invalid-domain-format': 'Domínio inválido',
   'page--community-domain-create.step-add.form.button.text': 'Adicionar',
 
   'page--community-domain-create.step-dns-servers.title': 'Altere os servidores do seu provedor DNS',
@@ -134,8 +144,15 @@ export default {
 
   // page community info
   'page--community-info.form.name.label': 'Nome',
+  'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-info.form.description.label': 'Descrição',
   'page--community-info.form.city.label': 'Cidade',
+  'page--community-info.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
   'page--community-info.form.custom-from-email.label': 'E-mail de resposta para notificações',
   'page--community-info.form.custom-from-email.helper-text': 'Você deve preencher seguindo o formato padrão: Nome do contato <contato@provedor.com>',
+  'page--community-info.form.custom-from-email.validation.invalid-email-format': 'E-mail de resposta fora do formato padrão',
+
+  // component settings form
+  'ux.components--settings-form.button.text': 'Salvar',
+  'ux.components--settings-form.success-message': 'Dados editados com sucesso',
 }
