@@ -601,4 +601,14 @@ export default {
   'widgets.components--donation.period-label-options.year': 'ano',
   'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
   'widgets.components--donation.users-choice.unique': 'Doação única',
+
+  // page form widget
+  // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
+  'widgets.components--form.form.success-message': 'Formulário configurado com sucesso!',
+  'widgets.components--form.form.widget-title.label': 'Título do formulário',
+  'widgets.components--form.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
+  'widgets.components--form.form.button-text.label': 'Botão',
+  'widgets.components--form.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
+  'widgets.components--form.form.counter-text.label': 'Contador',
+  'widgets.components--form.form.counter-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
 }
