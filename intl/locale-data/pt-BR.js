@@ -315,4 +315,11 @@ export default {
   // filepath: /client/components/forms/control-buttons.js
   'components--control-buttons.input.value.default': 'Continuar',
   'components--control-buttons.input.value.saving': 'Salvando...',
+
+  // page mobilizations templates choose
+  // filepath: /routes/admin/authenticated/sidebar/templates-choose/page.js
+  'page--mobilizations.templates-choose.title': 'Como você deseja começar?',
+  'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar mobilização do zero',
+  'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Meus templates',
+  'page--mobilizations.templates-choose.browsable-list-item.templates-global': 'Templates globais',
 }
