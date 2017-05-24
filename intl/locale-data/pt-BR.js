@@ -310,4 +310,9 @@ export default {
   'mobilizations.components--basics-form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
   'mobilizations.components--basics-form.goal.validation.required': 'Insira o objetivo da mobilização',
   'mobilizations.components--basics-form.goal.validation.max-length': 'O limite de caracteres foi atingido.',
+
+  // component control buttons
+  // filepath: /client/components/forms/control-buttons.js
+  'components--control-buttons.input.value.default': 'Continuar',
+  'components--control-buttons.input.value.saving': 'Salvando...',
 }
