@@ -470,4 +470,12 @@ export default {
   'page--templates-list.more-menu-action.remove.text': 'Remover',
   'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
   'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
+
+  // page templates create
+  // filepath: /routes/admin/authenticated/sidebar/templates-create/page.js
+  'page--templates-create.header.title': 'Crie um template a partir da mobilização',
+  'page--templates-create.form.name.label': 'Nome do seu template',
+  'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
+  'page--templates-create.form.goal.label': 'Descrição',
+  'page--templates-create.form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
 }
