@@ -425,4 +425,19 @@ export default {
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
   'components.navigation--navbar-edition-wrapper.block': 'Bloco',
+
+  // component mobilizations form share
+  // filepath: /client/mobilizations/components/form-share.js
+  'mobilizations.components--form-share.facebook.title': 'Share de Facebook',
+  'mobilizations.components--form-share.facebook.helper-text': 'Configure o post que será publicado no Facebook sempre que alguém compartilhar a ação. É importante que esses textos sejam cativantes e curtos para não aparecerem cortados. :)',
+  'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagem',
+  'mobilizations.components--form-share.facebook.form.share-title.label': 'Título do post',
+  'mobilizations.components--form-share.facebook.form.share-title.placeholder': 'Um título direto que passe a ideia da sua mobilização',
+  'mobilizations.components--form-share.facebook.form.share-description.label': 'Subtítulo do post',
+  'mobilizations.components--form-share.facebook.form.share-description.placeholder': 'Complete a informação do título e chame o leitor para a mobilização',
+
+  'mobilizations.components--form-share.twitter.title': 'Share de Twitter',
+  'mobilizations.components--form-share.twitter.helper-text': 'Configure a mensagem que será publicada no Twitter sempre que alguém compartilhar sua mobilização.',
+  'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto do Tweet',
+  'mobilizations.components--form-share.twitter.form.share-text.placeholder': 'Insira uma frase e chame o leitor para a mobilização',
 }
