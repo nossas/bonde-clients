@@ -288,4 +288,26 @@ export default {
   // filepath: /client/mobilizations/components/list/items/fund-raising.js
   'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
+
+  // component mobilizations page tab layout
+  // filepath: /client/mobilizations/components/page-tab-layout.js
+  'mobilizations.components--page-tab-layout.title': 'Nova mobilização',
+  'mobilizations.components--tabs.goal': 'Objetivo',
+  'mobilizations.components--tabs.templates': 'Templates',
+
+  // page mobilizations new
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-new/page.js
+  'page--mobilizations-new.title': 'Qual o objetivo da sua mobilização?',
+  'page--mobilizations-new.footer': 'Fique tranquil@ vc poderá editar depois se achar necessário.',
+
+  // component mobilizations mobilization basics form
+  // filepath: /client/mobilizations/components/mobilization-basics-form.js
+  'mobilizations.components--basics-form.name.label': 'Nome',
+  'mobilizations.components--basics-form.name.placeholder': 'Ex: Pela criação de uma delegacia de desaparecidos',
+  'mobilizations.components--basics-form.name.validation.required': 'Insira o nome da mobilização',
+  'mobilizations.components--basics-form.name.validation.max-length': 'Seu título está muito longo!',
+  'mobilizations.components--basics-form.goal.label': 'Objetivo',
+  'mobilizations.components--basics-form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+  'mobilizations.components--basics-form.goal.validation.required': 'Insira o objetivo da mobilização',
+  'mobilizations.components--basics-form.goal.validation.max-length': 'O limite de caracteres foi atingido.',
 }
