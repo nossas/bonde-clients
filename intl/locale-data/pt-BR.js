@@ -337,4 +337,26 @@ export default {
   // page mobilizations templates choose global
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-global/page.js
   'page--mobilizations.templates-choose-global.title': 'Templates Globais',
+
+  // component mobilizations settings menu
+  // filepath: /client/mobilizations/components/settings-menu.js
+  'mobilizations.components--settings-menu.title': 'Configure sua mobilização',
+  'mobilizations.components--settings-menu.tabs.info': 'Informações básicas',
+  'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
+  'mobilizations.components--settings-menu.tabs.domain': 'Domínio',
+
+  // page mobilizations settings analytics
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.js
+  'page--mobilizations-analytics.first-paragraph': 'Para acompanhar os resultados da sua mobilização, você precisa configurar uma conta no Google Analytics.',
+  'page--mobilizations-analytics.second-paragraph': 'Siga os passos abaixo:',
+  'page--mobilizations-analytics.ol.create-analytics-account': ' Crie uma conta no Google Analytics {link}',
+  'page--mobilizations-analytics.ol.create-analytics-account.link': 'clicando aqui',
+  'page--mobilizations-analytics.ol.keep-up-with': 'Obtenha sua ID de acompanhamento no Google Analytics. É um código que começa sempre com as letras UA, que você verá após criar sua conta lá.',
+  'page--mobilizations-analytics.ol.paste-ga-code': 'Copie a ID de acompanhamento e cole no campo abaixo:',
+  'page--mobilizations-analytics.ol.form.ga-code.label': 'ID do Google Analytics',
+  'page--mobilizations-analytics.ol.done': 'Pronto! Você já pode acompanhar as estatísticas da sua mobilização no Google Analytics!',
+
+  // page mobilizations settings analytics (connected)
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.connected.js
+  'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Informe uma ID válida',
 }
