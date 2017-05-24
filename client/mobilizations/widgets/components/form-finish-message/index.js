@@ -49,7 +49,7 @@ export const FormFinishMessage = props => {
       }}
       successMessage={successMessage || 'Formulário salvo com sucesso!'}
     >
-      <FormGroup controlId='payment-type-id' {...finishMessageType}>
+      <FormGroup controlId='finish-message-type-id' {...finishMessageType}>
         <ControlLabel>Tipo de mensagem</ControlLabel>
         <RadioGroup>
           <Radio value='share'>Compartilhar</Radio>

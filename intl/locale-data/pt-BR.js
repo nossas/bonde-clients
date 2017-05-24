@@ -544,4 +544,51 @@ export default {
   'widgets.components--form-autofire.form.email-subject.placeholder': 'Defina o assunto que irá aparecer na mensagem enviada.',
   'widgets.components--form-autofire.form.email-text.label': 'Email de agradecimento',
   'widgets.components--form-autofire.form.email-text.placeholder': 'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço.',
+
+  // component widget form finish message
+  // filepath: /client/mobilizations/widgets/components/form-finish-message/index.js
+  'widgets.components--form-finish-message.success-message': 'Formulário salvo com sucesso!',
+  'widgets.components--form-finish-message.type.label': 'Tipo de mensagem',
+  'widgets.components--form-finish-message.type.radio.share': 'Compartilhar',
+  'widgets.components--form-finish-message.type.radio.custom': 'Customizar',
+  'widgets.components--form-finish-message.type.validation.required': 'Nenhum tipo de mensagem foi selecionado',
+  'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto do WhatsApp',
+  'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+  'widgets.components--form-finish-message.preview.label': 'Preview',
+  'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar...',
+
+  // component share tell-a-friend
+  // filepath: /client/components/share/tell-a-friend.js
+  'share.components--tell-a-friend.text': 'Agora, compartilhe com seus amigos!',
+
+  // component share facebook-share-button
+  // filepath: /client/components/share/facebook-share-button.js
+  'share.components--facebook-share-button.text': 'Compartilhar no Facebook',
+
+  // component share twitter-share-button
+  // filepath: /client/components/share/twitter-share-button.js
+  'share.components--twitter-share-button.text': 'Compartilhar no Twitter',
+
+  // component share whatsapp-share-button
+  // filepath: /client/components/share/whatsapp-share-button.js
+  'share.components--whatsapp-share-button.text': 'Compartilhar no WhatsApp',
+
+  // page donation widget finish
+  // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page.js
+  'page--donation-widget-finish.form.success-message': 'Formulário de pós-doação salvo com sucesso!',
+
+  // component donation widget tell-a-friend
+  // filepath: /client/mobilizations/widgets/__plugins__/donation/components/donation-tell-a-friend.js
+  'donation.components--tell-a-friend.message': 'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.',
+
+  // config mobrender widgets
+  // filepath: /client/mobrender/widgets/config.js
+  'widgets.config--content.label': 'Texto',
+  'widgets.config--content.default': 'Clique aqui para editar...',
+  'widgets.config--form.label': 'Formulário',
+  'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
+  'widgets.config--pressure.label': 'Pressão',
+  'widgets.config--pressure.default.title': 'Envie um e-mail para quem pode tomar essa decisão',
+  'widgets.config--pressure.default.button-text': 'Enviar e-mail',
+  'widgets.config--donation.label': 'Doação',
 }
