@@ -333,4 +333,8 @@ export default {
   // page mobilizations templates choose custom
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
   'page--mobilizations.templates-choose-custom.title': 'Meus Templates',
+
+  // page mobilizations templates choose global
+  // filepath: /routes/admin/authenticated/sidebar/templates-choose-global/page.js
+  'page--mobilizations.templates-choose-global.title': 'Templates Globais',
 }

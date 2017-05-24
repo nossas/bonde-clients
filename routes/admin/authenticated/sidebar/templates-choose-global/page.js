@@ -13,7 +13,7 @@ const TemplatesChooseGlobalPage = ({
 }) => (
   <PageTabLayout {...{ location }}>
     <div className='choose-global-page col-12'>
-      <h3 className='h1 mt0 mb3 center'>Meus Templates</h3>
+      <h3 className='h1 mt0 mb3 center'>Templates Globais</h3>
       <TemplateSelectableList
         {...listableProps}
         handleGoBack={() => browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))}
