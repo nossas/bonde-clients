@@ -241,4 +241,22 @@ export default {
   'page--community-report.section-button.activists.title': 'RELATÓRIO DE ATIVISTAS',
   'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório dos ativistas da comunidade.',
   'page--community-report.section-button.activists.text': 'Baixar',
+
+  // component sidebar
+  // filepath: /client/components/navigation/sidebar/sidebar.js
+  'components.navigation--sidebar.community-settings.item.mobilizations': 'Minhas Mobilizações',
+  'components.navigation--sidebar.community-settings.item.info': 'Informações',
+  'components.navigation--sidebar.community-settings.item.mailchimp': 'Mailchimp',
+  'components.navigation--sidebar.community-settings.item.recipient': 'Recebedor',
+  'components.navigation--sidebar.community-settings.item.report': 'Relatório',
+  'components.navigation--sidebar.community-settings.item.domains': 'Domínios',
+
+  'components.navigation--sidebar.mobilization-settings.item.launch': 'PUBLICAR BONDE',
+  'components.navigation--sidebar.mobilization-settings.item.launched': 'BONDE público',
+  'components.navigation--sidebar.mobilization-settings.item.edit': 'Editar mobilização',
+  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar conteúdo',
+  'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Ver em uma nova aba',
+  'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações',
+
+  'components.navigation--sidebar.footer.sign-out': 'Sair',
 }
