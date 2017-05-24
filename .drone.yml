@@ -4,6 +4,8 @@ pipeline:
     commands:
       - yarn
       - yarn test
+    when:
+      event: [push, tag]
 
   publish-staging:
     image: plugins/docker
