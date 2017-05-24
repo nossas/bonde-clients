@@ -227,4 +227,18 @@ export default {
   'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF deve conter 11 digitos',
   'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format': 'CPF inválido',
   'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format': 'CNPJ inválido',
+
+  // page community report
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+  'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
+  'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',
+  'page--community-report.section-button.donation.text': 'Baixar',
+
+  'page--community-report.section-button.actions.title': 'RELATÓRIO DE AÇÕES',
+  'page--community-report.section-button.actions.helper-text': 'Clique no botão abaixo para baixar o relatório de ações feitas na comunidade.',
+  'page--community-report.section-button.actions.text': 'Baixar',
+
+  'page--community-report.section-button.activists.title': 'RELATÓRIO DE ATIVISTAS',
+  'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório dos ativistas da comunidade.',
+  'page--community-report.section-button.activists.text': 'Baixar',
 }
