@@ -478,4 +478,56 @@ export default {
   'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
   'page--templates-create.form.goal.label': 'Descrição',
   'page--templates-create.form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+
+  // component donation widget settings menu
+  // filepath: /client/mobilizations/widgets/__plugins__/donation/components/settings-menu.js
+  'donation.components--settings-menu.title': 'Configure o bloco de doação',
+  'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
+  'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
+  'donation.components--settings-menu.tabs.post-action': 'Pós-doação',
+
+  // page donation widget
+  // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
+  'page--donation-widget.header.title': 'Crie um template a partir da mobilização',
+  'page--donation-widget.form.submit-button': 'Salvar',
+  'page--donation-widget.form.success-message': 'Formulário de doação configurado com sucesso!',
+  'page--donation-widget.form.donation-title.label': 'Título do bloco de doação',
+  'page--donation-widget.form.donation-title.placeholder': 'Ex.: Escolha um valor e contribua agora!',
+  'page--donation-widget.form.payment-type.label': 'Tipo de doação',
+  'page--donation-widget.form.payment-type.unique': 'Única',
+  'page--donation-widget.form.payment-type.recurring': 'Recorrente',
+  'page--donation-widget.form.payment-type.users-choice': 'Usuário escolhe',
+  'page--donation-widget.form.payment-interval.label': 'Intervalo da recorrência',
+  'page--donation-widget.form.payment-interval.monthly': 'Mensal',
+  'page--donation-widget.form.payment-interval.semiannually': 'Semestral',
+  'page--donation-widget.form.payment-interval.annually': 'Anual',
+  'page--donation-widget.form.main-color.label': 'Defina a cor da página de pagamento',
+  'page--donation-widget.form.main-color.helper-text': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.',
+  'page--donation-widget.form.donation-default-value.label': 'Defina os valores para o bloco de doação',
+  'page--donation-widget.form.donation-default-value.helper-text': 'Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)',
+  'page--donation-widget.form.default-value-01.label': 'Valor 1',
+  'page--donation-widget.form.default-value-01.placeholder': 'R$20',
+  'page--donation-widget.form.default-value-02.label': 'Valor 2',
+  'page--donation-widget.form.default-value-02.placeholder': 'R$50',
+  'page--donation-widget.form.default-value-03.label': 'Valor 3',
+  'page--donation-widget.form.default-value-03.placeholder': 'R$100',
+  'page--donation-widget.form.default-value-04.label': 'Valor 4',
+  'page--donation-widget.form.default-value-04.placeholder': 'R$200',
+  'page--donation-widget.form.default-value-05.label': 'Valor 5',
+  'page--donation-widget.form.default-value-05.placeholder': 'R$500',
+  'page--donation-widget.form.default-value.radio.text': 'Default',
+  'page--donation-widget.form.default-value.helper-text': '*todos os valores são em reais',
+  'page--donation-widget.form.button-text.label': 'Texto do botão de doação',
+  'page--donation-widget.form.button-text.placeholder': 'Ex.: Doe agora!',
+  'page--donation-widget.form.payment-method.label': 'Habilitar pagamento por boleto?',
+  'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pago terá um custo adicional de R$3,00',
+  'page--donation-widget.form.payment-method.radio.yes': 'Sim',
+  'page--donation-widget.form.payment-method.radio.no': 'Não',
+  'page--donation-widget.form.bank-account.label': 'Conta bancária',
+  'page--donation-widget.form.bank-account.helper-text': 'Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.',
+
+  // page donation widget (connected)
+  // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
+  'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
+  'page--donation-widget.form.validation.button-text.max-length': 'O limite de caracteres foi atingido.',
 }
