@@ -258,7 +258,13 @@ export default {
   'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Ver em uma nova aba',
   'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações',
 
+  'components.navigation--sidebar.footer.account': 'Minha Conta',
   'components.navigation--sidebar.footer.sign-out': 'Sair',
+
+  // component sidenav
+  // filepath: /client/components/navigation/sidenav/sidenav.js
+  'components.navigation--sidenav.config': 'Configurações',
+  'components.navigation--sidenav.change-community': 'Trocar',
 
   // page mobilizations list
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-list/page.js
@@ -396,4 +402,27 @@ export default {
   'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
   'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
   'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.',
+
+  // component mobrender mobilization
+  // filepath: /client/mobrender/components/mobilization.js
+  'mobrender.components--mobilization.footer.slogan': 'Feito pra causar. Feito com',
+
+  // component mobrender block config menu
+  // filepath: /client/mobrender/components/block-config-menu.js
+  'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
+  'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
+  'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
+  'mobrender.components--block-config-menu.item.remove': 'Remover',
+  'mobrender.components--block-config-menu.item.remove.confirm': 'Você tem certeza que quer remover este bloco?',
+  'mobrender.components--block-config-menu.item.move-up': 'Mover para cima',
+  'mobrender.components--block-config-menu.item.move-down': 'Mover para baixo',
+
+  // component mobrender block change background
+  // filepath: /client/mobrender/components/block-change-background.js
+  'mobrender.components--block-change-background.button.save': 'Salvar',
+  'mobrender.components--block-change-background.button.cancel': 'Cancelar',
+
+  // component navigation navbar edition wrapper
+  // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
+  'components.navigation--navbar-edition-wrapper.block': 'Bloco',
 }
