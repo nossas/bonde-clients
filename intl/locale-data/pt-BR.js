@@ -322,4 +322,15 @@ export default {
   'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar mobilização do zero',
   'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Meus templates',
   'page--mobilizations.templates-choose.browsable-list-item.templates-global': 'Templates globais',
+
+  // component mobilizations templates selectable list
+  // filepath: /client/mobilizations/templates/components/template-selectable-list.js
+  'templates.components--selectable-list.filterable-search-bar.placeholder': 'Busque um template',
+  'templates.components--selectable-list.empty-list-text': 'Não existe nenhum template com esse nome',
+  'templates.components--selectable-list.button.back': 'Voltar',
+  'templates.components--selectable-list.button.next': 'Continuar',
+
+  // page mobilizations templates choose custom
+  // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
+  'page--mobilizations.templates-choose-custom.title': 'Meus Templates',
 }

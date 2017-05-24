@@ -24,7 +24,7 @@ const TemplateSelectableList = props => {
 
   return (
     <div className='mobilization-templates-selectable-list'>
-      <FilterableSearchBar list={templates} />
+      <FilterableSearchBar list={templates} placeholder='Busque um template' />
 
       <div className='bg-white rounded-bottom' style={{ padding: '1.6rem 2rem' }}>
         <SelectableList

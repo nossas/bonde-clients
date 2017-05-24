@@ -11,7 +11,7 @@ export class FilterableSearchBar extends Component {
   }
 
   render () {
-    const { list, dispatch } = this.props
+    const { list, dispatch, placeholder } = this.props
     return (
       <div
         className='bg-white rounded-top border-only-bottom border-whisper flex flex-wrap'
@@ -20,7 +20,7 @@ export class FilterableSearchBar extends Component {
         <i className='fa fa-search black pt1' style={{ fontSize: '1.1rem' }} />
         <input
           className='input border-none col-11 inline-block mb0'
-          placeholder='Busque um template'
+          placeholder={placeholder}
           style={{ fontSize: '1.2rem' }}
           onChange={input => {
             dispatch(setFilterableSearchBarList(
