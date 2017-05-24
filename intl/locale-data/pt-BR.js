@@ -460,4 +460,14 @@ export default {
   'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar e contar pra todo mundo!',
   'page--mobilizations-launch-end.title': 'Chegou a hora',
   'page--mobilizations-launch-end.button': 'Lançar mobilização',
+
+  // page templates list
+  // filepath: /routes/admin/authenticated/sidebar/templates-list/page.js
+  'page--templates-list.header.title': 'Seus templates',
+  'page--templates-list.empty-list.no-template': 'Nenhum template criado.',
+  'page--templates-list.empty-list.create-one': 'Crie a partir de uma mobilização.',
+  'page--templates-list.empty-list.mobilization-list': 'Lista de mobilizações',
+  'page--templates-list.more-menu-action.remove.text': 'Remover',
+  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
+  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
 }
