@@ -195,4 +195,36 @@ export default {
   // filepath: /routes/admin/authenticated/external/community-new/page.connected.js
   'page--community-new.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-new.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
+
+  // page community recipient
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.js
+  'page--community-recipient.form.transfer-interval.label': 'Intervalo',
+  'page--community-recipient.form.transfer-interval.value.weekly': 'Semanalmente',
+  'page--community-recipient.form.transfer-interval.value.monthly': 'Mensalmente',
+  'page--community-recipient.form.transfer-day.label': 'Dia de transferência',
+
+  'page--community-recipient.section--account.header': 'Conta bancária',
+  'page--community-recipient.form.bank-code.label': 'Banco',
+  'page--community-recipient.form.bank-code.value.default': 'Selecione o banco',
+  'page--community-recipient.form.bank-account-type.label': 'Tipo de conta',
+  'page--community-recipient.form.bank-account-type.value.checking-account': 'Corrente',
+  'page--community-recipient.form.bank-account-type.value.savings-account': 'Poupança',
+  'page--community-recipient.form.bank-agency.label': 'Agência',
+  'page--community-recipient.form.bank-agency-dv.label': 'Dígito',
+  'page--community-recipient.form.bank-account.label': 'Conta',
+  'page--community-recipient.form.bank-account-dv.label': 'Dígito',
+  'page--community-recipient.form.bank-legal-name.label': 'Nome / Razão Social',
+  'page--community-recipient.form.bank-document-number.label': 'CPF / CNPJ',
+
+  // page community recipient (connected)
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.connected.js
+  'page--community-recipient.form.validation.required': 'Campo obrigatório',
+  'page--community-recipient.form.bank-agency.validation.max-length': 'Deve conter no máximo 5 digitos',
+  'page--community-recipient.form.bank-agency-dv.validation.length': 'Deve conter apenas 1 digito',
+  'page--community-recipient.form.bank-account.validation.max-length': 'Deve conter no máximo 13 digitos',
+  'page--community-recipient.form.bank-account-dv.validation.max-length': 'Deve conter no máximo 2 caracteres',
+  'page--community-recipient.form.bank-document-number.validation.cnpj-length': 'CNPJ deve conter 14 digitos',
+  'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF deve conter 11 digitos',
+  'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format': 'CPF inválido',
+  'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format': 'CNPJ inválido',
 }
