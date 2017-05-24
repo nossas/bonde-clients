@@ -453,4 +453,11 @@ export default {
   'page--mobilizations-launch.button.launch': 'Lançar mobilização',
   'page--mobilizations-launch.button.next': 'Continuar',
   'page--mobilizations-launch.form-share.validation.required': 'Obrigatório',
+
+  // page mobilizations launch end
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch-end/page.js
+  'page--mobilizations-launch-end.heading.all-done': 'Tudo pronto?',
+  'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar e contar pra todo mundo!',
+  'page--mobilizations-launch-end.title': 'Chegou a hora',
+  'page--mobilizations-launch-end.button': 'Lançar mobilização',
 }
