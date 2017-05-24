@@ -440,4 +440,17 @@ export default {
   'mobilizations.components--form-share.twitter.helper-text': 'Configure a mensagem que será publicada no Twitter sempre que alguém compartilhar sua mobilização.',
   'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto do Tweet',
   'mobilizations.components--form-share.twitter.form.share-text.placeholder': 'Insira uma frase e chame o leitor para a mobilização',
+
+  // page mobilizations launch
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch/page.js
+  'page--mobilizations-launch.title': 'Lançando sua mobilização',
+  'page--mobilizations-launch.steps.form-domain.title': 'Configure o endereço da mobilização',
+  'page--mobilizations-launch.steps.form-share.title': 'Configure as informações de compartilhamento',
+  'page--mobilizations-launch.steps.done.title': 'Seu BONDE está pronto!',
+  'page--mobilizations-launch.steps.done.helper-text': 'Em uma nova aba, digite o endereço que cadastrou na mobilização para se certificar de que ela já está no ar. Se ainda não estiver, cheque se cadastrou os domínios corretamente. Está tudo certo? Então é só esperar ele propagar pela internet!',
+  'page--mobilizations-launch.steps.done.button.open': 'Visualizar mobilização',
+  'page--mobilizations-launch.button.saving': 'Salvando...',
+  'page--mobilizations-launch.button.launch': 'Lançar mobilização',
+  'page--mobilizations-launch.button.next': 'Continuar',
+  'page--mobilizations-launch.form-share.validation.required': 'Obrigatório',
 }

@@ -95,12 +95,14 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
           <div className='ux--flat-form'>
             <h1>Seu BONDE está pronto!</h1>
             <p className='h5'>
-            Em uma nova aba, digite o endereço que cadastrou na mobilização
-            para se certificar de que ela já está no ar. Se ainda não estiver,
-            cheque se cadastrou os domínios corretamente. Está tudo certo? Então
-            é só esperar ele propagar pela internet!
+              Em uma nova aba, digite o endereço que cadastrou na mobilização
+              para se certificar de que ela já está no ar. Se ainda não estiver,
+              cheque se cadastrou os domínios corretamente. Está tudo certo? Então
+              é só esperar ele propagar pela internet!
             </p>
-            <Button href={`http://${mobilization.custom_domain}`} target='_blank'>Visualizar mobilização</Button>
+            <Button href={`http://${mobilization.custom_domain}`} target='_blank'>
+              Visualizar mobilização
+            </Button>
           </div>
         </StepContent>
       </StepsContainerStack>
