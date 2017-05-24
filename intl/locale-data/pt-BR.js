@@ -602,6 +602,15 @@ export default {
   'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
   'widgets.components--donation.users-choice.unique': 'Doação única',
 
+  // component form widget settings menu
+  // filepath: /client/mobilizations/widgets/__plugins__/form/components/settings-menu.js
+  'form-widget.components--settings-menu.title': 'Configure o formulário da sua ação',
+  'form-widget.components--settings-menu.items.fields': 'Campos do formulário',
+  'form-widget.components--settings-menu.items.adjusts': 'Ajustes',
+  'form-widget.components--settings-menu.items.autofire': 'Mensagem agradecimento',
+  'form-widget.components--settings-menu.items.report': 'Relatório',
+  'form-widget.components--settings-menu.items.post-action': 'Pós-inscrição',
+
   // page form widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
   'widgets.components--form.form.success-message': 'Formulário configurado com sucesso!',
