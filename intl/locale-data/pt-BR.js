@@ -359,4 +359,14 @@ export default {
   // page mobilizations settings analytics (connected)
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.connected.js
   'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Informe uma ID válida',
+
+  // page block create
+  // filepath: /routes/admin/authenticated/sidebar/blocks-create/page.js
+  'page--block-create.title': 'Adicione um bloco de conteúdo',
+  'page--block-create.tabs.blank-blocks': 'Blocos em branco',
+  'page--block-create.helper-text': 'Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento',
+  'page--block-create.type.label': 'Tipo de bloco',
+  'page--block-create.background.label': 'Fundo',
+  'page--block-create.background.image.placeholder.text': 'Selecione a imagem de fundo',
+  'page--block-create.button-add.text': 'Adicionar',
 }
