@@ -11,6 +11,11 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
 import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
+import Raven from 'raven-js'
+
+Raven
+    .config(process.env.SENTRY_DSN_PUBLIC)
+    .install()
 
 addLocaleData([...pt, ...es, ...en])
 

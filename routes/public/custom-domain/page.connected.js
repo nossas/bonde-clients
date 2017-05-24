@@ -27,7 +27,8 @@ const redial = {
 
 const mapStateToProps = (state, props) => ({
   mobilization: MobSelectors(state, props).getMobilizations()[0],
-  host: state.sourceRequest.host
+  host: state.sourceRequest.host,
+  protocol: state.sourceRequest.protocol
 })
 
 export default provideHooks(redial)(connect(mapStateToProps)(Page))

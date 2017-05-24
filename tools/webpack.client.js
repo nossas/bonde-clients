@@ -11,6 +11,7 @@ const staticsPath = path.join(__dirname, './../public/')
 const nodeEnv = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development'
 const isProd = nodeEnv === 'production' || nodeEnv === 'staging' ? true : false
 const s3BucketName = process.env.AWS_BUCKET || 'bonde-assets-dev'
+const sentryDsnPublic = process.env.SENTRY_DSN_PUBLIC || 'https://1111@sentry.io/86008'
 
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
@@ -24,6 +25,7 @@ const plugins = [
     APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
     PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
     AWS_BUCKET: JSON.stringify(s3BucketName),
+    SENTRY_DSN_PUBLIC: JSON.stringify(sentryDsnPublic),
     GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
     '__DEV__': true
 
