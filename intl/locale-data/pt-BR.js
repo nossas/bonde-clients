@@ -530,4 +530,18 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
   'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
   'page--donation-widget.form.validation.button-text.max-length': 'O limite de caracteres foi atingido.',
+
+  // component widget autofire
+  // filepath: /client/mobilizations/widgets/components/form-autofire.js
+  'widgets.components--form-autofire.form.submit-button': 'Salvar',
+  'widgets.components--form-autofire.form.success-message': 'Mensagem de agradecimento configurada com sucesso!',
+  'widgets.components--form-autofire.form.sender-name.label': 'Nome do remetente',
+  'widgets.components--form-autofire.form.sender-name.placeholder': 'Defina o nome que irá aparecer na mensagem enviada.',
+  'widgets.components--form-autofire.form.sender-email.label': 'E-mail remetente',
+  'widgets.components--form-autofire.form.sender-email.placeholder': 'Defina o e-mail que irá aparecer na mensagem enviada.',
+  'widgets.components--form-autofire.form.sender-email.validation.invalid-email-format': 'Informe um e-mail inválido',
+  'widgets.components--form-autofire.form.email-subject.label': 'Assunto do e-mail',
+  'widgets.components--form-autofire.form.email-subject.placeholder': 'Defina o assunto que irá aparecer na mensagem enviada.',
+  'widgets.components--form-autofire.form.email-text.label': 'Email de agradecimento',
+  'widgets.components--form-autofire.form.email-text.placeholder': 'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço.',
 }
