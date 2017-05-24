@@ -369,4 +369,31 @@ export default {
   'page--block-create.background.label': 'Fundo',
   'page--block-create.background.image.placeholder.text': 'Selecione a imagem de fundo',
   'page--block-create.button-add.text': 'Adicionar',
+
+  // page mobilizations domain
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-domain/page.js
+  'page--mobilizations-domain.form-domain.success-message': 'Dados de domínio salvos com sucesso',
+
+  // component mobilizations form domain
+  // filepath: /client/mobilizations/components/form-domain.js
+  'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Quero usar o domínio principal da minha comunidade',
+  'mobilizations.components--form-domain.basic.header-toggle.create-domain': 'Quero cadastrar um domínio principal na minha comunidade',
+  'mobilizations.components--form-domain.basic.helper-text': 'Preencha abaixo o subdomínio e escolha o domínio que deseja configurar como endereço da sua mobilização',
+  'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomínio',
+  'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedamob',
+  'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
+  'mobilizations.components--form-domain.basic.create-domain.helper-text': 'Ops, você ainda não tem um domínio configurado na sua comunidade. Se quiser cadastar, {link}. Senão você pode, abaixo, usar um domínio externo para configurar o endereço da sua mobilização.',
+  'mobilizations.components--form-domain.basic.create-domain.helper-text.link': 'clique aqui',
+
+  'mobilizations.components--form-domain.advanced.header-toggle': 'Quero usar um domínio externo',
+  'mobilizations.components--form-domain.advanced.helper-text': 'Se você quer usar um domínio que comprou mas não está cadastrado na sua comunidade aqui, pode fazer isso. Por exemplo, se você já comprou www.meudominio.com.br você pode usá-lo para este BONDE. Demais, né? Preencha o campo abaixo e siga as orientações:',
+  'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Domínio personalizado',
+  'mobilizations.components--form-domain.advanced.form.external-domain.placeholder': 'meudominio.com.br',
+
+  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: você vai precisar configurar este domínio no seu servidor de registro para que o endereço seja redirecionado à página da sua mobilização. Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:',
+  'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Não esqueça',
+  'mobilizations.components--form-domain.cname-table.header.name': 'Nome',
+  'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
+  'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.',
 }
