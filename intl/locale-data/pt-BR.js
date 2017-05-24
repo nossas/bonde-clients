@@ -611,4 +611,17 @@ export default {
   'widgets.components--form.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
   'widgets.components--form.form.counter-text.label': 'Contador',
   'widgets.components--form.form.counter-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
+
+  // component data export
+  // filepath: /client/mobilizations/widgets/components/data-export.js
+  'widgets.components--data-export.formated-export-at': '{date} às {time}',
+  'widgets.components--data-export.loading.message': 'Aguarde enquanto estamos processando...',
+  'widgets.components--data-export.exported.message': 'Última exportação: {formatedExportAt}.',
+  'widgets.components--data-export.export.label': 'Exportar',
+  'widgets.components--data-export.export.helper-text': 'Clique no botão abaixo para baixar o relatório completo do formulário em formato excel.',
+  'widgets.components--data-export.export.button': 'Clique para baixar a planilha completa.',
+
+  // action async widget data export
+  // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
+  'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
 }
