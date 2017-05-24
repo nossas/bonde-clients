@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { DivFloat, Button } from '~client/ux/components'

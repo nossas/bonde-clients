@@ -259,4 +259,33 @@ export default {
   'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações',
 
   'components.navigation--sidebar.footer.sign-out': 'Sair',
+
+  // page mobilizations list
+  // filepath: /routes/admin/authenticated/sidebar/mobilizations-list/page.js
+  'page--mobilizations-list.page-header.title': 'Suas Mobilizações',
+  'page--mobilizations-list.more-menu-action.open': 'Abrir página',
+  'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
+
+  // component mobilizations page header
+  // filepath: /client/mobilizations/components/page-header.js
+  'mobilizations.components--page-header.button.text': 'Nova mobilização',
+  'mobilizations.components--tabs.actives': 'Ativas',
+  'mobilizations.components--tabs.templates': 'Templates',
+
+  // component mobilizations list item: name
+  // filepath: /client/mobilizations/components/list/items/name/index.js
+  'mobilizations.components--list.items.name.header.text': 'Nome',
+
+  // component mobilizations list item: created at
+  // filepath: /client/mobilizations/components/list/items/created-at.js
+  'mobilizations.components--list.items.created-at.header.text': 'Criada em',
+
+  // component mobilizations list item: users
+  // filepath: /client/mobilizations/components/list/items/users.js
+  'mobilizations.components--list.items.users.header.text': 'Usuários',
+
+  // component mobilizations list item: fund raising
+  // filepath: /client/mobilizations/components/list/items/fund-raising.js
+  'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
+  'mobilizations.components--list.items.fund-raising.currency': 'R$',
 }
