@@ -591,4 +591,14 @@ export default {
   'widgets.config--pressure.default.title': 'Envie um e-mail para quem pode tomar essa decisão',
   'widgets.config--pressure.default.button-text': 'Enviar e-mail',
   'widgets.config--donation.label': 'Doação',
+
+  // component donation widget
+  // filepath: /client/mobilizations/widgets/__plugins__/donation/components/__donation__/index.js
+  'widgets.components--donation.default.button-text': 'Doar agora',
+  'widgets.components--donation.default.title-text': 'Clique para configurar seu bloco de doação',
+  'widgets.components--donation.period-label-options.month': 'mês',
+  'widgets.components--donation.period-label-options.halfyear': 'semestre',
+  'widgets.components--donation.period-label-options.year': 'ano',
+  'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
+  'widgets.components--donation.users-choice.unique': 'Doação única',
 }

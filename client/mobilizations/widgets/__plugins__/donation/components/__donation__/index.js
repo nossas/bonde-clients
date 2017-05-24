@@ -161,57 +161,57 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 onClick={::this.handleClickSetValueDonation.bind(this, 1)}
                 style={selectedValue !== 1 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                 className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 1 ? 'active' : 'bg-darken-1')}
-            >
+              >
                 {'R$ ' + donationValue1 + (paymentType === 'recurring' || (selectedPaymentType === 'recurring' && paymentType !== 'unique') ? ' /' : '') + periodLabel}
               </a>
-          )}
+            )}
             {donationValue2 <= 0 ? null : (
               <a
                 href='#'
                 onClick={::this.handleClickSetValueDonation.bind(this, 2)}
                 style={selectedValue !== 2 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                 className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 2 ? 'active' : 'bg-darken-1')}
-            >
+              >
                 {'R$ ' + donationValue2 + (paymentType === 'recurring' || (selectedPaymentType === 'recurring' && paymentType !== 'unique') ? ' /' : '') + periodLabel}
               </a>
-          )}
+            )}
             {donationValue3 <= 0 ? null : (
               <a
                 href='#'
                 onClick={::this.handleClickSetValueDonation.bind(this, 3)}
                 style={selectedValue !== 3 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                 className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 3 ? 'active' : 'bg-darken-1')}
-            >
+              >
                 {'R$ ' + donationValue3 + (paymentType === 'recurring' || (selectedPaymentType === 'recurring' && paymentType !== 'unique') ? ' /' : '') + periodLabel}
               </a>
-          )}
+            )}
             {donationValue4 <= 0 ? null : (
               <a
                 href='#'
                 onClick={::this.handleClickSetValueDonation.bind(this, 4)}
                 style={selectedValue !== 4 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                 className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 4 ? 'active' : 'bg-darken-1')}
-            >
+              >
                 {'R$ ' + donationValue4 + (paymentType === 'recurring' || (selectedPaymentType === 'recurring' && paymentType !== 'unique') ? ' /' : '') + periodLabel}
               </a>
-          )}
+            )}
             {donationValue5 <= 0 ? null : (
               <a
                 href='#'
                 onClick={::this.handleClickSetValueDonation.bind(this, 5)}
                 style={selectedValue !== 5 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                 className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 5 ? 'active' : 'bg-darken-1')}
-            >
+              >
                 {'R$ ' + donationValue5 + (paymentType === 'recurring' || (selectedPaymentType === 'recurring' && paymentType !== 'unique') ? ' /' : '') + periodLabel}
               </a>
-          )}
+            )}
 
             <a
               href='#'
               onClick={::this.handleClickDonate}
               style={{ backgroundColor: mainColor }}
               className='btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'
-          >
+            >
               {buttonText}
             </a>
           </div>
@@ -228,21 +228,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     let result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')'
     return result
-  }
-
-  renderOverlay () {
-    const { editable, configurable } = this.props
-    if (editable && !configurable && this.state.hasMouseOver) {
-      return (
-        <div className='absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1'>
-          <div className='table full-height col-12 center'>
-            <div className='white table-cell align-middle'>
-              Clique para editar
-            </div>
-          </div>
-        </div>
-      )
-    }
   }
 
   renderForm () {
