@@ -141,6 +141,7 @@ services:
     image: nossas/bonde-client
     depends_on:
       - api
+      - graphql
     volumes:
       - ./:/code:Z
       - node-modules:/code/node_modules
@@ -154,9 +155,13 @@ services:
     links:
       - api
       - api:api.bonde.devel
+      - graphql
+      - graphql:graphql.bonde.devel
       - redis
       - redis:keyval.devel
     extra_hosts:
       - "app.bonde.devel:127.0.0.1"
+    environment:
+      GRAPHQL_URL: http://graphql.bonde.devel:3003/graphql
     env_file:
       - .env

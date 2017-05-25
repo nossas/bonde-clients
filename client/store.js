@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === `development`) {
 
 export const client = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: DefaultServerConfig.graphqlUrl,
+    uri: process.env.GRAPHQL_URL,
     connectToDevTools: true,
   }),
 })

@@ -22,6 +22,7 @@ const plugins = [
   new webpack.EnvironmentPlugin({
     NODE_ENV: nodeEnv,
     API_URL: JSON.stringify(process.env.API_URL),
+    GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
     APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
     PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
     AWS_BUCKET: JSON.stringify(s3BucketName),
