@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
+import { FormattedMessage, injectIntl } from 'react-intl'
 
 import {
   FormRedux,
@@ -27,41 +28,116 @@ class RegisterPage extends Component {
         last_name: lastName,
         email,
         password,
-        password2 },
+        password2
+      },
+      intl,
       ...formProps
     } = this.props
     return (
       <div>
-        <h1>Crie sua conta no Bonde.</h1>
+        <h1>
+          <FormattedMessage
+            id='page--account-register.title'
+            defaultMessage='Crie sua conta no Bonde.'
+          />
+        </h1>
+
         <FormRedux
           nosubmit
           className='bg-white rounded'
           {...formProps}
         >
           <div className='flex'>
+
             <FormGroup className='col-6' controlId='nameId' {...firstName}>
-              <ControlLabel>Nome</ControlLabel>
-              <FormControl type='text' placeholder='Seu nome' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--account-register.form.name.label'
+                defaultMessage='Nome'
+              />
+            </ControlLabel>
+
+            <FormControl
+              type='text'
+              placeholder={
+                intl.formatMessage({
+                  id: 'page--account-register.form.name.placeholder',
+                  defaultMessage: 'Seu nome'
+                })
+              }
+            />
             </FormGroup>
+
             <FormGroup className='col-6' controlId='lastNameId' {...lastName}>
-              <ControlLabel>Sobrenome</ControlLabel>
-              <FormControl type='text' placeholder='Sobrenome' />
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--account-register.form.lastname.label'
+                  defaultMessage='Sobrenome'
+                />
+              </ControlLabel>
+
+                <FormControl
+                  type='text'
+                  placeholder={
+                    intl.formatMessage({
+                      id: 'page--account-register.form.lastname.placeholder',
+                      defaultMessage: 'Sobrenome'
+                    })
+                  }
+                />
             </FormGroup>
           </div>
+
           <FormGroup controlId='emailId' {...email}>
-            <ControlLabel>E-mail</ControlLabel>
-            <FormControl type='email' placeholder='exemplo@email.com.br' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--account-register.form.email.label'
+                defaultMessage='E-mail'
+              />
+            </ControlLabel>
+
+            <FormControl
+              type='email'
+              placeholder={
+                intl.formatMessage({
+                  id: 'page--account-register.form.email.placeholder',
+                  defaultMessage: 'exemplo@email.com.br'
+                })
+              }
+            />
           </FormGroup>
           <FormGroup controlId='passwordId' {...password}>
-            <ControlLabel>Senha</ControlLabel>
-            <FormControl type='password' placeholder='********' />
-          </FormGroup>
+            <ControlLabel>
+              <FormattedMessage
+                id= 'page--account-register.form.password.label'
+                defaultMessage= 'Senha'
+              />
+              </ControlLabel>
+              <FormControl type='password' placeholder='********' />
+            </FormGroup>
           <FormGroup controlId='password2Id' {...password2}>
-            <ControlLabel>Confirme sua senha</ControlLabel>
+            <ControlLabel>
+              <FormattedMessage
+                id='page--account-register.form.password-confirm.label'
+                defaultMessage='Confirme sua senha'
+              />
+            </ControlLabel>
             <FormControl type='password' placeholder='********' />
           </FormGroup>
           <Button type='submit' className='btn caps col-12 p2 white rounded-bottom bg-pagenta'>
-            {formProps.submitting ? 'Salvando...' : 'Criar conta'}
+            {formProps.submitting ?
+            (
+              <FormattedMessage
+                id='page--account-register.form.submit-button.saving'
+                defaultMessage='Salvando...'
+              />
+            )
+               : <FormattedMessage
+                    id='page--account-register.form.submit-button.default'
+                    defaultMessage='Criar conta'
+                 />
+
+            }
           </Button>
         </FormRedux>
       </div>
@@ -76,4 +152,4 @@ RegisterPage.propTypes = {
   fields: PropTypes.object.isRequired
 }
 
-export default RegisterPage
+export default injectIntl(RegisterPage)
