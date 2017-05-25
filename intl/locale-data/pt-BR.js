@@ -718,4 +718,21 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.connected.js
   'page--pressure-widget.form.validation.title-text.required': 'Insira um título para o formulário',
   'page--pressure-widget.form.validation.button-text.required': 'Insira um texto para o botão',
+
+  // component widgets input tag
+  // filepath: /client/mobilizations/widgets/components/input-tag.js
+  'widgets.components--input-tag.helper-text.target-format': '1. Informe nome e email. Ex.: Nome <email@provedor.com>',
+  'widgets.components--input-tag.helper-text.enter-to-add': '2. Pressione <Enter> para adicionar mais alvos.',
+
+  // page pressure widget email
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
+  'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
+  'page--pressure-widget-email.form.input-tag.label': 'Alvos',
+  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>',
+  'page--pressure-widget-email.form.email-subject.label': 'Assunto do email',
+  'page--pressure-widget-email.form.email-body.label': 'Corpo do email que será enviado',
+
+  // page pressure widget email (connected)
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.connected.js
+  'page--pressure-widget-email.form.validation.required': 'Preenchimento obrigatório',
 }
