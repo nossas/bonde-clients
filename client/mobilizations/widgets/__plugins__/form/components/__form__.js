@@ -147,21 +147,6 @@ class Form extends Component {
     }
   }
 
-  renderOverlay () {
-    const { editable, configurable } = this.props
-    if (editable && !configurable && this.state.hasMouseOver) {
-      return (
-        <div className='absolute top-0 right-0 bottom-0 left-0 bg-darken-4 h1 bold rounded z1'>
-          <div className='table full-height col-12 center'>
-            <div className='white table-cell align-middle'>
-              Clique para editar
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
-
   renderErrors () {
     const { errors } = this.state
 
@@ -206,7 +191,6 @@ class Form extends Component {
           {this.renderFields()}
           {this.renderErrors()}
           {this.renderButton()}
-          {this.renderOverlay()}
         </div>
       </div>
     )
@@ -221,17 +205,10 @@ class Form extends Component {
     const { success } = this.state
 
     return (
-      <WidgetOverlay
-        editable={editable}
-        onClick={::this.handleOverlayOnClick}
-        text='Clique para configurar o formulário de inscrição'
-      >
-        <div onKeyDown={(e) => e.stopPropagation()} />
-        <div className={`widget ${headerFont}-header`}>
-          {success ? this.renderShareButtons() : this.renderForm()}
-          {this.renderCount()}
-        </div>
-      </WidgetOverlay>
+      <div className={`widget ${headerFont}-header`}>
+        {success ? this.renderShareButtons() : this.renderForm()}
+        {this.renderCount()}
+      </div>
     )
   }
 }

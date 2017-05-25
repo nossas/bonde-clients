@@ -613,13 +613,13 @@ export default {
 
   // page form widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
-  'widgets.components--form.form.success-message': 'Formulário configurado com sucesso!',
-  'widgets.components--form.form.widget-title.label': 'Título do formulário',
-  'widgets.components--form.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
-  'widgets.components--form.form.button-text.label': 'Botão',
-  'widgets.components--form.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
-  'widgets.components--form.form.counter-text.label': 'Contador',
-  'widgets.components--form.form.counter-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
+  'page--form-widget.form.success-message': 'Formulário configurado com sucesso!',
+  'page--form-widget.form.widget-title.label': 'Título do formulário',
+  'page--form-widget.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
+  'page--form-widget.form.button-text.label': 'Botão',
+  'page--form-widget.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
+  'page--form-widget.form.counter-text.label': 'Contador',
+  'page--form-widget.form.counter-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
 
   // component data export
   // filepath: /client/mobilizations/widgets/components/data-export.js
@@ -633,4 +633,51 @@ export default {
   // action async widget data export
   // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
   'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
+
+  // page form widget fields
+  // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
+  'page--form-widget-fields.add-button': 'Adicionar um campo',
+  'page--form-widget-fields.helper-text.still-empty': 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.',
+  'page--form-widget-fields.helper-text.manage-fields': 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.',
+
+  // component form widget
+  // filepath: /client/mobilizations/widgets/__plugins__/form/components/__form__.js
+  'form-widget.components--form.default.title-text': 'Clique para configurar seu formulário...',
+  'form-widget.components--form.default.button-text': 'Enviar',
+  'form-widget.components--form.default.counter-suffix': 'assinaturas',
+
+  // component form widget input
+  // filepath: /client/mobilizations/widgets/__plugins__/form/components/input.js
+  'form-widget.components--input.click-to-edit': 'Clique para editar',
+  'form-widget.components--input.field-dropdown.options.default': 'Selecione...',
+  'form-widget.components--input.field-greetings.title': 'Mensagem de sucesso alterada para:',
+
+  // component form widget input form
+  // filepath: /client/mobilizations/widgets/__plugins__/form/components/input-form.js
+  'form-widget.components--input-form.handle-remove.confirm': 'Você tem certeza que quer remover este campo?',
+  'form-widget.components--input-form.handle-overlay-click.confirm': 'Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?',
+  'form-widget.components--input-form.field-title.label': 'Título do campo',
+  'form-widget.components--input-form.field-title.placeholder': 'Ex: Email',
+  'form-widget.components--input-form.field-helper-text.label': 'Texto de ajuda',
+  'form-widget.components--input-form.field-helper-text.placeholder': 'Ex: Insira aqui o seu email',
+  'form-widget.components--input-form.field-type.label': 'Tipo de campo',
+  'form-widget.components--input-form.field-type.options.text': 'Texto',
+  'form-widget.components--input-form.field-type.options.email': 'E-mail',
+  'form-widget.components--input-form.field-type.options.number': 'Número',
+  'form-widget.components--input-form.field-type.options.dropdown': 'Dropdown &#9733;',
+  'form-widget.components--input-form.field-type.options.greetings': 'Saudação &#9733;',
+  'form-widget.components--input-form.field-required.label': 'Obrigatório',
+  'form-widget.components--input-form.field-required.radio.yes.label': 'Sim',
+  'form-widget.components--input-form.field-required.radio.no.label': 'Não',
+  'form-widget.components--input-form.button-move-up': 'Mover para cima',
+  'form-widget.components--input-form.button-move-down': 'Mover para baixo',
+  'form-widget.components--input-form.button-remove': 'Remover',
+  'form-widget.components--input-form.button-cancel': 'Cancelar',
+  'form-widget.components--input-form.button-save.saving': 'Salvando...',
+  'form-widget.components--input-form.button-save.default': 'Salvar',
+
+  // component mobrender widget overlay
+  // filepath: /client/mobrender/components/widget-overlay.js
+  'mobrender.components--widget-overlay.button.edit.title': 'Editar',
+  'mobrender.components--widget-overlay.button.remove.title': 'Remover',
 }
