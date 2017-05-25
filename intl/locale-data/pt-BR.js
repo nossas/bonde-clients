@@ -680,4 +680,12 @@ export default {
   // filepath: /client/mobrender/components/widget-overlay.js
   'mobrender.components--widget-overlay.button.edit.title': 'Editar',
   'mobrender.components--widget-overlay.button.remove.title': 'Remover',
+
+  // page form widget finish
+  // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
+  'page--form-widget-finish.success-message': 'Formulário de pós-inscrição salvo com sucesso!',
+
+  // component form widget tell a friend
+  // filepath: /client/mobilizations/widgets/__plugins__/form/components/form-tell-a-friend.js
+  'form-widget.components--tell-a-friend.message': 'Formulário submetido com sucesso!',
 }
