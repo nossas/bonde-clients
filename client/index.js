@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom'
 import Router from 'react-router/lib/Router'
 import match from 'react-router/lib/match'
 import browserHistory from 'react-router/lib/browserHistory'
+import { configureStore, client } from './store'
+import { ApolloProvider } from 'react-apollo'
 import { Provider } from 'react-redux'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
@@ -26,7 +28,6 @@ if (__PROD__ || __TEST__) {
 
 addLocaleData([...pt, ...es, ...en])
 
-import { configureStore } from './store'
 const initialState = window.INITIAL_STATE || {}
 // Set up Redux (note: this API requires redux@>=3.1.0):
 const store = configureStore(initialState)
@@ -54,7 +55,13 @@ const render = () => {
     ReactDOM.render(
       <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
         <Provider store={store}>
-          <Router routes={routes} history={browserHistory} key={Math.random()} />
+          <ApolloProvider store={store} client={client}>
+            <Router
+              routes={routes}
+              history={browserHistory}
+              key={Math.random()}
+            />
+          </ApolloProvider>
         </Provider>
       </IntlProvider>,
       container

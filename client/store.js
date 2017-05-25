@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
-import DefaultServerConfig from '../server/config'
+import { ApolloClient, createNetworkInterface } from 'react-apollo'
+import DefaultServerConfig from '~server/config'
 import createReducer from './createReducer'
 import DevTools from './components/dev-tools'
 
@@ -15,6 +16,13 @@ if (process.env.NODE_ENV === `development`) {
   const logger = createLogger()
   middlewares.push(logger)
 }
+
+export const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: DefaultServerConfig.graphqlUrl,
+    connectToDevTools: true,
+  }),
+})
 
 export function configureStore (initialState, thunkExtraArgument) {
   middlewares.push(thunk.withExtraArgument({ axios, api, ...thunkExtraArgument }))

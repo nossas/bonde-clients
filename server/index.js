@@ -18,6 +18,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/server'
 import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { Provider } from 'react-redux'
+import { ApolloProvider } from 'react-apollo'
 import { IntlProvider } from 'react-intl'
 import { trigger } from 'redial'
 import Helm from 'react-helmet'
@@ -31,7 +32,7 @@ import reactCookie from 'react-cookie'
 
 import DefaultServerConfig from './config'
 import webpackConfig from '../tools/webpack.client'
-import { configureStore } from '../client/store'
+import { configureStore, client } from '../client/store'
 import createRoutes from '../routes'
 import loadState from './load-state'
 import localeData from '../intl/locale-data'
@@ -184,7 +185,9 @@ export const createServer = (config) => {
           const InitialView = (
             <IntlProvider locale={currentLocale} messages={currentLocaleMessages}>
               <Provider store={store}>
-                <RouterContext {...renderProps} />
+                <ApolloProvider store={store} client={client}>
+                  <RouterContext {...renderProps} />
+                </ApolloProvider>
               </Provider>
             </IntlProvider>
           )
