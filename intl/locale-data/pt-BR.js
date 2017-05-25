@@ -688,4 +688,34 @@ export default {
   // component form widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/form-tell-a-friend.js
   'form-widget.components--tell-a-friend.message': 'Formulário submetido com sucesso!',
+
+  // component pressure widget settings menu
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
+  'pressure-widget.components--settings-menu.title': 'Configure seu formulário de pressão',
+  'pressure-widget.components--settings-menu.items.form': 'Formulário',
+  'pressure-widget.components--settings-menu.items.pressure-email': 'E-mail para alvo',
+  'pressure-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
+  'pressure-widget.components--settings-menu.items.post-action': 'Pós-pressão',
+
+  // page pressure widget
+  // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
+  'page--pressure-widget.success-message': 'Formulário de pressão configurado com sucesso!',
+  'page--pressure-widget.form.title-text.label': 'Título do formulário',
+  'page--pressure-widget.form.title-text.placeholder': 'Envie um e-mail para quem pode tomar essa decisão',
+  'page--pressure-widget.form.button-text.label': 'Texto do botão',
+  'page--pressure-widget.form.button-text.placeholder': 'Enviar e-mail',
+  'page--pressure-widget.form.main-color.label': 'Cor do formulário',
+  'page--pressure-widget.form.show-counter.label': 'Mostrar contador de pressão',
+  'page--pressure-widget.form.show-counter.radio.yes.label': 'Sim',
+  'page--pressure-widget.form.show-counter.radio.no.label': 'Não',
+  'page--pressure-widget.form.counter-text.label': 'Texto do contador',
+  'page--pressure-widget.form.counter-text.placeholder': 'pressões feitas',
+  'page--pressure-widget.form.show-city-field.label': 'Mostrar campo de cidade',
+  'page--pressure-widget.form.show-city-field.radio.yes.label': 'Sim',
+  'page--pressure-widget.form.show-city-field.radio.no.label': 'Não',
+
+  // page pressure widget (connected)
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.connected.js
+  'page--pressure-widget.form.validation.title-text.required': 'Insira um título para o formulário',
+  'page--pressure-widget.form.validation.button-text.required': 'Insira um texto para o botão',
 }
