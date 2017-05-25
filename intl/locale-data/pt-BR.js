@@ -743,4 +743,57 @@ export default {
   // component pressure widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-tell-a-friend.js
   'pressure-widget--tell-a-friend.message': 'Pressão enviada',
+
+  //
+  // page activists management
+  // filepath: {incoming-for-v0.6.x release}
+  //
+  // if the namenclature of the items was not matching when implementing
+  // this feature, consider to make the necessary changes. after it,
+  // remove this comment and place the respective filepath of the
+  // translation keys.
+  //
+  // maybe, new intl key name convention can be implemented.
+  //   e.g.
+  //   - page      ~> `p--`
+  //   - component ~> `c--`
+  //
+  'p--activists-management.header.title': 'Base de usuários',
+  'p--activists-management.header.button.upload.text': 'Upload',
+  'p--activists-management.header.button.download.text': 'Download',
+  'p--activists-management.content.title': '{totalNumber} pessoas',
+  'p--activists-management.content.button.tagging.text': 'Etiquetar',
+  'p--activists-management.content.button.email.text': 'Email',
+  'p--activists-management.content.form-tagging.tags.placeholder': 'Digite tags separadas por vírgula',
+  'p--activists-management.content.form-tagging.button.text': 'Adicionar etiqueta',
+  'p--activists-management.content.form-tagging.success.message': 'Etiquetas adicionadas com sucesso a {taggedNumber} pessoas',
+  'p--activists-management.content.form-tagging.success.undo': 'Desfazer',
+  'p--activists-management.content.activist-spotlight.title': 'Perfil selecionado',
+  'p--activists-management.content.activist-spotlight.email.label': 'Email',
+  'p--activists-management.content.activist-spotlight.phone.label': 'Telefone',
+  'p--activists-management.content.activist-spotlight.mobilizations.label': 'Mobilizações',
+  'p--activists-management.content.activist-spotlight.tags.label': 'Etiquetas',
+  'p--activists-management.content.activist-spotlight.form-tagging.button.text': 'Adicionar',
+
+  // component activists management filterable list
+  // filepath: {incoming-for-v0.6.x release}
+  'activists-management.c--filterable-list.activist.placeholder': 'Quem você está procurando?',
+
+  'activists-management.c--filterable-list.suggest.placeholder': 'Filtre por mobilizações ou formulários',
+  'activists-management.c--filterable-list.suggest.operators.label': 'Operadores',
+  'activists-management.c--filterable-list.suggest.operators.options.or.label': 'ou',
+  'activists-management.c--filterable-list.suggest.operators.options.and.label': 'e',
+  'activists-management.c--filterable-list.suggest.segment.donations.label': 'Doações',
+  'activists-management.c--filterable-list.suggest.segment.pressures.label': 'Pressões',
+  'activists-management.c--filterable-list.suggest.segment.gen-forms.label': 'Formulários genéricos',
+  'activists-management.c--filterable-list.suggest.segment.other-tags.label': 'Outras etiquetas',
+
+  'activists-management.c--filterable-list.period.options.today': 'Hoje',
+  'activists-management.c--filterable-list.period.options.last-week': 'Na última semana',
+  'activists-management.c--filterable-list.period.options.last-fortnight': 'Nos últimos 15 dias',
+  'activists-management.c--filterable-list.period.options.last-month': 'Nos últimos 30 dias',
+  'activists-management.c--filterable-list.period.options.last-quarter': 'Nos últimos 3 meses',
+  'activists-management.c--filterable-list.period.options.last-year': 'No último ano',
+  'activists-management.c--filterable-list.period.options.always': 'Sempre',
+  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...',
 }
