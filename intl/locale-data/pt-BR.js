@@ -735,4 +735,12 @@ export default {
   // page pressure widget email (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.connected.js
   'page--pressure-widget-email.form.validation.required': 'Preenchimento obrigatório',
+
+  // page pressure widget finish
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/finish/page.js
+  'page--pressure-widget-finish.success-message': 'Formulário de pós-pressão salvo com sucesso!',
+
+  // component pressure widget tell a friend
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-tell-a-friend.js
+  'pressure-widget--tell-a-friend.message': 'Pressão enviada',
 }
