@@ -20,7 +20,7 @@ pipeline:
       - AWS_ACCESS_KEY_ID=${STAG_AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${STAG_AWS_SECRET_ACCESS_KEY}
       - SENTRY_DSN_PUBLIC=${STAG_SENTRY_DSN_PUBLIC}
-      - GRAPHQL_URL=https://data.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -57,7 +57,7 @@ pipeline:
       - AWS_ACCESS_KEY_ID=${PROD_AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${PROD_AWS_SECRET_ACCESS_KEY}
       - SENTRY_DSN_PUBLIC=${PROD_SENTRY_DSN_PUBLIC}
-      - GRAPHQL_URL=https://data.bonde.org
+      - GRAPHQL_URL=https://data.bonde.org/graphql
     when:
       status: success
       event: tag
