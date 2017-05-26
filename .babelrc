@@ -12,7 +12,8 @@
         "~client": "./client",
         "~routes": "./routes",
         "~server": "./server",
-        "~tools": "./tools"
+        "~tools": "./tools",
+        "~root": "./"
       }
     }],
     ["react-intl", {

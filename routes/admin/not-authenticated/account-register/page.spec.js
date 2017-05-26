@@ -1,7 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
-
+import { mountWithIntl } from '~root/intl/helpers'
 import Page from '~routes/admin/not-authenticated/account-register/page'
 
 const dummyField = field => ({
@@ -23,7 +22,7 @@ describe('~routes/admin/not-authenticated/account-register/page', () => {
   }
 
   it('should render without crashed', () => {
-    const page = mount(<Page {...props} />)
+    const page = mountWithIntl(<Page {...props} />)
     expect(page).to.be.ok
   })
 })
