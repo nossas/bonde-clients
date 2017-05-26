@@ -1,6 +1,7 @@
 export default {
   // page account login
   // filepath: /routes/admin/not-authenticated/account-login/page.js
+  // routepath: /login
   'page--account-login.label.email': 'E-mail',
   'page--account-login.label.password': 'Senha',
   'page--account-login.placeholder.email': 'exemplo@email.com',
@@ -11,6 +12,7 @@ export default {
 
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
+  // routepath: /register
   'page--account-register.title': 'Crie sua conta no Bonde.',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
@@ -31,6 +33,7 @@ export default {
 
   // page account edit
   // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
+  // routepath: /account/edit
   'page--account-edit.header.title': 'Minha conta',
   'page--account-edit.header.tabs.user': 'Usuário',
   'page--account-edit.form.name.label': 'Nome',
@@ -41,6 +44,7 @@ export default {
 
   // page subscription edit
   // filepath: /routes/public/subscription-edit/page.js
+  // routepath: /subscriptions/:id/edit
   'page--subscription-edit.title': 'Dados da Doação',
   'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
@@ -48,6 +52,7 @@ export default {
 
   // form subscription credit card
   // filepath: /client/subscriptions/forms/credit-card-form.js
+  // routepath: /subscriptions/:id/edit
   'form--subscription-creditcard.helper-text': 'Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
 
   'form--subscription-creditcard.previous-data.title': 'Dados do último cartão',
@@ -67,6 +72,7 @@ export default {
 
   // form subscription recurring
   // filepath: /client/subscriptions/forms/recurring-form.js
+  // routepath: /subscriptions/:id/edit
   'form--subscription-recurring.helper-text': 'Preencha os campos abaixo para alterar a data em que a cobrança da sua doação é efetuada. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
   'form--subscription-recurring.form.process-at.label': 'Nova data de cobrança',
   'form--subscription-recurring.form.process-at.placeholder': 'Ex: DD/MM/AAAA',
@@ -76,6 +82,7 @@ export default {
 
   // notifications
   // filepath: /client/utils/notifications.js
+  // routepath: /subscriptions/:id/edit
   'notification--generic-request-error.title': 'Ops!',
   'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
   'notification--generic-save-success.title': 'Oba!',
@@ -83,12 +90,20 @@ export default {
 
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
+  // routepath: /community
   'page--community-list.title': 'Olá {userFirstName},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
   'page--community-list.new': 'Crie uma nova comunidade',
 
   // component community settings menu
   // filepath: /client/community/components/settings-menu.js
+  // routepath:
+  //   - /community/domain
+  //   - /community/domain/add
+  //   - /community/info
+  //   - /community/mailchimp
+  //   - /community/recipient
+  //   - /community/report
   'community.components--settings-menu.title': 'Configurações da comunidade',
   'community.components--settings-menu.tabs.info': 'Informações',
   'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
@@ -98,16 +113,19 @@ export default {
 
   // component community domain preview
   // filepath: /client/community/components/dns/dns-preview/domain-preview.js
+  // routepath: /community/domain/add
   'community.components--domain-preview.li.domain.header': 'Domínio da comunidade',
 
   // component community subdomain preview
   // filepath: /client/community/components/dns/dns-preview/subdomain-preview.js
+  // routepath: /community/domain
   'community.components--subdomain-preview.li.subdomain.header': 'Subdomínio',
   'community.components--subdomain-preview.li.record-type.header': 'Tipo',
   'community.components--subdomain-preview.li.redirect-to.header': 'Redirecionar para',
 
   // component community subdomain form
   // filepath: /client/community/components/dns/subdomain-form/index.js
+  // routepath: /community/domain
   'community.components--subdomain-form.subdomain.label': 'Subdomínio',
   'community.components--subdomain-form.record-type.label': 'Tipo',
   'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
@@ -115,6 +133,7 @@ export default {
 
   // page community domain
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
+  // routepath: /community/domain
   'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
 
   'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
@@ -131,11 +150,13 @@ export default {
 
   // component dialog
   // filepath: /client/ux/components/dialog/index.js
+  // routepath: /community/domain
   'ux.components--dialog.button.confirm.text': 'Confirmar',
   'ux.components--dialog.button.cancel.text': 'Cancelar',
 
   // page community domain create
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain-create/page.js
+  // routepath: /community/domain/add
   'page--community-domain-create.title': 'Domínio da comunidade',
 
   'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
@@ -159,6 +180,7 @@ export default {
 
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
+  // routepath: /community/info
   'page--community-info.form.name.label': 'Nome',
   'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-info.form.description.label': 'Descrição',
@@ -170,17 +192,38 @@ export default {
 
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
+  // routepath:
+  //   - /account/edit
+  //   - /community/info
+  //   - /community/mailchimp
+  //   - /community/recipient
+  //   - /mobilizations/:mobilization_id/analytics
+  //   - /mobilizations/:mobilization_id/basics
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/sharing
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'ux.components--settings-form.button.text': 'Salvar',
   'ux.components--settings-form.success-message': 'Dados editados com sucesso',
 
   // page community mailchimp
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
+  // routepath: /community/mailchimp
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
   'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
+  // routepath: /community/new
   'page--community-new.title': 'Crie uma comunidade',
   'page--community-new.subtitle': 'Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.',
 
@@ -193,11 +236,13 @@ export default {
 
   // page community new (connected)
   // filepath: /routes/admin/authenticated/external/community-new/page.connected.js
+  // routepath: /community/new
   'page--community-new.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-new.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
 
   // page community recipient
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.js
+  // routepath: /community/recipient
   'page--community-recipient.form.transfer-interval.label': 'Intervalo',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanalmente',
   'page--community-recipient.form.transfer-interval.value.monthly': 'Mensalmente',
@@ -218,6 +263,7 @@ export default {
 
   // page community recipient (connected)
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.connected.js
+  // routepath: /community/recipient
   'page--community-recipient.form.validation.required': 'Campo obrigatório',
   'page--community-recipient.form.bank-agency.validation.max-length': 'Deve conter no máximo 5 digitos',
   'page--community-recipient.form.bank-agency-dv.validation.length': 'Deve conter apenas 1 digito',
@@ -230,6 +276,7 @@ export default {
 
   // page community report
   // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+  // routepath: /community/report
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
   'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',
   'page--community-report.section-button.donation.text': 'Baixar',
@@ -244,6 +291,42 @@ export default {
 
   // component sidebar
   // filepath: /client/components/navigation/sidebar/sidebar.js
+  // routepath:
+  //   - /account/edit
+  //   - /community/domain
+  //   - /community/domain/add
+  //   - /community/info
+  //   - /community/mailchimp
+  //   - /community/recipient
+  //   - /community/report
+  //   - /mobilizations
+  //   - /mobilizations/:mobilization_id/analytics
+  //   - /mobilizations/:mobilization_id/basics
+  //   - /mobilizations/:mobilization_id/blocks/create
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/edit
+  //   - /mobilizations/:mobilization_id/launch
+  //   - /mobilizations/:mobilization_id/launch/end
+  //   - /mobilizations/:mobilization_id/sharing
+  //   - /mobilizations/:mobilization_id/templates/choose
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
+  //   - /mobilizations/:mobilization_id/templates/create
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/export
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/export
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - /mobilizations/new
+  //   - /mobilizations/templates/list
   'components.navigation--sidebar.community-settings.item.mobilizations': 'Minhas Mobilizações',
   'components.navigation--sidebar.community-settings.item.info': 'Informações',
   'components.navigation--sidebar.community-settings.item.mailchimp': 'Mailchimp',
@@ -263,51 +346,118 @@ export default {
 
   // component sidenav
   // filepath: /client/components/navigation/sidenav/sidenav.js
+  // routepath:
+  //   - /account/edit
+  //   - /community/domain
+  //   - /community/domain/add
+  //   - /community/info
+  //   - /community/mailchimp
+  //   - /community/recipient
+  //   - /community/report
+  //   - /mobilizations
+  //   - /mobilizations/:mobilization_id/analytics
+  //   - /mobilizations/:mobilization_id/basics
+  //   - /mobilizations/:mobilization_id/blocks/create
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/edit
+  //   - /mobilizations/:mobilization_id/launch
+  //   - /mobilizations/:mobilization_id/launch/end
+  //   - /mobilizations/:mobilization_id/sharing
+  //   - /mobilizations/:mobilization_id/templates/choose
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
+  //   - /mobilizations/:mobilization_id/templates/create
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/export
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/export
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - /mobilizations/new
+  //   - /mobilizations/templates/list
   'components.navigation--sidenav.config': 'Configurações',
   'components.navigation--sidenav.change-community': 'Trocar',
 
   // page mobilizations list
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-list/page.js
+  // routepath: /mobilizations
   'page--mobilizations-list.page-header.title': 'Suas Mobilizações',
   'page--mobilizations-list.more-menu-action.open': 'Abrir página',
   'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
 
   // component mobilizations page header
   // filepath: /client/mobilizations/components/page-header.js
+  // routepath:
+  //   - /mobilizations
+  //   - /mobilizations/templates/list
   'mobilizations.components--page-header.button.text': 'Nova mobilização',
   'mobilizations.components--tabs.actives': 'Ativas',
   'mobilizations.components--tabs.templates': 'Templates',
 
   // component mobilizations list item: name
   // filepath: /client/mobilizations/components/list/items/name/index.js
+  // routepath:
+  //   - /mobilizations
+  //   - /mobilizations/templates/list
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
+  //   - /mobilizations/:mobilization_id/templates/create
   'mobilizations.components--list.items.name.header.text': 'Nome',
 
   // component mobilizations list item: created at
   // filepath: /client/mobilizations/components/list/items/created-at.js
+  // routepath:
+  //   - /mobilizations
+  //   - /mobilizations/templates/list
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
+  //   - /mobilizations/:mobilization_id/templates/create
   'mobilizations.components--list.items.created-at.header.text': 'Criada em',
 
   // component mobilizations list item: users
   // filepath: /client/mobilizations/components/list/items/users.js
+  // routepath:
+  //   - /mobilizations
+  //   - /mobilizations/templates/list
   'mobilizations.components--list.items.users.header.text': 'Usuários',
 
   // component mobilizations list item: fund raising
   // filepath: /client/mobilizations/components/list/items/fund-raising.js
+  // routepath:
+  //   - /mobilizations
+  //   - /mobilizations/templates/list
   'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
   // component mobilizations page tab layout
   // filepath: /client/mobilizations/components/page-tab-layout.js
+  // routepath:
+  //   - /mobilizations/new
+  //   - /mobilizations/:mobilization_id/templates/choose
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
   'mobilizations.components--page-tab-layout.title': 'Nova mobilização',
   'mobilizations.components--tabs.goal': 'Objetivo',
   'mobilizations.components--tabs.templates': 'Templates',
 
   // page mobilizations new
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-new/page.js
+  // routepath: /mobilizations/new
   'page--mobilizations-new.title': 'Qual o objetivo da sua mobilização?',
   'page--mobilizations-new.footer': 'Fique tranquil@ vc poderá editar depois se achar necessário.',
 
   // component mobilizations mobilization basics form
   // filepath: /client/mobilizations/components/mobilization-basics-form.js
+  // routepath:
+  //   - /mobilizations/new
+  //   - /mobilizations/:mobilization_id/basics
   'mobilizations.components--basics-form.name.label': 'Nome',
   'mobilizations.components--basics-form.name.placeholder': 'Ex: Pela criação de uma delegacia de desaparecidos',
   'mobilizations.components--basics-form.name.validation.required': 'Insira o nome da mobilização',
@@ -319,11 +469,40 @@ export default {
 
   // component control buttons
   // filepath: /client/components/forms/control-buttons.js
+  // routepath:
+  //   - /account/edit
+  //   - /community/domain
+  //   - /community/domain/add
+  //   - /community/info
+  //   - /community/mailchimp
+  //   - /community/new
+  //   - /community/recipient
+  //   - /login
+  //   - /mobilizations/:mobilization_id/analytics
+  //   - /mobilizations/:mobilization_id/basics
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/launch
+  //   - /mobilizations/:mobilization_id/sharing
+  //   - /mobilizations/:mobilization_id/templates/create
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - /mobilizations/new
+  //   - /register
+  //   - /subscriptions/:id/edit
   'components--control-buttons.input.value.default': 'Continuar',
   'components--control-buttons.input.value.saving': 'Salvando...',
 
   // page mobilizations templates choose
   // filepath: /routes/admin/authenticated/sidebar/templates-choose/page.js
+  // routepath: /mobilizations/:mobilization_id/templates/choose
   'page--mobilizations.templates-choose.title': 'Como você deseja começar?',
   'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar mobilização do zero',
   'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Meus templates',
@@ -331,6 +510,9 @@ export default {
 
   // component mobilizations templates selectable list
   // filepath: /client/mobilizations/templates/components/template-selectable-list.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/templates/choose/custom
+  //   - /mobilizations/:mobilization_id/templates/choose/global
   'templates.components--selectable-list.filterable-search-bar.placeholder': 'Busque um template',
   'templates.components--selectable-list.empty-list-text': 'Não existe nenhum template com esse nome',
   'templates.components--selectable-list.button.back': 'Voltar',
@@ -338,14 +520,21 @@ export default {
 
   // page mobilizations templates choose custom
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
+  // routepath: /mobilizations/:mobilization_id/templates/choose/custom
   'page--mobilizations.templates-choose-custom.title': 'Meus Templates',
 
   // page mobilizations templates choose global
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-global/page.js
+  // routepath: /mobilizations/:mobilization_id/templates/choose/global
   'page--mobilizations.templates-choose-global.title': 'Templates Globais',
 
   // component mobilizations settings menu
   // filepath: /client/mobilizations/components/settings-menu.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/analytics
+  //   - /mobilizations/:mobilization_id/basics
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/sharing
   'mobilizations.components--settings-menu.title': 'Configure sua mobilização',
   'mobilizations.components--settings-menu.tabs.info': 'Informações básicas',
   'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
@@ -353,6 +542,7 @@ export default {
 
   // page mobilizations settings analytics
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.js
+  // routepath: /mobilizations/:mobilization_id/analytics
   'page--mobilizations-analytics.first-paragraph': 'Para acompanhar os resultados da sua mobilização, você precisa configurar uma conta no Google Analytics.',
   'page--mobilizations-analytics.second-paragraph': 'Siga os passos abaixo:',
   'page--mobilizations-analytics.ol.create-analytics-account': ' Crie uma conta no Google Analytics {link}',
@@ -364,10 +554,12 @@ export default {
 
   // page mobilizations settings analytics (connected)
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/analytics
   'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Informe uma ID válida',
 
   // page block create
   // filepath: /routes/admin/authenticated/sidebar/blocks-create/page.js
+  // routepath: /mobilizations/:mobilization_id/blocks/create
   'page--block-create.title': 'Adicione um bloco de conteúdo',
   'page--block-create.tabs.blank-blocks': 'Blocos em branco',
   'page--block-create.helper-text': 'Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento',
@@ -378,10 +570,14 @@ export default {
 
   // page mobilizations domain
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-domain/page.js
+  // routepath: /mobilizations/:mobilization_id/customDomain
   'page--mobilizations-domain.form-domain.success-message': 'Dados de domínio salvos com sucesso',
 
   // component mobilizations form domain
   // filepath: /client/mobilizations/components/form-domain.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/launch
   'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Quero usar o domínio principal da minha comunidade',
   'mobilizations.components--form-domain.basic.header-toggle.create-domain': 'Quero cadastrar um domínio principal na minha comunidade',
   'mobilizations.components--form-domain.basic.helper-text': 'Preencha abaixo o subdomínio e escolha o domínio que deseja configurar como endereço da sua mobilização',
@@ -405,10 +601,14 @@ export default {
 
   // component mobrender mobilization
   // filepath: /client/mobrender/components/mobilization.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
   'mobrender.components--mobilization.footer.slogan': 'Feito pra causar. Feito com',
 
   // component mobrender block config menu
   // filepath: /client/mobrender/components/block-config-menu.js
+  // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
@@ -419,15 +619,22 @@ export default {
 
   // component mobrender block change background
   // filepath: /client/mobrender/components/block-change-background.js
+  // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--block-change-background.button.save': 'Salvar',
   'mobrender.components--block-change-background.button.cancel': 'Cancelar',
 
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
   'components.navigation--navbar-edition-wrapper.block': 'Bloco',
 
   // component mobilizations form share
   // filepath: /client/mobilizations/components/form-share.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/launch
+  //   - /mobilizations/:mobilization_id/sharing
   'mobilizations.components--form-share.facebook.title': 'Share de Facebook',
   'mobilizations.components--form-share.facebook.helper-text': 'Configure o post que será publicado no Facebook sempre que alguém compartilhar a ação. É importante que esses textos sejam cativantes e curtos para não aparecerem cortados. :)',
   'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagem',
@@ -443,6 +650,7 @@ export default {
 
   // page mobilizations launch
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch/page.js
+  // routepath: /mobilizations/:mobilization_id/launch
   'page--mobilizations-launch.title': 'Lançando sua mobilização',
   'page--mobilizations-launch.steps.form-domain.title': 'Configure o endereço da mobilização',
   'page--mobilizations-launch.steps.form-share.title': 'Configure as informações de compartilhamento',
@@ -456,6 +664,7 @@ export default {
 
   // page mobilizations launch end
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch-end/page.js
+  // routepath: /mobilizations/:mobilization_id/launch/end
   'page--mobilizations-launch-end.heading.all-done': 'Tudo pronto?',
   'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar e contar pra todo mundo!',
   'page--mobilizations-launch-end.title': 'Chegou a hora',
@@ -463,16 +672,17 @@ export default {
 
   // page templates list
   // filepath: /routes/admin/authenticated/sidebar/templates-list/page.js
+  // routepath: /mobilizations/templates/list
   'page--templates-list.header.title': 'Seus templates',
   'page--templates-list.empty-list.no-template': 'Nenhum template criado.',
   'page--templates-list.empty-list.create-one': 'Crie a partir de uma mobilização.',
   'page--templates-list.empty-list.mobilization-list': 'Lista de mobilizações',
   'page--templates-list.more-menu-action.remove.text': 'Remover',
   'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
-  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
 
   // page templates create
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.js
+  // routepath: /mobilizations/:mobilization_id/templates/create
   'page--templates-create.header.title': 'Crie um template a partir da mobilização',
   'page--templates-create.form.name.label': 'Nome do seu template',
   'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
@@ -481,6 +691,10 @@ export default {
 
   // component donation widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/settings-menu.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   'donation.components--settings-menu.title': 'Configure o bloco de doação',
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
   'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
@@ -488,6 +702,7 @@ export default {
 
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
   'page--donation-widget.header.title': 'Crie um template a partir da mobilização',
   'page--donation-widget.form.submit-button': 'Salvar',
   'page--donation-widget.form.success-message': 'Formulário de doação configurado com sucesso!',
@@ -528,11 +743,16 @@ export default {
 
   // page donation widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
   'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
   'page--donation-widget.form.validation.button-text.max-length': 'O limite de caracteres foi atingido.',
 
   // component widget autofire
   // filepath: /client/mobilizations/widgets/components/form-autofire.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
   'widgets.components--form-autofire.form.submit-button': 'Salvar',
   'widgets.components--form-autofire.form.success-message': 'Mensagem de agradecimento configurada com sucesso!',
   'widgets.components--form-autofire.form.sender-name.label': 'Nome do remetente',
@@ -547,6 +767,10 @@ export default {
 
   // component widget form finish message
   // filepath: /client/mobilizations/widgets/components/form-finish-message/index.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'widgets.components--form-finish-message.success-message': 'Formulário salvo com sucesso!',
   'widgets.components--form-finish-message.type.label': 'Tipo de mensagem',
   'widgets.components--form-finish-message.type.radio.share': 'Compartilhar',
@@ -559,30 +783,55 @@ export default {
 
   // component share tell-a-friend
   // filepath: /client/components/share/tell-a-friend.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - (public) /
   'share.components--tell-a-friend.text': 'Agora, compartilhe com seus amigos!',
 
   // component share facebook-share-button
   // filepath: /client/components/share/facebook-share-button.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - (public) /
   'share.components--facebook-share-button.text': 'Compartilhar no Facebook',
 
   // component share twitter-share-button
   // filepath: /client/components/share/twitter-share-button.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - (public) /
   'share.components--twitter-share-button.text': 'Compartilhar no Twitter',
 
   // component share whatsapp-share-button
   // filepath: /client/components/share/whatsapp-share-button.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
+  //   - (public) /
   'share.components--whatsapp-share-button.text': 'Compartilhar no WhatsApp',
 
   // page donation widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   'page--donation-widget-finish.form.success-message': 'Formulário de pós-doação salvo com sucesso!',
 
   // component donation widget tell-a-friend
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/donation-tell-a-friend.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
+  //   - (public) /
   'donation.components--tell-a-friend.message': 'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.',
 
   // config mobrender widgets
   // filepath: /client/mobrender/widgets/config.js
+  // routepath: /mobilizations/:mobilization_id/edit
   'widgets.config--content.label': 'Texto',
   'widgets.config--content.default': 'Clique aqui para editar...',
   'widgets.config--form.label': 'Formulário',
@@ -594,6 +843,9 @@ export default {
 
   // component donation widget
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/__donation__/index.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
   'widgets.components--donation.default.button-text': 'Doar agora',
   'widgets.components--donation.default.title-text': 'Clique para configurar seu bloco de doação',
   'widgets.components--donation.period-label-options.month': 'mês',
@@ -604,6 +856,12 @@ export default {
 
   // component form widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/settings-menu.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/export
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   'form-widget.components--settings-menu.title': 'Configure o formulário da sua ação',
   'form-widget.components--settings-menu.items.fields': 'Campos do formulário',
   'form-widget.components--settings-menu.items.adjusts': 'Ajustes',
@@ -613,6 +871,7 @@ export default {
 
   // page form widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form
   'page--form-widget.form.success-message': 'Formulário configurado com sucesso!',
   'page--form-widget.form.widget-title.label': 'Título do formulário',
   'page--form-widget.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
@@ -623,6 +882,7 @@ export default {
 
   // component data export
   // filepath: /client/mobilizations/widgets/components/data-export.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   'widgets.components--data-export.formated-export-at': '{date} às {time}',
   'widgets.components--data-export.loading.message': 'Aguarde enquanto estamos processando...',
   'widgets.components--data-export.exported.message': 'Última exportação: {formatedExportAt}.',
@@ -632,28 +892,35 @@ export default {
 
   // action async widget data export
   // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   'page--form-widget-fields.add-button': 'Adicionar um campo',
   'page--form-widget-fields.helper-text.still-empty': 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.',
   'page--form-widget-fields.helper-text.manage-fields': 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.',
 
   // component form widget
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/__form__.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
   'form-widget.components--form.default.title-text': 'Clique para configurar seu formulário...',
   'form-widget.components--form.default.button-text': 'Enviar',
   'form-widget.components--form.default.counter-suffix': 'assinaturas',
 
   // component form widget input
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   'form-widget.components--input.click-to-edit': 'Clique para editar',
   'form-widget.components--input.field-dropdown.options.default': 'Selecione...',
   'form-widget.components--input.field-greetings.title': 'Mensagem de sucesso alterada para:',
 
   // component form widget input form
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input-form.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   'form-widget.components--input-form.handle-remove.confirm': 'Você tem certeza que quer remover este campo?',
   'form-widget.components--input-form.handle-overlay-click.confirm': 'Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?',
   'form-widget.components--input-form.field-title.label': 'Título do campo',
@@ -678,19 +945,29 @@ export default {
 
   // component mobrender widget overlay
   // filepath: /client/mobrender/components/widget-overlay.js
+  // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--widget-overlay.button.edit.title': 'Editar',
   'mobrender.components--widget-overlay.button.remove.title': 'Remover',
 
   // page form widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   'page--form-widget-finish.success-message': 'Formulário de pós-inscrição salvo com sucesso!',
 
   // component form widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/form-tell-a-friend.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
+  //   - (public) /
   'form-widget.components--tell-a-friend.message': 'Formulário submetido com sucesso!',
 
   // component pressure widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'pressure-widget.components--settings-menu.title': 'Configure seu formulário de pressão',
   'pressure-widget.components--settings-menu.items.form': 'Formulário',
   'pressure-widget.components--settings-menu.items.pressure-email': 'E-mail para alvo',
@@ -698,7 +975,8 @@ export default {
   'pressure-widget.components--settings-menu.items.post-action': 'Pós-pressão',
 
   // page pressure widget
-  // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
   'page--pressure-widget.success-message': 'Formulário de pressão configurado com sucesso!',
   'page--pressure-widget.form.title-text.label': 'Título do formulário',
   'page--pressure-widget.form.title-text.placeholder': 'Envie um e-mail para quem pode tomar essa decisão',
@@ -716,16 +994,19 @@ export default {
 
   // page pressure widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
   'page--pressure-widget.form.validation.title-text.required': 'Insira um título para o formulário',
   'page--pressure-widget.form.validation.button-text.required': 'Insira um texto para o botão',
 
   // component widgets input tag
   // filepath: /client/mobilizations/widgets/components/input-tag.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'widgets.components--input-tag.helper-text.target-format': '1. Informe nome e email. Ex.: Nome <email@provedor.com>',
   'widgets.components--input-tag.helper-text.enter-to-add': '2. Pressione <Enter> para adicionar mais alvos.',
 
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
   'page--pressure-widget-email.form.input-tag.label': 'Alvos',
   'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>',
@@ -734,14 +1015,17 @@ export default {
 
   // page pressure widget email (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'page--pressure-widget-email.form.validation.required': 'Preenchimento obrigatório',
 
   // page pressure widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/finish/page.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'page--pressure-widget-finish.success-message': 'Formulário de pós-pressão salvo com sucesso!',
 
   // component pressure widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-tell-a-friend.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'pressure-widget--tell-a-friend.message': 'Pressão enviada',
 
   //
