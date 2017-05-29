@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { mountWithIntl } from '~root/intl/helpers'
 
 import Page from '~routes/admin/authenticated/sidebar/account-edit/page'
 
@@ -23,7 +23,7 @@ describe('~routes/admin/authenticated/sidebar/account-edit/page', () => {
   }
 
   it('should render without crashed', () => {
-    const page = mount(<Page {...props} />)
+    const page = mountWithIntl (<Page {...props} />)
     expect(page).to.be.ok
   })
 })
