@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage} from 'react-intl'
 import { Tabs, Tab } from '~client/components/navigation'
 import {
   SettingsPageLayout,
@@ -25,9 +26,24 @@ const EditUserPage = ({
   ...formProps
 }) => (
   <SettingsPageLayout>
-    <SettingsPageMenuLayout title='Minha conta'>
+    <SettingsPageMenuLayout
+      title={
+        <FormattedMessage
+          id='page--account-edit.header.title'
+          defaultMessage='Minha conta'
+        />
+      }
+    >
       <Tabs>
-        <Tab text='Usuário' path={Paths.editAccount()} isActive />
+        <Tab
+          text={
+            <FormattedMessage
+              id='page--account-edit.header.tabs.user'
+              defaultMessage='Usuário'
+            />
+          }
+          path={Paths.editAccount()}
+          isActive />
       </Tabs>
     </SettingsPageMenuLayout>
     <SettingsPageContentLayout>
@@ -37,15 +53,30 @@ const EditUserPage = ({
           <UploadImageField signingUrl={`${process.env.API_URL}/uploads`} />
         </FormGroup>
         <FormGroup controlId='firstNameId' {...firstName}>
-          <ControlLabel>Nome</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--account-edit.form.name.label'
+              defaultMessage='Nome'
+            />
+          </ControlLabel>
           <FormControl type='text' />
         </FormGroup>
         <FormGroup controlId='lastNameId' {...lastName}>
-          <ControlLabel>Sobrenome</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--account-edit.form.lastname.label'
+              defaultMessage='Sobrenome'
+            />
+          </ControlLabel>
           <FormControl type='text' />
         </FormGroup>
         <FormGroup controlId='emailId' {...email}>
-          <ControlLabel>E-mail</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--account-edit.form.email.label'
+              defaultMessage='E-mail'
+            />
+          </ControlLabel>
           <FormControl type='email' />
         </FormGroup>
       </SettingsForm>

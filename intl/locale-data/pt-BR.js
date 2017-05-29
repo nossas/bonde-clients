@@ -39,8 +39,6 @@ export default {
   'page--account-edit.form.name.label': 'Nome',
   'page--account-edit.form.lastname.label': 'Sobrenome',
   'page--account-edit.form.email.label': 'E-mail',
-  'page--account-edit.form.submit-button.default': 'Salvar',
-  'page--account-edit.form.submit-button.success-message': 'Dados editados com sucesso.',
 
   // page subscription edit
   // filepath: /routes/public/subscription-edit/page.js

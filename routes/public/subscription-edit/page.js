@@ -3,6 +3,7 @@ import query from 'querystring'
 import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import { FormattedMessage} from 'react-intl'
 import { Background } from '~client/components/layout'
 import { CreditCardForm, RecurringForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
@@ -114,10 +115,16 @@ const SubscriptionEditPage = props => {
             fontWeight: 'bold',
             fontSize: '2em'
           }}>
-            Dados da Doação
+              <FormattedMessage
+                id='page--subscription-edit.title'
+                defaultMessage='Dados da Doação'
+              />
           </h1>
           <p className='paragraph--helper-text'>
-            Selecione abaixo qual informação da sua doação quer alterar:
+            <FormattedMessage
+              id='page--subscription-edit.helper-text'
+              defaultMessage='Selecione abaixo qual informação da sua doação quer alterar:'
+            />
           </p>
           <div className='container--tab-buttons'>
             <button
@@ -127,7 +134,10 @@ const SubscriptionEditPage = props => {
               )}
               onClick={() => displayForm(CreditCardFormImplementation, 'creditcard')}
             >
-              Cartão de crédito
+              <FormattedMessage
+                id='page--subscription-edit.button.creditcard'
+                defaultMessage='Cartão de crédito'
+              />
             </button>
             <button
               className={classnames(
@@ -136,7 +146,10 @@ const SubscriptionEditPage = props => {
               )}
               onClick={() => displayForm(RecurringFormImplementation, 'recurring')}
             >
-              Data da doação
+              <FormattedMessage
+                id='page--subscription-edit.button.recurring'
+                defaultMessage='Data da doação'
+              />
             </button>
           </div>
           <CSSTransitionGroup
