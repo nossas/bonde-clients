@@ -124,7 +124,7 @@ services:
       RAILS_ENV: test
 
   graphql:
-    image: nossas/bonde-graphql
+    image: nossas/bonde-graphql:0.0.1
     depends_on:
       - postgres
     ports:
@@ -135,7 +135,11 @@ services:
       - postgres:db.devel
     environment:
       PORT: 3003
-      DATABASE_URL: postgres://postgres:3x4mpl3@db.devel:5432/bonde
+      SCHEMA_NAME: postgraphql
+      DATABASE_URL: postgres://postgraphql:3x4mpl3@db.devel:5432/bonde
+      JWT_TYPE: postgraphql.jwt_token
+      JWT_SECRET: d41d8cd98f00b204e9800998ecf8427e
+      PG_DEFAULT_ROLE: anonymous
 
   client:
     image: nossas/bonde-client
