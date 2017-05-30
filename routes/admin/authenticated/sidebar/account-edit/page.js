@@ -43,7 +43,8 @@ const EditUserPage = ({
             />
           }
           path={Paths.editAccount()}
-          isActive />
+          isActive
+        />
       </Tabs>
     </SettingsPageMenuLayout>
     <SettingsPageContentLayout>
