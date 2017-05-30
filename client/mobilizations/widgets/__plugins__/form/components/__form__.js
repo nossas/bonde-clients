@@ -4,16 +4,11 @@ import { browserHistory } from 'react-router'
 import $ from 'jquery'
 import classnames from 'classnames'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { Error } from '~client/components/form-util'
 import { isValidEmail } from '~client/utils/validation-helper'
-
-// Parent module dependencies
-import { WidgetOverlay, FinishMessageCustom } from '~client/mobilizations/widgets/components'
+import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
-
-// Current module dependencies
 import { Button, Input, FormTellAFriend } from '../components'
 
 class Form extends Component {
@@ -197,10 +192,7 @@ class Form extends Component {
   }
 
   render () {
-    const {
-      editable,
-      mobilization: { header_font: headerFont }
-    } = this.props
+    const { mobilization: { header_font: headerFont } } = this.props
 
     const { success } = this.state
 

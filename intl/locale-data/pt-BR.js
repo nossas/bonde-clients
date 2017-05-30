@@ -396,8 +396,8 @@ export default {
   //   - /mobilizations
   //   - /mobilizations/templates/list
   'mobilizations.components--page-header.button.text': 'Nova mobilização',
-  'mobilizations.components--tabs.actives': 'Ativas',
-  'mobilizations.components--tabs.templates': 'Templates',
+  'mobilizations.components--page-header.tabs.actives': 'Ativas',
+  'mobilizations.components--page-header.tabs.templates': 'Templates',
 
   // component mobilizations list item: name
   // filepath: /client/mobilizations/components/list/items/name/index.js
@@ -442,8 +442,8 @@ export default {
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
   'mobilizations.components--page-tab-layout.title': 'Nova mobilização',
-  'mobilizations.components--tabs.goal': 'Objetivo',
-  'mobilizations.components--tabs.templates': 'Templates',
+  'mobilizations.components--page-tab-layout.tabs.goal': 'Objetivo',
+  'mobilizations.components--page-tab-layout.tabs.templates': 'Templates',
 
   // page mobilizations new
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-new/page.js
@@ -1077,5 +1077,5 @@ export default {
   'activists-management.c--filterable-list.period.options.last-quarter': 'Nos últimos 3 meses',
   'activists-management.c--filterable-list.period.options.last-year': 'No último ano',
   'activists-management.c--filterable-list.period.options.always': 'Sempre',
-  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...',
+  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...'
 }

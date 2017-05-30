@@ -32,8 +32,8 @@ export const validate = (values, props) => {
 const mapStateToProps = (state, props) => {
   const { custom_domain: customDomain } = props.mobilization
   if (customDomain) {
-    // eslint-disable-next-line
     const hasWWW = customDomain.startsWith('www.')
+    // eslint-disable-next-line no-useless-escape
     const reDomain = hasWWW ? /^www.[\w\-]+\.(.*)/ : /^[\w\-]+\.(.*)/
     const reSubdomain = hasWWW ? /^www\.([\w-]*).[\w-.]*/ : /^([\w-]*).[\w-.]*/
 

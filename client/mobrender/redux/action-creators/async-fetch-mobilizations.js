@@ -3,7 +3,7 @@ import { createAction } from './create-action'
 import AuthSelectors from '~client/account/redux/selectors'
 
 export default relationshipId => (dispatch, getState, { api }) => {
-  const headers = AuthSelectors(getState()).getCredentials() 
+  const headers = AuthSelectors(getState()).getCredentials()
   dispatch(createAction(t.FETCH_MOBILIZATIONS_REQUEST))
   if (relationshipId) {
     return api

@@ -99,7 +99,6 @@ class FormDomain extends Component {
     const {
       formComponent: FormComponent,
       fields: { domain, subdomain, externalDomain },
-      mobilization,
       hostedZones,
       ...formProps
     } = this.props

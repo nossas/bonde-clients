@@ -16,7 +16,7 @@ export const date = value => ({
 
 // Validate email from
 export const isValidFromEmail = value => {
-  const regex = /^[\w ]+\<(.*)\>$/
+  const regex = /^[\w ]+<(.*)>$/
   if (regex.test(value)) {
     const email = value.match(regex)[1]
     return isValidEmail(email)

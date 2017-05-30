@@ -32,7 +32,7 @@ const CommunitySettingsRecipientPage = ({
         <Radio value='monthly'>Mensalmente</Radio>
       </RadioGroup>
     </FormGroup>
-    
+
     <FormGroup controlId='transferDayId' {...transferDay}>
       <ControlLabel>Dia de transferência</ControlLabel>
       {transferInterval.value === 'weekly' ? (
@@ -42,7 +42,7 @@ const CommunitySettingsRecipientPage = ({
           <option value='3'>Quarta</option>
           <option value='4'>Quinta</option>
           <option value='5'>Sexta</option>
-        </FormControl> 
+        </FormControl>
       ) : (
         <FormControl componentClass='select'>
           <option value='1'>1</option>
@@ -51,9 +51,9 @@ const CommunitySettingsRecipientPage = ({
           <option value='16'>16</option>
           <option value='21'>21</option>
           <option value='26'>26</option>
-        </FormControl> 
+        </FormControl>
       )}
-      
+
     </FormGroup>
 
     <div className='section'>

@@ -23,7 +23,7 @@ describe('~routes/admin/authenticated/sidebar/account-edit/page', () => {
   }
 
   it('should render without crashed', () => {
-    const page = mountWithIntl (<Page {...props} />)
+    const page = mountWithIntl(<Page {...props} />)
     expect(page).to.be.ok
   })
 })

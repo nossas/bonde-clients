@@ -60,7 +60,7 @@ describe('client/mobrender/components/widget-overlay', () => {
     over.find('button.btn-edit').simulate('click')
     expect(result).to.equal(true)
   })
-  
+
   it('should call onDelete when click remove button', () => {
     let result
     over.setProps({

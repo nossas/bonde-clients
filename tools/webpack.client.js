@@ -9,7 +9,7 @@ const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
 
 const nodeEnv = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development'
-const isProd = nodeEnv === 'production' || nodeEnv === 'staging' ? true : false
+const isProd = nodeEnv === 'production' || nodeEnv === 'staging'
 const s3BucketName = process.env.AWS_BUCKET || 'bonde-assets-dev'
 const sentryDsnPublic = process.env.SENTRY_DSN_PUBLIC || 'https://1111@sentry.io/86008'
 

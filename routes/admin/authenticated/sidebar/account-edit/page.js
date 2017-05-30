@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage} from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 import { Tabs, Tab } from '~client/components/navigation'
 import {
   SettingsPageLayout,

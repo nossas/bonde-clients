@@ -14,7 +14,7 @@ class Content extends Component {
     this.setState({ forceRenderNewEditor: true })
   }
 
-  deleteWidget() {
+  deleteWidget () {
     if (window.confirm('Deseja remover o widget?')) {
       this.props.update({
         ...this.props.widget,

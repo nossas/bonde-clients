@@ -94,7 +94,7 @@ class EditorSlate extends Component {
             className={!readOnly ? 'editable' : ''}
             readOnly={readOnly}
           />
-          
+
           <FooterEditor>
             <ActionButton
               editing={this.state.editing}
@@ -107,7 +107,7 @@ class EditorSlate extends Component {
               className='mt2'
               onClick={() => {
                 handleDelete()
-              }} 
+              }}
             >
               <i className='fa fa-trash' />
             </ActionButton>

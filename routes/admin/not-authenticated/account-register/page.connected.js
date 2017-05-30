@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { FormattedMessage, injectIntl } from 'react-intl'
+import { injectIntl } from 'react-intl'
 
 import { isValidEmail } from '~client/utils/validation-helper'
 import { asyncAddUser } from '~client/account/redux/action-creators'
@@ -12,8 +12,8 @@ const validate = (values, { intl }) => {
   const errors = {}
   if (!values.first_name) {
     errors.first_name = intl.formatMessage({
-      id:'page--account-register.form.name.validation.required',
-      defaultMessage:'Informe seu nome'
+      id: 'page--account-register.form.name.validation.required',
+      defaultMessage: 'Informe seu nome'
     })
   }
   if (!values.email) {

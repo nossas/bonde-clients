@@ -50,16 +50,16 @@ class RegisterPage extends Component {
           <div className='flex'>
 
             <FormGroup className='col-6' controlId='nameId' {...firstName}>
-            <ControlLabel>
-              <FormattedMessage
-                id='page--account-register.form.name.label'
-                defaultMessage='Nome'
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--account-register.form.name.label'
+                  defaultMessage='Nome'
               />
-            </ControlLabel>
+              </ControlLabel>
 
-            <FormControl
-              type='text'
-              placeholder={
+              <FormControl
+                type='text'
+                placeholder={
                 intl.formatMessage({
                   id: 'page--account-register.form.name.placeholder',
                   defaultMessage: 'Seu nome'
@@ -76,9 +76,9 @@ class RegisterPage extends Component {
                 />
               </ControlLabel>
 
-                <FormControl
-                  type='text'
-                  placeholder={
+              <FormControl
+                type='text'
+                placeholder={
                     intl.formatMessage({
                       id: 'page--account-register.form.lastname.placeholder',
                       defaultMessage: 'Sobrenome'
@@ -109,12 +109,12 @@ class RegisterPage extends Component {
           <FormGroup controlId='passwordId' {...password}>
             <ControlLabel>
               <FormattedMessage
-                id= 'page--account-register.form.password.label'
-                defaultMessage= 'Senha'
+                id='page--account-register.form.password.label'
+                defaultMessage='Senha'
               />
-              </ControlLabel>
-              <FormControl type='password' placeholder='********' />
-            </FormGroup>
+            </ControlLabel>
+            <FormControl type='password' placeholder='********' />
+          </FormGroup>
           <FormGroup controlId='password2Id' {...password2}>
             <ControlLabel>
               <FormattedMessage
@@ -125,19 +125,17 @@ class RegisterPage extends Component {
             <FormControl type='password' placeholder='********' />
           </FormGroup>
           <Button type='submit' className='btn caps col-12 p2 white rounded-bottom bg-pagenta'>
-            {formProps.submitting ?
-            (
+            {formProps.submitting ? (
               <FormattedMessage
                 id='page--account-register.form.submit-button.saving'
                 defaultMessage='Salvando...'
               />
-            )
-               : <FormattedMessage
-                    id='page--account-register.form.submit-button.default'
-                    defaultMessage='Criar conta'
-                 />
-
-            }
+            ) : (
+              <FormattedMessage
+                id='page--account-register.form.submit-button.default'
+                defaultMessage='Criar conta'
+              />
+            )}
           </Button>
         </FormRedux>
       </div>

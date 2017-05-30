@@ -3,7 +3,7 @@ import query from 'querystring'
 import classnames from 'classnames'
 import uuid from 'uuid'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import { FormattedMessage} from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 import { Background } from '~client/components/layout'
 import { CreditCardForm, RecurringForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
@@ -115,9 +115,9 @@ const SubscriptionEditPage = props => {
             fontWeight: 'bold',
             fontSize: '2em'
           }}>
-              <FormattedMessage
-                id='page--subscription-edit.title'
-                defaultMessage='Dados da Doação'
+            <FormattedMessage
+              id='page--subscription-edit.title'
+              defaultMessage='Dados da Doação'
               />
           </h1>
           <p className='paragraph--helper-text'>

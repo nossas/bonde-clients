@@ -54,7 +54,7 @@ describe('client/utils/validation-helper', () => {
     })
 
     it('should return false for "I9 <>"', () => {
-       expect(validator.isValidFromEmail('I9 <>')).to.equal(false)
+      expect(validator.isValidFromEmail('I9 <>')).to.equal(false)
     })
 
     it('should return false for "I9"', () => {
@@ -62,27 +62,27 @@ describe('client/utils/validation-helper', () => {
     })
 
     it('should return false for "I9 <contact@i9.org"', () => {
-      expect(validator.isValidFromEmail('I9 <contact@i9.org')).to.equal(false) 
+      expect(validator.isValidFromEmail('I9 <contact@i9.org')).to.equal(false)
     })
 
     it('should return false for "I9 contact@i9.org>"', () => {
-      expect(validator.isValidFromEmail('I9 contact@i9.org>')).to.equal(false) 
+      expect(validator.isValidFromEmail('I9 contact@i9.org>')).to.equal(false)
     })
 
     it('should return false for "I9 <contact@org>"', () => {
-      expect(validator.isValidFromEmail('I9 <contact@org>')).to.equal(false) 
+      expect(validator.isValidFromEmail('I9 <contact@org>')).to.equal(false)
     })
 
     it('should return false for "I9 <@i9.org>"', () => {
-      expect(validator.isValidFromEmail('I9 <@i9.org>')).to.equal(false) 
+      expect(validator.isValidFromEmail('I9 <@i9.org>')).to.equal(false)
     })
 
     it('should return false for "I9 <contacti9.org>"', () => {
-      expect(validator.isValidFromEmail('I9 <contacti9.org>')).to.equal(false) 
+      expect(validator.isValidFromEmail('I9 <contacti9.org>')).to.equal(false)
     })
 
     it('should return true for "I9 <contact@i9.org>"', () => {
-      expect(validator.isValidFromEmail('I9 <contact@i9.org>')).to.equal(true) 
+      expect(validator.isValidFromEmail('I9 <contact@i9.org>')).to.equal(true)
     })
   })
 })
