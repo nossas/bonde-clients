@@ -16,7 +16,6 @@ import en from 'react-intl/locale-data/en'
 import Raven from 'raven-js'
 import DSConf from '~server/config'
 
-
 const __PROD__ = DSConf.nodeEnv === 'production' || DSConf.nodeEnv === 'staging'
 const __TEST__ = DSConf.nodeEnv === 'test'
 
