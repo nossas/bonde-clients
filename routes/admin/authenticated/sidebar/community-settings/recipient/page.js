@@ -26,7 +26,14 @@ const CommunitySettingsRecipientPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
-    <p style={{ color: '#FF9500' }}>
+    <p
+      style={{
+        color: '#444',
+        fontWeight: 'bold',
+        background: '#eee',
+        padding: '1em'
+      }}
+    >
       <FormattedMessage
         id='page--community-recipient.pagarme-warning'
         defaultMessage={
