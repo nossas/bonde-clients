@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.3"></a>
+## [0.5.3](https://github.com/nossas/bonde-client/compare/v0.5.2...v0.5.3) (2017-05-31)
+
+
+### Bug Fixes
+
+* **community:** add range to select transfer day on recipient register. closes [#615](https://github.com/nossas/bonde-client/issues/615) ([92de1a5](https://github.com/nossas/bonde-client/commit/92de1a5))
+
+
+### Features
+
+* **intl:** add app translation keys close [#614](https://github.com/nossas/bonde-client/issues/614) ([0edbd86](https://github.com/nossas/bonde-client/commit/0edbd86))
+* **intl:** add incoming v0.6.x keys close [#614](https://github.com/nossas/bonde-client/issues/614) ([51690b0](https://github.com/nossas/bonde-client/commit/51690b0))
+* **routes:** update the `yarn routes` command [#584](https://github.com/nossas/bonde-client/issues/584) ([123c19e](https://github.com/nossas/bonde-client/commit/123c19e))
+
+
+
 <a name="0.5.2"></a>
 ## [0.5.2](https://github.com/nossas/bonde-client/compare/v0.5.1...v0.5.2) (2017-05-23)
 
