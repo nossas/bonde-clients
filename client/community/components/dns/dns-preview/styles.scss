@@ -146,7 +146,7 @@
   }
 
   .table-row.active {
-    border: 1px solid green;
+    box-shadow: 0 0 4px 0px rgba(100,100,100,.5);
 
     .cell--domain-name {
       text-decoration: underline;

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import classnames from 'classnames'
 import Preview from './preview'
 
 const DomainPreview = ({
@@ -10,7 +11,10 @@ const DomainPreview = ({
   isActive,
   onToggle
 }) => (
-  <div className={`table-row ${isActive ? 'active' : ''}`}>
+  <div
+    className={classnames('table-row', { active: isActive })}
+    style={{ borderLeftColor: checked ? '#7ed321' : 'red' }}
+  >
     <div className='wrapper'>
       <div className='text' style={{ width: 30 }}>
         <span className={`circle${checked ? ' checked' : ''}`}>
