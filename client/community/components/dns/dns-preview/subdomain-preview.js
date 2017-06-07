@@ -19,7 +19,7 @@ const SubdomainPreview = ({ subdomain, menuComponent: MenuComponent, checked }) 
       </div>
     </div>
 
-    <div className='wrapper' style={{ width: 100 }}>
+    <div className='wrapper' style={{ width: 100, padding: '0 20px', textAlign: 'center' }}>
       <div className='text'>
         {subdomain.record_type}
       </div>

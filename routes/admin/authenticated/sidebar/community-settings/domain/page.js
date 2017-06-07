@@ -138,14 +138,18 @@ class Page extends Component {
             <Preview
               header={
                 <div className='table-row header'>
-                  <div className='wrapper'>
-                    <div className='text' style={{ width: 35 }} />
-                    <div className='text' style={{ flex: 10 }}>
+                  <div className='wrapper' style={{ width: 50 }}>
+                    <div className='text' />
+                  </div>
+                  <div className='wrapper' style={{ flex: 10 }}>
+                    <div className='text'>
                       <FormattedMessage
                         id='community.components--domain.preview.label.domain'
                         defaultMessage='Domínio da comunidade'
                       />
                     </div>
+                  </div>
+                  <div className='wrapper'>
                     <div className='text' />
                   </div>
                 </div>
@@ -222,7 +226,7 @@ class Page extends Component {
                     <div className='wrapper' style={{ width: 50 }}>
                       <div className='text' />
                     </div>
-                    <div className='wrapper' style={{ flex: '12' }}>
+                    <div className='wrapper' style={{ flex: 15 }}>
                       <div className='text'>
                         <FormattedMessage
                           id='community.components--subdomain.label.name'
@@ -230,7 +234,7 @@ class Page extends Component {
                         />
                       </div>
                     </div>
-                    <div className='wrapper'>
+                    <div className='wrapper' style={{ width: 100, textAlign: 'center' }}>
                       <div className='text'>
                         <FormattedMessage
                           id='community.components--subdomain.label.record-type'
@@ -238,7 +242,7 @@ class Page extends Component {
                         />
                       </div>
                     </div>
-                    <div className='wrapper' style={{ flex: '12' }}>
+                    <div className='wrapper' style={{ flex: 17 }}>
                       <div className='text'>
                         <FormattedMessage
                           id='community.components--subdomain.label.value'
