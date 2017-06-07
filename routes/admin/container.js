@@ -1,17 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import ga from 'react-ga'
 import DevTools from '~client/components/dev-tools'
 import { ZendeskWidget } from '~client/components/external-services'
-import ga from 'react-ga'
-
-if (require('exenv').canUseDOM) {
-  require('~client/styles/main.scss')
-  var theme = require('reapop-theme-wybo')
-}
-
-const NotificationsSystem = require('exenv').canUseDOM
-  ? require('reapop').default
-  : () => <div />
+import NotificationSystem from '~client/components/notification-system'
 
 import { GoogleFontsLoader } from '~client/components/fonts'
 
@@ -34,7 +26,7 @@ class Application extends React.Component {
         <ZendeskWidget />
         {process.env.NODE_ENV === 'development' ? <DevTools /> : ''}
         {children}
-        <NotificationsSystem {...{ theme }} />
+        <NotificationSystem />
         <GoogleFontsLoader fonts='Source Sans Pro' />
       </div>
     )
