@@ -1,0 +1,35 @@
+.c--notify-warning {
+  background-color: #ffffff;
+  border-left: 2px solid #f5aa0a;
+  color: #524c4c;
+  display: table;
+  box-shadow: 2px 1px 7px -1px rgba(0, 0, 0, 0.2);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  margin-bottom: 20px;
+
+  .c--notify-warning-icon {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 10px 0 10px 15px;
+    font-size: 20px !important;
+    color: #f5aa0a;
+  }
+  .c--notify-warning-content {
+    display: table-cell;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .c--notify-warning-title {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.428571429;
+  }
+  .c--notify-warning-message {
+    margin: 0;
+  }
+}

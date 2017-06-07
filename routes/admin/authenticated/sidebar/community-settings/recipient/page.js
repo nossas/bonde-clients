@@ -11,6 +11,7 @@ import {
   Radio
 } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
+import { Warning } from '~client/components/notify'
 import { getCodeBanks } from '~client/community/utils'
 
 const CommunitySettingsRecipientPage = ({
@@ -26,16 +27,14 @@ const CommunitySettingsRecipientPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
-    <p
-      style={{
-        color: '#444',
-        fontWeight: 'bold',
-        background: '#eee',
-        padding: '1em'
-      }}
-    >
+    <Warning title={
       <FormattedMessage
-        id='page--community-recipient.pagarme-warning'
+        id='page--community-recipient.pagarme-warning.title'
+        defaultMessage='Importante'
+      />
+    }>
+      <FormattedMessage
+        id='page--community-recipient.pagarme-warning.message'
         defaultMessage={
           'Atenção: As doações só ficam disponíveis 31 dias após a transação de cartão de ' +
           'crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações ' +
@@ -45,7 +44,7 @@ const CommunitySettingsRecipientPage = ({
           'e assim por diante.'
         }
       />
-    </p>
+    </Warning>
     <FormGroup controlId='transferIntervalId' {...transferInterval}>
       <ControlLabel>Intervalo</ControlLabel>
       <RadioGroup layout='horizontal'>
