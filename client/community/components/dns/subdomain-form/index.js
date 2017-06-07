@@ -49,7 +49,7 @@ const Form = ({ dnsHostedZone, fields: { name, record_type: recordType, value },
                 defaultMessage='Valor'
               />
             </ControlLabel>
-            <FormControl componentClass='textarea' type='text' />
+            <FormControl componentClass='textarea' type='text' rows='5' />
           </FormGroup>
         </div>
         <div className='clearfix' />
