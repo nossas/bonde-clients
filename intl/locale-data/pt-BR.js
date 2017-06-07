@@ -128,7 +128,6 @@ export default {
   'community.components--subdomain.label.value': 'Valor',
   'community.components--subdomain.form.submit-button': 'Adicionar',
   'community.components--domain.preview.label.domain': 'Domínio da comunidade',
-  'community.page--domain-list.header.dns-hosted-zone': 'Domínios da comunidade',
   'community.page--domain-list.header.dns-records': 'Registros DNS',
   'community.page--domain-list.header.dns-server': 'Servidor DNS',
   'community.page--domain-list.button.add-new-record': 'Adicionar novo registro',

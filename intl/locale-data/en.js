@@ -14,7 +14,6 @@ export default {
   'community.components--subdomain.label.value': 'Value',
   'community.components--subdomain.form.submit-button': 'Add',
   'community.components--domain.preview.label.domain': 'Domain',
-  'community.page--domain-list.header.dns-hosted-zone': 'Community domains',
   'community.page--domain-list.header.dns-records': 'DNS records',
   'community.page--domain-list.header.dns-server': 'DNS server',
   'community.page--domain-list.button.add-new-record': 'Add new record',

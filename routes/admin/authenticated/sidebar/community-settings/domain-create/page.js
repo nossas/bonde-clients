@@ -41,8 +41,6 @@ class Page extends Component {
 
     return (
       <div className='page'>
-        <h2>Domínio da comunidade</h2>
-
         <Steps
           renderRule={(position, current) => position <= current}
           progressValidations={[

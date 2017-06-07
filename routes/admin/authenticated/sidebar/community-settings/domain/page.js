@@ -127,12 +127,6 @@ class Page extends Component {
     return (
       <div className='domain-page'>
         <div className='dns-hosted-zones'>
-          <h2>
-            <FormattedMessage
-              id='community.page--domain-list.header.dns-hosted-zone'
-              defaultMessage='Domínios da comunidade'
-            />
-          </h2>
           {dnsHostedZoneIsLoading && <Loading />}
           {dnsHostedZones && (
             <Preview
