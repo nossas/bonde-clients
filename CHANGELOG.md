@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.7"></a>
+## [0.5.7](https://github.com/nossas/bonde-client/compare/v0.5.6...v0.5.7) (2017-06-07)
+
+
+### Bug Fixes
+
+* **ci:** change deploy server address ([168f4fb](https://github.com/nossas/bonde-client/commit/168f4fb))
+
+
+
 <a name="0.5.6"></a>
 ## [0.5.6](https://github.com/nossas/bonde-client/compare/v0.5.5...v0.5.6) (2017-06-07)
 
