@@ -181,12 +181,13 @@ class Page extends Component {
               onConfirm={() => this.confirmDeleteDomain()}
               onCancel={() => this.setState({ deletedHostedZone: undefined })}
             >
-              <p>
+              <div className='mb2'>
                 <FormattedMessage
                   id='community.page--domain-list.dialog.domain-confirm-message'
                   defaultMessage='Tem certeza que deseja remover o domínio'
                 />
-                <b> {this.state.deletedHostedZone.domain_name}</b>?</p>
+                <b> {this.state.deletedHostedZone.domain_name}</b>?
+              </div>
             </Dialog>
           )}
         </div>
@@ -298,13 +299,13 @@ class Page extends Component {
                   onConfirm={() => this.confirmDeleteSubdomain()}
                   onCancel={() => this.setState({ deletedDNSRecord: undefined })}
                 >
-                  <p>
+                  <div className='mb2'>
                     <FormattedMessage
                       id='community.page--domain-list.dialog.record-confirm-message'
                       defaultMessage='Tem certeza que deseja remover o subdomínio'
                     />
                     <b> {this.state.deletedDNSRecord.value}</b>?
-                  </p>
+                  </div>
                 </Dialog>
               )}
             </div>
