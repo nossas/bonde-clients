@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.6"></a>
+## [0.5.6](https://github.com/nossas/bonde-client/compare/v0.5.5...v0.5.6) (2017-06-07)
+
+
+### Bug Fixes
+
+* **community:** change field name for custom default email [#639](https://github.com/nossas/bonde-client/issues/639) ([004ad51](https://github.com/nossas/bonde-client/commit/004ad51))
+* **community:** fix warns about lint ([2bcf65b](https://github.com/nossas/bonde-client/commit/2bcf65b))
+* **community:** try exception 401 with logout in fetch community [#630](https://github.com/nossas/bonde-client/issues/630) ([bc05159](https://github.com/nossas/bonde-client/commit/bc05159))
+* **dns:** add click in domain preview on list dns community [#632](https://github.com/nossas/bonde-client/issues/632) ([ce4a162](https://github.com/nossas/bonde-client/commit/ce4a162))
+* **packages:** upgrade slate-editor to v2.6.4 ([bafcf0b](https://github.com/nossas/bonde-client/commit/bafcf0b))
+* **raven:** not install raven in development env ([c72ae55](https://github.com/nossas/bonde-client/commit/c72ae55))
+* **widgets:** ensure async refetch to update on cache close [#637](https://github.com/nossas/bonde-client/issues/637) ([39d4b01](https://github.com/nossas/bonde-client/commit/39d4b01))
+
+
+### Features
+
+* **auth:** add redirect to logout on action. closes [#630](https://github.com/nossas/bonde-client/issues/630) ([a40e476](https://github.com/nossas/bonde-client/commit/a40e476))
+* **community:** add translate for domain notification [#632](https://github.com/nossas/bonde-client/issues/632) ([912e072](https://github.com/nossas/bonde-client/commit/912e072))
+* **dns:** add delegation servers name when detail a domain settings [#633](https://github.com/nossas/bonde-client/issues/633) ([79d4ca4](https://github.com/nossas/bonde-client/commit/79d4ca4))
+* **dns:** add help text in records section [#633](https://github.com/nossas/bonde-client/issues/633) ([b65f66d](https://github.com/nossas/bonde-client/commit/b65f66d))
+* **dns:** add notification with result of check dns [#632](https://github.com/nossas/bonde-client/issues/632) ([0b5cbe2](https://github.com/nossas/bonde-client/commit/0b5cbe2))
+* **dns:** change labels in settings dns page [#633](https://github.com/nossas/bonde-client/issues/633) ([fb51c1e](https://github.com/nossas/bonde-client/commit/fb51c1e))
+* **forms:** add plus possibility for render raise field [#631](https://github.com/nossas/bonde-client/issues/631) ([a5082a0](https://github.com/nossas/bonde-client/commit/a5082a0))
+* **forms:** add possibility to change style tag in form redux ([7788b06](https://github.com/nossas/bonde-client/commit/7788b06))
+* **forms:** add possibility to insert addon text on input [#633](https://github.com/nossas/bonde-client/issues/633) ([3e06511](https://github.com/nossas/bonde-client/commit/3e06511))
+* **i18n:** add translation en to community domain page [#633](https://github.com/nossas/bonde-client/issues/633) ([628ab8d](https://github.com/nossas/bonde-client/commit/628ab8d))
+* **mobilizations:** add animated counter to widgets [#637](https://github.com/nossas/bonde-client/issues/637) ([cce9bba](https://github.com/nossas/bonde-client/commit/cce9bba))
+* **mobilizations:** add en translate for notification to update dns [#631](https://github.com/nossas/bonde-client/issues/631) ([b9234d6](https://github.com/nossas/bonde-client/commit/b9234d6))
+* **mobilizations:** edit slug field [#631](https://github.com/nossas/bonde-client/issues/631) ([9a3a2de](https://github.com/nossas/bonde-client/commit/9a3a2de))
+* **mobilizations:** reject errors passed by api on add and update actions [#631](https://github.com/nossas/bonde-client/issues/631) ([e77368d](https://github.com/nossas/bonde-client/commit/e77368d))
+* **packages:** add react-countup [#637](https://github.com/nossas/bonde-client/issues/637) ([6369108](https://github.com/nossas/bonde-client/commit/6369108))
+* **string-helper:** add slugify function [#631](https://github.com/nossas/bonde-client/issues/631) ([853a741](https://github.com/nossas/bonde-client/commit/853a741))
+* **ux:** add background fixed to dialog [#632](https://github.com/nossas/bonde-client/issues/632) ([f9dd06f](https://github.com/nossas/bonde-client/commit/f9dd06f))
+
+
+
 <a name="0.5.5"></a>
 ## [0.5.5](https://github.com/nossas/bonde-client/compare/v0.5.4...v0.5.5) (2017-06-01)
 
