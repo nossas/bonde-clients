@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+var styles = require('exenv').canUseDOM ? require('./tag.scss') : {}
+
 const Tag = ({ value, onClick, onRemove }) => {
   const clickable = onClick && typeof onClick === 'function'
   const removable = onRemove && typeof onRemove === 'function'
 
   return (
     <span
-      className='bg-white mr1 mt1 p1 darkengray'
+      className={styles.tag}
       style={{ cursor: clickable ? 'pointer' : null }}
     >
       <span

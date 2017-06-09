@@ -101,7 +101,7 @@ class PressureSettingsEmailPage extends Component {
                     )
                   }}
                 />
-                <ul style={{ paddingLeft: 15 }}>
+                <ul style={{ paddingLeft: 15, marginBottom: 0 }}>
                   <li>
                     <FormattedMessage
                       id='widgets.components--input-tag.info.item.target-format'
