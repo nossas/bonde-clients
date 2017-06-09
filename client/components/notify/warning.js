@@ -1,21 +1,19 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-if (require('exenv').canUseDOM) require('./warning.scss')
+var styles = require('exenv').canUseDOM ? require('./warning.scss') : {}
 
 const Warning = ({ title, children }) => (
-  <div className='c--notify-warning'>
-    <span className='c--notify-warning-icon'>
-      <i
-        className='fa fa-exclamation-triangle'
-      />
+  <div className={styles.notifyBox}>
+    <span className={styles.notifyBoxIcon}>
+      <i className='fa fa-exclamation-triangle' />
     </span>
 
-    <div className='c--notify-warning-content'>
-      <div className='c--notify-warning-title'>
+    <div className={styles.notifyBoxContent}>
+      <div className={styles.notifyBoxTitle}>
         {title}
       </div>
-      <div className='c--notify-warning-message'>
+      <div className={styles.notifyBoxMessage}>
         {children}
       </div>
     </div>
