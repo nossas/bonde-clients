@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
+import { addNotification as notify } from 'reapop'
+import { messagePressureTargetsRemoveAll } from '~client/utils/notifications'
 
 import Page from './page'
 
@@ -13,6 +15,10 @@ const mapStateToProps = (state, props) => {
   }
 }
 
+const mapDispatchToProps = (dispatch, props) => ({
+  notifyAllTargetsRemoval: () => dispatch(notify(messagePressureTargetsRemoveAll(props.intl)))
+})
+
 const validate = values => {
   const errors = {}
   if (!values.pressure_subject) {
@@ -24,7 +30,7 @@ const validate = values => {
   return errors
 }
 
-export default injectIntl(connect(mapStateToProps)(
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
     form: 'widgetsPressureSettingsEmailForm',
     fields: ['pressure_subject', 'pressure_body', 'targets'],

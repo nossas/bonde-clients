@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl'
 import { BlockTag } from '~client/mobilizations/widgets/components'
 import * as array from '~client/utils/array'
 
+var styles = require('exenv').canUseDOM ? require('./input-tag.scss') : {}
+
 class InputTag extends Component {
   constructor (props) {
     super(props)
@@ -37,7 +39,7 @@ class InputTag extends Component {
   }
 
   render () {
-    const { values, label, onRemoveTag, helperText } = this.props
+    const { values, label, onRemoveTag, onRemoveAll, helperText } = this.props
 
     return (
       <div className='input-tag'>
@@ -61,18 +63,37 @@ class InputTag extends Component {
           onChange={(e) => this.setState({ value: e.target.value })}
           onKeyPress={::this.handleKeyPress}
         />
-        <label className='h5 bold caps mt3'>
-          <FormattedMessage
-            id='widgets.components--input-tag.tags.label'
-            defaultMessage='Alvos cadastrados ({targetsCount})'
-            values={{ targetsCount: String(array.clean(values).length) }}
-          />
-        </label>
-        <BlockTag
-          tags={values}
-          onClick={::this.handleEdit}
-          onRemove={onRemoveTag}
-        />
+
+        {array.clean(values).length > 0 && (
+          <div className='form-group'>
+            <label className='h5 bold caps mt3'>
+              <FormattedMessage
+                id='widgets.components--input-tag.tags.label'
+                defaultMessage='Alvos cadastrados ({targetsCount})'
+                values={{ targetsCount: String(array.clean(values).length) }}
+              />
+            </label>
+            <BlockTag
+              tags={values}
+              onClick={::this.handleEdit}
+              onRemove={onRemoveTag}
+            />
+            <div className={styles.buttons}>
+              <button
+                type='button'
+                className={styles.buttonDanger}
+                onClick={onRemoveAll}
+                disabled={!array.clean(values).length}
+              >
+                <i className='fa fa-trash mr1' />
+                <FormattedMessage
+                  id='widgets.components--input-tag.button.remove-all'
+                  defaultMessage='Remover todos'
+                />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     )
   }
@@ -84,6 +105,7 @@ InputTag.propTypes = {
   validate: PropTypes.func,
   onInsertTag: PropTypes.func.isRequired,
   onRemoveTag: PropTypes.func.isRequired,
+  onRemoveAll: PropTypes.func.isRequired,
   helperText: PropTypes.node.isRequired
 }
 

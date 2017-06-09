@@ -34,3 +34,21 @@ export const slugUpdatedMessage = intl => ({
   dismissible: true,
   closeButton: false
 })
+
+export const messagePressureTargetsRemoveAll = intl => ({
+  title: intl.formatMessage({
+    id: 'notification--message-pressure-targets-remove-all.title',
+    defaultMessage: 'Lembre-se...'
+  }),
+  status: 'info',
+  message: intl.formatMessage({
+    id: 'notification--message-pressure-targets-remove-all.message',
+    defaultMessage:
+      'Não se esqueça que é necessário clicar no botão salvar, no canto superior direito ' +
+      'da tela pra que a ação se torne permanente. Se quiser reverter os alvos removidos, ' +
+      'basta atualizar a página. (:'
+  }),
+  dismissAfter: 7000,
+  dismissible: true,
+  closeButton: false
+})

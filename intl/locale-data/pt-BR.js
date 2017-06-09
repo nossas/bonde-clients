@@ -90,6 +90,9 @@ export default {
   'notification--slug-updated-message.title': 'Importante',
   'notification--slug-updated-message.message': 'O slug da sua mobilização foi alterado. Se você faz algum redirecionamento de DNS via CNAME, não se esqueça de atualizá-lo.',
 
+  'notification--message-pressure-targets-remove-all.title': 'Lembre-se...',
+  'notification--message-pressure-targets-remove-all.message': 'Não se esqueça que você precisa clicar no botão salvar, no canto superior direito da tela pra que a ação seja permanente. Se quiser reverter os alvos removidos, basta atualizar a página. (:',
+
   'notify.community.check--dns--success': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
   'notify.community.check--dns--failure': 'A sincronização ainda está pendente, você pode tentar de novo em alguns minutos.',
 
@@ -1032,6 +1035,7 @@ export default {
   // filepath: /client/mobilizations/widgets/components/input-tag.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
+  'widgets.components--input-tag.button.remove-all': 'Remover todos',
 
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js

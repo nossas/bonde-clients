@@ -68,6 +68,12 @@ class PressureSettingsEmailPage extends Component {
               this.setState({ targets })
               targetsField.onChange(this.getTargetString(targets))
             }}
+            onRemoveAll={() => {
+              const targets = []
+              this.setState({ targets })
+              targetsField.onChange(this.getTargetString(targets))
+              this.props.notifyAllTargetsRemoval()
+            }}
             validate={value => {
               const errors = { valid: true }
               if (!value.match(patternTarget)) {
