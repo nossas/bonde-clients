@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-
-// Current module dependencies
-import { BlockTag } from '../components'
+import { FormattedMessage } from 'react-intl'
+import { BlockTag } from '~client/mobilizations/widgets/components'
 
 class InputTag extends Component {
   constructor (props) {
@@ -61,6 +60,13 @@ class InputTag extends Component {
           onChange={(e) => this.setState({ value: e.target.value })}
           onKeyPress={::this.handleKeyPress}
         />
+        <label className='h5 bold caps mt3'>
+          <FormattedMessage
+            id='widgets.components--input-tag.tags.label'
+            defaultMessage='Alvos cadastrados ({targetsCount})'
+            values={{ targetsCount: values.length }}
+          />
+        </label>
         <BlockTag
           tags={values}
           onClick={::this.handleEdit}

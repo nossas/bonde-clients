@@ -1028,6 +1028,11 @@ export default {
   'page--pressure-widget.form.validation.title-text.required': 'Insira um título para o formulário',
   'page--pressure-widget.form.validation.button-text.required': 'Insira um texto para o botão',
 
+  // component widgets input tag
+  // filepath: /client/mobilizations/widgets/components/input-tag.js
+  // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+  'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
+
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
