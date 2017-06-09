@@ -127,7 +127,7 @@ class PressureSettingsEmailPage extends Component {
         </FormGroup>
         <FormGroup controlId='email-body-id' {...pressureBody}>
           <ControlLabel>Corpo do email que será enviado</ControlLabel>
-          <FormControl type='text' componentClass='textarea' />
+          <FormControl type='text' componentClass='textarea' rows='7' />
         </FormGroup>
       </SettingsForm>
     )
