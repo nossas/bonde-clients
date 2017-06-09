@@ -1062,6 +1062,13 @@ export default {
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'pressure-widget--tell-a-friend.message': 'Pressão enviada',
 
+  // component pressure widget: target list
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/target-list/index.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
+  'pressure-widget--target-list.label': 'Quem você vai pressionar ({targetsCount}) alvos',
+
   //
   // page activists management
   // filepath: {incoming-for-v0.6.x release}

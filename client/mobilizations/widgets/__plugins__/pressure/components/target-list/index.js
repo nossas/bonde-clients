@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-// Current module dependencies
 if (require('exenv').canUseDOM) require('./index.scss')
 
 const parseTarget = target => {
@@ -12,7 +12,13 @@ const parseTarget = target => {
 
 const TargetList = ({ targets }) => (
   <div className='target-list px2 py1'>
-    <p className='target-list-label bold'>Quem você vai pressionar</p>
+    <p className='target-list-label bold'>
+      <FormattedMessage
+        id='pressure-widget--target-list.label'
+        defaultMessage='Quem você vai pressionar ({targetsCount} alvos)'
+        values={{ targetsCount: targets.length }}
+      />
+    </p>
     <div className='target-list-container clearfix'>
       <div className='target-list-wrapper clearfix'>
         {targets.length > 0 && targets.map((obj, index) => {
