@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import * as array from '~client/utils/array'
 
 if (require('exenv').canUseDOM) require('./index.scss')
 
@@ -16,7 +17,7 @@ const TargetList = ({ targets }) => (
       <FormattedMessage
         id='pressure-widget--target-list.label'
         defaultMessage='Quem você vai pressionar ({targetsCount} alvos)'
-        values={{ targetsCount: targets.length }}
+        values={{ targetsCount: String(array.clean(targets).length) }}
       />
     </p>
     <div className='target-list-container clearfix'>

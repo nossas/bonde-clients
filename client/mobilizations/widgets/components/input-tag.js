@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { BlockTag } from '~client/mobilizations/widgets/components'
+import * as array from '~client/utils/array'
 
 class InputTag extends Component {
   constructor (props) {
@@ -64,7 +65,7 @@ class InputTag extends Component {
           <FormattedMessage
             id='widgets.components--input-tag.tags.label'
             defaultMessage='Alvos cadastrados ({targetsCount})'
-            values={{ targetsCount: values.length }}
+            values={{ targetsCount: String(array.clean(values).length) }}
           />
         </label>
         <BlockTag
