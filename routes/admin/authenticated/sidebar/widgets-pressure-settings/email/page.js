@@ -80,12 +80,12 @@ class PressureSettingsEmailPage extends Component {
             helperText={
               <Info
                 title={intl.formatMessage({
-                  id: 'widgets.components--input-tag.info.title',
+                  id: 'p--pressure-widget--input-tag.info.title',
                   defaultMessage: 'Como cadastrar alvos'
                 })}
               >
                 <FormattedMessage
-                  id='widgets.components--input-tag.info.text'
+                  id='p--pressure-widget--input-tag.info.text'
                   defaultMessage={
                     'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo ' +
                     'por vez. Você precisa separar os alvos, em linhas distintas e, cada ' +
@@ -104,7 +104,7 @@ class PressureSettingsEmailPage extends Component {
                 <ul style={{ paddingLeft: 15, marginBottom: 0 }}>
                   <li>
                     <FormattedMessage
-                      id='widgets.components--input-tag.info.item.target-format'
+                      id='p--pressure-widget--input-tag.info.item.target-format'
                       defaultMessage={
                         'Formato do alvo: {format} (obrigatório usar os caractéres ' +
                         '{lt} e {gt} para agrupar o email)'
@@ -114,6 +114,16 @@ class PressureSettingsEmailPage extends Component {
                         lt: <Kbd>{'<'}</Kbd>,
                         gt: <Kbd>{'>'}</Kbd>
                       }}
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage
+                      id='p--pressure-widget--input-tag.info.item.sorting'
+                      defaultMessage={
+                        'Os alvos serão exibidos em ordem aleatória na widget de pressão.' +
+                        'Ou seja, cada vez que a mobilização for acessada, a ordem de exibição' +
+                        'será diferente.'
+                      }
                     />
                   </li>
                 </ul>
