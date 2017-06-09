@@ -1,8 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
-
-// Current module dependencies
+import { mountWithIntl } from '~root/intl/helpers'
 import { InputTag } from '~client/mobilizations/widgets/components'
 
 describe('client/mobilizations/widgets/components/input-tag', () => {
@@ -30,15 +28,15 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
   }
 
   beforeEach(() => {
-    wrapper = mount(<InputTag {...props} />)
+    wrapper = mountWithIntl(<InputTag {...props} />)
   })
 
   it('should render one <label> element', () => {
-    expect(wrapper.find('label')).to.have.length(1)
+    expect(wrapper.find('.input-tag > label')).to.have.length(1)
   })
 
   it('should render one <label> element with its content as passed label prop value', () => {
-    expect(wrapper.find('label').text()).to.be.equal(props.label)
+    expect(wrapper.find('.input-tag > label').text()).to.be.equal(props.label)
   })
 
   it('should render error when keyUp Enter and validade return is false', () => {
