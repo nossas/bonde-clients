@@ -1,7 +1,9 @@
 import React from 'react'
+import sinon from 'sinon'
 import { expect } from 'chai'
 import { mountWithIntl } from '~root/intl/helpers'
 import { InputTag } from '~client/mobilizations/widgets/components'
+import * as os from '~client/utils/browser/os'
 
 describe('client/mobilizations/widgets/components/input-tag', () => {
   let wrapper
@@ -11,15 +13,15 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
   const props = {
     values: tags,
     label: 'Foo',
-    onInsertTag: value => {
-      wrapper.setProps({ values: [...tags, value] })
+    onInsertTag: targets => {
+      wrapper.setProps({ values: [...tags, ...targets] })
     },
     onRemoveTag: value => {
       wrapper.setProps({ values: tags.filter(tag => tag !== value) })
     },
-    validate: value => {
+    validate: targets => {
       const errors = { valid: true }
-      if (!value.match(re)) {
+      if (targets.some(target => !target.match(re))) {
         errors.valid = false
         errors.message = 'Dismatch error'
       }
@@ -39,19 +41,51 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
     expect(wrapper.find('.input-tag > label').text()).to.be.equal(props.label)
   })
 
-  it('should render error when keyUp Enter and validade return is false', () => {
-    wrapper.find('input').simulate('keyPress', { charCode: 13 })
+  it('should render error when keyDown `cmd` + `enter` on Mac and validade returns false', () => {
+    let confirmStub = sinon.stub(os, 'isMac')
+    confirmStub.returns(true)
+    wrapper.find('textarea').simulate('keyDown', {
+      charCode: 13,
+      nativeEvent: { metaKey: true }
+    })
     expect(wrapper.find('.red').text()).to.have.string('Dismatch error')
   })
 
-  it('should clean and call onInsertTag when keyUp Enter and validade return is true', () => {
-    // simulate click with fill input
-    wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
-    wrapper.find('input').simulate('keyPress', { charCode: 13 })
+  it('should render error when keyDown `ctrl` + `enter` on Windows and validade returns false',
+    () => {
+      let confirmStub = sinon.stub(os, 'isWindows')
+      confirmStub.returns(true)
+      wrapper.find('textarea').simulate('keyDown', {
+        charCode: 13,
+        nativeEvent: { ctrlKey: true }
+      })
+      expect(wrapper.find('.red').text()).to.have.string('Dismatch error')
+    }
+  )
 
-    expect(wrapper.props().values).to.deep.equal(['Tag 1', 'Tag 2', 'Igor Santos <igor@nossascidades.org>'])
-    expect(wrapper.instance().state.value).to.equal('')
+  it('should render error when keyDown `ctrl` + `enter` on Linux and validade returns false', () => {
+    let confirmStub = sinon.stub(os, 'isLinux')
+    confirmStub.returns(true)
+    wrapper.find('textarea').simulate('keyDown', {
+      charCode: 13,
+      nativeEvent: { ctrlKey: true }
+    })
+    expect(wrapper.find('.red').text()).to.have.string('Dismatch error')
   })
+
+  it('should clean and call onInsertTag when keyDown `cmd` + `enter` and validade return is true',
+    () => {
+      // simulate click with fill input
+      wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
+      wrapper.find('textarea').simulate('keyDown', {
+        charCode: 13,
+        nativeEvent: { metaKey: true }
+      })
+
+      expect(wrapper.props().values).to.deep.equal(['Tag 1', 'Tag 2', 'Igor Santos <igor@nossascidades.org>'])
+      expect(wrapper.instance().state.value).to.equal('')
+    }
+  )
 
   it('should insert value in input and onRemoveTag when clicked to edit tag', () => {
     // find first tag: "Tag 1"
@@ -66,7 +100,7 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
     wrapper.setProps({ values: ['Igor Santos <igor@nossascidades.org>'] })
     // set value to insert
     wrapper.setState({ value: 'Igor Santos <igor@nossascidades.org>' })
-    wrapper.find('input').simulate('keyUp', { key: 'Enter' })
+    wrapper.find('textarea').simulate('keyUp', { key: 'Enter' })
 
     expect(wrapper.props().values.length).to.equal(1)
   })

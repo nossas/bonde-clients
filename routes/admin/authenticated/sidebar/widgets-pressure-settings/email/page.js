@@ -58,10 +58,10 @@ class PressureSettingsEmailPage extends Component {
           <InputTag
             label='Alvos'
             values={this.state.targets}
-            onInsertTag={value => {
-              const targets = [...this.state.targets, value]
-              this.setState({ targets })
-              targetsField.onChange(this.getTargetString(targets))
+            onInsertTag={targets => {
+              const targetsPushed = [...this.state.targets, ...targets]
+              this.setState({ targets: targetsPushed })
+              targetsField.onChange(this.getTargetString(targetsPushed))
             }}
             onRemoveTag={value => {
               const targets = this.state.targets.filter(tag => tag !== value)
@@ -74,12 +74,12 @@ class PressureSettingsEmailPage extends Component {
               targetsField.onChange(this.getTargetString(targets))
               this.props.notifyAllTargetsRemoval()
             }}
-            validate={value => {
+            validate={targets => {
               const errors = { valid: true }
-              if (!value.match(patternTarget)) {
+              if (targets.some(target => !target.match(patternTarget))) {
                 errors.valid = false
-                errors.message = 'Alvo fora do formato padrão. Ex.: Nome do alvo' +
-                  ' <alvo@provedor.com>'
+                errors.message =
+                  'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
               }
               return errors
             }}
