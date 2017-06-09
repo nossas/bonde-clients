@@ -37,7 +37,7 @@ class InputTag extends Component {
   }
 
   render () {
-    const { values, label, onRemoveTag } = this.props
+    const { values, label, onRemoveTag, helperText } = this.props
 
     return (
       <div className='input-tag'>
@@ -51,8 +51,7 @@ class InputTag extends Component {
             {(this.state.error && <span className='red'> - {this.state.error}</span>)}
           </label>
         )}
-        <p className='h5'>{'1. Informe nome e email. Ex.: Nome <email@provedor.com>'}</p>
-        <p className='h5'>{'2. Pressione <Enter> para adicionar mais alvos.'}</p>
+        {helperText}
         <input
           ref='insert'
           id='insert-tag-id'
@@ -77,7 +76,8 @@ InputTag.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
   validate: PropTypes.func,
   onInsertTag: PropTypes.func.isRequired,
-  onRemoveTag: PropTypes.func.isRequired
+  onRemoveTag: PropTypes.func.isRequired,
+  helperText: PropTypes.node.isRequired
 }
 
 export default InputTag

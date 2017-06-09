@@ -1031,8 +1031,9 @@ export default {
   // component widgets input tag
   // filepath: /client/mobilizations/widgets/components/input-tag.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
-  'widgets.components--input-tag.helper-text.target-format': '1. Informe nome e email. Ex.: Nome <email@provedor.com>',
-  'widgets.components--input-tag.helper-text.enter-to-add': '2. Pressione <Enter> para adicionar mais alvos.',
+  'widgets.components--input-tag.info.title': 'Como cadastrar alvos',
+  'widgets.components--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar, clicando no botão no canto superior direito da tela.',
+  'widgets.components--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
 
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js

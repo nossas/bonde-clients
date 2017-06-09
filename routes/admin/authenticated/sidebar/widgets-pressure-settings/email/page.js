@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { FormattedMessage, intlShape } from 'react-intl'
 
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
+import { Info } from '~client/components/notify'
+import { Kbd } from '~client/components/markdown'
 
 // Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
 // eslint-disable-next-line
@@ -42,6 +45,7 @@ class PressureSettingsEmailPage extends Component {
         pressure_body: pressureBody,
         targets: targetsField
       },
+      intl,
       ...props
     } = this.props
     return (
@@ -73,6 +77,48 @@ class PressureSettingsEmailPage extends Component {
               }
               return errors
             }}
+            helperText={
+              <Info
+                title={intl.formatMessage({
+                  id: 'widgets.components--input-tag.info.title',
+                  defaultMessage: 'Como cadastrar alvos'
+                })}
+              >
+                <FormattedMessage
+                  id='widgets.components--input-tag.info.text'
+                  defaultMessage={
+                    'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo ' +
+                    'por vez. Você precisa separar os alvos, em linhas distintas e, cada ' +
+                    'alvo deve seguir o formato descrito abaixo. Para cadastrar basta ' +
+                    'pressionar {keyboardTrigger}. E não se esqueça de salvar, clicando ' +
+                    'no botão no canto superior direito da tela.'
+                  }
+                  values={{
+                    keyboardTrigger: (
+                      <span>
+                        <Kbd>cmd</Kbd>+<Kbd>enter</Kbd>
+                      </span>
+                    )
+                  }}
+                />
+                <ul style={{ paddingLeft: 15 }}>
+                  <li>
+                    <FormattedMessage
+                      id='widgets.components--input-tag.info.item.target-format'
+                      defaultMessage={
+                        'Formato do alvo: {format} (obrigatório usar os caractéres ' +
+                        '{lt} e {gt} para agrupar o email)'
+                      }
+                      values={{
+                        format: <b>{'Nome <email@provedor.com>'}</b>,
+                        lt: <Kbd>{'<'}</Kbd>,
+                        gt: <Kbd>{'>'}</Kbd>
+                      }}
+                    />
+                  </li>
+                </ul>
+              </Info>
+            }
           />
         </div>
         <FormGroup controlId='email-subject-id' {...pressureSubject}>
@@ -96,7 +142,8 @@ PressureSettingsEmailPage.propTypes = {
   // Injected by redux-form
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired
 }
 
 export default PressureSettingsEmailPage
