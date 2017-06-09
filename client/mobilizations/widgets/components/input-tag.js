@@ -44,10 +44,11 @@ class InputTag extends Component {
     }
   }
 
-  handleEdit (value) {
+  handleEdit (target) {
     const { onRemoveTag } = this.props
-    onRemoveTag && onRemoveTag(value)
-    this.setState({ value: value, error: undefined })
+    onRemoveTag && onRemoveTag(target)
+    const value = [...array.clean(this.state.value.split('\n')), target].join('\n')
+    this.setState({ value, error: undefined })
   }
 
   render () {
