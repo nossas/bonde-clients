@@ -1071,7 +1071,12 @@ export default {
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'pressure-widget--target-list.label': 'Quem você vai pressionar ({targetsCount}) alvos',
+  'pressure-widget--target-list.label': `
+    Quem você vai pressionar ({targetsCount} {targetsCount, plural,
+      one {alvo}
+      other {alvos}
+    })
+  `,
 
   //
   // page activists management

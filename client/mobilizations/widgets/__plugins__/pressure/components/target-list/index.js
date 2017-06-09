@@ -41,7 +41,12 @@ class TargetList extends Component {
         <p className='target-list-label bold'>
           <FormattedMessage
             id='pressure-widget--target-list.label'
-            defaultMessage='Quem você vai pressionar ({targetsCount} alvos)'
+            defaultMessage={`
+              Quem você vai pressionar ({targetsCount} {targetsCount, plural,
+                one {alvo}
+                other {alvos}
+              })
+            `}
             values={{ targetsCount: String(array.clean(targets).length) }}
           />
         </p>
