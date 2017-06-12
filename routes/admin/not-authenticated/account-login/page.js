@@ -13,13 +13,7 @@ import {
 } from '~client/components/forms'
 
 class LoginPage extends Component {
-  componentWillReceiveProps (nextProps) {
-    const { submitting } = this.props
-    if (submitting && (!nextProps.submitting && !nextProps.submitFailed) && nextProps.user) {
-      browserHistory.push('/')
-    }
-  }
-
+  
   render () {
     const {
       fields: { email, password },
