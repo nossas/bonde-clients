@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
+import * as os from '~client/utils/browser/os'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
@@ -102,7 +103,8 @@ class PressureSettingsEmailPage extends Component {
                   values={{
                     keyboardTrigger: (
                       <span>
-                        <Kbd>cmd</Kbd>+<Kbd>enter</Kbd>
+                        {os.isMac() ? <Kbd>cmd</Kbd> : <Kbd>ctrl</Kbd>}
+                        +<Kbd>enter</Kbd>
                       </span>
                     )
                   }}
@@ -127,7 +129,7 @@ class PressureSettingsEmailPage extends Component {
                       id='p--pressure-widget--input-tag.info.item.sorting'
                       defaultMessage={
                         'Os alvos serão exibidos em ordem aleatória na widget de pressão.' +
-                        'Ou seja, cada vez que a mobilização for acessada, a ordem de exibição' +
+                        'Ou seja, cada vez que a mobilização for acessada, a ordem de exibição ' +
                         'será diferente.'
                       }
                     />
