@@ -56,67 +56,74 @@ class InputTag extends Component {
 
     return (
       <div className='input-tag'>
-        {label && (
-          <label
-            style={{ cursor: 'pointer' }}
-            className='h5 bold caps'
-            htmlFor='insert-tag-id'
-          >
-            {label}
-            {(this.state.error && <span className='red'> - {this.state.error}</span>)}
-          </label>
-        )}
         {helperText}
-        <textarea
-          ref='insert'
-          id='insert-tag-id'
-          type='text'
-          rows='7'
-          placeholder={
-            'Nome do primeiro alvo <primeiro@alvo.com>\n' +
-            'Nome do segundo alvo <segundo@alvo.com>\n' +
-            'Nome do terceiro alvo <terceiro@alvo.com>\n' +
-            'Nome do quarto alvo <quarto@alvo.com>\n' +
-            'Nome do quinto alvo <quinto@alvo.com>\n' +
-            '...'
-          }
-          className={classnames('input block h3 col-12 mt1 px1', styles.textarea)}
-          value={this.state.value}
-          onChange={(e) => this.setState({ value: e.target.value })}
-          onKeyDown={::this.handleKeyPress}
-        />
-
-
-        {array.clean(values).length > 0 && (
-          <div className='form-group'>
-            <label className='h5 bold caps mt3'>
-              <FormattedMessage
-                id='widgets.components--input-tag.tags.label'
-                defaultMessage='Alvos cadastrados ({targetsCount})'
-                values={{ targetsCount: String(array.clean(values).length) }}
+        <div className='clearfix mxn2'>
+          <div className='col col-6 px2'>
+            <div className='form-group'>
+              {label && (
+                <label
+                  style={{ cursor: 'pointer' }}
+                  className='h5 bold caps'
+                  htmlFor='insert-tag-id'
+                >
+                  {label}
+                  {(this.state.error && <span className='red'> - {this.state.error}</span>)}
+                </label>
+              )}
+              <textarea
+                ref='insert'
+                id='insert-tag-id'
+                type='text'
+                rows='7'
+                placeholder={
+                  'Nome do primeiro alvo <primeiro@alvo.com>\n' +
+                  'Nome do segundo alvo <segundo@alvo.com>\n' +
+                  'Nome do terceiro alvo <terceiro@alvo.com>\n' +
+                  'Nome do quarto alvo <quarto@alvo.com>\n' +
+                  'Nome do quinto alvo <quinto@alvo.com>\n' +
+                  '...'
+                }
+                className={classnames('input block h3 col-12 mt1 px1', styles.textarea)}
+                value={this.state.value}
+                onChange={(e) => this.setState({ value: e.target.value })}
+                onKeyDown={::this.handleKeyPress}
               />
-            </label>
-            <BlockTag
-              tags={values}
-              onClick={::this.handleEdit}
-              onRemove={onRemoveTag}
-            />
-            <div className={styles.buttons}>
-              <button
-                type='button'
-                className={styles.buttonDanger}
-                onClick={onRemoveAll}
-                disabled={!array.clean(values).length}
-              >
-                <i className='fa fa-trash mr1' />
-                <FormattedMessage
-                  id='widgets.components--input-tag.button.remove-all'
-                  defaultMessage='Remover todos'
-                />
-              </button>
             </div>
           </div>
-        )}
+
+          <div className='col col-6 px2'>
+            {array.clean(values).length > 0 && (
+              <div className='form-group'>
+                <label className='h5 bold caps'>
+                  <FormattedMessage
+                    id='widgets.components--input-tag.tags.label'
+                    defaultMessage='Alvos cadastrados ({targetsCount})'
+                    values={{ targetsCount: String(array.clean(values).length) }}
+                  />
+                </label>
+                <BlockTag
+                  tags={values}
+                  onClick={::this.handleEdit}
+                  onRemove={onRemoveTag}
+                />
+                <div className={styles.buttons}>
+                  <button
+                    type='button'
+                    className={styles.buttonDanger}
+                    onClick={onRemoveAll}
+                    disabled={!array.clean(values).length}
+                  >
+                    <i className='fa fa-trash mr1' />
+                    <FormattedMessage
+                      id='widgets.components--input-tag.button.remove-all'
+                      defaultMessage='Remover todos'
+                    />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     )
   }
