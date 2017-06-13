@@ -1,0 +1,29 @@
+import { browserHistory } from 'react-router'
+import { addNotification as notify } from 'reapop'
+import { accountPasswordRetrieveSuccess } from '~client/utils/notifications'
+import * as paths from '~client/paths'
+import * as t from '../action-types'
+import { createAction } from './create-action'
+
+export default user => (dispatch, getState, { api, intl }) => {
+  const endpoint = '/auth/retrieve'
+  const body = { user }
+
+  dispatch(createAction(t.ASYNC_RETRIEVE_PASSWORD_REQUEST))
+  return api.post(endpoint, body)
+    .then(res => {
+      if (res.status === 200 && res.data.errors) {
+        // Reject request on redux-form
+        return Promise.reject({ ...res.data.errors })
+      } else if (res.status === 200) {
+        dispatch(createAction(t.ASYNC_RETRIEVE_PASSWORD_SUCCESS, res.data))
+        dispatch(notify(accountPasswordRetrieveSuccess(intl)))
+        browserHistory.push(paths.login())
+        return Promise.resolve()
+      }
+    })
+    .catch(ex => {
+      dispatch(createAction(t.ASYNC_RETRIEVE_PASSWORD_FAILURE))
+      return Promise.reject(ex)
+    })
+}

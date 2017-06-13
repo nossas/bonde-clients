@@ -13,17 +13,11 @@ const UNIX_TIMESTAMP_MILLISECONDS_FIX = 1000
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case t.LOGIN_REQUEST:
-      return {
-        ...state,
-        isLoading: true
-      }
     case t.LOAD_SUCCESS:
-      return {
-        ...state,
-        isLoaded: true,
-        isLoading: false
-      }
+      return { ...state, isLoaded: true, isLoading: false }
+
+    case t.LOGIN_REQUEST:
+      return { ...state, isLoading: true }
     case t.LOGIN_SUCCESS:
       const { credentials, user } = action.payload
 
@@ -31,11 +25,10 @@ export default (state = initialState, action = {}) => {
         { auth: { credentials, user } },
         // { expires: new Date(credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }  // todo expiry JWT token
       )
-      return {...state,
-        isLoading: false,
-        error: undefined,
-        ...action.payload
-      }
+      return { ...state, isLoading: false, error: undefined, ...action.payload }
+    case t.LOGIN_FAILURE:
+      return { ...state, isLoading: false, error: action.payload }
+
     case t.LOGOUT_SUCCESS:
       reactCookie.remove('auth')
       reactCookie.remove('community')
@@ -46,16 +39,9 @@ export default (state = initialState, action = {}) => {
         user: undefined,
         credentials: undefined
       }
-    case t.LOGIN_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      }
+
     case t.UPDATE_USER_REQUEST:
-      return {...state,
-        saving: true
-      }
+      return { ...state, saving: true }
     case t.UPDATE_USER_SUCCESS:
       reactCookie.save('auth', {
         auth: {
@@ -63,16 +49,18 @@ export default (state = initialState, action = {}) => {
           user: action.payload
         }
       })
-      return {...state,
-        saving: false,
-        user: action.payload
-      }
+      return { ...state, saving: false, user: action.payload }
     case t.UPDATE_USER_FAILURE:
-      return {...state,
-        saving: false,
-        error: action.payload
-      }
+      return { ...state, saving: false, error: action.payload }
+
+    case t.ASYNC_RETRIEVE_PASSWORD_REQUEST:
+      return { ...state, saving: false }
+    case t.ASYNC_RETRIEVE_PASSWORD_SUCCESS:
+      return { ...state, saving: true, user: action.payload }
+    case t.ASYNC_RETRIEVE_PASSWORD_FAILURE:
+      return { ...state, saving: false, error: action.payload }
+
     default:
-      return {...state}
+      return { ...state }
   }
 }

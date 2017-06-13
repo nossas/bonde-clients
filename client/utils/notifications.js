@@ -52,3 +52,21 @@ export const messagePressureTargetsRemoveAll = intl => ({
   dismissible: true,
   closeButton: false
 })
+
+export const accountPasswordRetrieveSuccess = intl => ({
+  title: intl.formatMessage({
+    id: 'notification--account-password-retrieve-success.title',
+    defaultMessage: 'Recuperação de senha'
+  }),
+  status: 'success',
+  message: intl.formatMessage({
+  id: 'notification--account-password-retrieve-success.message',
+  defaultMessage:
+    'Acabamos de enviar um email com a sua nova senha. Confira na ' +
+    'caixa de entrada do seu email para acessar o BONDE novamente. Relaxe pois, ' +
+    'pode alterar essa senha quando você quiser, nas configurações da sua conta.'
+  }),
+  dismissAfter: 0,
+  dismissible: true,
+  closeButton: false
+})

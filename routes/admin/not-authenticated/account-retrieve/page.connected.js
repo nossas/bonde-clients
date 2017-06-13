@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 
 import { isValidEmail } from '~client/utils/validation-helper'
-import { asyncAddUser } from '~client/account/redux/action-creators'
+import { asyncRetrievePassword } from '~client/account/redux/action-creators'
 import Page from './page'
 
 const fields = ['email']
@@ -25,7 +25,7 @@ const validate = (values, { intl }) => {
 }
 
 const mapActionsToProps = dispatch => ({
-  submit: () => {}
+  submit: user => dispatch(asyncRetrievePassword(user))
 })
 
 export default injectIntl(connect(undefined, mapActionsToProps)(
