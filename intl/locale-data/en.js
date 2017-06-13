@@ -31,5 +31,5 @@ export default {
   'notify.community.check--dns--failure': 'The sync is still pending, you can try again in a few minutes.',
 
   'notification--slug-updated-message.title': 'Important',
-  'notification--slug-updated-message.message': 'The slug of this mobilization was changed. If you do some DNS redirection via CNAME, be sure to update it.',
+  'notification--slug-updated-message.message': 'The slug of this mobilization was changed. If you do some DNS redirection via CNAME, be sure to update it.'
 }

@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
-import Preview from './preview'
 
 const SubdomainPreview = ({ subdomain, menuComponent: MenuComponent, checked }) => (
   <div className='table-row'>

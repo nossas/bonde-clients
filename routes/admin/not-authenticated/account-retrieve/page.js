@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
 import {
@@ -10,18 +9,13 @@ import {
   FormControl,
   Button
 } from '~client/components/forms'
-import * as Paths from '~client/paths'
 
 var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
 
 class RegisterPage extends Component {
   render () {
     const {
-      fields: {
-        email,
-        password,
-        password2
-      },
+      fields: { email },
       intl,
       ...formProps
     } = this.props

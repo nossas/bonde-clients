@@ -54,9 +54,9 @@ export function configureStore (initialState, thunkExtraArgument) {
     initialState,
     compose(
       applyMiddleware(...middlewares),
-      process.env.NODE_ENV === 'development' ?
-        DevTools.instrument() :
-        f => f
+      process.env.NODE_ENV === 'development'
+        ? DevTools.instrument()
+        : f => f
     )
   )
 

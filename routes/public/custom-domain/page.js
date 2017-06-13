@@ -38,8 +38,8 @@ class CustomDomainPage extends Component {
       //
       // nossas/bonde-cache widgets counter fix
       //
+      const { host, asyncFilterWidget } = this.props
       // eslint-disable-next-line
-      const { host, asyncFilterWidget, dispatch } = this.props
       const regex = host.match(`(.+)\.${DefaultServerConfig.appDomain}`)
       const where = regex
         ? { slug: regex[1].replace(/^www\./, '') }

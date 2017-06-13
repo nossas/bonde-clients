@@ -13,20 +13,9 @@ import {
   Preview
 } from '~client/community/components/dns'
 import * as dnsMessages from '~client/community/notifications/dns'
-
 import * as Paths from '~client/paths'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
-
-
-const DnsRecordMenu = ({ dnsRecord, onClick }) => {
-  return (
-    <DropdownMenu
-      inline
-      items={[{ icon: 'fa fa-trash', text: 'Remover subdomínio', onClick }]}
-    />
-  )
-}
 
 class Page extends Component {
 

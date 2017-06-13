@@ -11,9 +11,7 @@ const dummyField = field => ({
 describe('~routes/admin/not-authenticated/account-retrieve/page', () => {
   const props = {
     submit: () => {},
-    fields: {
-      email: dummyField('email'),
-    },
+    fields: { email: dummyField('email') },
     handleSubmit: () => {}
   }
 

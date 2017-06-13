@@ -117,7 +117,7 @@ const mapActionsToProps = (dispatch, props) => ({
       mobilization.custom_domain = www ? customDomain : `www.${customDomain}`
     }
 
-    return dispatch(asyncUpdateMobilization({...mobilization, fieldName }))
+    return dispatch(asyncUpdateMobilization({ ...mobilization, fieldName }))
   }
 })
 

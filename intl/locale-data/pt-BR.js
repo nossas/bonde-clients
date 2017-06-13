@@ -164,9 +164,9 @@ export default {
   // component community subdomain form
   // filepath: /client/community/components/dns/subdomain-form/index.js
   // routepath: /community/domain
-  //'community.components--subdomain-form.subdomain.label': 'Subdomínio',
-  //'community.components--subdomain-form.record-type.label': 'Tipo',
-  //'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
+  // 'community.components--subdomain-form.subdomain.label': 'Subdomínio',
+  // 'community.components--subdomain-form.record-type.label': 'Tipo',
+  // 'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
   'community.components--subdomain-form.button.text': 'Adicionar',
 
   // page community domain
