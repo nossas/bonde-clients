@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import ga from 'react-ga'
 import DevTools from '~client/components/dev-tools'
+import { Loading } from '~client/components/await'
 import { ZendeskWidget } from '~client/components/external-services'
 import NotificationSystem from '~client/components/notification-system'
 
@@ -20,13 +21,14 @@ class Application extends React.Component {
   }
 
   render () {
-    const { children } = this.props
+    const { children, loading } = this.props
     return (
       <div>
         <ZendeskWidget />
         {process.env.NODE_ENV === 'development' ? <DevTools /> : ''}
         {children}
         <NotificationSystem />
+        {loading && <Loading />}
         <GoogleFontsLoader fonts='Source Sans Pro' />
       </div>
     )
@@ -37,7 +39,8 @@ Application.propTypes = {
   children: PropTypes.object.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  })
+  }),
+  loading: PropTypes.bool.isRequired
 }
 
 export default (Application)

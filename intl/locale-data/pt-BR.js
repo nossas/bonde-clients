@@ -97,6 +97,7 @@ export default {
   //   - /mobilizations/:mobilization_id/basics
   //   - /mobilizations/new
   //   - /subscriptions/:id/edit
+  //   - /community/invite
   'notification--generic-request-error.title': 'Ops!',
   'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
 
@@ -111,6 +112,9 @@ export default {
 
   'notification--account-password-retrieve-success.title': 'Recuperação de senha',
   'notification--account-password-retrieve-success.message': 'Acabamos de enviar um email com a sua nova senha. Confira na caixa de entrada do seu email para acessar o BONDE novamente. Relaxe pois, pode alterar essa senha quando você quiser, nas configurações da sua conta.',
+
+  'notification--community-invite-success.title': 'Oba!',
+  'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
 
   'notify.community.check--dns--success': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
   'notify.community.check--dns--failure': 'A sincronização ainda está pendente, você pode tentar de novo em alguns minutos.',

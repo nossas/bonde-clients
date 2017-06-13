@@ -14,7 +14,7 @@ export default store => ({
 
   getComponent (nextState, callback) {
     require.ensure([], function (require) {
-      callback(null, require('./container').default)
+      callback(null, require('./container.connected').default)
     })
   },
 

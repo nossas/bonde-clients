@@ -27,9 +27,9 @@ export const slugUpdatedMessage = intl => ({
   message: intl.formatMessage({
     id: 'notification--slug-updated-message.message',
     defaultMessage: 'O slug da sua mobilização foi alterado. ' +
-    'Se você faz algum redirecionamento de DNS via ' +
-    'CNAME, não se esqueça de atualizá-lo.'
-  }),
+      'Se você faz algum redirecionamento de DNS via ' +
+      'CNAME, não se esqueça de atualizá-lo.'
+    }),
   dismissAfter: 0,
   dismissible: true,
   closeButton: false
@@ -66,6 +66,22 @@ export const accountPasswordRetrieveSuccess = intl => ({
       'pode alterar essa senha quando você quiser, nas configurações da sua conta.'
   }),
   dismissAfter: 0,
+  dismissible: true,
+  closeButton: false
+})
+
+export const communityInviteSuccess = (intl, email) => ({
+  title: intl.formatMessage({
+    id: 'notification--community-invite-success.title',
+    defaultMessage: 'Oba!'
+  }),
+  status: 'success',
+  message: intl.formatMessage({
+    id: 'notification--community-invite-success.message',
+    defaultMessage: 'O convite para {email} foi enviado com sucesso! ' +
+      'Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
+  }, { email }),
+  dismissAfter: 15000,
   dismissible: true,
   closeButton: false
 })

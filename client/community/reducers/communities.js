@@ -5,9 +5,11 @@ import * as t from '../action-types'
 import * as authT from '~client/account/redux/action-types'
 
 export const initialState = {
+  loading: false,
   isLoaded: false,
   data: [],
-  currentId: undefined
+  currentId: undefined,
+  error: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -75,6 +77,14 @@ export default (state = initialState, action = {}) => {
     case authT.LOGOUT_SUCCESS:
       // reset info to make redirect correctly
       return initialState
+
+    case t.ASYNC_INVITE_REQUEST:
+      return { ...state }
+    case t.ASYNC_INVITE_SUCCESS:
+      return { ...state }
+    case t.ASYNC_INVITE_FAILURE:
+      return { ...state, error: action.payload }
+
     default:
       return state
   }

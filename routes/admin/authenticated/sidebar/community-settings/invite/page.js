@@ -15,14 +15,14 @@ import Button from '~client/ux/components/button'
 var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
 
 const CommunitySettingsInfoPage = ({
-  fields: { inviteEmail },
+  fields: { email },
   location,
   community,
   downloadActivists,
   ...formProps
 }) => (
   <FormRedux nosubmit {...formProps}>
-    <FormGroup controlId='inviteEmail' {...inviteEmail}>
+    <FormGroup controlId='email' {...email}>
       <ControlLabel>Pessoas</ControlLabel>
       <FormControl
         type='text'

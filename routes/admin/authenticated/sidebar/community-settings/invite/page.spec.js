@@ -6,7 +6,7 @@ import Page from '~routes/admin/authenticated/sidebar/community-settings/invite/
 
 describe('routes/admin/authenticated/sidebar/community-settings/invite/page', () => {
   const props = {
-    fields: { inviteEmail: {} }
+    fields: { email: {} }
   }
 
   it('should render without crashed', () => {

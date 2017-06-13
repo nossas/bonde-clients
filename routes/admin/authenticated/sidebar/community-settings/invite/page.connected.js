@@ -1,27 +1,31 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
-import { asyncEdit } from '~client/community/action-creators'
+import { asyncInvite } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 import { isValidFromEmail } from '~client/utils/validation-helper'
 
 import Page from './page'
 
-const mapDispatchToProps = { submit: asyncEdit }
+const mapStateToProps = state => ({
+  communityId: CommunitySelectors.getCurrentId(state)
+})
+const mapDispatchToProps = { asyncInvite }
+const mergeProps = ({ communityId }, { asyncInvite }) => ({
+  submit: values => asyncInvite(communityId, values)
+})
 
-const fields = ['inviteEmail']
+const fields = ['email']
 
-const validate = ({ inviteEmail }) => {
+const validate = ({ email }) => {
   const errors = {}
 
-  if (!inviteEmail) {
-    errors.inviteEmail = 'Obrigatório'
-  } else if (inviteEmail && !isValidFromEmail(inviteEmail)) {
-    errors.inviteEmail = 'Formato de email inválido'
+  if (!email) {
+    errors.email = 'Obrigatório'
   }
   return errors
 }
 
-export default connect(undefined, mapDispatchToProps)(
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   reduxForm({ form: 'communityInviteForm', fields, validate })(Page)
 )
