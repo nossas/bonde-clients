@@ -161,6 +161,23 @@ describe('client/components/navigation/sidebar/sidebar', () => {
           })
         })
 
+        describe('- membros', () => {
+          beforeAll(incrementIndex)
+
+          it('should render with its text properly', () => {
+            const text = 'Membros'
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().text).to.be.equal(text)
+          })
+          it('should render with its icon properly', () => {
+            const icon = 'users'
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().icon).to.be.equal(icon)
+          })
+          it('should render with its href properly', () => {
+            const href = paths.communityInvite()
+            expect(wrapper.find('SidenavListItem').at(itemIndex).props().href).to.be.equal(href)
+          })
+        })
+
         describe('- mailchimp', () => {
           beforeAll(incrementIndex)
 
