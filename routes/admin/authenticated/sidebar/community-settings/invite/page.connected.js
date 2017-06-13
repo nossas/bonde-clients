@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 
 import { asyncInvite } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
-import { isValidFromEmail } from '~client/utils/validation-helper'
+import { isValidEmail } from '~client/utils/validation-helper'
 
 import Page from './page'
 
@@ -22,6 +22,8 @@ const validate = ({ email }) => {
 
   if (!email) {
     errors.email = 'Obrigatório'
+  } else if (!isValidEmail(email)) {
+    errors.email = 'Informe um email válido'
   }
   return errors
 }
