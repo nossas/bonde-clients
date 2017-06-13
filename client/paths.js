@@ -3,6 +3,7 @@ export const logout = () => '/logout'
 
 export const editAccount = () => '/account/edit'
 export const createAccount = () => '/register'
+export const accountRetrieve = () => '/account/retrieve'
 //
 // Interface to modules paths
 //

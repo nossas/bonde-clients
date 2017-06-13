@@ -6,6 +6,8 @@ export default {
   'page--account-login.signin': 'Sign in',
   'page--account-login.ask-register': 'Not yet registered?',
   'page--account-login.cta-signup': 'Click to create an account.',
+  'page--account-login.auth.error-message': 'Incorrect password.',
+  'page--account-login.auth.error-message.retrieve-password.link': 'Forgot your password?',
 
   // component community subdomain preview and form
   // routepath: /community/domain

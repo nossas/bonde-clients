@@ -9,11 +9,26 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  Button
+  Button,
+  Raise
 } from '~client/components/forms'
 
+var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
+
+const InputError = (field) => field.error && field.touched ? (
+  <Raise error={field.error} />
+) : undefined
+
 class LoginPage extends Component {
-  
+  componentWillReceiveProps (nextProps) {
+    const { fields: { password }, errorMessage, resetErrorMessage } = this.props
+
+    // checking if user has typed after wrong password error has been displayed
+    if (password.value !== nextProps.fields.password.value && errorMessage) {
+      resetErrorMessage()
+    }
+  }
+
   render () {
     const {
       fields: { email, password },
@@ -56,13 +71,28 @@ class LoginPage extends Component {
             />
           </FormGroup>
           <FormGroup controlId='passwordId' {...password}>
-            <ControlLabel>
+            <ControlLabel hideError>
               <FormattedMessage
                 id='page--account-login.label.password'
                 defaultMessage='Senha'
               />
+              {InputError(password)}
+              {errorMessage && !formProps.submitting && !password.error && password.touched ? (
+                <span className='red'>
+                  {` - ${errorMessage} `}
+                  <Link to={paths.accountRetrieve()} className={styles.error}>
+                    <FormattedMessage
+                      id='page--account-login.auth.error-message.retrieve-password.link'
+                      defaultMessage='Esqueceu sua senha?'
+                    />
+                  </Link>
+                </span>
+              ) : null}
             </ControlLabel>
-            <FormControl type='password' placeholder='••••••••••' />
+            <FormControl
+              type='password'
+              placeholder='••••••••••'
+            />
           </FormGroup>
           <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
             {formProps.submitting ? (
@@ -78,12 +108,6 @@ class LoginPage extends Component {
             )}
           </Button>
         </FormRedux>
-
-        {!errorMessage || formProps.submitting ? null : (
-          <div className='h5 white bold center animated shake mt2'>
-            {errorMessage}
-          </div>
-        )}
 
         <p className='white center'>
           <FormattedMessage

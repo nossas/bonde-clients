@@ -9,6 +9,8 @@ export default {
   'page--account-login.signin': 'Entrar',
   'page--account-login.ask-register': 'Ainda não é cadastrado?',
   'page--account-login.cta-signup': 'Clique para criar uma conta.',
+  'page--account-login.auth.error-message': 'Senha incorreta.',
+  'page--account-login.auth.error-message.retrieve-password.link': 'Esqueceu sua senha?',
 
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js

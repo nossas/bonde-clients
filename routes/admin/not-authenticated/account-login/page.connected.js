@@ -4,7 +4,9 @@ import { graphql } from 'react-apollo'
 import { browserHistory } from 'react-router'
 
 import * as AccountActions from '~client/account/redux/action-creators'
+import * as AccountActionTypes from '~client/account/redux/action-types'
 import AccountSelectors from '~client/account/redux/selectors'
+import { createAction } from '~client/utils/redux'
 import { isValidEmail } from '~client/utils/validation-helper'
 
 import authenticate from '~client/account/queries/authenticate'
@@ -51,15 +53,16 @@ const mapActionsToProps = (dispatch, props) => ({...props,
               credentials: { 'access-token': `${jwtToken}` }
             }
           })
-          browserHistory.push('/') 
+          browserHistory.push('/')
         } else {
           dispatch({
             type: authType.LOGIN_FAILURE,
-            payload: 'Ops, o email e/ou senha estão incorretos.' 
+            payload: 'Ops, o email e/ou senha estão incorretos.'
           })
         }
       })
-  }
+  },
+  resetErrorMessage: () => createAction(AccountActionTypes.LOGIN_FAILURE, undefined),
 })
 
 const FormLoginWithMutation = graphql(authenticate)(reduxForm(
