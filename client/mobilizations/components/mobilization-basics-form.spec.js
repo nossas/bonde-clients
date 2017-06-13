@@ -18,7 +18,7 @@ describe('client/mobilizations/components/mobilization-basics-form', () => {
     dirty: false,
     valid: false
   }
-  
+
   /*
   beforeAll(() => {
     wrapper = shallow(<MobilizationBasicsForm {...props} />)
@@ -27,7 +27,7 @@ describe('client/mobilizations/components/mobilization-basics-form', () => {
 
   describe('#render', () => {
     it('should render without crash', () => {
-      //expect(wrapper).to.be.ok
+      // expect(wrapper).to.be.ok
       expect(true).to.equal(true)
     })
     /*

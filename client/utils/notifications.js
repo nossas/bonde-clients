@@ -25,8 +25,8 @@ export const slugUpdatedMessage = intl => ({
   }),
   status: 'warning',
   message: intl.formatMessage({
-  id: 'notification--slug-updated-message.message',
-  defaultMessage: 'O slug da sua mobilização foi alterado. ' +
+    id: 'notification--slug-updated-message.message',
+    defaultMessage: 'O slug da sua mobilização foi alterado. ' +
     'Se você faz algum redirecionamento de DNS via ' +
     'CNAME, não se esqueça de atualizá-lo.'
   }),
@@ -60,11 +60,10 @@ export const accountPasswordRetrieveSuccess = intl => ({
   }),
   status: 'success',
   message: intl.formatMessage({
-  id: 'notification--account-password-retrieve-success.message',
-  defaultMessage:
-    'Acabamos de enviar um email com a sua nova senha. Confira na ' +
-    'caixa de entrada do seu email para acessar o BONDE novamente. Relaxe pois, ' +
-    'pode alterar essa senha quando você quiser, nas configurações da sua conta.'
+    id: 'notification--account-password-retrieve-success.message',
+    defaultMessage: 'Acabamos de enviar um email com a sua nova senha. Confira na ' +
+      'caixa de entrada do seu email para acessar o BONDE novamente. Relaxe pois, ' +
+      'pode alterar essa senha quando você quiser, nas configurações da sua conta.'
   }),
   dismissAfter: 0,
   dismissible: true,

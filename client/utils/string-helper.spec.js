@@ -2,7 +2,6 @@ import { expect } from 'chai'
 import { sanitize, slugify } from '~client/utils/string-helper'
 
 describe('client/utils/string-helper', () => {
-  
   describe('#sanitize', () => {
     it('should return a lowercase string that contains uppercase', () => {
       expect(sanitize('Foo')).to.be.equal('foo')
@@ -41,7 +40,7 @@ describe('client/utils/string-helper', () => {
 
   describe('slugify', () => {
     it('should return slug of "Hello World"', () => {
-      expect(slugify('Hello World')).to.be.equal('hello-world') 
+      expect(slugify('Hello World')).to.be.equal('hello-world')
     })
     it('should return slug of "àlo brasil -"', () => {
       expect(slugify('àlo brasil -')).to.be.equal('alo-brasil')

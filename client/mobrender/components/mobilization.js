@@ -14,11 +14,11 @@ class Mobilization extends React.Component {
     const { editable, blocks } = props
 
     this.state = {
-      blocks: blocks.filter(block => !editable ? !block.hidden : true),
+      blocks: blocks.filter(block => !editable ? !block.hidden : true)
     }
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     if (this.props.blocks !== props.blocks) {
       const { editable, blocks } = props
 
@@ -72,7 +72,7 @@ class Mobilization extends React.Component {
         const lastBlock = this.state.blocks.slice(-1)[0]
 
         if (isBottom && !lastBlock.scrollTopReached) {
-          this.updateBlock( lastBlock, { scrollTopReached: true })
+          this.updateBlock(lastBlock, { scrollTopReached: true })
         }
       }
     }

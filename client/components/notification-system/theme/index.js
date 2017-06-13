@@ -16,7 +16,7 @@ var notificationsSystemClassName = css['notifications-system']
 // default className for NotificationsContainer component
 var notificationsContainerClassName = {
   main: css['notifications-container'],
-  position: function position(_position) {
+  position: function position (_position) {
     return css['notifications-container--' + _position]
   }
 }
@@ -42,11 +42,11 @@ var notificationClassName = {
   icon: 'fa ' + css['notification-icon'],
   imageContainer: css['notification-image-container'],
   image: css['notification-image'],
-  status: function status(_status) {
+  status: function status (_status) {
     return css['notification--' + _status]
   },
   dismissible: css['notification--dismissible'],
-  buttons: function buttons(count) {
+  buttons: function buttons (count) {
     if (count === 0) return ''
     else if (count === 1) return css['notification--buttons-1']
     else if (count === 2) return css['notification--buttons-2']

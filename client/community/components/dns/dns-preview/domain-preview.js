@@ -41,7 +41,6 @@ const DomainPreview = ({
   </div>
 )
 
-
 DomainPreview.propTypes = {
   domain: PropTypes.object,
   isActive: PropTypes.bool,

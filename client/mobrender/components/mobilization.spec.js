@@ -63,7 +63,7 @@ describe('client/mobrender/components/mobilization', () => {
 
   describe('when is editable', () => {
     const editableWrapper = shallow(
-      <Mobilization {...props} editable={true} />
+      <Mobilization {...props} editable />
     )
 
     it('should renders relative layout classNames', () => {

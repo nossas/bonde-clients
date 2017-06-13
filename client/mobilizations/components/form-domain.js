@@ -163,7 +163,7 @@ class FormDomain extends Component {
             Quer cadastrar um novo
             domínio? <a href='#' onClick={this.clickHere.bind(this)} target='_self'>Clique aqui</a>.
           </p>
-          
+
           {error && <p>{error}</p>}
 
           <div className='basic-config' style={{ marginBottom: '1rem' }}>
@@ -183,7 +183,7 @@ class FormDomain extends Component {
                   <div className='form-groups-container flex flex-wrap'>
                     <div className='prefix'>www.</div>
                     <FormGroup controlId='subdomain' {...subdomain}>
-                      <ControlLabel hideError={true}>Subdomínio</ControlLabel>
+                      <ControlLabel hideError>Subdomínio</ControlLabel>
                       <FormControl
                         type='text'
                         placeholder='nomedamob'
@@ -193,7 +193,7 @@ class FormDomain extends Component {
                       <strong>.</strong>
                     </div>
                     <FormGroup controlId='domain' {...domain}>
-                      <ControlLabel hideError={true}>Domínio Principal</ControlLabel>
+                      <ControlLabel hideError>Domínio Principal</ControlLabel>
                       <FormDropdown
                         onChange={e => domain.onChange(e.target.value)}
                         value={
@@ -238,7 +238,7 @@ class FormDomain extends Component {
                   <div className='form-groups-container flex flex-wrap'>
                     <div className='prefix'>www.</div>
                     <FormGroup controlId='rootDomain' {...rootDomain}>
-                      <ControlLabel hideError={true}>Domínio Principal</ControlLabel>
+                      <ControlLabel hideError>Domínio Principal</ControlLabel>
                       <FormDropdown
                         onChange={e => rootDomain.onChange(e.target.value)}
                         value={
@@ -286,7 +286,7 @@ class FormDomain extends Component {
                   pode usá-lo para este BONDE. Demais, né? Preencha o campo abaixo e siga as orientações:
                 </p>
                 <FormGroup controlId='externalDomain' {...externalDomain}>
-                  <ControlLabel hideError={true}>Domínio personalizado</ControlLabel>
+                  <ControlLabel hideError>Domínio personalizado</ControlLabel>
                   <div className='form-control-container--external-domain'>
                     <div className='prefix'>www.</div>
                     <FormControl

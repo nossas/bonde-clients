@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import NotificationsSystem from 'reapop';
-import theme from './theme';
+import React, {Component} from 'react'
+import NotificationsSystem from 'reapop'
+import theme from './theme'
 
 const NotificationSystem = () => (
   require('exenv').canUseDOM ?
