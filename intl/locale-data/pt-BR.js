@@ -33,6 +33,16 @@ export default {
   'page--account-register.form.submit-button.default': 'Criar conta',
   'page--account-register.form.submit-button.saving': 'Salvando...',
 
+  // page account retrieve password
+  // filepath: /routes/admin/not-authenticated/account-retrieve/page.connected.js
+  // routepath: /account/retrieve
+  'p--account-retrieve.form.email.validation.required': 'Informe seu e-mail',
+  'p--account-retrieve.form.email.validation.invalid-email-format': 'E-mail inválido',
+  'p--account-retrieve.form.email.label': 'E-mail',
+  'p--account-retrieve.form.email.placeholder': 'exemplo@email.com.br',
+  'p--account-retrieve.form.submit-button.sending': 'Enviando...',
+  'p--account-retrieve.form.submit-button.default': 'Enviar',
+
   // page account edit
   // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
   // routepath: /account/edit

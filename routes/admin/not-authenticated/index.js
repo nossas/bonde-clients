@@ -12,6 +12,7 @@ export default store => ({
       cb(null, [
         require('./account-login').default(store),
         require('./account-register').default(store),
+        require('./account-retrieve').default(store),
         require('./playground-js').default(store)
       ])
     })

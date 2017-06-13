@@ -39,7 +39,7 @@ class LoginPage extends Component {
     } = this.props
 
     return (
-      <div>
+      <div className='page col-3'>
         <div className='col-8 mb3 mx-auto'>
           <img alt='Logo Bonde' src={
             require('exenv').canUseDOM

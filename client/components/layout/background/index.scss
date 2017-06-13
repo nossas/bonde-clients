@@ -4,6 +4,14 @@
   background-image: url('../../../images/bg-login.png');
   color: $darkGray;
   overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    display: flex;
+    justify-content: center;
+  }
 
   h1 {
     font-size: 36px;

@@ -11,17 +11,10 @@ describe('client/components/layout/background', () => {
   })
 
   it('should render div with bg classes', () => {
-    const className = 'bg-center bg-reboo bg-cover absolute top-0 right-0 bottom-0 left-0'
+    const className = 'bg-reboo bg-center bg-cover absolute top-0 right-0 bottom-0 left-0'
     const bg = mount(<Background />)
     const main = bg.find('div').at(0)
     expect(main.props().className).to.equal(className)
-  })
-
-  it('should render tabless div classes for children content', () => {
-    const bg = mount(<Background />)
-    expect(bg.find('.table.mx-auto.full-height').length).to.equal(1)
-    const table = bg.find('.table.mx-auto.full-height')
-    expect(table.find('.table-cell.align-middle').length).to.equal(1)
   })
 
   it('should render children in content div', () => {
@@ -30,20 +23,20 @@ describe('client/components/layout/background', () => {
         <h1>LoremIpsum</h1>
       </Background>
     )
-    const cell = bg.find('.table-cell')
+    const cell = bg.find('.content')
     expect(cell.find('h1').length).to.equal(1)
   })
 
   it('should render inner div with colunm size 3 by default', () => {
     const className = 'col-3'
     const bg = mount(<Background />)
-    expect(bg.find('.table').props().className).to.contain(className)
+    expect(bg.find('.content').props().className).to.contain(className)
   })
 
   it('should render inner div with colunm size class', () => {
     const className = 'col-5'
     const bg = mount(<Background contentSize={5} />)
-    expect(bg.find('.table').props().className).to.contain(className)
+    expect(bg.find('.content').props().className).to.contain(className)
   })
 
   it('should render image in background', () => {

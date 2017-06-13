@@ -11,11 +11,12 @@ const Background = ({ children, contentSize, image }) => {
   }
 
   return (
-    <div className='bg-center bg-reboo bg-cover absolute top-0 right-0 bottom-0 left-0' style={bgStyle}>
-      <div className={classnames(`col-${contentSize}`, 'table mx-auto full-height')}>
-        <div className='table-cell align-middle'>
-          {children}
-        </div>
+    <div
+      className='bg-reboo bg-center bg-cover absolute top-0 right-0 bottom-0 left-0'
+      style={bgStyle}
+    >
+      <div className={classnames(`content col-${contentSize}`)}>
+        {children}
       </div>
     </div>
   )
