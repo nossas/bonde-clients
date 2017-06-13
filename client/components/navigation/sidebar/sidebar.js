@@ -22,6 +22,11 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
             href={paths.communityInfo()}
           />
           <SidenavListItem
+            text='Membros'
+            icon='users'
+            href={paths.communityInvite()}
+          />
+          <SidenavListItem
             text='Mailchimp'
             icon='envelope-o'
             href={paths.communityMailchimp()}

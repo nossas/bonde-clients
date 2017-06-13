@@ -7,6 +7,7 @@ import * as paths from '~client/paths'
 
 const SettingsMenu = ({ location: { pathname } }) => {
   const infoPath = paths.communityInfo()
+  const invitePath = paths.communityInvite()
   const mailchimpPath = paths.communityMailchimp()
   const recipientPath = paths.communityRecipient()
   const reportPath = paths.communityReport()
@@ -19,6 +20,7 @@ const SettingsMenu = ({ location: { pathname } }) => {
     <SettingsPageMenuLayout title='Configurações da comunidade'>
       <Tabs>
         <Tab text='Informações' path={infoPath} isActive={infoPath === pathname} />
+        <Tab text='Membros' path={invitePath} isActive={invitePath === pathname} />
         <Tab text='Mailchimp' path={mailchimpPath} isActive={mailchimpPath === pathname} />
         <Tab text='Recebedor' path={recipientPath} isActive={recipientPath === pathname} />
         <Tab text='Relatório' path={reportPath} isActive={reportPath === pathname} />

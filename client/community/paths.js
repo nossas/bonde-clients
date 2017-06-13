@@ -3,6 +3,7 @@ const namespace = '/community'
 export const communityList = () => namespace
 export const communityAdd = () => `${namespace}/new`
 export const communityInfo = () => `${namespace}/info`
+export const communityInvite = () => `${namespace}/invite`
 export const communityMailchimp = () => `${namespace}/mailchimp`
 export const communityRecipient = () => `${namespace}/recipient`
 export const communityReport = () => `${namespace}/report`

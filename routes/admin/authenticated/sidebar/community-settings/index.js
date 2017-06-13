@@ -16,6 +16,7 @@ export default store => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./info').default(store),
+        require('./invite').default(store),
         require('./mailchimp').default(store),
         require('./recipient').default(store),
         require('./report').default(store),
