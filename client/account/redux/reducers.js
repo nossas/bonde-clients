@@ -25,9 +25,11 @@ export default (state = initialState, action = {}) => {
         isLoading: false
       }
     case t.LOGIN_SUCCESS:
+      const { credentials, user } = action.payload
+
       reactCookie.save('auth',
-        { auth: action.payload },
-        { expires: new Date(action.payload.credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }
+        { auth: { credentials, user } },
+        // { expires: new Date(credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }  // todo expiry JWT token
       )
       return {...state,
         isLoading: false,

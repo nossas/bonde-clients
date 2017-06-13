@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
+import cookie from 'react-cookie'
 import DefaultServerConfig from '~server/config'
 import createReducer from './createReducer'
 import DevTools from './components/dev-tools'
@@ -17,12 +18,27 @@ if (process.env.NODE_ENV === `development`) {
   middlewares.push(logger)
 }
 
-export const client = new ApolloClient({
-  networkInterface: createNetworkInterface({
-    uri: DefaultServerConfig.graphqlUrl,
-    connectToDevTools: true,
-  }),
+const networkInterface = createNetworkInterface({
+  uri: DefaultServerConfig.graphqlUrl,
+  connectToDevTools: true
 })
+
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {}
+    }
+    cookie.plugToRequest(req)
+    const state = cookie.load('auth') || {}
+    if (state.auth && state.auth.credentials) {
+      const token = state.auth.credentials['access-token']
+      req.options.headers.authorization = `Bearer ${token}`
+    }
+    next();
+  }
+}])
+
+export const client = new ApolloClient({ networkInterface })
 
 export function configureStore (initialState, thunkExtraArgument) {
   middlewares.push(thunk.withExtraArgument({ axios, api, ...thunkExtraArgument }))
