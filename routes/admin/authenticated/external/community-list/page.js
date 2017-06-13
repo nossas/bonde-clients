@@ -22,7 +22,7 @@ class CommunityListPage extends Component {
 
     return isLoading || user === undefined ? <Loading /> : (
       <div>
-        <h1>Olá {user.first_name},</h1>
+        <h1>Olá {user.firstName || user.first_name},</h1>
         <h2>Escolha uma das suas comunidades</h2>
         {isLoaded ? (
           <div className='rounded bg-white'>
@@ -47,9 +47,7 @@ CommunityListPage.propTypes = {
   isLoaded: PropTypes.bool,
   isLoading: PropTypes.bool,
   communities: PropTypes.array,
-  user: PropTypes.shape({
-    first_name: PropTypes.string.isRequired
-  }),
+  user: PropTypes.object,
   // Actions
   select: PropTypes.func.isRequired
 }

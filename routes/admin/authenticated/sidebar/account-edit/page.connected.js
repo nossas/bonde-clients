@@ -11,8 +11,11 @@ const mapStateToProps = (state, props) => {
   const user = AuthSelectors(state, props).getUser()
   return {
     initialValues: {
-      ...user,
-      avatar: user.avatar_url
+      id: user.id,
+      first_name: user.firstName || user.first_name,
+      last_name: user.lastName || user.last_name,
+      avatar: user.avatar  || user.avatar_url,
+      email: user.email
     }
   }
 }
