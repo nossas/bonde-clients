@@ -34,11 +34,11 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
   })
 
   it('should render one <label> element', () => {
-    expect(wrapper.find('.input-tag > label')).to.have.length(1)
+    expect(wrapper.find('label[htmlFor="insert-tag-id"]')).to.have.length(1)
   })
 
   it('should render one <label> element with its content as passed label prop value', () => {
-    expect(wrapper.find('.input-tag > label').text()).to.be.equal(props.label)
+    expect(wrapper.find('label[htmlFor="insert-tag-id"]').text()).to.be.equal(props.label)
   })
 
   it('should render error when keyDown `cmd` + `enter` on Mac and validade returns false', () => {
