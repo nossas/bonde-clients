@@ -46,29 +46,32 @@ const mapActionsToProps = (dispatch, props) => ({...props,
     props.mutate({ variables: { ...values } })
       .then(({ data: { authenticate: { jwtToken } } }) => {
         if (jwtToken) {
-          dispatch({
-            type: authType.LOGIN_SUCCESS,
-            payload: {
+          dispatch(createAction(
+            authType.LOGIN_SUCCESS,
+            {
               user: { id: 1, first_name: 'Igor', last_name: 'Santos', email: 'igor@nossas.org' },
               credentials: { 'access-token': `${jwtToken}` }
             }
-          })
+          ))
           browserHistory.push('/')
         } else {
-          dispatch({
-            type: authType.LOGIN_FAILURE,
-            payload: 'Ops, o email e/ou senha estão incorretos.'
-          })
+          dispatch(createAction(
+            authType.LOGIN_FAILURE,
+            props.intl.formatMessage({
+              id: 'page--account-login.auth.error-message',
+              defaultMessage: 'Senha incorreta.'
+            })
+          ))
         }
       })
   },
   resetErrorMessage: () => createAction(AccountActionTypes.LOGIN_FAILURE, undefined),
 })
 
-const FormLoginWithMutation = graphql(authenticate)(reduxForm(
+const FormLoginWithMutation = injectIntl(graphql(authenticate)(reduxForm(
   { form: 'loginForm', fields, validate },
   mapStateToProps,
   mapActionsToProps
-)(injectIntl(FormLogin)))
+)(FormLogin)))
 
 export default FormLoginWithMutation
