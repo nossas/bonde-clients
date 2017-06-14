@@ -23,6 +23,7 @@ const redial = {
 const mapStateToProps = state => {
   const mobilization = MobSelectors(state).getMobilization()
   return {
+    formName: form,
     initialValues: mobilization,
     mobilization
   }
@@ -32,12 +33,10 @@ const mapActionCreatorsToProps = {
   submit: MobActions.asyncUpdateMobilization
 }
 
+const form = 'mobilizationBasicsForm'
+
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({
-      form: 'mobilizationBasicsForm',
-      fields: [...fields, 'id'],
-      validate
-    })(Page)
+    reduxForm({ form, fields: [...fields, 'id'], validate })(Page)
   )
 )

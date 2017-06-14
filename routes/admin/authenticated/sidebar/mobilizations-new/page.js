@@ -12,8 +12,7 @@ const MobilizationsNewPage = props => (
       <h2 className='h1 mt0 mb3 center'>Qual o objetivo da sua mobilização?</h2>
       <MobilizationBasicsForm
         className='bg-white'
-        onFinishSubmit={() => {
-          const { mobilization } = props
+        onFinishSubmit={mobilization => {
           mobilization && browserHistory.push(
             paths.mobilizationTemplatesChoose(mobilization)
           )

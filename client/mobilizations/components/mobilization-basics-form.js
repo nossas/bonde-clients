@@ -1,68 +1,56 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addNotification as notify } from 'reapop'
 import { injectIntl, intlShape } from 'react-intl'
 import { slugUpdatedMessage } from '~client/utils/notifications'
 
-// Global module dependencies
 import { slugify } from '~client/utils/string-helper'
-import {
-  FormRedux,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from '~client/components/forms'
-
-// Current module dependencies
+import { FormRedux, FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 
-class MobilizationBasicsForm extends Component {
+const MobilizationBasicsForm = ({
+  fields: { name, slug, goal },
+  floatSubmit,
+  ...formProps
+}) => {
+  const ComponentForm = floatSubmit ? SettingsForm : FormRedux
 
-  render () {
-    const { floatSubmit, fields: { name, slug, goal }, ...formProps } = this.props
-
-    const ComponentForm = floatSubmit ? SettingsForm : FormRedux
-
-    const nameInputProps = {
-      ...name,
-      onBlur: evt => {
-        if (!slug.value) {
-          slug.onChange(slugify(name.value))
-        }
-        name.onBlur(evt)
-      }
-    }
-
-    return (
-      <ComponentForm {...formProps}>
-        <FormGroup controlId='name' {...nameInputProps}>
-          <ControlLabel maxLength={100}>Nome</ControlLabel>
-          <FormControl
-            type='text'
-            placeholder='Ex: Pela criação de uma delegacia de desaparecidos'
-            maxLength={100}
-          />
-        </FormGroup>
-        <FormGroup controlId='slug' {...slug}>
-          <ControlLabel maxLength={63}>Slug</ControlLabel>
-          <FormControl
-            type='text'
-            maxLength={63}
-          />
-        </FormGroup>
-        <FormGroup controlId='goal' {...goal}>
-          <ControlLabel maxLength={500}>Objetivo</ControlLabel>
-          <FormControl
-            componentClass='textarea'
-            placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à' +
-              ' sua mobilização. Você poderá alterar este texto depois.'}
-            maxLength={500}
-            rows='4'
-          />
-        </FormGroup>
-      </ComponentForm>
-    )
-  }
+  return (
+    <ComponentForm {...formProps}>
+      <FormGroup
+        {...name}
+        controlId='name'
+        onBlur={event => {
+          if (!slug.value) slug.onChange(slugify(name.value))
+          name.onBlur(event)
+        }}
+      >
+        <ControlLabel maxLength={100}>Nome</ControlLabel>
+        <FormControl
+          type='text'
+          placeholder='Ex: Pela criação de uma delegacia de desaparecidos'
+          maxLength={100}
+        />
+      </FormGroup>
+      <FormGroup controlId='slug' {...slug}>
+        <ControlLabel maxLength={63}>Slug</ControlLabel>
+        <FormControl
+          type='text'
+          maxLength={63}
+        />
+      </FormGroup>
+      <FormGroup controlId='goal' {...goal}>
+        <ControlLabel maxLength={500}>Objetivo</ControlLabel>
+        <FormControl
+          componentClass='textarea'
+          placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à' +
+            ' sua mobilização. Você poderá alterar este texto depois.'}
+          maxLength={500}
+          rows='4'
+        />
+      </FormGroup>
+    </ComponentForm>
+  )
 }
 
 export const fields = ['name', 'slug', 'goal', 'community_id']
@@ -95,12 +83,15 @@ const mapActionsCreators = (dispatch, props) => ({
   submit: values => {
     props.submit(values)
       .then(mobilization => {
-        if (mobilization.slug !== props.mobilization.slug) {
-          dispatch(notify(slugUpdatedMessage(props.intl)))
-        }
+        const { mobilization: { slug: slugInitial }, onFinishSubmit } = props
+        const { slug: slugResult } = mobilization
+        const hasSlugUpdated = slugInitial && slugInitial !== slugResult
+
+        hasSlugUpdated && dispatch(notify(slugUpdatedMessage(props.intl)))
+        onFinishSubmit && onFinishSubmit(mobilization)
       })
       .catch(errors => {
-        dispatch({ errors, type: 'redux-form/STOP_SUBMIT', form: 'mobilizationBasicsForm' })
+        dispatch({ errors, type: 'redux-form/STOP_SUBMIT', form: props.formName })
       })
   }
 })

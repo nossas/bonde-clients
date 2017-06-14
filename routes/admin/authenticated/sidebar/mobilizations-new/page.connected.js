@@ -7,11 +7,14 @@ import { asyncAddMobilization } from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 
+const form = 'newMobilizationForm'
+
 const mapStateToProps = (state, props) => {
   const mobilization = MobSelectors(state, props).getMobilization() || {}
   const community = CommunitySelectors.getCurrent(state)
   return {
     mobilization,
+    formName: form,
     initialValues: {
       ...mobilization,
       community_id: mobilization.community_id || community.id
@@ -24,7 +27,7 @@ const mapActionCreatorsToProps = {
 }
 
 export default reduxForm(
-  { form: 'newMobilizationForm', fields, validate },
+  { form, fields, validate },
   mapStateToProps,
   mapActionCreatorsToProps
 )(Page)
