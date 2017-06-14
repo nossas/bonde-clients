@@ -6,7 +6,7 @@ import * as t from '../action-types'
 import { createAction } from './create-action'
 
 export default user => (dispatch, getState, { api, intl }) => {
-  const endpoint = '/auth/retrieve'
+  const endpoint = '/retrieve'
   const body = { user }
 
   dispatch(createAction(t.ASYNC_RETRIEVE_PASSWORD_REQUEST))
