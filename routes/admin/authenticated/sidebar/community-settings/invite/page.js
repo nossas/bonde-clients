@@ -16,12 +16,17 @@ var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
 
 const CommunitySettingsInfoPage = ({
   fields: { email },
+  resetForm,
   location,
   community,
   downloadActivists,
   ...formProps
 }) => (
-  <FormRedux nosubmit {...formProps}>
+  <FormRedux
+    {...formProps}
+    nosubmit
+    onFinishSubmit={() => resetForm()}
+  >
     <FormGroup controlId='email' {...email}>
       <ControlLabel>Pessoas</ControlLabel>
       <FormControl
