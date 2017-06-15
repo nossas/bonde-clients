@@ -1,4 +1,4 @@
-FROM kkarczmarczyk/node-yarn
+FROM gabrielrtakeda/node-yarn:8.1.0
 MAINTAINER Nossas <tech@nossas.org>
 
 ARG AWS_BUCKET=bonde-assets-staging
