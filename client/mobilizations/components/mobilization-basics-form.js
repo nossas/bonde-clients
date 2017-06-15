@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addNotification as notify } from 'reapop'
 import { injectIntl, intlShape } from 'react-intl'
+import { Info } from '~client/components/notify'
 import { slugUpdatedMessage } from '~client/utils/notifications'
-
 import { slugify } from '~client/utils/string-helper'
 import { FormRedux, FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
+import { Code } from '~client/components/markdown'
 
 const MobilizationBasicsForm = ({
   fields: { name, slug, goal },
@@ -33,7 +34,11 @@ const MobilizationBasicsForm = ({
         />
       </FormGroup>
       <FormGroup controlId='slug' {...slug} className='hide'>
-        <ControlLabel maxLength={63}>Slug</ControlLabel>
+        <ControlLabel maxLength={63}>Identificador Único</ControlLabel>
+        <Info title='Pra que serve?'>
+          O valor desse campo é utilizado para referenciar a mobilização no domínio do BONDE,
+          por exemplo: <Code>www.123-nome-da-mob.bonde.org</Code>
+        </Info>
         <FormControl
           type='text'
           maxLength={63}
@@ -70,9 +75,9 @@ export const validate = values => {
   }
 
   if (!values.slug) {
-    errors.slug = 'Insira o slug da mobilização'
+    errors.slug = 'Insira o identificador único da mobilização'
   } else if (values.slug.length > 63) {
-    errors.slug = 'Seu slug está muito longo!'
+    errors.slug = 'Seu identificador único está muito longo!'
   }
 
   return errors
