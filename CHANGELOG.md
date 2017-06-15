@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.8"></a>
+## [0.5.8](https://github.com/nossas/bonde-client/compare/v0.5.7...v0.5.8) (2017-06-15)
+
+
+### Bug Fixes
+
+* **auth:** change fields for work with fetch user by graphql [#661](https://github.com/nossas/bonde-client/issues/661) ([6cdccc3](https://github.com/nossas/bonde-client/commit/6cdccc3))
+* **client:** install raven only in production / test ([578fd0f](https://github.com/nossas/bonde-client/commit/578fd0f))
+* **mobilizations:** redirect after create mobilization fix [#662](https://github.com/nossas/bonde-client/issues/662) ([efffbb7](https://github.com/nossas/bonde-client/commit/efffbb7))
+* **packages:** force slate-editor upgrade to v2.6.5 [#654](https://github.com/nossas/bonde-client/issues/654) ([039f65d](https://github.com/nossas/bonde-client/commit/039f65d))
+* **packages:** slate-editor semver install minor version fix [#654](https://github.com/nossas/bonde-client/issues/654) ([dba5c55](https://github.com/nossas/bonde-client/commit/dba5c55))
+* **raven:** not install raven in development env ([b53da1f](https://github.com/nossas/bonde-client/commit/b53da1f))
+
+
+### Features
+
+* **account:** use graphql for user authentication [#624](https://github.com/nossas/bonde-client/issues/624) ([4953fac](https://github.com/nossas/bonde-client/commit/4953fac))
+* **account-retrieve:** account password recovering [#659](https://github.com/nossas/bonde-client/issues/659) ([32d59e4](https://github.com/nossas/bonde-client/commit/32d59e4))
+* **auth:** add authentication by JWT token in apollo client [#661](https://github.com/nossas/bonde-client/issues/661) ([7255c80](https://github.com/nossas/bonde-client/commit/7255c80))
+* **community:** invite members to community [#660](https://github.com/nossas/bonde-client/issues/660) ([e3a213b](https://github.com/nossas/bonde-client/commit/e3a213b))
+* **graphql:** add config for authenticate with graphql. closes [#624](https://github.com/nossas/bonde-client/issues/624) ([8c599b8](https://github.com/nossas/bonde-client/commit/8c599b8))
+* **graphql:** add graphql service on listening port 3003 [#621](https://github.com/nossas/bonde-client/issues/621) ([d772183](https://github.com/nossas/bonde-client/commit/d772183))
+* **graphql:** add react-apollo [#622](https://github.com/nossas/bonde-client/issues/622) ([a38d803](https://github.com/nossas/bonde-client/commit/a38d803))
+* **pressure-widget:** support to insert multiple targets [#657](https://github.com/nossas/bonde-client/issues/657) ([9607b2d](https://github.com/nossas/bonde-client/commit/9607b2d))
+
+
+
 <a name="0.5.7"></a>
 ## [0.5.7](https://github.com/nossas/bonde-client/compare/v0.5.6...v0.5.7) (2017-06-07)
 
