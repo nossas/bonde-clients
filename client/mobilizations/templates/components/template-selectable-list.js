@@ -6,9 +6,7 @@ import classnames from 'classnames'
 import SelectableList from '~client/components/selectable-list'
 import FilterableSearchBar from '~client/components/filterable-search-bar'
 
-const btnStyle = {
-  width: '100%'
-}
+var styles = require('exenv').canUseDOM ? require('./template-selectable-list.scss') : {}
 
 const TemplateSelectableList = props => {
   const {
@@ -33,13 +31,12 @@ const TemplateSelectableList = props => {
           list={filterableTemplates}
           emptyListText='Não existe nenhum template com esse nome'
         />
-        <div className='flex flex-wrap' style={{ marginTop: '1.6rem' }}>
+        <div className={styles.buttonContainer}>
           {handleGoBack !== undefined ? (
             <div className='col-4'>
               <button
-                style={btnStyle}
                 onClick={() => handleGoBack()}
-                className={classnames('btn h3 white p2 rounded bg-gray')}
+                className={classnames('btn h3 white p2 rounded bg-gray', styles.button)}
               >
                 Voltar
               </button>
@@ -47,12 +44,12 @@ const TemplateSelectableList = props => {
           ) : undefined}
           <div className={classnames(!handleGoBack ? 'col-12' : 'col-4 pl1')}>
             <button
-              style={btnStyle}
               disabled={!item}
               onClick={() => handleSelectItem(item)}
               className={classnames(
                 'btn h3 white p2 rounded',
-                !item ? 'bg-gray95' : 'bg-pagenta'
+                !item ? 'bg-gray95' : 'bg-pagenta',
+                styles.button
               )}
             >
               Continuar
