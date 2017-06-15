@@ -26,9 +26,7 @@ const Background = ({ children, contentSize, image, alignment }) => {
       style={bgStyle}
     >
       <div className={classnames(`content col-${contentSize}`)}>
-        <div className='col-12'>
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   )

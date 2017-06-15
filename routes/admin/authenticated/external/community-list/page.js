@@ -23,7 +23,7 @@ class CommunityListPage extends Component {
 
     return isLoading || user === undefined ? <Loading /> : (
       <Background image={image} alignment={{ x: 'center', y: 'top' }}>
-        <div>
+        <div className='col-12'>
           <h1>Olá {user.firstName || user.first_name},</h1>
           <h2>Escolha uma das suas comunidades</h2>
           {isLoaded ? (
