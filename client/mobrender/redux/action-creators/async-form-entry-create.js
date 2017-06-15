@@ -15,7 +15,7 @@ const asyncFormEntryCreate = ({ mobilization, formEntry }) => (dispatch, getStat
   dispatch({ type: t.WIDGET_FORM_ENTRY_CREATE_REQUEST })
   return api.post(endpoint, body)
     .then(({ data }) => {
-      dispatch(createAction(t.WIDGET_FORM_ENTRY_CREATE_SUCCESS, updateWidget(state, data.errors)))
+      dispatch(createAction(t.WIDGET_FORM_ENTRY_CREATE_SUCCESS, updateWidget(state, data)))
       AnalyticsEvents.formSavedData()
       return Promise.resolve()
     })
