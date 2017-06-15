@@ -156,6 +156,7 @@
     "parser": "babel-eslint"
   },
   "engines": {
+    "engineStrict": true,
     "node": "8.1.0"
   },
   "postcss": {
