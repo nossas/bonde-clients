@@ -20,6 +20,8 @@ const redial = {
   }
 }
 
+const form = 'mobilizationBasicsForm'
+
 const mapStateToProps = state => {
   const mobilization = MobSelectors(state).getMobilization()
   return {
@@ -32,8 +34,6 @@ const mapStateToProps = state => {
 const mapActionCreatorsToProps = {
   submit: MobActions.asyncUpdateMobilization
 }
-
-const form = 'mobilizationBasicsForm'
 
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
