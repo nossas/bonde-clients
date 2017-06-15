@@ -20,7 +20,7 @@ class CurrentUserContainer extends Component {
       <div className='current-user-container'>
         {loading && !currentUser ? <Loading /> : (
           React.cloneElement(children, { currentUser })
-        )} 
+        )}
       </div>
     )
   }

@@ -48,10 +48,7 @@ const mapActionsToProps = (dispatch, props) => ({...props,
         if (jwtToken) {
           dispatch(createAction(
             authType.LOGIN_SUCCESS,
-            {
-              user: { id: 1, first_name: 'Igor', last_name: 'Santos', email: 'igor@nossas.org' },
-              credentials: { 'access-token': `${jwtToken}` }
-            }
+            { credentials: { 'access-token': jwtToken } }
           ))
           browserHistory.push('/')
         } else {

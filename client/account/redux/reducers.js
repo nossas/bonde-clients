@@ -14,7 +14,7 @@ const UNIX_TIMESTAMP_MILLISECONDS_FIX = 1000
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case t.LOAD_SUCCESS:
-      return { ...state, isLoaded: true, isLoading: false }
+      return { ...state, isLoaded: true, isLoading: false, ...action.payload }
 
     case t.LOGIN_REQUEST:
       return { ...state, isLoading: true }
