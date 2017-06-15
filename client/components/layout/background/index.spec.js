@@ -42,7 +42,9 @@ describe('client/components/layout/background', () => {
   it('should render image in background', () => {
     const style = {
       backgroundImage: "url('../assets/bg-login.png')",
-      overflow: 'auto'
+      overflow: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
     const bg = mount(<Background image='../assets/bg-login.png' />)
     expect(bg.find('.bg-cover').props().style).to.deep.equal(style)

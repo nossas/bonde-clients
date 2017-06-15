@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
+import { Background } from '~client/components/layout'
 import * as paths from '~client/paths'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
@@ -18,27 +19,29 @@ class CommunityListPage extends Component {
   }
 
   render () {
-    const { isLoading, isLoaded, communities, user } = this.props
+    const { image, isLoading, isLoaded, communities, user } = this.props
 
     return isLoading || user === undefined ? <Loading /> : (
-      <div>
-        <h1>Olá {user.firstName || user.first_name},</h1>
-        <h2>Escolha uma das suas comunidades</h2>
-        {isLoaded ? (
-          <div className='rounded bg-white'>
-            {communities && communities.map((community, key) => (
-              <ListItem
-                key={`list-item-${key}`}
-                community={community}
-                onClick={this.onClickItem.bind(this)}
-              />
-            ))}
-          </div>
-        ) : null}
-        <p className='white center'>
-          ou <Link to={paths.communityAdd()}>Crie uma nova comunidade</Link>
-        </p>
-      </div>
+      <Background image={image} alignment={{ x: 'center', y: 'top' }}>
+        <div>
+          <h1>Olá {user.firstName || user.first_name},</h1>
+          <h2>Escolha uma das suas comunidades</h2>
+          {isLoaded ? (
+            <div className='rounded bg-white'>
+              {communities && communities.map((community, key) => (
+                <ListItem
+                  key={`list-item-${key}`}
+                  community={community}
+                  onClick={this.onClickItem.bind(this)}
+                />
+              ))}
+            </div>
+          ) : null}
+          <p className='white center'>
+            ou <Link to={paths.communityAdd()}>Crie uma nova comunidade</Link>
+          </p>
+        </div>
+      </Background>
     )
   }
 }

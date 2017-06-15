@@ -23,34 +23,37 @@ class CommunityNewPage extends Component {
 
   render () {
     const {
+      image,
       fields: { name, city },
       // Actions
       asyncCreate,
       ...formProps
     } = this.props
     return (
-      <Background>
-        <h1>Crie uma comunidade</h1>
-        <h2>Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.</h2>
-        <FormRedux
-          nosubmit
-          className='bg-white rounded'
-          onSubmit={values => asyncCreate(values)}
-          {...formProps}
-        >
-          <FormGroup controlId='nameId' {...name}>
-            <ControlLabel>Nome da comunidade</ControlLabel>
-            <FormControl type='text' placeholder='Exemplo: Movimento 90º São Paulo' />
-          </FormGroup>
-          <FormGroup controlId='cityId' {...city}>
-            <ControlLabel>Cidade da comunidade</ControlLabel>
-            <FormControl type='text' placeholder='Exemplo: São Paulo' />
-          </FormGroup>
-          <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
-            {formProps.submitting ? 'Salvando...' : 'Criar comunidade'}
-          </Button>
-          <FormError className='mt2' />
-        </FormRedux>
+      <Background image={image}>
+        <div>
+          <h1>Crie uma comunidade</h1>
+          <h2>Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.</h2>
+          <FormRedux
+            nosubmit
+            className='bg-white rounded'
+            onSubmit={values => asyncCreate(values)}
+            {...formProps}
+          >
+            <FormGroup controlId='nameId' {...name}>
+              <ControlLabel>Nome da comunidade</ControlLabel>
+              <FormControl type='text' placeholder='Exemplo: Movimento 90º São Paulo' />
+            </FormGroup>
+            <FormGroup controlId='cityId' {...city}>
+              <ControlLabel>Cidade da comunidade</ControlLabel>
+              <FormControl type='text' placeholder='Exemplo: São Paulo' />
+            </FormGroup>
+            <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
+              {formProps.submitting ? 'Salvando...' : 'Criar comunidade'}
+            </Button>
+            <FormError className='mt2' />
+          </FormRedux>
+        </div>
       </Background>
     )
   }

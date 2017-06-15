@@ -4,10 +4,20 @@ import classnames from 'classnames'
 
 if (require('exenv').canUseDOM) require('./index.scss')
 
-const Background = ({ children, contentSize, image }) => {
+const Background = ({ children, contentSize, image, alignment }) => {
+  const flexAlignments = {
+    center: 'center',
+    'top': 'flex-start',
+    'bottom': 'flex-end',
+  }
+  const justifyContent = flexAlignments[alignment.x]
+  const alignItems = flexAlignments[alignment.y]
+
   const bgStyle = {
     backgroundImage: image ? `url('${image}')` : undefined,
-    overflow: 'auto'
+    overflow: 'auto',
+    alignItems,
+    justifyContent
   }
 
   return (
@@ -24,11 +34,16 @@ const Background = ({ children, contentSize, image }) => {
 
 Background.propTypes = {
   contentSize: PropTypes.number,
-  image: PropTypes.string
+  image: PropTypes.string,
+  alignment: PropTypes.shape({
+    x: PropTypes.string,
+    y: PropTypes.string
+  }).isRequired
 }
 
 Background.defaultProps = {
-  contentSize: 3
+  contentSize: 3,
+  alignment: { x: 'center', y: 'center' }
 }
 
 export default Background
