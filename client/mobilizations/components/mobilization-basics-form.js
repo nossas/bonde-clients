@@ -32,7 +32,7 @@ const MobilizationBasicsForm = ({
           maxLength={100}
         />
       </FormGroup>
-      <FormGroup controlId='slug' {...slug}>
+      <FormGroup controlId='slug' {...slug} className='hide'>
         <ControlLabel maxLength={63}>Slug</ControlLabel>
         <FormControl
           type='text'
