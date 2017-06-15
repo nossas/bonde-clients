@@ -33,11 +33,12 @@ const CommunitySettingsInfoPage = ({
         type='text'
         placeholder='Insira um email para convidar'
         containerClassName={styles.inlineFormControlContainer}
-      >
-        <span className={styles.buttonWrapper}>
-          <Button type='submit'>Convidar</Button>
-        </span>
-      </FormControl>
+        content={(
+          <span className={styles.buttonWrapper}>
+            <Button type='submit'>Convidar</Button>
+          </span>
+        )}
+      />
     </FormGroup>
   </FormRedux>
 )

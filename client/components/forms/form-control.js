@@ -16,6 +16,7 @@ class FormControl extends Component {
       submitted,
       addonText,
       children,
+      content,
       ...props
     } = this.props
     const {
@@ -48,9 +49,11 @@ class FormControl extends Component {
             className
           )}
           style={style}
-        />
+        >
+          {children}
+        </Component>
         {addonText && <span className='text-addon'>{addonText}</span>}
-        {children}
+        {content}
         {formInline && (
           <ControlButtons {...{ submitted, submitting, dirty, showCancel: false, formInline }} />
         )}
