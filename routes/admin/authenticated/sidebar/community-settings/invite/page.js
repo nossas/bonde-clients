@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, intlShape } from 'react-intl'
 
 import {
   FormRedux,
@@ -22,6 +22,7 @@ const CommunitySettingsInfoPage = ({
   location,
   community,
   downloadActivists,
+  intl,
   ...formProps
 }) => (
   <FormRedux
@@ -33,21 +34,34 @@ const CommunitySettingsInfoPage = ({
       <FormattedMessage
         id='page--community-invite.helper-text'
         defaultMessage={
-          'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor' +
+          'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor ' +
           'sua comunidade.'
         }
       />
     </Info>
 
     <FormGroup controlId='email' {...email}>
-      <ControlLabel>Pessoas</ControlLabel>
+      <ControlLabel>
+        <FormattedMessage
+          id='page--community-invite.form.email.label'
+          defaultMessage='Email'
+        />
+      </ControlLabel>
       <FormControl
         type='text'
-        placeholder='Insira um email para convidar'
+        placeholder={intl.formatMessage({
+          id: 'page--community-invite.form.email.placeholder',
+          defaultMessage: 'Insira um email para convidar. Ex: mobilizador@email.com'
+        })}
         containerClassName={styles.inlineFormControlContainer}
         content={(
           <span className={styles.buttonWrapper}>
-            <Button type='submit'>Convidar</Button>
+            <Button type='submit'>
+              <FormattedMessage
+                id='page--community-invite.form.submit-button.default'
+                defaultMessage='Convidar'
+              />
+            </Button>
           </span>
         )}
       />
@@ -63,7 +77,8 @@ CommunitySettingsInfoPage.propTypes = {
     description: PropTypes.object.isRequired,
     email_template_from: PropTypes.object
   }),
-  community: PropTypes.object.isRequired
+  community: PropTypes.object.isRequired,
+  intl: intlShape.isRequired
 }
 
 export default CommunitySettingsInfoPage

@@ -236,6 +236,9 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
   // routepath: /community/invite
   'page--community-invite.helper-text': 'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor sua comunidade.',
+  'page--community-invite.form.email.label': 'Email',
+  'page--community-invite.form.email.placeholder': 'Insira um email para convidar. Ex: mobilizador@email.com',
+  'page--community-invite.form.submit-button.default': 'Convidar',
 
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
