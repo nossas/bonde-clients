@@ -139,7 +139,7 @@ export default {
   'community.components--settings-menu.tabs.info': 'Informações',
   'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
   'community.components--settings-menu.tabs.recipient': 'Recebedor',
-  'community.components--settings-menu.tabs.report': 'Relatório',
+  'community.components--settings-menu.tabs.metrics': 'Métricas',
   'community.components--settings-menu.tabs.domains': 'Domínios',
 
   // component community domain preview
@@ -372,11 +372,9 @@ export default {
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
-  'components.navigation--sidebar.community-settings.item.mobilizations': 'Minhas Mobilizações',
-  'components.navigation--sidebar.community-settings.item.info': 'Informações',
-  'components.navigation--sidebar.community-settings.item.mailchimp': 'Mailchimp',
-  'components.navigation--sidebar.community-settings.item.recipient': 'Recebedor',
-  'components.navigation--sidebar.community-settings.item.report': 'Relatório',
+  'components.navigation--sidebar.community-settings.item.mobilizations': 'Mobilizações',
+  'components.navigation--sidebar.community-settings.item.info': 'Comunidade',
+  'components.navigation--sidebar.community-settings.item.metrics': 'Métricas',
   'components.navigation--sidebar.community-settings.item.domains': 'Domínios',
 
   'components.navigation--sidebar.mobilization-settings.item.launch': 'PUBLICAR BONDE',
