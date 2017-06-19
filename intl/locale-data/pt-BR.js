@@ -137,6 +137,7 @@ export default {
   //   - /community/report
   'community.components--settings-menu.title': 'Configurações da comunidade',
   'community.components--settings-menu.tabs.info': 'Informações',
+  'community.components--settings-menu.tabs.mobilizers': 'Mobilizadores',
   'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
   'community.components--settings-menu.tabs.recipient': 'Recebedor',
   'community.components--settings-menu.tabs.metrics': 'Métricas',
