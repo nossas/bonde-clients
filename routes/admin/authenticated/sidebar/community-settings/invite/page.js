@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   FormRedux,
@@ -9,6 +10,7 @@ import {
   UploadImageField,
   HelpBlock
 } from '~client/components/forms'
+import { Info } from '~client/components/notify'
 import { SettingsForm } from '~client/ux/components'
 import Button from '~client/ux/components/button'
 
@@ -27,6 +29,16 @@ const CommunitySettingsInfoPage = ({
     nosubmit
     onFinishSubmit={() => resetForm()}
   >
+    <Info title='Informação'>
+      <FormattedMessage
+        id='page--community-invite.helper-text'
+        defaultMessage={
+          'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor' +
+          'sua comunidade.'
+        }
+      />
+    </Info>
+
     <FormGroup controlId='email' {...email}>
       <ControlLabel>Pessoas</ControlLabel>
       <FormControl

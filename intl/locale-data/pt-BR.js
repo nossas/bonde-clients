@@ -232,6 +232,11 @@ export default {
   'page--community-info.form.custom-from-email.helper-text': 'Você deve preencher seguindo o formato padrão: Nome do contato <contato@provedor.com>',
   'page--community-info.form.custom-from-email.validation.invalid-email-format': 'E-mail de resposta fora do formato padrão',
 
+  // page community invite
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
+  // routepath: /community/invite
+  'page--community-invite.helper-text': 'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor sua comunidade.',
+
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
   // routepath:
