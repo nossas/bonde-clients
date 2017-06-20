@@ -344,7 +344,7 @@ class Page extends Component {
               <h3>
                 <FormattedMessage
                   id='community.page--domain-list.header.dns-server'
-                  defaultMessage='Servidor DNS'
+                  defaultMessage='Servidores DNS'
                 />
               </h3>
               <p>

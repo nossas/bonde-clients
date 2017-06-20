@@ -160,7 +160,7 @@ export default {
   'community.components--subdomain.form.submit-button': 'Adicionar',
   'community.components--domain.preview.label.domain': 'Domínio da comunidade',
   'community.page--domain-list.header.dns-records': 'Registros DNS',
-  'community.page--domain-list.header.dns-server': 'Servidor DNS',
+  'community.page--domain-list.header.dns-server': 'Servidores DNS',
   'community.page--domain-list.button.add-new-record': 'Adicionar novo registro',
   'community.page--domain-list.button.add-new-domain': 'Adicionar novo domínio',
   'community.page--domain-list.dialog.domain-confirm-message': 'Tem certeza que deseja remover o domínio',
