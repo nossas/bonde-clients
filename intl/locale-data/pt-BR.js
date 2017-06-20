@@ -159,7 +159,6 @@ export default {
   'community.page--domain-list.header.dns-server': 'Servidor DNS',
   'community.page--domain-list.button.add-new-record': 'Adicionar novo registro',
   'community.page--domain-list.button.add-new-domain': 'Adicionar novo domínio',
-  'community.page--domain-list.dialog.record-confirm-message': 'Tem certeza que deseja remover o registro',
   'community.page--domain-list.dialog.domain-confirm-message': 'Tem certeza que deseja remover o domínio',
   'community.page--domain-list.dns-record-description': 'Os registros DNS são configurações especiais que alteram a forma como o seu domínio trabalha. Com esses registros, você se conecta a serviços de terceiros como provedores de email. {link}.',
   'community.page--domain-list.dns-record-description.link': 'Saiba mais',
@@ -179,17 +178,14 @@ export default {
   // routepath: /community/domain
   'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
 
-  'page--community-domain.section--dns-hosted-zone.title': 'Domínios da comunidade',
   'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
   'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
   'page--community-domain.section--dns-hosted-zone.menu.remove': 'Remover domínio',
   'page--community-domain.section--dns-hosted-zone.menu.remove.dialog.text': 'Tem certeza que deseja remover o domínio {domainName}?',
-  'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Verificar DNS',
+  'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Testar a conexão',
 
-  'page--community-domain.section--dns-records.title': 'Subdomínios externos',
-  'page--community-domain.section--dns-records.add': 'Adicionar novo subdomínio externo',
   'page--community-domain.section--dns-records.menu.remove': 'Remover subdomínio',
-  'page--community-domain.section--dns-records.menu.remove.dialog.text': 'Tem certeza que deseja remover o subdomínio {subdomainName}?',
+  'page--community-domain.section--dns-records.menu.remove.dialog.text': 'Tem certeza que deseja remover o registro {recordName}?',
 
   // component dialog
   // filepath: /client/ux/components/dialog/index.js

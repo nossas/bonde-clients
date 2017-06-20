@@ -61,15 +61,32 @@ class Page extends Component {
   }
 
   dnsHostedZoneMenu (dnsHostedZone) {
-    const { checkHostedZone } = this.props
+    const { checkHostedZone, intl } = this.props
     const items = [
-      { icon: 'fa fa-bars', text: 'Subdomínios', onClick: () => this.toggleDNSRecords(dnsHostedZone) },
-      { icon: 'fa fa-trash', text: 'Remover domínio', onClick: () => this.setState({ deletedHostedZone: dnsHostedZone }) }
+      {
+        icon: 'fa fa-bars',
+        text: intl.formatMessage({
+          id: 'page--community-domain.section--dns-hosted-zone.menu.subdomains',
+          defaultMessage: 'Subdomínios'
+        }),
+        onClick: () => this.toggleDNSRecords(dnsHostedZone)
+      }, {
+        icon: 'fa fa-trash',
+        text: intl.formatMessage({
+          id: 'page--community-domain.section--dns-hosted-zone.menu.remove',
+          defaultMessage: 'Remover domínio'
+        }),
+        onClick: () => this.setState({ deletedHostedZone: dnsHostedZone })
+      }
     ]
+
     if (!dnsHostedZone.ns_ok) {
       items.splice(0, 0, {
         icon: 'fa fa-refresh',
-        text: 'Verificar DNS',
+        text: intl.formatMessage({
+          id: 'page--community-domain.section--dns-hosted-zone.menu.check-dns',
+          defaultMessage: 'Testar a conexão'
+        }),
         onClick: () => {
           checkHostedZone(dnsHostedZone)
             .then(resp => {
@@ -93,12 +110,18 @@ class Page extends Component {
   }
 
   dnsRecordMenu (dnsRecord) {
+    const { intl } = this.props
     return (
       <DropdownMenu
         inline
-        items={[
-          { icon: 'fa fa-trash', text: 'Remover subdomínio', onClick: () => this.setState({ deletedDNSRecord: dnsRecord }) }
-        ]}
+        items={[{
+          icon: 'fa fa-trash',
+          text: intl.formatMessage({
+            id: 'page--community-domain.section--dns-records.menu.remove',
+            defaultMessage: 'Remover subdomínio'
+          }),
+          onClick: () => this.setState({ deletedDNSRecord: dnsRecord })
+        }]}
       />
     )
   }
@@ -284,10 +307,12 @@ class Page extends Component {
                 >
                   <div className='mb2'>
                     <FormattedMessage
-                      id='community.page--domain-list.dialog.record-confirm-message'
-                      defaultMessage='Tem certeza que deseja remover o subdomínio'
+                      id='page--community-domain.section--dns-records.menu.remove.dialog.text'
+                      defaultMessage='Tem certeza que deseja remover o registro {recordName}?'
+                      values={{
+                        recordName: <b>{this.state.deletedDNSRecord.value}</b>
+                      }}
                     />
-                    <b> {this.state.deletedDNSRecord.value}</b>?
                   </div>
                 </Dialog>
               )}
