@@ -182,6 +182,9 @@ export default {
   'page--community-domain.header.info.title': 'Informação',
   'page--community-domain.header.info.text': 'Abaixo, encontra-se a lista de domínios já cadastrados. Após alteração e ativação dos servidores DNS, torna-se possível publicar uma mobilização muito mais rápido, além de gerenciar os subdomínios externos cadastrados.',
 
+  'page--community-domain.domain-preview.success-icon.title': 'Servidores DNS ativos',
+  'page--community-domain.domain-preview.failure-icon.title': 'Aguardando alteração dos servidores DNS',
+
   'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
   'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
   'page--community-domain.section--dns-hosted-zone.menu.remove': 'Remover domínio',

@@ -184,6 +184,14 @@ class Page extends Component {
                   checked={dnsHostedZone.ns_ok}
                   onToggle={() => this.toggleDNSRecords(dnsHostedZone)}
                   menuComponent={this.dnsHostedZoneMenu(dnsHostedZone)}
+                  successIconTitle={intl.formatMessage({
+                    id: 'page--community-domain.domain-preview.success-icon.title',
+                    defaultMessage: 'Servidores DNS ativos'
+                  })}
+                  failureIconTitle={intl.formatMessage({
+                    id: 'page--community-domain.domain-preview.failure-icon.title',
+                    defaultMessage: 'Aguardando alteração dos servidores DNS'
+                  })}
                 />
               ))}
             </Preview>
