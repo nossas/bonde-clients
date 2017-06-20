@@ -232,11 +232,21 @@ class Page extends Component {
               {dnsRecordsIsLoading && <Loading />}
               <p>
                 <FormattedMessage
-                  id='community.page--domain-list.dns-record-description'
+                  id='community.page--domain-list.dns-record-description.first-paragraph'
                   defaultMessage={
-                    'Os registros DNS são configurações especiais que alteram a ' +
-                    'forma como o seu domínio trabalha. Com esses registros, você ' +
-                    'se conecta a serviços de terceiros como provedores de email.'
+                    'Os Servidores DNS são endereços utilizados pelas organizações de ' +
+                    'registro de domínios como registro.br ou godaddy.com, para ' +
+                    'identificarem em qual servidor se encontram as informações ' +
+                    'sobre o domínio registrado.'
+                  }
+                />
+              </p>
+              <p>
+                <FormattedMessage
+                  id='community.page--domain-list.dns-record-description.second-paragraph'
+                  defaultMessage={
+                    'Complete a ativação do domínio alterando os servidores DNS, ' +
+                    'onde o domínio foi registrado, para os endereços abaixo:'
                   }
                 />
               </p>
@@ -361,7 +371,9 @@ class Page extends Component {
                 />
               </p>
               <ul>
-                {this.state.dnsHostedZone.delegation_set_servers.map(
+                {
+                  this.state.dnsHostedZone.delegation_set_servers &&
+                  this.state.dnsHostedZone.delegation_set_servers.map(
                   (server, index) => <li key={index}>{server}</li>
                 )}
               </ul>

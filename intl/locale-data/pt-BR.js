@@ -164,8 +164,8 @@ export default {
   'community.page--domain-list.button.add-new-record': 'Adicionar novo registro',
   'community.page--domain-list.button.add-new-domain': 'Adicionar novo domínio',
   'community.page--domain-list.dialog.domain-confirm-message': 'Tem certeza que deseja remover o domínio',
-  'community.page--domain-list.dns-record-description': 'Os registros DNS são configurações especiais que alteram a forma como o seu domínio trabalha. Com esses registros, você se conecta a serviços de terceiros como provedores de email.',
-  'community.page--domain-list.dns-server-description': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registrobr} ou {godaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado. Tire suas dúvidas {trilho}.',
+  'community.page--domain-list.dns-record-description.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como registro.br ou godaddy.com, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
+  'community.page--domain-list.dns-record-description.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
   'community.page--domain-list.dns-server-description.trilho.link': 'no site de ajuda',
 
   // component community subdomain form
