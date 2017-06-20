@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { Loading } from '~client/components/await'
+import { Info } from '~client/components/notify'
 import { Dialog } from '~client/ux/components'
 import {
   ButtonPreview,
@@ -18,7 +19,6 @@ import * as Paths from '~client/paths'
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 class Page extends Component {
-
   constructor (props) {
     super(props)
     this.state = {
@@ -138,6 +138,21 @@ class Page extends Component {
 
     return (
       <div className='domain-page'>
+        <Info
+          title={intl.formatMessage({
+            id: 'page--community-domain.header.info.title',
+            defaultMessage: 'Informação'
+          })}
+        >
+          <FormattedMessage
+            id='page--community-domain.header.info.text'
+            defaultMessage={
+              'Abaixo, encontra-se a lista de domínios já cadastrados. Após alteração e ativação' +
+              'dos servidores DNS, torna-se possível publicar uma mobilização muito mais rápido,' +
+              'além de gerenciar os subdomínios externos cadastrados.'
+            }
+          />
+        </Info>
         <div className='dns-hosted-zones'>
           {dnsHostedZoneIsLoading && <Loading />}
           {dnsHostedZones && (

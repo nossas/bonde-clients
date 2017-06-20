@@ -149,6 +149,7 @@ export default {
   'community.components--domain-preview.li.domain.header': 'Domínio da comunidade',
 
   // component community subdomain preview and form
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
   'community.components--subdomain.label.name': 'Nome',
   'community.components--subdomain.label.record-type': 'Tipo',
@@ -177,6 +178,9 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
   'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
+
+  'page--community-domain.header.info.title': 'Informação',
+  'page--community-domain.header.info.text': 'Abaixo, encontra-se a lista de domínios já cadastrados. Após alteração e ativação dos servidores DNS, torna-se possível publicar uma mobilização muito mais rápido, além de gerenciar os subdomínios externos cadastrados.',
 
   'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
   'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
