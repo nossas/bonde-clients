@@ -156,26 +156,7 @@ class Page extends Component {
         <div className='dns-hosted-zones'>
           {dnsHostedZoneIsLoading && <Loading />}
           {dnsHostedZones && (
-            <Preview
-              header={
-                <div className='table-row header'>
-                  <div className='wrapper' style={{ width: 50 }}>
-                    <div className='text' />
-                  </div>
-                  <div className='wrapper' style={{ flex: 10 }}>
-                    <div className='text'>
-                      <FormattedMessage
-                        id='community.components--domain.preview.label.domain'
-                        defaultMessage='Domínio da comunidade'
-                      />
-                    </div>
-                  </div>
-                  <div className='wrapper'>
-                    <div className='text' />
-                  </div>
-                </div>
-              }
-            >
+            <Preview>
               {dnsHostedZones.map((dnsHostedZone, index) => (
                 <DomainPreview
                   key={`dns-hosted-zone-${index}`}
