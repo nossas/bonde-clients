@@ -6,6 +6,7 @@ import { Button } from '~client/ux/components'
 import * as dnsMessages from '~client/community/notifications/dns'
 import { Steps, Step } from '~client/steps'
 import { DomainStep } from '~client/community/components/dns'
+import * as paths from '~client/paths'
 
 var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
 
@@ -81,7 +82,7 @@ class Page extends Component {
                   <Button
                     type='button'
                     disabled={saving || this.state.dns !== undefined}
-                    onClick={browserHistory.goBack}
+                    onClick={() => browserHistory.push(paths.communityDomain())}
                   >
                     Cancelar
                   </Button>
@@ -95,12 +96,16 @@ class Page extends Component {
 
           <Step title='Altere os servidores do seu provedor DNS' stepComponent={DomainStep}>
             <p>
-              1. Faça login no seu provedor de DNS
-              (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)
+              Os Servidores DNS são endereços utilizados pelas organizações de registro de
+              domínios como
+              &nbsp;<a href='https://registro.br'>registro.br</a> ou
+              &nbsp;<a href='https://br.godaddy.com'>godaddy.com</a>, para identificarem
+              em qual servidor se encontram as informações sobre o domínio registrado.
             </p>
             <p>
-              2. Encontre a página de <b>gerenciador de DNS</b>, e altere
-              os <b>nomes de servidor</b> para os servidores do Bonde:</p>
+              Complete a ativação do domínio alterando os servidores DNS, onde o domínio
+              foi registrado, para os endereços abaixo:
+            </p>
             <br />
             {
               this.state.dns &&
@@ -115,13 +120,7 @@ class Page extends Component {
               <span style={{ marginRight: '1rem' }}>
                 <Button
                   type='button'
-                  onClick={() =>
-                    asyncDeleteHostedZone(this.state.dns)
-                      .then(dns => {
-                        this.setState({ dns: undefined })
-                        return Promise.resolve()
-                      })
-                  }
+                  onClick={() => browserHistory.push(paths.communityDomain())}
                 >
                   Trocar depois
                 </Button>
@@ -146,7 +145,19 @@ class Page extends Component {
               <p>Clique no botão abaixo para verificar se tudo está certo.</p>
               <p>Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.</p>
             </div>
-            <Button onClick={() => this.handleTestConnection()}>Testar</Button>
+            <div className={styles.actionButtons}>
+              <span style={{ marginRight: '1rem' }}>
+                <Button
+                  type='button'
+                  onClick={() => browserHistory.push(paths.communityDomain())}
+                >
+                  Testar depois
+                </Button>
+              </span>
+              <Button onClick={() => this.handleTestConnection()}>
+                Testar
+              </Button>
+            </div>
           </Step>
         </Steps>
       </div>

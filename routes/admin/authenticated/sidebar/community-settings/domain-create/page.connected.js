@@ -30,7 +30,6 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = {
   asyncAddHostedZone,
-  asyncDeleteHostedZone,
   asyncCheckHostedZone,
   notify
 }
