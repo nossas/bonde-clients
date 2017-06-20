@@ -171,7 +171,6 @@ const SubscriptionEditPage = props => {
                 const message = intl.formatMessage({
                   id: 'page--subscription-edit.cancel-subscription.confirm',
                   defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
-                    'Fazendo isso, você deixa de nos ajudar com suas doações. ' +
                     'Tem certeza que quer continuar?'
                 })
 
