@@ -3,10 +3,13 @@ import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import { addNotification as notify } from 'reapop'
 
-import DNSControlSelectors from '~client/community/dns-control-selectors'
-import { asyncAddHostedZone, asyncCheckHostedZone } from '~client/community/action-creators/dns-control'
 import { isValidDomain } from '~client/utils/validation-helper'
-
+import DnsControlSelectors from '~client/community/dns-control-selectors'
+import {
+  asyncAddHostedZone,
+  asyncDeleteHostedZone,
+  asyncCheckHostedZone
+} from '~client/community/action-creators/dns-control'
 import Page from './page'
 
 const fields = ['domain_name']
@@ -22,12 +25,13 @@ const validate = values => {
 }
 
 const mapStateToProps = state => ({
-  saving: DNSControlSelectors(state).dnsHostedZones().isSaving()
+  saving: DnsControlSelectors(state).dnsHostedZones().isSaving()
 })
 
 const mapActionsToProps = {
-  save: asyncAddHostedZone,
-  checkHostedZone: asyncCheckHostedZone,
+  asyncAddHostedZone,
+  asyncDeleteHostedZone,
+  asyncCheckHostedZone,
   notify
 }
 

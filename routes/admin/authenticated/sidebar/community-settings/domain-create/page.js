@@ -19,8 +19,8 @@ class Page extends Component {
   }
 
   handleTestConnection () {
-    const { checkHostedZone, notify, intl } = this.props
-    checkHostedZone(this.state.dns)
+    const { asyncCheckHostedZone, notify, intl } = this.props
+    asyncCheckHostedZone(this.state.dns)
       .then(dns => {
         this.setState({ dns })
 
@@ -38,7 +38,13 @@ class Page extends Component {
   }
 
   render () {
-    const { saving, save, fields: { domain_name: domainName }, ...formProps } = this.props
+    const {
+      saving,
+      asyncAddHostedZone,
+      asyncDeleteHostedZone,
+      fields: { domain_name: domainName },
+      ...formProps
+    } = this.props
 
     return (
       <div className='page'>
@@ -55,7 +61,7 @@ class Page extends Component {
               nosubmit
               {...formProps}
               onSubmit={values =>
-                save(values)
+                asyncAddHostedZone(values)
                   .then(dns => {
                     this.setState({ dns })
                     return Promise.resolve()
@@ -64,24 +70,29 @@ class Page extends Component {
             >
               <FormGroup {...domainName}>
                 <ControlLabel>Domínio da sua comunidade</ControlLabel>
-                <FormControl type='text' placeholder='Ex. minhacomunidade.org' />
+                <FormControl
+                  type='text'
+                  placeholder='Ex. minhacomunidade.org'
+                  disabled={this.state.dns !== undefined}
+                />
               </FormGroup>
               <div className={styles.actionButtons}>
                 <span style={{ marginRight: '1rem' }}>
                   <Button
                     type='button'
-                    disabled={saving || (formProps.pristine && domainName.value)}
+                    disabled={saving || this.state.dns !== undefined}
                     onClick={browserHistory.goBack}
                   >
                     Cancelar
                   </Button>
                 </span>
-                <Button disabled={saving} type='submit'>
+                <Button disabled={saving || this.state.dns !== undefined} type='submit'>
                   Adicionar
                 </Button>
               </div>
             </FormRedux>
           </Step>
+
           <Step title='Altere os servidores do seu provedor DNS' stepComponent={DomainStep}>
             <p>
               1. Faça login no seu provedor de DNS
@@ -100,19 +111,36 @@ class Page extends Component {
                 </p>
               ))
             }
-            <Button
-              onClick={() => {
-                const { location: { query } } = this.props
-                if (query && query.next) {
-                  browserHistory.push(query.next)
-                } else {
-                  this.setState({ renderTestConnection: true })
-                }
-              }}
-            >
-              Continuar
-            </Button>
+            <div className={styles.actionButtons}>
+              <span style={{ marginRight: '1rem' }}>
+                <Button
+                  type='button'
+                  onClick={() =>
+                    asyncDeleteHostedZone(this.state.dns)
+                      .then(dns => {
+                        this.setState({ dns: undefined })
+                        return Promise.resolve()
+                      })
+                  }
+                >
+                  Trocar depois
+                </Button>
+              </span>
+              <Button
+                onClick={() => {
+                  const { location: { query } } = this.props
+                  if (query && query.next) {
+                    browserHistory.push(query.next)
+                  } else {
+                    this.setState({ renderTestConnection: true })
+                  }
+                }}
+              >
+                Continuar
+              </Button>
+            </div>
           </Step>
+
           <Step title='Teste a conexão' stepComponent={DomainStep}>
             <div>
               <p>Clique no botão abaixo para verificar se tudo está certo.</p>
