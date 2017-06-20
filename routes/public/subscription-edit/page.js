@@ -79,6 +79,7 @@ const SubscriptionEditPage = props => {
     url,
     modificationType,
     animationStack,
+    asyncSubscriptionDelete,
     setModificationType,
     appendAnimationStack,
     removeAnimationStack
@@ -163,6 +164,19 @@ const SubscriptionEditPage = props => {
               </div>
             ))}
           </CSSTransitionGroup>
+          <p className='link--cancel center mt3 lightgray link'>
+            <a
+              onClick={() => {
+                animationStack.length && removeAnimationStack(0)
+                asyncSubscriptionDelete(initialValues)
+              }}
+            >
+              <FormattedMessage
+                id='page--subscription-edit.link.cancel-subscription'
+                defaultMessage='Quero cancelar a minha assinatura.'
+              />
+            </a>
+          </p>
         </section>
       </Background>
     </div>

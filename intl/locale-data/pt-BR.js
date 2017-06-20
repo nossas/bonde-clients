@@ -59,6 +59,7 @@ export default {
   'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
   'page--subscription-edit.button.recurring': 'Data da doação',
+  'page--subscription-edit.link.cancel-subscription': 'Quero cancelar a minha assinatura.',
 
   // form subscription credit card
   // filepath: /client/subscriptions/forms/credit-card-form.js
@@ -115,6 +116,9 @@ export default {
 
   'notification--community-invite-success.title': 'Oba!',
   'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
+
+  'notification--subscription-cancel-success.title': 'Assinatura cancelada',
+  'notification--subscription-cancel-success.message': 'Sua assinatura foi cancelada e, o valor da sua doação não será debitado até que você reative-a.',
 
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
