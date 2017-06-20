@@ -7,8 +7,9 @@ import * as dnsMessages from '~client/community/notifications/dns'
 import { Steps, Step } from '~client/steps'
 import { DomainStep } from '~client/community/components/dns'
 
-class Page extends Component {
+var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
 
+class Page extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -53,26 +54,52 @@ class Page extends Component {
             <FormRedux
               nosubmit
               {...formProps}
-              onSubmit={values => {
-                return save(values)
+              onSubmit={values =>
+                save(values)
                   .then(dns => {
                     this.setState({ dns })
                     return Promise.resolve()
                   })
-              }}
+              }
             >
               <FormGroup {...domainName}>
                 <ControlLabel>Domínio da sua comunidade</ControlLabel>
                 <FormControl type='text' placeholder='Ex. minhacomunidade.org' />
               </FormGroup>
-              <Button disabled={saving} type='submit'>Adicionar</Button>
+              <div className={styles.actionButtons}>
+                <span style={{ marginRight: '1rem' }}>
+                  <Button
+                    type='button'
+                    disabled={saving || (formProps.pristine && domainName.value)}
+                    onClick={browserHistory.goBack}
+                  >
+                    Cancelar
+                  </Button>
+                </span>
+                <Button disabled={saving} type='submit'>
+                  Adicionar
+                </Button>
+              </div>
             </FormRedux>
           </Step>
           <Step title='Altere os servidores do seu provedor DNS' stepComponent={DomainStep}>
-            <p>1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)</p>
-            <p>2. Encontre a página de <b>gerenciador de DNS</b>, e altere os <b>nomes de servidor</b> para os servidores do Bonde:</p>
+            <p>
+              1. Faça login no seu provedor de DNS
+              (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)
+            </p>
+            <p>
+              2. Encontre a página de <b>gerenciador de DNS</b>, e altere
+              os <b>nomes de servidor</b> para os servidores do Bonde:</p>
             <br />
-            {this.state.dns && this.state.dns.delegation_set_servers.map((server, index) => <p key={`server-${index}`}>{server}</p>)}
+            {
+              this.state.dns &&
+              this.state.dns.delegation_set_servers &&
+              this.state.dns.delegation_set_servers.map((server, index) => (
+                <p key={`server-${index}`}>
+                  {server}
+                </p>
+              ))
+            }
             <Button
               onClick={() => {
                 const { location: { query } } = this.props
