@@ -200,25 +200,24 @@ export default {
   // page community domain create
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain-create/page.js
   // routepath: /community/domain/add
-  'page--community-domain-create.title': 'Domínio da comunidade',
-
   'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
   'page--community-domain-create.step-add.form.domain-name.label': 'Domínio da sua comunidade',
   'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ex. minhacomunidade.org',
   'page--community-domain-create.step-add.form.domain-name.validation.required': 'Domínio é obrigatório.',
   'page--community-domain-create.step-add.form.domain-name.validation.invalid-domain-format': 'Domínio inválido',
+  'page--community-domain-create.step-add.form.cancel-button.text': 'Cancelar',
   'page--community-domain-create.step-add.form.button.text': 'Adicionar',
 
   'page--community-domain-create.step-dns-servers.title': 'Altere os servidores do seu provedor DNS',
-  'page--community-domain-create.step-dns-servers.first-paragraph': '1. Faça login no seu provedor de DNS (onde seu domínio está registrado, por exemplo GoDaddy, Locaweb, RegistroBR)',
-  'page--community-domain-create.step-dns-servers.second-paragraph': '2. Encontre a página de {dnsManager}, e altere os {serversName} para os servidores do Bonde:',
-  'page--community-domain-create.step-dns-servers.second-paragraph.dns-manager': 'gerenciador de DNS',
-  'page--community-domain-create.step-dns-servers.second-paragraph.servers-name': 'nomes de servidor',
+  'page--community-domain-create.step-dns-servers.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registroBr} ou {goDaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
+  'page--community-domain-create.step-dns-servers.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
+  'page--community-domain-create.step-dns-servers.change-later-button.text': 'Trocar depois',
   'page--community-domain-create.step-dns-servers.button.text': 'Continuar',
 
   'page--community-domain-create.step-check.title': 'Teste a conexão',
   'page--community-domain-create.step-check.first-paragraph': 'Clique no botão abaixo para verificar se tudo está certo.',
   'page--community-domain-create.step-check.second-paragraph': 'Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.',
+  'page--community-domain-create.step-check.test-later-button.text': 'Testar depois',
   'page--community-domain-create.step-check.button.text': 'Testar',
 
   // page community info
