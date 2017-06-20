@@ -116,8 +116,11 @@ export default {
   'notification--community-invite-success.title': 'Oba!',
   'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
 
+  // community dns notifications
+  // filepath: /client/community/notifications/dns.js
+  // routepath: /community/domain
   'notify.community.check--dns--success': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
-  'notify.community.check--dns--failure': 'A sincronização ainda está pendente, você pode tentar de novo em alguns minutos.',
+  'notify.community.check--dns--failure': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
 
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
