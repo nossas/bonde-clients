@@ -95,7 +95,7 @@ export const subscriptionCancelSuccess = intl => ({
   message: intl.formatMessage({
     id: 'notification--subscription-cancel-success.message',
     defaultMessage: 'Sua assinatura foi cancelada e, o valor da sua ' +
-      'doação não será debitado até que você reative-a.',
+      'doação não será debitado até que você faça uma nova doação recorrente.',
   }),
   dismissAfter: 15000,
   dismissible: true,
