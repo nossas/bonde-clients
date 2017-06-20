@@ -1,9 +1,9 @@
 import React from 'react'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import { FormattedMessage, intlShape } from 'react-intl'
 import query from 'querystring'
 import classnames from 'classnames'
 import uuid from 'uuid'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import { FormattedMessage } from 'react-intl'
 import { Background } from '~client/components/layout'
 import { CreditCardForm, RecurringForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
@@ -82,7 +82,8 @@ const SubscriptionEditPage = props => {
     asyncSubscriptionDelete,
     setModificationType,
     appendAnimationStack,
-    removeAnimationStack
+    removeAnimationStack,
+    intl
   } = props
 
   const displayForm = (form, type) => {
@@ -167,8 +168,17 @@ const SubscriptionEditPage = props => {
           <p className='link--cancel center mt3 lightgray link'>
             <a
               onClick={() => {
-                animationStack.length && removeAnimationStack(0)
-                asyncSubscriptionDelete(initialValues)
+                const message = intl.formatMessage({
+                  id: 'page--subscription-edit.cancel-subscription.confirm',
+                  defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
+                    'Fazendo isso, você deixa de nos ajudar com suas doações. ' +
+                    'Tem certeza que quer continuar?'
+                })
+
+                if (window.confirm(message)) {
+                  animationStack.length && removeAnimationStack(0)
+                  asyncSubscriptionDelete(initialValues)
+                }
               }}
             >
               <FormattedMessage
@@ -181,6 +191,10 @@ const SubscriptionEditPage = props => {
       </Background>
     </div>
   )
+}
+
+SubscriptionEditPage.propTypes = {
+  intl: intlShape.isRequired
 }
 
 export default SubscriptionEditPage

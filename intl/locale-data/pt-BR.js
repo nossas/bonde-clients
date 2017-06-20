@@ -59,6 +59,7 @@ export default {
   'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
   'page--subscription-edit.button.recurring': 'Data da doação',
+  'page--subscription-edit.cancel-subscription.confirm': 'Você está prestes a cancelar sua assinatura. Fazendo isso, você deixa de nos ajudar com suas doações. Tem certeza que quer continuar?',
   'page--subscription-edit.link.cancel-subscription': 'Quero cancelar a minha assinatura.',
 
   // form subscription credit card

@@ -1,5 +1,6 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
+import { injectIntl } from 'react-intl'
 import {
   asyncSubscriptionDelete,
   asyncSubscriptionFetch,
@@ -36,6 +37,6 @@ const mapDispatchToProps = {
   removeAnimationStack
 }
 
-export default provideHooks(redial)(
+export default injectIntl(provideHooks(redial)(
   connect(mapStateToProps, mapDispatchToProps)(Page)
-)
+))
