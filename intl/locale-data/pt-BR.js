@@ -119,7 +119,7 @@ export default {
   'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
 
   'notification--subscription-cancel-success.title': 'Assinatura cancelada',
-  'notification--subscription-cancel-success.message': 'Sua assinatura foi cancelada e, o valor da sua doação não será debitado até que você reative-a.',
+  'notification--subscription-cancel-success.message': 'Sua assinatura foi cancelada e, o valor da sua doação não será debitado até que você faça uma nova doação recorrente.',
 
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
