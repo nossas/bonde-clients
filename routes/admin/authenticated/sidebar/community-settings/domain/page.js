@@ -236,18 +236,8 @@ class Page extends Component {
                   defaultMessage={
                     'Os registros DNS são configurações especiais que alteram a ' +
                     'forma como o seu domínio trabalha. Com esses registros, você ' +
-                    'se conecta a serviços de terceiros como provedores de email. {link}.'
+                    'se conecta a serviços de terceiros como provedores de email.'
                   }
-                  values={{
-                    link: (
-                      <a href='https://trilho.bonde.org' title='Saiba mais' target='_blank'>
-                        <FormattedMessage
-                          id='community.page--domain-list.dns-record-description.link'
-                          defaultMessage='Saiba mais'
-                        />
-                      </a>
-                    )
-                  }}
                 />
               </p>
               <Preview
