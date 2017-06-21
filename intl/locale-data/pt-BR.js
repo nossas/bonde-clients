@@ -320,10 +320,10 @@ export default {
   'page--community-recipient.title': 'Agendamento dos Saques'
   'page--community-recipient.subtitle': 'Atenção: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
 
-  'page--community-recipient.form.transfer-interval.label': 'Intervalo',
-  'page--community-recipient.form.transfer-interval.value.weekly': 'Semanalmente',
-  'page--community-recipient.form.transfer-interval.value.monthly': 'Mensalmente',
-  'page--community-recipient.form.transfer-day.label': 'Dia de transferência',
+  'page--community-recipient.form.transfer-interval.label': 'Recorrência',
+  'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
+  'page--community-recipient.form.transfer-interval.value.monthly': 'Mensal',
+  'page--community-recipient.form.transfer-day.label': 'Dia de execução',
 
   'page--community-recipient.section--account.header': 'Conta bancária',
   'page--community-recipient.form.bank-code.label': 'Banco',
