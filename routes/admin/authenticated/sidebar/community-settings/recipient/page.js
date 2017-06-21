@@ -6,6 +6,7 @@ import { Warning } from '~client/components/notify'
 import { FormGroup, FormControl, ControlLabel, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { getCodeBanks } from '~client/community/utils'
+import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const CommunitySettingsRecipientPage = ({
   fields: {
@@ -174,6 +175,14 @@ const CommunitySettingsRecipientPage = ({
     </div>
   </SettingsForm>
 )
+
+export const normalizer = {
+  'recipient.bank_account.agency': normalizers.number.max(5),
+  'recipient.bank_account.agency_dig': normalizers.number.max(1),
+  'recipient.bank_account.account': normalizers.number.max(13),
+  'recipient.bank_account.account_dig': normalizers.number.max(2),
+  'recipient.bank_account.document_number': normalizers.documents.cpfCnpj
+}
 
 CommunitySettingsRecipientPage.propTypes = {
   fields: PropTypes.shape({

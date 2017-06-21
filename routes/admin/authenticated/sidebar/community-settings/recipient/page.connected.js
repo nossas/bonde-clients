@@ -97,16 +97,20 @@ const validate = values => {
     errors.recipient.bank_account.legal_name = 'Campo obrigatório'
   }
 
+
   if (!documentNumber) {
     errors.recipient.bank_account.document_number = 'Campo obrigatório'
-  } else if (documentNumber.length > 11 && documentNumber.length !== 14) {
-    errors.recipient.bank_account.document_number = 'CNPJ deve conter 14 digitos'
-  } else if (documentNumber.length < 11) {
-    errors.recipient.bank_account.document_number = 'CPF deve conter 11 digitos'
-  } else if (documentNumber.length === 11 && !CPF.isValid(documentNumber)) {
-    errors.recipient.bank_account.document_number = 'CPF inválido'
-  } else if (documentNumber.length === 14 && !CNPJ.isValid(documentNumber)) {
-    errors.recipient.bank_account.document_number = 'CNPJ inválido'
+  } else {
+    const docOnlyNum = documentNumber.replace(/[^\d]/g, '')
+    if (docOnlyNum.length > 11 && docOnlyNum.length !== 14) {
+      errors.recipient.bank_account.document_number = 'CNPJ deve conter 14 digitos'
+    } else if (docOnlyNum.length < 11) {
+      errors.recipient.bank_account.document_number = 'CPF deve conter 11 digitos'
+    } else if (docOnlyNum.length === 11 && !CPF.isValid(docOnlyNum)) {
+      errors.recipient.bank_account.document_number = 'CPF inválido'
+    } else if (docOnlyNum.length === 14 && !CNPJ.isValid(docOnlyNum)) {
+      errors.recipient.bank_account.document_number = 'CNPJ inválido'
+    }
   }
 
   return errors
@@ -114,7 +118,7 @@ const validate = values => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
-    form: 'mailchimpForm',
+    form: 'communityRecipientForm',
     fields,
     validate
   })(Page)

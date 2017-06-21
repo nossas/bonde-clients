@@ -12,24 +12,19 @@ export default {
     if (nums.length <= 11) {
       if (!previousValue || value.length > previousValue.length) { // typing forward
         if (nums.length === 3) {
-          console.log('1')
           return `${nums}.`
         }
         if (nums.length === 6) {
-          console.log('2')
           return `${nums.slice(0, 3)}.${nums.slice(3)}.`
         }
         if (nums.length === 9) {
-          console.log('3')
           return `${nums.slice(0, 3)}.${nums.slice(3, 6)}.${nums.slice(6)}-`
         }
       }
       if (nums.length <= 3) {
-        console.log('5')
         return nums
       }
       if (nums.length <= 6) {
-        console.log('6')
         return `${nums.slice(0, 3)}.${nums.slice(3)}`
       }
       if (nums.length <= 9) {
