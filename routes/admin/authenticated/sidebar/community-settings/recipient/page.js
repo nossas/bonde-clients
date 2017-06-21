@@ -40,12 +40,8 @@ const CommunitySettingsRecipientPage = ({
       />
     </h5>
 
-    <div className='clearfix'>
-      <FormGroup
-        {...transferInterval}
-        className='col col-3'
-        controlId='transferIntervalId'
-      >
+    <div className='flex'>
+      <FormGroup {...transferInterval} controlId='transferIntervalId' style={{ width: 190 }}>
         <ControlLabel>Recorrência</ControlLabel>
         <RadioGroup
           layout='horizontal'
@@ -61,11 +57,7 @@ const CommunitySettingsRecipientPage = ({
         </RadioGroup>
       </FormGroup>
 
-      <FormGroup
-        {...transferDay}
-        className='col col-9'
-        controlId='transferDayId'
-      >
+      <FormGroup {...transferDay} className='flex-auto'>
         <ControlLabel>Dia de execução</ControlLabel>
         {transferInterval.value === 'weekly' ? (
           <FormControl componentClass='select'>
@@ -100,66 +92,85 @@ const CommunitySettingsRecipientPage = ({
         o saque sempre será feito para a conta bancária definida no momento da doação.
       </Warning>
 
-      <div className='flex flex-wrap'>
-        <div className='col col-10 pr1'>
-          <FormGroup controlId='bankCodeId' {...bank_account.bank_code}>
-            <ControlLabel>Banco</ControlLabel>
-            <FormControl componentClass='select'>
-              <option value=''>Selecione o banco</option>
-              {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3).map(bank => (
-                <option key={uuid()} value={bank.code}>
-                  {`${bank.code} - ${bank.name}`}
-                </option>
-              ))}
-            </FormControl>
+      <div className='flex'>
+        <FormGroup controlId='bankAccountTypeId' {...bank_account.type} style={{ width: 210 }}>
+          <ControlLabel>Tipo de conta</ControlLabel>
+          <RadioGroup
+            layout='horizontal'
+            style={{
+              marginBottom: 0,
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Radio value='conta_corrente'>Corrente</Radio>
+            <Radio value='conta_poupanca'>Poupança</Radio>
+          </RadioGroup>
+        </FormGroup>
+
+        <FormGroup className='flex-auto' controlId='bankCodeId' {...bank_account.bank_code}>
+          <ControlLabel>Banco</ControlLabel>
+          <FormControl componentClass='select'>
+            <option value=''>Selecione o banco</option>
+            {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3).map(bank => (
+              <option key={uuid()} value={bank.code}>
+                {`${bank.code} - ${bank.name}`}
+              </option>
+            ))}
+          </FormControl>
+        </FormGroup>
+      </div>
+
+      <div className='flex flex-wrap mxn2'>
+        <div className='col col-12 lg-col-6 px2'>
+          <div className='col col-10 pr1'>
+            <FormGroup controlId='bankAgencyId' {...bank_account.agency}>
+              <ControlLabel>Agência</ControlLabel>
+              <FormControl type='text' />
+            </FormGroup>
+          </div>
+
+          <div className='col col-2'>
+            <FormGroup controlId='bankAgencyDvId' {...bank_account.agency_dig}>
+              <ControlLabel>Dígito</ControlLabel>
+              <FormControl type='text' />
+            </FormGroup>
+          </div>
+        </div>
+
+        <div className='col col-12 lg-col-6 px2'>
+          <div className='col col-10 pr1'>
+            <FormGroup controlId='bankAccountId' {...bank_account.account}>
+              <ControlLabel>Conta</ControlLabel>
+              <FormControl type='text' />
+            </FormGroup>
+          </div>
+
+          <div className='col col-2'>
+            <FormGroup controlId='bankAccountDvId' {...bank_account.account_dig}>
+              <ControlLabel>Dígito</ControlLabel>
+              <FormControl type='text' />
+            </FormGroup>
+          </div>
+        </div>
+      </div>
+
+      <div className='flex flex-wrap mxn2'>
+        <div className='col col-12 lg-col-6 px2'>
+          <FormGroup controlId='bankLegalNameId' {...bank_account.legal_name}>
+            <ControlLabel>Nome / Razão Social</ControlLabel>
+            <FormControl type='text' />
           </FormGroup>
         </div>
-        <div className='col col-2'>
-          <FormGroup controlId='bankAccountTypeId' {...bank_account.type}>
-            <ControlLabel>Tipo de conta</ControlLabel>
-            <RadioGroup layout='vertical'>
-              <Radio value='conta_corrente'>Corrente</Radio>
-              <Radio value='conta_poupanca'>Poupança</Radio>
-            </RadioGroup>
+
+        <div className='col col-12 lg-col-6 px2'>
+          <FormGroup controlId='bankDocumentNumberId' {...bank_account.document_number}>
+            <ControlLabel>CPF / CNPJ</ControlLabel>
+            <FormControl type='text' />
           </FormGroup>
         </div>
       </div>
-      <div className='flex flex-wrap'>
-        <div className='col col-10 pr1'>
-          <FormGroup controlId='bankAgencyId' {...bank_account.agency}>
-            <ControlLabel>Agência</ControlLabel>
-            <FormControl type='text' />
-          </FormGroup>
-        </div>
-        <div className='col col-2'>
-          <FormGroup controlId='bankAgencyDvId' {...bank_account.agency_dig}>
-            <ControlLabel>Dígito</ControlLabel>
-            <FormControl type='text' />
-          </FormGroup>
-        </div>
-      </div>
-      <div className='flex flex-wrap'>
-        <div className='col col-10 pr1'>
-          <FormGroup controlId='bankAccountId' {...bank_account.account}>
-            <ControlLabel>Conta</ControlLabel>
-            <FormControl type='text' />
-          </FormGroup>
-        </div>
-        <div className='col col-2'>
-          <FormGroup controlId='bankAccountDvId' {...bank_account.account_dig}>
-            <ControlLabel>Dígito</ControlLabel>
-            <FormControl type='text' />
-          </FormGroup>
-        </div>
-      </div>
-      <FormGroup controlId='bankLegalNameId' {...bank_account.legal_name}>
-        <ControlLabel>Nome / Razão Social</ControlLabel>
-        <FormControl type='text' />
-      </FormGroup>
-      <FormGroup controlId='bankDocumentNumberId' {...bank_account.document_number}>
-        <ControlLabel>CPF / CNPJ</ControlLabel>
-        <FormControl type='text' />
-      </FormGroup>
     </div>
   </SettingsForm>
 )
