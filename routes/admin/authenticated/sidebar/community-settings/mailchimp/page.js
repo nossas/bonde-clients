@@ -45,7 +45,23 @@ const CommunitySettingsMailchimpPage = ({
 
     <FormGroup controlId='listId' {...mailchimpListId}>
       <ControlLabel>Mailchimp ID da lista</ControlLabel>
-      <FormControl type='text' />
+      <Info title='Onde acho essa informação?'>
+        <ol style={{ paddingLeft: '1rem', marginBottom: 5 }}>
+          <li>
+            Siga os passos: <b>List</b> (no menu){' > '}
+            (Selecione a lista de sua escolha){' > '}
+            <b>Settings</b>{' > '}<b>Lists and Defaults</b>
+          </li>
+          <li>
+            Agora é só colar no campo abaixo o conteúdo da coluna a direita,
+            abaixo do título <b>LIST ID</b>
+          </li>
+        </ol>
+      </Info>
+      <FormControl
+        type='text'
+        placeholder='Insira aqui o "ID da lista"'
+      />
     </FormGroup>
 
     <FormGroup controlId='groupId' {...mailchimpGroupId}>
