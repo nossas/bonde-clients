@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from '~client/components/forms'
+import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
+import { Info } from '~client/components/notify'
 
 const CommunitySettingsMailchimpPage = ({
   fields: {
@@ -18,6 +14,11 @@ const CommunitySettingsMailchimpPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
+    <Info title='Informação'>
+      A integração com o mailchimp é feita através da criação de segmentos de cada
+      widget criada no BONDE. Adotamos o seguinte padrão no nome dos segmentos:
+      M999P999, M999F999, M999D999
+    </Info>
     <FormGroup controlId='apiKeyId' {...mailchimpApiKey}>
       <ControlLabel>Mailchimp API Key</ControlLabel>
       <FormControl type='text' />
