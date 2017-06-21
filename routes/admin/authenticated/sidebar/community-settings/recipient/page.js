@@ -3,15 +3,8 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import uuid from 'uuid'
 
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  RadioGroup,
-  Radio
-} from '~client/components/forms'
+import { FormGroup, FormControl, ControlLabel, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
-import { Warning } from '~client/components/notify'
 import { getCodeBanks } from '~client/community/utils'
 
 const CommunitySettingsRecipientPage = ({
@@ -27,14 +20,15 @@ const CommunitySettingsRecipientPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
-    <Warning title={
+    <h2 className='mt0'>
       <FormattedMessage
-        id='page--community-recipient.pagarme-warning.title'
-        defaultMessage='Importante'
+        id='page--community-recipient.title'
+        defaultMessage='Agendamento dos Saques'
       />
-    }>
+    </h2>
+    <h5>
       <FormattedMessage
-        id='page--community-recipient.pagarme-warning.message'
+        id='page--community-recipient.subtitle'
         defaultMessage={
           'Atenção: As doações só ficam disponíveis 31 dias após a transação de cartão de ' +
           'crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações ' +
@@ -44,7 +38,8 @@ const CommunitySettingsRecipientPage = ({
           'e assim por diante.'
         }
       />
-    </Warning>
+    </h5>
+
     <FormGroup controlId='transferIntervalId' {...transferInterval}>
       <ControlLabel>Intervalo</ControlLabel>
       <RadioGroup layout='horizontal'>
