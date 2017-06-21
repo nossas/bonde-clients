@@ -38,10 +38,12 @@ const CommunitySettingsInfoPage = ({
     <FormGroup controlId='customFromEmail' {...customFromEmail}>
       <ControlLabel>E-mail de resposta para notificações</ControlLabel>
       <HelpBlock>
-        {`Você deve preencher seguindo o formato padrão:
-          Nome do contato <contato@provedor.com>`}
+        Esse email é utilizado como remetente padrão das notificações.
       </HelpBlock>
-      <FormControl type='text' />
+      <FormControl
+        type='text'
+        placeholder='Ex: Nome do remetente <remetente@provedor.com>'
+      />
     </FormGroup>
   </SettingsForm>
 )

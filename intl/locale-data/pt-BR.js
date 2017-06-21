@@ -239,7 +239,8 @@ export default {
   'page--community-info.form.city.label': 'Cidade',
   'page--community-info.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
   'page--community-info.form.custom-from-email.label': 'E-mail de resposta para notificações',
-  'page--community-info.form.custom-from-email.helper-text': 'Você deve preencher seguindo o formato padrão: Nome do contato <contato@provedor.com>',
+  'page--community-info.form.custom-from-email.helper-text': 'Esse email é utilizado como remetente padrão das notificações.',
+  'page--community-info.form.custom-from-email.placeholder': 'Ex: Nome do remetente <remetente@provedor.com>',
   'page--community-info.form.custom-from-email.validation.invalid-email-format': 'E-mail de resposta fora do formato padrão',
 
   // page community invite
