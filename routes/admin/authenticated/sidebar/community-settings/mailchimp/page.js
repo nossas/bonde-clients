@@ -66,7 +66,10 @@ const CommunitySettingsMailchimpPage = ({
 
     <FormGroup controlId='groupId' {...mailchimpGroupId}>
       <ControlLabel>Mailchimp ID do grupo</ControlLabel>
-      <FormControl type='text' />
+      <FormControl
+        type='text'
+        placeholder='Insira aqui o "ID do grupo"'
+      />
     </FormGroup>
   </SettingsForm>
 )
