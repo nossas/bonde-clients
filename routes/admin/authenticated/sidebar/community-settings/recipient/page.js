@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
 import uuid from 'uuid'
-
+import { FormattedMessage } from 'react-intl'
+import { Warning } from '~client/components/notify'
 import { FormGroup, FormControl, ControlLabel, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { getCodeBanks } from '~client/community/utils'
@@ -90,8 +90,16 @@ const CommunitySettingsRecipientPage = ({
 
 
     <div className='section'>
-      <h3>Conta bancaria</h3>
-      <hr />
+      <h2>Conta bancaria</h2>
+      <h5>
+        As doações só serão recebidas após o preenchimento dos dados bancários.
+      </h5>
+      <Warning title='Importante'>
+        As doações recebidas por uma conta bancária não podem ser transferidas
+        para outra após ela ter sido realizada, ou seja, após serem realizadas as doações
+        o saque sempre será feito para a conta bancária definida no momento da doação.
+      </Warning>
+
       <div className='flex flex-wrap'>
         <div className='col col-10 pr1'>
           <FormGroup controlId='bankCodeId' {...bank_account.bank_code}>
