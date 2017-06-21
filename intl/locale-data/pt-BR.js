@@ -234,8 +234,10 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
   'page--community-info.form.name.label': 'Nome',
+  'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
   'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',
   'page--community-info.form.description.label': 'Descrição',
+  'page--community-info.form.description.placeholder': 'Insira uma descrição para a sua comunidade',
   'page--community-info.form.city.label': 'Cidade',
   'page--community-info.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
   'page--community-info.form.custom-from-email.label': 'E-mail de resposta para notificações',
