@@ -280,9 +280,20 @@ export default {
   // page community mailchimp
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
+  'page--community-mailchimp.helper-text': 'A integração com o mailchimp é feita através da criação de segmentos de cada widget criada no BONDE. Adotamos o seguinte padrão no nome dos segmentos: M999P999, M999F999, M999D999',
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
+  'page--community-mailchimp.form.api-key.helper-text.title': 'Onde acho essa informação?',
+  'page--community-mailchimp.form.api-key.helper-text.step-01': 'No canto superior esquerdo, clique no seu nome de usuário. Em seguida um menu surgirá. Clique na opção {accountStrong}.',
+  'page--community-mailchimp.form.api-key.helper-text.step-02': 'Siga os passos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}',
+  'page--community-mailchimp.form.api-key.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo de {apiKeyStrong}.',
+  'page--community-mailchimp.form.api-key.placeholder': 'Insira aqui o conteúdo de "API key"',
   'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
+  'page--community-mailchimp.form.list-id.helper-text.title': 'Onde acho essa informação?',
+  'page--community-mailchimp.form.list-id.helper-text.step-01': 'Siga os passos: {listStrong} (no menu) > (Selecione a lista de sua escolha) > {settingsStrong} > {listAndDefaultsStrong}',
+  'page--community-mailchimp.form.list-id.helper-text.step-02': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
+  'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
   'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
+  'page--community-mailchimp.form.group-id.placeholder': 'Insira aqui o "ID do grupo"',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
