@@ -18,6 +18,7 @@ const CommunitySettingsRecipientPage = ({
     }
   },
   location,
+  intl,
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
@@ -43,7 +44,12 @@ const CommunitySettingsRecipientPage = ({
 
     <div className='flex'>
       <FormGroup {...transferInterval} controlId='transferIntervalId' style={{ width: 190 }}>
-        <ControlLabel>Recorrência</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--community-recipient.form.transfer-interval.label'
+            defaultMessage='Recorrência'
+          />
+        </ControlLabel>
         <RadioGroup
           layout='horizontal'
           style={{
@@ -53,20 +59,60 @@ const CommunitySettingsRecipientPage = ({
             alignItems: 'center',
           }}
         >
-          <Radio value='weekly'>Semanal</Radio>
-          <Radio value='monthly'>Mensal</Radio>
+          <Radio value='weekly'>
+            <FormattedMessage
+              id='page--community-recipient.form.transfer-interval.value.weekly'
+              defaultMessage='Semanal'
+            />
+          </Radio>
+          <Radio value='monthly'>
+            <FormattedMessage
+              id='page--community-recipient.form.transfer-interval.value.monthly'
+              defaultMessage='Mensal'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
 
       <FormGroup {...transferDay} className='flex-auto'>
-        <ControlLabel>Dia de execução</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--community-recipient.form.transfer-day.label'
+            defaultMessage='Dia de execução'
+          />
+        </ControlLabel>
         {transferInterval.value === 'weekly' ? (
           <FormControl componentClass='select'>
-            <option value='1'>Segunda</option>
-            <option value='2'>Terça</option>
-            <option value='3'>Quarta</option>
-            <option value='4'>Quinta</option>
-            <option value='5'>Sexta</option>
+            <option value='1'>
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.transfer-day.weekly.mon',
+                defaultMessage: 'Segunda'
+              })}
+            </option>
+            <option value='2'>
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.transfer-day.weekly.tue',
+                defaultMessage: 'Terça'
+              })}
+            </option>
+            <option value='3'>
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.transfer-day.weekly.wed',
+                defaultMessage: 'Quarta'
+              })}
+            </option>
+            <option value='4'>
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.transfer-day.weekly.thu',
+                defaultMessage: 'Quinta'
+              })}
+            </option>
+            <option value='5'>
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.transfer-day.weekly.fri',
+                defaultMessage: 'Sexta'
+              })}
+            </option>
           </FormControl>
         ) : (
           <FormControl componentClass='select'>
@@ -83,19 +129,44 @@ const CommunitySettingsRecipientPage = ({
 
 
     <div className='section'>
-      <h2>Conta bancaria</h2>
+      <h2>
+        <FormattedMessage
+          id='page--community-recipient.section--account.title'
+          defaultMessage='Conta bancária'
+        />
+      </h2>
       <h5>
-        As doações só serão recebidas após o preenchimento dos dados bancários.
+        <FormattedMessage
+          id='page--community-recipient.section--account.subtitle'
+          defaultMessage='As doações só serão recebidas após o preenchimento dos dados bancários.'
+        />
       </h5>
-      <Warning title='Importante'>
-        As doações recebidas por uma conta bancária não podem ser transferidas
-        para outra após ela ter sido realizada, ou seja, após serem realizadas as doações
-        o saque sempre será feito para a conta bancária definida no momento da doação.
+      <Warning
+        title={
+          <FormattedMessage
+            id='page--community-recipient.section--account.warning.title'
+            defaultMessage='Importante'
+          />
+        }
+      >
+        <FormattedMessage
+          id='page--community-recipient.section--account.warning.text'
+          defaultMessage={
+            'As doações recebidas por uma conta bancária não podem ser transferidas ' +
+            'para outra após ela ter sido realizada, ou seja, após serem realizadas as doações ' +
+            'o saque sempre será feito para a conta bancária definida no momento da doação.'
+          }
+        />
       </Warning>
 
       <div className='flex'>
         <FormGroup controlId='bankAccountTypeId' {...bank_account.type} style={{ width: 240 }}>
-          <ControlLabel>Tipo de conta</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--community-recipient.form.bank-account-type.label'
+              defaultMessage='Tipo de conta'
+            />
+          </ControlLabel>
           <RadioGroup
             layout='horizontal'
             style={{
@@ -105,15 +176,35 @@ const CommunitySettingsRecipientPage = ({
               alignItems: 'center',
             }}
           >
-            <Radio value='conta_corrente'>Corrente</Radio>
-            <Radio value='conta_poupanca'>Poupança</Radio>
+            <Radio value='conta_corrente'>
+              <FormattedMessage
+                id='page--community-recipient.form.bank-account-type.value.checking-account'
+                defaultMessage='Corrente'
+              />
+            </Radio>
+            <Radio value='conta_poupanca'>
+              <FormattedMessage
+                id='page--community-recipient.form.bank-account-type.value.savings-account'
+                defaultMessage='Poupança'
+              />
+            </Radio>
           </RadioGroup>
         </FormGroup>
 
         <FormGroup className='flex-auto' controlId='bankCodeId' {...bank_account.bank_code}>
-          <ControlLabel>Banco</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--community-recipient.form.bank-code.label'
+              defaultMessage='Banco'
+            />
+          </ControlLabel>
           <FormControl componentClass='select'>
-            <option value=''>Selecione o banco</option>
+            <option value=''>
+            {intl.formatMessage({
+              id: 'page--community-recipient.form.bank-code.value.default',
+              defaultMessage: 'Selecione o banco'
+            })}
+            </option>
             {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3).map(bank => (
               <option key={uuid()} value={bank.code}>
                 {`${bank.code} - ${bank.name}`}
@@ -127,15 +218,37 @@ const CommunitySettingsRecipientPage = ({
         <div className='col col-12 lg-col-6 px2'>
           <div className='col col-10 pr1'>
             <FormGroup controlId='bankAgencyId' {...bank_account.agency}>
-              <ControlLabel>Agência</ControlLabel>
-              <FormControl type='text' placeholder='Digite apenas números' />
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--community-recipient.form.bank-agency.label'
+                  defaultMessage='Agência'
+                />
+              </ControlLabel>
+              <FormControl
+                type='text'
+                placeholder={intl.formatMessage({
+                  id: 'page--community-recipient.form.bank-agency.placeholder',
+                  defaultMessage: 'Digite apenas números'
+                })}
+              />
             </FormGroup>
           </div>
 
           <div className='col col-2'>
             <FormGroup controlId='bankAgencyDvId' {...bank_account.agency_dig}>
-              <ControlLabel>Dígito</ControlLabel>
-              <FormControl type='text' placeholder='Ex: 0' />
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--community-recipient.form.bank-agency-dv.label'
+                  defaultMessage='Dígito'
+                />
+              </ControlLabel>
+              <FormControl
+                type='text'
+                placeholder={intl.formatMessage({
+                  id: 'page--community-recipient.form.bank-agency-dv.placeholder',
+                  defaultMessage: 'Ex: 0'
+                })}
+              />
             </FormGroup>
           </div>
         </div>
@@ -143,15 +256,37 @@ const CommunitySettingsRecipientPage = ({
         <div className='col col-12 lg-col-6 px2'>
           <div className='col col-8 pr1'>
             <FormGroup controlId='bankAccountId' {...bank_account.account}>
-              <ControlLabel>Conta</ControlLabel>
-              <FormControl type='text' placeholder='Digite apenas números' />
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--community-recipient.form.bank-account.label'
+                  defaultMessage='Conta'
+                />
+              </ControlLabel>
+              <FormControl
+                type='text'
+                placeholder={intl.formatMessage({
+                  id: 'page--community-recipient.form.bank-account.plcaeholder',
+                  defaultMessage: 'Digite apenas números'
+                })}
+              />
             </FormGroup>
           </div>
 
           <div className='col col-4'>
             <FormGroup controlId='bankAccountDvId' {...bank_account.account_dig}>
-              <ControlLabel>Dígito</ControlLabel>
-              <FormControl type='text' placeholder='Ex: 00' />
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--community-recipient.form.bank-account-dv.label'
+                  defaultMessage='Dígito'
+                />
+              </ControlLabel>
+              <FormControl
+                type='text'
+                placeholder={intl.formatMessage({
+                  id: 'page--community-recipient.form.bank-account-dv.plcaeholder',
+                  defaultMessage: 'Ex: 00'
+                })}
+              />
             </FormGroup>
           </div>
         </div>
@@ -160,15 +295,37 @@ const CommunitySettingsRecipientPage = ({
       <div className='flex flex-wrap mxn2'>
         <div className='col col-12 lg-col-6 px2'>
           <FormGroup controlId='bankLegalNameId' {...bank_account.legal_name}>
-            <ControlLabel>Nome / Razão Social</ControlLabel>
-            <FormControl type='text' placeholder='Ex: Minha Sampa' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--community-recipient.form.bank-legal-name.label'
+                defaultMessage='Nome / Razão Social'
+              />
+            </ControlLabel>
+            <FormControl
+              type='text'
+              placeholder={intl.formatMessage({
+                id: 'page--community-recipient.form.bank-legal-name.placeholder',
+                defaultMessage: 'Ex: Minha Sampa'
+              })}
+            />
           </FormGroup>
         </div>
 
         <div className='col col-12 lg-col-6 px2'>
           <FormGroup controlId='bankDocumentNumberId' {...bank_account.document_number}>
-            <ControlLabel>CPF / CNPJ</ControlLabel>
-            <FormControl type='text' placeholder='Digite apenas números' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--community-recipient.form.bank-document-number.label'
+                defaultMessage='CPF / CNPJ'
+              />
+            </ControlLabel>
+            <FormControl
+              type='text'
+              placeholder={intl.formatMessage({
+                id: 'page--community-recipient.form.bank-document-number.placeholder',
+                defaultMessage: 'Digite apenas números'
+              })}
+            />
           </FormGroup>
         </div>
       </div>
