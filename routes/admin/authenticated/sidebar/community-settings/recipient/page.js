@@ -93,7 +93,7 @@ const CommunitySettingsRecipientPage = ({
       </Warning>
 
       <div className='flex'>
-        <FormGroup controlId='bankAccountTypeId' {...bank_account.type} style={{ width: 210 }}>
+        <FormGroup controlId='bankAccountTypeId' {...bank_account.type} style={{ width: 240 }}>
           <ControlLabel>Tipo de conta</ControlLabel>
           <RadioGroup
             layout='horizontal'
@@ -127,30 +127,30 @@ const CommunitySettingsRecipientPage = ({
           <div className='col col-10 pr1'>
             <FormGroup controlId='bankAgencyId' {...bank_account.agency}>
               <ControlLabel>Agência</ControlLabel>
-              <FormControl type='text' />
+              <FormControl type='text' placeholder='Digite apenas números' />
             </FormGroup>
           </div>
 
           <div className='col col-2'>
             <FormGroup controlId='bankAgencyDvId' {...bank_account.agency_dig}>
               <ControlLabel>Dígito</ControlLabel>
-              <FormControl type='text' />
+              <FormControl type='text' placeholder='Ex: 0' />
             </FormGroup>
           </div>
         </div>
 
         <div className='col col-12 lg-col-6 px2'>
-          <div className='col col-10 pr1'>
+          <div className='col col-8 pr1'>
             <FormGroup controlId='bankAccountId' {...bank_account.account}>
               <ControlLabel>Conta</ControlLabel>
-              <FormControl type='text' />
+              <FormControl type='text' placeholder='Digite apenas números' />
             </FormGroup>
           </div>
 
-          <div className='col col-2'>
+          <div className='col col-4'>
             <FormGroup controlId='bankAccountDvId' {...bank_account.account_dig}>
               <ControlLabel>Dígito</ControlLabel>
-              <FormControl type='text' />
+              <FormControl type='text' placeholder='Ex: 00' />
             </FormGroup>
           </div>
         </div>
@@ -160,14 +160,14 @@ const CommunitySettingsRecipientPage = ({
         <div className='col col-12 lg-col-6 px2'>
           <FormGroup controlId='bankLegalNameId' {...bank_account.legal_name}>
             <ControlLabel>Nome / Razão Social</ControlLabel>
-            <FormControl type='text' />
+            <FormControl type='text' placeholder='Ex: Minha Sampa' />
           </FormGroup>
         </div>
 
         <div className='col col-12 lg-col-6 px2'>
           <FormGroup controlId='bankDocumentNumberId' {...bank_account.document_number}>
             <ControlLabel>CPF / CNPJ</ControlLabel>
-            <FormControl type='text' />
+            <FormControl type='text' placeholder='Digite apenas números' />
           </FormGroup>
         </div>
       </div>
