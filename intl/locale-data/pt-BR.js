@@ -241,6 +241,7 @@ servidor-03.dominio.com`,
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
+  'page--community-info.form.logo.label': 'Logo',
   'page--community-info.form.name.label': 'Nome',
   'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
   'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',

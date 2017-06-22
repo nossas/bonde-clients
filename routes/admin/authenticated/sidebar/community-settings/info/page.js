@@ -23,6 +23,12 @@ const CommunitySettingsInfoPage = ({
 }) => (
   <SettingsForm {...formProps}>
     <FormGroup controlId='imageId' {...image}>
+      <ControlLabel>
+        <FormattedMessage
+          id='page--community-info.form.logo.label'
+          defaultMessage='Logo'
+        />
+      </ControlLabel>
       <UploadImageField signingUrl={`${process.env.API_URL}/uploads`} />
     </FormGroup>
     <FormGroup controlId='nametId' {...name}>
