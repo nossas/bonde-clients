@@ -107,25 +107,32 @@ const CommunitySettingsMailchimpPage = ({
           defaultMessage='Mailchimp ID da lista'
         />
       </ControlLabel>
-      <Info
-        title={
+      <HelpBlock>
+        <b>
           <FormattedMessage
             id='page--community-mailchimp.form.list-id.helper-text.title'
-            defaultMessage='Onde acho essa informação?'
+            defaultMessage='Onde buscar essa informação?'
           />
-        }
-      >
-        <ol style={{ paddingLeft: '1rem', marginBottom: 5 }}>
+        </b>
+        <ol>
           <li>
             <FormattedMessage
               id='page--community-mailchimp.form.list-id.helper-text.step-01'
               defaultMessage={
-                'Siga os passos: {listStrong} (no menu) > ' +
-                '(Selecione a lista de sua escolha) > ' +
+                'Após fazer o login como administrador no mailchimp, clique no seu ' +
+                'nome de usuário. Surgirá um menu, clique na opção {listStrong}.'
+              }
+              values={{ listStrong: <b>List</b> }}
+            />
+          </li>
+          <li>
+            <FormattedMessage
+              id='page--community-mailchimp.form.list-id.helper-text.step-02'
+              defaultMessage={
+                'Selecione a lista correspondente e siga os passos: ' +
                 '{settingsStrong} > {listAndDefaultsStrong}'
               }
               values={{
-                listStrong: <b>List</b>,
                 settingsStrong: <b>Settings</b>,
                 listAndDefaultsStrong: <b>Lists and Defaults</b>
               }}
@@ -133,7 +140,7 @@ const CommunitySettingsMailchimpPage = ({
           </li>
           <li>
             <FormattedMessage
-              id='page--community-mailchimp.form.list-id.helper-text.step-02'
+              id='page--community-mailchimp.form.list-id.helper-text.step-03'
               defaultMessage={
                 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, ' +
                 'abaixo do título {listIdStrong}'
@@ -144,7 +151,7 @@ const CommunitySettingsMailchimpPage = ({
             />
           </li>
         </ol>
-      </Info>
+      </HelpBlock>
       <FormControl
         type='text'
         placeholder={intl.formatMessage({
