@@ -39,6 +39,7 @@ coverage
 .yarnclean
 webpack-assets.json
 static
+/public
 
 # Mac OSX specific files
 .DS_Store
