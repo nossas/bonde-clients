@@ -28,8 +28,18 @@ class Application extends React.Component {
         <Helmet
           title='BONDE - Feito pra causar'
           link={[
-            { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon/favicon-32.png' },
-            { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon/favicon-16.png' }
+            {
+              rel: 'icon',
+              type: 'image/png',
+              sizes: '32x32',
+              href: require('exenv').canUseDOM ? require('~client/images/icon/favicon-32.png') : ''
+            },
+            {
+              rel: 'icon',
+              type: 'image/png',
+              sizes: '16x16',
+              href: require('exenv').canUseDOM ? require('~client/images/icon/favicon-16.png') : ''
+            }
           ]}
         />
         <ZendeskWidget />
