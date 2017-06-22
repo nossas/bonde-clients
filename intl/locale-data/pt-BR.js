@@ -306,8 +306,6 @@ servidor-03.dominio.com`,
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
-  'page--community-mailchimp.form.group-id.label': 'Mailchimp ID do grupo',
-  'page--community-mailchimp.form.group-id.placeholder': 'Insira aqui o "ID do grupo"',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js

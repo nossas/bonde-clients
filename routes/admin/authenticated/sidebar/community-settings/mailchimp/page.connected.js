@@ -17,6 +17,6 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(
   injectIntl(reduxForm({
     form: 'mailchimpForm',
-    fields: ['id', 'mailchimp_api_key', 'mailchimp_list_id', 'mailchimp_group_id']
+    fields: ['id', 'mailchimp_api_key', 'mailchimp_list_id']
   })(Page))
 )
