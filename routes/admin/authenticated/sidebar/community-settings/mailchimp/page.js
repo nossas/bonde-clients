@@ -8,8 +8,7 @@ import { Info, Warning } from '~client/components/notify'
 const CommunitySettingsMailchimpPage = ({
   fields: {
     mailchimp_api_key: mailchimpApiKey,
-    mailchimp_list_id: mailchimpListId,
-    mailchimp_group_id: mailchimpGroupId
+    mailchimp_list_id: mailchimpListId
   },
   location,
   intl,
@@ -160,22 +159,6 @@ const CommunitySettingsMailchimpPage = ({
         })}
       />
     </FormGroup>
-
-    <FormGroup controlId='groupId' {...mailchimpGroupId}>
-      <ControlLabel>
-        <FormattedMessage
-          id='page--community-mailchimp.form.group-id.label'
-          defaultMessage='Mailchimp ID do grupo'
-        />
-      </ControlLabel>
-      <FormControl
-        type='text'
-        placeholder={intl.formatMessage({
-          id: 'page--community-mailchimp.form.group-id.placeholder',
-          defaultMessage: 'Insira aqui o "ID do grupo"'
-        })}
-      />
-    </FormGroup>
   </SettingsForm>
 )
 
@@ -183,7 +166,6 @@ CommunitySettingsMailchimpPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
     mailchimp_list_id: PropTypes.object.isRequired,
-    mailchimp_group_id: PropTypes.object.isRequired
   }).isRequired,
   // redux-form required props
   submit: PropTypes.func.isRequired,
