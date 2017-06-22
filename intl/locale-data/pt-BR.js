@@ -329,9 +329,12 @@ servidor-03.dominio.com`,
   // page community recipient
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.js
   // routepath: /community/recipient
-  'page--community-recipient.title': 'Agendamento dos Saques',
-  'page--community-recipient.subtitle': 'Atenção: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
+  'page--community-recipient.warning.title': 'Importante',
+  'page--community-recipient.warning.content.list.li-01': 'Informe: Preencha sua conta bancária abaixo para trasferirmos automaticamente as doações recebidas por sua comunidade.',
+  'page--community-recipient.warning.content.list.li-02': 'Atenção 1: Não é possível fazer a transferência de uma doação já recebida para uma nova conta bancária, sempre será utilizada a conta bancária ativa no momento da doação.',
+  'page--community-recipient.warning.content.list.li-03': 'Atenção 2: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
 
+  'page--community-recipient.title': 'Agendamento dos Saques',
   'page--community-recipient.form.transfer-interval.label': 'Recorrência',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
   'page--community-recipient.form.transfer-interval.value.monthly': 'Mensal',
@@ -343,9 +346,6 @@ servidor-03.dominio.com`,
   'page--community-recipient.form.transfer-day.weekly.fri': 'Sexta',
 
   'page--community-recipient.section--account.title': 'Conta bancária',
-  'page--community-recipient.section--account.subtitle': 'As doações só serão recebidas após o preenchimento dos dados bancários.',
-  'page--community-recipient.section--account.warning.title': 'Importante',
-  'page--community-recipient.section--account.warning.text': 'As doações recebidas por uma conta bancária não podem ser transferidas para outra após ela ter sido realizada, ou seja, após serem realizadas as doações o saque sempre será feito para a conta bancária definida no momento da doação.',
   'page--community-recipient.form.bank-account-type.label': 'Tipo de conta',
   'page--community-recipient.form.bank-account-type.value.checking-account': 'Corrente',
   'page--community-recipient.form.bank-account-type.value.savings-account': 'Poupança',
