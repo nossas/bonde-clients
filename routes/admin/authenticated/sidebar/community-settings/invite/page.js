@@ -30,13 +30,25 @@ const CommunitySettingsInfoPage = ({
     nosubmit
     onFinishSubmit={() => resetForm()}
   >
-    <Info title='Informação'>
+    <Info
+      title={
+        <FormattedMessage
+          id='page--community-invite.info.title'
+          defaultMessage='Informação'
+        />
+      }
+    >
       <FormattedMessage
-        id='page--community-invite.helper-text'
+        id='page--community-invite.info.content.first-line'
         defaultMessage={
-          'Ao preencher o campo abaixo, você estará convidando novos mobilizadores para compor ' +
-          'sua comunidade.'
+          'Convide novos usuários para fazerem parte da sua comunidade, eles terão ' +
+          'acesso as mesmas informações que o você possui.'
         }
+      />
+      <br />
+      <FormattedMessage
+        id='page--community-invite.info.content.second-line'
+        defaultMessage='Utilizando o formulário abaixo, você envia o convite por e-mail.'
       />
     </Info>
 
