@@ -5,6 +5,8 @@ import { FormattedMessage, intlShape } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { Info } from '~client/components/notify'
 import { Dialog } from '~client/ux/components'
+import { Title, Subtitle } from '~client/components/title'
+import { Preformatted } from '~client/components/markdown'
 import {
   ButtonPreview,
   DomainPreview,
@@ -204,14 +206,14 @@ class Page extends Component {
         {this.state.dnsHostedZone ? (
           <div className='dns-detail'>
             <div className='dns-records'>
-              <h3>
+              <Title size='2'>
                 <FormattedMessage
                   id='community.page--domain-list.header.dns-records'
                   defaultMessage='Registros DNS'
                 />
-              </h3>
+              </Title>
               {dnsRecordsIsLoading && <Loading />}
-              <p>
+              <Subtitle>
                 <FormattedMessage
                   id='community.page--domain-list.dns-record-description.first-paragraph'
                   defaultMessage={
@@ -221,8 +223,7 @@ class Page extends Component {
                     'sobre o domínio registrado.'
                   }
                 />
-              </p>
-              <p>
+                <br /><br />
                 <FormattedMessage
                   id='community.page--domain-list.dns-record-description.second-paragraph'
                   defaultMessage={
@@ -230,7 +231,7 @@ class Page extends Component {
                     'onde o domínio foi registrado, para os endereços abaixo:'
                   }
                 />
-              </p>
+              </Subtitle>
               <Preview
                 header={
                   <div className='table-row header'>
@@ -240,7 +241,7 @@ class Page extends Component {
                     <div className='wrapper' style={{ flex: 15 }}>
                       <div className='text'>
                         <FormattedMessage
-                          id='community.components--subdomain.label.name'
+                          id='community.components--subdomain-preview-header.name'
                           defaultMessage='Nome'
                         />
                       </div>
@@ -248,7 +249,7 @@ class Page extends Component {
                     <div className='wrapper' style={{ width: 100, textAlign: 'center' }}>
                       <div className='text'>
                         <FormattedMessage
-                          id='community.components--subdomain.label.record-type'
+                          id='community.components--subdomain-preview-header.record-type'
                           defaultMessage='Tipo'
                         />
                       </div>
@@ -256,7 +257,7 @@ class Page extends Component {
                     <div className='wrapper' style={{ flex: 17 }}>
                       <div className='text'>
                         <FormattedMessage
-                          id='community.components--subdomain.label.value'
+                          id='community.components--subdomain-preview-header.value'
                           defaultMessage='Valor'
                         />
                       </div>
@@ -322,13 +323,13 @@ class Page extends Component {
               )}
             </div>
             <div className='dns-server'>
-              <h3>
+              <Title size='2'>
                 <FormattedMessage
                   id='community.page--domain-list.header.dns-server'
                   defaultMessage='Servidores DNS'
                 />
-              </h3>
-              <p>
+              </Title>
+              <Subtitle>
                 <FormattedMessage
                   id='community.page--domain-list.dns-server-description'
                   defaultMessage={
@@ -350,14 +351,14 @@ class Page extends Component {
                     )
                   }}
                 />
-              </p>
-              <ul>
-                {
-                  this.state.dnsHostedZone.delegation_set_servers &&
-                  this.state.dnsHostedZone.delegation_set_servers.map(
-                  (server, index) => <li key={index}>{server}</li>
-                )}
-              </ul>
+              </Subtitle>
+              {this.state.dnsHostedZone.delegation_set_servers && (
+                <Preformatted backgroundColor='#ffffff'>
+                  {this.state.dnsHostedZone.delegation_set_servers.map(
+                    (server, index) => !index ? server : `\n${server}`
+                  )}
+                </Preformatted>
+              )}
             </div>
           </div>
         ) : null}

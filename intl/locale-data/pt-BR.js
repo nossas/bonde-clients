@@ -159,10 +159,9 @@ export default {
   // component community subdomain preview and form
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
-  'community.components--subdomain.label.name': 'Nome',
-  'community.components--subdomain.label.record-type': 'Tipo',
-  'community.components--subdomain.label.value': 'Valor',
-  'community.components--subdomain.form.submit-button': 'Adicionar',
+  'community.components--subdomain-preview-header.name': 'Nome',
+  'community.components--subdomain-preview-header.record-type': 'Tipo',
+  'community.components--subdomain-preview-header.value': 'Valor',
   'community.components--domain.preview.label.domain': 'Domínio da comunidade',
   'community.page--domain-list.header.dns-records': 'Registros DNS',
   'community.page--domain-list.header.dns-server': 'Servidores DNS',
@@ -171,15 +170,23 @@ export default {
   'community.page--domain-list.dialog.domain-confirm-message': 'Tem certeza que deseja remover o domínio',
   'community.page--domain-list.dns-record-description.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como registro.br ou godaddy.com, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
   'community.page--domain-list.dns-record-description.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
+  'community.page--domain-list.dns-server-description': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registrobr} ou {godaddy}, para identificarem em qual servidor se encontra as informações sobre o domínio registrado. Tire suas dúvidas {trilho}.',
   'community.page--domain-list.dns-server-description.trilho.link': 'no site de ajuda',
 
   // component community subdomain form
   // filepath: /client/community/components/dns/subdomain-form/index.js
   // routepath: /community/domain
-  // 'community.components--subdomain-form.subdomain.label': 'Subdomínio',
-  // 'community.components--subdomain-form.record-type.label': 'Tipo',
-  // 'community.components--subdomain-form.redirect-to.label': 'Redirecionar para',
-  'community.components--subdomain-form.button.text': 'Adicionar',
+  'community.components--subdomain.name.label': 'Nome',
+  'community.components--subdomain.name.placeholder': 'subdominio',
+  'community.components--subdomain.record-type.label': 'Tipo',
+  'community.components--subdomain.value.label': 'Valor',
+  'community.components--subdomain.value.placeholder':
+`redirecionamento.dominio.com
+ou
+servidor-01.dominio.com
+servidor-02.dominio.com
+servidor-03.dominio.com`,
+  'community.components--subdomain.form.submit-button': 'Adicionar',
 
   // page community domain
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
@@ -218,9 +225,10 @@ export default {
   'page--community-domain-create.step-add.form.cancel-button.text': 'Cancelar',
   'page--community-domain-create.step-add.form.button.text': 'Adicionar',
 
-  'page--community-domain-create.step-dns-servers.title': 'Altere os servidores do seu provedor DNS',
-  'page--community-domain-create.step-dns-servers.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registroBr} ou {goDaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
-  'page--community-domain-create.step-dns-servers.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
+  'page--community-domain-create.step-dns-servers.step-title': 'Altere os servidores do seu provedor DNS',
+  'page--community-domain-create.step-dns-servers.title': 'O que são servidores DNS?',
+  'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registroBr} ou {goDaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
+  'page--community-domain-create.step-dns-servers.subtitle.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
   'page--community-domain-create.step-dns-servers.change-later-button.text': 'Trocar depois',
   'page--community-domain-create.step-dns-servers.button.text': 'Continuar',
 

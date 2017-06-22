@@ -6,6 +6,8 @@ import { Button } from '~client/ux/components'
 import * as dnsMessages from '~client/community/notifications/dns'
 import { Steps, Step } from '~client/steps'
 import { DomainStep } from '~client/community/components/dns'
+import { Preformatted } from '~client/components/markdown'
+import { Title, Subtitle } from '~client/components/title'
 import * as paths from '~client/paths'
 
 var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
@@ -118,13 +120,19 @@ class Page extends Component {
           <Step
             stepComponent={DomainStep}
             title={intl.formatMessage({
-              id: 'page--community-domain-create.step-dns-servers.title',
+              id: 'page--community-domain-create.step-dns-servers.step-title',
               defaultMessage: 'Altere os servidores do seu provedor DNS'
             })}
           >
-            <p>
+            <Title size='2'>
               <FormattedMessage
-                id='page--community-domain-create.step-dns-servers.first-paragraph'
+                id='page--community-domain-create.step-dns-servers.title'
+                defaultMessage='O que são servidores DNS?'
+              />
+            </Title>
+            <Subtitle>
+              <FormattedMessage
+                id='page--community-domain-create.step-dns-servers.subtitle.first-paragraph'
                 defaultMessage={
                   'Os Servidores DNS são endereços utilizados pelas organizações de registro de ' +
                   'domínios como {registroBr} ou {goDaddy}, para identificarem em qual ' +
@@ -135,26 +143,24 @@ class Page extends Component {
                   goDaddy: <a href='https://br.godaddy.com'>godaddy.com</a>
                 }}
               />
-            </p>
-            <p>
+              <br /><br />
               <FormattedMessage
-                id='page--community-domain-create.step-dns-servers.second-paragraph'
+                id='page--community-domain-create.step-dns-servers.subtitle.second-paragraph'
                 defaultMessage={
                   'Complete a ativação do domínio alterando os servidores DNS, onde o domínio ' +
                   'foi registrado, para os endereços abaixo:'
                 }
               />
-            </p>
-            <br />
+            </Subtitle>
             {
               this.state.dns &&
-              this.state.dns.delegation_set_servers &&
-              this.state.dns.delegation_set_servers.map((server, index) => (
-                <p key={`server-${index}`}>
-                  {server}
-                </p>
-              ))
-            }
+              this.state.dns.delegation_set_servers && (
+                <Preformatted>
+                  {this.state.dns.delegation_set_servers.map(
+                    (server, index) => !index ? server : `\n${server}`
+                  )}
+                </Preformatted>
+            )}
             <div className={styles.actionButtons}>
               <span style={{ marginRight: '1rem' }}>
                 <Button

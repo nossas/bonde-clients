@@ -11,9 +11,9 @@ export default {
 
   // component community subdomain preview and form
   // routepath: /community/domain
-  'community.components--subdomain.label.name': 'Name',
-  'community.components--subdomain.label.record-type': 'Record type',
-  'community.components--subdomain.label.value': 'Value',
+  'community.components--subdomain-preview-header.name': 'Name',
+  'community.components--subdomain-preview-header.record-type': 'Record type',
+  'community.components--subdomain-preview-header.value': 'Value',
   'community.components--subdomain.form.submit-button': 'Add',
   'community.components--domain.preview.label.domain': 'Domain',
   'community.page--domain-list.header.dns-records': 'DNS records',

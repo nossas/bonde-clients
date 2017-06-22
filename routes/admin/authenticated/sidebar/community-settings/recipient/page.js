@@ -6,6 +6,7 @@ import { Warning } from '~client/components/notify'
 import { FormGroup, FormControl, ControlLabel, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { getCodeBanks } from '~client/community/utils'
+import { Title, Subtitle } from '~client/components/title'
 import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const CommunitySettingsRecipientPage = ({
@@ -22,13 +23,13 @@ const CommunitySettingsRecipientPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
-    <h2 className='mt0'>
+    <Title size='2' className='mt0'>
       <FormattedMessage
         id='page--community-recipient.title'
         defaultMessage='Agendamento dos Saques'
       />
-    </h2>
-    <h5>
+    </Title>
+    <Subtitle>
       <FormattedMessage
         id='page--community-recipient.subtitle'
         defaultMessage={
@@ -40,7 +41,7 @@ const CommunitySettingsRecipientPage = ({
           'e assim por diante.'
         }
       />
-    </h5>
+    </Subtitle>
 
     <div className='flex'>
       <FormGroup {...transferInterval} controlId='transferIntervalId' style={{ width: 190 }}>
@@ -129,18 +130,18 @@ const CommunitySettingsRecipientPage = ({
 
 
     <div className='section'>
-      <h2>
+      <Title size='2'>
         <FormattedMessage
           id='page--community-recipient.section--account.title'
           defaultMessage='Conta bancária'
         />
-      </h2>
-      <h5>
+      </Title>
+      <Subtitle>
         <FormattedMessage
           id='page--community-recipient.section--account.subtitle'
           defaultMessage='As doações só serão recebidas após o preenchimento dos dados bancários.'
         />
-      </h5>
+      </Subtitle>
       <Warning
         title={
           <FormattedMessage
