@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from '~client/components/forms'
+import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { Info, Warning } from '~client/components/notify'
 
 const CommunitySettingsMailchimpPage = ({
   fields: {
     mailchimp_api_key: mailchimpApiKey,
-    mailchimp_list_id: mailchimpListId
+    mailchimp_list_id: mailchimpListId,
+    mailchimp_group_id: mailchimpGroupId
   },
   location,
   intl,
@@ -47,21 +48,21 @@ const CommunitySettingsMailchimpPage = ({
           defaultMessage='Mailchimp API Key'
         />
       </ControlLabel>
-      <HelpBlock>
-        <b>
+      <Info
+        title={
           <FormattedMessage
             id='page--community-mailchimp.form.api-key.helper-text.title'
-            defaultMessage='Onde buscar essa informação?'
+            defaultMessage='Onde acho essa informação?'
           />
-        </b>
-        <br />
-        <ol>
+        }
+      >
+        <ol style={{ paddingLeft: '1rem', marginBottom: 5 }}>
           <li>
             <FormattedMessage
               id='page--community-mailchimp.form.api-key.helper-text.step-01'
               defaultMessage={
-                'Após fazer o login como administrador no mailchimp, ' +
-                'clique no seu nome de usuário. Surgirá um menu, clique na opção {accountStrong}.'
+                'No canto superior esquerdo, clique no seu nome de usuário. ' +
+                'Em seguida um menu surgirá. Clique na opção {accountStrong}.'
               }
               values={{ accountStrong: <b>account</b> }}
             />
@@ -89,7 +90,7 @@ const CommunitySettingsMailchimpPage = ({
             />
           </li>
         </ol>
-      </HelpBlock>
+      </Info>
       <FormControl
         type='text'
         placeholder={intl.formatMessage({
@@ -106,32 +107,25 @@ const CommunitySettingsMailchimpPage = ({
           defaultMessage='Mailchimp ID da lista'
         />
       </ControlLabel>
-      <HelpBlock>
-        <b>
+      <Info
+        title={
           <FormattedMessage
-            id='page--community-mailchimp.form.list-id.helper-text.title'
-            defaultMessage='Onde buscar essa informação?'
+            id='page--community-mailchimp.form.api-key.helper-text.title'
+            defaultMessage='Onde acho essa informação?'
           />
-        </b>
-        <ol>
+        }
+      >
+        <ol style={{ paddingLeft: '1rem', marginBottom: 5 }}>
           <li>
             <FormattedMessage
               id='page--community-mailchimp.form.list-id.helper-text.step-01'
               defaultMessage={
-                'Após fazer o login como administrador no mailchimp, clique no seu ' +
-                'nome de usuário. Surgirá um menu, clique na opção {listStrong}.'
-              }
-              values={{ listStrong: <b>List</b> }}
-            />
-          </li>
-          <li>
-            <FormattedMessage
-              id='page--community-mailchimp.form.list-id.helper-text.step-02'
-              defaultMessage={
-                'Selecione a lista correspondente e siga os passos: ' +
+                'Siga os passos: {listStrong} (no menu) > ' +
+                '(Selecione a lista de sua escolha) > ' +
                 '{settingsStrong} > {listAndDefaultsStrong}'
               }
               values={{
+                listStrong: <b>List</b>,
                 settingsStrong: <b>Settings</b>,
                 listAndDefaultsStrong: <b>Lists and Defaults</b>
               }}
@@ -139,7 +133,7 @@ const CommunitySettingsMailchimpPage = ({
           </li>
           <li>
             <FormattedMessage
-              id='page--community-mailchimp.form.list-id.helper-text.step-03'
+              id='page--community-mailchimp.form.list-id.helper-text.step-02'
               defaultMessage={
                 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, ' +
                 'abaixo do título {listIdStrong}'
@@ -150,12 +144,28 @@ const CommunitySettingsMailchimpPage = ({
             />
           </li>
         </ol>
-      </HelpBlock>
+      </Info>
       <FormControl
         type='text'
         placeholder={intl.formatMessage({
           id: 'page--community-mailchimp.form.list-id.placeholder',
           defaultMessage: 'Insira aqui o "ID da lista"'
+        })}
+      />
+    </FormGroup>
+
+    <FormGroup controlId='groupId' {...mailchimpGroupId}>
+      <ControlLabel>
+        <FormattedMessage
+          id='page--community-mailchimp.form.group-id.label'
+          defaultMessage='Mailchimp ID do grupo'
+        />
+      </ControlLabel>
+      <FormControl
+        type='text'
+        placeholder={intl.formatMessage({
+          id: 'page--community-mailchimp.form.group-id.placeholder',
+          defaultMessage: 'Insira aqui o "ID do grupo"'
         })}
       />
     </FormGroup>
@@ -166,6 +176,7 @@ CommunitySettingsMailchimpPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
     mailchimp_list_id: PropTypes.object.isRequired,
+    mailchimp_group_id: PropTypes.object.isRequired
   }).isRequired,
   // redux-form required props
   submit: PropTypes.func.isRequired,
