@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
+import { FormGroup, FormControl, ControlLabel, HelpBlock } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { Info, Warning } from '~client/components/notify'
 
@@ -48,21 +48,21 @@ const CommunitySettingsMailchimpPage = ({
           defaultMessage='Mailchimp API Key'
         />
       </ControlLabel>
-      <Info
-        title={
+      <HelpBlock>
+        <b>
           <FormattedMessage
             id='page--community-mailchimp.form.api-key.helper-text.title'
-            defaultMessage='Onde acho essa informação?'
+            defaultMessage='Onde buscar essa informação?'
           />
-        }
-      >
-        <ol style={{ paddingLeft: '1rem', marginBottom: 5 }}>
+        </b>
+        <br />
+        <ol>
           <li>
             <FormattedMessage
               id='page--community-mailchimp.form.api-key.helper-text.step-01'
               defaultMessage={
-                'No canto superior esquerdo, clique no seu nome de usuário. ' +
-                'Em seguida um menu surgirá. Clique na opção {accountStrong}.'
+                'Após fazer o login como administrador no mailchimp, ' +
+                'clique no seu nome de usuário. Surgirá um menu, clique na opção {accountStrong}.'
               }
               values={{ accountStrong: <b>account</b> }}
             />
@@ -90,7 +90,7 @@ const CommunitySettingsMailchimpPage = ({
             />
           </li>
         </ol>
-      </Info>
+      </HelpBlock>
       <FormControl
         type='text'
         placeholder={intl.formatMessage({
@@ -110,7 +110,7 @@ const CommunitySettingsMailchimpPage = ({
       <Info
         title={
           <FormattedMessage
-            id='page--community-mailchimp.form.api-key.helper-text.title'
+            id='page--community-mailchimp.form.list-id.helper-text.title'
             defaultMessage='Onde acho essa informação?'
           />
         }
