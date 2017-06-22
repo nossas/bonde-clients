@@ -3,7 +3,7 @@ import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
-import { Box, Info } from '~client/components/notify'
+import { Info, Warning } from '~client/components/notify'
 
 const CommunitySettingsMailchimpPage = ({
   fields: {
@@ -16,16 +16,30 @@ const CommunitySettingsMailchimpPage = ({
   ...formProps
 }) => (
   <SettingsForm {...formProps}>
-    <Box title='Informação'>
+    <Warning
+      title={
+        <FormattedMessage
+          id='page--community-mailchimp.warning.title'
+          defaultMessage='Atenção'
+        />
+      }
+    >
       <FormattedMessage
-        id='page--community-mailchimp.helper-text'
+        id='page--community-mailchimp.warning.content.first-line'
         defaultMessage={
-          'A integração com o mailchimp é feita através da criação de segmentos de cada ' +
-          'widget criada no BONDE. Adotamos o seguinte padrão no nome dos segmentos: ' +
-          'M999P999, M999F999, M999D999'
+          'Configure a integração com o mailchimp para que seja possível a criação ' +
+          'de segmentos dos usuários que interagiram com o sua mobilização nele.'
         }
       />
-    </Box>
+      <br />
+      <FormattedMessage
+        id='page--community-mailchimp.warning.content.second-line'
+        defaultMessage={
+          'Adotamos o seguinte padrão no nome dos segmentos: ' +
+          'M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)'
+        }
+      />
+    </Warning>
 
     <FormGroup controlId='apiKeyId' {...mailchimpApiKey}>
       <ControlLabel>

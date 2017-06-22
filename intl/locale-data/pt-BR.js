@@ -291,7 +291,9 @@ servidor-03.dominio.com`,
   // page community mailchimp
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
-  'page--community-mailchimp.helper-text': 'A integração com o mailchimp é feita através da criação de segmentos de cada widget criada no BONDE. Adotamos o seguinte padrão no nome dos segmentos: M999P999, M999F999, M999D999',
+  'page--community-mailchimp.warning.title': 'Atenção',
+  'page--community-mailchimp.warning.content.first-line': 'Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.',
+  'page--community-mailchimp.warning.content.second-line': 'Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)',
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.api-key.helper-text.title': 'Onde acho essa informação?',
   'page--community-mailchimp.form.api-key.helper-text.step-01': 'No canto superior esquerdo, clique no seu nome de usuário. Em seguida um menu surgirá. Clique na opção {accountStrong}.',
