@@ -10,6 +10,9 @@ from '~routes/admin/authenticated/sidebar/community-settings/recipient/page'
 // Reapop
 import { reducer as notificationsReducer } from 'reapop'
 
+// Apollo
+import { client } from './store'
+
 // Application
 import auth from '~client/account/redux/reducers'
 import wait from '~client/components/await/redux/reducers'
@@ -36,6 +39,7 @@ export default function createReducer (asyncReducers) {
       recurringForm,
       communityRecipientForm
     }),
+    apollo: client.reducer(),
     notifications: notificationsReducer(),
     auth,
     wait,

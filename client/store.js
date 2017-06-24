@@ -53,6 +53,8 @@ export function configureStore (initialState, thunkExtraArgument) {
     })
   )
 
+  middlewares.push(client.middleware())
+
   let store = createStore(
     createReducer(),
     initialState,
