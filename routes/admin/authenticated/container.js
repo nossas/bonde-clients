@@ -14,14 +14,14 @@ class CurrentUserContainer extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps (nextProps, nextState) {
     if (!this.props.data.currentUser && nextProps.data.currentUser) {
       this.props.load(nextProps.data.currentUser)
     }
   }
 
   render () {
-    const { children, data: { loading, currentUser }  } = this.props
+    const { children, data: { loading, currentUser } } = this.props
     return (
       <div className='current-user-container'>
         {loading && !currentUser ? <Loading /> : (
@@ -36,6 +36,10 @@ const mapStateToProps = state => ({
   user: AuthSelectors(state).getUser()
 })
 
-export default graphql(fetchCurrentUser)(
+export default graphql(fetchCurrentUser, {
+  options: {
+    fetchPolicy: 'network-only'
+  }
+})(
   connect(mapStateToProps, { load })(CurrentUserContainer)
 )
