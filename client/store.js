@@ -39,7 +39,10 @@ networkInterface.use([{
   }
 }])
 
-export const client = new ApolloClient({ networkInterface })
+export const client = new ApolloClient({
+  ssrMode: true,
+  networkInterface
+})
 
 export function configureStore (initialState, thunkExtraArgument) {
   middlewares.push(
