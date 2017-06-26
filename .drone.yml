@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: gabrielrtakeda/node-yarn:8.1.0
+    image: node:latest
     commands:
       - yarn
       - yarn test
