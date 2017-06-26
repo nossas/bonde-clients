@@ -19,7 +19,7 @@ const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFi
         file={block.bg_image}
         progress={progress}
         onProgress={progress => onUploadFile(BLOCK_UPLOAD_KEY, progress)}
-        onRemove={() => onChangeBackground({ ...block, bg_image: undefined })}
+        onRemove={() => onChangeBackground({ ...block, bg_image: '' })}
         onFinish={file => {
           onUploadFile(BLOCK_UPLOAD_KEY)
           onChangeBackground({...block, bg_image: file})
