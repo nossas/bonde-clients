@@ -1,4 +1,4 @@
-FROM gabrielrtakeda/node-yarn:8.1.0
+FROM node:latest
 MAINTAINER Nossas <tech@nossas.org>
 
 ARG AWS_BUCKET=bonde-assets-staging
@@ -16,8 +16,8 @@ ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG
 RUN mkdir /code
 WORKDIR /code
 
-COPY package.json yarn.lock /code/
-RUN yarn
+COPY package.json /code/
+RUN npm install
 COPY . /code
 
 RUN touch .env
@@ -31,8 +31,8 @@ RUN AWS_BUCKET=$AWS_BUCKET \
     SENTRY_DSN_PUBLIC=$SENTRY_DSN_PUBLIC \
     GRAPHQL_URL=$GRAPHQL_URL \
     NODE_ENV=$NODE_ENV \
-    yarn heroku-postbuild
+    npm run heroku-postbuild
 
-CMD ["yarn", "start:prod"]
+CMD ["npm", "run", "start:prod"]
 
 EXPOSE 5001

@@ -35,7 +35,7 @@ build
 assets.json
 .nyc_output
 coverage
-.env
+.env*
 .yarnclean
 webpack-assets.json
 static
