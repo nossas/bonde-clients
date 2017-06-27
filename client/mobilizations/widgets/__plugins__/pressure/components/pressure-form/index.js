@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
-
-// Global module dependencies
 import { isValidEmail } from '~client/utils/validation-helper'
-
-// Current module dependencies
-if (require('exenv').canUseDOM) require('./index.scss')
-
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
+
+if (require('exenv').canUseDOM) require('./index.scss')
 
 // TODO: Reusable Input
 const controlClassname = 'px3 py1'
@@ -33,35 +29,35 @@ class PressureForm extends Component {
   }
 
   validate () {
-    const { widget: { settings: { show_city: showCity } } } = this.props
+    const { targetList, widget: { settings: { show_city: showCity } } } = this.props
     const requiredMsg = 'Preenchimento obrigatório'
     const errors = { valid: true }
+
     if (!this.state.email) {
-      errors.valid = false
       errors.email = requiredMsg
     } else if (!isValidEmail(this.state.email)) {
-      errors.valid = false
       errors.email = 'E-mail inválido'
+    } else if (targetList.some(target => target.match(`<${this.state.email}>`))) {
+      errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
     }
     if (!this.state.name) {
-      errors.valid = false
       errors.name = requiredMsg
     }
     if (!this.state.lastname) {
-      errors.valid = false
       errors.lastname = requiredMsg
     }
     if (showCity === 'city-true' && !this.state.city) {
-      errors.valid = false
       errors.city = requiredMsg
     }
     if (!this.state.subject) {
-      errors.valid = false
       errors.subject = requiredMsg
     }
     if (!this.state.body) {
-      errors.valid = false
       errors.body = requiredMsg
+    }
+
+    if (Object.keys(errors).length > 1) {
+      errors.valid = false
     }
     return errors
   }

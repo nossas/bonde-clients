@@ -1077,6 +1077,25 @@ servidor-03.dominio.com`,
   //   - (public) /
   'form-widget.components--tell-a-friend.message': 'Formulário submetido com sucesso!',
 
+  // component pressure widget form
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-form/index.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/edit
+  //   - (public) /
+  'pressure-widget.components--pressure-form.validation.required': 'Preenchimento obrigatório',
+  'pressure-widget.components--pressure-form.email.label': 'E-mail',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
+  'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'E-mail inválido',
+  'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da mobilização.',
+  'pressure-widget.components--pressure-form.name.label': 'Nome',
+  'pressure-widget.components--pressure-form.name.placeholder': 'Insira seu nome',
+  'pressure-widget.components--pressure-form.lastname.label': 'Sobrenome',
+  'pressure-widget.components--pressure-form.lastname.placeholder': 'Insira seu sobrenome',
+  'pressure-widget.components--pressure-form.city.label': 'Cidade',
+  'pressure-widget.components--pressure-form.city.placeholder': 'Insira sua cidade',
+  'pressure-widget.components--pressure-form.subject.label': 'Assunto',
+  'pressure-widget.components--pressure-form.body.label': 'Corpo do e-mail',
+
   // component pressure widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
   // routepath:

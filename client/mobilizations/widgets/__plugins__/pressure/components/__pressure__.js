@@ -124,6 +124,7 @@ export class Pressure extends Component {
               subject={pressureSubject}
               body={pressureBody}
               onSubmit={::this.handleSubmit}
+              targetList={this.getTargetList()}
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount
