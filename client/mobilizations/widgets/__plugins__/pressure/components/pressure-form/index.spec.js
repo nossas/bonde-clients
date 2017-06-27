@@ -6,10 +6,11 @@ import { PressureForm } from '~client/mobilizations/widgets/__plugins__/pressure
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-form', () => {
   let wrapper
+  const targets = ['foo@bar.com', 'bar@foo.com', 'foo@baz.com']
   const widget = { settings: {} }
 
   beforeEach(() => {
-    wrapper = mount(<PressureForm widget={widget} />)
+    wrapper = mount(<PressureForm widget={widget} targetList={targets} />)
   })
 
   it('should render ok by default', () => {
