@@ -33,6 +33,7 @@ class ColorPickerButton extends React.Component {
         </button>
         <div className='fixed z5'>
           <ColorPicker
+            theme={this.props.theme}
             showColorPicker={this.state.show}
             color={this.state.color}
             onChangeColor={this.onChangeColor.bind(this)}
@@ -43,10 +44,11 @@ class ColorPickerButton extends React.Component {
   }
 }
 
-const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFile, onCancelEdit, update }) => (
+const BlockChangeBackground = ({ mobilization, block, onChangeBackground, progress, onUploadFile, onCancelEdit, update }) => (
   <div className='absolute col-12 top-0 left-0 bg-darken-4 z5'>
     <div className='flex flex-wrap'>
       <ColorPickerButton
+        theme={mobilization.color_scheme}
         onChange={color => {
           onChangeBackground({ ...block, bg_class: color })
         }}
@@ -93,6 +95,7 @@ const BlockChangeBackground = ({ block, onChangeBackground, progress, onUploadFi
 BlockChangeBackground.propTypes = {
   block: PropTypes.object.isRequired,
   // Injected by redux
+  mobilization: PropTypes.object.isRequired,
   update: PropTypes.func.isRequired,
   onChangeBackground: PropTypes.func,
   onCancelEdit: PropTypes.func,

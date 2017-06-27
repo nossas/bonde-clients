@@ -7,6 +7,7 @@ import BlockChangeBackground from '~client/mobrender/components/block-change-bac
 describe('~client/mobrender/components/block-change-background', () => {
   let changeBackground
   const props = {
+    mobilization: { id: 1, color_scheme: 'meurio' },
     block: { id: 1, bg_class: 'bg-1', bg_image: 'tmp://bg.png' },
     onCancelEdit: () => {}
   }

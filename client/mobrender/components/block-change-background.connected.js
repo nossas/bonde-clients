@@ -5,7 +5,8 @@ import { asyncUpdateBlock, handleChangeBackground, handleCancelEdit, handleUploa
 import BlockChangeBackground, { BLOCK_UPLOAD_KEY } from './block-change-background'
 
 const mapStateToProps = (state, props) => ({
-  progress: Selectors(state, props).getUploadProgress(BLOCK_UPLOAD_KEY)
+  progress: Selectors(state, props).getUploadProgress(BLOCK_UPLOAD_KEY),
+  mobilization: Selectors(state, props).getMobilization()
 })
 
 const mapActionsToProps = {
