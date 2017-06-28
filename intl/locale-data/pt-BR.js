@@ -643,6 +643,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--settings-menu.title': 'Configure sua mobilização',
   'mobilizations.components--settings-menu.tabs.info': 'Informações básicas',
   'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
+  'mobilizations.components--settings-menu.tabs.metrics': 'Métricas',
   'mobilizations.components--settings-menu.tabs.domain': 'Domínio',
 
   // page mobilizations settings analytics

@@ -19,4 +19,5 @@ export const cityMobilization = id => `/mobilizations/${id}/city`
 export const cityNewMobilization = id => `/mobilizations/${id}/cityNew`
 export const sharingMobilization = id => `/mobilizations/${id}/sharing`
 export const analyticsMobilization = id => `/mobilizations/${id}/analytics`
+export const metricsMobilization = id => `/mobilizations/${id}/metrics`
 export const customDomainMobilization = id => `/mobilizations/${id}/customDomain`
