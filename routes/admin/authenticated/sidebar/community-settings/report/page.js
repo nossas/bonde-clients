@@ -38,7 +38,7 @@ const CommunitySettingsReportPage = ({
       <Title className='mt0'>
         Métricas
       </Title>
-      <MetricsCommunity communityId={9} />
+      <MetricsCommunity communityId={community.id} />
     </div>
 
     <div className='px2'>
