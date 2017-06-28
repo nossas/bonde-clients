@@ -11,13 +11,11 @@ class ColorPickerButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: false,
-      color: { r: 255, g: 255, b: 255, a: 0.8 }
+      show: false
     }
   }
 
   onChangeColor(color) {
-    this.setState({ color: color.rgb })
     this.props.onChange(JSON.stringify(color.rgb))
   }
 
@@ -35,7 +33,7 @@ class ColorPickerButton extends React.Component {
           <ColorPicker
             theme={this.props.theme}
             showColorPicker={this.state.show}
-            color={this.state.color}
+            color={this.props.color}
             onChangeColor={this.onChangeColor.bind(this)}
           />
         </div>
@@ -44,10 +42,22 @@ class ColorPickerButton extends React.Component {
   }
 }
 
+const rgba = block => {
+  if (block.bg_class) {
+    try {
+      const rgba = JSON.parse(block.bg_class)
+      return rgba
+    } catch (ex) {
+      // Silent error because use className
+    }
+  }
+}
+
 const BlockChangeBackground = ({ mobilization, block, onChangeBackground, progress, onUploadFile, onCancelEdit, update }) => (
   <div className='absolute col-12 top-0 left-0 bg-darken-4 z5'>
     <div className='flex flex-wrap'>
       <ColorPickerButton
+        color={rgba(block)}
         theme={mobilization.color_scheme}
         onChange={color => {
           onChangeBackground({ ...block, bg_class: color })
