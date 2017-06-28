@@ -7,3 +7,7 @@ export const slugify = (text) => slug(text, { lower: true })
   .replace(/^-+/, '')       // Trim - from start of text
   .replace(/-+$/, '')      // Trim - from end of text
 
+
+export const formatCurrency = value => (
+  Number(parseFloat(value).toFixed(2)).toLocaleString('pt')
+)

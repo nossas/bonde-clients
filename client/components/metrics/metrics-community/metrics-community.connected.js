@@ -1,5 +1,5 @@
 import { graphql } from 'react-apollo'
-import MetricsCommunity from './metrics-community'
+import { MetricsDataTable } from '../components'
 import MetricsCommunityGraphQL from './metrics-community.graphql'
 
-export default graphql(MetricsCommunityGraphQL)(MetricsCommunity)
+export default graphql(MetricsCommunityGraphQL)(MetricsDataTable)

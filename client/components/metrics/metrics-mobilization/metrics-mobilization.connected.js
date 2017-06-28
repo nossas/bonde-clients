@@ -1,5 +1,5 @@
 import { graphql } from 'react-apollo'
-import MetricsMobilization from './metrics-mobilization'
+import { MetricsDataTable } from '../components'
 import MetricsMobilizationGraphQL from './metrics-mobilization.graphql'
 
-export default graphql(MetricsMobilizationGraphQL)(MetricsMobilization)
+export default graphql(MetricsMobilizationGraphQL)(MetricsDataTable)

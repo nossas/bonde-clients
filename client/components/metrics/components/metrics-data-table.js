@@ -1,4 +1,5 @@
 import React from 'react'
+import * as stringHelper from '~client/utils/string-helper'
 
 const Value = ({ loading, value }) => (
   loading
@@ -6,12 +7,12 @@ const Value = ({ loading, value }) => (
     : <b>{value}</b>
 )
 
-const MetricsMobilization = ({ data: { loading, ...data } }) => (
+const MetricsDataTable = ({ data: { loading, ...data } }) => (
   <table>
     <tr>
       <td>Total de ativistas únicos:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalSubscriptionDonationsAmountLastMonth} />
+        <Value loading={loading} value={data.totalUniqueActivists} />
       </td>
     </tr>
     <tr>
@@ -35,46 +36,67 @@ const MetricsMobilization = ({ data: { loading, ...data } }) => (
     <tr>
       <td>Valor total de devolução das doações coletadas até agora:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalDonationsChargedBackAmount} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsChargedBackAmount)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total de doações coletadas até agora:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalDonationsPaidAmount} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsPaidAmount)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total de reembolso das doações coletadas até agora:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalDonationsRefundedAmount} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsRefundedAmount)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total das doações recusadas até agora:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalDonationsRefusedAmount} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsRefusedAmount)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total das doações aguardando pagamento até agora:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalDonationsWaitingPaymentAmount} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsWaitingPaymentAmount)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total das doações recorrentes nos últimos 30 dias:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalUniqueActivists} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalSubscriptionDonationsAmountLastMonth)}`}
+        />
       </td>
     </tr>
     <tr>
       <td>Valor total das doações únicas nos últimos 30 dias:</td>
       <td className='px2'>
-        <Value loading={loading} value={data.totalUniqueDonationsAmountLastMonth} />
+        <Value
+          loading={loading}
+          value={`R$ ${stringHelper.formatCurrency(data.totalUniqueDonationsAmountLastMonth)}`}
+        />
       </td>
     </tr>
   </table>
 )
 
-export default MetricsMobilization
+export default MetricsDataTable
