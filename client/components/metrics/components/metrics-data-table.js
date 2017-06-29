@@ -2,8 +2,9 @@ import React from 'react'
 import format from 'format-number'
 import { MetricsCard } from '~client/components/metrics/components'
 
-const currency = format({ prefix: 'R$ ', integerSeparator: '.', decimal: ',', padRight: 2 })
-const number = format({ integerSeparator: '.', decimal: ',' })
+const formatOptions = { integerSeparator: '.', decimal: ',' }
+const currency = format({ ...formatOptions, prefix: 'R$ ', padRight: 2, truncate: 2 })
+const number = format(formatOptions)
 
 const Value = ({ loading, value }) => (
   loading
