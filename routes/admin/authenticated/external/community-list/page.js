@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
 import { Background } from '~client/components/layout'
 import * as paths from '~client/paths'
+import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
 
@@ -24,8 +25,19 @@ class CommunityListPage extends Component {
     return isLoading || user === undefined ? <Loading /> : (
       <Background image={image} alignment={{ x: 'center', y: 'top' }}>
         <div className='col-12'>
-          <h1>Olá {user.firstName || user.first_name},</h1>
-          <h2>Escolha uma das suas comunidades</h2>
+          <h1>
+            <FormattedMessage
+              id='page--community-list.title'
+              defaultMessage='Olá {name},'
+              values={{ name: user.firstName || user.first_name }}
+            />
+          </h1>
+          <h2>
+            <FormattedMessage
+              id='page--community-list.subtitle'
+              defaultMessage='Escolha uma das suas comunidades'
+            />
+          </h2>
           {isLoaded ? (
             <div className='rounded bg-white'>
               {communities && communities.map((community, key) => (
@@ -38,7 +50,20 @@ class CommunityListPage extends Component {
             </div>
           ) : null}
           <p className='white center'>
-            ou <Link to={paths.communityAdd()}>Crie uma nova comunidade</Link>
+            <FormattedMessage
+              id='page--community-list.or'
+              defaultMessage='or {link}'
+              values={{
+                link: (
+                  <Link to={paths.communityAdd()}>
+                    <FormattedMessage
+                      id='page--community-list.new'
+                      defaultMessage='Crie uma nova comunidade'
+                    />
+                  </Link>
+                )
+              }}
+            />
           </p>
         </div>
       </Background>
