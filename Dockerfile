@@ -16,8 +16,8 @@ ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG
 RUN mkdir /code
 WORKDIR /code
 
-COPY package.json /code/
-RUN npm install
+COPY package.json yarn.lock /code/
+RUN yarn
 COPY . /code
 
 RUN touch .env
@@ -31,8 +31,8 @@ RUN AWS_BUCKET=$AWS_BUCKET \
     SENTRY_DSN_PUBLIC=$SENTRY_DSN_PUBLIC \
     GRAPHQL_URL=$GRAPHQL_URL \
     NODE_ENV=$NODE_ENV \
-    npm run heroku-postbuild
+    yarn heroku-postbuild
 
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "start:prod"]
 
 EXPOSE 5001
