@@ -132,6 +132,7 @@ export default {
   // routepath: /community
   'page--community-list.title': 'Olá {userFirstName},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
+  'page--community-list.or': 'ou {link}',
   'page--community-list.new': 'Crie uma nova comunidade',
 
   // component community settings menu
