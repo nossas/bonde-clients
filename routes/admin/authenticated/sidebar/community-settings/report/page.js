@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
 import { ForceDownloadViaAjax } from '~client/community/components'
+import { MetricsCommunity } from '~client/components/metrics'
+import { Title } from '~client/components/title'
 
 const SectionButton = ({ sectionTitle, helperText, buttonTitle, onClick, wrapperStyle }) => (
   <div className='col md-col-12 lg-col-4 px2'>
@@ -33,6 +34,16 @@ const CommunitySettingsReportPage = ({
   asyncDownloadDonations
 }) => (
   <div className='mxn2'>
+    <div className='col col-12 px2 mb3'>
+      <Title className='mt0'>
+        Métricas
+      </Title>
+      <MetricsCommunity communityId={community.id} />
+    </div>
+
+    <div className='px2'>
+      <Title>Relatórios</Title>
+    </div>
     <SectionButton
       sectionTitle='RELATÓRIO DE DOAÇÕES'
       helperText='Clique no botão abaixo para baixar o relatório de doações da comunidade.'

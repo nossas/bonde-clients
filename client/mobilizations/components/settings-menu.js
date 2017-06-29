@@ -9,6 +9,7 @@ const SettingsMenu = ({ mobilization, location }) => {
   const basicsMobilizationPath = paths.basicsMobilization(mobilization.id)
   const sharingMobilizationPath = paths.sharingMobilization(mobilization.id)
   const analyticsMobilizationPath = paths.analyticsMobilization(mobilization.id)
+  const metricsMobilizationPath = paths.metricsMobilization(mobilization.id)
   const customDomainMobilizationPath = paths.customDomainMobilization(mobilization.id)
 
   return (
@@ -28,6 +29,11 @@ const SettingsMenu = ({ mobilization, location }) => {
           text='Google Analytics'
           path={analyticsMobilizationPath}
           isActive={analyticsMobilizationPath === location.pathname}
+        />
+        <Tab
+          text='Métricas'
+          path={metricsMobilizationPath}
+          isActive={metricsMobilizationPath === location.pathname}
         />
         <Tab
           text='Domínio'

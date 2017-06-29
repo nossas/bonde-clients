@@ -7,6 +7,7 @@ import BlockChangeBackground from '~client/mobrender/components/block-change-bac
 describe('~client/mobrender/components/block-change-background', () => {
   let changeBackground
   const props = {
+    mobilization: { id: 1, color_scheme: 'meurio' },
     block: { id: 1, bg_class: 'bg-1', bg_image: 'tmp://bg.png' },
     onCancelEdit: () => {}
   }
@@ -20,23 +21,27 @@ describe('~client/mobrender/components/block-change-background', () => {
   })
 
   it('should render block-color-picker and file-uploader', () => {
-    expect(changeBackground.find('BasicColorPicker').length).to.equal(1)
+    expect(changeBackground.find('ColorPickerButton').length).to.equal(1)
     expect(changeBackground.find('FileUploader').length).to.equal(1)
   })
 
-  describe('render color picker', () => {
-    it('should pass block.bg_class to selected in color-picker', () => {
-      const colorPicker = changeBackground.find('BasicColorPicker')
-      expect(colorPicker.props().selected).to.equal(props.block.bg_class)
+  describe('render color picker button', () => {
+    it('should pass color_scheme to theme in colorpicker', () => {
+      const colorPicker = changeBackground.find('ColorPickerButton')
+      expect(colorPicker.props().theme).to.equal(props.mobilization.color_scheme)
     })
 
     it('should call onChangeBackground with block updated when click color-picker', () => {
       let result
       changeBackground.setProps({ onChangeBackground: block => { result = block } })
-      const item = changeBackground.find('BasicColorPickerItem').at(1)
-      item.props().onSelectColor(item.props().color)
-      expect(result).to.deep.equal({...props.block,
-        bg_class: item.props().color
+      const color = JSON.stringify({ r: 255, g: 255, b: 255, a: 1 })
+      changeBackground
+        .find('ColorPickerButton')
+        .props()
+        .onChange(color)
+      expect(result).to.deep.equal({
+        ...props.block,
+        bg_class: color
       })
     })
   })
@@ -52,7 +57,7 @@ describe('~client/mobrender/components/block-change-background', () => {
       changeBackground.setProps({ onChangeBackground: block => { result = block } })
       changeBackground.find('FileUploader').props().onRemove()
       expect(result).to.deep.equal({...props.block,
-        bg_image: undefined
+        bg_image: ''
       })
     })
 
@@ -92,14 +97,14 @@ describe('~client/mobrender/components/block-change-background', () => {
     })
 
     it('should render div wrapper to cancel edit when clicked out navbar', () => {
-      const wrapper = changeBackground.find('div.fixed')
+      const wrapper = changeBackground.find('div.fixed.z3')
       expect(wrapper.props().className).to.contains('fixed top-0 right-0 bottom-0 left-0')
     })
 
     it('should call onCancelEdit when clicked in wrapper', () => {
       let result
       changeBackground.setProps({ onCancelEdit: block => { result = block } })
-      const wrapper = changeBackground.find('div.fixed')
+      const wrapper = changeBackground.find('div.fixed.z3')
       wrapper.simulate('click')
       expect(result).to.deep.equal(props.block)
     })

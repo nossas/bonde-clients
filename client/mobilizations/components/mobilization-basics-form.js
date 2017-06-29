@@ -9,7 +9,7 @@ import { FormRedux, FormGroup, ControlLabel, FormControl } from '~client/compone
 import { SettingsForm } from '~client/ux/components'
 import { Code } from '~client/components/markdown'
 
-const MobilizationBasicsForm = ({
+export const MobilizationBasicsForm = ({
   fields: { name, slug, goal },
   floatSubmit,
   ...formProps

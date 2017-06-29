@@ -27,6 +27,7 @@ export default store => ({
         require('./mobilizations-settings-analytics').default(store),
         require('./mobilizations-settings-basics').default(store),
         require('./mobilizations-settings-domain').default(store),
+        require('./mobilizations-settings-metrics').default(store),
         require('./mobilizations-settings-sharing').default(store),
         require('./templates-choose').default(store),
         require('./templates-choose-custom').default(store),
