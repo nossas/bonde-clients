@@ -37,6 +37,7 @@
     "express": "^4.13.4",
     "express-winston": "^2.3.0",
     "font-awesome": "^4.7.0",
+    "format-number": "^2.0.2",
     "helmet": "^2.3.0",
     "history": "^4.6.0",
     "hpp": "^0.2.0",

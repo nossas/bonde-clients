@@ -1,5 +1,9 @@
 import React from 'react'
-import * as stringHelper from '~client/utils/string-helper'
+import format from 'format-number'
+import { MetricsCard } from '~client/components/metrics/components'
+
+const currency = format({ prefix: 'R$ ', integerSeparator: '.', decimal: ',', padRight: 2 })
+const number = format({ integerSeparator: '.', decimal: ',' })
 
 const Value = ({ loading, value }) => (
   loading
@@ -8,95 +12,136 @@ const Value = ({ loading, value }) => (
 )
 
 const MetricsDataTable = ({ data: { loading, ...data } }) => (
-  <table>
-    <tr>
-      <td>Total de ativistas únicos:</td>
-      <td className='px2'>
-        <Value loading={loading} value={data.totalUniqueActivists} />
-      </td>
-    </tr>
-    <tr>
-      <td>Total de ativistas ativos nos últimos 90 dias:</td>
-      <td className='px2'>
-        <Value loading={loading} value={data.totalUniqueActivistsLast90Days} />
-      </td>
-    </tr>
-    <tr>
-      <td>Total de ações de pressão nos últimos 90 dias:</td>
-      <td className='px2'>
-        <Value loading={loading} value={data.totalActivistsPressureLast90Days} />
-      </td>
-    </tr>
-    <tr>
-      <td>Total de ações de assinatura nos últimos 90 dias:</td>
-      <td className='px2'>
-        <Value loading={loading} value={data.totalActivistsFormEntryLast90Days} />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total de devolução das doações coletadas até agora:</td>
-      <td className='px2'>
-        <Value
+  <div>
+    <div className='clearfix mxn1'>
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#DD2396'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsChargedBackAmount)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total de doações coletadas até agora:</td>
-      <td className='px2'>
-        <Value
+          title='Ativistas'
+          footer={<span>Total de ativistas únicos<br />&nbsp;</span>}
+        >
+          {number(data.totalUniqueActivists)}
+        </MetricsCard>
+      </div>
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#DD2396'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsPaidAmount)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total de reembolso das doações coletadas até agora:</td>
-      <td className='px2'>
-        <Value
+          title='Ativistas'
+          footer={<span>Total de ativistas ativos<br />nos últimos 90 dias</span>}
+        >
+          {number(data.totalUniqueActivistsLast90Days)}
+        </MetricsCard>
+      </div>
+
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#40B4E5'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsRefundedAmount)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total das doações recusadas até agora:</td>
-      <td className='px2'>
-        <Value
+          title='Ações'
+          footer={<span>Total de ações de pressão<br/>nos últimos 90 dias</span>}
+        >
+          {number(data.totalActivistsPressureLast90Days)}
+        </MetricsCard>
+      </div>
+
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#40B4E5'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsRefusedAmount)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total das doações aguardando pagamento até agora:</td>
-      <td className='px2'>
-        <Value
+          title='Ações'
+          footer={<span>Total de ações de assinatura<br />nos últimos 90 dias</span>}
+        >
+          {number(data.totalActivistsFormEntryLast90Days)}
+        </MetricsCard>
+      </div>
+    </div>
+
+    <div className='clearfix mxn1'>
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#00C08A'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalDonationsWaitingPaymentAmount)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total das doações recorrentes nos últimos 30 dias:</td>
-      <td className='px2'>
-        <Value
+          title='Doações'
+          footer='Valor total das doações únicas confirmadas nos últimos 30 dias'
+          contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
+        >
+          {currency(data.totalUniqueDonationsAmountLastMonth)}
+        </MetricsCard>
+      </div>
+
+      <div className='mb2 col col-6 lg-col-3 px1'>
+        <MetricsCard
+          backgroundColor='#00C08A'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalSubscriptionDonationsAmountLastMonth)}`}
-        />
-      </td>
-    </tr>
-    <tr>
-      <td>Valor total das doações únicas nos últimos 30 dias:</td>
-      <td className='px2'>
-        <Value
+          title='Doações'
+          footer='Valor total das doações recorrentes confirmadas nos últimos 30 dias'
+          contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
+        >
+          {currency(data.totalSubscriptionDonationsAmountLastMonth)}
+        </MetricsCard>
+      </div>
+
+      <div className='mb2 col col-12 lg-col-6 px1'>
+        <MetricsCard
+          backgroundColor='#00C08A'
           loading={loading}
-          value={`R$ ${stringHelper.formatCurrency(data.totalUniqueDonationsAmountLastMonth)}`}
-        />
-      </td>
-    </tr>
-  </table>
+          title='Doações'
+          footer={
+            <span>
+              Valor total de doações únicas e recorrentes até agora<br />
+              (confirmadas / aguardando pagamento)
+            </span>
+          }
+          contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
+        >
+          {currency(data.totalDonationsPaidAmount)}
+          {' / '}
+          {currency(data.totalDonationsWaitingPaymentAmount)}
+        </MetricsCard>
+      </div>
+    </div>
+
+    <table>
+      <tbody>
+        {data.totalDonationsChargedBackAmount > 0 && (
+          <tr>
+            <td>
+              Valor total de devolução das doações coletadas até agora:</td>
+            <td className='px2'>
+              <Value
+                loading={loading}
+                value={currency(data.totalDonationsChargedBackAmount)}
+              />
+            </td>
+          </tr>
+        )}
+        {data.totalDonationsRefundedAmount > 0 && (
+          <tr>
+            <td>Valor total de reembolso das doações coletadas até agora:</td>
+            <td className='px2'>
+              <Value
+                loading={loading}
+                value={currency(data.totalDonationsRefundedAmount)}
+              />
+            </td>
+          </tr>
+        )}
+        {data.totalDonationsRefusedAmount > 0 && (
+          <tr>
+            <td>Valor total das doações recusadas até agora:</td>
+            <td className='px2'>
+              <Value
+                loading={loading}
+                value={currency(data.totalDonationsRefusedAmount)}
+              />
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
 )
 
 export default MetricsDataTable
