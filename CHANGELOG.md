@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.10"></a>
+## [0.5.10](https://github.com/nossas/bonde-client/compare/v0.5.8...v0.5.10) (2017-06-29)
+
+
+### Bug Fixes
+
+* **auth:** load current user in authenticated container ([6716857](https://github.com/nossas/bonde-client/commit/6716857))
+* **ci:** staging app container deploy command fix [#706](https://github.com/nossas/bonde-client/issues/706) ([7989c05](https://github.com/nossas/bonde-client/commit/7989c05))
+* **community:** set user role on invitation request fix [#693](https://github.com/nossas/bonde-client/issues/693) ([6786eef](https://github.com/nossas/bonde-client/commit/6786eef))
+* **custom_domain:** change regex to check valid domain [#698](https://github.com/nossas/bonde-client/issues/698) ([9e4679e](https://github.com/nossas/bonde-client/commit/9e4679e))
+* **mobilization:** change background image from block [#703](https://github.com/nossas/bonde-client/issues/703) ([d769db0](https://github.com/nossas/bonde-client/commit/d769db0))
+
+
+### Features
+
+* **account:** enable network-only on fetch current user [#706](https://github.com/nossas/bonde-client/issues/706) ([275fd1b](https://github.com/nossas/bonde-client/commit/275fd1b))
+* **admin:** add bonde favicons close [#682](https://github.com/nossas/bonde-client/issues/682) ([23921c1](https://github.com/nossas/bonde-client/commit/23921c1))
+* **auth:** add handle to request 401 on API Rest [#672](https://github.com/nossas/bonde-client/issues/672) ([0c1dd04](https://github.com/nossas/bonde-client/commit/0c1dd04))
+* **auth:** add handle to request 401 SSR [#672](https://github.com/nossas/bonde-client/issues/672) ([1a9dff4](https://github.com/nossas/bonde-client/commit/1a9dff4))
+* **community:** metrics [#677](https://github.com/nossas/bonde-client/issues/677) ([d009230](https://github.com/nossas/bonde-client/commit/d009230))
+* **components:** title and subtitle to standardize style [#700](https://github.com/nossas/bonde-client/issues/700) ([0f5d87a](https://github.com/nossas/bonde-client/commit/0f5d87a))
+* **custom-domain:** add validation for subdomain [#698](https://github.com/nossas/bonde-client/issues/698) ([16ccde3](https://github.com/nossas/bonde-client/commit/16ccde3))
+* **intl:** community basic info page [#675](https://github.com/nossas/bonde-client/issues/675) ([704ecfd](https://github.com/nossas/bonde-client/commit/704ecfd))
+* **intl:** community mailchimp page [#675](https://github.com/nossas/bonde-client/issues/675) ([4e90ac6](https://github.com/nossas/bonde-client/commit/4e90ac6))
+* **intl:** community recipient page close [#675](https://github.com/nossas/bonde-client/issues/675) ([9313cd1](https://github.com/nossas/bonde-client/commit/9313cd1))
+* **mobilizations:** metrics close [#677](https://github.com/nossas/bonde-client/issues/677) ([eaeb0ee](https://github.com/nossas/bonde-client/commit/eaeb0ee))
+* **mobrender:** add colorpicker from change background [#704](https://github.com/nossas/bonde-client/issues/704) ([e3ac55d](https://github.com/nossas/bonde-client/commit/e3ac55d))
+* **packages:** upgrade slate-editor to v2.6.6 close [#688](https://github.com/nossas/bonde-client/issues/688) ([f0b4fb4](https://github.com/nossas/bonde-client/commit/f0b4fb4))
+* **subscription:** option to cancel the subscription close [#683](https://github.com/nossas/bonde-client/issues/683) ([8ef482a](https://github.com/nossas/bonde-client/commit/8ef482a))
+
+
+
 <a name="0.5.9"></a>
 ## [0.5.9](https://github.com/nossas/bonde-client/compare/v0.5.8...v0.5.9) (2017-06-27)
 
