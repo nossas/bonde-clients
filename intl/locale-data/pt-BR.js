@@ -381,6 +381,23 @@ servidor-03.dominio.com`,
   // page community report
   // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
   // routepath: /community/report
+  'page--community-report.metrics.unique.activists.title':'ATIVISTAS',
+  'page--community-report.metrics.unique.activists.subtitle':'Total de ativistas únicos',
+  'page--community-report.metrics.total.active.activists.title':'ATIVISTAS',
+  'page--community-report.metrics.total.active.activists.subtitle':'Total de ativistas ativos nos últimos 90 dias',
+
+  'page--community-report.metrics.total.pressure.actions.title':'AÇÕES',
+  'page--community-report.metrics.total.pressure.actions.subtitle':'Total de ações de pressão nos últimos 90 dias',
+  'page--community-report.metrics.total.subscriptions.actions.title':'AÇÕES',
+  'page--community-report.metrics.total.subscriptions.actions.subtitle':'Total de ações de assinatura nos últimos 90 dias',
+
+  'page--community-report.metrics.total.unique.donations.title':'DOAÇÕES',
+  'page--community-report.metrics.total.unique.donations.subtitle':'Valor total das doações únicas confirmadas nos últimos 30 dias',
+  'page--community-report.metrics.total.recurrent.donations.title':'DOAÇÕES',
+  'page--community-report.metrics.total.recurrent.donations.subtitle':'Valor total das doações recorrentes confirmadas nos últimos 30 dias',
+  'page--community-report.metrics.total.unique-and-recurrent.donations.title':'DOAÇÕES',
+  'page--community-report.metrics.total.unique-and-recurrent.donations.title':'Valor total de doações únicas e recorrentes até agora (confirmadas / aguardando pagamento)',
+
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
   'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',
   'page--community-report.section-button.donation.text': 'Baixar',

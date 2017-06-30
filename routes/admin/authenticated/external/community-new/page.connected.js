@@ -1,5 +1,5 @@
 import { reduxForm } from 'redux-form'
-
+import { injectIntl } from 'react-intl'
 import * as CommunityActions from '~client/community/action-creators'
 
 import Page from './page'
@@ -15,8 +15,8 @@ const validate = (values) => {
   return error
 }
 
-export default reduxForm({
+export default injectIntl(reduxForm({
   form: 'communityNewForm',
   fields: ['name', 'city'],
   validate
-}, undefined, CommunityActions)(Page)
+}, undefined, CommunityActions)(Page))
