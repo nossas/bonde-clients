@@ -22,12 +22,14 @@ class InputTag extends Component {
     //
     // watch the keyboard event to dispatch the trigger to add targets
     // Mac      : cmd + enter
-    // Default  : ctrl + enter
+    // Windows  : ctrl + enter
+    // Linux    : ctrl + enter
     //
     const mac = os.isMac() && keycode(e) === 'enter' && e.nativeEvent.metaKey
-    const def = keycode(e) === 'enter' && e.ctrlKey
+    const windows = os.isWindows() && keycode(e) === 'enter' && e.ctrlKey
+    const linux = (os.isLinux() || os.isUnix()) && keycode(e) === 'enter' && e.ctrlKey
 
-    if (mac || def) {
+    if (mac || windows || linux) {
       e.preventDefault()
       const { onInsertTag, validate } = this.props
       const targets = e.target.value.split('\n')
