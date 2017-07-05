@@ -32,12 +32,17 @@ describe('client/components/forms/control-buttons', () => {
     })
   })
 
-  describe('without cancel button', () => {
+  describe('with cancel button', () => {
     beforeAll(() => {
-      wrapper = shallow(<ControlButtons {...{ ...props, showCancel: false }} />, { context })
+      wrapper = shallow(<ControlButtons {...{ ...props }} />, { context })
     })
-    it('should not render cancel button', () => {
-      expect(wrapper.find('button')).to.have.length(0)
+    it('should render cancel button when pass onCancel', () => {
+      let called
+      wrapper.setProps({ onCancel: () => { called = true } })
+      expect(wrapper.find('button')).to.have.length(1)
+
+      wrapper.find('button').simulate('click')
+      expect(called).to.equal(true)
     })
   })
 

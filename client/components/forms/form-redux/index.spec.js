@@ -29,6 +29,12 @@ describe('client/components/forms/form-redux', () => {
     expect(wrapper.instance().state.submitted).to.equal(true)
   })
 
+  it('should pass onCancel for <ControlButtons />', () => {
+    const onCancel = () => {}
+    wrapper.setProps({ onCancel })
+    expect(wrapper.find('ControlButtons').props().onCancel).to.equal(onCancel)
+  })
+
   describe('default', () => {
     it('className prop should be as default', () => {
       expect(wrapper.props().className).to.be.a.string
