@@ -5,17 +5,26 @@ import classnames from 'classnames'
 class ControlButtons extends Component {
   render () {
     const { $formRedux: { floatButton, successMessage } } = this.context
-    const { submitting, submitted, dirty, formInline, valid } = this.props
+    const { onCancel, submitting, submitted, dirty, formInline, valid } = this.props
     return (
       <div className={classnames(
           'control-buttons',
           formInline ? 'inline-block ml1' : 'flex flex-wrap mt1'
       )}>
+        {onCancel && (
+          <button
+            className='btn h3 col-4 ml2 white mt1 mb2 p2 rounded bg-gray'
+            onClick={onCancel}
+          >
+            Voltar
+          </button>
+        )}
         <input
           type='submit'
           className={classnames(
-            'btn h3 col-12 mt1 mb2 mx2 white p2 rounded',
-            !valid ? 'bg-gray95' : 'bg-pagenta'
+            'btn h3 mt1 mb2 white p2 rounded',
+            !valid ? 'bg-gray95' : 'bg-pagenta',
+            onCancel ? 'col-7 ml3' : 'col-12 mx2'
           )}
           disabled={!valid || submitting || !dirty}
           value={(submitting ? 'Salvando...' : (floatButton || 'Continuar'))}

@@ -47,7 +47,8 @@ class FormRedux extends Component {
       className,
       floatButton,
       nosubmit,
-      style
+      style,
+      onCancel
     } = this.props
     const { submitted } = this.state
 
@@ -62,7 +63,7 @@ class FormRedux extends Component {
         )}
       >
         {children}
-        {!inline && !nosubmit && <ControlButtons {...{ submitted, submitting, dirty, valid }} />}
+        {!inline && !nosubmit && <ControlButtons {...{ submitted, submitting, dirty, valid, onCancel }} />}
       </form>
     )
   }
