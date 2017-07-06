@@ -15,7 +15,7 @@ export class MobilizationsEditPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
     if (blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.createBlock(mobilization))
+      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 
