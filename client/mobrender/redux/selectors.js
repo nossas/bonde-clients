@@ -3,7 +3,13 @@ export default (state, props) => ({
 
   getMobilization: () => {
     const { list: { currentId, data } } = state.mobilizations
-    return data.filter(mob => mob.id === currentId)[0]
+
+    const mobilization = (id) => data.filter(mob => mob.id === id)[0]
+
+    if (!currentId && props && props.params && props.params.mobilization_id) {
+      return mobilization(parseInt(props.params.mobilization_id))
+    }
+    return mobilization(currentId)
   },
 
   mobilizationsIsLoading: () => {
