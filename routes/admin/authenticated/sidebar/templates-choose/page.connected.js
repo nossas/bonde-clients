@@ -1,10 +1,12 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
-import { selectMobilization } from '~client/mobrender/redux/action-creators'
+import { selectMobilization, asyncUpdateMobilization } from '~client/mobrender/redux/action-creators'
 import * as TemplateActions from '~client/mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~client/mobilizations/templates/selectors'
+import * as paths from '~client/paths'
 
 import Page from './page'
 
@@ -26,8 +28,22 @@ const redial = {
 
 const mapStateToProps = state => ({
   mobilization: MobSelectors(state).getMobilization(),
-  templatesGlobalLength: TemplateSelectors.getGlobalTemplates(state).length,
+  templatesGlobal: TemplateSelectors.getGlobalTemplates(state),
   templatesCustomLength: TemplateSelectors.getCustomTemplates(state).length
 })
 
-export default provideHooks(redial)(connect(mapStateToProps)(Page))
+const mapActionsToProps = (dispatch, props) => ({
+  createMobilizationFromTemplate: ({ mobilization, template }) => {
+    dispatch(asyncUpdateMobilization({
+      id: mobilization.id,
+      template_mobilization_id: template.id
+    }))
+    .then(() => {
+      browserHistory.push(paths.editMobilization(mobilization.id))
+    })
+  }
+})
+
+export default provideHooks(redial)(
+  connect(mapStateToProps, mapActionsToProps)(Page)
+)
