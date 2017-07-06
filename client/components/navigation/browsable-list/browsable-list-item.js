@@ -7,15 +7,25 @@ if (require('exenv').canUseDOM) {
   require('./browsable-list-item.scss')
 }
 
-const BrowsableListItem = ({ className, style, leftIcon, title, subtitle, rightIcon, path }) => (
-  <Link className={classnames('browsable-list-item', className)} style={style} to={path}>
-    <i className={`bg-animation-icon fa fa-${rightIcon}`} />
-    <i className={`icon left-icon fa fa-${leftIcon}`} />
-    <span className='title'>{title}</span>
-    <span className='subtitle'>{subtitle}</span>
-    <i className={`icon right-icon fa fa-${rightIcon}`} />
-  </Link>
-)
+const BrowsableListItem = ({ className, style, leftIcon, title, subtitle, rightIcon, path, onClick }) => {
+  const Component = path ? Link : 'div'
+  const componentProps = path
+    ? { to: path }
+    : { style: { cursor: 'pointer' }, onClick }
+
+  return (
+    <Component
+      className={classnames('browsable-list-item', className)}
+      {...componentProps}
+    >
+      <i className={`bg-animation-icon fa fa-${rightIcon}`} />
+      <i className={`icon left-icon fa fa-${leftIcon}`} />
+      <span className='title'>{title}</span>
+      <span className='subtitle'>{subtitle}</span>
+      <i className={`icon right-icon fa fa-${rightIcon}`} />
+    </Component>
+  )
+}
 
 BrowsableListItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
