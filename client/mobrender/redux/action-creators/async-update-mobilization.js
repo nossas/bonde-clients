@@ -1,6 +1,9 @@
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
+import asyncFetchBlocks from './async-fetch-blocks'
+import asyncFetchWidgets from './async-fetch-widgets'
+
 export default ({ fieldName, ...mobilization }) =>
   (dispatch, getState, { api }) => {
     const { auth: { credentials } } = getState()
@@ -12,6 +15,10 @@ export default ({ fieldName, ...mobilization }) =>
       .put(endpoint, { mobilization }, config)
       .then(({ status, data }) => {
         dispatch({ type: t.UPDATE_MOBILIZATION_SUCCESS, payload: data })
+        if (mobilization.template_mobilization_id) {
+          dispatch(asyncFetchBlocks(data.id))
+          dispatch(asyncFetchWidgets(data.id))
+        }
         return Promise.resolve(data)
       })
       .catch(({ ...errors, response }) => {
