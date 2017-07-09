@@ -16,13 +16,7 @@ const CreditCardForm = ({
     expiration,
     cvv
   },
-  card: {
-    brand,
-    first_digits: firstDigits,
-    last_digits: lastDigits,
-    holder_name: holderName,
-    expiration_date: expirationDate
-  },
+  card,
   ...formProps
 }) => (
   <div>
@@ -40,15 +34,19 @@ const CreditCardForm = ({
         será cobrado neste novo cartão ; )
       </p>
 
-      <div className='mb3 lightgray'>
-        <b className='block mb1'>Dados do último cartão</b>
-        <div>
-          <span className='caps'>{brand}: </span>
-          {firstDigits.slice(0, 4)} {firstDigits.slice(4, 6)}XX XXXX {lastDigits}
+      {card && (
+        <div className='mb3 lightgray'>
+          <b className='block mb1'>Dados do último cartão</b>
+          <div>
+            <span className='caps'>{card.brand}: </span>
+            {card.first_digits.slice(0, 4)} {card.first_digits.slice(4, 6)}XX XXXX {card.last_digits}
+          </div>
+          <div>Nome: <span className='caps'>{card.holder_name}</span></div>
+          <div>
+            Validade: {card.expiration_date.slice(0, 2)}/{card.expiration_date.slice(2, 4)}
+          </div>
         </div>
-        <div>Nome: <span className='caps'>{holderName}</span></div>
-        <div>Validade: {expirationDate.slice(0, 2)}/{expirationDate.slice(2, 4)}</div>
-      </div>
+      )}
 
       <FormGroup className='mb2' controlId='creditcard' {...creditcard}>
         <ControlLabel>Número</ControlLabel>
@@ -117,7 +115,7 @@ CreditCardForm.propTypes = {
     last_digits: PropTypes.string.isRequired,
     holder_name: PropTypes.string.isRequired,
     expiration_date: PropTypes.string.isRequired
-  }).isRequired
+  })
 }
 
 export const normalizer = {

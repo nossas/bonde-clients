@@ -37,6 +37,6 @@ const mapDispatchToProps = {
   removeAnimationStack
 }
 
-export default injectIntl(provideHooks(redial)(
-  connect(mapStateToProps, mapDispatchToProps)(Page)
-))
+export default provideHooks(redial)(
+  connect(mapStateToProps, mapDispatchToProps)(injectIntl(Page))
+)
