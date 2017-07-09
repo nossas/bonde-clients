@@ -4,6 +4,10 @@ export default (state, props) => {
   return {
     getModificationType: () => edit.modificationType,
     getAnimationStack: () => edit.animationStack,
-    getCard: () => edit.data.last_donation.gateway_data.card
+    getCard: () => (
+      edit.data &&
+      edit.data.last_donation &&
+      edit.data.last_donation.gateway_data.card
+    )
   }
 }
