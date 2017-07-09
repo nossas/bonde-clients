@@ -39,11 +39,11 @@ const CreditCardForm = ({
           <b className='block mb1'>Dados do último cartão</b>
           <div>
             <span className='caps'>{card.brand}: </span>
-            {card.first_digits.slice(0, 4)} {card.first_digits.slice(4, 6)}XX XXXX {card.last_digits}
+            {card.firstDigits.slice(0, 4)} {card.firstDigits.slice(4, 6)}XX XXXX {card.lastDigits}
           </div>
-          <div>Nome: <span className='caps'>{card.holder_name}</span></div>
+          <div>Nome: <span className='caps'>{card.holderName}</span></div>
           <div>
-            Validade: {card.expiration_date.slice(0, 2)}/{card.expiration_date.slice(2, 4)}
+            Validade: {card.expirationDate.slice(0, 2)}/{card.expirationDate.slice(2, 4)}
           </div>
         </div>
       )}
