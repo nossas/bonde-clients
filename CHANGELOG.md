@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.11"></a>
+## [0.5.11](https://github.com/nossas/bonde-client/compare/v0.5.10...v0.5.11) (2017-07-09)
+
+
+### Bug Fixes
+
+* **community:** normalize recipient document number fix [#737](https://github.com/nossas/bonde-client/issues/737) ([b3b9648](https://github.com/nossas/bonde-client/commit/b3b9648))
+* **subscription:** undefined last donation card data fix [#732](https://github.com/nossas/bonde-client/issues/732) ([b339bbc](https://github.com/nossas/bonde-client/commit/b339bbc))
+
+
+
 <a name="0.5.10"></a>
 ## [0.5.10](https://github.com/nossas/bonde-client/compare/v0.5.8...v0.5.10) (2017-06-29)
 
