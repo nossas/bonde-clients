@@ -14,16 +14,31 @@ class TemplatesChoosePage extends Component {
       customTemplatesLength,
       globalTemplates,
       createMobilizationFromTemplate,
+      createEmptyMobilization,
       location
     } = this.props
 
     if (loading) return <Loading />
+
+    const renderEmptyChoice = (
+      customTemplatesLength === 0
+      && globalTemplates.length === 0
+    )
     
     return (
       <PageTabLayout {...{ location }}>
         <div className='choose-menu-page col-12'>
           <h3 className='h1 mt0 mb3 center'>Como você deseja começar?</h3>
           <BrowsableList>
+            {renderEmptyChoice && (
+              <BrowsableListItem
+                leftIcon='plus-square-o'
+                title='Criar mobilização do zero'
+                onClick={() => {
+                  createEmptyMobilization({ mobilization })
+                }}
+              />
+            )}
             {globalTemplates && globalTemplates.map(template => (
               <BrowsableListItem
                 key={`index-${template.id}`}

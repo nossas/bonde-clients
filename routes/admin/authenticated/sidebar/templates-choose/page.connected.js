@@ -30,6 +30,9 @@ const mapActionsToProps = (dispatch, props) => ({
     .then(() => {
       browserHistory.push(paths.editMobilization(mobilization.id))
     })
+  },
+  createEmptyMobilization: ({ mobilization }) => {
+    browserHistory.push(paths.createBlock(mobilization))
   }
 })
 
