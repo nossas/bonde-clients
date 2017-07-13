@@ -378,25 +378,33 @@ servidor-03.dominio.com`,
   'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format': 'CPF inválido',
   'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format': 'CNPJ inválido',
 
-  // page community report
-  // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+  // metrics data table component
+  // filepath: /client/components/metrics/components/metrics-data-table.js
   // routepath: /community/report
-  'page--community-report.metrics.unique.activists.title':'ATIVISTAS',
-  'page--community-report.metrics.unique.activists.subtitle':'Total de ativistas únicos',
-  'page--community-report.metrics.total.active.activists.title':'ATIVISTAS',
-  'page--community-report.metrics.total.active.activists.subtitle':'Total de ativistas ativos nos últimos 90 dias',
+  'c--metrics.unique.activists.title':'ATIVISTAS',
+  'c--metrics.unique.activists.subtitle':'Total de ativistas únicos',
+  'c--metrics.total.active.activists.title':'ATIVISTAS',
+  'c--metrics.total.active.activists.subtitle':'Total de ativistas ativos {br} nos últimos 90 dias',
 
-  'page--community-report.metrics.total.pressure.actions.title':'AÇÕES',
-  'page--community-report.metrics.total.pressure.actions.subtitle':'Total de ações de pressão nos últimos 90 dias',
-  'page--community-report.metrics.total.subscriptions.actions.title':'AÇÕES',
-  'page--community-report.metrics.total.subscriptions.actions.subtitle':'Total de ações de assinatura nos últimos 90 dias',
+  'c--metrics.total.pressure.actions.title':'AÇÕES',
+  'c--metrics.total.pressure.actions.subtitle':'Total de ações de pressão {br} nos últimos 90 dias',
+  'c--metrics.total.subscriptions.actions.title':'AÇÕES',
+  'c--metrics.total.subscriptions.actions.subtitle':'Total de ações de assinatura {br} nos últimos 90 dias',
 
-  'page--community-report.metrics.total.unique.donations.title':'DOAÇÕES',
-  'page--community-report.metrics.total.unique.donations.subtitle':'Valor total das doações únicas confirmadas nos últimos 30 dias',
-  'page--community-report.metrics.total.recurrent.donations.title':'DOAÇÕES',
-  'page--community-report.metrics.total.recurrent.donations.subtitle':'Valor total das doações recorrentes confirmadas nos últimos 30 dias',
-  'page--community-report.metrics.total.unique-and-recurrent.donations.title':'DOAÇÕES',
-  'page--community-report.metrics.total.unique-and-recurrent.donations.title':'Valor total de doações únicas e recorrentes até agora (confirmadas / aguardando pagamento)',
+  'c--metrics.total.unique.donations.title':'DOAÇÕES',
+  'c--metrics.total.unique.donations.subtitle':'Valor total das doações únicas confirmadas nos últimos 30 dias',
+  'c--metrics.total.recurrent.donations.title':'DOAÇÕES',
+  'c--metrics.total.recurrent.donations.subtitle':'Valor total das doações recorrentes confirmadas nos últimos 30 dias',
+  'c--metrics.total.unique-and-recurrent.donations.title':'DOAÇÕES',
+  'c--metrics.total.unique-and-recurrent.donations.subtitle':'Valor total de doações únicas e recorrentes até agora {br}(confirmadas / aguardando pagamento)',
+
+  'c--metrics.total.donations.charged-back-amount':'Valor total de devolução das doações coletadas até agora:',
+  'c--metrics.total.donations.refunded-amount':'Valor total de reembolso das doações coletadas até agora:',
+  'c--metrics.total.donations.refused-amount':'Valor total de reembolso das doações coletadas até agora:',
+
+    // page community report
+    // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+    // routepath: /community/report
 
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
   'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',

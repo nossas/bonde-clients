@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import format from 'format-number'
 import { MetricsCard } from '~client/components/metrics/components'
 
@@ -19,8 +20,21 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#DD2396'
           loading={loading}
-          title='Ativistas'
-          footer={<span>Total de ativistas únicos<br />&nbsp;</span>}
+          title={
+            <FormattedMessage
+              id='c--metrics.unique.activists.title'
+              defaultMessage='Ativistas'
+            />
+          }
+          footer={
+            <span>
+              <FormattedMessage
+                id='c--metrics.unique.activists.subtitle'
+                defaultMessage='Total de ativistas únicos'
+              />
+              <br />&nbsp;
+            </span>
+          }
         >
           {number(data.totalUniqueActivists)}
         </MetricsCard>
@@ -29,8 +43,23 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#DD2396'
           loading={loading}
-          title='Ativistas'
-          footer={<span>Total de ativistas ativos<br />nos últimos 90 dias</span>}
+          title={
+            <FormattedMessage
+              id='c--metrics.total.active.activists.title'
+              defaultMessage='Ativistas'
+            />
+          }
+          footer={
+            <span>
+              <FormattedMessage
+                id='c--metrics.total.active.activists.subtitle'
+                defaultMessage='Total de ativistas ativos{br}nos últimos 90 dias'
+                values={{
+                  br: <br />
+                }}
+              />
+            </span>
+          }
         >
           {number(data.totalUniqueActivistsLast90Days)}
         </MetricsCard>
@@ -40,8 +69,23 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#40B4E5'
           loading={loading}
-          title='Ações'
-          footer={<span>Total de ações de pressão<br/>nos últimos 90 dias</span>}
+          title={
+            <FormattedMessage
+              id='c--metrics.total.pressure.actions.title'
+              defaultMessage='Ações'
+            />
+          }
+          footer={
+            <span>
+              <FormattedMessage
+                id='c--metrics.total.pressure.actions.subtitle'
+                defaultMessage='Total de ações de pressão {br} nos últimos 90 dias'
+                values={{
+                  br: <br />
+                }}
+              />
+            </span>
+          }
         >
           {number(data.totalActivistsPressureLast90Days)}
         </MetricsCard>
@@ -51,8 +95,21 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#40B4E5'
           loading={loading}
-          title='Ações'
-          footer={<span>Total de ações de assinatura<br />nos últimos 90 dias</span>}
+          title={
+            <FormattedMessage
+              id='c--metrics.total.subscriptions.actions.title'
+              defaultMessage='Ações'
+            />
+          }
+          footer={
+            <FormattedMessage
+              id='c--metrics.total.subscriptions.actions.subtitle'
+              defaultMessage='Total de ações de assinatura {br} nos últimos 90 dias'
+              values={{
+                br: <br />
+              }}
+            />
+          }
         >
           {number(data.totalActivistsFormEntryLast90Days)}
         </MetricsCard>
@@ -64,8 +121,18 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#00C08A'
           loading={loading}
-          title='Doações'
-          footer='Valor total das doações únicas confirmadas nos últimos 30 dias'
+          title={
+            <FormattedMessage
+              id='c--metrics.total.unique.donations.title'
+              defaultMessage='Doações'
+            />
+          }
+          footer={
+            <FormattedMessage
+              id='c--metrics.total.unique.donations.subtitle'
+              defaultMessage='Valor total das doações únicas confirmadas nos últimos 30 dias'
+            />
+          }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
           {currency(data.totalUniqueDonationsAmountLastMonth)}
@@ -76,8 +143,18 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#00C08A'
           loading={loading}
-          title='Doações'
-          footer='Valor total das doações recorrentes confirmadas nos últimos 30 dias'
+          title={
+            <FormattedMessage
+              id='c--metrics.total.recurrent.donations.title'
+              defaultMessage='Doações'
+            />
+          }
+          footer={
+            <FormattedMessage
+              id='c--metrics.total.recurrent.donations.subtitle'
+              defaultMessage='Valor total das doações recorrentes confirmadas nos últimos 30 dias'
+            />
+          }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
           {currency(data.totalSubscriptionDonationsAmountLastMonth)}
@@ -88,12 +165,20 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         <MetricsCard
           backgroundColor='#00C08A'
           loading={loading}
-          title='Doações'
+          title={
+            <FormattedMessage
+              id='c--metrics.total.unique-and-recurrent.donations.title'
+              defaultMessage='Doações'
+            />
+          }
           footer={
-            <span>
-              Valor total de doações únicas e recorrentes até agora<br />
-              (confirmadas / aguardando pagamento)
-            </span>
+            <FormattedMessage
+              id='c--metrics.total.unique-and-recurrent.donations.subtitle'
+              defaultMessage='Valor total de doações únicas e recorrentes até agora {br}(confirmadas / aguardando pagamento)'
+              values={{
+                br: <br />
+              }}
+            />
           }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
@@ -109,7 +194,11 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         {data.totalDonationsChargedBackAmount > 0 && (
           <tr>
             <td>
-              Valor total de devolução das doações coletadas até agora:</td>
+              <FormattedMessage
+                id='c--metrics.total.donations.charged-back-amount'
+                defaultMessage='Valor total de devolução das doações coletadas até agora:'
+              />
+            </td>
             <td className='px2'>
               <Value
                 loading={loading}
@@ -120,7 +209,12 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         )}
         {data.totalDonationsRefundedAmount > 0 && (
           <tr>
-            <td>Valor total de reembolso das doações coletadas até agora:</td>
+            <td>
+              <FormattedMessage
+                id='c--metrics.total.donations.refunded-amount'
+                defaultMessage='Valor total de reembolso das doações coletadas até agora:'
+              />
+            </td>
             <td className='px2'>
               <Value
                 loading={loading}
@@ -131,7 +225,12 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
         )}
         {data.totalDonationsRefusedAmount > 0 && (
           <tr>
-            <td>Valor total das doações recusadas até agora:</td>
+            <td>
+              <FormattedMessage
+                id='c--metrics.total.donations.refused-amount'
+                defaultMessage='Valor total das doações recusadas até agora:'
+              />
+            </td>
             <td className='px2'>
               <Value
                 loading={loading}
