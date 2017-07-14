@@ -75,28 +75,37 @@ class CustomDomainPage extends Component {
         facebook_share_description: facebookShareDescription,
         facebook_share_image: facebookShareImage,
         header_font: headerFont,
-        body_font: bodyFont
+        body_font: bodyFont,
+        favicon
       } = mobilization
 
       const url = `${protocol}://${mobilization.custom_domain}` || host
 
+      const helmetProps = {
+        title: name,
+        meta: [
+          { name: 'description', content: goal },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: facebookShareTitle },
+          { name: 'twitter:description', content: facebookShareDescription },
+          { name: 'twitter:image', content: facebookShareImage },
+          { property: 'twitter:url', content: url },
+          { property: 'og:url', content: url },
+          { property: 'og:title', content: facebookShareTitle },
+          { property: 'og:description', content: facebookShareDescription },
+          { property: 'og:image', content: facebookShareImage }
+        ]
+      }
+      
+      if (favicon) {
+        helmetProps.link = [
+          { rel: 'icon', type: 'image/png', href: favicon }
+        ] 
+      }
+
       return (
         <div>
-          <Helmet
-            title={name}
-            meta={[
-              { name: 'description', content: goal },
-              { name: 'twitter:card', content: 'summary_large_image' },
-              { name: 'twitter:title', content: facebookShareTitle },
-              { name: 'twitter:description', content: facebookShareDescription },
-              { name: 'twitter:image', content: facebookShareImage },
-              { property: 'twitter:url', content: url },
-              { property: 'og:url', content: url },
-              { property: 'og:title', content: facebookShareTitle },
-              { property: 'og:description', content: facebookShareDescription },
-              { property: 'og:image', content: facebookShareImage }
-            ]}
-          />
+          <Helmet {...helmetProps} />
           <Mobilization />
           <GoogleFontsLoader fonts={[headerFont, bodyFont].filter(arrayUtil.distinct)} />
         </div>

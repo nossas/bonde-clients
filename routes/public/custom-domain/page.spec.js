@@ -1,6 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
+import Helmet from 'react-helmet'
 
 import * as arrayUtil from '~client/utils/array'
 import CustomDomainPage from '~routes/public/custom-domain/page'
@@ -38,6 +39,14 @@ describe('routes/public/custom-domain/page', () => {
     const fonts = [mobilization.header_font, mobilization.body_font]
     const fontsLoader = wrapper.find('GoogleFontsLoader')
     expect(fontsLoader.props().fonts).to.deep.equal(fonts)
+  })
+
+  it('should render helmet with favicon if passed on mobilization', () => {
+    const mobilization = { ...props.mobilization, favicon: 'http://favicon.png' }
+    wrapper.setProps({ mobilization })
+    expect(wrapper.find(Helmet).props().link).to.deep.equal([
+      { rel: 'icon', type: 'image/png', href: mobilization.favicon }
+    ])
   })
 
   it('should not render reapeat font in GoogleFontsLoader', () => {
