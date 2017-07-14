@@ -18,7 +18,7 @@ import {
 import * as paths from '~client/paths'
 
 export const MobilizationBasicsForm = ({
-  fields: { name, slug, goal },
+  fields: { name, slug, goal, favicon },
   floatSubmit,
   ...formProps
 }) => {
@@ -69,11 +69,21 @@ export const MobilizationBasicsForm = ({
           placeholder='Ex: 123-nome-da-mob'
         />
       </FormGroup>
+      <FormGroup
+        {...favicon}
+        controlId='favicon'
+        className={classnames({ hide: isNewMobilizationPath })}
+      >
+        <ControlLabel>Favicon</ControlLabel>
+        <FormControl
+          type={isNewMobilizationPath ? 'hidden': 'text'}
+        />
+      </FormGroup>
     </ComponentForm>
   )
 }
 
-export const fields = ['name', 'slug', 'goal', 'community_id']
+export const fields = ['name', 'slug', 'goal', 'favicon', 'community_id']
 
 export const validate = values => {
   const errors = {}
