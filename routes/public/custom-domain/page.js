@@ -13,6 +13,14 @@ if (require('exenv').canUseDOM) {
   require('~client/styles/main.scss')
 }
 
+const defaultFavicon32 = require('exenv').canUseDOM
+  ? require('~client/images/icon/favicon-32.png')
+  : ''
+const defaultFavicon16 = require('exenv').canUseDOM
+  ? require('~client/images/icon/favicon-16.png')
+  : ''
+
+
 class CustomDomainPage extends Component {
   componentDidMount () {
     if (require('exenv').canUseDOM) {
@@ -79,7 +87,7 @@ class CustomDomainPage extends Component {
         favicon
       } = mobilization
 
-      const url = `${protocol}://${mobilization.custom_domain}` || host
+      const url = `${protocol}://${mobilization.custom_domain}` || host 
 
       const helmetProps = {
         title: name,
@@ -94,13 +102,21 @@ class CustomDomainPage extends Component {
           { property: 'og:title', content: facebookShareTitle },
           { property: 'og:description', content: facebookShareDescription },
           { property: 'og:image', content: facebookShareImage }
+        ],
+        link: [
+          {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '32x32',
+            href: favicon || defaultFavicon32
+          },
+          {
+            rel: 'icon',
+            type: 'image/png',
+            sizes: '16x16',
+            href: favicon || defaultFavicon16
+          }
         ]
-      }
-      
-      if (favicon) {
-        helmetProps.link = [
-          { rel: 'icon', type: 'image/png', href: favicon }
-        ] 
       }
 
       return (

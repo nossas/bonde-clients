@@ -6,6 +6,13 @@ import Helmet from 'react-helmet'
 import * as arrayUtil from '~client/utils/array'
 import CustomDomainPage from '~routes/public/custom-domain/page'
 
+const defaultFavicon32 = require('exenv').canUseDOM
+  ? require('~client/images/icon/favicon-32.png')
+  : ''
+const defaultFavicon16 = require('exenv').canUseDOM
+  ? require('~client/images/icon/favicon-16.png')
+  : ''
+
 describe('routes/public/custom-domain/page', () => {
   let wrapper
   const props = {
@@ -25,6 +32,24 @@ describe('routes/public/custom-domain/page', () => {
     expect(wrapper).to.be.ok
   })
 
+  it('should render bonde favicon by default', () => {
+    const link = [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: defaultFavicon32
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: defaultFavicon16
+      }   
+    ]
+    expect(wrapper.find(Helmet).props().link).to.deep.equal(link)
+  })
+
   it('should render Mobilization with editable prop as undefined', () => {
     expect(wrapper.find('Connect(Mobilization)').props().editable).to.be.undefined
   })
@@ -42,11 +67,19 @@ describe('routes/public/custom-domain/page', () => {
   })
 
   it('should render helmet with favicon if passed on mobilization', () => {
-    const mobilization = { ...props.mobilization, favicon: 'http://favicon.png' }
+    const favicon = 'http://favicon'
+    const link = [
+      {
+        rel: 'icon', type: 'image/png', sizes: '32x32', href: favicon
+      },
+      {
+        rel: 'icon', type: 'image/png', sizes: '16x16', href: favicon
+      }   
+    ]
+
+    const mobilization = { ...props.mobilization, favicon }
     wrapper.setProps({ mobilization })
-    expect(wrapper.find(Helmet).props().link).to.deep.equal([
-      { rel: 'icon', type: 'image/png', href: mobilization.favicon }
-    ])
+    expect(wrapper.find(Helmet).props().link).to.deep.equal(link)
   })
 
   it('should not render reapeat font in GoogleFontsLoader', () => {
