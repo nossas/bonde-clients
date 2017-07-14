@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { addNotification as notify } from 'reapop'
 import { injectIntl, intlShape } from 'react-intl'
-import { Info } from '~client/components/notify'
+import DefaultServerConfig from '~server/config'
 import { slugUpdatedMessage } from '~client/utils/notifications'
 import { slugify } from '~client/utils/string-helper'
 import { SettingsForm } from '~client/ux/components'
@@ -13,7 +13,8 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock
+  HelpBlock,
+  UploadImageField
 } from '~client/components/forms'
 import * as paths from '~client/paths'
 
@@ -75,8 +76,9 @@ export const MobilizationBasicsForm = ({
         className={classnames({ hide: isNewMobilizationPath })}
       >
         <ControlLabel>Favicon</ControlLabel>
-        <FormControl
-          type={isNewMobilizationPath ? 'hidden': 'text'}
+        <UploadImageField
+          signingUrl={`${DefaultServerConfig.apiUrl}/uploads`}
+          type={isNewMobilizationPath ? 'hidden' : 'text'}
         />
       </FormGroup>
     </ComponentForm>
