@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, intlShape } from 'react-intl'
 import {
   FormGroup,
   ControlLabel,
@@ -31,6 +32,8 @@ const PressureSettingsPage = ({
     })
   }
 
+  const { intl } = props
+
   const {
     dispatch,
     mobilization: { color_scheme: colorScheme }
@@ -40,44 +43,118 @@ const PressureSettingsPage = ({
     <SettingsForm
       {...props}
       onSubmit={handleSubmit}
-      successMessage='Formulário de pressão configurado com sucesso!'
+      successMessage={
+        <FormattedMessage
+          id='page--pressure-widget.success-message'
+          defaultMessage='Formulário de pressão configurado com sucesso!'
+        />
+      }
     >
       <FormGroup controlId='title-text-id' {...titleText}>
-        <ControlLabel>Título do formulário</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--pressure-widget.form.title-text.label'
+            defaultMessage='Título do formulário'
+          />
+        </ControlLabel>
         <FormControl
           type='text'
-          placeholder='Envie um e-mail para quem pode tomar essa decisão'
+          placeholder={
+            intl.formatMessage({
+              id: 'page--pressure-widget.form.title-text.placeholder',
+              defaultMessage: 'Envie um e-mail para quem pode tomar essa decisão'
+            })
+          }
         />
       </FormGroup>
       <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>Texto do botão</ControlLabel>
-        <FormControl type='text' placeholder='Enviar e-mail' />
+        <ControlLabel>
+          <FormattedMessage
+            id='page--pressure-widget.form.button-text.label'
+            defaultMessage='Texto do botão'
+          />
+        </ControlLabel>
+        <FormControl type='text'
+          placeholder={
+            intl.formatMessage({
+              id: 'page--pressure-widget.form.button-text.placeholder',
+              defaultMessage: 'Enviar e-mail'
+            })
+          }
+        />
       </FormGroup>
       <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Cor do formulário</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--pressure-widget.form.main-color.label'
+            defaultMessage='Cor do formulário'
+          />
+        </ControlLabel>
         <ColorPicker
           dispatch={dispatch}
           theme={colorScheme.replace('-scheme', '')}
         />
       </FormGroup>
       <FormGroup controlId='show-counter-id' {...showCounter}>
-        <ControlLabel>Mostrar contador de pressão</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--pressure-widget.form.show-counter.label'
+            defaultMessage='Mostrar contador de pressão'
+          />
+        </ControlLabel>
         <RadioGroup>
-          <Radio value='true'>Sim</Radio>
-          <Radio value='false'>Não</Radio>
+          <Radio value='true'>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-counter.radio.yes.label'
+              defaultMessage='Sim'
+            />
+          </Radio>
+          <Radio value='false'>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-counter.radio.no.label'
+              defaultMessage='Não'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
       {(showCounter.value === 'true' ? (
         <FormGroup controlId='count-text-id' {...countText}>
-          <ControlLabel>Texto do contador</ControlLabel>
-          <FormControl type='text' placeholder='pressões feitas' />
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget.form.counter-text.label'
+              defaultMessage='Texto do contador'
+            />
+          </ControlLabel>
+          <FormControl type='text'
+            placeholder={
+              intl.formatMessage({
+                id: 'page--pressure-widget.form.counter-text.placeholder',
+                defaultMessage: 'pressões feitas'
+              })
+            }
+          />
         </FormGroup>
       ) : null)}
       <FormGroup controlId='show-city-field-id' {...showCity}>
-        <ControlLabel>Mostrar campo de cidade</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--pressure-widget.form.show-city-field.label'
+            defaultMessage='Mostrar campo de cidade'
+          />
+        </ControlLabel>
         <RadioGroup>
-          <Radio value='city-true'>Sim</Radio>
-          <Radio value='city-false'>Não</Radio>
+          <Radio value='city-true'>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-city-field.radio.yes.label'
+              defaultMessage='Sim'
+            />
+          </Radio>
+          <Radio value='city-false'>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-city-field.radio.no.label'
+              defaultMessage='Não'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
     </SettingsForm>
@@ -93,7 +170,9 @@ PressureSettingsPage.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
+  // translation
+  intl: intlShape.isRequired
 }
 
 export default PressureSettingsPage
