@@ -12,11 +12,11 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapActionsToProps = (dispatch, props) => ({
-  moveUp: asyncMoveUp,
-  moveDown: asyncMoveDown,
-  update: asyncUpdateBlock,
-  onEdit: handleEdit,
-  destroy: asyncDestroyBlock,
+  moveUp: block => dispatch(asyncMoveUp(block)),
+  moveDown: block => dispatch(asyncMoveDown(block)),
+  update: block => dispatch(asyncUpdateBlock(block)),
+  onEdit: key => dispatch(handleEdit(key)),
+  destroy: block => dispatch(asyncDestroyBlock(block)),
   duplicate: ({ mobilization_id, bg_class, bg_image, position, hidden, name, menu_hidden }) => {
     // Widgets clean
     const widgetsAttributes = props.widgets.map(
