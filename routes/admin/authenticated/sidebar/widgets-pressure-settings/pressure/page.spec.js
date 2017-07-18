@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallowWithIntl } from '~root/intl/helpers'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
@@ -20,7 +20,7 @@ describe('routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/
   }
 
   beforeAll(() => {
-    wrapper = shallow(<Page {...props} />)
+    wrapper = shallowWithIntl(<Page {...props} />)
   })
 
   describe('#render', () => {

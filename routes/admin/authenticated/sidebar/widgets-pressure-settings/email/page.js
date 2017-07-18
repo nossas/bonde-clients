@@ -53,11 +53,21 @@ class PressureSettingsEmailPage extends Component {
       <SettingsForm
         {...props}
         onSubmit={::this.handleSubmit}
-        successMessage='Email para alvo configurado com sucesso!'
+        successMessage={
+          intl.formatMessage({
+            id: 'page--pressure-widget-email.success-message',
+            defaultMessage: 'Email para alvo configurado com sucesso!'
+          })
+        }
       >
         <div className='form-group'>
           <InputTag
-            label='Alvos'
+            label={
+              intl.formatMessage({
+                id: 'page--pressure-widget-email.form.input-tag.label',
+                defaultMessage: 'Alvos'
+              })
+            }
             values={this.state.targets}
             onInsertTag={targets => {
               const targetsPushed = [...this.state.targets, ...targets]
@@ -79,8 +89,10 @@ class PressureSettingsEmailPage extends Component {
               const errors = { valid: true }
               if (targets.some(target => !target.match(patternTarget))) {
                 errors.valid = false
-                errors.message =
-                  'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.invalid-target-format',
+                  defaultMessage: 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+                })
               }
               return errors
             }}
@@ -140,11 +152,21 @@ class PressureSettingsEmailPage extends Component {
           />
         </div>
         <FormGroup controlId='email-subject-id' {...pressureSubject}>
-          <ControlLabel>Assunto do email</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.email-subject.label'
+              defaultMessage='Assunto do email'
+            />
+          </ControlLabel>
           <FormControl type='text' />
         </FormGroup>
         <FormGroup controlId='email-body-id' {...pressureBody}>
-          <ControlLabel>Corpo do email que será enviado</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.email-body.label'
+              defaultMessage='Corpo do email que será enviado'
+            />
+          </ControlLabel>
           <FormControl type='text' componentClass='textarea' rows='7' />
         </FormGroup>
       </SettingsForm>

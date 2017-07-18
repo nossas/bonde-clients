@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import { shallowWithIntl } from '~root/intl/helpers'
 
 import { FormFinishMessage } from '~client/mobilizations/widgets/components/form-finish-message'
 
@@ -30,7 +30,7 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(
+    wrapper = shallowWithIntl(
       <FormFinishMessage {...props} />
     )
   })

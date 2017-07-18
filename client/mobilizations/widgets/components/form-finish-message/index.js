@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
 import { reduxForm } from 'redux-form'
 import { Raw } from 'slate'
 
@@ -25,6 +26,8 @@ export const FormFinishMessage = props => {
   const { color_scheme: colorScheme } = mobilization
   const { TellAFriend } = props
 
+  const { intl } = props
+
   const {
     finish_message_type: finishMessageType,
     finish_message: finishMessage,
@@ -47,13 +50,33 @@ export const FormFinishMessage = props => {
           settings: { ...widget.settings, ...values }
         })
       }}
-      successMessage={successMessage || 'Formulário salvo com sucesso!'}
+      successMessage={successMessage || (
+        <FormattedMessage
+          id='widgets.components--form-finish-message.success-message'
+          defaultMessage='Formulário salvo com sucesso!'
+        />
+      )}
     >
       <FormGroup controlId='finish-message-type-id' {...finishMessageType}>
-        <ControlLabel>Tipo de mensagem</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='widgets.components--form-finish-message.type.label'
+            defaultMessage='Tipo de mensagem'
+          />
+        </ControlLabel>
         <RadioGroup>
-          <Radio value='share'>Compartilhar</Radio>
-          <Radio value='custom'>Customizar</Radio>
+          <Radio value='share'>
+            <FormattedMessage
+              id='widgets.components--form-finish-message.type.radio.share'
+              defaultMessage='Compartilhar'
+            />
+          </Radio>
+          <Radio value='custom'>
+            <FormattedMessage
+              id='widgets.components--form-finish-message.type.radio.custom'
+              defaultMessage='Customizar'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
 
@@ -62,19 +85,31 @@ export const FormFinishMessage = props => {
           <FormGroup controlId='whatsapp-text-id' {...whatsappText}>
             <ControlLabel>
               <i className='fa fa-whatsapp mr2' style={styles.whatsappControlLabel} />
-              Texto do WhatsApp
+              <FormattedMessage
+                id='widgets.components--form-finish-message.share.whatsapp-text.label'
+                defaultMessage='Texto do WhatsApp'
+              />
             </ControlLabel>
             <FormControl
               rows='4'
               componentClass='textarea'
-              placeholder={'Faça um texto curto, capaz de motivar outras pessoas a se unirem à' +
-                ' sua mobilização. Você poderá alterar este texto depois.'}
+              placeholder={
+                intl.formatMessage({
+                  id: 'widgets.components--form-finish-message.share.whatsapp-text.placeholder',
+                  defaultMessage: 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.'
+                })
+              }
             />
           </FormGroup>
         </div>
       )}
 
-      <label className='h5 darkengray caps mb1 block'>Preview</label>
+      <label className='h5 darkengray caps mb1 block'>
+        <FormattedMessage
+          id='widgets.components--form-finish-message.preview.label'
+          defaultMessage='Preview'
+        />
+      </label>
       {finishMessageType.value === 'share' && (
         <TellAFriend preview mobilization={mobilization} widget={widget} />
       )}
@@ -130,10 +165,15 @@ const validate = values => {
 
 const mapStateToProps = (state, props) => {
   const settings = props.widget.settings || {}
+  const { intl } = props
   return {
     initialValues: {
       finish_message_type: settings.finish_message_type || 'share',
-      finish_message: settings.finish_message || createEditorContent('Clique aqui para editar...'),
+      finish_message: settings.finish_message ||
+      createEditorContent(intl.formatMessage({
+        id: 'widgets.components--form-finish-message.custom.message.default',
+        defaultMessage: 'Clique aqui para editar...'
+      })),
       finish_message_background: settings.finish_message_background || '255,255,255,1',
       whatsapp_text: settings.whatsapp_text || ''
     }
@@ -154,10 +194,14 @@ FormFinishMessage.propTypes = {
   // Injected by components
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired
+  asyncWidgetUpdate: PropTypes.func.isRequired,
+  // translation
+  intl: intlShape.isRequired
 }
 
-export default reduxForm(
-  { form: 'formFinishMessage', fields, validate },
-  mapStateToProps
-)(FormFinishMessage)
+export default injectIntl(
+  reduxForm(
+    { form: 'formFinishMessage', fields, validate },
+    mapStateToProps
+  )(FormFinishMessage)
+)
