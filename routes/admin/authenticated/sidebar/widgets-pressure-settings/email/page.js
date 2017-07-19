@@ -4,6 +4,7 @@ import { FormattedMessage, intlShape } from 'react-intl'
 
 import * as os from '~client/utils/browser/os'
 import * as validator from '~client/utils/validation-helper'
+import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import { FormGroup, ControlLabel, FormControl, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
@@ -15,15 +16,7 @@ class PressureSettingsEmailPage extends Component {
     super(props)
     this.state = {
       targets: this.getTargetList() || [],
-      pressureType: this.getPressureType() || undefined
-    }
-  }
-
-  getPressureType (targets = this.getTargetList()) {
-    if (targets.length) {
-      if (validator.isValidTargetEmail(targets[0])) return 'email'
-      if (validator.isValidTargetPhone(targets[0])) return 'phone'
-      return 'invalid'
+      pressureType: pressureHelper.getType(this.getTargetList()) || undefined
     }
   }
 
@@ -80,7 +73,7 @@ class PressureSettingsEmailPage extends Component {
             values={this.state.targets}
             onInsertTag={targets => {
               const targetsPushed = [...this.state.targets, ...targets]
-              const pressureType = this.getPressureType(targetsPushed)
+              const pressureType = pressureHelper.getType(targetsPushed)
               this.setState({ targets: targetsPushed, pressureType })
               targetsField.onChange(this.getTargetString(targetsPushed))
             }}

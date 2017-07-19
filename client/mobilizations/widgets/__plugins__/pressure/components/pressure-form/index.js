@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import { isValidEmail } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
@@ -20,11 +21,13 @@ class PressureForm extends Component {
     super(props)
     this.state = {
       email: '',
+      phone: '',
       name: '',
       lastname: '',
       city: '',
       subject: props.subject,
-      body: props.body
+      body: props.body,
+      pressureType: pressureHelper.getType(props.targetList) || undefined
     }
   }
 
@@ -75,33 +78,54 @@ class PressureForm extends Component {
 
   render () {
     const { buttonColor, buttonText, children, widget, disabled } = this.props
-    const { email, name, lastname, city, subject, body, errors } = this.state
+    const { email, phone, name, lastname, city, subject, body, errors } = this.state
     return (
       <form className='pressure-form' onSubmit={::this.handleSubmit}>
         <div className={classnames('activist-form bg-white', !children ? 'rounded-bottom' : null)}>
           <div className='form bg-white rounded-bottom'>
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+                  E-mail
+                  {(errors && errors['email'] && <span className='error'>{errors['email']}</span>)}
+                </label>
+                <input
+                  id='pressure-sender-email-id'
+                  className='col-12'
+                  style={inputReset}
+                  onBlur={::AnalyticsEvents.pressureIsFilled}
+                  type='email'
+                  placeholder='Insira seu e-mail'
+                  value={email}
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
+              </div>
+            )}
+            {this.state.pressureType === 'phone' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-sender-phone-id'>
+                  Telefone
+                  {(errors && errors['phone'] && <span className='error'>{errors['phone']}</span>)}
+                </label>
+                <input
+                  id='pressure-sender-phone-id'
+                  className='col-12'
+                  style={inputReset}
+                  onBlur={::AnalyticsEvents.pressureIsFilled}
+                  type='text'
+                  placeholder='Insira seu telefone'
+                  value={phone}
+                  onChange={e => this.setState({ phone: e.target.value })}
+                />
+              </div>
+            )}
             <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
-                E-mail
-                {(errors && errors['email'] && <span className='error'>{errors['email']}</span>)}
-              </label>
-              <input
-                id='pressure-sender-email-id'
-                className='col-12'
-                style={inputReset}
-                onBlur={::AnalyticsEvents.pressureIsFilled}
-                type='email'
-                placeholder='Insira seu e-mail'
-                value={email}
-                onChange={e => this.setState({ email: e.target.value })}
-              />
-            </div>
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+              <label className='py1 gray' htmlFor='pressure-sender-firstname-id'>
                 Nome
                 {(errors && errors['name'] && <span className='error'>{errors['name']}</span>)}
               </label>
               <input
+                id='pressure-sender-firstname-id'
                 className='col-12'
                 style={inputReset}
                 type='text'
@@ -111,11 +135,12 @@ class PressureForm extends Component {
               />
             </div>
             <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+              <label className='py1 gray' htmlFor='pressure-sender-lastname-id'>
                 Sobrenome
                 {(errors && errors['lastname'] && <span className='error'>{errors['lastname']}</span>)}
               </label>
               <input
+                id='pressure-sender-lastname-id'
                 className='col-12'
                 style={inputReset}
                 type='text'
