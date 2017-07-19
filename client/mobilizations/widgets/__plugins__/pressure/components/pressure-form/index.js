@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
-import { isValidEmail } from '~client/utils/validation-helper'
+import { isValidEmail, isValidPhone } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
 if (require('exenv').canUseDOM) require('./index.scss')
@@ -36,12 +36,29 @@ class PressureForm extends Component {
     const requiredMsg = 'Preenchimento obrigatório'
     const errors = { valid: true }
 
-    if (!this.state.email) {
-      errors.email = requiredMsg
-    } else if (!isValidEmail(this.state.email)) {
-      errors.email = 'E-mail inválido'
-    } else if (targetList && targetList.some(target => target.match(`<${this.state.email}>`))) {
-      errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
+    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
+      if (!this.state.email) {
+        errors.email = requiredMsg
+      } else if (!isValidEmail(this.state.email)) {
+        errors.email = 'E-mail inválido'
+      } else if (targetList && targetList.some(target => target.match(`<${this.state.email}>`))) {
+        errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
+      }
+      if (!this.state.subject) {
+        errors.subject = requiredMsg
+      }
+      if (!this.state.body) {
+        errors.body = requiredMsg
+      }
+    }
+    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
+      if (!this.state.phone) {
+        errors.phone = requiredMsg
+      } else if (!isValidPhone(this.state.phone)) {
+        errors.phone = 'Telefone inválido'
+      } else if (targetList && targetList.some(target => target.match(`<${this.state.phone}>`))) {
+        errors.phone = 'O telefone que você está tentando usar é de um dos alvos da mobilização.'
+      }
     }
     if (!this.state.name) {
       errors.name = requiredMsg
@@ -51,12 +68,6 @@ class PressureForm extends Component {
     }
     if (showCity === 'city-true' && !this.state.city) {
       errors.city = requiredMsg
-    }
-    if (!this.state.subject) {
-      errors.subject = requiredMsg
-    }
-    if (!this.state.body) {
-      errors.body = requiredMsg
     }
 
     if (Object.keys(errors).length > 1) {
@@ -167,35 +178,39 @@ class PressureForm extends Component {
                 </div>
               )
             }
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-subject-id'>
-                Assunto
-                {(errors && errors['subject'] && <span className='error'>{errors['subject']}</span>)}
-              </label>
-              <input
-                id='pressure-subject-id'
-                className='col-12'
-                style={inputReset}
-                type='text'
-                value={subject}
-                disabled={disabled}
-                onChange={e => this.setState({ subject: e.target.value })}
-              />
-            </div>
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-body-id'>
-                Corpo do e-mail
-                {(errors && errors['body'] && <span className='error'>{errors['body']}</span>)}
-              </label>
-              <textarea
-                id='pressure-body-id'
-                className='col-12 mt1'
-                style={{...inputReset, height: '7rem'}}
-                value={body}
-                disabled={disabled}
-                onChange={e => this.setState({ body: e.target.value })}
-              />
-            </div>
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-subject-id'>
+                  Assunto
+                  {(errors && errors['subject'] && <span className='error'>{errors['subject']}</span>)}
+                </label>
+                <input
+                  id='pressure-subject-id'
+                  className='col-12'
+                  style={inputReset}
+                  type='text'
+                  value={subject}
+                  disabled={disabled}
+                  onChange={e => this.setState({ subject: e.target.value })}
+                />
+              </div>
+            )}
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-body-id'>
+                  Corpo do e-mail
+                  {(errors && errors['body'] && <span className='error'>{errors['body']}</span>)}
+                </label>
+                <textarea
+                  id='pressure-body-id'
+                  className='col-12 mt1'
+                  style={{...inputReset, height: '7rem'}}
+                  value={body}
+                  disabled={disabled}
+                  onChange={e => this.setState({ body: e.target.value })}
+                />
+              </div>
+            )}
           </div>
           <div className='pt1 pb3 px3'>
             <button

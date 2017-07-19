@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-
+import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import * as paths from '~client/paths'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as PressureActions from '../action-creators'
@@ -41,21 +41,25 @@ export class Pressure extends Component {
   }
 
   handleSubmit (data) {
-    const { widget, asyncFillWidget } = this.props
-    const payload = {
-      activist: {
-        firstname: data.name,
-        lastname: data.lastname,
-        email: data.email,
-        city: data.city ? data.city : null
-      },
-      mail: {
-        cc: this.getTargetList().map(target => this.getEmailTarget(target)),
-        subject: data.subject,
-        body: data.body
+    if (data.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
+      const { widget, asyncFillWidget } = this.props
+      const payload = {
+        activist: {
+          firstname: data.name,
+          lastname: data.lastname,
+          email: data.email,
+          city: data.city || null
+        },
+        mail: {
+          cc: this.getTargetList().map(target => this.getEmailTarget(target)),
+          subject: data.subject,
+          body: data.body
+        }
       }
+      asyncFillWidget({ payload, widget })
+    } else if (data.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
+      console.info('do the phone pressure! (call GraphQL mutation or something else...)')
     }
-    asyncFillWidget({ payload, widget })
   }
 
   handleOverlayOnClick (e) {

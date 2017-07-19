@@ -7,7 +7,7 @@ import { PressureForm } from '~client/mobilizations/widgets/__plugins__/pressure
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-form', () => {
   let wrapper
-  const targets = ['foo@bar.com', 'bar@foo.com', 'foo@baz.com']
+  const targets = ['Foo Bar <foo@bar.com>', 'Bar Foo <bar@foo.com>', 'Foo Baz <foo@baz.com>']
   const widget = { settings: {} }
 
   beforeEach(() => {
@@ -82,7 +82,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
       />
     )
     wrapper.find('form').simulate('submit')
-    expect(wrapper.find('span.error').length).to.equal(4)
+    expect(wrapper.find('span.error').length).to.equal(5)
     expect(submitted).to.equal(undefined)
   })
 
@@ -109,6 +109,17 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
 
     it('should not render email field when targets have phone number', () => {
       expect(wrapper.find('#pressure-sender-email-id').length).to.equal(0)
+    })
+
+    it('should render error and not call onSubmit if any field not fill', () => {
+      let submitted
+      wrapper.setProps({
+        ...wrapper.props(),
+        onSubmit: data => { submitted = data }
+      })
+      wrapper.find('form').simulate('submit')
+      expect(wrapper.find('span.error').length).to.equal(3)
+      expect(submitted).to.equal(undefined)
     })
   })
 })
