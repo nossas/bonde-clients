@@ -29,7 +29,11 @@ export const isValidFromEmail = value => {
 const regexTargetEmail = /[a-zà-úA-ZÀ-Ú\s]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
 export const isValidTargetEmail = value => regexTargetEmail.test(value)
 
-// Regex to validate Target
+// Regex to validate phone number
 // Validating only BRA phone numbers for now
-const regexTargetPhone = /[a-zà-úA-ZÀ-Ú\s']+\s<(\+\d{2})?\d{2}\d{4,5}-?\d{4}>/
+const regexPhone = /^(\+\d{2})?\d{6,7}-?\d{4}$/
+export const isValidPhone = phone => regexPhone.test(phone)
+
+// Regex to validate target with phone number
+const regexTargetPhone = /^[a-zà-úA-ZÀ-Ú\s']+\s<(\+\d{2})?\d{6,7}-?\d{4}>$/
 export const isValidTargetPhone = value => regexTargetPhone.test(value)
