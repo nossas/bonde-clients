@@ -23,7 +23,11 @@ import {
 export class Pressure extends Component {
   constructor (props, context) {
     super(props, context)
-    this.state = { filled: false }
+    this.state = {
+      filled: false,
+      selectedTargets: [],
+      selectedTargetsError: undefined
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -38,6 +42,10 @@ export class Pressure extends Component {
   getEmailTarget (target) {
     const targetSplit = target.split('<')
     return targetSplit[1].replace('>', '')
+  }
+
+  changeSelectedTargets (selectedTargets) {
+    this.setState({ selectedTargets })
   }
 
   handleSubmit (data) {
@@ -58,7 +66,15 @@ export class Pressure extends Component {
       }
       asyncFillWidget({ payload, widget })
     } else if (data.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
-      console.info('do the phone pressure! (call GraphQL mutation or something else...)')
+      if (!this.state.selectedTargets.length) {
+        this.setState({
+          selectedTargetsError:
+            'Ops, você precisa selecionar pelo menos um alvo para poder pressionar'
+        })
+      } else {
+        this.setState({ selectedTargetsError: undefined })
+        console.info('do the phone pressure! (call GraphQL mutation or something else...)')
+      }
     }
   }
 
@@ -122,7 +138,11 @@ export class Pressure extends Component {
             >
               {titleText}
             </h2>
-            <TargetList targets={::this.getTargetList() || []} />
+            <TargetList
+              targets={::this.getTargetList() || []}
+              onSelect={::this.changeSelectedTargets}
+              errorMessage={this.state.selectedTargetsError}
+            />
             <PressureForm
               disabled={disableEditField === 's'}
               widget={widget}
@@ -132,6 +152,7 @@ export class Pressure extends Component {
               body={pressureBody}
               onSubmit={::this.handleSubmit}
               targetList={this.getTargetList()}
+              selectedTargets={this.selectedTargets}
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount

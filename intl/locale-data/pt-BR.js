@@ -1200,8 +1200,14 @@ servidor-03.dominio.com`,
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'pressure-widget--target-list.label': `
+  'pressure-widget--target-list.label.email': `
     Quem você vai pressionar ({targetsCount} {targetsCount, plural,
+      one {alvo}
+      other {alvos}
+    })
+  `,
+  'pressure-widget--target-list.label.pressure': `
+    Selecione quem você quer pressionar ({targetsCount} {targetsCount, plural,
       one {alvo}
       other {alvos}
     })

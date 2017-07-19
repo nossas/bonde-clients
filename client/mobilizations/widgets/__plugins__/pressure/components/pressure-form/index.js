@@ -55,8 +55,16 @@ class PressureForm extends Component {
       if (!this.state.phone) {
         errors.phone = requiredMsg
       } else if (!isValidPhone(this.state.phone)) {
-        errors.phone = 'Telefone inválido'
-      } else if (targetList && targetList.some(target => target.match(`<${this.state.phone}>`))) {
+        errors.phone = [9, 10].includes(this.state.phone.length)
+          ? 'Informe o DDD com dois dígitos'
+          : 'Telefone inválido'
+      } else if (
+        targetList &&
+        targetList.some(
+          target => target.replace(/\D/g, '')
+            .match(`${this.state.phone.replace(/\D/g, '')}`)
+        )
+      ) {
         errors.phone = 'O telefone que você está tentando usar é de um dos alvos da mobilização.'
       }
     }
@@ -80,11 +88,9 @@ class PressureForm extends Component {
     e.preventDefault()
     const { onSubmit } = this.props
     const errors = this.validate()
-    if (!errors.valid) {
-      this.setState({ errors })
-    } else {
-      onSubmit && onSubmit(this.state)
-    }
+
+    this.setState({ errors })
+    if (errors.valid) onSubmit && onSubmit(this.state)
   }
 
   render () {

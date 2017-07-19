@@ -2,20 +2,22 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import * as array from '~client/utils/array'
+import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 
 if (require('exenv').canUseDOM) require('./index.scss')
 
 const parseTarget = target => {
   const targetSplit = target.split('<')
   const valid = targetSplit.length === 2
-  return valid ? { name: targetSplit[0].trim(), email: targetSplit[1].replace('>', '') } : null
+  return valid ? { name: targetSplit[0].trim(), value: targetSplit[1].replace('>', '') } : null
 }
 
 class TargetList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      targets: props.targets
+      targets: props.targets,
+      selectedTargets: []
     }
   }
 
@@ -35,35 +37,75 @@ class TargetList extends Component {
 
   render () {
     const { targets } = this.state
+    const { onSelect, errorMessage } = this.props
+    const pressureType = pressureHelper.getType(targets)
+    const isPressureEmail = pressureType === pressureHelper.PRESSURE_TYPE_EMAIL
+    const isPressurePhone = pressureType === pressureHelper.PRESSURE_TYPE_PHONE
 
     return (
       <div className='target-list px2 py1'>
-        <p className='target-list-label bold'>
-          <FormattedMessage
-            id='pressure-widget--target-list.label'
-            defaultMessage={`
-              Quem você vai pressionar ({targetsCount} {targetsCount, plural,
-                one {alvo}
-                other {alvos}
-              })
-            `}
-            values={{ targetsCount: String(array.clean(targets).length) }}
-          />
-        </p>
+        <div className='target-list-label bold'>
+          {!isPressureEmail ? null : (
+            <FormattedMessage
+              id='pressure-widget--target-list.label.email'
+              defaultMessage={`
+                Quem você vai pressionar ({targetsCount} {targetsCount, plural,
+                  one {alvo}
+                  other {alvos}
+                })
+              `}
+              values={{ targetsCount: String(array.clean(targets).length) }}
+            />
+          )}
+          {!isPressurePhone ? null : (
+            <FormattedMessage
+              id='pressure-widget--target-list.label.pressure'
+              defaultMessage={`
+                Selecione quem você quer pressionar ({targetsCount} {targetsCount, plural,
+                  one {alvo}
+                  other {alvos}
+                })
+              `}
+              values={{ targetsCount: String(array.clean(targets).length) }}
+            />
+          )}
+          {errorMessage && (<div className='red mt1'>{errorMessage}</div>)}
+        </div>
         <div className='target-list-container clearfix'>
           <div className='target-list-wrapper clearfix'>
             {targets.length > 0 && targets.map((obj, index) => {
               const target = parseTarget(obj)
               return !target ? null : (
-                <div
+                <label
                   key={`target-item-${index}`}
                   className='target-item left py1 px2 mr1 bg-white rounded'
                 >
+                  {isPressurePhone && (
+                    <input
+                      type='checkbox'
+                      onChange={({ target: { checked } }) => {
+                        const { selectedTargets } = this.state
+                        if (checked) {
+                          // append the current target
+                          this.state.selectedTargets = [...selectedTargets, target]
+                        } else {
+                          const nameMatching = t => t.name === target.name
+                          const index = selectedTargets.findIndex(nameMatching)
+                          // remove the current target
+                          this.state.selectedTargets = [
+                            ...selectedTargets.slice(0, index),
+                            ...selectedTargets.slice(index + 1)
+                          ]
+                        }
+                        onSelect && onSelect(this.state.selectedTargets)
+                      }}
+                    />
+                  )}
                   <p className='black h6 m0'>
                     <span className='bold flex'>{target.name}</span>
-                    <span>{target.email}</span>
+                    <span>{target.value}</span>
                   </p>
-                </div>
+                </label>
               )
             })}
           </div>
@@ -74,7 +116,9 @@ class TargetList extends Component {
 }
 
 TargetList.propTypes = {
-  targets: PropTypes.arrayOf(PropTypes.string)
+  targets: PropTypes.arrayOf(PropTypes.string),
+  onSelect: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string
 }
 
 TargetList.defaultProps = {
