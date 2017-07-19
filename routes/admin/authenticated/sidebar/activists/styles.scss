@@ -1,0 +1,15 @@
+.listable {
+  
+  .row-activist {
+    margin-bottom: 10px;
+
+    &.active {
+      border: 1px solid black;
+    }
+
+    .col-activist {
+      background-color: white;
+      padding: 10px;
+    }
+  }
+}

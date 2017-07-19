@@ -5,15 +5,16 @@ import classnames from 'classnames'
 export const Listable = ({
   data,
   onClickRow,
-  selectedRow,
+  selectedRowIndex,
   listComponent: ListComponent,
   rowComponent: RowComponent
 }) => (
   <ListComponent className={classnames('listable', { 'selectable': onClickRow })}>
     {data && data.map((item, index) => (
       <RowComponent
+        key={`rowIndex-${index}`}
         item={item}
-        active={index === selectedRow}
+        active={index === selectedRowIndex}
         onClick={() => onClickRow && onClickRow(item, index)}
       />
     ))}
@@ -25,11 +26,7 @@ Listable.propTypes = {
   onClickRow: PropTypes.func,
   listComponent: PropTypes.node,
   rowComponent: PropTypes.node,
-  selectedRow: PropTypes.oneOf([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ])
+  selectedRowIndex: PropTypes.number
 }
 
 Listable.defaultProps = {
@@ -43,21 +40,18 @@ export const Row = ({
   className,
   style,
   children
-}) => {
- 
- return (
-    <div
-      className={classnames('flex row clearfix', className, { 'active': active })}
-      style={{
-        ...style,
-        cursor: onClick ? 'pointer' : 'none'
-      }}
-      onClick={onClick}
-    >
-      {children && children({ item })}
-    </div>
-  )
-}
+}) => (
+  <div
+    className={classnames('flex row clearfix', className, { 'active': active })}
+    style={{
+      ...style,
+      cursor: onClick ? 'pointer' : 'none'
+    }}
+    onClick={onClick}
+  >
+    {children && children({ item })}
+  </div>
+)
 
 Row.propTypes = {
   item: PropTypes.oneOfType([
@@ -81,9 +75,8 @@ export const ColumnHOC = ({ defaultClassName, defaultComponent, style }) => ({
   smSize,
   lgSize
 }) => {
+  const Column = defaultComponent || 'div'
 
-  const Column = defaultComponent ? defaultComponent : 'div'
-  
   return (
     <Column
       style={style}
