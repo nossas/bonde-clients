@@ -1171,7 +1171,7 @@ servidor-03.dominio.com`,
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
   'page--pressure-widget-email.form.input-tag.label': 'Alvos',
-  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>',
+  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Padrão inválido. Ex.: Nome <nome@email.com> ou Nome <+5511999999999>',
   'page--pressure-widget-email.form.email-subject.label': 'Assunto do email',
   'page--pressure-widget-email.form.email-body.label': 'Corpo do email que será enviado',
 

@@ -3,20 +3,28 @@ import React, { Component } from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
 import * as os from '~client/utils/browser/os'
+import * as validator from '~client/utils/validation-helper'
 import { FormGroup, ControlLabel, FormControl, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
 import { Info } from '~client/components/notify'
 import { Kbd } from '~client/components/markdown'
 
-// Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
-// eslint-disable-next-line
-const patternTarget = /[a-zà-úA-ZÀ-Ú\s]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
-
 class PressureSettingsEmailPage extends Component {
   constructor (props) {
     super(props)
-    this.state = { targets: this.getTargetList() || [] }
+    this.state = {
+      targets: this.getTargetList() || [],
+      pressureType: this.getPressureType() || undefined
+    }
+  }
+
+  getPressureType (targets = this.getTargetList()) {
+    if (targets.length) {
+      if (validator.isValidTargetEmail(targets[0])) return 'email'
+      if (validator.isValidTargetPhone(targets[0])) return 'phone'
+      return 'invalid'
+    }
   }
 
   getTargetString (targets) {
@@ -72,29 +80,45 @@ class PressureSettingsEmailPage extends Component {
             values={this.state.targets}
             onInsertTag={targets => {
               const targetsPushed = [...this.state.targets, ...targets]
-              this.setState({ targets: targetsPushed })
+              const pressureType = this.getPressureType(targetsPushed)
+              this.setState({ targets: targetsPushed, pressureType })
               targetsField.onChange(this.getTargetString(targetsPushed))
             }}
             onRemoveTag={value => {
               const targets = this.state.targets.filter(tag => tag !== value)
-              this.setState({ targets })
+              const pressureType = targets.length ? this.state.pressureType : undefined
+              this.setState({ targets, pressureType })
               targetsField.onChange(this.getTargetString(targets))
             }}
             onRemoveAll={() => {
               const targets = []
-              this.setState({ targets })
+              this.setState({ targets, pressureType: undefined })
               targetsField.onChange(this.getTargetString(targets))
               this.props.notifyAllTargetsRemoval()
             }}
             validate={targets => {
               const errors = { valid: true }
-              if (targets.some(target => !target.match(patternTarget))) {
-                errors.valid = false
+              if (targets.some(target => !(
+                validator.isValidTargetEmail(target) ||
+                validator.isValidTargetPhone(target)
+              ))) {
                 errors.message = intl.formatMessage({
                   id: 'page--pressure-widget-email.form.input-tag.validation.invalid-target-format',
                   defaultMessage: 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
                 })
+              } else if (
+                this.state.pressureType === 'email' &&
+                targets.some(target => validator.isValidTargetPhone(target))
+              ) {
+                errors.message = 'Você já cadastrou um alvo para pressão por email.'
+              } else if (
+                this.state.pressureType === 'phone' &&
+                targets.some(target => validator.isValidTargetEmail(target))
+              ) {
+                errors.message = 'Você já cadastrou um alvo para pressão por telefone.'
               }
+
+              if (errors.message) errors.valid = false
               return errors
             }}
             helperText={
