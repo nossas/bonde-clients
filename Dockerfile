@@ -2,37 +2,17 @@ FROM node:latest
 MAINTAINER Nossas <tech@nossas.org>
 
 ARG AWS_BUCKET=bonde-assets-staging
-ARG AWS_ACCESS_KEY_ID=1
-ARG AWS_SECRET_ACCESS_KEY=1
 ARG APP_DOMAIN=staging.bonde.org
 ARG API_URL=https://api.staging.bonde.org
-ARG GOOGLE_FONTS_API_KEY=1
-ARG PAGARME_KEY=1
-ARG SENTRY_DSN_PUBLIC
-ARG GRAPHQL_URL
+ARG GRAPHQL_URL=https://data.staging.bonde.org
 
 ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG_PRODUCTION=false PORT=5001
 
-RUN mkdir /code
+RUN mkdir /code && touch /code/.env
 WORKDIR /code
 
 COPY package.json yarn.lock /code/
 RUN yarn
 COPY . /code
-
-RUN touch .env
-RUN AWS_BUCKET=$AWS_BUCKET \
-    AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
-    AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
-    APP_DOMAIN=$APP_DOMAIN \
-    API_URL=$API_URL \
-    GOOGLE_FONTS_API_KEY=$GOOGLE_FONTS_API_KEY \
-    PAGARME_KEY=$PAGARME_KEY \
-    SENTRY_DSN_PUBLIC=$SENTRY_DSN_PUBLIC \
-    GRAPHQL_URL=$GRAPHQL_URL \
-    NODE_ENV=$NODE_ENV \
-    yarn heroku-postbuild
-
-CMD ["yarn", "start:prod"]
 
 EXPOSE 5001

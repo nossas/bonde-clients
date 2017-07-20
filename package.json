@@ -10,7 +10,8 @@
     "coverage": "nyc npm test",
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
     "start:prod": "node ./build/server.js",
-    "heroku-postbuild": "./node_modules/.bin/webpack --config ./tools/webpack.client.js && ./node_modules/.bin/webpack -p --config ./tools/webpack.server.js",
+    "build:server": "./node_modules/.bin/webpack -p --config ./tools/webpack.server.js",
+    "build:client": "./node_modules/.bin/webpack --config ./tools/webpack.client.js",
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version"

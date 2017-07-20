@@ -10,24 +10,9 @@ pipeline:
   publish-staging:
     image: plugins/docker
     repo: nossas/bonde-client
-    username: lpirola
-    password: ${DOCKER_PASSWORD}
-    secrets: [
-      docker_password,
-      stag_pagarme_key,
-      stag_google_fonts_api_key,
-      stag_aws_access_key_id,
-      stag_aws_secret_access_key,
-      stag_sentry_dsn_public ]
+    secrets: [ docker_username, docker_password ]
     tags:
       - ${DRONE_BRANCH}
-    build_args:
-      - PAGARME_KEY=$stag_pagarme_key
-      - GOOGLE_FONTS_API_KEY=${stag_google_fonts_api_key}
-      - AWS_ACCESS_KEY_ID=$STAG_AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY=${STAG_AWS_SECRET_ACCESS_KEY}
-      - SENTRY_DSN_PUBLIC=${stag_sentry_dsn_public}
-      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -44,6 +29,8 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
+      - dokku run 0-client yarn build:client
+      - dokku run 0-client yarn build:server
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -51,27 +38,14 @@ pipeline:
   publish-production:
     image: plugins/docker
     repo: nossas/bonde-client
-    username: lpirola
-    password: ${DOCKER_PASSWORD}
-    secrets: [
-      docker_password,
-      prod_pagarme_key,
-      prod_google_fonts_api_key,
-      prod_aws_access_key_id,
-      prod_aws_secret_access_key,
-      prod_sentry_dsn_public ]
+    secrets: [ docker_username, docker_password ]
     tags:
       - ${DRONE_TAG##v}
     build_args:
       - NODE_ENV=production
-      - PAGARME_KEY=${PROD_PAGARME_KEY}
-      - GOOGLE_FONTS_API_KEY=${PROD_GOOGLE_FONTS_API_KEY}
       - APP_DOMAIN=bonde.org
       - API_URL=https://api.bonde.org
       - AWS_BUCKET=bonde-assets
-      - AWS_ACCESS_KEY_ID=${PROD_AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${PROD_AWS_SECRET_ACCESS_KEY}
-      - SENTRY_DSN_PUBLIC=${PROD_SENTRY_DSN_PUBLIC}
       - GRAPHQL_URL=https://data.bonde.org/graphql
     when:
       status: success
@@ -89,6 +63,8 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
+      - dokku run 0-client yarn build:client
+      - dokku run 0-client yarn build:server
     when:
       status: success
       event: tag
