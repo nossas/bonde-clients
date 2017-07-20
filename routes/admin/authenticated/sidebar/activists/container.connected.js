@@ -6,14 +6,22 @@ import * as CommunitySelectors from '~client/community/selectors'
 import Container from './container'
 
 const allActivistsQuery = gql`
-  query allActivists ($communityId: Int) {
-    allActivists (condition: { communityId: $communityId }) {
+  query allActivists ($communityId: Int, $first: Int, $cursor: Cursor) {
+    allActivists (
+      first: $first,
+      after: $cursor,
+      condition: { communityId: $communityId }
+    ) {
       totalCount,
       nodes {
         id,
         name,
         email,
         phone
+      },
+      pageInfo {
+        hasNextPage,
+        endCursor
       }
     }
   }
@@ -22,13 +30,25 @@ const allActivistsQuery = gql`
 const WithActivistsQuery = graphql(allActivistsQuery, {
   options: (props) => ({
     variables: {
-      communityId: props.communityId
+      communityId: props.communityId,
+      first: 10
     }
   }),
-  props: ({ data: { loading, allActivists } }) => ({
+  props: ({ data: { loading, allActivists, fetchMore }, ownProps: { communityId }}) => ({
     loading,
     data: allActivists ? allActivists.nodes : [],
-    totalCount: allActivists ? allActivists.totalCount : 0
+    totalCount: allActivists ? allActivists.totalCount : 0,
+    onNextPage: () => {
+      return fetchMore({
+        query: allActivistsQuery,
+        variables: {
+          communityId,
+          first: 10,
+          cursor: allActivists ? allActivists.pageInfo.endCursor : null
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult
+      })
+    }
   })
 })
 

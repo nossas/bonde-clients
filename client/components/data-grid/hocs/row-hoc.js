@@ -24,10 +24,6 @@ export default (WrappedComponent) => {
       PropTypes.string,
       PropTypes.number,
       PropTypes.object
-    ]),
-    rowIndex: PropTypes.oneOf([
-      PropTypes.string,
-      PropTypes.number
     ])
   }
 

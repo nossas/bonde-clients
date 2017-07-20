@@ -5,6 +5,7 @@ import {
   SettingsPageMenuLayout,
   SettingsPageContentLayout
 } from '~client/components/layout'
+import { Loading } from '~client/components/await'
 
 import { DataGridHOC } from '~client/components/data-grid/hocs'
 import { CounterDataGrid, ClickableCol, CheckboxCol, Col, Row } from '~client/components/data-grid/components'
@@ -51,7 +52,7 @@ export default class ActivistsContainer extends Component {
   }
 
   render () {
-    const { children, data, totalCount } = this.props
+    const { children, loading, data, totalCount, onNextPage } = this.props
     
     return (
       <SettingsPageLayout>
@@ -67,36 +68,39 @@ export default class ActivistsContainer extends Component {
           {this.state.item && (
             <ActivistDetail item={this.state.item} />
           )}
-          <CounterDataGrid
-            data={data}
-            totalCount={totalCount}
-            counterText={
-              <FormattedMessage
-                id='activists.routes--container.counter-text'
-                defaultMessage='ativistas'
-              />
-            }
-            fieldIndex='id'
-          >
-            {({ data, rowIndex }) => [
-              <CheckboxCol
-                key={`colIndex-${rowIndex}`}
-                checked={this.state.rowIndexList.indexOf(rowIndex) !== -1}
-                onChange={() => {
-                  this.handleSelectRow(data, rowIndex)
-                }}
-              />,
-              <ClickableCol
-                key={`colName${rowIndex}`}
-                onClick={() => {
-                  this.handleClickRow(data, rowIndex)
-                }}
-              >
-                {data.name}
-              </ClickableCol>,
-              <Col key={`colEmail-${rowIndex}`}>{data.email}</Col>
-            ]}
-          </CounterDataGrid>
+          {loading ? <Loading /> : [
+            <CounterDataGrid
+              data={data}
+              totalCount={totalCount}
+              counterText={
+                <FormattedMessage
+                  id='activists.routes--container.counter-text'
+                  defaultMessage='ativistas'
+                />
+              }
+              fieldIndex='id'
+            >
+              {({ data, rowIndex }) => [
+                <CheckboxCol
+                  key={`colIndex-${rowIndex}`}
+                  checked={this.state.rowIndexList.indexOf(rowIndex) !== -1}
+                  onChange={() => {
+                    this.handleSelectRow(data, rowIndex)
+                  }}
+                />,
+                <ClickableCol
+                  key={`colName${rowIndex}`}
+                  onClick={() => {
+                    this.handleClickRow(data, rowIndex)
+                  }}
+                >
+                  {data.name}
+                </ClickableCol>,
+                <Col key={`colEmail-${rowIndex}`}>{data.email}</Col>
+              ]}
+            </CounterDataGrid>,
+            <button onClick={onNextPage}>Próxima</button>
+          ]}
           {children}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
