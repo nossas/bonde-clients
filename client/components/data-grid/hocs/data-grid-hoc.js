@@ -2,18 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-export default ({ fieldIndex, rowComponent: RowComponent }) =>
+export default ({ rowComponent: RowComponent }) =>
   (WrappedComponent) => {
     class PP extends React.Component {
       render () {
+        const { children, data, fieldIndex } = this.props
         const dataGridProps = {
           className: classnames('flex flex-column', this.props.className),
           data: WrappedComponent !== 'div' ? data : null
         }
-        const { children, data } = this.props
 
         return (
-          <WrappedComponent {...dataGridProps}>
+          <WrappedComponent {...this.props} {...dataGridProps}>
             {data && data.map((item, rowIndex) => (
               <RowComponent
                 key={`rowIndex-${rowIndex}`}
@@ -22,7 +22,7 @@ export default ({ fieldIndex, rowComponent: RowComponent }) =>
               >
                 {children}
               </RowComponent>
-            ))} 
+            ))}
           </WrappedComponent>
         )
       }
