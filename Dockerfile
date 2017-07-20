@@ -12,7 +12,7 @@ RUN mkdir /code && touch /code/.env
 WORKDIR /code
 
 COPY package.json yarn.lock /code/
-RUN yarn
+RUN yarn install
 COPY . /code
 
 EXPOSE 5001

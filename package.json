@@ -5,7 +5,7 @@
   "author": "Nossas <tech@nosssas.org>",
   "homepage": "http://bonde.org",
   "scripts": {
-    "test": "node --max_old_space_size=3584 ./node_modules/.bin/jest --config ./tools/jest/config.json --maxWorkers=2",
+    "test": "node --max_old_space_size=3584 ./node_modules/.bin/jest --config ./tools/jest/config.json",
     "test:w": "yarn test -- --watch",
     "coverage": "nyc npm test",
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
@@ -43,6 +43,7 @@
     "history": "^4.6.0",
     "hpp": "^0.2.0",
     "immutable": "^3.8.1",
+    "jest-cli": "^18.1.0",
     "jquery": "^3.1.1",
     "keycode": "^2.1.8",
     "morgan": "^1.6.1",
