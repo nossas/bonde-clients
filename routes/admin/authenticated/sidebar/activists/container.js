@@ -7,7 +7,7 @@ import {
 } from '~client/components/layout'
 
 import { DataGridHOC } from '~client/components/data-grid/hocs'
-import { ClickableCol, CheckboxCol, Col, Row } from '~client/components/data-grid/components'
+import { CounterDataGrid, ClickableCol, CheckboxCol, Col, Row } from '~client/components/data-grid/components'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
@@ -20,8 +20,6 @@ const ActivistDetail = ({ item }) => (
   </ul>
 )
 // end todo
-const DataGrid = DataGridHOC({ fieldIndex: 'id', rowComponent: Row })('div')
-
 
 export default class ActivistsContainer extends Component {
   
@@ -53,7 +51,7 @@ export default class ActivistsContainer extends Component {
   }
 
   render () {
-    const { children, data } = this.props
+    const { children, data, totalCount } = this.props
     
     return (
       <SettingsPageLayout>
@@ -69,7 +67,17 @@ export default class ActivistsContainer extends Component {
           {this.state.item && (
             <ActivistDetail item={this.state.item} />
           )}
-          <DataGrid data={data}>
+          <CounterDataGrid
+            data={data}
+            totalCount={totalCount}
+            counterText={
+              <FormattedMessage
+                id='activists.routes--container.counter-text'
+                defaultMessage='ativistas'
+              />
+            }
+            fieldIndex='id'
+          >
             {({ data, rowIndex }) => [
               <CheckboxCol
                 key={`colIndex-${rowIndex}`}
@@ -88,7 +96,7 @@ export default class ActivistsContainer extends Component {
               </ClickableCol>,
               <Col key={`colEmail-${rowIndex}`}>{data.email}</Col>
             ]}
-          </DataGrid>
+          </CounterDataGrid>
           {children}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
