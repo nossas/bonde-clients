@@ -11,8 +11,7 @@ ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG
 RUN mkdir /code && touch /code/.env
 WORKDIR /code
 
-COPY package.json yarn.lock /code/
+COPY . /code/
 RUN yarn install
-COPY . /code
 
 EXPOSE 5001
