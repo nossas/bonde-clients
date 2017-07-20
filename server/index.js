@@ -49,7 +49,7 @@ export const createServer = (config) => {
     app.use(hpp())
     app.use(compression())
     if (__PROD__) {
-      assets = require('./../assets.json')
+      assets = require('./../build/assets.json')
     }
     Raven.config(config.sentryDns).install()
     app.use(Raven.requestHandler())

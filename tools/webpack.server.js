@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const webpack = require('webpack')
 const fs = require('fs')
 const path = require('path')
@@ -12,7 +14,7 @@ function getExternals () {
 
 module.exports = {
   target: 'node',
-  devtool: 'inline-source-map',
+  devtool: 'hidden-source-map',
   entry: './server',
   output: {
     path: './build',

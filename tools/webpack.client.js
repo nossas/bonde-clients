@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const webpack = require('webpack')
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
@@ -94,9 +96,9 @@ if (isProd) {
       test: /\.js$|\.css$|\.svg$/,
       minRatio: 0.8
     }),
-    new AssetsPlugin({ filename: 'assets.json' }),
+    new AssetsPlugin({ filename: './build/assets.json' }),
     new Visualizer({
-      filename: './main.stats.html'
+      filename: './build/main.stats.html'
     })
   )
   if ('AWS_ACCESS_KEY_ID' in process.env) {
@@ -133,7 +135,7 @@ if (isProd) {
 }
 
 module.exports = {
-  devtool: isProd ? 'source-map' : 'eval',
+  devtool: isProd ? 'hidden-source-map' : 'eval',
   context: sourcePath,
   node: {
     fs: 'empty'
