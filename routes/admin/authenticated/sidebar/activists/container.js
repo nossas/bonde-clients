@@ -5,11 +5,8 @@ import {
   SettingsPageMenuLayout,
   SettingsPageContentLayout
 } from '~client/components/layout'
-import { Loading } from '~client/components/await'
-import { connect } from 'react-redux'
-import * as CommunitySelectors from '~client/community/selectors'
-import { DataGridHOC } from '~client/components/data-grid/hocs'
-import { CounterDataGrid, ClickableCol, CheckboxCol, Col, Row } from '~client/components/data-grid/components'
+
+import PaginationGrid from './pagination-grid'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
@@ -53,14 +50,6 @@ export default class ActivistsContainer extends Component {
   }
 
   render () {
-    
-    const {
-      loading,
-      data,
-      totalCount,
-      onNextPage,
-      onPreviousPage
-    } = this.props
 
     return (
       <SettingsPageLayout>
@@ -76,40 +65,12 @@ export default class ActivistsContainer extends Component {
           {this.state.item && (
             <ActivistDetail item={this.state.item} />
           )}
-          {loading ? <Loading /> : [
-            <CounterDataGrid
-              data={data}
-              totalCount={totalCount}
-              counterText={
-                <FormattedMessage
-                  id='activists.routes--container.counter-text'
-                  defaultMessage='ativistas'
-                />
-              }
-              fieldIndex='id'
-            >
-              {({ data, rowIndex }) => [
-                <CheckboxCol
-                  key={`colIndex-${rowIndex}`}
-                  checked={this.state.rowIndexList.indexOf(rowIndex) !== -1}
-                  onChange={() => {
-                    this.handleSelectRow(data, rowIndex)
-                  }}
-                />,
-                <ClickableCol
-                  key={`colName${rowIndex}`}
-                  onClick={() => {
-                    this.handleClickRow(data, rowIndex)
-                  }}
-                >
-                  {data.name}
-                </ClickableCol>,
-                <Col key={`colEmail-${rowIndex}`}>{data.email}</Col>
-              ]}
-            </CounterDataGrid>,
-            <button onClick={onPreviousPage}>Anterior</button>,
-            <button onClick={onNextPage}>Próxima</button>
-          ]}
+          <PaginationGrid
+            {...this.props}
+            rowIndexList={this.state.rowIndexList}
+            onSelectRow={this.handleSelectRow.bind(this)}
+          />
+          {`${this.state.rowIndexList.length} ativistas selecionados`}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
