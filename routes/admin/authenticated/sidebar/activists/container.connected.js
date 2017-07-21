@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { graphql, gql } from 'react-apollo'
+import { gql } from 'react-apollo'
+import { PaginationHOC } from '~client/components/data-grid/hocs'
 import * as CommunitySelectors from '~client/community/selectors'
 
 import Container from './container'
 
 const allActivistsQuery = gql`
-  query allActivists ($communityId: Int, $first: Int, $cursor: Cursor) {
+  query allActivists ($communityId: Int, $first: Int, $offset: Int) {
     allActivists (
       first: $first,
-      after: $cursor,
+      offset: $offset,
       condition: { communityId: $communityId }
     ) {
       totalCount,
@@ -18,45 +19,21 @@ const allActivistsQuery = gql`
         name,
         email,
         phone
-      },
-      pageInfo {
-        hasNextPage,
-        endCursor
       }
     }
   }
 `
 
-const WithActivistsQuery = graphql(allActivistsQuery, {
-  options: (props) => ({
-    variables: {
-      communityId: props.communityId,
-      first: 10
-    }
-  }),
-  props: ({ data: { loading, allActivists, fetchMore }, ownProps: { communityId }}) => ({
-    loading,
-    data: allActivists ? allActivists.nodes : [],
-    totalCount: allActivists ? allActivists.totalCount : 0,
-    onNextPage: () => {
-      return fetchMore({
-        query: allActivistsQuery,
-        variables: {
-          communityId,
-          first: 10,
-          cursor: allActivists ? allActivists.pageInfo.endCursor : null
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult
-      })
-    }
-  })
-})
-
 const mapStateToProps = (state) => ({
   communityId: CommunitySelectors.getCurrentId(state)
 })
 
-export default connect(mapStateToProps)(
-  WithActivistsQuery(Container)
-)
+const Pagination = PaginationHOC({
+  query: allActivistsQuery,
+  queryParams: ({ communityId }) => ({ communityId }),
+  queryName: 'allActivists',
+  limit: 15
+})
+
+export default connect(mapStateToProps)(Pagination(Container))
 

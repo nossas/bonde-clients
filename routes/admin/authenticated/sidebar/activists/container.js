@@ -6,7 +6,8 @@ import {
   SettingsPageContentLayout
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
-
+import { connect } from 'react-redux'
+import * as CommunitySelectors from '~client/community/selectors'
 import { DataGridHOC } from '~client/components/data-grid/hocs'
 import { CounterDataGrid, ClickableCol, CheckboxCol, Col, Row } from '~client/components/data-grid/components'
 
@@ -52,8 +53,15 @@ export default class ActivistsContainer extends Component {
   }
 
   render () {
-    const { children, loading, data, totalCount, onNextPage } = this.props
     
+    const {
+      loading,
+      data,
+      totalCount,
+      onNextPage,
+      onPreviousPage
+    } = this.props
+
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout
@@ -99,9 +107,9 @@ export default class ActivistsContainer extends Component {
                 <Col key={`colEmail-${rowIndex}`}>{data.email}</Col>
               ]}
             </CounterDataGrid>,
+            <button onClick={onPreviousPage}>Anterior</button>,
             <button onClick={onNextPage}>Próxima</button>
           ]}
-          {children}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
