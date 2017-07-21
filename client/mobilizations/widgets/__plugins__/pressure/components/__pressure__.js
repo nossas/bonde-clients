@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
 import { browserHistory } from 'react-router'
+import * as graphqlMutations from '~client/graphql/mutations'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import * as paths from '~client/paths'
 import MobSelectors from '~client/mobrender/redux/selectors'
@@ -73,7 +75,11 @@ export class Pressure extends Component {
         })
       } else {
         this.setState({ selectedTargetsError: undefined })
-        console.info('do the phone pressure! (call GraphQL mutation or something else...)')
+        // it needs to find or create the activist data
+        this.props.createTwilioCall({
+          from: data.phone,
+          to: this.state.selectedTargets.map(target => target.value).join(',')
+        })
       }
     }
   }
@@ -192,4 +198,12 @@ const mapStateToProps = (state, props) => {
   return { saving, filledPressureWidgets }
 }
 
-export default connect(mapStateToProps, PressureActions)(Pressure)
+const mapDispatchToProps = (dispatch, props) => ({
+  ...props,
+  ...PressureActions,
+  createTwilioCall: variables => props.mutate({ variables })
+})
+
+export default graphql(graphqlMutations.createTwilioCall)(
+  connect(mapStateToProps, mapDispatchToProps)(Pressure)
+)
