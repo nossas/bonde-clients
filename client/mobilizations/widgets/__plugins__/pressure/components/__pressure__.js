@@ -1,22 +1,17 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
+import { withApollo } from 'react-apollo'
 import { browserHistory } from 'react-router'
+import { client as graphqlClient } from '~client/store'
 import * as graphqlMutations from '~client/graphql/mutations'
+import * as graphqlQueries from '~client/graphql/queries'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import * as paths from '~client/paths'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as PressureActions from '../action-creators'
 import { WidgetOverlay, FinishMessageCustom } from '~client/mobilizations/widgets/components'
-
-// Current module dependencies
-import {
-  PressureCount,
-  PressureForm,
-  TargetList,
-  PressureTellAFriend
-} from '../components'
+import { PressureCount, PressureForm, TargetList, PressureTellAFriend } from '../components'
 
 /* TODO: Change static content by props
  * - title
@@ -28,7 +23,9 @@ export class Pressure extends Component {
     this.state = {
       filled: false,
       selectedTargets: [],
-      selectedTargetsError: undefined
+      selectedTargetsError: undefined,
+      callTransition: undefined,
+      graphqlSubscription: undefined
     }
   }
 
@@ -75,10 +72,26 @@ export class Pressure extends Component {
         })
       } else {
         this.setState({ selectedTargetsError: undefined })
+
         // it needs to find or create the activist data
-        this.props.createTwilioCall({
-          from: data.phone,
-          to: this.state.selectedTargets.map(target => target.value).join(',')
+        graphqlClient().mutate({
+          mutation: graphqlMutations.createTwilioCall,
+          variables: {
+            widgetId: this.props.widget.id,
+            from: data.phone,
+            to: this.state.selectedTargets.map(target => target.value).join(',')
+          }
+        }).then(() => {
+          const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
+            pollInterval: 2000,
+            query: graphqlQueries.watchTwilioCallTransitions,
+            variables: { widgetId: this.props.widget.id, from: data.phone }
+          })
+          observableQuery.subscribe({
+            next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
+              this.setState({ callTransition })
+            }
+          })
         })
       }
     }
@@ -169,6 +182,9 @@ export class Pressure extends Component {
                 />
               )}
             </PressureForm>
+            {this.state.callTransition && (
+              <span>{this.state.callTransition.twilioCallTransitionStatus}</span>
+            )}
           </div>
         )}
       </WidgetOverlay>
@@ -198,12 +214,9 @@ const mapStateToProps = (state, props) => {
   return { saving, filledPressureWidgets }
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-  ...props,
-  ...PressureActions,
-  createTwilioCall: variables => props.mutate({ variables })
-})
+const mapDispatchToProps = { ...PressureActions }
 
-export default graphql(graphqlMutations.createTwilioCall)(
-  connect(mapStateToProps, mapDispatchToProps)(Pressure)
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Pressure)
