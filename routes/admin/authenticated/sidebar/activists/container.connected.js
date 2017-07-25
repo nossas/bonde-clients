@@ -37,7 +37,7 @@ const Pagination = PaginationHOC({
     ...data,
     mobilizations: JSON.parse(mobilizations)
   }),
-  limit: 15
+  limit: 50
 })
 
 export default connect(mapStateToProps)(Pagination(Container))
