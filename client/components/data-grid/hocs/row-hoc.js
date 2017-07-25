@@ -5,11 +5,16 @@ import classnames from 'classnames'
 export default (WrappedComponent) => {
   class PP extends React.Component {
     render () {
-      const { data, rowIndex, children } = this.props
+      const { data, onSelectRow, rowIndex, actived, className, children } = this.props
       const rowProps = {
-        className: classnames('flex', this.props.className),
+        className: classnames(
+          'flex',
+          className,
+          { 'active' : actived }
+        ),
         data: WrappedComponent !== 'div' ? data : null,
-        rowIndex: WrappedComponent !== 'div' ? rowIndex : null
+        rowIndex: WrappedComponent !== 'div' ? rowIndex : null,
+        onSelectRow
       }
       return (
         <WrappedComponent {...rowProps}>

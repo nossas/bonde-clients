@@ -6,7 +6,13 @@ export default ({ rowComponent: RowComponent }) =>
   (WrappedComponent) => {
     class PP extends React.Component {
       render () {
-        const { children, data, fieldIndex } = this.props
+        const {
+          children,
+          data,
+          fieldIndex,
+          rowIndex: rowSelectedIndex,
+          onSelectRow
+        } = this.props
         const dataGridProps = {
           className: classnames('flex flex-column', this.props.className),
           data: WrappedComponent !== 'div' ? data : null
@@ -17,6 +23,10 @@ export default ({ rowComponent: RowComponent }) =>
             {data && data.map((item, rowIndex) => (
               <RowComponent
                 key={`rowIndex-${rowIndex}`}
+                actived={rowSelectedIndex === rowIndex}
+                onSelectRow={() => {
+                  onSelectRow && onSelectRow(item, rowIndex)
+                }}
                 data={item}
                 rowIndex={fieldIndex ? item[fieldIndex] : rowIndex}
               >
