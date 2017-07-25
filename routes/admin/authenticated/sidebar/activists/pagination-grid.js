@@ -113,7 +113,7 @@ const PaginationGrid = ({
             <Col key={`name-${rowIndex}`}>{data.name}</Col>,
             <Col key={`email-${rowIndex}`}>{data.email}</Col>,
             <Col key={`mob-${rowIndex}`}>
-              <CountMobilization mobilizations={data.mobilizations} />
+              {data.mobilizations.length}
             </Col>
           ]}
       </DataGrid>

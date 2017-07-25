@@ -13,7 +13,8 @@ export default ({
   limit,
   // [string]: Nome da query utilizada. É usado para mapear as propriedades
   // do componente envovlido.
-  queryName
+  queryName,
+  parse
 }) => (WrappedComponent) => {
   // Injeta como propriedade do componente `WrappedComponent` o seguinte
   // objeto:
@@ -64,9 +65,10 @@ export default ({
       return options
     },
     props: ({ data, ownProps: { location } }) => {
+      const all = data[queryName] ? data[queryName].nodes : []
       return {
         loading: data.loading,
-        data: data[queryName] ? data[queryName].nodes : [],
+        data: all.map(parse),
         totalCount: data[queryName] ? data[queryName].totalCount : 0,
         onNextPage: () => {
           browserHistory.push({

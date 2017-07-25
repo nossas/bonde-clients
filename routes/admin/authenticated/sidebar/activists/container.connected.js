@@ -33,6 +33,10 @@ const Pagination = PaginationHOC({
   query: allActivistsQuery,
   queryParams: ({ communityId }) => ({ communityId }),
   queryName: 'allActivists',
+  parse: ({ mobilizations, ...data }) => ({
+    ...data,
+    mobilizations: JSON.parse(mobilizations)
+  }),
   limit: 15
 })
 
