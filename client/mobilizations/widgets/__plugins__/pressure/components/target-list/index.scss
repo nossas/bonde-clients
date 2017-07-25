@@ -22,11 +22,14 @@
       .target-item {
         display: flex;
         align-items: flex-start;
-        min-width: 160px;
 
         input[type="checkbox"] {
           margin: .25rem .8rem;
           margin-left: 0;
+        }
+
+        .target-name, .target-value {
+          white-space: nowrap;
         }
       }
     }

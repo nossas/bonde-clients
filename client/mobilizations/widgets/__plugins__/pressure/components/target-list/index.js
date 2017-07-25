@@ -37,7 +37,7 @@ class TargetList extends Component {
 
   render () {
     const { targets } = this.state
-    const { onSelect, errorMessage } = this.props
+    const { onSelect, errorMessage, selectable } = this.props
     const pressureType = pressureHelper.getType(targets)
     const isPressureEmail = pressureType === pressureHelper.PRESSURE_TYPE_EMAIL
     const isPressurePhone = pressureType === pressureHelper.PRESSURE_TYPE_PHONE
@@ -69,7 +69,9 @@ class TargetList extends Component {
               values={{ targetsCount: String(array.clean(targets).length) }}
             />
           )}
-          {errorMessage && (<div className='red mt1'>{errorMessage}</div>)}
+          {selectable && errorMessage && (
+            <div className='red mt1'>{errorMessage}</div>
+          )}
         </div>
         <div className='target-list-container clearfix'>
           <div className='target-list-wrapper clearfix'>
@@ -80,7 +82,7 @@ class TargetList extends Component {
                   key={`target-item-${index}`}
                   className='target-item left py1 px2 mr1 bg-white rounded'
                 >
-                  {isPressurePhone && (
+                  {selectable && (
                     <input
                       type='checkbox'
                       onChange={({ target: { checked } }) => {
@@ -102,8 +104,8 @@ class TargetList extends Component {
                     />
                   )}
                   <p className='black h6 m0'>
-                    <span className='bold flex'>{target.name}</span>
-                    <span>{target.value}</span>
+                    <span className='target-name bold flex'>{target.name}</span>
+                    <span className='target-value'>{target.value}</span>
                   </p>
                 </label>
               )
@@ -118,11 +120,13 @@ class TargetList extends Component {
 TargetList.propTypes = {
   targets: PropTypes.arrayOf(PropTypes.string),
   onSelect: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  selectable: PropTypes.bool
 }
 
 TargetList.defaultProps = {
-  targets: []
+  targets: [],
+  selectable: false
 }
 
 export default TargetList
