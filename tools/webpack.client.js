@@ -15,14 +15,14 @@ const plugins = [
     filename: 'vendor.bundle.js'
   }),
   new webpack.EnvironmentPlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    'process.env.API_URL': JSON.stringify(process.env.API_URL),
-    'process.env.GRAPHQL_URL': JSON.stringify(process.env.GRAPHQL_URL),
-    'process.env.APP_DOMAIN': JSON.stringify(process.env.APP_DOMAIN),
-    'process.env.PAGARME_KEY': JSON.stringify(process.env.PAGARME_KEY),
-    'process.env.AWS_BUCKET': JSON.stringify(process.env.AWS_BUCKET),
-    'process.env.SENTRY_DSN_PUBLIC': JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
-    'process.env.GOOGLE_FONTS_API_KEY': JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    API_URL: JSON.stringify(process.env.API_URL),
+    GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
+    APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
+    PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+    AWS_BUCKET: JSON.stringify(process.env.AWS_BUCKET),
+    SENTRY_DSN_PUBLIC: JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
+    GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
   }),
   new webpack.NamedModulesPlugin(),
   new ExtractTextPlugin({filename: '[name].css', allChunks: true})

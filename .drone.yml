@@ -1,5 +1,5 @@
 pipeline:
-  build:
+  tests:
     image: node:latest
     commands:
       - yarn install
@@ -7,7 +7,7 @@ pipeline:
     when:
       event: [push, tag]
 
-  publish-staging:
+  build-docker-staging:
     image: plugins/docker
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
@@ -17,7 +17,7 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  deploy-staging:
+  publish-staging:
     image: appleboy/drone-ssh
     host: staging.bonde.org
     username: ubuntu
@@ -30,13 +30,13 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run 0-client npm run build:client
-      - dokku --rm run 0-client npm run build:server
+      - dokku --rm run app-client npm run build:client
+      - dokku --rm run app-client npm run build:server
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-production:
+  build-docker-production:
     image: plugins/docker
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
@@ -52,7 +52,7 @@ pipeline:
       status: success
       event: tag
 
-  deploy-production:
+  publish-production:
     image: appleboy/drone-ssh
     host: ssh.bonde.org
     username: ubuntu
@@ -65,8 +65,8 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run 0-client npm run build:client
-      - dokku --rm run 0-client npm run build:server
+      - dokku --rm run app-client npm run build:client
+      - dokku --rm run app-client npm run build:server
     when:
       status: success
       event: tag
