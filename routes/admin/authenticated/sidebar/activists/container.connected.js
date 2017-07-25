@@ -18,7 +18,8 @@ const allActivistsQuery = gql`
         id,
         name,
         email,
-        phone
+        phone,
+        mobilizations
       }
     }
   }

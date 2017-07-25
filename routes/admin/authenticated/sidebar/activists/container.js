@@ -39,16 +39,6 @@ export default class ActivistsContainer extends Component {
     }
   }
 
-  handleSelectRow (item, rowIndex) {
-    let { rowIndexList } = this.state
-    if (rowIndexList.find(i => i === rowIndex) !== undefined) {
-      rowIndexList = rowIndexList.filter(x => x !== rowIndex)
-    } else {
-      rowIndexList = [...this.state.rowIndexList, rowIndex]
-    }
-    this.setState({ rowIndexList })
-  }
-
   render () {
 
     return (
@@ -65,12 +55,7 @@ export default class ActivistsContainer extends Component {
           {this.state.item && (
             <ActivistDetail item={this.state.item} />
           )}
-          <PaginationGrid
-            {...this.props}
-            rowIndexList={this.state.rowIndexList}
-            onSelectRow={this.handleSelectRow.bind(this)}
-          />
-          {`${this.state.rowIndexList.length} ativistas selecionados`}
+          <PaginationGrid {...this.props} />
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
