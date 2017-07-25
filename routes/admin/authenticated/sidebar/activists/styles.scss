@@ -1,15 +1,18 @@
-.listable {
-  
-  .row-activist {
+.pagination {
+
+  .row {
     margin-bottom: 10px;
 
-    &.active {
-      border: 1px solid black;
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #c7c7c7;    
+      }
     }
 
-    .col-activist {
-      background-color: white;
-      padding: 10px;
+    &.active {
+      background-color: #c3c3c3;
     }
   }
 }

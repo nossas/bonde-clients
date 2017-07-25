@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import { Link } from 'react-router'
 import { Loading } from '~client/components/await'
 import {
   ClickableCol,
@@ -8,11 +10,11 @@ import {
   Row
 } from '~client/components/data-grid/components'
 import { DataGridHOC } from '~client/components/data-grid/hocs'
+import * as paths from '~client/paths'
 
 const DataGrid = DataGridHOC({ rowComponent: Row })('div')
 
-
-const SelectableHOC = (WrappedComponent) => {
+const HOC = (WrappedComponent) => {
   
   class PP extends React.Component {
     
@@ -20,8 +22,7 @@ const SelectableHOC = (WrappedComponent) => {
       super(props)
       this.state = {
         item: null,
-        rowIndex: null,
-        rowIndexList: []
+        rowIndex: null
       }
     }
 
@@ -31,57 +32,43 @@ const SelectableHOC = (WrappedComponent) => {
       } else {
         this.setState({ rowIndex, item })
       }
-    }
-
-    handleSelectRow (item, rowIndex) {
-      let { rowIndexList } = this.state
-      if (rowIndexList.find(i => i === rowIndex) !== undefined) {
-        rowIndexList = rowIndexList.filter(x => x !== rowIndex)
-      } else {
-        rowIndexList = [...this.state.rowIndexList, rowIndex]
-      }
-      this.setState({ rowIndexList })
-    }
-
-    handleMarkAll(e) {
-      const { data } = this.props
-      let { rowIndexList } = this.state
-      
-      const selected = data
-          .filter(item => rowIndexList.indexOf(item.id) === -1)
-          .map(item => item.id)
-
-      if (e.target.checked) {
-        rowIndexList = [...this.state.rowIndexList, ...selected]
-      } else {
-        rowIndexList = rowIndexList.filter(x => selected.indexOf(x) !== -1)
-      }
-      this.setState({ rowIndexList })
-    }
+    } 
 
     render () {
       const { totalCount } = this.props
-      const { rowIndexList, checked } = this.state
+      const { item, rowIndex, checked } = this.state
 
       return (
-        <div className='selectable'>
-          <h2>
-            <input
-              type='checkbox'
-              value={checked}
-              onChange={this.handleMarkAll.bind(this)}
-            />
-            <span>
-              Selecionado {rowIndexList.length} de {totalCount} ativistas
-            </span>
-          </h2>
+        <div>
           <WrappedComponent
             {...this.props}
-            onClickRow={this.handleClickRow.bind(this)}
-            onSelectRow={this.handleSelectRow.bind(this)}
-            rowIndexList={this.state.rowIndexList}
-            rowIndex={this.state.rowIndex}
+            className={classnames('col col-8')}
+            onSelectRow={this.handleClickRow.bind(this)}
+            rowIndex={rowIndex}
           />
+          {item && (
+            <div className='col col-4'>
+              <div>
+                <h2>Perfil selecionado</h2>
+                <button onClick={() => this.handleClickRow(item, rowIndex)}>X</button>
+              </div>
+              <div>
+                <h3>{item.name}</h3>
+                
+                <label>Email:</label>
+                {item.email}
+                <br />
+                <label>Mobilizações:</label>
+                <ul>
+                {item.mobilizations && item.mobilizations.map((mob) =>
+                  <li>
+                    <Link to={paths.editMobilization(mob.id)}>{mob.name}</Link>
+                  </li>
+                )}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       )
     }
@@ -90,12 +77,9 @@ const SelectableHOC = (WrappedComponent) => {
   return PP
 }
 
-const CountMobilization = ({ mobilizations }) => (
-  <span>{JSON.parse(mobilizations).length}</span>
-)
-
 const PaginationGrid = ({
   children,
+  className,
   loading,
   data,
   totalCount,
@@ -103,36 +87,47 @@ const PaginationGrid = ({
   onNextPage,
   onPreviousPage,
   // Injected by SelectableHOC
-  rowIndexList,
+  rowIndex,
   onSelectRow
 }) => (
-  <div className='pagination'> 
-    {loading ? <Loading /> : (
-      <DataGrid className='grid' data={data} fieldIndex='id'>
-        {({ data, rowIndex }) => [
-            <Col key={`name-${rowIndex}`}>{data.name}</Col>,
-            <Col key={`email-${rowIndex}`}>{data.email}</Col>,
-            <Col key={`mob-${rowIndex}`}>
-              {data.mobilizations.length}
-            </Col>
-          ]}
-      </DataGrid>
-    )}
-    <div className='flex'>
-      <button
-        className='btn bg-gray rounded m2 flex-auto'
-        onClick={onPreviousPage}
-      >
-        Anterior
-      </button>
-      <button
-        className='btn bg-gray rounded m2 flex-auto'
-        onClick={onNextPage}
-      >
-        Próximo
-      </button>
+  <div className={classnames('pagination', className)}>
+    <div className='header flex'>
+      <div className='flex-auto'>Nome</div>
+      <div className='flex-auto'>E-mail</div>
+      <div className='flex-auto'>Mobilizações</div>
     </div>
+    {loading ? <Loading /> : [
+        <DataGrid
+          className='grid'
+          data={data}
+          rowIndex={rowIndex}
+          onSelectRow={onSelectRow}
+          fieldIndex='id'
+        >
+          {({ data, rowIndex }) => [
+              <Col key={`name-${rowIndex}`}>{data.name}</Col>,
+              <Col key={`email-${rowIndex}`}>{data.email}</Col>,
+              <Col key={`mob-${rowIndex}`}>
+                {data.mobilizations.length}
+              </Col>
+            ]}
+        </DataGrid>,
+        <div className='flex'>
+          <button
+            className='btn bg-gray rounded m2 flex-auto'
+            onClick={onPreviousPage}
+          >
+            Anterior
+          </button>
+          <button
+            className='btn bg-gray rounded m2 flex-auto'
+            onClick={onNextPage}
+          >
+            Próximo
+          </button>
+        </div>
+    ]} 
   </div>
 )
 
-export default PaginationGrid
+export default HOC(PaginationGrid)
