@@ -6,7 +6,7 @@ ARG APP_DOMAIN=staging.bonde.org
 ARG API_URL=https://api.staging.bonde.org
 ARG GRAPHQL_URL=https://data.staging.bonde.org
 
-ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG_PRODUCTION=false PORT=5001
+ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG_PRODUCTION=false
 
 RUN mkdir /code && mkdir /build && touch /code/.env
 WORKDIR /code

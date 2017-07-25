@@ -5,7 +5,6 @@ const config = {
   port: process.env.PORT || 1337,
   apiUrl: process.env.API_URL || 'http://localhost:3000',
   graphqlUrl: process.env.GRAPHQL_URL || 'http://localhost:3003/graphql',
-  authPort: process.env.AUTH_PORT || 3005,
   appDomain: process.env.APP_DOMAIN || 'localhost',
   timeout: 120000,
   defaultLocale: process.env.DEFAULT_LOCALE || 'pt-BR',

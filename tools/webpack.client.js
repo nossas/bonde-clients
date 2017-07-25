@@ -1,5 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
 const webpack = require('webpack')
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
@@ -10,11 +8,6 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
 
-const nodeEnv = process.env.NODE_ENV !== undefined ? process.env.NODE_ENV : 'development'
-const isProd = nodeEnv === 'production' || nodeEnv === 'staging'
-const s3BucketName = process.env.AWS_BUCKET || 'bonde-assets-dev'
-const sentryDsnPublic = process.env.SENTRY_DSN_PUBLIC || 'https://1111@sentry.io/86008'
-
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -22,20 +15,20 @@ const plugins = [
     filename: 'vendor.bundle.js'
   }),
   new webpack.EnvironmentPlugin({
-    NODE_ENV: nodeEnv,
-    API_URL: JSON.stringify(process.env.API_URL),
-    GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-    APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
-    PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
-    AWS_BUCKET: JSON.stringify(s3BucketName),
-    SENTRY_DSN_PUBLIC: JSON.stringify(sentryDsnPublic),
-    GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
-    '__DEV__': true
-
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    'process.env.GRAPHQL_URL': JSON.stringify(process.env.GRAPHQL_URL),
+    'process.env.APP_DOMAIN': JSON.stringify(process.env.APP_DOMAIN),
+    'process.env.PAGARME_KEY': JSON.stringify(process.env.PAGARME_KEY),
+    'process.env.AWS_BUCKET': JSON.stringify(process.env.AWS_BUCKET),
+    'process.env.SENTRY_DSN_PUBLIC': JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
+    'process.env.GOOGLE_FONTS_API_KEY': JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
   }),
   new webpack.NamedModulesPlugin(),
   new ExtractTextPlugin({filename: '[name].css', allChunks: true})
 ]
+
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
 
 const entry = {
   main: [
@@ -113,7 +106,7 @@ if (isProd) {
           region: 'sa-east-1'
         },
         s3UploadOptions: {
-          Bucket: s3BucketName,
+          Bucket: process.env.AWS_BUCKET,
           ContentEncoding (fileName) {
             if (/\.js$|\.css$|\.svg$/.test(fileName)) {
               return 'gzip'
@@ -135,7 +128,7 @@ if (isProd) {
 }
 
 module.exports = {
-  devtool: isProd ? 'hidden-source-map' : 'eval',
+  devtool: isProd ? 'source-map' : 'eval',
   context: sourcePath,
   node: {
     fs: 'empty'
@@ -149,7 +142,7 @@ module.exports = {
   output: {
     path: staticsPath,
     filename: '[name].bundle.js',
-    publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${s3BucketName}/` : '/'
+    publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${process.env.AWS_BUCKET}/` : '/'
   },
   module: {
     rules: [

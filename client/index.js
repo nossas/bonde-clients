@@ -14,15 +14,12 @@ import pt from 'react-intl/locale-data/pt'
 import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
 import Raven from 'raven-js'
-import DSConf from '~server/config'
 
-const __PROD__ = DSConf.nodeEnv === 'production' || DSConf.nodeEnv === 'staging'
-const __TEST__ = DSConf.nodeEnv === 'test'
+const __PROD__ = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
+const __TEST__ = process.env.NODE_ENV === 'test'
 
 if (__PROD__ || __TEST__) {
-  Raven
-    .config(process.env.SENTRY_DSN_PUBLIC)
-    .install()
+  Raven.config(process.env.SENTRY_DSN_PUBLIC).install()
 }
 
 const initialState = window.INITIAL_STATE || {}

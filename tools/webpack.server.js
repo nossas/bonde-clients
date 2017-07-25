@@ -1,5 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
 const webpack = require('webpack')
 const fs = require('fs')
 const path = require('path')
@@ -11,13 +9,12 @@ function getExternals () {
     return ext
   }, {})
 }
-
 module.exports = {
   target: 'node',
-  devtool: 'hidden-source-map',
+  devtool: 'source-map',
   entry: './server',
   output: {
-    path: './build',
+    path: path.join(__dirname, './build'),
     filename: 'server.js'
   },
   externals: getExternals(),
