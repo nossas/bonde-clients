@@ -55,7 +55,7 @@ const render = () => {
     ReactDOM.render(
       <IntlProvider locale={locale} messages={messages}>
         <Provider store={store}>
-          <ApolloProvider store={store} client={client}>
+          <ApolloProvider store={store} client={client()}>
             <Router
               routes={routes}
               history={browserHistory}

@@ -192,7 +192,7 @@ export const createServer = (config) => {
           const InitialView = (
             <IntlProvider locale={currentLocale} messages={currentLocaleMessages}>
               <Provider store={store}>
-                <ApolloProvider store={store} client={client}>
+                <ApolloProvider store={store} client={client()}>
                   <RouterContext {...renderProps} />
                 </ApolloProvider>
               </Provider>
