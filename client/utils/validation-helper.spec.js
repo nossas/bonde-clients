@@ -161,4 +161,28 @@ describe('client/utils/validation-helper', () => {
       expect(validator.isValidTargetPhone(' <123>')).to.equal(false)
     })
   })
+
+  describe('isValidPhoneE164', () => {
+    it('should return true for "+5511999999999 (9 digits)"', () => {
+      expect(validator.isValidPhoneE164('+5511999999999')).to.equal(true)
+    })
+    it('should return true for "+551199999999 (8 digits)"', () => {
+      expect(validator.isValidPhoneE164('+551199999999')).to.equal(true)
+    })
+    it('should return false for "+1199999999 (w/o DDI)"', () => {
+      expect(validator.isValidPhoneE164('+1199999999')).to.equal(false)
+    })
+    it('should return false for "+5599999999 (w/o DDD)"', () => {
+      expect(validator.isValidPhoneE164('+5599999999')).to.equal(false)
+    })
+    it('should return false for "+99999999 (w/o DDI and DDD)"', () => {
+      expect(validator.isValidPhoneE164('+99999999')).to.equal(false)
+    })
+    it('should return false for "99999999 (only phone number)"', () => {
+      expect(validator.isValidPhoneE164('99999999')).to.equal(false)
+    })
+    it('should return false for "5511999999999 (w/o +)"', () => {
+      expect(validator.isValidPhoneE164('5511999999999')).to.equal(false)
+    })
+  })
 })

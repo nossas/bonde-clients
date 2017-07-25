@@ -1171,13 +1171,15 @@ servidor-03.dominio.com`,
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
   'page--pressure-widget-email.form.input-tag.label': 'Alvos',
-  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Padrão inválido. Ex.: Nome <nome@email.com> ou Nome <+5511999999999>',
+  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Padrão inválido. Preencha conforme explicação acima.',
   'page--pressure-widget-email.form.email-subject.label': 'Assunto do email',
   'page--pressure-widget-email.form.email-body.label': 'Corpo do email que será enviado',
 
   'p--pressure-widget--input-tag.info.title': 'Como cadastrar alvos',
   'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar, clicando no botão no canto superior direito da tela.',
-  'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
+  'p--pressure-widget--input-tag.info.item.target-email-format': 'Pressão por email: {format}',
+  'p--pressure-widget--input-tag.info.item.target-phone-format': 'Pressão por telefone: {format}',
+  'p--pressure-widget--input-tag.info.item.special-chars': 'Em ambos os tipos de pressão é obrigatório o uso dos caractéres {lt} e {gt} para agrupar o email ou telefone',
   'p--pressure-widget--input-tag.info.item.sorting': 'Os alvos serão exibidos em ordem aleatória na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente.',
 
   // page pressure widget email (connected)

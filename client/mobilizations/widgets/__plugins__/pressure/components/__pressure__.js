@@ -48,6 +48,9 @@ export class Pressure extends Component {
   }
 
   handleSubmit (data) {
+    // normalize phone number with + sign (e.g. +5511987654321)
+    data.phone = /^\+/.test(data.phone) ? data.phone : `+${data.phone}`
+
     if (data.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
       const { widget, asyncFillWidget } = this.props
       const payload = {

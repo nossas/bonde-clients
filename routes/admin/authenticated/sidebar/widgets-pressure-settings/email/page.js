@@ -93,15 +93,15 @@ class PressureSettingsEmailPage extends Component {
               const errors = { valid: true }
               if (targets.some(target => !(
                 validator.isValidTargetEmail(target) ||
-                validator.isValidTargetPhone(target)
+                validator.isValidTargetPhoneE164(target)
               ))) {
                 errors.message = intl.formatMessage({
                   id: 'page--pressure-widget-email.form.input-tag.validation.invalid-target-format',
-                  defaultMessage: 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+                  defaultMessage: 'Padrão inválido. Preencha conforme explicação acima.'
                 })
               } else if (
                 this.state.pressureType === 'email' &&
-                targets.some(target => validator.isValidTargetPhone(target))
+                targets.some(target => validator.isValidTargetPhoneE164(target))
               ) {
                 errors.message = 'Você já cadastrou um alvo para pressão por email.'
               } else if (
@@ -142,13 +142,26 @@ class PressureSettingsEmailPage extends Component {
                 <ul style={{ paddingLeft: 15, marginBottom: 0 }}>
                   <li>
                     <FormattedMessage
-                      id='p--pressure-widget--input-tag.info.item.target-format'
+                      id='p--pressure-widget--input-tag.info.item.target-email-format'
+                      defaultMessage='Pressão por email: {format}'
+                      values={{ format: <b>{'Nome Sobrenome <email@provedor.com>'}</b> }}
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage
+                      id='p--pressure-widget--input-tag.info.item.target-phone-format'
+                      defaultMessage='Pressão por telefone: {format}'
+                      values={{ format: <b>{'Nome Sobrenome <+5511976547654>'}</b> }}
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage
+                      id='p--pressure-widget--input-tag.info.item.special-chars'
                       defaultMessage={
-                        'Formato do alvo: {format} (obrigatório usar os caractéres ' +
-                        '{lt} e {gt} para agrupar o email)'
+                        'Em ambos os tipos de pressão é obrigatório o uso dos caractéres ' +
+                        '{lt} e {gt} para agrupar o email ou telefone'
                       }
                       values={{
-                        format: <b>{'Nome <email@provedor.com>'}</b>,
                         lt: <Kbd>{'<'}</Kbd>,
                         gt: <Kbd>{'>'}</Kbd>
                       }}

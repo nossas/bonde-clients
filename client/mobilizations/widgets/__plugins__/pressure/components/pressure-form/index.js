@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
-import { isValidEmail, isValidPhone } from '~client/utils/validation-helper'
+import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
 if (require('exenv').canUseDOM) require('./index.scss')
@@ -52,12 +52,16 @@ class PressureForm extends Component {
       }
     }
     if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
-      if (!this.state.phone) {
+      const { phone } = this.state
+      const phoneE164 = /^\+/.test(phone) ? phone : `+${phone}`
+      if (!phone) {
         errors.phone = requiredMsg
-      } else if (!isValidPhone(this.state.phone)) {
-        errors.phone = [9, 10].includes(this.state.phone.length)
-          ? 'Informe o DDD com dois dígitos'
-          : 'Telefone inválido'
+      } else if (!isValidPhoneE164(phoneE164)) {
+        if ([11, 12].includes(phoneE164.length)) {
+          errors.phone = 'Informe o código do país e o DDD com dois dígitos. Ex: +5511'
+        } else {
+          errors.phone = 'Telefone inválido'
+        }
       } else if (
         targetList &&
         targetList.some(
@@ -130,7 +134,7 @@ class PressureForm extends Component {
                   style={inputReset}
                   onBlur={::AnalyticsEvents.pressureIsFilled}
                   type='text'
-                  placeholder='Insira seu telefone'
+                  placeholder='Insira seu telefone. Ex: +5511987654321'
                   value={phone}
                   onChange={e => this.setState({ phone: e.target.value })}
                 />
