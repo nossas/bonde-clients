@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/nossas/bonde-client/compare/v0.5.10...v0.6.0) (2017-07-26)
+
+
+### Bug Fixes
+
+* **community:** normalize recipient document number fix [#737](https://github.com/nossas/bonde-client/issues/737) ([2f381f4](https://github.com/nossas/bonde-client/commit/2f381f4))
+* **community:** normalize recipient document number fix [#737](https://github.com/nossas/bonde-client/issues/737) ([b3b9648](https://github.com/nossas/bonde-client/commit/b3b9648))
+* **package:** update newrelic to version 2.0.0 ([e1f198a](https://github.com/nossas/bonde-client/commit/e1f198a))
+* **package:** update newrelic to version 2.0.0 ([c24c7ab](https://github.com/nossas/bonde-client/commit/c24c7ab))
+* **pressure-widget:** add target on linux and windows fix [#725](https://github.com/nossas/bonde-client/issues/725) ([b75dfe1](https://github.com/nossas/bonde-client/commit/b75dfe1))
+* **pressure-widget:** add target on linux and windows fix [#725](https://github.com/nossas/bonde-client/issues/725) ([269976f](https://github.com/nossas/bonde-client/commit/269976f))
+* **pressure-widget:** add target on linux and windows fix [#725](https://github.com/nossas/bonde-client/issues/725) ([400d42e](https://github.com/nossas/bonde-client/commit/400d42e))
+* **subscription:** undefined last donation card data fix [#732](https://github.com/nossas/bonde-client/issues/732) ([3714974](https://github.com/nossas/bonde-client/commit/3714974))
+* **subscription:** undefined last donation card data fix [#732](https://github.com/nossas/bonde-client/issues/732) ([a75941d](https://github.com/nossas/bonde-client/commit/a75941d))
+* **subscription:** undefined last donation card data fix [#732](https://github.com/nossas/bonde-client/issues/732) ([b339bbc](https://github.com/nossas/bonde-client/commit/b339bbc))
+
+
+### Features
+
+* **auth:** request without credentials when authenticate mutation [#730](https://github.com/nossas/bonde-client/issues/730) ([c2c5e41](https://github.com/nossas/bonde-client/commit/c2c5e41))
+* **forms:** add cancel button option in redux form [#689](https://github.com/nossas/bonde-client/issues/689) ([f28ee65](https://github.com/nossas/bonde-client/commit/f28ee65))
+* **forms:** add cancel button option in redux form [#689](https://github.com/nossas/bonde-client/issues/689) ([0647767](https://github.com/nossas/bonde-client/commit/0647767))
+* **mobilization:** add favicon in settings page [#740](https://github.com/nossas/bonde-client/issues/740) ([951d6fd](https://github.com/nossas/bonde-client/commit/951d6fd))
+* **mobilizations:** add favicon from mobilization on public view [#752](https://github.com/nossas/bonde-client/issues/752) ([92ae308](https://github.com/nossas/bonde-client/commit/92ae308))
+* **mobilizations:** use params to get current mobilization on selectors [#692](https://github.com/nossas/bonde-client/issues/692) ([2e9946a](https://github.com/nossas/bonde-client/commit/2e9946a))
+* **mobilizations:** use params to get current mobilization on selectors [#692](https://github.com/nossas/bonde-client/issues/692) ([84d126c](https://github.com/nossas/bonde-client/commit/84d126c))
+* **mobrender:** add block button on edit mobilization footer [#690](https://github.com/nossas/bonde-client/issues/690) ([acaccbf](https://github.com/nossas/bonde-client/commit/acaccbf))
+* **mobrender:** add duplicate block choice on menu block [#731](https://github.com/nossas/bonde-client/issues/731) ([f25f8ce](https://github.com/nossas/bonde-client/commit/f25f8ce))
+* **navigation:** add option to onClick in browsable list item [#692](https://github.com/nossas/bonde-client/issues/692) ([1440049](https://github.com/nossas/bonde-client/commit/1440049))
+* **navigation:** add option to onClick in browsable list item [#692](https://github.com/nossas/bonde-client/issues/692) ([1fcdd40](https://github.com/nossas/bonde-client/commit/1fcdd40))
+* **templates:** add cancel button at from create template [#689](https://github.com/nossas/bonde-client/issues/689) ([9ae729b](https://github.com/nossas/bonde-client/commit/9ae729b))
+* **templates:** add cancel button at from create template [#689](https://github.com/nossas/bonde-client/issues/689) ([0b0e01f](https://github.com/nossas/bonde-client/commit/0b0e01f))
+* **templates:** add graphql to fetch custom templates [#692](https://github.com/nossas/bonde-client/issues/692) ([58e45b3](https://github.com/nossas/bonde-client/commit/58e45b3))
+* **templates:** add graphql to fetch custom templates [#692](https://github.com/nossas/bonde-client/issues/692) ([a6ffebb](https://github.com/nossas/bonde-client/commit/a6ffebb))
+* **templates:** change fetch template to query graphql [#692](https://github.com/nossas/bonde-client/issues/692) ([03efda9](https://github.com/nossas/bonde-client/commit/03efda9))
+* **templates:** change fetch template to query graphql [#692](https://github.com/nossas/bonde-client/issues/692) ([b8bb858](https://github.com/nossas/bonde-client/commit/b8bb858))
+* **templates:** change option global and empty to list of global templates [#691](https://github.com/nossas/bonde-client/issues/691) 692 ([0c68f65](https://github.com/nossas/bonde-client/commit/0c68f65))
+* **templates:** change option global and empty to list of global templates [#691](https://github.com/nossas/bonde-client/issues/691) 692 ([81dea3b](https://github.com/nossas/bonde-client/commit/81dea3b))
+
+
+
 <a name="0.5.11"></a>
 ## [0.5.11](https://github.com/nossas/bonde-client/compare/v0.5.10...v0.5.11) (2017-07-09)
 
