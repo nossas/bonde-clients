@@ -1,1 +1,1 @@
-export { default as createTwilioCall } from './create-twilio-call'
+export { default as addTwilioCall } from './create-twilio-call'

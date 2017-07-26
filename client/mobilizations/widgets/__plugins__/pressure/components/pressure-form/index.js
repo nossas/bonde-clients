@@ -148,7 +148,7 @@ class PressureForm extends Component {
       children,
       widget,
       disabled,
-      createTwilioCallMutation
+      addTwilioCallMutation
     } = this.props
     const {
       email, phone, name, lastname, city, subject, body, errors,
@@ -375,7 +375,7 @@ class PressureForm extends Component {
                             className='btn-call outlined'
                             onClick={e => {
                               e.preventDefault()
-                              createTwilioCallMutation({
+                              addTwilioCallMutation({
                                 widgetId: this.props.widget.id,
                                 from: this.state.phone,
                                 to: value
@@ -401,7 +401,7 @@ class PressureForm extends Component {
                       type='button'
                       onClick={e => {
                         e.preventDefault()
-                        createTwilioCallMutation({
+                        addTwilioCallMutation({
                           widgetId: this.props.widget.id,
                           from: this.state.phone,
                           to: value

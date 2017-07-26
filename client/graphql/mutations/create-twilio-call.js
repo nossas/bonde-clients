@@ -1,19 +1,19 @@
 import { gql } from 'react-apollo'
 
 export default gql`
-  mutation createTwilioCall(
+  mutation addTwilioCall(
     $widgetId: Int!
     $from: String!
     $to: String!
   ){
-    createTwilioCall(input: {
+    addTwilioCall(input: {
       call: {
         widgetId: $widgetId
         from: $from
         to: $to
       }
     }) {
-      twilioCalls {
+      twilioCall {
         id
         widgetId
         activistId

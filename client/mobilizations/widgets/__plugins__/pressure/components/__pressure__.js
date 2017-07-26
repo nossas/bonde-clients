@@ -27,7 +27,7 @@ export class Pressure extends Component {
       selectedTargetsError: undefined,
       callTransition: undefined,
       observableQuery: undefined,
-      createTwilioCallMutation: undefined,
+      addTwilioCallMutation: undefined,
       // TODO: receive from widget settings
       selectableTargetList: false
     }
@@ -81,12 +81,12 @@ export class Pressure extends Component {
         this.setState({ selectedTargetsError: undefined })
 
         // it needs to find or create the activist data
-        const createTwilioCallMutation = variables => graphqlClient().mutate({
-          mutation: graphqlMutations.createTwilioCall,
+        const addTwilioCallMutation = variables => graphqlClient().mutate({
+          mutation: graphqlMutations.addTwilioCall,
           variables
         })
 
-        createTwilioCallMutation({
+        addTwilioCallMutation({
           widgetId: this.props.widget.id,
           from: data.phone,
           to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
@@ -106,8 +106,8 @@ export class Pressure extends Component {
           }
         })
 
-        if (!this.state.createTwilioCallMutation) {
-          this.setState({ createTwilioCallMutation })
+        if (!this.state.addTwilioCallMutation) {
+          this.setState({ addTwilioCallMutation })
         }
       }
     }
@@ -190,7 +190,7 @@ export class Pressure extends Component {
               targetList={this.getTargetList()}
               selectedTargets={this.selectedTargets}
               callTransition={this.state.callTransition}
-              createTwilioCallMutation={this.state.createTwilioCallMutation}
+              addTwilioCallMutation={this.state.addTwilioCallMutation}
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount
