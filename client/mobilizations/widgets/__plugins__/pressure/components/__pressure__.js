@@ -29,7 +29,21 @@ export class Pressure extends Component {
       observableQuery: undefined,
       addTwilioCallMutation: undefined,
       // TODO: receive from widget settings
-      selectableTargetList: false
+      selectableTargetList: false,
+      phonePressureCount: undefined
+    }
+  }
+
+  componentWillMount () {
+    if (pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE) {
+      graphqlClient().query({
+        query: graphqlQueries.CountTwilioCallsByWidget,
+        variables: { widgetId: this.props.widget.id }
+      })
+        .then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
+          this.setState({ phonePressureCount })
+        })
+        .catch(err => console.error(err))
     }
   }
 
@@ -81,10 +95,13 @@ export class Pressure extends Component {
         this.setState({ selectedTargetsError: undefined })
 
         // it needs to find or create the activist data
-        const addTwilioCallMutation = variables => graphqlClient().mutate({
-          mutation: graphqlMutations.addTwilioCall,
-          variables
-        })
+        const addTwilioCallMutation = variables => {
+          this.state.phonePressureCount && ++this.state.phonePressureCount
+          return graphqlClient().mutate({
+            mutation: graphqlMutations.addTwilioCall,
+            variables
+          })
+        }
 
         addTwilioCallMutation({
           widgetId: this.props.widget.id,
@@ -194,7 +211,7 @@ export class Pressure extends Component {
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount
-                  value={widget.count || 0}
+                  value={this.state.phonePressureCount || widget.count || 0}
                   color={mainColor}
                   text={countText}
                   startCounting={block.scrollTopReached}
