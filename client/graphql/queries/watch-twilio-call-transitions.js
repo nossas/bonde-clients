@@ -16,6 +16,9 @@ export default gql`
       twilioCallTransitionId
       twilioCallTransitionSequenceNumber
       twilioCallTransitionStatus
+      twilioCallTransitionCallDuration
+      twilioCallTransitionCreatedAt
+      twilioCallTransitionUpdatedAt
     }
   }
 `

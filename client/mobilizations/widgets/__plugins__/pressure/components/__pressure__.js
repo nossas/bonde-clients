@@ -8,6 +8,7 @@ import * as graphqlMutations from '~client/graphql/mutations'
 import * as graphqlQueries from '~client/graphql/queries'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import * as paths from '~client/paths'
+import * as array from '~client/utils/array'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as PressureActions from '../action-creators'
 import { WidgetOverlay, FinishMessageCustom } from '~client/mobilizations/widgets/components'
@@ -25,7 +26,10 @@ export class Pressure extends Component {
       selectedTargets: [],
       selectedTargetsError: undefined,
       callTransition: undefined,
-      graphqlSubscription: undefined
+      observableQuery: undefined,
+      createTwilioCallMutation: undefined,
+      // TODO: receive from widget settings
+      selectableTargetList: false
     }
   }
 
@@ -48,9 +52,6 @@ export class Pressure extends Component {
   }
 
   handleSubmit (data) {
-    // normalize phone number with + sign (e.g. +5511987654321)
-    data.phone = /^\+/.test(data.phone) ? data.phone : `+${data.phone}`
-
     if (data.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
       const { widget, asyncFillWidget } = this.props
       const payload = {
@@ -68,34 +69,46 @@ export class Pressure extends Component {
       }
       asyncFillWidget({ payload, widget })
     } else if (data.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
-      if (!this.state.selectedTargets.length) {
+      if (!this.state.selectedTargets.length && this.state.selectableTargetList) {
         this.setState({
           selectedTargetsError:
             'Ops, você precisa selecionar pelo menos um alvo para poder pressionar'
         })
       } else {
+        // normalize phone number with + sign (e.g. +5511987654321)
+        data.phone = /^\+/.test(data.phone) ? data.phone : `+${data.phone}`
+
         this.setState({ selectedTargetsError: undefined })
 
         // it needs to find or create the activist data
-        graphqlClient().mutate({
+        const createTwilioCallMutation = variables => graphqlClient().mutate({
           mutation: graphqlMutations.createTwilioCall,
-          variables: {
-            widgetId: this.props.widget.id,
-            from: data.phone,
-            to: this.state.selectedTargets.map(target => target.value).join(',')
-          }
-        }).then(() => {
-          const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
-            pollInterval: 2000,
-            query: graphqlQueries.watchTwilioCallTransitions,
-            variables: { widgetId: this.props.widget.id, from: data.phone }
-          })
-          observableQuery.subscribe({
-            next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
-              this.setState({ callTransition })
-            }
-          })
+          variables
         })
+
+        createTwilioCallMutation({
+          widgetId: this.props.widget.id,
+          from: data.phone,
+          to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
+        }).then(() => {
+          if (!this.state.observableQuery) {
+            const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
+              pollInterval: 2000,
+              query: graphqlQueries.watchTwilioCallTransitions,
+              variables: { widgetId: this.props.widget.id, from: data.phone }
+            })
+            observableQuery.subscribe({
+              next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
+                this.setState({ callTransition })
+              }
+            })
+            this.setState({ observableQuery })
+          }
+        })
+
+        if (!this.state.createTwilioCallMutation) {
+          this.setState({ createTwilioCallMutation })
+        }
       }
     }
   }
@@ -164,6 +177,7 @@ export class Pressure extends Component {
               targets={::this.getTargetList() || []}
               onSelect={::this.changeSelectedTargets}
               errorMessage={this.state.selectedTargetsError}
+              selectable={this.selectableTargetList}
             />
             <PressureForm
               disabled={disableEditField === 's'}
@@ -175,6 +189,8 @@ export class Pressure extends Component {
               onSubmit={::this.handleSubmit}
               targetList={this.getTargetList()}
               selectedTargets={this.selectedTargets}
+              callTransition={this.state.callTransition}
+              createTwilioCallMutation={this.state.createTwilioCallMutation}
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount

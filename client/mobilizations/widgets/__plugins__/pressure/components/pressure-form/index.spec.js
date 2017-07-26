@@ -22,7 +22,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
 
   it('should render buttonColor according passed in props', () => {
     wrapper.setProps({ buttonColor: '#fff' })
-    expect(wrapper.find('button').props().style.backgroundColor).to.equal('#fff')
+    expect(wrapper.find('button[type="submit"]').props().style.backgroundColor).to.equal('#fff')
   })
 
   it('should return onSubmit values of state when clicked button', () => {
@@ -37,7 +37,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
       body: 'body',
       pressureType: pressureHelper.PRESSURE_TYPE_EMAIL
     }
-    wrapper.setProps({ onSubmit: data => { returned = data } })
+    wrapper.setProps({ onSubmit: data => { delete data.callManagement; returned = data } })
     wrapper.setState(state)
 
     wrapper.find('form').simulate('submit')
@@ -67,7 +67,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
     wrapper.setProps({
       buttonText: 'Enviar e-mail para o alvo'
     })
-    expect(wrapper.find('button').text()).to.equal('Enviar e-mail para o alvo')
+    expect(wrapper.find('button[type="submit"]').text()).to.equal('Enviar e-mail para o alvo')
   })
 
   it('should render error and not call onSubmit if any field not fill', () => {

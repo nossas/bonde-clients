@@ -5,7 +5,10 @@ import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-he
 import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
-if (require('exenv').canUseDOM) require('./index.scss')
+if (require('exenv').canUseDOM) {
+  require('./index.scss')
+  require('./phone-calls.scss')
+}
 
 // TODO: Reusable Input
 const controlClassname = 'px3 py1'
@@ -14,6 +17,12 @@ const inputReset = {
   padding: '0',
   height: '2rem',
   outline: 'none'
+}
+
+const parseTarget = target => {
+  const targetSplit = target.split('<')
+  const valid = targetSplit.length === 2
+  return valid ? { name: targetSplit[0].trim(), value: targetSplit[1].replace('>', '') } : null
 }
 
 class PressureForm extends Component {
@@ -27,7 +36,40 @@ class PressureForm extends Component {
       city: '',
       subject: props.subject,
       body: props.body,
-      pressureType: pressureHelper.getType(props.targetList) || undefined
+      pressureType: pressureHelper.getType(props.targetList) || undefined,
+      callManagement: undefined
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (!this.props.callTransition && props.targetList && props.targetList.length) {
+      this.setState({
+        callManagement: props.targetList.map(target => ({
+          ...parseTarget(target),
+          attempts: 0
+        }))
+      })
+    }
+
+    if (
+      props.callTransition &&
+      props.targetList &&
+      props.targetList.length &&
+      JSON.stringify(this.props.callTransition) !== JSON.stringify(props.callTransition)
+    ) {
+      this.setState({
+        callManagement: this.state.callManagement.map((target, index) => {
+          const isCallToCurrentTarget = target.value === props.callTransition.twilioCallTo
+          const transition = isCallToCurrentTarget ? props.callTransition : {}
+          const { twilioCallTransitionStatus: status } = transition
+          const isFailStatus = ['busy', 'failed', 'no-answer'].includes(status)
+
+          let attempts = this.state.callManagement[index].attempts
+          if (isCallToCurrentTarget && isFailStatus) attempts++
+
+          return { ...target, ...transition, attempts }
+        })
+      })
     }
   }
 
@@ -98,11 +140,35 @@ class PressureForm extends Component {
   }
 
   render () {
-    const { buttonColor, buttonText, children, widget, disabled } = this.props
-    const { email, phone, name, lastname, city, subject, body, errors } = this.state
+    const {
+      targetList,
+      callTransition,
+      buttonColor,
+      buttonText,
+      children,
+      widget,
+      disabled,
+      createTwilioCallMutation
+    } = this.props
+    const {
+      email, phone, name, lastname, city, subject, body, errors,
+      callManagement
+    } = this.state
+
     return (
-      <form className='pressure-form' onSubmit={::this.handleSubmit}>
-        <div className={classnames('activist-form bg-white', !children ? 'rounded-bottom' : null)}>
+      <form
+        className={classnames(
+          'pressure-form',
+          { 'is-calling': !!callTransition }
+        )}
+        onSubmit={::this.handleSubmit}
+      >
+        <div
+          className={classnames(
+            'activist-form bg-white',
+            !children ? 'rounded-bottom' : null
+          )}
+        >
           <div className='form bg-white rounded-bottom'>
             {this.state.pressureType === 'email' && (
               <div className={classnames('form-group', controlClassname)}>
@@ -231,6 +297,147 @@ class PressureForm extends Component {
             >
               {buttonText}
             </button>
+          </div>
+        </div>
+
+        <div className='phone-calls'>
+          <p className='heading'>Ligações</p>
+
+          <ul>
+            {callManagement && callManagement.length && callManagement.map(target => {
+              const {
+                name,
+                value,
+                attempts,
+                twilioCallTo: to,
+                twilioCallTransitionStatus: status,
+                twilioCallTransitionCallDuration: duration
+              } = target
+              let ListItem = <div />
+
+              if (to === value) {
+                if (status === 'completed') {
+                  ListItem = (
+                    <li>
+                      <div className='call-item'>
+                        <div>
+                          <i className='fa fa-phone-square success' />
+                        </div>
+                        <div>{name}<br />{value}</div>
+                      </div>
+                      <div className='finish'>
+                        {duration}s
+                        <i className='fa fa-check-circle' />
+                      </div>
+                    </li>
+                  )
+                } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
+                  ListItem = (
+                    <li>
+                      <div className='call-item'>
+                        <div>
+                          <span className='fa fa-phone warning ring'></span>
+                        </div>
+                        <div>{name}<br />{value}</div>
+                      </div>
+                      <button className='btn-call calling'>
+                        {status === 'initiated' && 'Iniciando'}
+                        {status === 'ringing' && 'Ligando...'}
+                        {status === 'in-progress' && 'Conectado'}
+                      </button>
+                    </li>
+                  )
+                } else if (['busy', 'failed', 'no-answer'].includes(status)) {
+                  ListItem = (
+                    <li>
+                      <div className='call-item'>
+                        <span className='fa fa-phone-square danger'></span>
+                        <div>{name}<br />{value}</div>
+                      </div>
+                      <div className='finish'>
+                        3x
+                        <span className='fa fa-times-circle'></span>
+                      </div>
+                    </li>
+                  )
+                  if (attempts < 3) {
+                    ListItem = (
+                      <li>
+                        <div className='call-item'>
+                          <span className='fa fa-phone-square'></span>
+                          <div>{name}<br />{value}</div>
+                        </div>
+                        <div className='retry-container'>
+                          <div className='attempt'>
+                            {attempts}x
+                          </div>
+                          <button
+                            className='btn-call outlined'
+                            onClick={e => {
+                              e.preventDefault()
+                              createTwilioCallMutation({
+                                widgetId: this.props.widget.id,
+                                from: this.state.phone,
+                                to: value
+                              })
+                            }}
+                          >
+                            Religar
+                          </button>
+                        </div>
+                      </li>
+                    )
+                  }
+                }
+              } else {
+                ListItem = (
+                  <li>
+                    <div className='call-item'>
+                      <span className='fa fa-phone-square primary'></span>
+                      <div>{name}<br />{value}</div>
+                    </div>
+                    <button
+                      className='btn-call primary'
+                      type='button'
+                      onClick={e => {
+                        e.preventDefault()
+                        createTwilioCallMutation({
+                          widgetId: this.props.widget.id,
+                          from: this.state.phone,
+                          to: value
+                        })
+                      }}
+                    >
+                      Ligar
+                    </button>
+                  </li>
+                )
+              }
+              return ListItem
+            })}
+          </ul>
+
+          <div className='caption'>
+            <div className='item'>
+              <div className='bullet success'></div>
+              Sucesso
+            </div>
+            <div className='item'>
+              <div className='bullet warning'></div>
+              Em andamento
+            </div>
+            <div className='item'>
+              <div className='bullet danger'></div>
+              Erro
+            </div>
+            <div className='item'>
+              <div className='bullet'></div>
+              Religar (até 3x)
+            </div>
+            <div className='item'>
+              <div className='bullet primary'></div>
+              Disponível
+            </div>
           </div>
         </div>
         {children}
