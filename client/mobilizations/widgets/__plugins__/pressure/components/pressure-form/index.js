@@ -323,7 +323,7 @@ class PressureForm extends Component {
                         <div>
                           <i className='fa fa-phone-square success' />
                         </div>
-                        <div>{name}<br />{value}</div>
+                        <div>{name}</div>
                       </div>
                       <div className='finish'>
                         {duration}s
@@ -338,7 +338,7 @@ class PressureForm extends Component {
                         <div>
                           <span className='fa fa-phone warning ring'></span>
                         </div>
-                        <div>{name}<br />{value}</div>
+                        <div>{name}</div>
                       </div>
                       <button className='btn-call calling'>
                         {status === 'initiated' && 'Iniciando'}
@@ -352,7 +352,7 @@ class PressureForm extends Component {
                     <li>
                       <div className='call-item'>
                         <span className='fa fa-phone-square danger'></span>
-                        <div>{name}<br />{value}</div>
+                        <div>{name}</div>
                       </div>
                       <div className='finish'>
                         3x
@@ -365,7 +365,7 @@ class PressureForm extends Component {
                       <li>
                         <div className='call-item'>
                           <span className='fa fa-phone-square'></span>
-                          <div>{name}<br />{value}</div>
+                          <div>{name}</div>
                         </div>
                         <div className='retry-container'>
                           <div className='attempt'>
@@ -394,7 +394,7 @@ class PressureForm extends Component {
                   <li>
                     <div className='call-item'>
                       <span className='fa fa-phone-square primary'></span>
-                      <div>{name}<br />{value}</div>
+                      <div>{name}</div>
                     </div>
                     <button
                       className='btn-call primary'

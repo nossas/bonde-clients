@@ -45,23 +45,22 @@ class TargetList extends Component {
     return (
       <div className='target-list px2 py1'>
         <div className='target-list-label bold'>
-          {!isPressureEmail ? null : (
+          {selectable ? (
             <FormattedMessage
-              id='pressure-widget--target-list.label.email'
+              id='pressure-widget--target-list.label.pressure'
               defaultMessage={`
-                Quem você vai pressionar ({targetsCount} {targetsCount, plural,
+                Selecione quem você quer pressionar ({targetsCount} {targetsCount, plural,
                   one {alvo}
                   other {alvos}
                 })
               `}
               values={{ targetsCount: String(array.clean(targets).length) }}
             />
-          )}
-          {!isPressurePhone ? null : (
+          ) : (
             <FormattedMessage
-              id='pressure-widget--target-list.label.pressure'
+              id='pressure-widget--target-list.label.email'
               defaultMessage={`
-                Selecione quem você quer pressionar ({targetsCount} {targetsCount, plural,
+                Quem você vai pressionar ({targetsCount} {targetsCount, plural,
                   one {alvo}
                   other {alvos}
                 })
@@ -105,7 +104,7 @@ class TargetList extends Component {
                   )}
                   <p className='black h6 m0'>
                     <span className='target-name bold flex'>{target.name}</span>
-                    <span className='target-value'>{target.value}</span>
+                    {!isPressurePhone && <span className='target-value'>{target.value}</span>}
                   </p>
                 </label>
               )

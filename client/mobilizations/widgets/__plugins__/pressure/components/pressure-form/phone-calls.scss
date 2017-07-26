@@ -81,7 +81,7 @@
     flex-direction: column;
     text-transform: none;
     justify-content: center;
-    text-align: right;
+    text-align: center;
   }
 
   ul li .fa-times-circle {
@@ -91,9 +91,13 @@
 
   ul li .retry-container {
     display: flex;
-    flex-direction: column;
     text-transform: none;
     text-align: right;
+    align-items: center;
+  }
+
+  ul li .retry-container .attempt {
+    margin-right: .3rem;
   }
 
   ul li .retry-container .btn-call {

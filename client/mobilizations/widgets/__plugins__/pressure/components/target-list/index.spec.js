@@ -34,18 +34,17 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/target-li
     })
   })
 
-  describe('phone pressure', () => {
+  describe('selectable', () => {
     it('should render the phone pressure label text properly', () => {
       const targets = ['Foo Bar <+551199999-9999>']
       // jump the targets shuffle process
       wrapper.setState({ targets })
+      wrapper.setProps({ ...wrapper.props(), selectable: true })
 
       expect(wrapper.find('.target-list-label FormattedMessage').at(0).props().defaultMessage)
         .to.include('Selecione quem você quer pressionar')
     })
-  })
 
-  describe('selectable', () => {
     it('should render a checkbox on each target item', () => {
       const targets = ['Foo Bar <+551199999-9999>', 'Foo Bar <+551199999-9999>']
       // jump the targets shuffle process

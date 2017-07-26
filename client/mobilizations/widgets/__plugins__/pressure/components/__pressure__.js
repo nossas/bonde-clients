@@ -201,9 +201,6 @@ export class Pressure extends Component {
                 />
               )}
             </PressureForm>
-            {this.state.callTransition && (
-              <span>{this.state.callTransition.twilioCallTransitionStatus}</span>
-            )}
           </div>
         )}
       </WidgetOverlay>
