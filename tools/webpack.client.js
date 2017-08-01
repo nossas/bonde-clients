@@ -11,8 +11,11 @@ const staticsPath = path.join(__dirname, './../public/')
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: Infinity,
-    filename: 'vendor.bundle.js'
+    filename: 'vendor.[hash].js',
+    minChunks (module) {
+      return module.context &&
+             module.context.indexOf('node_modules') >= 0;
+    }
   }),
   new webpack.EnvironmentPlugin({
     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -36,24 +39,17 @@ const entry = {
   ],
   vendor: [
     'react',
-    'axios',
     'cpf_cnpj',
-    'draft-js',
-    'slate-editor',
     'react-cookie',
     'react-dom',
     'react-ga',
     'react-helmet',
     'react-redux',
-    'react-router',
     'redial',
     'redux',
-    'redux-form',
-    'redux-form-validation',
     'redux-logger',
     'redux-promise',
-    'redux-thunk',
-    'superagent'
+    'redux-thunk'
   ]
 }
 
@@ -61,12 +57,8 @@ if (isProd) {
   plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
       compress: {
         warnings: false,
         screw_ie8: true,
@@ -83,6 +75,7 @@ if (isProd) {
         comments: false
       }
     }),
+    new webpack.HashedModuleIdsPlugin(),
     new CompressionPlugin({
       asset: '[path][query]',
       algorithm: 'gzip',
@@ -128,7 +121,7 @@ if (isProd) {
 }
 
 module.exports = {
-  devtool: isProd ? 'source-map' : 'eval',
+  devtool: isProd ? 'cheap-module-source-map' : 'source-map',
   context: sourcePath,
   node: {
     fs: 'empty'
