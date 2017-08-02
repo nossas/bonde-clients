@@ -76,36 +76,39 @@
     margin: 0;
   }
 
-  ul li .fa-check-circle {
-    font-size: 1.8rem;
-    color: #00C08A;
-  }
-
   ul li .finish {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-transform: none;
     justify-content: center;
     text-align: center;
+    align-items: center;
+  }
+
+  ul li .fa-check-circle {
+    font-size: 1.8rem;
+    color: #00C08A;
+    margin-left: .5rem;
   }
 
   ul li .fa-times-circle {
     font-size: 1.8rem;
     color: #DD2295;
+    margin-left: .5rem;
   }
 
-  ul li .retry-container {
+  ul li .inline-container {
     display: flex;
     text-transform: none;
     text-align: right;
     align-items: center;
   }
 
-  ul li .retry-container .attempt {
+  ul li .inline-container .prefix {
     margin-right: .3rem;
   }
 
-  ul li .retry-container .btn-call {
+  ul li .inline-container .btn-call {
     margin: 0;
   }
 
