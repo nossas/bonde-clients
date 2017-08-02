@@ -25,6 +25,29 @@ const parseTarget = target => {
   return valid ? { name: targetSplit[0].trim(), value: targetSplit[1].replace('>', '') } : null
 }
 
+class RealtimeCallDuration extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { duration: 0, interval: undefined }
+  }
+
+  timer = () => {
+    this.setState({ duration: this.state.duration + 1 })
+  }
+
+  componentDidMount() {
+    this.setState({ interval: setInterval(this.timer, 1000) })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval)
+  }
+
+  render () {
+    return <span>{`${this.state.duration}s`}</span>
+  }
+}
+
 class PressureForm extends Component {
   constructor (props) {
     super(props)
@@ -340,11 +363,16 @@ class PressureForm extends Component {
                         </div>
                         <div>{name}</div>
                       </div>
-                      <button className='btn-call calling'>
-                        {status === 'initiated' && 'Iniciando'}
-                        {status === 'ringing' && 'Ligando...'}
-                        {status === 'in-progress' && 'Conectado'}
-                      </button>
+                      <div className='inline-container'>
+                        <div className='prefix'>
+                          {status === 'in-progress' && <RealtimeCallDuration />}
+                        </div>
+                        <button className='btn-call calling'>
+                          {status === 'initiated' && 'Iniciando'}
+                          {status === 'ringing' && 'Ligando...'}
+                          {status === 'in-progress' && 'Conectado'}
+                        </button>
+                      </div>
                     </li>
                   )
                 } else if (['busy', 'failed', 'no-answer'].includes(status)) {
@@ -367,8 +395,8 @@ class PressureForm extends Component {
                           <span className='fa fa-phone-square'></span>
                           <div>{name}</div>
                         </div>
-                        <div className='retry-container'>
-                          <div className='attempt'>
+                        <div className='inline-container'>
+                          <div className='prefix'>
                             {attempts}x
                           </div>
                           <button
