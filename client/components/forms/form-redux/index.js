@@ -13,9 +13,15 @@ class FormRedux extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { onFinishSubmit } = this.props
+    const { onFinishSubmit, submitting, forceFinishSubmit } = this.props
+    const naturalSubmitTransition = (
+      submitting &&
+      !nextProps.submitting &&
+      !nextProps.submitFailed
+    )
+    const forcedSubmitTransition = !forceFinishSubmit && nextProps.forceFinishSubmit
 
-    if (this.props.submitting && !nextProps.submitting && !nextProps.submitFailed) {
+    if (naturalSubmitTransition || forcedSubmitTransition) {
       this.setState({ submitted: true })
       onFinishSubmit && onFinishSubmit()
     }
