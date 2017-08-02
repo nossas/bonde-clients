@@ -17,20 +17,31 @@ const mapStateToProps = state =>  ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   submit: values => {
-    const { community, addTwilioConfiguration, isConfigPreexists } = props
+    const {
+      community,
+      isConfigPreexists,
+      addTwilioConfiguration,
+      updateTwilioConfiguration
+    } = props
 
-    !isConfigPreexists && addTwilioConfiguration({
-      variables: {
-        communityId: community.id,
-        twilioAccountSid: values.twilio_account_sid,
-        twilioAuthToken: values.twilio_auth_token,
-        twilioNumber: values.twilio_number
-      }
-    })
+    const variables = {
+      communityId: community.id,
+      twilioAccountSid: values.twilio_account_sid,
+      twilioAuthToken: values.twilio_auth_token,
+      twilioNumber: values.twilio_number
+    }
+
+    !isConfigPreexists && addTwilioConfiguration({ variables })
       .then(res => { dispatch(CommunityActions.setForcedSubmit(true)) })
       .catch(err => console.error('err', err))
 
-    isConfigPreexists && console.info('update the community\'s twilio config')
+    isConfigPreexists && updateTwilioConfiguration({ variables })
+      .then(res => {
+        console.info('updated!!')
+        dispatch(CommunityActions.setForcedSubmit(true))
+      })
+      .catch(err => console.error('err', err))
+
     return { type: 'graphql/mutations/ADD_TWILIO_CONFIGURATION' }
   }
 })
@@ -55,6 +66,7 @@ const validate = values => {
 export default connect(mapStateToProps)(
   compose(
     graphql(graphqlMutations.addTwilioConfiguration, { name: 'addTwilioConfiguration' }),
+    graphql(graphqlMutations.updateTwilioConfiguration, { name: 'updateTwilioConfiguration' }),
     graphql(graphqlQueries.fetchTwilioConfiguration, {
       options: ({ community }) => ({
         fetchPolicy: 'network-only',

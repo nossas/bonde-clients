@@ -36,6 +36,7 @@ const CommunitySettingsTwilioPage = ({
       </HelpBlock>
       <FormControl
         type='text'
+        tabIndex={1}
         placeholder='Ex: ACe4________6835_______2277_______'
       />
     </FormGroup>
@@ -61,6 +62,7 @@ const CommunitySettingsTwilioPage = ({
       </HelpBlock>
       <FormControl
         type='text'
+        tabIndex={2}
         placeholder='Ex: ecd5_______a82c_______b9c9______'
       />
     </FormGroup>
@@ -91,7 +93,7 @@ const CommunitySettingsTwilioPage = ({
         <span>
         </span>
       </HelpBlock>
-      <FormControl type='text' placeholder='Ex: +5511956781234' />
+      <FormControl type='text' tabIndex={3} placeholder='Ex: +5511956781234' />
     </FormGroup>
   </SettingsForm>
 )
