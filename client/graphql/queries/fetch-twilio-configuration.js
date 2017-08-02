@@ -2,10 +2,10 @@ import { gql } from 'react-apollo'
 
 export default gql`
   query fetchTwilioConfiguration($communityId: Int!) {
-    allTwilioConfigurations(condition: {
+    configs: allTwilioConfigurations(condition: {
       communityId: $communityId
     }) {
-      nodes {
+      list: nodes {
         id
         communityId
         twilioAccountSid
