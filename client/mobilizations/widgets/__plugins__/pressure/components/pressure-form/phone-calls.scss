@@ -45,7 +45,7 @@
     display: flex;
   }
 
-  ul li .btn-call {
+  .btn-call {
     border: none;
     color: #FFFFFF;
     background-color: transparent;
@@ -57,18 +57,23 @@
     outline: none;
   }
 
-  ul li .btn-call.calling {
+  .btn-call.calling {
     background-color: #222;
   }
 
-  ul li .btn-call.primary {
+  .btn-call.primary {
     background-color: #40B4E5;
   }
 
-  ul li .btn-call.outlined {
+  .btn-call.outlined {
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
     padding: calc(.8rem - 1px) calc(1rem - 1px);
+  }
+
+  .btn-call.full-width {
+    width: 100%;
+    margin: 0;
   }
 
   ul li .fa-check-circle {
@@ -109,6 +114,8 @@
     font-weight: 300;
     text-transform: uppercase;
     margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .caption .item {
@@ -116,6 +123,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    width: calc(50% - 1.5rem);
   }
 
   .caption .bullet {

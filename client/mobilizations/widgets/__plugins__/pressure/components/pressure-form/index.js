@@ -423,21 +423,36 @@ class PressureForm extends Component {
               Sucesso
             </div>
             <div className='item'>
-              <div className='bullet warning'></div>
-              Em andamento
-            </div>
-            <div className='item'>
-              <div className='bullet danger'></div>
-              Erro
-            </div>
-            <div className='item'>
               <div className='bullet'></div>
               Religar (até 3x)
+            </div>
+            <div className='item'>
+              <div className='bullet warning'></div>
+              Em andamento
             </div>
             <div className='item'>
               <div className='bullet primary'></div>
               Disponível
             </div>
+            <div className='item'>
+              <div className='bullet danger'></div>
+              Erro
+            </div>
+          </div>
+
+          <div style={{ margin: '1rem 0', padding: '0 1rem' }}>
+            <button
+              type='button'
+              className='btn-call outlined full-width'
+              onClick={e => {
+                e.preventDefault()
+                const { changeParentState } = this.props
+                const message = 'Tem certeza que deseja finalizar a pressão por telefone?'
+                window.confirm(message) && changeParentState({ showFinishMessage: true })
+              }}
+            >
+              Finalizar pressão por telefone
+            </button>
           </div>
         </div>
         {children}
@@ -452,12 +467,14 @@ PressureForm.propTypes = {
   buttonText: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string,
-  widget: PropTypes.object
+  widget: PropTypes.object,
+  changeParentState: PropTypes.func.isRequired
 }
 
 PressureForm.defaultProps = {
   subject: '',
-  body: ''
+  body: '',
+  changeParentState: () => {}
 }
 
 export default PressureForm

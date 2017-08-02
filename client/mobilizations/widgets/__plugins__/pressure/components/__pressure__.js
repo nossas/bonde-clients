@@ -30,7 +30,8 @@ export class Pressure extends Component {
       addTwilioCallMutation: undefined,
       // TODO: receive from widget settings
       selectableTargetList: false,
-      phonePressureCount: undefined
+      phonePressureCount: undefined,
+      showFinishMessage: false
     }
   }
 
@@ -63,6 +64,10 @@ export class Pressure extends Component {
 
   changeSelectedTargets (selectedTargets) {
     this.setState({ selectedTargets })
+  }
+
+  changeState (state) {
+    this.setState(state)
   }
 
   handleSubmit (data) {
@@ -175,7 +180,7 @@ export class Pressure extends Component {
         onClick={::this.handleOverlayOnClick}
         text='Clique para configurar o formulário de pressão direta'
       >
-        {filledPressureWidgets.includes(widget.id) ? (
+        {filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage ? (
           finishMessageType === 'custom' ? (
             <FinishMessageCustom widget={widget} />
           ) : (
@@ -208,6 +213,7 @@ export class Pressure extends Component {
               selectedTargets={this.selectedTargets}
               callTransition={this.state.callTransition}
               addTwilioCallMutation={this.state.addTwilioCallMutation}
+              changeParentState={::this.changeState}
             >
               {!showCounter || showCounter !== 'true' ? null : (
                 <PressureCount
