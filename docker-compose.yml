@@ -120,11 +120,11 @@ services:
     environment:
       PORT: 3002
       GRAPHQL_URL: http://data.bonde.devel:3001/graphql
-      MESSENGER_APP_SECRET: 96dc8dfaf77306ed689120a9b67e8081
-      MESSENGER_PAGE_ACCESS_TOKEN: EAAajJa4WgAMBAOVWaDVUH5ql3Drz8ZAXg8XBxGoT9MYFPq9ls7ZCP6mzN8cNcOgqaGmXwZCYzBVAbAr8Psmi7aqbl2fvZCHkZA2iXNcpSGjvyeM5vQRZAW1LZBsya7wQITusGJL5uP0GxdNHGLEP5c14UBluhapDYE8TgvjiV8JIwZDZD
-      MESSENGER_VALIDATION_TOKEN: resistenciadosprogramadoresindependentes
-      SERVER_AUTH_EMAIL: pirola@nossascidades.org
-      SERVER_AUTH_PASSWORD: meurio201%
+      MESSENGER_APP_SECRET: 96dc8d
+      MESSENGER_PAGE_ACCESS_TOKEN: EAAajJa
+      MESSENGER_VALIDATION_TOKEN: bonde-client
+      SERVER_AUTH_EMAIL: foo@bar.com
+      SERVER_AUTH_PASSWORD: 123
       WEB_CONCURRENCY: 1
       WEB_MEMORY: 256
 
@@ -183,6 +183,48 @@ services:
       VALIDATE_REGION: sa-east-1
       WEB_CONCURRENCY: 1
       WEB_MEMORY: 256
-
     env_file:
       - .env
+
+  cache:
+    image: nossas/bonde-cache:develop
+    command: go run bonde-cache
+    depends_on:
+      - api-v1
+    volumes:
+      - ../bonde-cache:/go/src/app:Z
+    ports:
+      - "3005:3005"
+      - "3006:3006"
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    links:
+      - api-v1:api.bonde.devel
+    environment:
+      CACHE_APIURL: http://api.bonde.devel:3000
+      PORT: 3005
+      CACHE_ENV: development
+      CACHE_INTERVAL: 6000
+      CACHE_PORT: 3005
+      CACHE_PORTSSL: 3006
+      CACHE_RESET: 'false'
+      AWS_SECRET_ACCESS_KEY:
+      AWS_ACCESS_KEY_ID:
+
+  redirect:
+    image: nossas/bonde-redirect:develop
+    command: go run rebu-redirect
+    depends_on:
+      - api-v1
+    volumes:
+      - ../bonde-redirect:/go/src/app:Z
+    ports:
+      - "3007:3007"
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    links:
+      - api-v1:api.bonde.devel
+    environment:
+      PORT: 3007
