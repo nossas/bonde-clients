@@ -16,14 +16,14 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./domain').default(store),
+        require('./domain-create').default(store),
         require('./info').default(store),
         require('./invite').default(store),
         require('./mailchimp').default(store),
         require('./recipient').default(store),
         require('./report').default(store),
-
-        require('./domain').default(store),
-        require('./domain-create').default(store)
+        require('./twilio').default(store),
       ])
     })
   }
