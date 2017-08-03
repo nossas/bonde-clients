@@ -39,7 +39,7 @@ const HOC = (WrappedComponent) => {
       const { item, rowIndex, checked } = this.state
 
       return (
-        <div>
+        <div className='activists-content'>
           <WrappedComponent
             {...this.props}
             className={classnames('col col-8')}
@@ -47,12 +47,12 @@ const HOC = (WrappedComponent) => {
             rowIndex={rowIndex}
           />
           {item && (
-            <div className='col col-4'>
-              <div>
+            <div className='preview col col-4 pl3 flex flex-column'>
+              <div className='header flex flex-wrap'>
                 <h2>Perfil selecionado</h2>
                 <button onClick={() => this.handleClickRow(item, rowIndex)}>X</button>
               </div>
-              <div>
+              <div className='body'>
                 <h3>{item.name}</h3>
                 
                 <label>Email:</label>
@@ -77,6 +77,16 @@ const HOC = (WrappedComponent) => {
   return PP
 }
 
+const PhoneNumber = (props) => {
+  let { value } = props
+  
+  if (value) value = JSON.parse(value.replace(/=>/g, ':'))
+
+  return value ? (
+    <span>{`(${value.ddd}) ${value.number}`}</span>
+  ) : (<span>-</span>)
+}
+
 const PaginationGrid = ({
   children,
   className,
@@ -91,11 +101,6 @@ const PaginationGrid = ({
   onSelectRow
 }) => (
   <div className={classnames('pagination', className)}>
-    <div className='header flex'>
-      <div className='flex-auto'>Nome</div>
-      <div className='flex-auto'>E-mail</div>
-      <div className='flex-auto'>Mobilizações</div>
-    </div>
     {loading ? <Loading /> : [
         <DataGrid
           className='grid'
@@ -105,10 +110,23 @@ const PaginationGrid = ({
           fieldIndex='id'
         >
           {({ data, rowIndex }) => [
-              <Col key={`name-${rowIndex}`}>{data.name}</Col>,
-              <Col key={`email-${rowIndex}`}>{data.email}</Col>,
-              <Col key={`mob-${rowIndex}`}>
-                {data.mobilizations.length}
+              <Col
+                className='col col-6'
+                key={`name-${rowIndex}`}
+              >
+                {data.name}
+              </Col>,
+              <Col
+                className='col col-5'
+                key={`email-${rowIndex}`}
+              >
+                {data.email}
+              </Col>,
+              <Col
+                className='col col-2'
+                key={`mob-${rowIndex}`}
+              >
+                <PhoneNumber value={data.phone} />
               </Col>
             ]}
         </DataGrid>,

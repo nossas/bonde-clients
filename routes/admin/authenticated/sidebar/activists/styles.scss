@@ -1,18 +1,57 @@
+.activists-content {
+  margin-top: 50px;
+}
 .pagination {
-
+  
+  .header, .row {
+    height: 50px;
+  }
   .row {
-    margin-bottom: 10px;
+    padding: 0 10px;
+    background-color: #fff;
+    
+    > .col {
+      display: flex;
+      align-items: center;
+    }
 
     &.clickable {
       cursor: pointer;
 
-      &:hover {
-        background-color: #c7c7c7;    
+      &:hover, &.active {
+        border-left: 2px solid #c7c7c7;
+        padding: 0 10px 0 8px;
+        border-bottom: 1px solid rgba(158, 150, 158, 0.17); 
       }
+    } 
+  }
+}
+
+.preview {
+  
+  margin-top: -50px;
+
+  .header {
+    position: relative;
+    height: 50px;
+
+    h2 {
+      margin: 0;
+      font-size: 36px;
     }
 
-    &.active {
-      background-color: #c3c3c3;
+    button {
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      padding: 10px;
+      font-size: 20px;
     }
+  }
+  .body {
+    background: #fff;
   }
 }
