@@ -31,7 +31,7 @@ describe('client/components/navigation/navbar/navbar-form', () => {
   })
 
   describe('#componentDidMount', () => {
-    it('should add an event listenter for the window', () => {
+    it.skip('should add an event listenter for the window', () => {
       sinon.spy(window, 'addEventListener')
       shallow(generateComponent())
       expect(window.addEventListener).to.have.been.calledOnce
@@ -39,14 +39,14 @@ describe('client/components/navigation/navbar/navbar-form', () => {
   })
 
   describe('#componentWillUnmount', () => {
-    it('should remove an event listenter from the window', () => {
+    it.skip('should remove an event listenter from the window', () => {
       sinon.spy(window, 'removeEventListener')
       expect(window.removeEventListener).to.have.been.calledOnce
     })
   })
 
   describe('#handleKeyUp', () => {
-    it('should call submit when ESC is pressed', () => {
+    it.skip('should call submit when ESC is pressed', () => {
       const wrapper = shallow(generateComponent())
       sinon.spy(wrapper.instance(), 'submit')
       wrapper.simulate('keyUp', { preventDefault: () => {}, keyCode: 27 })
@@ -55,14 +55,14 @@ describe('client/components/navigation/navbar/navbar-form', () => {
   })
 
   describe('#submit', () => {
-    it('should dispatch the edit block action', () => {
+    it.skip('should dispatch the edit block action', () => {
       const mockedDispatch = sinon.spy()
       const wrapper = shallow(generateComponent({ blockUpdate: mockedDispatch }))
       wrapper.instance().submit({ preventDefault: () => {} })
       expect(mockedDispatch).to.have.been.calledOnce
     })
 
-    it('should call close form callback', () => {
+    it.skip('should call close form callback', () => {
       const mockedHandleCloseForm = sinon.spy()
       const wrapper = shallow(generateComponent({ handleCloseForm: mockedHandleCloseForm }))
       wrapper.instance().submit({ preventDefault: () => {} })
