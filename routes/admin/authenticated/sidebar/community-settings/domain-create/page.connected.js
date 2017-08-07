@@ -5,8 +5,9 @@ import { addNotification as notify } from 'reapop'
 
 import { isValidDomain } from '~client/utils/validation-helper'
 import DnsControlSelectors from '~client/community/dns-control-selectors'
+import * as dnsNotify from '~client/community/notifications/dns'
 import {
-  asyncAddHostedZone,
+  asyncAddHostedZone as addHostedZone,
   asyncDeleteHostedZone,
   asyncCheckHostedZone
 } from '~client/community/action-creators/dns-control'
@@ -34,11 +35,16 @@ const mapStateToProps = state => ({
   saving: DnsControlSelectors(state).dnsHostedZones().isSaving()
 })
 
-const mapActionsToProps = {
-  asyncAddHostedZone,
+const mapActionsToProps = (dispatch, { intl }) => ({
+  asyncAddHostedZone: (values) => {
+    return dispatch(addHostedZone(values))
+      .catch(err => {
+        dispatch(notify(dnsNotify.addHostedZoneFailure()))
+      })
+  },
   asyncCheckHostedZone,
   notify
-}
+})
 
 export default injectIntl(connect(mapStateToProps, mapActionsToProps)(
   reduxForm({ form: 'createDomainForm', fields, validate })(Page))
