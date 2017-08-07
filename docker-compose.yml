@@ -64,6 +64,7 @@ services:
       REDIS_URL: redis://keyval.devel:6379
       RACK_ENV: development
       RAILS_ENV: development
+      JWT_SECRET: d41d8cd98f00b204e9800998ecf8427e
       WEB_CONCURRENCY: 1
       WEB_MEMORY: 256
     ports:
@@ -153,13 +154,13 @@ services:
 
   client:
     image: nossas/bonde-client
-    command: yarn start
+    command: npm start
     depends_on:
       - api-v1
       - api-v2
     volumes:
       - ./:/code:Z
-      - node-modules:/code/node_modules
+      - node-modules:/tmp/node_modules
     ports:
       - "3004:5001"
     build:
