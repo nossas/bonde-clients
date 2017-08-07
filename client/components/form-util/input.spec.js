@@ -40,7 +40,7 @@ describe('client/components/form-util/input', () => {
     })
 
     it('should render input with default onChange prop as function', () => {
-      expect(unrenderedProps.onChange).to.be.func
+      expect(unrenderedProps.onChange).to.be.a('function')
     })
 
     it('should render input with default required prop as false', () => {
@@ -52,7 +52,7 @@ describe('client/components/form-util/input', () => {
     })
 
     it('should render input with default classes prop as array', () => {
-      expect(unrenderedProps.classes).to.be.array
+      expect(unrenderedProps.classes).to.be.a('array')
     })
   })
 })

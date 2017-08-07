@@ -34,7 +34,7 @@ describe('client/components/navigation/navbar/navbar-button', () => {
     })
 
     it('should add an onClick event listener to the anchor', () => {
-      expect(wrapper.props().onClick).to.be.a.function
+      expect(wrapper.props().onClick).to.be.a('function')
     })
   })
 })
