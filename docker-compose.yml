@@ -154,13 +154,12 @@ services:
 
   client:
     image: nossas/bonde-client
-    command: npm start
+    command: yarn start
     depends_on:
       - api-v1
       - api-v2
     volumes:
       - ./:/code:Z
-      - node-modules:/tmp/node_modules
     ports:
       - "3004:5001"
     build:
