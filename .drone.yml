@@ -30,8 +30,8 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run app-client npm run build:client
-      - dokku --rm run app-client npm run build:server
+      - dokku --rm run app-client yarn run build:client
+      - dokku --rm run app-client yarn run build:server
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -65,8 +65,8 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run app-client npm run build:client
-      - dokku --rm run app-client npm run build:server
+      - dokku --rm run app-client yarn run build:client
+      - dokku --rm run app-client yarn run build:server
     when:
       status: success
       event: tag
