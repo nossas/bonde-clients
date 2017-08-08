@@ -88,11 +88,13 @@ export class Pressure extends Component {
       count_text: countText,
       pressure_subject: pressureSubject,
       pressure_body: pressureBody,
-      finish_message_type: finishMessageType
+      finish_message_type: finishMessageType,
+      disable_edit_field: disableEditField
     } = widget.settings || {
       main_color: '#f23392',
       title_text: 'Envie um e-mail para quem pode tomar essa decisão',
-      button_text: 'Enviar e-mail'
+      button_text: 'Enviar e-mail',
+      disable_edit_field: 'n'
     }
 
     return (
@@ -118,6 +120,7 @@ export class Pressure extends Component {
             </h2>
             <TargetList targets={::this.getTargetList() || []} />
             <PressureForm
+              disabled={disableEditField === 's'}
               widget={widget}
               buttonText={(saving && !editable ? 'Enviando...' : buttonText)}
               buttonColor={mainColor}
