@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
 import * as os from '~client/utils/browser/os'
-import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import { FormGroup, ControlLabel, FormControl, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
 import { Info } from '~client/components/notify'
@@ -44,7 +44,8 @@ class PressureSettingsEmailPage extends Component {
       fields: {
         pressure_subject: pressureSubject,
         pressure_body: pressureBody,
-        targets: targetsField
+        targets: targetsField,
+        disable_edit_field: disableEditField
       },
       intl,
       ...props
@@ -168,6 +169,18 @@ class PressureSettingsEmailPage extends Component {
             />
           </ControlLabel>
           <FormControl type='text' componentClass='textarea' rows='7' />
+        </FormGroup>
+        <FormGroup controlId='disable-edit-field-id' {...disableEditField}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.disable-edit-field.label'
+              defaultMessage='Desabilitar edição de assuno e corpo do e-mail'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='s'>Sim</Radio>
+            <Radio value='n'>Não</Radio>
+          </RadioGroup> 
         </FormGroup>
       </SettingsForm>
     )

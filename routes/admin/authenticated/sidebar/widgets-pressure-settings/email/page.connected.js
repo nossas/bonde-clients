@@ -7,6 +7,10 @@ import { messagePressureTargetsRemoveAll } from '~client/utils/notifications'
 import Page from './page'
 
 const mapStateToProps = (state, props) => {
+  const { settings } = props.widget
+  const disable = settings && !settings.disable_edit_field ? 'n'
+    : settings.disable_edit_field
+
   return {
     initialValues: {
       ...props.widget.settings || {},
@@ -33,7 +37,7 @@ const validate = values => {
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
     form: 'widgetsPressureSettingsEmailForm',
-    fields: ['pressure_subject', 'pressure_body', 'targets'],
+    fields: ['pressure_subject', 'pressure_body', 'targets', 'disable_edit_field'],
     validate
   })(Page)
 ))
