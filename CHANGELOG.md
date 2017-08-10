@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.2"></a>
+## [0.6.2](https://github.com/nossas/bonde-client/compare/v0.6.1...v0.6.2) (2017-08-10)
+
+
+### Bug Fixes
+
+* **autofire:** change order to inject translate hoc [#795](https://github.com/nossas/bonde-client/issues/795) ([98b24fc](https://github.com/nossas/bonde-client/commit/98b24fc))
+* **templates:** change context to params on query custom templates [#796](https://github.com/nossas/bonde-client/issues/796) ([ff07eb8](https://github.com/nossas/bonde-client/commit/ff07eb8))
+
+
+
 <a name="0.6.1"></a>
 ## [0.6.1](https://github.com/nossas/bonde-client/compare/v0.6.0...v0.6.1) (2017-08-10)
 
