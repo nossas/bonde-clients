@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { injectIntl } from 'react-intl'
 
 import Page from './page'
 
@@ -30,10 +31,10 @@ const validate = values => {
   return errors
 }
 
-export default connect(mapStateToProps)(
+export default injectIntl(connect(mapStateToProps)(
   reduxForm({
     form: 'widgetsPressureSettingsForm',
     fields,
     validate
   })(Page)
-)
+))

@@ -74,7 +74,7 @@ class PressureForm extends Component {
   }
 
   render () {
-    const { buttonColor, buttonText, children, widget } = this.props
+    const { buttonColor, buttonText, children, widget, disabled } = this.props
     const { email, name, lastname, city, subject, body, errors } = this.state
     return (
       <form className='pressure-form' onSubmit={::this.handleSubmit}>
@@ -153,6 +153,7 @@ class PressureForm extends Component {
                 style={inputReset}
                 type='text'
                 value={subject}
+                disabled={disabled}
                 onChange={e => this.setState({ subject: e.target.value })}
               />
             </div>
@@ -166,6 +167,7 @@ class PressureForm extends Component {
                 className='col-12 mt1'
                 style={{...inputReset, height: '7rem'}}
                 value={body}
+                disabled={disabled}
                 onChange={e => this.setState({ body: e.target.value })}
               />
             </div>

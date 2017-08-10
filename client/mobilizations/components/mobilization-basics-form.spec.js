@@ -16,7 +16,8 @@ describe.skip('client/mobilizations/components/mobilization-basics-form', () => 
     handleSubmit: mock.noop,
     submitFailed: false,
     dirty: false,
-    valid: false
+    valid: false,
+    location: { pathname: 'foobar' }
   }
 
   beforeAll(() => {

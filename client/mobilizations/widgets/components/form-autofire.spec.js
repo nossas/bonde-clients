@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallowWithIntl } from '~root/intl/helpers'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
@@ -21,7 +21,7 @@ describe('client/mobilizations/widgets/components/form-autofire', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<FormAutofire {...props} />)
+    wrapper = shallowWithIntl(<FormAutofire {...props} />)
   })
 
   describe('#render', () => {

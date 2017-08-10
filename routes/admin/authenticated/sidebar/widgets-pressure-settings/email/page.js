@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
 import * as os from '~client/utils/browser/os'
-import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import { FormGroup, ControlLabel, FormControl, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { InputTag } from '~client/mobilizations/widgets/components'
 import { Info } from '~client/components/notify'
@@ -44,7 +44,8 @@ class PressureSettingsEmailPage extends Component {
       fields: {
         pressure_subject: pressureSubject,
         pressure_body: pressureBody,
-        targets: targetsField
+        targets: targetsField,
+        disable_edit_field: disableEditField
       },
       intl,
       ...props
@@ -53,11 +54,21 @@ class PressureSettingsEmailPage extends Component {
       <SettingsForm
         {...props}
         onSubmit={::this.handleSubmit}
-        successMessage='Email para alvo configurado com sucesso!'
+        successMessage={
+          intl.formatMessage({
+            id: 'page--pressure-widget-email.success-message',
+            defaultMessage: 'Email para alvo configurado com sucesso!'
+          })
+        }
       >
         <div className='form-group'>
           <InputTag
-            label='Alvos'
+            label={
+              intl.formatMessage({
+                id: 'page--pressure-widget-email.form.input-tag.label',
+                defaultMessage: 'Alvos'
+              })
+            }
             values={this.state.targets}
             onInsertTag={targets => {
               const targetsPushed = [...this.state.targets, ...targets]
@@ -79,8 +90,10 @@ class PressureSettingsEmailPage extends Component {
               const errors = { valid: true }
               if (targets.some(target => !target.match(patternTarget))) {
                 errors.valid = false
-                errors.message =
-                  'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.invalid-target-format',
+                  defaultMessage: 'Alvo fora do formato padrão. Ex.: Nome do alvo <alvo@provedor.com>'
+                })
               }
               return errors
             }}
@@ -140,12 +153,34 @@ class PressureSettingsEmailPage extends Component {
           />
         </div>
         <FormGroup controlId='email-subject-id' {...pressureSubject}>
-          <ControlLabel>Assunto do email</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.email-subject.label'
+              defaultMessage='Assunto do email'
+            />
+          </ControlLabel>
           <FormControl type='text' />
         </FormGroup>
         <FormGroup controlId='email-body-id' {...pressureBody}>
-          <ControlLabel>Corpo do email que será enviado</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.email-body.label'
+              defaultMessage='Corpo do email que será enviado'
+            />
+          </ControlLabel>
           <FormControl type='text' componentClass='textarea' rows='7' />
+        </FormGroup>
+        <FormGroup controlId='disable-edit-field-id' {...disableEditField}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget-email.form.disable-edit-field.label'
+              defaultMessage='Desabilitar edição de assuno e corpo do e-mail'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='s'>Sim</Radio>
+            <Radio value='n'>Não</Radio>
+          </RadioGroup> 
         </FormGroup>
       </SettingsForm>
     )
