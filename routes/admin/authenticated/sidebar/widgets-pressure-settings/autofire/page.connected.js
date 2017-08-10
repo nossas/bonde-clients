@@ -12,9 +12,9 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps)(
-  reduxForm({
+  injectIntl(reduxForm({
     form: 'formAutofireForm',
     fields,
     validate
-  })(injectIntl(Page))
-)
+  })(Page)
+))
