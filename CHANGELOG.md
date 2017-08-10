@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/nossas/bonde-client/compare/v0.6.0...v0.6.1) (2017-08-10)
+
+
+### Bug Fixes
+
+* **dns:** add warning for any error on API request [#788](https://github.com/nossas/bonde-client/issues/788) ([405b8eb](https://github.com/nossas/bonde-client/commit/405b8eb))
+* **subscriptions:** card's data keys to snake case fix [#783](https://github.com/nossas/bonde-client/issues/783) ([8c9ff3d](https://github.com/nossas/bonde-client/commit/8c9ff3d))
+
+
+### Features
+
+* **pages:** add option to disable edit field on pressure [#791](https://github.com/nossas/bonde-client/issues/791) ([64eedd6](https://github.com/nossas/bonde-client/commit/64eedd6))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/nossas/bonde-client/compare/v0.5.10...v0.6.0) (2017-07-26)
 
