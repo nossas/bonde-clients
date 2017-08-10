@@ -28,7 +28,7 @@ const mapActionsToProps = {
 
 const GraphPage = graphql(gql`
   query customTemplates($communityId: Int!) {
-    customTemplates (communityId: $communityId) {
+    customTemplates (ctxCommunityId: $communityId) {
       nodes {
         id,
         name,

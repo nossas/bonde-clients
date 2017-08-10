@@ -38,7 +38,7 @@ const mapActionsToProps = (dispatch, props) => ({
 
 const GraphPage = graphql(gql`
   query allTemplates($communityId: Int!) {
-    customTemplates (communityId: $communityId) {
+    customTemplates (ctxCommunityId: $communityId) {
       totalCount
     }
     globalTemplates {
