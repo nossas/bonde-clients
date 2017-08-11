@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.1'
 
 volumes:
   # We'll define a volume that will store the data from the postgres databases:
