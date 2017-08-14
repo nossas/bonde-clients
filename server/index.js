@@ -47,10 +47,10 @@ export const createServer = (config) => {
   const app = express()
 
   if (__PROD__ || __TEST__) {
+    let assets = null
     if (__PROD__) {
       assets = require('./../build/assets.json')
     }
-    let assets = null
     app.use(helmet())
     app.use(hpp())
     app.use(compression())
