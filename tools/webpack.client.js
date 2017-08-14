@@ -1,6 +1,7 @@
 const dotenv = require('dotenv')
 dotenv.config()
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -34,12 +35,7 @@ const entry = {
 
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: 'vendor.bundle.js',
-    minChunks (module) {
-      return module.context &&
-             module.context.indexOf('node_modules') >= 0;
-    }
+    name: 'vendor'
   }),
   new webpack.EnvironmentPlugin({
     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -57,6 +53,9 @@ const plugins = [
 
 if (isProd) {
   plugins.push(
+    new CleanWebpackPlugin(['build']),
+    new AssetsPlugin({ filename: './build/assets.json' }),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -77,14 +76,12 @@ if (isProd) {
         comments: false
       }
     }),
-    new webpack.HashedModuleIdsPlugin(),
     new CompressionPlugin({
       asset: '[path][query]',
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.svg$/,
       minRatio: 0.8
     }),
-    new AssetsPlugin({ filename: './build/assets.json' }),
     new Visualizer({
       filename: './build/main.stats.html'
     })
@@ -136,7 +133,7 @@ module.exports = {
   entry: entry,
   output: {
     path: staticsPath,
-    filename: '[name].bundle.js',
+    filename: '[name].[hash].js',
     publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${process.env.AWS_BUCKET}/` : '/'
   },
   module: {
