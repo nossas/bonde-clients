@@ -49,6 +49,7 @@
     "chai-as-promised": "^7.1.0",
     "chai-http": "^3.0.0",
     "classnames": "^2.2.5",
+    "clean-webpack-plugin": "^0.1.16",
     "compression": "^1.7.0",
     "compression-webpack-plugin": "^1.0",
     "cookie-parser": "^1.4.3",
