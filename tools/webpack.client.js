@@ -1,7 +1,6 @@
 const dotenv = require('dotenv')
 dotenv.config()
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -19,17 +18,25 @@ const entry = {
   ],
   vendor: [
     'react',
-    'cpf_cnpj',
-    'react-cookie',
     'react-dom',
     'react-ga',
     'react-helmet',
+    'react-cookie',
     'react-redux',
+    'react-apollo',
+    'react-intl',
+    'react-router',
+    'react-countup',
     'redial',
     'redux',
-    'redux-logger',
     'redux-promise',
-    'redux-thunk'
+    'redux-thunk',
+    'redux-form',
+    'redux-form-validation',
+    'raven-js',
+    'axios',
+    'reapop',
+    'format-number'
   ]
 }
 
@@ -53,7 +60,6 @@ const plugins = [
 
 if (isProd) {
   plugins.push(
-    new CleanWebpackPlugin(['build']),
     new AssetsPlugin({ filename: './build/assets.json' }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
