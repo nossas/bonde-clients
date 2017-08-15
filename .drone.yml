@@ -32,6 +32,8 @@ pipeline:
       - dokku tags:deploy app-client latest
       - dokku --rm run app-client yarn run build:client
       - dokku --rm run app-client yarn run build:server
+      - dokku ps:restart app-client
+      - dokku ps:restart 0-client
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
@@ -67,6 +69,9 @@ pipeline:
       - dokku tags:deploy app-client latest
       - dokku --rm run app-client yarn run build:client
       - dokku --rm run app-client yarn run build:server
+      - dokku ps:restart 0-client
+      - dokku ps:restart app-client
+
     when:
       status: success
       event: tag
