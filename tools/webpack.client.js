@@ -126,7 +126,7 @@ if (isProd) {
 }
 
 module.exports = {
-  devtool: isProd ? 'cheap-module-source-map' : 'source-map',
+  devtool: isProd ? 'source-map' : 'cheap-module-source-map',
   context: sourcePath,
   node: {
     fs: 'empty'

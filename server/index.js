@@ -43,11 +43,11 @@ const normalizeAssets = function (assets) {
 export const createServer = (config) => {
   const __PROD__ = config.nodeEnv === 'production' || config.nodeEnv === 'staging'
   const __TEST__ = config.nodeEnv === 'test'
+  let assets = null
 
   const app = express()
 
   if (__PROD__ || __TEST__) {
-    let assets = null
     if (__PROD__) {
       assets = require('./../build/assets.json')
     }
