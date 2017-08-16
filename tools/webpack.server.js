@@ -22,6 +22,11 @@ module.exports = {
     __filename: true,
     __dirname: true
   },
+  resolve: {
+    alias: {
+      './rangy-core': 'rangy/lib/rangy-core'
+    }
+  },
   module: {
     loaders: [
       {

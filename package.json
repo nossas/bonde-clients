@@ -196,6 +196,7 @@
       "node_modules"
     ],
     "moduleNameMapper": {
+      "wysihtml-toolbar.min.js$": "<rootDir>/tools/jest/mock-file.js",
       "^~(.*)$": "<rootDir>$1",
       "^~client(.*)$": "<rootDir>/client$1",
       "^~routes(.*)$": "<rootDir>/routes$1",
