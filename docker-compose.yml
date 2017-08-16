@@ -22,7 +22,7 @@ services:
       # our database IDEs with it:
       - 5432:5432
     volumes:
-      - ./tools/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./tools/db-dumps/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 3x4mpl3
