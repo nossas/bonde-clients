@@ -70,6 +70,7 @@ export default ({
         loading: data.loading,
         data: all.map(parse),
         totalCount: data[queryName] ? data[queryName].totalCount : 0,
+        refetch: data.refetch,
         onNextPage: () => {
           browserHistory.push({
             ...location,

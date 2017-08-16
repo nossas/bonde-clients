@@ -7,11 +7,12 @@ import * as CommunitySelectors from '~client/community/selectors'
 import Container from './container'
 
 const allActivistsQuery = gql`
-  query allActivists ($communityId: Int, $first: Int, $offset: Int) {
-    allActivists (
+  query allActivists ($search: String, $communityId: Int, $first: Int, $offset: Int) {
+    searchActivistsOnCommunity (
       first: $first,
       offset: $offset,
-      condition: { communityId: $communityId }
+      ctxCommunityId: $communityId,
+      query: $search
     ) {
       totalCount,
       nodes {
@@ -31,8 +32,12 @@ const mapStateToProps = (state) => ({
 
 const Pagination = PaginationHOC({
   query: allActivistsQuery,
-  queryParams: ({ communityId }) => ({ communityId }),
-  queryName: 'allActivists',
+  queryParams: ({ communityId, location }) => {
+    const q = location && location.query && location.query.q ?
+      location.query.q : ''
+    return { communityId, search: q }
+  },
+  queryName: 'searchActivistsOnCommunity',
   parse: ({ mobilizations, ...data }) => ({
     ...data,
     mobilizations: JSON.parse(mobilizations)
