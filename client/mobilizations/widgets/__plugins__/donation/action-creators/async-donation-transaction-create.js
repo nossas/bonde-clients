@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import { addNotification } from 'reapop'
 import * as notifications from '~client/utils/notifications'
 import { createAction } from './create-action'

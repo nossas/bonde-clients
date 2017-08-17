@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
 
 import * as validator from '~client/utils/validation-helper'

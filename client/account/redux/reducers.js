@@ -9,7 +9,6 @@ export const initialState = {
   credentials: undefined,
   error: undefined
 }
-const UNIX_TIMESTAMP_MILLISECONDS_FIX = 1000
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -23,7 +22,6 @@ export default (state = initialState, action = {}) => {
 
       cookie.save('auth',
         { auth: { credentials, user } }
-        // { expires: new Date(credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }  // todo expiry JWT token
       )
       return { ...state, isLoading: false, error: undefined, ...action.payload }
     case t.LOGIN_FAILURE:

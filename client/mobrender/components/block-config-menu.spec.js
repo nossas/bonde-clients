@@ -38,7 +38,7 @@ describe('~client/mobrender/components/block-config-menu', () => {
 
       it('should call duplicate when clicked', () => {
         let expected
-        menuConfig.setProps({ duplicate: (block) => expected = block })
+        menuConfig.setProps({ duplicate: (block) => { expected = block } })
         menu.simulate('click')
         expect(expected).to.deep.equal(props.block)
       })

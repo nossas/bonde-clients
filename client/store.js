@@ -79,6 +79,7 @@ export function configureStore (initialState, thunkExtraArgument) {
       if (response && response.status === 401) {
         store.dispatch(logout())
       }
+      // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({ response, ...error })
     }
   )

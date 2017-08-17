@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 
 const AsyncCreateTemplate = template => (dispatch, getState, { api }) => {

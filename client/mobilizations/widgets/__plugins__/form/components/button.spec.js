@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'

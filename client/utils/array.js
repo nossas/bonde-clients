@@ -3,7 +3,9 @@ export const distinct = (value, index, self) => self.indexOf(value) === index
 export const clean = array => array.filter(n => n)
 
 export const shuffle = array => {
-  let currentIndex = array.length, temporaryValue, randomIndex
+  let currentIndex = array.length
+  let temporaryValue
+  let randomIndex
 
   // While there remain elements to shuffle...
   while (currentIndex !== 0) {

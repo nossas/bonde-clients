@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import downloadjs from 'downloadjs'
 
 const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, getState, { api }) => {

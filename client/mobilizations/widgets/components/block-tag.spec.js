@@ -1,8 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
-
-// Current module dependencies
 import { BlockTag } from '~client/mobilizations/widgets/components'
 
 describe('client/mobilizations/widgets/components/block-tag', () => {
