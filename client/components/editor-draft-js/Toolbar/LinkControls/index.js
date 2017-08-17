@@ -15,7 +15,6 @@ const getSelectionLink = (editorState) => {
 }
 
 export default class LinkControls extends Component {
-
   constructor (props) {
     super(props)
     this.state = {

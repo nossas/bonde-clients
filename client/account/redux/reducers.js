@@ -22,7 +22,7 @@ export default (state = initialState, action = {}) => {
       const { credentials, user } = action.payload
 
       cookie.save('auth',
-        { auth: { credentials, user } },
+        { auth: { credentials, user } }
         // { expires: new Date(credentials.Expiry * UNIX_TIMESTAMP_MILLISECONDS_FIX) }  // todo expiry JWT token
       )
       return { ...state, isLoading: false, error: undefined, ...action.payload }

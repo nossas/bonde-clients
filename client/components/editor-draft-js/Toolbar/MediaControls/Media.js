@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { Entity } from 'draft-js'
 
 class Media extends Component {
-
   render () {
     const { block } = this.props
 

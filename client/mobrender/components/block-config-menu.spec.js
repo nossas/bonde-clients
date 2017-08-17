@@ -43,7 +43,7 @@ describe('~client/mobrender/components/block-config-menu', () => {
         expect(expected).to.deep.equal(props.block)
       })
     })
-    
+
     describe('1: change background', () => {
       beforeEach(() => {
         menu = menuConfig.find('DropdownMenuItem').at(1)

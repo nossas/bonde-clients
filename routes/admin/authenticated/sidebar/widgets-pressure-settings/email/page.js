@@ -180,7 +180,7 @@ class PressureSettingsEmailPage extends Component {
           <RadioGroup>
             <Radio value='s'>Sim</Radio>
             <Radio value='n'>Não</Radio>
-          </RadioGroup> 
+          </RadioGroup>
         </FormGroup>
       </SettingsForm>
     )

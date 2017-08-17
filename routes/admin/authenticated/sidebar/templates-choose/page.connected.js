@@ -13,7 +13,6 @@ import * as paths from '~client/paths'
 
 import Page from './page'
 
-
 const mapStateToProps = (state, props) => ({
   communityId: CommunitySelectors.getCurrentId(state),
   mobilization: MobSelectors(state, props).getMobilization(),
@@ -60,7 +59,7 @@ const GraphPage = graphql(gql`
       customTemplatesLength: customTemplates ? customTemplates.totalCount : 0,
       globalTemplates: globalTemplates ? globalTemplates.nodes : []
     }
-  },
+  }
 })(Page)
 
 export default connect(mapStateToProps, mapActionsToProps)(GraphPage)

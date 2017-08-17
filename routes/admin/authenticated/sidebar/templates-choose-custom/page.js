@@ -7,7 +7,6 @@ import { TemplateSelectableList } from '~client/mobilizations/templates/componen
 import { Loading } from '~client/components/await'
 
 class TemplatesChooseCustomPage extends React.Component {
-
   componentDidMount () {
     if (this.props.templates) {
       this.props.setFilterableSearchBarList(this.props.templates)
@@ -22,7 +21,7 @@ class TemplatesChooseCustomPage extends React.Component {
       loading,
       ...listableProps
     } = this.props
-    
+
     return loading ? <Loading /> : (
       <PageTabLayout {...{ location }}>
         <div className='choose-custom-page col-12'>

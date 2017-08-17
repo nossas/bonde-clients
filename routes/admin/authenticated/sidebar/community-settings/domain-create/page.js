@@ -101,9 +101,9 @@ class Page extends Component {
                     disabled={saving || this.state.dns !== undefined}
                     onClick={() => browserHistory.push(paths.communityDomain())}
                   >
-                  <FormattedMessage
-                    id='page--community-domain-create.step-add.form.cancel-button.text'
-                    defaultMessage='Cancelar'
+                    <FormattedMessage
+                      id='page--community-domain-create.step-add.form.cancel-button.text'
+                      defaultMessage='Cancelar'
                   />
                   </Button>
                 </span>

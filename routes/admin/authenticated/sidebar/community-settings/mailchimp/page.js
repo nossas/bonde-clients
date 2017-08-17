@@ -165,7 +165,7 @@ const CommunitySettingsMailchimpPage = ({
 CommunitySettingsMailchimpPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
-    mailchimp_list_id: PropTypes.object.isRequired,
+    mailchimp_list_id: PropTypes.object.isRequired
   }).isRequired,
   // redux-form required props
   submit: PropTypes.func.isRequired,

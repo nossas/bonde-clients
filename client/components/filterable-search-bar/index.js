@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { setFilterableSearchBarList } from './actions'
 
 export class FilterableSearchBar extends Component {
-
   componentDidMount () {
     const { dispatch, list } = this.props
     dispatch(setFilterableSearchBarList(list))

@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 class Preview extends Component {
-
   render () {
     const { children, header } = this.props
 

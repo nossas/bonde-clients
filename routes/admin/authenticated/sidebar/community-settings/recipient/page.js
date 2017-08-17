@@ -88,7 +88,7 @@ const CommunitySettingsRecipientPage = ({
             marginBottom: 0,
             height: 50,
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Radio value='weekly'>
@@ -159,7 +159,6 @@ const CommunitySettingsRecipientPage = ({
       </FormGroup>
     </div>
 
-
     <div className='section'>
       <Title size='2'>
         <FormattedMessage
@@ -182,7 +181,7 @@ const CommunitySettingsRecipientPage = ({
               marginBottom: 0,
               height: 50,
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'center'
             }}
           >
             <Radio value='conta_corrente'>
@@ -209,10 +208,10 @@ const CommunitySettingsRecipientPage = ({
           </ControlLabel>
           <FormControl componentClass='select'>
             <option value=''>
-            {intl.formatMessage({
-              id: 'page--community-recipient.form.bank-code.value.default',
-              defaultMessage: 'Selecione o banco'
-            })}
+              {intl.formatMessage({
+                id: 'page--community-recipient.form.bank-code.value.default',
+                defaultMessage: 'Selecione o banco'
+              })}
             </option>
             {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3).map(bank => (
               <option key={uuid()} value={bank.code}>

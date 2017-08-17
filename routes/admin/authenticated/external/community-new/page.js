@@ -62,8 +62,8 @@ class CommunityNewPage extends Component {
                 type='text'
                 placeholder={
                   intl.formatMessage({
-                    id:'page--community-new.form.name.placeholder',
-                    defaultMessage:'Exemplo: Movimento 90º São Paulo',
+                    id: 'page--community-new.form.name.placeholder',
+                    defaultMessage: 'Exemplo: Movimento 90º São Paulo'
                   })
                 }
               />
@@ -79,8 +79,8 @@ class CommunityNewPage extends Component {
                 type='text'
                 placeholder={
                   intl.formatMessage({
-                    id:'page--community-new.form.city.placeholder',
-                    defaultMessage:'Exemplo: São Paulo',
+                    id: 'page--community-new.form.city.placeholder',
+                    defaultMessage: 'Exemplo: São Paulo'
                   })
                 }
               />

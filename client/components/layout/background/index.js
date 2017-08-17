@@ -8,7 +8,7 @@ const Background = ({ children, contentSize, image, alignment }) => {
   const flexAlignments = {
     center: 'center',
     'top': 'flex-start',
-    'bottom': 'flex-end',
+    'bottom': 'flex-end'
   }
   const justifyContent = flexAlignments[alignment.x]
   const alignItems = flexAlignments[alignment.y]

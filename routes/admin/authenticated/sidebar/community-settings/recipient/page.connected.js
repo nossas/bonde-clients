@@ -114,7 +114,6 @@ const validate = (values, { intl }) => {
     errors.recipient.bank_account.legal_name = requiredMessage
   }
 
-
   if (!documentNumber) {
     errors.recipient.bank_account.document_number = requiredMessage
   } else {

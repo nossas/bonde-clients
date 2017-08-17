@@ -44,7 +44,7 @@ const GraphPage = graphql(gql`
   }),
   props: ({ ownProps, data: { loading, customTemplates } }) => ({
     loading,
-    templates: customTemplates ? customTemplates.nodes : [] 
+    templates: customTemplates ? customTemplates.nodes : []
   })
 })(Page)
 

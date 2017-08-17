@@ -45,7 +45,7 @@ describe('routes/public/custom-domain/page', () => {
         type: 'image/png',
         sizes: '16x16',
         href: defaultFavicon16
-      }   
+      }
     ]
     expect(wrapper.find(Helmet).props().link).to.deep.equal(link)
   })
@@ -74,7 +74,7 @@ describe('routes/public/custom-domain/page', () => {
       },
       {
         rel: 'icon', type: 'image/png', sizes: '16x16', href: favicon
-      }   
+      }
     ]
 
     const mobilization = { ...props.mobilization, favicon }
