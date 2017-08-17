@@ -28,6 +28,9 @@ Propriedades:
           finish_message_type: PropTypes.oneOf([''])
         })
       }),
-      handleDonationTransactionCreate: PropTypes.func.isRequired
+      handleDonationTransactionCreate: PropTypes.func.isRequired,
+      checkout: PropTypes.shape({
+        open: PropTypes.func    
+      })
     }
     ```
