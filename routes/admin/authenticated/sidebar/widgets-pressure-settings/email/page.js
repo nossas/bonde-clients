@@ -142,26 +142,13 @@ class PressureSettingsEmailPage extends Component {
                 <ul style={{ paddingLeft: 15, marginBottom: 0 }}>
                   <li>
                     <FormattedMessage
-                      id='p--pressure-widget--input-tag.info.item.target-email-format'
-                      defaultMessage='Pressão por email: {format}'
-                      values={{ format: <b>{'Nome Sobrenome <email@provedor.com>'}</b> }}
-                    />
-                  </li>
-                  <li>
-                    <FormattedMessage
-                      id='p--pressure-widget--input-tag.info.item.target-phone-format'
-                      defaultMessage='Pressão por telefone: {format}'
-                      values={{ format: <b>{'Nome Sobrenome <+5511976547654>'}</b> }}
-                    />
-                  </li>
-                  <li>
-                    <FormattedMessage
-                      id='p--pressure-widget--input-tag.info.item.special-chars'
+                      id='p--pressure-widget--input-tag.info.item.target-format'
                       defaultMessage={
-                        'Em ambos os tipos de pressão é obrigatório o uso dos caractéres ' +
-                        '{lt} e {gt} para agrupar o email ou telefone'
+                        'Formato do alvo: {format} (obrigatório usar os caractéres ' +
+                        '{lt} e {gt} para agrupar o email)'
                       }
                       values={{
+                        format: <b>{'Nome <email@provedor.com>'}</b>,
                         lt: <Kbd>{'<'}</Kbd>,
                         gt: <Kbd>{'>'}</Kbd>
                       }}
