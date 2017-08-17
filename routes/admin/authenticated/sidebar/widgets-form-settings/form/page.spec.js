@@ -27,6 +27,7 @@ describe('routes/admin/authenticated/sidebar/widgets-form-settings/form/page', (
 
   describe('#render', () => {
     it('should render without crash', () => {
+      // eslint-disable-next-line no-unused-expressions
       expect(wrapper).to.be.ok
     })
   })

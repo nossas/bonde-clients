@@ -29,6 +29,7 @@ describe('routes/public/custom-domain/page', () => {
   })
 
   it('render without crashed', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper).to.be.ok
   })
 
@@ -51,6 +52,7 @@ describe('routes/public/custom-domain/page', () => {
   })
 
   it('should render Mobilization with editable prop as undefined', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper.find('Connect(Mobilization)').props().editable).to.be.undefined
   })
 

@@ -6,7 +6,7 @@ import { Warning } from '~client/components/notify'
 import { FormGroup, FormControl, ControlLabel, RadioGroup, Radio } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { getCodeBanks } from '~client/community/utils'
-import { Title, Subtitle } from '~client/components/title'
+import { Title } from '~client/components/title'
 import * as normalizers from '~client/utils/redux-form/normalizers'
 
 const CommunitySettingsRecipientPage = ({

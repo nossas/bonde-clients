@@ -2,16 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
-import {
-  FormRedux,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  UploadImageField,
-  HelpBlock
-} from '~client/components/forms'
+import { FormRedux, FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 import { Info } from '~client/components/notify'
-import { SettingsForm } from '~client/ux/components'
 import Button from '~client/ux/components/button'
 
 var styles = require('exenv').canUseDOM ? require('./page.scss') : {}

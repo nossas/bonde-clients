@@ -1,7 +1,8 @@
-// polyfill webpack require.ensure
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 import { showMobilizationPublicView, getDomain } from '~routes/utils'
 import serverConfig from '~server/config'
+
+// polyfill webpack require.ensure
+if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
 const whitelistedPublicRoutes = [
   /^\/subscriptions\/\d+\/edit$/ // /subscriptions/:id/edit

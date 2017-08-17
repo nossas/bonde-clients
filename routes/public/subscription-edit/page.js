@@ -42,6 +42,7 @@ const CreditCardFormImplementation = CreditCardForm({
 
         const errors = card.fieldErrors()
 
+        /* eslint-disable prefer-promise-reject-errors */
         Object.keys(errors).length > 0
           ? reject({
             cvv: errors.card_cvv,
@@ -56,6 +57,7 @@ const CreditCardFormImplementation = CreditCardForm({
               card_hash: cardHash
             }))
           })
+          /* eslint-disable prefer-promise-reject-errors */
       })
 
       return Promise.resolve(promise).then(action => action)

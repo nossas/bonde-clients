@@ -1,6 +1,7 @@
+import { isIndexRedirected } from '~routes/utils'
+
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
-import { isIndexRedirected } from '~routes/utils'
 
 //
 // @path (admin) /

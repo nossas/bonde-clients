@@ -1,11 +1,9 @@
-import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { graphql, gql } from 'react-apollo'
 
 import * as SelectableActions from '~client/components/selectable-list/actions'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import * as TemplateActions from '~client/mobilizations/templates/action-creators'
 import * as TemplateSelectors from '~client/mobilizations/templates/selectors'
 import * as CommunitySelectors from '~client/community/selectors'
 

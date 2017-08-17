@@ -14,6 +14,7 @@ describe('routes/admin/authenticated/sidebar/mobilizations-settings-basics/page'
 
   describe('#render', () => {
     it('should render without crash', () => {
+      // eslint-disable-next-line no-unused-expressions
       expect(wrapper).to.be.ok
     })
   })

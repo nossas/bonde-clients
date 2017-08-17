@@ -13,6 +13,7 @@ describe('routes/admin/authenticated/sidebar/widgets-pressure-settings/container
 
   it('should render without crashed', () => {
     const container = shallow(<Container {...props} />)
+    // eslint-disable-next-line no-unused-expressions
     expect(container).to.be.ok
   })
 

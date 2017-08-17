@@ -17,6 +17,7 @@ describe('~routes/admin/not-authenticated/account-retrieve/page', () => {
 
   it('should render without crashed', () => {
     const page = mountWithIntl(<Page {...props} />)
+    // eslint-disable-next-line no-unused-expressions
     expect(page).to.be.ok
   })
 })
