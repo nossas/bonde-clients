@@ -1,7 +1,5 @@
 import 'newrelic'
 import url from 'url'
-import dotenv from 'dotenv'
-dotenv.config()
 
 import http from 'http'
 import express from 'express'
@@ -35,6 +33,8 @@ import { configureStore, client } from '../client/store'
 import createRoutes from '../routes'
 import loadState from './load-state'
 import localeData from '../intl/locale-data'
+
+require('dotenv').config()
 
 const normalizeAssets = function (assets) {
   return Array.isArray(assets) ? assets : [assets]
