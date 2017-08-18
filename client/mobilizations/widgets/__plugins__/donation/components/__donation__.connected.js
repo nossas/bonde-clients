@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { asyncDonationTransactionCreate } from '../action-creators'
-import Donation from './__donation__'
+import { Donation } from './__donation__'
 
 const mapActionsToProps = {
   handleDonationTransactionCreate: asyncDonationTransactionCreate

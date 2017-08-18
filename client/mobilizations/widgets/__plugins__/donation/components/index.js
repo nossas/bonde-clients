@@ -3,4 +3,4 @@ export { default as SettingsMenu } from './settings-menu'
 export { default as DonationTellAFriend } from './donation-tell-a-friend'
 
 // Export for test component
-export { default as DonationWidget } from './__donation__'
+export { factoryDonation as factoryDonation } from './__donation__'

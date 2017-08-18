@@ -4,7 +4,15 @@ import { mount } from 'enzyme'
 import { Map } from 'immutable'
 
 // TODO: Move DonationWidget
-import { DonationWidget } from '~client/mobilizations/widgets/__plugins__/donation/components'
+import { factoryDonation } from '~client/mobilizations/widgets/__plugins__/donation/components'
+
+
+const TellAFriend = () => (<div />)
+const FinishMessageCustom = () => (<div />)
+const DonationWidget = factoryDonation({
+  finishMessageCustom: FinishMessageCustom,
+  tellAFriend: TellAFriend
+}) 
 
 
 describe('<DonationWidget />', () => {
