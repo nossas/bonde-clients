@@ -27,7 +27,15 @@ filename_owner_changed="${filename}.owner-changed"
 echo "${dark_gray}Filenames generated.${nc}\n"
 
 echo "${green}[03/08]\t${light_gray}Generating the dump file...${nc}"
-docker-compose exec postgres pg_dump ${src_psql_uri} > ${filename}
+docker-compose exec -T postgres pg_dump ${src_psql_uri} > ${filename} &
+pid=$!
+trap "kill $pid 2> /dev/null" EXIT
+while kill -0 $pid 2> /dev/null; do
+  ls -lah $filename \
+    | awk '{ printf "\033[1;30m\rDumping... \033[0;34m%s \033[1;30m~> \033[0;32m%s ", $9, $5 }';
+  sleep 1;
+done
+echo ""
 echo "${dark_gray}Dump completed. (${dump_dir}/${filename})\n"
 
 echo "${green}[04/08]${nc}\t${light_gray}Changing the owners of the dump file...${nc}"
@@ -37,8 +45,6 @@ sed -i.bak 's/FROM reboo/FROM postgres/g' $filename && rm "$filename.bak" && \
 sed -i.bak 's/TO reboo/TO postgres/g' $filename && rm "$filename.bak"
 mv $filename $filename_owner_changed
 echo "${dark_gray}Owners changed."
-echo "${dark_gray}- ${filename_original}"
-echo "${dark_gray}- ${filename_owner_changed}\n"
 
 echo "${green}[05/08]${nc}\t${light_gray}Dropping the local database...${nc}"
 docker-compose exec postgres psql $dest_psql_uri -c 'DROP SCHEMA PUBLIC CASCADE; DROP SCHEMA postgraphql CASCADE; CREATE SCHEMA PUBLIC; CREATE SCHEMA postgraphql;'
@@ -55,5 +61,9 @@ echo "${dark_gray}Migrations executed.\n"
 echo "${green}[08/08]${nc}\t${light_gray}Restarting graphql service...${nc}"
 docker-compose restart api-v2
 echo "${dark_gray}GraphQL restarted.\n"
+
+echo "${cyan}Stored dump files:${nc}"
+echo "${dark_gray}- ${filename_original}"
+echo "${dark_gray}- ${filename_owner_changed}\n"
 
 trap - EXIT
