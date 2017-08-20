@@ -124,7 +124,7 @@ export const factoryDonation = ({
       const paymentType = ((widget.settings && widget.settings.payment_type) ? widget.settings.payment_type : 'unique')
       const recurringPeriod = ((widget.settings && widget.settings.recurring_period) ? widget.settings.recurring_period : 30)
 
-      const periodLabelOptions = { 30: ' mês', 180: ' semestre', 365: ' ano' }
+      const periodLabelOptions = { 30: 'mês', 180: 'semestre', 365: 'ano' }
       const periodLabelCurrent = periodLabelOptions[recurringPeriod]
       const periodLabel = paymentType === 'unique' || selectedPaymentType === 'unique' ? ''
         : periodLabelCurrent
