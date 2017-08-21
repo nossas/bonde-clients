@@ -206,8 +206,7 @@ describe('<DonationWidget />', () => {
     }
     let expected
 
-    const handleDonationTransactionCreate = (data) =>
-      new Promise((resolve, reject) => {
+    const handleDonationTransactionCreate = (data) => new Promise((resolve) => {
         expected = data
         return resolve()
     })

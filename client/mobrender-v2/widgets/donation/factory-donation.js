@@ -8,7 +8,6 @@ export default ({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: DonationTellAFriend
 }) => {
-
   class Donation extends React.Component {
     constructor (props, context) {
       super(props, context)
@@ -59,7 +58,9 @@ export default ({
         widget,
         selectedValue,
         selectedPaymentType
-      }).then(() => this.setState({ success: true }))
+      }).then(() => {
+        this.setState({ success: true })
+      }) 
     }
 
     renderButton () {
@@ -207,7 +208,7 @@ export default ({
     renderThankyouText () {
       const { mobilization, widget } = this.props
       const { settings: { finish_message_type: finishMessageType } } = widget
-
+      
       return finishMessageType === 'custom' ? (
         <FinishMessageCustom widget={widget} />
       ) : (
@@ -216,11 +217,9 @@ export default ({
     }
 
     render () {
-      const { success } = this.state
-
       return (
         <div className='bg-white widget rounded'>
-          {success ? this.renderThankyouText() : this.renderForm()}
+          {this.state.success ? this.renderThankyouText() : this.renderForm()}
         </div>
       )
     }

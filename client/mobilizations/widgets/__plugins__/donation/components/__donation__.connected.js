@@ -4,7 +4,7 @@ import { asyncDonationTransactionCreate } from '../action-creators'
 
 import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
 import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
-import { DonationTellAFriend } from '../components'
+import DonationTellAFriend from './donation-tell-a-friend'
 
 const Donation = factoryDonation({
   finishMessageCustom: FinishMessageCustom,
@@ -26,7 +26,7 @@ const mapActionsToProps = (dispatch) => ({
       ? widget.settings.main_color
       : '#43a2cc'
 
-    const checkout = new PagarMeCheckou.Checkou({
+    const checkout = new PagarMeCheckout.Checkout({
       encryption_key: process.env.PAGARME_KEY || 'setup env var',
       success: (data) => {
         data.subscription = paymentType === 'users_choice'
