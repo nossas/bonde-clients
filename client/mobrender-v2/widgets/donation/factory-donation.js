@@ -1,15 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
-import * as paths from '~client/paths'
-import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
-import { DonationTellAFriend } from '../../components'
+if (require('exenv').canUseDOM) require('./donation.scss')
 
-if (require('exenv').canUseDOM) require('./index.scss')
-
-export const factoryDonation = ({
+export default ({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: DonationTellAFriend
 }) => {
@@ -41,13 +36,6 @@ export const factoryDonation = ({
     componentWillReceiveProps (nextProps) {
       if (this.state.loading) {
         this.setState({ loading: false, success: true })
-      }
-    }
-
-    handleOverlayOnClick () {
-      const { mobilization, widget, editable } = this.props
-      if (editable) {
-        browserHistory.push(paths.donation(mobilization.id, widget.id))
       }
     }
 
@@ -249,8 +237,3 @@ export const factoryDonation = ({
 
   return Donation
 }
-
-export const Donation = factoryDonation({
-  finishMessageCustom: FinishMessageCustom,
-  tellAFriend: DonationTellAFriend
-})

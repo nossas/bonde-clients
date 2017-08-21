@@ -3,8 +3,7 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 import { Map } from 'immutable'
 
-// TODO: Move DonationWidget
-import { factoryDonation } from '~client/mobilizations/widgets/__plugins__/donation/components'
+import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
 
 
 const TellAFriend = () => (<div />)
@@ -13,7 +12,6 @@ const DonationWidget = factoryDonation({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: TellAFriend
 }) 
-
 
 describe('<DonationWidget />', () => {
   let donationWidget

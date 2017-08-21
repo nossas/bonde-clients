@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '../action-creators'
-import { Donation } from './__donation__'
+
+import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
+import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
+import { DonationTellAFriend } from '../components'
+
+const Donation = factoryDonation({
+  finishMessageCustom: FinishMessageCustom,
+  tellAFriend: DonationTellAFriend
+})
 
 const mapActionsToProps = (dispatch) => ({
   handleDonationTransactionCreate: ({
