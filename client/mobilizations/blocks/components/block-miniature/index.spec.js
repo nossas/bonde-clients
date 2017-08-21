@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
@@ -22,7 +23,7 @@ describe('client/mobilizations/blocks/components/block-miniature', () => {
       expect(wrapper.find('div.block-miniature')).to.have.length
     })
     it('should render root .block-miniature <div> with onClick prop as a function', () => {
-      expect(wrapper.find('div.block-miniature').props().onClick).to.be.a.function
+      expect(wrapper.find('div.block-miniature').props().onClick).to.be.a('function')
     })
     it('should render one .layout-wrapper div', () => {
       expect(wrapper.find('div.layout-wrapper')).to.have.length(1)

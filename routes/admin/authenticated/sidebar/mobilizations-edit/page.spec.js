@@ -18,6 +18,7 @@ describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   })
 
   it('should render without crashed', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(page).to.be.ok
   })
 

@@ -1,3 +1,5 @@
+const dotenv = require('dotenv')
+dotenv.config()
 const webpack = require('webpack')
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin')
@@ -8,11 +10,39 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../public/')
 
+const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
+
+const entry = {
+  main: [
+    './index.js'
+  ],
+  vendor: [
+    'react',
+    'react-dom',
+    'react-ga',
+    'react-helmet',
+    'react-cookie',
+    'react-redux',
+    'react-apollo',
+    'react-intl',
+    'react-router',
+    'react-countup',
+    'redial',
+    'redux',
+    'redux-promise',
+    'redux-thunk',
+    'redux-form',
+    'redux-form-validation',
+    'raven-js',
+    'axios',
+    'reapop',
+    'format-number'
+  ]
+}
+
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: Infinity,
-    filename: 'vendor.bundle.js'
+    name: 'vendor'
   }),
   new webpack.EnvironmentPlugin({
     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -28,45 +58,14 @@ const plugins = [
   new ExtractTextPlugin({filename: '[name].css', allChunks: true})
 ]
 
-const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
-
-const entry = {
-  main: [
-    './index.js'
-  ],
-  vendor: [
-    'react',
-    'axios',
-    'cpf_cnpj',
-    'draft-js',
-    'slate-editor',
-    'react-cookie',
-    'react-dom',
-    'react-ga',
-    'react-helmet',
-    'react-redux',
-    'react-router',
-    'redial',
-    'redux',
-    'redux-form',
-    'redux-form-validation',
-    'redux-logger',
-    'redux-promise',
-    'redux-thunk',
-    'superagent'
-  ]
-}
-
 if (isProd) {
   plugins.push(
+    new AssetsPlugin({ filename: './build/assets.json' }),
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
       compress: {
         warnings: false,
         screw_ie8: true,
@@ -89,7 +88,6 @@ if (isProd) {
       test: /\.js$|\.css$|\.svg$/,
       minRatio: 0.8
     }),
-    new AssetsPlugin({ filename: './build/assets.json' }),
     new Visualizer({
       filename: './build/main.stats.html'
     })
@@ -123,12 +121,12 @@ if (isProd) {
 
   plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   )
 }
 
 module.exports = {
-  devtool: isProd ? 'source-map' : 'eval',
+  devtool: isProd ? 'source-map' : 'cheap-module-source-map',
   context: sourcePath,
   node: {
     fs: 'empty'
@@ -141,7 +139,7 @@ module.exports = {
   entry: entry,
   output: {
     path: staticsPath,
-    filename: '[name].bundle.js',
+    filename: '[name].[hash].js',
     publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${process.env.AWS_BUCKET}/` : '/'
   },
   module: {

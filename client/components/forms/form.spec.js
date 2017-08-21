@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import PropTypes from 'prop-types'
 import React from 'react'
 import { expect } from 'chai'

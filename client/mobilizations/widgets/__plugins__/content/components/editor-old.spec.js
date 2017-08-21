@@ -1,11 +1,9 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-// Global module dependencies
 import * as mock from '~client/utils/mock'
-
-// Current module dependencies
 import EditorOld from '~client/mobilizations/widgets/__plugins__/content/components/editor-old'
 
 describe('client/mobilizations/widgets/__plugins__/content/components/editor-old', () => {

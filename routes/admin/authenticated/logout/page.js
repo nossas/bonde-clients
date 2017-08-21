@@ -5,7 +5,6 @@ import * as Paths from '~client/paths'
 import { Loading } from '~client/components/await'
 
 class LogoutPage extends Component {
-
   componentDidMount () {
     this.props.logout().then(() => browserHistory.push(Paths.login()))
   }

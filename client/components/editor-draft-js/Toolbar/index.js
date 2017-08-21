@@ -14,7 +14,6 @@ import MediaControls, { blockRendererFn as mediaBlockRendererFn } from './MediaC
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 class Toolbar extends Component {
-
   toggleInlineStyle (style) {
     const { editorState, setEditorState } = this.props
     setEditorState(RichUtils.toggleInlineStyle(editorState, style))

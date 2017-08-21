@@ -10,7 +10,6 @@ import NotificationSystem from '~client/components/notification-system'
 import { GoogleFontsLoader } from '~client/components/fonts'
 
 class Application extends React.Component {
-
   componentDidMount () {
     ga.initialize('UA-26278513-30')
   }

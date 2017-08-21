@@ -11,7 +11,6 @@ import * as paths from '~client/paths'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
-
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
     if (blocksIsLoaded && blocks.length === 0) {

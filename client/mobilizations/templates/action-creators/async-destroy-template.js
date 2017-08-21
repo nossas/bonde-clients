@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 
 const AsyncDestroyTemplate = template => (dispatch, getState, { api }) => {

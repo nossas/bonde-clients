@@ -7,15 +7,14 @@ import FileUploader from './file-uploader'
 export const BLOCK_UPLOAD_KEY = 'bgBlock'
 
 class ColorPickerButton extends React.Component {
-  
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       show: false
     }
   }
 
-  onChangeColor(color) {
+  onChangeColor (color) {
     this.props.onChange(JSON.stringify(color.rgb))
   }
 

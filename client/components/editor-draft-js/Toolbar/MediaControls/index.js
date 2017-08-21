@@ -10,7 +10,6 @@ import InsertScriptButton from './InsertScriptButton'
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 export default class MediaControls extends Component {
-
   handleInsertMedia (mediaType, source) {
     const { editorState, setEditorState } = this.props
 

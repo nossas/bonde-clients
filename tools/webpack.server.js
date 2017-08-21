@@ -14,7 +14,7 @@ module.exports = {
   devtool: 'source-map',
   entry: './server',
   output: {
-    path: path.join(__dirname, './build'),
+    path: path.join(__dirname, './../build'),
     filename: 'server.js'
   },
   externals: getExternals(),

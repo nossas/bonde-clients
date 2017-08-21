@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import { createAction } from './create-action'
 import * as t from '../action-types'
 

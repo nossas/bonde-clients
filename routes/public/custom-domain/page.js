@@ -20,7 +20,6 @@ const defaultFavicon16 = require('exenv').canUseDOM
   ? require('~client/images/icon/favicon-16.png')
   : ''
 
-
 class CustomDomainPage extends Component {
   componentDidMount () {
     if (require('exenv').canUseDOM) {
@@ -87,7 +86,7 @@ class CustomDomainPage extends Component {
         favicon
       } = mobilization
 
-      const url = `${protocol}://${mobilization.custom_domain}` || host 
+      const url = `${protocol}://${mobilization.custom_domain}` || host
 
       const helmetProps = {
         title: name,

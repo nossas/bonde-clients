@@ -13,7 +13,7 @@ const Title = ({ children, size, className }) => (
 Title.propTypes = {
   children: PropTypes.node.isRequired,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 Title.defaultProps = {

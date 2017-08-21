@@ -29,7 +29,7 @@ export const slugUpdatedMessage = intl => ({
     defaultMessage: 'O slug da sua mobilização foi alterado. ' +
       'Se você faz algum redirecionamento de DNS via ' +
       'CNAME, não se esqueça de atualizá-lo.'
-    }),
+  }),
   dismissAfter: 0,
   dismissible: true,
   closeButton: false
@@ -79,7 +79,7 @@ export const communityInviteSuccess = (intl, email) => ({
   message: intl.formatMessage({
     id: 'notification--community-invite-success.message',
     defaultMessage: 'O convite para {email} foi enviado com sucesso! ' +
-      'Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
+      'Mais um passo foi dado pra sua comunidade crescer ainda mais (:'
   }, { email }),
   dismissAfter: 15000,
   dismissible: true,
@@ -95,7 +95,7 @@ export const subscriptionCancelSuccess = intl => ({
   message: intl.formatMessage({
     id: 'notification--subscription-cancel-success.message',
     defaultMessage: 'Sua assinatura foi cancelada e, o valor da sua ' +
-      'doação não será debitado até que você faça uma nova doação recorrente.',
+      'doação não será debitado até que você faça uma nova doação recorrente.'
   }),
   dismissAfter: 15000,
   dismissible: true,

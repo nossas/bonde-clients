@@ -58,6 +58,12 @@
 ## Configuration
 Bonde Client app depends on the host name to decide how to behave, considering this you should [setup a wildcard DNS domain](http://asciithoughts.com/posts/2014/02/23/setting-up-a-wildcard-dns-domain-on-mac-os-x/) on the development environment.
 
+Or you could simple add to your ```/etc/hosts``` the following names:
+
+```
+127.0.0.1	app.bonde.devel bonde.devel api.bonde.devel data.bonde.devel db.devel keyval.devel meurio.bonde.org
+```
+
 ## Container Development
 
 ### Requirements
@@ -70,9 +76,9 @@ Bonde Client app depends on the host name to decide how to behave, considering t
 $ git --version
 git version 2.7.4
 $ docker -v
-Docker version 1.12.5, build 7392c3b
+Docker version 17.07.0-ce-rc1-mac21 (18848), build 9f75bcddf8
 $ docker-compose -v
-docker-compose version 1.10.0-rc1, build ecff6f1
+docker-compose version 1.15.0, build e12f3b9
 ```
 
 ### One-line installation
@@ -85,41 +91,32 @@ sh <(curl -s https://raw.githubusercontent.com/nossas/bonde-install/master/unins
 ```
 
 ### Install
+Images from services used by BONDE ecosystem must be downloaded at the first time container start.
+
 ```
 mkdir code/ && cd code/
 git clone git@github.com:nossas/bonde-client.git
-git clone git@github.com:nossas/bonde-server.git
-cd bonde-server/ && git fetch origin && git checkout -b my-support-docker origin/add/support-docker
-cd ../bonde-client && git fetch origin && git checkout -b my-refactor-ssr origin/add/refactor-ssr
-docker-compose up -
-```
-
-When container start from the first time, you need to create database and run migrate, to do that, after docker-compose finish, run:
-
-```
-docker-compose exec postgres psql -Upostgres -c 'create database reboo;'
-docker-compose exec postgres psql -Upostgres -c 'create database reboo_test;'
-docker-compose exec api ./bin/rake db:migrate
-docker-compose up --build
+cd bonde-client
+touch .env                                  # fill env vars
+docker-compose up -d                        # download, build and start containers
+docker-compose exec api-v1 rake db:migrate  # sync db
+docker-compose exec api-v1 rake db:seed     # fill db
+docker-compose restart api-v2               # refresh graphql cache schema
+docker-compose run client yarn install      # fill volume with node_modules
 ```
 
 ### Others Useful commands
 
 ```
-docker-compose logs client # Show logs from container nodejs
-docker-compose exec client /bin/ash # Open bash inside ruby container
-docker-compose exec api /bin/bash # Open bash inside ruby container
-docker-compose up --build # Force build from images
+docker-compose logs client -f         # Show logs from container nodejs
+docker-compose exec client /bin/bash  # Open bash inside frontend container
+docker-compose exec api-v2 /bin/bash  # Open bash inside ruby container
+docker-compose up --build             # Force build from images
 ```
 
-If you need to run npm or yarn do:
+If you need to rebuild node-sass:
 
 ```
-docker-compose exec client /bin/ash
-npm rebuild node-sass
-
-# or just
-
 docker-compose exec client npm rebuild node-sass
 ```
 
@@ -132,6 +129,14 @@ docker volume rm $(docker volume ls -f dangling=true -q)
 ```
 
 And you are done!
+
+## Restore Database
+
+```
+export DSN_SRC=postgres://postgres:3x4mpl3@localhost:5432/bonde
+export DSN_DEST=postgres://postgres:3x4mpl3@localhost:5432/bonde
+./tools/restore-db.sh
+```
 
 ## Local Development
 

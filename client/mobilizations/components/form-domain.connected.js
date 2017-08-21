@@ -37,7 +37,7 @@ export const validate = (values, props) => {
   if (values.rootDomainConfig && !values.rootDomain) {
     errors.rootDomain = 'Preenchimento obrigatório'
   }
-  if (values.subdomain && !/^[\w\-]+$/.test(values.subdomain)) {
+  if (values.subdomain && !/^[\w-]+$/.test(values.subdomain)) {
     errors.subdomain = 'Informe um subdomínio válido'
   }
   if (values.externalDomain && !isValidDomain(values.externalDomain)) {

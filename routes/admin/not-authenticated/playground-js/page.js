@@ -13,7 +13,7 @@ const ActivistsList = gql`
   }
 `
 
-const Styles = { 
+const Styles = {
   width: '500px',
   heigth: '150px',
   backgroundColor: '#fff',
@@ -21,10 +21,9 @@ const Styles = {
 }
 
 class Page extends Component {
-
   render () {
     const { data: { loading, error, allActivists } } = this.props
-    
+
     return (
       <div style={Styles}>
         {loading && <p>Carregando ativistas</p>}

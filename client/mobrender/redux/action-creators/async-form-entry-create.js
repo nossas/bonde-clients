@@ -1,8 +1,6 @@
-// Parent module dependencies
+/* eslint-disable prefer-promise-reject-errors */
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 import MobSelectors from '~client/mobrender/redux/selectors'
-
-// Current module dependencies
 import * as t from '../action-types'
 import { createAction } from './create-action'
 

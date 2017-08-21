@@ -29,6 +29,7 @@ const setup = (props = {}) => {
 describe('routes/admin/container', () => {
   it('render without crashed', () => {
     const { wrapper } = setup()
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper).to.be.ok
   })
 

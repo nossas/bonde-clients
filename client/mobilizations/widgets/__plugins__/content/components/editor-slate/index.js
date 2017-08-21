@@ -21,8 +21,9 @@ import DefaultServerConfig from '~server/config'
 import { Loading } from '~client/components/await'
 import { ActionButton, FooterEditor, Layer } from '~client/mobilizations/widgets/__plugins__/content/components'
 
-if (require('exenv').canUseDOM) require('./index.scss')
 import styles from './styles'
+
+if (require('exenv').canUseDOM) require('./index.scss')
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()

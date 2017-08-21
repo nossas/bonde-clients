@@ -1,10 +1,8 @@
-// Current module dependencies
+/* eslint-disable prefer-promise-reject-errors */
 import { createAction } from './create-action'
 import * as t from '../action-types'
 
 export default where => (dispatch, getState, { api }) => {
-  // const { auth: { credentials } } = getState()
-
   const endpoint = '/blocks'
   const config = { params: where }
 

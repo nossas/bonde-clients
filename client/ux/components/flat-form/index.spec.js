@@ -29,10 +29,12 @@ describe('client/ux/components/flat-form', () => {
   })
 
   it('should render without crash', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper).to.be.ok
   })
 
   it('should render children properly', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper.contains(children)).to.be.true
   })
 
@@ -41,6 +43,7 @@ describe('client/ux/components/flat-form', () => {
   })
 
   it('should render FormRedux with `nosubmit` prop by default', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper.props().nosubmit).to.not.be.undefined
   })
 })

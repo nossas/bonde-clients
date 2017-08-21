@@ -13,7 +13,6 @@ import {
 import * as Paths from '~client/paths'
 
 class RegisterPage extends Component {
-
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && (!nextProps.submitting && !nextProps.submitFailed)) {
