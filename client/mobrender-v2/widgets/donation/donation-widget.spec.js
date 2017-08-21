@@ -200,5 +200,26 @@ describe('<DonationWidget />', () => {
 
   it('should submit a donation when click on button', () => {
     // TODO: refactor widget for change pagarme checkout
+    const data = {
+      mobilization: props.toJS().mobilization,
+      widget: props.toJS().widget,
+      selectedValue: 1,
+      selectedPaymentType: 'recurring'
+    }
+    let expected
+
+    const handleDonationTransactionCreate = (data) =>
+      new Promise((resolve, reject) => {
+        expected = data
+        return resolve()
+    })
+    donationWidget.setProps({ handleDonationTransactionCreate })
+    donationWidget.instance().setState({
+      selectedValue: data.selectedValue,
+      selectedPaymentType: data.selectedPaymentType
+    })
+    
+    donationWidget.find('.btn').simulate('click')
+    expect(expected).to.deep.equal(data)
   })
 })

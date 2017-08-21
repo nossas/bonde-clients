@@ -5,7 +5,6 @@ import classnames from 'classnames'
 
 import * as paths from '~client/paths'
 import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
-import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 import { DonationTellAFriend } from '../../components'
 
 if (require('exenv').canUseDOM) require('./index.scss')
@@ -61,47 +60,18 @@ export const factoryDonation = ({
     }
 
     handleClickDonate () {
-      const { widget, handleDonationTransactionCreate } = this.props
+      const { mobilization, widget } = this.props
       const {
         selected_value: selectedValue,
         selected_payment_type: selectedPaymentType
       } = this.state
-      const that = this
-
-      const paymentType = widget.settings.payment_type
-      const recurringPeriod = widget.settings.recurring_period
-      const mainColor = (widget.settings.main_color ? widget.settings.main_color : '#43a2cc')
-
-      let checkout = new PagarMeCheckout.Checkout({
-        encryption_key: process.env.PAGARME_KEY || 'setup env var',
-        success: data => {
-          data.subscription = paymentType === 'users_choice'
-            ? (selectedPaymentType !== 'unique')
-            : data.subscription = (paymentType !== 'unique')
-
-          data.recurring_period = recurringPeriod
-          data.mobilization_id = this.props.mobilization.id
-          data.widget_id = this.props.widget.id
-          data.amount = widget.settings['donation_value' + selectedValue] + '00'
-
-          handleDonationTransactionCreate(data)
-            .then(() => that.setState({ success: true }))
-        },
-        error: err => { console.error(err) }
-      })
-
-      const params = {
-        createToken: 'false',
-        amount: widget.settings['donation_value' + selectedValue] + '00',
-        customerData: 'true',
-        paymentMethods: widget.settings.payment_methods === 'true' ? 'credit_card,boleto' : 'credit_card',
-        uiColor: mainColor,
-        paymentButtonText: widget.settings.button_text
-      }
-
-      AnalyticsEvents.donationSetValue()
-
-      checkout.open(params)
+      
+      this.props.handleDonationTransactionCreate({
+        mobilization,
+        widget,
+        selectedValue,
+        selectedPaymentType
+      }).then(() => this.setState({ success: true }))
     }
 
     renderButton () {
