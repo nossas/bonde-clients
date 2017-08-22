@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import { addNotification as notify } from 'reapop'
 import { createAction } from '~client/utils/redux'
 import * as t from '~client/community/action-types'

@@ -28,7 +28,7 @@ export const addHostedZoneFailure = () => ({
   id: 'notify.community.add--dns-hosted-zone--failure',
   title: 'Ooops!',
   status: 'error',
-  message: 'Ocorreu um erro no servidor, '+
+  message: 'Ocorreu um erro no servidor, ' +
     'verifique se este domínio já não foi inserido.',
   dismissAfter: 0,
   dismissable: true,

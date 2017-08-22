@@ -16,7 +16,6 @@ import BLOCK_LAYOUTS from '~client/mobilizations/blocks/constants/block-layouts'
 if (require('exenv').canUseDOM) require('./page.scss')
 
 class BlocksCreatePage extends Component {
-
   constructor (props) {
     super(props)
     this.state = {

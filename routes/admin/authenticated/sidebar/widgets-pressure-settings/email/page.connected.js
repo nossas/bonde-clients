@@ -6,18 +6,12 @@ import { messagePressureTargetsRemoveAll } from '~client/utils/notifications'
 
 import Page from './page'
 
-const mapStateToProps = (state, props) => {
-  const { settings } = props.widget
-  const disable = settings && !settings.disable_edit_field ? 'n'
-    : settings.disable_edit_field
-
-  return {
-    initialValues: {
-      ...props.widget.settings || {},
-      targets: props.widget.settings && props.widget.settings.targets
-    }
+const mapStateToProps = (state, props) => ({
+  initialValues: {
+    ...props.widget.settings || {},
+    targets: props.widget.settings && props.widget.settings.targets
   }
-}
+})
 
 const mapDispatchToProps = (dispatch, props) => ({
   notifyAllTargetsRemoval: () => dispatch(notify(messagePressureTargetsRemoveAll(props.intl)))

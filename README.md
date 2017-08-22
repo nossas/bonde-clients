@@ -97,26 +97,26 @@ Images from services used by BONDE ecosystem must be downloaded at the first tim
 mkdir code/ && cd code/
 git clone git@github.com:nossas/bonde-client.git
 cd bonde-client
-docker-compose up -d
-docker-compose exec api rake db:migrate
+touch .env                                  # fill env vars
+docker-compose up -d                        # download, build and start containers
+docker-compose exec api-v1 rake db:migrate  # sync db
+docker-compose exec api-v1 rake db:seed     # fill db
+docker-compose restart api-v2               # refresh graphql cache schema
+docker-compose run client yarn install      # fill volume with node_modules
 ```
 
 ### Others Useful commands
 
 ```
-docker-compose logs client # Show logs from container nodejs
-docker-compose exec client /bin/ash # Open bash inside ruby container
-docker-compose exec api /bin/bash # Open bash inside ruby container
-docker-compose up --build # Force build from images
+docker-compose logs client -f         # Show logs from container nodejs
+docker-compose exec client /bin/bash  # Open bash inside frontend container
+docker-compose exec api-v2 /bin/bash  # Open bash inside ruby container
+docker-compose up --build             # Force build from images
 ```
 
-If you need to run npm or yarn do:
+If you need to rebuild node-sass:
 
 ```
-docker-compose exec client /bin/ash
-
-# or just
-
 docker-compose exec client npm rebuild node-sass
 ```
 
@@ -129,6 +129,14 @@ docker volume rm $(docker volume ls -f dangling=true -q)
 ```
 
 And you are done!
+
+## Restore Database
+
+```
+export DSN_SRC=postgres://postgres:3x4mpl3@localhost:5432/bonde
+export DSN_DEST=postgres://postgres:3x4mpl3@localhost:5432/bonde
+./tools/restore-db.sh
+```
 
 ## Local Development
 

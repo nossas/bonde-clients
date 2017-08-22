@@ -12,14 +12,14 @@ const parseTarget = target => {
 }
 
 class TargetList extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       targets: props.targets
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     //
     // to works on nossas/bonde-cache, make an async method
     // to shuffle the pressure targets on the client-side.
@@ -33,7 +33,7 @@ class TargetList extends Component {
     }
   }
 
-  render() {
+  render () {
     const { targets } = this.state
 
     return (

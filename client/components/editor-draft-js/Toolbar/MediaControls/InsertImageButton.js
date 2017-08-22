@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
 
 class InsertImageButton extends Component {
-
   constructor (props) {
     super(props)
     this.state = { showInsertDialog: false, isLoading: false, image: null }

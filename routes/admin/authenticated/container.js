@@ -7,7 +7,6 @@ import fetchCurrentUser from '~client/account/queries/current-user'
 import AuthSelectors from '~client/account/redux/selectors'
 
 class CurrentUserContainer extends Component {
-
   componentDidMount () {
     if (this.props.data.currentUser && !this.props.user) {
       this.props.load(this.props.data.currentUser)

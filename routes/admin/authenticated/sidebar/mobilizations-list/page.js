@@ -24,7 +24,6 @@ import {
 import { PageHeader } from '~client/mobilizations/components'
 
 export class MobilizationsListPage extends Component {
-
   componentWillMount () {
     this.props.select(undefined)
     this.props.toggleMenu(undefined)

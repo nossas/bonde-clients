@@ -39,7 +39,7 @@ const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, ...formProp
       <FormRedux
         className='bg-white'
         onCancel={() => {
-          browserHistory.push(paths.mobilizations()) 
+          browserHistory.push(paths.mobilizations())
         }}
         onFinishSubmit={() => {
           browserHistory.push(paths.mobilizations())

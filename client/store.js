@@ -31,7 +31,7 @@ networkInterface.use([{
     }
     // Non-use auth for authenticate mutation to make a new JWT Token
     const requiredAuth = req.request.operationName !== 'authenticate'
-    
+
     cookie.plugToRequest(req)
     const state = cookie.load('auth') || {}
     if (state.auth && state.auth.credentials && requiredAuth) {
@@ -79,6 +79,7 @@ export function configureStore (initialState, thunkExtraArgument) {
       if (response && response.status === 401) {
         store.dispatch(logout())
       }
+      // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({ response, ...error })
     }
   )

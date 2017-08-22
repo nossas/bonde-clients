@@ -12,7 +12,7 @@ const Subtitle = ({ children, className }) => (
 
 Subtitle.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 }
 
 export default Subtitle

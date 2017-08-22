@@ -47,3 +47,5 @@ static
 # Vim editor swap files
 *.swp
 jest
+tools/db-dumps/*
+!tools/db-dumps/init.sql

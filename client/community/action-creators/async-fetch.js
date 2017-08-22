@@ -1,5 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '~client/community/action-types'
-import { logout } from '~client/account/redux/action-creators'
 
 const asyncFetch = () => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()

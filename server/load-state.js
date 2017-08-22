@@ -7,4 +7,3 @@ export default () => {
   const store = createStore(createReducer())
   return fromJS(store.getState())
 }
-

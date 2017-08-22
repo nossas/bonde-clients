@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import { browserHistory } from 'react-router'
 import { addNotification as notify } from 'reapop'
 import { accountPasswordRetrieveSuccess } from '~client/utils/notifications'

@@ -1,4 +1,3 @@
-import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
@@ -6,13 +5,11 @@ import { graphql, gql } from 'react-apollo'
 
 import * as CommunitySelectors from '~client/community/selectors'
 import MobSelectors from '~client/mobrender/redux/selectors'
-import { selectMobilization, asyncUpdateMobilization } from '~client/mobrender/redux/action-creators'
-import * as TemplateActions from '~client/mobilizations/templates/action-creators'
+import { asyncUpdateMobilization } from '~client/mobrender/redux/action-creators'
 import * as TemplateSelectors from '~client/mobilizations/templates/selectors'
 import * as paths from '~client/paths'
 
 import Page from './page'
-
 
 const mapStateToProps = (state, props) => ({
   communityId: CommunitySelectors.getCurrentId(state),
@@ -60,7 +57,7 @@ const GraphPage = graphql(gql`
       customTemplatesLength: customTemplates ? customTemplates.totalCount : 0,
       globalTemplates: globalTemplates ? globalTemplates.nodes : []
     }
-  },
+  }
 })(Page)
 
 export default connect(mapStateToProps, mapActionsToProps)(GraphPage)

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+/* eslint-disable camelcase */
 const CreatedAt = ({ created_at, createdAt }) => (
   <div className='created-at px3 col col-3'>
     {new Date(Date.parse(created_at || createdAt)).toLocaleString()}
   </div>
 )
+/* eslint-disable camelcase */
 
 CreatedAt.propTypes = {
   created_at: PropTypes.string,

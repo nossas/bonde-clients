@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { injectIntl } from 'react-intl'
 
 import { fields, validate } from '~client/mobilizations/widgets/components/form-autofire'
 import Page from './page'
@@ -11,5 +12,9 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps)(
-  reduxForm({ form: 'formAutofireForm', fields, validate })(Page)
-)
+  injectIntl(reduxForm({
+    form: 'formAutofireForm',
+    fields,
+    validate
+  })(Page)
+))

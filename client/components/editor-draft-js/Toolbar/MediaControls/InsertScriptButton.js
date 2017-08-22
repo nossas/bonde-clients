@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 class InsertScriptButton extends Component {
-
   constructor (props) {
     super(props)
     this.state = { showInputDialog: false, script: '' }

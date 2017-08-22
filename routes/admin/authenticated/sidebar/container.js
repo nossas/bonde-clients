@@ -20,6 +20,4 @@ ApplicationContainer.propTypes = {
   sidebarProps: PropTypes.object.isRequired
 }
 
-ApplicationContainer.context
-
 export default ApplicationContainer

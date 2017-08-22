@@ -6,7 +6,6 @@ import { Loading } from '~client/components/await'
 import { PageTabLayout } from '~client/mobilizations/components'
 
 class TemplatesChoosePage extends Component {
-
   render () {
     const {
       mobilization,
@@ -21,10 +20,10 @@ class TemplatesChoosePage extends Component {
     if (loading) return <Loading />
 
     const renderEmptyChoice = (
-      customTemplatesLength === 0
-      && globalTemplates.length === 0
+      customTemplatesLength === 0 &&
+      globalTemplates.length === 0
     )
-    
+
     return (
       <PageTabLayout {...{ location }}>
         <div className='choose-menu-page col-12'>

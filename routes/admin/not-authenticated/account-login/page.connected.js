@@ -10,7 +10,6 @@ import AccountSelectors from '~client/account/redux/selectors'
 import authenticate from '~client/account/queries/authenticate'
 import * as authType from '~client/account/redux/action-types'
 
-
 import FormLogin from './page'
 
 const fields = ['email', 'password']
@@ -60,7 +59,7 @@ const mapActionsToProps = (dispatch, props) => ({...props,
         }
       })
   },
-  resetErrorMessage: () => createAction(authType.LOGIN_FAILURE, undefined),
+  resetErrorMessage: () => createAction(authType.LOGIN_FAILURE, undefined)
 })
 
 const FormLoginWithMutation = injectIntl(graphql(authenticate)(reduxForm(

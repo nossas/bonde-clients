@@ -21,7 +21,7 @@ const mobilization = { id: 1 }
 const block = data[0]
 
 mockAxios.onDelete(
-  `/mobilizations/${mobilization.id}/blocks/${block.id}`,
+  `/mobilizations/${mobilization.id}/blocks/${block.id}`
 ).reply(200, block)
 
 // Mock store

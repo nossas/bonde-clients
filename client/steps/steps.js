@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 const INITIAL_STEP_PROGRESS = 1
 
 class Steps extends Component {
-
   constructor (props) {
     super(props)
     this.state = { current: INITIAL_STEP_PROGRESS }

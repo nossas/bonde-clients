@@ -5,7 +5,6 @@ import { SketchPicker } from 'react-color'
 import themes from '../themes'
 
 class ColorPickerButton extends Component {
-
   constructor (props) {
     super(props)
     this.state = { showColorPicker: false }

@@ -8,7 +8,6 @@ import DnsControlSelectors from '~client/community/dns-control-selectors'
 import * as dnsNotify from '~client/community/notifications/dns'
 import {
   asyncAddHostedZone as addHostedZone,
-  asyncDeleteHostedZone,
   asyncCheckHostedZone
 } from '~client/community/action-creators/dns-control'
 import Page from './page'
@@ -38,9 +37,8 @@ const mapStateToProps = state => ({
 const mapActionsToProps = (dispatch, { intl }) => ({
   asyncAddHostedZone: (values) => {
     return dispatch(addHostedZone(values))
-      .catch(err => {
-        dispatch(notify(dnsNotify.addHostedZoneFailure()))
-      })
+      // eslint-disable-next-line handle-callback-err
+      .catch(err => dispatch(notify(dnsNotify.addHostedZoneFailure())))
   },
   asyncCheckHostedZone,
   notify

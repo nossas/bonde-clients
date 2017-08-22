@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '~client/community/action-types'
 
 const asyncCreate = community => (dispatch, getState, { api }) => {

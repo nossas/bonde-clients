@@ -29,6 +29,7 @@ describe('routes/public/custom-domain/page', () => {
   })
 
   it('render without crashed', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper).to.be.ok
   })
 
@@ -45,12 +46,13 @@ describe('routes/public/custom-domain/page', () => {
         type: 'image/png',
         sizes: '16x16',
         href: defaultFavicon16
-      }   
+      }
     ]
     expect(wrapper.find(Helmet).props().link).to.deep.equal(link)
   })
 
   it('should render Mobilization with editable prop as undefined', () => {
+    // eslint-disable-next-line no-unused-expressions
     expect(wrapper.find('Connect(Mobilization)').props().editable).to.be.undefined
   })
 
@@ -74,7 +76,7 @@ describe('routes/public/custom-domain/page', () => {
       },
       {
         rel: 'icon', type: 'image/png', sizes: '16x16', href: favicon
-      }   
+      }
     ]
 
     const mobilization = { ...props.mobilization, favicon }

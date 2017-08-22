@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 import downloadjs from 'downloadjs'
 import { createAction } from './create-action'

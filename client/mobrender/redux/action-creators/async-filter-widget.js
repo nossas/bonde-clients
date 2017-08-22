@@ -1,9 +1,8 @@
+/* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 import { createAction } from './create-action'
 
 export default where => (dispatch, getState, { api }) => {
-  // const { auth: { credentials } } = getState()
-
   const endpoint = '/widgets'
   const config = { params: where }
 

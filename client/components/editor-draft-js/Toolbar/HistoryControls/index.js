@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { EditorState } from 'draft-js'
 
 export default class HistoryControls extends Component {
-
   handleUndoClick () {
     const { editorState, setEditorState } = this.props
 
