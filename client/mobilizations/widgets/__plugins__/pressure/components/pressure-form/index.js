@@ -474,12 +474,10 @@ class PressureForm extends Component {
               className='btn-call outlined full-width'
               onClick={e => {
                 e.preventDefault()
-                const { changeParentState } = this.props
-                const message = 'Tem certeza que deseja finalizar a pressão por telefone?'
-                window.confirm(message) && changeParentState({ showFinishMessage: true })
+                this.props.changeParentState({ showFinishMessage: true })
               }}
             >
-              Finalizar pressão por telefone
+              Encerrar e Compartilhar
             </button>
           </div>
         </div>
