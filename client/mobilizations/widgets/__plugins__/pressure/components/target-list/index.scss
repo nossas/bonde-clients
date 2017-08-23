@@ -18,6 +18,20 @@
       p {
           font-size: .8rem;
       }
+
+      .target-item {
+        display: flex;
+        align-items: flex-start;
+
+        input[type="checkbox"] {
+          margin: .25rem .8rem;
+          margin-left: 0;
+        }
+
+        .target-name, .target-value {
+          white-space: nowrap;
+        }
+      }
     }
   }
 }

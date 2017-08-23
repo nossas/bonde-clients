@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import { isValidEmail } from '~client/utils/validation-helper'
+import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
+import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 
-if (require('exenv').canUseDOM) require('./index.scss')
+if (require('exenv').canUseDOM) {
+  require('./index.scss')
+  require('./phone-calls.scss')
+}
 
 // TODO: Reusable Input
 const controlClassname = 'px3 py1'
@@ -15,16 +19,80 @@ const inputReset = {
   outline: 'none'
 }
 
+const parseTarget = target => {
+  const targetSplit = target.split('<')
+  const valid = targetSplit.length === 2
+  return valid ? { name: targetSplit[0].trim(), value: targetSplit[1].replace('>', '') } : null
+}
+
+class RealtimeCallDuration extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { duration: 0, interval: undefined }
+  }
+
+  timer = () => {
+    this.setState({ duration: this.state.duration + 1 })
+  }
+
+  componentDidMount() {
+    this.setState({ interval: setInterval(this.timer, 1000) })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.interval)
+  }
+
+  render () {
+    return <span>{`${this.state.duration}s`}</span>
+  }
+}
+
 class PressureForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
       email: '',
+      phone: '',
       name: '',
       lastname: '',
       city: '',
       subject: props.subject,
-      body: props.body
+      body: props.body,
+      pressureType: pressureHelper.getType(props.targetList) || undefined,
+      callManagement: undefined
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (!this.props.callTransition && props.targetList && props.targetList.length) {
+      this.setState({
+        callManagement: props.targetList.map(target => ({
+          ...parseTarget(target),
+          attempts: 0
+        }))
+      })
+    }
+
+    if (
+      props.callTransition &&
+      props.targetList &&
+      props.targetList.length &&
+      JSON.stringify(this.props.callTransition) !== JSON.stringify(props.callTransition)
+    ) {
+      this.setState({
+        callManagement: this.state.callManagement.map((target, index) => {
+          const isCallToCurrentTarget = target.value === props.callTransition.twilioCallTo
+          const transition = isCallToCurrentTarget ? props.callTransition : {}
+          const { twilioCallTransitionStatus: status } = transition
+          const isFailStatus = ['busy', 'failed', 'no-answer'].includes(status)
+
+          let attempts = this.state.callManagement[index].attempts
+          if (isCallToCurrentTarget && isFailStatus) attempts++
+
+          return { ...target, ...transition, attempts }
+        })
+      })
     }
   }
 
@@ -33,12 +101,41 @@ class PressureForm extends Component {
     const requiredMsg = 'Preenchimento obrigatório'
     const errors = { valid: true }
 
-    if (!this.state.email) {
-      errors.email = requiredMsg
-    } else if (!isValidEmail(this.state.email)) {
-      errors.email = 'E-mail inválido'
-    } else if (targetList && targetList.some(target => target.match(`<${this.state.email}>`))) {
-      errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
+    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
+      if (!this.state.email) {
+        errors.email = requiredMsg
+      } else if (!isValidEmail(this.state.email)) {
+        errors.email = 'E-mail inválido'
+      } else if (targetList && targetList.some(target => target.match(`<${this.state.email}>`))) {
+        errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
+      }
+      if (!this.state.subject) {
+        errors.subject = requiredMsg
+      }
+      if (!this.state.body) {
+        errors.body = requiredMsg
+      }
+    }
+    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
+      const { phone } = this.state
+      const phoneE164 = /^\+/.test(phone) ? phone : `+${phone}`
+      if (!phone) {
+        errors.phone = requiredMsg
+      } else if (!isValidPhoneE164(phoneE164)) {
+        if ([11, 12].includes(phoneE164.length)) {
+          errors.phone = 'Informe o código do país e o DDD com dois dígitos. Ex: +5511'
+        } else {
+          errors.phone = 'Telefone inválido'
+        }
+      } else if (
+        targetList &&
+        targetList.some(
+          target => target.replace(/\D/g, '')
+            .match(`${this.state.phone.replace(/\D/g, '')}`)
+        )
+      ) {
+        errors.phone = 'O telefone que você está tentando usar é de um dos alvos da mobilização.'
+      }
     }
     if (!this.state.name) {
       errors.name = requiredMsg
@@ -48,12 +145,6 @@ class PressureForm extends Component {
     }
     if (showCity === 'city-true' && !this.state.city) {
       errors.city = requiredMsg
-    }
-    if (!this.state.subject) {
-      errors.subject = requiredMsg
-    }
-    if (!this.state.body) {
-      errors.body = requiredMsg
     }
 
     if (Object.keys(errors).length > 1) {
@@ -66,42 +157,85 @@ class PressureForm extends Component {
     e.preventDefault()
     const { onSubmit } = this.props
     const errors = this.validate()
-    if (!errors.valid) {
-      this.setState({ errors })
-    } else {
-      onSubmit && onSubmit(this.state)
-    }
+
+    this.setState({ errors })
+    if (errors.valid) onSubmit && onSubmit(this.state)
   }
 
   render () {
-    const { buttonColor, buttonText, children, widget, disabled } = this.props
-    const { email, name, lastname, city, subject, body, errors } = this.state
+    const {
+      targetList,
+      callTransition,
+      buttonColor,
+      buttonText,
+      children,
+      widget,
+      disabled,
+      addTwilioCallMutation
+    } = this.props
+    const {
+      email, phone, name, lastname, city, subject, body, errors,
+      callManagement
+    } = this.state
+
     return (
-      <form className='pressure-form' onSubmit={::this.handleSubmit}>
-        <div className={classnames('activist-form bg-white', !children ? 'rounded-bottom' : null)}>
+      <form
+        className={classnames(
+          'pressure-form',
+          { 'is-calling': !!callTransition }
+        )}
+        onSubmit={::this.handleSubmit}
+      >
+        <div
+          className={classnames(
+            'activist-form bg-white',
+            !children ? 'rounded-bottom' : null
+          )}
+        >
           <div className='form bg-white rounded-bottom'>
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+                  E-mail
+                  {(errors && errors['email'] && <span className='error'>{errors['email']}</span>)}
+                </label>
+                <input
+                  id='pressure-sender-email-id'
+                  className='col-12'
+                  style={inputReset}
+                  onBlur={::AnalyticsEvents.pressureIsFilled}
+                  type='email'
+                  placeholder='Insira seu e-mail'
+                  value={email}
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
+              </div>
+            )}
+            {this.state.pressureType === 'phone' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-sender-phone-id'>
+                  Telefone
+                  {(errors && errors['phone'] && <span className='error'>{errors['phone']}</span>)}
+                </label>
+                <input
+                  id='pressure-sender-phone-id'
+                  className='col-12'
+                  style={inputReset}
+                  onBlur={::AnalyticsEvents.pressureIsFilled}
+                  type='text'
+                  placeholder='Insira seu telefone. Ex: +5511987654321'
+                  value={phone}
+                  onChange={e => this.setState({ phone: e.target.value })}
+                />
+              </div>
+            )}
             <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
-                E-mail
-                {(errors && errors['email'] && <span className='error'>{errors['email']}</span>)}
-              </label>
-              <input
-                id='pressure-sender-email-id'
-                className='col-12'
-                style={inputReset}
-                onBlur={::AnalyticsEvents.pressureIsFilled}
-                type='email'
-                placeholder='Insira seu e-mail'
-                value={email}
-                onChange={e => this.setState({ email: e.target.value })}
-              />
-            </div>
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+              <label className='py1 gray' htmlFor='pressure-sender-firstname-id'>
                 Nome
                 {(errors && errors['name'] && <span className='error'>{errors['name']}</span>)}
               </label>
               <input
+                id='pressure-sender-firstname-id'
                 className='col-12'
                 style={inputReset}
                 type='text'
@@ -111,11 +245,12 @@ class PressureForm extends Component {
               />
             </div>
             <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-sender-email-id'>
+              <label className='py1 gray' htmlFor='pressure-sender-lastname-id'>
                 Sobrenome
                 {(errors && errors['lastname'] && <span className='error'>{errors['lastname']}</span>)}
               </label>
               <input
+                id='pressure-sender-lastname-id'
                 className='col-12'
                 style={inputReset}
                 type='text'
@@ -142,35 +277,39 @@ class PressureForm extends Component {
                 </div>
               )
             }
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-subject-id'>
-                Assunto
-                {(errors && errors['subject'] && <span className='error'>{errors['subject']}</span>)}
-              </label>
-              <input
-                id='pressure-subject-id'
-                className='col-12'
-                style={inputReset}
-                type='text'
-                value={subject}
-                disabled={disabled}
-                onChange={e => this.setState({ subject: e.target.value })}
-              />
-            </div>
-            <div className={classnames('form-group', controlClassname)}>
-              <label className='py1 gray' htmlFor='pressure-body-id'>
-                Corpo do e-mail
-                {(errors && errors['body'] && <span className='error'>{errors['body']}</span>)}
-              </label>
-              <textarea
-                id='pressure-body-id'
-                className='col-12 mt1'
-                style={{...inputReset, height: '7rem'}}
-                value={body}
-                disabled={disabled}
-                onChange={e => this.setState({ body: e.target.value })}
-              />
-            </div>
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-subject-id'>
+                  Assunto
+                  {(errors && errors['subject'] && <span className='error'>{errors['subject']}</span>)}
+                </label>
+                <input
+                  id='pressure-subject-id'
+                  className='col-12'
+                  style={inputReset}
+                  type='text'
+                  value={subject}
+                  disabled={disabled}
+                  onChange={e => this.setState({ subject: e.target.value })}
+                />
+              </div>
+            )}
+            {this.state.pressureType === 'email' && (
+              <div className={classnames('form-group', controlClassname)}>
+                <label className='py1 gray' htmlFor='pressure-body-id'>
+                  Corpo do e-mail
+                  {(errors && errors['body'] && <span className='error'>{errors['body']}</span>)}
+                </label>
+                <textarea
+                  id='pressure-body-id'
+                  className='col-12 mt1'
+                  style={{...inputReset, height: '7rem'}}
+                  value={body}
+                  disabled={disabled}
+                  onChange={e => this.setState({ body: e.target.value })}
+                />
+              </div>
+            )}
           </div>
           <div className='pt1 pb3 px3'>
             <button
@@ -180,6 +319,159 @@ class PressureForm extends Component {
               style={{ backgroundColor: buttonColor }}
             >
               {buttonText}
+            </button>
+          </div>
+        </div>
+
+        <div className='phone-calls'>
+          <ul>
+            {callManagement && callManagement.length && callManagement.map(target => {
+              const {
+                name,
+                value,
+                attempts,
+                twilioCallTo: to,
+                twilioCallTransitionStatus: status,
+                twilioCallTransitionCallDuration: duration
+              } = target
+              let ListItem = <div />
+
+              if (to === value) {
+                if (status === 'completed') {
+                  ListItem = (
+                    <li className='success'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <div>
+                            <i className='fa fa-phone-square' />
+                          </div>
+                          <div className='target-name'>{name}</div>
+                        </div>
+                        <div className='finish'>
+                          {duration}s
+                          <i className='fa fa-check-circle' />
+                        </div>
+                      </div>
+                    </li>
+                  )
+                } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
+                  ListItem = (
+                    <li className='warning'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <div>
+                            <span className='fa fa-phone ring'></span>
+                          </div>
+                          <div className='target-name'>
+                            {name}<br />
+                            Chamada em andamento
+                          </div>
+                        </div>
+                        <div className='inline-container'>
+                          <div className='prefix'>
+                            {status === 'in-progress' && <RealtimeCallDuration />}
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  )
+                } else if (['busy', 'failed', 'no-answer'].includes(status)) {
+                  ListItem = (
+                    <li className='danger'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <span className='fa fa-phone-square'></span>
+                          <div className='target-name'>{name}</div>
+                        </div>
+                        <div className='finish'>
+                          3x
+                          <span className='fa fa-times-circle'></span>
+                        </div>
+                      </div>
+                    </li>
+                  )
+                  if (attempts < 0) {
+                    ListItem = (
+                      <li className='danger'>
+                        <div className='flex-container'>
+                          <div className='call-item'>
+                            <span className='fa fa-phone-square'></span>
+                            <div className='target-name'>{name}</div>
+                          </div>
+                          <div className='inline-container'>
+                            <div className='prefix'>
+                              {attempts}x
+                            </div>
+                            <button
+                              className='btn-call outlined'
+                              onClick={e => {
+                                e.preventDefault()
+                                addTwilioCallMutation({
+                                  widgetId: this.props.widget.id,
+                                  from: this.state.phone,
+                                  to: value
+                                })
+                              }}
+                            >
+                              Religar
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    )
+                  }
+                }
+              } else {
+                ListItem = (
+                  <li>
+                    <div className='flex-container'>
+                      <div className='call-item'>
+                        <span className='fa fa-phone-square primary'></span>
+                        <div className='target-name'>{name}</div>
+                      </div>
+                      <button
+                        className='btn-call primary'
+                        type='button'
+                        onClick={e => {
+                          e.preventDefault()
+                          addTwilioCallMutation({
+                            widgetId: this.props.widget.id,
+                            from: this.state.phone,
+                            to: value
+                          })
+                        }}
+                      >
+                        Ligar
+                      </button>
+                    </div>
+                  </li>
+                )
+              }
+              return ListItem
+            })}
+          </ul>
+
+          <div className='how-it-works'>
+            Como funciona?
+            <ol>
+              <li>Estamos ligando para o seu alvo</li>
+              <li>Assim que alguém atender do lado de lá, vamos te ligar</li>
+              <li>Quando você atender, conectamos as ligações</li>
+              <li>Agora é com você!</li>
+            </ol>
+          </div>
+
+          <div style={{ margin: '1rem 0', padding: '0 1rem' }}>
+            <button
+              type='button'
+              className='btn-call full-width'
+              style={{ backgroundColor: buttonColor }}
+              onClick={e => {
+                e.preventDefault()
+                this.props.changeParentState({ showFinishMessage: true })
+              }}
+            >
+              Encerrar e Compartilhar
             </button>
           </div>
         </div>
@@ -195,12 +487,14 @@ PressureForm.propTypes = {
   buttonText: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string,
-  widget: PropTypes.object
+  widget: PropTypes.object,
+  changeParentState: PropTypes.func.isRequired
 }
 
 PressureForm.defaultProps = {
   subject: '',
-  body: ''
+  body: '',
+  changeParentState: () => {}
 }
 
 export default PressureForm

@@ -42,9 +42,10 @@ networkInterface.use([{
   }
 }])
 
-export const client = new ApolloClient({
+export const client = (options = {}) => new ApolloClient({
   ssrMode: true,
-  networkInterface
+  networkInterface,
+  ...options
 })
 
 export function configureStore (initialState, thunkExtraArgument) {
@@ -56,7 +57,7 @@ export function configureStore (initialState, thunkExtraArgument) {
     })
   )
 
-  middlewares.push(client.middleware())
+  middlewares.push(client().middleware())
 
   let store = createStore(
     createReducer(),
