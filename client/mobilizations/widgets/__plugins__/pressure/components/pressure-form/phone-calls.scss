@@ -1,6 +1,6 @@
 .phone-calls {
-  background-color: #333;
-  color: #FFFFFF;
+  color: #333333;
+  background-color: #FFFFFF;
 
   .heading {
     font-size: .85rem;
@@ -12,38 +12,49 @@
     list-style: none;
     padding: 0;
     font-size: .8rem;
+    margin: 0 0 .8rem;
   }
 
   ul li {
     text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    padding: .5rem 1.5rem;
+    padding: 1.7rem 1.5rem;
     padding-right: .8rem;
-    justify-content: space-between;
-    border-top: 1px solid #444;
   }
 
-  ul li:last-child {
-    border-bottom: 1px solid #444;
+  ul li.success { background-color: #00C08A; }
+  ul li.warning { background-color: #FFD500; }
+  ul li.primary { background-color: #40B4E5; }
+  ul li.danger { background-color: #C20000; }
+
+  ul li .flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   ul li .fa-phone-square,
   ul li .fa-phone {
-    font-size: 1rem;
-    margin-right: .5rem;
+    font-size: 2.4rem;
+    margin-right: 1rem;
     position: relative;
     top: 1px;
   }
 
-  ul li .fa-phone-square.success { color: #00C08A; }
-  ul li .fa-phone.warning { color: #FFD500; }
-  ul li .fa-phone-square.primary { color: #40B4E5; }
-  ul li .fa-phone-square.danger { color: #DD2295; }
+  ul li .fa-phone-square { color: #333333; }
+  ul li .fa-phone { color: #333333; }
 
   ul li .call-item {
     display: flex;
   }
+
+  .call-status-message {
+    margin-left: 20px;
+  }
+
+   .call-status-message.success{ color: #00C08A; }
+   .call-status-message.warning{ color: #FFD500; }
+   .call-status-message.primary{ color: #40B4E5; }
+   .call-status-message.danger{ color: #DD2295; }
 
   .btn-call {
     border: none;
@@ -66,8 +77,8 @@
   }
 
   .btn-call.outlined {
-    border: 1px solid #FFFFFF;
-    color: #FFFFFF;
+    border: 1px solid #333333;
+    color: #333333;
     padding: calc(.8rem - 1px) calc(1rem - 1px);
   }
 
@@ -87,13 +98,11 @@
 
   ul li .fa-check-circle {
     font-size: 1.8rem;
-    color: #00C08A;
     margin-left: .5rem;
   }
 
   ul li .fa-times-circle {
     font-size: 1.8rem;
-    color: #DD2295;
     margin-left: .5rem;
   }
 
@@ -110,6 +119,29 @@
 
   ul li .inline-container .btn-call {
     margin: 0;
+  }
+
+  .target-name {
+    display: flex;
+    align-items: center;
+  }
+
+  .how-it-works {
+    padding: 0 1.5rem;
+    font-size: .8rem;
+    text-transform: uppercase;
+  }
+
+  .how-it-works > ol {
+    text-align: left;
+    padding-left: 1.5rem;
+    font-size: .8rem;
+    text-transform: none;
+    margin-top: .5rem;
+  }
+
+  .how-it-works > ol > li {
+    margin-bottom: .4rem;
   }
 
   .caption {

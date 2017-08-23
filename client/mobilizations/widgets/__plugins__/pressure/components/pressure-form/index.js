@@ -324,8 +324,6 @@ class PressureForm extends Component {
         </div>
 
         <div className='phone-calls'>
-          <p className='heading'>Ligações</p>
-
           <ul>
             {callManagement && callManagement.length && callManagement.map(target => {
               const {
@@ -341,77 +339,83 @@ class PressureForm extends Component {
               if (to === value) {
                 if (status === 'completed') {
                   ListItem = (
-                    <li>
-                      <div className='call-item'>
-                        <div>
-                          <i className='fa fa-phone-square success' />
+                    <li className='success'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <div>
+                            <i className='fa fa-phone-square' />
+                          </div>
+                          <div className='target-name'>{name}</div>
                         </div>
-                        <div>{name}</div>
-                      </div>
-                      <div className='finish'>
-                        {duration}s
-                        <i className='fa fa-check-circle' />
+                        <div className='finish'>
+                          {duration}s
+                          <i className='fa fa-check-circle' />
+                        </div>
                       </div>
                     </li>
                   )
                 } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
                   ListItem = (
-                    <li>
-                      <div className='call-item'>
-                        <div>
-                          <span className='fa fa-phone warning ring'></span>
+                    <li className='warning'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <div>
+                            <span className='fa fa-phone ring'></span>
+                          </div>
+                          <div className='target-name'>
+                            {name}<br />
+                            Chamada em andamento
+                          </div>
                         </div>
-                        <div>{name}</div>
-                      </div>
-                      <div className='inline-container'>
-                        <div className='prefix'>
-                          {status === 'in-progress' && <RealtimeCallDuration />}
+                        <div className='inline-container'>
+                          <div className='prefix'>
+                            {status === 'in-progress' && <RealtimeCallDuration />}
+                          </div>
                         </div>
-                        <button className='btn-call calling'>
-                          {status === 'initiated' && 'Iniciando'}
-                          {status === 'ringing' && 'Ligando...'}
-                          {status === 'in-progress' && 'Conectado'}
-                        </button>
                       </div>
                     </li>
                   )
                 } else if (['busy', 'failed', 'no-answer'].includes(status)) {
                   ListItem = (
-                    <li>
-                      <div className='call-item'>
-                        <span className='fa fa-phone-square danger'></span>
-                        <div>{name}</div>
-                      </div>
-                      <div className='finish'>
-                        3x
-                        <span className='fa fa-times-circle'></span>
+                    <li className='danger'>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <span className='fa fa-phone-square'></span>
+                          <div className='target-name'>{name}</div>
+                        </div>
+                        <div className='finish'>
+                          3x
+                          <span className='fa fa-times-circle'></span>
+                        </div>
                       </div>
                     </li>
                   )
-                  if (attempts < 3) {
+                  if (attempts < 0) {
                     ListItem = (
-                      <li>
-                        <div className='call-item'>
-                          <span className='fa fa-phone-square'></span>
-                          <div>{name}</div>
-                        </div>
-                        <div className='inline-container'>
-                          <div className='prefix'>
-                            {attempts}x
+                      <li className='danger'>
+                        <div className='flex-container'>
+                          <div className='call-item'>
+                            <span className='fa fa-phone-square'></span>
+                            <div className='target-name'>{name}</div>
                           </div>
-                          <button
-                            className='btn-call outlined'
-                            onClick={e => {
-                              e.preventDefault()
-                              addTwilioCallMutation({
-                                widgetId: this.props.widget.id,
-                                from: this.state.phone,
-                                to: value
-                              })
-                            }}
-                          >
-                            Religar
-                          </button>
+                          <div className='inline-container'>
+                            <div className='prefix'>
+                              {attempts}x
+                            </div>
+                            <button
+                              className='btn-call outlined'
+                              onClick={e => {
+                                e.preventDefault()
+                                addTwilioCallMutation({
+                                  widgetId: this.props.widget.id,
+                                  from: this.state.phone,
+                                  to: value
+                                })
+                              }}
+                            >
+                              Religar
+                            </button>
+                          </div>
                         </div>
                       </li>
                     )
@@ -420,24 +424,26 @@ class PressureForm extends Component {
               } else {
                 ListItem = (
                   <li>
-                    <div className='call-item'>
-                      <span className='fa fa-phone-square primary'></span>
-                      <div>{name}</div>
+                    <div className='flex-container'>
+                      <div className='call-item'>
+                        <span className='fa fa-phone-square primary'></span>
+                        <div className='target-name'>{name}</div>
+                      </div>
+                      <button
+                        className='btn-call primary'
+                        type='button'
+                        onClick={e => {
+                          e.preventDefault()
+                          addTwilioCallMutation({
+                            widgetId: this.props.widget.id,
+                            from: this.state.phone,
+                            to: value
+                          })
+                        }}
+                      >
+                        Ligar
+                      </button>
                     </div>
-                    <button
-                      className='btn-call primary'
-                      type='button'
-                      onClick={e => {
-                        e.preventDefault()
-                        addTwilioCallMutation({
-                          widgetId: this.props.widget.id,
-                          from: this.state.phone,
-                          to: value
-                        })
-                      }}
-                    >
-                      Ligar
-                    </button>
                   </li>
                 )
               }
@@ -445,33 +451,21 @@ class PressureForm extends Component {
             })}
           </ul>
 
-          <div className='caption'>
-            <div className='item'>
-              <div className='bullet success'></div>
-              Sucesso
-            </div>
-            <div className='item'>
-              <div className='bullet'></div>
-              Religar (até 3x)
-            </div>
-            <div className='item'>
-              <div className='bullet warning'></div>
-              Em andamento
-            </div>
-            <div className='item'>
-              <div className='bullet primary'></div>
-              Disponível
-            </div>
-            <div className='item'>
-              <div className='bullet danger'></div>
-              Erro
-            </div>
+          <div className='how-it-works'>
+            Como funciona?
+            <ol>
+              <li>Estamos ligando para o seu alvo</li>
+              <li>Assim que alguém atender do lado de lá, vamos te ligar</li>
+              <li>Quando você atender, conectamos as ligações</li>
+              <li>Agora é com você!</li>
+            </ol>
           </div>
 
           <div style={{ margin: '1rem 0', padding: '0 1rem' }}>
             <button
               type='button'
-              className='btn-call outlined full-width'
+              className='btn-call full-width'
+              style={{ backgroundColor: buttonColor }}
               onClick={e => {
                 e.preventDefault()
                 this.props.changeParentState({ showFinishMessage: true })
