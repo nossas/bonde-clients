@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { gql } from 'react-apollo'
+import { addNotification as notify } from 'reapop'
 //import { PaginationHOC } from '~client/components/data-grid/hocs'
 import * as CommunitySelectors from '~client/community/selectors'
 
@@ -51,6 +52,19 @@ const mapStateToProps = (state) => ({
   communityId: CommunitySelectors.getCurrentId(state)
 })
 
+const mapActionsToProps = (dispatch) => ({
+  listableHandleError: err => {
+    dispatch(notify({
+      status: 'error',
+      title: 'Ooops!',
+      message: 'Problemas de conexão com o servidor',
+      dismissAfter: 0,
+      dismissable: true,
+      closeButton: false
+    })) 
+  }
+})
+
 const mapQueryParams = ({ communityId, query }) => ({
   communityId,
   search: query
@@ -76,7 +90,7 @@ const Selectable = SelectableHOC({
 
 const Filterable = FilterableHOC()
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, mapActionsToProps)(
   Filterable(
     Selectable(
       Listable(
@@ -85,4 +99,3 @@ export default connect(mapStateToProps)(
     )
   )
 )
-

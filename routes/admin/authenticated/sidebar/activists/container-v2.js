@@ -12,7 +12,9 @@ class Container extends Component {
   render () {
     
     const { query, onQueryChange } = this.props
+
     const { fetch, data, loading } = this.props
+    const { onNextPage, onPreviousPage } = this.props
 
     return (
       <SettingsPageLayout>
@@ -35,11 +37,13 @@ class Container extends Component {
             <input type='submit' value='Filtrar' />
           </form>
           {/* Grid */}
-          {loading ? <Loading /> : (
+          {loading ? <Loading /> : [
             <ul>
               {data.map(d => <li>{d.name}</li>)}
-            </ul>
-          )}
+            </ul>,
+            <button type='button' onClick={onPreviousPage}>Anterior</button>,
+            <button type='button' onClick={onNextPage}>Próximo</button>
+          ]}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )

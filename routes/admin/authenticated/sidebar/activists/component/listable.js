@@ -12,7 +12,8 @@ export const ListableHOC = ({
   // [string]: Nome da query utilizada. É usado para mapear as propriedades
   // do componente envovlido.
   queryName,
-  parse
+  parse,
+  handleError
 }) => (WrappedComponent) => {
 
   class PP extends React.Component {
@@ -22,7 +23,8 @@ export const ListableHOC = ({
       this.state = {
         loading: false,
         data: [],
-        totalCount: 0
+        totalCount: 0,
+        page: 0
       }
     }
 
@@ -30,11 +32,7 @@ export const ListableHOC = ({
       const { location } = this.props
       return {
         first: limit,
-        offset: (
-          location &&
-          location.query.page &&
-          (location.query.page - 1) * limit
-        ) || 0
+        offset: this.state.page * limit
       } 
     }
 
@@ -53,17 +51,35 @@ export const ListableHOC = ({
           data: all.map(parse),
           totalCount: data[queryName] ? data[queryName].totalCount : 0,  
         })
+      }).catch((err) => {
+        this.setState({ loading: false })
+        const handle = handleError || this.props.listableHandleError
+        handle(err)
       })
     }
 
-    render() {
+    handleNextPage () {
+      this.setState({ page: this.state.page + 1 }, this.fetch)
+    }
+
+    handlePreviousPage () {
+      if (this.state.page > 0) {
+        this.setState({ page: this.state.page - 1 }, this.fetch)
+      }
+    }
+
+    render () {
       return (
         <WrappedComponent
           {...this.props}
+          // Fetching
           fetch={this.fetch.bind(this)}
           loading={this.state.loading}
           data={this.state.data}
           totalCount={this.state.totalCount}
+          // Pagination
+          onNextPage={this.handleNextPage.bind(this)}
+          onPreviousPage={this.handlePreviousPage.bind(this)}
         />
       )
     }
