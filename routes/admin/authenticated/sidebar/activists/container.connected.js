@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { gql } from 'react-apollo'
-import { PaginationHOC } from '~client/components/data-grid/hocs'
+//import { PaginationHOC } from '~client/components/data-grid/hocs'
 import * as CommunitySelectors from '~client/community/selectors'
 
-import Container from './container'
+//import SelectableHOC from './selectable'
+
+import {
+  ListableHOC,
+  SelectableHOC,
+  FilterableHOC
+} from './component/listable'
+
+import Container from './container-v2'
 
 const allActivistsQuery = gql`
   query allActivists ($search: String, $communityId: Int, $first: Int, $offset: Int) {
@@ -26,17 +34,31 @@ const allActivistsQuery = gql`
   }
 `
 
+const allActivistsIdQuery = gql`
+  query allActivistsIdQuery ($search: String, $communityId: Int) {
+    searchActivistsOnCommunity (
+      ctxCommunityId: $communityId,
+      query: $search
+    ) {
+      nodes {
+        id
+      }
+    }
+  }
+`
+
 const mapStateToProps = (state) => ({
   communityId: CommunitySelectors.getCurrentId(state)
 })
 
-const Pagination = PaginationHOC({
+const mapQueryParams = ({ communityId, query }) => ({
+  communityId,
+  search: query
+})
+
+const Listable = ListableHOC({
   query: allActivistsQuery,
-  queryParams: ({ communityId, location }) => {
-    const q = location && location.query && location.query.q ?
-      location.query.q : ''
-    return { communityId, search: q }
-  },
+  queryParams: mapQueryParams,
   queryName: 'searchActivistsOnCommunity',
   parse: ({ mobilizations, ...data }) => ({
     ...data,
@@ -45,5 +67,22 @@ const Pagination = PaginationHOC({
   limit: 50
 })
 
-export default connect(mapStateToProps)(Pagination(Container))
+const Selectable = SelectableHOC({
+  query: allActivistsIdQuery,
+  queryParams: mapQueryParams,
+  queryName: 'searchActivistsOnCommunity',
+  parse: ({ id }) => id
+})
+
+const Filterable = FilterableHOC()
+
+export default connect(mapStateToProps)(
+  Filterable(
+    Selectable(
+      Listable(
+        Container
+      )
+    )
+  )
+)
 
