@@ -16,7 +16,9 @@ class Container extends Component {
     const { fetch, data, loading, totalCount } = this.props
     const { indexPage, lastPage, onNextPage, onPreviousPage } = this.props
 
-    const { selected, onSelectRow } = this.props
+    const { selected, onSelectRow, onSelectAll, selecting } = this.props
+    
+    console.log('selected', selected)
 
     return (
       <SettingsPageLayout>
@@ -40,6 +42,8 @@ class Container extends Component {
           </form>
           {/* Grid */}
           <h3>{`Página ${indexPage} de ${lastPage} [Total ${totalCount}]`}</h3>
+          <a href='#' onClick={() => onSelectAll()}>Selecionar todos</a>
+          {selecting && <Loading />}
           {loading ? <Loading /> : (
             <div>
               <ul>

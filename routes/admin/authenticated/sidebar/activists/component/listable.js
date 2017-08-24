@@ -1,5 +1,6 @@
 import React from 'react'
 import { withApollo } from 'react-apollo'
+import { List } from 'immutable'
 
 export const ListableHOC = ({
   // [gql]: Query carregamento dos dados.
@@ -92,25 +93,35 @@ export const SelectableHOC = ({
   query,
   // [object | function]: Parametros utilizados na query caso exista. Se
   // função recebe `ownProps` e deve retornar um `object`.
-  queryParams
+  queryParams,
+  queryName,
+  parse,
+  handleError
 }) => (WrappedComponent) => {
   class PP extends React.Component {
     constructor (props) {
       super(props)
       this.state = {
-        selected: []
+        selected: [],
+        loading: false
       }
     }
     
     handleSelectAll () {
+      this.setState({ loading: true })
       this.props.client.query({
         query,
         variables: typeof queryParams === 'function'
           ? queryParams(this.props) : queryParams 
-      }).then((response) => {
-        debugger
+      }).then(({ data }) => {
+        const selected = List(this.state.selected)
+          .concat(List(data[queryName].nodes.map(parse)))
+          .toArray()
+        this.setState({ selected, loading: false })
       }).catch((err) => {
-        debugger
+        this.setState({ loading: false })
+        const handle = handleError || this.props.selectableHandleError
+        handle(err)
       })
     }
 
@@ -133,6 +144,7 @@ export const SelectableHOC = ({
           selected={this.state.selected}
           onSelectAll={this.handleSelectAll.bind(this)}
           onSelectRow={this.handleSelectRow.bind(this)}
+          selecting={this.state.loading}
         />
       )
     }
