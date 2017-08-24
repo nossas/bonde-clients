@@ -1,5 +1,5 @@
 import React from 'react'
-import { withApollo, graphql } from 'react-apollo'
+import { withApollo } from 'react-apollo'
 
 export const ListableHOC = ({
   // [gql]: Query carregamento dos dados.
@@ -15,9 +15,7 @@ export const ListableHOC = ({
   parse,
   handleError
 }) => (WrappedComponent) => {
-
   class PP extends React.Component {
-    
     constructor (props) {
       super(props)
       this.state = {
@@ -29,7 +27,6 @@ export const ListableHOC = ({
     }
 
     getPaginationParams () {
-      const { location } = this.props
       return {
         first: limit,
         offset: this.state.page * limit
@@ -49,7 +46,7 @@ export const ListableHOC = ({
         this.setState({
           loading: data.loading,
           data: all.map(parse),
-          totalCount: data[queryName] ? data[queryName].totalCount : 0,  
+          totalCount: data[queryName] ? data[queryName].totalCount : 0,
         })
       }).catch((err) => {
         this.setState({ loading: false })
@@ -78,6 +75,8 @@ export const ListableHOC = ({
           data={this.state.data}
           totalCount={this.state.totalCount}
           // Pagination
+          indexPage={(this.state.page + 1)}
+          lastPage={(parseInt(this.state.totalCount / limit) + 1)}
           onNextPage={this.handleNextPage.bind(this)}
           onPreviousPage={this.handlePreviousPage.bind(this)}
         />
@@ -85,72 +84,6 @@ export const ListableHOC = ({
     }
   }
   
-  /*
-  const withGraphql = graphql(query, {
-    skip: true, 
-    options: (ownProps) => {
-      let options = {
-        variables: {
-          first: limit,
-          offset: (
-            ownProps.location &&
-            ownProps.location.query.page &&
-            (ownProps.location.query.page - 1) * limit
-          ) || 0
-        }
-      }
-
-      if (typeof queryParams === 'function') {
-        options = {
-          variables: {
-            ...queryParams(ownProps),
-            ...options.variables
-          }
-        }
-      } else if (typeof queryParams === 'object') {
-        options = {
-          variables: {
-            ...queryParams,
-            ...options.variables
-          }
-        } 
-      }
-      
-      return options
-    },
-    props: ({ data, ownProps: { location } }) => {
-      const all = data[queryName] ? data[queryName].nodes : []
-      debugger
-      return {
-        loading: data.loading,
-        data: all.map(parse),
-        totalCount: data[queryName] ? data[queryName].totalCount : 0,
-        refetch: data.refetch,
-        onNextPage: () => {
-          browserHistory.push({
-            ...location,
-            query: {
-              ...location.query,
-              page: parseInt(location.query.page || 1) + 1
-            }
-          })
-        },
-        onPreviousPage: () => {
-          const previousPage = parseInt(location.query.page || 1) - 1
-          if (previousPage > 0) {
-            browserHistory.push({
-              ...location,
-              query: {
-                ...location.query,
-                page: previousPage
-              }
-            })
-          }
-        }
-      }
-    }
-  })
-  */
   return withApollo(PP)
 }
 
@@ -161,17 +94,15 @@ export const SelectableHOC = ({
   // função recebe `ownProps` e deve retornar um `object`.
   queryParams
 }) => (WrappedComponent) => {
-  
   class PP extends React.Component {
-
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.state = {
         selected: []
       }
     }
     
-    handleSelectAll() {
+    handleSelectAll () {
       this.props.client.query({
         query,
         variables: typeof queryParams === 'function'
@@ -183,8 +114,8 @@ export const SelectableHOC = ({
       })
     }
 
-    handleSelectRow(id) {
-      if (this.state.selected.find(id) !== -1) {
+    handleSelectRow (id) {
+      if (this.state.selected.indexOf(id) !== -1) {
         this.setState({
           selected: this.state.selected.filter(sid => sid !== id)
         })
@@ -195,8 +126,7 @@ export const SelectableHOC = ({
       }
     }
 
-    render() {
-      
+    render () {
       return (
         <WrappedComponent
           {...this.props}
@@ -212,10 +142,8 @@ export const SelectableHOC = ({
 }
 
 export const FilterableHOC = () => (WrappedComponent) => {
-  
   class PP extends React.Component {
-    
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.state = {
         query: ''
@@ -226,8 +154,7 @@ export const FilterableHOC = () => (WrappedComponent) => {
       this.setState({ query: e.target.value })
     }
 
-    render() {
-      
+    render () {
       return (
         <WrappedComponent
           {...this.props}

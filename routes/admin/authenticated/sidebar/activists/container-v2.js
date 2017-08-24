@@ -13,8 +13,10 @@ class Container extends Component {
     
     const { query, onQueryChange } = this.props
 
-    const { fetch, data, loading } = this.props
-    const { onNextPage, onPreviousPage } = this.props
+    const { fetch, data, loading, totalCount } = this.props
+    const { indexPage, lastPage, onNextPage, onPreviousPage } = this.props
+
+    const { selected, onSelectRow } = this.props
 
     return (
       <SettingsPageLayout>
@@ -37,13 +39,37 @@ class Container extends Component {
             <input type='submit' value='Filtrar' />
           </form>
           {/* Grid */}
-          {loading ? <Loading /> : [
-            <ul>
-              {data.map(d => <li>{d.name}</li>)}
-            </ul>,
-            <button type='button' onClick={onPreviousPage}>Anterior</button>,
-            <button type='button' onClick={onNextPage}>Próximo</button>
-          ]}
+          <h3>{`Página ${indexPage} de ${lastPage} [Total ${totalCount}]`}</h3>
+          {loading ? <Loading /> : (
+            <div>
+              <ul>
+                {data.map(d => (
+                  <li
+                    key={d.id}
+                    style={{
+                      cursor: 'pointer',
+                      color: selected.indexOf(d.id) !== -1
+                        ? '#c7c7c7'
+                        : '#000000'
+                    }}
+                    onClick={() => onSelectRow(d.id)}
+                  >
+                    <p>{d.name}</p>
+                  </li>
+                ))}
+              </ul>
+              {(indexPage > 1) && (
+                <button type='button' onClick={onPreviousPage}>
+                  Anterior
+                </button>
+              )}
+              {(indexPage !== lastPage) && (
+                <button type='button' onClick={onNextPage}>
+                  Próximo
+                </button>
+              )}
+            </div>
+          )}
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
