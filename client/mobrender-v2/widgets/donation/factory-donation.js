@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
+import formatNumber from 'format-number'
+import { Progress } from '.'
 
 if (require('exenv').canUseDOM) require('./donation.scss')
 
@@ -52,7 +54,7 @@ export default ({
         selected_value: selectedValue,
         selected_payment_type: selectedPaymentType
       } = this.state
-      
+
       this.props.handleDonationTransactionCreate({
         mobilization,
         widget,
@@ -60,7 +62,7 @@ export default ({
         selectedPaymentType
       }).then(() => {
         this.setState({ success: true })
-      }) 
+      })
     }
 
     renderButton () {
@@ -87,6 +89,9 @@ export default ({
       const periodLabelCurrent = periodLabelOptions[recurringPeriod]
       const periodLabel = paymentType === 'unique' || selectedPaymentType === 'unique' ? ''
         : periodLabelCurrent
+
+      const goal = 100000
+      const progress = 50
 
       if (!configurable) {
         return (
@@ -118,6 +123,26 @@ export default ({
                   Doação única
                 </a>
               </div> : ''}
+
+              <div className='donation-goal-progress'>
+                <Progress value={progress} />
+                <div className='progress-description'>
+                  <div className='progress-value'>
+                    {progress}%
+                  </div>
+                  <div className='goal-value'>
+                    {
+                      formatNumber({
+                        prefix: 'R$ ',
+                        integerSeparator: '.',
+                        decimal: ',',
+                        padRight: 2,
+                        truncate: 2
+                      })(goal)
+                    }
+                  </div>
+                </div>
+              </div>
 
               {donationValue1 <= 0 ? null : (
                 <a
@@ -208,7 +233,7 @@ export default ({
     renderThankyouText () {
       const { mobilization, widget } = this.props
       const { settings: { finish_message_type: finishMessageType } } = widget
-      
+
       return finishMessageType === 'custom' ? (
         <FinishMessageCustom widget={widget} />
       ) : (

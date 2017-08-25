@@ -51,4 +51,19 @@
     border-style: solid;
     border-color: #fff;
   }
+
+  .donation-goal-progress {
+    color: #666;
+    font-size: .8rem;
+    margin-bottom: .5rem;
+
+    .progress {
+      margin: .5rem 0;
+    }
+
+    .progress-description {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
