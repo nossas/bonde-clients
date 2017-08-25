@@ -34,6 +34,10 @@ export const ListableHOC = ({
       } 
     }
 
+    componentDidMount () {
+      this.fetch()
+    }
+
     fetch () {
       this.setState({ loading: true })
       return this.props.client.query({
