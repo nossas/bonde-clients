@@ -36,7 +36,7 @@ export const ListableHOC = ({
 
     fetch () {
       this.setState({ loading: true })
-      this.props.client.query({
+      return this.props.client.query({
         query,
         variables: {
           ...this.getPaginationParams(),
@@ -49,20 +49,32 @@ export const ListableHOC = ({
           data: all.map(parse),
           totalCount: data[queryName] ? data[queryName].totalCount : 0,
         })
+        return Promise.resolve()
       }).catch((err) => {
         this.setState({ loading: false })
         const handle = handleError || this.props.listableHandleError
         handle(err)
+        return Promise.reject(err)
       })
     }
 
     handleNextPage () {
-      this.setState({ page: this.state.page + 1 }, this.fetch)
+      this.setState({ page: this.state.page + 1 }, () => {
+        this.fetch()
+          .catch(err => {
+            this.setState({ page: this.state.page - 1 })
+          })
+      })
     }
 
     handlePreviousPage () {
       if (this.state.page > 0) {
-        this.setState({ page: this.state.page - 1 }, this.fetch)
+        this.setState({ page: this.state.page - 1, action: 'previous' }, () => {
+          this.fetch()
+            .catch(err => {
+              this.setState({ page: this.state.page + 1 })
+            })
+        })
       }
     }
 
