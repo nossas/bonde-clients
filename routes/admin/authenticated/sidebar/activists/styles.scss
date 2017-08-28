@@ -1,57 +1,49 @@
-.activists-content {
-  margin-top: 50px;
-}
-.pagination {
+.query-form {
+  width: 100%;
+  background-color: #eee;
+  position: relative;
   
-  .header, .row {
-    height: 50px;
+  input[type='text'] {
+    width: 100%;
+    height: 20px;
+    margin: 23px 0 25px 35px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif;
+    color: #333;
   }
-  .row {
-    padding: 0 10px;
-    background-color: #fff;
-    
-    > .col {
-      display: flex;
-      align-items: center;
-    }
 
-    &.clickable {
-      cursor: pointer;
+  ::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder, ::-ms-input-placeholder {
+    color: #333;
+  }
 
-      &:hover, &.active {
-        border-left: 2px solid #c7c7c7;
-        padding: 0 10px 0 8px;
-        border-bottom: 1px solid rgba(158, 150, 158, 0.17); 
-      }
-    } 
+  i {
+    font-size: 25px;
+    position: absolute;
+    margin: 20px 0;
+    color: #4a4a4a;
   }
 }
 
-.preview {
-  
-  margin-top: -50px;
+.counter {
+  font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif;
+  font-size: 35px;
+  color: #222;
+  padding: 16px;
+}
 
-  .header {
-    position: relative;
-    height: 50px;
+.row {
+  font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif;
+  font-size: 14px;
+  color: #333;
+  padding: 16px 17px;
+  background-color: #fff;
+  border-bottom: solid 1px #efefef;
 
-    h2 {
-      margin: 0;
-      font-size: 36px;
-    }
-
-    button {
-      font-weight: bold;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      right: 0;
-      padding: 10px;
-      font-size: 20px;
-    }
-  }
-  .body {
-    background: #fff;
+  &:hover {
+    cursor: pointer;
+    border-left: solid 3px #ff0099;
+    padding-left: 14px;
   }
 }

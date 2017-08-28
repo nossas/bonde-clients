@@ -6,9 +6,93 @@ import {
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
 
+if (require('exenv').canUseDOM) require('./styles.scss')
+
+const QueryForm = ({
+  query,
+  onQueryChange,
+  onSubmit,
+  label,
+  buttonText,
+  name
+}) => (
+  <form
+    className='query-form pr4 pl3 border-box'
+    onSubmit={e => {
+      e.preventDefault()
+      onSubmit()
+    }}
+  >
+    <i className='fa fa-search' aria-hidden='true'></i> 
+    <input
+      id={`${name}Id`}
+      type='text'
+      onChange={onQueryChange}
+      value={query}
+      placeholder={label}
+    />
+    {buttonText && (
+      <input
+        className='absolute'
+        type='submit'
+        value={buttonText}
+      />)}
+  </form>
+)
+
+const Pagination = ({
+  indexPage,
+  lastPage,
+  onPreviousPage,
+  onNextPage
+}) => {
+  const handleClick = (handle) => (e) => {
+    e.preventDefault()
+    handle()
+  }
+  return (
+    <ul>
+      <li>
+        <button
+          disabled={indexPage < 2}
+          onClick={handleClick(onPreviousPage)}
+        >
+          {`<<`}
+        </button>
+      </li>
+      <li>
+        <button
+          disabled={indexPage === lastPage}
+          onClick={handleClick(onNextPage)}
+        >
+          {`>>`}
+        </button>
+      </li>
+    </ul>
+  )
+}
+
+const Row = ({ obj, onSelectRow, isSelected }) => (
+  <div className='row clearfix mx-auto'>
+    <div className='col col-1'>
+      <input
+        type='checkbox'
+        checked={isSelected}
+        onChange={() => onSelectRow(obj.id)}
+      />
+    </div>
+    <div className='col col-6'>
+      {obj.name}
+    </div>
+    <div className='col col-5'>
+      {obj.email}
+    </div>
+  </div>
+)
+
 
 class Container extends Component {
-  
+
   render () {
     
     const { query, onQueryChange } = this.props
@@ -17,63 +101,56 @@ class Container extends Component {
     const { indexPage, lastPage, onNextPage, onPreviousPage } = this.props
 
     const { selected, onSelectRow, onSelectAll, selecting } = this.props
-    
-    console.log('selected', selected)
 
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title='Base de usuários' />
+        <QueryForm
+          name='q'
+          label='Filtre por mobilizações ou formulários'
+          onSubmit={this.props.fetch}
+          query={this.props.query}
+          onQueryChange={this.props.onQueryChange}
+        />
         <SettingsPageContentLayout>
-          {/* Filter query form */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              fetch()
-            }}
-          >
-            <label htmlFor='queryId'>Termo filtrado:</label>
-            <input
-              id='queryId'
-              type='text'
-              onChange={onQueryChange}
-              value={query}
-            />
-            <input type='submit' value='Filtrar' />
-          </form>
-          {/* Grid */}
-          <h3>{`Página ${indexPage} de ${lastPage} [Total ${totalCount}]`}</h3>
-          <a href='#' onClick={() => onSelectAll()}>Selecionar todos</a>
-          {selecting && <Loading />}
-          {loading ? <Loading /> : (
-            <div>
-              <ul>
-                {data.map(d => (
-                  <li
-                    key={d.id}
-                    style={{
-                      cursor: 'pointer',
-                      color: selected.indexOf(d.id) !== -1
-                        ? '#c7c7c7'
-                        : '#000000'
-                    }}
-                    onClick={() => onSelectRow(d.id)}
-                  >
-                    <p>{d.name}</p>
-                  </li>
-                ))}
-              </ul>
-              {(indexPage > 1) && (
-                <button type='button' onClick={onPreviousPage}>
-                  Anterior
-                </button>
-              )}
-              {(indexPage !== lastPage) && (
-                <button type='button' onClick={onNextPage}>
-                  Próximo
-                </button>
-              )}
+          <div className='p2'>
+            {/* Grid */}
+            <div className='counter clearfix'>
+              <div className='col col-1'>
+                <input
+                  id='selectAllId'
+                  type='checkbox'
+                  checked={selected.length > 0 && selected.length === totalCount}
+                  onClick={(evt) => {
+                    onSelectAll()
+                  }}
+                />
+              </div>
+              <div className='col col-11'>
+                {totalCount} pessoas
+              </div>
             </div>
-          )}
+            {(selecting || loading) && <Loading />}
+            {(
+              <div>
+                <div>
+                  {data.map(d => (
+                    <Row
+                      obj={d}
+                      isSelected={selected.indexOf(d.id) !== -1}
+                      onSelectRow={this.props.onSelectRow}
+                    />
+                  ))}
+                </div>
+                <Pagination
+                  indexPage={this.props.indexPage}
+                  lastPage={this.props.lastPage}
+                  onPreviousPage={this.props.onPreviousPage}
+                  onNextPage={this.props.onNextPage}
+                />
+              </div>
+            )}
+          </div>
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
