@@ -13,7 +13,7 @@ import {
   FilterableHOC
 } from './component/listable'
 
-import Container from './container-v2'
+import Container from './container'
 
 const allActivistsQuery = gql`
   query allActivists ($search: String, $communityId: Int, $first: Int, $offset: Int) {
