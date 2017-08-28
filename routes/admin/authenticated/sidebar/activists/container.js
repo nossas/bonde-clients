@@ -77,20 +77,19 @@ const Pagination = ({
 
 const Row = ({ obj, onSelectRow, onClickRow, isSelected, isActived }) => (
   <div
-    className={`row clearfix mx-auto p2${isActived ? ' active' : ''}`}
-    onClick={() => onClickRow(obj)}
+    className={`row clearfix mx-auto px2${isActived ? ' active' : ''}`}
   >
-    <div className='col col-1'>
+    <div className='col col-1 py2'>
       <input
         type='checkbox'
         checked={isSelected}
         onChange={() => onSelectRow(obj.id)}
       />
     </div>
-    <div className='col col-6'>
+    <div className='col col-6 py2' onClick={() => onClickRow(obj)}>
       {obj.name}
     </div>
-    <div className='col col-5'>
+    <div className='col col-5 py2' onClick={() => onClickRow(obj)}>
       {obj.email}
     </div>
   </div>
