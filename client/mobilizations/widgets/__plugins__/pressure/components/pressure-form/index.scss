@@ -1,4 +1,32 @@
 .pressure-form {
+  overflow: hidden;
+  position: relative;
+  background-color: #FFFFFF;
+
+  & > div {
+    transition: left .5s ease;
+  }
+
+  .activist-form {
+    position: relative;
+    width: 100%;
+    left: 0;
+  }
+
+  .phone-calls {
+    position: absolute;
+    width: calc(100%);
+    height: calc(100% - 145px);
+    top: 0;
+    left: 100%;
+    overflow-y: auto;
+  }
+
+  &.is-calling {
+    .activist-form { left: -100%; }
+    .phone-calls { left: 0; }
+  }
+
   .form-group {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;

@@ -10,6 +10,7 @@ const SettingsMenu = ({ location: { pathname } }) => {
   const infoPath = paths.communityInfo()
   const invitePath = paths.communityInvite()
   const mailchimpPath = paths.communityMailchimp()
+  const twilioPath = paths.communityTwilio()
   const recipientPath = paths.communityRecipient()
   const reportPath = paths.communityReport()
 
@@ -56,6 +57,11 @@ const SettingsMenu = ({ location: { pathname } }) => {
               defaultMessage='Mailchimp'
             />
           }
+        />
+        <Tab
+          isActive={twilioPath === pathname}
+          path={twilioPath}
+          text='Twilio'
         />
         <Tab
           isActive={recipientPath === pathname}

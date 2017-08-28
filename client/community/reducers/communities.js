@@ -9,7 +9,8 @@ export const initialState = {
   isLoaded: false,
   data: [],
   currentId: undefined,
-  error: undefined
+  error: undefined,
+  forcedSubmit: false
 }
 
 export default (state = initialState, action = {}) => {
@@ -84,6 +85,9 @@ export default (state = initialState, action = {}) => {
       return { ...state }
     case t.ASYNC_INVITE_FAILURE:
       return { ...state, error: action.payload }
+
+    case t.SET_FORCED_SUBMIT:
+      return { ...state, forcedSubmit: action.payload }
 
     default:
       return state

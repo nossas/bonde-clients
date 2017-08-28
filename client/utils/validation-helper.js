@@ -23,3 +23,26 @@ export const isValidFromEmail = value => {
   }
   return false
 }
+
+// Regex to validate Target (Ex.: Igor Santos <igor@nossascidades.org>)
+// eslint-disable-next-line
+const regexTargetEmail = /[a-zà-úA-ZÀ-Ú\s]+<(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))>/
+export const isValidTargetEmail = value => regexTargetEmail.test(value)
+
+// Regex to validate phone number
+// Validating only BRA phone numbers for now
+const regexPhone = /^(\+\d{2})?\d{6,7}-?\d{4}$/
+export const isValidPhone = phone => regexPhone.test(phone)
+
+// Regex to validate phone numver in E.164 format
+// Validating only BRA phone numbers for now
+const regexPhoneE164 = /^\+\d{12,13}$/
+export const isValidPhoneE164 = phone => regexPhoneE164.test(phone)
+
+// Regex to validate target with phone number
+const regexTargetPhone = /^[a-zà-úA-ZÀ-Ú\s']+\s<(\+\d{2})?\d{6,7}-?\d{4}>$/
+export const isValidTargetPhone = value => regexTargetPhone.test(value)
+
+// Regex to validate target with phone number in E.164 format
+const regexTargetPhoneE164 = /^[a-zà-úA-ZÀ-Ú\s']+\s<\+\d{12,13}>$/
+export const isValidTargetPhoneE164 = value => regexTargetPhoneE164.test(value)

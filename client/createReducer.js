@@ -39,7 +39,7 @@ export default function createReducer (asyncReducers) {
       recurringForm,
       communityRecipientForm
     }),
-    apollo: client.reducer(),
+    apollo: client().reducer(),
     notifications: notificationsReducer(),
     auth,
     wait,
