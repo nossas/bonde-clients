@@ -6,6 +6,7 @@ import Page from './page'
 const mapStateToProps = (state, props) => {
   return {
     initialValues: {
+      goal: parseInt(props.widget.goal) || undefined,
       default_donation_value: 1,
       main_color: '#54d0f6',
       recurring_period: 30,
@@ -17,7 +18,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const fields = [
-  'title_text', 'button_text', 'main_color', 'default_donation_value',
+  'title_text', 'button_text', 'goal', 'main_color', 'default_donation_value',
   'donation_value1', 'donation_value2', 'donation_value3', 'donation_value4',
   'donation_value5', 'recurring_period', 'payment_type', 'payment_methods'
 ]

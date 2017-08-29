@@ -28,7 +28,8 @@ const DonationSettingsPage = props => {
       donation_value5: donationValue5,
       recurring_period: recurringPeriod,
       payment_methods: paymentMethods,
-      payment_type: paymentType
+      payment_type: paymentType,
+      goal
     },
     ...formProps
   } = props
@@ -40,11 +41,13 @@ const DonationSettingsPage = props => {
       {...formProps}
       buttonText='Salvar'
       onSubmit={values => {
+        console.log('values', values)
         const { widget, asyncWidgetUpdate } = props
         const settings = widget.settings || {}
         return asyncWidgetUpdate({
           ...widget,
-          settings: { ...settings, ...values }
+          settings: { ...settings, ...values },
+          goal: values.goal
         })
       }}
       successMessage='Formulário de doação configurado com sucesso!'
@@ -121,6 +124,11 @@ const DonationSettingsPage = props => {
           <Radio className='col col-2' title={donationValueTitle} value='5'>Default</Radio>
         </RadioGroup>
         <HelpBlock>*todos os valores são em reais</HelpBlock>
+      </FormGroup>
+
+      <FormGroup controlId='button-goal' {...goal}>
+        <ControlLabel>Meta de doação</ControlLabel>
+        <FormControl type='text' placeholder='Ex.: 30000' />
       </FormGroup>
 
       <FormGroup controlId='button-text-id' {...buttonText}>
