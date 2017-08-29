@@ -146,8 +146,17 @@ class Container extends Component {
     const { data, loading, totalCount } = this.props
     const { indexPage, lastPage, onNextPage, onPreviousPage } = this.props
 
-    const { selected, onSelectRow, onSelectAll, selecting } = this.props
+    const {
+      selected,
+      onSelectRow,
+      onSelectAll,
+      onRemoveAll,
+      selecting
+    } = this.props
 
+    const isSelectedAll = (
+      selected.length > 0 && selected.length === totalCount
+    )
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title='Base de usuários' />
@@ -167,9 +176,14 @@ class Container extends Component {
                 <input
                   id='selectAllId'
                   type='checkbox'
-                  checked={selected.length > 0 && selected.length === totalCount}
+                  disabled={totalCount === 0}
+                  checked={isSelectedAll}
                   onClick={(evt) => {
-                    onSelectAll()
+                    if (isSelectedAll) {
+                      onRemoveAll()
+                    } else {
+                      onSelectAll()
+                    }
                   }}
                 />
               </div>

@@ -131,7 +131,7 @@ export const SelectableHOC = ({
           ? queryParams(this.props) : queryParams 
       }).then(({ data }) => {
         const selected = List(this.state.selected)
-          .concat(List(data[queryName].nodes.map(parse)))
+          .merge(List(data[queryName].nodes.map(parse)))
           .toArray()
         this.setState({ selected, loading: false })
       }).catch((err) => {
@@ -153,12 +153,17 @@ export const SelectableHOC = ({
       }
     }
 
+    handleRemoveAll () {
+      this.setState({ selected: [] })
+    }
+
     render () {
       return (
         <WrappedComponent
           {...this.props}
           selected={this.state.selected}
           onSelectAll={this.handleSelectAll.bind(this)}
+          onRemoveAll={this.handleRemoveAll.bind(this)}
           onSelectRow={this.handleSelectRow.bind(this)}
           selecting={this.state.loading}
         />
