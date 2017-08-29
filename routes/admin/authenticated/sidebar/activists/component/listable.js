@@ -31,27 +31,31 @@ export const ListableHOC = ({
       return {
         first: limit,
         offset: this.state.page * limit
-      } 
+      }
     }
 
     componentDidMount () {
       this.fetch()
     }
 
-    fetch () {
+    fetch (resetPage) {
+      const page = resetPage ? 0 : this.state.page
+      const params = { first: limit, offset: page }
       this.setState({ loading: true })
+
       return this.props.client.query({
         query,
         variables: {
-          ...this.getPaginationParams(),
+          ...params,
           ...queryParams(this.props)
         }
       }).then(({ data }) => {
         const all = data[queryName] ? data[queryName].nodes : []
         this.setState({
+          page,
           loading: data.loading,
           data: all.map(parse),
-          totalCount: data[queryName] ? data[queryName].totalCount : 0,
+          totalCount: data[queryName] ? data[queryName].totalCount : 0
         })
         return Promise.resolve()
       }).catch((err) => {
@@ -66,7 +70,7 @@ export const ListableHOC = ({
       this.setState({ page: this.state.page + 1 }, () => {
         this.fetch()
           .catch(err => {
-            this.setState({ page: this.state.page - 1 })
+            this.setState({ page: this.state.page - 1, err })
           })
       })
     }
@@ -76,7 +80,7 @@ export const ListableHOC = ({
         this.setState({ page: this.state.page - 1, action: 'previous' }, () => {
           this.fetch()
             .catch(err => {
-              this.setState({ page: this.state.page + 1 })
+              this.setState({ page: this.state.page + 1, err })
             })
         })
       }
@@ -100,7 +104,7 @@ export const ListableHOC = ({
       )
     }
   }
-  
+
   return withApollo(PP)
 }
 
@@ -122,13 +126,13 @@ export const SelectableHOC = ({
         loading: false
       }
     }
-    
+
     handleSelectAll () {
       this.setState({ loading: true })
       this.props.client.query({
         query,
         variables: typeof queryParams === 'function'
-          ? queryParams(this.props) : queryParams 
+          ? queryParams(this.props) : queryParams
       }).then(({ data }) => {
         const selected = List(this.state.selected)
           .merge(List(data[queryName].nodes.map(parse)))

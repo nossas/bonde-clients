@@ -23,7 +23,7 @@ const QueryForm = ({
       onSubmit()
     }}
   >
-    <i className='fa fa-search' aria-hidden='true'></i> 
+    <i className='fa fa-search' aria-hidden='true' />
     <input
       id={`${name}Id`}
       type='text'
@@ -57,7 +57,7 @@ const Pagination = ({
           disabled={indexPage < 2}
           onClick={handleClick(onPreviousPage)}
         >
-          <i className='fa fa-arrow-left' aria-hidden="true"></i>
+          <i className='fa fa-arrow-left' aria-hidden='true' />
         </button>
       </div>
       <div className='col col-10'>
@@ -68,7 +68,7 @@ const Pagination = ({
           disabled={indexPage === lastPage}
           onClick={handleClick(onNextPage)}
         >
-          <i className='fa fa-arrow-right' aria-hidden='true'></i>
+          <i className='fa fa-arrow-right' aria-hidden='true' />
         </button>
       </div>
     </div>
@@ -95,7 +95,6 @@ const Row = ({ obj, onSelectRow, onClickRow, isSelected, isActived }) => (
   </div>
 )
 
-
 const Detail = ({ obj, onClose }) => (
   <div className='detail col col-4 pl2'>
     <div className='col col-12 title py2'>
@@ -118,19 +117,10 @@ const Detail = ({ obj, onClose }) => (
   </div>
 )
 
-
 class Container extends Component {
-
   constructor (props) {
     super(props)
     this.state = { item: null }
-  }
-
-  renderDetail () {
-    return (
-      <div className='col col-3'>
-      </div>
-    )
   }
 
   onClickRow (item) {
@@ -142,28 +132,24 @@ class Container extends Component {
   }
 
   render () {
-    
     const { data, loading, totalCount } = this.props
-    const { indexPage, lastPage, onNextPage, onPreviousPage } = this.props
-
     const {
       selected,
-      onSelectRow,
       onSelectAll,
       onRemoveAll,
       selecting
     } = this.props
-
     const isSelectedAll = (
       selected.length > 0 && selected.length === totalCount
     )
+
     return (
       <SettingsPageLayout>
         <SettingsPageMenuLayout title='Base de usuários' />
         <QueryForm
           name='q'
           label='Filtre por mobilizações ou formulários'
-          onSubmit={this.props.fetch}
+          onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
           onQueryChange={this.props.onQueryChange}
         />

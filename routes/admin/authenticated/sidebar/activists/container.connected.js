@@ -1,18 +1,12 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { gql } from 'react-apollo'
 import { addNotification as notify } from 'reapop'
-//import { PaginationHOC } from '~client/components/data-grid/hocs'
 import * as CommunitySelectors from '~client/community/selectors'
-
-//import SelectableHOC from './selectable'
-
 import {
   ListableHOC,
   SelectableHOC,
   FilterableHOC
 } from './component/listable'
-
 import Container from './container'
 
 const allActivistsQuery = gql`
@@ -53,7 +47,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = (dispatch) => ({
-  listableHandleError: err => {
+  listableHandleError: () => {
     dispatch(notify({
       status: 'error',
       title: 'Ooops!',
@@ -61,7 +55,7 @@ const mapActionsToProps = (dispatch) => ({
       dismissAfter: 0,
       dismissable: true,
       closeButton: false
-    })) 
+    }))
   }
 })
 
