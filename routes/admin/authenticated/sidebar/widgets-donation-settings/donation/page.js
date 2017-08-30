@@ -47,7 +47,7 @@ const DonationSettingsPage = props => {
         return asyncWidgetUpdate({
           ...widget,
           settings: { ...settings, ...values },
-          goal: values.goal
+          goal: String(values.goal).replace(/,/g, '.')
         })
       }}
       successMessage='Formulário de doação configurado com sucesso!'
@@ -126,9 +126,9 @@ const DonationSettingsPage = props => {
         <HelpBlock>*todos os valores são em reais</HelpBlock>
       </FormGroup>
 
-      <FormGroup controlId='button-goal' {...goal}>
+      <FormGroup controlId='goal-value' {...goal}>
         <ControlLabel>Meta de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: 30000' />
+        <FormControl type='text' placeholder='Ex.: 30000.50' />
       </FormGroup>
 
       <FormGroup controlId='button-text-id' {...buttonText}>
