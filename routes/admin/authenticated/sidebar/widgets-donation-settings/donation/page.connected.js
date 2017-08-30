@@ -1,16 +1,14 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import formatNumber from 'format-number'
-
+import * as formatNumberHelper from '~client/utils/format-number-helper'
 import Page from './page'
 
 const mapStateToProps = (state, props) => {
   const { goal } = props.widget
 
-  const float = formatNumber({ integerSeparator: '', decimal: '.', padRight: 2 })
   return {
     initialValues: {
-      goal: goal ? float(goal) : undefined,
+      goal: goal ? formatNumberHelper.float(goal) : undefined,
       default_donation_value: 1,
       main_color: '#54d0f6',
       recurring_period: 30,

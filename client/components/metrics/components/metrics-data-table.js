@@ -1,11 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import format from 'format-number'
+import * as formatNumberHelper from '~client/utils/format-number-helper'
 import { MetricsCard } from '~client/components/metrics/components'
-
-const formatOptions = { integerSeparator: '.', decimal: ',' }
-const currency = format({ ...formatOptions, prefix: 'R$ ', padRight: 2, truncate: 2 })
-const number = format(formatOptions)
 
 const Value = ({ loading, value }) => (
   loading
@@ -36,7 +32,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             </span>
           }
         >
-          {number(data.totalUniqueActivists)}
+          {formatNumberHelper.number(data.totalUniqueActivists)}
         </MetricsCard>
       </div>
       <div className='mb2 col col-6 lg-col-3 px1'>
@@ -61,7 +57,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             </span>
           }
         >
-          {number(data.totalUniqueActivistsLast90Days)}
+          {formatNumberHelper.number(data.totalUniqueActivistsLast90Days)}
         </MetricsCard>
       </div>
 
@@ -87,7 +83,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             </span>
           }
         >
-          {number(data.totalActivistsPressureLast90Days)}
+          {formatNumberHelper.number(data.totalActivistsPressureLast90Days)}
         </MetricsCard>
       </div>
 
@@ -111,7 +107,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             />
           }
         >
-          {number(data.totalActivistsFormEntryLast90Days)}
+          {formatNumberHelper.number(data.totalActivistsFormEntryLast90Days)}
         </MetricsCard>
       </div>
     </div>
@@ -135,7 +131,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
           }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
-          {currency(data.totalUniqueDonationsAmountLastMonth)}
+          {formatNumberHelper.currency(data.totalUniqueDonationsAmountLastMonth)}
         </MetricsCard>
       </div>
 
@@ -157,7 +153,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
           }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
-          {currency(data.totalSubscriptionDonationsAmountLastMonth)}
+          {formatNumberHelper.currency(data.totalSubscriptionDonationsAmountLastMonth)}
         </MetricsCard>
       </div>
 
@@ -182,9 +178,9 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
           }
           contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
         >
-          {currency(data.totalDonationsPaidAmount)}
+          {formatNumberHelper.currency(data.totalDonationsPaidAmount)}
           {' / '}
-          {currency(data.totalDonationsWaitingPaymentAmount)}
+          {formatNumberHelper.currency(data.totalDonationsWaitingPaymentAmount)}
         </MetricsCard>
       </div>
     </div>
@@ -202,7 +198,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             <td className='px2'>
               <Value
                 loading={loading}
-                value={currency(data.totalDonationsChargedBackAmount)}
+                value={formatNumberHelper.currency(data.totalDonationsChargedBackAmount)}
               />
             </td>
           </tr>
@@ -218,7 +214,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             <td className='px2'>
               <Value
                 loading={loading}
-                value={currency(data.totalDonationsRefundedAmount)}
+                value={formatNumberHelper.currency(data.totalDonationsRefundedAmount)}
               />
             </td>
           </tr>
@@ -234,7 +230,7 @@ const MetricsDataTable = ({ data: { loading, ...data } }) => (
             <td className='px2'>
               <Value
                 loading={loading}
-                value={currency(data.totalDonationsRefusedAmount)}
+                value={formatNumberHelper.currency(data.totalDonationsRefusedAmount)}
               />
             </td>
           </tr>
