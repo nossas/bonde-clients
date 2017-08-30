@@ -29,6 +29,7 @@ const DonationSettingsPage = props => {
       recurring_period: recurringPeriod,
       payment_methods: paymentMethods,
       payment_type: paymentType,
+      goal_date_limit: goalDateLimit,
       goal
     },
     ...formProps
@@ -41,9 +42,9 @@ const DonationSettingsPage = props => {
       {...formProps}
       buttonText='Salvar'
       onSubmit={values => {
-        console.log('values', values)
         const { widget, asyncWidgetUpdate } = props
         const settings = widget.settings || {}
+
         return asyncWidgetUpdate({
           ...widget,
           settings: { ...settings, ...values },
@@ -126,10 +127,27 @@ const DonationSettingsPage = props => {
         <HelpBlock>*todos os valores são em reais</HelpBlock>
       </FormGroup>
 
-      <FormGroup controlId='goal-value' {...goal}>
-        <ControlLabel>Meta de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: 30000.50' />
-      </FormGroup>
+      <div className='clearfix mxn1'>
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goal}
+        >
+          <ControlLabel>Meta de doação</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: 30000.50' />
+        </FormGroup>
+
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-date-limit-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goalDateLimit}
+        >
+          <ControlLabel>Data limite da meta de doação</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: DD/MM/AAAA' />
+        </FormGroup>
+      </div>
 
       <FormGroup controlId='button-text-id' {...buttonText}>
         <ControlLabel>Texto do botão de doação</ControlLabel>
