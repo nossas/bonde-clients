@@ -24,21 +24,45 @@ describe('client/mobrender-v2/widgets/donation/progress', () => {
 
   it('should render a <progress> element as `max` prop with 100 by default', () => {
     progress = shallow(<Progress value={50} />)
-    expect(progress.props().max).to.be.equal(100)
+    expect(progress.find('progress.progress').props().max).to.be.equal(100)
   })
 
   it('should render with `is-primary` class when the value is >= 50', () => {
     progress = shallow(<Progress value={50} />)
-    expect(progress.props().className).to.be.equal('progress is-primary')
+    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-primary')
   })
 
   it('should render with `is-warning` class when the value is >= 30', () => {
     progress = shallow(<Progress value={30} />)
-    expect(progress.props().className).to.be.equal('progress is-warning')
+    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-warning')
   })
 
   it('should render with `is-danger` class when the value is < 30', () => {
     progress = shallow(<Progress value={29} />)
-    expect(progress.props().className).to.be.equal('progress is-danger')
+    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-danger')
+  })
+
+  it('should render the `valueTopLeft` prop value in .progress-top-left properly', () => {
+    const text = 'Foo'
+    progress = shallow(<Progress value={50} valueTopLeft={text} />)
+    expect(progress.find('.progress-top > .progress-top-left').text()).to.be.equal(text)
+  })
+
+  it('should render the `valueTopRight` prop value in .progress-top-right properly', () => {
+    const text = 'Foo'
+    progress = shallow(<Progress value={50} valueTopRight={text} />)
+    expect(progress.find('.progress-top > .progress-top-right').text()).to.be.equal(text)
+  })
+
+  it('should render the `valueBottomLeft` prop value in .progress-bottom-left properly', () => {
+    const text = 'Foo'
+    progress = shallow(<Progress value={50} valueBottomLeft={text} />)
+    expect(progress.find('.progress-bottom > .progress-bottom-left').text()).to.be.equal(text)
+  })
+
+  it('should render the `valueBottomRight` prop value in .progress-bottom-right properly', () => {
+    const text = 'Foo'
+    progress = shallow(<Progress value={50} valueBottomRight={text} />)
+    expect(progress.find('.progress-bottom > .progress-bottom-right').text()).to.be.equal(text)
   })
 })

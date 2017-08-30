@@ -228,7 +228,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           loading: false
         }
       })
-      expect(donationWidget.find('.donation-goal-progress')).to.have.length(1)
+      expect(donationWidget.find('Progress')).to.have.length(1)
     })
 
     it('should not render the progress bar if the `donationGoalStats` does not exists', () => {

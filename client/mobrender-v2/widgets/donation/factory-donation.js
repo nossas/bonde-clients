@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
-import formatNumber from 'format-number'
+import * as formatNumberHelper from '~client/utils/format-number-helper'
 import { Progress } from '.'
 
 if (require('exenv').canUseDOM) require('./donation.scss')
@@ -63,6 +63,54 @@ export default ({
       }).then(() => {
         this.setState({ success: true })
       })
+    }
+
+    progressProps (goalStats) {
+      let goalDateRemaining
+      const { widget: { settings } } = this.props
+
+      if (settings && settings.goal_date_limit) {
+        const now = new Date()
+        const [day, month, year] = settings.goal_date_limit.split('/')
+        const goalDate = new Date(`${year}-${month}-${day}`)
+        goalDateRemaining = parseInt((goalDate - now) / (1000 * 60 * 60 * 24))
+      }
+
+      let value = 0
+      let valueTopLeft = ''
+      let valueTopRight = ''
+      let valueBottomLeft = ''
+      let valueBottomRight = ''
+
+      if (goalStats.total_donations) {
+        valueTopLeft = `${goalStats.total_donations} doações`
+      }
+      if (goalDateRemaining !== undefined) {
+        if (goalDateRemaining === 0)
+          valueTopRight = 'último dia dentro do prazo'
+        else if (goalDateRemaining < 0) {
+          const positiveDay = goalDateRemaining * -1
+          const pluralizeDay = positiveDay === 1 ? 'dia' : 'dias'
+          valueTopRight = (
+            <span style={{ color: 'hsl(348, 100%, 61%)' }}>
+              {positiveDay} {pluralizeDay} de atraso
+            </span>
+          )
+        }
+        else {
+          const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
+          valueTopRight = `${goalDateRemaining} ${pluralizeDay} faltando`
+        }
+      }
+      if (goalStats.progress) {
+        value = goalStats.progress
+        valueBottomLeft = `${parseInt(goalStats.progress)}%`
+      }
+      if (goalStats.goal) {
+        valueBottomRight = formatNumberHelper.currency(goalStats.goal)
+      }
+
+      return { value, valueTopLeft, valueTopRight, valueBottomLeft, valueBottomRight }
     }
 
     renderButton () {
@@ -131,25 +179,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               </div> : ''}
 
               {goalStats && (
-                <div className='donation-goal-progress'>
-                  <Progress value={goalStats.progress} />
-                  <div className='progress-description'>
-                    <div className='progress-value'>
-                      {formatNumber({ decimal: ',', truncate: 0 })(goalStats.progress)}%
-                    </div>
-                    <div className='goal-value'>
-                      {
-                        formatNumber({
-                          prefix: 'R$ ',
-                          integerSeparator: '.',
-                          decimal: ',',
-                          padRight: 2,
-                          truncate: 2
-                        })(goalStats.goal)
-                      }
-                    </div>
-                  </div>
-                </div>
+                <Progress className='my1' {...this.progressProps(goalStats)} />
               )}
 
               {donationValue1 <= 0 ? null : (
