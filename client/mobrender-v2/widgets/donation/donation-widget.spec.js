@@ -11,7 +11,7 @@ const FinishMessageCustom = () => (<div />)
 const DonationWidget = factoryDonation({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: TellAFriend
-}) 
+})
 
 describe('<DonationWidget />', () => {
   let donationWidget
@@ -19,11 +19,11 @@ describe('<DonationWidget />', () => {
     mobilization: Map({ id: 1, header_font: 'Ubuntu Mono' }),
     widget: Map({ id: 3, kind: 'donation', settings: {} })
   })
-  
+
   beforeEach(() => {
     donationWidget = mount(<DonationWidget {...props.toJS()} />)
   })
-  
+
   it('should render without crash', () => {
     // TODO: Change displayName for this component
     expect(DonationWidget.displayName).to.equal('Donation')
@@ -73,7 +73,7 @@ describe('<DonationWidget />', () => {
   it('should render finish message custom when type "custom" is defined', () => {
     // TODO: This behavior is confused
     donationWidget.instance().setState({ loading: false, success: true })
-    const newProps = props.mergeDeep(Map({ 
+    const newProps = props.mergeDeep(Map({
       widget: Map({
         settings: Map({
           finish_message_type: 'custom'
@@ -89,7 +89,7 @@ describe('<DonationWidget />', () => {
   })
 
   describe('when payment method is users_choice', () => {
-  
+
     beforeEach(() => {
       const newProps = props.mergeDeep(Map({
         widget: Map({
@@ -100,7 +100,7 @@ describe('<DonationWidget />', () => {
     })
 
     it('should render options to user choice between recurring or unique', () => {
-      expect(donationWidget.find('a.payment-type').length).to.equal(2) 
+      expect(donationWidget.find('a.payment-type').length).to.equal(2)
     })
 
     it('should render a different period for recurring payment', () => {
@@ -124,7 +124,7 @@ describe('<DonationWidget />', () => {
       })).toJS())
       expect(donationWidget.find('a.payment-type').at(0).text())
         .to.equal('Apoiar todo ano')
-    }) 
+    })
 
     it('should select payment type recurring', () => {
       // simulate a click on recurring payment type
@@ -142,7 +142,7 @@ describe('<DonationWidget />', () => {
   })
 
   describe('donation values', () => {
-    
+
     const values = [5, 10, 20, 25, 30]
 
     beforeEach(() => {
@@ -169,13 +169,13 @@ describe('<DonationWidget />', () => {
       // recurring monthly by default
       values.map((value, i) => {
         expect(donationWidget.find('a.value-option').at(i).text())
-          .to.equal(`R$ ${value} /mês`) 
+          .to.equal(`R$ ${value} /mês`)
       })
       // unique
       donationWidget.setState({ selected_payment_type: 'unique' })
       values.map((value, i) => {
         expect(donationWidget.find('a.value-option').at(i).text())
-          .to.equal(`R$ ${value}`) 
+          .to.equal(`R$ ${value}`)
       })
     })
 
@@ -185,7 +185,7 @@ describe('<DonationWidget />', () => {
         donationWidget.find('a.value-option').at(i).simulate('click')
         expect(donationWidget.instance().state.selected_value)
           .to.equal(i+1)
-      }) 
+      })
     })
   })
 
@@ -215,8 +215,35 @@ describe('<DonationWidget />', () => {
       selectedValue: data.selectedValue,
       selectedPaymentType: data.selectedPaymentType
     })
-    
+
     donationWidget.find('.btn').simulate('click')
     expect(expected).to.deep.equal(data)
+  })
+
+  describe('donation progress bar', () => {
+    it('should render the progress bar if the `donationGoalStats` exists', () => {
+      donationWidget.setProps({
+        donationGoalStats: {
+          data: '{ "progress": 50, "goal": 1000 }',
+          loading: false
+        }
+      })
+      expect(donationWidget.find('.donation-goal-progress')).to.have.length(1)
+    })
+
+    it('should not render the progress bar if the `donationGoalStats` does not exists', () => {
+      donationWidget.setProps({ donationGoalStats: undefined })
+      expect(donationWidget.find('.donation-goal-progress')).to.have.length(0)
+    })
+
+    it('should not render the progress bar if the `loading` is true', () => {
+      donationWidget.setProps({
+        donationGoalStats: {
+          data: '{ "progress": 50, "goal": 1000 }',
+          loading: true
+        }
+      })
+      expect(donationWidget.find('.donation-goal-progress')).to.have.length(0)
+    })
   })
 })

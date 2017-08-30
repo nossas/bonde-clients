@@ -66,11 +66,19 @@ export default ({
     }
 
     renderButton () {
-      const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
+      const {
+        configurable,
+        widget,
+        donationGoalStats: goal,
+        mobilization: { header_font: headerFont }
+      } = this.props
+
       const {
         selected_value: selectedValue,
         selected_payment_type: selectedPaymentType
       } = this.state
+
+      const goalStats = !goal || goal.loading ? undefined : JSON.parse(goal.data)
 
       const buttonText = ((widget.settings && widget.settings.button_text) ? widget.settings.button_text : 'Doar agora')
       const titleText = ((widget.settings && widget.settings.title_text) ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
@@ -89,9 +97,6 @@ export default ({
       const periodLabelCurrent = periodLabelOptions[recurringPeriod]
       const periodLabel = paymentType === 'unique' || selectedPaymentType === 'unique' ? ''
         : periodLabelCurrent
-
-      const goal = 100000
-      const progress = 50
 
       if (!configurable) {
         return (
@@ -124,25 +129,27 @@ export default ({
                 </a>
               </div> : ''}
 
-              <div className='donation-goal-progress'>
-                <Progress value={progress} />
-                <div className='progress-description'>
-                  <div className='progress-value'>
-                    {progress}%
-                  </div>
-                  <div className='goal-value'>
-                    {
-                      formatNumber({
-                        prefix: 'R$ ',
-                        integerSeparator: '.',
-                        decimal: ',',
-                        padRight: 2,
-                        truncate: 2
-                      })(goal)
-                    }
+              {goalStats && (
+                <div className='donation-goal-progress'>
+                  <Progress value={goalStats.progress} />
+                  <div className='progress-description'>
+                    <div className='progress-value'>
+                      {formatNumber({ decimal: ',', truncate: 0 })(goalStats.progress)}%
+                    </div>
+                    <div className='goal-value'>
+                      {
+                        formatNumber({
+                          prefix: 'R$ ',
+                          integerSeparator: '.',
+                          decimal: ',',
+                          padRight: 2,
+                          truncate: 2
+                        })(goalStats.goal)
+                      }
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {donationValue1 <= 0 ? null : (
                 <a
