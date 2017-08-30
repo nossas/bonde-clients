@@ -68,7 +68,7 @@ export default ({
     renderButton () {
       const {
         configurable,
-        widget,
+        widget: { settings },
         donationGoalStats: goal,
         mobilization: { header_font: headerFont }
       } = this.props
@@ -80,23 +80,23 @@ export default ({
 
       const goalStats = !goal || goal.loading ? undefined : JSON.parse(goal.data)
 
-      const buttonText = ((widget.settings && widget.settings.button_text) ? widget.settings.button_text : 'Doar agora')
-      const titleText = ((widget.settings && widget.settings.title_text) ? widget.settings.title_text : 'Clique para configurar seu bloco de doação')
+      const buttonText = (settings && settings.button_text) || 'Doar agora'
+      const titleText = (settings && settings.title_text) || 'Clique para configurar seu bloco de doação'
 
-      const donationValue1 = ((widget.settings && widget.settings.donation_value1) ? widget.settings.donation_value1 : 0)
-      const donationValue2 = ((widget.settings && widget.settings.donation_value2) ? widget.settings.donation_value2 : 0)
-      const donationValue3 = ((widget.settings && widget.settings.donation_value3) ? widget.settings.donation_value3 : 0)
-      const donationValue4 = ((widget.settings && widget.settings.donation_value4) ? widget.settings.donation_value4 : 0)
-      const donationValue5 = ((widget.settings && widget.settings.donation_value5) ? widget.settings.donation_value5 : 0)
-      const mainColor = ((widget.settings && widget.settings.main_color) ? widget.settings.main_color : '#54d0f6')
+      const donationValue1 = (settings && settings.donation_value1) || 0
+      const donationValue2 = (settings && settings.donation_value2) || 0
+      const donationValue3 = (settings && settings.donation_value3) || 0
+      const donationValue4 = (settings && settings.donation_value4) || 0
+      const donationValue5 = (settings && settings.donation_value5) || 0
+      const mainColor = (settings && settings.main_color) || '#54d0f6'
 
-      const paymentType = ((widget.settings && widget.settings.payment_type) ? widget.settings.payment_type : 'unique')
-      const recurringPeriod = ((widget.settings && widget.settings.recurring_period) ? widget.settings.recurring_period : 30)
+      const paymentType = (settings && settings.payment_type) || 'unique'
+      const recurringPeriod = (settings && settings.recurring_period) || 30
 
+      const isUniquePayment = paymentType === 'unique' || selectedPaymentType === 'unique'
       const periodLabelOptions = { 30: 'mês', 180: 'semestre', 365: 'ano' }
       const periodLabelCurrent = periodLabelOptions[recurringPeriod]
-      const periodLabel = paymentType === 'unique' || selectedPaymentType === 'unique' ? ''
-        : periodLabelCurrent
+      const periodLabel = isUniquePayment ? '' : periodLabelCurrent
 
       if (!configurable) {
         return (
@@ -108,10 +108,11 @@ export default ({
               {titleText}
             </h2>
             <script dangerouslySetInnerHTML={{__html: `
-  (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`}} />
+(function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`
+            }} />
             <div className='p3 relative'>
 
               {paymentType === 'users_choice' ? <div className='mb2 clearfix'>

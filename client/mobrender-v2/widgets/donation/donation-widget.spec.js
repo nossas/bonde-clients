@@ -32,10 +32,10 @@ describe('<DonationWidget />', () => {
 
   it('should insert Pagarme script', () => {
     const pagarmeScriptHTML = `
-  (function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`
+(function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`
     expect(donationWidget.find('script').props()).to.deep.equal({
       dangerouslySetInnerHTML: { __html: pagarmeScriptHTML }
     })
