@@ -116,8 +116,8 @@ export default ({
     renderButton () {
       const {
         configurable,
-        widget: { settings },
-        donationGoalStats: goal,
+        widget: { settings, goal },
+        donationGoalStats,
         mobilization: { header_font: headerFont }
       } = this.props
 
@@ -126,7 +126,13 @@ export default ({
         selected_payment_type: selectedPaymentType
       } = this.state
 
-      const goalStats = !goal || goal.loading ? undefined : JSON.parse(goal.data)
+      const goalStats = (
+        !donationGoalStats ||
+        !donationGoalStats.data ||
+        donationGoalStats.loading
+      )
+        ? undefined
+        : JSON.parse(donationGoalStats.data)
 
       const buttonText = (settings && settings.button_text) || 'Doar agora'
       const titleText = (settings && settings.title_text) || 'Clique para configurar seu bloco de doação'
@@ -178,7 +184,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 </a>
               </div> : ''}
 
-              {goalStats && (
+              {goalStats && goal && (
                 <Progress className='my1' {...this.progressProps(goalStats)} />
               )}
 
