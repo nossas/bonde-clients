@@ -33,10 +33,14 @@ const validate = values => {
     errors.button_text = 'O limite de caracteres foi atingido.'
   }
 
-  if (values.goal && String(values.goal).replace(/\./g, '').match(/\D/g)) {
-    errors.goal = 'Formato inválido. ' +
-      'Utilize apenas números e ponto como separador decimal. ' +
-      'Ex: 10000.50'
+  if (values.goal) {
+    const hasAlphanumerics = String(values.goal).replace(/\./g, '').match(/\D/g)
+    const hasMultipleDots = String(values.goal).match(/\./g || []).length > 1
+    if (hasAlphanumerics || hasMultipleDots) {
+      errors.goal = 'Formato inválido. ' +
+        'Utilize apenas números e ponto como separador decimal. ' +
+        'Ex: 10000.50'
+    }
   }
   return errors
 }
