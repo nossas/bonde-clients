@@ -35,7 +35,7 @@ const validate = values => {
 
   if (values.goal) {
     const hasAlphanumerics = String(values.goal).replace(/\./g, '').match(/\D/g)
-    const hasMultipleDots = String(values.goal).match(/\./g || []).length > 1
+    const hasMultipleDots = (String(values.goal).match(/\./g) || []).length > 1
     if (hasAlphanumerics || hasMultipleDots) {
       errors.goal = 'Formato inválido. ' +
         'Utilize apenas números e ponto como separador decimal. ' +
