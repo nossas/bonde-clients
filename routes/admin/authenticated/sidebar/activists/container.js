@@ -6,7 +6,10 @@ import {
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
 
+import FilterForm from './component/filter-form'
+
 if (require('exenv').canUseDOM) require('./styles.scss')
+
 
 const QueryForm = ({
   query,
@@ -14,7 +17,8 @@ const QueryForm = ({
   onSubmit,
   label,
   buttonText,
-  name
+  name,
+  communityId
 }) => (
   <form
     className='query-form pr4 pl3 border-box'
@@ -24,6 +28,13 @@ const QueryForm = ({
     }}
   >
     <i className='fa fa-search' aria-hidden='true' />
+    <FilterForm
+      name={name}
+      communityId={communityId}
+      query={query}
+      onQueryChange={onQueryChange}
+    />
+    {/*
     <input
       id={`${name}Id`}
       type='text'
@@ -31,6 +42,7 @@ const QueryForm = ({
       value={query}
       placeholder={label}
     />
+    */}
     {buttonText && (
       <input
         className='absolute'
@@ -137,7 +149,8 @@ class Container extends Component {
       selected,
       onSelectAll,
       onRemoveAll,
-      selecting
+      selecting,
+      communityId
     } = this.props
     const isSelectedAll = (
       selected.length > 0 && selected.length === totalCount
@@ -152,6 +165,7 @@ class Container extends Component {
           onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
           onQueryChange={this.props.onQueryChange}
+          communityId={communityId}
         />
         <SettingsPageContentLayout>
           <div className={(
