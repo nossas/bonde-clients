@@ -42,6 +42,20 @@ const validate = values => {
         'Ex: 10000.50'
     }
   }
+
+  if (values.goal_date_limit) {
+    if (!values.goal_date_limit.match(/\d{2}\/\d{2}\/\d{2}/)) {
+      errors.goal_date_limit = 'Formato de data inválido. Ex: DD/MM/AAAA'
+    }
+    else {
+      const [day, month, year] = values.goal_date_limit.split('/')
+      const dateLimitCandidate = new Date(`${year}-${month}-${day}`)
+
+      if (dateLimitCandidate.toString() === 'Invalid Date') {
+        errors.goal_date_limit = 'Data inválida.'
+      }
+    }
+  }
   return errors
 }
 
