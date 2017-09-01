@@ -81,7 +81,7 @@ const DonationSettingsPage = props => {
           {...goal}
         >
           <ControlLabel>Meta da campanha</ControlLabel>
-          <FormControl type='text' placeholder='Ex.: 30000.50' />
+          <FormControl type='text' placeholder='Ex.: 50000' />
         </FormGroup>
 
         <FormGroup
