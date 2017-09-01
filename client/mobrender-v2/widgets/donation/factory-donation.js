@@ -65,9 +65,17 @@ export default ({
       })
     }
 
-    progressProps (goalStats) {
+    renderProgressBar (mainColor) {
       let goalDateRemaining
-      const { widget: { settings } } = this.props
+      const { donationGoalStats, widget: { settings, goal } } = this.props
+
+      const goalStats = (
+        !donationGoalStats ||
+        !donationGoalStats.data ||
+        donationGoalStats.loading
+      )
+        ? undefined
+        : JSON.parse(donationGoalStats.data)
 
       if (settings && settings.goal_date_limit) {
         const now = new Date()
@@ -84,11 +92,22 @@ export default ({
         valueBottomRight: ''
       }
 
-      // Top
-      if (goalStats.pledged) {
-        props.valueTopLeft = (
-          <b>{formatNumberHelper.currency(goalStats.pledged)} arrecadados!</b>
-        )
+      if (goalStats) {
+        if (goalStats.pledged) {
+          props.valueTopLeft = (
+            <b>{formatNumberHelper.currency(goalStats.pledged)} arrecadados!</b>
+          )
+        }
+        if (goalStats.progress) {
+          props.value = goalStats.progress
+        }
+        if (goalStats.total_donations) {
+          props.valueBottomLeft = `${goalStats.total_donations} doações`
+        }
+      }
+
+      if (goal) {
+        props.valueBottomRight = `Meta: ${formatNumberHelper.currency(goal)}`
       }
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
@@ -104,18 +123,10 @@ export default ({
 
         props.valueTopRight = <b>{props.valueTopRight}</b>
       }
-      // Bottom
-      if (goalStats.progress) {
-        props.value = goalStats.progress
-      }
-      if (goalStats.total_donations) {
-        props.valueBottomLeft = `${goalStats.total_donations} doações`
-      }
-      if (goalStats.goal) {
-        props.valueBottomRight = `Meta: ${formatNumberHelper.currency(goalStats.goal)}`
-      }
 
-      return props
+      return (goal || goalDateRemaining !== undefined) && (
+        <Progress className='my1' fillColor={mainColor} {...props} />
+      )
     }
 
     renderButton () {
@@ -130,14 +141,6 @@ export default ({
         selected_value: selectedValue,
         selected_payment_type: selectedPaymentType
       } = this.state
-
-      const goalStats = (
-        !donationGoalStats ||
-        !donationGoalStats.data ||
-        donationGoalStats.loading
-      )
-        ? undefined
-        : JSON.parse(donationGoalStats.data)
 
       const buttonText = (settings && settings.button_text) || 'Doar agora'
       const titleText = (settings && settings.title_text) || 'Clique para configurar seu bloco de doação'
@@ -189,13 +192,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 </a>
               </div> : ''}
 
-              {goalStats && goal && (
-                <Progress
-                  className='my1'
-                  fillColor={mainColor}
-                  {...this.progressProps(goalStats)}
-                />
-              )}
+              {this.renderProgressBar(mainColor)}
 
               {donationValue1 <= 0 ? null : (
                 <a

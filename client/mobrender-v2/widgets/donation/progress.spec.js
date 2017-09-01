@@ -45,12 +45,6 @@ describe('client/mobrender-v2/widgets/donation/progress', () => {
     expect(progress.find('.progress-top > .progress-top-left').text()).to.be.equal(text)
   })
 
-  it('should render the `valueTopCenter` prop value in .progress-top-center properly', () => {
-    const text = 'Foo'
-    progress = shallow(<Progress value={50} valueTopCenter={text} />)
-    expect(progress.find('.progress-top > .progress-top-center').text()).to.be.equal(text)
-  })
-
   it('should render the `valueTopRight` prop value in .progress-top-right properly', () => {
     const text = 'Foo'
     progress = shallow(<Progress value={50} valueTopRight={text} />)
@@ -61,12 +55,6 @@ describe('client/mobrender-v2/widgets/donation/progress', () => {
     const text = 'Foo'
     progress = shallow(<Progress value={50} valueBottomLeft={text} />)
     expect(progress.find('.progress-bottom > .progress-bottom-left').text()).to.be.equal(text)
-  })
-
-  it('should render the `valueBottomCenter` prop value in .progress-bottom-center properly', () => {
-    const text = 'Foo'
-    progress = shallow(<Progress value={50} valueBottomCenter={text} />)
-    expect(progress.find('.progress-bottom > .progress-bottom-center').text()).to.be.equal(text)
   })
 
   it('should render the `valueBottomRight` prop value in .progress-bottom-right properly', () => {

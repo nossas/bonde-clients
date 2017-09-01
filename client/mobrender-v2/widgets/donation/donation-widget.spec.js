@@ -232,27 +232,32 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       expect(donationWidget.find('Progress')).to.have.length(1)
     })
 
-    it('should not render the progress bar if only `donationGoalStats` exists', () => {
+    it('should render the progress bar if only `widget.goal` exists', () => {
       donationWidget.setProps({
-        widget: { ...props.widget },
-        donationGoalStats: {
-          data: '{ "progress": 50, "goal": 1000 }',
-          loading: false
+        widget: { ...props.widget, goal: 1000.50 }
+      })
+      expect(donationWidget.find('Progress')).to.have.length(1)
+    })
+
+    it('should render the progress bar if only `widget.settings.goal_date_limit` exists', () => {
+      const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' }
+      const [year, month, day] = new Date().toLocaleString('pt-BR', dateOptions).split('-')
+
+      donationWidget.setProps({
+        widget: { ...props.widget,
+          settings: {
+            goal_date_limit: `${day}/${month}/${year}` }
         }
       })
-      expect(donationWidget.find('Progress')).to.have.length(0)
+      expect(donationWidget.find('Progress')).to.have.length(1)
     })
 
-    it('should not render the progress bar if only `widget.goal` exists', () => {
-      donationWidget.setProps({
-        widget: { ...props.widget, goal: 10000.50 }
-      })
-      expect(donationWidget.find('Progress')).to.have.length(0)
-    })
+    it('should not render the progress bar if all goal props does not exists', () => {
+      const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' }
+      const [year, month, day] = new Date().toLocaleString('pt-BR', dateOptions).split('-')
 
-    it('should not render the progress bar if `donationGoalStats` does not exists', () => {
-      donationWidget.setProps({ donationGoalStats: undefined })
-      expect(donationWidget.find('.donation-goal-progress')).to.have.length(0)
+      donationWidget.setProps(props)
+      expect(donationWidget.find('Progress')).to.have.length(0)
     })
 
     it('should not render the progress bar if `loading` is true', () => {
