@@ -104,23 +104,23 @@ const DonationSettingsPage = props => {
         <HorizontalLayout cols={5}>
           <FormGroup controlId='donation-value1-id' {...donationValue1}>
             <ControlLabel>Valor 1</ControlLabel>
-            <FormControl type='number' placeholder='R$20' />
+            <FormControl placeholder='R$20' />
           </FormGroup>
           <FormGroup controlId='donation-value2-id' {...donationValue2}>
             <ControlLabel>Valor 2</ControlLabel>
-            <FormControl type='number' placeholder='R$50' />
+            <FormControl placeholder='R$50' />
           </FormGroup>
           <FormGroup controlId='donation-value3-id' {...donationValue3}>
             <ControlLabel>Valor 3</ControlLabel>
-            <FormControl type='number' placeholder='R$100' />
+            <FormControl placeholder='R$100' />
           </FormGroup>
           <FormGroup controlId='donation-value4-id' {...donationValue4}>
             <ControlLabel>Valor 4</ControlLabel>
-            <FormControl type='number' placeholder='R$200' />
+            <FormControl placeholder='R$200' />
           </FormGroup>
           <FormGroup controlId='donation-value5-id' {...donationValue5}>
             <ControlLabel>Valor 5</ControlLabel>
-            <FormControl type='number' placeholder='R$500' />
+            <FormControl placeholder='R$500' />
           </FormGroup>
         </HorizontalLayout>
         <RadioGroup className='flex flex-wrap'>

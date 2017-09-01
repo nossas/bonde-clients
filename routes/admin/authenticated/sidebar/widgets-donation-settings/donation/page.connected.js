@@ -33,6 +33,13 @@ const validate = values => {
     errors.button_text = 'O limite de caracteres foi atingido.'
   }
 
+  const hasAlphaNumerics = value => value && String(value).match(/\D/g)
+  if (hasAlphaNumerics(values.donation_value1)) errors.donation_value1 = 'Inválido'
+  if (hasAlphaNumerics(values.donation_value2)) errors.donation_value2 = 'Inválido'
+  if (hasAlphaNumerics(values.donation_value3)) errors.donation_value3 = 'Inválido'
+  if (hasAlphaNumerics(values.donation_value4)) errors.donation_value4 = 'Inválido'
+  if (hasAlphaNumerics(values.donation_value5)) errors.donation_value5 = 'Inválido'
+
   if (values.goal) {
     const hasAlphanumerics = String(values.goal).replace(/\./g, '').match(/\D/g)
     const hasMultipleDots = (String(values.goal).match(/\./g) || []).length > 1
