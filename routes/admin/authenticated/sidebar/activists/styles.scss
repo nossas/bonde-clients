@@ -21,7 +21,7 @@
   i {
     font-size: 25px;
     position: absolute;
-    margin: 20px 0;
+    margin: 12px 0;
     color: #4a4a4a;
   }
 }
@@ -86,5 +86,131 @@
     font-size: 22px;
     font-weight: bold;
     color: #222222;
+  }
+}
+
+// Autocomplete
+.Select {
+  position: relative;
+  margin-left: 30px;
+
+  div, input, span {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .Select-control {
+    color: #333;
+    cursor: default;
+    display: table;
+    border-spacing: 0;
+    border-collapse: separate;
+    height: 47px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .Select-placeholder,
+  &.Select--single > .Select-control .Select-value {
+    bottom: 0;
+    color: #333333;
+    left: 0;
+    line-height: 20px;
+    padding: 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif;
+  }
+
+  .Select-input {
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+
+    input {
+      height: 45px;
+      border: none;
+      background: none;
+    }
+  }
+
+  .Select-value-label {
+    font-family: 'Source Sans Pro', 'Proxima Nova', sans-serif;
+    font-weight: 500;
+    line-height: 23px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    background-color: #ff0099;
+    color: #fff;
+  }
+
+  .Select-menu-outer {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top-color: #e6e6e6;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    margin-top: -1px;
+    max-height: 200px;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .Select-menu {
+    max-height: 198px;
+    overflow-y: auto;
+  }
+  
+  .Select-option {
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #666666;
+    cursor: pointer;
+    display: block;
+    padding: 8px 10px;
+  }
+  .Select-option:last-child {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .Select-option.is-selected {
+    background-color: #FF0099;
+    /* Fallback color for IE 8 */
+    background-color: rgba(255, 0, 153, 0.05);
+    color: #333;
+  }
+  
+  .Select-option.is-focused {
+    background-color: #FF0099;
+    /* Fallback color for IE 8 */
+    background-color: rgba(255, 0, 153, 0.05);
+    color: #333;
+  }
+  
+  .Select-option.is-disabled {
+    color: #cccccc;
+    cursor: default;
+  }
+  
+  .Select-noresults {
+    box-sizing: border-box;
+    color: #999999;
+    cursor: default;
+    display: block;
+    padding: 8px 10px;
   }
 }

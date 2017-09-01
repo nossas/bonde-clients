@@ -32,6 +32,7 @@ const QueryForm = ({
       name={name}
       communityId={communityId}
       query={query}
+      placeholder={label}
       onQueryChange={onQueryChange}
     />
     {/*
@@ -196,6 +197,7 @@ class Container extends Component {
               <div>
                 {data.map(d => (
                   <Row
+                    key={`row-${d.id}`}
                     obj={d}
                     isSelected={selected.indexOf(d.id) !== -1}
                     isActived={this.state.item === d}

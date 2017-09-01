@@ -16,7 +16,14 @@ const tagsByCommunityQuery = gql`
 `
 
 
-const FilterForm = ({ name, query, onQueryChange, communityId, client }) => {
+const FilterForm = ({
+  name,
+  query,
+  placeholder,
+  onQueryChange,
+  communityId,
+  client
+}) => {
   const getOptions = (input) => {
     return client.query({
       query: tagsByCommunityQuery,
@@ -49,6 +56,7 @@ const FilterForm = ({ name, query, onQueryChange, communityId, client }) => {
   return (
     <Select.Async
       name={name}
+      placeholder={placeholder}
       value={query}
       loadOptions={getOptions}
       onChange={parseValueToEvent}
