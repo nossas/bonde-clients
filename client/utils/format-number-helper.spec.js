@@ -14,4 +14,14 @@ describe('client/utils/format-number-helper', () => {
       expect(helper.number(1000)).to.be.equal('1.000')
     })
   })
+  describe('float', () => {
+    it('should return an integer number in float format', () => {
+      expect(helper.float(1000)).to.be.equal('1000.00')
+    })
+  })
+  describe('integer', () => {
+    it('should return a float number in integer format', () => {
+      expect(helper.integer(1000.5)).to.be.equal('1000')
+    })
+  })
 })

@@ -8,7 +8,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     initialValues: {
-      goal: goal ? formatNumberHelper.float(goal) : undefined,
+      goal: goal ? formatNumberHelper.integer(goal) : undefined,
       default_donation_value: 1,
       main_color: '#54d0f6',
       recurring_period: 30,
@@ -26,6 +26,8 @@ const fields = [
 ]
 
 const validate = values => {
+  const hasAlphanumerics = value => value && String(value).match(/\D/g)
+
   const errors = {}
   if (!values.button_text) {
     errors.button_text = 'Insira o texto do botão'
@@ -33,22 +35,13 @@ const validate = values => {
     errors.button_text = 'O limite de caracteres foi atingido.'
   }
 
-  const hasAlphaNumerics = value => value && String(value).match(/\D/g)
-  if (hasAlphaNumerics(values.donation_value1)) errors.donation_value1 = 'Inválido'
-  if (hasAlphaNumerics(values.donation_value2)) errors.donation_value2 = 'Inválido'
-  if (hasAlphaNumerics(values.donation_value3)) errors.donation_value3 = 'Inválido'
-  if (hasAlphaNumerics(values.donation_value4)) errors.donation_value4 = 'Inválido'
-  if (hasAlphaNumerics(values.donation_value5)) errors.donation_value5 = 'Inválido'
+  if (hasAlphanumerics(values.donation_value1)) errors.donation_value1 = 'Inválido.'
+  if (hasAlphanumerics(values.donation_value2)) errors.donation_value2 = 'Inválido.'
+  if (hasAlphanumerics(values.donation_value3)) errors.donation_value3 = 'Inválido.'
+  if (hasAlphanumerics(values.donation_value4)) errors.donation_value4 = 'Inválido.'
+  if (hasAlphanumerics(values.donation_value5)) errors.donation_value5 = 'Inválido.'
 
-  if (values.goal) {
-    const hasAlphanumerics = String(values.goal).replace(/\./g, '').match(/\D/g)
-    const hasMultipleDots = (String(values.goal).match(/\./g) || []).length > 1
-    if (hasAlphanumerics || hasMultipleDots) {
-      errors.goal = 'Formato inválido. ' +
-        'Utilize apenas números e ponto como separador decimal. ' +
-        'Ex: 10000.50'
-    }
-  }
+  if (hasAlphanumerics(values.goal)) errors.goal = 'Não é permitido número decimal.'
 
   if (values.goal_date_limit) {
     if (!values.goal_date_limit.match(/\d{2}\/\d{2}\/\d{2}/)) {
