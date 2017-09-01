@@ -53,11 +53,6 @@ const DonationSettingsPage = props => {
       }}
       successMessage='Formulário de doação configurado com sucesso!'
     >
-      <FormGroup controlId='title-text-id' {...titleText}>
-        <ControlLabel>Título do bloco de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
-      </FormGroup>
-
       <FormGroup controlId='payment-type-id' {...paymentType}>
         <ControlLabel>Tipo de doação</ControlLabel>
         <RadioGroup>
@@ -78,19 +73,30 @@ const DonationSettingsPage = props => {
         </FormGroup>
       )}
 
-      <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Defina a cor da página de pagamento</ControlLabel>
-        <HelpBlock>
-          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
-        </HelpBlock>
-        <ColorPicker
-          dispatch={dispatch}
-          theme={colorScheme.replace('-scheme', '')}
-        />
-      </FormGroup>
+      <div className='clearfix mxn1'>
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goal}
+        >
+          <ControlLabel>Meta da campanha</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: 30000.50' />
+        </FormGroup>
+
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-date-limit-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goalDateLimit}
+        >
+          <ControlLabel>Prazo de arrecadação</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: DD/MM/AAAA' />
+        </FormGroup>
+      </div>
 
       <FormGroup controlId='default-donation-value' {...defaultDonationValue}>
-        <ControlLabel>Defina os valores para o bloco de doação</ControlLabel>
+        <ControlLabel>Valores das doações</ControlLabel>
         <HelpBlock>
           Você pode ter até 5 valores por bloco de doação. Preencha apenas com números
           inteiros (Ex: 50)
@@ -117,7 +123,7 @@ const DonationSettingsPage = props => {
             <FormControl type='number' placeholder='R$500' />
           </FormGroup>
         </HorizontalLayout>
-        <RadioGroup className='flex flex-wrap' style={{ marginTop: '-1rem' }}>
+        <RadioGroup className='flex flex-wrap'>
           <Radio className='col col-2' title={donationValueTitle} value='1'>Default</Radio>
           <Radio className='col col-2' title={donationValueTitle} value='2'>Default</Radio>
           <Radio className='col col-2' title={donationValueTitle} value='3'>Default</Radio>
@@ -127,30 +133,24 @@ const DonationSettingsPage = props => {
         <HelpBlock>*todos os valores são em reais</HelpBlock>
       </FormGroup>
 
-      <div className='clearfix mxn1'>
-        <FormGroup
-          className='col col-12 lg-col-6'
-          controlId='goal-value'
-          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
-          {...goal}
-        >
-          <ControlLabel>Meta de doação</ControlLabel>
-          <FormControl type='text' placeholder='Ex.: 30000.50' />
-        </FormGroup>
+      <FormGroup controlId='title-text-id' {...titleText}>
+        <ControlLabel>Título da caixa de doação</ControlLabel>
+        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
+      </FormGroup>
 
-        <FormGroup
-          className='col col-12 lg-col-6'
-          controlId='goal-date-limit-value'
-          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
-          {...goalDateLimit}
-        >
-          <ControlLabel>Data limite da meta de doação</ControlLabel>
-          <FormControl type='text' placeholder='Ex.: DD/MM/AAAA' />
-        </FormGroup>
-      </div>
+      <FormGroup controlId='main-color-id' {...mainColor}>
+        <ControlLabel>Cor da caixa de doação</ControlLabel>
+        <HelpBlock>
+          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
+        </HelpBlock>
+        <ColorPicker
+          dispatch={dispatch}
+          theme={colorScheme.replace('-scheme', '')}
+        />
+      </FormGroup>
 
       <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>Texto do botão de doação</ControlLabel>
+        <ControlLabel>Texto do botão de confirmação</ControlLabel>
         <FormControl type='text' placeholder='Ex.: Doe agora!' />
       </FormGroup>
 
@@ -166,7 +166,8 @@ const DonationSettingsPage = props => {
       <FormGroup>
         <ControlLabel>Conta bancária</ControlLabel>
         <HelpBlock>
-          Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.
+          Esta campanha está associada à conta bancária cadastrada nas configurações
+          dessa comunidade ;)
         </HelpBlock>
       </FormGroup>
     </SettingsForm>
