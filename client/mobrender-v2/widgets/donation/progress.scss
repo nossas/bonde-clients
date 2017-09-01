@@ -105,6 +105,10 @@ $colors: (
 
     .progress-value {
       height: 100%;
+      display: flex;
+      justify-content: center;
+
+      .percentage { font-size: .75rem }
 
       // Colors
       @each $name, $pair in $colors {
@@ -121,5 +125,14 @@ $colors: (
   .progress-top, .progress-bottom {
     display: flex;
     justify-content: space-between;
+  }
+
+  .progress-top-left, .progress-bottom-left { text-align: left }
+  .progress-top-center, .progress-bottom-center { text-align: center }
+  .progress-top-right, .progress-bottom-right { text-align: right }
+
+  .flex-col {
+    flex-basis: 0;
+    flex-grow: 1;
   }
 }

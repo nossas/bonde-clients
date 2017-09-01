@@ -73,39 +73,49 @@ export default ({
         const now = new Date()
         const [day, month, year] = settings.goal_date_limit.split('/')
         const goalDate = new Date(`${year}-${month}-${day}`)
-        goalDateRemaining = parseInt((goalDate - now) / (1000 * 60 * 60 * 24))
+        goalDateRemaining = Math.ceil((goalDate - now) / (1000 * 60 * 60 * 24))
       }
 
-      let value = 0
-      let valueTopLeft = ''
-      let valueTopRight = ''
-      let valueBottomLeft = ''
-      let valueBottomRight = ''
+      const props = {
+        value: 0,
+        valueTopLeft: '',
+        valueTopRight: '',
+        valueBottomLeft: '',
+        valueBottomRight: ''
+      }
 
-      if (goalStats.total_donations) {
-        valueTopLeft = `${goalStats.total_donations} doações`
+      // Top
+      if (goalStats.pledged) {
+        props.valueTopLeft = (
+          <b>{formatNumberHelper.currency(goalStats.pledged)} arrecadados!</b>
+        )
       }
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
 
         if (goalDateRemaining === 0)
-          valueTopRight = 'último dia!'
+          props.valueTopRight = 'último dia!'
 
         else if (goalDateRemaining === 7)
-          valueTopRight = 'última semana!'
+          props.valueTopRight = 'última semana!'
 
         else if (goalDateRemaining > 0)
-          valueTopRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
+          props.valueTopRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
+
+        props.valueTopRight = <b>{props.valueTopRight}</b>
       }
+      // Bottom
       if (goalStats.progress) {
-        value = goalStats.progress
-        valueBottomLeft = `${parseInt(goalStats.progress)}%`
+        props.value = goalStats.progress
+      }
+      if (goalStats.total_donations) {
+        props.valueBottomLeft = `${goalStats.total_donations} doações`
       }
       if (goalStats.goal) {
-        valueBottomRight = formatNumberHelper.currency(goalStats.goal)
+        props.valueBottomRight = `Meta: ${formatNumberHelper.currency(goalStats.goal)}`
       }
 
-      return { value, valueTopLeft, valueTopRight, valueBottomLeft, valueBottomRight }
+      return props
     }
 
     renderButton () {
