@@ -86,21 +86,16 @@ export default ({
         valueTopLeft = `${goalStats.total_donations} doações`
       }
       if (goalDateRemaining !== undefined) {
+        const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
+
         if (goalDateRemaining === 0)
-          valueTopRight = 'último dia dentro do prazo'
-        else if (goalDateRemaining < 0) {
-          const positiveDay = goalDateRemaining * -1
-          const pluralizeDay = positiveDay === 1 ? 'dia' : 'dias'
-          valueTopRight = (
-            <span style={{ color: 'hsl(348, 100%, 61%)' }}>
-              {positiveDay} {pluralizeDay} de atraso
-            </span>
-          )
-        }
-        else {
-          const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
-          valueTopRight = `${goalDateRemaining} ${pluralizeDay} faltando`
-        }
+          valueTopRight = 'último dia!'
+
+        else if (goalDateRemaining === 7)
+          valueTopRight = 'última semana!'
+
+        else if (goalDateRemaining > 0)
+          valueTopRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
       }
       if (goalStats.progress) {
         value = goalStats.progress
