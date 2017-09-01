@@ -12,34 +12,31 @@ describe('client/mobrender-v2/widgets/donation/progress', () => {
     expect(progress).to.be.ok
   })
 
-  it('should render a <progress> element', () => {
+  it('should render a <div> element with `progress` class', () => {
     progress = shallow(<Progress value={50} />)
-    expect(progress.find('progress')).to.have.length(1)
+    expect(progress.find('.progress')).to.have.length(1)
   })
 
-  it('should render a <progress> element with `progress` class', () => {
+  it('should render the .progress element as `max` prop with 100 by default', () => {
     progress = shallow(<Progress value={50} />)
-    expect(progress.find('progress.progress')).to.have.length(1)
+    expect(progress.find('.progress').props().max).to.be.equal(100)
   })
 
-  it('should render a <progress> element as `max` prop with 100 by default', () => {
+  it('should render a .progress-value element inside of .progress element', () => {
     progress = shallow(<Progress value={50} />)
-    expect(progress.find('progress.progress').props().max).to.be.equal(100)
+    expect(progress.find('.progress .progress-value')).to.have.length(1)
   })
 
-  it('should render with `is-primary` class when the value is >= 50', () => {
+  it('should render .progress-value element with `fillColor` with turquoise by default', () => {
+    const turquoise = 'hsl(171, 100%, 41%)'
     progress = shallow(<Progress value={50} />)
-    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-primary')
+    expect(progress.find('.progress-value').props().style.backgroundColor).to.be.equal(turquoise)
   })
 
-  it('should render with `is-warning` class when the value is >= 30', () => {
-    progress = shallow(<Progress value={30} />)
-    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-warning')
-  })
-
-  it('should render with `is-danger` class when the value is < 30', () => {
-    progress = shallow(<Progress value={29} />)
-    expect(progress.find('progress.progress').props().className).to.be.equal('progress is-danger')
+  it('should render .progress-value element with `fillColor` properly', () => {
+    const color = '#f00'
+    progress = shallow(<Progress value={50} fillColor={color} />)
+    expect(progress.find('.progress-value').props().style.backgroundColor).to.be.equal(color)
   })
 
   it('should render the `valueTopLeft` prop value in .progress-top-left properly', () => {

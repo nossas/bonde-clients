@@ -11,7 +11,8 @@ const Progress = ({
   valueTopLeft,
   valueTopRight,
   valueBottomLeft,
-  valueBottomRight
+  valueBottomRight,
+  fillColor
 }) => (
   <div className={classnames('progress-container', className)}>
     <div className='progress-top'>
@@ -19,20 +20,14 @@ const Progress = ({
       <div className='progress-top-right'>{valueTopRight}</div>
     </div>
 
-    <progress
-      className={classnames(
-        'progress',
-        {
-          'is-primary': value >= 50,
-          'is-warning': value >= 30 && value < 50,
-          'is-danger': value < 30
-        }
-      )}
-      value={value}
-      max={max}
-    >
-      {value}%
-    </progress>
+    <div className='progress' value={value} max={max}>
+      <div className='progress-value'
+        style={{
+          backgroundColor: fillColor,
+          width: `${value > 100 ? 100 : value}%`
+        }}
+      />
+    </div>
 
     <div className='progress-bottom'>
       <div className='progress-bottom-left'>{valueBottomLeft}</div>
@@ -48,11 +43,13 @@ Progress.propTypes = {
   valueTopLeft: PropTypes.node,
   valueTopRight: PropTypes.node,
   valueBottomLeft: PropTypes.node,
-  valueBottomRight: PropTypes.node
+  valueBottomRight: PropTypes.node,
+  fillColor: PropTypes.string
 }
 
 Progress.defaultProps = {
-  max: 100
+  max: 100,
+  fillColor: 'hsl(171, 100%, 41%)'
 }
 
 export default Progress

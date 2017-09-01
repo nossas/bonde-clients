@@ -185,7 +185,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               </div> : ''}
 
               {goalStats && goal && (
-                <Progress className='my1' {...this.progressProps(goalStats)} />
+                <Progress
+                  className='my1'
+                  fillColor={mainColor}
+                  {...this.progressProps(goalStats)}
+                />
               )}
 
               {donationValue1 <= 0 ? null : (
