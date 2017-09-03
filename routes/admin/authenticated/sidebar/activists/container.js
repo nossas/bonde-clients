@@ -7,6 +7,7 @@ import {
 import { Loading } from '~client/components/await'
 
 import FilterForm from './component/filter-form'
+import ActivistDetailHOC from './component/detail'  
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
@@ -35,15 +36,6 @@ const QueryForm = ({
       placeholder={label}
       onQueryChange={onQueryChange}
     />
-    {/*
-    <input
-      id={`${name}Id`}
-      type='text'
-      onChange={onQueryChange}
-      value={query}
-      placeholder={label}
-    />
-    */}
     {buttonText && (
       <input
         className='absolute'
@@ -108,26 +100,36 @@ const Row = ({ obj, onSelectRow, onClickRow, isSelected, isActived }) => (
   </div>
 )
 
-const Detail = ({ obj, onClose }) => (
-  <div className='detail col col-4 pl2'>
-    <div className='col col-12 title py2'>
-      <span>Perfil</span>
-      <i
-        className='fa fa-close'
-        aria-hidden='true'
-        onClick={() => onClose(obj)}
-      />
-    </div>
-    <div className='col col-12 bg-white py1 px2'>
-      <h3>{obj.name}</h3>
-      <div>
+const Detail = ActivistDetailHOC(
+  ({ obj, onClose, mobilizations }) => (
+    <div className='detail col col-4 pl2'>
+      <div className='col col-12 title py2'>
+        <span>Perfil</span>
+        <i
+          className='fa fa-close'
+          aria-hidden='true'
+          onClick={() => onClose(obj)}
+        />
+      </div>
+      <div className='col col-12 bg-white py1 px2'>
+        <h3>{obj.name}</h3>
         <div>
-          <label>E-mail</label>
-          <p>{obj.email}</p>
+          <div>
+            <label>E-mail</label>
+            <p>{obj.email}</p>
+          </div>
+          <div>
+            <label>Mobilizações</label>
+            <ul>
+              {mobilizations.map(mobilization => (
+                <li key={mobilization.id}>{mobilization.name}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  )
 )
 
 class Container extends Component {
@@ -216,6 +218,8 @@ class Container extends Component {
           </div>
           {this.state.item && (
             <Detail
+              communityId={this.props.communityId}
+              activistId={this.state.item.id}
               obj={this.state.item}
               onClose={this.onClickRow.bind(this)}
             />
