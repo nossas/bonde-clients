@@ -101,7 +101,7 @@ const Row = ({ obj, onSelectRow, onClickRow, isSelected, isActived }) => (
 )
 
 const Detail = ActivistDetailHOC(
-  ({ obj, onClose, mobilizations }) => (
+  ({ obj, onClose, mobilizations, tags }) => (
     <div className='detail col col-4 pl2'>
       <div className='col col-12 title py2'>
         <span>Perfil</span>
@@ -121,8 +121,16 @@ const Detail = ActivistDetailHOC(
           <div>
             <label>Mobilizações</label>
             <ul>
-              {mobilizations.map(mobilization => (
-                <li key={mobilization.id}>{mobilization.name}</li>
+              {mobilizations.map((mob, i) => (
+                <li key={`mob${i}`}>{mob.name}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <label>Etiquetas</label>
+            <ul className='tags'>
+              {tags.map((tag, i) => (
+                <li key={`tag${i}`}>{tag.tagCompleteName}</li>
               ))}
             </ul>
           </div>

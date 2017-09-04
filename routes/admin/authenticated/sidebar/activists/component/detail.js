@@ -15,6 +15,18 @@ const detailActivistQuery = gql`
         name
       }
     }
+    allActivistTags (
+      condition: {
+        communityId: $communityId,
+        activistId: $activistId
+      } 
+    ) {
+      nodes {
+        tagCompleteName,
+        tagFrom,
+        tagName
+      }
+    }
   }
 `
 
@@ -27,7 +39,8 @@ export default (WrappedComponent) => {
       const {
         data: {
           loading,
-          allActivistMobilizations
+          allActivistMobilizations,
+          allActivistTags
         },
         ...ownProps
       } = this.props
@@ -36,10 +49,15 @@ export default (WrappedComponent) => {
         ? allActivistMobilizations.nodes
         : []
 
+      const tags = allActivistTags
+        ? allActivistTags.nodes
+        : []
+
       return loading ? <Loading /> : (
         <WrappedComponent
           {...ownProps}
           mobilizations={mobilizations}
+          tags={tags}
         />
       )
     }
