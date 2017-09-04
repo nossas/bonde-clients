@@ -107,21 +107,21 @@ export default ({
       }
 
       if (goal) {
-        props.valueBottomRight = `Meta: ${formatNumberHelper.currency(goal)}`
+        props.valueTopRight = `Meta: ${formatNumberHelper.currency(goal)}`
       }
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
 
         if (goalDateRemaining === 0)
-          props.valueTopRight = 'último dia!'
+          props.valueBottomRight = 'último dia!'
 
         else if (goalDateRemaining === 7)
-          props.valueTopRight = 'última semana!'
+          props.valueBottomRight = 'última semana!'
 
         else if (goalDateRemaining > 0)
-          props.valueTopRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
+          props.valueBottomRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
 
-        props.valueTopRight = <b>{props.valueTopRight}</b>
+        props.valueBottomRight = <b>{props.valueBottomRight}</b>
       }
 
       return (goal || goalDateRemaining !== undefined) && (
