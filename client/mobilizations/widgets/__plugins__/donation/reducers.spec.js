@@ -33,4 +33,32 @@ describe('client/mobilizations/widgets/__plugins__/donation/reducers', () => {
       .that.is.an('object')
       .that.deep.equals(failurePayload)
   })
+
+  it('should set the donation customer data properly', () => {
+    const payload = {
+      name: 'Foo Bar',
+      email: 'foo@bar.com',
+      document_number: '12345678909',
+      phone: {
+        ddd: '12',
+        number: '123123123'
+      },
+      address: {
+        city: 'Teresina',
+        complementary: 'Casa',
+        neighborhood: 'Pirajá',
+        state: 'PI',
+        street: 'Avenida Bahia',
+        street_number: '100',
+        zipcode: '64003740'
+      }
+    }
+    const action = createAction(t.SET_DONATION_CUSTOMER_DATA, payload)
+    const nextState = reducers(initialState, action)
+
+    expect(nextState)
+      .to.have.property('customerData')
+      .that.is.an('object')
+      .that.deep.equals(payload)
+  })
 })

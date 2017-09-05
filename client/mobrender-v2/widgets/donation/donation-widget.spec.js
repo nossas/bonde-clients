@@ -202,13 +202,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       mobilization: props.toJS().mobilization,
       widget: props.toJS().widget,
       selectedValue: 1,
-      selectedPaymentType: 'recurring'
+      selectedPaymentType: 'recurring',
+      storedDonationCustomerData: undefined
     }
     let expected
 
-    const handleDonationTransactionCreate = (data) => new Promise((resolve) => {
-        expected = data
-        return resolve()
+    const handleDonationTransactionCreate = data => new Promise(resolve => {
+      expected = data
+      return resolve()
     })
     donationWidget.setProps({ handleDonationTransactionCreate })
     donationWidget.instance().setState({

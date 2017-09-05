@@ -49,7 +49,7 @@ export default ({
     }
 
     handleClickDonate () {
-      const { mobilization, widget } = this.props
+      const { mobilization, widget, donationCustomerData } = this.props
       const {
         selected_value: selectedValue,
         selected_payment_type: selectedPaymentType
@@ -59,7 +59,8 @@ export default ({
         mobilization,
         widget,
         selectedValue,
-        selectedPaymentType
+        selectedPaymentType,
+        storedDonationCustomerData: donationCustomerData
       }).then(() => {
         this.setState({ success: true })
       })
@@ -326,10 +327,49 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       )
     }
 
+    renderReattemptMessage () {
+      const { widget: { settings } } = this.props
+      const mainColor = (settings && settings.main_color) || '#54d0f6'
+
+      return (
+        <div className='donation'>
+          <h2
+            className='p2 m0 white rounded-top center'
+            style={{ backgroundColor: mainColor }}
+          >
+            Ops!
+          </h2>
+          <div style={{ textAlign: 'center', color: '#333', padding: '3rem 0' }}>
+            <i
+              className='error-icon inline-block mb2'
+              style={{ backgroundColor: '#de0000' }}
+            />
+            <br />
+            Algo de errado aconteceu com a sua doação. ):<br />
+            Clique no botão abaixo pra tentar de novo.<br />
+
+            <button
+              onClick={::this.handleClickDonate}
+              style={{ backgroundColor: mainColor }}
+              className='btn white caps bg-darken-4 p2 mt3 rounded border-box'
+            >
+              Nova tentativa
+            </button>
+          </div>
+        </div>
+      )
+    }
+
+    renderContentStrategy () {
+      if (this.props.donationCustomerData) return this.renderReattemptMessage()
+      else if (this.state.success) return this.renderThankyouText()
+      else return this.renderForm()
+    }
+
     render () {
       return (
         <div className='bg-white widget rounded'>
-          {this.state.success ? this.renderThankyouText() : this.renderForm()}
+          {this.renderContentStrategy()}
         </div>
       )
     }
