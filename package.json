@@ -102,7 +102,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^2.8.1",
     "react-s3-uploader": "^4.1.1",
-    "react-select": "^1.0.0-rc.5",
+    "react-select-plus": "^1.0.0-rc.5",
     "react-test-renderer": "^15.6.1",
     "reapop": "^1.1.2",
     "reapop-theme-wybo": "^0.4.1",
