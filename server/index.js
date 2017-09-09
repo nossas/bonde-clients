@@ -99,7 +99,7 @@ export const createServer = (config) => {
   })
 
   app.use((req, res, next) => {
-    const host = req.headers.host
+    const host = req.hostname || ''
     const isAppSubdomain = host.indexOf(`app.${process.env.APP_DOMAIN}`) !== -1
     const www = host.match(/^www\.(.*)/)
 
