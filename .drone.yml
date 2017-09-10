@@ -1,3 +1,7 @@
+workspace:
+  base: /build
+  path: code
+
 pipeline:
   tests:
     image: node:latest
@@ -17,23 +21,42 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
+  s3-sync-staging:
+    image: plugins/s3-sync:1
+    bucket: bonde-assets-staging
+    region: sa-east-1
+    source: public/
+    target: /public
+    delete: true
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    acl:
+      "public/*": public-read
+      "private/*": private
+    content_type:
+      ".ttf": application/x-font-ttf
+      ".eot": application/vnd.ms-fontobject
+      ".png": image/png
+      ".otf": application/x-font-opentype
+      ".woff": application/font-woff
+      ".woff2": application/font-woff2
+      ".svg": image/svg+xml
+    content_encoding:
+      ".js": gzip
+      ".css": gzip
+      ".svg": gzip
+    cache_control: "public, max-age: 31536000"
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
   publish-staging:
-    image: appleboy/drone-ssh
-    host: staging.bonde.org
-    username: ubuntu
-    command_timeout: 360
-    port: 22
-    secrets: [ ssh_key ]
-    script:
-      - sudo docker pull nossas/bonde-client:${DRONE_BRANCH}
-      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/0-client:latest
-      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/app-client:latest
-      - dokku tags:deploy 0-client latest
-      - dokku tags:deploy app-client latest
-      - dokku --rm run app-client yarn run build:client
-      - dokku --rm run app-client yarn run build:server
-      - dokku ps:restart app-client
-      - dokku ps:restart 0-client
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: staging/client
+    docker_image: nossas/bonde-client:${DRONE_BRANCH}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
