@@ -11,7 +11,7 @@
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
     "start:prod": "node ./build/server.js",
     "build:server": "./node_modules/.bin/webpack --colors --hide-modules --bail -p --config ./tools/webpack.server.js",
-    "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail -p --config ./tools/webpack.client.js",
+    "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail --config ./tools/webpack.client.js",
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version"
