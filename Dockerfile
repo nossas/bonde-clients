@@ -11,8 +11,9 @@ ENV NODE_ENV=production NEW_RELIC_HOME=./src NODE_MODULES_CACHE=false NPM_CONFIG
 
 WORKDIR /code
 COPY yarn.lock .
-RUN yarn install
+RUN mkdir build && yarn install
 COPY . .
+RUN yarn run build:client && yarn run build:server
 EXPOSE 5001
 
 CMD ["yarn", "start"]
