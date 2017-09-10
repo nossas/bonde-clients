@@ -1,6 +1,6 @@
 workspace:
-  base: /build
-  path: code
+  base: /code
+#   path: code
 
 pipeline:
   tests:
@@ -21,11 +21,29 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
+  build-assets-staging:
+    image: node:latest
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org
+      - APP_DOMAIN=staging.bonde.org
+      - PAGARME_KEY=${STAG_PAGARME_KEY}
+      - AWS_BUCKET=${STAG_AWS_BUCKET}
+      - SENTRY_DSN_PUBLIC=${STAG_SENTRY_DSN_PUBLIC}
+      - GOOGLE_FONTS_API_KEY=${STAG_GOOGLE_FONTS_API_KEY}
+    commands:
+      - mkdir build
+      - yarn run build:client
+      - yarn run build:server
+    when:
+      event: [push, tag]
+
   s3-sync-staging:
     image: plugins/s3-sync:1
     bucket: bonde-assets-staging
     region: sa-east-1
-    source: public/
+    source: public
     target: /public
     delete: true
     secrets: [ aws_access_key_id, aws_secret_access_key ]
@@ -94,7 +112,6 @@ pipeline:
       - dokku --rm run app-client yarn run build:server
       - dokku ps:restart 0-client
       - dokku ps:restart app-client
-
     when:
       status: success
       event: tag

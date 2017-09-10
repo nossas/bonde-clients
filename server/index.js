@@ -88,6 +88,11 @@ export const createServer = (config) => {
     ]
   }))
 
+  app.get('/_version', function (req, res) {
+    let p = require('child_process')
+    res.json({hash: p.execSync('git rev-parse --short HEAD').toString().trim()})
+  })
+
   app.use((req, res, next) => {
     const host = req.headers.host
     const isAppDomain = host === process.env.APP_DOMAIN
