@@ -1,9 +1,8 @@
 workspace:
   base: /code
-#   path: code
 
 pipeline:
-  tests:
+  unit-tests:
     image: node:latest
     commands:
       - yarn install
@@ -11,17 +10,7 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-docker-staging:
-    image: plugins/docker
-    repo: nossas/bonde-client
-    secrets: [ docker_username, docker_password ]
-    tags:
-      - ${DRONE_BRANCH}
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  build-assets-staging:
+  build-assets:
     image: node:latest
     environment:
       - NODE_ENV=production
@@ -37,19 +26,31 @@ pipeline:
       - yarn run build:client
       - yarn run build:server
     when:
-      event: [push, tag]
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
 
-  s3-sync-staging:
+  publish-docker-staging:
+    image: plugins/docker
+    group: publish
+    repo: nossas/bonde-client
+    secrets: [ docker_username, docker_password ]
+    tags:
+      - ${DRONE_BRANCH}
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-s3-staging:
     image: plugins/s3-sync:1
+    group: publish
     bucket: bonde-assets-staging
     region: sa-east-1
     source: public
-    target: /public
+    target: /
     delete: true
     secrets: [ aws_access_key_id, aws_secret_access_key ]
     acl:
-      "public/*": public-read
-      "private/*": private
+      "*": public-read
     content_type:
       ".ttf": application/x-font-ttf
       ".eot": application/vnd.ms-fontobject
@@ -67,7 +68,7 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-staging:
+  publish-rancher-staging:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: staging/client
@@ -95,7 +96,7 @@ pipeline:
       status: success
       event: tag
 
-  publish-production:
+  publish-dokku-production:
     image: appleboy/drone-ssh
     host: ssh.bonde.org
     username: ubuntu
