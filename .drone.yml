@@ -10,18 +10,18 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-assets:
+  build-assets-staging:
     image: node:latest
     environment:
       - NODE_ENV=production
       - API_URL=https://api.staging.bonde.org
-      - GRAPHQL_URL=https://data.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
-      - PAGARME_KEY=$STAG_PAGARME_KEY
       - AWS_BUCKET=bonde-assets-staging
-      - SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
-      - GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
     commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
       - mkdir build
       - yarn run build:client
       - yarn run build:server
@@ -47,7 +47,7 @@ pipeline:
     commands:
       - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
       - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --delete-removed --no-mime-magic --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+      - s3cmd --acl-public --delete-removed --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
     secrets: [ aws_access_key_id, aws_secret_access_key ]
     when:
       status: success
