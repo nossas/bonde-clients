@@ -47,7 +47,6 @@ pipeline:
     region: sa-east-1
     source: public
     target: /
-    delete: true
     secrets: [ aws_access_key_id, aws_secret_access_key ]
     acl:
       "*": public-read
@@ -68,7 +67,7 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-rancher-staging:
+  deploy-rancher-staging:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: staging/client
@@ -80,7 +79,7 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  build-docker-production:
+  publish-docker-production:
     image: plugins/docker
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
@@ -96,7 +95,7 @@ pipeline:
       status: success
       event: tag
 
-  publish-dokku-production:
+  deploy-dokku-production:
     image: appleboy/drone-ssh
     host: ssh.bonde.org
     username: ubuntu
@@ -109,10 +108,6 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run app-client yarn run build:client
-      - dokku --rm run app-client yarn run build:server
-      - dokku ps:restart 0-client
-      - dokku ps:restart app-client
     when:
       status: success
       event: tag
