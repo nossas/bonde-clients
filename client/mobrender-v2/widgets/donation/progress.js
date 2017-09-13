@@ -33,7 +33,7 @@ const Progress = ({
       >
         {value > 5 && (
           <span className='percentage' style={{ color: colorStrategy(fillColor) }}>
-            {formatNumberHelper.number(value).slice(0, 2)}%
+            {formatNumberHelper.number(value).split(',')[0]}%
           </span>
         )}
       </div>
