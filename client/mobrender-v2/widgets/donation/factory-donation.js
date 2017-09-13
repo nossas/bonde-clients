@@ -115,6 +115,9 @@ export default ({
         if (goalDateRemaining === 0)
           props.valueBottomRight = 'último dia!'
 
+        else if (goalDateRemaining > 0 && goalDateRemaining < 7)
+          props.valueBottomRight = 'últimos dias!'
+
         else if (goalDateRemaining === 7)
           props.valueBottomRight = 'última semana!'
 

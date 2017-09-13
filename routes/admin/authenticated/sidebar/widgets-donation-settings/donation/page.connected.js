@@ -41,11 +41,11 @@ const validate = values => {
   if (hasAlphanumerics(values.donation_value4)) errors.donation_value4 = 'Inválido.'
   if (hasAlphanumerics(values.donation_value5)) errors.donation_value5 = 'Inválido.'
 
-  if (hasAlphanumerics(values.goal)) errors.goal = 'Não é permitido número decimal.'
+  if (hasAlphanumerics(values.goal)) errors.goal = 'Insira o valor desse jeito, ó: 1000'
 
   if (values.goal_date_limit) {
     if (!values.goal_date_limit.match(/\d{2}\/\d{2}\/\d{2}/)) {
-      errors.goal_date_limit = 'Formato de data inválido. Ex: DD/MM/AAAA'
+      errors.goal_date_limit = 'Insira a data desse jeito, ó: DD/MM/AAAA'
     }
     else {
       const [day, month, year] = values.goal_date_limit.split('/')
