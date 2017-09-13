@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '../action-creators'
 
+import * as graphqlQueries from '~client/graphql/queries'
 import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
 import { FinishMessageCustom } from '~client/mobilizations/widgets/components'
 import DonationTellAFriend from './donation-tell-a-friend'
@@ -60,4 +62,8 @@ const mapActionsToProps = (dispatch) => ({
   })
 })
 
-export default connect(undefined, mapActionsToProps)(Donation)
+export default graphql(
+  graphqlQueries.fetchDonationGoalStats, {
+    name: 'donationGoalStats',
+    options: props => ({ variables: { widgetId: props.widget.id } })
+  })(connect(undefined, mapActionsToProps)(Donation))

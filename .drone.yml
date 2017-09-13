@@ -1,5 +1,8 @@
+workspace:
+  base: /code
+
 pipeline:
-  tests:
+  unit-tests:
     image: node:latest
     commands:
       - yarn install
@@ -7,8 +10,29 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-docker-staging:
+  build-assets-staging:
+    image: node:latest
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
+      - APP_DOMAIN=staging.bonde.org
+      - AWS_BUCKET=bonde-assets-staging
+    commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
+      - mkdir build
+      - yarn run build:client
+      - yarn run build:server
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-docker-staging:
     image: plugins/docker
+    group: publish
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
     tags:
@@ -17,28 +41,31 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-staging:
-    image: appleboy/drone-ssh
-    host: staging.bonde.org
-    username: ubuntu
-    command_timeout: 360
-    port: 22
-    secrets: [ ssh_key ]
-    script:
-      - sudo docker pull nossas/bonde-client:${DRONE_BRANCH}
-      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/0-client:latest
-      - sudo docker tag nossas/bonde-client:${DRONE_BRANCH} dokku/app-client:latest
-      - dokku tags:deploy 0-client latest
-      - dokku tags:deploy app-client latest
-      - dokku --rm run app-client yarn run build:client
-      - dokku --rm run app-client yarn run build:server
-      - dokku ps:restart app-client
-      - dokku ps:restart 0-client
+  publish-s3-staging:
+    image: nossas/s3cmd
+    group: publish
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --delete-removed --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  build-docker-production:
+  deploy-rancher-staging:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: staging/client
+    docker_image: nossas/bonde-client:${DRONE_BRANCH}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-docker-production:
     image: plugins/docker
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
@@ -54,7 +81,7 @@ pipeline:
       status: success
       event: tag
 
-  publish-production:
+  deploy-dokku-production:
     image: appleboy/drone-ssh
     host: ssh.bonde.org
     username: ubuntu
@@ -67,11 +94,6 @@ pipeline:
       - sudo docker tag nossas/bonde-client:${DRONE_TAG##v} dokku/app-client:latest
       - dokku tags:deploy 0-client latest
       - dokku tags:deploy app-client latest
-      - dokku --rm run app-client yarn run build:client
-      - dokku --rm run app-client yarn run build:server
-      - dokku ps:restart 0-client
-      - dokku ps:restart app-client
-
     when:
       status: success
       event: tag
