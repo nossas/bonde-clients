@@ -15,7 +15,8 @@ class BotPage extends Component {
     this.state = {
       loading: false,
       listActivists: [],
-      totalActivists: 0
+      totalActivists: 0,
+      searchFinished: false
     }
   }
 
@@ -25,7 +26,7 @@ class BotPage extends Component {
 
   render () {
     const { image } = this.props
-    const { loading, listActivists, totalActivists } = this.state
+    const { loading, listActivists, totalActivists, searchFinished } = this.state
 
     return (
       <Background image={image} alignment={{ x: 'center', y: 'center' }} contentSize={12}>
@@ -45,7 +46,7 @@ class BotPage extends Component {
               ComponentPointerContainer={Tabs}
               ComponentPointerChildren={Tab}
               pointerChildrenProps={({ index, step }) => ({ isActive: index === step, index })}
-              progressValidations={[() => false, () => false]}
+              progressValidations={[() => searchFinished, () => false]}
             >
               <StepContent>
                 <ActivistSegmentationForm

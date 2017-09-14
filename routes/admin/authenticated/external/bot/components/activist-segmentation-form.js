@@ -130,7 +130,10 @@ const ActivistSegmentationForm = ({
 
     {totalActivists > 0 && <Summary value={totalActivists} />}
 
-    <Button disabled={!formProps.valid || !totalActivists}>
+    <Button
+      disabled={!formProps.valid || !totalActivists}
+      onClick={() => changeParentState({ searchFinished: true })}
+    >
       Escrever mensagem
     </Button>
   </FlatForm>
