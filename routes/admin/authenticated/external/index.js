@@ -10,6 +10,7 @@ export default store => ({
   getChildRoutes (location, cb) {
     require.ensure([], (require) => {
       cb(null, [
+        require('./bot').default(store),
         require('./community-list').default(store),
         require('./community-new').default(store)
       ])
