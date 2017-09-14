@@ -4,10 +4,10 @@ import uuid from 'uuid'
 
 var styles = require('exenv').canUseDOM ? require('./preview.scss') : {}
 
-const genderIconMap = {
+const genderIcon = gender => ({
   male: `mars ${styles.blue}`,
   female: `venus ${styles.pink}`
-}
+}[gender] || `genderless ${styles.gray}`)
 
 const Preview = ({ list, total }) => (
   <div className={styles.previewContainer}>
@@ -25,7 +25,7 @@ const Preview = ({ list, total }) => (
             style={{ backgroundImage: `url('${activist.profile_pic}')` }}
           />
           <div className={styles.previewListItemGender}>
-            <i className={`fa fa-${genderIconMap[activist.gender]}`} />
+            <i className={`fa fa-${genderIcon(activist.gender)}`} />
           </div>
           <div className={styles.previewListItemName}>
             {activist.first_name} {activist.last_name}
