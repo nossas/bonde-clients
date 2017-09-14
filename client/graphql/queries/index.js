@@ -6,5 +6,6 @@ export { default as fetchFacebookActivistsByMessage } from './fetch-facebook-act
 export { default as fetchFacebookActivistsByQuickReplyDateInterval } from './fetch-facebook-activists-by-quick-reply-date-interval'
 export { default as fetchFacebookActivistsByMessageDateInterval } from './fetch-facebook-activists-by-message-date-interval'
 export { default as fetchFacebookActivistsByMessageQuickReply } from './fetch-facebook-activists-by-message-quick-reply'
+export { default as fetchFacebookActivistsByMessageQuickReplyDateInterval } from './fetch-facebook-activists-by-message-quick-reply-date-interval'
 export { default as fetchTwilioConfiguration } from './fetch-twilio-configuration'
 export { default as watchTwilioCallTransitions } from './watch-twilio-call-transitions'
