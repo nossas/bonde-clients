@@ -20,9 +20,10 @@ const Preview = ({ list, total }) => (
     <ul className={styles.previewList}>
       {list.map(activist => (
         <li key={uuid()} className={styles.previewListItem}>
-          <div className={styles.previewListItemAvatar}>
-            <img src={activist.profile_pic} />
-          </div>
+          <div
+            className={styles.previewListItemAvatar}
+            style={{ backgroundImage: `url('${activist.profile_pic}')` }}
+          />
           <div className={styles.previewListItemGender}>
             <i className={`fa fa-${genderIconMap[activist.gender]}`} />
           </div>

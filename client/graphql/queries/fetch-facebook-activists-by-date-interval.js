@@ -18,7 +18,6 @@ query fetchFacebookActivistsByDateInterval(
     activists: nodes {
       fbContextRecipientId
       ${extraFields.join(' ')}
-      data
     }
   }
 }
