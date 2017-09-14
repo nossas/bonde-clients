@@ -5,15 +5,33 @@ import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Button } from '~client/ux/components'
 import { Summary } from '.'
 
-const FacebookBotMassMessageForm = ({ totalActivists, fields: { message }, ...formProps }) => (
+var styles = require('exenv').canUseDOM ? require('./facebook-bot-mass-message-form.scss') : {}
+
+const FacebookBotMassMessageForm = ({
+  fields: { message },
+  totalActivists,
+  changeParentState,
+  ...formProps
+}) => (
   <FlatForm
     {...formProps}
     buttonText='Enviar mensagem'
-    style={{ paddingTop: '.5rem' }}
+    style={{ paddingTop: '.5rem', position: 'relative' }}
     submit={values => {
       console.log('values', values)
     }}
   >
+    <button
+      type='button'
+      title='Voltar'
+      className={styles.backButton}
+      onClick={e => {
+        e.preventDefault()
+        changeParentState({ searchFinished: false })
+      }}
+    >
+      <i className='fa fa-chevron-left' />
+    </button>
     <FormGroup className='mb2' controlId='message' {...message}>
       <ControlLabel>Mensagem</ControlLabel>
       <FormControl
