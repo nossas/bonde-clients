@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import uuid from 'uuid'
 
 var styles = require('exenv').canUseDOM ? require('./preview.scss') : {}
 
@@ -18,7 +19,7 @@ const Preview = ({ list, total }) => (
     </h1>
     <ul className={styles.previewList}>
       {list.map(activist => (
-        <li className={styles.previewListItem}>
+        <li key={uuid()} className={styles.previewListItem}>
           <div className={styles.previewListItemAvatar}>
             <img src={activist.profile_pic} />
           </div>

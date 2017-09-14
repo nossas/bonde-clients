@@ -1,9 +1,12 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+
+import * as graphqlQueries from '~client/graphql/queries'
+import * as validationHelper from '~client/utils/validation-helper'
+import { client as graphqlClient } from '~client/store'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Button } from '~client/ux/components'
-import * as validationHelper from '~client/utils/validation-helper'
 import { Summary } from '.'
 
 const ActivistSegmentationForm = ({
@@ -14,15 +17,50 @@ const ActivistSegmentationForm = ({
     date_interval_end: dateIntervalEnd
   },
   totalActivists,
+  changeParentState,
   ...formProps
 }) => (
   <FlatForm
     {...formProps}
     hideButton
-    buttonText='Buscar'
-    style={{ paddingTop: '.5rem' }}
+    style={{ paddingTop: '.5rem', width: 'calc(500px - 4rem)' }}
     submit={values => {
-      console.log('values', values)
+      const {
+        message: m,
+        quick_reply: qr,
+        date_interval_start: start,
+        date_interval_end: end
+      } = values
+
+      const isOnlyMessage         =  m && !qr && !start && !end
+      const isOnlyQReply          = !m &&  qr && !start && !end
+      const isOnlyDateInterval    = !m && !qr &&  start &&  end
+      const isQReplyDateInterval  = !m &&  qr &&  start &&  end
+      const isMessageQReply       =  m &&  qr && !start && !end
+      const isMessageDateInterval =  m && !qr &&  start &&  end
+      const isAll                 =  m &&  qr &&  start &&  end
+
+      changeParentState({ loading: true })
+      graphqlClient().query({
+        query: graphqlQueries.fetchFacebookActivistsByDateInterval({ extraFields: ['data'] }),
+        variables: {
+          dateIntervalStart: '2017-09-11',
+          dateIntervalEnd: '2017-09-13',
+          first: 50
+        }
+      })
+        .then(({
+          loading,
+          data: { getFacebookActivistsByDateInterval: { activists, totalCount } }
+        }) => {
+
+          changeParentState({
+            loading,
+            listActivists: activists.length ? activists.map(a => JSON.parse(a.data)) : [],
+            totalActivists: totalCount
+          })
+        })
+        .catch(err => console.error(err))
     }}
   >
     <FormGroup className='mb2' controlId='message' {...message}>
@@ -59,9 +97,9 @@ const ActivistSegmentationForm = ({
       </FormGroup>
     </div>
 
-    <Summary value={totalActivists} />
+    {totalActivists > 0 && <Summary value={totalActivists} />}
 
-    <Button disabled={!formProps.valid}>
+    <Button disabled={!formProps.valid || !totalActivists}>
       Escrever mensagem
     </Button>
   </FlatForm>
