@@ -2,5 +2,6 @@ export { default as CountTwilioCallsByWidget } from './count-twilio-calls-by-wid
 export { default as fetchDonationGoalStats } from './fetch-donation-goal-stats'
 export { default as fetchFacebookActivistsByDateInterval } from './fetch-facebook-activists-by-date-interval'
 export { default as fetchFacebookActivistsByQuickReply } from './fetch-facebook-activists-by-quick-reply'
+export { default as fetchFacebookActivistsByMessage } from './fetch-facebook-activists-by-message'
 export { default as fetchTwilioConfiguration } from './fetch-twilio-configuration'
 export { default as watchTwilioCallTransitions } from './watch-twilio-call-transitions'
