@@ -32,8 +32,6 @@ const ActivistSegmentationForm = ({
         date_interval_end: end
       } = values
 
-      changeParentState({ loading: true })
-
       const isOnlyMessage         =  m && !qr && !start && !end
       const isOnlyQReply          = !m &&  qr && !start && !end
       const isOnlyDateInterval    = !m && !qr &&  start &&  end
@@ -44,6 +42,7 @@ const ActivistSegmentationForm = ({
 
       const normalizeList = list => list.length ? list.map(i => JSON.parse(i.data)) : []
       const formatDate = date => {
+        if (!date) return
         const [day, month, year] = date.split('/')
         return `${year}-${month}-${day}`
       }
@@ -53,15 +52,25 @@ const ActivistSegmentationForm = ({
       const dateIntervalStart = formatDate(start)
       const dateIntervalEnd = formatDate(end)
 
-      if (isOnlyDateInterval) {
+      const executeQuery = (query, variables) => {
+        changeParentState({ loading: true })
         graphqlClient().query({
-          query: graphqlQueries.fetchFacebookActivistsByDateInterval({ extraFields: ['data'] }),
-          variables: { dateIntervalStart, dateIntervalEnd, first: 50 }
+          query: query({ extraFields: ['data'] }),
+          variables: { first: 50, ...variables }
         })
           .then(({ loading, data: { query: { activists: a, totalCount: totalActivists } } }) => {
             changeParentState({ loading, listActivists: normalizeList(a), totalActivists })
           })
           .catch(err => console.error(err))
+      }
+
+      if (isOnlyDateInterval) {
+        const variables = { dateIntervalStart, dateIntervalEnd }
+        executeQuery(graphqlQueries.fetchFacebookActivistsByDateInterval, variables)
+      }
+      else if (isOnlyQReply) {
+        const variables = { quickReply }
+        executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReply, variables)
       }
     }}
   >
