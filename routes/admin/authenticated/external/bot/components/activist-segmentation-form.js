@@ -36,8 +36,8 @@ const ActivistSegmentationForm = ({
       const isOnlyQReply          = !m &&  qr && !start && !end
       const isOnlyDateInterval    = !m && !qr &&  start &&  end
       const isQReplyDateInterval  = !m &&  qr &&  start &&  end
-      const isMessageQReply       =  m &&  qr && !start && !end
       const isMessageDateInterval =  m && !qr &&  start &&  end
+      const isMessageQReply       =  m &&  qr && !start && !end
       const isAll                 =  m &&  qr &&  start &&  end
 
       const normalizeList = list => list.length ? list.map(i => JSON.parse(i.data)) : []
@@ -75,6 +75,10 @@ const ActivistSegmentationForm = ({
       else if (isOnlyMessage) {
         const variables = { message }
         executeQuery(graphqlQueries.fetchFacebookActivistsByMessage, variables)
+      }
+      else if (isQReplyDateInterval) {
+        const variables = { quickReply, dateIntervalStart, dateIntervalEnd }
+        executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReplyDateInterval, variables)
       }
     }}
   >
