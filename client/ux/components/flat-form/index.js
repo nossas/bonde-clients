@@ -37,7 +37,7 @@ const FlatForm = ({
     )}
     {children}
     {hideButton && <button type='submit' style={{ display: 'none' }} />}
-    {!hideButton && <Button type='submit'>{buttonText}</Button>}
+    {!hideButton && <Button type='submit' disabled={!formProps.valid}>{buttonText}</Button>}
   </FormRedux>
 )
 

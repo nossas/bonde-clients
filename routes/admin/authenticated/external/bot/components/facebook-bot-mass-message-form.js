@@ -38,4 +38,11 @@ const FacebookBotMassMessageForm = ({ totalActivists, fields: { message }, ...fo
 
 export const form = 'facebookBotMassMessageForm'
 export const fields = ['message']
-export default reduxForm({ form, fields })(FacebookBotMassMessageForm)
+export const validate = values => {
+  const errors = {}
+
+  if (!values.message) errors.message = 'Obrigatório'
+
+  return errors
+}
+export default reduxForm({ form, fields, validate })(FacebookBotMassMessageForm)
