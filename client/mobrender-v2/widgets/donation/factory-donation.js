@@ -95,19 +95,19 @@ export default ({
       if (goalStats) {
         if (goalStats.pledged) {
           props.valueTopLeft = (
-            <b>{formatNumberHelper.currency(goalStats.pledged)} arrecadados!</b>
+            <b>{formatNumberHelper.currencyInt(goalStats.pledged)}</b>
           )
         }
         if (goalStats.progress) {
           props.value = goalStats.progress
         }
         if (goalStats.total_donations) {
-          props.valueBottomLeft = `${goalStats.total_donations} doações`
+          props.valueBottomLeft = `${goalStats.total_donations} apoios`
         }
       }
 
       if (goal) {
-        props.valueTopRight = `Meta: ${formatNumberHelper.currency(goal)}`
+        props.valueTopRight = `Meta: ${formatNumberHelper.currencyInt(goal)}`
       }
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'

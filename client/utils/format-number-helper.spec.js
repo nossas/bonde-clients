@@ -9,6 +9,11 @@ describe('client/utils/format-number-helper', () => {
       expect(helper.currency(1000)).to.be.equal('R$ 1.000,00')
     })
   })
+  describe('currencyInt', () => {
+    it('should return an interger number in BRL currency format', () => {
+      expect(helper.currencyInt(1000.50)).to.be.equal('R$ 1.000')
+    })
+  })
   describe('number', () => {
     it('should return a number in brazilian number format', () => {
       expect(helper.number(1000)).to.be.equal('1.000')
