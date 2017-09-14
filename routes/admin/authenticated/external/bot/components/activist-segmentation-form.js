@@ -32,6 +32,8 @@ const ActivistSegmentationForm = ({
         date_interval_end: end
       } = values
 
+      changeParentState({ loading: true })
+
       const isOnlyMessage         =  m && !qr && !start && !end
       const isOnlyQReply          = !m &&  qr && !start && !end
       const isOnlyDateInterval    = !m && !qr &&  start &&  end
@@ -40,23 +42,27 @@ const ActivistSegmentationForm = ({
       const isMessageDateInterval =  m && !qr &&  start &&  end
       const isAll                 =  m &&  qr &&  start &&  end
 
-      changeParentState({ loading: true })
-      graphqlClient().query({
-        query: graphqlQueries.fetchFacebookActivistsByDateInterval({ extraFields: ['data'] }),
-        variables: {
-          dateIntervalStart: '2017-09-11',
-          dateIntervalEnd: '2017-09-13',
-          first: 50
-        }
-      })
-        .then(({ loading, data: { query: { activists, totalCount } } }) => {
-          changeParentState({
-            loading,
-            listActivists: activists.length ? activists.map(a => JSON.parse(a.data)) : [],
-            totalActivists: totalCount
-          })
+      const normalizeList = list => list.length ? list.map(i => JSON.parse(i.data)) : []
+      const formatDate = date => {
+        const [day, month, year] = date.split('/')
+        return `${year}-${month}-${day}`
+      }
+
+      const message = m
+      const quickReply = qr
+      const dateIntervalStart = formatDate(start)
+      const dateIntervalEnd = formatDate(end)
+
+      if (isOnlyDateInterval) {
+        graphqlClient().query({
+          query: graphqlQueries.fetchFacebookActivistsByDateInterval({ extraFields: ['data'] }),
+          variables: { dateIntervalStart, dateIntervalEnd, first: 50 }
         })
-        .catch(err => console.error(err))
+          .then(({ loading, data: { query: { activists: a, totalCount: totalActivists } } }) => {
+            changeParentState({ loading, listActivists: normalizeList(a), totalActivists })
+          })
+          .catch(err => console.error(err))
+      }
     }}
   >
     <FormGroup className='mb2' controlId='message' {...message}>
