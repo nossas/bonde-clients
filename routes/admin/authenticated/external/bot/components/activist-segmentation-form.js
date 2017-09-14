@@ -80,6 +80,10 @@ const ActivistSegmentationForm = ({
         const variables = { quickReply, dateIntervalStart, dateIntervalEnd }
         executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReplyDateInterval, variables)
       }
+      else if (isMessageDateInterval) {
+        const variables = { message, dateIntervalStart, dateIntervalEnd }
+        executeQuery(graphqlQueries.fetchFacebookActivistsByMessageDateInterval, variables)
+      }
     }}
   >
     <FormGroup className='mb2' controlId='message' {...message}>
