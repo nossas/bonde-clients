@@ -189,11 +189,19 @@ export const FilterableHOC = () => (WrappedComponent) => {
     }
 
     onChangeQuery (q) {
-      this.setState({ query: q })
+      return new Promise((resolve, reject) => {
+        if (this.state.query !== q) {
+          this.setState({ query: q }, resolve)
+        }
+      })
     }
 
     onChangeDaysAgo (days) {
-      this.setState({ daysAgo: days })
+      return new Promise((resolve, reject) => {
+        if (this.state.daysAgo !== days) {
+          this.setState({ daysAgo: days }, resolve)
+        }
+      })
     } 
 
     render () {

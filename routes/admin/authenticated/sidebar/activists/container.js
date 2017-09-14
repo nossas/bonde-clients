@@ -5,6 +5,7 @@ import {
   SettingsPageContentLayout
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
+import Select from 'react-select-plus'
 
 import FilterForm from './component/filter-form'
 import ActivistDetailHOC from './component/detail'  
@@ -24,42 +25,39 @@ const QueryForm = ({
   communityId
 }) => (
   <form
-    className='query-form pr4 pl3 border-box'
+    className='query-form pr4 pl3 border-box flex flex-wrap'
     onSubmit={e => {
       e.preventDefault()
       onSubmit()
     }}
   >
-    <i className='fa fa-search' aria-hidden='true' />
-    <FilterForm
-      name={name}
-      communityId={communityId}
-      query={query}
-      placeholder={label}
-      onChange={onQueryChange}
-    />
-    <div>
-      <label>Período</label>
-      <select
-        name='daysAgo'
-        value={daysAgo}
-        onChange={(e) => onChangeDaysAgo(e.target.value)}
-      >
-        <option value={1}>Hoje</option>
-        <option value={7}>Na última semana</option>
-        <option value={15}>Nos últimos 15 dias</option>
-        <option value={30}>Nos últimos 30 dias</option>
-        <option value={90}>Nos últimos 3 meses</option>
-        <option value={365}>No último ano</option>
-        <option value={0}>Sempre</option>
-      </select>
+    <div className='form-group col-9'>
+      <i className='fa fa-search' aria-hidden='true' />
+      <FilterForm
+        name={name}
+        communityId={communityId}
+        query={query}
+        placeholder={label}
+        onChange={onQueryChange}
+      />
     </div>
-    {buttonText && (
-      <input
-        className='absolute'
-        type='submit'
-        value={buttonText}
-      />)}
+    <div className='form-group col-3'>
+      <i className='fa fa-calendar-o' aria-hidden='true' />
+      <Select
+        simplevalue
+        onChange={({ value }) => onChangeDaysAgo(value)}
+        value={daysAgo}
+        options={[
+          { value: 1, label: 'Hoje' },
+          { value: 7, label: 'Na última semana' },
+          { value: 15, label: 'Nos últimos 15 dias' },
+          { value: 30, label: 'Nos últimos 30 dias' },
+          { value: 90, label: 'Nos últimos 3 meses' },
+          { value: 365, label: 'No último ano' },
+          { value: 0, label: 'Sempre' }
+        ]}
+      />
+    </div>
   </form>
 )
 
@@ -193,9 +191,19 @@ class Container extends Component {
           label='Filtre por mobilizações ou formulários'
           onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
-          onQueryChange={this.props.onChangeQuery}
+          onQueryChange={(q) => {
+            this.props.onChangeQuery(q)
+              .then(() => {
+                this.props.fetch(true)
+              })
+          }}
           daysAgo={this.props.daysAgo}
-          onChangeDaysAgo={this.props.onChangeDaysAgo}
+          onChangeDaysAgo={(days) => {
+            this.props.onChangeDaysAgo(days)
+              .then(() => {
+                this.props.fetch(true)
+              })
+          }}
           communityId={communityId}
         />
         <SettingsPageContentLayout>
