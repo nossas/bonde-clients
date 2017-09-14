@@ -49,11 +49,7 @@ const ActivistSegmentationForm = ({
           first: 50
         }
       })
-        .then(({
-          loading,
-          data: { getFacebookActivistsByDateInterval: { activists, totalCount } }
-        }) => {
-
+        .then(({ loading, data: { query: { activists, totalCount } } }) => {
           changeParentState({
             loading,
             listActivists: activists.length ? activists.map(a => JSON.parse(a.data)) : [],
@@ -156,6 +152,9 @@ export const validate = values => {
       }
     }
   }
+
+  if (!dateIntervalStart && dateIntervalEnd) errors.date_interval_start = 'Preencha'
+  if (dateIntervalStart && !dateIntervalEnd) errors.date_interval_end = 'Preencha'
 
   if (!message && !quickReply && !dateIntervalStart && !dateIntervalEnd) {
     errors.message = 'Preencha'

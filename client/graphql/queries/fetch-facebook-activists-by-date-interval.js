@@ -9,7 +9,7 @@ query fetchFacebookActivistsByDateInterval(
   $dateIntervalEnd: Datetime!
   $first: Int
 ) {
-  getFacebookActivistsByDateInterval(
+  query: getFacebookActivistsByDateInterval(
     dateIntervalStart: $dateIntervalStart
     dateIntervalEnd: $dateIntervalEnd
     first: $first
