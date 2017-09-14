@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
 import { Button } from '~client/ux/components'
+import * as validationHelper from '~client/utils/validation-helper'
 import { Summary } from '.'
 
 const ActivistSegmentationForm = ({
@@ -49,7 +50,7 @@ const ActivistSegmentationForm = ({
         />
       </FormGroup>
 
-      <FormGroup className='col col-4 ml3' controlId='dateIntervalEnd' {...dateIntervalEnd}>
+      <FormGroup className='col col-6' controlId='dateIntervalEnd' {...dateIntervalEnd}>
         <ControlLabel>Data limite</ControlLabel>
         <FormControl
           type='text'
@@ -60,10 +61,72 @@ const ActivistSegmentationForm = ({
 
     <Summary value={totalActivists} />
 
-    <Button>Escrever mensagem</Button>
+    <Button disabled={!formProps.valid}>
+      Escrever mensagem
+    </Button>
   </FlatForm>
 )
 
 export const form = 'facebookBotActivistSegmentationForm'
 export const fields = ['message', 'quick_reply', 'date_interval_start', 'date_interval_end']
-export default reduxForm({ form, fields })(ActivistSegmentationForm)
+export const validate = values => {
+  const errors = {}
+  const {
+    message,
+    quick_reply: quickReply,
+    date_interval_start: dateIntervalStart,
+    date_interval_end: dateIntervalEnd
+  } = values
+
+  const regexDateFormat = /\d{2}\/\d{2}\/\d{2}/
+  if (dateIntervalStart && dateIntervalEnd) {
+    if (dateIntervalStart.match(regexDateFormat) && dateIntervalEnd.match(regexDateFormat)) {
+      const toDateObject = dateString => {
+        const [day, month, year] = dateString.split('/')
+        return new Date(`${year}-${month}-${day}`)
+      }
+      const start = toDateObject(dateIntervalStart)
+      const end = toDateObject(dateIntervalEnd)
+
+      if (start > end) {
+        errors.date_interval_start = 'Deve ser menor'
+        errors.date_interval_end = 'Deve ser maior'
+      }
+    }
+  }
+
+  if (dateIntervalStart) {
+    if (!dateIntervalStart.match(regexDateFormat)) {
+      errors.date_interval_start = 'Ex: DD/MM/AAAA'
+    }
+    else {
+      const [day, month, year] = dateIntervalStart.split('/')
+      if (!validationHelper.isValidDate({ day, month, year })) {
+        errors.date_interval_start = 'Data inválida'
+      }
+    }
+  }
+
+  if (dateIntervalEnd) {
+    if (!dateIntervalEnd.match(regexDateFormat)) {
+      errors.date_interval_end = 'Ex: DD/MM/AAAA'
+    }
+    else {
+      const [day, month, year] = dateIntervalEnd.split('/')
+      if (!validationHelper.isValidDate({ day, month, year })) {
+        errors.date_interval_end = 'Data inválida'
+      }
+    }
+  }
+
+  if (!message && !quickReply && !dateIntervalStart && !dateIntervalEnd) {
+    errors.message = 'Preencha'
+    errors.quick_reply = 'Preencha'
+    errors.date_interval_start = 'Preencha'
+    errors.date_interval_end = 'Preencha'
+  }
+
+  return errors
+}
+
+export default reduxForm({ form, fields, validate })(ActivistSegmentationForm)

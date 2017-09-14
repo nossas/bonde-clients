@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import * as formatNumberHelper from '~client/utils/format-number-helper'
+import * as validationHelper from '~client/utils/validation-helper'
 import Page from './page'
 
 const mapStateToProps = (state, props) => {
@@ -49,9 +50,7 @@ const validate = values => {
     }
     else {
       const [day, month, year] = values.goal_date_limit.split('/')
-      const dateLimitCandidate = new Date(`${year}-${month}-${day}`)
-
-      if (dateLimitCandidate.toString() === 'Invalid Date') {
+      if (!validationHelper.isValidDate({ day, month, year })) {
         errors.goal_date_limit = 'Data inválida.'
       }
     }

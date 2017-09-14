@@ -46,3 +46,8 @@ export const isValidTargetPhone = value => regexTargetPhone.test(value)
 // Regex to validate target with phone number in E.164 format
 const regexTargetPhoneE164 = /^[a-zà-úA-ZÀ-Ú\s']+\s<\+\d{12,13}>$/
 export const isValidTargetPhoneE164 = value => regexTargetPhoneE164.test(value)
+
+// Validate if date is valid
+export const isValidDate = ({ day, month, year }) => (
+  new Date(`${year}-${month}-${day}`).toString() !== 'Invalid Date'
+)
