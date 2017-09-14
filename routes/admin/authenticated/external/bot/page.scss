@@ -1,76 +1,15 @@
 :local {
-  .activistListContainer {
-    background: #fff;
-    border-right: 1px solid #efefef;
-  }
-  .activistListTitle {
-    color: #222 !important;
-    line-height: 1.5 !important;
-    font-size: 1.7em !important;
-    margin: 0 !important;
-    padding: 2rem 0 1rem;
-    font-weight: bold;
-    border-bottom: 1px solid #efefef;
-  }
-  .activistListHelper {
-    margin: 0;
-    font-size: .85rem;
-    font-weight: normal;
-    color: #999;
-    line-height: .85rem;
-  }
-  .activistList {
-    background: #fff;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    background: #f8f8f8;
-    height: 386px;
-    overflow-y: auto;
-  }
-  .activistListItem {
-    display: flex;
-    align-items: center;
-    height: 48px;
-    border-bottom: 1px solid #efefef;
-    background: #fff;
-  }
-  .activistListItemAvatar {
-    width: 48px;
-    height: 48px;
-    margin: 0 .75rem 0 0;
-    overflow: hidden;
-  }
-  .activistListItemGender {
-    margin: 0 .75rem;
-  }
-  .activistListItemName {
-    margin: 0 2rem 0 .75rem;
-  }
-
   .stepsContainer {
-    background: #fff;
+    background: #FFFFFF;
     text-align: center;
   }
   .stepsTitle {
-    color: #222 !important;
+    color: #222222 !important;
     line-height: 1.5 !important;
     font-size: 1.7em !important;
     margin: 0 0 -30px !important;
     padding: 2rem 0 1.8rem;
     font-weight: bold;
-    border-bottom: 1px solid #efefef;
-  }
-
-  .summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .summaryHighlight {
-    font-size: 3rem;
-    font-weight: bold;
-    line-height: 4rem;
-    margin-right: 1rem;
+    border-bottom: 1px solid #EFEFEF;
   }
 }
