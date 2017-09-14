@@ -183,20 +183,27 @@ export const FilterableHOC = () => (WrappedComponent) => {
     constructor (props) {
       super(props)
       this.state = {
-        query: ''
+        query: '',
+        daysAgo: 0
       }
     }
 
-    onChange (e) {
-      this.setState({ query: e.target.value })
+    onChangeQuery (q) {
+      this.setState({ query: q })
     }
+
+    onChangeDaysAgo (days) {
+      this.setState({ daysAgo: days })
+    } 
 
     render () {
       return (
         <WrappedComponent
           {...this.props}
           query={this.state.query}
-          onQueryChange={this.onChange.bind(this)}
+          daysAgo={this.state.daysAgo}
+          onChangeQuery={this.onChangeQuery.bind(this)}
+          onChangeDaysAgo={this.onChangeDaysAgo.bind(this)}
         />
       )
     }

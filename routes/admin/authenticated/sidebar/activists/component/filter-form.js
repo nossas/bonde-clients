@@ -49,7 +49,7 @@ const FilterForm = ({
   name,
   query,
   placeholder,
-  onQueryChange,
+  onChange,
   communityId,
   client
 }) => {
@@ -78,19 +78,13 @@ const FilterForm = ({
     })
   }
 
-  const parseValueToEvent = (opt) => onQueryChange({
-    target: {
-      value: opt.value
-    }
-  })
-  
   return (
     <Select.Async
       name={name}
       placeholder={placeholder}
       value={query}
       loadOptions={getOptions}
-      onChange={parseValueToEvent}
+      onChange={({ value }) => onChange(value)}
     />
   )
 }

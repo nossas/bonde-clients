@@ -15,6 +15,8 @@ if (require('exenv').canUseDOM) require('./styles.scss')
 const QueryForm = ({
   query,
   onQueryChange,
+  daysAgo,
+  onChangeDaysAgo,
   onSubmit,
   label,
   buttonText,
@@ -34,8 +36,24 @@ const QueryForm = ({
       communityId={communityId}
       query={query}
       placeholder={label}
-      onQueryChange={onQueryChange}
+      onChange={onQueryChange}
     />
+    <div>
+      <label>Período</label>
+      <select
+        name='daysAgo'
+        value={daysAgo}
+        onChange={(e) => onChangeDaysAgo(e.target.value)}
+      >
+        <option value={1}>Hoje</option>
+        <option value={7}>Na última semana</option>
+        <option value={15}>Nos últimos 15 dias</option>
+        <option value={30}>Nos últimos 30 dias</option>
+        <option value={90}>Nos últimos 3 meses</option>
+        <option value={365}>No último ano</option>
+        <option value={0}>Sempre</option>
+      </select>
+    </div>
     {buttonText && (
       <input
         className='absolute'
@@ -175,7 +193,9 @@ class Container extends Component {
           label='Filtre por mobilizações ou formulários'
           onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
-          onQueryChange={this.props.onQueryChange}
+          onQueryChange={this.props.onChangeQuery}
+          daysAgo={this.props.daysAgo}
+          onChangeDaysAgo={this.props.onChangeDaysAgo}
           communityId={communityId}
         />
         <SettingsPageContentLayout>

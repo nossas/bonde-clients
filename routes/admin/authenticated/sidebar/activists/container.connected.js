@@ -10,12 +10,13 @@ import {
 import Container from './container'
 
 const allActivistsQuery = gql`
-  query allActivists ($search: String, $communityId: Int, $first: Int, $offset: Int) {
+  query allActivists ($search: String, $communityId: Int, $daysAgo: Int, $first: Int, $offset: Int) {
     searchActivistsOnCommunity (
       first: $first,
       offset: $offset,
       ctxCommunityId: $communityId,
-      query: $search
+      query: $search,
+      daysAgo: $daysAgo
     ) {
       totalCount,
       nodes {
@@ -30,10 +31,11 @@ const allActivistsQuery = gql`
 `
 
 const allActivistsIdQuery = gql`
-  query allActivistsIdQuery ($search: String, $communityId: Int) {
+  query allActivistsIdQuery ($search: String, $communityId: Int, $daysAgo: Int) {
     searchActivistsOnCommunity (
       ctxCommunityId: $communityId,
-      query: $search
+      query: $search,
+      daysAgo: $daysAgo
     ) {
       nodes {
         id
@@ -59,8 +61,9 @@ const mapActionsToProps = (dispatch) => ({
   }
 })
 
-const mapQueryParams = ({ communityId, query }) => ({
+const mapQueryParams = ({ communityId, query, daysAgo }) => ({
   communityId,
+  daysAgo: daysAgo || 0,
   search: query
 })
 
