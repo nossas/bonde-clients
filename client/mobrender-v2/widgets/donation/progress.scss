@@ -89,8 +89,8 @@ $colors: (
 
 .progress-container {
   color: #666;
-  font-size: .9rem;
-  line-height: .9rem;
+  font-size: .8rem;
+  line-height: .8rem;
 
   .progress {
     @include block();
@@ -101,7 +101,7 @@ $colors: (
     overflow: hidden;
     padding: 0;
     width: 100%;
-    margin: .5rem 0 !important;
+    margin: 1rem 0 !important;
     background-color: $progress-bar-background-color;
 
     .progress-value {
@@ -128,4 +128,13 @@ $colors: (
     display: flex;
     justify-content: space-between;
   }
+
+  .progress-top > div, .progress-bottom > div {
+    flex-basis: 33.33%;
+    flex-shrink: 0;
+  }
+
+  .progress-top-left, .progress-bottom-left { text-align: left }
+  .progress-top-center, .progress-bottom-center { text-align: center }
+  .progress-top-right, .progress-bottom-right { text-align: right }
 }

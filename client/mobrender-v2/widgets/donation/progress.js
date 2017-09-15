@@ -13,14 +13,17 @@ const Progress = ({
   value,
   max,
   valueTopLeft,
+  valueTopCenter,
   valueTopRight,
   valueBottomLeft,
+  valueBottomCenter,
   valueBottomRight,
   fillColor
 }) => (
   <div className={classnames('progress-container', className)}>
     <div className='progress-top'>
       <div className='progress-top-left'>{valueTopLeft}</div>
+      <div className='progress-top-center'>{valueTopCenter}</div>
       <div className='progress-top-right'>{valueTopRight}</div>
     </div>
 
@@ -41,6 +44,7 @@ const Progress = ({
 
     <div className='progress-bottom'>
       <div className='progress-bottom-left'>{valueBottomLeft}</div>
+      <div className='progress-bottom-center'>{valueBottomCenter}</div>
       <div className='progress-bottom-right'>{valueBottomRight}</div>
     </div>
   </div>
@@ -52,8 +56,10 @@ Progress.propTypes = {
   max: PropTypes.number,
   valueTopLeft: PropTypes.node,
   valueTopRight: PropTypes.node,
+  valueTopCenter: PropTypes.node,
   valueBottomLeft: PropTypes.node,
   valueBottomRight: PropTypes.node,
+  valueBottomCenter: PropTypes.node,
   fillColor: PropTypes.string
 }
 

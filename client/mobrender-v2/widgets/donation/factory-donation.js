@@ -94,20 +94,48 @@ export default ({
 
       if (goalStats) {
         if (goalStats.pledged) {
-          props.valueTopLeft = (
-            <b>{formatNumberHelper.currencyInt(goalStats.pledged)}</b>
+          props.valueTopCenter = (
+            <div>
+              <div style={{
+                color: mainColor,
+                fontSize: '2rem',
+                lineHeight: '2rem',
+                fontWeight: 'bold'
+              }}>
+                {formatNumberHelper.currencyInt(goalStats.pledged)}
+              </div>
+              <div style={{
+                color: '#666',
+                fontWeight: 'bold',
+                fontSize: '.8rem',
+                textTransform: 'uppercase',
+                margin: '0.4rem 0 0',
+                lineHeight: '0.8rem'
+              }}>
+                arrecadados
+              </div>
+            </div>
           )
         }
         if (goalStats.progress) {
           props.value = goalStats.progress
         }
         if (goalStats.total_donations) {
-          props.valueBottomLeft = `${goalStats.total_donations} apoios`
+          props.valueBottomLeft = (
+            <span style={{ color: '#999999' }}>
+              {goalStats.total_donations} apoios
+            </span>
+          )
         }
       }
 
       if (goal) {
-        props.valueTopRight = `Meta: ${formatNumberHelper.currencyInt(goal)}`
+        props.valueBottomCenter = (
+          <b>
+            <span style={{ color: '#999999' }}>Meta: </span>
+            {formatNumberHelper.currencyInt(goal)}
+          </b>
+        )
       }
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
@@ -124,7 +152,11 @@ export default ({
         else if (goalDateRemaining > 0)
           props.valueBottomRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
 
-        props.valueBottomRight = <b>{props.valueBottomRight}</b>
+        props.valueBottomRight = (
+          <b style={{ color: mainColor }}>
+            {props.valueBottomRight}
+          </b>
+        )
       }
 
       return (goal || goalDateRemaining !== undefined) && (
