@@ -158,7 +158,7 @@ export default ({
       }
 
       return (goal || goalDateRemaining !== undefined) && (
-        <Progress className='my1' fillColor={mainColor} {...props} />
+        <Progress fillColor={mainColor} {...props} />
       )
     }
 
@@ -208,8 +208,8 @@ export default ({
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`
             }} />
-            <div className='p3 relative'>
 
+            <div className='p3 relative'>
               {paymentType === 'users_choice' ? <div className='mb2 clearfix'>
                 <a href='#' onClick={::this.handleClickSetTypeDonation.bind(this, 'recurring')}
                   style={selectedPaymentType === 'recurring' ? {color: mainColor} : {}}
@@ -224,8 +224,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                   Doação única
                 </a>
               </div> : ''}
-
-              {this.renderProgressBar(mainColor)}
 
               {donationValue1 <= 0 ? null : (
                 <a
@@ -286,6 +284,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               >
                 {buttonText}
               </a>
+            </div>
+
+            <div className='p3' style={{ boxShadow: '#E3E3E3 0px 15px 18px -10px inset' }}>
+              {this.renderProgressBar(mainColor)}
             </div>
           </div>
         )
