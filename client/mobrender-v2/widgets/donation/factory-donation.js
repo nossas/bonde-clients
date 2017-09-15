@@ -98,8 +98,8 @@ export default ({
             <div>
               <div style={{
                 color: mainColor,
-                fontSize: '2rem',
-                lineHeight: '2rem',
+                fontSize: '2.5em',
+                lineHeight: '1em',
                 fontWeight: 'bold'
               }}>
                 {formatNumberHelper.currencyInt(goalStats.pledged)}
@@ -107,10 +107,8 @@ export default ({
               <div style={{
                 color: '#666',
                 fontWeight: 'bold',
-                fontSize: '.8rem',
                 textTransform: 'uppercase',
                 margin: '0.4rem 0 0',
-                lineHeight: '0.8rem'
               }}>
                 arrecadados
               </div>

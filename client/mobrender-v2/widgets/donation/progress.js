@@ -22,9 +22,9 @@ const Progress = ({
 }) => (
   <div className={classnames('progress-container', className)}>
     <div className='progress-top'>
-      <div className='progress-top-left'>{valueTopLeft}</div>
-      <div className='progress-top-center'>{valueTopCenter}</div>
-      <div className='progress-top-right'>{valueTopRight}</div>
+      {valueTopLeft && <div className='progress-top-left'>{valueTopLeft}</div>}
+      {valueTopCenter && <div className='progress-top-center'>{valueTopCenter}</div>}
+      {valueTopRight && <div className='progress-top-right'>{valueTopRight}</div>}
     </div>
 
     <div className='progress' value={value} max={max}>
@@ -43,9 +43,9 @@ const Progress = ({
     </div>
 
     <div className='progress-bottom'>
-      <div className='progress-bottom-left'>{valueBottomLeft}</div>
-      <div className='progress-bottom-center'>{valueBottomCenter}</div>
-      <div className='progress-bottom-right'>{valueBottomRight}</div>
+      {valueBottomLeft && <div className='progress-bottom-left'>{valueBottomLeft}</div>}
+      {valueBottomCenter && <div className='progress-bottom-center'>{valueBottomCenter}</div>}
+      {valueBottomRight && <div className='progress-bottom-right'>{valueBottomRight}</div>}
     </div>
   </div>
 )

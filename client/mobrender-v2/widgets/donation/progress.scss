@@ -89,8 +89,8 @@ $colors: (
 
 .progress-container {
   color: #666;
-  font-size: .8rem;
-  line-height: .8rem;
+  font-size: 1rem;
+  line-height: 1rem;
 
   .progress {
     @include block();
@@ -109,8 +109,12 @@ $colors: (
       display: flex;
       justify-content: center;
       align-items: center;
+      border-radius: 290486px;
 
-      .percentage { font-size: .65rem }
+      .percentage {
+        font-size: .65rem;
+        font-weight: bold;
+      }
 
       // Colors
       @each $name, $pair in $colors {
@@ -127,6 +131,7 @@ $colors: (
   .progress-top, .progress-bottom {
     display: flex;
     justify-content: space-between;
+    font-size: .8em;
   }
 
   .progress-top > div, .progress-bottom > div {
@@ -134,7 +139,32 @@ $colors: (
     flex-shrink: 0;
   }
 
-  .progress-top-left, .progress-bottom-left { text-align: left }
+  .progress-top-left:only-child,
+  .progress-top-center:only-child,
+  .progress-top-right:only-child {
+    flex-basis: 100%;
+  }
+
+  .progress-top-left,   .progress-bottom-left   { text-align: left }
   .progress-top-center, .progress-bottom-center { text-align: center }
-  .progress-top-right, .progress-bottom-right { text-align: right }
+  .progress-top-right,  .progress-bottom-right  { text-align: right }
+
+
+  @media screen and (max-width: 831px) {
+    .progress { height: 25px }
+    .percentage { font-size: 1rem !important }
+    .progress-top > div,
+    .progress-bottom > div {
+      text-align: left;
+      margin: .5rem;
+    }
+    .progress-top { font-size: 1.25rem }
+    .progress-bottom {
+      font-size: 1.05rem;
+      flex-direction: column;
+    }
+    .progress-bottom-center { order: 1 }
+    .progress-bottom-left { order: 2 }
+    .progress-bottom-right { order: 3 }
+  }
 }
