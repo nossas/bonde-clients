@@ -16,7 +16,8 @@ class BotPage extends Component {
       loading: false,
       listActivists: [],
       totalActivists: 0,
-      searchFinished: false
+      searchFinished: false,
+      segmentation: {}
     }
   }
 
@@ -26,7 +27,7 @@ class BotPage extends Component {
 
   render () {
     const { image } = this.props
-    const { loading, listActivists, totalActivists, searchFinished } = this.state
+    const { loading, listActivists, totalActivists, searchFinished, segmentation } = this.state
 
     return (
       <Background image={image} alignment={{ x: 'center', y: 'center' }} contentSize={12}>
@@ -59,6 +60,7 @@ class BotPage extends Component {
                 <FacebookBotMassMessageForm
                   totalActivists={totalActivists}
                   changeParentState={::this.changeState}
+                  segmentation={segmentation}
                 />
               </StepContent>
             </StepsContainerStack>

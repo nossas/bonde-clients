@@ -53,6 +53,7 @@ const plugins = [
     AWS_BUCKET: JSON.stringify(process.env.AWS_BUCKET),
     SENTRY_DSN_PUBLIC: JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
     GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+    BOT_URL: JSON.stringify(process.env.BOT_URL),
   }),
   new webpack.NamedModulesPlugin(),
   new ExtractTextPlugin({filename: '[name].css', allChunks: true})

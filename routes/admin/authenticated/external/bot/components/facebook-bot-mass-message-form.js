@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { reduxForm } from 'redux-form'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
@@ -11,6 +12,7 @@ const FacebookBotMassMessageForm = ({
   fields: { message },
   totalActivists,
   changeParentState,
+  segmentation,
   ...formProps
 }) => (
   <FlatForm
@@ -19,6 +21,9 @@ const FacebookBotMassMessageForm = ({
     style={{ paddingTop: '.5rem', position: 'relative' }}
     submit={values => {
       console.log('values', values)
+      const url = `${process.env.BOT_URL}/enqueue-mass-messages`
+      const payload = { ...segmentation, text: values.message }
+      axios.post(url, payload)
     }}
   >
     <button

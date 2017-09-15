@@ -53,7 +53,10 @@ const ActivistSegmentationForm = ({
       const dateIntervalEnd = formatDate(end)
 
       const executeQuery = (query, variables) => {
-        changeParentState({ loading: true })
+        changeParentState({
+          loading: true,
+          segmentation: { message, quickReply, dateIntervalStart, dateIntervalEnd }
+        })
         graphqlClient().query({
           query: query({ extraFields: ['data'] }),
           variables: { first: 50, ...variables }
