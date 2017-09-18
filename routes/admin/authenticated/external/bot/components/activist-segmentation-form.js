@@ -28,10 +28,10 @@ const ActivistSegmentationForm = ({
   ...formProps
 }) => {
   const hasSegmentationChanged = Object.keys(segmentation) === 0 || (
-    String(segmentation.message) !== message.value ||
-    String(segmentation.quickReply) !== quickReply.value ||
-    String(segmentation.dateIntervalStart) !== formatDate(dateIntervalStart.value) ||
-    String(segmentation.dateIntervalEnd) !== formatDate(dateIntervalEnd.value)
+    (segmentation.message || '') !== message.value ||
+    (segmentation.quickReply || '') !== quickReply.value ||
+    (segmentation.dateIntervalStart) !== formatDate(dateIntervalStart.value) ||
+    (segmentation.dateIntervalEnd) !== formatDate(dateIntervalEnd.value)
   )
 
   const disableMessageButton = !formProps.valid || !totalActivists || hasSegmentationChanged
