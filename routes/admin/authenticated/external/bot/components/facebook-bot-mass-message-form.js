@@ -23,15 +23,19 @@ const FacebookBotMassMessageForm = ({
     {...formProps}
     buttonText='Enviar mensagem'
     style={{ paddingTop: '.5rem', position: 'relative' }}
-    submit={values => {
+    submit={({
+      message: text,
+      quick_reply_redirect: quickReplyRedirect,
+      quick_reply_button_text: quickReplyButtonText
+    }) => {
+      changeParentState({ loading: true })
+
       const url = `${process.env.BOT_URL}/enqueue-mass-messages`
-      const payload = {
-        ...segmentation,
-        text: values.message,
-        quickReplyRedirect: values.quick_reply_redirect,
-        quickReplyButtonText: values.quick_reply_button_text
-      }
+      const payload = { ...segmentation, text, quickReplyRedirect, quickReplyButtonText }
+
       axios.post(url, payload)
+        .then(() => changeParentState({ hasEnqueued: true, loading: false }))
+        .catch(err => console.error(err))
     }}
   >
     <button

@@ -12,4 +12,24 @@
     font-weight: bold;
     border-bottom: 1px solid #EFEFEF;
   }
+
+  .successMessageContainer {
+    width: 500px;
+    color: #333333;
+    padding: 0 2rem 3rem;
+  }
+  .h1 {
+    color: #333333 !important;
+  }
+  .successIcon {
+    -webkit-mask-image: url('../../../../../client/images/thin-circular-check.svg');
+    mask-image: url('../../../../../client/images/thin-circular-check.svg');
+    -webkit-mask-size: 150px;
+    mask-size: 150px;
+    width: 150px;
+    height: 150px;
+    background-color: #00C08A;
+    display: inline-block;
+    margin-bottom: 1.6rem;
+  }
 }
