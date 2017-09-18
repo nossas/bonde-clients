@@ -72,6 +72,7 @@ class BotPage extends Component {
                 <ActivistSegmentationForm
                   totalActivists={totalActivists}
                   changeParentState={::this.changeState}
+                  segmentation={segmentation}
                 />
               </StepContent>
 
