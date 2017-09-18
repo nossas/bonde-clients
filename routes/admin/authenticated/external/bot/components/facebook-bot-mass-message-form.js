@@ -9,7 +9,11 @@ import { Summary } from '.'
 var styles = require('exenv').canUseDOM ? require('./facebook-bot-mass-message-form.scss') : {}
 
 const FacebookBotMassMessageForm = ({
-  fields: { message },
+  fields: {
+    message,
+    quick_reply_redirect: quickReplyRedirect,
+    quick_reply_button_text: quickReplyButtonText
+  },
   totalActivists,
   changeParentState,
   segmentation,
@@ -20,9 +24,13 @@ const FacebookBotMassMessageForm = ({
     buttonText='Enviar mensagem'
     style={{ paddingTop: '.5rem', position: 'relative' }}
     submit={values => {
-      console.log('values', values)
       const url = `${process.env.BOT_URL}/enqueue-mass-messages`
-      const payload = { ...segmentation, text: values.message }
+      const payload = {
+        ...segmentation,
+        text: values.message,
+        quickReplyRedirect: values.quick_reply_redirect,
+        quickReplyButtonText: values.quick_reply_button_text
+      }
       axios.post(url, payload)
     }}
   >
@@ -42,29 +50,51 @@ const FacebookBotMassMessageForm = ({
       <FormControl
         rows='10'
         componentClass='textarea'
-        placeholder={
-          'Digite aqui a mensagem que você deseja enviar para os usuários segmentados.\n\n' +
-          'Exemplo: \nLorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
-          'Quid enim de amicitia statueris utilitatis causa expetenda vides. ' +
-          'Sed quanta sit alias, nunc tantum possitne esse tanta. Non igitur de improbo, ' +
-          'sed de callido improbo quaerimus, qualis Q. Sin dicit obscurari quaedam nec ' +
-          'apparere, quia valde parva sint, nos quoque concedimus; Duo Reges: constructio ' +
-          'interrete. Quae autem natura suae primae institutionis oblita est?'
-        }
-        style={{ height: '158px' }}
+        placeholder='Digite aqui a mensagem que você deseja enviar para os usuários segmentados.'
+        style={{ height: 90 }}
       />
     </FormGroup>
+
+    <div className='clearfix col-12 mb2'>
+      <FormGroup className='col col-6' controlId='quickReplyRedirect' {...quickReplyRedirect}>
+        <ControlLabel>Quick Reply</ControlLabel>
+        <FormControl
+          type='text'
+          placeholder='Ex: QUICK_REPLY_C'
+        />
+      </FormGroup>
+
+      <FormGroup className='col col-6' controlId='quickReplyButtonText' {...quickReplyButtonText}>
+        <ControlLabel>Texto do botão</ControlLabel>
+        <FormControl
+          type='text'
+          placeholder='Ex: #SemRodeios'
+        />
+      </FormGroup>
+    </div>
 
     <Summary value={totalActivists} />
   </FlatForm>
 )
 
 export const form = 'facebookBotMassMessageForm'
-export const fields = ['message']
+export const fields = ['message', 'quick_reply_redirect', 'quick_reply_button_text']
 export const validate = values => {
   const errors = {}
+  const {
+    message,
+    quick_reply_redirect: quickReplyRedirect,
+    quick_reply_button_text: quickReplyButtonText
+  } = values
 
-  if (!values.message) errors.message = 'Obrigatório'
+  if (!message) errors.message = 'Obrigatório'
+
+  if (quickReplyRedirect && !quickReplyButtonText) {
+    errors.quick_reply_button_text = 'Preencha'
+  }
+  if (!quickReplyRedirect && quickReplyButtonText) {
+    errors.quick_reply_redirect = 'Preencha'
+  }
 
   return errors
 }
