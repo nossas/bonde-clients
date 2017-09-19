@@ -84,6 +84,12 @@ if (isProd) {
         screw_ie8: true
       }
     }),
+    new CompressionPlugin({
+      asset: '[path][query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.svg$/,
+      minRatio: 0.8
+    }),
     new Visualizer({
       filename: './build/main.stats.html'
     })
