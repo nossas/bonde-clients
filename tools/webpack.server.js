@@ -11,7 +11,7 @@ function getExternals () {
 }
 module.exports = {
   target: 'node',
-  devtool: 'source-map',
+  devtool: 'nosources-source-map',
   entry: './server',
   output: {
     path: path.join(__dirname, './../build'),
@@ -32,7 +32,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules)/
+        exclude: /(node_modules|wysihtml-toolbar.min)/
       }
     ]
   },
