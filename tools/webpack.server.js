@@ -32,7 +32,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|wysihtml-toolbar.min)/
+        exclude: /(node_modules)/
       }
     ]
   },

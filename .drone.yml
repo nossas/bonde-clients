@@ -10,7 +10,7 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-assets-staging:
+  build-client-staging:
     image: node:latest
     environment:
       - NODE_ENV=production
@@ -25,15 +25,45 @@ pipeline:
       - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
       - mkdir build
       - yarn run build:client
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-client-staging:
+    image: nossas/s3cmd
+    group: concurrent
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --delete-removed --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  build-server-staging:
+    image: node:latest
+    group: concurrent
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.staging.bonde.org
+      - BOT_URL=https://bot.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
+      - APP_DOMAIN=staging.bonde.org
+      - AWS_BUCKET=bonde-assets-staging
+    commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
       - yarn run build:server
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-docker-staging:
+  publish-server-staging:
     image: plugins/docker
-    group: publish
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
     tags:
@@ -42,19 +72,7 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-s3-staging:
-    image: nossas/s3cmd
-    group: publish
-    commands:
-      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
-      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --delete-removed --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-    secrets: [ aws_access_key_id, aws_secret_access_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  deploy-rancher-staging:
+  deploy-staging:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: staging/client
@@ -66,23 +84,69 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-docker-production:
+  build-client-production:
+    image: node:latest
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.bonde.org
+      - BOT_URL=https://bot.bonde.org
+      - GRAPHQL_URL=https://data.bonde.org/graphql
+      - APP_DOMAIN=bonde.org
+      - AWS_BUCKET=bonde-assets
+    commands:
+      - export PAGARME_KEY=$PROD_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$PROD_GOOGLE_FONTS_API_KEY
+      - mkdir build
+      - yarn run build:client
+    secrets: [ prod_pagarme_key, prod_sentry_dsn_public, prod_google_fonts_api_key ]
+    when:
+      status: success
+      event: tag
+
+  publish-client-production:
+    image: nossas/s3cmd
+    group: concurrent
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --delete-removed --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      status: success
+      event: tag
+
+  build-server-production:
+    image: node:latest
+    group: concurrent
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.bonde.org
+      - BOT_URL=https://bot.bonde.org
+      - GRAPHQL_URL=https://data.bonde.org/graphql
+      - APP_DOMAIN=bonde.org
+      - AWS_BUCKET=bonde-assets
+    commands:
+      - export PAGARME_KEY=$PROD_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$PROD_GOOGLE_FONTS_API_KEY
+      - yarn run build:server
+    secrets: [ prod_pagarme_key, prod_sentry_dsn_public, prod_google_fonts_api_key ]
+    when:
+      status: success
+      event: tag
+
+  publish-server-production:
     image: plugins/docker
     repo: nossas/bonde-client
     secrets: [ docker_username, docker_password ]
     tags:
       - ${DRONE_TAG##v}
-    build_args:
-      - NODE_ENV=production
-      - APP_DOMAIN=bonde.org
-      - API_URL=https://api.bonde.org
-      - AWS_BUCKET=bonde-assets
-      - GRAPHQL_URL=https://data.bonde.org/graphql
     when:
       status: success
       event: tag
 
-  deploy-dokku-production:
+  deploy-production:
     image: appleboy/drone-ssh
     host: ssh.bonde.org
     username: ubuntu
