@@ -87,7 +87,7 @@ if (isProd) {
     new CompressionPlugin({
       asset: '[path][query]',
       algorithm: 'gzip',
-      test: /\.js$|\.css$|\.svg$/,
+      test: /\.js$|\.css$$/,
       minRatio: 0.8
     }),
     new Visualizer({
