@@ -56,7 +56,7 @@ const plugins = [
     BOT_URL: JSON.stringify(process.env.BOT_URL),
   }),
   new webpack.NamedModulesPlugin(),
-  new ExtractTextPlugin({filename: '[name].css', allChunks: true})
+  new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true})
 ]
 
 if (isProd) {
