@@ -124,7 +124,7 @@ pipeline:
     environment:
       - NODE_ENV=production
       - API_URL=https://api.bonde.org
-      - BOT_URL=https://bot.bonde.org
+      - BOT_URL=https://beta.bonde.org
       - GRAPHQL_URL=https://data.bonde.org/graphql
       - APP_DOMAIN=bonde.org
       - AWS_BUCKET=bonde-assets
