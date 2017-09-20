@@ -185,4 +185,16 @@ describe('client/utils/validation-helper', () => {
       expect(validator.isValidPhoneE164('5511999999999')).to.equal(false)
     })
   })
+
+  describe('isValidDate', () => {
+    it('should return false for `2017-21-01`', () => {
+      expect(validator.isValidDate({ year: '2017', month: '21', day: '01' })).to.be.false
+    })
+    it('should return false for `2017-01-40`', () => {
+      expect(validator.isValidDate({ year: '2017', month: '01', day: '40' })).to.be.false
+    })
+    it('should return true for `2017-01-01`', () => {
+      expect(validator.isValidDate({ year: '2017', month: '01', day: '01' })).to.be.true
+    })
+  })
 })

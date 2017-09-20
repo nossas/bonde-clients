@@ -2,10 +2,12 @@
 import { addNotification } from 'reapop'
 import * as notifications from '~client/utils/notifications'
 import { createAction } from './create-action'
-import * as t from '../action-types'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
+import * as t from '../action-types'
+import { setDonationCustomerData } from '.'
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) => {
+  const state = getState()
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`
   const body = { donation: genRequestPayload(params) }
 
@@ -14,14 +16,29 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) =
     .then(response => {
       dispatch({ type: t.ASYNC_DONATION_TRANSACTION_CREATE_SUCCESS })
 
-      AnalyticsEvents.donationFinishRequest()
+      if (state.mobilizations.plugins.donation.customerData) {
+        dispatch(setDonationCustomerData(undefined))
+      }
 
+      AnalyticsEvents.donationFinishRequest()
       return Promise.resolve()
     })
     .catch(failure => {
       dispatch(createAction(t.ASYNC_DONATION_TRANSACTION_CREATE_FAILURE, failure))
       dispatch(addNotification(notifications.genericRequestError()))
-      return Promise.reject({ _error: `Response ${failure}` })
+
+      if (failure.config && failure.config.data) {
+        try {
+          const failureData = JSON.parse(failure.config.data)
+          dispatch(setDonationCustomerData(failureData.donation.customer))
+        }
+        catch (error) {
+          console.error('Customer data is not parsable. Cannot store the customer data.')
+          console.error(error)
+        }
+      }
+
+      return Promise.reject({ _error: `Response ${JSON.stringify(failure)}` })
     })
 }
 

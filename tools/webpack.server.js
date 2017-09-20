@@ -11,7 +11,7 @@ function getExternals () {
 }
 module.exports = {
   target: 'node',
-  devtool: 'source-map',
+  devtool: 'nosources-source-map',
   entry: './server',
   output: {
     path: path.join(__dirname, './../build'),
@@ -21,6 +21,11 @@ module.exports = {
   node: {
     __filename: true,
     __dirname: true
+  },
+  resolve: {
+    alias: {
+      './rangy-core': 'rangy/lib/rangy-core'
+    }
   },
   module: {
     loaders: [

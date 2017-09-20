@@ -18,6 +18,7 @@ const FlatForm = ({
   titleMediumMargin,
   titleBigMargin,
   buttonText,
+  hideButton,
   ...formProps
 }) => (
   <FormRedux
@@ -35,7 +36,8 @@ const FlatForm = ({
       </h1>
     )}
     {children}
-    <Button type='submit'>{buttonText}</Button>
+    {hideButton && <button type='submit' style={{ display: 'none' }} />}
+    {!hideButton && <Button type='submit' disabled={!formProps.valid}>{buttonText}</Button>}
   </FormRedux>
 )
 

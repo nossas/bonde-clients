@@ -6,9 +6,18 @@
     &.btn { color: #fff; }
   }
 
+  .error-icon {
+    -webkit-mask-image: url('../../../mobilizations/images/thin-circular-cross.svg');
+    mask-image: url('../../../mobilizations/images/thin-circular-cross.svg');
+    -webkit-mask-size: 150px;
+    mask-size: 150px;
+    width: 150px;
+    height: 150px;
+  }
+
   .icon-payment-recurring,
   .icon-payment-unique {
-    background: 50% 50% url('./../../images/donation-recurring.png') transparent no-repeat;
+    background: 50% 50% url('./images/donation-recurring.png') transparent no-repeat;
     background-size: contain;
     width: 2.2rem;
     height: 2.2rem;
@@ -20,7 +29,7 @@
     display: block;
   }
   .icon-payment-unique {
-    background-image: url('./../../images/donation-unique.png');
+    background-image: url('./images/donation-unique.png');
   }
 
 

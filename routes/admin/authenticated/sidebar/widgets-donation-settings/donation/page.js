@@ -28,7 +28,9 @@ const DonationSettingsPage = props => {
       donation_value5: donationValue5,
       recurring_period: recurringPeriod,
       payment_methods: paymentMethods,
-      payment_type: paymentType
+      payment_type: paymentType,
+      goal_date_limit: goalDateLimit,
+      goal
     },
     ...formProps
   } = props
@@ -42,18 +44,15 @@ const DonationSettingsPage = props => {
       onSubmit={values => {
         const { widget, asyncWidgetUpdate } = props
         const settings = widget.settings || {}
+
         return asyncWidgetUpdate({
           ...widget,
-          settings: { ...settings, ...values }
+          settings: { ...settings, ...values },
+          goal: String(values.goal).replace(/,/g, '.')
         })
       }}
       successMessage='Formulário de doação configurado com sucesso!'
     >
-      <FormGroup controlId='title-text-id' {...titleText}>
-        <ControlLabel>Título do bloco de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
-      </FormGroup>
-
       <FormGroup controlId='payment-type-id' {...paymentType}>
         <ControlLabel>Tipo de doação</ControlLabel>
         <RadioGroup>
@@ -74,19 +73,30 @@ const DonationSettingsPage = props => {
         </FormGroup>
       )}
 
-      <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Defina a cor da página de pagamento</ControlLabel>
-        <HelpBlock>
-          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
-        </HelpBlock>
-        <ColorPicker
-          dispatch={dispatch}
-          theme={colorScheme.replace('-scheme', '')}
-        />
-      </FormGroup>
+      <div className='clearfix mxn1'>
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goal}
+        >
+          <ControlLabel>Meta da campanha</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: 50000' />
+        </FormGroup>
+
+        <FormGroup
+          className='col col-12 lg-col-6'
+          controlId='goal-date-limit-value'
+          style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
+          {...goalDateLimit}
+        >
+          <ControlLabel>Prazo de arrecadação</ControlLabel>
+          <FormControl type='text' placeholder='Ex.: DD/MM/AAAA' />
+        </FormGroup>
+      </div>
 
       <FormGroup controlId='default-donation-value' {...defaultDonationValue}>
-        <ControlLabel>Defina os valores para o bloco de doação</ControlLabel>
+        <ControlLabel>Valores das doações</ControlLabel>
         <HelpBlock>
           Você pode ter até 5 valores por bloco de doação. Preencha apenas com números
           inteiros (Ex: 50)
@@ -94,26 +104,26 @@ const DonationSettingsPage = props => {
         <HorizontalLayout cols={5}>
           <FormGroup controlId='donation-value1-id' {...donationValue1}>
             <ControlLabel>Valor 1</ControlLabel>
-            <FormControl type='number' placeholder='R$20' />
+            <FormControl placeholder='R$20' />
           </FormGroup>
           <FormGroup controlId='donation-value2-id' {...donationValue2}>
             <ControlLabel>Valor 2</ControlLabel>
-            <FormControl type='number' placeholder='R$50' />
+            <FormControl placeholder='R$50' />
           </FormGroup>
           <FormGroup controlId='donation-value3-id' {...donationValue3}>
             <ControlLabel>Valor 3</ControlLabel>
-            <FormControl type='number' placeholder='R$100' />
+            <FormControl placeholder='R$100' />
           </FormGroup>
           <FormGroup controlId='donation-value4-id' {...donationValue4}>
             <ControlLabel>Valor 4</ControlLabel>
-            <FormControl type='number' placeholder='R$200' />
+            <FormControl placeholder='R$200' />
           </FormGroup>
           <FormGroup controlId='donation-value5-id' {...donationValue5}>
             <ControlLabel>Valor 5</ControlLabel>
-            <FormControl type='number' placeholder='R$500' />
+            <FormControl placeholder='R$500' />
           </FormGroup>
         </HorizontalLayout>
-        <RadioGroup className='flex flex-wrap' style={{ marginTop: '-1rem' }}>
+        <RadioGroup className='flex flex-wrap'>
           <Radio className='col col-2' title={donationValueTitle} value='1'>Default</Radio>
           <Radio className='col col-2' title={donationValueTitle} value='2'>Default</Radio>
           <Radio className='col col-2' title={donationValueTitle} value='3'>Default</Radio>
@@ -123,8 +133,24 @@ const DonationSettingsPage = props => {
         <HelpBlock>*todos os valores são em reais</HelpBlock>
       </FormGroup>
 
+      <FormGroup controlId='title-text-id' {...titleText}>
+        <ControlLabel>Título da caixa de doação</ControlLabel>
+        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
+      </FormGroup>
+
+      <FormGroup controlId='main-color-id' {...mainColor}>
+        <ControlLabel>Cor da caixa de doação</ControlLabel>
+        <HelpBlock>
+          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
+        </HelpBlock>
+        <ColorPicker
+          dispatch={dispatch}
+          theme={colorScheme.replace('-scheme', '')}
+        />
+      </FormGroup>
+
       <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>Texto do botão de doação</ControlLabel>
+        <ControlLabel>Texto do botão de confirmação</ControlLabel>
         <FormControl type='text' placeholder='Ex.: Doe agora!' />
       </FormGroup>
 
@@ -140,7 +166,8 @@ const DonationSettingsPage = props => {
       <FormGroup>
         <ControlLabel>Conta bancária</ControlLabel>
         <HelpBlock>
-          Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.
+          Esta campanha está associada à conta bancária cadastrada nas configurações
+          dessa comunidade ;)
         </HelpBlock>
       </FormGroup>
     </SettingsForm>

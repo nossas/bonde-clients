@@ -838,7 +838,7 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
-  'donation.components--settings-menu.title': 'Configure o bloco de doação',
+  'donation.components--settings-menu.title': 'Configure sua caixa de doação',
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
   'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
   'donation.components--settings-menu.tabs.post-action': 'Pós-doação',

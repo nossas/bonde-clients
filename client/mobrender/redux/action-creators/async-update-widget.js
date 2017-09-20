@@ -9,8 +9,12 @@ export default widget => (dispatch, getState, { api }) => {
   const credentials = AuthSelectors(getState()).getCredentials()
   const mobilization = Selectors(getState()).getMobilization()
 
+  const endpoint = `/mobilizations/${mobilization.id}/widgets/${widget.id}`
+  const body = { widget }
+  const options = { headers: credentials }
+
   return api
-    .put(`/mobilizations/${mobilization.id}/widgets/${widget.id}`, { widget }, { headers: credentials })
+    .put(endpoint, body, options)
     .then(res => {
       dispatch(createAction(t.UPDATE_WIDGET_SUCCESS, res.data))
     })

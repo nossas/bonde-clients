@@ -20,12 +20,11 @@ class StepsContainerStack extends Component {
     // If it pass, jump to the next step.
     // If not, define it as current.
     //
-    let step = this.state.step
+    let step = 1
     validations && validations.length && validations.map((validate, index) => {
       const position = index + 1
-      const isCurrent = step === position
       const isLast = validations.length === position
-      if (isCurrent && !isLast && validate()) step++
+      if (!isLast && validate()) step = position + 1
     })
     this.setState({ ...this.state, step })
   }

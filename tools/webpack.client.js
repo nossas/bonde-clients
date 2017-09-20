@@ -53,9 +53,10 @@ const plugins = [
     AWS_BUCKET: JSON.stringify(process.env.AWS_BUCKET),
     SENTRY_DSN_PUBLIC: JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
     GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+    BOT_URL: JSON.stringify(process.env.BOT_URL),
   }),
   new webpack.NamedModulesPlugin(),
-  new ExtractTextPlugin({filename: '[name].css', allChunks: true})
+  new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true})
 ]
 
 if (isProd) {
@@ -66,26 +67,27 @@ if (isProd) {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      beautify: false,
+      comments: false,
       compress: {
         warnings: false,
+        drop_console: true,
+        screw_ie8: true
+      },
+      mangle: {
         screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
+        keep_fnames: true
       },
       output: {
-        comments: false
+        comments: false,
+        screw_ie8: true
       }
     }),
     new CompressionPlugin({
       asset: '[path][query]',
       algorithm: 'gzip',
-      test: /\.js$|\.css$|\.svg$/,
+      test: /\.js$|\.css$$/,
       minRatio: 0.8
     }),
     new Visualizer({
@@ -142,6 +144,11 @@ module.exports = {
     filename: '[name].[hash].js',
     publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${process.env.AWS_BUCKET}/` : '/'
   },
+  resolve: {
+    alias: {
+      './rangy-core': 'rangy/lib/rangy-core'
+    }
+  },
   module: {
     rules: [
       {
@@ -168,7 +175,7 @@ module.exports = {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'standard-loader',
-        exclude: /node_modules/,
+        exclude: /(node_modules|wysihtml-toolbar.min)/,
         options: {
           // Emit errors instead of warnings (default = false)
           error: false,

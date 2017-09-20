@@ -12,7 +12,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
   const donationFinishPath = paths.donationFinish(mobilization.id, widget.id)
 
   return (
-    <SettingsPageMenuLayout title='Configure o bloco de doação'>
+    <SettingsPageMenuLayout title='Configure sua caixa de doação'>
       <Tabs>
         <Tab
           text='Ajustes'
