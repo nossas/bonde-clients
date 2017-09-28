@@ -30,22 +30,8 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
-  publish-client-staging:
-    image: nossas/s3cmd
-    group: concurrent
-    commands:
-      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
-      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --delete-removed --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-      - s3cmd --acl-public --delete-removed --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-    secrets: [ aws_access_key_id, aws_secret_access_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
   build-server-staging:
     image: node:latest
-    group: concurrent
     environment:
       - NODE_ENV=production
       - API_URL=https://api.staging.bonde.org
@@ -73,8 +59,22 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
+  publish-client-staging:
+    image: nossas/s3cmd
+    group: concurrent
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
   deploy-staging:
     image: peloton/drone-rancher
+    group: concurrent
     url: http://cluster.bonde.org
     service: staging/client
     docker_image: nossas/bonde-client:${DRONE_BRANCH}
@@ -105,22 +105,8 @@ pipeline:
       status: success
       event: tag
 
-  publish-client-production:
-    image: nossas/s3cmd
-    group: concurrent
-    commands:
-      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
-      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --delete-removed --include='*' --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets
-      - s3cmd --acl-public --delete-removed --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets
-    secrets: [ aws_access_key_id, aws_secret_access_key ]
-    when:
-      status: success
-      event: tag
-
   build-server-production:
     image: node:latest
-    group: concurrent
     environment:
       - NODE_ENV=production
       - API_URL=https://api.bonde.org
@@ -148,8 +134,22 @@ pipeline:
       status: success
       event: tag
 
+  publish-client-production:
+    image: nossas/s3cmd
+    group: concurrent
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --include='*' --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets
+      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      status: success
+      event: tag
+
   deploy-production:
     image: appleboy/drone-ssh
+    group: concurrent
     host: ssh.bonde.org
     username: ubuntu
     command_timeout: 360
