@@ -108,20 +108,6 @@ class LoginPage extends Component {
             )}
           </Button>
         </FormRedux>
-
-        <p className='white center'>
-          <FormattedMessage
-            id='page--account-login.ask-register'
-            defaultMessage='Ainda não é cadastrado?'
-          />
-          <br />
-          <Link to={paths.createAccount()}>
-            <FormattedMessage
-              id='page--account-login.cta-signup'
-              defaultMessage='Clique para criar uma conta.'
-            />
-          </Link>
-        </p>
       </div>
     )
   }
