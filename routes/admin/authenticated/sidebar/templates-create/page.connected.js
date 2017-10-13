@@ -1,6 +1,7 @@
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { injectIntl } from 'react-intl'
 
 import { selectMobilization } from '~client/mobrender/redux/action-creators'
 import MobSelectors from '~client/mobrender/redux/selectors'
@@ -46,6 +47,6 @@ export default provideHooks(redial)(
         return errors
       },
       fields: ['name', 'goal', 'mobilization_id', 'global']
-    })(Page)
+    })(injectIntl(Page))
   )
 )
