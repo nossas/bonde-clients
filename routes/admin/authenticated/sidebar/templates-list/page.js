@@ -69,7 +69,6 @@ const TemplatesListPage = ({
                   <CopyNumber {...template} />
                 </div>
               </div>
-
               <More onClick={() => toggleMenu(index)} index={index}>
                 <MoreMenu active={menuActiveIndex === index}>
                   <MoreMenuAction
