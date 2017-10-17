@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { injectIntl } from 'redux-intl'
+import { injectIntl } from 'react-intl'
 
 import Page from './page'
 
