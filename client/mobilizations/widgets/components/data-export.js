@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Button } from '~client/ux/components'
 
@@ -16,22 +17,39 @@ class DataExport extends Component {
     const pad = value => (`00${value}`).slice(-2)
     const date = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`
     const time = `${pad(d.getHours())}:${pad(d.getMinutes())}`
-    return `${date} às ${time}`
+    return (
+      <FormattedMessage
+        id='widgets.components--data-export.formated-export-at'
+        defaultMessage='{date} às {time}'
+        values={{ date, time }}
+      />
+    )
   }
 
   renderLoadingMessage () {
-    return <span>
-      <i className='fa fa-circle-o-notch fa-spin fa-w mr1' />
-      Aguarde enquanto estamos processando...
-    </span>
+    return (
+      <span>
+        <i className='fa fa-circle-o-notch fa-spin fa-w mr1' />
+        <FormattedMessage
+          id='widgets.components--data-export.loading.message'
+          defaultMessage='Aguarde enquanto estamos processando...'
+        />
+      </span>
+    )
   }
 
   renderExportedMessage () {
     const { widget } = this.props
-    return <span className='olive'>
-      Última exportação: {this.formatExportAt(widget)}.
-      <i className='fa fa-calendar-check-o ml1' />
-    </span>
+    return (
+      <span className='olive'>
+        <FormattedMessage
+          id='widgets.components--data-export.exported.message'
+          defaultMessage='Última exportação: {formatedExportAt}.'
+          values={{ formatedExportAt: this.formatExportAt(widget) }}
+        />
+        <i className='fa fa-calendar-check-o ml1' />
+      </span>
+    )
   }
 
   renderErrorMessage () {
@@ -47,12 +65,22 @@ class DataExport extends Component {
       <div>
         <div className='table caps bold mb2 darkengray h6'>
           <i className='fa fa-file-excel-o darkengray table-cell align-middle h2' />
-          <span className='table-cell align-middle pl1'>Exportar</span>
+          <span className='table-cell align-middle pl1'>
+            <FormattedMessage
+              id='widgets.components--data-export.export.label'
+              defaultMessage='Exportar'
+            />
+          </span>
         </div>
 
         <p className='h5 mb2 darkengray'>
-          Clique no botão abaixo para baixar o relatório completo do
-          formulário em formato excel.
+          <FormattedMessage
+            id='widgets.components--data-export.export.helper-text'
+            defaultMessage={
+              'Clique no botão abaixo para baixar o relatório completo do ' +
+              'formulário em formato excel.'
+            }
+          />
         </p>
 
         <p className='mb2'>
@@ -60,7 +88,10 @@ class DataExport extends Component {
             disabled={loading}
             onClick={() => asyncWidgetDataExport({ mobilization, widget, filename })}
           >
-            Clique para baixar a planilha completa.
+            <FormattedMessage
+              id='widgets.components--data-export.export.button'
+              defaultMessage='Clique para baixar a planilha completa.'
+            />
           </Button>
         </p>
 
