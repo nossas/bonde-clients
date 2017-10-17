@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { injectIntl } from 'redux-intl'
 
 import Page from './page'
 
@@ -12,5 +13,5 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps)(
-  reduxForm({ form: 'widgetsFormSettingsPageForm', fields })(Page)
+  reduxForm({ form: 'widgetsFormSettingsPageForm', fields })(injectIntl(Page))
 )

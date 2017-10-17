@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-
-// Global module dependencies
+import { FormattedMessage } from 'react-intl'
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~client/components/layout'
@@ -14,32 +13,64 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
   const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id)
 
   return (
-    <SettingsPageMenuLayout title='Configure o formulário da sua ação'>
+    <SettingsPageMenuLayout
+      title={
+        <FormattedMessage
+          id='form-widget.components--settings-menu.title'
+          defaultMessage='Configure o formulário da sua ação'
+        />
+      }
+    >
       <Tabs>
         <Tab
           path={fieldsPath}
-          text='Campos do formulário'
           isActive={fieldsPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.fields'
+              defaultMessage='Campos do formulário'
+            />
+          }
         />
         <Tab
           path={formPath}
-          text='Ajustes'
           isActive={formPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.adjusts'
+              defaultMessage='Ajustes'
+            />
+          }
         />
         <Tab
           path={formAutofirePath}
-          text='Mensagem agradecimento'
           isActive={formAutofirePath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.autofire'
+              defaultMessage='Mensagem agradecimento'
+            />
+          }
         />
         <Tab
           path={formExportPath}
-          text='Relatório'
           isActive={formExportPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.report'
+              defaultMessage='Relatório'
+            />
+          }
         />
         <Tab
           path={finishPath}
-          text='Pós-inscrição'
           isActive={finishPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.post-action'
+              defaultMessage='Pós-inscrição'
+            />
+          }
         />
       </Tabs>
     </SettingsPageMenuLayout>
