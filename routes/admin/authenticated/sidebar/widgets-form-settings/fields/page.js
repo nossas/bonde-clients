@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Loading } from '~client/components/await'
 import { Button, DivFloat } from '~client/ux/components'
@@ -59,16 +60,31 @@ class FormSettingsFieldsPage extends Component {
       <div>
         <DivFloat>
           <Button onClick={::this.handleAddTextField}>
-            Adicionar um campo
+            <FormattedMessage
+              id='page--form-widget-fields.add-button'
+              defaultMessage='Adicionar um campo'
+            />
           </Button>
         </DivFloat>
         <p className='h5 mb3 darkengray'>
-          {
-            this.fields().length
-              ? 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a' +
-                ' adicionar campos.'
-              : 'Adicione, remova, edite e ordene os campos do formulário de acordo com as' +
-                ' necessidades da sua ação.'
+          {this.fields().length
+            ? (
+              <FormattedMessage
+                id='page--form-widget-fields.helper-text.still-empty'
+                defaultMessage={
+                  'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a ' +
+                  'adicionar campos.'
+                }
+              />
+            ) : (
+              <FormattedMessage
+                id='page--form-widget-fields.helper-text.manage-fields'
+                defaultMessage={
+                  'Adicione, remova, edite e ordene os campos do formulário de acordo com as ' +
+                  'necessidades da sua ação.'
+                }
+              />
+            )
           }
         </p>
 

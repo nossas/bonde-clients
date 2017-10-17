@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import $ from 'jquery'
 
 import * as MobActions from '~client/mobrender/redux/action-creators'
@@ -138,7 +139,10 @@ export class InputForm extends Component {
   handleRemove (event) {
     event.preventDefault()
     event.stopPropagation()
-    if (confirm('Você tem certeza que quer remover este campo?')) {
+    if (confirm(this.props.intl.formatMessage({
+      id: 'form-widget.components--input-form.handle-remove.confirm',
+      defaultMessage: 'Você tem certeza que quer remover este campo?'
+    }))) {
       const { fields } = this.props.widget.settings
       const newFields = fields.filter(field =>
         field.uid !== this.props.field.uid
@@ -151,13 +155,16 @@ export class InputForm extends Component {
     event.preventDefault()
     event.stopPropagation()
     const dirty = this.dirty()
-    if (!dirty || (dirty && confirm('Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?'))) {
+    if (!dirty || (dirty && confirm(this.props.intl.formatMessage({
+      id: 'form-widget.components--input-form.handle-overlay-click.confirm',
+      defaultMessage: 'Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?'
+    })))) {
       this.handleCancel(event)
     }
   }
 
   render () {
-    const { canMoveUp, canMoveDown, uid } = this.props
+    const { canMoveUp, canMoveDown, uid, intl } = this.props
     return (
       <div>
         <div
@@ -168,13 +175,19 @@ export class InputForm extends Component {
             <div className='table col-12 mb2'>
               <div className='col-3 table-cell align-middle'>
                 <label className='h5 bold'>
-                  Título do campo
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-title.label'
+                    defaultMessage='Título do campo'
+                  />
                 </label>
               </div>
               <div className='col-9 table-cell'>
                 <input
                   className='input m0'
-                  placeholder='Ex: Email'
+                  placeholder={intl.formatMessage({
+                    id: 'form-widget.components--input-form.field-title.placeholder',
+                    defaultMessage: 'Ex: Email'
+                  })}
                   type='text'
                   value={this.state.label}
                   onChange={::this.handleLabelChange}
@@ -185,13 +198,19 @@ export class InputForm extends Component {
             <div className='table col-12 mb2'>
               <div className='col-3 table-cell align-middle'>
                 <label className='h5 bold'>
-                  Texto de ajuda
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-helper-text.label'
+                    defaultMessage='Texto de ajuda'
+                  />
                 </label>
               </div>
               <div className='col-9 table-cell'>
                 <input
                   className='input m0'
-                  placeholder='Ex: Insira aqui o seu email'
+                  placeholder={intl.formatMessage({
+                    id: 'form-widget.components--input-form.field-helper-text.placeholder',
+                    defaultMessage: 'Ex: Insira aqui o seu email'
+                  })}
                   type='text'
                   value={this.state.placeholder}
                   onChange={::this.handlePlaceholderChange}
@@ -202,7 +221,10 @@ export class InputForm extends Component {
             <div className='table col-12 mb2'>
               <div className='col-3 table-cell align-middle'>
                 <label className='h5 bold'>
-                  Tipo de campo
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-type.label'
+                    defaultMessage='Tipo de campo'
+                  />
                 </label>
               </div>
               <div className='col-9 table-cell'>
@@ -210,11 +232,36 @@ export class InputForm extends Component {
                   className='select m0'
                   onChange={::this.handleKindChange}
                   value={this.state.kind}>
-                  <option value='text'>Texto</option>
-                  <option value='email'>E-mail</option>
-                  <option value='number'>Número</option>
-                  <option value='dropdown'>Dropdown &#9733;</option>
-                  <option value='greetings'>Saudação &#9733;</option>
+                  <option value='text'>
+                    <FormattedMessage
+                      id='form-widget.components--input-form.field-type.options.text'
+                      defaultMessage='Texto'
+                    />
+                  </option>
+                  <option value='email'>
+                    <FormattedMessage
+                      id='form-widget.components--input-form.field-type.options.email'
+                      defaultMessage='E-mail'
+                    />
+                  </option>
+                  <option value='number'>
+                    <FormattedMessage
+                      id='form-widget.components--input-form.field-type.options.number'
+                      defaultMessage='Número'
+                    />
+                  </option>
+                  <option value='dropdown'>
+                    <FormattedMessage
+                      id='form-widget.components--input-form.field-type.options.dropdown'
+                      defaultMessage='Dropdown &#9733;'
+                    />
+                  </option>
+                  <option value='greetings'>
+                    <FormattedMessage
+                      id='form-widget.components--input-form.field-type.options.greetings'
+                      defaultMessage='Saudação &#9733;'
+                    />
+                  </option>
                 </select>
               </div>
             </div>
@@ -222,7 +269,10 @@ export class InputForm extends Component {
             <div className='table col-12 mb2'>
               <div className='col-3 table-cell align-meiddle'>
                 <label className='h5 bold'>
-                  Obrigatório
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-required.label'
+                    defaultMessage='Obrigatório'
+                  />
                 </label>
               </div>
               <div className='col-9 table-cell'>
@@ -234,7 +284,12 @@ export class InputForm extends Component {
                   checked={this.state.required === 'true'}
                   onChange={::this.handleRequiredChange}
                 />
-                <label className='ml1 mr2' htmlFor={`required-true-${uid}`}>Sim</label>
+                <label className='ml1 mr2' htmlFor={`required-true-${uid}`}>
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-required.radio.yes.label'
+                    defaultMessage='Sim'
+                  />
+                </label>
                 <input
                   id={`required-false-${uid}`}
                   type='radio'
@@ -243,7 +298,12 @@ export class InputForm extends Component {
                   checked={this.state.required === 'false'}
                   onChange={::this.handleRequiredChange}
                 />
-                <label className='ml1' htmlFor={`required-false-${uid}`}>Não</label>
+                <label className='ml1' htmlFor={`required-false-${uid}`}>
+                  <FormattedMessage
+                    id='form-widget.components--input-form.field-required.radio.no.label'
+                    defaultMessage='Não'
+                  />
+                </label>
               </div>
             </div>
           </div>
@@ -257,7 +317,10 @@ export class InputForm extends Component {
                 onClick={::this.handleMoveUp}
               >
                 <i className='fa fa-chevron-up mr1' />
-                Mover para cima
+                <FormattedMessage
+                  id='form-widget.components--input-form.button-move-up'
+                  defaultMessage='Mover para cima'
+                />
               </button>
             </div>
 
@@ -269,7 +332,10 @@ export class InputForm extends Component {
                 onClick={::this.handleMoveDown}
               >
                 <i className='fa fa-chevron-down mr1' />
-                Mover para baixo
+                <FormattedMessage
+                  id='form-widget.components--input-form.button-move-down'
+                  defaultMessage='Mover para baixo'
+                />
               </button>
             </div>
 
@@ -280,7 +346,10 @@ export class InputForm extends Component {
                 onClick={::this.handleRemove}
               >
                 <i className='fa fa-trash mr1' />
-                Remover
+                <FormattedMessage
+                  id='form-widget.components--input-form.button-remove'
+                  defaultMessage='Remover'
+                />
               </button>
             </div>
 
@@ -289,14 +358,29 @@ export class InputForm extends Component {
                 className='btn white caps bg-darken-3 p2 mr2 rounded'
                 onClick={::this.handleCancel}
               >
-                Cancelar
+                <FormattedMessage
+                  id='form-widget.components--input-form.button-cancel'
+                  defaultMessage='Cancelar'
+                />
               </button>
               <button
                 disabled={this.state.loading}
                 className='btn white caps bg-pagenta p2 mr2 rounded'
                 onClick={::this.handleSave}
               >
-                {this.state.loading ? 'Salvando...' : 'Salvar'}
+                {this.state.loading
+                  ? (
+                    <FormattedMessage
+                      id='form-widget.components--input-form.button-save.saving'
+                      defaultMessage='Salvando...'
+                    />
+                  ) : (
+                    <FormattedMessage
+                      id='form-widget.components--input-form.button-save.default'
+                      defaultMessage='Salvar'
+                    />
+                  )
+                }
               </button>
             </div>
           </div>
@@ -311,4 +395,8 @@ export class InputForm extends Component {
   }
 }
 
-export default connect()(InputForm)
+InputForm.propTypes = {
+  intl: intlShape.isRequired
+}
+
+export default connect()(injectIntl(InputForm))
