@@ -4,14 +4,12 @@ import $ from 'jquery'
 import classnames from 'classnames'
 
 let wysihtml5, wysihtml5ParserRules
-
 /* eslint-disable */
 if (require('exenv').canUseDOM) {
   window.rangy = require('rangy/lib/rangy-core')
   wysihtml5 = require('exports-loader?wysihtml5!./wysihtml-toolbar.min.js')
   wysihtml5ParserRules = require('exports-loader?wysihtml5ParserRules!./wysihtml-toolbar.min.js')
 }
-/* eslint-disable */
 
 // Global module dependencies
 import { WYSIHTMLToolbar } from '~client/components/editor-wysihtml'
