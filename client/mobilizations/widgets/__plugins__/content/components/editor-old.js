@@ -3,10 +3,11 @@ import React from 'react'
 import $ from 'jquery'
 import classnames from 'classnames'
 
-let wysihtml5
+let wysihtml5, wysihtml5ParserRules
 if (require('exenv').canUseDOM) {
   window.rangy = require('rangy/lib/rangy-core')
-  wysihtml5 = require("exports-loader?wysihtml5!./wysihtml-toolbar.min.js")
+  wysihtml5 = require("exports-loader?wysihtml5!./wysihtml-toolbar.min.js");
+  wysihtml5ParserRules = require("exports-loader?wysihtml5ParserRules!./wysihtml-toolbar.min.js");
 }
 // Global module dependencies
 import { WYSIHTMLToolbar } from '~client/components/editor-wysihtml'
@@ -28,7 +29,8 @@ class EditorOld extends React.Component {
     if (this.props.editable) {
       const editor = new wysihtml5.Editor(
         this.refs.content, {
-          toolbar: this.state.toolbarId
+          toolbar: this.state.toolbarId,
+          parserRules: wysihtml5ParserRules
         }
       ).on('focus', ::this.handleEditorFocus)
       this.setState({editor: editor})
