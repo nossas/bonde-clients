@@ -8,6 +8,7 @@ import {
   FilterableHOC
 } from './component/listable'
 import Container from './container'
+import exportCSV from './actions/export-csv'
 
 const allActivistsQuery = gql`
   query allActivists ($search: String, $communityId: Int, $daysAgo: Int, $first: Int, $offset: Int) {
@@ -45,7 +46,8 @@ const allActivistsIdQuery = gql`
 `
 
 const mapStateToProps = (state) => ({
-  communityId: CommunitySelectors.getCurrentId(state)
+  communityId: CommunitySelectors.getCurrentId(state),
+  community: CommunitySelectors.getCurrent(state)
 })
 
 const mapActionsToProps = (dispatch) => ({
@@ -58,7 +60,8 @@ const mapActionsToProps = (dispatch) => ({
       dismissable: true,
       closeButton: false
     }))
-  }
+  },
+  exportCSV: (ids, filename) => dispatch(exportCSV(ids, filename))
 })
 
 const mapQueryParams = ({ communityId, query, daysAgo }) => ({

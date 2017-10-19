@@ -89,3 +89,17 @@
   }
 }
 
+.Action-btn-group {
+  position: absolute;
+  right: 0;
+
+  button {
+    font-weight: bold;
+    font-size: 18px;
+    color: #ff0099;
+    border-radius: 2px;
+    background: none;
+    border: 1px solid #ff0099;
+    padding: 5px 15px;
+  }
+}
