@@ -164,6 +164,17 @@ class Container extends Component {
     }
   }
 
+  onExportCSV () {
+    this.setState({ loading: true })
+    this.props.exportCSV(this.props.selected, this.props.community.name)
+      .then(() => {
+        this.setState({ loading: false })
+      })
+      .catch((error) => {
+        this.setState({ loading: false, error })
+      })
+  }
+
   render () {
     const { data, loading, totalCount } = this.props
     const {
@@ -229,6 +240,16 @@ class Container extends Component {
                 {totalCount > 0 && (
                   <div className={styles.h1}>
                     {totalCount} pessoas
+                  </div>
+                )}
+                {selected.length > 0 && (
+                  <div className='Action-btn-group'>
+                    <button
+                      type='button'
+                      onClick={this.onExportCSV.bind(this)}
+                    >
+                      Exportar CSV
+                    </button>
                   </div>
                 )}
               </div>
