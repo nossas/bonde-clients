@@ -16,7 +16,7 @@ volumes:
 
 services:
   postgres:
-    image: postgres
+    image: postgres:9.6.5
     ports:
       # We'll bind our host's port 5432 to postgres's port 5432, so we can use
       # our database IDEs with it:
@@ -38,7 +38,7 @@ services:
 
   # This container will run the rails web server:
   api-v1:
-    image: nossas/bonde-server:develop
+    image: nossas/bonde-server:feature-add-activist-function
     command: bundle exec puma -C config/puma.rb
 
     # build:

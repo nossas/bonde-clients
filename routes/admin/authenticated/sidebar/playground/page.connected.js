@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { graphql, gql } from 'react-apollo'
-import ReactFileReader from 'react-file-reader'
 
 import { required, validateEmail, validate } from '~client/utils/validate'
 import * as CommunitySelectors from '~client/community/selectors'
@@ -78,23 +77,38 @@ class Page extends React.Component {
     this.state = { activists: [] }
   }
 
-  parseCSV (csv) {
-    const allTextLines = csv.split(/\r\n|\n/)
-    const activists = allTextLines.map(row => {
-      const data = row.split(';')
-      return {
-        name: data[0],
-        email: data[1]
-      }
-    })
-    this.setState({ activists })
-    return activists
+  onChange (evt) {
+    const file = evt.target.files[0]
+    if (file) { 
+      const reader = new FileReader()
+      reader.addEventListener('load', () => {
+        // Split CSV in rows, check if row is empty
+        const isEmpty = line => line.length === 0 || !line.trim()
+        const lines = reader
+          .result
+          .split(/\r\n|\n/)
+          .filter(line => !isEmpty(line))
+        // Get header and mount activist fields
+        const header = lines[0].split(';')
+        const activists = lines.slice(1).map(row => {
+          const columns = row.split(';').map((col, i) => ({
+            [header[i]]: col
+          }))
+          const activist = {}
+          columns.forEach((col) => {
+            activist[Object.keys(col)[0]] = Object.values(col)[0]
+          })
+          return activist
+        })
+        // Callback with result of parse
+        this.setState({ activists })
+      })
+      reader.readAsText(file)
+    }
   }
 
-  onChange (files) {
-    const reader = new FileReader()
-    reader.onload = () => this.parseCSV(reader.result)
-    reader.readAsText(files.fileList[0])
+  handleClick () {
+    
   }
 
   render () {
@@ -105,9 +119,7 @@ class Page extends React.Component {
       <div style={{ marginLeft: '20px' }}>
         <h1>{`Insert activit in community (${communityId})`}</h1>
         <div style={{ backgroundColor: '#c7c7c7', width: '200px' }}>
-          <ReactFileReader base64={true} multipleFiles={false} handleFiles={this.onChange.bind(this)}>
-            <button>Upload!</button>
-          </ReactFileReader>
+          <input type='file' onChange={this.onChange.bind(this)} />
         </div>
         <div>
           <ul>
@@ -115,6 +127,7 @@ class Page extends React.Component {
               <li key={activist.name}>{`${activist.name}(${activist.email})`}</li>
             ))}
           </ul>
+          <button onClick={this.handleClick.bind(this)}>Export CSV</button>
         </div>
         <CreateActivistForm communityId={communityId} />
       </div>
