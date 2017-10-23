@@ -5,7 +5,7 @@
   "author": "Nossas <tech@nosssas.org>",
   "homepage": "http://bonde.org",
   "scripts": {
-    "test": "./node_modules/.bin/jest",
+    "test": "./node_modules/.bin/standard && ./node_modules/.bin/jest",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc yarn test",
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
@@ -137,7 +137,7 @@
     "throng": "4.0.0",
     "tinycolor2": "1.4.1",
     "url-loader": "0.6.2",
-    "uuid": "3.1.0",
+    "uuid": "^3.1.0",
     "webpack": "3.8.1",
     "webpack-dev-middleware": "1.12",
     "webpack-hot-middleware": "2.20.0",
