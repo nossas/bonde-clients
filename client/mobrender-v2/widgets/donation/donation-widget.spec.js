@@ -26,6 +26,7 @@ describe('<DonationWidget />', () => {
   it('should render without crash', () => {
     // TODO: Change displayName for this component
     expect(DonationWidget.displayName).to.equal('Donation')
+    // eslint-disable-next-line
     expect(donationWidget).to.be.ok
   })
 
@@ -102,14 +103,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })
 
     it('should render a different period for recurring payment', () => {
-      const payment_type = 'users_choice'
+      const paymentType = 'users_choice'
       // render recurring period monthly by default
       expect(donationWidget.find('a.payment-type').at(0).text())
         .to.equal('Apoiar todo mês')
       // render recurring period semiannualy
       donationWidget.setProps(props.mergeDeep(Map({
         widget: Map({
-          settings: Map({ payment_type, recurring_period: 180 })
+          settings: Map({ payment_type: paymentType, recurring_period: 180 })
         })
       })).toJS())
       expect(donationWidget.find('a.payment-type').at(0).text())
@@ -117,7 +118,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       // render recurring period annualy
       donationWidget.setProps(props.mergeDeep(Map({
         widget: Map({
-          settings: Map({ payment_type, recurring_period: 365 })
+          settings: Map({ payment_type: paymentType, recurring_period: 365 })
         })
       })).toJS())
       expect(donationWidget.find('a.payment-type').at(0).text())
@@ -251,8 +252,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })
 
     it('should not render the progress bar if all goal props does not exists', () => {
-      const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' }
-      const [year, month, day] = new Date().toLocaleString('pt-BR', dateOptions).split('-')
+      // const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' }
 
       donationWidget.setProps(props)
       expect(donationWidget.find('Progress')).to.have.length(0)
