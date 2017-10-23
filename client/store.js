@@ -11,42 +11,39 @@ import { logout } from '~client/account/redux/action-creators'
 
 const api = axios.create({ baseURL: DefaultServerConfig.apiUrl })
 
-const middlewares = [ promise ]
-
-if (process.env.NODE_ENV === `development`) {
-  const createLogger = require(`redux-logger`)
-  const logger = createLogger()
-  middlewares.push(logger)
-}
+const middlewares = [promise]
 
 const networkInterface = createNetworkInterface({
   uri: DefaultServerConfig.graphqlUrl,
   connectToDevTools: true
 })
 
-networkInterface.use([{
-  applyMiddleware (req, next) {
-    if (!req.options.headers) {
-      req.options.headers = {}
-    }
-    // Non-use auth for authenticate mutation to make a new JWT Token
-    const requiredAuth = req.request.operationName !== 'authenticate'
+networkInterface.use([
+  {
+    applyMiddleware (req, next) {
+      if (!req.options.headers) {
+        req.options.headers = {}
+      }
+      // Non-use auth for authenticate mutation to make a new JWT Token
+      const requiredAuth = req.request.operationName !== 'authenticate'
 
-    cookie.plugToRequest(req)
-    const state = cookie.load('auth') || {}
-    if (state.auth && state.auth.credentials && requiredAuth) {
-      const token = state.auth.credentials['access-token']
-      req.options.headers.authorization = `Bearer ${token}`
+      cookie.plugToRequest(req)
+      const state = cookie.load('auth') || {}
+      if (state.auth && state.auth.credentials && requiredAuth) {
+        const token = state.auth.credentials['access-token']
+        req.options.headers.authorization = `Bearer ${token}`
+      }
+      next()
     }
-    next()
   }
-}])
+])
 
-export const client = (options = {}) => new ApolloClient({
-  ssrMode: true,
-  networkInterface,
-  ...options
-})
+export const client = (options = {}) =>
+  new ApolloClient({
+    ssrMode: true,
+    networkInterface,
+    ...options
+  })
 
 export function configureStore (initialState, thunkExtraArgument) {
   middlewares.push(
@@ -64,16 +61,14 @@ export function configureStore (initialState, thunkExtraArgument) {
     initialState,
     compose(
       applyMiddleware(...middlewares),
-      process.env.NODE_ENV === 'development'
-        ? DevTools.instrument()
-        : f => f
+      process.env.NODE_ENV === 'development' ? DevTools.instrument() : f => f
     )
   )
 
   store.asyncReducers = {}
 
   api.interceptors.response.use(
-    (response) => {
+    response => {
       return response
     },
     ({ response, ...error }) => {
@@ -87,11 +82,8 @@ export function configureStore (initialState, thunkExtraArgument) {
 
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
-      module.hot.accept(
-        './createReducer',
-        () => store.replaceReducer(
-          require('./createReducer').default
-        )
+      module.hot.accept('./createReducer', () =>
+        store.replaceReducer(require('./createReducer').default)
       )
     }
   }
