@@ -27,12 +27,11 @@ export default ({
   // ```
 
   class PP extends React.Component {
-
     render () {
       return <WrappedComponent {...this.props} />
     }
   }
-  
+
   const withQuery = graphql(query, {
     options: (ownProps) => {
       let options = {
@@ -59,9 +58,9 @@ export default ({
             ...queryParams,
             ...options.variables
           }
-        } 
+        }
       }
-      
+
       return options
     },
     props: ({ data, ownProps: { location } }) => {

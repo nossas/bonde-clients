@@ -1,6 +1,6 @@
 import React from 'react'
 import { gql, withApollo } from 'react-apollo'
-//import Select from 'react-select'
+// import Select from 'react-select'
 import Select from 'react-select-plus'
 
 const tagsByCommunityQuery = gql`
@@ -18,12 +18,12 @@ const tagsByCommunityQuery = gql`
   }
 `
 
-const groupBy = (array , f) => {
+const groupBy = (array, f) => {
   let groups = {}
   array.forEach((o) => {
-    let group = JSON.stringify(f(o));
-    groups[group] = groups[group] || [];
-    groups[group].push( o );
+    let group = JSON.stringify(f(o))
+    groups[group] = groups[group] || []
+    groups[group].push(o)
   })
 
   return Object.keys(groups).map((group) => {
@@ -31,9 +31,8 @@ const groupBy = (array , f) => {
   })
 }
 
-
 const tagGroupNames = (tagFrom) => {
-  switch(tagFrom) {
+  switch (tagFrom) {
     case 'donation':
       return 'Doações'
     case 'pressure':
@@ -65,11 +64,11 @@ const FilterForm = ({
     .then(({ data: { filterCommunityTags } }) => {
       const grouped = groupBy(filterCommunityTags.nodes, item => [item.tagFrom])
       const options = grouped.map((group) => ({
-          label: tagGroupNames(group[0].tagFrom),
-          options: group.map(tag => ({
-            label: tag.tagName,
-            value: tag.tagCompleteName
-          }))
+        label: tagGroupNames(group[0].tagFrom),
+        options: group.map(tag => ({
+          label: tag.tagName,
+          value: tag.tagCompleteName
+        }))
       }))
       return { options }
     })

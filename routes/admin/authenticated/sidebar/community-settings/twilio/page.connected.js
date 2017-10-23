@@ -10,7 +10,7 @@ import { isValidPhoneE164 } from '~client/utils/validation-helper'
 
 import Page from './page'
 
-const mapStateToProps = state =>  ({
+const mapStateToProps = state => ({
   community: CommunitySelectors.getCurrent(state),
   forceFinishSubmit: CommunitySelectors.isForcedSubmit(state)
 })
@@ -70,7 +70,7 @@ export default connect(mapStateToProps)(
     graphql(graphqlQueries.fetchTwilioConfiguration, {
       options: ({ community }) => ({
         fetchPolicy: 'network-only',
-        variables: { communityId: community.id },
+        variables: { communityId: community.id }
       }),
       props: ({ ownProps, data: { configs, loading } }) => {
         const [config] = (configs && configs.list) || []

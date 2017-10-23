@@ -90,8 +90,7 @@ const CommunitySettingsTwilioPage = ({
             Escolha qual número Twilio quer usar
           </li>
         </ol>
-        <span>
-        </span>
+        <span />
       </HelpBlock>
       <FormControl type='text' tabIndex={3} placeholder='Ex: +5511956781234' />
     </FormGroup>
@@ -101,7 +100,7 @@ const CommunitySettingsTwilioPage = ({
 CommunitySettingsTwilioPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
-    mailchimp_list_id: PropTypes.object.isRequired,
+    mailchimp_list_id: PropTypes.object.isRequired
   }).isRequired,
   // redux-form required props
   submit: PropTypes.func.isRequired,

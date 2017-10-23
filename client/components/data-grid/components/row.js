@@ -14,5 +14,4 @@ const ClickableRow = ({ children, className, onSelectRow }) => (
   </div>
 )
 
-
 export default RowHOC(ClickableRow)
