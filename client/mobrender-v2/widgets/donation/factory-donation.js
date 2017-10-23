@@ -156,8 +156,7 @@ export default ({
     renderButton () {
       const {
         configurable,
-        widget: { settings, goal },
-        donationGoalStats,
+        widget: { settings },
         mobilization: { header_font: headerFont }
       } = this.props
 

@@ -17,7 +17,6 @@ import {
   Avatar,
   Name,
   CreatedAt,
-  FundRaising,
   More,
   MoreMenu,
   MoreMenuAction,
