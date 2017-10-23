@@ -22,7 +22,7 @@ export default ({ fieldName, ...mobilization }) =>
         }
         return Promise.resolve(data)
       })
-      .catch(({ ...errors, response }) => {
+      .catch(({ response, ...errors }) => {
         if (response.status === 422 && response.data.errors) {
           const errors = response.data.errors
           if (response.data.errors.custom_domain) {

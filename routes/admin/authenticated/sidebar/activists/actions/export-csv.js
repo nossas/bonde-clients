@@ -11,6 +11,6 @@ export default (ids, filename) => (dispatch, getState, { api }) => {
       return Promise.resolve()
     })
     .catch(error => {
-      return Promise.reject(new Error({ _error: error })
+      return Promise.reject(new Error({ _error: error }))
     })
 }

@@ -6,8 +6,7 @@ import * as validationHelper from '~client/utils/validation-helper'
 import { client as graphqlClient } from '~client/store'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
-import { Button } from '~client/ux/components'
-import { Summary } from '.'
+import { Summary } from './summary'
 
 const formatDate = date => {
   if (!date) return

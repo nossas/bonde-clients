@@ -39,7 +39,7 @@ class TargetList extends Component {
     const { targets } = this.state
     const { onSelect, errorMessage, selectable } = this.props
     const pressureType = pressureHelper.getType(targets)
-    const isPressureEmail = pressureType === pressureHelper.PRESSURE_TYPE_EMAIL
+    // const isPressureEmail = pressureType === pressureHelper.PRESSURE_TYPE_EMAIL
     const isPressurePhone = pressureType === pressureHelper.PRESSURE_TYPE_PHONE
 
     return (

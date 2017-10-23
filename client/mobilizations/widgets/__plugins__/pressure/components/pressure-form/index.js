@@ -31,7 +31,7 @@ class RealtimeCallDuration extends Component {
     this.state = { duration: 0, interval: undefined }
   }
 
-  timer = () => {
+  timer () {
     this.setState({ duration: this.state.duration + 1 })
   }
 
@@ -164,7 +164,6 @@ class PressureForm extends Component {
 
   render () {
     const {
-      targetList,
       callTransition,
       buttonColor,
       buttonText,

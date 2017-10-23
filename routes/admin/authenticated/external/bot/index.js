@@ -1,4 +1,4 @@
-import { injectAsyncReducer } from '~client/store'
+// import { injectAsyncReducer } from '~client/store'
 
 // polyfill webpack require.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)

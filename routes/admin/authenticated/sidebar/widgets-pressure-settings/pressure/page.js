@@ -12,7 +12,6 @@ import {
 import { SettingsForm } from '~client/ux/components'
 
 const PressureSettingsPage = ({
-  ...props,
   fields: {
     title_text: titleText,
     button_text: buttonText,
@@ -20,7 +19,8 @@ const PressureSettingsPage = ({
     show_city: showCity,
     count_text: countText,
     main_color: mainColor
-  }
+  },
+  ...props
 }) => {
   const handleSubmit = values => {
     const { widget, asyncWidgetUpdate } = props

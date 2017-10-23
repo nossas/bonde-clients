@@ -3,8 +3,7 @@ import axios from 'axios'
 import { reduxForm } from 'redux-form'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
-import { Button } from '~client/ux/components'
-import { Summary } from '.'
+import { Summary } from './summary'
 
 var styles = require('exenv').canUseDOM ? require('./facebook-bot-mass-message-form.scss') : {}
 
