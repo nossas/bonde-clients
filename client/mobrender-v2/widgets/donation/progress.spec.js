@@ -9,6 +9,7 @@ describe('client/mobrender-v2/widgets/donation/progress', () => {
 
   it('should render without crash', () => {
     progress = shallow(<Progress value={50} />)
+    // eslint-disable-next-line
     expect(progress).to.be.ok
   })
 
