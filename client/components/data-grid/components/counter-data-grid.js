@@ -2,7 +2,6 @@ import React from 'react'
 import { DataGridHOC } from '../hocs'
 import Row from './row'
 
-
 const Counter = ({
   children,
   data,

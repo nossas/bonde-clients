@@ -50,13 +50,13 @@ const ActivistSegmentationForm = ({
           date_interval_end: end
         } = values
 
-        const isOnlyMessage         =  m && !qr && !start && !end
-        const isOnlyQReply          = !m &&  qr && !start && !end
-        const isOnlyDateInterval    = !m && !qr &&  start &&  end
-        const isQReplyDateInterval  = !m &&  qr &&  start &&  end
-        const isMessageDateInterval =  m && !qr &&  start &&  end
-        const isMessageQReply       =  m &&  qr && !start && !end
-        const isAll                 =  m &&  qr &&  start &&  end
+        const isOnlyMessage = m && !qr && !start && !end
+        const isOnlyQReply = !m && qr && !start && !end
+        const isOnlyDateInterval = !m && !qr && start && end
+        const isQReplyDateInterval = !m && qr && start && end
+        const isMessageDateInterval = m && !qr && start && end
+        const isMessageQReply = m && qr && !start && !end
+        const isAll = m && qr && start && end
 
         const normalizeList = list => list.length ? list.map(i => JSON.parse(i.data)) : []
 
@@ -83,28 +83,22 @@ const ActivistSegmentationForm = ({
         if (isOnlyDateInterval) {
           const variables = { dateIntervalStart, dateIntervalEnd }
           executeQuery(graphqlQueries.fetchFacebookActivistsByDateInterval, variables)
-        }
-        else if (isOnlyQReply) {
+        } else if (isOnlyQReply) {
           const variables = { quickReply }
           executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReply, variables)
-        }
-        else if (isOnlyMessage) {
+        } else if (isOnlyMessage) {
           const variables = { message }
           executeQuery(graphqlQueries.fetchFacebookActivistsByMessage, variables)
-        }
-        else if (isQReplyDateInterval) {
+        } else if (isQReplyDateInterval) {
           const variables = { quickReply, dateIntervalStart, dateIntervalEnd }
           executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReplyDateInterval, variables)
-        }
-        else if (isMessageDateInterval) {
+        } else if (isMessageDateInterval) {
           const variables = { message, dateIntervalStart, dateIntervalEnd }
           executeQuery(graphqlQueries.fetchFacebookActivistsByMessageDateInterval, variables)
-        }
-        else if (isMessageQReply) {
+        } else if (isMessageQReply) {
           const variables = { message, quickReply }
           executeQuery(graphqlQueries.fetchFacebookActivistsByMessageQuickReply, variables)
-        }
-        else if (isAll) {
+        } else if (isAll) {
           const variables = { message, quickReply, dateIntervalStart, dateIntervalEnd }
           executeQuery(graphqlQueries.fetchFacebookActivistsByMessageQuickReplyDateInterval, variables)
         }
@@ -154,7 +148,9 @@ const ActivistSegmentationForm = ({
             onClick={() => changeParentState({ searchFinished: true })}
             className='btn white bg-pagenta caps p2 rounded h4'
             style={{
-              width: 'calc(250px - 3rem)', marginBottom: '2rem', marginRight: '1rem',
+              width: 'calc(250px - 3rem)',
+              marginBottom: '2rem',
+              marginRight: '1rem',
               backgroundColor: disableMessageButton ? '#f2f2f2' : '#000000'
             }}
           >
@@ -167,7 +163,9 @@ const ActivistSegmentationForm = ({
             disabled={disableFilterButton}
             className='btn white bg-pagenta caps p2 rounded h4'
             style={{
-              width: 'calc(250px - 3rem)', marginBottom: '2rem', marginLeft: '1rem',
+              width: 'calc(250px - 3rem)',
+              marginBottom: '2rem',
+              marginLeft: '1rem',
               backgroundColor: disableFilterButton ? '#f2f2f2' : '#000000'
             }}
           >
@@ -210,8 +208,7 @@ export const validate = values => {
   if (dateIntervalStart) {
     if (!dateIntervalStart.match(regexDateFormat)) {
       errors.date_interval_start = 'Ex: DD/MM/AAAA'
-    }
-    else {
+    } else {
       const [day, month, year] = dateIntervalStart.split('/')
       if (!validationHelper.isValidDate({ day, month, year })) {
         errors.date_interval_start = 'Data inválida'
@@ -222,8 +219,7 @@ export const validate = values => {
   if (dateIntervalEnd) {
     if (!dateIntervalEnd.match(regexDateFormat)) {
       errors.date_interval_end = 'Ex: DD/MM/AAAA'
-    }
-    else {
+    } else {
       const [day, month, year] = dateIntervalEnd.split('/')
       if (!validationHelper.isValidDate({ day, month, year })) {
         errors.date_interval_end = 'Data inválida'

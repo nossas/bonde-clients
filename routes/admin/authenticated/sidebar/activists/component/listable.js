@@ -202,7 +202,7 @@ export const FilterableHOC = () => (WrappedComponent) => {
           this.setState({ daysAgo: days }, resolve)
         }
       })
-    } 
+    }
 
     render () {
       return (

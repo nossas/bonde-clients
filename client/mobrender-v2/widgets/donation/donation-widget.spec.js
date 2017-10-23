@@ -5,7 +5,6 @@ import { Map } from 'immutable'
 
 import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
 
-
 const TellAFriend = () => (<div />)
 const FinishMessageCustom = () => (<div />)
 const DonationWidget = factoryDonation({
@@ -89,7 +88,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })
 
   describe('when payment method is users_choice', () => {
-
     beforeEach(() => {
       const newProps = props.mergeDeep(Map({
         widget: Map({
@@ -142,7 +140,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })
 
   describe('donation values', () => {
-
     const values = [5, 10, 20, 25, 30]
 
     beforeEach(() => {
@@ -184,7 +181,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       values.map((value, i) => {
         donationWidget.find('a.value-option').at(i).simulate('click')
         expect(donationWidget.instance().state.selected_value)
-          .to.equal(i+1)
+          .to.equal(i + 1)
       })
     })
   })

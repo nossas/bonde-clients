@@ -1,5 +1,5 @@
 import * as CommunitySelectors from '~client/community/selectors'
-import downloadjs from 'downloadjs' 
+import downloadjs from 'downloadjs'
 
 export default (ids, filename) => (dispatch, getState, { api }) => {
   const communityId = CommunitySelectors.getCurrentId(getState())
@@ -11,6 +11,6 @@ export default (ids, filename) => (dispatch, getState, { api }) => {
       return Promise.resolve()
     })
     .catch(error => {
-      return Promise.reject({ _error: error })
+      return Promise.reject(new Error({ _error: error })
     })
 }

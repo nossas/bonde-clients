@@ -47,8 +47,7 @@ const validate = values => {
   if (values.goal_date_limit) {
     if (!values.goal_date_limit.match(/\d{2}\/\d{2}\/\d{2}/)) {
       errors.goal_date_limit = 'Insira a data desse jeito, ó: DD/MM/AAAA'
-    }
-    else {
+    } else {
       const [day, month, year] = values.goal_date_limit.split('/')
       if (!validationHelper.isValidDate({ day, month, year })) {
         errors.goal_date_limit = 'Data inválida.'

@@ -13,7 +13,6 @@ import ActivistDetailHOC from './component/detail'
 if (require('exenv').canUseDOM) require('./styles.scss')
 var styles = require('exenv').canUseDOM ? require('./container.scss') : {}
 
-
 const QueryForm = ({
   query,
   onQueryChange,
