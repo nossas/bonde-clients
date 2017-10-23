@@ -14,7 +14,8 @@
     "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail --config ./tools/webpack.client.js",
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
-    "release": "./node_modules/.bin/standard-version"
+    "release": "./node_modules/.bin/standard-version",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -79,6 +80,7 @@
     "jest": "21.2.1",
     "jquery": "3.2.1",
     "keycode": "2.1.9",
+    "lint-staged": "^4.3.0",
     "mocha": "3.5.0",
     "morgan": "1.9.0",
     "newrelic": "2.3.0",
@@ -88,6 +90,7 @@
     "opn": "5.1.0",
     "postcss-loader": "2.0.8",
     "postcss-scss": "1.0",
+    "prettier": "^1.7.4",
     "prop-types": "15.6.0",
     "rangy": "1.3.0",
     "raven": "2.2.1",
@@ -181,6 +184,12 @@
       "**/migrations/**",
       "**/tools/**",
       "**/test/**"
+    ]
+  },
+  "lint-staged": {
+    "client/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
     ]
   },
   "jest": {
