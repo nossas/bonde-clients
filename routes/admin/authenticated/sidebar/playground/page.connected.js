@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { graphql, gql } from 'react-apollo'
+import ReactFileReader from 'react-file-reader'
 
 import { required, validateEmail, validate } from '~client/utils/validate'
 import * as CommunitySelectors from '~client/community/selectors'
@@ -70,11 +71,55 @@ const CreateActivistForm = graphql(createActivistMutation)(
   )
 )
 
-const Page = ({ communityId }) => (
-  <div style={{ marginLeft: '20px' }}>
-    <h1>{`Insert activit in community (${communityId})`}</h1>
-    <CreateActivistForm communityId={communityId} />
-  </div>
-)
+class Page extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.state = { activists: [] }
+  }
+
+  parseCSV (csv) {
+    const allTextLines = csv.split(/\r\n|\n/)
+    const activists = allTextLines.map(row => {
+      const data = row.split(';')
+      return {
+        name: data[0],
+        email: data[1]
+      }
+    })
+    this.setState({ activists })
+    return activists
+  }
+
+  onChange (files) {
+    const reader = new FileReader()
+    reader.onload = () => this.parseCSV(reader.result)
+    reader.readAsText(files.fileList[0])
+  }
+
+  render () {
+  
+    const { communityId } = this.props 
+
+    return (
+      <div style={{ marginLeft: '20px' }}>
+        <h1>{`Insert activit in community (${communityId})`}</h1>
+        <div style={{ backgroundColor: '#c7c7c7', width: '200px' }}>
+          <ReactFileReader base64={true} multipleFiles={false} handleFiles={this.onChange.bind(this)}>
+            <button>Upload!</button>
+          </ReactFileReader>
+        </div>
+        <div>
+          <ul>
+            {this.state.activists.map((activist) => (
+              <li key={activist.name}>{`${activist.name}(${activist.email})`}</li>
+            ))}
+          </ul>
+        </div>
+        <CreateActivistForm communityId={communityId} />
+      </div>
+    )
+  }
+}
 
 export default connect(mapStateToProps)(Page)
