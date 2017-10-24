@@ -6,6 +6,7 @@ import {
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
 import Select from 'react-select-plus'
+import ImportCSV from './component/import-csv'
 
 import FilterForm from './component/filter-form'
 import ActivistDetailHOC from './component/detail'
@@ -242,16 +243,19 @@ class Container extends Component {
                     {totalCount} pessoas
                   </div>
                 )}
-                {selected.length > 0 && (
-                  <div className='Action-btn-group'>
+                <div className='Action-btn-group'>
+                  <ImportCSV>
+                    <button type='button'>Import CSV</button>
+                  </ImportCSV>
+                  {selected.length > 0 && (
                     <button
                       type='button'
                       onClick={this.onExportCSV.bind(this)}
                     >
                       Exportar CSV
                     </button>
-                  </div>
-                )}
+                  )}
+                </div> 
               </div>
 
               <div className={styles.tableContainer}>

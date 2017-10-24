@@ -93,6 +93,11 @@
   position: absolute;
   right: 0;
 
+  > * {
+    display: inline-block;
+    margin-left: 5px;
+  }
+  
   button {
     font-weight: bold;
     font-size: 18px;
