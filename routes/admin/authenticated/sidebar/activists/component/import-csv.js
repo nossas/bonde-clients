@@ -2,12 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { graphql, gql } from 'react-apollo'
 import uuidv4 from 'uuid/v4'
+import { addNotification as notify } from 'reapop'
 
 import * as CommunitySelectors from '~client/community/selectors'
 
 const mapStateToProps = (state) => ({
   communityId: CommunitySelectors.getCurrentId(state)
 })
+
+const mapActionsToProps = { notify }
 
 const createActivistMutation = gql`
   mutation createActivist($activist: Json!) {
@@ -60,7 +63,9 @@ class SimpleImportCSV extends React.Component {
   }
 
   insertActivists (activists) {
-    const { communityId } = this.props
+    const { communityId, notify } = this.props
+    let inserted = 0
+    let uninserted = 0
     activists.forEach(activist => {
       this.props.mutate({
         variables: {
@@ -70,9 +75,33 @@ class SimpleImportCSV extends React.Component {
           })
         }})
         .then(({ data: { createActivist } }) => {
-          console.log(`Created activist with id (${JSON.parse(createActivist.json).id})`)
+          inserted += 1
         })
+        .catch(ex => {
+          uninserted += 1
+        })  
     })
+    if (inserted > 0) {
+      notify({
+        id: 'notify.activists.bulk-insert.success',
+        title: 'Sucesso!',
+        status: 'success',
+        message: `${inserted} ativistas importados com sucesso.`,
+        dismissAfter: 0,
+        dismissable: true,
+        closeButton: false
+      })
+    } else if (uninserted > 0) {
+      notify({
+        id: 'notify.activists.bulk-insert.fail',
+        title: 'Ooops!',
+        status: 'error',
+        message: `Falha ao tentar importar ${uninserted} ativistas.`,
+        dismissAfter: 0,
+        dismissable: true,
+        closeButton: false
+      })
+    }
   }
 
   clickInput () {
@@ -100,6 +129,6 @@ class SimpleImportCSV extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, mapActionsToProps)(
   graphql(createActivistMutation)(SimpleImportCSV)
 )
