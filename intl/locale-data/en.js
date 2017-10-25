@@ -74,7 +74,7 @@ export default {
   'notification--generic-request-error.title': 'Oops!',
   'notification--generic-request-error.message': 'It seems that he had some technical problem with this last request. Please try again later.',
 
-  'notification--generic-save-success.title': 'Oba!',
+  'notification--generic-save-success.title': 'Yay!',
   'notification--generic-save-success.message': 'The request was successfully made and your data is safely saved.',
 
   'notification--slug-updated-message.title': 'Important',
@@ -86,7 +86,7 @@ export default {
   'notification--account-password-retrieve-success.title': 'Password recovery',
   'notification--account-password-retrieve-success.message': 'We just sent you an email with your new password. Check your email inbox to access BONDE again. So relax, you can change this password whenever you want in your account settings.',
 
-  'notification--community-invite-success.title': 'Oba!',
+  'notification--community-invite-success.title': 'Yay!',
   'notification--community-invite-success.message': 'Invitation to {email} was successfully sent! One more step has been given to your community to grow even more (:',
 
   'notification--subscription-cancel-success.title': 'Subscription canceled',
@@ -312,8 +312,8 @@ servidor-03.dominio.com`,
   'components.navigation--sidebar.community-settings.item.metrics': 'Metrics',
   'components.navigation--sidebar.community-settings.item.domains': 'Domain Names',
 
-  'components.navigation--sidebar.mobilization-settings.item.launch': 'PUBLISH WALL',
-  'components.navigation--sidebar.mobilization-settings.item.launched': 'Public bond',
+  'components.navigation--sidebar.mobilization-settings.item.launch': 'PUBLISH BONDE',
+  'components.navigation--sidebar.mobilization-settings.item.launched': 'Public BONDE',
   'components.navigation--sidebar.mobilization-settings.item.edit': 'Edit mobilization',
   'components.navigation--sidebar.mobilization-settings.item.add-block': 'Add Content',
   'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'View in new tab',
@@ -343,7 +343,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
   'mobilizations.components--page-tab-layout.title': 'New mobilization',
-  'mobilizations.components--page-tab-layout.tabs.goal': 'goal',
+  'mobilizations.components--page-tab-layout.tabs.goal': 'Goal',
   'mobilizations.components--page-tab-layout.tabs.templates': 'Templates',
 
   'page--mobilizations-new.title': 'What is the purpose of your mobilization?',
@@ -357,7 +357,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--basics-form.slug.helper-text': 'The value of this field is used to refer to mobilization in the BONDE domain, for example: {example}',
   'mobilizations.components--basics-form.slug.validation.required': 'Enter the unique identifier of the mobilization',
   'mobilizations.components--basics-form.slug.validation.max-length': 'Your unique identifier is too long!',
-  'mobilizations.components--basics-form.goal.label': 'goal',
+  'mobilizations.components--basics-form.goal.label': 'Goal',
   'mobilizations.components--basics-form.goal.placeholder': 'Make a short text that will motivate others to join in your mobilization. You can change this text later.',
   'mobilizations.components--basics-form.goal.validation.required': 'Enter the purpose of the mobilization',
   'mobilizations.components--basics-form.goal.validation.max-length': 'The character limit has been reached.',
@@ -582,7 +582,7 @@ servidor-03.dominio.com`,
 
   'page--donation-widget-finish.form.success-message': 'Post-donation form saved successfully!',
 
-  'donation.components--tell-a-friend.message': 'Oba, donation registered! Is your donation via ticket? Check your email.',
+  'donation.components--tell-a-friend.message': 'Yay, donation registered! Is your donation via ticket? Check your email.',
 
   'widgets.config--content.label': 'Text',
   'widgets.config--content.default': 'Click here to edit...',
