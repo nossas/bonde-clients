@@ -53,10 +53,12 @@ const validate = (values, { intl }) => {
   if (hasAlphanumerics(values.donation_value4)) errors.donation_value4 = messageInvalid
   if (hasAlphanumerics(values.donation_value5)) errors.donation_value5 = messageInvalid
 
-  if (hasAlphanumerics(values.goal)) errors.goal = intl.formatMessage({
-    id: 'page--donation-widget.form.validation.goal.format',
-    defaultMessage: 'Insira o valor desse jeito, ó: 1000'
-  })
+  if (hasAlphanumerics(values.goal)) {
+    errors.goal = intl.formatMessage({
+      id: 'page--donation-widget.form.validation.goal.format',
+      defaultMessage: 'Insira o valor desse jeito, ó: 1000'
+    })
+  }
 
   if (values.goal_date_limit) {
     if (!values.goal_date_limit.match(/\d{2}\/\d{2}\/\d{2}/)) {
@@ -64,8 +66,7 @@ const validate = (values, { intl }) => {
         id: 'page--donation-widget.form.validation.goal-date-limit.format',
         defaultMessage: 'Insira a data desse jeito, ó: DD/MM/AAAA'
       })
-    }
-    else {
+    } else {
       const [day, month, year] = values.goal_date_limit.split('/')
       if (!validationHelper.isValidDate({ day, month, year })) {
         errors.goal_date_limit = intl.formatMessage({

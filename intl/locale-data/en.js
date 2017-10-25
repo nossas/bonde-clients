@@ -295,7 +295,6 @@ servidor-03.dominio.com`,
   'c--metrics.total.donations.refunded-amount': 'Total repayment value of donations collected so far:',
   'c--metrics.total.donations.refused-amount': 'Total repayment value of donations collected so far:',
 
-
   'page--community-report.section-button.donation.title': 'DONATIONS REPORT',
   'page--community-report.section-button.donation.helper-text': 'Click the button below to download the community donation report.',
   'page--community-report.section-button.donation.text': 'Download',
@@ -588,7 +587,7 @@ servidor-03.dominio.com`,
   'widgets.config--content.label': 'Text',
   'widgets.config--content.default': 'Click here to edit...',
   'widgets.config--form.label': 'Form',
-  'widgets.config--form.default': 'Thank you for betting on the strength of collective networking action. Your participation is very important and we need your help now so that more people can collaborate with this mobilization. Share on your networks by clicking one of the links below. \ N \ nA hug',
+  'widgets.config--form.default': 'Thank you for betting on the strength of collective networking action. Your participation is very important and we need your help now so that more people can collaborate with this mobilization. Share on your networks by clicking one of the links below. \n\nA hug',
   'widgets.config--pressure.label': 'Pressure',
   'widgets.config--pressure.default.title': 'Send an email to anyone who can make this decision',
   'widgets.config--pressure.default.button-text': 'Send Email',
@@ -774,5 +773,5 @@ servidor-03.dominio.com`,
   'activists-management.c--filterable-list.period.options.last-quarter': 'In the last 3 months',
   'activists-management.c--filterable-list.period.options.last-year': 'On the last year',
   'activists-management.c--filterable-list.period.options.always': 'Ever',
-  'activists-management.c--filterable-list.period.options.custom-period': 'Customize period ...',
+  'activists-management.c--filterable-list.period.options.custom-period': 'Customize period ...'
 }

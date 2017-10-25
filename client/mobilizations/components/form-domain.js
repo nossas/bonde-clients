@@ -38,9 +38,9 @@ const CreateDomainText = ({ onClickLink }) => (
       }}
     />
     <br />
-      <FormattedMessage
-        id='mobilizations.components--form-domain.create-domain-text.second-line'
-        defaultMessage='Senão você pode, abaixo, usar um domínio externo para configurar o endereço da sua mobilização.'
+    <FormattedMessage
+      id='mobilizations.components--form-domain.create-domain-text.second-line'
+      defaultMessage='Senão você pode, abaixo, usar um domínio externo para configurar o endereço da sua mobilização.'
       />
   </p>
 )
@@ -223,26 +223,26 @@ class FormDomain extends Component {
               defaultMessage='Estamos quase lá, antes de publicar sua mobilização é preciso escolher a url que será usada para publicação.'
             />
             <br />
-              <FormattedMessage
-                id='mobilizations.components--form-domain.helper-text-second-line'
-                defaultMessage='Já cadastrou um domínio na comunidade? Selecione abaixo qual das opções melhor se encaixa.'
+            <FormattedMessage
+              id='mobilizations.components--form-domain.helper-text-second-line'
+              defaultMessage='Já cadastrou um domínio na comunidade? Selecione abaixo qual das opções melhor se encaixa.'
               />
             <br />
-              <FormattedMessage
-                id='mobilizations.components--form-domain.helper-text-third-line'
-                defaultMessage={
+            <FormattedMessage
+              id='mobilizations.components--form-domain.helper-text-third-line'
+              defaultMessage={
                   'Quer cadastrar um novo domínio? {link}.'
                 }
-                values={{
-                  link: (
-                    <a href='#' onClick={this.clickHere.bind(this)} target='_self'>
-                      <FormattedMessage
-                        id='mobilizations.components--form-domain.helper-text-third-line.link'
-                        defaultMessage='Clique aqui'
+              values={{
+                link: (
+                  <a href='#' onClick={this.clickHere.bind(this)} target='_self'>
+                    <FormattedMessage
+                      id='mobilizations.components--form-domain.helper-text-third-line.link'
+                      defaultMessage='Clique aqui'
                       />
-                    </a>
+                  </a>
                   )
-                }}
+              }}
               />
           </p>
 
@@ -425,7 +425,7 @@ class FormDomain extends Component {
                       containerClassName='form-control--external-domain'
                       type='text'
                       placeholder={
-                        intl.formatMessage ({
+                        intl.formatMessage({
                           id: 'mobilizations.components--form-domain.advanced.form.external-domain.placeholder',
                           defaultMessage: 'meudominio.com.br'
                         })

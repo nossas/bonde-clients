@@ -142,9 +142,9 @@ class Mobilization extends React.Component {
               }}
             >
               <i className='fa fa-plus' />
-                <FormattedMessage
-                  id='mobrender.components--mobilization.add-block-content'
-                  defaultMessage='Adicionar bloco de conteúdo'
+              <FormattedMessage
+                id='mobrender.components--mobilization.add-block-content'
+                defaultMessage='Adicionar bloco de conteúdo'
                 />
             </div>
           )}

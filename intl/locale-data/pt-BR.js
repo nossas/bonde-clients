@@ -728,7 +728,6 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
   'mobilizations.components--form-domain.basic.form.domain.button.chose': 'Escolha...',
 
-
   'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Quero usar um domínio principal cadastrado na comunidade',
   'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio que deseja configurar como endereço da sua mobilização',
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
+import { FormattedMessage, intlShape } from 'react-intl'
 
 const TwitterShareButton = props => {
   const handleClick = () => {

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
 import { shallowWithIntl } from '~root/intl/helpers'
 
 import { ControlButtons } from '~client/components/forms/control-buttons'
