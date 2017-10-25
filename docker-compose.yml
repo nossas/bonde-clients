@@ -38,7 +38,7 @@ services:
 
   # This container will run the rails web server:
   api-v1:
-    image: nossas/bonde-server:feature-add-activist-function
+    image: nossas/bonde-server:develop
     command: bundle exec puma -C config/puma.rb
 
     # build:

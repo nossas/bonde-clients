@@ -62,46 +62,59 @@ class SimpleImportCSV extends React.Component {
     }
   }
 
+  mergeName (activist) {
+    if (Object.keys(activist).indexOf('name') === -1) {
+      return {
+        ...activist,
+        name: `${activist.first_name} ${activist.last_name}`
+      }
+    }
+    return activist
+  }
+  
   insertActivists (activists) {
     const { communityId, notify } = this.props
-    let inserted = 0
-    let uninserted = 0
-    activists.forEach(activist => {
-      this.props.mutate({
-        variables: {
-          activist: JSON.stringify({
-            ...activist,
-            community_id: communityId
-          })
-        }})
+    const promises = activists.map(activist => {
+      return new Promise((resolve, reject) => {
+        this.props.mutate({
+          variables: {
+            activist: JSON.stringify({
+              ...this.mergeName(activist),
+              community_id: communityId
+            })
+          }
+        })
         .then(({ data: { createActivist } }) => {
-          inserted += 1
+          return resolve(JSON.parse(createActivist.json))
         })
         .catch(ex => {
-          uninserted += 1
-        })  
+          return reject(ex)
+        })
+      })
     })
-    if (inserted > 0) {
-      notify({
-        id: 'notify.activists.bulk-insert.success',
-        title: 'Sucesso!',
-        status: 'success',
-        message: `${inserted} ativistas importados com sucesso.`,
-        dismissAfter: 0,
-        dismissable: true,
-        closeButton: false
+    Promise.all(promises)
+      .then(result => {
+        notify({
+          id: 'notify.activists.bulk-insert.success',
+          title: 'Sucesso!',
+          status: 'success',
+          message: `${result.length} ativistas importados com sucesso.`,
+          dismissAfter: 0,
+          dismissable: true,
+          closeButton: false
+        })  
       })
-    } else if (uninserted > 0) {
-      notify({
-        id: 'notify.activists.bulk-insert.fail',
-        title: 'Ooops!',
-        status: 'error',
-        message: `Falha ao tentar importar ${uninserted} ativistas.`,
-        dismissAfter: 0,
-        dismissable: true,
-        closeButton: false
+      .catch(err => {
+        notify({
+          id: 'notify.activists.bulk-insert.fail',
+          title: 'Ooops!',
+          status: 'error',
+          message: `${err.message || err}`,
+          dismissAfter: 0,
+          dismissable: true,
+          closeButton: false
+        }) 
       })
-    }
   }
 
   clickInput () {
