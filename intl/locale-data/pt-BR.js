@@ -572,6 +572,12 @@ servidor-03.dominio.com`,
   'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
+  // component mobilizations list item: fund raising
+  // filepath: /client/mobilizations/components/list/items/copy-number.js
+  // routepath:
+  //   - /mobilizations/templates/list
+  'mobilizations.components--list.items.copy-number.header.text': 'Núm. Cópias',
+
   // component mobilizations page tab layout
   // filepath: /client/mobilizations/components/page-tab-layout.js
   // routepath:
@@ -845,6 +851,11 @@ servidor-03.dominio.com`,
   'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
   'page--templates-create.form.goal.label': 'Descrição',
   'page--templates-create.form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+
+  // page templates create (connected)
+  // filepath: /routes/admin/authenticated/sidebar/templates-create/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/templates/create
+  'page--templates-create.form.validation.required': 'Preenchimento obrigatório',
 
   // component donation widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/settings-menu.js

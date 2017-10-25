@@ -348,6 +348,8 @@ servidor-03.dominio.com`,
   'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
+  'mobilizations.components--list.items.copy-number.header.text': 'Copies',
+
   'mobilizations.components--page-tab-layout.title': 'New mobilization',
   'mobilizations.components--page-tab-layout.tabs.goal': 'Goal',
   'mobilizations.components--page-tab-layout.tabs.templates': 'Templates',
@@ -501,6 +503,8 @@ servidor-03.dominio.com`,
   'page--templates-create.form.name.placeholder': 'For the creation of a police station for the disappeared',
   'page--templates-create.form.goal.label': 'Description',
   'page--templates-create.form.goal.placeholder': 'Make a short text that can motivate others to join in your mobilization. You can change this text later.',
+
+  'page--templates-create.form.validation.required': 'Required field',
 
   'donation.components--settings-menu.title': 'Set up your donation box',
   'donation.components--settings-menu.tabs.adjusts': 'Settings',

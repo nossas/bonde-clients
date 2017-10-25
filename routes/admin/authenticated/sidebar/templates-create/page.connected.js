@@ -38,15 +38,22 @@ const mapActionCreatorsToProps = {
 
 export default provideHooks(redial)(
   connect(mapStateToProps, mapActionCreatorsToProps)(
-    reduxForm({
-      form: 'templateCreateForm',
-      validate: (values) => {
-        const errors = {}
-        if (!values.name) errors.name = 'Preenchimento obrigatório'
-        if (!values.goal) errors.goal = 'Preenchimento obrigatório'
-        return errors
-      },
-      fields: ['name', 'goal', 'mobilization_id', 'global']
-    })(injectIntl(Page))
+    injectIntl(
+      reduxForm({
+        form: 'templateCreateForm',
+        validate: (values, { intl }) => {
+          const errors = {}
+          const requiredMessage = intl.formatMessage({
+            id: 'page--templates-create.form.validation.required',
+            defaultMessage: 'Preenchimento obrigatório'
+          })
+
+          if (!values.name) errors.name = requiredMessage
+          if (!values.goal) errors.goal = requiredMessage
+          return errors
+        },
+        fields: ['name', 'goal', 'mobilization_id', 'global']
+      })(Page)
+    )
   )
 )
