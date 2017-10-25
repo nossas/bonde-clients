@@ -14,17 +14,26 @@ import FormLogin from './page'
 
 const fields = ['email', 'password']
 
-const validate = values => {
+const validate = (values, { intl }) => {
   const errors = {}
   if (!values.email) {
-    errors.email = 'Informe seu email'
+    errors.email = intl.formatMessage({
+      id: 'p--account-login.form.email.validation.required',
+      defaultMessage: 'Informe seu email'
+    })
     errors.valid = false
   } else if (!isValidEmail(values.email)) {
-    errors.email = 'Email inválido'
+    errors.email = intl.formatMessage({
+      id: 'p--account-login.form.email.validation.invalid',
+      defaultMessage: 'Email inválido'
+    })
     errors.valid = false
   }
   if (!values.password) {
-    errors.password = 'Informe sua senha'
+    errors.password = intl.formatMessage({
+      id: 'p--account-login.form.password.validation.required',
+      defaultMessage: 'Informe sua senha'
+    })
     errors.valid = false
   }
   return errors

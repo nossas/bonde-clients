@@ -9,6 +9,10 @@ export default {
   'page--account-login.auth.error-message': 'Incorrect password.',
   'page--account-login.auth.error-message.retrieve-password.link': 'Forgot your password?',
 
+  'p--account-login.form.email.validation.required': 'Enter your email',
+  'p--account-login.form.email.validation.invalid': 'Invalid email',
+  'p--account-login.form.password.validation.required': 'Inform your password',
+
   'page--account-register.title': 'Create your Bonde account.',
   'page--account-register.form.name.label': 'Name',
   'page--account-register.form.name.placeholder': 'Your name',
@@ -27,6 +31,8 @@ export default {
   'page--account-register.form.submit-button.default': 'Create an account',
   'page--account-register.form.submit-button.saving': 'Saving ...',
 
+  'p--account-retrieve.title.first-line': 'What is your email address?',
+  'p--account-retrieve.title.second-line': 'We will send a new password to you.',
   'p--account-retrieve.form.email.validation.required': 'Enter your email address',
   'p--account-retrieve.form.email.validation.invalid-email-format': 'Invalid email',
   'p--account-retrieve.form.email.label': 'Email',

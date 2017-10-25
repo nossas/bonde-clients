@@ -12,10 +12,19 @@ export default {
   'page--account-login.auth.error-message': 'Senha incorreta.',
   'page--account-login.auth.error-message.retrieve-password.link': 'Esqueceu sua senha?',
 
+  // page account login (connected)
+  // filepath: /routes/admin/not-authenticated/account-login/page.connected.js
+  // routepath: /login
+  'p--account-login.form.email.validation.required': 'Informe seu email',
+  'p--account-login.form.email.validation.invalid': 'Email inválido',
+  'p--account-login.form.password.validation.required': 'Informe sua senha',
+
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
   // routepath: /register
   'page--account-register.title': 'Crie sua conta no Bonde.',
+  'p--account-retrieve.title.first-line': 'Qual seu email cadastrado?',
+  'p--account-retrieve.title.second-line': 'Vamos enviar uma nova senha para você.',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
   'page--account-register.form.name.validation.required': 'Informe seu nome',
