@@ -716,12 +716,18 @@ servidor-03.dominio.com`,
   'page--pressure-widget-email.success-message': 'Target email configured successfully!',
   'page--pressure-widget-email.form.input-tag.label': 'Targets',
   'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Invalid pattern. Fill in as explained above.',
+  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'You have already registered a target for email pressure.',
+  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'You have already registered a target for phone pressure.',
   'page--pressure-widget-email.form.email-subject.label': 'Email subject',
   'page--pressure-widget-email.form.email-body.label': 'Body of the email that will be sent',
+  'page--pressure-widget-email.form.disable-edit-field.label': 'Disable email editing and body editing',
+  'page--pressure-widget-email.form.disable-edit-field.value.yes': 'Yes',
+  'page--pressure-widget-email.form.disable-edit-field.value.no': 'No',
 
   'p--pressure-widget--input-tag.info.title': 'How to register targets',
   'p--pressure-widget--input-tag.info.text': 'The target register is very simple and can be done with more than one target at a time. You need to separate the targets in separate lines, and each target must follow the format described below. To register, simply press {keyboardTrigger}. And do not forget to save by clicking the button in the upper right corner of the screen.',
   'p--pressure-widget--input-tag.info.item.target-format': 'Target format: {format} (required to use the {lt} and {gt} characters to group the email)',
+  'p--pressure-widget--input-tag.info.item.target-format.example': 'Name <email@hostname.com>',
   'p--pressure-widget--input-tag.info.item.special-chars': 'In both types of pressure it is mandatory to use the characters {lt} and {gt} to group the email or telephone',
   'p--pressure-widget--input-tag.info.item.sorting': 'The targets will be displayed in random order in the pressure widget. That is, each time the mobilization is accessed, the display order will be different.',
 
@@ -733,14 +739,14 @@ servidor-03.dominio.com`,
 
   'pressure-widget--target-list.label.email': `
     Who will you press? ({targetsCount} {targetsCount, plural,
-      one {alvo}
-      other {alvos}
+      one {target}
+      other {targets}
     })
   `,
   'pressure-widget--target-list.label.pressure': `
     Select who you want to press ({targetsCount} {targetsCount, plural,
-      one {alvo}
-      other {alvos}
+      one {target}
+      other {targets}
     })
   `,
 

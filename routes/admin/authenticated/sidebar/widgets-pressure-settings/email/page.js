@@ -103,12 +103,18 @@ class PressureSettingsEmailPage extends Component {
                 this.state.pressureType === 'email' &&
                 targets.some(target => validator.isValidTargetPhoneE164(target))
               ) {
-                errors.message = 'Você já cadastrou um alvo para pressão por email.'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.type-email-registered',
+                  defaultMessage: 'Você já cadastrou um alvo para pressão por email.'
+                })
               } else if (
                 this.state.pressureType === 'phone' &&
                 targets.some(target => validator.isValidTargetEmail(target))
               ) {
-                errors.message = 'Você já cadastrou um alvo para pressão por telefone.'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.type-phone-registered',
+                  defaultMessage: 'Você já cadastrou um alvo para pressão por telefone.'
+                })
               }
 
               if (errors.message) errors.valid = false
@@ -148,7 +154,14 @@ class PressureSettingsEmailPage extends Component {
                         '{lt} e {gt} para agrupar o email)'
                       }
                       values={{
-                        format: <b>{'Nome <email@provedor.com>'}</b>,
+                        format: (
+                          <b>
+                            <FormattedMessage
+                              id='p--pressure-widget--input-tag.info.item.target-format.example'
+                              defaultMessage='Nome <email@provedor.com>'
+                            />
+                          </b>
+                        ),
                         lt: <Kbd>{'<'}</Kbd>,
                         gt: <Kbd>{'>'}</Kbd>
                       }}
@@ -195,8 +208,18 @@ class PressureSettingsEmailPage extends Component {
             />
           </ControlLabel>
           <RadioGroup>
-            <Radio value='s'>Sim</Radio>
-            <Radio value='n'>Não</Radio>
+            <Radio value='s'>
+              <FormattedMessage
+                id='page--pressure-widget-email.form.disable-edit-field.value.yes'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='n'>
+              <FormattedMessage
+                id='page--pressure-widget-email.form.disable-edit-field.value.no'
+                defaultMessage='Não'
+              />
+            </Radio>
           </RadioGroup>
         </FormGroup>
       </SettingsForm>

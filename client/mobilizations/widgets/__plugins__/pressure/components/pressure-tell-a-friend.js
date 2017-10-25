@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TellAFriend } from '~client/components/share'
 
@@ -8,7 +9,12 @@ const PressureTellAFriend = ({ preview, mobilization, widget }) => (
     preview={preview}
     mobilization={mobilization}
     widget={widget}
-    message='Pressão enviada'
+    message={
+      <FormattedMessage
+        id='pressure-widget--tell-a-friend.message'
+        defaultMessage='Pressão enviada'
+      />
+    }
   />
 )
 
