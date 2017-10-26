@@ -1,8 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
 import { Map } from 'immutable'
-
+import { mountWithIntl } from '~root/intl/helpers'
 import { factoryDonation } from '~client/mobrender-v2/widgets/donation'
 
 const TellAFriend = () => (<div />)
@@ -20,7 +19,7 @@ describe('<DonationWidget />', () => {
   })
 
   beforeEach(() => {
-    donationWidget = mount(<DonationWidget {...props.toJS()} />)
+    donationWidget = mountWithIntl(<DonationWidget {...props.toJS()} />)
   })
 
   it('should render without crash', () => {
@@ -49,7 +48,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })
     }).toJS()
     expect(
-      mount(<DonationWidget {...newProps} />)
+      mountWithIntl(<DonationWidget {...newProps} />)
         .instance()
         .state.selected_value
     ).to.equal(defaultDonationValue)
