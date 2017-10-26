@@ -226,25 +226,25 @@ class Container extends Component {
                   </div>
                 )}
                 {totalCount > 0 && (
-                  <input
-                    id='selectAllId'
-                    type='checkbox'
-                    disabled={totalCount === 0}
-                    checked={isSelectedAll}
-                    onClick={(evt) => {
-                      if (isSelectedAll) onRemoveAll()
-                      else onSelectAll()
-                    }}
-                  />
-                )}
-                {totalCount > 0 && (
-                  <div className={styles.h1}>
-                    {totalCount} pessoas
+                  <div className={styles.selectAll}>
+                    <input
+                      id='selectAllId'
+                      type='checkbox'
+                      disabled={totalCount === 0}
+                      checked={isSelectedAll}
+                      onClick={(evt) => {
+                        if (isSelectedAll) onRemoveAll()
+                        else onSelectAll()
+                      }}
+                    />
+                    <div className={styles.h1}>
+                      {totalCount} pessoas
+                    </div>
                   </div>
                 )}
-                <div className='Action-btn-group'>
+                <div className={styles.btnGroup}>
                   <ImportCSV>
-                    <button type='button'>Import CSV</button>
+                    <button type='button'>Importar CSV</button>
                   </ImportCSV>
                   {selected.length > 0 && (
                     <button
