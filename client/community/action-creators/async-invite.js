@@ -27,7 +27,7 @@ export default (communityId, invitation) => (dispatch, getState, { api, intl }) 
       dispatch(AwaitActions.setLoading(false))
 
       if (status === 400 && data.errors) {
-        dispatch(notify(genericRequestError()))
+        dispatch(notify(genericRequestError(intl)))
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
         dispatch(notify(communityInviteSuccess(intl, invitation.email)))
@@ -36,7 +36,7 @@ export default (communityId, invitation) => (dispatch, getState, { api, intl }) 
       }
     })
     .catch(error => {
-      dispatch(notify(genericRequestError()))
+      dispatch(notify(genericRequestError(intl)))
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_INVITE_FAILURE, error))
       return Promise.reject(error)
