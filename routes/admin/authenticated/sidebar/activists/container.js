@@ -254,7 +254,7 @@ class Container extends Component {
                       Exportar CSV
                     </button>
                   )}
-                </div> 
+                </div>
               </div>
 
               <div className={styles.tableContainer}>

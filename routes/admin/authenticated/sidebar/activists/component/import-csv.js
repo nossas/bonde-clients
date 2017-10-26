@@ -23,7 +23,6 @@ const createActivistMutation = gql`
 `
 
 class SimpleImportCSV extends React.Component {
-
   constructor (props) {
     super(props)
     this.state = {
@@ -34,8 +33,8 @@ class SimpleImportCSV extends React.Component {
 
   onChange (evt) {
     const file = evt.target.files[0]
-    if (file) { 
-      const reader = new FileReader()
+    if (file) {
+      const reader = new window.FileReader()
       reader.addEventListener('load', () => {
         // Split CSV in rows, check if row is empty
         const isEmpty = line => line.length === 0 || !line.trim()
@@ -71,7 +70,7 @@ class SimpleImportCSV extends React.Component {
     }
     return activist
   }
-  
+
   insertActivists (activists) {
     const { communityId, notify } = this.props
     const promises = activists.map(activist => {
@@ -102,7 +101,7 @@ class SimpleImportCSV extends React.Component {
           dismissAfter: 0,
           dismissable: true,
           closeButton: false
-        })  
+        })
       })
       .catch(err => {
         notify({
@@ -113,7 +112,7 @@ class SimpleImportCSV extends React.Component {
           dismissAfter: 0,
           dismissable: true,
           closeButton: false
-        }) 
+        })
       })
   }
 

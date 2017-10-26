@@ -3,8 +3,7 @@ import { expect } from 'chai'
 import { required, validateEmail, validate } from './'
 
 describe('validate', () => {
-  
-  it('should return errors with required field', () => { 
+  it('should return errors with required field', () => {
     const values = { firstName: 'Ada', email: '', lastName: '' }
     expect(required(['firstName', 'lastName', 'email'])(values)).to.deep.equal({
       lastName: 'Required field.',
@@ -26,7 +25,7 @@ describe('validate', () => {
 
   it('should keep validation message with order to be applied', () => {
     const values = { name: '', email: '' }
-    
+
     const fnFirstRequired = validate([
       required(['name', 'email']),
       validateEmail(['email'])
@@ -38,7 +37,7 @@ describe('validate', () => {
 
     const fnFirstEmail = validate([
       validateEmail(['email']),
-      required(['name', 'email']) 
+      required(['name', 'email'])
     ])
     expect(fnFirstEmail(values)).to.deep.equal({
       name: 'Required field.',
