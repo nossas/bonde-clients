@@ -65,9 +65,10 @@ describe('~client/mobrender/components/block', () => {
 
   it('should render hidden tag when block is hidden', () => {
     expect(block.find('div.hidden-tag').length).to.equal(0)
+
+    const expected = 'Escondido'
     block.setProps({ block: { ...props.block, hidden: true } })
-    expect(block.find('div.hidden-tag').length).to.equal(1)
-    expect(block.find('div.hidden-tag').text()).to.equal(' Escondido')
+    expect(block.find('div.hidden-tag FormattedMessage').props().defaultMessage).to.equal(expected)
   })
 
   describe('render change background', () => {
