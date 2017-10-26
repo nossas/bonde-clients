@@ -4,13 +4,19 @@ import * as CommunityActions from '~client/community/action-creators'
 
 import Page from './page'
 
-const validate = (values) => {
+const validate = (values, { intl }) => {
   const error = {}
   if (!values.name) {
-    error.name = 'Informe o nome da comunidade'
+    error.name = intl.formatMessage({
+      id: 'page--community-new.form.name.validation.required',
+      defaultMessage: 'Informe o nome da comunidade'
+    })
   }
   if (!values.city) {
-    error.city = 'Informe em qual cidade sua comunidade atua'
+    error.city = intl.formatMessage({
+      id: 'page--community-new.form.city.validation.required',
+      defaultMessage: 'Informe em qual cidade sua comunidade atua'
+    })
   }
   return error
 }

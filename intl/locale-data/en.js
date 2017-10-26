@@ -98,10 +98,14 @@ export default {
   'notification--subscription-cancel-success.title': 'Subscription canceled',
   'notification--subscription-cancel-success.message': 'Your signature has been canceled, and the amount of your donation will not be charged until you make a recurring donation.',
 
-  'notify.community.check--dns--success': 'DNS servers are synchronized, you can now configure your email and other services, as well as choose the domain of your mobilization.',
-  'notify.community.check--dns--failure': 'The DNS server change is still pending. You can try again in a few minutes.',
+  'notify.community.check--dns--success.title': 'Yay!',
+  'notify.community.check--dns--success.text': 'DNS servers are synchronized, you can now configure your email and other services, as well as choose the domain of your mobilization.',
+  'notify.community.check--dns--failure.title': 'Ooops!',
+  'notify.community.check--dns--failure.text': 'The DNS server change is still pending. You can try again in a few minutes.',
+  'notify.community.add--dns-hosted-zone--failure.title': 'Ooops!',
+  'notify.community.add--dns-hosted-zone--failure.text': 'There was an error on the server, make sure this domain was not already inserted.',
 
-  'page--community-list.title': 'Hello {userFirstName},',
+  'page--community-list.title': 'Hello {name},',
   'page--community-list.subtitle': 'Choose one of your communities',
   'page--community-list.or': 'or {link}',
   'page--community-list.new': 'Create a new community',
@@ -203,6 +207,9 @@ servidor-03.dominio.com`,
   'page--community-invite.form.email.placeholder': 'Please enter an email to invite. Ex: mobilizador@email.com',
   'page--community-invite.form.submit-button.default': 'To invite',
 
+  'page--community-invite.form.email.validation.required': 'Required',
+  'page--community-invite.form.email.validation.invalid': 'Please enter a valid email address',
+
   'ux.components--settings-form.button.text': 'To save',
   'ux.components--settings-form.success-message': 'Data edited successfully',
 
@@ -221,6 +228,17 @@ servidor-03.dominio.com`,
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Select the corresponding list and follow the steps: {settingsStrong}> {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Now just paste in the field below the contents of the right column below the title {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Enter here the "List ID"',
+
+  'page--community-twilio.helper-text.title': 'Where to get this information?',
+  'page--community-twilio.helper-text.twilio-login': 'Sign in to {link}',
+  'page--community-twilio.helper-text.twilio-login.link': 'Twilio\'s website',
+
+  'page--community-twilio.form.twilio-account-sid.label': 'Twilio Account SID',
+  'page--community-twilio.form.twilio-auth-token.label': 'Twilio Auth Token',
+  'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Click the eye icon',
+  'page--community-twilio.form.twilio-number.label': 'Twilio Number',
+  'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Click {strongPhoneNumber} ({strongHashtag} symbol in the left menu)',
+  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Choose which number Twilio wants to use',
 
   'page--community-new.title': 'Create a community',
   'page--community-new.subtitle': 'Tram communities are action groups that work together for a cause.',
@@ -300,6 +318,9 @@ servidor-03.dominio.com`,
   'c--metrics.total.donations.charged-back-amount': 'Total amount returned for donations collected so far:',
   'c--metrics.total.donations.refunded-amount': 'Total repayment value of donations collected so far:',
   'c--metrics.total.donations.refused-amount': 'Total repayment value of donations collected so far:',
+
+  'page--community-report.title.metrics': 'Metrics',
+  'page--community-report.title.reports': 'Reports',
 
   'page--community-report.section-button.donation.title': 'DONATIONS REPORT',
   'page--community-report.section-button.donation.helper-text': 'Click the button below to download the community donation report.',

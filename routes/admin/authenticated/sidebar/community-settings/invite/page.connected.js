@@ -18,17 +18,23 @@ const mergeProps = ({ communityId }, { asyncInvite }) => ({
 
 const fields = ['email']
 
-const validate = ({ email }) => {
+const validate = ({ email }, { intl }) => {
   const errors = {}
 
   if (!email) {
-    errors.email = 'Obrigatório'
+    errors.email = intl.formatMessage({
+      id: 'page--community-invite.form.email.validation.required',
+      defaultMessage: 'Obrigatório'
+    })
   } else if (!isValidEmail(email)) {
-    errors.email = 'Informe um email válido'
+    errors.email = intl.formatMessage({
+      id: 'page--community-invite.form.email.validation.invalid',
+      defaultMessage: 'Informe um email válido'
+    })
   }
   return errors
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  reduxForm({ form: 'communityInviteForm', fields, validate })(injectIntl(Page))
+  injectIntl(reduxForm({ form: 'communityInviteForm', fields, validate })(Page))
 )

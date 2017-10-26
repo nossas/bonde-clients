@@ -133,13 +133,17 @@ export default {
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
   // routepath: /community/domain
-  'notify.community.check--dns--success': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
-  'notify.community.check--dns--failure': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
+  'notify.community.check--dns--success.title': 'Uhuu!',
+  'notify.community.check--dns--success.text': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
+  'notify.community.check--dns--failure.title': 'Ooops!',
+  'notify.community.check--dns--failure.text': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
+  'notify.community.add--dns-hosted-zone--failure.title': 'Ooops!',
+  'notify.community.add--dns-hosted-zone--failure.text': 'Ocorreu um erro no servidor, verifique se este domínio já não foi inserido.',
 
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
   // routepath: /community
-  'page--community-list.title': 'Olá {userFirstName},',
+  'page--community-list.title': 'Olá {name},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
   'page--community-list.or': 'ou {link}',
   'page--community-list.new': 'Crie uma nova comunidade',
@@ -274,6 +278,12 @@ servidor-03.dominio.com`,
   'page--community-invite.form.email.placeholder': 'Insira um email para convidar. Ex: mobilizador@email.com',
   'page--community-invite.form.submit-button.default': 'Convidar',
 
+  // page community invite (connected)
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.connected.js
+  // routepath: /community/invite
+  'page--community-invite.form.email.validation.required': 'Obrigatório',
+  'page--community-invite.form.email.validation.invalid': 'Informe um email válido',
+
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
   // routepath:
@@ -316,6 +326,20 @@ servidor-03.dominio.com`,
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
+
+  // page community twilio settings
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
+  // routepath: /community/twilio
+  'page--community-twilio.helper-text.title': 'Onde buscar essa informação?',
+  'page--community-twilio.helper-text.twilio-login': 'Faça login no {link}',
+  'page--community-twilio.helper-text.twilio-login.link': 'site do Twilio',
+
+  'page--community-twilio.form.twilio-account-sid.label': 'Twilio Account SID',
+  'page--community-twilio.form.twilio-auth-token.label': 'Twilio Auth Token',
+  'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Clicar no ícone do olho',
+  'page--community-twilio.form.twilio-number.label': 'Twilio Number',
+  'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Clique em {strongPhoneNumber} (símbolo de {strongHashtag} no menu da esquerda)',
+  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escolha qual número Twilio quer usar',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
@@ -414,6 +438,8 @@ servidor-03.dominio.com`,
     // page community report
     // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
     // routepath: /community/report
+  'page--community-report.title.metrics': 'Métricas',
+  'page--community-report.title.reports': 'Relatórios',
 
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
   'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',

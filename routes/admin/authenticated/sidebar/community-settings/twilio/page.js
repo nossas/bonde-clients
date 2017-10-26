@@ -17,20 +17,36 @@ const CommunitySettingsTwilioPage = ({
   <SettingsForm {...formProps}>
     <FormGroup controlId='twilioAccountSid' {...twilioAccountSid}>
       <ControlLabel>
-        Twilio Account SID
+        <FormattedMessage
+          id='page--community-twilio.form.twilio-account-sid.label'
+          defaultMessage='Twilio Account SID'
+        />
       </ControlLabel>
       <HelpBlock>
         <b>
           <FormattedMessage
-            id='page--community-mailchimp.form.api-key.helper-text.title'
+            id='page--community-twilio.helper-text.title'
             defaultMessage='Onde buscar essa informação?'
           />
         </b>
         <br />
         <span>
-          Faça login no <a href='https://www.twilio.com' target='_blank'>site do Twilio</a>
-          {' >'} <b>Account Summary</b>
-          {' >'} <b>ACCOUNT SID</b>
+          <FormattedMessage
+            id='page--community-twilio.helper-text.twilio-login'
+            defaultMessage='Faça login no {link}'
+            values={{
+              link: (
+                <a href='https://www.twilio.com' target='_blank'>
+                  <FormattedMessage
+                    id='page--community-twilio.helper-text.twilio-login.link'
+                    defaultMessage='site do Twilio'
+                  />
+                </a>
+              )
+            }}
+          />
+          {' > '}<b>Account Summary</b>
+          {' > '}<b>ACCOUNT SID</b>
         </span>
       </HelpBlock>
       <FormControl
@@ -42,21 +58,43 @@ const CommunitySettingsTwilioPage = ({
 
     <FormGroup controlId='twilioAuthToken' {...twilioAuthToken}>
       <ControlLabel>
-        Twilio Auth Token
+        <FormattedMessage
+          id='page--community-twilio.form.twilio-auth-token.label'
+          defaultMessage='Twilio Auth Token'
+        />
       </ControlLabel>
       <HelpBlock>
         <b>
           <FormattedMessage
-            id='page--community-mailchimp.form.api-key.helper-text.title'
+            id='page--community-twilio.helper-text.title'
             defaultMessage='Onde buscar essa informação?'
           />
         </b>
         <br />
         <span>
-          Faça login no <a href='https://www.twilio.com' target='_blank'>site do Twilio</a>
-          {' >'} <b>Account Summary</b>
-          {' >'} <b>AUTH TOKEN</b>
-          {' >'} <b>Clicar no ícone do olho</b>
+          <FormattedMessage
+            id='page--community-twilio.helper-text.twilio-login'
+            defaultMessage='Faça login no {link}'
+            values={{
+              link: (
+                <a href='https://www.twilio.com' target='_blank'>
+                  <FormattedMessage
+                    id='page--community-twilio.helper-text.twilio-login.link'
+                    defaultMessage='site do Twilio'
+                  />
+                </a>
+              )
+            }}
+          />
+          {' > '}<b>Account Summary</b>
+          {' > '}<b>AUTH TOKEN</b>
+          {' > '}
+          <b>
+            <FormattedMessage
+              id='page--community-twilio.form.twilio-auth-token.helper-text.eye-icon'
+              defaultMessage='Clicar no ícone do olho'
+            />
+          </b>
         </span>
       </HelpBlock>
       <FormControl
@@ -68,25 +106,54 @@ const CommunitySettingsTwilioPage = ({
 
     <FormGroup controlId='twilioNumber' {...twilioNumber}>
       <ControlLabel>
-        Twilio Number
+        <FormattedMessage
+          id='page--community-twilio.form.twilio-number.label'
+          defaultMessage='Twilio Number'
+        />
       </ControlLabel>
       <HelpBlock>
         <b>
           <FormattedMessage
-            id='page--community-mailchimp.form.api-key.helper-text.title'
+            id='page--community-twilio.helper-text.title'
             defaultMessage='Onde buscar essa informação?'
           />
         </b>
         <br />
         <ol>
           <li>
-            Faça login no <a href='https://www.twilio.com' target='_blank'>site do Twilio</a>
+            <FormattedMessage
+              id='page--community-twilio.helper-text.twilio-login'
+              defaultMessage='Faça login no {link}'
+              values={{
+                link: (
+                  <a href='https://www.twilio.com' target='_blank'>
+                    <FormattedMessage
+                      id='page--community-twilio.helper-text.twilio-login.link'
+                      defaultMessage='site do Twilio'
+                    />
+                  </a>
+                )
+              }}
+            />
           </li>
           <li>
-            Clique em <b>Phone Number</b> (símbolo de <b>#</b> no menu da esquerda)
+            <FormattedMessage
+              id='page--community-twilio.form.twilio-number.helper-text.menu-item'
+              defaultMessage={
+                'Clique em {strongPhoneNumber} ' +
+                '(símbolo de {strongHashtag} no menu da esquerda)'
+              }
+              values={{
+                strongPhoneNumber: <b>Phone Number</b>,
+                strongHashtag: <b>#</b>
+              }}
+            />
           </li>
           <li>
-            Escolha qual número Twilio quer usar
+            <FormattedMessage
+              id='page--community-twilio.form.twilio-number.helper-text.choice-number'
+              defaultMessage='Escolha qual número Twilio quer usar'
+            />
           </li>
         </ol>
         <span />
