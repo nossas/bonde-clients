@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
@@ -178,6 +179,7 @@ class Container extends Component {
   render () {
     const { data, loading, totalCount } = this.props
     const {
+      intl,
       selected,
       onSelectAll,
       onRemoveAll,
@@ -190,10 +192,19 @@ class Container extends Component {
 
     return (
       <SettingsPageLayout>
-        <SettingsPageMenuLayout title='Base de usuários' className={styles.pageMenu} />
+        <SettingsPageMenuLayout
+          title={intl.formatMessage({
+            id: 'routes.admin.sidebar.activists.container.title',
+            defaultMessage: 'Base de usuários'
+          })}
+          className={styles.pageMenu}
+        />
         <QueryForm
           name='q'
-          label='Filtre por mobilizações ou formulários'
+          label={intl.formatMessage({
+            id: 'routes.admin.sidebar.activists.container.filter-placeholder',
+            defaultMessage: 'Filtre por mobilizações ou formulários'
+          })}
           onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
           onQueryChange={(q) => {
@@ -222,7 +233,10 @@ class Container extends Component {
               <div className={`${styles.title} clearfix`}>
                 {totalCount <= 0 && (
                   <div className={`${styles.h1} mx3`}>
-                    Ops! Ninguém com esse filtro :(
+                    <FormattedMessage
+                      id='routes.admin.sidebar.activists.container.empty-list'
+                      defaultMessage='Ops! Ninguém com esse filtro :('
+                    />
                   </div>
                 )}
                 {totalCount > 0 && (
@@ -238,20 +252,35 @@ class Container extends Component {
                       }}
                     />
                     <div className={styles.h1}>
-                      {totalCount} pessoas
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.counter'
+                        defaultMessage={`{totalCount} {totalCount, plural,
+                          one {pessoa}
+                          other {pessoas}
+                        }`}
+                        values={{ totalCount }}
+                      /> 
                     </div>
                   </div>
                 )}
                 <div className={styles.btnGroup}>
                   <ImportCSV>
-                    <button type='button'>Importar CSV</button>
+                    <button type='button'>
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.import-csv'
+                        defaultMessage='Importar CSV'
+                      />
+                    </button>
                   </ImportCSV>
                   {selected.length > 0 && (
                     <button
                       type='button'
                       onClick={this.onExportCSV.bind(this)}
                     >
-                      Exportar CSV
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.export-csv'
+                        defaultMessage='Exportar CSV'
+                      />
                     </button>
                   )}
                 </div>

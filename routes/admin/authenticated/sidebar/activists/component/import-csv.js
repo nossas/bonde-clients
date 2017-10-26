@@ -3,14 +3,23 @@ import { connect } from 'react-redux'
 import { graphql, gql } from 'react-apollo'
 import uuidv4 from 'uuid/v4'
 import { addNotification as notify } from 'reapop'
+import { injectIntl } from 'react-intl'
 
+import * as Notifications from '../notifications'
 import * as CommunitySelectors from '~client/community/selectors'
 
 const mapStateToProps = (state) => ({
   communityId: CommunitySelectors.getCurrentId(state)
 })
 
-const mapActionsToProps = { notify }
+const mapActionsToProps = (dispatch, { intl }) => ({
+  notifyBulkInsertSuccess: (context) => dispatch(notify(
+    Notifications.bulkInsertSuccess(intl, context)
+  )),
+  notifyBulkInsertFail: (context) => dispatch(notify(
+    Notifications.bulkInsertFailr(intl, context)
+  ))
+})
 
 const createActivistMutation = gql`
   mutation createActivist($activist: Json!) {
@@ -72,14 +81,13 @@ class SimpleImportCSV extends React.Component {
   }
 
   insertActivists (activists) {
-    const { communityId, notify } = this.props
     const promises = activists.map(activist => {
       return new Promise((resolve, reject) => {
         this.props.mutate({
           variables: {
             activist: JSON.stringify({
               ...this.mergeName(activist),
-              community_id: communityId
+              community_id: this.props.communityId
             })
           }
         })
@@ -91,29 +99,14 @@ class SimpleImportCSV extends React.Component {
         })
       })
     })
+
     Promise.all(promises)
-      .then(result => {
-        notify({
-          id: 'notify.activists.bulk-insert.success',
-          title: 'Sucesso!',
-          status: 'success',
-          message: `${result.length} ativistas importados com sucesso.`,
-          dismissAfter: 0,
-          dismissable: true,
-          closeButton: false
-        })
-      })
-      .catch(err => {
-        notify({
-          id: 'notify.activists.bulk-insert.fail',
-          title: 'Ooops!',
-          status: 'error',
-          message: `${err.message || err}`,
-          dismissAfter: 0,
-          dismissable: true,
-          closeButton: false
-        })
-      })
+      .then(result => this.props.notifyBulkInsertSuccess({
+        length: result.length
+      }))
+      .catch(err => this.props.notifyBulkInsertFail({
+        error: err.message || err
+      }))
   }
 
   clickInput () {
@@ -141,6 +134,8 @@ class SimpleImportCSV extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(
-  graphql(createActivistMutation)(SimpleImportCSV)
+export default injectIntl(
+  connect(mapStateToProps, mapActionsToProps)(
+    graphql(createActivistMutation)(SimpleImportCSV)
+  )
 )
