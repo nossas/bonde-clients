@@ -58,12 +58,30 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
     mobilization.facebook_share_description &&
     mobilization.twitter_share_text
   )
+  const savingButtonMessage = (
+    <FormattedMessage
+      id='page--mobilizations-launch.button.saving'
+      defaultMessage='Salvando...'
+    />
+  )
+  const launchButtonMessage = (
+    <FormattedMessage
+      id='page--mobilizations-launch.button.launch'
+      defaultMessage='Lançar mobilização'
+    />
+  )
+  const continueButtonMessage = (
+    <FormattedMessage
+      id='page--mobilizations-launch.button.next'
+      defaultMessage='Continuar'
+    />
+  )
 
   return (
     <PageCentralizedLayout>
       <PageCentralizedLayoutTitle>
         <FormattedMessage
-          id='page--mobilizations-launch.button.launch'
+          id='page--mobilizations-launch.title'
           defaultMessage='Lançando sua mobilização'
         />
       </PageCentralizedLayoutTitle>
@@ -78,8 +96,17 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
           <FormDomain
             {...formProps}
             formComponent={FlatForm}
-            titleText='Configure o endereço da mobilização'
-            buttonText={isSaving ? 'Salvando...' : stepShareValidation() ? 'Lançar mobilização' : 'Continuar'}
+            titleText={
+              <FormattedMessage
+                id='page--mobilizations-launch.steps.form-domain.title'
+                defaultMessage='Configure o endereço da mobilização'
+              />
+            }
+            buttonText={
+              isSaving
+                ? savingButtonMessage
+                : (stepShareValidation() ? launchButtonMessage : continueButtonMessage)
+            }
             requiredField
             mobilization={mobilization}
             hostedZones={hostedZones}
@@ -96,8 +123,13 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
             {...formProps}
             FormComponent={FlatForm}
             formClassNames='mobilization-launch--form-share'
-            titleText='Configure as informações de compartilhamento'
-            buttonText={isSaving ? 'Salvando...' : 'Lançar mobilização'}
+            titleText={
+              <FormattedMessage
+                id='page--mobilizations-launch.steps.form-share.title'
+                defaultMessage='Configure as informações de compartilhamento'
+              />
+            }
+            buttonText={isSaving ? savingButtonMessage : launchButtonMessage}
           />
         </StepContent>
 
@@ -112,11 +144,19 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
             <p className='h5'>
               <FormattedMessage
                 id='page--mobilizations-launch.steps.done.helper-text'
-                defaultMessage='Em uma nova aba, digite o endereço que cadastrou na mobilização para se certificar de que ela já está no ar. Se ainda não estiver, cheque se cadastrou os domínios corretamente. Está tudo certo? Então é só esperar ele propagar pela internet!'
+                defaultMessage={
+                  'Em uma nova aba, digite o endereço que cadastrou na mobilização ' +
+                  'para se certificar de que ela já está no ar. Se ainda não estiver, ' +
+                  'cheque se cadastrou os domínios corretamente. Está tudo certo? Então ' +
+                  'é só esperar ele propagar pela internet!'
+                }
               />
             </p>
             <Button href={`http://${mobilization.custom_domain}`} target='_blank'>
-              Visualizar mobilização
+              <FormattedMessage
+                id='page--mobilizations-launch.steps.done.button.open'
+                defaultMessage='Visualizar mobilização'
+              />
             </Button>
           </div>
         </StepContent>

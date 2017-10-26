@@ -138,7 +138,10 @@ export const validate = (values, { intl }) => {
   }
 
   if (!values.goal) {
-    errors.goal = 'Insira o objetivo da mobilização'
+    errors.goal = intl.formatMessage({
+      id: 'mobilizations.components--basics-form.goal.validation.required',
+      defaultMessage: 'Insira o objetivo da mobilização'
+    })
   } else if (values.goal.length > 500) {
     errors.goal = intl.formatMessage({
       id: 'mobilizations.components--basics-form.goal.validation.max-length',

@@ -345,7 +345,7 @@ servidor-03.dominio.com`,
 
   'mobilizations.components--list.items.users.header.text': 'Users',
 
-  'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
+  'mobilizations.components--list.items.fund-raising.header.text': 'Fund Raising',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
   'mobilizations.components--list.items.copy-number.header.text': 'Copies',
@@ -396,7 +396,7 @@ servidor-03.dominio.com`,
 
   'page--mobilizations-analytics.first-paragraph': 'To track the results of your mobilization, you need to set up an account in Google Analytics.',
   'page--mobilizations-analytics.second-paragraph': 'Follow the steps below:',
-  'page--mobilizations-analytics.ol.create-analytics-account': ' Create an account in Google Analytics {link}',
+  'page--mobilizations-analytics.ol.create-analytics-account': ' Create an account in Google Analytics {analyticsLink}',
   'page--mobilizations-analytics.ol.create-analytics-account.link': 'clicking here',
   'page--mobilizations-analytics.ol.keep-up-with': 'Get your Tracking ID in Google Analytics. It is a code that always starts with the letters UA, which you will see after creating your account there.',
   'page--mobilizations-analytics.ol.paste-ga-code': 'Copy the tracking ID and paste in the field below:',
@@ -429,6 +429,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomain',
   'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedamob',
   'mobilizations.components--form-domain.basic.form.domain.label': 'Primary Domain',
+  'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Choice...',
 
   'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'I want to use a primary domain registered in the community',
   'mobilizations.components--form-domain.root.helper-text': 'Choose the domain you want to configure as your mobilization address',
@@ -444,9 +445,18 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.cname-table.header.record-type': 'Kind',
   'mobilizations.components--form-domain.cname-table.header.data': 'Data',
   'mobilizations.components--form-domain.cname-table.footer.helper-text': 'If you have any questions, take a look at the "Configuring your domain on BONDE" topic in our tutorial, {link}.',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'Trilho',
+
+  'mobilizations.components--form-domain.validation.required': 'Required field',
+  'mobilizations.components--form-domain.validation.subdomain.required': 'Required to fill subdomain',
+  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Required to complete main domain',
+  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Please enter a valid subdomain',
+  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Enter a valid domain',
 
   'mobrender.components--mobilization.footer.slogan': 'Made to cause. Done with',
+  'mobrender.components--mobilization.add-block-content': 'Add content block',
 
+  'mobrender.components--block-config-menu.item.duplicate': 'Duplicate block',
   'mobrender.components--block-config-menu.item.change-background': 'Change Background',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Show',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'To hide',
@@ -457,6 +467,8 @@ servidor-03.dominio.com`,
 
   'mobrender.components--block-change-background.button.save': 'To save',
   'mobrender.components--block-change-background.button.cancel': 'Cancel',
+
+  'mobrender.components--block.hidden-tag': 'Hidden',
 
   'components.navigation--navbar-edition-wrapper.block': 'Block',
 
@@ -610,6 +622,27 @@ servidor-03.dominio.com`,
   'widgets.components--donation.period-label-options.year': 'year',
   'widgets.components--donation.users-choice.recurring': 'Support all {periodLabelCurrent}',
   'widgets.components--donation.users-choice.unique': 'Single donation',
+  'widgets.components--donation.reattempt.message.title': 'Oops!',
+  'widgets.components--donation.reattempt.message.text.line-01': 'Something wrong happened with your donation. ):',
+  'widgets.components--donation.reattempt.message.text.line-02': 'Click the button below to try again.',
+  'widgets.components--donation.reattempt.message.button.text': 'Retry',
+  'widgets.components--donation.progress-bar.collected': 'collected',
+  'widgets.components--donation.progress-bar.supports': `
+    {totalDonations} {totalDonations, plural,
+      one {support}
+      other {supports}
+    }
+  `,
+  'widgets.components--donation.progress-bar.goal': 'Goal:',
+  'widgets.components--donation.progress-bar.date.last-day': 'last day!',
+  'widgets.components--donation.progress-bar.date.last-days': 'last days!',
+  'widgets.components--donation.progress-bar.date.last-week': 'last week!',
+  'widgets.components--donation.progress-bar.date.remaining': `
+    remaining {goalDateRemaining} {goalDateRemaining, plural,
+      one {day}
+      other {days}
+    }
+  `,
 
   'form-widget.components--settings-menu.title': 'Set up your action form',
   'form-widget.components--settings-menu.items.fields': 'Form fields',
@@ -677,10 +710,15 @@ servidor-03.dominio.com`,
   'form-widget.components--tell-a-friend.message': 'Form submitted successfully!',
 
   'pressure-widget.components--pressure-form.validation.required': 'Required field',
-  'pressure-widget.components--pressure-form.email.label': 'Email',
-  'pressure-widget.components--pressure-form.email.placeholder': 'Enter your email',
   'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'Invalid email',
   'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'The email you are trying to use is one of the targets of the mobilization.',
+  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Enter the country code and the two-digit DDD. Ex: +5511',
+  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Invalid phone number',
+  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'The phone you are trying to use is one of the targets of the mobilization.',
+  'pressure-widget.components--pressure-form.email.label': 'Email',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Enter your email',
+  'pressure-widget.components--pressure-form.phone.label': 'Phone',
+  'pressure-widget.components--pressure-form.phone.placeholder': 'Insert your phone. Ex: +5511987654321',
   'pressure-widget.components--pressure-form.name.label': 'Name',
   'pressure-widget.components--pressure-form.name.placeholder': 'Enter your name',
   'pressure-widget.components--pressure-form.lastname.label': 'Last name',
@@ -689,6 +727,15 @@ servidor-03.dominio.com`,
   'pressure-widget.components--pressure-form.city.placeholder': 'Enter your city',
   'pressure-widget.components--pressure-form.subject.label': 'Subject matter',
   'pressure-widget.components--pressure-form.body.label': 'Email body',
+  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Call in progress',
+  'pressure-widget.components--pressure-form.phone-calls.retry': 'To reenact',
+  'pressure-widget.components--pressure-form.phone-calls.call': 'To reenact',
+  'pressure-widget.components--pressure-form.phone.how-it-works.title': 'How it works?',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'We\'re calling your target.',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'As soon as someone picks up from there, we\'ll call you',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'When you answer, we connect the calls',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Now it\'s up to you!',
+  'pressure-widget.components--pressure-form.phone.finish-and-share': 'Close and Share',
 
   'pressure-widget.components--settings-menu.title': 'Set up your pressure form',
   'pressure-widget.components--settings-menu.items.form': 'Form',

@@ -15,34 +15,51 @@ const fields = [
   'rootDomainConfig'
 ]
 
-export const validate = (values, props) => {
+export const validate = (values, { requiredField, intl }) => {
   const errors = {}
+  const requiredMessage = intl.formatMessage({
+    id: 'mobilizations.components--form-domain.validation.required',
+    defaultMessage: 'Preenchimento obrigatório'
+  })
+  const requiredDomainMessage = intl.formatMessage({
+    id: 'mobilizations.components--form-domain.validation.subdomain.required-domain',
+    defaultMessage: 'Obrigatório preencher o domínio principal'
+  })
 
-  if (props.requiredField) {
+  if (requiredField) {
     if (values.advancedConfig === true && !values.externalDomain) {
-      errors.externalDomain = 'Preenchimento obrigatório'
+      errors.externalDomain = requiredMessage
     }
     if (!values.rootDomainConfig) {
       if (!values.advancedConfig && !values.subdomain) {
-        errors.subdomain = 'Obrigatório preencher subdomínio'
+        errors.subdomain = intl.formatMessage({
+          id: 'mobilizations.components--form-domain.validation.subdomain.required',
+          defaultMessage: 'Obrigatório preencher subdomínio'
+        })
       }
       if (!values.advancedConfig && !values.domain) {
-        errors.subdomain = 'Obrigatório preencher o domínio principal'
+        errors.subdomain = requiredDomainMessage
       }
     }
   }
 
   if (!values.rootDomainConfig && !values.advancedConfig && !values.domain) {
-    errors.subdomain = 'Obrigatório preencher o domínio principal'
+    errors.subdomain = requiredDomainMessage
   }
   if (values.rootDomainConfig && !values.rootDomain) {
-    errors.rootDomain = 'Preenchimento obrigatório'
+    errors.rootDomain = requiredMessage
   }
   if (values.subdomain && !/^[\w-]+$/.test(values.subdomain)) {
-    errors.subdomain = 'Informe um subdomínio válido'
+    errors.subdomain = intl.formatMessage({
+      id: 'mobilizations.components--form-domain.validation.subdomain.required',
+      defaultMessage: 'Informe um subdomínio válido'
+    })
   }
   if (values.externalDomain && !isValidDomain(values.externalDomain)) {
-    errors.externalDomain = 'Informe um domínio válido'
+    errors.externalDomain = intl.formatMessage({
+      id: 'mobilizations.components--form-domain.validation.external-domain.invalid',
+      defaultMessage: 'Informe um domínio válido'
+    })
   }
 
   return errors

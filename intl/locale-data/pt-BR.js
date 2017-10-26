@@ -741,7 +741,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomínio',
   'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedamob',
   'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
-  'mobilizations.components--form-domain.basic.form.domain.button.chose': 'Escolha...',
+  'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Escolha...',
 
   'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Quero usar um domínio principal cadastrado na comunidade',
   'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio que deseja configurar como endereço da sua mobilização',
@@ -759,6 +759,17 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.',
   'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'Trilho',
 
+  // component mobilizations form domain (connected)
+  // filepath: /client/mobilizations/components/form-domain.connected.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/launch
+  'mobilizations.components--form-domain.validation.required': 'Preenchimento obrigatório',
+  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Obrigatório preencher o domínio principal',
+  'mobilizations.components--form-domain.validation.subdomain.required': 'Obrigatório preencher subdomínio',
+  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Informe um subdomínio válido',
+  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Informe um domínio válido',
+
   // component mobrender mobilization
   // filepath: /client/mobrender/components/mobilization.js
   // routepath:
@@ -770,6 +781,7 @@ servidor-03.dominio.com`,
   // component mobrender block config menu
   // filepath: /client/mobrender/components/block-config-menu.js
   // routepath: /mobilizations/:mobilization_id/edit
+  'mobrender.components--block-config-menu.item.duplicate': 'Duplicar bloco',
   'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
@@ -783,6 +795,11 @@ servidor-03.dominio.com`,
   // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--block-change-background.button.save': 'Salvar',
   'mobrender.components--block-change-background.button.cancel': 'Cancelar',
+
+  // component mobrender block
+  // filepath: /client/mobrender/components/block.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'mobrender.components--block.hidden-tag': 'Escondido',
 
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
@@ -1029,6 +1046,27 @@ servidor-03.dominio.com`,
   'widgets.components--donation.period-label-options.year': 'ano',
   'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
   'widgets.components--donation.users-choice.unique': 'Doação única',
+  'widgets.components--donation.reattempt.message.title': 'Ops!',
+  'widgets.components--donation.reattempt.message.text.line-01': 'Algo de errado aconteceu com a sua doação. ):',
+  'widgets.components--donation.reattempt.message.text.line-02': 'Clique no botão abaixo pra tentar de novo.',
+  'widgets.components--donation.reattempt.message.button.text': 'Nova tentativa',
+  'widgets.components--donation.progress-bar.collected': 'arrecadados',
+  'widgets.components--donation.progress-bar.supports': `
+    {totalDonations} {totalDonations, plural,
+      one {apoio}
+      other {apoio}
+    }
+  `,
+  'widgets.components--donation.progress-bar.goal': 'Meta:',
+  'widgets.components--donation.progress-bar.date.last-day': 'último dia!',
+  'widgets.components--donation.progress-bar.date.last-days': 'últimos dias!',
+  'widgets.components--donation.progress-bar.date.last-week': 'última semana!',
+  'widgets.components--donation.progress-bar.date.remaining': `
+    faltam {goalDateRemaining} {goalDateRemaining, plural,
+      one {dia}
+      other {dias}
+    }
+  `,
 
   // component form widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/settings-menu.js
@@ -1143,10 +1181,15 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'pressure-widget.components--pressure-form.validation.required': 'Preenchimento obrigatório',
-  'pressure-widget.components--pressure-form.email.label': 'E-mail',
-  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
   'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'E-mail inválido',
   'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da mobilização.',
+  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Informe o código do país e o DDD com dois dígitos. Ex: +5511',
+  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Telefone inválido',
+  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'O telefone que você está tentando usar é de um dos alvos da mobilização.',
+  'pressure-widget.components--pressure-form.email.label': 'E-mail',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
+  'pressure-widget.components--pressure-form.phone.label': 'Telefone',
+  'pressure-widget.components--pressure-form.phone.placeholder': 'Insira seu telefone. Ex: +5511987654321',
   'pressure-widget.components--pressure-form.name.label': 'Nome',
   'pressure-widget.components--pressure-form.name.placeholder': 'Insira seu nome',
   'pressure-widget.components--pressure-form.lastname.label': 'Sobrenome',
@@ -1155,6 +1198,15 @@ servidor-03.dominio.com`,
   'pressure-widget.components--pressure-form.city.placeholder': 'Insira sua cidade',
   'pressure-widget.components--pressure-form.subject.label': 'Assunto',
   'pressure-widget.components--pressure-form.body.label': 'Corpo do e-mail',
+  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Chamada em andamento',
+  'pressure-widget.components--pressure-form.phone-calls.retry': 'Religar',
+  'pressure-widget.components--pressure-form.phone-calls.call': 'Religar',
+  'pressure-widget.components--pressure-form.phone.how-it-works.title': 'Como funciona?',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos ligando para o seu alvo',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'Assim que alguém atender do lado de lá, vamos te ligar',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'Quando você atender, conectamos as ligações',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Agora é com você!',
+  'pressure-widget.components--pressure-form.phone.finish-and-share': 'Encerrar e Compartilhar',
 
   // component pressure widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
