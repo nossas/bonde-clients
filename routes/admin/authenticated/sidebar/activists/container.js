@@ -259,7 +259,7 @@ class Container extends Component {
                           other {pessoas}
                         }`}
                         values={{ totalCount }}
-                      /> 
+                      />
                     </div>
                   </div>
                 )}
