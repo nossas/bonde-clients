@@ -1,4 +1,6 @@
-import { AdjustmentsForm } from '~client/mobrender/widgets/adjustments/form'
-import Page from './page'
+import {
+  adjustmentsForm,
+  AdjustmentsSettingsForm
+} from '~client/mobrender/widgets/adjustments'
 
-export default AdjustmentsForm(Page)
+export default adjustmentsForm(AdjustmentsSettingsForm)
