@@ -164,7 +164,7 @@
     "parser": "babel-eslint"
   },
   "engines": {
-    "node": "~8"
+    "node": "~9"
   },
   "postcss": {
     "map": true,
