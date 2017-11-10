@@ -14,9 +14,16 @@
  */
 import { ModelForm } from '../models'
 
-export const adjustmentsFormExtend = (fields) => ModelForm({
+const adjustFields = (fields) => {
+  let adjusts = ['call_to_action', 'button_text', 'count_text']
+  adjusts.push.apply(adjusts, fields || [])
+  return adjusts
+}
+
+export const adjustmentsFormExtend = ({ fields, ...config }) => ModelForm({
   form: 'adjustmentsForm',
-  fields: ['call_to_action', 'button_text', 'count_text', ...fields]
+  fields: adjustFields(fields),
+  ...config
 })
 
-export const adjustmentsForm = adjustmentsFormExtend([])
+export const adjustmentsForm = adjustmentsFormExtend({})
