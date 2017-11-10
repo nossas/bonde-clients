@@ -166,7 +166,7 @@ export default ({
       } = this.state
 
       const buttonText = (settings && settings.button_text) || 'Doar agora'
-      const titleText = (settings && settings.title_text) || 'Clique para configurar seu bloco de doação'
+      const titleText = settings ? settings.call_to_action || settings.title_text : 'Clique para configurar seu bloco de doação'
 
       const donationValue1 = (settings && settings.donation_value1) || 0
       const donationValue2 = (settings && settings.donation_value2) || 0

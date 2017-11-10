@@ -17,7 +17,7 @@ const DonationSettingsPage = props => {
   const {
     dispatch,
     fields: {
-      title_text: titleText,
+      call_to_action: callToAction,
       button_text: buttonText,
       main_color: mainColor,
       default_donation_value: defaultDonationValue,
@@ -133,7 +133,7 @@ const DonationSettingsPage = props => {
         <HelpBlock>*todos os valores são em reais</HelpBlock>
       </FormGroup>
 
-      <FormGroup controlId='title-text-id' {...titleText}>
+      <FormGroup controlId='title-text-id' {...callToAction}>
         <ControlLabel>Título da caixa de doação</ControlLabel>
         <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
       </FormGroup>
