@@ -7,7 +7,6 @@ import { adjustmentsFormExtend } from '../adjustments'
 import * as formatNumberHelper from '~client/utils/format-number-helper'
 import * as validationHelper from '~client/utils/validation-helper'
 
-
 export const donationForm = adjustmentsFormExtend({
   fields: [
     'goal', 'goal_date_limit', 'main_color',
@@ -54,6 +53,6 @@ export const donationForm = adjustmentsFormExtend({
         }
       }
     }
-    return errors 
+    return errors
   }
 })
