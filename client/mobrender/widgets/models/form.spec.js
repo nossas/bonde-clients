@@ -8,11 +8,13 @@ describe('ModelForm = (config) => (Component)', () => {
   })
 
   describe('mapStateToProps = (state, { widget }) => { initialValues }', () => {
+    const colorScheme = '#c7c7c7'
     const ownProps = {
       widget: {
         id: 1,
         settings: { title: 'Donation' }
-      }
+      },
+      mobilization: { color_scheme: colorScheme }
     }
 
     it('should map initalValues with widget.settings by default', () => {
@@ -31,7 +33,8 @@ describe('ModelForm = (config) => (Component)', () => {
           initialValues: {
             ...ownProps.widget.settings,
             id: ownProps.widget.id
-          }
+          },
+          colorScheme
         })
       })
 
@@ -43,7 +46,8 @@ describe('ModelForm = (config) => (Component)', () => {
         expect(props).to.deep.equal({
           initialValues: {
             title
-          }
+          },
+          colorScheme
         })
       })
     })

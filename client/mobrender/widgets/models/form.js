@@ -2,6 +2,10 @@ import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
 export const mapStateToProps = (mapInitialValues) => (state, ownProps) => {
+  // TODO: Checar onde seria a melhor forma de
+  // aplicar o schema padrão da mobilização no ColorPicker
+  const { color_scheme: colorScheme } = ownProps.mobilization
+
   const { settings } = ownProps.widget
   const initialValues = {
     ...settings || {}
@@ -11,10 +15,11 @@ export const mapStateToProps = (mapInitialValues) => (state, ownProps) => {
       initialValues: {
         ...initialValues,
         ...mapInitialValues(ownProps.widget)
-      }
+      },
+      colorScheme
     }
   }
-  return { initialValues }
+  return { initialValues, colorScheme }
 }
 
 export default (config) => (Component) => {
