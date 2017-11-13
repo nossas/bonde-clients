@@ -11,7 +11,7 @@ export default store => ({
   getIndexRoute (location, cb) {
     require.ensure([], (require) => {
       cb(null, {
-        component: require('./donation/page.connected').default
+        component: require('./adjustments/page.connected').default
       })
     })
   },
@@ -26,7 +26,8 @@ export default store => ({
       cb(null, [
         require('./autofire').default(store),
         require('./export').default(store),
-        require('./finish').default(store)
+        require('./finish').default(store),
+        require('./donation').default(store)
       ])
     })
   }

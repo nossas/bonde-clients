@@ -7,7 +7,8 @@ import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~client/components/layout'
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
-  const donationPath = paths.donation(mobilization.id, widget.id)
+  const donationPath = paths.donation(mobilization.id, widget.id) + '/settings'
+  const donationAdjustmentsPath = paths.donation(mobilization.id, widget.id)
   const donationAutofirePath = paths.donationAutofire(mobilization.id, widget.id)
   const donationFinishPath = paths.donationFinish(mobilization.id, widget.id)
 
@@ -16,6 +17,11 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
       <Tabs>
         <Tab
           text='Ajustes'
+          path={donationAdjustmentsPath}
+          isActive={donationAdjustmentsPath === location.pathname}
+        />
+        <Tab
+          text='Configurações'
           path={donationPath}
           isActive={donationPath === location.pathname}
         />
