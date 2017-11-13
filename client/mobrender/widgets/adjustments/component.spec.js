@@ -11,12 +11,13 @@ describe('<AdjustmentsSettingsForm />', () => {
     fields: {
       call_to_action: 'callToAction',
       button_text: 'buttonText',
-      count_text: 'countText'
+      count_text: 'countText',
+      main_color: 'mainColor'
     },
     handleSubmit: mock.noop,
     submitting: false,
     error: undefined,
-    mobilization: {},
+    colorScheme: '#c7c7c7',
     widget: {},
     asyncWidgetUpdate: mock.noop
   }

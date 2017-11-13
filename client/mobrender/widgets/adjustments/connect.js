@@ -15,7 +15,7 @@
 import { ModelForm } from '../models'
 
 const adjustFields = (fields) => {
-  let adjusts = ['call_to_action', 'button_text', 'count_text']
+  let adjusts = ['call_to_action', 'button_text', 'count_text', 'main_color']
   adjusts.push.apply(adjusts, fields || [])
   return adjusts
 }

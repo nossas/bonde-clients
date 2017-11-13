@@ -5,7 +5,13 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  ColorPicker,
+  HelpBlock
+} from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 
 const AdjustmentsSettingsForm = (props) => {
@@ -14,10 +20,14 @@ const AdjustmentsSettingsForm = (props) => {
     fields: {
       call_to_action: callToAction,
       button_text: buttonText,
-      count_text: countText
+      count_text: countText,
+      main_color: mainColor
     },
     widget,
     asyncWidgetUpdate,
+    // TODO: Remover essa dependencia da mobilização
+    dispatch,
+    colorScheme,
     ...formProps
   } = props
   return (
@@ -54,6 +64,16 @@ const AdjustmentsSettingsForm = (props) => {
           placeholder='Defina o texto que ficará ao lado do número de pessoas que agiram.'
         />
       </FormGroup>
+      <FormGroup controlId='main-color-id' {...mainColor}>
+        <ControlLabel>Cor da caixa de doação</ControlLabel>
+        <HelpBlock>
+          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
+        </HelpBlock>
+        <ColorPicker
+          dispatch={dispatch}
+          theme={colorScheme.replace('-scheme', '')}
+        />
+      </FormGroup>
       {children}
     </SettingsForm>
   )
@@ -65,6 +85,8 @@ AdjustmentsSettingsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  // Injected by widgets/models/ModelForm
+  colorScheme: PropTypes.string,
   // Injected by container
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
