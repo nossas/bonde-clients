@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
 
+import { mountWithIntl } from '~root/intl/helpers'
 import Navbar from '~client/mobrender/components/navbar'
 import MenuItems from '~client/mobrender/components/navbar/menu-items'
 
@@ -29,7 +29,7 @@ describe('client/mobrender/components/navbar', () => {
   }
 
   beforeEach(() => {
-    wrapper = mount(<Navbar {...props} />)
+    wrapper = mountWithIntl(<Navbar {...props} />)
   })
 
   it('renders absolute layout by default', () => {

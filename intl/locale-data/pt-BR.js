@@ -326,6 +326,8 @@ servidor-03.dominio.com`,
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
+  'page--community-mailchimp.form.button.save': 'Salvar',
+  'page--community-mailchimp.form.button.sync': 'Sincronizar',
 
   // page community twilio settings
   // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
@@ -832,7 +834,7 @@ servidor-03.dominio.com`,
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'components.navigation--navbar-edition-wrapper.block': 'Bloco',
+  'components.navigation--navbar-edition-wrapper.block': 'Bloco {position}',
 
   // component mobilizations form share
   // filepath: /client/mobilizations/components/form-share.js
@@ -1135,6 +1137,16 @@ servidor-03.dominio.com`,
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
 
+  // content widget
+  // filepath: /client/mobilizations/widgets/__plugins__/content/components/__content__.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--content-widget.delete-widget.confirm.message': 'Deseja remover o widget?',
+
+  // slate editor implementation component
+  // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--editor-slate.button-save.text': 'Salvar',
+
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
@@ -1248,6 +1260,11 @@ servidor-03.dominio.com`,
   'pressure-widget.components--settings-menu.items.post-action': 'Pós-pressão',
 
   // page pressure widget
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-count.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--pressure-count.text.default': 'pressões feitas',
+
+  // page pressure widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
   'page--pressure-widget.success-message': 'Formulário de pressão configurado com sucesso!',
@@ -1275,6 +1292,7 @@ servidor-03.dominio.com`,
   // filepath: /client/mobilizations/widgets/components/input-tag.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
+  'widgets.components--input-tag.insert-tag.placeholder': 'Nome do primeiro alvo <primeiro@alvo.com>\nNome do segundo alvo <segundo@alvo.com>\nNome do terceiro alvo <terceiro@alvo.com>\nNome do quarto alvo <quarto@alvo.com>\nNome do quinto alvo <quinto@alvo.com>\n...',
   'widgets.components--input-tag.button.remove-all': 'Remover todos',
 
   // page pressure widget email

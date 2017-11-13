@@ -36,7 +36,11 @@ const Widget = ({ saving, mobilization, block, widget, update, editable, intl })
             browserHistory.push(redirect)
           }}
           onDelete={() => {
-            if (window.confirm('Deseja remover o widget?')) {
+            const message = intl.formatMessage({
+              id: 'c--content-widget.delete-widget.confirm.message',
+              defaultMessage: 'Deseja remover o widget?'
+            })
+            if (window.confirm(message)) {
               update({
                 ...widget,
                 settings: undefined,

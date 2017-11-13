@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import CountUp from 'react-countup'
 
 const PressureCount = ({ value, color, text, startCounting }) => {
@@ -21,7 +22,14 @@ const PressureCount = ({ value, color, text, startCounting }) => {
             duration={5}
           />
         </div>
-        <span className='black bold h3 ml1'>{text}</span>
+        <span className='black bold h3 ml1'>
+          {text || (
+            <FormattedMessage
+              id='c--pressure-count.text.default'
+              defaultMessage='pressões feitas'
+            />
+          )}
+        </span>
       </p>
     </div>
   )
@@ -36,7 +44,6 @@ PressureCount.propTypes = {
 
 PressureCount.defaultProps = {
   value: 0,
-  text: 'pressões feitas',
   startCounting: false
 }
 

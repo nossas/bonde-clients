@@ -304,10 +304,10 @@ class FormDomain extends Component {
                         }
                       >
                         <option value='' disabled>
-                          <FormattedMessage
-                            id='mobilizations.components--form-domain.basic.form.domain.button.chose'
-                            defaultMessage='Escolha...'
-                          />
+                          {intl.formatMessage({
+                            id: 'mobilizations.components--form-domain.basic.form.domain.button.choice',
+                            defaultMessage: 'Escolha...'
+                          })}
                         </option>
                         {hostedZones.map((obj, i) => (
                           <option key={`hostedZone-${i}`} value={obj.domain_name}>
@@ -365,10 +365,10 @@ class FormDomain extends Component {
                         }
                       >
                         <option value='' disabled>
-                          <FormattedMessage
-                            id='mobilizations.components--form-domain.basic.form.domain.button.chose'
-                            defaultMessage='Escolha...'
-                          />
+                          {intl.formatMessage({
+                            id: 'mobilizations.components--form-domain.basic.form.domain.button.choice',
+                            defaultMessage: 'Escolha...'
+                          })}
                         </option>
                         {hostedZones.map((obj, i) => (
                           <option

@@ -168,8 +168,18 @@ const CommunitySettingsMailchimpPage = ({
       />
     </FormGroup>
     <DivFloat>
-      <Button type='submit' disable={formProps.submitting}>Salvar</Button>
-      <Button type='button' onClick={resyncMailchimp}>Sincronizar</Button>
+      <Button type='submit' disable={formProps.submitting}>
+        <FormattedMessage
+          id='page--community-mailchimp.form.button.save'
+          defaultMessage='Salvar'
+        />
+      </Button>
+      <Button type='button' onClick={resyncMailchimp}>
+        <FormattedMessage
+          id='page--community-mailchimp.form.button.sync'
+          defaultMessage='Sincronizar'
+        />
+      </Button>
       <SuccessMessage text='Dados editados com sucesso' />
     </DivFloat>
   </FormRedux>

@@ -4,14 +4,17 @@ import { injectIntl } from 'react-intl'
 
 import Page from './page'
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state, { widget, intl }) => {
   return {
     initialValues: {
       show_counter: 'false',
       show_city: 'city-false',
-      count_text: 'pressões feitas',
+      count_text: intl.formatMessage({
+        id: 'page--pressure-widget.form.counter-text.placeholder',
+        defaultMessage: 'pressões feitas'
+      }),
       main_color: '#f23392',
-      ...props.widget.settings || {}
+      ...widget.settings || {}
     }
   }
 }

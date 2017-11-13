@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import keycode from 'keycode'
 import classnames from 'classnames'
 import { BlockTag } from '~client/mobilizations/widgets/components'
@@ -9,7 +9,7 @@ import * as os from '~client/utils/browser/os'
 
 var styles = require('exenv').canUseDOM ? require('./input-tag.scss') : {}
 
-class InputTag extends Component {
+export class InputTag extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -52,7 +52,7 @@ class InputTag extends Component {
   }
 
   render () {
-    const { values, label, onRemoveTag, onRemoveAll, helperText } = this.props
+    const { values, label, onRemoveTag, onRemoveAll, helperText, intl } = this.props
 
     return (
       <div className='input-tag'>
@@ -76,12 +76,17 @@ class InputTag extends Component {
                 type='text'
                 rows='7'
                 placeholder={
-                  'Nome do primeiro alvo <primeiro@alvo.com>\n' +
-                  'Nome do segundo alvo <segundo@alvo.com>\n' +
-                  'Nome do terceiro alvo <terceiro@alvo.com>\n' +
-                  'Nome do quarto alvo <quarto@alvo.com>\n' +
-                  'Nome do quinto alvo <quinto@alvo.com>\n' +
-                  '...'
+                  intl.formatMessage({
+                    id: 'widgets.components--input-tag.insert-tag.placeholder',
+                    defaultMessage: (
+                      'Nome do primeiro alvo <primeiro@alvo.com>\n' +
+                      'Nome do segundo alvo <segundo@alvo.com>\n' +
+                      'Nome do terceiro alvo <terceiro@alvo.com>\n' +
+                      'Nome do quarto alvo <quarto@alvo.com>\n' +
+                      'Nome do quinto alvo <quinto@alvo.com>\n' +
+                      '...'
+                    )
+                  })
                 }
                 className={classnames('input block h3 col-12 mt1 px1', styles.textarea)}
                 value={this.state.value}
@@ -136,7 +141,8 @@ InputTag.propTypes = {
   onInsertTag: PropTypes.func.isRequired,
   onRemoveTag: PropTypes.func.isRequired,
   onRemoveAll: PropTypes.func.isRequired,
-  helperText: PropTypes.node.isRequired
+  helperText: PropTypes.node.isRequired,
+  intl: intlShape.isRequired
 }
 
-export default InputTag
+export default injectIntl(InputTag)
