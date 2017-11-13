@@ -7,8 +7,7 @@ import {
   HelpBlock,
   FormControl,
   RadioGroup,
-  Radio,
-  ColorPicker
+  Radio
 } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { HorizontalLayout } from '~client/components/grids'
@@ -17,9 +16,6 @@ const DonationSettingsPage = props => {
   const {
     dispatch,
     fields: {
-      call_to_action: callToAction,
-      button_text: buttonText,
-      main_color: mainColor,
       default_donation_value: defaultDonationValue,
       donation_value1: donationValue1,
       donation_value2: donationValue2,
@@ -34,7 +30,6 @@ const DonationSettingsPage = props => {
     },
     ...formProps
   } = props
-  const { mobilization: { color_scheme: colorScheme } } = props
   const donationValueTitle = 'Clique para definir este valor como padrão.'
 
   return (
@@ -131,27 +126,6 @@ const DonationSettingsPage = props => {
           <Radio className='col col-2' title={donationValueTitle} value='5'>Default</Radio>
         </RadioGroup>
         <HelpBlock>*todos os valores são em reais</HelpBlock>
-      </FormGroup>
-
-      <FormGroup controlId='title-text-id' {...callToAction}>
-        <ControlLabel>Título da caixa de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
-      </FormGroup>
-
-      <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Cor da caixa de doação</ControlLabel>
-        <HelpBlock>
-          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
-        </HelpBlock>
-        <ColorPicker
-          dispatch={dispatch}
-          theme={colorScheme.replace('-scheme', '')}
-        />
-      </FormGroup>
-
-      <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>Texto do botão de confirmação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Doe agora!' />
       </FormGroup>
 
       <FormGroup controlId='payment-methods-id' {...paymentMethods}>
