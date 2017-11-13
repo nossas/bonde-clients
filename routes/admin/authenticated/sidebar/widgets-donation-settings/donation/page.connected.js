@@ -1,4 +1,3 @@
-import { donationForm } from '~client/mobrender/widgets/donations'
-import Page from './page'
+import { donationForm, DonationSettingsForm } from '~client/mobrender/widgets/donations'
 
-export default donationForm(Page)
+export default donationForm(DonationSettingsForm)

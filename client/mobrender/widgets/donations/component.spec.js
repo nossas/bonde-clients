@@ -3,9 +3,9 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
-import Page from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page'
+import DonationSettingsForm from './component'
 
-describe('routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page', () => {
+describe('<DonationSettingsForm />', () => {
   let wrapper
   const props = {
     dispatch: mock.noop,
@@ -27,7 +27,7 @@ describe('routes/admin/authenticated/sidebar/widgets-donation-settings/donation/
   }
 
   beforeAll(() => {
-    wrapper = shallow(<Page {...props} />)
+    wrapper = shallow(<DonationSettingsForm {...props} />)
   })
 
   describe('#render', () => {

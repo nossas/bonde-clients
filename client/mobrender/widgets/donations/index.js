@@ -1,3 +1,7 @@
 import { donationForm } from './connect'
+import DonationSettingsForm from './component'
 
-export { donationForm }
+export {
+  donationForm,
+  DonationSettingsForm
+}
