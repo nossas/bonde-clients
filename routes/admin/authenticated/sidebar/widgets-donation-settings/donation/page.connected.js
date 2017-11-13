@@ -68,7 +68,14 @@ const validate = (values, { intl }) => {
       })
     } else {
       const [day, month, year] = values.goal_date_limit.split('/')
-      if (!validationHelper.isValidDate({ day, month, year })) {
+      const goalDateTimestamp = new Date(`${year}-${month}-${day}`).setHours(24, 0, 0, 0)
+      const currentTimestamp = new Date(new Date().setHours(0, 0, 0, 0)).getTime()
+      if (goalDateTimestamp < currentTimestamp) {
+        errors.goal_date_limit = intl.formatMessage({
+          id: 'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher',
+          defaultMessage: 'A data da meta não pode ser no passado'
+        })
+      } else if (!validationHelper.isValidDate({ day, month, year })) {
         errors.goal_date_limit = intl.formatMessage({
           id: 'page--donation-widget.form.validation.goal-date-limit.invalid-date',
           defaultMessage: 'Data inválida.'

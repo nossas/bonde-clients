@@ -967,6 +967,7 @@ servidor-03.dominio.com`,
   'page--donation-widget.form.validation.goal.format': 'Insira o valor desse jeito, ó: 1000',
   'page--donation-widget.form.validation.goal-date-limit.format': 'Insira a data desse jeito, ó: DD/MM/AAAA',
   'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Data inválida.',
+  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'A data da meta não pode ser no passado',
 
   // component widget autofire
   // filepath: /client/mobilizations/widgets/components/form-autofire.js

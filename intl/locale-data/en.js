@@ -594,6 +594,7 @@ servidor-03.dominio.com`,
   'page--donation-widget.form.validation.goal.format': 'Enter the value this way, ó: 1000',
   'page--donation-widget.form.validation.goal-date-limit.format': 'Enter the date like this, ó: DD / MM / YYYY',
   'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Invalid date.',
+  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'Goal date can not be in the past.',
 
   'widgets.components--form-autofire.form.submit-button': 'To save',
   'widgets.components--form-autofire.form.success-message': 'Thanks message successfully configured!',
