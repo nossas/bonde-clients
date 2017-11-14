@@ -65,7 +65,7 @@ const AdjustmentsSettingsForm = (props) => {
         />
       </FormGroup>
       <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Cor da caixa de doação</ControlLabel>
+        <ControlLabel>Cor padrão</ControlLabel>
         <HelpBlock>
           Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
         </HelpBlock>

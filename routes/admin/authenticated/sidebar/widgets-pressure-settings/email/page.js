@@ -46,7 +46,9 @@ class PressureSettingsEmailPage extends Component {
         pressure_subject: pressureSubject,
         pressure_body: pressureBody,
         targets: targetsField,
-        disable_edit_field: disableEditField
+        disable_edit_field: disableEditField,
+        show_city: showCity,
+        show_counter: showCounter
       },
       intl,
       ...props
@@ -197,6 +199,50 @@ class PressureSettingsEmailPage extends Component {
           <RadioGroup>
             <Radio value='s'>Sim</Radio>
             <Radio value='n'>Não</Radio>
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup controlId='show-counter-id' {...showCounter}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-counter.label'
+              defaultMessage='Mostrar contador de pressão'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='true'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-counter.radio.yes.label'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='false'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-counter.radio.no.label'
+                defaultMessage='Não'
+              />
+            </Radio>
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup controlId='show-city-field-id' {...showCity}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-city-field.label'
+              defaultMessage='Mostrar campo de cidade'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='city-true'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-city-field.radio.yes.label'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='city-false'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-city-field.radio.no.label'
+                defaultMessage='Não'
+              />
+            </Radio>
           </RadioGroup>
         </FormGroup>
       </SettingsForm>
