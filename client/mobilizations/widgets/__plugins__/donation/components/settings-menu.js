@@ -21,7 +21,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={donationAdjustmentsPath === location.pathname}
         />
         <Tab
-          text='Configurações'
+          text='Dados para doação'
           path={donationPath}
           isActive={donationPath === location.pathname}
         />

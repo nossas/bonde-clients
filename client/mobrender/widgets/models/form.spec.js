@@ -19,7 +19,10 @@ describe('ModelForm = (config) => (Component)', () => {
 
     it('should map initalValues with widget.settings by default', () => {
       const props = mapStateToProps(undefined)(undefined, ownProps)
-      expect(props).to.deep.equal({ initialValues: ownProps.widget.settings })
+      expect(props).to.deep.equal({
+        initialValues: ownProps.widget.settings,
+        colorScheme
+      })
     })
 
     describe('mapInitialValues passed like function', () => {

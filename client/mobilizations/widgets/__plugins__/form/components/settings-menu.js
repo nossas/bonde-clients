@@ -17,14 +17,14 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
     <SettingsPageMenuLayout title='Configure o formulário da sua ação'>
       <Tabs>
         <Tab
-          path={fieldsPath}
-          text='Campos do formulário'
-          isActive={fieldsPath === location.pathname}
-        />
-        <Tab
           path={formPath}
           text='Ajustes'
           isActive={formPath === location.pathname}
+        />
+        <Tab
+          path={fieldsPath}
+          text='Campos do formulário'
+          isActive={fieldsPath === location.pathname}
         />
         <Tab
           path={formAutofirePath}

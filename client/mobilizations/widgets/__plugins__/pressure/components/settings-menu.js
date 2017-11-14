@@ -17,7 +17,7 @@ const SettingsMenu = ({ location, mobilization, widget }) => {
       <Tabs>
         <Tab
           path={pressurePath}
-          text='Formulário'
+          text='Ajustes'
           isActive={pressurePath === location.pathname}
         />
         <Tab
