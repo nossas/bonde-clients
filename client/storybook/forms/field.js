@@ -2,9 +2,8 @@ import React from 'react'
 import FormProvider from './formProvider'
 
 class Field extends React.Component {
-  
-  getFieldProps(fieldName) {
-    const { form: { fields }} = this.context
+  getFieldProps (fieldName) {
+    const { form: { fields } } = this.context
     const field = fields[fieldName]
     return {
       name: field.name,
@@ -13,7 +12,7 @@ class Field extends React.Component {
     }
   }
 
-  render() {
+  render () {
     const { name, component: Component, ...inputProps } = this.props
     return <Component {...this.getFieldProps(name)} {...inputProps} />
   }

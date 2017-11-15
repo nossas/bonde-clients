@@ -1,30 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// FormProvider
-export class FormProvider extends React.Component {
-
-  getChildContext() {
-    return {
-      form: {
-        fields: this.props.fields
+export const withForm = (Component) => {
+  class Form extends React.Component {
+    getChildContext () {
+      return {
+        form: {
+          fields: this.props.fields
+        }
       }
+    }
+
+    render () {
+      const { children, handleSubmit, submit } = this.props
+      return (
+        <Component onSubmit={handleSubmit(submit)}>
+          {children}
+        </Component>
+      )
     }
   }
 
-  render() {
-    const { children, handleSubmit, submit } = this.props
-    return (
-      <form onSubmit={handleSubmit(submit)}>
-        {children}
-        <button type='submit'>Submit!</button>
-      </form>
-    )
+  Form.displayName = `withForm(${Component.displayName || Component.name || Component})`
+  Form.childContextTypes = {
+    form: PropTypes.object.isRequired
   }
+
+  return Form
 }
 
-FormProvider.childContextTypes = {
-  form: PropTypes.object.isRequired
-}
-
-export default FormProvider
+export default withForm('form')
