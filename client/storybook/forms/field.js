@@ -12,9 +12,8 @@ class Field extends React.Component {
     const { form: { fields } } = this.context
     const field = fields[fieldName]
     return {
-      name: field.name,
-      value: field.value,
-      onChange: field.onChange
+      ...field,
+      value: field.value || ''
     }
   }
 
