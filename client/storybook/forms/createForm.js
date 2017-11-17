@@ -1,5 +1,5 @@
 import { reduxForm } from 'redux-form'
-import { withForm } from './formProvider'
+import { createFormProvider } from './createFormProvider'
 
 export const subscribe = HOC => settings => {
   /**
@@ -19,7 +19,7 @@ export const subscribe = HOC => settings => {
 
   // always use a provider form, it is responsible to control
   // the behavior of form.
-  const FormProvider = withForm(FormComponent || 'form')
+  const FormProvider = createFormProvider(FormComponent || 'form')
   // redux-form configuration
   const configForm = { form: name, fields, validate }
   // react-redux configuration

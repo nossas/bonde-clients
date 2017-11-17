@@ -64,13 +64,13 @@ describe('createForm API', () => {
 
       it('should decorate a form like default', () => {
         const Form = subscribe(HOC)({})
-        expect(Form.displayName).to.equal('withForm(form)')
+        expect(Form.displayName).to.equal('createForm(form)')
       })
 
       it('should decorate configured component', () => {
         const CustomForm = () => <div />
         const Form = subscribe(HOC)({ component: CustomForm })
-        expect(Form.displayName).to.equal('withForm(CustomForm)')
+        expect(Form.displayName).to.equal('createForm(CustomForm)')
       })
     })
   })
@@ -82,7 +82,7 @@ describe('createForm API', () => {
         submit: () => 'submit'
       })
       const wrapper = shallow(<Form />)
-      expect(wrapper.name()).to.equal('ReduxFormConnector(withForm(form))')
+      expect(wrapper.name()).to.equal('ReduxFormConnector(createForm(form))')
     })
   })
 })
