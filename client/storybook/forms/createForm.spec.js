@@ -1,124 +1,88 @@
-import React from 'react'
 import { expect } from 'chai'
-import {
-  mapStateToProps,
-  mapActionsToProps,
-  connectCreateForm
-} from './createForm'
+import { shallow } from 'enzyme'
+import { subscribe, createForm } from './createForm'
 
-describe('createForm', () => {
-  const buttonText = 'Submit!'
-  const dispatch = () => {}
-  const state = {}
-  const ownProps = {
-    widget: {
-      settings: {
-        buttonText
+describe('createForm API', () => {
+  describe('subscribe', () => {
+    const callToAction = 'CALL_TO_ACTION'
+    const globalState = {}
+    const globalOwnProps = { widget: { settings: { callToAction } } }
+
+    describe('should map initialValues in HOC props when', () => {
+      let param
+      const HOC = (configForm, mapStateToProps) => () => {
+        param = mapStateToProps
       }
-    }
-  }
 
-  describe('config.initialValues', () => {
-    it('should call initialValues(state, ownProps) when is function', () => {
-      let params
-      const initialValues = (state, ownProps) => {
-        params = [state, ownProps]
-        return {
-          buttonText
+      it('is function', () => {
+        const initialValues = (state, ownProps) => ({
+          ...ownProps.widget.settings
+        })
+        subscribe(HOC)({ initialValues })
+        expect(param(globalState, globalOwnProps)).to.deep.equal({
+          initialValues: globalOwnProps.widget.settings
+        })
+      })
+
+      it('is object', () => {
+        const initialValues = {
+          ...globalOwnProps.widget.settings
         }
-      }
-
-      expect(mapStateToProps(initialValues)(state, ownProps)).to.deep.equal({
-        initialValues: { buttonText }
+        subscribe(HOC)({ initialValues })
+        expect(param()).to.deep.equal({ initialValues: globalOwnProps.widget.settings })
       })
-      expect(params).to.deep.equal([state, ownProps])
     })
 
-    it('should return initialValues when is object', () => {
-      let params
-      const initialValues = { buttonText }
-      expect(mapStateToProps(initialValues)(state, ownProps)).to.deep.equal({
-        initialValues: { buttonText }
+    it('should map submit in HOC props', () => {
+      let param
+      const HOC = (configForm, mapStateToProps, mapActionsToProps) => () => {
+        param = mapActionsToProps
+      }
+      const submit = () => 'submit'
+      subscribe(HOC)({ submit })
+      expect(param.submit()).to.equal('submit')
+    })
+
+    it('should map form props like name, fields and validate', () => {
+      let param
+      const HOC = (configForm) => () => {
+        param = configForm
+      }
+      const settings = {
+        name: 'testForm',
+        fields: ['name', 'email'],
+        validate: () => 'validate'
+      }
+      subscribe(HOC)(settings)
+      expect(param.form).to.equal(settings.name)
+      expect(param.fields).to.deep.equal(settings.fields)
+      expect(param.validate()).to.equal('validate')
+    })
+
+    describe('decorate component like FormProvider', () => {
+      const HOC = () => Component => Component
+
+      it('should decorate a form like default', () => {
+        const Form = subscribe(HOC)({})
+        expect(Form.displayName).to.equal('withForm(form)')
       })
-      expect(params).to.be.equal(undefined)
+
+      it('should decorate configured component', () => {
+        const CustomForm = () => <div />
+        const Form = subscribe(HOC)({ component: CustomForm })
+        expect(Form.displayName).to.equal('withForm(CustomForm)')
+      })
     })
   })
-
-  describe('config.submit', () => {
-    it('should call submit(values, dispatch)', () => {
-      let params
-      const submit = (values, dispatch) => {
-        params = [values, dispatch]
-      }
-
-      const submitValues = { buttonText }
-      const actionsToProps = mapActionsToProps(submit)(dispatch)
-      actionsToProps.submit(submitValues)
-      expect(params).to.deep.equal([submitValues, dispatch])
-    })
-  })
-
-  describe('config.formComponent', () => {
-    const connect = () => Component => Component
-    const reduxForm = () => Component => Component
-    const createForm = connectCreateForm(connect, reduxForm)
-
-    it('should return a form component provider like default', () => {
-      const Form = createForm({})
-      expect(Form.displayName).to.equal('withForm(form)')
-    })
-
-    it('should return a custom component provider', () => {
-      const CustomForm = () => <div />
-      const Form = createForm({ formComponent: CustomForm })
-      expect(Form.displayName).to.equal('withForm(CustomForm)')
-    })
-  })
-
-  describe('third apps', () => {
-    // Mock connect of react-redux for test config
-    let reactReduxConfig
-    const reactRedux = (mapStateToProps, mapActionsToProps) => () => {
-      reactReduxConfig = { mapStateToProps, mapActionsToProps }
-    }
-    let reduxFormConfig // eslint-disable-line
-    const reduxForm = (config) => () => {
-      reduxFormConfig = config
-    }
-    const createForm = connectCreateForm(reactRedux, reduxForm)
-
-    describe('react-redux', () => {
-      it('should receive a mapStateToProps with initialValues mapped', () => {
-        const initialValues = { buttonText: 'Submit!' }
-        createForm({ initialValues })
-        const { mapStateToProps } = reactReduxConfig
-        expect(mapStateToProps(state, ownProps)).to.deep.equal({ initialValues })
+  describe('createForm', () => {
+    it('should connect with reduxForm', () => {
+      const Form = createForm({
+        name: 'testForm',
+        fields: ['name'],
+        submit: () => 'submit'
       })
-      it('should receive a mapActionsToProps with submit action mapped', () => {
-        const dispatch = 'dispatch'
-        const submit = (values, dispatch) => [values, dispatch]
-        createForm({ submit })
-        const { mapActionsToProps } = reactReduxConfig
-        const actions = mapActionsToProps(dispatch)
-        expect(actions.submit({ buttonText })).to.deep.equal([{ buttonText }, dispatch])
-      })
-    })
-
-    describe('redux-form', () => {
-      // Config variables
-      const error = { name: 'required' }
-      const name = 'testForm'
-      const fields = ['name', 'email']
-      const validate = (values) => {
-        if (!values.name) {
-          return error
-        }
-      }
-      const config = { name, fields, validate }
-      it('should receive a start config form', () => {
-        createForm(config)
-        expect(reduxFormConfig).to.deep.equal({ form: name, fields, validate })
-      })
+      const wrapper = shallow(<Form />)
+      expect(wrapper.name()).to.equal('ReduxFormConnector(withForm(form))')
     })
   })
 })

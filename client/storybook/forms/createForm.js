@@ -1,40 +1,42 @@
 import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import { withForm } from './formProvider'
 
-export const mapStateToProps = (initialValues) => (state, ownProps) => {
-  if (typeof initialValues === 'function') {
-    return { initialValues: initialValues(state, ownProps) }
-  } else if (typeof initialValues === 'object') {
-    return { initialValues }
-  }
+export const subscribe = HOC => settings => {
+  /**
+   * Subscribe a form component to use `react-redux` and
+   * `redux-form`, removing the third-party library coupling
+   * in forms.
+   */
+
+  const {
+    name,
+    fields,
+    validate,
+    submit,
+    initialValues: mapValues,
+    component: FormComponent
+  } = settings
+
+  // always use a provider form, it is responsible to control
+  // the behavior of form.
+  const FormProvider = withForm(FormComponent || 'form')
+  // redux-form configuration
+  const configForm = { form: name, fields, validate }
+  // react-redux configuration
+  const mapStateToProps = (state, props) => ({
+    initialValues: (
+      typeof mapValues === 'function' ? mapValues(state, props)
+        : typeof mapValues === 'object' ? mapValues
+        : null
+    )
+  })
+  const mapActionsToProps = { submit }
+  // return a form component decorated
+  return HOC(
+    configForm,
+    mapStateToProps,
+    mapActionsToProps
+  )(FormProvider)
 }
 
-export const mapActionsToProps = (submit) => (dispatch) => ({
-  submit: (values) => {
-    return submit(values, dispatch)
-  }
-})
-
-export const connectCreateForm = (connectRedux, connectReduxForm) =>
-  (config) => {
-    /**
-     * 1. Redux-form simple api
-     * 2. React-intl simple api
-     */
-
-    const { initialValues, name, fields, validate, submit } = config
-
-    const { formComponent: FormComponent } = config
-    const Form = withForm(FormComponent || 'form')
-
-    const reduxHOC = connectRedux(
-      initialValues ? mapStateToProps(initialValues) : undefined,
-      mapActionsToProps(submit)
-    )
-    const reduxFormHOC = connectReduxForm({ form: name, fields, validate })
-
-    return reduxHOC(reduxFormHOC(Form))
-  }
-
-export const createForm = connectCreateForm(connect, reduxForm)
+export const createForm = subscribe(reduxForm)
