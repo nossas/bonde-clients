@@ -7,22 +7,38 @@ import {
   SettingsPageContentLayout
 } from '~client/storybook/settings/components'
 import {
-  SettingsForm
+  SettingsForm,
+  TextField
 } from '~client/storybook/forms/components'
 
-
-storiesOf('Formulário de configuração', module)
- .addDecorator(story => (
+storiesOf('TextField', module)
+  .addDecorator(story => (
     <SettingsPageLayout>
       <SettingsPageMenuLayout title='Configure seu widget' />
       <SettingsPageContentLayout>
-        {story()}
+        <SettingsForm
+          onSubmit={e => {
+            e.preventDefault()
+            action('onSubmit')()
+          }}
+        >
+          {story()}
+        </SettingsForm>
       </SettingsPageContentLayout>
     </SettingsPageLayout>
   ))
   .add('default', () => (
-    <SettingsForm />
+    <TextField type='text' />
   ))
-  .add('when submitting', () => (
-    <SettingsForm submitting={true} />
+  .add('label', () => (
+    <TextField label='Name' type='text' />
+  ))
+  .add('invalid', () => (
+    <TextField
+      label='E-mail'
+      type='text'
+      value='suporte@@'
+      error='Invalid email'
+      invalid
+    />
   ))
