@@ -6,13 +6,26 @@ import { FormProvider, createFormProvider } from './createFormProvider'
 
 describe('createFormProvider API', () => {
   let wrapper, defaultProps
+  const context = {
+    intl: {
+      now: sinon.spy(),
+      formatMessage: sinon.spy(),
+      formatDate: sinon.spy(),
+      formatTime: sinon.spy(),
+      formatRelative: sinon.spy(),
+      formatNumber: sinon.spy(),
+      formatPlural: sinon.spy(),
+      formatHTMLMessage: sinon.spy()
+    }
+  }
 
   beforeEach(() => {
     defaultProps = {
       handleSubmit: sinon.spy(),
-      submit: sinon.spy()
+      submit: sinon.spy(),
+      intl: context.intl
     }
-    wrapper = shallow(<FormProvider {...defaultProps} />)
+    wrapper = shallow(<FormProvider {...defaultProps} />, { context })
   })
 
   it('should render a form component by default', () => {
@@ -36,9 +49,16 @@ describe('createFormProvider API', () => {
   it('should pass fields like child context', () => {
     const fields = 'fields'
     wrapper.setProps({ fields })
-    expect(wrapper.instance().getChildContext()).to.deep.equal({
-      form: { fields }
-    })
+    const { i18n, ...otherProps } = wrapper.instance().getChildContext().form
+    expect(otherProps).to.deep.equal({ fields })
+  })
+
+  it('should pass i18n function like child context', () => {
+    const message = { id: 'text.label', defaultMessage: 'text' }
+    const intl = { formatMessage: t => t }
+    wrapper.setProps({ intl })
+    expect(wrapper.instance().getChildContext().form.i18n(message))
+      .to.deep.equal(message)
   })
 
   it('should pass submitted false by default', () => {

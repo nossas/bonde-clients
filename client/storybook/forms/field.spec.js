@@ -13,7 +13,8 @@ describe('<Field />', () => {
           value: 'value',
           onChange: () => `onChange(${fieldName})`
         }
-      }
+      },
+      i18n: m => m
     }
   }
 
@@ -28,8 +29,10 @@ describe('<Field />', () => {
   })
 
   it('should pass props to field obtained by form provider context', () => {
-    expect(wrapper.find('input').props())
+    const { i18n, ...otherProps } = wrapper.find('input').props()
+    expect(otherProps)
       .to.deep.equal(defaultContext.form.fields[fieldName])
+    expect(i18n('test')).to.equal('test')
   })
 
   it('should pass extraProps to component', () => {

@@ -9,9 +9,10 @@ class Field extends React.Component {
    */
 
   getFieldProps (fieldName) {
-    const { form: { fields } } = this.context
+    const { form: { fields, i18n } } = this.context
     const field = fields[fieldName]
     return {
+      i18n,
       ...field,
       value: field.value || ''
     }

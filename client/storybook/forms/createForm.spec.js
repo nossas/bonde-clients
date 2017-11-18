@@ -7,6 +7,7 @@ describe('createForm API', () => {
     const callToAction = 'CALL_TO_ACTION'
     const globalState = {}
     const globalOwnProps = { widget: { settings: { callToAction } } }
+    const intl = Component => Component
 
     describe('should map initialValues in HOC props when', () => {
       let param
@@ -18,7 +19,7 @@ describe('createForm API', () => {
         const initialValues = (state, ownProps) => ({
           ...ownProps.widget.settings
         })
-        subscribe(HOC)({ initialValues })
+        subscribe(intl, HOC)({ initialValues })
         expect(param(globalState, globalOwnProps)).to.deep.equal({
           initialValues: globalOwnProps.widget.settings
         })
@@ -28,7 +29,7 @@ describe('createForm API', () => {
         const initialValues = {
           ...globalOwnProps.widget.settings
         }
-        subscribe(HOC)({ initialValues })
+        subscribe(intl, HOC)({ initialValues })
         expect(param()).to.deep.equal({ initialValues: globalOwnProps.widget.settings })
       })
     })
@@ -39,7 +40,7 @@ describe('createForm API', () => {
         param = mapActionsToProps
       }
       const submit = () => 'submit'
-      subscribe(HOC)({ submit })
+      subscribe(intl, HOC)({ submit })
       expect(param.submit()).to.equal('submit')
     })
 
@@ -53,7 +54,7 @@ describe('createForm API', () => {
         fields: ['name', 'email'],
         validate: () => 'validate'
       }
-      subscribe(HOC)(settings)
+      subscribe(intl, HOC)(settings)
       expect(param.form).to.equal(settings.name)
       expect(param.fields).to.deep.equal(settings.fields)
       expect(param.validate()).to.equal('validate')
@@ -63,26 +64,38 @@ describe('createForm API', () => {
       const HOC = () => Component => Component
 
       it('should decorate a form like default', () => {
-        const Form = subscribe(HOC)({})
+        const Form = subscribe(intl, HOC)({})
         expect(Form.displayName).to.equal('createForm(form)')
       })
 
       it('should decorate configured component', () => {
         const CustomForm = () => <div />
-        const Form = subscribe(HOC)({ component: CustomForm })
+        const Form = subscribe(intl, HOC)({ component: CustomForm })
         expect(Form.displayName).to.equal('createForm(CustomForm)')
       })
     })
   })
   describe('createForm', () => {
-    it('should connect with reduxForm', () => {
+    it('should connect with reduxForm and react-intl', () => {
+      const mock = message => message
+      const intl = {
+        now: mock,
+        formatMessage: mock,
+        formatDate: mock,
+        formatTime: mock,
+        formatRelative: mock,
+        formatNumber: mock,
+        formatPlural: mock,
+        formatHTMLMessage: mock
+      }
       const Form = createForm({
         name: 'testForm',
         fields: ['name'],
         submit: () => 'submit'
       })
-      const wrapper = shallow(<Form />)
-      expect(wrapper.name()).to.equal('ReduxFormConnector(createForm(form))')
+      const wrapper = shallow(<Form />, { context: { intl } })
+      // expect(wrapper.name()).to.equal('ReduxFormConnector(createForm(form))')
+      expect(wrapper.name()).to.equal('ConnectedForm')
     })
   })
 })

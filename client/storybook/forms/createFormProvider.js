@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { intlShape } from 'react-intl'
 
 export const createFormProvider = (Component) => {
   class Form extends React.Component {
@@ -11,9 +12,18 @@ export const createFormProvider = (Component) => {
     getChildContext () {
       return {
         form: {
-          fields: this.props.fields
+          fields: this.props.fields,
+          i18n: this.i18n.bind(this)
         }
       }
+    }
+
+    i18n (text) {
+      if (typeof text === 'object') {
+        const { values, ...message } = text
+        return this.props.intl.formatMessage(message, values)
+      }
+      return text
     }
 
     componentWillReceiveProps (nextProps) {
@@ -31,7 +41,8 @@ export const createFormProvider = (Component) => {
       const { children, successMessage, handleSubmit, submit } = this.props
       return (
         <Component
-          successMessage={successMessage}
+          i18n={this.i18n.bind(this)}
+          successMessage={this.i18n(successMessage)}
           submitted={this.state.submitted}
           onSubmit={handleSubmit(submit)}
         >
@@ -44,6 +55,9 @@ export const createFormProvider = (Component) => {
   Form.displayName = `createForm(${Component.displayName || Component.name || Component})`
   Form.childContextTypes = {
     form: PropTypes.object.isRequired
+  }
+  Form.propTypes = {
+    intl: intlShape.isRequired
   }
 
   return Form

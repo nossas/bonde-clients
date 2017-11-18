@@ -1,7 +1,8 @@
 import { reduxForm } from 'redux-form'
+import { injectIntl } from 'react-intl'
 import { createFormProvider } from './createFormProvider'
 
-export const subscribe = HOC => settings => {
+export const subscribe = (intl, HOC) => settings => {
   /**
    * Subscribe a form component to use `react-redux` and
    * `redux-form`, removing the third-party library coupling
@@ -32,11 +33,11 @@ export const subscribe = HOC => settings => {
   })
   const mapActionsToProps = { submit }
   // return a form component decorated
-  return HOC(
+  return intl(HOC(
     configForm,
     mapStateToProps,
     mapActionsToProps
-  )(FormProvider)
+  )(FormProvider))
 }
 
-export const createForm = subscribe(reduxForm)
+export const createForm = subscribe(injectIntl, reduxForm)
