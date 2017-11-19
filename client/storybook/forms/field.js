@@ -18,9 +18,31 @@ class Field extends React.Component {
     }
   }
 
+  getI18nProps (fieldName) {
+    const { form: { i18n, i18nContext } } = this.context
+    let { label, placeholder, helpText } = this.props
+    if (i18nContext && i18nContext.fields && i18nContext.fields[fieldName]) {
+      const fieldContext = i18nContext.fields[fieldName]
+      label = fieldContext.label || label
+      placeholder = fieldContext.placeholder || placeholder
+      helpText = fieldContext.helpText || helpText
+    }
+    return {
+      label: i18n(label),
+      placeholder: i18n(placeholder),
+      helpText: i18n(helpText)
+    }
+  }
+
   render () {
     const { name, component: Component, ...inputProps } = this.props
-    return <Component {...this.getFieldProps(name)} {...inputProps} />
+    return (
+      <Component
+        {...this.getFieldProps(name)}
+        {...inputProps}
+        {...this.getI18nProps(name)}
+      />
+    )
   }
 }
 

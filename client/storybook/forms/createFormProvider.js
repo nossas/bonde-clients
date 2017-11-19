@@ -13,7 +13,8 @@ export const createFormProvider = (Component) => {
       return {
         form: {
           fields: this.props.fields,
-          i18n: this.i18n.bind(this)
+          i18n: this.i18n.bind(this),
+          i18nContext: this.props.i18nContext
         }
       }
     }

@@ -49,7 +49,11 @@ describe('createFormProvider API', () => {
   it('should pass fields like child context', () => {
     const fields = 'fields'
     wrapper.setProps({ fields })
-    const { i18n, ...otherProps } = wrapper.instance().getChildContext().form
+    const {
+      i18n,
+      i18nContext,
+      ...otherProps
+    } = wrapper.instance().getChildContext().form
     expect(otherProps).to.deep.equal({ fields })
   })
 
@@ -59,6 +63,21 @@ describe('createFormProvider API', () => {
     wrapper.setProps({ intl })
     expect(wrapper.instance().getChildContext().form.i18n(message))
       .to.deep.equal(message)
+  })
+
+  it('should pass i18nContext like child context', () => {
+    const i18nContext = {
+      fields: {
+        name: {
+          label: { id: 'label', defaultMessage: 'label' },
+          placeholder: { id: 'placeholder', defaultMessage: 'placeholder' }
+        }
+      }
+    }
+    const intl = { formatMessage: t => t }
+    wrapper.setProps({ intl, i18nContext })
+    expect(wrapper.instance().getChildContext().form.i18nContext)
+      .to.deep.equal(i18nContext)
   })
 
   it('should pass submitted false by default', () => {

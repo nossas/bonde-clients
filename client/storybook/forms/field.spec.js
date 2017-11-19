@@ -14,7 +14,22 @@ describe('<Field />', () => {
           onChange: () => `onChange(${fieldName})`
         }
       },
-      i18n: m => m
+      i18n: m => `i18n(${m})`,
+      i18nContext: {
+        fields: {
+          [fieldName]: {
+            label: { id: 'testField.label', defaultMessage: 'TestField' },
+            placeholder: {
+              id: 'testField.placeholder',
+              defaultMessage: 'TestField Placeholder'
+            },
+            helpText: {
+              id: 'testField.helpText',
+              defaultMessage: 'TestField HelpText'
+            }
+          }
+        }
+      }
     }
   }
 
@@ -30,9 +45,19 @@ describe('<Field />', () => {
 
   it('should pass props to field obtained by form provider context', () => {
     const { i18n, ...otherProps } = wrapper.find('input').props()
-    expect(otherProps)
-      .to.deep.equal(defaultContext.form.fields[fieldName])
-    expect(i18n('test')).to.equal('test')
+    const field = defaultContext.form.fields[fieldName]
+    expect(otherProps.name).to.equal(field.name)
+    expect(otherProps.value).to.equal(field.value)
+    expect(otherProps.onChange).to.equal(field.onChange)
+    expect(i18n('test')).to.equal('i18n(test)')
+  })
+
+  it('should pass label, placeholder and helpText translated', () => {
+    const { i18n, label, placeholder, helpText } = wrapper.find('input').props()
+    const field = defaultContext.form.i18nContext.fields[fieldName]
+    expect(label).to.equal(i18n(field.label))
+    expect(placeholder).to.equal(i18n(field.placeholder))
+    expect(helpText).to.equal(i18n(field.helpText))
   })
 
   it('should pass extraProps to component', () => {
