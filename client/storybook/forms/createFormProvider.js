@@ -38,12 +38,21 @@ export const createFormProvider = (Component) => {
       }
     }
 
+    getPropI18n (propName) {
+      const prop = this.props[propName]
+      const { i18nContext } = this.props
+      if (i18nContext && i18nContext[propName]) {
+        return this.i18n(i18nContext[propName])
+      }
+      return this.i18n(prop)
+    }
+
     render () {
-      const { children, successMessage, handleSubmit, submit } = this.props
+      const { children, handleSubmit, submit } = this.props
       return (
         <Component
           i18n={this.i18n.bind(this)}
-          successMessage={this.i18n(successMessage)}
+          successMessage={this.getPropI18n('successMessage')}
           submitted={this.state.submitted}
           onSubmit={handleSubmit(submit)}
         >

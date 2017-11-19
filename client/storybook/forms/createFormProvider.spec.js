@@ -107,6 +107,37 @@ describe('createFormProvider API', () => {
       .to.equal(successMessage)
   })
 
+  it('should translate successMessage to form', () => {
+    const successMessage = {
+      id: 'testForm.successMessage',
+      defaultMessage: 'Success Message'
+    }
+    const formatMessage = m => `i18n(${m.defaultMessage})`
+    wrapper.setProps({
+      intl: {
+        ...defaultProps.intl,
+        formatMessage
+      },
+      successMessage
+    })
+    expect(wrapper.find('form').props().successMessage)
+      .to.equal(`i18n(${successMessage.defaultMessage})`)
+  })
+
+  it('should translate successMessage to form with i18nContext', () => {
+    const successMessage = {
+      id: 'testForm.successMessage',
+      defaultMessage: 'Success Message'
+    }
+    const formatMessage = m => `i18n(${m.defaultMessage})`
+    wrapper.setProps({
+      i18nContext: { successMessage },
+      intl: { ...defaultProps.intl, formatMessage }
+    })
+    expect(wrapper.find('form').props().successMessage)
+      .to.equal(`i18n(${successMessage.defaultMessage})`)
+  })
+
   describe('createFormProvider', () => {
     it('should define displayName like createForm(Component)', () => {
       const CustomFormProvider = createFormProvider('form')
