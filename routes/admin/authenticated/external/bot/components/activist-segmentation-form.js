@@ -54,8 +54,8 @@ class ActivistSegmentationForm extends Component {
     const hasSegmentationChanged = Object.keys(segmentation) === 0 || (
       (segmentation.message || '') !== message.value ||
       (segmentation.quickReply || '') !== quickReply.value ||
-      (segmentation.dateIntervalStart || '') !== dateIntervalStart.value ||
-      (segmentation.dateIntervalEnd || '') !== dateIntervalEnd.value ||
+      (segmentation.dateIntervalStart) !== formatDate(dateIntervalStart.value) ||
+      (segmentation.dateIntervalEnd) !== formatDate(dateIntervalEnd.value) ||
       (segmentation.campaignExclusionIds || '') !== campaignExclusionIds.value ||
       (segmentation.campaignInclusionIds || '') !== campaignInclusionIds.value
     )
@@ -78,18 +78,22 @@ class ActivistSegmentationForm extends Component {
             campaign_inclusion_ids: campaignInclusionIds
           } = values
 
+          const currentSegmentation = {
+            message: message || undefined,
+            quickReply: quickReply || undefined,
+            dateIntervalStart: formatDate(dateIntervalStart),
+            dateIntervalEnd: formatDate(dateIntervalEnd),
+            campaignExclusionIds,
+            campaignInclusionIds
+          }
+
+          changeParentState({ loading: true, segmentation: currentSegmentation })
+
           graphqlClient().query({
             query: graphqlQueries.fetchFacebookBotActivistsStrategy({ extraFields: ['data'] }),
             variables: {
               first: 50,
-              search: JSON.stringify({
-                message,
-                quickReply,
-                dateIntervalStart: formatDate(dateIntervalStart),
-                dateIntervalEnd: formatDate(dateIntervalEnd),
-                campaignExclusionIds: campaignExclusionIds,
-                campaignInclusionIds: campaignInclusionIds
-              })
+              search: JSON.stringify(currentSegmentation)
             }
           })
             .then(({
@@ -99,15 +103,7 @@ class ActivistSegmentationForm extends Component {
               changeParentState({
                 loading,
                 totalActivists,
-                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data)),
-                segmentation: {
-                  message,
-                  quickReply,
-                  dateIntervalStart,
-                  dateIntervalEnd,
-                  campaignExclusionIds,
-                  campaignInclusionIds
-                }
+                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data))
               })
             })
             .catch(err => console.error(err))
