@@ -12,9 +12,9 @@ const style = {
   minHeight: '0px',
   minWidth: '0px',
   position: 'relative',
-  '-moz-box-direction': 'normal',
-  '-moz-box-flex': '1',
-  '-moz-box-orient': 'vertical'
+  MozBoxDirection: 'normal',
+  MozBoxFlex: '1',
+  MozBoxOrient: 'vertical'
 }
 
 export default ({ children }) => (
