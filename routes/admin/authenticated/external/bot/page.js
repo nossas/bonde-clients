@@ -40,6 +40,13 @@ class BotPage extends Component {
     this.setState({ ...this.state, ...state })
   }
 
+  getCurrentStep () {
+    const { searchFinished, hasEnqueued } = this.state
+    if (searchFinished && hasEnqueued) return 2
+    else if (searchFinished && !hasEnqueued) return 1
+    return 0
+  }
+
   render () {
     const { image } = this.props
     const {
@@ -65,6 +72,7 @@ class BotPage extends Component {
             <Preview
               list={listActivists}
               total={totalImpactedActivists}
+              listStyle={{ height: [577, 461][this.getCurrentStep()] }}
             />
           )}
 
