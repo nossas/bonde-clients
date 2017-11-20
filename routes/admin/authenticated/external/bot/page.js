@@ -40,7 +40,7 @@ class BotPage extends Component {
     this.setState({ ...this.state, ...state })
   }
 
-  getCurrentStep() {
+  getCurrentStep () {
     const { searchFinished, hasEnqueued } = this.state
     if (searchFinished && hasEnqueued) return 2
     else if (searchFinished && !hasEnqueued) return 1

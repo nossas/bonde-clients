@@ -34,7 +34,7 @@ class ActivistSegmentationForm extends Component {
     }
   }
 
-  componentWillReceiveProps({ forceReset, communityCampaigns, changeParentState }) {
+  componentWillReceiveProps ({ forceReset, communityCampaigns, changeParentState }) {
     if (forceReset) {
       communityCampaigns.refetch()
       changeParentState({ forceResetSearch: false })
@@ -105,12 +105,12 @@ class ActivistSegmentationForm extends Component {
           })
             .then(({
               loading,
-              data: { query: {  activists,  totalCount: totalImpactedActivists } }
+              data: { query: { activists, totalCount: totalImpactedActivists } }
             }) => {
               changeParentState({
                 loading,
                 totalImpactedActivists,
-                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data)),
+                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data))
               })
             })
             .catch(err => console.error(err))
@@ -157,11 +157,11 @@ class ActivistSegmentationForm extends Component {
         >
           <ControlLabel>Exclusão de campanhas</ControlLabel>
           <Select
+            multi
             placeholder='Selecione...'
             noResultsText='Nenhum resultado encontrado'
             name='campaign_exclusion_ids'
             value={this.state.campaignExclusionIds}
-            multi={true}
             onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
             onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
             options={
@@ -182,11 +182,11 @@ class ActivistSegmentationForm extends Component {
         >
           <ControlLabel>Inclusão de campanhas</ControlLabel>
           <Select
+            multi
             placeholder='Selecione...'
             noResultsText='Nenhum resultado encontrado'
             name='campaign_inclusion_ids'
             value={this.state.campaignInclusionIds}
-            multi={true}
             onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
             onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
             options={
@@ -315,6 +315,6 @@ const mapStateToProps = state => ({ community: CommunitySelectors.getCurrent(sta
 export default connect(mapStateToProps)(graphql(
   graphqlQueries.fetchFacebookBotCampaignsByCommunityId, {
     name: 'communityCampaigns',
-    options: ({ community }) =>  ({ variables: { communityId: community.id } })
+    options: ({ community }) => ({ variables: { communityId: community.id } })
   }
 )(reduxForm({ form, fields, validate })(ActivistSegmentationForm)))
