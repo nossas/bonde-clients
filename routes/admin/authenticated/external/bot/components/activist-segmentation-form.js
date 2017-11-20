@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
+import { graphql } from 'react-apollo'
 import Select from 'react-select-plus'
 
 import * as graphqlQueries from '~client/graphql/queries'
 import * as validationHelper from '~client/utils/validation-helper'
+import * as CommunitySelectors from '~client/community/selectors'
 import { client as graphqlClient } from '~client/store'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
-import { Summary } from './summary'
+import Summary from './summary'
 
 var styles = require('exenv').canUseDOM ? require('./activist-segmentation-form.scss') : {}
 
@@ -15,6 +18,11 @@ const formatDate = date => {
   if (!date) return
   const [day, month, year] = date.split('/')
   return `${year}-${month}-${day}`
+}
+
+const formatArray = list => {
+  if (!list || !list.length) return
+  return `{${list.map(item => item.value).join(',')}}`
 }
 
 class ActivistSegmentationForm extends Component {
@@ -37,8 +45,10 @@ class ActivistSegmentationForm extends Component {
       totalActivists,
       changeParentState,
       segmentation,
+      communityCampaigns,
       ...formProps
     } = this.props
+
     const hasSegmentationChanged = Object.keys(segmentation) === 0 || (
       (segmentation.message || '') !== message.value ||
       (segmentation.quickReply || '') !== quickReply.value ||
@@ -56,64 +66,37 @@ class ActivistSegmentationForm extends Component {
         style={{ paddingTop: '.5rem', width: 'calc(500px - 4rem)' }}
         submit={values => {
           const {
-            message: m,
-            quick_reply: qr,
-            date_interval_start: start,
-            date_interval_end: end
+            message,
+            quick_reply: quickReply,
+            date_interval_start: dateIntervalStart,
+            date_interval_end: dateIntervalEnd
           } = values
 
-          const isOnlyMessage = m && !qr && !start && !end
-          const isOnlyQReply = !m && qr && !start && !end
-          const isOnlyDateInterval = !m && !qr && start && end
-          const isQReplyDateInterval = !m && qr && start && end
-          const isMessageDateInterval = m && !qr && start && end
-          const isMessageQReply = m && qr && !start && !end
-          const isAll = m && qr && start && end
-
-          const normalizeList = list => list.length ? list.map(i => JSON.parse(i.data)) : []
-
-          const message = m
-          const quickReply = qr
-          const dateIntervalStart = formatDate(start)
-          const dateIntervalEnd = formatDate(end)
-
-          const executeQuery = (query, variables) => {
-            changeParentState({
-              loading: true,
-              segmentation: { message, quickReply, dateIntervalStart, dateIntervalEnd }
-            })
-            graphqlClient().query({
-              query: query({ extraFields: ['data'] }),
-              variables: { first: 50, ...variables }
-            })
-              .then(({ loading, data: { query: { activists: a, totalCount: totalActivists } } }) => {
-                changeParentState({ loading, listActivists: normalizeList(a), totalActivists })
+          graphqlClient().query({
+            query: graphqlQueries.fetchFacebookBotActivistsStrategy({ extraFields: ['data'] }),
+            variables: {
+              first: 50,
+              search: JSON.stringify({
+                message,
+                quickReply,
+                dateIntervalStart: formatDate(dateIntervalStart),
+                dateIntervalEnd: formatDate(dateIntervalEnd),
+                campaignExclusionIds: formatArray(this.state.campaignExclusionIds),
+                campaignInclusionIds: formatArray(this.state.campaignInclusionIds)
               })
-              .catch(err => console.error(err))
-          }
-
-          if (isOnlyDateInterval) {
-            const variables = { dateIntervalStart, dateIntervalEnd }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByDateInterval, variables)
-          } else if (isOnlyQReply) {
-            const variables = { quickReply }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReply, variables)
-          } else if (isOnlyMessage) {
-            const variables = { message }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByMessage, variables)
-          } else if (isQReplyDateInterval) {
-            const variables = { quickReply, dateIntervalStart, dateIntervalEnd }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByQuickReplyDateInterval, variables)
-          } else if (isMessageDateInterval) {
-            const variables = { message, dateIntervalStart, dateIntervalEnd }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByMessageDateInterval, variables)
-          } else if (isMessageQReply) {
-            const variables = { message, quickReply }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByMessageQuickReply, variables)
-          } else if (isAll) {
-            const variables = { message, quickReply, dateIntervalStart, dateIntervalEnd }
-            executeQuery(graphqlQueries.fetchFacebookActivistsByMessageQuickReplyDateInterval, variables)
-          }
+            }
+          })
+            .then(({
+              loading,
+              data: { query: {  activists,  totalCount: totalActivists } }
+            }) => {
+              changeParentState({
+                loading,
+                totalActivists,
+                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data))
+              })
+            })
+            .catch(err => console.error(err))
         }}
       >
         <FormGroup className='mb2' controlId='message' {...message}>
@@ -162,22 +145,13 @@ class ActivistSegmentationForm extends Component {
             name='campaign-exclusion'
             value={this.state.campaignExclusionIds}
             multi={true}
-            options={[
-              { value: 'one', label: 'One' },
-              { value: 'two', label: 'Two' },
-              { value: 'three', label: 'Three' },
-              { value: 'four', label: 'Four' },
-              { value: 'five', label: 'Five' },
-              { value: 'six', label: 'Six' },
-              { value: 'seven', label: 'Seven' },
-              { value: 'eight', label: 'Eight' },
-              { value: 'nine', label: 'Nine' },
-              { value: 'ten', label: 'Ten' }
-            ]}
-            onChange={(val) => {
-              this.setState({ campaignExclusionIds: val })
-              console.log("Selected: " + JSON.stringify(val));
-            }}
+            onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
+            onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
+            options={
+              communityCampaigns.loading ? [] : communityCampaigns.query
+                .campaigns.map(c => ({ value: c.id, label: c.name }))
+            }
+            onChange={campaignExclusionIds => this.setState({ campaignExclusionIds })}
           />
         </FormGroup>
 
@@ -193,22 +167,13 @@ class ActivistSegmentationForm extends Component {
             name='campaign-inclusion'
             value={this.state.campaignInclusionIds}
             multi={true}
-            options={[
-              { value: 'one', label: 'One' },
-              { value: 'two', label: 'Two' },
-              { value: 'three', label: 'Three' },
-              { value: 'four', label: 'Four' },
-              { value: 'five', label: 'Five' },
-              { value: 'six', label: 'Six' },
-              { value: 'seven', label: 'Seven' },
-              { value: 'eight', label: 'Eight' },
-              { value: 'nine', label: 'Nine' },
-              { value: 'ten', label: 'Ten' }
-            ]}
-            onChange={(val) => {
-              this.setState({ campaignInclusionIds: val })
-              console.log("Selected: " + JSON.stringify(val));
-            }}
+            onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
+            onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
+            options={
+              communityCampaigns.loading ? [] : communityCampaigns.query
+                .campaigns.map(c => ({ value: c.id, label: c.name }))
+            }
+            onChange={campaignInclusionIds => this.setState({ campaignInclusionIds })}
           />
         </FormGroup>
 
@@ -315,4 +280,11 @@ export const validate = values => {
   return errors
 }
 
-export default reduxForm({ form, fields, validate })(ActivistSegmentationForm)
+const mapStateToProps = state => ({ community: CommunitySelectors.getCurrent(state) })
+
+export default connect(mapStateToProps)(graphql(
+  graphqlQueries.fetchFacebookBotCampaignsByCommunityId, {
+    name: 'communityCampaigns',
+    options: ({ community }) =>  ({ variables: { communityId: community.id } })
+  }
+)(reduxForm({ form, fields, validate })(ActivistSegmentationForm)))

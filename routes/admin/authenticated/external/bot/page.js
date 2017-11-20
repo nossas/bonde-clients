@@ -18,7 +18,9 @@ class BotPage extends Component {
       totalActivists: 0,
       searchFinished: false,
       hasEnqueued: false,
-      segmentation: {}
+      segmentation: {},
+      backgroundAlignmentX: 'center',
+      backgroundAlignmentY: 'center'
     }
   }
 
@@ -48,7 +50,14 @@ class BotPage extends Component {
     } = this.state
 
     return (
-      <Background image={image} alignment={{ x: 'center', y: 'center' }} contentSize={12}>
+      <Background
+        image={image}
+        alignment={{
+            x: this.state.backgroundAlignmentX,
+            y: this.state.backgroundAlignmentY
+        }}
+        contentSize={12}
+      >
         <div style={{ display: 'flex' }}>
           {[searchFinished, hasEnqueued].some(f => !f) && listActivists.length && (
             <Preview
