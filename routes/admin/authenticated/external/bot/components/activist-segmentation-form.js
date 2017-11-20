@@ -40,7 +40,9 @@ class ActivistSegmentationForm extends Component {
         message,
         quick_reply: quickReply,
         date_interval_start: dateIntervalStart,
-        date_interval_end: dateIntervalEnd
+        date_interval_end: dateIntervalEnd,
+        campaign_exclusion_ids: campaignExclusionIds,
+        campaign_inclusion_ids: campaignInclusionIds
       },
       totalActivists,
       changeParentState,
@@ -52,8 +54,10 @@ class ActivistSegmentationForm extends Component {
     const hasSegmentationChanged = Object.keys(segmentation) === 0 || (
       (segmentation.message || '') !== message.value ||
       (segmentation.quickReply || '') !== quickReply.value ||
-      (segmentation.dateIntervalStart) !== formatDate(dateIntervalStart.value) ||
-      (segmentation.dateIntervalEnd) !== formatDate(dateIntervalEnd.value)
+      (segmentation.dateIntervalStart || '') !== dateIntervalStart.value ||
+      (segmentation.dateIntervalEnd || '') !== dateIntervalEnd.value ||
+      (segmentation.campaignExclusionIds || '') !== campaignExclusionIds.value ||
+      (segmentation.campaignInclusionIds || '') !== campaignInclusionIds.value
     )
 
     const disableMessageButton = !formProps.valid || !totalActivists || hasSegmentationChanged
@@ -69,7 +73,9 @@ class ActivistSegmentationForm extends Component {
             message,
             quick_reply: quickReply,
             date_interval_start: dateIntervalStart,
-            date_interval_end: dateIntervalEnd
+            date_interval_end: dateIntervalEnd,
+            campaign_exclusion_ids: campaignExclusionIds,
+            campaign_inclusion_ids: campaignInclusionIds
           } = values
 
           graphqlClient().query({
@@ -81,8 +87,8 @@ class ActivistSegmentationForm extends Component {
                 quickReply,
                 dateIntervalStart: formatDate(dateIntervalStart),
                 dateIntervalEnd: formatDate(dateIntervalEnd),
-                campaignExclusionIds: formatArray(this.state.campaignExclusionIds),
-                campaignInclusionIds: formatArray(this.state.campaignInclusionIds)
+                campaignExclusionIds: campaignExclusionIds,
+                campaignInclusionIds: campaignInclusionIds
               })
             }
           })
@@ -93,7 +99,15 @@ class ActivistSegmentationForm extends Component {
               changeParentState({
                 loading,
                 totalActivists,
-                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data))
+                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data)),
+                segmentation: {
+                  message,
+                  quickReply,
+                  dateIntervalStart,
+                  dateIntervalEnd,
+                  campaignExclusionIds,
+                  campaignInclusionIds
+                }
               })
             })
             .catch(err => console.error(err))
@@ -136,13 +150,13 @@ class ActivistSegmentationForm extends Component {
         <FormGroup
           className={`${styles.multiselectField} mb2`}
           controlId='campaignExclusion'
-          {...quickReply}
+          {...campaignExclusionIds}
         >
           <ControlLabel>Exclusão de campanhas</ControlLabel>
           <Select
             placeholder='Selecione...'
             noResultsText='Nenhum resultado encontrado'
-            name='campaign-exclusion'
+            name='campaign_exclusion_ids'
             value={this.state.campaignExclusionIds}
             multi={true}
             onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
@@ -151,20 +165,23 @@ class ActivistSegmentationForm extends Component {
               communityCampaigns.loading ? [] : communityCampaigns.query
                 .campaigns.map(c => ({ value: c.id, label: c.name }))
             }
-            onChange={campaignExclusionIds => this.setState({ campaignExclusionIds })}
+            onChange={value => {
+              this.setState({ campaignExclusionIds: value })
+              campaignExclusionIds.onChange(formatArray(value))
+            }}
           />
         </FormGroup>
 
         <FormGroup
           className={`${styles.multiselectField} mb2`}
           controlId='campaignInclusion'
-          {...quickReply}
+          {...campaignInclusionIds}
         >
           <ControlLabel>Inclusão de campanhas</ControlLabel>
           <Select
             placeholder='Selecione...'
             noResultsText='Nenhum resultado encontrado'
-            name='campaign-inclusion'
+            name='campaign_inclusion_ids'
             value={this.state.campaignInclusionIds}
             multi={true}
             onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
@@ -173,7 +190,10 @@ class ActivistSegmentationForm extends Component {
               communityCampaigns.loading ? [] : communityCampaigns.query
                 .campaigns.map(c => ({ value: c.id, label: c.name }))
             }
-            onChange={campaignInclusionIds => this.setState({ campaignInclusionIds })}
+            onChange={value => {
+              this.setState({ campaignInclusionIds: value })
+              campaignInclusionIds.onChange(formatArray(value))
+            }}
           />
         </FormGroup>
 
@@ -218,7 +238,14 @@ class ActivistSegmentationForm extends Component {
 }
 
 export const form = 'facebookBotActivistSegmentationForm'
-export const fields = ['message', 'quick_reply', 'date_interval_start', 'date_interval_end']
+export const fields = [
+  'message',
+  'quick_reply',
+  'date_interval_start',
+  'date_interval_end',
+  'campaign_exclusion_ids',
+  'campaign_inclusion_ids'
+]
 export const validate = values => {
   const errors = {}
   const {
