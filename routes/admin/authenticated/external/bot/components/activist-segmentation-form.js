@@ -150,55 +150,58 @@ class ActivistSegmentationForm extends Component {
           </FormGroup>
         </div>
 
-        <FormGroup
-          className={`${styles.multiselectField} mb2`}
-          controlId='campaignExclusion'
-          {...campaignExclusionIds}
-        >
-          <ControlLabel>Exclusão de campanhas</ControlLabel>
-          <Select
-            multi
-            placeholder='Selecione...'
-            noResultsText='Nenhum resultado encontrado'
-            name='campaign_exclusion_ids'
-            value={this.state.campaignExclusionIds}
-            onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
-            onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
-            options={
-              communityCampaigns.loading ? [] : communityCampaigns.query
-                .campaigns.map(c => ({ value: c.id, label: c.name }))
-            }
-            onChange={value => {
-              this.setState({ campaignExclusionIds: value })
-              campaignExclusionIds.onChange(formatArray(value))
-            }}
-          />
-        </FormGroup>
+        {communityCampaigns.query && communityCampaigns.query.campaigns.length > 0 && (
+          <div>
+            <FormGroup
+              className={`${styles.multiselectField} mb2`}
+              controlId='campaignExclusion'
+              {...campaignExclusionIds}
+            >
+              <ControlLabel>Exclusão de campanhas</ControlLabel>
+              <Select
+                multi
+                placeholder='Selecione...'
+                noResultsText='Nenhum resultado encontrado'
+                name='campaign_exclusion_ids'
+                value={this.state.campaignExclusionIds}
+                onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
+                onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
+                options={
+                  communityCampaigns.query.campaigns.map(c => ({ value: c.id, label: c.name }))
+                }
+                onChange={value => {
+                  this.setState({ campaignExclusionIds: value })
+                  campaignExclusionIds.onChange(formatArray(value))
+                }}
+              />
+            </FormGroup>
 
-        <FormGroup
-          className={`${styles.multiselectField} mb2`}
-          controlId='campaignInclusion'
-          {...campaignInclusionIds}
-        >
-          <ControlLabel>Inclusão de campanhas</ControlLabel>
-          <Select
-            multi
-            placeholder='Selecione...'
-            noResultsText='Nenhum resultado encontrado'
-            name='campaign_inclusion_ids'
-            value={this.state.campaignInclusionIds}
-            onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
-            onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
-            options={
-              communityCampaigns.loading ? [] : communityCampaigns.query
-                .campaigns.map(c => ({ value: c.id, label: c.name }))
-            }
-            onChange={value => {
-              this.setState({ campaignInclusionIds: value })
-              campaignInclusionIds.onChange(formatArray(value))
-            }}
-          />
-        </FormGroup>
+            <FormGroup
+              className={`${styles.multiselectField} mb2`}
+              controlId='campaignInclusion'
+              {...campaignInclusionIds}
+            >
+              <ControlLabel>Inclusão de campanhas</ControlLabel>
+              <Select
+                multi
+                placeholder='Selecione...'
+                noResultsText='Nenhum resultado encontrado'
+                name='campaign_inclusion_ids'
+                value={this.state.campaignInclusionIds}
+                onOpen={() => changeParentState({ backgroundAlignmentY: 'top' })}
+                onClose={() => changeParentState({ backgroundAlignmentY: 'center' })}
+                options={
+                  communityCampaigns.loading ? [] : communityCampaigns.query
+                    .campaigns.map(c => ({ value: c.id, label: c.name }))
+                }
+                onChange={value => {
+                  this.setState({ campaignInclusionIds: value })
+                  campaignInclusionIds.onChange(formatArray(value))
+                }}
+              />
+            </FormGroup>
+          </div>
+        )}
 
         {totalImpactedActivists > 0 && <Summary value={totalImpactedActivists} />}
 

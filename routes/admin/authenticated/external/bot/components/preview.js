@@ -38,7 +38,7 @@ const Preview = ({ list, total, listStyle }) => (
 
 Preview.propTypes = {
   list: PropTypes.array.isRequired,
-  total: PropTypes.number.isRequiredm,
+  total: PropTypes.number.isRequired,
   listStyle: PropTypes.object
 }
 

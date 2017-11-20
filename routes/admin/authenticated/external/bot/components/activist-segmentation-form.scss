@@ -24,18 +24,27 @@
   .multiselectField :global .Select .Select-control .Select-multi-value-wrapper .Select-value {
     display: inline-block;
     line-height: 1;
-    padding: 6px 15px 6px 0;
-    border-radius: 2px;
-    background-color: #ff0099;
     color: #fff;
     margin-right: .5rem;
     margin-bottom: .5rem;
   }
 
+  .multiselectField :global .Select .Select-control .Select-multi-value-wrapper .Select-value-label {
+    padding: 6px 15px 6px 7px;
+    background-color: #ff0099;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+
   .multiselectField :global .Select .Select-control .Select-multi-value-wrapper .Select-value-icon {
-    padding-left: 15px;
-    padding-right: .5rem;
+    padding: 6px 10px;
     cursor: pointer;
+    background-color: #ff0099;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+  .multiselectField :global .Select .Select-control .Select-multi-value-wrapper .Select-value-icon:hover {
+    background-color: #d80081;
   }
 
   .multiselectField :global .Select .Select-control .Select-placeholder {
