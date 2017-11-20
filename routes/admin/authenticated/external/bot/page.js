@@ -15,22 +15,24 @@ class BotPage extends Component {
     this.state = {
       loading: false,
       listActivists: [],
-      totalActivists: 0,
+      totalImpactedActivists: 0,
       searchFinished: false,
       hasEnqueued: false,
       segmentation: {},
       backgroundAlignmentX: 'center',
-      backgroundAlignmentY: 'center'
+      backgroundAlignmentY: 'center',
+      forceResetSearch: false
     }
   }
 
   resetSteps () {
     this.changeState({
       listActivists: [],
-      totalActivists: 0,
+      totalImpactedActivists: 0,
       searchFinished: false,
       hasEnqueued: false,
-      segmentation: {}
+      segmentation: {},
+      forceResetSearch: true
     })
   }
 
@@ -43,7 +45,7 @@ class BotPage extends Component {
     const {
       loading,
       listActivists,
-      totalActivists,
+      totalImpactedActivists,
       searchFinished,
       hasEnqueued,
       segmentation
@@ -62,7 +64,7 @@ class BotPage extends Component {
           {[searchFinished, hasEnqueued].some(f => !f) && listActivists.length && (
             <Preview
               list={listActivists}
-              total={totalActivists}
+              total={totalImpactedActivists}
             />
           )}
 
@@ -78,15 +80,16 @@ class BotPage extends Component {
             >
               <StepContent>
                 <ActivistSegmentationForm
-                  totalActivists={totalActivists}
+                  totalImpactedActivists={totalImpactedActivists}
                   changeParentState={::this.changeState}
                   segmentation={segmentation}
+                  forceReset={this.state.forceResetSearch}
                 />
               </StepContent>
 
               <StepContent>
                 <FacebookBotMassMessageForm
-                  totalActivists={totalActivists}
+                  totalImpactedActivists={totalImpactedActivists}
                   changeParentState={::this.changeState}
                   segmentation={segmentation}
                 />

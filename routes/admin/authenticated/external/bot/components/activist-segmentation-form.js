@@ -34,6 +34,13 @@ class ActivistSegmentationForm extends Component {
     }
   }
 
+  componentWillReceiveProps({ forceReset, communityCampaigns, changeParentState }) {
+    if (forceReset) {
+      communityCampaigns.refetch()
+      changeParentState({ forceResetSearch: false })
+    }
+  }
+
   render () {
     const {
       fields: {
@@ -44,7 +51,7 @@ class ActivistSegmentationForm extends Component {
         campaign_exclusion_ids: campaignExclusionIds,
         campaign_inclusion_ids: campaignInclusionIds
       },
-      totalActivists,
+      totalImpactedActivists,
       changeParentState,
       segmentation,
       communityCampaigns,
@@ -60,7 +67,7 @@ class ActivistSegmentationForm extends Component {
       (segmentation.campaignInclusionIds || '') !== campaignInclusionIds.value
     )
 
-    const disableMessageButton = !formProps.valid || !totalActivists || hasSegmentationChanged
+    const disableMessageButton = !formProps.valid || !totalImpactedActivists || hasSegmentationChanged
     const disableFilterButton = !formProps.valid || !hasSegmentationChanged
 
     return (
@@ -98,12 +105,12 @@ class ActivistSegmentationForm extends Component {
           })
             .then(({
               loading,
-              data: { query: {  activists,  totalCount: totalActivists } }
+              data: { query: {  activists,  totalCount: totalImpactedActivists } }
             }) => {
               changeParentState({
                 loading,
-                totalActivists,
-                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data))
+                totalImpactedActivists,
+                listActivists: !activists.length ? [] : activists.map(a => JSON.parse(a.data)),
               })
             })
             .catch(err => console.error(err))
@@ -193,7 +200,7 @@ class ActivistSegmentationForm extends Component {
           />
         </FormGroup>
 
-        {totalActivists > 0 && <Summary value={totalActivists} />}
+        {totalImpactedActivists > 0 && <Summary value={totalImpactedActivists} />}
 
         <div className='clearfix col-12 mt2'>
           <div className='col col-6'>
