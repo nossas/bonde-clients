@@ -3,18 +3,18 @@ import axios from 'axios'
 import { reduxForm } from 'redux-form'
 import { FlatForm } from '~client/ux/components'
 import { FormGroup, ControlLabel, FormControl } from '~client/components/forms'
-import { Button } from '~client/ux/components'
-import { Summary } from '.'
+import Summary from './summary'
 
 var styles = require('exenv').canUseDOM ? require('./facebook-bot-mass-message-form.scss') : {}
 
 const FacebookBotMassMessageForm = ({
   fields: {
+    name,
     message,
     quick_reply_redirect: quickReplyRedirect,
     quick_reply_button_text: quickReplyButtonText
   },
-  totalActivists,
+  totalImpactedActivists,
   changeParentState,
   segmentation,
   ...formProps
@@ -24,6 +24,7 @@ const FacebookBotMassMessageForm = ({
     buttonText='Enviar mensagem'
     style={{ paddingTop: '.5rem', position: 'relative' }}
     submit={({
+      name,
       message: text,
       quick_reply_redirect: quickReplyRedirect,
       quick_reply_button_text: quickReplyButtonText
@@ -31,7 +32,15 @@ const FacebookBotMassMessageForm = ({
       changeParentState({ loading: true })
 
       const url = `${process.env.BOT_URL}/enqueue-mass-messages`
-      const payload = { ...segmentation, text, quickReplyRedirect, quickReplyButtonText }
+      const payload = {
+        ...segmentation,
+        facebookBotConfigurationId: 1, // TODO: It needs to be fixed!
+        name,
+        totalImpactedActivists,
+        text,
+        quickReplyRedirect,
+        quickReplyButtonText
+      }
 
       axios.post(url, payload)
         .then(() => changeParentState({ hasEnqueued: true, loading: false }))
@@ -49,6 +58,15 @@ const FacebookBotMassMessageForm = ({
     >
       <i className='fa fa-chevron-left' />
     </button>
+
+    <FormGroup className='mb2' controlId='name' {...name}>
+      <ControlLabel>Nome da Campanha</ControlLabel>
+      <FormControl
+        type='text'
+        placeholder='Ex: Campanha de Pressão Contra a PEC 181 (1º envio)'
+      />
+    </FormGroup>
+
     <FormGroup className='mb2' controlId='message' {...message}>
       <ControlLabel>Mensagem</ControlLabel>
       <FormControl
@@ -77,19 +95,22 @@ const FacebookBotMassMessageForm = ({
       </FormGroup>
     </div>
 
-    <Summary value={totalActivists} />
+    <Summary value={totalImpactedActivists} />
   </FlatForm>
 )
 
 export const form = 'facebookBotMassMessageForm'
-export const fields = ['message', 'quick_reply_redirect', 'quick_reply_button_text']
+export const fields = ['name', 'message', 'quick_reply_redirect', 'quick_reply_button_text']
 export const validate = values => {
   const errors = {}
   const {
+    name,
     message,
     quick_reply_redirect: quickReplyRedirect,
     quick_reply_button_text: quickReplyButtonText
   } = values
+
+  if (!name) errors.name = 'Obrigatório'
 
   if (!message) errors.message = 'Obrigatório'
 

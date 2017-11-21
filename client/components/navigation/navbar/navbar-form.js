@@ -19,7 +19,7 @@ class NavbarForm extends React.Component {
     window.removeEventListener('keyup', this.handleKeyUp)
   }
 
-  handleKeyUp = (e) => {
+  handleKeyUp (e) {
     if (e.keyCode === 27) {
       this.submit(e)
     }

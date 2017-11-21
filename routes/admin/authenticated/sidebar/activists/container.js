@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
@@ -6,13 +7,13 @@ import {
 } from '~client/components/layout'
 import { Loading } from '~client/components/await'
 import Select from 'react-select-plus'
+import ImportCSV from './component/import-csv'
 
 import FilterForm from './component/filter-form'
 import ActivistDetailHOC from './component/detail'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 var styles = require('exenv').canUseDOM ? require('./container.scss') : {}
-
 
 const QueryForm = ({
   query,
@@ -178,6 +179,7 @@ class Container extends Component {
   render () {
     const { data, loading, totalCount } = this.props
     const {
+      intl,
       selected,
       onSelectAll,
       onRemoveAll,
@@ -190,10 +192,19 @@ class Container extends Component {
 
     return (
       <SettingsPageLayout>
-        <SettingsPageMenuLayout title='Base de usuários' className={styles.pageMenu} />
+        <SettingsPageMenuLayout
+          title={intl.formatMessage({
+            id: 'routes.admin.sidebar.activists.container.title',
+            defaultMessage: 'Base de usuários'
+          })}
+          className={styles.pageMenu}
+        />
         <QueryForm
           name='q'
-          label='Filtre por mobilizações ou formulários'
+          label={intl.formatMessage({
+            id: 'routes.admin.sidebar.activists.container.filter-placeholder',
+            defaultMessage: 'Filtre por mobilizações ou formulários'
+          })}
           onSubmit={() => this.props.fetch(true)}
           query={this.props.query}
           onQueryChange={(q) => {
@@ -222,36 +233,57 @@ class Container extends Component {
               <div className={`${styles.title} clearfix`}>
                 {totalCount <= 0 && (
                   <div className={`${styles.h1} mx3`}>
-                    Ops! Ninguém com esse filtro :(
+                    <FormattedMessage
+                      id='routes.admin.sidebar.activists.container.empty-list'
+                      defaultMessage='Ops! Ninguém com esse filtro :('
+                    />
                   </div>
                 )}
                 {totalCount > 0 && (
-                  <input
-                    id='selectAllId'
-                    type='checkbox'
-                    disabled={totalCount === 0}
-                    checked={isSelectedAll}
-                    onClick={(evt) => {
-                      if (isSelectedAll) onRemoveAll()
-                      else onSelectAll()
-                    }}
-                  />
-                )}
-                {totalCount > 0 && (
-                  <div className={styles.h1}>
-                    {totalCount} pessoas
+                  <div className={styles.selectAll}>
+                    <input
+                      id='selectAllId'
+                      type='checkbox'
+                      disabled={totalCount === 0}
+                      checked={isSelectedAll}
+                      onClick={(evt) => {
+                        if (isSelectedAll) onRemoveAll()
+                        else onSelectAll()
+                      }}
+                    />
+                    <div className={styles.h1}>
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.counter'
+                        defaultMessage={`{totalCount} {totalCount, plural,
+                          one {pessoa}
+                          other {pessoas}
+                        }`}
+                        values={{ totalCount }}
+                      />
+                    </div>
                   </div>
                 )}
-                {selected.length > 0 && (
-                  <div className='Action-btn-group'>
+                <div className={styles.btnGroup}>
+                  <ImportCSV>
+                    <button type='button'>
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.import-csv'
+                        defaultMessage='Importar CSV'
+                      />
+                    </button>
+                  </ImportCSV>
+                  {selected.length > 0 && (
                     <button
                       type='button'
                       onClick={this.onExportCSV.bind(this)}
                     >
-                      Exportar CSV
+                      <FormattedMessage
+                        id='routes.admin.sidebar.activists.container.export-csv'
+                        defaultMessage='Exportar CSV'
+                      />
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
 
               <div className={styles.tableContainer}>

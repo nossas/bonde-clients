@@ -9,11 +9,13 @@ import { Link } from 'react-router'
 if (require('exenv').canUseDOM) require('./styles.scss')
 
 // TODO: Change to style component
-const basscss = 'ux--button btn white bg-pagenta caps p2 rounded h4'
+const basscss = 'ux--button btn white caps p2 rounded h4 ml2'
 
 const Button = ({ children, type, disabled, to, href, onClick }) => {
+  const isSubmit = type !== 'submit'
   const className = classnames(
     basscss,
+    isSubmit ? 'bg-gray' : 'bg-pagenta',
     disabled ? 'disabled' : null
   )
 
@@ -23,7 +25,7 @@ const Button = ({ children, type, disabled, to, href, onClick }) => {
   return (
     <button
       type={type}
-      onClick={e => type !== 'submit' && onClick(e)}
+      onClick={e => isSubmit && onClick(e)}
       disabled={disabled}
       className={className}
     >

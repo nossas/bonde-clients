@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { FormGroup, FormControl, ControlLabel, HelpBlock } from '~client/components/forms'
-import { SettingsForm } from '~client/ux/components'
+import {
+  FormRedux,
+  SuccessMessage,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  HelpBlock
+} from '~client/components/forms'
+import { Button, DivFloat } from '~client/ux/components'
 import { Warning } from '~client/components/notify'
 
 const CommunitySettingsMailchimpPage = ({
@@ -12,9 +19,10 @@ const CommunitySettingsMailchimpPage = ({
   },
   location,
   intl,
+  resyncMailchimp,
   ...formProps
 }) => (
-  <SettingsForm {...formProps}>
+  <FormRedux nosubmit {...formProps}>
     <Warning
       title={
         <FormattedMessage
@@ -159,7 +167,12 @@ const CommunitySettingsMailchimpPage = ({
         })}
       />
     </FormGroup>
-  </SettingsForm>
+    <DivFloat>
+      <Button type='submit' disable={formProps.submitting}>Salvar</Button>
+      <Button type='button' onClick={resyncMailchimp}>Sincronizar</Button>
+      <SuccessMessage text='Dados editados com sucesso' />
+    </DivFloat>
+  </FormRedux>
 )
 
 CommunitySettingsMailchimpPage.propTypes = {

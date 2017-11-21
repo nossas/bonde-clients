@@ -9,7 +9,7 @@ const genderIcon = gender => ({
   female: `venus ${styles.pink}`
 }[gender] || `genderless ${styles.gray}`)
 
-const Preview = ({ list, total }) => (
+const Preview = ({ list, total, listStyle }) => (
   <div className={styles.previewContainer}>
     <h1 className={styles.previewTitle}>
       Preview
@@ -17,7 +17,7 @@ const Preview = ({ list, total }) => (
         Exibindo {list.length} de {total}
       </p>
     </h1>
-    <ul className={styles.previewList}>
+    <ul className={styles.previewList} style={listStyle}>
       {list.map(activist => (
         <li key={uuid()} className={styles.previewListItem}>
           <div
@@ -38,7 +38,8 @@ const Preview = ({ list, total }) => (
 
 Preview.propTypes = {
   list: PropTypes.array.isRequired,
-  total: PropTypes.number.isRequired
+  total: PropTypes.number.isRequired,
+  listStyle: PropTypes.object
 }
 
 export default Preview

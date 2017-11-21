@@ -1265,5 +1265,22 @@ servidor-03.dominio.com`,
   'activists-management.c--filterable-list.period.options.last-quarter': 'Nos últimos 3 meses',
   'activists-management.c--filterable-list.period.options.last-year': 'No último ano',
   'activists-management.c--filterable-list.period.options.always': 'Sempre',
-  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...'
+  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...',
+
+  // Activists (CRM)
+  // filepath: routes/admin/authenticated/sidebar/activists
+  // route: /activists
+  'routes.admin.sidebar.activists.container.title': 'Base de usuários',
+  'routes.admin.sidebar.activists.container.filter-placeholder': 'Filtre por mobilizações ou formulários',
+  'routes.admin.sidebar.activists.container.empty-list': 'Ops! Ninguém com esse filtro :(',
+  'routes.admin.sidebar.activists.container.counter': `{totalCount} {totalCount, plural,
+    one {pessoa}
+    other {pessoas}
+  }`,
+  'routes.admin.sidebar.activists.container.import-csv': 'Importar CSV',
+  'routes.admin.sidebar.activists.container.export-csv': 'Exportar CSV',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': 'Importação concluída com sucesso!',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} ativistas importados com sucesso.',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ooops!',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}'
 }

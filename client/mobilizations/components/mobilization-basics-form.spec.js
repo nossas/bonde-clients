@@ -14,9 +14,6 @@ describe.skip('client/mobilizations/components/mobilization-basics-form', () => 
       goal: {}
     },
     handleSubmit: mock.noop,
-    location: {
-      pathname: ''
-    },
     submitFailed: false,
     dirty: false,
     valid: false,

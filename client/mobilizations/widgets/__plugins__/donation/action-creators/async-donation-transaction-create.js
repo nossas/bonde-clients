@@ -31,8 +31,7 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) =
         try {
           const failureData = JSON.parse(failure.config.data)
           dispatch(setDonationCustomerData(failureData.donation.customer))
-        }
-        catch (error) {
+        } catch (error) {
           console.error('Customer data is not parsable. Cannot store the customer data.')
           console.error(error)
         }

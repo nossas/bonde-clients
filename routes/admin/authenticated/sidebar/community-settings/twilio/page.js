@@ -3,7 +3,6 @@ import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { FormGroup, FormControl, ControlLabel, HelpBlock } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
-import { Info, Warning } from '~client/components/notify'
 
 const CommunitySettingsTwilioPage = ({
   fields: {
@@ -90,8 +89,7 @@ const CommunitySettingsTwilioPage = ({
             Escolha qual número Twilio quer usar
           </li>
         </ol>
-        <span>
-        </span>
+        <span />
       </HelpBlock>
       <FormControl type='text' tabIndex={3} placeholder='Ex: +5511956781234' />
     </FormGroup>
@@ -101,7 +99,7 @@ const CommunitySettingsTwilioPage = ({
 CommunitySettingsTwilioPage.propTypes = {
   fields: PropTypes.shape({
     mailchimp_api_key: PropTypes.object.isRequired,
-    mailchimp_list_id: PropTypes.object.isRequired,
+    mailchimp_list_id: PropTypes.object.isRequired
   }).isRequired,
   // redux-form required props
   submit: PropTypes.func.isRequired,

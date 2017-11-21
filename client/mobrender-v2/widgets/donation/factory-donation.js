@@ -109,7 +109,7 @@ export default ({
                 color: '#666',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
-                margin: '0.4rem 0 0',
+                margin: '0.4rem 0 0'
               }}>
                 arrecadados
               </div>
@@ -139,17 +139,7 @@ export default ({
       if (goalDateRemaining !== undefined) {
         const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
 
-        if (goalDateRemaining === 0)
-          props.valueBottomRight = 'último dia!'
-
-        else if (goalDateRemaining > 0 && goalDateRemaining < 7)
-          props.valueBottomRight = 'últimos dias!'
-
-        else if (goalDateRemaining === 7)
-          props.valueBottomRight = 'última semana!'
-
-        else if (goalDateRemaining > 0)
-          props.valueBottomRight = `faltam ${goalDateRemaining} ${pluralizeDay}`
+        if (goalDateRemaining === 0) { props.valueBottomRight = 'último dia!' } else if (goalDateRemaining > 0 && goalDateRemaining < 7) { props.valueBottomRight = 'últimos dias!' } else if (goalDateRemaining === 7) { props.valueBottomRight = 'última semana!' } else if (goalDateRemaining > 0) { props.valueBottomRight = `faltam ${goalDateRemaining} ${pluralizeDay}` }
 
         props.valueBottomRight = (
           <b style={{ color: mainColor }}>
@@ -166,8 +156,7 @@ export default ({
     renderButton () {
       const {
         configurable,
-        widget: { settings, goal },
-        donationGoalStats,
+        widget: { settings },
         mobilization: { header_font: headerFont }
       } = this.props
 

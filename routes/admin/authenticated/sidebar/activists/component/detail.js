@@ -30,11 +30,8 @@ const detailActivistQuery = gql`
   }
 `
 
-
 export default (WrappedComponent) => {
-  
   class PP extends React.Component {
-    
     render () {
       const {
         data: {
@@ -44,7 +41,7 @@ export default (WrappedComponent) => {
         },
         ...ownProps
       } = this.props
-      
+
       const mobilizations = allActivistMobilizations
         ? allActivistMobilizations.nodes
         : []

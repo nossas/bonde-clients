@@ -23,7 +23,7 @@ export default store => ({
         require('./mailchimp').default(store),
         require('./recipient').default(store),
         require('./report').default(store),
-        require('./twilio').default(store),
+        require('./twilio').default(store)
       ])
     })
   }

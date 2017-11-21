@@ -94,6 +94,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
         'Evelyn Pereira <+551199999-9999>',
         'Agatha Stefany Costa <+551199999-9999>'
       ]
+      let submitted
       wrapper = mount(
         <PressureForm
           widget={widget}
@@ -101,6 +102,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
           targetList={targetsPhone}
         />
       )
+      expect(submitted).to.equal(undefined)
     })
 
     it('should render phone field when targets have phone number', () => {

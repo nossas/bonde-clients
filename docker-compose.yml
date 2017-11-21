@@ -16,7 +16,7 @@ volumes:
 
 services:
   postgres:
-    image: postgres
+    image: postgres:9.6.5
     ports:
       # We'll bind our host's port 5432 to postgres's port 5432, so we can use
       # our database IDEs with it:

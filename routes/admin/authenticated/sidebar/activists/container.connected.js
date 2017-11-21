@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { gql } from 'react-apollo'
 import { addNotification as notify } from 'reapop'
+import { injectIntl } from 'react-intl'
 import * as CommunitySelectors from '~client/community/selectors'
 import {
   ListableHOC,
@@ -90,7 +91,7 @@ const Selectable = SelectableHOC({
 
 const Filterable = FilterableHOC()
 
-export default connect(mapStateToProps, mapActionsToProps)(
+export default injectIntl(connect(mapStateToProps, mapActionsToProps)(
   Filterable(
     Selectable(
       Listable(
@@ -98,4 +99,4 @@ export default connect(mapStateToProps, mapActionsToProps)(
       )
     )
   )
-)
+))

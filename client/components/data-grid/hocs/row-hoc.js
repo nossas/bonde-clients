@@ -10,7 +10,7 @@ export default (WrappedComponent) => {
         className: classnames(
           'flex',
           className,
-          { 'active' : actived }
+          { 'active': actived }
         ),
         data: WrappedComponent !== 'div' ? data : null,
         rowIndex: WrappedComponent !== 'div' ? rowIndex : null,

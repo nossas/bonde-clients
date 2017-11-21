@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { browserHistory } from 'react-router'
 
@@ -27,12 +26,11 @@ export default ({
   // ```
 
   class PP extends React.Component {
-
     render () {
       return <WrappedComponent {...this.props} />
     }
   }
-  
+
   const withQuery = graphql(query, {
     options: (ownProps) => {
       let options = {
@@ -59,9 +57,9 @@ export default ({
             ...queryParams,
             ...options.variables
           }
-        } 
+        }
       }
-      
+
       return options
     },
     props: ({ data, ownProps: { location } }) => {

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { Background } from '~client/components/layout'
@@ -16,20 +15,24 @@ class BotPage extends Component {
     this.state = {
       loading: false,
       listActivists: [],
-      totalActivists: 0,
+      totalImpactedActivists: 0,
       searchFinished: false,
       hasEnqueued: false,
-      segmentation: {}
+      segmentation: {},
+      backgroundAlignmentX: 'center',
+      backgroundAlignmentY: 'center',
+      forceResetSearch: false
     }
   }
 
   resetSteps () {
     this.changeState({
       listActivists: [],
-      totalActivists: 0,
+      totalImpactedActivists: 0,
       searchFinished: false,
       hasEnqueued: false,
-      segmentation: {}
+      segmentation: {},
+      forceResetSearch: true
     })
   }
 
@@ -37,24 +40,39 @@ class BotPage extends Component {
     this.setState({ ...this.state, ...state })
   }
 
+  getCurrentStep () {
+    const { searchFinished, hasEnqueued } = this.state
+    if (searchFinished && hasEnqueued) return 2
+    else if (searchFinished && !hasEnqueued) return 1
+    return 0
+  }
+
   render () {
     const { image } = this.props
     const {
       loading,
       listActivists,
-      totalActivists,
+      totalImpactedActivists,
       searchFinished,
       hasEnqueued,
       segmentation
     } = this.state
 
     return (
-      <Background image={image} alignment={{ x: 'center', y: 'center' }} contentSize={12}>
+      <Background
+        image={image}
+        alignment={{
+          x: this.state.backgroundAlignmentX,
+          y: this.state.backgroundAlignmentY
+        }}
+        contentSize={12}
+      >
         <div style={{ display: 'flex' }}>
           {[searchFinished, hasEnqueued].some(f => !f) && listActivists.length && (
             <Preview
               list={listActivists}
-              total={totalActivists}
+              total={totalImpactedActivists}
+              listStyle={{ height: [577, 461][this.getCurrentStep()] }}
             />
           )}
 
@@ -70,15 +88,16 @@ class BotPage extends Component {
             >
               <StepContent>
                 <ActivistSegmentationForm
-                  totalActivists={totalActivists}
+                  totalImpactedActivists={totalImpactedActivists}
                   changeParentState={::this.changeState}
                   segmentation={segmentation}
+                  forceReset={this.state.forceResetSearch}
                 />
               </StepContent>
 
               <StepContent>
                 <FacebookBotMassMessageForm
-                  totalActivists={totalActivists}
+                  totalImpactedActivists={totalImpactedActivists}
                   changeParentState={::this.changeState}
                   segmentation={segmentation}
                 />

@@ -1,3 +1,5 @@
+import { addNotification } from 'reapop'
+
 export const genericRequestError = () => ({
   title: 'Ops!',
   status: 'error',
@@ -101,3 +103,25 @@ export const subscriptionCancelSuccess = intl => ({
   dismissible: true,
   closeButton: false
 })
+
+// Standardize use of these functions
+
+const applyIntl = (value, intl) => {
+  if (typeof value === 'object') {
+    const { context, ...message } = value
+    return intl.formatMessage(message, context)
+  }
+  return value
+}
+
+export const notify = ({ status, title, message }, dispatch, ownProps) => {
+  const { intl } = ownProps || {}
+  dispatch(addNotification({
+    status,
+    title: applyIntl(title, intl),
+    message: applyIntl(message, intl),
+    dismissAfter: 0,
+    dismissable: true,
+    closeButton: false
+  }))
+}

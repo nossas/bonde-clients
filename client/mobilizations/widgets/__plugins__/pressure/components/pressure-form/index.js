@@ -31,15 +31,15 @@ class RealtimeCallDuration extends Component {
     this.state = { duration: 0, interval: undefined }
   }
 
-  timer = () => {
+  timer () {
     this.setState({ duration: this.state.duration + 1 })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({ interval: setInterval(this.timer, 1000) })
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(this.state.interval)
   }
 
@@ -64,7 +64,7 @@ class PressureForm extends Component {
     }
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps (props) {
     if (!this.props.callTransition && props.targetList && props.targetList.length) {
       this.setState({
         callManagement: props.targetList.map(target => ({
@@ -164,7 +164,6 @@ class PressureForm extends Component {
 
   render () {
     const {
-      targetList,
       callTransition,
       buttonColor,
       buttonText,
@@ -360,7 +359,7 @@ class PressureForm extends Component {
                       <div className='flex-container'>
                         <div className='call-item'>
                           <div>
-                            <span className='fa fa-phone ring'></span>
+                            <span className='fa fa-phone ring' />
                           </div>
                           <div className='target-name'>
                             {name}<br />
@@ -380,12 +379,12 @@ class PressureForm extends Component {
                     <li className='danger'>
                       <div className='flex-container'>
                         <div className='call-item'>
-                          <span className='fa fa-phone-square'></span>
+                          <span className='fa fa-phone-square' />
                           <div className='target-name'>{name}</div>
                         </div>
                         <div className='finish'>
                           3x
-                          <span className='fa fa-times-circle'></span>
+                          <span className='fa fa-times-circle' />
                         </div>
                       </div>
                     </li>
@@ -395,7 +394,7 @@ class PressureForm extends Component {
                       <li className='danger'>
                         <div className='flex-container'>
                           <div className='call-item'>
-                            <span className='fa fa-phone-square'></span>
+                            <span className='fa fa-phone-square' />
                             <div className='target-name'>{name}</div>
                           </div>
                           <div className='inline-container'>
@@ -426,7 +425,7 @@ class PressureForm extends Component {
                   <li>
                     <div className='flex-container'>
                       <div className='call-item'>
-                        <span className='fa fa-phone-square primary'></span>
+                        <span className='fa fa-phone-square primary' />
                         <div className='target-name'>{name}</div>
                       </div>
                       <button
