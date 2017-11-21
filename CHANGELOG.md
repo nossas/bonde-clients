@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/nossas/bonde-client/compare/v0.6.10...v0.7.0) (2017-11-21)
+
+
+### Bug Fixes
+
+* **auth:** fix check when need reload current user [#879](https://github.com/nossas/bonde-client/issues/879) ([#881](https://github.com/nossas/bonde-client/issues/881)) ([eb1ace5](https://github.com/nossas/bonde-client/commit/eb1ace5))
+* **templates:** remove z-index on hover item list [#855](https://github.com/nossas/bonde-client/issues/855) ([c9253bd](https://github.com/nossas/bonde-client/commit/c9253bd))
+* **templates:** remove z-index on hover item list [#855](https://github.com/nossas/bonde-client/issues/855) ([bbb3fc3](https://github.com/nossas/bonde-client/commit/bbb3fc3))
+* **widgets:** form finish editor toolbar z-index fix [#878](https://github.com/nossas/bonde-client/issues/878) ([#880](https://github.com/nossas/bonde-client/issues/880)) ([ecb1d32](https://github.com/nossas/bonde-client/commit/ecb1d32))
+
+
+### Features
+
+* **activists:** add button to import activists from csv ([6e9e0c6](https://github.com/nossas/bonde-client/commit/6e9e0c6))
+* **activists:** add button to resync mailchimp ([ff47744](https://github.com/nossas/bonde-client/commit/ff47744))
+* **activists:** add export csv to activists module [#838](https://github.com/nossas/bonde-client/issues/838) ([#846](https://github.com/nossas/bonde-client/issues/846)) ([204f37f](https://github.com/nossas/bonde-client/commit/204f37f))
+* **activists:** add possibility for translate crm module ([aa9366f](https://github.com/nossas/bonde-client/commit/aa9366f))
+* **bot:** activists strategy fn; campaign segmentation [#885](https://github.com/nossas/bonde-client/issues/885) ([3aa84f8](https://github.com/nossas/bonde-client/commit/3aa84f8))
+* **bot:** send mass message with campaign segmentation close [#885](https://github.com/nossas/bonde-client/issues/885) ([9440a61](https://github.com/nossas/bonde-client/commit/9440a61))
+* **notification:** add a factory to create notify messages ([05bdab0](https://github.com/nossas/bonde-client/commit/05bdab0))
+* **validation-form:** add a factory validate on utils function ([ab5e67d](https://github.com/nossas/bonde-client/commit/ab5e67d))
+
+
+
 <a name="0.6.2"></a>
 ## [0.6.2](https://github.com/nossas/bonde-client/compare/v0.6.1...v0.6.2) (2017-08-10)
 
