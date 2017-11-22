@@ -51,7 +51,7 @@ describe('createFormProvider API', () => {
     wrapper.setProps({ fields })
     const {
       i18n,
-      i18nContext,
+      i18nKeys,
       ...otherProps
     } = wrapper.instance().getChildContext().form
     expect(otherProps).to.deep.equal({ fields })
@@ -65,8 +65,8 @@ describe('createFormProvider API', () => {
       .to.deep.equal(message)
   })
 
-  it('should pass i18nContext like child context', () => {
-    const i18nContext = {
+  it('should pass i18nKeys like child context', () => {
+    const i18nKeys = {
       fields: {
         name: {
           label: { id: 'label', defaultMessage: 'label' },
@@ -75,9 +75,9 @@ describe('createFormProvider API', () => {
       }
     }
     const intl = { formatMessage: t => t }
-    wrapper.setProps({ intl, i18nContext })
-    expect(wrapper.instance().getChildContext().form.i18nContext)
-      .to.deep.equal(i18nContext)
+    wrapper.setProps({ intl, i18nKeys })
+    expect(wrapper.instance().getChildContext().form.i18nKeys)
+      .to.deep.equal(i18nKeys)
   })
 
   it('should pass submitted false by default', () => {
@@ -100,41 +100,33 @@ describe('createFormProvider API', () => {
     expect(wrapper.find('form').props().submitted).to.equal(false)
   })
 
-  it('should pass successMessage to form', () => {
-    const successMessage = 'successMessage'
-    wrapper.setProps({ successMessage })
-    expect(wrapper.find('form').props().successMessage)
-      .to.equal(successMessage)
-  })
-
-  it('should translate successMessage to form', () => {
-    const successMessage = {
-      id: 'testForm.successMessage',
-      defaultMessage: 'Success Message'
-    }
-    const formatMessage = m => `i18n(${m.defaultMessage})`
-    wrapper.setProps({
+  it('should pass getPropI18n to form', () => {
+    const props = {
       intl: {
         ...defaultProps.intl,
-        formatMessage
+        formatMessage: m => `i18n(${m.defaultMessage})`
       },
-      successMessage
-    })
-    expect(wrapper.find('form').props().successMessage)
-      .to.equal(`i18n(${successMessage.defaultMessage})`)
+      customProp: {
+        id: 'form.customProp',
+        defaultMessage: 'Custom Prop'
+      }
+    }
+    wrapper.setProps(props)
+    expect(wrapper.find('form').props().getPropI18n('customProp'))
+      .to.equal(`i18n(${props.customProp.defaultMessage})`)
   })
 
-  it('should translate successMessage to form with i18nContext', () => {
+  it('should translate prop to form with i18nKeys', () => {
     const successMessage = {
       id: 'testForm.successMessage',
       defaultMessage: 'Success Message'
     }
     const formatMessage = m => `i18n(${m.defaultMessage})`
     wrapper.setProps({
-      i18nContext: { successMessage },
+      i18nKeys: { successMessage },
       intl: { ...defaultProps.intl, formatMessage }
     })
-    expect(wrapper.find('form').props().successMessage)
+    expect(wrapper.find('form').props().getPropI18n('successMessage'))
       .to.equal(`i18n(${successMessage.defaultMessage})`)
   })
 

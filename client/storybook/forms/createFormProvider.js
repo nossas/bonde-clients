@@ -14,7 +14,7 @@ export const createFormProvider = (Component) => {
         form: {
           fields: this.props.fields,
           i18n: this.i18n.bind(this),
-          i18nContext: this.props.i18nContext
+          i18nKeys: this.props.i18nKeys
         }
       }
     }
@@ -40,9 +40,9 @@ export const createFormProvider = (Component) => {
 
     getPropI18n (propName) {
       const prop = this.props[propName]
-      const { i18nContext } = this.props
-      if (i18nContext && i18nContext[propName]) {
-        return this.i18n(i18nContext[propName])
+      const { i18nKeys } = this.props
+      if (i18nKeys && i18nKeys[propName]) {
+        return this.i18n(prop || i18nKeys[propName])
       }
       return this.i18n(prop)
     }
@@ -52,7 +52,7 @@ export const createFormProvider = (Component) => {
       return (
         <Component
           i18n={this.i18n.bind(this)}
-          successMessage={this.getPropI18n('successMessage')}
+          getPropI18n={this.getPropI18n.bind(this)}
           submitted={this.state.submitted}
           onSubmit={handleSubmit(submit)}
         >
