@@ -11,7 +11,7 @@ import {
   TextField,
   RadioField,
   Radio
-} from '~client/storybook/forms'
+} from '~client/storybook/settings/forms'
 
 const Form = (props) => (
   <SettingsForm
@@ -19,6 +19,7 @@ const Form = (props) => (
       e.preventDefault()
       action('onSubmit')()
     }}
+    getPropI18n={action('getPropI18n')}
     {...props}
   >
     <TextField label='Input text' type='text' />
@@ -48,6 +49,7 @@ storiesOf('Formulário de configuração', module)
   .add('when submit of success', () => (
     <Form
       submitted
+      getPropI18n={(k) => (k === 'successMessage' && 'Formulário salvo com sucesso!')}
       successMessage='Formulário salvo com sucesso!'
     />
   ))

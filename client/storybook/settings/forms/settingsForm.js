@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button } from './'
 
 const floatSubmitStyle = {
@@ -21,27 +22,38 @@ const successMessageStyle = {
   textAlign: 'right'
 }
 
-export default ({
+const SettingsForm = ({
   children,
   // Provider form
   onSubmit,
   submitted,
-  // SettingsForm
-  successMessage,
+  getPropI18n,
   // redux-form
   valid,
   submitting
-}) => (
-  <form onSubmit={onSubmit}>
-    {children}
-    <div style={floatSubmitStyle}>
-      <Button disabled={submitting} type='submit'>Salvar</Button>
-      {submitted && successMessage ? (
-        <div style={successMessageStyle}>
-          <span>{`${successMessage}`}</span>
-          <i className='fa fa-check-circle olive ml1' />
-        </div>
-      ) : null}
-    </div>
-  </form>
-)
+}) => {
+  const successMessage = getPropI18n('successMessage')
+  return (
+    <form onSubmit={onSubmit}>
+      {children}
+      <div style={floatSubmitStyle}>
+        <Button disabled={submitting} type='submit'>Salvar</Button>
+        {submitted && successMessage ? (
+          <div style={successMessageStyle}>
+            <span>{successMessage}</span>
+            <i className='fa fa-check-circle olive ml1' />
+          </div>
+        ) : null}
+      </div>
+    </form>
+  )
+}
+
+SettingsForm.propTypes = {
+  successMessage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
+}
+
+export default SettingsForm

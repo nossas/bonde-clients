@@ -7,7 +7,13 @@ import {
 } from '~client/storybook/settings/forms'
 import { asyncEdit } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
-import { isValidFromEmail } from '~client/utils/validation-helper'
+import { i18nKeys } from './i18n'
+import { required, validateEmail, validate } from '~client/utils/validate'
+
+const emailErrorMessage = {
+  id: 'page--community-info.form.custom-from-email.validation.invalid-email-format',
+  defaultMessage: 'E-mail de resposta fora do formato padrão'
+}
 
 const CommunityForm = createForm({
   name: 'communityInfoForm',
@@ -17,91 +23,24 @@ const CommunityForm = createForm({
   initialValues: (state) => ({
     ...CommunitySelectors.getCurrent(state) || {}
   }),
-  validate: (values, ownProps) => {
-    const { name, city, email_template_from: customFromEmail } = values
-    const errors = {}
-
-    if (!name) {
-      errors.name = {
-        id: 'page--community-info.form.name.validation.required',
-        defaultMessage: 'Informe o nome da comunidade'
-      }
-    }
-    if (!city) {
-      errors.city = {
-        id: 'page--community-info.form.city.validation.required',
-        defaultMessage: 'Informe em qual cidade sua comunidade atua'
-      }
-    }
-    if (customFromEmail && !isValidFromEmail(customFromEmail)) {
-      errors.email_template_from = {
-        id: 'page--community-info.form.custom-from-email.validation.invalid-email-format',
-        defaultMessage: 'E-mail de resposta fora do formato padrão'
-      }
-    }
-    return errors
-  },
+  validate: validate([
+    required('name', {
+      id: 'page--community-info.form.name.validation.required',
+      defaultMessage: 'Informe o nome da comunidade'
+    }),
+    required('city', {
+      id: 'page--community-info.form.city.validation.required',
+      defaultMessage: 'Informe em qual cidade sua comunidade atua'
+    }),
+    required('email_template_from', emailErrorMessage),
+    validateEmail('email_template_from', emailErrorMessage)
+  ]),
   submit: asyncEdit,
   component: SettingsForm
 })
 
-const I18N = {
-  successMessage: {
-    id: 'page--community-info.form.successMessage',
-    defaultMessage: 'Informações básicas inseridas com sucesso'
-  },
-  fields: {
-    image: {
-      label: {
-        id: 'page--community-info.form.logo.label',
-        defaultMessage: 'Logo'
-      }
-    },
-    name: {
-      label: {
-        id: 'page--community-info.form.name.label',
-        defaultMessage: 'Nome'
-      },
-      placeholder: {
-        id: 'page--community-info.form.name.placeholder',
-        defaultMessage: 'Insira o nome da sua comunidade'
-      }
-    },
-    description: {
-      label: {
-        id: 'page--community-info.form.description.label',
-        defaultMessage: 'Descrição'
-      },
-      placeholder: {
-        id: 'page--community-info.form.description.placeholder',
-        defaultMessage: 'Insira uma descrição para a sua comunidade'
-      }
-    },
-    city: {
-      label: {
-        id: 'page--community-info.form.city.label',
-        defaultMessage: 'Cidade'
-      }
-    },
-    email_template_from: {
-      label: {
-        id: 'page--community-info.form.custom-from-email.label',
-        defaultMessage: 'E-mail de resposta para notificações'
-      },
-      placeholder: {
-        id: 'page--community-info.form.custom-from-email.placeholder',
-        defaultMessage: 'Ex: Nome do remetente <remetente@provedor.com>'
-      },
-      helpText: {
-        id: 'page--community-info.form.custom-from-email.helper-text',
-        defaultMessage: 'Esse email é utilizado como remetente padrão das notificações.'
-      }
-    }
-  }
-}
-
 export default () => (
-  <CommunityForm i18nContext={I18N}>
+  <CommunityForm i18nKeys={i18nKeys}>
     <Field
       name='image'
       signingUrl={`${process.env.API_URL}/uploads`}

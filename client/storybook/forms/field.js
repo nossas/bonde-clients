@@ -19,13 +19,13 @@ class Field extends React.Component {
   }
 
   getI18nProps (fieldName) {
-    const { form: { i18n, i18nContext } } = this.context
+    const { form: { i18n, i18nKeys } } = this.context
     let { label, placeholder, helpText } = this.props
-    if (i18nContext && i18nContext.fields && i18nContext.fields[fieldName]) {
-      const fieldContext = i18nContext.fields[fieldName]
-      label = fieldContext.label || label
-      placeholder = fieldContext.placeholder || placeholder
-      helpText = fieldContext.helpText || helpText
+    if (i18nKeys && i18nKeys.fields && i18nKeys.fields[fieldName]) {
+      const fieldContext = i18nKeys.fields[fieldName]
+      label = label || fieldContext.label
+      placeholder = placeholder || fieldContext.placeholder
+      helpText = helpText || fieldContext.helpText
     }
     return {
       label: i18n(label),

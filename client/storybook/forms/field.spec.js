@@ -15,7 +15,7 @@ describe('<Field />', () => {
         }
       },
       i18n: m => `i18n(${m})`,
-      i18nContext: {
+      i18nKeys: {
         fields: {
           [fieldName]: {
             label: { id: 'testField.label', defaultMessage: 'TestField' },
@@ -54,7 +54,7 @@ describe('<Field />', () => {
 
   it('should pass label, placeholder and helpText translated', () => {
     const { i18n, label, placeholder, helpText } = wrapper.find('input').props()
-    const field = defaultContext.form.i18nContext.fields[fieldName]
+    const field = defaultContext.form.i18nKeys.fields[fieldName]
     expect(label).to.equal(i18n(field.label))
     expect(placeholder).to.equal(i18n(field.placeholder))
     expect(helpText).to.equal(i18n(field.helpText))

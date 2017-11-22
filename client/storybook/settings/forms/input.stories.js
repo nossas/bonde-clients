@@ -9,7 +9,7 @@ import {
 import {
   SettingsForm,
   TextField
-} from '~client/storybook/forms'
+} from '~client/storybook/settings/forms'
 
 storiesOf('TextField', module)
   .addDecorator(story => (
@@ -21,6 +21,7 @@ storiesOf('TextField', module)
             e.preventDefault()
             action('onSubmit')()
           }}
+          getPropI18n={action('getPropI18n')}
         >
           {story()}
         </SettingsForm>
@@ -35,10 +36,11 @@ storiesOf('TextField', module)
   ))
   .add('invalid', () => (
     <TextField
+      i18n={(m) => m}
       label='E-mail'
       type='text'
       value='suporte@@'
       error='Invalid email'
-      invalid
+      touched
     />
   ))
