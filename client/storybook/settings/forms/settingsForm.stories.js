@@ -5,13 +5,13 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~client/storybook/settings/components'
+} from '~client/storybook/settings/layout'
 import {
   SettingsForm,
   TextField,
   RadioField,
   Radio
-} from '~client/storybook/forms/components'
+} from '~client/storybook/forms'
 
 const Form = (props) => (
   <SettingsForm

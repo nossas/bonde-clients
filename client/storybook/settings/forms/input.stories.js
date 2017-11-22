@@ -5,11 +5,11 @@ import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout
-} from '~client/storybook/settings/components'
+} from '~client/storybook/settings/layout'
 import {
   SettingsForm,
   TextField
-} from '~client/storybook/forms/components'
+} from '~client/storybook/forms'
 
 storiesOf('TextField', module)
   .addDecorator(story => (
