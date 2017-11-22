@@ -3,11 +3,19 @@ import { expect } from 'chai'
 import { required, validateEmail, validate } from './'
 
 describe('validate', () => {
+  const requiredMessage = {
+    id: 'utils.validate.required',
+    defaultMessage: 'Required field.'
+  }
+  const emailMessage = {
+    id: 'utils.validate.email',
+    defaultMessage: 'Email isn\'t valid.'
+  }
   it('should return errors with required field', () => {
     const values = { firstName: 'Ada', email: '', lastName: '' }
     expect(required(['firstName', 'lastName', 'email'])(values)).to.deep.equal({
-      lastName: 'Required field.',
-      email: 'Required field.'
+      lastName: requiredMessage,
+      email: requiredMessage
     })
   })
 
@@ -18,8 +26,8 @@ describe('validate', () => {
       email2: 'test@@nossas.org'
     }
     expect(validateEmail(['email', 'email1', 'email2'])(values)).to.deep.equal({
-      email1: 'Email isn\'t valid.',
-      email2: 'Email isn\'t valid.'
+      email1: emailMessage,
+      email2: emailMessage
     })
   })
 
@@ -31,8 +39,8 @@ describe('validate', () => {
       validateEmail(['email'])
     ])
     expect(fnFirstRequired(values)).to.deep.equal({
-      name: 'Required field.',
-      email: 'Required field.'
+      name: requiredMessage,
+      email: requiredMessage
     })
 
     const fnFirstEmail = validate([
@@ -40,8 +48,28 @@ describe('validate', () => {
       required(['name', 'email'])
     ])
     expect(fnFirstEmail(values)).to.deep.equal({
-      name: 'Required field.',
-      email: 'Email isn\'t valid.'
+      name: requiredMessage,
+      email: emailMessage
+    })
+  })
+
+  it('should make a validation with custom message', () => {
+    const firstNameMessage = {
+      id: 'validation.required.firstName',
+      defaultMessage: 'First name is required'
+    }
+    const lastNameMessage = {
+      id: 'validation.required.lastName',
+      defaultMessage: 'Last name is required'
+    }
+    const values = { firstName: '', lastName: '' }
+    const fnValidate = validate([
+      required('firstName', firstNameMessage),
+      required('lastName', lastNameMessage)
+    ])
+    expect(fnValidate(values)).to.deep.equal({
+      firstName: firstNameMessage,
+      lastName: lastNameMessage
     })
   })
 })
