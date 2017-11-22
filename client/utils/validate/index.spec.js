@@ -5,11 +5,11 @@ import { required, validateEmail, validate } from './'
 describe('validate', () => {
   const requiredMessage = {
     id: 'utils.validate.required',
-    defaultMessage: 'Required field.'
+    defaultMessage: 'Preenchimento obrigatório'
   }
   const emailMessage = {
     id: 'utils.validate.email',
-    defaultMessage: 'Email isn\'t valid.'
+    defaultMessage: 'Informe um e-mail válido'
   }
   it('should return errors with required field', () => {
     const values = { firstName: 'Ada', email: '', lastName: '' }
