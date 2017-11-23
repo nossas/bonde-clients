@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import * as pressureHelper from '~client/mobilizations/widgets/utils/pressure-helper'
 import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
@@ -97,17 +98,26 @@ class PressureForm extends Component {
   }
 
   validate () {
-    const { targetList, widget: { settings: { show_city: showCity } } } = this.props
-    const requiredMsg = 'Preenchimento obrigatório'
+    const { targetList, widget: { settings: { show_city: showCity } }, intl } = this.props
+    const requiredMsg = intl.formatMessage({
+      id: 'pressure-widget.components--pressure-form.validation.required',
+      defaultMessage: 'Preenchimento obrigatório'
+    })
     const errors = { valid: true }
 
     if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
       if (!this.state.email) {
         errors.email = requiredMsg
       } else if (!isValidEmail(this.state.email)) {
-        errors.email = 'E-mail inválido'
+        errors.email = intl.formatMessage({
+          id: 'pressure-widget.components--pressure-form.email.validation.invalid-email-format',
+          defaultMessage: 'E-mail inválido'
+        })
       } else if (targetList && targetList.some(target => target.match(`<${this.state.email}>`))) {
-        errors.email = 'O email que você está tentando usar é de um dos alvos da mobilização.'
+        errors.email = intl.formatMessage({
+          id: 'pressure-widget.components--pressure-form.email.validation.sender-is-target',
+          defaultMessage: 'O email que você está tentando usar é de um dos alvos da mobilização.'
+        })
       }
       if (!this.state.subject) {
         errors.subject = requiredMsg
@@ -123,9 +133,15 @@ class PressureForm extends Component {
         errors.phone = requiredMsg
       } else if (!isValidPhoneE164(phoneE164)) {
         if ([11, 12].includes(phoneE164.length)) {
-          errors.phone = 'Informe o código do país e o DDD com dois dígitos. Ex: +5511'
+          errors.phone = intl.formatMessage({
+            id: 'pressure-widget.components--pressure-form.phone.validation.ddd',
+            defaultMessage: 'Informe o código do país e o DDD com dois dígitos. Ex: +5511'
+          })
         } else {
-          errors.phone = 'Telefone inválido'
+          errors.phone = intl.formatMessage({
+            id: 'pressure-widget.components--pressure-form.phone.validation.invalid',
+            defaultMessage: 'Telefone inválido'
+          })
         }
       } else if (
         targetList &&
@@ -134,7 +150,10 @@ class PressureForm extends Component {
             .match(`${this.state.phone.replace(/\D/g, '')}`)
         )
       ) {
-        errors.phone = 'O telefone que você está tentando usar é de um dos alvos da mobilização.'
+        errors.phone = intl.formatMessage({
+          id: 'pressure-widget.components--pressure-form.phone.validation.caller-is-target',
+          defaultMessage: 'O telefone que você está tentando usar é de um dos alvos da mobilização.'
+        })
       }
     }
     if (!this.state.name) {
@@ -170,7 +189,8 @@ class PressureForm extends Component {
       children,
       widget,
       disabled,
-      addTwilioCallMutation
+      addTwilioCallMutation,
+      intl
     } = this.props
     const {
       email, phone, name, lastname, city, subject, body, errors,
@@ -195,7 +215,10 @@ class PressureForm extends Component {
             {this.state.pressureType === 'email' && (
               <div className={classnames('form-group', controlClassname)}>
                 <label className='py1 gray' htmlFor='pressure-sender-email-id'>
-                  E-mail
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.email.label'
+                    defaultMessage='E-mail'
+                  />
                   {(errors && errors['email'] && <span className='error'>{errors['email']}</span>)}
                 </label>
                 <input
@@ -204,7 +227,10 @@ class PressureForm extends Component {
                   style={inputReset}
                   onBlur={::AnalyticsEvents.pressureIsFilled}
                   type='email'
-                  placeholder='Insira seu e-mail'
+                  placeholder={intl.formatMessage({
+                    id: 'pressure-widget.components--pressure-form.email.placeholder',
+                    defaultMessage: 'Insira seu e-mail'
+                  })}
                   value={email}
                   onChange={e => this.setState({ email: e.target.value })}
                 />
@@ -213,7 +239,10 @@ class PressureForm extends Component {
             {this.state.pressureType === 'phone' && (
               <div className={classnames('form-group', controlClassname)}>
                 <label className='py1 gray' htmlFor='pressure-sender-phone-id'>
-                  Telefone
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.phone.label'
+                    defaultMessage='Telefone'
+                  />
                   {(errors && errors['phone'] && <span className='error'>{errors['phone']}</span>)}
                 </label>
                 <input
@@ -222,7 +251,10 @@ class PressureForm extends Component {
                   style={inputReset}
                   onBlur={::AnalyticsEvents.pressureIsFilled}
                   type='text'
-                  placeholder='Insira seu telefone. Ex: +5511987654321'
+                  placeholder={intl.formatMessage({
+                    id: 'pressure-widget.components--pressure-form.phone.placeholder',
+                    defaultMessage: 'Insira seu telefone. Ex: +5511987654321'
+                  })}
                   value={phone}
                   onChange={e => this.setState({ phone: e.target.value })}
                 />
@@ -230,7 +262,10 @@ class PressureForm extends Component {
             )}
             <div className={classnames('form-group', controlClassname)}>
               <label className='py1 gray' htmlFor='pressure-sender-firstname-id'>
-                Nome
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.name.label'
+                  defaultMessage='Nome'
+                />
                 {(errors && errors['name'] && <span className='error'>{errors['name']}</span>)}
               </label>
               <input
@@ -238,14 +273,20 @@ class PressureForm extends Component {
                 className='col-12'
                 style={inputReset}
                 type='text'
-                placeholder='Insira seu nome'
+                placeholder={intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.name.placeholder',
+                  defaultMessage: 'Insira seu nome'
+                })}
                 value={name}
                 onChange={e => this.setState({ name: e.target.value })}
               />
             </div>
             <div className={classnames('form-group', controlClassname)}>
               <label className='py1 gray' htmlFor='pressure-sender-lastname-id'>
-                Sobrenome
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.lastname.label'
+                  defaultMessage='Sobrenome'
+                />
                 {(errors && errors['lastname'] && <span className='error'>{errors['lastname']}</span>)}
               </label>
               <input
@@ -253,7 +294,10 @@ class PressureForm extends Component {
                 className='col-12'
                 style={inputReset}
                 type='text'
-                placeholder='Insira seu sobrenome'
+                placeholder={intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.lastname.placeholder',
+                  defaultMessage: 'Insira seu sobrenome'
+                })}
                 value={lastname}
                 onChange={e => this.setState({ lastname: e.target.value })}
               />
@@ -262,14 +306,20 @@ class PressureForm extends Component {
               !widget.settings.show_city || widget.settings.show_city !== 'city-true' ? null : (
                 <div className={classnames('form-group', controlClassname)}>
                   <label className='py1 gray' htmlFor='pressure-sender-city-id'>
-                    Cidade
+                    <FormattedMessage
+                      id='pressure-widget.components--pressure-form.city.label'
+                      defaultMessage='Cidade'
+                    />
                     {(errors && errors['city'] && <span className='error'>{errors['city']}</span>)}
                   </label>
                   <input
                     className='col-12'
                     style={inputReset}
                     type='text'
-                    placeholder='Insira sua cidade'
+                    placeholder={intl.formatMessage({
+                      id: 'pressure-widget.components--pressure-form.city.placeholder',
+                      defaultMessage: 'Insira sua cidade'
+                    })}
                     value={city}
                     onChange={e => this.setState({ city: e.target.value })}
                   />
@@ -279,7 +329,10 @@ class PressureForm extends Component {
             {this.state.pressureType === 'email' && (
               <div className={classnames('form-group', controlClassname)}>
                 <label className='py1 gray' htmlFor='pressure-subject-id'>
-                  Assunto
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.subject.label'
+                    defaultMessage='Assunto'
+                  />
                   {(errors && errors['subject'] && <span className='error'>{errors['subject']}</span>)}
                 </label>
                 <input
@@ -296,7 +349,10 @@ class PressureForm extends Component {
             {this.state.pressureType === 'email' && (
               <div className={classnames('form-group', controlClassname)}>
                 <label className='py1 gray' htmlFor='pressure-body-id'>
-                  Corpo do e-mail
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.body.label'
+                    defaultMessage='Corpo do e-mail'
+                  />
                   {(errors && errors['body'] && <span className='error'>{errors['body']}</span>)}
                 </label>
                 <textarea
@@ -363,7 +419,10 @@ class PressureForm extends Component {
                           </div>
                           <div className='target-name'>
                             {name}<br />
-                            Chamada em andamento
+                            <FormattedMessage
+                              id='pressure-widget.components--pressure-form.phone-calls.ringing'
+                              defaultMessage='Chamada em andamento'
+                            />
                           </div>
                         </div>
                         <div className='inline-container'>
@@ -412,7 +471,10 @@ class PressureForm extends Component {
                                 })
                               }}
                             >
-                              Religar
+                              <FormattedMessage
+                                id='pressure-widget.components--pressure-form.phone-calls.retry'
+                                defaultMessage='Religar'
+                              />
                             </button>
                           </div>
                         </div>
@@ -440,7 +502,10 @@ class PressureForm extends Component {
                           })
                         }}
                       >
-                        Ligar
+                        <FormattedMessage
+                          id='pressure-widget.components--pressure-form.phone-calls.call'
+                          defaultMessage='Ligar'
+                        />
                       </button>
                     </div>
                   </li>
@@ -451,12 +516,35 @@ class PressureForm extends Component {
           </ul>
 
           <div className='how-it-works'>
-            Como funciona?
+            <FormattedMessage
+              id='pressure-widget.components--pressure-form.phone.how-it-works.title'
+              defaultMessage='Como funciona?'
+            />
             <ol>
-              <li>Estamos ligando para o seu alvo</li>
-              <li>Assim que alguém atender do lado de lá, vamos te ligar</li>
-              <li>Quando você atender, conectamos as ligações</li>
-              <li>Agora é com você!</li>
+              <li>
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-01'
+                  defaultMessage='Estamos ligando para o seu alvo'
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-02'
+                  defaultMessage='Assim que alguém atender do lado de lá, vamos te ligar'
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-03'
+                  defaultMessage='Quando você atender, conectamos as ligações'
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-04'
+                  defaultMessage='Agora é com você!'
+                />
+              </li>
             </ol>
           </div>
 
@@ -470,7 +558,10 @@ class PressureForm extends Component {
                 this.props.changeParentState({ showFinishMessage: true })
               }}
             >
-              Encerrar e Compartilhar
+              <FormattedMessage
+                id='pressure-widget.components--pressure-form.phone.finish-and-share'
+                defaultMessage='Encerrar e Compartilhar'
+              />
             </button>
           </div>
         </div>
@@ -487,7 +578,8 @@ PressureForm.propTypes = {
   subject: PropTypes.string,
   body: PropTypes.string,
   widget: PropTypes.object,
-  changeParentState: PropTypes.func.isRequired
+  changeParentState: PropTypes.func.isRequired,
+  intl: intlShape
 }
 
 PressureForm.defaultProps = {
@@ -496,4 +588,4 @@ PressureForm.defaultProps = {
   changeParentState: () => {}
 }
 
-export default PressureForm
+export default injectIntl(PressureForm)

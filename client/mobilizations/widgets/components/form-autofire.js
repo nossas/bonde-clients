@@ -23,7 +23,12 @@ const FormAutofire = props => {
   return (
     <SettingsForm
       {...rest}
-      buttonText='Salvar'
+      buttonText={
+        <FormattedMessage
+          id='widgets.components--form-autofire.form.submit-button'
+          defaultMessage='Salvar'
+        />
+      }
       onSubmit={values => {
         const settings = widget.settings || {}
         return asyncWidgetUpdate({ ...widget, settings: { ...settings, ...values } })

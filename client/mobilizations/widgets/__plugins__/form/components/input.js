@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import classnames from 'classnames'
 
@@ -47,7 +48,10 @@ class Input extends Component {
       return (
         <div className='right'>
           <i className='fa fa-pencil-square-o mr1' />
-          Clique para editar
+          <FormattedMessage
+            id='form-widget.components--input.click-to-edit'
+            defaultMessage='Clique para editar'
+          />
         </div>
       )
     }
@@ -68,7 +72,12 @@ class Input extends Component {
           height: 'inherit'
         }}
       >
-        <option value=''>Selecione...</option>
+        <option value=''>
+          <FormattedMessage
+            id='form-widget.components--input.field-dropdown.options.default'
+            defaultMessage='Selecione...'
+          />
+        </option>
         {
           field.placeholder.split(',').map(function (v, index) {
             return <option key={`dropdown-option-${index}`}>{v}</option>
@@ -79,7 +88,13 @@ class Input extends Component {
       return (
         editable || configurable ? (
           <p className='block full-width'>
-            <strong>Mensagem de sucesso alterada para:</strong><br />
+            <strong>
+              <FormattedMessage
+                id='form-widget.components--input.field-greetings.title'
+                defaultMessage='Mensagem de sucesso alterada para:'
+              />
+            </strong>
+            <br />
             {field.placeholder}
           </p>
         )

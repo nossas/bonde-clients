@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
+import { injectIntl } from 'react-intl'
 import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '../action-creators'
 
@@ -91,4 +92,4 @@ export default graphql(
   graphqlQueries.fetchDonationGoalStats, {
     name: 'donationGoalStats',
     options: props => ({ variables: { widgetId: props.widget.id } })
-  })(connect(mapStateToProps, mapDispatchToProps)(Donation))
+  })(connect(mapStateToProps, mapDispatchToProps)(injectIntl(Donation)))

@@ -1,29 +1,29 @@
 import React from 'react'
-import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
-import AdjustmentsSettingsForm from './component'
+import { shallowWithIntl } from '~root/intl/helpers'
+import Page from './component'
 
-describe('<AdjustmentsSettingsForm />', () => {
+describe('client/mobrender/widgets/adjustments/component', () => {
   let wrapper
   const props = {
+    colorScheme: '#c7c7c7',
     fields: {
       call_to_action: 'callToAction',
       button_text: 'buttonText',
-      count_text: 'countText',
-      main_color: 'mainColor'
+      count_text: 'countText'
     },
     handleSubmit: mock.noop,
     submitting: false,
     error: undefined,
-    colorScheme: '#c7c7c7',
+    mobilization: {},
     widget: {},
     asyncWidgetUpdate: mock.noop
   }
 
   beforeAll(() => {
-    wrapper = shallow(<AdjustmentsSettingsForm {...props} />)
+    wrapper = shallowWithIntl(<Page {...props} />)
   })
 
   describe('#render', () => {

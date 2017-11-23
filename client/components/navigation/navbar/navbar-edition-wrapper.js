@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import classnames from 'classnames'
 
 import { NavbarButton, NavbarForm } from '~client/components/navigation/navbar'
@@ -85,7 +86,13 @@ class NavbarEditionWrapper extends React.Component {
   }
 
   blockName (block) {
-    return block.name || `Bloco ${block.position}`
+    return block.name || (
+      <FormattedMessage
+        id='components.navigation--navbar-edition-wrapper.block'
+        defaultMessage='Bloco {position}'
+        values={{ position: block.position }}
+      />
+    )
   }
 
   renderNavbarButton () {

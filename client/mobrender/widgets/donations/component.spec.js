@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
+import { shallowWithIntl } from '~root/intl/helpers'
 import * as mock from '~client/utils/mock'
-import DonationSettingsForm from './component'
+import Page from './component'
 
-describe('<DonationSettingsForm />', () => {
+describe('client/mobrender/widgets/donations/component', () => {
   let wrapper
   const props = {
     dispatch: mock.noop,
@@ -27,7 +27,7 @@ describe('<DonationSettingsForm />', () => {
   }
 
   beforeAll(() => {
-    wrapper = shallow(<DonationSettingsForm {...props} />)
+    wrapper = shallowWithIntl(<Page {...props} />)
   })
 
   describe('#render', () => {

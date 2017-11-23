@@ -2,7 +2,7 @@ import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
 import { mountWithIntl } from '~root/intl/helpers'
-import { InputTag } from '~client/mobilizations/widgets/components'
+import { InputTag } from '~client/mobilizations/widgets/components/input-tag'
 import * as os from '~client/utils/browser/os'
 
 describe('client/mobilizations/widgets/components/input-tag', () => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
-
-import Content, { EditorNew } from '~client/mobilizations/widgets/__plugins__/content/components'
+import { shallowWithIntl } from '~root/intl/helpers'
+import { EditorNew } from '~client/mobilizations/widgets/__plugins__/content/components'
+import { Content } from '~client/mobilizations/widgets/__plugins__/content/components/__content__'
 
 describe('client/mobilizations/widgets/__plugins__/content/components/__content__', () => {
   let contentWidget
@@ -20,7 +20,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/__content_
   }
 
   beforeEach(() => {
-    contentWidget = shallow(<Content {...props} />, { context: stubContext })
+    contentWidget = shallowWithIntl(<Content {...props} />, { context: stubContext })
   })
 
   it('should render draft.js editor when settings content is JSON and have "entityMap" key', () => {

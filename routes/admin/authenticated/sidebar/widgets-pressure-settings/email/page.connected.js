@@ -19,13 +19,18 @@ const mapDispatchToProps = (dispatch, props) => ({
   notifyAllTargetsRemoval: () => dispatch(notify(messagePressureTargetsRemoveAll(props.intl)))
 })
 
-const validate = values => {
+const validate = (values, { intl }) => {
   const errors = {}
+  const requiredMessage = intl.formatMessage({
+    id: 'page--pressure-widget-email.form.validation.required',
+    defaultMessage: 'Preenchimento obrigatório'
+  })
+
   if (!values.pressure_subject) {
-    errors.pressure_subject = 'Preenchimento obrigatório'
+    errors.pressure_subject = requiredMessage
   }
   if (!values.pressure_body) {
-    errors.pressure_body = 'Preenchimento obrigatório'
+    errors.pressure_body = requiredMessage
   }
   return errors
 }

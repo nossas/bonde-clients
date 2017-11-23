@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
+import { FormattedMessage, intlShape } from 'react-intl'
 import * as formatNumberHelper from '~client/utils/format-number-helper'
 import { Progress } from '.'
 
@@ -111,7 +112,10 @@ export default ({
                 textTransform: 'uppercase',
                 margin: '0.4rem 0 0'
               }}>
-                arrecadados
+                <FormattedMessage
+                  id='widgets.components--donation.progress-bar.collected'
+                  defaultMessage='arrecadados'
+                />
               </div>
             </div>
           )
@@ -122,7 +126,16 @@ export default ({
         if (goalStats.total_donations) {
           props.valueBottomLeft = (
             <span style={{ color: '#999999' }}>
-              {goalStats.total_donations} apoios
+              <FormattedMessage
+                id='widgets.components--donation.progress-bar.supports'
+                defaultMessage={`
+                  {totalDonations} {totalDonations, plural,
+                    one {apoio}
+                    other {apoio}
+                  }
+                `}
+                values={{ totalDonations: goalStats.total_donations }}
+              />
             </span>
           )
         }
@@ -131,15 +144,52 @@ export default ({
       if (goal) {
         props.valueBottomCenter = (
           <b>
-            <span style={{ color: '#999999' }}>Meta: </span>
-            {formatNumberHelper.currencyInt(goal)}
+            <span style={{ color: '#999999' }}>
+              <FormattedMessage
+                id='widgets.components--donation.progress-bar.goal'
+                defaultMessage='Meta:'
+              />
+            </span>
+            {' '}{formatNumberHelper.currencyInt(goal)}
           </b>
         )
       }
       if (goalDateRemaining !== undefined) {
-        const pluralizeDay = goalDateRemaining === 1 ? 'dia' : 'dias'
-
-        if (goalDateRemaining === 0) { props.valueBottomRight = 'último dia!' } else if (goalDateRemaining > 0 && goalDateRemaining < 7) { props.valueBottomRight = 'últimos dias!' } else if (goalDateRemaining === 7) { props.valueBottomRight = 'última semana!' } else if (goalDateRemaining > 0) { props.valueBottomRight = `faltam ${goalDateRemaining} ${pluralizeDay}` }
+        if (goalDateRemaining === 0) {
+          props.valueBottomRight = (
+            <FormattedMessage
+              id='widgets.components--donation.progress-bar.date.last-day'
+              defaultMessage='último dia!'
+            />
+          )
+        } else if (goalDateRemaining > 0 && goalDateRemaining < 7) {
+          props.valueBottomRight = (
+            <FormattedMessage
+              id='widgets.components--donation.progress-bar.date.last-days'
+              defaultMessage='últimos dias!'
+            />
+          )
+        } else if (goalDateRemaining === 7) {
+          props.valueBottomRight = (
+            <FormattedMessage
+              id='widgets.components--donation.progress-bar.date.last-week'
+              defaultMessage='última semana!'
+            />
+          )
+        } else if (goalDateRemaining > 0) {
+          props.valueBottomRight = (
+            <FormattedMessage
+              id='widgets.components--donation.progress-bar.date.remaining'
+              defaultMessage={`
+                faltam {goalDateRemaining} {goalDateRemaining, plural,
+                  one {dia}
+                  other {dias}
+                }
+              `}
+              values={{ goalDateRemaining }}
+            />
+          )
+        }
 
         props.valueBottomRight = (
           <b style={{ color: mainColor }}>
@@ -157,7 +207,8 @@ export default ({
       const {
         configurable,
         widget: { settings },
-        mobilization: { header_font: headerFont }
+        mobilization: { header_font: headerFont },
+        intl
       } = this.props
 
       const {
@@ -165,8 +216,18 @@ export default ({
         selected_payment_type: selectedPaymentType
       } = this.state
 
-      const buttonText = (settings && settings.button_text) || 'Doar agora'
-      const titleText = settings ? settings.call_to_action || settings.title_text : 'Clique para configurar seu bloco de doação'
+      const buttonText = (settings && settings.button_text) || (
+        <FormattedMessage
+          id='widgets.components--donation.default.button-text'
+          defaultMessage='Doar agora'
+        />
+      )
+      const titleText = (settings && settings.title_text) || (
+        <FormattedMessage
+          id='widgets.components--donation.default.title-text'
+          defaultMessage='Clique para configurar seu bloco de doação'
+        />
+      )
 
       const donationValue1 = (settings && settings.donation_value1) || 0
       const donationValue2 = (settings && settings.donation_value2) || 0
@@ -179,7 +240,20 @@ export default ({
       const recurringPeriod = (settings && settings.recurring_period) || 30
 
       const isUniquePayment = paymentType === 'unique' || selectedPaymentType === 'unique'
-      const periodLabelOptions = { 30: 'mês', 180: 'semestre', 365: 'ano' }
+      const periodLabelOptions = {
+        30: intl.formatMessage({
+          id: 'widgets.components--donation.period-label-options.month',
+          defaultMessage: 'mês'
+        }),
+        180: intl.formatMessage({
+          id: 'widgets.components--donation.period-label-options.halfyear',
+          defaultMessage: 'semestre'
+        }),
+        365: intl.formatMessage({
+          id: 'widgets.components--donation.period-label-options.year',
+          defaultMessage: 'ano'
+        })
+      }
       const periodLabelCurrent = periodLabelOptions[recurringPeriod]
       const periodLabel = isUniquePayment ? '' : periodLabelCurrent
 
@@ -205,13 +279,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                   style={selectedPaymentType === 'recurring' ? {color: mainColor} : {}}
                   className={selectedPaymentType === 'recurring' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
                   <i className='icon-payment-recurring' />
-                  {'Apoiar todo ' + periodLabelCurrent}
+                  <FormattedMessage
+                    id='widgets.components--donation.users-choice.recurring'
+                    defaultMessage='Apoiar todo {periodLabelCurrent}'
+                    values={{ periodLabelCurrent }}
+                  />
                 </a>
                 <a href='#' onClick={::this.handleClickSetTypeDonation.bind(this, 'unique')}
                   style={selectedPaymentType === 'unique' ? {color: mainColor} : {}}
                   className={selectedPaymentType === 'unique' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
                   <i className='icon-payment-unique' />
-                  Doação única
+                  <FormattedMessage
+                    id='widgets.components--donation.users-choice.unique'
+                    defaultMessage='Doação única'
+                  />
                 </a>
               </div> : ''}
 
@@ -326,7 +407,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             className='p2 m0 white rounded-top center'
             style={{ backgroundColor: mainColor }}
           >
-            Ops!
+            <FormattedMessage
+              id='widgets.components--donation.reattempt.message.title'
+              defaultMessage='Ops!'
+            />
           </h2>
           <div style={{ textAlign: 'center', color: '#333', padding: '3rem 0' }}>
             <i
@@ -334,15 +418,27 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               style={{ backgroundColor: '#de0000' }}
             />
             <br />
-            Algo de errado aconteceu com a sua doação. ):<br />
-            Clique no botão abaixo pra tentar de novo.<br />
+
+            <FormattedMessage
+              id='widgets.components--donation.reattempt.message.text.line-01'
+              defaultMessage='Algo de errado aconteceu com a sua doação. ):'
+            />
+            <br />
+            <FormattedMessage
+              id='widgets.components--donation.reattempt.message.text.line-02'
+              defaultMessage='Clique no botão abaixo pra tentar de novo.'
+            />
+            <br />
 
             <button
               onClick={::this.handleClickDonate}
               style={{ backgroundColor: mainColor }}
               className='btn white caps bg-darken-4 p2 mt3 rounded border-box'
             >
-              Nova tentativa
+              <FormattedMessage
+                id='widgets.components--donation.reattempt.message.button.text'
+                defaultMessage='Nova tentativa'
+              />
             </button>
           </div>
         </div>
@@ -370,7 +466,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     editable: PropTypes.bool.isRequired,
     configurable: PropTypes.bool,
     hasNewField: PropTypes.bool,
-    handleDonationTransactionCreate: PropTypes.func
+    handleDonationTransactionCreate: PropTypes.func,
+    intl: intlShape
   }
 
   return Donation

@@ -1,14 +1,13 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
-
+import { mountWithIntl } from '~root/intl/helpers'
 import { PressureCount } from '~client/mobilizations/widgets/__plugins__/pressure/components'
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-count', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(<PressureCount />)
+    wrapper = mountWithIntl(<PressureCount />)
   })
 
   it('should render ok and total 0 by default', () => {

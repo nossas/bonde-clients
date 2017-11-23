@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import classnames from 'classnames'
 
 const WhatsAppShareButton = ({ preview, whatsappText, mobilization }) => {
@@ -12,7 +13,10 @@ const WhatsAppShareButton = ({ preview, whatsappText, mobilization }) => {
       href={`whatsapp://send?text=${encodeURIComponent(whatsappText)}`}
       style={{ backgroundColor: '#4CEC68', color: '#fff' }}
     >
-      Compartilhar no WhatsApp
+      <FormattedMessage
+        id='share.components--whatsapp-share-button.text'
+        defaultMessage='Compartilhar no WhatsApp'
+      />
     </a>
   )
 }

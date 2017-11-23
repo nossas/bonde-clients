@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallowWithIntl } from '~root/intl/helpers'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
 import { MobilizationBasicsForm } from '~client/mobilizations/components/mobilization-basics-form'
 
-describe.skip('client/mobilizations/components/mobilization-basics-form', () => {
+describe('client/mobilizations/components/mobilization-basics-form', () => {
   let wrapper
   const props = {
     floatSubmit: false,
@@ -21,7 +21,7 @@ describe.skip('client/mobilizations/components/mobilization-basics-form', () => 
   }
 
   beforeAll(() => {
-    wrapper = shallow(<MobilizationBasicsForm {...props} />)
+    wrapper = shallowWithIntl(<MobilizationBasicsForm {...props} />)
   })
 
   describe('#render', () => {
@@ -33,7 +33,7 @@ describe.skip('client/mobilizations/components/mobilization-basics-form', () => 
       expect(wrapper.find('FormRedux').length).to.equal(1)
     })
     it('should SettingsForm when floatSubmit prop is true', () => {
-      wrapper = shallow(<MobilizationBasicsForm {...props} floatSubmit />)
+      wrapper = shallowWithIntl(<MobilizationBasicsForm {...props} floatSubmit />)
       expect(wrapper.find('SettingsForm').length).to.equal(1)
     })
   })

@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
-
+import { mountWithIntl } from '~root/intl/helpers'
 import BlockChangeBackground from '~client/mobrender/components/block-change-background'
 
 describe('~client/mobrender/components/block-change-background', () => {
@@ -14,7 +13,7 @@ describe('~client/mobrender/components/block-change-background', () => {
   }
 
   beforeEach(() => {
-    changeBackground = mount(<BlockChangeBackground {...props} />)
+    changeBackground = mountWithIntl(<BlockChangeBackground {...props} />)
   })
 
   it('should render without crashed', () => {

@@ -3,7 +3,7 @@ import * as t from '../action-types'
 import downloadjs from 'downloadjs'
 import { createAction } from './create-action'
 
-const asyncWidgetDataExport = params => (dispatch, getState, { api }) => {
+const asyncWidgetDataExport = params => (dispatch, getState, { api, intl }) => {
   const { auth: { credentials } } = getState()
   const { mobilization, widget, filename } = params
 
@@ -20,7 +20,10 @@ const asyncWidgetDataExport = params => (dispatch, getState, { api }) => {
   return api.get(endpoint, config)
     .then(({ data }) => {
       if (!data.length) {
-        window.alert('Nao foi encontrado nenhum dado para ser exportado')
+        window.alert(intl.formatMessage({
+          id: 'action--async-widget-data-export.no-data',
+          defaultMessage: 'Nao foi encontrado nenhum dado para ser exportado'
+        }))
         dispatch({ type: t.EXPORT_DATACLIP_NO_DATA_FOUND })
         return Promise.resolve()
       }

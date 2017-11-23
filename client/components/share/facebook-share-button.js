@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 
-const FacebookShareButton = props => {
+const FacebookShareButton = ({ href, intl }) => {
   const handleClick = () => {
     window.open(
-      `http://www.facebook.com/sharer.php?u=${props.href}`,
-      'Compartilhar no Facebook',
+      `http://www.facebook.com/sharer.php?u=${href}`,
+      intl.formatMessage({
+        id: 'share.components--facebook-share-button.text',
+        defaultMessage: 'Compartilhar no Facebook'
+      }),
       'width=800,height=600'
     )
   }
@@ -16,13 +20,17 @@ const FacebookShareButton = props => {
       onClick={handleClick}
       style={{ backgroundColor: '#2D88ED' }}
     >
-      Compartilhar no Facebook
+      <FormattedMessage
+        id='share.components--facebook-share-button.text'
+        defaultMessage='Compartilhar no Facebook'
+      />
     </button>
   )
 }
 
 FacebookShareButton.propTypes = {
-  href: PropTypes.string.isRequired
+  href: PropTypes.string.isRequired,
+  intl: intlShape.isRequired
 }
 
-export default FacebookShareButton
+export default injectIntl(FacebookShareButton)

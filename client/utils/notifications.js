@@ -1,20 +1,36 @@
 import { addNotification } from 'reapop'
 
-export const genericRequestError = () => ({
-  title: 'Ops!',
+export const genericRequestError = intl => ({
+  title: intl.formatMessage({
+    id: 'notification--generic-request-error.title',
+    defaultMessage: 'Ops!'
+  }),
   status: 'error',
-  message:
-    'Parece que teve algum problema técnico nessa última requisição. ' +
-    'Pedimos que tente de novo daqui a pouco.',
+  message: intl.formatMessage({
+    id: 'notification--generic-request-error.message',
+    defaultMessage: (
+      'Parece que teve algum problema técnico nessa última requisição. ' +
+      'Pedimos que tente de novo daqui a pouco.'
+    )
+  }),
   dismissAfter: 0,
   dismissible: true,
   closeButton: false
 })
 
-export const genericSaveSuccess = () => ({
-  title: 'Oba!',
+export const genericSaveSuccess = intl => ({
+  title: intl.formatMessage({
+    id: 'notification--generic-save-success.title',
+    defaultMessage: 'Oba!'
+  }),
   status: 'success',
-  message: 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
+  message: intl.formatMessage({
+    id: 'notification--generic-save-success.message',
+    defaultMessage: (
+      'A requisição foi feita com sucesso e, os seus ' +
+      'dados estão salvos em segurança.'
+    )
+  }),
   dismissAfter: 7000,
   dismissible: true,
   closeButton: false
