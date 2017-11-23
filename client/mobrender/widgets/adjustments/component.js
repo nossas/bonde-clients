@@ -63,6 +63,7 @@ const AdjustmentsSettingsForm = (props) => {
           type='text'
           placeholder='Defina o texto que ficará ao lado do número de pessoas que agiram.'
         />
+        <HelpBlock>O contador será mostrado se existir um texto definido.</HelpBlock>
       </FormGroup>
       <FormGroup controlId='main-color-id' {...mainColor}>
         <ControlLabel>Cor padrão</ControlLabel>
