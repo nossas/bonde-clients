@@ -16,7 +16,8 @@
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "storybook": "start-storybook -p 9001 -c ./client/storybook"
   },
   "repository": {
     "type": "git",
@@ -215,5 +216,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|wav|mp3|aac)$": "<rootDir>/tools/jest/mock-file.js",
       "\\.(css|scss)$": "<rootDir>/tools/jest/mock-style.js"
     }
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.2.15"
   }
 }
