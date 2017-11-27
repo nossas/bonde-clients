@@ -8,6 +8,8 @@ import Page from './page'
 
 const mapStateToProps = (state, props) => ({
   initialValues: {
+    show_counter: 'false',
+    show_city: 'city-false',
     ...props.widget.settings || {},
     targets: props.widget.settings && props.widget.settings.targets
   }
@@ -36,7 +38,14 @@ const validate = (values, { intl }) => {
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
     form: 'widgetsPressureSettingsEmailForm',
-    fields: ['pressure_subject', 'pressure_body', 'targets', 'disable_edit_field'],
+    fields: [
+      'pressure_subject',
+      'pressure_body',
+      'targets',
+      'disable_edit_field',
+      'show_counter',
+      'show_city'
+    ],
     validate
   })(Page)
 ))

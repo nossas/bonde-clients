@@ -23,22 +23,22 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
     >
       <Tabs>
         <Tab
-          path={fieldsPath}
-          isActive={fieldsPath === location.pathname}
-          text={
-            <FormattedMessage
-              id='form-widget.components--settings-menu.items.fields'
-              defaultMessage='Campos do formulário'
-            />
-          }
-        />
-        <Tab
           path={formPath}
           isActive={formPath === location.pathname}
           text={
             <FormattedMessage
               id='form-widget.components--settings-menu.items.adjusts'
               defaultMessage='Ajustes'
+            />
+          }
+        />
+        <Tab
+          path={fieldsPath}
+          isActive={fieldsPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='form-widget.components--settings-menu.items.fields'
+              defaultMessage='Campos do formulário'
             />
           }
         />

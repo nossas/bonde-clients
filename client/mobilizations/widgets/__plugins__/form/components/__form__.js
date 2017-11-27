@@ -138,33 +138,30 @@ class Form extends Component {
   }
 
   renderCount () {
-    const { configurable } = this.props
-    if (!configurable) {
-      const {
-        block: { scrollTopReached: startCounting },
-        widget: { settings, form_entries_count: count },
-        mobilization: { body_font: bodyFont },
-        intl
-      } = this.props
+    const {
+      block: { scrollTopReached: startCounting },
+      widget: { settings, form_entries_count: count },
+      mobilization: { body_font: bodyFont },
+      intl
+    } = this.props
 
-      return (
-        <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
-          <CountUp
-            start={0}
-            end={!isNaN(count) && startCounting ? Number(count) : 0}
-            duration={5}
-          />
-          &nbsp;
-          {settings && settings.count_text
-            ? settings.count_text
-            : intl.formatMessage({
-              id: 'form-widget.components--form.default.counter-suffix',
-              defaultMessage: 'assinaturas'
-            })
-          }
-        </div>
-      )
-    }
+    return (
+      <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
+        <CountUp
+          start={0}
+          end={!isNaN(count) && startCounting ? Number(count) : 0}
+          duration={5}
+        />
+        &nbsp;
+        {settings && settings.count_text
+          ? settings.count_text
+          : intl.formatMessage({
+            id: 'form-widget.components--form.default.counter-suffix',
+            defaultMessage: 'assinaturas'
+          })
+        }
+      </div>
+    )
   }
 
   renderErrors () {
@@ -197,15 +194,23 @@ class Form extends Component {
   }
 
   renderForm () {
-    const { editable, configurable } = this.props
+    const {
+      editable,
+      configurable,
+      widget: { settings }
+    } = this.props
+    const backgroundColor = settings && settings.main_color
+      ? settings.main_color
+      : 'rgba(0,0,0,0.25)'
 
     return (
       <div>
         <div
           className={classnames(
             'rounded',
-            { 'p3 bg-darken-3 relative': editable || !configurable }
+            { 'p3 relative': editable || !configurable }
           )}
+          style={{ backgroundColor }}
         >
           {this.renderCallToAction()}
           {this.renderFields()}
@@ -218,7 +223,6 @@ class Form extends Component {
 
   render () {
     const { mobilization: { header_font: headerFont } } = this.props
-
     const { success } = this.state
 
     return (

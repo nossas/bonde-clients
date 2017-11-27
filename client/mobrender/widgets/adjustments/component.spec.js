@@ -1,22 +1,25 @@
 import React from 'react'
-import { shallowWithIntl } from '~root/intl/helpers'
 import { expect } from 'chai'
 
 import * as mock from '~client/utils/mock'
-import Page from '~routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page'
+import { shallowWithIntl } from '~root/intl/helpers'
+import Page from './component'
 
-describe('routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page', () => {
+describe('client/mobrender/widgets/adjustments/component', () => {
   let wrapper
   const props = {
-    mobilization: { color_scheme: 'meurio-scheme' },
-    widget: {},
-    asyncWidgetUpdate: mock.noop,
+    colorScheme: '#c7c7c7',
     fields: {
-      show_counter: { value: true }
+      call_to_action: 'callToAction',
+      button_text: 'buttonText',
+      count_text: 'countText'
     },
     handleSubmit: mock.noop,
     submitting: false,
-    error: undefined
+    error: undefined,
+    mobilization: {},
+    widget: {},
+    asyncWidgetUpdate: mock.noop
   }
 
   beforeAll(() => {

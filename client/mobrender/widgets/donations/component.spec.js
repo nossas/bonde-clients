@@ -3,9 +3,9 @@ import { expect } from 'chai'
 
 import { shallowWithIntl } from '~root/intl/helpers'
 import * as mock from '~client/utils/mock'
-import Page from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page'
+import Page from './component'
 
-describe('routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page', () => {
+describe('client/mobrender/widgets/donations/component', () => {
   let wrapper
   const props = {
     dispatch: mock.noop,

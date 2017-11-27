@@ -8,8 +8,7 @@ import {
   HelpBlock,
   FormControl,
   RadioGroup,
-  Radio,
-  ColorPicker
+  Radio
 } from '~client/components/forms'
 import { SettingsForm } from '~client/ux/components'
 import { HorizontalLayout } from '~client/components/grids'
@@ -18,9 +17,6 @@ const DonationSettingsPage = props => {
   const {
     dispatch,
     fields: {
-      title_text: titleText,
-      button_text: buttonText,
-      main_color: mainColor,
       default_donation_value: defaultDonationValue,
       donation_value1: donationValue1,
       donation_value2: donationValue2,
@@ -36,7 +32,6 @@ const DonationSettingsPage = props => {
     intl,
     ...formProps
   } = props
-  const { mobilization: { color_scheme: colorScheme } } = props
   const donationValueTitle = (
     <FormattedMessage
       id='page--donation-widget.form.donation-value-title'
@@ -301,61 +296,6 @@ const DonationSettingsPage = props => {
           />
         </HelpBlock>
       </FormGroup>
-
-      <FormGroup controlId='title-text-id' {...titleText}>
-        <ControlLabel>
-          <FormattedMessage
-            id='page--donation-widget.form.donation-title.label'
-            defaultMessage='Título da caixa de doação'
-          />
-        </ControlLabel>
-        <FormControl
-          type='text'
-          placeholder={intl.formatMessage({
-            id: 'page--donation-widget.form.donation-title.placeholder',
-            defaultMessage: 'Ex.: Escolha um valor e contribua agora!'
-          })}
-        />
-      </FormGroup>
-
-      <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>
-          <FormattedMessage
-            id='page--donation-widget.form.main-color.label'
-            defaultMessage='Cor da caixa de doação'
-          />
-        </ControlLabel>
-        <HelpBlock>
-          <FormattedMessage
-            id='page--donation-widget.form.main-color.helper-text'
-            defaultMessage={
-              'Selecione a cor no box abaixo ou insira o valor ' +
-              'em hex, por exemplo: #DC3DCE.'
-            }
-          />
-        </HelpBlock>
-        <ColorPicker
-          dispatch={dispatch}
-          theme={colorScheme.replace('-scheme', '')}
-        />
-      </FormGroup>
-
-      <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>
-          <FormattedMessage
-            id='page--donation-widget.form.button-text.label'
-            defaultMessage='Texto do botão de confirmação'
-          />
-        </ControlLabel>
-        <FormControl
-          type='text'
-          placeholder={intl.formatMessage({
-            id: 'page--donation-widget.form.button-text.placeholder',
-            defaultMessage: 'Ex.: Doe agora!'
-          })}
-        />
-      </FormGroup>
-
       <FormGroup controlId='payment-methods-id' {...paymentMethods}>
         <ControlLabel>
           <FormattedMessage
@@ -384,7 +324,6 @@ const DonationSettingsPage = props => {
           </Radio>
         </RadioGroup>
       </FormGroup>
-
       <FormGroup>
         <ControlLabel>
           <FormattedMessage

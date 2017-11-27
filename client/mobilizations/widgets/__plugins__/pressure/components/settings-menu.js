@@ -28,7 +28,7 @@ const SettingsMenu = ({ location, mobilization, widget }) => {
           text={
             <FormattedMessage
               id='pressure-widget.components--settings-menu.items.form'
-              defaultMessage='Formulário'
+              defaultMessage='Ajustes'
             />
           }
         />

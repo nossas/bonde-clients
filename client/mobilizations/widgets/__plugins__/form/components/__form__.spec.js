@@ -13,6 +13,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/__form__', ()
         finish_message_type: 'share'
       }
     },
+    block: {},
     editable: true,
     configurable: true,
     hasNewField: false
