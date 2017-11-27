@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, intlShape } from 'react-intl'
 
 const TwitterShareButton = props => {
   const handleClick = () => {
@@ -8,10 +9,13 @@ const TwitterShareButton = props => {
     // related: additional users related to the tweet comma-separated
     // hashtags: comma-separated list without #
 
-    const { href, text } = props
+    const { href, text, intl } = props
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${href}`,
-      'Compartilhar no Twitter',
+      intl.formatMessage({
+        id: 'share.components--twitter-share-button.text',
+        defaultMessage: 'Compartilhar no Twitter'
+      }),
       'width=800,height=600'
     )
   }
@@ -22,14 +26,18 @@ const TwitterShareButton = props => {
       onClick={handleClick}
       style={{backgroundColor: '#3DD1F4'}}
     >
-      Compartilhar no Twitter
+      <FormattedMessage
+        id='share.components--twitter-share-button.text'
+        defaultMessage='Compartilhar no Twitter'
+      />
     </button>
   )
 }
 
 TwitterShareButton.propTypes = {
   href: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  intl: intlShape.isRequired
 }
 
 export default TwitterShareButton

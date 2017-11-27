@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
 import sinon from 'sinon'
+import { mountWithIntl } from '~root/intl/helpers'
 import BlockConfigMenu from '~client/mobrender/components/block-config-menu'
 
 describe('~client/mobrender/components/block-config-menu', () => {
@@ -10,7 +10,7 @@ describe('~client/mobrender/components/block-config-menu', () => {
   }
   let menuConfig
   beforeEach(() => {
-    menuConfig = mount(<BlockConfigMenu {...props} />)
+    menuConfig = mountWithIntl(<BlockConfigMenu {...props} />)
   })
 
   it('should render dropdown menu with options to action', () => {
@@ -57,9 +57,10 @@ describe('~client/mobrender/components/block-config-menu', () => {
       })
 
       it('should custom style to item', () => {
+        const text = 'Alterar fundo'
         expect(menu.props().className).to.equal('btn')
         expect(menu.find('i').props().className).to.equal('fa fa-picture-o')
-        expect(menu.find('span').text()).to.equal(' Alterar fundo')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
       })
     })
 
@@ -83,12 +84,12 @@ describe('~client/mobrender/components/block-config-menu', () => {
 
       it('should custom style to item when block is hidden', () => {
         menuConfig.setProps({ block: { ...props.block, hidden: true } })
-        expect(menu.find('span').text()).to.equal(' Mostrar')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Mostrar')
         expect(menu.find('i').props().className).to.equal('fa fa-eye')
       })
 
       it('should custom style to item when block isnt hidden', () => {
-        expect(menu.find('span').text()).to.equal(' Esconder')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Esconder')
         expect(menu.find('i').props().className).to.equal('fa fa-eye-slash')
       })
     })
@@ -120,7 +121,7 @@ describe('~client/mobrender/components/block-config-menu', () => {
 
       it('should custom style item', () => {
         expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span').text()).to.equal(' Remover')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Remover')
         expect(menu.find('i').props().className).to.equal('fa fa-trash')
       })
     })
@@ -147,8 +148,9 @@ describe('~client/mobrender/components/block-config-menu', () => {
       })
 
       it('should custom style to item', () => {
+        const text = 'Mover para cima'
         expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span').text()).to.equal(' Mover para cima')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
         expect(menu.find('i').props().className).to.equal('fa fa-chevron-up')
       })
     })
@@ -174,8 +176,9 @@ describe('~client/mobrender/components/block-config-menu', () => {
       })
 
       it('should custom style to item', () => {
+        const text = 'Mover para baixo'
         expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span').text()).to.equal(' Mover para baixo')
+        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
         expect(menu.find('i').props().className).to.equal('fa fa-chevron-down')
       })
     })

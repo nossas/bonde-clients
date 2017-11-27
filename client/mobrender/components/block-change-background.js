@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 import { ColorPicker } from '~client/components/color-picker'
 import FileUploader from './file-uploader'
 
@@ -82,14 +83,20 @@ const BlockChangeBackground = ({ mobilization, block, onChangeBackground, progre
             onCancelEdit(block)
           }}
         >
-          Salvar
+          <FormattedMessage
+            id='mobrender.components--block-change-background.button.save'
+            defaultMessage='Salvar'
+          />
         </button>
         <button
           className='btn caps bg-darken-4 white rounded cancel-btn'
           style={{ heigth: '40px' }}
           onClick={() => onCancelEdit(block)}
         >
-          Cancelar
+          <FormattedMessage
+            id='mobrender.components--block-change-background.button.cancel'
+            defaultMessage='Cancelar'
+          />
         </button>
       </div>
     </div>

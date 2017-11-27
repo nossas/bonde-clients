@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import CountUp from 'react-countup'
+import { intlShape } from 'react-intl'
 import $ from 'jquery'
 import classnames from 'classnames'
 
@@ -76,11 +77,14 @@ class Form extends Component {
   }
 
   renderCallToAction () {
-    const { configurable, widget, mobilization: { header_font: headerFont } } = this.props
+    const { configurable, widget, mobilization: { header_font: headerFont }, intl } = this.props
     const callToAction = (
       widget.settings && widget.settings.call_to_action
         ? widget.settings.call_to_action
-        : 'Clique para configurar seu formulário...'
+        : intl.formatMessage({
+          id: 'form-widget.components--form.default.title-text',
+          defaultMessage: 'Clique para configurar seu formulário...'
+        })
     ).replace('\n', '<br/><br/>')
 
     return configurable ? null : (
@@ -111,18 +115,20 @@ class Form extends Component {
   }
 
   renderButton () {
-    const { configurable, widget } = this.props
+    const { configurable, widget, intl } = this.props
     const { loading, success } = this.state
 
     if (!configurable) {
       return (
         <Button
           {...this.props}
-          buttonText={(
-            widget.settings
-              ? (widget.settings.button_text || 'Enviar')
-              : 'Enviar'
-          )}
+          buttonText={
+            (widget.settings && widget.settings.button_text) ||
+            intl.formatMessage({
+              id: 'form-widget.components--form.default.button-text',
+              defaultMessage: 'Enviar'
+            })
+          }
           handleClick={::this.submit}
           loading={loading}
           success={success}
@@ -137,7 +143,8 @@ class Form extends Component {
       const {
         block: { scrollTopReached: startCounting },
         widget: { settings, form_entries_count: count },
-        mobilization: { body_font: bodyFont }
+        mobilization: { body_font: bodyFont },
+        intl
       } = this.props
 
       return (
@@ -148,7 +155,13 @@ class Form extends Component {
             duration={5}
           />
           &nbsp;
-          {settings && settings.count_text ? settings.count_text : 'assinaturas'}
+          {settings && settings.count_text
+            ? settings.count_text
+            : intl.formatMessage({
+              id: 'form-widget.components--form.default.counter-suffix',
+              defaultMessage: 'assinaturas'
+            })
+          }
         </div>
       )
     }
@@ -226,7 +239,8 @@ Form.propTypes = {
   }).isRequired,
   editable: PropTypes.bool,
   configurable: PropTypes.bool,
-  hasNewField: PropTypes.bool
+  hasNewField: PropTypes.bool,
+  intl: intlShape
 }
 
 export default Form

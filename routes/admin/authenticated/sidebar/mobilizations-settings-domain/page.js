@@ -1,5 +1,6 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
+import { FormattedMessage } from 'react-intl'
 
 import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import { SettingsForm } from '~client/ux/components'
@@ -15,8 +16,13 @@ const MobilizationsSettingsDomainPage = ({ location, mobilization, ...formProps 
           {...formProps}
           mobilization={mobilization}
           formComponent={SettingsForm}
-          successMessage='Dados de domínio salvos com sucesso'
           redirectToCreateDNS={() => browserHistory.push(paths.communityDomainCreate())}
+          successMessage={
+            <FormattedMessage
+              id='page--mobilizations-domain.form-domain.success-message'
+              defaultMessage='Dados de domínio salvos com sucesso'
+            />
+          }
         />
       </SettingsPageContentLayout>
     </SettingsPageLayout>

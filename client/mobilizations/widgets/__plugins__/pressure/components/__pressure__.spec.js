@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
-
+import { shallowWithIntl } from '~root/intl/helpers'
 import { Pressure } from '~client/mobilizations/widgets/__plugins__/pressure/components/__pressure__'
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressure__', () => {
@@ -16,7 +15,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
   }
 
   beforeEach(() => {
-    wrapper = shallow(<Pressure {...props} />)
+    wrapper = shallowWithIntl(<Pressure {...props} />)
   })
 
   it('should color with main_color, h2, a, PressureForm, PressureCount', () => {
@@ -27,7 +26,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
       }
     })
     expect(wrapper.find('h2').props().style.backgroundColor).to.equal('#fff')
-    expect(wrapper.find('PressureForm').props().buttonColor).to.equal('#fff')
+    expect(wrapper.find('InjectIntl(PressureForm)').props().buttonColor).to.equal('#fff')
     expect(wrapper.find('PressureCount').props().color).to.equal('#fff')
   })
 
@@ -52,15 +51,15 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
       }
     })
 
-    expect(wrapper.find('PressureForm').props().subject).to.equal(pressureSubject)
-    expect(wrapper.find('PressureForm').props().body).to.equal(pressureBody)
+    expect(wrapper.find('InjectIntl(PressureForm)').props().subject).to.equal(pressureSubject)
+    expect(wrapper.find('InjectIntl(PressureForm)').props().body).to.equal(pressureBody)
   })
 
   it('should render PressureForm with button_text', () => {
     const buttonText = 'Enviar e-mail'
     wrapper.setProps({ widget: { id: 1, settings: { button_text: buttonText } } })
 
-    expect(wrapper.find('PressureForm').props().buttonText).to.equal(buttonText)
+    expect(wrapper.find('InjectIntl(PressureForm)').props().buttonText).to.equal(buttonText)
   })
 
   it('should render ok with values default when settings is undefined', () => {

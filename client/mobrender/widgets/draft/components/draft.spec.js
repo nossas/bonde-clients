@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { mountWithIntl } from '~root/intl/helpers'
 import { Draft } from '~client/mobrender/widgets/draft/components'
 import widgetsConfig from '~client/mobrender/widgets/config'
 
@@ -15,22 +15,24 @@ describe('client/mobrender/widgets/draft/components/draft', () => {
     },
     update: widget => widget
   }
-  const widgets = widgetsConfig(props.mobilization, props.widget)
+  const widgets = widgetsConfig(props.mobilization, props.widget, {
+    intl: { formatMessage: ({ defaultMessage }) => defaultMessage }
+  })
 
   it('should render without crashed', () => {
-    const draft = mount(<Draft {...props} />)
+    const draft = mountWithIntl(<Draft {...props} />)
     expect(draft).to.be.ok
   })
 
   it('should render buttons to update kind', () => {
     const plugins = widgets.filter(w => w.kind !== 'draft')
-    const draft = mount(<Draft {...props} />)
+    const draft = mountWithIntl(<Draft {...props} />)
     expect(draft.find('DraftButton').length).to.equal(plugins.length)
   })
 
   it('should pass to update method widget props when clicked button', () => {
     let widgetProps
-    const draft = mount(
+    const draft = mountWithIntl(
       <Draft {...props} update={props => { widgetProps = props }} />
     )
     const button = draft.find('DraftButton').at(1)

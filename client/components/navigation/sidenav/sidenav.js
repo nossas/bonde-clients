@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router'
+import { FormattedMessage } from 'react-intl'
 
 import * as paths from '~client/paths'
 
@@ -19,22 +20,28 @@ const Sidenav = ({ children, community }) => (
           </Link>
         </div>
         <div className='item-content'>
-          <div className='table-cell align-middle'>
-            <div>
-              <div className='item-community-name'>
-                <Link to={paths.mobilizations()}>{community.name || 'Bonde'}</Link>
-              </div>
-              <div className='item-community-change'>
-                <Link to={paths.communityInfo()} className='col col-8'>
-                  <i className='fa fa-cog mr1' />
-                  <span>Configurações</span>
-                </Link>
-                <Link to={paths.communityList()} className='col col-4'>
-                  <i className='fa fa-refresh mr1' />
-                  <span>Trocar</span>
-                </Link>
-              </div>
-            </div>
+          <div className='item-community-name'>
+            <Link to={paths.mobilizations()}>{community.name || 'Bonde'}</Link>
+          </div>
+          <div className='item-community-change'>
+            <Link to={paths.communityInfo()}>
+              <i className='fa fa-cog mr1' />
+              <span>
+                <FormattedMessage
+                  id='components.navigation--sidenav.config'
+                  defaultMessage='Configurações'
+                />
+              </span>
+            </Link>
+            <Link to={paths.communityList()}>
+              <i className='fa fa-refresh mr1' />
+              <span>
+                <FormattedMessage
+                  id='components.navigation--sidenav.change-community'
+                  defaultMessage='Trocar'
+                />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

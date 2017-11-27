@@ -5,7 +5,8 @@
   "author": "Nossas <tech@nosssas.org>",
   "homepage": "http://bonde.org",
   "scripts": {
-    "test": "./node_modules/.bin/standard && ./node_modules/.bin/jest",
+    "test": "./node_modules/.bin/standard && node --max_old_space_size=4096 ./node_modules/.bin/jest",
+    "test:ci": "yarn test --ci --silent --runInBand --logHeapUsage",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc yarn test",
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
@@ -211,6 +212,7 @@
       "^~routes(.*)$": "<rootDir>/routes$1",
       "^~server(.*)$": "<rootDir>/server$1",
       "^~tools(.*)$": "<rootDir>/tools$1",
+      "^~root/intl/locale-data/pt-BR$": "<rootDir>/tools/jest/mock-intl.js",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|wav|mp3|aac)$": "<rootDir>/tools/jest/mock-file.js",
       "\\.(css|scss)$": "<rootDir>/tools/jest/mock-style.js"
     }

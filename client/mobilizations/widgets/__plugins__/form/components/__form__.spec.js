@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
-import { shallow } from 'enzyme'
 import { expect } from 'chai'
-
+import { shallowWithIntl } from '~root/intl/helpers'
 import { Form } from '~client/mobilizations/widgets/__plugins__/form/components/__form__.connected'
 
 describe('client/mobilizations/widgets/__plugins__/form/components/__form__', () => {
@@ -20,7 +19,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/__form__', ()
   }
 
   beforeAll(() => {
-    wrapper = shallow(<Form {...props} />)
+    wrapper = shallowWithIntl(<Form {...props} />)
   })
 
   describe('#render', () => {

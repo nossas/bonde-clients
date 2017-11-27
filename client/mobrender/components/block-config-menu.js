@@ -1,11 +1,24 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import classnames from 'classnames'
 import { DropdownMenu, DropdownMenuItem } from '~client/components/dropdown-menu'
 
 export const EDIT_KEY = 'background'
 
-const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp, moveUp, canMoveDown, moveDown, display }) => (
+const BlockConfigMenu = ({
+  block,
+  update,
+  duplicate,
+  destroy,
+  onEdit,
+  canMoveUp,
+  moveUp,
+  canMoveDown,
+  moveDown,
+  display,
+  intl
+}) => (
   <DropdownMenu
     wrapperClassName={classnames(
       'm1 absolute bottom-0 right-0 z2',
@@ -17,7 +30,11 @@ const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp,
   >
     <DropdownMenuItem className='btn' onClick={() => duplicate(block)}>
       <span>
-        <i className='fa fa-clone' /> Duplicar bloco
+        <i className='fa fa-clone' />{' '}
+        <FormattedMessage
+          id='mobrender.components--block-config-menu.item.duplicate'
+          defaultMessage='Duplicar bloco'
+        />
       </span>
     </DropdownMenuItem>
     <DropdownMenuItem
@@ -25,7 +42,11 @@ const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp,
       onClick={() => onEdit(`${EDIT_KEY}-${block.id}`)}
     >
       <span>
-        <i className='fa fa-picture-o' /> Alterar fundo
+        <i className='fa fa-picture-o' />{' '}
+        <FormattedMessage
+          id='mobrender.components--block-config-menu.item.change-background'
+          defaultMessage='Alterar fundo'
+        />
       </span>
     </DropdownMenuItem>
     <DropdownMenuItem
@@ -33,19 +54,35 @@ const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp,
       onClick={() => update({...block, hidden: !block.hidden})}
     >
       <span>
-        <i className={classnames('fa', block.hidden ? 'fa-eye' : 'fa-eye-slash')} /> {(block.hidden ? 'Mostrar' : 'Esconder')}
+        <i className={classnames('fa', block.hidden ? 'fa-eye' : 'fa-eye-slash')} />{' '}
+        {(block.hidden
+          ? <FormattedMessage
+            id='mobrender.components--block-config-menu.item.toggle-visibility.show'
+            defaultMessage='Mostrar'
+            />
+          : <FormattedMessage
+            id='mobrender.components--block-config-menu.item.toggle-visibility.hide'
+            defaultMessage='Esconder'
+            />
+        )}
       </span>
     </DropdownMenuItem>
     <DropdownMenuItem
       className='btn'
       onClick={() => {
-        if (window.confirm('Você tem certeza que quer remover este bloco?')) {
-          destroy(block)
-        }
+        const message = intl.formatMessage({
+          id: 'mobrender.components--block-config-menu.item.remove.confirm',
+          defaultMessage: 'Você tem certeza que quer remover este bloco?'
+        })
+        if (window.confirm(message)) destroy(block)
       }}
     >
       <span>
-        <i className='fa fa-trash' /> Remover
+        <i className='fa fa-trash' />{' '}
+        <FormattedMessage
+          id='mobrender.components--block-config-menu.item.remove'
+          defaultMessage='Remover'
+        />
       </span>
     </DropdownMenuItem>
     <DropdownMenuItem
@@ -54,7 +91,11 @@ const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp,
       onClick={() => moveUp(block)}
     >
       <span>
-        <i className='fa fa-chevron-up' /> Mover para cima
+        <i className='fa fa-chevron-up' />{' '}
+        <FormattedMessage
+          id='mobrender.components--block-config-menu.item.move-up'
+          defaultMessage='Mover para cima'
+        />
       </span>
     </DropdownMenuItem>
     <DropdownMenuItem
@@ -63,7 +104,11 @@ const BlockConfigMenu = ({ block, update, duplicate, destroy, onEdit, canMoveUp,
       onClick={() => moveDown(block)}
     >
       <span>
-        <i className='fa fa-chevron-down' /> Mover para baixo
+        <i className='fa fa-chevron-down' />{' '}
+        <FormattedMessage
+          id='mobrender.components--block-config-menu.item.move-down'
+          defaultMessage='Mover para baixo'
+        />
       </span>
     </DropdownMenuItem>
   </DropdownMenu>
@@ -78,7 +123,9 @@ BlockConfigMenu.propTypes = {
   canMoveDown: PropTypes.bool,
   moveDown: PropTypes.func,
   update: PropTypes.func,
-  onEdit: PropTypes.func
+  onEdit: PropTypes.func,
+  // Injected by react-intl
+  intl: intlShape.isRequired
 }
 
-export default BlockConfigMenu
+export default injectIntl(BlockConfigMenu)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { Raw, Plain } from 'slate'
 import {
   SlateEditor, SlateToolbar, SlateContent,
@@ -120,7 +121,10 @@ class EditorSlate extends Component {
                 handleSave(state)
               }}
             >
-              Salvar
+              <FormattedMessage
+                id='c--editor-slate.button-save.text'
+                defaultMessage='Salvar'
+              />
             </ActionButton>
           </FooterEditor>
           <Layer

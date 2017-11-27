@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { TellAFriend } from '~client/components/share'
 
@@ -11,7 +11,12 @@ const DonationTellAFriend = ({ preview, mobilization, widget }) => {
       preview={preview}
       mobilization={mobilization}
       widget={widget}
-      message={'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.'}
+      message={
+        <FormattedMessage
+          id='donation.components--tell-a-friend.message'
+          defaultMessage='Oba, doação registrada! Sua doação é via boleto? Verifique seu email.'
+        />
+      }
       href={paths.mobilization(mobilization)}
     />
   )

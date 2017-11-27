@@ -8,7 +8,7 @@ import {
 import { createEditorContent } from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'
 import * as Paths from '~client/paths'
 
-export default (mobilization, widget) => [
+export default (mobilization, widget, { intl }) => [
   {
     component: Draft,
     kind: 'draft',
@@ -18,21 +18,37 @@ export default (mobilization, widget) => [
     component: Content,
     kind: 'content',
     icon: 'font',
-    label: 'Texto',
+    label: intl.formatMessage({
+      id: 'widgets.config--content.label',
+      defaultMessage: 'Texto'
+    }),
     settings: {
-      content: createEditorContent('Clique aqui para editar...')
+      content: createEditorContent(
+        intl.formatMessage({
+          id: 'widgets.config--content.default',
+          defaultMessage: 'Clique aqui para editar...'
+        })
+      )
     }
   },
   {
     component: Form,
     kind: 'form',
     icon: 'list',
-    label: 'Formulário',
+    label: intl.formatMessage({
+      id: 'widgets.config--form.label',
+      defaultMessage: 'Formulário'
+    }),
     settings: {
-      email_text: `Obrigado por apostar na força da ação coletiva em
-      rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que
-      mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um
-      dos links abaixo.\n\nUm abraço`
+      email_text: intl.formatMessage({
+        id: 'widgets.config--form.default',
+        defaultMessage: (
+          'Obrigado por apostar na força da ação coletiva em rede. Sua participação ' +
+          'é muito importante e, agora, precisamos da sua ajuda para que mais gente ' +
+          'colabore com esta mobilização. Compartilhe nas suas redes clicando em um ' +
+          'dos links abaixo.\n\nUm abraço'
+        )
+      })
     },
     redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
   },
@@ -40,11 +56,20 @@ export default (mobilization, widget) => [
     component: Pressure,
     kind: 'pressure',
     icon: 'bullseye',
-    label: 'Pressão',
+    label: intl.formatMessage({
+      id: 'widgets.config--pressure.label',
+      defaultMessage: 'Pressão'
+    }),
     settings: {
       main_color: '#f23392',
-      title_text: 'Envie um e-mail para quem pode tomar essa decisão',
-      button_text: 'Enviar e-mail'
+      title_text: intl.formatMessage({
+        id: 'widgets.config--pressure.default.title',
+        defaultMessage: 'Envie um e-mail para quem pode tomar essa decisão'
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.config--pressure.default.button-text',
+        defaultMessage: 'Enviar e-mail'
+      })
       /* reply_email: user.email */
     },
     redirect: Paths.pressure(mobilization.id, widget.id)
@@ -53,7 +78,10 @@ export default (mobilization, widget) => [
     component: Donation,
     kind: 'donation',
     icon: 'money',
-    label: 'Doação',
+    label: intl.formatMessage({
+      id: 'widgets.config--donation.label',
+      defaultMessage: 'Doação'
+    }),
     redirect: Paths.donation(mobilization.id, widget.id)
   }
 ]

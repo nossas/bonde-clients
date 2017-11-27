@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage, intlShape } from 'react-intl'
 
 import {
   FormGroup,
@@ -32,15 +33,26 @@ const DonationSettingsPage = props => {
       goal_date_limit: goalDateLimit,
       goal
     },
+    intl,
     ...formProps
   } = props
   const { mobilization: { color_scheme: colorScheme } } = props
-  const donationValueTitle = 'Clique para definir este valor como padrão.'
+  const donationValueTitle = (
+    <FormattedMessage
+      id='page--donation-widget.form.donation-value-title'
+      defaultMessage='Clique para definir este valor como padrão.'
+    />
+  )
 
   return (
     <SettingsForm
       {...formProps}
-      buttonText='Salvar'
+      buttonText={
+        <FormattedMessage
+          id='page--donation-widget.form.submit-button'
+          defaultMessage='Salvar'
+        />
+      }
       onSubmit={values => {
         const { widget, asyncWidgetUpdate } = props
         const settings = widget.settings || {}
@@ -51,24 +63,69 @@ const DonationSettingsPage = props => {
           goal: String(values.goal).replace(/,/g, '.')
         })
       }}
-      successMessage='Formulário de doação configurado com sucesso!'
+      successMessage={
+        <FormattedMessage
+          id='page--donation-widget.form.success-message'
+          defaultMessage='Formulário de doação configurado com sucesso!'
+        />
+      }
     >
       <FormGroup controlId='payment-type-id' {...paymentType}>
-        <ControlLabel>Tipo de doação</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.payment-type.label'
+            defaultMessage='Tipo de doação'
+          />
+        </ControlLabel>
         <RadioGroup>
-          <Radio value='unique'>Única</Radio>
-          <Radio value='recurring'>Recorrente</Radio>
-          <Radio value='users_choice'>Usuário escolhe</Radio>
+          <Radio value='unique'>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-type.unique'
+              defaultMessage='Única'
+            />
+          </Radio>
+          <Radio value='recurring'>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-type.recurring'
+              defaultMessage='Recorrente'
+            />
+          </Radio>
+          <Radio value='users_choice'>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-type.users-choice'
+              defaultMessage='Usuário escolhe'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
 
       {!(paymentType.value === 'recurring' || paymentType.value === 'users_choice') ? '' : (
         <FormGroup controlId='payment-type-id' {...recurringPeriod}>
-          <ControlLabel>Intervalo da recorrência</ControlLabel>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-interval.label'
+              defaultMessage='Intervalo da recorrência'
+            />
+          </ControlLabel>
           <RadioGroup>
-            <Radio value='30'>Mensal</Radio>
-            <Radio value='180'>Semestral</Radio>
-            <Radio value='365'>Anual</Radio>
+            <Radio value='30'>
+              <FormattedMessage
+                id='page--donation-widget.form.payment-interval.monthly'
+                defaultMessage='Mensal'
+              />
+            </Radio>
+            <Radio value='180'>
+              <FormattedMessage
+                id='page--donation-widget.form.payment-interval.semiannually'
+                defaultMessage='Semestral'
+              />
+            </Radio>
+            <Radio value='365'>
+              <FormattedMessage
+                id='page--donation-widget.form.payment-interval.annually'
+                defaultMessage='Anual'
+              />
+            </Radio>
           </RadioGroup>
         </FormGroup>
       )}
@@ -80,8 +137,19 @@ const DonationSettingsPage = props => {
           style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
           {...goal}
         >
-          <ControlLabel>Meta da campanha</ControlLabel>
-          <FormControl type='text' placeholder='Ex.: 50000' />
+          <ControlLabel>
+            <FormattedMessage
+              id='page--donation-widget.form.goal.label'
+              defaultMessage='Meta da campanha'
+            />
+          </ControlLabel>
+          <FormControl
+            type='text'
+            placeholder={intl.formatMessage({
+              id: 'page--donation-widget.form.goal.placeholder',
+              defaultMessage: 'Ex.: 50000'
+            })}
+          />
         </FormGroup>
 
         <FormGroup
@@ -90,58 +158,181 @@ const DonationSettingsPage = props => {
           style={{ paddingLeft: '.5rem', paddingRight: '.5rem' }}
           {...goalDateLimit}
         >
-          <ControlLabel>Prazo de arrecadação</ControlLabel>
-          <FormControl type='text' placeholder='Ex.: DD/MM/AAAA' />
+          <ControlLabel>
+            <FormattedMessage
+              id='page--donation-widget.goal-date-limit.label'
+              defaultMessage='Prazo de arrecadação'
+            />
+          </ControlLabel>
+          <FormControl
+            type='text'
+            placeholder={intl.formatMessage({
+              id: 'page--donation-widget.goal-date-limit.placeholder',
+              defaultMessage: 'Ex.: DD/MM/AAAA'
+            })}
+          />
         </FormGroup>
       </div>
 
       <FormGroup controlId='default-donation-value' {...defaultDonationValue}>
-        <ControlLabel>Valores das doações</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.donation-default-value.label'
+            defaultMessage='Valores das doações'
+          />
+        </ControlLabel>
         <HelpBlock>
-          Você pode ter até 5 valores por bloco de doação. Preencha apenas com números
-          inteiros (Ex: 50)
+          <FormattedMessage
+            id='page--donation-widget.form.donation-default-value.helper-text'
+            defaultMessage={
+              'Você pode ter até 5 valores por bloco de doação. Preencha apenas com ' +
+              'números inteiros (Ex: 50)'
+            }
+          />
         </HelpBlock>
         <HorizontalLayout cols={5}>
           <FormGroup controlId='donation-value1-id' {...donationValue1}>
-            <ControlLabel>Valor 1</ControlLabel>
-            <FormControl placeholder='R$20' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--donation-widget.form.default-value-01.label'
+                defaultMessage='Valor 1'
+              />
+            </ControlLabel>
+            <FormControl
+              placeholder={intl.formatMessage({
+                id: 'page--donation-widget.form.default-value-01.placeholder',
+                defaultMessage: 'R$20'
+              })}
+            />
           </FormGroup>
           <FormGroup controlId='donation-value2-id' {...donationValue2}>
-            <ControlLabel>Valor 2</ControlLabel>
-            <FormControl placeholder='R$50' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--donation-widget.form.default-value-02.label'
+                defaultMessage='Valor 2'
+              />
+            </ControlLabel>
+            <FormControl
+              placeholder={intl.formatMessage({
+                id: 'page--donation-widget.form.default-value-02.placeholder',
+                defaultMessage: 'R$50'
+              })}
+            />
           </FormGroup>
           <FormGroup controlId='donation-value3-id' {...donationValue3}>
-            <ControlLabel>Valor 3</ControlLabel>
-            <FormControl placeholder='R$100' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--donation-widget.form.default-value-03.label'
+                defaultMessage='Valor 3'
+              />
+            </ControlLabel>
+            <FormControl
+              placeholder={intl.formatMessage({
+                id: 'page--donation-widget.form.default-value-03.placeholder',
+                defaultMessage: 'R$100'
+              })}
+            />
           </FormGroup>
           <FormGroup controlId='donation-value4-id' {...donationValue4}>
-            <ControlLabel>Valor 4</ControlLabel>
-            <FormControl placeholder='R$200' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--donation-widget.form.default-value-04.label'
+                defaultMessage='Valor 4'
+              />
+            </ControlLabel>
+            <FormControl
+              placeholder={intl.formatMessage({
+                id: 'page--donation-widget.form.default-value-04.placeholder',
+                defaultMessage: 'R$200'
+              })}
+            />
           </FormGroup>
           <FormGroup controlId='donation-value5-id' {...donationValue5}>
-            <ControlLabel>Valor 5</ControlLabel>
-            <FormControl placeholder='R$500' />
+            <ControlLabel>
+              <FormattedMessage
+                id='page--donation-widget.form.default-value-05.label'
+                defaultMessage='Valor 5'
+              />
+            </ControlLabel>
+            <FormControl
+              placeholder={intl.formatMessage({
+                id: 'page--donation-widget.form.default-value-05.placeholder',
+                defaultMessage: 'R$500'
+              })}
+            />
           </FormGroup>
         </HorizontalLayout>
         <RadioGroup className='flex flex-wrap'>
-          <Radio className='col col-2' title={donationValueTitle} value='1'>Default</Radio>
-          <Radio className='col col-2' title={donationValueTitle} value='2'>Default</Radio>
-          <Radio className='col col-2' title={donationValueTitle} value='3'>Default</Radio>
-          <Radio className='col col-2' title={donationValueTitle} value='4'>Default</Radio>
-          <Radio className='col col-2' title={donationValueTitle} value='5'>Default</Radio>
+          <Radio className='col col-2' title={donationValueTitle} value='1'>
+            <FormattedMessage
+              id='page--donation-widget.form.default-value.radio.text'
+              defaultMessage='Default'
+            />
+          </Radio>
+          <Radio className='col col-2' title={donationValueTitle} value='2'>
+            <FormattedMessage
+              id='page--donation-widget.form.default-value.radio.text'
+              defaultMessage='Default'
+            />
+          </Radio>
+          <Radio className='col col-2' title={donationValueTitle} value='3'>
+            <FormattedMessage
+              id='page--donation-widget.form.default-value.radio.text'
+              defaultMessage='Default'
+            />
+          </Radio>
+          <Radio className='col col-2' title={donationValueTitle} value='4'>
+            <FormattedMessage
+              id='page--donation-widget.form.default-value.radio.text'
+              defaultMessage='Default'
+            />
+          </Radio>
+          <Radio className='col col-2' title={donationValueTitle} value='5'>
+            <FormattedMessage
+              id='page--donation-widget.form.default-value.radio.text'
+              defaultMessage='Default'
+            />
+          </Radio>
         </RadioGroup>
-        <HelpBlock>*todos os valores são em reais</HelpBlock>
+        <HelpBlock>
+          <FormattedMessage
+            id='page--donation-widget.form.default-value.helper-text'
+            defaultMessage='*todos os valores são em reais'
+          />
+        </HelpBlock>
       </FormGroup>
 
       <FormGroup controlId='title-text-id' {...titleText}>
-        <ControlLabel>Título da caixa de doação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Escolha um valor e contribua agora!' />
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.donation-title.label'
+            defaultMessage='Título da caixa de doação'
+          />
+        </ControlLabel>
+        <FormControl
+          type='text'
+          placeholder={intl.formatMessage({
+            id: 'page--donation-widget.form.donation-title.placeholder',
+            defaultMessage: 'Ex.: Escolha um valor e contribua agora!'
+          })}
+        />
       </FormGroup>
 
       <FormGroup controlId='main-color-id' {...mainColor}>
-        <ControlLabel>Cor da caixa de doação</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.main-color.label'
+            defaultMessage='Cor da caixa de doação'
+          />
+        </ControlLabel>
         <HelpBlock>
-          Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.
+          <FormattedMessage
+            id='page--donation-widget.form.main-color.helper-text'
+            defaultMessage={
+              'Selecione a cor no box abaixo ou insira o valor ' +
+              'em hex, por exemplo: #DC3DCE.'
+            }
+          />
         </HelpBlock>
         <ColorPicker
           dispatch={dispatch}
@@ -150,24 +341,65 @@ const DonationSettingsPage = props => {
       </FormGroup>
 
       <FormGroup controlId='button-text-id' {...buttonText}>
-        <ControlLabel>Texto do botão de confirmação</ControlLabel>
-        <FormControl type='text' placeholder='Ex.: Doe agora!' />
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.button-text.label'
+            defaultMessage='Texto do botão de confirmação'
+          />
+        </ControlLabel>
+        <FormControl
+          type='text'
+          placeholder={intl.formatMessage({
+            id: 'page--donation-widget.form.button-text.placeholder',
+            defaultMessage: 'Ex.: Doe agora!'
+          })}
+        />
       </FormGroup>
 
       <FormGroup controlId='payment-methods-id' {...paymentMethods}>
-        <ControlLabel>Habilitar pagamento por boleto?</ControlLabel>
-        <HelpBlock>Cada boleto pago terá um custo adicional de R$3,00</HelpBlock>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.payment-method.label'
+            defaultMessage='Habilitar pagamento por boleto?'
+          />
+        </ControlLabel>
+        <HelpBlock>
+          <FormattedMessage
+            id='page--donation-widget.form.payment-method.helper-text'
+            defaultMessage='Cada boleto pago terá um custo adicional de R$3,00'
+          />
+        </HelpBlock>
         <RadioGroup>
-          <Radio value='true'>Sim</Radio>
-          <Radio value='false'>Não</Radio>
+          <Radio value='true'>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-method.radio.yes'
+              defaultMessage='Sim'
+            />
+          </Radio>
+          <Radio value='false'>
+            <FormattedMessage
+              id='page--donation-widget.form.payment-method.radio.no'
+              defaultMessage='Não'
+            />
+          </Radio>
         </RadioGroup>
       </FormGroup>
 
       <FormGroup>
-        <ControlLabel>Conta bancária</ControlLabel>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.bank-account.label'
+            defaultMessage='Conta bancária'
+          />
+        </ControlLabel>
         <HelpBlock>
-          Esta campanha está associada à conta bancária cadastrada nas configurações
-          dessa comunidade ;)
+          <FormattedMessage
+            id='page--donation-widget.form.bank-account.helper-text'
+            defaultMessage={
+              'Esta campanha está associada à conta bancária cadastrada ' +
+              'nas configurações dessa comunidade ;)'
+            }
+          />
         </HelpBlock>
       </FormGroup>
     </SettingsForm>
@@ -182,7 +414,9 @@ DonationSettingsPage.propTypes = {
   // Injected by container
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired
+  asyncWidgetUpdate: PropTypes.func.isRequired,
+  // Injected by react-intl
+  intl: intlShape.isRequired
 }
 
 export default DonationSettingsPage

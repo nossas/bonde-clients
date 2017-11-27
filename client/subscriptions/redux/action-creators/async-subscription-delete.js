@@ -27,7 +27,7 @@ export default ({ id, token }) => (dispatch, getState, { api, intl }) => {
     .catch(e => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_FETCH_FAILURE, e))
-      dispatch(notify(notifications.genericRequestError()))
+      dispatch(notify(notifications.genericRequestError(intl)))
       return Promise.reject(e)
     })
 }

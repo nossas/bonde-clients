@@ -38,7 +38,7 @@ const mapActionsToProps = (dispatch, { intl }) => ({
   asyncAddHostedZone: (values) => {
     return dispatch(addHostedZone(values))
       // eslint-disable-next-line handle-callback-err
-      .catch(err => dispatch(notify(dnsNotify.addHostedZoneFailure())))
+      .catch(err => dispatch(notify(dnsNotify.addHostedZoneFailure(intl))))
   },
   asyncCheckHostedZone,
   notify
