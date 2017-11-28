@@ -255,6 +255,7 @@ servidor-03.dominio.com`,
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
+  'page--community-info.form.successMessage': 'Informações básicas inseridas com sucesso',
   'page--community-info.form.logo.label': 'Logo',
   'page--community-info.form.name.label': 'Nome',
   'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
@@ -1147,6 +1148,7 @@ servidor-03.dominio.com`,
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
   // routepath: /mobilizations/:mobilization_id/edit
   'c--editor-slate.button-save.text': 'Salvar',
+  'c--editor-slate.button-cancel.text': 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
