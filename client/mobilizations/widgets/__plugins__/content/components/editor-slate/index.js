@@ -62,11 +62,36 @@ class EditorSlate extends Component {
     }
   }
 
+  handleCancelEditionMode (state, setState) {
+    const initialRaw = JSON.stringify(Raw.serialize(this.state.initialState))
+    const raw = JSON.stringify(Raw.serialize(state))
+    if (initialRaw !== raw) {
+      if (window.confirm(this.props.intl.formatMessage({
+        id: 'c--editor-slate.button-cancel.message',
+        defaultMessage: 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.'
+      }))) {
+        this.setState({ editing: false })
+        setState(this.state.initialState)
+      }
+    } else {
+      this.setState({ editing: false })
+    }
+  }
+
+  handleSave (state) {
+    this.setState({ initialState: state })
+    this.props.handleSave(state)
+  }
+
   render () {
-    const { handleSave, handleDelete, readOnly, toolbarStyles, contentStyles } = this.props
+    const { handleDelete, readOnly, toolbarStyles, contentStyles } = this.props
     return (
       <div className='widgets--content-plugin'>
-        <SlateEditor plugins={plugins} initialState={this.state.initialState} style={{ color: '#fff' }}>
+        <SlateEditor
+          plugins={plugins}
+          initialState={this.state.initialState}
+          style={{ color: '#fff' }}
+        >
           <SlateToolbar style={{
             ...styles.toolbar,
             display: this.state.editing ? 'block' : 'none',
@@ -107,37 +132,34 @@ class EditorSlate extends Component {
                 bottom: 0
               }}
               className='mt2'
-              onClick={() => {
-                handleDelete()
-              }}
+              onClick={handleDelete}
             >
               <i className='fa fa-trash' />
             </ActionButton>
             <ActionButton
               editing={this.state.editing}
               className='mt2 right-align'
-              onClick={state => {
-                this.setState({ editing: false, initialState: state })
-                handleSave(state)
-              }}
+              onClick={this.handleSave.bind(this)}
             >
               <FormattedMessage
                 id='c--editor-slate.button-save.text'
                 defaultMessage='Salvar'
               />
             </ActionButton>
+            <ActionButton
+              editing={this.state.editing}
+              className='mt2 right-align mx2'
+              onClick={this.handleCancelEditionMode.bind(this)}
+            >
+              <FormattedMessage
+                id='c--editor-slate.button-cancel.text'
+                defaultMessage='Cancelar'
+              />
+            </ActionButton>
           </FooterEditor>
           <Layer
             editing={this.state.editing}
-            onClick={(state, setState) => {
-              if (window.confirm(this.props.intl.formatMessage({
-                id: 'c--editor-slate.button-cancel.text',
-                defaultMessage: 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.'
-              }))) {
-                this.setState({ editing: false })
-                setState(this.state.initialState)
-              }
-            }}
+            onClick={this.handleCancelEditionMode.bind(this)}
           />
         </SlateEditor>
         {this.state.loading && <Loading />}

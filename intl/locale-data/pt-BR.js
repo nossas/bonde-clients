@@ -1148,7 +1148,8 @@ servidor-03.dominio.com`,
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
   // routepath: /mobilizations/:mobilization_id/edit
   'c--editor-slate.button-save.text': 'Salvar',
-  'c--editor-slate.button-cancel.text': 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.',
+  'c--editor-slate.button-cancel.text': 'Cancelar',
+  'c--editor-slate.button-cancel.message': 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
