@@ -46,6 +46,6 @@ static
 
 # Vim editor swap files
 *.swp
-jest
+./jest
 tools/db-dumps/*
 !tools/db-dumps/init.sql
