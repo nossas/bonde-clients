@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
  */
 import React from 'react'
 import classnames from 'classnames'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 if (require('exenv').canUseDOM) require('./styles.scss')
 
