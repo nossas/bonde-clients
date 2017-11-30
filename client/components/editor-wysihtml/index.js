@@ -1,5 +1,3 @@
-export { default as ColorSchemer } from './color-schemer'
-
 //
 // Toolbar
 //
