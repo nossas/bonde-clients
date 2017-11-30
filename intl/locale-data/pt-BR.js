@@ -1421,5 +1421,9 @@ servidor-03.dominio.com`,
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': 'Importação concluída com sucesso!',
   'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} ativistas importados com sucesso.',
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ooops!',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}'
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}',
+
+  // settingsForm
+  // path: client/storybook/settings/forms
+  'settingsForm.submitLabel.default': 'Salvar'
 }

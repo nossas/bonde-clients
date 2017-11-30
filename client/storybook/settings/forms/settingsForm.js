@@ -27,17 +27,24 @@ const SettingsForm = ({
   // Provider form
   onSubmit,
   submitted,
+  i18n,
   getPropI18n,
   // redux-form
   valid,
   submitting
 }) => {
   const successMessage = getPropI18n('successMessage')
+  const submitLabel = getPropI18n('submitLabel')
   return (
     <form onSubmit={onSubmit}>
       {children}
       <div style={floatSubmitStyle}>
-        <Button disabled={submitting} type='submit'>Salvar</Button>
+        <Button disabled={submitting} type='submit'>
+          {submitLabel || i18n({
+            id: 'settingsForm.submitLabel.default',
+            defaultMessage: 'Salvar'
+          })}
+        </Button>
         {submitted && successMessage ? (
           <div style={successMessageStyle}>
             <span>{successMessage}</span>
