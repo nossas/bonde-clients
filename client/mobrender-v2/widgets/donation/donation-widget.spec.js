@@ -15,7 +15,8 @@ describe('<DonationWidget />', () => {
   let donationWidget
   const props = Map({
     mobilization: Map({ id: 1, header_font: 'Ubuntu Mono' }),
-    widget: Map({ id: 3, kind: 'donation', settings: {} })
+    widget: Map({ id: 3, kind: 'donation', settings: {} }),
+    editable: true
   })
 
   beforeEach(() => {
@@ -65,7 +66,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
   it('should render tell a friend on finish submission by default', () => {
     // TODO: This behavior is confused
-    donationWidget.instance().setState({ loading: false, success: true })
+    donationWidget.setState({ loading: false, success: true })
     expect(donationWidget.find(TellAFriend).length).to.equal(1)
   })
 
