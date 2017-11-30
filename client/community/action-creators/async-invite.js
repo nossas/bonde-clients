@@ -11,11 +11,11 @@ const COMMUNITY_USER_ROLES = {
   participant: 3
 }
 
-export default (communityId, invitation) => (dispatch, getState, { api, intl }) => {
+export default ({ communityId, email }) => (dispatch, getState, { api, intl }) => {
   const { auth: { credentials } } = getState()
 
   const endpoint = `/communities/${communityId}/invitation`
-  const body = { invitation: { ...invitation, role: COMMUNITY_USER_ROLES.admin } }
+  const body = { invitation: { email, role: COMMUNITY_USER_ROLES.admin } }
   const options = { headers: credentials }
 
   dispatch(AwaitActions.setLoading(true))
@@ -30,7 +30,7 @@ export default (communityId, invitation) => (dispatch, getState, { api, intl }) 
         dispatch(notify(genericRequestError(intl)))
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        dispatch(notify(communityInviteSuccess(intl, invitation.email)))
+        dispatch(notify(communityInviteSuccess(intl, email)))
         dispatch(createAction(t.ASYNC_INVITE_SUCCESS, data))
         return Promise.resolve()
       }
