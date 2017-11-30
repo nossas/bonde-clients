@@ -1423,6 +1423,10 @@ servidor-03.dominio.com`,
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ooops!',
   'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}',
 
+  // createForm validations
+  // path: client/storybook/forms/validate
+  'createForm.validate.email': 'Informe um e-mail válido',
+  'createForm.validate.required': 'Preenchimento obrigatório',
   // settingsForm
   // path: client/storybook/settings/forms
   'settingsForm.submitLabel.default': 'Salvar'
