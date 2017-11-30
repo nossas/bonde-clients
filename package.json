@@ -214,6 +214,7 @@
       "node_modules"
     ],
     "moduleNameMapper": {
+      "react-ga": "<rootDir>/tools/jest/mock-react-ga.js",
       "wysihtml-toolbar.min.js$": "<rootDir>/tools/jest/mock-wysihtml-toolbar.js",
       "^~(.*)$": "<rootDir>$1",
       "^~client(.*)$": "<rootDir>/client$1",
