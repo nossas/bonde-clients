@@ -33,27 +33,4 @@ describe('client/components/form-util/input', () => {
   it('should render input with expected placeholder', () => {
     expect(wrapper.find('input').props().placeholder).to.equal(props.placeholder)
   })
-
-  describe('default props', () => {
-    let unrenderedProps
-    beforeAll(() => {
-      unrenderedProps = wrapper.unrendered.props
-    })
-
-    it('should render input with default onChange prop as function', () => {
-      expect(unrenderedProps.onChange).to.be.a('function')
-    })
-
-    it('should render input with default required prop as false', () => {
-      expect(unrenderedProps.required).to.be.false
-    })
-
-    it('should render input with default show prop as true', () => {
-      expect(unrenderedProps.show).to.be.true
-    })
-
-    it('should render input with default classes prop as array', () => {
-      expect(unrenderedProps.classes).to.be.a('array')
-    })
-  })
 })

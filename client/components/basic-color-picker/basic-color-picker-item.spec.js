@@ -21,7 +21,7 @@ describe('client/components/basic-color-picker/basic-color-picker-item', () => {
   })
 
   it('should render without style when isnt selected', () => {
-    expect(pickerItem.instance().props.style).to.equal(undefined)
+    expect(pickerItem.props.style).to.equal(undefined)
   })
 
   it('should render select style when is selected', () => {
