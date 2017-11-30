@@ -58,12 +58,25 @@ describe('~client/mobrender/redux/selectors', () => {
     expect(Selectors(getState()).getMobilizationMenuActive()).to.equal(menuActiveIndex)
   })
 
-  it('#getMobilizations', () => {
-    const data = [ { id: 1, name: 'Lorem' }, { id: 2, name: 'Ipsum' } ]
+  describe('#getMobilizations', () => {
+    const data = [
+      { id: 1, name: 'Lorem', status: 'active' },
+      { id: 2, name: 'Ipsum', status: 'active' },
+      { id: 3, name: 'Dolor', status: 'archived' }
+    ]
     const getState = () => state.mergeDeep(fromJS({
       mobilizations: { list: { data } }
     })).toJS()
-    expect(Selectors(getState()).getMobilizations()).to.deep.equal(data)
+
+    it('should return only active status by default', () => {
+      expect(Selectors(getState()).getMobilizations())
+        .to.deep.equal(data.filter(m => m.status === 'active'))
+    })
+
+    it('should return only filtered', () => {
+      expect(Selectors(getState()).getMobilizations({ status: 'archived' }))
+        .to.deep.equal(data.filter(m => m.status === 'archived'))
+    })
   })
 
   it('#blocksIsLoaded', () => {

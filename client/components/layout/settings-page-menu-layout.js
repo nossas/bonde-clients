@@ -17,7 +17,7 @@ const SettingsPageMenuLayout = ({ children, title, className }) => (
 SettingsPageMenuLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  title: PropTypes.string.isRequired
+  title: PropTypes.any.isRequired
 }
 
 export default SettingsPageMenuLayout

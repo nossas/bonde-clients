@@ -7,8 +7,16 @@ import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { DivFloat, Button } from '~client/ux/components'
 
 const PageHeader = ({ location }) => {
-  const activeMobilizationsListPath = paths.mobilizations()
-  const mobilizationsTemplatesListPath = paths.mobilizationTemplatesList()
+  const activePath = paths.mobilizations()
+  const archivedPath = `${activePath}?status=archived`
+  const templatesPath = paths.mobilizationTemplatesList()
+
+  const getPathnameWithQuery = () => {
+    const { pathname, query } = location
+    if (query.status) return `${pathname}?status=${query.status}`
+    else return pathname
+  }
+
   return (
     <div>
       <DivFloat>
@@ -28,8 +36,18 @@ const PageHeader = ({ location }) => {
               defaultMessage='Ativas'
             />
           }
-          path={activeMobilizationsListPath}
-          isActive={activeMobilizationsListPath === location.pathname}
+          path={activePath}
+          isActive={activePath === getPathnameWithQuery()}
+        />
+        <Tab
+          text={
+            <FormattedMessage
+              id='mobilizations.components--page-header.tabs.archived'
+              defaultMessage='Arquivadas'
+            />
+          }
+          path={archivedPath}
+          isActive={archivedPath === getPathnameWithQuery()}
         />
         <Tab
           text={
@@ -38,8 +56,8 @@ const PageHeader = ({ location }) => {
               defaultMessage='Templates'
             />
           }
-          path={mobilizationsTemplatesListPath}
-          isActive={mobilizationsTemplatesListPath === location.pathname}
+          path={templatesPath}
+          isActive={templatesPath === location.pathname}
         />
       </Tabs>
     </div>
