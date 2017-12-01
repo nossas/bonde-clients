@@ -40,8 +40,6 @@ describe('client/components/dropdown-menu/dropdown-menu', () => {
       wrapper.setState({ open: true })
       wrapper.find('div.overlay').at(0).simulate('click')
       expect(wrapper.state()).to.deep.equal({ open: false })
-      wrapper.find('div.overlay').at(0).simulate('click')
-      expect(wrapper.state()).to.deep.equal({ open: false })
     })
   })
 
