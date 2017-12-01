@@ -48,9 +48,9 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
   })
 
   describe('fields', () => {
-    describe('finish_message_type', () => {
-      const field = () => wrapper.instance().props.fields.finish_message_type
+    const field = () => wrapper.find('FormGroup[controlId="finish-message-type-id"]').props()
 
+    describe('finish_message_type', () => {
       afterAll(() => {
         wrapper.setProps(props)
       })
@@ -60,11 +60,6 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
       })
       it('should initialize with previously configured finish_message_type', () => {
         const value = 'custom'
-        wrapper.setProps(widgetSettings(props, { finish_message_type: { ...field(), value } }))
-        expect(field().value).to.equal(value)
-      })
-      it('should', () => {
-        const value = 'custom'
         const settings = { finish_message_type: { ...field(), value } }
         wrapper.setProps(widgetSettings(props, settings))
         expect(field().value).to.equal(value)
@@ -72,19 +67,31 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
     })
 
     describe('finish_message', () => {
-      const field = () => wrapper.instance().props.fields.finish_message
-
       afterAll(() => {
         wrapper.setProps(props)
       })
 
-      it('should initialize with default finish_message', () => {
-        expect(field().value).to.equal('Clique aqui para editar...')
+      it('should show EditorSlate when selects custom finish message', () => {
+        const value = 'custom'
+        const settings = { finish_message_type: { ...field(), value } }
+        wrapper.setProps(widgetSettings(props, settings))
+        expect(wrapper.find('EditorSlate')).to.have.length(1)
       })
-      it('should initialize with previously configured finish_message_type', () => {
-        const value = '{"entityMap":{},"blocks":[{"key":"dhhdo","text":"Foobar","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"BOLD"},{"offset":0,"length":6,"style":"center"},{"offset":0,"length":6,"style":"color: rgba(255,198,39,1);"}],"entityRanges":[],"data":{}}]}'
-        wrapper.setProps(widgetSettings(props, { finish_message: { ...field(), value } }))
-        expect(field().value).to.equal(value)
+      it('should initialize with default finish_message', () => {
+        const value = 'custom'
+        const settings = { finish_message_type: { ...field(), value } }
+        wrapper.setProps(widgetSettings(props, settings))
+        expect(wrapper.find('EditorSlate').props().content).to.equal('Clique aqui para editar...')
+      })
+      it('should initialize with RebooEditor component', () => {
+        const typeValue = 'custom'
+        const messageValue = '{"entityMap":{},"blocks":[{"key":"dhhdo","text":"Foobar","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"BOLD"},{"offset":0,"length":6,"style":"center"},{"offset":0,"length":6,"style":"color: rgba(255,198,39,1);"}],"entityRanges":[],"data":{}}]}'
+        const settings = {
+          finish_message_type: { ...field(), value: typeValue },
+          finish_message: { ...field(), value: messageValue }
+        }
+        wrapper.setProps(widgetSettings(props, settings))
+        expect(wrapper.find('RebooEditor')).to.have.length(1)
       })
     })
   })
