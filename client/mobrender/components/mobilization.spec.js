@@ -33,7 +33,7 @@ describe('client/mobrender/components/mobilization', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<Mobilization {...props} />)
+    wrapper = shallow(<Mobilization {...props} />, { disableLifecycleMethods: true })
   })
 
   it('render without crashed', () => {
@@ -63,9 +63,9 @@ describe('client/mobrender/components/mobilization', () => {
   })
 
   describe('when is editable', () => {
-    const editableWrapper = shallow(
-      <Mobilization {...props} editable />
-    )
+    const editableWrapper = shallow(<Mobilization {...props} editable />, {
+      disableLifecycleMethods: true
+    })
 
     it('should renders relative layout classNames', () => {
       const layoutClassName = '.flex-auto.relative'
