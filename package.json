@@ -104,7 +104,7 @@
     "react": "^16.2.0",
     "react-apollo": "^1.2.0",
     "react-color": "^2.13.8",
-    "react-cookie": "^2.1.2",
+    "react-cookie": "^1.0.4",
     "react-countup": "^2.4.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.3.5",

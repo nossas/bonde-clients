@@ -5394,6 +5394,10 @@ is-my-json-valid@^2.10.0, is-my-json-valid@^2.12.4:
     jsonpointer "^4.0.0"
     xtend "^4.0.0"
 
+is-node@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/is-node/-/is-node-1.0.2.tgz#d7d002745ef7debbb7477e988956ab0a4fccb653"
+
 is-npm@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-npm/-/is-npm-1.0.0.tgz#f2fb63a65e4905b406c86072765a1a4dc793b9f4"
@@ -8108,13 +8112,13 @@ react-color@^2.13.8:
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
 
-react-cookie@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-2.1.2.tgz#f8005f4d39e0ac906371ec45d7ed519851222f81"
+react-cookie@^1.0.4:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-cookie/-/react-cookie-1.0.5.tgz#234190bd55ddfea361444a89c873077ab6abf651"
   dependencies:
-    hoist-non-react-statics "^1.2.0"
-    prop-types "^15.0.0"
-    universal-cookie "^2.1.2"
+    cookie "^0.3.1"
+    is-node "^1.0.2"
+    object-assign "^4.1.0"
 
 react-countup@^2.4.0:
   version "2.4.0"
