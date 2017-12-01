@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-import { Raw } from 'slate'
 
 import { EditorOld, EditorNew, EditorSlate } from '../components'
 
@@ -45,8 +44,8 @@ export class Content extends Component {
           {...this.props}
           content={settings.content}
           readOnly={!editable}
-          handleSave={state => {
-            const raw = JSON.stringify(Raw.serialize(state))
+          handleSave={value => {
+            const raw = JSON.stringify(value.toJSON())
 
             if (settings.content !== raw) {
               const { update, widget } = this.props

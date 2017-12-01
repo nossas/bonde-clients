@@ -2,9 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
 import { reduxForm } from 'redux-form'
-import { Raw } from 'slate'
 
-// Global module dependencies
 import {
   FormGroup,
   RadioGroup,
@@ -17,8 +15,6 @@ import Editor from '~client/components/editor-draft-js'
 import EditorSlate, {
   createEditorContent
 } from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'
-
-// Current module dependencies
 import * as styles from './index-scss'
 
 export const FormFinishMessage = props => {
@@ -132,8 +128,8 @@ export const FormFinishMessage = props => {
             ) : (
               <EditorSlate
                 content={finishMessage.value}
-                handleSave={state => {
-                  const raw = JSON.stringify(Raw.serialize(state))
+                handleSave={value => {
+                  const raw = JSON.stringify(value.toJSON())
                   if (finishMessage.value !== raw) finishMessage.onChange(raw)
                 }}
                 toolbarStyles={{ position: 'relative', marginBottom: 10, zIndex: 4 }}
