@@ -1428,5 +1428,6 @@ servidor-03.dominio.com`,
   'createForm.validate.required': 'Preenchimento obrigatório',
   // settingsForm
   // path: client/storybook/settings/forms
-  'settingsForm.submitLabel.default': 'Salvar'
+  'settingsForm.submitLabel.default': 'Salvar',
+  'settingsForm.sucessMessage.default': 'Formulário salvo com sucesso.'
 }

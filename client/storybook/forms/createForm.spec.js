@@ -37,11 +37,14 @@ describe('createForm API', () => {
     it('should map submit in HOC props', () => {
       let param
       const HOC = (configForm, mapStateToProps, mapActionsToProps) => () => {
-        param = mapActionsToProps
+        const dispatch = f => {
+          param = f
+        }
+        mapActionsToProps(dispatch).submit()
       }
       const submit = () => 'submit'
       subscribe(intl, HOC)({ submit })
-      expect(param.submit()).to.equal('submit')
+      expect(param).to.equal('submit')
     })
 
     it('should map form props like name, fields and validate', () => {

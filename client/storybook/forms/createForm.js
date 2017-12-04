@@ -31,7 +31,9 @@ export const subscribe = (intl, HOC) => settings => {
         : null
     )
   })
-  const mapActionsToProps = { submit }
+  const mapActionsToProps = (dispatch, props) => ({
+    submit: (values) => dispatch(submit(values, props))
+  })
   // return a form component decorated
   return intl(HOC(
     configForm,
