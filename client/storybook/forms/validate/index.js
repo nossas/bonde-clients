@@ -1,4 +1,4 @@
-import { isValidEmail } from '~client/utils/validation-helper'
+import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
 
 const applyValidate = ({
   validate,
@@ -31,6 +31,14 @@ export const isEmail = applyValidate({
   message: {
     id: 'createForm.validate.email',
     defaultMessage: 'Informe um e-mail válido'
+  }
+})
+
+export const isPhoneNumber = applyValidate({
+  validate: (value) => !isValidPhoneE164(value),
+  message: {
+    id: 'createForm.validate.phoneNumber',
+    defaultMessage: 'Formato de telefone inválido. Ex: +5511956781234'
   }
 })
 

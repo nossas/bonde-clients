@@ -1,15 +1,19 @@
 import { expect } from 'chai'
 
-import { required, isEmail, combineValidations } from './'
+import { required, isEmail, isPhoneNumber, combineValidations } from './'
 
 describe('validate', () => {
   const requiredMessage = {
-    id: 'utils.validate.required',
+    id: 'createForm.validate.required',
     defaultMessage: 'Preenchimento obrigatório'
   }
   const emailMessage = {
-    id: 'utils.validate.email',
+    id: 'createForm.validate.email',
     defaultMessage: 'Informe um e-mail válido'
+  }
+  const phoneNumberMessage = {
+    id: 'createForm.validate.phoneNumber',
+    defaultMessage: 'Formato de telefone inválido. Ex: +5511956781234'
   }
   it('should return errors with required field', () => {
     const values = { firstName: 'Ada', email: '', lastName: '' }
@@ -28,6 +32,17 @@ describe('validate', () => {
     expect(isEmail(['email', 'email1', 'email2'])(values)).to.deep.equal({
       email1: emailMessage,
       email2: emailMessage
+    })
+  })
+
+  it('should return errors with invalid phone number', () => {
+    const values = {
+      phone: '+5531998877878', // successfully
+      phone1: '+553199987787', // successfully, but without the first digit (9)
+      phone2: '31999887878' // fail, wihtout area code
+    }
+    expect(isPhoneNumber(['phone', 'phone1', 'phone2'])(values)).to.deep.equal({
+      phone2: phoneNumberMessage
     })
   })
 
