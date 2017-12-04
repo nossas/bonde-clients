@@ -555,6 +555,8 @@ servidor-03.dominio.com`,
   'page--mobilizations-list.page-header.title': 'Suas Mobilizações',
   'page--mobilizations-list.more-menu-action.open': 'Abrir página',
   'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
+  'page--mobilizations-list.more-menu-action.archived': 'Arquivar',
+  'page--mobilizations-list.more-menu-action.active': 'Ativar',
 
   // component mobilizations page header
   // filepath: /client/mobilizations/components/page-header.js
@@ -564,6 +566,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--page-header.button.text': 'Nova mobilização',
   'mobilizations.components--page-header.tabs.actives': 'Ativas',
   'mobilizations.components--page-header.tabs.templates': 'Templates',
+  'mobilizations.components--page-header.tabs.archived': 'Arquivadas',
 
   // component mobilizations list item: name
   // filepath: /client/mobilizations/components/list/items/name/index.js

@@ -98,6 +98,29 @@ export class MobilizationsListPage extends Component {
                       path={paths.mobilizationTemplatesCreate(mobilization)}
                       icon='star'
                     />
+                    <MoreMenuAction
+                      componentClass='div'
+                      text={
+                        (mobilization.status === 'active' ? (
+                          <FormattedMessage
+                            id='page--mobilizations-list.more-menu-action.archived'
+                            defaultMessage='Arquivar'
+                          />
+                        ) : (
+                          <FormattedMessage
+                            id='page--mobilizations-list.more-menu-action.active'
+                            defaultMessage='Ativar'
+                          />
+                        ))
+                      }
+                      onClick={() => {
+                        this.props.changeStatus(mobilization)
+                          .then(() => {
+                            this.props.toggleMenu(undefined)
+                          })
+                      }}
+                      icon='archive'
+                    />
                   </MoreMenu>
                 </More>
               </Item>

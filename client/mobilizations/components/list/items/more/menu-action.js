@@ -28,7 +28,7 @@ const MenuAction = ({
 MenuAction.propTypes = {
   componentClass: PropTypes.oneOf(['Link', 'a', 'div']),
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  text: PropTypes.string.isRequired,
+  text: PropTypes.any.isRequired,
   path: PropTypes.string,
   icon: PropTypes.string.isRequired
 }
