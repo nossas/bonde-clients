@@ -1,6 +1,7 @@
 import React from 'react'
 
 const btnStyle = {
+  display: 'block',
   borderBottomColor: 'rgba(0, 0, 0, 0)',
   borderBottomLeftRadius: '3px',
   borderBottomRightRadius: '3px',
@@ -24,17 +25,12 @@ const btnStyle = {
   borderTopWidth: '1px',
   color: 'rgb(255, 255, 255)',
   cursor: 'pointer',
-  display: 'inlinEblock',
   fontFamily: '"Source Sans Pro", "Proxima Nova", sans-serif',
   fontSize: '17.6px',
   fontWeight: '700',
   height: '52px',
   letterSpacing: '0px',
   lineHeight: '18px',
-  marginBottom: '0px',
-  marginLeft: '16px',
-  marginRight: '0px',
-  marginTop: '0px',
   paddingBottom: '16px',
   paddingLeft: '16px',
   paddingRight: '16px',
@@ -52,12 +48,20 @@ const btnStyle = {
   MozBorderTopColors: 'none'
 }
 
-const Button = ({ children, type, disabled }) => (
+const Button = ({
+  children,
+  style,
+  type,
+  disabled,
+  onClick
+}) => (
   <button
     type={type}
     disabled={disabled}
+    onClick={onClick}
     style={{
       ...btnStyle,
+      ...style,
       backgroundColor: disabled ? '#f2f2f2' : '#000'
     }}
   >

@@ -39,7 +39,11 @@ const SettingsForm = ({
     <form onSubmit={onSubmit}>
       {children}
       <div style={floatSubmitStyle}>
-        <Button disabled={submitting} type='submit'>
+        <Button
+          style={{ display: 'inline-block' }}
+          disabled={submitting}
+          type='submit'
+        >
           {submitLabel || i18n({
             id: 'settingsForm.submitLabel.default',
             defaultMessage: 'Salvar'
