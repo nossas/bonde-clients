@@ -1,51 +1,44 @@
-import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { injectIntl } from 'react-intl'
-import { notify } from '~client/utils/notifications'
-import { asyncEdit, resyncMailchimp } from '~client/community/action-creators'
+// New File
+import React from 'react'
+import { createForm, Field } from '~client/storybook/forms'
+import {
+  SettingsForm,
+  TextField
+} from '~client/storybook/settings/forms'
 import * as CommunitySelectors from '~client/community/selectors'
+import { asyncEdit } from '~client/community/action-creators'
+import { i18nKeys } from './i18n'
+import {
+  MailchimpFormWarning,
+  MailchimpApiKeyHelp,
+  MailchimpListIdHelp
+} from './helpText'
 
-import Page from './page'
-
-const mapStateToProps = state => ({
-  initialValues: { ...CommunitySelectors.getCurrent(state) }
+const MailchimpForm = createForm({
+  name: 'communityMailchimpForm',
+  initialValues: (state) => ({
+    ...CommunitySelectors.getCurrent(state)
+  }),
+  fields: ['id', 'mailchimp_api_key', 'mailchimp_list_id'],
+  submit: (values, props) => asyncEdit(values),
+  component: SettingsForm
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  submit: (values) => dispatch(asyncEdit(values)),
-  resyncMailchimp: () => {
-    // dispatch notifications
-    dispatch(resyncMailchimp())
-      .then(({ sync_requested_at }) => {
-        notify({
-          status: 'success',
-          message: {
-            id: 'routes.admin.authenticated.sidebar.community-settings.mailchimp.resync.message',
-            defaultMessage: 'Sincronia com Mailchimp solicitada com sucesso.'
-          }
-        }, dispatch, ownProps)
-      })
-      .catch((err) => {
-        notify({
-          status: 'error',
-          title: 'Oops!',
-          message: {
-            id: 'routes.admin.authenticated.sidebar.community-settings.mailchimp.resync.message',
-            defaultMessage: 'Houve um problema ao tentar sincronizar com mailchimp: {error}',
-            context: {
-              error: err.message || err
-            }
-          }
-        }, dispatch, ownProps)
-      })
-  }
-})
-
-export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(
-    reduxForm({
-      form: 'mailchimpForm',
-      fields: ['id', 'mailchimp_api_key', 'mailchimp_list_id']
-    })(Page)
-  )
+export default () => (
+  <MailchimpForm i18nKeys={i18nKeys}>
+    {/* MailchimpFormWarning has a button to resync mailchimp */}
+    <MailchimpFormWarning />
+    <Field
+      name='mailchimp_api_key'
+      type='text'
+      component={TextField}
+      helpTextComponent={MailchimpApiKeyHelp}
+    />
+    <Field
+      name='mailchimp_list_id'
+      type='text'
+      component={TextField}
+      helpTextComponent={MailchimpListIdHelp}
+    />
+  </MailchimpForm>
 )

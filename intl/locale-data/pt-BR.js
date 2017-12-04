@@ -312,8 +312,12 @@ servidor-03.dominio.com`,
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
   'page--community-mailchimp.warning.title': 'Atenção',
-  'page--community-mailchimp.warning.content.first-line': 'Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.',
-  'page--community-mailchimp.warning.content.second-line': 'Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)',
+  'page--community-mailchimp.warning.content': `
+Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.
+{br}
+Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)
+{br}{br}
+Caso sua base de ações não esteja sincronizada com o mailchimp, você pode forçar a sincronia no botão abaixo:`,
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.api-key.helper-text.title': 'Onde buscar essa informação?',
   'page--community-mailchimp.form.api-key.helper-text.step-01': 'Após fazer o login como administrador no mailchimp, clique no seu nome de usuário. Surgirá um menu, clique na opção {accountStrong}.',
