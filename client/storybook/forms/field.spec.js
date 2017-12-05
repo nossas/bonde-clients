@@ -5,6 +5,7 @@ import Field from './field'
 describe('<Field />', () => {
   let wrapper
   const fieldName = 'testField'
+  const deepField = 'deep.Field'
   const defaultContext = {
     form: {
       fields: {
@@ -12,6 +13,13 @@ describe('<Field />', () => {
           name: fieldName,
           value: 'value',
           onChange: () => `onChange(${fieldName})`
+        },
+        [deepField.split('.')[0]]: {
+          [deepField.split('.')[1]]: {
+            name: deepField,
+            value: 'deepValue',
+            onChange: () => `onChange(${deepField})`
+          }
         }
       },
       i18n: m => `i18n(${m})`,
@@ -50,6 +58,18 @@ describe('<Field />', () => {
     expect(otherProps.value).to.equal(field.value)
     expect(otherProps.onChange).to.equal(field.onChange)
     expect(i18n('test')).to.equal('i18n(test)')
+  })
+
+  it('should pass props to field even that value be deep', () => {
+    const field = shallow(
+      <Field name={deepField} component='input' />,
+      { context: defaultContext }
+    )
+    const deep = deepField.split('.')
+    const fields = defaultContext.form.fields
+    const { value } = field.find('input').props()
+    expect(value)
+      .to.equal(fields[deep[0]][deep[1]]['value'])
   })
 
   it('should pass label, placeholder and helpText translated', () => {

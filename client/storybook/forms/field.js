@@ -1,6 +1,10 @@
 import React from 'react'
 import { FormProvider } from './createFormProvider'
 
+const deepGet = (obj, path) =>
+  path.split('.').reduce((xs, x) =>
+    (xs && xs[x]) ? xs[x] : null, obj)
+
 class Field extends React.Component {
   /**
    * Component responsible to manage the behavior of field. It get
@@ -10,7 +14,7 @@ class Field extends React.Component {
 
   getFieldProps (fieldName) {
     const { form: { fields, i18n } } = this.context
-    const field = fields[fieldName]
+    const field = deepGet(fields, fieldName)
     return {
       i18n,
       ...field,
@@ -38,8 +42,8 @@ class Field extends React.Component {
     const { name, component: Component, ...inputProps } = this.props
     return (
       <Component
-        {...this.getFieldProps(name)}
         {...inputProps}
+        {...this.getFieldProps(name)}
         {...this.getI18nProps(name)}
       />
     )
