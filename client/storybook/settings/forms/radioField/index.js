@@ -1,8 +1,9 @@
 import React from 'react'
 import FormGroup from '../formGroup'
+import { radioGroupStyle, radioStyle } from './styles'
 
 export const Radio = ({ children, label, value, checked, onChange }) => (
-  <label htmlFor={`${value}-id`}>
+  <label style={radioStyle} htmlFor={`${value}-id`}>
     <input
       id={`${value}-id`}
       value={value}
@@ -17,7 +18,7 @@ export const Radio = ({ children, label, value, checked, onChange }) => (
 export default FormGroup((props) => {
   const { children, value, checked, ...inputProps } = props
   return (
-    <div>
+    <div style={radioGroupStyle}>
       {children && children.map((child, index) => React.cloneElement(child, {
         key: `${inputProps.name}-radio-${index}`,
         checked: checked || value,

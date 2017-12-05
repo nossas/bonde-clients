@@ -4,6 +4,7 @@ import TextField from './textField'
 import RadioField, { Radio } from './radioField'
 import UploadField from './uploadField'
 import HelpBlock from './helpBlock'
+import SelectField, { Option } from './selectField'
 
 export {
   SettingsForm,
@@ -12,5 +13,7 @@ export {
   RadioField,
   Radio,
   UploadField,
-  HelpBlock
+  HelpBlock,
+  SelectField,
+  Option
 }
