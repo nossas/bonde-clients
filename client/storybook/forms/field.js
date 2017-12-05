@@ -1,9 +1,6 @@
 import React from 'react'
 import { FormProvider } from './createFormProvider'
-
-const deepGet = (obj, path) =>
-  path.split('.').reduce((xs, x) =>
-    (xs && xs[x]) ? xs[x] : null, obj)
+import deepGet from './deepGet'
 
 class Field extends React.Component {
   /**
