@@ -17,10 +17,11 @@ export default (InputComponent) => ({
   label,
   helpText,
   helpTextComponent: HelpTextComponent,
+  style,
   ...inputProps
 }) => {
   return (
-    <div style={formGroupStyle}>
+    <div style={{ ...formGroupStyle, ...style }}>
       {label && (<ControlLabel htmlFor={`${name}-id`}>{label}</ControlLabel>)}
       {helpText && <HelpBlock level='warning'>{helpText}</HelpBlock>}
       {HelpTextComponent && <HelpTextComponent />}

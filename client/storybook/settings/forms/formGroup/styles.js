@@ -9,7 +9,7 @@ export const formGroupStyle = {
   fontFamily: '"Source Sans Pro", "Proxima Nova", sans-serif',
   lineHeight: '24px',
   padding: '16px 0 8px',
-  minWidth: '500px'
+  width: '100%'
 }
 
 export const controlLabelStyle = {
