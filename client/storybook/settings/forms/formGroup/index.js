@@ -28,6 +28,7 @@ export default (InputComponent) => ({
       <InputComponent
         id={`${name}-id`}
         name={name}
+        i18n={i18n}
         {...inputProps}
       />
       {touched && error && (

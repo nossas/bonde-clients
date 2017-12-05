@@ -9,7 +9,11 @@ export const formGroupStyle = {
   fontFamily: '"Source Sans Pro", "Proxima Nova", sans-serif',
   lineHeight: '24px',
   padding: '16px 0 8px',
-  width: '100%'
+  WebkitBoxFlex: 1,
+  msFlex: '1 1 auto',
+  flex: '1 1 auto',
+  minWidth: 0,
+  minHeight: 0
 }
 
 export const controlLabelStyle = {

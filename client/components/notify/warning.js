@@ -15,7 +15,10 @@ const Warning = ({ title, children }) => (
 )
 
 Warning.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired,
   children: PropTypes.any.isRequired
 }
 

@@ -19,7 +19,10 @@ const Box = ({ title, children, icon, styles }) => (
 )
 
 Box.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired,
   icon: PropTypes.string.isRequired,
   children: PropTypes.any.isRequired
 }
