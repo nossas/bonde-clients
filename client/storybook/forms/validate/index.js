@@ -1,18 +1,24 @@
 import { isValidEmail, isValidPhoneE164 } from '~client/utils/validation-helper'
+import { fromJS } from 'immutable'
 
-const applyValidate = ({
+const getIn = (obj, path) => fromJS(obj).getIn(path.split('.'))
+
+const setIn = (obj, path, value) => fromJS(obj).setIn(path.split('.'), value).toJS()
+
+export const applyValidate = ({
   validate,
   message
 }) => (fieldsOrField, customMessage) => (values, errorsCtx) => {
   let fields = fieldsOrField
-  const errors = errorsCtx || {}
+  let errors = errorsCtx || {}
   if (typeof fieldsOrField === 'string') {
     fields = [fieldsOrField]
   }
 
   fields.map(fieldName => {
-    if (validate(values[fieldName])) {
-      errors[fieldName] = errors[fieldName] || customMessage || message
+    if (validate(getIn(values, fieldName))) {
+      const error = (getIn(errors, fieldName) || customMessage || message)
+      errors = setIn(errors, fieldName, error)
     }
   })
   return errors

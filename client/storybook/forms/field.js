@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormProvider } from './createFormProvider'
 import { fromJS } from 'immutable'
-// import deepGet from './deepGet'
 
 class Field extends React.Component {
   /**

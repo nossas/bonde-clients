@@ -1,6 +1,12 @@
 import { expect } from 'chai'
 
-import { required, isEmail, isPhoneNumber, combineValidations } from './'
+import {
+  required,
+  isEmail,
+  isPhoneNumber,
+  combineValidations,
+  applyValidate
+} from './'
 
 describe('validate', () => {
   const requiredMessage = {
@@ -85,6 +91,26 @@ describe('validate', () => {
     expect(fnValidate(values)).to.deep.equal({
       firstName: firstNameMessage,
       lastName: lastNameMessage
+    })
+  })
+
+  describe('applyValidate', () => {
+    const message = 'required field'
+    const values = {
+      person: {
+        firstName: '',
+        lastName: '9'
+      }
+    }
+
+    it('should work with fieldName in deep', () => {
+      const validate = value => !value
+      const customValidate = applyValidate({ validate, message })
+      expect(customValidate('person.firstName')(values)).to.deep.equal({
+        person: {
+          firstName: message
+        }
+      })
     })
   })
 })
