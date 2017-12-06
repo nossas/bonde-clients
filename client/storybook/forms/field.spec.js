@@ -85,4 +85,11 @@ describe('<Field />', () => {
     wrapper.setProps({ type: inputType })
     expect(wrapper.find('input').props().type).to.equal(inputType)
   })
+
+  it('should apply normalize props on value', () => {
+    const normalize = value => `normalize${value}`
+    wrapper.setProps({ normalize })
+    expect(wrapper.find('input').props().value)
+      .to.equal(normalize(defaultContext.form.fields[fieldName].value))
+  })
 })

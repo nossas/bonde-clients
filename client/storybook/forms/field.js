@@ -11,11 +11,12 @@ class Field extends React.Component {
 
   getFieldProps (fieldName) {
     const { form: { fields, i18n } } = this.context
+    const { normalize } = this.props
     const field = deepGet(fields, fieldName)
     return {
       i18n,
       ...field,
-      value: field.value || ''
+      value: !normalize ? field.value || '' : normalize(field.value)
     }
   }
 
@@ -36,7 +37,12 @@ class Field extends React.Component {
   }
 
   render () {
-    const { name, component: Component, ...inputProps } = this.props
+    const {
+      name,
+      component: Component,
+      normalize, // eslint-disable-line no-unused-vars
+      ...inputProps
+    } = this.props
     return (
       <Component
         {...inputProps}
