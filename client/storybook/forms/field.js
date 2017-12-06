@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormProvider } from './createFormProvider'
-import deepGet from './deepGet'
+import { fromJS } from 'immutable'
+// import deepGet from './deepGet'
 
 class Field extends React.Component {
   /**
@@ -12,7 +13,7 @@ class Field extends React.Component {
   getFieldProps (fieldName) {
     const { form: { fields, i18n } } = this.context
     const { normalize } = this.props
-    const field = deepGet(fields, fieldName)
+    const field = fromJS(fields).getIn(fieldName.split('.')).toJS()
     return {
       i18n,
       ...field,
