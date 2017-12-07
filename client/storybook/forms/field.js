@@ -2,6 +2,10 @@ import React from 'react'
 import { FormProvider } from './createFormProvider'
 import { fromJS } from 'immutable'
 
+const getValue = eventOrValue =>
+  typeof eventOrValue === 'object'
+    ? eventOrValue.target.value : eventOrValue
+
 class Field extends React.Component {
   /**
    * Component responsible to manage the behavior of field. It get
@@ -13,10 +17,17 @@ class Field extends React.Component {
     const { form: { fields, i18n } } = this.context
     const { normalize } = this.props
     const field = fromJS(fields).getIn(fieldName.split('.')).toJS()
+
     return {
       i18n,
       ...field,
-      value: !normalize ? field.value || '' : normalize(field.value)
+      error: i18n(field.error),
+      onChange: (eventOrValue) => {
+        const value = getValue(eventOrValue)
+        if (!normalize) return field.onChange(value)
+        else return field.onChange(normalize(value))
+      },
+      value: !normalize ? field.value : normalize(field.value)
     }
   }
 

@@ -32,7 +32,7 @@ export default (InputComponent) => ({
         {...inputProps}
       />
       {touched && error && (
-        <HelpBlock level='error'>{i18n(error)}</HelpBlock>
+        <HelpBlock level='error'>{error}</HelpBlock>
       )}
     </div>
   )

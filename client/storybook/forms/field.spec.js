@@ -12,13 +12,13 @@ describe('<Field />', () => {
         [fieldName]: {
           name: fieldName,
           value: 'value',
-          onChange: () => `onChange(${fieldName})`
+          onChange: v => `onChange(${fieldName}:${v})`
         },
         [deepField.split('.')[0]]: {
           [deepField.split('.')[1]]: {
             name: deepField,
             value: 'deepValue',
-            onChange: () => `onChange(${deepField})`
+            onChange: v => `onChange(${deepField}:${v})`
           }
         }
       },
@@ -56,7 +56,7 @@ describe('<Field />', () => {
     const field = defaultContext.form.fields[fieldName]
     expect(otherProps.name).to.equal(field.name)
     expect(otherProps.value).to.equal(field.value)
-    expect(otherProps.onChange).to.equal(field.onChange)
+    expect(otherProps.onChange('a')).to.equal(field.onChange('a'))
     expect(i18n('test')).to.equal('i18n(test)')
   })
 
@@ -86,10 +86,17 @@ describe('<Field />', () => {
     expect(wrapper.find('input').props().type).to.equal(inputType)
   })
 
-  it('should apply normalize props on value', () => {
+  it('should apply normalize props in value', () => {
     const normalize = value => `normalize${value}`
     wrapper.setProps({ normalize })
     expect(wrapper.find('input').props().value)
       .to.equal(normalize(defaultContext.form.fields[fieldName].value))
+  })
+
+  it('should apply normalize props in onChange', () => {
+    const normalize = value => `normalize(${value})`
+    wrapper.setProps({ normalize })
+    expect(wrapper.find('input').props().onChange('a'))
+      .to.equal(defaultContext.form.fields[fieldName].onChange(normalize('a')))
   })
 })
