@@ -1433,6 +1433,10 @@ Caso sua base de ações não esteja sincronizada com o mailchimp, você pode fo
   // path: client/storybook/forms/validate
   'createForm.validate.email': 'Informe um e-mail válido',
   'createForm.validate.required': 'Preenchimento obrigatório',
+  'createForm.validate.cnpj.length': 'CNPJ deve conter 14 digitos',
+  'createForm.validate.cnpj.invalid': 'CNPJ inválido',
+  'createForm.validate.cpf.length': 'CPF deve conter 11 digitos',
+  'createForm.validate.cpf.invalid': 'CPF inválido',
   // settingsForm
   // path: client/storybook/settings/forms
   'settingsForm.submitLabel.default': 'Salvar',
