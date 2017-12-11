@@ -138,30 +138,32 @@ class Form extends Component {
   }
 
   renderCount () {
-    const {
-      block: { scrollTopReached: startCounting },
-      widget: { settings, form_entries_count: count },
-      mobilization: { body_font: bodyFont },
-      intl
-    } = this.props
+    if (!this.props.configurable) {
+      const {
+        block: { scrollTopReached: startCounting },
+        widget: { settings, form_entries_count: count },
+        mobilization: { body_font: bodyFont },
+        intl
+      } = this.props
 
-    return (
-      <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
-        <CountUp
-          start={0}
-          end={!isNaN(count) && startCounting ? Number(count) : 0}
-          duration={5}
-        />
-        &nbsp;
-        {settings && settings.count_text
-          ? settings.count_text
-          : intl.formatMessage({
-            id: 'form-widget.components--form.default.counter-suffix',
-            defaultMessage: 'assinaturas'
-          })
-        }
-      </div>
-    )
+      return (
+        <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
+          <CountUp
+            start={0}
+            end={!isNaN(count) && startCounting ? Number(count) : 0}
+            duration={5}
+          />
+          &nbsp;
+          {settings && settings.count_text
+            ? settings.count_text
+            : intl.formatMessage({
+              id: 'form-widget.components--form.default.counter-suffix',
+              defaultMessage: 'assinaturas'
+            })
+          }
+        </div>
+      )
+    }
   }
 
   renderErrors () {
@@ -210,7 +212,7 @@ class Form extends Component {
             'rounded',
             { 'p3 relative': editable || !configurable }
           )}
-          style={{ backgroundColor }}
+          style={{ backgroundColor: !configurable ? backgroundColor : null }}
         >
           {this.renderCallToAction()}
           {this.renderFields()}
