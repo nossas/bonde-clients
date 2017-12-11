@@ -130,6 +130,12 @@ describe('createFormProvider API', () => {
       .to.equal(`i18n(${successMessage.defaultMessage})`)
   })
 
+  it('should pass error prop to wrapper', () => {
+    const error = 'invalid form'
+    wrapper.setProps({ error })
+    expect(wrapper.find('form').props().error).to.equal(error)
+  })
+
   describe('createFormProvider', () => {
     it('should define displayName like createForm(Component)', () => {
       const CustomFormProvider = createFormProvider('form')
