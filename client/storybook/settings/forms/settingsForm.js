@@ -31,6 +31,7 @@ const SettingsForm = ({
   getPropI18n,
   // redux-form
   valid,
+  error,
   submitting
 }) => {
   const successMessage = getPropI18n('successMessage')
@@ -55,6 +56,11 @@ const SettingsForm = ({
             <i className='fa fa-check-circle olive ml1' />
           </div>
         ) : null}
+        {error && (
+          <div style={{...successMessageStyle, color: 'red'}}>
+            {error}
+          </div>
+        )}
       </div>
     </form>
   )
