@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import ga from 'react-ga'
 import Helmet from 'react-helmet'
-import { renderRoutes } from 'react-router-config'
 import DevTools from '~client/components/dev-tools'
 import { Loading } from '~client/components/await'
 import { ZendeskWidget } from '~client/components/external-services'
@@ -48,7 +47,6 @@ class Application extends React.Component {
         <NotificationSystem />
         {loading && <Loading />}
         <GoogleFontsLoader fonts='Source Sans Pro' />
-        {renderRoutes(route.routes)}
       </div>
     )
   }

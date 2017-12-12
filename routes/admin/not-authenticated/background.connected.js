@@ -8,11 +8,4 @@ const mapStateToProps = () => ({
   contentSize: 12
 })
 
-const BackgroundContainer = ({ children, route, ...props }) => (
-  <Background {...props}>
-    {children}
-    {renderRoutes(route.routes)}
-  </Background>
-)
-
-export default connect(mapStateToProps)(BackgroundContainer)
+export default connect(mapStateToProps)(Background)

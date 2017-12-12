@@ -12,7 +12,7 @@ import en from 'react-intl/locale-data/en'
 import localeData from '~root/intl/locale-data'
 import Raven from 'raven-js'
 
-import routes from '~root/routes-v1'
+import App from '~root/routes-v1'
 import { configureStore, client } from '~client/store'
 
 const __PROD__ = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
@@ -43,9 +43,7 @@ const AppRouter = () => {
     <IntlProvider locale={locale} messages={messages}>
       <Provider store={store}>
         <ApolloProvider store={store} client={client()}>
-          <BrowserRouter>
-            {renderRoutes(routes)}
-          </BrowserRouter>
+          <App />
         </ApolloProvider>
       </Provider>
     </IntlProvider>

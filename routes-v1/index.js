@@ -1,91 +1,54 @@
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+  Switch
+} from 'react-router-dom'
+
 import '~client/styles/main.scss'
 
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
-
-import AuthRedirectStrategy from '~root/routes-v1/auth-redirect-strategy'
-
-import Application from '~routes/admin/container.connected'
 import BackgroundContainer from '~routes/admin/not-authenticated/background.connected'
 import CurrentUserContainer from '~routes/admin/authenticated/container'
+import { TechnicalIssues } from '~client/components/error/index.js'
+import PrivateRoute from '~root/routes-v1/private-route'
 
 import AccountLogin from '~routes/admin/not-authenticated/account-login/page.connected'
 import CommunityList from '~routes/admin/authenticated/external/community-list/page.connected'
-import NotFound from '~client/components/not-found'
+import MobilizationsList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
 
-const Home = ({ route }) => (
+const withBackground = Component => props => (
+  <BackgroundContainer {...props}>
+    <Component {...props} />
+  </BackgroundContainer>
+)
+
+const withUser = Component => props => (
+  <CurrentUserContainer {...props}>
+    <Component {...props} />
+  </CurrentUserContainer>
+)
+
+const About = () => (
   <div>
-    <h2>Home</h2>
+    <h2>About</h2>
   </div>
 )
 
-const Child = ({ route }) => (
-  <div>
-    <h2>Child</h2>
-    <Link to='/'>
-      Home
-    </Link>
-    {/* child routes won't render without this */}
-    {renderRoutes(route.routes, { someProp: 'these extra props are optional' })}
-  </div>
-)
-
-const GrandChild = ({ someProp, ...rest }) => {
-  return (
+const AuthExample = () => (
+  <Router>
     <div>
-      <h3>Grand Child</h3>
-      <pre>{JSON.stringify(someProp)}</pre>
+      <Switch>
+        <Route exact path="/login" component={withBackground(AccountLogin)} />
+        <PrivateRoute exact path="/" component={withUser(MobilizationsList)} />
+        <PrivateRoute exact path="/community" component={withUser(CommunityList)} />
+        <PrivateRoute exact path="/mobilizations" component={withUser(MobilizationsList)} />
+        <Route component={TechnicalIssues} />
+      </Switch>
     </div>
-  )
-}
+  </Router>
+)
 
-const routes = [
-  { component: Application,
-    routes: [
-      {
-        component: CurrentUserContainer,
-        routes: [
-          {
-            path: '/',
-            exact: true,
-            component: AuthRedirectStrategy
-          },
-          {
-            path: '/',
-            component: BackgroundContainer,
-            routes: [
-              {
-                path: '/login',
-                exact: true,
-                component: AccountLogin
-              },
-              {
-                path: '/community',
-                exact: true,
-                component: CommunityList
-              },
-              {
-                path: '*',
-                component: NotFound
-              }
-            ]
-          }
-        ]
-      },
-
-      {
-        path: '/child/:id',
-        component: Child,
-        routes: [
-          {
-            path: '/child/:id/grand-child',
-            component: GrandChild
-          }
-        ]
-      }
-    ]
-  }
-]
-
-export default routes
+export default AuthExample
