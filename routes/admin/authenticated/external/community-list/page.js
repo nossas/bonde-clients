@@ -1,22 +1,28 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Link, browserHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Background } from '~client/components/layout'
 import * as paths from '~client/paths'
 import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
+import * as CommunityActions from '~client/community/action-creators'
+import * as CommunitySelectors from '~client/community/selectors'
 
 class CommunityListPage extends Component {
+  componentDidMount() {
+    this.props.asyncFetch()
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLoaded && nextProps.communities.length === 0) {
-      browserHistory.push(paths.communityAdd())
+      this.props.history.push(paths.communityAdd())
     }
   }
 
   onClickItem (id) {
     this.props.select(id)
-    browserHistory.push(paths.mobilizations())
+    this.props.history.push(paths.mobilizations())
   }
 
   render () {

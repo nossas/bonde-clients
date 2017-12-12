@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
+import { renderRoutes } from 'react-router-config'
 import { Loading } from '~client/components/await'
 import { load } from '~client/account/redux/action-creators'
 import fetchCurrentUser from '~client/account/queries/current-user'
@@ -17,12 +18,10 @@ class CurrentUserContainer extends Component {
   }
 
   render () {
-    const { children, data: { loading, currentUser } } = this.props
+    const { route, data: { loading, currentUser } } = this.props
     return (
       <div className='current-user-container'>
-        {loading && !currentUser ? <Loading /> : (
-          React.cloneElement(children, { currentUser })
-        )}
+        {loading && !currentUser ? <Loading /> : (renderRoutes(route.routes))}
       </div>
     )
   }

@@ -1,23 +1,18 @@
 import '~client/styles/main.scss'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
-import Application from '~routes/admin/container.connected'
-import AccountLogin from '~routes/admin/not-authenticated/account-login/page.connected'
-import BackgroundContainer from '~routes/admin/not-authenticated/background.connected'
 
-// const Root = props => (
-//   <div>
-//     <Application {...props}>
-//       <h1>Root</h1>
-//       <Link to='/child/1'>
-//         Child 1
-//       </Link>
-//       {/* child routes won't render without this */}
-//       {renderRoutes(props.route.routes)}
-//     </Application>
-//   </div>
-// )
+import AuthRedirectStrategy from '~root/routes-v1/auth-redirect-strategy'
+
+import Application from '~routes/admin/container.connected'
+import BackgroundContainer from '~routes/admin/not-authenticated/background.connected'
+import CurrentUserContainer from '~routes/admin/authenticated/container'
+
+import AccountLogin from '~routes/admin/not-authenticated/account-login/page.connected'
+import CommunityList from '~routes/admin/authenticated/external/community-list/page.connected'
+import NotFound from '~client/components/not-found'
 
 const Home = ({ route }) => (
   <div>
@@ -37,7 +32,6 @@ const Child = ({ route }) => (
 )
 
 const GrandChild = ({ someProp, ...rest }) => {
-  console.log('rest', rest)
   return (
     <div>
       <h3>Grand Child</h3>
@@ -46,24 +40,40 @@ const GrandChild = ({ someProp, ...rest }) => {
   )
 }
 
-const LoginWithBackground = props => (
-  <BackgroundContainer {...props}>
-    <AccountLogin {...props} />
-  </BackgroundContainer>
-)
-
 const routes = [
   { component: Application,
     routes: [
       {
-        path: '/',
-        exact: true,
-        component: Home
+        component: CurrentUserContainer,
+        routes: [
+          {
+            path: '/',
+            exact: true,
+            component: AuthRedirectStrategy
+          },
+          {
+            path: '/',
+            component: BackgroundContainer,
+            routes: [
+              {
+                path: '/login',
+                exact: true,
+                component: AccountLogin
+              },
+              {
+                path: '/community',
+                exact: true,
+                component: CommunityList
+              },
+              {
+                path: '*',
+                component: NotFound
+              }
+            ]
+          }
+        ]
       },
-      {
-        path: '/login',
-        component: LoginWithBackground
-      },
+
       {
         path: '/child/:id',
         component: Child,
@@ -77,15 +87,5 @@ const routes = [
     ]
   }
 ]
-
-// const routes = [
-//   { component: Root,
-//     routes: [
-//       { path: '/', exact: true, component: Home },
-//       { path: '/home', component: Home },
-//       { path: '/list', component: List }
-//     ]
-//   }
-// ]
 
 export default routes
