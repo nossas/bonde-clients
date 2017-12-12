@@ -1,18 +1,50 @@
-import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { injectIntl } from 'react-intl'
-import { CPF, CNPJ } from 'cpf_cnpj'
-import * as CommunityActions from '~client/community/action-creators'
-import * as CommunitySelectors from '~client/community/selectors'
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { createForm, getValues, Field } from '~client/storybook/forms'
+import {
+  combineValidations,
+  required,
+  isCpfCnpj
+} from '~client/storybook/forms/validate'
+import {
+  SettingsForm,
+  RadioField,
+  Radio,
+  SelectField,
+  Option,
+  TextField
+} from '~client/storybook/settings/forms'
+import * as normalizers from '~client/utils/redux-form/normalizers'
+import { Title } from '~client/components/title'
+import { asyncEdit } from '~client/community/action-creators'
+import { getCurrent as getCommunity } from '~client/community/selectors'
+import { getCodeBanks } from '~client/community/utils'
+import { RecipientFormWarning } from './helpText'
+import { i18nKeys } from './i18n'
 
-import Page from './page'
-
-const mapStateToProps = (state, ownProps) => {
-  const { id, recipient } = CommunitySelectors.getCurrent(state)
-  const values = recipient || {}
-
-  return {
-    initialValues: {
+const formName = 'communityRecipientForm'
+const transferIntervalFieldName = 'recipient.transfer_interval'
+const RecipientForm = createForm({
+  name: formName,
+  fields: [
+    'id',
+    transferIntervalFieldName,
+    'recipient.transfer_day',
+    'recipient.transfer_enabled',
+    'recipient.bank_account.bank_code',
+    'recipient.bank_account.agency',
+    'recipient.bank_account.agency_dig',
+    'recipient.bank_account.account',
+    'recipient.bank_account.account_dig',
+    'recipient.bank_account.type',
+    'recipient.bank_account.legal_name',
+    'recipient.bank_account.document_number'
+  ],
+  submit: asyncEdit,
+  initialValues: (state) => {
+    const { id, recipient } = getCommunity(state)
+    const values = recipient || {}
+    return {
       id,
       recipient: {
         ...values,
@@ -21,133 +53,197 @@ const mapStateToProps = (state, ownProps) => {
         transfer_enabled: values.transfer_enabled || true
       }
     }
-  }
+  },
+  validate: combineValidations([
+    required([
+      'recipient.transfer_day',
+      'recipient.bank_account.bank_code',
+      'recipient.bank_account.agency',
+      'recipient.bank_account.account',
+      'recipient.bank_account.account_dig',
+      'recipient.bank_account.type',
+      'recipient.bank_account.legal_name',
+      'recipient.bank_account.document_number'
+    ]),
+    isCpfCnpj('recipient.bank_account.document_number')
+  ]),
+  component: SettingsForm
+})
+
+export default () => {
+  const transferInterval = getValues(formName, transferIntervalFieldName)
+
+  return (
+    <RecipientForm i18nKeys={i18nKeys}>
+      <RecipientFormWarning />
+
+      <Title size='2'>
+        <FormattedMessage
+          id='page--community-recipient.title'
+          defaultMessage='Agendamento dos Saques'
+        />
+      </Title>
+
+      <div style={{ display: 'flex' }}>
+        <Field
+          name={transferIntervalFieldName}
+          component={RadioField}
+          style={{ maxWidth: '230px' }}
+        >
+          <Radio value='weekly'>
+            <FormattedMessage
+              id='page--community-recipient.form.transfer-interval.value.weekly'
+              defaultMessage='Semanal'
+            />
+          </Radio>
+          <Radio value='monthly'>
+            <FormattedMessage
+              id='page--community-recipient.form.transfer-interval.value.monthly'
+              defaultMessage='Mensal'
+            />
+          </Radio>
+        </Field>
+        <Field name='recipient.transfer_day' component={SelectField}>
+          {transferInterval === 'monthly' ? ([
+            <Option key='1' value='1' />,
+            <Option key='2' value='6' />,
+            <Option key='3' value='11' />,
+            <Option key='4' value='16' />,
+            <Option key='5' value='21' />,
+            <Option key='6' value='26' />
+          ]) : ([
+            <Option
+              key='1'
+              value='1'
+              label={{
+                id: 'page--community-recipient.form.transfer-day.weekly.mon',
+                defaultMessage: 'Segunda'
+              }}
+            />,
+            <Option
+              key='2'
+              value='2'
+              label={{
+                id: 'page--community-recipient.form.transfer-day.weekly.tue',
+                defaultMessage: 'Terça'
+              }}
+            />,
+            <Option
+              key='3'
+              value='3'
+              label={{
+                id: 'page--community-recipient.form.transfer-day.weekly.wed',
+                defaultMessage: 'Quarta'
+              }}
+            />,
+            <Option
+              key='4'
+              value='4'
+              label={{
+                id: 'page--community-recipient.form.transfer-day.weekly.thu',
+                defaultMessage: 'Quinta'
+              }}
+            />,
+            <Option
+              key='5'
+              value='5'
+              label={{
+                id: 'page--community-recipient.form.transfer-day.weekly.fri',
+                defaultMessage: 'Sexta'
+              }}
+            />
+          ])}
+        </Field>
+      </div>
+
+      <Title size='2'>
+        <FormattedMessage
+          id='page--community-recipient.section--account.title'
+          defaultMessage='Conta bancária'
+        />
+      </Title>
+
+      <div style={{ display: 'flex' }}>
+        <Field
+          style={{ maxWidth: '230px' }}
+          name='recipient.bank_account.type'
+          component={RadioField}
+        >
+          <Radio value='conta_corrente'>
+            <FormattedMessage
+              id='page--community-recipient.form.bank-account-type.value.checking-account'
+              defaultMessage='Corrente'
+            />
+          </Radio>
+          <Radio value='conta_poupanca'>
+            <FormattedMessage
+              id='page--community-recipient.form.bank-account-type.value.savings-account'
+              defaultMessage='Poupança'
+            />
+          </Radio>
+        </Field>
+        <Field name='recipient.bank_account.bank_code' component={SelectField}>
+          {getCodeBanks(bank => !isNaN(bank.code) && bank.code.length === 3)
+            .map((bank, i) => (
+              <Option
+                key={`bankCode-${i}`}
+                value={bank.code}
+                label={`${bank.code} - ${bank.name}`}
+              />
+            )
+          )}
+        </Field>
+      </div>
+
+      <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', width: '30%' }}>
+          <Field
+            name='recipient.bank_account.agency'
+            type='text'
+            component={TextField}
+            normalize={normalizers.number.max(5)}
+          />
+          <Field
+            style={{ maxWidth: '100px', marginLeft: '20px' }}
+            name='recipient.bank_account.agency_dig'
+            type='text'
+            component={TextField}
+            normalize={normalizers.number.max(1)}
+          />
+        </div>
+
+        <div style={{ display: 'flex', width: '70%', paddingLeft: '40px' }}>
+          <Field
+            name='recipient.bank_account.account'
+            type='text'
+            component={TextField}
+            normalize={normalizers.number.max(13)}
+          />
+          <Field
+            style={{ maxWidth: '100px', marginLeft: '20px' }}
+            name='recipient.bank_account.account_dig'
+            type='text'
+            component={TextField}
+            normalize={normalizers.number.max(2)}
+          />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex' }}>
+        <Field
+          style={{ maxWidth: '70%' }}
+          name='recipient.bank_account.legal_name'
+          type='text'
+          component={TextField}
+        />
+        <Field
+          style={{ maxWidth: '30%', paddingLeft: '40px' }}
+          name='recipient.bank_account.document_number'
+          type='text'
+          component={TextField}
+          normalize={normalizers.documents.cpfCnpj}
+        />
+      </div>
+    </RecipientForm>
+  )
 }
-
-const mapDispatchToProps = {
-  submit: CommunityActions.asyncEdit
-}
-
-const fields = [
-  'id',
-  'recipient.transfer_interval',
-  'recipient.transfer_day',
-  'recipient.transfer_enabled',
-  'recipient.bank_account.bank_code',
-  'recipient.bank_account.agency',
-  'recipient.bank_account.agency_dig',
-  'recipient.bank_account.account',
-  'recipient.bank_account.account_dig',
-  'recipient.bank_account.type',
-  'recipient.bank_account.legal_name',
-  'recipient.bank_account.document_number'
-]
-
-const validate = (values, { intl }) => {
-  const errors = { recipient: { bank_account: {} } }
-  const {
-    recipient: {
-      transfer_day: transferDay,
-      bank_account: {
-        bank_code: bankCode,
-        agency,
-        agency_dig: agencyDig,
-        account,
-        account_dig: accountDig,
-        type,
-        legal_name: legalName,
-        document_number: documentNumber
-      }
-    }
-  } = values
-
-  const requiredMessage = intl.formatMessage({
-    id: 'page--community-recipient.form.validation.required',
-    defaultMessage: 'Campo obrigatório'
-  })
-
-  if (!transferDay) {
-    errors.recipient.transfer_day = requiredMessage
-  }
-
-  if (!bankCode) {
-    errors.recipient.bank_account.bank_code = requiredMessage
-  }
-
-  if (!agency) {
-    errors.recipient.bank_account.agency = requiredMessage
-  } else if (agency.length > 5) {
-    errors.recipient.bank_account.agency = intl.formatMessage({
-      id: 'page--community-recipient.form.bank-agency.validation.max-length',
-      defaultMessage: 'Deve conter no máximo 5 digitos'
-    })
-  }
-  if (agencyDig && agencyDig.length > 1) {
-    errors.recipient.bank_account.agency_dig = intl.formatMessage({
-      id: 'page--community-recipient.form.bank-agency-dv.validation.length',
-      defaultMessage: 'Deve conter apenas 1 digito'
-    })
-  }
-
-  if (!account) {
-    errors.recipient.bank_account.account = requiredMessage
-  } else if (account.length > 13) {
-    errors.recipient.bank_account.account = intl.formatMessage({
-      id: 'page--community-recipient.form.bank-account.validation.max-length',
-      defaultMessage: 'Deve conter no máximo 13 digitos'
-    })
-  }
-  if (!accountDig) {
-    errors.recipient.bank_account.account_dig = requiredMessage
-  } else if (accountDig.length > 2) {
-    errors.recipient.bank_account.account_dig = intl.formatMessage({
-      id: 'page--community-recipient.form.bank-account-dv.validation.max-length',
-      defaultMessage: 'Deve conter no máximo 2 caracteres'
-    })
-  }
-
-  if (!type) {
-    errors.recipient.bank_account.type = requiredMessage
-  }
-
-  if (!legalName) {
-    errors.recipient.bank_account.legal_name = requiredMessage
-  }
-
-  if (!documentNumber) {
-    errors.recipient.bank_account.document_number = requiredMessage
-  } else {
-    const docOnlyNum = documentNumber.replace(/[^\d]/g, '')
-    if (docOnlyNum.length > 11 && docOnlyNum.length !== 14) {
-      errors.recipient.bank_account.document_number = intl.formatMessage({
-        id: 'page--community-recipient.form.bank-document-number.validation.cnpj-length',
-        defaultMessage: 'CNPJ deve conter 14 digitos'
-      })
-    } else if (docOnlyNum.length < 11) {
-      errors.recipient.bank_account.document_number = intl.formatMessage({
-        id: 'page--community-recipient.form.bank-document-number.validation.cpf-length',
-        defaultMessage: 'CPF deve conter 11 digitos'
-      })
-    } else if (docOnlyNum.length === 11 && !CPF.isValid(docOnlyNum)) {
-      errors.recipient.bank_account.document_number = intl.formatMessage({
-        id: 'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format',
-        defaultMessage: 'CPF inválido'
-      })
-    } else if (docOnlyNum.length === 14 && !CNPJ.isValid(docOnlyNum)) {
-      errors.recipient.bank_account.document_number = intl.formatMessage({
-        id: 'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format',
-        defaultMessage: 'CNPJ inválido'
-      })
-    }
-  }
-
-  return errors
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(reduxForm({
-    form: 'communityRecipientForm',
-    fields,
-    validate
-  })(Page))
-)

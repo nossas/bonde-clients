@@ -1,5 +1,10 @@
 import React from 'react'
 import { FormProvider } from './createFormProvider'
+import { fromJS } from 'immutable'
+
+const getValue = eventOrValue =>
+  typeof eventOrValue === 'object'
+    ? eventOrValue.target.value : eventOrValue
 
 class Field extends React.Component {
   /**
@@ -10,11 +15,19 @@ class Field extends React.Component {
 
   getFieldProps (fieldName) {
     const { form: { fields, i18n } } = this.context
-    const field = fields[fieldName]
+    const { normalize } = this.props
+    const field = fromJS(fields).getIn(fieldName.split('.')).toJS()
+
     return {
       i18n,
       ...field,
-      value: field.value || ''
+      error: i18n(field.error),
+      onChange: (eventOrValue) => {
+        const value = getValue(eventOrValue)
+        if (!normalize) return field.onChange(value)
+        else return field.onChange(normalize(value))
+      },
+      value: !normalize ? field.value : normalize(field.value)
     }
   }
 
@@ -35,11 +48,16 @@ class Field extends React.Component {
   }
 
   render () {
-    const { name, component: Component, ...inputProps } = this.props
+    const {
+      name,
+      component: Component,
+      normalize, // eslint-disable-line no-unused-vars
+      ...inputProps
+    } = this.props
     return (
       <Component
-        {...this.getFieldProps(name)}
         {...inputProps}
+        {...this.getFieldProps(name)}
         {...this.getI18nProps(name)}
       />
     )

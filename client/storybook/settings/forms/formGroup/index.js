@@ -16,19 +16,23 @@ export default (InputComponent) => ({
   i18n,
   label,
   helpText,
+  helpTextComponent: HelpTextComponent,
+  style,
   ...inputProps
 }) => {
   return (
-    <div style={formGroupStyle}>
+    <div style={{ ...formGroupStyle, ...style }}>
       {label && (<ControlLabel htmlFor={`${name}-id`}>{label}</ControlLabel>)}
       {helpText && <HelpBlock level='warning'>{helpText}</HelpBlock>}
+      {HelpTextComponent && <HelpTextComponent />}
       <InputComponent
         id={`${name}-id`}
         name={name}
+        i18n={i18n}
         {...inputProps}
       />
       {touched && error && (
-        <HelpBlock level='error'>{i18n(error)}</HelpBlock>
+        <HelpBlock level='error'>{error}</HelpBlock>
       )}
     </div>
   )

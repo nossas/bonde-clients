@@ -48,13 +48,14 @@ export const createFormProvider = (Component) => {
     }
 
     render () {
-      const { children, handleSubmit, submit } = this.props
+      const { children, handleSubmit, submit, error } = this.props
       return (
         <Component
           i18n={this.i18n.bind(this)}
           getPropI18n={this.getPropI18n.bind(this)}
           submitted={this.state.submitted}
           onSubmit={handleSubmit(submit)}
+          error={error}
         >
           {children}
         </Component>

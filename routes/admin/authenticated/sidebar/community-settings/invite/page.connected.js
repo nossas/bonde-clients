@@ -1,40 +1,53 @@
-import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { injectIntl } from 'react-intl'
-
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { createForm, Field } from '~client/storybook/forms'
+import {
+  combineValidations,
+  required,
+  isEmail
+} from '~client/storybook/forms/validate'
+import { SettingsForm, TextField } from '~client/storybook/settings/forms'
+import { Info } from '~client/components/notify'
 import { asyncInvite } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
-import { isValidEmail } from '~client/utils/validation-helper'
+import { i18nKeys } from './i18n'
 
-import Page from './page'
-
-const mapStateToProps = state => ({
-  communityId: CommunitySelectors.getCurrentId(state)
+const InviteForm = createForm({
+  name: 'communityInviteForm',
+  fields: ['communityId', 'email'],
+  initialValues: (state) => ({
+    communityId: CommunitySelectors.getCurrentId(state)
+  }),
+  validate: combineValidations([
+    required('email'),
+    isEmail('email')
+  ]),
+  submit: asyncInvite,
+  component: SettingsForm
 })
-const mapDispatchToProps = { asyncInvite }
-const mergeProps = ({ communityId }, { asyncInvite }) => ({
-  submit: values => asyncInvite(communityId, values)
-})
 
-const fields = ['email']
-
-const validate = ({ email }, { intl }) => {
-  const errors = {}
-
-  if (!email) {
-    errors.email = intl.formatMessage({
-      id: 'page--community-invite.form.email.validation.required',
-      defaultMessage: 'Obrigatório'
-    })
-  } else if (!isValidEmail(email)) {
-    errors.email = intl.formatMessage({
-      id: 'page--community-invite.form.email.validation.invalid',
-      defaultMessage: 'Informe um email válido'
-    })
-  }
-  return errors
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  injectIntl(reduxForm({ form: 'communityInviteForm', fields, validate })(Page))
+export default () => (
+  <InviteForm i18nKeys={i18nKeys}>
+    <Info
+      title={(
+        <FormattedMessage
+          id='page--community-invite.info.title'
+          defaultMessage='Informação'
+        />
+      )}
+    >
+      <FormattedMessage
+        id='page--community-invite.info.content'
+        defaultMessage={
+          'Convide novos usuários para fazerem parte da sua comunidade, eles terão ' +
+          'acesso as mesmas informações que o você possui.{br}' +
+          'Utilizando o formulário abaixo, você envia o convite por e-mail.'
+        }
+        values={{
+          br: <br />
+        }}
+      />
+    </Info>
+    <Field type='text' name='email' component={TextField} />
+  </InviteForm>
 )

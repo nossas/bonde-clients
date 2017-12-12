@@ -1,6 +1,11 @@
 import React from 'react'
 import { createForm, Field } from '~client/storybook/forms'
 import {
+  combineValidations,
+  required,
+  isEmail
+} from '~client/storybook/forms/validate'
+import {
   SettingsForm,
   TextField,
   UploadField
@@ -8,7 +13,6 @@ import {
 import { asyncEdit } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 import { i18nKeys } from './i18n'
-import { required, validateEmail, validate } from '~client/utils/validate'
 
 const emailErrorMessage = {
   id: 'page--community-info.form.custom-from-email.validation.invalid-email-format',
@@ -23,7 +27,7 @@ const CommunityForm = createForm({
   initialValues: (state) => ({
     ...CommunitySelectors.getCurrent(state) || {}
   }),
-  validate: validate([
+  validate: combineValidations([
     required('name', {
       id: 'page--community-info.form.name.validation.required',
       defaultMessage: 'Informe o nome da comunidade'
@@ -33,7 +37,7 @@ const CommunityForm = createForm({
       defaultMessage: 'Informe em qual cidade sua comunidade atua'
     }),
     required('email_template_from', emailErrorMessage),
-    validateEmail('email_template_from', emailErrorMessage)
+    isEmail('email_template_from', emailErrorMessage)
   ]),
   submit: asyncEdit,
   component: SettingsForm

@@ -1,4 +1,4 @@
-export const inputStyle = {
+export const selectStyle = {
   borderBottomColor: 'rgb(238, 238, 238)',
   borderBottomLeftRadius: '2px',
   borderBottomRightRadius: '2px',

@@ -24,7 +24,16 @@ const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
         return Promise.resolve()
       }
     })
-    .catch(error => Promise.reject(error))
+    .catch(obj => {
+      if (obj.response && obj.response.data && obj.response.data.errors) {
+        if (typeof obj.response.data.errors === 'object') {
+          const error = Object.values(obj.response.data.errors)[0]
+          return Promise.reject({ _error: error })
+        }
+        return Promise.reject({ _error: obj.response.data.errors })
+      }
+      return Promise.reject({ _errors: obj })
+    })
 }
 
 export default asyncEdit
