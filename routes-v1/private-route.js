@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import AccountSelectors from '~client/account/redux/selectors'
 import * as CommunitySelectors from '~client/community/selectors'
 
-const Redirect = ({ pathname }) => (
-  <RedirectComponent to={{ pathname, state: { from: props.location } }} />
+const Redirect = ({ pathname, location }) => (
+  <RedirectComponent to={{ pathname, state: { from: location } }} />
 )
 
 const PrivateRoute = ({
@@ -32,13 +32,13 @@ const PrivateRoute = ({
       const communityPathname = !isCommunity
 
       if (authenticated && hasCommunity && mobilizationsPathname) {
-        return <Redirect pathname='/mobilizations' />
+        return <Redirect {...props} pathname='/mobilizations' />
       }
       else if (authenticated && !hasCommunity && communityPathname) {
-        return <Redirect pathname='/community' />
+        return <Redirect {...props} pathname='/community' />
       }
       else if (!authenticated) {
-        return <Redirect pathname='/login' />
+        return <Redirect {...props} pathname='/login' />
       }
       else {
         return <Component {...props} />
