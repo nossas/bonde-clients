@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage, intlShape } from 'react-intl'
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
 
 import {
   FormGroup,
@@ -358,4 +358,4 @@ DonationSettingsPage.propTypes = {
   intl: intlShape.isRequired
 }
 
-export default DonationSettingsPage
+export default injectIntl(DonationSettingsPage)

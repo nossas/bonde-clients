@@ -919,6 +919,7 @@ Caso sua base de ações não esteja sincronizada com o mailchimp, você pode fo
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
   'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
   'donation.components--settings-menu.tabs.post-action': 'Pós-doação',
+  'donation.components--settings-menu.tabs.info': 'Dados para doação',
 
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
