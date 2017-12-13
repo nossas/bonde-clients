@@ -34,7 +34,8 @@ const AuthExample = () => (
         <Route exact path="/login" component={withBackground(AccountLogin)} />
         <PrivateRoute exact path="/" component={withUser(MobilizationsList)} />
         <PrivateRoute exact path="/community" component={withUser(CommunityList)} />
-        <PrivateRoute exact path="/mobilizations" component={withSidebar(MobilizationsList)} />
+        <PrivateRoute exact path="/mobilizations" component={withUser(withSidebar(MobilizationsList))} />
+        <PrivateRoute exact path="/hello" component={About} />
         <Route component={TechnicalIssues} />
       </Switch>
     </div>

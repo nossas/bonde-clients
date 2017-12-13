@@ -21,6 +21,13 @@ class CommunityListPage extends Component {
   }
 
   onClickItem (id) {
+    // Save selected community into browser's localStorage
+    window.localStorage.setItem('community', JSON.stringify({
+      list: {
+        data: [this.props.communities.filter(c => c.id === id)[0]],
+        currentId: id
+      }
+    }))
     this.props.select(id)
     this.props.history.push(paths.mobilizations())
   }

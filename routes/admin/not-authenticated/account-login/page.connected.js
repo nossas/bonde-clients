@@ -51,10 +51,9 @@ const mapActionsToProps = (dispatch, props) => ({...props,
     props.mutate({ variables: { ...values } })
       .then(({ data: { authenticate: { jwtToken } } }) => {
         if (jwtToken) {
-          dispatch(createAction(
-            authType.LOGIN_SUCCESS,
-            { credentials: { 'access-token': jwtToken } }
-          ))
+          const auth = { credentials: { 'access-token': jwtToken } }
+          dispatch(createAction(authType.LOGIN_SUCCESS, auth))
+          window.localStorage.setItem('auth', JSON.stringify(auth))
           props.history.push('/community')
         } else {
           dispatch(createAction(

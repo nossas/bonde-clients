@@ -22,8 +22,22 @@ if (__PROD__ || __TEST__) {
   Raven.config(process.env.SENTRY_DSN_PUBLIC).install()
 }
 
+// Set up redux initial state
+const hydrateInitialState = keys => {
+  const extracted = {}
+  keys.forEach(key => {
+    const data = window.localStorage.getItem(key) || '{}'
+    const parsed = JSON.parse(data)
+    if (!!Object.keys(parsed).length) {
+      extracted[key] = parsed
+    }
+  })
+  return extracted
+}
+
 const initialState = window.INITIAL_STATE || {
-  intl: { currentLocale: 'pt-BR', messages: localeData }
+  intl: { currentLocale: 'pt-BR', messages: localeData },
+  ...hydrateInitialState(['auth', 'community'])
 }
 
 // Set up React-Intl
