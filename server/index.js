@@ -1,14 +1,13 @@
 import http from 'http'
 import express from 'express'
-import request from 'request'
 
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
-import { StaticRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
+// import React from 'react'
+// import { renderToString } from 'react-dom/server'
+// import { Provider } from 'react-redux'
+// import { StaticRouter } from 'react-router-dom'
+// import { renderRoutes } from 'react-router-config'
 
-
+// import path from 'path'
 import winston from 'winston'
 import expressWinston from 'express-winston'
 import cors from 'cors'
@@ -23,23 +22,21 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from '../tools/webpack.server'
 import DefaultServerConfig from './config'
 
-
-import routes from '../routes-v1'
-import { configureStore, client } from '~client/store'
+// import routes from '../routes-v1'
+// import { configureStore } from '~client/store'
 
 require('dotenv').config()
 
 export const createServer = (config) => {
   const __PROD__ = config.nodeEnv === 'production' || config.nodeEnv === 'staging'
   const __TEST__ = config.nodeEnv === 'test'
-  let assets = null
 
   const app = express()
 
   if (__PROD__ || __TEST__) {
-    if (__PROD__) {
-      assets = require('./../build/assets.json')
-    }
+    // if (__PROD__) {
+    //   let assets = require('./../build/assets.json')
+    // }
     app.use(helmet())
     app.use(hpp())
     app.use(compression())
@@ -87,23 +84,23 @@ export const createServer = (config) => {
     res.json({hash: p.execSync('git rev-parse --short HEAD').toString().trim()})
   })
 
-  const store = configureStore(initialState)
-  const initialState = store.getState()
+  // const initialState = store.getState()
+  // const store = configureStore(initialState)
 
-  app.get('*', (req, res) => {
-    let context = {}
-    const content = renderToString(
-      <Provider store={store}>
-        <StaticRouter location={req.url} context={context}>
-          {renderRoutes(routes)}
-        </StaticRouter>
-      </Provider>
-    )
-    res.render(
-      __dirname + '/../tools/index.template.ejs',
-      { title: 'Express', data: false, content }
-    )
-  })
+  // app.get('*', (req, res) => {
+  //   let context = {}
+  //   const content = renderToString(
+  //     <Provider store={store}>
+  //       <StaticRouter location={req.url} context={context}>
+  //         {renderRoutes(routes)}
+  //       </StaticRouter>
+  //     </Provider>
+  //   )
+  //   res.render(
+  //     path.join(__dirname, '/../tools/index.template.ejs'),
+  //     { title: 'Express', data: false, content }
+  //   )
+  // })
 
   if (__PROD__) { app.use(Raven.errorHandler()) }
 
@@ -155,7 +152,6 @@ if (require.main === module) {
     lifetime: Infinity
   })
 }
-
 
 // const server = createServer({})
 // server.listen(3005, err => {

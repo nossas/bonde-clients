@@ -12,7 +12,7 @@ import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
   componentDidMount () {
-    const {  match: { params }, mobilization } = this.props
+    const { match: { params }, mobilization } = this.props
     const promises = []
 
     !mobilization && promises.push(

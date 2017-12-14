@@ -21,7 +21,7 @@ class Application extends React.Component {
   }
 
   render () {
-    const { children, loading, route } = this.props
+    const { children, loading } = this.props
     return (
       <div>
         <Helmet

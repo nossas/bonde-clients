@@ -6,11 +6,9 @@ import * as paths from '~client/paths'
 import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
-import * as CommunityActions from '~client/community/action-creators'
-import * as CommunitySelectors from '~client/community/selectors'
 
 class CommunityListPage extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.asyncFetch()
   }
 

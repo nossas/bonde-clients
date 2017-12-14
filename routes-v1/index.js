@@ -1,17 +1,8 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import '~client/styles/main.scss'
 
-import BackgroundContainer from '~routes/admin/not-authenticated/background.connected'
-import CurrentUserContainer from '~routes/admin/authenticated/container'
 import { TechnicalIssues } from '~client/components/error/index.js'
 import PrivateRoute from '~root/routes-v1/private-route'
 
@@ -32,12 +23,12 @@ const AuthExample = () => (
   <Router>
     <div>
       <Switch>
-        <Route exact path="/login" component={withBackground(AccountLogin)} />
-        <PrivateRoute exact path="/" component={withUser(MobilizationsList)} />
-        <PrivateRoute exact path="/community" component={withUser(CommunityList)} />
-        <PrivateRoute exact path="/mobilizations" component={withUser(withSidebar(MobilizationsList))} />
-        <PrivateRoute exact path="/mobilizations/:mobilization_id/edit" component={withUser(withSidebar(MobilizationsEdit))} />
-        <PrivateRoute exact path="/hello" component={About} />
+        <Route exact path='/login' component={withBackground(AccountLogin)} />
+        <PrivateRoute exact path='/' component={withUser(MobilizationsList)} />
+        <PrivateRoute exact path='/community' component={withUser(CommunityList)} />
+        <PrivateRoute exact path='/mobilizations' component={withUser(withSidebar(MobilizationsList))} />
+        <PrivateRoute exact path='/mobilizations/:mobilization_id/edit' component={withUser(withSidebar(MobilizationsEdit))} />
+        <PrivateRoute exact path='/hello' component={About} />
         <Route component={TechnicalIssues} />
       </Switch>
     </div>

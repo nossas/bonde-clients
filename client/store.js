@@ -30,7 +30,7 @@ networkInterface.use([
       cookie.plugToRequest(req)
 
       const localStorageAuth = window.localStorage.getItem('auth')
-      const auth = !!localStorageAuth ? JSON.parse(localStorageAuth) : {}
+      const auth = localStorageAuth ? JSON.parse(localStorageAuth) : {}
       if (auth && auth.credentials && requiredAuth) {
         req.options.headers.authorization = `Bearer ${auth.credentials['access-token']}`
       }

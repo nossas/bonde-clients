@@ -1,17 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
-
-import { BrowserRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import { ApolloProvider } from 'react-apollo'
 import { Provider } from 'react-redux'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
 import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
-import localeData from '~root/intl/locale-data'
 import Raven from 'raven-js'
 
+import localeData from '~root/intl/locale-data'
 import App from '~root/routes-v1'
 import { configureStore, client } from '~client/store'
 
@@ -28,7 +25,7 @@ const hydrateInitialState = keys => {
   keys.forEach(key => {
     const data = window.localStorage.getItem(key) || '{}'
     const parsed = JSON.parse(data)
-    if (!!Object.keys(parsed).length) {
+    if (Object.keys(parsed).length > 0) {
       extracted[key] = parsed
     }
   })
@@ -50,7 +47,6 @@ const { intl } = intlProvider.getChildContext()
 
 // Set up Redux store
 export const store = configureStore(initialState, { intl })
-const { dispatch, getState } = store
 
 const AppRouter = () => {
   return (

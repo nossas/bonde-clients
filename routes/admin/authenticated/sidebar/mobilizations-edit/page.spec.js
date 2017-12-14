@@ -9,12 +9,12 @@ import Page from '~routes/admin/authenticated/sidebar/mobilizations-edit/page'
 describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   let page
   const defaultProps = {
-    mobilization: {}
+    mobilization: {},
+    match: {}
   }
-  const context = { router: {} }
 
   beforeEach(() => {
-    page = shallow(<Page {...defaultProps} />, { context })
+    page = shallow(<Page {...defaultProps} />)
   })
 
   it('should render without crashed', () => {

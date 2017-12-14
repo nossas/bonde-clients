@@ -28,19 +28,19 @@ const PrivateRoute = ({
       const isCommunity = pathname.match(/\/community\/?/)
       const isMobilizations = pathname.match(/\/mobilizations\/?/)
 
-      const mobilizationsPathname = isRoot && !isMobilizations
-      const communityPathname = !isCommunity
+      const redir = destination => ({
+        '/mobilizations': authenticated && hasCommunity && isRoot && !isMobilizations,
+        '/community': authenticated && !hasCommunity && !isCommunity,
+        '/login': !authenticated
+      }[destination])
 
-      if (authenticated && hasCommunity && mobilizationsPathname) {
+      if (redir('/mobilizations')) {
         return <Redirect {...props} pathname='/mobilizations' />
-      }
-      else if (authenticated && !hasCommunity && communityPathname) {
+      } else if (redir('/community')) {
         return <Redirect {...props} pathname='/community' />
-      }
-      else if (!authenticated) {
+      } else if (redir('/login')) {
         return <Redirect {...props} pathname='/login' />
-      }
-      else {
+      } else {
         return <Component {...props} />
       }
     }}

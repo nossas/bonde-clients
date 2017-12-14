@@ -11,7 +11,8 @@ describe('routes/admin/authenticated/external/community-list/page', () => {
     communities: [{ id: 1 }],
     user: { first_name: 'Foo Bar' },
     // Actions
-    select: mock.noop
+    select: mock.noop,
+    asyncFetch: mock.noop
   }
 
   it('should render without crashed', () => {
