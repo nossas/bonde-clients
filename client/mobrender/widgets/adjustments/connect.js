@@ -20,12 +20,24 @@ const adjustFields = (fields) => {
   return adjusts
 }
 
-const validate = (values) => {
+const validate = (values, { intl }) => {
   const errors = {}
+  if (!values.call_to_action) {
+    errors.call_to_action = intl.formatMessage({
+      id: 'adjustmentnsForm.validate.call_to_action.required',
+      defaultMessage: 'Insira o título da widget'
+    })
+  }
   if (!values.button_text) {
-    errors.button_text = 'Insira o texto do botão'
+    errors.button_text = intl.formatMessage({
+      id: 'adjustmentnsForm.validate.button_text.required',
+      defaultMessage: 'Insira o texto do botão'
+    })
   } else if (values.button_text.length > 50) {
-    errors.button_text = 'O limite de caracteres foi atingido.'
+    errors.button_text = intl.formatMessage({
+      id: 'adjustmentnsForm.validate.button_text.length',
+      defaultMessage: 'O limite de caracteres foi atingido.'
+    })
   }
   return errors
 }
