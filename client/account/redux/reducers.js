@@ -18,11 +18,6 @@ export default (state = initialState, action = {}) => {
     case t.LOGIN_REQUEST:
       return { ...state, isLoading: true }
     case t.LOGIN_SUCCESS:
-      const { credentials, user } = action.payload
-
-      cookie.save('auth',
-        { auth: { credentials, user } }
-      )
       return { ...state, isLoading: false, error: undefined, ...action.payload }
     case t.LOGIN_FAILURE:
       return { ...state, isLoading: false, error: action.payload }
