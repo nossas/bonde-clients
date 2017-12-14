@@ -11,6 +11,21 @@ import * as paths from '~client/paths'
 import Mobilization from '~client/mobrender/components/mobilization.connected'
 
 export class MobilizationsEditPage extends Component {
+  componentDidMount () {
+    const {  match: { params }, mobilization } = this.props
+    const promises = []
+
+    !mobilization && promises.push(
+      this.props.selectMobilization(params.mobilization_id)
+    )
+
+    if (this.props.mobilizationIsNeedReload) {
+      promises.push(this.props.asyncFetchBlocks(params.mobilization_id))
+      promises.push(this.props.asyncFetchWidgets(params.mobilization_id))
+    }
+    return Promise.all(promises)
+  }
+
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
     if (blocksIsLoaded && blocks.length === 0) {

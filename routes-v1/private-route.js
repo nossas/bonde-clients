@@ -28,7 +28,7 @@ const PrivateRoute = ({
       const isCommunity = pathname.match(/\/community\/?/)
       const isMobilizations = pathname.match(/\/mobilizations\/?/)
 
-      const mobilizationsPathname = (isRoot || isCommunity) && !isMobilizations
+      const mobilizationsPathname = isRoot && !isMobilizations
       const communityPathname = !isCommunity
 
       if (authenticated && hasCommunity && mobilizationsPathname) {

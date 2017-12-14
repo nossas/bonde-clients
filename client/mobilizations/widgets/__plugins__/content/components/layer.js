@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Layer = ({ editing, onClick, state, onChange }) => (
+const Layer = ({ editing, onClick, value, setState }) => (
   <div
     style={{
       display: editing ? 'block' : 'none',
@@ -12,7 +12,7 @@ const Layer = ({ editing, onClick, state, onChange }) => (
       backgroundColor: 'rgba(0,0,0,.3)',
       zIndex: 1
     }}
-    onClick={() => onClick(state, onChange)}
+    onClick={() => onClick(value, setState)}
   />
 )
 

@@ -77,6 +77,7 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
               }
               icon='check'
               className='launched-item'
+              href='/#'
             />
           )}
           <SidenavListItem

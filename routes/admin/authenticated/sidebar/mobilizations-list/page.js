@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
 import classnames from 'classnames'
-import { browserHistory } from 'react-router'
 
 import {
   SettingsPageLayout,
@@ -32,7 +31,7 @@ export class MobilizationsListPage extends Component {
 
   handleSelectItem (mobilization) {
     this.props.select(mobilization.id)
-    browserHistory.push(paths.editMobilization(mobilization.id))
+    this.props.history.push(paths.editMobilization(mobilization.id))
   }
 
   render () {

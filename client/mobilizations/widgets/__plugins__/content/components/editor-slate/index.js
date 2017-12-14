@@ -115,7 +115,7 @@ class EditorSlate extends Component {
           <SlateContent
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150, ...contentStyles }}
-            onSelectionChange={() => {
+            onFocus={() => {
               if (!readOnly) this.setState({ editing: true })
             }}
             onKeyDown={(event, data, state) => {

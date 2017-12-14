@@ -28,10 +28,11 @@ networkInterface.use([
       const requiredAuth = req.request.operationName !== 'authenticate'
 
       cookie.plugToRequest(req)
-      const state = cookie.load('auth') || {}
-      if (state.auth && state.auth.credentials && requiredAuth) {
-        const token = state.auth.credentials['access-token']
-        req.options.headers.authorization = `Bearer ${token}`
+
+      const localStorageAuth = window.localStorage.getItem('auth')
+      const auth = !!localStorageAuth ? JSON.parse(localStorageAuth) : {}
+      if (auth && auth.credentials && requiredAuth) {
+        req.options.headers.authorization = `Bearer ${auth.credentials['access-token']}`
       }
       next()
     }
