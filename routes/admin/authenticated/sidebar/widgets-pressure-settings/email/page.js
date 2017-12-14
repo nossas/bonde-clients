@@ -47,8 +47,7 @@ class PressureSettingsEmailPage extends Component {
         pressure_body: pressureBody,
         targets: targetsField,
         disable_edit_field: disableEditField,
-        show_city: showCity,
-        show_counter: showCounter
+        show_city: showCity
       },
       intl,
       ...props
@@ -219,28 +218,6 @@ class PressureSettingsEmailPage extends Component {
             <Radio value='n'>
               <FormattedMessage
                 id='page--pressure-widget-email.form.disable-edit-field.value.no'
-                defaultMessage='Não'
-              />
-            </Radio>
-          </RadioGroup>
-        </FormGroup>
-        <FormGroup controlId='show-counter-id' {...showCounter}>
-          <ControlLabel>
-            <FormattedMessage
-              id='page--pressure-widget.form.show-counter.label'
-              defaultMessage='Mostrar contador de pressão'
-            />
-          </ControlLabel>
-          <RadioGroup>
-            <Radio value='true'>
-              <FormattedMessage
-                id='page--pressure-widget.form.show-counter.radio.yes.label'
-                defaultMessage='Sim'
-              />
-            </Radio>
-            <Radio value='false'>
-              <FormattedMessage
-                id='page--pressure-widget.form.show-counter.radio.no.label'
                 defaultMessage='Não'
               />
             </Radio>

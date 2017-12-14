@@ -22,7 +22,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
     wrapper.setProps({
       widget: {
         id: 1,
-        settings: { main_color: '#fff', show_counter: 'true' }
+        settings: { main_color: '#fff', count_text: 'pressões' }
       }
     })
     expect(wrapper.find('h2').props().style.backgroundColor).to.equal('#fff')
@@ -35,6 +35,19 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
     wrapper.setProps({ widget: { id: 1, settings: { title_text: titleText } } })
 
     expect(wrapper.find('h2').text()).to.equal(titleText)
+  })
+
+  it('should render h2 with call_to_action', () => {
+    const titleText = 'Envie um e-mail para quem quer tomar essa decisão'
+    const callToAction = 'Envie um e-mail'
+    wrapper.setProps({
+      widget: {
+        id: 1,
+        settings: { call_to_action: callToAction, title_text: titleText }
+      }
+    })
+
+    expect(wrapper.find('h2').text()).to.equal(callToAction)
   })
 
   it('should render PressureForm with pressure_subject and pressure_body', () => {
