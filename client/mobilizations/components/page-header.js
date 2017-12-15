@@ -7,7 +7,7 @@ import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { DivFloat, Button } from '~client/ux/components'
 
 const PageHeader = ({ location }) => {
-  const activePath = paths.mobilizations()
+  const activePath = `${paths.mobilizations()}/`
   const archivedPath = `${activePath}?status=archived`
   const templatesPath = paths.mobilizationTemplatesList()
 
@@ -46,7 +46,7 @@ const PageHeader = ({ location }) => {
               defaultMessage='Arquivadas'
             />
           }
-          path={archivedPath}
+          path={{ to: activePath, search: '?status=archived' }}
           isActive={archivedPath === getPathnameWithQuery()}
         />
         <Tab

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-
+import qs from 'query-string'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
 
@@ -7,10 +7,15 @@ import Page from './page'
 
 const mapStateToProps = (state, props) => {
   const selectors = MobSelectors(state, props)
-  const { location: { query } } = props
+  const { location: { search } } = props
+  const query = qs.parse(search)
   return {
     mobilizations: selectors.getMobilizations(query),
-    menuActiveIndex: selectors.getMobilizationMenuActive()
+    menuActiveIndex: selectors.getMobilizationMenuActive(),
+    location: {
+      ...props.location,
+      query
+    }
   }
 }
 
