@@ -1,5 +1,21 @@
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const webpack = require('webpack')
+const { ANALYZE } = process.env
+
 module.exports = {
   webpack: (config, { dev }) => {
+    if (ANALYZE) {
+      config.plugins.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 8888,
+        openAnalyzer: true
+      }))
+    }
+
+    config.plugins.push(new webpack.ProvidePlugin({
+      'window.jQuery': 'jquery'
+    }))
+
     config.module.rules.push(
       {
         test: /\.css$/,
@@ -27,8 +43,7 @@ module.exports = {
             name: 'assets/images/[name].[ext]'
           }
         }]
-      }
-
+      },
     )
     return config
   }
