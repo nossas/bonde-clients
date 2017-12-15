@@ -272,7 +272,7 @@ servidor-03.dominio.com`,
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
   // routepath: /community/invite
   'page--community-invite.info.title': '',
-  'page--community-invite.info.content': 'Quanto mais gente, mais potente! Para convidar outros mobilizadores, é só preencher o campo abaixo. Mas lembre-se, a galera que você convidar vai ser literalmente parte do seu bonde: com acesso aos dados da comunidade e edição das páginas.', 
+  'page--community-invite.info.content': 'Quanto mais gente, mais potente! Para convidar outros mobilizadores, é só preencher o campo abaixo. Mas lembre-se, a galera que você convidar vai ser literalmente parte do seu bonde: com acesso aos dados da comunidade e edição das páginas.',
   'page--community-invite.form.email.label': 'Enviar convite para:',
   'page--community-invite.form.email.placeholder': 'Insira aqui o email de cadastro de quem quiser convidar.',
   'page--community-invite.form.submit-button.default': 'Convidar',
@@ -372,7 +372,6 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--community-recipient.warning.content.list.li-01': 'Informe: Preencha sua conta bancária abaixo para trasferirmos automaticamente as doações recebidas por sua comunidade.',
   'page--community-recipient.warning.content.list.li-02': 'Atenção 1: Não é possível fazer a transferência de uma doação já recebida para uma nova conta bancária, sempre será utilizada a conta bancária ativa no momento da doação.',
   'page--community-recipient.warning.content.list.li-03': 'Atenção 2: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
-
   'page--community-recipient.title': 'Agendamento dos Saques',
   'page--community-recipient.form.transfer-interval.label': 'Recorrência',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
@@ -383,7 +382,6 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--community-recipient.form.transfer-day.weekly.wed': 'Quarta',
   'page--community-recipient.form.transfer-day.weekly.thu': 'Quinta',
   'page--community-recipient.form.transfer-day.weekly.fri': 'Sexta',
-
   'page--community-recipient.section--account.title': 'Conta bancária',
   'page--community-recipient.form.bank-account-type.label': 'Tipo de conta',
   'page--community-recipient.form.bank-account-type.value.checking-account': 'Corrente',
