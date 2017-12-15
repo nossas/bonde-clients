@@ -6941,10 +6941,6 @@ node-sass@^4.7.2:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
-node-uuid@1.x:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
-
 nodemon@^1.12.1:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.12.1.tgz#996a56dc49d9f16bbf1b78a4de08f13634b3878d"
@@ -8314,16 +8310,6 @@ react-router@^4, react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-s3-uploader@^4.0.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.1.1.tgz#5efa38118ac1dd1ab414baf40334f813e1d6de88"
-  dependencies:
-    aws-sdk "2.x"
-    create-react-class "^15.5.2"
-    node-uuid "1.x"
-    object-assign "^2.0.0"
-    prop-types "^15.5.8"
-
 react-s3-uploader@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.6.0.tgz#f7aac19644a61e3cc05d6ced3d3ec445e186dd12"
@@ -9209,7 +9195,7 @@ slate-editor@nossas/slate-editor#feature-slate-v0.31.3:
     react-color "^2.13.8"
     react-draggable "^3"
     react-fontawesome "^1.6.1"
-    react-s3-uploader "^4.6.0"
+    react-s3-uploader "^4.0.1"
     slate "^0.31.3"
     slate-react "^0.10.17"
 

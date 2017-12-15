@@ -9,11 +9,9 @@
     "test:ci": "yarn test --ci --silent --runInBand --logHeapUsage",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc yarn test",
-    "start:dev": "webpack-dev-server --config ./tools/webpack.dev.js",
-    "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
-    "start:prod": "node ./build/server.js",
-    "build:server": "./node_modules/.bin/webpack --colors --hide-modules --bail -p --config ./tools/webpack.server.js",
-    "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail --config ./tools/webpack.prod.js",
+    "start": "webpack-dev-server --config ./tools/webpack.dev.js",
+    "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail -p --config ./tools/webpack.prod.js",
+    "build:webviewer": "./node_modules/.bin/webpack --colors --hide-modules --bail --config ./tools/webpack.webviewer.js",
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version",
@@ -172,7 +170,10 @@
       "PagarMeCheckout",
       "confirm"
     ],
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "mob-render/webviewer/*"
+    ]
   },
   "engines": {
     "node": "~9"

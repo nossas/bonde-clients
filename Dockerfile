@@ -6,7 +6,6 @@ RUN set -x \
     && apt-get install -y --no-install-recommends git
 
 WORKDIR /code
-COPY . .
+COPY mob-render .
 EXPOSE 5001
-
-CMD ["yarn", "start:prod"]
+CMD ["./node_modules/.bin/next", "start", "-p", "5001"]

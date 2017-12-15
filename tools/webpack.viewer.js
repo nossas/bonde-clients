@@ -3,30 +3,44 @@ dotenv.config()
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const Visualizer = require('webpack-visualizer-plugin')
+
 const sourcePath = path.join(__dirname, './../client/')
-const staticsPath = path.join(__dirname, './../public/')
+const staticsPath = path.join(__dirname, './../mob-render/webviewer/')
+const fs = require('fs')
 
 const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
 
+function getExternals () {
+  const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
+  return nodeModules.reduce(function (ext, mod) {
+    ext[mod] = 'commonjs ' + mod
+    return ext
+  }, {})
+}
+
 module.exports = {
+  devtool: 'source-map',
   context: sourcePath,
+  target: 'node',
+  target: 'node',
+  externals: getExternals(),
   node: {
     fs: 'empty'
   },
-  externals: [
-    {
-      './cptable': 'var cptable'
-    }
-  ],
-  entry: {
-    main: [
-      './index.js'
-    ]
-  },
+  // externals: [
+  //   {
+  //     './cptable': 'var cptable'
+  //   }
+  // ],
+  entry: '../client/mobrender/components/index.js',
   output: {
     path: staticsPath,
-    filename: '[name].[hash].js',
-    publicPath: isProd ? `https://s3-sa-east-1.amazonaws.com/${process.env.AWS_BUCKET}/` : '/'
+    filename: 'webviewer.js',
+    publicPath: '/',
+    library: 'webviewer',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   resolve: {
     alias: {
@@ -108,7 +122,39 @@ module.exports = {
       BOT_URL: JSON.stringify(process.env.BOT_URL)
     }),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true})
+    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true}),
+    // new AssetsPlugin({ filename: './build/assets.json' }),
+    // new webpack.HashedModuleIdsPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   beautify: false,
+    //   comments: false,
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: true,
+    //     screw_ie8: true
+    //   },
+    //   mangle: {
+    //     screw_ie8: true,
+    //     keep_fnames: true
+    //   },
+    //   output: {
+    //     comments: false,
+    //     screw_ie8: true
+    //   }
+    // }),
+    // new CompressionPlugin({
+    //   asset: '[path][query]',
+    //   algorithm: 'gzip',
+    //   test: /\.js$|\.css$$/,
+    //   minRatio: 0.8
+    // }),
+    new Visualizer({
+      filename: './build/webviewer.stats.html'
+    })
   ],
 
   performance: isProd && {
