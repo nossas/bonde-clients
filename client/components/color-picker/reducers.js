@@ -8,7 +8,7 @@ const initialState = {
   color: undefined
 }
 
-const ColorPickerReducer = (state = initialState, action) => {
+const ColorPickerReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_SELECTED_COLOR:
       return {

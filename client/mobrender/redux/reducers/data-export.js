@@ -6,7 +6,7 @@ const initialState = {
   error: undefined
 }
 
-export default function dataExport (state = initialState, action) {
+export default function dataExport (state = initialState, action = {}) {
   switch (action.type) {
     case t.EXPORT_DATACLIP_REQUEST:
       return { ...state, loading: true }

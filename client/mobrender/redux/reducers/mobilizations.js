@@ -12,7 +12,7 @@ export const initialState = {
   communityId: undefined
 }
 
-export default (state = initialState, action) => {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case t.ADD_MOBILIZATION_REQUEST:
     case t.UPDATE_MOBILIZATION_REQUEST:

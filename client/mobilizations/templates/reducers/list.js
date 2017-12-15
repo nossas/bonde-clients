@@ -9,7 +9,7 @@ export const initialState = {
   templateId: undefined
 }
 
-const MobilizationTemplatesReducer = (state = initialState, action) => {
+const MobilizationTemplatesReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case t.REQUEST_TEMPLATE_CREATE:
       return { ...state, loading: true }
