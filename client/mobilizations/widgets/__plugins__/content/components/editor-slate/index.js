@@ -63,8 +63,8 @@ class EditorSlate extends Component {
   }
 
   handleCancelEditionMode (state, setState) {
-    const initialRaw = JSON.stringify(Raw.serialize(this.state.initialState))
-    const raw = JSON.stringify(Raw.serialize(state))
+    const initialRaw = Plain.serialize(this.state.initialState)
+    const raw = Plain.serialize(state)
     if (initialRaw !== raw) {
       if (window.confirm(this.props.intl.formatMessage({
         id: 'c--editor-slate.button-cancel.message',
