@@ -10,7 +10,7 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
 import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
-import localeData from '../intl/locale-data'
+import localeData from './../locale-data'
 
 const APP_DOMAIN = 'localhost:8000'
 const API_URL = 'https://api.staging.bonde.org'
