@@ -2,14 +2,14 @@ export default {
   // page account login
   // filepath: /routes/admin/not-authenticated/account-login/page.js
   // routepath: /login
-  'page--account-login.label.email': 'E-mail',
+  'page--account-login.label.email': 'Email',
   'page--account-login.label.password': 'Senha',
   'page--account-login.placeholder.email': 'exemplo@email.com',
   'page--account-login.loading': 'Carregando...',
   'page--account-login.signin': 'Entrar',
-  'page--account-login.ask-register': 'Ainda não é cadastrado?',
-  'page--account-login.cta-signup': 'Clique para criar uma conta.',
-  'page--account-login.auth.error-message': 'Senha incorreta.',
+  'page--account-login.ask-register': 'Ainda não se cadastrou?',
+  'page--account-login.cta-signup': 'Clique para entrar no BONDE',
+  'page--account-login.auth.error-message': 'Senha incorreta...',
   'page--account-login.auth.error-message.retrieve-password.link': 'Esqueceu sua senha?',
 
   // page account login (connected)
@@ -22,32 +22,32 @@ export default {
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
   // routepath: /register
-  'page--account-register.title': 'Crie sua conta no Bonde.',
-  'p--account-retrieve.title.first-line': 'Qual seu email cadastrado?',
-  'p--account-retrieve.title.second-line': 'Vamos enviar uma nova senha para você.',
+  'page--account-register.title': 'Crie sua conta no BONDE.',
+  'p--account-retrieve.title.first-line': 'Relaxa, vamos enviar uma nova senha pra você :)',
+  'p--account-retrieve.title.second-line': 'Preencha o campo abaixo com seu email de login:',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
   'page--account-register.form.name.validation.required': 'Informe seu nome',
   'page--account-register.form.lastname.label': 'Sobrenome',
-  'page--account-register.form.lastname.placeholder': 'Sobrenome',
-  'page--account-register.form.email.label': 'E-mail',
+  'page--account-register.form.lastname.placeholder': 'Seu sobrenome',
+  'page--account-register.form.email.label': 'Email',
   'page--account-register.form.email.placeholder': 'exemplo@email.com.br',
-  'page--account-register.form.email.validation.required': 'Informe seu e-mail',
-  'page--account-register.form.email.validation.invalid-email-format': 'E-mail inválido',
+  'page--account-register.form.email.validation.required': 'Informe seu email',
+  'page--account-register.form.email.validation.invalid-email-format': 'Email inválido',
   'page--account-register.form.password.label': 'Senha',
-  'page--account-register.form.password.label.validation.required': 'Informe uma senha',
-  'page--account-register.form.password.label.validation.min-length': 'Sua senha precisa ter um minímo de 8 caracteres.',
+  'page--account-register.form.password.label.validation.required': 'Crie uma senha',
+  'page--account-register.form.password.label.validation.min-length': 'Sua senha precisa ter no mínimo 8 caracteres',
   'page--account-register.form.password-confirm.label': 'Confirme sua senha',
-  'page--account-register.form.password-confirm.label.validation.match': 'Senha não confere',
+  'page--account-register.form.password-confirm.label.validation.match': 'Ops, não deu "match"',
   'page--account-register.form.submit-button.default': 'Criar conta',
   'page--account-register.form.submit-button.saving': 'Salvando...',
 
   // page account retrieve password
   // filepath: /routes/admin/not-authenticated/account-retrieve/page.connected.js
   // routepath: /account/retrieve
-  'p--account-retrieve.form.email.validation.required': 'Informe seu e-mail',
-  'p--account-retrieve.form.email.validation.invalid-email-format': 'E-mail inválido',
-  'p--account-retrieve.form.email.label': 'E-mail',
+  'p--account-retrieve.form.email.validation.required': 'Informe seu email',
+  'p--account-retrieve.form.email.validation.invalid-email-format': 'Email inválido',
+  'p--account-retrieve.form.email.label': 'Email',
   'p--account-retrieve.form.email.placeholder': 'exemplo@email.com.br',
   'p--account-retrieve.form.submit-button.sending': 'Enviando...',
   'p--account-retrieve.form.submit-button.default': 'Enviar',
@@ -56,35 +56,35 @@ export default {
   // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
   // routepath: /account/edit
   'page--account-edit.header.title': 'Minha conta',
-  'page--account-edit.header.tabs.user': 'Usuário',
+  'page--account-edit.header.tabs.user': 'Perfil',
   'page--account-edit.form.name.label': 'Nome',
   'page--account-edit.form.lastname.label': 'Sobrenome',
-  'page--account-edit.form.email.label': 'E-mail',
+  'page--account-edit.form.email.label': 'Email',
 
   // page subscription edit
   // filepath: /routes/public/subscription-edit/page.js
   // routepath: /subscriptions/:id/edit
-  'page--subscription-edit.title': 'Dados da Doação',
-  'page--subscription-edit.helper-text': 'Selecione abaixo qual informação da sua doação quer alterar:',
+  'page--subscription-edit.title': 'Sua doação',
+  'page--subscription-edit.helper-text': 'O que você quer mudar na sua doação?',
   'page--subscription-edit.button.creditcard': 'Cartão de crédito',
   'page--subscription-edit.button.recurring': 'Data da doação',
-  'page--subscription-edit.cancel-subscription.confirm': 'Você está prestes a cancelar sua assinatura. Tem certeza que quer continuar?',
-  'page--subscription-edit.link.cancel-subscription': 'Quero cancelar a minha assinatura.',
+  'page--subscription-edit.cancel-subscription.confirm': 'Você está prestes a cancelar seu apoio. Tem certeza que quer continuar?',
+  'page--subscription-edit.link.cancel-subscription': 'Quero cancelar a minha doação.',
 
   // form subscription credit card
   // filepath: /client/subscriptions/forms/credit-card-form.js
   // routepath: /subscriptions/:id/edit
-  'form--subscription-creditcard.helper-text': 'Altere os dados do seu cartão de crédito preenchendo os campos abaixo. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
+  'form--subscription-creditcard.helper-text': 'Preencha os campos abaixo para alterar o cartão da sua doação:',
 
   'form--subscription-creditcard.previous-data.title': 'Dados do último cartão',
   'form--subscription-creditcard.previous-data.name': 'Nome',
-  'form--subscription-creditcard.previous-data.expiration-date': 'Validade',
+  'form--subscription-creditcard.previous-data.expiration-date': 'Data de validade',
 
   'form--subscription-creditcard.form.number.label': 'Número',
   'form--subscription-creditcard.form.number.placeholder': 'Ex: 0000 0000 0000 0000',
   'form--subscription-creditcard.form.name.label': 'Nome',
   'form--subscription-creditcard.form.name.placeholder': '(igual ao que aparece no cartão)',
-  'form--subscription-creditcard.form.expiration-date.label': 'Validade',
+  'form--subscription-creditcard.form.expiration-date.label': 'Data de validade',
   'form--subscription-creditcard.form.expiration-date.placeholder': '00/00',
   'form--subscription-creditcard.form.cvv.label': 'CVV',
   'form--subscription-creditcard.form.cvv.placeholder': 'Ex: 000',
@@ -94,8 +94,8 @@ export default {
   // form subscription recurring
   // filepath: /client/subscriptions/forms/recurring-form.js
   // routepath: /subscriptions/:id/edit
-  'form--subscription-recurring.helper-text': 'Preencha os campos abaixo para alterar a data em que a cobrança da sua doação é efetuada. Sua doação continuará a mesma mas, a partir do momento em que salvar os dados abaixo, o valor será cobrado neste novo cartão ; )',
-  'form--subscription-recurring.form.process-at.label': 'Nova data de cobrança',
+  'form--subscription-recurring.helper-text': 'Preencha os campos abaixo para alterar o dia do mês em que sua doação recorrente é processada:',
+  'form--subscription-recurring.form.process-at.label': 'Nova data',
   'form--subscription-recurring.form.process-at.placeholder': 'Ex: DD/MM/AAAA',
   'form--subscription-recurring.form.submit-button.text': 'Salvar',
   'form--subscription-recurring.form.validation.required': 'Obrigatório',
@@ -110,42 +110,41 @@ export default {
   //   - /subscriptions/:id/edit
   //   - /community/invite
   'notification--generic-request-error.title': 'Ops!',
-  'notification--generic-request-error.message': 'Parece que teve algum problema técnico nessa última requisição. Pedimos que tente de novo daqui a pouco.',
+  'notification--generic-request-error.message': 'Confira se preencheu os campos certinho, se o problema continuar tente de novo daqui a pouco ;)',
 
   'notification--generic-save-success.title': 'Oba!',
-  'notification--generic-save-success.message': 'A requisição foi feita com sucesso e, os seus dados estão salvos em segurança.',
-
+  'notification--generic-save-success.message': 'Dados salvos com sucesso :)',
   'notification--slug-updated-message.title': 'Importante',
-  'notification--slug-updated-message.message': 'O slug da sua mobilização foi alterado. Se você faz algum redirecionamento de DNS via CNAME, não se esqueça de atualizá-lo.',
+  'notification--slug-updated-message.message': 'O identificador (slug) da sua página foi alterado. Se você faz algum redirecionamento de DNS via CNAME, não se esqueça de atualizá-lo.',
 
-  'notification--message-pressure-targets-remove-all.title': 'Lembre-se...',
-  'notification--message-pressure-targets-remove-all.message': 'Não se esqueça que você precisa clicar no botão salvar, no canto superior direito da tela pra que a ação seja permanente. Se quiser reverter os alvos removidos, basta atualizar a página. (:',
+  'notification--message-pressure-targets-remove-all.title': 'Atenção',
+  'notification--message-pressure-targets-remove-all.message': 'Lembre-se que você precisa clicar no botão salvar, no canto superior direito da tela, para que os alvos sejam atualizados na ferramenta ;)',
 
-  'notification--account-password-retrieve-success.title': 'Recuperação de senha',
-  'notification--account-password-retrieve-success.message': 'Acabamos de enviar um email com a sua nova senha. Confira na caixa de entrada do seu email para acessar o BONDE novamente. Relaxe pois, pode alterar essa senha quando você quiser, nas configurações da sua conta.',
+  'notification--account-password-retrieve-success.title': 'Pronto!',
+  'notification--account-password-retrieve-success.message': 'Acabamos de te enviar um email com uma nova senha. Confira sua caixa de entrada e use ela para fazer login ;)',
 
   'notification--community-invite-success.title': 'Oba!',
-  'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Mais um passo foi dado pra sua comunidade crescer ainda mais (:',
+  'notification--community-invite-success.message': 'O convite para {email} foi enviado com sucesso! Seu BONDE tá crescendo :)',
 
   'notification--subscription-cancel-success.title': 'Assinatura cancelada',
-  'notification--subscription-cancel-success.message': 'Sua assinatura foi cancelada e, o valor da sua doação não será debitado até que você faça uma nova doação recorrente.',
+  'notification--subscription-cancel-success.message': 'Obrigado pelo seu apoio até aqui - e esperamos que volte a nos apoiar novamente! ',
 
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
   // routepath: /community/domain
-  'notify.community.check--dns--success.title': 'Uhuu!',
-  'notify.community.check--dns--success.text': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
-  'notify.community.check--dns--failure.title': 'Ooops!',
-  'notify.community.check--dns--failure.text': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
-  'notify.community.add--dns-hosted-zone--failure.title': 'Ooops!',
-  'notify.community.add--dns-hosted-zone--failure.text': 'Ocorreu um erro no servidor, verifique se este domínio já não foi inserido.',
+  'notify.community.check--dns--success.title': 'Boa!',
+  'notify.community.check--dns--success.text': 'Os servidores DNS foram sincronizados com sucesso! Agora você pode configurar domínios e emails na sua comunidade :)',
+  'notify.community.check--dns--failure.title': 'Ops...',
+  'notify.community.check--dns--failure.text': 'A sincronização de servidores DNS ainda está pendente. Se você já alterou eles no site em que comprou, tente de novo daqui a pouco.',
+  'notify.community.add--dns-hosted-zone--failure.title': 'Ops...',
+  'notify.community.add--dns-hosted-zone--failure.text': 'Ocorreu um erro, verifique se este domínio já não foi inserido.',
 
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
   // routepath: /community
   'page--community-list.title': 'Olá {name},',
-  'page--community-list.subtitle': 'Escolha uma das suas comunidades',
-  'page--community-list.or': 'ou {link}',
+  'page--community-list.subtitle': 'Em qual comunidade você quer causar?',
+  'page--community-list.or': '{link}',
   'page--community-list.new': 'Crie uma nova comunidade',
 
   // component community settings menu
@@ -157,18 +156,18 @@ export default {
   //   - /community/mailchimp
   //   - /community/recipient
   //   - /community/report
-  'community.components--settings-menu.title': 'Configurações da comunidade',
+  'community.components--settings-menu.title': 'Configurações da sua comunidade',
   'community.components--settings-menu.tabs.info': 'Informações',
   'community.components--settings-menu.tabs.mobilizers': 'Mobilizadores',
-  'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
-  'community.components--settings-menu.tabs.recipient': 'Recebedor',
+  'community.components--settings-menu.tabs.mailchimp': 'Integração com Mailchimp',
+  'community.components--settings-menu.tabs.recipient': 'Conta bancária',
   'community.components--settings-menu.tabs.metrics': 'Métricas',
   'community.components--settings-menu.tabs.domains': 'Domínios',
 
   // component community domain preview
   // filepath: /client/community/components/dns/dns-preview/domain-preview.js
   // routepath: /community/domain/add
-  'community.components--domain-preview.li.domain.header': 'Domínio da comunidade',
+  'community.components--domain-preview.li.domain.header': 'Qual domínio quer adicionar à sua comunidade?',
 
   // component community subdomain preview and form
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
@@ -205,10 +204,10 @@ servidor-03.dominio.com`,
   // page community domain
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
-  'page--community-domain.form.validation.required': 'Preenchimento obrigatório',
+  'page--community-domain.form.validation.required': 'Campo obrigatório',
 
-  'page--community-domain.header.info.title': 'Informação',
-  'page--community-domain.header.info.text': 'Abaixo, encontra-se a lista de domínios já cadastrados. Após alteração e ativação dos servidores DNS, torna-se possível publicar uma mobilização muito mais rápido, além de gerenciar os subdomínios externos cadastrados.',
+  'page--community-domain.header.info.title': '',
+  'page--community-domain.header.info.text': 'Esta é a lista de domínios cadastrados na sua comunidade. Quando for publicar uma página, vai poder usar eles como endereços ou criar subdomínios de maneira bem fácil e rápida :) Se algum domínio da sua lista estiver com um "X", certifique-se de ter alterado direitinho os servidores DNS conforme orientamos.',
 
   'page--community-domain.domain-preview.success-icon.title': 'Servidores DNS ativos',
   'page--community-domain.domain-preview.failure-icon.title': 'Aguardando alteração dos servidores DNS',
@@ -234,7 +233,7 @@ servidor-03.dominio.com`,
   'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
   'page--community-domain-create.step-add.form.domain-name.label': 'Domínio da sua comunidade',
   'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ex. minhacomunidade.org',
-  'page--community-domain-create.step-add.form.domain-name.validation.required': 'Domínio é obrigatório.',
+  'page--community-domain-create.step-add.form.domain-name.validation.required': 'Campo obrigatório.',
   'page--community-domain-create.step-add.form.domain-name.validation.invalid-domain-format': 'Domínio inválido',
   'page--community-domain-create.step-add.form.cancel-button.text': 'Cancelar',
   'page--community-domain-create.step-add.form.button.text': 'Adicionar',
@@ -255,34 +254,34 @@ servidor-03.dominio.com`,
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
-  'page--community-info.form.successMessage': 'Informações básicas inseridas com sucesso',
-  'page--community-info.form.logo.label': 'Logo',
-  'page--community-info.form.name.label': 'Nome',
+  'page--community-info.form.successMessage': 'Dados salvos com sucesso :)',
+  'page--community-info.form.logo.label': 'Logo da sua comunidade',
+  'page--community-info.form.name.label': 'Nome da comunidade',
   'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
-  'page--community-info.form.name.validation.required': 'Informe o nome da comunidade',
+  'page--community-info.form.name.validation.required': 'Campo obrigatório',
   'page--community-info.form.description.label': 'Descrição',
-  'page--community-info.form.description.placeholder': 'Insira uma descrição para a sua comunidade',
+  'page--community-info.form.description.placeholder': 'Para que sua comunidade vem ao mundo?',
   'page--community-info.form.city.label': 'Cidade',
   'page--community-info.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
-  'page--community-info.form.custom-from-email.label': 'E-mail de resposta para notificações',
-  'page--community-info.form.custom-from-email.helper-text': 'Esse email é utilizado como remetente padrão das notificações.',
-  'page--community-info.form.custom-from-email.placeholder': 'Ex: Nome do remetente <remetente@provedor.com>',
-  'page--community-info.form.custom-from-email.validation.invalid-email-format': 'E-mail de resposta fora do formato padrão',
+  'page--community-info.form.custom-from-email.label': 'Email padrão para comunicação',
+  'page--community-info.form.custom-from-email.helper-text': 'Esse email é utilizado como remetente padrão das comunicações enviadas através do BONDE.',
+  'page--community-info.form.custom-from-email.placeholder': 'Insira neste formato: Nome do remetente<remetente@email.com>',
+  'page--community-info.form.custom-from-email.validation.invalid-email-format': 'Formato inválido',
 
   // page community invite
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
   // routepath: /community/invite
-  'page--community-invite.info.title': 'Informação',
-  'page--community-invite.info.content': 'Convide novos usuários para fazerem parte da sua comunidade, eles terão acesso as mesmas informações que o você possui.{br}Utilizando o formulário abaixo, você envia o convite por e-mail.',
-  'page--community-invite.form.email.label': 'Email',
-  'page--community-invite.form.email.placeholder': 'Insira um email para convidar. Ex: mobilizador@email.com',
+  'page--community-invite.info.title': '',
+  'page--community-invite.info.content': 'Quanto mais gente, mais potente! Para convidar outros mobilizadores, é só preencher o campo abaixo. Mas lembre-se, a galera que você convidar vai ser literalmente parte do seu bonde: com acesso aos dados da comunidade e edição das páginas.', 
+  'page--community-invite.form.email.label': 'Enviar convite para:',
+  'page--community-invite.form.email.placeholder': 'Insira aqui o email de cadastro de quem quiser convidar.',
   'page--community-invite.form.submit-button.default': 'Convidar',
 
   // page community invite (connected)
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.connected.js
   // routepath: /community/invite
   'page--community-invite.form.email.validation.required': 'Obrigatório',
-  'page--community-invite.form.email.validation.invalid': 'Informe um email válido',
+  'page--community-invite.form.email.validation.invalid': 'Email inválido',
 
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
@@ -306,27 +305,27 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   'ux.components--settings-form.button.text': 'Salvar',
-  'ux.components--settings-form.success-message': 'Dados editados com sucesso',
+  'ux.components--settings-form.success-message': 'Dados salvos com sucesso :)',
 
   // page community mailchimp
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
-  'page--community-mailchimp.warning.title': 'Atenção',
+  'page--community-mailchimp.warning.title': 'Integração com Mailchimp',
   'page--community-mailchimp.warning.content': `
-Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.
+Se você tem uma conta no Mailchimp, pode integrá-la à sua comunidade. Assim, vão ser criados "segmentos estáticos" lá com os usuários que agirem em alguma página que criou aqui no BONDE. A gente captura os dados e integra eles pra você poder se comunicar e reengajar essa galera!
 {br}
-Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)
+Os segmentos criados no Mailchimp a partir do BONDE seguem o seguinte formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)
 {br}{br}
-Caso sua base de ações não esteja sincronizada com o mailchimp, você pode forçar a sincronia no botão abaixo:`,
+Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode forçar a sincronia no botão abaixo:`,
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
-  'page--community-mailchimp.form.api-key.helper-text.title': 'Onde buscar essa informação?',
-  'page--community-mailchimp.form.api-key.helper-text.step-01': 'Após fazer o login como administrador no mailchimp, clique no seu nome de usuário. Surgirá um menu, clique na opção {accountStrong}.',
-  'page--community-mailchimp.form.api-key.helper-text.step-02': 'Siga os passos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}',
-  'page--community-mailchimp.form.api-key.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo de {apiKeyStrong}.',
+  'page--community-mailchimp.form.api-key.helper-text.title': 'Onde encontro essa informação?',
+  'page--community-mailchimp.form.api-key.helper-text.step-01': 'Faça login na sua conta no Mailchimp e clique no seu nome de usuário. Você vai ver um menu surgir, clique na opção {accountStrong}.',
+  'page--community-mailchimp.form.api-key.helper-text.step-02': 'Depois, siga os passos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}',
+  'page--community-mailchimp.form.api-key.helper-text.step-03': 'Agora é só copiar o código e colar no campo abaixo {apiKeyStrong}.',
   'page--community-mailchimp.form.api-key.placeholder': 'Insira aqui o conteúdo de "API key"',
   'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
-  'page--community-mailchimp.form.list-id.helper-text.title': 'Onde buscar essa informação?',
-  'page--community-mailchimp.form.list-id.helper-text.step-01': 'Após fazer o login como administrador no mailchimp, clique no seu nome de usuário. Surgirá um menu, clique na opção {listStrong}.',
+  'page--community-mailchimp.form.list-id.helper-text.title': 'Onde encontro essa informação?',
+  'page--community-mailchimp.form.list-id.helper-text.step-01': 'Faça login na sua conta no Mailchimp e clique no seu nome de usuário. Surgirá um menu, clique na opção {listStrong}.',
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
@@ -336,7 +335,7 @@ Caso sua base de ações não esteja sincronizada com o mailchimp, você pode fo
   // page community twilio settings
   // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
   // routepath: /community/twilio
-  'page--community-twilio.helper-text.title': 'Onde buscar essa informação?',
+  'page--community-twilio.helper-text.title': 'Onde encontro essa informação?',
   'page--community-twilio.helper-text.twilio-login': 'Faça login no {link}',
   'page--community-twilio.helper-text.twilio-login.link': 'site do Twilio',
 
