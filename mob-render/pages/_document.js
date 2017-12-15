@@ -1,0 +1,30 @@
+import Document from 'next/document'
+import flush from 'styled-jsx/server'
+
+export default class MyDocument extends Document {
+  render () {
+    const { nextStyle } = this.props
+
+    return (
+      <html>
+        <Head>
+          { nextStyle.tag }
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </html>
+    )
+  }
+}
+
+MyDocument.getInitialProps = function (ctx) {
+  const props = Document.getInitialProps(ctx)
+
+  props.nextStyle = flush()
+
+  return props
+}
+
+// export default MyDocument

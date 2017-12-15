@@ -4463,7 +4463,7 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-s3-uploader@^4.6.0:
+react-s3-uploader@^4.0.1, react-s3-uploader@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.6.0.tgz#f7aac19644a61e3cc05d6ced3d3ec445e186dd12"
   dependencies:

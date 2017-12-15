@@ -5,6 +5,7 @@ import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webvi
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
 import { configureStore, client } from '../store'
+import styles from './../webviewer/main.3b3e3ca1d1b88a76b379'
 
 import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
@@ -59,6 +60,7 @@ export default class extends React.Component {
         <Provider store={store}>
           <ApolloProvider store={store} client={client()}>
             <Mobilization editable={false} />
+            <style global jsx>{styles}</style>
           </ApolloProvider>
         </Provider>
       </IntlProvider>
