@@ -23,7 +23,6 @@ module.exports = {
   devtool: 'source-map',
   context: sourcePath,
   target: 'node',
-  target: 'node',
   externals: getExternals(),
   node: {
     fs: 'empty'
