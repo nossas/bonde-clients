@@ -70,8 +70,8 @@ pipeline:
     commands:
       - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
       - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+      - s3cmd --acl-public --rexclude='\.svg$|\.html$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.html$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
     secrets: [ aws_access_key_id, aws_secret_access_key ]
     when:
       status: success
