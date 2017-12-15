@@ -12,8 +12,8 @@ import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
 import localeData from './../locale-data'
 
-const APP_DOMAIN = 'localhost:8000'
-const API_URL = 'https://api.staging.bonde.org'
+const APP_DOMAIN = process.env.APP_DOMAIN !== undefined ? process.env.APP_DOMAIN : 'localhost:8000'
+const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http://localhost:3000'
 
 const initialState = {} || {
   intl: { currentLocale: 'pt-BR', messages: localeData }

@@ -10,8 +10,8 @@ import { ApolloClient, createNetworkInterface } from 'react-apollo'
 // import { logout } from '~client/account/redux/action-creators'
 import { Reducer as WebviewerReducer } from './webviewer/webviewer'
 
-const GRAPHQL_URL = 'https://data.staging.bonde.org'
-const API_URL = 'https://api.staging.bonde.org'
+const GRAPHQL_URL = process.env.GRAPHQL_URL !== undefined ? process.env.GRAPHQL_URL : 'http://localhost:3003'
+const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http://localhost:3000'
 
 const api = axios.create({ baseURL: API_URL })
 
