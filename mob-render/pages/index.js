@@ -5,7 +5,8 @@ import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webvi
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
 import { configureStore, client } from '../store'
-import styles from './../webviewer/main.3b3e3ca1d1b88a76b379'
+
+import styles from './../webviewer/main.3b3e3ca1d1b88a76b379.css'
 
 import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
@@ -43,7 +44,6 @@ export default class extends React.Component {
       : { custom_domain: host }
 
     const promises = []
-    console.log()
     promises.push(store.dispatch(MobilizationActions.asyncFilterMobilization(where)))
     promises.push(store.dispatch(MobilizationActions.asyncFilterBlock(where)))
     promises.push(store.dispatch(MobilizationActions.asyncFilterWidget(where)))
