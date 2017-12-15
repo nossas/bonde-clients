@@ -23362,7 +23362,7 @@ Object.defineProperty(exports, 'WidgetOverlay', {
   }
 });
 
-var _mobilization = __webpack_require__("./mobrender/components/mobilization.js");
+var _mobilization = __webpack_require__("./mobrender/components/mobilization.connected.js");
 
 Object.defineProperty(exports, 'Mobilization', {
   enumerable: true,
@@ -23381,6 +23381,51 @@ Object.defineProperty(exports, 'Reducer', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./mobrender/components/mobilization.connected.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__("react-redux");
+
+var _actionCreators = __webpack_require__("./mobrender/redux/action-creators/index.js");
+
+var _blockConfigMenu = __webpack_require__("./mobrender/components/block-config-menu.js");
+
+var _selectors = __webpack_require__("./mobrender/redux/selectors.js");
+
+var _selectors2 = _interopRequireDefault(_selectors);
+
+var _mobilization = __webpack_require__("./mobrender/components/mobilization.js");
+
+var _mobilization2 = _interopRequireDefault(_mobilization);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  var selectors = (0, _selectors2.default)(state, props);
+  var editing = selectors.getEditing();
+  return {
+    mobilization: selectors.getMobilization() || selectors.getMobilizations()[0],
+    blocks: selectors.getBlocks(),
+    widgets: selectors.getWidgets(),
+    blockEditionMode: editing ? editing.indexOf(_blockConfigMenu.EDIT_KEY) !== -1 : false
+  };
+};
+
+var mapActionsToProps = {
+  blockUpdate: _actionCreators.asyncUpdateBlock
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(_mobilization2.default);
 
 /***/ }),
 
@@ -24452,7 +24497,7 @@ exports.default = function (where) {
     dispatch({ type: t.FILTER_BLOCKS_REQUEST });
     return api.get(endpoint, config).then(function (response) {
       dispatch((0, _createAction.createAction)(t.FILTER_BLOCKS_SUCCESS, response.data));
-      return Promise.resolve();
+      return Promise.resolve(response.data);
     }).catch(function (failure) {
       dispatch((0, _createAction.createAction)(t.FILTER_BLOCKS_FAILURE, failure));
       return Promise.reject({ _error: 'Response ' + failure });
@@ -24495,7 +24540,7 @@ exports.default = function (query) {
 
       if (status === 200) {
         dispatch((0, _createAction.createAction)(t.FILTER_MOBILIZATIONS_SUCCESS, data));
-        return Promise.resolve();
+        return Promise.resolve(data);
       }
 
       return Promise.reject({ message: 'Request code ' + status });
@@ -24537,7 +24582,7 @@ exports.default = function (where) {
     dispatch({ type: t.FILTER_WIDGETS_REQUEST });
     return api.get(endpoint, config).then(function (response) {
       dispatch((0, _createAction.createAction)(t.FILTER_WIDGETS_SUCCESS, response.data));
-      return Promise.resolve();
+      return Promise.resolve(response.data);
     }).catch(function (failure) {
       dispatch((0, _createAction.createAction)(t.FILTER_WIDGETS_FAILURE, failure));
       Promise.reject({ _error: 'Response ' + failure });

@@ -3,11 +3,6 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
-// import cookie from 'react-cookie'
-// import DefaultServerConfig from '~server/config'
-// import createReducer from './createReducer'
-// import DevTools from './components/dev-tools'
-// import { logout } from '~client/account/redux/action-creators'
 import { Reducer as WebviewerReducer } from './webviewer/webviewer'
 
 const GRAPHQL_URL = process.env.GRAPHQL_URL !== undefined ? process.env.GRAPHQL_URL : 'http://localhost:3003'
@@ -16,26 +11,6 @@ const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http:
 const api = axios.create({ baseURL: API_URL })
 
 const middlewares = [promise]
-
-// Redux Form
-// import { reducer as form } from 'redux-form'
-// import { normalizer as creditCardForm } from '~client/subscriptions/forms/credit-card-form'
-// import { normalizer as recurringForm } from '~client/subscriptions/forms/recurring-form'
-
-// Reapop
-// import { reducer as notificationsReducer } from 'reapop'
-
-// Apollo
-// import { client } from './store'
-
-// Application
-// import auth from '~client/account/redux/reducers'
-// import wait from '~client/components/await/redux/reducers'
-// import mobilizations from '~client/mobrender/redux/reducers'
-// import community from '~client/community/reducers'
-// import colorPicker from '~client/components/color-picker/reducers'
-// import subscriptions from '~client/subscriptions/redux/reducers'
-// import intl from '../intl/redux/reducers'
 
 const sourceRequestReducerInitialState = {
   host: '',
@@ -70,18 +45,8 @@ const intlReducer = (state = intlReducerInitialState, action) => {
 export function createReducer (asyncReducers) {
   return combineReducers({
     sourceRequestReducer,
-    // form: form.normalize({
-    //   creditCardForm,
-    //   recurringForm
-    // }),
     apollo: client().reducer(),
-    // notifications: notificationsReducer(),
-    // auth,
-    // wait,
-    mobilizations: WebviewerReducer.reducer(),
-    // community,
-    // colorPicker,
-    // subscriptions,
+    mobilizations: WebviewerReducer.reducer,
     intlReducer,
     ...asyncReducers
   })
@@ -91,26 +56,6 @@ const networkInterface = createNetworkInterface({
   uri: GRAPHQL_URL,
   connectToDevTools: true
 })
-
-// networkInterface.use([
-//   {
-//     applyMiddleware (req, next) {
-//       if (!req.options.headers) {
-//         req.options.headers = {}
-//       }
-//       // Non-use auth for authenticate mutation to make a new JWT Token
-//       const requiredAuth = req.request.operationName !== 'authenticate'
-
-//       // cookie.plugToRequest(req)
-//       // const state = cookie.load('auth') || {}
-//       // if (state.auth && state.auth.credentials && requiredAuth) {
-//       //   const token = state.auth.credentials['access-token']
-//       //   req.options.headers.authorization = `Bearer ${token}`
-//       // }
-//       next()
-//     }
-//   }
-// ])
 
 export const client = (options = {}) =>
   new ApolloClient({
@@ -139,27 +84,6 @@ export function configureStore (initialState, thunkExtraArgument) {
   )
 
   store.asyncReducers = {}
-
-  // api.interceptors.response.use(
-  //   response => {
-  //     return response
-  //   },
-  //   ({ response, ...error }) => {
-  //     if (response && response.status === 401) {
-  //       store.dispatch(logout())
-  //     }
-  //     // eslint-disable-next-line prefer-promise-reject-errors
-  //     return Promise.reject({ response, ...error })
-  //   }
-  // )
-
-  // if (process.env.NODE_ENV === 'development') {
-  //   if (module.hot) {
-  //     module.hot.accept('./createReducer', () =>
-  //       store.replaceReducer(require('./createReducer').default)
-  //     )
-  //   }
-  // }
 
   return store
 }

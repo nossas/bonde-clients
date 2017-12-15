@@ -11,7 +11,7 @@ export default where => (dispatch, getState, { api }) => {
     .get(endpoint, config)
     .then(response => {
       dispatch(createAction(t.FILTER_WIDGETS_SUCCESS, response.data))
-      return Promise.resolve()
+      return Promise.resolve(response.data)
     })
     .catch(failure => {
       dispatch(createAction(t.FILTER_WIDGETS_FAILURE, failure))

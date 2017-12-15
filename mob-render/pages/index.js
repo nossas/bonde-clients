@@ -1,7 +1,7 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
 import qs from 'qs'
-import { Mobilization } from '../webviewer/webviewer'
+import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webviewer'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
 import { configureStore, client } from '../store'
@@ -32,29 +32,25 @@ export const store = configureStore(initialState, { intl })
 
 export default class extends React.Component {
   static async getInitialProps ({ req }) {
-    if (req) {
-      const host = req.headers['host']
-      // eslint-disable-next-line
-      const regex = host.match(`(.+)\.${APP_DOMAIN}`)
+    const { actions: MobilizationActions } = MobilizationReducer
+    const host = req.headers['host']
+    // eslint-disable-next-line
+    const regex = host.match(`(.+)\.${APP_DOMAIN}`)
 
-      const where = regex
-        ? { slug: regex[1].replace(/^www\./, '') }
-        : { custom_domain: host }
-      const urls = ['/mobilizations', '/blocks', '/widgets']
-      const endpoints = urls.map(endpoint =>
-        `${API_URL}${endpoint}?${qs.stringify(where)}`)
-      // fetch mobilizations
-      let res = await fetch(endpoints[0])
-      const mobilization = (await res.json())[0]
-      // fetch blocks
-      res = await fetch(endpoints[1])
-      const blocks = await res.json()
-      // fetch widgets
-      res = await fetch(endpoints[2])
-      const widgets = await res.json()
+    const where = regex
+      ? { slug: regex[1].replace(/^www\./, '') }
+      : { custom_domain: host }
 
-      return { mobilization, blocks, widgets }
-    }
+    const promises = []
+    console.log()
+    promises.push(store.dispatch(MobilizationActions.asyncFilterMobilization(where)))
+    promises.push(store.dispatch(MobilizationActions.asyncFilterBlock(where)))
+    promises.push(store.dispatch(MobilizationActions.asyncFilterWidget(where)))
+    return Promise.all(promises).then((values) => ({
+      mobilization: values[0],
+      blocks: values[1],
+      widgets: values[2]
+    }))
   }
 
   render () {
@@ -62,10 +58,10 @@ export default class extends React.Component {
       <IntlProvider locale={locale} messages={messages}>
         <Provider store={store}>
           <ApolloProvider store={store} client={client()}>
-            <Mobilization editable={false} {...this.props} />
+            <Mobilization editable={false} />
           </ApolloProvider>
         </Provider>
       </IntlProvider>
-    ) : (<h1>Not found!</h1>)
+    ) : (<h2>Loading...</h2>)
   }
 }
