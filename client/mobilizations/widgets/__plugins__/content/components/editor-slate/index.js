@@ -58,7 +58,7 @@ class EditorSlate extends Component {
     this.state = {
       editing: false,
       loading: false,
-      initialState: Plain.deserialize(props.content)
+      initialState: JSON.parse(props.content)
     }
   }
 
