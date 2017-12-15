@@ -88,6 +88,19 @@ pipeline:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
 
+  deploy-staging-non-ssl:
+    image: peloton/drone-rancher
+    group: concurrent
+    url: http://cluster.bonde.org
+    service: staging/client-non-ssl
+    docker_image: nossas/bonde-client:${DRONE_BRANCH}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
   build-client-production:
     image: node:latest
     environment:
