@@ -1,6 +1,6 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
-import qs from 'qs'
+// import fetch from 'isomorphic-fetch'
+// import qs from 'qs'
 import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webviewer'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
@@ -13,7 +13,7 @@ import en from 'react-intl/locale-data/en'
 import localeData from './../locale-data'
 
 const APP_DOMAIN = process.env.APP_DOMAIN !== undefined ? process.env.APP_DOMAIN : 'localhost:8000'
-const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http://localhost:3000'
+// const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http://localhost:3000'
 
 const initialState = {} || {
   intl: { currentLocale: 'pt-BR', messages: localeData }

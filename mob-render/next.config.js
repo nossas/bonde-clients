@@ -43,7 +43,7 @@ module.exports = {
             name: 'assets/images/[name].[ext]'
           }
         }]
-      },
+      }
     )
     return config
   }
