@@ -23,15 +23,7 @@ export default (state = initialState, action = {}) => {
       return { ...state, isLoading: false, error: action.payload }
 
     case t.LOGOUT_SUCCESS:
-      cookie.remove('auth')
-      cookie.remove('community')
-      return {
-        ...state,
-        isLoaded: false,
-        isLoading: false,
-        user: undefined,
-        credentials: undefined
-      }
+      return initialState
 
     case t.UPDATE_USER_REQUEST:
       return { ...state, saving: true }

@@ -10,6 +10,7 @@ import AccountLogin from '~routes/admin/not-authenticated/account-login/page.con
 import CommunityList from '~routes/admin/authenticated/external/community-list/page.connected'
 import MobilizationsList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
 import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
+import Logout from '~routes/admin/authenticated/logout/page.connected.js'
 
 import { withBackground, withUser, withSidebar } from '~root/routes-v1/hocs'
 
@@ -29,6 +30,7 @@ const AuthExample = () => (
         <PrivateRoute exact path='/mobilizations' component={withUser(withSidebar(MobilizationsList))} />
         <PrivateRoute exact path='/mobilizations/:mobilization_id/edit' component={withUser(withSidebar(MobilizationsEdit))} />
         <PrivateRoute exact path='/hello' component={About} />
+        <PrivateRoute exact path='/logout' component={Logout} />
         <Route component={TechnicalIssues} />
       </Switch>
     </div>
