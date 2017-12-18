@@ -12,10 +12,19 @@ export default {
   'page--account-login.auth.error-message': 'Senha incorreta.',
   'page--account-login.auth.error-message.retrieve-password.link': 'Esqueceu sua senha?',
 
+  // page account login (connected)
+  // filepath: /routes/admin/not-authenticated/account-login/page.connected.js
+  // routepath: /login
+  'p--account-login.form.email.validation.required': 'Informe seu email',
+  'p--account-login.form.email.validation.invalid': 'Email inválido',
+  'p--account-login.form.password.validation.required': 'Informe sua senha',
+
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
   // routepath: /register
   'page--account-register.title': 'Crie sua conta no Bonde.',
+  'p--account-retrieve.title.first-line': 'Qual seu email cadastrado?',
+  'p--account-retrieve.title.second-line': 'Vamos enviar uma nova senha para você.',
   'page--account-register.form.name.label': 'Nome',
   'page--account-register.form.name.placeholder': 'Seu nome',
   'page--account-register.form.name.validation.required': 'Informe seu nome',
@@ -124,13 +133,17 @@ export default {
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
   // routepath: /community/domain
-  'notify.community.check--dns--success': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
-  'notify.community.check--dns--failure': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
+  'notify.community.check--dns--success.title': 'Uhuu!',
+  'notify.community.check--dns--success.text': 'Os servidores DNS estão sincronizados, agora você pode configurar seu e-mail e outros serviços, assim como escolher o domínio da sua mobilização.',
+  'notify.community.check--dns--failure.title': 'Ooops!',
+  'notify.community.check--dns--failure.text': 'A alteração de servidores DNS ainda está pendente. Você pode tentar de novo em alguns minutos.',
+  'notify.community.add--dns-hosted-zone--failure.title': 'Ooops!',
+  'notify.community.add--dns-hosted-zone--failure.text': 'Ocorreu um erro no servidor, verifique se este domínio já não foi inserido.',
 
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
   // routepath: /community
-  'page--community-list.title': 'Olá {userFirstName},',
+  'page--community-list.title': 'Olá {name},',
   'page--community-list.subtitle': 'Escolha uma das suas comunidades',
   'page--community-list.or': 'ou {link}',
   'page--community-list.new': 'Crie uma nova comunidade',
@@ -242,6 +255,7 @@ servidor-03.dominio.com`,
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
+  'page--community-info.form.successMessage': 'Informações básicas inseridas com sucesso',
   'page--community-info.form.logo.label': 'Logo',
   'page--community-info.form.name.label': 'Nome',
   'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
@@ -259,11 +273,16 @@ servidor-03.dominio.com`,
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
   // routepath: /community/invite
   'page--community-invite.info.title': 'Informação',
-  'page--community-invite.info.content.first-line': 'Convide novos usuários para fazerem parte da sua comunidade, eles terão acesso as mesmas informações que o você possui.',
-  'page--community-invite.info.content.second-line': 'Utilizando o formulário abaixo, você envia o convite por e-mail.',
+  'page--community-invite.info.content': 'Convide novos usuários para fazerem parte da sua comunidade, eles terão acesso as mesmas informações que o você possui.{br}Utilizando o formulário abaixo, você envia o convite por e-mail.',
   'page--community-invite.form.email.label': 'Email',
   'page--community-invite.form.email.placeholder': 'Insira um email para convidar. Ex: mobilizador@email.com',
   'page--community-invite.form.submit-button.default': 'Convidar',
+
+  // page community invite (connected)
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.connected.js
+  // routepath: /community/invite
+  'page--community-invite.form.email.validation.required': 'Obrigatório',
+  'page--community-invite.form.email.validation.invalid': 'Informe um email válido',
 
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
@@ -293,8 +312,12 @@ servidor-03.dominio.com`,
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
   'page--community-mailchimp.warning.title': 'Atenção',
-  'page--community-mailchimp.warning.content.first-line': 'Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.',
-  'page--community-mailchimp.warning.content.second-line': 'Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)',
+  'page--community-mailchimp.warning.content': `
+Configure a integração com o mailchimp para que seja possível a criação de segmentos dos usuários que interagiram com o sua mobilização nele.
+{br}
+Adotamos o seguinte padrão no nome dos segmentos: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)
+{br}{br}
+Caso sua base de ações não esteja sincronizada com o mailchimp, você pode forçar a sincronia no botão abaixo:`,
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
   'page--community-mailchimp.form.api-key.helper-text.title': 'Onde buscar essa informação?',
   'page--community-mailchimp.form.api-key.helper-text.step-01': 'Após fazer o login como administrador no mailchimp, clique no seu nome de usuário. Surgirá um menu, clique na opção {accountStrong}.',
@@ -307,6 +330,22 @@ servidor-03.dominio.com`,
   'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
   'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
   'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
+  'page--community-mailchimp.form.button.save': 'Salvar',
+  'page--community-mailchimp.form.button.sync': 'Sincronizar',
+
+  // page community twilio settings
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
+  // routepath: /community/twilio
+  'page--community-twilio.helper-text.title': 'Onde buscar essa informação?',
+  'page--community-twilio.helper-text.twilio-login': 'Faça login no {link}',
+  'page--community-twilio.helper-text.twilio-login.link': 'site do Twilio',
+
+  'page--community-twilio.form.twilio-account-sid.label': 'Twilio Account SID',
+  'page--community-twilio.form.twilio-auth-token.label': 'Twilio Auth Token',
+  'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Clicar no ícone do olho',
+  'page--community-twilio.form.twilio-number.label': 'Twilio Number',
+  'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Clique em {strongPhoneNumber} (símbolo de {strongHashtag} no menu da esquerda)',
+  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escolha qual número Twilio quer usar',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
@@ -405,6 +444,8 @@ servidor-03.dominio.com`,
     // page community report
     // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
     // routepath: /community/report
+  'page--community-report.title.metrics': 'Métricas',
+  'page--community-report.title.reports': 'Relatórios',
 
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
   'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',
@@ -518,6 +559,8 @@ servidor-03.dominio.com`,
   'page--mobilizations-list.page-header.title': 'Suas Mobilizações',
   'page--mobilizations-list.more-menu-action.open': 'Abrir página',
   'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
+  'page--mobilizations-list.more-menu-action.archived': 'Arquivar',
+  'page--mobilizations-list.more-menu-action.active': 'Ativar',
 
   // component mobilizations page header
   // filepath: /client/mobilizations/components/page-header.js
@@ -527,6 +570,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--page-header.button.text': 'Nova mobilização',
   'mobilizations.components--page-header.tabs.actives': 'Ativas',
   'mobilizations.components--page-header.tabs.templates': 'Templates',
+  'mobilizations.components--page-header.tabs.archived': 'Arquivadas',
 
   // component mobilizations list item: name
   // filepath: /client/mobilizations/components/list/items/name/index.js
@@ -563,6 +607,12 @@ servidor-03.dominio.com`,
   'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
+  // component mobilizations list item: fund raising
+  // filepath: /client/mobilizations/components/list/items/copy-number.js
+  // routepath:
+  //   - /mobilizations/templates/list
+  'mobilizations.components--list.items.copy-number.header.text': 'Núm. Cópias',
+
   // component mobilizations page tab layout
   // filepath: /client/mobilizations/components/page-tab-layout.js
   // routepath:
@@ -591,6 +641,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--basics-form.name.validation.max-length': 'Seu título está muito longo!',
   'mobilizations.components--basics-form.slug.label': 'Identificador Único',
   'mobilizations.components--basics-form.slug.helper-text': 'O valor desse campo é utilizado para referenciar a mobilização no domínio do BONDE, por exemplo: {example}',
+  'mobilizations.components--basics-form.slug.helper-example': 'Ex: 123-nome-da-mob',
   'mobilizations.components--basics-form.slug.validation.required': 'Insira o identificador único da mobilização',
   'mobilizations.components--basics-form.slug.validation.max-length': 'Seu identificador único está muito longo!',
   'mobilizations.components--basics-form.goal.label': 'Objetivo',
@@ -628,6 +679,7 @@ servidor-03.dominio.com`,
   //   - /mobilizations/new
   //   - /register
   //   - /subscriptions/:id/edit
+  'components--control-buttons.cancel': 'Voltar',
   'components--control-buttons.input.value.default': 'Continuar',
   'components--control-buttons.input.value.saving': 'Salvando...',
 
@@ -677,7 +729,7 @@ servidor-03.dominio.com`,
   // routepath: /mobilizations/:mobilization_id/analytics
   'page--mobilizations-analytics.first-paragraph': 'Para acompanhar os resultados da sua mobilização, você precisa configurar uma conta no Google Analytics.',
   'page--mobilizations-analytics.second-paragraph': 'Siga os passos abaixo:',
-  'page--mobilizations-analytics.ol.create-analytics-account': ' Crie uma conta no Google Analytics {link}',
+  'page--mobilizations-analytics.ol.create-analytics-account': 'Crie uma conta no Google Analytics {analyticsLink}',
   'page--mobilizations-analytics.ol.create-analytics-account.link': 'clicando aqui',
   'page--mobilizations-analytics.ol.keep-up-with': 'Obtenha sua ID de acompanhamento no Google Analytics. É um código que começa sempre com as letras UA, que você verá após criar sua conta lá.',
   'page--mobilizations-analytics.ol.paste-ga-code': 'Copie a ID de acompanhamento e cole no campo abaixo:',
@@ -724,6 +776,7 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomínio',
   'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedamob',
   'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
+  'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Escolha...',
 
   'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Quero usar um domínio principal cadastrado na comunidade',
   'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio que deseja configurar como endereço da sua mobilização',
@@ -739,6 +792,18 @@ servidor-03.dominio.com`,
   'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
   'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
   'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'Trilho',
+
+  // component mobilizations form domain (connected)
+  // filepath: /client/mobilizations/components/form-domain.connected.js
+  // routepath:
+  //   - /mobilizations/:mobilization_id/customDomain
+  //   - /mobilizations/:mobilization_id/launch
+  'mobilizations.components--form-domain.validation.required': 'Preenchimento obrigatório',
+  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Obrigatório preencher o domínio principal',
+  'mobilizations.components--form-domain.validation.subdomain.required': 'Obrigatório preencher subdomínio',
+  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Informe um subdomínio válido',
+  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Informe um domínio válido',
 
   // component mobrender mobilization
   // filepath: /client/mobrender/components/mobilization.js
@@ -746,10 +811,12 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'mobrender.components--mobilization.footer.slogan': 'Feito pra causar. Feito com',
+  'mobrender.components--mobilization.add-block-content': 'Adicionar bloco de conteúdo',
 
   // component mobrender block config menu
   // filepath: /client/mobrender/components/block-config-menu.js
   // routepath: /mobilizations/:mobilization_id/edit
+  'mobrender.components--block-config-menu.item.duplicate': 'Duplicar bloco',
   'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
@@ -764,12 +831,17 @@ servidor-03.dominio.com`,
   'mobrender.components--block-change-background.button.save': 'Salvar',
   'mobrender.components--block-change-background.button.cancel': 'Cancelar',
 
+  // component mobrender block
+  // filepath: /client/mobrender/components/block.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'mobrender.components--block.hidden-tag': 'Escondido',
+
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'components.navigation--navbar-edition-wrapper.block': 'Bloco',
+  'components.navigation--navbar-edition-wrapper.block': 'Bloco {position}',
 
   // component mobilizations form share
   // filepath: /client/mobilizations/components/form-share.js
@@ -821,7 +893,7 @@ servidor-03.dominio.com`,
   'page--templates-list.empty-list.create-one': 'Crie a partir de uma mobilização.',
   'page--templates-list.empty-list.mobilization-list': 'Lista de mobilizações',
   'page--templates-list.more-menu-action.remove.text': 'Remover',
-  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não é possível desfazer esta ação.',
+  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não será possível desfazer esta ação.',
 
   // page templates create
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.js
@@ -831,6 +903,11 @@ servidor-03.dominio.com`,
   'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
   'page--templates-create.form.goal.label': 'Descrição',
   'page--templates-create.form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+
+  // page templates create (connected)
+  // filepath: /routes/admin/authenticated/sidebar/templates-create/page.connected.js
+  // routepath: /mobilizations/:mobilization_id/templates/create
+  'page--templates-create.form.validation.required': 'Preenchimento obrigatório',
 
   // component donation widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/settings-menu.js
@@ -842,15 +919,14 @@ servidor-03.dominio.com`,
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
   'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
   'donation.components--settings-menu.tabs.post-action': 'Pós-doação',
+  'donation.components--settings-menu.tabs.info': 'Dados para doação',
 
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
-  'page--donation-widget.header.title': 'Crie um template a partir da mobilização',
+  'page--donation-widget.form.donation-value-title': 'Clique para definir este valor como padrão.',
   'page--donation-widget.form.submit-button': 'Salvar',
   'page--donation-widget.form.success-message': 'Formulário de doação configurado com sucesso!',
-  'page--donation-widget.form.donation-title.label': 'Título do bloco de doação',
-  'page--donation-widget.form.donation-title.placeholder': 'Ex.: Escolha um valor e contribua agora!',
   'page--donation-widget.form.payment-type.label': 'Tipo de doação',
   'page--donation-widget.form.payment-type.unique': 'Única',
   'page--donation-widget.form.payment-type.recurring': 'Recorrente',
@@ -859,9 +935,11 @@ servidor-03.dominio.com`,
   'page--donation-widget.form.payment-interval.monthly': 'Mensal',
   'page--donation-widget.form.payment-interval.semiannually': 'Semestral',
   'page--donation-widget.form.payment-interval.annually': 'Anual',
-  'page--donation-widget.form.main-color.label': 'Defina a cor da página de pagamento',
-  'page--donation-widget.form.main-color.helper-text': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.',
-  'page--donation-widget.form.donation-default-value.label': 'Defina os valores para o bloco de doação',
+  'page--donation-widget.form.goal.label': 'Meta da campanha',
+  'page--donation-widget.form.goal.placeholder': 'Ex.: 50000',
+  'page--donation-widget.goal-date-limit.label': 'Prazo de arrecadação',
+  'page--donation-widget.goal-date-limit.placeholder': 'Ex.: DD/MM/AAAA',
+  'page--donation-widget.form.donation-default-value.label': 'Valores das doações',
   'page--donation-widget.form.donation-default-value.helper-text': 'Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)',
   'page--donation-widget.form.default-value-01.label': 'Valor 1',
   'page--donation-widget.form.default-value-01.placeholder': 'R$20',
@@ -875,20 +953,29 @@ servidor-03.dominio.com`,
   'page--donation-widget.form.default-value-05.placeholder': 'R$500',
   'page--donation-widget.form.default-value.radio.text': 'Default',
   'page--donation-widget.form.default-value.helper-text': '*todos os valores são em reais',
-  'page--donation-widget.form.button-text.label': 'Texto do botão de doação',
+  'page--donation-widget.form.donation-title.label': 'Título da caixa de doação',
+  'page--donation-widget.form.donation-title.placeholder': 'Ex.: Escolha um valor e contribua agora!',
+  'page--donation-widget.form.main-color.label': 'Cor da caixa de doação',
+  'page--donation-widget.form.main-color.helper-text': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.',
+  'page--donation-widget.form.button-text.label': 'Texto do botão de confirmação',
   'page--donation-widget.form.button-text.placeholder': 'Ex.: Doe agora!',
   'page--donation-widget.form.payment-method.label': 'Habilitar pagamento por boleto?',
   'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pago terá um custo adicional de R$3,00',
   'page--donation-widget.form.payment-method.radio.yes': 'Sim',
   'page--donation-widget.form.payment-method.radio.no': 'Não',
   'page--donation-widget.form.bank-account.label': 'Conta bancária',
-  'page--donation-widget.form.bank-account.helper-text': 'Este bloco de doação está associado à conta correspondente da cidade no Pagar.me.',
+  'page--donation-widget.form.bank-account.helper-text': 'Esta campanha está associada à conta bancária cadastrada nas configurações dessa comunidade ;)',
 
   // page donation widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
+  'page--donation-widget.form.validation.invalid': 'Inválido.',
   'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
   'page--donation-widget.form.validation.button-text.max-length': 'O limite de caracteres foi atingido.',
+  'page--donation-widget.form.validation.goal.format': 'Insira o valor desse jeito, ó: 1000',
+  'page--donation-widget.form.validation.goal-date-limit.format': 'Insira a data desse jeito, ó: DD/MM/AAAA',
+  'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Data inválida.',
+  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'A data da meta não pode ser no passado',
 
   // component widget autofire
   // filepath: /client/mobilizations/widgets/components/form-autofire.js
@@ -996,6 +1083,27 @@ servidor-03.dominio.com`,
   'widgets.components--donation.period-label-options.year': 'ano',
   'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
   'widgets.components--donation.users-choice.unique': 'Doação única',
+  'widgets.components--donation.reattempt.message.title': 'Ops!',
+  'widgets.components--donation.reattempt.message.text.line-01': 'Algo de errado aconteceu com a sua doação. ):',
+  'widgets.components--donation.reattempt.message.text.line-02': 'Clique no botão abaixo pra tentar de novo.',
+  'widgets.components--donation.reattempt.message.button.text': 'Nova tentativa',
+  'widgets.components--donation.progress-bar.collected': 'arrecadados',
+  'widgets.components--donation.progress-bar.supports': `
+    {totalDonations} {totalDonations, plural,
+      one {apoio}
+      other {apoio}
+    }
+  `,
+  'widgets.components--donation.progress-bar.goal': 'Meta:',
+  'widgets.components--donation.progress-bar.date.last-day': 'último dia!',
+  'widgets.components--donation.progress-bar.date.last-days': 'últimos dias!',
+  'widgets.components--donation.progress-bar.date.last-week': 'última semana!',
+  'widgets.components--donation.progress-bar.date.remaining': `
+    faltam {goalDateRemaining} {goalDateRemaining, plural,
+      one {dia}
+      other {dias}
+    }
+  `,
 
   // component form widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/settings-menu.js
@@ -1037,6 +1145,18 @@ servidor-03.dominio.com`,
   // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
+
+  // content widget
+  // filepath: /client/mobilizations/widgets/__plugins__/content/components/__content__.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--content-widget.delete-widget.confirm.message': 'Deseja remover o widget?',
+
+  // slate editor implementation component
+  // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--editor-slate.button-save.text': 'Salvar',
+  'c--editor-slate.button-cancel.text': 'Cancelar',
+  'c--editor-slate.button-cancel.message': 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
@@ -1110,10 +1230,15 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'pressure-widget.components--pressure-form.validation.required': 'Preenchimento obrigatório',
-  'pressure-widget.components--pressure-form.email.label': 'E-mail',
-  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
   'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'E-mail inválido',
   'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da mobilização.',
+  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Informe o código do país e o DDD com dois dígitos. Ex: +5511',
+  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Telefone inválido',
+  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'O telefone que você está tentando usar é de um dos alvos da mobilização.',
+  'pressure-widget.components--pressure-form.email.label': 'E-mail',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
+  'pressure-widget.components--pressure-form.phone.label': 'Telefone',
+  'pressure-widget.components--pressure-form.phone.placeholder': 'Insira seu telefone. Ex: +5511987654321',
   'pressure-widget.components--pressure-form.name.label': 'Nome',
   'pressure-widget.components--pressure-form.name.placeholder': 'Insira seu nome',
   'pressure-widget.components--pressure-form.lastname.label': 'Sobrenome',
@@ -1122,6 +1247,15 @@ servidor-03.dominio.com`,
   'pressure-widget.components--pressure-form.city.placeholder': 'Insira sua cidade',
   'pressure-widget.components--pressure-form.subject.label': 'Assunto',
   'pressure-widget.components--pressure-form.body.label': 'Corpo do e-mail',
+  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Chamada em andamento',
+  'pressure-widget.components--pressure-form.phone-calls.retry': 'Religar',
+  'pressure-widget.components--pressure-form.phone-calls.call': 'Religar',
+  'pressure-widget.components--pressure-form.phone.how-it-works.title': 'Como funciona?',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos ligando para o seu alvo',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'Assim que alguém atender do lado de lá, vamos te ligar',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'Quando você atender, conectamos as ligações',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Agora é com você!',
+  'pressure-widget.components--pressure-form.phone.finish-and-share': 'Encerrar e Compartilhar',
 
   // component pressure widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
@@ -1135,6 +1269,11 @@ servidor-03.dominio.com`,
   'pressure-widget.components--settings-menu.items.pressure-email': 'E-mail para alvo',
   'pressure-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
   'pressure-widget.components--settings-menu.items.post-action': 'Pós-pressão',
+
+  // page pressure widget
+  // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-count.js
+  // routepath: /mobilizations/:mobilization_id/edit
+  'c--pressure-count.text.default': 'pressões feitas',
 
   // page pressure widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.js
@@ -1164,6 +1303,7 @@ servidor-03.dominio.com`,
   // filepath: /client/mobilizations/widgets/components/input-tag.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
+  'widgets.components--input-tag.insert-tag.placeholder': 'Nome do primeiro alvo <primeiro@alvo.com>\nNome do segundo alvo <segundo@alvo.com>\nNome do terceiro alvo <terceiro@alvo.com>\nNome do quarto alvo <quarto@alvo.com>\nNome do quinto alvo <quinto@alvo.com>\n...',
   'widgets.components--input-tag.button.remove-all': 'Remover todos',
 
   // page pressure widget email
@@ -1172,12 +1312,18 @@ servidor-03.dominio.com`,
   'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
   'page--pressure-widget-email.form.input-tag.label': 'Alvos',
   'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Padrão inválido. Preencha conforme explicação acima.',
+  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'Você já cadastrou um alvo para pressão por email.',
+  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'Você já cadastrou um alvo para pressão por telefone.',
   'page--pressure-widget-email.form.email-subject.label': 'Assunto do email',
   'page--pressure-widget-email.form.email-body.label': 'Corpo do email que será enviado',
+  'page--pressure-widget-email.form.disable-edit-field.label': 'Desabilitar edição de assuno e corpo do e-mail',
+  'page--pressure-widget-email.form.disable-edit-field.value.yes': 'Sim',
+  'page--pressure-widget-email.form.disable-edit-field.value.no': 'Não',
 
   'p--pressure-widget--input-tag.info.title': 'Como cadastrar alvos',
   'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar, clicando no botão no canto superior direito da tela.',
   'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
+  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nome <email@provedor.com>',
   'p--pressure-widget--input-tag.info.item.special-chars': 'Em ambos os tipos de pressão é obrigatório o uso dos caractéres {lt} e {gt} para agrupar o email ou telefone',
   'p--pressure-widget--input-tag.info.item.sorting': 'Os alvos serão exibidos em ordem aleatória na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente.',
 
@@ -1282,5 +1428,18 @@ servidor-03.dominio.com`,
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': 'Importação concluída com sucesso!',
   'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} ativistas importados com sucesso.',
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ooops!',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}'
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}',
+
+  // createForm validations
+  // path: client/storybook/forms/validate
+  'createForm.validate.email': 'Informe um e-mail válido',
+  'createForm.validate.required': 'Preenchimento obrigatório',
+  'createForm.validate.cnpj.length': 'CNPJ deve conter 14 digitos',
+  'createForm.validate.cnpj.invalid': 'CNPJ inválido',
+  'createForm.validate.cpf.length': 'CPF deve conter 11 digitos',
+  'createForm.validate.cpf.invalid': 'CPF inválido',
+  // settingsForm
+  // path: client/storybook/settings/forms
+  'settingsForm.submitLabel.default': 'Salvar',
+  'settingsForm.sucessMessage.default': 'Formulário salvo com sucesso.'
 }

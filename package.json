@@ -5,7 +5,8 @@
   "author": "Nossas <tech@nosssas.org>",
   "homepage": "http://bonde.org",
   "scripts": {
-    "test": "./node_modules/.bin/standard && ./node_modules/.bin/jest",
+    "test": "./node_modules/.bin/standard && node --max_old_space_size=4096 ./node_modules/.bin/jest",
+    "test:ci": "yarn test --ci --silent --runInBand --logHeapUsage",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc yarn test",
     "start": "nodemon -r 'babel-register' --delay 1 --watch ./server --watch ./tools ./server",
@@ -15,7 +16,8 @@
     "clean": "rm -rf build",
     "routes": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "storybook": "start-storybook -p 9001 -c ./client/storybook"
   },
   "repository": {
     "type": "git",
@@ -98,7 +100,6 @@
     "react": "15.5",
     "react-apollo": "1.2.0",
     "react-color": "2.13.8",
-    "react-colors-picker": "2.3.1",
     "react-cookie": "1.0.4",
     "react-countup": "2.3.0",
     "react-dom": "15.5",
@@ -210,8 +211,12 @@
       "^~routes(.*)$": "<rootDir>/routes$1",
       "^~server(.*)$": "<rootDir>/server$1",
       "^~tools(.*)$": "<rootDir>/tools$1",
+      "^~root/intl/locale-data/pt-BR$": "<rootDir>/tools/jest/mock-intl.js",
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|wav|mp3|aac)$": "<rootDir>/tools/jest/mock-file.js",
       "\\.(css|scss)$": "<rootDir>/tools/jest/mock-style.js"
     }
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.2.15"
   }
 }

@@ -14,7 +14,7 @@ import * as AwaitActions from '~client/components/await/redux/action-creators'
 //   process_at: String (required if `card_hash` is not defined)
 // })
 //
-export default values => (dispatch, getState, { api }) => {
+export default values => (dispatch, getState, { api, intl }) => {
   const endpoint = `/subscriptions/${values.id}/recharge`
   const body = values
 
@@ -25,12 +25,12 @@ export default values => (dispatch, getState, { api }) => {
     .then(({ data }) => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_SUCCESS, data))
-      dispatch(addNotification(notifications.genericSaveSuccess()))
+      dispatch(addNotification(notifications.genericSaveSuccess(intl)))
     })
     .catch(e => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_FAILURE, e))
-      dispatch(addNotification(notifications.genericRequestError()))
+      dispatch(addNotification(notifications.genericRequestError(intl)))
       return Promise.reject(e)
     })
 }

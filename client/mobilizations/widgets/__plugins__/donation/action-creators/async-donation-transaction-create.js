@@ -6,7 +6,7 @@ import AnalyticsEvents from '~client/mobilizations/widgets/utils/analytics-event
 import * as t from '../action-types'
 import { setDonationCustomerData } from '.'
 
-const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) => {
+const asyncDonationTransactionCreate = params => (dispatch, getState, { api, intl }) => {
   const state = getState()
   const endpoint = `/mobilizations/${params.mobilization_id}/donations`
   const body = { donation: genRequestPayload(params) }
@@ -25,7 +25,7 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, { api }) =
     })
     .catch(failure => {
       dispatch(createAction(t.ASYNC_DONATION_TRANSACTION_CREATE_FAILURE, failure))
-      dispatch(addNotification(notifications.genericRequestError()))
+      dispatch(addNotification(notifications.genericRequestError(intl)))
 
       if (failure.config && failure.config.data) {
         try {

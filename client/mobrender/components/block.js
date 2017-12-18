@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 import Widget from './widget.connected'
 import BlockConfigMenu from './block-config-menu.connected'
 import { EDIT_KEY } from './block-config-menu'
@@ -54,7 +55,11 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
       {block.hidden && (
         <div className='relative'>
           <div className='absolute bottom-0 left-0 ml1 mb1 bg-darken-2 p1 white rounded hidden-tag'>
-            <i className='fa fa-eye-slash mr1' /> Escondido
+            <i className='fa fa-eye-slash mr1' />{' '}
+            <FormattedMessage
+              id='mobrender.components--block.hidden-tag'
+              defaultMessage='Escondido'
+            />
           </div>
         </div>
       )}

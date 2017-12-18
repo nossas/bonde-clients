@@ -11,7 +11,7 @@ export default store => ({
   getIndexRoute (location, cb) {
     require.ensure([], (require) => {
       cb(null, {
-        component: require('./pressure/page.connected').default
+        component: require('./adjustments/page.connected').default
       })
     })
   },

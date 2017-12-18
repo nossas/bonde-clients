@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~client/components/layout'
@@ -13,27 +13,54 @@ const SettingsMenu = ({ location, mobilization, widget }) => {
   const pressureFinishPath = paths.pressureFinish(mobilization.id, widget.id)
 
   return (
-    <SettingsPageMenuLayout title='Configure seu formulário de pressão'>
+    <SettingsPageMenuLayout
+      title={
+        <FormattedMessage
+          id='pressure-widget.components--settings-menu.title'
+          defaultMessage='Configure seu formulário de pressão'
+        />
+      }
+    >
       <Tabs>
         <Tab
           path={pressurePath}
-          text='Formulário'
           isActive={pressurePath === location.pathname}
+          text={
+            <FormattedMessage
+              id='pressure-widget.components--settings-menu.items.form'
+              defaultMessage='Ajustes'
+            />
+          }
         />
         <Tab
           path={pressureEmailPath}
-          text='E-mail para alvo'
           isActive={pressureEmailPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='pressure-widget.components--settings-menu.items.pressure-email'
+              defaultMessage='E-mail para alvo'
+            />
+          }
         />
         <Tab
           path={pressureAutofirePath}
-          text='Mensagem de agradecimento'
           isActive={pressureAutofirePath === location.pathname}
+          text={
+            <FormattedMessage
+              id='pressure-widget.components--settings-menu.items.autofire'
+              defaultMessage='Mensagem de agradecimento'
+            />
+          }
         />
         <Tab
           path={pressureFinishPath}
-          text='Pós-pressão'
           isActive={pressureFinishPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='pressure-widget.components--settings-menu.items.post-action'
+              defaultMessage='Pós-pressão'
+            />
+          }
         />
       </Tabs>
     </SettingsPageMenuLayout>

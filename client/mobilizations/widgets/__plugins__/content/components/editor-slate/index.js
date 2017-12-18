@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
 import { Raw, Plain } from 'slate'
 import {
   SlateEditor, SlateToolbar, SlateContent,
@@ -56,16 +57,41 @@ class EditorSlate extends Component {
     super(props)
     this.state = {
       editing: false,
-      loading: false
+      loading: false,
+      initialState: Raw.deserialize(JSON.parse(props.content), { terse: true })
     }
   }
 
+  handleCancelEditionMode (state, setState) {
+    const initialRaw = JSON.stringify(Raw.serialize(this.state.initialState))
+    const raw = JSON.stringify(Raw.serialize(state))
+    if (initialRaw !== raw) {
+      if (window.confirm(this.props.intl.formatMessage({
+        id: 'c--editor-slate.button-cancel.message',
+        defaultMessage: 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.'
+      }))) {
+        this.setState({ editing: false })
+        setState(this.state.initialState)
+      }
+    } else {
+      this.setState({ editing: false })
+    }
+  }
+
+  handleSave (state) {
+    this.setState({ initialState: state })
+    this.props.handleSave(state)
+  }
+
   render () {
-    const { content, handleSave, handleDelete, readOnly, toolbarStyles, contentStyles } = this.props
-    const initialState = Raw.deserialize(JSON.parse(content), { terse: true })
+    const { handleDelete, readOnly, toolbarStyles, contentStyles } = this.props
     return (
       <div className='widgets--content-plugin'>
-        <SlateEditor plugins={plugins} initialState={initialState} style={{ color: '#fff' }}>
+        <SlateEditor
+          plugins={plugins}
+          initialState={this.state.initialState}
+          style={{ color: '#fff' }}
+        >
           <SlateToolbar style={{
             ...styles.toolbar,
             display: this.state.editing ? 'block' : 'none',
@@ -92,6 +118,12 @@ class EditorSlate extends Component {
             onSelectionChange={() => {
               if (!readOnly) this.setState({ editing: true })
             }}
+            onKeyDown={(event, data, state) => {
+              if (data.isMod && data.key === 's') {
+                event.preventDefault()
+                this.handleSave(state)
+              }
+            }}
             className={!readOnly ? 'editable' : ''}
             readOnly={readOnly}
           />
@@ -106,35 +138,44 @@ class EditorSlate extends Component {
                 bottom: 0
               }}
               className='mt2'
-              onClick={() => {
-                handleDelete()
-              }}
+              onClick={handleDelete}
             >
               <i className='fa fa-trash' />
             </ActionButton>
             <ActionButton
               editing={this.state.editing}
               className='mt2 right-align'
-              onClick={state => {
-                this.setState({ editing: false })
-                handleSave(state)
-              }}
+              onClick={this.handleSave.bind(this)}
             >
-              Salvar
+              <FormattedMessage
+                id='c--editor-slate.button-save.text'
+                defaultMessage='Salvar'
+              />
+            </ActionButton>
+            <ActionButton
+              editing={this.state.editing}
+              className='mt2 right-align mx2'
+              onClick={this.handleCancelEditionMode.bind(this)}
+            >
+              <FormattedMessage
+                id='c--editor-slate.button-cancel.text'
+                defaultMessage='Cancelar'
+              />
             </ActionButton>
           </FooterEditor>
           <Layer
             editing={this.state.editing}
-            onClick={state => {
-              this.setState({ editing: false })
-              handleSave(state)
-            }}
+            onClick={this.handleCancelEditionMode.bind(this)}
           />
         </SlateEditor>
         {this.state.loading && <Loading />}
       </div>
     )
   }
+}
+
+EditorSlate.propTypes = {
+  intl: intlShape.isRequired
 }
 
 EditorSlate.defaultProps = {
@@ -145,4 +186,4 @@ export const createEditorContent = content => JSON.stringify(
   Raw.serialize(Plain.deserialize(content), { terse: true })
 )
 
-export default EditorSlate
+export default injectIntl(EditorSlate)

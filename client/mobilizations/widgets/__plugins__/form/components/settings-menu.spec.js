@@ -28,16 +28,16 @@ describe('client/mobilizations/widgets/__plugins__/form/components/settings-menu
     props.mobilization.id = dummyId
     props.widget.id = dummyId
 
-    it('should active tab Campos do formulário (fields settings)', () => {
-      props.location.pathname = paths.fieldsMobilizationWidget(dummyId, dummyId)
+    it('should active tab Ajustes (form settings)', () => {
+      props.location.pathname = paths.formMobilizationWidget(dummyId, dummyId)
 
       let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(0)
       expect(node.props().isActive).to.equals(true)
     })
 
-    it('should active tab Ajustes (form settings)', () => {
-      props.location.pathname = paths.formMobilizationWidget(dummyId, dummyId)
+    it('should active tab Campos do formulário (fields settings)', () => {
+      props.location.pathname = paths.fieldsMobilizationWidget(dummyId, dummyId)
 
       let wrapper = shallow(<SettingsMenu {...props} />)
       let node = wrapper.find('Tabs Tab').at(1)

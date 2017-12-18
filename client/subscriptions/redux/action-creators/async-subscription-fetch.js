@@ -12,7 +12,7 @@ import * as AwaitActions from '~client/components/await/redux/action-creators'
 //   token: String (required)
 // })
 //
-export default ({ id, token }) => (dispatch, getState, { api }) => {
+export default ({ id, token }) => (dispatch, getState, { api, intl }) => {
   const endpoint = `/subscriptions/${id}`
   const config = { params: { token } }
 
@@ -26,7 +26,7 @@ export default ({ id, token }) => (dispatch, getState, { api }) => {
     .catch(e => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_FETCH_FAILURE, e))
-      dispatch(addNotification(notifications.genericRequestError()))
+      dispatch(addNotification(notifications.genericRequestError(intl)))
       return Promise.reject(e)
     })
 }

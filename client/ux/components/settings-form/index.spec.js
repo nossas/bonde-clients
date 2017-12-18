@@ -1,7 +1,8 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { FormattedMessage } from 'react-intl'
 
+import { mountWithIntl } from '~root/intl/helpers'
 import SettingsForm from '~client/ux/components/settings-form'
 
 describe('client/ux/components/settings-form', () => {
@@ -13,7 +14,7 @@ describe('client/ux/components/settings-form', () => {
   }
 
   beforeEach(() => {
-    form = mount(<SettingsForm {...props} />)
+    form = mountWithIntl(<SettingsForm {...props} />)
   })
 
   describe('by default', () => {
@@ -28,7 +29,12 @@ describe('client/ux/components/settings-form', () => {
     })
 
     it('should render SuccessMessage with text "Dados editados com sucesso"', () => {
-      expect(form.find('SuccessMessage').props().text).to.equal('Dados editados com sucesso')
+      expect(form.find('SuccessMessage').props().text.props).to.be.deep.equal(
+        <FormattedMessage
+          id='ux.components--settings-form.success-message'
+          defaultMessage='Dados editados com sucesso'
+        />.props
+      )
     })
   })
 

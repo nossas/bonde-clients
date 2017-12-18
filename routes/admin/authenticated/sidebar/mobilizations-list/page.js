@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { FormattedMessage } from 'react-intl'
 import classnames from 'classnames'
 import { browserHistory } from 'react-router'
 
@@ -39,7 +40,13 @@ export class MobilizationsListPage extends Component {
 
     return (
       <SettingsPageLayout>
-        <SettingsPageMenuLayout title='Suas Mobilizações'>
+        <SettingsPageMenuLayout title={
+          <FormattedMessage
+            id='page--mobilizations-list.page-header.title'
+            defaultMessage='Suas Mobilizações'
+          />
+        }
+      >
           <PageHeader location={location} />
         </SettingsPageMenuLayout>
         <SettingsPageContentLayout containerClassName='lg-col-12'>
@@ -72,14 +79,47 @@ export class MobilizationsListPage extends Component {
                     <MoreMenuAction
                       componentClass='a'
                       target='_blank'
-                      text='Abrir página'
+                      text={
+                        <FormattedMessage
+                          id='page--mobilizations-list.more-menu-action.open'
+                          defaultMessage='Abrir página'
+                        />
+                      }
                       path={paths.mobilization(mobilization)}
                       icon='external-link'
                     />
                     <MoreMenuAction
-                      text='Criar template'
+                      text={
+                        <FormattedMessage
+                          id='page--mobilizations-list.more-menu-action.create-template'
+                          defaultMessage='Criar template'
+                        />
+                      }
                       path={paths.mobilizationTemplatesCreate(mobilization)}
                       icon='star'
+                    />
+                    <MoreMenuAction
+                      componentClass='div'
+                      text={
+                        (mobilization.status === 'active' ? (
+                          <FormattedMessage
+                            id='page--mobilizations-list.more-menu-action.archived'
+                            defaultMessage='Arquivar'
+                          />
+                        ) : (
+                          <FormattedMessage
+                            id='page--mobilizations-list.more-menu-action.active'
+                            defaultMessage='Ativar'
+                          />
+                        ))
+                      }
+                      onClick={() => {
+                        this.props.changeStatus(mobilization)
+                          .then(() => {
+                            this.props.toggleMenu(undefined)
+                          })
+                      }}
+                      icon='archive'
                     />
                   </MoreMenu>
                 </More>

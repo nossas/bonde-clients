@@ -27,16 +27,8 @@ class Page extends Component {
       .then(dns => {
         this.setState({ dns })
 
-        const handleNotify = event => {
-          const { id, message: defaultMessage, ...n } = event()
-          notify({
-            ...n,
-            message: intl.formatMessage({ id, defaultMessage })
-          })
-        }
-
-        if (!dns.ns_ok) handleNotify(dnsMessages.checkDNSFailure)
-        else handleNotify(dnsMessages.checkDNSSuccess)
+        if (!dns.ns_ok) notify(dnsMessages.checkDNSFailure(intl))
+        else notify(dnsMessages.checkDNSSuccess(intl))
       })
   }
 

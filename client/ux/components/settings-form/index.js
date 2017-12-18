@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import DivFloat from '../div-float'
 import Button from '../button'
@@ -15,9 +16,21 @@ const SettingsForm = ({ children, buttonText, successMessage, ...formProps }) =>
         type='submit'
         disabled={formProps.submitting}
       >
-        {buttonText}
+        {buttonText || (
+          <FormattedMessage
+            id='ux.components--settings-form.button.text'
+            defaultMessage='Salvar'
+          />
+        )}
       </Button>
-      <SuccessMessage text={successMessage} />
+      <SuccessMessage
+        text={successMessage || (
+          <FormattedMessage
+            id='ux.components--settings-form.success-message'
+            defaultMessage='Dados editados com sucesso'
+          />
+        )}
+      />
     </DivFloat>
   </FormRedux>
 )
@@ -25,11 +38,6 @@ const SettingsForm = ({ children, buttonText, successMessage, ...formProps }) =>
 SettingsForm.propTypes = {
   buttonText: PropTypes.string,
   successMessage: PropTypes.string
-}
-
-SettingsForm.defaultProps = {
-  buttonText: 'Salvar',
-  successMessage: 'Dados editados com sucesso'
 }
 
 export default SettingsForm

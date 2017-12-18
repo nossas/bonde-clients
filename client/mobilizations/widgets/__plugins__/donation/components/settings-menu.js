@@ -1,33 +1,66 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-// Global module dependencies
 import * as paths from '~client/paths'
 import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { SettingsPageMenuLayout } from '~client/components/layout'
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
-  const donationPath = paths.donation(mobilization.id, widget.id)
+  const donationPath = paths.donation(mobilization.id, widget.id) + '/settings'
+  const donationAdjustmentsPath = paths.donation(mobilization.id, widget.id)
   const donationAutofirePath = paths.donationAutofire(mobilization.id, widget.id)
   const donationFinishPath = paths.donationFinish(mobilization.id, widget.id)
 
   return (
-    <SettingsPageMenuLayout title='Configure sua caixa de doação'>
+    <SettingsPageMenuLayout
+      title={
+        <FormattedMessage
+          id='donation.components--settings-menu.title'
+          defaultMessage='Configure sua caixa de doação'
+        />
+      }
+    >
       <Tabs>
         <Tab
-          text='Ajustes'
+          path={donationAdjustmentsPath}
+          isActive={donationAdjustmentsPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='donation.components--settings-menu.tabs.adjusts'
+              defaultMessage='Ajustes'
+            />
+          }
+        />
+        <Tab
           path={donationPath}
           isActive={donationPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='donation.components--settings-menu.tabs.info'
+              defaultMessage='Dados para doação'
+            />
+          }
         />
         <Tab
-          text='Mensagem agradecimento'
           path={donationAutofirePath}
           isActive={donationAutofirePath === location.pathname}
+          text={
+            <FormattedMessage
+              id='donation.components--settings-menu.tabs.autofire'
+              defaultMessage='Mensagem agradecimento'
+            />
+          }
         />
         <Tab
-          text='Pós-doação'
           path={donationFinishPath}
           isActive={donationFinishPath === location.pathname}
+          text={
+            <FormattedMessage
+              id='donation.components--settings-menu.tabs.post-action'
+              defaultMessage='Pós-doação'
+            />
+          }
         />
       </Tabs>
     </SettingsPageMenuLayout>

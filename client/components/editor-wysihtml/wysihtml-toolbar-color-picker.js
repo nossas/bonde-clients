@@ -1,15 +1,16 @@
 import React from 'react'
 
-import { ColorSchemer } from '~client/components/editor-wysihtml'
-if (require('exenv').canUseDOM) require('./color-picker.scss')
+import { ColorPicker } from '~client/components/color-picker'
+
+if (require('exenv').canUseDOM) require('./wysihtml-toolbar-color-picker.scss')
 
 class WYSIHTMLToolbarColorPicker extends React.Component {
   constructor () {
     super()
     this.state = { color: '#000000' }
   }
-  handleChange (color) {
-    this.setState({ color: color })
+  handleChange ({ hex }) {
+    this.setState({ color: hex })
   }
 
   render () {
@@ -26,7 +27,10 @@ class WYSIHTMLToolbarColorPicker extends React.Component {
           onChange={::this.handleChange}
           className='hide'
         />
-        <ColorSchemer onChange={::this.handleChange} />
+        <ColorPicker
+          onChangeColor={::this.handleChange}
+          color={this.state.color}
+        />
 
         <div className='save-button bg-atomic p1'>
           <a

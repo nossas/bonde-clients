@@ -46,7 +46,9 @@ class PressureSettingsEmailPage extends Component {
         pressure_subject: pressureSubject,
         pressure_body: pressureBody,
         targets: targetsField,
-        disable_edit_field: disableEditField
+        disable_edit_field: disableEditField,
+        show_city: showCity,
+        show_counter: showCounter
       },
       intl,
       ...props
@@ -103,12 +105,18 @@ class PressureSettingsEmailPage extends Component {
                 this.state.pressureType === 'email' &&
                 targets.some(target => validator.isValidTargetPhoneE164(target))
               ) {
-                errors.message = 'Você já cadastrou um alvo para pressão por email.'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.type-email-registered',
+                  defaultMessage: 'Você já cadastrou um alvo para pressão por email.'
+                })
               } else if (
                 this.state.pressureType === 'phone' &&
                 targets.some(target => validator.isValidTargetEmail(target))
               ) {
-                errors.message = 'Você já cadastrou um alvo para pressão por telefone.'
+                errors.message = intl.formatMessage({
+                  id: 'page--pressure-widget-email.form.input-tag.validation.type-phone-registered',
+                  defaultMessage: 'Você já cadastrou um alvo para pressão por telefone.'
+                })
               }
 
               if (errors.message) errors.valid = false
@@ -148,7 +156,14 @@ class PressureSettingsEmailPage extends Component {
                         '{lt} e {gt} para agrupar o email)'
                       }
                       values={{
-                        format: <b>{'Nome <email@provedor.com>'}</b>,
+                        format: (
+                          <b>
+                            <FormattedMessage
+                              id='p--pressure-widget--input-tag.info.item.target-format.example'
+                              defaultMessage='Nome <email@provedor.com>'
+                            />
+                          </b>
+                        ),
                         lt: <Kbd>{'<'}</Kbd>,
                         gt: <Kbd>{'>'}</Kbd>
                       }}
@@ -195,8 +210,62 @@ class PressureSettingsEmailPage extends Component {
             />
           </ControlLabel>
           <RadioGroup>
-            <Radio value='s'>Sim</Radio>
-            <Radio value='n'>Não</Radio>
+            <Radio value='s'>
+              <FormattedMessage
+                id='page--pressure-widget-email.form.disable-edit-field.value.yes'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='n'>
+              <FormattedMessage
+                id='page--pressure-widget-email.form.disable-edit-field.value.no'
+                defaultMessage='Não'
+              />
+            </Radio>
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup controlId='show-counter-id' {...showCounter}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-counter.label'
+              defaultMessage='Mostrar contador de pressão'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='true'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-counter.radio.yes.label'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='false'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-counter.radio.no.label'
+                defaultMessage='Não'
+              />
+            </Radio>
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup controlId='show-city-field-id' {...showCity}>
+          <ControlLabel>
+            <FormattedMessage
+              id='page--pressure-widget.form.show-city-field.label'
+              defaultMessage='Mostrar campo de cidade'
+            />
+          </ControlLabel>
+          <RadioGroup>
+            <Radio value='city-true'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-city-field.radio.yes.label'
+                defaultMessage='Sim'
+              />
+            </Radio>
+            <Radio value='city-false'>
+              <FormattedMessage
+                id='page--pressure-widget.form.show-city-field.radio.no.label'
+                defaultMessage='Não'
+              />
+            </Radio>
           </RadioGroup>
         </FormGroup>
       </SettingsForm>

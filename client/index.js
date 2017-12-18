@@ -33,7 +33,7 @@ const intlProvider = new IntlProvider({ locale, messages })
 const { intl } = intlProvider.getChildContext()
 
 // Set up Redux store
-const store = configureStore(initialState, { intl })
+export const store = configureStore(initialState, { intl })
 const { dispatch, getState } = store
 
 const container = document.getElementById('root')

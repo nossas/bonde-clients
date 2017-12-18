@@ -8,7 +8,7 @@ describe('client/mobilizations/components/page-header', () => {
   const context = { router: {} }
   let wrapper
   const props = {
-    location: { pathname: '' },
+    location: { pathname: '', query: {} },
     mobilization: { id: 1 }
   }
 
@@ -25,8 +25,8 @@ describe('client/mobilizations/components/page-header', () => {
       it('should render one <Tabs> parent component', () => {
         expect(wrapper.find('Tabs')).to.have.length(1)
       })
-      it('should render 2 <Tab> children component', () => {
-        expect(wrapper.find('Tab')).to.have.length(2)
+      it('should render 3 <Tab> children component', () => {
+        expect(wrapper.find('Tab')).to.have.length(3)
       })
     })
   })

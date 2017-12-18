@@ -1,10 +1,18 @@
 import { isValidEmail } from '~client/utils/validation-helper'
 
-const applyValidate = ({ validate, message }) => (fields) => (values, errorsCtx) => {
+const applyValidate = ({
+  validate,
+  message
+}) => (fieldsOrField, customMessage) => (values, errorsCtx) => {
+  let fields = fieldsOrField
   const errors = errorsCtx || {}
+  if (typeof fieldsOrField === 'string') {
+    fields = [fieldsOrField]
+  }
+
   fields.map(fieldName => {
     if (validate(values[fieldName])) {
-      errors[fieldName] = errors[fieldName] || message
+      errors[fieldName] = errors[fieldName] || customMessage || message
     }
   })
   return errors
@@ -12,12 +20,18 @@ const applyValidate = ({ validate, message }) => (fields) => (values, errorsCtx)
 
 export const required = applyValidate({
   validate: (value) => !value,
-  message: 'Required field.'
+  message: {
+    id: 'utils.validate.required',
+    defaultMessage: 'Preenchimento obrigatório'
+  }
 })
 
 export const validateEmail = applyValidate({
   validate: (value) => !isValidEmail(value),
-  message: 'Email isn\'t valid.'
+  message: {
+    id: 'utils.validate.email',
+    defaultMessage: 'Informe um e-mail válido'
+  }
 })
 
 export const validate = (validations) => (values) => {

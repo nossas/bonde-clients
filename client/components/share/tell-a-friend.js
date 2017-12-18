@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { FacebookShareButton, TwitterShareButton, WhatsAppShareButton } from '~client/components/share'
 
@@ -22,7 +23,12 @@ const TellAFriend = ({
       <div className='py2'>
         <img src={imageUrl} style={{ width: imageWidth || 100 }} />
       </div>
-      <p>Agora, compartilhe com seus amigos!</p>
+      <p>
+        <FormattedMessage
+          id='share.components--tell-a-friend.text'
+          defaultMessage='Agora, compartilhe com seus amigos!'
+        />
+      </p>
       <p><FacebookShareButton href={href} /></p>
       <p><TwitterShareButton href={href} text={twitterShareText} /></p>
       <p><WhatsAppShareButton whatsappText={settings.whatsapp_text || href} preview={preview} /></p>

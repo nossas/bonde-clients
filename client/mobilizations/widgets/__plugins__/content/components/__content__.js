@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { injectIntl, intlShape } from 'react-intl'
 import { Raw } from 'slate'
 
 import { EditorOld, EditorNew, EditorSlate } from '../components'
 
-class Content extends Component {
+export class Content extends Component {
   constructor (props) {
     super(props)
     this.state = { forceRenderNewEditor: false }
@@ -15,7 +16,11 @@ class Content extends Component {
   }
 
   deleteWidget () {
-    if (window.confirm('Deseja remover o widget?')) {
+    const message = this.props.intl.formatMessage({
+      id: 'c--content-widget.delete-widget.confirm.message',
+      defaultMessage: 'Deseja remover o widget?'
+    })
+    if (window.confirm(message)) {
       this.props.update({
         ...this.props.widget,
         settings: undefined,
@@ -78,7 +83,8 @@ Content.propTypes = {
   editable: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancelEdit: PropTypes.func.isRequired,
-  update: PropTypes.func
+  update: PropTypes.func,
+  intl: intlShape.isRequired
 }
 
-export default Content
+export default injectIntl(Content)

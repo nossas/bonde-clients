@@ -155,10 +155,13 @@ const fields = [
   'whatsapp_text'
 ]
 
-const validate = values => {
+const validate = (values, { intl }) => {
   const errors = {}
   if (!values.finish_message_type) {
-    errors.finish_message_type = 'Nenhum tipo de mensagem foi selecionado'
+    errors.finish_message_type = intl.formatMessage({
+      id: 'widgets.components--form-finish-message.type.validation.required',
+      defaultMessage: 'Nenhum tipo de mensagem foi selecionado'
+    })
   }
   return errors
 }
