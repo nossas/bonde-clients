@@ -1,69 +1,58 @@
 import React from 'react'
-// import fetch from 'isomorphic-fetch'
-// import qs from 'qs'
+import { connect } from 'react-redux'
+import { ProviderStore } from '../components'
 import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webviewer'
-import { Provider } from 'react-redux'
-import { ApolloProvider } from 'react-apollo'
-import { configureStore, client } from '../store'
+import styles from '../webviewer/main.3b3e3ca1d1b88a76b379.css'
 
-import styles from './../webviewer/main.3b3e3ca1d1b88a76b379.css'
-
-import { IntlProvider, addLocaleData } from 'react-intl'
-import pt from 'react-intl/locale-data/pt'
-import es from 'react-intl/locale-data/es'
-import en from 'react-intl/locale-data/en'
-import localeData from './../locale-data'
-
-const APP_DOMAIN = process.env.APP_DOMAIN !== undefined ? process.env.APP_DOMAIN : 'localhost:8000'
-// const API_URL = process.env.API_URL !== undefined ? process.env.API_URL : 'http://localhost:3000'
-
-const initialState = {} || {
-  intl: { currentLocale: 'pt-BR', messages: localeData }
-}
-
-addLocaleData([...pt, ...es, ...en])
-
-// const { intl: { currentLocale, messages: localeMessages } } = initialState
-const currentLocale = 'pt-BR'
-const locale = currentLocale
-const messages = {}
-const intlProvider = new IntlProvider({ locale, messages })
-const { intl } = intlProvider.getChildContext()
-
-export const store = configureStore(initialState, { intl })
-
-export default class extends React.Component {
-  static async getInitialProps ({ req }) {
-    const { actions: MobilizationActions } = MobilizationReducer
-    const host = req.headers['host']
-    // eslint-disable-next-line
-    const regex = host.match(`(.+)\.${APP_DOMAIN}`)
-
-    const where = regex
-      ? { slug: regex[1].replace(/^www\./, '') }
-      : { custom_domain: host }
-
-    const promises = []
-    promises.push(store.dispatch(MobilizationActions.asyncFilterMobilization(where)))
-    promises.push(store.dispatch(MobilizationActions.asyncFilterBlock(where)))
-    promises.push(store.dispatch(MobilizationActions.asyncFilterWidget(where)))
-    return Promise.all(promises).then((values) => ({
-      mobilization: values[0],
-      blocks: values[1],
-      widgets: values[2]
-    }))
+class Page extends React.Component {
+  
+  componentDidMount () {
+    if (!this.props.isLoaded) {
+      this.props.fetchAll()
+    }
   }
 
   render () {
     return this.props.mobilization ? (
-      <IntlProvider locale={locale} messages={messages}>
-        <Provider store={store}>
-          <ApolloProvider store={store} client={client()}>
-            <Mobilization editable={false} />
-            <style global jsx>{styles}</style>
-          </ApolloProvider>
-        </Provider>
-      </IntlProvider>
+      <div>
+        <Mobilization editable={false} />
+        <style global jsx>{styles}</style>
+      </div>
     ) : (<h2>Loading...</h2>)
   }
 }
+
+const mapStateToProps = (state) => {
+  const { mobilizations: { list: { currentId, data, isLoaded } } } = state
+  if (currentId) {
+    return {
+      isLoaded: isLoaded,
+      mobilization: data.filter(({ id }) => id === currentId)[0]
+    }
+  }
+  return { isLoaded: isLoaded }
+}
+
+const mapActionsToProps = (dispatch, ownProps) => ({
+  fetchAll: () => {
+    const { headers, appDomain } = ownProps
+    if (headers) {
+      const { actions: MobilizationActions } = MobilizationReducer
+      const host = headers['host']
+      // eslint-disable-next-line
+      const regex = host.match(`(.+)\.${appDomain}`)
+
+      const where = regex
+        ? { slug: regex[1].replace(/^www\./, '') }
+        : { custom_domain: host }
+
+      const promises = []
+      promises.push(dispatch(MobilizationActions.asyncFilterMobilization(where)))
+      promises.push(dispatch(MobilizationActions.asyncFilterBlock(where)))
+      promises.push(dispatch(MobilizationActions.asyncFilterWidget(where)))
+      Promise.all(promises)
+    }
+  }
+})
+
+export default ProviderStore(connect(mapStateToProps, mapActionsToProps)(Page))
