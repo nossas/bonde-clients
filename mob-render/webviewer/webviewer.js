@@ -5829,9 +5829,9 @@ const config = {
   nodeEnv: "development",
   webConcurrency: process.env.WEB_CONCURRENCY || 1,
   port: process.env.PORT || 1337,
-  apiUrl: "http://bonde.devel:3000" || 'http://localhost:3000',
-  graphqlUrl: "http://bonde.devel:3001/graphql" || 'http://localhost:3003/graphql',
-  appDomain: "bonde.devel:3005" || 'localhost',
+  apiUrl: process.env.API_URL || 'http://localhost:3000',
+  graphqlUrl: process.env.GRAPHQL_URL || 'http://localhost:3003/graphql',
+  appDomain: process.env.APP_DOMAIN || 'localhost',
   timeout: 120000,
   defaultLocale: process.env.DEFAULT_LOCALE || 'pt-BR',
   locales: ['pt-BR', 'en', 'es']
@@ -8814,7 +8814,7 @@ var InsertImageButton = function (_Component) {
           _react2.default.createElement('i', { className: 'fa fa-image' })
         ),
         _react2.default.createElement(_reactS3Uploader2.default, {
-          signingUrl: "http://bonde.devel:3000" + '/uploads',
+          signingUrl: process.env.API_URL + '/uploads',
           accept: 'image/*',
           onProgress: this.handleUploadProgress.bind(this),
           onError: this.handleUploadError.bind(this),
@@ -10275,7 +10275,7 @@ var WYSIHTMLToolbarInsertImage = function (_React$Component) {
           null,
           _react2.default.createElement(_reactS3Uploader2.default, {
             className: 'input col-11 inline-block',
-            signingUrl: "http://bonde.devel:3000" + '/uploads',
+            signingUrl: process.env.API_URL + '/uploads',
             accept: 'image/*',
             onProgress: this.handleUploadProgress.bind(this),
             onError: this.handleUploadError.bind(this),
@@ -16452,7 +16452,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         var mainColor = widget.settings.main_color ? widget.settings.main_color : '#43a2cc';
 
         var checkout = new PagarMeCheckout.Checkout({
-          encryption_key: "ek_test_PYsS1XrZsCCF7wynC67YEi5RW3lSCV" || 'setup env var',
+          encryption_key: process.env.PAGARME_KEY || 'setup env var',
           success: function success(data) {
             data.subscription = paymentType === 'users_choice' ? selectedPaymentType !== 'unique' : data.subscription = paymentType !== 'unique';
 

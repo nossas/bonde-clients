@@ -110,15 +110,7 @@ module.exports = {
 
   plugins: [
     new webpack.EnvironmentPlugin({
-      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      API_URL: JSON.stringify(process.env.API_URL),
-      GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-      APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
-      PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
-      AWS_BUCKET: JSON.stringify(process.env.AWS_BUCKET),
-      SENTRY_DSN_PUBLIC: JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
-      GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
-      BOT_URL: JSON.stringify(process.env.BOT_URL)
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.NamedModulesPlugin(),
     new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true}),
