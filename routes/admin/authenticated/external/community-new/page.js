@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { Background } from '~client/components/layout'
+import { BondeBackground } from '~client/components/layout/background'
 import {
   FormRedux,
   FormGroup,
@@ -30,7 +30,7 @@ class CommunityNewPage extends Component {
       ...formProps
     } = this.props
     return (
-      <Background image={image}>
+      <BondeBackground contentSize={3}>
         <div>
           <h1>
             <FormattedMessage
@@ -100,7 +100,7 @@ class CommunityNewPage extends Component {
             <FormError className='mt2' />
           </FormRedux>
         </div>
-      </Background>
+      </BondeBackground>
     )
   }
 }

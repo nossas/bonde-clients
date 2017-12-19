@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
+import { BondeBackground } from '~client/components/layout/background'
 
 import {
   FormRedux,
@@ -32,7 +33,7 @@ class RegisterPage extends Component {
       ...formProps
     } = this.props
     return (
-      <div>
+      <BondeBackground>
         <h1>
           <FormattedMessage
             id='page--account-register.title'
@@ -136,7 +137,7 @@ class RegisterPage extends Component {
             )}
           </Button>
         </FormRedux>
-      </div>
+      </BondeBackground>
     )
   }
 }

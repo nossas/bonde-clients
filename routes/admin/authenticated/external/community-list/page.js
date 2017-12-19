@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Background } from '~client/components/layout'
+import { BondeBackground } from '~client/components/layout/background'
 import * as paths from '~client/paths'
 import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
@@ -24,10 +24,13 @@ class CommunityListPage extends Component {
   }
 
   render () {
-    const { image, isLoading, isLoaded, communities, user } = this.props
+    const { isLoading, isLoaded, communities, user } = this.props
 
     return isLoading || user === undefined ? <Loading /> : (
-      <Background image={image} alignment={{ x: 'center', y: 'top' }}>
+      <BondeBackground
+        contentSize={3}
+        alignment={{ x: 'center', y: 'top' }}
+      >
         <div className='col-12'>
           <h1>
             <FormattedMessage
@@ -70,7 +73,7 @@ class CommunityListPage extends Component {
             />
           </p>
         </div>
-      </Background>
+      </BondeBackground>
     )
   }
 }

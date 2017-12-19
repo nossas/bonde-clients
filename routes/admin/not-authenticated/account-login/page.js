@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FormattedMessage, intlShape } from 'react-intl'
-
+import { BondeBackground } from '~client/components/layout/background'
 import * as paths from '~client/paths'
 import {
   FormRedux,
@@ -39,76 +39,78 @@ class LoginPage extends Component {
     } = this.props
 
     return (
-      <div className='page col-3'>
-        <div className='col-8 mb3 mx-auto'>
-          <img alt='Logo Bonde' src={
-            require('exenv').canUseDOM
-              ? require('~client/images/logo-nossas.svg')
-              : null
-          } />
+      <BondeBackground>
+        <div className='page col-3'>
+          <div className='col-8 mb3 mx-auto'>
+            <img alt='Logo Bonde' src={
+              require('exenv').canUseDOM
+                ? require('~client/images/logo-nossas.svg')
+                : null
+            } />
+          </div>
+          <FormRedux
+            nosubmit
+            className='bg-white rounded'
+            onSubmit={values => login(values)}
+            {...formProps}
+          >
+            <FormGroup controlId='emailId' {...email}>
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--account-login.label.email'
+                  defaultMessage='E-mail'
+                />
+              </ControlLabel>
+              <FormControl
+                type='email'
+                placeholder={
+                  intl.formatMessage({
+                    id: 'page--account-login.placeholder.email',
+                    defaultMessage: 'exemplo@email.com'
+                  })
+                }
+              />
+            </FormGroup>
+            <FormGroup controlId='passwordId' {...password}>
+              <ControlLabel hideError>
+                <FormattedMessage
+                  id='page--account-login.label.password'
+                  defaultMessage='Senha'
+                />
+                {InputError(password)}
+                {errorMessage && !formProps.submitting && !password.error && password.touched ? (
+                  <span className='red'>
+                    {` - ${errorMessage} `}
+                    <Link to={paths.accountRetrieve()} className={styles.error}>
+                      <FormattedMessage
+                        id='page--account-login.auth.error-message.retrieve-password.link'
+                        defaultMessage='Esqueceu sua senha?'
+                      />
+                    </Link>
+                  </span>
+                ) : null}
+              </ControlLabel>
+              <FormControl
+                type='password'
+                placeholder='••••••••••'
+              />
+            </FormGroup>
+            <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
+              {formProps.submitting ? (
+                <FormattedMessage
+                  id='page--account-login.loading'
+                  defaultMessage='Carregando...'
+                />
+              ) : (
+                <FormattedMessage
+                  id='page--account-login.signin'
+                  defaultMessage='Entrar'
+                />
+              )}
+            </Button>
+          </FormRedux>
         </div>
-        <FormRedux
-          nosubmit
-          className='bg-white rounded'
-          onSubmit={values => login(values)}
-          {...formProps}
-        >
-          <FormGroup controlId='emailId' {...email}>
-            <ControlLabel>
-              <FormattedMessage
-                id='page--account-login.label.email'
-                defaultMessage='E-mail'
-              />
-            </ControlLabel>
-            <FormControl
-              type='email'
-              placeholder={
-                intl.formatMessage({
-                  id: 'page--account-login.placeholder.email',
-                  defaultMessage: 'exemplo@email.com'
-                })
-              }
-            />
-          </FormGroup>
-          <FormGroup controlId='passwordId' {...password}>
-            <ControlLabel hideError>
-              <FormattedMessage
-                id='page--account-login.label.password'
-                defaultMessage='Senha'
-              />
-              {InputError(password)}
-              {errorMessage && !formProps.submitting && !password.error && password.touched ? (
-                <span className='red'>
-                  {` - ${errorMessage} `}
-                  <Link to={paths.accountRetrieve()} className={styles.error}>
-                    <FormattedMessage
-                      id='page--account-login.auth.error-message.retrieve-password.link'
-                      defaultMessage='Esqueceu sua senha?'
-                    />
-                  </Link>
-                </span>
-              ) : null}
-            </ControlLabel>
-            <FormControl
-              type='password'
-              placeholder='••••••••••'
-            />
-          </FormGroup>
-          <Button type='submit' className='btn py2 caps white col-12 rounded-bottom bg-pagenta'>
-            {formProps.submitting ? (
-              <FormattedMessage
-                id='page--account-login.loading'
-                defaultMessage='Carregando...'
-              />
-            ) : (
-              <FormattedMessage
-                id='page--account-login.signin'
-                defaultMessage='Entrar'
-              />
-            )}
-          </Button>
-        </FormRedux>
-      </div>
+      </BondeBackground>
     )
   }
 }
