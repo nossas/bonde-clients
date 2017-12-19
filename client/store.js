@@ -3,7 +3,6 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
-import cookie from 'react-cookie'
 import DefaultServerConfig from '~server/config'
 import createReducer from './createReducer'
 import DevTools from './components/dev-tools'
@@ -26,8 +25,6 @@ networkInterface.use([
       }
       // Non-use auth for authenticate mutation to make a new JWT Token
       const requiredAuth = req.request.operationName !== 'authenticate'
-
-      cookie.plugToRequest(req)
 
       const localStorageAuth = window.localStorage.getItem('auth')
       const auth = localStorageAuth ? JSON.parse(localStorageAuth) : {}
