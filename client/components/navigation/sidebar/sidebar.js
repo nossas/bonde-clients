@@ -151,7 +151,7 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
       </SidenavList>
     </Sidenav>
     <div className='flex flex-auto' style={{ marginLeft: 80 }}>
-      {children && React.cloneElement(children)}
+      {children}
     </div>
   </div>
 )

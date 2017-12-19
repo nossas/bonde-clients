@@ -12,12 +12,10 @@ import AccountRegister from '~routes/admin/not-authenticated/account-register/pa
 import CommunityList from '~routes/admin/authenticated/external/community-list/page.connected'
 import CommunityRegister from '~routes/admin/authenticated/external/community-new/page.connected'
 // ---  Sidebar Container
-import MobilizationsList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
 import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
 import Logout from '~routes/admin/authenticated/logout/page.connected.js'
-
-// Community Settings
-import CommunityContainer from '~routes/admin/authenticated/sidebar/community-settings/container'
+// Sidebar Container
+import Sidebar from './subroutes/sidebar'
 import { withBackground, withUser, withSidebar } from '~root/routes-v1/hocs'
 
 const About = () => (
@@ -32,19 +30,10 @@ const AuthExample = () => (
       <Route exact path='/login' component={withBackground(AccountLogin)} />
       <Route exact path='/register' component={withBackground(AccountRegister)} />
       <PrivateRoute exact path='/logout' component={Logout} />
-      <PrivateRoute exact path='/' component={withUser(MobilizationsList)} />
       <PrivateRoute exact path='/community' component={withUser(CommunityList)} />
       <PrivateRoute exect path='/community/new' component={withUser(CommunityRegister)} />
       {/* Sidebar container */}
-      <PrivateRoute
-        path='/community'
-        component={withUser(withSidebar(CommunityContainer))}
-      />
-      <PrivateRoute
-        exact
-        path='/mobilizations'
-        component={withUser(withSidebar(MobilizationsList))}
-      />
+      <PrivateRoute path='/' component={withUser(Sidebar)} />
       <PrivateRoute
         exact
         path='/mobilizations/:mobilization_id/edit'

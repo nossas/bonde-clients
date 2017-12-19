@@ -17,7 +17,7 @@ const RouteRoot = ({ path, component }) => (
   <Route exact path={`/community${path}`} component={component} />
 )
 
-const SettingsContainer = ({ children, location }) => (
+const SettingsContainer = ({ location }) => (
   <SettingsPageLayout>
     <SettingsMenu location={location} />
     <SettingsPageContentLayout>
