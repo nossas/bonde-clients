@@ -2,10 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ProviderStore } from '../components'
 import { Mobilization, Reducer as MobilizationReducer } from '../webviewer/webviewer'
-import styles from '../webviewer/main.3b3e3ca1d1b88a76b379.css'
+import styles from './../webviewer/main.dba55199cd8fb7024923.css'
 
 class Page extends React.Component {
-  
   componentDidMount () {
     if (!this.props.isLoaded) {
       this.props.fetchAll()
@@ -15,8 +14,8 @@ class Page extends React.Component {
   render () {
     return this.props.mobilization ? (
       <div>
-        <Mobilization editable={false} />
         <style global jsx>{styles}</style>
+        <Mobilization editable={false} />
       </div>
     ) : (<h2>Loading...</h2>)
   }

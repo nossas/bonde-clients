@@ -4,6 +4,12 @@
     ["react-intl", {
       "messagesDir": "./build/intl/messages",
       "enforceDescriptions": false
-    }]
+    }],
+    [
+      "inline-import",
+      {
+        "extensions": [".css"]
+      }
+    ]
   ]
 }

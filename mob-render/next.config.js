@@ -12,23 +12,17 @@ module.exports = {
       }))
     }
 
+    config.plugins.push(new webpack.EnvironmentPlugin({
+      API_URL: JSON.stringify(process.env.API_URL),
+      GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
+      APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
+    }))
+
     config.plugins.push(new webpack.ProvidePlugin({
       'window.jQuery': 'jquery'
     }))
 
     config.module.rules.push(
-      {
-        test: /\.css$/,
-        loader: 'emit-file-loader',
-        options: {
-          name: 'dist/[path][name].[ext]'
-        }
-      },
-      {
-        test: /\.css$/,
-        // Simplest example (non-minified)..
-        loader: `babel-loader!next-style-loader`
-      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
