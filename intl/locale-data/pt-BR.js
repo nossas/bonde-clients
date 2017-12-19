@@ -161,7 +161,7 @@ export default {
   'community.components--settings-menu.tabs.mobilizers': 'Mobilizadores',
   'community.components--settings-menu.tabs.mailchimp': 'Integração com Mailchimp',
   'community.components--settings-menu.tabs.recipient': 'Conta bancária',
-  'community.components--settings-menu.tabs.metrics': 'Métricas',
+  'community.components--settings-menu.tabs.metrics': 'Dados',
   'community.components--settings-menu.tabs.domains': 'Domínios',
 
   // component community domain preview
@@ -336,26 +336,25 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
   // routepath: /community/twilio
   'page--community-twilio.helper-text.title': 'Onde encontro essa informação?',
-  'page--community-twilio.helper-text.twilio-login': 'Faça login no {link}',
-  'page--community-twilio.helper-text.twilio-login.link': 'site do Twilio',
+  'page--community-twilio.helper-text.twilio-login': 'É só seguir estes passos: Faça login na {link}',
+  'page--community-twilio.helper-text.twilio-login.link': 'sua conta no Twilio',
 
   'page--community-twilio.form.twilio-account-sid.label': 'Twilio Account SID',
   'page--community-twilio.form.twilio-auth-token.label': 'Twilio Auth Token',
   'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Clicar no ícone do olho',
   'page--community-twilio.form.twilio-number.label': 'Twilio Number',
   'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Clique em {strongPhoneNumber} (símbolo de {strongHashtag} no menu da esquerda)',
-  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escolha qual número Twilio quer usar',
+  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escolha qual número do Twilio quer usar',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
   // routepath: /community/new
   'page--community-new.title': 'Crie uma comunidade',
-  'page--community-new.subtitle': 'Comunidades do Bonde são grupos de ação que trabalham juntos por uma causa.',
-
+  'page--community-new.subtitle': 'É na comunidade que tudo acontece: onde você cria e publica páginas de ação, gerencia seus dados e, claro, chama seu bonde pra chegar junto!.',
   'page--community-new.form.name.label': 'Nome da comunidade',
-  'page--community-new.form.name.placeholder': 'Exemplo: Movimento 90º São Paulo',
+  'page--community-new.form.name.placeholder': 'Exemplo: Meu Rio',
   'page--community-new.form.city.label': 'Cidade da comunidade',
-  'page--community-new.form.city.placeholder': 'Exemplo: São Paulo',
+  'page--community-new.form.city.placeholder': 'Exemplo: Rio de Janeiro',
   'page--community-new.form.submit-button.text.default': 'Criar comunidade',
   'page--community-new.form.submit-button.text.saving': 'Salvando...',
 
@@ -369,19 +368,18 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.js
   // routepath: /community/recipient
   'page--community-recipient.warning.title': 'Importante',
-  'page--community-recipient.warning.content.list.li-01': 'Informe: Preencha sua conta bancária abaixo para trasferirmos automaticamente as doações recebidas por sua comunidade.',
-  'page--community-recipient.warning.content.list.li-02': 'Atenção 1: Não é possível fazer a transferência de uma doação já recebida para uma nova conta bancária, sempre será utilizada a conta bancária ativa no momento da doação.',
-  'page--community-recipient.warning.content.list.li-03': 'Atenção 2: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
-  'page--community-recipient.title': 'Agendamento dos Saques',
+  'page--community-recipient.warning.content.list.li-01': 'A partir do momento em que você preencher os campos abaixo, você vai poder começar a arrecadar pela ferramenta de crowdfunding!',
+  'page--community-recipient.warning.content.list.li-02': 'Atenção: qualquer quantia arrecadada pelas páginas da sua comunidade vai ser automaticamente transferida para a conta cadastrada aqui no dia do mês (ou da semana) que selecionar abaixo.',
+  'page--community-recipient.title': 'Data de Transferência',
   'page--community-recipient.form.transfer-interval.label': 'Recorrência',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
   'page--community-recipient.form.transfer-interval.value.monthly': 'Mensal',
-  'page--community-recipient.form.transfer-day.label': 'Dia de execução',
-  'page--community-recipient.form.transfer-day.weekly.mon': 'Segunda',
-  'page--community-recipient.form.transfer-day.weekly.tue': 'Terça',
-  'page--community-recipient.form.transfer-day.weekly.wed': 'Quarta',
-  'page--community-recipient.form.transfer-day.weekly.thu': 'Quinta',
-  'page--community-recipient.form.transfer-day.weekly.fri': 'Sexta',
+  'page--community-recipient.form.transfer-day.label': 'Dia de transferência',
+  'page--community-recipient.form.transfer-day.weekly.mon': 'Segundas',
+  'page--community-recipient.form.transfer-day.weekly.tue': 'Terças',
+  'page--community-recipient.form.transfer-day.weekly.wed': 'Quartas',
+  'page--community-recipient.form.transfer-day.weekly.thu': 'Quintas',
+  'page--community-recipient.form.transfer-day.weekly.fri': 'Sextas',
   'page--community-recipient.section--account.title': 'Conta bancária',
   'page--community-recipient.form.bank-account-type.label': 'Tipo de conta',
   'page--community-recipient.form.bank-account-type.value.checking-account': 'Corrente',
@@ -405,12 +403,12 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.connected.js
   // routepath: /community/recipient
   'page--community-recipient.form.validation.required': 'Campo obrigatório',
-  'page--community-recipient.form.bank-agency.validation.max-length': 'Deve conter no máximo 5 digitos',
-  'page--community-recipient.form.bank-agency-dv.validation.length': 'Deve conter apenas 1 digito',
-  'page--community-recipient.form.bank-account.validation.max-length': 'Deve conter no máximo 13 digitos',
+  'page--community-recipient.form.bank-agency.validation.max-length': 'Deve conter no máximo 5 dígitos',
+  'page--community-recipient.form.bank-agency-dv.validation.length': 'Deve conter apenas 1 dígito',
+  'page--community-recipient.form.bank-account.validation.max-length': 'Deve conter no máximo 13 dígitos',
   'page--community-recipient.form.bank-account-dv.validation.max-length': 'Deve conter no máximo 2 caracteres',
-  'page--community-recipient.form.bank-document-number.validation.cnpj-length': 'CNPJ deve conter 14 digitos',
-  'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF deve conter 11 digitos',
+  'page--community-recipient.form.bank-document-number.validation.cnpj-length': 'CNPJ deve conter 14 dígitos',
+  'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF deve conter 11 dígitos',
   'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format': 'CPF inválido',
   'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format': 'CNPJ inválido',
 
@@ -418,21 +416,21 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /client/components/metrics/components/metrics-data-table.js
   // routepath: /community/report
   'c--metrics.unique.activists.title': 'ATIVISTAS',
-  'c--metrics.unique.activists.subtitle': 'Total de ativistas únicos',
+  'c--metrics.unique.activists.subtitle': 'Total de pessoas que já agiram em alguma página publicada pela sua comunidade',
   'c--metrics.total.active.activists.title': 'ATIVISTAS',
-  'c--metrics.total.active.activists.subtitle': 'Total de ativistas ativos {br} nos últimos 90 dias',
+  'c--metrics.total.active.activists.subtitle': 'Total de pessoas que agiram na sua comunidade {br} nos últimos 90 dias',
 
-  'c--metrics.total.pressure.actions.title': 'AÇÕES',
-  'c--metrics.total.pressure.actions.subtitle': 'Total de ações de pressão {br} nos últimos 90 dias',
-  'c--metrics.total.subscriptions.actions.title': 'AÇÕES',
-  'c--metrics.total.subscriptions.actions.subtitle': 'Total de ações de assinatura {br} nos últimos 90 dias',
+  'c--metrics.total.pressure.actions.title': 'PRESSÃO',
+  'c--metrics.total.pressure.actions.subtitle': 'Total de ações de pressão {br} feitas em páginas da sua comunidade nos últimos 90 dias',
+  'c--metrics.total.subscriptions.actions.title': 'FORMULÁRIO',
+  'c--metrics.total.subscriptions.actions.subtitle': 'Total de ações de cadastro em formulários publicados pela sua comunidade {br} nos últimos 90 dias',
 
-  'c--metrics.total.unique.donations.title': 'DOAÇÕES',
-  'c--metrics.total.unique.donations.subtitle': 'Valor total das doações únicas confirmadas nos últimos 30 dias',
-  'c--metrics.total.recurrent.donations.title': 'DOAÇÕES',
-  'c--metrics.total.recurrent.donations.subtitle': 'Valor total das doações recorrentes confirmadas nos últimos 30 dias',
+  'c--metrics.total.unique.donations.title': 'DOAÇÕES ÚNICAS',
+  'c--metrics.total.unique.donations.subtitle': 'Valor total das doações únicas confirmadas na sua comunidade nos últimos 30 dias',
+  'c--metrics.total.recurrent.donations.title': 'DOAÇÕES RECORRENTES',
+  'c--metrics.total.recurrent.donations.subtitle': 'Valor total das doações recorrentes confirmadas na sua comunidade nos últimos 30 dias',
   'c--metrics.total.unique-and-recurrent.donations.title': 'DOAÇÕES',
-  'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de doações únicas e recorrentes até agora {br}(confirmadas / aguardando pagamento)',
+  'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de doações únicas e recorrentes arrecadadas pela sua comunidade até agora {br}(confirmadas / aguardando pagamento)',
 
   'c--metrics.total.donations.charged-back-amount': 'Valor total de devolução das doações coletadas até agora:',
   'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso das doações coletadas até agora:',
@@ -445,15 +443,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--community-report.title.reports': 'Relatórios',
 
   'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
-  'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório de doações da comunidade.',
+  'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as doações feitas na sua comunidade.',
   'page--community-report.section-button.donation.text': 'Baixar',
 
   'page--community-report.section-button.actions.title': 'RELATÓRIO DE AÇÕES',
-  'page--community-report.section-button.actions.helper-text': 'Clique no botão abaixo para baixar o relatório de ações feitas na comunidade.',
+  'page--community-report.section-button.actions.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as ações feitas na sua comunidade.',
   'page--community-report.section-button.actions.text': 'Baixar',
 
   'page--community-report.section-button.activists.title': 'RELATÓRIO DE ATIVISTAS',
-  'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório dos ativistas da comunidade.',
+  'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as pessoas que agiram na sua comunidade.',
   'page--community-report.section-button.activists.text': 'Baixar',
 
   // component sidebar
@@ -494,17 +492,17 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
-  'components.navigation--sidebar.community-settings.item.mobilizations': 'Mobilizações',
-  'components.navigation--sidebar.community-settings.item.info': 'Comunidade',
-  'components.navigation--sidebar.community-settings.item.metrics': 'Métricas',
-  'components.navigation--sidebar.community-settings.item.domains': 'Domínios',
+  'components.navigation--sidebar.community-settings.item.mobilizations': 'Suas Páginas',
+  'components.navigation--sidebar.community-settings.item.info': 'Sua Comunidade',
+  'components.navigation--sidebar.community-settings.item.metrics': 'Seus Dados',
+  'components.navigation--sidebar.community-settings.item.domains': 'Seus Domínios',
 
-  'components.navigation--sidebar.mobilization-settings.item.launch': 'PUBLICAR BONDE',
-  'components.navigation--sidebar.mobilization-settings.item.launched': 'BONDE público',
-  'components.navigation--sidebar.mobilization-settings.item.edit': 'Editar mobilização',
-  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar conteúdo',
-  'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Ver em uma nova aba',
-  'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações',
+  'components.navigation--sidebar.mobilization-settings.item.launch': 'Publicar página',
+  'components.navigation--sidebar.mobilization-settings.item.launched': 'Página publicada',
+  'components.navigation--sidebar.mobilization-settings.item.edit': 'Editar página',
+  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar bloco de conteúdo',
+  'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Visualizar',
+  'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações da página',
 
   'components.navigation--sidebar.footer.account': 'Minha Conta',
   'components.navigation--sidebar.footer.sign-out': 'Sair',
@@ -718,7 +716,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'mobilizations.components--settings-menu.title': 'Configure sua mobilização',
   'mobilizations.components--settings-menu.tabs.info': 'Informações básicas',
   'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
-  'mobilizations.components--settings-menu.tabs.metrics': 'Métricas',
+  'mobilizations.components--settings-menu.tabs.metrics': 'Dados',
   'mobilizations.components--settings-menu.tabs.domain': 'Domínio',
 
   // page mobilizations settings analytics
