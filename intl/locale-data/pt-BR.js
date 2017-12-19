@@ -243,7 +243,7 @@ servidor-03.dominio.com`,
   'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registroBr} ou {goDaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
   'page--community-domain-create.step-dns-servers.subtitle.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
   'page--community-domain-create.step-dns-servers.change-later-button.text': 'Trocar depois',
-  'page--community-domain-create.step-dns-servers.button.text': 'Continuar',
+  'page--community-domain-create.step-dns-servers.button.text': 'Próxima parada',
 
   'page--community-domain-create.step-check.title': 'Teste a conexão',
   'page--community-domain-create.step-check.first-paragraph': 'Clique no botão abaixo para verificar se tudo está certo.',
@@ -675,7 +675,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /register
   //   - /subscriptions/:id/edit
   'components--control-buttons.cancel': 'Voltar',
-  'components--control-buttons.input.value.default': 'Próxima parada!',
+  'components--control-buttons.input.value.default': 'Próxima parada',
   'components--control-buttons.input.value.saving': 'Salvando...',
 
   // page mobilizations templates choose
@@ -694,7 +694,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'templates.components--selectable-list.filterable-search-bar.placeholder': 'Buscar template',
   'templates.components--selectable-list.empty-list-text': 'Ops, não existe nenhum template com esse nome...',
   'templates.components--selectable-list.button.back': 'Voltar',
-  'templates.components--selectable-list.button.next': 'Próxima parada!',
+  'templates.components--selectable-list.button.next': 'Próxima parada',
 
   // page mobilizations templates choose custom
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
@@ -1058,7 +1058,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /client/mobrender/widgets/config.js
   // routepath: /mobilizations/:mobilization_id/edit
   'widgets.config--content.label': 'Texto',
-  'widgets.config--content.default': 'Clique aqui para editar...',
+  'widgets.config--content.default': 'Clique para editar a ferramenta',
   'widgets.config--form.label': 'Formulário',
   'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
   'widgets.config--pressure.label': 'Pressão',
@@ -1072,14 +1072,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'widgets.components--donation.default.button-text': 'Doar agora',
-  'widgets.components--donation.default.title-text': 'Clique para configurar seu bloco de doação',
+  'widgets.components--donation.default.title-text': 'Clique para editar a ferramenta',
   'widgets.components--donation.period-label-options.month': 'mês',
   'widgets.components--donation.period-label-options.halfyear': 'semestre',
   'widgets.components--donation.period-label-options.year': 'ano',
   'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
-  'widgets.components--donation.users-choice.unique': 'Doação única',
+  'widgets.components--donation.users-choice.unique': 'Doação pontual',
   'widgets.components--donation.reattempt.message.title': 'Ops!',
-  'widgets.components--donation.reattempt.message.text.line-01': 'Algo de errado aconteceu com a sua doação. ):',
+  'widgets.components--donation.reattempt.message.text.line-01': 'Aconteceu algum problema :(',
   'widgets.components--donation.reattempt.message.text.line-02': 'Clique no botão abaixo pra tentar de novo.',
   'widgets.components--donation.reattempt.message.button.text': 'Nova tentativa',
   'widgets.components--donation.progress-bar.collected': 'arrecadados',
@@ -1108,18 +1108,18 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
-  'form-widget.components--settings-menu.title': 'Configure o formulário da sua ação',
-  'form-widget.components--settings-menu.items.fields': 'Campos do formulário',
+  'form-widget.components--settings-menu.title': 'Configurações da ferramenta',
+  'form-widget.components--settings-menu.items.fields': 'Configurações',
   'form-widget.components--settings-menu.items.adjusts': 'Ajustes',
-  'form-widget.components--settings-menu.items.autofire': 'Mensagem agradecimento',
+  'form-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
   'form-widget.components--settings-menu.items.report': 'Relatório',
-  'form-widget.components--settings-menu.items.post-action': 'Pós-inscrição',
+  'form-widget.components--settings-menu.items.post-action': 'Pós-ação',
 
   // page form widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form
-  'page--form-widget.form.success-message': 'Formulário configurado com sucesso!',
-  'page--form-widget.form.widget-title.label': 'Título do formulário',
+  'page--form-widget.form.success-message': 'Oba! Ferramenta configurada com sucesso :)',
+  'page--form-widget.form.widget-title.label': 'Título',
   'page--form-widget.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
   'page--form-widget.form.button-text.label': 'Botão',
   'page--form-widget.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
@@ -1130,42 +1130,42 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /client/mobilizations/widgets/components/data-export.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   'widgets.components--data-export.formated-export-at': '{date} às {time}',
-  'widgets.components--data-export.loading.message': 'Aguarde enquanto estamos processando...',
+  'widgets.components--data-export.loading.message': 'Processando...',
   'widgets.components--data-export.exported.message': 'Última exportação: {formatedExportAt}.',
-  'widgets.components--data-export.export.label': 'Exportar',
-  'widgets.components--data-export.export.helper-text': 'Clique no botão abaixo para baixar o relatório completo do formulário em formato excel.',
-  'widgets.components--data-export.export.button': 'Clique para baixar a planilha completa.',
+  'widgets.components--data-export.export.label': 'Relatório de ações',
+  'widgets.components--data-export.export.helper-text': 'Clique no botão abaixo para baixar um relatório com todos os dados capturados pelo formulário.',
+  'widgets.components--data-export.export.button': 'Baixar',
 
   // action async widget data export
   // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
-  'action--async-widget-data-export.no-data': 'Nao foi encontrado nenhum dado para ser exportado',
+  'action--async-widget-data-export.no-data': 'Ops, não encontramos nenhum dado para ser exportado...',
 
   // content widget
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/__content__.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'c--content-widget.delete-widget.confirm.message': 'Deseja remover o widget?',
+  'c--content-widget.delete-widget.confirm.message': 'Quer remover a ferramenta?',
 
   // slate editor implementation component
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
   // routepath: /mobilizations/:mobilization_id/edit
   'c--editor-slate.button-save.text': 'Salvar',
   'c--editor-slate.button-cancel.text': 'Cancelar',
-  'c--editor-slate.button-cancel.message': 'Deseja mesmo sair do modo edição? Suas alterações não serão salvas.',
+  'c--editor-slate.button-cancel.message': 'Quer mesmo sair do modo edição? Suas alterações não serão salvas.',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   'page--form-widget-fields.add-button': 'Adicionar um campo',
-  'page--form-widget-fields.helper-text.still-empty': 'Seu formulário ainda não possui nenhum campo. Clique abaixo para começar a adicionar campos.',
-  'page--form-widget-fields.helper-text.manage-fields': 'Adicione, remova, edite e ordene os campos do formulário de acordo com as necessidades da sua ação.',
+  'page--form-widget-fields.helper-text.still-empty': 'Seu formulário ainda não tem nenhum campo... Clique no botão para começar a adicionar!',
+  'page--form-widget-fields.helper-text.manage-fields': 'Aqui você pode adicionar, remover, editar e ordenar os campos do seu formulário do jeito que quiser :)',
 
   // component form widget
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/__form__.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'form-widget.components--form.default.title-text': 'Clique para configurar seu formulário...',
+  'form-widget.components--form.default.title-text': 'Clique para configurar sua ferramenta...',
   'form-widget.components--form.default.button-text': 'Enviar',
 
   // component form widget input
@@ -1178,8 +1178,8 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // component form widget input form
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input-form.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
-  'form-widget.components--input-form.handle-remove.confirm': 'Você tem certeza que quer remover este campo?',
-  'form-widget.components--input-form.handle-overlay-click.confirm': 'Ao sair sem salvar você perderá suas modificações. Deseja sair sem salvar?',
+  'form-widget.components--input-form.handle-remove.confirm': 'Você quer mesmo remover este campo?',
+  'form-widget.components--input-form.handle-overlay-click.confirm': 'Ao sair sem salvar você vai perder suas alterações... Quer sair mesmo assim?',
   'form-widget.components--input-form.field-title.label': 'Título do campo',
   'form-widget.components--input-form.field-title.placeholder': 'Ex: Email',
   'form-widget.components--input-form.field-helper-text.label': 'Texto de ajuda',
@@ -1209,14 +1209,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // page form widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
-  'page--form-widget-finish.success-message': 'Formulário de pós-inscrição salvo com sucesso!',
+  'page--form-widget-finish.success-message': 'Oba! Configurações salvas com sucesso :)',
 
   // component form widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/form-tell-a-friend.js
   // routepath:
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - (public) /
-  'form-widget.components--tell-a-friend.message': 'Formulário submetido com sucesso!',
+  'form-widget.components--tell-a-friend.message': 'Oba! Sua ação foi registrada :)',
 
   // component pressure widget form
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-form/index.js
@@ -1224,13 +1224,13 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'pressure-widget.components--pressure-form.validation.required': 'Preenchimento obrigatório',
-  'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'E-mail inválido',
-  'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da mobilização.',
-  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Informe o código do país e o DDD com dois dígitos. Ex: +5511',
-  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Telefone inválido',
-  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'O telefone que você está tentando usar é de um dos alvos da mobilização.',
-  'pressure-widget.components--pressure-form.email.label': 'E-mail',
-  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu e-mail',
+  'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'Email inválido',
+  'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da ferramenta...',
+  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Informe o código do país e o DDD com dois dígitos. Ex: +5521',
+  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Ops! Telefone inválido...',
+  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'O telefone que você está tentando usar é de um dos alvos da ferramenta...',
+  'pressure-widget.components--pressure-form.email.label': 'Email',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu email',
   'pressure-widget.components--pressure-form.phone.label': 'Telefone',
   'pressure-widget.components--pressure-form.phone.placeholder': 'Insira seu telefone. Ex: +5511987654321',
   'pressure-widget.components--pressure-form.name.label': 'Nome',
@@ -1240,15 +1240,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'pressure-widget.components--pressure-form.city.label': 'Cidade',
   'pressure-widget.components--pressure-form.city.placeholder': 'Insira sua cidade',
   'pressure-widget.components--pressure-form.subject.label': 'Assunto',
-  'pressure-widget.components--pressure-form.body.label': 'Corpo do e-mail',
-  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Chamada em andamento',
-  'pressure-widget.components--pressure-form.phone-calls.retry': 'Religar',
-  'pressure-widget.components--pressure-form.phone-calls.call': 'Religar',
+  'pressure-widget.components--pressure-form.body.label': 'Corpo do email',
+  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Ligação em andamento...',
+  'pressure-widget.components--pressure-form.phone-calls.retry': 'Ligar de novo',
+  'pressure-widget.components--pressure-form.phone-calls.call': 'Ligar de novo',
   'pressure-widget.components--pressure-form.phone.how-it-works.title': 'Como funciona?',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos ligando para o seu alvo',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos conectando com o alvo da vez...',
   'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'Assim que alguém atender do lado de lá, vamos te ligar',
   'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'Quando você atender, conectamos as ligações',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Agora é com você!',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Agora é com você, hora de pressionar!',
   'pressure-widget.components--pressure-form.phone.finish-and-share': 'Encerrar e Compartilhar',
 
   // component pressure widget settings menu
@@ -1258,11 +1258,11 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'pressure-widget.components--settings-menu.title': 'Configure seu formulário de pressão',
-  'pressure-widget.components--settings-menu.items.form': 'Formulário',
-  'pressure-widget.components--settings-menu.items.pressure-email': 'E-mail para alvo',
+  'pressure-widget.components--settings-menu.title': 'Configurações da ferramenta',
+  'pressure-widget.components--settings-menu.items.form': 'Ajustes',
+  'pressure-widget.components--settings-menu.items.pressure-email': 'Configurações',
   'pressure-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
-  'pressure-widget.components--settings-menu.items.post-action': 'Pós-pressão',
+  'pressure-widget.components--settings-menu.items.post-action': 'Pós-ação',
 
   // page pressure widget
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-count.js
@@ -1272,26 +1272,26 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // page pressure widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
-  'page--pressure-widget.success-message': 'Formulário de pressão configurado com sucesso!',
-  'page--pressure-widget.form.title-text.label': 'Título do formulário',
-  'page--pressure-widget.form.title-text.placeholder': 'Envie um e-mail para quem pode tomar essa decisão',
+  'page--pressure-widget.success-message': 'Oba! Configurações salvas com sucesso :)',
+  'page--pressure-widget.form.title-text.label': 'Título',
+  'page--pressure-widget.form.title-text.placeholder': 'Envie um email para quem pode tomar essa decisão',
   'page--pressure-widget.form.button-text.label': 'Texto do botão',
-  'page--pressure-widget.form.button-text.placeholder': 'Enviar e-mail',
-  'page--pressure-widget.form.main-color.label': 'Cor do formulário',
-  'page--pressure-widget.form.show-counter.label': 'Mostrar contador de pressão',
+  'page--pressure-widget.form.button-text.placeholder': 'Pressionar',
+  'page--pressure-widget.form.main-color.label': 'Cor',
+  'page--pressure-widget.form.show-counter.label': 'Mostrar contador de pressão?',
   'page--pressure-widget.form.show-counter.radio.yes.label': 'Sim',
   'page--pressure-widget.form.show-counter.radio.no.label': 'Não',
   'page--pressure-widget.form.counter-text.label': 'Texto do contador',
   'page--pressure-widget.form.counter-text.placeholder': 'pressões feitas',
-  'page--pressure-widget.form.show-city-field.label': 'Mostrar campo de cidade',
+  'page--pressure-widget.form.show-city-field.label': 'Mostrar campo de cidade?',
   'page--pressure-widget.form.show-city-field.radio.yes.label': 'Sim',
   'page--pressure-widget.form.show-city-field.radio.no.label': 'Não',
 
   // page pressure widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
-  'page--pressure-widget.form.validation.title-text.required': 'Insira um título para o formulário',
-  'page--pressure-widget.form.validation.button-text.required': 'Insira um texto para o botão',
+  'page--pressure-widget.form.validation.title-text.required': 'Preenchimento obrigatório',
+  'page--pressure-widget.form.validation.button-text.required': 'Preenchimento obrigatório',
 
   // component widgets input tag
   // filepath: /client/mobilizations/widgets/components/input-tag.js
@@ -1303,19 +1303,19 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
-  'page--pressure-widget-email.success-message': 'Email para alvo configurado com sucesso!',
-  'page--pressure-widget-email.form.input-tag.label': 'Alvos',
-  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Padrão inválido. Preencha conforme explicação acima.',
-  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'Você já cadastrou um alvo para pressão por email.',
-  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'Você já cadastrou um alvo para pressão por telefone.',
-  'page--pressure-widget-email.form.email-subject.label': 'Assunto do email',
-  'page--pressure-widget-email.form.email-body.label': 'Corpo do email que será enviado',
-  'page--pressure-widget-email.form.disable-edit-field.label': 'Desabilitar edição de assuno e corpo do e-mail',
+  'page--pressure-widget-email.success-message': 'Oba! Configurações salvas com sucesso :)',
+  'page--pressure-widget-email.form.input-tag.label': 'Adicionar alvos',
+  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Ops, formato inválido... Preencha do jeito que explicamos acima ;)',
+  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'Parece que você já cadastrou este alvo para receber pressão...',
+  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'Parece que você já cadastrou este alvo para receber pressão...',
+  'page--pressure-widget-email.form.email-subject.label': 'Assunto do email para os alvos',
+  'page--pressure-widget-email.form.email-body.label': 'Corpo do email para os alvos',
+  'page--pressure-widget-email.form.disable-edit-field.label': 'Desabilitar edição de assunto e corpo do email?',
   'page--pressure-widget-email.form.disable-edit-field.value.yes': 'Sim',
   'page--pressure-widget-email.form.disable-edit-field.value.no': 'Não',
 
   'p--pressure-widget--input-tag.info.title': 'Como cadastrar alvos',
-  'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar, clicando no botão no canto superior direito da tela.',
+  'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar depois, clicando no botão no canto superior direito da tela.',
   'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
   'p--pressure-widget--input-tag.info.item.target-format.example': 'Nome <email@provedor.com>',
   'p--pressure-widget--input-tag.info.item.special-chars': 'Em ambos os tipos de pressão é obrigatório o uso dos caractéres {lt} e {gt} para agrupar o email ou telefone',
@@ -1329,12 +1329,12 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // page pressure widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'page--pressure-widget-finish.success-message': 'Formulário de pós-pressão salvo com sucesso!',
+  'page--pressure-widget-finish.success-message': 'Oba! Configurações salvas com sucesso :)',
 
   // component pressure widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-tell-a-friend.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'pressure-widget--tell-a-friend.message': 'Pressão enviada',
+  'pressure-widget--tell-a-friend.message': 'Oba, sua pressão foi enviada!',
 
   // component pressure widget: target list
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/target-list/index.js
@@ -1368,77 +1368,77 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - page      ~> `p--`
   //   - component ~> `c--`
   //
-  'p--activists-management.header.title': 'Base de usuários',
-  'p--activists-management.header.button.upload.text': 'Upload',
-  'p--activists-management.header.button.download.text': 'Download',
+  'p--activists-management.header.title': 'Sua comunidade',
+  'p--activists-management.header.button.upload.text': 'Importar dados (csv)',
+  'p--activists-management.header.button.download.text': 'Exportar dados (csv)',
   'p--activists-management.content.title': '{totalNumber} pessoas',
-  'p--activists-management.content.button.tagging.text': 'Etiquetar',
+  'p--activists-management.content.button.tagging.text': 'Tags',
   'p--activists-management.content.button.email.text': 'Email',
   'p--activists-management.content.form-tagging.tags.placeholder': 'Digite tags separadas por vírgula',
-  'p--activists-management.content.form-tagging.button.text': 'Adicionar etiqueta',
-  'p--activists-management.content.form-tagging.success.message': 'Etiquetas adicionadas com sucesso a {taggedNumber} pessoas',
+  'p--activists-management.content.form-tagging.button.text': 'Adicionar tag',
+  'p--activists-management.content.form-tagging.success.message': 'Tags adicionadas com sucesso a {taggedNumber} pessoas',
   'p--activists-management.content.form-tagging.success.undo': 'Desfazer',
   'p--activists-management.content.activist-spotlight.title': 'Perfil selecionado',
   'p--activists-management.content.activist-spotlight.email.label': 'Email',
   'p--activists-management.content.activist-spotlight.phone.label': 'Telefone',
-  'p--activists-management.content.activist-spotlight.mobilizations.label': 'Mobilizações',
-  'p--activists-management.content.activist-spotlight.tags.label': 'Etiquetas',
+  'p--activists-management.content.activist-spotlight.mobilizations.label': 'Páginas em que agiu',
+  'p--activists-management.content.activist-spotlight.tags.label': 'Tags',
   'p--activists-management.content.activist-spotlight.form-tagging.button.text': 'Adicionar',
 
   // component activists management filterable list
   // filepath: {incoming-for-v0.6.x release}
   'activists-management.c--filterable-list.activist.placeholder': 'Quem você está procurando?',
 
-  'activists-management.c--filterable-list.suggest.placeholder': 'Filtre por mobilizações ou formulários',
+  'activists-management.c--filterable-list.suggest.placeholder': 'Filtre por páginas ou ferramentas',
   'activists-management.c--filterable-list.suggest.operators.label': 'Operadores',
   'activists-management.c--filterable-list.suggest.operators.options.or.label': 'ou',
   'activists-management.c--filterable-list.suggest.operators.options.and.label': 'e',
-  'activists-management.c--filterable-list.suggest.segment.donations.label': 'Doações',
-  'activists-management.c--filterable-list.suggest.segment.pressures.label': 'Pressões',
-  'activists-management.c--filterable-list.suggest.segment.gen-forms.label': 'Formulários genéricos',
-  'activists-management.c--filterable-list.suggest.segment.other-tags.label': 'Outras etiquetas',
+  'activists-management.c--filterable-list.suggest.segment.donations.label': 'Ferramenta: crowdfunding',
+  'activists-management.c--filterable-list.suggest.segment.pressures.label': 'Ferramenta: pressão',
+  'activists-management.c--filterable-list.suggest.segment.gen-forms.label': 'Ferramenta: formulário',
+  'activists-management.c--filterable-list.suggest.segment.other-tags.label': 'Outras tags',
 
   'activists-management.c--filterable-list.period.options.today': 'Hoje',
-  'activists-management.c--filterable-list.period.options.last-week': 'Na última semana',
-  'activists-management.c--filterable-list.period.options.last-fortnight': 'Nos últimos 15 dias',
-  'activists-management.c--filterable-list.period.options.last-month': 'Nos últimos 30 dias',
-  'activists-management.c--filterable-list.period.options.last-quarter': 'Nos últimos 3 meses',
-  'activists-management.c--filterable-list.period.options.last-year': 'No último ano',
-  'activists-management.c--filterable-list.period.options.always': 'Sempre',
-  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período...',
+  'activists-management.c--filterable-list.period.options.last-week': 'Última semana',
+  'activists-management.c--filterable-list.period.options.last-fortnight': 'Últimos 15 dias',
+  'activists-management.c--filterable-list.period.options.last-month': 'Últimos 30 dias',
+  'activists-management.c--filterable-list.period.options.last-quarter': 'Últimos 3 meses',
+  'activists-management.c--filterable-list.period.options.last-year': 'Último ano',
+  'activists-management.c--filterable-list.period.options.always': 'Escolha um período',
+  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período',
 
   // Activists (CRM)
   // filepath: routes/admin/authenticated/sidebar/activists
   // route: /activists
-  'routes.admin.sidebar.activists.container.title': 'Base de usuários',
-  'routes.admin.sidebar.activists.container.filter-placeholder': 'Filtre por mobilizações ou formulários',
+  'routes.admin.sidebar.activists.container.title': 'Sua comunidade',
+  'routes.admin.sidebar.activists.container.filter-placeholder': 'Filtre por páginas ou ferramentas',
   'routes.admin.sidebar.activists.container.empty-list': 'Ops! Ninguém com esse filtro :(',
   'routes.admin.sidebar.activists.container.counter': `{totalCount} {totalCount, plural,
     one {pessoa}
     other {pessoas}
   }`,
-  'routes.admin.sidebar.activists.container.import-csv': 'Importar CSV',
-  'routes.admin.sidebar.activists.container.export-csv': 'Exportar CSV',
+  'routes.admin.sidebar.activists.container.import-csv': 'Importar dados (csv)',
+  'routes.admin.sidebar.activists.container.export-csv': 'Exportar dados (csv)',
   'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': 'Importação concluída com sucesso!',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} ativistas importados com sucesso.',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ooops!',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} pessoas foram adicionadas à sua comunidade.',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ops!',
   'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}',
 
   // createForm validations
   // path: client/storybook/forms/validate
-  'createForm.validate.email': 'Informe um e-mail válido',
+  'createForm.validate.email': 'Ops! Email invlálido...',
   'createForm.validate.required': 'Preenchimento obrigatório',
-  'createForm.validate.cnpj.length': 'CNPJ deve conter 14 digitos',
-  'createForm.validate.cnpj.invalid': 'CNPJ inválido',
-  'createForm.validate.cpf.length': 'CPF deve conter 11 digitos',
+  'createForm.validate.cnpj.length': 'CNPJ deve ter 14 dígitos',
+  'createForm.validate.cnpj.invalid': 'Ops! CNPJ inválido',
+  'createForm.validate.cpf.length': 'CPF deve conter 11 dígitos',
   'createForm.validate.cpf.invalid': 'CPF inválido',
   // settingsForm
   // path: client/storybook/settings/forms
   'settingsForm.submitLabel.default': 'Salvar',
-  'settingsForm.sucessMessage.default': 'Formulário salvo com sucesso.',
+  'settingsForm.sucessMessage.default': 'Dados salvos com sucesso :)',
 
   // adjustmentsForms
-  'adjustmentnsForm.validate.call_to_action.required': 'Insira o título da widget',
+  'adjustmentnsForm.validate.call_to_action.required': 'Insira o título',
   'adjustmentnsForm.validate.button_text.required': 'Insira o texto do botão',
   'adjustmentnsForm.validate.button_text.length': 'O limite de caracteres foi atingido.'
 }
