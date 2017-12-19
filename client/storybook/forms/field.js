@@ -27,8 +27,12 @@ class Field extends React.Component {
         if (!normalize) return field.onChange(value)
         else return field.onChange(normalize(value))
       },
-      value: !normalize ? field.value : normalize(field.value)
+      value: !normalize ? this.isEmpty(field.value) : normalize(field.value)
     }
+  }
+
+  isEmpty (value) {
+    return !value ? '' : value
   }
 
   getI18nProps (fieldName) {

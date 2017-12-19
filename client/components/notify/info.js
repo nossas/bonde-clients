@@ -15,7 +15,10 @@ const Info = ({ title, children }) => (
 )
 
 Info.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired,
   children: PropTypes.any.isRequired
 }
 

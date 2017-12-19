@@ -45,7 +45,10 @@ class Tab extends Component {
 Tab.propTypes = {
   text: PropTypes.node,
   isActive: PropTypes.bool,
-  path: PropTypes.string,
+  path: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   index: PropTypes.number
 }
 
