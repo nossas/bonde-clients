@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { TechnicalIssues } from '~client/components/error/index.js'
 import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import { SettingsMenu } from '~client/community/components'
 import InfoPage from './info/page.connected'
@@ -29,7 +28,6 @@ const SettingsContainer = ({ location }) => (
       <RouteRoot path='/twilio' component={TwilioPage} />
       <RouteRoot path='/domain' component={DomainPage} />
       <RouteRoot path='/domain/add' component={DomainCreatePage} />
-      <Route component={TechnicalIssues} />
     </SettingsPageContentLayout>
   </SettingsPageLayout>
 )

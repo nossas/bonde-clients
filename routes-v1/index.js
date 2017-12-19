@@ -16,7 +16,7 @@ import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations
 import Logout from '~routes/admin/authenticated/logout/page.connected.js'
 // Sidebar Container
 import Sidebar from './subroutes/sidebar'
-import { withBackground, withUser, withSidebar } from '~root/routes-v1/hocs'
+import { withUser, withSidebar } from '~root/routes-v1/hocs'
 
 const AuthExample = () => (
   <Router>
