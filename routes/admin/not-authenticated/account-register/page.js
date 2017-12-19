@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
 import {
@@ -16,7 +15,7 @@ class RegisterPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && (!nextProps.submitting && !nextProps.submitFailed)) {
-      browserHistory.push(Paths.login())
+      this.props.history.push(Paths.login())
     }
   }
 

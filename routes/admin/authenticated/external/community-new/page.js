@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { Background } from '~client/components/layout'
 import {
@@ -17,7 +16,7 @@ class CommunityNewPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
-      browserHistory.push(paths.communityList())
+      this.props.history.push(paths.communityList())
     }
   }
 
