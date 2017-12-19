@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'
-
+import * as paths from '~client/paths'
 import { createAction } from '~client/utils/redux'
 import { isValidEmail } from '~client/utils/validation-helper'
 
@@ -54,7 +54,7 @@ const mapActionsToProps = (dispatch, props) => ({...props,
           const auth = { credentials: { 'access-token': jwtToken } }
           dispatch(createAction(authType.LOGIN_SUCCESS, auth))
           window.localStorage.setItem('auth', JSON.stringify(auth))
-          props.history.push('/community')
+          props.history.push(paths.communityList())
         } else {
           dispatch(createAction(
             authType.LOGIN_FAILURE,

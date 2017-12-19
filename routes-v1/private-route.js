@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect as RedirectComponent } from 'react-router-dom'
 import { connect } from 'react-redux'
-
+import * as paths from '~client/paths'
 import AccountSelectors from '~client/account/redux/selectors'
 import * as CommunitySelectors from '~client/community/selectors'
 
@@ -25,21 +25,25 @@ const PrivateRoute = ({
       const { location: { pathname } } = rest
 
       const isRoot = pathname === '/'
-      const isCommunity = pathname.match(/\/community\/?/)
+      const isCommunity = pathname.match(/\/communities\/?/)
       const isMobilizations = pathname.match(/\/mobilizations\/?/)
 
+      const mobilizationsPath = paths.mobilizations()
+      const communitiesPath = paths.communityList()
+      const loginPath = paths.login()
+
       const redir = destination => ({
-        '/mobilizations': authenticated && hasCommunity && isRoot && !isMobilizations,
-        '/community': authenticated && !hasCommunity && !isCommunity,
-        '/login': !authenticated
+        [mobilizationsPath]: authenticated && hasCommunity && isRoot && !isMobilizations,
+        [communitiesPath]: authenticated && !hasCommunity && !isCommunity,
+        [loginPath]: !authenticated
       }[destination])
 
-      if (redir('/mobilizations')) {
-        return <Redirect {...props} pathname='/mobilizations' />
-      } else if (redir('/community')) {
-        return <Redirect {...props} pathname='/community' />
-      } else if (redir('/login')) {
-        return <Redirect {...props} pathname='/login' />
+      if (redir(mobilizationsPath)) {
+        return <Redirect {...props} pathname={mobilizationsPath} />
+      } else if (redir(communitiesPath)) {
+        return <Redirect {...props} pathname={communitiesPath} />
+      } else if (redir(loginPath)) {
+        return <Redirect {...props} pathname={loginPath} />
       } else {
         return <Component {...props} />
       }

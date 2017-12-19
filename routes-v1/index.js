@@ -6,11 +6,11 @@ import '~client/styles/main.scss'
 import { TechnicalIssues } from '~client/components/error/index.js'
 import PrivateRoute from '~root/routes-v1/private-route'
 // -    Background Container
-import AccountLogin from '~routes/admin/not-authenticated/account-login/page.connected'
-import AccountRegister from '~routes/admin/not-authenticated/account-register/page.connected'
+import LoginPage from '~routes/admin/not-authenticated/account-login/page.connected'
+import RegisterPage from '~routes/admin/not-authenticated/account-register/page.connected'
 // --   User Container
-import CommunityList from '~routes/admin/authenticated/external/community-list/page.connected'
-import CommunityRegister from '~routes/admin/authenticated/external/community-new/page.connected'
+import CommunityListPage from '~routes/admin/authenticated/external/community-list/page.connected'
+import CommunityCreatePage from '~routes/admin/authenticated/external/community-new/page.connected'
 // ---  Sidebar Container
 import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
 import Logout from '~routes/admin/authenticated/logout/page.connected.js'
@@ -18,28 +18,20 @@ import Logout from '~routes/admin/authenticated/logout/page.connected.js'
 import Sidebar from './subroutes/sidebar'
 import { withBackground, withUser, withSidebar } from '~root/routes-v1/hocs'
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
 const AuthExample = () => (
   <Router>
     <Switch>
-      <Route exact path='/login' component={withBackground(AccountLogin)} />
-      <Route exact path='/register' component={withBackground(AccountRegister)} />
+      <Route exact path='/login' component={LoginPage} />
+      <Route exact path='/register' component={RegisterPage} />
       <PrivateRoute exact path='/logout' component={Logout} />
-      <PrivateRoute exact path='/community' component={withUser(CommunityList)} />
-      <PrivateRoute exect path='/community/new' component={withUser(CommunityRegister)} />
-      {/* Sidebar container */}
-      <PrivateRoute path='/' component={withUser(Sidebar)} />
+      <PrivateRoute exact path='/communities' component={withUser(CommunityListPage)} />
+      <PrivateRoute exect path='/communities/new' component={withUser(CommunityCreatePage)} />
       <PrivateRoute
         exact
         path='/mobilizations/:mobilization_id/edit'
         component={withUser(withSidebar(MobilizationsEdit))}
       />
-      <PrivateRoute exact path='/hello' component={About} />
+      <PrivateRoute path='/' component={withUser(Sidebar)} />
       <Route component={TechnicalIssues} />
     </Switch>
   </Router>
