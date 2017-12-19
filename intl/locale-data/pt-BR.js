@@ -55,7 +55,7 @@ export default {
   // page account edit
   // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
   // routepath: /account/edit
-  'page--account-edit.header.title': 'Minha conta',
+  'page--account-edit.header.title': 'Sua conta',
   'page--account-edit.header.tabs.user': 'Perfil',
   'page--account-edit.form.name.label': 'Nome',
   'page--account-edit.form.lastname.label': 'Sobrenome',
@@ -504,7 +504,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Visualizar',
   'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações da página',
 
-  'components.navigation--sidebar.footer.account': 'Minha Conta',
+  'components.navigation--sidebar.footer.account': 'Sua Conta',
   'components.navigation--sidebar.footer.sign-out': 'Sair',
 
   // component sidenav
@@ -545,13 +545,13 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
-  'components.navigation--sidenav.config': 'Configurações',
+  'components.navigation--sidenav.config': 'Comunidade',
   'components.navigation--sidenav.change-community': 'Trocar',
 
   // page mobilizations list
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-list/page.js
   // routepath: /mobilizations
-  'page--mobilizations-list.page-header.title': 'Suas Mobilizações',
+  'page--mobilizations-list.page-header.title': 'Suas páginas',
   'page--mobilizations-list.more-menu-action.open': 'Abrir página',
   'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
   'page--mobilizations-list.more-menu-action.archived': 'Arquivar',
@@ -562,7 +562,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--page-header.button.text': 'Nova mobilização',
+  'mobilizations.components--page-header.button.text': 'Nova página',
   'mobilizations.components--page-header.tabs.actives': 'Ativas',
   'mobilizations.components--page-header.tabs.templates': 'Templates',
   'mobilizations.components--page-header.tabs.archived': 'Arquivadas',
@@ -592,14 +592,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--list.items.users.header.text': 'Usuários',
+  'mobilizations.components--list.items.users.header.text': 'Ações',
 
   // component mobilizations list item: fund raising
   // filepath: /client/mobilizations/components/list/items/fund-raising.js
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadações',
+  'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadação',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
   // component mobilizations list item: fund raising
@@ -615,15 +615,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/templates/choose
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
-  'mobilizations.components--page-tab-layout.title': 'Nova mobilização',
-  'mobilizations.components--page-tab-layout.tabs.goal': 'Objetivo',
-  'mobilizations.components--page-tab-layout.tabs.templates': 'Templates',
+  'mobilizations.components--page-tab-layout.title': 'Nova página',
+  'mobilizations.components--page-tab-layout.tabs.goal': 'Informações',
+  'mobilizations.components--page-tab-layout.tabs.templates': 'Modelo',
 
   // page mobilizations new
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-new/page.js
   // routepath: /mobilizations/new
-  'page--mobilizations-new.title': 'Qual o objetivo da sua mobilização?',
-  'page--mobilizations-new.footer': 'Fique tranquil@ vc poderá editar depois se achar necessário.',
+  'page--mobilizations-new.title': 'Qual o objetivo da sua página?',
+  'page--mobilizations-new.footer': 'Relaxa! Você pode atualizar estes campos nas configurações da sua página quando quiser ;)',
 
   // component mobilizations mobilization basics form
   // filepath: /client/mobilizations/components/mobilization-basics-form.js
@@ -631,18 +631,18 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/new
   //   - /mobilizations/:mobilization_id/basics
   'mobilizations.components--basics-form.name.label': 'Nome',
-  'mobilizations.components--basics-form.name.placeholder': 'Ex: Pela criação de uma delegacia de desaparecidos',
-  'mobilizations.components--basics-form.name.validation.required': 'Insira o nome da mobilização',
-  'mobilizations.components--basics-form.name.validation.max-length': 'Seu título está muito longo!',
-  'mobilizations.components--basics-form.slug.label': 'Identificador Único',
-  'mobilizations.components--basics-form.slug.helper-text': 'O valor desse campo é utilizado para referenciar a mobilização no domínio do BONDE, por exemplo: {example}',
-  'mobilizations.components--basics-form.slug.helper-example': 'Ex: 123-nome-da-mob',
-  'mobilizations.components--basics-form.slug.validation.required': 'Insira o identificador único da mobilização',
-  'mobilizations.components--basics-form.slug.validation.max-length': 'Seu identificador único está muito longo!',
+  'mobilizations.components--basics-form.name.placeholder': 'Ex: Ação contra PEC 181',
+  'mobilizations.components--basics-form.name.validation.required': 'Insira o nome da página',
+  'mobilizations.components--basics-form.name.validation.max-length': 'Ops, o nome que você escolheu tá muito longo...',
+  'mobilizations.components--basics-form.slug.label': 'Identificador da página',
+  'mobilizations.components--basics-form.slug.helper-text': 'O identificador (ou "slug") é usado para referenciar a página - como no domínio padrão do BONDE, por exemplo: {example}',
+  'mobilizations.components--basics-form.slug.helper-example': 'Ex: 123-slug-que-escolher',
+  'mobilizations.components--basics-form.slug.validation.required': 'Insira o identificador da página',
+  'mobilizations.components--basics-form.slug.validation.max-length': 'Ops, seu identificador tá muito longo...',
   'mobilizations.components--basics-form.goal.label': 'Objetivo',
-  'mobilizations.components--basics-form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
-  'mobilizations.components--basics-form.goal.validation.required': 'Insira o objetivo da mobilização',
-  'mobilizations.components--basics-form.goal.validation.max-length': 'O limite de caracteres foi atingido.',
+  'mobilizations.components--basics-form.goal.placeholder': 'Qual impacto você quer gerar ao publicar está página?',
+  'mobilizations.components--basics-form.goal.validation.required': 'Insira o objetivo da página',
+  'mobilizations.components--basics-form.goal.validation.max-length': 'Ops, você passou do limite de caracteres...',
 
   // component control buttons
   // filepath: /client/components/forms/control-buttons.js
@@ -675,15 +675,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /register
   //   - /subscriptions/:id/edit
   'components--control-buttons.cancel': 'Voltar',
-  'components--control-buttons.input.value.default': 'Continuar',
+  'components--control-buttons.input.value.default': 'Próxima parada!',
   'components--control-buttons.input.value.saving': 'Salvando...',
 
   // page mobilizations templates choose
   // filepath: /routes/admin/authenticated/sidebar/templates-choose/page.js
   // routepath: /mobilizations/:mobilization_id/templates/choose
-  'page--mobilizations.templates-choose.title': 'Como você deseja começar?',
-  'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar mobilização do zero',
-  'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Meus templates',
+  'page--mobilizations.templates-choose.title': 'Como você quer começar?',
+  'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar página do zero',
+  'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Usar um template',
   'page--mobilizations.templates-choose.browsable-list-item.templates-global': 'Templates globais',
 
   // component mobilizations templates selectable list
@@ -691,15 +691,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath:
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
-  'templates.components--selectable-list.filterable-search-bar.placeholder': 'Busque um template',
-  'templates.components--selectable-list.empty-list-text': 'Não existe nenhum template com esse nome',
+  'templates.components--selectable-list.filterable-search-bar.placeholder': 'Buscar template',
+  'templates.components--selectable-list.empty-list-text': 'Ops, não existe nenhum template com esse nome...',
   'templates.components--selectable-list.button.back': 'Voltar',
-  'templates.components--selectable-list.button.next': 'Continuar',
+  'templates.components--selectable-list.button.next': 'Próxima parada!',
 
   // page mobilizations templates choose custom
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
   // routepath: /mobilizations/:mobilization_id/templates/choose/custom
-  'page--mobilizations.templates-choose-custom.title': 'Meus Templates',
+  'page--mobilizations.templates-choose-custom.title': 'Seus Templates',
 
   // page mobilizations templates choose global
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-global/page.js
@@ -713,81 +713,81 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/basics
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/sharing
-  'mobilizations.components--settings-menu.title': 'Configure sua mobilização',
-  'mobilizations.components--settings-menu.tabs.info': 'Informações básicas',
+  'mobilizations.components--settings-menu.title': 'Configurações da sua página',
+  'mobilizations.components--settings-menu.tabs.info': 'Informações',
   'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
-  'mobilizations.components--settings-menu.tabs.metrics': 'Dados',
+  'mobilizations.components--settings-menu.tabs.metrics': 'Métricas',
   'mobilizations.components--settings-menu.tabs.domain': 'Domínio',
 
   // page mobilizations settings analytics
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.js
   // routepath: /mobilizations/:mobilization_id/analytics
-  'page--mobilizations-analytics.first-paragraph': 'Para acompanhar os resultados da sua mobilização, você precisa configurar uma conta no Google Analytics.',
-  'page--mobilizations-analytics.second-paragraph': 'Siga os passos abaixo:',
-  'page--mobilizations-analytics.ol.create-analytics-account': 'Crie uma conta no Google Analytics {analyticsLink}',
+  'page--mobilizations-analytics.first-paragraph': 'Quer acesso a dados específicos? Quantos acessos diários sua página recebe? A origem deles? Quantos ativistas estão online na sua página agora? Você pode acompanhar essas e muitas outras métricas conectando sua página a uma conta no Google Analytics :)',
+  'page--mobilizations-analytics.second-paragraph': 'Cola aqui que a gente explica:',
+  'page--mobilizations-analytics.ol.create-analytics-account': 'Primeiro, crie uma conta no Google Analytics {analyticsLink}',
   'page--mobilizations-analytics.ol.create-analytics-account.link': 'clicando aqui',
-  'page--mobilizations-analytics.ol.keep-up-with': 'Obtenha sua ID de acompanhamento no Google Analytics. É um código que começa sempre com as letras UA, que você verá após criar sua conta lá.',
+  'page--mobilizations-analytics.ol.keep-up-with': 'Obtenha sua ID de acompanhamento no Google Analytics. É um código que começa sempre com as letras UA, que você vai ver depois de criar sua conta lá.',
   'page--mobilizations-analytics.ol.paste-ga-code': 'Copie a ID de acompanhamento e cole no campo abaixo:',
-  'page--mobilizations-analytics.ol.form.ga-code.label': 'ID do Google Analytics',
-  'page--mobilizations-analytics.ol.done': 'Pronto! Você já pode acompanhar as estatísticas da sua mobilização no Google Analytics!',
+  'page--mobilizations-analytics.ol.form.ga-code.label': 'ID de acompanhamento',
+  'page--mobilizations-analytics.ol.done': 'Pronto! Você já pode acompanhar as estatísticas da sua página no Google Analytics :)',
 
   // page mobilizations settings analytics (connected)
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.connected.js
   // routepath: /mobilizations/:mobilization_id/analytics
-  'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Informe uma ID válida',
+  'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Ops, ID inválida :/',
 
   // page block create
   // filepath: /routes/admin/authenticated/sidebar/blocks-create/page.js
   // routepath: /mobilizations/:mobilization_id/blocks/create
-  'page--block-create.title': 'Adicione um bloco de conteúdo',
-  'page--block-create.tabs.blank-blocks': 'Blocos em branco',
-  'page--block-create.helper-text': 'Os blocos serão adicionados ao fim da sua página, mas você pode trocá-los de ordem a qualquer momento',
-  'page--block-create.type.label': 'Tipo de bloco',
-  'page--block-create.background.label': 'Fundo',
-  'page--block-create.background.image.placeholder.text': 'Selecione a imagem de fundo',
-  'page--block-create.button-add.text': 'Adicionar',
+  'page--block-create.title': 'Adicionando um bloco de conteúdo',
+  'page--block-create.tabs.blank-blocks': 'Configurações',
+  'page--block-create.helper-text': 'Aqui, você deve escolher o layout das colunas e a imagem/cor de fundo do seu bloco. Lembre-se que em cada coluna você vai poder adicionar uma ferramenta diferente - conteúdo, pressão, crowdfunding ou formulário - e depois pode organizar e reorganizar os blocos como quiser, afinal, o esse bonde é seu :)',
+  'page--block-create.type.label': 'Layout do bloco',
+  'page--block-create.background.label': 'Fundo do bloco',
+  'page--block-create.background.image.placeholder.text': 'Você tambm pode selecionar uma imagem de fundo :)',
+  'page--block-create.button-add.text': 'Criar bloco',
 
   // page mobilizations domain
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-domain/page.js
   // routepath: /mobilizations/:mobilization_id/customDomain
-  'page--mobilizations-domain.form-domain.success-message': 'Dados de domínio salvos com sucesso',
+  'page--mobilizations-domain.form-domain.success-message': 'As informações do seu domínio foram salvas com sucesso!',
 
   // component mobilizations form domain
   // filepath: /client/mobilizations/components/form-domain.js
   // routepath:
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/launch
-  'mobilizations.components--form-domain.helper-text-first-line': 'Estamos quase lá, antes de publicar sua mobilização é preciso escolher a url que será usada para publicação.',
-  'mobilizations.components--form-domain.helper-text-second-line': 'Já cadastrou um domínio na comunidade? Selecione abaixo qual das opções melhor se encaixa.',
-  'mobilizations.components--form-domain.helper-text-third-line': 'Quer cadastrar um novo domínio? {link}.',
-  'mobilizations.components--form-domain.helper-text-third-line.link': 'Clique aqui',
+  'mobilizations.components--form-domain.helper-text-first-line': 'Estamos na reta final! Para publicar sua página, você precisa cadastrar aqui o domínio que quer direcionar pra ela. Esse vai ser o "endereço" da sua página para o público ;)',
+  'mobilizations.components--form-domain.helper-text-second-line': 'Se você já cadastrou domínios principais nas configurações da comunidade, é só escolher a opção que preferir abaixo.',
+  'mobilizations.components--form-domain.helper-text-third-line': 'Quer cadastrar um domínio principal? {link}.',
+  'mobilizations.components--form-domain.helper-text-third-line.link': 'Só clicar aqui!',
 
-  'mobilizations.components--form-domain.create-domain-text.first-line': 'Ops, você ainda não tem um domínio configurado na sua comunidade. Se quiser cadastar, {link}.',
+  'mobilizations.components--form-domain.create-domain-text.first-line': 'Ops, você ainda não tem domínios principais cadastrados na comunidade... Se quiser cadastar, {link}.',
   'mobilizations.components--form-domain.create-domain-text.first-line.link': 'clique aqui',
-  'mobilizations.components--form-domain.create-domain-text.second-line': 'Senão você pode, abaixo, usar um domínio externo para configurar o endereço da sua mobilização.',
+  'mobilizations.components--form-domain.create-domain-text.second-line': 'Você também pode usar um domínio externo para cadastrar como endereço desta página, é só selecionar a opção abaixo ;)',
 
-  'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Quero usar um novo sub-domínio',
-  'mobilizations.components--form-domain.basic.helper-text': 'Preencha abaixo o subdomínio e escolha o domínio que deseja configurar como endereço da sua mobilização',
+  'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Criar um subdomínio',
+  'mobilizations.components--form-domain.basic.helper-text': 'Abaixo, escolha o domínio principal que quer usar e preencha o campo com o subdomínio que quiser:',
   'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomínio',
-  'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedamob',
+  'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedapagina',
   'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
   'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Escolha...',
 
-  'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Quero usar um domínio principal cadastrado na comunidade',
-  'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio que deseja configurar como endereço da sua mobilização',
+  'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Usar um domínio principal',
+  'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio principal (ou seja, já cadastrado nas configurações da sua comunidade) que você quer usar como endereço da sua página:',
 
-  'mobilizations.components--form-domain.advanced.header-toggle': 'Quero direcionar para um domínio externo',
-  'mobilizations.components--form-domain.advanced.helper-text': 'Se você quer usar um domínio que comprou mas não está cadastrado na sua comunidade aqui, pode fazer isso. Por exemplo, se você já comprou www.meudominio.com.br você pode usá-lo para este BONDE. Demais, né? Preencha o campo abaixo e siga as orientações:',
-  'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Domínio personalizado',
+  'mobilizations.components--form-domain.advanced.header-toggle': 'Direcionar para um domínio externo',
+  'mobilizations.components--form-domain.advanced.helper-text': 'Se você quer usar um domínio que comprou mas não cadastrou aqui na sua comunidade, tudo bem! É só preencher o campo abaixo e seguir as orientações:',
+  'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Domínio externo',
   'mobilizations.components--form-domain.advanced.form.external-domain.placeholder': 'meudominio.com.br',
 
-  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: você vai precisar configurar este domínio no seu servidor de registro para que o endereço seja redirecionado à página da sua mobilização. Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:',
-  'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Não esqueça',
+  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: já que escolheu um domínio externo, você ainda precisa configurar este domínio no servidor em que cadastrou ele para que o endereço seja redirecionado à sua página. Pra isso, você vai precisar dessas informações aqui embaixo, anota aí:',
+  'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Próximo passo:',
   'mobilizations.components--form-domain.cname-table.header.name': 'Nome',
   'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
   'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'Trilho',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link}.',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'aqui',
 
   // component mobilizations form domain (connected)
   // filepath: /client/mobilizations/components/form-domain.connected.js
@@ -795,10 +795,10 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/launch
   'mobilizations.components--form-domain.validation.required': 'Preenchimento obrigatório',
-  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Obrigatório preencher o domínio principal',
-  'mobilizations.components--form-domain.validation.subdomain.required': 'Obrigatório preencher subdomínio',
-  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Informe um subdomínio válido',
-  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Informe um domínio válido',
+  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Preenchimento obrigatório',
+  'mobilizations.components--form-domain.validation.subdomain.required': 'Preenchimento obrigatório',
+  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Ops! Subdomínio inválido...',
+  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Ops! Domínio inválido...',
 
   // component mobrender mobilization
   // filepath: /client/mobrender/components/mobilization.js
@@ -811,7 +811,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // component mobrender block config menu
   // filepath: /client/mobrender/components/block-config-menu.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'mobrender.components--block-config-menu.item.duplicate': 'Duplicar bloco',
+  'mobrender.components--block-config-menu.item.duplicate': 'Duplicar',
   'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
@@ -829,7 +829,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // component mobrender block
   // filepath: /client/mobrender/components/block.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'mobrender.components--block.hidden-tag': 'Escondido',
+  'mobrender.components--block.hidden-tag': 'Bloco escondido',
 
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
@@ -843,61 +843,61 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath:
   //   - /mobilizations/:mobilization_id/launch
   //   - /mobilizations/:mobilization_id/sharing
-  'mobilizations.components--form-share.facebook.title': 'Share de Facebook',
-  'mobilizations.components--form-share.facebook.helper-text': 'Configure o post que será publicado no Facebook sempre que alguém compartilhar a ação. É importante que esses textos sejam cativantes e curtos para não aparecerem cortados. :)',
-  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Use imagens com pelo menos 1200x630 pixels para a melhor exibição em dispositivos de alta resolução. No mínimo, você deve usar imagens que tenham 600x315 pixels para exibir publicações na página com link com imagens maiores. O tamanho máximo das imagens é de 8 MB.',
+  'mobilizations.components--form-share.facebook.title': 'Link de compartilhamento',
+  'mobilizations.components--form-share.facebook.helper-text': 'Como você quer que sua página apareça quando compartilharem o link dela nas redes sociais? Essa é mais uma oportunidade de deixar tudo do seu jeito. Abaixo, você deve escolher a imagem, o título e o subtítulo do compartilhamento.',
+  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Use uma imagem com 470x270 pixels, assim ela vai encaixar direitinho :)',
   'mobilizations.components--form-share.facebook.fb.image.link': 'Saiba mais',
   'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagem',
-  'mobilizations.components--form-share.facebook.form.share-title.label': 'Título do post',
-  'mobilizations.components--form-share.facebook.form.share-title.placeholder': 'Um título direto que passe a ideia da sua mobilização',
-  'mobilizations.components--form-share.facebook.form.share-description.label': 'Subtítulo do post',
-  'mobilizations.components--form-share.facebook.form.share-description.placeholder': 'Complete a informação do título e chame o leitor para a mobilização',
+  'mobilizations.components--form-share.facebook.form.share-title.label': 'Título',
+  'mobilizations.components--form-share.facebook.form.share-title.placeholder': 'Um título bem claro que passe o objetivo da sua página',
+  'mobilizations.components--form-share.facebook.form.share-description.label': 'Subtítulo',
+  'mobilizations.components--form-share.facebook.form.share-description.placeholder': 'Use este espaço para completar a informação do título e engajar o público',
 
-  'mobilizations.components--form-share.twitter.title': 'Share de Twitter',
-  'mobilizations.components--form-share.twitter.helper-text': 'Configure a mensagem que será publicada no Twitter sempre que alguém compartilhar sua mobilização.',
-  'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto do Tweet',
-  'mobilizations.components--form-share.twitter.form.share-text.placeholder': 'Insira uma frase e chame o leitor para a mobilização',
+  'mobilizations.components--form-share.twitter.title': 'Twitter',
+  'mobilizations.components--form-share.twitter.helper-text': 'Se quiser, você também pode deixar pronto um "tweet padrão" pra quando alguém compartilhar por ali já saber o que falar. É só preencher abaixo:',
+  'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto padrão do tweet',
+  'mobilizations.components--form-share.twitter.form.share-text.placeholder': 'Insira uma frase que chame outras pessoas a se engajarem na sua página!',
 
   // page mobilizations launch
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch/page.js
   // routepath: /mobilizations/:mobilization_id/launch
-  'page--mobilizations-launch.title': 'Lançando sua mobilização',
-  'page--mobilizations-launch.steps.form-domain.title': 'Configure o endereço da mobilização',
-  'page--mobilizations-launch.steps.form-share.title': 'Configure as informações de compartilhamento',
-  'page--mobilizations-launch.steps.done.title': 'Seu BONDE está pronto!',
-  'page--mobilizations-launch.steps.done.helper-text': 'Em uma nova aba, digite o endereço que cadastrou na mobilização para se certificar de que ela já está no ar. Se ainda não estiver, cheque se cadastrou os domínios corretamente. Está tudo certo? Então é só esperar ele propagar pela internet!',
-  'page--mobilizations-launch.steps.done.button.open': 'Visualizar mobilização',
+  'page--mobilizations-launch.title': 'Publicando sua página',
+  'page--mobilizations-launch.steps.form-domain.title': '1ª parada: endereço da página',
+  'page--mobilizations-launch.steps.form-share.title': '2ª parada: informações de compartilhamento',
+  'page--mobilizations-launch.steps.done.title': 'Uhul! Sua página foi publicada :)',
+  'page--mobilizations-launch.steps.done.helper-text': 'Em uma nova aba, digite o endereço/domínio que cadastrou aqui para se certificar de que ela já está no ar. Se ainda não estiver, dê uma olhada se cadastrou os domínios corretamente. Está tudo certo? Então é só esperar propagar pela internet :)',
+  'page--mobilizations-launch.steps.done.button.open': 'Visualizar página',
   'page--mobilizations-launch.button.saving': 'Salvando...',
-  'page--mobilizations-launch.button.launch': 'Lançar mobilização',
-  'page--mobilizations-launch.button.next': 'Continuar',
+  'page--mobilizations-launch.button.launch': 'Publicar página',
+  'page--mobilizations-launch.button.next': 'Próxima parada',
   'page--mobilizations-launch.form-share.validation.required': 'Obrigatório',
 
   // page mobilizations launch end
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch-end/page.js
   // routepath: /mobilizations/:mobilization_id/launch/end
   'page--mobilizations-launch-end.heading.all-done': 'Tudo pronto?',
-  'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar e contar pra todo mundo!',
+  'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar pro mundo e compartilhar com a galera!',
   'page--mobilizations-launch-end.title': 'Chegou a hora',
-  'page--mobilizations-launch-end.button': 'Lançar mobilização',
+  'page--mobilizations-launch-end.button': 'Publicar página',
 
   // page templates list
   // filepath: /routes/admin/authenticated/sidebar/templates-list/page.js
   // routepath: /mobilizations/templates/list
   'page--templates-list.header.title': 'Seus templates',
-  'page--templates-list.empty-list.no-template': 'Nenhum template criado.',
-  'page--templates-list.empty-list.create-one': 'Crie a partir de uma mobilização.',
-  'page--templates-list.empty-list.mobilization-list': 'Lista de mobilizações',
+  'page--templates-list.empty-list.no-template': 'Sua comunidade ainda não tem nenhum template...',
+  'page--templates-list.empty-list.create-one': 'Mas você pode criar a partir de uma página.',
+  'page--templates-list.empty-list.mobilization-list': 'Lista de páginas',
   'page--templates-list.more-menu-action.remove.text': 'Remover',
   'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não será possível desfazer esta ação.',
 
   // page templates create
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.js
   // routepath: /mobilizations/:mobilization_id/templates/create
-  'page--templates-create.header.title': 'Crie um template a partir da mobilização',
+  'page--templates-create.header.title': 'Crie um template a partir da página',
   'page--templates-create.form.name.label': 'Nome do seu template',
-  'page--templates-create.form.name.placeholder': 'Pela criação de uma delegacia de desaparecidos',
+  'page--templates-create.form.name.placeholder': 'Para crowdfundings',
   'page--templates-create.form.goal.label': 'Descrição',
-  'page--templates-create.form.goal.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+  'page--templates-create.form.goal.placeholder': 'Escreva um texto curto explicando para que serve o template que está criando. Ex: template para páginas de crowdfunding',
 
   // page templates create (connected)
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.connected.js
@@ -910,22 +910,22 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
-  'donation.components--settings-menu.title': 'Configure sua caixa de doação',
+  'donation.components--settings-menu.title': 'Configurações da ferramenta',
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
-  'donation.components--settings-menu.tabs.autofire': 'Mensagem agradecimento',
-  'donation.components--settings-menu.tabs.post-action': 'Pós-doação',
-  'donation.components--settings-menu.tabs.info': 'Dados para doação',
+  'donation.components--settings-menu.tabs.autofire': 'Mensagem de agradecimento',
+  'donation.components--settings-menu.tabs.post-action': 'Pós-ação',
+  'donation.components--settings-menu.tabs.info': 'Configurações',
 
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
   'page--donation-widget.form.donation-value-title': 'Clique para definir este valor como padrão.',
   'page--donation-widget.form.submit-button': 'Salvar',
-  'page--donation-widget.form.success-message': 'Formulário de doação configurado com sucesso!',
-  'page--donation-widget.form.payment-type.label': 'Tipo de doação',
-  'page--donation-widget.form.payment-type.unique': 'Única',
-  'page--donation-widget.form.payment-type.recurring': 'Recorrente',
-  'page--donation-widget.form.payment-type.users-choice': 'Usuário escolhe',
+  'page--donation-widget.form.success-message': 'Oba! Suas configurações foram salvas com sucesso :)',
+  'page--donation-widget.form.payment-type.label': 'Tipo de crowdfunding',
+  'page--donation-widget.form.payment-type.unique': 'Doação única',
+  'page--donation-widget.form.payment-type.recurring': 'Doação recorrente',
+  'page--donation-widget.form.payment-type.users-choice': 'Deixar o usuário escolher',
   'page--donation-widget.form.payment-interval.label': 'Intervalo da recorrência',
   'page--donation-widget.form.payment-interval.monthly': 'Mensal',
   'page--donation-widget.form.payment-interval.semiannually': 'Semestral',
@@ -935,7 +935,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--donation-widget.goal-date-limit.label': 'Prazo de arrecadação',
   'page--donation-widget.goal-date-limit.placeholder': 'Ex.: DD/MM/AAAA',
   'page--donation-widget.form.donation-default-value.label': 'Valores das doações',
-  'page--donation-widget.form.donation-default-value.helper-text': 'Você pode ter até 5 valores por bloco de doação. Preencha apenas com números inteiros (Ex: 50)',
+  'page--donation-widget.form.donation-default-value.helper-text': 'Você pode escolher até 5 valores em cada ferramenta de crowdfunding - mas pode ter mais de uma ferramenta por página ;) Lembre-se: preencha apenas com números inteiros (Ex: 50)',
   'page--donation-widget.form.default-value-01.label': 'Valor 1',
   'page--donation-widget.form.default-value-01.placeholder': 'R$20',
   'page--donation-widget.form.default-value-02.label': 'Valor 2',
@@ -946,31 +946,31 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--donation-widget.form.default-value-04.placeholder': 'R$200',
   'page--donation-widget.form.default-value-05.label': 'Valor 5',
   'page--donation-widget.form.default-value-05.placeholder': 'R$500',
-  'page--donation-widget.form.default-value.radio.text': 'Default',
-  'page--donation-widget.form.default-value.helper-text': '*todos os valores são em reais',
-  'page--donation-widget.form.donation-title.label': 'Título da caixa de doação',
-  'page--donation-widget.form.donation-title.placeholder': 'Ex.: Escolha um valor e contribua agora!',
-  'page--donation-widget.form.main-color.label': 'Cor da caixa de doação',
-  'page--donation-widget.form.main-color.helper-text': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.',
-  'page--donation-widget.form.button-text.label': 'Texto do botão de confirmação',
-  'page--donation-widget.form.button-text.placeholder': 'Ex.: Doe agora!',
-  'page--donation-widget.form.payment-method.label': 'Habilitar pagamento por boleto?',
+  'page--donation-widget.form.default-value.radio.text': 'Padrão',
+  'page--donation-widget.form.default-value.helper-text': '*todos os valores são em reais, o BONDE ainda não processa transações em outras moedas...',
+  'page--donation-widget.form.donation-title.label': 'Título',
+  'page--donation-widget.form.donation-title.placeholder': 'Ex: Escolha um valor e contribua agora!',
+  'page--donation-widget.form.main-color.label': 'Cor',
+  'page--donation-widget.form.main-color.helper-text': 'Você pode escolher a cor na caixinha abaixo ou inserir o valor que quiser em hex - por exemplo: #DC3DCE.',
+  'page--donation-widget.form.button-text.label': 'Texto do botão',
+  'page--donation-widget.form.button-text.placeholder': 'Ex.: Doar agora!',
+  'page--donation-widget.form.payment-method.label': 'Quer habilitar o pagamento por boleto?',
   'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pago terá um custo adicional de R$3,00',
   'page--donation-widget.form.payment-method.radio.yes': 'Sim',
   'page--donation-widget.form.payment-method.radio.no': 'Não',
   'page--donation-widget.form.bank-account.label': 'Conta bancária',
-  'page--donation-widget.form.bank-account.helper-text': 'Esta campanha está associada à conta bancária cadastrada nas configurações dessa comunidade ;)',
+  'page--donation-widget.form.bank-account.helper-text': 'Esta campanha está associada à conta bancária cadastrada nas configurações dessa comunidade. O valor arrecadado vai ser transferido para a conta na data que tiver cadastrado lá ;)',
 
   // page donation widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
-  'page--donation-widget.form.validation.invalid': 'Inválido.',
+  'page--donation-widget.form.validation.invalid': 'Ops, formato inválido...',
   'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
-  'page--donation-widget.form.validation.button-text.max-length': 'O limite de caracteres foi atingido.',
-  'page--donation-widget.form.validation.goal.format': 'Insira o valor desse jeito, ó: 1000',
-  'page--donation-widget.form.validation.goal-date-limit.format': 'Insira a data desse jeito, ó: DD/MM/AAAA',
+  'page--donation-widget.form.validation.button-text.max-length': 'Você atingiu o limite de caracteres...',
+  'page--donation-widget.form.validation.goal.format': 'Insira o valor neste formato: 1000',
+  'page--donation-widget.form.validation.goal-date-limit.format': 'Insira a data neste formato: DD/MM/AAAA',
   'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Data inválida.',
-  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'A data da meta não pode ser no passado',
+  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'Ops, seu prazo já expirou! Escolha outra data',
 
   // component widget autofire
   // filepath: /client/mobilizations/widgets/components/form-autofire.js
@@ -980,15 +980,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
   'widgets.components--form-autofire.form.submit-button': 'Salvar',
   'widgets.components--form-autofire.form.success-message': 'Mensagem de agradecimento configurada com sucesso!',
-  'widgets.components--form-autofire.form.sender-name.label': 'Nome do remetente',
-  'widgets.components--form-autofire.form.sender-name.placeholder': 'Defina o nome que irá aparecer na mensagem enviada.',
-  'widgets.components--form-autofire.form.sender-email.label': 'E-mail remetente',
-  'widgets.components--form-autofire.form.sender-email.placeholder': 'Defina o e-mail que irá aparecer na mensagem enviada.',
-  'widgets.components--form-autofire.form.sender-email.validation.invalid-email-format': 'Informe um e-mail inválido',
-  'widgets.components--form-autofire.form.email-subject.label': 'Assunto do e-mail',
-  'widgets.components--form-autofire.form.email-subject.placeholder': 'Defina o assunto que irá aparecer na mensagem enviada.',
-  'widgets.components--form-autofire.form.email-text.label': 'Email de agradecimento',
-  'widgets.components--form-autofire.form.email-text.placeholder': 'Ex: Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço.',
+  'widgets.components--form-autofire.form.sender-name.label': 'Nome do(a) remetente',
+  'widgets.components--form-autofire.form.sender-name.placeholder': 'É o nome que vai aparecer como remetente do email de agradecimento.',
+  'widgets.components--form-autofire.form.sender-email.label': 'Email do(a) remetente',
+  'widgets.components--form-autofire.form.sender-email.placeholder': 'É o email do qual vão ser enviadas as mensagens de agradecimento.',
+  'widgets.components--form-autofire.form.sender-email.validation.invalid-email-format': 'Ops, email inválido...',
+  'widgets.components--form-autofire.form.email-subject.label': 'Assunto do email',
+  'widgets.components--form-autofire.form.email-subject.placeholder': 'Defina o assunto da mensagem de agradecimento.',
+  'widgets.components--form-autofire.form.email-text.label': 'Texto do email',
+  'widgets.components--form-autofire.form.email-text.placeholder': 'Aqui você deve escrever o texto que vai no corpo da mensagem de agradecimento. se Ex: Muito obrigada por apostar na força da ação coletiva em rede! Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço.',
 
   // component widget form finish message
   // filepath: /client/mobilizations/widgets/components/form-finish-message/index.js
@@ -996,15 +996,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'widgets.components--form-finish-message.success-message': 'Formulário salvo com sucesso!',
+  'widgets.components--form-finish-message.success-message': 'Oba! Informaçes salvas com sucesso :)',
   'widgets.components--form-finish-message.type.label': 'Tipo de mensagem',
-  'widgets.components--form-finish-message.type.radio.share': 'Compartilhar',
+  'widgets.components--form-finish-message.type.radio.share': 'Padrão',
   'widgets.components--form-finish-message.type.radio.custom': 'Customizar',
-  'widgets.components--form-finish-message.type.validation.required': 'Nenhum tipo de mensagem foi selecionado',
-  'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto do WhatsApp',
-  'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+  'widgets.components--form-finish-message.type.validation.required': 'Você precisa selecionar um tipo de mensagem ;)',
+  'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto para o WhatsApp',
+  'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)',
   'widgets.components--form-finish-message.preview.label': 'Preview',
-  'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar...',
+  'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar sua mensagem de pós-ação.',
 
   // component share tell-a-friend
   // filepath: /client/components/share/tell-a-friend.js
@@ -1013,7 +1013,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - (public) /
-  'share.components--tell-a-friend.text': 'Agora, compartilhe com seus amigos!',
+  'share.components--tell-a-friend.text': 'Compartilhe com a sua galera pra aumentarmos nosso impacto!',
 
   // component share facebook-share-button
   // filepath: /client/components/share/facebook-share-button.js
@@ -1045,14 +1045,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // page donation widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
-  'page--donation-widget-finish.form.success-message': 'Formulário de pós-doação salvo com sucesso!',
+  'page--donation-widget-finish.form.success-message': 'Oba! Informações salvas com sucesso :)',
 
   // component donation widget tell-a-friend
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/donation-tell-a-friend.js
   // routepath:
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   //   - (public) /
-  'donation.components--tell-a-friend.message': 'Oba, doação registrada! Sua doação é via boleto? Verifique seu email.',
+  'donation.components--tell-a-friend.message': 'Oba, sua doação foi registrada! Se selecionou a opção "boleto", dá uma olhada no seu email que o link vai chegar por lá ;) ',
 
   // config mobrender widgets
   // filepath: /client/mobrender/widgets/config.js
@@ -1060,11 +1060,11 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.config--content.label': 'Texto',
   'widgets.config--content.default': 'Clique aqui para editar...',
   'widgets.config--form.label': 'Formulário',
-  'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva em rede. Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
+  'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
   'widgets.config--pressure.label': 'Pressão',
-  'widgets.config--pressure.default.title': 'Envie um e-mail para quem pode tomar essa decisão',
-  'widgets.config--pressure.default.button-text': 'Enviar e-mail',
-  'widgets.config--donation.label': 'Doação',
+  'widgets.config--pressure.default.title': 'Envie um email para quem pode tomar essa decisão',
+  'widgets.config--pressure.default.button-text': 'Enviar email',
+  'widgets.config--donation.label': 'Crowdfunding',
 
   // component donation widget
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/__donation__/index.js
