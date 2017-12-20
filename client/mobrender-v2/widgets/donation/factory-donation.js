@@ -222,7 +222,7 @@ export default ({
           defaultMessage='Doar agora'
         />
       )
-      const titleText = (settings && settings.title_text) || (
+      const titleText = (settings && (settings.call_to_action || settings.title_text)) || (
         <FormattedMessage
           id='widgets.components--donation.default.title-text'
           defaultMessage='Clique para configurar seu bloco de doação'

@@ -138,12 +138,12 @@ class Form extends Component {
   }
 
   renderCount () {
-    if (!this.props.configurable) {
+    const { widget: { settings } } = this.props
+    if (!this.props.configurable && settings && settings.count_text) {
       const {
         block: { scrollTopReached: startCounting },
-        widget: { settings, form_entries_count: count },
-        mobilization: { body_font: bodyFont },
-        intl
+        widget: { form_entries_count: count },
+        mobilization: { body_font: bodyFont }
       } = this.props
 
       return (
@@ -154,13 +154,7 @@ class Form extends Component {
             duration={5}
           />
           &nbsp;
-          {settings && settings.count_text
-            ? settings.count_text
-            : intl.formatMessage({
-              id: 'form-widget.components--form.default.counter-suffix',
-              defaultMessage: 'assinaturas'
-            })
-          }
+          {settings.count_text}
         </div>
       )
     }

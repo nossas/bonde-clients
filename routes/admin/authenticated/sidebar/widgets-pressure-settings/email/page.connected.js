@@ -8,7 +8,6 @@ import Page from './page'
 
 const mapStateToProps = (state, props) => ({
   initialValues: {
-    show_counter: 'false',
     show_city: 'city-false',
     ...props.widget.settings || {},
     targets: props.widget.settings && props.widget.settings.targets
@@ -43,7 +42,6 @@ export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(
       'pressure_body',
       'targets',
       'disable_edit_field',
-      'show_counter',
       'show_city'
     ],
     validate

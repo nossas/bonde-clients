@@ -1172,7 +1172,6 @@ Caso sua base de ações não esteja sincronizada com o mailchimp, você pode fo
   //   - (public) /
   'form-widget.components--form.default.title-text': 'Clique para configurar seu formulário...',
   'form-widget.components--form.default.button-text': 'Enviar',
-  'form-widget.components--form.default.counter-suffix': 'assinaturas',
 
   // component form widget input
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input.js
@@ -1441,5 +1440,10 @@ Caso sua base de ações não esteja sincronizada com o mailchimp, você pode fo
   // settingsForm
   // path: client/storybook/settings/forms
   'settingsForm.submitLabel.default': 'Salvar',
-  'settingsForm.sucessMessage.default': 'Formulário salvo com sucesso.'
+  'settingsForm.sucessMessage.default': 'Formulário salvo com sucesso.',
+
+  // adjustmentsForms
+  'adjustmentnsForm.validate.call_to_action.required': 'Insira o título da widget',
+  'adjustmentnsForm.validate.button_text.required': 'Insira o texto do botão',
+  'adjustmentnsForm.validate.button_text.length': 'O limite de caracteres foi atingido.'
 }

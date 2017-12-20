@@ -156,11 +156,11 @@ export class Pressure extends Component {
     const { header_font: headerFont } = mobilization
     const {
       main_color: mainColor,
+      call_to_action: callToAction,
       title_text: titleText,
       button_text: buttonText,
       // Maybe `reply_email` is necessary...
       // reply_email,
-      show_counter: showCounter,
       count_text: countText,
       pressure_subject: pressureSubject,
       pressure_body: pressureBody,
@@ -192,7 +192,7 @@ export class Pressure extends Component {
               className='center py2 px3 m0 white rounded-top'
               style={{ backgroundColor: mainColor, fontFamily: headerFont }}
             >
-              {titleText}
+              {callToAction || titleText}
             </h2>
             <TargetList
               targets={::this.getTargetList() || []}
@@ -214,7 +214,7 @@ export class Pressure extends Component {
               addTwilioCallMutation={this.state.addTwilioCallMutation}
               changeParentState={::this.changeState}
             >
-              {!showCounter || showCounter !== 'true' ? null : (
+              {countText && (
                 <PressureCount
                   value={this.state.phonePressureCount || widget.count || 0}
                   color={mainColor}
