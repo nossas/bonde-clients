@@ -159,7 +159,7 @@ export default {
   'community.components--settings-menu.title': 'Configurações da sua comunidade',
   'community.components--settings-menu.tabs.info': 'Informações',
   'community.components--settings-menu.tabs.mobilizers': 'Mobilizadores',
-  'community.components--settings-menu.tabs.mailchimp': 'Integração com Mailchimp',
+  'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
   'community.components--settings-menu.tabs.recipient': 'Conta bancária',
   'community.components--settings-menu.tabs.metrics': 'Dados',
   'community.components--settings-menu.tabs.domains': 'Domínios',
@@ -417,19 +417,19 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath: /community/report
   'c--metrics.unique.activists.title': 'ATIVISTAS',
   'c--metrics.unique.activists.subtitle': 'Total de pessoas que já agiram em alguma página publicada pela sua comunidade',
-  'c--metrics.total.active.activists.title': 'ATIVISTAS',
+  'c--metrics.total.active.activists.title': 'ATIVISTAS RECENTES',
   'c--metrics.total.active.activists.subtitle': 'Total de pessoas que agiram na sua comunidade {br} nos últimos 90 dias',
 
-  'c--metrics.total.pressure.actions.title': 'PRESSÃO',
+  'c--metrics.total.pressure.actions.title': 'PRESSÕES',
   'c--metrics.total.pressure.actions.subtitle': 'Total de ações de pressão {br} feitas em páginas da sua comunidade nos últimos 90 dias',
-  'c--metrics.total.subscriptions.actions.title': 'FORMULÁRIO',
+  'c--metrics.total.subscriptions.actions.title': 'INSCRIÇÕES',
   'c--metrics.total.subscriptions.actions.subtitle': 'Total de ações de cadastro em formulários publicados pela sua comunidade {br} nos últimos 90 dias',
 
   'c--metrics.total.unique.donations.title': 'DOAÇÕES ÚNICAS',
   'c--metrics.total.unique.donations.subtitle': 'Valor total das doações únicas confirmadas na sua comunidade nos últimos 30 dias',
   'c--metrics.total.recurrent.donations.title': 'DOAÇÕES RECORRENTES',
   'c--metrics.total.recurrent.donations.subtitle': 'Valor total das doações recorrentes confirmadas na sua comunidade nos últimos 30 dias',
-  'c--metrics.total.unique-and-recurrent.donations.title': 'DOAÇÕES',
+  'c--metrics.total.unique-and-recurrent.donations.title': 'DOAÇÕES GERAIS',
   'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de doações únicas e recorrentes arrecadadas pela sua comunidade até agora {br}(confirmadas / aguardando pagamento)',
 
   'c--metrics.total.donations.charged-back-amount': 'Valor total de devolução das doações coletadas até agora:',
@@ -492,15 +492,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
-  'components.navigation--sidebar.community-settings.item.mobilizations': 'Suas Páginas',
-  'components.navigation--sidebar.community-settings.item.info': 'Sua Comunidade',
-  'components.navigation--sidebar.community-settings.item.metrics': 'Seus Dados',
-  'components.navigation--sidebar.community-settings.item.domains': 'Seus Domínios',
+  'components.navigation--sidebar.community-settings.item.mobilizations': 'Páginas',
+  'components.navigation--sidebar.community-settings.item.info': 'Comunidade',
+  'components.navigation--sidebar.community-settings.item.metrics': 'Dados',
+  'components.navigation--sidebar.community-settings.item.domains': 'Domínios',
 
   'components.navigation--sidebar.mobilization-settings.item.launch': 'Publicar página',
   'components.navigation--sidebar.mobilization-settings.item.launched': 'Página publicada',
   'components.navigation--sidebar.mobilization-settings.item.edit': 'Editar página',
-  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar bloco de conteúdo',
+  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar bloco',
   'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Visualizar',
   'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações da página',
 
@@ -1057,7 +1057,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // config mobrender widgets
   // filepath: /client/mobrender/widgets/config.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'widgets.config--content.label': 'Texto',
+  'widgets.config--content.label': 'Conteúdo',
   'widgets.config--content.default': 'Clique para editar a ferramenta',
   'widgets.config--form.label': 'Formulário',
   'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
@@ -1157,7 +1157,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   'page--form-widget-fields.add-button': 'Adicionar um campo',
-  'page--form-widget-fields.helper-text.still-empty': 'Seu formulário ainda não tem nenhum campo... Clique no botão para começar a adicionar!',
+  'page--form-widget-fields.helper-text.still-empty': 'Aqui você pode adicionar, remover, editar e ordenar os campos do seu formulário do jeito que quiser :)',
   'page--form-widget-fields.helper-text.manage-fields': 'Aqui você pode adicionar, remover, editar e ordenar os campos do seu formulário do jeito que quiser :)',
 
   // component form widget
@@ -1165,7 +1165,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'form-widget.components--form.default.title-text': 'Clique para configurar sua ferramenta...',
+  'form-widget.components--form.default.title-text': 'Clique para editar sua ferramenta...',
   'form-widget.components--form.default.button-text': 'Enviar',
 
   // component form widget input
@@ -1274,7 +1274,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
   'page--pressure-widget.success-message': 'Oba! Configurações salvas com sucesso :)',
   'page--pressure-widget.form.title-text.label': 'Título',
-  'page--pressure-widget.form.title-text.placeholder': 'Envie um email para quem pode tomar essa decisão',
+  'page--pressure-widget.form.title-text.placeholder': 'Clique para editar sua ferramenta...',
   'page--pressure-widget.form.button-text.label': 'Texto do botão',
   'page--pressure-widget.form.button-text.placeholder': 'Pressionar',
   'page--pressure-widget.form.main-color.label': 'Cor',
