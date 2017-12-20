@@ -9,23 +9,18 @@ import * as paths from '~client/paths'
 
 const MobilizationsSettingsDomainPage = ({ location, mobilization, ...formProps }) => {
   return (
-    <SettingsPageLayout>
-      <SettingsMenu mobilization={mobilization} location={location} />
-      <SettingsPageContentLayout>
-        <FormDomain
-          {...formProps}
-          mobilization={mobilization}
-          formComponent={SettingsForm}
-          redirectToCreateDNS={() => browserHistory.push(paths.communityDomainCreate())}
-          successMessage={
-            <FormattedMessage
-              id='page--mobilizations-domain.form-domain.success-message'
-              defaultMessage='Dados de domínio salvos com sucesso'
-            />
-          }
+    <FormDomain
+      {...formProps}
+      mobilization={mobilization}
+      formComponent={SettingsForm}
+      redirectToCreateDNS={() => browserHistory.push(paths.communityDomainCreate())}
+      successMessage={
+        <FormattedMessage
+          id='page--mobilizations-domain.form-domain.success-message'
+          defaultMessage='Dados de domínio salvos com sucesso'
         />
-      </SettingsPageContentLayout>
-    </SettingsPageLayout>
+      }
+    />
   )
 }
 

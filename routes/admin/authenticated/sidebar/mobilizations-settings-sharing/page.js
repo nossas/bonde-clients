@@ -16,16 +16,11 @@ const FormShareImplementation = FormShare(
 )
 
 const MobilizationsSettingsSharingPage = props => (
-  <SettingsPageLayout>
-    <SettingsMenu {...props} />
-    <SettingsPageContentLayout>
-      <FormShareImplementation
-        {...props}
-        FormComponent={SettingsForm}
-        className='mobilization-settings-sharing--form-share transparent'
-      />
-    </SettingsPageContentLayout>
-  </SettingsPageLayout>
+  <FormShareImplementation
+    {...props}
+    FormComponent={SettingsForm}
+    className='mobilization-settings-sharing--form-share transparent'
+  />
 )
 
 export default MobilizationsSettingsSharingPage

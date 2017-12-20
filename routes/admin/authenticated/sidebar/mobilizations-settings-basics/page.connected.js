@@ -1,4 +1,3 @@
-import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
@@ -8,22 +7,10 @@ import { fields, validate } from '~client/mobilizations/components/mobilization-
 
 import Page from './page'
 
-const redial = {
-  fetch: ({ dispatch, getState, params }) => {
-    const state = getState()
-    const promises = []
-
-    !MobSelectors(state).hasCurrentMobilization() && promises.push(
-      dispatch(MobActions.selectMobilization(params.mobilization_id))
-    )
-    return Promise.all(promises)
-  }
-}
-
 const form = 'mobilizationBasicsForm'
 
 const mapStateToProps = state => {
-  const mobilization = MobSelectors(state).getMobilization()
+  const mobilization = MobSelectors(state).getMobilization() || {}
   return {
     formName: form,
     initialValues: mobilization,
@@ -35,8 +22,6 @@ const mapActionCreatorsToProps = {
   submit: MobActions.asyncUpdateMobilization
 }
 
-export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionCreatorsToProps)(
-    injectIntl(reduxForm({ form, fields: [...fields, 'id'], validate })(Page))
-  )
+export default connect(mapStateToProps, mapActionCreatorsToProps)(
+  injectIntl(reduxForm({ form, fields: [...fields, 'id'], validate })(Page))
 )

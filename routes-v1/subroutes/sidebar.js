@@ -9,9 +9,10 @@ import * as MobActions from '~client/mobrender/redux/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 import DNSControlSelectors from '~client/community/dns-control-selectors'
 import * as DNSControlActions from '~client/community/action-creators/dns-control'
+
 // SubRoutes
 import CommunitySettings from '~routes/admin/authenticated/sidebar/community-settings/container'
-import MobilizationList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
+import MobilizationsRoutes from '~root/routes-v1/subroutes/mobilizations'
 
 class SubRoute extends React.Component {
   componentDidMount () {
@@ -34,7 +35,7 @@ class SubRoute extends React.Component {
     return this.props.loading ? <Loading /> : (
       <SidebarAPI.Sidebar {...this.props.sidebarProps}>
         <Route path='/community' component={CommunitySettings} />
-        <Route exact path='/mobilizations' component={MobilizationList} />
+        <Route path='/mobilizations' component={MobilizationsRoutes} />
       </SidebarAPI.Sidebar>
     )
   }

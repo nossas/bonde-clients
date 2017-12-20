@@ -5,8 +5,10 @@ export default (state, props) => ({
 
     const mobilization = (id) => data.filter(mob => mob.id === id)[0]
 
-    if (!currentId && props && props.params && props.params.mobilization_id) {
-      return mobilization(parseInt(props.params.mobilization_id))
+    const hasParams = props && props.match && props.match.params
+
+    if (!currentId && hasParams && props.match.params.mobilization_id) {
+      return mobilization(parseInt(props.match.params.mobilization_id))
     }
     return mobilization(currentId)
   },

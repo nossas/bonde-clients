@@ -12,7 +12,6 @@ import RegisterPage from '~routes/admin/not-authenticated/account-register/page.
 import CommunityListPage from '~routes/admin/authenticated/external/community-list/page.connected'
 import CommunityCreatePage from '~routes/admin/authenticated/external/community-new/page.connected'
 // ---  Sidebar Container
-import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
 import Logout from '~routes/admin/authenticated/logout/page.connected.js'
 // Sidebar Container
 import Sidebar from './subroutes/sidebar'
@@ -26,11 +25,6 @@ const AuthExample = () => (
       <PrivateRoute exact path='/logout' component={Logout} />
       <PrivateRoute exact path='/communities' component={withUser(CommunityListPage)} />
       <PrivateRoute exect path='/communities/new' component={withUser(CommunityCreatePage)} />
-      <PrivateRoute
-        exact
-        path='/mobilizations/:mobilization_id/edit'
-        component={withUser(withSidebar(MobilizationsEdit))}
-      />
       <PrivateRoute path='/' component={withUser(Sidebar)} />
       <Route component={TechnicalIssues} />
     </Switch>
