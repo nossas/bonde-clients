@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage, intlShape } from 'react-intl'
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 
-const TwitterShareButton = props => {
+const TwitterShareButton = ({ href, text, intl }) => {
   const handleClick = () => {
     // Optional Query params
     // via: twitter user to associate with the tweet
     // related: additional users related to the tweet comma-separated
     // hashtags: comma-separated list without #
-
-    const { href, text, intl } = props
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${href}`,
       intl.formatMessage({
@@ -40,4 +38,4 @@ TwitterShareButton.propTypes = {
   intl: intlShape.isRequired
 }
 
-export default TwitterShareButton
+export default injectIntl(TwitterShareButton)
