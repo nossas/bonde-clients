@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import DNSControlSelectors from '~client/community/dns-control-selectors'
-import * as MobActions from '~client/mobrender/redux/action-creators'
 import Page from './page'
 
 const mapStateToProps = state => ({

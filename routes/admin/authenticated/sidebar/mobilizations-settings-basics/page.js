@@ -1,7 +1,6 @@
 import React from 'react'
 import { startSubmit, stopSubmit } from 'redux-form'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
-import { SettingsMenu, MobilizationBasicsForm } from '~client/mobilizations/components'
+import { MobilizationBasicsForm } from '~client/mobilizations/components'
 
 const MobilizationsSettingsBasicsPage = ({ dispatch, ...props }) => (
   <MobilizationBasicsForm

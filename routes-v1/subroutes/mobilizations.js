@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import { TechnicalIssues } from '~client/components/error/index'
 import MobilizationList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
 import MobilizationsNew from '~routes/admin/authenticated/sidebar/mobilizations-new/page.connected'
 import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
@@ -18,7 +17,6 @@ const MobilizationsRoutes = ({ match: { path } }) => (
     <Route exact path={`${path}/:mobilization_id/launch/end`} component={MobilizationsLaunchEnd} />
 
     <Route path={`${path}/:mobilization_id/settings`} component={MobilizationsSettings} />
-    <Route path='*' component={TechnicalIssues} />
   </React.Fragment>
 )
 

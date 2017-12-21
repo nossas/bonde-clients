@@ -2,8 +2,7 @@ import React from 'react'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import { SettingsMenu, FormShare } from '~client/mobilizations/components'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { FormShare } from '~client/mobilizations/components'
 import { SettingsForm } from '~client/ux/components'
 
 if (require('exenv').canUseDOM) {

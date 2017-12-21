@@ -1,9 +1,7 @@
 import React from 'react'
 
 import { FormattedMessage } from 'react-intl'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import { FormGroup, FormControl, ControlLabel } from '~client/components/forms'
-import { SettingsMenu } from '~client/mobilizations/components'
 import { SettingsForm } from '~client/ux/components'
 
 const MobilizationsSettingsAnalyticsPage = props => {
