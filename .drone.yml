@@ -10,81 +10,6 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-client-staging:
-    image: node:latest
-    environment:
-      - NODE_ENV=production
-      - API_URL=https://api.staging.bonde.org
-      - BOT_URL=https://beta.staging.bonde.org
-      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
-      - APP_DOMAIN=staging.bonde.org
-      - AWS_BUCKET=bonde-assets-staging
-    commands:
-      - export PAGARME_KEY=$STAG_PAGARME_KEY
-      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
-      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
-      - mkdir build
-      - yarn run build:client
-    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  build-server-staging:
-    image: node:latest
-    environment:
-      - NODE_ENV=production
-      - API_URL=https://api.staging.bonde.org
-      - BOT_URL=https://beta.staging.bonde.org
-      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
-      - APP_DOMAIN=staging.bonde.org
-      - AWS_BUCKET=bonde-assets-staging
-    commands:
-      - export PAGARME_KEY=$STAG_PAGARME_KEY
-      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
-      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
-      - yarn run build:server
-    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  publish-server-staging:
-    image: plugins/docker
-    repo: nossas/bonde-client
-    secrets: [ docker_username, docker_password ]
-    tags:
-      - ${DRONE_BRANCH}
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  publish-client-staging:
-    image: nossas/s3cmd
-    group: concurrent
-    commands:
-      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
-      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-      - s3cmd --acl-public --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-    secrets: [ aws_access_key_id, aws_secret_access_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  deploy-staging:
-    image: peloton/drone-rancher
-    group: concurrent
-    url: http://cluster.bonde.org
-    service: staging/client
-    docker_image: nossas/bonde-client:${DRONE_BRANCH}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
   build-client-production:
     image: node:latest
     environment:
@@ -164,6 +89,86 @@ pipeline:
     when:
       status: success
       event: tag
+
+  build-client-staging:
+    image: node:latest
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.staging.bonde.org
+      - BOT_URL=https://beta.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
+      - APP_DOMAIN=staging.bonde.org
+      - AWS_BUCKET=bonde-assets-staging
+    commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
+      - mkdir build
+      - yarn run build:client
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    when:
+      event: push
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  build-server-staging:
+    image: node:latest
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.staging.bonde.org
+      - BOT_URL=https://beta.staging.bonde.org
+      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
+      - APP_DOMAIN=staging.bonde.org
+      - AWS_BUCKET=bonde-assets-staging
+    commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
+      - yarn run build:server
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    when:
+      event: push
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-server-staging:
+    image: plugins/docker
+    repo: nossas/bonde-client
+    secrets: [ docker_username, docker_password ]
+    tags:
+      - ${DRONE_BRANCH}
+    when:
+      event: push
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  publish-client-staging:
+    image: nossas/s3cmd
+    group: concurrent
+    commands:
+      - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
+      - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
+      - s3cmd --acl-public --rexclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+      - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
+    secrets: [ aws_access_key_id, aws_secret_access_key ]
+    when:
+      event: push
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
+
+  deploy-staging:
+    image: peloton/drone-rancher
+    group: concurrent
+    url: http://cluster.bonde.org
+    service: staging/client
+    docker_image: nossas/bonde-client:${DRONE_BRANCH}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      event: push
+      status: success
+      branch: [hotfix-*, release-*, feature-*, develop]
 
   notify:
     image: plugins/slack
