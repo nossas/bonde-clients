@@ -165,7 +165,10 @@ const FormShare = ({
 )
 
 FormShare.propTypes = {
-  FormComponent: PropTypes.node,
+  FormComponent: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.func
+  ]),
   fields: PropTypes.shape({
     facebook_share_image: PropTypes.object.isRequired,
     facebook_share_title: PropTypes.object.isRequired,
