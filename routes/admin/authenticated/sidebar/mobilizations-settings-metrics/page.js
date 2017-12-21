@@ -5,7 +5,7 @@ import { Title } from '~client/components/title'
 const MobilizationsSettingsMetricsPage = props => (
   <React.Fragment>
     <Title>Métricas</Title>
-    {props.mobilization.id && <MetricsMobilization mobilizationId={props.mobilization.id} />}
+    <MetricsMobilization mobilizationId={props.mobilization.id} />
   </React.Fragment>
 )
 

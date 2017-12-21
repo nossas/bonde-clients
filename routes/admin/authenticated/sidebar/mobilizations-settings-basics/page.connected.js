@@ -9,8 +9,8 @@ import Page from './page'
 
 const form = 'mobilizationBasicsForm'
 
-const mapStateToProps = state => {
-  const mobilization = MobSelectors(state).getMobilization() || {}
+const mapStateToProps = (state, props) => {
+  const mobilization = MobSelectors(state, props).getMobilization()
   return {
     formName: form,
     initialValues: mobilization,

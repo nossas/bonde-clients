@@ -7,8 +7,8 @@ import { isValidCodeGA } from '~client/utils/validation-helper'
 
 import Page from './page'
 
-const mapStateToProps = state => {
-  const mobilization = MobSelectors(state).getMobilization() || {}
+const mapStateToProps = (state, props) => {
+  const mobilization = MobSelectors(state, props).getMobilization()
   return {
     initialValues: mobilization,
     mobilization

@@ -4,8 +4,8 @@ import MobSelectors from '~client/mobrender/redux/selectors'
 import DNSControlSelectors from '~client/community/dns-control-selectors'
 import Page from './page'
 
-const mapStateToProps = state => ({
-  mobilization: MobSelectors(state).getMobilization() || {},
+const mapStateToProps = (state, props) => ({
+  mobilization: MobSelectors(state, props).getMobilization(),
   hostedZones: DNSControlSelectors(state)
     .dnsHostedZones()
     .getList()
