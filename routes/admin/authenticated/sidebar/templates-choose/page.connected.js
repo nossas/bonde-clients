@@ -1,14 +1,10 @@
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-
 import { graphql, gql } from 'react-apollo'
-
 import * as CommunitySelectors from '~client/community/selectors'
 import MobSelectors from '~client/mobrender/redux/selectors'
 import { asyncUpdateMobilization } from '~client/mobrender/redux/action-creators'
 import * as TemplateSelectors from '~client/mobilizations/templates/selectors'
 import * as paths from '~client/paths'
-
 import Page from './page'
 
 const mapStateToProps = (state, props) => ({
@@ -25,11 +21,11 @@ const mapActionsToProps = (dispatch, props) => ({
       template_mobilization_id: template.id
     }))
     .then(() => {
-      browserHistory.push(paths.editMobilization(mobilization.id))
+      props.history.push(paths.editMobilization(mobilization.id))
     })
   },
   createEmptyMobilization: ({ mobilization }) => {
-    browserHistory.push(paths.createBlock(mobilization))
+    props.history.push(paths.createBlock(mobilization))
   }
 })
 

@@ -13,6 +13,9 @@ import * as DNSControlActions from '~client/community/action-creators/dns-contro
 // SubRoutes
 import CommunitySettings from '~routes/admin/authenticated/sidebar/community-settings/container'
 import MobilizationsRoutes from '~root/routes-v1/subroutes/mobilizations'
+import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
+import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
+import BlockCreate from '~routes/admin/authenticated/sidebar/blocks-create/page.connected'
 
 class SubRoute extends React.Component {
   componentDidMount () {
@@ -32,10 +35,27 @@ class SubRoute extends React.Component {
   }
 
   render () {
-    return this.props.loading ? <Loading /> : (
+    const { community, loaded, loading } = this.props
+    const isLoading = community && !loaded && !loading
+    return isLoading ? <Loading /> : (
       <SidebarAPI.Sidebar {...this.props.sidebarProps}>
         <Route path='/community' component={CommunitySettings} />
         <Route path='/mobilizations' component={MobilizationsRoutes} />
+        <Route
+          exact
+          path='/mobilizations/:mobilization_id/templates/choose'
+          component={TemplateChoose}
+        />
+        <Route
+          exact
+          path='/mobilizations/:mobilization_id/templates/choose/custom'
+          component={TemplateChooseCustom}
+        />
+        <Route
+          exact
+          path='/mobilizations/:mobilization_id/blocks/create'
+          component={BlockCreate}
+        />
       </SidebarAPI.Sidebar>
     )
   }

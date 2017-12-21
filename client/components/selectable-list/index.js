@@ -49,7 +49,10 @@ SelectableList.propTypes = {
   list: PropTypes.array.isRequired,
   selectedIndex: PropTypes.number,
   setSelectedIndex: PropTypes.func.isRequired,
-  emptyListText: PropTypes.string,
+  emptyListText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   emptyListIcon: PropTypes.string
 }
 

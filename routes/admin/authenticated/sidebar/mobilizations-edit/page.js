@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
-
 // Global module dependencies
 import { Loading } from '~client/components/await'
 import { GoogleFontsLoader } from '~client/components/fonts'
@@ -29,7 +27,7 @@ export class MobilizationsEditPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
     if (blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
+      this.props.history.push(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 

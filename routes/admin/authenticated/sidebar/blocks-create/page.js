@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { browserHistory } from 'react-router'
 import ReactS3Uploader from 'react-s3-uploader'
 
 import DefaultServerConfig from '~server/config'
@@ -162,7 +161,7 @@ class BlocksCreatePage extends Component {
                   }
                   onCreateBlock(block)
                     .then(() => {
-                      browserHistory.push(
+                      this.props.history.push(
                         `${paths.editMobilization(mobilization.id)}?newBlock=true`
                       )
                     })
