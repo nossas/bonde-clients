@@ -2,22 +2,22 @@ export default {
   // page account login
   // filepath: /routes/admin/not-authenticated/account-login/page.js
   // routepath: /login
-  'page--account-login.label.email': 'Email',
-  'page--account-login.label.password': 'Senha',
-  'page--account-login.placeholder.email': 'exemplo@email.com',
-  'page--account-login.loading': 'Carregando...',
-  'page--account-login.signin': 'Entrar',
-  'page--account-login.ask-register': 'Ainda não se cadastrou?',
-  'page--account-login.cta-signup': 'Clique para entrar no BONDE',
-  'page--account-login.auth.error-message': 'Senha incorreta...',
-  'page--account-login.auth.error-message.retrieve-password.link': 'Esqueceu sua senha?',
+  'page--account-login.label.email': 'Correo electrónico',
+  'page--account-login.label.password': 'Contraseña',
+  'page--account-login.placeholder.email': 'ejemplo@email.com',
+  'page--account-login.loading': 'Cargando...',
+  'page--account-login.signin': 'Iniciar sesión',
+  'page--account-login.ask-register': '¿Todavía no te has inscrito?',
+  'page--account-login.cta-signup': 'Haz click para entrar a BONDE',
+  'page--account-login.auth.error-message': 'Contraseña incorrecta...',
+  'page--account-login.auth.error-message.retrieve-password.link': '¿Olvidaste tu contraseña?',
 
   // page account login (connected)
   // filepath: /routes/admin/not-authenticated/account-login/page.connected.js
   // routepath: /login
-  'p--account-login.form.email.validation.required': 'Informe seu email',
-  'p--account-login.form.email.validation.invalid': 'Email inválido',
-  'p--account-login.form.password.validation.required': 'Informe sua senha',
+  'p--account-login.form.email.validation.required': 'Coloca tu correo electrónico',
+  'p--account-login.form.email.validation.invalid': 'Correo electrónico inválido',
+  'p--account-login.form.password.validation.required': 'Coloca tu contraseña',
 
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
