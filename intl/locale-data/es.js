@@ -334,124 +334,124 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // page community twilio settings
   // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.js
   // routepath: /community/twilio
-  'page--community-twilio.helper-text.title': 'Onde encontro essa informação?',
-  'page--community-twilio.helper-text.twilio-login': 'É só seguir estes passos: Faça login na {link}',
-  'page--community-twilio.helper-text.twilio-login.link': 'sua conta no Twilio',
+  'page--community-twilio.helper-text.title': '¿Dónde encuentro esta información?',
+  'page--community-twilio.helper-text.twilio-login': 'Solo tienes que seguir los siguientes pasos: inicia sesión en {link}',
+  'page--community-twilio.helper-text.twilio-login.link': 'tu cuenta de Twilio',
 
   'page--community-twilio.form.twilio-account-sid.label': 'Twilio Account SID',
   'page--community-twilio.form.twilio-auth-token.label': 'Twilio Auth Token',
-  'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Clicar no ícone do olho',
+  'page--community-twilio.form.twilio-auth-token.helper-text.eye-icon': 'Hacer click en el ícono del ojo',
   'page--community-twilio.form.twilio-number.label': 'Twilio Number',
-  'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Clique em {strongPhoneNumber} (símbolo de {strongHashtag} no menu da esquerda)',
-  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escolha qual número do Twilio quer usar',
+  'page--community-twilio.form.twilio-number.helper-text.menu-item': 'Haz click en {strongPhoneNumber} (símbolo de {strongHashtag} en el menú a la mano izquierda)',
+  'page--community-twilio.form.twilio-number.helper-text.choice-number': 'Escoge qué número de Twilio quieres usar',
 
   // page community new
   // filepath: /routes/admin/authenticated/external/community-new/page.js
   // routepath: /community/new
-  'page--community-new.title': 'Crie uma comunidade',
-  'page--community-new.subtitle': 'É na comunidade que tudo acontece: onde você cria e publica páginas de ação, gerencia seus dados e, claro, chama seu bonde pra chegar junto!.',
-  'page--community-new.form.name.label': 'Nome da comunidade',
-  'page--community-new.form.name.placeholder': 'Exemplo: Meu Rio',
-  'page--community-new.form.city.label': 'Cidade da comunidade',
-  'page--community-new.form.city.placeholder': 'Exemplo: Rio de Janeiro',
-  'page--community-new.form.submit-button.text.default': 'Criar comunidade',
-  'page--community-new.form.submit-button.text.saving': 'Salvando...',
+  'page--community-new.title': 'Crea una comunidad',
+  'page--community-new.subtitle': 'Es en la comunidad que todo sucede: donde creas y publicas páginas de acción, gestionas sus datos y, clara, ¡llamas a tu BONDE para llegar juntos!',
+  'page--community-new.form.name.label': 'Nombre de la comunidad',
+  'page--community-new.form.name.placeholder': 'Ejemplo: Meu Rio',
+  'page--community-new.form.city.label': 'Ciudad de la comunidad',
+  'page--community-new.form.city.placeholder': 'Ejemplo: Rio de Janeiro',
+  'page--community-new.form.submit-button.text.default': 'Crear comunidad',
+  'page--community-new.form.submit-button.text.saving': 'Guardando...',
 
   // page community new (connected)
   // filepath: /routes/admin/authenticated/external/community-new/page.connected.js
   // routepath: /community/new
-  'page--community-new.form.name.validation.required': 'Informe o nome da comunidade',
-  'page--community-new.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
+  'page--community-new.form.name.validation.required': 'Ingresa el nombre de la comunidad',
+  'page--community-new.form.city.validation.required': 'Ingresa la ciudad en que tu comunidad actúa',
 
   // page community recipient
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.js
   // routepath: /community/recipient
   'page--community-recipient.warning.title': 'Importante',
-  'page--community-recipient.warning.content.list.li-01': 'A partir do momento em que você preencher os campos abaixo, você vai poder começar a arrecadar pela ferramenta de crowdfunding!',
-  'page--community-recipient.warning.content.list.li-02': 'Atenção: qualquer quantia arrecadada pelas páginas da sua comunidade vai ser automaticamente transferida para a conta cadastrada aqui no dia do mês (ou da semana) que selecionar abaixo.',
-  'page--community-recipient.title': 'Data de Transferência',
-  'page--community-recipient.form.transfer-interval.label': 'Recorrência',
+  'page--community-recipient.warning.content.list.li-01': 'A partir del momento en que llenes los campos de abajo, vas a poder comenzar a recaudar fondos con la herramienta de crowdfunding!',
+  'page--community-recipient.warning.content.list.li-02': 'Atención: cualquier cantidad recaudada por las páginas de tu comunidad será automáticamente transferida a la cuenta registrada aquí el día del mes (o de la semana) que selecciones a continuación.',
+  'page--community-recipient.title': 'Fecha de transferencia',
+  'page--community-recipient.form.transfer-interval.label': 'Frecuencia',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
-  'page--community-recipient.form.transfer-interval.value.monthly': 'Mensal',
-  'page--community-recipient.form.transfer-day.label': 'Dia de transferência',
-  'page--community-recipient.form.transfer-day.weekly.mon': 'Segundas',
-  'page--community-recipient.form.transfer-day.weekly.tue': 'Terças',
-  'page--community-recipient.form.transfer-day.weekly.wed': 'Quartas',
-  'page--community-recipient.form.transfer-day.weekly.thu': 'Quintas',
-  'page--community-recipient.form.transfer-day.weekly.fri': 'Sextas',
-  'page--community-recipient.section--account.title': 'Conta bancária',
-  'page--community-recipient.form.bank-account-type.label': 'Tipo de conta',
-  'page--community-recipient.form.bank-account-type.value.checking-account': 'Corrente',
-  'page--community-recipient.form.bank-account-type.value.savings-account': 'Poupança',
+  'page--community-recipient.form.transfer-interval.value.monthly': 'Mensual',
+  'page--community-recipient.form.transfer-day.label': 'Día de transferencia',
+  'page--community-recipient.form.transfer-day.weekly.mon': 'Lunes',
+  'page--community-recipient.form.transfer-day.weekly.tue': 'Martes',
+  'page--community-recipient.form.transfer-day.weekly.wed': 'Miércoles',
+  'page--community-recipient.form.transfer-day.weekly.thu': 'Jueves',
+  'page--community-recipient.form.transfer-day.weekly.fri': 'Viernes',
+  'page--community-recipient.section--account.title': 'Cuenta bancaria',
+  'page--community-recipient.form.bank-account-type.label': 'Tipo de cuenta',
+  'page--community-recipient.form.bank-account-type.value.checking-account': 'Corriente',
+  'page--community-recipient.form.bank-account-type.value.savings-account': 'Ahorro',
   'page--community-recipient.form.bank-code.label': 'Banco',
-  'page--community-recipient.form.bank-code.value.default': 'Selecione o banco',
-  'page--community-recipient.form.bank-agency.label': 'Agência',
-  'page--community-recipient.form.bank-agency.placeholder': 'Digite apenas números',
+  'page--community-recipient.form.bank-code.value.default': 'Selecciona el banco',
+  'page--community-recipient.form.bank-agency.label': 'Agencia',
+  'page--community-recipient.form.bank-agency.placeholder': 'Únicamente digite números',
   'page--community-recipient.form.bank-agency-dv.label': 'Dígito',
-  'page--community-recipient.form.bank-agency-dv.placeholder': 'Ex: 0',
-  'page--community-recipient.form.bank-account.label': 'Conta',
-  'page--community-recipient.form.bank-account.plcaeholder': 'Digite apenas números',
+  'page--community-recipient.form.bank-agency-dv.placeholder': 'Ejm: 0',
+  'page--community-recipient.form.bank-account.label': 'Cuenta',
+  'page--community-recipient.form.bank-account.plcaeholder': 'Únicamente digite números',
   'page--community-recipient.form.bank-account-dv.label': 'Dígito',
-  'page--community-recipient.form.bank-account-dv.plcaeholder': 'Ex: 00',
-  'page--community-recipient.form.bank-legal-name.label': 'Nome / Razão Social',
-  'page--community-recipient.form.bank-legal-name.placeholder': 'Ex: Minha Sampa',
+  'page--community-recipient.form.bank-account-dv.plcaeholder': 'Ejm: 00',
+  'page--community-recipient.form.bank-legal-name.label': 'Nombre / Razón social',
+  'page--community-recipient.form.bank-legal-name.placeholder': 'Ejm: Minha Sampa',
   'page--community-recipient.form.bank-document-number.label': 'CPF / CNPJ',
-  'page--community-recipient.form.bank-document-number.placeholder': 'Digite apenas números',
+  'page--community-recipient.form.bank-document-number.placeholder': 'Únicamente digite números',
 
   // page community recipient (connected)
   // filepath: /routes/admin/authenticated/sidebar/community-settings/recipient/page.connected.js
   // routepath: /community/recipient
-  'page--community-recipient.form.validation.required': 'Campo obrigatório',
-  'page--community-recipient.form.bank-agency.validation.max-length': 'Deve conter no máximo 5 dígitos',
-  'page--community-recipient.form.bank-agency-dv.validation.length': 'Deve conter apenas 1 dígito',
-  'page--community-recipient.form.bank-account.validation.max-length': 'Deve conter no máximo 13 dígitos',
-  'page--community-recipient.form.bank-account-dv.validation.max-length': 'Deve conter no máximo 2 caracteres',
-  'page--community-recipient.form.bank-document-number.validation.cnpj-length': 'CNPJ deve conter 14 dígitos',
-  'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF deve conter 11 dígitos',
+  'page--community-recipient.form.validation.required': 'Campo obLigatOrio',
+  'page--community-recipient.form.bank-agency.validation.max-length': 'Debe contener como máximo 5 dígitos',
+  'page--community-recipient.form.bank-agency-dv.validation.length': 'Debe contener únicamente 1 dígito',
+  'page--community-recipient.form.bank-account.validation.max-length': 'Debe contener como máximo 13 dígitos',
+  'page--community-recipient.form.bank-account-dv.validation.max-length': 'Debe contener como máximo 2 caracteres',
+  'page--community-recipient.form.bank-document-number.validation.cnpj-length': 'CNPJ debe contener como máximo 14 dígitos',
+  'page--community-recipient.form.bank-document-number.validation.cpf-length': 'CPF debe contener 11 dígitos',
   'page--community-recipient.form.bank-document-number.validation.invalid-cpf-format': 'CPF inválido',
   'page--community-recipient.form.bank-document-number.validation.invalid-cnpj-format': 'CNPJ inválido',
 
   // metrics data table component
   // filepath: /client/components/metrics/components/metrics-data-table.js
   // routepath: /community/report
-  'c--metrics.unique.activists.title': 'ATIVISTAS',
-  'c--metrics.unique.activists.subtitle': 'Total de pessoas que já agiram em alguma página publicada pela sua comunidade',
-  'c--metrics.total.active.activists.title': 'ATIVISTAS RECENTES',
-  'c--metrics.total.active.activists.subtitle': 'Total de pessoas que agiram na sua comunidade {br} nos últimos 90 dias',
+  'c--metrics.unique.activists.title': 'ACTIVISTAS',
+  'c--metrics.unique.activists.subtitle': 'Total de personas que ya han actuado en alguna de las páginas publicadas por tu comunidad',
+  'c--metrics.total.active.activists.title': 'ACTIVISTAS RECIENTES',
+  'c--metrics.total.active.activists.subtitle': 'Total de personas que han actuado en tu comunidad {br} en los últimos 90 días',
 
-  'c--metrics.total.pressure.actions.title': 'PRESSÕES',
-  'c--metrics.total.pressure.actions.subtitle': 'Total de ações de pressão {br} feitas em páginas da sua comunidade nos últimos 90 dias',
-  'c--metrics.total.subscriptions.actions.title': 'INSCRIÇÕES',
-  'c--metrics.total.subscriptions.actions.subtitle': 'Total de ações de cadastro em formulários publicados pela sua comunidade {br} nos últimos 90 dias',
+  'c--metrics.total.pressure.actions.title': 'PRESIONES',
+  'c--metrics.total.pressure.actions.subtitle': 'Total de acciones de presión {br} hechas en páginas de tu comunidad en los últimos 90 días',
+  'c--metrics.total.subscriptions.actions.title': 'INSCRIPCIONES',
+  'c--metrics.total.subscriptions.actions.subtitle': 'Total de acciones de inscripción en los formularios publicados por tu comunidad {br} en los últimos 90 días',
 
-  'c--metrics.total.unique.donations.title': 'DOAÇÕES ÚNICAS',
-  'c--metrics.total.unique.donations.subtitle': 'Valor total das doações únicas confirmadas na sua comunidade nos últimos 30 dias',
-  'c--metrics.total.recurrent.donations.title': 'DOAÇÕES RECORRENTES',
-  'c--metrics.total.recurrent.donations.subtitle': 'Valor total das doações recorrentes confirmadas na sua comunidade nos últimos 30 dias',
-  'c--metrics.total.unique-and-recurrent.donations.title': 'DOAÇÕES GERAIS',
-  'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de doações únicas e recorrentes arrecadadas pela sua comunidade até agora {br}(confirmadas / aguardando pagamento)',
+  'c--metrics.total.unique.donations.title': 'DONACIONES ÚNICAS',
+  'c--metrics.total.unique.donations.subtitle': 'Valor total de las donaciones únicas confirmadas en tu comunidad en los últimos 30 dias',
+  'c--metrics.total.recurrent.donations.title': 'DONACIONES RECURRENTES',
+  'c--metrics.total.recurrent.donations.subtitle': 'Valor total de las donaciones recurrentes confirmadas en tu comunidad en los últimos 30 dias'',
+  'c--metrics.total.unique-and-recurrent.donations.title': 'DONACIONES GENERALES',
+  'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de donaciones únicas y recurrentes recaudadas por tu comunidad hasta ahora {br}(confirmadas / esperando el pago)',
 
-  'c--metrics.total.donations.charged-back-amount': 'Valor total de devolução das doações coletadas até agora:',
-  'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso das doações coletadas até agora:',
-  'c--metrics.total.donations.refused-amount': 'Valor total de reembolso das doações coletadas até agora:',
+  'c--metrics.total.donations.charged-back-amount': 'Valor total de devolución de las donaciones colectadas hasta ahora:',
+  'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso de las donaciones colectadas hasta ahora:',
+  'c--metrics.total.donations.refused-amount': 'Valor total de reembolso de las donaciones colectadas hasta ahora:',
 
     // page community report
     // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
     // routepath: /community/report
   'page--community-report.title.metrics': 'Métricas',
-  'page--community-report.title.reports': 'Relatórios',
+  'page--community-report.title.reports': 'Reportes',
 
-  'page--community-report.section-button.donation.title': 'RELATÓRIO DE DOAÇÕES',
-  'page--community-report.section-button.donation.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as doações feitas na sua comunidade.',
-  'page--community-report.section-button.donation.text': 'Baixar',
+  'page--community-report.section-button.donation.title': 'REPORTE DE DONACIONES',
+  'page--community-report.section-button.donation.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las donaciones hechas en tu comunidad',
+  'page--community-report.section-button.donation.text': 'Descargar',
 
-  'page--community-report.section-button.actions.title': 'RELATÓRIO DE AÇÕES',
-  'page--community-report.section-button.actions.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as ações feitas na sua comunidade.',
-  'page--community-report.section-button.actions.text': 'Baixar',
+  'page--community-report.section-button.actions.title': 'REPORTE DE ACCIONES',
+  'page--community-report.section-button.actions.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las acciones hechas en tu comunidad'',
+  'page--community-report.section-button.actions.text': 'Descargar',
 
-  'page--community-report.section-button.activists.title': 'RELATÓRIO DE ATIVISTAS',
-  'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as pessoas que agiram na sua comunidade.',
-  'page--community-report.section-button.activists.text': 'Baixar',
+  'page--community-report.section-button.activists.title': 'REPORTE DE ACTIVISTAS',
+  'page--community-report.section-button.activists.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las personas que han actuado en tu comunidad'',
+  'page--community-report.section-button.activists.text': 'Descargar',
 
   // component sidebar
   // filepath: /client/components/navigation/sidebar/sidebar.js
@@ -492,19 +492,19 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
   'components.navigation--sidebar.community-settings.item.mobilizations': 'Páginas',
-  'components.navigation--sidebar.community-settings.item.info': 'Comunidade',
-  'components.navigation--sidebar.community-settings.item.metrics': 'Dados',
-  'components.navigation--sidebar.community-settings.item.domains': 'Domínios',
+  'components.navigation--sidebar.community-settings.item.info': 'Comunidad',
+  'components.navigation--sidebar.community-settings.item.metrics': 'Datos',
+  'components.navigation--sidebar.community-settings.item.domains': 'Dominios',
 
   'components.navigation--sidebar.mobilization-settings.item.launch': 'Publicar página',
   'components.navigation--sidebar.mobilization-settings.item.launched': 'Página publicada',
   'components.navigation--sidebar.mobilization-settings.item.edit': 'Editar página',
-  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Adicionar bloco',
+  'components.navigation--sidebar.mobilization-settings.item.add-block': 'Agregar bloque',
   'components.navigation--sidebar.mobilization-settings.item.open-at-new-tab': 'Visualizar',
-  'components.navigation--sidebar.mobilization-settings.item.config': 'Configurações da página',
+  'components.navigation--sidebar.mobilization-settings.item.config': 'Configuraciones de la página',
 
-  'components.navigation--sidebar.footer.account': 'Sua Conta',
-  'components.navigation--sidebar.footer.sign-out': 'Sair',
+  'components.navigation--sidebar.footer.account': 'Tu cuenta',
+  'components.navigation--sidebar.footer.sign-out': 'Salir',
 
   // component sidenav
   // filepath: /client/components/navigation/sidenav/sidenav.js
@@ -544,27 +544,27 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - /mobilizations/new
   //   - /mobilizations/templates/list
-  'components.navigation--sidenav.config': 'Comunidade',
-  'components.navigation--sidenav.change-community': 'Trocar',
+  'components.navigation--sidenav.config': 'Comunidad',
+  'components.navigation--sidenav.change-community': 'Modificar',
 
   // page mobilizations list
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-list/page.js
   // routepath: /mobilizations
-  'page--mobilizations-list.page-header.title': 'Suas páginas',
+  'page--mobilizations-list.page-header.title': 'Tus páginas',
   'page--mobilizations-list.more-menu-action.open': 'Abrir página',
-  'page--mobilizations-list.more-menu-action.create-template': 'Criar template',
-  'page--mobilizations-list.more-menu-action.archived': 'Arquivar',
-  'page--mobilizations-list.more-menu-action.active': 'Ativar',
+  'page--mobilizations-list.more-menu-action.create-template': 'Crear plantilla',
+  'page--mobilizations-list.more-menu-action.archived': 'Archivar',
+  'page--mobilizations-list.more-menu-action.active': 'Activar',
 
   // component mobilizations page header
   // filepath: /client/mobilizations/components/page-header.js
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--page-header.button.text': 'Nova página',
-  'mobilizations.components--page-header.tabs.actives': 'Ativas',
-  'mobilizations.components--page-header.tabs.templates': 'Templates',
-  'mobilizations.components--page-header.tabs.archived': 'Arquivadas',
+  'mobilizations.components--page-header.button.text': 'Nueva página',
+  'mobilizations.components--page-header.tabs.actives': 'Activas',
+  'mobilizations.components--page-header.tabs.templates': 'Plantillas',
+  'mobilizations.components--page-header.tabs.archived': 'Archivadas',
 
   // component mobilizations list item: name
   // filepath: /client/mobilizations/components/list/items/name/index.js
@@ -574,7 +574,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
   //   - /mobilizations/:mobilization_id/templates/create
-  'mobilizations.components--list.items.name.header.text': 'Nome',
+  'mobilizations.components--list.items.name.header.text': 'Nombre',
 
   // component mobilizations list item: created at
   // filepath: /client/mobilizations/components/list/items/created-at.js
@@ -584,28 +584,28 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
   //   - /mobilizations/:mobilization_id/templates/create
-  'mobilizations.components--list.items.created-at.header.text': 'Criada em',
+  'mobilizations.components--list.items.created-at.header.text': 'Creada en',
 
   // component mobilizations list item: users
   // filepath: /client/mobilizations/components/list/items/users.js
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--list.items.users.header.text': 'Ações',
+  'mobilizations.components--list.items.users.header.text': 'Acciones',
 
   // component mobilizations list item: fund raising
   // filepath: /client/mobilizations/components/list/items/fund-raising.js
   // routepath:
   //   - /mobilizations
   //   - /mobilizations/templates/list
-  'mobilizations.components--list.items.fund-raising.header.text': 'Arrecadação',
+  'mobilizations.components--list.items.fund-raising.header.text': 'Recaudación',
   'mobilizations.components--list.items.fund-raising.currency': 'R$',
 
   // component mobilizations list item: fund raising
   // filepath: /client/mobilizations/components/list/items/copy-number.js
   // routepath:
   //   - /mobilizations/templates/list
-  'mobilizations.components--list.items.copy-number.header.text': 'Núm. Cópias',
+  'mobilizations.components--list.items.copy-number.header.text': 'Núm. Copias',
 
   // component mobilizations page tab layout
   // filepath: /client/mobilizations/components/page-tab-layout.js
@@ -614,34 +614,34 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/templates/choose
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
-  'mobilizations.components--page-tab-layout.title': 'Nova página',
-  'mobilizations.components--page-tab-layout.tabs.goal': 'Informações',
+  'mobilizations.components--page-tab-layout.title': 'Nueva página',
+  'mobilizations.components--page-tab-layout.tabs.goal': 'Información',
   'mobilizations.components--page-tab-layout.tabs.templates': 'Modelo',
 
   // page mobilizations new
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-new/page.js
   // routepath: /mobilizations/new
-  'page--mobilizations-new.title': 'Qual o objetivo da sua página?',
-  'page--mobilizations-new.footer': 'Relaxa! Você pode atualizar estes campos nas configurações da sua página quando quiser ;)',
+  'page--mobilizations-new.title': '¿Cuál es el objetivo de tu página?',
+  'page--mobilizations-new.footer': '¡Tranquilo! Puedes actualizar estos campos en las configuraciones de tu página cuando quieras ;)',
 
   // component mobilizations mobilization basics form
   // filepath: /client/mobilizations/components/mobilization-basics-form.js
   // routepath:
   //   - /mobilizations/new
   //   - /mobilizations/:mobilization_id/basics
-  'mobilizations.components--basics-form.name.label': 'Nome',
-  'mobilizations.components--basics-form.name.placeholder': 'Ex: Ação contra PEC 181',
-  'mobilizations.components--basics-form.name.validation.required': 'Insira o nome da página',
-  'mobilizations.components--basics-form.name.validation.max-length': 'Ops, o nome que você escolheu tá muito longo...',
-  'mobilizations.components--basics-form.slug.label': 'Identificador da página',
-  'mobilizations.components--basics-form.slug.helper-text': 'O identificador (ou "slug") é usado para referenciar a página - como no domínio padrão do BONDE, por exemplo: {example}',
-  'mobilizations.components--basics-form.slug.helper-example': 'Ex: 123-slug-que-escolher',
-  'mobilizations.components--basics-form.slug.validation.required': 'Insira o identificador da página',
-  'mobilizations.components--basics-form.slug.validation.max-length': 'Ops, seu identificador tá muito longo...',
+  'mobilizations.components--basics-form.name.label': 'Nombre',
+  'mobilizations.components--basics-form.name.placeholder': 'Ejm: Acción contra PEC 181',
+  'mobilizations.components--basics-form.name.validation.required': 'Inserta el nombre de la página',
+  'mobilizations.components--basics-form.name.validation.max-length': 'Oops, el nombre que escogiste está demasiado largo...',
+  'mobilizations.components--basics-form.slug.label': 'Identificador de la página',
+  'mobilizations.components--basics-form.slug.helper-text': 'El identificador (o "slug") es usado para referenciar la página - como en el dominio patrón de BONDE, por ejemplo: {example}',
+  'mobilizations.components--basics-form.slug.helper-example': 'Ejm: 123-slug-que-escojas',
+  'mobilizations.components--basics-form.slug.validation.required': 'Ingrese el identificar de la página',
+  'mobilizations.components--basics-form.slug.validation.max-length': 'Oops, tu identificador está demasiado largo...',
   'mobilizations.components--basics-form.goal.label': 'Objetivo',
-  'mobilizations.components--basics-form.goal.placeholder': 'Qual impacto você quer gerar ao publicar está página?',
-  'mobilizations.components--basics-form.goal.validation.required': 'Insira o objetivo da página',
-  'mobilizations.components--basics-form.goal.validation.max-length': 'Ops, você passou do limite de caracteres...',
+  'mobilizations.components--basics-form.goal.placeholder': '¿Qué impacto quieres generar al publicar esta página?',
+  'mobilizations.components--basics-form.goal.validation.required': 'Inserta el objetivo de la página',
+  'mobilizations.components--basics-form.goal.validation.max-length': 'Oops, te excediste del límite de caracteres...',
 
   // component control buttons
   // filepath: /client/components/forms/control-buttons.js
@@ -673,37 +673,37 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/new
   //   - /register
   //   - /subscriptions/:id/edit
-  'components--control-buttons.cancel': 'Voltar',
+  'components--control-buttons.cancel': 'Regresar',
   'components--control-buttons.input.value.default': 'Próxima parada',
-  'components--control-buttons.input.value.saving': 'Salvando...',
+  'components--control-buttons.input.value.saving': 'Guardando...',
 
   // page mobilizations templates choose
   // filepath: /routes/admin/authenticated/sidebar/templates-choose/page.js
   // routepath: /mobilizations/:mobilization_id/templates/choose
-  'page--mobilizations.templates-choose.title': 'Como você quer começar?',
-  'page--mobilizations.templates-choose.browsable-list-item.blank': 'Criar página do zero',
-  'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Usar um template',
-  'page--mobilizations.templates-choose.browsable-list-item.templates-global': 'Templates globais',
+  'page--mobilizations.templates-choose.title': '¿Cómo quieres comenzar?',
+  'page--mobilizations.templates-choose.browsable-list-item.blank': 'Crear página desde cero',
+  'page--mobilizations.templates-choose.browsable-list-item.templates-custom': 'Usar una plantilla',
+  'page--mobilizations.templates-choose.browsable-list-item.templates-global': 'Plantillas globales',
 
   // component mobilizations templates selectable list
   // filepath: /client/mobilizations/templates/components/template-selectable-list.js
   // routepath:
   //   - /mobilizations/:mobilization_id/templates/choose/custom
   //   - /mobilizations/:mobilization_id/templates/choose/global
-  'templates.components--selectable-list.filterable-search-bar.placeholder': 'Buscar template',
-  'templates.components--selectable-list.empty-list-text': 'Ops, não existe nenhum template com esse nome...',
-  'templates.components--selectable-list.button.back': 'Voltar',
+  'templates.components--selectable-list.filterable-search-bar.placeholder': 'Buscar plantilla',
+  'templates.components--selectable-list.empty-list-text': 'Oops, no existe ninguna plantilla con ese nombre...',
+  'templates.components--selectable-list.button.back': 'Regresar',
   'templates.components--selectable-list.button.next': 'Próxima parada',
 
   // page mobilizations templates choose custom
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-custom/page.js
   // routepath: /mobilizations/:mobilization_id/templates/choose/custom
-  'page--mobilizations.templates-choose-custom.title': 'Seus Templates',
+  'page--mobilizations.templates-choose-custom.title': 'Tus plantillas',
 
   // page mobilizations templates choose global
   // filepath: /routes/admin/authenticated/sidebar/templates-choose-global/page.js
   // routepath: /mobilizations/:mobilization_id/templates/choose/global
-  'page--mobilizations.templates-choose-global.title': 'Templates Globais',
+  'page--mobilizations.templates-choose-global.title': 'Plantillas globales',
 
   // component mobilizations settings menu
   // filepath: /client/mobilizations/components/settings-menu.js
@@ -712,81 +712,81 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/basics
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/sharing
-  'mobilizations.components--settings-menu.title': 'Configurações da sua página',
-  'mobilizations.components--settings-menu.tabs.info': 'Informações',
-  'mobilizations.components--settings-menu.tabs.sharing': 'Compartilhamento',
+  'mobilizations.components--settings-menu.title': 'Configuraciones de tu página',
+  'mobilizations.components--settings-menu.tabs.info': 'Información',
+  'mobilizations.components--settings-menu.tabs.sharing': 'Compartir',
   'mobilizations.components--settings-menu.tabs.metrics': 'Métricas',
-  'mobilizations.components--settings-menu.tabs.domain': 'Domínio',
+  'mobilizations.components--settings-menu.tabs.domain': 'Dominio',
 
   // page mobilizations settings analytics
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.js
   // routepath: /mobilizations/:mobilization_id/analytics
-  'page--mobilizations-analytics.first-paragraph': 'Quer acesso a dados específicos? Quantos acessos diários sua página recebe? A origem deles? Quantos ativistas estão online na sua página agora? Você pode acompanhar essas e muitas outras métricas conectando sua página a uma conta no Google Analytics :)',
-  'page--mobilizations-analytics.second-paragraph': 'Cola aqui que a gente explica:',
-  'page--mobilizations-analytics.ol.create-analytics-account': 'Primeiro, crie uma conta no Google Analytics {analyticsLink}',
-  'page--mobilizations-analytics.ol.create-analytics-account.link': 'clicando aqui',
-  'page--mobilizations-analytics.ol.keep-up-with': 'Obtenha sua ID de acompanhamento no Google Analytics. É um código que começa sempre com as letras UA, que você vai ver depois de criar sua conta lá.',
-  'page--mobilizations-analytics.ol.paste-ga-code': 'Copie a ID de acompanhamento e cole no campo abaixo:',
-  'page--mobilizations-analytics.ol.form.ga-code.label': 'ID de acompanhamento',
-  'page--mobilizations-analytics.ol.done': 'Pronto! Você já pode acompanhar as estatísticas da sua página no Google Analytics :)',
+  'page--mobilizations-analytics.first-paragraph': '¿Quieres acceder a datos específicos? ¿Cuántos accesos diarios recibe tu BONDE? ¿De dónde vienen? ¿Cuántos activistas están en este momento en línea en tu BONDE? Puedes hacerle seguimiento a esas y muchas otras métricas más conectando tu página a una cuenta de Google Analytics :)',
+  'page--mobilizations-analytics.second-paragraph': 'Te explicamos cómo:',
+  'page--mobilizations-analytics.ol.create-analytics-account': 'Primero, Crea una cuenta en Google Analytics {analyticsLink}',
+  'page--mobilizations-analytics.ol.create-analytics-account.link': 'haciendo click aquí',
+  'page--mobilizations-analytics.ol.keep-up-with': 'Obtén tu ID de seguimiento en Google Analytics. La ID es un código que comienza siempre con las letras UA y que podrás ver después de crear tu cuenta.',
+  'page--mobilizations-analytics.ol.paste-ga-code': 'Copia la ID de seguimiento y pégala en el campo de acá abajo:',
+  'page--mobilizations-analytics.ol.form.ga-code.label': 'ID de seguimiento',
+  'page--mobilizations-analytics.ol.done': '¡Listo! Ya puedes hacerle seguimiento a las estadísticas de tu página en Google Analytics :)',
 
   // page mobilizations settings analytics (connected)
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-analytics/page.connected.js
   // routepath: /mobilizations/:mobilization_id/analytics
-  'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Ops, ID inválida :/',
+  'page--mobilizations-analytics.ol.form.ga-code.validation.invalid.ga-code.format': 'Oops, ID inválida :/',
 
   // page block create
   // filepath: /routes/admin/authenticated/sidebar/blocks-create/page.js
   // routepath: /mobilizations/:mobilization_id/blocks/create
-  'page--block-create.title': 'Adicionando um bloco de conteúdo',
-  'page--block-create.tabs.blank-blocks': 'Configurações',
-  'page--block-create.helper-text': 'Aqui, você deve escolher o layout das colunas e a imagem/cor de fundo do seu bloco. Lembre-se que em cada coluna você vai poder adicionar uma ferramenta diferente - conteúdo, pressão, crowdfunding ou formulário - e depois pode organizar e reorganizar os blocos como quiser, afinal, o esse bonde é seu :)',
-  'page--block-create.type.label': 'Layout do bloco',
-  'page--block-create.background.label': 'Fundo do bloco',
-  'page--block-create.background.image.placeholder.text': 'Você tambm pode selecionar uma imagem de fundo :)',
-  'page--block-create.button-add.text': 'Criar bloco',
+  'page--block-create.title': 'Agregando un bloque de contenido',
+  'page--block-create.tabs.blank-blocks': 'Configuraciones',
+  'page--block-create.helper-text': 'Aquí, debes escoger el layout de las columnas y la imagen/el color de fondo de tu bloque. Recuerda que en cada columna vas a poder agregar una herramienta diferente - contenido, presión, crowdfunding o formulario - y después puedes organizar y reorganizar los bloques como quieras, al final, ¡este BONDE es tuyo! :)',
+  'page--block-create.type.label': 'Layout del bloque',
+  'page--block-create.background.label': 'Fondo del bloque',
+  'page--block-create.background.image.placeholder.text': 'También puedes seleccionar una imagen de fondo :)',
+  'page--block-create.button-add.text': 'Crear bloque',
 
   // page mobilizations domain
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-settings-domain/page.js
   // routepath: /mobilizations/:mobilization_id/customDomain
-  'page--mobilizations-domain.form-domain.success-message': 'As informações do seu domínio foram salvas com sucesso!',
+  'page--mobilizations-domain.form-domain.success-message': '¡La información de tu dominio fue guardada exitosamente!',
 
   // component mobilizations form domain
   // filepath: /client/mobilizations/components/form-domain.js
   // routepath:
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/launch
-  'mobilizations.components--form-domain.helper-text-first-line': 'Estamos na reta final! Para publicar sua página, você precisa cadastrar aqui o domínio que quer direcionar pra ela. Esse vai ser o "endereço" da sua página para o público ;)',
-  'mobilizations.components--form-domain.helper-text-second-line': 'Se você já cadastrou domínios principais nas configurações da comunidade, é só escolher a opção que preferir abaixo.',
-  'mobilizations.components--form-domain.helper-text-third-line': 'Quer cadastrar um domínio principal? {link}.',
-  'mobilizations.components--form-domain.helper-text-third-line.link': 'Só clicar aqui!',
+  'mobilizations.components--form-domain.helper-text-first-line': '¡Estamos en la recta final! Para publicar tu página, tienes que registrar aquí el dominio que quieres redirgir hacia ella. Esa será la "dirección" de tu página para el público ;)',
+  'mobilizations.components--form-domain.helper-text-second-line': 'Si ya registraste dominios principales en las configuraciones de la comunidad, solo tienes que elegir a continuación la opción que prefieras.',
+  'mobilizations.components--form-domain.helper-text-third-line': '¿Quieres registrar un dominio principal? {link}.',
+  'mobilizations.components--form-domain.helper-text-third-line.link': '¡Haz click aquí!',
 
-  'mobilizations.components--form-domain.create-domain-text.first-line': 'Ops, você ainda não tem domínios principais cadastrados na comunidade... Se quiser cadastar, {link}.',
-  'mobilizations.components--form-domain.create-domain-text.first-line.link': 'clique aqui',
-  'mobilizations.components--form-domain.create-domain-text.second-line': 'Você também pode usar um domínio externo para cadastrar como endereço desta página, é só selecionar a opção abaixo ;)',
+  'mobilizations.components--form-domain.create-domain-text.first-line': 'Oops, todavía no tienes dominios principales registrados en la comunidad... si quieres hacerlo, {link}.',
+  'mobilizations.components--form-domain.create-domain-text.first-line.link': 'haz click aquí',
+  'mobilizations.components--form-domain.create-domain-text.second-line': 'También puedes usar un dominio externo para registrarlo como dirección de esta página, solo tienes que seleccionar la opción de abajo ;)', 
+  
+  'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Crear un subdominio',
+  'mobilizations.components--form-domain.basic.helper-text': 'Abajo, escoge el dominio principal que quieres usar y llena el campo con el subdominio que quieras:',
+  'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdominio',
+  'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nombredelapagina',
+  'mobilizations.components--form-domain.basic.form.domain.label': 'Dominio principal',
+  'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Escoge...',
 
-  'mobilizations.components--form-domain.basic.header-toggle.use-existing-domain': 'Criar um subdomínio',
-  'mobilizations.components--form-domain.basic.helper-text': 'Abaixo, escolha o domínio principal que quer usar e preencha o campo com o subdomínio que quiser:',
-  'mobilizations.components--form-domain.basic.form.subdomain.label': 'Subdomínio',
-  'mobilizations.components--form-domain.basic.form.subdomain.placeholder': 'nomedapagina',
-  'mobilizations.components--form-domain.basic.form.domain.label': 'Domínio Principal',
-  'mobilizations.components--form-domain.basic.form.domain.button.choice': 'Escolha...',
+  'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Usar un dominio principal',
+  'mobilizations.components--form-domain.root.helper-text': 'Escoge el dominio principal (o sea, ya registrado en las configuraciones de tu comunidad) que quieras usar como dirección de tu página:',
 
-  'mobilizations.components--form-domain.root.header-toggle.use-root-domain': 'Usar um domínio principal',
-  'mobilizations.components--form-domain.root.helper-text': 'Escolha o domínio principal (ou seja, já cadastrado nas configurações da sua comunidade) que você quer usar como endereço da sua página:',
+  'mobilizations.components--form-domain.advanced.header-toggle': 'Redirigir hacia un dominio externo',
+  'mobilizations.components--form-domain.advanced.helper-text': 'Si quieres usar un dominio que has comprado pero que nos registrado aquí en tu comunidad, ¡todo bien! Solo tienes que llenar el campo de abajo y seguir las indicaciones:',
+  'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Dominio externo',
+  'mobilizations.components--form-domain.advanced.form.external-domain.placeholder': 'midominio.com.br',
 
-  'mobilizations.components--form-domain.advanced.header-toggle': 'Direcionar para um domínio externo',
-  'mobilizations.components--form-domain.advanced.helper-text': 'Se você quer usar um domínio que comprou mas não cadastrou aqui na sua comunidade, tudo bem! É só preencher o campo abaixo e seguir as orientações:',
-  'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Domínio externo',
-  'mobilizations.components--form-domain.advanced.form.external-domain.placeholder': 'meudominio.com.br',
-
-  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: já que escolheu um domínio externo, você ainda precisa configurar este domínio no servidor em que cadastrou ele para que o endereço seja redirecionado à sua página. Pra isso, você vai precisar dessas informações aqui embaixo, anota aí:',
-  'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Próximo passo:',
-  'mobilizations.components--form-domain.cname-table.header.name': 'Nome',
+  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: ahora que ya escogiste un dominio externo, todavía tienes que configurar ese dominio en el servidor en que lo registraste para que la dirección sea redirigida a tu página. Para eso, vas a necesitar los datos siguientes:',
+  'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Próximo paso:',
+  'mobilizations.components--form-domain.cname-table.header.name': 'Nombre',
   'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
   'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link}.',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'aqui',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Si tuvieras alguna duda sobre cómo hacer esto, dale una mirada a nuestro FAQ, {link}.',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'aquÍ',
 
   // component mobilizations form domain (connected)
   // filepath: /client/mobilizations/components/form-domain.connected.js
