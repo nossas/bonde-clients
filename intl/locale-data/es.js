@@ -793,115 +793,115 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // routepath:
   //   - /mobilizations/:mobilization_id/customDomain
   //   - /mobilizations/:mobilization_id/launch
-  'mobilizations.components--form-domain.validation.required': 'Preenchimento obrigatório',
-  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Preenchimento obrigatório',
-  'mobilizations.components--form-domain.validation.subdomain.required': 'Preenchimento obrigatório',
-  'mobilizations.components--form-domain.validation.subdomain.invalid': 'Ops! Subdomínio inválido...',
-  'mobilizations.components--form-domain.validation.external-domain.invalid': 'Ops! Domínio inválido...',
+  'mobilizations.components--form-domain.validation.required': 'Campo obligatorio',
+  'mobilizations.components--form-domain.validation.subdomain.required-domain': 'Campo obligatorio',
+  'mobilizations.components--form-domain.validation.subdomain.required': 'Campo obligatorio',
+  'mobilizations.components--form-domain.validation.subdomain.invalid': '¡Oops! Subdominio inválido...',
+  'mobilizations.components--form-domain.validation.external-domain.invalid': '¡Oops! Dominio inválido...',
 
   // component mobrender mobilization
   // filepath: /client/mobrender/components/mobilization.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'mobrender.components--mobilization.footer.slogan': 'Feito pra causar. Feito com',
-  'mobrender.components--mobilization.add-block-content': 'Adicionar bloco de conteúdo',
+  'mobrender.components--mobilization.footer.slogan': 'Hecho para movilizar. Hecho con',
+  'mobrender.components--mobilization.add-block-content': 'Agregar bloque de contenido',
 
   // component mobrender block config menu
   // filepath: /client/mobrender/components/block-config-menu.js
   // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--block-config-menu.item.duplicate': 'Duplicar',
-  'mobrender.components--block-config-menu.item.change-background': 'Alterar fundo',
+  'mobrender.components--block-config-menu.item.change-background': 'Modificar fondo',
   'mobrender.components--block-config-menu.item.toggle-visibility.show': 'Mostrar',
   'mobrender.components--block-config-menu.item.toggle-visibility.hide': 'Esconder',
-  'mobrender.components--block-config-menu.item.remove': 'Remover',
-  'mobrender.components--block-config-menu.item.remove.confirm': 'Você tem certeza que quer remover este bloco?',
-  'mobrender.components--block-config-menu.item.move-up': 'Mover para cima',
-  'mobrender.components--block-config-menu.item.move-down': 'Mover para baixo',
+  'mobrender.components--block-config-menu.item.remove': 'Eliminar',
+  'mobrender.components--block-config-menu.item.remove.confirm': '¿Estás seguro/a de querer eliminar este bloque?',
+  'mobrender.components--block-config-menu.item.move-up': 'Mover para arriba',
+  'mobrender.components--block-config-menu.item.move-down': 'Mover para abajo',
 
   // component mobrender block change background
   // filepath: /client/mobrender/components/block-change-background.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'mobrender.components--block-change-background.button.save': 'Salvar',
+  'mobrender.components--block-change-background.button.save': 'Guardar',
   'mobrender.components--block-change-background.button.cancel': 'Cancelar',
 
   // component mobrender block
   // filepath: /client/mobrender/components/block.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'mobrender.components--block.hidden-tag': 'Bloco escondido',
+  'mobrender.components--block.hidden-tag': 'Bloque oculto',
 
   // component navigation navbar edition wrapper
   // filepath: /client/components/navigation/navbar/navbar-edition-wrapper.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'components.navigation--navbar-edition-wrapper.block': 'Bloco {position}',
+  'components.navigation--navbar-edition-wrapper.block': 'Bloque {position}',
 
   // component mobilizations form share
   // filepath: /client/mobilizations/components/form-share.js
   // routepath:
   //   - /mobilizations/:mobilization_id/launch
   //   - /mobilizations/:mobilization_id/sharing
-  'mobilizations.components--form-share.facebook.title': 'Link de compartilhamento',
-  'mobilizations.components--form-share.facebook.helper-text': 'Como você quer que sua página apareça quando compartilharem o link dela nas redes sociais? Essa é mais uma oportunidade de deixar tudo do seu jeito. Abaixo, você deve escolher a imagem, o título e o subtítulo do compartilhamento.',
-  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Use uma imagem com 470x270 pixels, assim ela vai encaixar direitinho :)',
-  'mobilizations.components--form-share.facebook.fb.image.link': 'Saiba mais',
-  'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagem',
+  'mobilizations.components--form-share.facebook.title': 'Enlace para compartir',
+  'mobilizations.components--form-share.facebook.helper-text': '¿Cómo quieres que tu página aparezca cuando compartas el enlace en las redes sociales? Esta es una oportunidad más para que todo esté exactamente como lo quieras. Abajo, tienes que escoger la imagen, el título y el subtítulo para compartir.',
+  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Usa una imagen de 470x270 pixeles, así encaja perfecto :)',
+  'mobilizations.components--form-share.facebook.fb.image.link': 'Sepa más',
+  'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagen',
   'mobilizations.components--form-share.facebook.form.share-title.label': 'Título',
-  'mobilizations.components--form-share.facebook.form.share-title.placeholder': 'Um título bem claro que passe o objetivo da sua página',
+  'mobilizations.components--form-share.facebook.form.share-title.placeholder': 'Un título bien claro que transmita el objetivo de tu página',
   'mobilizations.components--form-share.facebook.form.share-description.label': 'Subtítulo',
-  'mobilizations.components--form-share.facebook.form.share-description.placeholder': 'Use este espaço para completar a informação do título e engajar o público',
+  'mobilizations.components--form-share.facebook.form.share-description.placeholder': 'Usa este espacio para completar la información del título y comprometer el público',
 
   'mobilizations.components--form-share.twitter.title': 'Twitter',
-  'mobilizations.components--form-share.twitter.helper-text': 'Se quiser, você também pode deixar pronto um "tweet padrão" pra quando alguém compartilhar por ali já saber o que falar. É só preencher abaixo:',
-  'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto padrão do tweet',
-  'mobilizations.components--form-share.twitter.form.share-text.placeholder': 'Insira uma frase que chame outras pessoas a se engajarem na sua página!',
+  'mobilizations.components--form-share.twitter.helper-text': 'Si quieres, también puedes dejar listo un “tweet patrón” para que cuando alguien comparta ya sepa qué decir. Solo tienes que ponerlo acá abajo:',
+  'mobilizations.components--form-share.twitter.form.share-text.label': 'Texto patrón para el tweet',
+  'mobilizations.components--form-share.twitter.form.share-text.placeholder': '¡Inserta una frase que llame a otras personas a comprometerse con tu página!',
 
   // page mobilizations launch
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch/page.js
   // routepath: /mobilizations/:mobilization_id/launch
-  'page--mobilizations-launch.title': 'Publicando sua página',
-  'page--mobilizations-launch.steps.form-domain.title': '1ª parada: endereço da página',
-  'page--mobilizations-launch.steps.form-share.title': '2ª parada: informações de compartilhamento',
-  'page--mobilizations-launch.steps.done.title': 'Uhul! Sua página foi publicada :)',
-  'page--mobilizations-launch.steps.done.helper-text': 'Em uma nova aba, digite o endereço/domínio que cadastrou aqui para se certificar de que ela já está no ar. Se ainda não estiver, dê uma olhada se cadastrou os domínios corretamente. Está tudo certo? Então é só esperar propagar pela internet :)',
+  'page--mobilizations-launch.title': 'Publicando tu página',
+  'page--mobilizations-launch.steps.form-domain.title': '1ª parada: dirección de la página',
+  'page--mobilizations-launch.steps.form-share.title': '2ª parada: información para compartir',
+  'page--mobilizations-launch.steps.done.title': '¡Bien! Tu página fue publicada :)',
+  'page--mobilizations-launch.steps.done.helper-text': 'En una nueva pestaña, ingresa la dirección/dominio que registraste aquí para asegurarte de que ya se lanzó la página. Si todavía no lo está, verifica que hayas registrado los dominios correctamente. ¿Todo en orden? Entonces solo debes esperar a que se propague por el Internet :)',
   'page--mobilizations-launch.steps.done.button.open': 'Visualizar página',
-  'page--mobilizations-launch.button.saving': 'Salvando...',
+  'page--mobilizations-launch.button.saving': 'Guardando...',
   'page--mobilizations-launch.button.launch': 'Publicar página',
   'page--mobilizations-launch.button.next': 'Próxima parada',
-  'page--mobilizations-launch.form-share.validation.required': 'Obrigatório',
+  'page--mobilizations-launch.form-share.validation.required': 'Obligatorio',
 
   // page mobilizations launch end
   // filepath: /routes/admin/authenticated/sidebar/mobilizations-launch-end/page.js
   // routepath: /mobilizations/:mobilization_id/launch/end
-  'page--mobilizations-launch-end.heading.all-done': 'Tudo pronto?',
-  'page--mobilizations-launch-end.heading.just-launch': 'Agora é só lançar pro mundo e compartilhar com a galera!',
-  'page--mobilizations-launch-end.title': 'Chegou a hora',
+  'page--mobilizations-launch-end.heading.all-done': '¿Todo en orden?',
+  'page--mobilizations-launch-end.heading.just-launch': '¡Ahora solo tienes que lanzarla y compartir tu página con el mundo!',
+  'page--mobilizations-launch-end.title': 'Llegó la hora',
   'page--mobilizations-launch-end.button': 'Publicar página',
 
   // page templates list
   // filepath: /routes/admin/authenticated/sidebar/templates-list/page.js
   // routepath: /mobilizations/templates/list
-  'page--templates-list.header.title': 'Seus templates',
-  'page--templates-list.empty-list.no-template': 'Sua comunidade ainda não tem nenhum template...',
-  'page--templates-list.empty-list.create-one': 'Mas você pode criar a partir de uma página.',
+  'page--templates-list.header.title': 'Tus plantillas',
+  'page--templates-list.empty-list.no-template': 'Tu comunidad todavía no tiene ninguna plantilla...',
+  'page--templates-list.empty-list.create-one': 'Pero puedes crear una a partir de una página.',
   'page--templates-list.empty-list.mobilization-list': 'Lista de páginas',
-  'page--templates-list.more-menu-action.remove.text': 'Remover',
-  'page--templates-list.more-menu-action.remove.confirm': 'Tem certeza que deseja remover este template? Ao confirmar, não será possível desfazer esta ação.',
+  'page--templates-list.more-menu-action.remove.text': 'Eliminar',
+  'page--templates-list.more-menu-action.remove.confirm': '¿Estás seguro/a de querer eliminar esta plantilla? Una vez hecha, no será posible deshacer esta acción.',
 
   // page templates create
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.js
   // routepath: /mobilizations/:mobilization_id/templates/create
-  'page--templates-create.header.title': 'Crie um template a partir da página',
-  'page--templates-create.form.name.label': 'Nome do seu template',
+  'page--templates-create.header.title': 'Crea una plantilla a partir de la página',
+  'page--templates-create.form.name.label': 'Nombre de tu plantilla',
   'page--templates-create.form.name.placeholder': 'Para crowdfundings',
-  'page--templates-create.form.goal.label': 'Descrição',
-  'page--templates-create.form.goal.placeholder': 'Escreva um texto curto explicando para que serve o template que está criando. Ex: template para páginas de crowdfunding',
+  'page--templates-create.form.goal.label': 'Descripción',
+  'page--templates-create.form.goal.placeholder': 'Escribe un texto corto explicando para qué sirve la plantilla que estás creando. Ejm. plantilla para páginas de crowdfunding',
 
   // page templates create (connected)
   // filepath: /routes/admin/authenticated/sidebar/templates-create/page.connected.js
   // routepath: /mobilizations/:mobilization_id/templates/create
-  'page--templates-create.form.validation.required': 'Preenchimento obrigatório',
+  'page--templates-create.form.validation.required': 'Campo obligatorio',
 
   // component donation widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/settings-menu.js
@@ -909,11 +909,11 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
-  'donation.components--settings-menu.title': 'Configurações da ferramenta',
+  'donation.components--settings-menu.title': 'Configuraciones de la herramienta',
   'donation.components--settings-menu.tabs.adjusts': 'Ajustes',
-  'donation.components--settings-menu.tabs.autofire': 'Mensagem de agradecimento',
-  'donation.components--settings-menu.tabs.post-action': 'Pós-ação',
-  'donation.components--settings-menu.tabs.info': 'Configurações',
+  'donation.components--settings-menu.tabs.autofire': 'Mensaje de agradecimiento',
+  'donation.components--settings-menu.tabs.post-action': 'Post-acción',
+  'donation.components--settings-menu.tabs.info': 'Configuraciones',
 
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
