@@ -38,7 +38,7 @@ export default {
   'page--account-register.form.password.label.validation.required': 'Crea una contrseña',
   'page--account-register.form.password.label.validation.min-length': 'Tu contraseña debe tener al menos 8 caracteres',
   'page--account-register.form.password-confirm.label': 'Confirma tu constraseña',
-  'page--account-register.form.password-confirm.label.validation.match': 'Oops, ¡las constraseñas no son iguales!',
+  'page--account-register.form.password-confirm.label.validation.match': 'Oops, ¡las constraseñas no coinciden!',
   'page--account-register.form.submit-button.default': 'Crear cuenta',
   'page--account-register.form.submit-button.saving': 'Guardando...',
 
@@ -75,7 +75,6 @@ export default {
   // filepath: /client/subscriptions/forms/credit-card-form.js
   // routepath: /subscriptions/:id/edit
   'form--subscription-creditcard.helper-text': 'Llena los campos acá abajo para cambiar la tarjeta de tu donación:',
-
   'form--subscription-creditcard.previous-data.title': 'Datos de la tarjeta anterior',
   'form--subscription-creditcard.previous-data.name': 'Nombre',
   'form--subscription-creditcard.previous-data.expiration-date': 'Fecha de expiración',
@@ -142,10 +141,10 @@ export default {
   // page community list
   // filepath: /routes/admin/authenticated/external/community-list/page.js
   // routepath: /community
-  'page--community-list.title': 'Olá {name},',
-  'page--community-list.subtitle': 'Em qual comunidade você quer causar?',
+  'page--community-list.title': '¡Hola {name}!,',
+  'page--community-list.subtitle': '¿En qué comunidad te quieres movilizar?',
   'page--community-list.or': '{link}',
-  'page--community-list.new': 'Crie uma nova comunidade',
+  'page--community-list.new': 'Crea una nueva comunidad',
 
   // component community settings menu
   // filepath: /client/community/components/settings-menu.js
@@ -156,41 +155,41 @@ export default {
   //   - /community/mailchimp
   //   - /community/recipient
   //   - /community/report
-  'community.components--settings-menu.title': 'Configurações da sua comunidade',
-  'community.components--settings-menu.tabs.info': 'Informações',
-  'community.components--settings-menu.tabs.mobilizers': 'Mobilizadores',
+  'community.components--settings-menu.title': 'Configuraciones de tu comunidad',
+  'community.components--settings-menu.tabs.info': 'Información',
+  'community.components--settings-menu.tabs.mobilizers': 'Movilizadores',
   'community.components--settings-menu.tabs.mailchimp': 'Mailchimp',
-  'community.components--settings-menu.tabs.recipient': 'Conta bancária',
-  'community.components--settings-menu.tabs.metrics': 'Dados',
-  'community.components--settings-menu.tabs.domains': 'Domínios',
+  'community.components--settings-menu.tabs.recipient': 'Cuenta bancaria',
+  'community.components--settings-menu.tabs.metrics': 'Datos',
+  'community.components--settings-menu.tabs.domains': 'Dominios',
 
   // component community domain preview
   // filepath: /client/community/components/dns/dns-preview/domain-preview.js
   // routepath: /community/domain/add
-  'community.components--domain-preview.li.domain.header': 'Qual domínio quer adicionar à sua comunidade?',
+  'community.components--domain-preview.li.domain.header': '¿Qué dominio quieres agregar a tu comunidad?',
 
   // component community subdomain preview and form
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
-  'community.components--subdomain-preview-header.name': 'Nome',
+  'community.components--subdomain-preview-header.name': 'Nombre',
   'community.components--subdomain-preview-header.record-type': 'Tipo',
   'community.components--subdomain-preview-header.value': 'Valor',
-  'community.components--domain.preview.label.domain': 'Domínio da comunidade',
+  'community.components--domain.preview.label.domain': 'Dominio de la comunidad',
   'community.page--domain-list.header.dns-records': 'Registros DNS',
   'community.page--domain-list.header.dns-server': 'Servidores DNS',
-  'community.page--domain-list.button.add-new-record': 'Adicionar novo registro',
-  'community.page--domain-list.button.add-new-domain': 'Adicionar novo domínio',
-  'community.page--domain-list.dialog.domain-confirm-message': 'Tem certeza que deseja remover o domínio',
-  'community.page--domain-list.dns-record-description.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como registro.br ou godaddy.com, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
-  'community.page--domain-list.dns-record-description.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
-  'community.page--domain-list.dns-server-description': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registrobr} ou {godaddy}, para identificarem em qual servidor se encontra as informações sobre o domínio registrado. Tire suas dúvidas {trilho}.',
-  'community.page--domain-list.dns-server-description.trilho.link': 'no site de ajuda',
+  'community.page--domain-list.button.add-new-record': 'Agregar un nuevo registro',
+  'community.page--domain-list.button.add-new-domain': 'Agregar un nuevo dominio',
+  'community.page--domain-list.dialog.domain-confirm-message': '¿Estás seguro/a de que quieres eliminar el dominio?',
+  'community.page--domain-list.dns-record-description.first-paragraph': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como registro.br o godaddy.com, para identificar en qué servidor se encuentra la información sobre el dominio registrado.',
+  'community.page--domain-list.dns-record-description.second-paragraph': 'Completa la activación del dominio modificando los servidores DNS, donde el dominio fue registrado, para las direcciones acá abajo:',
+  'community.page--domain-list.dns-server-description': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registrobr} o {godaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado. Aclara tus dudas {trayectoria}.',
+  'community.page--domain-list.dns-server-description.trilho.link': 'en la página de ayuda',
 
   // component community subdomain form
   // filepath: /client/community/components/dns/subdomain-form/index.js
   // routepath: /community/domain
-  'community.components--subdomain.name.label': 'Nome',
-  'community.components--subdomain.name.placeholder': 'subdominio',
+  'community.components--subdomain.name.label': 'Nombre',
+  'community.components--subdomain.name.placeholder': 'Subdominio',
   'community.components--subdomain.record-type.label': 'Tipo',
   'community.components--subdomain.value.label': 'Valor',
   'community.components--subdomain.value.placeholder':
@@ -199,27 +198,27 @@ ou
 servidor-01.dominio.com
 servidor-02.dominio.com
 servidor-03.dominio.com`,
-  'community.components--subdomain.form.submit-button': 'Adicionar',
+  'community.components--subdomain.form.submit-button': 'Agregar',
 
   // page community domain
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain/page.js
   // routepath: /community/domain
-  'page--community-domain.form.validation.required': 'Campo obrigatório',
+  'page--community-domain.form.validation.required': 'Campo obligatorio',
 
   'page--community-domain.header.info.title': '',
-  'page--community-domain.header.info.text': 'Esta é a lista de domínios cadastrados na sua comunidade. Quando for publicar uma página, vai poder usar eles como endereços ou criar subdomínios de maneira bem fácil e rápida :) Se algum domínio da sua lista estiver com um "X", certifique-se de ter alterado direitinho os servidores DNS conforme orientamos.',
+  'page--community-domain.header.info.text': 'Esta es la lista de dominios registrados en tu comunidad. Cuando vayas a publicar una página, vas a poder usarlos como direcciones o crear subdominios muy fácilmente y rápido :) Si algún dominio de tu lista estuviera con una "X", asegúrate de haber modificado correctamente los servidores DNS de la manera que lo explicamos.',
 
-  'page--community-domain.domain-preview.success-icon.title': 'Servidores DNS ativos',
-  'page--community-domain.domain-preview.failure-icon.title': 'Aguardando alteração dos servidores DNS',
+  'page--community-domain.domain-preview.success-icon.title': 'Servidores DNS activos',
+  'page--community-domain.domain-preview.failure-icon.title': 'Esperando la modificación de los servidores DNS',
 
-  'page--community-domain.section--dns-hosted-zone.add': 'Adicionar novo domínio',
-  'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdomínios',
-  'page--community-domain.section--dns-hosted-zone.menu.remove': 'Remover domínio',
-  'page--community-domain.section--dns-hosted-zone.menu.remove.dialog.text': 'Tem certeza que deseja remover o domínio {domainName}?',
-  'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Testar a conexão',
+  'page--community-domain.section--dns-hosted-zone.add': 'Agregar un nuevo dominio',
+  'page--community-domain.section--dns-hosted-zone.menu.subdomains': 'Subdominios',
+  'page--community-domain.section--dns-hosted-zone.menu.remove': 'Quitar dominio',
+  'page--community-domain.section--dns-hosted-zone.menu.remove.dialog.text': '¿Estás seguro/a de querer quitar el domimio {domainName}?',
+  'page--community-domain.section--dns-hosted-zone.menu.check-dns': 'Probar la conexión',
 
-  'page--community-domain.section--dns-records.menu.remove': 'Remover subdomínio',
-  'page--community-domain.section--dns-records.menu.remove.dialog.text': 'Tem certeza que deseja remover o registro {recordName}?',
+  'page--community-domain.section--dns-records.menu.remove': 'Quitar subdominio',
+  'page--community-domain.section--dns-records.menu.remove.dialog.text': '¿Estás seguro/a de querer quitar el registro {recordName}?',
 
   // component dialog
   // filepath: /client/ux/components/dialog/index.js
@@ -230,58 +229,58 @@ servidor-03.dominio.com`,
   // page community domain create
   // filepath: /routes/admin/authenticated/sidebar/community-settings/domain-create/page.js
   // routepath: /community/domain/add
-  'page--community-domain-create.step-add.title': 'Insira o domínio desejado',
-  'page--community-domain-create.step-add.form.domain-name.label': 'Domínio da sua comunidade',
-  'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ex. minhacomunidade.org',
-  'page--community-domain-create.step-add.form.domain-name.validation.required': 'Campo obrigatório.',
-  'page--community-domain-create.step-add.form.domain-name.validation.invalid-domain-format': 'Domínio inválido',
+  'page--community-domain-create.step-add.title': 'Ingresa el dominio deseado',
+  'page--community-domain-create.step-add.form.domain-name.label': 'Dominio de tu comunidad',
+  'page--community-domain-create.step-add.form.domain-name.placeholder': 'Ejm. micomunidad.org',
+  'page--community-domain-create.step-add.form.domain-name.validation.required': 'Campo obligatorio.',
+  'page--community-domain-create.step-add.form.domain-name.validation.invalid-domain-format': 'Dominio inválido',
   'page--community-domain-create.step-add.form.cancel-button.text': 'Cancelar',
-  'page--community-domain-create.step-add.form.button.text': 'Adicionar',
+  'page--community-domain-create.step-add.form.button.text': 'Agregar',
 
-  'page--community-domain-create.step-dns-servers.step-title': 'Altere os servidores do seu provedor DNS',
-  'page--community-domain-create.step-dns-servers.title': 'O que são servidores DNS?',
-  'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Os Servidores DNS são endereços utilizados pelas organizações de registro de domínios como {registroBr} ou {goDaddy}, para identificarem em qual servidor se encontram as informações sobre o domínio registrado.',
-  'page--community-domain-create.step-dns-servers.subtitle.second-paragraph': 'Complete a ativação do domínio alterando os servidores DNS, onde o domínio foi registrado, para os endereços abaixo:',
-  'page--community-domain-create.step-dns-servers.change-later-button.text': 'Trocar depois',
+  'page--community-domain-create.step-dns-servers.step-title': 'Modifica los servidores de tu proveedor DNS',
+  'page--community-domain-create.step-dns-servers.title': '¿Qué son servidores DNS?',
+  'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registrobr} o {godaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado.',
+  'page--community-domain-create.step-dns-servers.subtitle.second-paragraph': 'Completa la activación del dominio modificando los servidores DNS, donde el dominio fue registrado, para las direcciones acá abajo:',
+  'page--community-domain-create.step-dns-servers.change-later-button.text': 'Modificar después',
   'page--community-domain-create.step-dns-servers.button.text': 'Próxima parada',
 
-  'page--community-domain-create.step-check.title': 'Teste a conexão',
-  'page--community-domain-create.step-check.first-paragraph': 'Clique no botão abaixo para verificar se tudo está certo.',
-  'page--community-domain-create.step-check.second-paragraph': 'Atenção: a mudança de DNS pode demorar até 48 horas para ser propagada pela internet.',
-  'page--community-domain-create.step-check.test-later-button.text': 'Testar depois',
-  'page--community-domain-create.step-check.button.text': 'Testar',
+  'page--community-domain-create.step-check.title': 'Pruebe la conexión',
+  'page--community-domain-create.step-check.first-paragraph': 'Haz click en el botón de abajo para ver que todo esté en orden.',
+  'page--community-domain-create.step-check.second-paragraph': 'Atención: la modificación de DNS puede demorar hasta 48 horas para ser propagada por el Internet.',
+  'page--community-domain-create.step-check.test-later-button.text': 'Probar luego',
+  'page--community-domain-create.step-check.button.text': 'Probar',
 
   // page community info
   // filepath: /routes/admin/authenticated/sidebar/community-settings/info/page.js
   // routepath: /community/info
-  'page--community-info.form.successMessage': 'Dados salvos com sucesso :)',
-  'page--community-info.form.logo.label': 'Logo da sua comunidade',
-  'page--community-info.form.name.label': 'Nome da comunidade',
-  'page--community-info.form.name.placeholder': 'Insira o nome da sua comunidade',
-  'page--community-info.form.name.validation.required': 'Campo obrigatório',
-  'page--community-info.form.description.label': 'Descrição',
-  'page--community-info.form.description.placeholder': 'Para que sua comunidade vem ao mundo?',
-  'page--community-info.form.city.label': 'Cidade',
-  'page--community-info.form.city.validation.required': 'Informe em qual cidade sua comunidade atua',
-  'page--community-info.form.custom-from-email.label': 'Email padrão para comunicação',
-  'page--community-info.form.custom-from-email.helper-text': 'Esse email é utilizado como remetente padrão das comunicações enviadas através do BONDE.',
-  'page--community-info.form.custom-from-email.placeholder': 'Insira neste formato: Nome do remetente<remetente@email.com>',
+  'page--community-info.form.successMessage': 'Datos guardados exitosamente :)',
+  'page--community-info.form.logo.label': 'Logo de tu comunidad',
+  'page--community-info.form.name.label': 'Nombre de la comunidad',
+  'page--community-info.form.name.placeholder': 'Inserta el nombre de tu comunidad',
+  'page--community-info.form.name.validation.required': 'Campo obligatprio',
+  'page--community-info.form.description.label': 'Descripción',
+  'page--community-info.form.description.placeholder': '¿Cuál es el propósito de tu comunidad?',
+  'page--community-info.form.city.label': 'Ciudad',
+  'page--community-info.form.city.validation.required': 'Informa en qué ciudad actúa tu comunidad',
+  'page--community-info.form.custom-from-email.label': 'Correo patrón para la comunicación',
+  'page--community-info.form.custom-from-email.helper-text': 'Este correo es usado como remitente patrón de las comunicaciones enviadas a través de BONDE.',
+  'page--community-info.form.custom-from-email.placeholder': 'Inserta con este formato: Nombre del remitente<remitente@email.com>',
   'page--community-info.form.custom-from-email.validation.invalid-email-format': 'Formato inválido',
 
   // page community invite
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.js
   // routepath: /community/invite
   'page--community-invite.info.title': '',
-  'page--community-invite.info.content': 'Quanto mais gente, mais potente! Para convidar outros mobilizadores, é só preencher o campo abaixo. Mas lembre-se, a galera que você convidar vai ser literalmente parte do seu bonde: com acesso aos dados da comunidade e edição das páginas.',
-  'page--community-invite.form.email.label': 'Enviar convite para:',
-  'page--community-invite.form.email.placeholder': 'Insira aqui o email de cadastro de quem quiser convidar.',
-  'page--community-invite.form.submit-button.default': 'Convidar',
+  'page--community-invite.info.content': 'Mientras más gente, ¡más fuerza! Es hora de invitar a los otros integrantes que quieran generar un impacto y que compartan tu causa. Pero recuerda, el grupo que vas a invitar literalmente va a ser parte de tu BONDE: podrán acceder a los datos de tu comunidad y editar páginas. ',
+  'page--community-invite.form.email.label': 'Mandar invitación a:',
+  'page--community-invite.form.email.placeholder': 'Inserta aquí el correo electrónico de registro de quien quieras invitar.',
+  'page--community-invite.form.submit-button.default': 'Invitar',
 
   // page community invite (connected)
   // filepath: /routes/admin/authenticated/sidebar/community-settings/invite/page.connected.js
   // routepath: /community/invite
-  'page--community-invite.form.email.validation.required': 'Obrigatório',
-  'page--community-invite.form.email.validation.invalid': 'Email inválido',
+  'page--community-invite.form.email.validation.required': 'Obligatorio',
+  'page--community-invite.form.email.validation.invalid': 'Correo electrónico inválido',
 
   // component settings form
   // filepath: /client/ux/components/settings-form/index.js
@@ -304,32 +303,32 @@ servidor-03.dominio.com`,
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'ux.components--settings-form.button.text': 'Salvar',
-  'ux.components--settings-form.success-message': 'Dados salvos com sucesso :)',
+  'ux.components--settings-form.button.text': 'Guardar',
+  'ux.components--settings-form.success-message': 'Datos guardados exitosamente :)',
 
   // page community mailchimp
   // filepath: /routes/admin/authenticated/sidebar/community-settings/mailchimp/page.js
   // routepath: /community/mailchimp
-  'page--community-mailchimp.warning.title': 'Integração com Mailchimp',
+  'page--community-mailchimp.warning.title': 'Integración con Mailchimp',
   'page--community-mailchimp.warning.content': `
-Se você tem uma conta no Mailchimp, pode integrá-la à sua comunidade. Assim, vão ser criados "segmentos estáticos" lá com os usuários que agirem em alguma página que criou aqui no BONDE. A gente captura os dados e integra eles pra você poder se comunicar e reengajar essa galera!
+Si tienes una cuenta en Mailchimp, puedes integrarla a tu comunidad. Al hacerlo, se crearán allí unos "segmentos estáticos" con los usuarios que actúen en alguna página que creaste aquí en BONDE. ¡Nosotros captamos los datos y los integramos directamente para que puedas comunicarte y volver a comprometer ese grupo en el futuro!
 {br}
-Os segmentos criados no Mailchimp a partir do BONDE seguem o seguinte formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)
+Los segmentos creados en Mailchimp a partir de BONDE toman el siguiente formato: M999P000, M999F000, M999D000 (M=Movilización, P=Presión, F=Formulario, D=Donación)
 {br}{br}
-Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode forçar a sincronia no botão abaixo:`,
+En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes forzar la sincronización con el botón abajo:`,
   'page--community-mailchimp.form.api-key.label': 'Mailchimp API Key',
-  'page--community-mailchimp.form.api-key.helper-text.title': 'Onde encontro essa informação?',
-  'page--community-mailchimp.form.api-key.helper-text.step-01': 'Faça login na sua conta no Mailchimp e clique no seu nome de usuário. Você vai ver um menu surgir, clique na opção {accountStrong}.',
-  'page--community-mailchimp.form.api-key.helper-text.step-02': 'Depois, siga os passos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}',
-  'page--community-mailchimp.form.api-key.helper-text.step-03': 'Agora é só copiar o código e colar no campo abaixo {apiKeyStrong}.',
-  'page--community-mailchimp.form.api-key.placeholder': 'Insira aqui o conteúdo de "API key"',
-  'page--community-mailchimp.form.list-id.label': 'Mailchimp ID da lista',
-  'page--community-mailchimp.form.list-id.helper-text.title': 'Onde encontro essa informação?',
-  'page--community-mailchimp.form.list-id.helper-text.step-01': 'Faça login na sua conta no Mailchimp e clique no seu nome de usuário. Surgirá um menu, clique na opção {listStrong}.',
-  'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecione a lista correspondente e siga os passos: {settingsStrong} > {listAndDefaultsStrong}',
-  'page--community-mailchimp.form.list-id.helper-text.step-03': 'Agora é só colar no campo abaixo o conteúdo da coluna a direita, abaixo do título {listIdStrong}',
-  'page--community-mailchimp.form.list-id.placeholder': 'Insira aqui o "ID da lista"',
-  'page--community-mailchimp.form.button.save': 'Salvar',
+  'page--community-mailchimp.form.api-key.helper-text.title': '¿Dónde encuentro esta información?',
+  'page--community-mailchimp.form.api-key.helper-text.step-01': 'Inicia sesión en tu cuenta de Mailchimp y haz click en tu nombre de usuario. Aparecerá un menú, haz click en la opción {accountStrong}.',
+  'page--community-mailchimp.form.api-key.helper-text.step-02': 'Luego, sigue los siguientes pisos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}',
+  'page--community-mailchimp.form.api-key.helper-text.step-03': 'Ahora solo tienes que copiar el código y pegarlo en el campo de abajo {apiKeyStrong}.',
+  'page--community-mailchimp.form.api-key.placeholder': 'Inserta aquí el contenido de "API key"',
+  'page--community-mailchimp.form.list-id.label': 'Mailchimp ID de la lista',
+  'page--community-mailchimp.form.list-id.helper-text.title': '¿Dónde encuentro esta información?',
+  'page--community-mailchimp.form.list-id.helper-text.step-01': 'Inicia sesión en tu cuenta de Mailchimp y haz click en tu nombre de usuario. Aparecerá un menú, haz click en la opción {listStrong}.',
+  'page--community-mailchimp.form.list-id.helper-text.step-02': 'Selecciona la lista correspondiente y sigue los siguientes pasos: {settingsStrong} > {listAndDefaultsStrong}',
+  'page--community-mailchimp.form.list-id.helper-text.step-03': 'Ahora solo tienes que pegar en el campo de abajo el contenido de la columna a la mano derecha, debajo del título {listIdStrong}',
+  'page--community-mailchimp.form.list-id.placeholder': 'Inserta aquí el "ID de la lista"',
+  'page--community-mailchimp.form.button.save': 'Guardar',
   'page--community-mailchimp.form.button.sync': 'Sincronizar',
 
   // page community twilio settings
