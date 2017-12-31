@@ -427,7 +427,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'c--metrics.total.unique.donations.title': 'DONACIONES ÚNICAS',
   'c--metrics.total.unique.donations.subtitle': 'Valor total de las donaciones únicas confirmadas en tu comunidad en los últimos 30 dias',
   'c--metrics.total.recurrent.donations.title': 'DONACIONES RECURRENTES',
-  'c--metrics.total.recurrent.donations.subtitle': 'Valor total de las donaciones recurrentes confirmadas en tu comunidad en los últimos 30 dias'',
+  'c--metrics.total.recurrent.donations.subtitle': 'Valor total de las donaciones recurrentes confirmadas en tu comunidad en los últimos 30 dias',
   'c--metrics.total.unique-and-recurrent.donations.title': 'DONACIONES GENERALES',
   'c--metrics.total.unique-and-recurrent.donations.subtitle': 'Valor total de donaciones únicas y recurrentes recaudadas por tu comunidad hasta ahora {br}(confirmadas / esperando el pago)',
 
