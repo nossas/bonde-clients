@@ -1302,38 +1302,38 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
-  'page--pressure-widget-email.success-message': 'Oba! Configurações salvas com sucesso :)',
-  'page--pressure-widget-email.form.input-tag.label': 'Adicionar alvos',
-  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Ops, formato inválido... Preencha do jeito que explicamos acima ;)',
-  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'Parece que você já cadastrou este alvo para receber pressão...',
-  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'Parece que você já cadastrou este alvo para receber pressão...',
-  'page--pressure-widget-email.form.email-subject.label': 'Assunto do email para os alvos',
-  'page--pressure-widget-email.form.email-body.label': 'Corpo do email para os alvos',
-  'page--pressure-widget-email.form.disable-edit-field.label': 'Desabilitar edição de assunto e corpo do email?',
-  'page--pressure-widget-email.form.disable-edit-field.value.yes': 'Sim',
-  'page--pressure-widget-email.form.disable-edit-field.value.no': 'Não',
+  'page--pressure-widget-email.success-message': '¡Listo! Configuraciones guardadas exitosamente :)',
+  'page--pressure-widget-email.form.input-tag.label': 'Agregar objetivos',
+  'page--pressure-widget-email.form.input-tag.validation.invalid-target-format': 'Oops, formato inválido... agrega el objetivo como te lo explicamos arriba ;)',
+  'page--pressure-widget-email.form.input-tag.validation.type-email-registered': 'Parece que ya has registrado este objetivo para ser presionado...',
+  'page--pressure-widget-email.form.input-tag.validation.type-phone-registered': 'Parece que ya has registrado este objetivo para ser presionado...',
+  'page--pressure-widget-email.form.email-subject.label': 'Asunto del mensaje para los objetivos',
+  'page--pressure-widget-email.form.email-body.label': 'Cuerpo del mensaje para los objetivos',
+  'page--pressure-widget-email.form.disable-edit-field.label': '¿Deshabilitar la edición del asunto y del cuerpo del mensaje?',
+  'page--pressure-widget-email.form.disable-edit-field.value.yes': 'Sí',
+  'page--pressure-widget-email.form.disable-edit-field.value.no': 'No',
 
-  'p--pressure-widget--input-tag.info.title': 'Como cadastrar alvos',
-  'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar depois, clicando no botão no canto superior direito da tela.',
-  'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
-  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nome <email@provedor.com>',
-  'p--pressure-widget--input-tag.info.item.special-chars': 'Em ambos os tipos de pressão é obrigatório o uso dos caractéres {lt} e {gt} para agrupar o email ou telefone',
-  'p--pressure-widget--input-tag.info.item.sorting': 'Os alvos serão exibidos em ordem aleatória na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente.',
+  'p--pressure-widget--input-tag.info.title': 'Cómo registrar objetivos',
+  'p--pressure-widget--input-tag.info.text': 'El registro de objetivos es bien simple y puede ser de más de un objetivo a la vez. Tienes que separar los objetivos, en líneas distintas, y cada objetivo debe seguir el formato descrito abajo. Para registrar basta con presionsar {keyboardTrigger}. Y no te olvides de guardar después, haciendo click en el botón de la esquina superior derecha de la pantalla.',
+  'p--pressure-widget--input-tag.info.item.target-format': 'Formato del objetivo: {format} (es obligatorio usar los caracteres {lt} y {gt} para agrupar el correo)',
+  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nombre <correoelectrónico@provedor.com>',
+  'p--pressure-widget--input-tag.info.item.special-chars': 'Para ambos tipos de presión es obligatorio el uso de los caracteres {lt} y {gt} para agrupar el correo electrónico o teléfono',
+  'p--pressure-widget--input-tag.info.item.sorting': 'Los objetivos serán exhibidos en orden aleatorio en el widget de presión. O sea, cada vez que se acceda a la movilización, el orden de exhibición será diferente',
 
   // page pressure widget email (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
-  'page--pressure-widget-email.form.validation.required': 'Preenchimento obrigatório',
+  'page--pressure-widget-email.form.validation.required': 'Campo obligatorio',
 
   // page pressure widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'page--pressure-widget-finish.success-message': 'Oba! Configurações salvas com sucesso :)',
+  'page--pressure-widget-finish.success-message': '¡Listo! Configuraciones guardadas exitosamente :)',
 
   // component pressure widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-tell-a-friend.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'pressure-widget--tell-a-friend.message': 'Oba, sua pressão foi enviada!',
+  'pressure-widget--tell-a-friend.message': '¡Listo, tu presión fue enviada!',
 
   // component pressure widget: target list
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/target-list/index.js
@@ -1341,15 +1341,15 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
   'pressure-widget--target-list.label.email': `
-    Quem você vai pressionar ({targetsCount} {targetsCount, plural,
-      one {alvo}
-      other {alvos}
+    La persona que vas a presionar ({targetsCount} {targetsCount, plural,
+      one {objetivo}
+      other {objetivos}
     })
   `,
   'pressure-widget--target-list.label.pressure': `
-    Selecione quem você quer pressionar ({targetsCount} {targetsCount, plural,
-      one {alvo}
-      other {alvos}
+    Selecciona la persona que quieres presionar ({targetsCount} {targetsCount, plural,
+      one {objetivo}
+      other {objetivos}
     })
   `,
 
@@ -1367,77 +1367,77 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - page      ~> `p--`
   //   - component ~> `c--`
   //
-  'p--activists-management.header.title': 'Sua comunidade',
-  'p--activists-management.header.button.upload.text': 'Importar dados (csv)',
-  'p--activists-management.header.button.download.text': 'Exportar dados (csv)',
-  'p--activists-management.content.title': '{totalNumber} pessoas',
-  'p--activists-management.content.button.tagging.text': 'Tags',
-  'p--activists-management.content.button.email.text': 'Email',
-  'p--activists-management.content.form-tagging.tags.placeholder': 'Digite tags separadas por vírgula',
-  'p--activists-management.content.form-tagging.button.text': 'Adicionar tag',
-  'p--activists-management.content.form-tagging.success.message': 'Tags adicionadas com sucesso a {taggedNumber} pessoas',
-  'p--activists-management.content.form-tagging.success.undo': 'Desfazer',
-  'p--activists-management.content.activist-spotlight.title': 'Perfil selecionado',
-  'p--activists-management.content.activist-spotlight.email.label': 'Email',
-  'p--activists-management.content.activist-spotlight.phone.label': 'Telefone',
-  'p--activists-management.content.activist-spotlight.mobilizations.label': 'Páginas em que agiu',
-  'p--activists-management.content.activist-spotlight.tags.label': 'Tags',
-  'p--activists-management.content.activist-spotlight.form-tagging.button.text': 'Adicionar',
+  'p--activists-management.header.title': 'Tu comunidad',
+  'p--activists-management.header.button.upload.text': 'Importar datos (.csv)',
+  'p--activists-management.header.button.download.text': 'Exportar datos (.csv)',
+  'p--activists-management.content.title': '{totalNumber} personas',
+  'p--activists-management.content.button.tagging.text': 'Etiquetas',
+  'p--activists-management.content.button.email.text': 'Correo electrónico',
+  'p--activists-management.content.form-tagging.tags.placeholder': 'Digita etiquetas separadas por comas',
+  'p--activists-management.content.form-tagging.button.text': 'Agregar etiquetas',
+  'p--activists-management.content.form-tagging.success.message': 'Etiquetas agregadas exitosamente a {taggedNumber} personas',
+  'p--activists-management.content.form-tagging.success.undo': 'Deshacer',
+  'p--activists-management.content.activist-spotlight.title': 'Perfil seleccionado',
+  'p--activists-management.content.activist-spotlight.email.label': 'Correo electrónico',
+  'p--activists-management.content.activist-spotlight.phone.label': 'Teléfono',
+  'p--activists-management.content.activist-spotlight.mobilizations.label': 'Páginas en las que actuó',
+  'p--activists-management.content.activist-spotlight.tags.label': 'Etiquetas',
+  'p--activists-management.content.activist-spotlight.form-tagging.button.text': 'Agregar',
 
   // component activists management filterable list
   // filepath: {incoming-for-v0.6.x release}
-  'activists-management.c--filterable-list.activist.placeholder': 'Quem você está procurando?',
+  'activists-management.c--filterable-list.activist.placeholder': '¿A quién estás buscando?',
 
-  'activists-management.c--filterable-list.suggest.placeholder': 'Filtre por páginas ou ferramentas',
+  'activists-management.c--filterable-list.suggest.placeholder': 'Filtra por páginas o herramientas',
   'activists-management.c--filterable-list.suggest.operators.label': 'Operadores',
-  'activists-management.c--filterable-list.suggest.operators.options.or.label': 'ou',
-  'activists-management.c--filterable-list.suggest.operators.options.and.label': 'e',
-  'activists-management.c--filterable-list.suggest.segment.donations.label': 'Ferramenta: crowdfunding',
-  'activists-management.c--filterable-list.suggest.segment.pressures.label': 'Ferramenta: pressão',
-  'activists-management.c--filterable-list.suggest.segment.gen-forms.label': 'Ferramenta: formulário',
-  'activists-management.c--filterable-list.suggest.segment.other-tags.label': 'Outras tags',
+  'activists-management.c--filterable-list.suggest.operators.options.or.label': 'o',
+  'activists-management.c--filterable-list.suggest.operators.options.and.label': 'y',
+  'activists-management.c--filterable-list.suggest.segment.donations.label': 'Herramienta: crowdfunding',
+  'activists-management.c--filterable-list.suggest.segment.pressures.label': 'Herramienta: presión',
+  'activists-management.c--filterable-list.suggest.segment.gen-forms.label': 'Herramienta: formulario',
+  'activists-management.c--filterable-list.suggest.segment.other-tags.label': 'Otras etiquetas',
 
-  'activists-management.c--filterable-list.period.options.today': 'Hoje',
+  'activists-management.c--filterable-list.period.options.today': 'Hoy',
   'activists-management.c--filterable-list.period.options.last-week': 'Última semana',
-  'activists-management.c--filterable-list.period.options.last-fortnight': 'Últimos 15 dias',
-  'activists-management.c--filterable-list.period.options.last-month': 'Últimos 30 dias',
+  'activists-management.c--filterable-list.period.options.last-fortnight': 'Últimos 15 días',
+  'activists-management.c--filterable-list.period.options.last-month': 'Últimos 30 días',
   'activists-management.c--filterable-list.period.options.last-quarter': 'Últimos 3 meses',
-  'activists-management.c--filterable-list.period.options.last-year': 'Último ano',
-  'activists-management.c--filterable-list.period.options.always': 'Escolha um período',
-  'activists-management.c--filterable-list.period.options.custom-period': 'Customizar período',
+  'activists-management.c--filterable-list.period.options.last-year': 'Último año',
+  'activists-management.c--filterable-list.period.options.always': 'Escoje un periodo',
+  'activists-management.c--filterable-list.period.options.custom-period': 'Personalizar periodo',
 
   // Activists (CRM)
   // filepath: routes/admin/authenticated/sidebar/activists
   // route: /activists
-  'routes.admin.sidebar.activists.container.title': 'Sua comunidade',
-  'routes.admin.sidebar.activists.container.filter-placeholder': 'Filtre por páginas ou ferramentas',
-  'routes.admin.sidebar.activists.container.empty-list': 'Ops! Ninguém com esse filtro :(',
+  'routes.admin.sidebar.activists.container.title': 'Tu comunidad',
+  'routes.admin.sidebar.activists.container.filter-placeholder': 'Filtra por páginas o herramientas',
+  'routes.admin.sidebar.activists.container.empty-list': '¡Oops! Nadie corresponde a ese filtro :(',
   'routes.admin.sidebar.activists.container.counter': `{totalCount} {totalCount, plural,
-    one {pessoa}
-    other {pessoas}
+    one {persona}
+    other {personas}
   }`,
-  'routes.admin.sidebar.activists.container.import-csv': 'Importar dados (csv)',
-  'routes.admin.sidebar.activists.container.export-csv': 'Exportar dados (csv)',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': 'Importação concluída com sucesso!',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} pessoas foram adicionadas à sua comunidade.',
-  'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': 'Ops!',
+  'routes.admin.sidebar.activists.container.import-csv': 'Importar datos (.csv)',
+  'routes.admin.sidebar.activists.container.export-csv': 'Exportar datos (.csv)',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.title.success': '¡Importación concluida exitosamente!',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.message.success': '{length} personas fueron incorporadas a tu comunidd.',
+  'routes.admin.sidebar.activists.import-csv.insertActivists.title.fail': '¡Oops!',
   'routes.admin.sidebar.activists.import-csv.insertActivists.message.fail': '{error}',
 
   // createForm validations
   // path: client/storybook/forms/validate
-  'createForm.validate.email': 'Ops! Email invlálido...',
-  'createForm.validate.required': 'Preenchimento obrigatório',
-  'createForm.validate.cnpj.length': 'CNPJ deve ter 14 dígitos',
-  'createForm.validate.cnpj.invalid': 'Ops! CNPJ inválido',
-  'createForm.validate.cpf.length': 'CPF deve conter 11 dígitos',
+  'createForm.validate.email': '¡Oops! Correo electrónico inválido...',
+  'createForm.validate.required': 'Campo obligatorio',
+  'createForm.validate.cnpj.length': 'CNPJ debe tener 14 dígitos',
+  'createForm.validate.cnpj.invalid': '¡Oops! CNPJ inválido',
+  'createForm.validate.cpf.length': 'CPF debe contener 11 dígitos',
   'createForm.validate.cpf.invalid': 'CPF inválido',
   // settingsForm
   // path: client/storybook/settings/forms
-  'settingsForm.submitLabel.default': 'Salvar',
-  'settingsForm.sucessMessage.default': 'Dados salvos com sucesso :)',
+  'settingsForm.submitLabel.default': 'Guardar',
+  'settingsForm.sucessMessage.default': 'Datos guardados exitosamente :)',
 
   // adjustmentsForms
-  'adjustmentnsForm.validate.call_to_action.required': 'Insira o título',
-  'adjustmentnsForm.validate.button_text.required': 'Insira o texto do botão',
-  'adjustmentnsForm.validate.button_text.length': 'O limite de caracteres foi atingido.'
+  'adjustmentnsForm.validate.call_to_action.required': 'Inserta el título',
+  'adjustmentnsForm.validate.button_text.required': 'Inserta el texto del botón',
+  'adjustmentnsForm.validate.button_text.length': 'El límite de caracteres fue alcanzado.'
 }
