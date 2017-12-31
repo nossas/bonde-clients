@@ -446,7 +446,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'page--community-report.section-button.donation.text': 'Descargar',
 
   'page--community-report.section-button.actions.title': 'REPORTE DE ACCIONES',
-  'page--community-report.section-button.actions.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las acciones hechas en tu comunidad'',
+  'page--community-report.section-button.actions.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las acciones hechas en tu comunidad',
   'page--community-report.section-button.actions.text': 'Descargar',
 
   'page--community-report.section-button.activists.title': 'REPORTE DE ACTIVISTAS',
