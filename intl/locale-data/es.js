@@ -1070,32 +1070,32 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'widgets.components--donation.default.button-text': 'Doar agora',
-  'widgets.components--donation.default.title-text': 'Clique para editar a ferramenta',
-  'widgets.components--donation.period-label-options.month': 'mês',
-  'widgets.components--donation.period-label-options.halfyear': 'semestre',
-  'widgets.components--donation.period-label-options.year': 'ano',
-  'widgets.components--donation.users-choice.recurring': 'Apoiar todo {periodLabelCurrent}',
-  'widgets.components--donation.users-choice.unique': 'Doação pontual',
-  'widgets.components--donation.reattempt.message.title': 'Ops!',
-  'widgets.components--donation.reattempt.message.text.line-01': 'Aconteceu algum problema :(',
-  'widgets.components--donation.reattempt.message.text.line-02': 'Clique no botão abaixo pra tentar de novo.',
-  'widgets.components--donation.reattempt.message.button.text': 'Nova tentativa',
-  'widgets.components--donation.progress-bar.collected': 'arrecadados',
+  'widgets.components--donation.default.button-text': 'Donar ahora',
+  'widgets.components--donation.default.title-text': 'Haz click para editar la herramienta',
+  'widgets.components--donation.period-label-options.month': 'Mes',
+  'widgets.components--donation.period-label-options.halfyear': 'Semestre',
+  'widgets.components--donation.period-label-options.year': 'Año',
+  'widgets.components--donation.users-choice.recurring': 'Apoyar todo {periodLabelCurrent}',
+  'widgets.components--donation.users-choice.unique': 'Donación puntual',
+  'widgets.components--donation.reattempt.message.title': '¡Oops!',
+  'widgets.components--donation.reattempt.message.text.line-01': 'Ocurrió un problema :(',
+  'widgets.components--donation.reattempt.message.text.line-02': 'Haz click en el botón de abajo para intentar de nuevo.',
+  'widgets.components--donation.reattempt.message.button.text': 'Nuevo intento',
+  'widgets.components--donation.progress-bar.collected': 'recaudados',
   'widgets.components--donation.progress-bar.supports': `
     {totalDonations} {totalDonations, plural,
-      one {apoio}
-      other {apoio}
+      one {apoyo}
+      other {apoyo}
     }
   `,
   'widgets.components--donation.progress-bar.goal': 'Meta:',
-  'widgets.components--donation.progress-bar.date.last-day': 'último dia!',
-  'widgets.components--donation.progress-bar.date.last-days': 'últimos dias!',
-  'widgets.components--donation.progress-bar.date.last-week': 'última semana!',
+  'widgets.components--donation.progress-bar.date.last-day': '¡último día!',
+  'widgets.components--donation.progress-bar.date.last-days': '¡últimos días!',
+  'widgets.components--donation.progress-bar.date.last-week': '¡última semana!',
   'widgets.components--donation.progress-bar.date.remaining': `
     faltam {goalDateRemaining} {goalDateRemaining, plural,
-      one {dia}
-      other {dias}
+      one {día}
+      other {días}
     }
   `,
 
@@ -1107,148 +1107,148 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/export
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
-  'form-widget.components--settings-menu.title': 'Configurações da ferramenta',
-  'form-widget.components--settings-menu.items.fields': 'Configurações',
+  'form-widget.components--settings-menu.title': 'Configuraciones de la herramienta',
+  'form-widget.components--settings-menu.items.fields': 'Configuraciones',
   'form-widget.components--settings-menu.items.adjusts': 'Ajustes',
-  'form-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
-  'form-widget.components--settings-menu.items.report': 'Relatório',
-  'form-widget.components--settings-menu.items.post-action': 'Pós-ação',
+  'form-widget.components--settings-menu.items.autofire': 'Mensaje de agradecimiento',
+  'form-widget.components--settings-menu.items.report': 'Reporte',
+  'form-widget.components--settings-menu.items.post-action': 'Post-acción',
 
   // page form widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/form/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form
-  'page--form-widget.form.success-message': 'Oba! Ferramenta configurada com sucesso :)',
+  'page--form-widget.form.success-message': '¡Listo! La herramienta fue configurada exitosamente :)',
   'page--form-widget.form.widget-title.label': 'Título',
-  'page--form-widget.form.widget-title.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
-  'page--form-widget.form.button-text.label': 'Botão',
-  'page--form-widget.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
+  'page--form-widget.form.widget-title.placeholder': 'Ejm: Llena el formulario de acá abajo para firmar la petición.',
+  'page--form-widget.form.button-text.label': 'Botón',
+  'page--form-widget.form.button-text.placeholder': 'Define el texto del botón de confirmación del formulario.',
   'page--form-widget.form.counter-text.label': 'Contador',
-  'page--form-widget.form.counter-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
+  'page--form-widget.form.counter-text.placeholder': 'Define el texto que estará al lado del número de personas que se están movilizando.',
 
   // component data export
   // filepath: /client/mobilizations/widgets/components/data-export.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
-  'widgets.components--data-export.formated-export-at': '{date} às {time}',
-  'widgets.components--data-export.loading.message': 'Processando...',
-  'widgets.components--data-export.exported.message': 'Última exportação: {formatedExportAt}.',
-  'widgets.components--data-export.export.label': 'Relatório de ações',
-  'widgets.components--data-export.export.helper-text': 'Clique no botão abaixo para baixar um relatório com todos os dados capturados pelo formulário.',
-  'widgets.components--data-export.export.button': 'Baixar',
+  'widgets.components--data-export.formated-export-at': '{date} a las {time}',
+  'widgets.components--data-export.loading.message': 'Procesando...',
+  'widgets.components--data-export.exported.message': 'Última exportación: {formatedExportAt}.',
+  'widgets.components--data-export.export.label': 'Reporte de acciones',
+  'widgets.components--data-export.export.helper-text': 'Haz click en el botón de abajo para descargar un informe con todos los datos captados por el formulario.',
+  'widgets.components--data-export.export.button': 'Descargar',
 
   // action async widget data export
   // filepath: /client/mobrender/redux/action-creators/async-widget-data-export.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/export
-  'action--async-widget-data-export.no-data': 'Ops, não encontramos nenhum dado para ser exportado...',
+  'action--async-widget-data-export.no-data': 'Oops, no encontramos ningún dato para exportar...',
 
   // content widget
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/__content__.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'c--content-widget.delete-widget.confirm.message': 'Quer remover a ferramenta?',
+  'c--content-widget.delete-widget.confirm.message': '¿Quieres eliminar la herramienta?',
 
   // slate editor implementation component
   // filepath: /client/mobilizations/widgets/__plugins__/content/components/editor-slate/index.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'c--editor-slate.button-save.text': 'Salvar',
+  'c--editor-slate.button-save.text': 'Guardar',
   'c--editor-slate.button-cancel.text': 'Cancelar',
-  'c--editor-slate.button-cancel.message': 'Quer mesmo sair do modo edição? Suas alterações não serão salvas.',
+  'c--editor-slate.button-cancel.message': '¿Estás seguro/a de querer salir del modo edición? Tus modificaciones no serán guardadas.',
 
   // page form widget fields
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/fields/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
-  'page--form-widget-fields.add-button': 'Adicionar um campo',
-  'page--form-widget-fields.helper-text.still-empty': 'Aqui você pode adicionar, remover, editar e ordenar os campos do seu formulário do jeito que quiser :)',
-  'page--form-widget-fields.helper-text.manage-fields': 'Aqui você pode adicionar, remover, editar e ordenar os campos do seu formulário do jeito que quiser :)',
+  'page--form-widget-fields.add-button': 'Agregar un campo',
+  'page--form-widget-fields.helper-text.still-empty': 'Aquí puedes agregar, eliminar y ordenar los campos de tu formulario de la manera que quieras :)',
+  'page--form-widget-fields.helper-text.manage-fields': 'Aquí puedes agregar, eliminar y ordenar los campos de tu formulario de la manera que quieras :)',
 
   // component form widget
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/__form__.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'form-widget.components--form.default.title-text': 'Clique para editar sua ferramenta...',
+  'form-widget.components--form.default.title-text': 'Haz click para editar tu herramienta...',
   'form-widget.components--form.default.button-text': 'Enviar',
 
   // component form widget input
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
-  'form-widget.components--input.click-to-edit': 'Clique para editar',
-  'form-widget.components--input.field-dropdown.options.default': 'Selecione...',
-  'form-widget.components--input.field-greetings.title': 'Mensagem de sucesso alterada para:',
+  'form-widget.components--input.click-to-edit': 'Haz click para editar',
+  'form-widget.components--input.field-dropdown.options.default': 'Selecciona...',
+  'form-widget.components--input.field-greetings.title': 'Mensaje de éxito modificado para:',
 
   // component form widget input form
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/input-form.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
-  'form-widget.components--input-form.handle-remove.confirm': 'Você quer mesmo remover este campo?',
-  'form-widget.components--input-form.handle-overlay-click.confirm': 'Ao sair sem salvar você vai perder suas alterações... Quer sair mesmo assim?',
-  'form-widget.components--input-form.field-title.label': 'Título do campo',
-  'form-widget.components--input-form.field-title.placeholder': 'Ex: Email',
-  'form-widget.components--input-form.field-helper-text.label': 'Texto de ajuda',
-  'form-widget.components--input-form.field-helper-text.placeholder': 'Ex: Insira aqui o seu email',
+  'form-widget.components--input-form.handle-remove.confirm': '¿Estás seguro/a de querer eliminar este campo?',
+  'form-widget.components--input-form.handle-overlay-click.confirm': 'Al salir sin guardar perderás tus modificaciones... ¿aun así quieres salir?',
+  'form-widget.components--input-form.field-title.label': 'Título del campo',
+  'form-widget.components--input-form.field-title.placeholder': 'Ejm: Correo electrónico',
+  'form-widget.components--input-form.field-helper-text.label': 'Texto de ayuda',
+  'form-widget.components--input-form.field-helper-text.placeholder': 'Ejm: Inserta aquí tu correo electrónico',
   'form-widget.components--input-form.field-type.label': 'Tipo de campo',
   'form-widget.components--input-form.field-type.options.text': 'Texto',
-  'form-widget.components--input-form.field-type.options.email': 'E-mail',
+  'form-widget.components--input-form.field-type.options.email': 'Correo electrónico',
   'form-widget.components--input-form.field-type.options.number': 'Número',
   'form-widget.components--input-form.field-type.options.dropdown': 'Dropdown &#9733;',
-  'form-widget.components--input-form.field-type.options.greetings': 'Saudação &#9733;',
-  'form-widget.components--input-form.field-required.label': 'Obrigatório',
-  'form-widget.components--input-form.field-required.radio.yes.label': 'Sim',
-  'form-widget.components--input-form.field-required.radio.no.label': 'Não',
-  'form-widget.components--input-form.button-move-up': 'Mover para cima',
-  'form-widget.components--input-form.button-move-down': 'Mover para baixo',
-  'form-widget.components--input-form.button-remove': 'Remover',
+  'form-widget.components--input-form.field-type.options.greetings': 'Saludo &#9733;',
+  'form-widget.components--input-form.field-required.label': 'Obligatorio',
+  'form-widget.components--input-form.field-required.radio.yes.label': 'Sí',
+  'form-widget.components--input-form.field-required.radio.no.label': 'No',
+  'form-widget.components--input-form.button-move-up': 'Mover para arriba',
+  'form-widget.components--input-form.button-move-down': 'Mover para abajo',
+  'form-widget.components--input-form.button-remove': 'Eliminar',
   'form-widget.components--input-form.button-cancel': 'Cancelar',
-  'form-widget.components--input-form.button-save.saving': 'Salvando...',
-  'form-widget.components--input-form.button-save.default': 'Salvar',
+  'form-widget.components--input-form.button-save.saving': 'Guardando...',
+  'form-widget.components--input-form.button-save.default': 'Guardar',
 
   // component mobrender widget overlay
   // filepath: /client/mobrender/components/widget-overlay.js
   // routepath: /mobilizations/:mobilization_id/edit
   'mobrender.components--widget-overlay.button.edit.title': 'Editar',
-  'mobrender.components--widget-overlay.button.remove.title': 'Remover',
+  'mobrender.components--widget-overlay.button.remove.title': 'Eliminar',
 
   // page form widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-form-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
-  'page--form-widget-finish.success-message': 'Oba! Configurações salvas com sucesso :)',
+  'page--form-widget-finish.success-message': '¡Listo! Configuraciones guardadas exitosamente :)',
 
   // component form widget tell a friend
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/form-tell-a-friend.js
   // routepath:
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - (public) /
-  'form-widget.components--tell-a-friend.message': 'Oba! Sua ação foi registrada :)',
+  'form-widget.components--tell-a-friend.message': '¡Listo! Tu acción fue registrada :)',
 
   // component pressure widget form
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-form/index.js
   // routepath:
   //   - /mobilizations/:mobilization_id/edit
   //   - (public) /
-  'pressure-widget.components--pressure-form.validation.required': 'Preenchimento obrigatório',
-  'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'Email inválido',
-  'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'O email que você está tentando usar é de um dos alvos da ferramenta...',
-  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Informe o código do país e o DDD com dois dígitos. Ex: +5521',
-  'pressure-widget.components--pressure-form.phone.validation.invalid': 'Ops! Telefone inválido...',
-  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'O telefone que você está tentando usar é de um dos alvos da ferramenta...',
-  'pressure-widget.components--pressure-form.email.label': 'Email',
-  'pressure-widget.components--pressure-form.email.placeholder': 'Insira seu email',
-  'pressure-widget.components--pressure-form.phone.label': 'Telefone',
-  'pressure-widget.components--pressure-form.phone.placeholder': 'Insira seu telefone. Ex: +5511987654321',
-  'pressure-widget.components--pressure-form.name.label': 'Nome',
-  'pressure-widget.components--pressure-form.name.placeholder': 'Insira seu nome',
-  'pressure-widget.components--pressure-form.lastname.label': 'Sobrenome',
-  'pressure-widget.components--pressure-form.lastname.placeholder': 'Insira seu sobrenome',
-  'pressure-widget.components--pressure-form.city.label': 'Cidade',
-  'pressure-widget.components--pressure-form.city.placeholder': 'Insira sua cidade',
-  'pressure-widget.components--pressure-form.subject.label': 'Assunto',
-  'pressure-widget.components--pressure-form.body.label': 'Corpo do email',
-  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Ligação em andamento...',
-  'pressure-widget.components--pressure-form.phone-calls.retry': 'Ligar de novo',
-  'pressure-widget.components--pressure-form.phone-calls.call': 'Ligar de novo',
-  'pressure-widget.components--pressure-form.phone.how-it-works.title': 'Como funciona?',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos conectando com o alvo da vez...',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'Assim que alguém atender do lado de lá, vamos te ligar',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'Quando você atender, conectamos as ligações',
-  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Agora é com você, hora de pressionar!',
-  'pressure-widget.components--pressure-form.phone.finish-and-share': 'Encerrar e Compartilhar',
+  'pressure-widget.components--pressure-form.validation.required': 'Campo obligatorio',
+  'pressure-widget.components--pressure-form.email.validation.invalid-email-format': 'Correo electrónico inválido',
+  'pressure-widget.components--pressure-form.email.validation.sender-is-target': 'El correo electrónico que estás intentando usar es uno de los objetivos de la herramienta...',
+  'pressure-widget.components--pressure-form.phone.validation.ddd': 'Ingresa el código del país y el DDD con dos dígitos. Ejm: +5521',
+  'pressure-widget.components--pressure-form.phone.validation.invalid': '¡Oops! Teléfono inválido...',
+  'pressure-widget.components--pressure-form.phone.validation.caller-is-target': 'El teléfono que estás intentando usar es uno de los objetivos de la herramienta...',
+  'pressure-widget.components--pressure-form.email.label': 'Correo electrónico',
+  'pressure-widget.components--pressure-form.email.placeholder': 'Ingresa tu correo electrónico',
+  'pressure-widget.components--pressure-form.phone.label': 'Teléfono',
+  'pressure-widget.components--pressure-form.phone.placeholder': 'Ingresa tu teléfono. Ejm: +5511987654321',
+  'pressure-widget.components--pressure-form.name.label': 'Nombre',
+  'pressure-widget.components--pressure-form.name.placeholder': 'Ingresa tu nombre',
+  'pressure-widget.components--pressure-form.lastname.label': 'Apellido',
+  'pressure-widget.components--pressure-form.lastname.placeholder': 'Ingresa tu apellido',
+  'pressure-widget.components--pressure-form.city.label': 'Ciudad',
+  'pressure-widget.components--pressure-form.city.placeholder': 'Ingresa tu ciudad',
+  'pressure-widget.components--pressure-form.subject.label': 'Asunto',
+  'pressure-widget.components--pressure-form.body.label': 'Cuerpo del correo electrónico',
+  'pressure-widget.components--pressure-form.phone-calls.ringing': 'Llamada en proceso...',
+  'pressure-widget.components--pressure-form.phone-calls.retry': 'Llamar de nuevo',
+  'pressure-widget.components--pressure-form.phone-calls.call': 'Llamar de nuevo',
+  'pressure-widget.components--pressure-form.phone.how-it-works.title': '¿Cómo funciona?',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01': 'Estamos conectando con el objetivo...',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02': 'El momento que alguien conteste del otro lado, te llamaremos',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03': 'Cuando contestes, conectamos las llamadas',
+  'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04': 'Ahora te toca a tí, ¡hora de presionar!',
+  'pressure-widget.components--pressure-form.phone.finish-and-share': 'Terminar y compartir',
 
   // component pressure widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/settings-menu.js
