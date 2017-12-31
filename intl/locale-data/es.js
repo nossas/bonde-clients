@@ -1257,47 +1257,47 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'pressure-widget.components--settings-menu.title': 'Configurações da ferramenta',
+  'pressure-widget.components--settings-menu.title': 'Configuraciones de la herramienta',
   'pressure-widget.components--settings-menu.items.form': 'Ajustes',
-  'pressure-widget.components--settings-menu.items.pressure-email': 'Configurações',
-  'pressure-widget.components--settings-menu.items.autofire': 'Mensagem de agradecimento',
-  'pressure-widget.components--settings-menu.items.post-action': 'Pós-ação',
+  'pressure-widget.components--settings-menu.items.pressure-email': 'Configuraciones',
+  'pressure-widget.components--settings-menu.items.autofire': 'Mensaje de agradecimiento',
+  'pressure-widget.components--settings-menu.items.post-action': 'Post-acción',
 
   // page pressure widget
   // filepath: /client/mobilizations/widgets/__plugins__/pressure/components/pressure-count.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'c--pressure-count.text.default': 'pressões feitas',
+  'c--pressure-count.text.default': 'presiones hechas',
 
   // page pressure widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
-  'page--pressure-widget.success-message': 'Oba! Configurações salvas com sucesso :)',
+  'page--pressure-widget.success-message': '¡Listo! Configuraciones guardadas exitosamente :)',
   'page--pressure-widget.form.title-text.label': 'Título',
-  'page--pressure-widget.form.title-text.placeholder': 'Clique para editar sua ferramenta...',
-  'page--pressure-widget.form.button-text.label': 'Texto do botão',
-  'page--pressure-widget.form.button-text.placeholder': 'Pressionar',
-  'page--pressure-widget.form.main-color.label': 'Cor',
-  'page--pressure-widget.form.show-counter.label': 'Mostrar contador de pressão?',
-  'page--pressure-widget.form.show-counter.radio.yes.label': 'Sim',
-  'page--pressure-widget.form.show-counter.radio.no.label': 'Não',
-  'page--pressure-widget.form.counter-text.label': 'Texto do contador',
-  'page--pressure-widget.form.counter-text.placeholder': 'pressões feitas',
-  'page--pressure-widget.form.show-city-field.label': 'Mostrar campo de cidade?',
-  'page--pressure-widget.form.show-city-field.radio.yes.label': 'Sim',
-  'page--pressure-widget.form.show-city-field.radio.no.label': 'Não',
+  'page--pressure-widget.form.title-text.placeholder': 'Haz click para editar tu herramienta...',
+  'page--pressure-widget.form.button-text.label': 'Texto del botón',
+  'page--pressure-widget.form.button-text.placeholder': 'Presionar',
+  'page--pressure-widget.form.main-color.label': 'Color',
+  'page--pressure-widget.form.show-counter.label': '¿Mostrar contador de presiones?',
+  'page--pressure-widget.form.show-counter.radio.yes.label': 'Sí',
+  'page--pressure-widget.form.show-counter.radio.no.label': 'No',
+  'page--pressure-widget.form.counter-text.label': 'Texto del contador',
+  'page--pressure-widget.form.counter-text.placeholder': 'presiones hechas',
+  'page--pressure-widget.form.show-city-field.label': '¿Mostrar campo de ciudad?',
+  'page--pressure-widget.form.show-city-field.radio.yes.label': 'Sí',
+  'page--pressure-widget.form.show-city-field.radio.no.label': 'No',
 
   // page pressure widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/pressure/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure
-  'page--pressure-widget.form.validation.title-text.required': 'Preenchimento obrigatório',
-  'page--pressure-widget.form.validation.button-text.required': 'Preenchimento obrigatório',
+  'page--pressure-widget.form.validation.title-text.required': 'Campo obligatorio',
+  'page--pressure-widget.form.validation.button-text.required': 'Campo obligatorio',
 
   // component widgets input tag
   // filepath: /client/mobilizations/widgets/components/input-tag.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
-  'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
-  'widgets.components--input-tag.insert-tag.placeholder': 'Nome do primeiro alvo <primeiro@alvo.com>\nNome do segundo alvo <segundo@alvo.com>\nNome do terceiro alvo <terceiro@alvo.com>\nNome do quarto alvo <quarto@alvo.com>\nNome do quinto alvo <quinto@alvo.com>\n...',
-  'widgets.components--input-tag.button.remove-all': 'Remover todos',
+  'widgets.components--input-tag.tags.label': 'Objetivos registrados ({targetsCount})',
+  'widgets.components--input-tag.insert-tag.placeholder': 'Nombre del primer objetivo <primer@objetivo.com>\nNombre del segundo objetivo <segundo@objetivo.com>\nNombre del tercer objetivo <tercer@objetivo.com>\nNombre del cuarto objetivo <cuarto@objetivo.com>\nNombre del quinto objetivo <quinto@objetivo.com>\n...',
+  'widgets.components--input-tag.button.remove-all': 'Eliminar todos',
 
   // page pressure widget email
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/email/page.js
