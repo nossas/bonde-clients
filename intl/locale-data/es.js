@@ -98,7 +98,7 @@ export default {
   'form--subscription-recurring.form.process-at.placeholder': 'Ejm: DD/MM/AAAA',
   'form--subscription-recurring.form.submit-button.text': 'Guardar',
   'form--subscription-recurring.form.validation.required': 'Obligatorio',
-  'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de fecha inválido',
+  'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de fecha inválido', 
 
   // notifications
   // filepath: /client/utils/notifications.js
