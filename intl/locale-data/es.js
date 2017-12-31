@@ -450,7 +450,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'page--community-report.section-button.actions.text': 'Descargar',
 
   'page--community-report.section-button.activists.title': 'REPORTE DE ACTIVISTAS',
-  'page--community-report.section-button.activists.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las personas que han actuado en tu comunidad'',
+  'page--community-report.section-button.activists.helper-text': 'Haz click en el botón de abajo para descargar el reporte con datos de todas las personas que han actuado en tu comunidad',
   'page--community-report.section-button.activists.text': 'Descargar',
 
   // component sidebar
