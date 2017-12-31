@@ -433,7 +433,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
 
   'c--metrics.total.donations.charged-back-amount': 'Valor total de devolución de las donaciones colectadas hasta ahora:',
   'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso de las donaciones colectadas hasta ahora:',
-  'c--metrics.total.donations.refused-amount': 'Valor total de reembolso de las donaciones colectadas hasta ahora:',
+  'c--metrics.total.donations.refused-amount': 'Valor total de reembolso de las donaciones colectadas hasta ahora:', 
 
     // page community report
     // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
