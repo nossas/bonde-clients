@@ -918,23 +918,23 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // page donation widget
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
-  'page--donation-widget.form.donation-value-title': 'Clique para definir este valor como padrão.',
-  'page--donation-widget.form.submit-button': 'Salvar',
-  'page--donation-widget.form.success-message': 'Oba! Suas configurações foram salvas com sucesso :)',
+  'page--donation-widget.form.donation-value-title': 'Haz click para definir este valor como patrón.',
+  'page--donation-widget.form.submit-button': 'Guardar',
+  'page--donation-widget.form.success-message': '¡Listo! Tus configuraciones fueron guardadas exitosamente :)',
   'page--donation-widget.form.payment-type.label': 'Tipo de crowdfunding',
-  'page--donation-widget.form.payment-type.unique': 'Doação única',
-  'page--donation-widget.form.payment-type.recurring': 'Doação recorrente',
-  'page--donation-widget.form.payment-type.users-choice': 'Deixar o usuário escolher',
-  'page--donation-widget.form.payment-interval.label': 'Intervalo da recorrência',
-  'page--donation-widget.form.payment-interval.monthly': 'Mensal',
+  'page--donation-widget.form.payment-type.unique': 'Donación única',
+  'page--donation-widget.form.payment-type.recurring': 'Donación recurrente',
+  'page--donation-widget.form.payment-type.users-choice': 'Dejar que el usuario escoja',
+  'page--donation-widget.form.payment-interval.label': 'Intervalo da frecuencia',
+  'page--donation-widget.form.payment-interval.monthly': 'Mensual',
   'page--donation-widget.form.payment-interval.semiannually': 'Semestral',
   'page--donation-widget.form.payment-interval.annually': 'Anual',
-  'page--donation-widget.form.goal.label': 'Meta da campanha',
-  'page--donation-widget.form.goal.placeholder': 'Ex.: 50000',
-  'page--donation-widget.goal-date-limit.label': 'Prazo de arrecadação',
-  'page--donation-widget.goal-date-limit.placeholder': 'Ex.: DD/MM/AAAA',
-  'page--donation-widget.form.donation-default-value.label': 'Valores das doações',
-  'page--donation-widget.form.donation-default-value.helper-text': 'Você pode escolher até 5 valores em cada ferramenta de crowdfunding - mas pode ter mais de uma ferramenta por página ;) Lembre-se: preencha apenas com números inteiros (Ex: 50)',
+  'page--donation-widget.form.goal.label': 'Meta de la campaña',
+  'page--donation-widget.form.goal.placeholder': 'Ejm.: 50000',
+  'page--donation-widget.goal-date-limit.label': 'Plazo de recaudación',
+  'page--donation-widget.goal-date-limit.placeholder': 'Ejm.: DD/MM/AAAA',
+  'page--donation-widget.form.donation-default-value.label': 'Valores de las donaciones',
+  'page--donation-widget.form.donation-default-value.helper-text': 'Puedes escoger hasta 5 valores en cada herramienta de crowdfunding - pero puedes tener más de una herramienta por página ;) Recuerda: coloca únicamente números enteros (Ejm.: 50)',
   'page--donation-widget.form.default-value-01.label': 'Valor 1',
   'page--donation-widget.form.default-value-01.placeholder': 'R$20',
   'page--donation-widget.form.default-value-02.label': 'Valor 2',
@@ -945,31 +945,31 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'page--donation-widget.form.default-value-04.placeholder': 'R$200',
   'page--donation-widget.form.default-value-05.label': 'Valor 5',
   'page--donation-widget.form.default-value-05.placeholder': 'R$500',
-  'page--donation-widget.form.default-value.radio.text': 'Padrão',
-  'page--donation-widget.form.default-value.helper-text': '*todos os valores são em reais, o BONDE ainda não processa transações em outras moedas...',
+  'page--donation-widget.form.default-value.radio.text': 'Patrón',
+  'page--donation-widget.form.default-value.helper-text': '*todos los valores son en reales, BONDE todavía no procesa transacciones en otras monedas...',
   'page--donation-widget.form.donation-title.label': 'Título',
-  'page--donation-widget.form.donation-title.placeholder': 'Ex: Escolha um valor e contribua agora!',
-  'page--donation-widget.form.main-color.label': 'Cor',
-  'page--donation-widget.form.main-color.helper-text': 'Você pode escolher a cor na caixinha abaixo ou inserir o valor que quiser em hex - por exemplo: #DC3DCE.',
-  'page--donation-widget.form.button-text.label': 'Texto do botão',
-  'page--donation-widget.form.button-text.placeholder': 'Ex.: Doar agora!',
-  'page--donation-widget.form.payment-method.label': 'Quer habilitar o pagamento por boleto?',
-  'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pago terá um custo adicional de R$3,00',
-  'page--donation-widget.form.payment-method.radio.yes': 'Sim',
-  'page--donation-widget.form.payment-method.radio.no': 'Não',
-  'page--donation-widget.form.bank-account.label': 'Conta bancária',
-  'page--donation-widget.form.bank-account.helper-text': 'Esta campanha está associada à conta bancária cadastrada nas configurações dessa comunidade. O valor arrecadado vai ser transferido para a conta na data que tiver cadastrado lá ;)',
+  'page--donation-widget.form.donation-title.placeholder': 'Ejm: ¡Escoge un valor y contribuye ahora!',
+  'page--donation-widget.form.main-color.label': 'Color',
+  'page--donation-widget.form.main-color.helper-text': 'Puedes escoger el color en la cajita de abajo o insertar el valor que quieras en HEX - por ejemplo: #DC3DCE.',
+  'page--donation-widget.form.button-text.label': 'Texto del botón',
+  'page--donation-widget.form.button-text.placeholder': 'Ejm.: ¡Donar ahora!',
+  'page--donation-widget.form.payment-method.label': '¿Quieres habilitar el pago por boleto?',
+  'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pagado tendrá un costo adicional de R$3,00',
+  'page--donation-widget.form.payment-method.radio.yes': 'Sí',
+  'page--donation-widget.form.payment-method.radio.no': 'No',
+  'page--donation-widget.form.bank-account.label': 'Cuenta bancaria',
+  'page--donation-widget.form.bank-account.helper-text': 'Esta campaña está asociada a la cuenta bancaria registrada en las configuraciones de esta comunidad. El valor recaudado será transferido a la cuenta en la fecha que hayas registrado allí ;)',
 
   // page donation widget (connected)
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation
-  'page--donation-widget.form.validation.invalid': 'Ops, formato inválido...',
-  'page--donation-widget.form.validation.button-text.required': 'Insira o texto do botão',
-  'page--donation-widget.form.validation.button-text.max-length': 'Você atingiu o limite de caracteres...',
-  'page--donation-widget.form.validation.goal.format': 'Insira o valor neste formato: 1000',
-  'page--donation-widget.form.validation.goal-date-limit.format': 'Insira a data neste formato: DD/MM/AAAA',
-  'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Data inválida.',
-  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'Ops, seu prazo já expirou! Escolha outra data',
+  'page--donation-widget.form.validation.invalid': 'Oops, formato inválido...',
+  'page--donation-widget.form.validation.button-text.required': 'Inserta el texto del botón',
+  'page--donation-widget.form.validation.button-text.max-length': 'Has llegado al límite de caracteres...',
+  'page--donation-widget.form.validation.goal.format': 'Inserta el valor en este formato: 1000',
+  'page--donation-widget.form.validation.goal-date-limit.format': 'Inserta la fecha en este formato: DD/MM/AAAA',
+  'page--donation-widget.form.validation.goal-date-limit.invalid-date': 'Fecha inválida.',
+  'page--donation-widget.form.validation.goal-date-limit.date-must-be-higher': 'Oops, ¡tu plazo ya expiró! Escoge otra fecha',
 
   // component widget autofire
   // filepath: /client/mobilizations/widgets/components/form-autofire.js
@@ -977,17 +977,17 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/autofire
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
-  'widgets.components--form-autofire.form.submit-button': 'Salvar',
-  'widgets.components--form-autofire.form.success-message': 'Mensagem de agradecimento configurada com sucesso!',
-  'widgets.components--form-autofire.form.sender-name.label': 'Nome do(a) remetente',
-  'widgets.components--form-autofire.form.sender-name.placeholder': 'É o nome que vai aparecer como remetente do email de agradecimento.',
-  'widgets.components--form-autofire.form.sender-email.label': 'Email do(a) remetente',
-  'widgets.components--form-autofire.form.sender-email.placeholder': 'É o email do qual vão ser enviadas as mensagens de agradecimento.',
-  'widgets.components--form-autofire.form.sender-email.validation.invalid-email-format': 'Ops, email inválido...',
-  'widgets.components--form-autofire.form.email-subject.label': 'Assunto do email',
-  'widgets.components--form-autofire.form.email-subject.placeholder': 'Defina o assunto da mensagem de agradecimento.',
-  'widgets.components--form-autofire.form.email-text.label': 'Texto do email',
-  'widgets.components--form-autofire.form.email-text.placeholder': 'Aqui você deve escrever o texto que vai no corpo da mensagem de agradecimento. se Ex: Muito obrigada por apostar na força da ação coletiva em rede! Sua participação é muito importante e, agora, precisamos da sua ajuda para que mais gente colabore com esta mobilização. Compartilhe nas suas redes clicando em um dos links abaixo. Um abraço.',
+  'widgets.components--form-autofire.form.submit-button': 'Guardar',
+  'widgets.components--form-autofire.form.success-message': '¡Mensaje de agradecimiento configurado exitosamente!',
+  'widgets.components--form-autofire.form.sender-name.label': 'Nombre del/de la remitente',
+  'widgets.components--form-autofire.form.sender-name.placeholder': 'Es el nombre que aparecera como remitente del mensaje de agradecimiento.',
+  'widgets.components--form-autofire.form.sender-email.label': 'Correo electrónico del/de la remitente',
+  'widgets.components--form-autofire.form.sender-email.placeholder': 'Es el correo electrónico del cual serán enviados los mensajes de agradecimiento.',
+  'widgets.components--form-autofire.form.sender-email.validation.invalid-email-format': 'Oops, correo electrónico inválido...',
+  'widgets.components--form-autofire.form.email-subject.label': 'Asunto del mensaje',
+  'widgets.components--form-autofire.form.email-subject.placeholder': 'Define el asunto del mensaje de agradecimento.',
+  'widgets.components--form-autofire.form.email-text.label': 'Texto del correo electrónico',
+  'widgets.components--form-autofire.form.email-text.placeholder': 'Aquí tienes que escribir el texto que va en el cuerpo del mensaje de agradecimiento. Ejm. ¡Muchas gracias por apostar en la fuerza de la acción colectiva en redes¡ Tu participación es muy importante y, ahora, necesitamos tu ayuda para que más personas colaboren con esta movilización. Comparte en tus redes haciendo click en uno de los enlaces acá abajo. Un abrazo.',
 
   // component widget form finish message
   // filepath: /client/mobilizations/widgets/components/form-finish-message/index.js
@@ -995,15 +995,15 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
-  'widgets.components--form-finish-message.success-message': 'Oba! Informaçes salvas com sucesso :)',
-  'widgets.components--form-finish-message.type.label': 'Tipo de mensagem',
-  'widgets.components--form-finish-message.type.radio.share': 'Padrão',
-  'widgets.components--form-finish-message.type.radio.custom': 'Customizar',
-  'widgets.components--form-finish-message.type.validation.required': 'Você precisa selecionar um tipo de mensagem ;)',
-  'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto para o WhatsApp',
-  'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)',
-  'widgets.components--form-finish-message.preview.label': 'Preview',
-  'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar sua mensagem de pós-ação.',
+  'widgets.components--form-finish-message.success-message': '¡Listo! Información guardada exitosamente :)',
+  'widgets.components--form-finish-message.type.label': 'Tipo de mensaje',
+  'widgets.components--form-finish-message.type.radio.share': 'Patrón',
+  'widgets.components--form-finish-message.type.radio.custom': 'Personalizar',
+  'widgets.components--form-finish-message.type.validation.required': 'Selecciona un tipo de mensaje ;)',
+  'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto para WhatsApp',
+  'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Aquí puedes dejar listo un texto patrón. Así, cuando alguien comparta tu página por WhatsApp en la post-acción, ya tendrás una sugerencia sobre qué hablar :)',
+  'widgets.components--form-finish-message.preview.label': 'Vista previa',
+  'widgets.components--form-finish-message.custom.message.default': 'Haz click aquí para editar tu mensaje de post-acción.',
 
   // component share tell-a-friend
   // filepath: /client/components/share/tell-a-friend.js
@@ -1012,7 +1012,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - (public) /
-  'share.components--tell-a-friend.text': 'Compartilhe com a sua galera pra aumentarmos nosso impacto!',
+  'share.components--tell-a-friend.text': '¡Comparte con tus amigos para aumentar nuestro impacto!',
 
   // component share facebook-share-button
   // filepath: /client/components/share/facebook-share-button.js
@@ -1021,7 +1021,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - (public) /
-  'share.components--facebook-share-button.text': 'Compartilhar no Facebook',
+  'share.components--facebook-share-button.text': 'Compartir en Facebook',
 
   // component share twitter-share-button
   // filepath: /client/components/share/twitter-share-button.js
@@ -1030,7 +1030,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - (public) /
-  'share.components--twitter-share-button.text': 'Compartilhar no Twitter',
+  'share.components--twitter-share-button.text': 'Compartir en Twitter',
 
   // component share whatsapp-share-button
   // filepath: /client/components/share/whatsapp-share-button.js
@@ -1039,30 +1039,30 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/form/finish
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/pressure/finish
   //   - (public) /
-  'share.components--whatsapp-share-button.text': 'Compartilhar no WhatsApp',
+  'share.components--whatsapp-share-button.text': 'Compartir en WhatsApp',
 
   // page donation widget finish
   // filepath: /routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page.js
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
-  'page--donation-widget-finish.form.success-message': 'Oba! Informações salvas com sucesso :)',
+  'page--donation-widget-finish.form.success-message': '¡Listo! La información fue guardada exitosamente :)',
 
   // component donation widget tell-a-friend
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/donation-tell-a-friend.js
   // routepath:
   //   - /mobilizations/:mobilization_id/widgets/:widget_id/donation/finish
   //   - (public) /
-  'donation.components--tell-a-friend.message': 'Oba, sua doação foi registrada! Se selecionou a opção "boleto", dá uma olhada no seu email que o link vai chegar por lá ;) ',
+  'donation.components--tell-a-friend.message': 'Listo, ¡tu donación fue registrada¡ Si seleccionaste la opción "boleto", dale una mirada a tu correo electrónico ya que el enlace te llegará allí ;) ',
 
   // config mobrender widgets
   // filepath: /client/mobrender/widgets/config.js
   // routepath: /mobilizations/:mobilization_id/edit
-  'widgets.config--content.label': 'Conteúdo',
-  'widgets.config--content.default': 'Clique para editar a ferramenta',
-  'widgets.config--form.label': 'Formulário',
-  'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
-  'widgets.config--pressure.label': 'Pressão',
-  'widgets.config--pressure.default.title': 'Envie um email para quem pode tomar essa decisão',
-  'widgets.config--pressure.default.button-text': 'Enviar email',
+  'widgets.config--content.label': 'Contenido',
+  'widgets.config--content.default': 'Haz click para editar la herramienta',
+  'widgets.config--form.label': 'Formulario',
+  'widgets.config--form.default': '¡Gracias por apostar en la fuerza de la acción colectiva! Tu participación es muy importante y, ahora, necesitamos tu ayuda para potenciar nuestro impacto. Comparte en tus redes sociales haciendo click en uno de los enlaces acá abajo.\n\nUn abrazo',
+  'widgets.config--pressure.label': 'Presión',
+  'widgets.config--pressure.default.title': 'Manda un correo electrónico a quien pueda tomar una decisión',
+  'widgets.config--pressure.default.button-text': 'Mandar un correo electrónico',
   'widgets.config--donation.label': 'Crowdfunding',
 
   // component donation widget
