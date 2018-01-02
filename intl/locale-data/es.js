@@ -65,7 +65,7 @@ export default {
   // filepath: /routes/public/subscription-edit/page.js
   // routepath: /subscriptions/:id/edit
   'page--subscription-edit.title': 'Tu donación',
-  'page--subscription-edit.helper-text': '¿Qué quieres cambiar en tu donación?',
+  'page--subscription-edit.helper-text': '¿Qué quieres modificar de tu donación?',
   'page--subscription-edit.button.creditcard': 'Tarjeta de crédito',
   'page--subscription-edit.button.recurring': 'Información de la donación',
   'page--subscription-edit.cancel-subscription.confirm': 'Estás a punto de cancelar tu apoyo. ¿Estás seguro de querer continuar?',
@@ -120,7 +120,7 @@ export default {
   'notification--message-pressure-targets-remove-all.message': 'Recuerda que debes hacer click en el botón guardar, en la esquina superior derecha de la pantalla, para que los objetivos sean actualizados en la herramienta ;)',
 
   'notification--account-password-retrieve-success.title': '¡Listo!',
-  'notification--account-password-retrieve-success.message': 'Acabamos de mandarte un correo con una nueva contraseña. Revisa la caja de entrada de tu correo y úsala para iniciar sesión ;)',
+  'notification--account-password-retrieve-success.message': 'Acabamos de mandarte un correo con una nueva contraseña. Revisa el buzón de entrada de tu correo y usa la nueva contraseña para iniciar sesión ;)',
 
   'notification--community-invite-success.title': '¡Listo!',
   'notification--community-invite-success.message': '¡La invitación para {correo electrónico} fue enviada exitosamente! Tu BONDE está creciendo :)',
