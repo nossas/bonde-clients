@@ -104,7 +104,8 @@ class Mobilization extends React.Component {
       widgets,
       blockUpdate,
       editable,
-      blockEditionMode
+      blockEditionMode,
+      history
     } = this.props
 
     const themeClassName = `${colorScheme} ${headerFont}-header ${bodyFont}-body`
@@ -125,6 +126,7 @@ class Mobilization extends React.Component {
         <div id='blocks-list' className='flex-auto' style={{ overflowY: 'scroll' }}>
           {this.state.blocks.map((block, index) => (
             <Block
+              history={history}
               key={`block-${block.id}`}
               editable={editable}
               block={block}
@@ -135,7 +137,7 @@ class Mobilization extends React.Component {
             <div
               className='add-new-block'
               onClick={() => {
-                this.props.history.push(
+                history.push(
                   paths.createBlock(this.props.mobilization)
                 )
               }}
