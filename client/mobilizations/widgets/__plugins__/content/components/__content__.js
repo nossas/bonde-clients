@@ -49,7 +49,11 @@ export class Content extends Component {
 
             if (settings.content !== raw) {
               const { update, widget } = this.props
-              update({ ...widget, settings: { content: raw } })
+              update({
+                ...widget,
+                settings: { content: raw },
+                mobilization: this.props.mobilization
+              })
             }
           }}
           handleDelete={this.deleteWidget.bind(this)}

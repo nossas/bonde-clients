@@ -4,13 +4,11 @@ import * as t from '../action-types'
 import AuthSelectors from '~client/account/redux/selectors'
 import Selectors from '../selectors'
 
-export default values => (dispatch, getState, { api }) => {
+export default ({ mobilization, ...block }) => (dispatch, getState, { api }) => {
   const headers = AuthSelectors(getState()).getCredentials()
-  let { mobilization, ...block } = values
-  if (!mobilization && !Selectors(getState()).getMobilization()) {
+  mobilization = mobilization || Selectors(getState()).getMobilization()
+  if (!mobilization) {
     throw new Error('Mobilization didn`t undefined on asyncUpdateBlock action.')
-  } else if (!mobilization) {
-    mobilization = Selectors(getState()).getMobilization()
   }
 
   dispatch(createAction(t.UPDATE_BLOCK_REQUEST))
