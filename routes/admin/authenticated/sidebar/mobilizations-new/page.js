@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { browserHistory } from 'react-router'
 
 import * as paths from '~client/paths'
 import { PageTabLayout } from '~client/mobilizations/components'
@@ -19,7 +18,7 @@ const MobilizationsNewPage = props => (
       <MobilizationBasicsForm
         className='bg-white'
         onFinishSubmit={mobilization => {
-          mobilization && browserHistory.push(
+          mobilization && props.history.push(
             paths.mobilizationTemplatesChoose(mobilization)
           )
         }}
