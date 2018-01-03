@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import { NavbarButton, NavbarForm } from '~client/components/navigation/navbar'
 
-class NavbarEditionWrapper extends React.Component {
+export class NavbarEditionWrapper extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
