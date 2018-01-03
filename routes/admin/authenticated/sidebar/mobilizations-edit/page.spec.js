@@ -23,7 +23,10 @@ describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   })
 
   it('should render mobilization with editable true', () => {
-    expect(page.find(Mobilization).props()).to.deep.equal({ editable: true })
+    expect(page.find(Mobilization).props())
+      .to.have.property('editable')
+      .that.is.a('boolean')
+      .that.equals(true)
   })
 
   it('should render loading when renderIsLoading is true', () => {
