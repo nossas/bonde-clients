@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
 import Block from './block.connected'
@@ -34,7 +33,7 @@ class Mobilization extends React.Component {
   componentDidMount () {
     const { editable, mobilization, blocks, blocksIsLoaded } = this.props
     if (editable && blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
+      this.props.history.push(paths.mobilizationTemplatesChoose(mobilization))
     }
 
     if (require('exenv').canUseDOM) {
@@ -136,7 +135,7 @@ class Mobilization extends React.Component {
             <div
               className='add-new-block'
               onClick={() => {
-                browserHistory.push(
+                this.props.history.push(
                   paths.createBlock(this.props.mobilization)
                 )
               }}
