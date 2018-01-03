@@ -7,7 +7,8 @@ import { Tabs, Tab } from '~client/components/navigation/tabs'
 import { DivFloat, Button } from '~client/ux/components'
 
 const PageHeader = ({ location }) => {
-  const activePath = `${paths.mobilizations()}/`
+  const activePath = `${paths.mobilizations()}`
+  const activePathWithBar = `${activePath}/`
   const archivedPath = `${activePath}?status=archived`
   const templatesPath = paths.mobilizationTemplatesList()
 
@@ -16,6 +17,8 @@ const PageHeader = ({ location }) => {
     if (query.status) return `${pathname}?status=${query.status}`
     else return pathname
   }
+
+  const pathnameWithQuery = getPathnameWithQuery()
 
   return (
     <div>
@@ -37,7 +40,10 @@ const PageHeader = ({ location }) => {
             />
           }
           path={activePath}
-          isActive={activePath === getPathnameWithQuery()}
+          isActive={(
+            activePath === pathnameWithQuery ||
+            activePathWithBar === pathnameWithQuery
+          )}
         />
         <Tab
           text={
@@ -47,7 +53,7 @@ const PageHeader = ({ location }) => {
             />
           }
           path={{ to: activePath, search: '?status=archived' }}
-          isActive={archivedPath === getPathnameWithQuery()}
+          isActive={archivedPath === pathnameWithQuery}
         />
         <Tab
           text={
