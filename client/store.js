@@ -36,6 +36,15 @@ networkInterface.use([
   }
 ])
 
+networkInterface.useAfter([{
+  applyAfterware ({ response }, next) {
+    if (response.status === 401) {
+      logout()
+    }
+    next()
+  }
+}])
+
 export const client = (options = {}) =>
   new ApolloClient({
     ssrMode: true,
