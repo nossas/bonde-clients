@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import DevTools from '~client/components/dev-tools'
 import '~client/styles/main.scss'
 
 import { TechnicalIssues } from '~client/components/error/index.js'
@@ -22,17 +22,20 @@ import Sidebar from './subroutes/sidebar'
 import { withUser } from '~root/routes-v1/hocs'
 
 const AuthExample = () => (
-  <Router>
-    <Switch>
-      <Route exact path='/login' component={LoginPage} />
-      <Route exact path='/register' component={RegisterPage} />
-      <PrivateRoute exact path='/logout' component={Logout} />
-      <PrivateRoute exact path='/communities' component={withUser(CommunityListPage)} />
-      <PrivateRoute exect path='/communities/new' component={withUser(CommunityCreatePage)} />
-      <PrivateRoute path='/' component={withUser(Sidebar)} />
-      <Route component={TechnicalIssues} />
-    </Switch>
-  </Router>
+  <div>
+    <Router>
+      <Switch>
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/register' component={RegisterPage} />
+        <PrivateRoute exact path='/logout' component={Logout} />
+        <PrivateRoute exact path='/communities' component={withUser(CommunityListPage)} />
+        <PrivateRoute exect path='/communities/new' component={withUser(CommunityCreatePage)} />
+        <PrivateRoute path='/' component={withUser(Sidebar)} />
+        <Route component={TechnicalIssues} />
+      </Switch>
+    </Router>
+    <DevTools />
+  </div>
 )
 
 export default AuthExample
