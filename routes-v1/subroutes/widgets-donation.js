@@ -9,9 +9,12 @@ import { SettingsPageLayout, SettingsPageContentLayout } from '~client/component
 import { SettingsMenu } from '~client/mobilizations/widgets/__plugins__/donation/components'
 
 // Pages
-import DonationBasic from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected'
+import Adjustments from '~routes/admin/authenticated/sidebar/widgets-donation-settings/adjustments/page.connected'
+import Autofire from '~routes/admin/authenticated/sidebar/widgets-donation-settings/autofire/page.connected'
+import Finish from '~routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page'
+import Settings from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected'
 
-const injectProps = (Component, props) => routeProps => <Component {...routeProps} {...props} />
+const injectProps = (Component, props) => routeProps => <Component {...props} {...routeProps} />
 
 class WidgetsDonation extends React.Component {
   componentDidMount () {
@@ -24,13 +27,14 @@ class WidgetsDonation extends React.Component {
     const { match: { path }, ...rest } = this.props
     const { mobilization, widget, location, widgetsIsLoaded } = this.props
 
-    return !mobilization || !widgetsIsLoaded ? (
-      <Loading />
-    ) : (
+    return !mobilization || !widgetsIsLoaded ? <Loading /> : (
       <SettingsPageLayout>
         <SettingsMenu mobilization={mobilization} widget={widget} location={location} />
         <SettingsPageContentLayout>
-          <Route exact path={`${path}`} render={injectProps(DonationBasic, rest)} />
+          <Route exact path={`${path}`} render={injectProps(Adjustments, rest)} />
+          <Route exact path={`${path}/autofire`} render={injectProps(Autofire, rest)} />
+          <Route exact path={`${path}/finish`} render={injectProps(Finish, rest)} />
+          <Route exact path={`${path}/settings`} render={injectProps(Settings, rest)} />
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     )
