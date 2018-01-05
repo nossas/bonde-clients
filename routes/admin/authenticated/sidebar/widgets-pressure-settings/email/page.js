@@ -205,7 +205,7 @@ class PressureSettingsEmailPage extends Component {
           <ControlLabel>
             <FormattedMessage
               id='page--pressure-widget-email.form.disable-edit-field.label'
-              defaultMessage='Desabilitar edição de assuno e corpo do e-mail'
+              defaultMessage='Desabilitar edição de assunto e corpo do e-mail'
             />
           </ControlLabel>
           <RadioGroup>
