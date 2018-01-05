@@ -1,15 +1,8 @@
 export default (state, props) => ({
 
   getMobilization: () => {
-    const { list: { currentId, data } } = state.mobilizations
-    const { match } = props || {}
-
-    const mobilization = (id) => data.filter(mob => mob.id === id)[0]
-
-    if (!currentId && match && match.params && match.params.mobilization_id) {
-      return mobilization(parseInt(match.params.mobilization_id))
-    }
-    return mobilization(currentId)
+    const { list: { currentId: id, data } } = state.mobilizations
+    return id ? data.filter(mob => mob.id === id)[0] : undefined
   },
 
   mobilizationsIsLoading: () => {

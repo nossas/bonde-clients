@@ -4,13 +4,10 @@ import * as t from '../action-types'
 import AuthSelectors from '~client/account/redux/selectors'
 import Selectors from '../selectors'
 
-export default ({ mobilization, ...widget }) => (dispatch, getState, { api }) => {
+export default (widget) => (dispatch, getState, { api }) => {
   dispatch(createAction(t.UPDATE_WIDGET_REQUEST))
   const credentials = AuthSelectors(getState()).getCredentials()
-  mobilization = mobilization || Selectors(getState()).getMobilization()
-  if (!mobilization) {
-    throw new Error('Mobilization didn`t undefined on asyncUpdateWidget action.')
-  }
+  const mobilization = Selectors(getState()).getMobilization()
 
   const endpoint = `/mobilizations/${mobilization.id}/widgets/${widget.id}`
   const body = { widget }

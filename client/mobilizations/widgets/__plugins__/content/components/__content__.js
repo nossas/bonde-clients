@@ -51,8 +51,7 @@ export class Content extends Component {
               const { update, widget } = this.props
               update({
                 ...widget,
-                settings: { content: raw },
-                mobilization: this.props.mobilization
+                settings: { content: raw }
               })
             }
           }}

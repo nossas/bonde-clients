@@ -52,7 +52,7 @@ MobilizationsEditPage.propTypes = {
     id: PropTypes.number.isRequired,
     header_font: PropTypes.string,
     body_font: PropTypes.string
-  }).isRequired,
+  }),
   renderIsLoading: PropTypes.bool,
   blocks: PropTypes.array,
   blockIsLoaded: PropTypes.bool
