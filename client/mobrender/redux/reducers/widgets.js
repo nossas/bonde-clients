@@ -1,6 +1,7 @@
 import * as t from '../action-types'
 
 export const initialState = {
+  currentId: undefined,
   isLoaded: false,
   fetching: false,
   saving: false,
@@ -10,6 +11,9 @@ export const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case t.SELECT_WIDGET:
+      return { ...state, currentId: action.payload }
+
     case t.FETCH_WIDGETS_REQUEST:
     case t.FILTER_WIDGETS_REQUEST:
       return {...state,
