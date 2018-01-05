@@ -2,8 +2,11 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+// Components
+import { Loading } from '~client/components/await'
+
 // Redux
-import { selectMobilization } from '~client/mobrender/redux/action-creators'
+import { selectMobilization, asyncFetchWidgets, asyncFetchBlocks } from '~client/mobrender/redux/action-creators'
 import MobSelectors from '~client/mobrender/redux/selectors'
 
 // Pages
@@ -19,29 +22,53 @@ import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
 import WidgetsRoutes from '~root/routes-v1/subroutes/widgets'
 
-const stateToProps = (state) => ({
-  mobilization: MobSelectors(state).getMobilization()
-})
+const stateToProps = (state) => {
+  const selectors = MobSelectors(state)
+
+  return {
+    mobilization: selectors.getMobilization(),
+    blocksIsLoaded: selectors.blocksIsLoaded(),
+    widgetsIsLoaded: selectors.widgetsIsLoaded(),
+    reload: selectors.mobilizationIsNeedReload()
+  }
+}
 
 const actionsToProps = {
-  select: selectMobilization
+  select: selectMobilization,
+  fetchWidgets: asyncFetchWidgets,
+  fetchBlocks: asyncFetchBlocks
 }
 
 const InsideMobilization = connect(stateToProps, actionsToProps)(class extends React.Component {
   componentDidMount () {
+    const promises = []
     const {
+      match: { params: { mobilization_id: id } },
       mobilization,
+      blocksIsLoaded,
+      widgetsIsLoaded,
+      reload,
       select,
-      match: { params: { mobilization_id: id } }
+      fetchBlocks,
+      fetchWidgets
     } = this.props
-    if (!mobilization && id) {
-      return Promise.all([select(id)])
-    }
+
+    if (!mobilization && id) promises.push(select(id))
+    if ((!blocksIsLoaded || reload) && id) promises.push(fetchBlocks(id))
+    if ((!widgetsIsLoaded || reload) && id) promises.push(fetchWidgets(id))
+
+    return Promise.all(promises)
   }
 
   render () {
-    const { match: { path } } = this.props
-    return (
+    const {
+      match: { path },
+      mobilization,
+      blocksIsLoaded,
+      widgetsIsLoaded
+    } = this.props
+
+    return !mobilization || !blocksIsLoaded || !widgetsIsLoaded ? <Loading /> : (
       <React.Fragment>
         <Route exact path={`${path}/blocks/create`} component={BlockCreate} />
         <Route exact path={`${path}/edit`} component={MobilizationsEdit} />
@@ -51,7 +78,7 @@ const InsideMobilization = connect(stateToProps, actionsToProps)(class extends R
         <Route exact path={`${path}/templates/choose/custom`} component={TemplateChooseCustom} />
 
         <Route path={`${path}/settings`} component={MobilizationsSettings} />
-        <Route path={`${path}/widgets`} component={WidgetsRoutes} />
+        <Route path={`${path}/widgets/:widget_id`} component={WidgetsRoutes} />
       </React.Fragment>
     )
   }
