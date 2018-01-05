@@ -9,7 +9,7 @@ import { SettingsMenu } from '~client/mobilizations/widgets/__plugins__/donation
 // Pages
 import Adjustments from '~routes/admin/authenticated/sidebar/widgets-donation-settings/adjustments/page.connected'
 import Autofire from '~routes/admin/authenticated/sidebar/widgets-donation-settings/autofire/page.connected'
-import Finish from '~routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page'
+import Finish from '~routes/admin/authenticated/sidebar/widgets-donation-settings/finish/page.connected'
 import Settings from '~routes/admin/authenticated/sidebar/widgets-donation-settings/donation/page.connected'
 
 class WidgetsDonation extends React.Component {
