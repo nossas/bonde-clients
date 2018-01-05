@@ -13,6 +13,7 @@ import * as DNSControlActions from '~client/community/action-creators/dns-contro
 // SubRoutes
 import CommunitySettings from '~routes/admin/authenticated/sidebar/community-settings/container'
 import MobilizationsRoutes from '~root/routes-v1/subroutes/mobilizations'
+import TemplateList from '~routes/admin/authenticated/sidebar/templates-list/page.connected'
 import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
 
@@ -49,6 +50,11 @@ class SubRoute extends React.Component {
           exact
           path='/mobilizations/:mobilization_id/templates/choose/custom'
           component={TemplateChooseCustom}
+        />
+        <Route
+          exact
+          path='/mobilizations/templates/list'
+          component={TemplateList}
         />
       </SidebarAPI.Sidebar>
     )

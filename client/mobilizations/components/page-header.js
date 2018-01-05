@@ -14,7 +14,7 @@ const PageHeader = ({ location }) => {
 
   const getPathnameWithQuery = () => {
     const { pathname, query } = location
-    if (query.status) return `${pathname}?status=${query.status}`
+    if (query && query.status) return `${pathname}?status=${query.status}`
     else return pathname
   }
 

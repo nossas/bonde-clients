@@ -1,16 +1,18 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
+import * as mock from '~client/utils/mock'
 
 import Page from '~routes/admin/authenticated/sidebar/templates-list/page'
 
 describe('routes/admin/authenticated/sidebar/templates-list/page', () => {
   let wrapper
   const props = {
-    toggleMenu: () => {},
+    toggleMenu: mock.noop,
     menuActiveIndex: 0,
     mobilizationTemplates: [{ id: 1 }, { id: 2 }],
-    asyncDestroyTemplate: () => {},
+    asyncDestroyTemplate: mock.noop,
+    asyncFetch: mock.noop,
     location: {}
   }
 
