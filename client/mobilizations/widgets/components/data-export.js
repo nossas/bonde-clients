@@ -106,7 +106,6 @@ class DataExport extends Component {
 }
 
 DataExport.propTypes = {
-  params: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
   widget: PropTypes.object.isRequired,
