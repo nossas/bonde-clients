@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
-import { injectIntl } from 'react-intl'
-import { adjustmentsForm, AdjustmentsSettingsForm } from '~client/mobrender/widgets/adjustments'
+
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
+
+import Page from './page'
 
 const mapStateToProps = state => {
   const selectors = MobSelectors(state)
@@ -17,6 +18,4 @@ const mapDispatchToProps = {
   asyncWidgetUpdate: MobActions.asyncUpdateWidget
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(adjustmentsForm(AdjustmentsSettingsForm))
-)
+export default connect(mapStateToProps, mapDispatchToProps)(Page)

@@ -12,6 +12,7 @@ import MobSelectors from '~client/mobrender/redux/selectors'
 // Pages
 import Donation from '~root/routes-v1/subroutes/widgets-donation'
 import Form from '~root/routes-v1/subroutes/widgets-form'
+import Pressure from '~root/routes-v1/subroutes/widgets-pressure'
 
 const stateToProps = state => ({
   widget: MobSelectors(state).getWidget()
@@ -41,6 +42,7 @@ export default connect(stateToProps, actionsToProps)(class extends React.Compone
       <React.Fragment>
         <Route path={`${path}/donation`} component={Donation} />
         <Route path={`${path}/form`} component={Form} />
+        <Route path={`${path}/pressure`} component={Pressure} />
       </React.Fragment>
     )
   }
