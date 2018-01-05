@@ -2,103 +2,103 @@ export default {
   // page account login
   // filepath: /routes/admin/not-authenticated/account-login/page.js
   // routepath: /login
-  'page--account-login.label.email': 'Correo electrónico',
-  'page--account-login.label.password': 'Contraseña',
-  'page--account-login.placeholder.email': 'ejemplo@email.com',
-  'page--account-login.loading': 'Cargando...',
-  'page--account-login.signin': 'Iniciar sesión',
-  'page--account-login.ask-register': '¿Todavía no te has inscrito?',
-  'page--account-login.cta-signup': 'Haz click para entrar a BONDE',
-  'page--account-login.auth.error-message': 'Contraseña incorrecta...',
-  'page--account-login.auth.error-message.retrieve-password.link': '¿Olvidaste tu contraseña?',
+    "page--account-login.label.email": "Correo electrónico",
+    "page--account-login.label.password": "Contraseña",
+    "page--account-login.placeholder.email": "ejemplo@email.com",
+    "page--account-login.loading": "Cargando...",
+    "page--account-login.signin": "Iniciar sesión",
+    "page--account-login.ask-register": "¿Todavía no te has inscrito?",
+    "page--account-login.cta-signup": "Haz click para entrar a BONDE",
+    "page--account-login.auth.error-message": "Contraseña incorrecta...",
+    "page--account-login.auth.error-message.retrieve-password.link": "¿Olvidaste tu contraseña?",
 
   // page account login (connected)
   // filepath: /routes/admin/not-authenticated/account-login/page.connected.js
   // routepath: /login
-  'p--account-login.form.email.validation.required': 'Ingresa tu correo electrónico',
-  'p--account-login.form.email.validation.invalid': 'Correo electrónico inválido',
-  'p--account-login.form.password.validation.required': 'Ingresa tu contraseña',
+    "p--account-login.form.email.validation.required": "Ingresa tu correo electrónico",
+    "p--account-login.form.email.validation.invalid": "Correo electrónico inválido",
+    "p--account-login.form.password.validation.required": "Ingresa tu contraseña",
 
   // page account register
   // filepath: /routes/admin/not-authenticated/account-register/page.js
   // routepath: /register
-  'page--account-register.title': 'Crea tu cuenta en BONDE',
-  'p--account-retrieve.title.first-line': 'Tranquilo, vamos a mandarte una nueva contraseña :)',
-  'p--account-retrieve.title.second-line': 'Llena el campo acá abajo con tu correo electrónico de ingreso',
-  'page--account-register.form.name.label': 'Nombre',
-  'page--account-register.form.name.placeholder': 'Tu nombre',
-  'page--account-register.form.name.validation.required': 'Ingresa tu nombre',
-  'page--account-register.form.lastname.label': 'Apellido',
-  'page--account-register.form.lastname.placeholder': 'Tu apellido',
-  'page--account-register.form.email.label': 'Correo electrónico',
-  'page--account-register.form.email.placeholder': 'ejemplo@email.com',
-  'page--account-register.form.email.validation.required': 'Ingresa tu correo electrónico ',
-  'page--account-register.form.email.validation.invalid-email-format': 'Correo electrónico inválido',
-  'page--account-register.form.password.label': 'Contraseña',
-  'page--account-register.form.password.label.validation.required': 'Crea una contrseña',
-  'page--account-register.form.password.label.validation.min-length': 'Tu contraseña debe tener al menos 8 caracteres',
-  'page--account-register.form.password-confirm.label': 'Confirma tu constraseña',
-  'page--account-register.form.password-confirm.label.validation.match': 'Oops, ¡las constraseñas no coinciden!',
-  'page--account-register.form.submit-button.default': 'Crear cuenta',
-  'page--account-register.form.submit-button.saving': 'Guardando...',
+  "page--account-register.title": "Crea tu cuenta en BONDE",
+  "p--account-retrieve.title.first-line": "Tranquilo, vamos a mandarte una nueva contraseña :)",
+  "p--account-retrieve.title.second-line": "Llena el campo acá abajo con tu correo electrónico de ingreso",
+  "page--account-register.form.name.label": "Nombre",
+  "page--account-register.form.name.placeholder": "Tu nombre",
+  "page--account-register.form.name.validation.required": "Ingresa tu nombre",
+  "page--account-register.form.lastname.label": "Apellido",
+  "page--account-register.form.lastname.placeholder": "Tu apellido",
+  "page--account-register.form.email.label": "Correo electrónico",
+  "page--account-register.form.email.placeholder": "ejemplo@email.com",
+  "page--account-register.form.email.validation.required": "Ingresa tu correo electrónico ",
+  "page--account-register.form.email.validation.invalid-email-format": "Correo electrónico inválido",
+  "page--account-register.form.password.label": "Contraseña",
+  "page--account-register.form.password.label.validation.required": "Crea una contrseña",
+  "page--account-register.form.password.label.validation.min-length": "Tu contraseña debe tener al menos 8 caracteres",
+  "page--account-register.form.password-confirm.label": "Confirma tu constraseña",
+  "page--account-register.form.password-confirm.label.validation.match": "Oops, ¡las constraseñas no coinciden!",
+  "page--account-register.form.submit-button.default": "Crear cuenta",
+  "page--account-register.form.submit-button.saving": "Guardando...",
 
   // page account retrieve password
   // filepath: /routes/admin/not-authenticated/account-retrieve/page.connected.js
   // routepath: /account/retrieve
-  'p--account-retrieve.form.email.validation.required': 'Ingresa tu correo electrónico',
-  'p--account-retrieve.form.email.validation.invalid-email-format': 'Correo electrónico inválido',
-  'p--account-retrieve.form.email.label': 'Correo electrónico',
-  'p--account-retrieve.form.email.placeholder': 'ejemplo@email.com',
-  'p--account-retrieve.form.submit-button.sending': 'Enviando...',
-  'p--account-retrieve.form.submit-button.default': 'Enviar',
+  "p--account-retrieve.form.email.validation.required": "Ingresa tu correo electrónico",
+  "p--account-retrieve.form.email.validation.invalid-email-format": "Correo electrónico inválido",
+  "p--account-retrieve.form.email.label": "Correo electrónico",
+  "p--account-retrieve.form.email.placeholder": "ejemplo@email.com",
+  "p--account-retrieve.form.submit-button.sending": "Enviando...",
+  "p--account-retrieve.form.submit-button.default": "Enviar",
 
   // page account edit
   // filepath: /routes/admin/authenticated/sidebar/account-edit/page.js
   // routepath: /account/edit
-  'page--account-edit.header.title': 'Tu cuenta',
-  'page--account-edit.header.tabs.user': 'Perfil',
-  'page--account-edit.form.name.label': 'Nombre',
-  'page--account-edit.form.lastname.label': 'Apellido',
-  'page--account-edit.form.email.label': 'Correo electrónico',
+  "page--account-edit.header.title": "Tu cuenta",
+  "page--account-edit.header.tabs.user": "Perfil",
+  "page--account-edit.form.name.label": "Nombre",
+  "page--account-edit.form.lastname.label": "Apellido",
+  "page--account-edit.form.email.label": "Correo electrónico",
 
   // page subscription edit
   // filepath: /routes/public/subscription-edit/page.js
   // routepath: /subscriptions/:id/edit
-  'page--subscription-edit.title': 'Tu donación',
-  'page--subscription-edit.helper-text': '¿Qué quieres modificar de tu donación?',
-  'page--subscription-edit.button.creditcard': 'Tarjeta de crédito',
-  'page--subscription-edit.button.recurring': 'Información de la donación',
-  'page--subscription-edit.cancel-subscription.confirm': 'Estás a punto de cancelar tu apoyo. ¿Estás seguro de querer continuar?',
-  'page--subscription-edit.link.cancel-subscription': 'Quiero cancelar mi donación',
+  "page--subscription-edit.title": "Tu donación",
+  "page--subscription-edit.helper-text": "¿Qué quieres modificar de tu donación?",
+  "page--subscription-edit.button.creditcard": "Tarjeta de crédito",
+  "page--subscription-edit.button.recurring": "Información de la donación",
+  "page--subscription-edit.cancel-subscription.confirm": "Estás a punto de cancelar tu apoyo. ¿Estás seguro de querer continuar?",
+  "page--subscription-edit.link.cancel-subscription": "Quiero cancelar mi donación",
 
   // form subscription credit card
   // filepath: /client/subscriptions/forms/credit-card-form.js
   // routepath: /subscriptions/:id/edit
-  'form--subscription-creditcard.helper-text': 'Llena los campos acá abajo para cambiar la tarjeta de tu donación:',
-  'form--subscription-creditcard.previous-data.title': 'Datos de la tarjeta anterior',
-  'form--subscription-creditcard.previous-data.name': 'Nombre',
-  'form--subscription-creditcard.previous-data.expiration-date': 'Fecha de expiración',
+  "form--subscription-creditcard.helper-text": "Llena los campos acá abajo para cambiar la tarjeta de tu donación:",
+  "form--subscription-creditcard.previous-data.title": "Datos de la tarjeta anterior",
+  "form--subscription-creditcard.previous-data.name": "Nombre",
+  "form--subscription-creditcard.previous-data.expiration-date": "Fecha de expiración",
 
-  'form--subscription-creditcard.form.number.label': 'Número',
-  'form--subscription-creditcard.form.number.placeholder': 'Ejm: 0000 0000 0000 0000',
-  'form--subscription-creditcard.form.name.label': 'Nombre',
-  'form--subscription-creditcard.form.name.placeholder': '(igual que el que aparece en la tarjeta)',
-  'form--subscription-creditcard.form.expiration-date.label': 'Fecha de expiración',
-  'form--subscription-creditcard.form.expiration-date.placeholder': '00/00',
-  'form--subscription-creditcard.form.cvv.label': 'CVV',
-  'form--subscription-creditcard.form.cvv.placeholder': 'Ejm: 000',
-  'form--subscription-creditcard.form.submit-button.text': 'Guardar',
-  'form--subscription-creditcard.form.validation.required': 'Obligatorio',
+  "form--subscription-creditcard.form.number.label": "Número",
+  "form--subscription-creditcard.form.number.placeholder": "Ejm: 0000 0000 0000 0000",
+  "form--subscription-creditcard.form.name.label": "Nombre",
+  "form--subscription-creditcard.form.name.placeholder": "(igual que el que aparece en la tarjeta)",
+  "form--subscription-creditcard.form.expiration-date.label": "Fecha de expiración",
+  "form--subscription-creditcard.form.expiration-date.placeholder": "00/00",
+  "form--subscription-creditcard.form.cvv.label": "CVV",
+  "form--subscription-creditcard.form.cvv.placeholder": "Ejm: 000",
+  "form--subscription-creditcard.form.submit-button.text": "Guardar",
+  "form--subscription-creditcard.form.validation.required": "Obligatorio",
 
   // form subscription recurring
   // filepath: /client/subscriptions/forms/recurring-form.js
   // routepath: /subscriptions/:id/edit
-  'form--subscription-recurring.helper-text': 'Llena los campos acá abajo para modificar el día del mes en que tu donación recurrente es procesada:',
-  'form--subscription-recurring.form.process-at.label': 'Nueva fecha',
-  'form--subscription-recurring.form.process-at.placeholder': 'Ejm: DD/MM/AAAA',
-  'form--subscription-recurring.form.submit-button.text': 'Guardar',
-  'form--subscription-recurring.form.validation.required': 'Obligatorio',
-  'form--subscription-recurring.form.validation.invalid-date-format': 'Formato de fecha inválido', 
+  "form--subscription-recurring.helper-text": "Llena los campos acá abajo para modificar el día del mes en que tu donación recurrente es procesada:",
+  "form--subscription-recurring.form.process-at.label": "Nueva fecha",
+  "form--subscription-recurring.form.process-at.placeholder": "Ejm: DD/MM/AAAA",
+  "form--subscription-recurring.form.submit-button.text": "Guardar",
+  "form--subscription-recurring.form.validation.required": "Obligatorio",
+  "form--subscription-recurring.form.validation.invalid-date-format": "Formato de fecha inválido", 
 
   // notifications
   // filepath: /client/utils/notifications.js
@@ -108,25 +108,25 @@ export default {
   //   - /mobilizations/new
   //   - /subscriptions/:id/edit
   //   - /community/invite
-  'notification--generic-request-error.title': '¡Oops!',
-  'notification--generic-request-error.message': 'Asegúrate de haber llenado bien los campos, si el problema persiste vuelve a intentar dentro de un rato ;)',
+  "notification--generic-request-error.title": "¡Oops!",
+  "notification--generic-request-error.message": "Asegúrate de haber llenado bien los campos, si el problema persiste vuelve a intentar dentro de un rato ;)",
 
-  'notification--generic-save-success.title': '¡Listo!',
-  'notification--generic-save-success.message': 'Los datos han sido guardados exitosamente :)',
-  'notification--slug-updated-message.title': 'Importante',
-  'notification--slug-updated-message.message': 'El identificador (slug) de tu página fue modificado.  Si realizas alguna redirección de DNS via CNAME, no te olvides de actualizarlo.',
+  "notification--generic-save-success.title": "¡Listo!",
+  "notification--generic-save-success.message": "Los datos han sido guardados exitosamente :)",
+  "notification--slug-updated-message.title": "Importante",
+  "notification--slug-updated-message.message": "El identificador (slug) de tu página fue modificado.  Si realizas alguna redirección de DNS via CNAME, no te olvides de actualizarlo.",
 
-  'notification--message-pressure-targets-remove-all.title': 'Atención',
-  'notification--message-pressure-targets-remove-all.message': 'Recuerda que debes hacer click en el botón guardar, en la esquina superior derecha de la pantalla, para que los objetivos sean actualizados en la herramienta ;)',
+  "notification--message-pressure-targets-remove-all.title": "Atención",
+  "notification--message-pressure-targets-remove-all.message": "Recuerda que debes hacer click en el botón guardar, en la esquina superior derecha de la pantalla, para que los objetivos sean actualizados en la herramienta ;)",
 
-  'notification--account-password-retrieve-success.title': '¡Listo!',
-  'notification--account-password-retrieve-success.message': 'Acabamos de mandarte un correo con una nueva contraseña. Revisa el buzón de entrada de tu correo y usa la nueva contraseña para iniciar sesión ;)',
+  "notification--account-password-retrieve-success.title": "¡Listo!",
+  "notification--account-password-retrieve-success.message': "Acabamos de mandarte un correo con una nueva contraseña. Revisa el buzón de entrada de tu correo y usa la nueva contraseña para iniciar sesión ;)",
 
-  'notification--community-invite-success.title': '¡Listo!',
-  'notification--community-invite-success.message': '¡La invitación para {correo electrónico} fue enviada exitosamente! Tu BONDE está creciendo :)',
+  "notification--community-invite-success.title": "¡Listo!",
+  "notification--community-invite-success.message": "¡La invitación para {correo electrónico} fue enviada exitosamente! Tu BONDE está creciendo :)",
 
-  'notification--subscription-cancel-success.title': 'Suscripción cancelada',
-  'notification--subscription-cancel-success.message': 'Gracias por tu apoyo hasta aquí - ¡y esperamos que nos vuelvas a apoyar nuevamente! ',
+  "notification--subscription-cancel-success.title": "Suscripción cancelada",
+  "notification--subscription-cancel-success.message": "Gracias por tu apoyo hasta aquí - ¡y esperamos que nos vuelvas a apoyar nuevamente! ",
 
   // community dns notifications
   // filepath: /client/community/notifications/dns.js
