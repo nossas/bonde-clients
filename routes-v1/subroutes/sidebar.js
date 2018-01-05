@@ -15,7 +15,6 @@ import CommunitySettings from '~routes/admin/authenticated/sidebar/community-set
 import MobilizationsRoutes from '~root/routes-v1/subroutes/mobilizations'
 import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
-import BlockCreate from '~routes/admin/authenticated/sidebar/blocks-create/page.connected'
 
 class SubRoute extends React.Component {
   componentDidMount () {
@@ -50,11 +49,6 @@ class SubRoute extends React.Component {
           exact
           path='/mobilizations/:mobilization_id/templates/choose/custom'
           component={TemplateChooseCustom}
-        />
-        <Route
-          exact
-          path='/mobilizations/:mobilization_id/blocks/create'
-          component={BlockCreate}
         />
       </SidebarAPI.Sidebar>
     )

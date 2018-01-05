@@ -90,7 +90,7 @@ class BlocksCreatePage extends Component {
               <ColorPicker
                 color={this.state.color}
                 onChangeColor={color => this.setState({ color: color.rgb })}
-                theme={colorScheme.replace('-scheme', '')}
+                theme={colorScheme && colorScheme.replace('-scheme', '')}
                 className='left'
               />
               <div
