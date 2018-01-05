@@ -1,9 +1,11 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+
 // Redux
 import { selectMobilization } from '~client/mobrender/redux/action-creators'
 import MobSelectors from '~client/mobrender/redux/selectors'
+
 // Pages
 import MobilizationList from '~routes/admin/authenticated/sidebar/mobilizations-list/page.connected'
 import MobilizationsNew from '~routes/admin/authenticated/sidebar/mobilizations-new/page.connected'
@@ -15,6 +17,7 @@ import BlockCreate from '~routes/admin/authenticated/sidebar/blocks-create/page.
 import TemplateList from '~routes/admin/authenticated/sidebar/templates-list/page.connected'
 import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
+import WidgetsRoutes from '~root/routes-v1/subroutes/widgets'
 
 const stateToProps = (state) => ({
   mobilization: MobSelectors(state).getMobilization()
@@ -48,6 +51,7 @@ const InsideMobilization = connect(stateToProps, actionsToProps)(class extends R
         <Route exact path={`${path}/templates/choose/custom`} component={TemplateChooseCustom} />
 
         <Route path={`${path}/settings`} component={MobilizationsSettings} />
+        <Route path={`${path}/widgets`} component={WidgetsRoutes} />
       </React.Fragment>
     )
   }
