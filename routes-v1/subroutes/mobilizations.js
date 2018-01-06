@@ -18,6 +18,7 @@ import MobilizationsLaunchEnd from '~routes/admin/authenticated/sidebar/mobiliza
 import MobilizationsSettings from '~root/routes-v1/subroutes/mobilizations-settings'
 import BlockCreate from '~routes/admin/authenticated/sidebar/blocks-create/page.connected'
 import TemplateList from '~routes/admin/authenticated/sidebar/templates-list/page.connected'
+import TemplateCreate from '~routes/admin/authenticated/sidebar/templates-create/page.connected'
 import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
 import WidgetsRoutes from '~root/routes-v1/subroutes/widgets'
@@ -74,6 +75,7 @@ const InsideMobilization = connect(stateToProps, actionsToProps)(class extends R
         <Route exact path={`${path}/edit`} component={MobilizationsEdit} />
         <Route exact path={`${path}/launch`} component={MobilizationsLaunch} />
         <Route exact path={`${path}/launch/end`} component={MobilizationsLaunchEnd} />
+        <Route exact path={`${path}/templates/create`} component={TemplateCreate} />
         <Route exact path={`${path}/templates/choose`} component={TemplateChoose} />
         <Route exact path={`${path}/templates/choose/custom`} component={TemplateChooseCustom} />
 
