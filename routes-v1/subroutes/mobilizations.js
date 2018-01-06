@@ -63,13 +63,15 @@ const InsideMobilization = connect(stateToProps, actionsToProps)(class extends R
 
   render () {
     const {
-      match: { path },
+      match: { path, params: { mobilization_id: id } },
       mobilization,
       blocksIsLoaded,
       widgetsIsLoaded
     } = this.props
 
-    return !mobilization || !blocksIsLoaded || !widgetsIsLoaded ? <Loading /> : (
+    const hasId = id && !isNaN(id)
+
+    return (!mobilization || !blocksIsLoaded || !widgetsIsLoaded) && hasId ? <Loading /> : (
       <React.Fragment>
         <Route exact path={`${path}/blocks/create`} component={BlockCreate} />
         <Route exact path={`${path}/edit`} component={MobilizationsEdit} />
