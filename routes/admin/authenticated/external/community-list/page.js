@@ -26,7 +26,7 @@ class CommunityListPage extends Component {
   render () {
     const { isLoading, isLoaded, communities, user } = this.props
 
-    return isLoading || user === undefined ? <Loading /> : (
+    return isLoading ? <Loading /> : (
       <BondeBackground
         contentSize={3}
         alignment={{ x: 'center', y: 'top' }}
@@ -82,7 +82,7 @@ CommunityListPage.propTypes = {
   isLoaded: PropTypes.bool,
   isLoading: PropTypes.bool,
   communities: PropTypes.array,
-  user: PropTypes.object,
+  user: PropTypes.object.isRequired,
   // Actions
   select: PropTypes.func.isRequired
 }
