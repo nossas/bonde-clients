@@ -1,3 +1,6 @@
+//
+// @route /community/recipient
+//
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createForm, getValues, Field } from '~client/storybook/forms'

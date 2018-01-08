@@ -13,7 +13,8 @@
     "build:client": "./node_modules/.bin/webpack --colors --hide-modules --bail -p --config ./tools/webpack.prod.js",
     "build:webviewer": "./node_modules/.bin/webpack --colors --hide-modules --bail --config ./tools/webpack.webviewer.js",
     "clean": "rm -rf build",
-    "routes": "grep -rhe @path ./routes/ | sort",
+    "routes": "grep -rhe @route ./routes/ | sort",
+    "routes-old": "grep -rhe @path ./routes/ | sort",
     "release": "./node_modules/.bin/standard-version",
     "precommit": "lint-staged",
     "storybook": "start-storybook -p 9001 -c ./client/storybook"

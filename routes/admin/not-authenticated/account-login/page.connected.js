@@ -1,3 +1,6 @@
+//
+// @route /login
+//
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'

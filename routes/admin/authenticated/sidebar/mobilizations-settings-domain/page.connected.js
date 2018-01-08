@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/customDomain
+//
 import { connect } from 'react-redux'
 
 import MobSelectors from '~client/mobrender/redux/selectors'

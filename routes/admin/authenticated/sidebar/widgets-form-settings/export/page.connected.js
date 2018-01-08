@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/form/export
+//
 import { connect } from 'react-redux'
 import { asyncWidgetDataExport, dataExportMount } from '~client/mobrender/redux/action-creators'
 import MobSelectors from '~client/mobrender/redux/selectors'

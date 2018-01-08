@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/templates/create
+//
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'

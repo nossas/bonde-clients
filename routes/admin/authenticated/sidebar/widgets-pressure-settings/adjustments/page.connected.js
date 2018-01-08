@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/pressure
+//
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import { adjustmentsForm, AdjustmentsSettingsForm } from '~client/mobrender/widgets/adjustments'

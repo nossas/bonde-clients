@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
+//
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'

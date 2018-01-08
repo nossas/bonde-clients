@@ -1,3 +1,6 @@
+//
+// @route /community/new
+//
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import * as CommunityActions from '~client/community/action-creators'

@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/edit
+//
 import { connect } from 'react-redux'
 
 import { selectMobilization, asyncFetchBlocks, asyncFetchWidgets } from '~client/mobrender/redux/action-creators'

@@ -5,10 +5,11 @@ import FetchCurrentUser from '~client/account/queries/current-user'
 import { connect } from 'react-redux'
 import { load } from '~client/account/redux/action-creators'
 import { Loading } from '~client/components/await'
+
 // Routes
 import CommunityListPage from '~routes/admin/authenticated/external/community-list/page.connected'
 import CommunityCreatePage from '~routes/admin/authenticated/external/community-new/page.connected'
-import LogoutPage from '~routes/admin/authenticated/logout/page.connected.js'
+import LogoutPage from '~routes/admin/authenticated/logout/page.connected'
 import SidebarRoute from './sidebar'
 import PrivateRoute from '~root/routes-v1/private-route'
 

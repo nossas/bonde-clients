@@ -1,3 +1,6 @@
+//
+// @route /community/info
+//
 import React from 'react'
 import { createForm, Field } from '~client/storybook/forms'
 import {

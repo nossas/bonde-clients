@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/pressure/autofire
+//
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { fields, validate } from '~client/mobilizations/widgets/components/form-autofire'

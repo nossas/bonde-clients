@@ -1,3 +1,6 @@
+//
+// @route /community/report
+//
 import { connect } from 'react-redux'
 
 import * as CommunityActions from '~client/community/action-creators'

@@ -1,3 +1,6 @@
+//
+// @route /community/mailchimp
+//
 // New File
 import React from 'react'
 import { createForm, Field } from '~client/storybook/forms'

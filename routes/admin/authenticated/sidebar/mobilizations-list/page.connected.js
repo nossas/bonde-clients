@@ -1,3 +1,6 @@
+//
+// @route /mobilizations
+//
 import { connect } from 'react-redux'
 import qs from 'query-string'
 import MobSelectors from '~client/mobrender/redux/selectors'

@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Route } from 'react-router-dom'
+
+// Components
 import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
 import { SettingsMenu } from '~client/community/components'
+
+// Pages
 import InfoPage from './info/page.connected'
 import InvitePage from './invite/page.connected'
 import DomainPage from './domain/page.connected'

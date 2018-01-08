@@ -15,12 +15,14 @@ import MobilizationsNew from '~routes/admin/authenticated/sidebar/mobilizations-
 import MobilizationsEdit from '~routes/admin/authenticated/sidebar/mobilizations-edit/page.connected'
 import MobilizationsLaunch from '~routes/admin/authenticated/sidebar/mobilizations-launch/page.connected'
 import MobilizationsLaunchEnd from '~routes/admin/authenticated/sidebar/mobilizations-launch-end/page.connected'
-import MobilizationsSettings from '~root/routes-v1/subroutes/mobilizations-settings'
 import BlockCreate from '~routes/admin/authenticated/sidebar/blocks-create/page.connected'
 import TemplateList from '~routes/admin/authenticated/sidebar/templates-list/page.connected'
 import TemplateCreate from '~routes/admin/authenticated/sidebar/templates-create/page.connected'
 import TemplateChoose from '~routes/admin/authenticated/sidebar/templates-choose/page.connected'
 import TemplateChooseCustom from '~routes/admin/authenticated/sidebar/templates-choose-custom/page.connected'
+
+// SubRoutes
+import MobilizationsSettings from '~root/routes-v1/subroutes/mobilizations-settings'
 import WidgetsRoutes from '~root/routes-v1/subroutes/widgets'
 
 const stateToProps = (state) => {

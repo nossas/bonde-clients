@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/donation/settings
+//
 import { connect } from 'react-redux'
 import { donationForm, DonationSettingsForm } from '~client/mobrender/widgets/donations'
 import MobSelectors from '~client/mobrender/redux/selectors'
