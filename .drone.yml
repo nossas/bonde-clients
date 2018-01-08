@@ -14,7 +14,6 @@ pipeline:
 
   build-client-staging:
     image: node:latest
-    group: concurrent-build
     environment:
       - NODE_ENV=production
       - API_URL=https://api.staging.bonde.org
@@ -35,7 +34,6 @@ pipeline:
 
   build-server-staging:
     image: node:latest
-    group: concurrent-build
     environment:
       - NODE_ENV=production
       - API_URL=https://api.staging.bonde.org
