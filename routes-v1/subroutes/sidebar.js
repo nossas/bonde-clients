@@ -13,6 +13,7 @@ import * as DNSControlActions from '~client/community/action-creators/dns-contro
 // SubRoutes
 import CommunitySettings from '~routes/admin/authenticated/sidebar/community-settings/container'
 import MobilizationsRoutes from '~root/routes-v1/subroutes/mobilizations'
+import AccountPage from '~routes/admin/authenticated/sidebar/account-edit/page.connected'
 
 class SubRoute extends React.Component {
   componentDidMount () {
@@ -38,6 +39,7 @@ class SubRoute extends React.Component {
       <SidebarAPI.Sidebar {...this.props.sidebarProps}>
         <Route path='/community' component={CommunitySettings} />
         <Route path='/mobilizations' component={MobilizationsRoutes} />
+        <Route exact path='/account/edit' component={AccountPage} />
       </SidebarAPI.Sidebar>
     )
   }
