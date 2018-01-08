@@ -7,6 +7,7 @@ import { load } from '~client/account/redux/action-creators'
 import { Loading } from '~client/components/await'
 
 // Routes
+import Bot from '~routes/admin/authenticated/external/bot/page'
 import CommunityListPage from '~routes/admin/authenticated/external/community-list/page.connected'
 import CommunityCreatePage from '~routes/admin/authenticated/external/community-new/page.connected'
 import LogoutPage from '~routes/admin/authenticated/logout/page.connected'
@@ -23,6 +24,11 @@ class Logged extends React.Component {
   render () {
     return this.props.loading ? <Loading /> : (
       <Switch>
+        <PrivateRoute
+          exact
+          path='/bot'
+          component={Bot}
+        />
         <PrivateRoute
           exact
           path='/communities'

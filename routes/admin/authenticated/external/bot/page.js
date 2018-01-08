@@ -1,3 +1,6 @@
+//
+// @route /bot
+//
 import React, { Component } from 'react'
 
 import { Background } from '~client/components/layout'
