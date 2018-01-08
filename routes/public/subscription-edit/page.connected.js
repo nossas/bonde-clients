@@ -1,42 +1,35 @@
-import { provideHooks } from 'redial'
+//
+// @route /subscriptions/:id/edit
+//
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import qs from 'query-string'
 import {
   asyncSubscriptionDelete,
   asyncSubscriptionFetch,
-  setModificationType,
-  appendAnimationStack,
-  removeAnimationStack
+  setModificationType
 } from '~client/subscriptions/redux/action-creators'
 import SubscriptionEditSelectors from '~client/subscriptions/redux/selectors/edit'
+import AwaitSelectors from '~client/components/await/redux/selectors'
 import Page from './page'
 
-const redial = {
-  fetch: ({ dispatch, params, query }) => {
-    return dispatch(asyncSubscriptionFetch({
-      id: params.id,
-      token: query.token
-    }))
-  }
-}
-
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   const selectors = SubscriptionEditSelectors(state)
+  const { location: { search } } = props
+
   return {
     modificationType: selectors.getModificationType(),
-    animationStack: selectors.getAnimationStack(),
-    url: state.sourceRequest.url,
-    card: selectors.getCard()
+    card: selectors.getCard(),
+    query: qs.parse(search),
+    data: selectors.getData(),
+    loading: AwaitSelectors(state).getLoading()
   }
 }
 
 const mapDispatchToProps = {
   asyncSubscriptionDelete,
   setModificationType,
-  appendAnimationStack,
-  removeAnimationStack
+  asyncSubscriptionFetch
 }
 
-export default provideHooks(redial)(
-  connect(mapStateToProps, mapDispatchToProps)(injectIntl(Page))
-)
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Page))
