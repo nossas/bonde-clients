@@ -29,6 +29,15 @@ module.exports = {
         exclude: /(node_modules|wysihtml-toolbar.min)/
       },
       {
+        test: /\.css$/,
+        use: [{
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1
+          }
+        }]
+      },
+      {
         test: /\.(png|jpg)$/,
         use: [{
           loader: 'file-loader',
