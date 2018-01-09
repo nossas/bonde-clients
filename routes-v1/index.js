@@ -7,6 +7,7 @@ import { TechnicalIssues } from '~client/components/error/index.js'
 // Page
 import LoginPage from '~routes/admin/not-authenticated/account-login/page.connected'
 import RegisterPage from '~routes/admin/not-authenticated/account-register/page.connected'
+import AccountRetrievePage from '~routes/admin/not-authenticated/account-retrieve/page.connected'
 import SubscriptionEditPage from '~routes/public/subscription-edit/page.connected'
 
 // Route
@@ -18,6 +19,7 @@ const AuthExample = () => (
       <Switch>
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/register' component={RegisterPage} />
+        <Route exact path='/account/retrieve' component={AccountRetrievePage} />
         <Route exact path='/subscriptions/:id/edit' component={SubscriptionEditPage} />
         <Route path='/' component={LoggedRoute} />
         <Route component={TechnicalIssues} />
