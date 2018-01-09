@@ -16,7 +16,7 @@ const initialState = {
   currentLocale: locale,
   defaultLocale: null,
   locales: [],
-  messages 
+  messages
 }
 
 export const reducer = (state = initialState, action = {}) => {

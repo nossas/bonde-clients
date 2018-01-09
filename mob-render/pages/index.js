@@ -35,7 +35,6 @@ class Page extends React.Component {
         ? { slug: regex[1].replace(/^www\./, '') }
         : { custom_domain: host }
 
-      const promises = []
       await dispatch(asyncFilterMobilization(where))
       await dispatch(asyncFilterBlock(where))
       await dispatch(asyncFilterWidget(where))
