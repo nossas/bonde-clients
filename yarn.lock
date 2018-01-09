@@ -6562,10 +6562,6 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "~3.0.0"
 
-lodash.throttle@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
-
 lodash.toplainobject@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash.toplainobject/-/lodash.toplainobject-3.0.0.tgz#28790ad942d293d78aa663a07ecf7f52ca04198d"
@@ -8556,7 +8552,17 @@ react-router@^4, react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-s3-uploader@^4.0.1, react-s3-uploader@^4.6.1:
+react-s3-uploader@^4.6.0:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.6.2.tgz#3cbbcb9ebbef578f6b3504f1a901579eff055a98"
+  dependencies:
+    aws-sdk "2.x"
+    create-react-class "^15.5.2"
+    object-assign "^2.0.0"
+    prop-types "^15.5.8"
+    uuid "^3.1.0"
+
+react-s3-uploader@^4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/react-s3-uploader/-/react-s3-uploader-4.6.1.tgz#a692adc5b31f37902cd58f304c9629ed3ff2d181"
   dependencies:
@@ -9451,9 +9457,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.18:
-  version "0.2.18"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.18.tgz#ef2a330f7cb1759b1dd5c8aa74eea496fb890372"
+slate-base64-serializer@^0.2.13:
+  version "0.2.19"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.19.tgz#2b9a40b964cc1429fc201796f497338092381e3a"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -9473,25 +9479,31 @@ slate-editor@nossas/slate-editor#feature-slate-v0.31.3:
     react-color "^2.13.8"
     react-draggable "^3"
     react-fontawesome "^1.6.1"
-    react-s3-uploader "^4.0.1"
-    slate "^0.31.3"
-    slate-react "^0.10.17"
+    react-s3-uploader "^4.6.0"
+    slate "0.31.3"
+    slate-react "0.10.17"
 
-slate-plain-serializer@^0.4.16:
+slate-plain-serializer@0.4.11:
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.4.11.tgz#824d1f55737d6a1f3772a909c9ca06b539acae11"
+  dependencies:
+    slate-dev-logger "^0.1.36"
+
+slate-plain-serializer@^0.4.11:
   version "0.4.16"
   resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.4.16.tgz#eff277b58943e130905114c7da431ab307cb4c1e"
   dependencies:
     slate-dev-logger "^0.1.36"
 
-slate-prop-types@^0.4.16:
-  version "0.4.16"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.16.tgz#651540107da22538a88c396d12262289133c72db"
+slate-prop-types@^0.4.11:
+  version "0.4.17"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.17.tgz#0a3681b4ddc9e39220a9ed71e2fa0b9d525848d1"
   dependencies:
     slate-dev-logger "^0.1.36"
 
-slate-react@^0.10.17:
-  version "0.10.23"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.10.23.tgz#f1e58af4c58d98ace68080b181a24b850683b8e1"
+slate-react@0.10.17:
+  version "0.10.17"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.10.17.tgz#450a43a43c245212e0104aa2feb038b98b99de5f"
   dependencies:
     debug "^2.3.2"
     get-window "^1.1.1"
@@ -9499,19 +9511,18 @@ slate-react@^0.10.17:
     is-in-browser "^1.1.3"
     is-window "^1.0.2"
     keycode "^2.1.2"
-    lodash.throttle "^4.1.1"
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     react-portal "^3.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.18"
+    slate-base64-serializer "^0.2.13"
     slate-dev-logger "^0.1.36"
-    slate-plain-serializer "^0.4.16"
-    slate-prop-types "^0.4.16"
+    slate-plain-serializer "^0.4.11"
+    slate-prop-types "^0.4.11"
 
-slate@^0.31.3:
-  version "0.31.8"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.31.8.tgz#d93fd397bcceb2b5eb2e1cbafa20643044230d63"
+slate@0.31.3:
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.31.3.tgz#21f95a1484a5a13937e33fd5a1aca1b34edf44f8"
   dependencies:
     debug "^2.3.2"
     direction "^0.1.5"
