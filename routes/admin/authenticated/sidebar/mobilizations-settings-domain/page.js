@@ -1,18 +1,17 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage } from 'react-intl'
 
 import { SettingsForm } from '~client/ux/components'
 import { FormDomain } from '~client/mobilizations/components'
 import * as paths from '~client/paths'
 
-const MobilizationsSettingsDomainPage = ({ location, mobilization, ...formProps }) => {
+const MobilizationsSettingsDomainPage = ({ location, history, mobilization, ...formProps }) => {
   return (
     <FormDomain
       {...formProps}
       mobilization={mobilization}
       formComponent={SettingsForm}
-      redirectToCreateDNS={() => browserHistory.push(paths.communityDomainCreate())}
+      redirectToCreateDNS={() => history.push(paths.communityDomainCreate())}
       successMessage={
         <FormattedMessage
           id='page--mobilizations-domain.form-domain.success-message'
