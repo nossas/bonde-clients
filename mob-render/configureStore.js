@@ -21,7 +21,7 @@ export default (initialState, options) => {
   return createStore(
     createReducer({
       sourceRequest: sourceReqCreateReducer({
-        host: options && options.req && options.req.headers.host || ''
+        host: (options && options.req && options.req.headers.host) || ''
       })
     }),
     initialState,
