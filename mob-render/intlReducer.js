@@ -7,7 +7,7 @@ import localeData from './locale-data'
 addLocaleData([...pt, ...es, ...en])
 
 export const locale = 'pt-BR'
-export const messages = localeData || {}
+export const messages = localeData[locale] || {}
 export const { intl } = new IntlProvider({ locale, messages })
   .getChildContext()
 
