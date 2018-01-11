@@ -9467,9 +9467,9 @@ slate-dev-logger@^0.1.36:
   version "0.1.36"
   resolved "https://registry.yarnpkg.com/slate-dev-logger/-/slate-dev-logger-0.1.36.tgz#ecdb37dbf944dfc742bab23b6a20d5a0472db95e"
 
-slate-editor@nossas/slate-editor#feature-slate-v0.31.3:
-  version "3.1.2"
-  resolved "https://codeload.github.com/nossas/slate-editor/tar.gz/d57d5e631310aee1e268298a64079ff8aff0e6b7"
+slate-editor@~4.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-4.0.0.tgz#7d4e1d3c8e548f4f042bf7f5cdeef927226cfd65"
   dependencies:
     classnames "^2.2.5"
     exenv "^1.2.1"
