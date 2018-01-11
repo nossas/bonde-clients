@@ -1,15 +1,17 @@
 import React from 'react'
 import withRedux from 'next-redux-wrapper'
-// React redux
-import { Provider } from 'react-redux'
+
 // Intl
 import { IntlProvider } from 'react-intl'
 import { locale, messages } from '../intlReducer'
+
 // ApolloClient
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from '../apolloClient'
+
 // Store
 import configureStore from '../configureStore'
+
 // Webviewer
 import {
   Mobilization as MobilizationApp,
@@ -39,7 +41,6 @@ class Page extends React.Component {
       await dispatch(asyncFilterBlock(where))
       await dispatch(asyncFilterWidget(where))
     }
-    return { store }
   }
 
   render () {
@@ -47,11 +48,9 @@ class Page extends React.Component {
       <div>
         <style global jsx>{styles}</style>
         <IntlProvider locale={locale} messages={messages}>
-          <Provider store={this.props.store}>
-            <ApolloProvider store={this.props.store} client={apolloClient()}>
-              <MobilizationApp editable={false} />
-            </ApolloProvider>
-          </Provider>
+          <ApolloProvider client={apolloClient()}>
+            <MobilizationApp editable={false} />
+          </ApolloProvider>
         </IntlProvider>
       </div>
     )
