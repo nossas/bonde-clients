@@ -22,8 +22,9 @@ import styles from './../webviewer/main.dba55199cd8fb7024923.css'
 class Page extends React.Component {
   static async getInitialProps ({ store }) {
     const { dispatch, getState } = store
-    const host = getState()['req']['host']
+    const host = getState().sourceRequest.host
     const appDomain = 'bonde.devel'
+
     if (host) {
       const {
         asyncFilterMobilization,
@@ -57,15 +58,15 @@ class Page extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { mobilizations: { list: { currentId, data, isLoaded } } } = state
+  const composeProps = {}
+
   if (currentId) {
-    return {
-      isLoaded: isLoaded,
-      mobilization: data.filter(({ id }) => id === currentId)[0]
-    }
+    composeProps.mobilization = data.filter(({ id }) => id === currentId)[0]
   }
-  return { isLoaded: isLoaded }
+
+  return { isLoaded, ...composeProps }
 }
 
 export default withRedux(configureStore, mapStateToProps)(Page)

@@ -17,17 +17,12 @@ const middlewares = [
   apolloClient().middleware()
 ]
 
-// main function
 export default (initialState, options) => {
-  // https://github.com/kirill-konshin/next-redux-wrapper
-  let host = ''
-  if (options && options.req) {
-    host = options.req.headers['host']
-  }
-
   return createStore(
     createReducer({
-      req: sourceReqCreateReducer({ host })
+      sourceRequest: sourceReqCreateReducer({
+        host: options && options.req && options.req.headers.host || ''
+      })
     }),
     initialState,
     compose(
