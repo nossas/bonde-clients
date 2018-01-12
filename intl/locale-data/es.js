@@ -1439,7 +1439,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   // adjustmentsForms
   'adjustmentnsForm.validate.call_to_action.required': 'Inserta el título',
   'adjustmentnsForm.validate.button_text.required': 'Inserta el texto del botón',
-  'adjustmentnsForm.validate.button_text.length': 'El límite de caracteres fue alcanzado.'
+  'adjustmentnsForm.validate.button_text.length': 'El límite de caracteres fue alcanzado.',
   'adjustments.form.successMessage': 'Formulário configurado com sucesso!',
   'adjustments.form.call-to-action.label': 'Título',
   'adjustments.form.call-to-action.placeholder': 'Ejm: Llena el formulario de acá abajo para firmar la petición.',
