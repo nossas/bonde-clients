@@ -1440,5 +1440,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // adjustmentsForms
   'adjustmentnsForm.validate.call_to_action.required': 'Insira o título',
   'adjustmentnsForm.validate.button_text.required': 'Insira o texto do botão',
-  'adjustmentnsForm.validate.button_text.length': 'O limite de caracteres foi atingido.'
+  'adjustmentnsForm.validate.button_text.length': 'O limite de caracteres foi atingido.',
+  'adjustments.form.successMessage': 'Formulário configurado com sucesso!',
+  'adjustments.form.call-to-action.label': 'Título do formulário',
+  'adjustments.form.call-to-action.placeholder': 'Ex: Preencha o formulário abaixo para assinar a petição.',
+  'adjustments.form.button-text.label': 'Botão',
+  'adjustments.form.button-text.placeholder': 'Defina o texto do botão de confirmação do formulário.',
+  'adjustments.form.count-text.label': 'Contador',
+  'adjustments.form.count-text.placeholder': 'Defina o texto que ficará ao lado do número de pessoas que agiram.',
+  'adjustments.form.count-text.helpBlock': 'O contador será mostrado se existir um texto definido.',
+  'adjustments.form.main-color.label': 'Cor padrão',
+  'adjustments.form.main-color.helpBlock': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.'
 }
