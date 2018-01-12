@@ -205,7 +205,7 @@ servidor-03.dominio.com`,
   // routepath: /community/domain
   'page--community-domain.form.validation.required': 'Campo obligatorio',
 
-  'page--community-domain.header.info.title': '',
+  'page--community-domain.header.info.title': 'Información',
   'page--community-domain.header.info.text': "Esta es la lista de dominios registrados en tu comunidad. Cuando vayas a publicar una página, vas a poder usarlos como direcciones o crear subdominios muy fácilmente y rápido :) Si algún dominio de tu lista estuviera con una 'X' , asegúrate de haber modificado correctamente los servidores DNS de la manera que lo explicamos.",
 
   'page--community-domain.domain-preview.success-icon.title': 'Servidores DNS activos',
