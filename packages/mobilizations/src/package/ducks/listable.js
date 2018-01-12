@@ -18,7 +18,11 @@ export default (state = initialState, action = {}) => {
     case Types.LOAD:
       return { ...state, data: payload }
     case Types.CREATE:
-      return { ...state, data: [payload, ...state.data] }
+      const exists = (
+        state.data.findIndex(entry => entry.id === payload.id)
+      ) !== -1
+      if (!exists)
+        return { ...state, data: [payload, ...state.data] }
     case Types.UPDATE:
       return {
         ...state,
