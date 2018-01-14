@@ -1,10 +1,18 @@
-import reducer, { Types, load, create, update, remove } from './listable'
+import reducer, {
+  Types,
+  load,
+  create,
+  update,
+  remove,
+  select
+} from './listable'
 
 describe('ducks/listable', () => {
   
   describe('reducer', () => {
     const initialState = {
-      data: []
+      data: [],
+      selected: undefined
     }
     
     it('initialize reducer with initialState', () => {
@@ -94,6 +102,15 @@ describe('ducks/listable', () => {
       const nextState = reducer(stateWithEntry, action)
       expect(nextState).to.deep.equal(stateWithEntry)
     })
+
+    it('add identifier selected in state when Types.SELECT', () => {
+      const payload = 1
+      const action = { type: Types.SELECT, payload }
+      const nextState = reducer(undefined, action)
+      expect(nextState).to.deep.equal({...initialState,
+        selected: payload
+      })
+    })
   })
 
   describe('actions', () => {
@@ -127,5 +144,13 @@ describe('ducks/listable', () => {
         payload: entry
       })
     })
+
+    it('select', () => {
+      expect(select(1)).to.deep.equal({
+        type: Types.SELECT,
+        payload: 1
+      })
+    })
+
   })
 })

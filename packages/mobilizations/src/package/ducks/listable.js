@@ -3,12 +3,14 @@ export const Types = {
   LOAD: 'LOAD',
   CREATE: 'CREATE',
   UPDATE: 'UPDATE',
-  REMOVE: 'REMOVE'
+  REMOVE: 'REMOVE',
+  SELECT: 'SELECT'
 }
 
 // Reducer
 const initialState = {
-  data: []
+  data: [],
+  selected: undefined
 }
 
 export default (state = initialState, action = {}) => {
@@ -23,6 +25,7 @@ export default (state = initialState, action = {}) => {
       ) !== -1
       if (!exists)
         return { ...state, data: [payload, ...state.data] }
+      return state
     case Types.UPDATE:
       return {
         ...state,
@@ -36,6 +39,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         data: state.data.filter(entry => entry.id !== payload.id)
       }
+    case Types.SELECT:
+      return { ...state, selected: action.payload }
     default:
       return state
   }
@@ -59,4 +64,9 @@ export const update = (entry) => ({
 export const remove = (entry) => ({
   type: Types.REMOVE,
   payload: entry
+})
+
+export const select = (id) => ({
+  type: Types.SELECT,
+  payload: id
 })

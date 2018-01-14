@@ -1,96 +1,73 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadMobilizations, loadWidgets } from '../package/actions'
-import { Form, Listable } from './components'
+import axios from 'axios'
+import qs from 'querystring'
+import {
+  loadMobilizations,
+  loadBlocks,
+  loadWidgets
+} from '../package/actions'
+import selectors from '../package/selectors'
 import logo from './logo.svg'
 import './App.css'
 
+const { mobilizationSelector } = selectors('mobilizations')
+
 class App extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
-    this.state = { current: undefined }
+    this.state = { loading: false }
   }
 
-  load (keyName) {
-    if (keyName === 'mobilizations') {
-      this.props.load([
-        { id: 1, name: 'Minha Beaga' },
-        { id: 2, name: 'Tarifa Zero' }
-      ])
+  async fetch (slug) {
+    const apiUrl = 'http://localhost:3000'
+    const options = {
+      params: {
+        slug
+      },
+      paramsSerializer: (params) => {
+        return qs.stringify(params)
+      }
     }
-    if (keyName === 'widgets') {
-      this.props.loadWidgets([
-        { id: 1, kind: 'Doação' },
-        { id: 2, kind: 'Conteúdo' },
-        { id: 3, kind: 'Formulário' }
-      ])
-    }
-  }
 
-  createOrUpdate ({ id, ...values }) {
-    if (!id) {
-      let { mobilizations: { data } } = this.props
-      data.sort((a, b) => b.id - a.id)
-      const lastObj = data[0]
-      this.props.create({ id: lastObj.id + 1, ...values })
-    } else {
-      this.props.update({ id, ...values })
-    }
-  }
-
-  selectItem (obj) {
-    this.setState({ current: obj })
+    this.setState({ loading: true })
+    const { data: mobilizations } = await axios.get(`${apiUrl}/mobilizations`, options)
+    const { data: blocks } = await axios.get(`${apiUrl}/blocks`, options)
+    const { data: widgets } = await axios.get(`${apiUrl}/widgets`, options)
+    this.props.loadAll({ mobilizations, blocks, widgets })
+    this.setState({ loading: false })
   }
 
   render() {
-    const {
-      mobilizations: {
-        mobilizations: { data: mobilizations },
-        widgets: { data: widgets }
-      }
-    } = this.props
-
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
           <p>
-            <button onClick={() => this.load('mobilizations')}>Carregar mobilizações</button>
-            <button onClick={() => this.load('widgets')}>Carregar widgets</button>
+            <button onClick={() => this.fetch('minha-beaga')}>Carregar mobilizações</button>
           </p>
         </header>
         <div className="App-intro">
-          <Form
-            submit={this.createOrUpdate.bind(this)}
-            initialValues={this.state.current}
-          />
-          <hr />
-          <div>
-            <h2>Mobilizações</h2>
-            <Listable data={mobilizations} onSelectItem={this.selectItem.bind(this)} />
-          </div>
-          <div>
-            <h2>Widgets</h2>
-            <Listable data={widgets} fieldName='kind' />
-          </div>
+          {this.state.loading && <p>Carregando...</p>}
+          {!this.state.loading && this.props.mobilization && <p>Vá ver o que aconteceu!</p>}
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
-  mobilizations: state.mobilizations
+  mobilization: mobilizationSelector(state)
 })
 
-const mapDispatchToProps = {
-  load: loadMobilizations,
-  loadWidgets,
-  create: () => {},
-  update: () => {},
-  remove: () => {}
-}
+const mapDispatchToProps = (dispatch) => ({
+  loadAll: ({ mobilizations, blocks, widgets }) => {
+    dispatch(loadMobilizations(mobilizations))
+    dispatch(loadBlocks(blocks))
+    dispatch(loadWidgets(widgets))
+  }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
