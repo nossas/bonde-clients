@@ -182,7 +182,7 @@ export default {
   'community.page--domain-list.dialog.domain-confirm-message': '¿Estás seguro/a de que quieres eliminar el dominio?',
   'community.page--domain-list.dns-record-description.first-paragraph': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como registro.br o godaddy.com, para identificar en qué servidor se encuentra la información sobre el dominio registrado.',
   'community.page--domain-list.dns-record-description.second-paragraph': 'Completa la activación del dominio modificando los servidores DNS, donde el dominio fue registrado, para las direcciones acá abajo:',
-  'community.page--domain-list.dns-server-description': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registrobr} o {godaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado. Aclara tus dudas {trilho}.',
+  'community.page--domain-list.dns-server-description': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registroBr} o {goDaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado. Aclara tus dudas {trilho}.',
   'community.page--domain-list.dns-server-description.trilho.link': 'en la página de ayuda',
 
   // component community subdomain form
@@ -239,7 +239,7 @@ servidor-03.dominio.com`,
 
   'page--community-domain-create.step-dns-servers.step-title': 'Modifica los servidores de tu proveedor DNS',
   'page--community-domain-create.step-dns-servers.title': '¿Qué son servidores DNS?',
-  'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registrobr} o {godaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado.',
+  'page--community-domain-create.step-dns-servers.subtitle.first-paragraph': 'Los servidores DNS son direcciones utilizadas por las organizaciones de registro de dominios como {registroBr} o {goDaddy}, para identificar en qué servidor se encuentra la información sobre el dominio registrado.',
   'page--community-domain-create.step-dns-servers.subtitle.second-paragraph': 'Completa la activación del dominio modificando los servidores DNS, donde el dominio fue registrado, para las direcciones acá abajo:',
   'page--community-domain-create.step-dns-servers.change-later-button.text': 'Modificar después',
   'page--community-domain-create.step-dns-servers.button.text': 'Próxima parada',
