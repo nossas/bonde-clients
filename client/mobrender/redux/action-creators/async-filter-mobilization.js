@@ -11,7 +11,7 @@ export default query => (dispatch, getState, { api }) => {
     .then(({ status, data }) => {
       if (status === 200) {
         dispatch(createAction(t.FILTER_MOBILIZATIONS_SUCCESS, data))
-        return Promise.resolve()
+        return Promise.resolve(data)
       }
 
       return Promise.reject({ message: `Request code ${status}` })

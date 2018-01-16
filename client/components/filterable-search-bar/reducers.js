@@ -9,7 +9,7 @@ export const initialState = {
 //        action to differs each other. For now, it will be used only inside
 //        mobilization's templates reducers.
 //
-const FilterableSearchBarReducer = (state = initialState, action) => {
+const FilterableSearchBarReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FILTERABLE_SEARCH_BAR_SET_LIST:
       return { ...state, list: action.list }

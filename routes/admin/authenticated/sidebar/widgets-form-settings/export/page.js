@@ -9,7 +9,6 @@ const FormSettingsExportPage = props => !props.widget ? <Loading /> : (
 )
 
 FormSettingsExportPage.propTypes = {
-  params: PropTypes.object.isRequired,
   // Injected by react-redux
   asyncWidgetDataExport: PropTypes.func.isRequired,
   dataExportMount: PropTypes.func.isRequired,

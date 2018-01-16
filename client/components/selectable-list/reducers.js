@@ -9,7 +9,7 @@ export const initialState = {}
 //        action to differs each other. For now, it will be used only inside
 //        mobilization's templates reducers.
 //
-const SelectableListReducer = (state = initialState, action) => {
+const SelectableListReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SELECTABLE_LIST_SET_SELECTED_INDEX:
       return { ...state, selectedIndex: action.index }

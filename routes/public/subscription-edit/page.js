@@ -1,17 +1,13 @@
 import React from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { FormattedMessage, intlShape } from 'react-intl'
 import query from 'querystring'
 import classnames from 'classnames'
-import uuid from 'uuid'
+import { Loading } from '~client/components/await'
 import { Background } from '~client/components/layout'
 import { CreditCardForm, RecurringForm } from '~client/subscriptions/forms'
 import { FlatForm } from '~client/ux/components'
 import * as SubscriptionActions from '~client/subscriptions/redux/action-creators'
-
-if (require('exenv').canUseDOM) {
-  require('./page.scss')
-}
+import './page.scss'
 
 const CreditCardFormImplementation = CreditCardForm({
   mapDispatchToProps: {
@@ -75,123 +71,126 @@ const RecurringFormImplementation = RecurringForm({
   }
 })
 
-const SubscriptionEditPage = props => {
-  const {
-    params,
-    url,
-    modificationType,
-    animationStack,
-    asyncSubscriptionDelete,
-    setModificationType,
-    appendAnimationStack,
-    removeAnimationStack,
-    intl
-  } = props
+class SubscriptionEditPage extends React.Component {
+  componentDidMount () {
+    const {
+      match: { params },
+      data,
+      query,
+      asyncSubscriptionFetch
+    } = this.props
 
-  const displayForm = (form, type) => {
-    const append = () => {
-      setModificationType(type)
-      appendAnimationStack(form)
+    !data && asyncSubscriptionFetch({
+      id: params.id,
+      token: query.token
+    })
+  }
+
+  render () {
+    const {
+      match: { params },
+      modificationType,
+      asyncSubscriptionDelete,
+      setModificationType,
+      intl,
+      loading,
+      data
+    } = this.props
+
+    const initialValues = {
+      id: params.id,
+      token: query.token
+    }
+    const forms = {
+      creditcard: CreditCardFormImplementation,
+      recurring: RecurringFormImplementation
     }
 
-    if (animationStack.length) {
-      removeAnimationStack(0)
-      setTimeout(append, 1000)
-    } else append()
+    return !loading && !data ? <Loading /> : (
+      <div className='routes--subscription-edit-page'>
+        <Background contentSize={0} image={require('~client/images/bg-login.png')}>
+          <section className='section--choose-type'>
+            <h1 style={{
+              color: '#333',
+              marginTop: 0,
+              fontWeight: 'bold',
+              fontSize: '2em'
+            }}>
+              <FormattedMessage
+                id='page--subscription-edit.title'
+                defaultMessage='Dados da Doação'
+                />
+            </h1>
+            <p className='paragraph--helper-text'>
+              <FormattedMessage
+                id='page--subscription-edit.helper-text'
+                defaultMessage='Selecione abaixo qual informação da sua doação quer alterar:'
+              />
+            </p>
+            <div className='container--tab-buttons'>
+              <button
+                className={classnames(
+                  'button--creditcard button',
+                  { active: modificationType === 'creditcard' }
+                )}
+                onClick={() => setModificationType('creditcard')}
+              >
+                <FormattedMessage
+                  id='page--subscription-edit.button.creditcard'
+                  defaultMessage='Cartão de crédito'
+                />
+              </button>
+              <button
+                className={classnames(
+                  'button--recurring button',
+                  { active: modificationType === 'recurring' }
+                )}
+                onClick={() => setModificationType('recurring')}
+              >
+                <FormattedMessage
+                  id='page--subscription-edit.button.recurring'
+                  defaultMessage='Data da doação'
+                />
+              </button>
+            </div>
+
+            {Object.keys(forms).map(type => {
+              const ChosenForm = forms[type]
+              return modificationType !== type ? null : (
+                <ChosenForm
+                  {...this.props}
+                  {...{ initialValues }}
+                  key={type}
+                  FormComponent={FlatForm}
+                />
+              )
+            })}
+
+            <p className='link--cancel center mt3 lightgray link'>
+              <a
+                onClick={() => {
+                  const message = intl.formatMessage({
+                    id: 'page--subscription-edit.cancel-subscription.confirm',
+                    defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
+                      'Tem certeza que quer continuar?'
+                  })
+
+                  if (window.confirm(message)) {
+                    asyncSubscriptionDelete(initialValues)
+                  }
+                }}
+              >
+                <FormattedMessage
+                  id='page--subscription-edit.link.cancel-subscription'
+                  defaultMessage='Quero cancelar a minha assinatura.'
+                />
+              </a>
+            </p>
+          </section>
+        </Background>
+      </div>
+    )
   }
-
-  const initialValues = {
-    id: params.id,
-    token: query.parse(url.query).token
-  }
-
-  return (
-    <div className='routes--subscription-edit-page'>
-      <Background contentSize={0} image={
-        require('exenv').canUseDOM
-          ? require('~client/images/bg-login.png')
-          : ''
-      }>
-        <section className='section--choose-type'>
-          <h1 style={{
-            color: '#333',
-            marginTop: 0,
-            fontWeight: 'bold',
-            fontSize: '2em'
-          }}>
-            <FormattedMessage
-              id='page--subscription-edit.title'
-              defaultMessage='Dados da Doação'
-              />
-          </h1>
-          <p className='paragraph--helper-text'>
-            <FormattedMessage
-              id='page--subscription-edit.helper-text'
-              defaultMessage='Selecione abaixo qual informação da sua doação quer alterar:'
-            />
-          </p>
-          <div className='container--tab-buttons'>
-            <button
-              className={classnames(
-                'button--creditcard button',
-                { active: modificationType === 'creditcard' }
-              )}
-              onClick={() => displayForm(CreditCardFormImplementation, 'creditcard')}
-            >
-              <FormattedMessage
-                id='page--subscription-edit.button.creditcard'
-                defaultMessage='Cartão de crédito'
-              />
-            </button>
-            <button
-              className={classnames(
-                'button--recurring button',
-                { active: modificationType === 'recurring' }
-              )}
-              onClick={() => displayForm(RecurringFormImplementation, 'recurring')}
-            >
-              <FormattedMessage
-                id='page--subscription-edit.button.recurring'
-                defaultMessage='Data da doação'
-              />
-            </button>
-          </div>
-          <CSSTransitionGroup
-            transitionName={`transition--form-${modificationType}`}
-            transitionEnterTimeout={1000}
-            transitionLeaveTimeout={1000}
-          >
-            {animationStack.map(ItemComponent => (
-              <div key={uuid()} style={{ overflowY: 'hidden' }}>
-                <ItemComponent {...props} {...{ initialValues }} FormComponent={FlatForm} />
-              </div>
-            ))}
-          </CSSTransitionGroup>
-          <p className='link--cancel center mt3 lightgray link'>
-            <a
-              onClick={() => {
-                const message = intl.formatMessage({
-                  id: 'page--subscription-edit.cancel-subscription.confirm',
-                  defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
-                    'Tem certeza que quer continuar?'
-                })
-
-                if (window.confirm(message)) {
-                  animationStack.length && removeAnimationStack(0)
-                  asyncSubscriptionDelete(initialValues)
-                }
-              }}
-            >
-              <FormattedMessage
-                id='page--subscription-edit.link.cancel-subscription'
-                defaultMessage='Quero cancelar a minha assinatura.'
-              />
-            </a>
-          </p>
-        </section>
-      </Background>
-    </div>
-  )
 }
 
 SubscriptionEditPage.propTypes = {

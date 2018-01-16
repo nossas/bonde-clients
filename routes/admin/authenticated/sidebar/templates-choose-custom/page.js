@@ -1,5 +1,4 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage } from 'react-intl'
 
 import * as paths from '~client/paths'
@@ -34,11 +33,11 @@ class TemplatesChooseCustomPage extends React.Component {
           </h3>
           <TemplateSelectableList
             {...listableProps}
-            handleGoBack={() => browserHistory.goBack()}
+            handleGoBack={() => this.props.history.goBack()}
             handleSelectItem={({ id: template_mobilization_id }) => {
               createMobilizationFromTemplate({ id: mobilization.id, template_mobilization_id })
                 .then(() => {
-                  browserHistory.push(paths.editMobilization(mobilization.id))
+                  this.props.history.push(paths.editMobilization(mobilization.id))
                   return Promise.resolve()
                 })
                 .catch(error => console.error('CreateMobilizationFromTemplateAsyncError', error))

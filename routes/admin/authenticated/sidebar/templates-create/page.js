@@ -1,5 +1,4 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 
 import * as paths from '~client/paths'
@@ -11,7 +10,7 @@ import {
 import { Avatar, Name } from '~client/mobilizations/components/list/items'
 import { FormRedux, FormGroup, FormControl, ControlLabel } from '~client/components/forms'
 
-const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, intl, ...formProps }) => (
+const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, intl, history, ...formProps }) => (
   <SettingsPageLayout>
     <SettingsPageMenuLayout
       title={
@@ -44,12 +43,8 @@ const TemplatesCreatePage = ({ mobilization, fields: { name, goal }, intl, ...fo
 
       <FormRedux
         className='bg-white'
-        onCancel={() => {
-          browserHistory.push(paths.mobilizations())
-        }}
-        onFinishSubmit={() => {
-          browserHistory.push(paths.mobilizations())
-        }}
+        onCancel={() => history.push(paths.mobilizations())}
+        onFinishSubmit={() => history.push(paths.mobilizations())}
         {...formProps}
       >
         <FormGroup controlId='name' {...name}>

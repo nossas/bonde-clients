@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 
+import { BondeBackground } from '~client/components/layout/background'
 import {
   FormRedux,
   FormGroup,
@@ -9,71 +10,63 @@ import {
   FormControl,
   Button
 } from '~client/components/forms'
+import styles from './page.scss'
 
-var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
+const RegisterPage = ({ fields: { email }, intl, ...formProps }) => (
+  <BondeBackground>
+    <div className={styles.page}>
+      <h1>
+        <FormattedMessage
+          id='p--account-retrieve.title.first-line'
+          defaultMessage='Qual seu email cadastrado?'
+        />
+        <br />
+        <FormattedMessage
+          id='p--account-retrieve.title.second-line'
+          defaultMessage='Vamos enviar uma nova senha para você.'
+        />
+      </h1>
 
-class RegisterPage extends Component {
-  render () {
-    const {
-      fields: { email },
-      intl,
-      ...formProps
-    } = this.props
-    return (
-      <div className={styles.page}>
-        <h1>
-          <FormattedMessage
-            id='p--account-retrieve.title.first-line'
-            defaultMessage='Qual seu email cadastrado?'
-          />
-          <br />
-          <FormattedMessage
-            id='p--account-retrieve.title.second-line'
-            defaultMessage='Vamos enviar uma nova senha para você.'
-          />
-        </h1>
-
-        <FormRedux
-          nosubmit
-          className='bg-white rounded col-8'
-          {...formProps}
-        >
-          <FormGroup controlId='emailId' {...email}>
-            <ControlLabel>
-              <FormattedMessage
-                id='p--account-retrieve.form.email.label'
-                defaultMessage='E-mail'
-              />
-            </ControlLabel>
-
-            <FormControl
-              type='email'
-              placeholder={
-                intl.formatMessage({
-                  id: 'p--account-retrieve.form.email.placeholder',
-                  defaultMessage: 'exemplo@email.com.br'
-                })
-              }
+      <FormRedux
+        nosubmit
+        className='bg-white rounded col-8'
+        {...formProps}
+      >
+        <FormGroup controlId='emailId' {...email}>
+          <ControlLabel>
+            <FormattedMessage
+              id='p--account-retrieve.form.email.label'
+              defaultMessage='E-mail'
             />
-          </FormGroup>
-          <Button type='submit' className='btn caps col-12 p2 white rounded-bottom bg-pagenta'>
-            {formProps.submitting ? (
-              <FormattedMessage
-                id='p--account-retrieve.form.submit-button.sending'
-                defaultMessage='Enviando...'
-              />
-            ) : (
-              <FormattedMessage
-                id='p--account-retrieve.form.submit-button.default'
-                defaultMessage='Enviar'
-              />
-            )}
-          </Button>
-        </FormRedux>
-      </div>
-    )
-  }
-}
+          </ControlLabel>
+
+          <FormControl
+            type='email'
+            placeholder={
+              intl.formatMessage({
+                id: 'p--account-retrieve.form.email.placeholder',
+                defaultMessage: 'exemplo@email.com.br'
+              })
+            }
+          />
+        </FormGroup>
+        <Button type='submit' className='btn caps col-12 p2 white rounded-bottom bg-pagenta'>
+          {formProps.submitting ? (
+            <FormattedMessage
+              id='p--account-retrieve.form.submit-button.sending'
+              defaultMessage='Enviando...'
+            />
+          ) : (
+            <FormattedMessage
+              id='p--account-retrieve.form.submit-button.default'
+              defaultMessage='Enviar'
+            />
+          )}
+        </Button>
+      </FormRedux>
+    </div>
+  </BondeBackground>
+)
 
 RegisterPage.propTypes = {
   // Injected by react-redux

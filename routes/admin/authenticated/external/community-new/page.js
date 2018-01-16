@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { Background } from '~client/components/layout'
+import { BondeBackground } from '~client/components/layout/background'
 import {
   FormRedux,
   FormGroup,
@@ -17,7 +16,7 @@ class CommunityNewPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { submitting } = this.props
     if (submitting && !nextProps.submitting && !nextProps.submitFailed) {
-      browserHistory.push(paths.communityList())
+      this.props.history.push(paths.communityList())
     }
   }
 
@@ -31,7 +30,7 @@ class CommunityNewPage extends Component {
       ...formProps
     } = this.props
     return (
-      <Background image={image}>
+      <BondeBackground contentSize={3}>
         <div>
           <h1>
             <FormattedMessage
@@ -101,7 +100,7 @@ class CommunityNewPage extends Component {
             <FormError className='mt2' />
           </FormRedux>
         </div>
-      </Background>
+      </BondeBackground>
     )
   }
 }

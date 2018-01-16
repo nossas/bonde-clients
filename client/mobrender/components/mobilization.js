@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { browserHistory } from 'react-router'
 import classnames from 'classnames'
 
 import Block from './block.connected'
@@ -34,7 +33,7 @@ class Mobilization extends React.Component {
   componentDidMount () {
     const { editable, mobilization, blocks, blocksIsLoaded } = this.props
     if (editable && blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
+      this.props.history.push(paths.mobilizationTemplatesChoose(mobilization))
     }
 
     if (require('exenv').canUseDOM) {
@@ -105,7 +104,8 @@ class Mobilization extends React.Component {
       widgets,
       blockUpdate,
       editable,
-      blockEditionMode
+      blockEditionMode,
+      history
     } = this.props
 
     const themeClassName = `${colorScheme} ${headerFont}-header ${bodyFont}-body`
@@ -126,6 +126,7 @@ class Mobilization extends React.Component {
         <div id='blocks-list' className='flex-auto' style={{ overflowY: 'scroll' }}>
           {this.state.blocks.map((block, index) => (
             <Block
+              history={history}
               key={`block-${block.id}`}
               editable={editable}
               block={block}
@@ -136,7 +137,7 @@ class Mobilization extends React.Component {
             <div
               className='add-new-block'
               onClick={() => {
-                browserHistory.push(
+                history.push(
                   paths.createBlock(this.props.mobilization)
                 )
               }}

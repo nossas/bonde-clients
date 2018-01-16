@@ -25,7 +25,7 @@ describe('routes/public/custom-domain/page', () => {
   }
 
   beforeEach(() => {
-    wrapper = shallow(<CustomDomainPage {...props} />)
+    wrapper = shallow(<CustomDomainPage {...props} />, { disableLifecycleMethods: true })
   })
 
   it('render without crashed', () => {

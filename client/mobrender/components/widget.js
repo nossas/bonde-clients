@@ -2,13 +2,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
 import { intlShape } from 'react-intl'
-import { browserHistory } from 'react-router'
 import { Loading } from '~client/components/await'
 import WidgetOverlay from './widget-overlay.connected'
 
 import widgets from '../widgets/config'
 
-const Widget = ({ saving, mobilization, block, widget, update, editable, intl }) => {
+const Widget = ({ saving, mobilization, block, widget, update, editable, intl, history }) => {
   // Resize column widget
   const { sm_size: smSize, md_size: mdSize, lg_size: lgSize } = widget
   const className = classnames(
@@ -32,9 +31,7 @@ const Widget = ({ saving, mobilization, block, widget, update, editable, intl })
       {editable && redirect ? (
         <WidgetOverlay
           widget={widget}
-          onEdit={() => {
-            browserHistory.push(redirect)
-          }}
+          onEdit={() => history.push(redirect)}
           onDelete={() => {
             const message = intl.formatMessage({
               id: 'c--content-widget.delete-widget.confirm.message',

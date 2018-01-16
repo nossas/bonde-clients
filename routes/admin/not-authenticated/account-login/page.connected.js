@@ -1,8 +1,10 @@
+//
+// @route /login
+//
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import { graphql } from 'react-apollo'
-import { browserHistory } from 'react-router'
-
+import * as paths from '~client/paths'
 import { createAction } from '~client/utils/redux'
 import { isValidEmail } from '~client/utils/validation-helper'
 
@@ -52,11 +54,10 @@ const mapActionsToProps = (dispatch, props) => ({...props,
     props.mutate({ variables: { ...values } })
       .then(({ data: { authenticate: { jwtToken } } }) => {
         if (jwtToken) {
-          dispatch(createAction(
-            authType.LOGIN_SUCCESS,
-            { credentials: { 'access-token': jwtToken } }
-          ))
-          browserHistory.push('/')
+          const auth = { credentials: { 'access-token': jwtToken } }
+          dispatch(createAction(authType.LOGIN_SUCCESS, auth))
+          window.localStorage.setItem('auth', JSON.stringify(auth))
+          props.history.push(paths.communityList())
         } else {
           dispatch(createAction(
             authType.LOGIN_FAILURE,

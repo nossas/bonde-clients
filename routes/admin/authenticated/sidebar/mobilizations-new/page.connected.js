@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/new
+//
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import * as CommunitySelectors from '~client/community/selectors'

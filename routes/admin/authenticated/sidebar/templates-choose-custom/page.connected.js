@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/templates/choose/custom
+//
 import { connect } from 'react-redux'
 import { graphql, gql } from 'react-apollo'
 import { injectIntl } from 'react-intl'

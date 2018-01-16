@@ -15,7 +15,10 @@ const ForceDownloadViaAjax = ({ onClick, title, className, icon }) => (
 
 ForceDownloadViaAjax.propTypes = {
   onClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]).isRequired
 }
 
 export default ForceDownloadViaAjax

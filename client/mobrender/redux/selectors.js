@@ -1,14 +1,8 @@
 export default (state, props) => ({
 
   getMobilization: () => {
-    const { list: { currentId, data } } = state.mobilizations
-
-    const mobilization = (id) => data.filter(mob => mob.id === id)[0]
-
-    if (!currentId && props && props.params && props.params.mobilization_id) {
-      return mobilization(parseInt(props.params.mobilization_id))
-    }
-    return mobilization(currentId)
+    const { list: { currentId: id, data } } = state.mobilizations
+    return id ? data.filter(mob => mob.id === id)[0] : undefined
   },
 
   mobilizationsIsLoading: () => {
@@ -87,9 +81,9 @@ export default (state, props) => ({
     return data
   },
 
-  getWidget: (widgetId) => {
-    const { widgets: { data } } = state.mobilizations
-    return data.filter(w => w.id === parseInt(widgetId))[0]
+  getWidget: () => {
+    const { widgets: { data, currentId } } = state.mobilizations
+    return data.filter(w => w.id === currentId)[0]
   },
 
   mobilizationIsNeedReload: () => {

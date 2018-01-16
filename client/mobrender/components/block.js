@@ -22,7 +22,7 @@ const getBackgroundStyle = block => {
   }
 }
 
-const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving }) => (
+const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut, onCancelEdit, editing, saving, history }) => (
   <div
     id={`block-${block.id}`}
     onMouseEnter={() => {
@@ -49,6 +49,7 @@ const Block = ({ block, widgets, editable, hasMouseOver, onMouseOver, onMouseOut
             widget={widget}
             block={block}
             editable={editable}
+            history={history}
           />
         ))}
       </div>

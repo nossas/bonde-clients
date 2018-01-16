@@ -1,3 +1,6 @@
+//
+// @route /community/domain
+//
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'

@@ -1,3 +1,6 @@
+//
+// @route /community/invite
+//
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createForm, Field } from '~client/storybook/forms'

@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
-
 // Global module dependencies
 import { Loading } from '~client/components/await'
 import { GoogleFontsLoader } from '~client/components/fonts'
@@ -14,7 +12,7 @@ export class MobilizationsEditPage extends Component {
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
     if (blocksIsLoaded && blocks.length === 0) {
-      browserHistory.push(paths.mobilizationTemplatesChoose(mobilization))
+      this.props.history.push(paths.mobilizationTemplatesChoose(mobilization))
     }
   }
 
@@ -25,7 +23,7 @@ export class MobilizationsEditPage extends Component {
       const fonts = [mobilization.header_font, mobilization.body_font].filter(arrayUtil.distinct)
       return (
         <div className='flex flex-auto overflow-hidden'>
-          <Mobilization editable />
+          <Mobilization editable history={this.props.history} />
           <GoogleFontsLoader fonts={fonts} />
         </div>
       )
@@ -39,7 +37,7 @@ MobilizationsEditPage.propTypes = {
     id: PropTypes.number.isRequired,
     header_font: PropTypes.string,
     body_font: PropTypes.string
-  }).isRequired,
+  }),
   renderIsLoading: PropTypes.bool,
   blocks: PropTypes.array,
   blockIsLoaded: PropTypes.bool

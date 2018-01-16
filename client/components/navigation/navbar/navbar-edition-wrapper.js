@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { injectIntl, intlShape } from 'react-intl'
 import classnames from 'classnames'
 
 import { NavbarButton, NavbarForm } from '~client/components/navigation/navbar'
 
-class NavbarEditionWrapper extends React.Component {
+export class NavbarEditionWrapper extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
@@ -24,7 +24,6 @@ class NavbarEditionWrapper extends React.Component {
   handleHideButtonClick () {
     this.refs.hideButton.blur()
     const { blockUpdate, block } = this.props
-
     blockUpdate({ ...block, menu_hidden: !block.menu_hidden })
   }
 
@@ -86,13 +85,10 @@ class NavbarEditionWrapper extends React.Component {
   }
 
   blockName (block) {
-    return block.name || (
-      <FormattedMessage
-        id='components.navigation--navbar-edition-wrapper.block'
-        defaultMessage='Bloco {position}'
-        values={{ position: block.position }}
-      />
-    )
+    return block.name || this.props.intl.formatMessage({
+      id: 'components.navigation--navbar-edition-wrapper.block',
+      defaultMessage: 'Bloco {position}'
+    }, { position: block.position })
   }
 
   renderNavbarButton () {
@@ -137,7 +133,8 @@ NavbarEditionWrapper.propTypes = {
   block: PropTypes.object.isRequired,
   dispatch: PropTypes.func,
   auth: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  intl: intlShape.isRequired
 }
 
-export default NavbarEditionWrapper
+export default injectIntl(NavbarEditionWrapper)

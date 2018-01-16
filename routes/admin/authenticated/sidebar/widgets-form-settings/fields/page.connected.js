@@ -1,37 +1,22 @@
-import { provideHooks } from 'redial'
+//
+// @route /mobilizations/:mobilization_id/widgets/:widget_id/form/fields
+//
 import { connect } from 'react-redux'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
-import { selectMobilization, asyncFetchWidgets, asyncUpdateWidget } from '~client/mobrender/redux/action-creators'
+import * as MobActions from '~client/mobrender/redux/action-creators'
 
 import Page from './page'
 
-const redial = {
-  fetch: ({ dispatch, getState, params }) => {
-    const selectors = MobSelectors(getState())
-    const promises = []
+const mapStateToProps = state => {
+  const selectors = MobSelectors(state)
 
-    !selectors.getMobilization() && promises.push(
-      dispatch(selectMobilization(params.mobilization_id))
-    )
-    !selectors.widgetsIsLoaded() && promises.push(
-      dispatch(asyncFetchWidgets(params.mobilization_id))
-    )
-    return Promise.all(promises)
-  }
-}
-
-const mapStateToProps = (state, props) => {
-  const { params: { widget_id } } = props
-  const selectors = MobSelectors(state, props)
   return {
     mobilization: selectors.getMobilization(),
-    widget: selectors.getWidget(widget_id)
+    widget: selectors.getWidget()
   }
 }
 
-const mapActionsToProps = { asyncWidgetUpdate: asyncUpdateWidget }
+const mapActionsToProps = { asyncWidgetUpdate: MobActions.asyncUpdateWidget }
 
-export default provideHooks(redial)(
-  connect(mapStateToProps, mapActionsToProps)(Page)
-)
+export default connect(mapStateToProps, mapActionsToProps)(Page)

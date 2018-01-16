@@ -1,29 +1,36 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Link, browserHistory } from 'react-router'
-import { Background } from '~client/components/layout'
+import { Link } from 'react-router-dom'
+import { BondeBackground } from '~client/components/layout/background'
 import * as paths from '~client/paths'
 import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
 
 class CommunityListPage extends Component {
+  componentDidMount () {
+    this.props.asyncFetch()
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.isLoaded && nextProps.communities.length === 0) {
-      browserHistory.push(paths.communityAdd())
+      this.props.history.push(paths.communityAdd())
     }
   }
 
   onClickItem (id) {
     this.props.select(id)
-    browserHistory.push(paths.mobilizations())
+    this.props.history.push(paths.mobilizations())
   }
 
   render () {
-    const { image, isLoading, isLoaded, communities, user } = this.props
+    const { isLoading, isLoaded, communities, user } = this.props
 
-    return isLoading || user === undefined ? <Loading /> : (
-      <Background image={image} alignment={{ x: 'center', y: 'top' }}>
+    return isLoading ? <Loading /> : (
+      <BondeBackground
+        contentSize={3}
+        alignment={{ x: 'center', y: 'top' }}
+      >
         <div className='col-12'>
           <h1>
             <FormattedMessage
@@ -66,7 +73,7 @@ class CommunityListPage extends Component {
             />
           </p>
         </div>
-      </Background>
+      </BondeBackground>
     )
   }
 }
@@ -75,7 +82,7 @@ CommunityListPage.propTypes = {
   isLoaded: PropTypes.bool,
   isLoading: PropTypes.bool,
   communities: PropTypes.array,
-  user: PropTypes.object,
+  user: PropTypes.object.isRequired,
   // Actions
   select: PropTypes.func.isRequired
 }

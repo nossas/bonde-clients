@@ -2,8 +2,7 @@ import React from 'react'
 
 import MobSelectors from '~client/mobrender/redux/selectors'
 import * as MobActions from '~client/mobrender/redux/action-creators'
-import { SettingsMenu, FormShare } from '~client/mobilizations/components'
-import { SettingsPageLayout, SettingsPageContentLayout } from '~client/components/layout'
+import { FormShare } from '~client/mobilizations/components'
 import { SettingsForm } from '~client/ux/components'
 
 if (require('exenv').canUseDOM) {
@@ -16,16 +15,11 @@ const FormShareImplementation = FormShare(
 )
 
 const MobilizationsSettingsSharingPage = props => (
-  <SettingsPageLayout>
-    <SettingsMenu {...props} />
-    <SettingsPageContentLayout>
-      <FormShareImplementation
-        {...props}
-        FormComponent={SettingsForm}
-        className='mobilization-settings-sharing--form-share transparent'
-      />
-    </SettingsPageContentLayout>
-  </SettingsPageLayout>
+  <FormShareImplementation
+    {...props}
+    FormComponent={SettingsForm}
+    className='mobilization-settings-sharing--form-share transparent'
+  />
 )
 
 export default MobilizationsSettingsSharingPage

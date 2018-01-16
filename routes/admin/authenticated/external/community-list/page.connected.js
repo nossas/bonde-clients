@@ -1,22 +1,12 @@
-import { provideHooks } from 'redial'
+//
+// @route /community
+//
 import { connect } from 'react-redux'
 
 import * as CommunityActions from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 
 import Page from './page'
-
-const redial = {
-  fetch: ({ dispatch, getState }) => {
-    const state = getState()
-    const promises = []
-
-    !CommunitySelectors.isLoaded(state) && promises.push(
-      dispatch(CommunityActions.asyncFetch())
-    )
-    return Promise.all(promises)
-  }
-}
 
 const mapStateToProps = state => ({
   user: state.auth.user,
@@ -25,6 +15,4 @@ const mapStateToProps = state => ({
   communities: CommunitySelectors.getList(state)
 })
 
-export default provideHooks(redial)(
-  connect(mapStateToProps, CommunityActions)(Page)
-)
+export default connect(mapStateToProps, CommunityActions)(Page)

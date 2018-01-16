@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl'
-import { Raw, Plain } from 'slate'
+import Plain from 'slate-plain-serializer'
 import {
   SlateEditor, SlateToolbar, SlateContent,
   AlignmentPlugin, AlignmentButtonBar,
@@ -58,13 +58,13 @@ class EditorSlate extends Component {
     this.state = {
       editing: false,
       loading: false,
-      initialState: Raw.deserialize(JSON.parse(props.content), { terse: true })
+      initialState: JSON.parse(props.content)
     }
   }
 
   handleCancelEditionMode (state, setState) {
-    const initialRaw = JSON.stringify(Raw.serialize(this.state.initialState))
-    const raw = JSON.stringify(Raw.serialize(state))
+    const initialRaw = Plain.serialize(this.state.initialState)
+    const raw = Plain.serialize(state)
     if (initialRaw !== raw) {
       if (window.confirm(this.props.intl.formatMessage({
         id: 'c--editor-slate.button-cancel.message',
@@ -115,7 +115,7 @@ class EditorSlate extends Component {
           <SlateContent
             wrapperStyle={{ position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' }}
             style={{ minHeight: 150, ...contentStyles }}
-            onSelectionChange={() => {
+            onFocus={() => {
               if (!readOnly) this.setState({ editing: true })
             }}
             onKeyDown={(event, data, state) => {
@@ -183,7 +183,7 @@ EditorSlate.defaultProps = {
 }
 
 export const createEditorContent = content => JSON.stringify(
-  Raw.serialize(Plain.deserialize(content), { terse: true })
+  Plain.deserialize(content).toJSON()
 )
 
 export default injectIntl(EditorSlate)

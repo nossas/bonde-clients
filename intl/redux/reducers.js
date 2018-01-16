@@ -7,7 +7,7 @@ const initialState = {
   messages: {}
 }
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case t.SET_CURRENT_LOCALE:
       return { ...state, currentLocale: action.payload }

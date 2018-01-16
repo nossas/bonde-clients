@@ -91,7 +91,7 @@ class Page extends Component {
                   <Button
                     type='button'
                     disabled={saving || this.state.dns !== undefined}
-                    onClick={() => browserHistory.push(paths.communityDomain())}
+                    onClick={() => this.props.history.push(paths.communityDomain())}
                   >
                     <FormattedMessage
                       id='page--community-domain-create.step-add.form.cancel-button.text'
@@ -157,7 +157,7 @@ class Page extends Component {
               <span style={{ marginRight: '1rem' }}>
                 <Button
                   type='button'
-                  onClick={() => browserHistory.push(paths.communityDomain())}
+                  onClick={() => this.props.history.push(paths.communityDomain())}
                 >
                   <FormattedMessage
                     id='page--community-domain-create.step-dns-servers.change-later-button.text'
@@ -169,7 +169,7 @@ class Page extends Component {
                 onClick={() => {
                   const { location: { query } } = this.props
                   if (query && query.next) {
-                    browserHistory.push(query.next)
+                    this.props.history.push(query.next)
                   } else {
                     this.setState({ renderTestConnection: true })
                   }

@@ -56,20 +56,7 @@ export default (state = initialState, action = {}) => {
         )
       }
     case t.SELECT:
-      if (state.currentId !== action.id) {
-        reactCookie.save('community', {
-          community: {
-            list: {
-              currentId: action.id,
-              data: state.data.filter(c => c.id === action.id)
-            }
-          }
-        })
-      }
-      return {
-        ...state,
-        currentId: action.id
-      }
+      return { ...state, currentId: action.id }
     case t.UNSET:
       return {
         ...state,

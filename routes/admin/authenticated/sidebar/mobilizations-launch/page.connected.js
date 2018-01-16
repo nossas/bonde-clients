@@ -1,3 +1,6 @@
+//
+// @route /mobilizations/:mobilization_id/launch
+//
 import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 

@@ -1,7 +1,8 @@
-export default (state, props) => {
+export default state => {
   const edit = state.subscriptions.edit
 
   return {
+    getData: () => edit.data,
     getModificationType: () => edit.modificationType,
     getAnimationStack: () => edit.animationStack,
     getCard: () => (

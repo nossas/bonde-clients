@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { Info } from '~client/components/notify'
@@ -178,7 +177,7 @@ class Page extends Component {
                 defaultMessage: 'Adicionar novo domínio'
               })
             }
-            onClick={() => browserHistory.push(Paths.communityDomainCreate())}
+            onClick={() => this.props.history.push(Paths.communityDomainCreate())}
           />
           {this.state.deletedHostedZone && (
             <Dialog

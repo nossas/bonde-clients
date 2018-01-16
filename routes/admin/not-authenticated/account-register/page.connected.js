@@ -1,3 +1,6 @@
+//
+// @route /register
+//
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'

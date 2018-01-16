@@ -31,7 +31,11 @@ class NavbarForm extends React.Component {
 
   submit (e) {
     e.preventDefault()
-    const { block, blockUpdate, handleCloseForm } = this.props
+    const {
+      block,
+      blockUpdate,
+      handleCloseForm
+    } = this.props
 
     blockUpdate({ ...block, name: this.state.name })
     handleCloseForm()
@@ -60,7 +64,6 @@ NavbarForm.propTypes = {
   mobilization: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockUpdate: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   defaultValue: PropTypes.string
 }
 

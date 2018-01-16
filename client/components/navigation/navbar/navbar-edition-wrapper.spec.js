@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 
 import { shallowWithIntl } from '~root/intl/helpers'
-import { NavbarEditionWrapper } from '~client/components/navigation/navbar'
+import { NavbarEditionWrapper } from '~client/components/navigation/navbar/navbar-edition-wrapper'
 
 const block = {}
 const mobilization = {}

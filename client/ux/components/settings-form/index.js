@@ -36,8 +36,14 @@ const SettingsForm = ({ children, buttonText, successMessage, ...formProps }) =>
 )
 
 SettingsForm.propTypes = {
-  buttonText: PropTypes.string,
-  successMessage: PropTypes.string
+  buttonText: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
+  successMessage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ])
 }
 
 export default SettingsForm

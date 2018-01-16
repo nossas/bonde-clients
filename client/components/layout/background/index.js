@@ -46,4 +46,14 @@ Background.defaultProps = {
   alignment: { x: 'center', y: 'center' }
 }
 
+export const BondeBackground = ({ children, ...props }) => (
+  <Background
+    image={require('exenv').canUseDOM ? require('~client/images/bg-login.png') : ''}
+    contentSize={12}
+    {...props}
+  >
+    {children}
+  </Background>
+)
+
 export default Background

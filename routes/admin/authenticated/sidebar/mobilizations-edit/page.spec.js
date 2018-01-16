@@ -9,12 +9,12 @@ import Page from '~routes/admin/authenticated/sidebar/mobilizations-edit/page'
 describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   let page
   const defaultProps = {
-    mobilization: {}
+    mobilization: {},
+    match: {}
   }
-  const context = { router: {} }
 
   beforeEach(() => {
-    page = shallow(<Page {...defaultProps} />, { context })
+    page = shallow(<Page {...defaultProps} />)
   })
 
   it('should render without crashed', () => {
@@ -23,7 +23,10 @@ describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   })
 
   it('should render mobilization with editable true', () => {
-    expect(page.find(Mobilization).props()).to.deep.equal({ editable: true })
+    expect(page.find(Mobilization).props())
+      .to.have.property('editable')
+      .that.is.a('boolean')
+      .that.equals(true)
   })
 
   it('should render loading when renderIsLoading is true', () => {

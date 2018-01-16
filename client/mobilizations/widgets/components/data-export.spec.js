@@ -9,7 +9,6 @@ import { DataExport } from '~client/mobilizations/widgets/components'
 describe('client/mobilizations/widgets/components/data-export', () => {
   let wrapper
   const props = {
-    params: { widget_id: '1' },
     loading: false,
     success: false,
     error: undefined,

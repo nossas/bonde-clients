@@ -4,7 +4,7 @@ import * as t from '../action-types'
 import AuthSelectors from '~client/account/redux/selectors'
 import Selectors from '../selectors'
 
-export default widget => (dispatch, getState, { api }) => {
+export default (widget) => (dispatch, getState, { api }) => {
   dispatch(createAction(t.UPDATE_WIDGET_REQUEST))
   const credentials = AuthSelectors(getState()).getCredentials()
   const mobilization = Selectors(getState()).getMobilization()

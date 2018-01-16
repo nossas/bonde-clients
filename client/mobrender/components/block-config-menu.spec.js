@@ -29,68 +29,56 @@ describe('~client/mobrender/components/block-config-menu', () => {
   })
 
   describe('should make menu item', () => {
-    let menu
+    const menu = index => menuConfig.find('DropdownMenuItem').at(index)
 
     describe('0: duplicate', () => {
-      beforeEach(() => {
-        menu = menuConfig.find('DropdownMenuItem').at(0)
-      })
-
       it('should call duplicate when clicked', () => {
         let expected
         menuConfig.setProps({ duplicate: (block) => { expected = block } })
-        menu.simulate('click')
+        menu(0).simulate('click')
         expect(expected).to.deep.equal(props.block)
       })
     })
 
     describe('1: change background', () => {
-      beforeEach(() => {
-        menu = menuConfig.find('DropdownMenuItem').at(1)
-      })
-
       it('should call onEdit("background-{block_id}") when clicked', () => {
         let result
         menuConfig.setProps({ onEdit: turn => { result = turn } })
-        menu.simulate('click')
+        menu(1).simulate('click')
         expect(result).to.equal(`background-${props.block.id}`)
       })
 
       it('should custom style to item', () => {
         const text = 'Alterar fundo'
-        expect(menu.props().className).to.equal('btn')
-        expect(menu.find('i').props().className).to.equal('fa fa-picture-o')
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(1).props().className).to.equal('btn')
+        expect(menu(1).find('i').props().className).to.equal('fa fa-picture-o')
+        expect(menu(1).find('span FormattedMessage').props().defaultMessage).to.equal(text)
       })
     })
 
     describe('2: show/hide block', () => {
-      beforeEach(() => {
-        menu = menuConfig.find('DropdownMenuItem').at(2)
-      })
-
       it('should call update with block.hidden updated', () => {
         let result
         menuConfig.setProps({ update: block => { result = block } })
-        menu.simulate('click')
+        menu(2).simulate('click')
         expect(result).to.deep.equal({...props.block,
           hidden: !props.block.hidden
         })
       })
 
       it('should custom style to item', () => {
-        expect(menu.props().className).to.equal('btn')
+        expect(menu(2).props().className).to.equal('btn')
       })
 
       it('should custom style to item when block is hidden', () => {
         menuConfig.setProps({ block: { ...props.block, hidden: true } })
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Mostrar')
-        expect(menu.find('i').props().className).to.equal('fa fa-eye')
+        expect(menu(2).find('span FormattedMessage').props().defaultMessage).to.equal('Mostrar')
+        expect(menu(2).find('i').props().className).to.equal('fa fa-eye')
       })
 
       it('should custom style to item when block isnt hidden', () => {
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Esconder')
-        expect(menu.find('i').props().className).to.equal('fa fa-eye-slash')
+        expect(menu(2).find('span FormattedMessage').props().defaultMessage).to.equal('Esconder')
+        expect(menu(2).find('i').props().className).to.equal('fa fa-eye-slash')
       })
     })
 
@@ -99,7 +87,6 @@ describe('~client/mobrender/components/block-config-menu', () => {
 
       beforeEach(() => {
         confirmStub = sinon.stub(window, 'confirm')
-        menu = menuConfig.find('DropdownMenuItem').at(3)
       })
 
       afterEach(() => {
@@ -107,7 +94,7 @@ describe('~client/mobrender/components/block-config-menu', () => {
       })
 
       it('should call window.confirm when click', () => {
-        menu.simulate('click')
+        menu(3).simulate('click')
         expect(confirmStub.called).to.equal(true)
       })
 
@@ -115,71 +102,63 @@ describe('~client/mobrender/components/block-config-menu', () => {
         let result
         menuConfig.setProps({ destroy: block => { result = block } })
         confirmStub.returns(true)
-        menu.simulate('click')
+        menu(3).simulate('click')
         expect(result).to.deep.equal(props.block)
       })
 
       it('should custom style item', () => {
-        expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal('Remover')
-        expect(menu.find('i').props().className).to.equal('fa fa-trash')
+        expect(menu(3).props().className).to.equal('btn')
+        expect(menu(3).find('span FormattedMessage').props().defaultMessage).to.equal('Remover')
+        expect(menu(3).find('i').props().className).to.equal('fa fa-trash')
       })
     })
 
     describe('4: move up', () => {
-      beforeEach(() => {
-        menu = menuConfig.find('DropdownMenuItem').at(4)
-      })
-
       it('should call moveUp(block) when click and canMoveUp', () => {
         let result
         menuConfig.setProps({
           moveUp: block => { result = block },
           canMoveUp: true
         })
-        menu.simulate('click')
-        expect(menu.props().disabled).to.equal(false)
+        menu(4).simulate('click')
+        expect(menu(4).props().disabled).to.equal(false)
         expect(result).to.deep.equal(props.block)
       })
 
       it('should disable button when !canMoveUp', () => {
         menuConfig.setProps({ canMoveUp: false })
-        expect(menu.props().disabled).to.equal(true)
+        expect(menu(4).props().disabled).to.equal(true)
       })
 
       it('should custom style to item', () => {
         const text = 'Mover para cima'
-        expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
-        expect(menu.find('i').props().className).to.equal('fa fa-chevron-up')
+        expect(menu(4).props().className).to.equal('btn')
+        expect(menu(4).find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(4).find('i').props().className).to.equal('fa fa-chevron-up')
       })
     })
 
     describe('5: move down', () => {
-      beforeEach(() => {
-        menu = menuConfig.find('DropdownMenuItem').at(5)
-      })
-
       it('should call moveDown(block) when click and canMoveDown', () => {
         let result
         menuConfig.setProps({
           moveDown: block => { result = block },
           canMoveDown: true
         })
-        menu.simulate('click')
+        menu(5).simulate('click')
         expect(result).to.deep.equal(props.block)
       })
 
       it('should disable button when !canMoveDown', () => {
         menuConfig.setProps({ canMoveDown: false })
-        expect(menu.props().disabled).to.equal(true)
+        expect(menu(5).props().disabled).to.equal(true)
       })
 
       it('should custom style to item', () => {
         const text = 'Mover para baixo'
-        expect(menu.props().className).to.equal('btn')
-        expect(menu.find('span FormattedMessage').props().defaultMessage).to.equal(text)
-        expect(menu.find('i').props().className).to.equal('fa fa-chevron-down')
+        expect(menu(5).props().className).to.equal('btn')
+        expect(menu(5).find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(5).find('i').props().className).to.equal('fa fa-chevron-down')
       })
     })
   })

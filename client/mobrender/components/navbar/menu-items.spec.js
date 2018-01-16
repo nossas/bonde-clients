@@ -21,7 +21,7 @@ describe('client/mobrender/components/navbar/menu-items', () => {
   })
 
   it('should render two NavbarEditionWrapper component properly', () => {
-    expect(wrapper.find('NavbarEditionWrapper')).to.have.length(2)
+    expect(wrapper.find('InjectIntl(NavbarEditionWrapper)')).to.have.length(2)
   })
 
   describe('default', () => {
