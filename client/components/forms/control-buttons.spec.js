@@ -25,8 +25,8 @@ describe('client/components/forms/control-buttons', () => {
     it('should render submit button as disabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.true
     })
-    it('should render submit button with its text as "Continuar"', () => {
-      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Continuar')
+    it('should render submit button with its text as "Próxima parada"', () => {
+      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Próxima parada')
     })
     it('should not render form submit success message', () => {
       expect(wrapper.find('.success-message')).to.have.length(0)
@@ -75,8 +75,8 @@ describe('client/components/forms/control-buttons', () => {
     it('should render form submit success message', () => {
       expect(wrapper.find('.success-message')).to.have.length(1)
     })
-    it('should render submit button with its text as "Continuar"', () => {
-      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Continuar')
+    it('should render submit button with its text as "Próxima parada"', () => {
+      expect(wrapper.find('input[type="submit"]').props().value).to.equal('Próxima parada')
     })
     it('should render submit button as disabled', () => {
       expect(wrapper.find('input[type="submit"]').props().disabled).to.be.true

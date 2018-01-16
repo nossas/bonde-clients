@@ -326,13 +326,13 @@ class Page extends Component {
                   id='community.page--domain-list.dns-server-description'
                   defaultMessage={
                     'Os Servidores DNS são endereços utilizados pelas organizações de registro ' +
-                    'de domínios como {registrobr} ou {godaddy}, para identificarem em qual ' +
+                    'de domínios como {registroBr} ou {goDaddy}, para identificarem em qual ' +
                     'servidor se encontra as informações sobre o domínio registrado. Tire ' +
                     'suas dúvidas {trilho}.'
                   }
                   values={{
-                    registrobr: <a href='http://registro.br' target='_blank'>registro.br</a>,
-                    godaddy: <a href='http://godaddy.com' target='_blank'>godaddy.com</a>,
+                    registroBr: <a href='http://registro.br' target='_blank'>registro.br</a>,
+                    goDaddy: <a href='http://godaddy.com' target='_blank'>godaddy.com</a>,
                     trilho: (
                       <a href='https://trilho.bonde.org/' title='Ajuda' target='_blank'>
                         <FormattedMessage

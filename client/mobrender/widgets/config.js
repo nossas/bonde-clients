@@ -42,12 +42,7 @@ export default (mobilization, widget, { intl }) => [
     settings: {
       email_text: intl.formatMessage({
         id: 'widgets.config--form.default',
-        defaultMessage: (
-          'Obrigado por apostar na força da ação coletiva em rede. Sua participação ' +
-          'é muito importante e, agora, precisamos da sua ajuda para que mais gente ' +
-          'colabore com esta mobilização. Compartilhe nas suas redes clicando em um ' +
-          'dos links abaixo.\n\nUm abraço'
-        )
+        defaultMessage: 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço'
       })
     },
     redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
