@@ -23,7 +23,7 @@ class Page extends React.Component {
   static async getInitialProps ({ store }) {
     const { dispatch, getState } = store
     const host = getState().sourceRequest.host
-    const appDomain = 'bonde.devel'
+    const appDomain = process.env.APP_DOMAIN || 'bonde.devel'
 
     if (host) {
       const {
