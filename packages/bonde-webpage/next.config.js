@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const webpack = require('webpack')
 const { ANALYZE } = process.env

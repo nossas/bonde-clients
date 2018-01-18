@@ -16,6 +16,7 @@
     "axios": "^0.17.1",
     "chain-function": "^1.0.0",
     "classnames": "^2.2.5",
+    "dotenv": "^4.0.0",
     "downloadjs": "^1.4.7",
     "draft-js": "^0.10.4",
     "exenv": "^1.2.2",
