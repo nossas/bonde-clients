@@ -1,7 +1,7 @@
 {
-  "name": "mob-render",
+  "name": "bonde-webpage",
   "version": "0.0.1",
-  "description": "Public release of the mobilization",
+  "description": "Bonde WebPage - Module responsible to make a mobilization",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 5001",
