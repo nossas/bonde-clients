@@ -9590,11 +9590,11 @@ slate-base64-serializer@^0.2.13:
   dependencies:
     isomorphic-base64 "^1.0.2"
 
-slate-dev-logger@^0.1.36:
+slate-dev-logger@^0.1.26, slate-dev-logger@^0.1.36:
   version "0.1.36"
   resolved "https://registry.yarnpkg.com/slate-dev-logger/-/slate-dev-logger-0.1.36.tgz#ecdb37dbf944dfc742bab23b6a20d5a0472db95e"
 
-slate-editor@~4.0:
+slate-editor@4.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-4.0.0.tgz#7d4e1d3c8e548f4f042bf7f5cdeef927226cfd65"
   dependencies:
@@ -9610,11 +9610,11 @@ slate-editor@~4.0:
     slate "0.31.3"
     slate-react "0.10.17"
 
-slate-plain-serializer@0.4.11:
-  version "0.4.11"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.4.11.tgz#824d1f55737d6a1f3772a909c9ca06b539acae11"
+slate-plain-serializer@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.4.0.tgz#85da9fb8d35637e42e52ea4e684467c737c7913d"
   dependencies:
-    slate-dev-logger "^0.1.36"
+    slate-dev-logger "^0.1.26"
 
 slate-plain-serializer@^0.4.11:
   version "0.4.16"
@@ -9650,19 +9650,6 @@ slate-react@0.10.17:
 slate@0.31.3:
   version "0.31.3"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.31.3.tgz#21f95a1484a5a13937e33fd5a1aca1b34edf44f8"
-  dependencies:
-    debug "^2.3.2"
-    direction "^0.1.5"
-    esrever "^0.2.0"
-    is-empty "^1.0.0"
-    is-plain-object "^2.0.4"
-    lodash "^4.17.4"
-    slate-dev-logger "^0.1.36"
-    type-of "^2.0.1"
-
-slate@^0.32.1:
-  version "0.32.1"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.32.1.tgz#774f81cfbfa57e5f1dbe8e064d0040eb6d7cbbc3"
   dependencies:
     debug "^2.3.2"
     direction "^0.1.5"
