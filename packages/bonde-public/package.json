@@ -1,7 +1,7 @@
 {
-  "name": "bonde-webpage",
+  "name": "bonde-public",
   "version": "0.0.1",
-  "description": "Bonde WebPage - Module responsible to make a mobilization",
+  "description": "Bonde Public - Responsible render a mobilization on public mode",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 5001",
