@@ -1,6 +1,6 @@
 {
-  "name": "mobilizations",
-  "version": "0.1.0",
+  "name": "bonde-webpage",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
