@@ -1,8 +1,6 @@
-import { createNamedWrapperAction as createAction } from './createAction'
-import { load } from '../ducks/listable'
+import { Types } from '../rootReducer'
 
-export const loadMobilizations = createAction(load, 'mobilizations')
-
-export const loadBlocks = createAction(load, 'blocks')
-
-export const loadWidgets = createAction(load, 'widgets')
+export const load = (meta, blocks, widgets) => ({
+  type: Types.LOAD,
+  payload: { meta, blocks, widgets }
+})

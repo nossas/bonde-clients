@@ -1,11 +1,23 @@
-import { combineReducers } from 'redux'
-import listable from './ducks/listable'
-import {
-  createNamedWrapperReducer as createReducer
-} from './createReducer'
+export const Types = {
+  LOAD: 'webpage/LOAD'
+}
 
-export default combineReducers({
-  mobilizations: createReducer(listable, 'mobilizations'),
-  blocks: createReducer(listable, 'blocks'),
-  widgets: createReducer(listable, 'widgets')
-})
+const initialState = {
+  meta: undefined,
+  blocks: [],
+  widgets: []
+}
+
+export default (state = initialState, action = {}) => {
+  switch (action.type) {
+    case Types.LOAD:
+      return {
+        ...state,
+        meta: action.payload.meta,
+        blocks: action.payload.blocks,
+        widgets: action.payload.widgets
+      }
+    default:
+      return state
+  }
+}
