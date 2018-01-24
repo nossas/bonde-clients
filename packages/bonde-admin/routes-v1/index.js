@@ -2,7 +2,10 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import DevTools from '~client/components/dev-tools'
 import '~client/styles/main.scss'
-import { TechnicalIssues } from '~client/components/error/index.js'
+import { TechnicalIssues } from '~client/components/error/index'
+import { ZendeskWidget } from '~client/components/external-services'
+import { GoogleFontsLoader } from '~client/components/fonts'
+import NotificationSystem from '~client/components/notification-system'
 
 // Page
 import LoginPage from '~routes/admin/not-authenticated/account-login/page.connected'
@@ -26,6 +29,9 @@ const AuthExample = () => (
       </Switch>
     </Router>
     <DevTools />
+    <ZendeskWidget />
+    <NotificationSystem />
+    <GoogleFontsLoader fonts='Source Sans Pro' />
   </div>
 )
 
