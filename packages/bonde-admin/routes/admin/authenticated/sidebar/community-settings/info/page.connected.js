@@ -16,7 +16,6 @@ import {
 import { asyncEdit } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 import { i18nKeys } from './i18n'
-import { isValidTargetEmail } from '~client/utils/validation-helper'
 
 const emailErrorMessage = {
   id: 'page--community-info.form.custom-from-email.validation.invalid-email-format',
