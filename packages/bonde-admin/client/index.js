@@ -21,14 +21,15 @@ if (__PROD__ || __TEST__) {
 
 // Set up React-Intl
 addLocaleData([...pt, ...es, ...en])
+const defaultLocale = 'pt-BR'
 const { languages, language } = window.navigator
-const currentLocale = ((languages && languages[0]) || language) || 'pt-BR'
+const currentLocale = ((languages && languages[0]) || language) || defaultLocale
 const languageWithoutRegionCode = currentLocale.toLowerCase().split(/[_-]+/)[0]
 const locale = currentLocale
 const messages = (
   localeData[currentLocale] ||
   localeData[languageWithoutRegionCode] ||
-  localeData[config.defaultLocale]
+  localeData[defaultLocale]
 )
 const intlProvider = new IntlProvider({ locale, messages })
 const { intl } = intlProvider.getChildContext()
