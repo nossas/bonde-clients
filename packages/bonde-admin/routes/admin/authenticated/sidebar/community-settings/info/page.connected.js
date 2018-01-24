@@ -6,7 +6,7 @@ import { createForm, Field } from '~client/storybook/forms'
 import {
   combineValidations,
   required,
-  isEmail
+  isEmailSender
 } from '~client/storybook/forms/validate'
 import {
   SettingsForm,
@@ -16,6 +16,7 @@ import {
 import { asyncEdit } from '~client/community/action-creators'
 import * as CommunitySelectors from '~client/community/selectors'
 import { i18nKeys } from './i18n'
+import { isValidTargetEmail } from '~client/utils/validation-helper'
 
 const emailErrorMessage = {
   id: 'page--community-info.form.custom-from-email.validation.invalid-email-format',
@@ -40,7 +41,7 @@ const CommunityForm = createForm({
       defaultMessage: 'Informe em qual cidade sua comunidade atua'
     }),
     required('email_template_from', emailErrorMessage),
-    isEmail('email_template_from', emailErrorMessage)
+    isEmailSender('email_template_from', emailErrorMessage)
   ]),
   submit: asyncEdit,
   component: SettingsForm
