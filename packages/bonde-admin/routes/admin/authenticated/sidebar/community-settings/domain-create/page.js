@@ -64,8 +64,9 @@ class Page extends Component {
               onSubmit={values =>
                 asyncAddHostedZone(values)
                   .then(dns => {
-                    this.setState({ dns })
-                    return Promise.resolve()
+                    if (dns.status !== 'error') {
+                      this.setState({ dns })
+                    }
                   })
               }
             >
