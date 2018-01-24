@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { FormRedux, ControlLabel, FormControl, FormGroup } from '~client/components/forms'
 import { Button } from '~client/ux/components'
