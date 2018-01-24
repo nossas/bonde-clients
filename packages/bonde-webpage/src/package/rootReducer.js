@@ -1,5 +1,5 @@
 export const Types = {
-  LOAD: 'webpage/LOAD'
+  SELECT_PAGE: 'webpage/SELECT_PAGE'
 }
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case Types.LOAD:
+    case Types.SELECT_PAGE:
       return {
         ...state,
         meta: action.payload.meta,

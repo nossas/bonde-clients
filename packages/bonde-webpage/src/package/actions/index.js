@@ -1,6 +1,6 @@
 import { Types } from '../rootReducer'
 
-export const load = (meta, blocks, widgets) => ({
-  type: Types.LOAD,
+export const selectPage = (meta, blocks, widgets) => ({
+  type: Types.SELECT_PAGE,
   payload: { meta, blocks, widgets }
 })

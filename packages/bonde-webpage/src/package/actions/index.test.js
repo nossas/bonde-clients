@@ -1,13 +1,13 @@
 import { Types } from '../rootReducer'
-import { load } from './'
+import { selectPage } from './'
 
 describe('package/actions', () => {
-  it('should dispatch Types.LOAD with meta, blocks and widgets', () => {
+  it('should dispatch SELECT_PAGE with meta, blocks and widgets', () => {
     const meta = 'meta'
     const blocks = ['blocks']
     const widgets = ['widgets']
-    expect(load(meta, blocks, widgets)).to.deep.equal({
-      type: Types.LOAD,
+    expect(selectPage(meta, blocks, widgets)).to.deep.equal({
+      type: Types.SELECT_PAGE,
       payload: { meta, blocks, widgets }
     })
   })
