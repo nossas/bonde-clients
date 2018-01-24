@@ -211,7 +211,7 @@ class Page extends Component {
               <span style={{ marginRight: '1rem' }}>
                 <Button
                   type='button'
-                  onClick={() => browserHistory.push(paths.communityDomain())}
+                  onClick={() => this.props.history.push(paths.communityDomain())}
                 >
                   <FormattedMessage
                     id='page--community-domain-create.step-check.test-later-button.text'
