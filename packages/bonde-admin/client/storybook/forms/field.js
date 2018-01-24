@@ -4,7 +4,7 @@ import { fromJS } from 'immutable'
 
 const getValue = eventOrValue =>
   typeof eventOrValue === 'object'
-    ? eventOrValue.target.value : eventOrValue
+    ? eventOrValue.value : eventOrValue
 
 class Field extends React.Component {
   /**
