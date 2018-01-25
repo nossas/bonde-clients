@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 class Block extends React.Component {
   
@@ -21,16 +22,18 @@ class Block extends React.Component {
   }
 
   render () {
-    const { children, block: { id, bg_class: bgClass } } = this.props
+    const { children, className, block: { id, bg_class: bgClass } } = this.props
     
     const bgClassName = bgClass && bgClass.indexOf('{') === -1
       ? bgClass : undefined
+
+    const blockStyle = Object.assign({}, this.getBgStyle())
     
     return (
       <div
         id={`block-${id}`}
-        className={bgClassName}
-        style={this.getBgStyle()}
+        className={`${className} ${bgClassName}`}
+        style={blockStyle}
       >
         {children}
       </div>
@@ -42,4 +45,8 @@ Block.defaultProps = {
   block: {}
 }
 
-export default Block
+export default styled(Block)`
+  display: grid;
+  grid-template-columns: repeat(${props => props.span ? '3' : 'auto-fit'}, minmax(320px, 1fr));
+  grid-template: 1 / 2 span;
+`

@@ -7,18 +7,26 @@ export const createPage = ({ plugins, relationship }) => {
   const Widget = createWidget({ plugins })
   
   class WebPage extends React.Component {
+
+    renderBlock (block) {
+      const widgets = relationship(block, this.props.widgets)
+
+      // Altera o layout apenas para modelo de grid com span em 3 colunas
+      const span = widgets.findIndex(widget => widget.lg_size === 8) !== -1
+
+      return (
+        <Block key={`block-${block.id}`} block={block} span={span}>
+          {widgets.map(widget => (
+            <Widget key={`widget-${widget.id}`} widget={widget} />
+          ))}
+        </Block>
+      )
+    }
   
     render () {
-      const { blocks, widgets } = this.props 
       return (
         <div className='webpage'>
-        {blocks.map(block => (
-          <Block key={`block-${block.id}`} block={block}>
-            {relationship(block, widgets).map(widget => (
-              <Widget key={`widget-${widget.id}`} widget={widget} />
-            ))}
-          </Block>
-        ))}
+          {this.props.blocks.map(this.renderBlock.bind(this))}
         </div>
       )
     }
