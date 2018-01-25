@@ -370,6 +370,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--community-recipient.warning.title': 'Importante',
   'page--community-recipient.warning.content.list.li-01': 'A partir do momento em que você preencher os campos abaixo, você vai poder começar a arrecadar pela ferramenta de crowdfunding!',
   'page--community-recipient.warning.content.list.li-02': 'Atenção: qualquer quantia arrecadada pelas páginas da sua comunidade vai ser automaticamente transferida para a conta cadastrada aqui no dia do mês (ou da semana) que selecionar abaixo.',
+  'page--community-recipient.warning.content.list.li-03': 'Atenção 2: As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário. Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será da seguinte forma: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.',
   'page--community-recipient.title': 'Data de Transferência',
   'page--community-recipient.form.transfer-interval.label': 'Recorrência',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',
