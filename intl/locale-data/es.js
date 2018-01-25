@@ -123,7 +123,7 @@ export default {
   'notification--account-password-retrieve-success.message': 'Acabamos de mandarte un correo con una nueva contrasena. Revisa el buzon de entrada de tu correo y usa la nueva contrasena para iniciar sesion ;)',
 
   'notification--community-invite-success.title': '¡Listo!',
-  'notification--community-invite-success.message': '¡La invitación para {correo electrónico} fue enviada exitosamente! Tu BONDE está creciendo :)',
+  'notification--community-invite-success.message': '¡La invitación para {email} fue enviada exitosamente! Tu BONDE está creciendo :)',
 
   'notification--subscription-cancel-success.title': 'Suscripción cancelada',
   'notification--subscription-cancel-success.message': 'Gracias por tu apoyo hasta aquí - ¡y esperamos que nos vuelvas a apoyar nuevamente! ',
