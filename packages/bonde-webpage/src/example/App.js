@@ -6,7 +6,7 @@ import { selectPage } from '../package/actions'
 import { createPage } from '../package/components/page'
 import logo from './logo.svg'
 import './App.css'
-import Overlay from './components/webpage/overlay'
+import OverlayWidget from '../package/components/overlay'
 
 const WidgetDefault = ({ widget }) => (
   <div>
@@ -14,12 +14,18 @@ const WidgetDefault = ({ widget }) => (
   </div>
 )
 
+const RenderOverlay = ({ widget }) => (
+  <OverlayWidget onClick={() => console.log(`clique overlay #${widget.id}`)}>
+    {`Clique aqui para configurar ${widget.kind}`}
+  </OverlayWidget>
+)
+
 const plugins = [
-  { kind: 'draft', component: WidgetDefault, renderOverlay: Overlay },
-  { kind: 'form', component: WidgetDefault, renderOverlay: Overlay },
-  { kind: 'content', component: WidgetDefault },
-  { kind: 'donation', component: WidgetDefault },
-  { kind: 'pressure', component: WidgetDefault }
+  { kind: 'draft', plugin: WidgetDefault, renderOverlay: RenderOverlay },
+  { kind: 'form', plugin: WidgetDefault, renderOverlay: RenderOverlay },
+  { kind: 'content', plugin: WidgetDefault },
+  { kind: 'donation', plugin: WidgetDefault },
+  { kind: 'pressure', plugin: WidgetDefault }
 ]
 
 const Mobilization = createPage({
@@ -64,7 +70,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
           <p>
-            <button onClick={() => this.fetch('minha-beaga')}>
+            <button onClick={() => this.fetch('minhabeaga')}>
               Carregar mobilizações
             </button>
           </p>

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 /**
  *
@@ -47,31 +48,33 @@ const Column = styled.div`{
   grid-column: ${props => props.size} span;
 }`
 
-export const createWidget = ({ plugins }) => class Widget extends React.Component {
+class Widget extends React.Component {
   
-  getPlugin (kind) {
-    const plugin = plugins.filter(opts => opts.kind === kind)[0]
-    if (!plugin) {
-      throw new Error(`Widget with kind ${kind} not exists in plugins configuration`)
-    }
-    return plugin
-  }
-
   render () {
-    const { widget } = this.props
     const {
-      component: WidgetComponent,
+      widget,
+      readOnly,
+      plugin: PluginComponent,
       renderOverlay: OverlayComponent
-    } = this.getPlugin(widget.kind)
+    } = this.props
     
     // TODO: verificar como será trabalhado o responsivo
     const { lg_size: lgSize } = widget
 
     return (
       <Column size={lgSize}>
-        {OverlayComponent && (<OverlayComponent widget={widget} />)}
-        <WidgetComponent widget={widget} />
+        {!readOnly && OverlayComponent && (<OverlayComponent widget={widget} />)}
+        <PluginComponent widget={widget} />
       </Column>
     )
   }
 }
+
+Widget.propTypes = {
+  readOnly: PropTypes.bool.isRequired,
+  plugin: PropTypes.element.isRequired,
+  renderOverlay: PropTypes.func,
+  widget: PropTypes.object.isRequired
+}
+
+export default Widget
