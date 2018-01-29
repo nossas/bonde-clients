@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { FormRedux, ControlLabel, FormControl, FormGroup } from '~client/components/forms'
 import { Button } from '~client/ux/components'
@@ -65,8 +64,9 @@ class Page extends Component {
               onSubmit={values =>
                 asyncAddHostedZone(values)
                   .then(dns => {
-                    this.setState({ dns })
-                    return Promise.resolve()
+                    if (dns.status !== 'error') {
+                      this.setState({ dns })
+                    }
                   })
               }
             >
@@ -211,7 +211,7 @@ class Page extends Component {
               <span style={{ marginRight: '1rem' }}>
                 <Button
                   type='button'
-                  onClick={() => browserHistory.push(paths.communityDomain())}
+                  onClick={() => this.props.history.push(paths.communityDomain())}
                 >
                   <FormattedMessage
                     id='page--community-domain-create.step-check.test-later-button.text'

@@ -123,7 +123,7 @@ export default {
   'notification--account-password-retrieve-success.message': 'Acabamos de mandarte un correo con una nueva contrasena. Revisa el buzon de entrada de tu correo y usa la nueva contrasena para iniciar sesion ;)',
 
   'notification--community-invite-success.title': '¡Listo!',
-  'notification--community-invite-success.message': '¡La invitación para {correo electrónico} fue enviada exitosamente! Tu BONDE está creciendo :)',
+  'notification--community-invite-success.message': '¡La invitación para {email} fue enviada exitosamente! Tu BONDE está creciendo :)',
 
   'notification--subscription-cancel-success.title': 'Suscripción cancelada',
   'notification--subscription-cancel-success.message': 'Gracias por tu apoyo hasta aquí - ¡y esperamos que nos vuelvas a apoyar nuevamente! ',
@@ -369,6 +369,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'page--community-recipient.warning.title': 'Importante',
   'page--community-recipient.warning.content.list.li-01': 'A partir del momento en que llenes los campos de abajo, vas a poder comenzar a recaudar fondos con la herramienta de crowdfunding!',
   'page--community-recipient.warning.content.list.li-02': 'Atención: cualquier cantidad recaudada por las páginas de tu comunidad será automáticamente transferida a la cuenta registrada aquí el día del mes (o de la semana) que selecciones a continuación.',
+  'page--community-recipient.warning.content.list.li-03': 'Atención 2: Las donaciones sólo quedan disponibles 31 días después de la transacción de la tarjeta de crédito se ha creado (29 días + 2 días hábiles) en el caso de transacciones con una cuota y 2 días hábiles después del pago del boleto bancario. En caso de que la transacción tenga de 2 a 12 cuotas, la recepción normal será de la siguiente forma: primer cuota en 31 días, segunda en 61, tercera en 91, y así sucesivamente.',
   'page--community-recipient.title': 'Fecha de transferencia',
   'page--community-recipient.form.transfer-interval.label': 'Frecuencia',
   'page--community-recipient.form.transfer-interval.value.weekly': 'Semanal',

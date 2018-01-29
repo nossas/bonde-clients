@@ -19,6 +19,21 @@ if (__PROD__ || __TEST__) {
   Raven.config(process.env.SENTRY_DSN_PUBLIC).install()
 }
 
+// Set up React-Intl
+addLocaleData([...pt, ...es, ...en])
+const defaultLocale = 'pt-BR'
+const { languages, language } = window.navigator
+const currentLocale = ((languages && languages[0]) || language) || defaultLocale
+const languageWithoutRegionCode = currentLocale.toLowerCase().split(/[_-]+/)[0]
+const locale = currentLocale
+const messages = (
+  localeData[currentLocale] ||
+  localeData[languageWithoutRegionCode] ||
+  localeData[defaultLocale]
+)
+const intlProvider = new IntlProvider({ locale, messages })
+const { intl } = intlProvider.getChildContext()
+
 // Set up redux initial state
 const hydrateInitialState = keys => {
   const extracted = {}
@@ -33,17 +48,9 @@ const hydrateInitialState = keys => {
 }
 
 const initialState = window.INITIAL_STATE || {
-  intl: { currentLocale: 'pt-BR', messages: localeData },
+  intl: { currentLocale, messages: localeData },
   ...hydrateInitialState(['auth', 'community'])
 }
-
-// Set up React-Intl
-addLocaleData([...pt, ...es, ...en])
-const { intl: { currentLocale, messages: localeMessages } } = initialState
-const locale = currentLocale
-const messages = localeMessages[currentLocale]
-const intlProvider = new IntlProvider({ locale, messages })
-const { intl } = intlProvider.getChildContext()
 
 // Set up Redux store
 export const store = configureStore(initialState, { intl })

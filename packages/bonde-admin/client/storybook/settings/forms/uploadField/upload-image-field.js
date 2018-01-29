@@ -23,10 +23,11 @@ class UploadImageField extends Component {
 
   onFinish (image) {
     this.setState({ loading: false })
-    const e = {
-      value: image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
-    }
-    this.props.onChange(e)
+    this.props.onChange({
+      target: {
+        value: image.signedUrl.substring(0, image.signedUrl.indexOf('?'))
+      }
+    })
   }
 
   onClick () {

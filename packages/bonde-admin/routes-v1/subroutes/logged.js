@@ -15,6 +15,12 @@ import SidebarRoute from './sidebar'
 import PrivateRoute from '~root/routes-v1/private-route'
 
 class Logged extends React.Component {
+  componentDidMount () {
+    if (this.props.user) {
+      this.props.load(this.props.user)
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
     if (!this.props.user && nextProps.user) {
       this.props.load(nextProps.user)

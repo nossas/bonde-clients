@@ -6,7 +6,7 @@ import { createForm, Field } from '~client/storybook/forms'
 import {
   combineValidations,
   required,
-  isEmail
+  isEmailSender
 } from '~client/storybook/forms/validate'
 import {
   SettingsForm,
@@ -40,7 +40,7 @@ const CommunityForm = createForm({
       defaultMessage: 'Informe em qual cidade sua comunidade atua'
     }),
     required('email_template_from', emailErrorMessage),
-    isEmail('email_template_from', emailErrorMessage)
+    isEmailSender('email_template_from', emailErrorMessage)
   ]),
   submit: asyncEdit,
   component: SettingsForm
