@@ -1,0 +1,15 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    ["react-intl", {
+      "messagesDir": "./build/intl/messages",
+      "enforceDescriptions": false
+    }],
+    [
+      "inline-import",
+      {
+        "extensions": [".css"]
+      }
+    ]
+  ]
+}
