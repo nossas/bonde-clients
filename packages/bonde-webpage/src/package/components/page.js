@@ -11,11 +11,8 @@ export const createPage = ({ plugins, relationship }) => {
     renderBlock (block) {
       const widgets = relationship(block, this.props.widgets)
 
-      // Altera o layout apenas para modelo de grid com span em 3 colunas
-      const span = widgets.findIndex(widget => widget.lg_size === 8) !== -1
-
       return (
-        <Block key={`block-${block.id}`} block={block} span={span}>
+        <Block key={`block-${block.id}`} block={block}>
           {widgets.map(widget => (
             <Widget key={`widget-${widget.id}`} widget={widget} />
           ))}

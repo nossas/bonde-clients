@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 /**
  *
  * # Widget:
@@ -41,13 +42,13 @@ import React from 'react'
  *
  */
 
+const Column = styled.div`{
+  position: relative;
+  grid-column: ${props => props.size} span;
+}`
+
 export const createWidget = ({ plugins }) => class Widget extends React.Component {
   
-  constructor (props) {
-    super(props)
-    this.state = { mouseOver: false }
-  }
-
   getPlugin (kind) {
     const plugin = plugins.filter(opts => opts.kind === kind)[0]
     if (!plugin) {
@@ -63,24 +64,14 @@ export const createWidget = ({ plugins }) => class Widget extends React.Componen
       renderOverlay: OverlayComponent
     } = this.getPlugin(widget.kind)
     
-    // colunagem com classe css
-    const renderWidget = <WidgetComponent widget={widget} />
-    const { sm_size: smSize, md_size: mdSize, lg_size: lgSize } = widget
-    const className = `col-${smSize} sm-col-${smSize} md-col-${mdSize} lg-col-${lgSize}`
+    // TODO: verificar como será trabalhado o responsivo
+    const { lg_size: lgSize } = widget
 
     return (
-      <div
-        className={`widget ${className}`}
-        style={{position: 'relative'}}
-        onMouseEnter={() => this.setState({ mouseOver: true })}
-        onMouseLeave={() => this.setState({ mouseOver: false })}
-      >
-        {this.state.mouseOver && OverlayComponent ? (
-          <OverlayComponent widget={widget}>
-           {renderWidget} 
-          </OverlayComponent>
-        ) : renderWidget}
-      </div>
+      <Column size={lgSize}>
+        {OverlayComponent && (<OverlayComponent widget={widget} />)}
+        <WidgetComponent widget={widget} />
+      </Column>
     )
   }
 }
