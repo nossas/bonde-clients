@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/nossas/bonde-client/compare/v0.7.3...v0.8.0) (2018-01-16)
+
+
+### Bug Fixes
+
+* **adjustmentsForm:** add translate keys ([d6c9178](https://github.com/nossas/bonde-client/commit/d6c9178))
+* **intl:** domain registrobr and godaddy variables case ([7a88f1b](https://github.com/nossas/bonde-client/commit/7a88f1b))
+* **widgets:** update settings defaultMessage to used on locale-data ([52afa30](https://github.com/nossas/bonde-client/commit/52afa30))
+
+
+
+<a name="0.7.3"></a>
+## [0.7.3](https://github.com/nossas/bonde-client/compare/v0.7.2...v0.7.3) (2017-12-21)
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/nossas/bonde-client/compare/v0.6.10...v0.7.0) (2017-11-21)
 
