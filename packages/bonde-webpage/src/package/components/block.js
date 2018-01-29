@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-class Block extends React.Component {
+export class Block extends React.Component {
   
   getBgStyle () {
     const { bg_image: bgImage, bg_class: bgClass } = this.props.block
@@ -32,7 +32,7 @@ class Block extends React.Component {
     return (
       <div
         id={`block-${id}`}
-        className={`${className} ${bgClassName}`}
+        className={bgClassName ? `${className} ${bgClassName}` : className}
         style={blockStyle}
       >
         {children}
@@ -47,6 +47,5 @@ Block.defaultProps = {
 
 export default styled(Block)`
   display: grid;
-  grid-template-columns: repeat(${props => props.span ? '3' : 'auto-fit'}, minmax(320px, 1fr));
-  grid-template: 1 / 2 span;
+  grid-template-columns: repeat(12, 1fr);
 `

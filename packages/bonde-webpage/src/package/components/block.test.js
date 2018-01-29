@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Block from './block'
+import { Block } from './block'
 
 describe('package/components/block', () => {
   let block
@@ -34,10 +34,12 @@ describe('package/components/block', () => {
     })
   })
 
-  it('should set className if bgClass to be a css class', () => {
+  it('should set className if bgClass to be a css class', () => { 
     const bg_class = 'bg-gray'
     block.setProps({ block: { bg_class } })
-    expect(block.find('div').props().className).to.equal(bg_class)
-    expect(block.find('div').props().style).to.equal(undefined)
+    // undefined is a hack to use styled
+    expect(block.find('div').props().className)
+      .to.equal(`undefined ${bg_class}`)
+    expect(block.find('div').props().style).to.deep.equal({})
   })
 })
