@@ -20,19 +20,22 @@
     "dev": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {},
+  "dependencies": {
+    "styled-components": "^3.1.4",
+    "webfontloader": "^1.6.28"
+  },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
-    "nwb": "0.21.x",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "@storybook/react": "^3.3.11",
     "@storybook/addon-actions": "^3.3.11",
     "@storybook/addon-links": "^3.3.11",
     "@storybook/addons": "^3.3.11",
-    "babel-core": "^6.26.0"
+    "@storybook/react": "^3.3.11",
+    "babel-core": "^6.26.0",
+    "nwb": "0.21.x",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "author": "",
   "homepage": "",

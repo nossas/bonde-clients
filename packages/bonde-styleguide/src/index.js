@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import WebFont from 'webfontloader'
 
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
+WebFont.load({
+  google: {
+    families: ['Nunito Sans:400,800,900', 'sans-serif']
   }
-}
+})
+
+export Title from './Title'
