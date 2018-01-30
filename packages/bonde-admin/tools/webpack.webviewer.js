@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
 
 const sourcePath = path.join(__dirname, './../client/')
-const staticsPath = path.join(__dirname, './../../mob-render/webviewer/')
+const staticsPath = path.join(__dirname, './../../bonde-public/webviewer/')
 const fs = require('fs')
 
 const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
