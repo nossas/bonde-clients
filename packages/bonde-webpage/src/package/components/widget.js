@@ -54,7 +54,7 @@ class Widget extends React.Component {
     const {
       widget,
       readOnly,
-      plugin: PluginComponent,
+      component: PluginComponent,
       renderOverlay: OverlayComponent
     } = this.props
     
@@ -64,7 +64,7 @@ class Widget extends React.Component {
     return (
       <Column size={lgSize}>
         {!readOnly && OverlayComponent && (<OverlayComponent widget={widget} />)}
-        <PluginComponent widget={widget} />
+        <PluginComponent widget={widget} readOnly={readOnly} />
       </Column>
     )
   }
@@ -72,8 +72,8 @@ class Widget extends React.Component {
 
 Widget.propTypes = {
   readOnly: PropTypes.bool.isRequired,
-  plugin: PropTypes.element.isRequired,
-  renderOverlay: PropTypes.func,
+  component: PropTypes.any.isRequired,
+  renderOverlay: PropTypes.any,
   widget: PropTypes.object.isRequired
 }
 
