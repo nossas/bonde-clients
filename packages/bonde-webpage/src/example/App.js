@@ -6,7 +6,8 @@ import { selectPage } from '../package/actions'
 import { createPage } from '../package/components/page'
 import logo from './logo.svg'
 import './App.css'
-import OverlayWidget from '../package/components/overlay'
+import Overlay from '../package/components/overlay'
+import ContentWidget from '../plugins/content'
 
 const WidgetDefault = ({ widget }) => (
   <div>
@@ -15,17 +16,17 @@ const WidgetDefault = ({ widget }) => (
 )
 
 const RenderOverlay = ({ widget }) => (
-  <OverlayWidget onClick={() => console.log(`clique overlay #${widget.id}`)}>
-    {`Clique aqui para configurar ${widget.kind}`}
-  </OverlayWidget>
+  <Overlay onClick={() => console.log(`clique overlay #${widget.id}`)}>
+    {'Clique aqui para configurar'}
+  </Overlay>
 )
 
 const plugins = [
-  { kind: 'draft', plugin: WidgetDefault, renderOverlay: RenderOverlay },
-  { kind: 'form', plugin: WidgetDefault, renderOverlay: RenderOverlay },
-  { kind: 'content', plugin: WidgetDefault },
-  { kind: 'donation', plugin: WidgetDefault },
-  { kind: 'pressure', plugin: WidgetDefault }
+  { kind: 'draft', component: WidgetDefault, renderOverlay: RenderOverlay },
+  { kind: 'form', component: WidgetDefault, renderOverlay: RenderOverlay },
+  { kind: 'content', component: ContentWidget },
+  { kind: 'donation', component: WidgetDefault },
+  { kind: 'pressure', component: WidgetDefault }
 ]
 
 const Mobilization = createPage({

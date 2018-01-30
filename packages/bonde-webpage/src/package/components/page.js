@@ -14,11 +14,11 @@ export const createPage = ({ plugins, relationship }) => {
       
       if (!config)
         throw new Error(`Plugin[${kind}] configuration not exists.`)
-      else if (Object.keys(config).findIndex(k => k === 'plugin') === -1)
-        throw new Error(`Plugin[${kind}]: plugin key isnt configured.`)
+      else if (Object.keys(config).findIndex(k => k === 'component') === -1)
+        throw new Error(`Plugin[${kind}]: component key isnt configured.`)
       
       return {
-        plugin: config.plugin,
+        component: config.component,
         renderOverlay: config.renderOverlay
       }
     }
