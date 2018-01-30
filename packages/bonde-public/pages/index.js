@@ -64,6 +64,8 @@ class Page extends React.Component {
       <div>
         <Head>
           <title>{name}</title>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name='description' content={goal} />
           <meta name='twitter:card' content='summary_large_image' />
           <meta name='twitter:title' content={facebookShareTitle} />
