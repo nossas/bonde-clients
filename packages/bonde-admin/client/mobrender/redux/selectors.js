@@ -81,9 +81,9 @@ export default (state, props) => ({
     return data
   },
 
-  getWidget: () => {
+  getWidget: (id) => {
     const { widgets: { data, currentId } } = state.mobilizations
-    return data.filter(w => w.id === currentId)[0]
+    return data.filter(w => w.id === currentId || id)[0]
   },
 
   mobilizationIsNeedReload: () => {
