@@ -42,13 +42,13 @@ pipeline:
     when:
       status: success
       branch: [hotfix-*, release-*, feature-*, develop]
-  publish-mob-render-staging:
+  publish-public-staging:
     image: plugins/docker
     repo: nossas/bonde-public
     group: publishing
     secrets: [ docker_username, docker_password ]
-    dockerfile: packages/mob-render/Dockerfile
-    context: packages/mob-render/
+    dockerfile: packages/bonde-public/Dockerfile
+    context: packages/bonde-public/
     tags:
       - ${DRONE_BRANCH}
     when:

@@ -1,7 +1,7 @@
 {
-  "name": "mob-render",
+  "name": "bonde-public",
   "version": "0.0.1",
-  "description": "Public release of the mobilization",
+  "description": "Bonde Public - Responsible render a mobilization on public mode",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 5001",
@@ -16,6 +16,7 @@
     "axios": "^0.17.1",
     "chain-function": "^1.0.0",
     "classnames": "^2.2.5",
+    "dotenv": "^4.0.0",
     "downloadjs": "^1.4.7",
     "draft-js": "^0.10.4",
     "exenv": "^1.2.2",
