@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const Visualizer = require('webpack-visualizer-plugin')
 
 const sourcePath = path.join(__dirname, './../client/')
-const staticsPath = path.join(__dirname, './../mob-render/webviewer/')
+const staticsPath = path.join(__dirname, './../../bonde-public/webviewer/')
 const fs = require('fs')
 
 const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
@@ -53,7 +53,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader',
-          publicPath: '/assets'
+          publicPath: '/../static'
         })
       },
       {
@@ -89,11 +89,11 @@ module.exports = {
       },
       {
         test: /\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/fonts/[name].[ext]'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=../static/fonts/[name].[ext]'
       }, // end otf, woff and woff2 test
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader?limit=10000&name=assets/fonts/[name].[ext]'
+        loader: 'file-loader?limit=10000&name=../static/fonts/[name].[ext]'
       }, // end ttf , eot and svg test
       {
         test: /\.(png|jpg)$/,
@@ -101,7 +101,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             limit: 10000, // Convert images < 10k to base64 strings
-            name: 'assets/images/[name].[ext]'
+            name: '../static/images/[name].[ext]'
           }
         }]
       }

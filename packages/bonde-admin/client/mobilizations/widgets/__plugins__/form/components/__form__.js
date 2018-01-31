@@ -59,7 +59,9 @@ class Form extends Component {
           widget_id: widget.id,
           fields: JSON.stringify(fieldsWithValue)
         }
-        asyncFormEntryCreate({ mobilization, formEntry })
+        asyncFormEntryCreate({ mobilization, formEntry }).then(() => {
+          this.setState({ loading: false, success: true })
+        })
       }
     }
   }

@@ -45,7 +45,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             limit: 10000, // Convert images < 10k to base64 strings
-            name: 'assets/images/[name].[ext]'
+            name: 'static/images/[name].[ext]'
           }
         }]
       }
