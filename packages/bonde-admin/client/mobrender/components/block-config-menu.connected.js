@@ -33,7 +33,7 @@ const mapActionsToProps = (dispatch, props) => ({
       name,
       menu_hidden,
       widgets_attributes: widgetsAttributes,
-      position: position + 1
+      position: position
     }
 
     dispatch(asyncAddBlock(block))
