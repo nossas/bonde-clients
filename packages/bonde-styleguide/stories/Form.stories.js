@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import Wrapper from './Wrapper'
-import { ControlLabel, Input, Select } from '../src/Form'
+import { ControlLabel, Input, Select, Checkbox } from '../src/Form'
 
 storiesOf('Form/Input', module)
   .addDecorator(story => (
@@ -46,3 +46,14 @@ storiesOf('Form/Select', module)
       <option value='1'>Value 1</option>
     </Select>
   ))
+
+storiesOf('Form/Checkbox', module)
+  .addDecorator(story => (
+    <Wrapper>
+      {story()}
+    </Wrapper>
+  ))
+  .add('default', () => <Checkbox>Checkbox</Checkbox>)
+  .add('checked', () => <Checkbox checked readOnly>Checkbox</Checkbox>)
+  .add('disabled', () => <Checkbox disabled>Checkbox</Checkbox>)
+  .add('checked and disabled', () => <Checkbox checked disabled>Checkbox</Checkbox>)
