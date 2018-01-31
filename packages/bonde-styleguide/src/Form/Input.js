@@ -9,6 +9,7 @@ const Input = styled.input`{
   border-bottom: 1px solid;
   border-color: ${props => props.invalid ? '#ff0931' : '#ccc'};
   padding: 8px 0;
+  background: none;
 
   &:focus {
     outline: none;
