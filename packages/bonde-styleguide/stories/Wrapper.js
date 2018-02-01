@@ -8,5 +8,6 @@ export default styled.div`{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.bg || '#fff'}
+  background-color: ${props => props.bg || '#fff'};
+  font-family: Nunito Sans, Source Sans Pro, Arial;
 }`
