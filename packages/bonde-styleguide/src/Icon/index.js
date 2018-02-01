@@ -1,0 +1,5 @@
+export { default as Archive } from './Archive'
+export { default as ArrowRight } from './ArrowRight'
+export { default as Plus } from './Plus'
+export { default as Sound } from './Sound'
+export { default as User } from './User'
