@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default ({ color, size }) => (
+export default ({ color, size, width, height }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
-    width={size || '11'}
-    height={size || '13'}
+    width={width || size || '11'}
+    height={height || size || '13'}
     viewBox='0 0 11 13'
   >
     <path

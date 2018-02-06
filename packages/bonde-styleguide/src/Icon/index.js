@@ -1,6 +1,7 @@
 export { default as AngleDown } from './AngleDown'
 export { default as AngleRight } from './AngleRight'
 export { default as Archive } from './Archive'
+export { default as Bonde } from './Bonde'
 export { default as Copy } from './Copy'
 export { default as Plus } from './Plus'
 export { default as Share } from './Share'

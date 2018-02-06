@@ -1,13 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export default styled.div`{
-  position: fixed;
-  width: 100%;
+  position: ${props => props.position || 'fixed'};
+  width: ${props => props.width ? `${props.width}px` : '100%'};
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${props => !props.position && css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `}
   background-color: ${props => props.bg || '#fff'};
   font-family: Nunito Sans, Source Sans Pro, Arial;
 }`
