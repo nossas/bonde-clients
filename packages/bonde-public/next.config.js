@@ -3,8 +3,10 @@ require('dotenv').config()
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const webpack = require('webpack')
 const { ANALYZE } = process.env
+const isProd = process.NODE_ENV === 'production'
 
 module.exports = {
+  assetPrefix: isProd? 'https://static.bonde.org' : '',
   webpack: (config, { dev }) => {
     if (ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({
