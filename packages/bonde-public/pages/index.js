@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
+import ReactGA from 'react-ga'
 
 // Intl
 import { IntlProvider } from 'react-intl'
@@ -42,6 +43,24 @@ class Page extends React.Component {
       await dispatch(asyncFilterMobilization(where))
       await dispatch(asyncFilterBlock(where))
       await dispatch(asyncFilterWidget(where))
+    }
+  }
+
+  componentDidMount () {
+    const isTest = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'test'
+    if (!isTest && this.props.mobilization) {
+      const { mobilization } = this.props
+
+      ReactGA.initialize('UA-26278513-30')
+      ReactGA.pageview('/' + mobilization.slug)
+
+      if (mobilization.google_analytics_code) {
+        ReactGA.initialize(
+          mobilization.google_analytics_code,
+          { gaOptions: { name: 'MobilizationTracker' } }
+        )
+        ReactGA.ga('MobilizationTracker.send', 'pageview', '/')
+      }
     }
   }
 
@@ -95,7 +114,7 @@ class Page extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   const composeProps = {}
   const {
     mobilizations: { list: { currentId, data, isLoaded } },
@@ -104,6 +123,8 @@ const mapStateToProps = state => {
 
   if (currentId) {
     composeProps.mobilization = data.filter(({ id }) => id === currentId)[0]
+  } else if (data.length === 1) {
+    composeProps.mobilization = data[0]
   }
 
   return { isLoaded, ...composeProps, protocol }
