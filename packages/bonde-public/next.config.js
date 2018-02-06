@@ -2,12 +2,14 @@ require('dotenv').config()
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const webpack = require('webpack')
-const { ANALYZE } = process.env
-const isProd = process.NODE_ENV === 'production'
+const { ANALYZE, APP_DOMAIN, NODE_ENV } = process.env
+const isProd = NODE_ENV === 'production'
 
 module.exports = {
-  assetPrefix: isProd? 'https://static.bonde.org' : '',
+  assetPrefix: isProd ? `https://static.${APP_DOMAIN}` : '',
   webpack: (config, { dev }) => {
+    config.output.publicPath = isProd ? `https://static.${APP_DOMAIN}${config.output.publicPath}` : config.output.publicPath;
+
     if (ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({
         analyzerMode: 'server',
