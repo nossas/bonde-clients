@@ -25,6 +25,22 @@ export const Item = styled.a`{
   }
 }`
 
+export const Header = styled.div`{
+  width: auto;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: flex-start;
+
+  & > img {
+    margin-right: 15px;
+  }
+}`
+
 const DropdownMenu = styled.div`{
   background-color: #fff;
   padding: 20px 0;
@@ -47,7 +63,7 @@ const Dropdown = styled.div`{
   position: relative;
   width: ${props => props.width ? `${props.width}px` : 'auto'};
   
-  &  > button {
+  &  button {
     cursor: pointer;
     color: #fff;
     font-family: 'Nunito Sans', sans-serif;
@@ -67,11 +83,18 @@ const Dropdown = styled.div`{
     }
   }
 
-  & > button span {
+  & button span {
     margin: 0 10px 0 0;
     line-height: 1.15;
     letter-spacing: 0.5px;
   }
+}`
+
+const Flexbox = styled.div`{
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }`
 
 
@@ -87,14 +110,17 @@ export default class extends React.Component {
   }
 
   render () {
-    const { children, label, width } = this.props
+    const { children, label, icon: Icon, width } = this.props
     const { show } = this.state
     return (
       <Dropdown width={width}>
-        <button type='button' onClick={this.toggleMenu.bind(this)}>
-          <span>{this.props.label}</span>
-          {show ? <AngleRight color='#fff' /> : <AngleDown color='#fff' />}
-        </button>
+        <Flexbox>
+          {Icon && <Icon width={16} height={14} color='#fff' />}
+          <button type='button' onClick={this.toggleMenu.bind(this)}> 
+            <span>{this.props.label}</span>
+            {show ? <AngleRight color='#fff' /> : <AngleDown color='#fff' />}
+          </button>
+        </Flexbox>
         {show && (<DropdownMenu>{children}</DropdownMenu>)}
       </Dropdown>
     )
