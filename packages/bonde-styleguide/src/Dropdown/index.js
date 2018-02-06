@@ -14,14 +14,22 @@ export const Item = styled.a`{
   text-align: left;
   color: #000000;
   text-decoration: none;
-  padding: 10px 0;
+  padding: 10px 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  & > svg, & > i {
+    margin-right: 15px;
+  }
 }`
 
 const DropdownMenu = styled.div`{
   background-color: #fff;
-  padding: 20px 25px;
+  padding: 20px 0;
   margin-top: 15px;
-  width: auto;
+  width: inherit;
   position: absolute;
  
   &::before {
@@ -37,8 +45,10 @@ const DropdownMenu = styled.div`{
 
 const Dropdown = styled.div`{
   position: relative;
+  width: ${props => props.width ? `${props.width}px` : 'auto'};
   
   &  > button {
+    cursor: pointer;
     color: #fff;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 13px;
@@ -46,9 +56,10 @@ const Dropdown = styled.div`{
     text-transform: uppercase;
     background: none;
     border: none;
+    width: inherit;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
 
     &:active, &:focus {
       border:none;
@@ -76,10 +87,10 @@ export default class extends React.Component {
   }
 
   render () {
-    const { children, label } = this.props
+    const { children, label, width } = this.props
     const { show } = this.state
     return (
-      <Dropdown>
+      <Dropdown width={width}>
         <button type='button' onClick={this.toggleMenu.bind(this)}>
           <span>{this.props.label}</span>
           {show ? <AngleRight color='#fff' /> : <AngleDown color='#fff' />}
