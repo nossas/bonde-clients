@@ -19,6 +19,9 @@ storiesOf('Header', module)
   .add('default', () => (
     <Header />
   ))
+  .add('with page title', () => (
+    <Header pageTitle='Home' />
+  ))
   .add('with user', () => (
     <Header user={user} />
   ))
@@ -34,6 +37,16 @@ storiesOf('Header', module)
   ))
   .add('with Tabs and user', () => (
     <Header user={user}>
+      <Tabs>
+        <Tab active>Dashboard</Tab>
+        <Tab>Mobilizações</Tab>
+        <Tab>Comunidade</Tab>
+        <Tab>Configurações</Tab>
+      </Tabs>
+    </Header>
+  ))
+  .add('with Tabs, user and page title', () => (
+    <Header pageTitle='Nome da Comunidade' user={user}>
       <Tabs>
         <Tab active>Dashboard</Tab>
         <Tab>Mobilizações</Tab>

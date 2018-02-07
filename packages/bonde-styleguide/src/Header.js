@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import * as Icon from './Icon'
+import Title from './Title'
 import Dropdown, {
   Item as DropdownItem,
   Header as DropdownHeader
@@ -45,7 +46,7 @@ const UserDropdown = ({ user }) => {
   )
 }
 
-const Header = ({ children, user }) => (
+const Header = ({ children, pageTitle, user }) => (
   <Navbar>
     <Nav>
       <a href='#' title='Bonde.org'>
@@ -54,6 +55,7 @@ const Header = ({ children, user }) => (
       {user && <UserDropdown user={user} />}
     </Nav>
     <div>
+      {pageTitle && <Title.H3 color='#fff'>{pageTitle}</Title.H3>}
       {children}
     </div>
   </Navbar>

@@ -22,7 +22,7 @@ const H3 = styled.h3`{
   font-size: 21px;
   font-weight: 800;
   line-height: 0.95;
-  color: #000;
+  color: ${props => props.color || '#000'};
 }`
 
 export default { H1, H2, H3 }
