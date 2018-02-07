@@ -141,10 +141,10 @@ pipeline:
 
   deploy-production:
     image: peloton/drone-rancher
-    group: deploying
+    group: deploying_prod
     url: http://cluster.bonde.org
     service: bonde/client
-    docker_image: nossas/bonde-admin:${DRONE_TAG##v}
+    docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -154,10 +154,10 @@ pipeline:
 
   deploy-production-non-ssl:
     image: peloton/drone-rancher
-    group: deploying
+    group: deploying_prod
     url: http://cluster.bonde.org
     service: bonde/client-non-ssl
-    docker_image: nossas/bonde-public:${DRONE_TAG##v}
+    docker_image: "nossas/bonde-public:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
