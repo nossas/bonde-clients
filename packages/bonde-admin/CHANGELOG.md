@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.4"></a>
+## [0.8.4](https://github.com/nossas/bonde-client/compare/v0.8.3...v0.8.4) (2018-02-07)
+
+
+### Bug Fixes
+
+* **bonde-public:** add and initialize ReactGA ([b1486e9](https://github.com/nossas/bonde-client/commit/b1486e9))
+
+
+
 <a name="0.8.3"></a>
 ## [0.8.3](https://github.com/nossas/bonde-client/compare/v0.8.2...v0.8.3) (2018-02-06)
 
