@@ -9,7 +9,7 @@ import Wrapper from './Wrapper'
 import Title from '../src/Title'
 import * as Icon from '../src/Icon'
 
-const Preformatted = styled.pre`{
+export const Preformatted = styled.pre`{
   word-wrap: normal;
   padding: 16px;
   overflow: auto;
@@ -23,7 +23,7 @@ const Preformatted = styled.pre`{
   text-align: left;
 }`
 
-const Hightlight = ({ code }) => (
+export const Hightlight = ({ code }) => (
   <div dangerouslySetInnerHTML={{ __html: Prism.highlight(code, Prism.languages.js) }} />
 )
 
