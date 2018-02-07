@@ -7,13 +7,18 @@ import Dropdown, {
   Header as DropdownHeader
 } from '../src/Dropdown'
 
-const Nav = styled.nav`{
+const Navbar = styled.div`{
   position: fixed;
   width: inherit;
   min-height: 80px;
   background: #000;
-  padding: 0 155px;
+  padding: 0 155px; 
+}`
+
+const Nav = styled.nav`{
   display: flex;
+  align-items: center;
+  margin: 28px 0 22px;
   align-items: center;
   justify-content: space-between;
 }`
@@ -21,7 +26,7 @@ const Nav = styled.nav`{
 const UserDropdown = ({ user }) => {
   
   const fullName = user.last_name
-    ? `${user.first_name} ${user.last_name}`
+    ?`${user.first_name} ${user.last_name}`
     : user.first_name
 
   return (
@@ -40,17 +45,18 @@ const UserDropdown = ({ user }) => {
   )
 }
 
-const Navbar = ({ user }) => (
-  <Nav>
-    <a href='#' title='Bonde.org'>
-      <Icon.Bonde />
-    </a>
-    {user && <UserDropdown user={user} />}
-  </Nav>
+const Header = ({ children, user }) => (
+  <Navbar>
+    <Nav>
+      <a href='#' title='Bonde.org'>
+        <Icon.Bonde />
+      </a>
+      {user && <UserDropdown user={user} />}
+    </Nav>
+    <div>
+      {children}
+    </div>
+  </Navbar>
 )
 
-Navbar.propTypes = {
-  user: PropTypes.object
-}
-
-export default Navbar
+export default Header
