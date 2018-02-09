@@ -13,7 +13,7 @@
   "scripts": {
     "build": "build-storybook -c .storybook -o dist",
     "clean": "nwb clean-module && nwb clean-demo",
-    "test": "nwb test-react",
+    "xtest": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
     "dev": "start-storybook -p 6006",
