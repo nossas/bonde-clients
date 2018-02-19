@@ -168,6 +168,7 @@ class SubscriptionEditPage extends React.Component {
 
             <p className='link--cancel center mt3 lightgray link'>
               <a
+                style={{ color: '#999999' }}
                 onClick={() => {
                   const message = intl.formatMessage({
                     id: 'page--subscription-edit.cancel-subscription.confirm',
