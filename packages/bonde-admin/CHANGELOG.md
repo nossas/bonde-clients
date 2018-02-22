@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.6"></a>
+## [0.8.6](https://github.com/nossas/bonde-client/compare/v0.8.5...v0.8.6) (2018-02-22)
+
+
+### Bug Fixes
+
+* add Button and Title tests ([f5ef7c9](https://github.com/nossas/bonde-client/commit/f5ef7c9))
+* add missing responsive meta tag [[#153755172](https://github.com/nossas/bonde-client/issues/153755172)] ([440d6ff](https://github.com/nossas/bonde-client/commit/440d6ff))
+* move static images to bonde-public package ([4e471cc](https://github.com/nossas/bonde-client/commit/4e471cc))
+* **bonde-public:** transform svg to react component [Fixes [#154965376](https://github.com/nossas/bonde-client/issues/154965376)] ([f18e963](https://github.com/nossas/bonde-client/commit/f18e963))
+* **donation:** remove counter settings of donation ([b0763e3](https://github.com/nossas/bonde-client/commit/b0763e3))
+* **subscriptions:** add lightgray color to cancel link [Fixes [#155332456](https://github.com/nossas/bonde-client/issues/155332456)] ([6864e75](https://github.com/nossas/bonde-client/commit/6864e75))
+* **subscriptions:** pass parsed querystring to forms [Fixes [#155331950](https://github.com/nossas/bonde-client/issues/155331950)] ([e2778cb](https://github.com/nossas/bonde-client/commit/e2778cb))
+* **webpack:** bonde-public webviewer build output path ([b7ac963](https://github.com/nossas/bonde-client/commit/b7ac963))
+* **widget-settings:** use like default params url to select widget ([e0cdf44](https://github.com/nossas/bonde-client/commit/e0cdf44))
+
+
+### Features
+
+* **blocks:** disable duplicate block ([fc68c2e](https://github.com/nossas/bonde-client/commit/fc68c2e))
+* **bonde-styleguide:** add Loading component ([9603b1f](https://github.com/nossas/bonde-client/commit/9603b1f))
+* **icon:** add icons [[#154769227](https://github.com/nossas/bonde-client/issues/154769227)] ([e8e87c6](https://github.com/nossas/bonde-client/commit/e8e87c6))
+* **icon-color:** add colorful icons [[#154769227](https://github.com/nossas/bonde-client/issues/154769227)] ([91cedab](https://github.com/nossas/bonde-client/commit/91cedab))
+* **tag:** add Tag component [[#154769264](https://github.com/nossas/bonde-client/issues/154769264)] ([910cacf](https://github.com/nossas/bonde-client/commit/910cacf))
+
+
+
 <a name="0.8.5"></a>
 ## [0.8.5](https://github.com/nossas/bonde-client/compare/v0.8.4...v0.8.5) (2018-02-21)
 
