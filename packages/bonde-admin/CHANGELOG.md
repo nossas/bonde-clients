@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.8"></a>
+## [0.8.8](https://github.com/nossas/bonde-client/compare/v0.8.7...v0.8.8) (2018-02-26)
+
+
+### Bug Fixes
+
+* **donation:** Set pagarme key to use prod env var ([dd00c26](https://github.com/nossas/bonde-client/commit/dd00c26))
+
+
+
 <a name="0.8.7"></a>
 ## [0.8.7](https://github.com/nossas/bonde-client/compare/v0.8.6...v0.8.7) (2018-02-26)
 
