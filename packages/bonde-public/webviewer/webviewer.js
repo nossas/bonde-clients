@@ -21684,39 +21684,6 @@ var mapActionsToProps = function mapActionsToProps(dispatch, props) {
     },
     destroy: function destroy(block) {
       return dispatch((0, _actionCreators.asyncDestroyBlock)(block));
-    },
-    duplicate: function duplicate(_ref) {
-      var mobilization_id = _ref.mobilization_id,
-          bg_class = _ref.bg_class,
-          bg_image = _ref.bg_image,
-          position = _ref.position,
-          hidden = _ref.hidden,
-          name = _ref.name,
-          menu_hidden = _ref.menu_hidden;
-
-      // Widgets clean
-      var widgetsAttributes = props.widgets.map(function (_ref2) {
-        var kind = _ref2.kind,
-            settings = _ref2.settings,
-            sm_size = _ref2.sm_size,
-            md_size = _ref2.md_size,
-            lg_size = _ref2.lg_size;
-
-        return { kind: kind, settings: settings, sm_size: sm_size, md_size: md_size, lg_size: lg_size };
-      });
-
-      var block = {
-        mobilization_id: mobilization_id,
-        bg_class: bg_class,
-        bg_image: bg_image,
-        hidden: hidden,
-        name: name,
-        menu_hidden: menu_hidden,
-        widgets_attributes: widgetsAttributes,
-        position: position
-      };
-
-      dispatch((0, _actionCreators.asyncAddBlock)(block));
     }
   };
 };
@@ -21761,44 +21728,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var EDIT_KEY = exports.EDIT_KEY = 'background';
 
 var _ref2 = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-clone'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.duplicate',
-  defaultMessage: 'Duplicar bloco'
-}));
-
-var _ref3 = _jsx('span', {}, void 0, _jsx('i', {
   className: 'fa fa-picture-o'
 }), ' ', _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.change-background',
   defaultMessage: 'Alterar fundo'
 }));
 
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
+var _ref3 = _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.toggle-visibility.show',
   defaultMessage: 'Mostrar'
 });
 
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
+var _ref4 = _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.toggle-visibility.hide',
   defaultMessage: 'Esconder'
 });
 
-var _ref6 = _jsx('span', {}, void 0, _jsx('i', {
+var _ref5 = _jsx('span', {}, void 0, _jsx('i', {
   className: 'fa fa-trash'
 }), ' ', _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.remove',
   defaultMessage: 'Remover'
 }));
 
-var _ref7 = _jsx('span', {}, void 0, _jsx('i', {
+var _ref6 = _jsx('span', {}, void 0, _jsx('i', {
   className: 'fa fa-chevron-up'
 }), ' ', _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.move-up',
   defaultMessage: 'Mover para cima'
 }));
 
-var _ref8 = _jsx('span', {}, void 0, _jsx('i', {
+var _ref7 = _jsx('span', {}, void 0, _jsx('i', {
   className: 'fa fa-chevron-down'
 }), ' ', _jsx(_reactIntl.FormattedMessage, {
   id: 'mobrender.components--block-config-menu.item.move-down',
@@ -21808,7 +21768,6 @@ var _ref8 = _jsx('span', {}, void 0, _jsx('i', {
 var BlockConfigMenu = function BlockConfigMenu(_ref) {
   var block = _ref.block,
       update = _ref.update,
-      duplicate = _ref.duplicate,
       destroy = _ref.destroy,
       onEdit = _ref.onEdit,
       canMoveUp = _ref.canMoveUp,
@@ -21825,21 +21784,16 @@ var BlockConfigMenu = function BlockConfigMenu(_ref) {
   }, void 0, _jsx(_dropdownMenu.DropdownMenuItem, {
     className: 'btn',
     onClick: function onClick() {
-      return duplicate(block);
-    }
-  }, void 0, _ref2), _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    onClick: function onClick() {
       return onEdit(EDIT_KEY + '-' + block.id);
     }
-  }, void 0, _ref3), _jsx(_dropdownMenu.DropdownMenuItem, {
+  }, void 0, _ref2), _jsx(_dropdownMenu.DropdownMenuItem, {
     className: 'btn',
     onClick: function onClick() {
       return update(_extends({}, block, { hidden: !block.hidden }));
     }
   }, void 0, _jsx('span', {}, void 0, _jsx('i', {
     className: (0, _classnames2.default)('fa', block.hidden ? 'fa-eye' : 'fa-eye-slash')
-  }), ' ', block.hidden ? _ref4 : _ref5)), _jsx(_dropdownMenu.DropdownMenuItem, {
+  }), ' ', block.hidden ? _ref3 : _ref4)), _jsx(_dropdownMenu.DropdownMenuItem, {
     className: 'btn',
     onClick: function onClick() {
       var message = intl.formatMessage({
@@ -21848,19 +21802,19 @@ var BlockConfigMenu = function BlockConfigMenu(_ref) {
       });
       if (window.confirm(message)) destroy(block);
     }
-  }, void 0, _ref6), _jsx(_dropdownMenu.DropdownMenuItem, {
+  }, void 0, _ref5), _jsx(_dropdownMenu.DropdownMenuItem, {
     className: 'btn',
     disabled: !canMoveUp,
     onClick: function onClick() {
       return moveUp(block);
     }
-  }, void 0, _ref7), _jsx(_dropdownMenu.DropdownMenuItem, {
+  }, void 0, _ref6), _jsx(_dropdownMenu.DropdownMenuItem, {
     className: 'btn',
     disabled: !canMoveDown,
     onClick: function onClick() {
       return moveDown(block);
     }
-  }, void 0, _ref8));
+  }, void 0, _ref7));
 };
 
 exports.default = (0, _reactIntl.injectIntl)(BlockConfigMenu);
@@ -25087,8 +25041,16 @@ exports.default = function (state, props) {
           data = _state$mobilizations$2.data,
           currentId = _state$mobilizations$2.currentId;
 
+      var pkey = void 0;
+      if (props && props.match.params && props.match.params.widget_id) {
+        pkey = parseInt(props.match.params.widget_id);
+      } else if (id) {
+        pkey = id;
+      } else {
+        pkey = currentId;
+      }
       return data.filter(function (w) {
-        return w.id === currentId || id;
+        return w.id === pkey;
       })[0];
     },
 

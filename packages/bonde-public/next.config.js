@@ -21,7 +21,9 @@ module.exports = {
     config.plugins.push(new webpack.EnvironmentPlugin({
       API_URL: JSON.stringify(process.env.API_URL),
       GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-      APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN)
+      APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
+      PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }))
 
     config.plugins.push(new webpack.ProvidePlugin({
