@@ -130,11 +130,11 @@ pipeline:
       - APP_DOMAIN=bonde.org
       - AWS_BUCKET=bonde-assets
     commands:
-      - export PAGARME_KEY=$STAG_PAGARME_KEY
-      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
-      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
+      - export PAGARME_KEY=$PROD_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$PROD_GOOGLE_FONTS_API_KEY
       - ./node_modules/.bin/lerna run build --parallel
-    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    secrets: [ prod_pagarme_key, prod_sentry_dsn_public, prod_google_fonts_api_key ]
     when:
       status: success
       event: tag
