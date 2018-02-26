@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.7"></a>
+## [0.8.7](https://github.com/nossas/bonde-client/compare/v0.8.6...v0.8.7) (2018-02-26)
+
+
+### Bug Fixes
+
+* **bonde-public:** update webviewer build ([08618e8](https://github.com/nossas/bonde-client/commit/08618e8)), closes [#155468597](https://github.com/nossas/bonde-client/issues/155468597)
+
+
+
 <a name="0.8.6"></a>
 ## [0.8.6](https://github.com/nossas/bonde-client/compare/v0.8.5...v0.8.6) (2018-02-22)
 
