@@ -7,16 +7,23 @@ import localeData from './locale-data'
 addLocaleData([...pt, ...es, ...en])
 
 export const locale = 'pt-BR'
-export const messages = localeData[locale] || {}
-export const { intl } = new IntlProvider({ locale, messages })
-  .getChildContext()
+export const messages = {
+  'pt-BR': localeData['pt-BR'],
+  'es': localeData['es'],
+  'en': localeData['en']
+}
+
+export const { intl } = new IntlProvider({
+  locale,
+  messages: messages[locale]
+}).getChildContext()
 
 const SET_CURRENT_LOCALE = 'intl/SET_CURRENT_LOCALE'
 const initialState = {
   currentLocale: locale,
   defaultLocale: null,
   locales: [],
-  messages
+  messages: messages[locale]
 }
 
 export const reducer = (state = initialState, action = {}) => {

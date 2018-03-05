@@ -131,7 +131,7 @@ export default {
   'community.page--domain-list.dialog.domain-confirm-message': 'Are you sure you want to remove the domain',
   'community.page--domain-list.dns-record-description.first-paragraph': 'DNS Servers are addresses used by domain registration organizations such as register.br or godaddy.com, to identify on which server the information about the registered domain is located.',
   'community.page--domain-list.dns-record-description.second-paragraph': 'Complete the domain activation by changing the DNS servers, where the domain was registered, to the addresses below:',
-  'community.page--domain-list.dns-server-description': 'DNS Servers are addresses used by domain registration organizations such as {registrobr} or {godaddy}, to identify on which server the information about the registered domain is located. Ask your questions {trilho}.',
+  'community.page--domain-list.dns-server-description': 'DNS Servers are addresses used by domain registration organizations such as {registroBr} or {goDaddy}, to identify on which server the information about the registered domain is located. Ask your questions {trilho}.',
   'community.page--domain-list.dns-server-description.trilho.link': 'on the help site',
 
   'community.components--subdomain.name.label': 'Name',
