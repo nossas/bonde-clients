@@ -22,7 +22,7 @@ import {
 import styles from './../webviewer/main.dba55199cd8fb7024923.css'
 
 class Page extends React.Component {
-  static async getInitialProps ({ store }) {
+  static async getInitialProps ({ store, req }) {
     const { dispatch, getState } = store
     const host = getState().sourceRequest.host
     const appDomain = process.env.APP_DOMAIN || 'bonde.devel'
@@ -44,6 +44,23 @@ class Page extends React.Component {
       await dispatch(asyncFilterBlock(where))
       await dispatch(asyncFilterWidget(where))
     }
+   
+    /* gambiarra para pegar locale no SSR */
+    const languages = ['pt-BR', 'en', 'es']
+    let defaultLocale
+    let index = 0
+    languages.map(locale => {
+      const currentIndex = req.headers['accept-language'].indexOf(locale)
+      if (!defaultLocale) {
+        defaultLocale = locale
+        index = currentIndex 
+      } else if (index > currentIndex) {
+        defaultLocale = locale
+        index = currentIndex
+      }
+
+    })
+    return { currentLocale: defaultLocale }
   }
 
   componentDidMount () {
@@ -76,6 +93,8 @@ class Page extends React.Component {
       body_font: bodyFont,
       custom_domain: customDomain
     } = this.props.mobilization
+    
+    const { currentLocale } = this.props
 
     const url = `${this.props.protocol}://${customDomain}` || host
 
@@ -104,7 +123,7 @@ class Page extends React.Component {
           />
         </Head>
         <style global jsx>{styles}</style>
-        <IntlProvider locale={locale} messages={messages}>
+        <IntlProvider locale={currentLocale || locale} messages={messages[currentLocale || locale]}>
           <ApolloProvider client={apolloClient()}>
             <MobilizationApp editable={false} />
           </ApolloProvider>
