@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.9"></a>
+## [0.8.9](https://github.com/nossas/bonde-client/compare/v0.8.8...v0.8.9) (2018-03-06)
+
+
+### Bug Fixes
+
+* **bonde-public:** adjust intl to get locale in page ([604ddae](https://github.com/nossas/bonde-client/commit/604ddae))
+
+
+### Features
+
+* **bonde-public:** update locale messages ([5d01cda](https://github.com/nossas/bonde-client/commit/5d01cda))
+
+
+
 <a name="0.8.8"></a>
 ## [0.8.8](https://github.com/nossas/bonde-client/compare/v0.8.7...v0.8.8) (2018-02-26)
 
