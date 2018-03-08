@@ -45,7 +45,12 @@ class Page extends React.Component {
       await dispatch(asyncFilterWidget(where))
     }
 
-    const currentLocale = req.headers['accept-language'].split(';')[0].split(',')[0]
+    let currentLocale
+    if ('accept-language' in req.headers) {
+      currentLocale = req.headers['accept-language'].split(';')[0].split(',')[0]
+    } else {
+      currentLocale = 'pt-BR'
+    }
     dispatch(setCurrentLocale(localeStrategy(currentLocale)))
   }
 
