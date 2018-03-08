@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.11"></a>
+## [0.8.11](https://github.com/nossas/bonde-client/compare/v0.8.10...v0.8.11) (2018-03-08)
+
+
+
 <a name="0.8.10"></a>
 ## [0.8.10](https://github.com/nossas/bonde-client/compare/v0.8.9...v0.8.10) (2018-03-08)
 
