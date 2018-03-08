@@ -5,7 +5,7 @@ import ReactGA from 'react-ga'
 
 // Intl
 import { IntlProvider } from 'react-intl'
-import { locale, messages } from '../intlReducer'
+import { defaultLocale, messages, setCurrentLocale, localeStrategy } from '../intlReducer'
 
 // ApolloClient
 import { ApolloProvider } from 'react-apollo'
@@ -44,23 +44,9 @@ class Page extends React.Component {
       await dispatch(asyncFilterBlock(where))
       await dispatch(asyncFilterWidget(where))
     }
-   
-    /* gambiarra para pegar locale no SSR */
-    const languages = ['pt-BR', 'en', 'es']
-    let defaultLocale
-    let index = 0
-    languages.map(locale => {
-      const currentIndex = req.headers['accept-language'].indexOf(locale)
-      if (!defaultLocale) {
-        defaultLocale = locale
-        index = currentIndex 
-      } else if (index > currentIndex) {
-        defaultLocale = locale
-        index = currentIndex
-      }
 
-    })
-    return { currentLocale: defaultLocale }
+    const currentLocale = req.headers['accept-language'].split(';')[0].split(',')[0]
+    dispatch(setCurrentLocale(localeStrategy(currentLocale)))
   }
 
   componentDidMount () {
@@ -79,6 +65,12 @@ class Page extends React.Component {
         ReactGA.ga('MobilizationTracker.send', 'pageview', '/')
       }
     }
+
+    const { dispatch } = this.props
+
+    const { languages, language } = window.navigator
+    const currentLocale = ((languages && languages[0]) || language) || locale
+    dispatch(setCurrentLocale(localeStrategy(currentLocale)))
   }
 
   render () {
@@ -93,7 +85,7 @@ class Page extends React.Component {
       body_font: bodyFont,
       custom_domain: customDomain
     } = this.props.mobilization
-    
+
     const { currentLocale } = this.props
 
     const url = `${this.props.protocol}://${customDomain}` || host
@@ -123,7 +115,7 @@ class Page extends React.Component {
           />
         </Head>
         <style global jsx>{styles}</style>
-        <IntlProvider locale={currentLocale || locale} messages={messages[currentLocale || locale]}>
+        <IntlProvider locale={currentLocale} key={currentLocale} messages={messages[currentLocale]}>
           <ApolloProvider client={apolloClient()}>
             <MobilizationApp editable={false} />
           </ApolloProvider>
@@ -136,6 +128,7 @@ class Page extends React.Component {
 const mapStateToProps = (state, props) => {
   const composeProps = {}
   const {
+    intl: { currentLocale },
     mobilizations: { list: { currentId, data, isLoaded } },
     sourceRequest: { protocol }
   } = state
@@ -146,7 +139,7 @@ const mapStateToProps = (state, props) => {
     composeProps.mobilization = data[0]
   }
 
-  return { isLoaded, ...composeProps, protocol }
+  return { isLoaded, ...composeProps, protocol, currentLocale }
 }
 
 export default withRedux(configureStore, mapStateToProps)(Page)
