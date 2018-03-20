@@ -5668,7 +5668,7 @@ var TransitionGroup = function (_React$Component) {
           _this3.childRefs[key] = r;
         };
 
-         false ? (0, _warning2.default)(isCallbackRef, 'string refs are not supported on children of TransitionGroup and will be ignored. ' + 'Please use a callback ref instead: https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute') : void 0;
+         true ? (0, _warning2.default)(isCallbackRef, 'string refs are not supported on children of TransitionGroup and will be ignored. ' + 'Please use a callback ref instead: https://facebook.github.io/react/docs/refs-and-the-dom.html#the-ref-callback-attribute') : void 0;
 
         // Always chaining the refs leads to problems when the childFactory
         // wraps the child. The child ref callback gets called twice with the
@@ -5715,7 +5715,7 @@ var TransitionGroup = function (_React$Component) {
 TransitionGroup.displayName = 'TransitionGroup';
 
 
-TransitionGroup.propTypes =  false ? propTypes : {};
+TransitionGroup.propTypes =  true ? propTypes : {};
 TransitionGroup.defaultProps = defaultProps;
 
 exports.default = TransitionGroup;
@@ -5826,7 +5826,7 @@ function mergeChildMappings(prev, next) {
 
 const config = {
   sentryDsn: process.env.SENTRY_DSN || 'https://1111:2222@sentry.io/86182',
-  nodeEnv: "production",
+  nodeEnv: "development",
   webConcurrency: process.env.WEB_CONCURRENCY || 1,
   port: process.env.PORT || 1337,
   apiUrl: process.env.API_URL || 'http://localhost:3000',
@@ -6791,8 +6791,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -6808,15 +6806,21 @@ var Loading = function Loading(_ref) {
       backgroundColor = _ref.backgroundColor,
       loaderColor = _ref.loaderColor,
       className = _ref.className;
-  return _jsx('div', {
-    className: (0, _classnames2.default)({ absolute: localized, fixed: !localized }, 'top-0 right-0 bottom-0 left-0 z9', className),
-    style: { backgroundColor: backgroundColor }
-  }, void 0, _jsx('div', {
-    className: 'table col-12 center full-height'
-  }, void 0, _jsx('i', {
-    className: 'fa fa-circle-o-notch fa-spin fa-3x fa-w table-cell align-middle',
-    style: { color: loaderColor }
-  })));
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)({ absolute: localized, fixed: !localized }, 'top-0 right-0 bottom-0 left-0 z9', className),
+      style: { backgroundColor: backgroundColor }
+    },
+    _react2.default.createElement(
+      'div',
+      { className: 'table col-12 center full-height' },
+      _react2.default.createElement('i', {
+        className: 'fa fa-circle-o-notch fa-spin fa-3x fa-w table-cell align-middle',
+        style: { color: loaderColor }
+      })
+    )
+  );
 };
 
 Loading.defaultProps = {
@@ -6840,8 +6844,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -6856,18 +6858,27 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx('br', {});
-
 var Progress = function Progress(_ref) {
   var className = _ref.className,
       style = _ref.style,
       percent = _ref.percent;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('progress col-12 border rounded border-darken-4')
-  }, void 0, _jsx('div', {
-    className: className,
-    style: _extends({}, style, { width: percent + '%' })
-  }, void 0, _ref2));
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('progress col-12 border rounded border-darken-4') },
+    _react2.default.createElement(
+      'div',
+      {
+        className: className,
+        style: _extends({}, style, { width: percent + '%' }) },
+      _react2.default.createElement('br', null)
+    )
+  );
+};
+
+Progress.propTypes = {
+  percent: _propTypes2.default.number.isRequired,
+  className: _propTypes2.default.string,
+  style: _propTypes2.default.object
 };
 
 exports.default = Progress;
@@ -6963,8 +6974,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ColorPicker = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -7004,13 +7013,23 @@ var ColorPicker = exports.ColorPicker = function ColorPicker(_ref) {
   var hasTheme = theme && _themes2.default[theme];
   var colorStrategy = selectedColor || (hasTheme ? _themes2.default[theme][0] : '#333');
 
-  return !showColorPicker ? null : _jsx('div', {
-    className: (0, _classnames2.default)('color-picker-container', className)
-  }, void 0, _jsx(_reactColor.SketchPicker, {
-    color: color || colorStrategy,
-    onChangeComplete: onChangeColor,
-    presetColors: hasTheme ? _themes2.default[theme] : []
-  }));
+  return !showColorPicker ? null : _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('color-picker-container', className) },
+    _react2.default.createElement(_reactColor.SketchPicker, {
+      color: color || colorStrategy,
+      onChangeComplete: onChangeColor,
+      presetColors: hasTheme ? _themes2.default[theme] : []
+    })
+  );
+};
+
+ColorPicker.propTypes = {
+  showColorPicker: _propTypes2.default.bool.isRequired,
+  onChangeColor: _propTypes2.default.func,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  theme: _propTypes2.default.string,
+  color: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object])
 };
 
 ColorPicker.defaultProps = {
@@ -7101,14 +7120,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-// Exported from redux-devtools
-
-
-// Monitors are separate packages, and you can make a custom one
-
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -7126,19 +7137,23 @@ var _reduxDevtoolsDockMonitor2 = _interopRequireDefault(_reduxDevtoolsDockMonito
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // createDevTools takes a monitor and produces a DevTools component
+
+
+// Monitors are separate packages, and you can make a custom one
 var DevTools = (0, _reduxDevtools.createDevTools)(
 // Monitors are individually adjustable with props.
 // Consult their repositories to learn about those props.
 // Here, we put LogMonitor inside a DockMonitor.
 // Note: DockMonitor is visible by default.
-_jsx(_reduxDevtoolsDockMonitor2.default, {
-  toggleVisibilityKey: 'ctrl-h',
-  changePositionKey: 'ctrl-q',
-  defaultIsVisible: false
-}, void 0, _jsx(_reduxDevtoolsLogMonitor2.default, {
-  theme: 'tomorrow'
-})));
+_react2.default.createElement(
+  _reduxDevtoolsDockMonitor2.default,
+  { toggleVisibilityKey: 'ctrl-h',
+    changePositionKey: 'ctrl-q',
+    defaultIsVisible: false },
+  _react2.default.createElement(_reduxDevtoolsLogMonitor2.default, { theme: 'tomorrow' })
+));
 
+// Exported from redux-devtools
 exports.default = DevTools;
 
 /***/ }),
@@ -7152,8 +7167,6 @@ exports.default = DevTools;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -7184,12 +7197,24 @@ var DropdownMenuItem = function DropdownMenuItem(props) {
       children = props.children;
 
 
-  return _jsx('a', {
-    className: (0, _classnames2.default)(className, disabled ? 'muted' : ''),
-    disabled: disabled,
-    onClick: handleClick,
-    href: href
-  }, void 0, children);
+  return _react2.default.createElement(
+    'a',
+    {
+      className: (0, _classnames2.default)(className, disabled ? 'muted' : ''),
+      disabled: disabled,
+      onClick: handleClick,
+      href: href },
+    children
+  );
+};
+
+DropdownMenuItem.propTypes = {
+  href: _propTypes2.default.string,
+  children: _propTypes2.default.object,
+  onClick: _propTypes2.default.func,
+  onItemClick: _propTypes2.default.func,
+  disabled: _propTypes2.default.bool,
+  className: _propTypes2.default.string
 };
 
 exports.default = DropdownMenuItem;
@@ -7207,8 +7232,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7262,7 +7285,7 @@ var DropdownMenu = function (_React$Component) {
   }, {
     key: 'renderOverlay',
     value: function renderOverlay() {
-      return !this.state.open ? null : _jsx('div', {
+      return !this.state.open ? null : _react2.default.createElement('div', {
         className: 'overlay fixed top-0 right-0 bottom-0 left-0 z1',
         onClick: this.handleOverlayClick.bind(this)
       });
@@ -7291,24 +7314,42 @@ var DropdownMenu = function (_React$Component) {
           children = _props.children;
 
 
-      return _jsx('div', {
-        style: { marginTop: '5px' },
-        className: (0, _classnames2.default)('relative', wrapperClassName)
-      }, void 0, _react2.default.createElement(
-        'button',
-        { ref: 'button', className: buttonClassName, onClick: this.handleClick.bind(this) },
-        this.renderIcon(),
-        ' ',
-        text
-      ), _jsx('div', {
-        className: (0, _classnames2.default)('absolute nowrap z2', menuClassName, this.state.open ? '' : 'display-none'),
-        style: menuStyle
-      }, void 0, children.length > 0 && this.renderChildren()), this.renderOverlay());
+      return _react2.default.createElement(
+        'div',
+        { style: { marginTop: '5px' }, className: (0, _classnames2.default)('relative', wrapperClassName) },
+        _react2.default.createElement(
+          'button',
+          { ref: 'button', className: buttonClassName, onClick: this.handleClick.bind(this) },
+          this.renderIcon(),
+          ' ',
+          text
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            className: (0, _classnames2.default)('absolute nowrap z2', menuClassName, this.state.open ? '' : 'display-none'),
+            style: menuStyle
+          },
+          children.length > 0 && this.renderChildren()
+        ),
+        this.renderOverlay()
+      );
     }
   }]);
 
   return DropdownMenu;
 }(_react2.default.Component);
+
+DropdownMenu.propTypes = {
+  className: _propTypes2.default.string,
+  menuClassName: _propTypes2.default.string,
+  menuStyle: _propTypes2.default.object,
+  wrapperClassName: _propTypes2.default.string,
+  buttonClassName: _propTypes2.default.string,
+  text: _propTypes2.default.string,
+  children: _propTypes2.default.array,
+  icon: _propTypes2.default.string
+};
 
 exports.default = DropdownMenu;
 
@@ -7378,8 +7419,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -7407,18 +7446,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var alignments = ['left', 'center', 'right'];
-
-var _ref = _jsx('i', {
-  className: 'fa fa-align-left'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-align-center'
-});
-
-var _ref3 = _jsx('i', {
-  className: 'fa fa-align-right'
-});
 
 var AlignmentControls = function (_Component) {
   _inherits(AlignmentControls, _Component);
@@ -7468,24 +7495,40 @@ var AlignmentControls = function (_Component) {
       var buttonClassName = this.props.buttonClassName;
 
 
-      return _jsx('div', {
-        className: 'alignmentControls'
-      }, void 0, _jsx('button', {
-        className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('left')),
-        onClick: function onClick() {
-          return _this2.handleToggleAlign('left');
-        }
-      }, void 0, _ref), _jsx('button', {
-        className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('center')),
-        onClick: function onClick() {
-          return _this2.handleToggleAlign('center');
-        }
-      }, void 0, _ref2), _jsx('button', {
-        className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('right')),
-        onClick: function onClick() {
-          return _this2.handleToggleAlign('right');
-        }
-      }, void 0, _ref3));
+      return _react2.default.createElement(
+        'div',
+        { className: 'alignmentControls' },
+        _react2.default.createElement(
+          'button',
+          {
+            className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('left')),
+            onClick: function onClick() {
+              return _this2.handleToggleAlign('left');
+            }
+          },
+          _react2.default.createElement('i', { className: 'fa fa-align-left' })
+        ),
+        _react2.default.createElement(
+          'button',
+          {
+            className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('center')),
+            onClick: function onClick() {
+              return _this2.handleToggleAlign('center');
+            }
+          },
+          _react2.default.createElement('i', { className: 'fa fa-align-center' })
+        ),
+        _react2.default.createElement(
+          'button',
+          {
+            className: (0, _classnames2.default)(buttonClassName, this.hasAlignmentStyle('right')),
+            onClick: function onClick() {
+              return _this2.handleToggleAlign('right');
+            }
+          },
+          _react2.default.createElement('i', { className: 'fa fa-align-right' })
+        )
+      );
     }
   }]);
 
@@ -7493,6 +7536,14 @@ var AlignmentControls = function (_Component) {
 }(_react.Component);
 
 exports.default = AlignmentControls;
+
+
+AlignmentControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string
+};
 
 /***/ }),
 
@@ -7554,8 +7605,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -7579,10 +7628,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-eyedropper'
-});
 
 var ColorPickerButton = function (_Component) {
   _inherits(ColorPickerButton, _Component);
@@ -7643,21 +7688,42 @@ var ColorPickerButton = function (_Component) {
         onChangeComplete: this.handleChange.bind(this)
       };
 
-      return _jsx('div', {}, void 0, _jsx('button', {
-        type: 'button',
-        className: className,
-        onClick: this.toggleColorPicker.bind(this)
-      }, void 0, _ref), showColorPicker ? _jsx('div', {
-        className: 'absolute left-0'
-      }, void 0, _react2.default.createElement(_reactColor.SketchPicker, colorPickerProps), _jsx('button', {
-        className: 'btn bg-darken-4 white col-12 rounded-bottom',
-        onClick: this.handleChangeColor.bind(this)
-      }, void 0, 'Fechar')) : null);
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { type: 'button', className: className, onClick: this.toggleColorPicker.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-eyedropper' })
+        ),
+        showColorPicker ? _react2.default.createElement(
+          'div',
+          { className: 'absolute left-0' },
+          _react2.default.createElement(_reactColor.SketchPicker, colorPickerProps),
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'btn bg-darken-4 white col-12 rounded-bottom',
+              onClick: this.handleChangeColor.bind(this)
+            },
+            'Fechar'
+          )
+        ) : null
+      );
     }
   }]);
 
   return ColorPickerButton;
 }(_react.Component);
+
+ColorPickerButton.propTypes = {
+  color: _propTypes2.default.string,
+  onRemoveColor: _propTypes2.default.func.isRequired,
+  onChangeColor: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  className: _propTypes2.default.string,
+  theme: _propTypes2.default.string
+};
 
 exports.default = ColorPickerButton;
 
@@ -7673,8 +7739,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.customStyleFn = exports.default = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7767,16 +7831,18 @@ var ColorControls = function (_Component) {
           theme = _props2.theme;
 
 
-      return _jsx('div', {
-        className: 'colorControls'
-      }, void 0, _jsx(_ColorPickerButton2.default, {
-        theme: theme,
-        className: (0, _classnames2.default)(buttonClassName, this.hasColorStyle()),
-        color: this.state.color,
-        onRemoveColor: function onRemoveColor() {},
-        onChangeColor: this.onChangeColor.bind(this),
-        focusEditor: this.props.focusEditor
-      }));
+      return _react2.default.createElement(
+        'div',
+        { className: 'colorControls' },
+        _react2.default.createElement(_ColorPickerButton2.default, {
+          theme: theme,
+          className: (0, _classnames2.default)(buttonClassName, this.hasColorStyle()),
+          color: this.state.color,
+          onRemoveColor: function onRemoveColor() {},
+          onChangeColor: this.onChangeColor.bind(this),
+          focusEditor: this.props.focusEditor
+        })
+      );
     }
   }]);
 
@@ -7784,6 +7850,16 @@ var ColorControls = function (_Component) {
 }(_react.Component);
 
 exports.default = ColorControls;
+
+
+ColorControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string,
+  theme: _propTypes2.default.string
+};
+
 var customStyleFn = exports.customStyleFn = function customStyleFn(style) {
   var output = {};
   var color = style.filter(function (value) {
@@ -8008,8 +8084,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -8022,21 +8096,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var fonts = ['Abel', 'Anton', 'Archivo Narrow', 'Asap', 'Bree Serif', 'Crimson Text', 'Cuprum', 'Exo', 'Exo 2', 'Fira Sans', 'Francois One', 'Josefin Sans', 'Karla', 'Libre Baskerville', 'Merriweather Sans', 'Pacifico', 'Poiret One', 'Quicksand', 'Signika', 'Varela Round', 'Arvo', 'Bitter', 'Cabin', 'Catamaran', 'Dosis', 'Fjalla One', 'Hind', 'Inconsolata', 'Indie Flower', 'Lobster', 'Muli', 'Noto Serif', 'Nunito', 'Oxygen', 'PT Serif', 'Playfair Display', 'Poppins', 'Titillium Web', 'Ubuntu Condensed', 'Yanone Kaffeesatz', 'Baloo Bhai', 'David Libre', 'Droid Sans', 'Gidugu', 'Lalezar', 'Lato', 'Lora', 'Montserrat', 'Open Sans', 'Open Sans Condensed', 'Oswald', 'PT Sans', 'Raleway', 'Roboto', 'Roboto Condensed', 'Roboto Slab', 'Ruslan Display', 'Slabo 27px', 'Source Sans Pro', 'Ubuntu'];
 
-var _ref = _jsx('option', {
-  value: ''
-}, void 0, 'Selecione uma fonte');
-
 var SelectFontFamily = function SelectFontFamily(props) {
   return _react2.default.createElement(
     'select',
     _extends({}, props, { className: 'font-controls-family select col col-8 h5' }),
-    _ref,
+    _react2.default.createElement(
+      'option',
+      { value: '' },
+      'Selecione uma fonte'
+    ),
     fonts.map(function (font) {
-      return _jsx('option', {
-        value: font
-      }, font, font);
+      return _react2.default.createElement(
+        'option',
+        { key: font, value: font },
+        font
+      );
     })
   );
+};
+
+SelectFontFamily.propTypes = {
+  value: _propTypes2.default.string.isRequired,
+  onChange: _propTypes2.default.func.isRequired
 };
 
 exports.default = SelectFontFamily;
@@ -8053,8 +8134,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.customStyleFn = exports.default = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -8165,19 +8244,22 @@ var FontControls = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('div', {
-        className: 'font-controls'
-      }, void 0, _jsx('input', {
-        type: 'number',
-        value: this.state.fontSize,
-        onChange: this.handleChangeSize.bind(this),
-        onMouseOut: this.handleMouseOut.bind(this),
-        className: 'font-controls-size input col col-3 h5 mx1'
-      }), _jsx(_SelectFontFamily2.default, {
-        onChange: this.handleChangeFont.bind(this),
-        value: this.state.fontFamily,
-        onMouseOut: this.handleMouseOut.bind(this)
-      }));
+      return _react2.default.createElement(
+        'div',
+        { className: 'font-controls' },
+        _react2.default.createElement('input', {
+          type: 'number',
+          value: this.state.fontSize,
+          onChange: this.handleChangeSize.bind(this),
+          onMouseOut: this.handleMouseOut.bind(this),
+          className: 'font-controls-size input col col-3 h5 mx1'
+        }),
+        _react2.default.createElement(_SelectFontFamily2.default, {
+          onChange: this.handleChangeFont.bind(this),
+          value: this.state.fontFamily,
+          onMouseOut: this.handleMouseOut.bind(this)
+        })
+      );
     }
   }]);
 
@@ -8185,6 +8267,19 @@ var FontControls = function (_Component) {
 }(_react.Component);
 
 exports.default = FontControls;
+
+
+FontControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  initialValue: _propTypes2.default.shape({
+    fontSize: _propTypes2.default.number,
+    fontFamily: _propTypes2.default.string
+  })
+
+};
+
 var customStyleFn = exports.customStyleFn = function customStyleFn(style) {
   var output = {};
   var fontSize = style.filter(function (value) {
@@ -8222,8 +8317,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -8243,14 +8336,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-undo regular'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-repeat regular'
-});
 
 var HistoryControls = function (_Component) {
   _inherits(HistoryControls, _Component);
@@ -8292,17 +8377,20 @@ var HistoryControls = function (_Component) {
       var buttonClassName = this.props.buttonClassName;
 
 
-      return _jsx('div', {
-        className: 'historyControls'
-      }, void 0, _jsx('button', {
-        type: 'button',
-        className: buttonClassName,
-        onClick: this.handleUndoClick.bind(this)
-      }, void 0, _ref), _jsx('button', {
-        type: 'button',
-        className: buttonClassName,
-        onClick: this.handleRedoClick.bind(this)
-      }, void 0, _ref2));
+      return _react2.default.createElement(
+        'div',
+        { className: 'historyControls' },
+        _react2.default.createElement(
+          'button',
+          { type: 'button', className: buttonClassName, onClick: this.handleUndoClick.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-undo regular' })
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'button', className: buttonClassName, onClick: this.handleRedoClick.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-repeat regular' })
+        )
+      );
     }
   }]);
 
@@ -8310,6 +8398,14 @@ var HistoryControls = function (_Component) {
 }(_react.Component);
 
 exports.default = HistoryControls;
+
+
+HistoryControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string
+};
 
 /***/ }),
 
@@ -8322,8 +8418,6 @@ exports.default = HistoryControls;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -8345,10 +8439,15 @@ var Link = function Link(_ref) {
       href = _Entity$get$getData.href,
       target = _Entity$get$getData.target;
 
-  return _jsx('a', {
-    href: href,
-    target: target
-  }, void 0, children);
+  return _react2.default.createElement(
+    'a',
+    { href: href, target: target },
+    children
+  );
+};
+
+Link.propTypes = {
+  entityKey: _propTypes2.default.string.isRequired
 };
 
 exports.default = Link;
@@ -8365,8 +8464,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.decorator = exports.default = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8412,18 +8509,6 @@ var getSelectionLink = function getSelectionLink(editorState) {
   // Return entity when one and only one selected
   return (0, _getSelectionEntities2.default)(editorState, 'LINK').last();
 };
-
-var _ref = _jsx('i', {
-  className: 'fa fa-link'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-check'
-});
-
-var _ref3 = _jsx('i', {
-  className: 'fa fa-unlink'
-});
 
 var LinkControls = function (_Component) {
   _inherits(LinkControls, _Component);
@@ -8513,41 +8598,61 @@ var LinkControls = function (_Component) {
           popoverClassName = _props3.popoverClassName;
 
 
-      return _jsx('div', {
-        className: 'linkControls'
-      }, void 0, _jsx('button', {
-        className: (0, _classnames2.default)(buttonClassName, this.state.hasLink ? 'active' : null),
-        onClick: this.handleToggleInput.bind(this)
-      }, void 0, _ref), this.state.showInput && _jsx('div', {
-        className: popoverClassName
-      }, void 0, _jsx('div', {
-        className: 'flex flex-wrap'
-      }, void 0, _jsx('input', {
-        type: 'text',
-        value: this.state.href,
-        onChange: function onChange(e) {
-          return _this2.setState({ href: e.target.value });
-        },
-        className: 'input col-8 m0'
-      }), _jsx('button', {
-        className: 'btn btn-outline white mx1',
-        onClick: this.confirmLink.bind(this)
-      }, void 0, _ref2)), _jsx('div', {
-        className: 'flex flex-wrap mt1'
-      }, void 0, _jsx('input', {
-        id: 'targetId',
-        type: 'checkbox',
-        onChange: this.handleChangeTarget.bind(this),
-        value: this.state.target,
-        checked: this.state.target === '_blank',
-        'data-wysihtml5-dialog-field': 'target'
-      }), _jsx('label', {
-        htmlFor: 'targetId',
-        style: { cursor: 'pointer', lineHeight: 'normal' }
-      }, void 0, 'Abrir link em nova aba'))), _jsx('button', {
-        className: buttonClassName,
-        onClick: this.removeLink.bind(this)
-      }, void 0, _ref3));
+      return _react2.default.createElement(
+        'div',
+        { className: 'linkControls' },
+        _react2.default.createElement(
+          'button',
+          { className: (0, _classnames2.default)(buttonClassName, this.state.hasLink ? 'active' : null), onClick: this.handleToggleInput.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-link' })
+        ),
+        this.state.showInput && _react2.default.createElement(
+          'div',
+          { className: popoverClassName },
+          _react2.default.createElement(
+            'div',
+            { className: 'flex flex-wrap' },
+            _react2.default.createElement('input', {
+              type: 'text',
+              value: this.state.href,
+              onChange: function onChange(e) {
+                return _this2.setState({ href: e.target.value });
+              },
+              className: 'input col-8 m0'
+            }),
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn btn-outline white mx1',
+                onClick: this.confirmLink.bind(this)
+              },
+              _react2.default.createElement('i', { className: 'fa fa-check' })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'flex flex-wrap mt1' },
+            _react2.default.createElement('input', {
+              id: 'targetId',
+              type: 'checkbox',
+              onChange: this.handleChangeTarget.bind(this),
+              value: this.state.target,
+              checked: this.state.target === '_blank',
+              'data-wysihtml5-dialog-field': 'target'
+            }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'targetId', style: { cursor: 'pointer', lineHeight: 'normal' } },
+              'Abrir link em nova aba'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { className: buttonClassName, onClick: this.removeLink.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-unlink' })
+        )
+      );
     }
   }]);
 
@@ -8555,6 +8660,16 @@ var LinkControls = function (_Component) {
 }(_react.Component);
 
 exports.default = LinkControls;
+
+
+LinkControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string,
+  popoverClassName: _propTypes2.default.string
+};
+
 var decorator = exports.decorator = {
   strategy: _linkStrategy2.default,
   component: _Link2.default
@@ -8597,8 +8712,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -8624,10 +8737,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-image'
-});
 
 var InsertImageButton = function (_Component) {
   _inherits(InsertImageButton, _Component);
@@ -8679,28 +8788,40 @@ var InsertImageButton = function (_Component) {
       var buttonClassName = this.props.buttonClassName;
 
 
-      return _jsx('div', {}, void 0, _jsx('button', {
-        className: buttonClassName,
-        onClick: this.handleOpenDialog.bind(this)
-      }, void 0, _ref), _react2.default.createElement(_reactS3Uploader2.default, {
-        signingUrl: process.env.API_URL + '/uploads',
-        accept: 'image/*',
-        onProgress: this.handleUploadProgress.bind(this),
-        onError: this.handleUploadError.bind(this),
-        onFinish: this.handleUploadFinish.bind(this),
-        ref: function ref(input) {
-          _this2.inputFile = input;
-        },
-        style: {
-          position: 'absolute',
-          visibility: 'hidden'
-        }
-      }));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { className: buttonClassName, onClick: this.handleOpenDialog.bind(this) },
+          _react2.default.createElement('i', { className: 'fa fa-image' })
+        ),
+        _react2.default.createElement(_reactS3Uploader2.default, {
+          signingUrl: process.env.API_URL + '/uploads',
+          accept: 'image/*',
+          onProgress: this.handleUploadProgress.bind(this),
+          onError: this.handleUploadError.bind(this),
+          onFinish: this.handleUploadFinish.bind(this),
+          ref: function ref(input) {
+            _this2.inputFile = input;
+          },
+          style: {
+            position: 'absolute',
+            visibility: 'hidden'
+          }
+        })
+      );
     }
   }]);
 
   return InsertImageButton;
 }(_react.Component);
+
+InsertImageButton.propTypes = {
+  buttonClassName: _propTypes2.default.string,
+  popoverClassName: _propTypes2.default.string,
+  handleUploadFinish: _propTypes2.default.func.isRequired
+};
 
 exports.default = InsertImageButton;
 
@@ -8715,8 +8836,6 @@ exports.default = InsertImageButton;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8735,14 +8854,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-code'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-check'
-});
 
 var InsertScriptButton = function (_Component) {
   _inherits(InsertScriptButton, _Component);
@@ -8786,28 +8897,50 @@ var InsertScriptButton = function (_Component) {
           popoverClassName = _props.popoverClassName;
 
 
-      return _jsx('div', {}, void 0, _jsx('button', {
-        className: buttonClassName,
-        onClick: function onClick(e) {
-          return _this2.setState({ showInputDialog: !_this2.state.showInputDialog });
-        }
-      }, void 0, _ref), !this.state.showInputDialog ? null : _jsx('div', {
-        className: popoverClassName
-      }, void 0, _jsx('input', {
-        type: 'text',
-        value: this.state.script,
-        onChange: function onChange(e) {
-          return _this2.setState({ script: e.target.value });
-        }
-      }), _jsx('button', {
-        className: 'btn btn-outline white mx1',
-        onClick: this.handleInsertScript.bind(this)
-      }, void 0, _ref2)));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          {
+            className: buttonClassName,
+            onClick: function onClick(e) {
+              return _this2.setState({ showInputDialog: !_this2.state.showInputDialog });
+            }
+          },
+          _react2.default.createElement('i', { className: 'fa fa-code' })
+        ),
+        !this.state.showInputDialog ? null : _react2.default.createElement(
+          'div',
+          { className: popoverClassName },
+          _react2.default.createElement('input', {
+            type: 'text',
+            value: this.state.script,
+            onChange: function onChange(e) {
+              return _this2.setState({ script: e.target.value });
+            }
+          }),
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'btn btn-outline white mx1',
+              onClick: this.handleInsertScript.bind(this)
+            },
+            _react2.default.createElement('i', { className: 'fa fa-check' })
+          )
+        )
+      );
     }
   }]);
 
   return InsertScriptButton;
 }(_react.Component);
+
+InsertScriptButton.propTypes = {
+  buttonClassName: _propTypes2.default.string,
+  popoverClassName: _propTypes2.default.string,
+  handleInsertScript: _propTypes2.default.func.isRequired
+};
 
 exports.default = InsertScriptButton;
 
@@ -8822,8 +8955,6 @@ exports.default = InsertScriptButton;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8847,10 +8978,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _ref = _jsx('span', {
-  className: 'remove-block'
-});
-
 var Media = function (_Component) {
   _inherits(Media, _Component);
 
@@ -8872,7 +8999,7 @@ var Media = function (_Component) {
       if (!entity) {
         // TODO: Remove behavior this code implemented because wasn't
         // control for media block
-        return _ref;
+        return _react2.default.createElement('span', { className: 'remove-block' });
       }
 
       var _entity$getData = entity.getData(),
@@ -8886,18 +9013,16 @@ var Media = function (_Component) {
         var media = _react2.default.createElement('img', mediaProps);
 
         if (href) {
-          return _jsx('a', {
-            href: href,
-            target: target || '_blank'
-          }, void 0, media);
+          return _react2.default.createElement(
+            'a',
+            { href: href, target: target || '_blank' },
+            media
+          );
         }
         return media;
       } else if (entityType === 'iframe' || entityType === 'script') {
         // insert script or iframe in div
-        return _jsx('div', {
-          className: 'noscript',
-          dangerouslySetInnerHTML: { __html: mediaProps.src }
-        });
+        return _react2.default.createElement('div', { className: 'noscript', dangerouslySetInnerHTML: { __html: mediaProps.src } });
       } else {
         throw new Error('Sorry, media type not found.');
       }
@@ -8906,6 +9031,11 @@ var Media = function (_Component) {
 
   return Media;
 }(_react.Component);
+
+Media.propTypes = {
+  // Injected by draft-js in blockRendererFn
+  block: _propTypes2.default.object.isRequired
+};
 
 exports.default = Media;
 
@@ -8921,8 +9051,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.blockRendererFn = exports.default = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8991,19 +9119,22 @@ var MediaControls = function (_Component) {
           popoverClassName = _props2.popoverClassName;
 
 
-      return _jsx('div', {
-        className: 'mediaControls'
-      }, void 0, _jsx(_InsertImageButton2.default, {
-        buttonClassName: buttonClassName,
-        popoverClassName: popoverClassName,
-        handleUploadFinish: function handleUploadFinish(source) {
-          return _this2.handleInsertMedia('image', source);
-        }
-      }), _jsx(_InsertScriptButton2.default, {
-        buttonClassName: buttonClassName,
-        popoverClassName: popoverClassName,
-        handleInsertScript: this.handleInsertMedia.bind(this)
-      }));
+      return _react2.default.createElement(
+        'div',
+        { className: 'mediaControls' },
+        _react2.default.createElement(_InsertImageButton2.default, {
+          buttonClassName: buttonClassName,
+          popoverClassName: popoverClassName,
+          handleUploadFinish: function handleUploadFinish(source) {
+            return _this2.handleInsertMedia('image', source);
+          }
+        }),
+        _react2.default.createElement(_InsertScriptButton2.default, {
+          buttonClassName: buttonClassName,
+          popoverClassName: popoverClassName,
+          handleInsertScript: this.handleInsertMedia.bind(this)
+        })
+      );
     }
   }]);
 
@@ -9011,6 +9142,16 @@ var MediaControls = function (_Component) {
 }(_react.Component);
 
 exports.default = MediaControls;
+
+
+MediaControls.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string,
+  popoverClassName: _propTypes2.default.string
+};
+
 var blockRendererFn = exports.blockRendererFn = function blockRendererFn(block) {
   if (block.getType() === 'atomic') {
     return {
@@ -9089,8 +9230,6 @@ exports.getBlockAlignment = exports.decorator = exports.toolbarEditorProps = und
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _getBlockAlignment = __webpack_require__("./components/editor-draft-js/Toolbar/AlignmentControls/getBlockAlignment.js");
@@ -9149,26 +9288,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./components/editor-draft-js/Toolbar/styles.scss");
-
-var _ref = _jsx('i', {
-  className: 'fa fa-bold'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-italic'
-});
-
-var _ref3 = _jsx('i', {
-  className: 'fa fa-underline'
-});
-
-var _ref4 = _jsx('i', {
-  className: 'fa fa-list-ol'
-});
-
-var _ref5 = _jsx('i', {
-  className: 'fa fa-list-ul'
-});
 
 var Toolbar = function (_Component) {
   _inherits(Toolbar, _Component);
@@ -9234,60 +9353,107 @@ var Toolbar = function (_Component) {
 
       var controlsProps = { editorState: editorState, setEditorState: setEditorState, focusEditor: focusEditor };
 
-      return _jsx('div', {
-        className: 'toolbar absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap',
-        style: style
-      }, void 0, _jsx('div', {}, void 0, _jsx('button', {
-        type: 'button',
-        className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('BOLD')),
-        onClick: function onClick() {
-          return _this2.toggleInlineStyle('BOLD');
-        }
-      }, void 0, _ref), _jsx('button', {
-        type: 'button',
-        className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('ITALIC')),
-        onClick: function onClick() {
-          return _this2.toggleInlineStyle('ITALIC');
-        }
-      }, void 0, _ref2), _jsx('button', {
-        type: 'button',
-        className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('UNDERLINE')),
-        onClick: function onClick() {
-          return _this2.toggleInlineStyle('UNDERLINE');
-        }
-      }, void 0, _ref3), _jsx('button', {
-        type: 'button',
-        className: (0, _classnames2.default)(buttonClassName, this.hasBlockType('ordered-list-item')),
-        onClick: function onClick() {
-          return _this2.toggleBlockType('ordered-list-item');
-        }
-      }, void 0, _ref4), _jsx('button', {
-        type: 'button',
-        className: (0, _classnames2.default)(buttonClassName, this.hasBlockType('unordered-list-item')),
-        onClick: function onClick() {
-          return _this2.toggleBlockType('unordered-list-item');
-        }
-      }, void 0, _ref5)), _react2.default.createElement(_LinkControls2.default, _extends({
-        buttonClassName: buttonClassName,
-        popoverClassName: popoverClassName
-      }, controlsProps)), _react2.default.createElement(_ColorControls2.default, _extends({
-        theme: theme,
-        buttonClassName: buttonClassName
-      }, controlsProps)), _react2.default.createElement(_FontControls2.default, _extends({
-        initialValue: { fontSize: 15, fontFamily: '' }
-      }, controlsProps)), _react2.default.createElement(_HistoryControls2.default, _extends({
-        buttonClassName: buttonClassName
-      }, controlsProps)), _react2.default.createElement(_AlignmentControls2.default, _extends({
-        buttonClassName: buttonClassName
-      }, controlsProps)), _react2.default.createElement(_MediaControls2.default, _extends({
-        buttonClassName: buttonClassName,
-        popoverClassName: popoverClassName
-      }, controlsProps)));
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'toolbar absolute full-width top-0 left-0 bg-darken-4 flex flex-wrap',
+          style: style
+        },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('BOLD')),
+              onClick: function onClick() {
+                return _this2.toggleInlineStyle('BOLD');
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-bold' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('ITALIC')),
+              onClick: function onClick() {
+                return _this2.toggleInlineStyle('ITALIC');
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-italic' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: (0, _classnames2.default)(buttonClassName, this.hasInlineStyle('UNDERLINE')),
+              onClick: function onClick() {
+                return _this2.toggleInlineStyle('UNDERLINE');
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-underline' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: (0, _classnames2.default)(buttonClassName, this.hasBlockType('ordered-list-item')),
+              onClick: function onClick() {
+                return _this2.toggleBlockType('ordered-list-item');
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-list-ol' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              className: (0, _classnames2.default)(buttonClassName, this.hasBlockType('unordered-list-item')),
+              onClick: function onClick() {
+                return _this2.toggleBlockType('unordered-list-item');
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-list-ul' })
+          )
+        ),
+        _react2.default.createElement(_LinkControls2.default, _extends({
+          buttonClassName: buttonClassName,
+          popoverClassName: popoverClassName
+        }, controlsProps)),
+        _react2.default.createElement(_ColorControls2.default, _extends({
+          theme: theme,
+          buttonClassName: buttonClassName
+        }, controlsProps)),
+        _react2.default.createElement(_FontControls2.default, _extends({
+          initialValue: { fontSize: 15, fontFamily: '' }
+        }, controlsProps)),
+        _react2.default.createElement(_HistoryControls2.default, _extends({
+          buttonClassName: buttonClassName
+        }, controlsProps)),
+        _react2.default.createElement(_AlignmentControls2.default, _extends({
+          buttonClassName: buttonClassName
+        }, controlsProps)),
+        _react2.default.createElement(_MediaControls2.default, _extends({
+          buttonClassName: buttonClassName,
+          popoverClassName: popoverClassName
+        }, controlsProps))
+      );
     }
   }]);
 
   return Toolbar;
 }(_react.Component);
+
+Toolbar.propTypes = {
+  editorState: _propTypes2.default.object.isRequired,
+  setEditorState: _propTypes2.default.func.isRequired,
+  focusEditor: _propTypes2.default.func.isRequired,
+  buttonClassName: _propTypes2.default.string,
+  popoverClassName: _propTypes2.default.string,
+  theme: _propTypes2.default.string
+};
 
 var toolbarEditorProps = exports.toolbarEditorProps = {
   blockRendererFn: _MediaControls.blockRendererFn,
@@ -9368,8 +9534,6 @@ exports.createEditorContent = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -9411,10 +9575,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./components/editor-draft-js/styles.scss");
-
-var _ref = _jsx('i', {
-  className: 'fa fa-trash'
-});
 
 var RebooEditor = function (_Component) {
   _inherits(RebooEditor, _Component);
@@ -9564,61 +9724,91 @@ var RebooEditor = function (_Component) {
 
       var hasFocusStyle = this.state.hasFocus && !readOnly ? focusStyle || { outline: '1px solid blue' } : {};
 
-      return _jsx('div', {
-        className: 'reboo-editor',
-        style: containerStyle
-      }, void 0, !readOnly ? _jsx('div', {
-        className: 'toolbar-container',
-        style: _extends({}, toolbarContainerStyle, { display: this.state.hasFocus ? 'block' : 'none' })
-      }, void 0, _jsx(_Toolbar2.default, {
-        theme: theme,
-        buttonClassName: 'btn white p2',
-        popoverClassName: 'absolute white p2 bg-darken-4 rounded-bottom',
-        editorState: this.state.editorState,
-        setEditorState: this.onChangeEditorState.bind(this),
-        focusEditor: this.focus.bind(this),
-        style: toolbarStyle
-      }), _jsx('div', {
-        className: 'outside',
-        onClick: this.save.bind(this)
-      })) : null, _jsx('div', {
-        className: 'editor',
-        style: _extends({}, editorStyle, hasFocusStyle)
-      }, void 0, _jsx('div', {
-        onClick: this.focus.bind(this)
-      }, void 0, _react2.default.createElement(_draftJs.Editor, _extends({
-        ref: 'editor',
-        readOnly: readOnly,
-        editorState: this.state.editorState,
-        onChange: this.onChangeEditorState.bind(this),
-        blockStyleFn: this.blockStyleFn.bind(this),
-        handleKeyCommand: this.handleKeyCommand.bind(this),
-        handleBeforeInput: this.handleBeforeInput.bind(this)
-      }, _Toolbar.toolbarEditorProps)), _jsx('div', {
-        style: { 'clear': 'both' }
-      })), !readOnly ? _jsx('div', {
-        className: 'right mt1',
-        style: {
-          display: this.state.hasFocus ? 'block' : 'none',
-          width: '100%',
-          position: 'relative'
-        }
-      }, void 0, _jsx('button', {
-        className: 'btn caps bg-darken-4 white rounded',
-        onClick: this.save.bind(this)
-      }, void 0, 'Salvar'), _jsx('button', {
-        className: 'btn bg-darken-4 white rounded',
-        style: {
-          position: 'absolute',
-          right: '0'
-        },
-        onClick: this.props.handleDelete
-      }, void 0, _ref)) : null));
+      return _react2.default.createElement(
+        'div',
+        { className: 'reboo-editor', style: containerStyle },
+        !readOnly ? _react2.default.createElement(
+          'div',
+          {
+            className: 'toolbar-container',
+            style: _extends({}, toolbarContainerStyle, { display: this.state.hasFocus ? 'block' : 'none' })
+          },
+          _react2.default.createElement(_Toolbar2.default, {
+            theme: theme,
+            buttonClassName: 'btn white p2',
+            popoverClassName: 'absolute white p2 bg-darken-4 rounded-bottom',
+            editorState: this.state.editorState,
+            setEditorState: this.onChangeEditorState.bind(this),
+            focusEditor: this.focus.bind(this),
+            style: toolbarStyle
+          }),
+          _react2.default.createElement('div', { className: 'outside', onClick: this.save.bind(this) })
+        ) : null,
+        _react2.default.createElement(
+          'div',
+          {
+            className: 'editor',
+            style: _extends({}, editorStyle, hasFocusStyle)
+          },
+          _react2.default.createElement(
+            'div',
+            { onClick: this.focus.bind(this) },
+            _react2.default.createElement(_draftJs.Editor, _extends({
+              ref: 'editor',
+              readOnly: readOnly,
+              editorState: this.state.editorState,
+              onChange: this.onChangeEditorState.bind(this),
+              blockStyleFn: this.blockStyleFn.bind(this),
+              handleKeyCommand: this.handleKeyCommand.bind(this),
+              handleBeforeInput: this.handleBeforeInput.bind(this)
+            }, _Toolbar.toolbarEditorProps)),
+            _react2.default.createElement('div', { style: { 'clear': 'both' } })
+          ),
+          !readOnly ? _react2.default.createElement(
+            'div',
+            {
+              className: 'right mt1',
+              style: {
+                display: this.state.hasFocus ? 'block' : 'none',
+                width: '100%',
+                position: 'relative'
+              }
+            },
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn caps bg-darken-4 white rounded',
+                onClick: this.save.bind(this)
+              },
+              'Salvar'
+            ),
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn bg-darken-4 white rounded',
+                style: {
+                  position: 'absolute',
+                  right: '0'
+                },
+                onClick: this.props.handleDelete
+              },
+              _react2.default.createElement('i', { className: 'fa fa-trash' })
+            )
+          ) : null
+        )
+      );
     }
   }]);
 
   return RebooEditor;
 }(_react.Component);
+
+RebooEditor.propTypes = {
+  handleSave: _propTypes2.default.func,
+  readOnly: _propTypes2.default.bool.isRequired,
+  value: _propTypes2.default.any,
+  theme: _propTypes2.default.string
+};
 
 RebooEditor.defaultProps = {
   readOnly: false
@@ -9704,8 +9894,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__("react");
@@ -9723,13 +9911,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./components/editor-wysihtml/wysihtml-toolbar-color-picker.scss");
-
-var _ref2 = _jsx('div', {
-  className: 'save-button bg-atomic p1'
-}, void 0, _jsx('a', {
-  'data-wysihtml5-dialog-action': 'save',
-  className: 'btn block center bg-aqua caps rounded'
-}, void 0, 'Aplicar cor'));
 
 var WYSIHTMLToolbarColorPicker = function (_React$Component) {
   _inherits(WYSIHTMLToolbarColorPicker, _React$Component);
@@ -9753,20 +9934,37 @@ var WYSIHTMLToolbarColorPicker = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('div', {
-        'data-wysihtml5-dialog': 'foreColorStyle',
-        style: { display: 'none', top: '36px', right: '105px' },
-        className: 'white p2 absolute'
-      }, void 0, _jsx('input', {
-        type: 'text',
-        'data-wysihtml5-dialog-field': 'color',
-        value: this.state.color,
-        onChange: this.handleChange.bind(this),
-        className: 'hide'
-      }), _jsx(_colorPicker.ColorPicker, {
-        onChangeColor: this.handleChange.bind(this),
-        color: this.state.color
-      }), _ref2);
+      return _react2.default.createElement(
+        'div',
+        {
+          'data-wysihtml5-dialog': 'foreColorStyle',
+          style: { display: 'none', top: '36px', right: '105px' },
+          className: 'white p2 absolute'
+        },
+        _react2.default.createElement('input', {
+          type: 'text',
+          'data-wysihtml5-dialog-field': 'color',
+          value: this.state.color,
+          onChange: this.handleChange.bind(this),
+          className: 'hide'
+        }),
+        _react2.default.createElement(_colorPicker.ColorPicker, {
+          onChangeColor: this.handleChange.bind(this),
+          color: this.state.color
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: 'save-button bg-atomic p1' },
+          _react2.default.createElement(
+            'a',
+            {
+              'data-wysihtml5-dialog-action': 'save',
+              className: 'btn block center bg-aqua caps rounded'
+            },
+            'Aplicar cor'
+          )
+        )
+      );
     }
   }]);
 
@@ -9795,14 +9993,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WYSIHTMLToolbarCreateLink = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-//
-// The content widget module it is not the perfect module to provide these actions.
-// Needs to refact to more abstract component like global reusable components module.
-//
-
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -9829,44 +10019,58 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Upgrade React Redux to version 4 will should go away this warning.
 // See: https://github.com/reactjs/react-redux/issues/141#issuecomment-148358733
 
-var _ref2 = _jsx('input', {
-  type: 'text',
-  'data-wysihtml5-dialog-field': 'href',
-  defaultValue: 'http://',
-  className: 'input mr1'
-});
-
-var _ref3 = _jsx('a', {
-  'data-wysihtml5-dialog-action': 'save',
-  className: 'btn btn-outline'
-}, void 0, 'Inserir');
-
-var _ref4 = _jsx('label', {
-  htmlFor: 'editorLinkTargetType'
-}, void 0, 'Abrir link em nova aba');
-
 var WYSIHTMLToolbarCreateLink = exports.WYSIHTMLToolbarCreateLink = function WYSIHTMLToolbarCreateLink(_ref) {
   var editorLinkTargetType = _ref.editorLinkTargetType,
       setEditorLinkTargetType = _ref.setEditorLinkTargetType;
-  return _jsx('div', {
-    'data-wysihtml5-dialog': 'createLink',
-    className: 'white p2 bg-darken-3',
-    style: { display: 'none' }
-  }, void 0, _ref2, _ref3, _jsx('span', {
-    className: 'ml2'
-  }, void 0, _jsx('input', {
-    type: 'checkbox',
-    name: 'editorLinkTargetType',
-    onChange: function onChange(e) {
-      return setEditorLinkTargetType(e.target.checked ? '_blank' : '_self');
+  return _react2.default.createElement(
+    'div',
+    {
+      'data-wysihtml5-dialog': 'createLink',
+      className: 'white p2 bg-darken-3',
+      style: { display: 'none' }
     },
-    value: editorLinkTargetType,
-    'data-wysihtml5-dialog-field': 'target'
-  }), _ref4));
+    _react2.default.createElement('input', {
+      type: 'text',
+      'data-wysihtml5-dialog-field': 'href',
+      defaultValue: 'http://',
+      className: 'input mr1'
+    }),
+    _react2.default.createElement(
+      'a',
+      { 'data-wysihtml5-dialog-action': 'save', className: 'btn btn-outline' },
+      'Inserir'
+    ),
+    _react2.default.createElement(
+      'span',
+      { className: 'ml2' },
+      _react2.default.createElement('input', {
+        type: 'checkbox',
+        name: 'editorLinkTargetType',
+        onChange: function onChange(e) {
+          return setEditorLinkTargetType(e.target.checked ? '_blank' : '_self');
+        },
+        value: editorLinkTargetType,
+        'data-wysihtml5-dialog-field': 'target'
+      }),
+      _react2.default.createElement(
+        'label',
+        { htmlFor: 'editorLinkTargetType' },
+        'Abrir link em nova aba'
+      )
+    )
+  );
 };
 
-// TODO: Replace by selectors
-var mapStateToProps = function mapStateToProps(state) {
+//
+// The content widget module it is not the perfect module to provide these actions.
+// Needs to refact to more abstract component like global reusable components module.
+//
+
+
+WYSIHTMLToolbarCreateLink.propTypes = {
+  editorLinkTargetType: _propTypes2.default.string.isRequired
+  // TODO: Replace by selectors
+};var mapStateToProps = function mapStateToProps(state) {
   return {
     editorLinkTargetType: state.mobilizations.plugins.content.editorLinkTargetType
   };
@@ -9885,8 +10089,6 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, ContentActions)(WYSI
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -9933,33 +10135,43 @@ var WYSIHTMLToolbarInsertHTML = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('div', {
-        'data-wysihtml5-dialog': 'insertHTMLForm',
-        style: { display: 'none' },
-        className: 'white p2 bg-darken-3'
-      }, void 0, _jsx('label', {
-        className: 'col mr1',
-        htmlFor: 'embed',
-        style: { lineHeight: '40px' }
-      }, void 0, 'Incorporar'), _jsx('input', {
-        type: 'text',
-        name: 'embed',
-        className: 'input mr2 ml1 col col-7',
-        value: this.state.insertHTMLContent,
-        onChange: this.handleInsertHTMLChange.bind(this)
-      }), _jsx('a', {
-        'data-wysihtml5-command': 'insertHTML',
-        'data-wysihtml5-command-value': this.state.insertHTMLContent,
-        onClick: this.handleInsertHTMLClick.bind(this),
-        className: 'btn btn-outline mr1'
-      }, void 0, 'Inserir'), _react2.default.createElement(
-        'a',
+      return _react2.default.createElement(
+        'div',
         {
-          ref: 'cancelButton',
-          'data-wysihtml5-dialog-action': 'cancel',
-          className: 'btn btn-transparent' },
-        'Cancelar'
-      ));
+          'data-wysihtml5-dialog': 'insertHTMLForm',
+          style: { display: 'none' },
+          className: 'white p2 bg-darken-3'
+        },
+        _react2.default.createElement(
+          'label',
+          { className: 'col mr1', htmlFor: 'embed', style: { lineHeight: '40px' } },
+          'Incorporar'
+        ),
+        _react2.default.createElement('input', {
+          type: 'text',
+          name: 'embed',
+          className: 'input mr2 ml1 col col-7',
+          value: this.state.insertHTMLContent,
+          onChange: this.handleInsertHTMLChange.bind(this)
+        }),
+        _react2.default.createElement(
+          'a',
+          {
+            'data-wysihtml5-command': 'insertHTML',
+            'data-wysihtml5-command-value': this.state.insertHTMLContent,
+            onClick: this.handleInsertHTMLClick.bind(this),
+            className: 'btn btn-outline mr1' },
+          'Inserir'
+        ),
+        _react2.default.createElement(
+          'a',
+          {
+            ref: 'cancelButton',
+            'data-wysihtml5-dialog-action': 'cancel',
+            className: 'btn btn-transparent' },
+          'Cancelar'
+        )
+      );
     }
   }]);
 
@@ -9980,8 +10192,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__("react");
@@ -9999,33 +10209,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-refresh fa-spin fa-w white'
-});
-
-var _ref2 = _jsx('label', {}, void 0, _jsx('span', {
-  className: 'mr1'
-}, void 0, 'Alinhamento'), _jsx('select', {
-  'data-wysihtml5-dialog-field': 'className',
-  className: 'select inline-block col-2 mr2 mb0'
-}, void 0, _jsx('option', {
-  value: ''
-}), _jsx('option', {
-  value: 'left'
-}, void 0, 'Esquerda'), _jsx('option', {
-  value: 'right'
-}, void 0, 'Direita')));
-
-var _ref3 = _jsx('a', {
-  'data-wysihtml5-dialog-action': 'save',
-  className: 'btn btn-outline white mr1'
-}, void 0, 'Inserir');
-
-var _ref4 = _jsx('a', {
-  'data-wysihtml5-dialog-action': 'cancel',
-  className: 'btn btn-transparent white'
-}, void 0, 'Cancelar');
 
 var WYSIHTMLToolbarInsertImage = function (_React$Component) {
   _inherits(WYSIHTMLToolbarInsertImage, _React$Component);
@@ -10063,25 +10246,72 @@ var WYSIHTMLToolbarInsertImage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('div', {
-        'data-wysihtml5-dialog': 'insertImage',
-        style: { display: 'none' },
-        className: 'white p2 bg-darken-3'
-      }, void 0, _jsx('div', {}, void 0, _jsx(_reactS3Uploader2.default, {
-        className: 'input col-11 inline-block',
-        signingUrl: process.env.API_URL + '/uploads',
-        accept: 'image/*',
-        onProgress: this.handleUploadProgress.bind(this),
-        onError: this.handleUploadError.bind(this),
-        onFinish: this.handleUploadFinish.bind(this)
-      }), _jsx('div', {
-        className: 'col-1 center',
-        style: { display: this.state.isLoading ? 'inline-block' : 'none' }
-      }, void 0, _ref)), _jsx('input', {
-        'data-wysihtml5-dialog-field': 'src',
-        value: this.state.image,
-        type: 'hidden'
-      }), _ref2, _ref3, _ref4);
+      return _react2.default.createElement(
+        'div',
+        {
+          'data-wysihtml5-dialog': 'insertImage',
+          style: { display: 'none' },
+          className: 'white p2 bg-darken-3'
+        },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_reactS3Uploader2.default, {
+            className: 'input col-11 inline-block',
+            signingUrl: process.env.API_URL + '/uploads',
+            accept: 'image/*',
+            onProgress: this.handleUploadProgress.bind(this),
+            onError: this.handleUploadError.bind(this),
+            onFinish: this.handleUploadFinish.bind(this)
+          }),
+          _react2.default.createElement(
+            'div',
+            {
+              className: 'col-1 center',
+              style: { display: this.state.isLoading ? 'inline-block' : 'none' }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-refresh fa-spin fa-w white' })
+          )
+        ),
+        _react2.default.createElement('input', { 'data-wysihtml5-dialog-field': 'src', value: this.state.image, type: 'hidden' }),
+        _react2.default.createElement(
+          'label',
+          null,
+          _react2.default.createElement(
+            'span',
+            { className: 'mr1' },
+            'Alinhamento'
+          ),
+          _react2.default.createElement(
+            'select',
+            {
+              'data-wysihtml5-dialog-field': 'className',
+              className: 'select inline-block col-2 mr2 mb0'
+            },
+            _react2.default.createElement('option', { value: '' }),
+            _react2.default.createElement(
+              'option',
+              { value: 'left' },
+              'Esquerda'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'right' },
+              'Direita'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-dialog-action': 'save', className: 'btn btn-outline white mr1' },
+          'Inserir'
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-dialog-action': 'cancel', className: 'btn btn-transparent white' },
+          'Cancelar'
+        )
+      );
     }
   }]);
 
@@ -10102,7 +10332,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -10136,138 +10366,152 @@ var _dropdownMenu = __webpack_require__("./components/dropdown-menu/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var renderFontsizeDropdownMenuItem = function renderFontsizeDropdownMenuItem(size, className) {
-  return _jsx(_dropdownMenu.DropdownMenuItem, {}, void 0, _jsx('span', {
-    className: (0, _classnames2.default)('block button button-transparent white p2', className),
-    'data-wysihtml5-command': 'fontSize',
-    'data-wysihtml5-command-value': className
-  }, void 0, size));
+  return _react2.default.createElement(
+    _dropdownMenu.DropdownMenuItem,
+    null,
+    _react2.default.createElement(
+      'span',
+      {
+        className: (0, _classnames2.default)('block button button-transparent white p2', className),
+        'data-wysihtml5-command': 'fontSize',
+        'data-wysihtml5-command-value': className
+      },
+      size
+    )
+  );
 };
 
-var _ref = _jsx('i', {
-  className: 'fa fa-link'
-});
+var WYSIHTMLToolbar = function (_React$Component) {
+  _inherits(WYSIHTMLToolbar, _React$Component);
 
-var _ref2 = _jsx('i', {
-  className: 'fa fa-unlink'
-});
+  function WYSIHTMLToolbar() {
+    _classCallCheck(this, WYSIHTMLToolbar);
 
-var _ref3 = _jsx('i', {
-  className: 'fa fa-image'
-});
+    return _possibleConstructorReturn(this, (WYSIHTMLToolbar.__proto__ || Object.getPrototypeOf(WYSIHTMLToolbar)).apply(this, arguments));
+  }
 
-var _ref4 = _jsx('i', {
-  className: 'fa fa-code'
-});
-
-var _ref5 = _jsx('i', {
-  className: 'fa fa-list-ul'
-});
-
-var _ref6 = _jsx('i', {
-  className: 'fa fa-list-ol'
-});
-
-var _ref7 = _jsx('i', {
-  className: 'fa fa-align-left'
-});
-
-var _ref8 = _jsx('i', {
-  className: 'fa fa-align-center'
-});
-
-var _ref9 = _jsx('i', {
-  className: 'fa fa-align-right regular'
-});
-
-var _ref10 = _jsx('i', {
-  className: 'fa fa-undo regular'
-});
-
-var _ref11 = _jsx('i', {
-  className: 'fa fa-repeat regular'
-});
-
-var _ref12 = _jsx('i', {
-  className: 'fa fa-bold'
-});
-
-var _ref13 = _jsx('i', {
-  className: 'fa fa-italic'
-});
-
-var _ref14 = _jsx('i', {
-  className: 'fa fa-eyedropper'
-});
-
-var _ref15 = _jsx(_wysihtmlToolbarInsertImage2.default, {});
-
-var _ref16 = _jsx(_wysihtmlToolbarCreateLink2.default, {});
-
-var _ref17 = _jsx(_wysihtmlToolbarInsertHtml2.default, {});
-
-var _ref18 = _jsx(_wysihtmlToolbarColorPicker2.default, {});
-
-function WYSIHTMLToolbar(props) {
-  var elementId = props.elementId,
-      className = props.className,
-      style = props.style,
-      buttonClassName = props.buttonClassName;
+  _createClass(WYSIHTMLToolbar, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          elementId = _props.elementId,
+          className = _props.className,
+          style = _props.style,
+          buttonClassName = _props.buttonClassName;
 
 
-  return _jsx('div', {
-    id: elementId,
-    className: className,
-    style: style
-  }, void 0, _jsx('a', {
-    'data-wysihtml5-command': 'createLink',
-    className: buttonClassName
-  }, void 0, _ref), _jsx('a', {
-    'data-wysihtml5-command': 'removeLink',
-    className: buttonClassName
-  }, void 0, _ref2), _jsx('a', {
-    'data-wysihtml5-command': 'insertImage',
-    className: buttonClassName
-  }, void 0, _ref3), _jsx('a', {
-    'data-wysihtml5-command': 'insertHTMLForm',
-    className: buttonClassName
-  }, void 0, _ref4), _jsx('a', {
-    'data-wysihtml5-command': 'insertUnorderedList',
-    className: buttonClassName
-  }, void 0, _ref5), _jsx('a', {
-    'data-wysihtml5-command': 'insertOrderedList',
-    className: buttonClassName
-  }, void 0, _ref6), _jsx('a', {
-    'data-wysihtml5-command': 'alignLeftStyle',
-    className: buttonClassName
-  }, void 0, _ref7), _jsx('a', {
-    'data-wysihtml5-command': 'alignCenterStyle',
-    className: buttonClassName
-  }, void 0, _ref8), _jsx('a', {
-    'data-wysihtml5-command': 'alignRightStyle',
-    className: buttonClassName
-  }, void 0, _ref9), _jsx('a', {
-    'data-wysihtml5-command': 'undo',
-    className: buttonClassName
-  }, void 0, _ref10), _jsx('a', {
-    'data-wysihtml5-command': 'redo',
-    className: buttonClassName
-  }, void 0, _ref11), _jsx('a', {
-    'data-wysihtml5-command': 'bold',
-    className: buttonClassName
-  }, void 0, _ref12), _jsx('a', {
-    'data-wysihtml5-command': 'italic',
-    className: buttonClassName
-  }, void 0, _ref13), _jsx(_dropdownMenu.DropdownMenu, {
-    icon: 'text-height',
-    wrapperClassName: 'inline',
-    buttonClassName: 'btn btn-transparent white p2',
-    menuClassName: 'bg-darken-4 left-0'
-  }, void 0, renderFontsizeDropdownMenuItem(8, 'h6'), renderFontsizeDropdownMenuItem(16, 'h5'), renderFontsizeDropdownMenuItem(24, 'h4'), renderFontsizeDropdownMenuItem(48, 'h3'), renderFontsizeDropdownMenuItem(72, 'h2'), renderFontsizeDropdownMenuItem(80, 'h1')), _jsx('a', {
-    'data-wysihtml5-command': 'foreColorStyle',
-    className: buttonClassName
-  }, void 0, _ref14), _ref15, _ref16, _ref17, _ref18);
-}
+      return _react2.default.createElement(
+        'div',
+        { id: elementId, className: className, style: style },
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'createLink', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-link' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'removeLink', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-unlink' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'insertImage', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-image' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'insertHTMLForm', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-code' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'insertUnorderedList', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-list-ul' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'insertOrderedList', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-list-ol' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'alignLeftStyle', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-align-left' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'alignCenterStyle', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-align-center' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'alignRightStyle', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-align-right regular' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'undo', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-undo regular' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'redo', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-repeat regular' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'bold', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-bold' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'italic', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-italic' })
+        ),
+        _react2.default.createElement(
+          _dropdownMenu.DropdownMenu,
+          {
+            icon: 'text-height',
+            wrapperClassName: 'inline',
+            buttonClassName: 'btn btn-transparent white p2',
+            menuClassName: 'bg-darken-4 left-0'
+          },
+          renderFontsizeDropdownMenuItem(8, 'h6'),
+          renderFontsizeDropdownMenuItem(16, 'h5'),
+          renderFontsizeDropdownMenuItem(24, 'h4'),
+          renderFontsizeDropdownMenuItem(48, 'h3'),
+          renderFontsizeDropdownMenuItem(72, 'h2'),
+          renderFontsizeDropdownMenuItem(80, 'h1')
+        ),
+        _react2.default.createElement(
+          'a',
+          { 'data-wysihtml5-command': 'foreColorStyle', className: buttonClassName },
+          _react2.default.createElement('i', { className: 'fa fa-eyedropper' })
+        ),
+        _react2.default.createElement(_wysihtmlToolbarInsertImage2.default, null),
+        _react2.default.createElement(_wysihtmlToolbarCreateLink2.default, null),
+        _react2.default.createElement(_wysihtmlToolbarInsertHtml2.default, null),
+        _react2.default.createElement(_wysihtmlToolbarColorPicker2.default, null)
+      );
+    }
+  }]);
+
+  return WYSIHTMLToolbar;
+}(_react2.default.Component);
+
+WYSIHTMLToolbar.propTypes = {
+  elementId: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  buttonClassName: _propTypes2.default.string
+};
 
 exports.default = WYSIHTMLToolbar;
 
@@ -10315,8 +10559,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__("react");
@@ -10334,8 +10576,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('span', {});
 
 var Pagarme = function (_Component) {
   _inherits(Pagarme, _Component);
@@ -10360,7 +10600,7 @@ var Pagarme = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _ref;
+      return _react2.default.createElement('span', null);
     }
   }]);
 
@@ -10381,8 +10621,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__("react");
@@ -10400,8 +10638,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('span', {});
 
 var ZendeskWidget = function (_Component) {
   _inherits(ZendeskWidget, _Component);
@@ -10425,7 +10661,7 @@ var ZendeskWidget = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _ref;
+      return _react2.default.createElement('span', null);
     }
   }]);
 
@@ -10503,8 +10739,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -10523,10 +10757,19 @@ var Error = function Error(_ref) {
   var message = _ref.message,
       classes = _ref.classes,
       styles = _ref.styles;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('p1 border-left border-red mb1 rounded-right red bold', classes),
-    style: _extends({}, styles)
-  }, void 0, message);
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)('p1 border-left border-red mb1 rounded-right red bold', classes),
+      style: _extends({}, styles) },
+    message
+  );
+};
+
+Error.propTypes = {
+  message: _propTypes2.default.string.isRequired,
+  classes: _propTypes2.default.array,
+  styles: _propTypes2.default.object
 };
 
 Error.defaultProps = {
@@ -10589,8 +10832,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -10612,9 +10853,17 @@ var InputCounter = function InputCounter(_ref) {
 
   var diff = maxLength - length;
 
-  return _jsx('span', {
-    className: (0, _classnames2.default)(className, { red: diff < 11 })
-  }, void 0, diff);
+  return _react2.default.createElement(
+    'span',
+    { className: (0, _classnames2.default)(className, { red: diff < 11 }) },
+    diff
+  );
+};
+
+InputCounter.propTypes = {
+  maxLength: _propTypes2.default.number.isRequired,
+  length: _propTypes2.default.number,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.array, _propTypes2.default.string])
 };
 
 exports.default = InputCounter;
@@ -10630,8 +10879,6 @@ exports.default = InputCounter;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -10656,25 +10903,43 @@ var Input = function Input(_ref) {
       required = _ref.required,
       show = _ref.show,
       classes = _ref.classes;
-  return _jsx('div', {
-    className: 'mb2 form-group',
-    style: { display: !show ? 'none' : 'block' }
-  }, void 0, _jsx('label', {
-    className: 'caps bold mb1 inline-block white',
-    style: {
-      fontSize: '.75rem',
-      fontWeight: 600,
-      marginBottom: '1rem',
-      color: 'white'
-    }
-  }, void 0, label, required ? ' *' : ''), _jsx('input', {
-    id: 'input-' + uid,
-    className: (0, _classnames2.default)('input block border border-gray94', classes),
-    onChange: onChange,
-    placeholder: placeholder,
-    type: type,
-    required: required
-  }));
+  return _react2.default.createElement(
+    'div',
+    { className: 'mb2 form-group', style: { display: !show ? 'none' : 'block' } },
+    _react2.default.createElement(
+      'label',
+      {
+        className: 'caps bold mb1 inline-block white',
+        style: {
+          fontSize: '.75rem',
+          fontWeight: 600,
+          marginBottom: '1rem',
+          color: 'white'
+        }
+      },
+      label,
+      required ? ' *' : ''
+    ),
+    _react2.default.createElement('input', {
+      id: 'input-' + uid,
+      className: (0, _classnames2.default)('input block border border-gray94', classes),
+      onChange: onChange,
+      placeholder: placeholder,
+      type: type,
+      required: required
+    })
+  );
+};
+
+Input.propTypes = {
+  uid: _propTypes2.default.string.isRequired,
+  type: _propTypes2.default.string.isRequired,
+  label: _propTypes2.default.string.isRequired,
+  placeholder: _propTypes2.default.string.isRequired,
+  onChange: _propTypes2.default.func.isRequired,
+  required: _propTypes2.default.bool,
+  show: _propTypes2.default.bool,
+  classes: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array])
 };
 
 Input.defaultProps = {
@@ -10698,8 +10963,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -10712,11 +10975,15 @@ var Button = function Button(_ref) {
       className = _ref.className,
       pristine = _ref.pristine,
       submitting = _ref.submitting;
-  return _jsx('button', {
-    type: type,
-    className: className,
-    disabled: type === 'submit' ? pristine || submitting : false
-  }, void 0, children);
+  return _react2.default.createElement(
+    'button',
+    {
+      type: type,
+      className: className,
+      disabled: type === 'submit' ? pristine || submitting : false
+    },
+    children
+  );
 };
 
 Button.defaultProps = {
@@ -10766,8 +11033,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -10843,14 +11108,16 @@ var ColorPicker = function (_Component) {
           className = _props.className,
           props = _objectWithoutProperties(_props, ['className']);
 
-      return _jsx('div', {
-        className: (0, _classnames2.default)('mt1 mb3', className)
-      }, void 0, _react2.default.createElement(_colorPicker2.default, _extends({}, props, {
-        onChangeColor: function onChangeColor(color) {
-          return onChange(_this2.getRGBA(color));
-        },
-        color: this.getRGBA(value)
-      })));
+      return _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('mt1 mb3', className) },
+        _react2.default.createElement(_colorPicker2.default, _extends({}, props, {
+          onChangeColor: function onChangeColor(color) {
+            return onChange(_this2.getRGBA(color));
+          },
+          color: this.getRGBA(value)
+        }))
+      );
     }
   }]);
 
@@ -10859,6 +11126,12 @@ var ColorPicker = function (_Component) {
 
 ColorPicker.contextTypes = {
   $formGroup: _propTypes2.default.object
+};
+
+ColorPicker.propTypes = {
+  dispatch: _propTypes2.default.func.isRequired,
+  theme: _propTypes2.default.string,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array])
 };
 
 exports.default = ColorPicker;
@@ -10875,8 +11148,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ControlButtons = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10902,15 +11173,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _ref = _jsx(_reactIntl.FormattedMessage, {
-  id: 'components--control-buttons.cancel',
-  defaultMessage: 'Voltar'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-check-circle olive'
-});
-
 var ControlButtons = exports.ControlButtons = function (_Component) {
   _inherits(ControlButtons, _Component);
 
@@ -10935,25 +11197,39 @@ var ControlButtons = exports.ControlButtons = function (_Component) {
           valid = _props.valid,
           intl = _props.intl;
 
-      return _jsx('div', {
-        className: (0, _classnames2.default)('control-buttons', formInline ? 'inline-block ml1' : 'flex flex-wrap mt1')
-      }, void 0, onCancel && _jsx('button', {
-        className: 'btn h3 col-4 ml2 white mt1 mb2 p2 rounded bg-gray',
-        onClick: onCancel
-      }, void 0, _ref), _jsx('input', {
-        type: 'submit',
-        className: (0, _classnames2.default)('btn h3 mt1 mb2 white p2 rounded', !valid ? 'bg-gray95' : 'bg-pagenta', onCancel ? 'col-7 ml3' : 'col-12 mx2'),
-        disabled: !valid || submitting || !dirty,
-        value: submitting ? intl.formatMessage({
-          id: 'components--control-buttons.input.value.saving',
-          defaultMessage: 'Salvando...'
-        }) : floatButton || intl.formatMessage({
-          id: 'components--control-buttons.input.value.default',
-          defaultMessage: 'Continuar'
-        })
-      }), submitted && !!successMessage && _jsx('div', {
-        className: 'success-message olive h4 px2 mt2'
-      }, void 0, successMessage, _ref2));
+      return _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('control-buttons', formInline ? 'inline-block ml1' : 'flex flex-wrap mt1') },
+        onCancel && _react2.default.createElement(
+          'button',
+          {
+            className: 'btn h3 col-4 ml2 white mt1 mb2 p2 rounded bg-gray',
+            onClick: onCancel
+          },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'components--control-buttons.cancel',
+            defaultMessage: 'Voltar'
+          })
+        ),
+        _react2.default.createElement('input', {
+          type: 'submit',
+          className: (0, _classnames2.default)('btn h3 mt1 mb2 white p2 rounded', !valid ? 'bg-gray95' : 'bg-pagenta', onCancel ? 'col-7 ml3' : 'col-12 mx2'),
+          disabled: !valid || submitting || !dirty,
+          value: submitting ? intl.formatMessage({
+            id: 'components--control-buttons.input.value.saving',
+            defaultMessage: 'Salvando...'
+          }) : floatButton || intl.formatMessage({
+            id: 'components--control-buttons.input.value.default',
+            defaultMessage: 'Continuar'
+          })
+        }),
+        submitted && !!successMessage && _react2.default.createElement(
+          'div',
+          { className: 'success-message olive h4 px2 mt2' },
+          successMessage,
+          _react2.default.createElement('i', { className: 'fa fa-check-circle olive' })
+        )
+      );
     }
   }]);
 
@@ -10962,6 +11238,15 @@ var ControlButtons = exports.ControlButtons = function (_Component) {
 
 ControlButtons.contextTypes = {
   $formRedux: _propTypes2.default.object
+};
+
+ControlButtons.propTypes = {
+  submitting: _propTypes2.default.bool,
+  submitted: _propTypes2.default.bool.isRequired,
+  dirty: _propTypes2.default.bool,
+  valid: _propTypes2.default.bool,
+  formInline: _propTypes2.default.bool.isRequired,
+  intl: _reactIntl.intlShape.isRequired
 };
 
 ControlButtons.defaultProps = {
@@ -10983,8 +11268,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11049,17 +11332,17 @@ var ControlLabel = function (_Component) {
       return _react2.default.createElement(
         'label',
         _extends({ style: { cursor: 'pointer' }, htmlFor: htmlFor }, props),
-        _jsx('span', {
-          className: (0, _classnames2.default)('caps', className)
-        }, void 0, children),
-        !maxLength ? null : _jsx(_formUtil.InputCounter, {
+        _react2.default.createElement(
+          'span',
+          { className: (0, _classnames2.default)('caps', className) },
+          children
+        ),
+        !maxLength ? null : _react2.default.createElement(_formUtil.InputCounter, {
           className: 'right regular',
           maxLength: maxLength,
           length: formGroup.value ? formGroup.value.length : 0
         }),
-        error && touched && !hideError && _jsx(_.Raise, {
-          error: error
-        })
+        error && touched && !hideError && _react2.default.createElement(_.Raise, { error: error })
       );
     }
   }]);
@@ -11069,6 +11352,10 @@ var ControlLabel = function (_Component) {
 
 ControlLabel.contextTypes = {
   $formGroup: _propTypes2.default.object
+};
+
+ControlLabel.propTypes = {
+  htmlFor: _propTypes2.default.string
 };
 
 exports.default = ControlLabel;
@@ -11086,8 +11373,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11157,19 +11442,26 @@ var FormControl = function (_Component) {
         delete fieldProps.valid;
       }
 
-      return _jsx('div', {
-        className: (0, _classnames2.default)(containerClassName, addonText !== undefined ? 'input-group' : '')
-      }, void 0, _react2.default.createElement(
-        Component,
-        _extends({}, props, fieldProps, {
-          id: controlId,
-          className: (0, _classnames2.default)('form-control-input block lightestgray', Component, formInline ? 'inline-block' : '', addonText !== undefined ? 'form-control-input-addon' : '', className),
-          style: style
-        }),
-        children
-      ), addonText && _jsx('span', {
-        className: 'text-addon'
-      }, void 0, addonText), content, formInline && _react2.default.createElement(_.ControlButtons, { submitted: submitted, submitting: submitting, dirty: dirty, showCancel: false, formInline: formInline }));
+      return _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)(containerClassName, addonText !== undefined ? 'input-group' : '') },
+        _react2.default.createElement(
+          Component,
+          _extends({}, props, fieldProps, {
+            id: controlId,
+            className: (0, _classnames2.default)('form-control-input block lightestgray', Component, formInline ? 'inline-block' : '', addonText !== undefined ? 'form-control-input-addon' : '', className),
+            style: style
+          }),
+          children
+        ),
+        addonText && _react2.default.createElement(
+          'span',
+          { className: 'text-addon' },
+          addonText
+        ),
+        content,
+        formInline && _react2.default.createElement(_.ControlButtons, { submitted: submitted, submitting: submitting, dirty: dirty, showCancel: false, formInline: formInline })
+      );
     }
   }]);
 
@@ -11185,6 +11477,12 @@ FormControl.contextTypes = {
   $formGroup: _propTypes2.default.shape({
     controlId: _propTypes2.default.string
   })
+};
+
+FormControl.propTypes = {
+  submitted: _propTypes2.default.bool.isRequired,
+  componentClass: _propTypes2.default.string.isRequired,
+  style: _propTypes2.default.object
 };
 
 FormControl.defaultProps = {
@@ -11278,6 +11576,11 @@ FormDropdown.contextTypes = {
   $formGroup: _propTypes2.default.object
 };
 
+FormDropdown.propTypes = {
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.array, _propTypes2.default.string])
+};
+
 exports.default = FormDropdown;
 
 /***/ }),
@@ -11291,8 +11594,6 @@ exports.default = FormDropdown;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11332,9 +11633,11 @@ var FormError = function (_Component) {
       var className = this.props.className;
 
 
-      return !error ? null : _jsx('div', {
-        className: (0, _classnames2.default)('h5 white bold center animated shake', className)
-      }, void 0, error);
+      return !error ? null : _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('h5 white bold center animated shake', className) },
+        error
+      );
     }
   }]);
 
@@ -11343,6 +11646,10 @@ var FormError = function (_Component) {
 
 FormError.contextTypes = {
   $formRedux: _propTypes2.default.object
+};
+
+FormError.propTypes = {
+  className: _propTypes2.default.string
 };
 
 exports.default = FormError;
@@ -11358,8 +11665,6 @@ exports.default = FormError;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11420,10 +11725,14 @@ var FormGroup = function (_Component) {
 
       var styleGroup = layout === 'inline' ? { paddingRight: '1rem' } : {};
 
-      return _jsx('div', {
-        className: (0, _classnames2.default)('form-group', className),
-        style: Object.assign(styleGroup, style)
-      }, void 0, children);
+      return _react2.default.createElement(
+        'div',
+        {
+          className: (0, _classnames2.default)('form-group', className),
+          style: Object.assign(styleGroup, style)
+        },
+        children
+      );
     }
   }]);
 
@@ -11432,6 +11741,14 @@ var FormGroup = function (_Component) {
 
 FormGroup.contextTypes = {
   $formRedux: _propTypes2.default.object
+};
+
+FormGroup.propTypes = {
+  controlId: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  error: _propTypes2.default.string,
+  touched: _propTypes2.default.bool,
+  layout: _propTypes2.default.oneOf(['inline', 'block'])
 };
 
 FormGroup.defaultProps = {
@@ -11455,8 +11772,6 @@ exports.default = FormGroup;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -11557,16 +11872,36 @@ var FormRedux = function (_Component) {
       var submitted = this.state.submitted;
 
 
-      return _jsx('form', {
-        style: style,
-        onSubmit: handleSubmit(submit || onSubmit),
-        className: (0, _classnames2.default)('form-redux form', floatButton ? 'btn-float' : null, className || 'transparent')
-      }, void 0, children, !inline && !nosubmit && _react2.default.createElement(_.ControlButtons, { submitted: submitted, submitting: submitting, dirty: dirty, valid: valid, onCancel: onCancel }));
+      return _react2.default.createElement(
+        'form',
+        {
+          style: style,
+          onSubmit: handleSubmit(submit || onSubmit),
+          className: (0, _classnames2.default)('form-redux form', floatButton ? 'btn-float' : null, className || 'transparent')
+        },
+        children,
+        !inline && !nosubmit && _react2.default.createElement(_.ControlButtons, { submitted: submitted, submitting: submitting, dirty: dirty, valid: valid, onCancel: onCancel })
+      );
     }
   }]);
 
   return FormRedux;
 }(_react.Component);
+
+FormRedux.propTypes = {
+  className: _propTypes2.default.string,
+  onSubmit: _propTypes2.default.func,
+  submit: _propTypes2.default.func,
+  // redux-form props
+  handleSubmit: _propTypes2.default.func.isRequired,
+  submitting: _propTypes2.default.bool.isRequired,
+  submitFailed: _propTypes2.default.bool.isRequired,
+  dirty: _propTypes2.default.bool.isRequired,
+  valid: _propTypes2.default.bool.isRequired,
+  inline: _propTypes2.default.bool.isRequired,
+  floatButton: _propTypes2.default.string.isRequired,
+  successMessage: _propTypes2.default.string
+};
 
 FormRedux.defaultProps = {
   submitting: false,
@@ -11600,8 +11935,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -11616,9 +11949,11 @@ var Form = function Form(_ref) {
       pristine = _ref.pristine,
       submitting = _ref.submitting;
 
-  return _jsx('form', {
-    onSubmit: handleSubmit
-  }, void 0, children && (0, _cloneElement.cloneElement)(children, { pristine: pristine, submitting: submitting }));
+  return _react2.default.createElement(
+    'form',
+    { onSubmit: handleSubmit },
+    children && (0, _cloneElement.cloneElement)(children, { pristine: pristine, submitting: submitting })
+  );
 };
 
 exports.default = Form;
@@ -11634,8 +11969,6 @@ exports.default = Form;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -11654,11 +11987,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HelpBlock = function HelpBlock(_ref) {
   var children = _ref.children,
       className = _ref.className;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('muted my2', className)
-  }, void 0, _jsx('small', {
-    className: 'block'
-  }, void 0, _jsx('dfn', {}, void 0, children)));
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('muted my2', className) },
+    _react2.default.createElement(
+      'small',
+      { className: 'block' },
+      _react2.default.createElement(
+        'dfn',
+        null,
+        children
+      )
+    )
+  );
+};
+
+HelpBlock.propTypes = {
+  className: _propTypes2.default.string
 };
 
 exports.default = HelpBlock;
@@ -11844,8 +12189,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -11861,7 +12204,25 @@ var Input = function Input(_ref) {
       touched = _ref$meta.touched,
       error = _ref$meta.error,
       warning = _ref$meta.warning;
-  return _jsx('div', {}, void 0, label && _jsx('label', {}, void 0, label), _react2.default.createElement('input', _extends({}, input, { type: type, placeholder: placeholder })), touched && (error && _jsx('span', {}, void 0, error) || warning && _jsx('span', {}, void 0, warning)));
+  return _react2.default.createElement(
+    'div',
+    null,
+    label && _react2.default.createElement(
+      'label',
+      null,
+      label
+    ),
+    _react2.default.createElement('input', _extends({}, input, { type: type, placeholder: placeholder })),
+    touched && (error && _react2.default.createElement(
+      'span',
+      null,
+      error
+    ) || warning && _react2.default.createElement(
+      'span',
+      null,
+      warning
+    ))
+  );
 };
 
 exports.default = Input;
@@ -11879,8 +12240,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -11931,16 +12290,17 @@ var RadioGroup = function (_Component) {
           style = _props.style;
 
 
-      return _jsx('p', {
-        className: (0, _classnames2.default)('mt1', className),
-        style: style
-      }, void 0, children && children.map(function (child, index) {
-        return _react2.default.cloneElement(child, _extends({
-          key: 'radio-' + index,
-          checked: value,
-          alignment: layout
-        }, field));
-      }));
+      return _react2.default.createElement(
+        'p',
+        { className: (0, _classnames2.default)('mt1', className), style: style },
+        children && children.map(function (child, index) {
+          return _react2.default.cloneElement(child, _extends({
+            key: 'radio-' + index,
+            checked: value,
+            alignment: layout
+          }, field));
+        })
+      );
     }
   }]);
 
@@ -11949,6 +12309,11 @@ var RadioGroup = function (_Component) {
 
 RadioGroup.contextTypes = {
   $formGroup: _propTypes2.default.object
+};
+
+RadioGroup.propTypes = {
+  layout: _propTypes2.default.oneOf(['horizontal', 'vertical']),
+  style: _propTypes2.default.object
 };
 
 RadioGroup.defaultProps = {
@@ -11968,8 +12333,6 @@ exports.default = RadioGroup;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12024,23 +12387,33 @@ var Radio = function (_Component) {
         style.display = 'block';
       }
 
-      return _jsx('label', {
-        className: (0, _classnames2.default)('form-radio', className, current.classes),
-        style: style,
-        htmlFor: id
-      }, void 0, _jsx('input', {
-        type: 'radio',
-        id: id,
-        className: 'mr1',
-        value: value,
-        onChange: onChange,
-        checked: checked === value
-      }), children);
+      return _react2.default.createElement(
+        'label',
+        {
+          className: (0, _classnames2.default)('form-radio', className, current.classes),
+          style: style,
+          htmlFor: id
+        },
+        _react2.default.createElement('input', {
+          type: 'radio',
+          id: id,
+          className: 'mr1',
+          value: value,
+          onChange: onChange,
+          checked: checked === value
+        }),
+        children
+      );
     }
   }]);
 
   return Radio;
 }(_react.Component);
+
+Radio.propTypes = {
+  checked: _propTypes2.default.any,
+  alignment: _propTypes2.default.oneOf(['horizontal', 'vertical'])
+};
 
 Radio.defaultProps = {
   alignment: 'horizontal'
@@ -12092,6 +12465,10 @@ var Raise = function Raise(_ref) {
   );
 };
 
+Raise.propTypes = {
+  error: _propTypes2.default.string.isRequired
+};
+
 exports.default = Raise;
 
 /***/ }),
@@ -12105,8 +12482,6 @@ exports.default = Raise;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12126,12 +12501,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _ref = _jsx('i', {
-  className: 'fa fa-check-circle olive ml1'
-});
-
-var _ref2 = _jsx('noscript', {});
-
 var SuccessMessage = function (_Component) {
   _inherits(SuccessMessage, _Component);
 
@@ -12147,9 +12516,12 @@ var SuccessMessage = function (_Component) {
       var submitted = this.context.$formRedux.submitted;
       var text = this.props.text;
 
-      return submitted ? _jsx('div', {
-        className: 'success-message olive h4 mt2'
-      }, void 0, text, _ref) : _ref2;
+      return submitted ? _react2.default.createElement(
+        'div',
+        { className: 'success-message olive h4 mt2' },
+        text,
+        _react2.default.createElement('i', { className: 'fa fa-check-circle olive ml1' })
+      ) : _react2.default.createElement('noscript', null);
     }
   }]);
 
@@ -12158,6 +12530,10 @@ var SuccessMessage = function (_Component) {
 
 SuccessMessage.contextTypes = {
   $formRedux: _propTypes2.default.object
+};
+
+SuccessMessage.propTypes = {
+  text: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object]).isRequired
 };
 
 exports.default = SuccessMessage;
@@ -12173,8 +12549,6 @@ exports.default = SuccessMessage;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12201,18 +12575,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-image'
-});
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-circle-o-notch fa-spin fa-w'
-});
-
-var _ref3 = _jsx('i', {
-  className: 'fa fa-spin fa-refresh'
-});
 
 var UploadImageField = function (_Component) {
   _inherits(UploadImageField, _Component);
@@ -12265,35 +12627,39 @@ var UploadImageField = function (_Component) {
       var value = this.context.$formGroup.value;
 
 
-      var content = _ref;
+      var content = _react2.default.createElement('i', { className: 'fa fa-image' });
       if (loading) {
-        content = _ref2;
+        content = _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-w' });
       } else if (value) {
-        content = _jsx('img', {
-          src: value,
-          role: 'presentation'
-        });
+        content = _react2.default.createElement('img', { src: value, role: 'presentation' });
       }
 
       if (theme === 'icon') {
-        return _jsx('div', {
-          className: 'upload-image-file'
-        }, void 0, _jsx('button', {
-          type: 'button',
-          disabled: loading,
-          className: className,
-          onClick: this.onClick.bind(this)
-        }, void 0, content), _react2.default.createElement(_reactS3Uploader2.default, {
-          signingUrl: signingUrl,
-          accept: 'image/*',
-          onProgress: this.onProgress.bind(this),
-          onError: this.onError.bind(this),
-          onFinish: this.onFinish.bind(this),
-          ref: 'inputFile'
-        }));
+        return _react2.default.createElement(
+          'div',
+          { className: 'upload-image-file' },
+          _react2.default.createElement(
+            'button',
+            {
+              type: 'button',
+              disabled: loading,
+              className: className,
+              onClick: this.onClick.bind(this)
+            },
+            content
+          ),
+          _react2.default.createElement(_reactS3Uploader2.default, {
+            signingUrl: signingUrl,
+            accept: 'image/*',
+            onProgress: this.onProgress.bind(this),
+            onError: this.onError.bind(this),
+            onFinish: this.onFinish.bind(this),
+            ref: 'inputFile'
+          })
+        );
       }
       // if theme === 'classic'
-      return loading ? _ref3 : _react2.default.createElement(_reactS3Uploader2.default, {
+      return loading ? _react2.default.createElement('i', { className: 'fa fa-spin fa-refresh' }) : _react2.default.createElement(_reactS3Uploader2.default, {
         signingUrl: signingUrl,
         accept: 'image/*',
         onProgress: this.onProgress.bind(this),
@@ -12322,6 +12688,12 @@ UploadImageField.contextTypes = {
   })
 };
 
+UploadImageField.propTypes = {
+  className: _propTypes2.default.string,
+  signingUrl: _propTypes2.default.string.isRequired,
+  theme: _propTypes2.default.oneOf(['classic', 'icon'])
+};
+
 UploadImageField.defaultProps = {
   theme: 'icon'
 };
@@ -12342,8 +12714,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.BondeBackground = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -12384,12 +12754,27 @@ var Background = function Background(_ref) {
     justifyContent: justifyContent
   };
 
-  return _jsx('div', {
-    className: 'bg-reboo bg-center bg-cover absolute top-0 right-0 bottom-0 left-0',
-    style: bgStyle
-  }, void 0, _jsx('div', {
-    className: (0, _classnames2.default)('content col-' + contentSize)
-  }, void 0, children));
+  return _react2.default.createElement(
+    'div',
+    {
+      className: 'bg-reboo bg-center bg-cover absolute top-0 right-0 bottom-0 left-0',
+      style: bgStyle
+    },
+    _react2.default.createElement(
+      'div',
+      { className: (0, _classnames2.default)('content col-' + contentSize) },
+      children
+    )
+  );
+};
+
+Background.propTypes = {
+  contentSize: _propTypes2.default.number,
+  image: _propTypes2.default.string,
+  alignment: _propTypes2.default.shape({
+    x: _propTypes2.default.string,
+    y: _propTypes2.default.string
+  }).isRequired
 };
 
 Background.defaultProps = {
@@ -12527,8 +12912,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -12546,12 +12929,22 @@ if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./components/la
 var PageCentralizedLayout = function PageCentralizedLayout(_ref) {
   var children = _ref.children;
 
-  return _jsx(_.SettingsPageLayout, {
-    className: 'page-centralized-layout'
-  }, void 0, _jsx(_.SettingsPageContentLayout, {
-    className: 'table col-12 full-height center',
-    wrapClassName: 'table-cell align-middle'
-  }, void 0, children));
+  return _react2.default.createElement(
+    _.SettingsPageLayout,
+    { className: 'page-centralized-layout' },
+    _react2.default.createElement(
+      _.SettingsPageContentLayout,
+      {
+        className: 'table col-12 full-height center',
+        wrapClassName: 'table-cell align-middle'
+      },
+      children
+    )
+  );
+};
+
+PageCentralizedLayout.propTypes = {
+  children: _propTypes2.default.node
 };
 
 exports.default = PageCentralizedLayout;
@@ -12575,8 +12968,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -12585,9 +12976,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PageCentralizedLayoutTitle = function PageCentralizedLayoutTitle(_ref) {
   var children = _ref.children;
-  return _jsx('h2', {
-    className: 'h1 mt0 mb3'
-  }, void 0, children);
+  return _react2.default.createElement(
+    'h2',
+    { className: 'h1 mt0 mb3' },
+    children
+  );
 };
 
 exports.default = PageCentralizedLayoutTitle;
@@ -12603,8 +12996,6 @@ exports.default = PageCentralizedLayoutTitle;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -12626,11 +13017,26 @@ var SettingsPageContentLayout = function SettingsPageContentLayout(_ref) {
       containerClassName = _ref.containerClassName,
       wrapClassName = _ref.wrapClassName,
       overflow = _ref.overflow;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('settings-page-content-layout clearfix py3 pr4 pl3 border-box', 'overflow-' + overflow, className)
-  }, void 0, _jsx('div', {
-    className: (0, _classnames2.default)('settings-page-content-layout-container', 'clearfix', containerClassName, wrapClassName || 'md-col-12 lg-col-9')
-  }, void 0, children));
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)('settings-page-content-layout clearfix py3 pr4 pl3 border-box', 'overflow-' + overflow, className)
+    },
+    _react2.default.createElement(
+      'div',
+      {
+        className: (0, _classnames2.default)('settings-page-content-layout-container', 'clearfix', containerClassName, wrapClassName || 'md-col-12 lg-col-9')
+      },
+      children
+    )
+  );
+};
+
+SettingsPageContentLayout.propTypes = {
+  children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]).isRequired,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  containerClassName: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  wrapClassName: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array])
 };
 
 SettingsPageContentLayout.defaultProps = {
@@ -12651,8 +13057,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -12670,9 +13074,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var SettingsPageLayout = function SettingsPageLayout(_ref) {
   var children = _ref.children,
       className = _ref.className;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('settings-page-layout flex-auto flex flex-column bg-silver relative', className)
-  }, void 0, children);
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)('settings-page-layout flex-auto flex flex-column bg-silver relative', className)
+    },
+    children
+  );
+};
+
+SettingsPageLayout.propTypes = {
+  children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]).isRequired,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array])
 };
 
 exports.default = SettingsPageLayout;
@@ -12688,8 +13101,6 @@ exports.default = SettingsPageLayout;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -12709,11 +13120,24 @@ var SettingsPageMenuLayout = function SettingsPageMenuLayout(_ref) {
   var children = _ref.children,
       title = _ref.title,
       className = _ref.className;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('settings-page-menu-layout bg-white pt3 pr4 pl3 border-only-bottom border-gray94', className)
-  }, void 0, _jsx('h1', {
-    className: 'h1 mt0 mb3'
-  }, void 0, title), children);
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)('settings-page-menu-layout bg-white pt3 pr4 pl3 border-only-bottom border-gray94', className)
+    },
+    _react2.default.createElement(
+      'h1',
+      { className: 'h1 mt0 mb3' },
+      title
+    ),
+    children
+  );
+};
+
+SettingsPageMenuLayout.propTypes = {
+  children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  title: _propTypes2.default.any.isRequired
 };
 
 exports.default = SettingsPageMenuLayout;
@@ -12771,8 +13195,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -12790,12 +13212,6 @@ var _jquery = __webpack_require__("jquery");
 var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _ref = _jsx('div', {
-  className: 'h2 absolute top-0 bottom-0 left-0 right-0 center flex flex-center'
-}, void 0, _jsx('i', {
-  className: 'fa fa-eye-slash flex-auto'
-}));
 
 var NavbarButton = function NavbarButton(props) {
   var handleClick = function handleClick(e) {
@@ -12816,12 +13232,30 @@ var NavbarButton = function NavbarButton(props) {
       children = props.children,
       hidden = props.hidden;
 
-  return _jsx('a', {
-    className: (0, _classnames2.default)(className, 'navbar-button relative'),
-    onClick: handleClick
-  }, void 0, _jsx('span', {
-    style: { opacity: hidden ? '.25' : '1' }
-  }, void 0, children), hidden && _ref);
+  return _react2.default.createElement(
+    'a',
+    {
+      className: (0, _classnames2.default)(className, 'navbar-button relative'),
+      onClick: handleClick },
+    _react2.default.createElement(
+      'span',
+      { style: { opacity: hidden ? '.25' : '1' } },
+      children
+    ),
+    hidden && _react2.default.createElement(
+      'div',
+      { className: 'h2 absolute top-0 bottom-0 left-0 right-0 center flex flex-center' },
+      _react2.default.createElement('i', { className: 'fa fa-eye-slash flex-auto' })
+    )
+  );
+};
+
+NavbarButton.propTypes = {
+  targetId: _propTypes2.default.string.isRequired,
+  scrollableId: _propTypes2.default.string.isRequired,
+  className: _propTypes2.default.string,
+  children: _propTypes2.default.string,
+  hidden: _propTypes2.default.bool
 };
 
 exports.default = NavbarButton;
@@ -12838,8 +13272,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.NavbarEditionWrapper = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -12868,10 +13300,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('i', {
-  className: 'fa fa-pencil'
-});
 
 var NavbarEditionWrapper = exports.NavbarEditionWrapper = function (_React$Component) {
   _inherits(NavbarEditionWrapper, _React$Component);
@@ -12938,26 +13366,33 @@ var NavbarEditionWrapper = exports.NavbarEditionWrapper = function (_React$Compo
 
       var hideButtonClassName = (0, _classnames2.default)('fa', { 'fa-eye-slash': !this.props.block.menu_hidden }, { 'fa-eye': this.props.block.menu_hidden });
 
-      return _jsx('div', {
-        className: 'relative'
-      }, void 0, _jsx('div', {
-        className: buttonsWrapperClassName
-      }, void 0, _jsx('button', {
-        className: editingButtonsClassName,
-        style: editingButtonsStyle,
-        onClick: this.handleEditButtonClick.bind(this)
-      }, void 0, _ref), _react2.default.createElement(
-        'button',
-        {
-          ref: 'hideButton',
-          className: editingButtonsClassName,
-          style: editingButtonsStyle,
-          onClick: this.handleHideButtonClick.bind(this)
-        },
-        _jsx('i', {
-          className: hideButtonClassName
-        })
-      )));
+      return _react2.default.createElement(
+        'div',
+        { className: 'relative' },
+        _react2.default.createElement(
+          'div',
+          { className: buttonsWrapperClassName },
+          _react2.default.createElement(
+            'button',
+            {
+              className: editingButtonsClassName,
+              style: editingButtonsStyle,
+              onClick: this.handleEditButtonClick.bind(this)
+            },
+            _react2.default.createElement('i', { className: 'fa fa-pencil' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              ref: 'hideButton',
+              className: editingButtonsClassName,
+              style: editingButtonsStyle,
+              onClick: this.handleHideButtonClick.bind(this)
+            },
+            _react2.default.createElement('i', { className: hideButtonClassName })
+          )
+        )
+      );
     }
   }, {
     key: 'blockName',
@@ -12975,15 +13410,22 @@ var NavbarEditionWrapper = exports.NavbarEditionWrapper = function (_React$Compo
           className = _props2.className;
 
 
-      return _jsx('div', {
-        onMouseOver: this.handleMouseOver.bind(this),
-        onMouseOut: this.handleMouseOut.bind(this)
-      }, void 0, _jsx(_.NavbarButton, {
-        targetId: 'block-' + block.id,
-        scrollableId: 'blocks-list',
-        hidden: block.menu_hidden,
-        className: className
-      }, void 0, this.blockName(block)), this.props.editable && this.renderEditingButtons());
+      return _react2.default.createElement(
+        'div',
+        {
+          onMouseOver: this.handleMouseOver.bind(this),
+          onMouseOut: this.handleMouseOut.bind(this) },
+        _react2.default.createElement(
+          _.NavbarButton,
+          {
+            targetId: 'block-' + block.id,
+            scrollableId: 'blocks-list',
+            hidden: block.menu_hidden,
+            className: className },
+          this.blockName(block)
+        ),
+        this.props.editable && this.renderEditingButtons()
+      );
     }
   }, {
     key: 'renderNavbarForm',
@@ -13006,6 +13448,14 @@ var NavbarEditionWrapper = exports.NavbarEditionWrapper = function (_React$Compo
   return NavbarEditionWrapper;
 }(_react2.default.Component);
 
+NavbarEditionWrapper.propTypes = {
+  block: _propTypes2.default.object.isRequired,
+  dispatch: _propTypes2.default.func,
+  auth: _propTypes2.default.object,
+  className: _propTypes2.default.string,
+  intl: _reactIntl.intlShape.isRequired
+};
+
 exports.default = (0, _reactIntl.injectIntl)(NavbarEditionWrapper);
 
 /***/ }),
@@ -13019,8 +13469,6 @@ exports.default = (0, _reactIntl.injectIntl)(NavbarEditionWrapper);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -13096,24 +13544,33 @@ var NavbarForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('form', {
-        className: 'inline-block',
-        onSubmit: this.submit.bind(this)
-      }, void 0, _react2.default.createElement('input', {
-        type: 'text',
-        ref: 'nameInput',
-        className: 'input z2 relative',
-        value: this.state.name,
-        onChange: this.handleChangeName.bind(this)
-      }), _jsx('div', {
-        className: 'fixed top-0 right-0 bottom-0 left-0 z1',
-        onClick: this.submit.bind(this)
-      }));
+      return _react2.default.createElement(
+        'form',
+        { className: 'inline-block', onSubmit: this.submit.bind(this) },
+        _react2.default.createElement('input', {
+          type: 'text',
+          ref: 'nameInput',
+          className: 'input z2 relative',
+          value: this.state.name,
+          onChange: this.handleChangeName.bind(this)
+        }),
+        _react2.default.createElement('div', {
+          className: 'fixed top-0 right-0 bottom-0 left-0 z1',
+          onClick: this.submit.bind(this) })
+      );
     }
   }]);
 
   return NavbarForm;
 }(_react2.default.Component);
+
+NavbarForm.propTypes = {
+  handleCloseForm: _propTypes2.default.func.isRequired,
+  mobilization: _propTypes2.default.object.isRequired,
+  block: _propTypes2.default.object.isRequired,
+  blockUpdate: _propTypes2.default.func.isRequired,
+  defaultValue: _propTypes2.default.string
+};
 
 exports.default = NavbarForm;
 
@@ -13129,8 +13586,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -13141,48 +13596,86 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx('g', {
-  transform: 'matrix(1.66704 0 0 1.66704 -60 -60.6)'
-}, void 0, _jsx('g', {}, void 0, _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 128.9,112.7 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z M 78,63.8 l 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 127.2,111.6 c 0,17.6 -14.3,29 -32,29 l -41.7,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.2,12.3 12.2,22.4 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 125.4,110.5 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.7,0 9.3,-4 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 130.7,113.8 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.9 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 0,0 z m 28.3,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.7,0 9.3,-4 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 123.6,109.4 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.4 12.1,22.4 z m -50.9,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 121.9,108.3 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99 38.7,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.4,4.6 12.2,12.3 12.2,22.3 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-3.9 9.3,-9.5 z'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  d: 'm 120.1,107.3 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.9 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.4,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,-0.1 9.3,-4 9.3,-9.5 z'
-}))), _jsx('g', {}, void 0, _jsx('polygon', {
-  points: '57.9,144.4 58.8,140.6 47.5,133.4 46.5,132.8 46.5,136.3'
-})), _jsx('g', {}, void 0, _jsx('polygon', {
-  fill: '#fff',
-  points: '58.8,110.8 58.8,106.8 47.5,99.6 46.5,99 46.5,102.7'
-})), _jsx('g', {}, void 0, _jsx('polygon', {
-  fill: '#fff',
-  points: '58.8,103.9 58.8,90.8 47.5,83.6 46.5,83 46.5,96.2'
-})), _jsx('g', {}, void 0, _jsx('polygon', {
-  fill: '#fff',
-  points: '46.5,37.2 51.8,37.2 66,44.3 59.8,44.3'
-})), _jsx('g', {}, void 0, _jsx('path', {
-  fill: '#fcfafa',
-  d: 'm 132.4,114.4 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.4 12.1,22.4 z m -50.9,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z'
-}), _jsx('path', {
-  d: 'm 100.4,144.5 -42.6,0 0,-101.2 39.8,0 c 18.7,0 32.3,12.4 32.3,29.4 0,7.6 -2.8,14.3 -8,19.3 7.4,5.2 11.5,13.1 11.5,22.5 0.1,17.3 -13.8,30 -33,30 z m -40.5,-2.1 40.6,0 c 17.9,0 30.9,-11.8 30.9,-28 0,-9.1 -4.2,-16.7 -11.7,-21.5 l -1.2,-0.8 1.1,-0.9 c 5.4,-4.7 8.3,-11.1 8.3,-18.6 0,-15.8 -12.7,-27.3 -30.2,-27.3 l -37.8,0 0,97.1 z m 40.5,-19.1 -20,0 0,-21.1 20,0 c 6.1,0 10.4,4.3 10.4,10.5 0,6.2 -4.2,10.6 -10.4,10.6 z m -17.9,-2.2 17.9,0 c 5,0 8.3,-3.4 8.3,-8.4 0,-5 -3.3,-8.4 -8.3,-8.4 l -17.9,0 c 0,0 0,16.8 0,16.8 z m 15.1,-36.9 -17.2,0 0,-19.7 17.2,0 c 5.7,0 9.7,4 9.7,9.8 0,5.7 -4.1,9.9 -9.7,9.9 z m -15.1,-2.1 15.1,0 c 4.5,0 7.6,-3.2 7.6,-7.7 0,-4.6 -3,-7.7 -7.6,-7.7 l -15.1,0 0,15.4 z'
-})));
-
 var LogoIconNoBorder = function LogoIconNoBorder(_ref) {
   var size = _ref.size;
-  return _jsx('svg', {
-    xmlns: 'http://www.w3.org/2000/svg',
-    width: size,
-    height: size,
-    viewBox: '0 0 180 180'
-  }, void 0, _ref2);
+  return _react2.default.createElement(
+    'svg',
+    {
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: size,
+      height: size,
+      viewBox: '0 0 180 180'
+    },
+    _react2.default.createElement(
+      'g',
+      { transform: 'matrix(1.66704 0 0 1.66704 -60 -60.6)' },
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 128.9,112.7 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z M 78,63.8 l 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 127.2,111.6 c 0,17.6 -14.3,29 -32,29 l -41.7,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.2,12.3 12.2,22.4 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 125.4,110.5 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.7,0 9.3,-4 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 130.7,113.8 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.9 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 0,0 z m 28.3,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.7,0 9.3,-4 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 123.6,109.4 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.4 12.1,22.4 z m -50.9,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 121.9,108.3 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99 38.7,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.4,4.6 12.2,12.3 12.2,22.3 z m -51,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 0,0 -16.1,0 -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-3.9 9.3,-9.5 z' })
+        ),
+        _react2.default.createElement(
+          'g',
+          null,
+          _react2.default.createElement('path', { d: 'm 120.1,107.3 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.3 12.1,22.4 z m -51,-48.9 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.4,47.2 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,-0.1 9.3,-4 9.3,-9.5 z' })
+        )
+      ),
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('polygon', { points: '57.9,144.4 58.8,140.6 47.5,133.4 46.5,132.8 46.5,136.3' })
+      ),
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('polygon', { fill: '#fff', points: '58.8,110.8 58.8,106.8 47.5,99.6 46.5,99 46.5,102.7' })
+      ),
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('polygon', { fill: '#fff', points: '58.8,103.9 58.8,90.8 47.5,83.6 46.5,83 46.5,96.2' })
+      ),
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('polygon', { fill: '#fff', points: '46.5,37.2 51.8,37.2 66,44.3 59.8,44.3' })
+      ),
+      _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('path', { fill: '#fcfafa', d: 'm 132.4,114.4 c 0,17.6 -14.3,29 -32,29 l -41.6,0 0,-99.1 38.8,0 c 17.3,0 31.3,11.2 31.3,28.3 0,8.2 -3.3,14.7 -8.6,19.4 7.3,4.7 12.1,12.4 12.1,22.4 z m -50.9,-48.8 0,17.6 16.1,0 c 5.1,0 8.6,-3.7 8.6,-8.8 0,-5.1 -3.4,-8.8 -8.6,-8.8 l -16.1,0 z m 28.3,47.1 c 0,-5.5 -3.7,-9.5 -9.3,-9.5 l -19,0 0,19 19,0 c 5.6,0 9.3,-4 9.3,-9.5 z' }),
+        _react2.default.createElement('path', { d: 'm 100.4,144.5 -42.6,0 0,-101.2 39.8,0 c 18.7,0 32.3,12.4 32.3,29.4 0,7.6 -2.8,14.3 -8,19.3 7.4,5.2 11.5,13.1 11.5,22.5 0.1,17.3 -13.8,30 -33,30 z m -40.5,-2.1 40.6,0 c 17.9,0 30.9,-11.8 30.9,-28 0,-9.1 -4.2,-16.7 -11.7,-21.5 l -1.2,-0.8 1.1,-0.9 c 5.4,-4.7 8.3,-11.1 8.3,-18.6 0,-15.8 -12.7,-27.3 -30.2,-27.3 l -37.8,0 0,97.1 z m 40.5,-19.1 -20,0 0,-21.1 20,0 c 6.1,0 10.4,4.3 10.4,10.5 0,6.2 -4.2,10.6 -10.4,10.6 z m -17.9,-2.2 17.9,0 c 5,0 8.3,-3.4 8.3,-8.4 0,-5 -3.3,-8.4 -8.3,-8.4 l -17.9,0 c 0,0 0,16.8 0,16.8 z m 15.1,-36.9 -17.2,0 0,-19.7 17.2,0 c 5.7,0 9.7,4 9.7,9.8 0,5.7 -4.1,9.9 -9.7,9.9 z m -15.1,-2.1 15.1,0 c 4.5,0 7.6,-3.2 7.6,-7.7 0,-4.6 -3,-7.7 -7.6,-7.7 l -15.1,0 0,15.4 z' })
+      )
+    )
+  );
 };
 
 var oneOfType = _propTypes2.default.oneOfType,
@@ -13192,6 +13685,10 @@ var oneOfType = _propTypes2.default.oneOfType,
 
 LogoIconNoBorder.defaultProps = {
   size: 45
+};
+
+LogoIconNoBorder.propTypes = {
+  size: oneOfType([string, number])
 };
 
 exports.default = LogoIconNoBorder;
@@ -13291,6 +13788,15 @@ var TabBorder = function TabBorder(_ref) {
   );
 };
 
+TabBorder.propTypes = {
+  children: _propTypes2.default.node.isRequired,
+  Component: _propTypes2.default.node.isRequired,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  path: _propTypes2.default.string,
+  isActive: _propTypes2.default.bool,
+  style: _propTypes2.default.string
+};
+
 exports.default = TabBorder;
 
 /***/ }),
@@ -13311,8 +13817,6 @@ exports.default = TabBorder;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -13361,23 +13865,38 @@ var Tab = function (_Component) {
           style = _props.style;
 
       if (path) {
-        return _jsx(_reactRouterDom.Link, {
-          to: path,
-          className: (0, _classnames2.default)('tab btn border-only-bottom px0 py2 mr3 inline-block', isActive ? 'h4 is-active' : null, className),
-          style: style
-        }, void 0, text);
+        return _react2.default.createElement(
+          _reactRouterDom.Link,
+          {
+            to: path,
+            className: (0, _classnames2.default)('tab btn border-only-bottom px0 py2 mr3 inline-block', isActive ? 'h4 is-active' : null, className),
+            style: style
+          },
+          text
+        );
       }
-      return _jsx('span', {
-        style: style,
-        className: (0, _classnames2.default)('tab inline-block py2 mr2', isActive ? 'bold black' : null, className)
-      }, void 0, _jsx('i', {
-        className: (0, _classnames2.default)('circle center inline-block', isActive ? 'bg-pagenta' : 'bg-gray94', text ? 'mr2' : null)
-      }, void 0, index), text);
+      return _react2.default.createElement(
+        'span',
+        { style: style, className: (0, _classnames2.default)('tab inline-block py2 mr2', isActive ? 'bold black' : null, className) },
+        _react2.default.createElement(
+          'i',
+          { className: (0, _classnames2.default)('circle center inline-block', isActive ? 'bg-pagenta' : 'bg-gray94', text ? 'mr2' : null) },
+          index
+        ),
+        text
+      );
     }
   }]);
 
   return Tab;
 }(_react.Component);
+
+Tab.propTypes = {
+  text: _propTypes2.default.node,
+  isActive: _propTypes2.default.bool,
+  path: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object]),
+  index: _propTypes2.default.number
+};
 
 Tab.defaultProps = {
   isActive: false
@@ -13404,8 +13923,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -13428,10 +13945,20 @@ var Tabs = function Tabs(_ref) {
   var children = _ref.children,
       className = _ref.className,
       style = _ref.style;
-  return _jsx('nav', {
-    className: (0, _classnames2.default)('tabs gray20', className),
-    style: style
-  }, void 0, children);
+  return _react2.default.createElement(
+    'nav',
+    {
+      className: (0, _classnames2.default)('tabs gray20', className),
+      style: style
+    },
+    children
+  );
+};
+
+Tabs.propTypes = {
+  children: _propTypes2.default.node.isRequired,
+  className: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  style: _propTypes2.default.string
 };
 
 exports.default = Tabs;
@@ -13516,8 +14043,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -13530,11 +14055,6 @@ var _reactIntl = __webpack_require__("react-intl");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'share.components--facebook-share-button.text',
-  defaultMessage: 'Compartilhar no Facebook'
-});
-
 var FacebookShareButton = function FacebookShareButton(_ref) {
   var href = _ref.href,
       intl = _ref.intl;
@@ -13546,11 +14066,23 @@ var FacebookShareButton = function FacebookShareButton(_ref) {
     }), 'width=800,height=600');
   };
 
-  return _jsx('button', {
-    className: 'btn white h3 p3 col-12 caps h5 rounded',
-    onClick: handleClick,
-    style: { backgroundColor: '#2D88ED' }
-  }, void 0, _ref2);
+  return _react2.default.createElement(
+    'button',
+    {
+      className: 'btn white h3 p3 col-12 caps h5 rounded',
+      onClick: handleClick,
+      style: { backgroundColor: '#2D88ED' }
+    },
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'share.components--facebook-share-button.text',
+      defaultMessage: 'Compartilhar no Facebook'
+    })
+  );
+};
+
+FacebookShareButton.propTypes = {
+  href: _propTypes2.default.string.isRequired,
+  intl: _reactIntl.intlShape.isRequired
 };
 
 exports.default = (0, _reactIntl.injectIntl)(FacebookShareButton);
@@ -13664,8 +14196,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -13680,11 +14210,6 @@ var _ = __webpack_require__("./components/share/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx('p', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'share.components--tell-a-friend.text',
-  defaultMessage: 'Agora, compartilhe com seus amigos!'
-}));
-
 var TellAFriend = function TellAFriend(_ref) {
   var preview = _ref.preview,
       href = _ref.href,
@@ -13696,24 +14221,59 @@ var TellAFriend = function TellAFriend(_ref) {
 
   var settings = widget.settings || {};
 
-  return _jsx('div', {
-    className: 'center p3 bg-white darkengray rounded'
-  }, void 0, _jsx('div', {
-    className: 'm0 h3 bold'
-  }, void 0, message), _jsx('div', {
-    className: 'py2'
-  }, void 0, _jsx('img', {
-    src: imageUrl,
-    style: { width: imageWidth || 100 }
-  })), _ref2, _jsx('p', {}, void 0, _jsx(_.FacebookShareButton, {
-    href: href
-  })), _jsx('p', {}, void 0, _jsx(_.TwitterShareButton, {
-    href: href,
-    text: twitterShareText
-  })), _jsx('p', {}, void 0, _jsx(_.WhatsAppShareButton, {
-    whatsappText: settings.whatsapp_text || href,
-    preview: preview
-  })));
+  return _react2.default.createElement(
+    'div',
+    { className: 'center p3 bg-white darkengray rounded' },
+    _react2.default.createElement(
+      'div',
+      { className: 'm0 h3 bold' },
+      message
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'py2' },
+      _react2.default.createElement('img', { src: imageUrl, style: { width: imageWidth || 100 } })
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'share.components--tell-a-friend.text',
+        defaultMessage: 'Agora, compartilhe com seus amigos!'
+      })
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      _react2.default.createElement(_.FacebookShareButton, { href: href })
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      _react2.default.createElement(_.TwitterShareButton, { href: href, text: twitterShareText })
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      _react2.default.createElement(_.WhatsAppShareButton, { whatsappText: settings.whatsapp_text || href, preview: preview })
+    )
+  );
+};
+
+TellAFriend.propTypes = {
+  preview: _propTypes2.default.bool,
+  mobilization: _propTypes2.default.shape({
+    twitter_share_text: _propTypes2.default.string
+  }).isRequired,
+  widget: _propTypes2.default.shape({
+    settings: _propTypes2.default.shape({
+      whatsapp_text: _propTypes2.default.string
+    })
+  }).isRequired,
+  message: _propTypes2.default.string.isRequired,
+  href: _propTypes2.default.string.isRequired,
+  imageUrl: _propTypes2.default.string,
+  imageWidth: _propTypes2.default.string
 };
 
 TellAFriend.defaultProps = {
@@ -13734,8 +14294,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -13747,11 +14305,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactIntl = __webpack_require__("react-intl");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'share.components--twitter-share-button.text',
-  defaultMessage: 'Compartilhar no Twitter'
-});
 
 var TwitterShareButton = function TwitterShareButton(_ref) {
   var href = _ref.href,
@@ -13769,11 +14322,24 @@ var TwitterShareButton = function TwitterShareButton(_ref) {
     }), 'width=800,height=600');
   };
 
-  return _jsx('button', {
-    className: 'btn white h3 p3 col-12 caps h5 rounded',
-    onClick: handleClick,
-    style: { backgroundColor: '#3DD1F4' }
-  }, void 0, _ref2);
+  return _react2.default.createElement(
+    'button',
+    {
+      className: 'btn white h3 p3 col-12 caps h5 rounded',
+      onClick: handleClick,
+      style: { backgroundColor: '#3DD1F4' }
+    },
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'share.components--twitter-share-button.text',
+      defaultMessage: 'Compartilhar no Twitter'
+    })
+  );
+};
+
+TwitterShareButton.propTypes = {
+  href: _propTypes2.default.string.isRequired,
+  text: _propTypes2.default.string.isRequired,
+  intl: _reactIntl.intlShape.isRequired
 };
 
 exports.default = (0, _reactIntl.injectIntl)(TwitterShareButton);
@@ -13789,8 +14355,6 @@ exports.default = (0, _reactIntl.injectIntl)(TwitterShareButton);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -13808,21 +14372,29 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'share.components--whatsapp-share-button.text',
-  defaultMessage: 'Compartilhar no WhatsApp'
-});
-
 var WhatsAppShareButton = function WhatsAppShareButton(_ref) {
   var preview = _ref.preview,
       whatsappText = _ref.whatsappText,
       mobilization = _ref.mobilization;
 
-  return _jsx('a', {
-    className: (0, _classnames2.default)('btn white h3 p3 col-12 caps h5 rounded border-box', { 'lg-hide': !preview }),
-    href: 'whatsapp://send?text=' + encodeURIComponent(whatsappText),
-    style: { backgroundColor: '#4CEC68', color: '#fff' }
-  }, void 0, _ref2);
+  return _react2.default.createElement(
+    'a',
+    {
+      className: (0, _classnames2.default)('btn white h3 p3 col-12 caps h5 rounded border-box', { 'lg-hide': !preview }),
+      href: 'whatsapp://send?text=' + encodeURIComponent(whatsappText),
+      style: { backgroundColor: '#4CEC68', color: '#fff' }
+    },
+    _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'share.components--whatsapp-share-button.text',
+      defaultMessage: 'Compartilhar no WhatsApp'
+    })
+  );
+};
+
+WhatsAppShareButton.propTypes = {
+  href: _propTypes2.default.string.isRequired,
+  preview: _propTypes2.default.bool,
+  whatsappText: _propTypes2.default.string
 };
 
 exports.default = WhatsAppShareButton;
@@ -14696,6 +15268,16 @@ var Content = exports.Content = function (_Component) {
   return Content;
 }(_react.Component);
 
+Content.propTypes = {
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  editable: _propTypes2.default.bool.isRequired,
+  onEdit: _propTypes2.default.func.isRequired,
+  onCancelEdit: _propTypes2.default.func.isRequired,
+  update: _propTypes2.default.func,
+  intl: _reactIntl.intlShape.isRequired
+};
+
 exports.default = (0, _reactIntl.injectIntl)(Content);
 
 /***/ }),
@@ -14711,8 +15293,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _react = __webpack_require__("react");
 
@@ -14733,17 +15313,21 @@ var ActionButton = function ActionButton(_ref) {
       style = _ref.style,
       className = _ref.className,
       value = _ref.value;
-  return _jsx('button', {
-    className: (0, _classnames2.default)('btn bg-blacker rounded', className),
-    onClick: function onClick() {
-      return _onClick(value, changeState);
+  return _react2.default.createElement(
+    'button',
+    {
+      className: (0, _classnames2.default)('btn bg-blacker rounded', className),
+      onClick: function onClick() {
+        return _onClick(value, changeState);
+      },
+      style: _extends({
+        position: 'relative',
+        display: editing ? 'inline-block' : 'none'
+      }, style),
+      title: title
     },
-    style: _extends({
-      position: 'relative',
-      display: editing ? 'inline-block' : 'none'
-    }, style),
-    title: title
-  }, void 0, children);
+    children
+  );
 };
 
 exports.default = ActionButton;
@@ -14793,8 +15377,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -14823,8 +15405,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./mobilizations/widgets/__plugins__/content/components/editor-new/index.scss");
 
-var _ref = _jsx(_await.Loading, {});
-
 var EditorNew = function (_React$Component) {
   _inherits(EditorNew, _React$Component);
 
@@ -14852,7 +15432,7 @@ var EditorNew = function (_React$Component) {
     key: 'renderLoading',
     value: function renderLoading() {
       if (this.state.loading) {
-        return _ref;
+        return _react2.default.createElement(_await.Loading, null);
       }
     }
   }, {
@@ -14892,21 +15472,32 @@ var EditorNew = function (_React$Component) {
         value = settings.content;
       }
 
-      return _jsx('div', {
-        className: 'widgets--content-plugin widget editor-new',
-        style: { fontFamily: bodyFont }
-      }, void 0, _jsx(_editorDraftJs2.default, {
-        value: value,
-        theme: theme,
-        readOnly: !editable,
-        handleSave: this.handleSave.bind(this),
-        handleDelete: this.props.handleDelete
-      }));
+      return _react2.default.createElement(
+        'div',
+        { className: 'widgets--content-plugin widget editor-new', style: { fontFamily: bodyFont } },
+        _react2.default.createElement(_editorDraftJs2.default, {
+          value: value,
+          theme: theme,
+          readOnly: !editable,
+          handleSave: this.handleSave.bind(this),
+          handleDelete: this.props.handleDelete
+        })
+      );
     }
   }]);
 
   return EditorNew;
 }(_react2.default.Component);
+
+EditorNew.propTypes = {
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  editable: _propTypes2.default.bool.isRequired,
+  onEdit: _propTypes2.default.func.isRequired,
+  onCancelEdit: _propTypes2.default.func.isRequired,
+  update: _propTypes2.default.func,
+  handleDelete: _propTypes2.default.func
+};
 
 exports.default = EditorNew;
 
@@ -14973,8 +15564,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -15017,8 +15606,6 @@ if (__webpack_require__("exenv").canUseDOM) {
 }
 
 // Global module dependencies
-
-var _ref = _jsx(_await.Loading, {});
 
 var EditorOld = function (_React$Component) {
   _inherits(EditorOld, _React$Component);
@@ -15158,7 +15745,7 @@ var EditorOld = function (_React$Component) {
     key: 'renderLoading',
     value: function renderLoading() {
       if (this.state.loading) {
-        return _ref;
+        return _react2.default.createElement(_await.Loading, null);
       }
     }
   }, {
@@ -15181,38 +15768,68 @@ var EditorOld = function (_React$Component) {
           bodyFont = _props$mobilization.body_font;
       var handleForceRender = this.props.handleForceRender;
 
-      return _jsx('div', {
-        className: 'widgets--content-plugin'
-      }, void 0, _jsx('div', {
-        className: (0, _classnames2.default)('content-widget col-12', { 'display-none': !editing })
-      }, void 0, _jsx(_editorWysihtml.WYSIHTMLToolbar, {
-        elementId: toolbarId,
-        className: 'absolute col-12 top-0 bg-darken-4 z7',
-        buttonClassName: 'btn white p2',
-        style: { left: 0 }
-      }), _jsx('div', {
-        className: 'fixed top-0 right-0 bottom-0 left-0 z5',
-        onClick: this.handleOverlayClick.bind(this)
-      })), _jsx('div', {
-        className: (0, _classnames2.default)('relative', editing ? 'z6' : 'z0')
-      }, void 0, _react2.default.createElement('div', {
-        className: (0, _classnames2.default)('widget', headerFont + '-header', bodyFont + '-body'),
-        dangerouslySetInnerHTML: { __html: this.state.content },
-        ref: 'content'
-      }), _jsx('div', {
-        className: (0, _classnames2.default)('right mt1', { 'display-none': !editing })
-      }, void 0, handleForceRender ? _jsx('button', {
-        onClick: this.handleRenderNewEditor.bind(this),
-        className: 'btn caps bg-darken-4 white rounded mr1'
-      }, void 0, 'Alterar editor') : null, _jsx('button', {
-        onClick: this.save.bind(this),
-        className: 'btn caps bg-darken-4 white rounded'
-      }, void 0, 'Salvar'))), this.renderLoading());
+      return _react2.default.createElement(
+        'div',
+        { className: 'widgets--content-plugin' },
+        _react2.default.createElement(
+          'div',
+          { className: (0, _classnames2.default)('content-widget col-12', { 'display-none': !editing }) },
+          _react2.default.createElement(_editorWysihtml.WYSIHTMLToolbar, {
+            elementId: toolbarId,
+            className: 'absolute col-12 top-0 bg-darken-4 z7',
+            buttonClassName: 'btn white p2',
+            style: { left: 0 }
+          }),
+          _react2.default.createElement('div', {
+            className: 'fixed top-0 right-0 bottom-0 left-0 z5',
+            onClick: this.handleOverlayClick.bind(this)
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: (0, _classnames2.default)('relative', editing ? 'z6' : 'z0') },
+          _react2.default.createElement('div', {
+            className: (0, _classnames2.default)('widget', headerFont + '-header', bodyFont + '-body'),
+            dangerouslySetInnerHTML: { __html: this.state.content },
+            ref: 'content'
+          }),
+          _react2.default.createElement(
+            'div',
+            { className: (0, _classnames2.default)('right mt1', { 'display-none': !editing }) },
+            handleForceRender ? _react2.default.createElement(
+              'button',
+              {
+                onClick: this.handleRenderNewEditor.bind(this),
+                className: 'btn caps bg-darken-4 white rounded mr1'
+              },
+              'Alterar editor'
+            ) : null,
+            _react2.default.createElement(
+              'button',
+              {
+                onClick: this.save.bind(this),
+                className: 'btn caps bg-darken-4 white rounded'
+              },
+              'Salvar'
+            )
+          )
+        ),
+        this.renderLoading()
+      );
     }
   }]);
 
   return EditorOld;
 }(_react2.default.Component);
+
+EditorOld.propTypes = {
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  editable: _propTypes2.default.bool.isRequired,
+  onEdit: _propTypes2.default.func.isRequired,
+  onCancelEdit: _propTypes2.default.func.isRequired,
+  update: _propTypes2.default.func
+};
 
 exports.default = EditorOld;
 
@@ -15230,8 +15847,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.createEditorContent = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -15280,22 +15895,6 @@ var classNames = {
   input: 'input col-3 inline-block mr1',
   lastButton: 'btn btn-primary not-rounded border border-gray linebreak'
 };
-
-var _ref = _jsx('i', {
-  className: 'fa fa-trash'
-});
-
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'c--editor-slate.button-save.text',
-  defaultMessage: 'Salvar'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'c--editor-slate.button-cancel.text',
-  defaultMessage: 'Cancelar'
-});
-
-var _ref4 = _jsx(_await.Loading, {});
 
 var EditorSlate = function (_Component) {
   _inherits(EditorSlate, _Component);
@@ -15347,85 +15946,109 @@ var EditorSlate = function (_Component) {
           toolbarStyles = _props.toolbarStyles,
           contentStyles = _props.contentStyles;
 
-      return _jsx('div', {
-        className: 'widgets--content-plugin'
-      }, void 0, _jsx(_slateEditor.SlateEditor, {
-        plugins: plugins,
-        initialState: this.state.initialState,
-        style: { color: '#fff' }
-      }, void 0, _jsx(_slateEditor.SlateToolbar, {
-        style: _extends({}, _styles2.default.toolbar, {
-          display: this.state.editing ? 'block' : 'none'
-        }, toolbarStyles)
-      }, void 0, _jsx(_slateEditor.BoldButton, {
-        className: classNames.button
-      }), _jsx(_slateEditor.ItalicButton, {
-        className: classNames.button
-      }), _jsx(_slateEditor.UnderlineButton, {
-        className: classNames.button
-      }), _jsx(_slateEditor.StrikethroughButton, {
-        className: classNames.button
-      }), _jsx(_slateEditor.AlignmentButtonBar, {
-        className: classNames.button
-      }), _jsx(_slateEditor.LinkButton, {
-        className: classNames.button
-      }), _jsx(_slateEditor.ListButtonBar, {
-        className: classNames.button
-      }), _jsx(_slateEditor.FontFamilyDropdown, {
-        className: classNames.dropdown,
-        style: _styles2.default.dropdown
-      }), _react2.default.createElement(_slateEditor.FontSizeInput, _extends({ className: classNames.input }, fontSizePluginOptions, { style: _styles2.default.input })), _jsx(_slateEditor.ImageButton, {
-        className: classNames.button,
-        signingUrl: _config2.default.apiUrl + '/uploads'
-      }), _jsx(_slateEditor.ColorButton, {
-        className: classNames.button,
-        initialState: colorPluginOptions,
-        pickerDefaultPosition: { x: 0, y: 17 }
-      }), _jsx(_slateEditor.GridButtonBar, {
-        className: classNames.button
-      }), _jsx(_slateEditor.EmbedButton, {
-        className: classNames.button
-      })), _jsx(_slateEditor.SlateContent, {
-        wrapperStyle: { position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' },
-        style: _extends({ minHeight: 150 }, contentStyles),
-        onFocus: function onFocus() {
-          if (!readOnly) _this2.setState({ editing: true });
-        },
-        onKeyDown: function onKeyDown(event, data, state) {
-          if (data.isMod && data.key === 's') {
-            event.preventDefault();
-            _this2.handleSave(state);
-          }
-        },
-        className: !readOnly ? 'editable' : '',
-        readOnly: readOnly
-      }), _jsx(_.FooterEditor, {}, void 0, _jsx(_.ActionButton, {
-        editing: this.state.editing,
-        title: 'Remover',
-        style: {
-          position: 'absolute',
-          right: 0,
-          bottom: 0
-        },
-        className: 'mt2',
-        onClick: handleDelete
-      }, void 0, _ref), _jsx(_.ActionButton, {
-        editing: this.state.editing,
-        className: 'mt2 right-align',
-        onClick: this.handleSave.bind(this)
-      }, void 0, _ref2), _jsx(_.ActionButton, {
-        editing: this.state.editing,
-        className: 'mt2 right-align mx2',
-        onClick: this.handleCancelEditionMode.bind(this)
-      }, void 0, _ref3)), _jsx(_.Layer, {
-        editing: this.state.editing,
-        onClick: this.handleCancelEditionMode.bind(this)
-      })), this.state.loading && _ref4);
+      return _react2.default.createElement(
+        'div',
+        { className: 'widgets--content-plugin' },
+        _react2.default.createElement(
+          _slateEditor.SlateEditor,
+          {
+            plugins: plugins,
+            initialState: this.state.initialState,
+            style: { color: '#fff' }
+          },
+          _react2.default.createElement(
+            _slateEditor.SlateToolbar,
+            { style: _extends({}, _styles2.default.toolbar, {
+                display: this.state.editing ? 'block' : 'none'
+              }, toolbarStyles) },
+            _react2.default.createElement(_slateEditor.BoldButton, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.ItalicButton, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.UnderlineButton, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.StrikethroughButton, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.AlignmentButtonBar, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.LinkButton, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.ListButtonBar, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.FontFamilyDropdown, { className: classNames.dropdown, style: _styles2.default.dropdown }),
+            _react2.default.createElement(_slateEditor.FontSizeInput, _extends({ className: classNames.input }, fontSizePluginOptions, { style: _styles2.default.input })),
+            _react2.default.createElement(_slateEditor.ImageButton, { className: classNames.button, signingUrl: _config2.default.apiUrl + '/uploads' }),
+            _react2.default.createElement(_slateEditor.ColorButton, { className: classNames.button, initialState: colorPluginOptions, pickerDefaultPosition: { x: 0, y: 17 } }),
+            _react2.default.createElement(_slateEditor.GridButtonBar, { className: classNames.button }),
+            _react2.default.createElement(_slateEditor.EmbedButton, { className: classNames.button })
+          ),
+          _react2.default.createElement(_slateEditor.SlateContent, {
+            wrapperStyle: { position: 'relative', zIndex: this.state.editing ? 4 : 'inherit' },
+            style: _extends({ minHeight: 150 }, contentStyles),
+            onFocus: function onFocus() {
+              if (!readOnly) _this2.setState({ editing: true });
+            },
+            onKeyDown: function onKeyDown(event, data, state) {
+              if (data.isMod && data.key === 's') {
+                event.preventDefault();
+                _this2.handleSave(state);
+              }
+            },
+            className: !readOnly ? 'editable' : '',
+            readOnly: readOnly
+          }),
+          _react2.default.createElement(
+            _.FooterEditor,
+            null,
+            _react2.default.createElement(
+              _.ActionButton,
+              {
+                editing: this.state.editing,
+                title: 'Remover',
+                style: {
+                  position: 'absolute',
+                  right: 0,
+                  bottom: 0
+                },
+                className: 'mt2',
+                onClick: handleDelete
+              },
+              _react2.default.createElement('i', { className: 'fa fa-trash' })
+            ),
+            _react2.default.createElement(
+              _.ActionButton,
+              {
+                editing: this.state.editing,
+                className: 'mt2 right-align',
+                onClick: this.handleSave.bind(this)
+              },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'c--editor-slate.button-save.text',
+                defaultMessage: 'Salvar'
+              })
+            ),
+            _react2.default.createElement(
+              _.ActionButton,
+              {
+                editing: this.state.editing,
+                className: 'mt2 right-align mx2',
+                onClick: this.handleCancelEditionMode.bind(this)
+              },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'c--editor-slate.button-cancel.text',
+                defaultMessage: 'Cancelar'
+              })
+            )
+          ),
+          _react2.default.createElement(_.Layer, {
+            editing: this.state.editing,
+            onClick: this.handleCancelEditionMode.bind(this)
+          })
+        ),
+        this.state.loading && _react2.default.createElement(_await.Loading, null)
+      );
     }
   }]);
 
   return EditorSlate;
 }(_react.Component);
+
+EditorSlate.propTypes = {
+  intl: _reactIntl.intlShape.isRequired
+};
 
 EditorSlate.defaultProps = {
   handleSave: function handleSave() {}
@@ -15518,8 +16141,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -15532,11 +16153,13 @@ exports.default = function (_ref) {
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, ['children']);
 
-  return _jsx('div', {
-    style: { position: 'relative', zIndex: 2 }
-  }, void 0, children && children.map(function (child) {
-    return _react2.default.cloneElement(child, props);
-  }));
+  return _react2.default.createElement(
+    'div',
+    { style: { position: 'relative', zIndex: 2 } },
+    children && children.map(function (child) {
+      return _react2.default.cloneElement(child, props);
+    })
+  );
 };
 
 /***/ }),
@@ -15628,8 +16251,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -15642,7 +16263,7 @@ var Layer = function Layer(_ref) {
       value = _ref.value,
       changeState = _ref.changeState;
 
-  return _jsx('div', {
+  return _react2.default.createElement('div', {
     style: {
       display: editing ? 'block' : 'none',
       position: 'fixed',
@@ -16024,8 +16645,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -16046,23 +16665,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--tell-a-friend.message',
-  defaultMessage: 'Oba, doa\xE7\xE3o registrada! Sua doa\xE7\xE3o \xE9 via boleto? Verifique seu email.'
-});
-
 var DonationTellAFriend = function DonationTellAFriend(_ref) {
   var preview = _ref.preview,
       mobilization = _ref.mobilization,
       widget = _ref.widget;
 
-  return _jsx(_share.TellAFriend, {
+  return _react2.default.createElement(_share.TellAFriend, {
     preview: preview,
     mobilization: mobilization,
     widget: widget,
-    message: _ref2,
+    message: _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'donation.components--tell-a-friend.message',
+      defaultMessage: 'Oba, doa\xE7\xE3o registrada! Sua doa\xE7\xE3o \xE9 via boleto? Verifique seu email.'
+    }),
     href: paths.mobilization(mobilization)
   });
+};
+
+DonationTellAFriend.propTypes = {
+  preview: _propTypes2.default.bool,
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired
 };
 
 exports.default = DonationTellAFriend;
@@ -16120,8 +16743,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -16144,31 +16765,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--settings-menu.title',
-  defaultMessage: 'Configure sua caixa de doa\xE7\xE3o'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--settings-menu.tabs.adjusts',
-  defaultMessage: 'Ajustes'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--settings-menu.tabs.info',
-  defaultMessage: 'Dados para doa\xE7\xE3o'
-});
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--settings-menu.tabs.autofire',
-  defaultMessage: 'Mensagem agradecimento'
-});
-
-var _ref6 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'donation.components--settings-menu.tabs.post-action',
-  defaultMessage: 'P\xF3s-doa\xE7\xE3o'
-});
-
 var SettingsMenu = function SettingsMenu(_ref) {
   var mobilization = _ref.mobilization,
       widget = _ref.widget,
@@ -16179,25 +16775,57 @@ var SettingsMenu = function SettingsMenu(_ref) {
   var donationAutofirePath = paths.donationAutofire(mobilization.id, widget.id);
   var donationFinishPath = paths.donationFinish(mobilization.id, widget.id);
 
-  return _jsx(_layout.SettingsPageMenuLayout, {
-    title: _ref2
-  }, void 0, _jsx(_tabs.Tabs, {}, void 0, _jsx(_tabs.Tab, {
-    path: donationAdjustmentsPath,
-    isActive: donationAdjustmentsPath === location.pathname,
-    text: _ref3
-  }), _jsx(_tabs.Tab, {
-    path: donationPath,
-    isActive: donationPath === location.pathname,
-    text: _ref4
-  }), _jsx(_tabs.Tab, {
-    path: donationAutofirePath,
-    isActive: donationAutofirePath === location.pathname,
-    text: _ref5
-  }), _jsx(_tabs.Tab, {
-    path: donationFinishPath,
-    isActive: donationFinishPath === location.pathname,
-    text: _ref6
-  })));
+  return _react2.default.createElement(
+    _layout.SettingsPageMenuLayout,
+    {
+      title: _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'donation.components--settings-menu.title',
+        defaultMessage: 'Configure sua caixa de doa\xE7\xE3o'
+      })
+    },
+    _react2.default.createElement(
+      _tabs.Tabs,
+      null,
+      _react2.default.createElement(_tabs.Tab, {
+        path: donationAdjustmentsPath,
+        isActive: donationAdjustmentsPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'donation.components--settings-menu.tabs.adjusts',
+          defaultMessage: 'Ajustes'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: donationPath,
+        isActive: donationPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'donation.components--settings-menu.tabs.info',
+          defaultMessage: 'Dados para doa\xE7\xE3o'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: donationAutofirePath,
+        isActive: donationAutofirePath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'donation.components--settings-menu.tabs.autofire',
+          defaultMessage: 'Mensagem agradecimento'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: donationFinishPath,
+        isActive: donationFinishPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'donation.components--settings-menu.tabs.post-action',
+          defaultMessage: 'P\xF3s-doa\xE7\xE3o'
+        })
+      })
+    )
+  );
+};
+
+SettingsMenu.propTypes = {
+  mobilization: _propTypes2.default.shape({ id: _propTypes2.default.number.isRequired }).isRequired,
+  widget: _propTypes2.default.shape({ id: _propTypes2.default.number.isRequired }).isRequired,
+  location: _propTypes2.default.shape({ pathname: _propTypes2.default.string.isRequired }).isRequired
 };
 
 exports.default = SettingsMenu;
@@ -16331,8 +16959,6 @@ exports.default = (0, _reactRedux.connect)(undefined, mapDispatchToProps)((0, _r
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -16490,7 +17116,7 @@ var Form = function (_Component) {
         defaultMessage: 'Clique para configurar seu formulário...'
       })).replace('\n', '<br/><br/>');
 
-      return configurable ? null : _jsx('h2', {
+      return configurable ? null : _react2.default.createElement('h2', {
         className: 'mt0 mb3 center white',
         dangerouslySetInnerHTML: { __html: callToAction },
         style: { fontFamily: headerFont }
@@ -16550,14 +17176,17 @@ var Form = function (_Component) {
             bodyFont = _props5.mobilization.body_font;
 
 
-        return _jsx('div', {
-          className: 'mt2 h3 center white',
-          style: { fontFamily: bodyFont }
-        }, void 0, _jsx(_reactCountup2.default, {
-          start: 0,
-          end: !isNaN(count) && startCounting ? Number(count) : 0,
-          duration: 5
-        }), '\xA0', settings.count_text);
+        return _react2.default.createElement(
+          'div',
+          { className: 'mt2 h3 center white', style: { fontFamily: bodyFont } },
+          _react2.default.createElement(_reactCountup2.default, {
+            start: 0,
+            end: !isNaN(count) && startCounting ? Number(count) : 0,
+            duration: 5
+          }),
+          '\xA0',
+          settings.count_text
+        );
       }
     }
   }, {
@@ -16566,11 +17195,13 @@ var Form = function (_Component) {
       var errors = this.state.errors;
 
 
-      return errors.length > 0 && _jsx('div', {}, void 0, errors.map(function (error) {
-        return _jsx(_formUtil.Error, {
-          message: error
-        });
-      }));
+      return errors.length > 0 && _react2.default.createElement(
+        'div',
+        null,
+        errors.map(function (error) {
+          return _react2.default.createElement(_formUtil.Error, { message: error });
+        })
+      );
     }
   }, {
     key: 'renderShareButtons',
@@ -16588,16 +17219,13 @@ var Form = function (_Component) {
             widget = _props6.widget;
         var finishMessageType = widget.settings.finish_message_type;
 
-        return finishMessageType === 'custom' ? _jsx(_components.FinishMessageCustom, {
-          widget: widget
-        }) : _jsx(_components2.FormTellAFriend, {
-          mobilization: mobilization,
-          widget: widget
-        });
+        return finishMessageType === 'custom' ? _react2.default.createElement(_components.FinishMessageCustom, { widget: widget }) : _react2.default.createElement(_components2.FormTellAFriend, { mobilization: mobilization, widget: widget });
       } else {
-        return _jsx('p', {
-          className: 'center p2 bg-darken-3'
-        }, void 0, message);
+        return _react2.default.createElement(
+          'p',
+          { className: 'center p2 bg-darken-3' },
+          message
+        );
       }
     }
   }, {
@@ -16610,10 +17238,21 @@ var Form = function (_Component) {
 
       var backgroundColor = settings && settings.main_color ? settings.main_color : 'rgba(0,0,0,0.25)';
 
-      return _jsx('div', {}, void 0, _jsx('div', {
-        className: (0, _classnames2.default)('rounded', { 'p3 relative': editable || !configurable }),
-        style: { backgroundColor: !configurable ? backgroundColor : null }
-      }, void 0, this.renderCallToAction(), this.renderFields(), this.renderErrors(), this.renderButton()));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          {
+            className: (0, _classnames2.default)('rounded', { 'p3 relative': editable || !configurable }),
+            style: { backgroundColor: !configurable ? backgroundColor : null }
+          },
+          this.renderCallToAction(),
+          this.renderFields(),
+          this.renderErrors(),
+          this.renderButton()
+        )
+      );
     }
   }, {
     key: 'render',
@@ -16622,14 +17261,30 @@ var Form = function (_Component) {
       var success = this.state.success;
 
 
-      return _jsx('div', {
-        className: 'widget ' + headerFont + '-header'
-      }, void 0, success ? this.renderShareButtons() : this.renderForm(), this.renderCount());
+      return _react2.default.createElement(
+        'div',
+        { className: 'widget ' + headerFont + '-header' },
+        success ? this.renderShareButtons() : this.renderForm(),
+        this.renderCount()
+      );
     }
   }]);
 
   return Form;
 }(_react.Component);
+
+Form.propTypes = {
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.shape({
+    settings: _propTypes2.default.shape({
+      finish_message_type: _propTypes2.default.string
+    }).isRequired
+  }).isRequired,
+  editable: _propTypes2.default.bool,
+  configurable: _propTypes2.default.bool,
+  hasNewField: _propTypes2.default.bool,
+  intl: _reactIntl.intlShape
+};
 
 exports.default = Form;
 
@@ -16645,8 +17300,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -16657,23 +17310,37 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx('div', {
-  className: 'center'
-}, void 0, 'Sua a\xE7\xE3o foi registrada com sucesso!');
-
 var Button = function Button(_ref) {
   var success = _ref.success,
       buttonText = _ref.buttonText,
       loading = _ref.loading,
       handleClick = _ref.handleClick,
       bodyFont = _ref.mobilization.body_font;
-  return _jsx('div', {
-    style: { fontFamily: bodyFont }
-  }, void 0, _jsx('button', {
-    disabled: loading,
-    className: 'caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white',
-    onClick: handleClick
-  }, void 0, loading ? 'Enviando...' : buttonText), success && _ref2);
+  return _react2.default.createElement(
+    'div',
+    { style: { fontFamily: bodyFont } },
+    _react2.default.createElement(
+      'button',
+      {
+        disabled: loading,
+        className: 'caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white',
+        onClick: handleClick },
+      loading ? 'Enviando...' : buttonText
+    ),
+    success && _react2.default.createElement(
+      'div',
+      { className: 'center' },
+      'Sua a\xE7\xE3o foi registrada com sucesso!'
+    )
+  );
+};
+
+Button.propTypes = {
+  success: _propTypes2.default.bool.isRequired,
+  buttonText: _propTypes2.default.string,
+  loading: _propTypes2.default.bool.isRequired,
+  handleClick: _propTypes2.default.func.isRequired,
+  mobilization: _propTypes2.default.object.isRequired
 };
 
 exports.default = Button;
@@ -16689,11 +17356,6 @@ exports.default = Button;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-// Global module dependencies
-
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -16715,22 +17377,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--tell-a-friend.message',
-  defaultMessage: 'Formul\xE1rio submetido com sucesso!'
-});
-
+// Global module dependencies
 var FormTellAFriend = function FormTellAFriend(_ref) {
   var preview = _ref.preview,
       mobilization = _ref.mobilization,
       widget = _ref.widget;
-  return _jsx(_share.TellAFriend, {
+  return _react2.default.createElement(_share.TellAFriend, {
     preview: preview,
     mobilization: mobilization,
     widget: widget,
-    message: _ref2,
+    message: _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'form-widget.components--tell-a-friend.message',
+      defaultMessage: 'Formul\xE1rio submetido com sucesso!'
+    }),
     href: paths.mobilization(mobilization)
   });
+};
+
+FormTellAFriend.propTypes = {
+  preview: _propTypes2.default.bool,
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired
 };
 
 exports.default = FormTellAFriend;
@@ -16816,8 +17483,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InputForm = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -16847,129 +17512,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('div', {
-  className: 'col-3 table-cell align-middle'
-}, void 0, _jsx('label', {
-  className: 'h5 bold'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-title.label',
-  defaultMessage: 'T\xEDtulo do campo'
-})));
-
-var _ref2 = _jsx('div', {
-  className: 'col-3 table-cell align-middle'
-}, void 0, _jsx('label', {
-  className: 'h5 bold'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-helper-text.label',
-  defaultMessage: 'Texto de ajuda'
-})));
-
-var _ref3 = _jsx('div', {
-  className: 'col-3 table-cell align-middle'
-}, void 0, _jsx('label', {
-  className: 'h5 bold'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.label',
-  defaultMessage: 'Tipo de campo'
-})));
-
-var _ref4 = _jsx('option', {
-  value: 'text'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.options.text',
-  defaultMessage: 'Texto'
-}));
-
-var _ref5 = _jsx('option', {
-  value: 'email'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.options.email',
-  defaultMessage: 'E-mail'
-}));
-
-var _ref6 = _jsx('option', {
-  value: 'number'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.options.number',
-  defaultMessage: 'N\xFAmero'
-}));
-
-var _ref7 = _jsx('option', {
-  value: 'dropdown'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.options.dropdown',
-  defaultMessage: 'Dropdown \u2605'
-}));
-
-var _ref8 = _jsx('option', {
-  value: 'greetings'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-type.options.greetings',
-  defaultMessage: 'Sauda\xE7\xE3o \u2605'
-}));
-
-var _ref9 = _jsx('div', {
-  className: 'col-3 table-cell align-meiddle'
-}, void 0, _jsx('label', {
-  className: 'h5 bold'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-required.label',
-  defaultMessage: 'Obrigat\xF3rio'
-})));
-
-var _ref10 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-required.radio.yes.label',
-  defaultMessage: 'Sim'
-});
-
-var _ref11 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.field-required.radio.no.label',
-  defaultMessage: 'N\xE3o'
-});
-
-var _ref12 = _jsx('i', {
-  className: 'fa fa-chevron-up mr1'
-});
-
-var _ref13 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-move-up',
-  defaultMessage: 'Mover para cima'
-});
-
-var _ref14 = _jsx('i', {
-  className: 'fa fa-chevron-down mr1'
-});
-
-var _ref15 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-move-down',
-  defaultMessage: 'Mover para baixo'
-});
-
-var _ref16 = _jsx('i', {
-  className: 'fa fa-trash mr1'
-});
-
-var _ref17 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-remove',
-  defaultMessage: 'Remover'
-});
-
-var _ref18 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-cancel',
-  defaultMessage: 'Cancelar'
-});
-
-var _ref19 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-save.saving',
-  defaultMessage: 'Salvando...'
-});
-
-var _ref20 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input-form.button-save.default',
-  defaultMessage: 'Salvar'
-});
 
 var InputForm = exports.InputForm = function (_Component) {
   _inherits(InputForm, _Component);
@@ -17180,103 +17722,300 @@ var InputForm = exports.InputForm = function (_Component) {
           uid = _props3.uid,
           intl = _props3.intl;
 
-      return _jsx('div', {}, void 0, _jsx('div', {
-        id: 'form-' + uid,
-        className: 'p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'
-      }, void 0, _jsx('div', {
-        className: 'col col-6'
-      }, void 0, _jsx('div', {
-        className: 'table col-12 mb2'
-      }, void 0, _ref, _jsx('div', {
-        className: 'col-9 table-cell'
-      }, void 0, _jsx('input', {
-        className: 'input m0',
-        placeholder: intl.formatMessage({
-          id: 'form-widget.components--input-form.field-title.placeholder',
-          defaultMessage: 'Ex: Email'
-        }),
-        type: 'text',
-        value: this.state.label,
-        onChange: this.handleLabelChange.bind(this)
-      }))), _jsx('div', {
-        className: 'table col-12 mb2'
-      }, void 0, _ref2, _jsx('div', {
-        className: 'col-9 table-cell'
-      }, void 0, _jsx('input', {
-        className: 'input m0',
-        placeholder: intl.formatMessage({
-          id: 'form-widget.components--input-form.field-helper-text.placeholder',
-          defaultMessage: 'Ex: Insira aqui o seu email'
-        }),
-        type: 'text',
-        value: this.state.placeholder,
-        onChange: this.handlePlaceholderChange.bind(this)
-      }))), _jsx('div', {
-        className: 'table col-12 mb2'
-      }, void 0, _ref3, _jsx('div', {
-        className: 'col-9 table-cell'
-      }, void 0, _jsx('select', {
-        className: 'select m0',
-        onChange: this.handleKindChange.bind(this),
-        value: this.state.kind
-      }, void 0, _ref4, _ref5, _ref6, _ref7, _ref8))), _jsx('div', {
-        className: 'table col-12 mb2'
-      }, void 0, _ref9, _jsx('div', {
-        className: 'col-9 table-cell'
-      }, void 0, _jsx('input', {
-        id: 'required-true-' + uid,
-        type: 'radio',
-        name: 'required-' + uid,
-        value: 'true',
-        checked: this.state.required === 'true',
-        onChange: this.handleRequiredChange.bind(this)
-      }), _jsx('label', {
-        className: 'ml1 mr2',
-        htmlFor: 'required-true-' + uid
-      }, void 0, _ref10), _jsx('input', {
-        id: 'required-false-' + uid,
-        type: 'radio',
-        name: 'required-' + uid,
-        value: 'false',
-        checked: this.state.required === 'false',
-        onChange: this.handleRequiredChange.bind(this)
-      }), _jsx('label', {
-        className: 'ml1',
-        htmlFor: 'required-false-' + uid
-      }, void 0, _ref11)))), _jsx('div', {
-        className: 'col col-6 px3'
-      }, void 0, _jsx('div', {}, void 0, _jsx('button', {
-        disabled: !canMoveUp,
-        className: 'btn btn-no-focus hover',
-        style: { backgroundColor: 'white', color: '#bbb' },
-        onClick: this.handleMoveUp.bind(this)
-      }, void 0, _ref12, _ref13)), _jsx('div', {}, void 0, _jsx('button', {
-        disabled: !canMoveDown,
-        className: 'btn btn-no-focus hover',
-        style: { backgroundColor: 'white', color: '#bbb' },
-        onClick: this.handleMoveDown.bind(this)
-      }, void 0, _ref14, _ref15)), _jsx('div', {}, void 0, _jsx('button', {
-        className: 'btn btn-no-focus hover',
-        style: { backgroundColor: 'white', color: '#bbb' },
-        onClick: this.handleRemove.bind(this)
-      }, void 0, _ref16, _ref17)), _jsx('div', {
-        className: 'mt1 ml2'
-      }, void 0, _jsx('button', {
-        className: 'btn white caps bg-darken-3 p2 mr2 rounded',
-        onClick: this.handleCancel.bind(this)
-      }, void 0, _ref18), _jsx('button', {
-        disabled: this.state.loading,
-        className: 'btn white caps bg-pagenta p2 mr2 rounded',
-        onClick: this.handleSave.bind(this)
-      }, void 0, this.state.loading ? _ref19 : _ref20)))), _jsx('div', {
-        className: 'fixed top-0 right-0 bottom-0 left-0 z3',
-        onClick: this.handleOverlayClick.bind(this)
-      }));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          {
+            id: 'form-' + uid,
+            className: 'p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'
+          },
+          _react2.default.createElement(
+            'div',
+            { className: 'col col-6' },
+            _react2.default.createElement(
+              'div',
+              { className: 'table col-12 mb2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-3 table-cell align-middle' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'h5 bold' },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-title.label',
+                    defaultMessage: 'T\xEDtulo do campo'
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-9 table-cell' },
+                _react2.default.createElement('input', {
+                  className: 'input m0',
+                  placeholder: intl.formatMessage({
+                    id: 'form-widget.components--input-form.field-title.placeholder',
+                    defaultMessage: 'Ex: Email'
+                  }),
+                  type: 'text',
+                  value: this.state.label,
+                  onChange: this.handleLabelChange.bind(this)
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'table col-12 mb2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-3 table-cell align-middle' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'h5 bold' },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-helper-text.label',
+                    defaultMessage: 'Texto de ajuda'
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-9 table-cell' },
+                _react2.default.createElement('input', {
+                  className: 'input m0',
+                  placeholder: intl.formatMessage({
+                    id: 'form-widget.components--input-form.field-helper-text.placeholder',
+                    defaultMessage: 'Ex: Insira aqui o seu email'
+                  }),
+                  type: 'text',
+                  value: this.state.placeholder,
+                  onChange: this.handlePlaceholderChange.bind(this)
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'table col-12 mb2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-3 table-cell align-middle' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'h5 bold' },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-type.label',
+                    defaultMessage: 'Tipo de campo'
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-9 table-cell' },
+                _react2.default.createElement(
+                  'select',
+                  {
+                    className: 'select m0',
+                    onChange: this.handleKindChange.bind(this),
+                    value: this.state.kind },
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'text' },
+                    _react2.default.createElement(_reactIntl.FormattedMessage, {
+                      id: 'form-widget.components--input-form.field-type.options.text',
+                      defaultMessage: 'Texto'
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'email' },
+                    _react2.default.createElement(_reactIntl.FormattedMessage, {
+                      id: 'form-widget.components--input-form.field-type.options.email',
+                      defaultMessage: 'E-mail'
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'number' },
+                    _react2.default.createElement(_reactIntl.FormattedMessage, {
+                      id: 'form-widget.components--input-form.field-type.options.number',
+                      defaultMessage: 'N\xFAmero'
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'dropdown' },
+                    _react2.default.createElement(_reactIntl.FormattedMessage, {
+                      id: 'form-widget.components--input-form.field-type.options.dropdown',
+                      defaultMessage: 'Dropdown \u2605'
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'greetings' },
+                    _react2.default.createElement(_reactIntl.FormattedMessage, {
+                      id: 'form-widget.components--input-form.field-type.options.greetings',
+                      defaultMessage: 'Sauda\xE7\xE3o \u2605'
+                    })
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'table col-12 mb2' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-3 table-cell align-meiddle' },
+                _react2.default.createElement(
+                  'label',
+                  { className: 'h5 bold' },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-required.label',
+                    defaultMessage: 'Obrigat\xF3rio'
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-9 table-cell' },
+                _react2.default.createElement('input', {
+                  id: 'required-true-' + uid,
+                  type: 'radio',
+                  name: 'required-' + uid,
+                  value: 'true',
+                  checked: this.state.required === 'true',
+                  onChange: this.handleRequiredChange.bind(this)
+                }),
+                _react2.default.createElement(
+                  'label',
+                  { className: 'ml1 mr2', htmlFor: 'required-true-' + uid },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-required.radio.yes.label',
+                    defaultMessage: 'Sim'
+                  })
+                ),
+                _react2.default.createElement('input', {
+                  id: 'required-false-' + uid,
+                  type: 'radio',
+                  name: 'required-' + uid,
+                  value: 'false',
+                  checked: this.state.required === 'false',
+                  onChange: this.handleRequiredChange.bind(this)
+                }),
+                _react2.default.createElement(
+                  'label',
+                  { className: 'ml1', htmlFor: 'required-false-' + uid },
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'form-widget.components--input-form.field-required.radio.no.label',
+                    defaultMessage: 'N\xE3o'
+                  })
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col col-6 px3' },
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'button',
+                {
+                  disabled: !canMoveUp,
+                  className: 'btn btn-no-focus hover',
+                  style: { backgroundColor: 'white', color: '#bbb' },
+                  onClick: this.handleMoveUp.bind(this)
+                },
+                _react2.default.createElement('i', { className: 'fa fa-chevron-up mr1' }),
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-move-up',
+                  defaultMessage: 'Mover para cima'
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'button',
+                {
+                  disabled: !canMoveDown,
+                  className: 'btn btn-no-focus hover',
+                  style: { backgroundColor: 'white', color: '#bbb' },
+                  onClick: this.handleMoveDown.bind(this)
+                },
+                _react2.default.createElement('i', { className: 'fa fa-chevron-down mr1' }),
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-move-down',
+                  defaultMessage: 'Mover para baixo'
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-no-focus hover',
+                  style: { backgroundColor: 'white', color: '#bbb' },
+                  onClick: this.handleRemove.bind(this)
+                },
+                _react2.default.createElement('i', { className: 'fa fa-trash mr1' }),
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-remove',
+                  defaultMessage: 'Remover'
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'mt1 ml2' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn white caps bg-darken-3 p2 mr2 rounded',
+                  onClick: this.handleCancel.bind(this)
+                },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-cancel',
+                  defaultMessage: 'Cancelar'
+                })
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  disabled: this.state.loading,
+                  className: 'btn white caps bg-pagenta p2 mr2 rounded',
+                  onClick: this.handleSave.bind(this)
+                },
+                this.state.loading ? _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-save.saving',
+                  defaultMessage: 'Salvando...'
+                }) : _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'form-widget.components--input-form.button-save.default',
+                  defaultMessage: 'Salvar'
+                })
+              )
+            )
+          )
+        ),
+        _react2.default.createElement('div', {
+          className: 'fixed top-0 right-0 bottom-0 left-0 z3',
+          onClick: this.handleOverlayClick.bind(this)
+        })
+      );
     }
   }]);
 
   return InputForm;
 }(_react.Component);
+
+InputForm.propTypes = {
+  intl: _reactIntl.intlShape.isRequired
+};
 
 exports.default = (0, _reactRedux.connect)()((0, _reactIntl.injectIntl)(InputForm));
 
@@ -17293,8 +18032,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17324,29 +18061,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Current module dependencies
 
-
-var _ref = _jsx('div', {
-  className: 'right'
-}, void 0, _jsx('i', {
-  className: 'fa fa-pencil-square-o mr1'
-}), _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input.click-to-edit',
-  defaultMessage: 'Clique para editar'
-}));
-
-var _ref2 = _jsx('option', {
-  value: ''
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input.field-dropdown.options.default',
-  defaultMessage: 'Selecione...'
-}));
-
-var _ref3 = _jsx('strong', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--input.field-greetings.title',
-  defaultMessage: 'Mensagem de sucesso alterada para:'
-}));
-
-var _ref4 = _jsx('br', {});
 
 var Input = function (_Component) {
   _inherits(Input, _Component);
@@ -17390,7 +18104,11 @@ var Input = function (_Component) {
     value: function renderForm() {
       var uid = this.props.uid;
 
-      return _jsx(_TransitionGroup2.default, {}, void 0, _react2.default.createElement(_components.InputForm, _extends({}, this.props, { onClose: this.handleCloseForm.bind(this), key: 'form-' + uid })));
+      return _react2.default.createElement(
+        _TransitionGroup2.default,
+        null,
+        _react2.default.createElement(_components.InputForm, _extends({}, this.props, { onClose: this.handleCloseForm.bind(this), key: 'form-' + uid }))
+      );
     }
   }, {
     key: 'renderInstructions',
@@ -17398,7 +18116,15 @@ var Input = function (_Component) {
       var configurable = this.props.configurable;
 
       if (configurable && this.state.hasMouseOver) {
-        return _ref;
+        return _react2.default.createElement(
+          'div',
+          { className: 'right' },
+          _react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr1' }),
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'form-widget.components--input.click-to-edit',
+            defaultMessage: 'Clique para editar'
+          })
+        );
       }
     }
   }, {
@@ -17413,25 +18139,52 @@ var Input = function (_Component) {
 
 
       if (field.kind === 'dropdown') {
-        return _jsx('select', {
-          id: 'input-' + uid,
-          className: 'select block border border-gray94',
-          style: {
-            cursor: editable || configurable ? 'pointer' : null,
-            borderRadius: '2px',
-            padding: '1rem',
-            display: 'inline-block',
-            height: 'inherit'
-          }
-        }, void 0, _ref2, field.placeholder.split(',').map(function (v, index) {
-          return _jsx('option', {}, 'dropdown-option-' + index, v);
-        }));
+        return _react2.default.createElement(
+          'select',
+          {
+            id: 'input-' + uid,
+            className: 'select block border border-gray94',
+            style: {
+              cursor: editable || configurable ? 'pointer' : null,
+              borderRadius: '2px',
+              padding: '1rem',
+              display: 'inline-block',
+              height: 'inherit'
+            }
+          },
+          _react2.default.createElement(
+            'option',
+            { value: '' },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'form-widget.components--input.field-dropdown.options.default',
+              defaultMessage: 'Selecione...'
+            })
+          ),
+          field.placeholder.split(',').map(function (v, index) {
+            return _react2.default.createElement(
+              'option',
+              { key: 'dropdown-option-' + index },
+              v
+            );
+          })
+        );
       } else if (field.kind === 'greetings') {
-        return editable || configurable ? _jsx('p', {
-          className: 'block full-width'
-        }, void 0, _ref3, _ref4, field.placeholder) : null;
+        return editable || configurable ? _react2.default.createElement(
+          'p',
+          { className: 'block full-width' },
+          _react2.default.createElement(
+            'strong',
+            null,
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'form-widget.components--input.field-greetings.title',
+              defaultMessage: 'Mensagem de sucesso alterada para:'
+            })
+          ),
+          _react2.default.createElement('br', null),
+          field.placeholder
+        ) : null;
       } else {
-        return _jsx('input', {
+        return _react2.default.createElement('input', {
           id: 'input-' + uid,
           className: 'input block border border-gray94',
           style: {
@@ -17455,24 +18208,34 @@ var Input = function (_Component) {
           bodyFont = _props2.mobilization.body_font;
 
 
-      return _jsx('div', {
-        className: 'mb2',
-        onMouseEnter: this.handleMouseOver.bind(this),
-        onMouseLeave: this.handleMouseOut.bind(this),
-        style: {
-          cursor: editable || configurable ? 'pointer' : null,
-          fontFamily: bodyFont
-        },
-        onClick: this.handleClick.bind(this)
-      }, void 0, _jsx('label', {
-        className: (0, _classnames2.default)('caps bold mb1 inline-block', configurable ? 'darkengray' : 'white'),
-        style: {
-          cursor: editable || configurable ? 'pointer' : null,
-          fontSize: '.75rem',
-          fontWeight: 600,
-          marginBottom: '1rem'
-        }
-      }, void 0, field.label, field.required === 'true' ? '*' : null), this.renderInstructions(), this.renderFieldKind());
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'mb2',
+          onMouseEnter: this.handleMouseOver.bind(this),
+          onMouseLeave: this.handleMouseOut.bind(this),
+          style: {
+            cursor: editable || configurable ? 'pointer' : null,
+            fontFamily: bodyFont
+          },
+          onClick: this.handleClick.bind(this) },
+        _react2.default.createElement(
+          'label',
+          {
+            className: (0, _classnames2.default)('caps bold mb1 inline-block', configurable ? 'darkengray' : 'white'),
+            style: {
+              cursor: editable || configurable ? 'pointer' : null,
+              fontSize: '.75rem',
+              fontWeight: 600,
+              marginBottom: '1rem'
+            }
+          },
+          field.label,
+          field.required === 'true' ? '*' : null
+        ),
+        this.renderInstructions(),
+        this.renderFieldKind()
+      );
     }
   }, {
     key: 'render',
@@ -17498,8 +18261,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -17522,36 +18283,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.title',
-  defaultMessage: 'Configure o formul\xE1rio da sua a\xE7\xE3o'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.items.adjusts',
-  defaultMessage: 'Ajustes'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.items.fields',
-  defaultMessage: 'Campos do formul\xE1rio'
-});
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.items.autofire',
-  defaultMessage: 'Mensagem agradecimento'
-});
-
-var _ref6 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.items.report',
-  defaultMessage: 'Relat\xF3rio'
-});
-
-var _ref7 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'form-widget.components--settings-menu.items.post-action',
-  defaultMessage: 'P\xF3s-inscri\xE7\xE3o'
-});
-
 var SettingsMenu = function SettingsMenu(_ref) {
   var mobilization = _ref.mobilization,
       widget = _ref.widget,
@@ -17563,29 +18294,65 @@ var SettingsMenu = function SettingsMenu(_ref) {
   var formExportPath = paths.formExport(mobilization.id, widget.id);
   var finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id);
 
-  return _jsx(_layout.SettingsPageMenuLayout, {
-    title: _ref2
-  }, void 0, _jsx(_tabs.Tabs, {}, void 0, _jsx(_tabs.Tab, {
-    path: formPath,
-    isActive: formPath === location.pathname,
-    text: _ref3
-  }), _jsx(_tabs.Tab, {
-    path: fieldsPath,
-    isActive: fieldsPath === location.pathname,
-    text: _ref4
-  }), _jsx(_tabs.Tab, {
-    path: formAutofirePath,
-    isActive: formAutofirePath === location.pathname,
-    text: _ref5
-  }), _jsx(_tabs.Tab, {
-    path: formExportPath,
-    isActive: formExportPath === location.pathname,
-    text: _ref6
-  }), _jsx(_tabs.Tab, {
-    path: finishPath,
-    isActive: finishPath === location.pathname,
-    text: _ref7
-  })));
+  return _react2.default.createElement(
+    _layout.SettingsPageMenuLayout,
+    {
+      title: _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'form-widget.components--settings-menu.title',
+        defaultMessage: 'Configure o formul\xE1rio da sua a\xE7\xE3o'
+      })
+    },
+    _react2.default.createElement(
+      _tabs.Tabs,
+      null,
+      _react2.default.createElement(_tabs.Tab, {
+        path: formPath,
+        isActive: formPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'form-widget.components--settings-menu.items.adjusts',
+          defaultMessage: 'Ajustes'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: fieldsPath,
+        isActive: fieldsPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'form-widget.components--settings-menu.items.fields',
+          defaultMessage: 'Campos do formul\xE1rio'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: formAutofirePath,
+        isActive: formAutofirePath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'form-widget.components--settings-menu.items.autofire',
+          defaultMessage: 'Mensagem agradecimento'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: formExportPath,
+        isActive: formExportPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'form-widget.components--settings-menu.items.report',
+          defaultMessage: 'Relat\xF3rio'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: finishPath,
+        isActive: finishPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'form-widget.components--settings-menu.items.post-action',
+          defaultMessage: 'P\xF3s-inscri\xE7\xE3o'
+        })
+      })
+    )
+  );
+};
+
+SettingsMenu.propTypes = {
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  location: _propTypes2.default.object.isRequired
 };
 
 exports.default = SettingsMenu;
@@ -17820,8 +18587,6 @@ exports.Pressure = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -17912,7 +18677,9 @@ var Pressure = exports.Pressure = function (_Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      if (pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE) {
+      var isPressurePhone = pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE;
+      var hasCounter = !!this.props.widget.settings.count_text;
+      if (hasCounter && isPressurePhone) {
         (0, _store.client)().query({
           query: graphqlQueries.CountTwilioCallsByWidget,
           variables: { widgetId: this.props.widget.id }
@@ -18071,53 +18838,79 @@ var Pressure = exports.Pressure = function (_Component) {
           finishMessageType = _ref4.finish_message_type,
           disableEditField = _ref4.disable_edit_field;
 
-      return _jsx(_components.WidgetOverlay, {
-        editable: editable,
-        onClick: this.handleOverlayOnClick.bind(this),
-        text: 'Clique para configurar o formul\xE1rio de press\xE3o direta'
-      }, void 0, filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage ? finishMessageType === 'custom' ? _jsx(_components.FinishMessageCustom, {
-        widget: widget
-      }) : _jsx(_components2.PressureTellAFriend, {
-        mobilization: mobilization,
-        widget: widget
-      }) : _jsx('div', {
-        className: 'pressure-widget'
-      }, void 0, _jsx('div', {
-        onKeyDown: function onKeyDown(e) {
-          return e.stopPropagation();
-        }
-      }), _jsx('h2', {
-        className: 'center py2 px3 m0 white rounded-top',
-        style: { backgroundColor: mainColor, fontFamily: headerFont }
-      }, void 0, callToAction || titleText), _jsx(_components2.TargetList, {
-        targets: this.getTargetList.call(this) || [],
-        onSelect: this.changeSelectedTargets.bind(this),
-        errorMessage: this.state.selectedTargetsError,
-        selectable: this.selectableTargetList
-      }), _jsx(_components2.PressureForm, {
-        disabled: disableEditField === 's',
-        widget: widget,
-        buttonText: saving && !editable ? 'Enviando...' : buttonText,
-        buttonColor: mainColor,
-        subject: pressureSubject,
-        body: pressureBody,
-        onSubmit: this.handleSubmit.bind(this),
-        targetList: this.getTargetList(),
-        selectedTargets: this.selectedTargets,
-        callTransition: this.state.callTransition,
-        addTwilioCallMutation: this.state.addTwilioCallMutation,
-        changeParentState: this.changeState.bind(this)
-      }, void 0, countText && _jsx(_components2.PressureCount, {
-        value: this.state.phonePressureCount || widget.count || 0,
-        color: mainColor,
-        text: countText,
-        startCounting: block.scrollTopReached
-      }))));
+      return _react2.default.createElement(
+        _components.WidgetOverlay,
+        {
+          editable: editable,
+          onClick: this.handleOverlayOnClick.bind(this),
+          text: 'Clique para configurar o formul\xE1rio de press\xE3o direta'
+        },
+        filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage ? finishMessageType === 'custom' ? _react2.default.createElement(_components.FinishMessageCustom, { widget: widget }) : _react2.default.createElement(_components2.PressureTellAFriend, { mobilization: mobilization, widget: widget }) : _react2.default.createElement(
+          'div',
+          { className: 'pressure-widget' },
+          _react2.default.createElement('div', { onKeyDown: function onKeyDown(e) {
+              return e.stopPropagation();
+            } }),
+          _react2.default.createElement(
+            'h2',
+            {
+              className: 'center py2 px3 m0 white rounded-top',
+              style: { backgroundColor: mainColor, fontFamily: headerFont }
+            },
+            callToAction || titleText
+          ),
+          _react2.default.createElement(_components2.TargetList, {
+            targets: this.getTargetList.call(this) || [],
+            onSelect: this.changeSelectedTargets.bind(this),
+            errorMessage: this.state.selectedTargetsError,
+            selectable: this.selectableTargetList
+          }),
+          _react2.default.createElement(
+            _components2.PressureForm,
+            {
+              disabled: disableEditField === 's',
+              widget: widget,
+              buttonText: saving && !editable ? 'Enviando...' : buttonText,
+              buttonColor: mainColor,
+              subject: pressureSubject,
+              body: pressureBody,
+              onSubmit: this.handleSubmit.bind(this),
+              targetList: this.getTargetList(),
+              selectedTargets: this.selectedTargets,
+              callTransition: this.state.callTransition,
+              addTwilioCallMutation: this.state.addTwilioCallMutation,
+              changeParentState: this.changeState.bind(this)
+            },
+            countText && _react2.default.createElement(_components2.PressureCount, {
+              value: this.state.phonePressureCount || widget.count || 0,
+              color: mainColor,
+              text: countText,
+              startCounting: block.scrollTopReached
+            })
+          )
+        )
+      );
     }
   }]);
 
   return Pressure;
 }(_react.Component);
+
+Pressure.propTypes = {
+  editable: _propTypes2.default.bool,
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.shape({
+    settings: _propTypes2.default.shape({
+      finish_message_type: _propTypes2.default.string,
+      finish_message: _propTypes2.default.string,
+      finish_message_background: _propTypes2.default.string
+    }).isRequired
+  }).isRequired,
+  saving: _propTypes2.default.bool,
+  filledPressureWidgets: _propTypes2.default.array,
+  // Actions
+  asyncFillWidget: _propTypes2.default.func
+};
 
 var mapStateToProps = function mapStateToProps(state, props) {
   var pressure = (0, _selectors2.default)(state, props).getPlugin('pressure');
@@ -18220,8 +19013,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -18238,11 +19029,6 @@ var _reactCountup2 = _interopRequireDefault(_reactCountup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'c--pressure-count.text.default',
-  defaultMessage: 'press\xF5es feitas'
-});
-
 var PressureCount = function PressureCount(_ref) {
   var value = _ref.value,
       color = _ref.color,
@@ -18257,21 +19043,38 @@ var PressureCount = function PressureCount(_ref) {
   var pressureCount = {
     boxShadow: 'inset 0px 15px 18px -10px rgba(227,224,227,1)'
   };
-  return _jsx('div', {
-    className: 'pressure-count p3 bg-white rounded-bottom',
-    style: pressureCount
-  }, void 0, _jsx('p', {
-    className: 'center m0'
-  }, void 0, _jsx('div', {
-    className: 'h1',
-    style: { color: color }
-  }, void 0, _jsx(_reactCountup2.default, {
-    start: 0,
-    end: !isNaN(value) && startCounting ? Number(value) : 0,
-    duration: 5
-  })), _jsx('span', {
-    className: 'black bold h3 ml1'
-  }, void 0, text || _ref2)));
+  return _react2.default.createElement(
+    'div',
+    { className: 'pressure-count p3 bg-white rounded-bottom', style: pressureCount },
+    _react2.default.createElement(
+      'p',
+      { className: 'center m0' },
+      _react2.default.createElement(
+        'div',
+        { className: 'h1', style: { color: color } },
+        _react2.default.createElement(_reactCountup2.default, {
+          start: 0,
+          end: !isNaN(value) && startCounting ? Number(value) : 0,
+          duration: 5
+        })
+      ),
+      _react2.default.createElement(
+        'span',
+        { className: 'black bold h3 ml1' },
+        text || _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'c--pressure-count.text.default',
+          defaultMessage: 'press\xF5es feitas'
+        })
+      )
+    )
+  );
+};
+
+PressureCount.propTypes = {
+  value: _propTypes2.default.number,
+  color: _propTypes2.default.string,
+  text: _propTypes2.default.string,
+  startCounting: _propTypes2.default.bool
 };
 
 PressureCount.defaultProps = {
@@ -18294,8 +19097,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18383,122 +19184,16 @@ var RealtimeCallDuration = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _jsx('span', {}, void 0, this.state.duration + 's');
+      return _react2.default.createElement(
+        'span',
+        null,
+        this.state.duration + 's'
+      );
     }
   }]);
 
   return RealtimeCallDuration;
 }(_react.Component);
-
-var _ref = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.email.label',
-  defaultMessage: 'E-mail'
-});
-
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.label',
-  defaultMessage: 'Telefone'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.name.label',
-  defaultMessage: 'Nome'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.lastname.label',
-  defaultMessage: 'Sobrenome'
-});
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.city.label',
-  defaultMessage: 'Cidade'
-});
-
-var _ref6 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.subject.label',
-  defaultMessage: 'Assunto'
-});
-
-var _ref7 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.body.label',
-  defaultMessage: 'Corpo do e-mail'
-});
-
-var _ref8 = _jsx('div', {});
-
-var _ref9 = _jsx('div', {}, void 0, _jsx('i', {
-  className: 'fa fa-phone-square'
-}));
-
-var _ref10 = _jsx('i', {
-  className: 'fa fa-check-circle'
-});
-
-var _ref11 = _jsx('div', {}, void 0, _jsx('span', {
-  className: 'fa fa-phone ring'
-}));
-
-var _ref12 = _jsx('br', {});
-
-var _ref13 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone-calls.ringing',
-  defaultMessage: 'Chamada em andamento'
-});
-
-var _ref14 = _jsx(RealtimeCallDuration, {});
-
-var _ref15 = _jsx('span', {
-  className: 'fa fa-phone-square'
-});
-
-var _ref16 = _jsx('div', {
-  className: 'finish'
-}, void 0, '3x', _jsx('span', {
-  className: 'fa fa-times-circle'
-}));
-
-var _ref17 = _jsx('span', {
-  className: 'fa fa-phone-square'
-});
-
-var _ref18 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone-calls.retry',
-  defaultMessage: 'Religar'
-});
-
-var _ref19 = _jsx('span', {
-  className: 'fa fa-phone-square primary'
-});
-
-var _ref20 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone-calls.call',
-  defaultMessage: 'Ligar'
-});
-
-var _ref21 = _jsx('div', {
-  className: 'how-it-works'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.how-it-works.title',
-  defaultMessage: 'Como funciona?'
-}), _jsx('ol', {}, void 0, _jsx('li', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01',
-  defaultMessage: 'Estamos ligando para o seu alvo'
-})), _jsx('li', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02',
-  defaultMessage: 'Assim que algu\xE9m atender do lado de l\xE1, vamos te ligar'
-})), _jsx('li', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03',
-  defaultMessage: 'Quando voc\xEA atender, conectamos as liga\xE7\xF5es'
-})), _jsx('li', {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04',
-  defaultMessage: 'Agora \xE9 com voc\xEA!'
-}))));
-
-var _ref22 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--pressure-form.phone.finish-and-share',
-  defaultMessage: 'Encerrar e Compartilhar'
-});
 
 var PressureForm = function (_Component2) {
   _inherits(PressureForm, _Component2);
@@ -18672,266 +19367,530 @@ var PressureForm = function (_Component2) {
           callManagement = _state.callManagement;
 
 
-      return _jsx('form', {
-        className: (0, _classnames2.default)('pressure-form', { 'is-calling': !!callTransition }),
-        onSubmit: this.handleSubmit.bind(this)
-      }, void 0, _jsx('div', {
-        className: (0, _classnames2.default)('activist-form bg-white', !children ? 'rounded-bottom' : null)
-      }, void 0, _jsx('div', {
-        className: 'form bg-white rounded-bottom'
-      }, void 0, this.state.pressureType === 'email' && _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-sender-email-id'
-      }, void 0, _ref, errors && errors['email'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['email'])), _jsx('input', {
-        id: 'pressure-sender-email-id',
-        className: 'col-12',
-        style: inputReset,
-        onBlur: _analyticsEvents2.default.pressureIsFilled.bind(_analyticsEvents2.default),
-        type: 'email',
-        placeholder: intl.formatMessage({
-          id: 'pressure-widget.components--pressure-form.email.placeholder',
-          defaultMessage: 'Insira seu e-mail'
-        }),
-        value: email,
-        onChange: function onChange(e) {
-          return _this5.setState({ email: e.target.value });
-        }
-      })), this.state.pressureType === 'phone' && _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-sender-phone-id'
-      }, void 0, _ref2, errors && errors['phone'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['phone'])), _jsx('input', {
-        id: 'pressure-sender-phone-id',
-        className: 'col-12',
-        style: inputReset,
-        onBlur: _analyticsEvents2.default.pressureIsFilled.bind(_analyticsEvents2.default),
-        type: 'text',
-        placeholder: intl.formatMessage({
-          id: 'pressure-widget.components--pressure-form.phone.placeholder',
-          defaultMessage: 'Insira seu telefone. Ex: +5511987654321'
-        }),
-        value: phone,
-        onChange: function onChange(e) {
-          return _this5.setState({ phone: e.target.value });
-        }
-      })), _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-sender-firstname-id'
-      }, void 0, _ref3, errors && errors['name'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['name'])), _jsx('input', {
-        id: 'pressure-sender-firstname-id',
-        className: 'col-12',
-        style: inputReset,
-        type: 'text',
-        placeholder: intl.formatMessage({
-          id: 'pressure-widget.components--pressure-form.name.placeholder',
-          defaultMessage: 'Insira seu nome'
-        }),
-        value: name,
-        onChange: function onChange(e) {
-          return _this5.setState({ name: e.target.value });
-        }
-      })), _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-sender-lastname-id'
-      }, void 0, _ref4, errors && errors['lastname'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['lastname'])), _jsx('input', {
-        id: 'pressure-sender-lastname-id',
-        className: 'col-12',
-        style: inputReset,
-        type: 'text',
-        placeholder: intl.formatMessage({
-          id: 'pressure-widget.components--pressure-form.lastname.placeholder',
-          defaultMessage: 'Insira seu sobrenome'
-        }),
-        value: lastname,
-        onChange: function onChange(e) {
-          return _this5.setState({ lastname: e.target.value });
-        }
-      })), !widget.settings.show_city || widget.settings.show_city !== 'city-true' ? null : _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-sender-city-id'
-      }, void 0, _ref5, errors && errors['city'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['city'])), _jsx('input', {
-        className: 'col-12',
-        style: inputReset,
-        type: 'text',
-        placeholder: intl.formatMessage({
-          id: 'pressure-widget.components--pressure-form.city.placeholder',
-          defaultMessage: 'Insira sua cidade'
-        }),
-        value: city,
-        onChange: function onChange(e) {
-          return _this5.setState({ city: e.target.value });
-        }
-      })), this.state.pressureType === 'email' && _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-subject-id'
-      }, void 0, _ref6, errors && errors['subject'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['subject'])), _jsx('input', {
-        id: 'pressure-subject-id',
-        className: 'col-12',
-        style: inputReset,
-        type: 'text',
-        value: subject,
-        disabled: disabled,
-        onChange: function onChange(e) {
-          return _this5.setState({ subject: e.target.value });
-        }
-      })), this.state.pressureType === 'email' && _jsx('div', {
-        className: (0, _classnames2.default)('form-group', controlClassname)
-      }, void 0, _jsx('label', {
-        className: 'py1 gray',
-        htmlFor: 'pressure-body-id'
-      }, void 0, _ref7, errors && errors['body'] && _jsx('span', {
-        className: 'error'
-      }, void 0, errors['body'])), _jsx('textarea', {
-        id: 'pressure-body-id',
-        className: 'col-12 mt1',
-        style: _extends({}, inputReset, { height: '7rem' }),
-        value: body,
-        disabled: disabled,
-        onChange: function onChange(e) {
-          return _this5.setState({ body: e.target.value });
-        }
-      }))), _jsx('div', {
-        className: 'pt1 pb3 px3'
-      }, void 0, _jsx('button', {
-        type: 'submit',
-        onClick: this.handleSubmit.bind(this),
-        className: 'btn caps white col-12 py2 rounded',
-        style: { backgroundColor: buttonColor }
-      }, void 0, buttonText))), _jsx('div', {
-        className: 'phone-calls'
-      }, void 0, _jsx('ul', {}, void 0, callManagement && callManagement.length && callManagement.map(function (target) {
-        var name = target.name,
-            value = target.value,
-            attempts = target.attempts,
-            to = target.twilioCallTo,
-            status = target.twilioCallTransitionStatus,
-            duration = target.twilioCallTransitionCallDuration;
+      return _react2.default.createElement(
+        'form',
+        {
+          className: (0, _classnames2.default)('pressure-form', { 'is-calling': !!callTransition }),
+          onSubmit: this.handleSubmit.bind(this)
+        },
+        _react2.default.createElement(
+          'div',
+          {
+            className: (0, _classnames2.default)('activist-form bg-white', !children ? 'rounded-bottom' : null)
+          },
+          _react2.default.createElement(
+            'div',
+            { className: 'form bg-white rounded-bottom' },
+            this.state.pressureType === 'email' && _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-sender-email-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.email.label',
+                  defaultMessage: 'E-mail'
+                }),
+                errors && errors['email'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['email']
+                )
+              ),
+              _react2.default.createElement('input', {
+                id: 'pressure-sender-email-id',
+                className: 'col-12',
+                style: inputReset,
+                onBlur: _analyticsEvents2.default.pressureIsFilled.bind(_analyticsEvents2.default),
+                type: 'email',
+                placeholder: intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.email.placeholder',
+                  defaultMessage: 'Insira seu e-mail'
+                }),
+                value: email,
+                onChange: function onChange(e) {
+                  return _this5.setState({ email: e.target.value });
+                }
+              })
+            ),
+            this.state.pressureType === 'phone' && _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-sender-phone-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.phone.label',
+                  defaultMessage: 'Telefone'
+                }),
+                errors && errors['phone'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['phone']
+                )
+              ),
+              _react2.default.createElement('input', {
+                id: 'pressure-sender-phone-id',
+                className: 'col-12',
+                style: inputReset,
+                onBlur: _analyticsEvents2.default.pressureIsFilled.bind(_analyticsEvents2.default),
+                type: 'text',
+                placeholder: intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.phone.placeholder',
+                  defaultMessage: 'Insira seu telefone. Ex: +5511987654321'
+                }),
+                value: phone,
+                onChange: function onChange(e) {
+                  return _this5.setState({ phone: e.target.value });
+                }
+              })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-sender-firstname-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.name.label',
+                  defaultMessage: 'Nome'
+                }),
+                errors && errors['name'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['name']
+                )
+              ),
+              _react2.default.createElement('input', {
+                id: 'pressure-sender-firstname-id',
+                className: 'col-12',
+                style: inputReset,
+                type: 'text',
+                placeholder: intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.name.placeholder',
+                  defaultMessage: 'Insira seu nome'
+                }),
+                value: name,
+                onChange: function onChange(e) {
+                  return _this5.setState({ name: e.target.value });
+                }
+              })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-sender-lastname-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.lastname.label',
+                  defaultMessage: 'Sobrenome'
+                }),
+                errors && errors['lastname'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['lastname']
+                )
+              ),
+              _react2.default.createElement('input', {
+                id: 'pressure-sender-lastname-id',
+                className: 'col-12',
+                style: inputReset,
+                type: 'text',
+                placeholder: intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.lastname.placeholder',
+                  defaultMessage: 'Insira seu sobrenome'
+                }),
+                value: lastname,
+                onChange: function onChange(e) {
+                  return _this5.setState({ lastname: e.target.value });
+                }
+              })
+            ),
+            !widget.settings.show_city || widget.settings.show_city !== 'city-true' ? null : _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-sender-city-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.city.label',
+                  defaultMessage: 'Cidade'
+                }),
+                errors && errors['city'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['city']
+                )
+              ),
+              _react2.default.createElement('input', {
+                className: 'col-12',
+                style: inputReset,
+                type: 'text',
+                placeholder: intl.formatMessage({
+                  id: 'pressure-widget.components--pressure-form.city.placeholder',
+                  defaultMessage: 'Insira sua cidade'
+                }),
+                value: city,
+                onChange: function onChange(e) {
+                  return _this5.setState({ city: e.target.value });
+                }
+              })
+            ),
+            this.state.pressureType === 'email' && _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-subject-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.subject.label',
+                  defaultMessage: 'Assunto'
+                }),
+                errors && errors['subject'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['subject']
+                )
+              ),
+              _react2.default.createElement('input', {
+                id: 'pressure-subject-id',
+                className: 'col-12',
+                style: inputReset,
+                type: 'text',
+                value: subject,
+                disabled: disabled,
+                onChange: function onChange(e) {
+                  return _this5.setState({ subject: e.target.value });
+                }
+              })
+            ),
+            this.state.pressureType === 'email' && _react2.default.createElement(
+              'div',
+              { className: (0, _classnames2.default)('form-group', controlClassname) },
+              _react2.default.createElement(
+                'label',
+                { className: 'py1 gray', htmlFor: 'pressure-body-id' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.body.label',
+                  defaultMessage: 'Corpo do e-mail'
+                }),
+                errors && errors['body'] && _react2.default.createElement(
+                  'span',
+                  { className: 'error' },
+                  errors['body']
+                )
+              ),
+              _react2.default.createElement('textarea', {
+                id: 'pressure-body-id',
+                className: 'col-12 mt1',
+                style: _extends({}, inputReset, { height: '7rem' }),
+                value: body,
+                disabled: disabled,
+                onChange: function onChange(e) {
+                  return _this5.setState({ body: e.target.value });
+                }
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'pt1 pb3 px3' },
+            _react2.default.createElement(
+              'button',
+              {
+                type: 'submit',
+                onClick: this.handleSubmit.bind(this),
+                className: 'btn caps white col-12 py2 rounded',
+                style: { backgroundColor: buttonColor }
+              },
+              buttonText
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'phone-calls' },
+          _react2.default.createElement(
+            'ul',
+            null,
+            callManagement && callManagement.length && callManagement.map(function (target) {
+              var name = target.name,
+                  value = target.value,
+                  attempts = target.attempts,
+                  to = target.twilioCallTo,
+                  status = target.twilioCallTransitionStatus,
+                  duration = target.twilioCallTransitionCallDuration;
 
-        var ListItem = _ref8;
+              var ListItem = _react2.default.createElement('div', null);
 
-        if (to === value) {
-          if (status === 'completed') {
-            ListItem = _jsx('li', {
-              className: 'success'
-            }, void 0, _jsx('div', {
-              className: 'flex-container'
-            }, void 0, _jsx('div', {
-              className: 'call-item'
-            }, void 0, _ref9, _jsx('div', {
-              className: 'target-name'
-            }, void 0, name)), _jsx('div', {
-              className: 'finish'
-            }, void 0, duration, 's', _ref10)));
-          } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
-            ListItem = _jsx('li', {
-              className: 'warning'
-            }, void 0, _jsx('div', {
-              className: 'flex-container'
-            }, void 0, _jsx('div', {
-              className: 'call-item'
-            }, void 0, _ref11, _jsx('div', {
-              className: 'target-name'
-            }, void 0, name, _ref12, _ref13)), _jsx('div', {
-              className: 'inline-container'
-            }, void 0, _jsx('div', {
-              className: 'prefix'
-            }, void 0, status === 'in-progress' && _ref14))));
-          } else if (['busy', 'failed', 'no-answer'].includes(status)) {
-            ListItem = _jsx('li', {
-              className: 'danger'
-            }, void 0, _jsx('div', {
-              className: 'flex-container'
-            }, void 0, _jsx('div', {
-              className: 'call-item'
-            }, void 0, _ref15, _jsx('div', {
-              className: 'target-name'
-            }, void 0, name)), _ref16));
-            if (attempts < 0) {
-              ListItem = _jsx('li', {
-                className: 'danger'
-              }, void 0, _jsx('div', {
-                className: 'flex-container'
-              }, void 0, _jsx('div', {
-                className: 'call-item'
-              }, void 0, _ref17, _jsx('div', {
-                className: 'target-name'
-              }, void 0, name)), _jsx('div', {
-                className: 'inline-container'
-              }, void 0, _jsx('div', {
-                className: 'prefix'
-              }, void 0, attempts, 'x'), _jsx('button', {
-                className: 'btn-call outlined',
+              if (to === value) {
+                if (status === 'completed') {
+                  ListItem = _react2.default.createElement(
+                    'li',
+                    { className: 'success' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'flex-container' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'call-item' },
+                        _react2.default.createElement(
+                          'div',
+                          null,
+                          _react2.default.createElement('i', { className: 'fa fa-phone-square' })
+                        ),
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'target-name' },
+                          name
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'finish' },
+                        duration,
+                        's',
+                        _react2.default.createElement('i', { className: 'fa fa-check-circle' })
+                      )
+                    )
+                  );
+                } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
+                  ListItem = _react2.default.createElement(
+                    'li',
+                    { className: 'warning' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'flex-container' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'call-item' },
+                        _react2.default.createElement(
+                          'div',
+                          null,
+                          _react2.default.createElement('span', { className: 'fa fa-phone ring' })
+                        ),
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'target-name' },
+                          name,
+                          _react2.default.createElement('br', null),
+                          _react2.default.createElement(_reactIntl.FormattedMessage, {
+                            id: 'pressure-widget.components--pressure-form.phone-calls.ringing',
+                            defaultMessage: 'Chamada em andamento'
+                          })
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'inline-container' },
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'prefix' },
+                          status === 'in-progress' && _react2.default.createElement(RealtimeCallDuration, null)
+                        )
+                      )
+                    )
+                  );
+                } else if (['busy', 'failed', 'no-answer'].includes(status)) {
+                  ListItem = _react2.default.createElement(
+                    'li',
+                    { className: 'danger' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'flex-container' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'call-item' },
+                        _react2.default.createElement('span', { className: 'fa fa-phone-square' }),
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'target-name' },
+                          name
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'finish' },
+                        '3x',
+                        _react2.default.createElement('span', { className: 'fa fa-times-circle' })
+                      )
+                    )
+                  );
+                  if (attempts < 0) {
+                    ListItem = _react2.default.createElement(
+                      'li',
+                      { className: 'danger' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'flex-container' },
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'call-item' },
+                          _react2.default.createElement('span', { className: 'fa fa-phone-square' }),
+                          _react2.default.createElement(
+                            'div',
+                            { className: 'target-name' },
+                            name
+                          )
+                        ),
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'inline-container' },
+                          _react2.default.createElement(
+                            'div',
+                            { className: 'prefix' },
+                            attempts,
+                            'x'
+                          ),
+                          _react2.default.createElement(
+                            'button',
+                            {
+                              className: 'btn-call outlined',
+                              onClick: function onClick(e) {
+                                e.preventDefault();
+                                addTwilioCallMutation({
+                                  widgetId: _this5.props.widget.id,
+                                  from: _this5.state.phone,
+                                  to: value
+                                });
+                              }
+                            },
+                            _react2.default.createElement(_reactIntl.FormattedMessage, {
+                              id: 'pressure-widget.components--pressure-form.phone-calls.retry',
+                              defaultMessage: 'Religar'
+                            })
+                          )
+                        )
+                      )
+                    );
+                  }
+                }
+              } else {
+                ListItem = _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'flex-container' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'call-item' },
+                      _react2.default.createElement('span', { className: 'fa fa-phone-square primary' }),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'target-name' },
+                        name
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'button',
+                      {
+                        className: 'btn-call primary',
+                        type: 'button',
+                        onClick: function onClick(e) {
+                          e.preventDefault();
+                          addTwilioCallMutation({
+                            widgetId: _this5.props.widget.id,
+                            from: _this5.state.phone,
+                            to: value
+                          });
+                        }
+                      },
+                      _react2.default.createElement(_reactIntl.FormattedMessage, {
+                        id: 'pressure-widget.components--pressure-form.phone-calls.call',
+                        defaultMessage: 'Ligar'
+                      })
+                    )
+                  )
+                );
+              }
+              return ListItem;
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'how-it-works' },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'pressure-widget.components--pressure-form.phone.how-it-works.title',
+              defaultMessage: 'Como funciona?'
+            }),
+            _react2.default.createElement(
+              'ol',
+              null,
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-01',
+                  defaultMessage: 'Estamos ligando para o seu alvo'
+                })
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-02',
+                  defaultMessage: 'Assim que algu\xE9m atender do lado de l\xE1, vamos te ligar'
+                })
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-03',
+                  defaultMessage: 'Quando voc\xEA atender, conectamos as liga\xE7\xF5es'
+                })
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'pressure-widget.components--pressure-form.phone.how-it-works.list-item-04',
+                  defaultMessage: 'Agora \xE9 com voc\xEA!'
+                })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { style: { margin: '1rem 0', padding: '0 1rem' } },
+            _react2.default.createElement(
+              'button',
+              {
+                type: 'button',
+                className: 'btn-call full-width',
+                style: { backgroundColor: buttonColor },
                 onClick: function onClick(e) {
                   e.preventDefault();
-                  addTwilioCallMutation({
-                    widgetId: _this5.props.widget.id,
-                    from: _this5.state.phone,
-                    to: value
-                  });
+                  _this5.props.changeParentState({ showFinishMessage: true });
                 }
-              }, void 0, _ref18))));
-            }
-          }
-        } else {
-          ListItem = _jsx('li', {}, void 0, _jsx('div', {
-            className: 'flex-container'
-          }, void 0, _jsx('div', {
-            className: 'call-item'
-          }, void 0, _ref19, _jsx('div', {
-            className: 'target-name'
-          }, void 0, name)), _jsx('button', {
-            className: 'btn-call primary',
-            type: 'button',
-            onClick: function onClick(e) {
-              e.preventDefault();
-              addTwilioCallMutation({
-                widgetId: _this5.props.widget.id,
-                from: _this5.state.phone,
-                to: value
-              });
-            }
-          }, void 0, _ref20)));
-        }
-        return ListItem;
-      })), _ref21, _jsx('div', {
-        style: { margin: '1rem 0', padding: '0 1rem' }
-      }, void 0, _jsx('button', {
-        type: 'button',
-        className: 'btn-call full-width',
-        style: { backgroundColor: buttonColor },
-        onClick: function onClick(e) {
-          e.preventDefault();
-          _this5.props.changeParentState({ showFinishMessage: true });
-        }
-      }, void 0, _ref22))), children);
+              },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'pressure-widget.components--pressure-form.phone.finish-and-share',
+                defaultMessage: 'Encerrar e Compartilhar'
+              })
+            )
+          )
+        ),
+        children
+      );
     }
   }]);
 
   return PressureForm;
 }(_react.Component);
+
+PressureForm.propTypes = {
+  onSubmit: _propTypes2.default.func,
+  buttonColor: _propTypes2.default.string,
+  buttonText: _propTypes2.default.string,
+  subject: _propTypes2.default.string,
+  body: _propTypes2.default.string,
+  widget: _propTypes2.default.object,
+  changeParentState: _propTypes2.default.func.isRequired,
+  intl: _reactIntl.intlShape
+};
 
 PressureForm.defaultProps = {
   subject: '',
@@ -18967,8 +19926,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -18983,21 +19940,25 @@ var _share = __webpack_require__("./components/share/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget--tell-a-friend.message',
-  defaultMessage: 'Press\xE3o enviada'
-});
-
 var PressureTellAFriend = function PressureTellAFriend(_ref) {
   var preview = _ref.preview,
       mobilization = _ref.mobilization,
       widget = _ref.widget;
-  return _jsx(_share.TellAFriend, {
+  return _react2.default.createElement(_share.TellAFriend, {
     preview: preview,
     mobilization: mobilization,
     widget: widget,
-    message: _ref2
+    message: _react2.default.createElement(_reactIntl.FormattedMessage, {
+      id: 'pressure-widget--tell-a-friend.message',
+      defaultMessage: 'Press\xE3o enviada'
+    })
   });
+};
+
+PressureTellAFriend.propTypes = {
+  preview: _propTypes2.default.bool,
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired
 };
 
 exports.default = PressureTellAFriend;
@@ -19014,14 +19975,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-// Global module dependencies
-
-
-// Current module dependencies
-
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -19036,16 +19989,33 @@ var _ = __webpack_require__("./mobilizations/widgets/__plugins__/pressure/compon
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Global module dependencies
 var SettingsBase = function SettingsBase(_ref) {
   var children = _ref.children,
       location = _ref.location,
       mobilization = _ref.mobilization,
       widget = _ref.widget;
-  return _jsx(_layout.SettingsPageLayout, {}, void 0, _jsx(_.SettingsMenu, {
-    location: location,
-    mobilization: mobilization,
-    widget: widget
-  }), children);
+  return _react2.default.createElement(
+    _layout.SettingsPageLayout,
+    null,
+    _react2.default.createElement(_.SettingsMenu, {
+      location: location,
+      mobilization: mobilization,
+      widget: widget
+    }),
+    children
+  );
+};
+
+// Current module dependencies
+
+
+SettingsBase.propTypes = {
+  location: _propTypes2.default.shape({
+    pathname: _propTypes2.default.string
+  }).isRequired,
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired
 };
 
 exports.default = SettingsBase;
@@ -19061,8 +20031,6 @@ exports.default = SettingsBase;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -19086,31 +20054,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--settings-menu.title',
-  defaultMessage: 'Configure seu formul\xE1rio de press\xE3o'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--settings-menu.items.form',
-  defaultMessage: 'Ajustes'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--settings-menu.items.pressure-email',
-  defaultMessage: 'E-mail para alvo'
-});
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--settings-menu.items.autofire',
-  defaultMessage: 'Mensagem de agradecimento'
-});
-
-var _ref6 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'pressure-widget.components--settings-menu.items.post-action',
-  defaultMessage: 'P\xF3s-press\xE3o'
-});
-
 var SettingsMenu = function SettingsMenu(_ref) {
   var location = _ref.location,
       mobilization = _ref.mobilization,
@@ -19121,25 +20064,63 @@ var SettingsMenu = function SettingsMenu(_ref) {
   var pressureAutofirePath = paths.pressureAutofire(mobilization.id, widget.id);
   var pressureFinishPath = paths.pressureFinish(mobilization.id, widget.id);
 
-  return _jsx(_layout.SettingsPageMenuLayout, {
-    title: _ref2
-  }, void 0, _jsx(_tabs.Tabs, {}, void 0, _jsx(_tabs.Tab, {
-    path: pressurePath,
-    isActive: pressurePath === location.pathname,
-    text: _ref3
-  }), _jsx(_tabs.Tab, {
-    path: pressureEmailPath,
-    isActive: pressureEmailPath === location.pathname,
-    text: _ref4
-  }), _jsx(_tabs.Tab, {
-    path: pressureAutofirePath,
-    isActive: pressureAutofirePath === location.pathname,
-    text: _ref5
-  }), _jsx(_tabs.Tab, {
-    path: pressureFinishPath,
-    isActive: pressureFinishPath === location.pathname,
-    text: _ref6
-  })));
+  return _react2.default.createElement(
+    _layout.SettingsPageMenuLayout,
+    {
+      title: _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'pressure-widget.components--settings-menu.title',
+        defaultMessage: 'Configure seu formul\xE1rio de press\xE3o'
+      })
+    },
+    _react2.default.createElement(
+      _tabs.Tabs,
+      null,
+      _react2.default.createElement(_tabs.Tab, {
+        path: pressurePath,
+        isActive: pressurePath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'pressure-widget.components--settings-menu.items.form',
+          defaultMessage: 'Ajustes'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: pressureEmailPath,
+        isActive: pressureEmailPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'pressure-widget.components--settings-menu.items.pressure-email',
+          defaultMessage: 'E-mail para alvo'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: pressureAutofirePath,
+        isActive: pressureAutofirePath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'pressure-widget.components--settings-menu.items.autofire',
+          defaultMessage: 'Mensagem de agradecimento'
+        })
+      }),
+      _react2.default.createElement(_tabs.Tab, {
+        path: pressureFinishPath,
+        isActive: pressureFinishPath === location.pathname,
+        text: _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'pressure-widget.components--settings-menu.items.post-action',
+          defaultMessage: 'P\xF3s-press\xE3o'
+        })
+      })
+    )
+  );
+};
+
+SettingsMenu.propTypes = {
+  location: _propTypes2.default.shape({
+    pathname: _propTypes2.default.string
+  }).isRequired,
+  mobilization: _propTypes2.default.shape({
+    id: _propTypes2.default.number.isRequired
+  }).isRequired,
+  widget: _propTypes2.default.shape({
+    id: _propTypes2.default.number.isRequired
+  }).isRequired
 };
 
 exports.default = SettingsMenu;
@@ -19155,8 +20136,6 @@ exports.default = SettingsMenu;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19246,60 +20225,92 @@ var TargetList = function (_Component) {
       // const isPressureEmail = pressureType === pressureHelper.PRESSURE_TYPE_EMAIL
       var isPressurePhone = pressureType === pressureHelper.PRESSURE_TYPE_PHONE;
 
-      return _jsx('div', {
-        className: 'target-list px2 py1'
-      }, void 0, _jsx('div', {
-        className: 'target-list-label bold'
-      }, void 0, selectable ? _jsx(_reactIntl.FormattedMessage, {
-        id: 'pressure-widget--target-list.label.pressure',
-        defaultMessage: '\n                Selecione quem voc\xEA quer pressionar ({targetsCount} {targetsCount, plural,\n                  one {alvo}\n                  other {alvos}\n                })\n              ',
-        values: { targetsCount: String(array.clean(targets).length) }
-      }) : _jsx(_reactIntl.FormattedMessage, {
-        id: 'pressure-widget--target-list.label.email',
-        defaultMessage: '\n                Quem voc\xEA vai pressionar ({targetsCount} {targetsCount, plural,\n                  one {alvo}\n                  other {alvos}\n                })\n              ',
-        values: { targetsCount: String(array.clean(targets).length) }
-      }), selectable && errorMessage && _jsx('div', {
-        className: 'red mt1'
-      }, void 0, errorMessage)), _jsx('div', {
-        className: 'target-list-container clearfix'
-      }, void 0, _jsx('div', {
-        className: 'target-list-wrapper clearfix'
-      }, void 0, targets.length > 0 && targets.map(function (obj, index) {
-        var target = parseTarget(obj);
-        return !target ? null : _jsx('label', {
-          className: 'target-item left py1 px2 mr1 bg-white rounded'
-        }, 'target-item-' + index, selectable && _jsx('input', {
-          type: 'checkbox',
-          onChange: function onChange(_ref) {
-            var checked = _ref.target.checked;
-            var selectedTargets = _this3.state.selectedTargets;
+      return _react2.default.createElement(
+        'div',
+        { className: 'target-list px2 py1' },
+        _react2.default.createElement(
+          'div',
+          { className: 'target-list-label bold' },
+          selectable ? _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'pressure-widget--target-list.label.pressure',
+            defaultMessage: '\n                Selecione quem voc\xEA quer pressionar ({targetsCount} {targetsCount, plural,\n                  one {alvo}\n                  other {alvos}\n                })\n              ',
+            values: { targetsCount: String(array.clean(targets).length) }
+          }) : _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'pressure-widget--target-list.label.email',
+            defaultMessage: '\n                Quem voc\xEA vai pressionar ({targetsCount} {targetsCount, plural,\n                  one {alvo}\n                  other {alvos}\n                })\n              ',
+            values: { targetsCount: String(array.clean(targets).length) }
+          }),
+          selectable && errorMessage && _react2.default.createElement(
+            'div',
+            { className: 'red mt1' },
+            errorMessage
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'target-list-container clearfix' },
+          _react2.default.createElement(
+            'div',
+            { className: 'target-list-wrapper clearfix' },
+            targets.length > 0 && targets.map(function (obj, index) {
+              var target = parseTarget(obj);
+              return !target ? null : _react2.default.createElement(
+                'label',
+                {
+                  key: 'target-item-' + index,
+                  className: 'target-item left py1 px2 mr1 bg-white rounded'
+                },
+                selectable && _react2.default.createElement('input', {
+                  type: 'checkbox',
+                  onChange: function onChange(_ref) {
+                    var checked = _ref.target.checked;
+                    var selectedTargets = _this3.state.selectedTargets;
 
-            if (checked) {
-              // append the current target
-              _this3.state.selectedTargets = [].concat(_toConsumableArray(selectedTargets), [target]);
-            } else {
-              var nameMatching = function nameMatching(t) {
-                return t.name === target.name;
-              };
-              var _index = selectedTargets.findIndex(nameMatching);
-              // remove the current target
-              _this3.state.selectedTargets = [].concat(_toConsumableArray(selectedTargets.slice(0, _index)), _toConsumableArray(selectedTargets.slice(_index + 1)));
-            }
-            onSelect && onSelect(_this3.state.selectedTargets);
-          }
-        }), _jsx('p', {
-          className: 'black h6 m0'
-        }, void 0, _jsx('span', {
-          className: 'target-name bold flex'
-        }, void 0, target.name), !isPressurePhone && _jsx('span', {
-          className: 'target-value'
-        }, void 0, target.value)));
-      }))));
+                    if (checked) {
+                      // append the current target
+                      _this3.state.selectedTargets = [].concat(_toConsumableArray(selectedTargets), [target]);
+                    } else {
+                      var nameMatching = function nameMatching(t) {
+                        return t.name === target.name;
+                      };
+                      var _index = selectedTargets.findIndex(nameMatching);
+                      // remove the current target
+                      _this3.state.selectedTargets = [].concat(_toConsumableArray(selectedTargets.slice(0, _index)), _toConsumableArray(selectedTargets.slice(_index + 1)));
+                    }
+                    onSelect && onSelect(_this3.state.selectedTargets);
+                  }
+                }),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'black h6 m0' },
+                  _react2.default.createElement(
+                    'span',
+                    { className: 'target-name bold flex' },
+                    target.name
+                  ),
+                  !isPressurePhone && _react2.default.createElement(
+                    'span',
+                    { className: 'target-value' },
+                    target.value
+                  )
+                )
+              );
+            })
+          )
+        )
+      );
     }
   }]);
 
   return TargetList;
 }(_react.Component);
+
+TargetList.propTypes = {
+  targets: _propTypes2.default.arrayOf(_propTypes2.default.string),
+  onSelect: _propTypes2.default.func.isRequired,
+  errorMessage: _propTypes2.default.string,
+  selectable: _propTypes2.default.bool
+};
 
 TargetList.defaultProps = {
   targets: [],
@@ -19450,8 +20461,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -19476,16 +20485,26 @@ var BlockTag = function BlockTag(_ref) {
   var tags = _ref.tags,
       rest = _objectWithoutProperties(_ref, ['tags']);
 
-  return _jsx('div', {
-    className: (0, _classnames2.default)('my2 flex flex-wrap h5', styles.blockTag)
-  }, void 0, tags.filter(function (tag) {
-    return !!tag.trim();
-  }).map(function (tag, index) {
-    return _react2.default.createElement(_components.Tag, _extends({
-      key: tag + '-' + index,
-      value: tag
-    }, rest));
-  }));
+  return _react2.default.createElement(
+    'div',
+    {
+      className: (0, _classnames2.default)('my2 flex flex-wrap h5', styles.blockTag)
+    },
+    tags.filter(function (tag) {
+      return !!tag.trim();
+    }).map(function (tag, index) {
+      return _react2.default.createElement(_components.Tag, _extends({
+        key: tag + '-' + index,
+        value: tag
+      }, rest));
+    })
+  );
+};
+
+BlockTag.propTypes = {
+  tags: _propTypes2.default.arrayOf(_propTypes2.default.string),
+  onClick: _propTypes2.default.func,
+  onRemove: _propTypes2.default.func
 };
 
 BlockTag.defaultProps = {
@@ -19514,8 +20533,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -19537,40 +20554,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _ref = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-circle-o-notch fa-spin fa-w mr1'
-}), _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--data-export.loading.message',
-  defaultMessage: 'Aguarde enquanto estamos processando...'
-}));
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-calendar-check-o ml1'
-});
-
-var _ref3 = _jsx('div', {
-  className: 'table caps bold mb2 darkengray h6'
-}, void 0, _jsx('i', {
-  className: 'fa fa-file-excel-o darkengray table-cell align-middle h2'
-}), _jsx('span', {
-  className: 'table-cell align-middle pl1'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--data-export.export.label',
-  defaultMessage: 'Exportar'
-})));
-
-var _ref4 = _jsx('p', {
-  className: 'h5 mb2 darkengray'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--data-export.export.helper-text',
-  defaultMessage: 'Clique no botão abaixo para baixar o relatório completo do ' + 'formulário em formato excel.'
-}));
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--data-export.export.button',
-  defaultMessage: 'Clique para baixar a planilha completa.'
-});
 
 var DataExport = function (_Component) {
   _inherits(DataExport, _Component);
@@ -19600,7 +20583,7 @@ var DataExport = function (_Component) {
       };
       var date = pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
       var time = pad(d.getHours()) + ':' + pad(d.getMinutes());
-      return _jsx(_reactIntl.FormattedMessage, {
+      return _react2.default.createElement(_reactIntl.FormattedMessage, {
         id: 'widgets.components--data-export.formated-export-at',
         defaultMessage: '{date} \xE0s {time}',
         values: { date: date, time: time }
@@ -19609,29 +20592,42 @@ var DataExport = function (_Component) {
   }, {
     key: 'renderLoadingMessage',
     value: function renderLoadingMessage() {
-      return _ref;
+      return _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-w mr1' }),
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--data-export.loading.message',
+          defaultMessage: 'Aguarde enquanto estamos processando...'
+        })
+      );
     }
   }, {
     key: 'renderExportedMessage',
     value: function renderExportedMessage() {
       var widget = this.props.widget;
 
-      return _jsx('span', {
-        className: 'olive'
-      }, void 0, _jsx(_reactIntl.FormattedMessage, {
-        id: 'widgets.components--data-export.exported.message',
-        defaultMessage: '\xDAltima exporta\xE7\xE3o: {formatedExportAt}.',
-        values: { formatedExportAt: this.formatExportAt(widget) }
-      }), _ref2);
+      return _react2.default.createElement(
+        'span',
+        { className: 'olive' },
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--data-export.exported.message',
+          defaultMessage: '\xDAltima exporta\xE7\xE3o: {formatedExportAt}.',
+          values: { formatedExportAt: this.formatExportAt(widget) }
+        }),
+        _react2.default.createElement('i', { className: 'fa fa-calendar-check-o ml1' })
+      );
     }
   }, {
     key: 'renderErrorMessage',
     value: function renderErrorMessage() {
       var error = this.props.error;
 
-      return _jsx('span', {
-        className: 'red'
-      }, void 0, error);
+      return _react2.default.createElement(
+        'span',
+        { className: 'red' },
+        error
+      );
     }
   }, {
     key: 'render',
@@ -19645,21 +20641,69 @@ var DataExport = function (_Component) {
 
       var filename = mobilization.name;
 
-      return _jsx('div', {}, void 0, _ref3, _ref4, _jsx('p', {
-        className: 'mb2'
-      }, void 0, _jsx(_components.Button, {
-        disabled: loading,
-        onClick: function onClick() {
-          return asyncWidgetDataExport({ mobilization: mobilization, widget: widget, filename: filename });
-        }
-      }, void 0, _ref5)), _jsx('div', {
-        className: 'mb3'
-      }, void 0, loading ? this.renderLoadingMessage() : null, widget.exported_at && !loading ? this.renderExportedMessage() : null, error ? this.renderErrorMessage() : null));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'table caps bold mb2 darkengray h6' },
+          _react2.default.createElement('i', { className: 'fa fa-file-excel-o darkengray table-cell align-middle h2' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'table-cell align-middle pl1' },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--data-export.export.label',
+              defaultMessage: 'Exportar'
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'h5 mb2 darkengray' },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'widgets.components--data-export.export.helper-text',
+            defaultMessage: 'Clique no botão abaixo para baixar o relatório completo do ' + 'formulário em formato excel.'
+          })
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'mb2' },
+          _react2.default.createElement(
+            _components.Button,
+            {
+              disabled: loading,
+              onClick: function onClick() {
+                return asyncWidgetDataExport({ mobilization: mobilization, widget: widget, filename: filename });
+              }
+            },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--data-export.export.button',
+              defaultMessage: 'Clique para baixar a planilha completa.'
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mb3' },
+          loading ? this.renderLoadingMessage() : null,
+          widget.exported_at && !loading ? this.renderExportedMessage() : null,
+          error ? this.renderErrorMessage() : null
+        )
+      );
     }
   }]);
 
   return DataExport;
 }(_react.Component);
+
+DataExport.propTypes = {
+  loading: _propTypes2.default.bool.isRequired,
+  error: _propTypes2.default.object,
+  widget: _propTypes2.default.object.isRequired,
+  // Actions
+  asyncWidgetDataExport: _propTypes2.default.func.isRequired,
+  dataExportMount: _propTypes2.default.func.isRequired
+};
 
 exports.default = DataExport;
 
@@ -19674,11 +20718,6 @@ exports.default = DataExport;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
-// Global module dependencies
-
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -19696,6 +20735,7 @@ var _components = __webpack_require__("./mobilizations/widgets/__plugins__/conte
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Global module dependencies
 var FinishMessageCustom = function FinishMessageCustom(_ref) {
   var readOnly = _ref.readOnly,
       widget = _ref.widget;
@@ -19705,14 +20745,14 @@ var FinishMessageCustom = function FinishMessageCustom(_ref) {
 
   var content = valueParse(finishMessage);
 
-  return content.entityMap ? _jsx(_editorDraftJs2.default, {
+  return content.entityMap ? _react2.default.createElement(_editorDraftJs2.default, {
     readOnly: readOnly,
     value: content,
     editorStyle: {
       backgroundColor: 'rgba(' + finishMessageBackground + ')',
       borderRadius: 3
     }
-  }) : _jsx(_components.EditorSlate, {
+  }) : _react2.default.createElement(_components.EditorSlate, {
     content: finishMessage,
     readOnly: readOnly,
     contentStyles: { backgroundColor: '#fff', color: '#666', padding: 10 }
@@ -19733,7 +20773,15 @@ var valueParse = function valueParse(message) {
 //
 // PropTypes
 //
-
+FinishMessageCustom.propTypes = {
+  widget: _propTypes2.default.shape({
+    settings: _propTypes2.default.shape({
+      finish_message: _propTypes2.default.string.isRequired,
+      finish_message_background: _propTypes2.default.string.isRequired
+    }).isRequired
+  }).isRequired,
+  readOnly: _propTypes2.default.bool
+};
 
 FinishMessageCustom.defaultProps = {
   readOnly: true
@@ -19753,8 +20801,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.validate = exports.fields = undefined;
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -19782,31 +20828,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var _ref = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-autofire.form.submit-button',
-  defaultMessage: 'Salvar'
-});
-
-var _ref2 = _jsx(_forms.ControlLabel, {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-autofire.form.sender-name.label',
-  defaultMessage: 'Nome do remetente'
-}));
-
-var _ref3 = _jsx(_forms.ControlLabel, {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-autofire.form.sender-email.label',
-  defaultMessage: 'E-mail remetente'
-}));
-
-var _ref4 = _jsx(_forms.ControlLabel, {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-autofire.form.email-subject.label',
-  defaultMessage: 'Assunto do e-mail'
-}));
-
-var _ref5 = _jsx(_forms.ControlLabel, {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-autofire.form.email-text.label',
-  defaultMessage: 'Email de agradecimento'
-}));
-
 var FormAutofire = function FormAutofire(props) {
   var _props$fields = props.fields,
       senderName = _props$fields.sender_name,
@@ -19821,7 +20842,10 @@ var FormAutofire = function FormAutofire(props) {
   return _react2.default.createElement(
     _components.SettingsForm,
     _extends({}, rest, {
-      buttonText: _ref,
+      buttonText: _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'widgets.components--form-autofire.form.submit-button',
+        defaultMessage: 'Salvar'
+      }),
       onSubmit: function onSubmit(values) {
         var settings = widget.settings || {};
         return asyncWidgetUpdate(_extends({}, widget, { settings: _extends({}, settings, values) }));
@@ -19834,8 +20858,15 @@ var FormAutofire = function FormAutofire(props) {
     _react2.default.createElement(
       _forms.FormGroup,
       _extends({ controlId: 'senderName' }, senderName),
-      _ref2,
-      _jsx(_forms.FormControl, {
+      _react2.default.createElement(
+        _forms.ControlLabel,
+        null,
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--form-autofire.form.sender-name.label',
+          defaultMessage: 'Nome do remetente'
+        })
+      ),
+      _react2.default.createElement(_forms.FormControl, {
         type: 'text',
         placeholder: intl.formatMessage({
           id: 'widgets.components--form-autofire.form.sender-name.placeholder',
@@ -19846,8 +20877,15 @@ var FormAutofire = function FormAutofire(props) {
     _react2.default.createElement(
       _forms.FormGroup,
       _extends({ controlId: 'senderEmail' }, senderEmail),
-      _ref3,
-      _jsx(_forms.FormControl, {
+      _react2.default.createElement(
+        _forms.ControlLabel,
+        null,
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--form-autofire.form.sender-email.label',
+          defaultMessage: 'E-mail remetente'
+        })
+      ),
+      _react2.default.createElement(_forms.FormControl, {
         type: 'text',
         placeholder: intl.formatMessage({
           id: 'widgets.components--form-autofire.form.sender-email.placeholder',
@@ -19858,8 +20896,15 @@ var FormAutofire = function FormAutofire(props) {
     _react2.default.createElement(
       _forms.FormGroup,
       _extends({ controlId: 'emailSubject' }, emailSubject),
-      _ref4,
-      _jsx(_forms.FormControl, {
+      _react2.default.createElement(
+        _forms.ControlLabel,
+        null,
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--form-autofire.form.email-subject.label',
+          defaultMessage: 'Assunto do e-mail'
+        })
+      ),
+      _react2.default.createElement(_forms.FormControl, {
         type: 'text',
         placeholder: intl.formatMessage({
           id: 'widgets.components--form-autofire.form.email-subject.placeholder',
@@ -19870,8 +20915,15 @@ var FormAutofire = function FormAutofire(props) {
     _react2.default.createElement(
       _forms.FormGroup,
       _extends({ controlId: 'emailText' }, emailText),
-      _ref5,
-      _jsx(_forms.FormControl, {
+      _react2.default.createElement(
+        _forms.ControlLabel,
+        null,
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--form-autofire.form.email-text.label',
+          defaultMessage: 'Email de agradecimento'
+        })
+      ),
+      _react2.default.createElement(_forms.FormControl, {
         componentClass: 'textarea',
         rows: '6',
         placeholder: intl.formatMessage({
@@ -19883,10 +20935,19 @@ var FormAutofire = function FormAutofire(props) {
   );
 };
 
+FormAutofire.propTypes = {
+  fields: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  // Actions
+  asyncWidgetUpdate: _propTypes2.default.func.isRequired,
+  // Translation
+  intl: _reactIntl.intlShape.isRequired
+};
+
 var fields = exports.fields = ['sender_name', 'sender_email', 'email_subject', 'email_text'];
 
-var validate = exports.validate = function validate(values, _ref6) {
-  var intl = _ref6.intl;
+var validate = exports.validate = function validate(values, _ref) {
+  var intl = _ref.intl;
 
   var errors = {};
   if (!validator.isValidEmail(values.sender_email)) {
@@ -19956,8 +21017,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.FormFinishMessage = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _propTypes = __webpack_require__("prop-types");
@@ -19994,50 +21053,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var _ref = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.success-message',
-  defaultMessage: 'Formul\xE1rio salvo com sucesso!'
-});
-
-var _ref2 = _jsx(_forms.ControlLabel, {}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.type.label',
-  defaultMessage: 'Tipo de mensagem'
-}));
-
-var _ref3 = _jsx(_forms.RadioGroup, {}, void 0, _jsx(_forms.Radio, {
-  value: 'share'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.type.radio.share',
-  defaultMessage: 'Compartilhar'
-})), _jsx(_forms.Radio, {
-  value: 'custom'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.type.radio.custom',
-  defaultMessage: 'Customizar'
-})));
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.share.whatsapp-text.label',
-  defaultMessage: 'Texto do WhatsApp'
-});
-
-var _ref5 = _jsx('label', {
-  className: 'h5 darkengray caps mb1 block'
-}, void 0, _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--form-finish-message.preview.label',
-  defaultMessage: 'Preview'
-}));
-
-var _ref6 = _jsx('input', {
-  type: 'hidden',
-  name: 'finish_message'
-});
-
-var _ref7 = _jsx('input', {
-  type: 'hidden',
-  name: 'finish_message_background'
-});
-
 var FormFinishMessage = function FormFinishMessage(props) {
   var mobilization = props.mobilization,
       fields = props.fields,
@@ -20068,60 +21083,107 @@ var FormFinishMessage = function FormFinishMessage(props) {
           settings: _extends({}, widget.settings, values)
         }));
       },
-      successMessage: successMessage || _ref
+      successMessage: successMessage || _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'widgets.components--form-finish-message.success-message',
+        defaultMessage: 'Formul\xE1rio salvo com sucesso!'
+      })
     }),
     _react2.default.createElement(
       _forms.FormGroup,
       _extends({ controlId: 'finish-message-type-id' }, finishMessageType),
-      _ref2,
-      _ref3
-    ),
-    finishMessageType.value === 'share' && _jsx('div', {}, void 0, _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ controlId: 'whatsapp-text-id' }, whatsappText),
-      _jsx(_forms.ControlLabel, {}, void 0, _jsx('i', {
-        className: 'fa fa-whatsapp mr2',
-        style: styles.whatsappControlLabel
-      }), _ref4),
-      _jsx(_forms.FormControl, {
-        rows: '4',
-        componentClass: 'textarea',
-        placeholder: intl.formatMessage({
-          id: 'widgets.components--form-finish-message.share.whatsapp-text.placeholder',
-          defaultMessage: 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.'
+      _react2.default.createElement(
+        _forms.ControlLabel,
+        null,
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--form-finish-message.type.label',
+          defaultMessage: 'Tipo de mensagem'
         })
+      ),
+      _react2.default.createElement(
+        _forms.RadioGroup,
+        null,
+        _react2.default.createElement(
+          _forms.Radio,
+          { value: 'share' },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'widgets.components--form-finish-message.type.radio.share',
+            defaultMessage: 'Compartilhar'
+          })
+        ),
+        _react2.default.createElement(
+          _forms.Radio,
+          { value: 'custom' },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'widgets.components--form-finish-message.type.radio.custom',
+            defaultMessage: 'Customizar'
+          })
+        )
+      )
+    ),
+    finishMessageType.value === 'share' && _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        _forms.FormGroup,
+        _extends({ controlId: 'whatsapp-text-id' }, whatsappText),
+        _react2.default.createElement(
+          _forms.ControlLabel,
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-whatsapp mr2', style: styles.whatsappControlLabel }),
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'widgets.components--form-finish-message.share.whatsapp-text.label',
+            defaultMessage: 'Texto do WhatsApp'
+          })
+        ),
+        _react2.default.createElement(_forms.FormControl, {
+          rows: '4',
+          componentClass: 'textarea',
+          placeholder: intl.formatMessage({
+            id: 'widgets.components--form-finish-message.share.whatsapp-text.placeholder',
+            defaultMessage: 'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.'
+          })
+        })
+      )
+    ),
+    _react2.default.createElement(
+      'label',
+      { className: 'h5 darkengray caps mb1 block' },
+      _react2.default.createElement(_reactIntl.FormattedMessage, {
+        id: 'widgets.components--form-finish-message.preview.label',
+        defaultMessage: 'Preview'
       })
-    )),
-    _ref5,
-    finishMessageType.value === 'share' && _jsx(TellAFriend, {
-      preview: true,
-      mobilization: mobilization,
-      widget: widget
-    }),
-    finishMessageType.value === 'custom' && _jsx('div', {
-      className: 'widget-finish-message-custom'
-    }, void 0, _jsx('div', {
-      className: 'relative'
-    }, void 0, _ref6, _ref7, parsedFinishMessage.constructor === Object && parsedFinishMessage.entityMap ? _jsx(_editorDraftJs2.default, {
-      value: parsedFinishMessage,
-      theme: colorScheme.replace('-scheme', ''),
-      toolbarContainerStyle: styles.editorToolbarContainer,
-      toolbarStyle: styles.editorToolbar,
-      containerStyle: styles.editorContainer,
-      focusStyle: styles.editorFocus,
-      editorStyle: styles.editor,
-      handleSave: function handleSave(rawContent) {
-        finishMessage.onChange(JSON.stringify(rawContent));
-      }
-    }) : _jsx(_editorSlate2.default, {
-      content: finishMessage.value,
-      handleSave: function handleSave(value) {
-        var raw = JSON.stringify(value.toJSON());
-        if (finishMessage.value !== raw) finishMessage.onChange(raw);
-      },
-      toolbarStyles: { position: 'relative', marginBottom: 10, zIndex: 4 },
-      contentStyles: { backgroundColor: '#fff', color: '#666', padding: 10 }
-    })))
+    ),
+    finishMessageType.value === 'share' && _react2.default.createElement(TellAFriend, { preview: true, mobilization: mobilization, widget: widget }),
+    finishMessageType.value === 'custom' && _react2.default.createElement(
+      'div',
+      { className: 'widget-finish-message-custom' },
+      _react2.default.createElement(
+        'div',
+        { className: 'relative' },
+        _react2.default.createElement('input', { type: 'hidden', name: 'finish_message' }),
+        _react2.default.createElement('input', { type: 'hidden', name: 'finish_message_background' }),
+        parsedFinishMessage.constructor === Object && parsedFinishMessage.entityMap ? _react2.default.createElement(_editorDraftJs2.default, {
+          value: parsedFinishMessage,
+          theme: colorScheme.replace('-scheme', ''),
+          toolbarContainerStyle: styles.editorToolbarContainer,
+          toolbarStyle: styles.editorToolbar,
+          containerStyle: styles.editorContainer,
+          focusStyle: styles.editorFocus,
+          editorStyle: styles.editor,
+          handleSave: function handleSave(rawContent) {
+            finishMessage.onChange(JSON.stringify(rawContent));
+          }
+        }) : _react2.default.createElement(_editorSlate2.default, {
+          content: finishMessage.value,
+          handleSave: function handleSave(value) {
+            var raw = JSON.stringify(value.toJSON());
+            if (finishMessage.value !== raw) finishMessage.onChange(raw);
+          },
+          toolbarStyles: { position: 'relative', marginBottom: 10, zIndex: 4 },
+          contentStyles: { backgroundColor: '#fff', color: '#666', padding: 10 }
+        })
+      )
+    )
   );
 };
 
@@ -20129,8 +21191,8 @@ var FormFinishMessage = function FormFinishMessage(props) {
 exports.FormFinishMessage = FormFinishMessage;
 var fields = ['finish_message_type', 'finish_message', 'finish_message_background', 'whatsapp_text'];
 
-var validate = function validate(values, _ref8) {
-  var intl = _ref8.intl;
+var validate = function validate(values, _ref) {
+  var intl = _ref.intl;
 
   var errors = {};
   if (!values.finish_message_type) {
@@ -20162,6 +21224,22 @@ var mapStateToProps = function mapStateToProps(state, props) {
 //
 // PropTypes
 //
+FormFinishMessage.propTypes = {
+  // Injected components
+  TellAFriend: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]).isRequired,
+  // Form Redux
+  fields: _propTypes2.default.object.isRequired,
+  submitting: _propTypes2.default.bool.isRequired,
+  error: _propTypes2.default.string,
+  successMessage: _propTypes2.default.string,
+  // Injected by components
+  mobilization: _propTypes2.default.object.isRequired,
+  widget: _propTypes2.default.object.isRequired,
+  asyncWidgetUpdate: _propTypes2.default.func.isRequired,
+  // translation
+  intl: _reactIntl.intlShape.isRequired
+};
+
 exports.default = (0, _reactIntl.injectIntl)((0, _reduxForm.reduxForm)({ form: 'formFinishMessage', fields: fields, validate: validate }, mapStateToProps)(FormFinishMessage));
 
 /***/ }),
@@ -20263,8 +21341,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InputTag = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -20308,15 +21384,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = __webpack_require__("exenv").canUseDOM ? __webpack_require__("./mobilizations/widgets/components/input-tag.scss") : {};
-
-var _ref = _jsx('i', {
-  className: 'fa fa-trash mr1'
-});
-
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--input-tag.button.remove-all',
-  defaultMessage: 'Remover todos'
-});
 
 var InputTag = exports.InputTag = function (_Component) {
   _inherits(InputTag, _Component);
@@ -20386,62 +21453,110 @@ var InputTag = exports.InputTag = function (_Component) {
           intl = _props2.intl;
 
 
-      return _jsx('div', {
-        className: 'input-tag'
-      }, void 0, helperText, _jsx('div', {
-        className: 'clearfix mxn2'
-      }, void 0, _jsx('div', {
-        className: 'col col-6 px2'
-      }, void 0, _jsx('div', {
-        className: 'form-group'
-      }, void 0, label && _jsx('label', {
-        style: { cursor: 'pointer' },
-        className: 'h5 bold caps',
-        htmlFor: 'insert-tag-id'
-      }, void 0, label, this.state.error && _jsx('span', {
-        className: 'red'
-      }, void 0, ' - ', this.state.error)), _react2.default.createElement('textarea', {
-        ref: 'insert',
-        id: 'insert-tag-id',
-        type: 'text',
-        rows: '7',
-        placeholder: intl.formatMessage({
-          id: 'widgets.components--input-tag.insert-tag.placeholder',
-          defaultMessage: 'Nome do primeiro alvo <primeiro@alvo.com>\n' + 'Nome do segundo alvo <segundo@alvo.com>\n' + 'Nome do terceiro alvo <terceiro@alvo.com>\n' + 'Nome do quarto alvo <quarto@alvo.com>\n' + 'Nome do quinto alvo <quinto@alvo.com>\n' + '...'
-        }),
-        className: (0, _classnames2.default)('input block h3 col-12 mt1 px1', styles.textarea),
-        value: this.state.value,
-        onChange: function onChange(e) {
-          return _this2.setState({ value: e.target.value });
-        },
-        onKeyDown: this.handleKeyPress.bind(this)
-      }))), _jsx('div', {
-        className: 'col col-6 px2'
-      }, void 0, array.clean(values).length > 0 && _jsx('div', {
-        className: 'form-group'
-      }, void 0, _jsx('label', {
-        className: 'h5 bold caps'
-      }, void 0, _jsx(_reactIntl.FormattedMessage, {
-        id: 'widgets.components--input-tag.tags.label',
-        defaultMessage: 'Alvos cadastrados ({targetsCount})',
-        values: { targetsCount: String(array.clean(values).length) }
-      })), _jsx(_.BlockTag, {
-        tags: values,
-        onClick: this.handleEdit.bind(this),
-        onRemove: onRemoveTag
-      }), _jsx('div', {
-        className: styles.buttons
-      }, void 0, _jsx('button', {
-        type: 'button',
-        className: styles.buttonDanger,
-        onClick: onRemoveAll,
-        disabled: !array.clean(values).length
-      }, void 0, _ref, _ref2))))));
+      return _react2.default.createElement(
+        'div',
+        { className: 'input-tag' },
+        helperText,
+        _react2.default.createElement(
+          'div',
+          { className: 'clearfix mxn2' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col col-6 px2' },
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              label && _react2.default.createElement(
+                'label',
+                {
+                  style: { cursor: 'pointer' },
+                  className: 'h5 bold caps',
+                  htmlFor: 'insert-tag-id'
+                },
+                label,
+                this.state.error && _react2.default.createElement(
+                  'span',
+                  { className: 'red' },
+                  ' - ',
+                  this.state.error
+                )
+              ),
+              _react2.default.createElement('textarea', {
+                ref: 'insert',
+                id: 'insert-tag-id',
+                type: 'text',
+                rows: '7',
+                placeholder: intl.formatMessage({
+                  id: 'widgets.components--input-tag.insert-tag.placeholder',
+                  defaultMessage: 'Nome do primeiro alvo <primeiro@alvo.com>\n' + 'Nome do segundo alvo <segundo@alvo.com>\n' + 'Nome do terceiro alvo <terceiro@alvo.com>\n' + 'Nome do quarto alvo <quarto@alvo.com>\n' + 'Nome do quinto alvo <quinto@alvo.com>\n' + '...'
+                }),
+                className: (0, _classnames2.default)('input block h3 col-12 mt1 px1', styles.textarea),
+                value: this.state.value,
+                onChange: function onChange(e) {
+                  return _this2.setState({ value: e.target.value });
+                },
+                onKeyDown: this.handleKeyPress.bind(this)
+              })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col col-6 px2' },
+            array.clean(values).length > 0 && _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { className: 'h5 bold caps' },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'widgets.components--input-tag.tags.label',
+                  defaultMessage: 'Alvos cadastrados ({targetsCount})',
+                  values: { targetsCount: String(array.clean(values).length) }
+                })
+              ),
+              _react2.default.createElement(_.BlockTag, {
+                tags: values,
+                onClick: this.handleEdit.bind(this),
+                onRemove: onRemoveTag
+              }),
+              _react2.default.createElement(
+                'div',
+                { className: styles.buttons },
+                _react2.default.createElement(
+                  'button',
+                  {
+                    type: 'button',
+                    className: styles.buttonDanger,
+                    onClick: onRemoveAll,
+                    disabled: !array.clean(values).length
+                  },
+                  _react2.default.createElement('i', { className: 'fa fa-trash mr1' }),
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'widgets.components--input-tag.button.remove-all',
+                    defaultMessage: 'Remover todos'
+                  })
+                )
+              )
+            )
+          )
+        )
+      );
     }
   }]);
 
   return InputTag;
 }(_react.Component);
+
+InputTag.propTypes = {
+  label: _propTypes2.default.string,
+  values: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
+  validate: _propTypes2.default.func,
+  onInsertTag: _propTypes2.default.func.isRequired,
+  onRemoveTag: _propTypes2.default.func.isRequired,
+  onRemoveAll: _propTypes2.default.func.isRequired,
+  helperText: _propTypes2.default.node.isRequired,
+  intl: _reactIntl.intlShape.isRequired
+};
 
 exports.default = (0, _reactIntl.injectIntl)(InputTag);
 
@@ -20465,8 +21580,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -20487,20 +21600,32 @@ var Tag = function Tag(_ref) {
   var clickable = onClick && typeof onClick === 'function';
   var removable = onRemove && typeof onRemove === 'function';
 
-  return _jsx('span', {
-    className: styles.tag,
-    style: { cursor: clickable ? 'pointer' : null }
-  }, void 0, _jsx('span', {
-    className: removable ? 'mr1' : null,
-    onClick: clickable ? function () {
-      return onClick(value);
-    } : null
-  }, void 0, value), removable ? _jsx('i', {
-    className: 'fa fa-close',
-    onClick: function onClick() {
-      return onRemove(value);
-    }
-  }) : null);
+  return _react2.default.createElement(
+    'span',
+    {
+      className: styles.tag,
+      style: { cursor: clickable ? 'pointer' : null }
+    },
+    _react2.default.createElement(
+      'span',
+      {
+        className: removable ? 'mr1' : null,
+        onClick: clickable ? function () {
+          return onClick(value);
+        } : null
+      },
+      value
+    ),
+    removable ? _react2.default.createElement('i', { className: 'fa fa-close', onClick: function onClick() {
+        return onRemove(value);
+      } }) : null
+  );
+};
+
+Tag.propTypes = {
+  value: _propTypes2.default.string.isRequired,
+  onClick: _propTypes2.default.func,
+  onRemove: _propTypes2.default.func
 };
 
 exports.default = Tag;
@@ -20524,8 +21649,6 @@ module.exports = {"tag":"ka60jU6yAQueq1hkUlpLE"};
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20582,24 +21705,41 @@ var WidgetOverlay = function (_Component) {
           onClick = _props.onClick,
           text = _props.text;
 
-      return _jsx('div', {
-        className: 'relative',
-        style: editable ? { cursor: 'pointer' } : null,
-        onMouseEnter: this.handleMouseEnter.bind(this),
-        onMouseLeave: this.handleMouseLeave.bind(this),
-        onClick: onClick
-      }, void 0, children, !editable || !this.state.hasMouseOver ? null : _jsx('div', {
-        className: 'widget-overlay h1 rounded z1 border border-pagenta px2'
-      }, void 0, _jsx('div', {
-        className: 'table full-height col-12 center'
-      }, void 0, _jsx('div', {
-        className: 'white table-cell align-middle'
-      }, void 0, text || 'Clique para editar'))));
+      return _react2.default.createElement(
+        'div',
+        { className: 'relative',
+          style: editable ? { cursor: 'pointer' } : null,
+          onMouseEnter: this.handleMouseEnter.bind(this),
+          onMouseLeave: this.handleMouseLeave.bind(this),
+          onClick: onClick
+        },
+        children,
+        !editable || !this.state.hasMouseOver ? null : _react2.default.createElement(
+          'div',
+          { className: 'widget-overlay h1 rounded z1 border border-pagenta px2' },
+          _react2.default.createElement(
+            'div',
+            { className: 'table full-height col-12 center' },
+            _react2.default.createElement(
+              'div',
+              { className: 'white table-cell align-middle' },
+              text || 'Clique para editar'
+            )
+          )
+        )
+      );
     }
   }]);
 
   return WidgetOverlay;
 }(_react.Component);
+
+WidgetOverlay.propTypes = {
+  editable: _propTypes2.default.bool.isRequired,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]).isRequired,
+  onClick: _propTypes2.default.func,
+  text: _propTypes2.default.string
+};
 
 WidgetOverlay.defaultProps = {
   editable: false
@@ -20804,8 +21944,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20841,80 +21979,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./mobrender-v2/widgets/donation/donation.scss");
-
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.progress-bar.collected',
-  defaultMessage: 'arrecadados'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.progress-bar.goal',
-  defaultMessage: 'Meta:'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.progress-bar.date.last-day',
-  defaultMessage: '\xFAltimo dia!'
-});
-
-var _ref5 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.progress-bar.date.last-days',
-  defaultMessage: '\xFAltimos dias!'
-});
-
-var _ref6 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.progress-bar.date.last-week',
-  defaultMessage: '\xFAltima semana!'
-});
-
-var _ref7 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.default.button-text',
-  defaultMessage: 'Doar agora'
-});
-
-var _ref8 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.default.title-text',
-  defaultMessage: 'Clique para configurar seu bloco de doa\xE7\xE3o'
-});
-
-var _ref9 = _jsx('i', {
-  className: 'icon-payment-recurring'
-});
-
-var _ref10 = _jsx('i', {
-  className: 'icon-payment-unique'
-});
-
-var _ref11 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.users-choice.unique',
-  defaultMessage: 'Doa\xE7\xE3o \xFAnica'
-});
-
-var _ref12 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.reattempt.message.title',
-  defaultMessage: 'Ops!'
-});
-
-var _ref13 = _jsx('br', {});
-
-var _ref14 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.reattempt.message.text.line-01',
-  defaultMessage: 'Algo de errado aconteceu com a sua doa\xE7\xE3o. ):'
-});
-
-var _ref15 = _jsx('br', {});
-
-var _ref16 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.reattempt.message.text.line-02',
-  defaultMessage: 'Clique no bot\xE3o abaixo pra tentar de novo.'
-});
-
-var _ref17 = _jsx('br', {});
-
-var _ref18 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'widgets.components--donation.reattempt.message.button.text',
-  defaultMessage: 'Nova tentativa'
-});
 
 exports.default = function (_ref) {
   var FinishMessageCustom = _ref.finishMessageCustom,
@@ -21025,59 +22089,95 @@ exports.default = function (_ref) {
 
         if (goalStats) {
           if (goalStats.pledged) {
-            props.valueTopCenter = _jsx('div', {}, void 0, _jsx('div', {
-              style: {
-                color: mainColor,
-                fontSize: '2.5em',
-                lineHeight: '1em',
-                fontWeight: 'bold'
-              }
-            }, void 0, formatNumberHelper.currencyInt(goalStats.pledged)), _jsx('div', {
-              style: {
-                color: '#666',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                margin: '0.4rem 0 0'
-              }
-            }, void 0, _ref2));
+            props.valueTopCenter = _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'div',
+                { style: {
+                    color: mainColor,
+                    fontSize: '2.5em',
+                    lineHeight: '1em',
+                    fontWeight: 'bold'
+                  } },
+                formatNumberHelper.currencyInt(goalStats.pledged)
+              ),
+              _react2.default.createElement(
+                'div',
+                { style: {
+                    color: '#666',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase',
+                    margin: '0.4rem 0 0'
+                  } },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'widgets.components--donation.progress-bar.collected',
+                  defaultMessage: 'arrecadados'
+                })
+              )
+            );
           }
           if (goalStats.progress) {
             props.value = goalStats.progress;
           }
           if (goalStats.total_donations) {
-            props.valueBottomLeft = _jsx('span', {
-              style: { color: '#999999' }
-            }, void 0, _jsx(_reactIntl.FormattedMessage, {
-              id: 'widgets.components--donation.progress-bar.supports',
-              defaultMessage: '\n                  {totalDonations} {totalDonations, plural,\n                    one {apoio}\n                    other {apoio}\n                  }\n                ',
-              values: { totalDonations: goalStats.total_donations }
-            }));
+            props.valueBottomLeft = _react2.default.createElement(
+              'span',
+              { style: { color: '#999999' } },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'widgets.components--donation.progress-bar.supports',
+                defaultMessage: '\n                  {totalDonations} {totalDonations, plural,\n                    one {apoio}\n                    other {apoio}\n                  }\n                ',
+                values: { totalDonations: goalStats.total_donations }
+              })
+            );
           }
         }
 
         if (goal) {
-          props.valueBottomCenter = _jsx('b', {}, void 0, _jsx('span', {
-            style: { color: '#999999' }
-          }, void 0, _ref3), ' ', formatNumberHelper.currencyInt(goal));
+          props.valueBottomCenter = _react2.default.createElement(
+            'b',
+            null,
+            _react2.default.createElement(
+              'span',
+              { style: { color: '#999999' } },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'widgets.components--donation.progress-bar.goal',
+                defaultMessage: 'Meta:'
+              })
+            ),
+            ' ',
+            formatNumberHelper.currencyInt(goal)
+          );
         }
         if (goalDateRemaining !== undefined) {
           if (goalDateRemaining === 0) {
-            props.valueBottomRight = _ref4;
+            props.valueBottomRight = _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.progress-bar.date.last-day',
+              defaultMessage: '\xFAltimo dia!'
+            });
           } else if (goalDateRemaining > 0 && goalDateRemaining < 7) {
-            props.valueBottomRight = _ref5;
+            props.valueBottomRight = _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.progress-bar.date.last-days',
+              defaultMessage: '\xFAltimos dias!'
+            });
           } else if (goalDateRemaining === 7) {
-            props.valueBottomRight = _ref6;
+            props.valueBottomRight = _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.progress-bar.date.last-week',
+              defaultMessage: '\xFAltima semana!'
+            });
           } else if (goalDateRemaining > 0) {
-            props.valueBottomRight = _jsx(_reactIntl.FormattedMessage, {
+            props.valueBottomRight = _react2.default.createElement(_reactIntl.FormattedMessage, {
               id: 'widgets.components--donation.progress-bar.date.remaining',
               defaultMessage: '\n                faltam {goalDateRemaining} {goalDateRemaining, plural,\n                  one {dia}\n                  other {dias}\n                }\n              ',
               values: { goalDateRemaining: goalDateRemaining }
             });
           }
 
-          props.valueBottomRight = _jsx('b', {
-            style: { color: mainColor }
-          }, void 0, props.valueBottomRight);
+          props.valueBottomRight = _react2.default.createElement(
+            'b',
+            { style: { color: mainColor } },
+            props.valueBottomRight
+          );
         }
 
         return (goal || goalDateRemaining !== undefined) && _react2.default.createElement(_.Progress, _extends({ fillColor: mainColor }, props));
@@ -21095,8 +22195,14 @@ exports.default = function (_ref) {
             selectedPaymentType = _state2.selected_payment_type;
 
 
-        var buttonText = settings && settings.button_text || _ref7;
-        var titleText = settings && (settings.call_to_action || settings.title_text) || _ref8;
+        var buttonText = settings && settings.button_text || _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--donation.default.button-text',
+          defaultMessage: 'Doar agora'
+        });
+        var titleText = settings && (settings.call_to_action || settings.title_text) || _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'widgets.components--donation.default.title-text',
+          defaultMessage: 'Clique para configurar seu bloco de doa\xE7\xE3o'
+        });
 
         var donationValue1 = settings && settings.donation_value1 || 0;
         var donationValue2 = settings && settings.donation_value2 || 0;
@@ -21129,66 +22235,116 @@ exports.default = function (_ref) {
         if (!configurable) {
           var _context;
 
-          return _jsx('div', {
-            className: 'donation center clearfix'
-          }, void 0, _jsx('h2', {
-            className: 'p2 m0 white rounded-top',
-            style: { fontFamily: headerFont, backgroundColor: mainColor }
-          }, void 0, titleText), _jsx('script', {
-            dangerouslySetInnerHTML: { __html: '\n(function(i,s,o,g,r,a,m){i[\'PagarMeCheckoutObject\']=r;i[r]=i[r]||function(){\n(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\nm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n})(window,document,\'script\',\'https://assets.pagar.me/checkout/checkout.js\',\'PagarMeCheckout\');'
-            }
-          }), _jsx('div', {
-            className: 'p3 relative'
-          }, void 0, paymentType === 'users_choice' ? _jsx('div', {
-            className: 'mb2 clearfix'
-          }, void 0, _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetTypeDonation).bind.call(_context, this, 'recurring'),
-            style: selectedPaymentType === 'recurring' ? { color: mainColor } : {},
-            className: selectedPaymentType === 'recurring' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'
-          }, void 0, _ref9, _jsx(_reactIntl.FormattedMessage, {
-            id: 'widgets.components--donation.users-choice.recurring',
-            defaultMessage: 'Apoiar todo {periodLabelCurrent}',
-            values: { periodLabelCurrent: periodLabelCurrent }
-          })), _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetTypeDonation).bind.call(_context, this, 'unique'),
-            style: selectedPaymentType === 'unique' ? { color: mainColor } : {},
-            className: selectedPaymentType === 'unique' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'
-          }, void 0, _ref10, _ref11)) : '', donationValue1 <= 0 ? null : _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 1),
-            style: selectedValue !== 1 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
-            className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 1 ? 'active' : 'bg-darken-1')
-          }, void 0, 'R$ ' + donationValue1 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel), donationValue2 <= 0 ? null : _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 2),
-            style: selectedValue !== 2 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
-            className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 2 ? 'active' : 'bg-darken-1')
-          }, void 0, 'R$ ' + donationValue2 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel), donationValue3 <= 0 ? null : _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 3),
-            style: selectedValue !== 3 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
-            className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 3 ? 'active' : 'bg-darken-1')
-          }, void 0, 'R$ ' + donationValue3 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel), donationValue4 <= 0 ? null : _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 4),
-            style: selectedValue !== 4 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
-            className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 4 ? 'active' : 'bg-darken-1')
-          }, void 0, 'R$ ' + donationValue4 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel), donationValue5 <= 0 ? null : _jsx('a', {
-            href: '#',
-            onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 5),
-            style: selectedValue !== 5 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
-            className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 5 ? 'active' : 'bg-darken-1')
-          }, void 0, 'R$ ' + donationValue5 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel), _jsx('a', {
-            href: '#',
-            onClick: this.handleClickDonate.bind(this),
-            style: { backgroundColor: mainColor },
-            className: 'btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'
-          }, void 0, buttonText)), _jsx('div', {
-            className: 'p3',
-            style: { boxShadow: '#E3E3E3 0px 15px 18px -10px inset' }
-          }, void 0, this.renderProgressBar(mainColor)));
+          return _react2.default.createElement(
+            'div',
+            { className: 'donation center clearfix' },
+            _react2.default.createElement(
+              'h2',
+              {
+                className: 'p2 m0 white rounded-top',
+                style: { fontFamily: headerFont, backgroundColor: mainColor }
+              },
+              titleText
+            ),
+            _react2.default.createElement('script', { dangerouslySetInnerHTML: { __html: '\n(function(i,s,o,g,r,a,m){i[\'PagarMeCheckoutObject\']=r;i[r]=i[r]||function(){\n(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\nm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n})(window,document,\'script\',\'https://assets.pagar.me/checkout/checkout.js\',\'PagarMeCheckout\');'
+              } }),
+            _react2.default.createElement(
+              'div',
+              { className: 'p3 relative' },
+              paymentType === 'users_choice' ? _react2.default.createElement(
+                'div',
+                { className: 'mb2 clearfix' },
+                _react2.default.createElement(
+                  'a',
+                  { href: '#', onClick: (_context = this.handleClickSetTypeDonation).bind.call(_context, this, 'recurring'),
+                    style: selectedPaymentType === 'recurring' ? { color: mainColor } : {},
+                    className: selectedPaymentType === 'recurring' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6' },
+                  _react2.default.createElement('i', { className: 'icon-payment-recurring' }),
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'widgets.components--donation.users-choice.recurring',
+                    defaultMessage: 'Apoiar todo {periodLabelCurrent}',
+                    values: { periodLabelCurrent: periodLabelCurrent }
+                  })
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { href: '#', onClick: (_context = this.handleClickSetTypeDonation).bind.call(_context, this, 'unique'),
+                    style: selectedPaymentType === 'unique' ? { color: mainColor } : {},
+                    className: selectedPaymentType === 'unique' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6' },
+                  _react2.default.createElement('i', { className: 'icon-payment-unique' }),
+                  _react2.default.createElement(_reactIntl.FormattedMessage, {
+                    id: 'widgets.components--donation.users-choice.unique',
+                    defaultMessage: 'Doa\xE7\xE3o \xFAnica'
+                  })
+                )
+              ) : '',
+              donationValue1 <= 0 ? null : _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 1),
+                  style: selectedValue !== 1 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
+                  className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 1 ? 'active' : 'bg-darken-1')
+                },
+                'R$ ' + donationValue1 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel
+              ),
+              donationValue2 <= 0 ? null : _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 2),
+                  style: selectedValue !== 2 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
+                  className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 2 ? 'active' : 'bg-darken-1')
+                },
+                'R$ ' + donationValue2 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel
+              ),
+              donationValue3 <= 0 ? null : _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 3),
+                  style: selectedValue !== 3 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
+                  className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 3 ? 'active' : 'bg-darken-1')
+                },
+                'R$ ' + donationValue3 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel
+              ),
+              donationValue4 <= 0 ? null : _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 4),
+                  style: selectedValue !== 4 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
+                  className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 4 ? 'active' : 'bg-darken-1')
+                },
+                'R$ ' + donationValue4 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel
+              ),
+              donationValue5 <= 0 ? null : _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: (_context = this.handleClickSetValueDonation).bind.call(_context, this, 5),
+                  style: selectedValue !== 5 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor },
+                  className: (0, _classnames2.default)('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 5 ? 'active' : 'bg-darken-1')
+                },
+                'R$ ' + donationValue5 + (paymentType === 'recurring' || selectedPaymentType === 'recurring' && paymentType !== 'unique' ? ' /' : '') + periodLabel
+              ),
+              _react2.default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: this.handleClickDonate.bind(this),
+                  style: { backgroundColor: mainColor },
+                  className: 'btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'
+                },
+                buttonText
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'p3', style: { boxShadow: '#E3E3E3 0px 15px 18px -10px inset' } },
+              this.renderProgressBar(mainColor)
+            )
+          );
         }
       }
     }, {
@@ -21211,9 +22367,11 @@ exports.default = function (_ref) {
 
         var className = (0, _classnames2.default)({ 'relative': editable || !configurable });
 
-        return _jsx('div', {
-          className: className
-        }, void 0, this.renderButton());
+        return _react2.default.createElement(
+          'div',
+          { className: className },
+          this.renderButton()
+        );
       }
     }, {
       key: 'renderThankyouText',
@@ -21224,12 +22382,7 @@ exports.default = function (_ref) {
         var finishMessageType = widget.settings.finish_message_type;
 
 
-        return finishMessageType === 'custom' ? _jsx(FinishMessageCustom, {
-          widget: widget
-        }) : _jsx(DonationTellAFriend, {
-          mobilization: mobilization,
-          widget: widget
-        });
+        return finishMessageType === 'custom' ? _react2.default.createElement(FinishMessageCustom, { widget: widget }) : _react2.default.createElement(DonationTellAFriend, { mobilization: mobilization, widget: widget });
       }
     }, {
       key: 'renderReattemptMessage',
@@ -21238,21 +22391,52 @@ exports.default = function (_ref) {
 
         var mainColor = settings && settings.main_color || '#54d0f6';
 
-        return _jsx('div', {
-          className: 'donation'
-        }, void 0, _jsx('h2', {
-          className: 'p2 m0 white rounded-top center',
-          style: { backgroundColor: mainColor }
-        }, void 0, _ref12), _jsx('div', {
-          style: { textAlign: 'center', color: '#333', padding: '3rem 0' }
-        }, void 0, _jsx('i', {
-          className: 'error-icon inline-block mb2',
-          style: { backgroundColor: '#de0000' }
-        }), _ref13, _ref14, _ref15, _ref16, _ref17, _jsx('button', {
-          onClick: this.handleClickDonate.bind(this),
-          style: { backgroundColor: mainColor },
-          className: 'btn white caps bg-darken-4 p2 mt3 rounded border-box'
-        }, void 0, _ref18)));
+        return _react2.default.createElement(
+          'div',
+          { className: 'donation' },
+          _react2.default.createElement(
+            'h2',
+            {
+              className: 'p2 m0 white rounded-top center',
+              style: { backgroundColor: mainColor }
+            },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.reattempt.message.title',
+              defaultMessage: 'Ops!'
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            { style: { textAlign: 'center', color: '#333', padding: '3rem 0' } },
+            _react2.default.createElement('i', {
+              className: 'error-icon inline-block mb2',
+              style: { backgroundColor: '#de0000' }
+            }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.reattempt.message.text.line-01',
+              defaultMessage: 'Algo de errado aconteceu com a sua doa\xE7\xE3o. ):'
+            }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'widgets.components--donation.reattempt.message.text.line-02',
+              defaultMessage: 'Clique no bot\xE3o abaixo pra tentar de novo.'
+            }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'button',
+              {
+                onClick: this.handleClickDonate.bind(this),
+                style: { backgroundColor: mainColor },
+                className: 'btn white caps bg-darken-4 p2 mt3 rounded border-box'
+              },
+              _react2.default.createElement(_reactIntl.FormattedMessage, {
+                id: 'widgets.components--donation.reattempt.message.button.text',
+                defaultMessage: 'Nova tentativa'
+              })
+            )
+          )
+        );
       }
     }, {
       key: 'renderContentStrategy',
@@ -21262,14 +22446,26 @@ exports.default = function (_ref) {
     }, {
       key: 'render',
       value: function render() {
-        return _jsx('div', {
-          className: 'bg-white widget rounded'
-        }, void 0, this.renderContentStrategy());
+        return _react2.default.createElement(
+          'div',
+          { className: 'bg-white widget rounded' },
+          this.renderContentStrategy()
+        );
       }
     }]);
 
     return Donation;
   }(_react2.default.Component);
+
+  Donation.propTypes = {
+    mobilization: _propTypes2.default.object.isRequired,
+    widget: _propTypes2.default.object.isRequired,
+    editable: _propTypes2.default.bool.isRequired,
+    configurable: _propTypes2.default.bool,
+    hasNewField: _propTypes2.default.bool,
+    handleDonationTransactionCreate: _propTypes2.default.func,
+    intl: _reactIntl.intlShape
+  };
 
   return Donation;
 };
@@ -21318,8 +22514,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -21361,38 +22555,80 @@ var Progress = function Progress(_ref) {
       valueBottomCenter = _ref.valueBottomCenter,
       valueBottomRight = _ref.valueBottomRight,
       fillColor = _ref.fillColor;
-  return _jsx('div', {
-    className: (0, _classnames2.default)('progress-container', className)
-  }, void 0, _jsx('div', {
-    className: 'progress-top'
-  }, void 0, valueTopLeft && _jsx('div', {
-    className: 'progress-top-left'
-  }, void 0, valueTopLeft), valueTopCenter && _jsx('div', {
-    className: 'progress-top-center'
-  }, void 0, valueTopCenter), valueTopRight && _jsx('div', {
-    className: 'progress-top-right'
-  }, void 0, valueTopRight)), _jsx('div', {
-    className: 'progress',
-    value: value,
-    max: max
-  }, void 0, _jsx('div', {
-    className: 'progress-value',
-    style: {
-      backgroundColor: fillColor,
-      width: (value > 100 ? 100 : value) + '%'
-    }
-  }, void 0, value > 5 && _jsx('span', {
-    className: 'percentage',
-    style: { color: colorStrategy(fillColor) }
-  }, void 0, formatNumberHelper.number(value).split(',')[0], '%'))), _jsx('div', {
-    className: 'progress-bottom'
-  }, void 0, valueBottomLeft && _jsx('div', {
-    className: 'progress-bottom-left'
-  }, void 0, valueBottomLeft), valueBottomCenter && _jsx('div', {
-    className: 'progress-bottom-center'
-  }, void 0, valueBottomCenter), valueBottomRight && _jsx('div', {
-    className: 'progress-bottom-right'
-  }, void 0, valueBottomRight)));
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('progress-container', className) },
+    _react2.default.createElement(
+      'div',
+      { className: 'progress-top' },
+      valueTopLeft && _react2.default.createElement(
+        'div',
+        { className: 'progress-top-left' },
+        valueTopLeft
+      ),
+      valueTopCenter && _react2.default.createElement(
+        'div',
+        { className: 'progress-top-center' },
+        valueTopCenter
+      ),
+      valueTopRight && _react2.default.createElement(
+        'div',
+        { className: 'progress-top-right' },
+        valueTopRight
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'progress', value: value, max: max },
+      _react2.default.createElement(
+        'div',
+        { className: 'progress-value',
+          style: {
+            backgroundColor: fillColor,
+            width: (value > 100 ? 100 : value) + '%'
+          }
+        },
+        value > 5 && _react2.default.createElement(
+          'span',
+          { className: 'percentage', style: { color: colorStrategy(fillColor) } },
+          formatNumberHelper.number(value).split(',')[0],
+          '%'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'progress-bottom' },
+      valueBottomLeft && _react2.default.createElement(
+        'div',
+        { className: 'progress-bottom-left' },
+        valueBottomLeft
+      ),
+      valueBottomCenter && _react2.default.createElement(
+        'div',
+        { className: 'progress-bottom-center' },
+        valueBottomCenter
+      ),
+      valueBottomRight && _react2.default.createElement(
+        'div',
+        { className: 'progress-bottom-right' },
+        valueBottomRight
+      )
+    )
+  );
+};
+
+Progress.propTypes = {
+  className: _propTypes2.default.string,
+  value: _propTypes2.default.number.isRquired,
+  max: _propTypes2.default.number,
+  valueTopLeft: _propTypes2.default.node,
+  valueTopRight: _propTypes2.default.node,
+  valueTopCenter: _propTypes2.default.node,
+  valueBottomLeft: _propTypes2.default.node,
+  valueBottomRight: _propTypes2.default.node,
+  valueBottomCenter: _propTypes2.default.node,
+  fillColor: _propTypes2.default.string
 };
 
 Progress.defaultProps = {
@@ -21473,8 +22709,6 @@ exports.BLOCK_UPLOAD_KEY = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
@@ -21507,10 +22741,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var BLOCK_UPLOAD_KEY = exports.BLOCK_UPLOAD_KEY = 'bgBlock';
 
-var _ref = _jsx('i', {
-  className: 'fa fa-eyedropper'
-});
-
 var ColorPickerButton = function (_React$Component) {
   _inherits(ColorPickerButton, _React$Component);
 
@@ -21535,20 +22765,31 @@ var ColorPickerButton = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return _jsx('div', {}, void 0, _jsx('button', {
-        className: (0, _classnames2.default)('btn white', { 'bg-darken-4': this.state.show }),
-        style: { height: '55px', borderRight: '1px solid rgba(119, 119, 119, 0.33)' },
-        onClick: function onClick() {
-          return _this2.setState({ show: !_this2.state.show });
-        }
-      }, void 0, _ref), _jsx('div', {
-        className: 'fixed z5'
-      }, void 0, _jsx(_colorPicker.ColorPicker, {
-        theme: this.props.theme,
-        showColorPicker: this.state.show,
-        color: this.props.color,
-        onChangeColor: this.onChangeColor.bind(this)
-      })));
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          {
+            className: (0, _classnames2.default)('btn white', { 'bg-darken-4': this.state.show }),
+            style: { height: '55px', borderRight: '1px solid rgba(119, 119, 119, 0.33)' },
+            onClick: function onClick() {
+              return _this2.setState({ show: !_this2.state.show });
+            }
+          },
+          _react2.default.createElement('i', { className: 'fa fa-eyedropper' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'fixed z5' },
+          _react2.default.createElement(_colorPicker.ColorPicker, {
+            theme: this.props.theme,
+            showColorPicker: this.state.show,
+            color: this.props.color,
+            onChangeColor: this.onChangeColor.bind(this)
+          })
+        )
+      );
     }
   }]);
 
@@ -21566,70 +22807,95 @@ var rgba = function rgba(block) {
   }
 };
 
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-change-background.button.save',
-  defaultMessage: 'Salvar'
-});
+var BlockChangeBackground = function BlockChangeBackground(_ref) {
+  var mobilization = _ref.mobilization,
+      block = _ref.block,
+      onChangeBackground = _ref.onChangeBackground,
+      progress = _ref.progress,
+      onUploadFile = _ref.onUploadFile,
+      onCancelEdit = _ref.onCancelEdit,
+      update = _ref.update;
+  return _react2.default.createElement(
+    'div',
+    { className: 'absolute col-12 top-0 left-0 bg-darken-4 z5' },
+    _react2.default.createElement(
+      'div',
+      { className: 'flex flex-wrap' },
+      _react2.default.createElement(ColorPickerButton, {
+        color: rgba(block),
+        theme: mobilization.color_scheme,
+        onChange: function onChange(color) {
+          onChangeBackground(_extends({}, block, { bg_class: color }));
+        }
+      }),
+      _react2.default.createElement(_fileUploader2.default, {
+        file: block.bg_image,
+        progress: progress,
+        onProgress: function onProgress(progress) {
+          return onUploadFile(BLOCK_UPLOAD_KEY, progress);
+        },
+        onRemove: function onRemove() {
+          return onChangeBackground(_extends({}, block, { bg_image: '' }));
+        },
+        onFinish: function onFinish(file) {
+          onUploadFile(BLOCK_UPLOAD_KEY);
+          onChangeBackground(_extends({}, block, { bg_image: file }));
+        }
+      }),
+      _react2.default.createElement(
+        'div',
+        { className: 'absolute right-0 mt1 mr2 nowrap' },
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'btn caps bg-darken-4 white rounded mr1 save-btn',
+            style: { heigth: '40px' },
+            disabled: progress !== undefined,
+            onClick: function onClick() {
+              update(block);
+              onCancelEdit(block);
+            }
+          },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'mobrender.components--block-change-background.button.save',
+            defaultMessage: 'Salvar'
+          })
+        ),
+        _react2.default.createElement(
+          'button',
+          {
+            className: 'btn caps bg-darken-4 white rounded cancel-btn',
+            style: { heigth: '40px' },
+            onClick: function onClick() {
+              return onCancelEdit(block);
+            }
+          },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'mobrender.components--block-change-background.button.cancel',
+            defaultMessage: 'Cancelar'
+          })
+        )
+      )
+    ),
+    _react2.default.createElement('div', {
+      className: 'fixed top-0 right-0 bottom-0 left-0 z3',
+      style: { marginTop: '50px' },
+      onClick: function onClick() {
+        return onCancelEdit(block);
+      }
+    })
+  );
+};
 
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-change-background.button.cancel',
-  defaultMessage: 'Cancelar'
-});
-
-var BlockChangeBackground = function BlockChangeBackground(_ref2) {
-  var mobilization = _ref2.mobilization,
-      block = _ref2.block,
-      onChangeBackground = _ref2.onChangeBackground,
-      progress = _ref2.progress,
-      onUploadFile = _ref2.onUploadFile,
-      onCancelEdit = _ref2.onCancelEdit,
-      update = _ref2.update;
-  return _jsx('div', {
-    className: 'absolute col-12 top-0 left-0 bg-darken-4 z5'
-  }, void 0, _jsx('div', {
-    className: 'flex flex-wrap'
-  }, void 0, _jsx(ColorPickerButton, {
-    color: rgba(block),
-    theme: mobilization.color_scheme,
-    onChange: function onChange(color) {
-      onChangeBackground(_extends({}, block, { bg_class: color }));
-    }
-  }), _jsx(_fileUploader2.default, {
-    file: block.bg_image,
-    progress: progress,
-    onProgress: function onProgress(progress) {
-      return onUploadFile(BLOCK_UPLOAD_KEY, progress);
-    },
-    onRemove: function onRemove() {
-      return onChangeBackground(_extends({}, block, { bg_image: '' }));
-    },
-    onFinish: function onFinish(file) {
-      onUploadFile(BLOCK_UPLOAD_KEY);
-      onChangeBackground(_extends({}, block, { bg_image: file }));
-    }
-  }), _jsx('div', {
-    className: 'absolute right-0 mt1 mr2 nowrap'
-  }, void 0, _jsx('button', {
-    className: 'btn caps bg-darken-4 white rounded mr1 save-btn',
-    style: { heigth: '40px' },
-    disabled: progress !== undefined,
-    onClick: function onClick() {
-      update(block);
-      onCancelEdit(block);
-    }
-  }, void 0, _ref3), _jsx('button', {
-    className: 'btn caps bg-darken-4 white rounded cancel-btn',
-    style: { heigth: '40px' },
-    onClick: function onClick() {
-      return onCancelEdit(block);
-    }
-  }, void 0, _ref4))), _jsx('div', {
-    className: 'fixed top-0 right-0 bottom-0 left-0 z3',
-    style: { marginTop: '50px' },
-    onClick: function onClick() {
-      return onCancelEdit(block);
-    }
-  }));
+BlockChangeBackground.propTypes = {
+  block: _propTypes2.default.object.isRequired,
+  // Injected by redux
+  mobilization: _propTypes2.default.object.isRequired,
+  update: _propTypes2.default.func.isRequired,
+  onChangeBackground: _propTypes2.default.func,
+  onCancelEdit: _propTypes2.default.func,
+  onUploadFile: _propTypes2.default.func,
+  progress: _propTypes2.default.number
 };
 
 exports.default = BlockChangeBackground;
@@ -21705,8 +22971,6 @@ exports.EDIT_KEY = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -21727,44 +22991,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var EDIT_KEY = exports.EDIT_KEY = 'background';
 
-var _ref2 = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-picture-o'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.change-background',
-  defaultMessage: 'Alterar fundo'
-}));
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.toggle-visibility.show',
-  defaultMessage: 'Mostrar'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.toggle-visibility.hide',
-  defaultMessage: 'Esconder'
-});
-
-var _ref5 = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-trash'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.remove',
-  defaultMessage: 'Remover'
-}));
-
-var _ref6 = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-chevron-up'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.move-up',
-  defaultMessage: 'Mover para cima'
-}));
-
-var _ref7 = _jsx('span', {}, void 0, _jsx('i', {
-  className: 'fa fa-chevron-down'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block-config-menu.item.move-down',
-  defaultMessage: 'Mover para baixo'
-}));
-
 var BlockConfigMenu = function BlockConfigMenu(_ref) {
   var block = _ref.block,
       update = _ref.update,
@@ -21776,45 +23002,133 @@ var BlockConfigMenu = function BlockConfigMenu(_ref) {
       moveDown = _ref.moveDown,
       display = _ref.display,
       intl = _ref.intl;
-  return _jsx(_dropdownMenu.DropdownMenu, {
-    wrapperClassName: (0, _classnames2.default)('m1 absolute bottom-0 right-0 z2', { 'display-none': !display }),
-    menuClassName: 'bg-darken-4 rounded white right-0 top-0 mr4',
-    buttonClassName: 'btn bg-darken-4 white rounded',
-    icon: 'cog'
-  }, void 0, _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    onClick: function onClick() {
-      return onEdit(EDIT_KEY + '-' + block.id);
-    }
-  }, void 0, _ref2), _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    onClick: function onClick() {
-      return update(_extends({}, block, { hidden: !block.hidden }));
-    }
-  }, void 0, _jsx('span', {}, void 0, _jsx('i', {
-    className: (0, _classnames2.default)('fa', block.hidden ? 'fa-eye' : 'fa-eye-slash')
-  }), ' ', block.hidden ? _ref3 : _ref4)), _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    onClick: function onClick() {
-      var message = intl.formatMessage({
-        id: 'mobrender.components--block-config-menu.item.remove.confirm',
-        defaultMessage: 'Você tem certeza que quer remover este bloco?'
-      });
-      if (window.confirm(message)) destroy(block);
-    }
-  }, void 0, _ref5), _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    disabled: !canMoveUp,
-    onClick: function onClick() {
-      return moveUp(block);
-    }
-  }, void 0, _ref6), _jsx(_dropdownMenu.DropdownMenuItem, {
-    className: 'btn',
-    disabled: !canMoveDown,
-    onClick: function onClick() {
-      return moveDown(block);
-    }
-  }, void 0, _ref7));
+  return _react2.default.createElement(
+    _dropdownMenu.DropdownMenu,
+    {
+      wrapperClassName: (0, _classnames2.default)('m1 absolute bottom-0 right-0 z2', { 'display-none': !display }),
+      menuClassName: 'bg-darken-4 rounded white right-0 top-0 mr4',
+      buttonClassName: 'btn bg-darken-4 white rounded',
+      icon: 'cog'
+    },
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenuItem,
+      {
+        className: 'btn',
+        onClick: function onClick() {
+          return onEdit(EDIT_KEY + '-' + block.id);
+        }
+      },
+      _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-picture-o' }),
+        ' ',
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.change-background',
+          defaultMessage: 'Alterar fundo'
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenuItem,
+      {
+        className: 'btn',
+        onClick: function onClick() {
+          return update(_extends({}, block, { hidden: !block.hidden }));
+        }
+      },
+      _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: (0, _classnames2.default)('fa', block.hidden ? 'fa-eye' : 'fa-eye-slash') }),
+        ' ',
+        block.hidden ? _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.toggle-visibility.show',
+          defaultMessage: 'Mostrar'
+        }) : _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.toggle-visibility.hide',
+          defaultMessage: 'Esconder'
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenuItem,
+      {
+        className: 'btn',
+        onClick: function onClick() {
+          var message = intl.formatMessage({
+            id: 'mobrender.components--block-config-menu.item.remove.confirm',
+            defaultMessage: 'Você tem certeza que quer remover este bloco?'
+          });
+          if (window.confirm(message)) destroy(block);
+        }
+      },
+      _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-trash' }),
+        ' ',
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.remove',
+          defaultMessage: 'Remover'
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenuItem,
+      {
+        className: 'btn',
+        disabled: !canMoveUp,
+        onClick: function onClick() {
+          return moveUp(block);
+        }
+      },
+      _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-chevron-up' }),
+        ' ',
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.move-up',
+          defaultMessage: 'Mover para cima'
+        })
+      )
+    ),
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenuItem,
+      {
+        className: 'btn',
+        disabled: !canMoveDown,
+        onClick: function onClick() {
+          return moveDown(block);
+        }
+      },
+      _react2.default.createElement(
+        'span',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-chevron-down' }),
+        ' ',
+        _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'mobrender.components--block-config-menu.item.move-down',
+          defaultMessage: 'Mover para baixo'
+        })
+      )
+    )
+  );
+};
+
+BlockConfigMenu.propTypes = {
+  block: _propTypes2.default.object.isRequired,
+  display: _propTypes2.default.bool,
+  // Injected by redux
+  canMoveUp: _propTypes2.default.bool,
+  moveUp: _propTypes2.default.func,
+  canMoveDown: _propTypes2.default.bool,
+  moveDown: _propTypes2.default.func,
+  update: _propTypes2.default.func,
+  onEdit: _propTypes2.default.func,
+  // Injected by react-intl
+  intl: _reactIntl.intlShape.isRequired
 };
 
 exports.default = (0, _reactIntl.injectIntl)(BlockConfigMenu);
@@ -21875,8 +23189,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HOVER_MOUSE_KEY = undefined;
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -21918,17 +23230,6 @@ var getBackgroundStyle = function getBackgroundStyle(block) {
   }
 };
 
-var _ref2 = _jsx('div', {
-  className: 'relative'
-}, void 0, _jsx('div', {
-  className: 'absolute bottom-0 left-0 ml1 mb1 bg-darken-2 p1 white rounded hidden-tag'
-}, void 0, _jsx('i', {
-  className: 'fa fa-eye-slash mr1'
-}), ' ', _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--block.hidden-tag',
-  defaultMessage: 'Escondido'
-})));
-
 var Block = function Block(_ref) {
   var block = _ref.block,
       widgets = _ref.widgets,
@@ -21940,43 +23241,80 @@ var Block = function Block(_ref) {
       editing = _ref.editing,
       saving = _ref.saving,
       history = _ref.history;
-  return _jsx('div', {
-    id: 'block-' + block.id,
-    onMouseEnter: function onMouseEnter() {
-      if (editable && !editing) onMouseOver(HOVER_MOUSE_KEY, block.id);
+  return _react2.default.createElement(
+    'div',
+    {
+      id: 'block-' + block.id,
+      onMouseEnter: function onMouseEnter() {
+        if (editable && !editing) onMouseOver(HOVER_MOUSE_KEY, block.id);
+      },
+      onMouseLeave: function onMouseLeave() {
+        if (editable && !editing) onMouseOut(HOVER_MOUSE_KEY);
+      },
+      onKeyUp: function onKeyUp(evt) {
+        // ESC keycode
+        if (evt.keyCode === 27) {
+          onCancelEdit(block);
+        }
+      },
+      className: block.bg_class && block.bg_class.indexOf('{') === -1 ? block.bg_class : undefined,
+      style: getBackgroundStyle(block)
     },
-    onMouseLeave: function onMouseLeave() {
-      if (editable && !editing) onMouseOut(HOVER_MOUSE_KEY);
-    },
-    onKeyUp: function onKeyUp(evt) {
-      // ESC keycode
-      if (evt.keyCode === 27) {
-        onCancelEdit(block);
-      }
-    },
-    className: block.bg_class && block.bg_class.indexOf('{') === -1 ? block.bg_class : undefined,
-    style: getBackgroundStyle(block)
-  }, void 0, _jsx('div', {
-    className: 'col-10 mx-auto'
-  }, void 0, editing === _blockConfigMenu3.EDIT_KEY + '-' + block.id ? _jsx(_blockChangeBackground2.default, {
-    block: block
-  }) : null, _jsx('div', {
-    className: 'clearfix widgets',
-    style: { padding: '5em 0' }
-  }, void 0, widgets && widgets.map(function (widget) {
-    return _jsx(_widget2.default, {
-      widget: widget,
-      block: block,
-      editable: editable,
-      history: history
-    }, 'widget-' + widget.id);
-  })), block.hidden && _ref2, _jsx('div', {
-    className: 'relative'
-  }, void 0, _jsx(_blockConfigMenu2.default, {
-    block: block,
-    widgets: widgets,
-    display: editable && hasMouseOver && !editing && !saving
-  }))));
+    _react2.default.createElement(
+      'div',
+      { className: 'col-10 mx-auto' },
+      editing === _blockConfigMenu3.EDIT_KEY + '-' + block.id ? _react2.default.createElement(_blockChangeBackground2.default, { block: block }) : null,
+      _react2.default.createElement(
+        'div',
+        { className: 'clearfix widgets', style: { padding: '5em 0' } },
+        widgets && widgets.map(function (widget) {
+          return _react2.default.createElement(_widget2.default, {
+            key: 'widget-' + widget.id,
+            widget: widget,
+            block: block,
+            editable: editable,
+            history: history
+          });
+        })
+      ),
+      block.hidden && _react2.default.createElement(
+        'div',
+        { className: 'relative' },
+        _react2.default.createElement(
+          'div',
+          { className: 'absolute bottom-0 left-0 ml1 mb1 bg-darken-2 p1 white rounded hidden-tag' },
+          _react2.default.createElement('i', { className: 'fa fa-eye-slash mr1' }),
+          ' ',
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'mobrender.components--block.hidden-tag',
+            defaultMessage: 'Escondido'
+          })
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'relative' },
+        _react2.default.createElement(_blockConfigMenu2.default, {
+          block: block,
+          widgets: widgets,
+          display: editable && hasMouseOver && !editing && !saving
+        })
+      )
+    )
+  );
+};
+
+Block.propTypes = {
+  block: _propTypes2.default.object.isRequired,
+  widgets: _propTypes2.default.array.isRequired,
+  editable: _propTypes2.default.bool,
+  // Injected by redux
+  hasMouseOver: _propTypes2.default.bool,
+  onMouseOver: _propTypes2.default.func,
+  onMouseOut: _propTypes2.default.func,
+  onCancelEdit: _propTypes2.default.func,
+  editing: _propTypes2.default.string,
+  saving: _propTypes2.default.bool
 };
 
 exports.default = Block;
@@ -21992,8 +23330,6 @@ exports.default = Block;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -22015,49 +23351,62 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _ref2 = _jsx('i', {
-  className: 'fa fa-trash'
-});
-
 var FileUploader = function FileUploader(_ref) {
   var file = _ref.file,
       onRemove = _ref.onRemove,
       progress = _ref.progress,
       _onProgress = _ref.onProgress,
       _onFinish = _ref.onFinish;
-  return _jsx('div', {
-    className: 'flex flex-wrap px1'
-  }, void 0, file && _jsx('div', {
-    className: 'py1'
-  }, void 0, _jsx('img', {
-    src: file,
-    style: { maxHeight: '36px' }
-  }), onRemove && _jsx('button', {
-    className: 'btn bg-darken-4 white rounded remove',
-    style: { margin: '-25px 10px 0' },
-    onClick: function onClick() {
-      if (window.confirm('Deseja remover a imagem de fundo?')) {
-        onRemove(file);
-      }
-    }
-  }, void 0, _ref2)), _jsx('div', {
-    className: 'py1'
-  }, void 0, !progress ? _jsx(_reactS3Uploader2.default, {
-    className: 'input border-none white m0 bg-darken-4',
-    accept: 'image/*',
-    signingUrl: _config2.default.apiUrl + '/uploads',
-    onProgress: function onProgress(percent) {
-      return _onProgress(percent);
-    },
-    onFinish: function onFinish(image) {
-      var url = image.signedUrl.substring(0, image.signedUrl.indexOf('?'));
-      _onFinish(url);
-    }
-  }) : _jsx(_await.Progress, {
-    className: 'bg-pagenta full-height rounded',
-    percent: progress,
-    style: { height: '34px' }
-  })));
+  return _react2.default.createElement(
+    'div',
+    { className: 'flex flex-wrap px1' },
+    file && _react2.default.createElement(
+      'div',
+      { className: 'py1' },
+      _react2.default.createElement('img', { src: file, style: { maxHeight: '36px' } }),
+      onRemove && _react2.default.createElement(
+        'button',
+        {
+          className: 'btn bg-darken-4 white rounded remove',
+          style: { margin: '-25px 10px 0' },
+          onClick: function onClick() {
+            if (window.confirm('Deseja remover a imagem de fundo?')) {
+              onRemove(file);
+            }
+          }
+        },
+        _react2.default.createElement('i', { className: 'fa fa-trash' })
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'py1' },
+      !progress ? _react2.default.createElement(_reactS3Uploader2.default, {
+        className: 'input border-none white m0 bg-darken-4',
+        accept: 'image/*',
+        signingUrl: _config2.default.apiUrl + '/uploads',
+        onProgress: function onProgress(percent) {
+          return _onProgress(percent);
+        },
+        onFinish: function onFinish(image) {
+          var url = image.signedUrl.substring(0, image.signedUrl.indexOf('?'));
+          _onFinish(url);
+        }
+      }) : _react2.default.createElement(_await.Progress, {
+        className: 'bg-pagenta full-height rounded',
+        percent: progress,
+        style: { height: '34px' }
+      })
+    )
+  );
+};
+
+FileUploader.propTypes = {
+  file: _propTypes2.default.string,
+  onRemove: _propTypes2.default.func,
+  progress: _propTypes2.default.number,
+  onProgress: _propTypes2.default.func,
+  onFinish: _propTypes2.default.func
 };
 
 exports.default = FileUploader;
@@ -22169,8 +23518,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22218,30 +23565,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./mobrender/components/add-new-block.scss");
-
-var _ref2 = _jsx('i', {
-  className: 'fa fa-plus'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--mobilization.add-block-content',
-  defaultMessage: 'Adicionar bloco de conte\xFAdo'
-});
-
-var _ref4 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'mobrender.components--mobilization.footer.slogan',
-  defaultMessage: 'Feito pra causar. Feito com'
-});
-
-var _ref5 = _jsx('strong', {}, void 0, ' BONDE.');
-
-var _ref6 = _jsx('div', {
-  className: 'col col-2'
-}, void 0, _jsx('a', {
-  href: 'http://www.bonde.org/?utm_source=footer-slogan',
-  className: 'right my2',
-  target: '_blank'
-}, void 0, _jsx(_logoIconNoBorder2.default, {})));
 
 var Mobilization = function (_React$Component) {
   _inherits(Mobilization, _React$Component);
@@ -22376,46 +23699,99 @@ var Mobilization = function (_React$Component) {
       var layoutClassName = editable ? 'flex-auto relative' : 'absolute';
       var layoutStyle = !editable ? { top: 0, bottom: 0, left: 0, right: 0 } : undefined;
 
-      return _jsx('div', {
-        className: (0, _classnames2.default)('flex flex-column', themeClassName, layoutClassName),
-        style: layoutStyle
-      }, void 0, !blockEditionMode && _jsx(_navbar2.default, {
-        mobilization: this.props.mobilization,
-        blocks: blocks,
-        editable: editable,
-        blockUpdate: blockUpdate
-      }), _jsx('div', {
-        id: 'blocks-list',
-        className: 'flex-auto',
-        style: { overflowY: 'scroll' }
-      }, void 0, this.state.blocks.map(function (block, index) {
-        return _jsx(_block2.default, {
-          history: history,
+      return _react2.default.createElement(
+        'div',
+        { className: (0, _classnames2.default)('flex flex-column', themeClassName, layoutClassName), style: layoutStyle },
+        !blockEditionMode && _react2.default.createElement(_navbar2.default, {
+          mobilization: this.props.mobilization,
+          blocks: blocks,
           editable: editable,
-          block: block,
-          widgets: widgets.filter(function (w) {
-            return w.block_id === block.id;
-          })
-        }, 'block-' + block.id);
-      }), editable && _jsx('div', {
-        className: 'add-new-block',
-        onClick: function onClick() {
-          history.push(paths.createBlock(_this3.props.mobilization));
-        }
-      }, void 0, _ref2, _ref3), _jsx('div', {
-        className: 'col-10 mx-auto'
-      }, void 0, _jsx('div', {
-        className: 'col col-10'
-      }, void 0, _jsx('a', {
-        href: 'http://www.bonde.org/?utm_source=footer-logo',
-        style: { 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' },
-        target: '_blank'
-      }, void 0, _ref4, _ref5)), _ref6)));
+          blockUpdate: blockUpdate
+        }),
+        _react2.default.createElement(
+          'div',
+          { id: 'blocks-list', className: 'flex-auto', style: { overflowY: 'scroll' } },
+          this.state.blocks.map(function (block, index) {
+            return _react2.default.createElement(_block2.default, {
+              history: history,
+              key: 'block-' + block.id,
+              editable: editable,
+              block: block,
+              widgets: widgets.filter(function (w) {
+                return w.block_id === block.id;
+              })
+            });
+          }),
+          editable && _react2.default.createElement(
+            'div',
+            {
+              className: 'add-new-block',
+              onClick: function onClick() {
+                history.push(paths.createBlock(_this3.props.mobilization));
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-plus' }),
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'mobrender.components--mobilization.add-block-content',
+              defaultMessage: 'Adicionar bloco de conte\xFAdo'
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-10 mx-auto' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col col-10' },
+              _react2.default.createElement(
+                'a',
+                {
+                  href: 'http://www.bonde.org/?utm_source=footer-logo',
+                  style: { 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' },
+                  target: '_blank'
+                },
+                _react2.default.createElement(_reactIntl.FormattedMessage, {
+                  id: 'mobrender.components--mobilization.footer.slogan',
+                  defaultMessage: 'Feito pra causar. Feito com'
+                }),
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  ' BONDE.'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col col-2' },
+              _react2.default.createElement(
+                'a',
+                {
+                  href: 'http://www.bonde.org/?utm_source=footer-slogan',
+                  className: 'right my2',
+                  target: '_blank'
+                },
+                _react2.default.createElement(_logoIconNoBorder2.default, null)
+              )
+            )
+          )
+        )
+      );
     }
   }]);
 
   return Mobilization;
 }(_react2.default.Component);
+
+Mobilization.propTypes = {
+  editable: _propTypes2.default.bool.isRequired,
+  // Injected by redux
+  mobilization: _propTypes2.default.object.isRequired,
+  blocks: _propTypes2.default.array.isRequired,
+  blockUpdate: _propTypes2.default.func,
+  widgets: _propTypes2.default.array.isRequired,
+  blockEditionMode: _propTypes2.default.bool,
+  blocksIsLoaded: _propTypes2.default.bool
+};
 
 Mobilization.defaultProps = {
   editable: false,
@@ -22462,8 +23838,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -22493,32 +23867,49 @@ var MenuItems = function MenuItems(_ref) {
       menuProps = _objectWithoutProperties(_ref, ['blocks', 'mobile']);
 
   var items = blocks.map(function (block) {
-    return _jsx('div', {
-      className: (0, _classnames2.default)({ 'menu-item inline-block': !mobile })
-    }, block.id, _react2.default.createElement(_navbar.NavbarEditionWrapper, _extends({
-      key: 'navbar-edition-wrapper-' + block.id,
-      block: block,
-      className: 'btn btn-transparent block white p2'
-    }, menuProps)));
+    return _react2.default.createElement(
+      'div',
+      { key: block.id, className: (0, _classnames2.default)({ 'menu-item inline-block': !mobile }) },
+      _react2.default.createElement(_navbar.NavbarEditionWrapper, _extends({
+        key: 'navbar-edition-wrapper-' + block.id,
+        block: block,
+        className: 'btn btn-transparent block white p2'
+      }, menuProps))
+    );
   });
 
-  return !mobile ? _jsx('div', {
-    className: 'lg-show center'
-  }, void 0, _jsx('div', {
-    className: 'bg-darken-4'
-  }, void 0, items)) : _jsx('div', {
-    className: 'lg-hide'
-  }, void 0, _jsx(_dropdownMenu.DropdownMenu, {
-    wrapperClassName: 'absolute right-0 top-0 m1',
-    buttonClassName: 'btn bg-darken-4 white rounded',
-    menuClassName: 'rounded bg-darken-4 white top-0 right-0',
-    menuStyle: { marginTop: '40px' },
-    icon: 'bars'
-  }, void 0, items));
+  return !mobile ? _react2.default.createElement(
+    'div',
+    { className: 'lg-show center' },
+    _react2.default.createElement(
+      'div',
+      { className: 'bg-darken-4' },
+      items
+    )
+  ) : _react2.default.createElement(
+    'div',
+    { className: 'lg-hide' },
+    _react2.default.createElement(
+      _dropdownMenu.DropdownMenu,
+      {
+        wrapperClassName: 'absolute right-0 top-0 m1',
+        buttonClassName: 'btn bg-darken-4 white rounded',
+        menuClassName: 'rounded bg-darken-4 white top-0 right-0',
+        menuStyle: { marginTop: '40px' },
+        icon: 'bars'
+      },
+      items
+    )
+  );
 };
 
 MenuItems.defaultProps = {
   mobile: false
+};
+
+MenuItems.propTypes = {
+  blocks: _propTypes2.default.arrayOf(_propTypes2.default.shape({ id: _propTypes2.default.number })).isRequired,
+  mobile: _propTypes2.default.bool
 };
 
 exports.default = MenuItems;
@@ -22534,8 +23925,6 @@ exports.default = MenuItems;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -22563,9 +23952,19 @@ var Navbar = function Navbar(props) {
   });
   var menuProps = _extends({}, props, { blocks: onlyVisibleBlocks });
 
-  return _jsx('div', {
-    className: 'absolute col-12 z3'
-  }, void 0, _react2.default.createElement(_menuItems2.default, menuProps), _react2.default.createElement(_menuItems2.default, _extends({}, menuProps, { mobile: true })));
+  return _react2.default.createElement(
+    'div',
+    { className: 'absolute col-12 z3' },
+    _react2.default.createElement(_menuItems2.default, menuProps),
+    _react2.default.createElement(_menuItems2.default, _extends({}, menuProps, { mobile: true }))
+  );
+};
+
+Navbar.propTypes = {
+  editable: _propTypes2.default.bool.isRequired,
+  mobilization: _propTypes2.default.object.isRequired,
+  blocks: _propTypes2.default.array,
+  blockUpdate: _propTypes2.default.func
 };
 
 Navbar.defaultProps = {
@@ -22624,8 +24023,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -22649,14 +24046,6 @@ var overlayStyle = {
   fontSize: '1.8rem'
 };
 
-var _ref2 = _jsx('i', {
-  className: 'fa fa-edit'
-});
-
-var _ref3 = _jsx('i', {
-  className: 'fa fa-trash'
-});
-
 var WidgetOverlay = function WidgetOverlay(_ref) {
   var children = _ref.children,
       widget = _ref.widget,
@@ -22665,31 +24054,59 @@ var WidgetOverlay = function WidgetOverlay(_ref) {
       onMouseOver = _ref.onMouseOver,
       onMouseOut = _ref.onMouseOut,
       hasMouseOver = _ref.hasMouseOver;
-  return _jsx('div', {
-    className: 'relative overlay',
-    style: { cursor: 'pointer' },
-    onMouseEnter: function onMouseEnter() {
-      return onMouseOver('widget', widget.id);
+  return _react2.default.createElement(
+    'div',
+    {
+      className: 'relative overlay',
+      style: { cursor: 'pointer' },
+      onMouseEnter: function onMouseEnter() {
+        return onMouseOver('widget', widget.id);
+      },
+      onMouseLeave: function onMouseLeave() {
+        return onMouseOut('widget');
+      }
     },
-    onMouseLeave: function onMouseLeave() {
-      return onMouseOut('widget');
-    }
-  }, void 0, children, hasMouseOver ? _jsx('div', {
-    className: 'h1 rounded z1 border border-pagenta px2',
-    style: overlayStyle
-  }, void 0, _jsx('div', {
-    className: 'table full-height col-12 center'
-  }, void 0, _jsx('div', {
-    className: 'white table-cell align-middle'
-  }, void 0, _jsx('button', {
-    className: 'btn m1 btn-edit',
-    onClick: onEdit,
-    title: 'Editar'
-  }, void 0, _ref2), _jsx('button', {
-    className: 'btn m1 btn-remove',
-    onClick: onDelete,
-    title: 'Remover'
-  }, void 0, _ref3)))) : null);
+    children,
+    hasMouseOver ? _react2.default.createElement(
+      'div',
+      { className: 'h1 rounded z1 border border-pagenta px2', style: overlayStyle },
+      _react2.default.createElement(
+        'div',
+        { className: 'table full-height col-12 center' },
+        _react2.default.createElement(
+          'div',
+          { className: 'white table-cell align-middle' },
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'btn m1 btn-edit',
+              onClick: onEdit,
+              title: 'Editar'
+            },
+            _react2.default.createElement('i', { className: 'fa fa-edit' })
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'btn m1 btn-remove',
+              onClick: onDelete,
+              title: 'Remover'
+            },
+            _react2.default.createElement('i', { className: 'fa fa-trash' })
+          )
+        )
+      )
+    ) : null
+  );
+};
+
+WidgetOverlay.propTypes = {
+  widget: _propTypes2.default.object,
+  onClick: _propTypes2.default.func,
+  // Injected by react-redux
+  hasMouseOver: _propTypes2.default.bool,
+  onMouseOver: _propTypes2.default.func,
+  onMouseOut: _propTypes2.default.func
 };
 
 exports.default = WidgetOverlay;
@@ -22748,8 +24165,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -22775,8 +24190,6 @@ var _config = __webpack_require__("./mobrender/widgets/config.js");
 var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _ref2 = _jsx(_await.Loading, {});
 
 var Widget = function Widget(_ref) {
   var saving = _ref.saving,
@@ -22805,26 +24218,44 @@ var Widget = function Widget(_ref) {
 
   var widgetComponent = _react2.default.createElement(Component, { mobilization: mobilization, block: block, widget: widget, update: update, editable: editable });
 
-  return _jsx('div', {
-    className: className
-  }, void 0, saving && _ref2, editable && redirect ? _jsx(_widgetOverlay2.default, {
-    widget: widget,
-    onEdit: function onEdit() {
-      return history.push(redirect);
-    },
-    onDelete: function onDelete() {
-      var message = intl.formatMessage({
-        id: 'c--content-widget.delete-widget.confirm.message',
-        defaultMessage: 'Deseja remover o widget?'
-      });
-      if (window.confirm(message)) {
-        update(_extends({}, widget, {
-          settings: undefined,
-          kind: 'draft'
-        }));
-      }
-    }
-  }, void 0, widgetComponent) : !editable && widget.kind === 'draft' ? null : widgetComponent);
+  return _react2.default.createElement(
+    'div',
+    { className: className },
+    saving && _react2.default.createElement(_await.Loading, null),
+    editable && redirect ? _react2.default.createElement(
+      _widgetOverlay2.default,
+      {
+        widget: widget,
+        onEdit: function onEdit() {
+          return history.push(redirect);
+        },
+        onDelete: function onDelete() {
+          var message = intl.formatMessage({
+            id: 'c--content-widget.delete-widget.confirm.message',
+            defaultMessage: 'Deseja remover o widget?'
+          });
+          if (window.confirm(message)) {
+            update(_extends({}, widget, {
+              settings: undefined,
+              kind: 'draft'
+            }));
+          }
+        }
+      },
+      widgetComponent
+    ) : !editable && widget.kind === 'draft' ? null : widgetComponent
+  );
+};
+
+Widget.propTypes = {
+  mobilization: _propTypes2.default.object,
+  widget: _propTypes2.default.object.isRequired,
+  editable: _propTypes2.default.bool,
+  // Injected by redux
+  update: _propTypes2.default.func.isRequired,
+  saving: _propTypes2.default.bool,
+  // Injected by react-intl
+  intl: _reactIntl.intlShape.isRequired
 };
 
 exports.default = Widget;
@@ -25210,8 +26641,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -25232,20 +26661,34 @@ var DraftButton = function DraftButton(_ref) {
       updateKind = _ref.updateKind,
       props = _objectWithoutProperties(_ref, ['icon', 'label', 'updateKind']);
 
-  return _jsx('div', {
-    className: 'draft-widget-button col col-4 p1'
-  }, void 0, _jsx('button', {
-    className: 'btn col-12',
-    onClick: function onClick() {
-      return updateKind(props);
-    }
-  }, void 0, _jsx('span', {
-    className: 'content'
-  }, void 0, _jsx('i', {
-    className: 'fa fa-' + icon + ' block white'
-  }), _jsx('span', {
-    className: 'text'
-  }, void 0, label))));
+  return _react2.default.createElement(
+    'div',
+    { className: 'draft-widget-button col col-4 p1' },
+    _react2.default.createElement(
+      'button',
+      { className: 'btn col-12', onClick: function onClick() {
+          return updateKind(props);
+        } },
+      _react2.default.createElement(
+        'span',
+        { className: 'content' },
+        _react2.default.createElement('i', { className: 'fa fa-' + icon + ' block white' }),
+        _react2.default.createElement(
+          'span',
+          { className: 'text' },
+          label
+        )
+      )
+    )
+  );
+};
+
+DraftButton.propTypes = {
+  label: _propTypes2.default.string.isRequired,
+  icon: _propTypes2.default.string.isRequired,
+  kind: _propTypes2.default.string.isRequired,
+  updateKind: _propTypes2.default.func.isRequired,
+  settings: _propTypes2.default.object
 };
 
 exports.default = DraftButton;
@@ -25268,8 +26711,6 @@ exports.default = DraftButton;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -25304,13 +26745,19 @@ var Draft = function Draft(_ref) {
     return w.kind !== 'draft';
   });
 
-  return _jsx('div', {
-    className: 'draft-widget widget center rounded lightgray clearfix'
-  }, void 0, widgetsConfig.map(function (wc, index) {
-    var props = Object.assign({}, wc);
-    delete props.component;
-    return _react2.default.createElement(_draftButton2.default, _extends({ key: 'wc-' + index, updateKind: updateKind }, props));
-  }));
+  return _react2.default.createElement(
+    'div',
+    { className: 'draft-widget widget center rounded lightgray clearfix' },
+    widgetsConfig.map(function (wc, index) {
+      var props = Object.assign({}, wc);
+      delete props.component;
+      return _react2.default.createElement(_draftButton2.default, _extends({ key: 'wc-' + index, updateKind: updateKind }, props));
+    })
+  );
+};
+
+Draft.propTypes = {
+  intl: _reactIntl.intlShape.isRequired
 };
 
 exports.default = (0, _reactIntl.injectIntl)(Draft);
@@ -25513,11 +26960,12 @@ networkInterface.use([{
     }
     // Non-use auth for authenticate mutation to make a new JWT Token
     var requiredAuth = req.request.operationName !== 'authenticate';
-
-    var localStorageAuth = window.localStorage.getItem('auth');
-    var auth = localStorageAuth ? JSON.parse(localStorageAuth) : {};
-    if (auth && auth.credentials && requiredAuth) {
-      req.options.headers.authorization = 'Bearer ' + auth.credentials['access-token'];
+    if (__webpack_require__("exenv").canUseDOM) {
+      var localStorageAuth = window.localStorage.getItem('auth');
+      var auth = localStorageAuth ? JSON.parse(localStorageAuth) : {};
+      if (auth && auth.credentials && requiredAuth) {
+        req.options.headers.authorization = 'Bearer ' + auth.credentials['access-token'];
+      }
     }
     next();
   }
@@ -25550,7 +26998,7 @@ function configureStore(initialState, thunkExtraArgument) {
 
   middlewares.push(client().middleware());
 
-  var store = (0, _redux.createStore)((0, _createReducer2.default)(), initialState, (0, _redux.compose)(_redux.applyMiddleware.apply(undefined, middlewares),  false ? _devTools2.default.instrument() : function (f) {
+  var store = (0, _redux.createStore)((0, _createReducer2.default)(), initialState, (0, _redux.compose)(_redux.applyMiddleware.apply(undefined, middlewares),  true ? _devTools2.default.instrument() : function (f) {
     return f;
   }));
 
@@ -25569,8 +27017,8 @@ function configureStore(initialState, thunkExtraArgument) {
     return Promise.reject(_extends({ response: response }, error));
   });
 
-  if (false) {
-    if (module.hot) {
+  if (true) {
+    if (false) {
       module.hot.accept('./createReducer', function () {
         return store.replaceReducer(require('./createReducer').default);
       });
@@ -25600,8 +27048,6 @@ exports.normalizer = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -25630,44 +27076,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var _ref2 = _jsx(_externalServices.Pagarme, {});
-
-var _ref3 = _jsx('p', {
-  className: 'mb3 lightgray'
-}, void 0, 'Altere os dados do seu cart\xE3o de cr\xE9dito preenchendo os campos abaixo. Sua doa\xE7\xE3o continuar\xE1 a mesma mas, a partir do momento em que salvar os dados abaixo, o valor ser\xE1 cobrado neste novo cart\xE3o ; )');
-
-var _ref4 = _jsx('b', {
-  className: 'block mb1'
-}, void 0, 'Dados do \xFAltimo cart\xE3o');
-
-var _ref5 = _jsx(_forms.ControlLabel, {}, void 0, 'N\xFAmero');
-
-var _ref6 = _jsx(_forms.FormControl, {
-  type: 'text',
-  placeholder: 'Ex: 0000 0000 0000 0000'
-});
-
-var _ref7 = _jsx(_forms.ControlLabel, {}, void 0, 'Nome');
-
-var _ref8 = _jsx(_forms.FormControl, {
-  type: 'text',
-  placeholder: '(igual ao que aparece no cart\xE3o)'
-});
-
-var _ref9 = _jsx(_forms.ControlLabel, {}, void 0, 'Validade');
-
-var _ref10 = _jsx(_forms.FormControl, {
-  type: 'text',
-  placeholder: '00/00'
-});
-
-var _ref11 = _jsx(_forms.ControlLabel, {}, void 0, 'CVV');
-
-var _ref12 = _jsx(_forms.FormControl, {
-  type: 'text',
-  placeholder: 'Ex: 000'
-});
-
 var CreditCardForm = function CreditCardForm(_ref) {
   var FormComponent = _ref.FormComponent,
       _ref$fields = _ref.fields,
@@ -25680,55 +27088,122 @@ var CreditCardForm = function CreditCardForm(_ref) {
       card = _ref.card,
       formProps = _objectWithoutProperties(_ref, ['FormComponent', 'fields', 'card']);
 
-  return _jsx('div', {}, void 0, _ref2, _react2.default.createElement(
-    FormComponent,
-    _extends({}, formProps, {
-      buttonText: 'Salvar'
-    }),
-    _jsx('input', {
-      type: 'hidden',
-      name: 'id',
-      value: id.value
-    }),
-    _jsx('input', {
-      type: 'hidden',
-      name: 'token',
-      value: token.value
-    }),
-    _ref3,
-    card && _jsx('div', {
-      className: 'mb3 lightgray'
-    }, void 0, _ref4, _jsx('div', {}, void 0, _jsx('span', {
-      className: 'caps'
-    }, void 0, card.brand, ': '), card.first_digits.slice(0, 4), ' ', card.first_digits.slice(4, 6), 'XX XXXX ', card.last_digits), _jsx('div', {}, void 0, 'Nome: ', _jsx('span', {
-      className: 'caps'
-    }, void 0, card.holder_name)), _jsx('div', {}, void 0, 'Validade: ', card.expiration_date.slice(0, 2), '/', card.expiration_date.slice(2, 4))),
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_externalServices.Pagarme, null),
     _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ className: 'mb2', controlId: 'creditcard' }, creditcard),
-      _ref5,
-      _ref6
-    ),
-    _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ className: 'mb2', controlId: 'name' }, name),
-      _ref7,
-      _ref8
-    ),
-    _jsx('div', {
-      className: 'clearfix col-12 mb3'
-    }, void 0, _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ className: 'col col-6', controlId: 'expiration' }, expiration),
-      _ref9,
-      _ref10
-    ), _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ className: 'col col-4 ml3', controlId: 'cvv' }, cvv),
-      _ref11,
-      _ref12
-    ))
-  ));
+      FormComponent,
+      _extends({}, formProps, {
+        buttonText: 'Salvar'
+      }),
+      _react2.default.createElement('input', { type: 'hidden', name: 'id', value: id.value }),
+      _react2.default.createElement('input', { type: 'hidden', name: 'token', value: token.value }),
+      _react2.default.createElement(
+        'p',
+        { className: 'mb3 lightgray' },
+        'Altere os dados do seu cart\xE3o de cr\xE9dito preenchendo os campos abaixo. Sua doa\xE7\xE3o continuar\xE1 a mesma mas, a partir do momento em que salvar os dados abaixo, o valor ser\xE1 cobrado neste novo cart\xE3o ; )'
+      ),
+      card && _react2.default.createElement(
+        'div',
+        { className: 'mb3 lightgray' },
+        _react2.default.createElement(
+          'b',
+          { className: 'block mb1' },
+          'Dados do \xFAltimo cart\xE3o'
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'span',
+            { className: 'caps' },
+            card.brand,
+            ': '
+          ),
+          card.first_digits.slice(0, 4),
+          ' ',
+          card.first_digits.slice(4, 6),
+          'XX XXXX ',
+          card.last_digits
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          'Nome: ',
+          _react2.default.createElement(
+            'span',
+            { className: 'caps' },
+            card.holder_name
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          'Validade: ',
+          card.expiration_date.slice(0, 2),
+          '/',
+          card.expiration_date.slice(2, 4)
+        )
+      ),
+      _react2.default.createElement(
+        _forms.FormGroup,
+        _extends({ className: 'mb2', controlId: 'creditcard' }, creditcard),
+        _react2.default.createElement(
+          _forms.ControlLabel,
+          null,
+          'N\xFAmero'
+        ),
+        _react2.default.createElement(_forms.FormControl, {
+          type: 'text',
+          placeholder: 'Ex: 0000 0000 0000 0000'
+        })
+      ),
+      _react2.default.createElement(
+        _forms.FormGroup,
+        _extends({ className: 'mb2', controlId: 'name' }, name),
+        _react2.default.createElement(
+          _forms.ControlLabel,
+          null,
+          'Nome'
+        ),
+        _react2.default.createElement(_forms.FormControl, {
+          type: 'text',
+          placeholder: '(igual ao que aparece no cart\xE3o)'
+        })
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'clearfix col-12 mb3' },
+        _react2.default.createElement(
+          _forms.FormGroup,
+          _extends({ className: 'col col-6', controlId: 'expiration' }, expiration),
+          _react2.default.createElement(
+            _forms.ControlLabel,
+            null,
+            'Validade'
+          ),
+          _react2.default.createElement(_forms.FormControl, {
+            type: 'text',
+            placeholder: '00/00'
+          })
+        ),
+        _react2.default.createElement(
+          _forms.FormGroup,
+          _extends({ className: 'col col-4 ml3', controlId: 'cvv' }, cvv),
+          _react2.default.createElement(
+            _forms.ControlLabel,
+            null,
+            'CVV'
+          ),
+          _react2.default.createElement(_forms.FormControl, {
+            type: 'text',
+            placeholder: 'Ex: 000'
+          })
+        )
+      )
+    )
+  );
 };
 
 var fields = ['id', 'token', 'creditcard', 'name', 'expiration', 'cvv'];
@@ -25750,6 +27225,17 @@ var abstractValidate = function abstractValidate(values) {
   return errors;
 };
 
+CreditCardForm.propTypes = {
+  FormComponent: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]).isRequired,
+  card: _propTypes2.default.shape({
+    brand: _propTypes2.default.string.isRequired,
+    first_digits: _propTypes2.default.string.isRequired,
+    last_digits: _propTypes2.default.string.isRequired,
+    holder_name: _propTypes2.default.string.isRequired,
+    expiration_date: _propTypes2.default.string.isRequired
+  })
+};
+
 var normalizer = exports.normalizer = {
   creditcard: normalizers.creditcard,
   expiration: normalizers.date.mmyy,
@@ -25757,10 +27243,10 @@ var normalizer = exports.normalizer = {
   name: normalizers.string.onlyWords
 };
 
-exports.default = function (_ref13) {
-  var validate = _ref13.validate,
-      mapStateToProps = _ref13.mapStateToProps,
-      mapDispatchToProps = _ref13.mapDispatchToProps;
+exports.default = function (_ref2) {
+  var validate = _ref2.validate,
+      mapStateToProps = _ref2.mapStateToProps,
+      mapDispatchToProps = _ref2.mapDispatchToProps;
   return (0, _reduxForm.reduxForm)({
     form: 'creditCardForm',
     fields: fields,
@@ -25782,8 +27268,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.normalizer = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
 
 var _propTypes = __webpack_require__("prop-types");
 
@@ -25817,19 +27301,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var _ref2 = _jsx(_externalServices.Pagarme, {});
-
-var _ref3 = _jsx('p', {
-  className: 'mb3 lightgray'
-}, void 0, 'Preencha os campos abaixo para alterar a data em que a cobran\xE7a da sua doa\xE7\xE3o \xE9 efetuada. Sua doa\xE7\xE3o continuar\xE1 a mesma mas, a partir do momento em que salvar os dados abaixo, o valor ser\xE1 cobrado neste novo cart\xE3o ; )');
-
-var _ref4 = _jsx(_forms.ControlLabel, {}, void 0, 'Nova data de cobran\xE7a');
-
-var _ref5 = _jsx(_forms.FormControl, {
-  type: 'text',
-  placeholder: 'Ex: DD/MM/AAAA'
-});
-
 var RecurringForm = function RecurringForm(_ref) {
   var FormComponent = _ref.FormComponent,
       _ref$fields = _ref.fields,
@@ -25838,29 +27309,37 @@ var RecurringForm = function RecurringForm(_ref) {
       processAt = _ref$fields.process_at,
       formProps = _objectWithoutProperties(_ref, ['FormComponent', 'fields']);
 
-  return _jsx('div', {}, void 0, _ref2, _react2.default.createElement(
-    FormComponent,
-    _extends({}, formProps, {
-      buttonText: 'Salvar'
-    }),
-    _jsx('input', {
-      type: 'hidden',
-      name: 'id',
-      value: id.value
-    }),
-    _jsx('input', {
-      type: 'hidden',
-      name: 'token',
-      value: token.value
-    }),
-    _ref3,
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_externalServices.Pagarme, null),
     _react2.default.createElement(
-      _forms.FormGroup,
-      _extends({ className: 'mb2', controlId: 'processAt' }, processAt),
-      _ref4,
-      _ref5
+      FormComponent,
+      _extends({}, formProps, {
+        buttonText: 'Salvar'
+      }),
+      _react2.default.createElement('input', { type: 'hidden', name: 'id', value: id.value }),
+      _react2.default.createElement('input', { type: 'hidden', name: 'token', value: token.value }),
+      _react2.default.createElement(
+        'p',
+        { className: 'mb3 lightgray' },
+        'Preencha os campos abaixo para alterar a data em que a cobran\xE7a da sua doa\xE7\xE3o \xE9 efetuada. Sua doa\xE7\xE3o continuar\xE1 a mesma mas, a partir do momento em que salvar os dados abaixo, o valor ser\xE1 cobrado neste novo cart\xE3o ; )'
+      ),
+      _react2.default.createElement(
+        _forms.FormGroup,
+        _extends({ className: 'mb2', controlId: 'processAt' }, processAt),
+        _react2.default.createElement(
+          _forms.ControlLabel,
+          null,
+          'Nova data de cobran\xE7a'
+        ),
+        _react2.default.createElement(_forms.FormControl, {
+          type: 'text',
+          placeholder: 'Ex: DD/MM/AAAA'
+        })
+      )
     )
-  ));
+  );
 };
 
 var fields = ['id', 'token', 'process_at'];
@@ -25875,14 +27354,18 @@ var abstractValidate = function abstractValidate(values) {
   return errors;
 };
 
+RecurringForm.propTypes = {
+  FormComponent: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]).isRequired
+};
+
 var normalizer = exports.normalizer = {
   process_at: normalizers.date.ddmmyyyy
 };
 
-exports.default = function (_ref6) {
-  var validate = _ref6.validate,
-      mapStateToProps = _ref6.mapStateToProps,
-      mapDispatchToProps = _ref6.mapDispatchToProps;
+exports.default = function (_ref2) {
+  var validate = _ref2.validate,
+      mapStateToProps = _ref2.mapStateToProps,
+      mapDispatchToProps = _ref2.mapDispatchToProps;
   return (0, _reduxForm.reduxForm)({
     form: 'recurringForm',
     fields: fields,
@@ -26794,12 +28277,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-/*
- * Component: Button
- */
-
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -26819,6 +28296,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./ux/components/button/styles.scss");
 
 // TODO: Change to style component
+
+/*
+ * Component: Button
+ */
 var basscss = 'ux--button btn white caps p2 rounded h4 ml2';
 
 var Button = function Button(_ref) {
@@ -26832,24 +28313,38 @@ var Button = function Button(_ref) {
   var isSubmit = type !== 'submit';
   var className = (0, _classnames2.default)(basscss, isSubmit ? 'bg-gray' : 'bg-pagenta', disabled ? 'disabled' : null);
 
-  if (href) return _jsx('a', {
-    href: href,
-    className: className,
-    target: '_blank'
-  }, void 0, children);
-  if (to) return _jsx(_reactRouterDom.Link, {
-    to: to,
-    className: className
-  }, void 0, children);
+  if (href) return _react2.default.createElement(
+    'a',
+    { href: href, className: className, target: '_blank' },
+    children
+  );
+  if (to) return _react2.default.createElement(
+    _reactRouterDom.Link,
+    { to: to, className: className },
+    children
+  );
 
-  return _jsx('button', {
-    type: type,
-    onClick: function onClick(e) {
-      return isSubmit && _onClick(e);
+  return _react2.default.createElement(
+    'button',
+    {
+      type: type,
+      onClick: function onClick(e) {
+        return isSubmit && _onClick(e);
+      },
+      disabled: disabled,
+      className: className
     },
-    disabled: disabled,
-    className: className
-  }, void 0, children);
+    children
+  );
+};
+
+Button.propTypes = {
+  type: _propTypes2.default.oneOf(['submit', 'button']),
+  disabled: _propTypes2.default.bool,
+  // Navigation
+  to: _propTypes2.default.string,
+  onClick: _propTypes2.default.func,
+  href: _propTypes2.default.string
 };
 
 Button.defaultProps = {
@@ -26877,8 +28372,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _react = __webpack_require__("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -26893,33 +28386,43 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./ux/components/dialog/styles.scss");
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'ux.components--dialog.button.confirm.text',
-  defaultMessage: 'Confirmar'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'ux.components--dialog.button.cancel.text',
-  defaultMessage: 'Cancelar'
-});
-
 var Dialog = function Dialog(_ref) {
   var children = _ref.children,
       onConfirm = _ref.onConfirm,
       onCancel = _ref.onCancel;
-  return _jsx('div', {
-    className: 'dialog--out'
-  }, void 0, _jsx('div', {
-    className: 'dialog'
-  }, void 0, _jsx('div', {
-    className: 'content--dialog'
-  }, void 0, children), _jsx('div', {
-    className: 'footer--dialog'
-  }, void 0, _jsx(_button2.default, {
-    onClick: onConfirm
-  }, void 0, _ref2), _jsx(_button2.default, {
-    onClick: onCancel
-  }, void 0, _ref3))));
+  return _react2.default.createElement(
+    'div',
+    { className: 'dialog--out' },
+    _react2.default.createElement(
+      'div',
+      { className: 'dialog' },
+      _react2.default.createElement(
+        'div',
+        { className: 'content--dialog' },
+        children
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'footer--dialog' },
+        _react2.default.createElement(
+          _button2.default,
+          { onClick: onConfirm },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'ux.components--dialog.button.confirm.text',
+            defaultMessage: 'Confirmar'
+          })
+        ),
+        _react2.default.createElement(
+          _button2.default,
+          { onClick: onCancel },
+          _react2.default.createElement(_reactIntl.FormattedMessage, {
+            id: 'ux.components--dialog.button.cancel.text',
+            defaultMessage: 'Cancelar'
+          })
+        )
+      )
+    )
+  );
 };
 
 exports.default = Dialog;
@@ -26943,13 +28446,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-/*
- * Component: DivFloat
- * Description: Become children floatable, by default float in top and right.
- */
-
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -26964,6 +28460,10 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*
+ * Component: DivFloat
+ * Description: Become children floatable, by default float in top and right.
+ */
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./ux/components/div-float/styles.scss");
 
 var DivFloat = function DivFloat(_ref) {
@@ -26971,9 +28471,16 @@ var DivFloat = function DivFloat(_ref) {
       horizontal = _ref.horizontal,
       vertical = _ref.vertical;
 
-  return _jsx('div', {
-    className: (0, _classnames2.default)('float', horizontal, vertical)
-  }, void 0, children);
+  return _react2.default.createElement(
+    'div',
+    { className: (0, _classnames2.default)('float', horizontal, vertical) },
+    children
+  );
+};
+
+DivFloat.propTypes = {
+  horizontal: _propTypes2.default.oneOf(['right', 'left']),
+  vertical: _propTypes2.default.oneOf(['top', 'bottom'])
 };
 
 DivFloat.defaultProps = {
@@ -27018,8 +28525,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -27062,23 +28567,33 @@ var FlatForm = function FlatForm(_ref) {
       nosubmit: true,
       className: (0, _classnames2.default)('ux--flat-form', formClassNames)
     }),
-    titleText && _jsx('h1', {
-      className: (0, _classnames2.default)({
-        'sm-margin': titleSmallMargin,
-        'md-margin': titleMediumMargin,
-        'lg-margin': titleBigMargin
-      })
-    }, void 0, titleText),
+    titleText && _react2.default.createElement(
+      'h1',
+      { className: (0, _classnames2.default)({
+          'sm-margin': titleSmallMargin,
+          'md-margin': titleMediumMargin,
+          'lg-margin': titleBigMargin
+        }) },
+      titleText
+    ),
     children,
-    hideButton && _jsx('button', {
-      type: 'submit',
-      style: { display: 'none' }
-    }),
-    !hideButton && _jsx(_.Button, {
-      type: 'submit',
-      disabled: !formProps.valid
-    }, void 0, buttonText)
+    hideButton && _react2.default.createElement('button', { type: 'submit', style: { display: 'none' } }),
+    !hideButton && _react2.default.createElement(
+      _.Button,
+      { type: 'submit', disabled: !formProps.valid },
+      buttonText
+    )
   );
+};
+
+FlatForm.propTypes = {
+  formClassNames: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
+  children: _propTypes2.default.node.isRequired,
+  buttonText: _propTypes2.default.string.isRequired,
+  titleText: _propTypes2.default.string,
+  titleSmallMargin: _propTypes2.default.bool,
+  titleMediumMargin: _propTypes2.default.bool,
+  titleBigMargin: _propTypes2.default.bool
 };
 
 exports.default = FlatForm;
@@ -27156,8 +28671,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
-
 var _propTypes = __webpack_require__("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -27185,16 +28698,6 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 // Dependency module
 
 
-var _ref2 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'ux.components--settings-form.button.text',
-  defaultMessage: 'Salvar'
-});
-
-var _ref3 = _jsx(_reactIntl.FormattedMessage, {
-  id: 'ux.components--settings-form.success-message',
-  defaultMessage: 'Dados editados com sucesso'
-});
-
 var SettingsForm = function SettingsForm(_ref) {
   var children = _ref.children,
       buttonText = _ref.buttonText,
@@ -27205,13 +28708,33 @@ var SettingsForm = function SettingsForm(_ref) {
     _forms.FormRedux,
     _extends({ nosubmit: true }, formProps),
     children,
-    _jsx(_divFloat2.default, {}, void 0, _jsx(_button2.default, {
-      type: 'submit',
-      disabled: formProps.submitting
-    }, void 0, buttonText || _ref2), _jsx(_forms.SuccessMessage, {
-      text: successMessage || _ref3
-    }))
+    _react2.default.createElement(
+      _divFloat2.default,
+      null,
+      _react2.default.createElement(
+        _button2.default,
+        {
+          type: 'submit',
+          disabled: formProps.submitting
+        },
+        buttonText || _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'ux.components--settings-form.button.text',
+          defaultMessage: 'Salvar'
+        })
+      ),
+      _react2.default.createElement(_forms.SuccessMessage, {
+        text: successMessage || _react2.default.createElement(_reactIntl.FormattedMessage, {
+          id: 'ux.components--settings-form.success-message',
+          defaultMessage: 'Dados editados com sucesso'
+        })
+      })
+    )
   );
+};
+
+SettingsForm.propTypes = {
+  buttonText: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object]),
+  successMessage: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object])
 };
 
 exports.default = SettingsForm;
