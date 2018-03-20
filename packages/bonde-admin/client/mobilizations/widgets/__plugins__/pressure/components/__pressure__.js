@@ -35,7 +35,9 @@ export class Pressure extends Component {
   }
 
   componentWillMount () {
-    if (pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE) {
+    const isPressurePhone = pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE
+    const hasCounter = !!this.props.widget.settings.count_text
+    if (hasCounter && isPressurePhone) {
       graphqlClient().query({
         query: graphqlQueries.CountTwilioCallsByWidget,
         variables: { widgetId: this.props.widget.id }
