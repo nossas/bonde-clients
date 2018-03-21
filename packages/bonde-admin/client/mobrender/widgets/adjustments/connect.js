@@ -42,13 +42,14 @@ const validate = (values, { intl }) => {
   return errors
 }
 
-export const adjustmentsFormExtend = ({ fields, ...config }) => ModelForm({
-  form: 'adjustmentsForm',
+export const adjustmentsFormExtend = ({ fields, formName, ...config }) => ModelForm({
+  form: formName,
   fields: adjustFields(fields),
   ...config
 })
 
-export const adjustmentsForm = adjustmentsFormExtend({
+export const adjustmentsForm = ({ formName }) => adjustmentsFormExtend({
+  formName,
   mapInitialValues: (widget) => ({
     // Fix field to config title on widget
     call_to_action: widget.settings
