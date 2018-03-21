@@ -77,6 +77,17 @@ export default (mobilization, widget, { intl }) => [
       id: 'widgets.config--donation.label',
       defaultMessage: 'Doação'
     }),
+    settings: {
+      main_color: '#54d0f6',
+      title_text: intl.formatMessage({
+        id: 'widgets.components--donation.default.title-text',
+        defaultMessage: 'Clique para configurar seu bloco de doação'
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.components--donation.default.button-text',
+        defaultMessage: 'Doar agora'
+      })
+    },
     redirect: Paths.donation(mobilization.id, widget.id)
   }
 ]

@@ -21,5 +21,9 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  injectIntl(adjustmentsForm(AdjustmentsSettingsForm))
+  injectIntl(
+    adjustmentsForm({ formName: 'pressureAdjustsForm' })(
+      AdjustmentsSettingsForm
+    )
+  )
 )
