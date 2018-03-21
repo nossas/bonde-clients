@@ -18,11 +18,20 @@ const middlewares = [
 ]
 
 export default (initialState, options) => {
+  const request = {
+    host: '',
+    protocol: 'http'
+  }
+
+  if (options && options.req && options.req.headers) {
+    const { headers } = options.req
+    request.host = headers.host || request.host
+    request.protocol = (headers['x-forwarded-proto'] && 'https') || request.protocol
+  }
+
   return createStore(
     createReducer({
-      sourceRequest: sourceReqCreateReducer({
-        host: (options && options.req && options.req.headers.host) || ''
-      })
+      sourceRequest: sourceReqCreateReducer(request)
     }),
     initialState,
     compose(
