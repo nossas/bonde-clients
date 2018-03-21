@@ -2,6 +2,63 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/nossas/bonde-client/compare/v0.8.11...v0.9.0) (2018-03-21)
+
+
+### Bug Fixes
+
+* phone pressure call state manager box height ([6df8f2d](https://github.com/nossas/bonde-client/commit/6df8f2d))
+* **adjustsForm:** config unique name for each adjustment form ([00c95ba](https://github.com/nossas/bonde-client/commit/00c95ba))
+* **bonde-public:** set source request protocol to redux state ([a49d782](https://github.com/nossas/bonde-client/commit/a49d782))
+* **bonde-styleguide:** mobilization colorful icon ([12ff677](https://github.com/nossas/bonde-client/commit/12ff677))
+* **donationWidget:** config adjusts fields like default to save api ([a150f98](https://github.com/nossas/bonde-client/commit/a150f98))
+* **webviewer:** check client-side render ([7f43549](https://github.com/nossas/bonde-client/commit/7f43549))
+
+
+### Features
+
+* **bonde-styleguide:** add addons-knobs ([012d3ec](https://github.com/nossas/bonde-client/commit/012d3ec))
+* **bonde-styleguide:** add card centralized content [[#154769299](https://github.com/nossas/bonde-client/issues/154769299)] ([d2bad12](https://github.com/nossas/bonde-client/commit/d2bad12))
+* **bonde-styleguide:** add Feed component ([4a5de76](https://github.com/nossas/bonde-client/commit/4a5de76)), closes [#154769299](https://github.com/nossas/bonde-client/issues/154769299)
+* **bonde-styleguide:** add footer ([8eaabb9](https://github.com/nossas/bonde-client/commit/8eaabb9))
+* **bonde-styleguide:** add grid Row and Cell components [[#154769299](https://github.com/nossas/bonde-client/issues/154769299)] ([d194e41](https://github.com/nossas/bonde-client/commit/d194e41))
+* **bonde-styleguide:** add image option to Card component [[#154769299](https://github.com/nossas/bonde-client/issues/154769299)] ([baa0a36](https://github.com/nossas/bonde-client/commit/baa0a36))
+* **bonde-styleguide:** add List component [[#154769299](https://github.com/nossas/bonde-client/issues/154769299)] ([de9069d](https://github.com/nossas/bonde-client/commit/de9069d))
+* **bonde-styleguide:** add noavatar option to List component ([0ef5505](https://github.com/nossas/bonde-client/commit/0ef5505)), closes [#154769299](https://github.com/nossas/bonde-client/issues/154769299)
+* **bonde-styleguide:** add Progress component ([f242c05](https://github.com/nossas/bonde-client/commit/f242c05)), closes [#154769312](https://github.com/nossas/bonde-client/issues/154769312)
+* **bonde-styleguide:** add ProgressRanking component ([0df525b](https://github.com/nossas/bonde-client/commit/0df525b)), closes [#154769312](https://github.com/nossas/bonde-client/issues/154769312)
+* **bonde-styleguide:** add storybook addon-jsx to preview component code ([c443d92](https://github.com/nossas/bonde-client/commit/c443d92))
+* **bonde-styleguide:** add ThemeWrapper ([bafb0f2](https://github.com/nossas/bonde-client/commit/bafb0f2)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** install react-styleguidist ([969ce97](https://github.com/nossas/bonde-client/commit/969ce97)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate BrazilMap component ([27133d4](https://github.com/nossas/bonde-client/commit/27133d4)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Button component ([d26ad82](https://github.com/nossas/bonde-client/commit/d26ad82)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Card component ([aa994df](https://github.com/nossas/bonde-client/commit/aa994df)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate DataList component ([135a280](https://github.com/nossas/bonde-client/commit/135a280)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Dropdown components ([97f228d](https://github.com/nossas/bonde-client/commit/97f228d)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Feed component ([0c725a6](https://github.com/nossas/bonde-client/commit/0c725a6)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Footer component ([0cbc458](https://github.com/nossas/bonde-client/commit/0cbc458)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Form components ([a093bdb](https://github.com/nossas/bonde-client/commit/a093bdb)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Grid component ([3065eec](https://github.com/nossas/bonde-client/commit/3065eec)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Header components ([9a2f6db](https://github.com/nossas/bonde-client/commit/9a2f6db)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Icon component ([5f7bfca](https://github.com/nossas/bonde-client/commit/5f7bfca)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate IconColorful component ([b306579](https://github.com/nossas/bonde-client/commit/b306579)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Image component ([3dbe322](https://github.com/nossas/bonde-client/commit/3dbe322)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Layout components ([36d7d76](https://github.com/nossas/bonde-client/commit/36d7d76)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate List component ([9d3f532](https://github.com/nossas/bonde-client/commit/9d3f532)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Loading component ([475b037](https://github.com/nossas/bonde-client/commit/475b037)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Navbar components ([b1d6f2e](https://github.com/nossas/bonde-client/commit/b1d6f2e)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Number component ([82fef79](https://github.com/nossas/bonde-client/commit/82fef79)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Progress component ([8e4eb5d](https://github.com/nossas/bonde-client/commit/8e4eb5d)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate ProgressRanking component ([ade6141](https://github.com/nossas/bonde-client/commit/ade6141)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Tab component ([f08d7e7](https://github.com/nossas/bonde-client/commit/f08d7e7)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Tag component ([77c120b](https://github.com/nossas/bonde-client/commit/77c120b)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** migrate Title and Text components ([0a2b80a](https://github.com/nossas/bonde-client/commit/0a2b80a)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+* **bonde-styleguide:** stylize card webkit scrollbar [[#154769299](https://github.com/nossas/bonde-client/issues/154769299)] ([6118bbf](https://github.com/nossas/bonde-client/commit/6118bbf))
+* **bonde-styleguide:** switch build script to react-styleguidist ([9152f05](https://github.com/nossas/bonde-client/commit/9152f05)), closes [#155655811](https://github.com/nossas/bonde-client/issues/155655811)
+
+
+
 <a name="0.8.11"></a>
 ## [0.8.11](https://github.com/nossas/bonde-client/compare/v0.8.10...v0.8.11) (2018-03-08)
 
