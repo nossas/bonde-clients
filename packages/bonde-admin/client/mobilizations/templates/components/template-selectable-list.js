@@ -58,7 +58,7 @@ const TemplateSelectableList = props => {
               </button>
             </div>
           ) : undefined}
-          <div className={classnames(!handleGoBack ? 'col-12' : 'col-4 pl1')}>
+          <div className={classnames(!handleGoBack ? 'col-12' : 'col-8 pl1')}>
             <button
               disabled={!item}
               onClick={() => handleSelectItem(item)}
