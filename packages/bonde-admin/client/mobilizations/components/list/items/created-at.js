@@ -9,7 +9,7 @@ const CreatedAt = ({ created_at, createdAt }) => {
   return (
     <div className='created-at px3 col col-2'>
       {`${`${date.getDate()}`.padStart(2, '0')}`}
-      {`/${`${date.getMonth()+1}`.padStart(2, '0')}`}
+      {`/${`${date.getMonth() + 1}`.padStart(2, '0')}`}
       {`/${date.getFullYear()}`}
     </div>
   )
