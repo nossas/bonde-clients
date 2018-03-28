@@ -26,7 +26,7 @@ export default (initialState, options) => {
   if (options && options.req && options.req.headers) {
     const { headers } = options.req
     request.host = headers.host || request.host
-    request.protocol = (headers['x-forwarded-proto'] && 'https') || request.protocol
+    request.protocol = headers['x-forwarded-proto'] || request.protocol
   }
 
   return createStore(
