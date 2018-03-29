@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.1"></a>
+## [0.9.1](https://github.com/nossas/bonde-client/compare/v0.9.0...v0.9.1) (2018-03-29)
+
+
+### Bug Fixes
+
+* **bonde-public:** set protocol directly from x-forwarded-proto ([8bccafb](https://github.com/nossas/bonde-client/commit/8bccafb)), closes [#156319015](https://github.com/nossas/bonde-client/issues/156319015)
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/nossas/bonde-client/compare/v0.8.11...v0.9.0) (2018-03-21)
 
