@@ -3,11 +3,17 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 /* eslint-disable camelcase */
-const CreatedAt = ({ created_at, createdAt }) => (
-  <div className='created-at px3 col col-3'>
-    {new Date(Date.parse(created_at || createdAt)).toLocaleString()}
-  </div>
-)
+const CreatedAt = ({ created_at, createdAt }) => {
+  const date = new Date(Date.parse(created_at || createdAt))
+
+  return (
+    <div className='created-at px3 col col-2'>
+      {`${`${date.getDate()}`.padStart(2, '0')}`}
+      {`/${`${date.getMonth() + 1}`.padStart(2, '0')}`}
+      {`/${date.getFullYear()}`}
+    </div>
+  )
+}
 /* eslint-disable camelcase */
 
 CreatedAt.propTypes = {

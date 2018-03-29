@@ -1,12 +1,16 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 
-const AsyncFetch = () => (dispatch, getState, { api }) => {
+const AsyncFetch = community => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
+  const config = {
+    headers: credentials,
+    params: { community_id: community.id }
+  }
 
   dispatch({ type: t.REQUEST_TEMPLATE_FETCH })
   return api
-    .get('/templates', { headers: credentials })
+    .get('/templates', config)
     .then(({ status, data }) => {
       dispatch({ type: t.SUCCESS_TEMPLATE_FETCH, templates: data })
       return Promise.resolve()
