@@ -16,7 +16,8 @@ describe('~routes/admin/not-authenticated/account-register/page', () => {
       last_name: dummyField('last_name'),
       email: dummyField('email'),
       password: dummyField('password'),
-      password2: dummyField('password2')
+      password2: dummyField('password2'),
+      invitation_code: dummyField('invitation_code')
     },
     handleSubmit: () => {}
   }
