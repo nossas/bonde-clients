@@ -42,16 +42,18 @@ const SettingsMenu = ({ location, mobilization, widget }) => {
             />
           }
         />
-        <Tab
-          path={pressureAutofirePath}
-          isActive={pressureAutofirePath === location.pathname}
-          text={
-            <FormattedMessage
-              id='pressure-widget.components--settings-menu.items.autofire'
-              defaultMessage='Mensagem de agradecimento'
-            />
-          }
-        />
+        {widget.kind !== 'pressure-phone' && (
+          <Tab
+            path={pressureAutofirePath}
+            isActive={pressureAutofirePath === location.pathname}
+            text={
+              <FormattedMessage
+                id='pressure-widget.components--settings-menu.items.autofire'
+                defaultMessage='Mensagem de agradecimento'
+              />
+            }
+          />
+        )}
         <Tab
           path={pressureFinishPath}
           isActive={pressureFinishPath === location.pathname}

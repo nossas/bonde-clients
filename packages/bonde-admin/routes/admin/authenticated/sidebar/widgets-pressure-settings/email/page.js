@@ -52,6 +52,9 @@ class PressureSettingsEmailPage extends Component {
       intl,
       ...props
     } = this.props
+
+    const isPressureByPhone = props.widget.kind === 'pressure-phone'
+
     return (
       <SettingsForm
         {...props}
@@ -183,46 +186,50 @@ class PressureSettingsEmailPage extends Component {
             }
           />
         </div>
-        <FormGroup controlId='email-subject-id' {...pressureSubject}>
-          <ControlLabel>
-            <FormattedMessage
-              id='page--pressure-widget-email.form.email-subject.label'
-              defaultMessage='Assunto do email'
-            />
-          </ControlLabel>
-          <FormControl type='text' />
-        </FormGroup>
-        <FormGroup controlId='email-body-id' {...pressureBody}>
-          <ControlLabel>
-            <FormattedMessage
-              id='page--pressure-widget-email.form.email-body.label'
-              defaultMessage='Corpo do email que será enviado'
-            />
-          </ControlLabel>
-          <FormControl type='text' componentClass='textarea' rows='7' />
-        </FormGroup>
-        <FormGroup controlId='disable-edit-field-id' {...disableEditField}>
-          <ControlLabel>
-            <FormattedMessage
-              id='page--pressure-widget-email.form.disable-edit-field.label'
-              defaultMessage='Desabilitar edição de assunto e corpo do e-mail'
-            />
-          </ControlLabel>
-          <RadioGroup>
-            <Radio value='s'>
-              <FormattedMessage
-                id='page--pressure-widget-email.form.disable-edit-field.value.yes'
-                defaultMessage='Sim'
-              />
-            </Radio>
-            <Radio value='n'>
-              <FormattedMessage
-                id='page--pressure-widget-email.form.disable-edit-field.value.no'
-                defaultMessage='Não'
-              />
-            </Radio>
-          </RadioGroup>
-        </FormGroup>
+        {!isPressureByPhone && (
+          <React.Fragment>
+            <FormGroup controlId='email-subject-id' {...pressureSubject}>
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--pressure-widget-email.form.email-subject.label'
+                  defaultMessage='Assunto do email'
+                />
+              </ControlLabel>
+              <FormControl type='text' />
+            </FormGroup>
+            <FormGroup controlId='email-body-id' {...pressureBody}>
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--pressure-widget-email.form.email-body.label'
+                  defaultMessage='Corpo do email que será enviado'
+                />
+              </ControlLabel>
+              <FormControl type='text' componentClass='textarea' rows='7' />
+            </FormGroup>
+            <FormGroup controlId='disable-edit-field-id' {...disableEditField}>
+              <ControlLabel>
+                <FormattedMessage
+                  id='page--pressure-widget-email.form.disable-edit-field.label'
+                  defaultMessage='Desabilitar edição de assunto e corpo do e-mail'
+                />
+              </ControlLabel>
+              <RadioGroup>
+                <Radio value='s'>
+                  <FormattedMessage
+                    id='page--pressure-widget-email.form.disable-edit-field.value.yes'
+                    defaultMessage='Sim'
+                  />
+                </Radio>
+                <Radio value='n'>
+                  <FormattedMessage
+                    id='page--pressure-widget-email.form.disable-edit-field.value.no'
+                    defaultMessage='Não'
+                  />
+                </Radio>
+              </RadioGroup>
+            </FormGroup>
+          </React.Fragment>
+        )}
         <FormGroup controlId='show-city-field-id' {...showCity}>
           <ControlLabel>
             <FormattedMessage
