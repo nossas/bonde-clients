@@ -68,6 +68,7 @@ class PressureSettingsEmailPage extends Component {
       >
         <div className='form-group'>
           <InputTag
+            isPressureByPhone={isPressureByPhone}
             label={
               intl.formatMessage({
                 id: 'page--pressure-widget-email.form.input-tag.label',

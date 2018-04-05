@@ -53,7 +53,7 @@ export default (mobilization, widget, { intl }) => [
     icon: 'bullseye',
     label: intl.formatMessage({
       id: 'widgets.config--pressure.label',
-      defaultMessage: 'Pressão'
+      defaultMessage: 'Pressão por email'
     }),
     settings: {
       main_color: '#f23392',
@@ -66,6 +66,27 @@ export default (mobilization, widget, { intl }) => [
         defaultMessage: 'Enviar e-mail'
       })
       /* reply_email: user.email */
+    },
+    redirect: Paths.pressure(mobilization.id, widget.id)
+  },
+  {
+    component: Pressure,
+    kind: 'pressure-phone',
+    icon: 'bullseye',
+    label: intl.formatMessage({
+      id: 'widgets.config--pressure-phone.label',
+      defaultMessage: 'Pressão por telefone'
+    }),
+    settings: {
+      main_color: '#f23392',
+      title_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.title',
+        defaultMessage: 'Ligue para quem pode tomar essa decisão'
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.button-text',
+        defaultMessage: 'Ligar'
+      })
     },
     redirect: Paths.pressure(mobilization.id, widget.id)
   },
