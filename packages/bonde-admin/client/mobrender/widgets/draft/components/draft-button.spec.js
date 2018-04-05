@@ -10,7 +10,10 @@ describe('client/mobrender/widgets/draft/components/draft-button', () => {
     label: 'Texto',
     kind: 'content',
     settings: {},
-    updateKind: () => {}
+    updateKind: () => {},
+    widget: {
+      lg_size: 4
+    }
   }
 
   it('should render without crashed', () => {
