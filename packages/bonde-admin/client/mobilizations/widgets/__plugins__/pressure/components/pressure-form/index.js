@@ -466,6 +466,7 @@ class PressureForm extends Component {
                                 e.preventDefault()
                                 addTwilioCallMutation({
                                   widgetId: this.props.widget.id,
+                                  communityId: this.props.mobilization.community_id,
                                   from: this.state.phone,
                                   to: value
                                 })
@@ -497,6 +498,7 @@ class PressureForm extends Component {
                           e.preventDefault()
                           addTwilioCallMutation({
                             widgetId: this.props.widget.id,
+                            communityId: this.props.mobilization.community_id,
                             from: this.state.phone,
                             to: value
                           })
@@ -577,6 +579,7 @@ PressureForm.propTypes = {
   buttonText: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string,
+  mobilization: PropTypes.object,
   widget: PropTypes.object,
   changeParentState: PropTypes.func.isRequired,
   intl: intlShape

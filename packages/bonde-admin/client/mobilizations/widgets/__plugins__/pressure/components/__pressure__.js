@@ -111,6 +111,7 @@ export class Pressure extends Component {
 
         addTwilioCallMutation({
           widgetId: this.props.widget.id,
+          communityId: this.props.mobilization.community_id,
           from: data.phone,
           to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
         }).then(() => {
@@ -205,6 +206,7 @@ export class Pressure extends Component {
             <PressureForm
               disabled={disableEditField === 's'}
               widget={widget}
+              mobilization={mobilization}
               buttonText={(saving && !editable ? 'Enviando...' : buttonText)}
               buttonColor={mainColor}
               subject={pressureSubject}

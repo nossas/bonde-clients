@@ -3,12 +3,14 @@ import { gql } from 'react-apollo'
 export default gql`
   mutation addTwilioCall(
     $widgetId: Int!
+    $communityId: Int!
     $from: String!
     $to: String!
   ){
     addTwilioCall(input: {
       call: {
         widgetId: $widgetId
+        communityId: $communityId
         from: $from
         to: $to
       }
@@ -24,6 +26,7 @@ export default gql`
         data
         createdAt
         updatedAt
+        communityId
       }
     }
   }

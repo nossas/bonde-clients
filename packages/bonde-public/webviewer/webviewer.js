@@ -11201,28 +11201,36 @@ var ControlButtons = exports.ControlButtons = function (_Component) {
         'div',
         { className: (0, _classnames2.default)('control-buttons', formInline ? 'inline-block ml1' : 'flex flex-wrap mt1') },
         onCancel && _react2.default.createElement(
-          'button',
-          {
-            className: 'btn h3 col-4 ml2 white mt1 mb2 p2 rounded bg-gray',
-            onClick: onCancel
-          },
-          _react2.default.createElement(_reactIntl.FormattedMessage, {
-            id: 'components--control-buttons.cancel',
-            defaultMessage: 'Voltar'
+          'div',
+          { className: 'col-5 col mt1 mb2 px2' },
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'btn h3 white p2 rounded bg-gray col-12',
+              onClick: onCancel
+            },
+            _react2.default.createElement(_reactIntl.FormattedMessage, {
+              id: 'components--control-buttons.cancel',
+              defaultMessage: 'Voltar'
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: (0, _classnames2.default)(onCancel ? 'col-7' : 'col-12', 'col mt1 mb2 px2') },
+          _react2.default.createElement('input', {
+            type: 'submit',
+            className: (0, _classnames2.default)('btn h3 white p2 rounded col-12', !valid ? 'bg-gray95' : 'bg-pagenta'),
+            disabled: !valid || submitting || !dirty,
+            value: submitting ? intl.formatMessage({
+              id: 'components--control-buttons.input.value.saving',
+              defaultMessage: 'Salvando...'
+            }) : floatButton || intl.formatMessage({
+              id: 'components--control-buttons.input.value.default',
+              defaultMessage: 'Continuar'
+            })
           })
         ),
-        _react2.default.createElement('input', {
-          type: 'submit',
-          className: (0, _classnames2.default)('btn h3 mt1 mb2 white p2 rounded', !valid ? 'bg-gray95' : 'bg-pagenta', onCancel ? 'col-7 ml3' : 'col-12 mx2'),
-          disabled: !valid || submitting || !dirty,
-          value: submitting ? intl.formatMessage({
-            id: 'components--control-buttons.input.value.saving',
-            defaultMessage: 'Salvando...'
-          }) : floatButton || intl.formatMessage({
-            id: 'components--control-buttons.input.value.default',
-            defaultMessage: 'Continuar'
-          })
-        }),
         submitted && !!successMessage && _react2.default.createElement(
           'div',
           { className: 'success-message olive h4 px2 mt2' },
@@ -14513,7 +14521,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  mutation addTwilioCall(\n    $widgetId: Int!\n    $from: String!\n    $to: String!\n  ){\n    addTwilioCall(input: {\n      call: {\n        widgetId: $widgetId\n        from: $from\n        to: $to\n      }\n    }) {\n      twilioCall {\n        id\n        widgetId\n        activistId\n        twilioAccountSid\n        twilioCallSid\n        from\n        to\n        data\n        createdAt\n        updatedAt\n      }\n    }\n  }\n'], ['\n  mutation addTwilioCall(\n    $widgetId: Int!\n    $from: String!\n    $to: String!\n  ){\n    addTwilioCall(input: {\n      call: {\n        widgetId: $widgetId\n        from: $from\n        to: $to\n      }\n    }) {\n      twilioCall {\n        id\n        widgetId\n        activistId\n        twilioAccountSid\n        twilioCallSid\n        from\n        to\n        data\n        createdAt\n        updatedAt\n      }\n    }\n  }\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  mutation addTwilioCall(\n    $widgetId: Int!\n    $communityId: Int!\n    $from: String!\n    $to: String!\n  ){\n    addTwilioCall(input: {\n      call: {\n        widgetId: $widgetId\n        communityId: $communityId\n        from: $from\n        to: $to\n      }\n    }) {\n      twilioCall {\n        id\n        widgetId\n        activistId\n        twilioAccountSid\n        twilioCallSid\n        from\n        to\n        data\n        createdAt\n        updatedAt\n        communityId\n      }\n    }\n  }\n'], ['\n  mutation addTwilioCall(\n    $widgetId: Int!\n    $communityId: Int!\n    $from: String!\n    $to: String!\n  ){\n    addTwilioCall(input: {\n      call: {\n        widgetId: $widgetId\n        communityId: $communityId\n        from: $from\n        to: $to\n      }\n    }) {\n      twilioCall {\n        id\n        widgetId\n        activistId\n        twilioAccountSid\n        twilioCallSid\n        from\n        to\n        data\n        createdAt\n        updatedAt\n        communityId\n      }\n    }\n  }\n']);
 
 var _reactApollo = __webpack_require__("react-apollo");
 
@@ -18769,8 +18777,11 @@ var Pressure = exports.Pressure = function (_Component) {
             });
           };
 
+          console.log('[Pressure] this.props.mobilization', this.props.mobilization);
+
           addTwilioCallMutation({
             widgetId: this.props.widget.id,
+            communityId: this.props.mobilization.community_id,
             from: data.phone,
             to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
           }).then(function () {
@@ -18870,6 +18881,7 @@ var Pressure = exports.Pressure = function (_Component) {
             {
               disabled: disableEditField === 's',
               widget: widget,
+              mobilization: mobilization,
               buttonText: saving && !editable ? 'Enviando...' : buttonText,
               buttonColor: mainColor,
               subject: pressureSubject,
@@ -19367,6 +19379,8 @@ var PressureForm = function (_Component2) {
           callManagement = _state.callManagement;
 
 
+      console.log('[PressureForm] this.props.mobilization', this.props.mobilization);
+
       return _react2.default.createElement(
         'form',
         {
@@ -19751,6 +19765,7 @@ var PressureForm = function (_Component2) {
                                 e.preventDefault();
                                 addTwilioCallMutation({
                                   widgetId: _this5.props.widget.id,
+                                  communityId: _this5.props.mobilization.community_id,
                                   from: _this5.state.phone,
                                   to: value
                                 });
@@ -19792,6 +19807,7 @@ var PressureForm = function (_Component2) {
                           e.preventDefault();
                           addTwilioCallMutation({
                             widgetId: _this5.props.widget.id,
+                            communityId: _this5.props.mobilization.community_id,
                             from: _this5.state.phone,
                             to: value
                           });
@@ -20091,7 +20107,7 @@ var SettingsMenu = function SettingsMenu(_ref) {
           defaultMessage: 'E-mail para alvo'
         })
       }),
-      _react2.default.createElement(_tabs.Tab, {
+      widget.kind !== 'pressure-phone' && _react2.default.createElement(_tabs.Tab, {
         path: pressureAutofirePath,
         isActive: pressureAutofirePath === location.pathname,
         text: _react2.default.createElement(_reactIntl.FormattedMessage, {
@@ -21446,12 +21462,21 @@ var InputTag = exports.InputTag = function (_Component) {
 
       var _props2 = this.props,
           values = _props2.values,
+          isPressureByPhone = _props2.isPressureByPhone,
           label = _props2.label,
           onRemoveTag = _props2.onRemoveTag,
           onRemoveAll = _props2.onRemoveAll,
           helperText = _props2.helperText,
           intl = _props2.intl;
 
+
+      var defaultPlaceholder = !isPressureByPhone ? intl.formatMessage({
+        id: 'widgets.components--input-tag.insert-tag.placeholder',
+        defaultMessage: 'Nome do primeiro alvo <primeiro@alvo.com>\n' + 'Nome do segundo alvo <segundo@alvo.com>\n' + 'Nome do terceiro alvo <terceiro@alvo.com>\n' + 'Nome do quarto alvo <quarto@alvo.com>\n' + 'Nome do quinto alvo <quinto@alvo.com>\n' + '...'
+      }) : intl.formatMessage({
+        id: 'widgets.components--input-tag.insert-tag.placeholder-phone',
+        defaultMessage: 'Nome do primeiro alvo <+5511999999999>\n' + 'Nome do segundo alvo <+5521888888888>\n' + 'Nome do terceiro alvo <+5531777777777>\n' + 'Nome do quarto alvo <+5527999999999>\n' + '...'
+      });
 
       return _react2.default.createElement(
         'div',
@@ -21486,10 +21511,7 @@ var InputTag = exports.InputTag = function (_Component) {
                 id: 'insert-tag-id',
                 type: 'text',
                 rows: '7',
-                placeholder: intl.formatMessage({
-                  id: 'widgets.components--input-tag.insert-tag.placeholder',
-                  defaultMessage: 'Nome do primeiro alvo <primeiro@alvo.com>\n' + 'Nome do segundo alvo <segundo@alvo.com>\n' + 'Nome do terceiro alvo <terceiro@alvo.com>\n' + 'Nome do quarto alvo <quarto@alvo.com>\n' + 'Nome do quinto alvo <quinto@alvo.com>\n' + '...'
-                }),
+                placeholder: defaultPlaceholder,
                 className: (0, _classnames2.default)('input block h3 col-12 mt1 px1', styles.textarea),
                 value: this.state.value,
                 onChange: function onChange(e) {
@@ -26602,7 +26624,7 @@ exports.default = function (mobilization, widget, _ref) {
     icon: 'bullseye',
     label: intl.formatMessage({
       id: 'widgets.config--pressure.label',
-      defaultMessage: 'Pressão'
+      defaultMessage: 'Pressão por email'
     }),
     settings: {
       main_color: '#f23392',
@@ -26618,6 +26640,26 @@ exports.default = function (mobilization, widget, _ref) {
     },
     redirect: Paths.pressure(mobilization.id, widget.id)
   }, {
+    component: _plugins__.Pressure,
+    kind: 'pressure-phone',
+    icon: 'bullseye',
+    label: intl.formatMessage({
+      id: 'widgets.config--pressure-phone.label',
+      defaultMessage: 'Pressão por telefone'
+    }),
+    settings: {
+      main_color: '#f23392',
+      title_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.title',
+        defaultMessage: 'Ligue para quem pode tomar essa decisão'
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.button-text',
+        defaultMessage: 'Ligar'
+      })
+    },
+    redirect: Paths.pressure(mobilization.id, widget.id)
+  }, {
     component: _plugins__.Donation,
     kind: 'donation',
     icon: 'money',
@@ -26625,6 +26667,17 @@ exports.default = function (mobilization, widget, _ref) {
       id: 'widgets.config--donation.label',
       defaultMessage: 'Doação'
     }),
+    settings: {
+      main_color: '#54d0f6',
+      title_text: intl.formatMessage({
+        id: 'widgets.components--donation.default.title-text',
+        defaultMessage: 'Clique para configurar seu bloco de doação'
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.components--donation.default.button-text',
+        defaultMessage: 'Doar agora'
+      })
+    },
     redirect: Paths.donation(mobilization.id, widget.id)
   }];
 };
@@ -26659,23 +26712,24 @@ var DraftButton = function DraftButton(_ref) {
   var icon = _ref.icon,
       label = _ref.label,
       updateKind = _ref.updateKind,
-      props = _objectWithoutProperties(_ref, ['icon', 'label', 'updateKind']);
+      widget = _ref.widget,
+      props = _objectWithoutProperties(_ref, ['icon', 'label', 'updateKind', 'widget']);
 
   return _react2.default.createElement(
     'div',
     { className: 'draft-widget-button col col-4 p1' },
     _react2.default.createElement(
       'button',
-      { className: 'btn col-12', onClick: function onClick() {
+      { title: label, className: 'btn col-12', onClick: function onClick() {
           return updateKind(props);
         } },
       _react2.default.createElement(
         'span',
         { className: 'content' },
         _react2.default.createElement('i', { className: 'fa fa-' + icon + ' block white' }),
-        _react2.default.createElement(
+        widget.lg_size !== 3 && _react2.default.createElement(
           'span',
-          { className: 'text' },
+          null,
           label
         )
       )
@@ -26730,13 +26784,16 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./mobrender/widgets/draft/components/draft.scss");
 
 var Draft = function Draft(_ref) {
   var mobilization = _ref.mobilization,
       widget = _ref.widget,
       update = _ref.update,
-      intl = _ref.intl;
+      intl = _ref.intl,
+      extraProps = _objectWithoutProperties(_ref, ['mobilization', 'widget', 'update', 'intl']);
 
   var updateKind = function updateKind(props) {
     return update(_extends({}, widget, props));
@@ -26751,7 +26808,11 @@ var Draft = function Draft(_ref) {
     widgetsConfig.map(function (wc, index) {
       var props = Object.assign({}, wc);
       delete props.component;
-      return _react2.default.createElement(_draftButton2.default, _extends({ key: 'wc-' + index, updateKind: updateKind }, props));
+      return _react2.default.createElement(_draftButton2.default, _extends({
+        key: 'wc-' + index,
+        widget: widget,
+        updateKind: updateKind
+      }, props));
     })
   );
 };
