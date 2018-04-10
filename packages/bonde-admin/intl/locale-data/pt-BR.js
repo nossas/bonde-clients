@@ -147,6 +147,16 @@ export default {
   'page--community-list.or': '{link}',
   'page--community-list.new': 'Crie uma nova comunidade',
 
+  // page community twilio
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.connected.js
+  // routepath: /community/twilio
+  'page--community-twilio.info.title': 'Integração com o Twilio',
+  'page--community-twilio.info.content': 'Para pressionar por telefone, você precisa de uma conta no Twilio. ' +
+  'Se você ainda não tem uma conta lá, relaxe que é bem rápido para criar: ' +
+  '{link}, faça seu cadastro e crie um número de telefone no final.{linebreak}' +
+  'Com a conta criada, é só acessá-la e copiar os dados abaixo:',
+  'page--community-twilio.info.link': 'clique aqui',
+
   // component community settings menu
   // filepath: /client/community/components/settings-menu.js
   // routepath:
