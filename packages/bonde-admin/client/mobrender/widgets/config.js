@@ -5,6 +5,7 @@ import {
   Content,
   Donation
 } from '~client/mobilizations/widgets/__plugins__'
+import { PressureEmailIcon, PressurePhoneIcon } from './icons'
 import { createEditorContent } from '~client/mobilizations/widgets/__plugins__/content/components/editor-slate'
 import * as Paths from '~client/paths'
 
@@ -50,7 +51,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Pressure,
     kind: 'pressure',
-    icon: 'bullseye',
+    svgIcon: PressureEmailIcon,
     label: intl.formatMessage({
       id: 'widgets.config--pressure.label',
       defaultMessage: 'Pressão por email'
@@ -72,7 +73,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Pressure,
     kind: 'pressure-phone',
-    icon: 'bullseye',
+    svgIcon: PressurePhoneIcon,
     label: intl.formatMessage({
       id: 'widgets.config--pressure-phone.label',
       defaultMessage: 'Pressão por telefone'
