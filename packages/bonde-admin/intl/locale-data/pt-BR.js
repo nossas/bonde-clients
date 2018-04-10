@@ -1017,6 +1017,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.components--form-finish-message.preview.label': 'Preview',
   'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar sua mensagem de pós-ação.',
 
+  // page widgets pressure adjustments
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/adjustments/page.connected.js
+  'page--widgets-pressure--adjustmens.warning.title': 'Falta pouco!',
+  'page--widgets-pressure--adjustmens.warning.content': 'Para liberar a Pressão por Telefone, o Bonde se juntou com o Twilio, uma plataforma ' +
+  'online de comunicação. Pensa numa integração boa! Por isso, pra começar a causar por ' +
+  'telefone é preciso configurar uma conta Twilio na sua comunidade.{linebreak}' +
+  'Bora lá?',
+  'page--widges-pressure--adjustments-warning.button': 'Bora lá',
+
   // component share tell-a-friend
   // filepath: /client/components/share/tell-a-friend.js
   // routepath:
