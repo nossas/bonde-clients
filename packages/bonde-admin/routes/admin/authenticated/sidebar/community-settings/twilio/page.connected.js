@@ -52,14 +52,20 @@ const TwilioForm = createForm({
     }
 
     !isConfigPreexists && addTwilioConfiguration({ variables })
-      .then(res => dispatch(CommunityActions.setForcedSubmit(true)))
+      .then(res => {
+        dispatch(CommunityActions.setForcedSubmit(true))
+        return resolve()
+      })
       .catch(err => {
         console.error('err', err)
         reject(err)
       })
 
     isConfigPreexists && updateTwilioConfiguration({ variables })
-      .then(res => dispatch(CommunityActions.setForcedSubmit(true)))
+      .then(res => {
+        dispatch(CommunityActions.setForcedSubmit(true))
+        return resolve()
+      })
       .catch(err => {
         console.error('err', err)
         reject(err)
@@ -72,7 +78,7 @@ const TwilioForm = createForm({
 })
 
 const PageGraphQL = (props) => (
-  <TwilioForm i18nKeys={i18nKeys} initialValues={props.initialValues}>
+  <TwilioForm i18nKeys={i18nKeys} {...props}>
     <Field
       name='twilio_account_sid'
       type='text'
@@ -117,7 +123,7 @@ const HOCGraphQL = Component => connect((state) => ({
           twilio_number: config.twilioNumber
         }
         // Props passed to mount initialValues and submit action
-        return { initialValues, isConfigPreexists }
+        return { initialValues, isConfigPreexists, communityId: ownProps.communityId }
       }
     })
   )(Component)
