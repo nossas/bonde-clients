@@ -19184,7 +19184,7 @@ var RealtimeCallDuration = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.setState({ interval: setInterval(this.timer, 1000) });
+      this.setState({ interval: setInterval(this.timer.bind(this), 1000) });
     }
   }, {
     key: 'componentWillUnmount',
@@ -19682,9 +19682,12 @@ var PressureForm = function (_Component2) {
                         ),
                         _react2.default.createElement(
                           'div',
-                          { className: 'target-name' },
-                          name,
-                          _react2.default.createElement('br', null),
+                          { className: 'target-name-two' },
+                          _react2.default.createElement(
+                            'span',
+                            null,
+                            name
+                          ),
                           _react2.default.createElement(_reactIntl.FormattedMessage, {
                             id: 'pressure-widget.components--pressure-form.phone-calls.ringing',
                             defaultMessage: 'Chamada em andamento'

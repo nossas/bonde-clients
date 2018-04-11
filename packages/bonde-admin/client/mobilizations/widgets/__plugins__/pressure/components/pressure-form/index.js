@@ -37,7 +37,7 @@ class RealtimeCallDuration extends Component {
   }
 
   componentDidMount () {
-    this.setState({ interval: setInterval(this.timer, 1000) })
+    this.setState({ interval: setInterval(this.timer.bind(this), 1000) })
   }
 
   componentWillUnmount () {
@@ -417,8 +417,8 @@ class PressureForm extends Component {
                           <div>
                             <span className='fa fa-phone ring' />
                           </div>
-                          <div className='target-name'>
-                            {name}<br />
+                          <div className='target-name-two'>
+                            <span>{name}</span>
                             <FormattedMessage
                               id='pressure-widget.components--pressure-form.phone-calls.ringing'
                               defaultMessage='Chamada em andamento'
