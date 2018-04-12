@@ -1316,8 +1316,8 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
 
   'p--pressure-widget--input-tag.info.title': 'Cómo registrar objetivos',
   'p--pressure-widget--input-tag.info.text': 'El registro de objetivos es bien simple y puede ser de más de un objetivo a la vez. Tienes que separar los objetivos, en líneas distintas, y cada objetivo debe seguir el formato descrito abajo. Para registrar basta con presionsar {keyboardTrigger}. Y no te olvides de guardar después, haciendo click en el botón de la esquina superior derecha de la pantalla.',
-  'p--pressure-widget--input-tag.info.item.target-format': 'Formato del objetivo: {format} (es obligatorio usar los caracteres {lt} y {gt} para agrupar el correo)',
-  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nombre <correoelectrónico@provedor.com>',
+  'p--pressure-widget--input-tag.info.item.target-format': 'Formato del objetivo: {format} (es obligatorio usar los caracteres {lt} y {gt} para agrupar los objetivos)',
+  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nombre <{contactFormat}>',
   'p--pressure-widget--input-tag.info.item.special-chars': 'Para ambos tipos de presión es obligatorio el uso de los caracteres {lt} y {gt} para agrupar el correo electrónico o teléfono',
   'p--pressure-widget--input-tag.info.item.sorting': 'Los objetivos serán exhibidos en orden aleatorio en el widget de presión. O sea, cada vez que se acceda a la movilización, el orden de exhibición será diferente',
 

@@ -156,14 +156,17 @@ class PressureSettingsEmailPage extends Component {
                       id='p--pressure-widget--input-tag.info.item.target-format'
                       defaultMessage={
                         'Formato do alvo: {format} (obrigatório usar os caractéres ' +
-                        '{lt} e {gt} para agrupar o email)'
+                        '{lt} e {gt} para agrupar os alvos)'
                       }
                       values={{
                         format: (
                           <b>
                             <FormattedMessage
                               id='p--pressure-widget--input-tag.info.item.target-format.example'
-                              defaultMessage='Nome <email@provedor.com>'
+                              defaultMessage='Nome <{contactFormat}>'
+                              values={{
+                                contactFormat: isPressureByPhone ? '+5521999999999' : 'email@provedor.com'
+                              }}
                             />
                           </b>
                         ),
