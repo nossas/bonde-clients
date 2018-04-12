@@ -50,6 +50,7 @@
     "slate": "^0.32.1",
     "slate-editor": "~4.0",
     "slate-plain-serializer": "0.4.11",
+    "ssri": "^5.2.2",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
