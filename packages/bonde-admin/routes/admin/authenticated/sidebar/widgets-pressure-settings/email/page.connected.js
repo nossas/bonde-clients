@@ -13,7 +13,7 @@ import { messagePressureTargetsRemoveAll } from '~client/utils/notifications'
 import Page from './page'
 
 const mapStateToProps = (state, props) => {
-  const selectors = MobSelectors(state)
+  const selectors = MobSelectors(state, props)
   const widget = selectors.getWidget()
 
   return {
@@ -32,17 +32,19 @@ const mapDispatchToProps = (dispatch, props) => ({
   asyncWidgetUpdate: (...args) => dispatch(MobActions.asyncUpdateWidget(...args))
 })
 
-const validate = (values, { intl }) => {
+const validate = (values, { intl, widget }) => {
   const errors = {}
   const requiredMessage = intl.formatMessage({
     id: 'page--pressure-widget-email.form.validation.required',
     defaultMessage: 'Preenchimento obrigatório'
   })
 
-  if (!values.pressure_subject) {
+  const isPressureByPhone = widget.kind === 'pressure-phone'
+
+  if (!isPressureByPhone && !values.pressure_subject) {
     errors.pressure_subject = requiredMessage
   }
-  if (!values.pressure_body) {
+  if (!isPressureByPhone && !values.pressure_body) {
     errors.pressure_body = requiredMessage
   }
   return errors

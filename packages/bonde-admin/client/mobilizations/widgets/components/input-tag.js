@@ -52,7 +52,36 @@ export class InputTag extends Component {
   }
 
   render () {
-    const { values, label, onRemoveTag, onRemoveAll, helperText, intl } = this.props
+    const {
+      values,
+      isPressureByPhone,
+      label,
+      onRemoveTag,
+      onRemoveAll,
+      helperText,
+      intl
+    } = this.props
+
+    const defaultPlaceholder = !isPressureByPhone ? intl.formatMessage({
+      id: 'widgets.components--input-tag.insert-tag.placeholder',
+      defaultMessage: (
+        'Nome do primeiro alvo <primeiro@alvo.com>\n' +
+        'Nome do segundo alvo <segundo@alvo.com>\n' +
+        'Nome do terceiro alvo <terceiro@alvo.com>\n' +
+        'Nome do quarto alvo <quarto@alvo.com>\n' +
+        'Nome do quinto alvo <quinto@alvo.com>\n' +
+        '...'
+      )
+    }) : intl.formatMessage({
+      id: 'widgets.components--input-tag.insert-tag.placeholder-phone',
+      defaultMessage: (
+        'Nome do primeiro alvo <+5511999999999>\n' +
+        'Nome do segundo alvo <+5521888888888>\n' +
+        'Nome do terceiro alvo <+5531777777777>\n' +
+        'Nome do quarto alvo <+5527999999999>\n' +
+        '...'
+      )
+    })
 
     return (
       <div className='input-tag'>
@@ -75,19 +104,7 @@ export class InputTag extends Component {
                 id='insert-tag-id'
                 type='text'
                 rows='7'
-                placeholder={
-                  intl.formatMessage({
-                    id: 'widgets.components--input-tag.insert-tag.placeholder',
-                    defaultMessage: (
-                      'Nome do primeiro alvo <primeiro@alvo.com>\n' +
-                      'Nome do segundo alvo <segundo@alvo.com>\n' +
-                      'Nome do terceiro alvo <terceiro@alvo.com>\n' +
-                      'Nome do quarto alvo <quarto@alvo.com>\n' +
-                      'Nome do quinto alvo <quinto@alvo.com>\n' +
-                      '...'
-                    )
-                  })
-                }
+                placeholder={defaultPlaceholder}
                 className={classnames('input block h3 col-12 mt1 px1', styles.textarea)}
                 value={this.state.value}
                 onChange={(e) => this.setState({ value: e.target.value })}

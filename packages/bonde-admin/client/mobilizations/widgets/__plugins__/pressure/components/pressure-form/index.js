@@ -37,7 +37,7 @@ class RealtimeCallDuration extends Component {
   }
 
   componentDidMount () {
-    this.setState({ interval: setInterval(this.timer, 1000) })
+    this.setState({ interval: setInterval(this.timer.bind(this), 1000) })
   }
 
   componentWillUnmount () {
@@ -417,8 +417,8 @@ class PressureForm extends Component {
                           <div>
                             <span className='fa fa-phone ring' />
                           </div>
-                          <div className='target-name'>
-                            {name}<br />
+                          <div className='target-name-two'>
+                            <span>{name}</span>
                             <FormattedMessage
                               id='pressure-widget.components--pressure-form.phone-calls.ringing'
                               defaultMessage='Chamada em andamento'
@@ -466,6 +466,7 @@ class PressureForm extends Component {
                                 e.preventDefault()
                                 addTwilioCallMutation({
                                   widgetId: this.props.widget.id,
+                                  communityId: this.props.mobilization.community_id,
                                   from: this.state.phone,
                                   to: value
                                 })
@@ -497,6 +498,7 @@ class PressureForm extends Component {
                           e.preventDefault()
                           addTwilioCallMutation({
                             widgetId: this.props.widget.id,
+                            communityId: this.props.mobilization.community_id,
                             from: this.state.phone,
                             to: value
                           })
@@ -577,6 +579,7 @@ PressureForm.propTypes = {
   buttonText: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string,
+  mobilization: PropTypes.object,
   widget: PropTypes.object,
   changeParentState: PropTypes.func.isRequired,
   intl: intlShape

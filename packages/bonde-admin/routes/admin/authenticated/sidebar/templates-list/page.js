@@ -26,9 +26,9 @@ import {
 
 class TemplatesListPage extends React.Component {
   componentDidMount () {
-    const { loaded, asyncFetch, toggleMenu } = this.props
+    const { loaded, asyncFetch, toggleMenu, community } = this.props
 
-    !loaded && asyncFetch()
+    !loaded && asyncFetch(community)
     toggleMenu(undefined)
   }
 

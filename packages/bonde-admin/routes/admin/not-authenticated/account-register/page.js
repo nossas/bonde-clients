@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { BondeBackground } from '~client/components/layout/background'
+import { Loading } from '~client/components/await'
 
 import {
   FormRedux,
@@ -10,16 +11,8 @@ import {
   FormControl,
   Button
 } from '~client/components/forms'
-import * as Paths from '~client/paths'
 
 class RegisterPage extends Component {
-  componentWillReceiveProps (nextProps) {
-    const { submitting } = this.props
-    if (submitting && (!nextProps.submitting && !nextProps.submitFailed)) {
-      this.props.history.push(Paths.login())
-    }
-  }
-
   render () {
     const {
       fields: {
@@ -27,11 +20,13 @@ class RegisterPage extends Component {
         last_name: lastName,
         email,
         password,
-        password2
+        password2,
+        invitation_code: invitationCode
       },
       intl,
       ...formProps
     } = this.props
+
     return (
       <BondeBackground>
         <div className='page col-3'>
@@ -41,7 +36,7 @@ class RegisterPage extends Component {
               defaultMessage='Crie sua conta no Bonde.'
             />
           </h1>
-
+          {this.props.checkInvitationLoading && <Loading />}
           <FormRedux
             nosubmit
             className='bg-white rounded'
@@ -97,6 +92,7 @@ class RegisterPage extends Component {
               </ControlLabel>
 
               <FormControl
+                disabled={invitationCode.value}
                 type='email'
                 placeholder={
                   intl.formatMessage({

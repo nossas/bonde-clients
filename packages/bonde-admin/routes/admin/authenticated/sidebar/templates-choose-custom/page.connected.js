@@ -32,9 +32,10 @@ const GraphPage = graphql(gql`
   query customTemplates($communityId: Int!) {
     customTemplates (ctxCommunityId: $communityId) {
       nodes {
-        id,
-        name,
-        goal,
+        id
+        name
+        goal
+        image: facebookShareImage
         createdAt
       }
     }

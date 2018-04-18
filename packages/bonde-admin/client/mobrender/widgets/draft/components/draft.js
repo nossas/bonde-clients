@@ -5,7 +5,7 @@ import widgets from '~client/mobrender/widgets/config'
 
 if (require('exenv').canUseDOM) require('./draft.scss')
 
-const Draft = ({ mobilization, widget, update, intl }) => {
+const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
   const updateKind = props => update({...widget, ...props})
   const widgetsConfig = widgets(mobilization, widget, { intl }).filter(w => w.kind !== 'draft')
 
@@ -14,7 +14,14 @@ const Draft = ({ mobilization, widget, update, intl }) => {
       {widgetsConfig.map((wc, index) => {
         const props = Object.assign({}, wc)
         delete props.component
-        return <DraftButton key={`wc-${index}`} updateKind={updateKind} {...props} />
+        return (
+          <DraftButton
+            key={`wc-${index}`}
+            widget={widget}
+            updateKind={updateKind}
+            {...props}
+          />
+        )
       })}
     </div>
   )

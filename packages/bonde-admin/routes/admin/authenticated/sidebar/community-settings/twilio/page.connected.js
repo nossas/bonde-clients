@@ -2,6 +2,8 @@
 // @route /community/twilio
 //
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { Info } from '~client/components/notify'
 import { createForm, Field } from '~client/storybook/forms'
 import {
   combineValidations,
@@ -52,14 +54,20 @@ const TwilioForm = createForm({
     }
 
     !isConfigPreexists && addTwilioConfiguration({ variables })
-      .then(res => dispatch(CommunityActions.setForcedSubmit(true)))
+      .then(res => {
+        dispatch(CommunityActions.setForcedSubmit(true))
+        return resolve()
+      })
       .catch(err => {
         console.error('err', err)
         reject(err)
       })
 
     isConfigPreexists && updateTwilioConfiguration({ variables })
-      .then(res => dispatch(CommunityActions.setForcedSubmit(true)))
+      .then(res => {
+        dispatch(CommunityActions.setForcedSubmit(true))
+        return resolve()
+      })
       .catch(err => {
         console.error('err', err)
         reject(err)
@@ -72,7 +80,36 @@ const TwilioForm = createForm({
 })
 
 const PageGraphQL = (props) => (
-  <TwilioForm i18nKeys={i18nKeys} initialValues={props.initialValues}>
+  <TwilioForm i18nKeys={i18nKeys} {...props}>
+    <Info
+      title={(
+        <FormattedMessage
+          id='page--community-twilio.info.title'
+          defaultMessage='Integração com o Twilio'
+        />
+      )}
+    >
+      <FormattedMessage
+        id='page--community-twilio.info.content'
+        defaultMessage={
+          'Para pressionar por telefone, você precisa de uma conta no Twilio. ' +
+          'Se você ainda não tem uma conta lá, relaxe que é bem rápido para criar: ' +
+          '{link}, faça seu cadastro e crie um número de telefone no final.{linebreak}' +
+          'Com a conta criada, é só acessá-la e copiar os dados abaixo:'
+        }
+        values={{
+          linebreak: <br />,
+          link: (
+            <a href='https://www.twilio.com/try-twilio' target='_blank'>
+              <FormattedMessage
+                id='page--community-twilio.info.link'
+                defaultMessage='clique aqui'
+              />
+            </a>
+          )
+        }}
+      />
+    </Info>
     <Field
       name='twilio_account_sid'
       type='text'
@@ -117,7 +154,7 @@ const HOCGraphQL = Component => connect((state) => ({
           twilio_number: config.twilioNumber
         }
         // Props passed to mount initialValues and submit action
-        return { initialValues, isConfigPreexists }
+        return { initialValues, isConfigPreexists, communityId: ownProps.communityId }
       }
     })
   )(Component)

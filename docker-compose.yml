@@ -62,6 +62,7 @@ services:
       JWT_SECRET: d41d8cd98f00b204e9800998ecf8427e
       WEB_CONCURRENCY: 1
       WEB_MEMORY: 256
+      APP_DOMAIN: http://app.bonde.devel:3005
     ports:
       - "3000:3000" # Bind our host's port 3000 to the app port 3000:
 

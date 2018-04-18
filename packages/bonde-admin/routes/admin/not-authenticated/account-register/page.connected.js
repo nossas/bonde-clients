@@ -4,12 +4,21 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
+import { gql, graphql } from 'react-apollo'
+import queryString from 'query-string'
 
+import * as Paths from '~client/paths'
 import { isValidEmail } from '~client/utils/validation-helper'
-import { asyncAddUser } from '~client/account/redux/action-creators'
 import Page from './page'
 
-const fields = ['first_name', 'last_name', 'email', 'password', 'password2']
+const fields = [
+  'first_name',
+  'last_name',
+  'email',
+  'password',
+  'password2',
+  'invitation_code'
+]
 
 const validate = (values, { intl }) => {
   const errors = {}
@@ -50,10 +59,72 @@ const validate = (values, { intl }) => {
   return errors
 }
 
-const mapActionsToProps = dispatch => ({
-  submit: ({ password2, ...user }) => dispatch(asyncAddUser(user))
+const CheckInvitationQuery = gql`
+query checkInvitation ($invitationCode: String!) {
+  checkInvitation (invitationCode: $invitationCode) {
+    nodes {
+      email
+    }
+  }
+}`
+
+const RegisterWithData = graphql(CheckInvitationQuery, {
+  skip: (ownProps) => !queryString.parse(ownProps.location.search).invitation_code,
+  options: (ownProps) => {
+    const params = queryString.parse(ownProps.location.search)
+    return {
+      variables: { invitationCode: params.invitation_code }
+    }
+  },
+  props: ({ ownProps, data: { loading, checkInvitation } }) => {
+    const email = checkInvitation && checkInvitation.nodes && checkInvitation.nodes[0].email
+    const params = queryString.parse(ownProps.location.search)
+    return {
+      checkInvitationLoading: loading,
+      initialValues: {
+        email,
+        invitation_code: params.invitation_code
+      }
+    }
+  }
 })
 
-export default injectIntl(connect(undefined, mapActionsToProps)(
-  reduxForm({ form: 'registerForm', fields, validate })(Page)
-))
+const RegisterMutation = gql`
+mutation register ($user: RegisterInput!) {
+  register (input: $user) {
+    jwtToken
+  }
+}
+`
+
+const mapActionsToProps = (dispatch, ownProps) => ({
+  submit: ({ password2, ...user }) => {
+    ownProps.mutate({
+      variables: {
+        user: {
+          data: JSON.stringify(user)
+        }
+      }
+    })
+    .then(({ data }) => {
+      if (data.register.jwtToken) {
+        ownProps.history.push(Paths.login())
+      } else {
+        console.log('error graphql register', 'jwtToken is null')
+      }
+    })
+    .catch(error => {
+      console.log('error graphql register', error)
+    })
+  }
+})
+
+export default injectIntl(
+  graphql(RegisterMutation)(
+    connect(undefined, mapActionsToProps)(
+      RegisterWithData(
+        reduxForm({ form: 'registerForm', fields, validate })(Page)
+      )
+    )
+  )
+)

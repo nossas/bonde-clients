@@ -17,22 +17,15 @@
     }
 
     .content {
-      position: relative;
-      top: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
 
       i.fa {
         font-size: 2rem;
-        margin-bottom: .5rem;
         position: relative;
-        top: -6px;
-      }
-
-      .text {
-        position: absolute;
-        width: 64px;
-        bottom: -10px;
-        left: 50%;
-        margin-left: -32px;
+        margin-bottom: 5px;
       }
     }
   }

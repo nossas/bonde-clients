@@ -17,7 +17,7 @@ export const TwilioAccountSidHelp = () => (
         defaultMessage='Faça login no {link}'
         values={{
           link: (
-            <a href='https://www.twilio.com' target='_blank'>
+            <a href='https://www.twilio.com/login' target='_blank'>
               <FormattedMessage
                 id='page--community-twilio.helper-text.twilio-login.link'
                 defaultMessage='site do Twilio'
@@ -47,7 +47,7 @@ export const TwilioAuthTokenHelp = () => (
         defaultMessage='Faça login no {link}'
         values={{
           link: (
-            <a href='https://www.twilio.com' target='_blank'>
+            <a href='https://www.twilio.com/login' target='_blank'>
               <FormattedMessage
                 id='page--community-twilio.helper-text.twilio-login.link'
                 defaultMessage='site do Twilio'
@@ -85,7 +85,7 @@ export const TwilioNumberHelp = () => (
           defaultMessage='Faça login no {link}'
           values={{
             link: (
-              <a href='https://www.twilio.com' target='_blank'>
+              <a href='https://www.twilio.com/login' target='_blank'>
                 <FormattedMessage
                   id='page--community-twilio.helper-text.twilio-login.link'
                   defaultMessage='site do Twilio'

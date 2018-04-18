@@ -126,6 +126,12 @@
     align-items: center;
   }
 
+  .target-name-two {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .how-it-works {
     padding: 0 1.5rem;
     font-size: .8rem;

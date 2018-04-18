@@ -11,7 +11,7 @@ if (require('exenv').canUseDOM) require('./styles.scss')
 // TODO: Change to style component
 const basscss = 'ux--button btn white caps p2 rounded h4 ml2'
 
-const Button = ({ children, type, disabled, to, href, onClick }) => {
+const Button = ({ children, btnStyles, type, disabled, to, href, onClick }) => {
   const isSubmit = type !== 'submit'
   const className = classnames(
     basscss,
@@ -19,11 +19,12 @@ const Button = ({ children, type, disabled, to, href, onClick }) => {
     disabled ? 'disabled' : null
   )
 
-  if (href) return <a href={href} className={className} target='_blank'>{children}</a>
-  if (to) return <Link to={to} className={className}>{children}</Link>
+  if (href) return <a style={btnStyles} href={href} className={className} target='_blank'>{children}</a>
+  if (to) return <Link style={btnStyles} to={to} className={className}>{children}</Link>
 
   return (
     <button
+      styles={btnStyles}
       type={type}
       onClick={e => isSubmit && onClick(e)}
       disabled={disabled}

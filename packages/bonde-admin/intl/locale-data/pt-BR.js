@@ -147,6 +147,16 @@ export default {
   'page--community-list.or': '{link}',
   'page--community-list.new': 'Crie uma nova comunidade',
 
+  // page community twilio
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/twilio/page.connected.js
+  // routepath: /community/twilio
+  'page--community-twilio.info.title': 'Integração com o Twilio',
+  'page--community-twilio.info.content': 'Para pressionar por telefone, você precisa de uma conta no Twilio. ' +
+  'Se você ainda não tem uma conta lá, relaxe que é bem rápido para criar: ' +
+  '{link}, faça seu cadastro e crie um número de telefone no final.{linebreak}' +
+  'Com a conta criada, é só acessá-la e copiar os dados abaixo:',
+  'page--community-twilio.info.link': 'clique aqui',
+
   // component community settings menu
   // filepath: /client/community/components/settings-menu.js
   // routepath:
@@ -1007,6 +1017,15 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.components--form-finish-message.preview.label': 'Preview',
   'widgets.components--form-finish-message.custom.message.default': 'Clique aqui para editar sua mensagem de pós-ação.',
 
+  // page widgets pressure adjustments
+  // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/adjustments/page.connected.js
+  'page--widgets-pressure--adjustmens.warning.title': 'Falta pouco!',
+  'page--widgets-pressure--adjustmens.warning.content': 'Para liberar a Pressão por Telefone, o Bonde se juntou com o Twilio, uma plataforma ' +
+  'online de comunicação. Pensa numa integração boa! Por isso, pra começar a causar por ' +
+  'telefone é preciso configurar uma conta Twilio na sua comunidade.{linebreak}' +
+  'Bora lá?',
+  'page--widges-pressure--adjustments-warning.button': 'Bora lá',
+
   // component share tell-a-friend
   // filepath: /client/components/share/tell-a-friend.js
   // routepath:
@@ -1062,10 +1081,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.config--content.default': 'Clique para editar a ferramenta',
   'widgets.config--form.label': 'Formulário',
   'widgets.config--form.default': 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço',
-  'widgets.config--pressure.label': 'Pressão',
+  'widgets.config--pressure.label': 'Pressão por email',
   'widgets.config--pressure.default.title': 'Envie um email para quem pode tomar essa decisão',
   'widgets.config--pressure.default.button-text': 'Enviar email',
   'widgets.config--donation.label': 'Crowdfunding',
+  // Pressure by phone
+  'widgets.config--pressure-phone.label': 'Pressão por telefone',
+  'widgets.config--pressure-phone.default.title': 'Ligue para quem pode tomar essa decisão',
+  'widgets.config--pressure-phone.default.button-text': 'Ligar',
 
   // component donation widget
   // filepath: /client/mobilizations/widgets/__plugins__/donation/components/__donation__/index.js
@@ -1299,6 +1322,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // routepath: /mobilizations/:mobilization_id/widgets/:widget_id/pressure/email
   'widgets.components--input-tag.tags.label': 'Alvos cadastrados ({targetsCount})',
   'widgets.components--input-tag.insert-tag.placeholder': 'Nome do primeiro alvo <primeiro@alvo.com>\nNome do segundo alvo <segundo@alvo.com>\nNome do terceiro alvo <terceiro@alvo.com>\nNome do quarto alvo <quarto@alvo.com>\nNome do quinto alvo <quinto@alvo.com>\n...',
+  'widgets.components--input-tag.insert-tag.placeholder-phone': 'Nome do primeiro alvo <+5511999999999>\nNome do segundo alvo <+5521888888888>\nNome do terceiro alvo <+5531777777777>\nNome do quarto alvo <+5527999999999>\n...',
   'widgets.components--input-tag.button.remove-all': 'Remover todos',
 
   // page pressure widget email
@@ -1317,8 +1341,8 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
 
   'p--pressure-widget--input-tag.info.title': 'Como cadastrar alvos',
   'p--pressure-widget--input-tag.info.text': 'O cadastro de alvos é bem simples e pode ser feito com mais de um alvo por vez. Você precisa separar os alvos, em linhas distintas e, cada alvo deve seguir o formato descrito abaixo. Para cadastrar basta pressionar {keyboardTrigger}. E não se esqueça de salvar depois, clicando no botão no canto superior direito da tela.',
-  'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar o email)',
-  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nome <email@provedor.com>',
+  'p--pressure-widget--input-tag.info.item.target-format': 'Formato do alvo: {format} (obrigatório usar os caractéres {lt} e {gt} para agrupar os alvos)',
+  'p--pressure-widget--input-tag.info.item.target-format.example': 'Nome <{contactFormat}>',
   'p--pressure-widget--input-tag.info.item.special-chars': 'Em ambos os tipos de pressão é obrigatório o uso dos caractéres {lt} e {gt} para agrupar o email ou telefone',
   'p--pressure-widget--input-tag.info.item.sorting': 'Os alvos serão exibidos em ordem aleatória na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente.',
 

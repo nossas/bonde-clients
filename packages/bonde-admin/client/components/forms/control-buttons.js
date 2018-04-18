@@ -13,35 +13,41 @@ export class ControlButtons extends Component {
           formInline ? 'inline-block ml1' : 'flex flex-wrap mt1'
       )}>
         {onCancel && (
-          <button
-            className='btn h3 col-4 ml2 white mt1 mb2 p2 rounded bg-gray'
-            onClick={onCancel}
-          >
-            <FormattedMessage
-              id='components--control-buttons.cancel'
-              defaultMessage='Voltar'
-            />
-          </button>
+          <div className='col-5 col mt1 mb2 px2'>
+            <button
+              className='btn h3 white p2 rounded bg-gray col-12'
+              onClick={onCancel}
+            >
+              <FormattedMessage
+                id='components--control-buttons.cancel'
+                defaultMessage='Voltar'
+              />
+            </button>
+          </div>
         )}
-        <input
-          type='submit'
-          className={classnames(
-            'btn h3 mt1 mb2 white p2 rounded',
-            !valid ? 'bg-gray95' : 'bg-pagenta',
-            onCancel ? 'col-7 ml3' : 'col-12 mx2'
-          )}
-          disabled={!valid || submitting || !dirty}
-          value={(submitting
-            ? intl.formatMessage({
-              id: 'components--control-buttons.input.value.saving',
-              defaultMessage: 'Salvando...'
-            })
-            : floatButton || intl.formatMessage({
-              id: 'components--control-buttons.input.value.default',
-              defaultMessage: 'Continuar'
-            })
-          )}
-        />
+        <div className={classnames(
+          onCancel ? 'col-7' : 'col-12',
+          'col mt1 mb2 px2'
+        )}>
+          <input
+            type='submit'
+            className={classnames(
+              'btn h3 white p2 rounded col-12',
+              !valid ? 'bg-gray95' : 'bg-pagenta'
+            )}
+            disabled={!valid || submitting || !dirty}
+            value={(submitting
+              ? intl.formatMessage({
+                id: 'components--control-buttons.input.value.saving',
+                defaultMessage: 'Salvando...'
+              })
+              : floatButton || intl.formatMessage({
+                id: 'components--control-buttons.input.value.default',
+                defaultMessage: 'Continuar'
+              })
+            )}
+          />
+        </div>
         {submitted && !!successMessage && (
           <div className='success-message olive h4 px2 mt2'>
             {successMessage}
