@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.2"></a>
+## [0.9.2](https://github.com/nossas/bonde-client/compare/v0.9.1...v0.9.2) (2018-04-19)
+
+
+### Bug Fixes
+
+* **adjustsForm:** config unique name for each adjustment form ([06770c6](https://github.com/nossas/bonde-client/commit/06770c6))
+* **bonde-admin:** fetch templates of current community ([2105d71](https://github.com/nossas/bonde-client/commit/2105d71)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-admin:** fetch templates of current community ([797a76b](https://github.com/nossas/bonde-client/commit/797a76b)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-admin:** selectable list template item layout ([af03b4e](https://github.com/nossas/bonde-client/commit/af03b4e)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-admin:** selectable list template item layout ([480b80f](https://github.com/nossas/bonde-client/commit/480b80f)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-admin:** template create form buttons inline ([6cce713](https://github.com/nossas/bonde-client/commit/6cce713)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-admin:** template create form buttons inline ([1d0862f](https://github.com/nossas/bonde-client/commit/1d0862f)), closes [#156143488](https://github.com/nossas/bonde-client/issues/156143488)
+* **bonde-public:** set protocol directly from x-forwarded-proto ([438b65d](https://github.com/nossas/bonde-client/commit/438b65d)), closes [#156319015](https://github.com/nossas/bonde-client/issues/156319015)
+* **bonde-public:** set source request protocol to redux state ([b6e067b](https://github.com/nossas/bonde-client/commit/b6e067b))
+* **community-settings:** add community_id on twilio settings ([4e0805b](https://github.com/nossas/bonde-client/commit/4e0805b))
+* **donationWidget:** config adjusts fields like default to save api ([25f3bbe](https://github.com/nossas/bonde-client/commit/25f3bbe))
+* **draft-widget:** hide text when block has 4 columns ([9c695aa](https://github.com/nossas/bonde-client/commit/9c695aa))
+* **form-widget:** route connected page and use props to get widget ([6e190af](https://github.com/nossas/bonde-client/commit/6e190af))
+* **settings-widget:** pass props to selectors when map state ([5ace093](https://github.com/nossas/bonde-client/commit/5ace093))
+* build webviewer to remove logs ([3e2e335](https://github.com/nossas/bonde-client/commit/3e2e335))
+* **webviewer:** check client-side render ([0fa1f34](https://github.com/nossas/bonde-client/commit/0fa1f34))
+* **widgets:** change index on finish custom message ([fb5fb8a](https://github.com/nossas/bonde-client/commit/fb5fb8a))
+* phone pressure call state manager box height ([07730b7](https://github.com/nossas/bonde-client/commit/07730b7))
+* phone pressure widget in-progress status manager style ([a7e4b5a](https://github.com/nossas/bonde-client/commit/a7e4b5a))
+
+
+### Features
+
+* **community:** add info to integration twilio on twilio settings ([7326618](https://github.com/nossas/bonde-client/commit/7326618))
+* **pressure-phone-widget:** update pressure settings to render like kind ([4ead435](https://github.com/nossas/bonde-client/commit/4ead435))
+* **register:** add possibility to register with invitation ([5614b94](https://github.com/nossas/bonde-client/commit/5614b94))
+* **ux:** add custom styles to button ([c46b845](https://github.com/nossas/bonde-client/commit/c46b845))
+* **widgets:** add pressure phone like available widgets ([7383cb5](https://github.com/nossas/bonde-client/commit/7383cb5))
+* **widgets:** add warning when community without twilio settings in pressure-phone ([ac3967e](https://github.com/nossas/bonde-client/commit/ac3967e))
+
+
+
 <a name="0.9.1"></a>
 ## [0.9.1](https://github.com/nossas/bonde-client/compare/v0.9.0...v0.9.1) (2018-03-29)
 
