@@ -51,7 +51,9 @@ module.exports = {
   contextDependencies: [path.resolve(__dirname, 'src')],
   showUsage: true,
   showCode: false,
-  // skipComponentsWithoutReadme: true,
+  skipComponentsWithoutExample: true,
+  
+  webpackConfig: require('./config/webpack.config.dev.js'),
 
   getComponentPathLine(componentPath) {
     const name = path.basename(componentPath, '.js')
@@ -61,5 +63,5 @@ module.exports = {
 
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'src/ThemeWrapper'),
-  }
+  } 
 }
