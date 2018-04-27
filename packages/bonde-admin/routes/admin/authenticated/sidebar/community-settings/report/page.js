@@ -6,7 +6,7 @@ import { MetricsCommunity } from '~client/components/metrics'
 import { Title } from '~client/components/title'
 
 const SectionButton = ({ sectionTitle, helperText, buttonTitle, onClick, wrapperStyle }) => (
-  <div className='col md-col-12 lg-col-4 px2'>
+  <div className='col md-col-12 lg-col-4 px2 mb2'>
     <div className='table caps bold mb2 darkengray h6'>
       <i className='fa fa-file-excel-o darkengray table-cell align-middle h2' />
       <span className='table-cell align-middle pl1'>
@@ -32,7 +32,8 @@ const CommunitySettingsReportPage = ({
   // Actions
   asyncDownloadActivistActions,
   asyncDownloadActivists,
-  asyncDownloadDonations
+  asyncDownloadDonations,
+  asyncDownloadRecurringDonors
 }) => (
   <div className='mxn2'>
     <div className='col col-12 px2 mb3'>
@@ -125,6 +126,30 @@ const CommunitySettingsReportPage = ({
       }
       onClick={() => asyncDownloadActivists(community)}
     />
+    <SectionButton
+      sectionTitle={
+        <FormattedMessage
+          id='page--community-report.section-button.recurring-donors.title'
+          defaultMessage='RELATÓRIO DE DOADORES RECORRENTES'
+        />
+      }
+      helperText={
+        <FormattedMessage
+          id='page--community-report.section-button.recurring-donors.helper-text'
+          defaultMessage={
+            'Clique no botão abaixo para baixar ' +
+            'o relatório dos doadores recorrentes da comunidade.'
+          }
+        />
+      }
+      buttonTitle={
+        <FormattedMessage
+          id='page--community-report.section-button.recurring-donors.text'
+          defaultMessage='Baixar'
+        />
+      }
+      onClick={() => asyncDownloadRecurringDonors(community)}
+    />
   </div>
 )
 
@@ -133,7 +158,8 @@ CommunitySettingsReportPage.propTypes = {
   // Actions
   asyncDownloadActivistActions: PropTypes.func.isRequired,
   asyncDownloadActivists: PropTypes.func.isRequired,
-  asyncDownloadDonations: PropTypes.func.isRequired
+  asyncDownloadDonations: PropTypes.func.isRequired,
+  asyncDownloadRecurringDonors: PropTypes.func.isRequired
 }
 
 export default CommunitySettingsReportPage
