@@ -465,6 +465,10 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'page--community-report.section-button.activists.helper-text': 'Clique no botão abaixo para baixar o relatório com dados de todas as pessoas que agiram na sua comunidade.',
   'page--community-report.section-button.activists.text': 'Baixar',
 
+  'page--community-report.section-button.recurring-donors.title': 'RELATÓRIO DE DOADORES RECORRENTES',
+  'page--community-report.section-button.recurring-donors.helper-text': 'Clique no botão abaixo para baixar o relatório dos doadores recorrentes da comunidade.',
+  'page--community-report.section-button.recurring-donors.text': 'Baixar',
+
   // component sidebar
   // filepath: /client/components/navigation/sidebar/sidebar.js
   // routepath:
