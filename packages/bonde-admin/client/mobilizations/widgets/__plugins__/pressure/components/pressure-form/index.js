@@ -378,77 +378,63 @@ class PressureForm extends Component {
           </div>
         </div>
 
-        <div className='phone-calls'>
-          <ul>
-            {callManagement && callManagement.length && callManagement.map(target => {
-              const {
-                name,
-                value,
-                attempts,
-                twilioCallTo: to,
-                twilioCallTransitionStatus: status,
-                twilioCallTransitionCallDuration: duration
-              } = target
-              let ListItem = <div />
+        {this.state.pressureType === 'phone' && (
+          <div className='phone-calls'>
+            <ul>
+              {callManagement && callManagement.length && callManagement.map(target => {
+                const {
+                  name,
+                  value,
+                  attempts,
+                  twilioCallTo: to,
+                  twilioCallTransitionStatus: status,
+                  twilioCallTransitionCallDuration: duration
+                } = target
+                let ListItem = <div />
 
-              if (to === value) {
-                if (status === 'completed') {
-                  ListItem = (
-                    <li className='success'>
-                      <div className='flex-container'>
-                        <div className='call-item'>
-                          <div>
-                            <i className='fa fa-phone-square' />
+                if (to === value) {
+                  if (status === 'completed') {
+                    ListItem = (
+                      <li className='success'>
+                        <div className='flex-container'>
+                          <div className='call-item'>
+                            <div>
+                              <i className='fa fa-phone-square' />
+                            </div>
+                            <div className='target-name'>{name}</div>
                           </div>
-                          <div className='target-name'>{name}</div>
-                        </div>
-                        <div className='finish'>
-                          {duration}s
-                          <i className='fa fa-check-circle' />
-                        </div>
-                      </div>
-                    </li>
-                  )
-                } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
-                  ListItem = (
-                    <li className='warning'>
-                      <div className='flex-container'>
-                        <div className='call-item'>
-                          <div>
-                            <span className='fa fa-phone ring' />
-                          </div>
-                          <div className='target-name-two'>
-                            <span>{name}</span>
-                            <FormattedMessage
-                              id='pressure-widget.components--pressure-form.phone-calls.ringing'
-                              defaultMessage='Chamada em andamento'
-                            />
+                          <div className='finish'>
+                            {duration}s
+                            <i className='fa fa-check-circle' />
                           </div>
                         </div>
-                        <div className='inline-container'>
-                          <div className='prefix'>
-                            {status === 'in-progress' && <RealtimeCallDuration />}
+                      </li>
+                    )
+                  } else if (['initiated', 'ringing', 'in-progress'].includes(status)) {
+                    ListItem = (
+                      <li className='warning'>
+                        <div className='flex-container'>
+                          <div className='call-item'>
+                            <div>
+                              <span className='fa fa-phone ring' />
+                            </div>
+                            <div className='target-name-two'>
+                              <span>{name}</span>
+                              <FormattedMessage
+                                id='pressure-widget.components--pressure-form.phone-calls.ringing'
+                                defaultMessage='Chamada em andamento'
+                              />
+                            </div>
+                          </div>
+                          <div className='inline-container'>
+                            <div className='prefix'>
+                              {status === 'in-progress' && <RealtimeCallDuration />}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
-                  )
-                } else if (['busy', 'failed', 'no-answer'].includes(status)) {
-                  ListItem = (
-                    <li className='danger'>
-                      <div className='flex-container'>
-                        <div className='call-item'>
-                          <span className='fa fa-phone-square' />
-                          <div className='target-name'>{name}</div>
-                        </div>
-                        <div className='finish'>
-                          3x
-                          <span className='fa fa-times-circle' />
-                        </div>
-                      </div>
-                    </li>
-                  )
-                  if (attempts < 0) {
+                      </li>
+                    )
+                  } else if (['busy', 'failed', 'no-answer'].includes(status)) {
                     ListItem = (
                       <li className='danger'>
                         <div className='flex-container'>
@@ -456,117 +442,133 @@ class PressureForm extends Component {
                             <span className='fa fa-phone-square' />
                             <div className='target-name'>{name}</div>
                           </div>
-                          <div className='inline-container'>
-                            <div className='prefix'>
-                              {attempts}x
-                            </div>
-                            <button
-                              className='btn-call outlined'
-                              onClick={e => {
-                                e.preventDefault()
-                                addTwilioCallMutation({
-                                  widgetId: this.props.widget.id,
-                                  communityId: this.props.mobilization.community_id,
-                                  from: this.state.phone,
-                                  to: value
-                                })
-                              }}
-                            >
-                              <FormattedMessage
-                                id='pressure-widget.components--pressure-form.phone-calls.retry'
-                                defaultMessage='Religar'
-                              />
-                            </button>
+                          <div className='finish'>
+                            3x
+                            <span className='fa fa-times-circle' />
                           </div>
                         </div>
                       </li>
                     )
+                    if (attempts < 0) {
+                      ListItem = (
+                        <li className='danger'>
+                          <div className='flex-container'>
+                            <div className='call-item'>
+                              <span className='fa fa-phone-square' />
+                              <div className='target-name'>{name}</div>
+                            </div>
+                            <div className='inline-container'>
+                              <div className='prefix'>
+                                {attempts}x
+                              </div>
+                              <button
+                                className='btn-call outlined'
+                                onClick={e => {
+                                  e.preventDefault()
+                                  addTwilioCallMutation({
+                                    widgetId: this.props.widget.id,
+                                    communityId: this.props.mobilization.community_id,
+                                    from: this.state.phone,
+                                    to: value
+                                  })
+                                }}
+                              >
+                                <FormattedMessage
+                                  id='pressure-widget.components--pressure-form.phone-calls.retry'
+                                  defaultMessage='Religar'
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      )
+                    }
                   }
-                }
-              } else {
-                ListItem = (
-                  <li>
-                    <div className='flex-container'>
-                      <div className='call-item'>
-                        <span className='fa fa-phone-square primary' />
-                        <div className='target-name'>{name}</div>
+                } else {
+                  ListItem = (
+                    <li>
+                      <div className='flex-container'>
+                        <div className='call-item'>
+                          <span className='fa fa-phone-square primary' />
+                          <div className='target-name'>{name}</div>
+                        </div>
+                        <button
+                          className='btn-call primary'
+                          type='button'
+                          onClick={e => {
+                            e.preventDefault()
+                            addTwilioCallMutation({
+                              widgetId: this.props.widget.id,
+                              communityId: this.props.mobilization.community_id,
+                              from: this.state.phone,
+                              to: value
+                            })
+                          }}
+                        >
+                          <FormattedMessage
+                            id='pressure-widget.components--pressure-form.phone-calls.call'
+                            defaultMessage='Ligar'
+                          />
+                        </button>
                       </div>
-                      <button
-                        className='btn-call primary'
-                        type='button'
-                        onClick={e => {
-                          e.preventDefault()
-                          addTwilioCallMutation({
-                            widgetId: this.props.widget.id,
-                            communityId: this.props.mobilization.community_id,
-                            from: this.state.phone,
-                            to: value
-                          })
-                        }}
-                      >
-                        <FormattedMessage
-                          id='pressure-widget.components--pressure-form.phone-calls.call'
-                          defaultMessage='Ligar'
-                        />
-                      </button>
-                    </div>
-                  </li>
-                )
-              }
-              return ListItem
-            })}
-          </ul>
+                    </li>
+                  )
+                }
+                return ListItem
+              })}
+            </ul>
 
-          <div className='how-it-works'>
-            <FormattedMessage
-              id='pressure-widget.components--pressure-form.phone.how-it-works.title'
-              defaultMessage='Como funciona?'
-            />
-            <ol>
-              <li>
-                <FormattedMessage
-                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-01'
-                  defaultMessage='Estamos ligando para o seu alvo'
-                />
-              </li>
-              <li>
-                <FormattedMessage
-                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-02'
-                  defaultMessage='Assim que alguém atender do lado de lá, vamos te ligar'
-                />
-              </li>
-              <li>
-                <FormattedMessage
-                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-03'
-                  defaultMessage='Quando você atender, conectamos as ligações'
-                />
-              </li>
-              <li>
-                <FormattedMessage
-                  id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-04'
-                  defaultMessage='Agora é com você!'
-                />
-              </li>
-            </ol>
-          </div>
-
-          <div style={{ margin: '1rem 0', padding: '0 1rem' }}>
-            <button
-              type='button'
-              className='btn-call full-width'
-              style={{ backgroundColor: buttonColor }}
-              onClick={e => {
-                e.preventDefault()
-                this.props.changeParentState({ showFinishMessage: true })
-              }}
-            >
+            <div className='how-it-works'>
               <FormattedMessage
-                id='pressure-widget.components--pressure-form.phone.finish-and-share'
-                defaultMessage='Encerrar e Compartilhar'
+                id='pressure-widget.components--pressure-form.phone.how-it-works.title'
+                defaultMessage='Como funciona?'
               />
-            </button>
+              <ol>
+                <li>
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-01'
+                    defaultMessage='Estamos ligando para o seu alvo'
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-02'
+                    defaultMessage='Assim que alguém atender do lado de lá, vamos te ligar'
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-03'
+                    defaultMessage='Quando você atender, conectamos as ligações'
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id='pressure-widget.components--pressure-form.phone.how-it-works.list-item-04'
+                    defaultMessage='Agora é com você!'
+                  />
+                </li>
+              </ol>
+            </div>
+
+            <div style={{ margin: '1rem 0', padding: '0 1rem' }}>
+              <button
+                type='button'
+                className='btn-call full-width'
+                style={{ backgroundColor: buttonColor }}
+                onClick={e => {
+                  e.preventDefault()
+                  this.props.changeParentState({ showFinishMessage: true })
+                }}
+              >
+                <FormattedMessage
+                  id='pressure-widget.components--pressure-form.phone.finish-and-share'
+                  defaultMessage='Encerrar e Compartilhar'
+                />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
         {children}
       </form>
     )
