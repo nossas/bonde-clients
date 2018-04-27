@@ -20,7 +20,8 @@ export const donationForm = ModelForm({
     default_donation_value: 1,
     recurring_period: 30,
     payment_type: 'unique',
-    payment_method: 'false'
+    payment_method: 'false',
+    ...widget.settings
   }),
   validate: (values) => {
     const errors = {}
