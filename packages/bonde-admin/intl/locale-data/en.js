@@ -336,6 +336,10 @@ servidor-03.dominio.com`,
   'page--community-report.section-button.activists.helper-text': 'Click the button below to download the community activists report.',
   'page--community-report.section-button.activists.text': 'Download',
 
+  'page--community-report.section-button.recurring-donors.title': 'RECORRING DONORS REPORT',
+  'page--community-report.section-button.recurring-donors.helper-text': 'Click the button below to download the report from recurring community donors.',
+  'page--community-report.section-button.recurring-donors.text': 'Download',
+
   'components.navigation--sidebar.community-settings.item.mobilizations': 'Mobilizations',
   'components.navigation--sidebar.community-settings.item.info': 'Community',
   'components.navigation--sidebar.community-settings.item.metrics': 'Metrics',
