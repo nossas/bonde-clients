@@ -88,5 +88,7 @@ Button.propTypes = {
   light: bool
 }
 
+Button.displayName = 'Button'
+
 /* @component */
 export default Button
