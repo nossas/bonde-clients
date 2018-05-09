@@ -26,8 +26,8 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
     position: absolute;
     top: 2px;
     left: 0;
-    height: 19px;
-    width: 19px;
+    height: 17px;
+    width: 17px;
     background: #fff;
     border: 1px solid #4a4a4a;
     border-radius: 4px;
@@ -73,12 +73,12 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
   }
 
   & .box:after {
-    left: 8px;
+    left: 7px;
     top: 4px;
     width: 3px;
-    height: 8px;
+    height: 6px;
     border: solid #fff;
-    border-width: 0 2px 2px 0;
+    border-width: 0 1px 1px 0;
     transform: rotate(45deg);
   }
 }`

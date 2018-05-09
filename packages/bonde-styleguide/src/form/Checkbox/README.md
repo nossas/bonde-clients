@@ -23,5 +23,5 @@
 
 
 ```js
-<Checkbox disabled>Disabled Checkbox</Checkbox>
+<Checkbox disabled checked>Disabled Checkbox</Checkbox>
 ```
