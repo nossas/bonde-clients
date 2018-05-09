@@ -1,6 +1,6 @@
 ```js
 <div style={{ display: 'flex' }}>
-  <Radio name='defaultRadio'>Default Radio</Radio>
+  <Radio name='defaultRadio'>Default</Radio>
   <Radio name='defaultRadio'>Radio</Radio>
 </div>
 ```
@@ -11,7 +11,7 @@
 
 ```js
 <div style={{ display: 'flex' }}>
-  <Radio name='checkedRadio' checked>Checked Radio</Radio>
+  <Radio name='checkedRadio' checked>Checked</Radio>
   <Radio name='checkedRadio'>Radio</Radio>
 </div>
 ```
@@ -21,7 +21,7 @@
 
 
 ```js
-<Radio name='readRadio' readOnly>Read-only Radio</Radio>
+<Radio name='readRadio' readOnly>Read-only</Radio>
 ```
 
 
@@ -30,7 +30,7 @@
 
 ```js
 <div style={{ display: 'flex' }}>
-  <Radio name='disabledRadio' disabled>Disabled Radio</Radio>
-  <Radio name='disabledRadio'>Radio</Radio>
+  <Radio name='disabledRadio' disabled checked>Disabled and Checked</Radio>
+  <Radio name='disabledRadio' disabled>Disabled</Radio>
 </div>
 ```
