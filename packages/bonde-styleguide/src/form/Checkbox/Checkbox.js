@@ -11,7 +11,7 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
   font-family: 'Nunito Sans', sans-serif;
   display: block;
   position: relative;
-  padding-left: 30px;
+  padding-left: 35px;
   margin-bottom: 15px;
   cursor: pointer;
   font-size: 18px;
