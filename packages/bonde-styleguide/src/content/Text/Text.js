@@ -32,7 +32,7 @@ Text.propTypes = {
 }
 
 Text.defaultProps = {
-  color: '#000',
+  color: '#424242',
   lineHeight: 1.39,
   fontWeight: 'normal',
   fontSize: 18,
