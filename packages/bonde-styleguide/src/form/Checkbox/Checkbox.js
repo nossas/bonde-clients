@@ -62,17 +62,14 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
     color: #d1cdd2;
   }
 
-  & .box:after {
-    content: '';
-    position: absolute;
-    display: none;
-  }
-
   & input:checked ~ .box:after {
     display: block;
   }
 
   & .box:after {
+    content: '';
+    position: absolute;
+    display: none;
     left: 7px;
     top: 4px;
     width: 3px;
