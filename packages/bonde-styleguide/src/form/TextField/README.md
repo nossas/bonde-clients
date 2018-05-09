@@ -7,12 +7,11 @@
 ```
 
 
-### TextField - `invalid`
+### TextField - `error`
 
 
 ```js
 <TextField
-  invalid
   label='Error'
   hint='Info/Hint'
   placeholder='Invalid field'
