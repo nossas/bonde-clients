@@ -44,5 +44,7 @@ InputAdornment.propTypes = {
   valid: PropTypes.bool
 }
 
+InputAdornment.displayName = 'InputAdornment'
+
 /* @component */
 export default InputAdornment

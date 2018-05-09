@@ -23,5 +23,7 @@ InputHint.propTypes = {
   invalid: PropTypes.bool
 }
 
+InputHint.displayName = 'InputHint'
+
 /* @component */
 export default InputHint

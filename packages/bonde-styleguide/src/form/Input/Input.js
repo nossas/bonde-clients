@@ -38,5 +38,7 @@ const Input = styled.input`{
   }`}
 }`
 
+Input.displayName = 'Input'
+
 /* @component */
 export default Input
