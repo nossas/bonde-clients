@@ -102,19 +102,6 @@ pipeline:
       status: success
       branch: [release/*, feature/*, develop]
 
-  staging-deploy-admin:
-    image: peloton/drone-rancher
-    group: deploying
-    url: http://cluster.bonde.org
-    service: webservers/admin
-    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, develop]
-
   staging-deploy-public:
     image: peloton/drone-rancher
     group: deploying
