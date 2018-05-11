@@ -12,9 +12,10 @@ import InputHint from '../InputHint/InputHint'
 const FormField = ({
   label,
   hint,
+  placeholder,
   meta: { error, valid },
-  inputComponent: InputComponent,
-  ...inputProps
+  input,
+  inputComponent: InputComponent
 }) => (
   <div>
     <Flexbox horizontal>
@@ -26,7 +27,8 @@ const FormField = ({
         fullWidth
         invalid={!!error}
         valid={valid}
-        {...inputProps}
+        placeholder={placeholder}
+        {...input}
       />
       {(!!error || valid) && <InputAdornment invalid={!!error} valid={valid} />}
     </Flexbox>
