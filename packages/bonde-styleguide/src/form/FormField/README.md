@@ -1,32 +1,37 @@
 ```js
-<TextField
+<FormField
   label='Default'
   hint='Info/Hint'
   placeholder='Placeholder'
+  inputComponent={Input}
 />
 ```
 
 
-### TextField - `error`
+### FormField - `error`
 
 
 ```js
-<TextField
+<FormField
   label='Error'
   hint='Info/Hint'
   placeholder='Invalid field'
-  error='Validation error'
+  meta={{
+    error:'Validation error'
+  }}
+  inputComponent={Input}
 />
 ```
 
-### TextField - `valid`
+### FormField - `valid`
 
 
 ```js
-<TextField
-  valid
+<FormField
+  meta={{ valid: true }}
   label='Success'
   hint='Info/Hint'
   placeholder='Valid field'
+  inputComponent={Input}
 />
 ```

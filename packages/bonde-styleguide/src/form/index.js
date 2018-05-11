@@ -1,5 +1,6 @@
 export ControlLabel from './ControlLabel/ControlLabel'
 export Checkbox from './Checkbox/Checkbox'
+export FormField from './FormField'
 export Input from './Input/Input'
 export InputAdornment from './InputAdornment/InputAdornment'
 export InputHint from './InputHint/InputHint'
