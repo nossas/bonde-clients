@@ -1,5 +1,5 @@
 ```js
-<Select>
+<Select name='select-default'>
   <option value='empty'>Select</option>
   <option value='opt1'>First</option>
   <option value='opt2'>Second</option>
@@ -7,11 +7,11 @@
 ```
 
 
-### Select - `invalid`
+### Select - `native`
 
 
 ```js
-<Select invalid>
+<Select name='select-native' native>
   <option value='empty'>Select</option>
   <option value='opt1'>First</option>
   <option value='opt2'>Second</option>
@@ -23,7 +23,7 @@
 
 
 ```js
-<Select disabled>
+<Select name='select-disabled' disabled>
   <option value='empty'>Select</option>
   <option value='opt1'>First</option>
   <option value='opt2'>Second</option>
