@@ -28,7 +28,7 @@ pipeline:
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-build-admin:
     image: node:9-alpine
@@ -61,7 +61,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-publish-public:
     image: plugins/docker
@@ -74,7 +74,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-publish-styleguide:
     image: plugins/docker
@@ -87,7 +87,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-publish-admin-canary:
     image: plugins/docker
@@ -113,7 +113,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-deploy-styleguide:
     image: peloton/drone-rancher
@@ -126,7 +126,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [develop]
+      branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-deploy-admin-canary:
     image: peloton/drone-rancher
