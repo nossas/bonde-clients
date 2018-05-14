@@ -1,3 +1,11 @@
 {
-  "description": "Insira seu nome abaixo"
+  "about": "Sobre",
+  "contact": "Contato",
+  "create-community": "Criar Comunidade",
+  "create-mobilization": "Criar Mobilização",
+  "help": "Ajuda eu",
+  "home": "Home",
+  "my-communities": "Minhas Comunidades",
+  "my-mobilizations": "Minhas Mobilizações",
+  "trending-mobs": "Trending mobs"
 }
