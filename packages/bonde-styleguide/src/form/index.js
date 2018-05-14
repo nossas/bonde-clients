@@ -1,6 +1,6 @@
-export { default as ControlLabel } from './ControlLabel/ControlLabel'
 export { default as Checkbox } from './Checkbox/Checkbox'
-export { default as FormField } from './FormField'
+export { default as ControlLabel } from './ControlLabel/ControlLabel'
+export { default as FormField } from './FormField/FormField'
 export { default as Input } from './Input/Input'
 export { default as InputAdornment } from './InputAdornment/InputAdornment'
 export { default as InputHint } from './InputHint/InputHint'
