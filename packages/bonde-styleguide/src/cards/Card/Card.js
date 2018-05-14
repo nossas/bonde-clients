@@ -33,6 +33,10 @@ const CardTitle = ({ children }) => (
   </Text>
 )
 
+const NoTitle = styled.div`
+  height: 46px;
+`
+
 /**
  *  The only true card.
  */
@@ -43,7 +47,10 @@ const Card = styled(({
   ...boxProps
 }) => (
   <div className={className}>
-    {title && (<CardTitle>{title}</CardTitle>)}
+    {!title ?
+      <NoTitle /> :
+      <CardTitle>{title}</CardTitle>
+    }
     <CardBox {...boxProps}>
       {children}
     </CardBox>
