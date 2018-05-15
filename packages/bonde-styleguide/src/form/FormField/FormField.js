@@ -13,30 +13,34 @@ const FormField = ({
   label,
   hint,
   placeholder,
-  meta: { error, valid, touched },
-  input,
+  meta: { error, valid, touched, dirty }, 
   inputComponent: InputComponent,
+  input,
   ...props
-}) => (
-  <div style={{ padding: '0 0 17px' }}>
-    <Flexbox horizontal>
-      <ControlLabel>{label}</ControlLabel>
-      {(error || hint) && <InputHint invalid={!!error}>{error || hint}</InputHint>}
-    </Flexbox>
-    <Flexbox horizontal>
-      <InputComponent
-        fullWidth
-        invalid={!!error}
-        valid={valid}
-        placeholder={placeholder}
-        touched={touched}
-        {...input}
-        {...props}
-      />
-      {(touched && (!!error || valid)) && <InputAdornment invalid={!!error} valid={valid} />}
-    </Flexbox>
-  </div>
-)
+}) => {
+  console.log('error', error)
+
+  return (
+    <div style={{ padding: '0 0 17px' }}>
+      <Flexbox horizontal>
+        <ControlLabel>{label}</ControlLabel>
+        {((touched && error) || hint) && <InputHint invalid={!!error}>{error || hint}</InputHint>}
+      </Flexbox>
+      <Flexbox horizontal>
+        <InputComponent
+          fullWidth
+          invalid={touched && !!error}
+          valid={touched && valid}
+          placeholder={placeholder}
+          touched={touched}
+          {...input}
+          {...props}
+        />
+        {(touched && (!!error || valid)) && <InputAdornment invalid={!!error} valid={valid} />}
+      </Flexbox>
+    </div>
+  )
+}
 
 FormField.propTypes = {
   /** Label text. */

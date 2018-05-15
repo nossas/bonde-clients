@@ -36,16 +36,22 @@ test('render InputHint when pass `hint` prop', t => {
   t.is(node.find('InputHint').length, 1)
 })
 
-test('render InputHint when pass `error` prop', t => {
+test('not render InputHint when pass touched false to prop', t => {
   const { node } = t.context
-  node.setProps({ meta: { error: 'Validation Error' } })
+  node.setProps({ meta: { error: 'Validation Error', touched: false } })
+  t.is(node.find('InputHint').length, 0)
+})
+
+test('render InputHint when pass error and touched prop', t => {
+  const { node } = t.context
+  node.setProps({ meta: { error: 'Validation Error', touched: true } })
   t.is(node.find('InputHint').length, 1)
 })
 
 test('render InputHint with `error` text when pass bot `error` and `hint` prop', t => {
   const { node } = t.context
   const error = 'Validation Error'
-  node.setProps({ hint: 'Info/Hint', meta: { error } })
+  node.setProps({ hint: 'Info/Hint', meta: { error, touched: true } })
   t.is(node.find('InputHint').children().text(), error)
 })
 
@@ -66,14 +72,20 @@ test('not render InputAdornment by default', t => {
   t.is(node.find('InputAdornment').length, 0)
 })
 
-test('render InputAdornment when `valid` prop was passed', t => {
+test('not render InputAdornment when pass touched false to props', t => {
   const { node } = t.context
-  node.setProps({ meta: { valid: true } })
+  node.setProps({ meta: { valid: true, touched: false } })
+  t.is(node.find('InputAdornment').length, 0)
+})
+
+test('render InputAdornment when valid and touched prop was passed', t => {
+  const { node } = t.context
+  node.setProps({ meta: { valid: true, touched: true } })
   t.is(node.find('InputAdornment').length, 1)
 })
 
-test('render InputAdornment when `error` prop was passed', t => {
+test('render InputAdornment when error and touched prop was passed', t => {
   const { node } = t.context
-  node.setProps({ meta: { error: 'Validatio Error' } })
+  node.setProps({ meta: { error: 'Validatio Error', touched: true } })
   t.is(node.find('InputAdornment').length, 1)
 })
