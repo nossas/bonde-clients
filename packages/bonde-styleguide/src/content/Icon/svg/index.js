@@ -7,6 +7,7 @@ import Plus from './Plus'
 import Share from './Share'
 import Sound from './Sound'
 import Star from './Star'
+import Tick from './Tick'
 import Times from './Times'
 import User from './User'
 
@@ -20,6 +21,7 @@ export default {
   'share': Share,
   'sound': Sound,
   'star': Star,
+  'tick': Tick,
   'times': Times,
   'user': User
 }

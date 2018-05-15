@@ -9,6 +9,7 @@
   <Icon name='share' />
   <Icon name='sound' />
   <Icon name='star' />
+  <Icon name='tick' />
   <Icon name='times' />
   <Icon name='user' />
 </div>
