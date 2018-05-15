@@ -25,7 +25,7 @@ const FooterContent = styled.div`{
 
 const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   <div className={className}>
-    <IconColorful name='bonde' size={300} />
+    <IconColorful name='bonde' size={115} inverted />
     <FooterContent>
     {children}
     </FooterContent>
