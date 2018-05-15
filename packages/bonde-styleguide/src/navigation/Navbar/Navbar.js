@@ -29,9 +29,10 @@ const Navbar = styled(({
 ))`{
   background-color: ${props => props.bgColor || '#000'};
   width: inherit;
-  height: 50px;
+  height: 18px;
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 
   & > a.homePageLink {
     margin-right: 15px;
