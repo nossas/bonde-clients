@@ -24,16 +24,14 @@ const Home = ({ t, i18n }) => {
             <UserNav />
           </Navbar>
         )}
-        actionButton={() => (
-          <div>
-            <Button dark onClick={() => alert('Button: onClick')}>
-              {t('create-mobilization')}
-            </Button>
-            <Button onClick={() => alert('Button: onClick')}>
-              {t('create-community')}
-            </Button>
-          </div>
-        )}
+        actionButtons={[
+          <Button dark onClick={() => alert('Button: onClick')}>
+            {t('create-mobilization')}
+          </Button>,
+          <Button onClick={() => alert('Button: onClick')}>
+            {t('create-community')}
+          </Button>
+        ]}
       />
 
       <Page>

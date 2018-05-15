@@ -10,19 +10,29 @@ const Container = styled.div`{
   align-items: center;
 }`
 
+const ActionButtonsContainer = styled.div`
+  & > * {
+    margin-left: 16px;
+  }
+`
+
 const Header = styled(({
   children,
   className,
   pageTitle,
+  actionButtons,
   navbar: Navbar,
-  actionButton: ActionButton,
   tabNavigation: Tabs
 }) => (
   <div className={className}>
     {Navbar && <Navbar />}
     <Container>
       {pageTitle && <Title.H3 color='#fff'>{pageTitle}</Title.H3>}
-      {ActionButton && <ActionButton />}
+      {actionButtons && (
+        <ActionButtonsContainer>
+          {actionButtons}
+        </ActionButtonsContainer>
+      )}
     </Container>
     {Tabs && <Tabs />}
   </div>
@@ -34,7 +44,7 @@ const Header = styled(({
   padding: 22px 155px;
 }`
 
-const { oneOfType, node, func, string } = PropTypes
+const { oneOfType, arrayOf, node, func, string } = PropTypes
 
 Header.propTypes = {
   /** The content of the header. */
@@ -44,7 +54,7 @@ Header.propTypes = {
   /** The navbar component. */
   navbar: oneOfType([node, func]),
   /** The action button component. */
-  actionButton: oneOfType([node, func]),
+  actionButtons: arrayOf(oneOfType([node, func])),
   /** The tab navition component. */
   tabNavigation: oneOfType([node, func])
 }
