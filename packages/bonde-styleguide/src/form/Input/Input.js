@@ -33,7 +33,7 @@ const Input = styled.input`{
     border-bottom-color: #FF0931;
   }`}
 
-  ${props => props.valid && `{
+  ${props => props.touched && props.valid && `{
     border-bottom-color: #50e3c2;
   }`}
 }`

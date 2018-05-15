@@ -13,11 +13,12 @@ const FormField = ({
   label,
   hint,
   placeholder,
-  meta: { error, valid },
+  meta: { error, valid, touched },
   input,
-  inputComponent: InputComponent
+  inputComponent: InputComponent,
+  ...props
 }) => (
-  <div>
+  <div style={{ padding: '0 0 17px' }}>
     <Flexbox horizontal>
       <ControlLabel>{label}</ControlLabel>
       {(error || hint) && <InputHint invalid={!!error}>{error || hint}</InputHint>}
@@ -28,9 +29,11 @@ const FormField = ({
         invalid={!!error}
         valid={valid}
         placeholder={placeholder}
+        touched={touched}
         {...input}
+        {...props}
       />
-      {(!!error || valid) && <InputAdornment invalid={!!error} valid={valid} />}
+      {(touched && (!!error || valid)) && <InputAdornment invalid={!!error} valid={valid} />}
     </Flexbox>
   </div>
 )

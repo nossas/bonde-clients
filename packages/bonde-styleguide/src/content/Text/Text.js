@@ -35,9 +35,9 @@ Text.propTypes = {
 
 Text.defaultProps = {
   color: '#424242',
-  lineHeight: 1.39,
+  lineHeight: 1.56,
   fontWeight: 'normal',
-  fontSize: 18,
+  fontSize: 16,
   letterSpacing: 'inherit',
   align: 'left',
   margin: {}
