@@ -3,7 +3,7 @@
 ```js
 <DataListCard
   title='Atividades recentes'
-  fields={{ name: {}, email: {}, time: { align: 'left' } }}
+  fields={{ name: {}, email: {}, time: { align: 'right' } }}
   items={[
     {
       name: 'Susan Schwartz',
