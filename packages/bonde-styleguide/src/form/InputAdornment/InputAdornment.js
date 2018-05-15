@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Icon from '../../content/Icon/Icon'
 
 //
 // TODO: Make component accepts the content like icons as a children.
 //
 const InputAdornment = styled(({ className, invalid }) => (
   <div className={className}>
-    {invalid ? '!' : ''}
+    {invalid ?
+      '!' :
+      <Icon name='tick' size={8} color='#50E3C2' />
+    }
   </div>
 ))`
   font-family: 'Nunito Sans', sans-serif;
@@ -25,15 +29,6 @@ const InputAdornment = styled(({ className, invalid }) => (
 
   ${props => props.valid && `{
     border-bottom-color: #50E3C2;
-
-    &:after {
-      content: '';
-      width: 3px;
-      height: 6px;
-      border: solid #50E3C2;
-      border-width: 0 1px 1px 0;
-      transform: rotate(45deg);
-    }
   }`}
 `
 
