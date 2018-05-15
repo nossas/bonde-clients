@@ -7,6 +7,7 @@ const Container = styled.div`{
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
+  align-items: center;
 }`
 
 const Header = styled(({
@@ -30,7 +31,7 @@ const Header = styled(({
   width: inherit;
   min-height: 80px;
   background: #000;
-  padding: 28px 155px 0;
+  padding: 22px 155px;
 }`
 
 const { oneOfType, node, func, string } = PropTypes
