@@ -2,6 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+
+/**
+ * The only true flexbox container.
+ */
 const Flexbox = styled.div`
   display: flex;
 
@@ -29,7 +33,11 @@ const Flexbox = styled.div`
 Flexbox.displayName = 'Flexbox2'
 
 Flexbox.propTypes = {
+  horizontal: PropTypes.bool,
+  vertical: PropTypes.bool,
+  middle: PropTypes.bool,
   spacing: PropTypes.oneOf(['around', 'between'])
 }
 
+/* @component */
 export default Flexbox

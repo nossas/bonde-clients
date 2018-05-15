@@ -24,7 +24,7 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
 
   & .box {
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 0;
     height: 17px;
     width: 17px;
