@@ -21,7 +21,8 @@ const FormField = ({
   <div style={{ padding: '0 0 17px' }}>
     <Flexbox horizontal>
       <ControlLabel>{label}</ControlLabel>
-      {((touched && error) || hint) && <InputHint invalid={!!error}>{error || hint}</InputHint>}
+      {(touched && error) && <InputHint invalid={true}>{error}</InputHint>}
+      {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
     </Flexbox>
     <Flexbox horizontal>
       <InputComponent
