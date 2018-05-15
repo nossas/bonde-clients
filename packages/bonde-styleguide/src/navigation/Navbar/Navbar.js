@@ -19,7 +19,7 @@ const Navbar = styled(({
   <div className={className}>
     {HomePageIcon && (
       <a className='homePageLink' href={homePageUrl || '#'} title={homePageTitle}>
-        <HomePageIcon size={16} />
+        <HomePageIcon size={18} />
       </a>
     )}
     <NavContainer>
@@ -50,7 +50,7 @@ Navbar.propTypes = {
 }
 
 Navbar.defaultProps = {
-  homePageIcon: () => <Icon name='bonde' />
+  homePageIcon: ({ size }) => <Icon name='bonde' size={size} />
 }
 
 /* @component */
