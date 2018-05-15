@@ -3,35 +3,83 @@ import { Mutation } from 'react-apollo'
 import { AuthAPI } from '../../../../services/auth' 
 import AUTHENTICATE from './authenticate.graphql'
 
+import {
+  Button,
+  Container,
+  Checkbox,
+  Flexbox2 as Flexbox,
+  FormField,
+  Input,
+  Link,
+  Title
+} from 'bonde-styleguide'
 
-const AuthLogin = () => {
-  let inputEmail
-  let inputPassword
+import Form, { Field, SubmissionError } from '../../../../components/Form'
+import { isEmail, isEmpty } from '../../../../services/validations'
 
-  return (
+const AuthLogin = () => (
+  <Container>
+    <Title.H1 margin={{ bottom: 37 }}>
+      O Bonde tá na área!
+      Chega mais.
+    </Title.H1>
     <Mutation mutation={AUTHENTICATE}>
       {(authenticate, { data }) => (
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            authenticate({
+        <Form
+          onSubmit={(values) => authenticate({
               variables: {
-                email: inputEmail.value,
-                password: inputPassword.value
+                email: values.email,
+                password: values.password
               }
             })
             .then(({ data }) => {
+              throw new SubmissionError({ _error: 'authentication is fail.' })
               AuthAPI.login(data)
             })
-          }}
+          }
         >
-          <input ref={node => { inputEmail = node }} type='text' placeholder='email' />
-          <input ref={node => { inputPassword = node }} type='password' placeholder='password' />
-          <button type='submit'>Go!</button>
-        </form>
+          <Field
+            name='email'
+            label='Email'
+            placeholder='seuemail@exemplo.com'
+            component={FormField}
+            inputComponent={Input}
+            validate={(value) => {
+              if (isEmpty(value)) return 'Required Field'
+              else if (!isEmail(value)) return 'Invalid email'
+            }}
+          />
+          <Field
+            name='password'
+            type='password'
+            placeholder='sua senha'
+            label='Senha' 
+            component={FormField}
+            inputComponent={Input}
+            validate={value => isEmpty(value) && 'Required field'}
+          />
+          <Flexbox spacing='between' padding='0 0 24px'>
+            <Checkbox>Continuar conectadx</Checkbox>
+            <Link
+              href='#esqueci-a-senha'
+              title='Esqueci a senha'
+            >
+              Esqueci a senha
+            </Link> 
+          </Flexbox>
+          <Flexbox middle spacing='between'>
+            <Link
+              href='#criar-conta'
+              title='Criar conta'
+            >
+              Criar conta
+            </Link>
+            <Button type='submit'>Partiu</Button>
+          </Flexbox>
+        </Form>
       )}
     </Mutation>
-  )
-}
+  </Container>
+)
 
 export default AuthLogin
