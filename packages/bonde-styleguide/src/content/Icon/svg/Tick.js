@@ -1,25 +1,21 @@
-import styled from 'styled-components'
+import React from 'react'
 
-const Icon = styled.div`
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  position: relative;
-  top: -2px;
+const Icon = ({ className, color, size }) => (
+  <svg
+    className={className}
+    width={size || '12'}
+    height={size || '9'}
+    viewBox='0 0 12 9'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <g fill='none' fillRule='evenodd'>
+      <g transform='translate(-420 -34)' stroke={color} strokeWidth='2'>
+        <g><polyline points='421 37.6091166 424.466392 41 430.6 35' /></g>
+      </g>
+    </g>
+  </svg>
+)
 
-  &:after {
-    content: '';
-    position: absolute;
-    left: 2px;
-    top: -1px;
-    width: 3px;
-    height: 6px;
-    border: solid ${props => props.color};
-    border-width: 0 1px 1px 0;
-    transform: rotate(45deg);
-  }
-`
-
-Icon.displayName = 'Icon.Copy'
+Icon.displayName = 'Icon.Star'
 
 export default Icon
