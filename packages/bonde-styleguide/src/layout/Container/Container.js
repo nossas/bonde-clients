@@ -23,9 +23,13 @@ const Content = styled.div`
   `}
 `
 
+Content.displayName = 'Content'
+
 const Container = styled.div`
   display: flex;
 `
+
+Container.displayName = 'Container'
 
 export default ({ children }) => (
   <Container>

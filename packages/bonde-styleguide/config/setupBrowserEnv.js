@@ -11,3 +11,8 @@ const dom = new JSDOM(`<body></body>`);
 global.document = dom.window.document;
 global.window = dom.window;
 global.navigator = dom.window.navigator;
+
+// mock png
+import requireHacker from 'require-hacker'
+
+requireHacker.hook('png', () => 'module.exports = ""')
