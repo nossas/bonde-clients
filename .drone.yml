@@ -28,7 +28,27 @@ pipeline:
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [hotfix/*, release/*, feature/*, develop]
+
+  staging-build-admin:
+    image: node:9-alpine
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api-v1.staging.bonde.org
+      - BOT_URL=https://beta.staging.bonde.org
+      - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
+      - APP_DOMAIN=staging.bonde.org
+      - AWS_BUCKET=bonde-assets-staging
+    commands:
+      - export PAGARME_KEY=$STAG_PAGARME_KEY
+      - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
+      - ./node_modules/.bin/lerna run testx --parallel
+      - ./node_modules/.bin/lerna run buildx --parallel
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
+    when:
+      status: success
+      branch: [hotfix/*, develop]
 
   staging-publish-admin:
     image: plugins/docker
@@ -41,7 +61,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix-*, develop]
+      branch: [hotfix/*, develop]
 
   staging-publish-public:
     image: plugins/docker
@@ -54,7 +74,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [hotfix/*, release/*, feature/*, develop]
 
   staging-publish-styleguide:
     image: plugins/docker
@@ -67,19 +87,6 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-
-  publish-admin-canary-staging:
-    image: plugins/docker
-    repo: nossas/bonde-admin-canary
-    group: publishing
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/bonde-admin-canary/Dockerfile
-    context: packages/bonde-admin-canary/
-    tags:
-      - ${DRONE_BRANCH}
-    when:
-      status: success
       branch: [develop]
 
   staging-publish-admin-canary:
@@ -90,43 +97,43 @@ pipeline:
     dockerfile: packages/bonde-admin-canary/Dockerfile
     context: packages/bonde-admin-canary/
     tags:
-      - ${DRONE_BRANCH}
+      - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [release-*, feature-*, develop]
+      branch: [release/*, feature/*, develop]
 
   staging-deploy-admin:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
     service: webservers/admin
-    docker_image: nossas/bonde-admin:${DRONE_BRANCH}
+    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix-*, develop]
+      branch: [hotfix/*, develop]
 
   staging-deploy-public:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
     service: webservers/public
-    docker_image: nossas/bonde-public:${DRONE_BRANCH}
+    docker_image: nossas/bonde-public:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [hotfix/*, release/*, feature/*, develop]
 
   staging-deploy-styleguide:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
     service: webservers/styleguide
-    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH}
+    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -139,13 +146,13 @@ pipeline:
     group: deploying
     url: http://cluster.bonde.org
     service: webservers/admin-canary
-    docker_image: nossas/bonde-admin-canary:${DRONE_BRANCH}
+    docker_image: nossas/bonde-admin-canary:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [release-*, feature-*, develop]
+      branch: [release/*, feature/*, develop]
 
   production-build:
     image: node:9-alpine
