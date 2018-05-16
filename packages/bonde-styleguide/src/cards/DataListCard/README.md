@@ -47,6 +47,7 @@
       render: (field) => (
         <Image
           src={field}
+          width={40}
           height={40}
           rounded='50%'
         />

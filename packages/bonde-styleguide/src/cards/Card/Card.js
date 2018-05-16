@@ -21,8 +21,6 @@ const CardBox = styled.div`{
   ${props => props.onClick && `cursor: pointer;`}
 
   ${props => props.hasFooter && `
-    min-height: ${px(props.minHeight - 46)};
-    max-height: ${px(props.maxHeight - 46)};
     padding-bottom: 46px;
   `}
 }`
@@ -43,7 +41,7 @@ const CardTitle = ({ children }) => (
 const CardFooter = styled.div`
   background-color: #FFFFFF;
   border-top: 1px solid #EFEFEF;
-  width: calc(100% - 26px * 2);
+  width: 100%;
   height: 46px;
   position: absolute;
   left: 0;
