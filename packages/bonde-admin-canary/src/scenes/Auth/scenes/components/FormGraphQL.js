@@ -7,32 +7,30 @@ const FormGraphQL = ({
   children,
   mutation, 
   onSubmit
-}) => {
-  return (
-    <Container>
-      <Title.H1 margin={{ bottom: 37 }}>
-        O Bonde tá na área!
-        Chega mais.
-      </Title.H1>
-      <Mutation mutation={mutation}>
-        {(mutationFunc) => (
-          <Form
-            onSubmit={(values) => {
-              return onSubmit(values, mutationFunc)
-                .catch((error) => {
-                  if (error && error.formError) {
-                    throw new SubmissionError({ _error: error.formError })
-                  }
-                  console.error(error)
-                })
-            }}
-          >
-            {children}
-          </Form>
-        )}
-      </Mutation>
-    </Container>
-  )
-}
+}) => (
+  <Container>
+    <Title.H1 margin={{ bottom: 37 }}>
+      O Bonde tá na área!
+      Chega mais.
+    </Title.H1>
+    <Mutation mutation={mutation}>
+      {(mutationFunc) => (
+        <Form
+          onSubmit={(values) => {
+            return onSubmit(values, mutationFunc)
+              .catch((error) => {
+                if (error && error.formError) {
+                  throw new SubmissionError({ _error: error.formError })
+                }
+                console.error(error)
+              })
+          }}
+        >
+          {children}
+        </Form>
+      )}
+    </Mutation>
+  </Container>
+)
 
 export default FormGraphQL
