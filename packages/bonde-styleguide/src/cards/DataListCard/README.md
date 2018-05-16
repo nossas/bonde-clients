@@ -1,8 +1,8 @@
-### Default text render
+### DataListCard - default text render
 
 ```js
 <DataListCard
-  title='Atividades recentes'
+  sectionTitle='Atividades recentes'
   fields={{ name: {}, email: {}, time: { align: 'right' } }}
   items={[
     {
@@ -34,12 +34,13 @@
 />
 ```
 
-### Custom field render
+### DataListCard - custom field render
 
 ```js
 <DataListCard
-  title='Atividades recentes'
+  sectionTitle='Atividades recentes'
   border={false}
+  footerProps={{  }}
   fields={{
     image: {
       width: 40,
@@ -83,6 +84,61 @@
         title: 'CPI dos Ônibus pra valer',
         description: 'Prorrogar a CPI dos ônibus por mais quatro meses.'
       }
+    }
+  ]}
+/>
+```
+
+### DataListCard - with Footer
+
+```js
+const now = new Date();
+
+<DataListCard
+  sectionTitle='Atividades recentes'
+  footerProps={{ justify: 'space-between' }}
+  Footer={() => (
+    <React.Fragment>
+      <Title.H6 fontWeight='bold'>{now.toLocaleString('pt-BR')}</Title.H6>
+      <Pagination pages={5} />
+    </React.Fragment>
+  )}
+  fields={{ name: {}, email: {}, time: { align: 'right' } }}
+  items={[
+    {
+      name: 'Susan Schwartz',
+      email: 'susan.schwartz@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Mattie Cunningham',
+      email: 'mattie.cunningham@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Carrie Barton',
+      email: 'carrie.barton@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Jeff Rowe',
+      email: 'jeff.rowe@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Owen Padilla',
+      email: 'owen.padilla@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Gabriel Laperouse',
+      email: 'gabriel.laperouse@email.com',
+      time: '23/10 às 14h'
+    },
+    {
+      name: 'Bobette Szczygiel',
+      email: 'bobette.szczygiel@email.com',
+      time: '23/10 às 14h'
     }
   ]}
 />

@@ -22,12 +22,19 @@ const DataListCard = ({
   minHeight,
   border,
   fields,
-  items
+  items,
+  Footer,
+  footerProps,
 }) => {
   const fieldNames = Object.keys(fields)
 
   return (
-    <Card title={sectionTitle} minHeight={minHeight}>
+    <Card
+      title={sectionTitle}
+      minHeight={minHeight}
+      Footer={Footer}
+      footerProps={footerProps}
+    >
       <Scrollbox>
         <DataList border={border}>
         {items.map(item => (
@@ -46,12 +53,19 @@ const DataListCard = ({
   )
 }
 
+const { oneOfType, oneOf, string, number, bool, object, array, node, func, shape } = PropTypes
+
 DataListCard.propTypes = {
-  sectionTitle: PropTypes.string,
-  minHeight: PropTypes.number,
-  border: PropTypes.bool,
-  fields: PropTypes.object,
-  items: PropTypes.array
+  sectionTitle: string,
+  minHeight: number,
+  border: bool,
+  fields: object,
+  items: array,
+  Footer: oneOfType([node, func]),
+  footerProps: shape({
+    align: oneOf(['flex-start', 'center', 'flex-end']),
+    justify: oneOf(['flex-start', 'center', 'flex-end', 'space-between']),
+  }),
 }
 
 DataListCard.defaultProps = {

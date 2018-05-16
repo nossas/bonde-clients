@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Button from '../../content/Button/Button'
 import Icon from '../../content/Icon/Icon'
 
@@ -82,7 +81,7 @@ class Pagination extends React.Component {
     const isLast = activeIndex === pages -1
 
     return (
-      <React.Fragment>
+      <span>
         <IconButton
           onClick={() => onClickFirst(this.handleActiveIndex(0))}
           disabled={isFirst}
@@ -117,7 +116,7 @@ class Pagination extends React.Component {
           disabled={isLast}
           name={iconLast}
         />
-      </React.Fragment>
+      </span>
     )
   }
 }
