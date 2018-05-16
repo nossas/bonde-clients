@@ -27,6 +27,16 @@
 </Button>
 ```
 
+### Button - `flat`
+```js
+<Button
+  onClick={() => alert('Button: onClick')}
+  flat
+>
+  Flat
+</Button>
+```
+
 ### Button - `disabled`
 ```js
 <Button disabled>Button</Button>
