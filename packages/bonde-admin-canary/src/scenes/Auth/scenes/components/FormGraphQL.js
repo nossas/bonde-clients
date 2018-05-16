@@ -1,14 +1,12 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import { Container, Title } from 'bonde-styleguide'
-import Form from '../../../../components/Form'
+import Form, { SubmissionError } from '../../../../components/Form'
 
 const FormGraphQL = ({
   children,
   mutation, 
-  onSuccess,
-  onFail,
-  parseValues
+  onSubmit
 }) => {
   return (
     <Container>
@@ -20,11 +18,13 @@ const FormGraphQL = ({
         {(mutationFunc) => (
           <Form
             onSubmit={(values) => {
-              return mutationFunc({
-                variables: parseValues ? parseValues(values) : values
-              })
-              .then(onSuccess)
-              .catch(onFail)
+              return onSubmit(values, mutationFunc)
+                .catch((error) => {
+                  if (error && error.formError) {
+                    throw new SubmissionError({ _error: error.formError })
+                  }
+                  console.error(error)
+                })
             }}
           >
             {children}

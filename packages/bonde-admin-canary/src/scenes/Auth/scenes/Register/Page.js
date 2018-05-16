@@ -12,7 +12,7 @@ import {
 
 import { FormGraphQL } from '../components'
 import { Link } from '../../../../components'
-import { Field, SubmissionError } from '../../../../components/Form'
+import { Field } from '../../../../components/Form'
 import { isEmail, isEmpty } from '../../../../services/validations'
 
 class AuthRegister extends React.Component { 
@@ -23,13 +23,17 @@ class AuthRegister extends React.Component {
     return (
       <FormGraphQL
         mutation={REGISTER}
-        parseValues={values => ({ user: { data: JSON.stringify(values) } })}
-        onSuccess={({ data }) => {
-          throw new SubmissionError({
-            _error: 'authentication is fail.'
+        onSubmit={(values, mutation) => {
+          return mutation({
+            variables: { user: { data: JSON.stringify(values) } }
           })
-          // eslint-disable-next-line
-          AuthAPI.login(data)
+          .then(({ data }) => {
+            if (data.register && !data.register.jwtToken) {
+              return Promise.reject({ formError: 'register is fail.' })
+            }
+            AuthAPI.login({ jwtToken: data.register.jwtToken })
+            return Promise.resolve()
+          })
         }}
       >
         <Flexbox colSize='49.1%' spacing='between'>

@@ -12,18 +12,24 @@ import {
 
 import { FormGraphQL } from '../components'
 import { Link } from '../../../../components'
-import { Field, SubmissionError } from '../../../../components/Form'
+import { Field } from '../../../../components/Form'
 import { isEmail, isEmpty } from '../../../../services/validations'
 
 const AuthLogin = () => (
   <FormGraphQL
     mutation={AUTHENTICATE}
-    onSuccess={({ data }) => {
-      throw new SubmissionError({
-        _error: 'authentication is fail.'
-      })
-      // eslint-disable-next-line
-      AuthAPI.login(data)
+    onSubmit={(values, mutation) => {
+      return mutation({ variables: values })
+        .then(({ data }) => {
+          if (data.authenticate && !data.authenticate.jwtToken) {
+            return Promise.reject({
+              formError: 'OPS! Email ou senha incorretos.'
+            })
+          }
+          AuthAPI
+            .login({ jwtToken: data.authenticate.jwtToken })
+          return Promise.resolve()
+        })
     }}
   >
     <Field

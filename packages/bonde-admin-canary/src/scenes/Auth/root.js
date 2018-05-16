@@ -8,7 +8,7 @@ import { Page as RegisterPage } from './scenes/Register'
 const AuthRoot = ({ match }) => (
   <Switch>
     <PublicRoute path={`${match.url}/login`} component={LoginPage} redirectTo='/' />
-    <PublicRoute path={`${match.url}/register`} component={RegisterPage} />
+    <PublicRoute path={`${match.url}/register`} component={RegisterPage} redirectTo='/' />
     <PublicRoute component={NotFound} />
   </Switch>
 )
