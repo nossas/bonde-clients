@@ -2,7 +2,7 @@ workspace:
   base: /code
 
 pipeline:
-  unit-tests-lerna:
+  unit-tests:
     image: node:9-alpine
     commands:
       - npm install
@@ -11,13 +11,13 @@ pipeline:
     when:
       event: [push, tag]
 
-  build-staging:
+  staging-build:
     image: node:9-alpine
     environment:
       - NODE_ENV=production
-      - API_URL=https://api.staging.bonde.org
+      - API_URL=https://api-v1.staging.bonde.org
       - BOT_URL=https://beta.staging.bonde.org
-      - GRAPHQL_URL=https://data.staging.bonde.org/graphql
+      - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
       - AWS_BUCKET=bonde-assets-staging
     commands:
@@ -30,7 +30,7 @@ pipeline:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
-  publish-admin-staging:
+  staging-publish-admin:
     image: plugins/docker
     repo: nossas/bonde-admin
     group: publishing
@@ -41,9 +41,9 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [hotfix-*, develop]
 
-  publish-public-staging:
+  staging-publish-public:
     image: plugins/docker
     repo: nossas/bonde-public
     group: publishing
@@ -56,7 +56,7 @@ pipeline:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
-  publish-styleguide-staging:
+  staging-publish-styleguide:
     image: plugins/docker
     repo: nossas/bonde-styleguide
     group: publishing
@@ -80,9 +80,9 @@ pipeline:
       - ${DRONE_BRANCH}
     when:
       status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
+      branch: [develop]
 
-  publish-admin-canary-staging:
+  staging-publish-admin-canary:
     image: plugins/docker
     repo: nossas/bonde-admin-canary
     group: publishing
@@ -93,26 +93,27 @@ pipeline:
       - ${DRONE_BRANCH}
     when:
       status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
+      branch: [release-*, feature-*, develop]
 
-  # deploy-admin-staging:
-  #   image: nossas/s3cmd
-  #   group: concurrent
-  #   commands:
-  #     - echo access_key=$AWS_ACCESS_KEY_ID >> ~/.s3cfg
-  #     - echo secret_key=$AWS_SECRET_ACCESS_KEY >> ~/.s3cfg
-  #     - s3cmd --acl-public --rexclude='\.svg$|\.html$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Content-Encoding:gzip' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-  #     - s3cmd --acl-public --exclude='*' --rinclude='\.svg$|\.html$|\.ttf$|\.eot$|\.png$|\.otf|woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$' --add-header='Cache-Control:max-age=3600' sync public/ s3://bonde-assets-staging
-  #   secrets: [ aws_access_key_id, aws_secret_access_key ]
-  #   when:
-  #     status: success
-  #     branch: [hotfix/*, release/*, feature/*, support/*, develop]
-  deploy-staging:
+  staging-deploy-admin:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
-    service: staging/client
-    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
+    service: webservers/admin
+    docker_image: nossas/bonde-admin:${DRONE_BRANCH}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix-*, develop]
+
+  staging-deploy-public:
+    image: peloton/drone-rancher
+    group: deploying
+    url: http://cluster.bonde.org
+    service: webservers/public
+    docker_image: nossas/bonde-public:${DRONE_BRANCH}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -120,65 +121,39 @@ pipeline:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
-  deploy-staging-non-ssl:
+  staging-deploy-styleguide:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
-    service: staging/client-non-ssl
-    docker_image: nossas/bonde-public:${DRONE_BRANCH/\//-}
+    service: webservers/styleguide
+    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [develop]
 
-  deploy-staging-styleguide:
+  staging-deploy-admin-canary:
     image: peloton/drone-rancher
     group: deploying
     url: http://cluster.bonde.org
-    service: staging/styleguide
-    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-
-  deploy-staging-admin-canary:
-    image: peloton/drone-rancher
-    group: deploying
-    url: http://cluster.bonde.org
-    service: staging/admin-canary
+    service: webservers/admin-canary
     docker_image: nossas/bonde-admin-canary:${DRONE_BRANCH}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
+      branch: [release-*, feature-*, develop]
 
-  deploy-staging-admin-canary:
-    image: peloton/drone-rancher
-    group: deploying
-    url: http://cluster.bonde.org
-    service: staging/admin-canary
-    docker_image: nossas/bonde-admin-canary:${DRONE_BRANCH}
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix-*, release-*, feature-*, develop]
-
-  build-production:
+  production-build:
     image: node:9-alpine
     environment:
       - NODE_ENV=production
-      - API_URL=https://api.bonde.org
+      - API_URL=https://api-v1.bonde.org
       - BOT_URL=https://beta.bonde.org
-      - GRAPHQL_URL=https://data.bonde.org/graphql
+      - GRAPHQL_URL=https://api-v2.bonde.org/graphql
       - APP_DOMAIN=bonde.org
       - AWS_BUCKET=bonde-assets
     commands:
@@ -191,7 +166,7 @@ pipeline:
       status: success
       event: tag
 
-  publish-admin-production:
+  production-publish-admin:
     image: plugins/docker
     repo: nossas/bonde-admin
     group: publishing
@@ -204,7 +179,7 @@ pipeline:
       status: success
       event: tag
 
-  publish-public-production:
+  production-publish-public:
     image: plugins/docker
     repo: nossas/bonde-public
     group: publishing
@@ -217,11 +192,11 @@ pipeline:
       status: success
       event: tag
 
-  deploy-production:
+  production-deploy-admin:
     image: peloton/drone-rancher
     group: deploying_prod
     url: http://cluster.bonde.org
-    service: bonde/client
+    service: webservers/admin
     docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
@@ -230,11 +205,11 @@ pipeline:
       status: success
       event: tag
 
-  deploy-production-non-ssl:
+  production-deploy-public:
     image: peloton/drone-rancher
     group: deploying_prod
     url: http://cluster.bonde.org
-    service: bonde/client-non-ssl
+    service: webservers/public
     docker_image: "nossas/bonde-public:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
