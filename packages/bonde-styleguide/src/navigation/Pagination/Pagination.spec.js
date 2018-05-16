@@ -110,7 +110,7 @@ test('disable prev button and first icon button when first page index was reache
   t.is(node.find('IconButton').get(1).props.disabled, false)
 })
 
-test('disable next button and last icon button when last icon button was clicked', t => {
+test('disable prev button and first icon button when first icon button was clicked', t => {
   const pages = 5
   const node = shallow(<Pagination pages={pages} activeIndex={4} />)
   node.find('IconButton').at(0).simulate('click')
