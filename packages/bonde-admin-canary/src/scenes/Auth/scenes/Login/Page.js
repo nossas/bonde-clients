@@ -1,5 +1,6 @@
 import React from 'react'
 import { AuthAPI } from '../../../../services/auth' 
+import { translate } from '../../../../services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
 
 import {
@@ -15,7 +16,7 @@ import { Link } from '../../../../components'
 import { Field } from '../../../../components/Form'
 import { isEmail, isEmpty } from '../../../../services/validations'
 
-const AuthLogin = () => (
+const AuthLogin = ({ t }) => (
   <FormGraphQL
     mutation={AUTHENTICATE}
     onSubmit={(values, mutation) => {
@@ -23,7 +24,7 @@ const AuthLogin = () => (
         .then(({ data }) => {
           if (data.authenticate && !data.authenticate.jwtToken) {
             return Promise.reject({
-              formError: 'OPS! Email ou senha incorretos.'
+              formError: t('form.authError')
             })
           }
           AuthAPI
@@ -34,8 +35,8 @@ const AuthLogin = () => (
   >
     <Field
       name='email'
-      label='Email'
-      placeholder='seuemail@exemplo.com'
+      label={t('fields.email.label')}
+      placeholder={t('fields.email.placeholder')}
       component={FormField}
       inputComponent={Input}
       validate={(value) => {
@@ -46,31 +47,33 @@ const AuthLogin = () => (
     <Field
       name='password'
       type='password'
-      placeholder='sua senha'
-      label='Senha' 
+      placeholder={t('fields.password.placeholder')}
+      label={t('fields.password.label')}
       component={FormField}
       inputComponent={Input}
       validate={value => isEmpty(value) && 'Required field'}
     />
     <Flexbox spacing='between' padding='0 0 24px'>
-      <Checkbox>Continuar conectadx</Checkbox>
+      <Checkbox>{t('links.stayConnected')}</Checkbox>
       <Link
         to='#esqueci-a-senha'
-        title='Esqueci a senha'
+        title={t('links.forgotPassword')}
       >
-        Esqueci a senha
+        {t('links.forgotPassword')}
       </Link> 
     </Flexbox>
     <Flexbox middle spacing='between'>
       <Link
         to='/auth/register'
-        title='Criar conta'
+        title={t('links.register')}
       >
-        Criar conta
+        {t('links.register')}
       </Link>
-      <Button type='submit'>Partiu</Button>
+      <Button type='submit' title={t('button.submit')}>
+        {t('button.submit')}
+      </Button>
     </Flexbox>
   </FormGraphQL>
 )
 
-export default AuthLogin
+export default translate('auth')(AuthLogin)

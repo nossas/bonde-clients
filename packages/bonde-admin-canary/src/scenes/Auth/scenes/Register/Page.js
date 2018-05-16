@@ -1,5 +1,6 @@
 import React from 'react'
 import { AuthAPI } from '../../../../services/auth' 
+import { translate } from '../../../../services/i18n' 
 import REGISTER from './register.graphql'
 
 import {
@@ -20,6 +21,8 @@ class AuthRegister extends React.Component {
   state = { showPassword: false }
 
   render () {
+    const { t } = this.props
+
     return (
       <FormGraphQL
         mutation={REGISTER}
@@ -39,16 +42,16 @@ class AuthRegister extends React.Component {
         <Flexbox colSize='49.1%' spacing='between'>
           <Field
             name='first_name'
-            label='Nome'
-            placeholder='Seu nome'
+            label={t('fields.firstName.label')}
+            placeholder={t('fields.firstName.placeholder')}
             component={FormField}
             inputComponent={Input}
             validate={value => isEmpty(value) && 'Required field'}
           />
           <Field
             name='last_name'
-            placeholder='Seu sobrenome'
-            label='Sobrenome' 
+            label={t('fields.lastName.label')}
+            placeholder={t('fields.lastName.placeholder')}
             component={FormField}
             inputComponent={Input}
             validate={value => isEmpty(value) && 'Required field'}
@@ -56,8 +59,8 @@ class AuthRegister extends React.Component {
         </Flexbox>
         <Field
             name='email'
-            label='Email'
-            placeholder='seuemail@exemplo.com'
+            label={t('fields.email.label')}
+            placeholder={t('fields.email.placeholder')}
             component={FormField}
             inputComponent={Input}
             validate={(value) => {
@@ -69,8 +72,8 @@ class AuthRegister extends React.Component {
             name='password'
             type={!this.state.showPassword ? 'password' : 'text'}
             placeholder='******'
-            label='Senha'
-            hint='Minimun 6 characters'
+            label={t('fields.password.label')}
+            hint={t('fields.password.hint')}
             component={FormField}
             inputComponent={Input}
             validate={value => {
@@ -83,21 +86,21 @@ class AuthRegister extends React.Component {
             checked={this.state.showPassword}
             onChange={() => this.setState({ showPassword: !this.state.showPassword })}
           >
-            Mostrar senha
+            {t('links.showPassword')}
           </Checkbox>
-          <Checkbox>Continuar conectadx</Checkbox> 
+          <Checkbox>{t('links.stayConnected')}</Checkbox> 
         </Flexbox>
         <Flexbox middle spacing='between'>
           <Link
             to='/auth/login'
-            title='Já tenho conta'
+            title={t('links.iHaveAccount')}
           >
-            Já tenho conta
+            {t('links.iHaveAccount')}
           </Link>
-          <Button type='submit'>Partiu</Button>
+          <Button type='submit'>{t('button.submit')}</Button>
         </Flexbox>
       </FormGraphQL>
     )
   }
 }
-export default AuthRegister
+export default translate('auth')(AuthRegister)
