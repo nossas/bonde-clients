@@ -25,6 +25,11 @@ const Flexbox = styled.div`
     justify-content: center;
   `}
 
+  ${props => props.end && `
+    align-items: end;
+    justify-content: flex-end;
+  `}
+
   ${props => props.spacing && `
     justify-content: space-${props.spacing}  
   `}
@@ -42,6 +47,7 @@ Flexbox.propTypes = {
   horizontal: PropTypes.bool,
   vertical: PropTypes.bool,
   middle: PropTypes.bool,
+  end: PropTypes.bool,
   spacing: PropTypes.oneOf(['around', 'between']),
   colSize: PropTypes.string
 }
