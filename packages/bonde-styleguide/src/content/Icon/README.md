@@ -5,6 +5,9 @@
   <Icon name='archive' />
   <Icon name='bonde' />
   <Icon name='copy' />
+  <Icon name='double-arrow-left' />
+  <Icon name='double-arrow-right' />
+  <Icon name='exclamation' />
   <Icon name='plus' />
   <Icon name='share' />
   <Icon name='sound' />

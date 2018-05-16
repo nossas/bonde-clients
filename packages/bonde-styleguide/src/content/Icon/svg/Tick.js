@@ -16,6 +16,6 @@ const Icon = ({ className, color, size }) => (
   </svg>
 )
 
-Icon.displayName = 'Icon.Star'
+Icon.displayName = 'Icon.Tick'
 
 export default Icon
