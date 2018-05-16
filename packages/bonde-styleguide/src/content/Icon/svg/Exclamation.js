@@ -18,6 +18,6 @@ const Icon = ({ className, color, size }) => (
   </svg>
 )
 
-Icon.displayName = 'Icon.DoubleArrowRight'
+Icon.displayName = 'Icon.Exclamation'
 
 export default Icon

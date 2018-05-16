@@ -6,12 +6,10 @@ import Icon from '../../content/Icon/Icon'
 //
 // TODO: Make component accepts the content like icons as a children.
 //
-const InputAdornment = styled(({ className, invalid }) => (
+const InputAdornment = styled(({ className, invalid, valid }) => (
   <div className={className}>
-    {invalid ?
-      '!' :
-      <Icon name='tick' size={8} color='#50E3C2' />
-    }
+    {invalid && <Icon name='exclamation' size={8} color='#FF2B4E' />}
+    {valid && <Icon name='tick' size={8} color='#50E3C2' />}
   </div>
 ))`
   font-family: 'Nunito Sans', sans-serif;
@@ -23,7 +21,6 @@ const InputAdornment = styled(({ className, invalid }) => (
   position: relative;
 
   ${props => props.invalid && `{
-    color: #FF2B4E;
     border-bottom-color: #FF2B4E;
   }`}
 

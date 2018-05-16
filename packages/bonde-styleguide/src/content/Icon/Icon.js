@@ -31,5 +31,7 @@ Icon.defaultProps = {
   size: 13
 }
 
+Icon.displayName = 'Icon'
+
 /** @component */
 export default Icon
