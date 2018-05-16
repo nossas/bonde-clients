@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataListCard, Image, Text, Icon } from 'bonde-styleguide'
+import { DataListCard, Image, Text, Icon, Pagination } from 'bonde-styleguide'
 
 const mobilizations = [
   {
@@ -54,6 +54,7 @@ const MobilizationList = ({ t }) => {
   return (
     <DataListCard
       sectionTitle={t('my-mobilizations')}
+      Footer={() => <Pagination pages={4} />}
       fields={{
         image: {
           width: 40,
