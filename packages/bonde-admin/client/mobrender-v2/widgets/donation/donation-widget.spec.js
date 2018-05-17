@@ -11,7 +11,7 @@ const DonationWidget = factoryDonation({
   tellAFriend: TellAFriend
 })
 
-describe('<DonationWidget />', () => {
+describe.skip('<DonationWidget />', () => {
   let donationWidget
   const props = Map({
     mobilization: Map({ id: 1, header_font: 'Ubuntu Mono' }),
