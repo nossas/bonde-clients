@@ -10,9 +10,9 @@ const Button = styled.button`{
   font-size: 13px;
   text-align: center;
   line-height: 1.15;
-  height: 45px;
+  height: 38px;
   border-radius: 100px;
-  padding: 17px 19px;
+  padding: 0 25px;
   min-width: 192px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -73,9 +73,35 @@ const Button = styled.button`{
     &:hover { background-color: #d1cdd2 }
     &:active { background-color: #d1cdd2 }
   `}
+
+  ${props => props.flat && `
+    background-color: transparent;
+    color: #000000;
+    box-shadow: none;
+    min-width: 88px;
+
+    &:hover {
+      background-color: transparent;
+      color: #424242;
+    }
+    &:active {
+      background-color: transparent;
+      color: #9b9b9b;
+    }
+
+    ${props.disabled && `
+      color: #aaaaaa;
+      &:hover { color: #aaaaaa }
+      &:active { color: #aaaaaa }
+    `}
+  `}
+
+  ${props => props.color && `
+    color: ${props.color};
+  `}
 }`
 
-const { node, bool } = PropTypes
+const { node, bool, string } = PropTypes
 
 Button.propTypes = {
   /** Children nodes. */
@@ -85,7 +111,11 @@ Button.propTypes = {
   /** Dark button style. */
   dark: bool,
   /** Light button style. */
-  light: bool
+  light: bool,
+  /** Flat button style. */
+  flat: bool,
+  /** Button text color. */
+  color: string
 }
 
 Button.displayName = 'Button'

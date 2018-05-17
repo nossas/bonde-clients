@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Button from '../../content/Button/Button'
+import IconColorful from '../../content/IconColorful/IconColorful'
 
 const FooterContent = styled.div`{
   flex-grow: 1;
@@ -24,12 +25,12 @@ const FooterContent = styled.div`{
 
 const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   <div className={className}>
-    <img alt='Logo' src='http://via.placeholder.com/150x30?text=BONDE' />
+    <IconColorful name='bonde' size={115} inverted />
     <FooterContent>
     {children}
     </FooterContent>
     {btnHelpLabel && btnHelpClick && (
-      <Button onClick={btnHelpClick}>{btnHelpLabel}</Button>
+      <Button dark onClick={btnHelpClick}>{btnHelpLabel}</Button>
     )}
   </div>
 ))`{
@@ -38,6 +39,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   height: 94px;
   background: #000;
   padding: 0 150px 0;
+  overflow: hidden;
 }`
 
 const { oneOfType, node, func, string } = PropTypes

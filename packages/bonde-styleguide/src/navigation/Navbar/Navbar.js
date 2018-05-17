@@ -19,7 +19,7 @@ const Navbar = styled(({
   <div className={className}>
     {HomePageIcon && (
       <a className='homePageLink' href={homePageUrl || '#'} title={homePageTitle}>
-        <HomePageIcon size={16} />
+        <HomePageIcon size={18} />
       </a>
     )}
     <NavContainer>
@@ -29,12 +29,13 @@ const Navbar = styled(({
 ))`{
   background-color: ${props => props.bgColor || '#000'};
   width: inherit;
-  height: 50px;
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 
   & > a.homePageLink {
     margin-right: 15px;
+    height: 18px;
   }
 }`
 
@@ -50,7 +51,7 @@ Navbar.propTypes = {
 }
 
 Navbar.defaultProps = {
-  homePageIcon: () => <Icon name='bonde' />
+  homePageIcon: ({ size }) => <Icon name='bonde' size={size} />
 }
 
 /* @component */

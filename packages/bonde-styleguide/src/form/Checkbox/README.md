@@ -1,5 +1,5 @@
 ```js
-<Checkbox>Default Checkbox</Checkbox>
+<Checkbox>Default</Checkbox>
 ```
 
 
@@ -7,7 +7,7 @@
 
 
 ```js
-<Checkbox checked>Checked Checkbox</Checkbox>
+<Checkbox checked>Checked</Checkbox>
 ```
 
 
@@ -15,7 +15,7 @@
 
 
 ```js
-<Checkbox readOnly>Read-only Checkbox</Checkbox>
+<Checkbox readOnly>Read-only</Checkbox>
 ```
 
 
@@ -23,5 +23,8 @@
 
 
 ```js
-<Checkbox disabled>Disabled Checkbox</Checkbox>
+<div>
+  <Checkbox disabled checked>Disabled and Checked</Checkbox>
+  <Checkbox disabled>Disabled</Checkbox>
+</div>
 ```

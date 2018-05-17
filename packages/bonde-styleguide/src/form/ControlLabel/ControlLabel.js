@@ -10,5 +10,7 @@ const ControlLabel = styled.label`{
   text-transform: uppercase;
 }`
 
+ControlLabel.displayName = 'ControlLabel'
+
 /* @component */
 export default ControlLabel

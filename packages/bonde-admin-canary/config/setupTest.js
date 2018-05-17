@@ -46,3 +46,8 @@ class XMLHttpRequest {
 }
 
 global.XMLHttpRequest = XMLHttpRequest;
+
+// mock png
+import requireHacker from 'require-hacker'
+
+requireHacker.hook('png', () => 'module.exports = ""')

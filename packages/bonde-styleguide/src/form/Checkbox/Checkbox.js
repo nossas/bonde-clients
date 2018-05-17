@@ -11,7 +11,7 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
   font-family: 'Nunito Sans', sans-serif;
   display: block;
   position: relative;
-  padding-left: 30px;
+  padding-left: 35px;
   margin-bottom: 15px;
   cursor: pointer;
   font-size: 18px;
@@ -24,10 +24,10 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
 
   & .box {
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 0;
-    height: 19px;
-    width: 19px;
+    height: 17px;
+    width: 17px;
     background: #fff;
     border: 1px solid #4a4a4a;
     border-radius: 4px;
@@ -62,23 +62,20 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
     color: #d1cdd2;
   }
 
-  & .box:after {
-    content: '';
-    position: absolute;
-    display: none;
-  }
-
   & input:checked ~ .box:after {
     display: block;
   }
 
   & .box:after {
-    left: 8px;
+    content: '';
+    position: absolute;
+    display: none;
+    left: 7px;
     top: 4px;
     width: 3px;
-    height: 8px;
+    height: 6px;
     border: solid #fff;
-    border-width: 0 2px 2px 0;
+    border-width: 0 1px 1px 0;
     transform: rotate(45deg);
   }
 }`

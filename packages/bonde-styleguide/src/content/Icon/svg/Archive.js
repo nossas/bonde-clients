@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Icon = ({ color, size }) => (
+const Icon = ({ className, color, size }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
+    className={className}
     width={size || '12'}
     height={size || '12'}
     viewBox='0 0 12 12'

@@ -1,4 +1,5 @@
 import WebFont from 'webfontloader'
+import './index.css'
 
 WebFont.load({
   google: {
@@ -6,48 +7,12 @@ WebFont.load({
   }
 })
 
-// export { default as Assets } from './Assets'
-// export { default as Header } from './Header'
-// export { default as Footer } from './Footer'
-// export { default as Navbar } from './Navbar'
-// export { default as Image } from './Image'
-// export { default as Page } from './Layout/Page'
-
-export { default as ActionCard } from './cards/ActionCard/ActionCard'
-export { default as AreaChartCard } from './cards/AreaChartCard/AreaChartCard'
-export { default as Card } from './cards/Card/Card'
-export { default as ClickableCard } from './cards/ClickableCard/ClickableCard'
-export { default as DataListCard } from './cards/DataListCard/DataListCard'
-export { default as FeedsCard } from './cards/FeedsCard/FeedsCard'
-export { default as Panel } from './cards/Panel/Panel'
-export { default as RankingCard } from './cards/RankingCard/RankingCard'
-export { default as NumberCard } from './cards/NumberCard/NumberCard'
-
-export { default as Button } from './content/Button/Button'
-export { default as Icon } from './content/Icon/Icon'
-export { default as IconColorful } from './content/IconColorful/IconColorful'
-export { default as Image } from './content/Image/Image'
-export { default as Number } from './content/Number/Number'
-export { default as Text } from './content/Text/Text'
-export { default as Title } from './content/Title/Title'
-
-export { default as Cell } from './layout/Cell/Cell'
-export { default as Flexbox } from './layout/Flexbox/Flexbox'
-export { default as Grid } from './layout/Grid/Grid'
-export { default as Scrollbox } from './layout/Scrollbox/Scrollbox'
-
-export { default as DataList } from './list/DataList/DataList'
-export { default as DataListRow } from './list//DataListRow/DataListRow'
-export { default as DataListCol } from './list/DataListCol/DataListCol'
-export { default as Feed } from './list/Feed/Feed'
-export { default as FeedItem } from './list/FeedItem/FeedItem'
-
-export { default as Loading } from './await/Loading/Loading'
-
-export { default as ProgressBar } from './progress/ProgressBar/ProgressBar'
-export { default as ProgressRanking } from './progress/ProgressRanking/ProgressRanking'
-export { default as ProgressRankingItem } from './progress/ProgressRankingItem/ProgressRankingItem'
-
-export { default as Tab } from './navigation/Tab/Tab'
-export { default as TabItem } from './navigation/TabItem/TabItem'
-
+export * from './assets'
+export * from './await'
+export * from './cards'
+export * from './content'
+export * from './form'
+export * from './layout'
+export * from './list'
+export * from './navigation'
+export * from './progress'

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 // Import used reducers
+import { reducer as formReducer } from 'redux-form'
 import { reducer as authReducer } from '../auth/redux'
 
 // Reducer example
@@ -15,5 +16,6 @@ const home = (state = '', action) => {
 export default combineReducers({
   // insert your reducers function
   home,
-  auth: authReducer
+  auth: authReducer,
+  form: formReducer
 })

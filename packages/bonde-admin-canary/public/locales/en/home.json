@@ -1,3 +1,13 @@
 {
-  "description": "Insert your name following"
+  "about": "About",
+  "active": "Active",
+  "contact": "Contact",
+  "create-community": "Create Community",
+  "create-mobilization": "Create Mobilization",
+  "draft": "Draft",
+  "help": "Help me",
+  "home": "Home",
+  "my-communities": "My Community",
+  "my-mobilizations": "My Mobilizations",
+  "trending-mobs": "Trending mobs"
 }

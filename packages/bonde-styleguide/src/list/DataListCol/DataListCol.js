@@ -18,10 +18,7 @@ const DataListCol = styled.div`{
     padding-right: 26px;
   }
 
-  ${props => props.align === 'left' && `
-    display: flex;
-    justify-content: flex-end;
-  `}
+  text-align: ${props => props.align};
 }`
 
 const { number, string } = PropTypes
@@ -31,6 +28,10 @@ DataListCol.propTypes = {
   width: number,
   /** The list column alignment. */
   align: string
+}
+
+DataListCol.defaultProps = {
+  align: 'inherit'
 }
 
 /* @component */

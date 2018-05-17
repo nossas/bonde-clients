@@ -13,6 +13,7 @@ const Text = styled.p`{
   color: ${props => props.color};
   text-align: ${props => props.align};
   text-transform: ${props => props.uppercase ? 'uppercase': null};
+  letter-spacing: ${props => props.letterSpacing};
   ${props => borderSpacing('margin', props.margin)}
 }`
 
@@ -28,14 +29,16 @@ Text.propTypes = {
     PropTypes.string
   ]),
   fontSize: PropTypes.number,
+  letterSpacing: PropTypes.string,
   uppercase: PropTypes.bool,
 }
 
 Text.defaultProps = {
-  color: '#000',
-  lineHeight: 1.39,
+  color: '#424242',
+  lineHeight: 1.56,
   fontWeight: 'normal',
-  fontSize: 18,
+  fontSize: 16,
+  letterSpacing: 'inherit',
   align: 'left',
   margin: {}
 }
