@@ -61,7 +61,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [hotfix/*, develop]
 
   staging-publish-public:
     image: plugins/docker
