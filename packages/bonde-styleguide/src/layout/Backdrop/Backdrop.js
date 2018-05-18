@@ -10,6 +10,7 @@ import styled from 'styled-components'
   bottom: 0;
   left: 0;
   right: 0;
+  cursor: default;
   z-index: ${props => props.zIndex};
   background-color: ${props => props.color};
 `
