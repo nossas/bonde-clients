@@ -3,23 +3,25 @@ import styled from 'styled-components'
 import BGImage from './assets/bg@2x.png'
 import Flexbox from '../Flexbox2/Flexbox2'
 import { Title } from '../../content'
-
+import IconColorful from '../../content/IconColorful/IconColorful'
+import Text from '../../content/Text/Text'
 
 const Content = styled.div`
   position: fixed;
   width: 50%;
   height: 100%;
-  
+  padding: 13%;
+
   ${props => props.left && `left: 0;`}
   ${props => props.right && `right: 0;`}
 
   ${props => props.bgImage && `
     background: url('${props.bgImage}') no-repeat;
     background-position: center center;
-    background-size: cover; 
+    background-size: cover;
   `}
   ${props => props.bgColor && `
-    background-color: ${props.bgColor}; 
+    background-color: ${props.bgColor};
   `}
 `
 
@@ -31,13 +33,24 @@ const Container = styled.div`
 
 Container.displayName = 'Container'
 
+const BondeIcon = styled(({ className }) => (
+  <div className={className}>
+    <IconColorful name='bonde' size={260} inverted />
+  </div>
+))`
+  width: 100%;
+  margin-bottom: -25px;
+  margin-left: -10px;
+`
+
 export default ({ children }) => (
   <Container>
     <Content left bgImage={BGImage}>
       <Flexbox vertical middle padding='0 160px'>
+        <BondeIcon />
         <Title.H2 color='#fff'>Quer mobilizar pessoas por uma causa?</Title.H2>
         <Title.H2 color='#fff'>
-          Cola aí, pode entrar. 
+          Cola aí, pode entrar.
           O BONDE te leva lá.
         </Title.H2>
       </Flexbox>
