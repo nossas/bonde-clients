@@ -1,0 +1,11 @@
+{
+  "actionButtons": {
+    "community": "Criar Comunidade",
+    "mobilization": "Criar Mobilização"
+  },
+  "footer": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "help": "Ajuda eu"
+  }
+}
