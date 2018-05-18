@@ -1,12 +1,7 @@
 {
-  "about": "Sobre",
   "active": "Ativa",
-  "contact": "Contato",
-  "create-community": "Criar Comunidade",
-  "create-mobilization": "Criar Mobilização",
   "draft": "Rascunho",
-  "help": "Ajuda eu",
-  "home": "Home",
+  "title": "Home",
   "my-communities": "Minhas Comunidades",
   "my-mobilizations": "Minhas Mobilizações",
   "trending-mobs": "Trending mobs"
