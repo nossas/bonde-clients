@@ -76,6 +76,7 @@ const Button = styled.button`{
 
   ${props => props.flat && `
     background-color: transparent;
+    border-color: transparent;
     color: #000000;
     box-shadow: none;
     min-width: 88px;
@@ -88,6 +89,19 @@ const Button = styled.button`{
       background-color: transparent;
       color: #9b9b9b;
     }
+
+    ${props.dark && `
+      color: #fff;
+
+      &:hover {
+        border-color: transparent;
+        color: #bebebe;
+      }
+      &:active {
+        border-color: transparent;
+        color: #ee0099;
+      }
+    `}
 
     ${props.disabled && `
       color: #aaaaaa;
