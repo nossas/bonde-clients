@@ -14,21 +14,26 @@ const DefaultNavBar = () => (
   </Navbar>
 )
 
-const DefaultActionButtons = ({ t, noActionButtons }) => noActionButtons ? [] : [
-  <Button dark onClick={() => alert('Button: onClick')}>
-    {t('actionButtons.mobilization')}
-  </Button>,
-  <Button onClick={() => alert('Button: onClick')}>
-    {t('actionButtons.community')}
-  </Button>
-]
+const DefaultActionButtons = ({ t, noActionButtons, ActionButtonsWrapper }) => (
+  noActionButtons ? null : ({ Wrapper }) => (
+  <ActionButtonsWrapper>
+    <Wrapper>
+      <Button dark onClick={() => alert('Button: onClick')}>
+        {t('actionButtons.mobilization')}
+      </Button>,
+      <Button onClick={() => alert('Button: onClick')}>
+        {t('actionButtons.community')}
+      </Button>
+    </Wrapper>
+  </ActionButtonsWrapper>
+))
 
-const PageAdmin = ({ children, t, title, noActionButtons }) => (
+const PageAdmin = ({ children, t, Title, noActionButtons, ActionButtonsWrapper }) => (
   <React.Fragment>
     <Header
-      pageTitle={title}
+      PageTitle={Title}
       navbar={DefaultNavBar}
-      actionButtons={DefaultActionButtons({ t, noActionButtons })}
+      ActionButtons={DefaultActionButtons({ t, noActionButtons, ActionButtonsWrapper })}
     />
 
     <Page>
@@ -49,11 +54,16 @@ const PageAdmin = ({ children, t, title, noActionButtons }) => (
   </React.Fragment>
 )
 
-const { string, bool } = PropTypes
+const { oneOfType, string, func, node, bool } = PropTypes
 
 PageAdmin.propTypes = {
-  title: string,
+  Title: oneOfType([string, func, node]),
+  ActionButtonsWrapper: oneOfType([func, node]),
   noActionButtons: bool,
+}
+
+PageAdmin.defaultProps = {
+  ActionButtonsWrapper: ({ children }) => <React.Fragment>{children}</React.Fragment>
 }
 
 export default translate('components-page-admin')(PageAdmin)
