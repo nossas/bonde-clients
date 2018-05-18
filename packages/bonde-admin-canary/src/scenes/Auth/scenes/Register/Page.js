@@ -1,6 +1,6 @@
 import React from 'react'
-import { AuthAPI } from '../../../../services/auth' 
-import { translate } from '../../../../services/i18n' 
+import { AuthAPI } from '../../../../services/auth'
+import { translate } from '../../../../services/i18n'
 import REGISTER from './register.graphql'
 
 import {
@@ -16,7 +16,7 @@ import { Link } from '../../../../components'
 import { Field } from '../../../../components/Form'
 import { isEmail, isEmpty } from '../../../../services/validations'
 
-class AuthRegister extends React.Component { 
+class AuthRegister extends React.Component {
 
   state = { showPassword: false }
 
@@ -88,14 +88,14 @@ class AuthRegister extends React.Component {
           >
             {t('links.showPassword')}
           </Checkbox>
-          <Checkbox>{t('links.stayConnected')}</Checkbox> 
+          <Checkbox>{t('links.stayConnected')}</Checkbox>
         </Flexbox>
         <Flexbox middle spacing='between'>
           <Link
             to='/auth/login'
             title={t('links.iHaveAccount')}
           >
-            {t('links.iHaveAccount')}
+            <Button flat>{t('links.iHaveAccount')}</Button>
           </Link>
           <Button type='submit'>{t('button.submit')}</Button>
         </Flexbox>

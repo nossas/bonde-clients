@@ -1,5 +1,5 @@
 import React from 'react'
-import { AuthAPI } from '../../../../services/auth' 
+import { AuthAPI } from '../../../../services/auth'
 import { translate } from '../../../../services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
 
@@ -60,14 +60,14 @@ const AuthLogin = ({ t }) => (
         title={t('links.forgotPassword')}
       >
         {t('links.forgotPassword')}
-      </Link> 
+      </Link>
     </Flexbox>
     <Flexbox middle spacing='between'>
       <Link
         to='/auth/register'
         title={t('links.register')}
       >
-        {t('links.register')}
+        <Button flat>{t('links.register')}</Button>
       </Link>
       <Button type='submit' title={t('button.submit')}>
         {t('button.submit')}
