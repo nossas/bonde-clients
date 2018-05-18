@@ -138,7 +138,7 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
 
 const Tooltip = styled(({ className, children, nolock, backdropClose, show, ...props }) => (
   <div className={className}>
-    {show && !nolock && <Backdrop onClick={backdropClose && props.onClose} />}
+    {show && !nolock && <Backdrop onClick={backdropClose ? props.onClose : undefined} />}
     {show && <CardTooltip {...props} />}
     {children}
   </div>
