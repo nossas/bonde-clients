@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 
 
 /**
@@ -10,7 +11,7 @@ const Flexbox = styled.div`
   display: flex;
 
   ${props => props.padding && `padding: ${props.padding};`}
-  
+
   ${props => props.horizontal && `
     width: 100%;
     flex-direction: row;
@@ -31,7 +32,7 @@ const Flexbox = styled.div`
   `}
 
   ${props => props.spacing && `
-    justify-content: space-${props.spacing}  
+    justify-content: space-${props.spacing}
   `}
 
   ${props => props.colSize && `
@@ -39,6 +40,9 @@ const Flexbox = styled.div`
       width: ${props.colSize};
     }
   `}
+
+  ${props => borderSpacing('margin', props.margin)}
+  ${props => borderSpacing('padding', props.padding)}
 `
 
 Flexbox.displayName = 'Flexbox2'
@@ -49,7 +53,14 @@ Flexbox.propTypes = {
   middle: PropTypes.bool,
   end: PropTypes.bool,
   spacing: PropTypes.oneOf(['around', 'between']),
-  colSize: PropTypes.string
+  colSize: PropTypes.string,
+  margin: borderSpacingPropTypes,
+  padding: borderSpacingPropTypes,
+}
+
+Flexbox.defaultProps = {
+  margin: {},
+  padding: {},
 }
 
 /* @component */
