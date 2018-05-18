@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { translate } from '../../services/i18n'
 import {
   Header, Page, Footer,
@@ -13,7 +14,7 @@ const DefaultNavBar = () => (
   </Navbar>
 )
 
-const DefaultActionButtons = ({ t }) => [
+const DefaultActionButtons = ({ t, noActionButtons }) => noActionButtons ? [] : [
   <Button dark onClick={() => alert('Button: onClick')}>
     {t('actionButtons.mobilization')}
   </Button>,
@@ -22,12 +23,12 @@ const DefaultActionButtons = ({ t }) => [
   </Button>
 ]
 
-const PageAdmin = ({ children, t, title }) => (
+const PageAdmin = ({ children, t, title, noActionButtons }) => (
   <React.Fragment>
     <Header
       pageTitle={title}
       navbar={DefaultNavBar}
-      actionButtons={DefaultActionButtons({ t })}
+      actionButtons={DefaultActionButtons({ t, noActionButtons })}
     />
 
     <Page>
@@ -47,5 +48,12 @@ const PageAdmin = ({ children, t, title }) => (
     </Footer>
   </React.Fragment>
 )
+
+const { string, bool } = PropTypes
+
+PageAdmin.propTypes = {
+  title: string,
+  noActionButtons: bool,
+}
 
 export default translate('components-page-admin')(PageAdmin)
