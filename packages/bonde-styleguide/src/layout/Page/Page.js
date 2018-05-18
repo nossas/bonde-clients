@@ -11,7 +11,7 @@ const PageContainer = styled.div`{
 const PageContent = styled.div`{
   position: relative;
   display: flex;
-  padding-top: 51px;
+  min-height: 100vh;
 }`
 
 const Page = ({ children, menuComponent: MenuComponent, bgColor }) => (
