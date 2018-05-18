@@ -4,7 +4,6 @@ import BGImage from './assets/bg@2x.png'
 import Flexbox from '../Flexbox2/Flexbox2'
 import { Title } from '../../content'
 import IconColorful from '../../content/IconColorful/IconColorful'
-import Text from '../../content/Text/Text'
 
 const Content = styled.div`
   position: fixed;
