@@ -8,7 +8,7 @@ import { Page as TagsPage } from './scenes/Tags'
 
 const AuthRoot = ({ match }) => (
   <Switch>
-    <PublicRoute path={`${match.url}/login`} component={LoginPage} redirectTo='/auth/tags' />
+    <PublicRoute path={`${match.url}/login`} component={LoginPage} redirectTo='/' />
     <PublicRoute path={`${match.url}/register`} component={RegisterPage} redirectTo='/auth/tags' />
     <PrivateRoute path={`${match.url}/tags`} component={TagsPage} redirectTo='/' />
     <PublicRoute component={NotFound} />
