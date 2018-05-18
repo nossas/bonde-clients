@@ -10,29 +10,35 @@ const Container = styled.div`{
   align-items: center;
 }`
 
-const ActionButtonsContainer = styled.div`
+const ButtonsWrapper = styled.div`
   & > * {
     margin-left: 16px;
   }
 `
 
+const PageTitleComponent = ({ children }) => (
+  <Title.H3 color='#fff'>
+    {children}
+  </Title.H3>
+)
+
 const Header = styled(({
   children,
   className,
-  pageTitle,
-  actionButtons,
+  PageTitle,
+  ActionButtons,
   navbar: Navbar,
   tabNavigation: Tabs
 }) => (
   <div className={className}>
     {Navbar && <Navbar />}
     <Container>
-      {pageTitle && <Title.H3 color='#fff'>{pageTitle}</Title.H3>}
-      {actionButtons && (
-        <ActionButtonsContainer>
-          {actionButtons}
-        </ActionButtonsContainer>
+      {PageTitle && (
+        PageTitle.constructor === String ?
+          <PageTitleComponent>{PageTitle}</PageTitleComponent> :
+          <PageTitle Default={PageTitleComponent} />
       )}
+      {ActionButtons && <ActionButtons Wrapper={ButtonsWrapper} />}
     </Container>
     {Tabs && <Tabs />}
   </div>
@@ -50,11 +56,11 @@ Header.propTypes = {
   /** The content of the header. */
   children: oneOfType([node, func]),
   /** The page title text. */
-  pageTitle: string,
+  PageTitle: oneOfType([node, func, string]),
   /** The navbar component. */
   navbar: oneOfType([node, func]),
   /** The action button component. */
-  actionButtons: arrayOf(oneOfType([node, func])),
+  ActionButtons: arrayOf(oneOfType([node, func])),
   /** The tab navition component. */
   tabNavigation: oneOfType([node, func])
 }

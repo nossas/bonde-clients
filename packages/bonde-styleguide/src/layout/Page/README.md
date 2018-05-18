@@ -46,7 +46,7 @@ const PageTabMenu = () => (
 );
 
 <div>
-  <Header pageTitle='Respeita as Mina'>
+  <Header PageTitle='Respeita as Mina'>
     <ModuleTabMenu />
   </Header>
   <Page menuComponent={PageTabMenu}>
