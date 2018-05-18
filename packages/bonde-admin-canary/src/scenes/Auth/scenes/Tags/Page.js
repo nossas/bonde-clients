@@ -7,7 +7,7 @@ import { Redirect } from 'react-router'
 
 import { translate, Interpolate } from '../../../../services/i18n'
 import { PageAdmin } from '../../../../components'
-import Form, { Field, SubmissionError } from '../../../../components/Form'
+import Form, { Field } from '../../../../components/Form'
 
 const classes = {
   container: {
