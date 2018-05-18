@@ -136,10 +136,10 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
   ${props => props.position && props.position.right && `right: ${props.position.right};`}
 `
 
-const Tooltip = styled(({ className, children, nolock, ...props }) => (
+const Tooltip = styled(({ className, children, nolock, backdropClose, show, ...props }) => (
   <div className={className}>
-    {!nolock && <Backdrop onClick={props.onClose} />}
-    <CardTooltip {...props} />
+    {show && !nolock && <Backdrop onClick={backdropClose && props.onClose} />}
+    {show && <CardTooltip {...props} />}
     {children}
   </div>
 ))`
@@ -156,7 +156,9 @@ Tooltip.propTypes = {
   Content: oneOfType([node, func]).isRequired,
   /** If pass this prop, the backdrop will not be rendered. */
   nolock: bool,
+  show: bool,
   onClose: func,
+  backdropClose: bool,
   placement: oneOf([
     'top-left',
     'top-middle',
@@ -181,6 +183,8 @@ Tooltip.propTypes = {
 
 Tooltip.defaultProps = {
   nolock: false,
+  backdropClose: false,
+  show: true,
   placement: 'right-top',
   position: {},
 }
