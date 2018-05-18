@@ -1,6 +1,6 @@
 import React from 'react'
 import { translate } from '../../services/i18n'
-import { Grid, Cell, Backdrop, Loading, Flexbox2 as Flexbox, Title, Text } from 'bonde-styleguide'
+import { Grid, Cell, Backdrop, Loading, Title, Text } from 'bonde-styleguide'
 
 import { PageAdmin } from '../../components'
 import { CommunityList, MobilizationList, TrendingMobs } from './components'
