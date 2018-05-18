@@ -13,6 +13,7 @@ pipeline:
 
   staging-build:
     image: node:9-alpine
+    group: building
     environment:
       - NODE_ENV=production
       - API_URL=https://api-v1.staging.bonde.org
@@ -32,6 +33,7 @@ pipeline:
 
   staging-build-admin:
     image: node:9-alpine
+    group: building
     environment:
       - NODE_ENV=production
       - API_URL=https://api-v1.staging.bonde.org
@@ -46,19 +48,6 @@ pipeline:
       - ./node_modules/.bin/lerna run testx --parallel
       - ./node_modules/.bin/lerna run buildx --parallel
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
-    when:
-      status: success
-      branch: [hotfix/*, develop]
-
-  staging-publish-admin:
-    image: plugins/docker
-    repo: nossas/bonde-admin
-    group: publishing
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/bonde-admin/Dockerfile
-    context: packages/bonde-admin/
-    tags:
-      - ${DRONE_BRANCH/\//-}
     when:
       status: success
       branch: [hotfix/*, develop]
@@ -102,6 +91,19 @@ pipeline:
       status: success
       branch: [release/*, feature/*, develop]
 
+  staging-publish-admin:
+    image: plugins/docker
+    repo: nossas/bonde-admin
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/bonde-admin/Dockerfile
+    context: packages/bonde-admin/
+    tags:
+      - ${DRONE_BRANCH/\//-}
+    when:
+      status: success
+      branch: [hotfix/*, develop]
+
   staging-deploy-public:
     image: peloton/drone-rancher
     group: deploying
@@ -126,7 +128,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      branch: [release/*, feature/*, develop]
 
   staging-deploy-admin-canary:
     image: peloton/drone-rancher
@@ -140,6 +142,19 @@ pipeline:
     when:
       status: success
       branch: [release/*, feature/*, develop]
+
+  staging-deploy-admin:
+    image: peloton/drone-rancher
+    group: deploying
+    url: http://cluster.bonde.org
+    service: webservers/admin
+    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      branch: [hotfix/*,  develop]
 
   production-build:
     image: node:9-alpine
@@ -155,20 +170,8 @@ pipeline:
       - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$PROD_GOOGLE_FONTS_API_KEY
       - ./node_modules/.bin/lerna run build --parallel
+      - ./node_modules/.bin/lerna run buildx --parallel
     secrets: [ prod_pagarme_key, prod_sentry_dsn_public, prod_google_fonts_api_key ]
-    when:
-      status: success
-      event: tag
-
-  production-publish-admin:
-    image: plugins/docker
-    repo: nossas/bonde-admin
-    group: publishing
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/bonde-admin/Dockerfile
-    context: packages/bonde-admin/
-    tags:
-      - ${DRONE_TAG##v}
     when:
       status: success
       event: tag
@@ -186,15 +189,15 @@ pipeline:
       status: success
       event: tag
 
-  production-deploy-admin:
-    image: peloton/drone-rancher
-    group: deploying_prod
-    url: http://cluster.bonde.org
-    service: webservers/admin
-    docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
-    timeout: 360
-    confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+  production-publish-admin:
+    image: plugins/docker
+    repo: nossas/bonde-admin
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/bonde-admin/Dockerfile
+    context: packages/bonde-admin/
+    tags:
+      - ${DRONE_TAG##v}
     when:
       status: success
       event: tag
@@ -205,6 +208,19 @@ pipeline:
     url: http://cluster.bonde.org
     service: webservers/public
     docker_image: "nossas/bonde-public:${DRONE_TAG##v}"
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      event: tag
+
+  production-deploy-admin:
+    image: peloton/drone-rancher
+    group: deploying_prod
+    url: http://cluster.bonde.org
+    service: webservers/admin
+    docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
