@@ -18,8 +18,8 @@ const classes = {
   flex: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'column',
+    marginTop: 58,
     width: 675,
     textAlign: 'center',
   }
