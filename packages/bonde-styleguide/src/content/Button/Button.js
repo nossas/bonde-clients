@@ -115,7 +115,13 @@ Button.propTypes = {
   /** Flat button style. */
   flat: bool,
   /** Button text color. */
-  color: string
+  color: string,
+  /** Button type. */
+  type: string,
+}
+
+Button.defaultProps = {
+  type: 'button',
 }
 
 Button.displayName = 'Button'
