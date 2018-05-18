@@ -150,15 +150,23 @@ const Tooltip = styled(({ className, children, nolock, backdropClose, show, ...p
 const { oneOfType, oneOf, node, func, bool, shape, number, string } = PropTypes
 
 Tooltip.propTypes = {
+  /** The component that will be wrapped with the tooltip. */
   children: oneOfType([node, func]).isRequired,
+  /** The minimum width of tooltip. */
   minWidth: number,
+  /** The minimum height of tooltip. */
   minHeight: number,
+  /** The content that will we rendered inside of the tooltip. */
   Content: oneOfType([node, func]).isRequired,
   /** If pass this prop, the backdrop will not be rendered. */
   nolock: bool,
+  /** Enable this to show the tooltip. */
   show: bool,
+  /** The function that will be executed to close the tooltip. */
   onClose: func,
+  /** Enable this to execute the `onClose` function when Backdrop was clicked. */
   backdropClose: bool,
+  /** The position that the tooltip will be placed around the target. */
   placement: oneOf([
     'top-left',
     'top-middle',
@@ -173,6 +181,7 @@ Tooltip.propTypes = {
     'left-middle',
     'left-bottom',
   ]),
+  /** Manually set the position of tooltip relative to the target. */
   position: shape({
     top: string,
     bottom: string,
