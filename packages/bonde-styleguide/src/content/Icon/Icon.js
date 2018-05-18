@@ -27,7 +27,7 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
   color: '#000000',
-  margin: '0 5px',
+  margin: '-2px 5px 0',
   size: 13
 }
 
