@@ -1,7 +1,8 @@
 import React from 'react'
-import { translate } from '../../services/i18n'
 import { Grid, Cell, Backdrop, Loading, Title, Text } from 'bonde-styleguide'
 
+import { translate } from '../../services/i18n'
+import { withLastLocation } from '../../services/router'
 import { PageAdmin } from '../../components'
 import { CommunityList, MobilizationList, TrendingMobs, OnboardingTooltip } from './components'
 
@@ -13,8 +14,19 @@ class Home extends React.Component {
   }
 
   handleStep = step => this.setState({ step })
-  initSplash = cb => setTimeout(() => { this.setState({ loading: false, splash: true }); cb() }, 5000)
-  initOnboarding = () => setTimeout(() => this.setState({ splash: false, step: 1 }), 3000)
+  initSplash = callback => setTimeout(
+    () => {
+      this.setState({ loading: false, splash: true });
+      callback()
+    }, 5000
+  )
+  initOnboarding = () => setTimeout(
+    () => {
+      const { lastLocation } = this.props
+      const fromRegister = lastLocation && lastLocation.pathname === '/auth/tags'
+      this.setState({ splash: false, step: Number(fromRegister) })
+    }, 3000
+  )
 
   componentDidMount () {
     this.initSplash(
@@ -23,6 +35,7 @@ class Home extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     const { t } = this.props
     const { loading, splash, step } = this.state
 
@@ -135,4 +148,4 @@ class Home extends React.Component {
   }
 }
 
-export default translate('home')(Home)
+export default translate('home')(withLastLocation(Home))
