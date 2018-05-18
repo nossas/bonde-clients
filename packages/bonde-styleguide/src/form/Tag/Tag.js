@@ -32,14 +32,29 @@ const Content = styled.span`
   }
 `
 
-const Tag = ({ checked, text, name }) => (
-  <label>
-    <Checkbox checked={checked} name={name} />
-    <Content>
-      {text}
-    </Content>
-  </label>
-)
+class Tag extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { checked: props.checked }
+  }
+
+  handleChange = e => {
+    this.setState({ checked: !this.state.checked })
+  }
+
+  render () {
+    const { text } = this.props
+
+    return (
+      <label>
+        <Checkbox checked={this.state.checked} {...this.props} />
+        <Content onClick={this.handleChange}>
+          {text}
+        </Content>
+      </label>
+    )
+  }
+}
 
 const { oneOfType, node, func, bool, string } = PropTypes
 
@@ -49,7 +64,9 @@ Tag.propTypes = {
   /** The default checked state. */
   checked: bool,
   /** The form input name attribute. */
-  name: string
+  name: string,
+  /** The form input value attribute. */
+  value: oneOfType([bool, string]),
 }
 
 Tag.defaultProps = {
