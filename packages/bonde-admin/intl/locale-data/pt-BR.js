@@ -135,7 +135,7 @@ export default {
   'notification--report-download-success.title': 'Oba! Tudo pronto (:',
   'notification--report-download-success.message': 'O download de {filename} foi feito com sucesso.',
 
-  'notification--report-download-error.title': 'Ops, deu ruim \\:',
+  'notification--report-download-error.title': 'Ops, deu ruim \\\\:',
   'notification--report-download-error.message': 'Algo de errado aconteceu na hora do download de {filename}. Pode tentar de novo? Mas caso o erro persista, pode falar com a gente pelo botão de suporte alí no canto inferior direito. Estamos aqui pra te ajudar (:',
 
   // community dns notifications

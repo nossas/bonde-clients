@@ -104,7 +104,7 @@ export default {
   'notification--report-download-success.title': 'Yay! All ready (:',
   'notification--report-download-success.message': 'The {filename} download was successful.',
 
-  'notification--report-download-error.title': 'Oops, something went wrong \\:',
+  'notification--report-download-error.title': 'Oops, something went wrong \\\\:',
   'notification--report-download-error.message': 'Something wrong happened when downloading {filename}. Can you try again? But if the error persists, you can talk to us by the support button there in the lower right corner. We are here to help you (:',
 
   'notify.community.check--dns--success.title': 'Yay!',

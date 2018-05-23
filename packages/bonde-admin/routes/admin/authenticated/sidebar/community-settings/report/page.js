@@ -33,7 +33,7 @@ class SectionButton extends React.Component {
           onClick={e => {
             e.preventDefault()
             this.toggleLoading()
-            onClick(this.toggleLoading)
+            onClick(::this.toggleLoading)
           }}
           className='btn bg-blacker white rounded border-box col-12 center'
           icon={this.state.loading ? 'circle-o-notch fa-spin' : 'download'}

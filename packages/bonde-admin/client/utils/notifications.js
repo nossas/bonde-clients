@@ -157,7 +157,7 @@ export const reportDownloadSuccess = (intl, { filename }) => ({
 export const reportDownloadError = (intl, { filename }) => ({
   title: intl.formatMessage({
     id: 'notification--report-download-error.title',
-    defaultMessage: 'Ops, deu ruim \\:'
+    defaultMessage: 'Ops, deu ruim \\\\:'
   }),
   status: 'error',
   message: intl.formatMessage({
