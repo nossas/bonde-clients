@@ -1,66 +1,41 @@
 import React from 'react'
 import { translate } from '../../../../services/i18n'
-import {
-  Header, Page, Footer,
-  Navbar, MainNav, UserNav,
-  Button,
-  Grid, Cell
-} from 'bonde-styleguide'
+import { Grid, Cell } from 'bonde-styleguide'
+import { editHeader } from '../../../../components/Header'
 
 import { CommunityList, MobilizationList, TrendingMobs } from './components'
 
-const Home = ({ t, i18n }) => {
-  // const changeLanguage = (lng) => {
-  //   i18n.changeLanguage(lng)
-  // }
+class Home extends React.Component { 
+  
+  render () {
 
-  return (
-    <div>
-      <Header
-        pageTitle={t('home')}
-        navbar={() => (
-          <Navbar>
-            <MainNav />
-            <UserNav />
-          </Navbar>
-        )}
-        actionButtons={[
-          <Button dark onClick={() => alert('Button: onClick')}>
-            {t('create-mobilization')}
-          </Button>,
-          <Button onClick={() => alert('Button: onClick')}>
-            {t('create-community')}
-          </Button>
-        ]}
-      />
+    const { t } = this.props
 
-      <Page>
-        <Grid>
-          <Cell size={[12, 12, 12]}>
-            <Grid>
-              <Cell size={[4, 4]}>
-                <CommunityList t={t} />
-              </Cell>
-              <Cell size={[8, 8]}>
-                <MobilizationList t={t} />
-              </Cell>
-            </Grid>
-          </Cell>
-          <Cell size={[12, 12, 12]}>
-            <TrendingMobs t={t} />
-          </Cell>
-        </Grid>
-      </Page>
-
-      <Footer
-        btnHelpLabel={t('help')}
-        btnHelpClick={() => alert('help clicked!')}
-      >
-        <a href='#about' title='Sobre'>{t('about')}</a>
-        <a href='#contact' title='Contato'>{t('contact')}</a>
-      </Footer>
-    </div>
-  )
+    return (
+      <Grid>
+        <Cell size={[12, 12, 12]}>
+          <Grid>
+            <Cell size={[4, 4]}>
+              <CommunityList t={t} />
+            </Cell>
+            <Cell size={[8, 8]}>
+              <MobilizationList t={t} />
+            </Cell>
+          </Grid>
+        </Cell>
+        <Cell size={[12, 12, 12]}>
+          <TrendingMobs t={t} />
+        </Cell>
+      </Grid>
+    )
+  }
 }
 
-export default translate('home')(Home)
+export default translate('home')(editHeader({
+  pageTitle: ({ t }) => t('title'),
+  actions: ({ t }) => [
+    { label: t('actionButtons.mobilization'), dark: true },
+    { label: t('actionButtons.community') }
+  ]
+})(Home))
+

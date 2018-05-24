@@ -1,1 +1,1 @@
-export { default as Page } from './Page.connected'
+export { default as Page } from './Page'
