@@ -3,6 +3,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { AuthAPI } from '../auth'
+import { CatchLink, onCatch } from './CatchLink'
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL || 'http://localhost:3001/graphql'
@@ -22,8 +23,19 @@ const authLink = setContext((_, { headers }) => {
   return { headers }
 })
 
+
+const handleError = onCatch(({ response, networkError }) => {
+  if (networkError && networkError.statusCode === 401) {
+    AuthAPI.logout()
+  }
+})
+
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: CatchLink.from([
+    authLink,
+    handleError,
+    httpLink
+  ]),
   cache: new InMemoryCache()
 })
 
