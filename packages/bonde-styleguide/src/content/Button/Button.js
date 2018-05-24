@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 
 /**
  * The only true Button component.
@@ -113,6 +114,8 @@ const Button = styled.button`{
   ${props => props.color && `
     color: ${props.color};
   `}
+
+  ${props => props.margin && borderSpacing('margin', props.margin)}
 }`
 
 const { node, bool, string } = PropTypes
@@ -132,10 +135,12 @@ Button.propTypes = {
   color: string,
   /** Button type. */
   type: string,
+  margin: borderSpacingPropTypes,
 }
 
 Button.defaultProps = {
   type: 'button',
+  margin: {}
 }
 
 Button.displayName = 'Button'
