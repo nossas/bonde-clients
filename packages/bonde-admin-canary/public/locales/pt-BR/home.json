@@ -4,5 +4,10 @@
   "title": "Home",
   "my-communities": "Minhas Comunidades",
   "my-mobilizations": "Minhas Mobilizações",
-  "trending-mobs": "Trending mobs"
+  "trending-mobs": "Trending mobs",
+  
+  "actionButtons": {
+    "community": "Criar Comunidade",
+    "mobilization": "Criar Mobilização"
+  }
 }
