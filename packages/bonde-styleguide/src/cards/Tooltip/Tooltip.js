@@ -93,19 +93,19 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
 
   ${props => props.placement.startsWith('top') && `
     margin-bottom: 8px;
-    bottom: 100%;
+    bottom: 110%;
   `}
   ${props => props.placement.startsWith('bottom') && `
     margin-top: 8px;
-    top: 100%;
+    top: 110%;
   `}
   ${props => props.placement.startsWith('left') && `
     margin-right: 8px;
-    right: 100%;
+    right: 110%;
   `}
   ${props => props.placement.startsWith('right') && `
     margin-left: 8px;
-    left: 100%;
+    left: 110%;
   `}
   ${props => props.placement.endsWith('top') && `
     top: 0;
