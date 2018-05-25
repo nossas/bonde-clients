@@ -17,7 +17,7 @@ class AuthTags extends React.Component {
   render () {
     const { t, user } = this.props
 
-    if (this.state.redir) return <Redirect to='/' />
+    if (this.state.redir) return <Redirect to='/admin' />
 
     return (
       <Flexbox vertical middle padding='0 26.6%'>
@@ -31,7 +31,7 @@ class AuthTags extends React.Component {
 
         <Form onSubmit={values => new Promise((resolve, reject) => {
           console.info('[TagsFormSubmit]', values)
-          this.setState({ redir: false })
+          this.setState({ redir: true })
           return resolve()
         })}>
           

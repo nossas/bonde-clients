@@ -14,15 +14,20 @@ import {
 } from 'bonde-styleguide'
 import { translate } from '../../../services/i18n'
 import { auth } from '../../../services/auth'
+import { Tourtip } from '../../Tourtip'
 
 const CommunitiesDropdown = ({ communities }) => {
   return communities ? (
-    <Dropdown>
+    <Dropdown label='Comunidades'>
       {communities.map((c, i) => (
         <DropdownItem key={`communityMenu-${i}`}>{c.name}</DropdownItem>
       ))}
     </Dropdown>
   ) : <div />
+}
+
+CommunitiesDropdown.defaultProps = {
+  communities: []
 }
 
 const UserDropdown = auth()(({ user }) => {
@@ -67,12 +72,31 @@ const FullPage = (props) => {
     <React.Fragment>
       <Header>
         <Navbar>
-          <CommunitiesDropdown />
+            <Tourtip
+              tourName='tour'
+              title='Gerencie seu BONDE por aqui'
+              description='Aqui em cima você confere em que página está e navega entre as principais sessões das suas comunidades e mobilizações.'
+              step={1}
+            >
+              <CommunitiesDropdown />
+            </Tourtip>
           <UserDropdown />
         </Navbar>
         <Flexbox middle spacing='between'>
-          {pageTitle && (<Title.H3 color='#fff'>{pageTitle}</Title.H3>)}
-          {actions && (<ActionBox actions={actions} />)}
+          {pageTitle && (
+            <Title.H3 color='#fff'>{pageTitle}</Title.H3>
+          )}
+          {actions && (
+            <Tourtip
+              tourName='tour'
+              title='Fique de olho nesse caminho'
+              description='Seu perfil, suas notificações e as principais ações sempre ficam por aqui.'
+              step={2}
+              placement='bottom-right'
+            >
+              <ActionBox actions={actions} />
+            </Tourtip>
+          )}
         </Flexbox>
       </Header>
       <Page>
