@@ -2,20 +2,13 @@ import { combineReducers } from 'redux'
 // Import used reducers
 import { reducer as formReducer } from 'redux-form'
 import { reducer as authReducer } from '../auth/redux'
-
-// Reducer example
-const home = (state = '', action) => {
-  switch (action.type) {
-    case 'home/CHANGE_NAME':
-      return action.payload
-    default:
-      return state
-  }
-}
+import { reducer as headerReducer } from '../../components/Header/redux'
+import { reducer as tourReducer } from '../../components/Tourtip'
 
 export default combineReducers({
   // insert your reducers function
-  home,
   auth: authReducer,
-  form: formReducer
+  form: formReducer,
+  header: headerReducer,
+  tour: tourReducer
 })

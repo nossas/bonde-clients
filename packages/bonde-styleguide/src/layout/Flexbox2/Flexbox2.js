@@ -9,8 +9,6 @@ import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 const Flexbox = styled.div`
   display: flex;
 
-  ${props => props.padding && `padding: ${props.padding};`}
-
   ${props => props.horizontal && `
     width: 100%;
     flex-direction: row;

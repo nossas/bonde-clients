@@ -91,12 +91,12 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { children, label, icon: IconComponent, width } = this.props
+    const { children, label, icon, width } = this.props
     const { show } = this.state
     return (
       <DropdownComponent width={width}>
         <Flexbox>
-          {IconComponent && <IconComponent size={16} color='#fff' />}
+          {icon && <Icon name={icon} size={16} color='#fff' />}
           <button type='button' onClick={this.toggleMenu.bind(this)}>
             <span>{label}</span>
             {show ? (
