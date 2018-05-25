@@ -5,9 +5,11 @@ import { Form, SubmissionError } from './'
 const FormGraphQL = ({
   children,
   mutation, 
-  onSubmit
+  update,
+  onSubmit,
+  ...props
 }) => ( 
-  <Mutation mutation={mutation}>
+  <Mutation mutation={mutation} update={update}>
     {(mutationFunc) => (
       <Form
         onSubmit={(values) => {
@@ -19,6 +21,7 @@ const FormGraphQL = ({
               console.error(error)
             })
         }}
+        {...props}
       >
         {children}
       </Form>
