@@ -251,7 +251,7 @@ pipeline:
     group: deploying_prod
     url: http://cluster.bonde.org
     service: webservers/admin-canary
-    docker_image: "nossas/bonde-canary:${DRONE_TAG##v}"
+    docker_image: "nossas/bonde-admin-canary:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
