@@ -5,11 +5,12 @@ import {
   Icon,
   Title
 } from 'bonde-styleguide'
-import { Redirect } from 'react-router'
-import { auth } from '../../../../services/auth'
+import { Redirect } from '../../../../services/router'
+import { CURRENT_USER_QUERY, auth } from '../../../../services/auth'
 import { translate } from '../../../../services/i18n'
-import { Form, Field } from '../../../../components/Form'
+import { FormGraphQL, Field } from '../../../../components/Form'
 import { TagsField } from './components'
+import CREATE_USER_TAGS from './createUserTags.graphql'
 
 class AuthTags extends React.Component {
   state = { redir: false }
@@ -29,11 +30,33 @@ class AuthTags extends React.Component {
           {t('explanation')}
         </Title.H4>
 
-        <Form onSubmit={values => new Promise((resolve, reject) => {
-          console.info('[TagsFormSubmit]', values)
-          this.setState({ redir: true })
-          return resolve()
-        })}>
+        <FormGraphQL
+          initialValues={{ tags: user.tags.join(';') }}
+          mutation={CREATE_USER_TAGS}
+          update={(cache, { data: { createUserTags } }) => {
+            if (createUserTags && createUserTags.json) {
+              const { currentUser } = cache.readQuery({ query: CURRENT_USER_QUERY })
+	      cache.writeQuery({
+	        query: CURRENT_USER_QUERY,
+	        data: {
+                  currentUser: {
+                    ...currentUser,
+                    tags: createUserTags.json
+                  }
+                }
+	      })
+            }
+	  }}
+          onSubmit={({ tags }, mutation) => {
+            const jsonTags = JSON.stringify({
+              tags: tags.split(';')
+            })
+            return mutation({ variables: { data: jsonTags } })
+            .then(() => {
+              this.setState({ redir: true })
+            })
+          }}
+        >
           
           <Field name='tags' component={TagsField} />
 
@@ -49,7 +72,7 @@ class AuthTags extends React.Component {
               {t('buttons.submit')}
             </Button>
           </Flexbox>
-        </Form>
+        </FormGraphQL>
       </Flexbox>
     )
   }
