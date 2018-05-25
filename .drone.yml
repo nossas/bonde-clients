@@ -163,6 +163,7 @@ pipeline:
       - API_URL=https://api-v1.bonde.org
       - BOT_URL=https://beta.bonde.org
       - GRAPHQL_URL=https://api-v2.bonde.org/graphql
+      - REACT_APP_GRAPHQL_URL=https://api-v2.bonde.org/graphql
       - APP_DOMAIN=bonde.org
       - AWS_BUCKET=bonde-assets
     commands:
@@ -204,7 +205,7 @@ pipeline:
       status: success
       event: tag
 
-  production-publish-admin:
+  production-publish-admin-canary:
     image: plugins/docker
     repo: nossas/bonde-admin-canary
     group: publishing
