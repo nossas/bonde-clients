@@ -185,6 +185,7 @@ pipeline:
     context: packages/bonde-public/
     tags:
       - ${DRONE_TAG##v}
+      - latest
     when:
       status: success
       event: tag
@@ -198,6 +199,21 @@ pipeline:
     context: packages/bonde-admin/
     tags:
       - ${DRONE_TAG##v}
+      - latest
+    when:
+      status: success
+      event: tag
+
+  production-publish-admin:
+    image: plugins/docker
+    repo: nossas/bonde-admin-canary
+    group: publishing
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/bonde-admin-canary/Dockerfile
+    context: packages/bonde-admin-canary/
+    tags:
+      - ${DRONE_TAG##v}
+      - latest
     when:
       status: success
       event: tag
@@ -221,6 +237,19 @@ pipeline:
     url: http://cluster.bonde.org
     service: webservers/admin
     docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      event: tag
+
+  production-deploy-admin-canary:
+    image: peloton/drone-rancher
+    group: deploying_prod
+    url: http://cluster.bonde.org
+    service: webservers/admin-canary
+    docker_image: "nossas/bonde-canary:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
