@@ -27,12 +27,28 @@ class Home extends React.Component {
               </Tourtip>
             </Cell>
             <Cell size={[8, 8]}>
-              <MobilizationList t={t} />
+              <Tourtip
+                tourName='tour'
+                title='Crie mobilizações pra causar'
+                description='É através das mobilizações que você vai gerar um impacto. Aqui você pode ver as mobs das suas comunidades e acessá-las com um clique.'
+                step={4}
+                placement='bottom-right'
+              >
+                <MobilizationList t={t} />
+              </Tourtip>
             </Cell>
           </Grid>
         </Cell>
         <Cell size={[12, 12, 12]}>
-          <TrendingMobs t={t} />
+          <Tourtip
+            tourName='tour'
+            title='Crie mobilizações pra causar'
+            description='É através das mobilizações que você vai gerar um impacto. Aqui você pode ver as mobs das suas comunidades e acessá-las com um clique.'
+            step={5}
+            placement='top-left'
+          >
+            <TrendingMobs t={t} />
+          </Tourtip>
         </Cell>
       </Grid>
     )

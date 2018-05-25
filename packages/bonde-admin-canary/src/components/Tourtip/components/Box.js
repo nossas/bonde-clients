@@ -40,7 +40,7 @@ const Header = ({ title, subtitle }) => (
 
 const Box = ({
   children,
-  minWidth,
+  width,
   minHeight,
   title,
   subtitle,
@@ -52,7 +52,7 @@ const Box = ({
 }) => (
   <Tooltip
     onClose={() => console.log('onClose()')}
-    minWidth={minWidth}
+    width={width}
     minHeight={minHeight}
     Content={() => (
       <React.Fragment>
@@ -72,7 +72,7 @@ const Box = ({
 )
 
 Box.defaultProps = {
-  minWidth: 445,
+  width: 445,
   minHeight: 226
 }
 

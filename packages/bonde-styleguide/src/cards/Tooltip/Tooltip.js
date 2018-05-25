@@ -39,6 +39,9 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
   ${props => props.minWidth && `
     min-width: ${props.minWidth}px;
   `}
+  ${props => props.width && `
+    width: ${props.width}px;
+  `}
   ${props => props.minHeight && `
     min-height: ${props.minHeight}px;
   `}
@@ -93,19 +96,19 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
 
   ${props => props.placement.startsWith('top') && `
     margin-bottom: 8px;
-    bottom: 110%;
+    bottom: 103%;
   `}
   ${props => props.placement.startsWith('bottom') && `
     margin-top: 8px;
-    top: 110%;
+    top: 103%;
   `}
   ${props => props.placement.startsWith('left') && `
     margin-right: 8px;
-    right: 110%;
+    right: 103%;
   `}
   ${props => props.placement.startsWith('right') && `
     margin-left: 8px;
-    left: 110%;
+    left: 103%;
   `}
   ${props => props.placement.endsWith('top') && `
     top: 0;
