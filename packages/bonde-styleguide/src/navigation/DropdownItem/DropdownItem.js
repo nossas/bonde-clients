@@ -1,9 +1,7 @@
+import React from 'react'
 import styled from 'styled-components'
 
-/**
- * The item component that composes the `Dropdown`.
- */
-const DropdownItem = styled.a`{
+const Item = styled('a')`{
   width: auto;
   display: block;
   font-family: 'Nunito Sans', sans-serif;
@@ -25,6 +23,19 @@ const DropdownItem = styled.a`{
     margin-right: 15px;
   }
 }`
+
+
+/**
+ * The item component that composes the `Dropdown`.
+ */
+const DropdownItem = ({
+  component: Component,
+  ...props
+}) => {
+  const Styled = Component ? Item.withComponent(Component) : Item
+
+  return <Styled {...props} />
+}
 
 /* @component */
 export default DropdownItem
