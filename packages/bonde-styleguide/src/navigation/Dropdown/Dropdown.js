@@ -91,8 +91,8 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { children, label, icon, width } = this.props
-    const { show } = this.state
+    const { children, label, icon, width, disabled } = this.props
+    const show = this.state.show && !disabled
     return (
       <DropdownComponent width={width}>
         <Flexbox>
