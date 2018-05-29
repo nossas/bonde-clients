@@ -15,20 +15,7 @@ import {
 import { translate } from '../../../services/i18n'
 import { auth } from '../../../services/auth'
 import { Tourtip } from '../../Tourtip'
-
-const CommunitiesDropdown = ({ communities }) => {
-  return communities ? (
-    <Dropdown label='Comunidades'>
-      {communities.map((c, i) => (
-        <DropdownItem key={`communityMenu-${i}`}>{c.name}</DropdownItem>
-      ))}
-    </Dropdown>
-  ) : <div />
-}
-
-CommunitiesDropdown.defaultProps = {
-  communities: []
-}
+import { CommunitiesDropdown } from './Navigation'
 
 const UserDropdown = auth()(({ user }) => {
   
@@ -78,7 +65,7 @@ const FullPage = (props) => {
               description='Aqui em cima você confere em que página está e navega entre as principais sessões das suas comunidades e mobilizações.'
               step={1}
             >
-              <CommunitiesDropdown />
+              <CommunitiesDropdown path='/communities' />
             </Tourtip>
           <UserDropdown />
         </Navbar>
