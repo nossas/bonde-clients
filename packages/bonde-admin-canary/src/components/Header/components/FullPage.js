@@ -7,34 +7,10 @@ import {
   Footer,
   Title,
   Flexbox2 as Flexbox,
-  Dropdown,
-  DropdownItem,
-  DropdownHeader,
-  Icon
 } from 'bonde-styleguide'
 import { translate } from '../../../services/i18n'
-import { auth } from '../../../services/auth'
 import { Tourtip } from '../../Tourtip'
-import { CommunitiesDropdown } from './Navigation'
-
-const UserDropdown = auth()(({ user }) => {
-  
-  const name = `${user.firstName} ${user.lastName}`
-  
-  return (
-    <Dropdown label={name} icon='sound' width={190}>
-      <DropdownHeader>
-        <img
-          src={user.avatarUrl || 'http://via.placeholder.com/35x35?text=U'}
-          alt={ name}
-        />
-        <span>{name}</span>
-      </DropdownHeader>
-      <DropdownItem><Icon name='user' /> Perfil</DropdownItem>
-      <DropdownItem><Icon name='times' /> Sair</DropdownItem>
-    </Dropdown>
-  )
-})
+import { CommunitiesDropdown, UserDropdown } from './Navigation'
 
 const ActionBox = ({ actions }) => (
   <Flexbox>
@@ -65,7 +41,7 @@ const FullPage = (props) => {
               description='Aqui em cima você confere em que página está e navega entre as principais sessões das suas comunidades e mobilizações.'
               step={1}
             >
-              <CommunitiesDropdown path='/communities' />
+              <CommunitiesDropdown path='/communities'/>
             </Tourtip>
           <UserDropdown />
         </Navbar>
