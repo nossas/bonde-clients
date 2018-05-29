@@ -14,6 +14,7 @@ import {
 import { FormGraphQL, Field } from '../../../../components/Form'
 import { Link } from '../../../../components'
 import { isEmail, isEmpty } from '../../../../services/validations'
+import { PasswordField } from '../components'
 
 const AuthLogin = ({ t }) => (
   <FormGraphQL
@@ -39,27 +40,19 @@ const AuthLogin = ({ t }) => (
       component={FormField}
       inputComponent={Input}
       validate={(value) => {
-        if (isEmpty(value)) return 'Required Field'
-        else if (!isEmail(value)) return 'Invalid email'
+        if (isEmpty(value)) return t('fields.email.errors.isEmpty')
+        else if (!isEmail(value)) return t('fields.email.errors.isEmail')
       }}
     />
     <Field
       name='password'
-      type='password'
       placeholder={t('fields.password.placeholder')}
       label={t('fields.password.label')}
-      component={FormField}
-      inputComponent={Input}
-      validate={value => isEmpty(value) && 'Required field'}
+      component={PasswordField}
+      validate={value => isEmpty(value) && t('fields.password.errors.isEmptyLogin')}
     />
     <Flexbox spacing='between' padding='0 0 24px'>
       <Checkbox>{t('links.stayConnected')}</Checkbox>
-      <Link
-        to='#esqueci-a-senha'
-        title={t('links.forgotPassword')}
-      >
-        {t('links.forgotPassword')}
-      </Link>
     </Flexbox>
     <Flexbox middle spacing='between'>
       <Link
