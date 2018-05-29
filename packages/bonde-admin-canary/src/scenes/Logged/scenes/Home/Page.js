@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Cell } from 'bonde-styleguide'
 import { translate } from '../../../../services/i18n'
 import { withLastLocation } from '../../../../services/router'
-import { editHeader } from '../../../../components/Header'
+import { page } from '../../../../components/Page'
 import { Tourtip, tourtip } from '../../../../components/Tourtip'
 import { CommunityList, MobilizationList, TrendingMobs } from './components'
 
@@ -56,7 +56,7 @@ class Home extends React.Component {
 }
 
 export default translate('home')(
-  editHeader({
+  page({
     pageTitle: ({ t }) => t('title'),
     actions: ({ t }) => [
       { label: t('actionButtons.mobilization'), dark: true },
