@@ -6,3 +6,7 @@ export const isEmail = (value) => {
 }
 
 export const isEmpty = (value) => !value
+
+export const min = (value, size) => value && value.length < size
+
+export const max = (value, size) => value && value.length > size
