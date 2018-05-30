@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { db } from '../session'
+import { db } from 'services/session'
 import configureStore from './configureStore'
 
 const initialState = {
