@@ -1,4 +1,4 @@
-import { connect } from '../../redux'
+import { connect } from 'services/redux'
 import Route from './Route'
 import AuthAPI from '../api'
 

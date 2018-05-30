@@ -1,5 +1,5 @@
 import React from 'react'
-import { store } from '../../services/redux'
+import { store } from 'services/redux'
 import * as actionTypes from './redux/actionTypes'
 
 const hoc = ({ pageTitle, actions }) => Component => class extends React.Component {

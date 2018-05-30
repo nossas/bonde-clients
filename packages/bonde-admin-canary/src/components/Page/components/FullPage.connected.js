@@ -1,4 +1,4 @@
-import { connect } from '../../../services/redux'
+import { connect } from 'services/redux'
 import FullPage from './FullPage'
 
 const mapStateToProps = (state) => ({

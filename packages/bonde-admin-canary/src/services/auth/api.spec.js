@@ -1,6 +1,6 @@
 import test from 'ava'
-import { store } from '../redux'
-import { db } from '../session'
+import { store } from 'services/redux'
+import { db } from 'services/session'
 import AuthAPI from './api'
 
 test('save user in redux and session when login', t => {

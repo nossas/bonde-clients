@@ -1,5 +1,5 @@
-import { store } from '../redux'
-import { db } from '../session'
+import { store } from 'services/redux'
+import { db } from 'services/session'
 import * as actionTypes from './redux/actionTypes'
 
 const { dispatch, getState } = store

@@ -5,10 +5,10 @@ import {
   Icon,
   Title
 } from 'bonde-styleguide'
-import { Redirect } from '../../../../services/router'
-import { CURRENT_USER_QUERY, auth } from '../../../../services/auth'
-import { translate } from '../../../../services/i18n'
-import { FormGraphQL, Field } from '../../../../components/Form'
+import { Redirect } from 'services/router'
+import { CURRENT_USER_QUERY, auth } from 'services/auth'
+import { translate } from 'services/i18n'
+import { FormGraphQL, Field } from 'components/Form'
 import { TagsField } from './components'
 import CREATE_USER_TAGS from './createUserTags.graphql'
 
