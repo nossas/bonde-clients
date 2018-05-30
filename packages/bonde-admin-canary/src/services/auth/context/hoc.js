@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from '../../redux'
+import { connect } from 'services/redux'
 import AuthAPI from '../api'
 import { AuthContext } from './Context'
 
