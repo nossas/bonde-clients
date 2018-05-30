@@ -1,7 +1,8 @@
 import React from 'react'
 import { Grid, Cell } from 'bonde-styleguide'
 import { translate } from '../../../../services/i18n'
-import { withLastLocation } from '../../../../services/router'
+import { withLastLocation, Redirect } from '../../../../services/router'
+import { auth } from '../../../../services/auth'
 import { editHeader } from '../../../../components/Header'
 import { Tourtip, tourtip } from '../../../../components/Tourtip'
 import { CommunityList, MobilizationList, TrendingMobs } from './components'
@@ -10,7 +11,9 @@ class Home extends React.Component {
   
   render () {
 
-    const { t } = this.props
+    const { t, user } = this.props
+    console.log('user', user)
+    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
 
     return (
       <Grid>
@@ -66,7 +69,7 @@ export default translate('home')(
     withLastLocation(
       tourtip({
         init: ({ lastLocation }) => lastLocation && lastLocation.pathname === '/admin/tags'
-      })(Home)
+      })(auth()(Home))
     )
   )
 )
