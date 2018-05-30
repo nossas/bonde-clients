@@ -1,4 +1,12 @@
+import React from 'react'
 import styled from 'styled-components'
+
+const Fixed = styled.div`{
+  position: 'fixed';
+  top: '0';
+  width: '100%';
+  zIndex: '2';
+}`
 
 const Header = styled.div`{
   position: relative;
@@ -9,4 +17,8 @@ const Header = styled.div`{
 }`
 
 /* @component */
-export default Header
+export default ({ id, ...props }) => (
+  <Fixed id={id}>
+    <Header {...props} />
+  </Fixed>
+)

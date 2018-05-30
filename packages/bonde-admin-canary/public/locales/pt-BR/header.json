@@ -1,0 +1,11 @@
+{
+  "dropdown": {
+    "label": {
+      "communities": "Comunidades"
+    },
+    "items": {
+      "profile": "Perfil",
+      "logout": "Sair"
+    }
+  }
+}
