@@ -1,10 +1,10 @@
 import React from 'react'
 import { Grid, Cell } from 'bonde-styleguide'
-import { translate } from '../../../../services/i18n'
-import { page } from '../../../../components/Page'
-import { withLastLocation, Redirect } from '../../../../services/router'
-import { auth } from '../../../../services/auth'
-import { Tourtip, tourtip } from '../../../../components/Tourtip'
+import { translate } from 'services/i18n'
+import { page } from 'components/Page'
+import { withLastLocation, Redirect } from 'services/router'
+import { auth } from 'services/auth'
+import { Tourtip, tourtip } from 'components/Tourtip'
 import { CommunityList, MobilizationList, TrendingMobs } from './components'
 
 class Home extends React.Component { 

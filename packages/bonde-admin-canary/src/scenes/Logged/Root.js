@@ -1,8 +1,8 @@
 import React from 'react'
-import { AuthProvider, Route } from '../../services/auth'
+import { AuthProvider, Route } from 'services/auth'
+import { FullPage } from 'components/Page'
 import { Page as HomePage } from './scenes/Home'
 import { Page as TagsPage } from './scenes/Tags'
-import { FullPage } from '../../components/Page'
 
 const Root = ({ match }) => (
   <AuthProvider>
