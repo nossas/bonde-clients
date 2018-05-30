@@ -1,15 +1,24 @@
 import React from 'react'
 import { AuthProvider, Route } from 'services/auth'
-import { FullPage } from 'components/Page'
-import { Page as HomePage } from './scenes/Home'
+import { FullScreenLoadable } from 'components/Loadable'
 import { Page as TagsPage } from './scenes/Tags'
+
+const LoadableHomePage = FullScreenLoadable({
+  loader: () => import('./scenes/Home/Page')
+})
 
 const Root = ({ match }) => (
   <AuthProvider>
-    <FullPage>
-      <Route exact path={match.url} component={HomePage} />
-      <Route path={`${match.url}/tags`} component={TagsPage} />
-    </FullPage>
+    <Route
+      exact
+      path={match.url}
+      component={LoadableHomePage}
+    />
+    
+    <Route
+      path={`${match.url}/tags`}
+      component={TagsPage}
+    />
   </AuthProvider>
 )
 
