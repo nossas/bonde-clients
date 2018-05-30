@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Title } from 'bonde-styleguide'
-import { Route } from '../../services/auth'
+import { Route } from  'services/auth'
 import { Page as LoginPage } from './scenes/Login'
 import { Page as RegisterPage } from './scenes/Register'
 

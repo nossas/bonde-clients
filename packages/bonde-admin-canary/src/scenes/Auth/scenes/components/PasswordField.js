@@ -1,6 +1,6 @@
 import React from 'react'
 import { Checkbox, FormField, Input } from 'bonde-styleguide'
-import { translate } from '../../../../services/i18n'
+import { translate } from 'services/i18n'
 
 class PasswordField extends React.Component {
 

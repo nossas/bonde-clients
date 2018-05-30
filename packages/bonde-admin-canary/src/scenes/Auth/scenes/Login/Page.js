@@ -1,6 +1,6 @@
 import React from 'react'
-import { AuthAPI } from '../../../../services/auth'
-import { translate } from '../../../../services/i18n'
+import { AuthAPI } from 'services/auth'
+import { translate } from 'services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
 
 import {
@@ -11,9 +11,9 @@ import {
   Input
 } from 'bonde-styleguide'
 
-import { FormGraphQL, Field } from '../../../../components/Form'
-import { Link } from '../../../../components'
-import { isEmail, isEmpty } from '../../../../services/validations'
+import { FormGraphQL, Field } from 'components/Form'
+import { Link } from 'components'
+import { isEmail, isEmpty } from 'services/validations'
 import { PasswordField } from '../components'
 
 const AuthLogin = ({ t }) => (
