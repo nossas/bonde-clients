@@ -8,8 +8,8 @@ import {
   Title,
   Flexbox2 as Flexbox,
 } from 'bonde-styleguide'
-import { translate } from '../../../services/i18n'
-import { Tourtip } from '../../Tourtip'
+import { translate } from 'services/i18n'
+import { Tourtip } from 'components/Tourtip'
 import { CommunitiesDropdown, UserDropdown } from './Navigation'
 import Zendesk from './Zendesk'
 

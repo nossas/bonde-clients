@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from '../../services/redux'
+import { connect } from 'services/redux'
 import * as actions from './redux/actions'
 
 const mapDispatchToProps = { initializeTour: actions.onStart }
