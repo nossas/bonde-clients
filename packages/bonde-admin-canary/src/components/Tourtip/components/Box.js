@@ -51,7 +51,7 @@ const Box = ({
   placement
 }) => (
   <Tooltip
-    onClose={() => console.log('onClose()')}
+    onClose={onClose}
     width={width}
     minHeight={minHeight}
     Content={() => (

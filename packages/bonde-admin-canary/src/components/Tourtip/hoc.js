@@ -7,7 +7,15 @@ const mapDispatchToProps = { initializeTour: actions.onStart }
 const hoc = ({ init } = {}) => Component => connect(undefined, mapDispatchToProps)(
   
   class extends React.Component {
-  
+    
+    componentDidMount () {
+      if (typeof init === 'function' && init(this.props)) {
+        this.props.initializeTour()
+      } else if (typeof init === 'boolean' && init) {
+        this.props.initializeTour()
+      } 
+    }
+
     componentDidUpdate () {
       if (typeof init === 'function' && init(this.props)) {
         this.props.initializeTour()
