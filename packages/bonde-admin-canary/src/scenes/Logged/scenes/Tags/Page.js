@@ -18,8 +18,8 @@ class AuthTags extends React.Component {
 
   render () {
     const { t, user } = this.props
-
-    if (this.state.redir) return <Redirect to='/admin' />
+    
+    if (user.tags && user.tags.length > 0) return <Redirect to='/admin' />
 
     return (
       <Page>
@@ -54,9 +54,6 @@ class AuthTags extends React.Component {
                 tags: tags.split(';')
               })
               return mutation({ variables: { data: jsonTags } })
-              .then(() => {
-                this.setState({ redir: true })
-              })
             }}
           >
             
