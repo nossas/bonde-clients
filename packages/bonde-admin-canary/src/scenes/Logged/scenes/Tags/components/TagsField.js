@@ -1,6 +1,7 @@
 import React from 'react'
-import { Loading, MultipleChoiceField, Tag } from 'bonde-styleguide'
+import { MultipleChoiceField, Tag } from 'bonde-styleguide'
 import { Query } from 'react-apollo'
+import { LoadingFullScreen } from 'components/Loadable'
 import TAGS from './tags.graphql'
 
 
@@ -8,7 +9,7 @@ const TagsField = (props) => (
   <Query query={TAGS} variables={{ tagType: 'user' }}>
     {({ loading, error, data }) => {
 
-      if (loading) return <Loading />
+      if (loading) return <LoadingFullScreen message='Carregando tags.' />
 
       if (error) console.log('error', error)
       
