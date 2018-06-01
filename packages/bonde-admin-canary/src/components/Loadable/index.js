@@ -1,6 +1,2 @@
-import Loadable from 'react-loadable'
-import LoadingFullScreen from './LoadingFullScreen' 
-
-export const FullScreenLoadable = (opts) => Loadable(Object.assign({
-  loading: LoadingFullScreen
-}, opts))
+export { default as FullScreenLoadable } from './FullScreenLoadable'
+export { default as LoadingFullScreen } from './LoadingFullScreen'
