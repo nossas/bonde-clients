@@ -1,5 +1,4 @@
 import React from 'react'
-import { Loading } from 'bonde-styleguide'
 import { Query } from 'react-apollo'
 import CURRENT_USER from './currentUser.graphql'
 
@@ -13,11 +12,11 @@ const getUser = ({ currentUser }) => ({
   })
 })
 
-const AuthProvider = ({ children }) => (
+const AuthProvider = ({ children, loading: Loading }) => (
   <Query query={CURRENT_USER}>
     {({ loading, error, data }) => {
       
-      if (loading) return <Loading />
+      if (loading) return <Loading message='Carregando seu usuário.' />
       
       if (error) console.log('error', error)
 
