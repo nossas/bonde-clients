@@ -1,8 +1,42 @@
 import React from 'react'
-import { DataListCard, Image, Text, Icon, Pagination } from 'bonde-styleguide'
+import { Link } from 'bonde-styleguide'
+import {
+  TableHeader,
+  Text,
+  Icon
+} from 'bonde-styleguide'
+import ImageColumn from './ImageColumn'
+import TableCardGadget from './TableCardGadget'
+
+const StatusColumn = ({ value, t }) => {
+  const statuses = {
+    active: {
+      label: t ? t('active') : 'ativo',
+      props: { color: '#50e3c2', fontWeight: 'bold' }
+    },
+    draft: {
+      label: t ? t('draft') : 'rascunho',
+      props: { color: '#aaaaaa', fontWeight: 'normal' }
+    }
+  }
+
+  return (
+    <Text
+      fontSize={13}
+      lineHeight={1.54}
+      {...statuses[value].props}
+    >
+      {value === 'active' && (
+        <Icon name='tick' color='#50e3c2' margin='0 5px 0 0' />
+      )}
+      {statuses[value].label}
+    </Text>
+  )
+}
 
 const mobilizations = [
   {
+    id: 2,
     image: 'https://goo.gl/JFHz3h',
     title: 'SParaMulheres',
     community: 'Minha Sampa',
@@ -10,6 +44,7 @@ const mobilizations = [
     actionsCount: 16320,
   },
   {
+    id: 3,
     image: 'https://goo.gl/FnqZWj',
     title: 'Ilumina SP',
     community: 'Minha Sampa',
@@ -17,6 +52,7 @@ const mobilizations = [
     actionsCount: 0,
   },
   {
+    id: 9,
     image: 'https://goo.gl/RJZTGF',
     title: 'Heróis Invisíveis',
     community: 'Minha Sampa',
@@ -24,6 +60,7 @@ const mobilizations = [
     actionsCount: 974,
   },
   {
+    id: 14,
     image: 'https://goo.gl/2ygft6',
     title: 'Queima de Arquivo',
     community: 'Minha Sampa',
@@ -31,6 +68,7 @@ const mobilizations = [
     actionsCount: 2453,
   },
   {
+    id: 5,
     image: 'https://goo.gl/3Chgix',
     title: 'Paulista Aberta',
     community: 'Minha Sampa',
@@ -39,72 +77,55 @@ const mobilizations = [
   }
 ]
 
-const MobilizationList = ({ t }) => {
-  const statuses = {
-    active: {
-      label: t('active'),
-      props: { color: '#50e3c2', fontWeight: 'bold' },
-    },
-    draft: {
-      label: t('draft'),
-      props: { color: '#aaaaaa', fontWeight: 'normal' },
-    },
+const columns = [
+  { field: 'image', render: ImageColumn },
+  {
+    field: 'title',
+    render: ({ value }) => (
+      <Text fontSize={16} fontWeight={900} lineHeight={1.25}>
+        {value}
+      </Text>
+    )
+  },
+  {
+    field: 'community',
+    header: 'Comunidade',
+    render: ({ value }) => (
+      <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>
+        {value}
+      </Text>
+    )
+  },
+  { field: 'status', header: 'Status', render: StatusColumn },
+  {
+    field: 'actionsCount',
+    header: 'Ações',
+    render: ({ value }) => (
+      <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>
+        {value || '—'}
+      </Text>
+    )
+  },
+  {
+    field: 'id',
+    render: ({ value }) => (
+      <Link to={`/admin/mobilizations/${value}`}>
+        <Icon name='angle-right' />
+      </Link>
+    )
   }
+]
 
-  return (
-    <DataListCard
-      sectionTitle={t('my-mobilizations')}
-      Footer={() => <Pagination pages={4} />}
-      fields={{
-        image: {
-          width: 40,
-          render: image => (
-            <Image src={image} width={40} height={40} rounded={40} />
-          )
-        },
-        title: {
-          render: title => (
-            <Text fontSize={16} fontWeight={900} lineHeight={1.25}>
-              {title}
-            </Text>
-          )
-        },
-        community: {
-          render: community => (
-            <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>
-              {community}
-            </Text>
-          )
-        },
-        status: {
-          render: status => (
-            <Text
-              fontSize={13}
-              lineHeight={1.54}
-              {...statuses[status].props}
-            >
-              {status === 'active' && <Icon name='tick' color='#50e3c2' margin='0 5px 0 0' />}
-              {statuses[status].label}
-            </Text>
-          )
-        },
-        actionsCount: {
-          render: count => (
-            <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>
-              {count || '—'}
-            </Text>
-          )
-        },
-        redir: {
-          align: 'right',
-          render: () => (
-            <Icon name='angle-right' />
-          )
-        }
-      }}
-      items={mobilizations}
-    />
-  )
-}
+const MobilizationList = ({ t }) => (
+  <TableCardGadget
+    border
+    data={mobilizations}
+    columns={columns}
+    HeaderComponent={TableHeader}
+    title='Minhas mobilizações'
+    emptyIcon='mobilization'
+    emptyText='As mobilizações das suas comunidades vão aparecer aqui.'
+  />
+)
 
 export default MobilizationList

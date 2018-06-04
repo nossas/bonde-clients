@@ -1,5 +1,7 @@
 import React from 'react'
-import { DataListCard, Image, Text } from 'bonde-styleguide'
+import { Text } from 'bonde-styleguide'
+import ImageColumn from './ImageColumn'
+import TableCardGadget from './TableCardGadget'
 
 const communities = [
   {
@@ -25,34 +27,41 @@ const communities = [
   }
 ]
 
-const CommunityList = ({ t }) => (
-  <DataListCard
-    sectionTitle={t('my-communities')}
-    border={false}
-    fields={{
-      image: {
-        width: 40,
-        render: (field) => (
-          <Image
-            src={field}
-            width={40}
-            height={40}
-            rounded={40}
-          />
-        )
-      },
-      text: {
-        render: (field) => {
-          return (
-            <React.Fragment>
-              <Text fontSize={16} fontWeight={900} lineHeight={1.25}>{field.title}</Text>
-              <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>{field.description}</Text>
-            </React.Fragment>
-          )
-        }
-      }
-    }}
-    items={communities}
+const columns = [
+  {
+    field: 'image',
+    render: ImageColumn
+  },
+  {
+    field: 'text',
+    render: ({ value }) => (
+      <React.Fragment>
+        <Text
+          fontSize={16}
+          fontWeight={900}
+          lineHeight={1.25}
+        >
+          {value.title}
+        </Text>
+        <Text
+          fontSize={13}
+          lineHeight={1.54}
+          color='#4a4a4a'
+        >
+          {value.description}
+        </Text>
+      </React.Fragment>
+    )
+  },
+]
+
+const CommunityList = () => (
+  <TableCardGadget
+    data={communities}
+    columns={columns}
+    title='Minhas comunidades'
+    emptyIcon='community'
+    emptyText='Crie uma comunidade para começar a causar'
   />
 )
 
