@@ -5,7 +5,10 @@ query communities {
   allCommunities {
     nodes {
       id,
-      name
+      name,
+      description,
+      image,
+      city
     }
   }
 }

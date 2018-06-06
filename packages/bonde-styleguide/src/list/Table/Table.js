@@ -43,7 +43,7 @@ const ReactTable = ({
             {columns.map(col => ( 
               <ColumnComponent>
                 {col.render
-                  ? col.render({ value: row[col.field] })
+                  ? col.render({ value: row[col.field], row })
                   : row[col.field]}
               </ColumnComponent>
             ))}

@@ -4,6 +4,7 @@ import ListEmpty from './ListEmpty'
 
 const TableCardGadget = ({
   title,
+  loading,
   data,
   columns,
   border,
@@ -19,18 +20,20 @@ const TableCardGadget = ({
       </Card>
     )}
   >
-    <Table
-      border={border}
-      data={data}
-      columns={columns}
-      HeaderComponent={HeaderComponent}
-      EmptyComponent={() => (
-        <ListEmpty
-          iconColorfulName={emptyIcon}
-          text={emptyText}
-        />
-      )}
-    />
+    {loading ? <p>Loading...</p> : (
+      <Table
+        border={border}
+        data={data}
+        columns={columns}
+        HeaderComponent={HeaderComponent}
+        EmptyComponent={() => (
+          <ListEmpty
+            iconColorfulName={emptyIcon}
+            text={emptyText}
+          />
+        )}
+      />
+    )}
   </Gadget>
 )
 
