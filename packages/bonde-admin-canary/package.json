@@ -33,6 +33,7 @@
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "graphql": "^0.13.2",
+    "graphql-anywhere": "^4.1.11",
     "graphql-tag": "^2.9.2",
     "html-webpack-plugin": "2.29.0",
     "i18next": "^11.3.1",

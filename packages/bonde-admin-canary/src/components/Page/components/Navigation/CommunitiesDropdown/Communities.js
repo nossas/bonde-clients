@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownItem } from 'bonde-styleguide'
 import urljoin from 'url-join'
+import { propType } from 'graphql-anywhere'
+import { CommunitiesDropdownCommunity } from 'graphql/fragments'
 
 const Communities = ({ data, path, t }) => {
   return (
@@ -30,10 +32,7 @@ Communities.defaultProps = {
 Communities.propTypes = {
   path: PropTypes.string.isRequired,
   communities: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
-    })
+    propType(CommunitiesDropdownCommunity)
   )
 }
 

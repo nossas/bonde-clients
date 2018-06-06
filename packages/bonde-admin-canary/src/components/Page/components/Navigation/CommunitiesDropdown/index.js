@@ -2,11 +2,11 @@ import React from 'react'
 import { translate } from '../../../../../services/i18n'
 import { Query } from 'react-apollo'
 import CommunitiesDropdown from './Communities'
-import ALL_COMMUNITIES from './allCommunities.graphql'
+import { AllCommunities } from 'graphql/queries'
 
 
 const CommunitiesAsync = (props) => (
-  <Query query={ALL_COMMUNITIES}>
+  <Query query={AllCommunities}>
     {({ loading, error, data }) => (
       <CommunitiesDropdown
         data={data && data.allCommunities ? data.allCommunities.nodes : []}
