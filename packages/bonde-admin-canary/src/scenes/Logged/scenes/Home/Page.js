@@ -5,8 +5,7 @@ import { Page, ActionButton } from 'components/Page'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
-import { MobilizationList, TrendingMobs } from './components'
-import { CommunityList } from './widgets'
+import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
 
 const HomeActionMenu = translate('home')(
   ({ t }) => (
@@ -41,7 +40,7 @@ const HomePage = translate('home')(
                   description='A comunidade é um grupo que se une por uma causa. A partir dela você pode criar mobilizações e convidar outras pessoas para chegar junto.'
                   step={3}
                 >
-                  <CommunityList t={t} />
+                  <CommunitiesGadget />
                 </Tourtip>
               </Cell>
               <Cell size={[8, 8]}>

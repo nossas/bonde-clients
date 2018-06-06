@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import { Dropdown, DropdownItem } from 'bonde-styleguide'
 import { Link } from 'react-router-dom'
 import urljoin from 'url-join'
-import CommunitiesDropdown from './Communities'
+import CommunitiesDropdown from './CommunitiesDropdown'
 
 test.beforeEach(t => {
   const props = {
@@ -37,28 +37,28 @@ test('when data is empty render disabled', t => {
 
 test('render DropdownItem when data is passed', t => {
   const { node } = t.context
-  const data = [
+  const communities = [
     { id: 1, name: 'C1' },
     { id: 2, name: 'C2' }
   ]
-  node.setProps({ data })
+  node.setProps({ communities })
   
-  t.is(node.find(DropdownItem).length, data.length)
+  t.is(node.find(DropdownItem).length, communities.length)
   t.is(node.find(DropdownItem).at(0).props().children, 'C1')
   t.is(node.find(DropdownItem).at(1).props().children, 'C2')
 })
 
 test('render DropdownItem with Link router', t => {
   const { node } = t.context
-  const data = [{ id: 1, name: 'C1' }]
-  node.setProps({ data })
+  const communities = [{ id: 1, name: 'C1' }]
+  node.setProps({ communities })
   t.is(node.find(DropdownItem).props().component, Link)
 })
 
 test('mount path to redirect with id when pass path', t => {
   const { node } = t.context
-  const data = [{ id: 1, name: 'C1' }]
+  const communities = [{ id: 1, name: 'C1' }]
   const path = '/admin/communities/'
-  node.setProps({ data, path })
-  t.is(node.find(DropdownItem).props().to, urljoin(path, data[0].id.toString()))
+  node.setProps({ communities, path })
+  t.is(node.find(DropdownItem).props().to, urljoin(path, communities[0].id.toString()))
 })
