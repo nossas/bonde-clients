@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
 
@@ -43,7 +44,7 @@ const DropdownComponent = styled.div`{
 
   &  button {
     cursor: pointer;
-    color: #fff;
+    color: ${props => !props.light ? '#fff' : '#000' };
     font-family: 'Nunito Sans', sans-serif;
     font-size: 13px;
     font-weight: 800;
@@ -91,18 +92,20 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { children, label, icon, width, disabled } = this.props
+    const { children, label, icon, width, disabled, light, style } = this.props
     const show = this.state.show && !disabled
+    const colorStrategy = !light ? '#fff' : '#000'
+
     return (
-      <DropdownComponent width={width}>
+      <DropdownComponent width={width} light={light} style={style}>
         <Flexbox>
-          {icon && <Icon name={icon} size={16} color='#fff' />}
+          {icon && <Icon name={icon} size={16} color={colorStrategy} />}
           <button type='button' onClick={this.toggleMenu.bind(this)}>
             <span>{label}</span>
             {show ? (
-              <Icon name='angle-right' color='#fff' />
+              <Icon name='angle-right' color={colorStrategy} />
             ) : (
-              <Icon name='angle-down' color='#fff' />
+              <Icon name='angle-down' color={colorStrategy} />
             )}
           </button>
         </Flexbox>
@@ -110,6 +113,16 @@ class Dropdown extends React.Component {
       </DropdownComponent>
     )
   }
+}
+
+const { bool } = PropTypes
+
+Dropdown.defaulProps = {
+  light: false,
+}
+
+Dropdown.propTypes = {
+  light: bool,
 }
 
 export default Dropdown
