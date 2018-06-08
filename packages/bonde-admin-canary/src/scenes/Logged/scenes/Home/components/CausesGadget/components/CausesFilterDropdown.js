@@ -31,7 +31,7 @@ const CausesFilterDropdown = ({ mutate, onChange, selected }) => (
   </Dropdown>
 )
 
-const { shape, string, func, number } = PropTypes
+const { string, func } = PropTypes
 
 CausesFilterDropdown.propTypes = {
   mutate: func.isRequired,

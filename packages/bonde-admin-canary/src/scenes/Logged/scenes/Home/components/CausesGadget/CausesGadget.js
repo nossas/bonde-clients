@@ -1,7 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
-import { Gadget, Grid, Cell, Panel, Flexbox, Dropdown, DropdownItem } from 'bonde-styleguide'
+import { Gadget, Grid, Flexbox } from 'bonde-styleguide'
 import { CausesFilterDropdown, CausesCellsLoading, CausesCells } from './components'
 
 class CausesGadget extends React.Component {
@@ -16,7 +14,7 @@ class CausesGadget extends React.Component {
   }
 
   render () {
-    const { t, mutate, loading, mobilizations } = this.props
+    const { mutate, loading, mobilizations } = this.props
     const { filter } = this.state
 
     return (

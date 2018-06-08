@@ -1,4 +1,3 @@
-import { propType } from 'graphql-anywhere'
 import Mobilizations from './Mobilizations.gql'
 
 export default {
