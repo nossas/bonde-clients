@@ -5,7 +5,7 @@ import { Page, ActionButton } from 'components/Page'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
-import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
+import { CommunitiesGadget, MobilizationList, CausesGadget } from './components'
 
 const HomeActionMenu = translate('home')(
   ({ t }) => (
@@ -13,7 +13,7 @@ const HomeActionMenu = translate('home')(
       <ActionButton
         dark
         to='/admin/mobilization/add'
-        label={t('actionButtons.mobilization')} 
+        label={t('actionButtons.mobilization')}
       />
       <ActionButton
         to='/admin/community/add'
@@ -64,7 +64,7 @@ const HomePage = translate('home')(
               step={5}
               placement='top-left'
             >
-              <TrendingMobs t={t} />
+              <CausesGadget t={t} />
             </Tourtip>
           </Cell>
         </Grid>
