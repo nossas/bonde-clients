@@ -31,7 +31,11 @@ const CausesFilterDropdown = ({ mutate, onChange, selected }) => (
   </Dropdown>
 )
 
+<<<<<<< HEAD
 const { string, func } = PropTypes
+=======
+const { shape, string, func, number } = PropTypes
+>>>>>>> refator(admin-canary): trending mobs to causes gadget
 
 CausesFilterDropdown.propTypes = {
   mutate: func.isRequired,
