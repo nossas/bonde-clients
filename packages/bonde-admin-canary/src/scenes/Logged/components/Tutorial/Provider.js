@@ -42,10 +42,16 @@ class Provider extends React.Component {
     })
   }
 
+  onClose () {
+    this.setState({ currentStep: 0 })
+    this.props.onClose && this.props.onClose()
+  }
+
   render () {
     const context = {
       registerStep: this.registerStep.bind(this),
       onNext: this.onNext.bind(this),
+      onClose: this.onClose.bind(this),
       currentStep: this.state.currentStep,
       total: this.state.steps.length
     }
@@ -66,7 +72,8 @@ Provider.propTypes = {
   initialize: PropTypes.oneOf([
     PropTypes.func,
     PropTypes.bool
-  ])
+  ]),
+  onClose: PropTypes.func
 }
 
 export default Provider
