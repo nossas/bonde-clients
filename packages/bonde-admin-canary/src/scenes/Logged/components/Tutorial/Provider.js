@@ -1,5 +1,6 @@
-// Provider é responsável por unir componentes Dialog em um tutorial
+// Provider is responsible to union Dialog components
 import React from 'react'
+import PropTypes from 'prop-types'
 import Context, { defaultContext } from './Context'
 
 class Provider extends React.Component {
@@ -11,6 +12,22 @@ class Provider extends React.Component {
   //
   registeredStepKeys = []
 
+  componentDidMount () {
+    this.onStart(this.props.initialize)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.initialize !== this.props.initialize) {
+      this.onStart(nextProps.initialize)
+    }
+  }
+
+  onStart (initialize) {
+    if (typeof initialize === 'function' ? initialize() : initialize) {
+      this.setState({ currentStep: 1 })
+    }
+  }
+
   registerStep (key) {
     if (!this.registeredStepKeys.includes(key)) {
       this.registeredStepKeys.push(key)
@@ -19,8 +36,9 @@ class Provider extends React.Component {
   }
 
   onNext () {
+    const { steps, currentStep } = this.state
     this.setState({
-      currentStep: this.state.currentStep + 1
+      currentStep: steps.length === currentStep ? 1 : currentStep + 1
     })
   }
 
@@ -38,6 +56,17 @@ class Provider extends React.Component {
       </Context.Provider>
     )
   }
+}
+
+Provider.defaultProps = {
+  initialize: false
+}
+
+Provider.propTypes = {
+  initialize: PropTypes.oneOf([
+    PropTypes.func,
+    PropTypes.bool
+  ])
 }
 
 export default Provider
