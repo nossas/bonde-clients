@@ -1,12 +1,12 @@
 import React from 'react'
-import { Flexbox2 } from 'bonde-styleguide'
+import { Grid, Cell } from 'bonde-styleguide'
 import { TutorialProvider, TutorialDialog } from '../../components/Tutorial'
 
 const BoxStyles = ({ color }) => ({
   display: 'block',
   backgroundColor: color,
   width: '100%',
-  height: '290px'
+  height: '150px'
 })
 
 const Box = ({ name, color }) => (
@@ -16,20 +16,42 @@ const Box = ({ name, color }) => (
 )
 
 export default () => (
-  <TutorialProvider name='tutorialTest'>
+  <TutorialProvider>
     <TutorialDialog
-      name='title'
-      step={1}
-      title='Escrevendo alguma coia'
-      description='Mais alguma coisa sendo escrita'
+      name='tutorial-step-0'
+      step={0}
+      title='Step Title'
+      description='Step Description'
     >
       <h1>Test page</h1>
     </TutorialDialog>
+
+    <TutorialDialog
+      name='tutorial-step-1'
+      step={1}
+      title='Step Title'
+      description='Step Description'
+    >
+      <h1>Test page</h1>
+    </TutorialDialog>
+
     <Box name='step1' color='blue' />
     <Box name='step2' color='green' />
-    <Flexbox2 horizontal>
-      <Box name='step3' color='pink' />
-      <Box name='step4' color='purple' />
-    </Flexbox2>
+
+    <Grid>
+      <Cell size={[4, 4, 4]}>
+          <Box name='step3' color='pink' />
+      </Cell>
+      <Cell size={[4, 4, 4]}>
+        <TutorialDialog
+          name='tutorial-step-2'
+          step={2}
+          title='Step Title'
+          description='Step Description'
+        >
+          <Box name='step4' color='purple' />
+        </TutorialDialog>
+      </Cell>
+    </Grid>
   </TutorialProvider>
 )
