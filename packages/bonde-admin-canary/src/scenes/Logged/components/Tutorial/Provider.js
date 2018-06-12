@@ -1,28 +1,35 @@
 // Provider é responsável por unir componentes Dialog em um tutorial
 import React from 'react'
-import PropTypes from 'prop-types'
 import Context, { defaultContext } from './Context'
 
 class Provider extends React.Component {
-
   state = defaultContext
 
-  registerStep (name, step) {
-    if (!Object.keys(this.state.steps).includes(name)) {
-      this.setState({
-        steps: {
-          ...this.state.steps,
-          [name]: step
-        }
-      })
+  //
+  // Class attribute that stores all childrens keys
+  // in rendering runtime, to update Provider state with it.
+  //
+  registeredStepKeys = []
+
+  registerStep (key) {
+    if (!this.registeredStepKeys.includes(key)) {
+      this.registeredStepKeys.push(key)
+      this.setState({ steps: this.registeredStepKeys })
     }
+  }
+
+  onNext () {
+    this.setState({
+      currentStep: this.state.currentStep + 1
+    })
   }
 
   render () {
     const context = {
       registerStep: this.registerStep.bind(this),
+      onNext: this.onNext.bind(this),
       currentStep: this.state.currentStep,
-      total: Object.keys(this.state.steps).length
+      total: this.state.steps.length
     }
 
     return (
@@ -31,10 +38,6 @@ class Provider extends React.Component {
       </Context.Provider>
     )
   }
-}
-
-Provider.propTypes = {
-  name: PropTypes.string.isRequired
 }
 
 export default Provider

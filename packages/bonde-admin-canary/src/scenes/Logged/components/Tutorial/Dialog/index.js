@@ -5,8 +5,8 @@ import DialogTooltip from './DialogTooltip'
 
 export class RegisterDialog extends React.Component {
   componentDidMount () {
-    const { name, step, context } = this.props
-    context.registerStep(name, step)
+    const { name, context } = this.props
+    context.registerStep(name)
   }
 
   render () {
@@ -16,6 +16,7 @@ export class RegisterDialog extends React.Component {
       <DialogTooltip
         total={context.total}
         currentStep={context.currentStep}
+        onNext={context.onNext}
         {...props}
       />
     ) : props.children
