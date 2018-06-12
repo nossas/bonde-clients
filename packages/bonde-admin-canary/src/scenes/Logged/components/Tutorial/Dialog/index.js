@@ -4,20 +4,27 @@ import Context from '../Context'
 import DialogTooltip from './DialogTooltip'
 
 export class RegisterDialog extends React.Component {
-  
   componentDidMount () {
-    this.props.registerStep(this.props.name, this.props.step)
+    const { name, step, context } = this.props
+    context.registerStep(name, step)
   }
 
   render () {
-    const { registerStep, ...props } = this.props  // es-lint-ignore-line
-    return <DialogTooltip {...props} />
-  } 
+    const { context, ...props } = this.props
+
+    return context.currentStep === props.step ? (
+      <DialogTooltip
+        total={context.total}
+        currentStep={context.currentStep}
+        {...props}
+      />
+    ) : props.children
+  }
 }
 
 const Dialog = (props) => (
   <Context.Consumer>
-    {(context) => <RegisterDialog {...context} {...props} />}
+    {context => <RegisterDialog context={context} {...props} />}
   </Context.Consumer>
 )
 

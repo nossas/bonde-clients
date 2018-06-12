@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import Context, { defaultContext } from './Context'
 
 class Provider extends React.Component {
-  
+
   state = defaultContext
 
   registerStep (name, step) {
-    if (Object.keys(this.state.steps).includes(name)) {
+    if (!Object.keys(this.state.steps).includes(name)) {
       this.setState({
         steps: {
           ...this.state.steps,
