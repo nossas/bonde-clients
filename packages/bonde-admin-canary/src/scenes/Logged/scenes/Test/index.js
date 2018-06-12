@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Cell } from 'bonde-styleguide'
+import { Button, Cell, Grid } from 'bonde-styleguide'
 import { TutorialProvider, TutorialDialog } from '../../components/Tutorial'
 
 const BoxStyles = ({ color }) => ({
@@ -15,43 +15,61 @@ const Box = ({ name, color }) => (
   </div>
 )
 
-export default () => (
-  <TutorialProvider>
-    <TutorialDialog
-      name='tutorial-step-0'
-      step={0}
-      title='Step Title'
-      description='Step Description'
-    >
-      <h1>Test page</h1>
-    </TutorialDialog>
+export default class extends React.Component {
 
-    <TutorialDialog
-      name='tutorial-step-1'
-      step={1}
-      title='Step Title'
-      description='Step Description'
-    >
-      <h1>Test page</h1>
-    </TutorialDialog>
+  constructor (...args) {
+    super(...args)
+    this.state = { init: false }
+  }
+  
+  onClose () {
+    this.setState({ init: false })
+  }
 
-    <Box name='step1' color='blue' />
-    <Box name='step2' color='green' />
+  render () {
+    return (
+      <TutorialProvider
+        initialize={this.state.init}
+        onClose={this.onClose.bind(this)}
+      >
+        <TutorialDialog
+          name='tutorial-step-1'
+          step={1}
+          title='Step Title'
+          description='Step Description'
+        >
+          <h1>Test page</h1>
+        </TutorialDialog>
 
-    <Grid>
-      <Cell size={[4, 4, 4]}>
-          <Box name='step3' color='pink' />
-      </Cell>
-      <Cell size={[4, 4, 4]}>
         <TutorialDialog
           name='tutorial-step-2'
           step={2}
           title='Step Title'
           description='Step Description'
         >
-          <Box name='step4' color='purple' />
+          <h1>Test page</h1>
         </TutorialDialog>
-      </Cell>
-    </Grid>
-  </TutorialProvider>
-)
+
+        <Box name='step1' color='blue' />
+        <Box name='step2' color='green' />
+
+        <Grid>
+          <Cell size={[4, 4, 4]}>
+              <Box name='step3' color='pink' />
+          </Cell>
+          <Cell size={[4, 4, 4]}>
+            <TutorialDialog
+              name='tutorial-step-3'
+              step={3}
+              title='Step Title'
+              description='Step Description'
+            >
+              <Box name='step4' color='purple' />
+            </TutorialDialog>
+          </Cell>
+        </Grid>
+        <Button onClick={() => this.setState({ init: true })}>Iniciar tour</Button>
+      </TutorialProvider>
+    )
+  }
+}

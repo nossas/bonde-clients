@@ -17,6 +17,7 @@ export class RegisterDialog extends React.Component {
         total={context.total}
         currentStep={context.currentStep}
         onNext={context.onNext}
+        onClose={context.onClose}
         {...props}
       />
     ) : props.children
