@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
+import Spacing from '../../layout/Spacing/Spacing'
 
 export const Header = styled.div`{
   width: auto;
@@ -103,7 +104,11 @@ class Dropdown extends React.Component {
     return (
       <DropdownComponent width={width}>
         <React.Fragment>
-          {icon && <Icon name={icon} size={16} color='#fff' />}
+          {icon && (
+            <Spacing margin={{ right: 17, top: -2 }}>
+              <Icon name={icon} size={16} color='#fff' />
+            </Spacing>
+          )}
           <DropdownTriggerButton onClick={this.toggleMenu.bind(this)}>
             <span>{label}</span>
             {show ? (
