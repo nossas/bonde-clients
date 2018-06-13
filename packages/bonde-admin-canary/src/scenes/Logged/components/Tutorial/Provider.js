@@ -2,8 +2,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Context, { defaultContext } from './Context'
+import Dialog from './Dialog'
 
 class Provider extends React.Component {
+  
+  static Dialog = Dialog
+  
   state = defaultContext
 
   //
