@@ -1,29 +1,34 @@
 import React from 'react'
-import { Flexbox2 as Flexbox, Grid, Cell } from 'bonde-styleguide'
+import { Flexbox2 as Flexbox, Grid, Cell, Tab, TabItem } from 'bonde-styleguide'
 import { translate } from 'services/i18n'
-import { Page } from '../../components/Page2'
+import { ActionButton } from 'components/Page'
+import { Page, Header } from '../../components/Page2'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
 import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
 
-/**
-const HomeActionMenu = translate('home')(
-  ({ t }) => (
-    <Flexbox>
-      <ActionButton
-        dark
-        to='/admin/mobilization/add'
-        label={t('actionButtons.mobilization')} 
-      />
-      <ActionButton
-        to='/admin/community/add'
-        label={t('actionButtons.community')}
-      />
-    </Flexbox>
-  )
+const HomeActionButtons = ({ t }) => (
+  <Flexbox>
+    <ActionButton
+      dark
+      to='/admin/mobilization/add'
+      label={t('actionButtons.mobilization')}
+    />
+    <ActionButton
+      to='/admin/community/add'
+      label={t('actionButtons.community')}
+    />
+  </Flexbox>
 )
-**/
+
+const HomeTabs = () => (
+  <Tab>
+    <TabItem>Dashboard</TabItem>
+    <TabItem>Mobilizações</TabItem>
+    <TabItem>Comunidades</TabItem>
+  </Tab>
+)
 
 const HomePage = translate('home')(
   ({ t, user }) => {
@@ -31,7 +36,12 @@ const HomePage = translate('home')(
     if (user.tags.length < 1) return <Redirect to='/admin/tags' />
 
     return (
-      <Page>
+      <Page
+        renderTitle={() => <Header.Title>Home</Header.Title>}
+        renderLeftDropdown={() => <Header.CommunitiesDropdown path='/communities' />}
+        renderActionButtons={() => <HomeActionButtons t={t} />}
+        renderTabs={HomeTabs}
+      >
           <Grid>
             <Cell size={[12, 12, 12]}>
               <Grid>
