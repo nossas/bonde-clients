@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Cell, Grid } from 'bonde-styleguide'
-import { TutorialProvider, TutorialDialog } from '../../components/Tutorial'
+import Tutorial from '../../components/Tutorial'
 
 const BoxStyles = ({ color }) => ({
   display: 'block',
@@ -28,27 +28,27 @@ export default class extends React.Component {
 
   render () {
     return (
-      <TutorialProvider
+      <Tutorial
         initialize={this.state.init}
         onClose={this.onClose.bind(this)}
       >
-        <TutorialDialog
+        <Tutorial.Dialog
           name='tutorial-step-1'
           step={1}
           title='Step Title'
           description='Step Description'
         >
           <h1>Test page</h1>
-        </TutorialDialog>
+        </Tutorial.Dialog>
 
-        <TutorialDialog
+        <Tutorial.Dialog
           name='tutorial-step-2'
           step={2}
           title='Step Title'
           description='Step Description'
         >
           <h1>Test page</h1>
-        </TutorialDialog>
+        </Tutorial.Dialog>
 
         <Box name='step1' color='blue' />
         <Box name='step2' color='green' />
@@ -58,18 +58,18 @@ export default class extends React.Component {
               <Box name='step3' color='pink' />
           </Cell>
           <Cell size={[4, 4, 4]}>
-            <TutorialDialog
+            <Tutorial.Dialog
               name='tutorial-step-3'
               step={3}
               title='Step Title'
               description='Step Description'
             >
               <Box name='step4' color='purple' />
-            </TutorialDialog>
+            </Tutorial.Dialog>
           </Cell>
         </Grid>
         <Button onClick={() => this.setState({ init: true })}>Iniciar tour</Button>
-      </TutorialProvider>
+      </Tutorial>
     )
   }
 }
