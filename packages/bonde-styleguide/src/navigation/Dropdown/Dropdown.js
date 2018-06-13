@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
 
@@ -22,29 +21,32 @@ export const Header = styled.div`{
 const DropdownMenu = styled.div`{
   background-color: #fff;
   padding: 20px 0;
-  margin-top: 15px;
-  width: inherit;
+  white-space: nowrap;
   position: absolute;
+  top: 30px;
   z-index: 9;
-
-  &::before {
-    content: '';
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 8px solid #fff;
-    position: absolute;
-    top: -8px;
-    right: 8px;
-  }
+  overflow-y: auto;
+  max-height: calc(100vh - 30px - 40px);
+  min-width: 100%;
 }`
+
+const DropdownMenuArrow = styled.div`
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 8px solid #fff;
+  position: absolute;
+  bottom: -16px;
+  right: 2px;
+`
 
 const DropdownComponent = styled.div`{
   position: relative;
+  display: flex;
   width: ${props => props.width ? `${props.width}px` : 'auto'};
 
   &  button {
     cursor: pointer;
-    color: ${props => !props.light ? '#fff' : '#000' };
+    color: #fff;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 13px;
     font-weight: 800;
@@ -81,6 +83,10 @@ const Flexbox = styled.div`{
   }
 }`
 
+const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
+  height: 100%;
+`
+
 class Dropdown extends React.Component {
   constructor (props) {
     super(props)
@@ -92,37 +98,26 @@ class Dropdown extends React.Component {
   }
 
   render () {
-    const { children, label, icon, width, disabled, light, style } = this.props
+    const { children, label, icon, width, disabled } = this.props
     const show = this.state.show && !disabled
-    const colorStrategy = !light ? '#fff' : '#000'
-
     return (
-      <DropdownComponent width={width} light={light} style={style}>
-        <Flexbox>
-          {icon && <Icon name={icon} size={16} color={colorStrategy} />}
-          <button type='button' onClick={this.toggleMenu.bind(this)}>
+      <DropdownComponent width={width}>
+        <React.Fragment>
+          {icon && <Icon name={icon} size={16} color='#fff' />}
+          <DropdownTriggerButton onClick={this.toggleMenu.bind(this)}>
             <span>{label}</span>
             {show ? (
-              <Icon name='angle-right' color={colorStrategy} />
+              <Icon name='angle-right' color='#fff' />
             ) : (
-              <Icon name='angle-down' color={colorStrategy} />
+              <Icon name='angle-down' color='#fff' />
             )}
-          </button>
-        </Flexbox>
+          </DropdownTriggerButton>
+        </React.Fragment>
         {show && (<DropdownMenu>{children}</DropdownMenu>)}
+        {show && (<DropdownMenuArrow />)}
       </DropdownComponent>
     )
   }
-}
-
-const { bool } = PropTypes
-
-Dropdown.defaulProps = {
-  light: false,
-}
-
-Dropdown.propTypes = {
-  light: bool,
 }
 
 export default Dropdown
