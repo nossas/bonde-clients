@@ -21,7 +21,6 @@ const Navbar = styled(({ children, className, renderBrand }) => (
   width: inherit;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
 }`
 
 Navbar.propTypes = {
