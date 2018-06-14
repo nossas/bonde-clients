@@ -4,15 +4,17 @@ import { Dropdown, DropdownItem, DropdownHeader, Icon } from 'bonde-styleguide'
 import { Link } from 'react-router-dom'
 
 const UserDropdown = ({ t, user, logout }) => {
-  
+
   const name = `${user.firstName} ${user.lastName}`
-  
+
   return (
-    <Dropdown label={name} icon='sound' width={190}>
+    <Dropdown label={name} icon='sound'>
       <DropdownHeader>
         <img
           src={user.avatar || 'http://via.placeholder.com/35x35?text=U'}
           alt={ name}
+          width='35'
+          height='35'
         />
         <span>{name}</span>
       </DropdownHeader>

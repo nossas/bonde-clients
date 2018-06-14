@@ -11,21 +11,21 @@ const MultipleChoiceField = ({
   
   const onChangeField = (evt) => {
     const value = evt.target.value
-    if (values.indexOf(value) !== -1) {
+    if (values.includes(value)) {
       values = values.filter(val => val !== value)
     } else {
       values.push(value)
     }
     input.onChange(values.join(separator))
   }
-
+  
   return (
     <React.Fragment>
       {options.map((field) => (
         <InputComponent
           key={`inputKey-${field.value}`}
           {...field}
-          checked={values.indexOf(field.value) !== -1}
+          checked={values.includes(field.value)}
           onChange={onChangeField}
         />
       ))}

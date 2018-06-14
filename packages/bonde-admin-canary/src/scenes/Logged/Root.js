@@ -1,10 +1,10 @@
 import React from 'react'
 import { AuthProvider, Route } from 'services/auth'
 import { FullScreenLoadable, LoadingFullScreen } from 'components/Loadable'
-import { Page as TagsPage } from './scenes/Tags'
+import TagsPage from './scenes/Tags'
 
 const HomePage = FullScreenLoadable({
-  loader: () => import('./scenes/Home/Page')
+  loader: () => import('./scenes/Home')
 })
 
 const Root = ({ match }) => (

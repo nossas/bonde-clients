@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
+import Spacing from '../../layout/Spacing/Spacing'
 
 export const Header = styled.div`{
   width: auto;
@@ -21,24 +22,27 @@ export const Header = styled.div`{
 const DropdownMenu = styled.div`{
   background-color: #fff;
   padding: 20px 0;
-  margin-top: 15px;
-  width: inherit;
+  white-space: nowrap;
   position: absolute;
+  top: 30px;
   z-index: 9;
-
-  &::before {
-    content: '';
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 8px solid #fff;
-    position: absolute;
-    top: -8px;
-    right: 8px;
-  }
+  overflow-y: auto;
+  max-height: calc(100vh - 30px - 40px);
+  min-width: 100%;
 }`
+
+const DropdownMenuArrow = styled.div`
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 8px solid #fff;
+  position: absolute;
+  bottom: -16px;
+  right: 2px;
+`
 
 const DropdownComponent = styled.div`{
   position: relative;
+  display: flex;
   width: ${props => props.width ? `${props.width}px` : 'auto'};
 
   &  button {
@@ -80,6 +84,10 @@ const Flexbox = styled.div`{
   }
 }`
 
+const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
+  height: 100%;
+`
+
 class Dropdown extends React.Component {
   constructor (props) {
     super(props)
@@ -95,18 +103,23 @@ class Dropdown extends React.Component {
     const show = this.state.show && !disabled
     return (
       <DropdownComponent width={width}>
-        <Flexbox>
-          {icon && <Icon name={icon} size={16} color='#fff' />}
-          <button type='button' onClick={this.toggleMenu.bind(this)}>
+        <React.Fragment>
+          {icon && (
+            <Spacing margin={{ right: 17, top: -2 }}>
+              <Icon name={icon} size={16} color='#fff' />
+            </Spacing>
+          )}
+          <DropdownTriggerButton onClick={this.toggleMenu.bind(this)}>
             <span>{label}</span>
             {show ? (
               <Icon name='angle-right' color='#fff' />
             ) : (
               <Icon name='angle-down' color='#fff' />
             )}
-          </button>
-        </Flexbox>
+          </DropdownTriggerButton>
+        </React.Fragment>
         {show && (<DropdownMenu>{children}</DropdownMenu>)}
+        {show && (<DropdownMenuArrow />)}
       </DropdownComponent>
     )
   }
