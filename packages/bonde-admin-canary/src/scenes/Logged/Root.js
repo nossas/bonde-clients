@@ -5,7 +5,7 @@ import { Page as TagsPage } from './scenes/Tags'
 import ScenesTest from './scenes/Test'
 
 const HomePage = FullScreenLoadable({
-  loader: () => import('./scenes/Home/Page')
+  loader: () => import('./scenes/Home')
 })
 
 const Root = ({ match }) => (
