@@ -10,13 +10,11 @@ const Spacing = styled.div`
   ${({ padding }) => padding && borderSpacing('padding', padding)}
 `
 
-const { string } = PropTypes
-
 Spacing.propTypes = {
   /** The margin property. */
-  margin: string,
+  margin: borderSpacingPropTypes,
   /** The padding property. */
-  padding: string
+  padding: borderSpacingPropTypes
 }
 
 Spacing.displayName = 'Spacing'
