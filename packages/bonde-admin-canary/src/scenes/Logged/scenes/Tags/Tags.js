@@ -3,8 +3,8 @@ import {
   Flexbox2 as Flexbox,
   Title
 } from 'bonde-styleguide'
+import { Page } from 'components/PageLogged'
 import { Redirect } from 'services/router'
-import { Page } from '../../components/Page'
 import CreateUserTagsForm from './CreateUserTagsForm'
 
 class Tags extends React.Component {
