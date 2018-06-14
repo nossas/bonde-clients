@@ -5,14 +5,17 @@ import {
   Header as HeaderStyleguide,
   Icon,
   Navbar,
-  Title,
   Spacing
 } from 'bonde-styleguide'
+// Components
+import ActionButton from './ActionButton'
 import CommunitiesDropdown from './CommunitiesDropdown'
+import Tabs, { Tab } from './Tabs'
+import Title from './Title'
 import UserDropdown from './UserDropdown'
 
 const Bonde = () => (
-  <a className='homePageLink' href='http://bonde.org' title='Bonde.org'>
+  <a href='http://bonde.org' title='Bonde.org'>
     <Spacing margin={{ right: 15 }}>
       <Icon name='bonde' size={20} />
     </Spacing>
@@ -26,7 +29,7 @@ const Header = ({
   renderTabs
 }) => (
   <HeaderStyleguide>
-    <Spacing margin={{ bottom: 16.6 }}>
+    <Spacing margin={{ bottom: 16 }}>
       <Navbar renderBrand={Bonde}>
         <Flexbox horizontal spacing='between'>
           {renderLeftDropdown ? renderLeftDropdown() : <div />}
@@ -37,14 +40,22 @@ const Header = ({
 
     <Navbar>
       <Flexbox horizontal spacing='between'>
+        {/* Render Title */}
         {renderTitle ? renderTitle() : <div />}
-        {renderActionButtons ? renderActionButtons() : <div />}
+        {/* Render Action Buttons */}
+        {renderActionButtons ? (
+          <Flexbox>
+            {renderActionButtons()}
+          </Flexbox>
+        ) : <div />}
       </Flexbox>
     </Navbar>
 
     {renderTabs && (
       <Spacing margin={{ bottom: -22 }}>
-        {renderTabs()}
+        <Tabs>
+          {renderTabs()}
+        </Tabs>
       </Spacing>
     )}
   </HeaderStyleguide>
@@ -59,7 +70,12 @@ Header.propTypes = {
   renderTabs: func
 }
 
+Header.ActionButton = ActionButton
+
 Header.CommunitiesDropdown = CommunitiesDropdown
-Header.Title = ({ children }) => <Title.H3 color='#fff'>{children}</Title.H3>
+
+Header.Tab = Tab
+
+Header.Title = Title 
 
 export default Header

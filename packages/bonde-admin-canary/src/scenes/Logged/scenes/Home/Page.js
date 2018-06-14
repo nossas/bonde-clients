@@ -1,33 +1,18 @@
 import React from 'react'
-import { Flexbox2 as Flexbox, Grid, Cell, Tab, TabItem } from 'bonde-styleguide'
+import { Grid, Cell } from 'bonde-styleguide'
 import { translate } from 'services/i18n'
-import { ActionButton } from 'components/Page'
 import { Page, Header } from '../../components/Page2'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
 import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
 
-const HomeActionButtons = ({ t }) => (
-  <Flexbox>
-    <ActionButton
-      dark
-      to='/admin/mobilization/add'
-      label={t('actionButtons.mobilization')}
-    />
-    <ActionButton
-      to='/admin/community/add'
-      label={t('actionButtons.community')}
-    />
-  </Flexbox>
-)
-
 const HomeTabs = () => (
-  <Tab>
-    <TabItem>Dashboard</TabItem>
-    <TabItem>Mobilizações</TabItem>
-    <TabItem>Comunidades</TabItem>
-  </Tab>
+  <React.Fragment>
+    <Header.Tab to='/admin'>Dashboard</Header.Tab>
+    <Header.Tab to='/admin/mobilizations'>Mobilizações</Header.Tab>
+    <Header.Tab to='/admin/communities'>Comunidades</Header.Tab>
+  </React.Fragment>
 )
 
 const HomePage = translate('home')(
@@ -39,7 +24,17 @@ const HomePage = translate('home')(
       <Page
         renderTitle={() => <Header.Title>Home</Header.Title>}
         renderLeftDropdown={() => <Header.CommunitiesDropdown path='/communities' />}
-        renderActionButtons={() => <HomeActionButtons t={t} />}
+        renderActionButtons={() => ([
+          <Header.ActionButton
+            dark
+            to='/admin/mobilization/add'
+            label={t('actionButtons.mobilization')}
+          />,
+          <Header.ActionButton
+            to='/admin/community/add'
+            label={t('actionButtons.community')}
+          />
+        ])}
         renderTabs={HomeTabs}
       >
           <Grid>
