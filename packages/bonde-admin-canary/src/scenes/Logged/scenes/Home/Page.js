@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Cell } from 'bonde-styleguide'
 import { translate } from 'services/i18n'
-import { Page, Header } from '../../components/Page2'
+import { Page, Header } from '../../components/Page'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
