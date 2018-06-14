@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation createUserTags($data: Json!){
+  mutation CreateUserTags($data: JSON!){
     createUserTags(input: {
       data: $data
     }) {
