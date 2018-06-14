@@ -1,23 +1,15 @@
 import React from 'react'
+import { I18n } from 'react-i18next'
 import { Grid, Cell } from 'bonde-styleguide'
-import { translate } from 'services/i18n'
 import { Page, Header } from 'components/PageLogged'
-import { withLastLocation, Redirect } from 'services/router'
-import { auth } from 'services/auth'
-import { Tourtip, tourtip } from 'components/Tourtip'
+import { Redirect } from 'services/router'
+import { Tourtip } from 'components/Tourtip'
 import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
 import ActionMenu from './ActionMenu'
 
-const HomeTabs = () => (
-  <React.Fragment>
-    <Header.Tab to='/admin'>Dashboard</Header.Tab>
-    <Header.Tab to='/admin/mobilizations'>Mobilizações</Header.Tab>
-    <Header.Tab to='/admin/communities'>Comunidades</Header.Tab>
-  </React.Fragment>
-)
-
-const HomePage = translate('home')(
-  ({ t, user }) => {
+export default ({ user }) => (
+  <I18n ns='home'>
+  {(t) => {
 
     if (user.tags.length < 1) return <Redirect to='/admin/tags' />
 
@@ -26,7 +18,6 @@ const HomePage = translate('home')(
         renderTitle={() => <Header.Title>Home</Header.Title>}
         renderLeftDropdown={() => <Header.CommunitiesDropdown path='/communities' />}
         renderActionButtons={ActionMenu}
-        renderTabs={HomeTabs}
       >
           <Grid>
             <Cell size={[12, 12, 12]}>
@@ -68,12 +59,7 @@ const HomePage = translate('home')(
           </Grid>
       </Page>
     )
-  }
-)
-
-export default withLastLocation(
-  tourtip({
-    init: ({ lastLocation }) => lastLocation && lastLocation.pathname === '/admin/tags'
-  })(auth()(HomePage))
+  }}
+  </I18n>
 )
 

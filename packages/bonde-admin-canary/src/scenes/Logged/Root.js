@@ -4,7 +4,7 @@ import { FullScreenLoadable, LoadingFullScreen } from 'components/Loadable'
 import TagsPage from './scenes/Tags'
 
 const HomePage = FullScreenLoadable({
-  loader: () => import('./scenes/Home/Page')
+  loader: () => import('./scenes/Home')
 })
 
 const Root = ({ match }) => (
