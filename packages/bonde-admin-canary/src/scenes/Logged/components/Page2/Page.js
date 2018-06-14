@@ -1,6 +1,7 @@
 import React from 'react'
-import { Footer, Page as Content } from 'bonde-styleguide'
+import { Page as Content } from 'bonde-styleguide'
 import Header from './Header'
+import Footer from './Footer'
 
 const Page =  ({
   children,
