@@ -1,11 +1,12 @@
 import React from 'react'
 import { Grid, Cell } from 'bonde-styleguide'
 import { translate } from 'services/i18n'
-import { Page, Header } from '../../components/Page'
+import { Page, Header } from 'components/PageLogged'
 import { withLastLocation, Redirect } from 'services/router'
 import { auth } from 'services/auth'
 import { Tourtip, tourtip } from 'components/Tourtip'
 import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
+import ActionMenu from './ActionMenu'
 
 const HomeTabs = () => (
   <React.Fragment>
@@ -24,17 +25,7 @@ const HomePage = translate('home')(
       <Page
         renderTitle={() => <Header.Title>Home</Header.Title>}
         renderLeftDropdown={() => <Header.CommunitiesDropdown path='/communities' />}
-        renderActionButtons={() => ([
-          <Header.ActionButton
-            dark
-            to='/admin/mobilization/add'
-            label={t('actionButtons.mobilization')}
-          />,
-          <Header.ActionButton
-            to='/admin/community/add'
-            label={t('actionButtons.community')}
-          />
-        ])}
+        renderActionButtons={ActionMenu}
         renderTabs={HomeTabs}
       >
           <Grid>
