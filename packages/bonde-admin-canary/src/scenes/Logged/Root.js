@@ -14,7 +14,7 @@ const Root = ({ match }) => (
       path={match.url}
       component={HomePage}
     />
-    
+
     <Route
       path={`${match.url}/tags`}
       component={TagsPage}
