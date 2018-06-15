@@ -5,6 +5,7 @@ import { Page, Header } from 'components/PageLogged'
 import { Redirect } from 'services/router'
 import { Tourtip } from 'components/Tourtip'
 import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
+import TrendingMobilizationsGadget from './components/TrendingMobilizations'
 import ActionMenu from './ActionMenu'
 
 export default ({ user }) => (
@@ -53,7 +54,7 @@ export default ({ user }) => (
                 step={5}
                 placement='top-left'
               >
-                <TrendingMobs t={t} />
+                <TrendingMobilizationsGadget />
               </Tourtip>
             </Cell>
           </Grid>

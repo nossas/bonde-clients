@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Gadget, Table } from 'bonde-styleguide' 
+import { Card, Table } from 'bonde-styleguide'
+import { Gadget } from 'components'
 import ListEmpty from './ListEmpty'
 
 const TableCardGadget = ({
