@@ -4,8 +4,7 @@ import { Grid, Cell } from 'bonde-styleguide'
 import { Page, Header } from 'components/PageLogged'
 import { Redirect } from 'services/router'
 import { Tourtip } from 'components/Tourtip'
-import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
-import TrendingMobilizationsGadget from './components/TrendingMobilizations'
+import { CommunitiesGadget, MobilizationList, TrendingMobilizationsGadget } from './components'
 import ActionMenu from './ActionMenu'
 
 export default ({ user }) => (
