@@ -1,18 +1,25 @@
 import React from 'react'
 import { I18n } from 'react-i18next'
+import { Query } from 'react-apollo'
 import { Grid, Cell } from 'bonde-styleguide'
+import { LoadingFullScreen } from 'components/Loadable'
 import { Page, Header } from 'components/PageLogged'
 import { Redirect } from 'services/router'
 import { Tourtip } from 'components/Tourtip'
-import { CommunitiesGadget, MobilizationList, TrendingMobilizationsGadget } from './components'
+import {
+  CommunitiesGadget,
+  MobilizationList,
+  TrendingMobilizationsGadget
+} from './components'
 import ActionMenu from './ActionMenu'
+import HomePageQuery from './query.graphql'
 
-export default ({ user }) => (
-  <I18n ns='home'>
-  {(t) => {
-
-    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
-
+const FetchHomePage = ({ t }) => (
+  <Query query={HomePageQuery}>
+  {({ loading, data }) => {
+    
+    if (loading) return <LoadingFullScreen message='Preparando seu BONDE.' />
+    
     return (
       <Page
         renderTitle={() => <Header.Title>Home</Header.Title>}
@@ -29,7 +36,9 @@ export default ({ user }) => (
                     description='A comunidade é um grupo que se une por uma causa. A partir dela você pode criar mobilizações e convidar outras pessoas para chegar junto.'
                     step={3}
                   >
-                    <CommunitiesGadget />
+                    <CommunitiesGadget
+                      communities={data.allCommunities.nodes}
+                    />
                   </Tourtip>
                 </Cell>
                 <Cell size={[8, 8]}>
@@ -53,12 +62,25 @@ export default ({ user }) => (
                 step={5}
                 placement='top-left'
               >
-                <TrendingMobilizationsGadget />
+                <TrendingMobilizationsGadget
+                  mobilizations={data.trendingMobilizations.nodes}
+                />
               </Tourtip>
             </Cell>
           </Grid>
       </Page>
     )
+  }}
+  </Query>
+)
+
+export default ({ user }) => (
+  <I18n ns='home'>
+  {(t) => {
+
+    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
+
+    return <FetchHomePage t={t} />
   }}
   </I18n>
 )
