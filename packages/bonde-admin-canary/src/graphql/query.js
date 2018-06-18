@@ -1,8 +1,8 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 
-const QueryHOC = ({ loading: Loading, query, props }) => (Component) => (ownProps) => (
-  <Query query={query}>
+const QueryHOC = ({ loading: Loading, query, props, variables }) => (Component) => (ownProps) => (
+  <Query query={query} variables={variables}>
     {({ loading, data }) => {
       if (loading && Loading) return <Loading />
 

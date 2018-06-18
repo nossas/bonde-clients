@@ -1,5 +1,6 @@
 import React from 'react'
-import { Gadget, Grid, Flexbox } from 'bonde-styleguide'
+import { Grid, Flexbox } from 'bonde-styleguide'
+import { Gadget } from 'components'
 import { CausesFilterDropdown, CausesCellsLoading, CausesCells } from './components'
 
 class CausesGadget extends React.Component {
