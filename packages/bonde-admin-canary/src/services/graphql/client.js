@@ -24,7 +24,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 
-const handleError = onCatch(({ response, networkError }) => {
+const handleError = onCatch(({ response, networkError }) => { 
   if (networkError && networkError.statusCode === 401) {
     AuthAPI.logout()
   }

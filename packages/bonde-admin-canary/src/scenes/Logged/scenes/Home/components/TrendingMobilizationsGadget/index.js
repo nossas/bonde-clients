@@ -8,10 +8,9 @@ export default query({
   query: trendingMobilizationsQuery,
   variables: { first: 4, days: 2 },
   props: ({ loading, data }) => {
-    console.log('trendingMobilizations', data)
     return {
       loading,
-      trendingMobilizations: data && data.trendingMobilizations
+      mobilizations: data && data.trendingMobilizations
         ? data.trendingMobilizations.nodes
         : undefined
     }

@@ -1,12 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { Grid, Flexbox } from 'bonde-styleguide'
 import { Gadget } from 'components'
-=======
-import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
-import { Gadget, Grid, Cell, Panel, Flexbox, Dropdown, DropdownItem } from 'bonde-styleguide'
+import { Grid } from 'bonde-styleguide'
 import { CausesFilterDropdown, CausesCellsLoading, CausesCells } from './components'
 
 class CausesGadget extends React.Component {
@@ -25,9 +19,9 @@ class CausesGadget extends React.Component {
     const { filter } = this.state
 
     return (
-      <Gadget title={[(
-        <Flexbox horizontal style={{ marginTop: 32 }}>
-          Causando por aí
+      <Gadget
+        title='Causando por aí'
+        renderFilter={() => (
           <div>
             Mobilizações
             <CausesFilterDropdown
@@ -36,8 +30,8 @@ class CausesGadget extends React.Component {
               onChange={this.changeSelectedFilter}
             />
           </div>
-        </Flexbox>
-      )]}>
+        )}
+      >
         <Grid>
           {loading
             ? <CausesCellsLoading cells={4} />

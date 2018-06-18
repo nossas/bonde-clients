@@ -3,16 +3,12 @@ import {
   Flexbox2 as Flexbox,
   Title
 } from 'bonde-styleguide'
-<<<<<<< HEAD
 import { Page } from 'components/PageLogged'
 import { Redirect } from 'services/router'
-=======
-import { Redirect } from 'services/router'
-import { Page } from '../../components/Page'
->>>>>>> chore(admin-canary): refactor Tags page to use page component
 import CreateUserTagsForm from './CreateUserTagsForm'
 
 class Tags extends React.Component {
+  
   render () {
     const { t, user } = this.props
     
