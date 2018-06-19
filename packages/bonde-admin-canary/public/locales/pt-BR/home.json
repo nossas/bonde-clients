@@ -2,12 +2,20 @@
   "active": "Ativa",
   "draft": "Rascunho",
   "title": "Home",
-  "my-communities": "Minhas Comunidades",
   "my-mobilizations": "Minhas Mobilizações",
   "trending-mobs": "Trending mobs",
-  
+
   "actionButtons": {
     "community": "Criar Comunidade",
     "mobilization": "Criar Mobilização"
+  },
+
+  "gadgets": {
+    "communities": {
+      "title": "Minhas Comunidades"
+    },
+    "trendingMobilizations": {
+      "title": "Causando por aí"
+    }
   }
 }

@@ -1,13 +1,21 @@
 {
-  "about": "About",
   "active": "Active",
-  "contact": "Contact",
-  "create-community": "Create Community",
-  "create-mobilization": "Create Mobilization",
   "draft": "Draft",
-  "help": "Help me",
-  "home": "Home",
-  "my-communities": "My Community",
+  "title": "Home",
   "my-mobilizations": "My Mobilizations",
-  "trending-mobs": "Trending mobs"
+  "trending-mobs": "Trending mobs",
+
+  "actionButtons": {
+    "community": "Create Community",
+    "mobilization": "Create Mobilization"
+  },
+
+  "gadgets": {
+    "communities": {
+      "title": "My Communities"
+    },
+    "trendingMobilizations": {
+      "title": "Causing around"
+    }
+  }
 }
