@@ -1,5 +1,19 @@
-import { auth } from 'services/auth'
-import { translate } from 'services/i18n'
+import React from 'react'
+import { I18n } from 'react-i18next'
+import { Auth } from 'services/auth'
 import CreateUserTagsForm from './CreateUserTagsForm'
 
-export default translate('tags')(auth()(CreateUserTagsForm))
+export default (props) => (
+  <I18n ns='tags'>
+  {(t) => (
+    <Auth>
+    {({ user }) => (
+      <CreateUserTagsForm
+        t={t}
+        user={user}
+      />
+    )}
+    </Auth>
+  )}
+  </I18n>
+)
