@@ -37,5 +37,7 @@ const DropdownItem = ({
   return <Styled {...props} />
 }
 
+DropdownItem.displayName = 'DropdownItem'
+
 /* @component */
 export default DropdownItem

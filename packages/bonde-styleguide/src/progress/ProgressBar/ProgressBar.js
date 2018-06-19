@@ -81,5 +81,7 @@ ProgressBar.defaultProps = {
 
 ProgressBar.sizes = sizes
 
+ProgressBar.displayName = 'ProgressBar'
+
 /* @component */
 export default ProgressBar

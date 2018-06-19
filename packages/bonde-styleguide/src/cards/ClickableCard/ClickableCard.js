@@ -39,5 +39,7 @@ ClickableCard.defaultProps = {
   minHeight: 110
 }
 
+ClickableCard.displayName = 'ClickableCard'
+
 /* @component */
 export default ClickableCard

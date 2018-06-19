@@ -31,5 +31,7 @@ Tab.defaultProps = {
   inverted: false
 }
 
+Tab.displayName = 'Tab'
+
 /* @component */
 export default Tab

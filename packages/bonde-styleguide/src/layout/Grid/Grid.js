@@ -10,5 +10,7 @@ const Grid = styled.div`
   grid-gap: 30px;
 `
 
+Grid.displayName = 'Grid'
+
 /* @component */
 export default Grid

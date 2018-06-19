@@ -28,5 +28,7 @@ Navbar.propTypes = {
   renderBrand: PropTypes.func
 }
 
+Navbar.displayName = 'Navbar'
+
 /* @component */
 export default Navbar

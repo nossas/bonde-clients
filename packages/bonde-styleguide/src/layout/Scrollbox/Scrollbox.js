@@ -37,5 +37,7 @@ Scrollbox.defaultProps = {
   padding: 0
 }
 
+Scrollbox.displayName = 'Scrollbox'
+
 /* @component */
 export default Scrollbox

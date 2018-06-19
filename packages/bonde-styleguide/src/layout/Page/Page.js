@@ -36,4 +36,6 @@ Page.propTypes = {
   bgColor: string
 }
 
+Page.displayName = 'Page'
+
 export default Page

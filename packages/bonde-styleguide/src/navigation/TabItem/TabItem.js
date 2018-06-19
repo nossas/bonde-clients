@@ -38,5 +38,7 @@ TabItem.defaultProps = {
   active: false
 }
 
+TabItem.displayName = 'TabItem'
+
 /* @component */
 export default TabItem

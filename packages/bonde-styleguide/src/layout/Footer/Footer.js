@@ -53,5 +53,7 @@ Footer.propTypes = {
   btnHelpClick: func
 }
 
+Footer.displayName = 'Footer'
+
 /* @component */
 export default Footer

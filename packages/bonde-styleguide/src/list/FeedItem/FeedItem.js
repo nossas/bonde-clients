@@ -70,5 +70,7 @@ FeedItem.propTypes = {
   text: string.isRequired
 }
 
+FeedItem.displayName = 'FeedItem'
+
 /* @component */
 export default FeedItem

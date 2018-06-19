@@ -75,5 +75,7 @@ DataListCard.defaultProps = {
   items: []
 }
 
+DataListCard.displayName = 'DataListCard'
+
 /* @component */
 export default DataListCard

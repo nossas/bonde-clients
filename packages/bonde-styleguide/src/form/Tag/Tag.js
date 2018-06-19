@@ -58,4 +58,6 @@ Tag.defaultProps = {
   checked: false
 }
 
+Tag.displayName = 'Tag'
+
 export default Tag

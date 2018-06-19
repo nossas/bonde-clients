@@ -26,12 +26,6 @@ const Content = styled.div`
 
 Content.displayName = 'Content'
 
-const Container = styled.div`
-  display: flex;
-`
-
-Container.displayName = 'Container'
-
 const BondeIcon = styled(({ className }) => (
   <div className={className}>
     <IconColorful name='bonde' size={260} inverted />
@@ -42,8 +36,8 @@ const BondeIcon = styled(({ className }) => (
   margin-left: -10px;
 `
 
-export default ({ children }) => (
-  <Container>
+const Container = styled(({ className, children }) => (
+  <div className={className}>
     <Content left bgImage={BGImage}>
       <Flexbox vertical middle padding='0 160px'>
         <BondeIcon />
@@ -59,5 +53,11 @@ export default ({ children }) => (
         {children}
       </Flexbox>
     </Content>
-  </Container>
-)
+  </div>
+))`
+  display: flex;
+`
+
+Container.displayName = 'Container'
+
+export default Container

@@ -80,5 +80,7 @@ ProgressRanking.defaultProps = {
   trackSize: 'xsmall'
 }
 
+ProgressRanking.displayName = 'ProgressRanking'
+
 /* @component */
 export default ProgressRanking

@@ -23,6 +23,7 @@ Feed.propTypes = {
   ]).isRequired
 }
 
+Feed.displayName = 'Feed'
+
 /* @component */
 export default Feed
-
