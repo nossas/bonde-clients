@@ -4,7 +4,7 @@ import { Flexbox2 as Flexbox, Title, Spacing } from 'bonde-styleguide'
 
 const Gadget = ({ children, title, renderFilter, WrapperComponent }) => (
   <Flexbox vertical>
-    <Spacing margin={{ bottom: 16 }}>
+    <Spacing margin={{ bottom: 15 }}>
       <Flexbox horizontal spacing='between'>
         {title
           ? <Title.H5 uppercase fontWeight='bold'>{title}</Title.H5>
