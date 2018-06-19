@@ -36,8 +36,14 @@ const BondeIcon = styled(({ className }) => (
   margin-left: -10px;
 `
 
-const Container = styled(({ className, children }) => (
-  <div className={className}>
+const Container = styled.div`
+  display: flex;
+`
+
+Container.displayName = 'Container'
+
+export default ({ children }) => (
+  <Container>
     <Content left bgImage={BGImage}>
       <Flexbox vertical middle padding='0 160px'>
         <BondeIcon />
@@ -53,11 +59,5 @@ const Container = styled(({ className, children }) => (
         {children}
       </Flexbox>
     </Content>
-  </div>
-))`
-  display: flex;
-`
-
-Container.displayName = 'Container'
-
-export default Container
+  </Container>
+)
