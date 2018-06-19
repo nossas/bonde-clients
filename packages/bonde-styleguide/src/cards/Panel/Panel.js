@@ -67,7 +67,7 @@ const Panel = ({
   <Card title={sectionTitle} minHeight={minHeight}>
     <Image src={image} height={185} />
     <Flexbox padding={{ x: 16, y: 14 }}>
-      <Title.H3>{title}</Title.H3>
+      <Title.H4>{title}</Title.H4>
       <Text fontSize={16} lineHeight={1.31} color={textColor} margin={{ y: 8 }}>
         {description}
       </Text>
