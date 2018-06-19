@@ -6,7 +6,10 @@ const Gadget = ({ children, title, renderFilter, WrapperComponent }) => (
   <Flexbox vertical>
     <Spacing margin={{ bottom: 16 }}>
       <Flexbox horizontal spacing='between'>
-        {title ? <Title.H4 uppercase>{title}</Title.H4> : <div />}
+        {title
+          ? <Title.H5 uppercase fontWeight='bold'>{title}</Title.H5>
+          : <div />
+        }
         {renderFilter && renderFilter()}
       </Flexbox>
     </Spacing>
