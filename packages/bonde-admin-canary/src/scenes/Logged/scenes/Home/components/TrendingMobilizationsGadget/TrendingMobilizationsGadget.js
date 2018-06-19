@@ -13,7 +13,7 @@ const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
             {mobilizations.map(mobilization => (
               <Cell size={[3, 3]}>
                 <Panel
-                  image={mobilization.facebookShareImage || 'https://goo.gl/hggWmp'}
+                  image={mobilization.facebookShareImage}
                   title={mobilization.name}
                   description={mobilization.goal}
                   author={mobilization.community.name}

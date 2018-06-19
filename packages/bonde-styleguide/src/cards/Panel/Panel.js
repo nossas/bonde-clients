@@ -8,6 +8,7 @@ import {
   Text,
   Title
 } from '../../'
+import IconColorful from '../../content/IconColorful/IconColorful'
 
 const textColor = '#4a4a4a'
 
@@ -55,6 +56,18 @@ const PanelLoading = styled(({ className, minHeight, title }) => (
   overflow: hidden;
 `
 
+const DefaultImage = styled(({ className }) => (
+  <div className={className}>
+    <IconColorful name='community' size={130} />
+  </div>
+))`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 185px;
+  background-color: #424242;
+`
+
 const Panel = ({
   loading,
   image,
@@ -65,7 +78,11 @@ const Panel = ({
   description
 }) => loading ? <PanelLoading title={sectionTitle} minHeight={minHeight} /> : (
   <Card title={sectionTitle} minHeight={minHeight}>
-    <Image src={image} height={185} />
+    {image
+      ? <Image src={image} height={185} />
+      : <DefaultImage />
+    }
+
     <Flexbox padding={{ x: 16, y: 14 }}>
       <Title.H4>{title}</Title.H4>
       <Text fontSize={16} lineHeight={1.31} color={textColor} margin={{ y: 8 }}>
