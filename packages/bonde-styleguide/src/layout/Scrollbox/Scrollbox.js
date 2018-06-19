@@ -34,7 +34,7 @@ Scrollbox.propTypes = {
 }
 
 Scrollbox.defaultProps = {
-  padding: 0
+  padding: {}
 }
 
 Scrollbox.displayName = 'Scrollbox'

@@ -21,10 +21,12 @@ const Gadget = ({ children, title, renderFilter, WrapperComponent }) => (
   </Flexbox>
 )
 
+const { oneOfType, string, func, node } = PropTypes
+
 Gadget.propTypes = {
-  title: PropTypes.string,
-  renderFilter: PropTypes.func,
-  WrapperComponent: PropTypes.node
+  title: string,
+  renderFilter: func,
+  WrapperComponent: oneOfType([node, func])
 }
 
 export default Gadget

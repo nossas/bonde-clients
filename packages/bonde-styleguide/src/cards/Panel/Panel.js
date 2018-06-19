@@ -101,7 +101,7 @@ Panel.propTypes = {
   loading: bool,
   sectionTitle: string,
   minHeight: number,
-  image: string.isRequired,
+  image: string,
   title: string.isRequired,
   description: string.isRequired,
   author: string.isRequired
@@ -111,6 +111,8 @@ Panel.defaultProps = {
   loading: false,
   minHeight: 320
 }
+
+Panel.displayName = 'Panel'
 
 /* @component */
 export default Panel

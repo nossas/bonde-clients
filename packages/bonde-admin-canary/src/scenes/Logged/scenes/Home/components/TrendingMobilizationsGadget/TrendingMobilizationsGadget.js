@@ -8,20 +8,19 @@ const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
     <Grid>
       {loading
         ? <TrendingMobilizationsCellsLoading />
-        : (
-          <React.Fragment>
-            {mobilizations.map(mobilization => (
-              <Cell size={[3, 3]}>
-                <Panel
-                  image={mobilization.facebookShareImage}
-                  title={mobilization.name}
-                  description={mobilization.goal}
-                  author={mobilization.community.name}
-                />
-              </Cell>
-            ))}
+        : mobilizations.map(mobilization => (
+          <React.Fragment key={Math.random()}>
+            <Cell size={[3, 3]}>
+              <Panel
+                image={mobilization.facebookShareImage}
+                title={mobilization.name}
+                description={mobilization.goal}
+                author={mobilization.community.name}
+              />
+            </Cell>
           </React.Fragment>
-        )
+        ))
+
       }
     </Grid>
   </Gadget>

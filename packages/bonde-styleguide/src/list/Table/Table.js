@@ -11,15 +11,21 @@ const Table = styled.div`{
   border-collapse: collapse;
 }`
 
+Table.displayName = 'Table'
+
 const TableBody = styled.div`{
   display: table-row-group;
 }`
+
+TableBody.displayName = 'TableBody'
 
 const TableBodyCell = TableCell.extend`
   padding: 13px 15px 14px 15px;
   vertical-align: middle;
   text-align: inherit;
 `
+
+TableBodyCell.displayName = 'TableBodyCell'
 
 const ReactTable = ({
   data,
@@ -30,25 +36,25 @@ const ReactTable = ({
   EmptyComponent,
   FooterComponent
 }) => {
- 
+
   const empty = data.length === 0
-  
+
   return !empty ? (
     <Scrollbox>
-      <Table> 
+      <Table>
         {HeaderComponent && <HeaderComponent columns={columns} />}
         <TableBody>
-          {data.map(row => ( 
-            <TableRow border={border}>
-            {columns.map(col => ( 
-              <ColumnComponent>
+          {data.map(row => (
+            <TableRow border={border} key={Math.random()}>
+            {columns.map(col => (
+              <ColumnComponent key={Math.random()}>
                 {col.render
                   ? col.render({ value: row[col.field], row })
                   : row[col.field]}
               </ColumnComponent>
             ))}
             </TableRow>
-          ))}  
+          ))}
         </TableBody>
       </Table>
     </Scrollbox>
@@ -57,7 +63,7 @@ const ReactTable = ({
 
 ReactTable.propTypes = {
   data: PropTypes.array,
-  columns: PropTypes.array.isRequired, 
+  columns: PropTypes.array.isRequired,
   ColumnComponent: PropTypes.any,
   EmptyComponent: PropTypes.any,
   HeaderComponent: PropTypes.any
@@ -68,5 +74,7 @@ ReactTable.defaultProps = {
   data: [],
   ColumnComponent: TableBodyCell
 }
+
+ReactTable.displayName = 'Table'
 
 export default ReactTable
