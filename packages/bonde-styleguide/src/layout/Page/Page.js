@@ -8,7 +8,7 @@ const PageContainer = styled.div`{
   padding-left: 155px;
   padding-bottom: 172px;
   padding-right: 155px;
-  background-color: ${props => props.bgColor || '#fff'};
+  background-color: ${props => props.bgColor || '#EEEEEE'};
 }`
 
 const PageContent = styled.div`{
