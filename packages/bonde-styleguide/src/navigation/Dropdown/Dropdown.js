@@ -98,6 +98,10 @@ class Dropdown extends React.Component {
     this.setState({ show: !this.state.show })
   }
 
+  closeMenu () {
+    this.setState({ show: false })
+  }
+
   render () {
     const { children, label, icon, width, disabled } = this.props
     const show = this.state.show && !disabled
@@ -118,8 +122,17 @@ class Dropdown extends React.Component {
             )}
           </DropdownTriggerButton>
         </React.Fragment>
-        {show && (<DropdownMenu>{children}</DropdownMenu>)}
-        {show && (<DropdownMenuArrow />)}
+
+        {show && (
+          <React.Fragment>
+            <DropdownMenu>
+              {React.Children.map(children, child => (
+                React.cloneElement(child, { closeMenu: this.closeMenu.bind(this) })
+              ))}
+            </DropdownMenu>
+            <DropdownMenuArrow />
+          </React.Fragment>
+        )}
       </DropdownComponent>
     )
   }

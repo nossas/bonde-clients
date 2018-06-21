@@ -19,17 +19,18 @@ class SelectDropdown extends React.Component {
   }
 
   render () {
-    const { options, onChange } = this.props
+    const { options } = this.props
     const { currentOption } = this.state
 
     return (
       <Dropdown label={currentOption.label}>
         {options.map(option => (
-          <React.Fragment key={Math.random()}>
-            <DropdownItem onClick={() => this.onChange(option)}>
-              {option.label}
-            </DropdownItem>
-          </React.Fragment>
+          <DropdownItem
+            key={Math.random()}
+            onClick={({ closeMenu }) => { closeMenu(); this.onChange(option) }}
+          >
+            {option.label}
+          </DropdownItem>
         ))}
       </Dropdown>
     )

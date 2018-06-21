@@ -30,11 +30,13 @@ const Item = styled('a')`{
  */
 const DropdownItem = ({
   component: Component,
+  closeMenu,
+  onClick,
   ...props
 }) => {
   const Styled = Component ? Item.withComponent(Component) : Item
 
-  return <Styled {...props} />
+  return <Styled {...props} onClick={() => onClick({ closeMenu })} />
 }
 
 DropdownItem.displayName = 'DropdownItem'
