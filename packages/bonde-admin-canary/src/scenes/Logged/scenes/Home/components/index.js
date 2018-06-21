@@ -1,4 +1,4 @@
-export { default as MobilizationList } from './MobilizationList'
+export { default as MobilizationsGadget } from './MobilizationsGadget'
 export { default as CommunitiesGadget } from './CommunitiesGadget'
 export { default as TrendingMobilizationsGadget } from './TrendingMobilizationsGadget'
 

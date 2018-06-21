@@ -7,7 +7,7 @@ import { Redirect } from 'services/router'
 import { Auth } from 'services/auth'
 import {
   CommunitiesGadget,
-  MobilizationList,
+  MobilizationsGadget,
   TrendingMobilizationsGadget
 } from './components'
 import ActionMenu from './ActionMenu'
@@ -55,7 +55,7 @@ export default ({ lastLocation }) => (
                       </Cell>
                       <Cell size={[8, 8]}>
                         <TutorialDialog t={t} step={4} placement='left-top'>
-                          <MobilizationList t={(key) => key} />
+                          <MobilizationsGadget />
                         </TutorialDialog>
                       </Cell>
                     </Grid>

@@ -16,6 +16,14 @@
         "alphabetic": "A-Z"
       }
     },
+    "mobilizations": {
+      "title": "Minhas mobilizações",
+      "emptyText": "As mobilizações das suas comunidades vão aparecer aqui.",
+      "statuses": {
+        "active": "ativo",
+        "archived": "arquivado"
+      }
+    },
     "trendingMobilizations": {
       "title": "Causando por aí",
       "filtersAdornment": "Mobilizações",
