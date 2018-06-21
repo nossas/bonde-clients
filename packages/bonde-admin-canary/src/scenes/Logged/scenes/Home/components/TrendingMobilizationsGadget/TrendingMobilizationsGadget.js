@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Cell, Panel } from 'bonde-styleguide'
+import { Grid, Cell, Panel, Spacing, Flexbox2 as Flexbox } from 'bonde-styleguide'
 import { Gadget } from 'components'
 import {
   TrendingMobilizationsCellsLoading,
@@ -9,7 +9,16 @@ import {
 const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
   <Gadget
     title={t('gadgets.trendingMobilizations.title')}
-    renderFilter={TrendingMobilizationsFilter}
+    renderFilter={() => (
+      <Flexbox>
+        <Spacing margin={{ right: 8 }}>
+          <Gadget.Title>
+            {t('gadgets.trendingMobilizations.filtersAdornment')}
+          </Gadget.Title>
+        </Spacing>
+        <TrendingMobilizationsFilter t={t} />
+      </Flexbox>
+    )}
   >
     <Grid>
       {loading

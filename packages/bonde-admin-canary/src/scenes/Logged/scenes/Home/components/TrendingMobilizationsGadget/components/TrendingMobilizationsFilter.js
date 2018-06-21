@@ -1,15 +1,15 @@
 import React from 'react'
 import { SelectDropdown } from 'components'
 
-const FILTERS = [
-  { label: 'Para agir agora', value: 2 },
-  { label: 'Para se inspirar', value: 90 },
+const options = ({ t }) => [
+  { label: t('gadgets.trendingMobilizations.filters.now'), value: 2 },
+  { label: t('gadgets.trendingMobilizations.filters.inspire'), value: 90 },
 ]
 
-const TrendingMobilizationsFilter = () => (
+const TrendingMobilizationsFilter = ({ t }) => (
   <SelectDropdown
     onChange={option => { console.log('[SelectDropdown.onChange]', option) }}
-    options={FILTERS}
+    options={options({ t })}
   />
 )
 

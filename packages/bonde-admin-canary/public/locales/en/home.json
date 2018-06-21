@@ -15,7 +15,12 @@
       "title": "My Communities"
     },
     "trendingMobilizations": {
-      "title": "Causing around"
+      "title": "Causing around",
+      "filtersAdornment": "Mobilizations",
+      "filters": {
+        "now": "To act now",
+        "inspire": "To get inspired"
+      }
     }
   }
 }
