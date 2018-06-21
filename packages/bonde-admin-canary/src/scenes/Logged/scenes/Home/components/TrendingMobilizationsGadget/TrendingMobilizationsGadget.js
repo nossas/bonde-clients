@@ -1,10 +1,16 @@
 import React from 'react'
 import { Grid, Cell, Panel } from 'bonde-styleguide'
 import { Gadget } from 'components'
-import { TrendingMobilizationsCellsLoading } from './components'
+import {
+  TrendingMobilizationsCellsLoading,
+  TrendingMobilizationsFilter
+} from './components'
 
 const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
-  <Gadget title={t('gadgets.trendingMobilizations.title')}>
+  <Gadget
+    title={t('gadgets.trendingMobilizations.title')}
+    renderFilter={TrendingMobilizationsFilter}
+  >
     <Grid>
       {loading
         ? <TrendingMobilizationsCellsLoading />
