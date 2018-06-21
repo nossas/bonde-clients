@@ -1,21 +1,20 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import PropTypes from 'prop-types'
-import {
-  Card,
-  Flexbox,
-  Image,
-  Text,
-  Title
-} from '../../'
+import { Card } from '../../'
+import Flexbox from '../../layout/Flexbox2/Flexbox2'
 import IconColorful from '../../content/IconColorful/IconColorful'
+import Image from '../../content/Image/Image'
+import Spacing from '../../layout/Spacing/Spacing'
+import Text from '../../content/Text/Text'
+import Title from '../../content/Title/Title'
 
 const textColor = '#4a4a4a'
 
 const placeHolderShimmer = keyframes`
   0% { -webkit-transform: translateX(-180%) }
   100% { -webkit-transform: translateX(70%) }
-`;
+`
 
 const BackgroundMasker = styled.div`
   background: #fff;
@@ -78,19 +77,28 @@ const Panel = ({
   description
 }) => loading ? <PanelLoading title={sectionTitle} minHeight={minHeight} /> : (
   <Card title={sectionTitle} minHeight={minHeight}>
-    {image
-      ? <Image src={image} height={185} />
-      : <DefaultImage />
-    }
+    <Flexbox vertical spacing='between'>
+      <div>
+        {image
+          ? <Image src={image} height={185} />
+          : <DefaultImage />
+        }
 
-    <Flexbox padding={{ x: 16, y: 14 }}>
-      <Title.H4>{title}</Title.H4>
-      <Text fontSize={16} lineHeight={1.31} color={textColor} margin={{ y: 8 }}>
-        {description}
-      </Text>
-      <Text fontSize={13} lineHeight={1.85} color={textColor}>
-        {author}
-      </Text>
+        <Spacing padding={{ x: 16, top: 14 }}>
+          <Title.H4>{title}</Title.H4>
+          <Spacing margin={{ y: 8 }}>
+            <Text fontSize={16} lineHeight={1.31} color={textColor}>
+              {description}
+            </Text>
+          </Spacing>
+        </Spacing>
+      </div>
+
+      <Spacing padding={{ x: 16, bottom: 14 }}>
+        <Text fontSize={13} lineHeight={1.85} color={textColor}>
+          {author}
+        </Text>
+      </Spacing>
     </Flexbox>
   </Card>
 )
