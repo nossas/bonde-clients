@@ -10,7 +10,11 @@
   },
   "gadgets": {
     "communities": {
-      "title": "Minhas Comunidades"
+      "title": "Minhas Comunidades",
+      "filters": {
+        "recent": "Mais recentes",
+        "alphabetic": "A-Z"
+      }
     },
     "trendingMobilizations": {
       "title": "Causando por aí",

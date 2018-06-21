@@ -50,7 +50,7 @@ export default ({ lastLocation }) => (
                     <Grid>
                       <Cell size={[4, 4]}>
                         <TutorialDialog t={t} step={3}>
-                          <CommunitiesGadget communities={[]} />
+                          <CommunitiesGadget />
                         </TutorialDialog>
                       </Cell>
                       <Cell size={[8, 8]}>

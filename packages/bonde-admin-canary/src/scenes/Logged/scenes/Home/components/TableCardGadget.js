@@ -11,10 +11,12 @@ const TableCardGadget = ({
   border,
   emptyIcon,
   emptyText,
+  renderFilter,
   HeaderComponent
 }) => (
   <Gadget
     title={title}
+    renderFilter={renderFilter}
     WrapperComponent={({ children }) => (
       <Card height='275px'>
         {children}
