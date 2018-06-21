@@ -3,31 +3,33 @@ import PropTypes from 'prop-types'
 import { Dropdown, DropdownItem } from 'bonde-styleguide'
 
 class SelectDropdown extends React.Component {
-  constructor (...args) {
-    super(...args)
-
-    this.state = {
-      currentOption: this.props.initialOption || this.props.options[0]
-    }
+  state = {
+    currentOption: undefined 
   }
 
   onChange = currentOption => {
-    if (currentOption.value !== this.state.currentOption.value) {
-      this.setState({ ...this.state, currentOption })
-      this.props.onChange(currentOption)
-    }
+    this.setState({ currentOption })
+    this.props.onChange(currentOption)
   }
 
   render () {
-    const { options } = this.props
-    const { currentOption } = this.state
+    const { initialOption, options } = this.props
+    let { currentOption } = this.state
+    if (!currentOption) {
+      currentOption = initialOption || options[0]
+    }
 
     return (
       <Dropdown label={currentOption.label} inverted>
         {options.map(option => (
           <DropdownItem
             key={Math.random()}
-            onClick={({ closeMenu }) => { closeMenu(); this.onChange(option) }}
+            onClick={({ closeMenu }) => {
+              closeMenu()
+              if (currentOption.value !== option.value) {
+                this.onChange(option)
+              }
+            }}
           >
             {option.label}
           </DropdownItem>

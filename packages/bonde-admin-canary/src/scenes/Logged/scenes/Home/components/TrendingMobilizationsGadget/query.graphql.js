@@ -1,13 +1,17 @@
 import gql from 'graphql-tag'
-import TrendingMobilizationsGadgetFragment from './fragment.graphql'
 
 export default gql`
-  query TrendingMobilizations($first: Int!, $days: Int!) {
-    trendingMobilizations(first: $first, days: $days) {
+  query TrendingMobilizations($limit: Int, $days: Int!) {
+    trendingMobilizations(first: $limit, days: $days) {
       nodes {
-        ...TrendingMobilizationsGadgetFragment
+        id
+        name
+        goal
+        facebookShareImage
+        community {
+          name
+        }
       }
     }
   }
-${TrendingMobilizationsGadgetFragment}
 `

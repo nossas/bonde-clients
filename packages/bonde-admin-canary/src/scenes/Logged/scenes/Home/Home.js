@@ -1,25 +1,22 @@
 import React from 'react'
-import { I18n } from 'react-i18next'
-import { Query } from 'react-apollo'
-import { Grid, Cell } from 'bonde-styleguide'
-import { LoadingFullScreen } from 'components/Loadable'
+import { Button, Cell, Grid } from 'bonde-styleguide'
 import { Page, Header } from 'components/PageLogged'
-import { Redirect } from 'services/router'
 import { Tourtip } from 'components/Tourtip'
+import { Redirect } from 'services/router'
+import { Auth } from 'services/auth'
 import {
   CommunitiesGadget,
   MobilizationList,
   TrendingMobilizationsGadget
 } from './components'
 import ActionMenu from './ActionMenu'
-import HomePageQuery from './query.graphql'
 
-const FetchHomePage = ({ t }) => (
-  <Query query={HomePageQuery}>
-  {({ loading, data }) => {
-    
-    if (loading) return <LoadingFullScreen message='Preparando seu BONDE.' />
-    
+export default () => (
+  <Auth>
+  {({ user }) => {
+  
+    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
+
     return (
       <Page
         renderTitle={() => <Header.Title>Home</Header.Title>}
@@ -36,9 +33,7 @@ const FetchHomePage = ({ t }) => (
                     description='A comunidade é um grupo que se une por uma causa. A partir dela você pode criar mobilizações e convidar outras pessoas para chegar junto.'
                     step={3}
                   >
-                    <CommunitiesGadget
-                      communities={data.allCommunities.nodes}
-                    />
+                    <CommunitiesGadget communities={[]} />
                   </Tourtip>
                 </Cell>
                 <Cell size={[8, 8]}>
@@ -49,7 +44,7 @@ const FetchHomePage = ({ t }) => (
                     step={4}
                     placement='bottom-right'
                   >
-                    <MobilizationList t={t} />
+                    <MobilizationList t={(key) => key} />
                   </Tourtip>
                 </Cell>
               </Grid>
@@ -62,26 +57,13 @@ const FetchHomePage = ({ t }) => (
                 step={5}
                 placement='top-left'
               >
-                <TrendingMobilizationsGadget
-                  mobilizations={data.trendingMobilizations.nodes}
-                />
+                <TrendingMobilizationsGadget />
               </Tourtip>
             </Cell>
           </Grid>
       </Page>
     )
   }}
-  </Query>
-)
-
-export default ({ user }) => (
-  <I18n ns='home'>
-  {(t) => {
-
-    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
-
-    return <FetchHomePage t={t} />
-  }}
-  </I18n>
+  </Auth>
 )
 

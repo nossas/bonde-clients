@@ -1,29 +1,21 @@
 import React from 'react'
-import { Grid, Cell, Panel, Spacing, Flexbox2 as Flexbox } from 'bonde-styleguide'
-import { Gadget } from 'components'
-import {
-  TrendingMobilizationsCellsLoading,
-  TrendingMobilizationsFilter
-} from './components'
+import { I18n } from 'react-i18next'
+import { Grid, Cell, Panel } from 'bonde-styleguide'
+import { Gadget, Queryset } from 'components'
+import Loading from './Loading'
+import Filter from './Filter'
+import trendingMobilizationsQuery from './query.graphql'
 
-const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
-  <Gadget
-    title={t('gadgets.trendingMobilizations.title')}
-    renderFilter={() => (
-      <Flexbox>
-        <Spacing margin={{ right: 8 }}>
-          <Gadget.Title>
-            {t('gadgets.trendingMobilizations.filtersAdornment')}
-          </Gadget.Title>
-        </Spacing>
-        <TrendingMobilizationsFilter t={t} />
-      </Flexbox>
-    )}
-  >
-    <Grid>
-      {loading
-        ? <TrendingMobilizationsCellsLoading />
-        : mobilizations.map(mobilization => (
+const TrendingMobilizationsGadget = ({ onChangeFilter, mobilizations, loading }) => (
+  <I18n ns='home'>
+  {(t) => (
+    <Gadget
+      title={t('gadgets.trendingMobilizations.title')}
+      renderFilter={() => <Filter onChange={onChangeFilter} />}
+    >
+      <Grid>
+      {loading ? <Loading /> : mobilizations.map(mobilization => {
+        return (
           <React.Fragment key={Math.random()}>
             <Cell size={[3, 3]}>
               <Panel
@@ -34,11 +26,28 @@ const TrendingMobilizationsGadget = ({ t, loading, mobilizations }) => (
               />
             </Cell>
           </React.Fragment>
-        ))
-
-      }
-    </Grid>
-  </Gadget>
+        )
+      })}
+      </Grid>
+    </Gadget>
+  )}
+  </I18n>
 )
 
-export default TrendingMobilizationsGadget
+const TrendingMobilizationsQueryset = () => (
+  <Queryset
+    limit={4}
+    filter={{ days: 2 }}
+    query={trendingMobilizationsQuery}
+  >
+    {({ data, onChangeFilter, loading }) => (
+      <TrendingMobilizationsGadget
+        onChangeFilter={onChangeFilter}
+        mobilizations={data && data.trendingMobilizations ? data.trendingMobilizations.nodes : undefined}
+        loading={loading}
+      />
+    )}
+  </Queryset>
+)
+
+export default TrendingMobilizationsQueryset
