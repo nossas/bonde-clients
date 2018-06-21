@@ -40,14 +40,8 @@ const Header = ({
 
     <Navbar>
       <Flexbox horizontal spacing='between'>
-        {/* Render Title */}
         {renderTitle ? renderTitle() : <div />}
-        {/* Render Action Buttons */}
-        {renderActionButtons ? (
-          <Flexbox>
-            {renderActionButtons()}
-          </Flexbox>
-        ) : <div />}
+        {renderActionButtons ? renderActionButtons() : <div />}
       </Flexbox>
     </Navbar>
 
@@ -72,10 +66,12 @@ Header.propTypes = {
 
 Header.ActionButton = ActionButton
 
+Header.ActionButtonGroup = Flexbox
+
 Header.CommunitiesDropdown = CommunitiesDropdown
 
 Header.Tab = Tab
 
-Header.Title = Title 
+Header.Title = Title
 
 export default Header

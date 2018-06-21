@@ -4,8 +4,8 @@ import { Header } from 'components/PageLogged'
 
 const ActionMenu = () => (
  <I18n ns='home'>
-  {(t) => (
-    <React.Fragment>
+  {t => (
+    <Header.ActionButtonGroup>
       <Header.ActionButton
         dark
         to='/admin/mobilization/add'
@@ -15,7 +15,7 @@ const ActionMenu = () => (
         to='/admin/community/add'
         label={t('actionButtons.community')}
       />
-    </React.Fragment>
+    </Header.ActionButtonGroup>
   )}
  </I18n>
 )
