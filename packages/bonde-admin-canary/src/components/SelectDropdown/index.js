@@ -23,7 +23,7 @@ class SelectDropdown extends React.Component {
     const { currentOption } = this.state
 
     return (
-      <Dropdown label={currentOption.label}>
+      <Dropdown label={currentOption.label} inverted>
         {options.map(option => (
           <DropdownItem
             key={Math.random()}
