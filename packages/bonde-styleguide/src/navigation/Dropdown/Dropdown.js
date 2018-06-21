@@ -25,11 +25,11 @@ const DropdownMenu = styled.div`{
   padding: 20px 0;
   white-space: nowrap;
   position: absolute;
-  top: 30px;
+  top: calc(100% + 15px);
   z-index: 9;
   overflow-y: auto;
   max-height: calc(100vh - 30px - 40px);
-  min-width: 100%;
+  min-width: calc(100% + 15px);
 }`
 
 const DropdownMenuArrow = styled.div`
@@ -37,8 +37,8 @@ const DropdownMenuArrow = styled.div`
   border-right: 10px solid transparent;
   border-bottom: 8px solid #fff;
   position: absolute;
-  bottom: -16px;
-  right: 2px;
+  bottom: -15px;
+  right: -3px;
 `
 
 const DropdownComponent = styled.div`{
