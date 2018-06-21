@@ -4,7 +4,7 @@ import { Dropdown, DropdownItem } from 'bonde-styleguide'
 
 class SelectDropdown extends React.Component {
   state = {
-    currentOption: undefined 
+    value: undefined 
   }
 
   onChange = currentOption => {
@@ -13,11 +13,13 @@ class SelectDropdown extends React.Component {
   }
 
   render () {
-    const { initialOption, options } = this.props
-    let { currentOption } = this.state
-    if (!currentOption) {
-      currentOption = initialOption || options[0]
+    const { initialValue, options } = this.props
+    let { value } = this.state
+    if (!value) {
+      value = initialValue || options[0].value
     }
+
+    const currentOption = options.find(opt => opt.value === value)
 
     return (
       <Dropdown label={currentOption.label} inverted>
@@ -39,7 +41,7 @@ class SelectDropdown extends React.Component {
   }
 }
 
-const { oneOfType, arrayOf, shape, string, number, node, func } = PropTypes
+const { any, oneOfType, arrayOf, shape, string, number, node, func } = PropTypes
 
 const optionShape = shape({
   label: oneOfType([node, func, string]),
@@ -50,7 +52,7 @@ SelectDropdown.propTypes = {
   options: arrayOf(optionShape).isRequired,
 
   onChange: func,
-  initialOption: optionShape,
+  initialValue: any,
 }
 
 SelectDropdown.defaultProps = {

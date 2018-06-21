@@ -13,6 +13,7 @@ const Filter = ({ filter, onChange }) => (
         </Gadget.Title>
       </Spacing>
       <SelectDropdown
+        initialValue={filter.days}
         onChange={({ value }) => onChange({ days: value })}
         options={[
           { 

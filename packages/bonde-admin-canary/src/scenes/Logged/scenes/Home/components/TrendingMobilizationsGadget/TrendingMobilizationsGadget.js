@@ -6,12 +6,12 @@ import Loading from './Loading'
 import Filter from './Filter'
 import trendingMobilizationsQuery from './query.graphql'
 
-const TrendingMobilizationsGadget = ({ onChangeFilter, mobilizations, loading }) => (
+const TrendingMobilizationsGadget = ({ filter, onChangeFilter, mobilizations, loading }) => (
   <I18n ns='home'>
   {(t) => (
     <Gadget
       title={t('gadgets.trendingMobilizations.title')}
-      renderFilter={() => <Filter onChange={onChangeFilter} />}
+      renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
     >
       <Grid>
       {loading ? <Loading /> : mobilizations.map(mobilization => {
@@ -40,8 +40,9 @@ const TrendingMobilizationsQueryset = () => (
     filter={{ days: 2 }}
     query={trendingMobilizationsQuery}
   >
-    {({ data, onChangeFilter, loading }) => (
+    {({ data, filter, onChangeFilter, loading }) => (
       <TrendingMobilizationsGadget
+        filter={filter}
         onChangeFilter={onChangeFilter}
         mobilizations={data && data.trendingMobilizations ? data.trendingMobilizations.nodes : undefined}
         loading={loading}
