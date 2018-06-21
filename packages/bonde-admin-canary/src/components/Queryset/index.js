@@ -37,6 +37,7 @@ class Queryset extends React.Component {
           return this.props.children({
             data,
             loading,
+            filter: this.state.filter,
             onChangeFilter: f => this.handleChangeFilter(f, refetch)
           })
         }}
