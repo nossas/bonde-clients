@@ -14,7 +14,8 @@
         "alphabetic": "A-Z"
     },
     "communities": {
-      "title": "Minhas Comunidades" 
+      "title": "Minhas Comunidades",
+      "emptyText": "Crie uma comunidade para começar a causar!"
     },
     "mobilizations": {
       "title": "Minhas mobilizações",

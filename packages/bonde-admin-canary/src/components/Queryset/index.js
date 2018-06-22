@@ -67,7 +67,7 @@ class Queryset extends React.Component {
 
 Queryset.propTypes = {
   query: PropTypes.object.isRequired,
-  limit: PropTypes.number.isRequired,
+  limit: PropTypes.number,
   filter: PropTypes.object
 }
 

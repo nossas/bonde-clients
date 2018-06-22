@@ -47,12 +47,12 @@ const AuthProvider = ({ children, loading: Loading, logout }) => (
   </I18n>
 )
 
-export default connect(undefined, {
+export default connect(undefined, (dispatch) => ({
   logout: () => {
-    AuthAPI
-      .logout()
-      .then(() => {
-        graphqlApi.resetStore()
-      })
+    return AuthAPI
+    .logout()
+    .then(() => {
+      graphqlApi.resetStore()
+    })
   }
-})(AuthProvider)
+}))(AuthProvider)
