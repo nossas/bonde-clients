@@ -26,8 +26,7 @@ class SelectDropdown extends React.Component {
         {options.map(option => (
           <DropdownItem
             key={Math.random()}
-            onClick={({ closeMenu }) => {
-              closeMenu()
+            onClick={() => {
               if (currentOption.value !== option.value) {
                 this.onChange(option)
               }

@@ -36,7 +36,15 @@ const DropdownItem = ({
 }) => {
   const Styled = Component ? Item.withComponent(Component) : Item
 
-  return <Styled {...props} onClick={() => onClick({ closeMenu })} />
+  return (
+    <Styled
+      {...props}
+      onClick={() => {
+        if (closeMenu) closeMenu()
+        onClick()
+      }}
+    />
+  )
 }
 
 DropdownItem.displayName = 'DropdownItem'
