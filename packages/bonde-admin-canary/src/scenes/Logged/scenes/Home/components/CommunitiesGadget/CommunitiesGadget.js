@@ -49,7 +49,6 @@ const CommunitiesGadget = ({ t, loading, communities, filter, onChangeFilter }) 
 const CommunitiesGadgetQueryset = ({ t }) => (
   <Queryset
     query={allUserCommunities}
-    limit={10}
     filter={{ orderBy: 'UPDATED_AT_DESC' }}
   >
     {({ loading, data, filter, onChangeFilter }) => (

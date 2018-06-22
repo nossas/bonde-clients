@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Flexbox2 as Flexbox, Spacing, Table } from 'bonde-styleguide'
+import { Card, Flexbox2 as Flexbox, Table } from 'bonde-styleguide'
 import { Gadget } from 'components'
 import ListEmpty from './ListEmpty'
 
