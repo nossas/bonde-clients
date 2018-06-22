@@ -5,7 +5,6 @@ import { Redirect } from 'services/router'
 import CreateUserTagsForm from './CreateUserTagsForm'
 
 class Tags extends React.Component {
-  
   render () {
     const { t, user } = this.props
     

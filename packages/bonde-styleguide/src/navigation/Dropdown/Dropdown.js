@@ -77,6 +77,10 @@ const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
   height: 100%;
 `
 
+const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
+  height: 100%;
+`
+
 class Dropdown extends React.Component {
   constructor (props) {
     super(props)
@@ -113,7 +117,6 @@ class Dropdown extends React.Component {
             )}
           </DropdownTriggerButton>
         </React.Fragment>
-
         {show && (
           <React.Fragment>
             <DropdownMenu>

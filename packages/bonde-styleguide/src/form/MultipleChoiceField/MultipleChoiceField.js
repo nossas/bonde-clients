@@ -18,7 +18,7 @@ const MultipleChoiceField = ({
     }
     input.onChange(values.join(separator))
   }
-
+  
   return (
     <React.Fragment>
       {options.map((field) => (
