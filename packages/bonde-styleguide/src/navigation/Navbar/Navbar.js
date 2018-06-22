@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Icon from '../../content/Icon/Icon'
 
 const NavContainer = styled.div`{
   display: flex;

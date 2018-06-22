@@ -73,18 +73,6 @@ const DropdownComponent = styled.div`{
   }
 }`
 
-const Flexbox = styled.div`{
-  width: inherit;
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-between;
-  align-items: center;
-
-  & > svg {
-    margin-right: 15px;
-  }
-}`
-
 const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
   height: 100%;
 `

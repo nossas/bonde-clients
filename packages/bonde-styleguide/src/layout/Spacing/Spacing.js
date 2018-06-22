@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 
