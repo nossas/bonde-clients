@@ -9,12 +9,12 @@
     "mobilization": "Criar Mobilização"
   },
   "gadgets": {
-    "communities": {
-      "title": "Minhas Comunidades",
-      "filters": {
+    "filters": {
         "recent": "Mais recentes",
         "alphabetic": "A-Z"
-      }
+    },
+    "communities": {
+      "title": "Minhas Comunidades" 
     },
     "mobilizations": {
       "title": "Minhas mobilizações",
