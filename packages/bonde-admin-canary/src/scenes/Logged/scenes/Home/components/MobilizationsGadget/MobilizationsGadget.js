@@ -1,13 +1,10 @@
 import React from 'react'
-import { Link } from 'bonde-styleguide'
-import {
-  Text,
-  Icon
-} from 'bonde-styleguide'
+import { Icon, Link, Text, Pagination } from 'bonde-styleguide'
 import { Queryset } from 'components'
 import ImageColumn from '../ImageColumn'
 import TableCardGadget from '../TableCardGadget'
 import StatusColumn from './StatusColumn'
+import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
 
 const columns = [
@@ -39,7 +36,7 @@ const columns = [
   }
 ]
 
-const MobilizationList = ({ t, loading, mobilizations }) => (
+const MobilizationList = ({ t, loading, mobilizations, filter, onChangeFilter }) => (
   <TableCardGadget
     border
     loading={loading}
@@ -48,15 +45,25 @@ const MobilizationList = ({ t, loading, mobilizations }) => (
     title={t('gadgets.mobilizations.title')}
     emptyIcon='mobilization'
     emptyText={t('gadgets.mobilizations.emptyText')}
+    renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
+    renderPagination={() => (
+      <Pagination />
+    )}
   />
 )
 
 const MobilizationsGadgetQueryset = ({ t }) => (
-  <Queryset query={allUserMobilizationsQuery} limit={10}>
-    {({ loading, data }) => {
+  <Queryset
+    query={allUserMobilizationsQuery}
+    limit={10}
+    filter={{ orderBy: 'UPDATED_AT_DESC' }}
+  >
+    {({ loading, data, filter, onChangeFilter }) => {
       return (
         <MobilizationList
           t={t}
+          filter={filter}
+          onChangeFilter={onChangeFilter}
           loading={loading}
           mobilizations={data && data.allUserMobilizations ? data.allUserMobilizations.nodes : []}
         />
