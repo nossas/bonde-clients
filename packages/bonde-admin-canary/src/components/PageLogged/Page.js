@@ -8,7 +8,8 @@ const Page =  ({
   renderTitle,
   renderLeftDropdown,
   renderActionButtons,
-  renderTabs
+  renderTabs,
+  ...pageProps
 }) => (
   <div>
     <Header
@@ -18,7 +19,7 @@ const Page =  ({
       renderTabs={renderTabs}
     />
 
-    <Content>{children}</Content>
+    <Content {...pageProps}>{children}</Content>
     <Footer />
   </div>
 )
