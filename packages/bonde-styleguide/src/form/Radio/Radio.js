@@ -65,5 +65,7 @@ const Radio = Checkbox.withComponent(
   }
 `
 
+Radio.displayName = 'Radio'
+
 /* @component */
 export default Radio

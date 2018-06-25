@@ -105,5 +105,7 @@ Card.propTypes = {
   }),
 }
 
+Card.displayName = 'Card'
+
 /* @component */
 export default Card

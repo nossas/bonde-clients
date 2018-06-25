@@ -34,5 +34,7 @@ DataListCol.defaultProps = {
   align: 'inherit'
 }
 
+DataListCol.displayName = 'DataListCol'
+
 /* @component */
 export default DataListCol

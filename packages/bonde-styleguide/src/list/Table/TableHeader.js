@@ -23,7 +23,9 @@ const TableHeader = styled(({ className, children, columns }) => (
     {columns && (
       <TableRow border>
         {columns.map(col => (
-          <TableHeaderCell>{col.header || ''}</TableHeaderCell>
+          <TableHeaderCell key={Math.random()}>
+            {col.header || ''}
+          </TableHeaderCell>
         ))}
       </TableRow>
     )}

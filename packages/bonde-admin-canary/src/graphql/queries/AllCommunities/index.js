@@ -8,7 +8,6 @@ import {
 export default {
   query: AllCommunities,
   props: ({ loading, data }) => {
-    console.log('data', data)
     return {
       loading,
       communities: data && data.allCommunities

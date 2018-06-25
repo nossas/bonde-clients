@@ -1,65 +1,77 @@
 import React from 'react'
 import { I18n } from 'react-i18next'
 import { Grid, Cell } from 'bonde-styleguide'
+import { Tutorial } from 'components'
 import { Page, Header } from 'components/PageLogged'
 import { Redirect } from 'services/router'
-import { Tourtip } from 'components/Tourtip'
-import { CommunitiesGadget, MobilizationList, TrendingMobs } from './components'
+import { Auth } from 'services/auth'
+import {
+  CommunitiesGadget,
+  MobilizationsGadget,
+  TrendingMobilizationsGadget
+} from './components'
 import ActionMenu from './ActionMenu'
 
-export default ({ user }) => (
+const TutorialDialog = ({ children, step, t, ...props }) => (
+  <Tutorial.Dialog
+    step={step}
+    name={`tutorial-step-${step}`}
+    title={t(`tutorial.steps.${step}.title`)}
+    description={t(`tutorial.steps.${step}.description`)}
+    {...props}
+  >
+    {children}
+  </Tutorial.Dialog>
+)
+
+export default ({ lastLocation }) => (
   <I18n ns='home'>
-  {(t) => {
-
-    if (user.tags.length < 1) return <Redirect to='/admin/tags' />
-
-    return (
-      <Page
-        renderTitle={() => <Header.Title>Home</Header.Title>}
-        renderLeftDropdown={() => <Header.CommunitiesDropdown path='/communities' />}
-        renderActionButtons={ActionMenu}
-      >
-          <Grid>
-            <Cell size={[12, 12, 12]}>
-              <Grid>
-                <Cell size={[4, 4]}>
-                  <Tourtip
-                    tourName='tour'
-                    title='Acesse suas comunidades'
-                    description='A comunidade é um grupo que se une por uma causa. A partir dela você pode criar mobilizações e convidar outras pessoas para chegar junto.'
-                    step={3}
-                  >
-                    <CommunitiesGadget />
-                  </Tourtip>
-                </Cell>
-                <Cell size={[8, 8]}>
-                  <Tourtip
-                    tourName='tour'
-                    title='Crie mobilizações pra causar'
-                    description='É através das mobilizações que você vai gerar um impacto. Aqui você pode ver as mobs das suas comunidades e acessá-las com um clique.'
-                    step={4}
-                    placement='bottom-right'
-                  >
-                    <MobilizationList t={t} />
-                  </Tourtip>
-                </Cell>
-              </Grid>
-            </Cell>
-            <Cell size={[12, 12, 12]}>
-              <Tourtip
-                tourName='tour'
-                title='Crie mobilizações pra causar'
-                description='É através das mobilizações que você vai gerar um impacto. Aqui você pode ver as mobs das suas comunidades e acessá-las com um clique.'
-                step={5}
-                placement='top-left'
+    {t => (
+      <Auth>
+        {({ user }) => user.tags.length < 1
+          ? <Redirect to='/admin/tags' />
+          : (
+            <Tutorial initialize={lastLocation && lastLocation.pathname === '/admin/tags'}>
+              <Page
+                renderTitle={() => <Header.Title>Home</Header.Title>}
+                renderLeftDropdown={() => (
+                  <TutorialDialog t={t} step={1}>
+                    <Header.CommunitiesDropdown path='/communities' />
+                  </TutorialDialog>
+                )}
+                renderActionButtons={() => (
+                  <TutorialDialog t={t} step={2} placement='bottom-right'>
+                    <ActionMenu />
+                  </TutorialDialog>
+                )}
               >
-                <TrendingMobs t={t} />
-              </Tourtip>
-            </Cell>
-          </Grid>
-      </Page>
-    )
-  }}
+                <Grid>
+                  <Cell size={[12, 12, 12]}>
+                    <Grid>
+                      <Cell size={[4, 4]}>
+                        <TutorialDialog t={t} step={3}>
+                          <CommunitiesGadget />
+                        </TutorialDialog>
+                      </Cell>
+                      <Cell size={[8, 8]}>
+                        <TutorialDialog t={t} step={4} placement='left-top'>
+                          <MobilizationsGadget />
+                        </TutorialDialog>
+                      </Cell>
+                    </Grid>
+                  </Cell>
+                  <Cell size={[12, 12, 12]}>
+                    <TutorialDialog t={t} step={5} placement='top-left'>
+                      <TrendingMobilizationsGadget />
+                    </TutorialDialog>
+                  </Cell>
+                </Grid>
+              </Page>
+            </Tutorial>
+          )
+        }
+      </Auth>
+    )}
   </I18n>
 )
 

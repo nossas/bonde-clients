@@ -72,5 +72,7 @@ ProgressRankingItem.propTypes = {
   trackSize: string
 }
 
+ProgressRankingItem.displayName = 'ProgressRankingItem'
+
 /* @component */
 export default ProgressRankingItem

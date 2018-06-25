@@ -5,7 +5,7 @@ import AUTHENTICATE from './authenticate.graphql'
 
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   Flexbox2 as Flexbox,
   FormField,
   Input
@@ -24,7 +24,11 @@ const AuthLogin = ({ t }) => (
         .then(({ data }) => {
           if (data.authenticate && !data.authenticate.jwtToken) {
             return Promise.reject({
-              formError: t('form.authError')
+              form: t('form.authError'),
+              fields: {
+                email: true,
+                password: true
+              }
             })
           }
           AuthAPI
@@ -51,9 +55,14 @@ const AuthLogin = ({ t }) => (
       component={PasswordField}
       validate={value => isEmpty(value) && t('fields.password.errors.isEmptyLogin')}
     />
-    <Flexbox spacing='between' padding='0 0 24px'>
-      <Checkbox>{t('links.stayConnected')}</Checkbox>
-    </Flexbox>
+    {/**
+      *
+      * TODO: Implement "Stay Connected" feature
+      *
+      <Flexbox spacing='between' padding={{ bottom: 24 }}>
+        <Checkbox>{t('links.stayConnected')}</Checkbox>
+      </Flexbox>
+    */}
     <Flexbox middle spacing='between'>
       <Link
         to='/auth/register'

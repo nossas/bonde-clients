@@ -6,9 +6,9 @@ const MultipleChoiceField = ({
   options,
   separator
 }) => {
-  
+
   let values = input.value ? input.value.split(separator) : []
-  
+
   const onChangeField = (evt) => {
     const value = evt.target.value
     if (values.includes(value)) {
@@ -36,5 +36,7 @@ const MultipleChoiceField = ({
 MultipleChoiceField.defaultProps = {
   separator: ';'
 }
+
+MultipleChoiceField.displayName = 'MultipleChoiceField'
 
 export default MultipleChoiceField

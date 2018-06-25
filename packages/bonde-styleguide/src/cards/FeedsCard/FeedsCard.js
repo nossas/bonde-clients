@@ -40,5 +40,7 @@ FeedsCard.defaultProps = {
   items: []
 }
 
+FeedsCard.displayName = 'FeedsCard'
+
 /* @component */
 export default FeedsCard

@@ -42,8 +42,6 @@ const Flexbox = styled.div`
   ${props => borderSpacing('padding', props.padding)}
 `
 
-Flexbox.displayName = 'Flexbox2'
-
 Flexbox.propTypes = {
   horizontal: PropTypes.bool,
   vertical: PropTypes.bool,
@@ -59,6 +57,8 @@ Flexbox.defaultProps = {
   margin: {},
   padding: {},
 }
+
+Flexbox.displayName = 'Flexbox2'
 
 /* @component */
 export default Flexbox

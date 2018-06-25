@@ -1,9 +1,29 @@
-import { translate } from 'services/i18n'
-import { query } from 'graphql'
-import { AllCommunities } from 'graphql/queries'
+import React from 'react'
+import { I18n } from 'react-i18next'
+import { Queryset } from 'components'
+import allUserCommunities from './query.graphql'
 import CommunitiesDropdown from './CommunitiesDropdown'
 
-export default query({
-  query: AllCommunities.query,
-  props: AllCommunities.props
-})(translate('header')(CommunitiesDropdown))
+const CommunitiesDropdownQueryset = ({ path }) => (
+  <Queryset
+    query={allUserCommunities}
+    filter={{ orderBy: 'NAME_ASC' }}
+  >
+    {({ loading, data, filter, onChangeFilter }) => (
+      <I18n ns='header'>
+        {t => (
+          <CommunitiesDropdown
+            t={t}
+            path={path}
+            loading={loading}
+            filter={filter}
+            onChangeFilter={onChangeFilter}
+            communities={data && data.query ? data.query.nodes : []}
+          />
+        )}
+      </I18n>
+    )}
+  </Queryset>
+)
+
+export default CommunitiesDropdownQueryset

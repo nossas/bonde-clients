@@ -43,4 +43,6 @@ ActionCard.defaultProps = {
   btnDisabled: false
 }
 
+ActionCard.displayName = 'ActionCard'
+
 export default ActionCard

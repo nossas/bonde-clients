@@ -4,20 +4,27 @@ import { Form, SubmissionError } from './'
 
 const FormGraphQL = ({
   children,
-  mutation, 
+  mutation,
   update,
   onSubmit,
   ...props
-}) => ( 
+}) => (
   <Mutation mutation={mutation} update={update}>
     {(mutationFunc) => (
       <Form
         onSubmit={(values) => {
           return onSubmit(values, mutationFunc)
             .catch((error) => {
-              if (error && error.formError) {
-                throw new SubmissionError({ _error: error.formError })
-              }
+              if (error && (error.form || error.fields)) {
+                let errors = {}
+                if (error.form) {
+                  errors = { _error: error.form }
+                }
+                if (error.fields) {
+                  errors = {...errors, ...error.fields}
+                }
+                throw new SubmissionError(errors)
+              } 
               console.error(error)
             })
         }}

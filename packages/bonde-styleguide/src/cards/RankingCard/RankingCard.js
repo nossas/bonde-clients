@@ -63,5 +63,7 @@ RankingCard.defaultProps = {
   trackColor: '#fff'
 }
 
+RankingCard.displayName = 'RankingCard'
+
 /* @component */
 export default RankingCard

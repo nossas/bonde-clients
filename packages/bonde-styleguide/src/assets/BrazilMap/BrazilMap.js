@@ -45,4 +45,6 @@ BrazilMap.defaultProps = {
   margin: {}
 }
 
+BrazilMap.displayName = 'BrazilMap'
+
 export default BrazilMap

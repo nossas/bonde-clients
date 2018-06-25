@@ -9,12 +9,12 @@ i18next
   .use(reactI18nextModule)
   .init({
     failbackingLng: 'pt-BR',
-    fallbackLng: ['pt-BR'], 
+    fallbackLng: ['pt-BR'],
     // have a common nampespace used around the full app
     ns: ['translations'],
     defaultNS: 'translations',
 
-    debug: true,
+    debug: process.env.NODE_ENV === 'development',
 
     react: {
       wait: true

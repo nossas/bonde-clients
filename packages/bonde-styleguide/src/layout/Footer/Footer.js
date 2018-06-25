@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Button from '../../content/Button/Button'
 import IconColorful from '../../content/IconColorful/IconColorful'
 
 const FooterContent = styled.div`{
@@ -52,6 +51,8 @@ Footer.propTypes = {
   /** The help button onClick event handler function. */
   btnHelpClick: func
 }
+
+Footer.displayName = 'Footer'
 
 /* @component */
 export default Footer

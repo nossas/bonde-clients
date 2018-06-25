@@ -28,4 +28,6 @@ Number.propTypes = {
   icon: oneOfType([node, func])
 }
 
+Number.displayName = 'Number'
+
 export default Number

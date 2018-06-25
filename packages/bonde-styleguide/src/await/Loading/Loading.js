@@ -47,4 +47,6 @@ Loading.defaultProps = {
   sparklesDuration: '6s'
 }
 
+Loading.displayName = 'Loading'
+
 export default Loading

@@ -1,19 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import urljoin from 'url-join'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownItem } from 'bonde-styleguide'
-import urljoin from 'url-join'
-import { AllCommunities } from 'graphql/queries'
 
-const CommunitiesDropdown = ({ communities, path, t }) => {
+const CommunitiesDropdown = ({ t, communities, path }) => {
   return (
     <Dropdown
       label={t('dropdown.label.communities')}
       disabled={communities.length > 0 ? false : true}
     >
-      {communities.map((c, i) => (
+      {communities.map(c => (
         <DropdownItem
-          key={`communities-dropdown-${i}`}
+          key={`communities-dropdown-${c.i}`}
           to={path && urljoin(path, c.id.toString())}
           component={Link}
         >
@@ -30,9 +29,10 @@ CommunitiesDropdown.defaultProps = {
 
 CommunitiesDropdown.propTypes = {
   path: PropTypes.string.isRequired,
-  communities: PropTypes.arrayOf(
-    AllCommunities.propTypes.CommunitiesDropdownCommunity
-  )
+  communities: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string
+  }))
 }
 
 export default CommunitiesDropdown

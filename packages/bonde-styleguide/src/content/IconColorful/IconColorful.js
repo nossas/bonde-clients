@@ -21,4 +21,6 @@ IconColorful.defaultProps = {
   inverted: false
 }
 
+IconColorful.displayName = 'IconColorful'
+
 export default IconColorful

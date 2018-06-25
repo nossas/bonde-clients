@@ -21,5 +21,7 @@ DataList.defaultProps = {
   border: false
 }
 
+DataList.displayName = 'DataList'
+
 /* @component */
 export default DataList

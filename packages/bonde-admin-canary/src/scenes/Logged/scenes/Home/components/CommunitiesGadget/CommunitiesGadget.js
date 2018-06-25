@@ -1,9 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Text } from 'bonde-styleguide'
-import { AllCommunities } from 'graphql/queries'
+import { Queryset } from 'components'
 import ImageColumn from '../ImageColumn'
 import TableCardGadget from '../TableCardGadget'
+import Filter from './Filter'
+import allUserCommunities from './query.graphql'
 
 const columns = [
   {
@@ -33,7 +34,7 @@ const columns = [
   },
 ]
 
-const CommunitiesGadget = ({ t, loading, communities }) => (
+const CommunitiesGadget = ({ t, loading, communities, filter, onChangeFilter }) => (
   <TableCardGadget
     loading={loading}
     data={communities}
@@ -41,13 +42,25 @@ const CommunitiesGadget = ({ t, loading, communities }) => (
     title={t('gadgets.communities.title')}
     emptyIcon='community'
     emptyText={t('gadgets.communities.emptyText')}
+    renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
   />
 )
 
-CommunitiesGadget.propTypes = {
-  communities: PropTypes.arrayOf(
-    AllCommunities.propTypes.CommunitiesGadgetCommunity
-  )
-}
+const CommunitiesGadgetQueryset = ({ t }) => (
+  <Queryset
+    query={allUserCommunities}
+    filter={{ orderBy: 'UPDATED_AT_DESC' }}
+  >
+    {({ loading, data, filter, onChangeFilter }) => (
+      <CommunitiesGadget
+        t={t}
+        loading={loading}
+        filter={filter}
+        onChangeFilter={onChangeFilter}
+        communities={data && data.allUserCommunities ? data.allUserCommunities.nodes : []}
+      />
+    )}
+  </Queryset>
+)
 
-export default CommunitiesGadget
+export default CommunitiesGadgetQueryset
