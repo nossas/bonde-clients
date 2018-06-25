@@ -91,6 +91,12 @@ const Button = styled.button`{
       color: #9b9b9b;
     }
 
+    ${props.disabled && `
+      color: #aaaaaa;
+      &:hover { color: #aaaaaa }
+      &:active { color: #aaaaaa }
+    `}
+
     ${props.dark && `
       color: #fff;
 
@@ -102,12 +108,6 @@ const Button = styled.button`{
         border-color: transparent;
         color: #ee0099;
       }
-    `}
-
-    ${props.disabled && `
-      color: #aaaaaa;
-      &:hover { color: #aaaaaa }
-      &:active { color: #aaaaaa }
     `}
   `}
 

@@ -1,9 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Button from '../../content/Button/Button'
 import Icon from '../../content/Icon/Icon'
 
-const FlatButton = Button.extend.attrs({ flat: true })`
+const FlatButton = styled(({ className, children, ...props }) => (
+  <Button {...props} className={className} flat>
+    {children}
+  </Button>
+))`
   min-width: 0 !important;
   padding: 0 8px !important;
   font-size: 11px !important;
