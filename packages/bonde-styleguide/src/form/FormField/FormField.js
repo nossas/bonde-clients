@@ -13,7 +13,7 @@ const FormField = ({
   label,
   hint,
   placeholder,
-  meta: { error, valid, touched, dirty, submitFailed },
+  meta: { error, valid, touched, dirty },
   inputComponent: InputComponent,
   input,
   ...props
@@ -22,14 +22,14 @@ const FormField = ({
     <div style={{ padding: '0 0 17px' }}>
       <Flexbox horizontal>
         <ControlLabel>{label}</ControlLabel>
-        {(touched && error) && <InputHint invalid={true}>{error}</InputHint>}
+        {(touched && error && typeof error === 'string') && <InputHint invalid={true}>{error}</InputHint>}
         {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
       </Flexbox>
       <Flexbox horizontal>
         <InputComponent
           fullWidth
-          invalid={touched && (!!error || submitFailed)}
-          valid={touched && valid && !submitFailed}
+          invalid={touched && !!error}
+          valid={touched && valid}
           placeholder={placeholder}
           touched={touched}
           {...input}
@@ -37,8 +37,8 @@ const FormField = ({
         />
         {(touched && (!!error || valid)) && (
           <InputAdornment
-            invalid={!!error || submitFailed}
-            valid={valid && !submitFailed}
+            invalid={!!error}
+            valid={valid}
           />
         )}
       </Flexbox>
@@ -53,7 +53,7 @@ FormField.propTypes = {
     /** Valid style. */
     valid: PropTypes.bool,
     /** Error text. The invalid input style is based on existence of this prop. */
-    error: PropTypes.string,
+    error: PropTypes.oneOf[PropTypes.string, PropTypes.bool],
   }),
   /** Hint text. */
   hint: PropTypes.string,

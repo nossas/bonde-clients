@@ -15,11 +15,16 @@ const FormGraphQL = ({
         onSubmit={(values) => {
           return onSubmit(values, mutationFunc)
             .catch((error) => {
-              if (error && error.form) {
-                throw new SubmissionError({ _error: error.form })
-              } else if (error && error.fields) {
-                throw new SubmissionError(error.fields)
-              }
+              if (error && (error.form || error.fields)) {
+                let errors = {}
+                if (error.form) {
+                  errors = { _error: error.form }
+                }
+                if (error.fields) {
+                  errors = {...errors, ...error.fields}
+                }
+                throw new SubmissionError(errors)
+              } 
               console.error(error)
             })
         }}
