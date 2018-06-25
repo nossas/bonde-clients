@@ -16,13 +16,13 @@ const Filter = ({ filter, onChange }) => (
         initialValue={filter.days}
         onChange={({ value }) => onChange({ days: value })}
         options={[
-          { 
+          {
             label: t('gadgets.trendingMobilizations.filters.now'),
             value: 2
           },
           {
             label: t('gadgets.trendingMobilizations.filters.inspire'),
-            value: 200
+            value: 90
           },
         ]}
       />
