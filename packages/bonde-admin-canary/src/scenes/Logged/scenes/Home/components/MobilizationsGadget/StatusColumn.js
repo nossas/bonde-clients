@@ -1,6 +1,6 @@
 import React from 'react'
 import { I18n } from 'react-i18next'
-import { Icon, Text } from 'bonde-styleguide'
+import { Icon, Text, Spacing, Flexbox2 as Flexbox } from 'bonde-styleguide'
 
 const StatusColumn = ({ value }) => (
   <I18n ns='home'>
@@ -22,10 +22,14 @@ const StatusColumn = ({ value }) => (
         lineHeight={1.54}
         {...statuses[value].props}
       >
-        {value === 'active' && (
-          <Icon name='tick' color='#50e3c2' margin='0 5px 0 0' />
-        )}
-        {statuses[value].label}
+        <Flexbox>
+          {value === 'ACTIVE' && (
+            <Spacing margin={{ right: 4 }}>
+              <Icon name='tick' color='#50e3c2' />
+            </Spacing>
+          )}
+          {statuses[value].label}
+        </Flexbox>
       </Text>
     )
   }}

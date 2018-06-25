@@ -10,6 +10,7 @@ query MobilizationsGadget ($offset: Int, $limit: Int, $orderBy: [UserMobilizatio
       community {
         name
       }
+      score
     }
     totalCount
   }

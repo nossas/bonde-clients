@@ -27,6 +27,14 @@ const columns = [
   },
   { field: 'status', render: StatusColumn },
   {
+    field: 'score',
+    render: ({ value }) => (
+      <Text fontSize={13} lineHeight={1.54} color='#4a4a4a'>
+        {value || '–'}
+      </Text>
+    )
+  },
+  {
     field: 'id',
     render: ({ value }) => (
       <Link to={`/admin/mobilizations/${value}`}>
@@ -70,7 +78,7 @@ const MobilizationList = ({
 )
 
 const MobilizationsGadgetQueryset = ({ t }) => {
-  const limit = 50  
+  const limit = 50
   return (
     <Queryset
       query={allUserMobilizationsQuery}
@@ -78,7 +86,7 @@ const MobilizationsGadgetQueryset = ({ t }) => {
       filter={{ orderBy: 'UPDATED_AT_DESC' }}
     >
       {({ loading, data, filter, onChangeFilter, page, onChangePage }) => {
-        
+
         const pageTotal = data && data.allUserMobilizations
           ? Math.ceil(data.allUserMobilizations.totalCount / limit)
           : null

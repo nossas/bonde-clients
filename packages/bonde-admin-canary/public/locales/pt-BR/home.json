@@ -21,8 +21,8 @@
       "title": "Minhas mobilizações",
       "emptyText": "As mobilizações das suas comunidades vão aparecer aqui.",
       "statuses": {
-        "active": "ativo",
-        "archived": "arquivado"
+        "active": "Ativa",
+        "archived": "Arquivada"
       }
     },
     "trendingMobilizations": {
