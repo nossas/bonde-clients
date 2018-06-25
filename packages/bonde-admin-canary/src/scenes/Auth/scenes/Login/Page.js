@@ -24,7 +24,7 @@ const AuthLogin = ({ t }) => (
         .then(({ data }) => {
           if (data.authenticate && !data.authenticate.jwtToken) {
             return Promise.reject({
-              formError: t('form.authError')
+              form: t('form.authError')
             })
           }
           AuthAPI

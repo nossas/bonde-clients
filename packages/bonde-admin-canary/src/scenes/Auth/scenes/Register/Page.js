@@ -25,10 +25,20 @@ const AuthRegister = ({ t }) => (
       })
       .then(({ data }) => {
         if (data.register && !data.register.jwtToken) {
-          return Promise.reject({ formError: 'register is fail.' })
+          return Promise.reject({ form: 'register is fail.' })
         }
         AuthAPI.login({ jwtToken: data.register.jwtToken })
         return Promise.resolve()
+      })
+      .catch(error => {
+        if (String(error).includes('index_users_on_uid_and_provider')) {
+          return Promise.reject({
+            fields: {
+              email: t('fields.email.errors.isDuplicated')
+            }
+          })
+        }
+        console.error(error)
       })
     }}
   >
