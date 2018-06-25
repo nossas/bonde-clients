@@ -24,7 +24,11 @@ const AuthLogin = ({ t }) => (
         .then(({ data }) => {
           if (data.authenticate && !data.authenticate.jwtToken) {
             return Promise.reject({
-              form: t('form.authError')
+              form: t('form.authError'),
+              fields: {
+                email: true,
+                password: true
+              }
             })
           }
           AuthAPI
@@ -51,7 +55,7 @@ const AuthLogin = ({ t }) => (
       component={PasswordField}
       validate={value => isEmpty(value) && t('fields.password.errors.isEmptyLogin')}
     />
-    <Flexbox spacing='between' padding='0 0 24px'>
+    <Flexbox spacing='between' padding={{ bottom: 24 }}>
       <Checkbox>{t('links.stayConnected')}</Checkbox>
     </Flexbox>
     <Flexbox middle spacing='between'>

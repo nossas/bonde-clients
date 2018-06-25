@@ -45,7 +45,7 @@ Container.displayName = 'Container'
 export default ({ children }) => (
   <Container>
     <Content left bgImage={BGImage}>
-      <Flexbox vertical middle padding='0 160px'>
+      <Flexbox vertical middle padding={{ x: 0, y: 160 }}>
         <BondeIcon />
         <Title.H2 color='#fff'>Quer mobilizar pessoas por uma causa?</Title.H2>
         <Title.H2 color='#fff'>
@@ -55,7 +55,7 @@ export default ({ children }) => (
       </Flexbox>
     </Content>
     <Content right bgColor='#fff'>
-      <Flexbox vertical middle padding='0 160px'>
+      <Flexbox vertical middle padding={{ x: 0, y: 160 }}>
         {children}
       </Flexbox>
     </Content>
