@@ -11,6 +11,7 @@ query MobilizationsGadget ($offset: Int, $limit: Int, $orderBy: [UserMobilizatio
         name
       }
       score
+      image: facebookShareImage
     }
     totalCount
   }
