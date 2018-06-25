@@ -5,7 +5,7 @@ import REGISTER from './register.graphql'
 
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   Flexbox2 as Flexbox,
   FormField,
   Input
@@ -81,9 +81,14 @@ const AuthRegister = ({ t }) => (
         else if (min(value, 6)) return t('fields.password.errors.min')
       }}
     />
-    <Flexbox vertical padding='0 0 24px'>
-      <Checkbox>{t('links.stayConnected')}</Checkbox>
-    </Flexbox>
+    {/**
+      *
+      * TODO: Implement "Stay Connected" feature
+      *
+      <Flexbox vertical padding='0 0 24px'>
+        <Checkbox>{t('links.stayConnected')}</Checkbox>
+      </Flexbox>
+    */}
     <Flexbox middle spacing='between'>
       <Link
         to='/auth/login'
