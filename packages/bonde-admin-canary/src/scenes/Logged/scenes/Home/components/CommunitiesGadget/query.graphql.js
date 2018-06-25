@@ -12,6 +12,7 @@ query CurrentUserCommunities (
       name
       city
       description
+      image
     }
   }
 }
