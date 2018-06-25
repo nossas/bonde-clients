@@ -1,26 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import urljoin from 'url-join'
 import { Link } from 'react-router-dom'
 import { Dropdown, DropdownItem } from 'bonde-styleguide'
-import urljoin from 'url-join'
-import { AllCommunities } from 'graphql/queries'
+import { I18n } from 'react-i18next'
+import { Queryset } from 'components'
+import allUserCommunities from './query.graphql'
 
-const CommunitiesDropdown = ({ communities, path, t }) => {
+const CommunitiesDropdown = ({ communities, path }) => {
   return (
-    <Dropdown
-      label={t('dropdown.label.communities')}
-      disabled={communities.length > 0 ? false : true}
-    >
-      {communities.map((c, i) => (
-        <DropdownItem
-          key={`communities-dropdown-${i}`}
-          to={path && urljoin(path, c.id.toString())}
-          component={Link}
+    <I18n ns='header'>
+      {t => (
+        <Dropdown
+          label={t('dropdown.label.communities')}
+          disabled={communities.length > 0 ? false : true}
         >
-          {c.name}
-        </DropdownItem>
-      ))}
-    </Dropdown>
+          {communities.map(c => (
+            <DropdownItem
+              key={`communities-dropdown-${c.i}`}
+              to={path && urljoin(path, c.id.toString())}
+              component={Link}
+            >
+              {c.name}
+            </DropdownItem>
+          ))}
+        </Dropdown>
+      )}
+    </I18n>
   )
 }
 
@@ -30,9 +36,27 @@ CommunitiesDropdown.defaultProps = {
 
 CommunitiesDropdown.propTypes = {
   path: PropTypes.string.isRequired,
-  communities: PropTypes.arrayOf(
-    AllCommunities.propTypes.CommunitiesDropdownCommunity
-  )
+  communities: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string
+  }))
 }
 
-export default CommunitiesDropdown
+const CommunitiesDropdownQueryset = ({ path }) => (
+  <Queryset
+    query={allUserCommunities}
+    filter={{ orderBy: 'NAME_ASC' }}
+  >
+    {({ loading, data, filter, onChangeFilter }) => (
+      <CommunitiesDropdown
+        path={path}
+        loading={loading}
+        filter={filter}
+        onChangeFilter={onChangeFilter}
+        communities={data && data.query ? data.query.nodes : []}
+      />
+    )}
+  </Queryset>
+)
+
+export default CommunitiesDropdownQueryset
