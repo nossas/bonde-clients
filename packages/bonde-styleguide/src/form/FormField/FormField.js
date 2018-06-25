@@ -53,7 +53,10 @@ FormField.propTypes = {
     /** Valid style. */
     valid: PropTypes.bool,
     /** Error text. The invalid input style is based on existence of this prop. */
-    error: PropTypes.oneOf[PropTypes.string, PropTypes.bool],
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool
+    ]),
   }),
   /** Hint text. */
   hint: PropTypes.string,
