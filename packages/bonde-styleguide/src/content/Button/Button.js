@@ -90,25 +90,25 @@ const Button = styled.button`{
       background-color: transparent;
       color: #9b9b9b;
     }
+  `}
 
-    ${props.disabled && `
-      color: #aaaaaa;
-      &:hover { color: #aaaaaa }
-      &:active { color: #aaaaaa }
-    `}
+  ${props => props.flat && props.dark && `
+    color: #fff;
 
-    ${props.dark && `
-      color: #fff;
+    &:hover {
+      border-color: transparent;
+      color: #bebebe;
+    }
+    &:active {
+      border-color: transparent;
+      color: #ee0099;
+    }
+  `}
 
-      &:hover {
-        border-color: transparent;
-        color: #bebebe;
-      }
-      &:active {
-        border-color: transparent;
-        color: #ee0099;
-      }
-    `}
+  ${props => props.flat && props.disabled && `
+    color: #aaaaaa;
+    &:hover { color: #aaaaaa }
+    &:active { color: #aaaaaa }
   `}
 
   ${props => props.color && `
