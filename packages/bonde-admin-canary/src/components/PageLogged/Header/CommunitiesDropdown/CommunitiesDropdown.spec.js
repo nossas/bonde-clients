@@ -16,7 +16,7 @@ test.beforeEach(t => {
 
 test('render a Dropdown component', t => {
   const { node } = t.context
-  
+
   t.is(node.find(Dropdown).length, 1)
 })
 
@@ -25,13 +25,13 @@ test('translate label for communities', t => {
   const i18n = () => i18nKey
   const { node } = t.context
   node.setProps({ t: i18n })
-  
+
   t.is(node.find(Dropdown).props().label, i18nKey)
 })
 
 test('when data is empty render disabled', t => {
   const { node } = t.context
-  
+
   t.is(node.find(Dropdown).props().disabled, true)
 })
 
@@ -42,7 +42,7 @@ test('render DropdownItem when data is passed', t => {
     { id: 2, name: 'C2' }
   ]
   node.setProps({ communities })
-  
+
   t.is(node.find(DropdownItem).length, communities.length)
   t.is(node.find(DropdownItem).at(0).props().children, 'C1')
   t.is(node.find(DropdownItem).at(1).props().children, 'C2')
