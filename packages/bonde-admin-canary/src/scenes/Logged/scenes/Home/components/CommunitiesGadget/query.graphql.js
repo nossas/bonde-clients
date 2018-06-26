@@ -14,6 +14,7 @@ query CurrentUserCommunities (
       description
       image
     }
+    totalCount
   }
 }
 `

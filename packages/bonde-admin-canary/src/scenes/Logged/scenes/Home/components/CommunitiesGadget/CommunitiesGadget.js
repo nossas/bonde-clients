@@ -48,6 +48,7 @@ const CommunitiesGadget = ({ t, loading, communities, filter, onChangeFilter }) 
 
 const CommunitiesGadgetQueryset = ({ t }) => (
   <Queryset
+    observable
     query={allUserCommunities}
     filter={{ orderBy: 'UPDATED_AT_DESC' }}
   >
