@@ -8,4 +8,6 @@ import CommunitiesGadget from './CommunitiesGadget'
 //  props: AllCommunities.props
 //})(translate('home')(CommunitiesGadget))
 
+export { default as query } from './query.graphql'
+
 export default translate('home')(CommunitiesGadget)
