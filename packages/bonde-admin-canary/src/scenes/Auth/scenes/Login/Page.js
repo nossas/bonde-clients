@@ -12,7 +12,7 @@ import {
 } from 'bonde-styleguide'
 
 import { FormGraphQL, Field } from 'components/Form'
-import { Link } from 'components'
+import { ButtonLink } from 'components/Link'
 import { isEmail, isEmpty } from 'services/validations'
 import { PasswordField } from '../components'
 
@@ -64,12 +64,12 @@ const AuthLogin = ({ t }) => (
       </Flexbox>
     */}
     <Flexbox middle spacing='between'>
-      <Link
+      <ButtonLink
         to='/auth/register'
         title={t('links.register')}
       >
-        <Button flat>{t('links.register')}</Button>
-      </Link>
+        {t('links.register')}
+      </ButtonLink>
       <Button type='submit' title={t('button.submit')}>
         {t('button.submit')}
       </Button>
