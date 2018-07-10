@@ -14,7 +14,7 @@ import {
 
 import { FormGraphQL, Field } from 'components/Form'
 import { ButtonLink } from 'components/Link'
-import { isEmail, isEmpty, min } from 'services/validations'
+import { isEmail, required, min } from 'services/validations'
 import { PasswordField } from '../components'
 
 const AuthRegister = ({ t }) => (
@@ -52,7 +52,7 @@ const AuthRegister = ({ t }) => (
           placeholder={t('fields.firstName.placeholder')}
           component={FormField}
           inputComponent={Input}
-          validate={value => isEmpty(value) && t('fields.firstName.errors.isEmpty')}
+          validate={required(t('fields.firstName.errors.isEmpty'))}
         />
         <Field
           name='last_name'
@@ -60,7 +60,7 @@ const AuthRegister = ({ t }) => (
           placeholder={t('fields.lastName.placeholder')}
           component={FormField}
           inputComponent={Input}
-          validate={value => isEmpty(value) && t('fields.lastName.errors.isEmpty')}
+          validate={required(t('fields.lastName.errors.isEmpty'))}
         />
       </Flexbox>
       <Field
@@ -69,20 +69,20 @@ const AuthRegister = ({ t }) => (
         placeholder={t('fields.email.placeholder')}
         component={FormField}
         inputComponent={Input}
-        validate={(value) => {
-          if (isEmpty(value)) return t('fields.email.errors.isEmpty')
-          else if (!isEmail(value)) return t('fields.email.errors.isEmail')
-        }}
+        validate={[
+          required(t('fields.email.errors.isEmpty')),
+          isEmail(t('fields.email.errors.isEmail'))
+        ]}
       />
       <Field
         name='password'
         label={t('fields.password.label')}
         hint={t('fields.password.hint')}
         component={PasswordField}
-        validate={value => {
-          if (isEmpty(value)) return t('fields.password.errors.isEmptyRegister')
-          else if (min(value, 6)) return t('fields.password.errors.min')
-        }}
+        validate={[
+          required(t('fields.password.errors.isEmptyRegister')),
+          min(6, t('fields.password.errors.min'))
+        ]}
       />
       {/**
         *

@@ -14,7 +14,7 @@ import {
 
 import { FormGraphQL, Field } from 'components/Form'
 import { ButtonLink } from 'components/Link'
-import { isEmail, isEmpty } from 'services/validations'
+import { isEmail, required } from 'services/validations'
 import { PasswordField } from '../components'
 
 const AuthLogin = ({ t }) => (
@@ -46,17 +46,17 @@ const AuthLogin = ({ t }) => (
         placeholder={t('fields.email.placeholder')}
         component={FormField}
         inputComponent={Input}
-        validate={(value) => {
-          if (isEmpty(value)) return t('fields.email.errors.isEmpty')
-          else if (!isEmail(value)) return t('fields.email.errors.isEmail')
-        }}
+        validate={[
+          required(t('fields.email.errors.isEmpty')),
+          isEmail(t('fields.email.errors.isEmail'))
+        ]}
       />
       <Field
         name='password'
         placeholder={t('fields.password.placeholder')}
         label={t('fields.password.label')}
         component={PasswordField}
-        validate={value => isEmpty(value) && t('fields.password.errors.isEmptyLogin')}
+        validate={required(t('fields.password.errors.isEmptyLogin'))}
       />
       {/**
         *

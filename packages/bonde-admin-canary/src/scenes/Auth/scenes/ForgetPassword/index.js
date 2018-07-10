@@ -10,6 +10,7 @@ import {
 } from 'bonde-styleguide'
 import { FormGraphQL, Field } from 'components/Form'
 import { ButtonLink } from 'components/Link'
+import { isEmail, required } from 'services/validations'
 import RequestTokenMutation from './requestResetPasswordToken.graphql'
 
 export default () => (
@@ -39,6 +40,10 @@ export default () => (
           placeholder={t('forgetPassword.email.placeholder')}
           component={FormField}
           inputComponent={Input}
+          validate={[
+            required(t('forgetPassword.email.isEmpty')),
+            isEmail(t('forgetPassword.email.isEmail'))
+          ]}
         />
         <Flexbox horizontal>
           <ButtonLink
