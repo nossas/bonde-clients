@@ -30,6 +30,13 @@ export default ({ onSuccess }) => (
             onSuccess && onSuccess()
             return Promise.resolve()
           })
+          .catch(({ graphQLErrors }) => {
+            if (graphQLErrors && graphQLErrors.length > 0) {
+              if (graphQLErrors[0].message === 'user_not_found') {
+                return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) }})
+              }
+            }
+          })
         }}
       >
         <Field
