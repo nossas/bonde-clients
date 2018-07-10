@@ -55,7 +55,7 @@ export default ({ children }) => (
       </Flexbox>
     </Content>
     <Content right bgColor='#fff'>
-      <Flexbox vertical middle padding={{ x: 0, y: 160 }}>
+      <Flexbox vertical middle>
         {children}
       </Flexbox>
     </Content>
