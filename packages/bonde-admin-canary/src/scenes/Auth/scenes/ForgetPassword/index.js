@@ -8,8 +8,9 @@ import {
   Title,
   Text
 } from 'bonde-styleguide'
-import { Form, Field } from 'components/Form'
+import { FormGraphQL, Field } from 'components/Form'
 import { ButtonLink } from 'components/Link'
+import RequestTokenMutation from './requestResetPasswordToken.graphql'
 
 export default () => (
   <I18n ns='auth'>
@@ -17,7 +18,21 @@ export default () => (
     <Flexbox>
       <Title.H2>{t('forgetPassword.title')}</Title.H2>
       <Text>{t('forgetPassword.description')}</Text>
-      <Form onSubmit={v => console.log('[onSubmit]', v)}>
+      <FormGraphQL
+        mutation={RequestTokenMutation}
+        onSubmit={(values, mutation) => {
+          console.log('[onSubmit]', values)
+          return mutation({
+            variables: {
+              data: JSON.stringify(values)
+            }
+          })
+          .then(() => {
+            console.log('[CHANGESTATE]', 'success')
+            return Promise.resolve()
+          })
+        }}
+      >
         <Field
           label={t('forgetPassword.email.label')}
           name='email'
@@ -36,7 +51,7 @@ export default () => (
             {t('forgetPassword.submit')}
           </Button>
         </Flexbox>
-      </Form>
+      </FormGraphQL>
     </Flexbox>
   )}
   </I18n>
