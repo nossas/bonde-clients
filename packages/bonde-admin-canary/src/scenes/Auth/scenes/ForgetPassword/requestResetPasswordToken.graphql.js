@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation RequestForgetPassword ($data: JSON!) {
+mutation RequestForgetPassword ($email: String!, $locale: String) {
   requestResetPasswordToken (
-    input: { data: $data }
+    input: { email: $email, locale: $locale }
   ) {
     clientMutationId
   }

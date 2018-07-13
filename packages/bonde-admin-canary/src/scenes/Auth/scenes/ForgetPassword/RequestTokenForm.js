@@ -21,22 +21,19 @@ export default ({ onSuccess }) => (
       <FormGraphQL
         mutation={RequestTokenMutation}
         onSubmit={(values, mutation) => {
-          return mutation({
-            variables: {
-              data: JSON.stringify(values)
-            }
-          })
-          .then(() => {
-            onSuccess && onSuccess()
-            return Promise.resolve()
-          })
-          .catch(({ graphQLErrors }) => {
-            if (graphQLErrors && graphQLErrors.length > 0) {
-              if (graphQLErrors[0].message === 'user_not_found') {
-                return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) }})
+          return mutation({ variables: values })
+            .then(() => {
+              onSuccess && onSuccess()
+              return Promise.resolve()
+            })
+            .catch(({ graphQLErrors }) => {
+              if (graphQLErrors && graphQLErrors.length > 0) {
+                if (graphQLErrors[0].message === 'user_not_found') {
+                  return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) }})
+                }
               }
-            }
-          })
+              console.error('catch[RequestTokenForm]:', graphQLErrors)
+            })
         }}
       >
         <Field
