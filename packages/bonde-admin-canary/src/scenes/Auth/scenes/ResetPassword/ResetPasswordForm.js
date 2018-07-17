@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, Flexbox, Title } from 'bonde-styleguide'
+import { Button, Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
 import { Field, Form } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { PasswordField } from '../components'
 
 export default ({ t }) => (
-  <Flexbox>
+  <Flexbox vertical>
     <Title.H2>{t('resetPassword.form.title')}</Title.H2>
     <Title.H4>{t('resetPassword.form.subtitle')}</Title.H4>
     <Form onSubmit={() => {}}>
