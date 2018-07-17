@@ -228,7 +228,11 @@ pipeline:
     docker_image: "nossas/bonde-public:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
     when:
       status: success
       event: tag
@@ -241,7 +245,11 @@ pipeline:
     docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
     when:
       status: success
       event: tag
@@ -254,7 +262,11 @@ pipeline:
     docker_image: "nossas/bonde-canary:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
     when:
       status: success
       event: tag
