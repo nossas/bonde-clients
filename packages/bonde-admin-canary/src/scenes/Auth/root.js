@@ -4,6 +4,7 @@ import { Route } from  'services/auth'
 import Login from './scenes/Login'
 import Register from './scenes/Register'
 import ForgetPassword from './scenes/ForgetPassword'
+import ResetPassword from './scenes/ResetPassword'
 
 const AuthRoot = ({ match }) => (
   <Container>
@@ -18,6 +19,10 @@ const AuthRoot = ({ match }) => (
     <Route
       path={`${match.url}/forget-password`}
       component={ForgetPassword}
+    />
+    <Route
+      path={`${match.url}/reset-password/:token`}
+      component={ResetPassword}
     />
   </Container>
 )
