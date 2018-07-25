@@ -14,14 +14,20 @@ import RequestTokenMutation from './requestResetPasswordToken.graphql'
 
 export default ({ onSuccess }) => (
   <I18n ns='auth'>
-  {(t) => (
+  {(t, { i18n }) => (
     <Flexbox>
       <Title.H2 margin={{ bottom: 20 }}>{t('forgetPassword.title')}</Title.H2>
       <Title.H4 margin={{ bottom: 25 }}>{t('forgetPassword.description')}</Title.H4>
       <FormGraphQL
         mutation={RequestTokenMutation}
-        onSubmit={(values, mutation) => {
-          return mutation({ variables: values })
+        onSubmit={({ email }, mutation) => {
+          return mutation({
+              variables: {
+                email,
+                callbackUrl: `${process.env.REACT_APP_DOMAIN}/auth/reset-password/`,
+                locale: i18n.language
+              }
+            })
             .then(() => {
               onSuccess && onSuccess()
               return Promise.resolve()
