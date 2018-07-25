@@ -26,12 +26,6 @@ const Content = styled.div`
 
 Content.displayName = 'Content'
 
-const Container = styled.div`
-  display: flex;
-`
-
-Container.displayName = 'Container'
-
 const BondeIcon = styled(({ className }) => (
   <div className={className}>
     <IconColorful name='bonde' size={260} inverted />
@@ -42,20 +36,26 @@ const BondeIcon = styled(({ className }) => (
   margin-left: -10px;
 `
 
+const Container = styled.div`
+  display: flex;
+`
+
+Container.displayName = 'Container'
+
 export default ({ children }) => (
   <Container>
     <Content left bgImage={BGImage}>
-      <Flexbox vertical middle padding='0 160px'>
-        <BondeIcon />
-        <Title.H2 color='#fff'>Quer mobilizar pessoas por uma causa?</Title.H2>
-        <Title.H2 color='#fff'>
-          Cola aí, pode entrar.
-          O BONDE te leva lá.
-        </Title.H2>
+      <Flexbox vertical middle>
+          <BondeIcon />
+          <Title.H2 color='#fff'>Quer mobilizar pessoas por uma causa?</Title.H2>
+          <Title.H2 color='#fff'>
+            Cola aí, pode entrar.
+            O BONDE te leva lá.
+          </Title.H2>
       </Flexbox>
     </Content>
     <Content right bgColor='#fff'>
-      <Flexbox vertical middle padding='0 160px'>
+      <Flexbox vertical middle>
         {children}
       </Flexbox>
     </Content>

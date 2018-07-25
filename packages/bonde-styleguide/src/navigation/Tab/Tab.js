@@ -5,7 +5,7 @@ import TabItem from '../TabItem/TabItem'
 
 const Tab = styled(({ children, className, inverted }) => (
   <div className={className}>
-    {children && children.map(child => (
+    {React.Children.map(children, child => (
       React.cloneElement(child, { inverted, key: Math.random() })
     ))}
   </div>
@@ -30,6 +30,8 @@ Tab.propTypes = {
 Tab.defaultProps = {
   inverted: false
 }
+
+Tab.displayName = 'Tab'
 
 /* @component */
 export default Tab

@@ -28,5 +28,7 @@ Image.propTypes = {
   rounded: number
 }
 
+Image.displayName = 'Image'
+
 /* @component */
 export default Image

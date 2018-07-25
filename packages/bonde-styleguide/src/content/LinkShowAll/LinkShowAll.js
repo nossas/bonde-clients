@@ -9,5 +9,7 @@ const LinkShowAll = Text.withComponent('a').extend`
   display: block;
 `
 
+LinkShowAll.displayName = 'LinkShowAll'
+
 /* @component */
 export default LinkShowAll

@@ -4,18 +4,20 @@ import styled from 'styled-components'
 
 const PageContainer = styled.div`{
   position: relative;
-  padding: 32px 155px 0;
-  background-color: ${props => props.bgColor || '#fff'};
+  padding-top: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'};
+  padding-left: 155px;
+  padding-bottom: 172px;
+  padding-right: 155px;
+  background-color: ${props => props.bgColor || '#EEEEEE'};
 }`
 
 const PageContent = styled.div`{
   position: relative;
   display: flex;
-  min-height: 100vh;
 }`
 
-const Page = ({ children, menuComponent: MenuComponent, bgColor }) => (
-  <PageContainer bgColor={bgColor}>
+const Page = ({ children, menuComponent: MenuComponent, bgColor, top }) => (
+  <PageContainer bgColor={bgColor} top={top}>
     {MenuComponent && <MenuComponent />}
     <PageContent>
     {children}
@@ -33,5 +35,7 @@ Page.propTypes = {
   /** The background color of the page. */
   bgColor: string
 }
+
+Page.displayName = 'Page'
 
 export default Page

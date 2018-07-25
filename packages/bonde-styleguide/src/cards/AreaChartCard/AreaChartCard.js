@@ -41,5 +41,7 @@ AreaChartCard.propTypes = {
   data: PropTypes.array.isRequired
 }
 
+AreaChartCard.displayName = 'AreaChartCard'
+
 /* @component */
 export default AreaChartCard

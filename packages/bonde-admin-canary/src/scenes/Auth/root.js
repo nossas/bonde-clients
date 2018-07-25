@@ -1,18 +1,30 @@
 import React from 'react'
-import { Switch } from 'react-router-dom'
-import { PublicRoute, PrivateRoute } from '../../services/auth'
-import { NotFound } from '../../components'
-import { Page as LoginPage } from './scenes/Login'
-import { Page as RegisterPage } from './scenes/Register'
-import { Page as TagsPage } from './scenes/Tags'
+import { Container } from 'bonde-styleguide'
+import { Route } from  'services/auth'
+import Login from './scenes/Login'
+import Register from './scenes/Register'
+import ForgetPassword from './scenes/ForgetPassword'
+import ResetPassword from './scenes/ResetPassword'
 
 const AuthRoot = ({ match }) => (
-  <Switch>
-    <PublicRoute path={`${match.url}/login`} component={LoginPage} redirectTo='/' />
-    <PublicRoute path={`${match.url}/register`} component={RegisterPage} redirectTo='/auth/tags' />
-    <PrivateRoute path={`${match.url}/tags`} component={TagsPage} redirectTo='/' />
-    <PublicRoute component={NotFound} />
-  </Switch>
+  <Container>
+    <Route
+      path={`${match.url}/login`}
+      component={Login}
+    />
+    <Route
+      path={`${match.url}/register`}
+      component={Register}
+    />
+    <Route
+      path={`${match.url}/forget-password`}
+      component={ForgetPassword}
+    />
+    <Route
+      path={`${match.url}/reset-password/:token`}
+      component={ResetPassword}
+    />
+  </Container>
 )
 
 export default AuthRoot

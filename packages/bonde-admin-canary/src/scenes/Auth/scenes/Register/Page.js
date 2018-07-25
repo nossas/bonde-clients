@@ -1,106 +1,108 @@
 import React from 'react'
-import { AuthAPI } from '../../../../services/auth'
-import { translate } from '../../../../services/i18n'
+import { AuthAPI } from 'services/auth'
+import { translate } from 'services/i18n'
 import REGISTER from './register.graphql'
 
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   Flexbox2 as Flexbox,
   FormField,
-  Input
+  Input,
+  Title
 } from 'bonde-styleguide'
 
-import { FormGraphQL } from '../components'
-import { Link } from '../../../../components'
-import { Field } from '../../../../components/Form'
-import { isEmail, isEmpty } from '../../../../services/validations'
+import { FormGraphQL, Field } from 'components/Form'
+import { ButtonLink } from 'components/Link'
+import { isEmail, required, min } from 'services/validations'
+import { PasswordField } from '../components'
 
-class AuthRegister extends React.Component {
-
-  state = { showPassword: false }
-
-  render () {
-    const { t } = this.props
-
-    return (
-      <FormGraphQL
-        mutation={REGISTER}
-        onSubmit={(values, mutation) => {
-          return mutation({
-            variables: { user: { data: JSON.stringify(values) } }
-          })
-          .then(({ data }) => {
-            if (data.register && !data.register.jwtToken) {
-              return Promise.reject({ formError: 'register is fail.' })
-            }
-            AuthAPI.login({ jwtToken: data.register.jwtToken })
-            return Promise.resolve()
-          })
-        }}
-      >
-        <Flexbox colSize='49.1%' spacing='between'>
-          <Field
-            name='first_name'
-            label={t('fields.firstName.label')}
-            placeholder={t('fields.firstName.placeholder')}
-            component={FormField}
-            inputComponent={Input}
-            validate={value => isEmpty(value) && 'Required field'}
-          />
-          <Field
-            name='last_name'
-            label={t('fields.lastName.label')}
-            placeholder={t('fields.lastName.placeholder')}
-            component={FormField}
-            inputComponent={Input}
-            validate={value => isEmpty(value) && 'Required field'}
-          />
-        </Flexbox>
+const AuthRegister = ({ t }) => (
+  <React.Fragment>
+    <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
+    <FormGraphQL
+      mutation={REGISTER}
+      onSubmit={(values, mutation) => {
+        return mutation({
+          variables: { user: { data: JSON.stringify(values) } }
+        })
+        .then(({ data }) => {
+          if (data.register && !data.register.jwtToken) {
+            return Promise.reject({ form: 'register is fail.' })
+          }
+          AuthAPI.login({ jwtToken: data.register.jwtToken })
+          return Promise.resolve()
+        })
+        .catch(error => {
+          if (String(error).includes('index_users_on_uid_and_provider')) {
+            return Promise.reject({
+              fields: {
+                email: t('fields.email.errors.isDuplicated')
+              }
+            })
+          }
+          console.error(error)
+        })
+      }}
+    >
+      <Flexbox colSize='49.1%' spacing='between'>
         <Field
-            name='email'
-            label={t('fields.email.label')}
-            placeholder={t('fields.email.placeholder')}
-            component={FormField}
-            inputComponent={Input}
-            validate={(value) => {
-              if (isEmpty(value)) return 'Required Field'
-              else if (!isEmail(value)) return 'Invalid email'
-            }}
-          />
-          <Field
-            name='password'
-            type={!this.state.showPassword ? 'password' : 'text'}
-            placeholder='******'
-            label={t('fields.password.label')}
-            hint={t('fields.password.hint')}
-            component={FormField}
-            inputComponent={Input}
-            validate={value => {
-              if (isEmpty(value)) return 'Required field'
-              else if (value.length < 6) return 'Minimun 6 characters'
-            }}
-          />
+          name='first_name'
+          label={t('fields.firstName.label')}
+          placeholder={t('fields.firstName.placeholder')}
+          component={FormField}
+          inputComponent={Input}
+          validate={required(t('fields.firstName.errors.isEmpty'))}
+        />
+        <Field
+          name='last_name'
+          label={t('fields.lastName.label')}
+          placeholder={t('fields.lastName.placeholder')}
+          component={FormField}
+          inputComponent={Input}
+          validate={required(t('fields.lastName.errors.isEmpty'))}
+        />
+      </Flexbox>
+      <Field
+        name='email'
+        label={t('fields.email.label')}
+        placeholder={t('fields.email.placeholder')}
+        component={FormField}
+        inputComponent={Input}
+        validate={[
+          required(t('fields.email.errors.isEmpty')),
+          isEmail(t('fields.email.errors.isEmail'))
+        ]}
+      />
+      <Field
+        name='password'
+        label={t('fields.password.label')}
+        hint={t('fields.password.hint')}
+        component={PasswordField}
+        validate={[
+          required(t('fields.password.errors.isEmptyRegister')),
+          min(6, t('fields.password.errors.min'))
+        ]}
+      />
+      {/**
+        *
+        * TODO: Implement "Stay Connected" feature
+        *
         <Flexbox vertical padding='0 0 24px'>
-          <Checkbox
-            checked={this.state.showPassword}
-            onChange={() => this.setState({ showPassword: !this.state.showPassword })}
-          >
-            {t('links.showPassword')}
-          </Checkbox>
           <Checkbox>{t('links.stayConnected')}</Checkbox>
         </Flexbox>
-        <Flexbox middle spacing='between'>
-          <Link
-            to='/auth/login'
-            title={t('links.iHaveAccount')}
-          >
-            <Button flat>{t('links.iHaveAccount')}</Button>
-          </Link>
-          <Button type='submit'>{t('button.submit')}</Button>
-        </Flexbox>
-      </FormGraphQL>
-    )
-  }
-}
+      */}
+      <Flexbox middle spacing='between'>
+        <ButtonLink
+          to='/auth/login'
+          title={t('links.iHaveAccount')}
+        >
+          {t('links.iHaveAccount')}
+        </ButtonLink>
+        <Button type='submit'>{t('button.submit')}</Button>
+      </Flexbox>
+    </FormGraphQL>
+  </React.Fragment>
+)
+
 export default translate('auth')(AuthRegister)

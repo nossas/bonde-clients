@@ -37,5 +37,7 @@ NumberCard.defaultProps = {
   minHeight: 110
 }
 
+NumberCard.displayName = 'NumberCard'
+
 /* @component */
 export default NumberCard

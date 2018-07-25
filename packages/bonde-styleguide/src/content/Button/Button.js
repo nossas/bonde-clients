@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 
 /**
  * The only true Button component.
@@ -8,11 +9,11 @@ const Button = styled.button`{
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 800;
   font-size: 13px;
-  text-align: center;
+  text-align: ${props => props.align};
   line-height: 1.15;
   height: 38px;
   border-radius: 100px;
-  padding: 0 25px;
+  padding: ${props => props.padding || '0 25px'};
   min-width: 192px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -89,33 +90,35 @@ const Button = styled.button`{
       background-color: transparent;
       color: #9b9b9b;
     }
+  `}
 
-    ${props.dark && `
-      color: #fff;
+  ${props => props.flat && props.dark && `
+    color: #fff;
 
-      &:hover {
-        border-color: transparent;
-        color: #bebebe;
-      }
-      &:active {
-        border-color: transparent;
-        color: #ee0099;
-      }
-    `}
+    &:hover {
+      border-color: transparent;
+      color: #bebebe;
+    }
+    &:active {
+      border-color: transparent;
+      color: #ee0099;
+    }
+  `}
 
-    ${props.disabled && `
-      color: #aaaaaa;
-      &:hover { color: #aaaaaa }
-      &:active { color: #aaaaaa }
-    `}
+  ${props => props.flat && props.disabled && `
+    color: #aaaaaa;
+    &:hover { color: #aaaaaa }
+    &:active { color: #aaaaaa }
   `}
 
   ${props => props.color && `
     color: ${props.color};
   `}
+
+  ${props => props.margin && borderSpacing('margin', props.margin)}
 }`
 
-const { node, bool, string } = PropTypes
+const { oneOf, node, bool, string } = PropTypes
 
 Button.propTypes = {
   /** Children nodes. */
@@ -132,10 +135,14 @@ Button.propTypes = {
   color: string,
   /** Button type. */
   type: string,
+  align: oneOf(['center', 'left', 'right']),
+  margin: borderSpacingPropTypes
 }
 
 Button.defaultProps = {
+  align: 'center',
   type: 'button',
+  margin: {}
 }
 
 Button.displayName = 'Button'

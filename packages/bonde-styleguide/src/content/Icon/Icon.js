@@ -9,7 +9,6 @@ const Icon = styled(({ className, name, color, size }) => {
   return <IconSVG className={className} color={color} size={size} />
 })`
   vertical-align: middle;
-  margin: ${props => props.margin};
 `
 
 const { oneOfType, string, number } = PropTypes
@@ -19,15 +18,12 @@ Icon.propTypes = {
   name: string.isRequired,
   /** The color of icon. */
   color: string,
-  /** The margin of icon. */
-  margin: string,
   /** The size of icon. */
   size: oneOfType([string, number])
 }
 
 Icon.defaultProps = {
   color: '#000000',
-  margin: '-2px 5px 0',
   size: 13
 }
 

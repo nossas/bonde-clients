@@ -17,11 +17,13 @@ export const borderSpacing = (
   ${propName}-right: ${px(right, x)};
 `
 
+const { oneOfType, number, string } = PropTypes
+
 export const borderSpacingPropTypes = PropTypes.shape({
-  top: PropTypes.number,
-  right: PropTypes.number,
-  bottom: PropTypes.number,
-  left: PropTypes.number,
-  x: PropTypes.number,
-  y: PropTypes.number
+  top: oneOfType([number, string]),
+  right: oneOfType([number, string]),
+  bottom: oneOfType([number, string]),
+  left: oneOfType([number, string]),
+  x: oneOfType([number, string]),
+  y: oneOfType([number, string])
 })

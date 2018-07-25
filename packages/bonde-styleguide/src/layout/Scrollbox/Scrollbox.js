@@ -8,7 +8,8 @@ const Scrollbox = styled.div`{
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  ${props => borderSpacing('padding', props.padding)}
+  ${props => props.padding && borderSpacing('padding', props.padding)}
+  ${props => props.margin && borderSpacing('margin', props.margin)}
 
   &::-webkit-scrollbar {
     width: 33px;
@@ -34,8 +35,10 @@ Scrollbox.propTypes = {
 }
 
 Scrollbox.defaultProps = {
-  padding: 0
+  padding: {}
 }
+
+Scrollbox.displayName = 'Scrollbox'
 
 /* @component */
 export default Scrollbox

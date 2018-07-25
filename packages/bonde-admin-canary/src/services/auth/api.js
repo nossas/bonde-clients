@@ -1,5 +1,5 @@
-import { store } from '../redux'
-import { db } from '../session'
+import { store } from 'services/redux'
+import { db } from 'services/session'
 import * as actionTypes from './redux/actionTypes'
 
 const { dispatch, getState } = store
@@ -33,7 +33,10 @@ const AuthAPI = {
   
   isAuthenticated: () => !!getState().auth.user,
 
-  getUser: () => getState().auth.user
+  getToken: () => {
+    const user = db.get('user').value()
+    return user ? user.jwtToken : undefined
+  }
 }
 
 export default AuthAPI

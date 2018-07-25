@@ -17,8 +17,6 @@ const Text = styled.p`{
   ${props => borderSpacing('margin', props.margin)}
 }`
 
-Text.displayName = 'Text'
-
 Text.propTypes = {
   margin: borderSpacingPropTypes,
   align: PropTypes.oneOf(['left', 'center', 'right']),
@@ -42,6 +40,8 @@ Text.defaultProps = {
   align: 'left',
   margin: {}
 }
+
+Text.displayName = 'Text'
 
 /* @component */
 export default Text

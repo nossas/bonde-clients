@@ -35,5 +35,7 @@ Flexbox.defaultProps = {
   row: false
 }
 
+Flexbox.displayName = 'Flexbox'
+
 /* @component */
 export default Flexbox

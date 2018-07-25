@@ -1,1 +1,1 @@
-export { default as FormGraphQL } from './FormGraphQL'
+export { default as PasswordField } from './PasswordField'

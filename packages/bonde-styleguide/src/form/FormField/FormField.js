@@ -13,31 +13,38 @@ const FormField = ({
   label,
   hint,
   placeholder,
-  meta: { error, valid, touched, dirty }, 
+  meta: { error, valid, touched, dirty },
   inputComponent: InputComponent,
   input,
   ...props
-}) => (
-  <div style={{ padding: '0 0 17px' }}>
-    <Flexbox horizontal>
-      <ControlLabel>{label}</ControlLabel>
-      {(touched && error) && <InputHint invalid={true}>{error}</InputHint>}
-      {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
-    </Flexbox>
-    <Flexbox horizontal>
-      <InputComponent
-        fullWidth
-        invalid={touched && !!error}
-        valid={touched && valid}
-        placeholder={placeholder}
-        touched={touched}
-        {...input}
-        {...props}
-      />
-      {(touched && (!!error || valid)) && <InputAdornment invalid={!!error} valid={valid} />}
-    </Flexbox>
-  </div>
-)
+}) => {
+  return (
+    <div style={{ padding: '0 0 17px' }}>
+      <Flexbox horizontal>
+        <ControlLabel>{label}</ControlLabel>
+        {(touched && error && typeof error === 'string') && <InputHint invalid={true}>{error}</InputHint>}
+        {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
+      </Flexbox>
+      <Flexbox horizontal>
+        <InputComponent
+          fullWidth
+          invalid={touched && !!error}
+          valid={touched && valid}
+          placeholder={placeholder}
+          touched={touched}
+          {...input}
+          {...props}
+        />
+        {(touched && (!!error || valid)) && (
+          <InputAdornment
+            invalid={!!error}
+            valid={valid}
+          />
+        )}
+      </Flexbox>
+    </div>
+  )
+}
 
 FormField.propTypes = {
   /** Label text. */
@@ -46,10 +53,13 @@ FormField.propTypes = {
     /** Valid style. */
     valid: PropTypes.bool,
     /** Error text. The invalid input style is based on existence of this prop. */
-    error: PropTypes.string,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool
+    ]),
   }),
   /** Hint text. */
-  hint: PropTypes.string, 
+  hint: PropTypes.string,
   /** Placeholder text. */
   placeholder: PropTypes.string
 }

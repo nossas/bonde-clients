@@ -32,35 +32,20 @@ const Content = styled.span`
   }
 `
 
-class Tag extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { checked: props.checked }
-  }
-
-  handleChange = e => {
-    this.setState({ checked: !this.state.checked })
-  }
-
-  render () {
-    const { text } = this.props
-
-    return (
-      <label>
-        <Checkbox checked={this.state.checked} {...this.props} />
-        <Content onClick={this.handleChange}>
-          {text}
-        </Content>
-      </label>
-    )
-  }
-}
+const Tag = ({ label, ...field }) => (
+  <label>
+    <Checkbox {...field} />
+    <Content>
+      {label}
+    </Content>
+  </label>
+)
 
 const { oneOfType, node, func, bool, string } = PropTypes
 
 Tag.propTypes = {
   /** Anything that can be rendered, will be rendered inside the tag. */
-  text: oneOfType([node, func]).isRequired,
+  label: oneOfType([node, func]).isRequired,
   /** The default checked state. */
   checked: bool,
   /** The form input name attribute. */
@@ -72,5 +57,7 @@ Tag.propTypes = {
 Tag.defaultProps = {
   checked: false
 }
+
+Tag.displayName = 'Tag'
 
 export default Tag

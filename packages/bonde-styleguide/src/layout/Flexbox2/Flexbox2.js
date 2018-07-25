@@ -9,8 +9,6 @@ import { borderSpacing, borderSpacingPropTypes } from '../../utils'
 const Flexbox = styled.div`
   display: flex;
 
-  ${props => props.padding && `padding: ${props.padding};`}
-
   ${props => props.horizontal && `
     width: 100%;
     flex-direction: row;
@@ -30,6 +28,10 @@ const Flexbox = styled.div`
     justify-content: flex-end;
   `}
 
+  ${props => props.justify && `
+    justify-content: ${props.justify};  
+  `}
+
   ${props => props.spacing && `
     justify-content: space-${props.spacing}
   `}
@@ -43,8 +45,6 @@ const Flexbox = styled.div`
   ${props => borderSpacing('margin', props.margin)}
   ${props => borderSpacing('padding', props.padding)}
 `
-
-Flexbox.displayName = 'Flexbox2'
 
 Flexbox.propTypes = {
   horizontal: PropTypes.bool,
@@ -61,6 +61,8 @@ Flexbox.defaultProps = {
   margin: {},
   padding: {},
 }
+
+Flexbox.displayName = 'Flexbox2'
 
 /* @component */
 export default Flexbox

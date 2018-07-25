@@ -11,7 +11,8 @@ export const TabItem = styled.a`{
   text-transform: uppercase;
   cursor: pointer;
   margin: 0 15px 0 0;
-  padding: 14px 0;
+  padding-bottom: 14px;
+
   ${props => props.active && css`
     border-bottom: 3px solid #ee0099;
     padding-bottom: 11px;
@@ -36,6 +37,8 @@ TabItem.defaultProps = {
   inverted: false,
   active: false
 }
+
+TabItem.displayName = 'TabItem'
 
 /* @component */
 export default TabItem
