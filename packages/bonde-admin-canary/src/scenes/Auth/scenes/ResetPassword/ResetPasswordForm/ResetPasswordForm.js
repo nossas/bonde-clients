@@ -8,8 +8,8 @@ import resetPassword from './resetPassword.graphql'
 
 export default ({ t, token, handleSuccess }) => (
   <Flexbox vertical>
-    <Title.H2>{t('resetPassword.form.title')}</Title.H2>
-    <Title.H4>{t('resetPassword.form.subtitle')}</Title.H4>
+    <Title.H2 margin={{ bottom: 20 }}>{t('resetPassword.form.title')}</Title.H2>
+    <Title.H4 margin={{ bottom: 15 }}>{t('resetPassword.form.subtitle')}</Title.H4>
     <FormGraphQL
       mutation={resetPassword}
       onSubmit={(values, mutation) => {
@@ -32,8 +32,10 @@ export default ({ t, token, handleSuccess }) => (
           min(6, t('resetPassword.fields.password.min6'))
         ]}
       />
-      <ButtonLink to='/auth/login'>{t('resetPassword.form.cancel')}</ButtonLink>
-      <Button type='submit'>{t('resetPassword.form.submit')}</Button>
+      <Flexbox horizontal spacing='between'>
+        <ButtonLink to='/auth/login'>{t('resetPassword.form.cancel')}</ButtonLink>
+        <Button type='submit'>{t('resetPassword.form.submit')}</Button>
+      </Flexbox>
     </FormGraphQL>
   </Flexbox>
 )
