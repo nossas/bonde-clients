@@ -2,6 +2,7 @@ import React from 'react'
 import { I18n } from 'react-i18next'
 import { Query } from 'react-apollo'
 import { AuthAPI } from 'services/auth'
+import { notify } from 'components/Notification'
 
 import tokenVerify from './tokenVerify.graphql'
 import CheckingToken from './CheckingToken'
@@ -28,6 +29,9 @@ export default ({ match }) => (
             handleSuccess={({ data }) => {
               AuthAPI.login({
                 jwtToken: data.resetPasswordChangePassword.jwtToken
+              })
+              .then(() => {
+                notify(t('resetPassword.success'))
               })
             }}
           />
