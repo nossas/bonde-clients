@@ -17,9 +17,18 @@ export default () => (
           <div>
             <IconColorful name='mobilization' size={80} />
           </div>
-          <Title.H2 margin={{ y: 20 }}>{t('forgetPassword.successfully.title')}</Title.H2>
-          <Title.H4 margin={spacing}>{t('forgetPassword.successfully.checkEmail')}</Title.H4>
-          <Title.H4 margin={spacing}>{t('forgetPassword.successfully.checkSpam')}</Title.H4>
+          <Title.H2 margin={{ y: 20 }}>
+            {t('forgetPassword.successfully.title')}
+          </Title.H2>
+          <Title.H4 margin={spacing}>
+            {t('forgetPassword.successfully.checkEmail')}
+          </Title.H4>
+          <Title.H4 margin={spacing}>
+            {t('forgetPassword.successfully.checkSpam')}
+          </Title.H4>
+          <Title.H4 margin={spacing}>
+            {t('forgetPassword.successfully.checkExpiry')}
+          </Title.H4>
           <ButtonLink to='/auth/login'>{t('forgetPassword.goback')}</ButtonLink>
         </Flexbox>
       )
