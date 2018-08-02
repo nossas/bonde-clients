@@ -36,6 +36,7 @@
     "react-dom": "^16.2.0",
     "react-ga": "^2.3.5",
     "react-intl": "^2.4.0",
+    "react-lifecycles-compat": "^3.0.4",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-s3-uploader": "^4.6.0",
