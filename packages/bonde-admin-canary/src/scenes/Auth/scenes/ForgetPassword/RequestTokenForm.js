@@ -16,8 +16,8 @@ export default ({ onSuccess }) => (
   <I18n ns='auth'>
   {(t, { i18n }) => (
     <Flexbox>
-      <Title.H2 margin={{ bottom: 20 }}>{t('forgetPassword.title')}</Title.H2>
-      <Title.H4 margin={{ bottom: 25 }}>{t('forgetPassword.description')}</Title.H4>
+      <Title.H2 margin={{ bottom: 18 }}>{t('forgetPassword.title')}</Title.H2>
+      <Title.H4 margin={{ bottom: 30 }}>{t('forgetPassword.description')}</Title.H4>
       <FormGraphQL
         mutation={RequestTokenMutation}
         onSubmit={({ email }, mutation) => {
