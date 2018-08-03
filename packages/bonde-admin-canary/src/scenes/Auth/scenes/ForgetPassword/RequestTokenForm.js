@@ -7,7 +7,7 @@ import {
   Input,
   Title
 } from 'bonde-styleguide'
-import { FormGraphQL, Field } from 'components/Form'
+import { FormGraphQL, Field, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { isEmail } from 'services/validations'
 import RequestTokenMutation from './requestResetPasswordToken.graphql'
@@ -59,9 +59,9 @@ export default ({ onSuccess }) => (
           >
             {t('forgetPassword.goback')}
           </ButtonLink>
-          <Button type='submit'>
+          <SubmitButton>
             {t('forgetPassword.submit')}
-          </Button>
+          </SubmitButton>
         </Flexbox>
       </FormGraphQL>
     </Flexbox>
