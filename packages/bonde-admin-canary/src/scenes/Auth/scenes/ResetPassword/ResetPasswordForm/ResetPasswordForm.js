@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
-import { Field, FormGraphQL } from 'components/Form'
+import { Field, FormGraphQL, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { required, min } from 'services/validations'
 import { PasswordField } from '../../components'
@@ -34,7 +34,7 @@ export default ({ t, token, handleSuccess }) => (
       />
       <Flexbox horizontal spacing='between'>
         <ButtonLink to='/auth/login'>{t('resetPassword.form.cancel')}</ButtonLink>
-        <Button type='submit'>{t('resetPassword.form.submit')}</Button>
+        <SubmitButton>{t('resetPassword.form.submit')}</SubmitButton>
       </Flexbox>
     </FormGraphQL>
   </Flexbox>
