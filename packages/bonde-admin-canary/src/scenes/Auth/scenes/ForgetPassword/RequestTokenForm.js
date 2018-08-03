@@ -9,7 +9,7 @@ import {
 } from 'bonde-styleguide'
 import { FormGraphQL, Field } from 'components/Form'
 import { ButtonLink } from 'components/Link'
-import { isEmail, required } from 'services/validations'
+import { isEmail } from 'services/validations'
 import RequestTokenMutation from './requestResetPasswordToken.graphql'
 
 export default ({ onSuccess }) => (
@@ -49,7 +49,6 @@ export default ({ onSuccess }) => (
           component={FormField}
           inputComponent={Input}
           validate={[
-            required(t('forgetPassword.email.isEmpty')),
             isEmail(t('forgetPassword.email.isEmail'))
           ]}
         />
