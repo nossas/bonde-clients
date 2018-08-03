@@ -66,7 +66,7 @@ const AuthLogin = ({ t }) => (
           <Checkbox>{t('links.stayConnected')}</Checkbox>
         </Flexbox>
       */}
-      <Flexbox horizontal end>
+      <Flexbox horizontal>
         <ButtonLink
           to='/auth/forget-password'
           title={t('links.forgePassword')}

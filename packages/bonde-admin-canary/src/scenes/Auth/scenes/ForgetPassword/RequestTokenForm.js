@@ -53,7 +53,7 @@ export default ({ onSuccess }) => (
             isEmail(t('forgetPassword.email.isEmail'))
           ]}
         />
-        <Flexbox horizontal>
+        <Flexbox padding={{ top: 25 }} horizontal>
           <ButtonLink
             to='/auth/login'
             title={t('forgetPassword.goback')}
