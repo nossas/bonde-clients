@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
+import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
 import { Field, FormGraphQL, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { required, min } from 'services/validations'
