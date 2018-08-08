@@ -8,7 +8,6 @@ pipeline:
       - npm install
       - ./node_modules/.bin/lerna bootstrap
       - ./node_modules/.bin/lerna run test --parallel
-      - rm -rf ./packages/bonde-public/.next
     when:
       event: [push, tag]
 
