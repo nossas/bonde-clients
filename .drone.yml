@@ -26,7 +26,7 @@ pipeline:
       - export PAGARME_KEY=$STAG_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
-      - ./node_modules/.bin/lerna run build --parallel
+      - ./node_modules/.bin/lerna run build
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
@@ -46,7 +46,7 @@ pipeline:
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
       - ./node_modules/.bin/lerna run testx --parallel
-      - ./node_modules/.bin/lerna run buildx --parallel
+      - ./node_modules/.bin/lerna run buildx
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
