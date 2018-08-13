@@ -134,4 +134,16 @@ describe('~client/mobrender/redux/reducers/widgets', () => {
         .that.deep.equals(failurePayload)
     })
   })
+
+  it('should reset widgets reducer when SELECT_MOBILIZATION', () => {
+    const fetchState = {...initialState,
+      isLoaded: true,
+      data: [
+        { id: 1, kind: 'draft', block_id: 1 }
+      ]
+    }
+    const action = { type: t.SELECT_MOBILIZATION }
+    const nextState = reducer(fetchState, action)
+    expect(nextState).to.deep.equal(initialState)
+  })
 })

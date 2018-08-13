@@ -56,10 +56,10 @@ export default (state = initialState, action = {}) => {
       return {...state,
         data: [...state.data, ...action.payload]
       }
-
     case t.SET_WIDGET_LIST:
       return { ...state, data: action.payload }
-
+    case t.SELECT_MOBILIZATION:
+      return initialState
     default:
       return state
   }
