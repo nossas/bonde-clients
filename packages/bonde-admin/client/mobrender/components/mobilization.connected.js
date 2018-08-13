@@ -11,6 +11,7 @@ const mapStateToProps = (state, props) => {
   return {
     mobilization: selectors.getMobilization() || selectors.getMobilizations()[0],
     blocks: selectors.getBlocks(),
+    blocksIsLoaded: selectors.blocksIsLoaded(),
     widgets: selectors.getWidgets(),
     blockEditionMode: editing ? editing.indexOf(EDIT_KEY) !== -1 : false
   }
