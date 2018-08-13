@@ -75,6 +75,8 @@ export default (state = initialState, action = {}) => {
           else return b
         })
       }
+    case t.SELECT_MOBILIZATION:
+      return initialState
     default:
       return state
   }

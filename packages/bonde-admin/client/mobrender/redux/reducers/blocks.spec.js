@@ -205,4 +205,16 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       })
     })
   })
+
+  it('should reset blocks reducer when SELECT_MOBILIZATION', () => {
+    const fetchState = {...initialState,
+      isLoaded: true,
+      data: [
+        { id: 1, name: 'Lorem', bg_class: 'bg-5' }
+      ]
+    }
+    const action = { type: t.SELECT_MOBILIZATION }
+    const nextState = reducer(fetchState, action)
+    expect(nextState).to.deep.equal(initialState)
+  })
 })
