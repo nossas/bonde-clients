@@ -4,7 +4,7 @@ Ao contribuir com este projeto, por favor, discuta primeiro a mudança que
 deseja fazer via issue com os mantenedores do projeto antes de fazer uma
 alteração.
 
-Por favor, note que temos um código de conduto, você deve segui-lo em todas as
+Por favor, note que temos um código de conduta, você deve segui-lo em todas as
 suas interações com o projeto.
 
 ## Enviando sua colaboração (Pull request)
