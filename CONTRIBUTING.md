@@ -1,6 +1,30 @@
-# Código de Conduta para Colaboradores
+# Contribuindo
 
-## Nossa promessa
+Ao contribuir com este projeto, por favor, discuta primeiro a mudança que
+deseja fazer via issue com os mantenedores do projeto antes de fazer uma
+alteração.
+
+Por favor, note que temos um código de conduto, você deve segui-lo em todas as
+suas interações com o projeto.
+
+## Enviando sua colaboração (Pull request)
+
+1. Atualize o README.md com detalhes das mudanças na interface, isso inclui
+   novas variáveis de ambiente, portas expostas, arquivos utéis e parâmetros do
+   container.
+2. Aumente os números de versão em quaisquer arquivos de exemplos e o README.md
+   para a nova versão que está solicitação de extração representaria. O esquema
+   de versionamento que usamos é [SemVer](https://semver.org/)
+3. Use [Gitflow
+   Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+   no fluxo de alteração do código fonte.
+4. Você pode mesclar o pull request, uma vez que você tenha a assinatura de
+   dois outros desenvolvedores, ou se você não tiver permissão para fazer isso,
+   você pode solicitar o segundo revisor para mesclar isso para você.
+
+## Código de Conduta para Colaboradores
+
+### Nossa promessa
 
 Com o interesse de fomentar uma comunidade aberta e acolhedora,
 nós, como colaboradores e administradores deste projeto, comprometemo-nos
@@ -10,7 +34,7 @@ etnia, gênero, idade, identidade ou expressão de gênero, identidade
 ou orientação sexual, nacionalidade, nível de experiência, porte físico,
 raça ou religião.
 
-## Nossos padrões
+### Nossos padrões
 
 Exemplos de comportamentos que contribuem a criar um ambiente positivo incluem:
 
@@ -31,7 +55,7 @@ exemplo, um endereço eletrônico ou residencial
 * Qualquer outra forma de conduta que pode ser razoavelmente considerada
 inapropriada num ambiente profissional
 
-## Nossas responsibilidades
+### Nossas responsibilidades
 
 Os administradores do projeto são responsáveis por esclarecer os padrões de
 comportamento e deverão tomar ação corretiva apropriada e justa em resposta
@@ -44,7 +68,7 @@ acordo com este Código de Conduta, bem como banir temporariamente ou
 permanentemente qualquer colaborador por qualquer outro comportamento
 que se considere impróprio, perigoso, ofensivo ou problemático.
 
-## Escopo
+### Escopo
 
 Este Código de Conduta aplica-se dentro dos espaços do projeto ou
 qualquer espaço público onde alguém represente o mesmo ou a sua
@@ -54,7 +78,7 @@ mídia social oficial, ou agir como um representante designado num evento
 online ou offline. A representação de um projeto pode ser ainda definida e
 esclarecida pelos administradores do projeto.
 
-## Aplicação
+### Aplicação
 
 Comportamento abusivo, de assédio ou de outros tipos pode ser
 comunicado contatando a equipe do projeto [INSIRA O ENDEREÇO
@@ -68,7 +92,7 @@ Administradores do projeto que não sigam ou não mantenham o Código
 de Conduta em boa fé podem enfrentar repercussões temporárias ou permanentes
 determinadas por outros membros da liderança do projeto.
 
-## Atribuição
+### Atribuição
 
 Este Código de Conduta é adaptado do [Contributor
 Covenant](https://www.contributor-covenant.org), versão 1.4, disponível em
