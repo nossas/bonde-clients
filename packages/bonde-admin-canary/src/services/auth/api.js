@@ -1,8 +1,13 @@
 import { store } from 'services/redux'
 import { db } from 'services/session'
 import * as actionTypes from './redux/actionTypes'
+import { CrossStorageClient } from 'cross-storage'
 
 const { dispatch, getState } = store
+
+const storage = new CrossStorageClient(
+  process.env.REACT_APP_CROSS_STORAGE_URL || 'http://localhost:8888'
+)
 
 /**
  * API used on manage user authentication, depends on services/redux and
@@ -22,6 +27,12 @@ const AuthAPI = {
   login: (user) => new Promise((resolve, reject) => {
     dispatch({ type: actionTypes.LOGIN, payload: user })
     db.set('user', user).write()
+
+    storage.onConnect()
+      .then(() => {
+        storage.set('auth', JSON.stringify(user))
+      })
+
     return resolve(user)
   }),
 
