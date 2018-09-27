@@ -12,7 +12,7 @@ import LoginPage from '~routes/admin/not-authenticated/account-login/page.connec
 import RegisterPage from '~routes/admin/not-authenticated/account-register/page.connected'
 import AccountRetrievePage from '~routes/admin/not-authenticated/account-retrieve/page.connected'
 import SubscriptionEditPage from '~routes/public/subscription-edit/page.connected'
-
+import RedirectPage from '~routes/admin/not-authenticated/redirect/page'
 // Route
 import LoggedRoute from './subroutes/logged'
 
@@ -24,6 +24,7 @@ const AuthExample = () => (
         <Route exact path='/register' component={RegisterPage} />
         <Route exact path='/account/retrieve' component={AccountRetrievePage} />
         <Route exact path='/subscriptions/:id/edit' component={SubscriptionEditPage} />
+        <Route exact path='/redirect' component={RedirectPage} />
         <Route path='/' component={LoggedRoute} />
         <Route component={TechnicalIssues} />
       </Switch>
