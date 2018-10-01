@@ -1,16 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { ApolloProvider } from 'react-apollo'
-import { Provider } from 'react-redux'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import pt from 'react-intl/locale-data/pt'
 import es from 'react-intl/locale-data/es'
 import en from 'react-intl/locale-data/en'
 import Raven from 'raven-js'
-
 import localeData from '~root/intl/locale-data'
-import App from '~root/pages/app'
-import { configureStore, client } from '~client/store'
+import Application from './app'
+import { configureStore, client } from './store'
 
 const __PROD__ = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
 const __TEST__ = process.env.NODE_ENV === 'test'
@@ -55,16 +52,11 @@ const initialState = window.INITIAL_STATE || {
 // Set up Redux store
 export const store = configureStore(initialState, { intl })
 
-const AppRouter = () => {
-  return (
-    <IntlProvider locale={locale} messages={messages}>
-      <Provider store={store}>
-        <ApolloProvider store={store} client={client()}>
-          <App />
-        </ApolloProvider>
-      </Provider>
-    </IntlProvider>
-  )
-}
-
-render(<AppRouter />, document.getElementById('root'))
+render((
+  <Application
+    locale={locale}
+    messages={messages}
+    store={store}
+    apolloClient={client}
+  />
+), document.getElementById('root'))
