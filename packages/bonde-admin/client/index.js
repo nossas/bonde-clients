@@ -9,7 +9,7 @@ import en from 'react-intl/locale-data/en'
 import Raven from 'raven-js'
 
 import localeData from '~root/intl/locale-data'
-import App from '~root/routes-v1'
+import App from '~root/pages/app'
 import { configureStore, client } from '~client/store'
 
 const __PROD__ = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
