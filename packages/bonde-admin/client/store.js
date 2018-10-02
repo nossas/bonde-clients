@@ -3,17 +3,19 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
-import DefaultServerConfig from '~server/config'
-import createReducer from './createReducer'
-import DevTools from './components/dev-tools'
 import { logout } from '~client/account/redux/action-creators'
+import crossStorage from '~client/cross-storage-client'
+import createReducer from './createReducer'
+// import DevTools from './components/dev-tools'
 
-const api = axios.create({ baseURL: DefaultServerConfig.apiUrl })
+const api = axios.create({
+  baseURL: process.env.API_URL || 'http://api-v1.bonde.devel'
+})
 
 const middlewares = [promise]
 
 const networkInterface = createNetworkInterface({
-  uri: DefaultServerConfig.graphqlUrl,
+  uri: process.env.GRAPHQL_URL || 'http://api-v2.bonde.devel/graphql',
   connectToDevTools: true
 })
 
@@ -25,14 +27,19 @@ networkInterface.use([
       }
       // Non-use auth for authenticate mutation to make a new JWT Token
       const requiredAuth = req.request.operationName !== 'authenticate'
-      if (require('exenv').canUseDOM) {
-        const localStorageAuth = window.localStorage.getItem('auth')
-        const auth = localStorageAuth ? JSON.parse(localStorageAuth) : {}
-        if (auth && auth.credentials && requiredAuth) {
-          req.options.headers.authorization = `Bearer ${auth.credentials['access-token']}`
-        }
+      if (require('exenv').canUseDOM && requiredAuth) {
+        crossStorage.onConnect()
+          .then(() => {
+            return crossStorage.get('auth')
+          })
+          .then(authJson => {
+            const { jwtToken } = JSON.parse(authJson)
+            req.options.headers.authorization = `Bearer ${jwtToken}`
+            next()
+          })
+      } else {
+        next()
       }
-      next()
     }
   }
 ])
@@ -40,6 +47,7 @@ networkInterface.use([
 networkInterface.useAfter([{
   applyAfterware ({ response }, next) {
     if (response.status === 401) {
+      // TODO: redirect to logout page on admin-canary
       logout()
     }
     next()
@@ -64,12 +72,13 @@ export function configureStore (initialState, thunkExtraArgument) {
 
   middlewares.push(client().middleware())
 
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
   let store = createStore(
     createReducer(),
     initialState,
-    compose(
-      applyMiddleware(...middlewares),
-      process.env.NODE_ENV === 'development' ? DevTools.instrument() : f => f
+    composeEnhancers(
+      applyMiddleware(...middlewares)
     )
   )
 
@@ -81,6 +90,7 @@ export function configureStore (initialState, thunkExtraArgument) {
     },
     ({ response, ...error }) => {
       if (response && response.status === 401) {
+        // TODO: redirect to logout page on admin-canary
         store.dispatch(logout())
       }
       // eslint-disable-next-line prefer-promise-reject-errors

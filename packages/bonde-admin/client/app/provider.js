@@ -2,7 +2,11 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { IntlProvider } from 'react-intl'
 import { Provider } from 'react-redux'
-import { CrossStorageClient } from 'cross-storage'
+import crossStorage from '~client/cross-storage-client'
+// save on store
+import { createAction } from '~client/utils/redux'
+import * as authTypes from '~client/account/redux/action-types'
+// routing app
 import AppRouting from '~root/pages/app'
 import ApplicationContextTypes from './context/types'
 
@@ -11,9 +15,7 @@ const Loading = () => <h1>Signing...</h1>
 class Application extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { signing: true, signed: false, token: undefined }
-    // TODO: Check this variable, its coming undefined
-    this.storage = new CrossStorageClient(process.env.CROSS_STORAGE_URL || 'http://cross-storage.bonde.devel')
+    this.state = { signing: false, signed: false, token: undefined }
   }
 
   getChildContext () {
@@ -21,17 +23,34 @@ class Application extends React.Component {
   }
 
   componentDidMount () {
-    this.storage.onConnect()
+    crossStorage.onConnect()
       .then(() => {
-        return this.storage.get('auth')
+        return crossStorage.get('auth')
       })
       .then(res => {
+        if (!res) {
+          const err = new Error('unauthorized')
+          err.status = 401
+          return Promise.reject(err)
+        }
+        const { store } = this.props
         const { jwtToken } = JSON.parse(res)
+        // authenticate on store
+        const auth = { credentials: { 'access-token': jwtToken } }
+        store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
+        // authenticate on context
         this.setState({ signing: false, signed: true, token: jwtToken })
+
+        return Promise.resolve()
       })
       .catch(err => {
-        console.log('err', err)
-        this.setState({ signing: false, signed: false, token: undefined })
+        if (err && err.status === 401) {
+          // TODO: use env to redirect on admin-canary
+          window.location.href = 'http://admin-canary.bonde.devel:5002/auth/login'
+        } else {
+          console.log('err', err)
+          this.setState({ signing: false, signed: false, token: undefined })
+        }
       })
   }
 
