@@ -39,6 +39,12 @@ const AuthAPI = {
   logout: () => new Promise((resolve, reject) => {
     dispatch({ type: actionTypes.LOGOUT })
     db.unset('user').write()
+
+    storage.onConnect()
+      .then(() => {
+        return storage.del('auth')
+      })
+
     return resolve()
   }),
   
