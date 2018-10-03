@@ -4,7 +4,6 @@ import { translate } from 'services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
 import qs from 'query-string'
 import {
-  Button,
   // Checkbox,
   Flexbox2 as Flexbox,
   FormField,

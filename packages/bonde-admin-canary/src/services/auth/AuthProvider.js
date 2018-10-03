@@ -38,7 +38,7 @@ class AuthProvider extends React.Component {
               
               if (error || !data) {
                 console.log('[ERROR: AuthProvider]', error)
-                return <h2>Houver algum problema na conexão GraphQL</h2>
+                return <h2>Houve algum problema na conexão GraphQL</h2>
               }
 
               return (
