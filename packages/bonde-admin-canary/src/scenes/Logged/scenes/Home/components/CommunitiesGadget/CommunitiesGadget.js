@@ -9,7 +9,8 @@ import allUserCommunities from './query.graphql'
 const columns = [
   {
     field: 'image',
-    render: ImageColumn
+    render: ImageColumn,
+    props: { width: '40px' }
   },
   {
     field: 'text',

@@ -8,7 +8,7 @@ import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
 
 const columns = [
-  { field: 'image', render: ImageColumn },
+  { field: 'image', render: ImageColumn, props: { width: '40px' } },
   {
     field: 'name',
     render: ({ value }) => (
