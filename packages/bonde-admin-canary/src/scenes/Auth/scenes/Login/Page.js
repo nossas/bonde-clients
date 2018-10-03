@@ -71,20 +71,22 @@ const AuthLogin = ({ t, location }) => (
           <Checkbox>{t('links.stayConnected')}</Checkbox>
         </Flexbox>
       */}
-      <Flexbox horizontal>
-        <ButtonLink
-          to='/auth/forget-password'
-          title={t('links.forgePassword')}
-        >
-          {t('links.forgetPassword')}
-        </ButtonLink>
-      </Flexbox>
       <Flexbox middle spacing='between'>
+      {/**
+        *
+        * TODO: Account register will be released on future
         <ButtonLink
           to='/auth/register'
           title={t('links.register')}
         >
           {t('links.register')}
+        </ButtonLink>
+      */}
+        <ButtonLink
+          to='/auth/forget-password'
+          title={t('links.forgePassword')}
+        >
+          {t('links.forgetPassword')}
         </ButtonLink>
         <Button type='submit' title={t('button.submit')}>
           {t('button.submit')}
