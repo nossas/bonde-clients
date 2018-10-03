@@ -7,6 +7,7 @@ class AuthAPI {
       process.env.REACT_APP_CROSS_STORAGE_URL || 'http://cross-storage.bonde.devel'
     )
     this.token = undefined
+    this.session = {}
   }
 
   login (user) {
@@ -24,6 +25,7 @@ class AuthAPI {
         return this.storage.del('auth')
           .then(() => {
             this.token = undefined
+            this.session = {}
           })
       })
   }
@@ -47,6 +49,14 @@ class AuthAPI {
 
   isAuthenticated () {
     return this.token !== undefined
+  }
+
+  setItem (key, value) {
+    this.session[key] = value
+  }
+
+  getItem (key, defaultValue) {
+    return this.session[key] || defaultValue
   }
 }
 

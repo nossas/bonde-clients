@@ -25,8 +25,18 @@ const authLink = setContext((_, { headers }) => {
 
 
 const handleError = onCatch(({ response, networkError }) => { 
-  if (networkError && networkError.statusCode === 401) {
-    authSession.logout()
+  if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
+    const redirectTo = authSession.getItem('redirectTo')
+    
+    authSession
+      .logout()
+      .then(() => {
+        if (redirectTo) {
+          window.location.href = `/auth/login?next=${redirectTo}`
+        } else {
+          window.location.href = '/auth/login'
+        }
+      })
   }
 })
 
