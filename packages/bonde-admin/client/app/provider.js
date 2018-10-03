@@ -45,8 +45,8 @@ class Application extends React.Component {
       })
       .catch(err => {
         if (err && err.status === 401) {
-          // TODO: use env to redirect on admin-canary
-          window.location.href = 'http://admin-canary.bonde.devel:5002/auth/login'
+          const loginUrl = process.env.LOGIN_URL || 'http://admin-canary.bonde.devel:5002/auth/login'
+          window.location.href = `${loginUrl}?next=${window.location.href}`
         } else {
           console.log('err', err)
           this.setState({ signing: false, signed: false, token: undefined })

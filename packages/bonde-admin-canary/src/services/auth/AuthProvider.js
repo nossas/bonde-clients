@@ -1,9 +1,9 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import { I18n } from 'react-i18next'
-import { connect } from 'services/redux'
+import { Redirect } from 'react-router-dom'
 import { graphqlApi } from 'services/graphql'
-import AuthAPI from './api'
+import authSession from './session'
 import CurrentUserQuery from './currentUser.graphql'
 
 const AuthContext = React.createContext()
@@ -18,41 +18,50 @@ const getUserWithTags = ({ currentUser }) => ({
   })
 })
 
-const AuthProvider = ({ children, loading: Loading, logout }) => (
-  <I18n ns='auth'>
-    {(t) => (
-      <Query query={CurrentUserQuery}>
-        {({ loading, error, data }) => {
-          
-          if (loading) return <Loading message={t('loading.currentUser')} />
-          
-          if (error || !data) {
-            console.log('[ERROR: AuthProvider]', error)
-            return <h2>Voce não deve ter acesso a essa página</h2>
-          }
+class AuthProvider extends React.Component {
+  state = { redirectToReferrer: false } 
+  
+  render () {
+    const { children, loading: Loading } = this.props
 
-          return (
-            <AuthContext.Provider
-              value={{
-                user: getUserWithTags(data),
-                logout
-              }}
-            >
-              {children}
-            </AuthContext.Provider>
-          )
-        }}
-      </Query>
-    )}
-  </I18n>
-)
+    if (this.state.redirectToReferrer) {
+      return <Redirect to={{ pathname: '/auth/login' }} />
+    }
 
-export default connect(undefined, (dispatch) => ({
-  logout: () => {
-    return AuthAPI
-    .logout()
-    .then(() => {
-      graphqlApi.resetStore()
-    })
+    return (
+      <I18n ns='auth'>
+        {(t) => (
+          <Query query={CurrentUserQuery}>
+            {({ loading, error, data }) => {
+              
+              if (loading) return <Loading message={t('loading.currentUser')} />
+              
+              if (error || !data) {
+                console.log('[ERROR: AuthProvider]', error)
+                return <h2>Houver algum problema na conexão GraphQL</h2>
+              }
+
+              return (
+                <AuthContext.Provider
+                  value={{
+                    user: getUserWithTags(data),
+                    logout: () => authSession
+                      .logout()
+                      .then(() => {
+                        graphqlApi.resetStore()
+                        this.setState({ redirectToReferrer: true })
+                      })
+                  }}
+                >
+                  {children}
+                </AuthContext.Provider>
+              )
+            }}
+          </Query>
+        )}
+      </I18n>
+    )
   }
-}))(AuthProvider)
+}
+
+export default AuthProvider

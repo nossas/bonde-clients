@@ -5,4 +5,5 @@ export { default as Route } from './components/Route'
 export { default as CURRENT_USER_QUERY } from './currentUser.graphql'
 export { default as AuthProvider } from './AuthProvider'
 export { Consumer as Auth } from './AuthProvider'
-
+export { default as authSession } from './session'
+export { default as SessionProvider } from './SessionProvider'

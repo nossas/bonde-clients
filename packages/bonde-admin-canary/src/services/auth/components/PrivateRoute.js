@@ -1,10 +1,10 @@
 import { connect } from 'services/redux'
 import Route from './Route'
-import AuthAPI from '../api'
+import authSession from '../session'
 
 const mapStateToProps = (state, { redirectTo, ...ownProps }) => ({
   redirectTo: redirectTo || '/auth/login',
-  assert: AuthAPI.isAuthenticated()
+  assert: authSession.isAuthenticated()
 })
 
 /**

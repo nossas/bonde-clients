@@ -1,8 +1,8 @@
 import React from 'react'
-import { AuthAPI } from 'services/auth'
+import { authSession } from 'services/auth'
 import { translate } from 'services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
-
+import qs from 'query-string'
 import {
   Button,
   // Checkbox,
@@ -17,7 +17,7 @@ import { ButtonLink } from 'components/Link'
 import { isEmail, required } from 'services/validations'
 import { PasswordField } from '../components'
 
-const AuthLogin = ({ t }) => (
+const AuthLogin = ({ t, location }) => (
   <React.Fragment>
     <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
     <FormGraphQL
@@ -34,9 +34,14 @@ const AuthLogin = ({ t }) => (
                 }
               })
             }
-            AuthAPI
+            return authSession
               .login({ jwtToken: data.authenticate.jwtToken })
-            return Promise.resolve()
+              .then(() => {
+                const search = qs.parse(location.search)
+                if (search.next) {
+                  window.location.href = search.next
+                }
+              })
           })
       }}
     >
