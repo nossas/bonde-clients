@@ -3,10 +3,14 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise'
 import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
-import { logout } from '~client/account/redux/action-creators'
 import crossStorage from '~client/cross-storage-client'
 import createReducer from './createReducer'
 // import DevTools from './components/dev-tools'
+
+const logoutOnCanary = () => {
+  const loginUrl = process.env.LOGIN_URL || 'http://admin-canary.bonde.devel:5002/auth/login'
+  window.location.href = `${loginUrl}?next=${window.location.href}` 
+}
 
 const api = axios.create({
   baseURL: process.env.API_URL || 'http://api-v1.bonde.devel'
@@ -47,8 +51,7 @@ networkInterface.use([
 networkInterface.useAfter([{
   applyAfterware ({ response }, next) {
     if (response.status === 401) {
-      // TODO: redirect to logout page on admin-canary
-      logout()
+      logoutOnCanary()
     }
     next()
   }
@@ -90,8 +93,7 @@ export function configureStore (initialState, thunkExtraArgument) {
     },
     ({ response, ...error }) => {
       if (response && response.status === 401) {
-        // TODO: redirect to logout page on admin-canary
-        store.dispatch(logout())
+        logoutOnCanary()
       }
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({ response, ...error })

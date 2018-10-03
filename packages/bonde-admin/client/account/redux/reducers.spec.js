@@ -13,50 +13,17 @@ describe('AuthReducer', () => {
     })
   })
 
-  it('auth/LOGIN_REQUEST', () => {
-    const action = { type: t.LOGIN_REQUEST }
-    const nextState = authReducer(initialState, action)
-    expect(nextState).to.deep.equal({
-      ...initialState,
-      isLoading: true
-    })
-  })
-
-  it('auth/LOGIN_SUCCESS', () => {
+  it('auth/SIGN_SUCCESS', () => {
     const payload = {
       user: { first_name: 'Lorem' },
       credentials: { key: 'lorem-ipsum-dolor.org' }
     }
-    const action = { type: t.LOGIN_SUCCESS, payload }
+    const action = { type: t.SIGN_SUCCESS, payload }
     const nextState = authReducer(initialState, action)
     expect(nextState).to.deep.equal({
       ...initialState,
       isLoading: false,
       ...payload
-    })
-  })
-
-  it('auth/LOGIN_FAILURE', () => {
-    const payload = {
-      stack: 'Lorem ipsum'
-    }
-    const action = { type: t.LOGIN_FAILURE, payload }
-    const nextState = authReducer(initialState, action)
-    expect(nextState).to.deep.equal({
-      ...initialState,
-      isLoading: false,
-      error: payload
-    })
-  })
-
-  it('auth/LOGOUT_SUCCESS', () => {
-    const action = { type: t.LOGOUT_SUCCESS }
-    const nextState = authReducer(initialState, action)
-    expect(nextState).to.deep.equal({
-      ...initialState,
-      isLoading: false,
-      user: undefined,
-      credentials: undefined
     })
   })
 
