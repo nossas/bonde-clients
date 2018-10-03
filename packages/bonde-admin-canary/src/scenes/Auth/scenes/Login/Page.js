@@ -12,7 +12,7 @@ import {
   Title
 } from 'bonde-styleguide'
 
-import { FormGraphQL, Field } from 'components/Form'
+import { FormGraphQL, Field, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { isEmail, required } from 'services/validations'
 import { PasswordField } from '../components'
@@ -26,13 +26,7 @@ const AuthLogin = ({ t, location }) => (
         return mutation({ variables: values })
           .then(({ data }) => {
             if (data.authenticate && !data.authenticate.jwtToken) {
-              return Promise.reject({
-                form: t('form.authError'),
-                fields: {
-                  email: true,
-                  password: true
-                }
-              })
+              return Promise.reject({ form: t('form.authError') })
             }
             return authSession
               .login({ jwtToken: data.authenticate.jwtToken })
@@ -51,6 +45,7 @@ const AuthLogin = ({ t, location }) => (
         placeholder={t('fields.email.placeholder')}
         component={FormField}
         inputComponent={Input}
+        showValid={false}
         validate={[
           required(t('fields.email.errors.isEmpty')),
           isEmail(t('fields.email.errors.isEmail'))
@@ -60,6 +55,7 @@ const AuthLogin = ({ t, location }) => (
         name='password'
         placeholder={t('fields.password.placeholder')}
         label={t('fields.password.label')}
+        showValid={false}
         component={PasswordField}
         validate={required(t('fields.password.errors.isEmptyLogin'))}
       />
@@ -88,9 +84,9 @@ const AuthLogin = ({ t, location }) => (
         >
           {t('links.forgetPassword')}
         </ButtonLink>
-        <Button type='submit' title={t('button.submit')}>
+        <SubmitButton title={t('button.submit')}>
           {t('button.submit')}
-        </Button>
+        </SubmitButton>
       </Flexbox>
     </FormGraphQL>
   </React.Fragment>
