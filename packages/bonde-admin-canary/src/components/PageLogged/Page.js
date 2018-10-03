@@ -6,7 +6,6 @@ import Footer from './Footer'
 const Page =  ({
   children,
   renderTitle,
-  renderLeftDropdown,
   renderActionButtons,
   renderTabs,
   ...pageProps
@@ -14,7 +13,6 @@ const Page =  ({
   <div>
     <Header
       renderTitle={renderTitle}
-      renderLeftDropdown={renderLeftDropdown}
       renderActionButtons={renderActionButtons}
       renderTabs={renderTabs}
     />

@@ -24,26 +24,26 @@ const Bonde = () => (
 
 const Header = ({
   renderTitle,
-  renderLeftDropdown,
   renderActionButtons,
   renderTabs
 }) => (
-  <HeaderStyleguide>
-    <Spacing margin={{ bottom: 16 }}>
-      <Navbar renderBrand={Bonde}>
-        <Flexbox horizontal spacing='between'>
-          {renderLeftDropdown ? renderLeftDropdown() : <div />}
-          <UserDropdown />
-        </Flexbox>
-      </Navbar>
-    </Spacing>
-
-    <Navbar>
+  <HeaderStyleguide> 
+    <Navbar renderBrand={Bonde}>
       <Flexbox horizontal spacing='between'>
         {renderTitle ? renderTitle() : <div />}
-        {renderActionButtons ? renderActionButtons() : <div />}
+        <UserDropdown />
       </Flexbox>
     </Navbar>
+
+    {renderActionButtons && (
+      <Spacing margin={{ top: 16 }}>
+        <Navbar>
+          <Flexbox horizontal end>
+            {renderActionButtons()}
+          </Flexbox>
+        </Navbar>
+      </Spacing>
+    )}
 
     {renderTabs && (
       <Spacing margin={{ bottom: -22 }}>
@@ -59,7 +59,6 @@ const { func } = PropTypes
 
 Header.propTypes = {
   renderTitle: func,
-  renderLeftDropdown: func,
   renderActionButtons: func,
   renderTabs: func
 }

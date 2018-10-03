@@ -11,7 +11,6 @@ import {
   MobilizationsGadget,
   TrendingMobilizationsGadget
 } from './components'
-import ActionMenu from './ActionMenu'
 
 const TutorialDialog = ({ children, step, t, ...props }) => (
   <Tutorial.Dialog
@@ -38,19 +37,7 @@ export default class extends React.Component {
               ? <Redirect to='/admin/tags' />
               : (
                 <Tutorial initialize={lastLocation && lastLocation.pathname === '/admin/tags'}>
-                  <Page
-                    renderTitle={() => <Header.Title>Home</Header.Title>}
-                    renderLeftDropdown={() => (
-                      <TutorialDialog t={t} step={1}>
-                        <Header.CommunitiesDropdown path='/communities' />
-                      </TutorialDialog>
-                    )}
-                    renderActionButtons={() => (
-                      <TutorialDialog t={t} step={2} placement='bottom-right'>
-                        <ActionMenu />
-                      </TutorialDialog>
-                    )}
-                  >
+                  <Page renderTitle={() => <Header.Title>Home</Header.Title>}>
                     <Flexbox vertical>
                       <ToastContainer />
                       <Grid>
