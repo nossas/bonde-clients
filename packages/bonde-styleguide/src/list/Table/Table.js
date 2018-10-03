@@ -48,7 +48,10 @@ const ReactTable = ({
           {data.map(row => (
             <TableRow border={border} key={Math.random()}>
             {columns.map(col => (
-              <ColumnComponent key={Math.random()}>
+              <ColumnComponent
+                key={Math.random()}
+                {...col.props}
+              >
                 {col.render
                   ? col.render({ value: row[col.field], row })
                   : row[col.field]}
