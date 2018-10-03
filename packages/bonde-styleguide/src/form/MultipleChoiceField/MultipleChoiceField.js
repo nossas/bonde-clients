@@ -1,4 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const InputContainer = styled.div`
+  text-align: center;
+`
 
 const MultipleChoiceField = ({
   inputComponent: InputComponent,
@@ -20,7 +25,7 @@ const MultipleChoiceField = ({
   }
   
   return (
-    <React.Fragment>
+    <InputContainer>
       {options.map((field) => (
         <InputComponent
           key={`inputKey-${field.value}`}
@@ -29,7 +34,7 @@ const MultipleChoiceField = ({
           onChange={onChangeField}
         />
       ))}
-    </React.Fragment>
+    </InputContainer>
   )
 }
 
