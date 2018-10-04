@@ -63,7 +63,9 @@ const MobilizationList = ({
     emptyIcon='mobilization'
     emptyText={t('gadgets.mobilizations.emptyText')}
     renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
-    renderPagination={() => pageTotal ? (
+    page={page}
+    pageTotal={pageTotal}
+    renderPagination={() => (
       <Pagination
         page={page}
         pages={pageTotal}
@@ -73,7 +75,7 @@ const MobilizationList = ({
         onClickItem={(index) => onChangePage(index + 1)}
         onClickLast={() => onChangePage(pageTotal)}
       />
-    ) : null}
+    )}
   />
 )
 
