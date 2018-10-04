@@ -74,9 +74,10 @@ const Panel = ({
   sectionTitle,
   author,
   title,
-  description
+  description,
+  onClick
 }) => loading ? <PanelLoading title={sectionTitle} minHeight={minHeight} /> : (
-  <Card title={sectionTitle} minHeight={minHeight}>
+  <Card title={sectionTitle} minHeight={minHeight} onClick={onClick}>
     <Flexbox vertical spacing='between'>
       <div>
         {image

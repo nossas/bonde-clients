@@ -8,6 +8,7 @@ const Card = styled.div`{
   width: 100%;
   display: block;
   ${props => props.height && `height: ${props.height};`}
+  ${props => props.onClick && `cursor: pointer;`}
 
 }`
 
