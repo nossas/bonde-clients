@@ -8,6 +8,8 @@ export default gql`
         name
         goal
         facebookShareImage
+        customDomain
+        slug
         community {
           name
         }

@@ -9,7 +9,7 @@ import createReducer from './createReducer'
 
 const logoutOnCanary = () => {
   const loginUrl = process.env.LOGIN_URL || 'http://admin-canary.bonde.devel:5002/auth/login'
-  window.location.href = `${loginUrl}?next=${window.location.href}` 
+  window.location.href = `${loginUrl}?next=${window.location.href}`
 }
 
 const api = axios.create({
