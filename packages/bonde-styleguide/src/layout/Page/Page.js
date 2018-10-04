@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const PageContainer = styled.div`{
+  width: 100%;
   position: relative;
   padding-top: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'};
   padding-left: 155px;
@@ -12,6 +13,7 @@ const PageContainer = styled.div`{
 }`
 
 const PageContent = styled.div`{
+  width: 100%;
   position: relative;
   display: flex;
 }`
