@@ -81,7 +81,6 @@ const MobilizationsGadgetQueryset = ({ t }) => {
   const limit = 50
   return (
     <Queryset
-      observable
       query={allUserMobilizationsQuery}
       limit={limit}
       filter={{ orderBy: 'UPDATED_AT_DESC' }}
