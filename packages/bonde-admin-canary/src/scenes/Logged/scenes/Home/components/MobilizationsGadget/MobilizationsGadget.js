@@ -80,7 +80,7 @@ const MobilizationList = ({
 )
 
 const MobilizationsGadgetQueryset = ({ t }) => {
-  const limit = 50
+  const limit = 20
   return (
     <Queryset
       query={allUserMobilizationsQuery}
