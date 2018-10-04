@@ -31,22 +31,20 @@ const TableCardGadget = ({
         </Card>
       )}
     >
-      <Flexbox vertical> 
-        {loading ? <p>Loading...</p> : ( 
-          <Table
-            border={border}
-            data={data}
-            columns={columns}
-            margin={renderPagination ? { bottom: 25 } : undefined}
-            HeaderComponent={HeaderComponent}
-            EmptyComponent={() => (
-              <ListEmpty
-                iconColorfulName={emptyIcon}
-                text={emptyText}
-              />
-            )}
-          /> 
-        )}
+      <Flexbox vertical>
+        <Table
+          border={border}
+          data={data}
+          columns={columns}
+          margin={renderPagination ? { bottom: 25 } : undefined}
+          HeaderComponent={HeaderComponent}
+          EmptyComponent={() => (
+            <ListEmpty
+              iconColorfulName={emptyIcon}
+              text={emptyText}
+            />
+          )}
+        /> 
         {showPagination && (
           <div
             style={{
@@ -62,6 +60,10 @@ const TableCardGadget = ({
       </Flexbox>
     </Gadget>
   )
+}
+
+TableCardGadget.defaultProps = {
+  data: []
 }
 
 export default TableCardGadget
