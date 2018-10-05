@@ -30,7 +30,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
     </FooterContent>
   </div>
 ))`{
-  position: fixed;
+  position: absolute;
   display: flex;
   align-items: center;
   height: 94px;

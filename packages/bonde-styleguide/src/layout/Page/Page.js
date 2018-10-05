@@ -7,9 +7,27 @@ const PageContainer = styled.div`{
   position: relative;
   padding-top: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'};
   padding-left: 155px;
-  padding-bottom: 172px;
   padding-right: 155px;
   background-color: ${props => props.bgColor || '#EEEEEE'};
+
+  margin: -100px 0 -75px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 100px;
+    width: 100%;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    height: 75px;
+    width: 100%;
+  }
 }`
 
 const PageContent = styled.div`{
