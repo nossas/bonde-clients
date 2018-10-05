@@ -8,7 +8,7 @@ import CommunitiesDropdown from './CommunitiesDropdown'
 
 test.beforeEach(t => {
   const props = {
-    t: () => {},
+    t: (key) => key,
     path: '/communities'
   }
   t.context.node = shallow(<CommunitiesDropdown {...props} />)
