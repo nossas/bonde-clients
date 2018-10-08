@@ -15,7 +15,8 @@ module.exports = {
   },
   externals: [
     {
-      './cptable': 'var cptable'
+      './cptable': 'var cptable',
+      PagarMeCheckout: 'PagarMeCheckout'
     }
   ],
   entry: {
@@ -108,7 +109,11 @@ module.exports = {
       BOT_URL: JSON.stringify(process.env.BOT_URL)
     }),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true})
+    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true}),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
   ],
 
   performance: isProd && {
