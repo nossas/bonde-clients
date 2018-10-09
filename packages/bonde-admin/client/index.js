@@ -31,22 +31,8 @@ const messages = (
 const intlProvider = new IntlProvider({ locale, messages })
 const { intl } = intlProvider.getChildContext()
 
-// Set up redux initial state
-const hydrateInitialState = keys => {
-  const extracted = {}
-  keys.forEach(key => {
-    const data = window.localStorage.getItem(key) || '{}'
-    const parsed = JSON.parse(data)
-    if (Object.keys(parsed).length > 0) {
-      extracted[key] = parsed
-    }
-  })
-  return extracted
-}
-
 const initialState = window.INITIAL_STATE || {
-  intl: { currentLocale, messages: localeData },
-  ...hydrateInitialState(['auth', 'community'])
+  intl: { currentLocale, messages: localeData }
 }
 
 // Set up Redux store

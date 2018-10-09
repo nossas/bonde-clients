@@ -6,6 +6,7 @@ import crossStorage from '~client/cross-storage-client'
 // save on store
 import { createAction } from '~client/utils/redux'
 import * as authTypes from '~client/account/redux/action-types'
+import * as communityTypes from '~client/community/action-types'
 // routing app
 import AppRouting from '~root/pages/app'
 import ApplicationContextTypes from './context/types'
@@ -25,19 +26,28 @@ class Application extends React.Component {
   componentDidMount () {
     crossStorage.onConnect()
       .then(() => {
-        return crossStorage.get('auth')
+        return crossStorage.get('auth', 'community')
       })
-      .then(res => {
-        if (!res) {
+      .then(params => {
+        const authJson = params[0]
+        const communityJson = params[1]
+
+        if (!authJson) {
           const err = new Error('unauthorized')
           err.status = 401
           return Promise.reject(err)
         }
         const { store } = this.props
-        const { jwtToken } = JSON.parse(res)
+        const { jwtToken } = JSON.parse(authJson)
         // authenticate on store
         const auth = { credentials: { 'access-token': jwtToken } }
         store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
+
+        // select community on store
+        const community = JSON.parse(communityJson)
+        if (community) {
+          store.dispatch(createAction(communityTypes.REHYDRATE, community))
+        }
         // authenticate on context
         this.setState({ signing: false, signed: true, token: jwtToken })
 
