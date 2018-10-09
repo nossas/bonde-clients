@@ -3,17 +3,16 @@ workspace:
 
 pipeline:
   unit-tests:
-    image: node:9-alpine
+    image: node:10-alpine
     commands:
       - npm install
-      - ./node_modules/.bin/lerna bootstrap
-      - ./node_modules/.bin/lerna run test --parallel
-      - rm -rf ./packages/bonde-public/.next
+      - yarn lerna bootstrap
+      - yarn lerna run test
     when:
       event: [push, tag]
 
   staging-build:
-    image: node:9-alpine
+    image: node:10-alpine
     environment:
       - NODE_ENV=production
       - API_URL=https://api-v1.staging.bonde.org
@@ -27,14 +26,14 @@ pipeline:
       - export PAGARME_KEY=$STAG_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
-      - ./node_modules/.bin/lerna run build --parallel
+      - yarn lerna run build
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
 
   staging-build-admin:
-    image: node:9-alpine
+    image: node:10-alpine
     environment:
       - NODE_ENV=production
       - API_URL=https://api-v1.staging.bonde.org
@@ -46,8 +45,8 @@ pipeline:
       - export PAGARME_KEY=$STAG_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$STAG_GOOGLE_FONTS_API_KEY
-      - ./node_modules/.bin/lerna run testx --parallel
-      - ./node_modules/.bin/lerna run buildx --parallel
+      - yarn lerna run testx
+      - yarn lerna run buildx
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_google_fonts_api_key ]
     when:
       status: success
@@ -158,7 +157,7 @@ pipeline:
       branch: [hotfix/*,  develop]
 
   production-build:
-    image: node:9-alpine
+    image: node:10-alpine
     environment:
       - NODE_ENV=production
       - API_URL=https://api-v1.bonde.org
@@ -171,8 +170,8 @@ pipeline:
       - export PAGARME_KEY=$PROD_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
       - export GOOGLE_FONTS_API_KEY=$PROD_GOOGLE_FONTS_API_KEY
-      - ./node_modules/.bin/lerna run build --parallel
-      - ./node_modules/.bin/lerna run buildx --parallel
+      - yarn lerna run build
+      - yarn lerna run buildx
     secrets: [ prod_pagarme_key, prod_sentry_dsn_public, prod_google_fonts_api_key ]
     when:
       status: success

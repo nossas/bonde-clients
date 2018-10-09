@@ -1,5 +1,10 @@
 {
+    "name": "bonde",
+    "version": "0.9.3",
+    "description": "Bonde",
+    "author": "Nossas <tech@nosssas.org>",
+    "homepage": "http://bonde.org",
     "devDependencies": {
-            "lerna": "^2.7.1"
+        "lerna": "^3.4.0"
     }
 }
