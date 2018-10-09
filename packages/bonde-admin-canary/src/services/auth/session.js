@@ -22,7 +22,7 @@ class AuthAPI {
   logout () {
     return this.storage.onConnect()
       .then(() => {
-        return this.storage.del('auth')
+        return this.storage.del('auth', 'community')
           .then(() => {
             this.token = undefined
             this.session = {}
@@ -49,6 +49,23 @@ class AuthAPI {
 
   isAuthenticated () {
     return this.token !== undefined
+  }
+
+  setAsyncItem (key, value) {
+    return this.storage.onConnect()
+      .then(() => {
+        return this.storage.set(key, JSON.stringify(value))
+      })
+  }
+
+  getAsyncItem (key) {
+    return this.storage.onConnect()
+      .then(() => {
+        return this.storage.get(key)
+      })
+      .then(value => {
+        return Promise.resolve(JSON.parse(value))
+      })
   }
 
   setItem (key, value) {

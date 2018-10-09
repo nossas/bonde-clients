@@ -15,7 +15,8 @@ const TableCardGadget = ({
   renderPagination,
   HeaderComponent,
   page,
-  pageTotal
+  pageTotal,
+  onClickRow
 }) => {
   const showPagination = (
     page && pageTotal && pageTotal > 1 && renderPagination
@@ -36,6 +37,7 @@ const TableCardGadget = ({
           border={border}
           data={data}
           columns={columns}
+          onClickRow={onClickRow}
           margin={renderPagination ? { bottom: 25 } : undefined}
           HeaderComponent={HeaderComponent}
           EmptyComponent={() => (

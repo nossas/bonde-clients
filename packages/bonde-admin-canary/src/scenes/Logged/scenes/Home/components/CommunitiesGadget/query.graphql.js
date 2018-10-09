@@ -13,6 +13,15 @@ query CurrentUserCommunities (
       city
       description
       image
+      createdAt
+      updatedAt
+      mailchimpApiKey
+      mailchimpListId
+      mailchimpGroupId
+      fbLink
+      twitterLink
+      facebookAppId
+      emailTemplateFrom
     }
     totalCount
   }
