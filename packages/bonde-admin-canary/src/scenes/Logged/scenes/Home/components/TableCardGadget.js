@@ -18,7 +18,7 @@ const TableCardGadget = ({
   pageTotal,
   onClickRow
 }) => {
-  const showPagination = (
+  const showPagination = !!(
     page && pageTotal && pageTotal > 1 && renderPagination
   )
 
