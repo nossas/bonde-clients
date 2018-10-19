@@ -35,6 +35,8 @@ export default ({ match }) => (
               })
               .then(() => {
                 notify(t('resetPassword.success', { user }))
+                // should redirect with window to rehydrate session
+                window.location.href = '/'
               })
             }}
           />
