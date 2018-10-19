@@ -6,6 +6,7 @@ import TableCardGadget from '../TableCardGadget'
 import StatusColumn from './StatusColumn'
 import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
+import { authSession } from 'services/auth'
 
 const columns = [
   { field: 'image', render: ImageColumn, props: { width: '40px' } },
@@ -65,6 +66,14 @@ const MobilizationList = ({
     renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
     page={page}
     pageTotal={pageTotal}
+    onClickRow={row => {
+      authSession
+        .setAsyncItem('community', row.community)
+        .then(() => {
+          const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
+          window.open(`${baseUrl}/mobilizations/${row.id}/edit`, '_blank')
+        })
+    }}
     renderPagination={() => (
       <Pagination
         page={page}
