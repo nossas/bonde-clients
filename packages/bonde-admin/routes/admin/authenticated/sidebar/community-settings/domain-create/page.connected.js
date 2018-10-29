@@ -43,8 +43,8 @@ const mapActionsToProps = (dispatch, { intl }) => ({
       // eslint-disable-next-line handle-callback-err
       .catch(err => dispatch(notify(dnsNotify.addHostedZoneFailure(intl))))
   },
-  asyncCheckHostedZone,
-  notify
+  asyncCheckHostedZone: (args) => dispatch(asyncCheckHostedZone(args)),
+  notify: (args) => dispatch(notify(args))
 })
 
 export default injectIntl(connect(mapStateToProps, mapActionsToProps)(
