@@ -7,31 +7,31 @@ const Visualizer = require('webpack-visualizer-plugin')
 
 const sourcePath = path.join(__dirname, './../client/')
 const staticsPath = path.join(__dirname, './../../bonde-public/webviewer/')
-// const fs = require('fs')
+const fs = require('fs')
 
 const isProd = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
 
-// function getExternals () {
-//   const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
-//   return nodeModules.reduce(function (ext, mod) {
-//     ext[mod] = 'commonjs ' + mod
-//     return ext
-//   }, {})
-// }
+function getExternals () {
+  const nodeModules = fs.readdirSync(path.join(process.cwd(), 'node_modules'))
+  return nodeModules.reduce(function (ext, mod) {
+    ext[mod] = 'commonjs ' + mod
+    return ext
+  }, {})
+}
 
 module.exports = {
   devtool: 'source-map',
   context: sourcePath,
   target: 'node',
-  // externals: getExternals(),
+  externals: getExternals(),
   node: {
     fs: 'empty'
   },
-  externals: [
-    {
-      PagarMeCheckout: 'PagarMeCheckout'
-    }
-  ],
+  // externals: [
+  //   {
+  //     './cptable': 'var cptable'
+  //   }
+  // ],
   entry: '../client/mobrender/components/index.js',
   output: {
     path: staticsPath,
@@ -61,9 +61,9 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader', query: { modules: false, sourceMaps: true } },
-            { loader: 'postcss-loader' },
-            { loader: 'sass-loader', query: { sourceMaps: true } }
+                { loader: 'css-loader', query: { modules: false, sourceMaps: true } },
+                { loader: 'postcss-loader' },
+                { loader: 'sass-loader', query: { sourceMaps: true } }
           ]
         })
       },
@@ -113,7 +113,7 @@ module.exports = {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true}),
+    new ExtractTextPlugin({filename: '[name].css', allChunks: true}),
     // new AssetsPlugin({ filename: './build/assets.json' }),
     // new webpack.HashedModuleIdsPlugin(),
     // new webpack.optimize.OccurrenceOrderPlugin(),

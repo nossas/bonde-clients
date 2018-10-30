@@ -15,8 +15,7 @@ module.exports = {
   },
   externals: [
     {
-      './cptable': 'var cptable',
-      PagarMeCheckout: 'PagarMeCheckout'
+      './cptable': 'var cptable'
     }
   ],
   entry: {
