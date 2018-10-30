@@ -22226,6 +22226,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./mobrender/components/add-new-block.scss");
+if (__webpack_require__("exenv").canUseDOM) __webpack_require__("./styles/main.scss");
 
 var _ref2 = _jsx('i', {
   className: 'fa fa-plus'
@@ -25937,6 +25938,13 @@ function injectAsyncReducer(store, name, asyncReducer) {
   store.asyncReducers[name] = asyncReducer;
   store.replaceReducer((0, _createReducer2.default)(store.asyncReducers));
 }
+
+/***/ }),
+
+/***/ "./styles/main.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
