@@ -62,5 +62,8 @@
     "css-loader": "^0.28.8",
     "file-loader": "1.1.11",
     "webpack-bundle-analyzer": "2.13.1"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }
