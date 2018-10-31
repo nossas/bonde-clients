@@ -14,6 +14,7 @@ const Flexbox = styled.div`
     flex-direction: row;
   `}
   ${props => props.vertical && `
+    width: 100%;
     height: 100%;
     flex-direction: column;
   `}

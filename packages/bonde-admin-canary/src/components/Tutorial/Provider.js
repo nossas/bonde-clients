@@ -89,7 +89,7 @@ Provider.defaultProps = {
 }
 
 Provider.propTypes = {
-  initialize: PropTypes.oneOf([
+  initialize: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.bool
   ]),

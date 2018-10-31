@@ -11,7 +11,6 @@ import {
   MobilizationsGadget,
   TrendingMobilizationsGadget
 } from './components'
-import ActionMenu from './ActionMenu'
 
 const TutorialDialog = ({ children, step, t, ...props }) => (
   <Tutorial.Dialog
@@ -29,7 +28,7 @@ export default class extends React.Component {
   
   render () {
     const { lastLocation } = this.props
-  
+    const showTutorial = lastLocation && lastLocation.pathname === '/admin/tags'
     return (
       <I18n ns='home'>
         {t => (
@@ -37,39 +36,43 @@ export default class extends React.Component {
             {({ user }) => user.tags.length < 1
               ? <Redirect to='/admin/tags' />
               : (
-                <Tutorial initialize={lastLocation && lastLocation.pathname === '/admin/tags'}>
+                <Tutorial initialize={showTutorial}>
                   <Page
-                    renderTitle={() => <Header.Title>Home</Header.Title>}
-                    renderLeftDropdown={() => (
-                      <TutorialDialog t={t} step={1}>
-                        <Header.CommunitiesDropdown path='/communities' />
+                    renderTitle={() => (<Header.Title>Home</Header.Title>)}
+                    wrapperHeaderComponent={({ children }) => (
+                      <TutorialDialog
+                        t={t}
+                        step={1}
+                        placement='bottom-left'
+                        margin={{ left: 125 }}
+                      >
+                        {children}
                       </TutorialDialog>
                     )}
-                    renderActionButtons={() => (
-                      <TutorialDialog t={t} step={2} placement='bottom-right'>
-                        <ActionMenu />
-                      </TutorialDialog>
-                    )}
-                  >
+                  > 
                     <Flexbox vertical>
                       <ToastContainer />
                       <Grid>
                         <Cell size={[12, 12, 12]}>
                           <Grid>
                             <Cell size={[4, 4]}>
-                              <TutorialDialog t={t} step={3}>
+                              <TutorialDialog t={t} step={2}>
                                 <CommunitiesGadget />
                               </TutorialDialog>
                             </Cell>
                             <Cell size={[8, 8]}>
-                              <TutorialDialog t={t} step={4} placement='left-top'>
+                              <TutorialDialog
+                                t={t}
+                                step={3}
+                                placement='bottom-left'
+                              >
                                 <MobilizationsGadget />
                               </TutorialDialog>
                             </Cell>
                           </Grid>
                         </Cell>
                         <Cell size={[12, 12, 12]}>
-                          <TutorialDialog t={t} step={5} placement='top-left'>
+                          <TutorialDialog t={t} step={4} placement='top-left'>
                             <TrendingMobilizationsGadget />
                           </TutorialDialog>
                         </Cell>

@@ -2,7 +2,7 @@ import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { AuthAPI } from 'services/auth'
+import { authSession } from 'services/auth'
 import { CatchLink, onCatch } from './CatchLink'
 
 const httpLink = createHttpLink({
@@ -10,7 +10,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = AuthAPI.getToken()
+  const token = authSession.getToken()
 
   if (token) {
     return {
@@ -25,8 +25,18 @@ const authLink = setContext((_, { headers }) => {
 
 
 const handleError = onCatch(({ response, networkError }) => { 
-  if (networkError && networkError.statusCode === 401) {
-    AuthAPI.logout()
+  if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
+    const redirectTo = authSession.getItem('redirectTo')
+    
+    authSession
+      .logout()
+      .then(() => {
+        if (redirectTo) {
+          window.location.href = `/auth/login?next=${redirectTo}`
+        } else {
+          window.location.href = '/auth/login'
+        }
+      })
   }
 })
 

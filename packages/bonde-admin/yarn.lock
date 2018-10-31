@@ -3274,6 +3274,10 @@ crypt@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
+cross-storage@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cross-storage/-/cross-storage-1.0.0.tgz#70950377241484f17ce9559b05d2e08448e17660"
+
 cryptiles@2.x.x:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"

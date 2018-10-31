@@ -105,6 +105,8 @@ module.exports = {
       AWS_BUCKET: JSON.stringify(process.env.AWS_BUCKET),
       SENTRY_DSN_PUBLIC: JSON.stringify(process.env.SENTRY_DSN_PUBLIC),
       GOOGLE_FONTS_API_KEY: JSON.stringify(process.env.GOOGLE_FONTS_API_KEY),
+      CROSS_STORAGE_URL: JSON.stringify(process.env.CROSS_STORAGE_URL),
+      LOGIN_URL: JSON.stringify(process.env.LOGIN_URL),
       BOT_URL: JSON.stringify(process.env.BOT_URL)
     }),
     new webpack.NamedModulesPlugin(),

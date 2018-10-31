@@ -4,7 +4,7 @@
   "description": "Bonde Public - Responsible render a mobilization on public mode",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 5001",
+    "dev": "next -p 5003",
     "start": "next start -p 5001",
     "build": "rm -rf .next && next build",
     "test": "echo \"Error: no test specified\" && exit 0"

@@ -1,10 +1,9 @@
 import React from 'react'
-import { AuthAPI } from 'services/auth'
+import { authSession } from 'services/auth'
 import { translate } from 'services/i18n'
 import AUTHENTICATE from './authenticate.graphql'
-
+import qs from 'query-string'
 import {
-  Button,
   // Checkbox,
   Flexbox2 as Flexbox,
   FormField,
@@ -12,12 +11,12 @@ import {
   Title
 } from 'bonde-styleguide'
 
-import { FormGraphQL, Field } from 'components/Form'
+import { FormGraphQL, Field, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
 import { isEmail, required } from 'services/validations'
 import { PasswordField } from '../components'
 
-const AuthLogin = ({ t }) => (
+const AuthLogin = ({ t, location }) => (
   <React.Fragment>
     <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
     <FormGraphQL
@@ -26,17 +25,16 @@ const AuthLogin = ({ t }) => (
         return mutation({ variables: values })
           .then(({ data }) => {
             if (data.authenticate && !data.authenticate.jwtToken) {
-              return Promise.reject({
-                form: t('form.authError'),
-                fields: {
-                  email: true,
-                  password: true
+              return Promise.reject({ form: t('form.authError') })
+            }
+            return authSession
+              .login({ jwtToken: data.authenticate.jwtToken })
+              .then(() => {
+                const search = qs.parse(location.search)
+                if (search.next) {
+                  window.location.href = search.next
                 }
               })
-            }
-            AuthAPI
-              .login({ jwtToken: data.authenticate.jwtToken })
-            return Promise.resolve()
           })
       }}
     >
@@ -46,6 +44,7 @@ const AuthLogin = ({ t }) => (
         placeholder={t('fields.email.placeholder')}
         component={FormField}
         inputComponent={Input}
+        showValid={false}
         validate={[
           required(t('fields.email.errors.isEmpty')),
           isEmail(t('fields.email.errors.isEmail'))
@@ -55,6 +54,7 @@ const AuthLogin = ({ t }) => (
         name='password'
         placeholder={t('fields.password.placeholder')}
         label={t('fields.password.label')}
+        showValid={false}
         component={PasswordField}
         validate={required(t('fields.password.errors.isEmptyLogin'))}
       />
@@ -66,24 +66,26 @@ const AuthLogin = ({ t }) => (
           <Checkbox>{t('links.stayConnected')}</Checkbox>
         </Flexbox>
       */}
-      <Flexbox horizontal>
-        <ButtonLink
-          to='/auth/forget-password'
-          title={t('links.forgePassword')}
-        >
-          {t('links.forgetPassword')}
-        </ButtonLink>
-      </Flexbox>
       <Flexbox middle spacing='between'>
+      {/**
+        *
+        * TODO: Account register will be released on future
         <ButtonLink
           to='/auth/register'
           title={t('links.register')}
         >
           {t('links.register')}
         </ButtonLink>
-        <Button type='submit' title={t('button.submit')}>
+      */}
+        <ButtonLink
+          to='/auth/forget-password'
+          title={t('links.forgePassword')}
+        >
+          {t('links.forgetPassword')}
+        </ButtonLink>
+        <SubmitButton title={t('button.submit')}>
           {t('button.submit')}
-        </Button>
+        </SubmitButton>
       </Flexbox>
     </FormGraphQL>
   </React.Fragment>

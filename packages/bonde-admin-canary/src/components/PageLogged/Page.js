@@ -6,23 +6,32 @@ import Footer from './Footer'
 const Page =  ({
   children,
   renderTitle,
-  renderLeftDropdown,
   renderActionButtons,
   renderTabs,
+  wrapperHeaderComponent: WrapperHeader,
   ...pageProps
-}) => (
-  <div>
+}) => {
+  const headerNode = (
     <Header
       renderTitle={renderTitle}
-      renderLeftDropdown={renderLeftDropdown}
       renderActionButtons={renderActionButtons}
       renderTabs={renderTabs}
     />
+  )
 
-    <Content {...pageProps}>{children}</Content>
-    <Footer />
-  </div>
-)
+  return (
+    <div>
+      {WrapperHeader ? (
+        <WrapperHeader>
+          {headerNode}
+        </WrapperHeader>
+      ) : headerNode}
+
+      <Content {...pageProps}>{children}</Content>
+      <Footer />
+    </div>
+  )
+}
 
 Page.propTypes = {
   ...Header.propTypes
