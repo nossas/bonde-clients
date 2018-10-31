@@ -17,7 +17,7 @@ pipeline:
       - NODE_ENV=production
       - API_URL=https://api-v1.staging.bonde.org
       - BOT_URL=https://beta.staging.bonde.org
-      - CROSS_STORAGE_URL=http://cross-storage.staging.bonde.org
+      - CROSS_STORAGE_URL=https://cross-storage.staging.bonde.org
       - LOGIN_URL=http://admin-canary.staging.bonde.org/auth/login
       - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
@@ -26,7 +26,7 @@ pipeline:
       - REACT_APP_DOMAIN=http://admin-canary.staging.bonde.org
       - REACT_APP_ADMIN_URL=http://app.staging.bonde.org
       - REACT_APP_PUBLIC_DOMAIN=staging.bonde.org
-      - REACT_APP_CROSS_STORAGE_URL=http://cross-storage.staging.bonde.org
+      - REACT_APP_CROSS_STORAGE_URL=https://cross-storage.staging.bonde.org
     commands:
       - export PAGARME_KEY=$STAG_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
@@ -143,7 +143,7 @@ pipeline:
       - NODE_ENV=production
       - API_URL=https://api-v1.bonde.org
       - BOT_URL=https://beta.bonde.org
-      - CROSS_STORAGE_URL=http://cross-storage.bonde.org
+      - CROSS_STORAGE_URL=https://cross-storage.bonde.org
       - LOGIN_URL=http://admin-canary.bonde.org/auth/login
       - GRAPHQL_URL=https://api-v2.bonde.org/graphql
       - APP_DOMAIN=bonde.org
@@ -152,7 +152,7 @@ pipeline:
       - REACT_APP_DOMAIN=http://admin-canary.bonde.org
       - REACT_APP_ADMIN_URL=http://app.bonde.org
       - REACT_APP_PUBLIC_DOMAIN.bonde.org
-      - REACT_APP_CROSS_STORAGE_URL=http://cross-storage.bonde.org
+      - REACT_APP_CROSS_STORAGE_URL=https://cross-storage.bonde.org
     commands:
       - export PAGARME_KEY=$PROD_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
