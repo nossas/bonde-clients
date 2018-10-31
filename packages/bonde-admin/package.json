@@ -134,7 +134,7 @@
     "redux-promise": "0.6.0",
     "redux-thunk": "2.3.0",
     "sass-loader": "^6.0.7",
-    "serve": "^6.5.8",
+    "serve": ">=7.0.0",
     "sinon": "^4.5.0",
     "slate": "0.31.3",
     "slate-editor": "4.0.1",
@@ -183,7 +183,7 @@
     ]
   },
   "engines": {
-    "node": "~10"
+    "node": ">=8"
   },
   "postcss": {
     "map": true,
