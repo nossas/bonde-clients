@@ -94,7 +94,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [release/*, feature/*, develop]
+      branch: [hotfix/*, release/*, feature/*, develop]
 
   staging-publish-admin:
     image: plugins/docker
@@ -146,7 +146,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [release/*, feature/*, develop]
+      branch: [hotfix/*, release/*, feature/*, develop]
 
   staging-deploy-admin:
     image: peloton/drone-rancher
