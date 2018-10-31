@@ -33,7 +33,7 @@ class SessionProvider extends React.Component {
   render () {
     return !this.state.signing
       ? this.props.children
-      : <LoadingFullScreen message='Signing...' /> 
+      : <LoadingFullScreen /> 
   }
 }
 

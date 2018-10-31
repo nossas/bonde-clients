@@ -34,7 +34,7 @@ class AuthProvider extends React.Component {
           <Query query={CurrentUserQuery}>
             {({ loading, error, data }) => {
               
-              if (loading) return <Loading message={t('loading.currentUser')} />
+              if (loading) return <Loading />
               
               if (error || !data) {
                 console.log('[ERROR: AuthProvider]', error)
