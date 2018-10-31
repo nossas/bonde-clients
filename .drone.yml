@@ -19,6 +19,9 @@ pipeline:
       - BOT_URL=https://beta.staging.bonde.org
       - REACT_APP_GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - REACT_APP_DOMAIN=http://admin-canary.staging.bonde.org
+      - REACT_APP_ADMIN_URL=http://app.stating.bonde.org
+      - REACT_APP_PUBLIC_DOMAIN=staging.bonde.org
+      - REACT_APP_CROSS_STORAGE_URL=http://cross-storage.staging.bonde.org
       - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
       - AWS_BUCKET=bonde-assets-staging
@@ -41,6 +44,8 @@ pipeline:
       - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
       - AWS_BUCKET=bonde-assets-staging
+      - CROSS_STORAGE_URL=http://cross-storage.staging.bonde.org
+      - LOGIN_URL=http://admin-canary.staging.bonde.org/auth/login
     commands:
       - export PAGARME_KEY=$STAG_PAGARME_KEY
       - export SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
