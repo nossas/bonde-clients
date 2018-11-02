@@ -77,14 +77,27 @@ export function configureStore (initialState, thunkExtraArgument) {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-  let store = createStore(
-    createReducer(),
-    initialState,
-    composeEnhancers(
-      applyMiddleware(...middlewares),
-      process.env.NODE_ENV !== 'production' ? DevTools.instrument() : () => {}
+  let store
+  if (process.env.NODE_ENV !== 'production') {
+    store = createStore(
+      createReducer(),
+      initialState,
+      composeEnhancers(
+        applyMiddleware(...middlewares),
+        DevTools.instrument()
+      )
     )
-  )
+  } else {
+    store = store = createStore(
+      createReducer(),
+      initialState,
+      composeEnhancers(
+        applyMiddleware(...middlewares)
+      )
+    )
+  }
+
+
 
   store.asyncReducers = {}
 

@@ -19,7 +19,7 @@ const AuthExample = () => (
         <Route component={TechnicalIssues} />
       </Switch>
     </Router>
-    <DevTools />
+    {process.env.NODE_ENV !== 'production' ? <DevTools /> : <div></div>}
     <ZendeskWidget />
     <NotificationSystem />
     <GoogleFontsLoader fonts='Source Sans Pro' />
