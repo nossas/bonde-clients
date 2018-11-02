@@ -24,7 +24,7 @@ export default ({ onSuccess }) => (
           return mutation({
               variables: {
                 email,
-                callbackUrl: `${process.env.REACT_APP_DOMAIN}/auth/reset-password/`,
+                callbackUrl: `${process.env.REACT_APP_DOMAIN_ADMIN_CANARY}/auth/reset-password/`,
                 locale: i18n.language
               }
             })

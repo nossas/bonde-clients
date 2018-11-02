@@ -167,12 +167,12 @@ class FormDomain extends Component {
             <tr>
               <td><code>{host}</code></td>
               <td><code>CNAME</code></td>
-              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN}</code></td>
+              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN_ADMIN}</code></td>
             </tr>
             <tr>
               <td><code>{`www.${host}`}</code></td>
               <td><code>CNAME</code></td>
-              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN}</code></td>
+              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN_ADMIN}</code></td>
             </tr>
           </tbody>
         </table>

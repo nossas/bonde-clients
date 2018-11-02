@@ -80,9 +80,9 @@ export function configureStore (initialState, thunkExtraArgument) {
   let store = createStore(
     createReducer(),
     initialState,
-    DevTools.instrument(),
     composeEnhancers(
-      applyMiddleware(...middlewares)
+      applyMiddleware(...middlewares),
+      process.env.NODE_ENV !== 'production' ? DevTools.instrument() : () => {}
     )
   )
 
