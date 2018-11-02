@@ -19,6 +19,7 @@ const NavbarButton = props => {
   const {className, children, hidden} = props
   return (
     <a
+      href='/'
       className={classnames(className, 'navbar-button relative')}
       onClick={handleClick}>
       <span style={{ opacity: hidden ? '.25' : '1' }}>

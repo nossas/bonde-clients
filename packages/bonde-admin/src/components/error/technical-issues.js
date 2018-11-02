@@ -19,7 +19,7 @@ class TechnicalIssues extends Component {
               <span className='bold blacker'>Primeiro, certifique-se de que preencheu os campos da página corretamente. </span>
               Se o problema persistir, vamos dar nosso máximo para resolver e pedimos que tente entrar novamente daqui a pouco ; )
             </p>
-            <p>Qualquer dúvida, pode falar com a gente pelo e-mail: <a href='mailto:contato@bonde.org?Subject=Problemas%20Técnicos' target='_blank'>contato@bonde.org</a></p>
+            <p>Qualquer dúvida, pode falar com a gente pelo e-mail: <a href='mailto:contato@bonde.org?Subject=Problemas%20Técnicos' target='_blank' rel="noopener noreferrer">contato@bonde.org</a></p>
           </div>
         </div>
       </div>

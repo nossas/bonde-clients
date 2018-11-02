@@ -26,6 +26,7 @@ export const applyValidate = ({
     } else if (typeof invalid === 'boolean' && invalid && !error) {
       errors = setIn(errors, fieldName, customMessage || message)
     }
+    return error
   })
   return errors
 }

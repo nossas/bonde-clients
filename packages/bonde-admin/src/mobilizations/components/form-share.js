@@ -41,6 +41,7 @@ const FormShare = ({
       <a
         href='https://developers.facebook.com/docs/sharing/best-practices#images'
         target='_blank'
+        rel='noopener noreferrer'
       >
         <FormattedMessage
           id='mobilizations.components--form-share.facebook.fb.image.link'

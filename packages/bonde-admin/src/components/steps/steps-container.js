@@ -23,13 +23,15 @@ class StepsContainer extends Component {
         {/* Render StepContent with position */}
         {children && children.length ? children.map((child, index) => {
           const position = index + 1
+          let el
           if (position <= this.state.step) {
-            return React.cloneElement(child, {
+             el = React.cloneElement(child, {
               position,
               step: this.state.step,
               onNextStep: () => this.nextStep(position)
             })
           }
+          return el
         }) : children ? React.cloneElement(children, { position: 1 }) : null}
       </div>
     )

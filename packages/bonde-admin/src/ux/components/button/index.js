@@ -19,7 +19,7 @@ const Button = ({ children, btnStyles, type, disabled, to, href, onClick }) => {
     disabled ? 'disabled' : null
   )
 
-  if (href) return <a style={btnStyles} href={href} className={className} target='_blank'>{children}</a>
+  if (href) return <a style={btnStyles} href={href} className={className} target='_blank' rel='noopener noreferrer'>{children}</a>
   if (to) return <Link style={btnStyles} to={to} className={className}>{children}</Link>
 
   return (

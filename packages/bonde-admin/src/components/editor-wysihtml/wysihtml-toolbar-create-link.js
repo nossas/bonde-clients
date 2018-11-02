@@ -28,7 +28,7 @@ export const WYSIHTMLToolbarCreateLink = ({ editorLinkTargetType, setEditorLinkT
       defaultValue='http://'
       className='input mr1'
     />
-    <a data-wysihtml5-dialog-action='save' className='btn btn-outline'>
+    <a data-wysihtml5-dialog-action='save' className='btn btn-outline' href='/inserir'>
       Inserir
     </a>
     <span className='ml2'>

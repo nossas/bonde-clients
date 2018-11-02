@@ -1,6 +1,4 @@
 import React from 'react'
-// import { browserHistory } from 'react-router'
-
 import { FormattedMessage } from 'react-intl'
 import * as paths from '@/paths'
 import { PageCentralizedLayout, PageCentralizedLayoutTitle } from '@/components/layout'
@@ -26,7 +24,7 @@ const Image = ({ image }) => (
   <div className='image' style={{ backgroundImage: `url(${image})` }} />
 )
 
-const MobilizationsLaunchPage = ({ mobilization: { id, facebook_share_image: image } }) => {
+const MobilizationsLaunchPage = ({ browserHistory, mobilization: { id, facebook_share_image: image } }) => {
   return (
     <PageCentralizedLayout>
       <PageCentralizedLayoutTitle>
@@ -39,12 +37,12 @@ const MobilizationsLaunchPage = ({ mobilization: { id, facebook_share_image: ima
       <div className='mobilization-launch-end'>
         <Heading />
         <Image image={image} />
-        {/* <Button onClick={() => browserHistory.push(paths.editMobilization(id))}> */}
+        <Button onClick={() => browserHistory.push(paths.editMobilization(id))}>
           <FormattedMessage
             id='page--mobilizations-launch-end.button'
             defaultMessage='Lançar mobilização'
           />
-        {/* </Button> */}
+        </Button>
       </div>
     </PageCentralizedLayout>
   )

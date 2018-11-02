@@ -275,7 +275,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             <div className='p3 relative'>
               {paymentType === 'users_choice' ? <div className='mb2 clearfix'>
-                <a href='#' onClick={this.handleClickSetTypeDonation.bind(this, 'recurring')}
+                <a href='/' onClick={this.handleClickSetTypeDonation.bind(this, 'recurring')}
                   style={selectedPaymentType === 'recurring' ? {color: mainColor} : {}}
                   className={selectedPaymentType === 'recurring' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
                   <i className='icon-payment-recurring' />
@@ -285,7 +285,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     values={{ periodLabelCurrent }}
                   />
                 </a>
-                <a href='#' onClick={this.handleClickSetTypeDonation.bind(this, 'unique')}
+                <a href='/' onClick={this.handleClickSetTypeDonation.bind(this, 'unique')}
                   style={selectedPaymentType === 'unique' ? {color: mainColor} : {}}
                   className={selectedPaymentType === 'unique' ? 'payment-type bold py1 col col-6 active' : 'payment-type bold py1 col col-6'}>
                   <i className='icon-payment-unique' />
@@ -298,7 +298,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
               {donationValue1 <= 0 ? null : (
                 <a
-                  href='#'
+                  href='/'
                   onClick={this.handleClickSetValueDonation.bind(this, 1)}
                   style={selectedValue !== 1 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                   className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 1 ? 'active' : 'bg-darken-1')}
@@ -308,7 +308,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               )}
               {donationValue2 <= 0 ? null : (
                 <a
-                  href='#'
+                  href='/'
                   onClick={this.handleClickSetValueDonation.bind(this, 2)}
                   style={selectedValue !== 2 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                   className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 2 ? 'active' : 'bg-darken-1')}
@@ -318,7 +318,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               )}
               {donationValue3 <= 0 ? null : (
                 <a
-                  href='#'
+                  href='/'
                   onClick={this.handleClickSetValueDonation.bind(this, 3)}
                   style={selectedValue !== 3 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                   className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 3 ? 'active' : 'bg-darken-1')}
@@ -328,7 +328,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               )}
               {donationValue4 <= 0 ? null : (
                 <a
-                  href='#'
+                  href='/'
                   onClick={this.handleClickSetValueDonation.bind(this, 4)}
                   style={selectedValue !== 4 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                   className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 4 ? 'active' : 'bg-darken-1')}
@@ -338,7 +338,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               )}
               {donationValue5 <= 0 ? null : (
                 <a
-                  href='#'
+                  href='/'
                   onClick={this.handleClickSetValueDonation.bind(this, 5)}
                   style={selectedValue !== 5 ? {} : { backgroundColor: this.convertHex(mainColor, 35), color: mainColor }}
                   className={classnames('value-option block mb1 py1 col-12 bold hover no-underscore', selectedValue === 5 ? 'active' : 'bg-darken-1')}
@@ -348,7 +348,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
               )}
 
               <a
-                href='#'
+                href='/'
                 onClick={this.handleClickDonate.bind(this)}
                 style={{ backgroundColor: mainColor }}
                 className='btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'

@@ -39,13 +39,15 @@ class Steps extends Component {
       <div className={`steps ${className}`}>
         {steps && steps.map((stepComponent, index) => {
           const position = index + 1
+          let el
           if (renderRule(position, this.state.current)) {
-            return React.cloneElement(stepComponent, {
+            el = React.cloneElement(stepComponent, {
               key: `step-${position}`,
               step: position,
               isValid: position < this.state.current
             })
           }
+          return el
         })}
       </div>
     )

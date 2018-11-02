@@ -21,7 +21,7 @@ const TellAFriend = ({
     <div className='center p3 bg-white darkengray rounded'>
       <div className='m0 h3 bold'>{message}</div>
       <div className='py2'>
-        <img src={imageUrl} style={{ width: imageWidth || 100 }} />
+        <img src={imageUrl} style={{ width: imageWidth || 100 }} alt="" />
       </div>
       <p>
         <FormattedMessage
