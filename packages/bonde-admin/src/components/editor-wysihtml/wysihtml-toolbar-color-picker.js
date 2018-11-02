@@ -36,6 +36,7 @@ class WYSIHTMLToolbarColorPicker extends React.Component {
           <a
             data-wysihtml5-dialog-action='save'
             className='btn block center bg-aqua caps rounded'
+            href='/aplicar'
           >
             Aplicar cor
           </a>

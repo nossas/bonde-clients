@@ -8,7 +8,7 @@ const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }) => (
   <div className='flex flex-wrap px1'>
     {file && (
       <div className='py1'>
-        <img src={file} style={{ maxHeight: '36px' }} />
+        <img src={file} style={{ maxHeight: '36px' }} alt="" />
         {onRemove && (
           <button
             className='btn bg-darken-4 white rounded remove'

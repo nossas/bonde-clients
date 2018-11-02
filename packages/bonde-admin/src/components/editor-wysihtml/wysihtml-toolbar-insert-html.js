@@ -38,13 +38,15 @@ class WYSIHTMLToolbarInsertHTML extends React.Component {
           data-wysihtml5-command='insertHTML'
           data-wysihtml5-command-value={this.state.insertHTMLContent}
           onClick={this.handleInsertHTMLClick.bind(this)}
-          className='btn btn-outline mr1'>
+          className='btn btn-outline mr1'
+          href='/inserir'>
           Inserir
         </a>
         <a
           ref='cancelButton'
           data-wysihtml5-dialog-action='cancel'
-          className='btn btn-transparent'>
+          className='btn btn-transparent'
+          href='/cancelar'>
           Cancelar
         </a>
       </div>

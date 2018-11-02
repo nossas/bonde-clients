@@ -61,8 +61,8 @@ class WYSIHTMLToolbarInsertImage extends React.Component {
             <option value='right'>Direita</option>
           </select>
         </label>
-        <a data-wysihtml5-dialog-action='save' className='btn btn-outline white mr1'>Inserir</a>
-        <a data-wysihtml5-dialog-action='cancel' className='btn btn-transparent white'>Cancelar</a>
+        <a data-wysihtml5-dialog-action='save' href='/save' className='btn btn-outline white mr1'>Inserir</a>
+        <a data-wysihtml5-dialog-action='cancel' href='/cancel' className='btn btn-transparent white'>Cancelar</a>
       </div>
     )
   }

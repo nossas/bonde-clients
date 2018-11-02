@@ -88,15 +88,15 @@ class TargetList extends Component {
                         const { selectedTargets } = this.state
                         if (checked) {
                           // append the current target
-                          this.state.selectedTargets = [...selectedTargets, target]
+                          this.setState({ selectedTargets: [...selectedTargets, target] })
                         } else {
                           const nameMatching = t => t.name === target.name
                           const index = selectedTargets.findIndex(nameMatching)
                           // remove the current target
-                          this.state.selectedTargets = [
+                          this.setState({ selectedTargets: [
                             ...selectedTargets.slice(0, index),
                             ...selectedTargets.slice(index + 1)
-                          ]
+                          ]})
                         }
                         onSelect && onSelect(this.state.selectedTargets)
                       }}

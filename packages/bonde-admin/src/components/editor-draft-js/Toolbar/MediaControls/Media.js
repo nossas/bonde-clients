@@ -26,7 +26,7 @@ class Media extends Component {
     const entityType = entity.getType().toLowerCase()
 
     if (entityType === 'image') {
-      const media = <img {...mediaProps} />
+      const media = <img {...mediaProps} alt='' />
 
       if (href) {
         return (

@@ -42,7 +42,7 @@ class UploadImageField extends Component {
     if (loading) {
       content = <i className='fa fa-circle-o-notch fa-spin fa-w' />
     } else if (value) {
-      content = <img src={value} role='presentation' />
+      content = <img src={value} alt='' />
     }
 
     if (theme === 'icon') {

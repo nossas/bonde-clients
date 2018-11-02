@@ -27,7 +27,7 @@ const CreateDomainText = ({ onClickLink }) => (
       }
       values={{
         link: (
-          <a href='#' onClick={onClickLink} target='_self'>
+          <a href='/' onClick={onClickLink} target='_self'>
             <FormattedMessage
               id='mobilizations.components--form-domain.create-domain-text.first-line.link'
               defaultMessage='clique aqui'
@@ -184,7 +184,7 @@ class FormDomain extends Component {
             }
             values={{
               link: (
-                <a href='https://trilho.bonde.org' target='_blank'>
+                <a href='https://trilho.bonde.org' target='_blank' rel='noopener noreferrer'>
                   <FormattedMessage
                     id='mobilizations.components--form-domain.cname-table.footer.helper-text.link'
                     defaultMessage='Trilho {icon}'
@@ -234,7 +234,7 @@ class FormDomain extends Component {
                 }
               values={{
                 link: (
-                  <a href='#' onClick={this.clickHere.bind(this)} target='_self'>
+                  <a href='/' onClick={this.clickHere.bind(this)} target='_self'>
                     <FormattedMessage
                       id='mobilizations.components--form-domain.helper-text-third-line.link'
                       defaultMessage='Clique aqui'

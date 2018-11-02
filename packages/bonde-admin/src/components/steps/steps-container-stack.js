@@ -25,6 +25,7 @@ class StepsContainerStack extends Component {
       const position = index + 1
       const isLast = validations.length === position
       if (!isLast && validate()) step = position + 1
+      return step
     })
     this.setState({ ...this.state, step })
   }
@@ -69,7 +70,7 @@ class StepsContainerStack extends Component {
           const position = index + 1
           const isCurrentStep = position === step
           const incrementStep = () => this.setState({ step: step + 1 })
-
+          let el
           if (position <= step) {
             const validate = progressValidations[index]
             const styleFromParent = { display: isCurrentStep ? 'block' : 'none' }
@@ -82,8 +83,9 @@ class StepsContainerStack extends Component {
               propsPropagationWhitelist
             }
 
-            return React.cloneElement(child, propagateProps)
+            el = React.cloneElement(child, propagateProps)
           }
+          return el
         }) : children ? React.cloneElement(children, { position: 1 }) : null}
       </div>
     )

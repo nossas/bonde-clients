@@ -48,6 +48,7 @@ class Mobilization extends React.Component {
 
         blocksWithOffsetTop.push({ ...block, offsetTop, scrollTopReached })
         blocksTotalHeight += offsetHeight
+        return blocksWithOffsetTop
       })
       this.setState({ blocks: blocksWithOffsetTop })
 
@@ -63,6 +64,7 @@ class Mobilization extends React.Component {
           if (scrollPassed && !block.scrollTopReached) {
             this.updateBlock(block, { scrollTopReached: true })
           }
+          return scrollPassed
         })
 
         //
@@ -156,6 +158,7 @@ class Mobilization extends React.Component {
                 href='http://www.bonde.org/?utm_source=footer-logo'
                 style={{ 'color': '#000', 'textDecoration': 'none', 'lineHeight': '85px' }}
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 <FormattedMessage
                   id='mobrender.components--mobilization.footer.slogan'
@@ -169,6 +172,7 @@ class Mobilization extends React.Component {
                 href='http://www.bonde.org/?utm_source=footer-slogan'
                 className='right my2'
                 target='_blank'
+                rel='noopener noreferrer'
               >
                 <LogoIconNoBorder />
               </a>

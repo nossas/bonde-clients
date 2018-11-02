@@ -5,7 +5,7 @@ import classnames from 'classnames'
 const ForceDownloadViaAjax = ({ onClick, title, className, icon }) => (
   <div className='DownloadItem' style={{ cursor: 'pointer' }}>
     <p>
-      <a className={classnames('table align-middle', className)} href='#' onClick={onClick}>
+      <a href='/download' className={classnames('table align-middle', className)} onClick={onClick}>
         {icon && <i className={`fa fa-${icon} white h2 align-middle`} />}
         <span className='align-middle pl1'>{title}</span>
       </a>

@@ -1,5 +1,4 @@
 import React from 'react'
-// import { browserHistory } from 'react-router'
 
 import { FormattedMessage, injectIntl } from 'react-intl'
 import * as paths from '@/paths'
@@ -43,7 +42,7 @@ const FormShareImplementation = injectIntl(FormShare(
   }
 ))
 
-const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formProps }) => {
+const MobilizationsLaunchPage = ({ browserHistory, hostedZones, mobilization, isSaving, ...formProps }) => {
   const stepDomainValidation = () => !!mobilization.custom_domain
   const stepShareValidation = () => (
     !!mobilization.facebook_share_image &&
@@ -111,9 +110,9 @@ const MobilizationsLaunchPage = ({ hostedZones, mobilization, isSaving, ...formP
             mobilization={mobilization}
             hostedZones={hostedZones}
             redirectToCreateDNS={() => {
-              // browserHistory.push(
-              //   paths.communityDomainCreate(`?next=${paths.mobilizationLaunch(mobilization.id)}`)
-              // )
+              browserHistory.push(
+                paths.communityDomainCreate(`?next=${paths.mobilizationLaunch(mobilization.id)}`)
+              )
             }}
           />
         </StepContent>

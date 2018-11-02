@@ -27,7 +27,7 @@ const MobilizationsSettingsAnalyticsPage = props => {
             defaultMessage='Crie uma conta no Google Analytics {analyticsLink}'
             values={{
               analyticsLink: (
-                <a href='http://www.google.com/analytics/' target='_blank'>
+                <a href='http://www.google.com/analytics/' target='_blank'rel='noopener noreferrer'>
                   <FormattedMessage
                     id='page--mobilizations-analytics.ol.create-analytics-account.link'
                     defaultMessage='clicando aqui'

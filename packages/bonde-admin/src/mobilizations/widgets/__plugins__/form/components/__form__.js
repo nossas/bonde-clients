@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-// import { browserHistory } from 'react-router'
 import CountUp from 'react-countup'
 import { intlShape } from 'react-intl'
 import $ from 'jquery'
@@ -36,9 +35,9 @@ class Form extends Component {
   }
 
   handleOverlayOnClick () {
-    const { mobilization, widget, editable } = this.props
+    const { browserHistory, mobilization, widget, editable } = this.props
     if (editable) {
-      // browserHistory.push(paths.fieldsMobilizationWidget(mobilization.id, widget.id))
+      browserHistory.push(paths.fieldsMobilizationWidget(mobilization.id, widget.id))
     }
   }
 
@@ -177,6 +176,7 @@ class Form extends Component {
       if (field.kind === 'greetings') {
         message = field.placeholder
       }
+      return message
     })
     if (message === '') {
       const { mobilization, widget } = this.props

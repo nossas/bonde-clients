@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { browserHistory } from 'react-router'
 import { client as graphqlClient } from '@/store'
 import * as graphqlMutations from '@/graphql/mutations'
 import * as graphqlQueries from '@/graphql/queries'
@@ -102,7 +101,8 @@ export class Pressure extends Component {
 
         // it needs to find or create the activist data
         const addTwilioCallMutation = variables => {
-          this.state.phonePressureCount && ++this.state.phonePressureCount
+          const { phonePressureCount } = this.state
+          this.setstate({ phonePressureCount: phonePressureCount + 1 })
           return graphqlClient().mutate({
             mutation: graphqlMutations.addTwilioCall,
             variables
@@ -138,12 +138,12 @@ export class Pressure extends Component {
   }
 
   handleOverlayOnClick (e) {
-    const { mobilization, widget, editable } = this.props
+    const { browserHistory, mobilization, widget, editable } = this.props
     if (editable) {
       if (e) e.preventDefault()
-      // browserHistory.push(
-      //   paths.pressure(mobilization.id, widget.id)
-      // )
+      browserHistory.push(
+        paths.pressure(mobilization.id, widget.id)
+      )
     }
   }
 

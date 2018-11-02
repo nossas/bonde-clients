@@ -330,10 +330,10 @@ class Page extends Component {
                     'suas dúvidas {trilho}.'
                   }
                   values={{
-                    registroBr: <a href='http://registro.br' target='_blank'>registro.br</a>,
-                    goDaddy: <a href='http://godaddy.com' target='_blank'>godaddy.com</a>,
+                    registroBr: <a href='http://registro.br' target='_blank' rel='noopener noreferrer'>registro.br</a>,
+                    goDaddy: <a href='http://godaddy.com' target='_blank' rel='noopener noreferrer'>godaddy.com</a>,
                     trilho: (
-                      <a href='https://trilho.bonde.org/' title='Ajuda' target='_blank'>
+                      <a href='https://trilho.bonde.org/' title='Ajuda' target='_blank' rel='noopener noreferrer'>
                         <FormattedMessage
                           id='community.page--domain-list.dns-server-description.trilho.link'
                           defaultMessage='no site de ajuda'
