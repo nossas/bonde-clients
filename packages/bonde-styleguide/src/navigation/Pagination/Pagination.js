@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import Flexbox from  '../../layout/Flexbox2/Flexbox2'
 import Button from '../../content/Button/Button'
 import Icon from '../../content/Icon/Icon'
+import InputPage from './InputPage'
 
 const FlatButton = styled(({ className, children, ...props }) => (
   <Button {...props} className={className} flat>
@@ -63,7 +65,6 @@ class Pagination extends React.Component {
     const {
       pageIndex,
       pages,
-      activeColor,
       textPrev,
       textNext,
       iconFirst,
@@ -74,40 +75,39 @@ class Pagination extends React.Component {
     const isLast = pageIndex === pages -1
     
     return (
-      <span>
-        <IconButton
-          onClick={() => this.handleActiveIndex(0)}
-          disabled={isFirst}
-          name={iconFirst}
-        />
-        <FlatButton
-          onClick={() => this.handleActiveIndex(pageIndex - 1)}
-          disabled={isFirst}
-        >
-          {textPrev}
-        </FlatButton>
-        {Array(pages).fill().map((o, index) => (
+      <Flexbox horizontal spacing='between' middle>
+        <div>
+          <IconButton
+            onClick={() => this.handleActiveIndex(0)}
+            disabled={isFirst}
+            name={iconFirst}
+          />
           <FlatButton
-            key={Math.random()}
-            onClick={() => this.handleActiveIndex(index)}
-            color={pageIndex === index ? activeColor : ''}
-            disabled={pageIndex === index}
+            onClick={() => this.handleActiveIndex(pageIndex - 1)}
+            disabled={isFirst}
           >
-            {index + 1}
+            {textPrev}
           </FlatButton>
-        ))}
-        <FlatButton
-          onClick={() => this.handleActiveIndex(pageIndex + 1)}
-          disabled={isLast}
-        >
-          {textNext}
-        </FlatButton>
-        <IconButton
-          onClick={() => this.handleActiveIndex(pages - 1)}
-          disabled={isLast}
-          name={iconLast}
+        </div>
+        <InputPage
+          pages={pages}
+          pageIndex={pageIndex}
+          onChangePage={this.handleActiveIndex.bind(this)}
         />
-      </span>
+        <div>
+          <FlatButton
+            onClick={() => this.handleActiveIndex(pageIndex + 1)}
+            disabled={isLast}
+          >
+            {textNext}
+          </FlatButton>
+          <IconButton
+            onClick={() => this.handleActiveIndex(pages - 1)}
+            disabled={isLast}
+            name={iconLast}
+          />
+        </div>
+      </Flexbox>
     )
   }
 }
@@ -119,8 +119,6 @@ Pagination.propTypes = {
   pages: number,
   /** Active page index */
   pageIndex: number.isRequired,
-  /** Active item color. */
-  activeColor: string.isRequired,
   /** Callback when clicks the button to take to the specific page. */
   onChangePage: func.isRequired,
   /** Previous button text. */
@@ -136,7 +134,6 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   pages: 1,
   pageIndex: 0,
-  activeColor: '#ee0099',
   textPrev: 'Prev',
   textNext: 'Next',
   iconFirst: 'double-arrow-left',
