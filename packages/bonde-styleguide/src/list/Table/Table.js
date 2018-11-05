@@ -32,6 +32,7 @@ const ReactTable = ({
   columns,
   border,
   margin,
+  borderBottom,
   ColumnComponent,
   HeaderComponent,
   EmptyComponent,
@@ -42,7 +43,7 @@ const ReactTable = ({
   const empty = data.length === 0
 
   return !empty ? (
-    <Scrollbox margin={margin}>
+    <Scrollbox margin={margin} borderBottom={borderBottom}>
       <Table>
         {HeaderComponent && <HeaderComponent columns={columns} />}
         <TableBody>

@@ -10,6 +10,9 @@ const Scrollbox = styled.div`{
   overflow-x: hidden;
   ${props => props.padding && borderSpacing('padding', props.padding)}
   ${props => props.margin && borderSpacing('margin', props.margin)}
+  ${props => props.borderBottom && `
+    border-bottom: 1px solid #c7c7c75c;
+  `}
 
   &::-webkit-scrollbar {
     width: 33px;
