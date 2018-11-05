@@ -79,6 +79,8 @@ const MobilizationList = ({
         pageIndex={pageIndex}
         pages={pageTotal}
         onChangePage={onChangePage}
+        textPrev={t('pagination.previous')}
+        textNext={t('pagination.next')}
       />
     )}
   />

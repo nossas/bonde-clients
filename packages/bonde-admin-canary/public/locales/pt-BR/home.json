@@ -57,5 +57,9 @@
         "description": "Veja as mobilizações que estão causando por aí, se inspire e apoie as causas em que acredita."
       }
     }
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Próximo"
   }
 }
