@@ -37,8 +37,8 @@ const TableCardGadget = ({
           border={border}
           data={data}
           columns={columns}
+          borderBottom={showPagination}
           onClickRow={onClickRow}
-          margin={renderPagination ? { bottom: 25 } : undefined}
           HeaderComponent={HeaderComponent}
           EmptyComponent={() => (
             <ListEmpty
