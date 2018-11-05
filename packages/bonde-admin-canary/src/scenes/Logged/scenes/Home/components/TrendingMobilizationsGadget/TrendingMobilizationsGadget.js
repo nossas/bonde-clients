@@ -17,7 +17,7 @@ const TrendingMobilizationsGadget = ({ filter, onChangeFilter, mobilizations, lo
       {loading ? <Loading /> : mobilizations.map(mobilization => {
         return (
           <React.Fragment key={Math.random()}>
-            <Cell size={[3, 3]}>
+            <Cell size={[3, 3, 6, 12, 12, 12]}>
               <Panel
                 image={mobilization.facebookShareImage}
                 title={mobilization.name}
