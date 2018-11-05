@@ -60,7 +60,7 @@ const MobilizationList = ({
       authSession
         .setAsyncItem('community', row.community)
         .then(() => {
-          const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
+          const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
           window.open(`${baseUrl}/mobilizations/${row.id}/edit`, '_self')
         })
     }}

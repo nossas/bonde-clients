@@ -51,7 +51,7 @@ const EditUserPage = ({
       {/* TODO: Change FormRedux to be transparent by default */}
       <SettingsForm {...formProps}>
         <FormGroup controlId='avatarId' {...avatar}>
-          <UploadImageField signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`} />
+          <UploadImageField signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`} />
         </FormGroup>
         <FormGroup controlId='firstNameId' {...firstName}>
           <ControlLabel>

@@ -1,7 +1,7 @@
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
 
-const GRAPHQL_URL = process.env.GRAPHQL_URL !== undefined
-  ? process.env.GRAPHQL_URL
+const GRAPHQL_URL = process.env.REACT_APP_DOMAIN_API_GRAPHQL !== undefined
+  ? process.env.REACT_APP_DOMAIN_API_GRAPHQL
   : 'http://api-v2.bonde.devel'
 
 const networkInterface = createNetworkInterface({

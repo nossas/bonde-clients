@@ -49,7 +49,7 @@ const CommunitiesGadget = ({ t, loading, communities, filter, onChangeFilter }) 
       authSession
         .setAsyncItem('community', row)
         .then(() => {
-          const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
+          const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
           window.open(baseUrl, '_self')
         })
     }}
@@ -67,7 +67,7 @@ const CommunitiesGadgetQueryset = ({ t }) => (
         loading={loading}
         filter={filter}
         onChangeFilter={onChangeFilter}
-        communities={data && data.allUserCommunities ? data.allUserCommunities.nodes : []} 
+        communities={data && data.allUserCommunities ? data.allUserCommunities.nodes : []}
       />
     )}
   </Queryset>

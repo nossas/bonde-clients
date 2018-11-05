@@ -28,7 +28,7 @@ const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }) => (
         <ReactS3Uploader
           className='input border-none white m0 bg-darken-4'
           accept='image/*'
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
           onProgress={percent => onProgress(percent)}
           onFinish={image => {
             const url = image.signedUrl.substring(0, image.signedUrl.indexOf('?'))

@@ -55,8 +55,8 @@ class Application extends React.Component {
       })
       .catch(err => {
         if (err && err.status === 401) {
-          const loginUrl = process.env.REACT_APP_DOMAIN_LOGIN || 'http://admin-canary.bonde.devel:5002/auth/login'
-          window.location.href = `${loginUrl}?next=${window.location.href}`
+          const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+          window.location.href = `${domain}/auth/login?next=${window.location.href}`
         } else {
           console.log('err', err)
           this.setState({ signing: false, signed: false, token: undefined })

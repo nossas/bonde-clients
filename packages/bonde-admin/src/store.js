@@ -8,12 +8,12 @@ import createReducer from './createReducer'
 import DevTools from './components/dev-tools'
 
 const logoutOnCanary = () => {
-  const loginUrl = process.env.REACT_APP_DOMAIN_LOGIN || 'http://admin-canary.bonde.devel:5002/auth/login'
-  window.location.href = `${loginUrl}?next=${window.location.href}`
+  const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+  window.location.href = `${domain}/auth/login?next=${window.location.href}`
 }
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_DOMAIN_API_V1 || 'http://api-v1.bonde.devel'
+  baseURL: process.env.REACT_APP_DOMAIN_API_REST || 'http://api-v1.bonde.devel'
 })
 
 const middlewares = [promise]
@@ -83,8 +83,7 @@ export function configureStore (initialState, thunkExtraArgument) {
       createReducer(),
       initialState,
       composeEnhancers(
-        applyMiddleware(...middlewares),
-        DevTools.instrument()
+        applyMiddleware(...middlewares)
       )
     )
   } else {

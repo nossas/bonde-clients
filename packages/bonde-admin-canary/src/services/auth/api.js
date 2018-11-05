@@ -6,7 +6,7 @@ import { CrossStorageClient } from 'cross-storage'
 const { dispatch, getState } = store
 
 const storage = new CrossStorageClient(
-  process.env.REACT_APP_CROSS_STORAGE_URL || 'http://localhost:8888'
+  process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://localhost:8888'
 )
 
 /**
@@ -23,7 +23,7 @@ const storage = new CrossStorageClient(
  *
  */
 const AuthAPI = {
-  
+
   login: (user) => new Promise((resolve, reject) => {
     dispatch({ type: actionTypes.LOGIN, payload: user })
     db.set('user', user).write()
@@ -47,7 +47,7 @@ const AuthAPI = {
 
     return resolve()
   }),
-  
+
   isAuthenticated: () => !!getState().auth.user,
 
   getToken: () => {

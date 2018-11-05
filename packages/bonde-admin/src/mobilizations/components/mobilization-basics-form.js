@@ -113,7 +113,7 @@ export const MobilizationBasicsForm = ({
       >
         <ControlLabel>Favicon</ControlLabel>
         <UploadImageField
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
           type={isNewMobilizationPath ? 'hidden' : 'text'}
         />
       </FormGroup>
