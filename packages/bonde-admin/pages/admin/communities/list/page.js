@@ -6,6 +6,7 @@ import * as paths from '~client/paths'
 import { FormattedMessage } from 'react-intl'
 import { Loading } from '~client/components/await'
 import { ListItem } from '~client/community/components'
+import crossStorage from '~client/cross-storage-client'
 
 class CommunityListPage extends Component {
   componentDidMount () {
@@ -18,9 +19,17 @@ class CommunityListPage extends Component {
     }
   }
 
-  onClickItem (id) {
-    this.props.select(id)
-    this.props.history.push(paths.mobilizations())
+  onClickItem (community) {
+    crossStorage
+      .onConnect()
+      .then(() => {
+        return crossStorage
+          .set('community', JSON.stringify(community))
+          .then(() => {
+            this.props.select(community.id)
+            this.props.history.push(paths.mobilizations())
+          })
+      })
   }
 
   render () {
@@ -51,7 +60,7 @@ class CommunityListPage extends Component {
                 <ListItem
                   key={`list-item-${key}`}
                   community={community}
-                  onClick={this.onClickItem.bind(this)}
+                  onClick={() => this.onClickItem(community)}
                 />
               ))}
             </div>
