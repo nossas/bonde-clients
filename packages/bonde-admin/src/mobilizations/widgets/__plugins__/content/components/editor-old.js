@@ -21,13 +21,20 @@ class EditorOld extends React.Component {
 
   componentDidMount () {
     if (this.props.editable) {
-      const editor = new window.wysihtml5.Editor(
-        this.refs.content, {
-          toolbar: this.state.toolbarId,
-          parserRules: window.wysihtml5ParserRules
-        }
-      ).on('focus', this.handleEditorFocus.bind(this))
-      this.setState({editor: editor})
+      import('./wysihtml-toolbar.min')
+      .then(({ wysihtml5, wysihtml5ParserRules }) => {
+        const editor = new wysihtml5.Editor(
+          this.refs.content, {
+            toolbar: this.state.toolbarId,
+            parserRules: wysihtml5ParserRules
+          }
+        ).on('focus', this.handleEditorFocus.bind(this))
+        this.setState({editor: editor})
+        })
+        .catch(err => {
+          // Handle failure
+          console.log('fail when try to load wysihtml5 dependecies', err)
+        });
     } else {
       this.setClick()
     }
