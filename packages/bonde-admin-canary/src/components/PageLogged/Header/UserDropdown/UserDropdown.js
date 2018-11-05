@@ -8,7 +8,7 @@ const UserDropdown = ({ t, user, logout }) => {
   const name = `${user.firstName} ${user.lastName}`
 
   return (
-    <Dropdown label={name} icon='sound'>
+    <Dropdown label={name}>
       <DropdownHeader>
         <img
           src={user.avatar || 'http://via.placeholder.com/35x35?text=U'}

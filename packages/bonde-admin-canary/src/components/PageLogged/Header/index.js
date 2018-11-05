@@ -15,11 +15,9 @@ import Title from './Title'
 import UserDropdown from './UserDropdown'
 
 const Bonde = () => (
-  <a href='http://bonde.org' title='Bonde.org'>
-    <Spacing margin={{ right: 15 }}>
-      <Icon name='bonde' size={20} />
-    </Spacing>
-  </a>
+  <Spacing margin={{ right: 15 }}>
+    <Icon name='bonde' size={20} />
+  </Spacing>
 )
 
 const Header = ({
