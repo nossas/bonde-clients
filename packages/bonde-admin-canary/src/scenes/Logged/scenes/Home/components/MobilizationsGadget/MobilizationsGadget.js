@@ -51,7 +51,7 @@ const MobilizationList = ({
   mobilizations,
   filter,
   onChangeFilter,
-  page,
+  pageIndex,
   onChangePage,
   pageTotal
 }) => (
@@ -64,7 +64,7 @@ const MobilizationList = ({
     emptyIcon='mobilization'
     emptyText={t('gadgets.mobilizations.emptyText')}
     renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
-    page={page}
+    pageIndex={pageIndex}
     pageTotal={pageTotal}
     onClickRow={row => {
       authSession
@@ -76,13 +76,9 @@ const MobilizationList = ({
     }}
     renderPagination={() => (
       <Pagination
-        page={page}
+        pageIndex={pageIndex}
         pages={pageTotal}
-        onClickFirst={() => onChangePage(1)}
-        onClickNext={() => onChangePage(page + 1)}
-        onClickPrev={() => onChangePage(page - 1)}
-        onClickItem={(index) => onChangePage(index + 1)}
-        onClickLast={() => onChangePage(pageTotal)}
+        onChangePage={onChangePage}
       />
     )}
   />
@@ -96,7 +92,7 @@ const MobilizationsGadgetQueryset = ({ t }) => {
       limit={limit}
       filter={{ orderBy: 'UPDATED_AT_DESC' }}
     >
-      {({ loading, data, filter, onChangeFilter, page, onChangePage }) => {
+      {({ loading, data, filter, onChangeFilter, pageIndex, onChangePage }) => {
 
         const pageTotal = data && data.allUserMobilizations
           ? Math.ceil(data.allUserMobilizations.totalCount / limit)
@@ -107,7 +103,7 @@ const MobilizationsGadgetQueryset = ({ t }) => {
             t={t}
             filter={filter}
             onChangeFilter={onChangeFilter}
-            page={page}
+            pageIndex={pageIndex}
             onChangePage={onChangePage}
             loading={loading}
             mobilizations={data && data.allUserMobilizations ? data.allUserMobilizations.nodes : []}

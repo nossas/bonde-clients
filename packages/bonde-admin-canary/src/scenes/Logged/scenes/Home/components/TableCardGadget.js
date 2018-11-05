@@ -14,12 +14,12 @@ const TableCardGadget = ({
   renderFilter,
   renderPagination,
   HeaderComponent,
-  page,
+  pageIndex,
   pageTotal,
   onClickRow
 }) => {
   const showPagination = !!(
-    page && pageTotal && pageTotal > 1 && renderPagination
+    pageIndex !== undefined && pageTotal && pageTotal > 0 && renderPagination
   )
 
   return (

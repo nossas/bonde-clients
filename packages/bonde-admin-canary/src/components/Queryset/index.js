@@ -43,8 +43,7 @@ class Queryset extends React.Component {
     refetch({ ...filter })
   }
 
-  handleChangePage (page, fetchMore) {
-    const pageIndex = page - 1
+  handleChangePage (pageIndex, fetchMore) {
     const offset = pageIndex * this.state.limit
     this.setState({ pageIndex, offset })
 
@@ -84,7 +83,7 @@ class Queryset extends React.Component {
             loading,
             filter: this.state.filter,
             onChangeFilter: f => this.handleChangeFilter(f, refetch),
-            page: this.state.pageIndex + 1,
+            pageIndex: this.state.pageIndex,
             onChangePage: p => this.handleChangePage(p, fetchMore)
           })
         }}
