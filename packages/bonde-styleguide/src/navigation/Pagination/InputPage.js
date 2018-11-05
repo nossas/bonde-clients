@@ -16,7 +16,7 @@ const Prefix = styled.span`
   margin: 0 5px;
 `
 
-export default ({ pageIndex, pages, onChangePage }) => (
+const InputPage = ({ pageIndex, pages, onChangePage }) => (
   <Span>
     <InputNumber
       type='number'
@@ -34,3 +34,5 @@ export default ({ pageIndex, pages, onChangePage }) => (
     {pages}
   </Span>
 )
+
+export default InputPage

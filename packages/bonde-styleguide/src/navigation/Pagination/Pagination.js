@@ -72,7 +72,7 @@ class Pagination extends React.Component {
     } = this.props
 
     const isFirst = pageIndex === 0
-    const isLast = pageIndex === pages -1
+    const isLast = pageIndex === pages - 1
     
     return (
       <Flexbox horizontal spacing='between' middle>
