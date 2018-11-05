@@ -5,7 +5,7 @@ import axios from 'axios'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
 import crossStorage from '@/cross-storage-client'
 import createReducer from './createReducer'
-import DevTools from './components/dev-tools'
+// import DevTools from './components/dev-tools'
 
 const logoutOnCanary = () => {
   const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'

@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const webpack = require('webpack')
 const { ANALYZE, REACT_APP_DOMAIN_PUBLIC, NODE_ENV } = process.env
@@ -19,16 +21,21 @@ module.exports = {
     }
 
     config.plugins.push(new webpack.EnvironmentPlugin({
-      REACT_APP_API_REST: JSON.stringify(process.env.API_URL),
-      REACT_APP_DOMAIN_API_GRAPHQL: JSON.stringify(process.env.REACT_APP_DOMAIN_API_GRAPHQL),
-      REACT_APP_DOMAIN_PUBLIC: JSON.stringify(process.env.REACT_APP_DOMAIN_PUBLIC),
-      PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }))
 
     config.plugins.push(new webpack.ProvidePlugin({
       'window.jQuery': 'jquery'
     }))
+
+    config.plugins = [
+      ...config.plugins,
+
+      new Dotenv({
+        path: path.join(__dirname, '.env'),
+        systemvars: true
+      })
+    ]
 
     config.module.rules.push(
       {

@@ -15950,7 +15950,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         var mainColor = widget.settings.main_color ? widget.settings.main_color : '#43a2cc';
 
         var checkout = new PagarMeCheckout.Checkout({
-          encryption_key: process.env.PAGARME_KEY || 'setup env var',
+          encryption_key: process.env.REACT_APP_PAGARME_KEY || 'setup env var',
           success: function success(data) {
             data.subscription = paymentType === 'users_choice' ? selectedPaymentType !== 'unique' : data.subscription = paymentType !== 'unique';
 
