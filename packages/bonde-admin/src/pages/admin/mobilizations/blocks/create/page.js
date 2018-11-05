@@ -127,7 +127,7 @@ class BlocksCreatePage extends Component {
                       ? <i className='fa fa-spin fa-refresh' />
                       : <ReactS3Uploader
                         id='blockBackgroundImage'
-                        signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+                        signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
                         accept='image/*'
                         onProgress={progress =>
                           !this.state.uploading && this.setState({ uploading: progress })

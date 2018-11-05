@@ -50,7 +50,7 @@ export default () => (
   <CommunityForm i18nKeys={i18nKeys}>
     <Field
       name='image'
-      signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+      signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
       component={UploadField}
     />
     <Field name='name' component={TextField} />

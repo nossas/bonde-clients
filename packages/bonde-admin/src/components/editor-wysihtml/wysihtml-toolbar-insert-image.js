@@ -35,7 +35,7 @@ class WYSIHTMLToolbarInsertImage extends React.Component {
         <div>
           <ReactS3Uploader
             className='input col-11 inline-block'
-            signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+            signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
             accept='image/*'
             onProgress={this.handleUploadProgress.bind(this)}
             onError={this.handleUploadError.bind(this)}

@@ -42,7 +42,7 @@ class InsertImageButton extends Component {
           <i className='fa fa-image' />
         </button>
         <ReactS3Uploader
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_V1}/uploads`}
+          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
           accept='image/*'
           onProgress={this.handleUploadProgress.bind(this)}
           onError={this.handleUploadError.bind(this)}
