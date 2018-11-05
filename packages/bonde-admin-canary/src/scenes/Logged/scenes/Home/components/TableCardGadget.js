@@ -19,7 +19,7 @@ const TableCardGadget = ({
   onClickRow
 }) => {
   const showPagination = !!(
-    pageIndex !== undefined && pageTotal && pageTotal > 0 && renderPagination
+    pageIndex !== undefined && pageTotal && pageTotal > 1 && renderPagination
   )
 
   return (
@@ -47,18 +47,7 @@ const TableCardGadget = ({
             />
           )}
         /> 
-        {showPagination && (
-          <div
-            style={{
-              textAlign: 'right',
-              position: 'absolute',
-              bottom: '-7px',
-              right: 0
-            }}
-          >
-            {renderPagination()}
-          </div>
-        )}
+        {showPagination && renderPagination()}
       </Flexbox>
     </Gadget>
   )
