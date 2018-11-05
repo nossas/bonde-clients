@@ -4,7 +4,8 @@ import {
   Flexbox,
   FormField,
   Input,
-  Title
+  Title,
+  Text
 } from 'bonde-styleguide'
 import { FormGraphQL, Field, SubmitButton } from 'components/Form'
 import { ButtonLink } from 'components/Link'
@@ -16,7 +17,7 @@ export default ({ onSuccess }) => (
   {(t, { i18n }) => (
     <Flexbox>
       <Title.H2 margin={{ bottom: 18 }}>{t('forgetPassword.title')}</Title.H2>
-      <Title.H4 margin={{ bottom: 30 }}>{t('forgetPassword.description')}</Title.H4>
+      <Text margin={{ bottom: 30 }}>{t('forgetPassword.description')}</Text>
       <FormGraphQL
         mutation={RequestTokenMutation}
         onSubmit={({ email }, mutation) => {
