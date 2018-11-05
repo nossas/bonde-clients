@@ -50,7 +50,7 @@ const CommunitiesGadget = ({ t, loading, communities, filter, onChangeFilter }) 
         .setAsyncItem('community', row)
         .then(() => {
           const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
-          window.open(baseUrl, '_blank')
+          window.open(baseUrl, '_self')
         })
     }}
   />
