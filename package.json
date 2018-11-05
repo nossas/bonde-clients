@@ -4,6 +4,9 @@
     "description": "Bonde",
     "author": "Nossas <tech@nosssas.org>",
     "homepage": "http://bonde.org",
+    "scripts": {
+      "dev": "yarn lerna run dev --parallel --scope=bonde-admin --scope=bonde-admin-canary --scope=bonde-public"
+    },
     "devDependencies": {
         "lerna": "^3.4.0"
     }
