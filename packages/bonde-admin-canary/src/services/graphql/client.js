@@ -6,7 +6,7 @@ import { authSession } from 'services/auth'
 import { CatchLink, onCatch } from './CatchLink'
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_API_GRAPHQL || 'http://localhost:3001/graphql'
+  uri: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-v2.bonde.devel/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
