@@ -30,8 +30,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
     </FooterContent>
   </div>
 ))`{
-  position: relative;
-  margin-top: 30px;
+  position: absolute;
   display: flex;
   align-items: center;
   height: 94px;

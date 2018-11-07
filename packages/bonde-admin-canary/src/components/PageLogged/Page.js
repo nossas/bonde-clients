@@ -9,6 +9,7 @@ const Page =  ({
   renderActionButtons,
   renderTabs,
   wrapperHeaderComponent: WrapperHeader,
+  bgColor,
   ...pageProps
 }) => {
   const headerNode = (
