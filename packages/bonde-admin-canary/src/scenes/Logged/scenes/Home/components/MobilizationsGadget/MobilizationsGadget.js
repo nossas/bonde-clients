@@ -1,9 +1,8 @@
 import React from 'react'
-import { Icon, Link, Text, Pagination } from 'bonde-styleguide'
+import { Text, Pagination } from 'bonde-styleguide'
 import { Queryset } from 'components'
 import ImageColumn from '../ImageColumn'
 import TableCardGadget from '../TableCardGadget'
-import StatusColumn from './StatusColumn'
 import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
 import { authSession } from 'services/auth'
@@ -26,7 +25,6 @@ const columns = [
       </Text>
     )
   },
-  { field: 'status', render: StatusColumn },
   {
     field: 'score',
     render: ({ value }) => (
@@ -35,14 +33,6 @@ const columns = [
       </Text>
     )
   },
-  {
-    field: 'id',
-    render: ({ value }) => (
-      <Link to={`/admin/mobilizations/${value}`}>
-        <Icon name='angle-right' />
-      </Link>
-    )
-  }
 ]
 
 const MobilizationList = ({
