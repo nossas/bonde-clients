@@ -30,14 +30,16 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
     </FooterContent>
   </div>
 ))`{
-  position: absolute;
+  ${props => props.fixed && `
+    position: absolute;
+    bottom: 0;
+  `}
   display: flex;
   align-items: center;
   height: 94px;
   background: #000;
   padding: 0 150px;
   overflow: hidden;
-  bottom: 0;
   width: 100%;
 }`
 

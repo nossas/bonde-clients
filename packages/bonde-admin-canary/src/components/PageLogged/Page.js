@@ -10,6 +10,7 @@ const Page =  ({
   renderTabs,
   wrapperHeaderComponent: WrapperHeader,
   bgColor,
+  fixedFooter,
   ...pageProps
 }) => {
   const headerNode = (
@@ -29,7 +30,7 @@ const Page =  ({
       ) : headerNode}
 
       <Content {...pageProps}>{children}</Content>
-      <Footer />
+      <Footer fixed={fixedFooter} />
     </div>
   )
 }

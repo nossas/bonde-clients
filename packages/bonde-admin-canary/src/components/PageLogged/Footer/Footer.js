@@ -5,8 +5,8 @@ import {
 } from 'bonde-styleguide'
 import HelpButton from './HelpButton'
 
-const Footer = ({ t }) => (
-  <FooterStyled>
+const Footer = ({ t, fixed }) => (
+  <FooterStyled fixed={fixed}>
     <Flexbox horizontal spacing='between'>
       <Flexbox middle>
         <a

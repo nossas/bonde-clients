@@ -11,7 +11,7 @@ class Tags extends React.Component {
     if (user.tags && user.tags.length > 0) return <Redirect to='/admin' />
 
     return (
-      <Page bgColor='#FFFFFF'>
+      <Page fixedFooter>
         <Flexbox vertical middle padding='0 26.6%'>
           <Title.H2 margin={{ bottom: 25 }} fontSize={44}>
             {`${t('greetings')}, ${user.firstName}!`}
