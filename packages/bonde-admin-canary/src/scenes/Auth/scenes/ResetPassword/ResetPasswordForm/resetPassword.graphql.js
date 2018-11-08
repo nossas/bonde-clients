@@ -9,6 +9,9 @@ mutation ResetPassword (
     newPassword:$newPassword,
     token:$token
   }) {
-    jwtToken
+    changePasswordField {
+      userFirstName,
+      token
+    }
   }
 }`

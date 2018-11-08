@@ -12,6 +12,9 @@
     "communities": {
       "title": "My Communities"
     },
+    "mobilizations": {
+      "title": "My Mobilizations"
+    },
     "trendingMobilizations": {
       "title": "Causing around",
       "filtersAdornment": "Mobilizations",
@@ -48,5 +51,9 @@
         "description": "Access the latest mobilizations related to the causes you support and help other communities make a difference!"
       }
     }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }

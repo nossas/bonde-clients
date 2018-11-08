@@ -1,8 +1,4 @@
-import cookie from 'react-cookie'
 import * as t from '../action-types'
-
-// Dependency module
-import * as authT from '~client/account/redux/action-types'
 
 export const initialState = {
   loading: false,
@@ -40,16 +36,6 @@ export default (state = initialState, action = {}) => {
         data: [...state.data, action.community]
       }
     case t.EDIT:
-      // state saved on storages to hydrate
-      const hydrateState = {
-        list: {
-          currentId: action.community.id,
-          data: [action.community]
-        }
-      }
-      window.localStorage.setItem('community', JSON.stringify(hydrateState))
-      cookie.save('community', hydrateState)
-
       return {
         ...state,
         data: state.data.map(
@@ -63,10 +49,13 @@ export default (state = initialState, action = {}) => {
         ...state,
         currentId: null
       }
-    case authT.LOGOUT_SUCCESS:
-      // reset info to make redirect correctly
-      return initialState
-
+    case t.REHYDRATE:
+      return {
+        ...initialState,
+        isLoaded: true,
+        data: [action.payload],
+        currentId: action.payload.id
+      }
     case t.ASYNC_INVITE_REQUEST:
       return { ...state }
     case t.ASYNC_INVITE_SUCCESS:

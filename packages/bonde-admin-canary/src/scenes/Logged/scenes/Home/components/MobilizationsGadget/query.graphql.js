@@ -8,7 +8,15 @@ query MobilizationsGadget ($offset: Int, $limit: Int, $orderBy: [UserMobilizatio
       name
       status
       community {
+        id
         name
+        city
+        description
+        image
+        createdAt
+        updatedAt
+        fbLink
+        twitterLink
       }
       score
       image: facebookShareImage

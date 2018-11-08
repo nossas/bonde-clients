@@ -3,7 +3,8 @@ import { I18n } from 'react-i18next'
 import {
   Flexbox,
   IconColorful,
-  Title
+  Title,
+  Text
 } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 
@@ -17,9 +18,18 @@ export default () => (
           <div>
             <IconColorful name='mobilization' size={80} />
           </div>
-          <Title.H2 margin={{ y: 20 }}>{t('forgetPassword.successfully.title')}</Title.H2>
-          <Title.H4 margin={spacing}>{t('forgetPassword.successfully.checkEmail')}</Title.H4>
-          <Title.H4 margin={spacing}>{t('forgetPassword.successfully.checkSpam')}</Title.H4>
+          <Title.H2 margin={{ y: 20 }}>
+            {t('forgetPassword.successfully.title')}
+          </Title.H2>
+          <Text margin={spacing}>
+            {t('forgetPassword.successfully.checkEmail')}
+          </Text>
+          <Text margin={spacing}>
+            {t('forgetPassword.successfully.checkSpam')}
+          </Text>
+          <Text margin={spacing}>
+            {t('forgetPassword.successfully.checkExpiry')}
+          </Text>
           <ButtonLink to='/auth/login'>{t('forgetPassword.goback')}</ButtonLink>
         </Flexbox>
       )

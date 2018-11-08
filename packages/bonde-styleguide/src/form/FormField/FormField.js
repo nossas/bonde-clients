@@ -16,8 +16,22 @@ const FormField = ({
   meta: { error, valid, touched, dirty },
   inputComponent: InputComponent,
   input,
+  showValid,
   ...props
 }) => {
+
+  const adornmentProps = {}
+  let showAdornment = false
+  if (touched) {
+    if (!!error) {
+      adornmentProps.invalid = true
+      showAdornment = true
+    } else if (valid && showValid) {
+      adornmentProps.valid = true
+      showAdornment = true
+    }
+  }
+
   return (
     <div style={{ padding: '0 0 17px' }}>
       <Flexbox horizontal>
@@ -32,15 +46,11 @@ const FormField = ({
           valid={touched && valid}
           placeholder={placeholder}
           touched={touched}
+          showValid={showValid}
           {...input}
           {...props}
         />
-        {(touched && (!!error || valid)) && (
-          <InputAdornment
-            invalid={!!error}
-            valid={valid}
-          />
-        )}
+        {showAdornment && (<InputAdornment {...adornmentProps} />)}
       </Flexbox>
     </div>
   )
@@ -61,11 +71,14 @@ FormField.propTypes = {
   /** Hint text. */
   hint: PropTypes.string,
   /** Placeholder text. */
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  /** Show valid theme in input when finish validation */
+  showValid: PropTypes.bool
 }
 
 FormField.defaultProps = {
-  meta: {}
+  meta: {},
+  showValid: true
 }
 
 FormField.displayName = 'FormField'

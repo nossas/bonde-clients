@@ -34,6 +34,7 @@ test('render avatar in dropdown header', t => {
   t.is(node.find(DropdownHeader).find('span').text(), name)
 })
 
+/*
 test('render a profile menu', t => {
   const { node } = t.context
   const i18nKey = 'dropdown.items.profile'
@@ -46,6 +47,7 @@ test('render a profile menu', t => {
   t.is(item.props().component, Link)
   t.is(item.props().to, '/admin/profile')
 })
+*/
 
 test('render a logout menu', t => {
   const { node } = t.context
@@ -54,7 +56,7 @@ test('render a logout menu', t => {
   const logout = () => 'logout'
   node.setProps({ t: i18n, logout })
 
-  const item = node.find(DropdownItem).at(1)
+  const item = node.find(DropdownItem).at(0)
   t.is(item.find(Icon).props().name, 'times')
   t.is(item.props().children[1], i18nKey)
   t.is(item.props().onClick(), 'logout')

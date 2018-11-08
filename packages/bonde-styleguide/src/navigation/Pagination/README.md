@@ -1,21 +1,21 @@
 ### Pagination - default
 
 ```js
-<Pagination />
+<Pagination onChangePage={i => i} />
 ```
 
 
 ### Pagination - `pages`
 
 ```js
-<Pagination pages={10} />
+<Pagination onChangePage={i => i} pages={10} />
 ```
 
 
-### Pagination - `activeIndex`
+### Pagination - `pageIndex`
 
 ```js
-<Pagination pages={5} activeIndex={4} />
+<Pagination onChangePage={i => i} pages={5} pageIndex={4} />
 ```
 
 
@@ -24,11 +24,7 @@
 ```js
 <Pagination
   pages={6}
-  onClickFirst={index => alert(`onClickFirst[${index}]`)}
-  onClickPrev={index => alert(`onClickPrev[${index}]`)}
-  onClickNext={index => alert(`onClickNext[${index}]`)}
-  onClickLast={index => alert(`onClickLast[${index}]`)}
-  onClickItem={index => alert(`onClickItem[${index}]`)}
+  onChangePage={index => alert(`onChangePage[${index}]`)}
 />
 ```
 
@@ -37,8 +33,9 @@
 
 ```js
 <Pagination
+  onChangePage={i => i}
   pages={5}
-  activeIndex={2}
+  pageIndex={2}
   textPrev='précédent'
   textNext='prochain'
   iconFirst='star'

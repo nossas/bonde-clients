@@ -14,12 +14,14 @@ const DialogTooltip = ({
   total,
   onNext,
   onClose,
-  placement
+  placement,
+  margin
 }) => (
   <Tooltip
     onClose={onClose}
     width={width}
     minHeight={minHeight}
+    margin={margin}
     Content={() => (
       <React.Fragment>
         <Header title={title} description={description} />

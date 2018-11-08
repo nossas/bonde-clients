@@ -13,24 +13,32 @@ const TableCardGadget = ({
   emptyText,
   renderFilter,
   renderPagination,
-  HeaderComponent
-}) => (
-  <Gadget
-    title={title}
-    renderFilter={renderFilter}
-    WrapperComponent={({ children }) => (
-      <Card height='275px'>
-        {children}
-      </Card>
-    )}
-  >
-    <Flexbox vertical> 
-      {loading ? <p>Loading...</p> : ( 
+  HeaderComponent,
+  pageIndex,
+  pageTotal,
+  onClickRow
+}) => {
+  const showPagination = !!(
+    pageIndex !== undefined && pageTotal && pageTotal > 1 && renderPagination
+  )
+
+  return (
+    <Gadget
+      title={title}
+      renderFilter={renderFilter}
+      WrapperComponent={({ children }) => (
+        <Card height='275px'>
+          {children}
+        </Card>
+      )}
+    >
+      <Flexbox vertical>
         <Table
           border={border}
           data={data}
           columns={columns}
-          margin={renderPagination ? { bottom: 25 } : undefined}
+          borderBottom={showPagination}
+          onClickRow={onClickRow}
           HeaderComponent={HeaderComponent}
           EmptyComponent={() => (
             <ListEmpty
@@ -39,21 +47,14 @@ const TableCardGadget = ({
             />
           )}
         /> 
-      )}
-      {renderPagination && (
-        <div
-          style={{
-            textAlign: 'right',
-            position: 'absolute',
-            bottom: '-7px',
-            right: 0
-          }}
-        >
-          {renderPagination()}
-        </div>
-      )}
-    </Flexbox>
-  </Gadget>
-)
+        {showPagination && renderPagination()}
+      </Flexbox>
+    </Gadget>
+  )
+}
+
+TableCardGadget.defaultProps = {
+  data: []
+}
 
 export default TableCardGadget

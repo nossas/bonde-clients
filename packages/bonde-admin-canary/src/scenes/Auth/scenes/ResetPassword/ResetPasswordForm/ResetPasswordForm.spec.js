@@ -1,9 +1,9 @@
 import test from 'ava'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Button, Title } from 'bonde-styleguide'
+import { Title } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
-import { FormGraphQL } from 'components/Form'
+import { FormGraphQL, SubmitButton } from 'components/Form'
 import { PasswordField } from '../../components'
 import ResetPasswordForm from './ResetPasswordForm'
 import resetPassword from './resetPassword.graphql'
@@ -56,10 +56,10 @@ test('should use token and newPassword on submit mutation', t => {
 
 test('should render a submit button', t => {
   const { node } = t.context
-  const submitButtonProps = node.find(Button).props()
+  const submitButton = node.find(SubmitButton)
   
-  t.is(submitButtonProps.type, 'submit')
-  t.is(submitButtonProps.children, 'resetPassword.form.submit')
+  t.is(submitButton.length, 1)
+  t.is(submitButton.props().children, 'resetPassword.form.submit')
 })
 
 test('should call handleSuccess when mutation done', t => {

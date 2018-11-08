@@ -1,4 +1,7 @@
 node_modules
+packages/bonde-admin-canary/build/
 .DS_Store
 *debug.log
 .env
+.env.local
+.docz

@@ -166,6 +166,7 @@ export DSN_DEST=postgres://postgres:3x4mpl3@localhost:5432/bonde
 ```
 
 ## Links
+- [How to contribute](CONTRIBUTING.md)
 - [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/888220)
 - [Invision](https://projects.invisionapp.com/share/763UO3YDT#/screens)
 - [Zeplin](https://app.zeplin.io/project.html#pid=55d1d57e14a5317a0e909551)

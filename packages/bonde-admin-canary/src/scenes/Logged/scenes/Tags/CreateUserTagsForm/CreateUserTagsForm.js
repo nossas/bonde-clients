@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Icon, Flexbox2 as Flexbox } from 'bonde-styleguide'
+import { Button, Flexbox2 as Flexbox } from 'bonde-styleguide'
 import { Field, FormGraphQL } from 'components/Form'
 import UserTagsField from './UserTagsField'
 import CreateUserTags from './createUserTags.graphql'
@@ -20,11 +20,7 @@ const CreateUserTagsForm = ({ t, user }) => {
     >
       <Field name='tags' component={UserTagsField} />
 
-      <Flexbox horizontal spacing='between' margin={{ top: 55 }}>
-        <Button flat title={t('buttons.addTag')}>
-          <Icon name='plus' size={7} />
-          {t('buttons.addTag')}
-        </Button>
+      <Flexbox horizontal end margin={{ top: 55 }}>
         <Button
           type='submit'
           title={t('buttons.submit')}

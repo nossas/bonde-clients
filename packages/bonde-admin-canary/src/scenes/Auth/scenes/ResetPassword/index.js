@@ -27,11 +27,16 @@ export default ({ match }) => (
             t={t}
             token={token}
             handleSuccess={({ data }) => {
+              const { changePasswordField } = data.resetPasswordChangePassword
+              const user = { name: changePasswordField.userFirstName }
+              
               AuthAPI.login({
-                jwtToken: data.resetPasswordChangePassword.jwtToken
+                jwtToken: changePasswordField.token
               })
               .then(() => {
-                notify(t('resetPassword.success'))
+                notify(t('resetPassword.success', { user }))
+                // should redirect with window to rehydrate session
+                window.location.href = '/'
               })
             }}
           />

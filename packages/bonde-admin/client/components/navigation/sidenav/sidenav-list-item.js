@@ -5,12 +5,12 @@ import classnames from 'classnames'
 
 class SidenavListItem extends Component {
   render () {
-    const { text, icon, linkType, children, className, href, target, style } = this.props
+    const { text, icon, linkType, children, className, href, target, onClick, style } = this.props
     const { customIcon, customContent } = this.props
 
     const elementTypes = {
       router: { component: Link, props: { to: href } },
-      anchor: { component: 'a', props: { href, target } }
+      anchor: { component: 'a', props: { href, target, onClick } }
     }
     const current = elementTypes[linkType]
     const Component = current.component

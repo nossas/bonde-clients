@@ -5,6 +5,8 @@ const TableCell = styled.div`{
   padding: 13px 15px 14px 15px;
   vertical-align: middle;
   text-align: inherit;
+
+  ${props => props.width && `width: ${props.width};`}
 }`
 
 TableCell.displayName = 'TableCell'

@@ -32,23 +32,36 @@ const ReactTable = ({
   columns,
   border,
   margin,
+  borderBottom,
   ColumnComponent,
   HeaderComponent,
   EmptyComponent,
-  FooterComponent
+  FooterComponent,
+  onClickRow
 }) => {
 
   const empty = data.length === 0
 
   return !empty ? (
-    <Scrollbox margin={margin}>
+    <Scrollbox margin={margin} borderBottom={borderBottom}>
       <Table>
         {HeaderComponent && <HeaderComponent columns={columns} />}
         <TableBody>
           {data.map(row => (
-            <TableRow border={border} key={Math.random()}>
+            <TableRow
+              border={border}
+              key={Math.random()}
+              onClick={(
+                onClickRow
+                  ? () => onClickRow(row)
+                  : undefined
+              )}
+            >
             {columns.map(col => (
-              <ColumnComponent key={Math.random()}>
+              <ColumnComponent
+                key={Math.random()}
+                {...col.props}
+              >
                 {col.render
                   ? col.render({ value: row[col.field], row })
                   : row[col.field]}
@@ -65,6 +78,8 @@ const ReactTable = ({
 ReactTable.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array.isRequired,
+  /* A function that receive data row */
+  onClickRow: PropTypes.func.isRequired,
   ColumnComponent: PropTypes.any,
   EmptyComponent: PropTypes.any,
   HeaderComponent: PropTypes.any

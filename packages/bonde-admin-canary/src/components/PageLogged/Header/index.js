@@ -15,35 +15,33 @@ import Title from './Title'
 import UserDropdown from './UserDropdown'
 
 const Bonde = () => (
-  <a href='http://bonde.org' title='Bonde.org'>
-    <Spacing margin={{ right: 15 }}>
-      <Icon name='bonde' size={20} />
-    </Spacing>
-  </a>
+  <Spacing margin={{ right: 15 }}>
+    <Icon name='bonde' size={20} />
+  </Spacing>
 )
 
 const Header = ({
   renderTitle,
-  renderLeftDropdown,
   renderActionButtons,
   renderTabs
 }) => (
-  <HeaderStyleguide>
-    <Spacing margin={{ bottom: 16 }}>
-      <Navbar renderBrand={Bonde}>
-        <Flexbox horizontal spacing='between'>
-          {renderLeftDropdown ? renderLeftDropdown() : <div />}
-          <UserDropdown />
-        </Flexbox>
-      </Navbar>
-    </Spacing>
-
-    <Navbar>
+  <HeaderStyleguide> 
+    <Navbar renderBrand={Bonde}>
       <Flexbox horizontal spacing='between'>
         {renderTitle ? renderTitle() : <div />}
-        {renderActionButtons ? renderActionButtons() : <div />}
+        <UserDropdown />
       </Flexbox>
     </Navbar>
+
+    {renderActionButtons && (
+      <Spacing margin={{ top: 16 }}>
+        <Navbar>
+          <Flexbox horizontal end>
+            {renderActionButtons()}
+          </Flexbox>
+        </Navbar>
+      </Spacing>
+    )}
 
     {renderTabs && (
       <Spacing margin={{ bottom: -22 }}>
@@ -59,7 +57,6 @@ const { func } = PropTypes
 
 Header.propTypes = {
   renderTitle: func,
-  renderLeftDropdown: func,
   renderActionButtons: func,
   renderTabs: func
 }

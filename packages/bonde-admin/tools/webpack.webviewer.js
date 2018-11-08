@@ -113,7 +113,7 @@ module.exports = {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin({filename: '[name].[hash].css', allChunks: true}),
+    new ExtractTextPlugin({filename: '[name].css', allChunks: true}),
     // new AssetsPlugin({ filename: './build/assets.json' }),
     // new webpack.HashedModuleIdsPlugin(),
     // new webpack.optimize.OccurrenceOrderPlugin(),
@@ -145,6 +145,10 @@ module.exports = {
     // }),
     new Visualizer({
       filename: './build/webviewer.stats.html'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ],
 

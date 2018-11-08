@@ -19,7 +19,7 @@ import {
   Mobilization as MobilizationApp,
   Reducer as MobilizationRedux
 } from '../webviewer/webviewer'
-import styles from './../webviewer/main.dba55199cd8fb7024923.css'
+import styles from './../webviewer/main.css'
 
 class Page extends React.Component {
   static async getInitialProps ({ store, req, res }) {

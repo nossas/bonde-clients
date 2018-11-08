@@ -38,28 +38,28 @@
     "skip": "Pular tour",
     "next": "Próxima parada",
     "restart": "Rever tour",
-    "finish": "Finalizar tour",
+    "finish": "Valeu!",
     "steps": {
       "1": {
-        "title": "Gerencie seu BONDE por aqui",
-        "description": "Aqui em cima você confere em que página está e navega entre as principais sessões das suas comunidades e mobilizações."
+        "title": "Esse é o seu BONDE.",
+        "description": "Aqui na Home você acessa suas comunidades e mobilizações com um clique."
       },
       "2": {
-        "title": "Fique de olho nesse cantinho",
-        "description": "Seu perfil, suas notificações e as principais ações sempre ficam por aqui."
+        "title": "Acesse suas comunidades",
+        "description": "Você pode ordenar pelas mais recentes ou por ordem alfabética."
       },
       "3": {
-        "title": "Acesse suas comunidades",
-        "description": "A comunidade é um grupo que se une por uma causa. A partir dela você pode criar mobilizações e convidar outras pessoas pra chegar junto."
+        "title": "Suas mobilizações em um clique",
+        "description": "Agora você pode acessar as mobilizações recentes da sua comunidade direto da home."
       },
       "4": {
-        "title": "Crie mobilizações pra causar",
-        "description": "É através das mobilizações que você vai gerar um impacto. Aqui você pode ver as mobs das suas comunidades e acessá-las com um clique."
-      },
-      "5": {
-        "title": "Apoie as causas que acredita",
-        "description": "Acesse as mobilizações mais recentes relacionadas às causas que você apoia e ajude outras comunidades a fazerem a diferença!"
+        "title": "Se inspire e apoie outras causas",
+        "description": "Veja as mobilizações que estão causando por aí, se inspire e apoie as causas em que acredita."
       }
     }
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Próximo"
   }
 }

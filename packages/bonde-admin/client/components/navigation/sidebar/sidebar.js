@@ -6,6 +6,7 @@ import * as paths from '~client/paths'
 import * as mobilizationUtils from '~client/mobilizations/utils'
 import { Loading } from '~client/components/await'
 import { Sidenav, SidenavList, SidenavListItem } from '~client/components/navigation/sidenav'
+import crossStorage from '~client/cross-storage-client'
 
 const Sidebar = ({ children, loading, mobilization, user, community }) => loading ? <Loading /> : (
   <div className='top-0 right-0 bottom-0 left-0 flex flex-column absolute'>
@@ -146,7 +147,21 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
           }
           icon='sign-out'
           className='caps'
-          href={paths.logout()}
+          linkType='anchor'
+          href='#'
+          onClick={(e) => {
+            e.preventDefault()
+            crossStorage
+              .onConnect()
+              .then(() => {
+                crossStorage
+                  .del('auth', 'community')
+                  .then(() => {
+                    const loginUrl = process.env.LOGIN_URL || 'http://admin-canary.bonde.devel:5002/auth/login'
+                    window.location.href = loginUrl
+                  })
+              })
+          }}
         />
       </SidenavList>
     </Sidenav>

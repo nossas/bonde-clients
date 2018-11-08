@@ -17,12 +17,22 @@ const TrendingMobilizationsGadget = ({ filter, onChangeFilter, mobilizations, lo
       {loading ? <Loading /> : mobilizations.map(mobilization => {
         return (
           <React.Fragment key={Math.random()}>
-            <Cell size={[3, 3]}>
+            <Cell size={[3, 3, 6, 12, 12, 12]}>
               <Panel
                 image={mobilization.facebookShareImage}
                 title={mobilization.name}
                 description={mobilization.goal}
                 author={mobilization.community.name}
+                onClick={() => {
+                  if (mobilization.customDomain) {
+                    const url = new URL(`http://${mobilization.customDomain}`)
+                    window.open(url, '_blank')
+                  } else {
+                    const domain = process.env.REACT_APP_PUBLIC_DOMAIN || 'bonde.devel:5003'
+                    const url = new URL(`http://${mobilization.slug}.${domain}`)
+                    window.open(url, '_blank')
+                  }
+                }}
               />
             </Cell>
           </React.Fragment>

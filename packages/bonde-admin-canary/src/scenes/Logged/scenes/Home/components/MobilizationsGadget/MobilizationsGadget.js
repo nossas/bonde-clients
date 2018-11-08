@@ -1,14 +1,14 @@
 import React from 'react'
-import { Icon, Link, Text, Pagination } from 'bonde-styleguide'
+import { Text, Pagination } from 'bonde-styleguide'
 import { Queryset } from 'components'
 import ImageColumn from '../ImageColumn'
 import TableCardGadget from '../TableCardGadget'
-import StatusColumn from './StatusColumn'
 import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
+import { authSession } from 'services/auth'
 
 const columns = [
-  { field: 'image', render: ImageColumn },
+  { field: 'image', render: ImageColumn, props: { width: '40px' } },
   {
     field: 'name',
     render: ({ value }) => (
@@ -25,7 +25,6 @@ const columns = [
       </Text>
     )
   },
-  { field: 'status', render: StatusColumn },
   {
     field: 'score',
     render: ({ value }) => (
@@ -34,14 +33,6 @@ const columns = [
       </Text>
     )
   },
-  {
-    field: 'id',
-    render: ({ value }) => (
-      <Link to={`/admin/mobilizations/${value}`}>
-        <Icon name='angle-right' />
-      </Link>
-    )
-  }
 ]
 
 const MobilizationList = ({
@@ -50,7 +41,7 @@ const MobilizationList = ({
   mobilizations,
   filter,
   onChangeFilter,
-  page,
+  pageIndex,
   onChangePage,
   pageTotal
 }) => (
@@ -63,30 +54,37 @@ const MobilizationList = ({
     emptyIcon='mobilization'
     emptyText={t('gadgets.mobilizations.emptyText')}
     renderFilter={() => <Filter filter={filter} onChange={onChangeFilter} />}
-    renderPagination={() => pageTotal ? (
+    pageIndex={pageIndex}
+    pageTotal={pageTotal}
+    onClickRow={row => {
+      authSession
+        .setAsyncItem('community', row.community)
+        .then(() => {
+          const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
+          window.open(`${baseUrl}/mobilizations/${row.id}/edit`, '_self')
+        })
+    }}
+    renderPagination={() => (
       <Pagination
-        page={page}
+        pageIndex={pageIndex}
         pages={pageTotal}
-        onClickFirst={() => onChangePage(1)}
-        onClickNext={() => onChangePage(page + 1)}
-        onClickPrev={() => onChangePage(page - 1)}
-        onClickItem={(index) => onChangePage(index + 1)}
-        onClickLast={() => onChangePage(pageTotal)}
+        onChangePage={onChangePage}
+        textPrev={t('pagination.previous')}
+        textNext={t('pagination.next')}
       />
-    ) : null}
+    )}
   />
 )
 
 const MobilizationsGadgetQueryset = ({ t }) => {
-  const limit = 50
+  const limit = 20
   return (
     <Queryset
-      observable
       query={allUserMobilizationsQuery}
       limit={limit}
       filter={{ orderBy: 'UPDATED_AT_DESC' }}
     >
-      {({ loading, data, filter, onChangeFilter, page, onChangePage }) => {
+      {({ loading, data, filter, onChangeFilter, pageIndex, onChangePage }) => {
 
         const pageTotal = data && data.allUserMobilizations
           ? Math.ceil(data.allUserMobilizations.totalCount / limit)
@@ -97,7 +95,7 @@ const MobilizationsGadgetQueryset = ({ t }) => {
             t={t}
             filter={filter}
             onChangeFilter={onChangeFilter}
-            page={page}
+            pageIndex={pageIndex}
             onChangePage={onChangePage}
             loading={loading}
             mobilizations={data && data.allUserMobilizations ? data.allUserMobilizations.nodes : []}
