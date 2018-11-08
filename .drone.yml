@@ -18,13 +18,13 @@ pipeline:
       - API_URL=https://api-v1.staging.bonde.org
       - BOT_URL=https://beta.staging.bonde.org
       - CROSS_STORAGE_URL=https://cross-storage.staging.bonde.org
-      - LOGIN_URL=http://admin-canary.staging.bonde.org/auth/login
+      - LOGIN_URL=https://admin-canary.staging.bonde.org/auth/login
       - GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
       - APP_DOMAIN=staging.bonde.org
       - AWS_BUCKET=bonde-assets-staging
       - REACT_APP_GRAPHQL_URL=https://api-v2.staging.bonde.org/graphql
-      - REACT_APP_DOMAIN=http://admin-canary.staging.bonde.org
-      - REACT_APP_ADMIN_URL=http://app.staging.bonde.org
+      - REACT_APP_DOMAIN=https://admin-canary.staging.bonde.org
+      - REACT_APP_ADMIN_URL=https://app.staging.bonde.org
       - REACT_APP_PUBLIC_DOMAIN=staging.bonde.org
       - REACT_APP_CROSS_STORAGE_URL=https://cross-storage.staging.bonde.org
     commands:
@@ -144,14 +144,14 @@ pipeline:
       - API_URL=https://api-v1.bonde.org
       - BOT_URL=https://beta.bonde.org
       - CROSS_STORAGE_URL=https://cross-storage.bonde.org
-      - LOGIN_URL=http://admin-canary.bonde.org/auth/login
+      - LOGIN_URL=https://admin-canary.bonde.org/auth/login
       - GRAPHQL_URL=https://api-v2.bonde.org/graphql
       - APP_DOMAIN=bonde.org
       - AWS_BUCKET=bonde-assets
       - REACT_APP_GRAPHQL_URL=https://api-v2.bonde.org/graphql
-      - REACT_APP_DOMAIN=http://admin-canary.bonde.org
-      - REACT_APP_ADMIN_URL=http://app.bonde.org
-      - REACT_APP_PUBLIC_DOMAIN.bonde.org
+      - REACT_APP_DOMAIN=https://admin-canary.bonde.org
+      - REACT_APP_ADMIN_URL=https://app.bonde.org
+      - REACT_APP_PUBLIC_DOMAIN=bonde.org
       - REACT_APP_CROSS_STORAGE_URL=https://cross-storage.bonde.org
     commands:
       - export PAGARME_KEY=$PROD_PAGARME_KEY
