@@ -8,6 +8,7 @@ pipeline:
       - yarn
       - yarn lerna bootstrap
       - yarn lerna run test
+      - yarn lerna run coverage
     when:
       event: [push, tag]
 
@@ -28,9 +29,23 @@ pipeline:
       - export REACT_APP_SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
       - yarn lerna run build
     secrets: [ stag_pagarme_key, stag_sentry_dsn_public ]
+    group: build
     when:
       status: success
       branch: [hotfix/*, release/*, feature/*, support/*, develop]
+
+  codecov:
+    image: plugins/codecov
+    secrets: [ codecov_token ]
+    group: build
+    paths:
+      - packages/bonde-admin/coverage
+      - packages/bonde-admin-canary/coverage
+      - packages/bonde-public/coverage
+      - packages/bonde-styleguide/coverage
+    when:
+      status: success
+      event: [push, tag]
 
   publish-public:
     image: plugins/docker

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next -p 5003",
     "start": "next start -p 5001",
-    "build": "rm -rf .next && next build",
+    "prepare": "rm -rf .next",
+    "build": "next build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],

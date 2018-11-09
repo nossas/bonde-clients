@@ -87,11 +87,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "coverage": "yarn test -- --coverage",
     "build:webviewer": "webpack --colors --hide-modules --bail --config ./tools/webpack.webviewer.js",
     "release": "standard-version",
     "storybook": "start-storybook -p 9001 -c ./src/storybook",
     "preinstall": "rm -f node_modules/@",
     "postinstall": "ln -s `pwd`/src node_modules/@"
+  },
+  "jest": {
+    "coverageReporters": ["lcov", "text-summary"]
   },
   "eslintConfig": {
     "extends": "react-app"
