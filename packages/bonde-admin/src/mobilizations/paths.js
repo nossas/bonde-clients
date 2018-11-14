@@ -1,5 +1,5 @@
 export const mobilizations = () => '/mobilizations'
-export const mobilization = (mobilization, domain = process.env.REACT_APP_DOMAIN_ADMIN) => {
+export const mobilization = (mobilization, domain = process.env.REACT_APP_DOMAIN_PUBLIC) => {
   if (domain && domain.indexOf('staging') !== -1) {
     return `http://${mobilization.slug}.${domain}`
   }
