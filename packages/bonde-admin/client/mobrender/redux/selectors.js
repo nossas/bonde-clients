@@ -46,7 +46,11 @@ export default (state, props) => ({
 
   getBlockLastPosition: () => {
     const { blocks: { data } } = state.mobilizations
-    return data.length
+    const orderBy = (a, b) => a.position - b.position
+    const lastIndex = data.length - 1
+    return data.length > 0
+      ? data.sort(orderBy)[lastIndex].position
+      : 1
   },
 
   blocksIsLoaded: () => {
