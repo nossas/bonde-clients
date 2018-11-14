@@ -1,14 +1,16 @@
 require('dotenv').config()
 
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const webpack = require('webpack')
-const { ANALYZE, APP_DOMAIN, NODE_ENV } = process.env
+const { ANALYZE, REACT_APP_DOMAIN_PUBLIC, NODE_ENV } = process.env
 const isProd = NODE_ENV === 'production'
 
 module.exports = {
-  assetPrefix: isProd ? `https://static.${APP_DOMAIN}` : '',
+  assetPrefix: isProd ? `https://static.${REACT_APP_DOMAIN_PUBLIC}` : '',
   webpack: (config, { dev }) => {
-    config.output.publicPath = isProd ? `https://static.${APP_DOMAIN}${config.output.publicPath}` : config.output.publicPath;
+    config.output.publicPath = isProd ? `https://static.${REACT_APP_DOMAIN_PUBLIC}${config.output.publicPath}` : config.output.publicPath;
 
     if (ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({
@@ -19,16 +21,21 @@ module.exports = {
     }
 
     config.plugins.push(new webpack.EnvironmentPlugin({
-      API_URL: JSON.stringify(process.env.API_URL),
-      GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
-      APP_DOMAIN: JSON.stringify(process.env.APP_DOMAIN),
-      PAGARME_KEY: JSON.stringify(process.env.PAGARME_KEY),
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }))
 
     config.plugins.push(new webpack.ProvidePlugin({
       'window.jQuery': 'jquery'
     }))
+
+    config.plugins = [
+      ...config.plugins,
+
+      new Dotenv({
+        path: path.join(__dirname, '.env'),
+        systemvars: true
+      })
+    ]
 
     config.module.rules.push(
       {

@@ -5412,7 +5412,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
             win = null;
         });
     });
-    
+
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
@@ -5821,9 +5821,9 @@ const config = {
   nodeEnv: "production",
   webConcurrency: process.env.WEB_CONCURRENCY || 1,
   port: process.env.PORT || 1337,
-  apiUrl: process.env.API_URL || 'http://localhost:3000',
-  graphqlUrl: process.env.GRAPHQL_URL || 'http://localhost:3003/graphql',
-  appDomain: process.env.APP_DOMAIN || 'localhost',
+  apiUrl: process.env.REACT_APP_DOMAIN_API_REST || 'http://localhost:3000',
+  graphqlUrl: process.env.REACT_APP_DOMINA_API_GRAPHQL || 'http://localhost:3003/graphql',
+  appDomain: process.env.REACT_APP_DOMAIN_PUBLIC || 'localhost',
   timeout: 120000,
   defaultLocale: process.env.DEFAULT_LOCALE || 'pt-BR',
   locales: ['pt-BR', 'en', 'es']
@@ -15950,7 +15950,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         var mainColor = widget.settings.main_color ? widget.settings.main_color : '#43a2cc';
 
         var checkout = new PagarMeCheckout.Checkout({
-          encryption_key: process.env.PAGARME_KEY || 'setup env var',
+          encryption_key: process.env.REACT_APP_PAGARME_KEY || 'setup env var',
           success: function success(data) {
             data.subscription = paymentType === 'users_choice' ? selectedPaymentType !== 'unique' : data.subscription = paymentType !== 'unique';
 
