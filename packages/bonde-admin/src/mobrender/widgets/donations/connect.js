@@ -13,7 +13,8 @@ export const donationForm = ModelForm({
     'goal', 'goal_date_limit',
     'default_donation_value', 'donation_value1', 'donation_value2',
     'donation_value3', 'donation_value4', 'donation_value5',
-    'recurring_period', 'payment_type', 'payment_methods'
+    'recurring_period', 'payment_type', 'payment_methods',
+    'external_resource'
   ],
   mapInitialValues: (widget) => ({
     goal: widget.goal ? formatNumberHelper.integer(widget.goal) : undefined,

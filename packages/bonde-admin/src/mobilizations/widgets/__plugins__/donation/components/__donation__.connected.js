@@ -91,5 +91,8 @@ const mapDispatchToProps = dispatch => ({
 export default graphql(
   graphqlQueries.fetchDonationGoalStats, {
     name: 'donationGoalStats',
-    options: props => ({ variables: { widgetId: props.widget.id } })
+    options: props => ({
+      variables: { widgetId: props.widget.id },
+      fetchPolicy: 'network-only'
+    })
   })(connect(mapStateToProps, mapDispatchToProps)(injectIntl(Donation)))

@@ -47,5 +47,8 @@ describe('@/mobrender/redux/action-creators/async-add-block', () => {
         expect(store.getActions()[1]).to.deep.equal(expectedActions[1])
         expect(store.getActions()[2]).to.deep.equal(expectedActions[2])
       })
+      .catch((err, res) => {
+        console.log('err', err)
+      })
   })
 })
