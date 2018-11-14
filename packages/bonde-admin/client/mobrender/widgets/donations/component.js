@@ -27,7 +27,8 @@ const DonationSettingsPage = props => {
       payment_methods: paymentMethods,
       payment_type: paymentType,
       goal_date_limit: goalDateLimit,
-      goal
+      goal,
+      external_resource: externalResource
     },
     intl,
     ...formProps
@@ -168,7 +169,24 @@ const DonationSettingsPage = props => {
           />
         </FormGroup>
       </div>
-
+      <FormGroup controlId='external-resource' {...externalResource}>
+        <ControlLabel>
+          <FormattedMessage
+            id='page--donation-widget.form.external-resource.label'
+            defaultMessage='Recurso externo'
+          />
+        </ControlLabel>
+        <HelpBlock>
+          <FormattedMessage
+            id='page--donation-widget.form.external-resource.helper-text'
+            defaultMessage={
+              'Caso você esteja arrecadando para esta campanha por outro canal, pode adicionar o ' +
+              'valor arrecadado por fora aqui. Assim, vamos contabilizá-lo na barra de progresso'
+            }
+          />
+        </HelpBlock>
+        <FormControl type='number' />
+      </FormGroup>
       <FormGroup controlId='default-donation-value' {...defaultDonationValue}>
         <ControlLabel>
           <FormattedMessage
