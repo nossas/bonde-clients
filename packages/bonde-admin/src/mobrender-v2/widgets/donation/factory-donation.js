@@ -131,7 +131,7 @@ export default ({
                 defaultMessage={`
                   {totalDonations} {totalDonations, plural,
                     one {apoio}
-                    other {apoio}
+                    other {apoios}
                   }
                 `}
                 values={{ totalDonations: goalStats.total_donations }}

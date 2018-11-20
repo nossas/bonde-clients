@@ -1123,7 +1123,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.components--donation.progress-bar.supports': `
     {totalDonations} {totalDonations, plural,
       one {apoio}
-      other {apoio}
+      other {apoios}
     }
   `,
   'widgets.components--donation.progress-bar.goal': 'Meta:',
