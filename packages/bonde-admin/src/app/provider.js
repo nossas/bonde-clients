@@ -25,8 +25,9 @@ class Application extends React.Component {
 
   componentDidMount () {
     const { location: { pathname } } = window
+    const publicPaths = [/\/register\/?/, /\/subscriptions\/\d+\/edit\/?/]
 
-    if (!/\/subscriptions\/\d+\/edit\/?/.test(pathname)) {
+    if (!publicPaths.some(pathRegex => pathRegex.test(pathname))) {
       crossStorage.onConnect()
         .then(() => {
           return crossStorage.get('auth', 'community')
