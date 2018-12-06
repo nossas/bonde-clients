@@ -24,44 +24,49 @@ class Application extends React.Component {
   }
 
   componentDidMount () {
-    crossStorage.onConnect()
-      .then(() => {
-        return crossStorage.get('auth', 'community')
-      })
-      .then(params => {
-        const authJson = params[0]
-        const communityJson = params[1]
+    const { location: { pathname } } = window
+    const publicPaths = [/\/register\/?/, /\/subscriptions\/\d+\/edit\/?/]
 
-        if (!authJson) {
-          const err = new Error('unauthorized')
-          err.status = 401
-          return Promise.reject(err)
-        }
-        const { store } = this.props
-        const { jwtToken } = JSON.parse(authJson)
-        // authenticate on store
-        const auth = { credentials: { 'access-token': jwtToken } }
-        store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
+    if (!publicPaths.some(pathRegex => pathRegex.test(pathname))) {
+      crossStorage.onConnect()
+        .then(() => {
+          return crossStorage.get('auth', 'community')
+        })
+        .then(params => {
+          const authJson = params[0]
+          const communityJson = params[1]
 
-        // select community on store
-        const community = JSON.parse(communityJson)
-        if (community) {
-          store.dispatch(createAction(communityTypes.REHYDRATE, community))
-        }
-        // authenticate on context
-        this.setState({ signing: false, signed: true, token: jwtToken })
+          if (!authJson) {
+            const err = new Error('unauthorized')
+            err.status = 401
+            return Promise.reject(err)
+          }
+          const { store } = this.props
+          const { jwtToken } = JSON.parse(authJson)
+          // authenticate on store
+          const auth = { credentials: { 'access-token': jwtToken } }
+          store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
 
-        return Promise.resolve()
-      })
-      .catch(err => {
-        if (err && err.status === 401) {
-          const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
-          window.location.href = `${domain}/auth/login?next=${window.location.href}`
-        } else {
-          console.log('err', err)
-          this.setState({ signing: false, signed: false, token: undefined })
-        }
-      })
+          // select community on store
+          const community = JSON.parse(communityJson)
+          if (community) {
+            store.dispatch(createAction(communityTypes.REHYDRATE, community))
+          }
+          // authenticate on context
+          this.setState({ signing: false, signed: true, token: jwtToken })
+
+          return Promise.resolve()
+        })
+        .catch(err => {
+          if (err && err.status === 401) {
+            const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+            window.location.href = `${domain}/auth/login?next=${window.location.href}`
+          } else {
+            console.log('err', err)
+            this.setState({ signing: false, signed: false, token: undefined })
+          }
+        })
+      }
   }
 
   render () {

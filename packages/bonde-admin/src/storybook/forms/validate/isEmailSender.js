@@ -1,4 +1,4 @@
-import { isValidTargetEmail } from '@/utils/validation-helper'
+import { isValidFromEmail } from '@/utils/validation-helper'
 import { applyValidate } from './applyValidate'
 
 export const message = {
@@ -7,6 +7,6 @@ export const message = {
 }
 
 export default applyValidate({
-  validate: (value) => !isValidTargetEmail(value),
+  validate: (value) => !isValidFromEmail(value),
   message
 })

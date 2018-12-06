@@ -858,7 +858,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   //   - /mobilizations/:mobilization_id/sharing
   'mobilizations.components--form-share.facebook.title': 'Enlace para compartir',
   'mobilizations.components--form-share.facebook.helper-text': '¿Cómo quieres que tu página aparezca cuando compartas el enlace en las redes sociales? Esta es una oportunidad más para que todo esté exactamente como lo quieras. Abajo, tienes que escoger la imagen, el título y el subtítulo para compartir.',
-  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Usa una imagen de 470x270 pixeles, así encaja perfecto :)',
+  'mobilizations.components--form-share.facebook.fb.image.helper-text': 'Utilice imágenes que tengan al menos 1200 x 630 píxeles para obtener la mejor visualización en dispositivos de alta resolución. Como mínimo, debe usar imágenes de 600 x 315 píxeles para mostrar publicaciones de páginas de enlace con imágenes más grandes. Las imágenes pueden ser de hasta 8 MB de tamaño.',
   'mobilizations.components--form-share.facebook.fb.image.link': 'Sepa más',
   'mobilizations.components--form-share.facebook.form.share-image.label': 'Imagen',
   'mobilizations.components--form-share.facebook.form.share-title.label': 'Título',

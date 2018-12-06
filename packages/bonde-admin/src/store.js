@@ -37,8 +37,10 @@ networkInterface.use([
             return crossStorage.get('auth')
           })
           .then(authJson => {
-            const { jwtToken } = JSON.parse(authJson)
-            req.options.headers.authorization = `Bearer ${jwtToken}`
+            const auth = JSON.parse(authJson)
+            if (auth) {
+              req.options.headers.authorization = `Bearer ${auth.jwtToken}`
+            }
             next()
           })
       } else {

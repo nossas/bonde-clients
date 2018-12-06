@@ -42,7 +42,7 @@ const FormShareImplementation = injectIntl(FormShare(
   }
 ))
 
-const MobilizationsLaunchPage = ({ browserHistory, hostedZones, mobilization, isSaving, ...formProps }) => {
+const MobilizationsLaunchPage = ({ history, hostedZones, mobilization, isSaving, ...formProps }) => {
   const stepDomainValidation = () => !!mobilization.custom_domain
   const stepShareValidation = () => (
     !!mobilization.facebook_share_image &&
@@ -110,7 +110,7 @@ const MobilizationsLaunchPage = ({ browserHistory, hostedZones, mobilization, is
             mobilization={mobilization}
             hostedZones={hostedZones}
             redirectToCreateDNS={() => {
-              browserHistory.push(
+              history.push(
                 paths.communityDomainCreate(`?next=${paths.mobilizationLaunch(mobilization.id)}`)
               )
             }}

@@ -7,6 +7,7 @@ import { ZendeskWidget } from '@/components/external-services'
 import { GoogleFontsLoader } from '@/components/fonts'
 import NotificationSystem from '@/components/notification-system'
 
+import AccountRegisterPage from './public/account-register'
 import SubscriptionEditPage from './public/subscription-edit'
 import LoggedRoute from './admin'
 
@@ -14,6 +15,7 @@ const AuthExample = () => (
   <div>
     <Router>
       <Switch>
+        <Route exact path='/register' component={AccountRegisterPage} />
         <Route exact path='/subscriptions/:id/edit' component={SubscriptionEditPage} />
         <Route path='/' component={LoggedRoute} />
         <Route component={TechnicalIssues} />
