@@ -207,18 +207,14 @@ pipeline:
     image: node:10-alpine
     environment:
       - NODE_ENV=production
-      - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
-      - REACT_APP_DOMAIN_BOT=https://beta.bonde.org
-      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
-      - REACT_APP_DOMAIN_LOGIN=https://admin-canary.bonde.org/auth/login
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-v2.bonde.org/graphql
       - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
-      - REACT_APP_AWS_BUCKET=bonde-assets
-      - REACT_APP_GRAPHQL_URL=https://api-v2.bonde.org/graphql
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
-      - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
-      - REACT_APP_PUBLIC_DOMAIN=bonde.org
-      - REACT_APP_CROSS_STORAGE_URL=https://cross-storage.bonde.org
+      - REACT_APP_DOMAIN_PUBLIC=bonde.org
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-v2.bonde.org/graphql
+      - REACT_APP_DOMAIN_BOT=https://beta.bonde.org
+      - REACT_APP_AWS_BUCKET=bonde-assets
     commands:
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
       - export REACT_APP_SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
