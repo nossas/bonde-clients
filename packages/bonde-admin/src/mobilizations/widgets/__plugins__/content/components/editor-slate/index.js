@@ -20,7 +20,7 @@ import { Loading } from '@/components/await'
 import { ActionButton, FooterEditor, Layer } from '@/mobilizations/widgets/__plugins__/content/components'
 
 import styles from './styles'
-
+if (require('exenv').canUseDOM) require('./index.scss')
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
