@@ -724,7 +724,17 @@
   dependencies:
     array-from "^2.1.1"
 
-"@slate-editor/alignment-plugin@^5.1.0":
+"@slate-editor/alignment-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/alignment-plugin/-/alignment-plugin-5.0.0.tgz#76d86eaa21582c099909c98eceb8f025faf6aab9"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/alignment-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/alignment-plugin/-/alignment-plugin-5.1.0.tgz#eb9a92f505012b5dc69850d5114e1b8866339285"
   dependencies:
@@ -734,7 +744,16 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/bold-plugin@^5.1.0":
+"@slate-editor/bold-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/bold-plugin/-/bold-plugin-5.0.0.tgz#ab76f5c05d22961250ba50cd3937b93044a632e5"
+  dependencies:
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/bold-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/bold-plugin/-/bold-plugin-5.1.0.tgz#cc63cba01e1527808d325c6ded41fcbb7b2701ca"
   dependencies:
@@ -743,7 +762,20 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/color-plugin@^5.1.0":
+"@slate-editor/color-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/color-plugin/-/color-plugin-5.0.0.tgz#788920fa2f6e7add0f6b9ef8b0a21800fb9588db"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    prop-types "^15.6.0"
+    react "^16.2.0"
+    react-color "^2.13.8"
+    react-draggable "^3"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/color-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/color-plugin/-/color-plugin-5.1.0.tgz#35fcfacbda45db4dfe0f8b9452f9d559e56078ba"
   dependencies:
@@ -756,7 +788,7 @@
     react-draggable "^3"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/components@^5.1.0":
+"@slate-editor/components@^5.0.0", "@slate-editor/components@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/components/-/components-5.1.0.tgz#0a50ef2cfb3a6880c00cfad3be5abb0aa9e85ec8"
   dependencies:
@@ -765,7 +797,18 @@
     exenv "^1.2.1"
     react "^16.2.0"
 
-"@slate-editor/embed-plugin@^5.1.0":
+"@slate-editor/embed-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/embed-plugin/-/embed-plugin-5.0.0.tgz#de44aa2d8b7cca90daf6d6021ece99a695786f96"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/embed-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/embed-plugin/-/embed-plugin-5.1.0.tgz#3620abfd0e86212a660157b322cf8eda22820cf2"
   dependencies:
@@ -776,7 +819,15 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/font-family-plugin@^5.1.0":
+"@slate-editor/font-family-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/font-family-plugin/-/font-family-plugin-5.0.0.tgz#77461bc34aec562725404bb9da3f8907a2187a40"
+  dependencies:
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    react "^16.2.0"
+
+"@slate-editor/font-family-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/font-family-plugin/-/font-family-plugin-5.1.0.tgz#4677e71110cf12389a9e9fdbb15be99e67c7f005"
   dependencies:
@@ -784,7 +835,16 @@
     classnames "^2.2.5"
     react "^16.2.0"
 
-"@slate-editor/font-size-plugin@^5.1.0":
+"@slate-editor/font-size-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/font-size-plugin/-/font-size-plugin-5.0.0.tgz#aa1bc50be88f88281afbc3106ef0938d4de74ec5"
+  dependencies:
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+
+"@slate-editor/font-size-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/font-size-plugin/-/font-size-plugin-5.1.0.tgz#0f1fbe40cc2ebd19b7837f04583f2dfc0c1ed90c"
   dependencies:
@@ -793,7 +853,17 @@
     exenv "^1.2.1"
     react "^16.2.0"
 
-"@slate-editor/grid-plugin@^5.1.0":
+"@slate-editor/grid-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/grid-plugin/-/grid-plugin-5.0.0.tgz#9f8e26f4a1a382fec0dc4da7084365f3aa80f966"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/grid-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/grid-plugin/-/grid-plugin-5.1.0.tgz#738fafe9d31cf6b3ae4b51f30c9a4b36b0d297ef"
   dependencies:
@@ -803,7 +873,20 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/image-plugin@^5.1.0":
+"@slate-editor/image-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/image-plugin/-/image-plugin-5.0.0.tgz#0fadc0f95c84db6ed3af4434ff117afc3d01b3f7"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-fontawesome "^1.6.1"
+    react-s3-uploader "^4.6.0"
+
+"@slate-editor/image-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/image-plugin/-/image-plugin-5.1.0.tgz#18735840232008f76d0b4e513bf7fcd757b4eb3c"
   dependencies:
@@ -816,7 +899,17 @@
     react-fontawesome "^1.6.1"
     react-s3-uploader "^4.6.0"
 
-"@slate-editor/italic-plugin@^5.1.0":
+"@slate-editor/italic-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/italic-plugin/-/italic-plugin-5.0.0.tgz#af156547dc5fb2eb23cc3908f370dd924e061ce4"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/italic-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/italic-plugin/-/italic-plugin-5.1.0.tgz#465be5c1e1dd8d9ebc5998919ebac174dd721718"
   dependencies:
@@ -826,7 +919,18 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/link-plugin@^5.1.0":
+"@slate-editor/link-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/link-plugin/-/link-plugin-5.0.0.tgz#479ae14620a6e8fbd98eabf5024612f223a7b213"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/link-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/link-plugin/-/link-plugin-5.1.0.tgz#6cc855e444c447c1fb9ea87101e61ca1d60315dc"
   dependencies:
@@ -837,7 +941,17 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/list-plugin@^5.1.0":
+"@slate-editor/list-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/list-plugin/-/list-plugin-5.0.0.tgz#0cd33e25600a92b816410efd735a5ab8e35894ea"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    classnames "^2.2.5"
+    exenv "^1.2.1"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/list-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/list-plugin/-/list-plugin-5.1.0.tgz#2e9a439808c64bd0181531e4c5047e5ce7f36124"
   dependencies:
@@ -847,7 +961,7 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/state-logger@^5.1.0":
+"@slate-editor/state-logger@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/state-logger/-/state-logger-5.1.0.tgz#5c78d9ca4f0ff021ee315cabd5df5e68c6c91487"
   dependencies:
@@ -856,7 +970,16 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/strikethrough-plugin@^5.1.0":
+"@slate-editor/strikethrough-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/strikethrough-plugin/-/strikethrough-plugin-5.0.0.tgz#d76c5d0b0619c22dccd8a19081addbba8657966f"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    classnames "^2.2.5"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/strikethrough-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/strikethrough-plugin/-/strikethrough-plugin-5.1.0.tgz#fea82db046b1525f82b9d9fd54a0490d118ea9dc"
   dependencies:
@@ -865,7 +988,7 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/toggle-readonly@^5.1.0":
+"@slate-editor/toggle-readonly@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/toggle-readonly/-/toggle-readonly-5.1.0.tgz#b9595604871f57aa447e1811180f43e7c9a00135"
   dependencies:
@@ -873,7 +996,17 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/underline-plugin@^5.1.0":
+"@slate-editor/underline-plugin@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@slate-editor/underline-plugin/-/underline-plugin-5.0.0.tgz#1b80c3b12f22b6290c95facf0e41aa171b9e5e4c"
+  dependencies:
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
+    classnames "^2.2.5"
+    react "^16.2.0"
+    react-fontawesome "^1.6.1"
+
+"@slate-editor/underline-plugin@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/underline-plugin/-/underline-plugin-5.1.0.tgz#357fc036d3c83ee60ef7c358d1deef3d9a21bc87"
   dependencies:
@@ -883,7 +1016,7 @@
     react "^16.2.0"
     react-fontawesome "^1.6.1"
 
-"@slate-editor/utils@^5.1.0":
+"@slate-editor/utils@^5.0.0", "@slate-editor/utils@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@slate-editor/utils/-/utils-5.1.0.tgz#905e42a705a3d3334de0b766588a03c1844b643c"
   dependencies:
@@ -4005,7 +4138,7 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
+debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.2, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -6293,6 +6426,10 @@ is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
 
+is-empty@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/is-empty/-/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
+
 is-equal-shallow@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/is-equal-shallow/-/is-equal-shallow-0.1.3.tgz#2238098fc221de0bcfa5d9eac4c45d638aa1c534"
@@ -6359,7 +6496,7 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
-is-hotkey@0.1.4:
+is-hotkey@^0.1.1:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.4.tgz#c34d2c85d6ec8d09a871dcf71931c8067a824c7d"
 
@@ -7108,7 +7245,7 @@ just-extend@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-3.0.0.tgz#cee004031eaabf6406da03a7b84e4fe9d78ef288"
 
-keycode@^2.1.9:
+keycode@^2.1.2, keycode@^2.1.9:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
 
@@ -7372,7 +7509,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.0.1, lodash@^4.1.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.0.1, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.10:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -7504,10 +7641,6 @@ mem@^4.0.0:
     map-age-cleaner "^0.1.1"
     mimic-fn "^1.0.0"
     p-is-promise "^1.1.0"
-
-memoize-one@^4.0.0:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.2.tgz#3fb8db695aa14ab9c0f1644e1585a8806adc1aee"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -9845,6 +9978,12 @@ react-modal@^3.3.2:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-portal@^3.1.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-3.2.0.tgz#4224e19b2b05d5cbe730a7ba0e34ec7585de0043"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-pure-render@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-pure-render/-/react-pure-render-1.0.2.tgz#9d8a928c7f2c37513c2d064e57b3e3c356e9fabb"
@@ -10882,94 +11021,84 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slate-base64-serializer@^0.2.69:
-  version "0.2.83"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.83.tgz#355020f0e7b8de4bd3c946bd0271295b02b91eb7"
+slate-base64-serializer@^0.2.13:
+  version "0.2.94"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.94.tgz#b908c3af481b9a0ead78f313653414c4b2b4b2d5"
   dependencies:
     isomorphic-base64 "^1.0.2"
 
-slate-dev-environment@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/slate-dev-environment/-/slate-dev-environment-0.2.0.tgz#c43f4a5e13cccc16ad4c3015c8ad182b6e5b5b3a"
-  dependencies:
-    is-in-browser "^1.1.3"
+slate-dev-logger@^0.1.36:
+  version "0.1.43"
+  resolved "https://registry.yarnpkg.com/slate-dev-logger/-/slate-dev-logger-0.1.43.tgz#77f6ca7207fcbf453a5516f3aa8b19794d1d26dc"
 
-slate-dev-warning@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/slate-dev-warning/-/slate-dev-warning-0.0.1.tgz#f6c36731babea5e301b5bd504fe64911dd24200a"
-
-slate-editor@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-5.1.0.tgz#de9d3d6d6d8c5a0272b3c622124238d0053d1fd0"
+slate-editor@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/slate-editor/-/slate-editor-5.0.0.tgz#35f2918177c6dfcffb432914f4bfe4356fe2a254"
   dependencies:
-    "@slate-editor/alignment-plugin" "^5.1.0"
-    "@slate-editor/bold-plugin" "^5.1.0"
-    "@slate-editor/color-plugin" "^5.1.0"
-    "@slate-editor/components" "^5.1.0"
-    "@slate-editor/embed-plugin" "^5.1.0"
-    "@slate-editor/font-family-plugin" "^5.1.0"
-    "@slate-editor/font-size-plugin" "^5.1.0"
-    "@slate-editor/grid-plugin" "^5.1.0"
-    "@slate-editor/image-plugin" "^5.1.0"
-    "@slate-editor/italic-plugin" "^5.1.0"
-    "@slate-editor/link-plugin" "^5.1.0"
-    "@slate-editor/list-plugin" "^5.1.0"
-    "@slate-editor/state-logger" "^5.1.0"
-    "@slate-editor/strikethrough-plugin" "^5.1.0"
-    "@slate-editor/toggle-readonly" "^5.1.0"
-    "@slate-editor/underline-plugin" "^5.1.0"
-    "@slate-editor/utils" "^5.1.0"
+    "@slate-editor/alignment-plugin" "^5.0.0"
+    "@slate-editor/bold-plugin" "^5.0.0"
+    "@slate-editor/color-plugin" "^5.0.0"
+    "@slate-editor/components" "^5.0.0"
+    "@slate-editor/embed-plugin" "^5.0.0"
+    "@slate-editor/font-family-plugin" "^5.0.0"
+    "@slate-editor/font-size-plugin" "^5.0.0"
+    "@slate-editor/grid-plugin" "^5.0.0"
+    "@slate-editor/image-plugin" "^5.0.0"
+    "@slate-editor/italic-plugin" "^5.0.0"
+    "@slate-editor/link-plugin" "^5.0.0"
+    "@slate-editor/list-plugin" "^5.0.0"
+    "@slate-editor/state-logger" "^5.0.0"
+    "@slate-editor/strikethrough-plugin" "^5.0.0"
+    "@slate-editor/toggle-readonly" "^5.0.0"
+    "@slate-editor/underline-plugin" "^5.0.0"
+    "@slate-editor/utils" "^5.0.0"
     classnames "^2.2.5"
     immutable "^3.8.2"
     prop-types "^15.6.0"
     react "^16.2.0"
-    slate "0.41.3"
-    slate-react "0.18.11"
+    slate "0.31.3"
+    slate-react "0.10.17"
 
-slate-hotkeys@^0.2.5:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/slate-hotkeys/-/slate-hotkeys-0.2.7.tgz#a5b613ced4af931b2d74a206f985ee2c63f3b0f9"
+slate-plain-serializer@^0.4.11:
+  version "0.4.16"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.4.16.tgz#eff277b58943e130905114c7da431ab307cb4c1e"
   dependencies:
-    is-hotkey "0.1.4"
-    slate-dev-environment "^0.2.0"
+    slate-dev-logger "^0.1.36"
 
-slate-plain-serializer@^0.6.8:
-  version "0.6.22"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.22.tgz#659b4754a9d017b068fe5d99cf03b3d105549d1b"
-
-slate-prop-types@^0.4.67:
+slate-prop-types@^0.4.11:
   version "0.4.67"
   resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.4.67.tgz#c6aa74195466546a44fcb85d1c7b15fefe36ce6b"
 
-slate-react@0.18.11:
-  version "0.18.11"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.18.11.tgz#f452e7eb73f0271422d2a17e8090dcd8d889aef6"
+slate-react@0.10.17:
+  version "0.10.17"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.10.17.tgz#450a43a43c245212e0104aa2feb038b98b99de5f"
   dependencies:
-    debug "^3.1.0"
+    debug "^2.3.2"
     get-window "^1.1.1"
+    is-hotkey "^0.1.1"
+    is-in-browser "^1.1.3"
     is-window "^1.0.2"
-    lodash "^4.1.1"
-    memoize-one "^4.0.0"
+    keycode "^2.1.2"
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
+    react-portal "^3.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.69"
-    slate-dev-environment "^0.2.0"
-    slate-dev-warning "^0.0.1"
-    slate-hotkeys "^0.2.5"
-    slate-plain-serializer "^0.6.8"
-    slate-prop-types "^0.4.67"
+    slate-base64-serializer "^0.2.13"
+    slate-dev-logger "^0.1.36"
+    slate-plain-serializer "^0.4.11"
+    slate-prop-types "^0.4.11"
 
-slate@0.41.3:
-  version "0.41.3"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.41.3.tgz#fa468de5db53afc453a0a7d7875b4de05737a900"
+slate@0.31.3:
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.31.3.tgz#21f95a1484a5a13937e33fd5a1aca1b34edf44f8"
   dependencies:
-    debug "^3.1.0"
+    debug "^2.3.2"
     direction "^0.1.5"
     esrever "^0.2.0"
+    is-empty "^1.0.0"
     is-plain-object "^2.0.4"
     lodash "^4.17.4"
-    slate-dev-warning "^0.0.1"
+    slate-dev-logger "^0.1.36"
     type-of "^2.0.1"
 
 slice-ansi@1.0.0:
