@@ -15,8 +15,13 @@ query MobilizationsGadget ($offset: Int, $limit: Int, $orderBy: [UserMobilizatio
         image
         createdAt
         updatedAt
+        mailchimpApiKey
+        mailchimpListId
+        mailchimpGroupId
         fbLink
         twitterLink
+        facebookAppId
+        emailTemplateFrom
       }
       score
       image: facebookShareImage

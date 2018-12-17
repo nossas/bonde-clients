@@ -6,7 +6,7 @@ import { authSession } from 'services/auth'
 import { CatchLink, onCatch } from './CatchLink'
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL || 'http://localhost:3001/graphql'
+  uri: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-v2.bonde.devel/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -24,10 +24,10 @@ const authLink = setContext((_, { headers }) => {
 })
 
 
-const handleError = onCatch(({ response, networkError }) => { 
+const handleError = onCatch(({ response, networkError }) => {
   if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
     const redirectTo = authSession.getItem('redirectTo')
-    
+
     authSession
       .logout()
       .then(() => {

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next -p 5003",
     "start": "next start -p 5001",
-    "build": "rm -rf .next && next build",
+    "prepare": "rm -rf .next",
+    "build": "next build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
     "chain-function": "^1.0.0",
     "classnames": "2.2.6",
     "dotenv": "^4.0.0",
+    "dotenv-webpack": "^1.5.7",
     "downloadjs": "^1.4.7",
     "draft-js": "0.10.5",
     "exenv": "^1.2.2",
@@ -62,5 +64,8 @@
     "css-loader": "^0.28.8",
     "file-loader": "1.1.11",
     "webpack-bundle-analyzer": "2.13.1"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }

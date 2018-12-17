@@ -6,6 +6,7 @@ import TableCardGadget from '../TableCardGadget'
 import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
 import { authSession } from 'services/auth'
+import { toSnakeCase  } from '../../utils'
 
 const columns = [
   { field: 'image', render: ImageColumn, props: { width: '40px' } },
@@ -58,9 +59,9 @@ const MobilizationList = ({
     pageTotal={pageTotal}
     onClickRow={row => {
       authSession
-        .setAsyncItem('community', row.community)
+        .setAsyncItem('community', toSnakeCase(row.community))
         .then(() => {
-          const baseUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001'
+          const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
           window.open(`${baseUrl}/mobilizations/${row.id}/edit`, '_self')
         })
     }}

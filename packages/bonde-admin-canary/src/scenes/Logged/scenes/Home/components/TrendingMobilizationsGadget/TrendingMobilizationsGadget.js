@@ -28,7 +28,7 @@ const TrendingMobilizationsGadget = ({ filter, onChangeFilter, mobilizations, lo
                     const url = new URL(`http://${mobilization.customDomain}`)
                     window.open(url, '_blank')
                   } else {
-                    const domain = process.env.REACT_APP_PUBLIC_DOMAIN || 'bonde.devel:5003'
+                    const domain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel:5003'
                     const url = new URL(`http://${mobilization.slug}.${domain}`)
                     window.open(url, '_blank')
                   }
