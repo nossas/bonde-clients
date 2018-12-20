@@ -91,8 +91,8 @@
     "build:webviewer": "webpack --colors --hide-modules --bail --config ./tools/webpack.webviewer.js",
     "release": "standard-version",
     "storybook": "start-storybook -p 9001 -c ./src/storybook",
-    "preinstall": "rm -f node_modules/@",
-    "postinstall": "ln -s `pwd`/src node_modules/@"
+    "preinstall": "rm -f node_modules/@ && rm -f node_modules/@mobs",
+    "postinstall": "ln -s `pwd`/src node_modules/@ && ln -s `pwd`/src/1corelib node_modules/@mobs"
   },
   "jest": {
     "coverageReporters": ["lcov", "text-summary"]
