@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { Footer, ScrollContainer } from './components'
+import { Section, Footer, ScrollContainer } from './components'
 
 /**
  * A mobilization can have two modes, in editing and only rendering.
@@ -9,7 +9,7 @@ import { Footer, ScrollContainer } from './components'
  * properties that will be used for block and widgets editing.
  */
 class Mobilization extends React.Component {
-  
+
   render () {
   	// Props used on editable mode
   	const { editable, newBlockButton: NewBlockButton } = this.props
@@ -19,10 +19,21 @@ class Mobilization extends React.Component {
     const themeClassName = `${colorScheme} ${headerFont}-header ${bodyFont}-body`
     const layoutClassName = editable ? 'flex-auto relative' : 'absolute'
     const layoutStyle = !editable ? { top: 0, bottom: 0, left: 0, right: 0 } : undefined
+    // Props to render blocos
+    const { blocks, blockWrapper, linkTo } = this.props
 
   	return (
   	  <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
   	    <ScrollContainer>
+          {blocks.map((b, i) => (
+            <Section
+              key={`section-${i}`}
+              anchor={linkTo(b)}
+              block={b}
+              editable={editable}
+              wrapper={blockWrapper}
+            />
+          ))}
   	      {editable && NewBlockButton && (<NewBlockButton />)}
   	  	  <Footer />
         </ScrollContainer>
@@ -32,15 +43,26 @@ class Mobilization extends React.Component {
 }
 
 Mobilization.defaultProps = {
-  editable: false
+  editable: false,
+  blocks: []
 }
 
 Mobilization.propTypes = {
   /* Define when the mobilization is in edit mode. */
   editable: PropTypes.bool,
-  /* this component is rendered just below the list of blocks,
+  /* This component is rendered just below the list of blocks,
    * and should lead to the addition of a new block when it is clicked */
-  newBlockButton: PropTypes.any
+  newBlockButton: PropTypes.any,
+  /* This component renders wrapped to the block, in it you can
+   * customize the rendering of your block, get block and editable
+   * as property. */
+  blockWrapper: PropTypes.any,
+  /* Sections of your mobilization, you will receive an item from this
+   * list when you are rendering block customization. */
+  blocks: PropTypes.array,
+  /* Function used to link navigation bar with block,
+   * receives block as parameter. */
+  linkTo: PropTypes.func.isRequired
 }
 
 export default Mobilization

@@ -3,6 +3,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import { Mobilization } from '@mobs'
+import { Section } from '@mobs/components'
 /*import Block from '@/mobrender/components/block.connected'*/
 
 describe('client/mobrender/components/mobilization', () => {
@@ -21,11 +22,13 @@ describe('client/mobrender/components/mobilization', () => {
       facebook_share_description: 'Facebook share description',
       facebook_share_image: 'http://facebook.com/share-image.png'
     },*/
-/*    blocks: [
-      { id: 1, hidden: false, menu_hidden: false, mobilization_id: 1 },
-      { id: 2, hidden: true, menu_hidden: true, mobilization_id: 1 }
+    editable: true,
+    linkTo: (b) => `section-${b.id}`,
+    blocks: [
+      { id: 1 },
+      { id: 2 }
     ],
-    widgets: [
+    /*widgets: [
       { id: 1, block_id: 1, kind: 'draft' },
       { id: 2, block_id: 2, kind: 'draft' }
     ],*/
@@ -51,17 +54,22 @@ describe('client/mobrender/components/mobilization', () => {
     expect(wrapper.find('Navbar').props().editable).to.equal(props.editable || false)
   })*/
 
-  /*it('should pass widgets filter by block to block component', () => {
-    // jump the scroll offset handling
-    wrapper.setState({ blocks: props.blocks })
-
-    let expected = props.widgets.filter(w => w.block_id === props.blocks[0].id)
-    expect(wrapper.find(Block).at(0).props().widgets).to.deep.equal(expected)
-
-    expected = props.widgets.filter(w => w.block_id === props.blocks[1].id)
-    expect(wrapper.find(Block).at(1).props().widgets).to.deep.equal(expected)
+  it('should render blocks with section basic structure', () => {
+    expect(wrapper.find(Section).length).to.equal(props.blocks.length)
   })
 
+  it('should pass block props to section component', () => {
+    const firstBlock = props.blocks[0]
+    const firstBlockProps = {
+      block: firstBlock,
+      editable: props.editable,
+      anchor: props.linkTo(firstBlock),
+      wrapper: props.blockWrapper
+    }
+    expect(wrapper.find(Section).at(0).props()).to.deep.equal(firstBlockProps)
+  })
+
+  /*
   describe('when is editable', () => {
     const editableWrapper = shallow(<Mobilization {...props} editable />, {
       disableLifecycleMethods: true
