@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import WidgetArea from './widget-area'
 
 
 /**
@@ -10,12 +11,16 @@ import PropTypes from 'prop-types'
 class Section extends React.Component {
 
   renderBlock () {
-    const { anchor, widgets } = this.props
+    const { anchor, widgets, widgetComponent } = this.props
     return (
       <div id={anchor} className='col-10 mx-auto'>
         <div className='clearfix widgets' style={{ padding: '5em 0' }}>
           {widgets && widgets.map(widget => (
-            <p key={`widget-${widget.id}`}>{widget.kind}</p>
+            <WidgetArea
+              key={`widget-${widget.id}`}
+              widget={widget}
+              widgetComponent={widgetComponent}
+            />
           ))}
         </div>
       </div>
@@ -50,7 +55,10 @@ Section.propTypes = {
   /* True if mobilization is editable mode */
   editable: PropTypes.bool.isRequired,
   /* Array of widgets related on Section */
-  widgets: PropTypes.array
+  widgets: PropTypes.array,
+  /* Component responsible to render a widget logic,
+   * receive { widget } props */
+  widgetComponent: PropTypes.any.isRequired
 }
 
 export default Section

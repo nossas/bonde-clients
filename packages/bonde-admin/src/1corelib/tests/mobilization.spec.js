@@ -32,6 +32,9 @@ describe('client/mobrender/components/mobilization', () => {
       { id: 1, block_id: 1, kind: 'draft' },
       { id: 2, block_id: 2, kind: 'draft' }
     ],
+    widgetComponent: ({ widget }) => (
+      <p>{widget.kind}</p>
+    ),
 /*    store: mock.store({ auth: { user: { email: 'foo@bar.com' } } })*/
   }
 
@@ -65,7 +68,8 @@ describe('client/mobrender/components/mobilization', () => {
       editable: props.editable,
       anchor: props.linkTo(firstBlock),
       wrapper: props.blockWrapper,
-      widgets: props.widgets.filter(w => w.block_id === firstBlock.id)
+      widgets: props.widgets.filter(w => w.block_id === firstBlock.id),
+      widgetComponent: props.widgetComponent
     }
     const sectionProps = wrapper.find(Section).at(0).props()
     expect(sectionProps).to.deep.equal(firstBlockProps)

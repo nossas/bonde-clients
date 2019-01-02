@@ -8,12 +8,18 @@ import { Section } from '@mobs/components'
 describe('client/mobrender/components/mobilization', () => {
   let blockComponent
   const block = { id: 1 }
-  const widgets = [{ id: 1, kind: 'draft', block_id: 1 }]
+  const widgets = [
+    { id: 1, kind: 'draft', sm_size: 6, md_size: 6, lg_size: 6, block_id: 1 },
+  ]
+  const WidgetComponent = ({ widget }) => (
+    <p>{widget.kind}</p>
+  )
   const props = {
     anchor: `section-${block.id}`,
     editable: true,
     block,
-    widgets
+    widgets,
+    widgetComponent: WidgetComponent
   }
   const BlockWrapper = ({ children }) => (
     <div id='block-wrapper'>{children}</div>
@@ -41,5 +47,9 @@ describe('client/mobrender/components/mobilization', () => {
     // use this format because children is passed to wrapper component too
     expect(blockWrapperProps.block).to.deep.equal(props.block)
     expect(blockWrapperProps.editable).to.deep.equal(props.editable)
+  })
+
+  it('should render WidgetArea to each widget object', () => {
+    expect(blockComponent.find('WidgetArea').length).to.equal(props.widgets.length)
   })
 })

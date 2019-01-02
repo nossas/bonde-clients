@@ -20,7 +20,14 @@ class Mobilization extends React.Component {
     const layoutClassName = editable ? 'flex-auto relative' : 'absolute'
     const layoutStyle = !editable ? { top: 0, bottom: 0, left: 0, right: 0 } : undefined
     // Props to render blocos
-    const { blocks, blockWrapper, linkTo, blockWidgetsRef, widgets } = this.props
+    const {
+      blocks,
+      blockWrapper,
+      linkTo,
+      blockWidgetsRef,
+      widgets,
+      widgetComponent
+    } = this.props
 
   	return (
   	  <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
@@ -33,6 +40,7 @@ class Mobilization extends React.Component {
               editable={editable}
               wrapper={blockWrapper}
               widgets={blockWidgetsRef(b, widgets)}
+              widgetComponent={widgetComponent}
             />
           ))}
   	      {editable && NewBlockButton && (<NewBlockButton />)}
@@ -53,21 +61,24 @@ Mobilization.defaultProps = {
 Mobilization.propTypes = {
   /* Define when the mobilization is in edit mode. */
   editable: PropTypes.bool,
+  /* Function used to link navigation bar with block,
+   * receives block as parameter. */
+  linkTo: PropTypes.func.isRequired,
   /* This component is rendered just below the list of blocks,
    * and should lead to the addition of a new block when it is clicked */
   newBlockButton: PropTypes.any,
+  /* Sections of your mobilization, you will receive an item from this
+   * list when you are rendering block customization. */
+  blocks: PropTypes.array,
   /* This component renders wrapped to the block, in it you can
    * customize the rendering of your block, get block and editable
    * as property. */
   blockWrapper: PropTypes.any,
-  /* Sections of your mobilization, you will receive an item from this
-   * list when you are rendering block customization. */
-  blocks: PropTypes.array,
-  /* Function used to link navigation bar with block,
-   * receives block as parameter. */
-  linkTo: PropTypes.func.isRequired,
   /* Array of widgets object used on render. */
   widgets: PropTypes.array.isRequired,
+  /* Component responsible to render a widget logic,
+   * receive { widget } props */
+  widgetComponent: PropTypes.any.isRequired,
   /* Function used to link widgets with block, receives (block, widgets)
    * as param.
    * Default function use the attrs widget.block_id to relationship. */
