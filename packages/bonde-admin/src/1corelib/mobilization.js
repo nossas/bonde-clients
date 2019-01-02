@@ -20,7 +20,7 @@ class Mobilization extends React.Component {
     const layoutClassName = editable ? 'flex-auto relative' : 'absolute'
     const layoutStyle = !editable ? { top: 0, bottom: 0, left: 0, right: 0 } : undefined
     // Props to render blocos
-    const { blocks, blockWrapper, linkTo } = this.props
+    const { blocks, blockWrapper, linkTo, blockWidgetsRef, widgets } = this.props
 
   	return (
   	  <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
@@ -32,6 +32,7 @@ class Mobilization extends React.Component {
               block={b}
               editable={editable}
               wrapper={blockWrapper}
+              widgets={blockWidgetsRef(b, widgets)}
             />
           ))}
   	      {editable && NewBlockButton && (<NewBlockButton />)}
@@ -44,7 +45,9 @@ class Mobilization extends React.Component {
 
 Mobilization.defaultProps = {
   editable: false,
-  blocks: []
+  blocks: [],
+  widgets: [],
+  blockWidgetsRef: (b, ws) => ws.filter(w => w.block_id === b.id)
 }
 
 Mobilization.propTypes = {
@@ -62,7 +65,13 @@ Mobilization.propTypes = {
   blocks: PropTypes.array,
   /* Function used to link navigation bar with block,
    * receives block as parameter. */
-  linkTo: PropTypes.func.isRequired
+  linkTo: PropTypes.func.isRequired,
+  /* Array of widgets object used on render. */
+  widgets: PropTypes.array.isRequired,
+  /* Function used to link widgets with block, receives (block, widgets)
+   * as param.
+   * Default function use the attrs widget.block_id to relationship. */
+  blockWidgetsRef: PropTypes.func.isRequired
 }
 
 export default Mobilization

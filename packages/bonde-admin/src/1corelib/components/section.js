@@ -10,10 +10,14 @@ import PropTypes from 'prop-types'
 class Section extends React.Component {
 
   renderBlock () {
-    const { anchor } = this.props
+    const { anchor, widgets } = this.props
     return (
       <div id={anchor} className='col-10 mx-auto'>
-        <p>Render Widgets</p>
+        <div className='clearfix widgets' style={{ padding: '5em 0' }}>
+          {widgets && widgets.map(widget => (
+            <p key={`widget-${widget.id}`}>{widget.kind}</p>
+          ))}
+        </div>
       </div>
     )
   }
@@ -44,7 +48,9 @@ Section.propTypes = {
   /* Data structure of block, passed to blockWrapper component */
   block: PropTypes.object.isRequired,
   /* True if mobilization is editable mode */
-  editable: PropTypes.bool.isRequired
+  editable: PropTypes.bool.isRequired,
+  /* Array of widgets related on Section */
+  widgets: PropTypes.array
 }
 
 export default Section

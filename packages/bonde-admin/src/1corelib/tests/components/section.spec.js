@@ -8,10 +8,12 @@ import { Section } from '@mobs/components'
 describe('client/mobrender/components/mobilization', () => {
   let blockComponent
   const block = { id: 1 }
+  const widgets = [{ id: 1, kind: 'draft', block_id: 1 }]
   const props = {
     anchor: `section-${block.id}`,
     editable: true,
-    block
+    block,
+    widgets
   }
   const BlockWrapper = ({ children }) => (
     <div id='block-wrapper'>{children}</div>

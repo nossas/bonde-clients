@@ -26,7 +26,6 @@ class EditBlockWrapper extends React.Component {
 
     return (
       <div
-        id={`block-${block.id}`}
         onMouseEnter={() => {
           /*if (editable && !editing) onMouseOver(HOVER_MOUSE_KEY, block.id)*/
           if (editable) console.log(`[Block ${block.id}] onMouseEnter`)
