@@ -16,11 +16,23 @@ class PluggableWidget extends React.Component {
     }
   }
 
-  render () {
-    const { widget, plugins, editable, onEdit, onDelete } = this.props
-    const plugin = plugins.find(p => p.kind === widget.kind)
+  getOptions (plugin) {
+    let options = { noOverlay: !this.props.editable }
+    if (typeof plugin.options === 'function') {
+      options = Object.assign({}, options, plugin.options(this.props))
+    } else if (typeof plugin.options === 'object') {
+      options = Object.assign({}, options, plugin.options)
+    }
+    return options
+  }
 
-    return editable ? (
+  render () {
+    const { widget, plugins, onEdit, onDelete } = this.props
+    
+    const plugin = plugins.find(p => p.kind === widget.kind)
+    const { noOverlay } = this.getOptions(plugin)
+
+    return !noOverlay ? (
       <Overlay
         onEdit={() => onEdit && onEdit(widget)}
         onDelete={() => onDelete && onDelete(widget)}
