@@ -5,6 +5,16 @@ import Overlay from './overlay'
 
 class PluggableWidget extends React.Component {
 
+  getExtraProps () {
+    // TODO: Essas propriedades devem ser repensadas
+    return {
+      mobilization: {
+        header_font: 'meu-rio',
+        body_font: 'meu-rio'
+      }
+    }
+  }
+
   render () {
     const { widget, plugins, editable, onEdit, onDelete } = this.props
     const plugin = plugins.find(p => p.kind === widget.kind)
@@ -14,10 +24,10 @@ class PluggableWidget extends React.Component {
         onEdit={() => onEdit && onEdit(widget)}
         onDelete={() => onDelete && onDelete(widget)}
       >
-        <plugin.component widget={widget} />
+        <plugin.component widget={widget} {...this.getExtraProps()} />
       </Overlay>
     ) : (
-      <plugin.component widget={widget} />
+      <plugin.component widget={widget} {...this.getExtraProps()} />
     )
   }
 }
