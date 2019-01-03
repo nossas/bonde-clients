@@ -30,7 +30,10 @@ networkInterface.use([
         req.options.headers = {}
       }
       // Non-use auth for authenticate mutation to make a new JWT Token
-      const requiredAuth = req.request.operationName !== 'authenticate'
+      // Donation has a public method { fetchDonationGoalStats }
+      const requiredAuth =  !!!['authenticate', 'fetchDonationGoalStats'].find(
+        x =>  x === req.request.operationName
+      )
       if (require('exenv').canUseDOM && requiredAuth) {
         crossStorage.onConnect()
           .then(() => {

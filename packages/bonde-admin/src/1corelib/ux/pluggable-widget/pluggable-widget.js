@@ -11,7 +11,8 @@ class PluggableWidget extends React.Component {
       mobilization: {
         header_font: 'meu-rio',
         body_font: 'meu-rio'
-      }
+      },
+      editable: this.props.editable
     }
   }
 
