@@ -12,7 +12,11 @@ class PluggableWidget extends React.Component {
         header_font: 'meu-rio',
         body_font: 'meu-rio'
       },
-      editable: this.props.editable
+      editable: this.props.editable,
+      // TODO: Propriedades requeridas para edição de conteúdo, sai do padrão
+      // overlay
+      onEdit: () => {},
+      onCancelEdit: () => {}
     }
   }
 
