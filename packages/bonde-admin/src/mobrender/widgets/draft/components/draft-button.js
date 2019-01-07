@@ -19,7 +19,7 @@ const DraftButton = ({ icon, svgIcon: SVGIcon, label, updateKind, widget, ...pro
 
 DraftButton.propTypes = {
   label: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   kind: PropTypes.string.isRequired,
   updateKind: PropTypes.func.isRequired,
   settings: PropTypes.object

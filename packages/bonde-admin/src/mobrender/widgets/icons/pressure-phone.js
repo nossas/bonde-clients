@@ -7,11 +7,11 @@ xmlnsXlink='http://www.w3.org/1999/xlink'>
     <defs>
         <path d='M12.5,10 C17.65625,10 21.875,14.05 21.875,19 C21.875,23.95 17.65625,28 12.5,28 C7.34375,28 3.125,23.95 3.125,19 C3.125,14.05 7.34375,10 12.5,10 L12.5,10 Z M12.5,7 C5.625,7 0,12.4 0,19 C0,25.5999992 5.625,31 12.5,31 C19.375,31 25,25.5999992 25,19 C25,12.4 19.375,7 12.5,7 L12.5,7 L12.5,7 Z'
         id='path-1' />
-        <filter x='-20%' y='-20.8%' width='156%' height='158.3%' filterunits='objectBoundingBox'
+        <filter x='-20%' y='-20.8%' width='156%' height='158.3%' filterUnits='objectBoundingBox'
         id='filter-2'>
             <femorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
                 <feoffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
-                    <fegaussianblur stddeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
+                    <fegaussianblur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
                         <fecolormatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.17 0' in='shadowBlurOuter1'
                         />
                     </fegaussianblur>
@@ -20,11 +20,11 @@ xmlnsXlink='http://www.w3.org/1999/xlink'>
         </filter>
         <path d='M13,16 C14.65,16 16,17.35 16,19 C16,20.65 14.65,22 13,22 C11.35,22 10,20.65 10,19 C10,17.35 11.35,16 13,16 L13,16 Z M13,13 C9.7,13 7,15.7 7,19 C7,22.3 9.7,25 13,25 C16.3,25 19,22.3 19,19 C19,15.7 16.3,13 13,13 L13,13 L13,13 Z'
         id='path-3' />
-        <filter x='-41.7%' y='-41.7%' width='216.7%' height='216.7%' filterunits='objectBoundingBox'
+        <filter x='-41.7%' y='-41.7%' width='216.7%' height='216.7%' filterUnits='objectBoundingBox'
         id='filter-4'>
             <femorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
                 <feoffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
-                    <fegaussianblur stddeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
+                    <fegaussianblur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
                         <fecolormatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.17 0' in='shadowBlurOuter1'
                         />
                     </fegaussianblur>

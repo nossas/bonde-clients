@@ -52,7 +52,7 @@ const Progress = ({
 
 Progress.propTypes = {
   className: PropTypes.string,
-  value: PropTypes.number.isRquired,
+  value: PropTypes.number,
   max: PropTypes.number,
   valueTopLeft: PropTypes.node,
   valueTopRight: PropTypes.node,
@@ -65,6 +65,7 @@ Progress.propTypes = {
 
 Progress.defaultProps = {
   max: 100,
+  value: 0,
   fillColor: 'hsl(171, 100%, 41%)'
 }
 

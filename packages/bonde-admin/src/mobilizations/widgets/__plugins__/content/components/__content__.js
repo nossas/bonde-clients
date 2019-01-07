@@ -83,8 +83,8 @@ Content.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   editable: PropTypes.bool.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onCancelEdit: PropTypes.func.isRequired,
+  onEdit: PropTypes.func,
+  onCancelEdit: PropTypes.func,
   update: PropTypes.func,
   intl: intlShape.isRequired
 }
