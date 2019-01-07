@@ -25,12 +25,14 @@ describe('client/mobrender/components/mobilization', () => {
     editable: true,
     linkTo: (b) => `section-${b.id}`,
     blocks: [
-      { id: 1 },
-      { id: 2 }
+      { id: 1, hidden: false },
+      { id: 2, hidden: false },
+      { id: 3, hidden: true }
     ],
     widgets: [
       { id: 1, block_id: 1, kind: 'draft' },
-      { id: 2, block_id: 2, kind: 'draft' }
+      { id: 2, block_id: 2, kind: 'draft' },
+      { id: 2, block_id: 3, kind: 'draft' }
     ],
     widgetComponent: ({ widget }) => (
       <p>{widget.kind}</p>
@@ -123,9 +125,9 @@ describe('client/mobrender/components/mobilization', () => {
       expect(main.props().style).to.deep.equal({ top: 0, bottom: 0, left: 0, right: 0 })
     })
 
-    /*it('should render only visible blocks', () => {
+    it('should render only visible blocks', () => {
       const visibleBlocks = props.blocks.filter(b => !b.hidden)
-      expect(wrapper.find(Block).length).to.equal(visibleBlocks.length)
-    })*/
+      expect(wrapper.find(Section).length).to.equal(visibleBlocks.length)
+    })
   })
 })

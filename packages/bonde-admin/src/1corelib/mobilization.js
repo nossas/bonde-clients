@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { Section, Footer, ScrollContainer } from './components'
+import { Section, Footer, ScrollContainer, Navigation } from './components'
 
 /**
  * A mobilization has two modes, in editing ({ editable: true })
@@ -30,10 +30,13 @@ class Mobilization extends React.Component {
       widgetComponent
     } = this.props
 
+    const visibleBlocks = !editable ? blocks.filter(b => !b.hidden) : blocks
+
   	return (
   	  <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
+        <Navigation blocks={visibleBlocks} editable={editable} linkTo={linkTo} />
   	    <ScrollContainer>
-          {blocks.map((b, i) => (
+          {visibleBlocks.map((b, i) => (
             <Section
               key={`section-${i}`}
               anchor={linkTo(b)}
