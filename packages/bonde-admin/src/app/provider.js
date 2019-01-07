@@ -25,7 +25,7 @@ class Application extends React.Component {
 
   componentDidMount () {
     const { location: { pathname } } = window
-    const publicPaths = [/\/register\/?/, /\/subscriptions\/\d+\/edit\/?/]
+    const publicPaths = [/\/register\/?/, /\/subscriptions\/\d+\/edit\/?/, /\/playground\/?/]
 
     if (!publicPaths.some(pathRegex => pathRegex.test(pathname))) {
       crossStorage.onConnect()
