@@ -10,7 +10,7 @@ const Navbar = props => {
   const menuProps = { ...props, blocks: visibleMenuBlocks }
 
   return (
-    <div className='absolute col-12 z3'>
+    <div className='absolute col-12 z3 fixed'>
       <Menu {...menuProps} />
       <Menu {...menuProps} mobile />
     </div>

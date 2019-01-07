@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { Section, Footer, ScrollContainer, Navigation } from './components'
+import { Section, Footer, Navigation } from './components'
 
 /**
  * A mobilization has two modes, in editing ({ editable: true })
@@ -35,7 +35,7 @@ class Mobilization extends React.Component {
   	return (
   	  <div className={classnames('flex flex-column', themeClassName, layoutClassName)} style={layoutStyle}>
         <Navigation blocks={visibleBlocks} editable={editable} linkTo={linkTo} />
-  	    <ScrollContainer>
+  	    <div className='flex-auto'>
           {visibleBlocks.map((b, i) => (
             <Section
               key={`section-${i}`}
@@ -49,7 +49,7 @@ class Mobilization extends React.Component {
           ))}
   	      {editable && NewBlockButton && (<NewBlockButton />)}
   	  	  <Footer />
-        </ScrollContainer>
+        </div>
       </div>
   	)
   }
