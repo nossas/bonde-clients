@@ -8,7 +8,7 @@ class PluggableWidget extends React.Component {
   getExtraProps () {
     // TODO: Essas propriedades devem ser repensadas
     return {
-      mobilization: {
+      mobilization: this.props.mobilization || {
         header_font: 'meu-rio',
         body_font: 'meu-rio'
       },
@@ -49,10 +49,14 @@ class PluggableWidget extends React.Component {
   }
 }
 
+PluggableWidget.defaultProps = {
+  editable: false
+}
+
 PluggableWidget.propTypes = {
   widget: PropTypes.object.isRequired,
   plugins: PropTypes.array.isRequired,
-  editable: PropTypes.bool.isRequired,
+  editable: PropTypes.bool,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func
 }

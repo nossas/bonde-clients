@@ -2,6 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import WidgetArea from './widget-area'
 
+const getBackgroundStyle = block => {
+  if (block.bg_image) return { background: `url('${block.bg_image}') no-repeat`, backgroundSize: 'cover' }
+  else if (block.bg_class) {
+    try {
+      const rgba = JSON.parse(block.bg_class)
+      return {
+        backgroundColor: `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`
+      }
+    } catch (ex) {
+      // Silent error because use className
+      return {}
+    }
+  }
+}
 
 /**
  * The basic rendering structure of a block has features
@@ -11,17 +25,23 @@ import WidgetArea from './widget-area'
 class Section extends React.Component {
 
   renderBlock () {
-    const { anchor, widgets, widgetComponent } = this.props
+    const { anchor, block, widgets, widgetComponent } = this.props
     return (
-      <div id={anchor} className='col-10 mx-auto'>
-        <div className='clearfix widgets' style={{ padding: '5em 0' }}>
-          {widgets && widgets.map(widget => (
-            <WidgetArea
-              key={`widget-${widget.id}`}
-              widget={widget}
-              widgetComponent={widgetComponent}
-            />
-          ))}
+      <div
+        id={anchor}
+        className={block.bg_class && block.bg_class.indexOf('{') === -1 ? block.bg_class : undefined}
+        style={{ ...getBackgroundStyle(block) }}
+      >
+        <div className='col-10 mx-auto'>
+          <div className='clearfix widgets' style={{ padding: '5em 0' }}>
+            {widgets && widgets.map(widget => (
+              <WidgetArea
+                key={`widget-${widget.id}`}
+                widget={widget}
+                widgetComponent={widgetComponent}
+              />
+            ))}
+          </div>
         </div>
       </div>
     )

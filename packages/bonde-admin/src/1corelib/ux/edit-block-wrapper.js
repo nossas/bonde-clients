@@ -1,22 +1,6 @@
 import React from 'react'
 
 
-const getBackgroundStyle = block => {
-  if (block.bg_image) return { background: `url('${block.bg_image}') no-repeat`, backgroundSize: 'cover' }
-  else if (block.bg_class) {
-    try {
-      const rgba = JSON.parse(block.bg_class)
-      return {
-        backgroundColor: `rgba(${rgba.r},${rgba.g},${rgba.b},${rgba.a})`
-      }
-    } catch (ex) {
-      // Silent error because use className
-      return {}
-    }
-  }
-}
-
-
 class EditBlockWrapper extends React.Component {
 
   render () {
@@ -40,8 +24,6 @@ class EditBlockWrapper extends React.Component {
             onCancelEdit(block)
           }*/
         }}
-        className={block.bg_class && block.bg_class.indexOf('{') === -1 ? block.bg_class : undefined}
-        style={{ ...getBackgroundStyle(block), cursor: 'pointer' }}
       >
         {children}
       </div>
