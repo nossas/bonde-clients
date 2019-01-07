@@ -41,10 +41,10 @@ class PluggableWidget extends React.Component {
         onEdit={() => onEdit && onEdit(widget)}
         onDelete={() => onDelete && onDelete(widget)}
       >
-        <plugin.component widget={widget} {...this.getExtraProps()} />
+        <plugin.component widget={widget} plugins={plugins} {...this.getExtraProps()} />
       </Overlay>
     ) : (
-      <plugin.component widget={widget} {...this.getExtraProps()} />
+      <plugin.component widget={widget} plugins={plugins} {...this.getExtraProps()} />
     )
   }
 }

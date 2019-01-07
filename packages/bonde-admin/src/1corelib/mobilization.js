@@ -4,7 +4,8 @@ import classnames from 'classnames'
 import { Section, Footer, ScrollContainer } from './components'
 
 /**
- * A mobilization can have two modes, in editing and only rendering.
+ * A mobilization has two modes, in editing ({ editable: true })
+ * and only rendering ({ editable: false }).
  * When a mobilization is in edit mode, it needs to receive extra
  * properties that will be used for block and widgets editing.
  */
@@ -62,10 +63,13 @@ Mobilization.propTypes = {
   /* Define when the mobilization is in edit mode. */
   editable: PropTypes.bool,
   /* Function used to link navigation bar with block,
-   * receives block as parameter. */
+   * receives block as parameter and should return a string like id. */
   linkTo: PropTypes.func.isRequired,
   /* This component is rendered just below the list of blocks,
-   * and should lead to the addition of a new block when it is clicked */
+   * and should lead to the addition of a new block when it is clicked
+   * 
+   * TODO: Review button should external to the mobilization component.
+   */
   newBlockButton: PropTypes.any,
   /* Sections of your mobilization, you will receive an item from this
    * list when you are rendering block customization. */
