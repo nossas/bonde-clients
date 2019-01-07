@@ -10,9 +10,10 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapActionsToProps = {
-  onEdit: () => handleEdit('widget'),
-  onCancelEdit: () => handleCancelEdit('widget')
-}
+const mapActionsToProps = (dispatch, ownProps) => ({
+  onEdit: () => dispatch(handleEdit('widget')),
+  onCancelEdit: () => dispatch(handleCancelEdit('widget')),
+  ...ownProps
+})
 
 export default connect(mapStateToProps, mapActionsToProps)(EditorOld)
