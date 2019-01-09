@@ -35,12 +35,12 @@ class Input extends React.Component {
           style={styles.select}
           onChange={onChange}
         >
-          <option value=''>
-            <FormattedMessage
-              id='form-widget.components--input.field-dropdown.options.default'
-              defaultMessage='Selecione...'
-            />
-          </option>
+          <FormattedMessage
+            id='form-widget.components--input.field-dropdown.options.default'
+            defaultMessage='Selecione...'
+          >
+            {(txt) => (<option value=''>{txt}</option>)}
+          </FormattedMessage>
           {
             field.placeholder.split(',').map(function (v, index) {
               return <option key={`dropdown-option-${index}`}>{v}</option>
@@ -52,12 +52,12 @@ class Input extends React.Component {
       return (
         <input
           name={name}
+          type={field.kind === 'email' ? 'email' : 'text'}
           onChange={onChange}
-          className='input block border border-gray94'
-          style={styles.input}
           onBlur={onBlur}
           placeholder={field.placeholder}
-          type={field.kind === 'email' ? 'email' : 'text'}
+          className='input block border border-gray94'
+          style={styles.input}
         />
       )
     }

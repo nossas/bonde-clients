@@ -27,7 +27,9 @@ class Form extends Component {
     return fields.filter(f => f.kind !== 'greetings')
   }
 
-  submit () {
+  submit (e) {
+    e.preventDefault()
+
     const { asyncFormEntryCreate, mobilization, widget } = this.props
     const { values } = this.state
 
@@ -38,15 +40,20 @@ class Form extends Component {
     const errors = this.validate(fieldsWithValue)
     this.setState({ errors })
 
-    if (errors.length === 0) {
+    if (errors.length > 0) {
+      this.setState({ errors, loading: false, success: false })
+    } else {
       this.setState({ loading: true })
       const formEntry = {
         widget_id: widget.id,
         fields: JSON.stringify(fieldsWithValue)
       }
-      asyncFormEntryCreate({ mobilization, formEntry }).then(() => {
-        this.setState({ loading: false, success: true, values: {} })
-      })
+      asyncFormEntryCreate({ mobilization, formEntry })
+        .then(() => {
+          debugger
+          this.setState({ loading: false, success: true, values: {} })
+          return Promise.resolve()
+        })
     }
   }
 
@@ -113,26 +120,22 @@ class Form extends Component {
   }
 
   renderButton () {
-    const { configurable, widget, intl } = this.props
-    const { loading, success } = this.state
-
-    if (!configurable) {
-      return (
-        <Button
-          {...this.props}
-          buttonText={
-            (widget.settings && widget.settings.button_text) ||
-            intl.formatMessage({
-              id: 'form-widget.components--form.default.button-text',
-              defaultMessage: 'Enviar'
-            })
-          }
-          handleClick={this.submit.bind(this)}
-          loading={loading}
-          success={success}
-        />
-      )
-    }
+    const { widget, intl } = this.props
+    const { loading, success } = this.state  
+    return (
+      <Button
+        {...this.props}
+        buttonText={
+          (widget.settings && widget.settings.button_text) ||
+          intl.formatMessage({
+            id: 'form-widget.components--form.default.button-text',
+            defaultMessage: 'Enviar'
+          })
+        }
+        loading={loading}
+        success={success}
+      />
+    )
   }
 
   renderCount () {
@@ -205,10 +208,12 @@ class Form extends Component {
     return (
       <div>
         <div className='rounded p3 relative' style={{ backgroundColor: bgcolor }}>
-          {this.renderCallToAction()}
-          {this.renderFields()}
-          {this.renderErrors()}
-          {this.renderButton()}
+          <form onSubmit={this.submit.bind(this)}>
+            {this.renderCallToAction()}
+            {this.renderFields()}
+            {this.renderErrors()}
+            {this.renderButton()}
+          </form>
         </div>
       </div>
     )
