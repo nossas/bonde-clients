@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 const WidgetArea = ({
+  block,
   widget,
-  widgetComponent: WidgetComponent
+  widgetComponent: WidgetComponent,
+  extraWidgetProps
 }) => {
   const { sm_size, md_size, lg_size } = widget
   const containerClass = classnames(
@@ -14,12 +16,13 @@ const WidgetArea = ({
 
   return (
     <div className={containerClass}>
-      <WidgetComponent widget={widget} />
+      <WidgetComponent block={block} widget={widget} extraWidgetProps={extraWidgetProps} />
     </div>
   )
 }
 
 WidgetArea.propsTypes = {
+  block: PropTypes.object,
   widget: PropTypes.object,
   /* Component responsible to render a widget logic,
    * receive { widget } props */

@@ -27,7 +27,8 @@ class Mobilization extends React.Component {
       linkTo,
       blockWidgetsRef,
       widgets,
-      widgetComponent
+      widgetComponent,
+      extraWidgetProps
     } = this.props
 
     const visibleBlocks = !editable ? blocks.filter(b => !b.hidden) : blocks
@@ -45,6 +46,7 @@ class Mobilization extends React.Component {
               wrapper={blockWrapper}
               widgets={blockWidgetsRef(b, widgets)}
               widgetComponent={widgetComponent}
+              extraWidgetProps={extraWidgetProps}
             />
           ))}
   	      {editable && NewBlockButton && (<NewBlockButton />)}
@@ -59,6 +61,7 @@ Mobilization.defaultProps = {
   editable: false,
   blocks: [],
   widgets: [],
+  extraWidgetProps: {},
   blockWidgetsRef: (b, ws) => ws.filter(w => w.block_id === b.id)
 }
 
@@ -86,6 +89,8 @@ Mobilization.propTypes = {
   /* Component responsible to render a widget logic,
    * receive { widget } props */
   widgetComponent: PropTypes.any.isRequired,
+  // TODO: Documentation
+  extraWidgetProps: PropTypes.object,
   /* Function used to link widgets with block, receives (block, widgets)
    * as param.
    * Default function use the attrs widget.block_id to relationship. */

@@ -6,7 +6,7 @@ import { Mobilization } from '@mobs'
 import { Section } from '@mobs/components'
 /*import Block from '@/mobrender/components/block.connected'*/
 
-describe('client/mobrender/components/mobilization', () => {
+describe('@mobs/mobilization Mobilization', () => {
   let wrapper
   const props = {
     colorScheme: 'meu-rio',
@@ -37,6 +37,7 @@ describe('client/mobrender/components/mobilization', () => {
     widgetComponent: ({ widget }) => (
       <p>{widget.kind}</p>
     ),
+    extraWidgetProps: {}
 /*    store: mock.store({ auth: { user: { email: 'foo@bar.com' } } })*/
   }
 
@@ -71,7 +72,8 @@ describe('client/mobrender/components/mobilization', () => {
       anchor: props.linkTo(firstBlock),
       wrapper: props.blockWrapper,
       widgets: props.widgets.filter(w => w.block_id === firstBlock.id),
-      widgetComponent: props.widgetComponent
+      widgetComponent: props.widgetComponent,
+      extraWidgetProps: props.extraWidgetProps
     }
     const sectionProps = wrapper.find(Section).at(0).props()
     expect(sectionProps).to.deep.equal(firstBlockProps)

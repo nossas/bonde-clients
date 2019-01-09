@@ -5,7 +5,7 @@ import { shallow } from 'enzyme'
 import { Section } from '@mobs/components'
 /*import Block from '@/mobrender/components/block.connected'*/
 
-describe('client/mobrender/components/mobilization', () => {
+describe('@mobs/components/section Section', () => {
   let blockComponent
   const block = { id: 1 }
   const widgets = [
@@ -19,7 +19,8 @@ describe('client/mobrender/components/mobilization', () => {
     editable: true,
     block,
     widgets,
-    widgetComponent: WidgetComponent
+    widgetComponent: WidgetComponent,
+    extraWidgetProps: {}
   }
   const BlockWrapper = ({ children }) => (
     <div id='block-wrapper'>{children}</div>
@@ -51,5 +52,15 @@ describe('client/mobrender/components/mobilization', () => {
 
   it('should render WidgetArea to each widget object', () => {
     expect(blockComponent.find('WidgetArea').length).to.equal(props.widgets.length)
+  })
+
+  it('should pass to WidgetArea block and widget', () => {
+    const widgetProps = blockComponent.find('WidgetArea').at(0).props()
+    expect(widgetProps).to.deep.equal({
+      block: props.block,
+      widget: props.widgets[0],
+      widgetComponent: props.widgetComponent,
+      extraWidgetProps: props.extraWidgetProps
+    })
   })
 })

@@ -5,21 +5,6 @@ import Overlay from './overlay'
 
 class PluggableWidget extends React.Component {
 
-  getExtraProps () {
-    // TODO: Essas propriedades devem ser repensadas
-    return {
-      mobilization: this.props.mobilization || {
-        header_font: 'meu-rio',
-        body_font: 'meu-rio'
-      },
-      editable: this.props.editable,
-      // TODO: Propriedades requeridas para edição de conteúdo, sai do padrão
-      // overlay
-      onEdit: () => {},
-      onCancelEdit: () => {}
-    }
-  }
-
   getOptions (plugin) {
     let options = { noOverlay: !this.props.editable }
     if (typeof plugin.options === 'function') {
@@ -31,20 +16,26 @@ class PluggableWidget extends React.Component {
   }
 
   render () {
-    const { widget, plugins, onEdit, onDelete } = this.props
+    const { block, widget, extraWidgetProps, onEdit, onDelete } = this.props
     
-    const plugin = plugins.find(p => p.kind === widget.kind)
+    const plugin = extraWidgetProps.plugins.find(p => p.kind === widget.kind)
     const { noOverlay } = this.getOptions(plugin)
+
+    const widgetProps = {
+      block,
+      widget,
+      ...extraWidgetProps
+    }
 
     return !noOverlay ? (
       <Overlay
         onEdit={() => onEdit && onEdit(widget)}
         onDelete={() => onDelete && onDelete(widget)}
       >
-        <plugin.component widget={widget} plugins={plugins} {...this.getExtraProps()} />
+        <plugin.component {...widgetProps} />
       </Overlay>
     ) : (
-      <plugin.component widget={widget} plugins={plugins} {...this.getExtraProps()} />
+      <plugin.component {...widgetProps} />
     )
   }
 }
@@ -54,6 +45,7 @@ PluggableWidget.defaultProps = {
 }
 
 PluggableWidget.propTypes = {
+  block: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   plugins: PropTypes.array.isRequired,
   editable: PropTypes.bool,

@@ -25,7 +25,7 @@ const getBackgroundStyle = block => {
 class Section extends React.Component {
 
   renderBlock () {
-    const { anchor, block, widgets, widgetComponent } = this.props
+    const { anchor, block, widgets, widgetComponent, extraWidgetProps } = this.props
     return (
       <div
         id={anchor}
@@ -37,8 +37,10 @@ class Section extends React.Component {
             {widgets && widgets.map(widget => (
               <WidgetArea
                 key={`widget-${widget.id}`}
+                block={block}
                 widget={widget}
                 widgetComponent={widgetComponent}
+                extraWidgetProps={extraWidgetProps}
               />
             ))}
           </div>
@@ -78,7 +80,9 @@ Section.propTypes = {
   widgets: PropTypes.array,
   /* Component responsible to render a widget logic,
    * receive { widget } props */
-  widgetComponent: PropTypes.any.isRequired
+  widgetComponent: PropTypes.any.isRequired,
+  // TODO: documentation
+  extraWidgetProps: PropTypes.object
 }
 
 export default Section
