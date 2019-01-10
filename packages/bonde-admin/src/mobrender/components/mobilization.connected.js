@@ -21,4 +21,6 @@ const mapActionsToProps = {
   blockUpdate: asyncUpdateBlock
 }
 
+export const mobrenderHOC = connect(mapStateToProps, mapActionsToProps)
+
 export default connect(mapStateToProps, mapActionsToProps)(Mobilization)

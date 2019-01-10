@@ -36,20 +36,22 @@ const TellAFriend = ({
   )
 }
 
+const { bool, shape, string, object, oneOf } = PropTypes
+
 TellAFriend.propTypes = {
-  preview: PropTypes.bool,
-  mobilization: PropTypes.shape({
-    twitter_share_text: PropTypes.string
+  preview: bool,
+  mobilization: shape({
+    twitter_share_text: string
   }).isRequired,
-  widget: PropTypes.shape({
-    settings: PropTypes.shape({
-      whatsapp_text: PropTypes.string
+  widget: shape({
+    settings: shape({
+      whatsapp_text: string
     })
   }).isRequired,
-  message: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
-  imageWidth: PropTypes.string
+  message: oneOf([string, object]).isRequired,
+  href: string.isRequired,
+  imageUrl: string,
+  imageWidth: string
 }
 
 TellAFriend.defaultProps = {

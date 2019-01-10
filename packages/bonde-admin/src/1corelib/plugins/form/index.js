@@ -1,0 +1,1 @@
+export { default as FormPlugin } from './plugin.connected'

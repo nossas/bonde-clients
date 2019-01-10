@@ -18,6 +18,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Content,
     kind: 'content',
+    // TODO: propriedades relacionadas ao draft
     icon: 'font',
     label: intl.formatMessage({
       id: 'widgets.config--content.label',
@@ -35,6 +36,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Form,
     kind: 'form',
+    // TODO: propriedades relacionadas ao draft
     icon: 'list',
     label: intl.formatMessage({
       id: 'widgets.config--form.label',
@@ -51,6 +53,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Pressure,
     kind: 'pressure',
+    // TODO: propriedades relacionadas ao draft
     svgIcon: PressureEmailIcon,
     label: intl.formatMessage({
       id: 'widgets.config--pressure.label',
@@ -73,6 +76,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Pressure,
     kind: 'pressure-phone',
+    // TODO: propriedades relacionadas ao draft
     svgIcon: PressurePhoneIcon,
     label: intl.formatMessage({
       id: 'widgets.config--pressure-phone.label',
@@ -94,6 +98,7 @@ export default (mobilization, widget, { intl }) => [
   {
     component: Donation,
     kind: 'donation',
+    // TODO: propriedades relacionadas ao draft
     icon: 'money',
     label: intl.formatMessage({
       id: 'widgets.config--donation.label',
