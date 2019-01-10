@@ -41,13 +41,14 @@ class PluggableWidget extends React.Component {
 }
 
 PluggableWidget.defaultProps = {
-  editable: false
+  editable: false,
+  plugins: []
 }
 
 PluggableWidget.propTypes = {
   block: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  plugins: PropTypes.array.isRequired,
+  plugins: PropTypes.array,
   editable: PropTypes.bool,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func

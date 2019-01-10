@@ -2,12 +2,8 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import CountUp from 'react-countup'
 import { intlShape } from 'react-intl'
-import { Button, Input, FormTellAFriend } from './components'
+import { Button, Input, Raise } from './components'
 import { isValidEmail } from './utils'
-// TOOD: Remove dependencies
-import { Error } from '@/components/form-util'
-import { FinishMessageCustom } from '@/mobilizations/widgets/components'
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 
 class Form extends Component {
   constructor (props, context) {
@@ -50,7 +46,6 @@ class Form extends Component {
       }
       asyncFormEntryCreate({ mobilization, formEntry })
         .then(() => {
-          debugger
           this.setState({ loading: false, success: true, values: {} })
           return Promise.resolve()
         })
@@ -104,6 +99,7 @@ class Form extends Component {
   }
 
   renderFields () {
+    const { analyticsEvents } = this.props
     const fields = this.fields()
     return fields.map((field, index) => {
       return (
@@ -112,7 +108,7 @@ class Form extends Component {
           key={field.uid}
           name={this.getFieldName(field)}
           onChange={this.handleChange.bind(this)}
-          onBlur={(Number(index) === 0 ? AnalyticsEvents.formIsFilled.bind(AnalyticsEvents) : () => {})}
+          onBlur={(Number(index) === 0 ? analyticsEvents.formIsFilled.bind(analyticsEvents) : () => {})}
           field={field}
         />
       )
@@ -165,18 +161,19 @@ class Form extends Component {
     const { errors } = this.state
 
     return errors.length > 0 && (
-      <div>
+      <React.Fragment>
         {errors.map((error, i) => (
-          <Error
+          <Raise
             key={`error-${i}`}
             message={error}
           />
         ))}
-      </div>
+      </React.Fragment>
     )
   }
 
   renderShareButtons () {
+    // TODO: check how works greetings
     const fields = this.fields()
     let message = ''
     fields.map((field) => {
@@ -186,12 +183,18 @@ class Form extends Component {
       return message
     })
     if (message === '') {
-      const { mobilization, widget } = this.props
+      const { mobilization, widget, overrides } = this.props
       const { settings: { finish_message_type: finishMessageType } } = widget
+
+      const {
+        FinishCustomMessage: { component: FinishCustomMessage },
+        FinishDefaultMessage: { component: FinishDefaultMessage }
+      } = overrides
+
       return finishMessageType === 'custom' ? (
-        <FinishMessageCustom widget={widget} />
+        <FinishCustomMessage mobilization={mobilization} widget={widget} />
       ) : (
-        <FormTellAFriend mobilization={mobilization} widget={widget} />
+        <FinishDefaultMessage mobilization={mobilization} widget={widget} />
       )
     } else {
       return <p className='center p2 bg-darken-3'>{message}</p>
@@ -232,14 +235,25 @@ class Form extends Component {
   }
 }
 
+const { any, object, shape, string } = PropTypes
+
 Form.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.shape({
-    settings: PropTypes.shape({
-      finish_message_type: PropTypes.string
+  mobilization: object.isRequired,
+  widget: shape({
+    settings: shape({
+      finish_message_type: string
     }).isRequired
   }).isRequired,
-  intl: intlShape
+  intl: intlShape,
+  analyticsEvents: object,
+  overrides: shape({
+    FinishCustomMessage: shape({
+      component: any
+    }).isRequired,
+    FinishDefaultMessage: shape({
+      component: any
+    }).isRequired
+  }).isRequired
 }
 
 export default Form
