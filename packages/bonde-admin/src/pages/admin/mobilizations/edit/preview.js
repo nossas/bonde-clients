@@ -1,9 +1,14 @@
 import React from 'react'
 import { Mobilization } from '@mobs'
 import { PluggableWidget } from '@mobs/ux'
-//Plugins
+// DRAFT PLUGIN and external dependencies
 import { DraftPlugin } from '@mobs/plugins/draft'
+// FORM PLUGIN and external dependencies
 import { FormPlugin } from '@mobs/plugins/form'
+import { FinishMessageCustom } from '@/mobilizations/widgets/components'
+import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
+import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
+// TODO: Migrate this plugins
 import { Content, Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
@@ -19,7 +24,16 @@ const plugins = [
   },
   {
     kind: 'form',
-    component: FormPlugin,
+    component: (props) => (
+      <FormPlugin
+        {...props}
+        analyticsEvents={AnalyticsEvents}
+        overrides={{
+          FinishCustomMessage: { component: FinishMessageCustom },
+          FinishDefaultMessage: { component: FormTellAFriend },
+        }}
+      />
+    ),
     options: DraftPlugin.setOptions({
       label: 'Formulário',
       icon: () => (<i className='fa fa-list block white' />),
