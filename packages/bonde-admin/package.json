@@ -95,7 +95,7 @@
     "coverage": "yarn test -- --coverage",
     "release": "standard-version",
     "preinstall": "rm -f node_modules/@ && rm -f node_modules/@mobs",
-    "postinstall": "ln -s `pwd`/src node_modules/@ && ln -s `pwd`/src/1corelib node_modules/@mobs"
+    "postinstall": "ln -s `pwd`/src node_modules/@ && ln -s `pwd`/src/1corelib node_modules/@mobs",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
