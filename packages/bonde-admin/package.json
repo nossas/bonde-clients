@@ -93,10 +93,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "coverage": "yarn test -- --coverage",
-    "build:webviewer": "webpack --colors --hide-modules --bail --config ./tools/webpack.webviewer.js",
     "release": "standard-version",
     "preinstall": "rm -f node_modules/@ && rm -f node_modules/@mobs",
     "postinstall": "ln -s `pwd`/src node_modules/@ && ln -s `pwd`/src/1corelib node_modules/@mobs"
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "jest": {
     "coverageReporters": [
@@ -112,5 +113,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-styleguidist": "^8.0.6"
+  }
 }
