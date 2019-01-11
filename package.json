@@ -8,6 +8,6 @@
       "dev": "yarn lerna run dev --parallel --scope=bonde-admin --scope=bonde-admin-canary --scope=bonde-public"
     },
     "devDependencies": {
-        "lerna": "^3.4.0"
+        "lerna": "^3.10.5"
     }
 }
