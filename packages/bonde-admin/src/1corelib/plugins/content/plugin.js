@@ -37,7 +37,7 @@ class Content extends React.Component {
   }
 }
 
-const { object, shape, func, string, oneOfType } = PropTypes
+const { object, shape, string, oneOfType } = PropTypes
 
 Content.propTypes = {
   mobilization: object.isRequired,
@@ -46,7 +46,8 @@ Content.propTypes = {
       content: oneOfType([string, object]).isRequired
     }),
   }).isRequired,
-  update: func,
+  // Used to render draft editor
+  decorator: PropTypes.object.isRequired,
   intl: intlShape.isRequired
 }
 

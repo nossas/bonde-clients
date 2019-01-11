@@ -10,6 +10,7 @@ import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/compon
 import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from '@mobs/plugins/content'
+import { decorator } from '@/components/editor-draft-js/Toolbar'
 // TODO: Migrate this plugins
 import { Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
@@ -79,7 +80,12 @@ const plugins = [
   },
   {
     kind: 'content',
-    component: ContentPlugin,
+    component: (props) => (
+      <ContentPlugin
+        {...props}
+        decorator={decorator}
+      />
+    ),
     options: Object.assign(
       {},
       DraftPlugin.setOptions({

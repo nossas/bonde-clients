@@ -7,8 +7,6 @@ import {
   convertFromHTML,
   convertFromRaw
 } from 'draft-js'
-// TODO: Remove this dependencies
-import { decorator } from '@/components/editor-draft-js/Toolbar'
 
 
 class RebooEditor extends React.Component {
@@ -25,7 +23,7 @@ class RebooEditor extends React.Component {
       throw new Error('Value invalid')
     }
 
-    const editorState = EditorState.createWithContent(contentState, decorator)
+    const editorState = EditorState.createWithContent(contentState, props.decorator)
 
     this.state = { editorState }
   }
@@ -46,7 +44,8 @@ class RebooEditor extends React.Component {
 }
 
 RebooEditor.propTypes = {
-  value: PropTypes.any
+  value: PropTypes.any,
+  decorator: PropTypes.object.isRequired
 }
 
 export default RebooEditor
