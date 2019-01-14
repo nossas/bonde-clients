@@ -11,8 +11,10 @@ import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from '@mobs/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
+// PRESSURE PLUGIN and external dependencies
+import { PressurePlugin } from '@mobs/plugins/pressure'
 // TODO: Migrate this plugins
-import { Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
+import { Donation } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 // TODO: Icons should be inside plugin reference.
@@ -58,7 +60,7 @@ const plugins = [
   },
   {
     kind: 'pressure',
-    component: Pressure,
+    component: PressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por e-mail',
       icon: PressureEmailIcon,
@@ -69,7 +71,7 @@ const plugins = [
   },
   {
     kind: 'pressure-phone',
-    component: Pressure,
+    component: PressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por telefone',
       icon: PressurePhoneIcon,
