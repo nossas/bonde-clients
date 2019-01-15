@@ -23,6 +23,16 @@ import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/icons'
 
 
+const MyCustonPressurePlugin = (props) => (
+  <PressurePlugin
+    {...props}
+    overrides={{
+      FinishCustomMessage: { component: FinishMessageCustom },
+      FinishDefaultMessage: { component: PressureTellAFriend },
+    }}
+  />
+)
+
 const plugins = [
   { 
     kind: 'draft',
@@ -62,15 +72,7 @@ const plugins = [
   },
   {
     kind: 'pressure',
-    component: (props) => (
-      <PressurePlugin
-        {...props}
-        overrides={{
-          FinishCustomMessage: { component: FinishMessageCustom },
-          FinishDefaultMessage: { component: PressureTellAFriend },
-        }}
-      />
-    ),
+    component: MyCustonPressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por e-mail',
       icon: PressureEmailIcon,
@@ -81,15 +83,7 @@ const plugins = [
   },
   {
     kind: 'pressure-phone',
-    component: (props) => (
-      <PressurePlugin
-        {...props}
-        overrides={{
-          FinishCustomMessage: { component: FinishMessageCustom },
-          FinishDefaultMessage: { component: PressureTellAFriend },
-        }}
-      />
-    ),
+    component: MyCustonPressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por telefone',
       icon: PressurePhoneIcon,

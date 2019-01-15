@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import MobSelectors from '@/mobrender/redux/selectors'
 import * as PressureActions from '@/mobilizations/widgets/__plugins__/pressure/action-creators'
-import Pressure from './plugin'
+import PressureGraphQL from './plugin.graphql'
 
 const mapStateToProps = (state, props) => {
   const pressure = MobSelectors(state, props).getPlugin('pressure')
@@ -11,4 +11,4 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = { ...PressureActions }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pressure)
+export default connect(mapStateToProps, mapDispatchToProps)(PressureGraphQL)

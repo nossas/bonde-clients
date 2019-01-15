@@ -1,8 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { client as graphqlClient } from '@/store'
-import * as graphqlMutations from '@/graphql/mutations'
-import * as graphqlQueries from '@/graphql/queries'
 import { arrayUtils, pressureUtils } from './utils'
 import { Count, Form, Targets } from './components'
 
@@ -17,8 +14,6 @@ class Pressure extends React.Component {
       filled: false,
       selectedTargets: [],
       selectedTargetsError: undefined,
-      callTransition: undefined,
-      observableQuery: undefined,
       addTwilioCallMutation: undefined,
       // TODO: receive from widget settings
       selectableTargetList: false,
@@ -31,12 +26,11 @@ class Pressure extends React.Component {
     const isPressurePhone = pressureUtils.getType(this.getTargetList()) === pressureUtils.PRESSURE_TYPE_PHONE
     const hasCounter = !!this.props.widget.settings.count_text
     if (hasCounter && isPressurePhone) {
-      graphqlClient().query({
-        query: graphqlQueries.CountTwilioCallsByWidget,
-        variables: { widgetId: this.props.widget.id }
-      }).then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
-        this.setState({ phonePressureCount })
-      }).catch(err => console.error(err))
+      this.props.countTwilioCallsByWidget({ widgetId: this.props.widget.id })
+        .then(({ phonePressureCount }) => {
+          this.setState({ phonePressureCount })
+        })
+        .catch(err => console.error(err))
     }
   }
 
@@ -87,37 +81,14 @@ class Pressure extends React.Component {
 
         this.setState({ selectedTargetsError: undefined })
 
-        this.handleTwilioCall({
+        this.props.twilioCall({
           widgetId: this.props.widget.id,
           communityId: this.props.mobilization.community_id,
           from: data.phone,
           to: this.getEmailTarget(arrayUtils.shuffle(this.getTargetList())[0])
-        }).then(() => {
-          if (!this.state.observableQuery) {
-            const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
-              pollInterval: 2000,
-              query: graphqlQueries.watchTwilioCallTransitions,
-              variables: { widgetId: this.props.widget.id, from: data.phone }
-            })
-            observableQuery.subscribe({
-              next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
-                this.setState({ callTransition })
-              }
-            })
-            this.setState({ observableQuery })
-          }
-        })
+        }, true)
       }
     }
-  }
-
-  handleTwilioCall (variables) {
-    const { phonePressureCount } = this.state
-    this.setState({ phonePressureCount: phonePressureCount + 1 })
-    return graphqlClient().mutate({
-      mutation: graphqlMutations.addTwilioCall,
-      variables
-    })
   }
 
   render () {
@@ -187,8 +158,8 @@ class Pressure extends React.Component {
             onSubmit={this.handleSubmit.bind(this)}
             targetList={this.getTargetList()}
             selectedTargets={this.selectedTargets}
-            callTransition={this.state.callTransition}
-            addTwilioCallMutation={this.handleTwilioCall.bind(this)}
+            callTransition={this.props.callTransition}
+            addTwilioCallMutation={this.props.twilioCall}
             changeParentState={this.changeState.bind(this)}
           >
             {countText && (
@@ -221,6 +192,9 @@ Pressure.propTypes = {
   filledPressureWidgets: array,
   // Actions
   asyncFillWidget: func,
+  // ({ widgetId: Int }): Promise<({ phonePressureCount })>
+  countTwilioCallsByWidget: func,
+  twilioCall: func,
   overrides: shape({
     FinishCustomMessage: shape({
       component: any
