@@ -11,8 +11,6 @@ import { Section, Footer, Navigation } from './components'
  */
 class Mobilization extends React.Component {
 
-  static BLOCK_LIST_ID = 'container-sections'
-
   constructor (props) {
     super(props)
     // used only visible blocks
