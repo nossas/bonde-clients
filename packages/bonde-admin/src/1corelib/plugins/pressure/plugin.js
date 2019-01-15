@@ -3,10 +3,7 @@ import PropTypes from 'prop-types'
 import { client as graphqlClient } from '@/store'
 import * as graphqlMutations from '@/graphql/mutations'
 import * as graphqlQueries from '@/graphql/queries'
-import * as pressureHelper from '@/mobilizations/widgets/utils/pressure-helper'
-import * as array from '@/utils/array'
-import { FinishMessageCustom } from '@/mobilizations/widgets/components'
-import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
+import { arrayUtils, pressureUtils } from './utils'
 import { Count, Form, Targets } from './components'
 
 /* TODO: Change static content by props
@@ -31,17 +28,15 @@ class Pressure extends React.Component {
   }
 
   componentWillMount () {
-    const isPressurePhone = pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE
+    const isPressurePhone = pressureUtils.getType(this.getTargetList()) === pressureUtils.PRESSURE_TYPE_PHONE
     const hasCounter = !!this.props.widget.settings.count_text
     if (hasCounter && isPressurePhone) {
       graphqlClient().query({
         query: graphqlQueries.CountTwilioCallsByWidget,
         variables: { widgetId: this.props.widget.id }
-      })
-        .then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
-          this.setState({ phonePressureCount })
-        })
-        .catch(err => console.error(err))
+      }).then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
+        this.setState({ phonePressureCount })
+      }).catch(err => console.error(err))
     }
   }
 
@@ -59,16 +54,12 @@ class Pressure extends React.Component {
     return targetSplit[1].replace('>', '')
   }
 
-  changeSelectedTargets (selectedTargets) {
-    this.setState({ selectedTargets })
-  }
-
   changeState (state) {
     this.setState(state)
   }
 
   handleSubmit (data) {
-    if (data.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
+    if (data.pressureType === pressureUtils.PRESSURE_TYPE_EMAIL) {
       const { widget, asyncFillWidget } = this.props
       const payload = {
         activist: {
@@ -84,7 +75,7 @@ class Pressure extends React.Component {
         }
       }
       asyncFillWidget({ payload, widget })
-    } else if (data.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
+    } else if (data.pressureType === pressureUtils.PRESSURE_TYPE_PHONE) {
       if (!this.state.selectedTargets.length && this.state.selectableTargetList) {
         this.setState({
           selectedTargetsError:
@@ -96,21 +87,11 @@ class Pressure extends React.Component {
 
         this.setState({ selectedTargetsError: undefined })
 
-        // it needs to find or create the activist data
-        const addTwilioCallMutation = variables => {
-          const { phonePressureCount } = this.state
-          this.setstate({ phonePressureCount: phonePressureCount + 1 })
-          return graphqlClient().mutate({
-            mutation: graphqlMutations.addTwilioCall,
-            variables
-          })
-        }
-
-        addTwilioCallMutation({
+        this.handleTwilioCall({
           widgetId: this.props.widget.id,
           communityId: this.props.mobilization.community_id,
           from: data.phone,
-          to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
+          to: this.getEmailTarget(arrayUtils.shuffle(this.getTargetList())[0])
         }).then(() => {
           if (!this.state.observableQuery) {
             const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
@@ -126,12 +107,17 @@ class Pressure extends React.Component {
             this.setState({ observableQuery })
           }
         })
-
-        if (!this.state.addTwilioCallMutation) {
-          this.setState({ addTwilioCallMutation })
-        }
       }
     }
+  }
+
+  handleTwilioCall (variables) {
+    const { phonePressureCount } = this.state
+    this.setState({ phonePressureCount: phonePressureCount + 1 })
+    return graphqlClient().mutate({
+      mutation: graphqlMutations.addTwilioCall,
+      variables
+    })
   }
 
   render () {
@@ -162,12 +148,21 @@ class Pressure extends React.Component {
       disable_edit_field: 'n'
     }
 
-    const finishPressure = filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage
+
+    const {
+      FinishCustomMessage: { component: FinishCustomMessage },
+      FinishDefaultMessage: { component: FinishDefaultMessage }
+    } = this.props.overrides
+
+    const finishPressure = (
+      (filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage)
+        && FinishCustomMessage && FinishDefaultMessage
+    )
 
     return finishPressure ? (finishMessageType === 'custom' ? (
-          <FinishMessageCustom mobilization={mobilization} widget={widget} />
+          <FinishCustomMessage mobilization={mobilization} widget={widget} />
         ) : (
-          <PressureTellAFriend mobilization={mobilization} widget={widget} />
+          <FinishDefaultMessage mobilization={mobilization} widget={widget} />
         )
       ) : (
         <div className='pressure-widget'>
@@ -180,9 +175,6 @@ class Pressure extends React.Component {
           </h2>
           <Targets
             targets={this.getTargetList() || []}
-            onSelect={this.changeSelectedTargets.bind(this)}
-            errorMessage={this.state.selectedTargetsError}
-            selectable={this.selectableTargetList}
           />
           <Form
             disabled={disableEditField === 's'}
@@ -196,7 +188,7 @@ class Pressure extends React.Component {
             targetList={this.getTargetList()}
             selectedTargets={this.selectedTargets}
             callTransition={this.state.callTransition}
-            addTwilioCallMutation={this.state.addTwilioCallMutation}
+            addTwilioCallMutation={this.handleTwilioCall.bind(this)}
             changeParentState={this.changeState.bind(this)}
           >
             {countText && (
@@ -213,20 +205,37 @@ class Pressure extends React.Component {
   }
 }
 
+const { any, array, bool, func, object, shape, string } = PropTypes
+
 Pressure.propTypes = {
-  editable: PropTypes.bool,
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.shape({
-    settings: PropTypes.shape({
-      finish_message_type: PropTypes.string,
-      finish_message: PropTypes.string,
-      finish_message_background: PropTypes.string
+  editable: bool,
+  mobilization: object.isRequired,
+  widget: shape({
+    settings: shape({
+      finish_message_type: string,
+      finish_message: string,
+      finish_message_background: string
     }).isRequired
   }).isRequired,
-  saving: PropTypes.bool,
-  filledPressureWidgets: PropTypes.array,
+  saving: bool,
+  filledPressureWidgets: array,
   // Actions
-  asyncFillWidget: PropTypes.func
+  asyncFillWidget: func,
+  overrides: shape({
+    FinishCustomMessage: shape({
+      component: any
+    }).isRequired,
+    FinishDefaultMessage: shape({
+      component: any
+    }).isRequired
+  }).isRequired
+}
+
+Pressure.defaultProps = {
+  overrides: {
+    FinishCustomMessage: {},
+    FinishDefaultMessage: {}
+  }
 }
 
 export default Pressure
