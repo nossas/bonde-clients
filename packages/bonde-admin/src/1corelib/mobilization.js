@@ -14,9 +14,21 @@ class Mobilization extends React.Component {
   constructor (props) {
     super(props)
     // used only visible blocks
-    const { editable, blocks } = props
-    const visibleBlocks = !editable ? blocks.filter(b => !b.hidden) : blocks
+    const visibleBlocks = this.getVisibleBlocks(props)
     this.state = { blocks: visibleBlocks }
+  }
+
+  componentWillReceveProps(nextProps) {
+    if (this.props.blocks !== nextProps.blocks) {
+      this.setState({
+        blocks: this.getVisibleBlocks(nextProps)
+      })
+    }
+  }
+
+  getVisibleBlocks ({ blocks, editable }) {
+    const visibleBlocks = !editable ? blocks.filter(b => !b.hidden) : blocks
+    return visibleBlocks
   }
 
   componentDidMount () {
