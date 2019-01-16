@@ -8,8 +8,11 @@ import { FormPlugin } from '@mobs/plugins/form'
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
 import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
+// CONTENT PLUGIN and external dependencies
+import { ContentPlugin } from '@mobs/plugins/content'
+import { decorator } from '@/components/editor-draft-js/Toolbar'
 // TODO: Migrate this plugins
-import { Content, Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
+import { Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 // TODO: Icons should be inside plugin reference.
@@ -77,7 +80,12 @@ const plugins = [
   },
   {
     kind: 'content',
-    component: Content,
+    component: (props) => (
+      <ContentPlugin
+        {...props}
+        decorator={decorator}
+      />
+    ),
     options: Object.assign(
       {},
       DraftPlugin.setOptions({
