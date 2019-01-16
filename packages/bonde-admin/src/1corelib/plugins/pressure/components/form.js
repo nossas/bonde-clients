@@ -1,10 +1,8 @@
+import React from 'react'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
 import classnames from 'classnames'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import * as pressureHelper from '@/mobilizations/widgets/utils/pressure-helper'
-import { isValidEmail, isValidPhoneE164 } from '@/utils/validation-helper'
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
+import { validateUtils, pressureUtils } from '../utils'
 
 if (require('exenv').canUseDOM) {
   require('./form.scss')
@@ -25,7 +23,7 @@ const parseTarget = target => {
   return valid ? { name: targetSplit[0].trim(), value: targetSplit[1].replace('>', '') } : null
 }
 
-class RealtimeCallDuration extends Component {
+class RealtimeCallDuration extends React.Component {
   constructor (props) {
     super(props)
     this.state = { duration: 0, interval: undefined }
@@ -48,7 +46,7 @@ class RealtimeCallDuration extends Component {
   }
 }
 
-class PressureForm extends Component {
+class PressureForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -59,7 +57,7 @@ class PressureForm extends Component {
       city: '',
       subject: props.subject,
       body: props.body,
-      pressureType: pressureHelper.getType(props.targetList) || undefined,
+      pressureType: pressureUtils.getType(props.targetList) || undefined,
       callManagement: undefined
     }
   }
@@ -104,10 +102,10 @@ class PressureForm extends Component {
     })
     const errors = { valid: true }
 
-    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_EMAIL) {
+    if (this.state.pressureType === pressureUtils.PRESSURE_TYPE_EMAIL) {
       if (!this.state.email) {
         errors.email = requiredMsg
-      } else if (!isValidEmail(this.state.email)) {
+      } else if (!validateUtils.isValidEmail(this.state.email)) {
         errors.email = intl.formatMessage({
           id: 'pressure-widget.components--pressure-form.email.validation.invalid-email-format',
           defaultMessage: 'E-mail inválido'
@@ -125,12 +123,12 @@ class PressureForm extends Component {
         errors.body = requiredMsg
       }
     }
-    if (this.state.pressureType === pressureHelper.PRESSURE_TYPE_PHONE) {
+    if (this.state.pressureType === pressureUtils.PRESSURE_TYPE_PHONE) {
       const { phone } = this.state
       const phoneE164 = /^\+/.test(phone) ? phone : `+${phone}`
       if (!phone) {
         errors.phone = requiredMsg
-      } else if (!isValidPhoneE164(phoneE164)) {
+      } else if (!validateUtils.isValidPhoneE164(phoneE164)) {
         if ([11, 12].includes(phoneE164.length)) {
           errors.phone = intl.formatMessage({
             id: 'pressure-widget.components--pressure-form.phone.validation.ddd',
@@ -224,7 +222,7 @@ class PressureForm extends Component {
                   id='pressure-sender-email-id'
                   className='col-12'
                   style={inputReset}
-                  onBlur={AnalyticsEvents.pressureIsFilled.bind(AnalyticsEvents)}
+                  onBlur={this.props.analyticsEvents.pressureIsFilled.bind(this.props.analyticsEvents)}
                   type='email'
                   placeholder={intl.formatMessage({
                     id: 'pressure-widget.components--pressure-form.email.placeholder',
@@ -248,7 +246,7 @@ class PressureForm extends Component {
                   id='pressure-sender-phone-id'
                   className='col-12'
                   style={inputReset}
-                  onBlur={AnalyticsEvents.pressureIsFilled.bind(AnalyticsEvents)}
+                  onBlur={this.props.analyticsEvents.pressureIsFilled.bind(this.props.analyticsEvents)}
                   type='text'
                   placeholder={intl.formatMessage({
                     id: 'pressure-widget.components--pressure-form.phone.placeholder',
@@ -584,6 +582,7 @@ PressureForm.propTypes = {
   mobilization: PropTypes.object,
   widget: PropTypes.object,
   changeParentState: PropTypes.func.isRequired,
+  analyticsEvents: PropTypes.object.isRequired,
   intl: intlShape
 }
 

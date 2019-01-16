@@ -148,6 +148,7 @@ class Pressure extends React.Component {
             targets={this.getTargetList() || []}
           />
           <Form
+            analyticsEvents={this.props.analyticsEvents}
             disabled={disableEditField === 's'}
             widget={widget}
             mobilization={mobilization}
@@ -195,6 +196,7 @@ Pressure.propTypes = {
   // ({ widgetId: Int }): Promise<({ phonePressureCount })>
   countTwilioCallsByWidget: func,
   twilioCall: func,
+  analyticsEvents: object.isRequired,
   overrides: shape({
     FinishCustomMessage: shape({
       component: any

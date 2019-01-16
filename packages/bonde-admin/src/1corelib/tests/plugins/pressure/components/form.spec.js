@@ -8,10 +8,14 @@ import { Form } from '@mobs/plugins/pressure/components'
 describe('@mobs/plugins/pressure/components Form', () => {
   let wrapper
   const targets = ['Foo Bar <foo@bar.com>', 'Bar Foo <bar@foo.com>', 'Foo Baz <foo@baz.com>']
-  const widget = { settings: {} }
+  const widget = { settings: { } }
+  const analyticsEvents = {
+    pressureIsFilled: () => {}
+  }
+  const defaultProps = { targets, widget, analyticsEvents }
 
   beforeEach(() => {
-    wrapper = mountWithIntl(<Form widget={widget} targetList={targets} />)
+    wrapper = mountWithIntl(<Form {...defaultProps} />)
   })
 
   it('should render ok by default', () => {
@@ -54,7 +58,7 @@ describe('@mobs/plugins/pressure/components Form', () => {
   it.skip('should set default subject and body by props', () => {
     const wrapper = mountWithIntl(
       <Form
-        widget={widget}
+        {...defaultProps}
         subject='subject default'
         body='body default'
       />
@@ -74,15 +78,15 @@ describe('@mobs/plugins/pressure/components Form', () => {
     let submitted
     const wrapper = mountWithIntl(
       <Form
-        widget={widget}
+        {...defaultProps}
+        widget={{ settings: { show_city: 'city-true' }}}
         buttonText='Enviando...'
         buttonColor='#666'
         onSubmit={data => { submitted = data }}
-        targetList={targets}
       />
     )
     wrapper.find('form').simulate('submit')
-    expect(wrapper.find('span.error').length).to.equal(5)
+    expect(wrapper.find('span.error').length).to.equal(3)
     expect(submitted).to.equal(undefined)
   })
 
@@ -97,7 +101,7 @@ describe('@mobs/plugins/pressure/components Form', () => {
       let submitted
       wrapper = mountWithIntl(
         <Form
-          widget={widget}
+          {...defaultProps}
           onSubmit={data => { submitted = data }}
           targetList={targetsPhone}
         />

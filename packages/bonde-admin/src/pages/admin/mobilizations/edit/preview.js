@@ -6,7 +6,6 @@ import { DraftPlugin } from '@mobs/plugins/draft'
 // FORM PLUGIN and external dependencies
 import { FormPlugin } from '@mobs/plugins/form'
 import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from '@mobs/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
@@ -14,6 +13,7 @@ import { decorator } from '@/components/editor-draft-js/Toolbar'
 import { PressurePlugin } from '@mobs/plugins/pressure'
 import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
 // Dependencies more plugins
+import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 // TODO: Migrate this plugins
 import { Donation } from '@/mobilizations/widgets/__plugins__'
@@ -26,6 +26,7 @@ import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/ic
 const MyCustonPressurePlugin = (props) => (
   <PressurePlugin
     {...props}
+    analyticsEvents={AnalyticsEvents}
     overrides={{
       FinishCustomMessage: { component: FinishMessageCustom },
       FinishDefaultMessage: { component: PressureTellAFriend },
