@@ -5,19 +5,34 @@ import { PluggableWidget } from '@mobs/ux'
 import { DraftPlugin } from '@mobs/plugins/draft'
 // FORM PLUGIN and external dependencies
 import { FormPlugin } from '@mobs/plugins/form'
-import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from '@mobs/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
+// PRESSURE PLUGIN and external dependencies
+import { PressurePlugin } from '@mobs/plugins/pressure'
+import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
+// Dependencies more plugins
+import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
+import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 // TODO: Migrate this plugins
-import { Donation, Pressure } from '@/mobilizations/widgets/__plugins__'
+import { Donation } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 // TODO: Icons should be inside plugin reference.
 import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/icons'
 
+
+const MyCustonPressurePlugin = (props) => (
+  <PressurePlugin
+    {...props}
+    analyticsEvents={AnalyticsEvents}
+    overrides={{
+      FinishCustomMessage: { component: FinishMessageCustom },
+      FinishDefaultMessage: { component: PressureTellAFriend },
+    }}
+  />
+)
 
 const plugins = [
   { 
@@ -58,7 +73,7 @@ const plugins = [
   },
   {
     kind: 'pressure',
-    component: Pressure,
+    component: MyCustonPressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por e-mail',
       icon: PressureEmailIcon,
@@ -69,7 +84,7 @@ const plugins = [
   },
   {
     kind: 'pressure-phone',
-    component: Pressure,
+    component: MyCustonPressurePlugin,
     options: DraftPlugin.setOptions({
       label: 'Pressão por telefone',
       icon: PressurePhoneIcon,

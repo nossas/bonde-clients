@@ -9,7 +9,7 @@ import Page from './page'
 describe('routes/admin/authenticated/sidebar/mobilizations-edit/page', () => {
   let page
   const defaultProps = {
-    mobilization: {},
+    mobilization: { id: 0 },
     match: {}
   }
 
