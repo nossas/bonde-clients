@@ -66,6 +66,7 @@ const plugins = [
     component: (props) => (
       <DonationPlugin
         {...props}
+        analyticsEvents={AnalyticsEvents}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
           FinishDefaultMessage: { component: DonationTellAFriend },

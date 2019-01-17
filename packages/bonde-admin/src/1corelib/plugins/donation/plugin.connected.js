@@ -1,16 +1,13 @@
 import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '@/mobilizations/widgets/__plugins__/donation/action-creators'
-import * as graphqlQueries from '@/graphql/queries'
 import DonationPlugin from './plugin'
 
 const mapStateToProps = state => ({
   donationCustomerData: state.mobilizations.plugins.donation.customerData
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   handleDonationTransactionCreate: ({
     mobilization,
     widget,
@@ -74,17 +71,10 @@ const mapDispatchToProps = dispatch => ({
       ...customerData
     }
 
-    AnalyticsEvents.donationSetValue()
+    ownProps.analyticsEvents.donationSetValue()
 
     checkout.open(params)
   })
 })
 
-export default graphql(
-  graphqlQueries.fetchDonationGoalStats, {
-    name: 'donationGoalStats',
-    options: props => ({
-      variables: { widgetId: props.widget.id },
-      fetchPolicy: 'network-only'
-    })
-  })(connect(mapStateToProps, mapDispatchToProps)(injectIntl(DonationPlugin)))
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(DonationPlugin))

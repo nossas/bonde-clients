@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import tinycolor from 'tinycolor2'
-import * as formatNumberHelper from '@/utils/format-number-helper'
+import { numberUtils } from '../utils'
 
 if (require('exenv').canUseDOM) require('./progress.scss')
 
@@ -36,7 +36,7 @@ const Progress = ({
       >
         {value > 5 && (
           <span className='percentage' style={{ color: colorStrategy(fillColor) }}>
-            {formatNumberHelper.number(value).split(',')[0]}%
+            {numberUtils.number(value).split(',')[0]}%
           </span>
         )}
       </div>

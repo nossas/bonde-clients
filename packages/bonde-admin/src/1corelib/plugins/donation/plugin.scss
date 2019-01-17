@@ -36,6 +36,10 @@
   .payment-type {
     font-size: .9rem;
     text-decoration: none;
+    border: none;
+    background: inherit;
+    color: #b0b0b0;
+    cursor: pointer;
 
     span {
       margin-top: .7em;
@@ -54,10 +58,12 @@
   }
 
   .value-option {
+    color: #b0b0b0;
     border-radius: .3rem;
     box-sizing: border-box;
     border-width: .3rem;
     border-style: solid;
     border-color: #fff;
+    cursor: pointer;
   }
 }
