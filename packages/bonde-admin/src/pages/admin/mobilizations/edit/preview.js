@@ -13,6 +13,7 @@ import { decorator } from '@/components/editor-draft-js/Toolbar'
 // PRESSURE PLUGIN and external dependencies
 import { PressurePlugin, PressureAnalytics } from '@mobs/plugins/pressure'
 import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
+import { client as graphqlClient } from '@/store'
 // PRESSURE PLUGIN and external dependencies
 import { DonationPlugin, DonationAnalytics } from '@mobs/plugins/donation'
 import { DonationTellAFriend } from '@/mobilizations/widgets/__plugins__/donation/components'
@@ -28,6 +29,7 @@ const MyCustonPressurePlugin = (props) => (
   <PressurePlugin
     {...props}
     analyticsEvents={PressureAnalytics}
+    graphqlClient={graphqlClient}
     overrides={{
       FinishCustomMessage: { component: FinishMessageCustom },
       FinishDefaultMessage: { component: PressureTellAFriend },

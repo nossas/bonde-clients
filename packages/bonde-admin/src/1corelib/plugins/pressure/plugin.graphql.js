@@ -1,7 +1,7 @@
 import React from 'react'
-import { client as graphqlClient } from '@/store'
-import * as graphqlMutations from '@/graphql/mutations'
-import * as graphqlQueries from '@/graphql/queries'
+import PropTypes from 'prop-types'
+import * as graphqlMutations from './graphql/mutations'
+import * as graphqlQueries from './graphql/queries'
 import PressurePlugin from './plugin'
 
 class PressureGraphQL extends React.Component {
@@ -12,6 +12,7 @@ class PressureGraphQL extends React.Component {
   }
 
   handleTwilioCall (variables, watchQuery=false) {
+    const { graphqlClient } = this.props
     const { phonePressureCount } = this.state
     this.setState({ phonePressureCount: phonePressureCount + 1 })
     return graphqlClient().mutate({
@@ -35,6 +36,7 @@ class PressureGraphQL extends React.Component {
   }
 
   render () {
+    const { graphqlClient } = this.props
     return (
       <PressurePlugin
         {...this.props}
@@ -42,7 +44,7 @@ class PressureGraphQL extends React.Component {
         twilioCall={this.handleTwilioCall.bind(this)}
         countTwilioCallsByWidget={(variables) => {
           return graphqlClient().query({
-            query: graphqlQueries.CountTwilioCallsByWidget,
+            query: graphqlQueries.countTwilioCallsByWidget,
             variables
           }).then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
             return Promise.resolve({ phonePressureCount })
@@ -51,6 +53,10 @@ class PressureGraphQL extends React.Component {
       />
     )
   }
+}
+
+PressureGraphQL.propTypes = {
+  graphqlClient: PropTypes.func.isRequired
 }
 
 export default PressureGraphQL
