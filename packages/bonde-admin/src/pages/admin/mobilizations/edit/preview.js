@@ -1,22 +1,22 @@
 import React from 'react'
+import ReactGA from 'react-ga'
 import { Mobilization } from '@mobs'
 import { PluggableWidget } from '@mobs/ux'
 // DRAFT PLUGIN and external dependencies
 import { DraftPlugin } from '@mobs/plugins/draft'
 // FORM PLUGIN and external dependencies
-import { FormPlugin } from '@mobs/plugins/form'
+import { FormPlugin, FormAnalytics } from '@mobs/plugins/form'
 import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from '@mobs/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
 // PRESSURE PLUGIN and external dependencies
-import { PressurePlugin } from '@mobs/plugins/pressure'
+import { PressurePlugin, PressureAnalytics } from '@mobs/plugins/pressure'
 import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
 // PRESSURE PLUGIN and external dependencies
-import { DonationPlugin } from '@mobs/plugins/donation'
+import { DonationPlugin, DonationAnalytics } from '@mobs/plugins/donation'
 import { DonationTellAFriend } from '@/mobilizations/widgets/__plugins__/donation/components'
 // Dependencies more plugins
-import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
@@ -27,7 +27,7 @@ import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/ic
 const MyCustonPressurePlugin = (props) => (
   <PressurePlugin
     {...props}
-    analyticsEvents={AnalyticsEvents}
+    analyticsEvents={PressureAnalytics}
     overrides={{
       FinishCustomMessage: { component: FinishMessageCustom },
       FinishDefaultMessage: { component: PressureTellAFriend },
@@ -46,7 +46,7 @@ const plugins = [
     component: (props) => (
       <FormPlugin
         {...props}
-        analyticsEvents={AnalyticsEvents}
+        analyticsEvents={FormAnalytics}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
           FinishDefaultMessage: { component: FormTellAFriend },
@@ -66,7 +66,7 @@ const plugins = [
     component: (props) => (
       <DonationPlugin
         {...props}
-        analyticsEvents={AnalyticsEvents}
+        analyticsEvents={DonationAnalytics}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
           FinishDefaultMessage: { component: DonationTellAFriend },
@@ -126,6 +126,24 @@ const plugins = [
 ]
 
 class MobilizationPreview extends React.Component {
+
+  componentDidMount () {
+    const isTest = false
+    if (!isTest && this.props.mobilization) {
+      const { mobilization } = this.props
+
+      ReactGA.initialize('UA-26278513-30')
+      ReactGA.pageview('/' + mobilization.slug)
+
+      if (mobilization.google_analytics_code) {
+        ReactGA.initialize(
+          mobilization.google_analytics_code,
+          { gaOptions: { name: 'MobilizationTracker' } }
+        )
+        ReactGA.ga('MobilizationTracker.send', 'pageview', '/')
+      }
+    }
+  }
 
   render () {
     // Properties received by HOC
