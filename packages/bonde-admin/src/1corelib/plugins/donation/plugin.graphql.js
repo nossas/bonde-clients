@@ -1,5 +1,5 @@
 import { graphql } from 'react-apollo'
-import * as graphqlQueries from '@/graphql/queries'
+import * as graphqlQueries from './graphql/queries'
 import DonationPluginConnected from './plugin.connected'
 
 export default graphql(graphqlQueries.fetchDonationGoalStats, {
