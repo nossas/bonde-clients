@@ -1,0 +1,1 @@
+export { default as DonationPlugin } from './plugin.graphql'

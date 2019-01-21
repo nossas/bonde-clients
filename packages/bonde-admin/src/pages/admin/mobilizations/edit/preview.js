@@ -12,11 +12,12 @@ import { decorator } from '@/components/editor-draft-js/Toolbar'
 // PRESSURE PLUGIN and external dependencies
 import { PressurePlugin } from '@mobs/plugins/pressure'
 import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
+// PRESSURE PLUGIN and external dependencies
+import { DonationPlugin } from '@mobs/plugins/donation'
+import { DonationTellAFriend } from '@/mobilizations/widgets/__plugins__/donation/components'
 // Dependencies more plugins
 import AnalyticsEvents from '@/mobilizations/widgets/utils/analytics-events'
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
-// TODO: Migrate this plugins
-import { Donation } from '@/mobilizations/widgets/__plugins__'
 // TODO: Review this concept
 import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 // TODO: Icons should be inside plugin reference.
@@ -62,7 +63,16 @@ const plugins = [
   },
   {
     kind: 'donation',
-    component: Donation,
+    component: (props) => (
+      <DonationPlugin
+        {...props}
+        analyticsEvents={AnalyticsEvents}
+        overrides={{
+          FinishCustomMessage: { component: FinishMessageCustom },
+          FinishDefaultMessage: { component: DonationTellAFriend },
+        }}
+      />
+    ),
     options: DraftPlugin.setOptions({
       label: 'Doação',
       icon: () => (<i className='fa fa-money block white' />),
