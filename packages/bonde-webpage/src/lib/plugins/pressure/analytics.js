@@ -1,23 +1,23 @@
 import AnalyticsBase from '../../analytics-base'
 
+const PRESSURE_FILLED = {
+  category: 'Pressão',
+  action: 'Preenchimento Iniciado'
+}
+
+const PRESSURE_SAVED = {
+  category: 'Pressão',
+  action: 'Dados Salvos com Sucesso'
+}
+
 class Analytics extends AnalyticsBase {
   
-  static PRESSURE_FILLED = {
-    category: 'Pressão',
-    action: 'Preenchimento Iniciado'
-  }
-  
-  static PRESSURE_SAVED = {
-    category: 'Pressão',
-    action: 'Dados Salvos com Sucesso'
-  }
-
   pressureIsFilled () {
-    return this.sendEvent(Analytics.PRESSURE_FILLED)
+    return this.sendEvent(PRESSURE_FILLED)
   }
 
   pressureSavedData () {
-    return this.sendEvent(Analytics.PRESSURE_SAVED)
+    return this.sendEvent(PRESSURE_SAVED)
   }
 }
 

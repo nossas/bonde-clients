@@ -1,8 +1,8 @@
 {
   "name": "bonde-webpage",
   "version": "0.0.1",
+  "private": false,
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "files": [
     "dist",
     "README.md"
@@ -29,20 +29,14 @@
   "scripts": {
     "preinstall": "rm -f node_modules/@bonde-webpage",
     "postinstall": "ln -s `pwd`/src/lib node_modules/@bonde-webpage",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "dev": "react-scripts start",
+    "prepare": "yarn build",
+    "build": "NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject"
   },
   "babel": {
-    "presets": [
-      [
-        "react-app",
-        {
-          "absoluteRuntime": false
-        }
-      ]
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,8 +48,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "axios-mock-adapter": "^1.16.0",
-    "babel-cli": "^6.26.0",
     "chai": "^4.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
