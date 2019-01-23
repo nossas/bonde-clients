@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactGA from 'react-ga'
-import { Mobilization } from '@mobs'
-import { PluggableWidget } from '@mobs/ux'
+import { Mobilization } from 'bonde-webpage'
+import { PluggableWidget } from 'bonde-webpage/ux'
 // DRAFT PLUGIN and external dependencies
-import { DraftPlugin } from '@mobs/plugins/draft'
+import { DraftPlugin } from 'bonde-webpage/plugins/draft'
 // FORM PLUGIN and external dependencies
-import { FormPlugin, FormAnalytics } from '@mobs/plugins/form'
+import { FormPlugin, FormAnalytics } from 'bonde-webpage/plugins/form'
 import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
 // CONTENT PLUGIN and external dependencies
-import { ContentPlugin } from '@mobs/plugins/content'
+import { ContentPlugin } from 'bonde-webpage/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
 // PRESSURE PLUGIN and external dependencies
-import { PressurePlugin, PressureAnalytics } from '@mobs/plugins/pressure'
+import { PressurePlugin, PressureAnalytics } from 'bonde-webpage/plugins/pressure'
 import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
 import { client as graphqlClient } from '@/store'
 // PRESSURE PLUGIN and external dependencies
-import { DonationPlugin, DonationAnalytics } from '@mobs/plugins/donation'
+import { DonationPlugin, DonationAnalytics } from 'bonde-webpage/plugins/donation'
 import { DonationTellAFriend } from '@/mobilizations/widgets/__plugins__/donation/components'
 // Dependencies more plugins
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
