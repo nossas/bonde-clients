@@ -2,7 +2,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import { Targets } from '@bonde-webpage/plugins/pressure/components'
+import { Targets } from '../../../../plugins/pressure/components'
 
 describe('@bonde-webpage/plugins/pressure/components Targets', () => {
   let wrapper

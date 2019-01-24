@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
-import { FormAnalytics } from '@bonde-webpage/plugins/form'
-import MobSelectors from '@bonde-webpage/redux/selectors'
+import { FormAnalytics } from '../../plugins/form'
+import MobSelectors from '../selectors'
 import * as t from '../action-types'
 import { createAction } from './create-action'
 

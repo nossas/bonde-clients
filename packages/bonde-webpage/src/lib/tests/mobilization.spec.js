@@ -2,8 +2,8 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import { Mobilization } from '@bonde-webpage'
-import { Section } from '@bonde-webpage/components'
+import { Mobilization } from '../'
+import { Section } from '../components'
 /*import Block from '@bonde-webpage/components/block.connected'*/
 
 describe('@bonde-webpage/mobilization Mobilization', () => {

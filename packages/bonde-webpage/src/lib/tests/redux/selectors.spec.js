@@ -3,7 +3,7 @@ import { fromJS } from 'immutable'
 import {
   reducer as rootReducer,
   selectors as Selectors
-} from '@bonde-webpage/redux'
+} from '../../redux'
 
 const state = fromJS({
   mobilizations: rootReducer

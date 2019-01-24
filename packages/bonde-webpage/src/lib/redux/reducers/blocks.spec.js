@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import * as t from '@bonde-webpage/redux/action-types'
-import reducer, { initialState } from '@bonde-webpage/redux/reducers/blocks'
+import * as t from '../action-types'
+import reducer, { initialState } from './blocks'
 
 describe('client/mobrender/redux/reducers/blocks', () => {
   describe('doing fetch', () => {

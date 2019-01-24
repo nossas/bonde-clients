@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import Form from './plugin'
-import { asyncFormEntryCreate } from '@bonde-webpage/redux/action-creators'
+import { asyncFormEntryCreate } from '../../redux/action-creators'
 
 const mapDispatchToProps = { asyncFormEntryCreate }
 

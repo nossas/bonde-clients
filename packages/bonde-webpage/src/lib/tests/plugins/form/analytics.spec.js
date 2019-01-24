@@ -1,6 +1,6 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { FormAnalytics } from '@bonde-webpage/plugins/form'
+import { FormAnalytics } from '../../../plugins/form'
 
 describe('@bonde-webpage/plugins/form FormAnalytics', () => {
   let sandbox

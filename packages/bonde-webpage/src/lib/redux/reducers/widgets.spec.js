@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import * as t from '@bonde-webpage/redux/action-types'
-import reducer, { initialState } from '@bonde-webpage/redux/reducers/widgets'
-import { createAction } from '@bonde-webpage/redux/action-creators/create-action'
+import * as t from '../action-types'
+import reducer, { initialState } from './widgets'
+import { createAction } from '../action-creators/create-action'
 
 describe('@bonde-webpage/redux/reducers/widgets', () => {
   describe('doing fetch', () => {

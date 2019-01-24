@@ -27,8 +27,6 @@
     "sinon": "^7.2.3"
   },
   "scripts": {
-    "preinstall": "rm -f node_modules/@bonde-webpage",
-    "postinstall": "ln -s `pwd`/src/lib node_modules/@bonde-webpage",
     "prepare": "yarn build",
     "build": "NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "start": "react-scripts start",
@@ -36,7 +34,9 @@
     "eject": "react-scripts eject"
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

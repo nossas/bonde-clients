@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { Input } from '@bonde-webpage/plugins/form/components'
+import { Input } from '../../../../plugins/form/components'
 
 describe('@bonde-webpage/plugins/form/components Input', () => {
 

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from '@bonde-webpage/tests/helpers/intl-enzyme-test-helper'
-import { Form } from '@bonde-webpage/plugins/pressure/components'
-import { pressureUtils } from '@bonde-webpage/plugins/pressure/utils'
+import { mountWithIntl } from '../../../helpers/intl-enzyme-test-helper'
+import { Form } from '../../../../plugins/pressure/components'
+import { pressureUtils } from '../../../../plugins/pressure/utils'
 
 describe('@bonde-webpage/plugins/pressure/components Form', () => {
   let wrapper

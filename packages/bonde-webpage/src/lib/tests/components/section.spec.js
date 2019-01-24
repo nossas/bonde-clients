@@ -2,7 +2,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import { Section } from '@bonde-webpage/components'
+import { Section } from '../../components'
 /*import Block from '@bonde-webpage/components/block.connected'*/
 
 describe('@bonde-webpage/components/section Section', () => {

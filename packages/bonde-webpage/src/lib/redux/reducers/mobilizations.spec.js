@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import * as t from '@bonde-webpage/redux/action-types'
-import reducer, { initialState } from '@bonde-webpage/redux/reducers/mobilizations'
+import * as t from '../action-types'
+import reducer, { initialState } from './mobilizations'
 
 describe('@bonde-webpage/redux/reducers/mobilizations', () => {
   describe('doing add', () => {
