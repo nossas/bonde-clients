@@ -12,19 +12,25 @@
     "url": "https://github.com/nossas/bonde-client.git"
   },
   "dependencies": {
+    "apollo-client": "^2.4.12",
     "axios": "^0.18.0",
     "basscss-sass": "^4.0.0",
     "classnames": "^2.2.6",
+    "draft-js": "^0.10.5",
     "exenv": "^1.2.2",
+    "format-number": "^3.0.0",
+    "graphql": "^14.1.1",
     "immutable": "^4.0.0-rc.12",
     "node-sass": "^4.11.0",
+    "react-apollo": "1.4.15",
     "react-countup": "^4.0.0",
     "react-ga": "^2.5.6",
     "react-intl": "^2.8.0",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "sinon": "^7.2.3"
+    "sinon": "^7.2.3",
+    "slate-editor": "^5.1.0"
   },
   "scripts": {
     "prepare": "yarn build",
