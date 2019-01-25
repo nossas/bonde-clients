@@ -8,4 +8,4 @@ export default graphql(graphqlQueries.fetchDonationGoalStats, {
     variables: { widgetId: props.widget.id },
     fetchPolicy: 'network-only'
   })
-})(DonationPluginConnected)
+})

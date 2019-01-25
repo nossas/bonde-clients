@@ -1,10 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { injectIntl } from 'react-intl'
-import DonationPlugin from './plugin'
-import { donationTransactionCreate } from './redux/action-creators'
+import Donation from './plugin'
 
-class DonationProvider extends React.Component {
+export default class extends React.Component {
   constructor (props) {
     super(props)
     this.state = { donationCustomerData: undefined }
@@ -104,7 +101,7 @@ class DonationProvider extends React.Component {
 
   render () {
     return (
-      <DonationPlugin
+      <Donation
         {...this.props}
         donationCustomerData={this.state.donationCustomerData}
         handleDonationTransactionCreate={this.handleTransactionCreate.bind(this)}
@@ -112,5 +109,3 @@ class DonationProvider extends React.Component {
     )
   }
 }
-
-export default connect(undefined, { donationTransactionCreate })(injectIntl(DonationProvider))
