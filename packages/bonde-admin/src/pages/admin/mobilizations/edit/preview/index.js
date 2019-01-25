@@ -1,29 +1,26 @@
 import React from 'react'
 import ReactGA from 'react-ga'
+// MOBILIZATION and external dependencies
 import { Mobilization } from 'bonde-webpage'
 import { PluggableWidget } from 'bonde-webpage/lib/ux'
+import mobilizationConnect from './mobilization.connected'
 // DRAFT PLUGIN and external dependencies
 import { DraftPlugin } from 'bonde-webpage/lib/plugins/draft'
 // FORM PLUGIN and external dependencies
 import FormPlugin from './plugin-form.connected'
-import { FormAnalytics } from 'bonde-webpage/lib/plugins/form'
-import { FormTellAFriend } from '@/mobilizations/widgets/__plugins__/form/components'
+import { FormAnalytics, FormTellAFriend } from 'bonde-webpage/lib/plugins/form'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from 'bonde-webpage/lib/plugins/content'
 import { decorator } from '@/components/editor-draft-js/Toolbar'
 // PRESSURE PLUGIN and external dependencies
 import PressurePlugin from './plugin-pressure.connected'
-import { PressureAnalytics } from 'bonde-webpage/lib/plugins/pressure'
-import { PressureTellAFriend } from '@/mobilizations/widgets/__plugins__/pressure/components'
+import { PressureAnalytics, PressureTellAFriend } from 'bonde-webpage/lib/plugins/pressure'
 import { client as graphqlClient } from '@/store'
 // PRESSURE PLUGIN and external dependencies
 import DonationPlugin from './plugin-donation.connected'
-import { DonationAnalytics } from 'bonde-webpage/lib/plugins/donation'
-import { DonationTellAFriend } from '@/mobilizations/widgets/__plugins__/donation/components'
+import { DonationAnalytics, DonationTellAFriend } from 'bonde-webpage/lib/plugins/donation'
 // Dependencies more plugins
 import { FinishMessageCustom } from '@/mobilizations/widgets/components'
-// TODO: Review this concept
-import { mobrenderHOC } from '@/mobrender/components/mobilization.connected'
 // TODO: Icons should be inside plugin reference.
 import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/icons'
 
@@ -169,4 +166,4 @@ class MobilizationPreview extends React.Component {
   }
 }
 
-export default mobrenderHOC(MobilizationPreview)
+export default mobilizationConnect(MobilizationPreview)
