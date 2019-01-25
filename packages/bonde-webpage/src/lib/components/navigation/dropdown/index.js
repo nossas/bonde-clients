@@ -18,7 +18,7 @@ class DropdownMenu extends React.Component {
 
   renderIcon () {
     return !this.props.icon ? null : (
-      <i ref='icon' className={classnames('icon fa', `fa-${this.props.icon}`)} />
+      <i className={classnames('icon fa', `fa-${this.props.icon}`)} />
     )
   }
 
@@ -53,7 +53,7 @@ class DropdownMenu extends React.Component {
 
     return (
       <div style={{ marginTop: '5px' }} className={classnames('relative', wrapperClassName)}>
-        <button ref='button' className={buttonClassName} onClick={this.handleClick.bind(this)}>
+        <button type='button' className={buttonClassName} onClick={this.handleClick.bind(this)}>
           {this.renderIcon()} {text}
         </button>
         <div

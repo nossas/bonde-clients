@@ -33,7 +33,7 @@ class RebooEditor extends React.Component {
       <div className='reboo-editor'>
         <div className='editor'>
           <div>
-            <Editor ref='editor' readOnly editorState={this.state.editorState} />
+            <Editor readOnly editorState={this.state.editorState} />
             <div style={{ 'clear': 'both' }} />
           </div>
         </div>
