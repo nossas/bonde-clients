@@ -2,7 +2,7 @@ import React from 'react'
 import ReactGA from 'react-ga'
 // MOBILIZATION and external dependencies
 import { Mobilization } from 'bonde-webpage'
-import { PluggableWidget } from 'bonde-webpage/lib/ux'
+import { PluggableWidget, FinishMessageCustom } from 'bonde-webpage/lib/ux'
 import mobilizationConnect from './mobilization.connected'
 // DRAFT PLUGIN and external dependencies
 import { DraftPlugin } from 'bonde-webpage/lib/plugins/draft'
@@ -19,8 +19,6 @@ import { client as graphqlClient } from '@/store'
 // PRESSURE PLUGIN and external dependencies
 import DonationPlugin from './plugin-donation.connected'
 import { DonationAnalytics, DonationTellAFriend } from 'bonde-webpage/lib/plugins/donation'
-// Dependencies more plugins
-import { FinishMessageCustom } from '@/mobilizations/widgets/components'
 // TODO: Icons should be inside plugin reference.
 import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/icons'
 
