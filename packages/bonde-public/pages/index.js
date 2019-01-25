@@ -14,12 +14,14 @@ import apolloClient from '../apolloClient'
 // Store
 import configureStore from '../configureStore'
 
-// Webviewer
+// bonde-webpage
 import {
-  Mobilization as MobilizationApp,
-  Reducer as MobilizationRedux
-} from '../webviewer/webviewer'
-import styles from './../webviewer/main.css'
+  asyncFilterMobilization,
+  asyncFilterBlock,
+  asyncFilterWidget
+} from 'bonde-webpage/lib/redux/action-creators'
+import MobilizationApp from './mobilization.connected'
+import styles from 'bonde-webpage/lib/styles/main.scss'
 
 class Page extends React.Component {
   static async getInitialProps ({ store, req, res }) {
@@ -37,13 +39,7 @@ class Page extends React.Component {
           res.end()
         }
       }
-      // return {}
 
-      const {
-        asyncFilterMobilization,
-        asyncFilterBlock,
-        asyncFilterWidget
-      } = MobilizationRedux.actions
       // eslint-disable-next-line
       const regex = host.match(`(.+)\.${appDomain}`)
 

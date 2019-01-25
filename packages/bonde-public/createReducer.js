@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 // Thirdy apps
-import { Reducer as MobilizationReducer } from './webviewer/webviewer'
+import { reducer as mobilizationReducer } from 'bonde-webpage/lib/redux'
 import { reducer as intlReducer } from './intlReducer'
 import apolloClient from './apolloClient'
 
@@ -25,6 +25,6 @@ export default (initialState = {}) => combineReducers({
   intl: intlReducer,
   sourceRequest: sourceReqCreateReducer(sourceReqInitialState),
   apollo: apolloClient().reducer(),
-  mobilizations: MobilizationReducer.reducer,
+  mobilizations: mobilizationReducer,
   ...initialState
 })
