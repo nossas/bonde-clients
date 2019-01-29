@@ -5,6 +5,8 @@ import FacebookShareButton from './facebook-share-button'
 import TwitterShareButton from './twitter-share-button'
 import WhatsAppShareButton from './whatsapp-share-button'
 
+// import checkMarkImage from './'
+
 const TellAFriend = ({
   preview,
   href,
@@ -22,7 +24,7 @@ const TellAFriend = ({
     <div className='center p3 bg-white darkengray rounded'>
       <div className='m0 h3 bold'>{message}</div>
       <div className='py2'>
-        <img src={imageUrl} style={{ width: imageWidth || 100 }} alt="" />
+        <img src={imageUrl || './check-mark-image.png'} style={{ width: imageWidth || 100 }} alt="" />
       </div>
       <p>
         <FormattedMessage
@@ -53,10 +55,6 @@ TellAFriend.propTypes = {
   href: string.isRequired,
   imageUrl: string,
   imageWidth: string
-}
-
-TellAFriend.defaultProps = {
-  imageUrl: require('exenv').canUseDOM ? require('./check-mark-image.png') : null
 }
 
 export default TellAFriend
