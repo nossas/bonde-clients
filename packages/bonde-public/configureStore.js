@@ -17,7 +17,7 @@ const middlewares = [
   apolloClient().middleware()
 ]
 
-export default (initialState, options) => {
+module.exports = (initialState, options) => {
   const request = {
     host: '',
     protocol: 'http'

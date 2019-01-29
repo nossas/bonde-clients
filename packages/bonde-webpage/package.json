@@ -42,6 +42,9 @@
   },
   "babel": {
     "presets": [
+      ["@babel/preset-env", {
+        "modules": "commonjs"
+      }],
       "react-app"
     ]
   },
