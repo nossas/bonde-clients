@@ -76,11 +76,9 @@ class Form extends Component {
     ).replace('\n', '<br/><br/>')
 
     return (
-      <h2
-        className='mt0 mb3 center white'
-        dangerouslySetInnerHTML={{__html: callToAction}}
-        style={{ fontFamily: headerFont }}
-      />
+      <h2 className='mt0 mb3 center white' style={{ fontFamily: headerFont }}>
+        {callToAction}
+      </h2>
     )
   }
 

@@ -17,7 +17,6 @@ export default class extends React.Component {
     } = values
 
     return new Promise((resolve, reject) => {
-      debugger
       const paymentType = widget.settings.payment_type
       const recurringPeriod = widget.settings.recurring_period
       const mainColor = widget.settings.main_color
