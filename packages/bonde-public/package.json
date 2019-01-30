@@ -55,7 +55,7 @@
     "redux-promise": "0.6.0",
     "redux-thunk": "2.3.0",
     "slate": "^0.32.1",
-    "slate-editor": "^5.1.0",
+    "slate-editor": "~4",
     "slate-plain-serializer": "0.4.11",
     "ssri": "^5.2.2",
     "tinycolor2": "^1.4.1",
