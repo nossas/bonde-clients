@@ -3,7 +3,6 @@ import ReactGA from 'react-ga'
 // MOBILIZATION and external dependencies
 import { Mobilization } from 'bonde-webpage'
 import { PluggableWidget, FinishMessageCustom } from 'bonde-webpage/lib/ux'
-import mobilizationConnect from './mobilization.connected'
 // DRAFT PLUGIN and external dependencies
 import { DraftPlugin } from 'bonde-webpage/lib/plugins/draft'
 // FORM PLUGIN and external dependencies
@@ -21,6 +20,21 @@ import DonationPlugin from './plugin-donation.connected'
 import { DonationAnalytics, DonationTellAFriend } from 'bonde-webpage/lib/plugins/donation'
 // TODO: Icons should be inside plugin reference.
 /*import { PressureEmailIcon, PressurePhoneIcon } from '@/pages/playground-mobs/icons'*/
+
+import { connect } from 'react-redux'
+import { selectors as MobilizationSelectors } from 'bonde-webpage/lib/redux'
+
+const mapStateToProps = (state, props) => {
+  const query = MobilizationSelectors(state, props)
+  return {
+    mobilization: query.getMobilization() || query.getMobilizations()[0],
+    blocks: query.getBlocks(),
+    blocksIsLoaded: query.blocksIsLoaded(),
+    widgets: query.getWidgets()
+  }
+}
+
+const mobilizationConnect = connect(mapStateToProps)
 
 const MyCustonPressurePlugin = (props) => (
   <PressurePlugin
@@ -68,14 +82,7 @@ const plugins = [
   },
   {
     kind: 'pressure',
-    component: MyCustonPressurePlugin,
-    options: DraftPlugin.setOptions({
-      label: 'Pressão por e-mail',
-      icon: PressureEmailIcon,
-      action: (widget) => {
-        console.log(`update widget ${widget.id}`)
-      }
-    })
+    component: MyCustonPressurePlugin
   },
   {
     kind: 'pressure-phone',
