@@ -1,7 +1,8 @@
 import axios from 'axios'
+import getConfig from 'next/config'
 
-const API_URL = process.env.REACT_APP_DOMAIN_API_REST !== undefined
-  ? process.env.REACT_APP_DOMAIN_API_REST
-  : 'http://api-v1.bonde.devel'
+const { publicRuntimeConfig } = getConfig()
 
-export default axios.create({ baseURL: API_URL })
+export default axios.create({
+  baseURL: publicRuntimeConfig.domainApiRest || 'http://api-v1.bonde.devel'
+})

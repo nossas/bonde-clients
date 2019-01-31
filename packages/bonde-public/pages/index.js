@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
 import ReactGA from 'react-ga'
+import getConfig from 'next/config'
 
 // Intl
 import { IntlProvider } from 'react-intl'
@@ -23,12 +24,15 @@ import {
 import MobilizationApp from './mobilization.connected'
 import styles from 'bonde-webpage/lib/styles/main.scss'
 
+const { publicRuntimeConfig } = getConfig()
+
+
 class Page extends React.Component {
   static async getInitialProps ({ store, req, res }) {
     const { dispatch, getState } = store
     const host = getState().sourceRequest.host
     const protocol = getState().sourceRequest.protocol
-    const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel'
+    const appDomain = publicRuntimeConfig.domainPublic || 'bonde.devel'
 
     if (host) {
       if (res) { // force host to be with www
