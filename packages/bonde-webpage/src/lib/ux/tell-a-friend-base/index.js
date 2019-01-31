@@ -1,1 +1,1 @@
-export { default } from './tell-a-friend.connected'
+export { default } from './tell-a-friend'

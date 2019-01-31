@@ -1,5 +1,18 @@
 export default (state, props) => ({
 
+  getMobilizationLink: () => {
+    const { sourceRequest: { protocol, host } } = state
+    const { list: { currentId: id, data } } = state.mobilizations
+    const mobilization =  id ? data.filter(mob => mob.id === id)[0] : undefined
+    if (mobilization) {
+      const { custom_domain: customDomain } = mobilization
+
+      return {
+        href: customDomain || `${protocol}://${host}`
+      }
+    }
+  },
+
   getMobilization: () => {
     const { list: { currentId: id, data } } = state.mobilizations
     return id ? data.filter(mob => mob.id === id)[0] : undefined
