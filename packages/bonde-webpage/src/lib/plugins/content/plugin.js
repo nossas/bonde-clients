@@ -8,7 +8,6 @@ class Content extends React.Component {
 
   render () {
     const { widget: { settings } } = this.props
-
     try {
       // If parse content is RebooEditor
       const content = JSON.parse(settings.content)
@@ -46,8 +45,6 @@ Content.propTypes = {
       content: oneOfType([string, object]).isRequired
     }),
   }).isRequired,
-  // Used to render draft editor
-  decorator: PropTypes.object.isRequired,
   intl: intlShape.isRequired
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Editor from './reboo-editor'
+import { decorator } from './Toolbar'
 
 if (require('exenv').canUseDOM) require('./index.scss')
 
@@ -35,6 +36,10 @@ EditorNew.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
   decorator: PropTypes.object.isRequired
+}
+
+EditorNew.defaultProps = {
+  decorator: decorator
 }
 
 export default EditorNew
