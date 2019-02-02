@@ -7,7 +7,7 @@ import { DraftEditor, SlateEditor } from './components'
 class Content extends React.Component {
 
   render () {
-    const { widget: { settings } } = this.props
+    let { widget: { settings } } = this.props
     try {
       // If parse content is RebooEditor
       const content = JSON.parse(settings.content)
@@ -18,20 +18,8 @@ class Content extends React.Component {
       )
     } catch (e) {
       // TODO: not silenty exception
-      // Else is old editor
-      /*if (this.state.forceRenderNewEditor) {
-        return (
-          <EditorNew {...this.props}
-          />
-        )
-      } else {
-        return (
-          <EditorOld
-            handleForceRender={this.handleForceRender.bind(this)}
-            {...this.props}
-          />
-        )
-      }*/
+      // When settings.content isn't a JSON object should be HTML
+      return <div dangerouslySetInnerHTML={{ __html: settings.content }} />
     }
   }
 }
