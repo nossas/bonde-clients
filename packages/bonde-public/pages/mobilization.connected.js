@@ -10,7 +10,6 @@ import FormPlugin from './plugin-form.connected'
 import { FormAnalytics, FormTellAFriend } from 'bonde-webpage/lib/plugins/form'
 // CONTENT PLUGIN and external dependencies
 import { ContentPlugin } from 'bonde-webpage/lib/plugins/content'
-/*import { decorator } from '@/components/editor-draft-js/Toolbar'*/
 // PRESSURE PLUGIN and external dependencies
 import PressurePlugin from './plugin-pressure.connected'
 import { PressureAnalytics, PressureTellAFriend } from 'bonde-webpage/lib/plugins/pressure'
@@ -36,6 +35,8 @@ const mapStateToProps = (state, props) => {
 
 const mobilizationConnect = connect(mapStateToProps)
 
+const imageUrl = '/static/images/check-mark-image.png'
+
 const MyCustonPressurePlugin = (props) => (
   <PressurePlugin
     {...props}
@@ -43,7 +44,7 @@ const MyCustonPressurePlugin = (props) => (
     graphqlClient={graphqlClient}
     overrides={{
       FinishCustomMessage: { component: FinishMessageCustom },
-      FinishDefaultMessage: { component: PressureTellAFriend },
+      FinishDefaultMessage: { component: PressureTellAFriend, props: { imageUrl } },
     }}
   />
 )
@@ -62,7 +63,7 @@ const plugins = [
         analyticsEvents={FormAnalytics}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
-          FinishDefaultMessage: { component: FormTellAFriend },
+          FinishDefaultMessage: { component: FormTellAFriend, props: { imageUrl } },
         }}
       />
     )
@@ -75,7 +76,7 @@ const plugins = [
         analyticsEvents={DonationAnalytics}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
-          FinishDefaultMessage: { component: DonationTellAFriend },
+          FinishDefaultMessage: { component: DonationTellAFriend, props: { imageUrl } },
         }}
       />
     )
@@ -90,12 +91,7 @@ const plugins = [
   },
   {
     kind: 'content',
-    component: (props) => (
-      <ContentPlugin
-        {...props}
-        decorator={{}}
-      />
-    )
+    component: ContentPlugin
   }
 ]
 
