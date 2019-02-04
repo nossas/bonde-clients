@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import * as paths from '../../../paths'
 import { TellAFriendBase } from '../../../ux'
 
-const FormTellAFriend = ({ preview, mobilization, widget }) => (
+const FormTellAFriend = ({ preview, mobilization, widget, ...props }) => (
   <TellAFriendBase
     preview={preview}
     mobilization={mobilization}
@@ -17,6 +17,7 @@ const FormTellAFriend = ({ preview, mobilization, widget }) => (
       />
     }
     href={paths.mobilization(mobilization)}
+    {...props}
   />
 )
 

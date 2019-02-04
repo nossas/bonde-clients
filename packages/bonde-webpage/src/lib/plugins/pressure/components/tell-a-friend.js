@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import { TellAFriendBase } from '../../../ux'
 
-const PressureTellAFriend = ({ preview, mobilization, widget }) => (
+const PressureTellAFriend = ({ preview, mobilization, widget, ...props }) => (
   <TellAFriendBase
     preview={preview}
     mobilization={mobilization}
@@ -14,6 +14,7 @@ const PressureTellAFriend = ({ preview, mobilization, widget }) => (
         defaultMessage='Pressão enviada'
       />
     }
+    {...props}
   />
 )
 

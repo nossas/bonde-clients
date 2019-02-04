@@ -121,8 +121,8 @@ class Pressure extends React.Component {
 
 
     const {
-      FinishCustomMessage: { component: FinishCustomMessage },
-      FinishDefaultMessage: { component: FinishDefaultMessage }
+      FinishCustomMessage: { component: FinishCustomMessage, props: customProps },
+      FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps }
     } = this.props.overrides
 
     const finishPressure = (
@@ -131,9 +131,9 @@ class Pressure extends React.Component {
     )
 
     return finishPressure ? (finishMessageType === 'custom' ? (
-          <FinishCustomMessage mobilization={mobilization} widget={widget} />
+          <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
         ) : (
-          <FinishDefaultMessage mobilization={mobilization} widget={widget} />
+          <FinishDefaultMessage mobilization={mobilization} widget={widget} {...defaultProps} />
         )
       ) : (
         <div className='pressure-widget'>
@@ -199,18 +199,20 @@ Pressure.propTypes = {
   analyticsEvents: object.isRequired,
   overrides: shape({
     FinishCustomMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired,
     FinishDefaultMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired
   }).isRequired
 }
 
 Pressure.defaultProps = {
   overrides: {
-    FinishCustomMessage: {},
-    FinishDefaultMessage: {}
+    FinishCustomMessage: { props: {} },
+    FinishDefaultMessage: { props: {} }
   }
 }
 

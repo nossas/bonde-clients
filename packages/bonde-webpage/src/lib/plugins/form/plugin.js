@@ -185,14 +185,14 @@ class Form extends Component {
       const { settings: { finish_message_type: finishMessageType } } = widget
 
       const {
-        FinishCustomMessage: { component: FinishCustomMessage },
-        FinishDefaultMessage: { component: FinishDefaultMessage }
+        FinishCustomMessage: { component: FinishCustomMessage, props: customProps },
+        FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps }
       } = overrides
 
       return finishMessageType === 'custom' ? (
-        <FinishCustomMessage mobilization={mobilization} widget={widget} />
+        <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
       ) : (
-        <FinishDefaultMessage mobilization={mobilization} widget={widget} />
+        <FinishDefaultMessage mobilization={mobilization} widget={widget} {...defaultProps} />
       )
     } else {
       return <p className='center p2 bg-darken-3'>{message}</p>
@@ -246,12 +246,21 @@ Form.propTypes = {
   analyticsEvents: object,
   overrides: shape({
     FinishCustomMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired,
     FinishDefaultMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired
   }).isRequired
+}
+
+Form.defaultProps = {
+  overrides: {
+    FinishCustomMessage: { props: {} },
+    FinishDefaultMessage: { props: {} }
+  }
 }
 
 export default Form

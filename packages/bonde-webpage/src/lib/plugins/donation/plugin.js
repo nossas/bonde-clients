@@ -374,14 +374,14 @@ class Donation extends React.Component {
     const { settings: { finish_message_type: finishMessageType } } = widget
 
     const {
-      FinishCustomMessage: { component: FinishCustomMessage },
-      FinishDefaultMessage: { component: FinishDefaultMessage }
+      FinishCustomMessage: { component: FinishCustomMessage, props: customProps },
+      FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps }
     } = overrides
 
     return finishMessageType === 'custom' ? (
-      <FinishCustomMessage mobilization={mobilization} widget={widget} />
+      <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
     ) : (
-      <FinishDefaultMessage mobilization={mobilization} widget={widget} />
+      <FinishDefaultMessage mobilization={mobilization} widget={widget} {...defaultProps} />
     )
   }
 
@@ -459,12 +459,21 @@ Donation.propTypes = {
   // Overrides componente of success action
   overrides: shape({
     FinishCustomMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired,
     FinishDefaultMessage: shape({
-      component: any
+      component: any,
+      props: object
     }).isRequired
   }).isRequired
+}
+
+Donation.defaultProps = {
+  overrides: {
+    FinishCustomMessage: { props: {} },
+    FinishDefaultMessage: { props: {} }
+  }
 }
 
 export default Donation
