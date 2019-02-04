@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { TellAFriendBase } from '../../../ux'
 
 const PressureTellAFriend = ({ preview, mobilization, widget }) => (
-  <TellAFriend
+  <TellAFriendBase
     preview={preview}
     mobilization={mobilization}
     widget={widget}

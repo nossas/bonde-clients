@@ -108,3 +108,9 @@ export default class extends React.Component {
     )
   }
 }
+
+/* TOOD: script inserted on top level for rendering, but need thing a better solution
+// eslint-disable-next-line
+const pagarmeScript = `(function(i,s,o,g,r,a,m){i['PagarMeCheckoutObject']=r;i[r]=i[r]||function(){(i[].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://assets.pagar.me/checkout/checkout.js','PagarMeCheckout');`
+<script dangerouslySetInnerHTML={{ __html: pagarmeScript }} />
+*/
