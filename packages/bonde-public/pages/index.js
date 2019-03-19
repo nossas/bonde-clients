@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
 import ReactGA from 'react-ga'
+import getConfig from 'next/config'
 
 // Intl
 import { IntlProvider } from 'react-intl'
@@ -14,19 +15,24 @@ import apolloClient from '../apolloClient'
 // Store
 import configureStore from '../configureStore'
 
-// Webviewer
+// bonde-webpage
 import {
-  Mobilization as MobilizationApp,
-  Reducer as MobilizationRedux
-} from '../webviewer/webviewer'
-import styles from './../webviewer/main.css'
+  asyncFilterMobilization,
+  asyncFilterBlock,
+  asyncFilterWidget
+} from 'bonde-webpage/lib/redux/action-creators'
+import MobilizationApp from './mobilization.connected'
+import styles from 'bonde-webpage/lib/styles/main.scss'
+
+const { publicRuntimeConfig } = getConfig()
+
 
 class Page extends React.Component {
   static async getInitialProps ({ store, req, res }) {
     const { dispatch, getState } = store
     const host = getState().sourceRequest.host
     const protocol = getState().sourceRequest.protocol
-    const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel'
+    const appDomain = publicRuntimeConfig.domainPublic || 'bonde.devel'
 
     if (host) {
       if (res) { // force host to be with www
@@ -37,13 +43,7 @@ class Page extends React.Component {
           res.end()
         }
       }
-      // return {}
 
-      const {
-        asyncFilterMobilization,
-        asyncFilterBlock,
-        asyncFilterWidget
-      } = MobilizationRedux.actions
       // eslint-disable-next-line
       const regex = host.match(`(.+)\.${appDomain}`)
 
@@ -129,6 +129,7 @@ class Page extends React.Component {
             href='https://fonts.googleapis.com/css?family=Abel|Anton|Archivo+Narrow:400,400i,700,700i|Arvo:400,400i,700,700i|Asap:400,400i,700,700i|Baloo+Bhai|Bitter:400,400i,700|Bree+Serif|Cabin:400,400i,700,700i|Catamaran:400,700|Crimson+Text:400,400i,700,700i|Cuprum:400,400i,700,700i|David+Libre:400,700|Dosis:400,700|Droid+Sans:400,700|Exo+2:400,400i,700,700i|Exo:400,400i,700,700i|Fira+Sans:400,400i,700,700i|Fjalla+One|Francois+One|Gidugu|Hind:400,700|Inconsolata:400,700|Indie+Flower|Josefin+Sans:400,400i,700,700i|Karla:400,400i,700,700i|Lalezar|Lato:400,400i,700,700i|Libre+Baskerville:400,400i,700|Lobster|Lora:400,400i,700,700i|Merriweather+Sans:400,400i,700,700i|Montserrat:400,700|Muli:400,400i|Noto+Serif:400,400i,700,700i|Nunito:400,700|Open+Sans+Condensed:300,300i,700|Open+Sans:400,400i,700,700i|Oswald:400,700|Oxygen:400,700|PT+Sans:400,400i,700,700i|PT+Serif:400,400i,700,700i|Pacifico|Playfair+Display:400,400i,700,700i|Poiret+One|Poppins:400,700|Quicksand:400,700|Raleway:400,400i,700,700i|Roboto+Condensed:400,400i,700,700i|Roboto+Mono:400,400i,700,700i|Roboto+Slab:400,700|Roboto:400,400i,700,700i|Ruslan+Display|Signika:400,700|Slabo+27px|Source+Sans+Pro:200,300,400,700|Titillium+Web:400,400i,700,700i|Ubuntu+Condensed|Ubuntu:400,400i,700,700i|Varela+Round|Yanone+Kaffeesatz:400,700'
             rel='stylesheet'
           />
+          <script type='text/javascript' src='https://assets.pagar.me/checkout/checkout.js' />
         </Head>
         <style global jsx>{styles}</style>
         <IntlProvider locale={currentLocale} key={currentLocale} messages={messages[currentLocale]}>
