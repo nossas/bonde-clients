@@ -23,11 +23,19 @@ class Form extends Component {
     return fields.filter(f => f.kind !== 'greetings')
   }
 
+  processEmptyForms(widget) {
+    if (!widget.settings.fields) {
+      widget.settings.fields = []
+    }
+  }
+
   submit (e) {
     e.preventDefault()
 
     const { asyncFormEntryCreate, mobilization, widget } = this.props
     const { values } = this.state
+
+    this.processEmptyForms(widget)
 
     const fieldsWithValue = widget.settings.fields.map(field => ({
       ...field,
