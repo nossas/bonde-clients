@@ -1,9 +1,13 @@
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import { shallow, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import { describe } from 'mocha'
 
 import { Input } from '../../../../plugins/form/components'
+
+configure({ adapter: new Adapter() })
 
 describe('@bonde-webpage/plugins/form/components Input', () => {
 
