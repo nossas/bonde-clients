@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { I18n } from 'react-i18next'
 import { Grid, Cell, Flexbox2 as Flexbox } from 'bonde-styleguide'
 import { Tutorial } from 'components'
@@ -23,7 +23,7 @@ const TutorialDialog = ({ children, step, t, ...props }) => (
   </Tutorial.Dialog>
 )
 
-export default class extends React.Component {
+export default class extends Component {
   
   render () {
     const { lastLocation } = this.props
@@ -37,7 +37,7 @@ export default class extends React.Component {
               : (
                 <Tutorial initialize={showTutorial}>
                   <Page
-                    renderTitle={() => (<Header.Title>Home</Header.Title>)}
+                    renderTitle={() => (<Header.Title>{t('title')}</Header.Title>)}
                     wrapperHeaderComponent={({ children }) => (
                       <TutorialDialog
                         t={t}
