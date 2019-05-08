@@ -26,12 +26,7 @@
       }
     },
     "trendingMobilizations": {
-      "title": "Causando por aí",
-      "filtersAdornment": "Mobilizações",
-      "filters": {
-        "now": "Para agir agora",
-        "inspire": "Para se inspirar"
-      }
+      "title": "Oportunidades de ação"
     }
   },
   "tutorial": {

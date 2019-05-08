@@ -8,7 +8,6 @@ import { Redirect } from 'services/router'
 import { Auth } from 'services/auth'
 import {
   CommunitiesGadget,
-  MobilizationsGadget,
   TrendingMobilizationsGadget
 } from './components'
 
@@ -55,26 +54,21 @@ export default class extends React.Component {
                       <Grid>
                         <Cell size={[12, 12, 12]}>
                           <Grid>
-                            <Cell size={[4, 4, 12, 12, 12, 12]}>
+                            <Cell size={[6, 6, 12, 12, 12, 12]}>
                               <TutorialDialog t={t} step={2}>
                                 <CommunitiesGadget />
                               </TutorialDialog>
                             </Cell>
-                            <Cell size={[8, 8, 12, 12, 12, 12]}>
+                            <Cell size={[6, 6, 12, 12, 12, 12]}>
                               <TutorialDialog
                                 t={t}
                                 step={3}
                                 placement='bottom-left'
                               >
-                                <MobilizationsGadget />
+                                <TrendingMobilizationsGadget />
                               </TutorialDialog>
                             </Cell>
                           </Grid>
-                        </Cell>
-                        <Cell size={[12, 12, 12, 12, 12, 12]}>
-                          <TutorialDialog t={t} step={4} placement='top-left'>
-                            <TrendingMobilizationsGadget />
-                          </TutorialDialog>
                         </Cell>
                       </Grid>
                     </Flexbox>
