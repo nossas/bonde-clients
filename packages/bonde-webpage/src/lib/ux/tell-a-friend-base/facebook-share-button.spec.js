@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 import FacebookShareButton from './facebook-share-button'
 import { IntlProvider } from 'react-intl';
-import { shallowWithIntl } from '../../tests/helpers/intl-enzyme-test-helper';
+import { shallowWithIntl } from '../../helpers/intl-enzyme-test-helper';
 
 global.window = {}
 

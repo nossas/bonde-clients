@@ -1,6 +1,6 @@
 import * as React from 'react'
 import test from 'ava'
-import { mountWithIntl } from '../../../tests/helpers/intl-enzyme-test-helper'
+import { mountWithIntl } from '../../../helpers/intl-enzyme-test-helper'
 import { Form } from '.'
 import { pressureUtils } from '../utils'
 import { JSDOM } from 'jsdom'
