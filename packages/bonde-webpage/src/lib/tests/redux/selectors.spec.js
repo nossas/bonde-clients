@@ -1,4 +1,4 @@
-import { expect } from 'chai'
+import test from 'ava'
 import { fromJS } from 'immutable'
 import {
   reducer as rootReducer,
@@ -7,248 +7,243 @@ import {
 
 const state = fromJS({
   mobilizations: rootReducer
-})
+});
 
-describe('@bonde-webpage/redux selectors', () => {
-  describe('#getMobilizations', () => {
-    const data = [{ id: 1, name: 'Lorem' }, { id: 2, name: 'Ipsum' }]
-    const nextState = state.mergeDeep(fromJS({
-      mobilizations: {
-        list: {
-          isLoaded: true,
-          currentId: data[1].id,
-          data
-        }
+(() => {
+  const data = [{ id: 1, name: 'Lorem' }, { id: 2, name: 'Ipsum' }]
+  const nextState = state.mergeDeep(fromJS({
+    mobilizations: {
+      list: {
+        isLoaded: true,
+        currentId: data[1].id,
+        data
       }
-    })).toJS()
-
-    it('should get current mobilization', () => {
-      expect(Selectors(nextState).getMobilization()).to.deep.equal(data[1])
-    })
+    }
+  })).toJS()
+  
+  test('should get current mobilization', t => {
+    t.deepEqual(Selectors(nextState).getMobilization(), data[1])
   })
-
-  it('#mobilizationsIsLoading', () => {
+  
+  test('#mobilizationsIsLoading', t => {
     const getState = loading => state.mergeDeep(fromJS({
       mobilizations: { list: { fetching: loading } }
     })).toJS()
-    expect(Selectors(getState(true)).mobilizationsIsLoading()).to.equal(true)
-    expect(Selectors(getState(false)).mobilizationsIsLoading()).to.equal(false)
+    t.true(Selectors(getState(true)).mobilizationsIsLoading())
+    t.false(Selectors(getState(false)).mobilizationsIsLoading())
   })
-
-  it('#mobilizationsIsLoaded', () => {
+  
+  test('#mobilizationsIsLoaded', t => {
     const getState = loading => state.mergeDeep(fromJS({
       mobilizations: { list: { isLoaded: loading } }
     })).toJS()
-    expect(Selectors(getState(true)).mobilizationsIsLoaded()).to.equal(true)
-    expect(Selectors(getState(false)).mobilizationsIsLoaded()).to.equal(false)
+    t.true(Selectors(getState(true)).mobilizationsIsLoaded())
+    t.false(Selectors(getState(false)).mobilizationsIsLoaded())
   })
-
-  it('#widgtesIsLoading', () => {
+  
+  test('#widgtesIsLoading', t => {
     const getState = loading => state.mergeDeep(fromJS({
       mobilizations: { widgets: { saving: loading } }
     })).toJS()
-    expect(Selectors(getState(true)).widgetsIsLoading()).to.equal(true)
-    expect(Selectors(getState(false)).widgetsIsLoading()).to.equal(false)
+    t.true(Selectors(getState(true)).widgetsIsLoading())
+    t.false(Selectors(getState(false)).widgetsIsLoading())
   })
-
-  it('#getMobilizationMenuActive', () => {
+  
+  test('#getMobilizationMenuActive', t => {
     const menuActiveIndex = 4
     const getState = () => state.mergeDeep(fromJS({
       mobilizations: { list: { menuActiveIndex } }
     })).toJS()
-    expect(Selectors(getState()).getMobilizationMenuActive()).to.equal(menuActiveIndex)
+    t.is(Selectors(getState()).getMobilizationMenuActive(), menuActiveIndex)
   })
+})();
 
-  describe('#getMobilizations', () => {
-    const data = [
-      { id: 1, name: 'Lorem', status: 'active' },
-      { id: 2, name: 'Ipsum', status: 'active' },
-      { id: 3, name: 'Dolor', status: 'archived' }
-    ]
-    const getState = () => state.mergeDeep(fromJS({
-      mobilizations: { list: { data } }
-    })).toJS()
+(() => {
 
-    it('should return only active status by default', () => {
-      expect(Selectors(getState()).getMobilizations())
-        .to.deep.equal(data.filter(m => m.status === 'active'))
-    })
-
-    it('should return only filtered', () => {
-      expect(Selectors(getState()).getMobilizations({ status: 'archived' }))
-        .to.deep.equal(data.filter(m => m.status === 'archived'))
-    })
+  const data = [
+    { id: 1, name: 'Lorem', status: 'active' },
+    { id: 2, name: 'Ipsum', status: 'active' },
+    { id: 3, name: 'Dolor', status: 'archived' }
+  ]
+  const getState = () => state.mergeDeep(fromJS({
+    mobilizations: { list: { data } }
+  })).toJS()
+  
+  test('should return only active status by default', t => {
+    t.deepEqual(Selectors(getState()).getMobilizations(),
+      data.filter(m => m.status === 'active'))
   })
-
-  it('#blocksIsLoaded', () => {
+  
+  test('should return only filtered', t => {
+    t.deepEqual(Selectors(getState()).getMobilizations({ status: 'archived' }), data.filter(m => m.status === 'archived'))
+  })
+  
+  test('#blocksIsLoaded', t => {
     const getState = loaded => state.mergeDeep(fromJS({
       mobilizations: { blocks: { isLoaded: loaded } }
     })).toJS()
-    expect(Selectors(getState(true)).blocksIsLoaded()).to.equal(true)
-    expect(Selectors(getState(false)).blocksIsLoaded()).to.equal(false)
+    t.true(Selectors(getState(true)).blocksIsLoaded())
+    t.false(Selectors(getState(false)).blocksIsLoaded())
   })
-
-  it('#widgetsIsLoaded', () => {
+  
+  test('#widgetsIsLoaded', t => {
     const getState = loaded => state.mergeDeep(fromJS({
       mobilizations: { widgets: { isLoaded: loaded } }
     })).toJS()
-    expect(Selectors(getState(true)).widgetsIsLoaded()).to.equal(true)
-    expect(Selectors(getState(false)).widgetsIsLoaded()).to.equal(false)
+    t.true(Selectors(getState(true)).widgetsIsLoaded())
+    t.false(Selectors(getState(false)).widgetsIsLoaded())
   })
-
-  describe('#renderIsLoading', () => {
-    it('should return false when loaded widgets and block', () => {
-      const getState = () => state.mergeDeep(fromJS({
-        mobilizations: {
-          widgets: { isLoaded: true, fetching: false },
-          blocks: { isLoaded: true, fetching: false }
-        }
-      })).toJS()
-      expect(Selectors(getState()).renderIsLoading()).to.equal(false)
-    })
-
-    it('should return true when fetching widgets or block', () => {
-      let getState = () => state.mergeDeep(fromJS({
-        mobilizations: {
-          widgets: { isLoaded: true, fetching: true },
-          blocks: { isLoaded: true, fetching: false }
-        }
-      })).toJS()
-      expect(Selectors(getState()).renderIsLoading()).to.equal(true)
-
-      getState = () => state.mergeDeep(fromJS({
-        mobilizations: {
-          widgets: { isLoaded: true, fetching: false },
-          blocks: { isLoaded: true, fetching: true }
-        }
-      })).toJS()
-      expect(Selectors(getState()).renderIsLoading()).to.equal(true)
-    })
-  })
-
-  describe('#hasMouseOver', () => {
-    const widget = { id: 1, kind: 'draft' }
-    const nextState = state.mergeDeep(fromJS({
+  
+  test('should return false when loaded widgets and block', t => {
+    const getState = () => state.mergeDeep(fromJS({
       mobilizations: {
-        hover: {
-          'widget': widget.id
-        }
+        widgets: { isLoaded: true, fetching: false },
+        blocks: { isLoaded: true, fetching: false }
       }
     })).toJS()
-
-    it('should be true if (key, id) equals mouseOver in state', () => {
-      const selectors = Selectors(nextState)
-      expect(selectors.hasMouseOver('widget', widget.id)).to.equal(true)
-    })
-
-    it('should be false if (key, id) not equals mouseOver or not exists in state', () => {
-      const selectors = Selectors(nextState)
-      expect(selectors.hasMouseOver('widget', 999)).to.equal(false)
-    })
+    t.false(Selectors(getState()).renderIsLoading())
   })
-
-  describe('move block', () => {
-    const data = [
-      { id: 1, name: 'Lorem' },
-      { id: 2, name: 'Ipsum' },
-      { id: 3, name: 'Dolor' }
-    ]
-    const nextState = state.mergeDeep(fromJS({
+  
+  test('should return true when fetching widgets or block', t => {
+    let getState = () => state.mergeDeep(fromJS({
       mobilizations: {
-        blocks: {
-          isLoaded: true,
-          data
-        }
+        widgets: { isLoaded: true, fetching: true },
+        blocks: { isLoaded: true, fetching: false }
       }
     })).toJS()
-
-    describe('#canMoveUp', () => {
-      it('should be true if props.block isnt first of data', () => {
-        const selectors = Selectors(nextState, { block: data[1] })
-        expect(selectors.canMoveUp()).to.equal(true)
-      })
-
-      it('should be false if props.block is first of data', () => {
-        const selectors = Selectors(nextState, { block: data[0] })
-        expect(selectors.canMoveUp()).to.equal(false)
-      })
-    })
-
-    describe('#canMoveDown', () => {
-      it('should be true if props.block isnt last of data', () => {
-        const selectors = Selectors(nextState, { block: data[1] })
-        expect(selectors.canMoveDown()).to.equal(true)
-      })
-
-      it('should be false if props.block is last of data', () => {
-        const selectors = Selectors(nextState, { block: data[2] })
-        expect(selectors.canMoveDown()).to.equal(false)
-      })
-    })
-  })
-
-  describe('#getBlocks', () => {
-    const data = [
-      { id: 1, name: 'Lorem', position: 2 },
-      { id: 2, name: 'Ipsum', position: 3 },
-      { id: 3, name: 'Dolor', position: 1 }
-    ]
-    const nextState = state.mergeDeep(fromJS({
+    t.true(Selectors(getState()).renderIsLoading())
+  
+    getState = () => state.mergeDeep(fromJS({
       mobilizations: {
-        blocks: {
-          isLoaded: true,
-          data
-        }
+        widgets: { isLoaded: true, fetching: false },
+        blocks: { isLoaded: true, fetching: true }
       }
     })).toJS()
-
-    it('should return blocks loaded in order', () => {
-      const selectors = Selectors(nextState)
-      const ordered = data.sort((a, b) => a.position - b.position)
-      expect(selectors.getBlocks()).to.deep.equal(ordered)
-    })
+    t.true(Selectors(getState()).renderIsLoading())
   })
+})();
 
-  describe('#getUploadProgress(key)', () => {
-    const nextState = state.mergeDeep(fromJS({
-      mobilizations: {
-        uploader: {
-          bgBlock: 50
-        }
+(() => {
+  const widget = { id: 1, kind: 'draft' }
+  const nextState = state.mergeDeep(fromJS({
+    mobilizations: {
+      hover: {
+        'widget': widget.id
       }
-    })).toJS()
-
+    }
+  })).toJS()
+  
+  test('should be true if (key, id) equals mouseOver in state', t => {
     const selectors = Selectors(nextState)
-
-    it('should return undefined when not exists key to upload', () => {
-      expect(selectors.getUploadProgress('header')).to.equal(undefined)
-    })
-
-    it('should return progress when exists key to upload', () => {
-      expect(selectors.getUploadProgress('bgBlock')).to.equal(50)
-    })
+    t.true(selectors.hasMouseOver('widget', widget.id))
   })
-
-  describe('about block edition', () => {
-    const getSelector = merge => Selectors(state.mergeDeep(fromJS({
-      mobilizations: { ...merge }
-    })).toJS())
-
-    it('#getEditing', () => {
-      const s = getSelector({ edition: { isEditing: true, mode: 'background' } })
-      expect(s.getEditing()).to.equal('background')
-    })
-
-    it('#getBlockSaving', () => {
-      let s = getSelector({ blocks: { saving: true } })
-      expect(s.getBlockSaving()).to.equal(true)
-
-      s = getSelector({ blocks: { saving: false } })
-      expect(s.getBlockSaving()).to.equal(false)
-    })
+  
+  test('should be false if (key, id) not equals mouseOver or not exists in state', t => {
+    const selectors = Selectors(nextState)
+    t.false(selectors.hasMouseOver('widget', 999))
   })
+})();
 
-  it('#getWidgets', () => {
+(() => {
+
+  const data = [
+    { id: 1, name: 'Lorem' },
+    { id: 2, name: 'Ipsum' },
+    { id: 3, name: 'Dolor' }
+  ]
+  const nextState = state.mergeDeep(fromJS({
+    mobilizations: {
+      blocks: {
+        isLoaded: true,
+        data
+      }
+    }
+  })).toJS()
+  
+  test('should be true if props.block isnt first of data', t => {
+    const selectors = Selectors(nextState, { block: data[1] })
+    t.true(selectors.canMoveUp())
+  })
+  
+  test('should be false if props.block is first of data', t => {
+    const selectors = Selectors(nextState, { block: data[0] })
+    t.false(selectors.canMoveUp())
+  })
+  
+  test('should be true if props.block isnt last of data', t => {
+    const selectors = Selectors(nextState, { block: data[1] })
+    t.true(selectors.canMoveDown())
+  })
+  
+  test('should be false if props.block is last of data', t => {
+    const selectors = Selectors(nextState, { block: data[2] })
+    t.false(selectors.canMoveDown())
+  })
+})();
+
+(() => {
+
+  const data = [
+    { id: 1, name: 'Lorem', position: 2 },
+    { id: 2, name: 'Ipsum', position: 3 },
+    { id: 3, name: 'Dolor', position: 1 }
+  ]
+  const nextState = state.mergeDeep(fromJS({
+    mobilizations: {
+      blocks: {
+        isLoaded: true,
+        data
+      }
+    }
+  })).toJS()
+  
+  test('should return blocks loaded in order', t => {
+    const selectors = Selectors(nextState)
+    const ordered = data.sort((a, b) => a.position - b.position)
+    t.deepEqual(selectors.getBlocks(), ordered)
+  })
+})();
+
+(() => {
+  const nextState = state.mergeDeep(fromJS({
+    mobilizations: {
+      uploader: {
+        bgBlock: 50
+      }
+    }
+  })).toJS()
+  
+  const selectors = Selectors(nextState)
+  
+  test('should return undefined when not exists key to upload', t => {
+    t.is(selectors.getUploadProgress('header'), undefined)
+  })
+  
+  test('should return progress when exists key to upload', t => {
+    t.is(selectors.getUploadProgress('bgBlock'), 50)
+  })
+})();
+
+(() => {
+
+  const getSelector = merge => Selectors(state.mergeDeep(fromJS({
+    mobilizations: { ...merge }
+  })).toJS())
+  
+  test('#getEditing', t => {
+    const s = getSelector({ edition: { isEditing: true, mode: 'background' } })
+    t.is(s.getEditing(), 'background')
+  })
+  
+  test('#getBlockSaving', t => {
+    let s = getSelector({ blocks: { saving: true } })
+    t.true(s.getBlockSaving())
+  
+    s = getSelector({ blocks: { saving: false } })
+    t.false(s.getBlockSaving())
+  })
+  
+  test('#getWidgets', t => {
     const widgets = [
       { id: 1, kind: 'draft' },
       { id: 2, kind: 'draft' }
@@ -258,36 +253,34 @@ describe('@bonde-webpage/redux selectors', () => {
         widgets: { data: widgets }
       }
     })).toJS()
-
+  
     const selector = Selectors(getState())
-    expect(selector.getWidgets()).to.deep.equal(widgets)
+    t.deepEqual(selector.getWidgets(), widgets)
   })
-
-  describe('#mobilizationIsNeedReload', () => {
-    it('should return true when blocks or widgets isnt loaded', () => {
-      const getState = () => state.mergeDeep(fromJS({
-        mobilizations: {
-          blocks: { isLoaded: false },
-          widgets: { isLoaded: false },
-          list: { reload: false }
-        }
-      })).toJS()
-
-      const selector = Selectors(getState())
-      expect(selector.mobilizationIsNeedReload()).to.equal(true)
-    })
-
-    it('should return reload when blocks or widgets is loaded', () => {
-      const getState = () => state.mergeDeep(fromJS({
-        mobilizations: {
-          blocks: { isLoaded: true },
-          widgets: { isLoaded: true },
-          list: { reload: false }
-        }
-      })).toJS()
-
-      const selector = Selectors(getState())
-      expect(selector.mobilizationIsNeedReload()).to.equal(false)
-    })
+  
+  test('should return true when blocks or widgets isnt loaded', t => {
+    const getState = () => state.mergeDeep(fromJS({
+      mobilizations: {
+        blocks: { isLoaded: false },
+        widgets: { isLoaded: false },
+        list: { reload: false }
+      }
+    })).toJS()
+  
+    const selector = Selectors(getState())
+    t.true(selector.mobilizationIsNeedReload())
   })
-})
+  
+  test('should return reload when blocks or widgets is loaded', t => {
+    const getState = () => state.mergeDeep(fromJS({
+      mobilizations: {
+        blocks: { isLoaded: true },
+        widgets: { isLoaded: true },
+        list: { reload: false }
+      }
+    })).toJS()
+  
+    const selector = Selectors(getState())
+    t.false(selector.mobilizationIsNeedReload())
+  })
+})();

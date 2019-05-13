@@ -1,35 +1,30 @@
-/* eslint-disable no-unused-expressions */
-import React from 'react'
-import { expect } from 'chai'
+import * as React from 'react'
+import test from 'ava'
 import { shallow } from 'enzyme'
 import { Targets } from '../../../../plugins/pressure/components'
 
-describe('@bonde-webpage/plugins/pressure/components Targets', () => {
-  let wrapper
+let wrapper
 
-  beforeEach(() => {
-    wrapper = shallow(<Targets onSelect={(item) => item} />)
-  })
+test.beforeEach(() => {
+  wrapper = shallow(<Targets onSelect={(item) => item} />)
+})
 
-  it('should render ok by default', () => {
-    expect(wrapper).to.be.ok
-    expect(wrapper.find('.target-item').length).to.equal(0)
-  })
+test('should render ok by default', t => {
+  t.truthy(wrapper)
+  t.is(wrapper.find('.target-item').length, 0)
+})
 
-  describe('email pressure', () => {
-    it('should render .target-item according targets passed', () => {
-      // jump the targets shuffle process
-      wrapper.setState({ targets: ['Igor Santos <igor@nossascidades.org>'] })
-      expect(wrapper.find('.target-item').length).to.equal(1)
-    })
+test('should render .target-item according targets passed', t => {
+  // jump the targets shuffle process
+  wrapper.setState({ targets: ['Igor Santos <igor@nossascidades.org>'] })
+  t.is(wrapper.find('.target-item').length, 1)
+})
 
-    it('should render target parsed to Name <user@host.com>', () => {
-      const targets = ['Igor Santos <igor@nossascidades.org>']
-      // jump the targets shuffle process
-      wrapper.setState({ targets })
+test('should render target parsed to Name <user@host.com>', t => {
+  const targets = ['Igor Santos <igor@nossascidades.org>']
+  // jump the targets shuffle process
+  wrapper.setState({ targets })
 
-      expect(wrapper.find('.target-item span').at(0).text()).to.equal('Igor Santos')
-      expect(wrapper.find('.target-item span').at(1).text()).to.equal('igor@nossascidades.org')
-    })
-  })
+  t.is(wrapper.find('.target-item span').at(0).text(), 'Igor Santos')
+  t.is(wrapper.find('.target-item span').at(1).text(), 'igor@nossascidades.org')
 })
