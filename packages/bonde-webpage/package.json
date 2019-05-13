@@ -99,8 +99,7 @@
   },
   "ava": {
     "files": [
-      "src/lib/**/*.spec.js",
-      "!src/lib/tests/**/*"
+      "src/**/*.spec.js"
     ],
     "concurrency": 5,
     "failFast": true,
