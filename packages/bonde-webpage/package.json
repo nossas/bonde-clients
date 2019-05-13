@@ -99,13 +99,7 @@
   },
   "ava": {
     "files": [
-      "src/lib/plugins/**/*.spec.js",
-      "src/lib/redux/**/*.spec.js",
-      "src/lib/styles/**/*.spec.js",
-      "src/lib/components/section.spec.js",
-      "src/lib/ux/tell-a-friend-base/facebook-share-button.spec.js",
-      "src/lib/ux/tell-a-friend-base/twitter-share-button.spec.js",
-      "src/lib/ux/tell-a-friend-base/whatsapp-share-button.spec.js",
+      "src/lib/**/*.spec.js",
       "!src/lib/tests/**/*"
     ],
     "concurrency": 5,
