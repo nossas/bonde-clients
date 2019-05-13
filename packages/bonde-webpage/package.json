@@ -90,6 +90,7 @@
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "jsdom": "^15.1.0",
     "mocha": "^6.1.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -98,11 +99,7 @@
   },
   "ava": {
     "files": [
-      "src/**/*.spec.js"
-    ],
-    "sources": [
-      "src/**/*.{js,jsx}",
-      "!lib/**/*",
+      "src/lib/plugins/**/*.spec.js",
       "!src/lib/tests/**/*"
     ],
     "concurrency": 5,

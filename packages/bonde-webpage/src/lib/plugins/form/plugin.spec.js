@@ -80,13 +80,11 @@ const props = {
 }
 
 test('check if send button is shown when no form fields is present', t => {
+    const { intl } = new IntlProvider({ locale: "en" }, {}).getChildContext()
 	const wrapper = shallow(
-        <IntlProvider locale="en-us">
-            <Form {...props} />
-        </IntlProvider>
+        <Form {...props} intl={intl} />
     );
 
-    const form = wrapper.find(Form).first().shallow()
-    t.true(form.find(Button).length === 0, 'O botão de envio não deveria aparecer!')
+    t.true(wrapper.find(Button).length === 0, 'O botão de envio não deveria aparecer!')
     // t.true(button.length === 0)
 });
