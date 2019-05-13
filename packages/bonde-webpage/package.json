@@ -55,7 +55,8 @@
     "prepare": "yarn build",
     "dev": "yarn build --watch",
     "build": "NODE_ENV=production babel src/lib --out-dir lib --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "test": "cross-env NODE_ENV=test ava"
+    "test": "cross-env NODE_ENV=test ava",
+    "coverage": "nyc --reporter=lcov ava"
   },
   "babel": {
     "presets": [
@@ -92,6 +93,7 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^15.1.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "^2.1.3",
