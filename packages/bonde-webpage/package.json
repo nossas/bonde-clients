@@ -103,6 +103,7 @@
       "src/lib/redux/reducers/blocks.spec.js",
       "src/lib/redux/reducers/mobilizations.spec.js",
       "src/lib/redux/reducers/widgets.spec.js",
+      "src/lib/components/section.spec.js",
       "!src/lib/tests/**/*"
     ],
     "concurrency": 5,
