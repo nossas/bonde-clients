@@ -101,6 +101,7 @@
     "files": [
       "src/lib/plugins/**/*.spec.js",
       "src/lib/redux/reducers/blocks.spec.js",
+      "src/lib/redux/reducers/mobilizations.spec.js",
       "!src/lib/tests/**/*"
     ],
     "concurrency": 5,
