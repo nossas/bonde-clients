@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { I18n } from 'react-i18next'
 import { Grid, Cell, Flexbox2 as Flexbox } from 'bonde-styleguide'
 import { Tutorial } from 'components'
@@ -8,7 +8,6 @@ import { Redirect } from 'services/router'
 import { Auth } from 'services/auth'
 import {
   CommunitiesGadget,
-  MobilizationsGadget,
   TrendingMobilizationsGadget
 } from './components'
 
@@ -24,7 +23,7 @@ const TutorialDialog = ({ children, step, t, ...props }) => (
   </Tutorial.Dialog>
 )
 
-export default class extends React.Component {
+export default class extends Component {
   
   render () {
     const { lastLocation } = this.props
@@ -38,7 +37,7 @@ export default class extends React.Component {
               : (
                 <Tutorial initialize={showTutorial}>
                   <Page
-                    renderTitle={() => (<Header.Title>Home</Header.Title>)}
+                    renderTitle={() => (<Header.Title>{t('title')}</Header.Title>)}
                     wrapperHeaderComponent={({ children }) => (
                       <TutorialDialog
                         t={t}
@@ -55,26 +54,21 @@ export default class extends React.Component {
                       <Grid>
                         <Cell size={[12, 12, 12]}>
                           <Grid>
-                            <Cell size={[4, 4, 12, 12, 12, 12]}>
+                            <Cell size={[6, 6, 12, 12, 12, 12]}>
                               <TutorialDialog t={t} step={2}>
                                 <CommunitiesGadget />
                               </TutorialDialog>
                             </Cell>
-                            <Cell size={[8, 8, 12, 12, 12, 12]}>
+                            <Cell size={[6, 6, 12, 12, 12, 12]}>
                               <TutorialDialog
                                 t={t}
                                 step={3}
                                 placement='bottom-left'
                               >
-                                <MobilizationsGadget />
+                                <TrendingMobilizationsGadget />
                               </TutorialDialog>
                             </Cell>
                           </Grid>
-                        </Cell>
-                        <Cell size={[12, 12, 12, 12, 12, 12]}>
-                          <TutorialDialog t={t} step={4} placement='top-left'>
-                            <TrendingMobilizationsGadget />
-                          </TutorialDialog>
                         </Cell>
                       </Grid>
                     </Flexbox>
