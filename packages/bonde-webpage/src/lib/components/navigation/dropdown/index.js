@@ -1,7 +1,7 @@
 import { array, object, string } from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { BarsIcon } from '../../icons'
 
 class DropdownMenu extends React.Component {
   constructor (props, context) {
@@ -19,7 +19,7 @@ class DropdownMenu extends React.Component {
 
   renderIcon () {
     return !this.props.icon ? null : (
-      <FontAwesomeIcon icon={this.props.icon} />
+      <BarsIcon />
     )
   }
 
