@@ -187,11 +187,13 @@ export const createEditorContent = content => JSON.stringify(
   Plain.deserialize(content).toJSON()
 )
 
-const dispatchToProps = (dispatch, ownProps) => {
-  notifySuccess: dispatch(notify(genericSaveSuccess(ownProps.intl)))
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  notifySuccess: () => {
+    return dispatch(notify(genericSaveSuccess(ownProps.intl)))
+  }
+})
 
-const ConnectedEditorSlate = injectIntl(connect(undefined, dispatchToProps)(EditorSlate))
+const ConnectedEditorSlate = injectIntl(connect(undefined, mapDispatchToProps)(EditorSlate))
 
 ConnectedEditorSlate.displayName = 'EditorSlate'
 
