@@ -16,6 +16,9 @@ import { ColorPlugin, ColorButton, ColorStateModel } from '@slate-editor/color-p
 import { GridPlugin, GridButtonBar } from '@slate-editor/grid-plugin'
 import { EmbedPlugin, EmbedButton } from '@slate-editor/embed-plugin'
 
+import { store } from '@'
+import { addNotification as notify } from 'reapop'
+import { genericSaveSuccess } from '@/utils/notifications'
 import { Loading } from '@/components/await'
 import { ActionButton, FooterEditor, Layer } from '@/mobilizations/widgets/__plugins__/content/components'
 
@@ -77,6 +80,7 @@ class EditorSlate extends Component {
   handleSave (state) {
     this.setState({ initialState: state })
     this.props.handleSave(state)
+    store.dispatch(notify(genericSaveSuccess(this.props.intl)))
   }
 
   render () {
