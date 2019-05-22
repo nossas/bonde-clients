@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { client as graphqlClient } from '@/store'
 import * as graphqlMutations from '@/graphql/mutations'
 import * as graphqlQueries from '@/graphql/queries'
@@ -138,10 +139,10 @@ export class Pressure extends Component {
   }
 
   handleOverlayOnClick (e) {
-    const { browserHistory, mobilization, widget, editable } = this.props
+    const { history, mobilization, widget, editable } = this.props
     if (editable) {
       if (e) e.preventDefault()
-      browserHistory.push(
+      history.push(
         paths.pressure(mobilization.id, widget.id)
       )
     }
@@ -258,7 +259,4 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = { ...PressureActions }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Pressure)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Pressure))
