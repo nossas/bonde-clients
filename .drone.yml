@@ -7,9 +7,7 @@ pipeline:
     commands:
       - yarn
       - yarn lerna bootstrap
-      - yarn lerna run test
       - yarn lerna run coverage
-      - rm -rf packages/bonde-public/node_modules && cd packages/bonde-public && yarn
     when:
       event: [push, tag]
 
