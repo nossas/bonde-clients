@@ -270,7 +270,7 @@ class Page extends Component {
                   style={{ marginBottom: '70px' }}
                   dnsHostedZone={this.state.dnsHostedZone}
                   onSubmit={values => {
-                    const name = `${values.name}.${this.state.dnsHostedZone.domain_name}`
+                    const name = (values.name && values.name.length > 0 ? values.name + '.' : '') + this.state.dnsHostedZone.domain_name
                     return createDNSRecord({
                       ...values,
                       name,
