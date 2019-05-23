@@ -10,7 +10,7 @@
     "url": "git+https://github.com/nossas/bonde-client.git"
   },
   "keywords": [],
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "dependencies": {
     "@slate-editor/alignment-plugin": "5.1.0",
     "@slate-editor/bold-plugin": "5.1.0",

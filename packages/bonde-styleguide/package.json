@@ -1,6 +1,7 @@
 {
   "name": "bonde-styleguide",
   "version": "0.14.0",
+  "license": "AGPL-3.0",
   "private": false,
   "dependencies": {
     "autoprefixer": "8.6.5",

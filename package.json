@@ -7,7 +7,7 @@
         "type": "git",
         "url": "git+https://github.com/nossas/bonde-client.git"
     },
-    "license": "GPL-3.0",
+    "license": "AGPL-3.0",
     "description": "Bonde",
     "author": "Nossas <tech@nosssas.org>",
     "homepage": "http://bonde.org",
