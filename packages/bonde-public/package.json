@@ -1,6 +1,7 @@
 {
   "name": "bonde-public",
   "version": "0.14.0",
+  "private": true,
   "description": "Bonde Public - Responsible render a mobilization on public mode",
   "main": "index.js",
   "scripts": {
