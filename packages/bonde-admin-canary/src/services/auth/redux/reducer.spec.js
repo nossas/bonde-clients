@@ -1,4 +1,3 @@
-import test from 'ava'
 import * as actionTypes from './actionTypes'
 import authReducer from './reducer'
 

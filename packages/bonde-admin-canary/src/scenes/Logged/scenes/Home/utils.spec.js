@@ -1,4 +1,3 @@
-import test from 'ava'
 import { toSnakeCase } from './utils'
 
 test('should convert deep object to snake case keys', t => {

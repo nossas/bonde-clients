@@ -1,4 +1,3 @@
-import test from 'ava'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Mutation } from 'react-apollo'
@@ -58,3 +57,4 @@ test('render children inside form', t => {
   
   t.is(form.props().children, children)
 })
+
