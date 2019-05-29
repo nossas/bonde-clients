@@ -35,7 +35,7 @@ class LocalStorageMock {
   }
 }
 
-global.localStorage = new LocalStorageMock
+global.localStorage = new LocalStorageMock()
 
 // Mock XMLHttpRequest
 class XMLHttpRequest {
