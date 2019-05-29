@@ -5,3 +5,4 @@ export const register = (queryName) => dispatch => {
 export const done = ({ queryName, length }) => dispatch => {
   dispatch({ type: 'Queryset/DONE', payload: { queryName, length } })
 }
+
