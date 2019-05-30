@@ -28,11 +28,46 @@ describe('scenes > Auth > scenes > ResetPassword > ResetPasswordForm > ResetPass
     expect(formGraphQL.props().mutation).to.be.equal(resetPassword)
   })
 
+  it('should use token and newPassword on submit mutation', done => {
+    
+    const token = 'my-token'
+    node.setProps({
+      token,
+      handleSuccess: (opts) => {
+        expect(opts).to.deep.equal({
+          variables: {
+            newPassword: values.password,
+            token
+          }
+        })
+        done()
+      }
+    })
+    
+    const submit = node.find(FormGraphQL).props().onSubmit
+    const values = { password: '123456' }
+    const mutation = opts => new Promise(resolve => resolve(opts))
+    
+    return submit(values, mutation)
+  })
+
   it('should render a submit button', () => {
     const submitButton = node.find(SubmitButton)
     
     expect(submitButton).to.be.lengthOf(1)
     expect(submitButton.props().children).to.be.equal('resetPassword.form.submit')
+  })
+
+  it('should call handleSuccess when mutation done', done => {
+    node.setProps({ handleSuccess: (n) => {
+      expect(n).to.be.equal(2) 
+      done()
+    }})
+    
+    const submit = node.find(FormGraphQL).props().onSubmit
+    return submit({}, () => new Promise((resolve) => {
+      resolve(2)
+    }))
   })
 
   it('should render a button link to /auth/login', () => {
