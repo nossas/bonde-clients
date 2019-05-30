@@ -96,8 +96,6 @@
     "eject": "react-scripts eject",
     "coverage": "yarn test -- --coverage",
     "release": "standard-version",
-    "preinstall": "rm -f node_modules/@",
-    "postinstall": "ln -s `pwd`/src node_modules/@",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
