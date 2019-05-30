@@ -14,7 +14,7 @@ import { ContentPlugin } from 'bonde-webpage/lib/plugins/content'
 // PRESSURE PLUGIN and external dependencies
 import PressurePlugin from './plugin-pressure.connected'
 import { PressureAnalytics, PressureTellAFriend } from 'bonde-webpage/lib/plugins/pressure'
-import { client as graphqlClient } from '@/store'
+import { client as graphqlClient } from 'store'
 // PRESSURE PLUGIN and external dependencies
 import DonationPlugin from './plugin-donation.connected'
 import { DonationAnalytics, DonationTellAFriend } from 'bonde-webpage/lib/plugins/donation'
