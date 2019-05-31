@@ -44,7 +44,7 @@
     "build": "react-scripts build",
     "start": "serve -s build",
     "test": "jest --modulePaths=src",
-    "coverage": "react-scripts test --coverage",
+    "coverage": "npm run test -- --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
   "engines": {
@@ -52,23 +52,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/src/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
-      }
-    },
-    "coverageReporters": ["text"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "devDependencies": {
     "enzyme": "^3.9.0",
