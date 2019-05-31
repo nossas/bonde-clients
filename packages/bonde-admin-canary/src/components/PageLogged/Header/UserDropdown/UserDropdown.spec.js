@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Dropdown, DropdownHeader, DropdownItem, Icon, Link } from 'bonde-styleguide'
+import { Dropdown, DropdownHeader, DropdownItem, Icon } from 'bonde-styleguide'
 import UserDropdown from './UserDropdown'
 import { expect } from 'chai'
 
