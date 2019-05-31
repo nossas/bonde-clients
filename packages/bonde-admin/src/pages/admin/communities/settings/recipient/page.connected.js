@@ -3,12 +3,12 @@
 //
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { createForm, getValues, Field } from '@/storybook/forms'
+import { createForm, getValues, Field } from 'storybook/forms'
 import {
   combineValidations,
   required,
   isCpfCnpj
-} from '@/storybook/forms/validate'
+} from 'storybook/forms/validate'
 import {
   SettingsForm,
   RadioField,
@@ -16,12 +16,12 @@ import {
   SelectField,
   Option,
   TextField
-} from '@/storybook/settings/forms'
-import * as normalizers from '@/utils/redux-form/normalizers'
-import { Title } from '@/components/title'
-import { asyncEdit } from '@/community/action-creators'
-import { getCurrent as getCommunity } from '@/community/selectors'
-import { getCodeBanks } from '@/community/utils'
+} from 'storybook/settings/forms'
+import * as normalizers from 'utils/redux-form/normalizers'
+import { Title } from 'components/title'
+import { asyncEdit } from 'community/action-creators'
+import { getCurrent as getCommunity } from 'community/selectors'
+import { getCodeBanks } from 'community/utils'
 import { RecipientFormWarning } from './helpText'
 import { i18nKeys } from './i18n'
 
