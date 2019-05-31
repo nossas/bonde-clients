@@ -95,36 +95,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "coverage": "yarn test -- --coverage",
+    "coverage": "npm run test -- --watchAll=false --coverage",
     "release": "standard-version",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
-  "jest": {
-    "coverageReporters": [
-      "lcov",
-      "text-summary"
-    ]
-  },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/src/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
-      }
-    },
-    "coverageReporters": ["text"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "browserslist": [
     ">0.2%",
