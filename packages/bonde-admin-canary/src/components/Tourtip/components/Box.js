@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { node, number, string, func } from 'prop-types'
 import {
   Button,
   Flexbox2 as Flexbox,
@@ -93,6 +94,19 @@ const Box = ({
 Box.defaultProps = {
   width: 445,
   minHeight: 226
+}
+
+Box.propTypes = {
+  children: node.isRequired,
+  width: number,
+  minHeight: number,
+  title: string.isRequired,
+  subtitle: string.isRequired,
+  currentStep: string.isRequired,
+  total: string.isRequired,
+  onNext: func.isRequired,
+  onClose: func.isRequired,
+  placement: string.isRequired,
 }
 
 export default Box
