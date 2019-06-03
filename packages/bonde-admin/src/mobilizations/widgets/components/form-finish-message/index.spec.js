@@ -1,8 +1,8 @@
 import React from 'react'
 import { expect } from 'chai'
-import shallowWithIntl from '@/intl/helpers/shallow-with-intl'
+import shallowWithIntl from 'intl/helpers/shallow-with-intl'
 
-import { FormFinishMessage } from '@/mobilizations/widgets/components/form-finish-message'
+import { FormFinishMessage } from 'mobilizations/widgets/components/form-finish-message'
 
 const TellAFriend = props => (
   <div className='tell-a-friend' />
