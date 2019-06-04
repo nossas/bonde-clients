@@ -8,6 +8,48 @@ const TellAFriend = props => (
   <div className='tell-a-friend' />
 )
 
+const DonationRecurrent = props => (
+  <div className='donation-recurrent' />
+)
+
+describe('client/mobilizations/widgets/components/form-finish-message in donation', () => {
+  let wrapper
+  const props = {
+    mobilization: { id: 1, color_scheme: 'nossas-scheme' },
+    widget: { id: 1 },
+    fields: {
+      finish_message_type: { value: 'donation-recurrent' },
+      finish_message: { value: 'Clique aqui para editar...' }
+    },
+    DonationRecurrent,
+    TellAFriend,
+    submitting: false,
+    handleSubmit: () => {},
+    submitFailed: false,
+    dirty: false,
+    valid: false,
+    asyncWidgetUpdate: () => {}
+  }
+
+  beforeAll(() => {
+    wrapper = shallowWithIntl(
+      <FormFinishMessage {...props} />
+    )
+  })
+
+  describe('render', () => {
+    afterAll(() => {
+      wrapper.setProps(props)
+    })
+
+    describe('preview', () => {
+      it('should render DonationRecurrent component by default', () => {
+        expect(wrapper.find('DonationRecurrent')).to.have.length(1)
+      })
+    })
+  })
+})
+
 describe('client/mobilizations/widgets/components/form-finish-message', () => {
   let wrapper
   const props = {
@@ -96,6 +138,7 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
     })
   })
 })
+
 
 const widgetSettings = (props, values) => ({
   ...props,
