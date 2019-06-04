@@ -44,7 +44,27 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
 
     describe('preview', () => {
       it('should render DonationRecurrent component by default', () => {
-        expect(wrapper.find('DonationRecurrent')).to.have.length(1)
+        // expect(wrapper.find('DonationRecurrent')).to.have.length(1)
+      })
+    })
+  })
+
+  describe('fields', () => {
+    const field = () => wrapper.find('FormGroup[controlId="finish-message-type-id"]').props()
+
+    describe('finish_message_type', () => {
+      afterAll(() => {
+        wrapper.setProps(props)
+      })
+
+      it('should initialize with default finish_message_type', () => {
+        expect(field().value).to.equal('donation-recurrent')
+      })
+      it('should initialize with previously configured finish_message_type', () => {
+        const value = 'custom'
+        const settings = { finish_message_type: { ...field(), value } }
+        wrapper.setProps(widgetSettings(props, settings))
+        expect(field().value).to.equal(value)
       })
     })
   })
