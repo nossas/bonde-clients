@@ -1,5 +1,12 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import {
+  bool,
+  oneOfType,
+  func,
+  node,
+  object,
+  string
+} from 'prop-types'
 import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
 import { reduxForm } from 'redux-form'
 
@@ -193,16 +200,16 @@ const mapStateToProps = (state, props) => {
 //
 FormFinishMessage.propTypes = {
   // Injected components
-  TellAFriend: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  TellAFriend: oneOfType([node, func]).isRequired,
   // Form Redux
-  fields: PropTypes.object.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  successMessage: PropTypes.string,
+  fields: object.isRequired,
+  submitting: bool.isRequired,
+  error: string,
+  successMessage: string,
   // Injected by components
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired,
+  mobilization: object.isRequired,
+  widget: object.isRequired,
+  asyncWidgetUpdate: func.isRequired,
   // translation
   intl: intlShape.isRequired
 }
