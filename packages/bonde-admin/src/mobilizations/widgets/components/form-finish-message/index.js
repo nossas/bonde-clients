@@ -25,11 +25,17 @@ import EditorSlate, {
 import * as styles from './index-scss'
 
 export const FormFinishMessage = props => {
-  const { mobilization, fields, successMessage, widget, ...formProps } = props
-  const { color_scheme: colorScheme } = mobilization
-  const { TellAFriend } = props
+  const {
+    mobilization,
+    fields,
+    successMessage,
+    widget,
+    intl,
+    TellAFriend,
+    ...formProps
+  } = props
 
-  const { intl } = props
+  const { color_scheme: colorScheme } = mobilization
 
   const {
     finish_message_type: finishMessageType,
