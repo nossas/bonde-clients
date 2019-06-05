@@ -1,4 +1,4 @@
-export default filterReduce => [
+export const banks = [
   { code: '654', name: 'Banco A.J.Renner S.A.' },
   { code: '246', name: 'Banco ABC Brasil S.A.' },
   { code: '075', name: 'Banco ABN AMRO S.A.' },
@@ -144,4 +144,6 @@ export default filterReduce => [
   { code: '129', name: 'UBS Brasil Banco de Investimento S.A.' },
   { code: '091-4', name: 'Unicred Central do Rio Grande do Sul' },
   { code: '084', name: 'Uniprime Norte do Paraná - Coop de Economia e Crédito Mútuo dos Médicos, Profissionais das Ciências' }
-].filter(filterReduce)
+]
+
+export default filterReduce => banks.filter(filterReduce)
