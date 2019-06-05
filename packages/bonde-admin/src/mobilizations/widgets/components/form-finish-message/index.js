@@ -80,7 +80,7 @@ export const FormFinishMessage = props => {
               defaultMessage='Customizar'
             />
           </Radio>
-          {finishMessageType.kind === 'donation' && (
+          {widget.kind === 'donation' && (
             <Radio value='donation-recurrent'>
               <FormattedMessage
                 id='widgets.components--form-finish-message.type.radio.donation-recurrent'
@@ -124,8 +124,8 @@ export const FormFinishMessage = props => {
       {finishMessageType.value === 'share' && (
         <TellAFriend preview mobilization={mobilization} widget={widget} />
       )}
-      {finishMessageType.value === 'donation-recurrent' &&
-       finishMessageType.kind === 'donation' && (
+      {finishMessageType.value === 'donation-recurrent' ||
+       widget.kind === 'donation' && (
         <div> preview donation aqui </div>
       )}
       {finishMessageType.value === 'custom' && (
