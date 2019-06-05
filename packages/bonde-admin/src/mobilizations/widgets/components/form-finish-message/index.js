@@ -97,7 +97,7 @@ export const FormFinishMessage = props => {
         </RadioGroup>
       </FormGroup>
 
-      {finishMessageType.value === 'share' && (
+      {finishMessageType.value !== 'custom' && (
         <div>
           <FormGroup controlId='whatsapp-text-id' {...whatsappText}>
             <ControlLabel>
