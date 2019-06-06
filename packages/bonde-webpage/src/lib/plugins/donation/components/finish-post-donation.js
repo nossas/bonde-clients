@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl'
+import { shape, string, func } from 'prop-types'
 
 export default class FinishPostDonation extends Component {
 
@@ -163,4 +164,21 @@ export default class FinishPostDonation extends Component {
       </div>
     )
   }
+}
+
+FinishPostDonation.propTypes = {
+  widget: shape({
+    settings: shape({
+      donation_value1: string.isRequired,
+      donation_value2: string.isRequired,
+      donation_value3: string.isRequired,
+      donation_value4: string.isRequired,
+      donation_value5: string.isRequired,
+      default_donation_value: string.isRequired
+    }).isRequired
+  }),
+  onFinish: func,
+  mobilizations: shape({
+    header_font: string
+  })
 }
