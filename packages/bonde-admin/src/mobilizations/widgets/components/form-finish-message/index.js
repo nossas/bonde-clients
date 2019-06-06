@@ -137,7 +137,7 @@ export const FormFinishMessage = props => {
       )}
       {finishMessageType.value === 'donation-recurrent' &&
        widget.kind === 'donation' && (
-        <div>
+        <div style={styles.previewFinishPostDonation}>
           <FinishPostDonation preview mobilization={mobilization} widget={widget} />
           <TellAFriend preview mobilization={mobilization} widget={widget} />
         </div>
