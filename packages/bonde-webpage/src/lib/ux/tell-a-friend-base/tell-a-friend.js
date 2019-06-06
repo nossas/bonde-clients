@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { any, bool, shape, string } from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import FacebookShareButton from './facebook-share-button'
 import TwitterShareButton from './twitter-share-button'
@@ -38,8 +38,6 @@ const TellAFriend = ({
     </div>
   )
 }
-
-const { any, bool, shape, string, object } = PropTypes
 
 TellAFriend.propTypes = {
   preview: bool,
