@@ -7,7 +7,9 @@ console.log(FinishPostDonation)
 
 const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {
   return (
-    <div>teste</div>
+    <div>
+        teste
+    </div>
   )
 }
 
