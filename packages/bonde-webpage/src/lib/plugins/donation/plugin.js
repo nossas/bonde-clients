@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { FormattedMessage, intlShape } from 'react-intl'
-import { Progress } from './components'
+import { Progress, TellAFriend } from './components'
 import { numberUtils } from './utils'
 import FinishPostDonation from './components/finish-post-donation'
 
@@ -388,15 +388,27 @@ class Donation extends React.Component {
       FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps }
     } = overrides
 
-    if (finishMessageType === 'custom') {
-      return <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
-    } else if (payment_type === 'recurring') {
+    if (payment_type === 'recurring') {
       return <FinishDefaultMessage mobilization={mobilization} widget={widget} {...defaultProps} />
     } else if (this.state.isFinishPostDonationFinished) {
-      if (this.state.postDonationValue) {
-        return <div> Usuário aceitou doação recorrente! </div>
+      if (finishMessageType === 'custom') {
+        return <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
+      } else if (this.state.postDonationValue) {
+        return <TellAFriend
+          {...this.props}
+          message={<FormattedMessage
+            id='widgets.components--donation.finish-post-donation-messages.donation-ok'
+            defaultMessage={'AEE! Doação registrada!'}
+          />}
+        />
       } else {
-        return <div> Usuário recusou doação recorrente! </div>
+        return <TellAFriend
+          {...this.props}
+          message={<FormattedMessage
+            id='widgets.components--donation.finish-post-donation-messages.not-now'
+            defaultMessage={'Tudo bem! Valeu por seu apoio :)'}
+          />}
+        />
       }
     } else {
       return <FinishPostDonation {...this.props} onFinish={this.finishDonation} />

@@ -667,6 +667,8 @@ servidor-03.dominio.com`,
       other {days}
     }
   `,
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'Nice! Donation registered :)',
+  'widgets.components--donation.finish-post-donation-messages.not-now': 'It\'s OK! Thank you for your support :)',
 
   'form-widget.components--settings-menu.title': 'Set up your action form',
   'form-widget.components--settings-menu.items.fields': 'Form fields',
