@@ -22,7 +22,9 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
       finish_message: { value: 'Clique aqui para editar...' }
     },
     DonationRecurrent,
+    // Injected components
     TellAFriend,
+    DonationRecurrent,
     submitting: false,
     handleSubmit: () => {},
     submitFailed: false,
@@ -43,8 +45,11 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
     })
 
     describe('preview', () => {
+      it('should render TellAFriend component by default', () => {
+        //expect(wrapper.find('TellAFriend')).to.have.length(1)
+      })
       it('should render DonationRecurrent component by default', () => {
-        // expect(wrapper.find('DonationRecurrent')).to.have.length(1)
+        //expect(wrapper.find('DonationRecurrent')).to.have.length(1)
       })
     })
   })
