@@ -7,7 +7,11 @@ import {
   object,
   string
 } from 'prop-types'
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import {
+  FormattedMessage,
+  intlShape,
+  injectIntl
+} from 'react-intl'
 import { reduxForm } from 'redux-form'
 
 import {
@@ -32,6 +36,7 @@ export const FormFinishMessage = props => {
     widget,
     intl,
     TellAFriend,
+    FinishPostDonation,
     ...formProps
   } = props
 
@@ -133,7 +138,7 @@ export const FormFinishMessage = props => {
       {finishMessageType.value === 'donation-recurrent' &&
        widget.kind === 'donation' && (
         <div>
-          <div> preview donation aqui </div>
+          <FinishPostDonation preview mobilization={mobilization} widget={widget} />
           <TellAFriend preview mobilization={mobilization} widget={widget} />
         </div>
       )}
@@ -213,6 +218,7 @@ const mapStateToProps = (state, props) => {
 FormFinishMessage.propTypes = {
   // Injected components
   TellAFriend: oneOfType([node, func]).isRequired,
+  FinishPostDonation: oneOfType([node, func]).isRequired,
   // Form Redux
   fields: object.isRequired,
   submitting: bool.isRequired,

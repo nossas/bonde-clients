@@ -8,7 +8,7 @@ const TellAFriend = props => (
   <div className='tell-a-friend' />
 )
 
-const DonationRecurrent = props => (
+const FinishPostDonation = props => (
   <div className='donation-recurrent' />
 )
 
@@ -21,10 +21,9 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
       finish_message_type: { value: 'donation-recurrent' },
       finish_message: { value: 'Clique aqui para editar...' }
     },
-    DonationRecurrent,
+    FinishPostDonation,
     // Injected components
     TellAFriend,
-    DonationRecurrent,
     submitting: false,
     handleSubmit: () => {},
     submitFailed: false,
@@ -48,8 +47,8 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
       it('should render TellAFriend component by default', () => {
         //expect(wrapper.find('TellAFriend')).to.have.length(1)
       })
-      it('should render DonationRecurrent component by default', () => {
-        //expect(wrapper.find('DonationRecurrent')).to.have.length(1)
+      it('should render FinishPostDonation component by default', () => {
+        //expect(wrapper.find('FinishPostDonation')).to.have.length(1)
       })
     })
   })
