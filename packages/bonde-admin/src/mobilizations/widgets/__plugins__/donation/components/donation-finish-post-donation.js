@@ -1,15 +1,10 @@
 import React from 'react'
 import { bool, object } from 'prop-types'
 
-import { FinishPostDonation } from 'bonde-webpage/lib/plugins/donation/components'
-
-console.log(FinishPostDonation)
-
+import { FinishPostDonation } from 'components/post-donation'
 const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {
   return (
-    <div>
-        teste
-    </div>
+    <FinishPostDonation />
   )
 }
 
