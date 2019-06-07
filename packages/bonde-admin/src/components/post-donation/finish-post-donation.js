@@ -1,6 +1,7 @@
 import { bool, string, object, oneOf } from 'prop-types'
 import React from 'react'
-// import { FormattedMessage } from 'react-intl'
+
+import TellAFriendBase from 'bonde-webpage/lib/ux/'
 
 const FinishPostDonation = ({
   preview,
@@ -26,7 +27,7 @@ const FinishPostDonation = ({
 
 FinishPostDonation.propTypes = {
   preview: bool,
-  widget: oneOf([string, object]),
+  widget: object,
   message: oneOf([string, object]),
   href: string,
   imageUrl: string,

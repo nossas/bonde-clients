@@ -15,8 +15,8 @@ const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {
 
 DonationFinishPostDonation.propTypes = {
   preview: bool,
-  mobilization: object.isRequired,
-  widget: object.isRequired
+  mobilization: object,
+  widget: object
 }
 
 export default DonationFinishPostDonation
