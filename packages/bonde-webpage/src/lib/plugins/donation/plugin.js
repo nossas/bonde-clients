@@ -63,7 +63,8 @@ class Donation extends React.Component {
       selected_value: selectedValue,
       selected_payment_type: selectedPaymentType
     } = this.state
-    this.props.handleDonationTransactionCreate({
+
+    return this.props.handleDonationTransactionCreate({
       mobilization,
       widget,
       selectedValue,
@@ -391,7 +392,14 @@ class Donation extends React.Component {
       return <FinishCustomMessage {...this.props} {...customProps} />
     }
     if (finishMessageType == 'donation-recurrent') {
-      return <FinishDonationMessage {...this.props} {...donationProps} />
+      return (
+        <FinishDonationMessage
+          {...this.props}
+          {...donationProps}
+          defaultSelectedValue={this.state.selected_value}
+          finishDonationComponent={FinishDefaultMessage}
+        />
+      )
     }
     return <FinishDefaultMessage {...this.props} {...defaultProps} />
   }

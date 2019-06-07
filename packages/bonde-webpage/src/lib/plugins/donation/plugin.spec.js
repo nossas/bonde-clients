@@ -7,11 +7,11 @@ let plugin = undefined
 
 test.beforeEach((t) => {
   t.context.props = {
-    widget: { settings: {} },
+    widget: { settings: { donation_value1: 10 } },
     mobilization: {},
     intl: { formatMessage: (key) => `{${key}}` },
-    handleDonationTransactionCreate: () => new Promise((resolve) => {
-      return resolve()
+    handleDonationTransactionCreate: () => new Promise((res, rej) => {
+      return res()
     }),
     overrides: {
       FinishCustomMessage: { component: () => <div className='finish-custom-message'/> },
@@ -30,9 +30,8 @@ test('should be render DonationPlugin its ok', t => {
 
 test('change state to success when resolve handleDonationTransactionCreate', t => {
   const { plugin } = t.context
-  plugin.find(DonationSubmitButton).simulate('click')
   
-  setImmediate(() => {
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     t.is(plugin.state('success'), true)
   })
 })
@@ -43,9 +42,7 @@ test('render FinishDonationMessage.component when pos action is donation-recurre
   const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent' }}
   plugin.setProps({ widget })
   // simulate donation click button
-  plugin.find(DonationSubmitButton).simulate('click')
-  
-  setImmediate(() => {
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     t.is(plugin.find(FinishDonationMessage.component).length, 1)
   })
 })
@@ -56,9 +53,7 @@ test('render FinishDefaultMessage.component when pos action is share', t => {
   const widget = { id: 1, settings: { finish_message_type: 'share' }}
   plugin.setProps({ widget })
   // simulate donation click button
-  plugin.find(DonationSubmitButton).simulate('click')
-  
-  setImmediate(() => {
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     t.is(plugin.find(FinishDefaultMessage.component).length, 1)
   })
 })
@@ -69,9 +64,31 @@ test('render FinishCustomMessage.component when pos action is custom', t => {
   const widget = { id: 1, settings: { finish_message_type: 'custom' }}
   plugin.setProps({ widget })
   // simulate donation click button
-  plugin.find(DonationSubmitButton).simulate('click')
-
-  setImmediate(() => {
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     t.is(plugin.find(FinishCustomMessage.component).length, 1)
+  })
+})
+
+test('pass extra props when FinishDonationMessage is rendered', t => {
+  const {
+    plugin,
+    props: {
+      handleDonationTransactionCreate,
+      overrides: {
+        FinishDonationMessage,
+        FinishDefaultMessage
+      }
+    }
+  } = t.context
+  
+  const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent' }}
+  plugin.setProps({ widget })
+  // simulate donation click button
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
+    const donationProps = plugin.find(FinishDonationMessage.component).props()
+    console.log('donationProps', donationProps)
+    t.is(donationProps.defaultSelectedValue, plugin.state('selected_value'))
+    t.is(donationProps.handleDonationTransactionCreate, handleDonationTransactionCreate)
+    t.is(donationProps.finishDonationComponent, FinishDefaultMessage.component)
   })
 })
