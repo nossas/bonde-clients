@@ -4,9 +4,20 @@ import classnames from 'classnames'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { Progress, TellAFriend } from './components'
 import { numberUtils } from './utils'
-import FinishPostDonation from './components/finish-post-donation'
 
 if (require('exenv').canUseDOM) require('./plugin.scss')
+
+
+export const DonationSubmitButton = ({ children, mainColor, onClick }) => (
+  <button
+    type='button'
+    onClick={onClick}
+    style={{ backgroundColor: mainColor }}
+    className='btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'
+  >
+    {children}
+  </button>
+)
 
 class Donation extends React.Component {
   constructor (props, context) {
@@ -17,18 +28,8 @@ class Donation extends React.Component {
       success: false,
       selected_value: 1,
       selected_payment_type: 'recurring',
-      errors: [],
-      isFinishPostDonationFinished: false
+      errors: []
     }
-
-    this.finishDonation = this.finishDonation.bind(this)
-  }
-
-  finishDonation(value) {
-    this.setState({
-      isFinishPostDonationFinished: true,
-      postDonationValue: value
-    })
   }
 
   componentDidMount () {
@@ -62,7 +63,6 @@ class Donation extends React.Component {
       selected_value: selectedValue,
       selected_payment_type: selectedPaymentType
     } = this.state
-
     this.props.handleDonationTransactionCreate({
       mobilization,
       widget,
@@ -344,14 +344,12 @@ class Donation extends React.Component {
             </button>
           )}
 
-          <button
-            type='button'
+          <DonationSubmitButton
+            mainColor={mainColor}
             onClick={this.handleClickDonate.bind(this)}
-            style={{ backgroundColor: mainColor }}
-            className='btn white caps bg-darken-4 p2 mt1 col-12 rounded border-box'
           >
             {buttonText}
-          </button>
+          </DonationSubmitButton>
         </div>
 
         <div className='p3' style={{ boxShadow: '#E3E3E3 0px 15px 18px -10px inset' }}>
@@ -385,34 +383,17 @@ class Donation extends React.Component {
 
     const {
       FinishCustomMessage: { component: FinishCustomMessage, props: customProps },
-      FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps }
+      FinishDefaultMessage: { component: FinishDefaultMessage, props: defaultProps },
+      FinishDonationMessage: { component: FinishDonationMessage, props: donationProps }
     } = overrides
 
-    if (payment_type === 'recurring') {
-      return <FinishDefaultMessage mobilization={mobilization} widget={widget} {...defaultProps} />
-    } else if (this.state.isFinishPostDonationFinished) {
-      if (finishMessageType === 'custom') {
-        return <FinishCustomMessage mobilization={mobilization} widget={widget} {...customProps} />
-      } else if (this.state.postDonationValue) {
-        return <TellAFriend
-          {...this.props}
-          message={<FormattedMessage
-            id='widgets.components--donation.finish-post-donation-messages.donation-ok'
-            defaultMessage={'AEE! Doação registrada!'}
-          />}
-        />
-      } else {
-        return <TellAFriend
-          {...this.props}
-          message={<FormattedMessage
-            id='widgets.components--donation.finish-post-donation-messages.not-now'
-            defaultMessage={'Tudo bem! Valeu por seu apoio :)'}
-          />}
-        />
-      }
-    } else {
-      return <FinishPostDonation {...this.props} onFinish={this.finishDonation} />
+    if (finishMessageType == 'custom') {
+      return <FinishCustomMessage {...this.props} {...customProps} />
     }
+    if (finishMessageType == 'donation-recurrent') {
+      return <FinishDonationMessage {...this.props} {...donationProps} />
+    }
+    return <FinishDefaultMessage {...this.props} {...defaultProps} />
   }
 
   renderReattemptMessage () {
@@ -464,9 +445,13 @@ class Donation extends React.Component {
   }
 
   renderContentStrategy () {
-    if (this.props.donationCustomerData) return this.renderReattemptMessage()
-    else if (this.state.success) return this.renderThankyouText()
-    else return this.renderForm()
+    if (this.props.donationCustomerData) {
+      return this.renderReattemptMessage()
+    }
+    if (this.state.success) {
+      return this.renderThankyouText()
+    }
+    return this.renderForm()
   }
 
   render () {
@@ -495,7 +480,11 @@ Donation.propTypes = {
     FinishDefaultMessage: shape({
       component: any,
       props: object
-    }).isRequired
+    }).isRequired,
+    FinishPostDonation: shape({
+      component: any,
+      props: object
+    }).isRequired,
   }).isRequired
 }
 
