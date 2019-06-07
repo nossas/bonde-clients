@@ -1,4 +1,4 @@
-import { bool, shape, string, object, oneOf } from 'prop-types'
+import { bool, string, object, oneOf } from 'prop-types'
 import React from 'react'
 // import { FormattedMessage } from 'react-intl'
 
@@ -10,10 +10,15 @@ const FinishPostDonation = ({
   imageWidth,
   widget
 }) => {
-  // const settings = widget.settings || {}
+  console.log('preview', preview)
+  console.log('href', href)
+  console.log('message', message)
+  console.log('imageUrl', imageUrl)
+  console.log('imageWidth', imageWidth)
+  console.log('widget', widget)
 
   return (
-    <div className='center p3 bg-white darkengray rounded'>
+    <div className='center p3 darkengray rounded'>
       teste
     </div>
   )
@@ -21,11 +26,7 @@ const FinishPostDonation = ({
 
 FinishPostDonation.propTypes = {
   preview: bool,
-  widget: shape({
-    settings: shape({
-      whatsapp_text: string
-    })
-  }),
+  widget: oneOf([string, object]),
   message: oneOf([string, object]),
   href: string,
   imageUrl: string,
@@ -37,4 +38,3 @@ FinishPostDonation.defaultProps = {
 }
 
 export default FinishPostDonation
-
