@@ -6,16 +6,12 @@ import TellAFriendBase from 'bonde-webpage/lib/ux/'
 const FinishPostDonation = ({
   preview,
   href,
-  message,
-  imageUrl,
-  imageWidth,
+  mobilization,
   widget
 }) => {
   console.log('preview', preview)
   console.log('href', href)
-  console.log('message', message)
-  console.log('imageUrl', imageUrl)
-  console.log('imageWidth', imageWidth)
+  console.log('mobilization', mobilization)
   console.log('widget', widget)
 
   return (
@@ -28,14 +24,8 @@ const FinishPostDonation = ({
 FinishPostDonation.propTypes = {
   preview: bool,
   widget: object,
-  message: oneOf([string, object]),
+  mobilization: object,
   href: string,
-  imageUrl: string,
-  imageWidth: string
-}
-
-FinishPostDonation.defaultProps = {
-  imageUrl: require('exenv').canUseDOM ? require('../share/check-mark-image.png') : null
 }
 
 export default FinishPostDonation
