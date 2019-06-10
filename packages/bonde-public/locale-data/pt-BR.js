@@ -1104,6 +1104,8 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
       other {dias}
     }
   `,
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'Boa! Doação registrada :)',
+  'widgets.components--donation.finish-post-donation-messages.not-now': 'Tudo bem! Valeu por seu apoio :)',
 
   // component form widget settings menu
   // filepath: /client/mobilizations/widgets/__plugins__/form/components/settings-menu.js
