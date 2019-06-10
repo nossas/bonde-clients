@@ -1,6 +1,17 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import {
+  bool,
+  oneOfType,
+  func,
+  node,
+  object,
+  string
+} from 'prop-types'
+import {
+  FormattedMessage,
+  intlShape,
+  injectIntl
+} from 'react-intl'
 import { reduxForm } from 'redux-form'
 
 import {
@@ -18,11 +29,18 @@ import EditorSlate, {
 import * as styles from './index-scss'
 
 export const FormFinishMessage = props => {
-  const { mobilization, fields, successMessage, widget, ...formProps } = props
-  const { color_scheme: colorScheme } = mobilization
-  const { TellAFriend } = props
+  const {
+    mobilization,
+    fields,
+    successMessage,
+    widget,
+    intl,
+    TellAFriend,
+    FinishPostDonation,
+    ...formProps
+  } = props
 
-  const { intl } = props
+  const { color_scheme: colorScheme } = mobilization
 
   const {
     finish_message_type: finishMessageType,
@@ -73,10 +91,18 @@ export const FormFinishMessage = props => {
               defaultMessage='Customizar'
             />
           </Radio>
+          {widget.kind === 'donation' && (
+            <Radio value='donation-recurrent'>
+              <FormattedMessage
+                id='widgets.components--form-finish-message.type.radio.donation-recurrent'
+                defaultMessage='Doação recorrente'
+              />
+            </Radio>
+          )}
         </RadioGroup>
       </FormGroup>
 
-      {finishMessageType.value === 'share' && (
+      {finishMessageType.value !== 'custom' && (
         <div>
           <FormGroup controlId='whatsapp-text-id' {...whatsappText}>
             <ControlLabel>
@@ -108,6 +134,13 @@ export const FormFinishMessage = props => {
       </label>
       {finishMessageType.value === 'share' && (
         <TellAFriend preview mobilization={mobilization} widget={widget} />
+      )}
+      {finishMessageType.value === 'donation-recurrent' &&
+       widget.kind === 'donation' && (
+        <div style={styles.previewFinishPostDonation}>
+          <FinishPostDonation preview mobilization={mobilization} widget={widget} />
+          <TellAFriend preview mobilization={mobilization} widget={widget} />
+        </div>
       )}
       {finishMessageType.value === 'custom' && (
         <div className='widget-finish-message-custom'>
@@ -184,16 +217,17 @@ const mapStateToProps = (state, props) => {
 //
 FormFinishMessage.propTypes = {
   // Injected components
-  TellAFriend: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  TellAFriend: oneOfType([node, func]).isRequired,
+  FinishPostDonation: oneOfType([node, func]).isRequired,
   // Form Redux
-  fields: PropTypes.object.isRequired,
-  submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  successMessage: PropTypes.string,
+  fields: object.isRequired,
+  submitting: bool.isRequired,
+  error: string,
+  successMessage: string,
   // Injected by components
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired,
+  mobilization: object.isRequired,
+  widget: object.isRequired,
+  asyncWidgetUpdate: func.isRequired,
   // translation
   intl: intlShape.isRequired
 }

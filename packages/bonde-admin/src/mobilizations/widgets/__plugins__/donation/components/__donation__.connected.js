@@ -8,10 +8,12 @@ import * as graphqlQueries from 'graphql/queries'
 import { factoryDonation } from 'mobrender-v2/widgets/donation'
 import { FinishMessageCustom } from 'mobilizations/widgets/components'
 import DonationTellAFriend from './donation-tell-a-friend'
+import DonationFinishPostDonation from './donation-finish-post-donation'
 
 const Donation = factoryDonation({
   finishMessageCustom: FinishMessageCustom,
-  tellAFriend: DonationTellAFriend
+  tellAFriend: DonationTellAFriend,
+  FinishPostDonation: DonationFinishPostDonation,
 })
 
 const mapStateToProps = state => ({
