@@ -23,6 +23,7 @@ import { DonationAnalytics, DonationTellAFriend } from 'bonde-webpage/lib/plugin
 
 import { connect } from 'react-redux'
 import { selectors as MobilizationSelectors } from 'bonde-webpage/lib/redux'
+import { FinishPostDonation } from 'bonde-webpage/lib/plugins/donation/components'
 
 
 const { publicRuntimeConfig } = getConfig()
@@ -86,6 +87,9 @@ const plugins = [
             component: FormTellAFriend,
             props: { imageUrl, href: getSharedPath(props.mobilization) }
           },
+          FinishDonationMessage: {
+            component: FinishPostDonation
+          }
         }}
       />
     )
