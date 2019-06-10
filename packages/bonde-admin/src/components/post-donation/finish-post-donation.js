@@ -1,7 +1,5 @@
-import { bool, string, object, oneOf } from 'prop-types'
+import { bool, string, object } from 'prop-types'
 import React from 'react'
-
-import TellAFriendBase from 'bonde-webpage/lib/ux/'
 
 const FinishPostDonation = ({
   preview,
@@ -16,7 +14,7 @@ const FinishPostDonation = ({
 
   return (
     <div className='center p3 darkengray rounded'>
-      teste
+      Seu componente de pós-doação
     </div>
   )
 }
