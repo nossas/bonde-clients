@@ -1013,6 +1013,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'widgets.components--form-finish-message.type.label': 'Tipo de mensaje',
   'widgets.components--form-finish-message.type.radio.share': 'Patrón',
   'widgets.components--form-finish-message.type.radio.custom': 'Personalizar',
+  'widgets.components--form-finish-message.type.radio.donation-recorrent': 'Donar recurrente',
   'widgets.components--form-finish-message.type.validation.required': 'Selecciona un tipo de mensaje ;)',
   'widgets.components--form-finish-message.share.whatsapp-text.label': 'Texto para WhatsApp',
   'widgets.components--form-finish-message.share.whatsapp-text.placeholder': 'Aquí puedes dejar listo un texto patrón. Así, cuando alguien comparta tu página por WhatsApp en la post-acción, ya tendrás una sugerencia sobre qué hablar :)',
