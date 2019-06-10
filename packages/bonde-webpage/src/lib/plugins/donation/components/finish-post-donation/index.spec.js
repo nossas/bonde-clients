@@ -6,6 +6,11 @@ import test from 'ava'
 import sinon from 'sinon'
 import FormSelect from './form-select'
 
+import {JSDOM} from 'jsdom'
+const doc = new JSDOM('<!doctype html><html><body></body></html>')
+global.window = doc.window
+global.document = window.document
+
 const finishDonationStub = sinon.fake.returns('oi')
 
 const props = {
