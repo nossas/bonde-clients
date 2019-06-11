@@ -60,51 +60,51 @@ const FormSelect = (props) => {
             onChange={onChange}
             value={value}
           >
-            {donation_value1 && <option value={1}>
-              <FormattedMessage
+            {donation_value1 && <FormattedMessage
                 id='widgets.components--donation.finish-post-donation.value-list'
                 defaultMessage='R$ {value} / mês'
                 values={{
                   value: donation_value1
                 }}
-              />
-            </option>}
-            {donation_value2 && <option value={2}>
-              <FormattedMessage
+              >
+                {(message) => <option value={1}>{message}</option>}
+              </FormattedMessage>}
+            {donation_value2 && <FormattedMessage
                 id='widgets.components--donation.finish-post-donation.value-list'
                 defaultMessage='R$ {value} / mês'
                 values={{
                   value: donation_value2
                 }}
-              />
-            </option>}
-            {donation_value3 && <option value={3}>
-              <FormattedMessage
+              >
+                {(message) => <option value={2}>{message}</option>}
+              </FormattedMessage>}
+            {donation_value3 && <FormattedMessage
                 id='widgets.components--donation.finish-post-donation.value-list'
                 defaultMessage='R$ {value} / mês'
                 values={{
                   value: donation_value3
                 }}
-              />
-            </option>}
-            {donation_value4 && <option value={4}>
-              <FormattedMessage
+              >
+                {(message) => <option value={3}>{message}</option>}
+              </FormattedMessage>}
+            {donation_value4 && <FormattedMessage
                 id='widgets.components--donation.finish-post-donation.value-list'
                 defaultMessage='R$ {value} / mês'
                 values={{
                   value: donation_value4
                 }}
-              />
-            </option>}
-            {donation_value5 && <option value={5}>
-              <FormattedMessage
+              >
+                {(message) => <option value={4}>{message}</option>}
+              </FormattedMessage>}
+            {donation_value5 && <FormattedMessage
                 id='widgets.components--donation.finish-post-donation.value-list'
                 defaultMessage='R$ {value} / mês'
                 values={{
                   value: donation_value5
                 }}
-              />
-            </option>}
+              >
+                {(message) => <option value={5}>{message}</option>}
+              </FormattedMessage>}
           </select>
           <button
             id="donate-btn"
