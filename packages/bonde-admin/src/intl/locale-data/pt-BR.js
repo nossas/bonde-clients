@@ -1499,5 +1499,7 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Torne essa doação recorrente!',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Sua contribuição será efetivada automaticamente uma vez ao mês, iniciando daqui há 31 dias.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'APOIAR TODO MÊS',
-  'widgets.components--donation.finish-post-donation.not-now': 'AGORA NÃO'
+  'widgets.components--donation.finish-post-donation.not-now': 'AGORA NÃO',
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'Boa! Doação registrada :)',
+  'widgets.components--donation.finish-post-donation-messages.not-now': 'Tudo bem! Valeu por seu apoio :)',
 }
