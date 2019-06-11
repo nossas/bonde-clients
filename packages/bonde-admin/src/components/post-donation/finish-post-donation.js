@@ -6,13 +6,9 @@ import { FormattedMessage } from 'react-intl'
 const imageUrl = require('exenv').canUseDOM ? require('../share/') : null
 
 const FinishPostDonationComponent = ({
-  href,
   mobilization,
   widget,
-  message
 }) => {
-  const { settings } = widget
-
   return (
     <div className='center p3 bg-white darkengray rounded'>
       <FinishPostDonation
