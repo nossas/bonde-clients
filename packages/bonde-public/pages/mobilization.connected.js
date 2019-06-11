@@ -86,9 +86,6 @@ const plugins = [
           FinishDefaultMessage: {
             component: FormTellAFriend,
             props: { imageUrl, href: getSharedPath(props.mobilization) }
-          },
-          FinishDonationMessage: {
-            component: FinishPostDonation
           }
         }}
       />
@@ -107,6 +104,9 @@ const plugins = [
             component: DonationTellAFriend,
             props: { imageUrl, href: getSharedPath(props.mobilization) }
           },
+          FinishDonationMessage: {
+            component: FinishPostDonation
+          }
         }}
       />
     )
