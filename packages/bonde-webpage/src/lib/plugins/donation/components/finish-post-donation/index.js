@@ -55,11 +55,12 @@ class FinishPostDonation extends React.Component {
 }
 
 FinishPostDonation.propTypes = {
-  mobilization: PropTypes.object,
-  widget: PropTypes.object,
-  defaultSelectedValue: PropTypes.number,
-  onClickDonation: PropTypes.func,
-  finishDonationComponent: PropTypes.func
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired.isRequired,
+  donationCustomerData: PropTypes.object.isRequired,
+  defaultSelectedValue: PropTypes.number.isRequired,
+  onClickDonation: PropTypes.func.isRequired,
+  finishDonationComponent: PropTypes.func.isRequired
 }
 
 export default FinishPostDonation
