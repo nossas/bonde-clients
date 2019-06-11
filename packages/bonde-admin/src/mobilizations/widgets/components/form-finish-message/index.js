@@ -139,7 +139,6 @@ export const FormFinishMessage = props => {
        widget.kind === 'donation' && (
         <div style={styles.previewFinishPostDonation}>
           <FinishPostDonation preview mobilization={mobilization} widget={widget} />
-          <TellAFriend preview mobilization={mobilization} widget={widget} />
         </div>
       )}
       {finishMessageType.value === 'custom' && (
