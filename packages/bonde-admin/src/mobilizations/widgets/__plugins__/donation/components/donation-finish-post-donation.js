@@ -1,9 +1,8 @@
 import React from 'react'
 import { bool, object } from 'prop-types'
+
 import * as paths from 'paths'
 import { FinishPostDonationComponent } from 'components/post-donation'
-
-import { TellAFriendBase } from 'bonde-webpage'
 
 const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {
   return (
@@ -11,14 +10,6 @@ const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {
       preview={preview}
       mobilization={mobilization}
       widget={widget}
-      message={ ({message}) => 
-        <TellAFriendBase
-          preview={preview}
-          mobilization={mobilization}
-          widget={widget}
-          message={message}
-      />
-      }
       href={paths.mobilization(mobilization)}
     />
   )
