@@ -9,7 +9,8 @@ const donationTransactionConvert = params => (dispatch, getState, { api, intl })
   
   const genRequestPayload = params => ({
     amount: params.amount,
-    donation_id: params.donation_id,
+    email: params.email,
+    widget_id: params.widget_id,
     delay_charge: params.delay_charge,
   })
   

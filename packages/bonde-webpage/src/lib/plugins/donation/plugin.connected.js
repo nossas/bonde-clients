@@ -101,44 +101,6 @@ class DonationConnected extends React.Component {
     })
   }
 
-  handleTransactionConvert (values) {
-    const {
-      mobilization,
-      widget,
-      selectedValue,
-      selectedPaymentType,
-      storedDonationCustomerData
-    } = values
-
-    return new Promise((resolve, reject) => {
-      const paymentType = widget.settings.payment_type
-      const recurringPeriod = widget.settings.recurring_period
-
-      this.props.donationTransactionConvert(data)
-        .then(() => {
-          if (this.state.donationCustomerData) {
-            this.setState({ donationCustomerData: undefined })
-          }
-          this.props.analyticsEvents.donationFinishRequest()
-          return resolve()
-        })
-        .catch(failure => {
-          if (failure.config && failure.config.data) {
-            try {
-              const failureData = JSON.parse(failure.config.data)
-              this.setState({ donationCustomerData: failureData.donation.customer })
-            } catch (error) {
-              console.error('Customer data is not parsable. Cannot store the customer data.')
-              console.error(error)
-            }
-          } else {
-            console.error(failure)
-          }
-        })
-      }
-    )
-  }
-
   render () {
     return (
       <Donation
@@ -146,7 +108,6 @@ class DonationConnected extends React.Component {
         email={this.state.email}
         donationCustomerData={this.state.donationCustomerData}
         handleDonationTransactionCreate={this.handleTransactionCreate.bind(this)}
-        handleDonationTransactionConvert={this.handleDonationTransactionConvert.bind(this)}
       />
     )
   }
