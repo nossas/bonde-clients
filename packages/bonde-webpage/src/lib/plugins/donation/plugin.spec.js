@@ -1,5 +1,6 @@
 import * as React from 'react'
 import test from 'ava'
+import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import DonationPlugin, { DonationSubmitButton } from './plugin'
 
@@ -86,9 +87,38 @@ test('pass extra props when FinishDonationMessage is rendered', t => {
   // simulate donation click button
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     const donationProps = plugin.find(FinishDonationMessage.component).props()
-    console.log('donationProps', donationProps)
+
     t.is(donationProps.defaultSelectedValue, plugin.state('selected_value'))
     t.is(donationProps.handleDonationTransactionCreate, handleDonationTransactionCreate)
     t.is(donationProps.finishDonationComponent, FinishDefaultMessage.component)
+  })
+})
+
+test('call handleDonationTransactionConvert when confirm donation-recurrent', t => {
+  const {
+    plugin,
+    props: {
+      overrides: {
+        FinishDonationMessage
+      }
+    }
+  } = t.context
+  const selectedValue = 1
+  const email = 'test@bonde.devel'
+  const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent', donation_value_1: '10' }}
+  const handleDonationTransactionConvert = sinon.fake()
+
+  plugin.setProps({ widget, email, handleDonationTransactionConvert })
+
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
+    const donationProps = plugin.find(FinishDonationMessage.component).props()
+    const donationState = plugin.state()
+
+    donationProps.onClickDonation(selectedValue)
+    t.true(handleDonationTransactionConvert.calledWith({
+      amount: widget.settings['donation_value' + selectedValue] + '00',
+      email,
+      widget_id: widget.id
+    }))
   })
 })
