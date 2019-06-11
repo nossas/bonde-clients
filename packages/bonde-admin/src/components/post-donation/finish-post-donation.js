@@ -1,29 +1,34 @@
-import { bool, string, object } from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { FinishPostDonation, TellAFriend } from 'bonde-webpage/lib/plugins/donation/components/'
+import { FormattedMessage } from 'react-intl'
 
-const FinishPostDonation = ({
-  preview,
+const FinishPostDonationComponent = ({
   href,
   mobilization,
   widget
 }) => {
-  console.log('preview', preview)
-  console.log('href', href)
-  console.log('mobilization', mobilization)
-  console.log('widget', widget)
+  const { settings } = widget
 
   return (
-    <div className='center p3 darkengray rounded'>
-      Seu componente de pós-doação
+    <div className='center p3 bg-white darkengray rounded'>
+      <FinishPostDonation
+        mobilization={mobilization}
+        widget={widget}
+        preview
+        onClickDonation={() => null}
+        defaultSelectedValue={1}
+        finishDonationComponent={TellAFriend}
+      />
     </div>
   )
 }
 
-FinishPostDonation.propTypes = {
-  preview: bool,
-  widget: object,
-  mobilization: object,
-  href: string,
+FinishPostDonationComponent.propTypes = {
+  preview: PropTypes.bool,
+  widget: PropTypes.object,
+  mobilization: PropTypes.object,
+  href: PropTypes.string,
 }
 
-export default FinishPostDonation
+export default FinishPostDonationComponent

@@ -1,1 +1,1 @@
-export { default as FinishPostDonation } from './finish-post-donation'
+export { default as FinishPostDonationComponent } from './finish-post-donation'

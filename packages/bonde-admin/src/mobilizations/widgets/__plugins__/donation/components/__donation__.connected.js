@@ -13,7 +13,7 @@ import DonationFinishPostDonation from './donation-finish-post-donation'
 const Donation = factoryDonation({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: DonationTellAFriend,
-  FinishPostDonation: DonationFinishPostDonation,
+  finishPostDonation: DonationFinishPostDonation,
 })
 
 const mapStateToProps = state => ({

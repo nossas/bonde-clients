@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import FinishPostDonation from './finish-post-donation'
+import FinishPostDonationComponent from './finish-post-donation'
 import MobSelectors from 'mobrender/redux/selectors'
 
 const mapStateToProps = state => {
@@ -11,5 +11,4 @@ const mapStateToProps = state => {
   }
 }
 
-export { default as FinishPostDonation } from './finish-post-donation'
-export default connect(mapStateToProps)(FinishPostDonation)
+export default connect(mapStateToProps)(FinishPostDonationComponent)
