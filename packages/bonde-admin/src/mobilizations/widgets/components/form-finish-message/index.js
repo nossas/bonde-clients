@@ -39,6 +39,8 @@ export const FormFinishMessage = props => {
     FinishPostDonation,
     ...formProps
   } = props
+  
+  console.log('props widget', widget)
 
   const { color_scheme: colorScheme } = mobilization
 
@@ -91,7 +93,8 @@ export const FormFinishMessage = props => {
               defaultMessage='Customizar'
             />
           </Radio>
-          {widget.kind === 'donation' && (
+          {widget.kind === 'donation' &&
+            widget.settings.payment_type === 'unique' && (
             <Radio value='donation-recurrent'>
               <FormattedMessage
                 id='widgets.components--form-finish-message.type.radio.donation-recurrent'
