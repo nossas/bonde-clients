@@ -104,11 +104,11 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
     }
   } = t.context
   const selectedValue = 1
-  const email = 'test@bonde.devel'
+  const donationId = 10
   const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent', donation_value_1: '10' }}
   const handleDonationTransactionConvert = sinon.fake()
 
-  plugin.setProps({ widget, email, handleDonationTransactionConvert })
+  plugin.setProps({ widget, donationId, handleDonationTransactionConvert })
 
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     const donationProps = plugin.find(FinishDonationMessage.component).props()
@@ -117,8 +117,7 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
     donationProps.onClickDonation(selectedValue)
     t.true(handleDonationTransactionConvert.calledWith({
       amount: widget.settings['donation_value' + selectedValue] + '00',
-      email,
-      widget_id: widget.id
+      donation_id: donationId
     }))
   })
 })

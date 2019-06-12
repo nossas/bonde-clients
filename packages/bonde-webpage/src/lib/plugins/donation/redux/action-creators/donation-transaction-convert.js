@@ -1,14 +1,8 @@
 const donationTransactionConvert = params => (dispatch, getState, { api, intl }) => {
-    const endpoint = `/convert`
-    const body = { donation: genRequestPayload(params) }
+  const endpoint = `/convert-donation`
+  const { donation_id, amount } = params
   
-    return api.post(endpoint, body)
-  }
+  return api.get(endpoint, { params })
+}
   
 export default donationTransactionConvert
-
-const genRequestPayload = params => ({
-  amount: params.amount,
-  email: params.email,
-  widget_id: params.widget_id
-})

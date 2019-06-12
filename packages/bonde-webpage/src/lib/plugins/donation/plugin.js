@@ -400,9 +400,8 @@ class Donation extends React.Component {
           onClickDonation={(value) => {
             if (value) {
               return this.props.handleDonationTransactionConvert({
-                email: this.props.email,
+                donation_id: this.props.donationId,
                 amount: widget.settings['donation_value' + value] + '00',
-                widget_id: widget.id
               })
             }
           }}
@@ -479,13 +478,13 @@ class Donation extends React.Component {
   }
 }
 
-const { any, bool, func, object, shape, string } = PropTypes
+const { any, bool, func, object, shape } = PropTypes
 
 Donation.propTypes = {
   mobilization: object.isRequired,
   widget: object.isRequired,
   hasNewField: bool,
-  email: string,
+  donationId: number,
   handleDonationTransactionCreate: func,
   intl: intlShape,
   // Overrides componente of success action

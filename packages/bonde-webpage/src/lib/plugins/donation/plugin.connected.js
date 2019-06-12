@@ -7,7 +7,7 @@ class DonationConnected extends React.Component {
     super(props)
     this.state = { 
       donationCustomerData: undefined, 
-      email: undefined 
+      donationId: undefined 
     }
   }
 
@@ -40,10 +40,10 @@ class DonationConnected extends React.Component {
           data.amount = widget.settings['donation_value' + selectedValue] + '00'
 
           this.props.donationTransactionCreate(data)
-            .then(() => {
+            .then((resp) => {
               this.setState({
                 donationCustomerData: undefined,
-                email: data.customer.email
+                donationId: resp.data.id
               })
 
               this.props.analyticsEvents.donationFinishRequest()
@@ -86,8 +86,6 @@ class DonationConnected extends React.Component {
         customerData.customerAddressNeighborhood = d.address.neighborhood
         customerData.customerAddressCity = d.address.city
         customerData.customerAddressState = d.address.state
-
-        this.setState({ email: d.email })
       }
 
       const params = {
@@ -110,7 +108,7 @@ class DonationConnected extends React.Component {
     return (
       <Donation
         {...this.props}
-        email={this.state.email}
+        donationId={this.state.donationId}
         donationCustomerData={this.state.donationCustomerData}
         handleDonationTransactionCreate={this.handleTransactionCreate.bind(this)}
       />
