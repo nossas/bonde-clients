@@ -5,7 +5,10 @@ import Donation from './plugin'
 class DonationConnected extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { donationCustomerData: undefined, email: undefined }
+    this.state = { 
+      donationCustomerData: undefined, 
+      email: undefined 
+    }
   }
 
   handleTransactionCreate (values) {
@@ -38,9 +41,11 @@ class DonationConnected extends React.Component {
 
           this.props.donationTransactionCreate(data)
             .then(() => {
-              if (this.state.donationCustomerData) {
-                this.setState({ donationCustomerData: undefined })
-              }
+              this.setState({
+                donationCustomerData: undefined,
+                email: data.customer.email
+              })
+
               this.props.analyticsEvents.donationFinishRequest()
               return resolve()
             })
@@ -64,7 +69,7 @@ class DonationConnected extends React.Component {
         }
       })
 
-      const customerData = {}
+      let customerData = {}
       if (storedDonationCustomerData) {
         const d = storedDonationCustomerData
 
@@ -81,7 +86,7 @@ class DonationConnected extends React.Component {
         customerData.customerAddressNeighborhood = d.address.neighborhood
         customerData.customerAddressCity = d.address.city
         customerData.customerAddressState = d.address.state
-        
+
         this.setState({ email: d.email })
       }
 

@@ -5,12 +5,11 @@ const donationTransactionConvert = params => (dispatch, getState, { api, intl })
     return api.post(endpoint, body)
   }
   
-  export default donationTransactionConvert
-  
-  const genRequestPayload = params => ({
-    amount: params.amount,
-    email: params.email,
-    widget_id: params.widget_id,
-    delay_charge: params.delay_charge,
-  })
-  
+export default donationTransactionConvert
+
+const genRequestPayload = params => ({
+  amount: params.amount,
+  email: params.email,
+  widget_id: params.widget_id,
+  delay_charge: params.delay_charge,
+})

@@ -7,7 +7,6 @@ import { numberUtils } from './utils'
 
 if (require('exenv').canUseDOM) require('./plugin.scss')
 
-
 export const DonationSubmitButton = ({ children, mainColor, onClick }) => (
   <button
     type='button'
@@ -403,7 +402,8 @@ class Donation extends React.Component {
               return this.props.handleDonationTransactionConvert({
                 email: this.props.email,
                 amount: widget.settings['donation_value' + value] + '00',
-                widget_id: widget.id
+                widget_id: widget.id,
+                delay_charge: 1
               })
             }
           }}
