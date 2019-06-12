@@ -39,8 +39,6 @@ export const FormFinishMessage = props => {
     FinishPostDonation,
     ...formProps
   } = props
-  
-  console.log('props widget', widget)
 
   const { color_scheme: colorScheme } = mobilization
 
