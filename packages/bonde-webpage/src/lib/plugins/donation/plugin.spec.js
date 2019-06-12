@@ -118,8 +118,7 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
     t.true(handleDonationTransactionConvert.calledWith({
       amount: widget.settings['donation_value' + selectedValue] + '00',
       email,
-      widget_id: widget.id,
-      delay_charge: 1
+      widget_id: widget.id
     }))
   })
 })

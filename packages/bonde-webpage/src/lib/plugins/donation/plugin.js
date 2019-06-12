@@ -402,8 +402,7 @@ class Donation extends React.Component {
               return this.props.handleDonationTransactionConvert({
                 email: this.props.email,
                 amount: widget.settings['donation_value' + value] + '00',
-                widget_id: widget.id,
-                delay_charge: 1
+                widget_id: widget.id
               })
             }
           }}
