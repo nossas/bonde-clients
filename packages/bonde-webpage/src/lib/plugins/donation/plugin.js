@@ -396,7 +396,15 @@ class Donation extends React.Component {
           {...this.props}
           {...donationProps}
           defaultSelectedValue={this.state.selected_value}
-          finishDonationComponent={FinishDefaultMessage}
+          finishDonationComponent={({message}) => (
+            <TellAFriend
+              mobilization={mobilization}
+              widget={widget}
+              message={<FormattedMessage
+                id={message}
+              />}
+            />
+          )}
           onClickDonation={(value) => {
             if (value) {
               return this.props.handleDonationTransactionConvert({
