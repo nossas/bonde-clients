@@ -19,6 +19,7 @@ import {
   RadioGroup,
   Radio,
   ControlLabel,
+  HelpBlock,
   FormControl
 } from 'components/forms'
 import { SettingsForm } from 'ux/components'
@@ -99,6 +100,18 @@ export const FormFinishMessage = props => {
                 defaultMessage='Doação recorrente'
               />
             </Radio>
+          )}
+          {finishMessageType.value === 'donation-recurrent' &&
+          widget.kind === 'donation' && (
+            <HelpBlock>
+              <FormattedMessage
+                id='widgets.components--form-finish-message.type.radio.donation-recurrent.helper-text'
+                defaultMessage={
+                  'O doador recebe a opção de seguir doando todo mês e se tornar um doador' +
+                  ' recorrente. Em seguida, visualiza a mensagem padrão de compartilhamento'
+                }
+              />
+            </HelpBlock>
           )}
         </RadioGroup>
       </FormGroup>
