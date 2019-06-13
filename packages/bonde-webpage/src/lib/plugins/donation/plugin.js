@@ -396,17 +396,7 @@ class Donation extends React.Component {
           {...this.props}
           {...donationProps}
           defaultSelectedValue={this.state.selected_value}
-          imageUrl={'/static/images/check-mark-image.png'}
-          finishDonationComponent={({message, imageUrl}) => (
-            <TellAFriend
-              mobilization={mobilization}
-              widget={widget}
-              message={<FormattedMessage
-                id={message}
-              />}
-              imageUrl={imageUrl}
-            />
-          )}
+          finishDonationComponent={FinishDonationMessage}
           onClickDonation={(value) => {
             if (value) {
               return this.props.handleDonationTransactionConvert({

@@ -1,6 +1,8 @@
 import React from 'react'
 import FormSelect from './form-select'
 import PropTypes from 'prop-types'
+import { TellAFriend } from '..';
+import { FormattedMessage } from 'react-intl';
 
 class FinishPostDonation extends React.Component {
   constructor(p) {
@@ -32,13 +34,15 @@ class FinishPostDonation extends React.Component {
     } = this.props
   
     return this.state.success ? (
-      <FinishDonationComponent
-        message={this.state.donationValue
-          ? 'widgets.components--donation.finish-post-donation-messages.donation-ok'
-          : 'widgets.components--donation.finish-post-donation-messages.not-now'}
-        imageUrl={this.state.donationValue
-          ? imageUrl
-          : undefined}
+      <TellAFriend
+        mobilization={mobilization}
+        widget={widget}
+        message={<FormattedMessage
+          id={this.state.donationValue
+            ? 'widgets.components--donation.finish-post-donation-messages.donation-ok'
+            : 'widgets.components--donation.finish-post-donation-messages.not-now'}
+        />}
+        imageUrl={this.state.donationValue && imageUrl}
       />
     ) : (
       <FormSelect
