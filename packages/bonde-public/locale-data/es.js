@@ -955,7 +955,7 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'page--donation-widget.form.button-text.label': 'Texto del botón',
   'page--donation-widget.form.button-text.placeholder': 'Ejm.: ¡Donar ahora!',
   'page--donation-widget.form.payment-method.label': '¿Quieres habilitar el pago por boleto?',
-  'page--donation-widget.form.payment-method.helper-text': 'Cada boleto pagado tendrá un costo adicional de R$3,00',
+  'page--donation-widget.form.payment-method.helper-text': 'El pago por boleto sólo está disponible para donaciones únicas. Cada boleto pagado tendrá un costo adicional de R $ 3,00.',
   'page--donation-widget.form.payment-method.radio.yes': 'Sí',
   'page--donation-widget.form.payment-method.radio.no': 'No',
   'page--donation-widget.form.bank-account.label': 'Cuenta bancaria',
