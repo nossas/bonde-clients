@@ -41,7 +41,7 @@ class FinishPostDonation extends React.Component {
         mobilization={mobilization}
         widget={widget}
         onChange={this.handleChange}
-        value={defaultSelectedValue}
+        value={this.state.value}
         onSubmit={async (value) => {
           await onClickDonation(value)
           this.setState({
