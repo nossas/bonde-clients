@@ -379,7 +379,7 @@ class Donation extends React.Component {
 
   renderThankyouText () {
     const { mobilization, widget, overrides } = this.props
-    const { settings: { finish_message_type: finishMessageType, payment_type } } = widget
+    const { settings: { finish_message_type: finishMessageType } } = widget
 
     const {
       FinishCustomMessage: { component: FinishCustomMessage, props: customProps },
@@ -387,10 +387,10 @@ class Donation extends React.Component {
       FinishDonationMessage: { component: FinishDonationMessage, props: donationProps }
     } = overrides
 
-    if (finishMessageType == 'custom') {
+    if (finishMessageType === 'custom') {
       return <FinishCustomMessage {...this.props} {...customProps} />
     }
-    if (finishMessageType == 'donation-recurrent') {
+    if (finishMessageType === 'donation-recurrent') {
       return (
         <FinishDonationMessage
           {...this.props}
@@ -488,7 +488,7 @@ class Donation extends React.Component {
   }
 }
 
-const { any, bool, func, object, shape } = PropTypes
+const { any, bool, func, object, shape, number } = PropTypes
 
 Donation.propTypes = {
   mobilization: object.isRequired,

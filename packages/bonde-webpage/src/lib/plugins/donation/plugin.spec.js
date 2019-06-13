@@ -4,7 +4,7 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import DonationPlugin, { DonationSubmitButton } from './plugin'
 
-let plugin = undefined
+let plugin
 
 test.beforeEach((t) => {
   t.context.props = {
@@ -77,7 +77,7 @@ test('pass extra props when FinishDonationMessage is rendered', t => {
       handleDonationTransactionCreate,
       overrides: {
         FinishDonationMessage,
-        FinishDefaultMessage
+        // FinishDefaultMessage
       }
     }
   } = t.context
@@ -113,7 +113,7 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
 
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     const donationProps = plugin.find(FinishDonationMessage.component).props()
-    const donationState = plugin.state()
+    // const donationState = plugin.state()
 
     donationProps.onClickDonation(selectedValue)
     t.true(handleDonationTransactionConvert.calledWith({
