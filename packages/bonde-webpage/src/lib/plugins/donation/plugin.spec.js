@@ -77,7 +77,7 @@ test('pass extra props when FinishDonationMessage is rendered', t => {
       handleDonationTransactionCreate,
       overrides: {
         FinishDonationMessage,
-        // FinishDefaultMessage
+        FinishDefaultMessage
       }
     }
   } = t.context
@@ -90,8 +90,7 @@ test('pass extra props when FinishDonationMessage is rendered', t => {
 
     t.is(donationProps.defaultSelectedValue, plugin.state('selected_value'))
     t.is(donationProps.handleDonationTransactionCreate, handleDonationTransactionCreate)
-    //to do simulate render FinishDefaultMessage
-    // t.is(donationProps.finishDonationComponent, FinishDefaultMessage.component)
+    t.is(donationProps.finishDonationComponent, FinishDonationMessage.component)
   })
 })
 
