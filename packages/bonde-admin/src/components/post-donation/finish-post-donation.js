@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FinishPostDonation, TellAFriend } from 'bonde-webpage/lib/plugins/donation/components/'
 import { FormattedMessage } from 'react-intl'
 
-const imageUrl = require('exenv').canUseDOM ? require('../share/') : null
+const imageUrl = require('exenv').canUseDOM ? require('../share/check-mark-image.png') : null
 
 const FinishPostDonationComponent = ({
   mobilization,
@@ -17,16 +17,8 @@ const FinishPostDonationComponent = ({
         preview
         onClickDonation={() => null}
         defaultSelectedValue={1}
-        finishDonationComponent={({message}) => (
-          <TellAFriend
-            mobilization={mobilization}
-            widget={widget}
-            imageUrl={imageUrl}
-            message={<FormattedMessage
-              id={message}
-            />}
-          />
-        )}
+        finishDonationComponent={FinishPostDonation}
+        imageUrl={imageUrl}
       />
     </div>
   )
