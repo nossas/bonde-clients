@@ -396,13 +396,15 @@ class Donation extends React.Component {
           {...this.props}
           {...donationProps}
           defaultSelectedValue={this.state.selected_value}
-          finishDonationComponent={({message}) => (
+          imageUrl={'/static/images/check-mark-image.png'}
+          finishDonationComponent={({message, imageUrl}) => (
             <TellAFriend
               mobilization={mobilization}
               widget={widget}
               message={<FormattedMessage
                 id={message}
               />}
+              imageUrl={imageUrl}
             />
           )}
           onClickDonation={(value) => {

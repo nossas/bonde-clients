@@ -27,7 +27,8 @@ class FinishPostDonation extends React.Component {
       // Passed Donation to Finish by state
       defaultSelectedValue,
       onClickDonation,
-      finishDonationComponent: FinishDonationComponent
+      finishDonationComponent: FinishDonationComponent,
+      imageUrl
     } = this.props
   
     return this.state.success ? (
@@ -35,6 +36,9 @@ class FinishPostDonation extends React.Component {
         message={this.state.donationValue
           ? 'widgets.components--donation.finish-post-donation-messages.donation-ok'
           : 'widgets.components--donation.finish-post-donation-messages.not-now'}
+        imageUrl={this.state.donationValue
+          ? imageUrl
+          : undefined}
       />
     ) : (
       <FormSelect
@@ -60,7 +64,8 @@ FinishPostDonation.propTypes = {
   donationCustomerData: PropTypes.object.isRequired,
   defaultSelectedValue: PropTypes.number.isRequired,
   onClickDonation: PropTypes.func.isRequired,
-  finishDonationComponent: PropTypes.func.isRequired
+  finishDonationComponent: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string
 }
 
 export default FinishPostDonation
