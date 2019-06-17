@@ -1470,4 +1470,5 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'widgets.components--donation.finish-post-donation.not-now': 'AGORA NÃO',
   'widgets.components--donation.finish-post-donation-messages.donation-ok': 'MUITO OBRIGADA! Sua doação foi registrada :) Ela será processada automaticamente uma vez ao mês, começando daqui a 31 dias.',
   'widgets.components--donation.finish-post-donation-messages.not-now': 'Tudo bem! Valeu por seu apoio :)',
+  'widgets.components--donation.finish-post-donation-messages.tell-a-friend.text': 'Compartilhe com a sua galera para espalhar o Mutirão Ativista por todos os cantos'
 }
