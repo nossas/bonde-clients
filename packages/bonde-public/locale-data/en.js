@@ -878,5 +878,6 @@ servidor-03.dominio.com`,
   'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Make your contribution now:',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Your contribution will be made automatically once a month, starting in 31 days.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'SUPPORT EVERY MONTH',
-  'widgets.components--donation.finish-post-donation.not-now': 'NOT NOW'
+  'widgets.components--donation.finish-post-donation.not-now': 'NOT NOW',
+  'widgets.components--donation.finish-post-donation-messages.tell-a-friend.text': 'Share with your crew to spread the Activist Mutirão around every corner:'
 }
