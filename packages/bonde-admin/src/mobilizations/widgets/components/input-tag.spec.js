@@ -26,7 +26,7 @@ describe('client/mobilizations/widgets/components/input-tag', () => {
         errors.message = 'Dismatch error'
       }
       return errors
-  }
+    }
   }
 
   beforeEach(() => {
