@@ -667,9 +667,6 @@ servidor-03.dominio.com`,
       other {days}
     }
   `,
-  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'Nice! Donation registered :)',
-  'widgets.components--donation.finish-post-donation-messages.not-now': 'It\'s OK! Thank you for your support :)',
-
   'form-widget.components--settings-menu.title': 'Set up your action form',
   'form-widget.components--settings-menu.items.fields': 'Form fields',
   'form-widget.components--settings-menu.items.adjusts': 'Settings',
@@ -871,12 +868,14 @@ servidor-03.dominio.com`,
   'activists-management.c--filterable-list.period.options.always': 'Ever',
   'activists-management.c--filterable-list.period.options.custom-period': 'Customize period ...',
 
-  // FinishPostDonation component - finish-post-donation.js
+  // FinishPostDonation
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'THANK YOU! Your donation has been recorded :) It will be processed automatically once a month, starting in 31 days.',
+  'widgets.components--donation.finish-post-donation-messages.not-now': 'It\'s OK! Thank you for your support :)',
   'widgets.components--donation.finish-post-donation.value-list': '$ {value} / month',
   'widgets.components--donation.finish-post-donation.no-action': 'No action available',
-  'widgets.components--donation.finish-post-donation.title-component': 'Yeah! Donation made :)',
-  'widgets.components--donation.finish-post-donation.improve-impact-question': 'Do you wanna increase your impact?',
-  'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Make this donation recurrent!',
+  'widgets.components--donation.finish-post-donation.title-component': 'YAY! Your donation has been processed :)',
+  'widgets.components--donation.finish-post-donation.improve-impact-question': 'You have just supported the basic structure of the Mutirão Ativista, but to reach its maximum potential we\'ll need to hire someone totally dedicated to support people who build campaigns through Panela de Pressão. With a small monthly donation, you can help us hire this person!',
+  'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Make your contribution now:',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Your contribution will be made automatically once a month, starting in 31 days.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'SUPPORT EVERY MONTH',
   'widgets.components--donation.finish-post-donation.not-now': 'NOT NOW'
