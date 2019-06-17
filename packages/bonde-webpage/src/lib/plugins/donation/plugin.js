@@ -25,6 +25,7 @@ class Donation extends React.Component {
       hasMouseOver: false,
       loading: false,
       success: false,
+      donation: undefined,
       selected_value: 1,
       selected_payment_type: 'recurring',
       errors: []
@@ -69,8 +70,8 @@ class Donation extends React.Component {
       selectedValue,
       selectedPaymentType,
       storedDonationCustomerData: donationCustomerData
-    }).then(() => {
-      this.setState({ success: true })
+    }).then(({ donation }) => {
+      this.setState({ success: true, donation })
     })
   }
 
@@ -390,7 +391,7 @@ class Donation extends React.Component {
     if (finishMessageType === 'custom') {
       return <FinishCustomMessage {...this.props} {...customProps} />
     }
-    if (finishMessageType === 'donation-recurrent') {
+    if (finishMessageType === 'donation-recurrent' && this.state.donation.payment_method !== 'boleto') {
       return (
         <FinishDonationMessage
           {...this.props}
@@ -400,7 +401,7 @@ class Donation extends React.Component {
           onClickDonation={(value) => {
             if (value) {
               return this.props.handleDonationTransactionConvert({
-                donation_id: this.props.donationId,
+                donation_id: this.state.donation.id,
                 amount: widget.settings['donation_value' + value] + '00',
               })
             }
@@ -478,13 +479,12 @@ class Donation extends React.Component {
   }
 }
 
-const { any, bool, func, object, shape, number } = PropTypes
+const { any, bool, func, object, shape } = PropTypes
 
 Donation.propTypes = {
   mobilization: object.isRequired,
   widget: object.isRequired,
   hasNewField: bool,
-  donationId: number,
   handleDonationTransactionCreate: func,
   intl: intlShape,
   // Overrides componente of success action

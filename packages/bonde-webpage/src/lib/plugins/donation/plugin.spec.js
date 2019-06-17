@@ -12,7 +12,7 @@ test.beforeEach((t) => {
     mobilization: {},
     intl: { formatMessage: (key) => `{${key}}` },
     handleDonationTransactionCreate: () => new Promise((res, rej) => {
-      return res()
+      return res({ donation: {} })
     }),
     overrides: {
       FinishCustomMessage: { component: () => <div className='finish-custom-message'/> },
@@ -30,8 +30,7 @@ test('should be render DonationPlugin its ok', t => {
 })
 
 test('change state to success when resolve handleDonationTransactionCreate', t => {
-  const { plugin } = t.context
-  
+  const { plugin } = t.context  
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     t.is(plugin.state('success'), true)
   })
@@ -74,16 +73,22 @@ test('pass extra props when FinishDonationMessage is rendered', t => {
   const {
     plugin,
     props: {
-      handleDonationTransactionCreate,
       overrides: {
         FinishDonationMessage,
         FinishDefaultMessage
       }
     }
   } = t.context
-  
+  const handleDonationTransactionCreate = () => new Promise((res, rej) => {
+    return res({ donation })
+  })
+  const donation = { id: 10, payment_method: 'cartao-credito' }
   const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent' }}
-  plugin.setProps({ widget })
+  plugin.setProps({
+    widget,
+    handleDonationTransactionCreate
+  })
+
   // simulate donation click button
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     const donationProps = plugin.find(FinishDonationMessage.component).props()
@@ -104,11 +109,17 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
     }
   } = t.context
   const selectedValue = 1
-  const donationId = 10
+  const donation = { id: 10, payment_method: 'cartao-credito' }
   const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent', donation_value_1: '10' }}
   const handleDonationTransactionConvert = sinon.fake()
 
-  plugin.setProps({ widget, donationId, handleDonationTransactionConvert })
+  plugin.setProps({
+    widget,
+    handleDonationTransactionConvert,
+    handleDonationTransactionCreate: () => new Promise((res, rej) => {
+      return res({ donation })
+    })
+  })
 
   return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
     const donationProps = plugin.find(FinishDonationMessage.component).props()
@@ -117,7 +128,36 @@ test('call handleDonationTransactionConvert when confirm donation-recurrent', t 
     donationProps.onClickDonation(selectedValue)
     t.true(handleDonationTransactionConvert.calledWith({
       amount: widget.settings['donation_value' + selectedValue] + '00',
-      donation_id: donationId
+      donation_id: donation.id
     }))
+  })
+})
+
+
+test('should render the default post-action when payment is not made by credit card', t => {
+  const {
+    plugin,
+    props: {
+      overrides: {
+        FinishDefaultMessage
+      }
+    }
+  } = t.context
+  const selectedValue = 1
+  const donation = { id: 10, payment_method: 'boleto' }
+  const widget = { id: 1, settings: { finish_message_type: 'donation-recurrent', donation_value_1: '10' }}
+  const handleDonationTransactionConvert = sinon.fake()
+
+  plugin.setProps({
+    widget,
+    donation,
+    handleDonationTransactionConvert,
+    handleDonationTransactionCreate: () => new Promise((res, rej) => {
+      return res({ donation })
+    })
+  })
+
+  return plugin.find(DonationSubmitButton).invoke('onClick')().then(() => {
+    t.is(plugin.find(FinishDefaultMessage.component).length, 1)
   })
 })

@@ -6,8 +6,7 @@ class DonationConnected extends React.Component {
   constructor (props) {
     super(props)
     this.state = { 
-      donationCustomerData: undefined, 
-      donationId: undefined 
+      donationCustomerData: undefined
     }
   }
 
@@ -39,15 +38,11 @@ class DonationConnected extends React.Component {
           data.widget_id = widget.id
           data.amount = widget.settings['donation_value' + selectedValue] + '00'
 
-          this.props.donationTransactionCreate(data)
+          return this.props.donationTransactionCreate(data)
             .then((resp) => {
-              this.setState({
-                donationCustomerData: undefined,
-                donationId: resp.data.id
-              })
-
+              this.setState({ donationCustomerData: undefined })
               this.props.analyticsEvents.donationFinishRequest()
-              return resolve()
+              return resolve({ donation: resp.data })
             })
             .catch(failure => {
               if (failure.config && failure.config.data) {
@@ -108,7 +103,6 @@ class DonationConnected extends React.Component {
     return (
       <Donation
         {...this.props}
-        donationId={this.state.donationId}
         donationCustomerData={this.state.donationCustomerData}
         handleDonationTransactionCreate={this.handleTransactionCreate.bind(this)}
       />
