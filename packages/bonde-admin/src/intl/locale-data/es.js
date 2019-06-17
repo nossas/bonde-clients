@@ -1477,5 +1477,6 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Haz tu contribución ahora',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Su contribución se realizará automáticamente una vez al mes, a partir de 31 días.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'APOYA CADA MES',
-  'widgets.components--donation.finish-post-donation.not-now': 'AHORA NO'
+  'widgets.components--donation.finish-post-donation.not-now': 'AHORA NO',
+  'widgets.components--donation.finish-post-donation-messages.tell-a-friend.text': 'Compartir con su galera para esparcir el Mutirão Activista por todos los rincones:'
 }
