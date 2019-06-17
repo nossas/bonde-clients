@@ -1465,5 +1465,17 @@ En caso de que tu base de acciones no esté sincronizada con Mailchimp, puedes f
   'adjustments.form.count-text.placeholder': 'Define el texto que estará al lado del número de personas que se están movilizando.',
   'adjustments.form.count-text.helpBlock': 'El contador será mostrado se existir um texto definido.',
   'adjustments.form.main-color.label': 'Color',
-  'adjustments.form.main-color.helpBlock': 'Puedes escoger el color en la cajita de abajo o insertar el valor que quieras en HEX - por ejemplo: #DC3DCE.'
+  'adjustments.form.main-color.helpBlock': 'Puedes escoger el color en la cajita de abajo o insertar el valor que quieras en HEX - por ejemplo: #DC3DCE.',
+
+  // Component FinishPostDonation on Donation
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': '¡MUCHAS GRACIAS! Su donación fue registrada :) Se procesará automáticamente una vez al mes, comenzando dentro de 31 días.',
+  'widgets.components--donation.finish-post-donation-messages.not-now': '¡Está bien! Gracias por tu apoyo :)',
+  'widgets.components--donation.finish-post-donation.value-list': '$ {value} / mes',
+  'widgets.components--donation.finish-post-donation.no-action': 'No hay acción disponible',
+  'widgets.components--donation.finish-post-donation.title-component': ' OBA! Su donación fue procesada :)',
+  'widgets.components--donation.finish-post-donation.improve-impact-question': 'Usted acaba de apoyar la estructura básica del Mutirão Activista, pero para él alcanzar su potencial máximo vamos a necesitar contratar a una persona totalmente dedicada a apoyar a todos los que quieran crear sus campañas en el Panela de Presión. Con una pequeña donación recurrente, usted nos ayuda a contratar a esa persona! Haga su contribución ahora:',
+  'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Haz tu contribución ahora',
+  'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Su contribución se realizará automáticamente una vez al mes, a partir de 31 días.',
+  'widgets.components--donation.finish-post-donation.support-every-month': 'APOYA CADA MES',
+  'widgets.components--donation.finish-post-donation.not-now': 'AHORA NO'
 }

@@ -1493,14 +1493,14 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'adjustments.form.main-color.helpBlock': 'Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE.',
 
   // FinishPostDonation component - finish-post-donation.js
-  'widgets.components--donation.finish-post-donation.value-list': '$ {value} / month',
+  'widgets.components--donation.finish-post-donation.value-list': '$ {value} / mês',
   'widgets.components--donation.finish-post-donation.no-action': 'Nenhuma ação disponível',
-  'widgets.components--donation.finish-post-donation.title-component': 'Boa! Doação Realizada :)',
-  'widgets.components--donation.finish-post-donation.improve-impact-question': 'Quer aumentar seu impacto?',
-  'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Torne essa doação recorrente!',
+  'widgets.components--donation.finish-post-donation.title-component': 'OBA! Sua doação foi processada :)',
+  'widgets.components--donation.finish-post-donation.improve-impact-question': 'Você acabou de apoiar a estrutura básica do Mutirão Ativista, mas para ele atingir seu potencial máximo vamos precisar contratar uma pessoa totalmente dedicada a apoiar todos que quiserem criar suas campanhas no Panela de Pressão. Com uma pequena doação recorrente, você nos ajuda a contratar essa pessoa!',
+  'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Faça sua contribuição agora:',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Sua contribuição será efetivada automaticamente uma vez ao mês, iniciando daqui há 31 dias.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'APOIAR TODO MÊS',
   'widgets.components--donation.finish-post-donation.not-now': 'AGORA NÃO',
-  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'Boa! Doação registrada :)',
+  'widgets.components--donation.finish-post-donation-messages.donation-ok': 'MUITO OBRIGADA! Sua doação foi registrada :) Ela será processada automaticamente uma vez ao mês, começando daqui a 31 dias.',
   'widgets.components--donation.finish-post-donation-messages.not-now': 'Tudo bem! Valeu por seu apoio :)',
 }
