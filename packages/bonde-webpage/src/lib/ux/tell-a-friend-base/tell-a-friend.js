@@ -19,7 +19,7 @@ const TellAFriend = ({
   widget
 }) => {
   const settings = widget.settings || {}
-
+  console.log(widget)
   return (
     <div className='center p3 bg-white darkengray rounded'>
       <div className='m0 h3 bold'>{message}</div>
@@ -28,7 +28,9 @@ const TellAFriend = ({
       </div>
       <p>
         <FormattedMessage
-          id='share.components--tell-a-friend.text'
+          id={widget.settings.finish_message_type === 'donation-recurrent'
+          ? 'widgets.components--donation.finish-post-donation-messages.tell-a-friend.text'
+          : 'share.components--tell-a-friend.text'}
           defaultMessage='Agora, compartilhe com seus amigos!'
         />
       </p>
