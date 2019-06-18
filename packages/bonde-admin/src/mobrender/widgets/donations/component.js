@@ -324,7 +324,7 @@ const DonationSettingsPage = props => {
         <HelpBlock>
           <FormattedMessage
             id='page--donation-widget.form.payment-method.helper-text'
-            defaultMessage='Cada boleto pago terá um custo adicional de R$3,00'
+            defaultMessage='O pagamento por boleto só está disponível para doações únicas. Cada boleto pago terá um custo adicional de R$3,00.'
           />
         </HelpBlock>
         <RadioGroup>
