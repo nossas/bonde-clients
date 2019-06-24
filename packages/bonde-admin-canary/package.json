@@ -43,7 +43,7 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "start": "serve -s build",
-    "test": "jest --modulePaths=src",
+    "test": "react-scripts test",
     "coverage": "npm run test -- --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
