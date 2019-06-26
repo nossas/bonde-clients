@@ -35,6 +35,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         data: [...state.data, action.community]
       }
+    case t.SET_ERRORS:
+      return {
+        ...state,
+        submitError: {...action.submitError }
+      }
     case t.EDIT:
       return {
         ...state,

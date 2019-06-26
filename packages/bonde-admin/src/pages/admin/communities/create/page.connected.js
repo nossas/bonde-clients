@@ -1,14 +1,25 @@
 //
 // @route /community/new
 //
+import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
 import * as CommunityActions from 'community/action-creators'
 
 import Page from './page'
 
-const validate = (values, { intl }) => {
-  const error = {}
+const mapStateToProps = state => {
+  const { community: { list: { submitError } } } = state
+  return {
+    submitError
+  }
+}
+
+const validate = (values, { submitError, intl }) => {
+  let error = {}
+  if (submitError) {
+    error = {...submitError}
+  }
   if (!values.name) {
     error.name = intl.formatMessage({
       id: 'page--community-new.form.name.validation.required',
@@ -24,8 +35,8 @@ const validate = (values, { intl }) => {
   return error
 }
 
-export default injectIntl(reduxForm({
+export default connect(mapStateToProps)(injectIntl(reduxForm({
   form: 'communityNewForm',
   fields: ['name', 'city'],
   validate
-}, undefined, CommunityActions)(Page))
+}, undefined, CommunityActions)(Page)))
