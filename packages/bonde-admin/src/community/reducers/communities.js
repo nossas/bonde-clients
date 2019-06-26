@@ -38,7 +38,14 @@ export default (state = initialState, action = {}) => {
     case t.SET_ERRORS:
       return {
         ...state,
-        submitError: {...action.submitError }
+        submitError: {...action.submitError },
+        clearError: action.clearError,
+      }
+    case t.CLEAR_ERROR:
+      return {
+        ...state,
+        submitError: undefined,
+        clearError: undefined,
       }
     case t.EDIT:
       return {
