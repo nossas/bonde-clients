@@ -9,10 +9,9 @@ import * as CommunityActions from 'community/action-creators'
 import Page from './page'
 
 const mapStateToProps = state => {
-  const { community: { list: { submitError, clearError } } } = state
+  const { community: { list: { submitError } } } = state
   return {
-    submitError,
-    clearError
+    submitError
   }
 }
 
@@ -33,7 +32,9 @@ const validate = (values, { intl }) => {
   return error
 }
 
-export default connect(mapStateToProps)(injectIntl(reduxForm({
+const clearError = () => ({type: 'CLEAR_ERROR'})
+
+export default connect(mapStateToProps, { clearError })(injectIntl(reduxForm({
   form: 'communityNewForm',
   fields: ['name', 'city'],
   validate

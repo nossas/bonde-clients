@@ -50,8 +50,7 @@ class CommunityNewPage extends Component {
             nosubmit
             className='bg-white rounded'
             onSubmit={values => {
-              clearError && clearError()
-              console.log(this.props)
+              clearError()
               return asyncCreate(values)
             }}
             {...formProps}

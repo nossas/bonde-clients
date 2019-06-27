@@ -38,14 +38,12 @@ export default (state = initialState, action = {}) => {
     case t.SET_ERRORS:
       return {
         ...state,
-        submitError: {...action.submitError },
-        clearError: action.clearError,
+        submitError: {...action.submitError }
       }
     case t.CLEAR_ERROR:
       return {
         ...state,
-        submitError: undefined,
-        clearError: undefined,
+        submitError: undefined
       }
     case t.EDIT:
       return {
