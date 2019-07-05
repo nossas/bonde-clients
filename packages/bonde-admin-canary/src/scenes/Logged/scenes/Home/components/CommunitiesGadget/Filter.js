@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
 import { SelectDropdown } from 'components'
 
@@ -22,5 +23,12 @@ const Filter = ({ filter, onChange }) => (
   )}
   </I18n>
 )
+
+Filter.propTypes = {
+  filter: PropTypes.shape({
+    orderBy: PropTypes.string
+  }),
+  onChange: PropTypes.func
+}
 
 export default Filter

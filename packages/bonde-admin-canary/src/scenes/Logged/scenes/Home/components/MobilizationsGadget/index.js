@@ -4,8 +4,10 @@ import MobilizationsGadget from './MobilizationsGadget'
 
 export { default as query } from './query.graphql'
 
-export default () => (
+const UserMobilizations = (props) => (
   <I18n ns='home'>
     {(t) => <MobilizationsGadget t={t} />}
   </I18n>
 )
+
+export default UserMobilizations
