@@ -874,9 +874,10 @@ servidor-03.dominio.com`,
   'widgets.components--donation.finish-post-donation.value-list': '$ {value} / month',
   'widgets.components--donation.finish-post-donation.no-action': 'No action available',
   'widgets.components--donation.finish-post-donation.title-component': 'YAY! Your donation has been processed :)',
-  'widgets.components--donation.finish-post-donation.improve-impact-question': 'You have just supported the basic structure of the Mutirão Ativista, but to reach its maximum potential we\'ll need to hire someone totally dedicated to support people who build campaigns through Panela de Pressão. With a small monthly donation, you can help us hire this person!',
+  'widgets.components--donation.finish-post-donation.improve-impact-question': 'You have just supported the basic structure of the Panela de Pressão, but to reach its maximum potential we\'ll need to hire someone totally dedicated to support people who build campaigns through the platform. With a small monthly donation, you can help us hire this person!',
   'widgets.components--donation.finish-post-donation.improve-impact-solution': 'Make your contribution now:',
   'widgets.components--donation.finish-post-donation.improve-impact-explanation': 'Your contribution will be made automatically once a month, starting in 31 days.',
   'widgets.components--donation.finish-post-donation.support-every-month': 'SUPPORT EVERY MONTH',
-  'widgets.components--donation.finish-post-donation.not-now': 'NOT NOW'
+  'widgets.components--donation.finish-post-donation.not-now': 'NOT NOW',
+  'widgets.components--donation.finish-post-donation-messages.tell-a-friend.text': 'Share with your crew to spread the Activist Mutirão around every corner:'
 }
