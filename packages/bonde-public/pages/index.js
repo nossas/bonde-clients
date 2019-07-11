@@ -78,6 +78,7 @@ class Page extends React.Component {
           { gaOptions: { name: 'MobilizationTracker' } }
         )
         ReactGA.ga('MobilizationTracker.send', 'pageview', '/')
+        ReactGA.ga('require', 'GTM-W4T6JCX')
       }
     }
 
