@@ -81,14 +81,11 @@ class EditorOld extends React.Component {
   }
 
   handleClick (e) {
+    console.log(e)
     e.preventDefault()
-    const target = $(e.target).closest('a').prop('hash')
-    const scrollable = $('#blocks-list')
-    const yPosition = $(target).offset().top + scrollable.scrollTop() - scrollable.position().top
+    const target = document.getElementById(e.target)
 
-    scrollable.stop().animate({scrollTop: yPosition}, 500, () => {
-      window.location.hash = target
-    })
+    target.scrollIntoView({behavior: "smooth"})
   }
 
   save () {
