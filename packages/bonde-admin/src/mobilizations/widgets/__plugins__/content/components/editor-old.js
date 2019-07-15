@@ -82,7 +82,6 @@ class EditorOld extends React.Component {
   }
 
   handleClick (e) {
-    console.log(e)
     e.preventDefault()
     const target = document.getElementById(e.target)
 
