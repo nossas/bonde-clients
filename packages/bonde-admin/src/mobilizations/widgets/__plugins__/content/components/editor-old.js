@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import $ from 'jquery'
 import classnames from 'classnames'
 
 // Global module dependencies
@@ -76,7 +75,9 @@ class EditorOld extends React.Component {
   setClick () {
     const links = document.querySelectorAll('.content-widget a:not([target="_blank"])')
     for (let link of links) {
-      $(link).on('click touchstart', this.handleClick.bind(this))
+      document.addEventListener('click touchstart', function(e) {
+        this.handleClick.bind(this)
+      })
     }
   }
 
