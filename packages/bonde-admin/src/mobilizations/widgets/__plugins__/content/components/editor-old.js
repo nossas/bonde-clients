@@ -73,15 +73,17 @@ class EditorOld extends React.Component {
   }
 
   setClick () {
-    const links = document.querySelectorAll('.content-widget a:not([target="_blank"])')
-    for (let link of links) {
-      document.addEventListener('click touchstart', function(e) {
-        this.handleClick.bind(this)
-      })
+    const on = (selector, event, handler, element = document) => {
+      element.addEventListener(event, (e) => { if(e.target.matches(selector)) handler(e); });
     }
+
+    window.addEventListener('click touchstart', function(e) {
+      on('.content-widget a:not([target="_blank"])','click touchstart', this.handleClick.bind(this))
+    })
   }
 
   handleClick (e) {
+    console.log(e)
     e.preventDefault()
     const target = document.getElementById(e.target)
 
