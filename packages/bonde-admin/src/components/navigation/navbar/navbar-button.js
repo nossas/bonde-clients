@@ -1,19 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
-import $ from 'jquery'
 
 const NavbarButton = props => {
   const handleClick = e => {
     e.preventDefault()
-    const { targetId, scrollableId } = props
-    const target = $(`#${targetId}`)
-    const scrollable = $(`#${scrollableId}`)
-    const yPosition = target.position().top + scrollable.scrollTop() - scrollable.position().top
+    const { targetId } = props
+    const target = document.getElementById(targetId)
 
-    scrollable.stop().animate({scrollTop: yPosition}, 500, () => {
-      window.location.hash = targetId
-    })
+    target.scrollIntoView({behavior: "smooth"})
   }
 
   const {className, children, hidden} = props
