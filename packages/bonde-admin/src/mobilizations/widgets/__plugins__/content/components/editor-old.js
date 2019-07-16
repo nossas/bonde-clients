@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import $ from 'jquery'
 import classnames from 'classnames'
 
 // Global module dependencies
@@ -74,21 +73,21 @@ class EditorOld extends React.Component {
   }
 
   setClick () {
-    const links = document.querySelectorAll('.content-widget a:not([target="_blank"])')
-    for (let link of links) {
-      $(link).on('click touchstart', this.handleClick.bind(this))
+    const on = (selector, event, handler, element = document) => {
+      element.addEventListener(event, (e) => { if(e.target.matches(selector)) handler(e); });
     }
+
+    window.addEventListener('click touchstart', function(e) {
+      on('.content-widget a:not([target="_blank"])','click touchstart', this.handleClick.bind(this))
+    })
   }
 
   handleClick (e) {
+    console.log(e)
     e.preventDefault()
-    const target = $(e.target).closest('a').prop('hash')
-    const scrollable = $('#blocks-list')
-    const yPosition = $(target).offset().top + scrollable.scrollTop() - scrollable.position().top
+    const target = document.getElementById(e.target)
 
-    scrollable.stop().animate({scrollTop: yPosition}, 500, () => {
-      window.location.hash = target
-    })
+    target.scrollIntoView({behavior: "smooth"})
   }
 
   save () {
