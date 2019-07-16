@@ -15,7 +15,22 @@
   20%, 60% {transform: translateX(-5px);}
   40%, 80% {transform: translateX(5px);}
 }
+
 .shake {
   -webkit-animation-name: shake;
   animation-name: shake;
+}
+
+@-webkit-keyframes slice-up {
+  from {-webkit-transform: translateY(0);}
+  to {-webkit-transform: translateY(5px);}
+}
+@keyframes slice-up {
+  from {-webkit-transform: translateY(0);}
+  to {-webkit-transform: translateY(5px);}
+}
+
+.slice-up {
+  -webkit-animation-name: slice-up;
+  animation-name: slice-up;
 }

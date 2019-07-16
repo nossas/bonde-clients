@@ -183,7 +183,7 @@ export class InputForm extends Component {
   render () {
     const { canMoveUp, canMoveDown, uid, intl } = this.props
     return (
-      <div>
+      <div className='animated slice-up'>
         <div
           id={`form-${uid}`}
           className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'
