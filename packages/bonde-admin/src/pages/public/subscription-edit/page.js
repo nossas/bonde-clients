@@ -166,26 +166,25 @@ class SubscriptionEditPage extends React.Component {
               )
             })}
 
-            <p className='link--cancel center mt3 lightgray link'>
-              <a href='/confirm'
-                style={{ color: '#999999' }}
-                onClick={() => {
-                  const message = intl.formatMessage({
-                    id: 'page--subscription-edit.cancel-subscription.confirm',
-                    defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
-                      'Tem certeza que quer continuar?'
-                  })
+            <p
+              className='link--cancel center mt3 lightgray link'
+              style={{ color: '#999999', cursor: 'pointer' }}
+              onClick={() => {
+                const message = intl.formatMessage({
+                  id: 'page--subscription-edit.cancel-subscription.confirm',
+                  defaultMessage: 'Você está prestes a cancelar sua assinatura. ' +
+                    'Tem certeza que quer continuar?'
+                })
 
-                  if (window.confirm(message)) {
-                    asyncSubscriptionDelete(initialValues)
-                  }
-                }}
-              >
-                <FormattedMessage
-                  id='page--subscription-edit.link.cancel-subscription'
-                  defaultMessage='Quero cancelar a minha assinatura.'
-                />
-              </a>
+                if (window.confirm(message)) {
+                  asyncSubscriptionDelete(initialValues)
+                }
+              }}
+            >
+              <FormattedMessage
+                id='page--subscription-edit.link.cancel-subscription'
+                defaultMessage='Quero cancelar a minha assinatura.'
+              />
             </p>
           </section>
         </Background>
