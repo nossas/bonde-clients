@@ -31,7 +31,7 @@ class Page extends React.Component {
     const { dispatch, getState } = store
     const host = getState().sourceRequest.host
     const protocol = getState().sourceRequest.protocol
-    const appDomain = publicRuntimeConfig.domainPublic || 'bonde.devel'
+    const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel'
 
     if (host) {
       if (res) { // force host to be with www
