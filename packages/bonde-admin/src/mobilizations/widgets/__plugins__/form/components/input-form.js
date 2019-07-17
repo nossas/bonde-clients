@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-import $ from 'jquery'
 
 import * as MobActions from 'mobrender/redux/action-creators'
 
@@ -43,17 +42,14 @@ export class InputForm extends Component {
 
   componentWillAppear () {
     const { uid } = this.props
-    $('#form-' + uid).hide()
-    $('#form-' + uid).slideDown(200)
+    document.getElementById(uid).style.display='none'
   }
 
   componentWillReceiveProps (nextProps) {
-    const { uid } = this.props
-    if (this.state.loading && this.props.field !== nextProps.field) {
+    const { field } = this.props
+    if (this.state.loading && field !== nextProps.field) {
       this.setState({ loading: false })
-      $('#form-' + uid).slideUp(200, () => {
-        this.props.onClose && this.props.onClose()
-      })
+      this.props.onClose && this.props.onClose()
     }
   }
 
@@ -95,16 +91,14 @@ export class InputForm extends Component {
   handleCancel (event) {
     event.preventDefault()
     event.stopPropagation()
-    const { field, uid } = this.props
+    const { field } = this.props
     this.setState({
       kind: field.kind,
       label: field.label,
       placeholder: field.placeholder,
       required: field.required
     })
-    $('#form-' + uid).slideUp(200, () => {
-      this.props.onClose && this.props.onClose()
-    })
+    this.props.onClose && this.props.onClose()
   }
 
   handleSave (event) {
@@ -189,7 +183,7 @@ export class InputForm extends Component {
   render () {
     const { canMoveUp, canMoveDown, uid, intl } = this.props
     return (
-      <div>
+      <div className='animated slice-up'>
         <div
           id={`form-${uid}`}
           className='p2 mb3 bg-white border border-gray94 clearfix relative rounded z4'

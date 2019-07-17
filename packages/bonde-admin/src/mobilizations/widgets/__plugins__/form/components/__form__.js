@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import CountUp from 'react-countup'
 import { intlShape } from 'react-intl'
-import $ from 'jquery'
 import classnames from 'classnames'
 
 import { Error } from 'components/form-util'
@@ -39,7 +38,7 @@ class Form extends Component {
 
       const fieldsWithValue = widget.settings.fields.map(field => ({
         ...field,
-        value: $(`#input-${field.uid}`).val()
+        value: document.querySelector(`#input-${field.uid}`).value
       }))
       const errors = this.validate(fieldsWithValue)
       this.setState({ errors })
