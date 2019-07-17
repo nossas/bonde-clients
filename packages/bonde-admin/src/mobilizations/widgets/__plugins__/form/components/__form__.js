@@ -38,7 +38,7 @@ class Form extends Component {
 
       const fieldsWithValue = widget.settings.fields.map(field => ({
         ...field,
-        value: document.getElementById(`#input-${field.uid}`).value
+        value: document.querySelector(`#input-${field.uid}`).value
       }))
       const errors = this.validate(fieldsWithValue)
       this.setState({ errors })
