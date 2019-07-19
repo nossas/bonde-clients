@@ -1,5 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
-import { addNotification as notify } from 'reapop'
+import { toast } from 'react-toastify'
+// TO DO: remove before migration notification to react-toastify
+//import { addNotification as notify } from 'reapop'
 import { createAction } from 'utils/redux'
 import * as t from 'community/action-types'
 import * as AwaitActions from 'components/await/redux/action-creators'
@@ -27,16 +29,31 @@ export default ({ communityId, email }) => (dispatch, getState, { api, intl }) =
       dispatch(AwaitActions.setLoading(false))
 
       if (status === 400 && data.errors) {
-        dispatch(notify(genericRequestError(intl)))
+        // TO DO: remove before migration notification to react-toastify
+        // dispatch(notify(genericRequestError(intl)))
+        toast.error(genericRequestError(intl).message, { 
+          autoClose: 5000,
+          hideProgressBar: true,
+        })
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        dispatch(notify(communityInviteSuccess(intl, email)))
+        // TO DO: remove before migration notification to react-toastify
+        // dispatch(notify(communityInviteSuccess(intl, email)))
+        toast.sucess(communityInviteSuccess(intl, email).message, { 
+          autoClose: 5000,
+          hideProgressBar: true,
+        })
         dispatch(createAction(t.ASYNC_INVITE_SUCCESS, data))
         return Promise.resolve()
       }
     })
     .catch(error => {
-      dispatch(notify(genericRequestError(intl)))
+      // TO DO: remove before migration notification to react-toastify
+      // dispatch(notify(genericRequestError(intl)))
+      toast.error(genericRequestError(intl).message, { 
+        autoClose: 5000,
+        hideProgressBar: true,
+      })
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_INVITE_FAILURE, error))
       return Promise.reject(error)
