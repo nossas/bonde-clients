@@ -1,11 +1,13 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import DevTools from 'components/dev-tools'
 import 'styles/main.scss'
 import { TechnicalIssues } from 'components/error/index'
 import { ZendeskWidget } from 'components/external-services'
 import { GoogleFontsLoader } from 'components/fonts'
-import NotificationSystem from 'components/notification-system'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 import AccountRegisterPage from './public/account-register'
 import SubscriptionEditPage from './public/subscription-edit'
@@ -23,7 +25,7 @@ const AuthExample = () => (
     </Router>
     {process.env.NODE_ENV !== 'production' ? <DevTools /> : <div></div>}
     <ZendeskWidget />
-    <NotificationSystem />
+    <ToastContainer />
     <GoogleFontsLoader fonts='Source Sans Pro' />
   </div>
 )
