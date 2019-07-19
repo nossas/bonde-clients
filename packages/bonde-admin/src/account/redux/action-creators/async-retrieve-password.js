@@ -1,5 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
-import { addNotification as notify } from 'reapop'
+import { toast } from 'react-toastify'
+// TO DO: remove before migration notification to react-toastify
+//import { addNotification as notify } from 'reapop'
 import { accountPasswordRetrieveSuccess } from 'utils/notifications'
 import * as t from '../action-types'
 import { createAction } from './create-action'
@@ -16,7 +18,12 @@ export default user => (dispatch, getState, { api, intl }) => {
         return Promise.reject({ ...res.data.errors })
       } else if (res.status === 200) {
         dispatch(createAction(t.ASYNC_RETRIEVE_PASSWORD_SUCCESS, res.data))
-        dispatch(notify(accountPasswordRetrieveSuccess(intl)))
+        // TO DO: remove before migration notification to react-toastify
+        //dispatch(notify(accountPasswordRetrieveSuccess(intl)))
+        toast.success(accountPasswordRetrieveSuccess(intl).message, { 
+          autoClose: 5000,
+          hideProgressBar: true,
+        })
         return Promise.resolve()
       }
     })
