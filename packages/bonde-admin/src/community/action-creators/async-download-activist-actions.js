@@ -29,7 +29,7 @@ const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, 
     // dispatch(dismiss(notificationId))
   }
 
-    // TO DO: remove before migration notification to react-toastify
+  // TO DO: remove before migration notification to react-toastify
   // const warningOptions = { filename, notificationId }
   // dispatch(notify(notifications.reportDownloadInProgressWarning(intl, warningOptions)))
 
