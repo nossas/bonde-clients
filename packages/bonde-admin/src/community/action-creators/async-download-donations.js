@@ -10,18 +10,26 @@ const asyncDownloadDonations = ({ id, name, ...community }) => (dispatch, getSta
   const filename = `[Relatório][Doação] ${name}.csv`
   // const notificationId = Math.random()
   const notifySuccess = () => {
-    toast.success(notifications.reportDownloadSuccess(intl, { filename }).title, { 
-      autoClose: 1500,
+    toast.success(notifications.reportDownloadSuccess(intl, { filename }).message, { 
+      autoClose: 5000,
       hideProgressBar: true,
     })
+    // TO DO: remove before migration notification to react-toastify
     // dispatch(toast(notifications.reportDownloadSuccess(intl, { filename })))
     // dispatch(toast(notificationId))
   }
-  // const notifyError = () => {
-  //   dispatch(toast(notifications.reportDownloadError(intl, { filename })))
-  //   dispatch(toast(notificationId))
-  // }
 
+  const notifyError = () => {
+    toast.error(notifications.reportDownloadError(intl, { filename }).message, { 
+      autoClose: 5000,
+      hideProgressBar: true,
+    })
+    // TO DO: remove before migration notification to react-toastify
+    // dispatch(toast(notifications.reportDownloadError(intl, { filename })))
+    // dispatch(toast(notificationId))
+  }
+
+  // TO DO: remove before migration notification to react-toastify
   //const warningOptions = { filename, notificationId }
   // dispatch(toast(notifications.reportDownloadInProgressWarning(intl, warningOptions)))
 
@@ -29,7 +37,7 @@ const asyncDownloadDonations = ({ id, name, ...community }) => (dispatch, getSta
     .get(`/communities/${id}/donation_reports.csv`, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 400 && data.errors) {
-        // notifyError()
+        notifyError()
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
         if (data.length > 0) {
@@ -40,7 +48,7 @@ const asyncDownloadDonations = ({ id, name, ...community }) => (dispatch, getSta
       }
     })
     .catch(error => {
-      // notifyError()
+      notifyError()
       Promise.reject(error)
     })
 }
