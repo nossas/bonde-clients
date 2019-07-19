@@ -1,7 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
-import { addNotification as notify } from 'reapop'
+import { toast } from 'react-toastify'
+// TO DO: remove before migration notification to react-toastify
+//import { addNotification as notify } from 'reapop'
+
 import { FormattedMessage, intlShape } from 'react-intl'
 
 import { slugUpdatedMessage } from 'utils/notifications'
@@ -168,7 +171,12 @@ const mapActionsCreators = (dispatch, props) => ({
         const { slug: slugResult } = mobilization
         const hasSlugUpdated = slugInitial && slugInitial !== slugResult
 
-        hasSlugUpdated && dispatch(notify(slugUpdatedMessage(props.intl)))
+        // TO DO: remove before migration notification to react-toastify
+        //hasSlugUpdated && dispatch(notify(slugUpdatedMessage(props.intl)))
+        hasSlugUpdated && toast.sucess(slugUpdatedMessage(props.intl).message, { 
+          autoClose: 5000,
+          hideProgressBar: true,
+        })
         onFinishSubmit && onFinishSubmit(mobilization)
       })
       .catch(errors => {
