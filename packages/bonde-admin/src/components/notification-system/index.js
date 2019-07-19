@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import NotificationsSystem from 'reapop'
-import theme from './theme'
+import myTheme from './theme'
 
-const NotificationSystem = () => (
-  require('exenv').canUseDOM
-    ? <NotificationsSystem {...{ theme }} />
-    : <div />
-)
-
-export default NotificationSystem
+export default class CustomNotificationsSystem extends Component {
+  render() {
+    return (
+      <NotificationsSystem theme={myTheme} />
+    )
+  }
+}
