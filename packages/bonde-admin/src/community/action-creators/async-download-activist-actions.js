@@ -1,8 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import downloadjs from 'downloadjs'
 import { toast } from 'react-toastify'
-// TO DO: remove before migration notification to react-toastify
-//import { addNotification as notify, removeNotification as dismiss } from 'reapop'
 import * as notifications from 'utils/notifications'
 
 const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, getState, { api, intl }) => {
@@ -15,18 +13,12 @@ const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, 
       autoClose: 5000,
       hideProgressBar: true,
     })
-    // TO DO: remove before migration notification to react-toastify
-    // dispatch(notify(notifications.reportDownloadSuccess(intl, { filename })))
-    // dispatch(dismiss(notificationId))
   }
   const notifyError = () => {
     toast.error(notifications.reportDownloadError(intl, { filename }).message, { 
       autoClose: 5000,
       hideProgressBar: true,
     })
-    // TO DO: remove before migration notification to react-toastify
-    // dispatch(notify(notifications.reportDownloadError(intl, { filename })))
-    // dispatch(dismiss(notificationId))
   }
 
   // TO DO: remove before migration notification to react-toastify
