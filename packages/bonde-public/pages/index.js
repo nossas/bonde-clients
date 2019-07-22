@@ -6,11 +6,11 @@ import {connect} from 'react-redux'
 
 // Intl
 import { IntlProvider } from 'react-intl'
-import { defaultLocale, messages, setCurrentLocale, localeStrategy } from '../intlReducer'
+import { defaultLocale, messages, setCurrentLocale, localeStrategy } from '../src/intlReducer'
 
 // ApolloClient
 import { ApolloProvider } from 'react-apollo'
-import apolloClient from '../apolloClient'
+import apolloClient from '../src/apolloClient'
 
 // bonde-webpage
 import {
@@ -18,7 +18,7 @@ import {
   asyncFilterBlock,
   asyncFilterWidget
 } from 'bonde-webpage/lib/redux/action-creators'
-import MobilizationApp from './mobilization.connected'
+import MobilizationApp from '../src/mobilization.connected'
 import styles from 'bonde-webpage/lib/styles/main.scss'
 
 class Page extends React.Component {
@@ -101,6 +101,8 @@ class Page extends React.Component {
 
     const url = `${this.props.protocol}://${customDomain}` || host
 
+    // return <pre>{styles}</pre>
+
     return (
       <div>
         <Head>
@@ -126,9 +128,9 @@ class Page extends React.Component {
           />
           <script type='text/javascript' src='https://assets.pagar.me/checkout/checkout.js' />
         </Head>
-        <style global jsx>{styles}</style>
+        <style jsx>{styles}</style>
         <IntlProvider locale={currentLocale} key={currentLocale} messages={messages[currentLocale]}>
-          <ApolloProvider client={apolloClient()}>
+          <ApolloProvider client={apolloClient}>
             <MobilizationApp editable={false} />
           </ApolloProvider>
         </IntlProvider>
