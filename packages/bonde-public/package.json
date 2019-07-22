@@ -17,6 +17,9 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link-http": "^1.5.15",
     "axios": "0.18.0",
     "bonde-webpage": "^0.14.7-alpha.0",
     "chain-function": "^1.0.0",
@@ -27,6 +30,8 @@
     "draft-js": "0.10.5",
     "exenv": "^1.2.2",
     "format-number": "^3.0.0",
+    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
     "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "3.3.1",
@@ -36,7 +41,7 @@
     "node-sass": "^4.11.0",
     "qs": "6.5.2",
     "react": "16.8.6",
-    "react-apollo": "^1.4.16",
+    "react-apollo": "^2.5.8",
     "react-color": "2.14.1",
     "react-cookie": "2.2.0",
     "react-countup": "3.0.3",
@@ -63,12 +68,16 @@
     "url-loader": "^1.1.2"
   },
   "devDependencies": {
+    "@types/graphql": "^14.2.2",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.23",
     "babel-loader": "7.1.5",
     "babel-plugin-inline-import": "^2.0.6",
     "babel-plugin-react-intl": "2.4.0",
     "babel-preset-env": "1.7.0",
     "css-loader": "^0.28.8",
     "file-loader": "1.1.11",
+    "typescript": "^3.5.3",
     "webpack-bundle-analyzer": "2.13.1"
   },
   "engines": {
