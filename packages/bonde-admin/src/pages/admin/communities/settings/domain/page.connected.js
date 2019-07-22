@@ -5,7 +5,7 @@ import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
-import { addNotification as notify } from 'reapop'
+// import { addNotification as notify } from 'reapop'
 
 import DNSControlSelectors from 'community/dns-control-selectors'
 import {
