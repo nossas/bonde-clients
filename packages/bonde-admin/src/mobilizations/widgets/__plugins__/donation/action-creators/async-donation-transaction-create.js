@@ -1,11 +1,12 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import { addNotification } from 'reapop'
+import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 import { createAction } from './create-action'
 import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events'
 import * as t from '../action-types'
 import { setDonationCustomerData } from '.'
-import { notify } from 'reapop/lib/store/notifications';
+// import { notify } from 'reapop/lib/store/notifications';
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, { api, intl }) => {
   const state = getState()
