@@ -80,8 +80,8 @@ const mapActionsToProps = {
   deleteHostedZone: asyncDeleteHostedZone,
   createDNSRecord: asyncAddDNSRecord,
   deleteDNSRecord: asyncDeleteDNSRecord,
-  checkHostedZone: asyncCheckHostedZone,
-  notify
+  checkHostedZone: asyncCheckHostedZone
+  // notify
 }
 
 export default injectIntl(provideHooks(redial)(
