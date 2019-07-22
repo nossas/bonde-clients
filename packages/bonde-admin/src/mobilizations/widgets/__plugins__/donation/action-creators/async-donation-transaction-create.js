@@ -1,10 +1,11 @@
 /* eslint-disable prefer-promise-reject-errors */
-import { addNotification } from 'reapop'
+// import { addNotification } from 'reapop'
 import * as notifications from 'utils/notifications'
 import { createAction } from './create-action'
 import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events'
 import * as t from '../action-types'
 import { setDonationCustomerData } from '.'
+import { notify } from 'reapop/lib/store/notifications';
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, { api, intl }) => {
   const state = getState()
@@ -25,7 +26,11 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, { api, int
     })
     .catch(failure => {
       dispatch(createAction(t.ASYNC_DONATION_TRANSACTION_CREATE_FAILURE, failure))
-      dispatch(addNotification(notifications.genericRequestError(intl)))
+      // dispatch(notify(notifications.genericRequestError(intl)))
+      toast.error(notifications.genericRequestError(intl).message, { 
+        autoClose: 5000,
+        hideProgressBar: true,
+      })
 
       if (failure.config && failure.config.data) {
         try {
