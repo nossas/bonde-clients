@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 // TO DO: remove before migration notification to react-toastify
-//import { addNotification as notify } from 'reapop'
+// import { addNotification as notify } from 'reapop'
 import * as notifications from 'utils/notifications'
 import * as t from 'subscriptions/redux/action-types'
 import { createAction } from 'utils/redux'
