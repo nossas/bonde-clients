@@ -1,5 +1,4 @@
 /* eslint-disable prefer-promise-reject-errors */
-// import { addNotification } from 'reapop'
 import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 import { createAction } from './create-action'
@@ -27,7 +26,6 @@ const asyncDonationTransactionCreate = params => (dispatch, getState, { api, int
     })
     .catch(failure => {
       dispatch(createAction(t.ASYNC_DONATION_TRANSACTION_CREATE_FAILURE, failure))
-      // dispatch(notify(notifications.genericRequestError(intl)))
       toast.error(notifications.genericRequestError(intl).message, { 
         autoClose: 5000,
         hideProgressBar: true,

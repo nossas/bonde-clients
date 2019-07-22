@@ -1,4 +1,3 @@
-// import { addNotification } from 'reapop'
 import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 import * as t from 'subscriptions/redux/action-types'
@@ -31,7 +30,6 @@ export default ({ id, token }) => (dispatch, getState, { api, intl }) => {
         autoClose: 5000,
         hideProgressBar: true,
       })
-      // dispatch(addNotification(notifications.genericRequestError(intl)))
       return Promise.reject(e)
     })
 }

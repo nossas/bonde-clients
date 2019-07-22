@@ -4,7 +4,6 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
-// import { addNotification as notify } from 'reapop'
 import { toast } from 'react-toastify'
 import { isValidDomain } from 'utils/validation-helper'
 import DnsControlSelectors from 'community/dns-control-selectors'
@@ -51,8 +50,8 @@ const mapActionsToProps = (dispatch, { intl }) => ({
   },
   asyncCheckHostedZone: (args) => dispatch(asyncCheckHostedZone(args)),
   notify: (args) => {
-    console.log(args) 
-    toast.error(args, { 
+    console.log(args)
+    toast.error(args, {
       autoClose: 5000,
       hideProgressBar: true,
     })

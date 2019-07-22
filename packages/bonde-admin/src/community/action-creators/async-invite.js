@@ -1,7 +1,5 @@
 /* eslint-disable prefer-promise-reject-errors */
 import { toast } from 'react-toastify'
-// TO DO: remove before migration notification to react-toastify
-//import { addNotification as notify } from 'reapop'
 import { createAction } from 'utils/redux'
 import * as t from 'community/action-types'
 import * as AwaitActions from 'components/await/redux/action-creators'
@@ -29,16 +27,12 @@ export default ({ communityId, email }) => (dispatch, getState, { api, intl }) =
       dispatch(AwaitActions.setLoading(false))
 
       if (status === 400 && data.errors) {
-        // TO DO: remove before migration notification to react-toastify
-        // dispatch(notify(genericRequestError(intl)))
         toast.error(genericRequestError(intl).message, { 
           autoClose: 5000,
           hideProgressBar: true,
         })
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        // TO DO: remove before migration notification to react-toastify
-        // dispatch(notify(communityInviteSuccess(intl, email)))
         toast.sucess(communityInviteSuccess(intl, email).message, { 
           autoClose: 5000,
           hideProgressBar: true,
@@ -48,8 +42,6 @@ export default ({ communityId, email }) => (dispatch, getState, { api, intl }) =
       }
     })
     .catch(error => {
-      // TO DO: remove before migration notification to react-toastify
-      // dispatch(notify(genericRequestError(intl)))
       toast.error(genericRequestError(intl).message, { 
         autoClose: 5000,
         hideProgressBar: true,
