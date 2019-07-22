@@ -4,7 +4,7 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
-import { addNotification as notify } from 'reapop'
+// import { addNotification as notify } from 'reapop'
 
 import { isValidDomain } from 'utils/validation-helper'
 import DnsControlSelectors from 'community/dns-control-selectors'
@@ -41,10 +41,23 @@ const mapActionsToProps = (dispatch, { intl }) => ({
   asyncAddHostedZone: (values) => {
     return dispatch(addHostedZone(values))
       // eslint-disable-next-line handle-callback-err
-      .catch(err => dispatch(notify(dnsNotify.addHostedZoneFailure(intl))))
+      .catch(err => {
+        // dispatch(notify(dnsNotify.addHostedZoneFailure(intl)))
+        toast.error(dnsNotify.addHostedZoneFailure(intl).message, { 
+          autoClose: 5000,
+          hideProgressBar: true,
+        })
+      })
   },
   asyncCheckHostedZone: (args) => dispatch(asyncCheckHostedZone(args)),
-  notify: (args) => dispatch(notify(args))
+  notify: (args) => {
+    console.log(args) 
+    toast.error(args, { 
+      autoClose: 5000,
+      hideProgressBar: true,
+    })
+    //dispatch(notify(args))
+  }
 })
 
 export default injectIntl(connect(mapStateToProps, mapActionsToProps)(
