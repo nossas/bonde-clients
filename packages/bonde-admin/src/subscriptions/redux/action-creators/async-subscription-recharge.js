@@ -1,4 +1,5 @@
 // import { addNotification } from 'reapop'
+import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 import * as t from 'subscriptions/redux/action-types'
 import { createAction } from 'utils/redux'
