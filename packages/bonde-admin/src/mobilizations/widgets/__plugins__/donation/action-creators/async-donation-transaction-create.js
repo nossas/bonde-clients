@@ -5,7 +5,6 @@ import { createAction } from './create-action'
 import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events'
 import * as t from '../action-types'
 import { setDonationCustomerData } from '.'
-// import { notify } from 'reapop/lib/store/notifications';
 
 const asyncDonationTransactionCreate = params => (dispatch, getState, { api, intl }) => {
   const state = getState()
