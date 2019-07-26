@@ -1,7 +1,7 @@
 @import "storm-react-diagrams/src/sass/main.scss";
 
 .srd-bonde-diagram {
-  background: #E5E5E5;
+  background: #eeeeee;
   min-height: 650px;
 }
 
@@ -9,11 +9,16 @@
 .diagram-app {
   display: flex;
   flex-direction: row;
+  position: relative;
 
   .diagram-tools {
-    min-width: 200px;
+    width: 200px;
     flex-grow: 0;
     flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 9;
 
     .draggable-item {
       display: flex;
