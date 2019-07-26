@@ -17,7 +17,7 @@
     flex-shrink: 0;
     position: absolute;
     top: 0;
-    height: 100%;
+    height: auto;
     z-index: 9;
 
     .draggable-item {
@@ -178,14 +178,18 @@
       }
       .srd-base-node__in {
         position: absolute;
-        top: 50%;
+        top: 40px;
         left: 0;
 
         .srd-port {
-          border: 1px solid #EE0090;
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-left: 10px solid #EE0090;
         }
         .srd-port--selected {
-          background: #EE0090;
+          border-color: lighten(#EE0090, 30%);
         }
       }
       .srd-base-node__out {
