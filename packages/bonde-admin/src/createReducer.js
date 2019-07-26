@@ -6,7 +6,7 @@ import { normalizer as creditCardForm } from 'subscriptions/forms/credit-card-fo
 import { normalizer as recurringForm } from 'subscriptions/forms/recurring-form'
 
 // Reapop
-import { reducer as notificationsReducer } from 'reapop'
+//import { reducer as notificationsReducer } from 'reapop'
 
 // Apollo
 import { client } from './store'
@@ -37,7 +37,6 @@ export default function createReducer (asyncReducers) {
       recurringForm
     }),
     apollo: client().reducer(),
-    notifications: notificationsReducer(),
     auth,
     wait,
     mobilizations,

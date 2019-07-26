@@ -1,4 +1,4 @@
-import { addNotification } from 'reapop'
+import { toast } from 'react-toastify'
 
 export const genericRequestError = intl => ({
   title: intl.formatMessage({
@@ -183,12 +183,16 @@ const applyIntl = (value, intl) => {
 
 export const notify = ({ status, title, message }, dispatch, ownProps) => {
   const { intl } = ownProps || {}
-  dispatch(addNotification({
-    status,
-    title: applyIntl(title, intl),
-    message: applyIntl(message, intl),
-    dismissAfter: 0,
-    dismissable: true,
-    closeButton: false
-  }))
+  toast.sucess(applyIntl(message, intl), { 
+    autoClose: 5000,
+    hideProgressBar: true,
+  })
+  // dispatch(addNotification({
+  //   status,
+  //   title: applyIntl(title, intl),
+  //   message: applyIntl(message, intl),
+  //   dismissAfter: 0,
+  //   dismissable: true,
+  //   closeButton: false
+  // }))
 }
