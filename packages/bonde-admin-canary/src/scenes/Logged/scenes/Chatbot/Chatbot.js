@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { I18n } from 'react-i18next'
-import {
-  Grid,
-  Cell,
-  Flexbox2 as Flexbox
-} from 'bonde-styleguide'
+import { Flexbox2 as Flexbox } from 'bonde-styleguide'
 import { Redirect } from 'services/router'
 import { Page, Header } from 'components/PageLogged'
 import { Auth } from 'services/auth'
@@ -23,14 +19,10 @@ export default class extends Component {
               ? <Redirect to='/admin/tags' />
               : (
                 <Page
-                  renderTitle={() => (<Header.Title>Test</Header.Title>)}
+                  renderTitle={() => (<Header.Title>Chatbot</Header.Title>)}
                 >
                   <Flexbox vertical>
-                    <Grid>
-                      <Cell size={[12, 12, 12]}>
-                        <BondeDiagram app={app} />
-                      </Cell>
-                    </Grid>
+                    <BondeDiagram app={app} />
                   </Flexbox>
                 </Page>
               )
