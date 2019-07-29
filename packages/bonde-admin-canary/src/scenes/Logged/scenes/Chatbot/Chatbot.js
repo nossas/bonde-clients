@@ -7,6 +7,7 @@ import { Auth } from 'services/auth'
 import { BondeDiagram, BondeDiagramApplication } from 'bonde-diagram'
 import 'bonde-diagram/lib/sass/main.scss'
 
+/* eslint-disable */
 export default class extends Component {
   render() {
     const app = new BondeDiagramApplication()
@@ -33,3 +34,4 @@ export default class extends Component {
     )
   }
 }
+/* eslint-enable */
