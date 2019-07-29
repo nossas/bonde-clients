@@ -70,7 +70,7 @@ class AuthProvider extends React.Component {
           logout: this.handleLogout.bind(this)
         }}
       >
-        {children}
+        {fetching ? <Loading /> : children}
       </AuthContext.Provider>
     )
   }
