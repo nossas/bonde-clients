@@ -17,8 +17,7 @@ import { GridPlugin, GridButtonBar } from '@slate-editor/grid-plugin'
 import { EmbedPlugin, EmbedButton } from '@slate-editor/embed-plugin'
 
 import { connect } from 'react-redux'
-import { addNotification as notify } from 'reapop'
-import { genericSaveSuccess } from 'utils/notifications'
+import { genericSaveSuccess, notify } from 'utils/notifications'
 
 import { Loading } from 'components/await'
 import { ActionButton, FooterEditor, Layer } from 'mobilizations/widgets/__plugins__/content/components'

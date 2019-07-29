@@ -5,7 +5,6 @@ import { provideHooks } from 'redial'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
-import { addNotification as notify } from 'reapop'
 
 import DNSControlSelectors from 'community/dns-control-selectors'
 import {
@@ -80,8 +79,7 @@ const mapActionsToProps = {
   deleteHostedZone: asyncDeleteHostedZone,
   createDNSRecord: asyncAddDNSRecord,
   deleteDNSRecord: asyncDeleteDNSRecord,
-  checkHostedZone: asyncCheckHostedZone,
-  notify
+  checkHostedZone: asyncCheckHostedZone
 }
 
 export default injectIntl(provideHooks(redial)(
