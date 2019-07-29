@@ -270,10 +270,12 @@ class Page extends Component {
                   style={{ marginBottom: '70px' }}
                   dnsHostedZone={this.state.dnsHostedZone}
                   onSubmit={values => {
-                    const name = `${values.name}.${this.state.dnsHostedZone.domain_name}`
+                    const name = (values.name && values.name.length > 0 ? values.name + '.' : '') + this.state.dnsHostedZone.domain_name
+                    const record_type = values.record_type ? values.record_type : 'A'
                     return createDNSRecord({
                       ...values,
                       name,
+                      record_type,
                       ttl: 3600,
                       dns_hosted_zone_id: this.state.dnsHostedZone.id
                     })
