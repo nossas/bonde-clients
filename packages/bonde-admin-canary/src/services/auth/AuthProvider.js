@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
-import { I18n } from 'react-i18next'
+// import { Query } from 'react-apollo'
+// import { I18n } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 import { graphqlApi } from 'services/graphql'
 import authSession from './session'
@@ -20,7 +20,7 @@ const getUserWithTags = (currentUser) => ({
 })
 
 class AuthProvider extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { fetching: true, user: undefined }
   }
@@ -54,6 +54,7 @@ class AuthProvider extends React.Component {
   }
 
   render () {
+    // eslint-disable-next-line no-unused-vars
     const { children, loading: Loading } = this.props
 
     if (!this.state.user && !this.state.fetching) {
@@ -67,7 +68,7 @@ class AuthProvider extends React.Component {
           logout: this.handleLogout.bind(this)
         }}
       >
-        {this.props.children}
+        {children}
       </AuthContext.Provider>
     )
   }

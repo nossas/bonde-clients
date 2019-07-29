@@ -6,8 +6,9 @@ import TableCardGadget from '../TableCardGadget'
 import Filter from './Filter'
 import allUserMobilizationsQuery from './query.graphql'
 import { authSession } from 'services/auth'
-import { toSnakeCase  } from '../../utils'
+import { toSnakeCase } from '../../utils'
 
+/* eslint-disable */
 const columns = [
   { field: 'image', render: ImageColumn, props: { width: '40px' } },
   {
@@ -33,8 +34,9 @@ const columns = [
         {value || '–'}
       </Text>
     )
-  },
+  }
 ]
+/* eslint-disable */
 
 const MobilizationList = ({
   t,

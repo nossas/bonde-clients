@@ -58,6 +58,12 @@ const CommunitiesGadget = ({ t, loading, communities }) => (
   />
 )
 
+CommunitiesGadget.propTypes = {
+  t: PropTypes.func,
+  communities: PropTypes.any,
+  loading: PropTypes.func
+}
+
 const CommunitiesGadgetQueryset = ({ t }) => (
   <Queryset
     query={allUserCommunities}
@@ -73,5 +79,9 @@ const CommunitiesGadgetQueryset = ({ t }) => (
     )}
   </Queryset>
 )
+
+CommunitiesGadgetQueryset.propTypes = {
+  t: PropTypes.func
+}
 
 export default CommunitiesGadgetQueryset

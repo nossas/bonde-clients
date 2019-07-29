@@ -30,7 +30,7 @@ const Root = () => (
               />
 
               <Redirect exact from='/' to='/admin' />
-              
+
               <Route component={NotFound} />
             </Switch>
           </ProviderLastLocation>
