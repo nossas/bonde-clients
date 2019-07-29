@@ -1,6 +1,7 @@
 import React from 'react'
-import { Query } from 'react-apollo'
-import { I18n } from 'react-i18next'
+import PropTypes from 'prop-types'
+// import { Query } from 'react-apollo'
+// import { I18n } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 import { graphqlApi } from 'services/graphql'
 import authSession from './session'
@@ -10,7 +11,7 @@ const AuthContext = React.createContext()
 
 export const { Consumer } = AuthContext
 
-const getUserWithTags = ({ currentUser }) => ({
+const getUserWithTags = (currentUser) => ({
   ...currentUser,
   tags: JSON.parse(currentUser.tags).filter(t => {
     if (typeof t === 'string') return true
@@ -19,49 +20,64 @@ const getUserWithTags = ({ currentUser }) => ({
 })
 
 class AuthProvider extends React.Component {
-  state = { redirectToReferrer: false } 
-  
+  constructor (props) {
+    super(props)
+    this.state = { fetching: true, user: undefined }
+  }
+
+  componentDidMount () {
+    graphqlApi
+      .query({ query: CurrentUserQuery })
+      .then(({ data }) => {
+        this.setState({ user: data.user, fetching: false })
+      })
+      .catch(error => {
+        const authErrors = [
+          'Token invalid, user not found.',
+          'Signature verification failed',
+          'Invalid audience'
+        ]
+
+        if (typeof error === 'object' && authErrors.indexOf(error.graphQLErrors[0].message) !== -1) {
+          this.handleLogout()
+        }
+      })
+  }
+
+  handleLogout () {
+    return authSession
+      .logout()
+      .then(() => {
+        graphqlApi.resetStore()
+        this.setState({ fetching: false, user: undefined })
+      })
+  }
+
   render () {
+    // eslint-disable-next-line no-unused-vars
     const { children, loading: Loading } = this.props
 
-    if (this.state.redirectToReferrer) {
+    if (!this.state.user && !this.state.fetching) {
       return <Redirect to={{ pathname: '/auth/login' }} />
     }
 
     return (
-      <I18n ns='auth'>
-        {(t) => (
-          <Query query={CurrentUserQuery}>
-            {({ loading, error, data }) => {
-              
-              if (loading) return <Loading />
-              
-              if (error || !data) {
-                console.log('[ERROR: AuthProvider]', error)
-                return <h2>Houve algum problema na conexão GraphQL</h2>
-              }
-
-              return (
-                <AuthContext.Provider
-                  value={{
-                    user: getUserWithTags(data),
-                    logout: () => authSession
-                      .logout()
-                      .then(() => {
-                        graphqlApi.resetStore()
-                        this.setState({ redirectToReferrer: true })
-                      })
-                  }}
-                >
-                  {children}
-                </AuthContext.Provider>
-              )
-            }}
-          </Query>
-        )}
-      </I18n>
+      <AuthContext.Provider
+        value={{
+          user: getUserWithTags(this.state.user),
+          logout: this.handleLogout.bind(this)
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
     )
   }
+}
+
+AuthProvider.propTypes = {
+  children: PropTypes.node,
+  loading: PropTypes.node,
+  t: PropTypes.func
 }
 
 export default AuthProvider
