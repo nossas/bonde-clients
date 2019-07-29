@@ -29,7 +29,8 @@ class AuthProvider extends React.Component {
     graphqlApi
       .query({ query: CurrentUserQuery })
       .then(({ data }) => {
-        this.setState({ user: data.user, fetching: false })
+        this.setState({ user: data.currentUser, fetching: false })
+        this.forceUpdate()
       })
       .catch(error => {
         const authErrors = [
@@ -56,19 +57,20 @@ class AuthProvider extends React.Component {
   render () {
     // eslint-disable-next-line no-unused-vars
     const { children, loading: Loading } = this.props
+    const { user, fetching } = this.state
 
-    if (!this.state.user && !this.state.fetching) {
+    if (!user && !fetching) {
       return <Redirect to={{ pathname: '/auth/login' }} />
     }
 
     return (
       <AuthContext.Provider
         value={{
-          user: getUserWithTags(this.state.user),
+          user: user ? getUserWithTags(user) : undefined,
           logout: this.handleLogout.bind(this)
         }}
       >
-        {children}
+        {fetching ? <Loading /> : children}
       </AuthContext.Provider>
     )
   }
