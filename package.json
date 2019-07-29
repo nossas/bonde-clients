@@ -13,6 +13,6 @@
         "dev": "yarn lerna run dev --parallel --scope=bonde-admin --scope=bonde-admin-canary --scope=bonde-public --scope=bonde-webpage"
     },
     "devDependencies": {
-        "lerna": "^3.12.0"
+        "lerna": "^3.16.0"
     }
 }
