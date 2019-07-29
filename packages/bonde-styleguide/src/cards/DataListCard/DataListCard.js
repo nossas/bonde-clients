@@ -9,9 +9,9 @@ import {
   Scrollbox
 } from '../../'
 
-const CustomCol = ({ render, field, ...colProps }) => (
+const CustomCol = ({ render, field, row, ...colProps }) => (
   <DataListCol {...colProps}>
-    {typeof render === 'function' ? render(field) : (
+    {typeof render === 'function' ? render(field, row) : (
       <Text fontSize={14}>{field}</Text>
     )}
   </DataListCol>
@@ -19,10 +19,11 @@ const CustomCol = ({ render, field, ...colProps }) => (
 
 const DataListCard = ({
   sectionTitle,
-  minHeight,
+  height,
   border,
   fields,
   items,
+  picker,
   Footer,
   footerProps,
 }) => {
@@ -31,7 +32,7 @@ const DataListCard = ({
   return (
     <Card
       title={sectionTitle}
-      minHeight={minHeight}
+      height={height}
       Footer={Footer}
       footerProps={footerProps}
     >
@@ -43,7 +44,8 @@ const DataListCard = ({
             <CustomCol
               {...fields[fieldName]}
               key={Math.random()}
-              field={item[fieldName]}
+              row={item}
+              field={picker ? item[picker][fieldName] : item[fieldName]}
             />
           ))}
           </DataListRow>
@@ -58,7 +60,7 @@ const { oneOfType, oneOf, string, number, bool, object, array, node, func, shape
 
 DataListCard.propTypes = {
   sectionTitle: string,
-  minHeight: number,
+  height: number,
   border: bool,
   fields: object,
   items: array,
@@ -67,10 +69,11 @@ DataListCard.propTypes = {
     align: oneOf(['flex-start', 'center', 'flex-end']),
     justify: oneOf(['flex-start', 'center', 'flex-end', 'space-between']),
   }),
+  picker: string
 }
 
 DataListCard.defaultProps = {
-  minHeight: 274,
+  height: 274,
   border: true,
   fields: {},
   items: []
