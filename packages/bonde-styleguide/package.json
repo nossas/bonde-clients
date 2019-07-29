@@ -37,7 +37,7 @@
     "react": "16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "16.4.2",
-    "react-styleguidist": "7.0.20",
+    "react-styleguidist": "9.1.13",
     "recharts": "1.0.1",
     "style-loader": "0.21.0",
     "styled-components": "3.3.3",
