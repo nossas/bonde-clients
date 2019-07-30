@@ -1,13 +1,11 @@
 {
   "name": "bonde-styleguide",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
-    "cross-env": "^5.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
     "recharts": "^1.6.2",
     "styled-components": "^4.3.2",
     "webfontloader": "^1.6.28"
@@ -16,7 +14,7 @@
     "prepare": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
     "watch": "yarn prepare --watch",
     "build": "styleguidist build",
-    "test": "react-scripts test",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
     "dev": "styleguidist server"
   },
@@ -25,7 +23,14 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-syntax-dynamic-import"
     ]
   },
   "browserslist": {
@@ -44,6 +49,10 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "babel-preset-react-app-babel-7": "^4.0.2-0",
+    "cross-env": "^5.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
     "react-styleguidist": "^9.1.13",
     "webpack": "^4.38.0"
   }
