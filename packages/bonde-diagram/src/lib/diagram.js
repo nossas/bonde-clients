@@ -1,14 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import WebFont from 'webfontloader'
 import { DiagramWidget } from 'storm-react-diagrams'
 import { DraggableItem } from './components'
 import { MessageNodeModel } from './beta/models'
 import { IconMessage, IconQuickReply } from './components/icons'
 
+
 class Diagram extends React.Component {
-
-  static DATATRANSFER_KEY = 'srd-diagram-model'
-
   constructor(props) {
     super(props)
     this.state = {
@@ -25,8 +24,7 @@ class Diagram extends React.Component {
   }
 
   handleDrop(event) {
-    const model = JSON.parse(event.dataTransfer.getData(this.DATATRANSFER_KEY))
-    console.log('model', model)
+    const model = JSON.parse(event.dataTransfer.getData('srd-diagram-model'))
     const nodesCount = Object.keys(
       this.props.app
         .getDiagramEngine()
@@ -34,27 +32,8 @@ class Diagram extends React.Component {
         .getNodes()
     ).length
 
-    let node = null;
-    // when the first message on diagram model should only has output port
-    if (nodesCount === 0 && model.kind === 'text') {
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
-      node.addOutPort('Out')
-    } else if (model.kind === 'text') {
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
-      node.addOutPort('Out')
-      node.addInPort('In')
-    } else if (model.kind === 'quick_reply'){
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
-      node.addInPort('In')
-      node.addQuickReply('Texto do botão')
-    } else {
-      // TODO: throws exception
-      console.error('não é possível adicionar esse tipo de mensagem agora')
-    }
-    
+    const node = this.props.createMessage(model, nodesCount)
     const points = this.props.app.getDiagramEngine().getRelativeMousePoint(event)
-    
-    console.log('points', points)
 
     node.x = points.x
     node.y = points.y
@@ -72,9 +51,7 @@ class Diagram extends React.Component {
   }
 
   handleDragStart(model, event) {
-    console.log(model)
-    console.log(event)
-    event.dataTransfer.setData(this.DATATRANSFER_KEY, JSON.stringify(model))
+    event.dataTransfer.setData('srd-diagram-model', JSON.stringify(model))
   }
 
   render() {
@@ -109,6 +86,10 @@ class Diagram extends React.Component {
       </div>
     )
   }
+}
+
+Diagram.propTypes = {
+  createMessage: PropTypes.func.isRequired
 }
 
 export default Diagram
