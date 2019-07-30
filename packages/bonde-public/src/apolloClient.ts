@@ -4,8 +4,10 @@ import { createHttpLink } from 'apollo-link-http'
 import getConfig from 'next/config'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
+const { publicRuntimeConfig } = getConfig()
+
 const link = createHttpLink({
-  uri: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-v2.bonde.devel'
+  uri: publicRuntimeConfig.domainApiGraphql || 'http://api-v2.bonde.devel'
 })
 
 const cache = new InMemoryCache()
