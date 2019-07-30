@@ -1,19 +1,24 @@
 @import "storm-react-diagrams/src/sass/main.scss";
 
 .srd-bonde-diagram {
-  background: #c7c7c7;
-  height: 650px;
+  background: #eeeeee;
+  min-height: 650px;
 }
 
 // drag-and-drop
 .diagram-app {
   display: flex;
   flex-direction: row;
+  position: relative;
 
   .diagram-tools {
-    min-width: 200px;
+    width: 200px;
     flex-grow: 0;
     flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    height: auto;
+    z-index: 9;
 
     .draggable-item {
       display: flex;
@@ -81,24 +86,26 @@
           font-size: 16px;
           font-family: 'Nunito Sans', sans-serif;
           padding: 23px;
-          max-width: 110px;
+          height: auto;
+          min-width: 110px;
         }
 
         textarea.srd-base-node__title {
           color: #000000;
           background: none;
-          margin: 20px 0;
           resize: none;
           overflow: hidden;
           height: auto;
           border: none;
+          margin: 0 auto;
+          max-width: 100%;
         }
         &.quick_reply {
           .srd-base-node__out {
-            padding: 0 23px;
+            padding: 0 10px;
             .srd-port {
               position: absolute;
-              right: -7px;
+              right: -12px;
               bottom: 12px;
               border-radius: 50px;
               margin-left: -10px;
@@ -128,8 +135,6 @@
           position: relative;
           color: #1E88E5;
           border-radius: 5px;
-          width: calc(100% - 48px);
-          height: calc(100% - 20px);
           padding: 10px 24px;
           font-size: 16px;
           text-align: center;
@@ -137,6 +142,7 @@
           border: 1px solid #1E88E5;
           border-radius: 50px;
         }
+
         .srd-port--selected {
           background: none;
           border: 1px solid #EE0090;
@@ -152,7 +158,8 @@
         button {
           border: none;
           color: #EE0090;
-          font-weight: 800;
+          font-weight: 600;
+          font-size: 14px;
           background: none;
           padding: 10px 10px 15px;
           cursor: pointer;
@@ -173,14 +180,18 @@
       }
       .srd-base-node__in {
         position: absolute;
-        top: 50%;
+        top: 40px;
         left: 0;
 
         .srd-port {
-          border: 1px solid #EE0090;
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-left: 10px solid #EE0090;
         }
         .srd-port--selected {
-          background: #EE0090;
+          border-color: lighten(#EE0090, 30%);
         }
       }
       .srd-base-node__out {
