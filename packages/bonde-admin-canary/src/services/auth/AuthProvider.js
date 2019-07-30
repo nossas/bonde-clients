@@ -78,7 +78,7 @@ class AuthProvider extends React.Component {
 
 AuthProvider.propTypes = {
   children: PropTypes.node,
-  loading: PropTypes.node,
+  loading: PropTypes.any,
   t: PropTypes.func
 }
 

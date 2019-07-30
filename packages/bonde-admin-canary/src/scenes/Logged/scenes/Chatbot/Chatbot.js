@@ -14,17 +14,18 @@ class Chatbot extends Component {
   }
 
   handleCreateMessage (model, nodesCount) {
-    let node = undefined  
+    // TODO: add translate
+    let node
     if (nodesCount === 0 && model.kind === 'text') {
       // when the first message on diagram model should only has output port
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
+      node = new MessageNodeModel('Escreva sua mensagem aqui', model.kind)
       node.addOutPort('Out')
     } else if (model.kind === 'text') {
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
+      node = new MessageNodeModel('Escreva sua mensagem aqui', model.kind)
       node.addOutPort('Out')
       node.addInPort('In')
     } else if (model.kind === 'quick_reply') {
-      node = new MessageNodeModel("Node " + (nodesCount + 1), model.kind)
+      node = new MessageNodeModel('Escreva sua pergunta aqui', model.kind)
       node.addInPort('In')
       node.addQuickReply('Texto do botão')
     } else {
