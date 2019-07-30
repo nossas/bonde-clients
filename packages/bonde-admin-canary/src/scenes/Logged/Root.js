@@ -23,7 +23,7 @@ const Root = ({ match }) => (
     />
 
     <Route
-      path={`${match.url}/chatbot`}
+      path={`${match.url}/:communityId/chatbot`}
       component={ChatbotPage}
     />
   </AuthProvider>

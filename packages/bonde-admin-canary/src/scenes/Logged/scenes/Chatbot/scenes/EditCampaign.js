@@ -7,7 +7,7 @@ import { MessageNodeModel } from 'bonde-diagram/lib/beta/models'
 // set style of diagram
 import 'bonde-diagram/lib/sass/main.scss'
 
-class Chatbot extends Component {
+class EditCampaign extends Component {
   constructor (props) {
     super(props)
     this.app = new BondeDiagramApplication()
@@ -58,4 +58,4 @@ class Chatbot extends Component {
   }
 }
 
-export default Chatbot
+export default EditCampaign
