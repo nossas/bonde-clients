@@ -2,10 +2,6 @@
   "packages": [
     "packages/*"
   ],
-  "command": {
-    "bootstrap": {
-      "npmClient": "yarn"
-    }
-  },
+  "npmClient": "yarn",
   "version": "0.14.7-alpha.0"
 }
