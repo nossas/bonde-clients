@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types'
+import { css } from 'styled-components'
 
 export const px = (value, defaultValue) => {
-  if (value && typeof value === 'number') return `${value}px`
+  if (value && typeof value === 'number') return css`${value}px`
   else if (value && typeof value === 'string') return value
-  else if (!value && defaultValue) return `${defaultValue}px`
+  else if (!value && defaultValue) return css`${defaultValue}px`
   else return 0
 }
 
 export const borderSpacing = (
   propName = 'margin',
   { top, right, bottom, left, x, y }
-) => `
+) => css`
   ${propName}-top: ${px(top, y)};
   ${propName}-bottom: ${px(bottom, y)};
   ${propName}-left: ${px(left, x)};
