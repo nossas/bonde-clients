@@ -7,12 +7,12 @@ const Root = ({ match }) => (
   <React.Fragment>
     <Route
       exact
-      path={match.url}
+      path={match.path}
       component={ListCampaign}
     />
 
     <Route
-      path={`${match.url}/:campaignId/campaign`}
+      path={`${match.path}/:campaignId/campaign`}
       component={EditCampaign}
     />
   </React.Fragment>
