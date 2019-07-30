@@ -1,10 +1,10 @@
-declare namespace NodeJS {
-  interface ProcessEnv {
-    REACT_APP_DOMAIN_API_GRAPHQL?: string
-    REACT_APP_DOMAIN_API_REST?: string
-    REACT_APP_PAGARME_KEY?: string
-    PORT?: string
-    HOST?: string
-    REACT_APP_DOMAIN_PUBLIC?: string
+declare module 'next/config' {
+  export default function getConfig(): {
+    publicRuntimeConfig: {
+      domainApiRest: string
+      domainApiGraphql: string
+      domainPublic: string
+      pagarmeKey: string
+    }
   }
 }
