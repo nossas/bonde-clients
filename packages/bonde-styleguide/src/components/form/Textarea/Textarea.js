@@ -40,5 +40,5 @@ const Textarea = styled.textarea`{
 
 Textarea.displayName = 'Textarea'
 
-/* @component */
+/** @component */
 export default Textarea

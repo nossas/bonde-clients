@@ -83,5 +83,5 @@ FormField.defaultProps = {
 
 FormField.displayName = 'FormField'
 
-/* @component */
+/** @component */
 export default FormField

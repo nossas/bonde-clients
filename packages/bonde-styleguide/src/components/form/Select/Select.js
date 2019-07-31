@@ -150,5 +150,5 @@ Select.propTypes = {
 
 Select.displayName = 'Select'
 
-/* @component */
+/** @component */
 export default Select

@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { borderSpacing, borderSpacingPropTypes } from '../../../utils'
-
 
 /**
  * The only true flexbox container.
@@ -43,8 +41,15 @@ const Flexbox = styled.div`
     }
   `}
 
-  ${props => borderSpacing('margin', props.margin)}
-  ${props => borderSpacing('padding', props.padding)}
+  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
+  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
+  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
+  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
+
+  ${props => props.padding && props.padding.top && `top: ${props.padding.top};`}
+  ${props => props.padding && props.padding.bottom && `bottom: ${props.padding.bottom};`}
+  ${props => props.padding && props.padding.left && `left: ${props.padding.left};`}
+  ${props => props.padding && props.padding.right && `right: ${props.padding.right};`}
 `
 
 Flexbox.propTypes = {
@@ -54,8 +59,18 @@ Flexbox.propTypes = {
   end: PropTypes.bool,
   spacing: PropTypes.oneOf(['around', 'between']),
   colSize: PropTypes.string,
-  margin: borderSpacingPropTypes,
-  padding: borderSpacingPropTypes,
+  margin: PropTypes.shape({
+    top: PropTypes.string,
+    bottom: PropTypes.string,
+    left: PropTypes.string,
+    right: PropTypes.string,
+  }),
+  padding: PropTypes.shape({
+    top: PropTypes.string,
+    bottom: PropTypes.string,
+    left: PropTypes.string,
+    right: PropTypes.string,
+  })
 }
 
 Flexbox.defaultProps = {
@@ -65,5 +80,5 @@ Flexbox.defaultProps = {
 
 Flexbox.displayName = 'Flexbox2'
 
-/* @component */
+/** @component */
 export default Flexbox

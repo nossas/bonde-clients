@@ -29,5 +29,5 @@ Navbar.propTypes = {
 
 Navbar.displayName = 'Navbar'
 
-/* @component */
+/** @component */
 export default Navbar

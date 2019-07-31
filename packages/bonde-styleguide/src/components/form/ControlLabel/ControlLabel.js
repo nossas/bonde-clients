@@ -12,5 +12,5 @@ const ControlLabel = styled.label`{
 
 ControlLabel.displayName = 'ControlLabel'
 
-/* @component */
+/** @component */
 export default ControlLabel

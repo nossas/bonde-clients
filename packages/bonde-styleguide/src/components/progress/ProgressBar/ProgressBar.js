@@ -83,5 +83,5 @@ ProgressBar.sizes = sizes
 
 ProgressBar.displayName = 'ProgressBar'
 
-/* @component */
+/** @component */
 export default ProgressBar

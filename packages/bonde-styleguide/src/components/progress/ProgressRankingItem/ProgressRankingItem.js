@@ -74,5 +74,5 @@ ProgressRankingItem.propTypes = {
 
 ProgressRankingItem.displayName = 'ProgressRankingItem'
 
-/* @component */
+/** @component */
 export default ProgressRankingItem

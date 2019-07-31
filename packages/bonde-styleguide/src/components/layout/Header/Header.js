@@ -10,5 +10,5 @@ const Header = styled.div`{
 
 Header.displayName = 'Header'
 
-/* @component */
+/** @component */
 export default Header

@@ -13,5 +13,5 @@ const LinkShowAll = styled(() => <Text as='a' />)`
 
 LinkShowAll.displayName = 'LinkShowAll'
 
-/* @component */
+/** @component */
 export default LinkShowAll

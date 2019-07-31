@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { borderSpacing, borderSpacingPropTypes } from '../../../utils'
-
 /**
  * The only true paragraph.
  */
@@ -15,11 +13,20 @@ const Text = styled.p`{
   text-align: ${props => props.align};
   text-transform: ${props => props.uppercase ? 'uppercase': null};
   letter-spacing: ${props => props.letterSpacing};
-  ${props => borderSpacing('margin', props.margin)}
+
+  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
+  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
+  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
+  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
 }`
 
 Text.propTypes = {
-  margin: borderSpacingPropTypes,
+  margin: PropTypes.shape({
+    top: PropTypes.string,
+    bottom: PropTypes.string,
+    left: PropTypes.string,
+    right: PropTypes.string,
+  }),
   align: PropTypes.oneOf(['left', 'center', 'right']),
   color: PropTypes.string,
   lineHeight: PropTypes.number,
@@ -38,11 +45,12 @@ Text.defaultProps = {
   fontWeight: 'normal',
   fontSize: 16,
   letterSpacing: 'inherit',
-  align: 'left',
-  margin: {}
+  align: 'left'
 }
+
+console.log(Text)
 
 Text.displayName = 'Text'
 
-/* @component */
+/** @component */
 export default Text

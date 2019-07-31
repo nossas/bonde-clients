@@ -56,5 +56,5 @@ Footer.propTypes = {
 
 Footer.displayName = 'Footer'
 
-/* @component */
+/** @component */
 export default Footer

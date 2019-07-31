@@ -38,5 +38,5 @@ InputAdornment.propTypes = {
 
 InputAdornment.displayName = 'InputAdornment'
 
-/* @component */
+/** @component */
 export default InputAdornment

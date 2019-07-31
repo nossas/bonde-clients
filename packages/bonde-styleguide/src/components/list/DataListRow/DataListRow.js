@@ -14,5 +14,5 @@ const DataListRow = styled.div`{
 
 DataListRow.displayName = 'DataListRow'
 
-/* @component */
+/** @component */
 export default DataListRow

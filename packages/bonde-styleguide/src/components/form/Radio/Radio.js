@@ -70,5 +70,5 @@ const Radio = styled(() => <Checkbox as={
 
 Radio.displayName = 'Radio'
 
-/* @component */
+/** @component */
 export default Radio
