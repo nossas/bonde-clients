@@ -25,8 +25,10 @@ import { connect } from 'react-redux'
 import { selectors as MobilizationSelectors } from 'bonde-webpage/lib/redux'
 import { FinishPostDonation } from 'bonde-webpage/lib/plugins/donation/components'
 
+const { publicRuntimeConfig } = getConfig()
+
 export const getSharedPath = (mobilization) => {
-  const domain = process.env.REACT_APP_DOMAIN_PUBLIC
+  const domain = publicRuntimeConfig.domainPublic
 
   if (domain && domain.indexOf('staging') !== -1) {
     return `http://${mobilization.slug}.${domain}`
@@ -93,7 +95,7 @@ const plugins = [
     component: (props) => (
       <DonationPlugin
         {...props}
-        pagarmeKey={process.env.REACT_APP_PAGARME_KEY}
+        pagarmeKey={publicRuntimeConfig.pagarmeKey}
         analyticsEvents={DonationAnalytics}
         overrides={{
           FinishCustomMessage: { component: FinishMessageCustom },
