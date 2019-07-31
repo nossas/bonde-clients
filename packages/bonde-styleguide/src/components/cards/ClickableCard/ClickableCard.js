@@ -41,5 +41,5 @@ ClickableCard.defaultProps = {
 
 ClickableCard.displayName = 'ClickableCard'
 
-/* @component */
+/** @component */
 export default ClickableCard

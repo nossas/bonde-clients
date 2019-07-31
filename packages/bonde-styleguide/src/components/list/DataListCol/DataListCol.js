@@ -36,5 +36,5 @@ DataListCol.defaultProps = {
 
 DataListCol.displayName = 'DataListCol'
 
-/* @component */
+/** @component */
 export default DataListCol

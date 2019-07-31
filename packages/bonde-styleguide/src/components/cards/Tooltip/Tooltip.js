@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
 import Button from '../../content/Button/Button'
 import Backdrop from '../../layout/Backdrop/Backdrop'
-import { borderSpacing, borderSpacingPropTypes } from '../../../utils'
 
 const CloseButton = styled(({ className, onClose }) => (
   <div className={className}>
@@ -37,7 +36,10 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
   position: absolute;
   z-index: 10;
 
-  ${props => props.margin && borderSpacing('margin', props.margin)}
+  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
+  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
+  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
+  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
 
   ${props => props.minWidth && `
     min-width: ${props.minWidth}px;
@@ -195,7 +197,12 @@ Tooltip.propTypes = {
     left: string,
     right: string,
   }),
-  margin: borderSpacingPropTypes
+  margin: shape({
+    top: string,
+    bottom: string,
+    left: string,
+    right: string,
+  })
 }
 
 Tooltip.defaultProps = {
@@ -208,5 +215,5 @@ Tooltip.defaultProps = {
 
 Tooltip.displayName = 'Tooltip'
 
-/* @component */
+/** @component */
 export default Tooltip

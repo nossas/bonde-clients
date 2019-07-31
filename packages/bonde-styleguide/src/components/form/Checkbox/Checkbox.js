@@ -82,5 +82,5 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
 
 Checkbox.displayName = 'Checkbox'
 
-/* @component */
+/** @component */
 export default Checkbox

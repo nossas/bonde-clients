@@ -21,5 +21,5 @@ Feed.propTypes = {
 
 Feed.displayName = 'Feed'
 
-/* @component */
+/** @component */
 export default Feed

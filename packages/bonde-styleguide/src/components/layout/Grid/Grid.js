@@ -12,5 +12,5 @@ const Grid = styled.div`
 
 Grid.displayName = 'Grid'
 
-/* @component */
+/** @component */
 export default Grid

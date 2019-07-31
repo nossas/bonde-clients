@@ -24,5 +24,5 @@ InputHint.propTypes = {
 
 InputHint.displayName = 'InputHint'
 
-/* @component */
+/** @component */
 export default InputHint

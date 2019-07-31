@@ -21,5 +21,5 @@ const DropdownHeader = styled.div`{
 
 DropdownHeader.displayName = 'DropdownHeader'
 
-/* @component */
+/** @component */
 export default DropdownHeader

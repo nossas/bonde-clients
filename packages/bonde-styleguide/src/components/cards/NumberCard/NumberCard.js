@@ -39,5 +39,5 @@ NumberCard.defaultProps = {
 
 NumberCard.displayName = 'NumberCard'
 
-/* @component */
+/** @component */
 export default NumberCard

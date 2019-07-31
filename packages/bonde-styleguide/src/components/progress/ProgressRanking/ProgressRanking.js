@@ -86,5 +86,5 @@ ProgressRanking.defaultProps = {
 
 ProgressRanking.displayName = 'ProgressRanking'
 
-/* @component */
+/** @component */
 export default ProgressRanking

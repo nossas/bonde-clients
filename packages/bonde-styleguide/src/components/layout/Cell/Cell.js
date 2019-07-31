@@ -38,5 +38,5 @@ Cell.defaultProps = {
 
 Cell.displayName = 'Cell'
 
-/* @component */
+/** @component */
 export default Cell

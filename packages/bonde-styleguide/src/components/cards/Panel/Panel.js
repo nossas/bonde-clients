@@ -123,5 +123,5 @@ Panel.defaultProps = {
 
 Panel.displayName = 'Panel'
 
-/* @component */
+/** @component */
 export default Panel

@@ -142,5 +142,5 @@ Pagination.defaultProps = {
 
 Pagination.displayName = 'Pagination'
 
-/* @component */
+/** @component */
 export default Pagination

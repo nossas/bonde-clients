@@ -12,12 +12,16 @@ const TextNumber = styled(Text)`
   flex-grow: 1;
 `
 
-const Number = ({ value, icon: Icon }) => (
-  <TextNumber>
-    <span>{value}</span>
-    {Icon && Icon}
-  </TextNumber>
-)
+const Number = ({ value, icon: Icon }) => {
+  console.log(value)
+  console.log(Icon)
+  return (
+    <TextNumber>
+      <span>{value}</span>
+      {Icon && Icon}
+    </TextNumber>
+  )
+}
 
 const { oneOfType, number, node, func } = PropTypes
 

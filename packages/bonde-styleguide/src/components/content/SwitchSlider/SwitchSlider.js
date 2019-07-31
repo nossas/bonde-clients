@@ -94,5 +94,5 @@ SwitchSlider.defaultProps = {
   onChange: () => {}
 }
 
-/* @component */
+/** @component */
 export default SwitchSlider

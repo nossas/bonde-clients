@@ -31,5 +31,5 @@ Backdrop.propTypes = {
 
 Backdrop.displayName = 'Backdrop'
 
-/* @component */
+/** @component */
 export default Backdrop

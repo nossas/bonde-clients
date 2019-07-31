@@ -65,5 +65,5 @@ RankingCard.defaultProps = {
 
 RankingCard.displayName = 'RankingCard'
 
-/* @component */
+/** @component */
 export default RankingCard

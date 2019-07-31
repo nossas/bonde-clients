@@ -49,5 +49,5 @@ const DropdownItem = ({
 
 DropdownItem.displayName = 'DropdownItem'
 
-/* @component */
+/** @component */
 export default DropdownItem

@@ -72,5 +72,5 @@ FeedItem.propTypes = {
 
 FeedItem.displayName = 'FeedItem'
 
-/* @component */
+/** @component */
 export default FeedItem

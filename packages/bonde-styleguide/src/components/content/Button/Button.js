@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { borderSpacing, borderSpacingPropTypes } from '../../../utils'
 
 /**
  * The only true Button component.
@@ -115,10 +114,13 @@ const Button = styled.button`{
     color: ${props.color};
   `}
 
-  ${props => props.margin && borderSpacing('margin', props.margin)}
+  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
+  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
+  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
+  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
 }`
 
-const { oneOf, node, bool, string } = PropTypes
+const { oneOf, node, bool, string, shape } = PropTypes
 
 Button.propTypes = {
   /** Children nodes. */
@@ -136,7 +138,12 @@ Button.propTypes = {
   /** Button type. */
   type: string,
   align: oneOf(['center', 'left', 'right']),
-  margin: borderSpacingPropTypes
+  margin: shape({
+    top: string,
+    bottom: string,
+    left: string,
+    right: string,
+  })
 }
 
 Button.defaultProps = {
@@ -147,5 +154,5 @@ Button.defaultProps = {
 
 Button.displayName = 'Button'
 
-/* @component */
+/** @component */
 export default Button

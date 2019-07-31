@@ -30,5 +30,5 @@ Image.propTypes = {
 
 Image.displayName = 'Image'
 
-/* @component */
+/** @component */
 export default Image

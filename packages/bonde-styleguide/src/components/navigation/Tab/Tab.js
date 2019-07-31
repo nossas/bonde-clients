@@ -33,5 +33,5 @@ Tab.defaultProps = {
 
 Tab.displayName = 'Tab'
 
-/* @component */
+/** @component */
 export default Tab

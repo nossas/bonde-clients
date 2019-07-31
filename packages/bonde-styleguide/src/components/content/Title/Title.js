@@ -76,5 +76,5 @@ H6.displayName = 'Title.H6'
  */
 const Title = { H1, H2, H3, H4, H5, H6 }
 
-/* @component */
+/** @component */
 export default Title
