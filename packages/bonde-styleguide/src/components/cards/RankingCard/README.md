@@ -1,4 +1,6 @@
 ```js
+import { BrazilMap } from '../../assets';
+
 <RankingCard
   sectionTitle='Localização'
   alignItems='middle'
@@ -17,6 +19,8 @@
 ```
 
 ```js
+import { IconColorful } from '../../content';
+
 <RankingCard
   sectionTitle='Top 5 Mobs'
   alignItems='end'

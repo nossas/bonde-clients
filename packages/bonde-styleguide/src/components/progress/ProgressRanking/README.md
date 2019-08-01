@@ -4,6 +4,9 @@
 The `ProgressRanking` component sorts the child items ascendantly by default.
 
 ```js
+import { IconColorful } from '../../content';
+import { ProgressRanking, ProgressRankingItem } from '../';
+
 <ProgressRanking>
   <ProgressRankingItem value={1602} label='Somos toda Olga' />
   <ProgressRankingItem value={2450} label='Existe Amor em SP' />
@@ -15,6 +18,8 @@ The `ProgressRanking` component sorts the child items ascendantly by default.
 
 
 ```js
+import { ProgressRanking, ProgressRankingItem } from '../';
+
 <ProgressRanking color='#C70038'>
   <ProgressRankingItem value={1602} label='Somos toda Olga' />
   <ProgressRankingItem value={2450} label='Existe Amor em SP' />
@@ -25,6 +30,8 @@ The `ProgressRanking` component sorts the child items ascendantly by default.
 ### ProgressRanking - `nosort`
 
 ```js
+import { ProgressRanking, ProgressRankingItem } from '../';
+
 <ProgressRanking nosort>
   <ProgressRankingItem value={610} label='Sem FiuFiu' />
   <ProgressRankingItem value={1602} label='Somos toda Olga' />
@@ -39,6 +46,8 @@ The `ProgressRanking` component sorts the child items ascendantly by default.
 
 
 ```js
+import { ProgressRanking, ProgressRankingItem } from '../';
+
 <ProgressRanking maxValue={5000}>
   <ProgressRankingItem value={1602} label='Somos toda Olga' />
   <ProgressRankingItem value={2450} label='Existe Amor em SP' />

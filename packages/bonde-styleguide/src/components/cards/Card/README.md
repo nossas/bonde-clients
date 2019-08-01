@@ -1,4 +1,6 @@
 ```js { "props": { "className": "noborder" } }
+import { Scrollbox } from '../../layout';
+
 <Card title='Lorem ipsum' minHeight={200}>
   <Scrollbox padding={{ y: 20, left: 20 }}>
     <Text>

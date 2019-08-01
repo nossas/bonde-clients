@@ -1,6 +1,8 @@
 ### DataListCard - default text render
 
 ```js
+import { DataListCard } from '../';
+
 <DataListCard
   sectionTitle='Atividades recentes'
   fields={{ name: {}, email: {}, time: { align: 'right' } }}
@@ -37,6 +39,8 @@
 ### DataListCard - custom field render
 
 ```js
+import { DataListCard } from '../';
+
 <DataListCard
   sectionTitle='Atividades recentes'
   border={false}
@@ -93,6 +97,8 @@
 ### DataListCard - with Footer
 
 ```js
+import { DataListCard, Pagination } from '../';
+
 const now = new Date();
 
 <DataListCard

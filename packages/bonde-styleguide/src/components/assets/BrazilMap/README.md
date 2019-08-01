@@ -1,3 +1,5 @@
 ```js
-<BrazilMap />
+import { BrazilMap } from '../';
+
+;<BrazilMap />
 ```

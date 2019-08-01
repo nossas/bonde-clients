@@ -1,6 +1,8 @@
 ### Tooltip - simple example
 
 ```js
+import { Flexbox2 } from '../../layout';
+
 <Flexbox2 middle>
   <Tooltip nolock small Content={() => <Text fontSize={11} color='#FFF'><nobr>top-left</nobr></Text>} placement='top-left'>
   <Tooltip nolock small Content={() => <Text fontSize={11} color='#FFF'><nobr>top-middle</nobr></Text>} placement='top-middle'>
@@ -39,6 +41,10 @@
 ### Tooltip - advanced example
 
 ```js
+import { Grid, Cell, Panel, Flexbox } from '../../layout';
+import { DataListCard } from '../';
+import { Button } from '../../form';
+
 <Grid>
   <Cell size={[4, 4]}>
     <Tooltip

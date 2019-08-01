@@ -1,6 +1,8 @@
 The `Cell` component works only together with `Grid` component.
 
 ```js
+import { Grid, Cell } from '../../layout';
+
 <Grid>
   <Cell
     size={[
@@ -26,6 +28,8 @@ I want to change only the cell size when window width is between 480px and 600px
 **(Resize the window to see.)**
 
 ```js
+import { Grid, Cell } from '../../layout';
+
 <Grid>
   <Cell size={[null, null, null, 8]}>
     <Text>example</Text>

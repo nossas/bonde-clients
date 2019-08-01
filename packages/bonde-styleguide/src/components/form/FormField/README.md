@@ -1,4 +1,6 @@
 ```js
+import { Input } from '../';
+
 <FormField
   label='Default'
   hint='Info/Hint'
@@ -12,6 +14,8 @@
 
 
 ```js
+import { Input } from '../';
+
 <FormField
   label='Error'
   hint='Info/Hint'
@@ -27,6 +31,8 @@
 
 
 ```js
+import { Input } from '../';
+
 <FormField
   meta={{ valid: true }}
   label='Success'

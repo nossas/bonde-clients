@@ -1,4 +1,6 @@
 ```js { "props": { "className": "dark" } }
+import { Dropdown, DropdownItem } from '../';
+
 <Dropdown label='Maria Benati' width={190}>
   <DropdownHeader>
     <img src='http://via.placeholder.com/35x35?text=U' alt='User' />

@@ -1,4 +1,7 @@
 ```js
+import { Grid, Cell, Flexbox } from '../../layout';
+import { Input, InputAdornment, ControlLabel } from '../';
+
 <Grid>
   <Cell size={[6, 6]}>
     <ControlLabel>Invalid</ControlLabel>
