@@ -1,4 +1,6 @@
 ```js
+import { Feed } from '../';
+
 const now = new Date;
 const sec = 1000;
 const min = sec * 60;

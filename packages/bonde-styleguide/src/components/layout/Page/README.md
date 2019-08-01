@@ -9,6 +9,8 @@
 
 
 ```js
+import { Tab, TabItem } from '../';
+
 const PageTabMenu = () => (
   <Tab inverted>
     <TabItem active>Informações</TabItem>
@@ -29,6 +31,8 @@ const PageTabMenu = () => (
 
 
 ```js
+import { Tab, TabItem, Header, Page } from '../';
+
 const ModuleTabMenu = () => (
   <Tab>
     <TabItem>Editar</TabItem>

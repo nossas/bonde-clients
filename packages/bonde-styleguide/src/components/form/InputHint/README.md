@@ -2,6 +2,8 @@
 
 
 ```js
+import { InputHint } from '../';
+
 <InputHint>Info/Hint</InputHint>
 ```
 
@@ -10,5 +12,7 @@
 
 
 ```js
+import { InputHint } from '../';
+
 <InputHint invalid>Info/Hint</InputHint>
 ```

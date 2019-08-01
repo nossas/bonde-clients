@@ -1,4 +1,7 @@
 ```js
+import { Flexbox, Modal } from '../';
+import { Button } from '../../form';
+
 class Controller extends React.Component {
   constructor(props) {
     super(props)

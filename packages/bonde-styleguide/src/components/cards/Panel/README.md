@@ -1,6 +1,8 @@
 ### Panel
 
 ```js
+import { Grid, Panel } from '../../layout';
+
 <Panel
   sectionTitle='Treending mobs'
   image='https://goo.gl/hggWmp'
@@ -12,6 +14,8 @@
 
 ### Panel - `loading`
 ```js
+import { Grid, Cell, Panel } from '../../layout';
+
 <Grid>
   <Cell size={[4, 4, 4]}>
     <Panel

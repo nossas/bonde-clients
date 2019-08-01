@@ -1,4 +1,5 @@
 ```js
+import { IconColorful } from '../';
 
 <div style={{ width: '20%' }}>
   <Number

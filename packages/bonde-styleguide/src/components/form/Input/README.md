@@ -1,4 +1,6 @@
 ```js
+import { Input } from '../';
+
 <Input placeholder='Placeholder' />
 ```
 
@@ -7,6 +9,8 @@
 
 
 ```js
+import { Input } from '../';
+
 <Input placeholder='Placeholder' invalid />
 ```
 
@@ -15,5 +19,7 @@
 
 
 ```js
+import { Input } from '../';
+
 <Input placeholder='Placeholder' disabled />
 ```

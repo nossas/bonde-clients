@@ -1,4 +1,6 @@
 ```js
+import { IconColorful } from '../';
+
 <div>
   <IconColorful name='abc' />
   <IconColorful name='bonde' size={100} />

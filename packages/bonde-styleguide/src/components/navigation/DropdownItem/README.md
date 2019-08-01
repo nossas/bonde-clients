@@ -1,6 +1,8 @@
 ### DropdownItem - with icon
 
 ```js { "props": { "className": "dark" } }
+import { Dropdown, DropdownItem } from '../';
+
 <Dropdown label='Minha sampa' width={200}>
   <DropdownItem onClick={() => alert('clicked Abrir página')}>
     <Icon name='share' /> Abrir página

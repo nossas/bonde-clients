@@ -2,6 +2,8 @@ The grid is defined in 12 columns. That wraps multiple `Cell` components.
 `[1, 2, 3, 4, 6, 12]`
 
 ```js
+import { Grid, Cell } from '../../layout';
+
 <Grid>
   <Cell><Text>1</Text></Cell>
   <Cell><Text>2</Text></Cell>
@@ -24,6 +26,8 @@ The grid is defined in 12 columns. That wraps multiple `Cell` components.
 
 
 ```js
+import { Grid, Cell } from '../../layout';
+
 //
 // Ancestral grid
 //
