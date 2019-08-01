@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-// import Text from '../Text/Text'
-import {
-  Text,
-  IconColorful
-} from '../../..'
+import Text from '../Text/Text'
+import IconColorful from '../IconColorful/IconColorful'
 
 
 const TextNumber = styled(Text)`
