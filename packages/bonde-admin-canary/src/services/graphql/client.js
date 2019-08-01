@@ -10,17 +10,24 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = authSession.getToken()
+  const hasuraToken = process.env.REACT_APP_HASURA_SECRET || 'segredo123'
+  const authToken = authSession.getToken()
 
-  if (token) {
+  if (authToken) {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${authToken}`,
+        'x-hasura-admin-secret': hasuraToken
       }
     }
   }
-  return { headers }
+  return {
+    headers: {
+      ...headers,
+      'x-hasura-admin-secret': hasuraToken
+    }
+  }
 })
 
 const handleError = onCatch(({ networkError }) => {

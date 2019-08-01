@@ -36,7 +36,8 @@ class AuthProvider extends React.Component {
         const authErrors = [
           'Token invalid, user not found.',
           'Signature verification failed',
-          'Invalid audience'
+          'Invalid audience',
+          'jwt expired'
         ]
 
         if (typeof error === 'object' && authErrors.indexOf(error.graphQLErrors[0].message) !== -1) {
