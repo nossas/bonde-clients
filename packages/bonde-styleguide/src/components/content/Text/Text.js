@@ -13,20 +13,11 @@ const Text = styled.p`{
   text-align: ${props => props.align};
   text-transform: ${props => props.uppercase ? 'uppercase': null};
   letter-spacing: ${props => props.letterSpacing};
-
-  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
-  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
-  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
-  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
+  margin: ${props => props.margin};
 }`
 
 Text.propTypes = {
-  margin: PropTypes.shape({
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
-  }),
+  margin: PropTypes.string,
   align: PropTypes.oneOf(['left', 'center', 'right']),
   color: PropTypes.string,
   lineHeight: PropTypes.number,

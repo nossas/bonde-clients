@@ -1,4 +1,5 @@
 ```js
+import { Icon } from '../';
 <div>
   <Icon name='angle-down' />
   <Icon name='angle-right' />
