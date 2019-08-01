@@ -15,4 +15,5 @@ const TableRow = styled.div`{
 
 TableRow.displayName = 'TableRow'
 
+/** @component */
 export default TableRow

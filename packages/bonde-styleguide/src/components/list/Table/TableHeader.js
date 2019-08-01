@@ -37,4 +37,5 @@ const TableHeader = styled(({ className, children, columns }) => (
 
 TableHeader.displayName = 'TableHeader'
 
+/** @component */
 export default TableHeader
