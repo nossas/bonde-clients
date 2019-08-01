@@ -1,8 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
 import Text from '../Text/Text'
 
-export const Link = styled(() => <Text as='a' />)`
+export const Link = styled(Text)`
   color: #ee0099!important;
   text-decoration: none;
 
@@ -18,4 +17,5 @@ export const Link = styled(() => <Text as='a' />)`
 
 Link.displayName = 'Link'
 
+/** @component */
 export default Link

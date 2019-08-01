@@ -137,7 +137,9 @@ Button.propTypes = {
   color: string,
   /** Button type. */
   type: string,
+  /** Button align. */
   align: oneOf(['center', 'left', 'right']),
+  /** Button margin. */
   margin: shape({
     top: string,
     bottom: string,

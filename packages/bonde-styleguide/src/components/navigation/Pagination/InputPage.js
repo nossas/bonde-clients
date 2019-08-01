@@ -35,4 +35,5 @@ const InputPage = ({ pageIndex, pages, onChangePage }) => (
   </Span>
 )
 
+/** @component */
 export default InputPage

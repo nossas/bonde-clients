@@ -8,12 +8,10 @@ const IconColorful = ({ name, color, size, inverted }) => {
   return <IconSVG color={color} size={size} inverted={inverted} />
 }
 
-const { oneOfType, string, number, bool } = PropTypes
-
 IconColorful.propTypes = {
-  name: string.isRequired,
-  size: oneOfType([string, number]),
-  inverted: bool
+  name: PropTypes.string.isRequired,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  inverted: PropTypes.bool
 }
 
 IconColorful.defaultProps = {

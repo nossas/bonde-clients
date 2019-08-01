@@ -93,4 +93,5 @@ ReactTable.defaultProps = {
 
 ReactTable.displayName = 'Table'
 
+/** @component */
 export default ReactTable

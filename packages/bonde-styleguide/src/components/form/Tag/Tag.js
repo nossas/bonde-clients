@@ -60,4 +60,5 @@ Tag.defaultProps = {
 
 Tag.displayName = 'Tag'
 
+/** @component */
 export default Tag

@@ -140,4 +140,5 @@ Dropdown.defaultProps = {
 
 Dropdown.displayName = 'Dropdown'
 
+/** @component */
 export default Dropdown

@@ -17,4 +17,5 @@ const Card = styled.div`{
 
 Card.displayName = 'Card'
 
+/** @component */
 export default Card

@@ -35,4 +35,5 @@ Page.propTypes = {
 
 Page.displayName = 'Page'
 
+/** @component */
 export default Page

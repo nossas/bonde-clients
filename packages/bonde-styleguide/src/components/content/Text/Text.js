@@ -48,8 +48,6 @@ Text.defaultProps = {
   align: 'left'
 }
 
-console.log(Text)
-
 Text.displayName = 'Text'
 
 /** @component */

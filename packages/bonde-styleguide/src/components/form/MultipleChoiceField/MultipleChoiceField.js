@@ -44,4 +44,5 @@ MultipleChoiceField.defaultProps = {
 
 MultipleChoiceField.displayName = 'MultipleChoiceField'
 
+/** @component */
 export default MultipleChoiceField

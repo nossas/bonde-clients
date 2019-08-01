@@ -11,4 +11,5 @@ const TableCell = styled.div`{
 
 TableCell.displayName = 'TableCell'
 
+/** @component */
 export default TableCell
