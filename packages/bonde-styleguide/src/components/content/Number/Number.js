@@ -1,7 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Text from '../Text/Text'
+// import Text from '../Text/Text'
+import {
+  Text,
+  IconColorful
+} from '../../..'
+
 
 const TextNumber = styled(Text)`
   font-size: 32px !important;
@@ -12,26 +17,25 @@ const TextNumber = styled(Text)`
   flex-grow: 1;
 `
 
-const Number = ({ value, icon: Icon }) => {
-  console.log(value)
-  console.log(Icon)
+const Number = ({ value, iconName }) => {
   return (
     <TextNumber>
       <span>{value}</span>
-      {Icon && Icon}
+      <IconColorful name={iconName} />
     </TextNumber>
   )
 }
 
-const { oneOfType, number, node, func } = PropTypes
-
 Number.propTypes = {
   /** The value that will be displayed. */
-  value: number,
+  value: PropTypes.number,
   /** The icon that will be displayed besides the value. */
-  icon: oneOfType([node, func])
+  iconName: PropTypes.string
 }
 
 Number.displayName = 'Number'
 
+/**
+ * @component
+ */
 export default Number
