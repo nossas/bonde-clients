@@ -1,5 +1,6 @@
 ```js { "props": { "className": "dark" } }
 import { Dropdown, DropdownItem } from '../';
+import { Icon } from '../../content';
 
 <Dropdown label='Maria Benati' width={190}>
   <DropdownHeader>

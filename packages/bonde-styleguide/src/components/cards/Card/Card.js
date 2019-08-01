@@ -32,7 +32,7 @@ const CardTitle = ({ children }) => (
     lineHeight={1.15}
     color='#4a4a4a'
     fontWeight='bold'
-    margin={{ y: 16 }}
+    margin='16px'
   >
     {children}
   </Text>

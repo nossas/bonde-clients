@@ -2,6 +2,7 @@
 
 ```js { "props": { "className": "dark" } }
 import { Dropdown, DropdownItem } from '../';
+import { Icon } from '../../content';
 
 <Dropdown label='Minha sampa' width={200}>
   <DropdownItem onClick={() => alert('clicked Abrir página')}>
