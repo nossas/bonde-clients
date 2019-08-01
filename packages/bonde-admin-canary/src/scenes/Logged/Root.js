@@ -2,6 +2,7 @@ import React from 'react'
 import { AuthProvider, Route } from 'services/auth'
 import { FullScreenLoadable, LoadingFullScreen } from 'components/Loadable'
 import TagsPage from './scenes/Tags'
+import ChatbotPage from './scenes/Chatbot'
 import PropTypes from 'prop-types'
 
 const HomePage = FullScreenLoadable({
@@ -19,6 +20,11 @@ const Root = ({ match }) => (
     <Route
       path={`${match.url}/tags`}
       component={TagsPage}
+    />
+
+    <Route
+      path={`${match.url}/chatbot`}
+      component={ChatbotPage}
     />
   </AuthProvider>
 )

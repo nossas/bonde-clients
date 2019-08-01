@@ -1,20 +1,25 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import { Form, SubmissionError } from './'
+import { Form, SubmissionError, resetForm } from './'
 import PropTypes from 'prop-types'
 
 const FormGraphQL = ({
   children,
   mutation,
   update,
+  refetchQueries,
   onSubmit,
   ...props
 }) => (
-  <Mutation mutation={mutation} update={update}>
+  <Mutation mutation={mutation} update={update} refetchQueries={refetchQueries}>
     {(mutationFunc) => (
       <Form
         onSubmit={(values) => {
           return onSubmit(values, mutationFunc)
+            .then(() => {
+              resetForm()
+              return Promise.resolve()
+            })
             .catch((error) => {
               if (error && (error.form || error.fields)) {
                 let errors = {}
