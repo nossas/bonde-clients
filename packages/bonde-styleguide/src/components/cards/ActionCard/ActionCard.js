@@ -45,4 +45,5 @@ ActionCard.defaultProps = {
 
 ActionCard.displayName = 'ActionCard'
 
+/** @component */
 export default ActionCard

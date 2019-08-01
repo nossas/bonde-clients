@@ -35,7 +35,5 @@ Number.propTypes = {
 
 Number.displayName = 'Number'
 
-/**
- * @component
- */
+/** @component */
 export default Number
