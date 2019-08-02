@@ -8,13 +8,13 @@ const Spark = styled.path.attrs({
   animation: ${props => `${props.animation} ${props.duration} infinite`};
 `
 
-const { string } = PropTypes
-
 Spark.propTypes = {
-  d: string.isRequired, // vector path attribute
-  colorInit: string.isRequired,
-  animation: string.isRequired,
-  duration: string.isRequired
+  d: PropTypes.string.isRequired, // vector path attribute
+  colorInit: PropTypes.string.isRequired,
+  animation: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired
 }
+
+Spark.displayName = 'Spark'
 
 export default Spark

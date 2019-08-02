@@ -71,12 +71,10 @@ const Sparkles = props => {
   )
 }
 
-const { string } = PropTypes
-
 Sparkles.propTypes = {
-  colorInit: string.isRequired,
-  color: string.isRequired,
-  duration: string.isRequired
+  colorInit: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired
 }
 
 Sparkles.defaultProps = {
@@ -84,5 +82,7 @@ Sparkles.defaultProps = {
   color: '#35E3C3',
   duration: '6s'
 }
+
+Image.displayName = 'Sparkles'
 
 export default Sparkles
