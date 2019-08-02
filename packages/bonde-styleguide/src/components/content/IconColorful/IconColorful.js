@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import svg from './svg'
 
-const IconColorful = ({ name, color, size, inverted }) => {
+const IconColorful = styled(({ name, color, size, inverted }) => {
   const IconSVG = svg[name]
 
   return <IconSVG color={color} size={size} inverted={inverted} />
-}
+})`
+  ${svg} > & {}
+  vertical-align: middle;
+`
 
 IconColorful.propTypes = {
   name: PropTypes.string.isRequired,
@@ -21,4 +25,5 @@ IconColorful.defaultProps = {
 
 IconColorful.displayName = 'IconColorful'
 
+/** @component */
 export default IconColorful
