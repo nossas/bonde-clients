@@ -83,6 +83,6 @@ Sparkles.defaultProps = {
   duration: '6s'
 }
 
-Image.displayName = 'Sparkles'
+Sparkles.displayName = 'Sparkles'
 
 export default Sparkles
