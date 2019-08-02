@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Text from '../Text/Text'
 import IconColorful from '../IconColorful/IconColorful'
 
-
 const TextNumber = styled(Text)`
   font-size: 32px !important;
   font-weight: 900 !important;
@@ -12,6 +11,8 @@ const TextNumber = styled(Text)`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+
+  ${IconColorful} > & {}
 `
 
 const Number = ({ value, iconName }) => {
