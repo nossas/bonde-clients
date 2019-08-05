@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Textarea = styled.textarea`{
+const Textarea = styled.textarea`
   ${props => props.fullWidth && 'width: 100%;'}
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
@@ -36,7 +36,7 @@ const Textarea = styled.textarea`{
   ${props => props.showValid && props.touched && props.valid && `{
     border-bottom-color: #50e3c2;
   }`}
-}`
+`
 
 Textarea.displayName = 'Textarea'
 

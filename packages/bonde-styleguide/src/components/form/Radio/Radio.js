@@ -5,7 +5,7 @@ import Text from '../../content/Text/Text'
 
 //  <Text as='a' />)`
 
-const Radio = styled(() => <Checkbox as={
+const Radio = styled((Text) => <Checkbox as={
   ({ children, className, ...inputProps }) => (
     <label className={className}>
       <input type='radio' {...inputProps} />

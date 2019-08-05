@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { px } from '../../../utils'
 
-const Card = styled.div`{
+const Card = styled.div`
   position: relative;
   border-radius: ${props => px(props.rounded || '1px')};
   background-color: #ffffff;
@@ -12,8 +12,7 @@ const Card = styled.div`{
   ${props => props.height && `height: ${props.height};`}
   ${props => props.onClick && `cursor: pointer;`}
   ${props => props.border && `border: ${props.border};`}
-
-}`
+`
 
 Card.displayName = 'Card'
 

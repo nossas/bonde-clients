@@ -9,10 +9,10 @@ const Tab = styled(({ children, className, inverted }) => (
       React.cloneElement(child, { inverted, key: Math.random() })
     ))}
   </div>
-))`{
+))`
   display: flex;
   align-items: center;
-}`
+`
 
 const { oneOfType, instanceOf, arrayOf, node, bool } = PropTypes
 

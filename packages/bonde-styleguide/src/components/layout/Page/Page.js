@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { px } from '../../../utils'
 
-const PageContainer = styled.div`{
+const PageContainer = styled.div`
   padding-top: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'};
   padding-bottom: 32px;
   width: 80%;
@@ -11,9 +11,9 @@ const PageContainer = styled.div`{
   ${props => props.height && `height: ${px(props.height)};`}
 `
 
-const PageContent = styled.div`{
+const PageContent = styled.div`
   display: flex;
-}`
+`
 
 const Page = ({ children, menuComponent: MenuComponent, top, height }) => (
   <PageContainer top={top} height={height}>

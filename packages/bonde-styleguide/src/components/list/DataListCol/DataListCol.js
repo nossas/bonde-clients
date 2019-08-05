@@ -5,7 +5,7 @@ import { px } from '../../../utils'
 /**
  * The column component of `DataList`.
  */
-const DataListCol = styled.div`{
+const DataListCol = styled.div`
   ${props => props.width && `width: ${px(props.width)};`}
   display: table-cell;
   padding: 13px 15px 14px 15px;
@@ -19,7 +19,7 @@ const DataListCol = styled.div`{
   }
 
   text-align: ${props => props.align};
-}`
+`
 
 const { number, string } = PropTypes
 

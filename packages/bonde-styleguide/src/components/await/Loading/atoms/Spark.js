@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const Spark = styled.path.attrs({
+const Spark = styled.path.attrs( props => ({
   d: props => props.d
-})`
+}))`
   fill: ${props => props.colorInit};
   animation: ${props => `${props.animation} ${props.duration} infinite`};
 `

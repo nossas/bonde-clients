@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Input = styled.input`{
+const Input = styled.input`
   ${props => props.fullWidth && 'width: 100%;'}
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
@@ -36,7 +36,7 @@ const Input = styled.input`{
   ${props => props.showValid && props.touched && props.valid && `{
     border-bottom-color: #50e3c2;
   }`}
-}`
+`
 
 Input.displayName = 'Input'
 

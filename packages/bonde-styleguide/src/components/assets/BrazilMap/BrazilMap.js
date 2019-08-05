@@ -1,10 +1,10 @@
 import React from 'react'
 
 const applyMargin = (margin) => ({
-  marginLeft: margin.left || margin.x || 0,
-  marginRight: margin.right || margin.x || 0,
-  marginTop: margin.top || margin.y || 0,
-  marginBottom: margin.bottom || margin.y || 0
+  marginLeft: margin.left || 0,
+  marginRight: margin.right || 0,
+  marginTop: margin.top || 0,
+  marginBottom: margin.bottom || 0
 })
 
 const BrazilMap = ({ size, width, height, margin }) => (

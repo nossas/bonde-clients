@@ -55,7 +55,7 @@ const PanelLoading = styled(({ className, minHeight, title }) => (
   overflow: hidden;
 `
 
-const DefaultImage = styled(({ className }) => (
+const DefaultImage = styled(IconColorful, ({ className }) => (
   <div className={className}>
     <IconColorful name='community' size={130} />
   </div>

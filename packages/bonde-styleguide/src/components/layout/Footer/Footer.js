@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import IconColorful from '../../content/IconColorful/IconColorful'
 
-const FooterContent = styled.div`{
+const FooterContent = styled.div`
   flex-grow: 1;
   padding: 0 0 0 84.7px;
 
@@ -20,7 +20,7 @@ const FooterContent = styled.div`{
       text-decoration: underline;
     }
   }
-}`
+`
 
 const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   <div className={className}>
@@ -29,7 +29,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
     {children}
     </FooterContent>
   </div>
-))`{
+))`
   ${props => props.fixed && `
     position: absolute;
     bottom: 0;
@@ -41,7 +41,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   padding: 0 150px;
   overflow: hidden;
   width: 100%;
-}`
+`
 
 const { oneOfType, node, func, string } = PropTypes
 

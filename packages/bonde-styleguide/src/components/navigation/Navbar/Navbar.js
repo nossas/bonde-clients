@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const NavContainer = styled.div`{
+const NavContainer = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-}`
+`
 
 const Navbar = styled(({ children, className, renderBrand }) => (
   <div className={className}>
@@ -16,11 +16,11 @@ const Navbar = styled(({ children, className, renderBrand }) => (
       {children}
     </NavContainer>
   </div>
-))`{
+))`
   width: inherit;
   display: flex;
   align-items: center;
-}`
+`
 
 Navbar.propTypes = {
   /** The home page icon. */

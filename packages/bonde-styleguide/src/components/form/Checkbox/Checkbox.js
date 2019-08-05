@@ -7,7 +7,7 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
     <span>{children}</span>
     <div className='box' />
   </label>
-))`{
+))`
   font-family: 'Nunito Sans', sans-serif;
   display: block;
   position: relative;
@@ -78,7 +78,7 @@ const Checkbox = styled(({ children, className, ...inputProps }) => (
     border-width: 0 1px 1px 0;
     transform: rotate(45deg);
   }
-}`
+`
 
 Checkbox.displayName = 'Checkbox'
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const ControlLabel = styled.label`{
+const ControlLabel = styled.label`
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
   font-size: 13px;
@@ -8,7 +8,7 @@ const ControlLabel = styled.label`{
   letter-spacing: 0.5px;
   color: #aaa;
   text-transform: uppercase;
-}`
+`
 
 ControlLabel.displayName = 'ControlLabel'
 

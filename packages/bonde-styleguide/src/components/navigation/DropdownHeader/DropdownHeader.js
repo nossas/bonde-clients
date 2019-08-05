@@ -3,7 +3,7 @@ import styled from 'styled-components'
 /**
  * The header component of `Dropdown`.
  */
-const DropdownHeader = styled.div`{
+const DropdownHeader = styled.div`
   width: auto;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
@@ -17,7 +17,7 @@ const DropdownHeader = styled.div`{
   & > img {
     margin-right: 15px;
   }
-}`
+`
 
 DropdownHeader.displayName = 'DropdownHeader'
 
