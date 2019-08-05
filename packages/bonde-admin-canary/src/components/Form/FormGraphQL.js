@@ -10,36 +10,39 @@ const FormGraphQL = ({
   refetchQueries,
   onSubmit,
   ...props
-}) => (
-  <Mutation mutation={mutation} update={update} refetchQueries={refetchQueries}>
-    {(mutationFunc) => (
-      <Form
-        onSubmit={(values) => {
-          return onSubmit(values, mutationFunc)
-            .then(() => {
-              resetForm()
-              return Promise.resolve()
-            })
-            .catch((error) => {
-              if (error && (error.form || error.fields)) {
-                let errors = {}
-                if (error.form) {
-                  errors = { _error: error.form }
+}) => {
+  return (
+    <Mutation mutation={mutation} update={update} refetchQueries={refetchQueries}>
+      {(mutationFunc) => (
+        <Form
+          name={props.name}
+          onSubmit={(values) => {
+            return onSubmit(values, mutationFunc)
+              .then(() => {
+                resetForm(props.name)
+                return Promise.resolve()
+              })
+              .catch((error) => {
+                if (error && (error.form || error.fields)) {
+                  let errors = {}
+                  if (error.form) {
+                    errors = { _error: error.form }
+                  }
+                  if (error.fields) {
+                    errors = { ...errors, ...error.fields }
+                  }
+                  throw new SubmissionError(errors)
                 }
-                if (error.fields) {
-                  errors = { ...errors, ...error.fields }
-                }
-                throw new SubmissionError(errors)
-              }
-            })
-        }}
-        {...props}
-      >
-        {children}
-      </Form>
-    )}
-  </Mutation>
-)
+              })
+          }}
+          {...props}
+        >
+          {children}
+        </Form>
+      )}
+    </Mutation>
+  )
+}
 
 FormGraphQL.propTypes = {
   children: PropTypes.node,
@@ -88,6 +91,7 @@ export class FormGraphQLv2 extends React.Component {
     
     return (
       <FormGraphQL
+        name={this.props.name}
         {...updateProps}
         mutation={mutation}
         onSubmit={(values, mutationPromise) => {

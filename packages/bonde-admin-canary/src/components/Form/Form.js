@@ -20,4 +20,9 @@ Form.propTypes = {
   handleSubmit: propTypes.func
 }
 
-export default reduxForm({ form: 'components/Form' })(Form)
+export default ({ name, children, ...formProps }) => {
+  const ReduxFormComponet = reduxForm({ form: name })(Form)
+  const elements = React.Children.toArray(children)
+  
+  return <ReduxFormComponet {...formProps} children={elements.map(child => React.cloneElement(child, { formName: name }))} />
+}
