@@ -7,21 +7,18 @@ import { FormGraphQL, Field, SubmitButton } from 'components/Form'
 import { chatbotsQuery, insertChatbotMutation } from '../graphql'
 
 
-const ChatbotForm = ({ communityId }) => {
+const ChatbotForm = ({ communityId, updateScene }) => {
   // TODO: dispatch notification
   return (
     <FormGraphQL
       mutation={insertChatbotMutation}
       update={(cache, { data: { insert_chatbots: { returning } } }) => {
-        const { chatbots, ...readquery } = cache.readQuery({
+        const { chatbots } = cache.readQuery({
           query: chatbotsQuery,
           variables: { communityId }
         })
         // TODO: Check simpler way to work with typing in graphql
         chatbots.push(returning[0])
-        
-        console.log('chatbots', chatbots)
-        console.log('__typename', readquery)
         cache.writeQuery({ query: chatbotsQuery, data: { chatbots }})
       }}
       refetchQueries={[{
@@ -29,8 +26,11 @@ const ChatbotForm = ({ communityId }) => {
         variables: { communityId }
       }]}
       onSubmit={(values, mutation) => {
-        // TODO: dispatch notification
         return mutation({ variables: { ...values, communityId } })
+          .then(() => {
+            // TODO: dispatch notification
+            updateScene()
+          })
       }}
     >
       <Field
@@ -47,7 +47,8 @@ const ChatbotForm = ({ communityId }) => {
 }
 
 ChatbotForm.propTypes = {
-  communityId: PropTypes.number.isRequired
+  communityId: PropTypes.number.isRequired,
+  updateScene: PropTypes.func.isRequired
 }
 
 export default ChatbotForm
