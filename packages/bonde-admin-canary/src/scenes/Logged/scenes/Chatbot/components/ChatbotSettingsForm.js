@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FormField, Select, Textarea } from 'bonde-styleguide'
 import { required } from 'services/validations'
-import { FormGraphQL, Field, SubmitButton } from 'components/Form'
+import { FormGraphQLv2, Field, SubmitButton } from 'components/Form'
 // module imports
 import { chatbotSettingsQuery, insertChatbotSettingsMutation } from '../graphql'
 
@@ -10,28 +10,18 @@ import { chatbotSettingsQuery, insertChatbotSettingsMutation } from '../graphql'
 const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
   // TODO: dispatch notification
   return (
-    <FormGraphQL
+    <FormGraphQLv2
       mutation={insertChatbotSettingsMutation}
-      update={(cache, { data: { insert_chatbot_settings: { returning } } }) => {
-        const { chatbot_settings } = cache.readQuery({
-          query: chatbotSettingsQuery,
-          variables: { chatbotId }
-        })
-        // TODO: Check simpler way to work with typing in graphql
+      mutationVariables={{ chatbotId }}
+      query={chatbotSettingsQuery}
+      queryVariables={{ chatbotId }}
+      cache={(readQuery, writeQuery, data) => {
+        const { insert_chatbot_settings: { returning } } = data
+        const { chatbot_settings } = readQuery()
         chatbot_settings.push(returning[0])
-        cache.writeQuery({ query: chatbotSettingsQuery, data: { chatbot_settings }})
+        writeQuery({ chatbot_settings })
       }}
-      refetchQueries={[{
-        query: chatbotSettingsQuery,
-        variables: { chatbotId }
-      }]}
-      onSubmit={(values, mutation) => {
-        return mutation({ variables: { ...values, chatbotId } })
-          .then(() => {
-            // TODO: dispatch notification
-            updateScene()
-          })
-      }}
+      onSuccess={updateScene}
     >
       <Field
         name='channel'
@@ -57,7 +47,7 @@ const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
         validate={required('Configurações deve ser preenchido')}
       />
       <SubmitButton>Salvar</SubmitButton>
-    </FormGraphQL>
+    </FormGraphQLv2>
   )
 }
 

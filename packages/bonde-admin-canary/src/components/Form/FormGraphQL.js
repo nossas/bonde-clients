@@ -50,3 +50,70 @@ FormGraphQL.propTypes = {
 }
 
 export default FormGraphQL
+
+
+export class FormGraphQLv2 extends React.Component {
+
+  render() {
+    const {
+      children,
+      mutation,
+      mutationVariables,
+      query,
+      queryVariables,
+      cache,
+      onSuccess,
+      onError
+    } = this.props
+
+    let updateProps = {}
+    if (query && cache) {
+      updateProps = {
+        update: (cache, { data }) => {
+          const readQuery = () => cache.readQuery({
+            query,
+            variables: { ...queryVariables }
+          })
+          const writeQuery = (writeData) => {
+            cache.writeQuery({ query, data: writeData })  
+          }
+          cache(readQuery, writeQuery, data)
+        },
+        refetchQueries: [{
+          query,
+          variables: { ...queryVariables }
+        }]
+      }
+    }
+    
+    return (
+      <FormGraphQL
+        {...updateProps}
+        mutation={mutation}
+        onSubmit={(values, mutationPromise) => {
+          const variables = { ...values, ...mutationVariables }
+          return mutationPromise({ variables })
+            .then(onSuccess)
+            .catch(onError)
+        }}
+      >
+        {children}
+      </FormGraphQL>
+    )
+  }
+}
+
+FormGraphQLv2.propTypes = {
+  mutation: PropTypes.func.isRequired,
+  mutationVariables: PropTypes.object,
+  query: PropTypes.func,
+  queryVariables: PropTypes.object,
+  cache: PropTypes.func,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func
+}
+
+FormGraphQLv2.defaultProps = {
+  mutationVariables: {},
+  queryVariables: {}
+}
