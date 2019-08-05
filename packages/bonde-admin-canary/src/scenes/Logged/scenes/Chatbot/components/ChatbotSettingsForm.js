@@ -11,8 +11,9 @@ const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
   // TODO: dispatch notification
   return (
     <FormGraphQLv2
+      name='ChatbotSettingsForm'
       mutation={insertChatbotSettingsMutation}
-      mutationVariables={{ chatbotId }}
+      mutationVariables={{ chatbotId }}   
       query={chatbotSettingsQuery}
       queryVariables={{ chatbotId }}
       cache={(readQuery, writeQuery, data) => {

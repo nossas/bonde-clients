@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query ChatbotCampaigns($chatbotSettingsId: Int!) {
-    chatbot_campaigns(where: { chatbot_settings_id: { _eq: $chatbotSettingsId } }) {
+  query ChatbotCampaigns($chatbotId: Int!) {
+    chatbot_campaigns(where: { chatbot_id: { _eq: $chatbotId } }) {
       id
       name
       prefix

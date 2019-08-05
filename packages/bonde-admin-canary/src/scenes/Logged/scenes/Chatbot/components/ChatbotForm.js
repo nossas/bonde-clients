@@ -11,6 +11,7 @@ const ChatbotForm = ({ communityId, updateScene }) => {
   // TODO: dispatch notification
   return (
     <FormGraphQLv2
+      name='ChatbotForm'
       mutation={insertChatbotMutation}
       mutationVariables={{ communityId }}
       query={chatbotsQuery}

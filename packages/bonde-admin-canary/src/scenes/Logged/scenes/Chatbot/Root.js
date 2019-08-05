@@ -9,6 +9,8 @@ import { Page, Header } from 'components/PageLogged'
 import {
   ChatbotForm,
   ChatbotList,
+  ChatbotCampaignsForm,
+  ChatbotCampaignsList,
   ChatbotSettingsForm,
   ChatbotSettingsList
 } from './components'
@@ -61,31 +63,56 @@ class Root extends Component {
               </Grid>
             </Cell>
             {this.state.chatbot && (
-              <Cell size={[12, 12, 12]}>
-                <Grid>
-                  <Cell size={[6, 6, 12, 12, 12, 12]}>
-                    <ChatbotSettingsForm chatbotId={this.state.chatbot.id} updateScene={this.handleUpdateScene} />
-                  </Cell>
-                  <Cell size={[6, 6, 12, 12, 12, 12]}>
-                    <ChatbotSettingsList
-                      chatbotId={this.state.chatbot.id}
-                      dataListComponent={({ chatbotSettings }) => {
-                      return (
-                        <ul>
-                          {chatbotSettings.map((config, i) => (
-                            <li key={`chatbot-settings-${i}`}>
-                              <p>{config.channel}</p>
-                              <ReactJson src={JSON.parse(config.settings)} />
-                            </li>
-                          ))}
-                        </ul>
-                      )
-                    }}
+              <React.Fragment>
+                <Cell size={[12, 12, 12]}>
+                  <Grid>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <ChatbotSettingsForm chatbotId={this.state.chatbot.id} updateScene={this.handleUpdateScene} />
+                    </Cell>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <ChatbotSettingsList
+                        chatbotId={this.state.chatbot.id}
+                        dataListComponent={({ chatbotSettings }) => {
+                        return (
+                          <ul>
+                            {chatbotSettings.map((config, i) => (
+                              <li key={`chatbot-settings-${i}`}>
+                                <p>{config.channel}</p>
+                                <ReactJson src={JSON.parse(config.settings)} />
+                              </li>
+                            ))}
+                          </ul>
+                        )
+                      }}
 
-                    />
-                  </Cell>
-                </Grid>
-              </Cell>
+                      />
+                    </Cell>
+                  </Grid>
+                </Cell>
+                <Cell size={[12, 12, 12]}>
+                  <Grid>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <ChatbotCampaignsForm chatbotId={this.state.chatbot.id} updateScene={this.handleUpdateScene} />
+                    </Cell>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <ChatbotCampaignsList
+                        chatbotId={this.state.chatbot.id}
+                        dataListComponent={({ chatbotCampaigns }) => {
+                          return (
+                            <ul>
+                              {chatbotCampaigns.map((campaign, i) => (
+                                <li key={`chatbot-settings-${i}`}>
+                                  <ReactJson src={{...campaign, diagram: JSON.parse(campaign.diagram)}} />
+                                </li>
+                              ))}
+                            </ul>
+                          )
+                        }}
+                      />
+                    </Cell>
+                  </Grid>
+                </Cell>
+              </React.Fragment>
             )}
           </Grid>
         </Flexbox>

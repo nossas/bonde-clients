@@ -5,7 +5,7 @@ import { chatbotSettingsQuery } from '../graphql'
 
 const ChatbotSettingsList = ({ chatbotId, dataListComponent: DataListComponent }) => {
   return (
-    <Query query={chatbotSettingsQuery} variables={{ chatbotId }} fetchO>
+    <Query query={chatbotSettingsQuery} variables={{ chatbotId }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...'
         if (error) return `Error! ${error.message}`
