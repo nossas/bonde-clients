@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
     "dev": "styleguidist server",
-    "lint": "stylelint src/**"
+    "lint": "stylelint src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
