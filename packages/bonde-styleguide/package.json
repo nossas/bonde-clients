@@ -5,9 +5,13 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
+    "babel-plugin-styled-components": "^1.10.6",
     "prop-types": "^15.7.2",
     "recharts": "^1.6.2",
     "styled-components": "^4.3.2",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-processor-styled-components": "^1.8.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -16,7 +20,8 @@
     "build": "styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
-    "dev": "styleguidist server"
+    "dev": "styleguidist server",
+    "lint": "stylelint src/**"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,6 +32,7 @@
       "@babel/preset-react"
     ],
     "plugins": [
+      "babel-plugin-styled-components",
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime",
@@ -54,6 +60,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "react-styleguidist": "^9.1.13",
+    "stylelint-config-styled-components": "^0.1.1",
     "webpack": "^4.38.0"
   }
 }
