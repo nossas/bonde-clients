@@ -5,15 +5,15 @@ import { px } from '../../../utils'
 /**
  * The only true image.
  */
-const Image = styled.div`{
+const Image = styled.div`
   display: block;
   width: ${props => px(props.width) || '100%'};
   height: ${props => px(props.height)};
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center center;
-  ${props => props.rounded && `border-radius: ${px(props.rounded)};`}
-}`
+  ${props => props.rounded && `border-radius: ${props.rounded};`}
+`
 
 const { oneOfType, string, number } = PropTypes
 

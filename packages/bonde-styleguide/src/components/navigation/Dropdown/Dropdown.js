@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
 import Spacing from '../../layout/Spacing/Spacing'
 
-export const Header = styled.div`{
+export const Header = styled.div`
   width: auto;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
@@ -18,9 +18,9 @@ export const Header = styled.div`{
   & > img {
     margin-right: 15px;
   }
-}`
+`
 
-const DropdownMenu = styled.div`{
+const DropdownMenu = styled.div`
   background-color: #fff;
   padding: 20px 0;
   white-space: nowrap;
@@ -31,7 +31,7 @@ const DropdownMenu = styled.div`{
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.45);
   max-height: calc(100vh - 30px - 40px);
   min-width: calc(100% + 15px);
-}`
+`
 
 const DropdownMenuArrow = styled.div`
   border-left: 10px solid transparent;
@@ -42,7 +42,7 @@ const DropdownMenuArrow = styled.div`
   right: -3px;
 `
 
-const DropdownComponent = styled.div`{
+const DropdownComponent = styled.div`
   position: relative;
   display: flex;
   width: ${props => props.width ? `${props.width}px` : 'auto'};
@@ -72,9 +72,9 @@ const DropdownComponent = styled.div`{
     line-height: 1.15;
     letter-spacing: 0.5px;
   }
-}`
+`
 
-const DropdownTriggerButton = styled.button.attrs({ type: 'button' })`
+const DropdownTriggerButton = styled.button.attrs(props => ({ type: 'button' }))`
   height: 100%;
 `
 

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-export const TabItem = styled.a`{
+export const TabItem = styled.a`
   display: inline-block;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 13px;
@@ -22,7 +22,7 @@ export const TabItem = styled.a`{
     border-bottom: 3px solid #ee0099;
     padding-bottom: 11px;
   }
-}`
+`
 
 const { bool } = PropTypes
 

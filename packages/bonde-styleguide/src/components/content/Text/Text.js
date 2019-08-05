@@ -4,7 +4,7 @@ import styled from 'styled-components'
 /**
  * The only true paragraph.
  */
-const Text = styled.p`{
+const Text = styled.p`
   font-family: 'Nunito Sans', sans-serif;
   font-size: ${props => props.fontSize};
   font-weight: ${props => props.fontWeight};
@@ -14,7 +14,7 @@ const Text = styled.p`{
   text-transform: ${props => props.uppercase ? 'uppercase': null};
   letter-spacing: ${props => props.letterSpacing};
   margin: ${props => props.margin};
-}`
+`
 
 Text.propTypes = {
   margin: PropTypes.string,

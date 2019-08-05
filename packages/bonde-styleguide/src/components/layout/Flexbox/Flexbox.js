@@ -4,7 +4,7 @@ import styled from 'styled-components'
 /**
  * The only true container.
  */
-const Flexbox = styled.div`{
+const Flexbox = styled.div`
   display: flex;
 
   ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
@@ -22,7 +22,7 @@ const Flexbox = styled.div`{
   ${props => props.alignItems === 'start' && `align-items: flex-start;`}
   ${props => props.alignItems === 'end' && `align-items: flex-end;`}
   ${props => props.alignItems === 'middle' && `align-items: center;`}
-}`
+`
 
 Flexbox.propTypes = {
   margin: PropTypes.shape({

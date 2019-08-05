@@ -4,11 +4,11 @@ import styled from 'styled-components'
 /**
  * The generic data list component.
  */
-const DataList = styled.div`{
+const DataList = styled.div`
   display: table;
   border-collapse: ${props => props.border ? 'collapse' : 'unset'};
   width: 100%;
-}`
+`
 
 const { bool } = PropTypes
 

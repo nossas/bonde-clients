@@ -2,17 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Text from '../../content/Text/Text'
-import { px } from '../../../utils'
 
-const CardBox = styled.div`{
+const CardBox = styled.div`
   width: 100%;
   border-radius: 1px;
   box-shadow: 2px 1px 14px 11px rgba(0, 0, 0, .04);
   position: relative;
 
   background-color: ${props => props.bgColor || '#fff'};
-  min-height: ${props => px(props.minHeight)};
-  max-height: ${props => px(props.maxHeight)};
+  min-height: ${props => props.minHeight};
+  max-height: ${props => props.maxHeight};
 
   display: flex;
   flex-direction: column;
@@ -23,7 +22,10 @@ const CardBox = styled.div`{
   ${props => props.hasFooter && `
     padding-bottom: 46px;
   `}
-}`
+  ${Text} > {
+    color: #4a4a4a;
+  }
+`
 
 const CardTitle = ({ children }) => (
   <Text
@@ -88,10 +90,10 @@ const Card = styled(({
       )}
     </CardBox>
   </div>
-))`{
+))`
   display: flex;
   flex-direction: column;
-}`
+`
 
 const { oneOfType, oneOf, number, node, func, shape } = PropTypes
 

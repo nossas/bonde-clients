@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Item = styled('a')`{
+const Item = styled('a')`
   width: auto;
   display: block;
   font-family: 'Nunito Sans', sans-serif;
@@ -22,7 +22,7 @@ const Item = styled('a')`{
   & > svg, & > i {
     margin-right: 15px;
   }
-}`
+`
 
 
 /**

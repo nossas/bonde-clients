@@ -4,7 +4,7 @@ import { px } from '../../../utils'
 /**
  * The generic scroll box component.
  */
-const Scrollbox = styled.div`{
+const Scrollbox = styled.div`
   height: ${props => props.height ? px(props.height) : '100%'};
   overflow-y: auto;
   overflow-x: hidden;
@@ -38,7 +38,7 @@ const Scrollbox = styled.div`{
     border-left-width: 15px;
     border-right-width: 15px;
   }
-}`
+`
 
 Scrollbox.propTypes = {
   margin: PropTypes.shape({

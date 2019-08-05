@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 /**
  * The only true Button component.
  */
-const Button = styled.button`{
+const Button = styled.button`
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 800;
   font-size: 13px;
@@ -118,7 +118,7 @@ const Button = styled.button`{
   ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
   ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
   ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
-}`
+`
 
 const { oneOf, node, bool, string, shape } = PropTypes
 
