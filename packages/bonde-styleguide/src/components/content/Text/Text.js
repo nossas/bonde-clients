@@ -13,11 +13,11 @@ const Text = styled.p`
   text-align: ${props => props.align};
   text-transform: ${props => props.uppercase ? 'uppercase': null};
   letter-spacing: ${props => props.letterSpacing};
-  margin: ${props => props.margin};
+  /* margin: ${props => props.margin}; */
 `
 
 Text.propTypes = {
-  margin: PropTypes.string,
+  // margin: PropTypes.string,
   align: PropTypes.oneOf(['left', 'center', 'right']),
   color: PropTypes.string,
   lineHeight: PropTypes.number,
