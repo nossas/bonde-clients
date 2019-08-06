@@ -40,6 +40,7 @@ import { DataListCard } from '../';
 
 ```js
 import { DataListCard } from '../';
+import { Text, Image, Title } from '../../content';
 
 <DataListCard
   sectionTitle='Atividades recentes'
