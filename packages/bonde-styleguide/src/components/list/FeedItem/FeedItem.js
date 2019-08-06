@@ -6,7 +6,6 @@ const Time = styled.div`
   display: table-cell;
   padding: 23px 0 23px 20px;
   border-bottom: 1px solid #eeeeee;
-  font-family: Nunito Sans;
   font-size: 13px;
   font-weight: 800;
   line-height: 1.6;
@@ -19,7 +18,6 @@ const FeedText = styled.div`
   display: table-cell;
   padding: 23px 35px 23px 40px;
   border-bottom: 1px solid #eeeeee;
-  font-family: Nunito Sans;
   font-size: 16px;
   line-height: 1.35;
   color: #333333;
