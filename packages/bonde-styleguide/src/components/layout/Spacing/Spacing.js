@@ -16,20 +16,24 @@ const Spacing = styled.div`
   ${props => props.padding && props.padding.right && `right: ${props.padding.right};`}
 `
 
+// decouple PropTypes only facility design props
+const { shape, oneOf, string, number } = PropTypes
+
+
 Spacing.propTypes = {
   /** The margin property. */
-  margin: PropTypes.shape({
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
+  margin: shape({
+    top: oneOf[string, number],
+    bottom: oneOf[string, number],
+    left: oneOf[string, number],
+    right: oneOf[string, number]
   }),
   /** The padding property. */
-  padding: PropTypes.shape({
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
+  padding: shape({
+    top: oneOf[string, number],
+    bottom: oneOf[string, number],
+    left: oneOf[string, number],
+    right: oneOf[string, number]
   })
 }
 

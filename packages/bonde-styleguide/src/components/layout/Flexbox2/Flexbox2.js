@@ -52,6 +52,9 @@ const Flexbox = styled.div`
   ${props => props.padding && props.padding.right && `right: ${props.padding.right};`}
 `
 
+// decouple PropTypes only facility design props
+const { shape, oneOf, string, number } = PropTypes
+
 Flexbox.propTypes = {
   horizontal: PropTypes.bool,
   vertical: PropTypes.bool,
@@ -59,17 +62,19 @@ Flexbox.propTypes = {
   end: PropTypes.bool,
   spacing: PropTypes.oneOf(['around', 'between']),
   colSize: PropTypes.string,
-  margin: PropTypes.shape({
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
+  /** The margin property. */
+  margin: shape({
+    top: oneOf[string, number],
+    bottom: oneOf[string, number],
+    left: oneOf[string, number],
+    right: oneOf[string, number]
   }),
-  padding: PropTypes.shape({
-    top: PropTypes.string,
-    bottom: PropTypes.string,
-    left: PropTypes.string,
-    right: PropTypes.string,
+  /** The padding property. */
+  padding: shape({
+    top: oneOf[string, number],
+    bottom: oneOf[string, number],
+    left: oneOf[string, number],
+    right: oneOf[string, number]
   })
 }
 
