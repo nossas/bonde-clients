@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const Item = styled('a')`
   width: auto;
-  display: block;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 13px;
   font-weight: bold;
