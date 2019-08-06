@@ -4,7 +4,8 @@ declare module 'next/config' {
       domainApiRest: string
       domainApiGraphql: string
       domainPublic: string
-      pagarmeKey: string
+      pagarmeKey: string,
+      hasuraSecret: string
     }
   }
 }
