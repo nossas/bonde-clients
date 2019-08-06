@@ -46,7 +46,7 @@ import { Tooltip } from '../';
 import { Grid, Cell, Panel, Flexbox } from '../../layout';
 import { DataListCard, Tooltip } from '../';
 import { Button } from '../../form';
-import { Image, Text } from '../../content';
+import { Image, Text, Title } from '../../content';
 
 <Grid>
   <Cell size={[4, 4]}>
