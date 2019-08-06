@@ -6,7 +6,6 @@ import { FormGraphQLv2, Field, SubmitButton } from 'components/Form'
 // module imports
 import { chatbotSettingsQuery, insertChatbotSettingsMutation } from '../graphql'
 
-
 const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
   // TODO: dispatch notification
   return (

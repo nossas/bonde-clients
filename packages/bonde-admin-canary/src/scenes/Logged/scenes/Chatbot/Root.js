@@ -14,17 +14,17 @@ import {
 } from './components'
 
 class Root extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { chatbot: undefined }
     this.handleUpdateScene = this.handleUpdateScene.bind(this)
   }
 
-  handleUpdateScene() {
+  handleUpdateScene () {
     this.forceUpdate()
   }
 
-  selectChatbot(chatbot) {
+  selectChatbot (chatbot) {
     this.setState({ chatbot })
   }
 
@@ -50,7 +50,7 @@ class Root extends Component {
                           {chatbots.map((chatbot, i) => (
                             <li key={`chatbot-${i}`}>
                               <p>{chatbot.name}</p>
-                              <small style={{cursor: 'pointer', color: 'blue'}} onClick={() => this.selectChatbot(chatbot)}>ABRIR</small>
+                              <small style={{ cursor: 'pointer', color: 'blue' }} onClick={() => this.selectChatbot(chatbot)}>ABRIR</small>
                             </li>
                           ))}
                         </ul>
@@ -70,17 +70,17 @@ class Root extends Component {
                     <ChatbotSettingsList
                       chatbotId={this.state.chatbot.id}
                       dataListComponent={({ chatbotSettings }) => {
-                      return (
-                        <ul>
-                          {chatbotSettings.map((config, i) => (
-                            <li key={`chatbot-settings-${i}`}>
-                              <p>{config.channel}</p>
-                              <ReactJson src={JSON.parse(config.settings)} />
-                            </li>
-                          ))}
-                        </ul>
-                      )
-                    }}
+                        return (
+                          <ul>
+                            {chatbotSettings.map((config, i) => (
+                              <li key={`chatbot-settings-${i}`}>
+                                <p>{config.channel}</p>
+                                <ReactJson src={JSON.parse(config.settings)} />
+                              </li>
+                            ))}
+                          </ul>
+                        )
+                      }}
 
                     />
                   </Cell>

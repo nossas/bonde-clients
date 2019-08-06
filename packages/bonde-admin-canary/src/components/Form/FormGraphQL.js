@@ -51,10 +51,8 @@ FormGraphQL.propTypes = {
 
 export default FormGraphQL
 
-
 export class FormGraphQLv2 extends React.Component {
-
-  render() {
+  render () {
     const {
       children,
       mutation,
@@ -75,7 +73,7 @@ export class FormGraphQLv2 extends React.Component {
             variables: { ...queryVariables }
           })
           const writeQuery = (writeData) => {
-            cache.writeQuery({ query, data: writeData })  
+            cache.writeQuery({ query, data: writeData })
           }
           cache(readQuery, writeQuery, data)
         },
@@ -85,7 +83,7 @@ export class FormGraphQLv2 extends React.Component {
         }]
       }
     }
-    
+
     return (
       <FormGraphQL
         {...updateProps}
