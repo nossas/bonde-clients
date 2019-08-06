@@ -2,6 +2,8 @@
 
 ```js
 import { Flexbox2 } from '../../layout';
+import { Image, Text } from '../../content';
+import { Tooltip } from '../';
 
 <Flexbox2 middle>
   <Tooltip nolock small Content={() => <Text fontSize={11} color='#FFF'><nobr>top-left</nobr></Text>} placement='top-left'>
@@ -42,8 +44,9 @@ import { Flexbox2 } from '../../layout';
 
 ```js
 import { Grid, Cell, Panel, Flexbox } from '../../layout';
-import { DataListCard } from '../';
+import { DataListCard, Tooltip } from '../';
 import { Button } from '../../form';
+import { Image, Text } from '../../content';
 
 <Grid>
   <Cell size={[4, 4]}>
