@@ -27,7 +27,7 @@ const TutorialDialog = ({ children, step, t, ...props }) => (
 
 TutorialDialog.propTypes = {
   children: PropTypes.node,
-  step: PropTypes.string,
+  step: PropTypes.number,
   t: PropTypes.func
 }
 
