@@ -26,8 +26,8 @@ const SelectInputNative = styled(() => <Input as='select' />)`
   box-shadow: none;
   background: transparent;
   background-image: none;
-  -webkit-border-radius: 0px;
-  -webkit-appearance: none;
+  border-radius: 0px;
+  appearance: none;
   position: relative;
   padding-right: 32px !important;
 
@@ -87,10 +87,6 @@ const SelectInput = styled(() => <Input as={() => class extends React.Component 
   cursor: pointer;
 
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 
   &:hover {

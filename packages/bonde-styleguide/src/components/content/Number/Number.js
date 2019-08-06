@@ -11,8 +11,6 @@ const TextNumber = styled(Text)`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
-
-  ${IconColorful} > & {}
 `
 
 const Number = ({ value, iconName }) => {
