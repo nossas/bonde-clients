@@ -55,7 +55,6 @@ const Switch = styled.label`
   p {
     margin-top: -9px;
     color: ${props => props.checked ? '#6ee8bf' : '#444444'};
-    ;
   }
 `
 
