@@ -12,8 +12,8 @@ import Title from '../../content/Title/Title'
 const textColor = '#4a4a4a'
 
 const placeHolderShimmer = keyframes`
-  0% { -webkit-transform: translateX(-180%) }
-  100% { -webkit-transform: translateX(70%) }
+  0% { transform: translateX(-180%) }
+  100% { transform: translateX(70%) }
 `
 
 const BackgroundMasker = styled.div`
