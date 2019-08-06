@@ -23,17 +23,17 @@ const { shape, oneOf, string, number } = PropTypes
 Spacing.propTypes = {
   /** The margin property. */
   margin: shape({
-    top: oneOf[string, number],
-    bottom: oneOf[string, number],
-    left: oneOf[string, number],
-    right: oneOf[string, number]
+    top: oneOf([string, number]),
+    bottom: oneOf([string, number]),
+    left: oneOf([string, number]),
+    right: oneOf([string, number])
   }),
   /** The padding property. */
   padding: shape({
-    top: oneOf[string, number],
-    bottom: oneOf[string, number],
-    left: oneOf[string, number],
-    right: oneOf[string, number]
+    top: oneOf([string, number]),
+    bottom: oneOf([string, number]),
+    left: oneOf([string, number]),
+    right: oneOf([string, number])
   })
 }
 
