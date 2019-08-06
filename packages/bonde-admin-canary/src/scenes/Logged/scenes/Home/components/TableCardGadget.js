@@ -71,7 +71,7 @@ TableCardGadget.propTypes = {
   pageIndex: PropTypes.number,
   pageTotal: PropTypes.number,
   onClickRow: PropTypes.func,
-  height: PropTypes.number
+  height: PropTypes.string
 }
 
 TableCardGadget.defaultProps = {

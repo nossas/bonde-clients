@@ -97,7 +97,7 @@ Queryset.propTypes = {
   filter: PropTypes.object,
   // Query should return totalCount when this prop is true
   observable: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.any
 }
 
 Queryset.defaultProps = {
