@@ -22,9 +22,6 @@ const CardBox = styled.div`
   ${props => props.hasFooter && `
     padding-bottom: 46px;
   `}
-  ${Text} > {
-    color: #4a4a4a;
-  }
 `
 
 const CardTitle = ({ children }) => (
