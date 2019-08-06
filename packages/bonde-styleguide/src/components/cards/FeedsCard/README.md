@@ -1,4 +1,6 @@
 ```js
+import { FeedsCard } from '../';
+
 <FeedsCard
   sectionTitle='Notificações'
   items={[
