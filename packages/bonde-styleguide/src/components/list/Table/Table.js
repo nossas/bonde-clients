@@ -19,14 +19,6 @@ const TableBody = styled.div`{
 
 TableBody.displayName = 'TableBody'
 
-const TableBodyCell = styled(() => <TableCell />)`
-  padding: 13px 15px 14px 15px;
-  vertical-align: middle;
-  text-align: inherit;
-`
-
-TableBodyCell.displayName = 'TableBodyCell'
-
 const ReactTable = ({
   data,
   columns,
@@ -88,7 +80,7 @@ ReactTable.propTypes = {
 ReactTable.defaultProps = {
   border: false,
   data: [],
-  ColumnComponent: TableBodyCell
+  ColumnComponent: TableCell
 }
 
 ReactTable.displayName = 'Table'
