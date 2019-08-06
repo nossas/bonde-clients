@@ -1,6 +1,6 @@
 export { default as ActionCard } from './ActionCard/ActionCard'
 export { default as AreaChartCard } from './AreaChartCard/AreaChartCard'
-//export { default as Card } from './Card/Card'
+export { default as Card } from './Card/Card'
 export { default as ClickableCard } from './ClickableCard/ClickableCard'
 export { default as DataListCard } from './DataListCard/DataListCard'
 export { default as FeedsCard } from './FeedsCard/FeedsCard'

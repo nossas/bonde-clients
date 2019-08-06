@@ -17,7 +17,7 @@ const Number = ({ value, iconName }) => {
   return (
     <TextNumber>
       <span>{value}</span>
-      <IconColorful name={iconName} />
+      {iconName && <IconColorful name={iconName} />}
     </TextNumber>
   )
 }

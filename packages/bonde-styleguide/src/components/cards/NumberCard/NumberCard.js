@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Card,
-  Flexbox,
-  IconColorful,
-  Number
-} from '../../..'
+import { Card } from '../../cards'
+import { Flexbox } from '../../layout'
+import { Number } from '../../content'
 
 const NumberCard = ({
   sectionTitle,
@@ -18,7 +15,7 @@ const NumberCard = ({
     <Flexbox row padding={{ y: 14, x: 19 }} alignItems={alignItems}>
       <Number
         value={value}
-        icon={iconName && <IconColorful name={iconName} />}
+        iconName={iconName}
       />
     </Flexbox>
   </Card>
