@@ -87,11 +87,11 @@ const Panel = ({
 
         <Spacing padding={{ x: 16, top: 14 }}>
           <Title.H4>{title}</Title.H4>
-          <Spacing margin={{ y: 8 }}>
+          {description && (<Spacing margin={{ y: 8 }}>
             <Text fontSize={16} lineHeight={1.31} color={textColor}>
               {description}
             </Text>
-          </Spacing>
+          </Spacing>)}
         </Spacing>
       </div>
 
@@ -112,7 +112,7 @@ Panel.propTypes = {
   minHeight: number,
   image: string,
   title: string.isRequired,
-  description: string.isRequired,
+  description: string,
   author: string.isRequired
 }
 
