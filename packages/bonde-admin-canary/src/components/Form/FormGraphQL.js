@@ -102,6 +102,7 @@ export class FormGraphQLv2 extends React.Component {
 }
 
 FormGraphQLv2.propTypes = {
+  children: PropTypes.node,
   mutation: PropTypes.func.isRequired,
   mutationVariables: PropTypes.object,
   query: PropTypes.func,
