@@ -2,6 +2,7 @@ The grid is defined in 12 columns. That wraps multiple `Cell` components.
 `[1, 2, 3, 4, 6, 12]`
 
 ```js
+import { Text } from '../../content';
 import { Grid, Cell } from '../../layout';
 
 <Grid>
@@ -26,6 +27,7 @@ import { Grid, Cell } from '../../layout';
 
 
 ```js
+import { Text } from '../../content';
 import { Grid, Cell } from '../../layout';
 
 //

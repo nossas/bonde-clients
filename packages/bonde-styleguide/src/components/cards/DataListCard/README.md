@@ -40,7 +40,7 @@ import { DataListCard } from '../';
 
 ```js
 import { DataListCard } from '../';
-import { Text, Image, Title } from '../../content';
+import { Text, Image } from '../../content';
 
 <DataListCard
   sectionTitle='Atividades recentes'
@@ -98,7 +98,9 @@ import { Text, Image, Title } from '../../content';
 ### DataListCard - with Footer
 
 ```js
-import { DataListCard, Pagination } from '../';
+import { DataListCard } from '../../cards';
+import { Pagination } from '../../navigation';
+import { Title } from '../../content';
 
 const now = new Date();
 

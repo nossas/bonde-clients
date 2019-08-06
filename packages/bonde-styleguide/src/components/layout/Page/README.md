@@ -1,4 +1,7 @@
 ```js
+import { Text } from '../../content';
+import { Page } from '../../layout';
+
 <Page>
   <Text>Welcome to bonde.org</Text>
 </Page>
@@ -9,7 +12,9 @@
 
 
 ```js
-import { Tab, TabItem } from '../';
+import { Text } from '../../content';
+import { Page } from '../../layout';
+import { Tab, TabItem } from '../../navigation';
 
 const PageTabMenu = () => (
   <Tab inverted>
@@ -31,7 +36,9 @@ const PageTabMenu = () => (
 
 
 ```js
-import { Tab, TabItem, Header, Page } from '../';
+import { Text } from '../../content';
+import { Header, Page } from '../../layout';
+import { Tab, TabItem } from '../../navigation';
 
 const ModuleTabMenu = () => (
   <Tab>

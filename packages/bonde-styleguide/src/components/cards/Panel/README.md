@@ -1,7 +1,7 @@
 ### Panel
 
 ```js
-import { Grid, Panel } from '../../layout';
+import { Panel } from '../../cards';
 
 <Panel
   sectionTitle='Treending mobs'
@@ -14,7 +14,8 @@ import { Grid, Panel } from '../../layout';
 
 ### Panel - `loading`
 ```js
-import { Grid, Cell, Panel } from '../../layout';
+import { Grid, Cell } from '../../layout';
+import { Panel } from '../../cards';
 
 <Grid>
   <Cell size={[4, 4, 4]}>

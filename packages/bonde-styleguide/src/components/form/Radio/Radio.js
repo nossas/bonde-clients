@@ -1,19 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import Checkbox from '../Checkbox/Checkbox'
 import Text from '../../content/Text/Text'
 
-//  <Text as='a' />)`
-
-const Radio = styled((Text) => <Checkbox as={
-  ({ children, className, ...inputProps }) => (
-    <label className={className}>
-      <input type='radio' {...inputProps} />
-      <Text>{children}</Text>
-      <div className='box' />
-    </label>
-  )
-}/>)`
+const Radio = styled(({ children, className, ...inputProps }) => (
+  <label className={className}>
+    <input type='radio' {...inputProps} />
+    <Text>{children}</Text>
+    <div className='box' />
+  </label>
+))`
   margin-right: 1.5rem;
 
   & .box {

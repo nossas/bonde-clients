@@ -43,10 +43,9 @@ import { Tooltip } from '../';
 ### Tooltip - advanced example
 
 ```js
-import { Grid, Cell, Panel, Flexbox } from '../../layout';
-import { DataListCard, Tooltip } from '../';
-import { Button } from '../../form';
-import { Image, Text, Title } from '../../content';
+import { Grid, Cell, Flexbox } from '../../layout';
+import { DataListCard, Panel, Tooltip } from '../../cards';
+import { Button, Image, Text, Title } from '../../content';
 
 <Grid>
   <Cell size={[4, 4]}>

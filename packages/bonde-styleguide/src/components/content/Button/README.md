@@ -1,7 +1,7 @@
 ### Button - Default
 
 ```js
-import { Button } from '../';
+import { Button } from '../../content';
 
 <Button onClick={() => alert('Button: onClick')}>
   Button
@@ -11,7 +11,7 @@ import { Button } from '../';
 ### Button - `dark`
 
 ```js { "props": { "className": "dark" } }
-import { Button } from '../';
+import { Button } from '../../content';
 
 <Button
   onClick={() => alert('Button: onClick')}
@@ -23,7 +23,7 @@ import { Button } from '../';
 
 ### Button - `light`
 ```js { "props": { "className": "transparent" } }
-import { Button } from '../';
+import { Button } from '../../content';
 
 <Button
   onClick={() => alert('Button: onClick')}
@@ -35,7 +35,7 @@ import { Button } from '../';
 
 ### Button - `flat`
 ```js
-import { Button } from '../';
+import { Button } from '../../content';
 
 <Button
   onClick={() => alert('Button: onClick')}
@@ -47,7 +47,7 @@ import { Button } from '../';
 
 ### Button - `disabled`
 ```js
-import { Button } from '../';
+import { Button } from '../../content';
 
 <Button disabled>Button</Button>
 ```
