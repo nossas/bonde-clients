@@ -8,7 +8,6 @@ const Icon = styled(({ className, name, color, size }) => {
 
   return <IconSVG className={className} color={color} size={size} />
 })`
-  ${svg} > & {}
   vertical-align: middle;
 `
 

@@ -8,7 +8,6 @@ const IconColorful = styled(({ name, color, size, inverted }) => {
 
   return <IconSVG color={color} size={size} inverted={inverted} />
 })`
-  ${svg} > & {}
   vertical-align: middle;
 `
 

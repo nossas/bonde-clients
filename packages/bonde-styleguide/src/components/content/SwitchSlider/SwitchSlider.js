@@ -23,7 +23,6 @@ const Switch = styled.label`
     right: 10px;
     bottom: 8px;
     background-color: #444444;
-    -webkit-transition: .4s;
     transition: .4s;
     ${props => props.round && `border-radius: 34px;`};
 
@@ -35,8 +34,6 @@ const Switch = styled.label`
       left: 0;
       bottom: 0;
       background-color: white;
-      -webkit-transition: .4s;
-      -webkit-transition: .4s;
       transition: .4s;
       box-shadow: 0 0 3px 0px;
       ${props => props.round && `border-radius: 50%;`};
@@ -53,10 +50,6 @@ const Switch = styled.label`
 
   input:checked + .slider:before {
     left: -12px;
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
   p {
