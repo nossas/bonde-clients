@@ -1,4 +1,6 @@
 ```js
+import { Loading } from '../../await';
+
 <Loading />
 ```
 
@@ -7,6 +9,8 @@
 
 
 ```js
+import { Loading } from '../../await';
+
 <div>
   <Loading color='#00C08A' />
   <Loading color='#FFD500' />
@@ -20,6 +24,8 @@
 
 
 ```js
+import { Loading } from '../../await';
+
 <div>
   <Loading size={120} />
   <Loading size={80} />
@@ -33,6 +39,8 @@
 
 
 ```js
+import { Loading } from '../../await';
+
 <Loading
   size={80}
   sparklesColorInit='black'

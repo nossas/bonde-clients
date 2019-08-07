@@ -49,4 +49,5 @@ Loading.defaultProps = {
 
 Loading.displayName = 'Loading'
 
+/** @component */
 export default Loading
