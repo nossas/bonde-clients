@@ -10,9 +10,6 @@
     "prop-types": "^15.7.2",
     "recharts": "^1.6.2",
     "styled-components": "^4.3.2",
-    "stylelint": "^10.1.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "stylelint-processor-styled-components": "^1.8.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -21,8 +18,7 @@
     "build": "styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
-    "dev": "styleguidist server",
-    "lint": "stylelint src/**/*.js"
+    "dev": "styleguidist server"
   },
   "eslintConfig": {
     "extends": "react-app"
