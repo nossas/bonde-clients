@@ -103,5 +103,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "version": "0.15.1-alpha.1"
+  "version": "0.15.1-alpha.2"
 }
