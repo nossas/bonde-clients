@@ -17,23 +17,23 @@ const Spacing = styled.div`
 `
 
 // decouple PropTypes only facility design props
-const { shape, oneOf, string, number } = PropTypes
+const { shape, oneOfType, string, number } = PropTypes
 
 
 Spacing.propTypes = {
   /** The margin property. */
   margin: shape({
-    top: oneOf([string, number]),
-    bottom: oneOf([string, number]),
-    left: oneOf([string, number]),
-    right: oneOf([string, number])
+    top: oneOfType([string, number]),
+    bottom: oneOfType([string, number]),
+    left: oneOfType([string, number]),
+    right: oneOfType([string, number])
   }),
   /** The padding property. */
   padding: shape({
-    top: oneOf([string, number]),
-    bottom: oneOf([string, number]),
-    left: oneOf([string, number]),
-    right: oneOf([string, number])
+    top: oneOfType([string, number]),
+    bottom: oneOfType([string, number]),
+    left: oneOfType([string, number]),
+    right: oneOfType([string, number])
   })
 }
 
