@@ -6,7 +6,6 @@ import { FormGraphQLv2, Field, SubmitButton } from 'components/Form'
 // module imports
 import { chatbotSettingsQuery, insertChatbotSettingsMutation } from '../graphql'
 
-
 const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
   // TODO: dispatch notification
   return (
@@ -18,9 +17,9 @@ const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
       queryVariables={{ chatbotId }}
       cache={(readQuery, writeQuery, data) => {
         const { insert_chatbot_settings: { returning } } = data
-        const { chatbot_settings } = readQuery()
-        chatbot_settings.push(returning[0])
-        writeQuery({ chatbot_settings })
+        const { chatbot_settings: chatbotSettings } = readQuery()
+        chatbotSettings.push(returning[0])
+        writeQuery({ chatbot_settings: chatbotSettings })
       }}
       onSuccess={updateScene}
     >
