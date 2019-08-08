@@ -45,6 +45,7 @@ const FormGraphQL = ({
 }
 
 FormGraphQL.propTypes = {
+  name: PropTypes.string.isRequired,
   children: PropTypes.node,
   mutation: PropTypes.object,
   update: PropTypes.func,
@@ -106,6 +107,7 @@ export class FormGraphQLv2 extends React.Component {
 }
 
 FormGraphQLv2.propTypes = {
+  name: PropTypes.string.isRequired,
   children: PropTypes.node,
   mutation: PropTypes.func.isRequired,
   mutationVariables: PropTypes.object,

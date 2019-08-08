@@ -2,8 +2,6 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import WebFont from 'webfontloader'
 
-import './global.css'
-
 WebFont.load({
   google: {
     families: ['Nunito Sans:400,600,800', 'sans-serif', 'Source Sans Pro:400,700']

@@ -12,7 +12,7 @@ const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
     <FormGraphQLv2
       name='ChatbotSettingsForm'
       mutation={insertChatbotSettingsMutation}
-      mutationVariables={{ chatbotId }}   
+      mutationVariables={{ chatbotId }}
       query={chatbotSettingsQuery}
       queryVariables={{ chatbotId }}
       cache={(readQuery, writeQuery, data) => {

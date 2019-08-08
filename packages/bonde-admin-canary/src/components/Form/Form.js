@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 import { InputHint, Flexbox2 as Flexbox } from 'bonde-styleguide'
-import propTypes from 'prop-types'
 
 const Form = ({ children, error, handleSubmit }) => {
   return (
@@ -15,14 +15,27 @@ const Form = ({ children, error, handleSubmit }) => {
 }
 
 Form.propTypes = {
-  children: propTypes.node,
-  error: propTypes.any,
-  handleSubmit: propTypes.func
+  children: PropTypes.node,
+  error: PropTypes.any,
+  handleSubmit: PropTypes.func
 }
 
-export default ({ name, children, ...formProps }) => {
-  const ReduxFormComponet = reduxForm({ form: name })(Form)
+const FormRedux = ({ name, children, ...formProps }) => {
+  const ReduxFormComponent = reduxForm({ form: name })(Form)
   const elements = React.Children.toArray(children)
-  
-  return <ReduxFormComponet {...formProps} children={elements.map(child => React.cloneElement(child, { formName: name }))} />
+
+  return (
+    <ReduxFormComponent {...formProps}>
+      {elements.map(child => React.cloneElement(child, { formName: name }))}
+    </ReduxFormComponent>
+  )
 }
+
+FormRedux.propTypes = {
+  /* name form used to controller redux */
+  name: PropTypes.string.isRequired,
+  /* all children received default props { formName: props.name } */
+  children: PropTypes.any
+}
+
+export default FormRedux

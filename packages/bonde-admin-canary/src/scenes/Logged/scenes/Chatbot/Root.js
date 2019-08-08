@@ -95,7 +95,7 @@ class Root extends Component {
                       <ChatbotCampaignsForm chatbotId={this.state.chatbot.id} updateScene={this.handleUpdateScene} />
                     </Cell>
                     <Cell size={[6, 6, 12, 12, 12, 12]}>
-                      <ChatbotCampaignsForm
+                      <ChatbotCampaignsList
                         chatbotId={this.state.chatbot.id}
                         dataListComponent={({ chatbotCampaigns }) => {
                           return (

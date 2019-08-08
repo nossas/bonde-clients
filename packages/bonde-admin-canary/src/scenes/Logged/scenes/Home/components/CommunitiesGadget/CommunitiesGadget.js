@@ -61,7 +61,7 @@ const CommunitiesGadget = ({ t, loading, communities }) => (
 CommunitiesGadget.propTypes = {
   t: PropTypes.func,
   communities: PropTypes.any,
-  loading: PropTypes.func
+  loading: PropTypes.bool
 }
 
 const CommunitiesGadgetQueryset = ({ t }) => (
