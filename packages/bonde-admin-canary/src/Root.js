@@ -5,7 +5,7 @@ import { ProviderGraphQL } from './services/graphql'
 import { ProviderLastLocation } from './services/router'
 import { SessionProvider, PrivateRoute, PublicRoute, Route } from './services/auth'
 // Routes
-import { Root as LoggedRoot } from './scenes/Logged'
+import Dashboard from './scenes/Dashboard'
 import { Root as AuthRoot } from './scenes/Auth'
 
 import { NotFound } from './components'
@@ -26,7 +26,7 @@ const Root = () => (
               <PrivateRoute
                 path='/admin'
                 redirectTo='/auth/login'
-                component={LoggedRoot}
+                component={Dashboard}
               />
 
               <Redirect exact from='/' to='/admin' />
