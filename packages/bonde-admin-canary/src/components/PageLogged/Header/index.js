@@ -20,10 +20,23 @@ const Bonde = () => (
   </Spacing>
 )
 
+const RenderElement = ({ component }) => {
+  switch (typeof component) {
+    case 'string':
+      return <Title>{component}</Title>
+    case 'function':
+      return component()
+    case 'object':
+      return component
+    default:
+      return <div className='render-element-undefined' />
+  }
+}
+
 const Header = ({
-  renderTitle,
-  renderActionButtons,
-  renderTabs
+  title,
+  actions,
+  tabs
 }) => (
   <HeaderStyleguide>
     <Navbar renderBrand={Bonde}>
@@ -32,34 +45,34 @@ const Header = ({
       </Flexbox>
     </Navbar>
 
-    {renderActionButtons && (
+    {actions && (
       <Spacing margin={{ top: 16 }}>
         <Navbar>
           <Flexbox horizontal end>
-            {renderActionButtons()}
+            <RenderElement component={actions} />
           </Flexbox>
         </Navbar>
       </Spacing>
     )}
 
-    {renderTabs && (
+    {tabs && (
       <Spacing margin={{ bottom: -22 }}>
         <Tabs>
-          {renderTabs()}
+          <RenderElement component={tabs} />
         </Tabs>
       </Spacing>
     )}
 
-    {renderTitle ? renderTitle() : <div />}
+    {title ? <RenderElement component={title} /> : <div />}
   </HeaderStyleguide>
 )
 
-const { func } = PropTypes
+const { oneOfType, func, string, object } = PropTypes
 
 Header.propTypes = {
-  renderTitle: func,
-  renderActionButtons: func,
-  renderTabs: func
+  title: oneOfType([func, string, object]),
+  actions: oneOfType([func, string, object]),
+  tabs: oneOfType([func, string, object])
 }
 
 Header.ActionButton = ActionButton
