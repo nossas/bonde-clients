@@ -84,6 +84,10 @@ const Button = styled.button`
     &:hover {
       background-color: transparent;
       color: #424242;
+
+      path {
+        fill: #424242;
+      }
     }
     &:active {
       background-color: transparent;
