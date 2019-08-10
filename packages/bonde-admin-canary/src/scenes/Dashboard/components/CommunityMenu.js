@@ -20,12 +20,12 @@ const menus = ({ community }) => [
     icon: 'window',
     component: Button,
     onClick: () => {
-     authSession
-      .setAsyncItem('community', toSnakeCase(community))
-      .then(() => {
-        const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
-        window.open(baseUrl, '_blank')
-      })
+      authSession
+        .setAsyncItem('community', toSnakeCase(community))
+        .then(() => {
+          const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
+          window.open(baseUrl, '_blank')
+        })
     }
   },
   {
@@ -35,16 +35,15 @@ const menus = ({ community }) => [
   }
 ]
 
-
 const CommunityMenu = ({ community, dark, pathname }) => {
   return (
     <Flexbox horizontal spacing='between'>
-      {menus({ community }).map(({ component: Component, icon, ...rest }) => {
+      {menus({ community }).map(({ component: Component, icon, ...rest }, i) => {
         const ownProps = {
           ...rest, dark, flat: true, active: pathname && pathname === rest.to
         }
         return (
-          <Component {...ownProps}>
+          <Component key={`community-menu-${i}`} {...ownProps}>
             <Icon size={20} name={icon} />
           </Component>
         )
@@ -55,7 +54,8 @@ const CommunityMenu = ({ community, dark, pathname }) => {
 
 CommunityMenu.propTypes = {
   community: PropTypes.object.isRequired,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  dark: PropTypes.bool
 }
 
 export default CommunityMenu

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
@@ -47,32 +48,31 @@ class AuthProvider extends React.Component {
 
     return (
       <Query query={CurrentUserQuery}>
-      {({ data, loading, error }) => {
-        if (loading) return <Loading />
+        {({ data, loading, error }) => {
+          if (loading) return <Loading />
 
-        const hasError = (typeof error === 'object' && this.authErrors.indexOf(error.graphQLErrors[0].message) !== -1)
-        if (hasError || !data || !data.currentUser) {
-          this.handleLogout()
-          return <Redirect to={{ pathname: '/auth/login' }} />
-        }
+          const hasError = (typeof error === 'object' && this.authErrors.indexOf(error.graphQLErrors[0].message) !== -1)
+          if (hasError || !data || !data.currentUser) {
+            this.handleLogout()
+            return <Redirect to={{ pathname: '/auth/login' }} />
+          }
 
-        return (
-          <AuthContext.Provider
-            value={{
-              user: data.currentUser ? getUserWithTags(data.currentUser) : undefined,
-              logout: () => {
-                this.handleLogout()
-                  .then(() => {
-                    console.log('forceUpdate')
-                    this.forceUpdate()
-                  })
-              }
-            }}
-          >
-            {children}
-          </AuthContext.Provider>
-        )
-      }}
+          return (
+            <AuthContext.Provider
+              value={{
+                user: data.currentUser ? getUserWithTags(data.currentUser) : undefined,
+                logout: () => {
+                  this.handleLogout()
+                    .then(() => {
+                      this.forceUpdate()
+                    })
+                }
+              }}
+            >
+              {children}
+            </AuthContext.Provider>
+          )
+        }}
       </Query>
     )
   }

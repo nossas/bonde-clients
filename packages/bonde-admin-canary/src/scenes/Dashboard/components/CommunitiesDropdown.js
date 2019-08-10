@@ -39,10 +39,17 @@ CommunitiesDropdown.defaultProps = {
 
 const { arrayOf, shape, number, string, func } = PropTypes
 
+const CommunityType = shape({
+  id: number,
+  name: string
+})
+
+CommunityItem.propTypes = {
+  community: CommunityType
+}
+
 CommunitiesDropdown.propTypes = {
-  communities: arrayOf(
-    shape({ id: number, name: string })
-  ),
+  communities: arrayOf(CommunityType),
   communityId: number,
   onChange: func.isRequired
 }

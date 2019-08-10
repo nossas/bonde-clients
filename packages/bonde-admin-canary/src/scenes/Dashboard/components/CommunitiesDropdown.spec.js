@@ -1,10 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Dropdown, DropdownItem } from 'bonde-styleguide'
-import { Link } from 'react-router-dom'
-import urljoin from 'url-join'
-import CommunitiesDropdown from './CommunitiesDropdown'
 import { expect } from 'chai'
+import { Dropdown, DropdownItem } from 'bonde-styleguide'
+import CommunitiesDropdown from './CommunitiesDropdown'
 
 describe('components > PageLogged > Header > CommunitiesDropdown > CommunitiesDropdown', () => {
   let node

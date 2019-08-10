@@ -5,7 +5,6 @@ import { Text } from 'bonde-styleguide'
 import { UserCommunities, CommunityMenu } from 'scenes/Dashboard/components'
 import { ImageColumn, TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
 
-
 const RenderText = ({ row }) => (
   <Fragment>
     <Text fontSize={16} fontWeight={900} lineHeight={1.25}>
@@ -37,7 +36,8 @@ const columns = [
   },
   {
     field: 'id',
-    render: ({ row }) => (<CommunityMenu community={row} />),
+    // eslint-disable-next-line react/display-name
+    render: ({ row }) => (<CommunityMenu community={row} />), // eslint-disable-line react/prop-types
     props: { width: '150px' }
   }
 ]
@@ -46,16 +46,16 @@ const CommunitiesGadget = () => (
   <UserCommunities
     component={({ loading, communities }) => (
       <I18n ns='home'>
-      {t => (
-        <TableCardGadget
-          loading={loading}
-          data={communities}
-          columns={columns}
-          title={t('gadgets.communities.title')}
-          emptyIcon='community'
-          emptyText={t('gadgets.communities.emptyText')}
-        />
-      )}
+        {t => (
+          <TableCardGadget
+            loading={loading}
+            data={communities}
+            columns={columns}
+            title={t('gadgets.communities.title')}
+            emptyIcon='community'
+            emptyText={t('gadgets.communities.emptyText')}
+          />
+        )}
       </I18n>
     )}
   />

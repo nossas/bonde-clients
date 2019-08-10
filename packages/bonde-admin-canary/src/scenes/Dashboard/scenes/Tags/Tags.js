@@ -5,7 +5,7 @@ import CreateUserTagsForm from './CreateUserTagsForm'
 import PropTypes from 'prop-types'
 
 class Tags extends React.Component {
-  constructor  (props) {
+  constructor (props) {
     super(props)
     this.state = { redirect: props.user.tags && props.user.tags.length > 0 }
   }

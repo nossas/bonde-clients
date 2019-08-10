@@ -7,16 +7,8 @@ import { CommunityPageLayout } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
 
-const ReportPage = ({ community }) => (
-  <h2>{`Dados | ${community.name}`}</h2>
-)
-
-const SettingsPage = ({ community }) => (
-  <h2>{`Configurações | ${community.name}`}</h2>
-)
-
-const ChatbotPage = ({ community }) => (
-  <h2>{`Chatbot | ${community.name}`}</h2>
+const DefaultPage = ({ community, title }) => (
+  <h2>{`${title} | ${community.name}`}</h2>
 )
 
 const Dashboard = ({ match }) => {
@@ -36,30 +28,40 @@ const Dashboard = ({ match }) => {
       <CommunityPageLayout
         exact
         path={`${match.path}/:communityId`}
-        component={ReportPage}
+        component={DefaultPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Dados' }}
+        componentProps={{ title: 'Dados' }}
       />
       <CommunityPageLayout
         exact
         path={`${match.path}/:communityId/settings`}
-        component={SettingsPage}
+        component={DefaultPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Configurações' }}
+        componentProps={{ title: 'Configurações' }}
       />
       <CommunityPageLayout
         exact
         path={`${match.path}/:communityId/chatbot`}
-        component={ChatbotPage}
+        component={DefaultPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Chatbot' }}
+        componentProps={{ title: 'Chatbot' }}
       />
     </AuthProvider>
   )
 }
 
+const { any, object, string } = PropTypes
+
+DefaultPage.propTypes = {
+  community: object,
+  title: string
+}
+
 Dashboard.propTypes = {
-  match: PropTypes.any
+  match: any
 }
 
 export default Dashboard

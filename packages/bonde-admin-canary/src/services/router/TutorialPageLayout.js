@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withLastLocation, PageLayout } from 'services/router'
 import { Tutorial } from 'components'
 
@@ -9,6 +10,12 @@ const TutorialPageLayout = ({ lastLocation, ...rest }) => {
       <PageLayout {...rest} />
     </Tutorial>
   )
+}
+
+TutorialPageLayout.propTypes = {
+  lastLocation: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 }
 
 export default withLastLocation(TutorialPageLayout)

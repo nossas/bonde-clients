@@ -10,8 +10,8 @@ import CommunityMenu from './CommunityMenu'
   * CommmunityPageLayout renders a module application, here
   * on UI receive a new dropdown in Header and create a context
   * of community that will be like componentProps to component
-  * render. 
-  * 
+  * render.
+  *
   */
 const CommunityPageLayout = withRouter(
   ({ location, history, pageProps, loading: Loading, ...rest }) => (
@@ -27,10 +27,11 @@ const CommunityPageLayout = withRouter(
         }
 
         const community = communities.filter(c => c.id === communityId)[0]
-        
+
         // manipular renderização do Header de PageLayout
         const newPageProps = {
           ...pageProps,
+          // eslint-disable-next-line react/display-name
           dropdown: () => (
             <Flexbox horizontal>
               <CommunitiesDropdown

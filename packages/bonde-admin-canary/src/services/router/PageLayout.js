@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Route } from 'react-router'
 import { Page } from 'components/PageLogged'
 
-
 const PageLayout = ({ component: Component, pageProps, componentProps, ...rest }) => {
   return (
     <Route {...rest} render={(matchProps) => {
@@ -17,6 +16,7 @@ const PageLayout = ({ component: Component, pageProps, componentProps, ...rest }
 }
 
 PageLayout.propTypes = {
+  component: PropTypes.any,
   // used to extend props of Page
   pageProps: PropTypes.object,
   // used to extend props of Component

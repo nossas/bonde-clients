@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
 import Dialog from './Dialog'
 
@@ -16,5 +17,9 @@ const HeaderDialog = ({ children }) => (
     )}
   </I18n>
 )
+
+HeaderDialog.propTypes = {
+  children: PropTypes.any
+}
 
 export default HeaderDialog

@@ -13,12 +13,6 @@ import Tabs, { Tab } from './Tabs'
 import Title from './Title'
 import UserDropdown from './UserDropdown'
 
-const Bonde = () => (
-  <Spacing margin={{ right: 15, bottom: 10 }}>
-    <IconColorful name='bonde' size={85} inverted />
-  </Spacing>
-)
-
 const RenderElement = ({ component }) => {
   switch (typeof component) {
     case 'string':
@@ -32,6 +26,14 @@ const RenderElement = ({ component }) => {
   }
 }
 
+const RightNavbar = ({ dropdown }) => (
+  <Spacing margin={{ right: 15, bottom: 10 }}>
+    {dropdown
+      ? <RenderElement component={dropdown} />
+      : <IconColorful name='bonde' size={85} inverted />}
+  </Spacing>
+)
+
 const Header = ({
   title,
   actions,
@@ -40,13 +42,7 @@ const Header = ({
 }) => {
   return (
     <HeaderStyleguide>
-      <Navbar
-        renderBrand={dropdown ? () => (
-          <Spacing margin={{ bottom: 10 }}>
-            <RenderElement component={dropdown} />
-          </Spacing>
-         ) : Bonde}
-      >
+      <Navbar renderBrand={() => <RightNavbar dropdown={dropdown} />}>
         <Flexbox horizontal end>
           <UserDropdown />
         </Flexbox>
@@ -80,6 +76,14 @@ const Header = ({
 }
 
 const { oneOfType, func, string, object } = PropTypes
+
+RenderElement.propTypes = {
+  component: oneOfType([func, string, object])
+}
+
+RightNavbar.propTypes = {
+  dropdown: oneOfType([func, string, object])
+}
 
 Header.propTypes = {
   title: oneOfType([func, string, object]),

@@ -17,35 +17,35 @@ import {
 
 const HomePage = () => (
   <I18n ns='home'>
-  {t => (
-    <Auth>
-    {({ user }) => {
-      if (user.tags.length < 1) return <Redirect to='/admin/tags' />
-      // Render HomePage only if user has tags
-      return (
-        <Flexbox vertical>
-          <ToastContainer />
-          <Grid>
-            <Cell size={[12, 12, 12]}>
+    {t => (
+      <Auth>
+        {({ user }) => {
+          if (user.tags.length < 1) return <Redirect to='/admin/tags' />
+          // Render HomePage only if user has tags
+          return (
+            <Flexbox vertical>
+              <ToastContainer />
               <Grid>
-                <Cell size={[6, 6, 12, 12, 12, 12]}>
-                  <Dialog t={t} step={2}>
-                    <CommunitiesGadget />
-                  </Dialog>
-                </Cell>
-                <Cell size={[6, 6, 12, 12, 12, 12]}>
-                  <Dialog t={t} step={3} placement='bottom-left'>
-                    <TrendingMobilizationsGadget />
-                  </Dialog>
+                <Cell size={[12, 12, 12]}>
+                  <Grid>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <Dialog t={t} step={2}>
+                        <CommunitiesGadget />
+                      </Dialog>
+                    </Cell>
+                    <Cell size={[6, 6, 12, 12, 12, 12]}>
+                      <Dialog t={t} step={3} placement='bottom-left'>
+                        <TrendingMobilizationsGadget />
+                      </Dialog>
+                    </Cell>
+                  </Grid>
                 </Cell>
               </Grid>
-            </Cell>
-          </Grid>
-        </Flexbox>
-      )
-    }}
-    </Auth>
-  )}
+            </Flexbox>
+          )
+        }}
+      </Auth>
+    )}
   </I18n>
 )
 
