@@ -79,7 +79,9 @@ const Button = styled.button`
     border-color: transparent;
     color: #000000;
     box-shadow: none;
-    min-width: 88px;
+    text-align: center;
+    min-width: auto;
+    padding: 0 10px;
 
     &:hover {
       background-color: transparent;
