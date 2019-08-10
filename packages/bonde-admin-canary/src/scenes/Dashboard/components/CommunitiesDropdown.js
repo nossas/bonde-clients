@@ -5,17 +5,16 @@ import {
   DropdownItem,
   Flexbox2 as Flexbox
 } from 'bonde-styleguide'
+import ImageColumn from './ImageColumn'
 
 const CommunityItem = ({ community }) => (
   <Flexbox horizontal middle>
-    <img
-      style={{ marginRight: '15px' }}
-      src={community.image || 'https://via.placeholder.com/24/'}
-      alt={community.name}
-      width={24}
-      heigth={24}
+    <ImageColumn
+      value={community.image}
+      padding=''
+      size={30}
     />
-    <span>{community.name}</span>
+    <span style={{ marginLeft: '10px' }}>{community.name}</span>
   </Flexbox>
 )
 

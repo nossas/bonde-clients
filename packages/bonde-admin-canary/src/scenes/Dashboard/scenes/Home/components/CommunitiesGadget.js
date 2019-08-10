@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
 import { Text } from 'bonde-styleguide'
-import { UserCommunities, CommunityMenu } from 'scenes/Dashboard/components'
-import { ImageColumn, TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
+import { UserCommunities, CommunityMenu, ImageColumn } from 'scenes/Dashboard/components'
+import { TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
 
 const RenderText = ({ row }) => (
   <Fragment>
@@ -27,7 +27,8 @@ RenderText.propTypes = {
 const columns = [
   {
     field: 'image',
-    render: ImageColumn,
+    // eslint-disable-next-line react/display-name
+    render: ({ row }) => <ImageColumn value={row.image} size={40} />, // eslint-disable-line react/prop-types
     props: { width: '40px' }
   },
   {
