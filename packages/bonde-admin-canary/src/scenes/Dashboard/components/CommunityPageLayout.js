@@ -14,7 +14,7 @@ import CommunityMenu from './CommunityMenu'
   *
   */
 const CommunityPageLayout = withRouter(
-  ({ location, history, pageProps, loading: Loading, ...rest }) => (
+  ({ location, history, pageProps, componentProps, loading: Loading, ...rest }) => (
     <UserCommunities component={
       ({ communities, loading }) => {
         if (loading && Loading) return <Loading />
@@ -62,7 +62,7 @@ const CommunityPageLayout = withRouter(
         return (
           <PageLayout
             pageProps={newPageProps}
-            componentProps={{ community }}
+            componentProps={{ ...componentProps, community }}
             {...rest}
           />
         )

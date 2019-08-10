@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types'
 
 const Loading = ({ message }) => (
-  <Flexbox vertical>
+  <Flexbox vertical middle>
     <Text align='center' margin={{ top: '20vh' }}>
       <LoadingStyled
         size={109}
