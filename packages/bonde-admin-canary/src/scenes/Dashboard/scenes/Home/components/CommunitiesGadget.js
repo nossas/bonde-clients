@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
-import { Text, Button, Icon, Flexbox2 as Flexbox } from 'bonde-styleguide'
-import { ButtonLink } from 'components/Link'
-import { authSession } from 'services/auth'
-import { UserCommunities } from 'scenes/Dashboard/components'
-import { toSnakeCase } from 'scenes/Dashboard/utils'
+import { Text } from 'bonde-styleguide'
+import { UserCommunities, CommunityMenu } from 'scenes/Dashboard/components'
 import { ImageColumn, TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
+
 
 const RenderText = ({ row }) => (
   <Fragment>
@@ -27,33 +25,6 @@ RenderText.propTypes = {
   })
 }
 
-const CommunityLinkModule = ({ row }) => (
-   <Flexbox horizontal spacing='between'>
-     <ButtonLink flat to={`/admin/${row.id}`}>
-       <Icon size={20} name='chart' />
-     </ButtonLink>
-     <ButtonLink flat to={`/admin/${row.id}/chatbot`}>
-       <Icon size={20} name='bot' />
-     </ButtonLink>
-     <Button
-       flat
-       onClick={() => {
-         authSession
-          .setAsyncItem('community', toSnakeCase(row))
-          .then(() => {
-            const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
-            window.open(baseUrl, '_self')
-          })
-       }}
-     >
-       <Icon size={20} name='window' />
-     </Button>
-     <ButtonLink flat to={`/admin/${row.id}/settings`}>
-       <Icon size={20} name='settings' />
-     </ButtonLink>
-   </Flexbox>
-)
-
 const columns = [
   {
     field: 'image',
@@ -66,7 +37,7 @@ const columns = [
   },
   {
     field: 'id',
-    render: CommunityLinkModule,
+    render: ({ row }) => (<CommunityMenu community={row} />),
     props: { width: '150px' }
   }
 ]

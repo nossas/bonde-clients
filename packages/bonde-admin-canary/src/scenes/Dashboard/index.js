@@ -15,6 +15,10 @@ const SettingsPage = ({ community }) => (
   <h2>{`Configurações | ${community.name}`}</h2>
 )
 
+const ChatbotPage = ({ community }) => (
+  <h2>{`Chatbot | ${community.name}`}</h2>
+)
+
 const Dashboard = ({ match }) => {
   return (
     <AuthProvider loading={LoadingFullScreen}>
@@ -42,6 +46,13 @@ const Dashboard = ({ match }) => {
         component={SettingsPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Configurações' }}
+      />
+      <CommunityPageLayout
+        exact
+        path={`${match.path}/:communityId/chatbot`}
+        component={ChatbotPage}
+        loading={LoadingFullScreen}
+        pageProps={{ title: 'Chatbot' }}
       />
     </AuthProvider>
   )
