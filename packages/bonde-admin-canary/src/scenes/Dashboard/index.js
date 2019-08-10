@@ -3,8 +3,13 @@ import PropTypes from 'prop-types'
 import { AuthProvider } from 'services/auth'
 import { PageLayout, TutorialPageLayout } from 'services/router'
 import { LoadingFullScreen } from 'components/Loadable'
+import { CommunityPageLayout } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
+
+const CommunityPage = () => (
+  <h2>Página de comunidade</h2>
+)
 
 const Dashboard = ({ match }) => {
   return (
@@ -19,6 +24,10 @@ const Dashboard = ({ match }) => {
         }}
       />
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
+      <CommunityPageLayout
+        path={`${match.path}/:communityId`}
+        component={CommunityPage}
+      />
     </AuthProvider>
   )
 }

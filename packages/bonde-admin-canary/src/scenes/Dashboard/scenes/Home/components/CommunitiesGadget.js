@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from 'react-i18next'
 import { Text, Button, Icon, Flexbox2 as Flexbox } from 'bonde-styleguide'
-import { Queryset } from 'components'
 import { ButtonLink } from 'components/Link'
-import ImageColumn from '../ImageColumn'
-import TableCardGadget from '../TableCardGadget'
-import allUserCommunities from './query.graphql'
 import { authSession } from 'services/auth'
-import { toSnakeCase } from '../../utils'
+import { UserCommunities } from 'scenes/Dashboard/components'
+import { toSnakeCase } from 'scenes/Dashboard/utils'
+import { ImageColumn, TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
 
 const RenderText = ({ row }) => (
   <Fragment>
@@ -65,41 +64,23 @@ const columns = [
   }
 ]
 
-const CommunitiesGadget = ({ t, loading, communities }) => (
-  <TableCardGadget
-    loading={loading}
-    data={communities}
-    columns={columns}
-    title={t('gadgets.communities.title')}
-    emptyIcon='community'
-    emptyText={t('gadgets.communities.emptyText')}
+const CommunitiesGadget = () => (
+  <UserCommunities
+    component={({ loading, communities }) => (
+      <I18n ns='home'>
+      {t => (
+        <TableCardGadget
+          loading={loading}
+          data={communities}
+          columns={columns}
+          title={t('gadgets.communities.title')}
+          emptyIcon='community'
+          emptyText={t('gadgets.communities.emptyText')}
+        />
+      )}
+      </I18n>
+    )}
   />
 )
 
-CommunitiesGadget.propTypes = {
-  t: PropTypes.func,
-  communities: PropTypes.any,
-  loading: PropTypes.bool
-}
-
-const CommunitiesGadgetQueryset = ({ t }) => (
-  <Queryset
-    query={allUserCommunities}
-    filter={{ orderBy: 'UPDATED_AT_DESC' }}
-  >
-    {({ loading, data, filter }) => (
-      <CommunitiesGadget
-        t={t}
-        loading={loading}
-        filter={filter}
-        communities={data && data.allUserCommunities ? data.allUserCommunities.nodes : []}
-      />
-    )}
-  </Queryset>
-)
-
-CommunitiesGadgetQueryset.propTypes = {
-  t: PropTypes.func
-}
-
-export default CommunitiesGadgetQueryset
+export default CommunitiesGadget

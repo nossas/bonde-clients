@@ -9,7 +9,6 @@ import {
 } from 'bonde-styleguide'
 // Components
 import ActionButton from './ActionButton'
-import CommunitiesDropdown from './CommunitiesDropdown'
 import Tabs, { Tab } from './Tabs'
 import Title from './Title'
 import UserDropdown from './UserDropdown'
@@ -36,50 +35,52 @@ const RenderElement = ({ component }) => {
 const Header = ({
   title,
   actions,
-  tabs
-}) => (
-  <HeaderStyleguide>
-    <Navbar renderBrand={Bonde}>
-      <Flexbox horizontal end>
-        <UserDropdown />
-      </Flexbox>
-    </Navbar>
+  tabs,
+  dropdown
+}) => {
+  return (
+    <HeaderStyleguide>
+      <Navbar renderBrand={dropdown ? () => <RenderElement component={dropdown} /> : Bonde}>
+        <Flexbox horizontal end>
+          <UserDropdown />
+        </Flexbox>
+      </Navbar>
 
-    {actions && (
-      <Spacing margin={{ top: 16 }}>
-        <Navbar>
-          <Flexbox horizontal end>
-            <RenderElement component={actions} />
-          </Flexbox>
-        </Navbar>
-      </Spacing>
-    )}
+      {actions && (
+        <Spacing margin={{ top: 16 }}>
+          <Navbar>
+            <Flexbox horizontal end>
+              <RenderElement component={actions} />
+            </Flexbox>
+          </Navbar>
+        </Spacing>
+      )}
 
-    {tabs && (
-      <Spacing margin={{ bottom: -22 }}>
-        <Tabs>
-          <RenderElement component={tabs} />
-        </Tabs>
-      </Spacing>
-    )}
+      {tabs && (
+        <Spacing margin={{ bottom: -22 }}>
+          <Tabs>
+            <RenderElement component={tabs} />
+          </Tabs>
+        </Spacing>
+      )}
 
-    {title ? <RenderElement component={title} /> : <div />}
-  </HeaderStyleguide>
-)
+      {title ? <RenderElement component={title} /> : <div />}
+    </HeaderStyleguide>
+  )
+}
 
 const { oneOfType, func, string, object } = PropTypes
 
 Header.propTypes = {
   title: oneOfType([func, string, object]),
   actions: oneOfType([func, string, object]),
-  tabs: oneOfType([func, string, object])
+  tabs: oneOfType([func, string, object]),
+  dropdown: oneOfType([func, string, object])
 }
 
 Header.ActionButton = ActionButton
 
 Header.ActionButtonGroup = Flexbox
-
-Header.CommunitiesDropdown = CommunitiesDropdown
 
 Header.Tab = Tab
 

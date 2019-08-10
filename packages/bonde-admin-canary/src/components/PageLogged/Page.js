@@ -8,7 +8,7 @@ const Page = ({
   title,
   actions,
   tabs,
-  props,
+  dropdown,
   wrapperHeaderComponent: WrapperHeader,
   fixedFooter,
   ...pageProps
@@ -23,7 +23,7 @@ const Page = ({
       title={title}
       actions={actions}
       tabs={tabs}
-      props={props}
+      dropdown={dropdown}
     />
   )
 
