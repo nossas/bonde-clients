@@ -25,16 +25,16 @@ const Spacing = ({ margin, padding, ...ownProps }) => {
     <SpacingStyled
       {...ownProps}
       margin={{
-        top: marginX || margin.top,
-        bottom: marginX || margin.bottom,
-        left: marginY || margin.left,
-        right: marginY || margin.right
+        top: marginY || margin.top,
+        bottom: marginY || margin.bottom,
+        left: marginX || margin.left,
+        right: marginX || margin.right
       }}
       padding={{
-        top: paddingX || padding.top,
-        bottom: paddingX || padding.bottom,
-        left: paddingY || padding.left,
-        right: paddingY || padding.right
+        top: paddingY || padding.top,
+        bottom: paddingY || padding.bottom,
+        left: paddingX || padding.left,
+        right: paddingX || padding.right
       }}
     />
   )
