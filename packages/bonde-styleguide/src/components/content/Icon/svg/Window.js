@@ -15,4 +15,6 @@ const Icon = ({ className, color, size }) => (
   </svg>
 )
 
+Icon.displayName = 'Icon.Window'
+
 export default Icon

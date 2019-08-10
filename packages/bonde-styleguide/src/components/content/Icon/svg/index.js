@@ -3,11 +3,13 @@ import AngleRight from './AngleRight'
 import Archive from './Archive'
 import Bonde from './Bonde'
 import Bot from './Bot'
+import Chart from './Chart'
 import Copy from './Copy'
 import DoubleArrowLeft from './DoubleArrowLeft'
 import DoubleArrowRight from './DoubleArrowRight'
 import Exclamation from './Exclamation'
 import Plus from './Plus'
+import Settings from './Settings'
 import Share from './Share'
 import Sound from './Sound'
 import Star from './Star'
@@ -21,6 +23,7 @@ export default {
   'angle-down': AngleDown,
   'angle-right': AngleRight,
   'archive': Archive,
+  'chart': Chart,
   'bonde': Bonde,
   'bot': Bot,
   'copy': Copy,
@@ -28,6 +31,7 @@ export default {
   'double-arrow-right': DoubleArrowRight,
   'exclamation': Exclamation,
   'plus': Plus,
+  'settings': Settings,
   'share': Share,
   'sound': Sound,
   'star': Star,
