@@ -27,6 +27,7 @@ const Dashboard = ({ match }) => {
       <CommunityPageLayout
         path={`${match.path}/:communityId`}
         component={CommunityPage}
+        loading={LoadingFullScreen}
       />
     </AuthProvider>
   )
