@@ -7,8 +7,8 @@ import { CommunityPageLayout } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
 
-const CommunityPage = () => (
-  <h2>Página de comunidade</h2>
+const CommunityPage = ({ community }) => (
+  <h2>{`Página de comunidade | ${community.name}`}</h2>
 )
 
 const Dashboard = ({ match }) => {
@@ -24,6 +24,7 @@ const Dashboard = ({ match }) => {
         }}
       />
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
+      {/* Community Context */}
       <CommunityPageLayout
         path={`${match.path}/:communityId`}
         component={CommunityPage}

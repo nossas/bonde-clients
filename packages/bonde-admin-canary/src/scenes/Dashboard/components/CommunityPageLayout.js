@@ -5,6 +5,13 @@ import UserCommunities from './UserCommunities'
 import CommunitiesDropdown from './CommunitiesDropdown'
 
 
+/**
+  * CommmunityPageLayout renders a module application, here
+  * on UI receive a new dropdown in Header and create a context
+  * of community that will be like componentProps to component
+  * render. 
+  * 
+  */
 const CommunityPageLayout = withRouter(
   ({ location, history, pageProps, loading: Loading, ...rest }) => (
     <UserCommunities component={
@@ -35,7 +42,14 @@ const CommunityPageLayout = withRouter(
         }
 
         // extender PageLayout com novo Header contendo CommunitiesDropdown
-        return <PageLayout pageProps={newPageProps} {...rest} />
+        const community = communities.filter(c => c.id === communityId)[0]
+        return (
+          <PageLayout
+            pageProps={newPageProps}
+            componentProps={{ community }}
+            {...rest}
+          />
+        )
       }}
     />
   )
