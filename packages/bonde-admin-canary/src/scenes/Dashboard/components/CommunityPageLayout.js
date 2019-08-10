@@ -34,7 +34,11 @@ const CommunityPageLayout = withRouter(
               communityId={communityId}
               onChange={c => {
                 if (c.id !== communityId) {
-                  history.push(`/admin/${c.id}`)
+                  history.push(
+                    location
+                      .pathname
+                      .replace(/admin\/[0-9]+/, `admin/${c.id}`)
+                  )
                 }
               }}
             />

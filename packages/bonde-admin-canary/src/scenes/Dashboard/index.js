@@ -7,8 +7,12 @@ import { CommunityPageLayout } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
 
-const CommunityPage = ({ community }) => (
-  <h2>{`Página de comunidade | ${community.name}`}</h2>
+const ReportPage = ({ community }) => (
+  <h2>{`Dados | ${community.name}`}</h2>
+)
+
+const SettingsPage = ({ community }) => (
+  <h2>{`Configurações | ${community.name}`}</h2>
 )
 
 const Dashboard = ({ match }) => {
@@ -26,8 +30,15 @@ const Dashboard = ({ match }) => {
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
       {/* Community Context */}
       <CommunityPageLayout
+        exact
         path={`${match.path}/:communityId`}
-        component={CommunityPage}
+        component={ReportPage}
+        loading={LoadingFullScreen}
+      />
+      <CommunityPageLayout
+        exact
+        path={`${match.path}/:communityId/settings`}
+        component={SettingsPage}
         loading={LoadingFullScreen}
       />
     </AuthProvider>
