@@ -40,7 +40,13 @@ const Header = ({
 }) => {
   return (
     <HeaderStyleguide>
-      <Navbar renderBrand={dropdown ? () => <RenderElement component={dropdown} /> : Bonde}>
+      <Navbar
+        renderBrand={dropdown ? () => (
+          <Spacing margin={{ bottom: 10 }}>
+            <RenderElement component={dropdown} />
+          </Spacing>
+         ) : Bonde}
+      >
         <Flexbox horizontal end>
           <UserDropdown />
         </Flexbox>
@@ -64,7 +70,11 @@ const Header = ({
         </Spacing>
       )}
 
-      {title ? <RenderElement component={title} /> : <div />}
+      {title ? (
+        <Spacing margin={{ top: 25, bottom: 10 }}>
+          <RenderElement component={title} />
+        </Spacing>
+      ) : <div />}
     </HeaderStyleguide>
   )
 }

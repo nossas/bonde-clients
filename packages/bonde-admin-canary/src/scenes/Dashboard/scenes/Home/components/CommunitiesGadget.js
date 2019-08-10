@@ -29,6 +29,9 @@ RenderText.propTypes = {
 
 const CommunityLinkModule = ({ row }) => (
    <Flexbox horizontal spacing='between'>
+     <ButtonLink flat to={`/admin/${row.id}`}>
+       <Icon size={20} name='chart' />
+     </ButtonLink>
      <ButtonLink flat to={`/admin/${row.id}/chatbot`}>
        <Icon size={20} name='bot' />
      </ButtonLink>
@@ -43,7 +46,11 @@ const CommunityLinkModule = ({ row }) => (
           })
        }}
      >
-       <Icon size={20} name='window' /></Button>
+       <Icon size={20} name='window' />
+     </Button>
+     <ButtonLink flat to={`/admin/${row.id}/settings`}>
+       <Icon size={20} name='settings' />
+     </ButtonLink>
    </Flexbox>
 )
 

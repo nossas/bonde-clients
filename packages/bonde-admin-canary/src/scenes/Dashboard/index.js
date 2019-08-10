@@ -34,12 +34,14 @@ const Dashboard = ({ match }) => {
         path={`${match.path}/:communityId`}
         component={ReportPage}
         loading={LoadingFullScreen}
+        pageProps={{ title: 'Dados' }}
       />
       <CommunityPageLayout
         exact
         path={`${match.path}/:communityId/settings`}
         component={SettingsPage}
         loading={LoadingFullScreen}
+        pageProps={{ title: 'Configurações' }}
       />
     </AuthProvider>
   )
