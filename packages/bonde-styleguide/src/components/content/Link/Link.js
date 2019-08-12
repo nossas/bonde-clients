@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import Text from '../Text/Text'
 
-const Link = styled(Text)`
+const Link = styled.a`
   color: #ee0099!important;
   text-decoration: none;
 

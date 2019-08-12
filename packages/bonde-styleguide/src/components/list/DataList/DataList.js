@@ -6,19 +6,20 @@ import styled from 'styled-components'
  */
 const DataList = styled.div`
   display: table;
-  border-collapse: ${props => props.border ? 'collapse' : 'unset'};
+  border-collapse: ${props => props.border};
+  border-spacing: 0 15px;
   width: 100%;
 `
 
-const { bool } = PropTypes
+const { oneOf } = PropTypes
 
 DataList.propTypes = {
   /** Flag to show or hide the wrapper border. */
-  border: bool
+  border: oneOf(['collapse', 'separate', 'unset'])
 }
 
 DataList.defaultProps = {
-  border: false
+  border: 'unset'
 }
 
 DataList.displayName = 'DataList'

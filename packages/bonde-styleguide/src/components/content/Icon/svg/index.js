@@ -8,6 +8,7 @@ import Copy from './Copy'
 import DoubleArrowLeft from './DoubleArrowLeft'
 import DoubleArrowRight from './DoubleArrowRight'
 import Exclamation from './Exclamation'
+import Pencil from './Pencil'
 import Plus from './Plus'
 import Settings from './Settings'
 import Share from './Share'
@@ -30,6 +31,7 @@ export default {
   'double-arrow-left': DoubleArrowLeft,
   'double-arrow-right': DoubleArrowRight,
   'exclamation': Exclamation,
+  'pencil': Pencil,
   'plus': Plus,
   'settings': Settings,
   'share': Share,

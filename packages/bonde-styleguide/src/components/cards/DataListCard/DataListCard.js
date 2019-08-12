@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  Card,
   DataList,
   DataListRow,
   DataListCol,
@@ -9,10 +8,10 @@ import {
   Scrollbox
 } from '../../..'
 
-const CustomCol = ({ render, field, row, ...colProps }) => (
+const CustomCol = ({ render, value, row, label, ...colProps }) => (
   <DataListCol {...colProps}>
-    {typeof render === 'function' ? render(field, row) : (
-      <Text fontSize={14}>{field}</Text>
+    {typeof render === 'function' ? render({ value, row }) : (
+      <Text fontSize={14}>{value}</Text>
     )}
   </DataListCol>
 )
@@ -30,14 +29,18 @@ const DataListCard = ({
   const fieldNames = Object.keys(fields)
 
   return (
-    <Card
-      title={sectionTitle}
-      height={height}
-      Footer={Footer}
-      footerProps={footerProps}
-    >
-      <Scrollbox>
-        <DataList border={border}>
+    <Scrollbox>
+      <DataList border={border}>
+        <DataListRow transparent>
+          {fieldNames.map(fieldName => {
+            const { label, ...colProps } = fields[fieldName]
+            return (
+              <DataListCol {...colProps} padding={false}>
+                <Text>{label}</Text>
+              </DataListCol>
+            )
+          })}
+        </DataListRow>
         {items.map(item => (
           <DataListRow key={Math.random()}>
           {fieldNames.map(fieldName => (
@@ -45,36 +48,26 @@ const DataListCard = ({
               {...fields[fieldName]}
               key={Math.random()}
               row={item}
-              field={picker ? item[picker][fieldName] : item[fieldName]}
+              value={picker ? item[picker][fieldName] : item[fieldName]}
             />
           ))}
           </DataListRow>
         ))}
-        </DataList>
-      </Scrollbox>
-    </Card>
+      </DataList>
+    </Scrollbox>
   )
 }
 
 const { oneOfType, oneOf, string, number, bool, object, array, node, func, shape } = PropTypes
 
 DataListCard.propTypes = {
-  sectionTitle: string,
-  height: number,
-  border: bool,
+  border: oneOf(['collapse', 'separate', 'unset']),
   fields: object,
-  items: array,
-  Footer: oneOfType([node, func]),
-  footerProps: shape({
-    align: oneOf(['flex-start', 'center', 'flex-end']),
-    justify: oneOf(['flex-start', 'center', 'flex-end', 'space-between']),
-  }),
-  picker: string
+  items: array
 }
 
 DataListCard.defaultProps = {
-  height: 274,
-  border: true,
+  border: 'unset',
   fields: {},
   items: []
 }
