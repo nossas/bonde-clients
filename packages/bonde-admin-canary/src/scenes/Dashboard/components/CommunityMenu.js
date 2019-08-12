@@ -9,7 +9,7 @@ const menus = ({ community }) => [
   {
     icon: 'chart',
     component: ButtonLink,
-    to: `/admin/${community.id}`
+    to: `/admin/${community.id}/report`
   },
   {
     icon: 'bot',
@@ -40,7 +40,7 @@ const CommunityMenu = ({ community, dark, pathname }) => {
     <Flexbox horizontal spacing='between'>
       {menus({ community }).map(({ component: Component, icon, ...rest }, i) => {
         const ownProps = {
-          ...rest, dark, flat: true, active: pathname && pathname === rest.to
+          ...rest, dark, flat: true, active: pathname && pathname.startsWith(rest.to)
         }
         return (
           <Component key={`community-menu-${i}`} {...ownProps}>

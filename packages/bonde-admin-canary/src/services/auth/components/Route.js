@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 const Route = ({
   assert,
   component: Component,
+  componentProps,
   redirectTo,
   ...ownProps
 }) => {
@@ -15,7 +16,7 @@ const Route = ({
       {...ownProps}
       render={props => (
         (valid || !redirectTo) ? (
-          <Component {...props} />
+          <Component {...props} {...componentProps} />
         ) : (
           <Redirect
             to={{ pathname: redirectTo, state: { from: props.location } }}
@@ -27,12 +28,14 @@ const Route = ({
 }
 
 Route.defaultProps = {
-  assert: true
+  assert: true,
+  componentProps: {}
 }
 
 Route.propTypes = {
   assert: PropTypes.any,
   component: PropTypes.func,
+  componentProps: PropTypes.object,
   redirectTo: PropTypes.string,
   location: PropTypes.object
 }
