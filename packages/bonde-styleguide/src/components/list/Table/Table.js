@@ -71,7 +71,7 @@ ReactTable.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array.isRequired,
   /* A function that receive data row */
-  onClickRow: PropTypes.func.isRequired,
+  onClickRow: PropTypes.func,
   ColumnComponent: PropTypes.any,
   EmptyComponent: PropTypes.any,
   HeaderComponent: PropTypes.any

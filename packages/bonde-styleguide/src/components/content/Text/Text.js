@@ -6,14 +6,13 @@ import styled from 'styled-components'
  */
 const Text = styled.p`
   font-family: 'Nunito Sans', sans-serif;
-  font-size: ${props => props.fontSize};
+  font-size: ${props => props.fontSize}px;
   font-weight: ${props => props.fontWeight};
   line-height: ${props => props.lineHeight};
   color: ${props => props.color};
   text-align: ${props => props.align};
   text-transform: ${props => props.uppercase ? 'uppercase': null};
   letter-spacing: ${props => props.letterSpacing};
-  /* margin: ${props => props.margin}; */
 `
 
 Text.propTypes = {

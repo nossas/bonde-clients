@@ -87,7 +87,7 @@ const Panel = ({
 
         <Spacing padding={{ x: 16, top: 14 }}>
           <Title.H4>{title}</Title.H4>
-          {description && (<Spacing margin={{ y: 8 }}>
+          {description && (<Spacing margin={{ x: 8 }}>
             <Text fontSize={16} lineHeight={1.31} color={textColor}>
               {description}
             </Text>

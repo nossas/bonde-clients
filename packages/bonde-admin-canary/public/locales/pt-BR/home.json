@@ -14,19 +14,11 @@
         "alphabetic": "A-Z"
     },
     "communities": {
-      "title": "Minhas Comunidades",
+      "title": "Selecione uma comunidade",
       "emptyText": "Crie uma comunidade para começar a causar!"
     },
-    "mobilizations": {
-      "title": "Minhas mobilizações",
-      "emptyText": "As mobilizações das suas comunidades vão aparecer aqui.",
-      "statuses": {
-        "active": "Ativa",
-        "archived": "Arquivada"
-      }
-    },
     "trendingMobilizations": {
-      "title": "Oportunidades de ação"
+      "title": "Se inspire e entre em ação"
     }
   },
   "tutorial": {
