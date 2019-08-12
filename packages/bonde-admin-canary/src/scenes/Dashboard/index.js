@@ -7,6 +7,7 @@ import { CommunityPageLayout, Page } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
 import SettingsPage from './scenes/Settings'
+import ChatbotPage from './scenes/Chatbot'
 
 
 const Dashboard = ({ match }) => {
@@ -31,15 +32,18 @@ const Dashboard = ({ match }) => {
         pageProps={{ title: 'Dados' }}
         componentProps={{ title: 'Dados' }}
       />
+      {/* Configurações de Chatbot */}
       <CommunityPageLayout
-        exact
         path={`${match.path}/:communityId/chatbot`}
-        component={Page}
+        component={ChatbotPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Chatbot' }}
-        componentProps={{ title: 'Chatbot' }}
+        tabs={[
+          { path: /^\/admin\/\d+\/chatbot$/, name: 'Fluxos de conversas' },
+          { path: /^\/admin\/\d+\/chatbot\/settings$/, name: 'Configurações', to: '/settings' },
+        ]}
       />
-      {/* Configurações de comunidade */}
+      {/* Configurações de Comunidade */}
       <CommunityPageLayout
         path={`${match.path}/:communityId/settings`}
         component={SettingsPage}

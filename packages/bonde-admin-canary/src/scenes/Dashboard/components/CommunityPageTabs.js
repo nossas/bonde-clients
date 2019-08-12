@@ -11,7 +11,7 @@ const PageTabs = ({ location, baseUrl, tabs, ...rest }) => {
         <TabItem
           key={`default-page-tabs-${i}`}
           active={path.test(location.pathname)}
-          to={`${baseUrl}${to}`}
+          to={`${baseUrl}${to || ''}`}
           component={Link}
         >
           {name}
