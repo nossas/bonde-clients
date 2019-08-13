@@ -1,32 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
-import CampaignsList from './components/CampaignsList'
-import SettingsForm from './components/SettingsForm'
 
-const ChatbotPage = ({ match, community }) => {
-  console.log('ChatbotPage match', match)
+const DefaultComponent = () => (
+  <h2>DefaultComponent</h2>
+)
+
+const ChatbotEditCampaignPage = ({ match, community }) => {
+  console.log('ChatbotEditCampaignPage match', match)
   return (
     <React.Fragment>
       <Route
         exact
         path={match.path}
-        component={CampaignsList}
+        component={DefaultComponent}
         componentProps={{ community }}
       />
       <Route
         exact
         path={`${match.path}/settings`}
-        component={SettingsForm}
+        component={DefaultComponent}
         componentProps={{ community }}
       />
     </React.Fragment>
   )
 }
 
-ChatbotPage.propTypes = {
+ChatbotEditCampaignPage.propTypes = {
   match: PropTypes.object.isRequired,
   community: PropTypes.object.isRequired
 }
 
-export default ChatbotPage
+export default ChatbotEditCampaignPage
