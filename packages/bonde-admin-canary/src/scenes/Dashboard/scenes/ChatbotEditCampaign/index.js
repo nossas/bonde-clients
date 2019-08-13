@@ -4,6 +4,7 @@ import { Flexbox2 as Flexbox, Title, Icon, Spacing } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 import { Route } from 'services/auth'
 import campaigns from 'scenes/Dashboard/campaigns'
+import CampaignDiagram from './components/CampaignDiagram'
 
 const ContentLayout = ({ backward, title, render, ...rest }) => (
   <div className='content-layout'>
@@ -17,15 +18,21 @@ const ContentLayout = ({ backward, title, render, ...rest }) => (
         </Flexbox>
       </ButtonLink>
     )}
-    {React.createElement(render, {...rest})}
+    {React.createElement(render, { ...rest })}
   </div>
 )
+
+ContentLayout.propTypes = {
+  backward: PropTypes.string,
+  title: PropTypes.string,
+  render: PropTypes.any
+}
 
 const DefaultRender = () => (
   <h2>DefaultRender</h2>
 )
 
-const ChatbotEditCampaignPage = ({ match, community, baseUrl }) => {
+const ChatbotEditCampaignPage = ({ match, community }) => {
   // TODO: buscar campanha de acordo com URL
   const campaign = campaigns.filter(c => c.id === Number(match.params.campaignId))[0]
   const componentProps = {
@@ -40,7 +47,7 @@ const ChatbotEditCampaignPage = ({ match, community, baseUrl }) => {
         exact
         path={match.path}
         component={ContentLayout}
-        componentProps={componentProps}
+        componentProps={{ ...componentProps, render: CampaignDiagram }}
       />
       <Route
         exact
