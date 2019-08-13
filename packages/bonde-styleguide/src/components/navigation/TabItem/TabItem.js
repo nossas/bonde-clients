@@ -13,17 +13,15 @@ export const TabItem = ({ component: Component, ...rest }) => {
     text-transform: uppercase;
     cursor: pointer;
     margin: 0 15px 0 0;
-    padding-bottom: 14px;
+    padding-bottom: 11px;
     text-decoration: none;
 
     ${props => props.active && css`
-      border-bottom: 3px solid #ee0099;
-      padding-bottom: 11px;
+      border-bottom: 1.5px solid #ee0099;
     `}
 
     &:hover, &:active {
-      border-bottom: 3px solid #ee0099;
-      padding-bottom: 11px;
+      border-bottom: 1.5px solid #ee0099;
     }
   `
 
