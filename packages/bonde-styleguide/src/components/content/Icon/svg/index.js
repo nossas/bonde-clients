@@ -1,6 +1,7 @@
 import AngleDown from './AngleDown'
 import AngleRight from './AngleRight'
 import Archive from './Archive'
+import ArrowLeft from './ArrowLeft'
 import Bonde from './Bonde'
 import Bot from './Bot'
 import Chart from './Chart'
@@ -24,6 +25,7 @@ export default {
   'angle-down': AngleDown,
   'angle-right': AngleRight,
   'archive': Archive,
+  'arrow-left': ArrowLeft,
   'chart': Chart,
   'bonde': Bonde,
   'bot': Bot,
