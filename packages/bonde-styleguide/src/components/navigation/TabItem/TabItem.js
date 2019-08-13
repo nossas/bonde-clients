@@ -17,11 +17,13 @@ export const TabItem = ({ component: Component, ...rest }) => {
     text-decoration: none;
 
     ${props => props.active && css`
-      border-bottom: 1.5px solid #ee0099;
+      border-bottom: 2px solid #ee0099;
+      padding-bottom: 9px;
     `}
 
     &:hover, &:active {
-      border-bottom: 1.5px solid #ee0099;
+      border-bottom: 2px solid #ee0099;
+      padding-bottom: 9px;
     }
   `
 
