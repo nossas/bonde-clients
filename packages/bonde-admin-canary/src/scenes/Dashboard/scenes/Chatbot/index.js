@@ -5,7 +5,6 @@ import CampaignsList from './components/CampaignsList'
 import SettingsForm from './components/SettingsForm'
 
 const ChatbotPage = ({ match, community }) => {
-  console.log('ChatbotPage match', match)
   return (
     <React.Fragment>
       <Route

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Flexbox2 as Flexbox,
@@ -23,11 +24,19 @@ const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
 )
 
+NameField.propTypes = {
+  value: PropTypes.string
+}
+
 const StatusButtonField = ({ value }) => (
   <SwitchSlider round checked={value === 'active'}>
     <Text>{value === 'active' ? 'ATIVO' : 'INATIVO'}</Text>
   </SwitchSlider>
 )
+
+StatusButtonField.propTypes = {
+  value: PropTypes.string
+}
 
 const MenuField = ({ value }) => (
   <Flexbox horizontal>
@@ -35,6 +44,10 @@ const MenuField = ({ value }) => (
     <Button flat><Icon name='trash' /> Excluir</Button>
   </Flexbox>
 )
+
+MenuField.propTypes = {
+  value: PropTypes.string
+}
 
 const fields = {
   name: { label: 'Nome do fluxo', render: NameField },

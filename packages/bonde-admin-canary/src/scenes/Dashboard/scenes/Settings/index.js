@@ -9,7 +9,7 @@ const pages = [
   { form: InfoForm, path: '/invite' },
   { form: InfoForm, path: '/domain' },
   { form: InfoForm, path: '/integration' },
-  { form: InfoForm, path: '/recipient' },
+  { form: InfoForm, path: '/recipient' }
 ]
 
 const CommunitySettinigsPage = ({ match, community }) => (

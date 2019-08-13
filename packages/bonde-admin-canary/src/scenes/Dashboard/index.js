@@ -12,7 +12,6 @@ import HomePage from './scenes/Home'
 import SettingsPage from './scenes/Settings'
 import TagsPage from './scenes/Tags'
 
-
 const Dashboard = ({ match }) => {
   return (
     <AuthProvider loading={LoadingFullScreen}>
@@ -35,7 +34,7 @@ const Dashboard = ({ match }) => {
         tabs={[
           { path: /^\/admin\/\d+\/analytics\/*$/, name: 'Dashboard' },
           { path: /^\/admin\/\d+\/analytics\/activists\/*$/, name: 'Ativistas', to: '/activists' },
-          { path: /^\/admin\/\d+\/analytics\/report\/*$/, name: 'Relatórios', to: '/report' },
+          { path: /^\/admin\/\d+\/analytics\/report\/*$/, name: 'Relatórios', to: '/report' }
         ]}
       />
       {/* Configurações de Chatbot */}
@@ -46,7 +45,7 @@ const Dashboard = ({ match }) => {
         pageProps={{ title: 'Chatbot' }}
         tabs={[
           { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/*$/, name: 'Editar Fluxo' },
-          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/settings\/*$/, name: 'Configurar', to: '/settings' },
+          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/settings\/*$/, name: 'Configurar', to: '/settings' }
         ]}
       />
       <FullPageLayout
@@ -56,7 +55,7 @@ const Dashboard = ({ match }) => {
         pageProps={{ title: 'Chatbot' }}
         tabs={[
           { path: /^\/admin\/\d+\/chatbot\/*$/, name: 'Fluxos de conversas' },
-          { path: /^\/admin\/\d+\/chatbot\/settings\/*$/, name: 'Configurações', to: '/settings' },
+          { path: /^\/admin\/\d+\/chatbot\/settings\/*$/, name: 'Configurações', to: '/settings' }
         ]}
       />
       {/* Configurações de Comunidade */}
@@ -70,7 +69,7 @@ const Dashboard = ({ match }) => {
           { path: /^\/admin\/\d+\/settings\/invite\/*$/, name: 'Mobilizadores', to: '/invite' },
           { path: /^\/admin\/\d+\/settings\/domain\/*$/, name: 'Domínios', to: '/domain' },
           { path: /^\/admin\/\d+\/settings\/integration\/*$/, name: 'Integrações', to: '/integration' },
-          { path: /^\/admin\/\d+\/settings\/recipient\/*$/, name: 'Financeira', to: '/recipient' },
+          { path: /^\/admin\/\d+\/settings\/recipient\/*$/, name: 'Financeira', to: '/recipient' }
         ]}
       />
 

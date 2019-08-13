@@ -21,10 +21,12 @@ const PageTabs = ({ location, baseUrl, tabs, ...rest }) => {
   )
 }
 
+const { array, shape, string } = PropTypes
+
 PageTabs.propTypes = {
-  tabs: PropTypes.array.isRequired
+  tabs: array.isRequired,
+  location: shape({ pathname: string }).isRequired,
+  baseUrl: string.isRequired
 }
 
-// TODO: trick used for fix RenderElement in Header
-/*export default (props) => <DefaultPageTabs {...props} />*/
 export default PageTabs

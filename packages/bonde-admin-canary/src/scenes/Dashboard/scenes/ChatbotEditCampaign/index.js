@@ -7,7 +7,6 @@ const DefaultComponent = () => (
 )
 
 const ChatbotEditCampaignPage = ({ match, community }) => {
-  console.log('ChatbotEditCampaignPage match', match)
   return (
     <React.Fragment>
       <Route

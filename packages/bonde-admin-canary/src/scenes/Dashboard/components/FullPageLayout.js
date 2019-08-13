@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Flexbox2 as Flexbox, Spacing } from 'bonde-styleguide'
 import UserCommunities from './UserCommunities'
 import CommunitiesDropdown from './CommunitiesDropdown'
@@ -7,7 +8,13 @@ import CommunityPageTabs from './CommunityPageTabs'
 import { Route } from 'react-router'
 import { Page } from 'components/PageLogged'
 
-
+/**
+  * FullPageLayout renders a module application, here
+  * on UI receive a new dropdown in Header and create a context
+  * of community that will be like componentProps to component
+  * render.
+  *
+  */
 const FullPageLayout = ({ component: Component, componentProps, pageProps, tabs, loading: Loading, ...rest }) => (
   <UserCommunities component={
     ({ communities, loading }) => {
@@ -16,7 +23,6 @@ const FullPageLayout = ({ component: Component, componentProps, pageProps, tabs,
       return (
         <Route {...rest} render={
           (matchProps) => {
-            console.log('matchProps', matchProps)
             // buscar comunidade por parametro na URL
             const { communityId } = matchProps.match.params
             const community = communities.filter(c => c.id === Number(communityId))[0]
@@ -72,11 +78,14 @@ const FullPageLayout = ({ component: Component, componentProps, pageProps, tabs,
   />
 )
 
-/**
-  * FullPageLayout renders a module application, here
-  * on UI receive a new dropdown in Header and create a context
-  * of community that will be like componentProps to component
-  * render.
-  *
-  */
+const { any, array, object } = PropTypes
+
+FullPageLayout.propTypes = {
+  pageProps: object,
+  component: any,
+  componentProps: object,
+  loading: any,
+  tabs: array
+}
+
 export default FullPageLayout
