@@ -14,7 +14,7 @@ const menus = ({ community }) => [
   {
     icon: 'bot',
     component: ButtonLink,
-    to: `/admin/${community.id}/chatbot`
+    to: `/admin/${community.id}/chatbot/1`
   },
   {
     icon: 'window',

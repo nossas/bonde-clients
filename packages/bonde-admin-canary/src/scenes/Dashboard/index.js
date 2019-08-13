@@ -39,23 +39,23 @@ const Dashboard = ({ match }) => {
       />
       {/* Configurações de Chatbot */}
       <FullPageLayout
-        path={`${match.path}/:communityId/chatbot/:chatbotId/campaign`}
+        path={`${match.path}/:communityId/chatbot/:chatbotId/campaign/:campaignId`}
         component={ChatbotEditCampaignPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Chatbot' }}
         tabs={[
-          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/*$/, name: 'Editar Fluxo' },
-          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/settings\/*$/, name: 'Configurar', to: '/settings' }
+          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/\d+\/*$/, name: 'Editar Fluxo' },
+          { path: /^\/admin\/\d+\/chatbot\/\d+\/campaign\/\d+\/settings\/*$/, name: 'Configurar', to: '/settings' }
         ]}
       />
       <FullPageLayout
-        path={`${match.path}/:communityId/chatbot`}
+        path={`${match.path}/:communityId/chatbot/:chatbotId`}
         component={ChatbotPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Chatbot' }}
         tabs={[
-          { path: /^\/admin\/\d+\/chatbot\/*$/, name: 'Fluxos de conversas' },
-          { path: /^\/admin\/\d+\/chatbot\/settings\/*$/, name: 'Configurações', to: '/settings' }
+          { path: /^\/admin\/\d+\/chatbot\/\d+\/*$/, name: 'Fluxos de conversas' },
+          { path: /^\/admin\/\d+\/chatbot\/\d+\/settings\/*$/, name: 'Configurações', to: '/settings' }
         ]}
       />
       {/* Configurações de Comunidade */}

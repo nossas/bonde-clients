@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import {
   Button,
   Flexbox2 as Flexbox,
@@ -11,14 +12,7 @@ import {
   Cell,
   Icon
 } from 'bonde-styleguide'
-
-const campaigns = [
-  { id: 1, name: 'Apresentação da BETA', status: 'active' },
-  { id: 2, name: 'Leis', status: 'active' },
-  { id: 3, name: 'ADPF442', status: 'inactive' },
-  { id: 5, name: 'Mapa do Acolhimento', status: 'inactive' },
-  { id: 6, name: 'Mais sobre a BETA', status: 'active' }
-]
+import campaigns from 'scenes/Dashboard/campaigns'
 
 const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
@@ -38,12 +32,21 @@ StatusButtonField.propTypes = {
   value: PropTypes.string
 }
 
-const MenuField = ({ value }) => (
-  <Flexbox horizontal>
-    <Button flat><Icon name='pencil' /> Editar</Button>
-    <Button flat><Icon name='trash' /> Excluir</Button>
-  </Flexbox>
-)
+const MenuField = withRouter(({ match, history, value }) => {
+  return (
+    <Flexbox horizontal>
+      <Button
+        flat
+        onClick={() => {
+          history.push(`${match.url}/campaign/${value}`)
+        }}
+      >
+        <Icon name='pencil' /> Editar
+      </Button>
+      <Button flat><Icon name='trash' /> Excluir</Button>
+    </Flexbox>
+  )
+})
 
 MenuField.propTypes = {
   value: PropTypes.string
