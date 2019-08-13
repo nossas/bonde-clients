@@ -33,7 +33,7 @@ const FullPageLayout = ({ component: Component, componentProps, pageProps, tabs,
               tabs: tabs ? () => (
                 <CommunityPageTabs
                   location={matchProps.location}
-                  baseUrl={matchProps.match.url}
+                  match={matchProps.match}
                   community={community}
                   tabs={tabs}
                 />

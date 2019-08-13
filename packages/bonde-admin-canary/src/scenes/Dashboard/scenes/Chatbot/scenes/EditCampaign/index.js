@@ -1,36 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flexbox2 as Flexbox, Title, Icon, Spacing } from 'bonde-styleguide'
+import { Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 import { Route } from 'services/auth'
+import { ContentPage } from 'scenes/Dashboard/components'
 import campaigns from 'scenes/Dashboard/campaigns'
 import CampaignDiagram from './components/CampaignDiagram'
-
-const ContentLayout = ({ backward, title, render, ...rest }) => (
-  <div className='content-layout'>
-    {backward && (
-      <ButtonLink flat to={backward} padding='0!important'>
-        <Flexbox horizontal>
-          <Spacing margin={{ right: 5, top: 1 }}>
-            <Icon name='arrow-left' />
-          </Spacing>
-          <Title.H5>{title}</Title.H5>
-        </Flexbox>
-      </ButtonLink>
-    )}
-    {React.createElement(render, { ...rest })}
-  </div>
-)
-
-ContentLayout.propTypes = {
-  backward: PropTypes.string,
-  title: PropTypes.string,
-  render: PropTypes.any
-}
 
 const DefaultRender = () => (
   <h2>DefaultRender</h2>
 )
+
+const Navigation = ({ match, location }) => {
+  const baseUrl = location.pathname.replace(match.url, '')
+  return (
+    <Flexbox horizontal middle>
+      <ButtonLink flat to={`${match.url}/new`} active={baseUrl === '/new'}>Criar</ButtonLink>
+      <Icon name='arrow-right' />
+      <ButtonLink flat active={match.isExact} to={match.url}>Editar</ButtonLink>
+      <Icon name='arrow-right' />
+      <ButtonLink flat to={`${match.url}/detail`} active={baseUrl === '/detail'}>Detalhes</ButtonLink>
+    </Flexbox>
+  )
+}
 
 const ChatbotEditCampaignPage = ({ match, community }) => {
   // TODO: buscar campanha de acordo com URL
@@ -39,20 +31,26 @@ const ChatbotEditCampaignPage = ({ match, community }) => {
     community,
     title: campaign.name,
     backward: match.url.replace(/\/campaign\/+\d+/, ''),
-    render: DefaultRender
+    tabs: (props) => <Navigation {...props} match={match} />
   }
   return (
     <React.Fragment>
       <Route
         exact
         path={match.path}
-        component={ContentLayout}
+        component={ContentPage}
         componentProps={{ ...componentProps, render: CampaignDiagram }}
       />
       <Route
         exact
-        path={`${match.path}/settings`}
-        component={ContentLayout}
+        path={`${match.path}/detail`}
+        component={ContentPage}
+        componentProps={componentProps}
+      />
+      <Route
+        exact
+        path={`${match.path}/new`}
+        component={ContentPage}
         componentProps={componentProps}
       />
     </React.Fragment>

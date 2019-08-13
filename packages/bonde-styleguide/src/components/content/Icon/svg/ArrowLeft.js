@@ -13,4 +13,6 @@ const Icon = ({ className, color, size }) => (
   </svg>
 )
 
+Icon.displayName = 'Icon.ArrowLeft'
+
 export default Icon

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
-import { FormPage } from 'scenes/Dashboard/components'
+import { ContentPage } from 'scenes/Dashboard/components'
 import InfoForm from './components/InfoForm'
 
 const pages = [
@@ -19,8 +19,8 @@ const CommunitySettinigsPage = ({ match, community }) => (
         key={`settings-page-router-${i}`}
         exact={exact}
         path={exact ? match.path : `${match.path}${path}`}
-        component={FormPage}
-        componentProps={{ form, community }}
+        component={ContentPage}
+        componentProps={{ community, render: InfoForm }}
       />
     ))}
   </React.Fragment>

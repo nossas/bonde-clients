@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
+import { ContentPage } from 'scenes/Dashboard/components'
 import Dashboard from './components/Dashboard'
 import Activists from './components/Activists'
 import Report from './components/Report'
@@ -10,20 +11,20 @@ const AnalyticsPage = ({ match, community }) => (
     <Route
       exact
       path={match.path}
-      component={Dashboard}
-      componentProps={{ community }}
+      component={ContentPage}
+      componentProps={{ community, render: Dashboard }}
     />
     <Route
       exact
       path={`${match.path}/activists`}
-      component={Activists}
-      componentProps={{ community }}
+      component={ContentPage}
+      componentProps={{ community, render: Activists }}
     />
     <Route
       exact
       path={`${match.path}/report`}
-      component={Report}
-      componentProps={{ community }}
+      component={ContentPage}
+      componentProps={{ community, render: Report }}
     />
   </React.Fragment>
 )
