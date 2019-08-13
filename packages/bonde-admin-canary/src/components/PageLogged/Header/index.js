@@ -65,7 +65,7 @@ const Header = ({
       ) : <div />}
 
       {tabs && (
-        <Spacing margin={{ top:22, bottom: -22 }}>
+        <Spacing margin={{ top: 22, bottom: -22 }}>
           <Tabs>
             <RenderElement component={tabs} />
           </Tabs>

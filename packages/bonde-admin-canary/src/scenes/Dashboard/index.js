@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { AuthProvider } from 'services/auth'
 import { PageLayout, TutorialPageLayout } from 'services/router'
 import { LoadingFullScreen } from 'components/Loadable'
-import { CommunityPageLayout, Page } from './components'
+import { CommunityPageLayout } from './components'
 import HomePage from './scenes/Home'
 import TagsPage from './scenes/Tags'
 import SettingsPage from './scenes/Settings'
 import ChatbotPage from './scenes/Chatbot'
+import AnalyticsPage from './scenes/Analytics'
 
 
 const Dashboard = ({ match }) => {
@@ -25,12 +26,15 @@ const Dashboard = ({ match }) => {
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
       {/* Community Context */}
       <CommunityPageLayout
-        exact
-        path={`${match.path}/:communityId/report`}
-        component={Page}
+        path={`${match.path}/:communityId/analytics`}
+        component={AnalyticsPage}
         loading={LoadingFullScreen}
         pageProps={{ title: 'Dados' }}
-        componentProps={{ title: 'Dados' }}
+        tabs={[
+          { path: /^\/admin\/\d+\/analytics$/, name: 'Dashboard' },
+          { path: /^\/admin\/\d+\/analytics\/activists$/, name: 'Ativistas', to: '/activists' },
+          { path: /^\/admin\/\d+\/analytics\/report$/, name: 'Relatórios', to: '/report' },
+        ]}
       />
       {/* Configurações de Chatbot */}
       <CommunityPageLayout

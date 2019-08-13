@@ -9,7 +9,7 @@ const menus = ({ community }) => [
   {
     icon: 'chart',
     component: ButtonLink,
-    to: `/admin/${community.id}/report`
+    to: `/admin/${community.id}/analytics`
   },
   {
     icon: 'bot',
