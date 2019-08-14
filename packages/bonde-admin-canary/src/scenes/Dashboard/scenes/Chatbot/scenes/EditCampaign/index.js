@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { toast } from 'react-toastify'
 import { Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
+import { SubmitButton } from 'components/Form'
 import { Route } from 'services/auth'
-import { ContentPage } from 'scenes/Dashboard/components'
+import { ContentPage, FormContentPage } from 'scenes/Dashboard/components'
 import campaigns from 'scenes/Dashboard/campaigns'
 import CampaignDiagram from './components/CampaignDiagram'
-
-const DefaultRender = () => (
-  <h2>DefaultRender</h2>
-)
 
 const Navigation = ({ match, location }) => {
   const baseUrl = location.pathname.replace(match.url, '')
@@ -24,13 +22,27 @@ const Navigation = ({ match, location }) => {
   )
 }
 
+Navigation.propTypes = {
+  // is very important this prop be a reference of outside component match
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
+}
+
 const ChatbotEditCampaignPage = ({ match, community }) => {
+  const onSubmit = (values) => {
+    // TODO: save on graphql
+    // eslint-disable-next-line no-console
+    console.log('onSubmit', values)
+    toast('Salvo com sucesso!')
+  }
+
   // TODO: buscar campanha de acordo com URL
   const campaign = campaigns.filter(c => c.id === Number(match.params.campaignId))[0]
   const componentProps = {
     community,
     title: campaign.name,
     backward: match.url.replace(/\/campaign\/+\d+/, ''),
+    // eslint-disable-next-line react/display-name
     tabs: (props) => <Navigation {...props} match={match} />
   }
   return (
@@ -38,8 +50,14 @@ const ChatbotEditCampaignPage = ({ match, community }) => {
       <Route
         exact
         path={match.path}
-        component={ContentPage}
-        componentProps={{ ...componentProps, render: CampaignDiagram }}
+        component={FormContentPage}
+        componentProps={{
+          ...componentProps,
+          render: CampaignDiagram,
+          formProps: { onSubmit },
+          // eslint-disable-next-line react/display-name
+          actions: () => <SubmitButton>Salvar e publicar</SubmitButton>
+        }}
       />
       <Route
         exact

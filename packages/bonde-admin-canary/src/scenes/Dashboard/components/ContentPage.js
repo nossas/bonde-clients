@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { Flexbox2 as Flexbox, Spacing, Icon, Title } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 
-const ContentPage = ({ backward, title, render, tabs, ...rest }) => (
+const ContentPage = ({ backward, title, render, tabs, actions, ...rest }) => (
   <Flexbox vertical>
     {(tabs || backward) && (
       <Spacing margin={{ top: 20 }}>
         <Flexbox horizontal spacing='between'>
-          {backward && (
+          {backward ? (
             <ButtonLink flat to={backward} padding='0!important' style={{ minWidth: '200px' }}>
               <Flexbox horizontal>
                 <Spacing margin={{ right: 5, top: 1 }}>
@@ -17,8 +17,9 @@ const ContentPage = ({ backward, title, render, tabs, ...rest }) => (
                 <Title.H5>{title}</Title.H5>
               </Flexbox>
             </ButtonLink>
-          )}
-          {tabs && tabs({...rest})}
+          ) : <div />}
+          {tabs ? tabs({ ...rest }) : <div />}
+          {actions ? actions({ ...rest }) : <div />}
         </Flexbox>
       </Spacing>
     )}
@@ -32,7 +33,8 @@ ContentPage.propTypes = {
   backward: PropTypes.string,
   title: PropTypes.string,
   render: PropTypes.any,
-  tabs: PropTypes.any
+  tabs: PropTypes.any,
+  actions: PropTypes.any
 }
 
 export default ContentPage
