@@ -3,7 +3,7 @@ import { DefaultPortModel } from '../models'
 
 class DefaultPortFactory extends AbstractPortFactory {
   constructor() {
-    super('beta')
+    super('bot')
   }
 
   getNewInstance(initialConfig) {

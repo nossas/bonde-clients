@@ -1,7 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
 import { BaseWidget } from 'storm-react-diagrams'
-import { DefaultPortModel, ReplyPortModel } from '../models'
 import DefaultPortWidget from './DefaultPortWidget'
 import ReplyPortWidget from './ReplyPortLabelWidget'
 
@@ -16,9 +15,9 @@ class MessageNodeWidget extends BaseWidget {
   }
 
   generatePort(port) {
-    if (port instanceof DefaultPortModel) {
+    if (port.type === 'default') {
       return <DefaultPortWidget node={port.getParent()} model={port} key={port.id} />
-    } else if (port instanceof ReplyPortModel) {
+    } else if (port.type === 'reply') {
       return <ReplyPortWidget node={port.getParent()} model={port} key={port.id} />
     }
   }

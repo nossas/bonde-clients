@@ -1,12 +1,5 @@
-import {
-  DiagramEngine,
-  DiagramModel
-} from 'storm-react-diagrams'
-import {
-  MessageNodeFactory,
-  DefaultPortFactory,
-  ReplyPortFactory
-} from './beta/factories'
+import { DiagramEngine, DiagramModel } from 'storm-react-diagrams'
+import { MessageNodeFactory, DefaultPortFactory, ReplyPortFactory } from './bot'
 
 class Application {
 

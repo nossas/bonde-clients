@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import WebFont from 'webfontloader'
 import { DiagramWidget } from 'storm-react-diagrams'
 import { DraggableItem } from './components'
-import { MessageNodeModel } from './beta/models'
 import { IconMessage, IconQuickReply } from './components/icons'
 
 
@@ -44,6 +43,7 @@ class Diagram extends React.Component {
       .addNode(node)
 
     this.forceUpdate()
+    this.props.onUpdate('handleDrop')
   }
 
   handleDragOver(event) {
@@ -81,6 +81,9 @@ class Diagram extends React.Component {
           <DiagramWidget
             className='srd-bonde-diagram'
             diagramEngine={this.props.app.getDiagramEngine()}
+            actionStillFiring={(args) => {
+              this.props.onUpdate(args)
+            }}
           />
         </div>
       </div>
@@ -89,7 +92,12 @@ class Diagram extends React.Component {
 }
 
 Diagram.propTypes = {
-  createMessage: PropTypes.func.isRequired
+  createMessage: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func,
+}
+
+Diagram.defaultProps = {
+  onUpdate: () => {}
 }
 
 export default Diagram

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { BondeDiagram, BondeDiagramApplication } from 'bonde-diagram'
-import { MessageNodeModel } from 'bonde-diagram/lib/beta/models'
+import { MessageNodeModel } from 'bonde-diagram/lib/bot'
 import { Field } from 'components/Form'
 // styles bonde-diagram
 import 'bonde-diagram/lib/sass/main.scss'
