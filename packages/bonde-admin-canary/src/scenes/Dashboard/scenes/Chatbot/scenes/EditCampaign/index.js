@@ -1,45 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
-import { ButtonLink } from 'components/Link'
-import { SubmitButton } from 'components/Form'
+import { SubmitButton, FormGraphQLv2 } from 'components/Form'
 import { Route } from 'services/auth'
 import { ContentPage, FormContentPage } from 'scenes/Dashboard/components'
-import campaigns from 'scenes/Dashboard/campaigns'
 import CampaignDiagram from './components/CampaignDiagram'
+import Navigation from './components/Navigation'
+import { updateChatbotCampaignsMutation, chatbotCampaignsQuery } from '../../graphql'
 
-const Navigation = ({ match, location }) => {
-  const baseUrl = location.pathname.replace(match.url, '')
-  return (
-    <Flexbox horizontal middle>
-      <ButtonLink flat to={`${match.url}/new`} active={baseUrl === '/new'}>Criar</ButtonLink>
-      <Icon name='arrow-right' />
-      <ButtonLink flat active={match.isExact} to={match.url}>Editar</ButtonLink>
-      <Icon name='arrow-right' />
-      <ButtonLink flat to={`${match.url}/detail`} active={baseUrl === '/detail'}>Detalhes</ButtonLink>
-    </Flexbox>
-  )
-}
-
-Navigation.propTypes = {
-  // is very important this prop be a reference of outside component match
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
-}
 
 const formName = 'EditCampaignForm'
 
-const ChatbotEditCampaignPage = ({ match, community }) => {
-  const onSubmit = (values) => {
-    // TODO: save on graphql
-    // eslint-disable-next-line no-console
-    console.log('onSubmit', values)
-    toast('Salvo com sucesso!')
+const ChatbotEditCampaignPage = ({ match, community, chatbotCampaigns }) => {
+  const chatbotId = Number(match.params.chatbotId)
+  const campaign = chatbotCampaigns.filter(c => c.id === Number(match.params.campaignId))[0]
+  const defaultValues = {
+    name: campaign.name,
+    prefix: campaign.prefix,
+    diagram: campaign.diagram,
+    id: campaign.id,
+    status: campaign.status
+  }
+  const formProps = {
+    mutation: updateChatbotCampaignsMutation,
+    mutationVariables: defaultValues,
+    query: chatbotCampaignsQuery,
+    queryVariables: { chatbotId },
+    onSuccess: () => toast('Salvo com sucesso!'),
+    cache: (readQuery, writeQuery, data) => {
+      const { update_chatbot_campaigns: { returning } } = data
+      const { chatbot_campaigns: campaigns } = readQuery()
+      campaigns.map(c => c.id === returning[0].id ? returning[0] : c)
+      writeQuery({ chatbot_campaigns: campaigns })
+    }
   }
 
-  // TODO: buscar campanha de acordo com URL
-  const campaign = campaigns.filter(c => c.id === Number(match.params.campaignId))[0]
   const componentProps = {
     community,
     title: campaign.name,
@@ -55,8 +50,10 @@ const ChatbotEditCampaignPage = ({ match, community }) => {
         component={FormContentPage}
         componentProps={{
           ...componentProps,
+          campaign,
           render: CampaignDiagram,
-          formProps: { name: formName, onSubmit },
+          form: FormGraphQLv2,
+          formProps: { name: formName, ...formProps },
           // eslint-disable-next-line react/display-name
           actions: () => <SubmitButton formName={formName}>Salvar e publicar</SubmitButton>
         }}

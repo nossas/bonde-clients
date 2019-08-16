@@ -4,14 +4,14 @@ import { Query } from 'react-apollo'
 import { chatbotCampaignsQuery } from '../graphql'
 import CampaignsList from './CampaignsList'
 
-const ChatbotCampaignsList = ({ chatbotId, dataListComponent: DataListComponent }) => {
+const ChatbotCampaignsList = ({ chatbotId, dataListComponent: DataListComponent, ...rest }) => {
   return (
     <Query query={chatbotCampaignsQuery} variables={{ chatbotId }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...'
         if (error) return `Error! ${error.message}`
 
-        return <DataListComponent chatbotCampaigns={data.chatbot_campaigns} />
+        return <DataListComponent chatbotCampaigns={data.chatbot_campaigns} {...rest} />
       }}
     </Query>
   )
