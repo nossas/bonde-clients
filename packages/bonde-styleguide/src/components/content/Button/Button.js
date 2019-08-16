@@ -56,13 +56,28 @@ const Button = styled.button`
   ${props => props.dark && css`
     color: #fff;
     border-color: #fff;
+
+    path {
+      fill: #fff;
+    }
+
     &:hover {
       border-color: #bebebe;
       color: #bebebe;
+
+      path {
+        fill: #ee0099!important;
+      }
     }
     &:active {
       border-color: #ee0099;
       color: #ee0099;
+    }
+  `}
+
+  ${props => props.active && css`
+    path {
+      fill: #ee0099!important;
     }
   `}
 
@@ -79,11 +94,17 @@ const Button = styled.button`
     border-color: transparent;
     color: #000000;
     box-shadow: none;
-    min-width: 88px;
+    text-align: center;
+    min-width: auto;
+    padding: 0 10px;
 
     &:hover {
       background-color: transparent;
       color: #424242;
+
+      path {
+        fill: #424242;
+      }
     }
     &:active {
       background-color: transparent;
@@ -127,6 +148,8 @@ Button.propTypes = {
   children: node,
   /** Disable button. */
   disabled: bool,
+  /** Active button. */
+  active: bool,
   /** Dark button style. */
   dark: bool,
   /** Light button style. */

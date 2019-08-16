@@ -1,10 +1,12 @@
 import { css } from 'styled-components'
 
 export const px = (value, defaultValue) => {
-  if (value && typeof value === 'number') return css`${value}px`
-  else if (value && typeof value === 'string') return value
-  else if (!value && defaultValue) return css`${defaultValue}px`
-  else return 0
+  if (value && typeof value === 'string') {
+    return value
+  }
+
+  const newValue = `${value || defaultValue || 0}px`
+  return css`${newValue}`
 }
 
 // export const borderSpacing = (

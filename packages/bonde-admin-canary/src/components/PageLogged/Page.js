@@ -5,9 +5,10 @@ import Footer from './Footer'
 
 const Page = ({
   children,
-  renderTitle,
-  renderActionButtons,
-  renderTabs,
+  title,
+  actions,
+  tabs,
+  dropdown,
   wrapperHeaderComponent: WrapperHeader,
   fixedFooter,
   ...pageProps
@@ -15,13 +16,14 @@ const Page = ({
   // calculate height to resize content and fix Footer component on bottom page
   const height = (window.innerHeight ||
     document.documentElement.clientHeight ||
-    document.body.clientHeight)
+    document.body.clientHeight) - 195
 
   const headerNode = (
     <Header
-      renderTitle={renderTitle}
-      renderActionButtons={renderActionButtons}
-      renderTabs={renderTabs}
+      title={title}
+      actions={actions}
+      tabs={tabs}
+      dropdown={dropdown}
     />
   )
 

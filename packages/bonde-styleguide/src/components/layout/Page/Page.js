@@ -4,9 +4,8 @@ import styled from 'styled-components'
 import { px } from '../../../utils'
 
 const PageContainer = styled.div`
-  padding-top: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'};
-  padding-bottom: 32px;
-  width: 80%;
+  padding: ${props => props.top ? `calc(${props.top}px + 32px)` : '32px'} 155px 32px;
+  width: 100%;
   margin: 0 auto;
   ${props => props.height && `height: ${px(props.height)};`}
 `

@@ -106,7 +106,7 @@ class Dropdown extends React.Component {
             </Spacing>
           )}
           <DropdownTriggerButton onClick={this.toggleMenu.bind(this)}>
-            <span>{label}</span>
+            {typeof label === 'string' ? (<span>{label}</span>) : label()}
             {show ? (
               <Icon name='angle-right' color={colorStrategy} />
             ) : (
@@ -130,7 +130,10 @@ class Dropdown extends React.Component {
 }
 
 Dropdown.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func
+  ]).isRequired,
   inverted: PropTypes.bool
 }
 

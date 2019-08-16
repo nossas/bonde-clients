@@ -16,12 +16,15 @@ const DefaultImage = (props) => (
   </div>
 )
 
-const ImageCol = ({ value }) => value
-  ? <Image src={value} width={40} height={40} rounded={40} />
-  : <DefaultImage width='40px' height='40' />
+const ImageCol = ({ value, size, ...rest }) => {
+  return value
+    ? <Image src={value} width={size} height={size} rounded={size} {...rest} />
+    : <DefaultImage width={`${size}px`} height={`${size}px`} {...rest} />
+}
 
 ImageCol.propTypes = {
-  value: PropTypes.string
+  value: PropTypes.string,
+  size: PropTypes.number
 }
 
 export default ImageCol

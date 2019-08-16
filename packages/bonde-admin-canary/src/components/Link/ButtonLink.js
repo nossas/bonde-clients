@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { Button } from 'bonde-styleguide'
 import PropTypes from 'prop-types'
 
-const ButtonLink = ({ to, title, children, align }) => (
+const ButtonLink = ({ to, title, children, align, ...rest }) => (
   <Link to={to} title={title}>
-    <Button flat align={align || 'left'} padding='0'>
+    <Button flat align={align || 'left'} padding='0' {...rest}>
       {children}
     </Button>
   </Link>
