@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { chatbotCampaignsQuery } from '../graphql'
+import CampaignsList from './CampaignsList'
 
-const ChatbotCampaignssList = ({ chatbotId, dataListComponent: DataListComponent }) => {
+const ChatbotCampaignsList = ({ chatbotId, dataListComponent: DataListComponent }) => {
   return (
     <Query query={chatbotCampaignsQuery} variables={{ chatbotId }}>
       {({ loading, error, data }) => {
@@ -16,9 +17,13 @@ const ChatbotCampaignssList = ({ chatbotId, dataListComponent: DataListComponent
   )
 }
 
-ChatbotCampaignssList.propTypes = {
+ChatbotCampaignsList.propTypes = {
   chatbotId: PropTypes.number.isRequired,
   dataListComponent: PropTypes.any
 }
 
-export default ChatbotCampaignssList
+ChatbotCampaignsList.defaultProps = {
+  dataListComponent: CampaignsList
+}
+
+export default ChatbotCampaignsList

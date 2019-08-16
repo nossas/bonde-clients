@@ -12,7 +12,6 @@ import {
   Cell,
   Icon
 } from 'bonde-styleguide'
-import campaigns from 'scenes/Dashboard/campaigns'
 
 const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
@@ -58,7 +57,7 @@ const fields = {
   id: { label: 'Ações', render: MenuField, width: 500 }
 }
 
-const CampaignsList = () => (
+const CampaignsList = ({ chatbotCampaigns }) => (
   <Grid gap={0}>
     <Cell size={[2, 2, 2]}>
       <Flexbox horizontal spacing='between'>
@@ -71,10 +70,18 @@ const CampaignsList = () => (
       <DataListCard
         border='separate'
         fields={fields}
-        items={campaigns}
+        items={chatbotCampaigns}
       />
     </Cell>
   </Grid>
 )
+
+CampaignsList.defaultProps = {
+  chatbotCampaigns: []
+}
+
+CampaignsList.propTypes = {
+  chatbotCampaigns: PropTypes.array
+}
 
 export default CampaignsList

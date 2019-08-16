@@ -7,7 +7,7 @@ export default gql`
       name
       prefix
       diagram
-      draft
+      status
       chatbot_id
       created_at
       updated_at

@@ -2,18 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
 import { ContentPage } from 'scenes/Dashboard/components'
-import CampaignsList from './components/CampaignsList'
+import { ChatbotCampaignsList } from './components'
 import SettingsForm from './components/SettingsForm'
 import EditCampaign from './scenes/EditCampaign'
 
 const ChatbotPage = ({ match, community }) => {
+  const { chatbotId } = match.params
+
   return (
     <React.Fragment>
       <Route
         exact
         path={match.path}
         component={ContentPage}
-        componentProps={{ community, render: CampaignsList }}
+        componentProps={{ community, render: () => <ChatbotCampaignsList chatbotId={chatbotId} /> }}
       />
       <Route
         exact
