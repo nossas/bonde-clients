@@ -20,7 +20,13 @@ const CommunitySettinigsPage = ({ match, community }) => (
         exact={exact}
         path={exact ? match.path : `${match.path}${path}`}
         component={FormContentPage}
-        componentProps={{ community, ...rest }}
+        componentProps={{
+          community,
+          formProps: {
+            name: 'CommunitySettinigsForm'
+          },
+          ...rest
+        }}
       />
     ))}
   </React.Fragment>

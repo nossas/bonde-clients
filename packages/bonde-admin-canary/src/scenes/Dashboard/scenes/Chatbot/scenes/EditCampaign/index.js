@@ -28,6 +28,8 @@ Navigation.propTypes = {
   location: PropTypes.object.isRequired
 }
 
+const formName = 'EditCampaignForm'
+
 const ChatbotEditCampaignPage = ({ match, community }) => {
   const onSubmit = (values) => {
     // TODO: save on graphql
@@ -54,9 +56,9 @@ const ChatbotEditCampaignPage = ({ match, community }) => {
         componentProps={{
           ...componentProps,
           render: CampaignDiagram,
-          formProps: { onSubmit },
+          formProps: { name: formName, onSubmit },
           // eslint-disable-next-line react/display-name
-          actions: () => <SubmitButton>Salvar e publicar</SubmitButton>
+          actions: () => <SubmitButton formName={formName}>Salvar e publicar</SubmitButton>
         }}
       />
       <Route

@@ -18,10 +18,13 @@ import { isEmail, required } from 'services/validations'
 import { PasswordField } from '../components'
 import PropTypes from 'prop-types'
 
+const formName = 'AuthLoginForm'
+
 const AuthLogin = ({ t, location }) => (
   <React.Fragment>
     <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
     <FormGraphQL
+      name={formName}
       mutation={AUTHENTICATE}
       onSubmit={(values, mutation) => {
         return mutation({ variables: values })
@@ -85,7 +88,7 @@ const AuthLogin = ({ t, location }) => (
         >
           {t('links.forgetPassword')}
         </ButtonLink>
-        <SubmitButton title={t('button.submit')}>
+        <SubmitButton title={t('button.submit')} formName={formName}>
           {t('button.submit')}
         </SubmitButton>
       </Flexbox>

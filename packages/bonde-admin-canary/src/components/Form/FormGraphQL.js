@@ -9,17 +9,18 @@ const FormGraphQL = ({
   update,
   refetchQueries,
   onSubmit,
+  name,
   ...props
 }) => {
   return (
     <Mutation mutation={mutation} update={update} refetchQueries={refetchQueries}>
       {(mutationFunc) => (
         <Form
-          name={props.name}
+          name={name}
           onSubmit={(values) => {
             return onSubmit(values, mutationFunc)
               .then(() => {
-                resetForm(props.name)
+                resetForm(name)
                 return Promise.resolve()
               })
               .catch((error) => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { AuthProvider } from 'services/auth'
 import { PageLayout, TutorialPageLayout } from 'services/router'
 import { LoadingFullScreen } from 'components/Loadable'
-import { FullPageLayout } from './components'
+import { FullPageLayout, ContentPage } from './components'
 // scenes of app
 import AnalyticsPage from './scenes/Analytics'
 import ChatbotPage from './scenes/Chatbot'
@@ -17,11 +17,12 @@ const Dashboard = ({ match }) => {
       <TutorialPageLayout
         exact
         path={match.path}
-        component={HomePage}
+        component={ContentPage}
         pageProps={{
           title: 'Inicio',
           wrapperHeaderComponent: HomePage.Header
         }}
+        componentProps={{ render: HomePage }}
       />
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
       {/* Community Context */}
