@@ -87,7 +87,8 @@ CampaignsList.defaultProps = {
 }
 
 CampaignsList.propTypes = {
-  chatbotCampaigns: PropTypes.array
+  chatbotCampaigns: PropTypes.array,
+  match: PropTypes.object
 }
 
 export default CampaignsList

@@ -13,7 +13,6 @@ import {
   insertChatbotCampaignsMutation
 } from '../../graphql'
 
-
 const formName = 'CampaignForm'
 
 const Campaign = ({ match, community, chatbotCampaigns, history }) => {
@@ -98,7 +97,8 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
             formProps,
             title: campaign.name,
             render: CampaignDiagram,
-            actions: () => <SubmitButton formName={formName}>Salvar e publicar</SubmitButton>,
+            // eslint-disable-next-line react/display-name
+            actions: () => <SubmitButton formName={formName}>Salvar e publicar</SubmitButton>
           }}
         />
         <Route

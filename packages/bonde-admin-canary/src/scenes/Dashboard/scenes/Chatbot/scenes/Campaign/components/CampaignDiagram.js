@@ -97,4 +97,8 @@ class CampaignDiagram extends React.Component {
   }
 }
 
+CampaignDiagram.propTypes = {
+  campaign: PropTypes.object.isRequired
+}
+
 export default CampaignDiagram

@@ -126,6 +126,7 @@ FormGraphQLv2.defaultProps = {
   mutationVariables: {},
   queryVariables: {},
   onError: (err) => {
+    // eslint-disable-next-line no-console
     console.error(err)
     toast('Houve um problema com a requisição')
   }
