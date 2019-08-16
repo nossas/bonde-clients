@@ -60,7 +60,7 @@ const Button = styled.button`
     path {
       fill: #fff;
     }
-    
+
     &:hover {
       border-color: #bebebe;
       color: #bebebe;

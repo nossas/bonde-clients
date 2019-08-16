@@ -26,10 +26,7 @@ const authLink = setContext((_, { headers }) => {
 const cache = new InMemoryCache()
 
 export default new ApolloClient({
-  link: ApolloLink.from([
-    authLink,
-  	httpLink
-  ]),
+  link: ApolloLink.from([authLink, httpLink]),
   cache,
   connectToDevTools: true
 })
