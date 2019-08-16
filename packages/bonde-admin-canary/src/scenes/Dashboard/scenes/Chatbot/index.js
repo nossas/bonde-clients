@@ -5,7 +5,7 @@ import { ContentPage } from 'scenes/Dashboard/components'
 import { ChatbotCampaignsList } from './components'
 import CampaignsList from './components/CampaignsList'
 import SettingsForm from './components/SettingsForm'
-import EditCampaign from './scenes/EditCampaign'
+import CampaignPage from './scenes/Campaign'
 
 const ChatbotPage = ({ match, community }) => {
   const chatbotId = Number(match.params.chatbotId)
@@ -33,7 +33,7 @@ const ChatbotPage = ({ match, community }) => {
             />
             <Route
               path={`${match.path}/campaign/:campaignId`}
-              component={EditCampaign}
+              component={CampaignPage}
               componentProps={{ community, chatbotCampaigns }}
             />
           </React.Fragment>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
+import { toast } from 'react-toastify'
 import { Form, SubmissionError, resetForm } from './'
 import PropTypes from 'prop-types'
 
@@ -64,13 +65,13 @@ export class FormGraphQLv2 extends React.Component {
       mutationVariables,
       query,
       queryVariables,
-      cache,
+      cache: onCache,
       onSuccess,
       onError
     } = this.props
 
     let updateProps = {}
-    if (query && cache) {
+    if (query && onCache) {
       updateProps = {
         update: (cache, { data }) => {
           const readQuery = () => cache.readQuery({
@@ -80,7 +81,7 @@ export class FormGraphQLv2 extends React.Component {
           const writeQuery = (writeData) => {
             cache.writeQuery({ query, data: writeData })
           }
-          cache(readQuery, writeQuery, data)
+          onCache(readQuery, writeQuery, data)
         },
         refetchQueries: [{
           query,
@@ -95,7 +96,7 @@ export class FormGraphQLv2 extends React.Component {
         {...updateProps}
         mutation={mutation}
         onSubmit={(values, mutationPromise) => {
-          const variables = { ...values, ...mutationVariables }
+          const variables = { ...mutationVariables, ...values }
           return mutationPromise({ variables })
             .then(onSuccess)
             .catch(onError)
@@ -107,19 +108,25 @@ export class FormGraphQLv2 extends React.Component {
   }
 }
 
+const { func, node, object, oneOfType, string } = PropTypes
+
 FormGraphQLv2.propTypes = {
-  name: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  mutation: PropTypes.func.isRequired,
-  mutationVariables: PropTypes.object,
-  query: PropTypes.func,
-  queryVariables: PropTypes.object,
-  cache: PropTypes.func,
-  onSuccess: PropTypes.func,
-  onError: PropTypes.func
+  name: string.isRequired,
+  children: node,
+  mutation: oneOfType([func, object]).isRequired,
+  mutationVariables: object,
+  query: oneOfType([func, object]),
+  queryVariables: object,
+  cache: func,
+  onSuccess: func,
+  onError: func
 }
 
 FormGraphQLv2.defaultProps = {
   mutationVariables: {},
-  queryVariables: {}
+  queryVariables: {},
+  onError: (err) => {
+    console.error(err)
+    toast('Houve um problema com a requisição')
+  }
 }

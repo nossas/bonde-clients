@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const ButtonLink = ({ to, title, children, align, ...rest }) => (
   <Link to={to} title={title}>
-    <Button flat align={align || 'left'} padding='0' {...rest}>
+    <Button align={align} padding='0' {...rest}>
       {children}
     </Button>
   </Link>
@@ -16,6 +16,10 @@ ButtonLink.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
   align: PropTypes.string
+}
+
+ButtonLink.defaultProps = {
+  align: 'center'
 }
 
 export default ButtonLink

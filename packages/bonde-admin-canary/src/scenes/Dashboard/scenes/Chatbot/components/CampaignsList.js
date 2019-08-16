@@ -12,6 +12,7 @@ import {
   Cell,
   Icon
 } from 'bonde-styleguide'
+import { ButtonLink } from 'components/Link'
 
 const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
@@ -57,24 +58,29 @@ const fields = {
   id: { label: 'Ações', render: MenuField, width: 500 }
 }
 
-const CampaignsList = ({ chatbotCampaigns }) => (
-  <Grid gap={0}>
-    <Cell size={[2, 2, 2]}>
-      <Flexbox horizontal spacing='between'>
-        <Button flat active>TODOS</Button>
-        <Button flat>ATIVOS</Button>
-        <Button flat>INATIVOS</Button>
-      </Flexbox>
-    </Cell>
-    <Cell size={[12, 12, 12]}>
-      <DataListCard
-        border='separate'
-        fields={fields}
-        items={chatbotCampaigns}
-      />
-    </Cell>
-  </Grid>
-)
+const CampaignsList = ({ chatbotCampaigns, match }) => {
+  return (
+    <Grid gap={0}>
+      <Cell size={[2, 2, 2]}>
+        <Flexbox horizontal spacing='between'>
+          <Button flat active>TODOS</Button>
+          <Button flat>ATIVOS</Button>
+          <Button flat>INATIVOS</Button>
+        </Flexbox>
+      </Cell>
+      <Cell align='right' size={[10, 10, 10]}>
+        <ButtonLink to={`${match.url}/campaign/new`}>Novo fluxo</ButtonLink>
+      </Cell>
+      <Cell size={[12, 12, 12]}>
+        <DataListCard
+          border='separate'
+          fields={fields}
+          items={chatbotCampaigns}
+        />
+      </Cell>
+    </Grid>
+  )
+}
 
 CampaignsList.defaultProps = {
   chatbotCampaigns: []
