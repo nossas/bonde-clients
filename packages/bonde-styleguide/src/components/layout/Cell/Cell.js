@@ -8,6 +8,8 @@ const Cell = styled.div`
   display: grid;
   grid-column: span 12;
 
+  ${props => props.align && `text-align: ${props.align};`}
+
   /* https://gist.github.com/chrisjlee/5832418 */
   @media (min-width: 320px)  { grid-column: span ${props => props.size[5] || 12}; }
   @media (min-width: 480px)  { grid-column: span ${props => props.size[4] || 6}; }
