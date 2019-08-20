@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   Icon
 } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
+import { updateChatbotCampaignsMutation, chatbotCampaignsQuery } from '../graphql'
 
 const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
@@ -22,14 +24,38 @@ NameField.propTypes = {
   value: PropTypes.string
 }
 
-const StatusButtonField = ({ value }) => (
-  <SwitchSlider round checked={value === 'active'}>
-    <Text>{value === 'active' ? 'ATIVO' : 'INATIVO'}</Text>
-  </SwitchSlider>
+const StatusButtonField = ({ value, row }) => (
+  <Mutation
+    mutation={updateChatbotCampaignsMutation}
+    refetchQueries={[{ query: chatbotCampaignsQuery, variables: { chatbotId: row.chatbot_id } }]}
+  >
+    {(mutation) => (
+      <SwitchSlider
+        round
+        checked={value === 'active'}
+        onChange={() => {
+          const variables = {
+            name: row.name,
+            prefix: row.prefix,
+            diagram: row.diagram,
+            id: row.id,
+            status: value === 'active' ? 'inactive' : 'active'
+          }
+          mutation({ variables })
+            .then((data) => {
+            // TODO: dispatch notify
+            })
+        }}
+      >
+        <Text>{value === 'active' ? 'ATIVO' : 'INATIVO'}</Text>
+      </SwitchSlider>
+    )}
+  </Mutation>
 )
 
 StatusButtonField.propTypes = {
-  value: PropTypes.string
+  value: PropTypes.string,
+  row: PropTypes.object
 }
 
 const MenuField = withRouter(({ match, history, value }) => {
