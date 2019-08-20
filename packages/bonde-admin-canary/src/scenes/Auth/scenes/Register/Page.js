@@ -22,6 +22,7 @@ const AuthRegister = ({ t }) => (
   <React.Fragment>
     <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
     <FormGraphQL
+      name='AuthRegisterForm'
       mutation={REGISTER}
       onSubmit={(values, mutation) => {
         return mutation({

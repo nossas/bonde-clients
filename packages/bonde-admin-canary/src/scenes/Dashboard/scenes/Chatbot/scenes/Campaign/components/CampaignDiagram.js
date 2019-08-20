@@ -48,6 +48,10 @@ class DiagramField extends React.Component {
       // when the first message on diagram model should only has output port
       node = new MessageNodeModel('Escreva sua mensagem aqui', model.kind)
       node.addOutPort('Out')
+    } else if (nodesCount === 0 && model.kind === 'quick_reply') {
+      // when the first message on diagram model should only has output port
+      node = new MessageNodeModel('Escreva sua mensagem aqui', model.kind)
+      node.addQuickReply('Texto do botão')
     } else if (model.kind === 'text') {
       node = new MessageNodeModel('Escreva sua mensagem aqui', model.kind)
       node.addOutPort('Out')

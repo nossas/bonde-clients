@@ -83,6 +83,7 @@ const AuthLogin = ({ t, location }) => (
         </ButtonLink>
       */}
         <ButtonLink
+          flat
           to='/auth/forget-password'
           title={t('links.forgePassword')}
         >
