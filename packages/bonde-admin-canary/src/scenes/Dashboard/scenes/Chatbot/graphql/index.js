@@ -5,6 +5,7 @@ export { default as updateChatbotMutation } from './updateChatbot.graphql'
 export { default as chatbotCampaignsQuery } from './chatbotCampaigns.graphql'
 export { default as insertChatbotCampaignsMutation } from './insertChatbotCampaigns.graphql'
 export { default as updateChatbotCampaignsMutation } from './updateChatbotCampaigns.graphql'
+export { default as deleteChatbotCampaignsMutation } from './deleteChatbotCampaigns.graphql'
 
 export { default as chatbotSettingsQuery } from './chatbotSettings.graphql'
 export { default as insertChatbotSettingsMutation } from './insertChatbotSettings.graphql'

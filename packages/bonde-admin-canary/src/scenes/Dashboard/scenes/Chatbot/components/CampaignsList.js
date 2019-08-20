@@ -14,7 +14,11 @@ import {
   Icon
 } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
-import { updateChatbotCampaignsMutation, chatbotCampaignsQuery } from '../graphql'
+import {
+  updateChatbotCampaignsMutation,
+  chatbotCampaignsQuery,
+  deleteChatbotCampaignsMutation
+} from '../graphql'
 
 const NameField = ({ value }) => (
   <Title.H4>{value}</Title.H4>
@@ -58,19 +62,33 @@ StatusButtonField.propTypes = {
   row: PropTypes.object
 }
 
-const MenuField = withRouter(({ match, history, value }) => {
+const MenuField = withRouter(({ match, history, value, row }) => {
   return (
-    <Flexbox horizontal>
-      <Button
-        flat
-        onClick={() => {
-          history.push(`${match.url}/campaign/${value}`)
-        }}
-      >
-        <Icon name='pencil' /> Editar
-      </Button>
-      <Button flat><Icon name='trash' /> Excluir</Button>
-    </Flexbox>
+    <Mutation
+      mutation={deleteChatbotCampaignsMutation}
+      refetchQueries={[{ query: chatbotCampaignsQuery, variables: { chatbotId: row.chatbot_id } }]}
+    >
+      {(mutation) => (
+        <Flexbox horizontal>
+          <Button
+            flat
+            onClick={() => {
+              history.push(`${match.url}/campaign/${value}`)
+            }}
+          >
+            <Icon name='pencil' /> Editar
+          </Button>
+          <Button
+            flat
+            onClick={() => {
+              mutation({ variables: { campaignId: Number(value) } })
+            }}
+          >
+            <Icon name='trash' /> Excluir
+          </Button>
+        </Flexbox>
+      )}
+    </Mutation>
   )
 })
 
