@@ -5,18 +5,18 @@ import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
 import { toSnakeCase } from 'scenes/Dashboard/utils'
 
-const menus = ({ community }) => [
-  {
+const menuBuilder = (menuName, { community, module }) => ({
+  'dashboard': {
     icon: 'chart',
     component: ButtonLink,
     to: `/admin/${community.id}/analytics`
   },
-  {
+  'chatbot': {
     icon: 'bot',
     component: ButtonLink,
-    to: `/admin/${community.id}/chatbot/1`
+    to: `/admin/${community.id}/chatbot/${module}`
   },
-  {
+  'mobilization': {
     icon: 'window',
     component: Button,
     onClick: () => {
@@ -28,17 +28,26 @@ const menus = ({ community }) => [
         })
     }
   },
-  {
+  'settings': {
     icon: 'settings',
     component: ButtonLink,
     to: `/admin/${community.id}/settings`
   }
-]
+})[menuName]
 
 const CommunityMenu = ({ community, dark, pathname }) => {
+  const modules = JSON.parse(community.modules)
+
+  const menus = Object.keys(modules).map((moduleName) => {
+    const module = modules[moduleName]
+    if (!!module) {
+      return menuBuilder(moduleName, { community, module })
+    }
+  }).filter(obj => !!obj)
+
   return (
     <Flexbox horizontal spacing='between'>
-      {menus({ community }).map(({ component: Component, icon, ...rest }, i) => {
+      {menus.map(({ component: Component, icon, ...rest }, i) => {
         const ownProps = {
           ...rest, dark, flat: true, active: pathname && pathname.startsWith(rest.to)
         }

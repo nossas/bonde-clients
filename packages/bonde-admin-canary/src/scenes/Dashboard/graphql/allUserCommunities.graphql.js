@@ -22,6 +22,7 @@ query CurrentUserCommunities (
       twitterLink
       facebookAppId
       emailTemplateFrom
+      modules
     }
     totalCount
   }
