@@ -20,10 +20,14 @@ Form.propTypes = {
   handleSubmit: PropTypes.func
 }
 
-const FormRedux = ({ name, children, ...formProps }) => {
-  const ReduxFormComponent = reduxForm({ form: name })(Form)
+const FormRedux = ({ name, children, initialValues, ...formProps }) => {
+  const ReduxFormComponent = reduxForm({
+    form: name,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
+    initialValues
+  })(Form)
   const elements = React.Children.toArray(children)
-
   return (
     <ReduxFormComponent {...formProps}>
       {elements.map(child => React.cloneElement(child, { formName: name }))}
