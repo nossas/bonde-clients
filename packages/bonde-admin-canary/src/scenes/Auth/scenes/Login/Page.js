@@ -9,7 +9,8 @@ import {
   Flexbox2 as Flexbox,
   FormField,
   Input,
-  Title
+  Title,
+  Spacing
 } from 'bonde-styleguide'
 
 import { FormGraphQL, Field, SubmitButton } from 'components/Form'
@@ -22,7 +23,9 @@ const formName = 'AuthLoginForm'
 
 const AuthLogin = ({ t, location }) => (
   <React.Fragment>
-    <Title.H1 margin={{ bottom: 37 }}>{t('welcome')}</Title.H1>
+    <Spacing margin={{ bottom: 37 }}>
+      <Title.H1>{t('welcome')}</Title.H1>
+    </Spacing>
     <FormGraphQL
       name={formName}
       mutation={AUTHENTICATE}
