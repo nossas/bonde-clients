@@ -36,6 +36,7 @@ const FormRedux = ({ name, children, initialValues, ...formProps }) => {
 }
 
 FormRedux.propTypes = {
+  initialValues: PropTypes.object,
   /* name form used to controller redux */
   name: PropTypes.string.isRequired,
   /* all children received default props { formName: props.name } */

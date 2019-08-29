@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
 mutation UpdateChatbotSettings($settings: jsonb!, $id: Int!) {
-  update_chatbot_campaigns(
+  update_chatbot_settings(
     _set: {
       settings: $settings,
     },

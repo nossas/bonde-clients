@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
 import { ContentPage } from 'scenes/Dashboard/components'
-import { ChatbotCampaignsList } from './components'
+import {
+  ChatbotCampaignsList,
+  ChatbotSettingsForm
+} from './components'
 import CampaignsList from './components/CampaignsList'
-import SettingsForm from './components/SettingsForm'
 import CampaignPage from './scenes/Campaign'
 
 const ChatbotPage = ({ match, community }) => {
@@ -29,7 +31,11 @@ const ChatbotPage = ({ match, community }) => {
               exact
               path={`${match.path}/settings`}
               component={ContentPage}
-              componentProps={{ community, render: SettingsForm }}
+              componentProps={{
+                community,
+                chatbotId,
+                render: ChatbotSettingsForm
+              }}
             />
             <Route
               path={`${match.path}/campaign/:campaignId`}

@@ -1,59 +1,106 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormField, Select, Textarea } from 'bonde-styleguide'
+import {
+  Card,
+  Flexbox2 as Flexbox,
+  Input,
+  Button
+} from 'bonde-styleguide'
+import { graphqlApi as GraphQLAPI } from 'services/graphql'
+import { Field, FormField, MutationForm } from 'components/Forms'
 import { required } from 'services/validations'
-import { FormGraphQLv2, Field, SubmitButton } from 'components/Form'
-// module imports
-import { chatbotSettingsQuery, insertChatbotSettingsMutation } from '../graphql'
+import {
+  chatbotSettingsQuery,
+  updateChatbotSettingsMutation,
+  insertChatbotSettingsMutation
+} from '../graphql'
 
-const ChatbotSettingsForm = ({ chatbotId, updateScene }) => {
-  // TODO: dispatch notification
-  return (
-    <FormGraphQLv2
-      name='ChatbotSettingsForm'
-      mutation={insertChatbotSettingsMutation}
-      mutationVariables={{ chatbotId }}
-      query={chatbotSettingsQuery}
-      queryVariables={{ chatbotId }}
-      cache={(readQuery, writeQuery, data) => {
+class ChatbotSettingsForm extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { chatbotSettings: [], fetching: true }
+  }
+
+  componentDidMount () {
+    const { chatbotId } = this.props
+    GraphQLAPI.query({ query: chatbotSettingsQuery, variables: { chatbotId } })
+      .then(({ data }) => {
+        const { chatbot_settings: chatbotSettings } = data
+        this.setState({ fetching: false, chatbotSettings })
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('[Chatbot] SettingsForm:', err)
+        this.setState({ fetching: false })
+      })
+  }
+
+  render () {
+    const { chatbotId } = this.props
+    // TODO: chatbot funciona apenas com configurações do Facebook
+    const mutationFormProps = {
+      mutation: insertChatbotSettingsMutation,
+      variables: { chatbotId, channel: 'facebook' },
+      refetchQueries: [{ query: chatbotSettingsQuery, variables: { chatbotId } }]
+    }
+
+    if (this.state.chatbotSettings.length > 0) {
+      const config = this.state.chatbotSettings.filter(c => c.channel === 'facebook')[0]
+      // throw exception when facebook config not exists
+      if (config === undefined) throw new Error('Bonde implement only facebook webhooks')
+
+      mutationFormProps.mutation = updateChatbotSettingsMutation
+      mutationFormProps.variables = { id: config.id }
+
+      // fill form with default values
+      mutationFormProps.values = { settings: config.settings }
+    } else {
+      mutationFormProps.updateQuery = (readQuery, writeQuery, data) => {
         const { insert_chatbot_settings: { returning } } = data
-        const { chatbot_settings: chatbotSettings } = readQuery()
-        chatbotSettings.push(returning[0])
-        writeQuery({ chatbot_settings: chatbotSettings })
-      }}
-      onSuccess={updateScene}
-    >
-      <Field
-        name='channel'
-        label='Canal'
-        component={FormField}
-        inputComponent={(props) => {
-          return (
-            <Select native {...props}>
-              <option value='facebook'>Facebook</option>
-              <option value='whatsapp'>WhatsApp</option>
-              <option value='google'>Google Assistent</option>
-            </Select>
-          )
-        }}
-        validate={required('Canal deve ser preenchido')}
-      />
-      <Field
-        name='settings'
-        label='Configurações'
-        placeholder='Informe suas configurações no formato JSON'
-        component={FormField}
-        inputComponent={Textarea}
-        validate={required('Configurações deve ser preenchido')}
-      />
-      <SubmitButton>Salvar</SubmitButton>
-    </FormGraphQLv2>
-  )
+        const { chatbot_settings: settings } = readQuery()
+        settings.push(returning[0])
+        writeQuery({ chatbot_settings: settings })
+      }
+    }
+    return (
+      <Card rounded={5} padding={{ x: 40, y: 40 }}>
+        <Flexbox vertical>
+          <MutationForm formId='ChabotSettingsForm' {...mutationFormProps}>
+            <Field
+              type='text'
+              name='settings.messenger_app_secret'
+              label='Chave de acesso ao Facebook app'
+              placeholder='Informe sua chave de acesso ao Facebook app'
+              component={FormField}
+              inputComponent={Input}
+              validate={[required('Chave de acesso deve ser preenchido')]}
+            />
+            <Field
+              name='settings.messenger_validation_token'
+              label='Token para validação'
+              placeholder='Informe seu token para validação'
+              component={FormField}
+              inputComponent={Input}
+              validate={[required('Token para validação deve ser preenchido')]}
+            />
+            <Field
+              name='settings.messenger_page_access_token'
+              label='Chave de acesso ao Facebook page'
+              placeholder='Informe sua chave de acesso ao Facebook page'
+              component={FormField}
+              inputComponent={Input}
+              validate={[required('Chave de acesso ao Facebook page deve ser preenchido')]}
+            />
+            <Button type='submit'>Salvar</Button>
+          </MutationForm>
+        </Flexbox>
+      </Card>
+    )
+  }
 }
 
 ChatbotSettingsForm.propTypes = {
-  chatbotId: PropTypes.number.isRequired,
-  updateScene: PropTypes.func.isRequired
+  chatbotId: PropTypes.number.isRequired
 }
 
 export default ChatbotSettingsForm
