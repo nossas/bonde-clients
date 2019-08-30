@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'components/Form'
+import { Form } from 'components/Forms'
 import ContentPage from './ContentPage'
 
-const FormContentPage = ({ form: FormComponent, formName, formProps, ...rest }) => (
-  <FormComponent name={formName} {...formProps}>
+const FormContentPage = ({ form: FormComponent, formId, formProps, ...rest }) => (
+  <FormComponent formId={formId} {...formProps}>
     <ContentPage {...rest} />
   </FormComponent>
 )
 
 FormContentPage.propTypes = {
   form: PropTypes.any.isRequired,
-  formName: PropTypes.string,
+  formId: PropTypes.string,
   formProps: PropTypes.object
 }
 

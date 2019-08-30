@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
+import { SubmissionError } from 'redux-form'
 import GenericReduxForm from './GenericReduxForm'
 
 const GenericMutationForm = ({
@@ -8,6 +9,7 @@ const GenericMutationForm = ({
   variables,
   refetchQueries,
   updateQuery,
+  onSuccess,
   ...rest
 }) => {
   const mutationProps = { mutation, refetchQueries }
@@ -31,6 +33,19 @@ const GenericMutationForm = ({
           onSubmit={values => {
             // Return a Promise to
             return action({ variables: { ...variables, ...values } })
+              .then(onSuccess)
+              .catch((error) => {
+                if (error && (error.form || error.fields)) {
+                  let errors = {}
+                  if (error.form) {
+                    errors = { _error: error.form }
+                  }
+                  if (error.fields) {
+                    errors = { ...errors, ...error.fields }
+                  }
+                  throw new SubmissionError(errors)
+                }
+              })
           }}
         />
       )}
@@ -38,16 +53,17 @@ const GenericMutationForm = ({
   )
 }
 
-const { arrayOf, func, object, shape } = PropTypes
+const { arrayOf, func, object, shape, oneOfType } = PropTypes
 
 GenericMutationForm.propTypes = {
-  mutation: func.isRequired,
+  mutation: oneOfType([func, object]).isRequired,
   variables: object,
   updateQuery: func,
   refetchQueries: arrayOf(shape({
     query: func,
     variables: object
-  }))
+  })),
+  onSuccess: func,
 }
 
 GenericMutationForm.defaultProps = {
