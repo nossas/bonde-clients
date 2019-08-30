@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'services/auth'
+import { Redirect } from 'services/router'
 import { ContentPage } from 'scenes/Dashboard/components'
 import {
   ChatbotCampaignsList,
@@ -10,7 +11,12 @@ import CampaignsList from './components/CampaignsList'
 import CampaignPage from './scenes/Campaign'
 
 const ChatbotPage = ({ match, community }) => {
+  const modules = JSON.parse(community.modules)
   const chatbotId = Number(match.params.chatbotId)
+  if (!modules.chatbot || modules.chatbot !== chatbotId) {
+    return <Redirect to={`/admin/${community.id}/settings`} />
+  }
+
   return (
     <ChatbotCampaignsList
       chatbotId={chatbotId}
