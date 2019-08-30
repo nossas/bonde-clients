@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
 const GenericReduxForm = compose(
   connect(mapStateToProps),
   reduxForm({
-    enableReinitialize: true
+    enableReinitialize: true,
+    destroyOnUnmount: false
   })
 )(GenericForm)
 

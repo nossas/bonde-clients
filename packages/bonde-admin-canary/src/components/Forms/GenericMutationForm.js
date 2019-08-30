@@ -16,8 +16,8 @@ const GenericMutationForm = ({
   const mutationProps = { mutation, refetchQueries }
   if (updateQuery && refetchQueries) {
     mutationProps.update = (cache, { data }) => {
-      const { query, variables } = refetchQueries[0]
-      const readQuery = () => cache.readQuery({ query, variables })
+      const { query, variables: queryVariables } = refetchQueries[0]
+      const readQuery = () => cache.readQuery({ query, variables: queryVariables })
       const writeQuery = (writeData) => {
         cache.writeQuery({ query, data: writeData })
       }
@@ -64,7 +64,7 @@ GenericMutationForm.propTypes = {
     query: func,
     variables: object
   })),
-  onSuccess: func,
+  onSuccess: func
 }
 
 GenericMutationForm.defaultProps = {

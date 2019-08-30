@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Button, Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
-import { toSnakeCase } from 'scenes/Dashboard/utils'
 
 const menuBuilder = (menuName, { community, module }) => ({
   'dashboard': {
@@ -21,7 +20,7 @@ const menuBuilder = (menuName, { community, module }) => ({
     component: Button,
     onClick: () => {
       authSession
-        .setAsyncItem('community', toSnakeCase(community))
+        .setAsyncItem('community', community)
         .then(() => {
           const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
           window.open(baseUrl, '_blank')
