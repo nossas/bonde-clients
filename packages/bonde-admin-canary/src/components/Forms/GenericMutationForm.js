@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { SubmissionError } from 'redux-form'
+import { toast } from 'react-toastify'
 import GenericReduxForm from './GenericReduxForm'
 
 const GenericMutationForm = ({
@@ -67,7 +68,10 @@ GenericMutationForm.propTypes = {
 }
 
 GenericMutationForm.defaultProps = {
-  variables: {}
+  variables: {},
+  onSuccess: () => {
+    toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
+  }
 }
 
 export default GenericMutationForm
