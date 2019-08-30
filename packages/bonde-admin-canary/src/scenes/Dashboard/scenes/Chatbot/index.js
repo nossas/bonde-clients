@@ -36,12 +36,8 @@ const ChatbotPage = ({ match, community }) => {
             <Route
               exact
               path={`${match.path}/settings`}
-              component={ContentPage}
-              componentProps={{
-                community,
-                chatbotId,
-                render: ChatbotSettingsForm
-              }}
+              component={ChatbotSettingsForm}
+              componentProps={{ community, chatbotId }}
             />
             <Route
               path={`${match.path}/campaign/:campaignId`}

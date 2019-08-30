@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 import {
   Card,
   Flexbox2 as Flexbox,
-  Input,
-  Button
+  Input
 } from 'bonde-styleguide'
 import { graphqlApi as GraphQLAPI } from 'services/graphql'
-import { Field, FormField, MutationForm } from 'components/Forms'
+import { Field, FormField, MutationForm, SubmitButton } from 'components/Forms'
 import { required } from 'services/validations'
 import {
   chatbotSettingsQuery,
   updateChatbotSettingsMutation,
   insertChatbotSettingsMutation
 } from '../graphql'
+import { ContentPageComponent } from 'scenes/Dashboard/components'
 
 class ChatbotSettingsForm extends React.Component {
   constructor (props) {
@@ -33,6 +33,12 @@ class ChatbotSettingsForm extends React.Component {
         console.error('[Chatbot] SettingsForm:', err)
         this.setState({ fetching: false })
       })
+  }
+
+  renderSubmitButton () {
+    return (
+      <SubmitButton formId='ChabotSettingsForm'>Salvar alterações</SubmitButton>
+    )
   }
 
   render () {
@@ -63,38 +69,41 @@ class ChatbotSettingsForm extends React.Component {
       }
     }
     return (
-      <Card rounded={5} padding={{ x: 40, y: 40 }}>
-        <Flexbox vertical>
-          <MutationForm formId='ChabotSettingsForm' {...mutationFormProps}>
-            <Field
-              type='text'
-              name='settings.messenger_app_secret'
-              label='Chave de acesso ao Facebook app'
-              placeholder='Informe sua chave de acesso ao Facebook app'
-              component={FormField}
-              inputComponent={Input}
-              validate={[required('Chave de acesso deve ser preenchido')]}
-            />
-            <Field
-              name='settings.messenger_validation_token'
-              label='Token para validação'
-              placeholder='Informe seu token para validação'
-              component={FormField}
-              inputComponent={Input}
-              validate={[required('Token para validação deve ser preenchido')]}
-            />
-            <Field
-              name='settings.messenger_page_access_token'
-              label='Chave de acesso ao Facebook page'
-              placeholder='Informe sua chave de acesso ao Facebook page'
-              component={FormField}
-              inputComponent={Input}
-              validate={[required('Chave de acesso ao Facebook page deve ser preenchido')]}
-            />
-            <Button type='submit'>Salvar</Button>
-          </MutationForm>
-        </Flexbox>
-      </Card>
+      <MutationForm formId='ChabotSettingsForm' {...mutationFormProps}>
+        <ContentPageComponent actions={this.renderSubmitButton.bind(this)}>
+          {() => (
+          <Card rounded={5} padding={{ x: 40, y: 40 }}>
+            <Flexbox vertical>
+              <Field
+                type='text'
+                name='settings.messenger_app_secret'
+                label='Chave de acesso ao Facebook app'
+                placeholder='Informe sua chave de acesso ao Facebook app'
+                component={FormField}
+                inputComponent={Input}
+                validate={[required('Chave de acesso deve ser preenchido')]}
+              />
+              <Field
+                name='settings.messenger_validation_token'
+                label='Token para validação'
+                placeholder='Informe seu token para validação'
+                component={FormField}
+                inputComponent={Input}
+                validate={[required('Token para validação deve ser preenchido')]}
+              />
+              <Field
+                name='settings.messenger_page_access_token'
+                label='Chave de acesso ao Facebook page'
+                placeholder='Informe sua chave de acesso ao Facebook page'
+                component={FormField}
+                inputComponent={Input}
+                validate={[required('Chave de acesso ao Facebook page deve ser preenchido')]}
+              />
+            </Flexbox>
+          </Card>
+          )}
+        </ContentPageComponent>
+      </MutationForm>
     )
   }
 }

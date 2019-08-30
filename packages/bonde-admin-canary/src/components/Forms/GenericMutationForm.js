@@ -61,7 +61,7 @@ GenericMutationForm.propTypes = {
   variables: object,
   updateQuery: func,
   refetchQueries: arrayOf(shape({
-    query: func,
+    query: oneOfType([func, object]),
     variables: object
   })),
   onSuccess: func
