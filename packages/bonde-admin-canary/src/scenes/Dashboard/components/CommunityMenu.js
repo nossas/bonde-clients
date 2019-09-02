@@ -3,44 +3,53 @@ import PropTypes from 'prop-types'
 import { Button, Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
-import { toSnakeCase } from 'scenes/Dashboard/utils'
 
-const menus = ({ community }) => [
-  {
+const menuBuilder = (menuName, { community, module }) => ({
+  'dashboard': {
     icon: 'chart',
     component: ButtonLink,
-    to: `/admin/${community.id}`
+    to: `/admin/${community.id}/analytics`
   },
-  {
+  'chatbot': {
     icon: 'bot',
     component: ButtonLink,
-    to: `/admin/${community.id}/chatbot`
+    to: `/admin/${community.id}/chatbot/${module}`
   },
-  {
+  'mobilization': {
     icon: 'window',
     component: Button,
     onClick: () => {
       authSession
-        .setAsyncItem('community', toSnakeCase(community))
+        .setAsyncItem('community', community)
         .then(() => {
           const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
           window.open(baseUrl, '_blank')
         })
     }
   },
-  {
+  'settings': {
     icon: 'settings',
     component: ButtonLink,
     to: `/admin/${community.id}/settings`
   }
-]
+})[menuName]
 
 const CommunityMenu = ({ community, dark, pathname }) => {
+  const modules = JSON.parse(community.modules)
+
+  const menus = Object.keys(modules).map((moduleName) => {
+    const module = modules[moduleName]
+    if (module) {
+      return menuBuilder(moduleName, { community, module })
+    }
+    return null
+  }).filter(obj => !!obj)
+
   return (
     <Flexbox horizontal spacing='between'>
-      {menus({ community }).map(({ component: Component, icon, ...rest }, i) => {
+      {menus.map(({ component: Component, icon, ...rest }, i) => {
         const ownProps = {
-          ...rest, dark, flat: true, active: pathname && pathname === rest.to
+          ...rest, dark, flat: true, active: pathname && pathname.startsWith(rest.to)
         }
         return (
           <Component key={`community-menu-${i}`} {...ownProps}>

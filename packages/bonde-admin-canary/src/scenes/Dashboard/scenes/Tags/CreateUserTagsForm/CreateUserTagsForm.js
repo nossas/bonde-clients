@@ -7,9 +7,12 @@ import CreateUserTags from './createUserTags.graphql'
 import updateCurrentUserTags from './updateCurrentUserTags'
 import PropTypes from 'prop-types'
 
+const formName = 'CreateUserTagsForm'
+
 const CreateUserTagsForm = ({ t, user, onSuccess }) => {
   return (
     <FormGraphQL
+      name={formName}
       initialValues={{ tags: user.tags.join(';') }}
       mutation={CreateUserTags}
       update={updateCurrentUserTags}
@@ -28,6 +31,7 @@ const CreateUserTagsForm = ({ t, user, onSuccess }) => {
         <Button
           type='submit'
           title={t('buttons.submit')}
+          formName={formName}
         >
           {t('buttons.submit')}
         </Button>

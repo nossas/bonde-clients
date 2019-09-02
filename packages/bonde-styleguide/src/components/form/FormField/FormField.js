@@ -9,51 +9,55 @@ import InputHint from '../InputHint/InputHint'
  * Full field component that composes ControlLabel, props.inputComponent,
  * InputHint and InputAdornment components.
  */
-const FormField = ({
-  label,
-  hint,
-  placeholder,
-  meta: { error, valid, touched, dirty },
-  inputComponent: InputComponent,
-  input,
-  showValid,
-  ...props
-}) => {
+class FormField extends React.Component {
+  render () {
+    const {
+      label,
+      hint,
+      placeholder,
+      meta: { error, valid, touched, dirty },
+      inputComponent: InputComponent,
+      input,
+      showValid,
+      ...props
+    } = this.props
 
-  const adornmentProps = {}
-  let showAdornment = false
-  if (touched) {
-    if (!!error) {
-      adornmentProps.invalid = true
-      showAdornment = true
-    } else if (valid && showValid) {
-      adornmentProps.valid = true
-      showAdornment = true
+    const adornmentProps = {}
+    let showAdornment = false
+
+    if (touched) {
+      if (!!error) {
+        adornmentProps.invalid = true
+        showAdornment = true
+      } else if (valid && showValid) {
+        adornmentProps.valid = true
+        showAdornment = true
+      }
     }
-  }
 
-  return (
-    <div style={{ padding: '0 0 17px' }}>
-      <Flexbox horizontal>
-        <ControlLabel>{label}</ControlLabel>
-        {(touched && error && typeof error === 'string') && <InputHint invalid={true}>{error}</InputHint>}
-        {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
-      </Flexbox>
-      <Flexbox horizontal>
-        <InputComponent
-          fullWidth
-          invalid={touched && !!error}
-          valid={touched && valid}
-          placeholder={placeholder}
-          touched={touched}
-          showValid={showValid}
-          {...input}
-          {...props}
-        />
-        {showAdornment && (<InputAdornment {...adornmentProps} />)}
-      </Flexbox>
-    </div>
-  )
+    return (
+      <div style={{ padding: '0 0 17px' }}>
+        <Flexbox horizontal>
+          <ControlLabel>{label}</ControlLabel>
+          {(touched && error && typeof error === 'string') && <InputHint invalid={true}>{error}</InputHint>}
+          {(hint && (!error || !touched)) && <InputHint>{hint}</InputHint>}
+        </Flexbox>
+        <Flexbox horizontal>
+          <InputComponent
+            fullWidth
+            invalid={touched && !!error}
+            valid={touched && valid}
+            placeholder={placeholder}
+            touched={touched}
+            showValid={showValid}
+            {...input}
+            {...props}
+          />
+          {showAdornment && (<InputAdornment {...adornmentProps} />)}
+        </Flexbox>
+      </div>
+    )
+  }
 }
 
 FormField.propTypes = {

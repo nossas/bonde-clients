@@ -5,6 +5,7 @@ import { PageLayout } from 'services/router'
 import UserCommunities from './UserCommunities'
 import CommunitiesDropdown from './CommunitiesDropdown'
 import CommunityMenu from './CommunityMenu'
+import CommunityPageTabs from './CommunityPageTabs'
 
 /**
   * CommmunityPageLayout renders a module application, here
@@ -14,7 +15,7 @@ import CommunityMenu from './CommunityMenu'
   *
   */
 const CommunityPageLayout = withRouter(
-  ({ location, history, pageProps, componentProps, loading: Loading, ...rest }) => (
+  ({ location, match, path, history, pageProps, componentProps, tabs, loading: Loading, ...rest }) => (
     <UserCommunities component={
       ({ communities, loading }) => {
         if (loading && Loading) return <Loading />
@@ -25,12 +26,22 @@ const CommunityPageLayout = withRouter(
         if (matches && matches.length === 1) {
           communityId = Number(matches[0].replace('/admin/', ''))
         }
-
+        // TODO: check a better trick to resolve this case
+        const baseUrl = path.replace(':communityId', communityId)
         const community = communities.filter(c => c.id === communityId)[0]
 
         // manipular renderização do Header de PageLayout
         const newPageProps = {
           ...pageProps,
+          // eslint-disable-next-line react/display-name
+          tabs: tabs ? () => (
+            <CommunityPageTabs
+              location={location}
+              baseUrl={baseUrl}
+              community={community}
+              tabs={tabs}
+            />
+          ) : undefined,
           // eslint-disable-next-line react/display-name
           dropdown: () => (
             <Flexbox horizontal>
@@ -61,6 +72,7 @@ const CommunityPageLayout = withRouter(
         // extender PageLayout com novo Header contendo CommunitiesDropdown
         return (
           <PageLayout
+            path={path}
             pageProps={newPageProps}
             componentProps={{ ...componentProps, community }}
             {...rest}

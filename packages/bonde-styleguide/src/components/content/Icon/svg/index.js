@@ -1,6 +1,8 @@
 import AngleDown from './AngleDown'
 import AngleRight from './AngleRight'
 import Archive from './Archive'
+import ArrowLeft from './ArrowLeft'
+import ArrowRight from './ArrowRight'
 import Bonde from './Bonde'
 import Bot from './Bot'
 import Chart from './Chart'
@@ -8,6 +10,7 @@ import Copy from './Copy'
 import DoubleArrowLeft from './DoubleArrowLeft'
 import DoubleArrowRight from './DoubleArrowRight'
 import Exclamation from './Exclamation'
+import Pencil from './Pencil'
 import Plus from './Plus'
 import Settings from './Settings'
 import Share from './Share'
@@ -23,6 +26,8 @@ export default {
   'angle-down': AngleDown,
   'angle-right': AngleRight,
   'archive': Archive,
+  'arrow-left': ArrowLeft,
+  'arrow-right': ArrowRight,
   'chart': Chart,
   'bonde': Bonde,
   'bot': Bot,
@@ -30,6 +35,7 @@ export default {
   'double-arrow-left': DoubleArrowLeft,
   'double-arrow-right': DoubleArrowRight,
   'exclamation': Exclamation,
+  'pencil': Pencil,
   'plus': Plus,
   'settings': Settings,
   'share': Share,

@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react'
-import {
-  Checkbox,
-  FormField,
-  Input
-} from 'bonde-styleguide'
+import { Checkbox, Input } from 'bonde-styleguide'
+import { FormField } from 'components/Forms'
 import { translate } from 'services/i18n'
 import PropTypes from 'prop-types'
 

@@ -58,19 +58,19 @@ const Header = ({
         </Spacing>
       )}
 
+      {title ? (
+        <Spacing margin={{ y: 20 }}>
+          <RenderElement component={title} />
+        </Spacing>
+      ) : <div />}
+
       {tabs && (
-        <Spacing margin={{ bottom: -22 }}>
+        <Spacing margin={{ top: 22, bottom: -22 }}>
           <Tabs>
             <RenderElement component={tabs} />
           </Tabs>
         </Spacing>
       )}
-
-      {title ? (
-        <Spacing margin={{ top: 25, bottom: 10 }}>
-          <RenderElement component={title} />
-        </Spacing>
-      ) : <div />}
     </HeaderStyleguide>
   )
 }

@@ -8,7 +8,7 @@ import { px } from '../../../utils'
 const DataListCol = styled.div`
   ${props => props.width && `width: ${px(props.width)};`}
   display: table-cell;
-  padding: 13px 15px 14px 15px;
+  padding: ${props => props.padding ? '13px 15px 14px 15px' : '0 15px 0 15px'};
   vertical-align: middle;
 
   &:first-child {
@@ -31,7 +31,8 @@ DataListCol.propTypes = {
 }
 
 DataListCol.defaultProps = {
-  align: 'inherit'
+  align: 'inherit',
+  padding: true
 }
 
 DataListCol.displayName = 'DataListCol'

@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Input = styled.input`
-  ${props => props.fullWidth && 'width: 100%;'}
+  ${props => props.fullWidth && css`width: 100%;`}
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
   color: #000000;
@@ -25,20 +25,24 @@ const Input = styled.input`
   &:-ms-input-placeholder { color: #424242 }
   &:-moz-placeholder { color: #424242 }
 
-  ${props => !props.invalid && !props.valid && `{
+  ${props => !props.invalid && !props.valid && css`
     &:focus { border-bottom: 1px solid #EE0099; }
-  }`}
+  `}
 
-  ${props => props.invalid && `{
+  ${props => props.invalid && css`
     border-bottom-color: #FF0931;
-  }`}
+  `}
 
-  ${props => props.showValid && props.touched && props.valid && `{
+  ${props => props.showValid && props.touched && props.valid && `
     border-bottom-color: #50e3c2;
-  }`}
+  `}
 `
 
 Input.displayName = 'Input'
+
+Input.defaultProps = {
+  fullWidth: true
+}
 
 /** @component */
 export default Input

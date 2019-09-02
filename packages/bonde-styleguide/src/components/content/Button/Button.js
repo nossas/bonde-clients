@@ -76,6 +76,7 @@ const Button = styled.button`
   `}
 
   ${props => props.active && css`
+    color: #ee0099!important;
     path {
       fill: #ee0099!important;
     }

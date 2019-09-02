@@ -50,7 +50,8 @@ class AuthProvider extends React.Component {
       <Query query={CurrentUserQuery}>
         {({ data, loading, error }) => {
           if (loading) return <Loading />
-
+          // eslint-disable-next-line no-console
+          console.log('error', error)
           const hasError = (typeof error === 'object' && this.authErrors.indexOf(error.graphQLErrors[0].message) !== -1)
           if (hasError || !data || !data.currentUser) {
             this.handleLogout()
