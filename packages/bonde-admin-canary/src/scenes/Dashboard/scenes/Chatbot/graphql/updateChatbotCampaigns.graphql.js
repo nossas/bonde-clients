@@ -1,14 +1,9 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation UpdateChatbotCampaigns($name: String!, $prefix: String!, $diagram: jsonb!, $id: Int!, $status: String!) {
+mutation UpdateChatbotCampaigns($campaign: chatbot_campaigns_set_input!, $id: Int!) {
   update_chatbot_campaigns(
-    _set: {
-      name: $name,
-      prefix: $prefix,
-      diagram: $diagram,
-      status: $status,
-    },
+    _set: $campaign,
     where: { id: { _eq: $id } }
   ) {
     returning {

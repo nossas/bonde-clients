@@ -18,14 +18,14 @@ const CampaignForm = () => (
     </Spacing>
     <Flexbox vertical>
       <Field
-        name='name'
+        name='campaign.name'
         label='Nome do fluxo'
         placeholder='Escreva aqui o nome da comunidade'
         component={FormField}
         inputComponent={Input}
       />
       <Field
-        name='prefix'
+        name='campaign.prefix'
         label='Identificador da campanha'
         placeholder='Escreva aqui o identificador da campanha'
         component={FormField}

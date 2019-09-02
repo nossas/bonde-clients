@@ -93,7 +93,7 @@ class CampaignDiagram extends React.Component {
 
     return (
       <Field
-        name='diagram'
+        name='campaign.diagram'
         defaultValue={campaign.diagram}
         component={DiagramField}
       />
