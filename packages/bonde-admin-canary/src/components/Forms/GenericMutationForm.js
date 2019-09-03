@@ -11,6 +11,7 @@ const GenericMutationForm = ({
   refetchQueries,
   updateQuery,
   onSuccess,
+  parse,
   ...rest
 }) => {
   const mutationProps = { mutation, refetchQueries }
@@ -32,8 +33,16 @@ const GenericMutationForm = ({
         <GenericReduxForm
           {...rest}
           onSubmit={values => {
-            // Return a Promise to
-            return action({ variables: { ...variables, ...values } })
+            const mutationProps = {
+              variables: { ...variables, ...values }
+            }
+            if (parse) {
+              mutationProps.variables = {
+                ...mutationProps.variables,
+                ...parse(values)
+              }
+            }
+            return action(mutationProps)
               .then(onSuccess)
               .catch((error) => {
                 if (error && (error.form || error.fields)) {
@@ -59,6 +68,8 @@ const { arrayOf, func, object, shape, oneOfType } = PropTypes
 GenericMutationForm.propTypes = {
   mutation: oneOfType([func, object]).isRequired,
   variables: object,
+  /* function to parsed variables before mutation is called. */
+  parse: func,
   updateQuery: func,
   refetchQueries: arrayOf(shape({
     query: oneOfType([func, object]),

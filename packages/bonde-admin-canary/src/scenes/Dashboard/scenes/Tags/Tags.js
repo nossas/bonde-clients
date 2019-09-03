@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
+import { toast } from 'react-toastify'
 import { Redirect } from 'services/router'
 import CreateUserTagsForm from './CreateUserTagsForm'
 import PropTypes from 'prop-types'
@@ -27,6 +28,7 @@ class Tags extends React.Component {
 
         <CreateUserTagsForm
           onSuccess={() => {
+            toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
             this.setState({ redirect: true })
           }}
         />
