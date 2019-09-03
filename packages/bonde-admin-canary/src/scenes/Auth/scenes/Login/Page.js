@@ -31,6 +31,7 @@ const AuthLogin = ({ t, location }) => (
       <Title.H1>{t('welcome')}</Title.H1>
     </Spacing>
     <MutationForm
+      cleanForm
       formId={formName}
       mutation={AUTHENTICATE}
       onSuccess={({ data }) => {
