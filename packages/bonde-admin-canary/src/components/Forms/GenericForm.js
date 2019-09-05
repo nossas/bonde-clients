@@ -28,10 +28,10 @@ class GenericForm extends React.Component {
   }
 }
 
-const { bool, node, any, func, number } = PropTypes
+const { bool, node, any, func, string } = PropTypes
 
 GenericForm.propTypes = {
-  formId: number,
+  formId: string,
   children: node,
   error: any,
   handleSubmit: func,
