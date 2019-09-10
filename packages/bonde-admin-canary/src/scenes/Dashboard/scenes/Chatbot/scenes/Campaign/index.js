@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { SubmitButton, FormGraphQLv2 } from 'components/Form'
+import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
 import { ContentPage, FormContentPage } from 'scenes/Dashboard/components'
 import CampaignDiagram from './components/CampaignDiagram'
@@ -19,25 +19,26 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
   const chatbotId = Number(match.params.chatbotId)
   const defaultComponentProps = {
     community,
-    form: FormGraphQLv2,
-    formName: formName,
+    form: MutationForm,
+    formId: formName,
     title: 'Criar fluxo de conversa',
     backward: match.url.replace(/\/campaign\/+\w+/, ''),
     // eslint-disable-next-line react/display-name
     tabs: (props) => <Navigation {...props} match={match} />
   }
   const defaulFormProps = {
-    query: chatbotCampaignsQuery,
-    queryVariables: { chatbotId },
-    onSuccess: () => toast('Salvo com sucesso!')
+    refetchQueries: [{
+      query: chatbotCampaignsQuery,
+      variables: { chatbotId }
+    }]
   }
 
   if (match.params.campaignId === 'new') {
     const formProps = {
       ...defaulFormProps,
       mutation: insertChatbotCampaignsMutation,
-      mutationVariables: { chatbotId, status: 'draft' },
-      cache: (readQuery, writeQuery, data) => {
+      values: { campaign: { chatbot_id: chatbotId, status: 'draft' } },
+      updateQuery: (readQuery, writeQuery, data) => {
         const { insert_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()
         campaigns.push(returning[0])
@@ -46,7 +47,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       onSuccess: ({ data }) => {
         const { insert_chatbot_campaigns: { returning } } = data
         history.push(match.url.replace('/new', `/${returning[0].id}`))
-        toast('Salvo com sucesso!')
+        toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
       }
     }
 
@@ -60,24 +61,17 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
           formProps,
           render: CampaignForm,
           // eslint-disable-next-line react/display-name
-          actions: () => <SubmitButton formName={formName}>Salvar e avançar</SubmitButton>
+          actions: () => <SubmitButton formId={formName}>Salvar e avançar</SubmitButton>
         }}
       />
     )
   } else {
     const campaign = chatbotCampaigns.filter(c => c.id === Number(match.params.campaignId))[0]
-    const defaultValues = {
-      name: campaign.name,
-      prefix: campaign.prefix,
-      diagram: campaign.diagram,
-      id: campaign.id,
-      status: campaign.status
-    }
     const formProps = {
       ...defaulFormProps,
       mutation: updateChatbotCampaignsMutation,
-      mutationVariables: defaultValues,
-      cache: (readQuery, writeQuery, data) => {
+      variables: { id: Number(campaign.id) },
+      updateQuery: (readQuery, writeQuery, data) => {
         const { update_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()
         campaigns.map(c => c.id === returning[0].id ? returning[0] : c)
@@ -98,7 +92,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
             title: campaign.name,
             render: CampaignDiagram,
             // eslint-disable-next-line react/display-name
-            actions: () => <SubmitButton formName={formName}>Salvar e publicar</SubmitButton>
+            actions: () => <SubmitButton formId={formName}>Salvar e publicar</SubmitButton>
           }}
         />
         <Route

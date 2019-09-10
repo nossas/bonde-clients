@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Flexbox2 as Flexbox } from 'bonde-styleguide'
-import { Field, FormGraphQL } from 'components/Form'
+import { Flexbox2 as Flexbox } from 'bonde-styleguide'
+import { MutationForm, Field, SubmitButton } from 'components/Forms'
 import { CURRENT_USER_QUERY } from 'services/auth'
 import UserTagsField from './UserTagsField'
 import CreateUserTags from './createUserTags.graphql'
@@ -11,32 +11,23 @@ const formName = 'CreateUserTagsForm'
 
 const CreateUserTagsForm = ({ t, user, onSuccess }) => {
   return (
-    <FormGraphQL
-      name={formName}
-      initialValues={{ tags: user.tags.join(';') }}
+    <MutationForm
+      formId={formName}
+      values={{ tags: user.tags.join(';') }}
       mutation={CreateUserTags}
-      update={updateCurrentUserTags}
+      parse={({ tags }) => ({ data: JSON.stringify({ tags: tags.split(';') }) })}
+      updateQuery={updateCurrentUserTags}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      onSubmit={({ tags }, mutation) => {
-        const jsonTags = JSON.stringify({
-          tags: tags.split(';')
-        })
-        return mutation({ variables: { data: jsonTags } })
-          .then(onSuccess)
-      }}
+      onSuccess={onSuccess}
     >
       <Field name='tags' component={UserTagsField} />
 
       <Flexbox horizontal end margin={{ top: 55 }}>
-        <Button
-          type='submit'
-          title={t('buttons.submit')}
-          formName={formName}
-        >
+        <SubmitButton title={t('buttons.submit')} formId={formName}>
           {t('buttons.submit')}
-        </Button>
+        </SubmitButton>
       </Flexbox>
-    </FormGraphQL>
+    </MutationForm>
   )
 }
 

@@ -10,39 +10,40 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const hasuraToken = process.env.REACT_APP_HASURA_SECRET || 'segredo123'
   const authToken = authSession.getToken()
 
   if (authToken) {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${authToken}`,
-        'x-hasura-admin-secret': hasuraToken
+        authorization: `Bearer ${authToken}`
       }
-    }
-  }
-  return {
-    headers: {
-      ...headers,
-      'x-hasura-admin-secret': hasuraToken
     }
   }
 })
 
-const handleError = onCatch(({ networkError }) => {
-  if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
-    const redirectTo = authSession.getItem('redirectTo')
+const logoutInSession = () => {
+  const redirectTo = authSession.getItem('redirectTo')
+  authSession
+    .logout()
+    .then(() => {
+      if (redirectTo) {
+        window.location.href = `/auth/login?next=${redirectTo}`
+      } else {
+        window.location.href = '/auth/login'
+      }
+    })
+}
 
-    authSession
-      .logout()
-      .then(() => {
-        if (redirectTo) {
-          window.location.href = `/auth/login?next=${redirectTo}`
-        } else {
-          window.location.href = '/auth/login'
-        }
-      })
+const handleError = onCatch(({ networkError, graphQLErrors }) => {
+  if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
+    logoutInSession()
+  }
+  if (graphQLErrors && graphQLErrors.length > 0) {
+    // when token has no passed on bonde-webhooks-auth
+    if (/field "\w+" not found in type: '\w+'/.test(graphQLErrors[0].message)) {
+      logoutInSession()
+    }
   }
 })
 

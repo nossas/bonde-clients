@@ -21,9 +21,9 @@ pipeline:
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-v1.staging.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://hasura.staging.bonde.org/v1/graphql
-      - REACT_APP_DOMAIN_BOT=https://beta.staging.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.staging.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.staging.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
     commands:
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY

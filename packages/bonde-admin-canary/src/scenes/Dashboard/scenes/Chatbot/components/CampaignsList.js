@@ -39,11 +39,13 @@ const StatusButtonField = ({ value, row }) => (
         checked={value === 'active'}
         onChange={() => {
           const variables = {
-            name: row.name,
-            prefix: row.prefix,
-            diagram: row.diagram,
             id: row.id,
-            status: value === 'active' ? 'inactive' : 'active'
+            campaign: {
+              name: row.name,
+              prefix: row.prefix,
+              diagram: row.diagram,
+              status: value === 'active' ? 'inactive' : 'active'
+            }
           }
           mutation({ variables })
             .then((data) => {
