@@ -53,7 +53,13 @@ const ChatbotPage = ({ match, community }) => {
                     exact
                     path={`${match.path}/persistent-menu`}
                     component={ChatbotPersistentMenu}
-                    componentProps={{ community, chatbot }}
+                    componentProps={{
+                      community,
+                      chatbot: {
+                        ...chatbot,
+                        campaigns: chatbotCampaigns
+                      }
+                    }}
                   />
                   <Route
                     path={`${match.path}/campaign/:campaignId`}

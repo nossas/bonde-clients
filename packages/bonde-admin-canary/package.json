@@ -30,6 +30,7 @@
     "raf": "3.4.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",
+    "react-autosuggest": "^9.4.3",
     "react-dom": "^16.8.6",
     "react-i18next": "^7.7.0",
     "react-json-view": "^1.19.1",
