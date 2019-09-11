@@ -34,11 +34,12 @@ const renderMenus = ({ fields, meta: { error, submitFailed } }) => (
   </Flexbox>
 )
 
-export default ({ chatbotId }) => (
+export default ({ chatbot }) => (
   <MutationForm
     formId='ChatbotPersistentMenu'
     mutation={updateChatbotMutation}
-    variables={{ id: chatbotId }}
+    variables={{ id: chatbot.id }}
+    values={{ persistent_menu: chatbot.persistent_menu }}
   >
     <ContentPageComponent>
     {() => (<FieldArray name='persistent_menu' component={renderMenus} />)}
