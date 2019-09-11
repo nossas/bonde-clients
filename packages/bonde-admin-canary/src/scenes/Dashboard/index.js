@@ -45,6 +45,7 @@ const Dashboard = ({ match }) => {
         pageProps={{ title: 'Chatbot' }}
         tabs={[
           { name: 'Fluxos de conversas' },
+          { name: 'Menu Persistente', to: '/persistent-menu' },
           { name: 'Configurações', to: '/settings' }
         ]}
       />

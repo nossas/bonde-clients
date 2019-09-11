@@ -5,7 +5,8 @@ import { Redirect } from 'services/router'
 import { ContentPage } from 'scenes/Dashboard/components'
 import {
   ChatbotCampaignsList,
-  ChatbotSettingsForm
+  ChatbotSettingsForm,
+  ChatbotPersistentMenu
 } from './components'
 import CampaignsList from './components/CampaignsList'
 import CampaignPage from './scenes/Campaign'
@@ -37,6 +38,12 @@ const ChatbotPage = ({ match, community }) => {
               exact
               path={`${match.path}/settings`}
               component={ChatbotSettingsForm}
+              componentProps={{ community, chatbotId }}
+            />
+            <Route
+              exact
+              path={`${match.path}/persistent-menu`}
+              component={ChatbotPersistentMenu}
               componentProps={{ community, chatbotId }}
             />
             <Route

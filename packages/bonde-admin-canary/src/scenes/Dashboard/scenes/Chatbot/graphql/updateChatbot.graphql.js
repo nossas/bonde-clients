@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation UpdateChatbot($name: String!, $id: Int!) {
-  update_chatbots(_set: { name: $name }, where: { id: { _eq: $id } }) {
+mutation UpdateChatbot($persistent_menu: jsonb, $id: Int!) {
+  update_chatbots(_set: { persistent_menu: $persistent_menu }, where: { id: { _eq: $id } }) {
     returning {
-      id,
-      name,
-      community_id,
-      created_at,
+      id
+      name
+      community_id
+      persistent_menu
+      created_at
       updated_at
     }
   }
