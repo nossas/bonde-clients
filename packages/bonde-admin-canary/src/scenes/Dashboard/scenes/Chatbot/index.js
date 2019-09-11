@@ -22,50 +22,50 @@ const ChatbotPage = ({ match, community }) => {
 
   return (
     <Query query={chatbotInfoQuery} variables={{ id: chatbotId }}>
-    {({ loading, data, error }) => {
-      if (loading) return 'Loading...'
-      if (error) return 'Error...'
+      {({ loading, data, error }) => {
+        if (loading) return 'Loading...'
+        if (error) return 'Error...'
 
-      const chatbot = data.chatbots[0]
-      return (
-        <ChatbotCampaignsList
-          chatbotId={chatbot.id}
-          dataListComponent={({ chatbotCampaigns }) => {
-            return (
-              <React.Fragment>
-                <Route
-                  exact
-                  path={match.path}
-                  component={ContentPage}
-                  componentProps={{
-                    community,
-                    chatbotCampaigns,
-                    render: CampaignsList
-                  }}
-                />
-                <Route
-                  exact
-                  path={`${match.path}/settings`}
-                  component={ChatbotSettingsForm}
-                  componentProps={{ community, chatbotId }}
-                />
-                <Route
-                  exact
-                  path={`${match.path}/persistent-menu`}
-                  component={ChatbotPersistentMenu}
-                  componentProps={{ community, chatbot }}
-                />
-                <Route
-                  path={`${match.path}/campaign/:campaignId`}
-                  component={CampaignPage}
-                  componentProps={{ community, chatbotCampaigns }}
-                />
-              </React.Fragment>
-            )
-          }}
-        />
-      )
-    }}
+        const chatbot = data.chatbots[0]
+        return (
+          <ChatbotCampaignsList
+            chatbotId={chatbot.id}
+            dataListComponent={({ chatbotCampaigns }) => {
+              return (
+                <React.Fragment>
+                  <Route
+                    exact
+                    path={match.path}
+                    component={ContentPage}
+                    componentProps={{
+                      community,
+                      chatbotCampaigns,
+                      render: CampaignsList
+                    }}
+                  />
+                  <Route
+                    exact
+                    path={`${match.path}/settings`}
+                    component={ChatbotSettingsForm}
+                    componentProps={{ community, chatbotId }}
+                  />
+                  <Route
+                    exact
+                    path={`${match.path}/persistent-menu`}
+                    component={ChatbotPersistentMenu}
+                    componentProps={{ community, chatbot }}
+                  />
+                  <Route
+                    path={`${match.path}/campaign/:campaignId`}
+                    component={CampaignPage}
+                    componentProps={{ community, chatbotCampaigns }}
+                  />
+                </React.Fragment>
+              )
+            }}
+          />
+        )
+      }}
     </Query>
   )
 }
