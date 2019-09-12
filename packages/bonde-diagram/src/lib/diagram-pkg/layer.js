@@ -35,11 +35,10 @@ class Layer extends React.Component {
 
   render () {
     const { app, eventListener } = this.context
-    const { className } = this.props
 
     return (
       <div
-        className={className}
+        className='diagram-layer'
         onDrop={this.handleDrop.bind(this)}
         onDragOver={this.handleDragOver.bind(this)}
       >
