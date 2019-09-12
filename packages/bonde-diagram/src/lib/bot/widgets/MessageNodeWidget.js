@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import copy from 'copy-to-clipboard'
+/* import copy from 'copy-to-clipboard' */
 import { BaseWidget } from 'storm-react-diagrams'
 import DefaultPortWidget from './DefaultPortWidget'
 import ReplyPortWidget from './ReplyPortLabelWidget'

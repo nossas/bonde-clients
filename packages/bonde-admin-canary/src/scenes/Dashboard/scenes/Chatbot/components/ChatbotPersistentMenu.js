@@ -18,7 +18,7 @@ const SectionTitle = (campaign) => (
 
 const findMessageById = (campaigns, id) => {
   const filtered = campaigns
-    .map(c => ({...c, messages: c.messages.filter(m => m.id === id)}))
+    .map(c => ({ ...c, messages: c.messages.filter(m => m.id === id) }))
     .filter(c => c.messages.length > 0)
 
   if (filtered.length > 0) return filtered[0].messages[0].text
@@ -88,6 +88,7 @@ const SuggestCampaignsInput = ({ campaigns, value: inputValue, onChange }) => {
 }
 
 SuggestCampaignsInput.propTypes = {
+  value: PropTypes.string,
   campaigns: PropTypes.array,
   onChange: PropTypes.func.isRequired
 }
