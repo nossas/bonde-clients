@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
-import { Card, Flexbox2 as Flexbox, Input, Button } from 'bonde-styleguide'
+import { Card, Flexbox2 as Flexbox, Icon, Input, Button, Text, Title } from 'bonde-styleguide'
 import { MutationForm, Field, FieldArray, FormField, SubmitButton } from 'components/Forms'
 import { ContentPageComponent } from 'scenes/Dashboard/components'
 import { updateChatbotMutation } from '../graphql'
@@ -16,9 +16,19 @@ const SectionTitle = (campaign) => (
   <strong>{campaign.name}</strong>
 )
 
-const SuggestCampaignsInput = ({ campaigns, onChange }) => {
+const findMessageById = (campaigns, id) => {
+  const filtered = campaigns
+    .map(c => ({...c, messages: c.messages.filter(m => m.id === id)}))
+    .filter(c => c.messages.length > 0)
+
+  if (filtered.length > 0) return filtered[0].messages[0].text
+
+  return ''
+}
+
+const SuggestCampaignsInput = ({ campaigns, value: inputValue, onChange }) => {
   const [suggestions, setSuggestions] = useState([])
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(findMessageById(campaigns, inputValue))
 
   // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
   const escapeRegexCharacters = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -42,8 +52,12 @@ const SuggestCampaignsInput = ({ campaigns, onChange }) => {
   const getSectionSuggestions = (campaign) => {
     return campaign.messages
   }
-  const onSuggestionSelected = (evt, { suggestion }) => {
+  const onSuggestionSelected = (evt, { suggestion, method }) => {
+    if (method === 'enter') {
+      evt.preventDefault()
+    }
     onChange(suggestion.id)
+    setValue(suggestion.text)
   }
 
   const inputProps = {
@@ -55,18 +69,21 @@ const SuggestCampaignsInput = ({ campaigns, onChange }) => {
   }
 
   return (
-    <Autosuggest
-      multiSection
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={(message) => setSuggestions(getSuggestions(message.value))}
-      onSuggestionsClearRequested={() => setSuggestions([])}
-      onSuggestionSelected={onSuggestionSelected}
-      getSuggestionValue={getSuggestionValue}
-      renderSuggestion={Suggestion}
-      getSectionSuggestions={getSectionSuggestions}
-      renderSectionTitle={SectionTitle}
-      inputProps={inputProps}
-    />
+    <Flexbox vertical>
+      <Autosuggest
+        multiSection
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={(message) => setSuggestions(getSuggestions(message.value))}
+        onSuggestionsClearRequested={() => setSuggestions([])}
+        onSuggestionSelected={onSuggestionSelected}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={Suggestion}
+        getSectionSuggestions={getSectionSuggestions}
+        renderSectionTitle={SectionTitle}
+        inputProps={inputProps}
+      />
+      <Text fontSize={12}>{inputValue}</Text>
+    </Flexbox>
   )
 }
 
@@ -79,6 +96,12 @@ const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed } }) =>
   <Flexbox vertical>
     {fields.map((menu, index) => (
       <Card key={`menu-field-${index}`} rounded={5} padding={{ x: 40, y: 40 }} margin={{ bottom: 20 }}>
+        <Flexbox horizontal spacing='between'>
+          <Title.H3>{`Menu #${index}`}</Title.H3>
+          <Button flat type='button' onClick={() => fields.remove(index)}>
+            <Icon name='trash' size={25} color='red' />
+          </Button>
+        </Flexbox>
         <Flexbox vertical>
           <Field
             type='text'
@@ -88,25 +111,20 @@ const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed } }) =>
             inputComponent={Input}
           />
           <Field
-            type='text'
             name={`${menu}.payload`}
             label='Mensagem de destino'
-            component={FormField}
-            inputComponent={Input}
-          />
-          <Field
-            name={`${menu}.payload`}
             component={FormField}
             inputComponent={SuggestCampaignsInput}
             campaigns={campaigns}
           />
         </Flexbox>
-        <Button flat type='button' onClick={() => fields.remove(index)}>Remover menu</Button>
       </Card>
     ))}
     <Flexbox horizontal spacing='between'>
+      <Button type='button' flat onClick={() => fields.push({})}>
+        <Icon name='plus' /> Novo menu
+      </Button>
       <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
-      <Button type='button' onClick={() => fields.push({})}>Adicionar menu</Button>
     </Flexbox>
   </Flexbox>
 )
@@ -119,7 +137,7 @@ MenuFieldArray.propTypes = {
 
 const ChatbotPersistentMenu = ({ chatbot }) => {
   const campaignsFilterPersistentMenu = chatbot.campaigns
-    .filter(c => !!c.diagram)
+    .filter(c => !!c.diagram && c.status === 'active')
     .map(campaign => {
       const { nodes } = JSON.parse(campaign.diagram)
       return {

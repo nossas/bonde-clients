@@ -3,14 +3,14 @@
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 30px;
-  padding: 10px 20px;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
+  width: 100%;
+  font-family: 'Nunito Sans',sans-serif;
   font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
+  color: #000000;
+  border: none;
+  border-bottom: 1px solid #AAAAAA;
+  padding: 8px 0;
+  background: none;
 }
 
 .react-autosuggest__input--focused {
@@ -29,8 +29,8 @@
 .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
-  top: 51px;
-  width: 280px;
+  top: 40px;
+  width: 100%;
   border: 1px solid #aaa;
   background-color: #fff;
   color: black;
