@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { BondeDiagram, BondeDiagramApplication } from 'bonde-diagram'
+import { Icon, Grid, Cell, Title } from 'bonde-styleguide'
+import { BondeDiagramApplication } from 'bonde-diagram'
+import { DiagramProvider, Layer } from 'bonde-diagram/lib/diagram-pkg'
 import { MessageNodeModel } from 'bonde-diagram/lib/bot'
 import { Field } from 'components/Form'
+import Toolbar from './Toolbar'
 // styles bonde-diagram
 import 'bonde-diagram/lib/sass/main.scss'
 
@@ -70,11 +73,33 @@ class DiagramField extends React.Component {
 
   render () {
     return (
-      <BondeDiagram
-        app={this.app}
-        createMessage={this.handleCreateMessage.bind(this)}
-        onUpdate={this.handleChange.bind(this)}
-      />
+      <DiagramProvider className='diagram-app' app={this.app} eventListener={this.handleChange.bind(this)}>
+        <Grid>
+          <Cell size={[2, 2, 2]}>
+            <Toolbar>
+              <Toolbar.Button data={{ kind: 'text' }}>
+                <Icon size={30} name='ballon-text' />
+                <Title.H4>Criar mensagem</Title.H4>
+              </Toolbar.Button>
+              <Toolbar.Button data={{ kind: 'quick_reply' }}>
+                <Icon size={30} name='ballon' />
+                <Title.H4>Criar resposta</Title.H4>
+              </Toolbar.Button>
+            </Toolbar>
+          </Cell>
+          <Cell size={[10, 10, 10]}>
+            <div
+              style={{
+                height: '600px',
+                boxShadow: 'inset 0px 0px 6px 1px #00000014',
+                background: '#c7c7c729'
+              }}
+            >
+              <Layer onCreateNode={this.handleCreateMessage.bind(this)} />
+            </div>
+          </Cell>
+        </Grid>
+      </DiagramProvider>
     )
   }
 }
