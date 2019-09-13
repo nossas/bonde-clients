@@ -3,6 +3,8 @@ import AngleRight from './AngleRight'
 import Archive from './Archive'
 import ArrowLeft from './ArrowLeft'
 import ArrowRight from './ArrowRight'
+import Ballon from './Ballon'
+import BallonText from './BallonText'
 import Bonde from './Bonde'
 import Bot from './Bot'
 import Chart from './Chart'
@@ -29,6 +31,8 @@ export default {
   'arrow-left': ArrowLeft,
   'arrow-right': ArrowRight,
   'chart': Chart,
+  'ballon': Ballon,
+  'ballon-text': BallonText,
   'bonde': Bonde,
   'bot': Bot,
   'copy': Copy,
