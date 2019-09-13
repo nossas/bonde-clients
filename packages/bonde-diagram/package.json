@@ -49,7 +49,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "npm run test -- --watchAll=false --coverage"
+    "coverage": "npm run test -- --passWithNoTests --watchAll=false --coverage"
   },
   "babel": {
     "presets": [

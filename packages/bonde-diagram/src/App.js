@@ -113,10 +113,6 @@ function App() {
     app.getDiagramEngine().setDiagramModel(model)
   }
 
-  const serialize = () => {
-    console.log('Diagram', app.getActiveDiagram().serializeDiagram())
-  }
-
   const handleCreateMessage = (model, nodesCount) => {
     // TODO: add translate
     let node
