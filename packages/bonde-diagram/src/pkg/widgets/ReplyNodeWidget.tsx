@@ -2,6 +2,7 @@ import * as React from 'react'
 import { PortWidget, DiagramEngine } from '@projectstorm/react-diagrams'
 import ReplyNodeModel from '../models/ReplyNodeModel'
 import MessageUI from '../themes/MessageUI'
+import TextNodeWidget from './TextNodeWidget'
 import EditableInput from './EditableInput'
 
 export interface ReplyNodeWidgetProps {
@@ -13,33 +14,22 @@ export interface ReplyNodeWidgetProps {
 class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
   render() {
     const { engine, node, theme } = this.props
-    const {
-      layer: Layer,
-      inPort: InPort,
-      content: Content,
-      outPort: OutPort
-    } = theme
+    const { outPort: OutPort } = theme
 
     const portProps = { engine }
-    const previousPort = node.previous()
 
     return (
-      <Layer node={node}>
-        {previousPort && (
-          <InPort node={previousPort}>
-            <PortWidget style={{ height: '100%' }} port={previousPort} engine={engine} />
-          </InPort>
-        )}
-        <Content>
-          <EditableInput node={node} />
-          {node.replies().map(port => (
-            <OutPort key={port.getOptions().id} node={port}>
-              <span>{port.getOptions().label}</span>
-              <PortWidget port={port} {...portProps} />
-            </OutPort>
-          ))}
-        </Content>
-      </Layer>
+      <TextNodeWidget engine={engine} node={node} theme={theme}>
+        {node.replies().map(port => (
+          <OutPort key={port.getOptions().id} node={port}>
+            <EditableInput
+              node={port}
+              component='input'
+            />
+            <PortWidget port={port} {...portProps} />
+          </OutPort>
+        ))}
+      </TextNodeWidget>
     );
   }
 }

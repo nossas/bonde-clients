@@ -1,10 +1,11 @@
 import * as React from 'react'
-import Textarea from 'react-textarea-autosize'
 import DiagramContext from '../Context'
-import { MessageNodeModel, ReplyNodeModel } from '../models'
+import { MessageNodeModel, ReplyNodeModel, MessagePortModel } from '../models'
 
 export interface EditableInputProps {
-  node: MessageNodeModel | ReplyNodeModel
+  node: MessageNodeModel | ReplyNodeModel | MessagePortModel,
+  component: any,
+  props?: object
 }
 
 export interface EditableInputState {
@@ -14,22 +15,17 @@ export interface EditableInputState {
 
 class EditableInput extends React.Component<EditableInputProps, EditableInputState> {
   static contextType = DiagramContext
+  static defaultProps = {
+    props: {}
+  }
 
   constructor(props: EditableInputProps) {
     super(props)
     this.state = {
-      value: this.props.node.getOptions().text,
+      value: this.props.node.getOptions().text || '',
       isEditing: false
     }
   }
-
-  /*
-  handleCreateReply(e) {
-    if (e) e.preventDefault()
-
-    this.props.node.addQuickReply('Texto do botão')
-    this.forceUpdate()
-  }*/
 
   handleKeyPress(e: any) {
     const { node } = this.props
@@ -45,7 +41,7 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
     } else if (e.key === 'Escape') {
       this.setState({
         isEditing: false,
-        value: node.getOptions().text
+        value: node.getOptions().text || ''
       })
     }
   }
@@ -56,19 +52,17 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
 
   render () {
     const { value, isEditing } = this.state
+    const { component: InputComponent, props: componentProps } = this.props
 
     return (
       <div onDoubleClick={this.handleDoubleClick.bind(this)}>
-        {isEditing ? (
-          <Textarea
-            maxRows={10}
-            defaultValue={value}
-            onChange={(e: any) => this.setState({ value: e.target.value })}
-            onKeyUp={this.handleKeyPress.bind(this)}
-          />
-        ) : (
-          <span>{value}</span>
-        )}
+        <InputComponent {...{
+          isEditing,
+          value,
+          onChange: (e: any) => this.setState({ value: e.target.value }),
+          onKeyUp: this.handleKeyPress.bind(this),
+          ...componentProps
+        }} />
       </div>
     )
   }

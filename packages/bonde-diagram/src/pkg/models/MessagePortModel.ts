@@ -11,7 +11,7 @@ import { DeserializeEvent } from '@projectstorm/react-canvas-core'
 
 
 export interface MessagePortModelOptions extends PortModelOptions {
-  label?: string;
+  text?: string;
   in?: boolean;
 }
 
@@ -37,15 +37,19 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
   deserialize(event: DeserializeEvent<this>) {
     super.deserialize(event)
     this.options.in = event.data.in
-    this.options.label = event.data.label
+    this.options.text = event.data.text
   }
 
   serialize() {
     return {
       ...super.serialize(),
       in: this.options.in,
-      label: this.options.label
+      text: this.options.text
     }
+  }
+
+  changeText(text: string) {
+    this.options.text = text
   }
 
   link(port: PortModel): DefaultLinkModel | LinkModel {
