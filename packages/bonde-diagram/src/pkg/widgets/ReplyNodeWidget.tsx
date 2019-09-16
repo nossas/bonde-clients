@@ -2,6 +2,7 @@ import * as React from 'react'
 import { PortWidget, DiagramEngine } from '@projectstorm/react-diagrams'
 import ReplyNodeModel from '../models/ReplyNodeModel'
 import MessageUI from '../themes/MessageUI'
+import EditableInput from './EditableInput'
 
 export interface ReplyNodeWidgetProps {
   node: ReplyNodeModel,
@@ -12,7 +13,6 @@ export interface ReplyNodeWidgetProps {
 class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
   render() {
     const { engine, node, theme } = this.props
-    const { text } = node.getOptions()
     const {
       layer: Layer,
       inPort: InPort,
@@ -31,7 +31,7 @@ class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
           </InPort>
         )}
         <Content>
-          <p>{text}</p>
+          <EditableInput node={node} />
           {node.replies().map(port => (
             <OutPort key={port.getOptions().id} node={port}>
               <span>{port.getOptions().label}</span>

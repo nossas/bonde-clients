@@ -1,11 +1,11 @@
-import * as React from 'react'
-import Application from './Application'
+import * as React from "react"
+import Application from "./Application"
 
-export type DiagramContextType = {
+export interface DiagramContextType {
   app: Application,
   transferKey: string,
   eventListener(action: string): void
-};
+}
 
 const DiagramContext = React.createContext<Partial<DiagramContextType>>({})
 

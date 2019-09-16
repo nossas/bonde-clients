@@ -24,9 +24,11 @@ Button.propTypes = {
 
 const Toolbar = ({ children }) => {
   return (
-    <Flexbox horizontal>
-      {children}
-    </Flexbox>
+    <Spacing margin={{ top: 10 }}>
+      <Flexbox horizontal>
+        {children}
+      </Flexbox>
+    </Spacing>
   )
 }
 

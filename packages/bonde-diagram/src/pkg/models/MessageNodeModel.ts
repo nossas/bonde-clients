@@ -1,24 +1,8 @@
-import {
-	NodeModel,
-	NodeModelGenerics
-} from '@projectstorm/react-diagrams-core'
-import {
-	BasePositionModelOptions,
-	DeserializeEvent
-} from '@projectstorm/react-canvas-core'
 import MessagePortModel from './MessagePortModel'
+import TextNodeModel from './TextNodeModel'
 
-export interface MessageNodeModelOptions extends BasePositionModelOptions {
-	text: string
-}
-
-export interface MessageNodeModelGenerics extends NodeModelGenerics {
-	OPTIONS: MessageNodeModelOptions
-}
-
-class MessageNodeModel extends NodeModel<MessageNodeModelGenerics> {
+class MessageNodeModel extends TextNodeModel {
 	protected _next?: MessagePortModel
-	protected _previous?: MessagePortModel
 
 	constructor(options: any = {}) {
 		if (typeof options === 'string') {
@@ -48,24 +32,8 @@ class MessageNodeModel extends NodeModel<MessageNodeModelGenerics> {
 		}
 	}
 
-	deserialize(event: DeserializeEvent<this>) {
-		super.deserialize(event)
-		this.options.text = event.data.text
-	}
-
-	serialize(): any {
-		return {
-			...super.serialize(),
-			text: this.options.text
-		}
-	}
-
 	next(): MessagePortModel | undefined {
 		return this._next
-	}
-
-	previous(): MessagePortModel | undefined {
-		return this._previous
 	}
 }
 

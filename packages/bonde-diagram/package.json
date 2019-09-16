@@ -1,92 +1,85 @@
 {
-  "name": "bonde-diagram",
-  "version": "0.15.1-alpha.10",
-  "private": false,
-  "license": "AGPL-3.0",
-  "main": "lib/index.js",
-  "files": [
-    "lib",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nossas/bonde-client.git"
-  },
-  "dependencies": {
-    "@babel/core": "7.2.2",
-    "@babel/plugin-proposal-class-properties": "7.2.3",
-    "@babel/plugin-proposal-decorators": "7.2.3",
-    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
-    "@babel/plugin-syntax-dynamic-import": "7.2.0",
-    "@babel/plugin-transform-classes": "7.2.2",
-    "@babel/plugin-transform-destructuring": "7.2.0",
-    "@babel/plugin-transform-flow-strip-types": "7.2.3",
-    "@babel/plugin-transform-react-constant-elements": "7.2.0",
-    "@babel/plugin-transform-react-display-name": "7.2.0",
-    "@babel/plugin-transform-runtime": "7.2.0",
-    "@babel/preset-env": "7.2.3",
-    "@babel/preset-react": "7.0.0",
-    "@babel/preset-typescript": "7.1.0",
-    "@babel/runtime": "7.2.0",
-    "babel-loader": "8.0.5",
-    "babel-plugin-dynamic-import-node": "2.2.0",
-    "babel-plugin-macros": "2.4.4",
-    "babel-plugin-transform-react-remove-prop-types": "0.4.21",
-    "classnames": "^2.2.6",
-    "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.15",
-    "node-sass": "^4.12.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "storm-react-diagrams": "^5.2.1",
-    "webfontloader": "^1.6.28"
-  },
-  "scripts": {
-    "prepare": "NODE_ENV=production babel src/lib --out-dir lib --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "dev": "yarn prepare --watch",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "coverage": "npm run test -- --watchAll=false --coverage"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
+    "name": "bonde-diagram",
+    "version": "0.15.1-alpha.10",
+    "private": true,
+    "main": "dist/pkg/index.js",
+    "types": "dist/pkg/index.d.ts",
+    "files": [
+        "lib",
+        "README.md"
     ],
-    "plugins": [
-      "babel-plugin-macros",
-      "@babel/plugin-transform-destructuring",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-transform-runtime",
-      "babel-plugin-transform-react-remove-prop-types",
-      "@babel/plugin-syntax-dynamic-import"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/register": "^7.4.4",
-    "bonde-styleguide": "^0.14.7-alpha.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "jsom": "^1.0.0",
-    "require-hacker": "^3.0.1"
-  }
+    "dependencies": {
+        "@projectstorm/react-diagrams": "^6.0.1-beta.5",
+        "@types/jest": "24.0.18",
+        "@types/node": "12.7.5",
+        "@types/react": "16.9.2",
+        "@types/react-dom": "16.9.0",
+        "@types/react-textarea-autosize": "^4.3.4",
+        "bonde-styleguide": "^0.15.1-alpha.10",
+        "react": "^16.9.0",
+        "react-dom": "^16.9.0",
+        "react-scripts": "3.1.1",
+        "react-textarea-autosize": "^7.1.0",
+        "typescript": "^3.6.3",
+        "uuid": "^3.3.3"
+    },
+    "scripts": {
+        "prepare": "yarn build",
+        "dev": "yarn prepare --watch",
+        "build": "./node_modules/.bin/tsc",
+        "lint": "./node_modules/.bin/tslint -c ./../../tslint.json src/**/*",
+        "test": "react-scripts test",
+        "coverage": "npm run test -- --passWithNoTests --watchAll=false --coverage"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "peerDependencies": {
+        "closest": "^0.0.1",
+        "lodash": "4.*",
+        "pathfinding": "^0.4.18",
+        "paths-js": "^0.4.9"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.0.0",
+        "@babel/core": "^7.0.0",
+        "@emotion/core": "^10.0.14",
+        "@emotion/styled": "^10.0.14",
+        "@types/dagre": "^0.7.42",
+        "@types/lodash": "^4.14.136",
+        "@types/mathjs": "^6.0.1",
+        "@types/promise": "^7.1.30",
+        "@types/puppeteer": "^1.19.0",
+        "@types/uuid": "^3.4.5",
+        "closest": "^0.0.1",
+        "dagre": "^0.8.4",
+        "file-loader": "^4.1.0",
+        "glob": "^7.1.4",
+        "json-beautify": "^1.1.0",
+        "lodash": "4.*",
+        "mathjs": "^6.0.3",
+        "pathfinding": "^0.4.18",
+        "paths-js": "^0.4.9",
+        "prettier": "^1.18.2",
+        "puppeteer": "^1.19.0",
+        "raf": "^3.4.1",
+        "raw-loader": "^3.1.0",
+        "resize-observer-polyfill": "^1.5.1",
+        "source-map-loader": "^0.2.4",
+        "style-loader": "^0.23.1",
+        "tslint": "^5.20.0",
+        "typescript": "^3.6.3"
+    }
 }

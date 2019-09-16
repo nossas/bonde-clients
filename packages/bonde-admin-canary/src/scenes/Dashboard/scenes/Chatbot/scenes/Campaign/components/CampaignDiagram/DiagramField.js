@@ -77,11 +77,11 @@ class DiagramField extends React.Component {
           </div>
           <Toolbar>
             <ToolbarButton kind='message'>
-              {/*<Icon size={30} name='ballon-text' />*/}
+              <Icon size={30} name='ballon-text' />
               <Title.H4>Criar mensagem</Title.H4>
             </ToolbarButton>
             <ToolbarButton kind='reply'>
-              {/*<Icon size={30} name='ballon' />*/}
+              <Icon size={30} name='ballon' />
               <Title.H4>Criar resposta</Title.H4>
             </ToolbarButton>
           </Toolbar>

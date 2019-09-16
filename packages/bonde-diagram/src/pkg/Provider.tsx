@@ -1,7 +1,6 @@
-import * as React from 'react'
-import { DiagramProvider } from './Context'
-import Application from './Application'
-
+import * as React from "react"
+import Application from "./Application"
+import { DiagramProvider } from "./Context"
 
 export interface ProviderProps {
   app: Application,
@@ -10,15 +9,15 @@ export interface ProviderProps {
 }
 
 class Provider extends React.Component<ProviderProps> {
-  static defaultProps = {
-    transferKey: 'srd-diagram-model'
+  public static defaultProps = {
+    transferKey: "srd-diagram-model",
   }
 
-  render () {
+  public render() {
     const diagramProps = {
       app: this.props.app,
+      eventListener: this.props.app.getEventListener(),
       transferKey: this.props.transferKey,
-      eventListener: this.props.app.getEventListener()
     }
 
     return (
