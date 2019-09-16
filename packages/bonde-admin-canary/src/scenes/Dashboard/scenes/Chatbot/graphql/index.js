@@ -1,4 +1,4 @@
-export { default as chatbotsQuery } from './chatbots.graphql'
+export { default as chatbotInfoQuery } from './chatbotInfo.graphql'
 export { default as insertChatbotMutation } from './insertChatbot.graphql'
 export { default as updateChatbotMutation } from './updateChatbot.graphql'
 

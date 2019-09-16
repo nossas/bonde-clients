@@ -1,6 +1,6 @@
 {
   "name": "bonde-diagram",
-  "version": "0.15.1-alpha.6",
+  "version": "0.15.1-alpha.9",
   "private": false,
   "license": "AGPL-3.0",
   "main": "lib/index.js",
@@ -33,6 +33,7 @@
     "babel-plugin-macros": "2.4.4",
     "babel-plugin-transform-react-remove-prop-types": "0.4.21",
     "classnames": "^2.2.6",
+    "copy-to-clipboard": "^3.2.0",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
@@ -48,7 +49,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "npm run test -- --watchAll=false --coverage"
+    "coverage": "npm run test -- --passWithNoTests --watchAll=false --coverage"
   },
   "babel": {
     "presets": [

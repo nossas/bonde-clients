@@ -1,53 +1,18 @@
 @import "storm-react-diagrams/src/sass/main.scss";
 
-.srd-bonde-diagram {
-  background: #eeeeee;
-  min-height: 650px;
-}
-
 // drag-and-drop
 .diagram-app {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-
-  .diagram-tools {
-    width: 200px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    position: absolute;
-    top: 0;
-    height: auto;
-    z-index: 9;
-
-    .draggable-item {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      text-transform: uppercase;
-      font-family: 'Nunito Sans', sans-serif;
-      color: #000000;
-      padding: 30px;
-      font-size: 13px;
-      border-radius: 2px;
-      cursor: pointer;
-      font-weight: 800;
-      box-shadow: 0px 6px 7px rgba(0, 0, 0, 0.05);
-      background-color: #FFFFFF;
-      margin: 0 2px 4px 0;
-      font-style: normal;
-      line-height: 18px;
-      letter-spacing: 0.005em;
-
-      span {
-        max-width: 100px;
-      }
-    }
-  }
+  margin: 0;
+  padding: 0;
+  height: 100%;
 
   .diagram-layer {
-    position: relative;
-    flex-grow: 1;
+    height:100%;
+
+    .srd-bonde-diagram {
+      background: none;
+      height: 100%;
+    }
 
     .srd-default-link path{
       stroke: #EE0090;
@@ -77,6 +42,29 @@
         &:hover {
           box-shadow: 0px 0px 20px rgba(238, 0, 153, 0.62);
           border-radius: 30px 30px 30px 0px;
+        }
+
+        .srd-base-node__header {
+          position: relative;
+          font-family: 'Nunito Sans', sans-serif;
+
+          span {
+            display: block;
+            font-size: 11px;
+            text-align: center;
+            padding-top: 10px;
+          }
+          button {
+            font-size: 12px;
+            border: 1px solid;
+            position: absolute;
+            right: 10px;
+
+            &:hover {
+              color: white;
+              background-color: #c7c7c7;
+            }
+          }
         }
 
         .srd-base-node__title {
