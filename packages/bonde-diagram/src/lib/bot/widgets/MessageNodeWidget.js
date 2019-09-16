@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+/* import copy from 'copy-to-clipboard' */
 import { BaseWidget } from 'storm-react-diagrams'
 import DefaultPortWidget from './DefaultPortWidget'
 import ReplyPortWidget from './ReplyPortLabelWidget'
@@ -58,6 +59,12 @@ class MessageNodeWidget extends BaseWidget {
 
     return (
       <div {...this.getProps()}>
+        {/*
+        <div className={this.bem('__header')}>
+          <span>{node.getID()}</span>
+          <button type='button' onClick={() => copy(node.getID())}>Copy</button>
+        </div>
+        */}
         {isEditing ? (
           <textarea
             className={this.bem("__title")}

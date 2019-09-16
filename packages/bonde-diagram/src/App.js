@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  Grid,
-  Cell,
-  Flexbox2 as Flexbox
-} from 'bonde-styleguide'
-import { BondeDiagram, BondeDiagramApplication } from './lib'
+import { BondeDiagramApplication } from './lib'
+import { DiagramProvider, Draggable, Layer } from './lib/diagram-pkg'
 import { MessageNodeModel } from './lib/bot'
 import './lib/sass/main.scss'
 
@@ -117,10 +113,6 @@ function App() {
     app.getDiagramEngine().setDiagramModel(model)
   }
 
-  const serialize = () => {
-    console.log('Diagram', app.getActiveDiagram().serializeDiagram())
-  }
-
   const handleCreateMessage = (model, nodesCount) => {
     // TODO: add translate
     let node
@@ -145,16 +137,14 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Bonde Diagram | <button onClick={serialize}>Serialize</button></h1>
-      <Flexbox vertical>
-        <Grid>
-          <Cell size={[12, 12, 12]}>
-            <BondeDiagram app={app} createMessage={handleCreateMessage} />
-          </Cell>
-        </Grid>
-      </Flexbox>
-    </div>
+    <DiagramProvider className='diagram-app' app={app}>
+      <div className='diagram-tools'>
+        <Draggable className='draggable-item' data={{ kind: 'text' }}>
+          texto qualquer
+        </Draggable>
+      </div>
+      <Layer className='diagram-layer' onCreateNode={handleCreateMessage} />
+    </DiagramProvider>
   )
 }
 

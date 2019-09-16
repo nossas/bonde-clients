@@ -17,11 +17,13 @@ const CardStyled = styled.div`
 `
 
 const Card = ({ margin, padding, children, ...rest }) => margin || padding ? (
-  <CardStyled {...rest}>
-    <Spacing margin={margin} padding={padding}>
-      {children}
-    </Spacing>
-  </CardStyled>
+  <Spacing margin={margin}>
+    <CardStyled {...rest}>
+      <Spacing padding={padding}>
+        {children}
+      </Spacing>
+    </CardStyled>
+  </Spacing>
 ) : (
   <CardStyled {...rest}>
     {children}
