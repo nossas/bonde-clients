@@ -8,9 +8,9 @@ const QuickReply = styled.div`
   padding: 10px 24px;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 5px;
   border: 1px solid #1e88e5;
   border-radius: 50px;
+  margin-bottom: 5px;
 
 	.port {
 		${PortDynamicStyle}

@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-const Layer = styled.div`
-	position: relative;
+// TODO: Use types of lib
+export const LayerDynamicStyle = (props)  => css`
+  position: relative;
   background-color: #fff;
   border: none;
   border-radius: 10px;
@@ -10,9 +11,11 @@ const Layer = styled.div`
   box-sizing: border-box;
   box-shadow: 3px 8px 5px 0 rgba(0,0,0,.24);
 
-  ${p => p.node.getOptions().selected && `
-    border: 1px solid #ee0090;
-  `}
+  ${props.node.getOptions().selected && `border: 1px solid #ee0090;`}
 `
 
+
+const Layer = styled.div`
+	${LayerDynamicStyle}
+`
 export default Layer

@@ -1,5 +1,6 @@
-import { Layer, Content, Port } from '../BaseUI'
+import { Content, Port } from '../BaseUI'
 import QuickReply from './QuickReply'
+import Layer from './Layer'
 
 export default {
   layer: Layer,
