@@ -41,7 +41,6 @@ class DiagramField extends React.Component {
   }
 
   deserialize (value) {
-    console.log('deserialize', value)
     this.app
       .getActiveDiagram()
       .deserializeModel(value, this.app.getDiagramEngine())
@@ -53,17 +52,15 @@ class DiagramField extends React.Component {
 
   handleCreateNode (kind, size) {
     // TODO: add translate
-    switch (kind) {
-      case 'message':
-        return new MessageNodeModel('Escreva sua mensagem aqui')
-      case 'reply':
-        const node = new ReplyNodeModel('Escreva sua mensagem aqui')
-        node.quickReply('Texto do botão')
-        return node
-      default:
-        // eslint-disable-next-line
-        throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
+    if (kind === 'message') {
+      return new MessageNodeModel('Escreva sua mensagem aqui')
+    } else if (kind === 'reply') {
+      const node = new ReplyNodeModel('Escreva sua mensagem aqui')
+      node.quickReply('Texto do botão')
+      return node
     }
+    // eslint-disable-next-line
+    throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
   }
 
   render () {
