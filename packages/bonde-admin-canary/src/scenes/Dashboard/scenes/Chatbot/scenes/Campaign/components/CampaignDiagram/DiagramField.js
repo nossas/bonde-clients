@@ -6,8 +6,8 @@ import {
   Layer,
   MessageNodeModel,
   ReplyNodeModel
-} from '@bonde/diagram'
-import { Flexbox2 as Flexbox, Icon, Title } from 'bonde-styleguide'
+} from 'bonde-diagram'
+import { Flexbox2 as Flexbox, Icon, Spacing, Text, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
 import Toolbar, { Button as ToolbarButton } from './Toolbar'
 
@@ -75,16 +75,26 @@ class DiagramField extends React.Component {
               color='rgba(0,0,0,0.05)'
               onCreateNode={this.handleCreateNode.bind(this)} />
           </div>
-          <Toolbar>
-            <ToolbarButton kind='message'>
-              <Icon size={30} name='ballon-text' />
-              <Title.H4>Criar mensagem</Title.H4>
-            </ToolbarButton>
-            <ToolbarButton kind='reply'>
-              <Icon size={30} name='ballon' />
-              <Title.H4>Criar resposta</Title.H4>
-            </ToolbarButton>
-          </Toolbar>
+          <Flexbox horizantal spacing='between'>
+            <Toolbar>
+              <ToolbarButton kind='message'>
+                <Icon size={30} name='ballon-text' />
+                <Title.H4>Criar mensagem</Title.H4>
+              </ToolbarButton>
+              <ToolbarButton kind='reply'>
+                <Icon size={30} name='ballon' />
+                <Title.H4>Criar resposta</Title.H4>
+              </ToolbarButton>
+            </Toolbar>
+            <Spacing margin={{ top: 10 }}>
+              <ul>
+                <li><Text fontSize={12}>[DOUBLE-CLICK]: Editar conteúdo</Text></li>
+                <li><Text fontSize={12}>[CTRL + ENTER]: Salvar edição</Text></li>
+                <li><Text fontSize={12}>[ESC]: Cancelar edição</Text></li>
+                <li><Text fontSize={12}>[DELETE]: Remover mensagem</Text></li>
+              </ul>
+            </Spacing>
+          </Flexbox>
         </Flexbox>
       </DiagramProvider>
     )
