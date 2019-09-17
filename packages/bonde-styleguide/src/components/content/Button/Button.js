@@ -13,7 +13,7 @@ const Button = styled.button`
   height: 38px;
   border-radius: 100px;
   padding: ${props => props.padding || '0 25px'};
-  min-width: 192px;
+  ${props => props.minWidth && `min-width: ${minWidth};`}
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
