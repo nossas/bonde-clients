@@ -20,15 +20,17 @@ class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
 
     return (
       <TextNodeWidget engine={engine} node={node} theme={theme}>
-        {node.replies().map(port => (
-          <OutPort key={port.getOptions().id} node={port}>
-            <EditableInput
-              node={port}
-              component='input'
-            />
-            <PortWidget port={port} {...portProps} />
-          </OutPort>
-        ))}
+        <div className='Replies'>
+          {node.replies().map(port => (
+            <OutPort key={port.getOptions().id} node={port}>
+              <EditableInput
+                node={port}
+                component='input'
+              />
+              <PortWidget port={port} {...portProps} />
+            </OutPort>
+          ))}
+        </div>
       </TextNodeWidget>
     );
   }

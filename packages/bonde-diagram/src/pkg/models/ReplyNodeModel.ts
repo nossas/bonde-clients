@@ -38,7 +38,7 @@ class ReplyNodeModel extends TextNodeModel {
 	}
 
 	quickReply(text: string) {
-		this._generatePort({ in: false, label: text })
+		this._generatePort({ in: false, text })
 	}
 }
 

@@ -8,7 +8,7 @@ import {
 } from '@projectstorm/react-diagrams-core'
 import { DefaultLinkModel } from '@projectstorm/react-diagrams-defaults'
 import { DeserializeEvent } from '@projectstorm/react-canvas-core'
-
+import { MessageNodeModel, ReplyNodeModel } from './'
 
 export interface MessagePortModelOptions extends PortModelOptions {
   text?: string;
@@ -17,6 +17,7 @@ export interface MessagePortModelOptions extends PortModelOptions {
 
 export interface MessagePortModelGenerics extends PortModelGenerics {
   OPTIONS: MessagePortModelOptions;
+  PARENT: MessageNodeModel | ReplyNodeModel;
 }
 
 class MessagePortModel extends PortModel<MessagePortModelGenerics> {
@@ -69,6 +70,14 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
   createLinkModel(): DefaultLinkModel | LinkModel {
     let link = super.createLinkModel()
     return link || new DefaultLinkModel()
+  }
+
+  locked() {
+    this.parent.locked()
+  }
+
+  unlocked() {
+    this.parent.unlocked()
   }
 }
 

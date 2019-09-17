@@ -53,7 +53,10 @@ class Layer extends React.Component<LayerProps> {
         background={background || 'rgb(60, 60, 60)'}
         color={color || 'rgba(255,255,255, 0.05)'}
       >
-        <CanvasWidget className='canvas' engine={app.getDiagramEngine()} />
+        <CanvasWidget
+          className='canvas'
+          engine={app.getDiagramEngine()}
+        />
       </Container>
     )
   }

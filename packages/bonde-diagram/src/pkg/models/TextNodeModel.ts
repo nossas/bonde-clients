@@ -38,6 +38,14 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 	changeText(text: string) {
 		this.options.text = text
 	}
+
+	locked() {
+		this.options.locked = true
+	}
+
+	unlocked() {
+		this.options.locked = false
+	}
 }
 
 export default TextNodeModel
