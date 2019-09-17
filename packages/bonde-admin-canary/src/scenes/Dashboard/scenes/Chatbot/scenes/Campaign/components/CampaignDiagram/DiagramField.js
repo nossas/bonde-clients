@@ -10,6 +10,7 @@ import {
 import { Flexbox2 as Flexbox, Icon, Spacing, Text, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
 import Toolbar, { Button as ToolbarButton } from './Toolbar'
+import ZoomButton from './ZoomButton'
 
 class DiagramField extends React.Component {
   constructor (props) {
@@ -69,11 +70,12 @@ class DiagramField extends React.Component {
     return (
       <DiagramProvider app={this.app}>
         <Flexbox vertical>
-          <div style={{ width: '100%', height: '500px' }}>
+          <div style={{ position: 'relative', width: '100%', height: '500px' }}>
             <Layer
               background='rgba(255,255,255,0.5)'
               color='rgba(0,0,0,0.05)'
               onCreateNode={this.handleCreateNode.bind(this)} />
+            <ZoomButton />
           </div>
           <Flexbox horizantal spacing='between'>
             <Toolbar>
