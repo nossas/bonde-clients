@@ -25,7 +25,6 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 	}
 
 	serialize(): any {
-		console.log(`serialize ${this.options.type}`, this.options)
 		return {
 			...super.serialize(),
 			text: this.options.text
