@@ -43,26 +43,35 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
     const { node } = this.props
     const { eventListener } = this.context
     if (e.key === 'Enter' && e.ctrlKey) {
-      node.changeText(e.target.value)
+      node
+        .changeText(e.target.value)
+        .unlocked()
+
       this.setState({ isEditing: false })
+
       eventListener('changeText')
+
       e.stopPropagation()
-      this.props.node.unlocked()
     } else if (e.key === 'Backspace' || e.key === 'Delete') {
       // stop propagation on backspace and delete pressed
       e.stopPropagation()
     } else if (e.key === 'Escape') {
-      this.setState({
-        isEditing: false,
-        value: node.getOptions().text || ''
-      })
-      this.props.node.unlocked()
+      this.setState({ isEditing: false, value: node.getOptions().text || '' })
+      node.unlocked()
     }
   }
 
   handleDoubleClick() {
     this.props.node.locked()
     this.setState({ isEditing: true })
+  }
+
+  handleOnBlur() {
+    this.props.node
+      .changeText(this.state.value)
+      .unlocked()
+
+    this.setState({ isEditing: false })
   }
 
   render () {
@@ -86,6 +95,7 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
           value={value}
           onChange={(e: any) => this.setState({ value: e.target.value })}
           onKeyUp={this.handleKeyPress.bind(this)}
+          onBlur={this.handleOnBlur.bind(this)}
           style={defaultStyle}
           {...componentProps}
         />

@@ -49,8 +49,9 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
     }
   }
 
-  changeText(text: string) {
+  changeText(text: string): MessagePortModel {
     this.options.text = text
+    return this
   }
 
   link(port: PortModel): DefaultLinkModel | LinkModel {
@@ -72,12 +73,14 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
     return link || new DefaultLinkModel()
   }
 
-  locked() {
+  locked(): MessagePortModel {
     this.parent.locked()
+    return this
   }
 
-  unlocked() {
+  unlocked(): MessagePortModel {
     this.parent.unlocked()
+    return this
   }
 }
 

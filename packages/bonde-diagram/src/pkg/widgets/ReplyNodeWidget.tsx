@@ -14,7 +14,7 @@ export interface ReplyNodeWidgetProps {
 class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
   render() {
     const { engine, node, theme } = this.props
-    const { outPort: OutPort } = theme
+    const { outPort: OutPort, addReply: AddReply } = theme
 
     const portProps = { engine }
 
@@ -30,6 +30,14 @@ class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
               <PortWidget port={port} {...portProps} />
             </OutPort>
           ))}
+          {AddReply && (
+            <AddReply
+              onQuickReply={(text: string) => {
+                node.quickReply(text)
+                this.forceUpdate()
+              }}
+            />
+          )}
         </div>
       </TextNodeWidget>
     );

@@ -3,7 +3,8 @@ type MessageUI = {
 	layer: any,
 	content: any,
 	inPort: any,
-	outPort: any
+	outPort: any,
+	addReply?: any
 }
 
 export default MessageUI

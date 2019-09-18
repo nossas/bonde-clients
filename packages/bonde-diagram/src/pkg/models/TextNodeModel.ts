@@ -25,6 +25,7 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 	}
 
 	serialize(): any {
+		console.log(`serialize ${this.options.type}`, this.options)
 		return {
 			...super.serialize(),
 			text: this.options.text
@@ -35,16 +36,19 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 		return this._previous
 	}
 
-	changeText(text: string) {
+	changeText(text: string): TextNodeModel {
 		this.options.text = text
+		return this
 	}
 
-	locked() {
+	locked(): TextNodeModel {
 		this.options.locked = true
+		return this
 	}
 
-	unlocked() {
+	unlocked(): TextNodeModel {
 		this.options.locked = false
+		return this
 	}
 }
 
