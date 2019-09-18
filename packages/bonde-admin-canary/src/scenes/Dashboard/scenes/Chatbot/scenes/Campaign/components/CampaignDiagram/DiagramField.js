@@ -10,14 +10,20 @@ import {
 import { Flexbox2 as Flexbox, Icon, Spacing, Text, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
 import Toolbar, { Button as ToolbarButton } from './Toolbar'
+import AddReply from './AddReply'
 import ZoomButton from './ZoomButton'
+
+const CustomReplyUI = {
+  ...DiagramStyleguide.MessageWithReplyUI,
+  addReply: AddReply
+}
 
 class DiagramField extends React.Component {
   constructor (props) {
     super(props)
     this.app = new DiagramApplication({
       message: DiagramStyleguide.MessageUI,
-      reply: DiagramStyleguide.MessageWithReplyUI
+      reply: CustomReplyUI
     }, this.handleChange.bind(this))
     // check default value received on Field
     const value = this.getFormValue()

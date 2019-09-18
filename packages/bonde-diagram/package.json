@@ -27,8 +27,7 @@
         "dev": "yarn prepare --watch",
         "build": "./node_modules/.bin/tsc",
         "lint": "./node_modules/.bin/tslint -c ./../../tslint.json src/**/*",
-        "test": "react-scripts test",
-        "coverage": "npm run test -- --passWithNoTests --watchAll=false --coverage"
+        "test": "echo \"Error: no test specified\" && exit 0"
     },
     "eslintConfig": {
         "extends": "react-app"
