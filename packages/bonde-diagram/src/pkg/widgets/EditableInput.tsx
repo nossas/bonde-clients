@@ -30,8 +30,8 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
     }
   }
 
-  componentDidUpdate() {
-    if (this.input.current) {
+  componentDidUpdate(_: any, prevState: EditableInputState) {
+    if (this.input.current && !prevState.isEditing && this.state.isEditing) {
       const { value } = this.state
 
       this.input.current.selectionStart = this.input.current.selectionEnd = value.length
