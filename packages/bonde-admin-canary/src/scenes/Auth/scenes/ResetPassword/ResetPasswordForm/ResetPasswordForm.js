@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
-import { Field, FormGraphQL, SubmitButton } from 'components/Form'
+import { Field, MutationForm, SubmitButton } from 'components/Forms'
 import { ButtonLink } from 'components/Link'
 import { required, min } from 'services/validations'
 import { PasswordField } from '../../components'
@@ -11,17 +11,10 @@ const ResetPasswordForm = ({ t, token, handleSuccess }) => (
   <Flexbox vertical>
     <Title.H2 margin={{ bottom: 18 }}>{t('resetPassword.form.title')}</Title.H2>
     <Title.H4 margin={{ bottom: 30 }}>{t('resetPassword.form.subtitle')}</Title.H4>
-    <FormGraphQL
+    <MutationForm
       mutation={resetPassword}
-      onSubmit={(values, mutation) => {
-        return mutation({
-          variables: {
-            newPassword: values.password,
-            token
-          }
-        })
-          .then(handleSuccess)
-      }}
+      variables={{ token }}
+      onSuccess={handleSuccess}
     >
       <Field
         name='password'
@@ -37,7 +30,7 @@ const ResetPasswordForm = ({ t, token, handleSuccess }) => (
         <ButtonLink to='/auth/login'>{t('resetPassword.form.cancel')}</ButtonLink>
         <SubmitButton>{t('resetPassword.form.submit')}</SubmitButton>
       </Flexbox>
-    </FormGraphQL>
+    </MutationForm>
   </Flexbox>
 )
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Field } from 'components/Form'
+import { Field } from 'components/Forms'
 import DiagramField from './DiagramField'
 
 class CampaignDiagram extends React.Component {

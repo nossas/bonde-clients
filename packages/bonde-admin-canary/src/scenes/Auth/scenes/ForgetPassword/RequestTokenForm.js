@@ -7,7 +7,7 @@ import {
   Title,
   Text
 } from 'bonde-styleguide'
-import { FormGraphQL, Field, SubmitButton } from 'components/Form'
+import { MutationForm, Field, SubmitButton } from 'components/Forms'
 import { ButtonLink } from 'components/Link'
 import { isEmail } from 'services/validations'
 import RequestTokenMutation from './requestResetPasswordToken.graphql'
@@ -19,28 +19,21 @@ const RequestTokenForm = ({ onSuccess }) => (
       <Flexbox>
         <Title.H2 margin={{ bottom: 18 }}>{t('forgetPassword.title')}</Title.H2>
         <Text margin={{ bottom: 30 }}>{t('forgetPassword.description')}</Text>
-        <FormGraphQL
+        <MutationForm
+          formId='RequestTokenForm'
           mutation={RequestTokenMutation}
-          onSubmit={({ email }, mutation) => {
-            return mutation({
-              variables: {
-                email,
-                callbackUrl: `${process.env.REACT_APP_DOMAIN_ADMIN_CANARY}/auth/reset-password/`,
-                locale: i18n.language
+          variables={{
+            callbackUrl: `${process.env.REACT_APP_DOMAIN_ADMIN_CANARY}/auth/reset-password/`,
+            locale: i18n.language
+          }}
+          onSuccess={onSuccess}
+          onError={({ graphQLErrors }) => {
+            if (graphQLErrors && graphQLErrors.length > 0) {
+              if (graphQLErrors[0].message === 'user_not_found') {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) } })
               }
-            })
-              .then(() => {
-                onSuccess && onSuccess()
-                return Promise.resolve()
-              })
-              .catch(({ graphQLErrors }) => {
-                if (graphQLErrors && graphQLErrors.length > 0) {
-                  if (graphQLErrors[0].message === 'user_not_found') {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) } })
-                  }
-                }
-              })
+            }
           }}
         >
           <Field
@@ -60,11 +53,11 @@ const RequestTokenForm = ({ onSuccess }) => (
             >
               {t('forgetPassword.goback')}
             </ButtonLink>
-            <SubmitButton>
+            <SubmitButton formId='RequestTokenForm'>
               {t('forgetPassword.submit')}
             </SubmitButton>
           </Flexbox>
-        </FormGraphQL>
+        </MutationForm>
       </Flexbox>
     )}
   </I18n>

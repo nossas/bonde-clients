@@ -2,11 +2,11 @@ import gql from 'graphql-tag'
 
 export default gql`
 mutation ResetPassword (
-  $newPassword: String!,
+  $password: String!,
   $token: String!
 ) {
   resetPasswordChangePassword (input: {
-    newPassword:$newPassword,
+    newPassword:$password,
     token:$token
   }) {
     changePasswordField {
