@@ -8,7 +8,7 @@ import {
   Text,
   Spacing
 } from 'bonde-styleguide'
-import { Field } from 'components/Form'
+import { Field } from 'components/Forms'
 
 const CampaignForm = () => (
   <Card rounded={5} padding={{ x: 40, y: 40 }}>

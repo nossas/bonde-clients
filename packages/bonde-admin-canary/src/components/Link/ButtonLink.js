@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const ButtonLink = ({ to, title, children, align, ...rest }) => (
   <Link to={to} title={title}>
-    <Button align={align} padding='0' {...rest}>
+    <Button align={align} {...rest}>
       {children}
     </Button>
   </Link>

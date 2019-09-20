@@ -1,39 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Card, Flexbox2 as Flexbox, Spacing } from 'bonde-styleguide'
-import { Draggable } from 'bonde-diagram/lib/diagram-pkg'
+import { Draggable } from 'bonde-diagram'
 
-const Button = ({ data, children }) => {
+export const Button = ({ kind, children }) => {
   return (
-    <Draggable data={data}>
-      <Spacing margin={{ bottom: 5 }}>
+    <Spacing margin={{ right: 5 }}>
+      <Draggable kind={kind}>
         <Card rounded={2} style={{ cursor: 'pointer' }} padding={{ x: 30, y: 30 }}>
           <Flexbox horizontal spacing='around' align='center'>
             {children}
           </Flexbox>
         </Card>
-      </Spacing>
-    </Draggable>
+      </Draggable>
+    </Spacing>
   )
 }
 
 Button.propTypes = {
   children: PropTypes.any,
-  data: PropTypes.object
+  kind: PropTypes.oneOf(['message', 'reply'])
 }
 
 const Toolbar = ({ children }) => {
   return (
-    <Flexbox vertical>
-      {children}
-    </Flexbox>
+    <Spacing margin={{ top: 10 }}>
+      <Flexbox horizontal>
+        {children}
+      </Flexbox>
+    </Spacing>
   )
 }
 
 Toolbar.propTypes = {
   children: PropTypes.any
 }
-
-Toolbar.Button = Button
 
 export default Toolbar

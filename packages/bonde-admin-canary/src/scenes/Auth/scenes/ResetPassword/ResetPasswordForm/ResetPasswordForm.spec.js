@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Title } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
-import { FormGraphQL, SubmitButton } from 'components/Form'
+import { MutationForm, SubmitButton } from 'components/Forms'
 import { PasswordField } from '../../components'
 import ResetPasswordForm from './ResetPasswordForm'
 import resetPassword from './resetPassword.graphql'
@@ -24,30 +24,8 @@ describe('scenes > Auth > scenes > ResetPassword > ResetPasswordForm > ResetPass
   })
 
   it('should render a form graphql component with mutation', () => {
-    const formGraphQL = node.find(FormGraphQL)
+    const formGraphQL = node.find(MutationForm)
     expect(formGraphQL.props().mutation).to.be.equal(resetPassword)
-  })
-
-  it('should use token and newPassword on submit mutation', done => {
-    const token = 'my-token'
-    node.setProps({
-      token,
-      handleSuccess: (opts) => {
-        expect(opts).to.deep.equal({
-          variables: {
-            newPassword: values.password,
-            token
-          }
-        })
-        done()
-      }
-    })
-
-    const submit = node.find(FormGraphQL).props().onSubmit
-    const values = { password: '123456' }
-    const mutation = opts => new Promise(resolve => resolve(opts))
-
-    return submit(values, mutation)
   })
 
   it('should render a submit button', () => {
@@ -63,10 +41,8 @@ describe('scenes > Auth > scenes > ResetPassword > ResetPasswordForm > ResetPass
       done()
     } })
 
-    const submit = node.find(FormGraphQL).props().onSubmit
-    return submit({}, () => new Promise((resolve) => {
-      resolve(2)
-    }))
+    const submit = node.find(MutationForm).props().onSuccess
+    return submit(2)
   })
 
   it('should render a button link to /auth/login', () => {

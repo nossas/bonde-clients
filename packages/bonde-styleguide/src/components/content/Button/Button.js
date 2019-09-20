@@ -12,8 +12,8 @@ const Button = styled.button`
   line-height: 1.15;
   height: 38px;
   border-radius: 100px;
-  padding: ${props => props.padding || '0 25px'};
-  min-width: 192px;
+  padding: ${props => props.padding};
+  ${props => props.minWidth && `min-width: ${props.minWidth};`}
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
@@ -161,6 +161,8 @@ Button.propTypes = {
   color: string,
   /** Button type. */
   type: string,
+  /** Button min-width. */
+  minWidth: string,
   /** Button align. */
   align: oneOf(['center', 'left', 'right']),
   /** Button margin. */
@@ -169,13 +171,16 @@ Button.propTypes = {
     bottom: string,
     left: string,
     right: string,
-  })
+  }),
+  /** Button padding. */
+  padding: string
 }
 
 Button.defaultProps = {
   align: 'center',
   type: 'button',
-  margin: {}
+  margin: {},
+  padding: '5px 20px'
 }
 
 Button.displayName = 'Button'

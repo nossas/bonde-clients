@@ -26,7 +26,7 @@ const findMessageById = (campaigns, id) => {
   return ''
 }
 
-const SuggestCampaignsInput = ({ campaigns, value: inputValue, onChange }) => {
+const SuggestCampaignsInput = ({ campaigns, minLength, value: inputValue, onChange }) => {
   const [suggestions, setSuggestions] = useState([])
   const [value, setValue] = useState(findMessageById(campaigns, inputValue))
 
@@ -36,10 +36,9 @@ const SuggestCampaignsInput = ({ campaigns, value: inputValue, onChange }) => {
   const getSuggestions = (input) => {
     const escapedValue = escapeRegexCharacters(input.trim())
 
-    if (escapedValue === '') return []
+    if (escapedValue === '' || escapedValue.length < minLength) return []
 
-    const regex = new RegExp('^' + escapedValue, 'i')
-
+    const regex = new RegExp(escapedValue, 'i')
     return campaigns.map(campaign => ({
       ...campaign,
       messages: campaign.messages.filter(message => regex.test(message.text))
@@ -90,7 +89,12 @@ const SuggestCampaignsInput = ({ campaigns, value: inputValue, onChange }) => {
 SuggestCampaignsInput.propTypes = {
   value: PropTypes.string,
   campaigns: PropTypes.array,
+  minLength: PropTypes.number,
   onChange: PropTypes.func.isRequired
+}
+
+SuggestCampaignsInput.defaultProps = {
+  minLength: 3
 }
 
 const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed } }) => (
@@ -140,7 +144,13 @@ const ChatbotPersistentMenu = ({ chatbot }) => {
   const campaignsFilterPersistentMenu = chatbot.campaigns
     .filter(c => !!c.diagram && c.status === 'active')
     .map(campaign => {
-      const { nodes } = JSON.parse(campaign.diagram)
+      const { layers } = JSON.parse(campaign.diagram)
+      const nodes = Object.values(
+        layers
+          .filter(m => m.type === 'diagram-nodes')[0]
+          .models
+      )
+
       return {
         id: campaign.id,
         name: campaign.name,

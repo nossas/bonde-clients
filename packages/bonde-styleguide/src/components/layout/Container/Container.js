@@ -7,12 +7,32 @@ import IconColorful from '../../content/IconColorful/IconColorful'
 
 const Content = styled.div`
   position: fixed;
-  width: 50%;
-  height: 100%;
   padding: 13%;
 
-  ${props => props.left && `left: 0;`}
-  ${props => props.right && `right: 0;`}
+  @media (min-width: 1024px) {
+    width: 50%;
+    height: 100%;
+
+    ${props => props.left && `
+      left: 0;
+    `}
+    ${props => props.right && `
+      right: 0;
+    `}
+  }
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    height: 50%;
+
+    ${props => props.left && `
+      top: 0;
+    `}
+    ${props => props.right && `
+      bottom: 0;
+    `}
+  }
+
 
   ${props => props.bgImage && `
     background: url('${props.bgImage}') no-repeat;
