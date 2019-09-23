@@ -10,7 +10,6 @@ const Page = ({
   tabs,
   dropdown,
   wrapperHeaderComponent: WrapperHeader,
-  fixedFooter,
   ...pageProps
 }) => {
   // calculate height to resize content and fix Footer component on bottom page
@@ -36,7 +35,7 @@ const Page = ({
       ) : headerNode}
 
       <Content {...pageProps} height={height}>{children}</Content>
-      <Footer fixed={fixedFooter} />
+      <Footer />
     </div>
   )
 }

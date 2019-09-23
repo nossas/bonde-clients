@@ -6,7 +6,7 @@ import { ButtonLink } from 'components/Link'
 const ContentPage = ({ backward, title, children, tabs, actions, ...rest }) => (
   <Flexbox vertical>
     {(tabs || backward || actions) && (
-      <Spacing margin={{ top: 20 }}>
+      <Spacing margin={{ top: 20, x: 60 }}>
         <Flexbox horizontal spacing='between'>
           {backward ? (
             <ButtonLink flat to={backward} padding='0!important' style={{ minWidth: '200px' }}>
