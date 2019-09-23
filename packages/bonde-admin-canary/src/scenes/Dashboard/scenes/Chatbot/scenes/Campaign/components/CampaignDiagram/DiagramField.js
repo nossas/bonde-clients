@@ -54,7 +54,6 @@ class DiagramField extends React.Component {
 
   handleChange (evt) {
     const value = this.serialize()
-    console.log('DiagramField.handleChange', value)
     this.setFormValue(value)
   }
 
