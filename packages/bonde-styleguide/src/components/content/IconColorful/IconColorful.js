@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import svg from './svg'
 
-const IconColorful = styled(({ name, color, size, inverted }) => {
+const IconColorful = styled(({ name, color, size, inverted, title }) => {
   const IconSVG = svg[name]
 
-  return <IconSVG color={color} size={size} inverted={inverted} />
+  return <IconSVG color={color} size={size} inverted={inverted} title={title} />
 })`
   vertical-align: middle;
 `

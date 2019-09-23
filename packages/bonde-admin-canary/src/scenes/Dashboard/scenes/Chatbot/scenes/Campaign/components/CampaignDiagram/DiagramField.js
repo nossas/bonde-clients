@@ -7,7 +7,7 @@ import {
   MessageNodeModel,
   ReplyNodeModel
 } from 'bonde-diagram'
-import { Flexbox2 as Flexbox, Icon, Spacing, Text, Title } from 'bonde-styleguide'
+import { Icon, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
 import Toolbar, { Button as ToolbarButton } from './Toolbar'
 import AddReply from './AddReply'
@@ -74,7 +74,7 @@ class DiagramField extends React.Component {
   render () {
     return (
       <DiagramProvider app={this.app}>
-        <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+        <div style={{ position: 'relative', width: '100%', height: `100%` }}>
           <Toolbar>
             <ToolbarButton kind='message'>
               <Icon size={30} name='ballon-text' />

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Flexbox2 as Flexbox, Position, Spacing, Text } from 'bonde-styleguide'
+import { Card, Position, Spacing, Text } from 'bonde-styleguide'
 import { Draggable } from 'bonde-diagram'
 
 export const Button = ({ kind, children }) => {

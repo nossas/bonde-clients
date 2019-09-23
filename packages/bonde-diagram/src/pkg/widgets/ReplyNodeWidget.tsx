@@ -34,7 +34,7 @@ class ReplyNodeWidget extends React.Component<ReplyNodeWidgetProps> {
             <AddReply
               onQuickReply={(text: string) => {
                 node.quickReply(text)
-                this.forceUpdate()
+                engine.repaintCanvas()
               }}
             />
           )}

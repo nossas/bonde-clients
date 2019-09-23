@@ -36,6 +36,7 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 	}
 
 	changeText(text: string): TextNodeModel {
+		console.log('TextNodeModel.changeText', text)
 		this.options.text = text
 		return this
 	}

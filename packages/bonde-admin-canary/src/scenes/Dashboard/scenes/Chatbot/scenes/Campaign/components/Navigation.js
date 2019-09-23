@@ -11,8 +11,6 @@ const Navigation = ({ match, location }) => {
         <ButtonLink flat to={baseUrl} active>Criar</ButtonLink>
         <Icon name='arrow-right' />
         <ButtonLink flat to={match.url} disabled>Editar</ButtonLink>
-        <Icon name='arrow-right' />
-        <ButtonLink flat to={`${match.url}/detail`} disabled>Detalhes</ButtonLink>
       </Flexbox>
     )
   } else {
@@ -22,8 +20,6 @@ const Navigation = ({ match, location }) => {
         <ButtonLink flat to={newUrl}>Criar</ButtonLink>
         <Icon name='arrow-right' />
         <ButtonLink flat to={match.url} active={match.isExact}>Editar</ButtonLink>
-        <Icon name='arrow-right' />
-        <ButtonLink flat to={`${match.url}/detail`} active={baseUrl === '/detail'}>Detalhes</ButtonLink>
       </Flexbox>
     )
   }

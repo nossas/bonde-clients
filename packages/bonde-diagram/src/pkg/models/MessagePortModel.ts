@@ -42,14 +42,17 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
   }
 
   serialize() {
-    return {
+    const serialized = {
       ...super.serialize(),
       in: this.options.in,
       text: this.options.text
     }
+    console.log('MessagePortModel.serialize', serialized)
+    return serialized
   }
 
   changeText(text: string): MessagePortModel {
+    console.log('MessagePortModel.changeText', text)
     this.options.text = text
     return this
   }

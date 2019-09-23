@@ -18,7 +18,7 @@ class GenericForm extends React.Component {
     const { children, error, handleSubmit } = this.props
 
     return (
-      <form style={{ width: '100%' }} onSubmit={handleSubmit}>
+      <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
         <Flexbox horizontal end>
           {error && <InputHint invalid>{error}</InputHint>}
         </Flexbox>

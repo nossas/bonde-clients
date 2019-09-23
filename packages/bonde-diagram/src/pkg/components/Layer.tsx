@@ -34,8 +34,7 @@ class Layer extends React.Component<LayerProps> {
     node.setPosition(point)
 
     app.getDiagramEngine().getModel().addNode(node)
-
-    this.forceUpdate()
+    app.getDiagramEngine().repaintCanvas()
   }
 
   handleDragOver(evt: any) {

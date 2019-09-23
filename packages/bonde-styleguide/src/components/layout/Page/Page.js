@@ -11,13 +11,14 @@ const PageContainer = styled.div`
 `
 
 const PageContent = styled.div`
-  display: flex;
+  height: 100%;
+  ${props => props.padding && `padding: ${props.padding};`}
 `
 
-const Page = ({ children, menuComponent: MenuComponent, top, height }) => (
-  <PageContainer top={top} height={height}>
+const Page = ({ children, style, menuComponent: MenuComponent, top, padding, height }) => (
+  <PageContainer top={top} height={height} style={style}>
     {MenuComponent && <MenuComponent />}
-    <PageContent>
+    <PageContent padding={padding}>
     {children}
     </PageContent>
   </PageContainer>
