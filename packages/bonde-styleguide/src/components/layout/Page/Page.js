@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { px } from '../../../utils'
 
 const PageContainer = styled.div`
-  padding: ${props => props.top ? `calc(${props.top}px + 0)` : '0'} 155px 0;
+  padding: ${props => props.top ? `calc(${props.top}px + 0)` : '0'} 0 0;
   width: 100%;
   margin: 0 auto;
   ${props => props.height && `height: ${px(props.height)};`}

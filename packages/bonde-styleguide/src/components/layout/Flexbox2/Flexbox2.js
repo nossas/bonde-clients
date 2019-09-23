@@ -32,7 +32,7 @@ const Flexbox = styled.div`
   `}
 
   ${props => props.spacing && `
-    justify-content: space-${props.spacing}
+    justify-content: space-${props.spacing};
   `}
 
   ${props => props.colSize && `
