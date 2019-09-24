@@ -47,33 +47,42 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
       in: this.options.in,
       text: this.options.text
     }
-    console.log('MessagePortModel.serialize', serialized)
+    // console.log('MessagePortModel.serialize', serialized)
     return serialized
   }
 
   changeText(text: string): MessagePortModel {
-    console.log('MessagePortModel.changeText', text)
+    // console.log('MessagePortModel.changeText', text)
     this.options.text = text
     return this
   }
 
-  link(port: PortModel): DefaultLinkModel | LinkModel {
+  link(port: PortModel): DefaultLinkModel | LinkModel | void {
     let link = this.createLinkModel()
-    link.setSourcePort(this)
-    link.setTargetPort(port)
-    return link
+
+    if (!!link) {
+      link.setSourcePort(this)
+      link.setTargetPort(port)
+      return link
+    }
   }
 
   canLinkToPort(port: PortModel): boolean {
+    console.log('canLinkToPort', port)
     if (port instanceof MessagePortModel) {
+      console.log('canLinkToPort inside', this)
       return this.options.in !== port.getOptions().in
     }
     return true
   }
 
-  createLinkModel(): DefaultLinkModel | LinkModel {
-    let link = super.createLinkModel()
-    return link || new DefaultLinkModel()
+  createLinkModel(): DefaultLinkModel | LinkModel | null {
+    // Locked one link by port
+    if (Object.values(this.links).length === 0) {
+      let link = super.createLinkModel()
+      return link || new DefaultLinkModel()
+    }
+    return null
   }
 
   locked(): MessagePortModel {
