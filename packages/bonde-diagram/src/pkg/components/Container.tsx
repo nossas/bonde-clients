@@ -44,6 +44,10 @@ const Container = styled.div<ContainerProps>`
       transparent 77%,
       transparent
     );
-`;
+
+  & > .canvas > svg {
+    overflow: visible!important;
+  }
+`
 
 export default Container
