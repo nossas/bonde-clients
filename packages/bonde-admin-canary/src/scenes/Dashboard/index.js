@@ -11,6 +11,11 @@ import HomePage from './scenes/Home'
 import SettingsPage from './scenes/Settings'
 import TagsPage from './scenes/Tags'
 
+const defaultProps = (title, header) => ({
+  title,
+  wrapperHeaderComponent: header
+})
+
 const Dashboard = ({ match }) => {
   return (
     <AuthProvider loading={LoadingFullScreen}>
@@ -18,10 +23,7 @@ const Dashboard = ({ match }) => {
         exact
         path={match.path}
         component={ContentPage}
-        pageProps={{
-          title: 'Inicio',
-          wrapperHeaderComponent: HomePage.Header
-        }}
+        pageProps={defaultProps('Inicio', HomePage.Header)}
         componentProps={{ render: HomePage }}
       />
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
@@ -30,7 +32,7 @@ const Dashboard = ({ match }) => {
         path={`${match.path}/:communityId/analytics`}
         component={AnalyticsPage}
         loading={LoadingFullScreen}
-        pageProps={{ title: 'Dados' }}
+        pageProps={defaultProps('Dados')}
         tabs={[
           { name: 'Dashboard' },
           { name: 'Ativistas', to: '/activists' },
@@ -42,7 +44,7 @@ const Dashboard = ({ match }) => {
         path={`${match.path}/:communityId/chatbot/:chatbotId`}
         component={ChatbotPage}
         loading={LoadingFullScreen}
-        pageProps={{ title: 'Chatbot' }}
+        pageProps={defaultProps('Chatbot')}
         tabs={[
           { name: 'Fluxos de conversas' },
           { name: 'Menu Persistente', to: '/persistent-menu' },
@@ -54,7 +56,7 @@ const Dashboard = ({ match }) => {
         path={`${match.path}/:communityId/settings`}
         component={SettingsPage}
         loading={LoadingFullScreen}
-        pageProps={{ title: 'Configurações' }}
+        pageProps={defaultProps('Configurações')}
         tabs={[
           { name: 'Informações' },
           { name: 'Mobilizadores', to: '/invite' },
@@ -63,7 +65,6 @@ const Dashboard = ({ match }) => {
           { name: 'Financeira', to: '/recipient' }
         ]}
       />
-
     </AuthProvider>
   )
 }

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { px } from '../../../utils'
 
 /**
  * The only true flexbox container.
@@ -32,7 +33,7 @@ const Flexbox = styled.div`
   `}
 
   ${props => props.spacing && `
-    justify-content: space-${props.spacing}
+    justify-content: space-${props.spacing};
   `}
 
   ${props => props.colSize && `
@@ -41,15 +42,15 @@ const Flexbox = styled.div`
     }
   `}
 
-  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
-  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
-  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
-  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
+  ${props => props.margin && props.margin.top && `margin-top: ${px(props.margin.top)};`}
+  ${props => props.margin && props.margin.bottom && `margin-bottom: ${px(props.margin.bottom)};`}
+  ${props => props.margin && props.margin.left && `margin-left: ${px(props.margin.left)};`}
+  ${props => props.margin && props.margin.right && `margin-right: ${px(props.margin.right)};`}
 
-  ${props => props.padding && props.padding.top && `top: ${props.padding.top};`}
-  ${props => props.padding && props.padding.bottom && `bottom: ${props.padding.bottom};`}
-  ${props => props.padding && props.padding.left && `left: ${props.padding.left};`}
-  ${props => props.padding && props.padding.right && `right: ${props.padding.right};`}
+  ${props => props.padding && props.padding.top && `padding-top: ${px(props.padding.top)};`}
+  ${props => props.padding && props.padding.bottom && `padding-bottom: ${px(props.padding.bottom)};`}
+  ${props => props.padding && props.padding.left && `padding-left: ${px(props.padding.left)};`}
+  ${props => props.padding && props.padding.right && `padding-right: ${px(props.padding.right)};`}
 `
 
 // decouple PropTypes only facility design props

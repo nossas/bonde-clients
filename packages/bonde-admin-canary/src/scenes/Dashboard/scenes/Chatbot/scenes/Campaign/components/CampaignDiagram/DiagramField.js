@@ -7,7 +7,7 @@ import {
   MessageNodeModel,
   ReplyNodeModel
 } from 'bonde-diagram'
-import { Flexbox2 as Flexbox, Icon, Spacing, Text, Title } from 'bonde-styleguide'
+import { Icon, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
 import Toolbar, { Button as ToolbarButton } from './Toolbar'
 import AddReply from './AddReply'
@@ -53,7 +53,8 @@ class DiagramField extends React.Component {
   }
 
   handleChange (evt) {
-    this.setFormValue(this.serialize())
+    const value = this.serialize()
+    this.setFormValue(value)
   }
 
   handleCreateNode (kind, size) {
@@ -72,35 +73,23 @@ class DiagramField extends React.Component {
   render () {
     return (
       <DiagramProvider app={this.app}>
-        <Flexbox vertical>
-          <div style={{ position: 'relative', width: '100%', height: '500px' }}>
-            <Layer
-              background='rgba(255,255,255,0.5)'
-              color='rgba(0,0,0,0.05)'
-              onCreateNode={this.handleCreateNode.bind(this)} />
-            <ZoomButton />
-          </div>
-          <Flexbox horizantal spacing='between'>
-            <Toolbar>
-              <ToolbarButton kind='message'>
-                <Icon size={30} name='ballon-text' />
-                <Title.H4>Criar mensagem</Title.H4>
-              </ToolbarButton>
-              <ToolbarButton kind='reply'>
-                <Icon size={30} name='ballon' />
-                <Title.H4>Criar resposta</Title.H4>
-              </ToolbarButton>
-            </Toolbar>
-            <Spacing margin={{ top: 10 }}>
-              <ul>
-                <li><Text fontSize={12}>[DOUBLE-CLICK]: Editar conteúdo</Text></li>
-                <li><Text fontSize={12}>[CTRL + ENTER]: Salvar edição</Text></li>
-                <li><Text fontSize={12}>[ESC]: Cancelar edição</Text></li>
-                <li><Text fontSize={12}>[DELETE]: Remover mensagem</Text></li>
-              </ul>
-            </Spacing>
-          </Flexbox>
-        </Flexbox>
+        <div style={{ position: 'relative', width: '100%', height: `100%` }}>
+          <Toolbar>
+            <ToolbarButton kind='message'>
+              <Icon size={30} name='ballon-text' />
+              <Title.H5 align='center'>MSG</Title.H5>
+            </ToolbarButton>
+            <ToolbarButton kind='reply'>
+              <Icon size={30} name='ballon' />
+              <Title.H5 align='center'>BOTÃO</Title.H5>
+            </ToolbarButton>
+          </Toolbar>
+          <Layer
+            background='rgba(255,255,255,0.5)'
+            color='rgba(0,0,0,0.05)'
+            onCreateNode={this.handleCreateNode.bind(this)} />
+          <ZoomButton />
+        </div>
       </DiagramProvider>
     )
   }

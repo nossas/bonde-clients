@@ -3,6 +3,17 @@ import { Page as Content } from 'bonde-styleguide'
 import Header from './Header'
 import Footer from './Footer'
 
+const styles = {
+  Main: {
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    height: '100%'
+  },
+  Content: {
+    flexGrow: 1
+  }
+}
+
 const Page = ({
   children,
   title,
@@ -10,14 +21,8 @@ const Page = ({
   tabs,
   dropdown,
   wrapperHeaderComponent: WrapperHeader,
-  fixedFooter,
   ...pageProps
 }) => {
-  // calculate height to resize content and fix Footer component on bottom page
-  const height = (window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight) - 195
-
   const headerNode = (
     <Header
       title={title}
@@ -28,16 +33,16 @@ const Page = ({
   )
 
   return (
-    <div>
+    <main style={styles.Main}>
       {WrapperHeader ? (
         <WrapperHeader>
           {headerNode}
         </WrapperHeader>
       ) : headerNode}
 
-      <Content {...pageProps} height={height}>{children}</Content>
-      <Footer fixed={fixedFooter} />
-    </div>
+      <Content {...pageProps} style={styles.Content}>{children}</Content>
+      <Footer />
+    </main>
   )
 }
 

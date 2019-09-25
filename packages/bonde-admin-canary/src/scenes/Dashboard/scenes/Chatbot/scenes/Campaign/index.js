@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
-import { ContentPage, FormContentPage } from 'scenes/Dashboard/components'
+import { FormContentPage } from 'scenes/Dashboard/components'
 import CampaignDiagram from './components/CampaignDiagram'
 import CampaignForm from './components/CampaignForm'
 import Navigation from './components/Navigation'
@@ -23,8 +23,13 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
     formId: formName,
     title: 'Criar fluxo de conversa',
     backward: match.url.replace(/\/campaign\/+\w+/, ''),
+    // use div component to fix Flexbox render
     // eslint-disable-next-line react/display-name
-    tabs: (props) => <Navigation {...props} match={match} />
+    tabs: (props) => (
+      <div>
+        <Navigation {...props} match={match} />
+      </div>
+    )
   }
   const defaulFormProps = {
     refetchQueries: [{
@@ -89,19 +94,11 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
             ...defaultComponentProps,
             campaign,
             formProps,
+            fullPage: true,
             title: campaign.name,
             render: CampaignDiagram,
             // eslint-disable-next-line react/display-name
-            actions: () => <SubmitButton formId={formName}>Salvar e publicar</SubmitButton>
-          }}
-        />
-        <Route
-          exact
-          path={`${match.path}/detail`}
-          component={ContentPage}
-          componentProps={{
-            ...defaultComponentProps,
-            title: campaign.name
+            actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
           }}
         />
       </React.Fragment>

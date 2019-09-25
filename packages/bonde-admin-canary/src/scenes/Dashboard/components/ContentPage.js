@@ -1,32 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flexbox2 as Flexbox, Spacing, Icon, Title } from 'bonde-styleguide'
-import { ButtonLink } from 'components/Link'
+import ContentPageComponent from './ContentPageComponent'
 
-const ContentPage = ({ backward, title, render, tabs, actions, ...rest }) => (
-  <Flexbox vertical>
-    {(tabs || backward || actions) && (
-      <Spacing margin={{ top: 20 }}>
-        <Flexbox horizontal spacing='between'>
-          {backward ? (
-            <ButtonLink flat to={backward} padding='0!important' style={{ minWidth: '200px' }}>
-              <Flexbox horizontal>
-                <Spacing margin={{ right: 5, top: 1 }}>
-                  <Icon name='arrow-left' />
-                </Spacing>
-                <Title.H5>{title}</Title.H5>
-              </Flexbox>
-            </ButtonLink>
-          ) : <div />}
-          {tabs ? tabs({ ...rest }) : <div />}
-          {actions ? actions({ ...rest }) : <div />}
-        </Flexbox>
-      </Spacing>
-    )}
-    <Spacing margin={{ top: 20 }}>
-      {render ? React.createElement(render, { ...rest }) : <Title.H1>Empty Page</Title.H1>}
-    </Spacing>
-  </Flexbox>
+const ContentPage = ({ render, ...rest }) => (
+  <ContentPageComponent {...rest}>
+    {render}
+  </ContentPageComponent>
 )
 
 ContentPage.propTypes = {

@@ -22,9 +22,7 @@ class Provider extends React.Component<ProviderProps> {
 
     return (
       <DiagramProvider value={diagramProps}>
-        <div className={this.props.className}>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </DiagramProvider>
     )
   }

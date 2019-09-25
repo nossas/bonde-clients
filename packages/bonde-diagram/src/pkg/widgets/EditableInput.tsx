@@ -40,22 +40,14 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
   }
 
   handleKeyPress(e: any) {
-    const { node } = this.props
-    const { eventListener } = this.context
     if (e.key === 'Enter' && e.ctrlKey) {
-      node
-        .changeText(e.target.value)
-        .unlocked()
-
-      this.setState({ isEditing: false })
-
-      eventListener('changeText')
-
+      this.changeText(e.target.value)
       e.stopPropagation()
     } else if (e.key === 'Backspace' || e.key === 'Delete') {
       // stop propagation on backspace and delete pressed
       e.stopPropagation()
     } else if (e.key === 'Escape') {
+      const { node } = this.props
       this.setState({ isEditing: false, value: node.getOptions().text || '' })
       node.unlocked()
     }
@@ -66,12 +58,20 @@ class EditableInput extends React.Component<EditableInputProps, EditableInputSta
     this.setState({ isEditing: true })
   }
 
-  handleOnBlur() {
-    this.props.node
-      .changeText(this.state.value)
-      .unlocked()
+  changeText(value: string) {
+    const { node } = this.props
+    const { app, eventListener } = this.context
+
+    node.changeText(value).unlocked()
 
     this.setState({ isEditing: false })
+
+    eventListener('changeText')
+    app.getDiagramEngine().repaintCanvas()
+  }
+
+  handleOnBlur() {
+    this.changeText(this.state.value)
   }
 
   render () {

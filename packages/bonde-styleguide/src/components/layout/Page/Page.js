@@ -4,20 +4,21 @@ import styled from 'styled-components'
 import { px } from '../../../utils'
 
 const PageContainer = styled.div`
-  padding: ${props => props.top ? `calc(${props.top}px + 0)` : '0'} 155px 0;
+  padding: ${props => props.top ? `calc(${props.top}px + 0)` : '0'} 0 0;
   width: 100%;
   margin: 0 auto;
   ${props => props.height && `height: ${px(props.height)};`}
 `
 
 const PageContent = styled.div`
-  display: flex;
+  height: 100%;
+  ${props => props.padding && `padding: ${props.padding};`}
 `
 
-const Page = ({ children, menuComponent: MenuComponent, top, height }) => (
-  <PageContainer top={top} height={height}>
+const Page = ({ children, style, menuComponent: MenuComponent, top, padding, height }) => (
+  <PageContainer top={top} height={height} style={style}>
     {MenuComponent && <MenuComponent />}
-    <PageContent>
+    <PageContent padding={padding}>
     {children}
     </PageContent>
   </PageContainer>

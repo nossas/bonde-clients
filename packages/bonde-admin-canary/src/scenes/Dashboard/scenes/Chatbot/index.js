@@ -64,7 +64,10 @@ const ChatbotPage = ({ match, community }) => {
                   <Route
                     path={`${match.path}/campaign/:campaignId`}
                     component={CampaignPage}
-                    componentProps={{ community, chatbotCampaigns }}
+                    componentProps={{
+                      community,
+                      chatbotCampaigns
+                    }}
                   />
                 </React.Fragment>
               )
