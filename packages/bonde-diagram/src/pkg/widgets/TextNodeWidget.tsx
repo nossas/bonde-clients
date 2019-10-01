@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { PortWidget, DiagramEngine } from '@projectstorm/react-diagrams'
 import Textarea from 'react-textarea-autosize'
-import { MessageNodeModel, ReplyNodeModel } from '../models'
+import { ActionNodeModel, MessageNodeModel, ReplyNodeModel } from '../models'
 import MessageUI from '../themes/MessageUI'
 import EditableInput from './EditableInput'
 
 export interface TextNodeWidgetProps {
-  node: MessageNodeModel | ReplyNodeModel,
+  node: ActionNodeModel | MessageNodeModel | ReplyNodeModel,
   engine: DiagramEngine,
   theme: MessageUI,
   children?: JSX.Element[] | JSX.Element

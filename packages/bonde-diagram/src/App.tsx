@@ -15,6 +15,7 @@ class App extends React.Component {
   constructor(props: any) {
     super(props)
     this.app = new DiagramApplication({
+      action: StyleguideDiagram.MessageActionUI,
       message: StyleguideDiagram.MessageUI,
       reply: StyleguideDiagram.MessageWithReplyUI
     })

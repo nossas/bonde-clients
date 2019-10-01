@@ -1,4 +1,5 @@
 import * as SRD from "@projectstorm/react-diagrams"
+import ActionNodeFactory from "./factories/ActionNodeFactory"
 import MessageNodeFactory from "./factories/MessageNodeFactory"
 import MessagePortFactory from "./factories/MessagePortFactory"
 import ReplyNodeFactory from "./factories/ReplyNodeFactory"
@@ -6,6 +7,7 @@ import MessageUI from "./themes/MessageUI"
 
 export interface ThemeUI {
   message: MessageUI,
+  action: MessageUI,
   reply: MessageUI
 }
 
@@ -21,6 +23,7 @@ class Application {
     this.diagramEngine = SRD.default()
     // install bonde-diagram default factories
     this.diagramEngine.getNodeFactories().registerFactory(new MessageNodeFactory(this.theme.message))
+    this.diagramEngine.getNodeFactories().registerFactory(new ActionNodeFactory(this.theme.action))
     this.diagramEngine.getNodeFactories().registerFactory(new ReplyNodeFactory(this.theme.reply))
     this.diagramEngine.getPortFactories().registerFactory(new MessagePortFactory())
 

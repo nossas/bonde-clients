@@ -14,4 +14,11 @@ declare module 'bonde-styleguide/dist/components/diagram' {
     outPort: any,
     inPort: any
   }
+
+  export const MessageActionUI = {
+    layer: any,
+    content: any,
+    outPort: any,
+    inPort: any
+  }
 }

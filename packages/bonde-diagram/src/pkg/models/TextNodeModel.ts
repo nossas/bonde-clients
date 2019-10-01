@@ -16,7 +16,7 @@ export interface TextNodeModelGenerics extends NodeModelGenerics {
 	OPTIONS: TextNodeModelOptions
 }
 
-class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
+class TextNodeModel<T extends TextNodeModelGenerics> extends NodeModel<T> {
 	public _previous?: MessagePortModel
 
 	deserialize(event: DeserializeEvent<this>) {
@@ -35,18 +35,18 @@ class TextNodeModel extends NodeModel<TextNodeModelGenerics> {
 		return this._previous
 	}
 
-	changeText(text: string): TextNodeModel {
+	changeText(text: string): TextNodeModel<T> {
 		/*console.log('TextNodeModel.changeText', text)*/
 		this.options.text = text
 		return this
 	}
 
-	locked(): TextNodeModel {
+	locked(): TextNodeModel<T> {
 		this.options.locked = true
 		return this
 	}
 
-	unlocked(): TextNodeModel {
+	unlocked(): TextNodeModel<T> {
 		this.options.locked = false
 		return this
 	}

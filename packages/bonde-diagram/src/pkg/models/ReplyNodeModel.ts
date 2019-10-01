@@ -1,7 +1,7 @@
 import MessagePortModel from './MessagePortModel'
-import TextNodeModel from './TextNodeModel'
+import TextNodeModel, { TextNodeModelGenerics } from './TextNodeModel'
 
-class ReplyNodeModel extends TextNodeModel {
+class ReplyNodeModel extends TextNodeModel<TextNodeModelGenerics> {
 	protected _replies: MessagePortModel[]
 
 	constructor(options: any = {}) {

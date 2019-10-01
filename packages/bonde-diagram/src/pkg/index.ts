@@ -5,5 +5,6 @@ export { default as Draggable } from "./components/Draggable"
 export { default as Zoom } from "./components/Zoom"
 export { default as Layer } from "./components/Layer"
 
+export { default as ActionNodeModel } from "./models/ActionNodeModel"
 export { default as MessageNodeModel } from "./models/MessageNodeModel"
 export { default as ReplyNodeModel } from "./models/ReplyNodeModel"

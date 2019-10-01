@@ -1,7 +1,7 @@
 import MessagePortModel from './MessagePortModel'
-import TextNodeModel from './TextNodeModel'
+import TextNodeModel, { TextNodeModelGenerics } from './TextNodeModel'
 
-class MessageNodeModel extends TextNodeModel {
+class MessageNodeModel extends TextNodeModel<TextNodeModelGenerics> {
 	protected _next?: MessagePortModel
 
 	constructor(options: any = {}) {

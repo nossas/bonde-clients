@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
 import DiagramContext from '../Context'
-import { MessageNodeModel, ReplyNodeModel, MessagePortModel } from '../models'
+import { ActionNodeModel, MessageNodeModel, ReplyNodeModel, MessagePortModel } from '../models'
 
 export interface EditableInputProps {
-  node: MessageNodeModel | ReplyNodeModel | MessagePortModel,
+  node: ActionNodeModel | MessageNodeModel | ReplyNodeModel | MessagePortModel,
   component: any,
   props: any
 }
