@@ -1,6 +1,6 @@
 {
     "name": "bonde-diagram",
-    "version": "0.15.3-alpha.1",
+    "version": "0.15.3-alpha.3",
     "main": "dist/pkg/index.js",
     "types": "dist/pkg/index.d.ts",
     "files": [

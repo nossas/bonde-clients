@@ -10,6 +10,7 @@ export { default as ReplyMessageModel } from "./messages/reply/ReplyMessageModel
 export { default as TextMessageModel } from "./messages/text/TextMessageModel"
 
 import DiagramApplication from "./Application"
+import Layer from "./components/Layer"
 import TextMessageModel from "./messages/text/TextMessageModel"
 
 export const createFirstMessage = (text: string): any => {
