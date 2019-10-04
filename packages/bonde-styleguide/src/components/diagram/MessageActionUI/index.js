@@ -1,9 +1,9 @@
 import { Layer, Content, Port } from '../BaseUI'
-import PortSuccessfully from './PortSuccessfully'
+import ActionPort from './ActionPort'
 
 export default {
   layer: Layer,
   content: Content,
   inPort: Port,
-  outPort: PortSuccessfully
+  outPort: ActionPort
 }
