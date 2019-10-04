@@ -45,6 +45,7 @@ class DefaultMessageFactory<T extends DefaultMessageModel> extends AbstractReact
 
 	generateModel(event: any): T {
 		const DefaultModel = this.model as DefaultMessageModel
+		// @ts-ignore
 		return new DefaultModel({ type: this.name, ...event.initialConfig })
 	}
 }

@@ -19,6 +19,7 @@ class DefaultPortFactory<T extends DefaultPortModel = DefaultPortModel> extends 
 
   generateModel(event: any): T {
     const Model = this.model
+    // @ts-ignore
     return new Model({ type: this.name, ...event.initialConfig })
   }
 }

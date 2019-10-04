@@ -26,6 +26,7 @@ class Application {
     // register messages
     this.diagramEngine.getNodeFactories().registerFactory(
       new DefaultMessageFactory<TextMessageModel>({
+        // @ts-ignore
         model: TextMessageModel,
         name: "message",
         theme: this.theme.message,
@@ -33,6 +34,7 @@ class Application {
       }))
     this.diagramEngine.getNodeFactories().registerFactory(
       new DefaultMessageFactory<ReplyMessageModel>({
+        // @ts-ignore
         model: ReplyMessageModel,
         name: "reply",
         theme: this.theme.reply,
@@ -40,6 +42,7 @@ class Application {
       }))
     this.diagramEngine.getNodeFactories().registerFactory(
       new DefaultMessageFactory<ActionMessageModel>({
+        // @ts-ignore
         model: ActionMessageModel,
         name: "action",
         theme: this.theme.action,
@@ -48,12 +51,14 @@ class Application {
     // register ports
     this.diagramEngine.getPortFactories().registerFactory(
       new DefaultPortFactory<DefaultPortModel>({
+        // @ts-ignore
         model: DefaultPortModel,
         name: "port",
       }),
     )
     this.diagramEngine.getPortFactories().registerFactory(
       new DefaultPortFactory<ActionPortModel>({
+        // @ts-ignore
         model: ActionPortModel,
         name: "action-port",
       }),
