@@ -4,10 +4,11 @@ import styled from 'styled-components'
 
 const Switch = styled.label`
   position: relative;
-  display: inline-block;
-  width: 30px;
+  width: 120px;
   height: 36px;
-  padding-left: 36px;
+  padding: 0 0 0 45px;
+  display: inline-flex;
+  align-items: center;
 
   input {
     opacity: 0;
@@ -18,6 +19,7 @@ const Switch = styled.label`
   .slider {
     position: absolute;
     cursor: pointer;
+    width: 30px;
     top: 13px;
     left: -3px;
     right: 10px;
