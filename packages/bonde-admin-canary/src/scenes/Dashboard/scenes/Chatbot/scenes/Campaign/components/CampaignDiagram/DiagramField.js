@@ -4,9 +4,9 @@ import {
   DiagramApplication,
   DiagramProvider,
   Layer,
-  MessageNodeModel,
-  ReplyNodeModel,
-  ActionNodeModel
+  ActionMessageModel,
+  ReplyMessageModel,
+  TextMessageModel
 } from 'bonde-diagram'
 import { Icon, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
@@ -59,17 +59,24 @@ class DiagramField extends React.Component {
     this.setFormValue(value)
   }
 
-  handleCreateNode (kind, size) {
+  handleCreateMessage (kind, size) {
     // TODO: add translate
     switch (kind) {
       case 'message':
-        return new MessageNodeModel('Escreva sua mensagem aqui')
+        return new TextMessageModel({
+          text: 'Escreva sua mensagem aqui.'
+        })
       case 'reply':
-        const node = new ReplyNodeModel('Escreva sua mensagem aqui')
-        node.quickReply('Texto do botão')
-        return node
+        return new ReplyMessageModel({
+          text: 'Escreva sua mensagem aqui.',
+          replies: ['Texto do botão']
+        })
       case 'action':
-        return new ActionNodeModel({ text: 'Informe seu email', actionId: 1 })
+        return new ActionMessageModel({
+          text: 'Escreva um texto pedindo e-mail do usuário.',
+          validLabel: 'E-mail válido',
+          invalidLabel: 'E-mail inválido'
+        })
       default:
         // eslint-disable-next-line
         throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
@@ -97,7 +104,7 @@ class DiagramField extends React.Component {
           <Layer
             background='rgba(255,255,255,0.5)'
             color='rgba(0,0,0,0.05)'
-            onCreateNode={this.handleCreateNode.bind(this)} />
+            onCreateMessage={this.handleCreateMessage.bind(this)} />
           <ZoomButton />
         </div>
       </DiagramProvider>

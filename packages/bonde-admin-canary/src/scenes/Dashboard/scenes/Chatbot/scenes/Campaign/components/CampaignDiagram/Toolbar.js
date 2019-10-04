@@ -24,7 +24,7 @@ export const Button = ({ kind, children }) => {
 
 Button.propTypes = {
   children: PropTypes.any,
-  kind: PropTypes.oneOf(['message', 'reply'])
+  kind: PropTypes.oneOf(['message', 'reply', 'action'])
 }
 
 const Toolbar = ({ children }) => {
