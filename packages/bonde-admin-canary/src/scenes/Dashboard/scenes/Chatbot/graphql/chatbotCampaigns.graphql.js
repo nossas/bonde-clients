@@ -5,7 +5,6 @@ export default gql`
     chatbot_campaigns(where: { chatbot_id: { _eq: $chatbotId } }, order_by: { created_at: desc }) {
       id
       name
-      prefix
       diagram
       status
       chatbot_id

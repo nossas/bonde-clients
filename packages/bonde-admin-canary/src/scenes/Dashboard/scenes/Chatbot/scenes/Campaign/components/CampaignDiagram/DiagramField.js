@@ -36,6 +36,13 @@ class DiagramField extends React.Component {
 
   getFormValue () {
     const { input, defaultValue } = this.props
+    if (input.value) {
+      try {
+        JSON.parse(input.value)
+      } catch (e) {
+        return JSON.parse(defaultValue)
+      }
+    }
     return input.value || defaultValue ? JSON.parse(input.value || defaultValue) : undefined
   }
 

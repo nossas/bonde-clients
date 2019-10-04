@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
+import { createFirstMessage } from 'bonde-diagram'
 import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
 import { FormContentPage } from 'scenes/Dashboard/components'
@@ -42,6 +43,15 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
     const formProps = {
       ...defaulFormProps,
       mutation: insertChatbotCampaignsMutation,
+      parse: ({ campaign }) => {
+        const firstMsg = campaign.diagram
+        return {
+          campaign: {
+            ...campaign,
+            diagram: createFirstMessage(firstMsg)
+          }
+        }
+      },
       values: { campaign: { chatbot_id: chatbotId, status: 'draft' } },
       updateQuery: (readQuery, writeQuery, data) => {
         const { insert_chatbot_campaigns: { returning } } = data
@@ -76,6 +86,14 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       ...defaulFormProps,
       mutation: updateChatbotCampaignsMutation,
       variables: { id: Number(campaign.id) },
+      parse: ({ campaign }) => {
+        return {
+          campaign: {
+            ...campaign,
+            diagram: JSON.parse(campaign.diagram)
+          }
+        }
+      },
       updateQuery: (readQuery, writeQuery, data) => {
         const { update_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()

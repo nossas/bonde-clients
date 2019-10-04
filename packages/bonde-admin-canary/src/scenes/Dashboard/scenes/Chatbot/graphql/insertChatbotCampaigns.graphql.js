@@ -6,7 +6,6 @@ mutation InsertChatbotCampaigns($campaign: chatbot_campaigns_insert_input!) {
     returning {
       id
       name
-      prefix
       diagram
       status
       chatbot_id
