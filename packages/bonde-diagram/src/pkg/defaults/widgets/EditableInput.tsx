@@ -1,10 +1,10 @@
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
-import DiagramContext from '../Context'
-import { ActionNodeModel, MessageNodeModel, ReplyNodeModel, MessagePortModel } from '../models'
+import DiagramContext from '../../Context'
+import { DefaultMessageModel, DefaultPortModel } from '../models'
 
 export interface EditableInputProps {
-  node: ActionNodeModel | MessageNodeModel | ReplyNodeModel | MessagePortModel,
+  node: DefaultMessageModel | DefaultPortModel,
   component: any,
   props: any
 }
@@ -16,9 +16,7 @@ export interface EditableInputState {
 
 class EditableInput extends React.Component<EditableInputProps, EditableInputState> {
   static contextType = DiagramContext
-  static defaultProps = {
-    props: {}
-  }
+  static defaultProps = { props: {} }
   private input: React.RefObject<HTMLInputElement>
 
   constructor(props: EditableInputProps) {

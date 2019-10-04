@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { CanvasWidget } from '@projectstorm/react-canvas-core'
+import { DefaultMessageModel } from '../defaults/models'
 import DiagramContext from '../Context'
-import MessageNodeModel from '../models/MessageNodeModel'
-import ReplyNodeModel from '../models/ReplyNodeModel'
 import Container from './Container'
 
 export interface LayerProps {
-	onCreateNode(kind: string, size: number): MessageNodeModel | ReplyNodeModel,
+	onCreateMessage(kind: string, size: number): DefaultMessageModel,
   color?: string,
   background?: string
 }
@@ -16,7 +15,7 @@ class Layer extends React.Component<LayerProps> {
 
   handleDrop(evt: any) {
     const { app, transferKey, eventListener } = this.context
-    const { onCreateNode } = this.props
+    const { onCreateMessage } = this.props
     const kind = evt.dataTransfer.getData(transferKey)
     const size = Object.keys(
       app
@@ -25,15 +24,13 @@ class Layer extends React.Component<LayerProps> {
         .getNodes()
     ).length
 
-    const node = onCreateNode(kind, size)
+    const node = onCreateMessage(kind, size)
     const point = app.getDiagramEngine().getRelativeMousePoint(evt)
-
     // register listener to change when change node
     node.registerListener({ eventDidFire: eventListener })
-    // update position node insert on content area
     node.setPosition(point)
 
-    app.getDiagramEngine().getModel().addNode(node)
+    app.getActiveDiagram().addNode(node)
     app.getDiagramEngine().repaintCanvas()
   }
 

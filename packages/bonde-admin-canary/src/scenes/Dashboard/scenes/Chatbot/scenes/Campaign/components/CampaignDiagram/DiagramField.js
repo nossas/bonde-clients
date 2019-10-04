@@ -5,7 +5,8 @@ import {
   DiagramProvider,
   Layer,
   MessageNodeModel,
-  ReplyNodeModel
+  ReplyNodeModel,
+  ActionNodeModel
 } from 'bonde-diagram'
 import { Icon, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
@@ -22,6 +23,7 @@ class DiagramField extends React.Component {
   constructor (props) {
     super(props)
     this.app = new DiagramApplication({
+      action: DiagramStyleguide.MessageActionUI,
       message: DiagramStyleguide.MessageUI,
       reply: CustomReplyUI
     }, this.handleChange.bind(this))
@@ -59,15 +61,19 @@ class DiagramField extends React.Component {
 
   handleCreateNode (kind, size) {
     // TODO: add translate
-    if (kind === 'message') {
-      return new MessageNodeModel('Escreva sua mensagem aqui')
-    } else if (kind === 'reply') {
-      const node = new ReplyNodeModel('Escreva sua mensagem aqui')
-      node.quickReply('Texto do botão')
-      return node
+    switch (kind) {
+      case 'message':
+        return new MessageNodeModel('Escreva sua mensagem aqui')
+      case 'reply':
+        const node = new ReplyNodeModel('Escreva sua mensagem aqui')
+        node.quickReply('Texto do botão')
+        return node
+      case 'action':
+        return new ActionNodeModel({ text: 'Informe seu email', actionId: 1 })
+      default:
+        // eslint-disable-next-line
+        throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
     }
-    // eslint-disable-next-line
-    throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
   }
 
   render () {
@@ -82,6 +88,10 @@ class DiagramField extends React.Component {
             <ToolbarButton kind='reply'>
               <Icon size={30} name='ballon' />
               <Title.H5 align='center'>BOTÃO</Title.H5>
+            </ToolbarButton>
+            <ToolbarButton kind='action'>
+              <Icon size={30} name='user' />
+              <Title.H5 align='center'>AÇÃO</Title.H5>
             </ToolbarButton>
           </Toolbar>
           <Layer
