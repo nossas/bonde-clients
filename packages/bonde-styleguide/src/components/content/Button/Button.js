@@ -136,10 +136,10 @@ const Button = styled.button`
     color: ${props.color};
   `}
 
-  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
-  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
-  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
-  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
+  ${props => props.margin && props.margin.top && `margin-top: ${props.margin.top};`}
+  ${props => props.margin && props.margin.bottom && `margin-bottom: ${props.margin.bottom};`}
+  ${props => props.margin && props.margin.left && `margin-left: ${props.margin.left};`}
+  ${props => props.margin && props.margin.right && `margin-right: ${props.margin.right};`}
 `
 
 const { oneOf, node, bool, string, shape } = PropTypes
