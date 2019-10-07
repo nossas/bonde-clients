@@ -1,7 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
-import { Card, Flexbox2 as Flexbox, Icon, Input, Button, Text, Title } from 'bonde-styleguide'
+import {
+  Button,
+  Card,
+  Flexbox2 as Flexbox,
+  Grid,
+  Cell,
+  Icon,
+  Input,
+  Text,
+  Title
+} from 'bonde-styleguide'
 import { MutationForm, Field, FieldArray, FormField, SubmitButton } from 'components/Forms'
 import { ContentPageComponent } from 'scenes/Dashboard/components'
 import { updateChatbotMutation } from '../graphql'
@@ -97,50 +107,65 @@ SuggestCampaignsInput.defaultProps = {
   minLength: 3
 }
 
-const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed } }) => (
-  <Flexbox vertical>
-    {fields.map((menu, index) => (
-      <Card key={`menu-field-${index}`} rounded={5} padding={{ x: 40, y: 40 }} margin={{ bottom: 20 }}>
-        <Flexbox horizontal spacing='between'>
-          <Title.H3>{`Menu #${index}`}</Title.H3>
-          <Button flat type='button' onClick={() => fields.remove(index)}>
-            <Icon name='trash' size={25} color='red' />
-          </Button>
-        </Flexbox>
-        <Flexbox vertical>
-          <Field
-            type='text'
-            name={`${menu}.title`}
-            label='Título do menu'
-            component={FormField}
-            inputComponent={Input}
-          />
-          <Field
-            name={`${menu}.payload`}
-            label='Mensagem de destino'
-            component={FormField}
-            inputComponent={SuggestCampaignsInput}
-            campaigns={campaigns}
-          />
-        </Flexbox>
-      </Card>
-    ))}
-    <Flexbox horizontal spacing='between'>
-      <Button type='button' flat onClick={() => fields.push({})}>
-        <Icon name='plus' /> Novo menu
-      </Button>
-      <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
-    </Flexbox>
-  </Flexbox>
-)
+const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed }, history }) => {
+  const contentProps = {
+    title: 'Voltar',
+    // eslint-disable-next-line react/display-name
+    backward: () => { history.goBack() },
+    // eslint-disable-next-line react/display-name
+    actions: () => (
+      <div>
+        <Button type='button' light onClick={() => fields.push({})} margin={{ right: '18px' }}>
+          <Icon name='plus' /> Novo menu
+        </Button>
+        <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
+      </div>
+    )
+  }
+  return (
+    <ContentPageComponent fixRender {...contentProps}>
+      <Grid>
+        {fields.map((menu, index) => (
+          <Cell key={`menu-field-${index}`} size={[4, 6, 12]}>
+            <Card rounded={5} padding={{ x: 40, y: 40 }} margin={{ bottom: 20 }}>
+              <Flexbox horizontal spacing='between'>
+                <Title.H3>{`Menu #${index}`}</Title.H3>
+                <Button flat type='button' onClick={() => fields.remove(index)}>
+                  <Icon name='trash' size={25} color='red' />
+                </Button>
+              </Flexbox>
+              <Flexbox vertical>
+                <Field
+                  type='text'
+                  name={`${menu}.title`}
+                  label='Título do menu'
+                  component={FormField}
+                  inputComponent={Input}
+                />
+                <Field
+                  name={`${menu}.payload`}
+                  label='Mensagem de destino'
+                  component={FormField}
+                  inputComponent={SuggestCampaignsInput}
+                  campaigns={campaigns}
+                />
+              </Flexbox>
+            </Card>
+          </Cell>
+        ))}
+      </Grid>
+    </ContentPageComponent>
+  )
+}
 
 MenuFieldArray.propTypes = {
   campaigns: PropTypes.array,
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  meta: PropTypes.object
+  meta: PropTypes.object,
+  history: PropTypes.object
 }
 
-const ChatbotPersistentMenu = ({ chatbot }) => {
+const ChatbotPersistentMenu = ({ chatbot, history }) => {
   const campaignsFilterPersistentMenu = chatbot.campaigns
     .filter(c => !!c.diagram && c.status === 'active')
     .map(campaign => {
@@ -165,20 +190,17 @@ const ChatbotPersistentMenu = ({ chatbot }) => {
       variables={{ id: chatbot.id }}
       values={{ persistent_menu: chatbot.persistent_menu }}
     >
-      <ContentPageComponent>
-        {() => (
-          <FieldArray
-            name='persistent_menu'
-            component={MenuFieldArray}
-            props={{ campaigns: campaignsFilterPersistentMenu }} />
-        )}
-      </ContentPageComponent>
+      <FieldArray
+        name='persistent_menu'
+        component={MenuFieldArray}
+        props={{ campaigns: campaignsFilterPersistentMenu, history }} />
     </MutationForm>
   )
 }
 
 ChatbotPersistentMenu.propTypes = {
-  chatbot: PropTypes.object
+  chatbot: PropTypes.object,
+  history: PropTypes.object
 }
 
 export default ChatbotPersistentMenu
