@@ -144,7 +144,7 @@ const ChatbotPersistentMenu = ({ chatbot }) => {
   const campaignsFilterPersistentMenu = chatbot.campaigns
     .filter(c => !!c.diagram && c.status === 'active')
     .map(campaign => {
-      const { layers } = JSON.parse(campaign.diagram)
+      const { layers } = campaign.diagram
       const nodes = Object.values(
         layers
           .filter(m => m.type === 'diagram-nodes')[0]
