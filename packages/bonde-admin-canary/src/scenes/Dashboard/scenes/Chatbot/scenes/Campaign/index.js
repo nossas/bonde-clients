@@ -86,14 +86,13 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       ...defaulFormProps,
       mutation: updateChatbotCampaignsMutation,
       variables: { id: Number(campaign.id) },
-      parse: ({ campaign }) => {
-        return {
-          campaign: {
-            ...campaign,
-            diagram: JSON.parse(campaign.diagram)
-          }
+      values: { campaign: { diagram: campaign.diagram } },
+      parse: ({ campaign }) => ({
+        campaign: {
+          ...campaign,
+          diagram: JSON.parse(campaign.diagram)
         }
-      },
+      }),
       updateQuery: (readQuery, writeQuery, data) => {
         const { update_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()
