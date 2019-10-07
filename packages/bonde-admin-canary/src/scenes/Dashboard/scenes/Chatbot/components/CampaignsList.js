@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import {
   Button,
   Flexbox2 as Flexbox,
@@ -49,7 +50,7 @@ const StatusButtonField = ({ value, row }) => (
           }
           mutation({ variables })
             .then((data) => {
-            // TODO: dispatch notify
+              toast('Pronto! Alterações salvas e publicadas no seu bot.', { type: toast.TYPE.SUCCESS })
             })
         }}
       >
@@ -84,6 +85,9 @@ const MenuField = withRouter(({ match, history, value, row }) => {
             flat
             onClick={() => {
               mutation({ variables: { campaignId: Number(value) } })
+                .then(() => {
+                  toast('Pronto! Alterações salvas e publicadas no seu bot.', { type: toast.TYPE.SUCCESS })
+                })
             }}
           >
             <Icon name='trash' /> Excluir

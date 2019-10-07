@@ -17,7 +17,10 @@ const Root = () => (
     <ProviderGraphQL>
       <ProviderRedux>
         <React.Fragment>
-          <ToastContainer />
+          <ToastContainer
+            className='BondeToastify'
+            hideProgressBar={true}
+          />
           <Router>
             <ProviderLastLocation>
               <Switch>

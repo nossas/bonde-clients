@@ -36,7 +36,10 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
     refetchQueries: [{
       query: chatbotCampaignsQuery,
       variables: { chatbotId }
-    }]
+    }],
+    onSuccess: () => {
+      toast('Pronto! Alterações salvas e publicadas no seu bot.', { type: toast.TYPE.SUCCESS })
+    }
   }
 
   if (match.params.campaignId === 'new') {
@@ -62,7 +65,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       onSuccess: ({ data }) => {
         const { insert_chatbot_campaigns: { returning } } = data
         history.push(match.url.replace('/new', `/${returning[0].id}`))
-        toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
+        defaulFormProps.onSuccess({ data })
       }
     }
 

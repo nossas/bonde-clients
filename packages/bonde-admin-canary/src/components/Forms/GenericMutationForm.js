@@ -43,7 +43,13 @@ const GenericMutationForm = ({
               }
             }
             return action(mutationProps)
-              .then(onSuccess)
+              .then((args) => {
+                if (typeof onSuccess === 'string') {
+                  toast(onSuccess, { type: toast.TYPE.SUCCESS })
+                  return Promise.resolve(args)
+                }
+                return onSuccess(args)
+              })
               .catch((error) => {
                 if (error && (error.form || error.fields)) {
                   let errors = {}
@@ -63,7 +69,7 @@ const GenericMutationForm = ({
   )
 }
 
-const { arrayOf, func, object, shape, oneOfType } = PropTypes
+const { arrayOf, func, object, shape, string, oneOfType } = PropTypes
 
 GenericMutationForm.propTypes = {
   mutation: oneOfType([func, object]).isRequired,
@@ -75,14 +81,12 @@ GenericMutationForm.propTypes = {
     query: oneOfType([func, object]),
     variables: object
   })),
-  onSuccess: func
+  onSuccess: oneOfType([func, string])
 }
 
 GenericMutationForm.defaultProps = {
   variables: {},
-  onSuccess: () => {
-    toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
-  }
+  onSuccess: 'Salvo com sucesso!'
 }
 
 export default GenericMutationForm
