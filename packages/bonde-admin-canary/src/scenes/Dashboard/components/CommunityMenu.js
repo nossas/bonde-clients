@@ -46,7 +46,7 @@ const CommunityMenu = ({ community, dark, pathname }) => {
   }).filter(obj => !!obj)
 
   return (
-    <Flexbox horizontal spacing='between'>
+    <Flexbox horizontal spacing='between' justify='flex-end'>
       {menus.map(({ component: Component, icon, ...rest }, i) => {
         const ownProps = {
           ...rest, dark, flat: true, active: pathname && pathname.startsWith(rest.to)

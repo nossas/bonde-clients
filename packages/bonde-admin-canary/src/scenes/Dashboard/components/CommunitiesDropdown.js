@@ -8,7 +8,7 @@ import {
 import ImageColumn from './ImageColumn'
 
 const CommunityItem = ({ community }) => (
-  <Flexbox horizontal middle>
+  <Flexbox horizontal middle justify='end'>
     <ImageColumn
       value={community.image}
       padding=''
