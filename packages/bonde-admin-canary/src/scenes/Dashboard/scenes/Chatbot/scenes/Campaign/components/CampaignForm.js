@@ -20,14 +20,14 @@ const CampaignForm = () => (
       <Field
         name='campaign.name'
         label='Nome do fluxo'
-        placeholder='Escreva aqui o nome da comunidade'
+        placeholder='Escreva aqui o nome do fluxo'
         component={FormField}
         inputComponent={Input}
       />
       <Field
-        name='campaign.prefix'
-        label='Identificador da campanha'
-        placeholder='Escreva aqui o identificador da campanha'
+        name='campaign.diagram'
+        label='Primeira mensagem'
+        placeholder='Escreva a primeira mensagem aqui (você poderá editar depois).'
         component={FormField}
         inputComponent={Input}
       />

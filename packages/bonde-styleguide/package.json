@@ -1,6 +1,6 @@
 {
   "name": "bonde-styleguide",
-  "version": "0.15.2",
+  "version": "0.15.3-alpha.1",
   "main": "dist/index.js",
   "private": false,
   "dependencies": {
@@ -15,10 +15,11 @@
   "scripts": {
     "prepare": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
     "watch": "yarn prepare --watch",
+    "dev": "yarn prepare --watch",
     "build": "styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
-    "dev": "styleguidist server"
+    "start": "styleguidist server"
   },
   "eslintConfig": {
     "extends": "react-app"

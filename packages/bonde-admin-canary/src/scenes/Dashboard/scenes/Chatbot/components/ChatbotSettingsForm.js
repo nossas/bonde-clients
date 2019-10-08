@@ -47,7 +47,8 @@ class ChatbotSettingsForm extends React.Component {
     const mutationFormProps = {
       mutation: insertChatbotSettingsMutation,
       variables: { chatbotId, channel: 'facebook' },
-      refetchQueries: [{ query: chatbotSettingsQuery, variables: { chatbotId } }]
+      refetchQueries: [{ query: chatbotSettingsQuery, variables: { chatbotId } }],
+      onSuccess: 'Pronto! Alterações salvas e publicadas no seu bot.'
     }
 
     if (this.state.chatbotSettings.length > 0) {

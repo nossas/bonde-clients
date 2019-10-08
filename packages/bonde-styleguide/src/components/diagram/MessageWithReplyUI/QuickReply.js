@@ -3,7 +3,7 @@ import { PortDynamicStyle } from '../BaseUI/Port'
 
 const QuickReply = styled.div`
 	position: relative;
-	width: 100%;
+	width: auto;
   color: #1e88e5;
   padding: 10px 24px;
   font-size: 16px;

@@ -40,7 +40,7 @@ const Footer = styled(({ children, className, btnHelpLabel, btnHelpClick }) => (
   background: #000;
   padding: 0 150px;
   overflow: hidden;
-  width: 100%;
+  width: auto;
 `
 
 const { oneOfType, node, func, string } = PropTypes

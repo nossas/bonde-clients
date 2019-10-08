@@ -1,6 +1,5 @@
 import uuid from 'uuid'
 import {
-  LinkModel,
   PortModel,
   PortModelAlignment,
   PortModelGenerics,
@@ -8,29 +7,24 @@ import {
 } from '@projectstorm/react-diagrams-core'
 import { DefaultLinkModel } from '@projectstorm/react-diagrams-defaults'
 import { DeserializeEvent } from '@projectstorm/react-canvas-core'
-import { MessageNodeModel, ReplyNodeModel } from './'
+import DefaultMessageModel from './DefaultMessageModel'
 
-export interface MessagePortModelOptions extends PortModelOptions {
+export interface DefaultPortModelOptions extends PortModelOptions {
   text?: string;
   in?: boolean;
 }
 
-export interface MessagePortModelGenerics extends PortModelGenerics {
-  OPTIONS: MessagePortModelOptions;
-  PARENT: MessageNodeModel | ReplyNodeModel;
+export interface DefaultPortModelGenerics extends PortModelGenerics {
+  OPTIONS: DefaultPortModelOptions
+  PARENT: DefaultMessageModel
 }
 
-class MessagePortModel extends PortModel<MessagePortModelGenerics> {
-  constructor(options: any = {}) {
-    if (typeof options === 'boolean') {
-      options = {
-        in: options
-      }
-    }
+class DefaultPortModel<T extends DefaultPortModelGenerics = DefaultPortModelGenerics> extends PortModel<T> {
+  constructor(options: DefaultPortModelOptions) {
     super({
       alignment: options.in ? PortModelAlignment.LEFT : PortModelAlignment.RIGHT,
-      type: 'port',
-      name: options.name || `port-${uuid.v4()}`,
+      name: options.name || `${options.type || 'port'}-${uuid.v4()}`,
+      type: options.type || 'port',
       ...options
     })
   }
@@ -42,22 +36,19 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
   }
 
   serialize() {
-    const serialized = {
+    return {
       ...super.serialize(),
       in: this.options.in,
       text: this.options.text
     }
-    // console.log('MessagePortModel.serialize', serialized)
-    return serialized
   }
 
-  changeText(text: string): MessagePortModel {
-    // console.log('MessagePortModel.changeText', text)
+  changeText(text: string): DefaultPortModel {
     this.options.text = text
     return this
   }
 
-  link(port: PortModel): DefaultLinkModel | LinkModel | void {
+  link(port: PortModel): DefaultLinkModel | void {
     let link = this.createLinkModel()
 
     if (!!link) {
@@ -68,33 +59,31 @@ class MessagePortModel extends PortModel<MessagePortModelGenerics> {
   }
 
   canLinkToPort(port: PortModel): boolean {
-    console.log('canLinkToPort', port)
-    if (port instanceof MessagePortModel) {
-      console.log('canLinkToPort inside', this)
+    if (port instanceof DefaultPortModel) {
       return this.options.in !== port.getOptions().in
     }
     return true
   }
 
-  createLinkModel(): DefaultLinkModel | LinkModel | null {
+  createLinkModel(): DefaultLinkModel | null {
     // Locked one link by port
     if (Object.values(this.links).length === 0) {
       let link = super.createLinkModel()
-      return link || new DefaultLinkModel()
+      return link as DefaultLinkModel || new DefaultLinkModel()
     }
     return null
   }
 
-  locked(): MessagePortModel {
+  locked(): DefaultPortModel {
     this.parent.locked()
     return this
   }
 
-  unlocked(): MessagePortModel {
+  unlocked(): DefaultPortModel {
     this.parent.unlocked()
     return this
   }
 }
 
 
-export default MessagePortModel
+export default DefaultPortModel

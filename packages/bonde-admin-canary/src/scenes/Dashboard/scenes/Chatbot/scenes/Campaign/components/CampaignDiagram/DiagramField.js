@@ -4,8 +4,9 @@ import {
   DiagramApplication,
   DiagramProvider,
   Layer,
-  MessageNodeModel,
-  ReplyNodeModel
+  ActionMessageModel,
+  ReplyMessageModel,
+  TextMessageModel
 } from 'bonde-diagram'
 import { Icon, Title } from 'bonde-styleguide'
 import * as DiagramStyleguide from 'bonde-styleguide/dist/components/diagram'
@@ -22,6 +23,7 @@ class DiagramField extends React.Component {
   constructor (props) {
     super(props)
     this.app = new DiagramApplication({
+      action: DiagramStyleguide.MessageActionUI,
       message: DiagramStyleguide.MessageUI,
       reply: CustomReplyUI
     }, this.handleChange.bind(this))
@@ -34,6 +36,13 @@ class DiagramField extends React.Component {
 
   getFormValue () {
     const { input, defaultValue } = this.props
+    if (input.value) {
+      try {
+        JSON.parse(input.value)
+      } catch (e) {
+        return JSON.parse(defaultValue)
+      }
+    }
     return input.value || defaultValue ? JSON.parse(input.value || defaultValue) : undefined
   }
 
@@ -57,17 +66,28 @@ class DiagramField extends React.Component {
     this.setFormValue(value)
   }
 
-  handleCreateNode (kind, size) {
+  handleCreateMessage (kind, size) {
     // TODO: add translate
-    if (kind === 'message') {
-      return new MessageNodeModel('Escreva sua mensagem aqui')
-    } else if (kind === 'reply') {
-      const node = new ReplyNodeModel('Escreva sua mensagem aqui')
-      node.quickReply('Texto do botão')
-      return node
+    switch (kind) {
+      case 'message':
+        return new TextMessageModel({
+          text: 'Escreva sua mensagem aqui.'
+        })
+      case 'reply':
+        return new ReplyMessageModel({
+          text: 'Escreva sua mensagem aqui.',
+          replies: ['Texto do botão']
+        })
+      case 'action':
+        return new ActionMessageModel({
+          text: 'Escreva um texto pedindo e-mail do usuário.',
+          validLabel: 'E-mail válido',
+          invalidLabel: 'E-mail inválido'
+        })
+      default:
+        // eslint-disable-next-line
+        throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
     }
-    // eslint-disable-next-line
-    throw new Exception(`Model kind ${model.kind} isnt mapped on diagram.`)
   }
 
   render () {
@@ -83,11 +103,15 @@ class DiagramField extends React.Component {
               <Icon size={30} name='ballon' />
               <Title.H5 align='center'>BOTÃO</Title.H5>
             </ToolbarButton>
+            <ToolbarButton kind='action'>
+              <Icon size={30} name='user' />
+              <Title.H5 align='center'>AÇÃO</Title.H5>
+            </ToolbarButton>
           </Toolbar>
           <Layer
             background='rgba(255,255,255,0.5)'
             color='rgba(0,0,0,0.05)'
-            onCreateNode={this.handleCreateNode.bind(this)} />
+            onCreateMessage={this.handleCreateMessage.bind(this)} />
           <ZoomButton />
         </div>
       </DiagramProvider>

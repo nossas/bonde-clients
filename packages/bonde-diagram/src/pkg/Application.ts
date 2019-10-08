@@ -1,11 +1,14 @@
 import * as SRD from "@projectstorm/react-diagrams"
-import MessageNodeFactory from "./factories/MessageNodeFactory"
-import MessagePortFactory from "./factories/MessagePortFactory"
-import ReplyNodeFactory from "./factories/ReplyNodeFactory"
+import { DefaultMessageFactory, DefaultPortFactory } from "./defaults/factories"
+import { DefaultPortModel } from "./defaults/models"
+import { ActionMessageModel, ActionMessageWidget, ActionPortModel } from "./messages/action"
+import { ReplyMessageModel, ReplyMessageWidget } from "./messages/reply"
+import { TextMessageModel, TextMessageWidget } from "./messages/text"
 import MessageUI from "./themes/MessageUI"
 
 export interface ThemeUI {
   message: MessageUI,
+  action: MessageUI,
   reply: MessageUI
 }
 
@@ -20,9 +23,46 @@ class Application {
     this.eventListener = eventListener
     this.diagramEngine = SRD.default()
     // install bonde-diagram default factories
-    this.diagramEngine.getNodeFactories().registerFactory(new MessageNodeFactory(this.theme.message))
-    this.diagramEngine.getNodeFactories().registerFactory(new ReplyNodeFactory(this.theme.reply))
-    this.diagramEngine.getPortFactories().registerFactory(new MessagePortFactory())
+    // register messages
+    this.diagramEngine.getNodeFactories().registerFactory(
+      new DefaultMessageFactory<TextMessageModel>({
+        // @ts-ignore
+        model: TextMessageModel,
+        name: "message",
+        theme: this.theme.message,
+        widget: TextMessageWidget,
+      }))
+    this.diagramEngine.getNodeFactories().registerFactory(
+      new DefaultMessageFactory<ReplyMessageModel>({
+        // @ts-ignore
+        model: ReplyMessageModel,
+        name: "reply",
+        theme: this.theme.reply,
+        widget: ReplyMessageWidget,
+      }))
+    this.diagramEngine.getNodeFactories().registerFactory(
+      new DefaultMessageFactory<ActionMessageModel>({
+        // @ts-ignore
+        model: ActionMessageModel,
+        name: "action",
+        theme: this.theme.action,
+        widget: ActionMessageWidget,
+      }))
+    // register ports
+    this.diagramEngine.getPortFactories().registerFactory(
+      new DefaultPortFactory<DefaultPortModel>({
+        // @ts-ignore
+        model: DefaultPortModel,
+        name: "port",
+      }),
+    )
+    this.diagramEngine.getPortFactories().registerFactory(
+      new DefaultPortFactory<ActionPortModel>({
+        // @ts-ignore
+        model: ActionPortModel,
+        name: "action-port",
+      }),
+    )
 
     this.activeModel = new SRD.DiagramModel()
     this.activeModel.registerListener({

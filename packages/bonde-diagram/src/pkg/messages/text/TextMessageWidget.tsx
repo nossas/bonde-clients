@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { PortWidget, DiagramEngine } from '@projectstorm/react-diagrams'
-import MessageNodeModel from '../models/MessageNodeModel'
-import MessageUI from '../themes/MessageUI'
-import TextNodeWidget from './TextNodeWidget'
+import { DefaultMessageWidget } from '../../defaults/widgets'
+import MessageUI from '../../themes/MessageUI'
+import TextMessageModel from './TextMessageModel'
 
-export interface MessageNodeWidgetProps {
-  node: MessageNodeModel,
+export interface TextMessageWidgetProps {
+  node: TextMessageModel,
   engine: DiagramEngine,
   theme: MessageUI
 }
 
-class MessageNodeWidget extends React.Component<MessageNodeWidgetProps> {
+class TextMessageWidget extends React.Component<TextMessageWidgetProps> {
   render() {
     const { engine, node, theme } = this.props
     const { outPort: OutPort } = theme
@@ -18,15 +18,15 @@ class MessageNodeWidget extends React.Component<MessageNodeWidgetProps> {
     const portProps = { engine, style: { height: '100%' } }
     const nextPort = node.next()
     return (
-      <TextNodeWidget node={node} engine={engine} theme={theme}>
+      <DefaultMessageWidget node={node} engine={engine} theme={theme}>
         {nextPort ? (
           <OutPort parent={node} node={nextPort}>
             <PortWidget port={nextPort} {...portProps} />
           </OutPort>
         ) : <div />}
-      </TextNodeWidget>
+      </DefaultMessageWidget>
     )
   }
 }
 
-export default MessageNodeWidget
+export default TextMessageWidget

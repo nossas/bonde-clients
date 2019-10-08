@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
+import { createFirstMessage } from 'bonde-diagram'
 import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
 import { FormContentPage } from 'scenes/Dashboard/components'
@@ -35,13 +36,25 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
     refetchQueries: [{
       query: chatbotCampaignsQuery,
       variables: { chatbotId }
-    }]
+    }],
+    onSuccess: () => {
+      toast('Pronto! Alterações salvas e publicadas no seu bot.', { type: toast.TYPE.SUCCESS })
+    }
   }
 
   if (match.params.campaignId === 'new') {
     const formProps = {
       ...defaulFormProps,
       mutation: insertChatbotCampaignsMutation,
+      parse: ({ campaign }) => {
+        const firstMsg = campaign.diagram
+        return {
+          campaign: {
+            ...campaign,
+            diagram: createFirstMessage(firstMsg)
+          }
+        }
+      },
       values: { campaign: { chatbot_id: chatbotId, status: 'draft' } },
       updateQuery: (readQuery, writeQuery, data) => {
         const { insert_chatbot_campaigns: { returning } } = data
@@ -52,7 +65,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       onSuccess: ({ data }) => {
         const { insert_chatbot_campaigns: { returning } } = data
         history.push(match.url.replace('/new', `/${returning[0].id}`))
-        toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
+        defaulFormProps.onSuccess({ data })
       }
     }
 
@@ -76,6 +89,13 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
       ...defaulFormProps,
       mutation: updateChatbotCampaignsMutation,
       variables: { id: Number(campaign.id) },
+      values: { campaign: { diagram: campaign.diagram } },
+      parse: ({ campaign }) => ({
+        campaign: {
+          ...campaign,
+          diagram: JSON.parse(campaign.diagram)
+        }
+      }),
       updateQuery: (readQuery, writeQuery, data) => {
         const { update_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()

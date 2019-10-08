@@ -10,7 +10,7 @@ class CampaignDiagram extends React.Component {
     return (
       <Field
         name='campaign.diagram'
-        defaultValue={campaign.diagram}
+        defaultValue={JSON.stringify(campaign.diagram)}
         component={DiagramField}
       />
     )

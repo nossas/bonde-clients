@@ -9,7 +9,6 @@ mutation UpdateChatbotCampaigns($campaign: chatbot_campaigns_set_input!, $id: In
     returning {
       id
       name
-      prefix
       diagram
       status
       chatbot_id
