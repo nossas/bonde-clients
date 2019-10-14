@@ -17,7 +17,7 @@ const PageTabs = ({ location, match, tabs, ...rest }) => {
             key={`default-page-tabs-${i}`}
             active={tabSelect ? tabSelect.to === to : i === 0}
             to={`${match.url}${to || ''}`}
-            component={Link}
+            component={({ className, children, to }) => (<Link className={className} to={to}>{children}</Link>)}
           >
             {name}
           </TabItem>
