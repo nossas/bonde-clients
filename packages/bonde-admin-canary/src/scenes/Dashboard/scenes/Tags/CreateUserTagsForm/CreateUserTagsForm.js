@@ -12,6 +12,7 @@ const formName = 'CreateUserTagsForm'
 const CreateUserTagsForm = ({ t, user, onSuccess }) => {
   return (
     <MutationForm
+      fluid
       formId={formName}
       values={{ tags: user.tags.join(';') }}
       mutation={CreateUserTags}

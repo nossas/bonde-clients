@@ -15,10 +15,11 @@ class GenericForm extends React.Component {
   }
 
   render () {
-    const { children, error, handleSubmit } = this.props
+    const { children, error, handleSubmit, fluid } = this.props
+    const formStyles = fluid ? {} : { width: '100%', height: '100%' }
 
     return (
-      <form style={{ width: '100%', height: '100%' }} onSubmit={handleSubmit}>
+      <form style={formStyles} onSubmit={handleSubmit}>
         <Flexbox horizontal end>
           {error && <InputHint invalid>{error}</InputHint>}
         </Flexbox>
@@ -35,11 +36,13 @@ GenericForm.propTypes = {
   children: node,
   error: any,
   handleSubmit: func,
+  fluid: bool.isRequired,
   cleanForm: bool.isRequired
 }
 
 GenericForm.defaultProps = {
-  cleanForm: false
+  cleanForm: false,
+  fluid: false
 }
 
 export default GenericForm
