@@ -16,7 +16,6 @@ const Flexbox = styled(({ children, className }) => {
   display: flex;
 
   ${props => props.horizontal && `
-    width: 100%;
     flex-direction: row;
   `}
   ${props => props.vertical && `

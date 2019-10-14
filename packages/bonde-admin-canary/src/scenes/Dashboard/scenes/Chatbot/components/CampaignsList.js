@@ -110,25 +110,21 @@ const fields = {
 
 const CampaignsList = ({ chatbotCampaigns, match }) => {
   return (
-    <Grid gap={0}>
-      <Cell size={[2, 2, 2]}>
-        <Flexbox horizontal spacing='between'>
+    <Flexbox vertical>
+      <Flexbox horizontal spacing='between'>
+        <Flexbox horizontal justify='flex-start'>
           <Button flat active>TODOS</Button>
           <Button flat>ATIVOS</Button>
           <Button flat>INATIVOS</Button>
         </Flexbox>
-      </Cell>
-      <Cell align='right' size={[10, 10, 10]}>
         <ButtonLink to={`${match.url}/campaign/new`}>Novo fluxo</ButtonLink>
-      </Cell>
-      <Cell size={[12, 12, 12]}>
-        <DataListCard
-          border='separate'
-          fields={fields}
-          items={chatbotCampaigns}
-        />
-      </Cell>
-    </Grid>
+      </Flexbox>
+      <DataListCard
+        border='separate'
+        fields={fields}
+        items={chatbotCampaigns}
+      />
+    </Flexbox>
   )
 }
 

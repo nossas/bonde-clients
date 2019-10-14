@@ -26,6 +26,7 @@ const DropdownMenu = styled.div`
   white-space: nowrap;
   position: absolute;
   top: calc(100% + 15px);
+  right: 0;
   z-index: 9;
   overflow-y: auto;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.45);
@@ -39,7 +40,7 @@ const DropdownMenuArrow = styled.div`
   border-bottom: 8px solid #fff;
   position: absolute;
   bottom: -15px;
-  right: -3px;
+  right: 3px;
 `
 
 const DropdownComponent = styled.div`

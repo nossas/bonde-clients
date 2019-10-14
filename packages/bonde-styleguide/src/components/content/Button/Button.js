@@ -21,7 +21,7 @@ const Button = styled.button`
 
   border: none;
   box-shadow: 1px 2px 7px 5px rgba(0, 0, 0, 0.08);
-  background-color: #ff0099;
+  background-color: #ee0099;
   color: #fff;
   &:hover {
     background-color: #e2058a;
