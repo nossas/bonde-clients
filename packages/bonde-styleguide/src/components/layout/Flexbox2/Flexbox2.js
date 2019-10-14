@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { px } from '../../../utils'
@@ -5,7 +6,13 @@ import { px } from '../../../utils'
 /**
  * The only true flexbox container.
  */
-const Flexbox = styled.div`
+const Flexbox = styled(({ children, className }) => {
+  return (
+    <div className={className}>
+      {children}
+    </div>
+  )
+})`
   display: flex;
 
   ${props => props.horizontal && `
