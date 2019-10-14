@@ -37,6 +37,10 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
   position: absolute;
   z-index: 10;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   ${props => props.margin && props.margin.top && `margin-top: ${px(props.margin.top)};`}
   ${props => props.margin && props.margin.bottom && `margin-bottom: ${px(props.margin.bottom)};`}
   ${props => props.margin && props.margin.left && `margin-left: ${px(props.margin.left)};`}
