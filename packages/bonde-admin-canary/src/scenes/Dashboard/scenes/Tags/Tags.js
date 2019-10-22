@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
+import { Flexbox2 as Flexbox, Title, Spacing } from 'bonde-styleguide'
 import { toast } from 'react-toastify'
 import { Redirect } from 'services/router'
 import CreateUserTagsForm from './CreateUserTagsForm'
@@ -17,22 +17,24 @@ class Tags extends React.Component {
     if (this.state.redirect) return <Redirect to='/admin' />
 
     return (
-      <Flexbox vertical middle padding='0 26.6%'>
-        <Title.H2 margin={{ bottom: 25 }} fontSize={44}>
-          {`${t('greetings')}, ${user.firstName}!`}
-        </Title.H2>
-
-        <Title.H4 margin={{ bottom: 60 }} fontWeight='normal' align='center'>
-          {t('explanation')}
-        </Title.H4>
-
-        <CreateUserTagsForm
-          onSuccess={() => {
-            toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
-            this.setState({ redirect: true })
-          }}
-        />
-      </Flexbox>
+      <Spacing style={{ height: '100%' }} padding={{ x: '10%', y: 0 }}>
+        <Flexbox vertical middle>
+          <Spacing margin={{ bottom: 30 }}>
+            <Title.H2 margin={{ bottom: 25 }} fontSize={44} align='center'>
+              {`${t('greetings')}, ${user.firstName}!`}
+            </Title.H2>
+            <Title.H4 margin={{ bottom: 60 }} fontWeight='normal' align='center'>
+              {t('explanation')}
+            </Title.H4>
+          </Spacing>
+          <CreateUserTagsForm
+            onSuccess={() => {
+              toast('Salvo com sucesso!', { type: toast.TYPE.SUCCESS })
+              this.setState({ redirect: true })
+            }}
+          />
+        </Flexbox>
+      </Spacing>
     )
   }
 }

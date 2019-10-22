@@ -55,7 +55,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
           }
         }
       },
-      values: { campaign: { chatbot_id: chatbotId, status: 'draft' } },
+      values: { campaign: { chatbot_id: chatbotId, status: 'inactive' } },
       updateQuery: (readQuery, writeQuery, data) => {
         const { insert_chatbot_campaigns: { returning } } = data
         const { chatbot_campaigns: campaigns } = readQuery()

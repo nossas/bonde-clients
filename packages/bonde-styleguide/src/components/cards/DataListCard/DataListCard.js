@@ -35,18 +35,18 @@ const DataListCard = ({
           {fieldNames.map(fieldName => {
             const { label, ...colProps } = fields[fieldName]
             return (
-              <DataListCol {...colProps} padding={false}>
+              <DataListCol {...colProps} key={`row-header-${Math.random()}`} padding={false}>
                 <Text>{label}</Text>
               </DataListCol>
             )
           })}
         </DataListRow>
         {items.map(item => (
-          <DataListRow key={Math.random()}>
+          <DataListRow key={`row-${Math.random()}`}>
           {fieldNames.map(fieldName => (
             <CustomCol
               {...fields[fieldName]}
-              key={Math.random()}
+              key={`col-${Math.random()}`}
               row={item}
               value={picker ? item[picker][fieldName] : item[fieldName]}
             />

@@ -10,7 +10,7 @@ const HeaderDialog = ({ children }) => (
         t={t}
         step={1}
         placement='bottom-left'
-        margin={{ left: 125 }}
+        margin={{ left: 60 }}
       >
         {children}
       </Dialog>

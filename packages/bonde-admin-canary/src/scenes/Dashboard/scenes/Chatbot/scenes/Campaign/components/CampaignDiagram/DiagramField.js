@@ -79,10 +79,12 @@ class DiagramField extends React.Component {
           replies: ['Texto do botão']
         })
       case 'action':
+        // TODO: check validation of actionId
         return new ActionMessageModel({
           text: 'Escreva um texto pedindo e-mail do usuário.',
           validLabel: 'E-mail válido',
-          invalidLabel: 'E-mail inválido'
+          invalidLabel: 'E-mail inválido',
+          actionId: Number(window.prompt('Informe o ID do widget de pressao:', 0))
         })
       default:
         // eslint-disable-next-line

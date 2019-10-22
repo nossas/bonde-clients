@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Icon from '../../content/Icon/Icon'
 import Button from '../../content/Button/Button'
 import Backdrop from '../../layout/Backdrop/Backdrop'
+import { px } from '../../../utils'
 
 const CloseButton = styled(({ className, onClose }) => (
   <div className={className}>
@@ -36,10 +37,14 @@ const CardTooltip = styled(({ className, onClose, Content }) => (
   position: absolute;
   z-index: 10;
 
-  ${props => props.margin && props.margin.top && `top: ${props.margin.top};`}
-  ${props => props.margin && props.margin.bottom && `bottom: ${props.margin.bottom};`}
-  ${props => props.margin && props.margin.left && `left: ${props.margin.left};`}
-  ${props => props.margin && props.margin.right && `right: ${props.margin.right};`}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${props => props.margin && props.margin.top && `margin-top: ${px(props.margin.top)};`}
+  ${props => props.margin && props.margin.bottom && `margin-bottom: ${px(props.margin.bottom)};`}
+  ${props => props.margin && props.margin.left && `margin-left: ${px(props.margin.left)};`}
+  ${props => props.margin && props.margin.right && `margin-right: ${px(props.margin.right)};`}
 
   ${props => props.minWidth && `
     min-width: ${props.minWidth}px;
@@ -198,10 +203,10 @@ Tooltip.propTypes = {
     right: string,
   }),
   margin: shape({
-    top: string,
-    bottom: string,
-    left: string,
-    right: string,
+    top: oneOfType([string, number]),
+    bottom: oneOfType([string, number]),
+    left: oneOfType([string, number]),
+    right: oneOfType([string, number]),
   })
 }
 
@@ -211,6 +216,7 @@ Tooltip.defaultProps = {
   show: true,
   placement: 'right-top',
   position: {},
+  margin: {}
 }
 
 Tooltip.displayName = 'Tooltip'

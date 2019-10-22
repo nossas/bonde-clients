@@ -10,8 +10,6 @@ import {
   SwitchSlider,
   Text,
   Title,
-  Grid,
-  Cell,
   Icon
 } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
@@ -32,7 +30,7 @@ NameField.propTypes = {
 const StatusButtonField = ({ value, row }) => (
   <Mutation
     mutation={updateChatbotCampaignsMutation}
-    refetchQueries={[{ query: chatbotCampaignsQuery, variables: { chatbotId: row.chatbot_id } }]}
+    refetchQueries={[{ query: chatbotCampaignsQuery, variables: { chatbotId: row.chatbot_id, filter: value } }]}
   >
     {(mutation) => (
       <SwitchSlider
@@ -108,27 +106,23 @@ const fields = {
   id: { label: 'Ações', render: MenuField, width: 500 }
 }
 
-const CampaignsList = ({ chatbotCampaigns, match }) => {
+const CampaignsList = ({ chatbotCampaigns, match, params }) => {
   return (
-    <Grid gap={0}>
-      <Cell size={[2, 2, 2]}>
-        <Flexbox horizontal spacing='between'>
-          <Button flat active>TODOS</Button>
-          <Button flat>ATIVOS</Button>
-          <Button flat>INATIVOS</Button>
+    <Flexbox vertical>
+      <Flexbox horizontal spacing='between'>
+        <Flexbox horizontal justify='flex-start'>
+          <ButtonLink flat to={match.url} active={!params.filter}>TODOS</ButtonLink>
+          <ButtonLink flat to={`${match.url}?filter=active`} active={params.filter === 'active'}>ATIVOS</ButtonLink>
+          <ButtonLink flat to={`${match.url}?filter=inactive`} active={params.filter === 'inactive'}>INATIVOS</ButtonLink>
         </Flexbox>
-      </Cell>
-      <Cell align='right' size={[10, 10, 10]}>
         <ButtonLink to={`${match.url}/campaign/new`}>Novo fluxo</ButtonLink>
-      </Cell>
-      <Cell size={[12, 12, 12]}>
-        <DataListCard
-          border='separate'
-          fields={fields}
-          items={chatbotCampaigns}
-        />
-      </Cell>
-    </Grid>
+      </Flexbox>
+      <DataListCard
+        border='separate'
+        fields={fields}
+        items={chatbotCampaigns}
+      />
+    </Flexbox>
   )
 }
 
@@ -138,7 +132,8 @@ CampaignsList.defaultProps = {
 
 CampaignsList.propTypes = {
   chatbotCampaigns: PropTypes.array,
-  match: PropTypes.object
+  match: PropTypes.object,
+  params: PropTypes.object
 }
 
 export default CampaignsList

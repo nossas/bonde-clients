@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types'
 
 const Navigation = ({ t, onNext, onClose, currentStep, total }) => (
-  <Flexbox horizontal middle>
+  <Flexbox horizontal middle spacing='between'>
     <Title.H5 color='#fff'>{currentStep} / {total}</Title.H5>
     {currentStep < total && (
       <Fragment>

@@ -52,10 +52,6 @@ Tag.propTypes = {
   value: oneOfType([bool, string]),
 }
 
-Tag.defaultProps = {
-  defaultChecked: false
-}
-
 Tag.displayName = 'Tag'
 
 /** @component */

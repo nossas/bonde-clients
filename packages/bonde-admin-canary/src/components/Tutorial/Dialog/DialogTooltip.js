@@ -56,7 +56,7 @@ DialogTooltip.propTypes = {
   onNext: PropTypes.func,
   onClose: PropTypes.func,
   placement: PropTypes.string,
-  margin: PropTypes.number
+  margin: PropTypes.object
 }
 
 export default DialogTooltip

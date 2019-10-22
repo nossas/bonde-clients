@@ -13,7 +13,7 @@ import CampaignsList from './components/CampaignsList'
 import CampaignPage from './scenes/Campaign'
 import { chatbotInfoQuery } from './graphql'
 
-const ChatbotPage = ({ match, community }) => {
+const ChatbotPage = ({ match, location, community }) => {
   const modules = JSON.parse(community.modules)
   const chatbotId = Number(match.params.chatbotId)
   if (!modules.chatbot || modules.chatbot !== chatbotId) {
@@ -30,7 +30,8 @@ const ChatbotPage = ({ match, community }) => {
         return (
           <ChatbotCampaignsList
             chatbotId={chatbot.id}
-            dataListComponent={({ chatbotCampaigns }) => {
+            queryParams={location.search}
+            dataListComponent={({ chatbotCampaigns, params }) => {
               return (
                 <React.Fragment>
                   <Route
@@ -40,6 +41,7 @@ const ChatbotPage = ({ match, community }) => {
                     componentProps={{
                       community,
                       chatbotCampaigns,
+                      params,
                       render: CampaignsList
                     }}
                   />
@@ -81,6 +83,7 @@ const ChatbotPage = ({ match, community }) => {
 
 ChatbotPage.propTypes = {
   match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   community: PropTypes.object.isRequired
 }
 
