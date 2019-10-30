@@ -79,7 +79,7 @@ class ChatbotSettingsForm extends React.Component {
               <Card rounded={5} padding={{ x: 40, y: 40 }} margin={{ bottom: 10 }}>
                 <Flexbox vertical>
                   <Spacing margin={{ bottom: 15 }}>
-                    <Title.H3>Facebook</Title.H3>
+                    <Title.H3>Webhook (Facebook)</Title.H3>
                   </Spacing>
                   <Field
                     type='text'
@@ -108,21 +108,38 @@ class ChatbotSettingsForm extends React.Component {
                   />
                 </Flexbox>
               </Card>
-              <Card rounded={5} padding={{ x: 40, y: 40 }}>
-                <Flexbox vertical>
-                  <Spacing margin={{ bottom: 15 }}>
-                    <Title.H3>Wit (Inteligência Artificial)</Title.H3>
-                  </Spacing>
-                  {/* Should be transform settings outside facebook */}
-                  <Field
-                    name='settings.wit_server_access_token'
-                    label='Chave de acesso a WIT (Inteligência artificial)'
-                    placeholder='Informe sua chave de acesso ao WIT (Inteligência artificial)'
-                    component={FormField}
-                    inputComponent={Input}
-                  />
-                </Flexbox>
-              </Card>
+              <Flexbox horizontal>
+                <div style={{ width: '100%' }}>
+                  <Card rounded={5} padding={{ x: 40, y: 40 }} margin={{ right: 10 }}>
+                    <Spacing margin={{ bottom: 15 }}>
+                      <Title.H3>Inteligência Artificial (Wit)</Title.H3>
+                    </Spacing>
+                    {/* Should be transform settings outside facebook */}
+                    <Field
+                      name='settings.wit_server_access_token'
+                      label='Chave de acesso a WIT (Inteligência artificial)'
+                      placeholder='Informe sua chave de acesso ao WIT (Inteligência artificial)'
+                      component={FormField}
+                      inputComponent={Input}
+                    />
+                  </Card>
+                </div>
+                <div style={{ width: '100%' }}>
+                  <Card rounded={5} padding={{ x: 40, y: 40 }}>
+                    <Spacing margin={{ bottom: 15 }}>
+                      <Title.H3>Padrão de mensagem</Title.H3>
+                    </Spacing>
+                    {/* Should be transform settings outside facebook */}
+                    <Field
+                      name='settings.default_error_message'
+                      label='Mensagem de erro'
+                      placeholder='Informe uma resposta padrão para erros ocorridos no BOT'
+                      component={FormField}
+                      inputComponent={Input}
+                    />
+                  </Card>
+                </div>
+              </Flexbox>
             </Flexbox>
           )}
         </ContentPageComponent>
