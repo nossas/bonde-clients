@@ -225,7 +225,7 @@ pipeline:
     secrets: [ prod_pagarme_key, prod_sentry_dsn_public ]
     when:
       status: success
-      branch: [release/v0.15.3]
+      branch: [release/*]
       # event: tag
 
   # production-publish-public:
@@ -269,7 +269,7 @@ pipeline:
       # - latest
     when:
       status: success
-      branch: [release/v0.15.3]
+      branch: [release/*]
       # event: tag
 
   # production-deploy-public:
@@ -322,7 +322,7 @@ pipeline:
         target: rancher_secret_key
     when:
       status: success
-      branch: [release/v0.15.3]
+      branch: [release/*]
       # event: tag
 
   notify:
