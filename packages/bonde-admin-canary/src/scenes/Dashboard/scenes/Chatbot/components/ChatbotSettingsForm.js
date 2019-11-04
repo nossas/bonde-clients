@@ -4,6 +4,7 @@ import {
   Card,
   Flexbox2 as Flexbox,
   Input,
+  Text,
   Title,
   Spacing
 } from 'bonde-styleguide'
@@ -16,6 +17,20 @@ import {
   insertChatbotSettingsMutation
 } from '../graphql'
 import { ContentPageComponent } from 'scenes/Dashboard/components'
+
+const ChatbotStatus = ({ chatbot }) => {
+  const endpoint = new URL(`/v2/${chatbot.id}`, process.env.REACT_APP_DOMAIN_BOT)
+
+  return (
+    <Spacing margin={{ top: 30 }}>
+      <Text>Configure seu webhook no Facebook para a URL: {endpoint.href}</Text>
+    </Spacing>
+  )
+}
+
+ChatbotStatus.propTypes = {
+  chatbot: PropTypes.object
+}
 
 class ChatbotSettingsForm extends React.Component {
   constructor (props) {
@@ -71,6 +86,7 @@ class ChatbotSettingsForm extends React.Component {
         writeQuery({ chatbot_settings: settings })
       }
     }
+
     return (
       <MutationForm formId='ChabotSettingsForm' {...mutationFormProps}>
         <ContentPageComponent actions={this.renderSubmitButton.bind(this)}>
@@ -140,6 +156,7 @@ class ChatbotSettingsForm extends React.Component {
                   </Card>
                 </div>
               </Flexbox>
+              <ChatbotStatus chatbot={{ id: chatbotId }} />
             </Flexbox>
           )}
         </ContentPageComponent>
