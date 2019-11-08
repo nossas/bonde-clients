@@ -9,64 +9,92 @@ import {
 } from 'bonde-styleguide'
 // Components
 import ActionButton from './ActionButton'
-import CommunitiesDropdown from './CommunitiesDropdown'
 import Tabs, { Tab } from './Tabs'
 import Title from './Title'
 import UserDropdown from './UserDropdown'
 
-const Bonde = () => (
+const RenderElement = ({ component }) => {
+  switch (typeof component) {
+    case 'string':
+      return <Title>{component}</Title>
+    case 'function':
+      return component()
+    case 'object':
+      return component
+    default:
+      return <div className='render-element-undefined' />
+  }
+}
+
+const RightNavbar = ({ dropdown }) => (
   <Spacing margin={{ right: 15, bottom: 10 }}>
-    <IconColorful name='bonde' size={85} inverted />
+    {dropdown
+      ? <RenderElement component={dropdown} />
+      : <IconColorful name='bonde' size={85} inverted />}
   </Spacing>
 )
 
 const Header = ({
-  renderTitle,
-  renderActionButtons,
-  renderTabs
-}) => (
-  <HeaderStyleguide> 
-    <Navbar renderBrand={Bonde}>
-      <Flexbox horizontal end>
-        <UserDropdown />
-      </Flexbox>
-    </Navbar>
+  title,
+  actions,
+  tabs,
+  dropdown
+}) => {
+  return (
+    <HeaderStyleguide>
+      <Navbar renderBrand={() => <RightNavbar dropdown={dropdown} />}>
+        <Flexbox horizontal end>
+          <UserDropdown />
+        </Flexbox>
+      </Navbar>
 
-    {renderActionButtons && (
-      <Spacing margin={{ top: 16 }}>
-        <Navbar>
-          <Flexbox horizontal end>
-            {renderActionButtons()}
-          </Flexbox>
-        </Navbar>
-      </Spacing>
-    )}
+      {actions && (
+        <Spacing margin={{ top: 16 }}>
+          <Navbar>
+            <Flexbox horizontal end>
+              <RenderElement component={actions} />
+            </Flexbox>
+          </Navbar>
+        </Spacing>
+      )}
 
-    {renderTabs && (
-      <Spacing margin={{ bottom: -22 }}>
-        <Tabs>
-          {renderTabs()}
-        </Tabs>
-      </Spacing>
-    )}
+      {title ? (
+        <Spacing margin={{ y: 20 }}>
+          <RenderElement component={title} />
+        </Spacing>
+      ) : <div />}
 
-    {renderTitle ? renderTitle() : <div />}
-  </HeaderStyleguide>
-)
+      {tabs && (
+        <Spacing margin={{ top: 22, bottom: -22 }}>
+          <Tabs>
+            <RenderElement component={tabs} />
+          </Tabs>
+        </Spacing>
+      )}
+    </HeaderStyleguide>
+  )
+}
 
-const { func } = PropTypes
+const { oneOfType, func, string, object } = PropTypes
+
+RenderElement.propTypes = {
+  component: oneOfType([func, string, object])
+}
+
+RightNavbar.propTypes = {
+  dropdown: oneOfType([func, string, object])
+}
 
 Header.propTypes = {
-  renderTitle: func,
-  renderActionButtons: func,
-  renderTabs: func
+  title: oneOfType([func, string, object]),
+  actions: oneOfType([func, string, object]),
+  tabs: oneOfType([func, string, object]),
+  dropdown: oneOfType([func, string, object])
 }
 
 Header.ActionButton = ActionButton
 
 Header.ActionButtonGroup = Flexbox
-
-Header.CommunitiesDropdown = CommunitiesDropdown
 
 Header.Tab = Tab
 

@@ -4,8 +4,7 @@
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { injectIntl } from 'react-intl'
-import { addNotification as notify } from 'reapop'
-
+import { toast } from 'react-toastify'
 import MobSelectors from 'mobrender/redux/selectors'
 import * as MobActions from 'mobrender/redux/action-creators'
 import { messagePressureTargetsRemoveAll } from 'utils/notifications'
@@ -28,7 +27,12 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-  notifyAllTargetsRemoval: () => dispatch(notify(messagePressureTargetsRemoveAll(props.intl))),
+  notifyAllTargetsRemoval: () => {
+    toast.sucess(messagePressureTargetsRemoveAll(props.intl).message, { 
+      autoClose: 5000,
+      hideProgressBar: true,
+    })
+  },
   asyncWidgetUpdate: (...args) => dispatch(MobActions.asyncUpdateWidget(...args))
 })
 

@@ -1,24 +1,29 @@
 /* eslint-disable prefer-promise-reject-errors */
 import downloadjs from 'downloadjs'
-import { addNotification as notify, removeNotification as dismiss } from 'reapop'
+import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 
 const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, getState, { api, intl }) => {
   const { auth: { credentials } } = getState()
 
   const filename = `[Relatório][Ações dos Ativistas] ${name}.csv`
-  const notificationId = Math.random()
+  // const notificationId = Math.random()
   const notifySuccess = () => {
-    dispatch(notify(notifications.reportDownloadSuccess(intl, { filename })))
-    dispatch(dismiss(notificationId))
+    toast.success(notifications.reportDownloadSuccess(intl, { filename }).message, { 
+      autoClose: 5000,
+      hideProgressBar: true,
+    })
   }
   const notifyError = () => {
-    dispatch(notify(notifications.reportDownloadError(intl, { filename })))
-    dispatch(dismiss(notificationId))
+    toast.error(notifications.reportDownloadError(intl, { filename }).message, { 
+      autoClose: 5000,
+      hideProgressBar: true,
+    })
   }
 
-  const warningOptions = { filename, notificationId }
-  dispatch(notify(notifications.reportDownloadInProgressWarning(intl, warningOptions)))
+  // TO DO: remove before migration notification to react-toastify
+  // const warningOptions = { filename, notificationId }
+  // dispatch(notify(notifications.reportDownloadInProgressWarning(intl, warningOptions)))
 
   return api
     .get(`/communities/${id}/activist_actions.csv`, { headers: credentials })

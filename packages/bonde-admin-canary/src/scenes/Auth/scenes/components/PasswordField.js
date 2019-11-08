@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react'
-import {
-  Checkbox,
-  FormField,
-  Input
-} from 'bonde-styleguide'
+import { Checkbox, Input } from 'bonde-styleguide'
+import { FormField } from 'components/Forms'
 import { translate } from 'services/i18n'
+import PropTypes from 'prop-types'
 
 class PasswordField extends React.Component {
-
   state = { showPassword: false }
 
   render () {
@@ -33,6 +30,10 @@ class PasswordField extends React.Component {
       </Fragment>
     )
   }
+}
+
+PasswordField.propTypes = {
+  t: PropTypes.func
 }
 
 export default translate('auth')(PasswordField)

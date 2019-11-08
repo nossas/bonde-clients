@@ -1,4 +1,4 @@
-import { addNotification } from 'reapop'
+import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
 import * as t from 'subscriptions/redux/action-types'
 import { createAction } from 'utils/redux'
@@ -25,12 +25,19 @@ export default values => (dispatch, getState, { api, intl }) => {
     .then(({ data }) => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_SUCCESS, data))
-      dispatch(addNotification(notifications.genericSaveSuccess(intl)))
+      toast.sucess(notifications.genericSaveSuccess(intl).message, { 
+        autoClose: 5000,
+        hideProgressBar: true,
+      })
     })
     .catch(e => {
       dispatch(AwaitActions.setLoading(false))
       dispatch(createAction(t.ASYNC_RECHARGE_FAILURE, e))
-      dispatch(addNotification(notifications.genericRequestError(intl)))
+
+      toast.error(notifications.genericRequestError(intl).message, { 
+        autoClose: 5000,
+        hideProgressBar: true,
+      })
       return Promise.reject(e)
     })
 }

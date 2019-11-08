@@ -5,7 +5,7 @@ class AuthAPI {
     const crossStorageUrl = process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel'
 
     this.storage = new CrossStorageClient(crossStorageUrl, {
-      timeout: 8000
+      timeout: process.env.REACT_APP_CROSS_STORAGE_TIMEOUT || '10000'
     })
     this.token = undefined
     this.session = {}

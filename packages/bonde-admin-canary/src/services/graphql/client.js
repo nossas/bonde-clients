@@ -10,33 +10,40 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = authSession.getToken()
+  const authToken = authSession.getToken()
 
-  if (token) {
+  if (authToken) {
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${token}`
+        authorization: `Bearer ${authToken}`
       }
     }
   }
-  return { headers }
 })
 
+const logoutInSession = () => {
+  const redirectTo = authSession.getItem('redirectTo')
+  authSession
+    .logout()
+    .then(() => {
+      if (redirectTo) {
+        window.location.href = `/auth/login?next=${redirectTo}`
+      } else {
+        window.location.href = '/auth/login'
+      }
+    })
+}
 
-const handleError = onCatch(({ response, networkError }) => {
+const handleError = onCatch(({ networkError, graphQLErrors }) => {
   if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
-    const redirectTo = authSession.getItem('redirectTo')
-
-    authSession
-      .logout()
-      .then(() => {
-        if (redirectTo) {
-          window.location.href = `/auth/login?next=${redirectTo}`
-        } else {
-          window.location.href = '/auth/login'
-        }
-      })
+    logoutInSession()
+  }
+  if (graphQLErrors && graphQLErrors.length > 0) {
+    // when token has no passed on bonde-webhooks-auth
+    if (/field "\w+" not found in type: '\w+'/.test(graphQLErrors[0].message)) {
+      logoutInSession()
+    }
   }
 })
 

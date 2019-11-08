@@ -7,6 +7,7 @@ pipeline:
     commands:
       - yarn
       - yarn lerna bootstrap
+      - yarn lerna run lint
       - yarn lerna run coverage
       - cd packages/bonde-public && rm -rf node_modules && yarn
     when:
@@ -20,15 +21,16 @@ pipeline:
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-v1.staging.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-v2.staging.bonde.org/graphql
-      - REACT_APP_DOMAIN_BOT=https://beta.staging.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.staging.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.staging.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
     commands:
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
       - export REACT_APP_SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
+      - export REACT_APP_HASURA_SECRET=$STAG_HASURA_KEY
       - yarn lerna run build
-    secrets: [ stag_pagarme_key, stag_sentry_dsn_public ]
+    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_hasura_key ]
     group: build
     when:
       status: success
@@ -213,8 +215,8 @@ pipeline:
       - REACT_APP_DOMAIN_PUBLIC=bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
       - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-v2.bonde.org/graphql
-      - REACT_APP_DOMAIN_BOT=https://beta.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets
     commands:
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
@@ -320,9 +322,9 @@ pipeline:
 
   notify:
     image: plugins/slack
-    webhook: https://hooks.slack.com/services/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
     channel: bonde_bots
     username: CI - ${DRONE_REPO_NAME}
+    secrets: [ slack_webhook ]
     when:
       event: [ push, tag, build, publish, deployment, pull_request ]
       status: [ success, failure ]
