@@ -14,7 +14,7 @@ import CampaignPage from './scenes/Campaign'
 import { chatbotInfoQuery } from './graphql'
 
 const ChatbotPage = ({ match, location, community }) => {
-  const modules = JSON.parse(community.modules)
+  const { modules } = community
   const chatbotId = Number(match.params.chatbotId)
   if (!modules.chatbot || modules.chatbot !== chatbotId) {
     return <Redirect to={`/admin/${community.id}/settings`} />

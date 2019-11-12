@@ -35,11 +35,11 @@ const AuthLogin = ({ t, location }) => (
       formId={formName}
       mutation={AUTHENTICATE}
       onSuccess={({ data }) => {
-        if (data.authenticate && !data.authenticate.jwtToken) {
+        if (data.authenticate && !data.authenticate.token) {
           return Promise.reject({ form: t('form.authError') })
         }
         return authSession
-          .login({ jwtToken: data.authenticate.jwtToken })
+          .login({ jwtToken: data.authenticate.token })
           .then(() => {
             const search = qs.parse(location.search)
             if (search.next) {

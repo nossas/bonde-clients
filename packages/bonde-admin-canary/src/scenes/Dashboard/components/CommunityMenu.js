@@ -35,7 +35,7 @@ const menuBuilder = (menuName, { community, module }) => ({
 })[menuName]
 
 const CommunityMenu = ({ community, dark, pathname }) => {
-  const modules = JSON.parse(community.modules)
+  const { modules } = community
 
   const menus = Object.keys(modules).map((moduleName) => {
     const module = modules[moduleName]
