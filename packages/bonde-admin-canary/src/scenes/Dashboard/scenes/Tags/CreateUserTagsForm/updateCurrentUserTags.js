@@ -1,11 +1,11 @@
-export default (readQuery, writeQuery, { createUserTags }) => {
-  if (createUserTags && createUserTags.json) {
+export default (readQuery, writeQuery, { insert_user_tags }) => {
+	const { returning } = insert_user_tags
+  if (returning && returning.length > 0) {
     const { currentUser } = readQuery()
-    writeQuery({
-      currentUser: {
-        ...currentUser,
-        tags: createUserTags.json
-      }
-    })
+  	const user = {
+  		...currentUser,
+  		tags: JSON.stringify(returning.map(userTag => userTag.tag.name))
+  	}
+    writeQuery({ currentUser: user })
   }
 }
