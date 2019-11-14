@@ -1,8 +1,6 @@
 import React from 'react'
 import { I18n } from 'react-i18next'
 import { Query } from 'react-apollo'
-import { AuthAPI } from 'services/auth'
-import { notify } from 'components/Notification'
 
 import tokenVerify from './tokenVerify.graphql'
 import CheckingToken from './CheckingToken'
@@ -26,19 +24,6 @@ const ResetPassword = ({ match }) => (
               <ResetPasswordForm
                 t={t}
                 token={token}
-                handleSuccess={({ data }) => {
-                  const { changePasswordField } = data.resetPasswordChangePassword
-                  const user = { name: changePasswordField.userFirstName }
-
-                  AuthAPI.login({
-                    jwtToken: changePasswordField.token
-                  })
-                    .then(() => {
-                      notify(t('resetPassword.success', { user }))
-                      // should redirect with window to rehydrate session
-                      window.location.href = '/'
-                    })
-                }}
               />
             )
           }}
