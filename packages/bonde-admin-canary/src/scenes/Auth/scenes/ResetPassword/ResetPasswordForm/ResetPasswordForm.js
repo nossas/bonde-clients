@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import qs from 'query-string'
 
 import { required, min } from 'services/validations'
 import { AuthAPI } from 'services/auth'
@@ -13,27 +14,36 @@ import { PasswordField } from '../../components'
 
 const formName = 'ResetPasswordForm'
 
-const ResetPasswordForm = ({ t, token }) => (
+const ResetPasswordForm = ({ t, token, location }) => (
   <Flexbox vertical>
     <Title.H2 margin={{ bottom: 18 }}>{t('resetPassword.form.title')}</Title.H2>
     <Title.H4 margin={{ bottom: 30 }}>{t('resetPassword.form.subtitle')}</Title.H4>
     <MutationForm
       mutation={resetPassword}
       variables={{ token }}
+      formId={formName}
       onSuccess={({ data }) => {
-        const { changePasswordField } = data.resetPasswordChangePassword
-        const user = { name: changePasswordField.userFirstName }
+        const {
+          resetPasswordChangePassword: {
+            changePasswordField, newPassword
+          }
+        } = data
+        if (data.resetPasswordChangePassword && !newPassword) {
+          // it's not an auth error
+          return Promise.reject({ form: t('form.authError') })
+        }
 
-        AuthAPI.login({
-          jwtToken: changePasswordField.token
-        })
+        return AuthAPI
+          .login({ jwtToken: changePasswordField.token })
           .then(() => {
-            notify(t('resetPassword.success', { user }))
+            return notify(t('resetPassword.success', { name: changePasswordField.userFirstName }))
             // should redirect with window to rehydrate session
-            window.location.href = '/'
+            const search = qs.parse(location.search)
+            if (search.next) {
+              window.location.href = search.next
+            } else { window.location.href = '/' }
           })
       }}
-      formId={formName}
     >
       <Field
         name='password'
