@@ -32,7 +32,7 @@ const ResetPassword = ({ match }) => (
                     resetPasswordChangePassword: {
                       changePasswordField
                     }
-                  } = typeof data !== 'undefined' && data
+                  } = data
                   const user = { name: changePasswordField.userFirstName }
                   return AuthAPI
                     .login({ jwtToken: changePasswordField.token })
