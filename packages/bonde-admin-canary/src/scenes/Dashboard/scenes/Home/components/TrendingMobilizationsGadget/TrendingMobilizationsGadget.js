@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import { I18n } from 'react-i18next'
+import { Query } from 'react-apollo'
 import { Grid, Cell, Panel } from 'bonde-styleguide'
-import { Gadget, Queryset } from 'components'
+import { Gadget } from 'components'
 import Loading from './Loading'
 import trendingMobilizationsQuery from './query.graphql'
 import PropTypes from 'prop-types'
@@ -45,19 +46,34 @@ TrendingMobilizationsGadget.propTypes = {
   loading: PropTypes.bool
 }
 
-const TrendingMobilizationsQueryset = () => (
-  <Queryset
-    limit={4}
-    filter={{ days: 2 }}
-    query={trendingMobilizationsQuery}
-  >
-    {({ data, loading }) => (
-      <TrendingMobilizationsGadget
-        mobilizations={data && data.trendingMobilizations ? data.trendingMobilizations.nodes : undefined}
-        loading={loading}
-      />
-    )}
-  </Queryset>
-)
+const TrendingMobilizationsQueryset = () => {
+  // subtract 90 days
+  const today = new Date()
+  today.setDate(today.getDate() - 90)
+
+  const parseMobilization = m => ({
+    id: m.id,
+    name: m.name,
+    goal: m.goal,
+    facebookShareImage: m.facebook_share_image,
+    customDomain: m.custom_domain,
+    slug: m.slug,
+    community: m.community,
+    score: m.activist_actions_aggregate.aggregate.count
+  })
+
+  return (
+    <Query query={trendingMobilizationsQuery} variables={{ created_at: today.toISOString() }}>
+      {({ data, loading, error }) => {
+        return (
+          <TrendingMobilizationsGadget
+            mobilizations={data && data.mobilizations ? data.mobilizations.map(parseMobilization) : []}
+            loading={loading}
+          />
+        )
+      }}
+    </Query>
+  )
+}
 
 export default TrendingMobilizationsQueryset
