@@ -27,11 +27,11 @@ const ResetPasswordForm = ({ t, token }) => (
             changePasswordField
           }
         } = data
-
+        const user = { name: changePasswordField.userFirstName }
         return AuthAPI
           .login({ jwtToken: changePasswordField.token })
           .then(() => {
-            notify(t('resetPassword.success', { name: changePasswordField.userFirstName }))
+            notify(t('resetPassword.success', { user }))
             // should redirect with window to rehydrate session
             window.location.href = '/'
           })
