@@ -22,11 +22,7 @@ const ResetPasswordForm = ({ t, token }) => (
       variables={{ token }}
       formId={formName}
       onSuccess={({ data }) => {
-        const {
-          resetPasswordChangePassword: {
-            changePasswordField
-          }
-        } = data
+        const { changePasswordField } = data.resetPasswordChangePassword
         const user = { name: changePasswordField.userFirstName }
         return AuthAPI
           .login({ jwtToken: changePasswordField.token })
