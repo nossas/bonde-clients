@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import qs from 'query-string'
 
 import { required, min } from 'services/validations'
 import { AuthAPI } from 'services/auth'
@@ -14,7 +13,7 @@ import { PasswordField } from '../../components'
 
 const formName = 'ResetPasswordForm'
 
-const ResetPasswordForm = ({ t, token, location }) => (
+const ResetPasswordForm = ({ t, token }) => (
   <Flexbox vertical>
     <Title.H2 margin={{ bottom: 18 }}>{t('resetPassword.form.title')}</Title.H2>
     <Title.H4 margin={{ bottom: 30 }}>{t('resetPassword.form.subtitle')}</Title.H4>
@@ -25,23 +24,16 @@ const ResetPasswordForm = ({ t, token, location }) => (
       onSuccess={({ data }) => {
         const {
           resetPasswordChangePassword: {
-            changePasswordField, newPassword
+            changePasswordField
           }
         } = data
-        if (data.resetPasswordChangePassword && !newPassword) {
-          // it's not an auth error
-          return Promise.reject({ form: t('form.authError') })
-        }
 
         return AuthAPI
           .login({ jwtToken: changePasswordField.token })
           .then(() => {
-            return notify(t('resetPassword.success', { name: changePasswordField.userFirstName }))
+            notify(t('resetPassword.success', { name: changePasswordField.userFirstName }))
             // should redirect with window to rehydrate session
-            const search = qs.parse(location.search)
-            if (search.next) {
-              window.location.href = search.next
-            } else { window.location.href = '/' }
+            window.location.href = '/'
           })
       }}
     >
