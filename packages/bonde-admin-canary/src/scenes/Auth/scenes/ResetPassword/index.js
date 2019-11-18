@@ -8,7 +8,7 @@ import InvalidToken from './InvalidToken'
 import ResetPasswordForm from './ResetPasswordForm'
 import PropTypes from 'prop-types'
 
-const ResetPassword = ({ match, location }) => (
+const ResetPassword = ({ match }) => (
   <I18n ns='auth'>
     {t => {
       const token = match.params.token
@@ -24,7 +24,6 @@ const ResetPassword = ({ match, location }) => (
               <ResetPasswordForm
                 t={t}
                 token={token}
-                location={location}
               />
             )
           }}
