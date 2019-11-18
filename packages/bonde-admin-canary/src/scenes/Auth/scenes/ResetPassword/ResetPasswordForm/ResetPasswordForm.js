@@ -2,18 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { required, min } from 'services/validations'
-import { AuthAPI } from 'services/auth'
 import resetPassword from './resetPassword.graphql'
 
 import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
 import { Field, MutationForm, SubmitButton } from 'components/Forms'
 import { ButtonLink } from 'components/Link'
-import { notify } from 'components/Notification'
 import { PasswordField } from '../../components'
 
 const formName = 'ResetPasswordForm'
 
-const ResetPasswordForm = ({ t, token }) => (
+const ResetPasswordForm = ({ t, token, handleSuccess }) => (
   <Flexbox vertical>
     <Title.H2 margin={{ bottom: 18 }}>{t('resetPassword.form.title')}</Title.H2>
     <Title.H4 margin={{ bottom: 30 }}>{t('resetPassword.form.subtitle')}</Title.H4>
@@ -21,17 +19,7 @@ const ResetPasswordForm = ({ t, token }) => (
       mutation={resetPassword}
       variables={{ token }}
       formId={formName}
-      onSuccess={({ data }) => {
-        const { changePasswordField } = data.resetPasswordChangePassword
-        const user = { name: changePasswordField.userFirstName }
-        return AuthAPI
-          .login({ jwtToken: changePasswordField.token })
-          .then(() => {
-            notify(t('resetPassword.success', { user }))
-            // should redirect with window to rehydrate session
-            window.location.href = '/'
-          })
-      }}
+      onSuccess={handleSuccess}
     >
       <Field
         name='password'

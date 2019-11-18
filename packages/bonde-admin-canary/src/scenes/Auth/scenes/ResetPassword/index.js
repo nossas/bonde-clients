@@ -2,7 +2,9 @@ import React from 'react'
 import { I18n } from 'react-i18next'
 import { Query } from 'react-apollo'
 import PropTypes from 'prop-types'
+import { notify } from 'components/Notification'
 
+import { AuthAPI } from 'services/auth'
 import tokenVerify from './tokenVerify.graphql'
 
 import CheckingToken from './CheckingToken'
@@ -25,6 +27,21 @@ const ResetPassword = ({ match }) => (
               <ResetPasswordForm
                 t={t}
                 token={token}
+                handleSuccess={({ data }) => {
+                  const {
+                    resetPasswordChangePassword: {
+                      changePasswordField
+                    }
+                  } = typeof data !== 'undefined' && data
+                  const user = { name: changePasswordField.userFirstName }
+                  return AuthAPI
+                    .login({ jwtToken: changePasswordField.token })
+                    .then(() => {
+                      notify(t('resetPassword.success', { user }))
+                      // should redirect with window to rehydrate session
+                      window.location.href = '/'
+                    })
+                }}
               />
             )
           }}
