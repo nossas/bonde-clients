@@ -15,20 +15,13 @@ const TrendingMobilizationsGadget = ({ mobilizations, loading }) => (
       >
         <Grid>
           {loading ? <Loading /> : mobilizations.map(mobilization => {
-            let author = 'undefined'
-            if (mobilization.community) {
-              author = mobilization.community.name
-            } else {
-              // eslint-disable-next-line no-console
-              console.log('mobilization without community', { mobilization })
-            }
             return (
               <Fragment key={Math.random()}>
                 <Cell size={[6, 6, 6, 12, 12, 12]}>
                   <Panel
                     image={mobilization.facebookShareImage}
                     title={mobilization.name}
-                    author={`Por ${author}`}
+                    author={`Por ${mobilization.community.name}`}
                     onClick={() => {
                       if (!mobilization.customDomain) {
                         const domain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel:5003'
@@ -76,7 +69,7 @@ const TrendingMobilizationsQueryset = () => {
       {({ data, loading, error }) => {
         return (
           <TrendingMobilizationsGadget
-            mobilizations={data && data.mobilizations ? data.mobilizations.map(parseMobilization) : []}
+            mobilizations={data && data.anonymous_mobilizations ? data.anonymous_mobilizations.map(parseMobilization) : []}
             loading={loading}
           />
         )

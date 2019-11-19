@@ -22,7 +22,7 @@ export default gql`
 
 export default gql`
   query TrendingMobilizations($created_at: timestamp!) {
-    mobilizations (
+    anonymous_mobilizations (
       limit: 4,
       offset: 0,
       order_by: {
