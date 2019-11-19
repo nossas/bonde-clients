@@ -26,7 +26,7 @@ const SubmitButtonAction = () => (
 
 const CommunitySettingsPage = ({ match, community }) => {
   // REMOVE MODULES OF MUTATION FORM VALUES
-  const { modules, ...initialValues } = community
+  const { modules, __typename, ...initialValues } = community
 
   return (
     <MutationForm
