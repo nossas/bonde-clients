@@ -20,7 +20,7 @@ const CreateUserTagsForm = ({ t, user, onSuccess }) => {
         const regexp = /\[+(\d+)\]$/
         const input = tags.split(';')
           .map(tag => regexp.exec(tag)[1])
-          .map(tagId => ({ user_id: user.id, tag_id: Number(tagId) }))
+          .map(tagId => ({ tag_id: Number(tagId) }))
         return { tags: input }
       }}
       updateQuery={updateCurrentUserTags}
