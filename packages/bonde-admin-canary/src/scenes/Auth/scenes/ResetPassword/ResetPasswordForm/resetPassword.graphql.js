@@ -5,13 +5,8 @@ mutation ResetPassword (
   $password: String!,
   $token: String!
 ) {
-  resetPasswordChangePassword (input: {
-    newPassword:$password,
-    token:$token
-  }) {
-    changePasswordField {
-      userFirstName,
-      token
-    }
+  reset_password_change (password: $password, token:$token) {
+    first_name,
+    token
   }
 }`
