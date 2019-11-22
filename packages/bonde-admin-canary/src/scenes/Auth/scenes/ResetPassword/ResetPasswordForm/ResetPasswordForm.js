@@ -1,11 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { required, min } from 'services/validations'
+import resetPassword from './resetPassword.graphql'
+
 import { Flexbox2 as Flexbox, Title } from 'bonde-styleguide'
 import { Field, MutationForm, SubmitButton } from 'components/Forms'
 import { ButtonLink } from 'components/Link'
-import { required, min } from 'services/validations'
 import { PasswordField } from '../../components'
-import resetPassword from './resetPassword.graphql'
-import PropTypes from 'prop-types'
+
+const formName = 'ResetPasswordForm'
 
 const ResetPasswordForm = ({ t, token, handleSuccess }) => (
   <Flexbox vertical>
@@ -14,6 +18,7 @@ const ResetPasswordForm = ({ t, token, handleSuccess }) => (
     <MutationForm
       mutation={resetPassword}
       variables={{ token }}
+      formId={formName}
       onSuccess={handleSuccess}
     >
       <Field
@@ -28,7 +33,7 @@ const ResetPasswordForm = ({ t, token, handleSuccess }) => (
       />
       <Flexbox padding={{ top: 25 }} horizontal spacing='between'>
         <ButtonLink to='/auth/login'>{t('resetPassword.form.cancel')}</ButtonLink>
-        <SubmitButton>{t('resetPassword.form.submit')}</SubmitButton>
+        <SubmitButton title={t('resetPassword.form.submit')} formId={formName}>{t('resetPassword.form.submit')}</SubmitButton>
       </Flexbox>
     </MutationForm>
   </Flexbox>

@@ -33,7 +33,7 @@ export default ({ communityId, email }) => (dispatch, getState, { api, intl }) =
         })
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        toast.sucess(communityInviteSuccess(intl, email).message, { 
+        toast.success(communityInviteSuccess(intl, email).message, { 
           autoClose: 5000,
           hideProgressBar: true,
         })
