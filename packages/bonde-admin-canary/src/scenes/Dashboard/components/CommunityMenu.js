@@ -30,7 +30,14 @@ const menuBuilder = (menuName, { community, module }) => ({
   'settings': {
     icon: 'settings',
     component: ButtonLink,
-    to: `/admin/${community.id}/settings`
+    onClick: () => {
+      authSession
+        .setAsyncItem('community', community)
+        .then(() => {
+          const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
+          window.open(`${baseUrl}/community/info`, '_blank')
+        })
+    }
   }
 })[menuName]
 
@@ -39,9 +46,7 @@ const CommunityMenu = ({ community, dark, pathname }) => {
 
   const menus = Object.keys(modules).map((moduleName) => {
     const module = modules[moduleName]
-    if (module) {
-      return menuBuilder(moduleName, { community, module })
-    }
+    if (module) return menuBuilder(moduleName, { community, module })
     return null
   }).filter(obj => !!obj)
 
