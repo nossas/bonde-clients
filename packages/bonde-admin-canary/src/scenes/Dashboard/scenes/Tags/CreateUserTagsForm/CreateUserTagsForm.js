@@ -16,7 +16,13 @@ const CreateUserTagsForm = ({ t, user, onSuccess }) => {
       formId={formName}
       values={{ tags: user.tags.join(';') }}
       mutation={CreateUserTags}
-      parse={({ tags }) => ({ data: JSON.stringify({ tags: tags.split(';') }) })}
+      parse={({ tags }) => {
+        const regexp = /\[+(\d+)\]$/
+        const input = tags.split(';')
+          .map(tag => regexp.exec(tag)[1])
+          .map(tagId => ({ tag_id: Number(tagId) }))
+        return { tags: input }
+      }}
       updateQuery={updateCurrentUserTags}
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       onSuccess={onSuccess}

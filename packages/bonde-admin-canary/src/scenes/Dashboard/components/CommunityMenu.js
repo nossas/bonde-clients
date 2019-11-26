@@ -1,15 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import urljoin from 'url-join'
 import { Button, Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
 
 const menuBuilder = (menuName, { community, module }) => ({
-  'dashboard': {
-    icon: 'chart',
-    component: ButtonLink,
-    to: `/admin/${community.id}/analytics`
-  },
   'chatbot': {
     icon: 'bot',
     component: ButtonLink,
@@ -29,20 +25,20 @@ const menuBuilder = (menuName, { community, module }) => ({
   },
   'settings': {
     icon: 'settings',
-    component: ButtonLink,
+    component: Button,
     onClick: () => {
       authSession
         .setAsyncItem('community', community)
         .then(() => {
           const baseUrl = process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel:5001'
-          window.open(`${baseUrl}/community/info`, '_blank')
+          window.open(urljoin(baseUrl, '/community/info'), '_blank')
         })
     }
   }
 })[menuName]
 
 const CommunityMenu = ({ community, dark, pathname }) => {
-  const modules = JSON.parse(community.modules)
+  const { modules } = community
 
   const menus = Object.keys(modules).map((moduleName) => {
     const module = modules[moduleName]
