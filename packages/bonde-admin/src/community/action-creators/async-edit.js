@@ -1,5 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from 'community/action-types'
+import crossStorage from 'cross-storage-client'
 
 const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
   const { auth: { credentials } } = getState()
@@ -20,8 +21,16 @@ const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
       if (status === 400 && data.errors) {
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        dispatch({ type: t.EDIT, community: data })
-        return Promise.resolve()
+        return crossStorage
+          .onConnect()
+          .then(() => {
+            return crossStorage
+              .set('community', JSON.stringify(data))
+              .then(() => {
+                dispatch({ type: t.EDIT, community: data })
+                return Promise.resolve()
+              })
+          })
       }
     })
     .catch(obj => {
