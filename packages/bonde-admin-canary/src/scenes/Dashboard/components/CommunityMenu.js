@@ -42,9 +42,7 @@ const CommunityMenu = ({ community, dark, pathname }) => {
 
   const menus = Object.keys(modules).map((moduleName) => {
     const module = modules[moduleName]
-    if (module) {
-      return menuBuilder(moduleName, { community, module })
-    }
+    if (module) return menuBuilder(moduleName, { community, module })
     return null
   }).filter(obj => !!obj)
 
