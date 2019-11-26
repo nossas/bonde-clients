@@ -18,6 +18,12 @@ export default gql`
       facebook_app_id
       email_template_from
       modules
+      recipient {
+        id
+        transfer_day: recipient(path: "transfer_day")
+        transfer_interval: recipient(path: "transfer_interval")
+        bank_account: recipient(path: "bank_account")
+      }
     }
 
     communities_aggregate {
