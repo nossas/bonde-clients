@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { BondeBackground } from 'components/layout/background'
 import * as paths from 'paths'
 import { FormattedMessage } from 'react-intl'
@@ -13,7 +12,7 @@ class CommunityListPage extends Component {
     this.props.asyncFetch()
   }
 
-  componentWillReceiveProps (nextProps) {
+  shouldComponentUpdate (nextProps) {
     if (nextProps.isLoaded && nextProps.communities.length === 0) {
       this.props.history.push(paths.communityAdd())
     }
@@ -65,22 +64,6 @@ class CommunityListPage extends Component {
               ))}
             </div>
           ) : null}
-          <p className='white center'>
-            <FormattedMessage
-              id='page--community-list.or'
-              defaultMessage='or {link}'
-              values={{
-                link: (
-                  <Link to={paths.communityAdd()}>
-                    <FormattedMessage
-                      id='page--community-list.new'
-                      defaultMessage='Crie uma nova comunidade'
-                    />
-                  </Link>
-                )
-              }}
-            />
-          </p>
         </div>
       </BondeBackground>
     )
