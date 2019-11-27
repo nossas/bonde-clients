@@ -14,9 +14,9 @@ const UserTagsField = ({ t, ...props }) => (
         )
       }
 
-      const tags = data.allTags.nodes.map(({ name, label }) => ({
+      const tags = data.tags.map(({ id, name, label }) => ({
         label,
-        value: name
+        value: `${name}[${id}]`
       }))
 
       return (
