@@ -19,10 +19,6 @@ const TableCardGadget = ({
   onClickRow,
   height
 }) => {
-  const showPagination = !!(
-    pageIndex !== undefined && pageTotal && pageTotal > 1 && renderPagination
-  )
-
   return (
     <Gadget
       title={title}
@@ -35,10 +31,10 @@ const TableCardGadget = ({
     >
       <Flexbox vertical>
         <Table
+          borderBottom
           border={border}
           data={data}
           columns={columns}
-          borderBottom={showPagination}
           onClickRow={onClickRow}
           HeaderComponent={HeaderComponent}
           EmptyComponent={() => (
@@ -48,7 +44,7 @@ const TableCardGadget = ({
             />
           )}
         />
-        {showPagination && renderPagination()}
+        {renderPagination && renderPagination()}
       </Flexbox>
     </Gadget>
   )

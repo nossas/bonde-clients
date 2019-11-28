@@ -28,14 +28,11 @@ const ResetPassword = ({ match }) => (
                 t={t}
                 token={token}
                 handleSuccess={({ data }) => {
-                  const {
-                    resetPasswordChangePassword: {
-                      changePasswordField
-                    }
-                  } = data
-                  const user = { name: changePasswordField.userFirstName }
-                  return AuthAPI
-                    .login({ jwtToken: changePasswordField.token })
+                  const jwtToken = data.reset_password_change
+                  const user = { name: jwtToken.first_name }
+
+                  AuthAPI
+                    .login({ jwtToken: jwtToken.token })
                     .then(() => {
                       notify(t('resetPassword.success', { user }))
                       // should redirect with window to rehydrate session

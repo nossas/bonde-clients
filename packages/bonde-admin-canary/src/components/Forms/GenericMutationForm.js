@@ -51,6 +51,16 @@ const GenericMutationForm = ({
                 return onSuccess(args)
               })
               .catch((error) => {
+                // TODO: resolve this error pattern
+                /* "errors": [
+                  {
+                    "extensions": {
+                      "path": "$.selectionSet.insert_chatbot_campaigns.args.objects",
+                      "code": "permission-error"
+                    },
+                    "message": "Check constraint violation. insert check constraint failed"
+                  }
+                ] */
                 if (error && (error.form || error.fields)) {
                   let errors = {}
                   if (error.form) {
@@ -61,6 +71,7 @@ const GenericMutationForm = ({
                   }
                   throw new SubmissionError(errors)
                 }
+                return Promise.reject(error)
               })
           }}
         />
