@@ -49,10 +49,6 @@ TrendingMobilizationsGadget.propTypes = {
 }
 
 const TrendingMobilizationsQueryset = () => {
-  // subtract 90 days
-  const today = new Date()
-  today.setDate(today.getDate() - 90)
-
   const parseMobilization = m => ({
     id: m.id,
     name: m.name,
@@ -64,8 +60,14 @@ const TrendingMobilizationsQueryset = () => {
     score: m.activist_actions_aggregate.aggregate.count
   })
 
+  // subtract 90 days
+  const today = new Date()
+  today.setDate(today.getDate() - 90)
+  // Fix many requests on api
+  const createdAt = today.toISOString().slice(0, 10)
+
   return (
-    <Query query={trendingMobilizationsQuery} variables={{ created_at: today.toISOString() }}>
+    <Query query={trendingMobilizationsQuery} variables={{ created_at: createdAt }}>
       {({ data, loading, error }) => {
         return (
           <TrendingMobilizationsGadget
