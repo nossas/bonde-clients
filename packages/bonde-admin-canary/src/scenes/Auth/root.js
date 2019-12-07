@@ -22,7 +22,7 @@ const AuthRoot = ({ match }) => (
       component={ResetPassword}
     />
     <Route
-      path={`${match.url}/register/:code`}
+      path={`${match.url}/register`}
       component={Register}
     />
   </Container>
