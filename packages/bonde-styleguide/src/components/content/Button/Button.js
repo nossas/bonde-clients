@@ -57,7 +57,7 @@ const Button = styled.button`
     color: #fff;
     border-color: #fff;
 
-    path {
+    path, g {
       fill: #fff;
     }
 
@@ -65,7 +65,7 @@ const Button = styled.button`
       border-color: #bebebe;
       color: #bebebe;
 
-      path {
+      path, g {
         fill: #ee0099!important;
       }
     }
@@ -77,7 +77,7 @@ const Button = styled.button`
 
   ${props => props.active && css`
     color: #ee0099!important;
-    path {
+    path, g {
       fill: #ee0099!important;
     }
   `}
@@ -103,7 +103,7 @@ const Button = styled.button`
       background-color: transparent;
       color: #424242;
 
-      path {
+      path, g {
         fill: #424242;
       }
     }
