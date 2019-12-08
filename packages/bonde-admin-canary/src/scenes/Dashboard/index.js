@@ -5,11 +5,11 @@ import { PageLayout, TutorialPageLayout } from 'services/router'
 import { LoadingFullScreen } from 'components/Loadable'
 import { FullPageLayout, ContentPage } from './components'
 // scenes of app
-import AnalyticsPage from './scenes/Analytics'
 import ChatbotPage from './scenes/Chatbot'
 import HomePage from './scenes/Home'
 import SettingsPage from './scenes/Settings'
 import TagsPage from './scenes/Tags'
+import InvitationsPage from './scenes/Invitations'
 
 const defaultProps = (title, header) => ({
   title,
@@ -29,15 +29,15 @@ const Dashboard = ({ match }) => {
       <PageLayout path={`${match.path}/tags`} component={TagsPage} />
       {/* Community Context */}
       <FullPageLayout
-        path={`${match.path}/:communityId/analytics`}
-        component={AnalyticsPage}
+        path={`${match.path}/:communityId/invitations`}
+        component={ContentPage}
         loading={LoadingFullScreen}
-        pageProps={defaultProps('Dados')}
-        tabs={[
-          { name: 'Dashboard' },
-          { name: 'Ativistas', to: '/activists' },
-          { name: 'Relatórios', to: '/report' }
-        ]}
+        pageProps={defaultProps('Mobilizadores convidados')}
+        componentProps={{
+          title: 'Voltar',
+          backward: '/admin',
+          render: InvitationsPage
+        }}
       />
       {/* Configurações de Chatbot */}
       <FullPageLayout
