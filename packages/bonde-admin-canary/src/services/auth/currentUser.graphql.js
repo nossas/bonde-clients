@@ -8,7 +8,8 @@ export default gql`
       lastName,
       email,
       avatar,
-      tags
+      tags,
+      admin
     }
   }
 `
