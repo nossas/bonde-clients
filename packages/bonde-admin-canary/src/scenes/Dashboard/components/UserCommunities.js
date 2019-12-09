@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
+import { connect } from 'react-redux'
 import { allUserCommunitiesQuery } from 'scenes/Dashboard/graphql'
 
 const parseBankAccount = (communities) => communities.map(community => {
@@ -32,8 +33,8 @@ const parseBankAccount = (communities) => communities.map(community => {
   return community
 })
 
-const UserCommunities = ({ loading: Loading, component: Component, ...rest }) => {
-  const [offset, setOffset] = useState(0)
+const UserCommunities = ({ loading: Loading, component: Component, offset, setOffset, ...rest }) => {
+  // const [offset, setOffset] = useState(0)
   return (
     <Query query={allUserCommunitiesQuery} variables={{ offset }}>
       {({ data, loading, error }) => {
@@ -61,7 +62,19 @@ const UserCommunities = ({ loading: Loading, component: Component, ...rest }) =>
 
 UserCommunities.propTypes = {
   loading: PropTypes.any,
-  component: PropTypes.any
+  component: PropTypes.any,
+  offset: PropTypes.number,
+  setOffset: PropTypes.func
 }
 
-export default UserCommunities
+const mapStateToProps = (state) => ({
+  offset: state.pagination.offset
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setOffset: (offset) => {
+    dispatch({ type: 'Pagination/REGISTER', payload: offset })
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserCommunities)
