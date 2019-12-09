@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
 import { Pagination, Text } from 'bonde-styleguide'
 import { UserCommunities, CommunityMenu, ImageColumn } from 'scenes/Dashboard/components'
-import { TableCardGadget } from 'scenes/Dashboard/scenes/Home/components'
+import TableCardGadget from 'components/DatasetGadget'
 
 const RenderText = ({ row }) => (
   <Fragment>

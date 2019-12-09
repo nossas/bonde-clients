@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import { connect } from 'react-redux'
+import urljoin from 'url-join'
 import { Tabs, Tab } from 'components/navigation'
 import { SettingsPageMenuLayout } from 'components/layout'
+import * as CommunitySelectors from 'community/selectors'
 
 import * as paths from 'paths'
 
-const SettingsMenu = ({ location: { pathname } }) => {
+export const SettingsMenu = ({ location: { pathname }, community }) => {
   const infoPath = paths.communityInfo()
-  const invitePath = paths.communityInvite()
   const mailchimpPath = paths.communityMailchimp()
   const twilioPath = paths.communityTwilio()
   const recipientPath = paths.communityRecipient()
@@ -39,8 +41,10 @@ const SettingsMenu = ({ location: { pathname } }) => {
           }
         />
         <Tab
-          isActive={invitePath === pathname}
-          path={invitePath}
+          onClick={() => {
+            const url = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, `admin/${community.id}`, 'invitations')
+            window.open(url, '_self')
+          }}
           text={
             <FormattedMessage
               id='community.components--settings-menu.tabs.mobilizers'
@@ -104,4 +108,8 @@ SettingsMenu.propTypes = {
   }).isRequired
 }
 
-export default SettingsMenu
+const mapStateToProps = (state) => ({
+  community: CommunitySelectors.getCurrent(state)
+})
+
+export default connect(mapStateToProps)(SettingsMenu)

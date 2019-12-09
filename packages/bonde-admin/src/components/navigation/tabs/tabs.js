@@ -2,10 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import classnames from 'classnames'
 
-if (require('exenv').canUseDOM) {
-  require('./tabs.scss')
-}
-
 const Tabs = ({ children, className, style }) => (
   <nav
     className={classnames('tabs gray20', className)}

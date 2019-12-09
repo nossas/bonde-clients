@@ -6,6 +6,11 @@ import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
 
 const menuBuilder = (menuName, { community, module }) => ({
+  'invitation': {
+    icon: 'user',
+    component: ButtonLink,
+    to: `/admin/${community.id}/invitations`
+  },
   'chatbot': {
     icon: 'bot',
     component: ButtonLink,
@@ -38,7 +43,7 @@ const menuBuilder = (menuName, { community, module }) => ({
 })[menuName]
 
 const CommunityMenu = ({ community, dark, pathname }) => {
-  const { modules } = community
+  const modules = { ...community.modules, invitation: true }
 
   const menus = Object.keys(modules).map((moduleName) => {
     const module = modules[moduleName]

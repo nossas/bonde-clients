@@ -35,9 +35,6 @@ const AuthLogin = ({ t, location }) => (
       formId={formName}
       mutation={AUTHENTICATE}
       onSuccess={({ data }) => {
-        if (data.authenticate && !data.authenticate.token) {
-          return Promise.reject({ form: t('form.authError') })
-        }
         return authSession
           .login({ jwtToken: data.authenticate.token })
           .then(() => {
@@ -47,6 +44,7 @@ const AuthLogin = ({ t, location }) => (
             }
           })
       }}
+      errors={{ email_password_dismatch: { _error: t('form.authError') } }}
     >
       <Field
         name='email'
