@@ -11,7 +11,6 @@ import * as paths from 'paths'
 
 export const SettingsMenu = ({ location: { pathname }, community }) => {
   const infoPath = paths.communityInfo()
-  const invitePath = paths.communityInvite()
   const mailchimpPath = paths.communityMailchimp()
   const twilioPath = paths.communityTwilio()
   const recipientPath = paths.communityRecipient()
