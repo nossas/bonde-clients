@@ -8,7 +8,6 @@ import { SettingsMenu } from 'community/components'
 
 // Pages
 import InfoPage from './info/page.connected'
-import InvitePage from './invite/page.connected'
 import DomainPage from './domain/page.connected'
 import DomainCreatePage from './domain-create/page.connected'
 import MailchimpPage from './mailchimp/page.connected'
@@ -25,7 +24,6 @@ const SettingsContainer = ({ location }) => (
     <SettingsMenu location={location} />
     <SettingsPageContentLayout>
       <RouteRoot path='/info' component={InfoPage} />
-      <RouteRoot path='/invite' component={InvitePage} />
       <RouteRoot path='/mailchimp' component={MailchimpPage} />
       <RouteRoot path='/recipient' component={RecipientPage} />
       <RouteRoot path='/report' component={ReportPage} />
