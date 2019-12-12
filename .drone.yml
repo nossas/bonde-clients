@@ -215,8 +215,8 @@ pipeline:
       - REACT_APP_DOMAIN_PUBLIC=bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
       - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-v2.bonde.org/graphql
-      - REACT_APP_DOMAIN_BOT=https://beta.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets
     commands:
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
