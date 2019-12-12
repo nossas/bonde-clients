@@ -24,7 +24,7 @@ const RequestTokenForm = ({ onSuccess }) => (
           mutation={RequestTokenMutation}
           variables={{
             callbackUrl: `${process.env.REACT_APP_DOMAIN_ADMIN_CANARY}/auth/reset-password/`,
-            locale: i18n.language
+            locale: i18n.language === 'pt' ? 'pt-BR' : i18n.language
           }}
           onSuccess={onSuccess}
           onError={({ graphQLErrors }) => {
@@ -32,6 +32,9 @@ const RequestTokenForm = ({ onSuccess }) => (
               if (graphQLErrors[0].message === 'user_not_found') {
                 // eslint-disable-next-line prefer-promise-reject-errors
                 return Promise.reject({ fields: { email: t(`forgetPassword.email.notFound`) } })
+              } else if (graphQLErrors[0].message === 'template_not_found') {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                return Promise.reject({ fields: { email: t(`forgetPassword.template.notFound`) } })
               }
             }
           }}

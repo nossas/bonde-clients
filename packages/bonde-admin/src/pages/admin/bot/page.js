@@ -14,7 +14,7 @@ import {
   Preview
 } from './components'
 
-var styles = require('exenv').canUseDOM ? require('./page.scss') : {}
+if (require('exenv').canUseDOM) require('./page.scss')
 
 class BotPage extends Component {
   constructor (props) {
@@ -83,8 +83,8 @@ class BotPage extends Component {
             />
           )}
 
-          <div className={styles.stepsContainer}>
-            <h1 className={styles.stepsTitle}>
+          <div className="stepsContainer">
+            <h1 className="stepsTitle">
               Envio de mensagem em massa
             </h1>
             <StepsContainerStack
@@ -111,9 +111,9 @@ class BotPage extends Component {
               </StepContent>
 
               <StepContent>
-                <div className={styles.successMessageContainer}>
-                  <h1 className={styles.h1}>Oba!</h1>
-                  <i className={styles.successIcon} />
+                <div className="successMessageContainer">
+                  <h1 className="h1">Oba!</h1>
+                  <i className="successIcon" />
                   <br />
                   Sua mensagem foi enfileirada. Em instantes todos os usuários
                   segmentados receberão sua mensagem.

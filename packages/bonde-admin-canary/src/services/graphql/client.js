@@ -39,12 +39,14 @@ const handleError = onCatch(({ networkError, graphQLErrors }) => {
   if (networkError && (networkError.statusCode === 401 || networkError.statusCode === 403)) {
     logoutInSession()
   }
-  if (graphQLErrors && graphQLErrors.length > 0) {
+  // eslint-disable-next-line no-console
+  // console.log('graphQLErrors', graphQLErrors)
+  /* if (graphQLErrors && graphQLErrors.length > 0) {
     // when token has no passed on bonde-webhooks-auth
     if (/field "\w+" not found in type: '\w+'/.test(graphQLErrors[0].message)) {
       logoutInSession()
     }
-  }
+  } */
 })
 
 const client = new ApolloClient({

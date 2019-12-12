@@ -14,6 +14,12 @@ class GenericForm extends React.Component {
     if (cleanForm) resetForm(formId)
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (!this.props.submitting && nextProps.submitSucceeded && this.props.cleanForm) {
+      resetForm(this.props.formId)
+    }
+  }
+
   render () {
     const { children, error, handleSubmit, fluid } = this.props
     const formStyles = fluid ? {} : { width: '100%', height: '100%' }
@@ -37,7 +43,9 @@ GenericForm.propTypes = {
   error: any,
   handleSubmit: func,
   fluid: bool.isRequired,
-  cleanForm: bool.isRequired
+  cleanForm: bool.isRequired,
+  submitting: bool.isRequired,
+  submitSucceeded: bool.isRequired
 }
 
 GenericForm.defaultProps = {

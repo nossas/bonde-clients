@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import TableCell from './TableCell'
 import TableRow from './TableRow'
 
-const TableHeaderCell = styled(() => <TableCell />)`
+const TableHeaderCell = styled((props) => <TableCell {...props} />)`
   opacity: 0.53;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 9px;

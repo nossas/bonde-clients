@@ -7,7 +7,7 @@ if (require('exenv').canUseDOM) require('./tab.scss')
 
 class Tab extends Component {
   render () {
-    const { text, index, path, isActive, className, style } = this.props
+    const { text, index, path, onClick, isActive, className, style } = this.props
     if (path) {
       return (
         <Link
@@ -24,18 +24,20 @@ class Tab extends Component {
       )
     }
     return (
-      <span style={style} className={classnames(
-        'tab inline-block py2 mr2',
-        isActive ? 'bold black' : null,
+      <span style={style} onClick={onClick} className={classnames(
+        'tab btn border-only-bottom px0 py2 mr3 inline-block',
+        isActive ? 'h4 is-active' : null,
         className
       )}>
-        <i className={classnames(
-          'circle center inline-block',
-          isActive ? 'bg-pagenta' : 'bg-gray94',
-        text ? 'mr2' : null
-        )}>
-          {index}
-        </i>
+        {!onClick && (
+          <i className={classnames(
+            'circle center inline-block',
+            isActive ? 'bg-pagenta' : 'bg-gray94',
+          text ? 'mr2' : null
+          )}>
+            {index}
+          </i>
+        )}
         {text}
       </span>
     )

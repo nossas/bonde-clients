@@ -5,6 +5,15 @@ import { SubmissionError } from 'redux-form'
 import { toast } from 'react-toastify'
 import GenericReduxForm from './GenericReduxForm'
 
+const catchErrors = (errorsMap) => (errors) => {
+  if (typeof errors === 'object') {
+    const errorCode = errors.message.replace('GraphQL error: ', '')
+    const errorMessage = errorsMap[errorCode]
+
+    if (errorMessage) throw new SubmissionError(errorMessage)
+  }
+}
+
 const GenericMutationForm = ({
   mutation,
   variables,
@@ -12,6 +21,8 @@ const GenericMutationForm = ({
   updateQuery,
   onSuccess,
   parse,
+  errors,
+  onError,
   ...rest
 }) => {
   const mutationProps = { mutation, refetchQueries }
@@ -26,6 +37,31 @@ const GenericMutationForm = ({
       updateQuery(readQuery, writeQuery, data)
     }
   }
+
+  const handleError = onError || catchErrors(errors)
+  /*! !onError ? onError :  (error) => {
+    // TODO: resolve this error pattern
+     "errors": [
+      {
+        "extensions": {
+          "path": "$.selectionSet.insert_chatbot_campaigns.args.objects",
+          "code": "permission-error"
+        },
+        "message": "Check constraint violation. insert check constraint failed"
+      }
+    ]
+    if (error && (error.form || error.fields)) {
+      let errors = {}
+      if (error.form) {
+        errors = { _error: error.form }
+      }
+      if (error.fields) {
+        errors = { ...errors, ...error.fields }
+      }
+      throw new SubmissionError(errors)
+    }
+    return Promise.reject(error)
+  } */
 
   return (
     <Mutation {...mutationProps}>
@@ -50,18 +86,7 @@ const GenericMutationForm = ({
                 }
                 return onSuccess(args)
               })
-              .catch((error) => {
-                if (error && (error.form || error.fields)) {
-                  let errors = {}
-                  if (error.form) {
-                    errors = { _error: error.form }
-                  }
-                  if (error.fields) {
-                    errors = { ...errors, ...error.fields }
-                  }
-                  throw new SubmissionError(errors)
-                }
-              })
+              .catch(handleError)
           }}
         />
       )}
@@ -81,12 +106,15 @@ GenericMutationForm.propTypes = {
     query: oneOfType([func, object]),
     variables: object
   })),
-  onSuccess: oneOfType([func, string])
+  onSuccess: oneOfType([func, string]),
+  onError: func,
+  errors: object
 }
 
 GenericMutationForm.defaultProps = {
   variables: {},
-  onSuccess: 'Salvo com sucesso!'
+  onSuccess: 'Salvo com sucesso!',
+  errors: {}
 }
 
 export default GenericMutationForm
