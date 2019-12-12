@@ -115,7 +115,13 @@ const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed }, hist
     // eslint-disable-next-line react/display-name
     actions: () => (
       <div>
-        <Button type='button' light onClick={() => fields.push({})} margin={{ right: '18px' }}>
+        <Button
+          light
+          type='button'
+          disabled={fields.length > 2}
+          onClick={() => fields.push({})}
+          margin={{ right: '18px' }}
+        >
           <Icon name='plus' /> Novo menu
         </Button>
         <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
