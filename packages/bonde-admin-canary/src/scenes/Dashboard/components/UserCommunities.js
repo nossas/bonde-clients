@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { connect } from 'react-redux'
 import { allUserCommunitiesQuery } from 'scenes/Dashboard/graphql'
+import { Auth } from 'services/auth'
 
 const parseBankAccount = (communities) => communities.map(community => {
   if (community.recipient) {
@@ -33,32 +34,33 @@ const parseBankAccount = (communities) => communities.map(community => {
   return community
 })
 
-const UserCommunities = ({ loading: Loading, component: Component, offset, setOffset, ...rest }) => {
-  // const [offset, setOffset] = useState(0)
-  return (
-    <Query query={allUserCommunitiesQuery} variables={{ offset }}>
-      {({ data, loading, error }) => {
-        if (loading && Loading) return <Loading />
-        if (error) return <span>{error}</span>
+const UserCommunities = ({ loading: Loading, component: Component, offset, setOffset, ...rest }) => (
+  <Auth>
+    {({ user }) => (
+      <Query query={allUserCommunitiesQuery} variables={{ offset, user_id: user.id }}>
+        {({ data, loading, error }) => {
+          if (loading && Loading) return <Loading />
+          if (error) return <span>{error}</span>
 
-        // LIMIT OF QUERY HARD SET LIKE 20
-        const communities = data && data.communities ? parseBankAccount(data.communities) : []
-        const count = data && data.communities_aggregate ? data.communities_aggregate.aggregate.count : 0
+          // LIMIT OF QUERY HARD SET LIKE 20
+          const communities = data && data.communities ? parseBankAccount(data.communities) : []
+          const count = data && data.communities_aggregate ? data.communities_aggregate.aggregate.count : 0
 
-        return (
-          <Component
-            communities={communities}
-            count={count}
-            offset={offset}
-            loading={loading}
-            setOffset={setOffset}
-            {...rest}
-          />
-        )
-      }}
-    </Query>
-  )
-}
+          return (
+            <Component
+              communities={communities}
+              count={count}
+              offset={offset}
+              loading={loading}
+              setOffset={setOffset}
+              {...rest}
+            />
+          )
+        }}
+      </Query>
+    )}
+  </Auth>
+)
 
 UserCommunities.propTypes = {
   loading: PropTypes.any,
@@ -68,6 +70,7 @@ UserCommunities.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.auth.user,
   offset: state.pagination.offset
 })
 
