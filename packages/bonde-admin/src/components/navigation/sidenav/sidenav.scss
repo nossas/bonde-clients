@@ -114,7 +114,10 @@
           font-weight: normal;
           margin-top: 0;
 
-          a {
+          a, button {
+            background: none;
+            border: none;
+            cursor: pointer;
             color: rgba(255,255,255,.7);
 
             &:hover {
@@ -124,7 +127,7 @@
         }
       }
 
-      a {
+      a, button {
         color: $white;
         text-decoration: none;
       }

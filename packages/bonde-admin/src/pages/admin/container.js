@@ -8,7 +8,6 @@ import { Loading } from 'components/await'
 
 // Routes
 import BetaBotPage from './bot'
-import CommunityListPage from './communities/list'
 import CommunityCreatePage from './communities/create'
 import SidebarContainer from './sidebar'
 import PrivateRoute from './private-route'
@@ -33,11 +32,6 @@ class Logged extends React.Component {
           exact
           path='/bot'
           component={BetaBotPage}
-        />
-        <PrivateRoute
-          exact
-          path='/communities'
-          component={CommunityListPage}
         />
         <PrivateRoute
           exact
