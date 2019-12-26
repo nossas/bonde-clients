@@ -33,7 +33,11 @@ const Sidenav = ({ children, community }) => (
                 />
               </span>
             </Link>
-            <Link to={paths.communityList()}>
+            <button onClick={(e) => {
+              e.preventDefault()
+              const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+              window.open(`${domain}/admin`, '_self')
+            }}>
               <i className='fa fa-refresh mr1' />
               <span>
                 <FormattedMessage
@@ -41,7 +45,7 @@ const Sidenav = ({ children, community }) => (
                   defaultMessage='Trocar'
                 />
               </span>
-            </Link>
+            </button>
           </div>
         </div>
       </div>

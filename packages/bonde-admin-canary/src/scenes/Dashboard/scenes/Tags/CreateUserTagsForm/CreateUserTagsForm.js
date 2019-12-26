@@ -10,6 +10,10 @@ import PropTypes from 'prop-types'
 const formName = 'CreateUserTagsForm'
 
 const CreateUserTagsForm = ({ t, user, onSuccess }) => {
+  const tagInput = (tagId) => {
+    return user.admin ? { tag_id: Number(tagId), user_id: user.id } : { tag_id: Number(tagId) }
+  }
+
   return (
     <MutationForm
       fluid
@@ -20,7 +24,7 @@ const CreateUserTagsForm = ({ t, user, onSuccess }) => {
         const regexp = /\[+(\d+)\]$/
         const input = tags.split(';')
           .map(tag => regexp.exec(tag)[1])
-          .map(tagId => ({ tag_id: Number(tagId) }))
+          .map(tagInput)
         return { tags: input }
       }}
       updateQuery={updateCurrentUserTags}
