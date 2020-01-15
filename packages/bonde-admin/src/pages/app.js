@@ -1,6 +1,6 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import DevTools from 'components/dev-tools'
 import { TechnicalIssues } from 'components/error/index'
 import { ZendeskWidget } from 'components/external-services'
@@ -15,6 +15,7 @@ const AuthExample = () => (
   <div>
     <Router>
       <Switch>
+        <Redirect from='/register' to='/' />
         <Route exact path='/subscriptions/:id/edit' component={SubscriptionEditPage} />
         <Route path='/' component={LoggedRoute} />
         <Route component={TechnicalIssues} />
