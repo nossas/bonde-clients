@@ -2,22 +2,19 @@ import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import DevTools from 'components/dev-tools'
-import 'styles/main.scss'
 import { TechnicalIssues } from 'components/error/index'
 import { ZendeskWidget } from 'components/external-services'
 import { GoogleFontsLoader } from 'components/fonts'
-
-import 'react-toastify/dist/ReactToastify.css'
-
-import AccountRegisterPage from './public/account-register'
 import SubscriptionEditPage from './public/subscription-edit'
 import LoggedRoute from './admin'
+
+import 'styles/main.scss'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AuthExample = () => (
   <div>
     <Router>
       <Switch>
-        <Route exact path='/register' component={AccountRegisterPage} />
         <Route exact path='/subscriptions/:id/edit' component={SubscriptionEditPage} />
         <Route path='/' component={LoggedRoute} />
         <Route component={TechnicalIssues} />
