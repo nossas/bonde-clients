@@ -7,7 +7,7 @@ import { px } from '../../../utils'
  */
 const Image = styled.div`
   display: block;
-  width: ${props => px(props.width) || '100%'};
+  width: ${props => props.width ? px(props.width) : '100%'};
   height: ${props => px(props.height)};
   background-image: url(${props => props.src});
   background-size: cover;
