@@ -31,7 +31,7 @@ const FacebookBotMassMessageForm = ({
     }) => {
       changeParentState({ loading: true })
 
-      const url = `${process.env.REACT_APP_DOMAIN_BOT}/enqueue-mass-messages`
+      const url = `${process.env.REACT_APP_DOMAIN_BETA}/enqueue-mass-messages`
       const payload = {
         ...segmentation,
         facebookBotConfigurationId: 1, // TODO: It needs to be fixed!
