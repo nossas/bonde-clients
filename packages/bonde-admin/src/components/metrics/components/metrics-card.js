@@ -11,7 +11,7 @@ const MetricsCard = ({
   contentStyle
 }) => (
   <div className={styles.container} style={{ backgroundColor }}>
-    <div className={styles.header}>{title}</div>
+    <div className={styles.header} style={{ position: 'relative' }}>{title}</div>
     <div className={styles.content} style={contentStyle}>
       {!loading && !dontLoad ? children : (
         <i className='fa fa-circle-o-notch fa-spin white' />
@@ -25,7 +25,8 @@ const MetricsCard = ({
 
 MetricsCard.defaultProps = {
   loading: true,
-  dontLoad: false
+  dontLoad: false,
+  contentStyle: {}
 }
 
 export default MetricsCard

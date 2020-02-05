@@ -1,1 +1,1 @@
-export { default } from './metrics-community.connected'
+export { default } from '../components/metrics-data-table'
