@@ -1,6 +1,6 @@
 {
   "name": "bonde-styleguide",
-  "version": "0.16.2",
+  "version": "0.16.4-alpha.1",
   "main": "dist/index.js",
   "private": false,
   "dependencies": {
