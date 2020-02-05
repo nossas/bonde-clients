@@ -48,7 +48,7 @@ TrendingMobilizationsGadget.propTypes = {
   loading: PropTypes.bool
 }
 
-const TrendingMobilizationsQueryset = () => {
+const TrendingMobilizationsQueryset = ({ user }) => {
   const parseMobilization = m => ({
     id: m.id,
     name: m.name,
@@ -56,28 +56,25 @@ const TrendingMobilizationsQueryset = () => {
     facebookShareImage: m.facebook_share_image,
     customDomain: m.custom_domain,
     slug: m.slug,
-    community: m.community,
-    score: m.activist_actions_aggregate.aggregate.count
+    community: m.community
   })
 
-  // subtract 90 days
-  const today = new Date()
-  today.setDate(today.getDate() - 90)
-  // Fix many requests on api
-  const createdAt = today.toISOString().slice(0, 10)
-
   return (
-    <Query query={trendingMobilizationsQuery} variables={{ created_at: createdAt }}>
+    <Query query={trendingMobilizationsQuery} variables={{ userId: user.id }}>
       {({ data, loading, error }) => {
         return (
           <TrendingMobilizationsGadget
-            mobilizations={data && data.anonymous_mobilizations ? data.anonymous_mobilizations.map(parseMobilization) : []}
+            mobilizations={data && data.mobilizations ? data.mobilizations.map(parseMobilization) : []}
             loading={loading}
           />
         )
       }}
     </Query>
   )
+}
+
+TrendingMobilizationsQueryset.propTypes = {
+  user: PropTypes.object.isRequired
 }
 
 export default TrendingMobilizationsQueryset

@@ -35,7 +35,7 @@ const HomePage = () => (
                     </Cell>
                     <Cell size={[6, 6, 12, 12, 12, 12]}>
                       <Dialog t={t} step={3} placement='left-top'>
-                        <TrendingMobilizationsGadget />
+                        <TrendingMobilizationsGadget user={user} />
                       </Dialog>
                     </Cell>
                   </Grid>
