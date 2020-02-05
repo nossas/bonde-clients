@@ -161,34 +161,39 @@ const TotalSubscriptionDonationsAmountLastMonth = graphql(queries.totalSubscript
   )
 })
 
-const TotalDonationsPaidAndWaitingAmount = graphql(queries.totalDonationsPaidAndWaitingAmount)(({ data: { loading, ...data } }) => {
-  return (
-    <MetricsCard
-      backgroundColor='#00C08A'
-      loading={loading}
-      title={
-        <FormattedMessage
-          id='c--metrics.total.unique-and-recurrent.donations.title'
-          defaultMessage='Doações'
-        />
-      }
-      footer={
-        <FormattedMessage
-          id='c--metrics.total.unique-and-recurrent.donations.subtitle'
-          defaultMessage='Valor total de doações únicas e recorrentes até agora {br}(confirmadas / aguardando pagamento)'
-          values={{
-            br: <br />
-          }}
-        />
-      }
-      contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
-    >
-      {formatNumberHelper.currency(data.totalDonationsPaidAmount)}
-      {' / '}
-      {formatNumberHelper.currency(data.totalDonationsWaitingPaymentAmount)}
-    </MetricsCard>
-  )
-})
+const TotalDonationsPaidAndWaitingAmount = graphql(queries.totalDonationsPaidAndWaitingAmount)(
+  ({ data: { loading, refetch, ...data } }) => {
+    return (
+      <MetricsCard
+        backgroundColor='#00C08A'
+        loading={loading}
+        title={
+          <span>
+          <FormattedMessage
+            id='c--metrics.total.unique-and-recurrent.donations.title'
+            defaultMessage='Doações'
+          />
+          <button type='button' style={{position: 'absolute', right: '5px', top: '5px'}} onClick={() => refetch()}><span className='fa fa-refresh'></span></button>
+          </span>
+        }
+        footer={
+          <FormattedMessage
+            id='c--metrics.total.unique-and-recurrent.donations.subtitle'
+            defaultMessage='Valor total de doações únicas e recorrentes até agora {br}(confirmadas / aguardando pagamento)'
+            values={{
+              br: <br />
+            }}
+          />
+        }
+        contentStyle={{ fontSize: '2.1vw', lineHeight: '2.2' }}
+      >
+        {formatNumberHelper.currency(data.totalDonationsPaidAmount)}
+        {' / '}
+        {formatNumberHelper.currency(data.totalDonationsWaitingPaymentAmount)}
+      </MetricsCard>
+    )
+  }
+)
 
 const TotalDonationsRefundedAmount = graphql(queries.totalDonationsRefundedAmount)(({ data: { loading, ...data } }) => {
   return !loading && data.totalDonationsRefundedAmount > 0 ? (
