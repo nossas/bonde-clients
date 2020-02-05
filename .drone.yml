@@ -24,6 +24,7 @@ pipeline:
       - REACT_APP_DOMAIN_API_REST=https://api-rest.staging.bonde.org
       - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.staging.bonde.org/v1/graphql
       - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
+      - REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
     commands:
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
@@ -217,6 +218,7 @@ pipeline:
       - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
       - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
       - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
+      - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets
     commands:
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
