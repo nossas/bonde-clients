@@ -1,16 +1,15 @@
 import React from 'react'
-import { MultipleChoiceField, Tag } from 'bonde-styleguide'
-import { Query } from 'react-apollo'
-import { LoadingFullScreen } from 'components/Loadable'
-import UserTags from './userTags.graphql'
 import PropTypes from 'prop-types'
+import { MultipleChoiceField, Tag, FullPageLoading } from 'bonde-styleguide'
+import { Query } from 'react-apollo'
+import UserTags from './userTags.graphql'
 
 const UserTagsField = ({ t, ...props }) => (
   <Query query={UserTags}>
     {({ loading, error, data }) => {
       if (loading) {
         return (
-          <LoadingFullScreen message={t('loading.userTags')} />
+          <FullPageLoading message={t('loading.userTags')} />
         )
       }
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import authSession from './session'
-import qs from 'query-string'
-import { LoadingFullScreen } from 'components/Loadable'
 import PropTypes from 'prop-types'
+import qs from 'query-string'
+import { FullPageLoading } from 'bonde-styleguide'
+import authSession from './session'
 
 /*
  * Responsible to control session used on cross-storage
@@ -34,7 +34,7 @@ class SessionProvider extends React.Component {
   render () {
     return !this.state.signing
       ? this.props.children
-      : <LoadingFullScreen />
+      : <FullPageLoading />
   }
 }
 

@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { FullPageLoading } from 'bonde-styleguide'
+// local services & apps
 import { AuthProvider } from 'services/auth'
 import { PageLayout, TutorialPageLayout } from 'services/router'
-import { LoadingFullScreen } from 'components/Loadable'
 import { FullPageLayout, ContentPage } from './components'
-// scenes of app
+// local scenes
 import ChatbotPage from './scenes/Chatbot'
 import HomePage from './scenes/Home'
 import SettingsPage from './scenes/Settings'
@@ -18,7 +19,7 @@ const defaultProps = (title, header) => ({
 
 const Dashboard = ({ match }) => {
   return (
-    <AuthProvider loading={LoadingFullScreen}>
+    <AuthProvider loading={FullPageLoading}>
       <TutorialPageLayout
         exact
         path={match.path}
@@ -31,7 +32,7 @@ const Dashboard = ({ match }) => {
       <FullPageLayout
         path={`${match.path}/:communityId/invitations`}
         component={ContentPage}
-        loading={LoadingFullScreen}
+        loading={FullPageLoading}
         pageProps={defaultProps('Mobilizadores convidados')}
         componentProps={{
           title: 'Voltar',
@@ -43,7 +44,7 @@ const Dashboard = ({ match }) => {
       <FullPageLayout
         path={`${match.path}/:communityId/chatbot/:chatbotId`}
         component={ChatbotPage}
-        loading={LoadingFullScreen}
+        loading={FullPageLoading}
         pageProps={defaultProps('Chatbot')}
         tabs={[
           { name: 'Fluxos de conversas' },
@@ -55,7 +56,7 @@ const Dashboard = ({ match }) => {
       <FullPageLayout
         path={`${match.path}/:communityId/settings`}
         component={SettingsPage}
-        loading={LoadingFullScreen}
+        loading={FullPageLoading}
         pageProps={defaultProps('Configurações')}
         tabs={[
           { name: 'Informações' },

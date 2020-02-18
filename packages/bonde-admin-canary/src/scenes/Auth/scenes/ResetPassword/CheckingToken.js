@@ -1,9 +1,9 @@
 import React from 'react'
-import { Loading } from 'components/Loadable'
 import PropTypes from 'prop-types'
+import { TextLoading } from 'bonde-styleguide'
 
 const CheckingToken = ({ t }) => (
-  <Loading
+  <TextLoading
     message={t('resetPassword.checkingToken')}
   />
 )
