@@ -6,15 +6,27 @@ import { ButtonLink } from 'components/Link'
 import { authSession } from 'services/auth'
 
 const menuBuilder = (menuName, { community, module }) => ({
-  'invitation': {
+  /* 'invitation': {
     icon: 'user',
     component: ButtonLink,
     to: `/admin/${community.id}/invitations`
-  },
+  }, */
   'chatbot': {
     icon: 'bot',
     component: ButtonLink,
     to: `/admin/${community.id}/chatbot/${module}`
+  },
+  'redes': {
+    icon: 'user',
+    component: Button,
+    onClick: () => {
+      authSession
+        .setAsyncItem('community', community)
+        .then(() => {
+          const baseUrl = process.env.REACT_APP_DOMAIN_REDES || 'http://solidarity.bonde.devel:4000'
+          window.open(baseUrl, '_self')
+        })
+    }
   },
   'mobilization': {
     icon: 'window',
