@@ -5,8 +5,12 @@ const Header = styled.div`
   ${props => props.minHeight && `min-height: 80px;`}
   background: #000;
   padding: 22px 60px;
-  z-index: 1;
+  z-index: ${props => props.zIndex};
 `
+
+Header.defaultProps = {
+	zIndex: 1
+}
 
 Header.displayName = 'Header'
 
