@@ -4,6 +4,8 @@ workspace:
 pipeline:
   unit-tests:
     image: node:12-alpine
+    environment:
+      - SKIP_PREFLIGHT_CHECK=true
     commands:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
@@ -11,12 +13,12 @@ pipeline:
       - pnpm m run test
       - pnpm m run coverage
     when:
-      event: [push, tag]
+      event: [push]
 
   build:
     image: node:12-alpine
     environment:
-      - NODE_ENV=production
+      - SKIP_PREFLIGHT_CHECK=true
       - REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
@@ -26,19 +28,17 @@ pipeline:
       - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
       - REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
-      - REACT_APP_DOMAIN_REDES=https://solidarity.staging.bonde.org
+      - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
     commands:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
-      - export REACT_APP_SENTRY_DSN_PUBLIC=$STAG_SENTRY_DSN_PUBLIC
-      - export REACT_APP_HASURA_SECRET=$STAG_HASURA_KEY
       - pnpm m run build
-    secrets: [ stag_pagarme_key, stag_sentry_dsn_public, stag_hasura_key ]
+    secrets: [ stag_pagarme_key ]
     group: build
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      event: [push]
 
   codecov:
     image: plugins/codecov
@@ -52,7 +52,7 @@ pipeline:
       - packages/bonde-styleguide/coverage
     when:
       status: success
-      event: [push, tag]
+      event: [push]
 
   publish-public:
     image: plugins/docker
@@ -65,20 +65,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-
-  publish-styleguide:
-    image: plugins/docker
-    repo: nossas/bonde-styleguide
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/bonde-styleguide/Dockerfile
-    context: packages/bonde-styleguide/
-    group: publish
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      event: [push]
 
   publish-admin-canary:
     image: plugins/docker
@@ -91,7 +78,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
+      event: [push]
 
   publish-admin:
     image: plugins/docker
@@ -104,59 +91,7 @@ pipeline:
       - ${DRONE_BRANCH/\//-}
     when:
       status: success
-      branch: [hotfix/*, release/*, feature/*, support/*, develop]
-
-  dev-deploy-public:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: webservers/public
-    docker_image: nossas/bonde-public:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*]
-
-  dev-deploy-styleguide:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: webservers/styleguide
-    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*]
-
-  dev-deploy-admin-canary:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: webservers/admin-canary
-    docker_image: nossas/bonde-admin-canary:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*]
-
-  dev-deploy-admin:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: webservers/admin
-    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [hotfix/*, release/*, feature/*, support/*]
+      event: [push]
 
   staging-deploy-public:
     image: peloton/drone-rancher
@@ -169,20 +104,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [develop]
-
-  staging-deploy-styleguide:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: webservers/styleguide
-    docker_image: nossas/bonde-styleguide:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      branch: [develop]
+      event: [push]
 
   staging-deploy-admin-canary:
     image: peloton/drone-rancher
@@ -195,7 +117,7 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [develop]
+      event: [push]
 
   staging-deploy-admin:
     image: peloton/drone-rancher
@@ -208,27 +130,29 @@ pipeline:
     secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
-      branch: [develop]
+      event: [push]
 
   production-build:
     image: node:12-alpine
     environment:
-      - NODE_ENV=production
+      - SKIP_PREFLIGHT_CHECK=true
       - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=bonde.org
       - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-v1.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.bonde.org
       - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
       - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
       - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets
-      - REACT_APP_DOMAIN_REDES=https://solidarity.bonde.org
+      - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
     commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
-      - export REACT_APP_SENTRY_DSN_PUBLIC=$PROD_SENTRY_DSN_PUBLIC
-      - yarn lerna run build
-    secrets: [ prod_pagarme_key, prod_sentry_dsn_public ]
+      - pnpm m run build
+    secrets: [ prod_pagarme_key ]
+    group: build
     when:
       status: success
       event: tag
