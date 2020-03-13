@@ -2,18 +2,6 @@ workspace:
   base: /code
 
 pipeline:
-  unit-tests:
-    image: node:12-alpine
-    environment:
-      - SKIP_PREFLIGHT_CHECK=true
-    commands:
-      - apk --update add curl
-      - curl -L https://unpkg.com/@pnpm/self-installer | node
-      - pnpm i
-      - pnpm m run test
-      - pnpm m run coverage
-    when:
-      event: [push]
 
   build:
     image: node:12-alpine
@@ -33,11 +21,24 @@ pipeline:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
+      - pnpm i
       - pnpm m run build
     secrets: [ stag_pagarme_key ]
     group: build
     when:
       status: success
+      event: [push]
+
+  unit-tests:
+    image: node:12-alpine
+    environment:
+      - SKIP_PREFLIGHT_CHECK=true
+    commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - pnpm m run test
+      - pnpm m run coverage
+    when:
       event: [push]
 
   codecov:
