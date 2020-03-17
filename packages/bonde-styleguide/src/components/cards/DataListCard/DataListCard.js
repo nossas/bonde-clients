@@ -58,7 +58,7 @@ const DataListCard = ({
   )
 }
 
-const { oneOfType, oneOf, string, number, bool, object, array, node, func, shape } = PropTypes
+const { oneOf, object, array } = PropTypes
 
 DataListCard.propTypes = {
   border: oneOf(['collapse', 'separate', 'unset']),
