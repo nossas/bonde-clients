@@ -35,9 +35,9 @@ BondeSessionProvider.displayName = 'BondeSessionProvider'
 const history = createBrowserHistory()
 
 const config = {
-  loginUrl: 'http://auth.bonde.devel:5000/auth/login',
-  crossStorageUrl: 'http://cross-storage.bonde.devel',
-  graphqlApiUrl: 'https://api-graphql.staging.bonde.org/v1/graphql'
+  loginUrl: process.env.REACT_APP_LOGIN_URL || 'http://auth.bonde.devel:5000/auth/login',
+  crossStorageUrl: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
+  graphqlApiUrl: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'https://api-graphql.staging.bonde.org/v1/graphql'
 }
 
 const Root = () => (
