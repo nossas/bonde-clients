@@ -1,9 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import { createBrowserHistory } from 'history'
 import { ProviderRedux } from './services/redux'
 import { ProviderGraphQL } from './services/graphql'
-import { ProviderLastLocation } from './services/router'
+import { Router, Redirect, Switch, ProviderLastLocation } from './services/router'
 import { SessionProvider, PrivateRoute, PublicRoute, Route } from './services/auth'
 // Routes
 import Dashboard from './scenes/Dashboard'
@@ -11,6 +11,8 @@ import { Root as AuthRoot } from './scenes/Auth'
 import { NotFound } from './components'
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
+
+const history = createBrowserHistory()
 
 const Root = () => (
   <SessionProvider>
@@ -21,7 +23,7 @@ const Root = () => (
             className='BondeToastify'
             hideProgressBar={true}
           />
-          <Router>
+          <Router history={history}>
             <ProviderLastLocation>
               <Switch>
                 <PublicRoute
