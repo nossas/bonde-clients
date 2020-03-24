@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { I18n } from 'react-i18next'
-import { Query } from 'react-apollo'
 import { Grid, Cell, Panel } from 'bonde-styleguide'
+import { useQuery } from 'bonde-core-tools'
 import { Gadget } from 'components'
 import Loading from './Loading'
 import trendingMobilizationsQuery from './query.graphql'
@@ -49,7 +49,9 @@ TrendingMobilizationsGadget.propTypes = {
 }
 
 const TrendingMobilizationsQueryset = ({ user }) => {
-  const parseMobilization = m => ({
+  const { data, loading, error } = useQuery(trendingMobilizationsQuery, { variables: { userId: user.id } })
+
+  const to = m => ({
     id: m.id,
     name: m.name,
     goal: m.goal,
@@ -59,18 +61,12 @@ const TrendingMobilizationsQueryset = ({ user }) => {
     community: m.community
   })
 
-  return (
-    <Query query={trendingMobilizationsQuery} variables={{ userId: user.id }}>
-      {({ data, loading, error }) => {
-        return (
-          <TrendingMobilizationsGadget
-            mobilizations={data && data.mobilizations ? data.mobilizations.map(parseMobilization) : []}
-            loading={loading}
-          />
-        )
-      }}
-    </Query>
-  )
+  return !error ? (
+    <TrendingMobilizationsGadget
+      mobilizations={data && data.mobilizations ? data.mobilizations.map(to) : []}
+      loading={loading}
+    />
+  ) : <p>Erro ao buscar mobilizações!</p>
 }
 
 TrendingMobilizationsQueryset.propTypes = {

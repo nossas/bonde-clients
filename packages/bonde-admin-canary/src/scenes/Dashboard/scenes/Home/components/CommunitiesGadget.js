@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18next'
-import { Pagination, Text } from 'bonde-styleguide'
-import { UserCommunities, CommunityMenu, ImageColumn } from 'scenes/Dashboard/components'
+import { Text } from 'bonde-styleguide'
+import { CommunityMenu, ImageColumn } from 'scenes/Dashboard/components'
+import { useSession } from 'bonde-core-tools'
 import TableCardGadget from 'components/DatasetGadget'
 
 const RenderText = ({ row }) => (
@@ -43,46 +44,55 @@ const columns = [
   }
 ]
 
-const RenderPagination = ({ count, offset, setOffset }) => {
-  const page = (offset / 20) + 1
-  const pages = (count % 20) > 0 ? Math.round(count / 20) + 1 : Math.round(count / 20)
+const SearchInput = ({ communities, onChange }) => {
+  const inputRef = useRef(null)
+
+  const normalize = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()
+
+  const searching = (c) => {
+    const search = inputRef.current.value
+    if (search && search.length > 3) {
+      return normalize(c.name).indexOf(normalize(search)) !== -1
+    }
+    return true
+  }
 
   return (
-    <Pagination
-      pages={pages}
-      pageIndex={page - 1}
-      textPrev='anterior'
-      textNext='próxima'
-      onChangePage={index => (index + 1) < page ? setOffset(offset - 20) : setOffset(offset + 20)}
-    />
+    <form
+      onSubmit={e => {
+        e.preventDefault()
+        onChange(communities.filter(searching))
+      }}
+    >
+      <input ref={inputRef} placeholder='Buscar comunidade' />
+      <button type='submit'>OK!</button>
+    </form>
   )
 }
 
-RenderPagination.propTypes = {
-  count: PropTypes.number.isRequired,
-  offset: PropTypes.number.isRequired,
-  setOffset: PropTypes.func.isRequired
+SearchInput.propTypes = {
+  communities: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
-const CommunitiesGadget = () => (
-  <UserCommunities
-    component={({ loading, communities, count, offset, setOffset }) => (
-      <I18n ns='home'>
-        {t => (
-          <TableCardGadget
-            loading={loading}
-            data={communities}
-            columns={columns}
-            renderPagination={() => <RenderPagination count={count} offset={offset} setOffset={setOffset} />}
-            title={t('gadgets.communities.title')}
-            emptyIcon='community'
-            emptyText={t('gadgets.communities.emptyText')}
-            {...{ count, setOffset }}
-          />
-        )}
-      </I18n>
-    )}
-  />
-)
+const CommunitiesGadget = () => {
+  const { communities } = useSession()
+  const [data, setData] = useState(communities)
+
+  return (
+    <I18n ns='home'>
+      {t => (
+        <TableCardGadget
+          data={data}
+          columns={columns}
+          title={t('gadgets.communities.title')}
+          renderFilter={() => <SearchInput communities={communities} onChange={setData} />}
+          emptyIcon='community'
+          emptyText={t('gadgets.communities.emptyText')}
+        />
+      )}
+    </I18n>
+  )
+}
 
 export default CommunitiesGadget
