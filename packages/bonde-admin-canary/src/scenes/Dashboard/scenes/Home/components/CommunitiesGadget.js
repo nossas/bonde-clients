@@ -59,6 +59,7 @@ const SearchInput = ({ communities, onChange }) => {
 
   return (
     <form
+      className='hide-xs'
       onSubmit={e => {
         e.preventDefault()
         onChange(communities.filter(searching))

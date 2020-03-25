@@ -283,6 +283,7 @@ importers:
       redux: 4.0.5
       redux-form: 8.3.1_f335e0554af146d3efbce05aea54a3c2
       redux-thunk: 2.3.0
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
       url-join: 4.0.1
     devDependencies:
       enzyme: 3.11.0
@@ -357,6 +358,7 @@ importers:
       redux-form: ^8.2.2
       redux-thunk: ^2.3.0
       require-hacker: ^3.0.1
+      styled-components: ^5.0.1
       url-join: ^4.0.0
   packages/bonde-public:
     dependencies:
