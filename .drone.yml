@@ -16,7 +16,7 @@ pipeline:
       - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
       - REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
-      - REACT_APP_LOGIN_URL=https://auth.staging.bonde.org/auth/login
+      - REACT_APP_LOGIN_URL=http://accounts.staging.bonde.org/login
       - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
     commands:
       - apk --update add curl
