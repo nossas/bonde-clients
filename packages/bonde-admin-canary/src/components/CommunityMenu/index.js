@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, Icon } from 'bonde-components'
+import { useSession } from 'bonde-core-tools'
 
 const MenuStyled = styled.div`
   display: flex;
@@ -18,12 +19,8 @@ const MenuStyled = styled.div`
   }
 `
 
-const click = (url) => (evt) => {
-  window.location.href = url
-}
-
-const MenuItem = ({ icon, title, url }) => (
-  <Button dark onClick={click(url)} title={title}>
+const MenuItem = ({ icon, title, onClick }) => (
+  <Button dark onClick={onClick} title={title}>
     <Icon name={icon} size='small' />
   </Button>
 )
@@ -31,12 +28,12 @@ const MenuItem = ({ icon, title, url }) => (
 MenuItem.propTypes = {
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  onClick: PropTypes.func.isRequired
 }
 
 const urls = {
-  settings: process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel',
-  mobilization: process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel',
+  settings: new URL('/community/info', process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel').href,
+  mobilization: new URL('/mobilizations', process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel').href,
   chatbot: process.env.REACT_APP_DOMAIN_BOT || 'http://chatbot.bonde.devel',
   redes: process.env.REACT_APP_DOMAIN_REDES || 'http://redes.bonde.devel'
 }
@@ -49,11 +46,21 @@ const items = {
 }
 
 const CommunityMenu = ({ community }) => {
+  const { onChange } = useSession()
   const { modules } = community
+
+  const click = (url) => async (evt) => {
+    await onChange({ community })
+    window.location.href = url
+  }
   return (
     <MenuStyled>
       {Object.keys(modules).filter(key => !!modules[key]).map(key => (
-        <MenuItem key={key} icon={items[key][0]} title={items[key][1]} url={urls[key]} />
+        <MenuItem
+          key={key}
+          icon={items[key][0]}
+          title={items[key][1]}
+          onClick={click(urls[key])} />
       ))}
     </MenuStyled>
   )
