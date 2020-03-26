@@ -9,11 +9,11 @@ import { Loading } from 'bonde-components'
 // Routes
 // import Dashboard from './scenes/Dashboard'
 // import { Root as AuthRoot } from './scenes/Auth'
-import HomePage from './scenes/Dashboard/scenes/Home'
+import HomePage from 'scenes/HomePage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
-import { NotFound } from './components'
+import { NotFound, ResponsiveUI } from 'components'
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -42,13 +42,13 @@ const config = {
 
 const Root = () => (
   <BondeSessionProvider loading={TextLoading} config={config} fetchData>
-    <ToastContainer
-      className='BondeToastify'
-      hideProgressBar={true}
-    />
     <Router history={history}>
-      <BondeSessionUI.Main>
-        <BondeSessionUI.Content>
+      <BondeSessionUI.Main indexRoute='/'>
+        <ToastContainer
+          className='BondeToastify'
+          hideProgressBar={true}
+        />
+        <ResponsiveUI>
           <Switch>
             <Route path='/admin'>
               <HomePage />
@@ -58,7 +58,7 @@ const Root = () => (
               <NotFound />
             </Route>
           </Switch>
-        </BondeSessionUI.Content>
+        </ResponsiveUI>
       </BondeSessionUI.Main>
     </Router>
   </BondeSessionProvider>
