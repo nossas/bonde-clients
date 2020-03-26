@@ -43,9 +43,9 @@ class Application extends React.Component {
             return Promise.reject(err)
           }
           const { store } = this.props
-          const { jwtToken } = JSON.parse(authJson)
+          const { token } = JSON.parse(authJson)
           // authenticate on store
-          const auth = { credentials: { 'access-token': jwtToken } }
+          const auth = { credentials: { 'access-token': token } }
           store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
 
           // select community on store
@@ -54,7 +54,7 @@ class Application extends React.Component {
             store.dispatch(createAction(communityTypes.REHYDRATE, community))
           }
           // authenticate on context
-          this.setState({ signing: false, signed: true, token: jwtToken })
+          this.setState({ signing: false, signed: true, token })
 
           return Promise.resolve()
         })
