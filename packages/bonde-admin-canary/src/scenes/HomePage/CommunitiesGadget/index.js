@@ -16,7 +16,7 @@ const CommunitiesGadget = () => {
           data={data}
           columns={columns}
           title={t('gadgets.communities.title')}
-          renderFilter={() => 
+          renderFilter={() =>
             <SearchInput
               placeholder='Buscar comunidade'
               field='name'

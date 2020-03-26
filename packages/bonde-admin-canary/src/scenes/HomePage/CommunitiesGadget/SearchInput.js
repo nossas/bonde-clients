@@ -51,6 +51,7 @@ const SearchInput = ({ data, field, placeholder, onChange }) => {
 SearchInput.propTypes = {
   field: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired
 }
 
