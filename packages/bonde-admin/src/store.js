@@ -42,7 +42,7 @@ networkInterface.use([
           .then(authJson => {
             const auth = JSON.parse(authJson)
             if (auth) {
-              req.options.headers.authorization = `Bearer ${auth.jwtToken}`
+              req.options.headers.authorization = `Bearer ${auth.jwtToken || auth.token}`
             }
             next()
           })
