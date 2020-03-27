@@ -60,10 +60,9 @@ class Application extends React.Component {
         })
         .catch(err => {
           if (err && err.status === 401) {
-            const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+            const domain = process.env.REACT_APP_LOGIN_URL || 'http://accounts.bonde.devel:5000'
             // TODO: Fix redirect, removed for change flux to select communities
-            // window.location.href = `${domain}/auth/login?next=${window.location.href}`
-            window.location.href = urljoin(domain, '/auth/login')
+            window.location.href = urljoin(domain, '/login')
           } else {
             console.log('err', err)
             this.setState({ signing: false, signed: false, token: undefined })
