@@ -10,6 +10,7 @@ import { Loading } from 'bonde-components'
 // import Dashboard from './scenes/Dashboard'
 // import { Root as AuthRoot } from './scenes/Auth'
 import HomePage from 'scenes/HomePage'
+import CommunityPage from 'scenes/CommunityPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
@@ -50,13 +51,10 @@ const Root = () => (
         />
         <ResponsiveUI>
           <Switch>
-            <Route path='/admin'>
-              <HomePage />
-            </Route>
-            <Redirect exact from='/' to='/admin' />
-            <Route>
-              <NotFound />
-            </Route>
+            <Route exact path='/' component={HomePage} />
+            <Route path='/community' component={CommunityPage} />
+            <Redirect from='/admin' to='/' />
+            <Route component={NotFound} />
           </Switch>
         </ResponsiveUI>
       </BondeSessionUI.Main>

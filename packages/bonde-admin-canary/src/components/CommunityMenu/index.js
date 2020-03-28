@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button, Icon } from 'bonde-components'
 import { useSession } from 'bonde-core-tools'
@@ -32,7 +33,7 @@ MenuItem.propTypes = {
 }
 
 const urls = {
-  settings: new URL('/community/info', process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel').href,
+  settings: '/community/mobilizers',
   mobilization: new URL('/mobilizations', process.env.REACT_APP_DOMAIN_ADMIN || 'http://app.bonde.devel').href,
   chatbot: process.env.REACT_APP_DOMAIN_BOT || 'http://chatbot.bonde.devel',
   redes: process.env.REACT_APP_DOMAIN_REDES || 'http://redes.bonde.devel'
@@ -46,12 +47,17 @@ const items = {
 }
 
 const CommunityMenu = ({ community }) => {
+  const history = useHistory()
   const { onChange } = useSession()
   const { modules } = community
 
   const click = (url) => async (evt) => {
     await onChange({ community })
-    window.location.href = url
+    if (url.startsWith('http')) {
+      window.location.href = url
+    } else {
+      history.push(url)
+    }
   }
   return (
     <MenuStyled>

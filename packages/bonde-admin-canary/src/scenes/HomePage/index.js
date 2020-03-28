@@ -10,10 +10,10 @@ const HomePage = () => {
   return (
     <I18n ns='home'>
       {t => (
-        <>
+        <div className='xs-6'>
           <CommunitiesGadget />
           <TrendingMobilizationsGadget user={user} />
-        </>
+        </div>
       )}
     </I18n>
   )

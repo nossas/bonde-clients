@@ -246,7 +246,7 @@ importers:
       apollo-link: 1.2.13_graphql@0.13.2
       apollo-link-context: 1.0.19_graphql@0.13.2
       apollo-link-http: 1.5.16_graphql@0.13.2
-      bonde-components: 0.0.2-alpha.9_react-dom@16.13.1+react@16.13.1
+      bonde-components: 0.0.2-alpha.11_react-dom@16.13.1+react@16.13.1
       bonde-core-tools: 0.1.1-1_da44470b011dd768d864f0ecf762c180
       bonde-styleguide: 0.16.4_react-dom@16.13.1+react@16.13.1
       chai: 4.2.0
@@ -273,14 +273,16 @@ importers:
       react-apollo: 2.5.8_7663d0b5af16066910de08183c12ab91
       react-autosuggest: 9.4.3_react@16.13.1
       react-dom: 16.13.1_react@16.13.1
+      react-final-form: 6.3.5_react@16.13.1
       react-i18next: 7.13.0_i18next@11.10.2+react@16.13.1
       react-json-view: 1.19.1_react-dom@16.13.1+react@16.13.1
       react-loadable: 5.5.0_react@16.13.1
       react-redux: 7.2.0_49f644e2f7de4182503f8b93abece808
       react-router: 5.1.2_react@16.13.1
-      react-router-dom: 4.3.1_react@16.13.1
-      react-router-last-location: 1.1.0_b8fd1402b9d71d26b68061ee0c6f2d42
+      react-router-dom: 5.1.2_react@16.13.1
+      react-router-last-location: 1.1.0_df7239e02c4db76bc1b42fea3d001a7d
       react-scripts: 3.4.1_node-sass@4.13.1
+      react-table: 7.0.0_react@16.13.1
       react-toastify: 5.5.0_react-dom@16.13.1+react@16.13.1
       redux: 4.0.5
       redux-form: 8.3.1_f335e0554af146d3efbce05aea54a3c2
@@ -310,7 +312,7 @@ importers:
       apollo-link: ^1
       apollo-link-context: ^1.0.8
       apollo-link-http: ^1.5.14
-      bonde-components: 0.0.2-alpha.9
+      bonde-components: 0.0.2-alpha.11
       bonde-core-tools: 0.1.1-1
       bonde-styleguide: 0.16.4
       chai: ^4.2.0
@@ -347,14 +349,16 @@ importers:
       react-apollo: ^2.5.6
       react-autosuggest: ^9.4.3
       react-dom: ^16.8.6
+      react-final-form: ^6.3.5
       react-i18next: ^7.7.0
       react-json-view: ^1.19.1
       react-loadable: ^5.4.0
       react-redux: ^7.1.0
       react-router: ^5.1.2
-      react-router-dom: ^4.3.1
+      react-router-dom: 5.1.2
       react-router-last-location: ^1.1.0
       react-scripts: 3.4.1
+      react-table: ^7.0.0
       react-test-renderer: ^16.8.6
       react-toastify: ^5.3.2
       redux: ^4.0.0
@@ -6645,17 +6649,7 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
-  /bonde-components/0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1:
-    dependencies:
-      react: 16.13.1
-      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
-    dev: false
-    peerDependencies:
-      react: '>=16'
-      react-dom: '*'
-    resolution:
-      integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
-  /bonde-components/0.0.2-alpha.9_react-dom@16.13.1+react@16.13.1:
+  /bonde-components/0.0.2-alpha.11_react-dom@16.13.1+react@16.13.1:
     dependencies:
       final-form: 4.18.7
       react: 16.13.1
@@ -6666,7 +6660,17 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-8veQLBRaaw8Z7RHgSXVJUzYDPQl+dYgeFhOBxKiShyUHGJ56hUT11S0b6Jtp711cmxmZ1BACN/9aMfD40TFZFw==
+      integrity: sha512-3jCqHr9KUTVxgqdXKO+EHtOBufjAUhrn8V0H3r0ehSLAdGFdIbnJlRX8YDfWStlpJbhJnx2YqxwU3AKk/K6NVw==
+  /bonde-components/0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1:
+    dependencies:
+      react: 16.13.1
+      styled-components: 5.0.1_8f7d443d2407229b91fbc1ce8596fcc4
+    dev: false
+    peerDependencies:
+      react: '>=16'
+      react-dom: '*'
+    resolution:
+      integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
   /bonde-core-tools/0.1.1-1_da44470b011dd768d864f0ecf762c180:
     dependencies:
       '@apollo/react-hooks': 3.1.3_e6483eb07bd904ccc819a99a005753f7
@@ -17678,6 +17682,18 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-btqEp1+n1WO4bUDopBdvUoIuoGHf91n/EOJg0QU5YjhX9CK+4RIsBI0M41lmyT3H6hWv6NELdX5n5zBJyOIXoA==
+  /react-final-form/6.3.5_react@16.13.1:
+    dependencies:
+      '@babel/runtime': 7.9.2
+      react: 16.13.1
+      ts-essentials: 5.0.0
+    dev: false
+    peerDependencies:
+      final-form: ^4.16.1
+      react: ^16.8.0
+    requiresBuild: true
+    resolution:
+      integrity: sha512-btqEp1+n1WO4bUDopBdvUoIuoGHf91n/EOJg0QU5YjhX9CK+4RIsBI0M41lmyT3H6hWv6NELdX5n5zBJyOIXoA==
   /react-fontawesome/1.7.1_react@16.13.1:
     dependencies:
       prop-types: 15.7.2
@@ -17983,7 +17999,6 @@ packages:
       invariant: 2.2.4
       loose-envify: 1.4.0
       prop-types: 15.7.2
-      react: 16.13.1
       react-router: 4.3.1_react@16.13.1
       warning: 4.0.3
     dev: false
@@ -18020,12 +18035,12 @@ packages:
       react: '>=15'
     resolution:
       integrity: sha512-7BPHAaIwWpZS074UKaw1FjVdZBSVWEk8IuDXdB+OkLb8vd/WRQIpA4ag9WQk61aEfQs47wHyjWUoUGGZxpQXew==
-  /react-router-last-location/1.1.0_b8fd1402b9d71d26b68061ee0c6f2d42:
+  /react-router-last-location/1.1.0_df7239e02c4db76bc1b42fea3d001a7d:
     dependencies:
       prop-types: 15.7.2
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
-      react-router-dom: 4.3.1_react@16.13.1
+      react-router-dom: 5.1.2_react@16.13.1
     dev: false
     peerDependencies:
       prop-types: ^15.6.0
@@ -18262,6 +18277,14 @@ packages:
       react-dom: ^15.0.0 || ^16.0.0
     resolution:
       integrity: sha512-eW057HT0lFgCKh8ilr0y2JaH2YbNcuEdFpxyg7Gf/qDKk9hqGMyXryZJ8iMGJEuKH0+wxS0ccSsBBB3W8yCn8w==
+  /react-table/7.0.0_react@16.13.1:
+    dependencies:
+      react: 16.13.1
+    dev: false
+    peerDependencies:
+      react: ^16.8.3
+    resolution:
+      integrity: sha512-/RKUYLuqrupUs0qHdjdQLmgwdQ9mgXPnpshqv2T+OQUGhTu0XuLXVc6GOIywemXNf6qjL3dj81O6zALLK74Emw==
   /react-test-renderer/16.13.1_react@16.13.1:
     dependencies:
       object-assign: 4.1.1
