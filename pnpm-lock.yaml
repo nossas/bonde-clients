@@ -246,7 +246,7 @@ importers:
       apollo-link: 1.2.13_graphql@0.13.2
       apollo-link-context: 1.0.19_graphql@0.13.2
       apollo-link-http: 1.5.16_graphql@0.13.2
-      bonde-components: 0.0.2-alpha.11_react-dom@16.13.1+react@16.13.1
+      bonde-components: 0.0.2-alpha.12_react-dom@16.13.1+react@16.13.1
       bonde-core-tools: 0.1.1-1_da44470b011dd768d864f0ecf762c180
       bonde-styleguide: 0.16.4_react-dom@16.13.1+react@16.13.1
       chai: 4.2.0
@@ -312,7 +312,7 @@ importers:
       apollo-link: ^1
       apollo-link-context: ^1.0.8
       apollo-link-http: ^1.5.14
-      bonde-components: 0.0.2-alpha.11
+      bonde-components: 0.0.2-alpha.12
       bonde-core-tools: 0.1.1-1
       bonde-styleguide: 0.16.4
       chai: ^4.2.0
@@ -6649,7 +6649,7 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
-  /bonde-components/0.0.2-alpha.11_react-dom@16.13.1+react@16.13.1:
+  /bonde-components/0.0.2-alpha.12_react-dom@16.13.1+react@16.13.1:
     dependencies:
       final-form: 4.18.7
       react: 16.13.1
@@ -6660,7 +6660,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-3jCqHr9KUTVxgqdXKO+EHtOBufjAUhrn8V0H3r0ehSLAdGFdIbnJlRX8YDfWStlpJbhJnx2YqxwU3AKk/K6NVw==
+      integrity: sha512-SwtSNZ+kp9AOGoBbgREPq/t5ySRao4FbpqQ25Un/056Amt/CC8Bof1j2qlvaxw4dXvTEJvo09loDqpn71O0Vxw==
   /bonde-components/0.0.2-alpha.2_react-dom@16.13.1+react@16.13.1:
     dependencies:
       react: 16.13.1

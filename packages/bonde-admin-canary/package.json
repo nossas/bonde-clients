@@ -11,7 +11,7 @@
     "apollo-link": "^1",
     "apollo-link-context": "^1.0.8",
     "apollo-link-http": "^1.5.14",
-    "bonde-components": "0.0.2-alpha.11",
+    "bonde-components": "0.0.2-alpha.12",
     "bonde-core-tools": "0.1.1-1",
     "bonde-styleguide": "0.16.4",
     "chai": "^4.2.0",

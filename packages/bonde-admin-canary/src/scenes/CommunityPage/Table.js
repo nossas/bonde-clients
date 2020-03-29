@@ -89,7 +89,7 @@ const Styles = styled.div`
 `
 
 Styles.defaultProps = {
-  height: '600px'
+  height: '500px'
 }
 
 const headerProps = (props, { column }) => getStyles(props, column.align)
@@ -253,9 +253,16 @@ function App ({ data: defaultData }) {
         minWidth: 350
       },
       {
+        Header: <Header.h5>Data de envio</Header.h5>,
+        accessor: 'created_at',
+        minWidth: 100,
+        width: 200,
+        Cell: ({ row: { original } }) => new Date(original.created_at).toISOString()
+      },
+      {
         Header: <Header.h5>Status</Header.h5>,
         accessor: 'expired',
-        width: 100,
+        minWidth: 100,
         Cell: ({ row: { original } }) => {
           // CHANGE CONVITE FIELDS STATUS
           const { expires, expired } = original
