@@ -9,6 +9,7 @@ import {
   Validators,
   Hint
 } from 'bonde-components'
+import { toast } from 'react-toastify'
 import { useMutation, useSession } from 'bonde-core-tools'
 
 const InlineFormWrap = styled.div`
@@ -65,7 +66,10 @@ const InviteForm = ({ onSuccess }) => {
 
         const { data } = await invite({ variables: { input } })
         onSuccess(data.insert_invitations.returning)
-          .then(() => { form.reset() })
+          .then(() => {
+            form.reset()
+            toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS })
+          })
       }}
     >
       {({ submitting }) => (

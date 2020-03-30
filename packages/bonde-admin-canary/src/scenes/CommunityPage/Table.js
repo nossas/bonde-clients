@@ -257,7 +257,7 @@ function App ({ data: defaultData }) {
         accessor: 'created_at',
         minWidth: 100,
         width: 200,
-        Cell: ({ row: { original } }) => new Date(original.created_at).toISOString()
+        Cell: ({ row: { original } }) => new Date(original.created_at).toISOString().slice(0, 10)
       },
       {
         Header: <Header.h5>Status</Header.h5>,
