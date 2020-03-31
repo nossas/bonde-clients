@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { Header, Navigation, Tab } from 'bonde-components'
 import styled from 'styled-components'
 import { useSession } from 'bonde-core-tools'
@@ -61,6 +61,7 @@ const CommunityPage = ({ match, location }) => {
           <Route exact path={`${match.path}/mobilizers`}>
             <Mobilizers community={community} />
           </Route>
+          <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
         </Switch>
       </SubContent>
     </PageWrap>

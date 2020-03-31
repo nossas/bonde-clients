@@ -22,7 +22,8 @@ const TextLoading = ({ fetching }) => {
   const messages = {
     session: 'Carregando sessão...',
     user: 'Carregando usuário...',
-    communities: 'Carregando communities...'
+    communities: 'Carregando communities...',
+    redirect: 'Redirecionando para autenticação...'
   }
   return <Loading fullsize message={messages[fetching]} />
 }
@@ -35,14 +36,12 @@ BondeSessionProvider.displayName = 'BondeSessionProvider'
 
 const history = createBrowserHistory()
 
-const config = {
-  loginUrl: process.env.REACT_APP_LOGIN_URL || 'http://auth.bonde.devel:5000/auth/login',
-  crossStorageUrl: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
-  graphqlApiUrl: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'https://api-graphql.staging.bonde.org/v1/graphql'
-}
-
 const Root = () => (
-  <BondeSessionProvider loading={TextLoading} config={config} fetchData>
+  <BondeSessionProvider
+    fetchData
+    environment={process.env.REACT_APP_ENVIRONMENT || 'development'}
+    loading={TextLoading}
+  >
     <Router history={history}>
       <BondeSessionUI.Main indexRoute='/'>
         <ToastContainer

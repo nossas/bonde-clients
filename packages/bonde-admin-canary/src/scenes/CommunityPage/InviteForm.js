@@ -61,7 +61,7 @@ const InviteForm = ({ onSuccess }) => {
           email,
           // default role to mobilizers
           role: 2,
-          callback_url: 'teste qualquer remover esse campo'
+          callback_url: ''
         }
 
         const { data } = await invite({ variables: { input } })

@@ -7,6 +7,7 @@ pipeline:
     image: node:12-alpine
     environment:
       - SKIP_PREFLIGHT_CHECK=true
+      - REACT_APP_ENVIRONMENT=staging
       - REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
@@ -138,6 +139,7 @@ pipeline:
     image: node:12-alpine
     environment:
       - SKIP_PREFLIGHT_CHECK=true
+      - REACT_APP_ENVIRONMENT=production
       - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
       - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
       - REACT_APP_DOMAIN_PUBLIC=bonde.org
