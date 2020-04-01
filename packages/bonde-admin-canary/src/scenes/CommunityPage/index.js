@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { Header, Navigation, Tab } from 'bonde-components'
 import styled from 'styled-components'
 import { useSession } from 'bonde-core-tools'
-import Empty from './Empty'
+import { Empty } from 'components'
 import Mobilizers from './Mobilizers'
 
 const SubHeader = styled.div`
@@ -32,14 +32,6 @@ const PageWrap = styled.div`
   flex-grow: 1;
 `
 
-const EmptyWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
-`
-
 const CommunityPage = ({ match, location }) => {
   const { community } = useSession()
 
@@ -65,12 +57,7 @@ const CommunityPage = ({ match, location }) => {
         </Switch>
       </SubContent>
     </PageWrap>
-  ) : (
-    <EmptyWrap>
-      <Empty />
-      <Header.h4>Selecione uma comunidade</Header.h4>
-    </EmptyWrap>
-  )
+  ) : <Empty message='Selecione uma comunidade' />
 }
 
 CommunityPage.propTypes = {

@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Header } from 'bonde-components'
 import { CommunityMenu } from 'bonde-core-tools'
+import { Empty } from 'components'
 
 const Styles = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   height: ${props => props.height};
   min-height: ${props => props.height};
@@ -55,28 +58,34 @@ const Image = styled.img`
 const CommunitiesScrollBox = ({ communities }) => {
   return (
     <Styles>
-      <ul>
-        {communities.map((c: any, index: number) => (
-          <li key={index}>
-            <Colunm>
-              <Image src={c.image || 'https://via.placeholder.com/100'} alt={c.name} />
-            </Colunm>
-            <Colunm grow={1}>
-              <Header.h4>{c.name}</Header.h4>
-              <Header.h5>{c.description || c.city}</Header.h5>
-            </Colunm>
-            <Colunm>
-              <CommunityMenu community={c} />
-            </Colunm>
-          </li>
-        ))}
-      </ul>
+      {communities.length > 0 ? (
+        <ul>
+          {communities.map((c: any, index: number) => (
+            <li key={index}>
+              <Colunm>
+                <Image src={c.image || 'https://via.placeholder.com/100'} alt={c.name} />
+              </Colunm>
+              <Colunm grow={1}>
+                <Header.h4>{c.name}</Header.h4>
+                <Header.h5>{c.description || c.city}</Header.h5>
+              </Colunm>
+              <Colunm>
+                <CommunityMenu community={c} />
+              </Colunm>
+            </li>
+          ))}
+        </ul>
+      ) : <Empty message='Nenhuma comunidade encontrada' />}
     </Styles>
   )
 }
 
 CommunitiesScrollBox.propTypes = {
   communities: PropTypes.array.isRequired
+}
+
+CommunitiesScrollBox.defaultProps = {
+  communities: []
 }
 
 export default CommunitiesScrollBox
