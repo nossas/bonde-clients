@@ -41,7 +41,10 @@ const PrivateRoute = ({
       if (redir(mobilizationsPath)) {
         return <Redirect {...props} pathname={mobilizationsPath} />
       } else if (redir(communitiesPath)) {
-        return <Redirect {...props} pathname={communitiesPath} />
+        console.log('redirect to admin')
+        window.location.href = process.env.REACT_APP_DOMAIN_ADMIN_CANARY
+          || 'http://admin-canary.bonde.devel:5001';
+        return <p>Redirecionando para admin...</p>
       } else if (redir(loginPath)) {
         return <Redirect {...props} pathname={loginPath} />
       } else {
