@@ -247,7 +247,7 @@ importers:
       apollo-link-context: 1.0.19_graphql@0.13.2
       apollo-link-http: 1.5.16_graphql@0.13.2
       bonde-components: 0.0.2-alpha.14_react-dom@16.13.1+react@16.13.1
-      bonde-core-tools: 0.1.2-alpha.2_da44470b011dd768d864f0ecf762c180
+      bonde-core-tools: 0.1.2_da44470b011dd768d864f0ecf762c180
       bonde-styleguide: 0.16.4_react-dom@16.13.1+react@16.13.1
       chai: 4.2.0
       cross-storage: 1.0.0
@@ -313,7 +313,7 @@ importers:
       apollo-link-context: ^1.0.8
       apollo-link-http: ^1.5.14
       bonde-components: 0.0.2-alpha.14
-      bonde-core-tools: 0.1.2-alpha.2
+      bonde-core-tools: 0.1.2
       bonde-styleguide: 0.16.4
       chai: ^4.2.0
       cross-storage: ^1.0.0
@@ -733,7 +733,7 @@ packages:
     dependencies:
       '@apollo/react-common': 3.1.3_7bee024fcd5cfbb6b664841c84853aa9
       '@types/react': 16.9.25
-      '@wry/equality': 0.1.9
+      '@wry/equality': 0.1.11
       apollo-client: 2.6.8_graphql@0.13.2
       graphql: 0.13.2
       react: 16.13.1
@@ -753,7 +753,7 @@ packages:
     dependencies:
       '@apollo/react-common': 3.1.3_a7390933f600db187819e3abdeb01dfb
       '@types/react': 16.9.25
-      '@wry/equality': 0.1.9
+      '@wry/equality': 0.1.11
       apollo-client: 2.6.8_graphql@0.13.2
       graphql: 14.6.0
       react: 16.13.1
@@ -4636,12 +4636,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-LrKVLove/zw6h2Md/KZyWxIkFM6AoyKp71OqpH9Hiip1csjPVoD3tPxlbQUNxEnHENks3UGgNpSBCAfq9KWuag==
-  /@wry/equality/0.1.9:
+  /@wry/equality/0.1.11:
     dependencies:
       tslib: 1.11.1
     dev: false
     resolution:
-      integrity: sha512-mB6ceGjpMGz1ZTza8HYnrPGos2mC6So4NhS1PtZ8s4Qt0K7fBiIGhpSxUbQmhwcSWE3no+bYxmI2OL6KuXYmoQ==
+      integrity: sha512-mwEVBDUVODlsQQ5dfuLUS5/Tf7jqUKyhKYHmVi4fPB6bDMOfWvUPJmKgS1Z7Za/sOI3vzWt4+O7yCiL/70MogA==
   /@xtuc/ieee754/1.2.0:
     resolution:
       integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==
@@ -5143,7 +5143,7 @@ packages:
       integrity: sha512-+iBMcYeevMm1JpYgwDEIDt/y0BB7VWyvlm/7x+TIPNLHCTCMgcEgDuW5kH86iQZWo0I7mNwQiTOz+/3ShPFmBw==
   /apollo-utilities/1.3.3_graphql@0.13.2:
     dependencies:
-      '@wry/equality': 0.1.9
+      '@wry/equality': 0.1.11
       fast-json-stable-stringify: 2.1.0
       graphql: 0.13.2
       ts-invariant: 0.4.4
@@ -5155,7 +5155,7 @@ packages:
       integrity: sha512-F14aX2R/fKNYMvhuP2t9GD9fggID7zp5I96MF5QeKYWDWTrkRdHRp4+SVfXUVN+cXOaB/IebfvRtzPf25CM0zw==
   /apollo-utilities/1.3.3_graphql@14.6.0:
     dependencies:
-      '@wry/equality': 0.1.9
+      '@wry/equality': 0.1.11
       fast-json-stable-stringify: 2.1.0
       graphql: 14.6.0
       ts-invariant: 0.4.4
@@ -6678,7 +6678,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-wUkjOaH7QU1524g7L+8W5gJV1qrwMEj5jtZHl7ntNtpsQDtGgAWG6t/yCulOCwiDIFIOXk1kg/hJeonDlCPW9g==
-  /bonde-core-tools/0.1.2-alpha.2_da44470b011dd768d864f0ecf762c180:
+  /bonde-core-tools/0.1.2_da44470b011dd768d864f0ecf762c180:
     dependencies:
       '@apollo/react-hooks': 3.1.3_e6483eb07bd904ccc819a99a005753f7
       '@types/react-router-dom': 5.1.3
@@ -6698,7 +6698,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-Uh8FNBhXAiS+dYhxGxsKNd9mjcwcd75Kk9EZyvdCGFSn9Cd/U8vcNhDS//cXzZiiZQ76pNs2VrfSU3mjCs12rQ==
+      integrity: sha512-ckgL4qUg75wCOTwvODB+94kWUec5zuGkEPfbdlXHtEBeXz9W1PV9c99Co3pVHkysP/mTw6ZB6dqFFuDXmH50QQ==
   /bonde-styleguide/0.16.4_react-dom@16.13.1+react@16.13.1:
     dependencies:
       '@babel/plugin-proposal-class-properties': 7.8.3
