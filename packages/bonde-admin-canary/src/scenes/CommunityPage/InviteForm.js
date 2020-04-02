@@ -60,8 +60,7 @@ const InviteForm = ({ onSuccess }) => {
           community_id: community.id,
           email,
           // default role to mobilizers
-          role: 2,
-          callback_url: ''
+          role: 2
         }
 
         const { data } = await invite({ variables: { input } })
