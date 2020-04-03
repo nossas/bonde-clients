@@ -47,7 +47,7 @@ const CommunityPage = ({ match, location }) => {
           <Tab
             onClick={() => {
               if (process.env.REACT_APP_DOMAIN_ADMIN) {
-                window.location.href = new URL('/community/settings', process.env.REACT_APP_DOMAIN_ADMIN).href;
+                window.location.href = new URL('/community/settings', process.env.REACT_APP_DOMAIN_ADMIN).href
               }
             }}
           >
