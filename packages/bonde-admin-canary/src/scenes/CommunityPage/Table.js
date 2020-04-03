@@ -49,6 +49,18 @@ const Styles = styled.div`
           border-right: 1px solid #c7c7c7;
         }
       }
+
+      &::-webkit-scrollbar {
+        width: 33px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-clip: padding-box;
+        background-color: rgba(74, 74, 74, 0.75);
+        border-width: 20px 15px;
+        border-style: solid;
+        border-color: transparent;
+        border-image: initial;
+      }
     }
 
     .tr {

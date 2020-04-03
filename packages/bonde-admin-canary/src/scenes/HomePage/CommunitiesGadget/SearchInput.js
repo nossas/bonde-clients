@@ -41,7 +41,10 @@ const SearchInput = ({ data, field, placeholder, onChange }) => {
       }}
     >
       <InputAddon>
-        <Input ref={inputRef} placeholder={placeholder} />
+        <Input
+          ref={inputRef}
+          placeholder={placeholder}
+        />
         <Button dark type='submit'><Icon name='Search' size='small' /></Button>
       </InputAddon>
     </form>

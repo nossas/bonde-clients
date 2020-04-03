@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { Header, Navigation, Tab } from 'bonde-components'
+import { Empty, Header, Navigation, Tab } from 'bonde-components'
 import styled from 'styled-components'
 import { useSession } from 'bonde-core-tools'
-import { Empty } from 'components'
 import Mobilizers from './Mobilizers'
 
 const SubHeader = styled.div`
@@ -45,7 +44,15 @@ const CommunityPage = ({ match, location }) => {
         <Header.h3>{community.name}</Header.h3>
         <Navigation>
           <Tab active={isActive}>Mobilizadores</Tab>
-          <Tab onClick={() => { console.log('redirect to admin') }}>Outras configurações</Tab>
+          <Tab
+            onClick={() => {
+              if (process.env.REACT_APP_DOMAIN_ADMIN) {
+                window.location.href = new URL('/community/settings', process.env.REACT_APP_DOMAIN_ADMIN).href;
+              }
+            }}
+          >
+            Outras configurações
+          </Tab>
         </Navigation>
       </SubHeader>
       <SubContent>
@@ -57,7 +64,7 @@ const CommunityPage = ({ match, location }) => {
         </Switch>
       </SubContent>
     </PageWrap>
-  ) : <Empty message='Selecione uma comunidade' />
+  ) : <Empty message='Nada por aqui...' />
 }
 
 CommunityPage.propTypes = {

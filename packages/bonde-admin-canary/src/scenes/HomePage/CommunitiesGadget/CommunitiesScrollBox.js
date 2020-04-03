@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Header } from 'bonde-components'
+import { Empty, Header } from 'bonde-components'
 import { CommunityMenu } from 'bonde-core-tools'
-import { Empty } from 'components'
 
 const Styles = styled.div`
   display: flex;
@@ -22,10 +21,6 @@ const Styles = styled.div`
       flex-direction: row;
       align-items: center;
     }
-  }
-
-  ${Header.h4}, ${Header.h5} {
-    margin: 0;
   }
 
   &::-webkit-scrollbar {
@@ -48,6 +43,10 @@ Styles.defaultProps = {
 const Colunm = styled.div`
   ${props => props.grow && `flex-grow: ${props.grow};`}
   padding: 13px 15px 14px;
+
+  ${Header.h4}, ${Header.h5} {
+    margin: 0;
+  }
 `
 
 const Image = styled.img`
