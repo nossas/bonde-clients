@@ -12,6 +12,7 @@ const Card = styled.div`
   box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
   overflow: hidden;
   width: 100%;
+  cursor: pointer;
 
   &:hover {
     img, svg {
@@ -24,9 +25,9 @@ const CardContent = styled.div`
   padding: 18px;
 `
 
-const MobilizationCard = styled(({ className, mobilization }) => {
+const MobilizationCard = styled(({ className, mobilization, onClick }) => {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <Card>
         <Image src={mobilization.facebookShareImage} title={mobilization.name} />
         <CardContent>

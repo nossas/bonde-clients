@@ -47,7 +47,7 @@ const GadgetWrap = styled.div`
 `
 
 const MobilizationsGadget = () => {
-  const { user } = useSession()
+  const { user, storage, communities } = useSession()
   const { data, loading } = useQuery(
     mobilizationsLastUpdated,
     { variables: { userId: user.id } }
@@ -74,7 +74,23 @@ const MobilizationsGadget = () => {
       </div>
       <GadgetWrap>
         {(mobilizations).map(parse).map(mobilization =>
-          <MobilizationCard key={mobilization.id} mobilization={mobilization} />
+          <MobilizationCard
+            key={mobilization.id}
+            mobilization={mobilization}
+            onClick={() => {
+              if (process.env.REACT_APP_DOMAIN_ADMIN) {
+                const community = communities.filter(c => c.id === mobilization.community.id)[0]
+                storage
+                  .setAsyncItem('community', community)
+                  .then(() => {
+                    window.location.href = new URL(
+                      `/mobilizations/${mobilization.id}/edit`,
+                      process.env.REACT_APP_DOMAIN_ADMIN
+                    ).href
+                  })
+              }
+            }}
+          />
         )}
       </GadgetWrap>
     </Styles>
