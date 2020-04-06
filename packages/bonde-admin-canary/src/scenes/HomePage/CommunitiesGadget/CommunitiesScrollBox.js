@@ -20,6 +20,14 @@ const Styles = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
+
+    }
+    li.mobile {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #c7c7c7;
+      }
     }
   }
 
@@ -46,7 +54,13 @@ const Colunm = styled.div`
 
   ${Header.h4}, ${Header.h5} {
     margin: 0;
-  }
+  };
+
+  @media only screen and (max-width: 768px) {
+    ${props => props.mobile === 'hide' && `
+      display: none;
+    `};
+  };
 `
 
 const Image = styled.img`
@@ -55,12 +69,19 @@ const Image = styled.img`
 `
 
 const CommunitiesScrollBox = ({ communities }) => {
+  const isMobile = window.innerWidth <= 768
+  const itemProps = {}
+  if (isMobile) {
+    itemProps.className = 'mobile'
+    // itemProps.onClick = () => { console.log('click item') }
+  }
+
   return (
     <Styles>
       {communities.length > 0 ? (
         <ul>
           {communities.map((c: any, index: number) => (
-            <li key={index}>
+            <li key={index} {...itemProps}>
               <Colunm>
                 <Image src={c.image || 'https://via.placeholder.com/100'} alt={c.name} />
               </Colunm>
@@ -68,7 +89,7 @@ const CommunitiesScrollBox = ({ communities }) => {
                 <Header.h4>{c.name}</Header.h4>
                 <Header.h5>{c.description || c.city}</Header.h5>
               </Colunm>
-              <Colunm>
+              <Colunm mobile='hide'>
                 <CommunityMenu community={c} />
               </Colunm>
             </li>

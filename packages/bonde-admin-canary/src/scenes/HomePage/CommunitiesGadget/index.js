@@ -14,7 +14,7 @@ const Styles = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     margin-bottom: 15px;
 
     ${Header.h5} {

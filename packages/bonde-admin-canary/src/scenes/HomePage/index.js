@@ -1,17 +1,12 @@
 import React from 'react'
-import { useSession } from 'bonde-core-tools'
 import CommunitiesGadget from './CommunitiesGadget'
-import TrendingMobilizationsGadget from './TrendingMobilizationsGadget'
+import MobilizationsGadget from './MobilizationsGadget'
 
-const HomePage = () => {
-  const { user } = useSession()
-
-  return (
-    <div className='xs-6'>
-      <CommunitiesGadget />
-      <TrendingMobilizationsGadget user={user} />
-    </div>
-  )
-}
+const HomePage = () => (
+  <div className='xs-6'>
+    <CommunitiesGadget />
+    <MobilizationsGadget />
+  </div>
+)
 
 export default HomePage
