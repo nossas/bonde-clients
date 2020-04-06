@@ -1,35 +1,14 @@
 import styled from 'styled-components'
 
-const ResponsiveUI = styled.div`
+const Row = styled.div`
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
-
-  .xs-6 {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: auto;
-    flex-grow: 1;
-    padding: 20px 60px;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  .xs-6 > div {
-    width: calc(50% - 20px);
-  }
+  flex-wrap: wrap;
+  padding: 1.25rem 3rem;
 
   @media only screen and (max-width: 768px) {
-    .xs-6 {
-      flex-direction: column;
-      padding: 20px 30px;
-    }
-
-    .xs-6 > div {
-      width: 100%;
-
-      padding: 0 0 30px;
-    }
+    padding: 1.25rem 1.125rem;
 
     .hide-xs {
       display: none;
@@ -37,4 +16,30 @@ const ResponsiveUI = styled.div`
   }
 `
 
-export default ResponsiveUI
+const getFlexBasis = ({ xs, sm }) => {
+  const isMobile = window.innerWidth <= 768
+  const value = isMobile ? sm : xs
+
+  switch (value) {
+    case 12:
+      return 'flex-basis: 100%;'
+    case 6:
+      return 'flex-basis: 50%;'
+    case 3:
+      return 'flex-basis: 25%;'
+    default:
+      break
+  }
+}
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding: 0 1rem;
+
+  ${props => getFlexBasis(props)}
+`
+
+export default { Row, Col }

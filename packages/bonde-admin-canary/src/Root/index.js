@@ -14,7 +14,7 @@ import CommunityPage from 'scenes/CommunityPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
-import { NotFound, ResponsiveUI } from 'components'
+import { NotFound } from 'components'
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -48,14 +48,12 @@ const Root = () => (
           className='BondeToastify'
           hideProgressBar={true}
         />
-        <ResponsiveUI>
-          <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route path='/community' component={CommunityPage} />
-            <Redirect from='/admin' to='/' />
-            <Route component={NotFound} />
-          </Switch>
-        </ResponsiveUI>
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/community' component={CommunityPage} />
+          <Redirect from='/admin' to='/' />
+          <Route component={NotFound} />
+        </Switch>
       </BondeSessionUI.Main>
     </Router>
   </BondeSessionProvider>

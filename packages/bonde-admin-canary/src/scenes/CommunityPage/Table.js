@@ -10,7 +10,7 @@ import {
 import { Header } from 'bonde-components'
 
 const Styles = styled.div`
-  flex-grow: 1;
+  width: 100%;
   padding: 0;
   ${''}
   display: block;

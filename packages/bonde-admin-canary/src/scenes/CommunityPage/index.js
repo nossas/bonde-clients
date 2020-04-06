@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { Empty, Header, Navigation, Tab } from 'bonde-components'
 import styled from 'styled-components'
 import { useSession } from 'bonde-core-tools'
+import { ResponsiveUI } from 'components'
 import Mobilizers from './Mobilizers'
 
 const SubHeader = styled.div`
@@ -16,13 +17,6 @@ const SubHeader = styled.div`
     color: #fff;
     margin: 10px 0 30px;
   }
-`
-
-const SubContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 30px 60px;
 `
 
 const PageWrap = styled.div`
@@ -55,14 +49,16 @@ const CommunityPage = ({ match, location }) => {
           </Tab>
         </Navigation>
       </SubHeader>
-      <SubContent>
-        <Switch>
-          <Route exact path={`${match.path}/mobilizers`}>
-            <Mobilizers community={community} />
-          </Route>
-          <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
-        </Switch>
-      </SubContent>
+      <ResponsiveUI.Row>
+        <ResponsiveUI.Col xs={12} sm={12}>
+          <Switch>
+            <Route exact path={`${match.path}/mobilizers`}>
+              <Mobilizers community={community} />
+            </Route>
+            <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
+          </Switch>
+        </ResponsiveUI.Col>
+      </ResponsiveUI.Row>
     </PageWrap>
   ) : <Empty message='Nada por aqui...' />
 }

@@ -9,6 +9,7 @@ import CommunitiesScrollBox from './CommunitiesScrollBox'
 const Styles = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   .header {
     display: flex;
