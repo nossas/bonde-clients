@@ -11,7 +11,6 @@ import { Loading } from 'bonde-components'
 // import { Root as AuthRoot } from './scenes/Auth'
 import HomePage from 'scenes/HomePage'
 import CommunityPage from 'scenes/CommunityPage'
-import UserPage from 'scenes/UserPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
@@ -34,7 +33,6 @@ const PagesRoute = () => {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/community' component={CommunityPage} />
-        <Route path='/user' component={UserPage} />
         <Redirect from='/admin' to='/' />
         <Route component={NotFound} />
       </Switch>
@@ -47,7 +45,8 @@ const TextLoading = ({ fetching }) => {
     session: 'Carregando sessão...',
     user: 'Carregando usuário...',
     communities: 'Carregando communities...',
-    redirect: 'Redirecionando para autenticação...'
+    redirect: 'Redirecionando para autenticação...',
+    module: 'Redirecionando para módulo...'
   }
   return <Loading fullsize message={messages[fetching]} />
 }
