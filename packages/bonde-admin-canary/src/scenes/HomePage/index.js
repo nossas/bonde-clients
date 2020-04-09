@@ -1,17 +1,30 @@
 import React from 'react'
-import { ResponsiveUI } from 'components'
+import styled from 'styled-components'
+import { Row, Col } from 'bonde-components'
+import Content from 'components/Content'
 import CommunitiesGadget from './CommunitiesGadget'
 import MobilizationsGadget from './MobilizationsGadget'
 
+const Styles = styled.div`
+  ${props => props.margin && `margin: ${props.margin};`}
+  ${props => props.padding && `padding: ${props.padding};`}
+`
+
 const HomePage = () => (
-  <ResponsiveUI.Row>
-    <ResponsiveUI.Col xs={6} sm={12}>
-      <CommunitiesGadget />
-    </ResponsiveUI.Col>
-    <ResponsiveUI.Col xs={6} sm={12}>
-      <MobilizationsGadget />
-    </ResponsiveUI.Col>
-  </ResponsiveUI.Row>
+  <Content>
+    <Row spacing='between'>
+      <Col size={[6, 6]}>
+        <Styles margin='0 20px 0 0'>
+          <CommunitiesGadget />
+        </Styles>
+      </Col>
+      <Col size={[6, 6]}>
+        <Styles margin='0 0 0 20px'>
+          <MobilizationsGadget />
+        </Styles>
+      </Col>
+    </Row>
+  </Content>
 )
 
 export default HomePage

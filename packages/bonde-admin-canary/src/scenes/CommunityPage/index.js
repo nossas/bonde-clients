@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { Empty, Header, Navigation, Tab } from 'bonde-components'
 import styled from 'styled-components'
+import { Empty, Header, Navigation, Tab, Row, Col } from 'bonde-components'
 import { useSession } from 'bonde-core-tools'
-import { ResponsiveUI } from 'components'
+
+import Content from 'components/Content'
 import Mobilizers from './Mobilizers'
 
 const SubHeader = styled.div`
@@ -49,16 +50,18 @@ const CommunityPage = ({ match, location }) => {
           </Tab>
         </Navigation>
       </SubHeader>
-      <ResponsiveUI.Row>
-        <ResponsiveUI.Col xs={12} sm={12}>
-          <Switch>
-            <Route exact path={`${match.path}/mobilizers`}>
-              <Mobilizers community={community} />
-            </Route>
-            <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
-          </Switch>
-        </ResponsiveUI.Col>
-      </ResponsiveUI.Row>
+      <Content>
+        <Row>
+          <Col>
+            <Switch>
+              <Route exact path={`${match.path}/mobilizers`}>
+                <Mobilizers community={community} />
+              </Route>
+              <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
+            </Switch>
+          </Col>
+        </Row>
+      </Content>
     </PageWrap>
   ) : <Empty message='Nada por aqui...' />
 }
