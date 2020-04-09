@@ -66,6 +66,7 @@ const Colunm = styled.div`
 const Image = styled.img`
   width: 40px;
   height: 40px;
+  border-radius: 30px;
 `
 
 const CommunitiesScrollBox = ({ communities }) => {
@@ -80,10 +81,10 @@ const CommunitiesScrollBox = ({ communities }) => {
     <Styles>
       {communities.length > 0 ? (
         <ul>
-          {communities.map((c: any, index: number) => (
+          {communities.map((c, index) => (
             <li key={index} {...itemProps}>
               <Colunm>
-                <Image src={c.image || 'https://via.placeholder.com/100'} alt={c.name} />
+                <Image src={c.image || `https://via.placeholder.com/100?text=${c.name.substring(0, 1)}`} alt={c.name} />
               </Colunm>
               <Colunm grow={1}>
                 <Header.h4>{c.name}</Header.h4>
