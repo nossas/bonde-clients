@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect as RedirectComponent } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as paths from 'paths'
+import { Loading } from 'components/await'
 import AccountSelectors from 'account/redux/selectors'
 import * as CommunitySelectors from 'community/selectors'
 
@@ -41,10 +42,9 @@ const PrivateRoute = ({
       if (redir(mobilizationsPath)) {
         return <Redirect {...props} pathname={mobilizationsPath} />
       } else if (redir(communitiesPath)) {
-        console.log('redirect to admin')
         window.location.href = process.env.REACT_APP_DOMAIN_ADMIN_CANARY
           || 'http://admin-canary.bonde.devel:5001';
-        return <p>Redirecionando para admin...</p>
+        return <Loading />
       } else if (redir(loginPath)) {
         return <Redirect {...props} pathname={loginPath} />
       } else {
