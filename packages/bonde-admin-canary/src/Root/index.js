@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
 import { createBrowserHistory } from 'history'
-import { Router, Redirect, Switch, Route } from 'react-router-dom'
+import { Router, Redirect, Switch, Route, useLocation } from 'react-router'
 import { BondeSessionProvider, BondeSessionUI } from 'bonde-core-tools'
 import { Loading } from 'bonde-components'
 // import { ProviderRedux } from './services/redux'
@@ -11,12 +11,36 @@ import { Loading } from 'bonde-components'
 // import { Root as AuthRoot } from './scenes/Auth'
 import HomePage from 'scenes/HomePage'
 import CommunityPage from 'scenes/CommunityPage'
+import UserPage from 'scenes/UserPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
 import { NotFound } from 'components'
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
+
+const PagesRoute = () => {
+  const location = useLocation()
+
+  return (
+    <BondeSessionUI
+      indexRoute='/'
+      disableNavigation={location.pathname === '/'}
+    >
+      <ToastContainer
+        className='BondeToastify'
+        hideProgressBar={true}
+      />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/community' component={CommunityPage} />
+        <Route path='/user' component={UserPage} />
+        <Redirect from='/admin' to='/' />
+        <Route component={NotFound} />
+      </Switch>
+    </BondeSessionUI>
+  )
+}
 
 const TextLoading = ({ fetching }) => {
   const messages = {
@@ -43,18 +67,7 @@ const Root = () => (
     loading={TextLoading}
   >
     <Router history={history}>
-      <BondeSessionUI.Main indexRoute='/'>
-        <ToastContainer
-          className='BondeToastify'
-          hideProgressBar={true}
-        />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/community' component={CommunityPage} />
-          <Redirect from='/admin' to='/' />
-          <Route component={NotFound} />
-        </Switch>
-      </BondeSessionUI.Main>
+      <PagesRoute />
     </Router>
   </BondeSessionProvider>
 )
