@@ -10,6 +10,7 @@ import { Loading } from 'bonde-components'
 // import Dashboard from './scenes/Dashboard'
 // import { Root as AuthRoot } from './scenes/Auth'
 import HomePage from 'scenes/HomePage'
+import ChatbotPage from 'scenes/ChatbotPage'
 import CommunityPage from 'scenes/CommunityPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
@@ -32,6 +33,7 @@ const PagesRoute = () => {
       />
       <Switch>
         <Route exact path='/' component={HomePage} />
+        <Route path='/chatbot' component={ChatbotPage} />
         <Route path='/community' component={CommunityPage} />
         <Redirect from='/admin' to='/' />
         <Route component={NotFound} />
@@ -59,11 +61,16 @@ BondeSessionProvider.displayName = 'BondeSessionProvider'
 
 const history = createBrowserHistory()
 
+const extraConfig = {
+  chatbot: 'http://admin-canary.bonde.devel:5001/chatbot'
+}
+
 const Root = () => (
   <BondeSessionProvider
     fetchData
     environment={process.env.REACT_APP_ENVIRONMENT || 'development'}
     loading={TextLoading}
+    extraConfig={extraConfig}
   >
     <Router history={history}>
       <PagesRoute />
