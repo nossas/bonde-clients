@@ -5,7 +5,7 @@ import { createFirstMessage } from 'bonde-diagram'
 import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
 import { FormContentPage } from 'scenes/Dashboard/components'
-// import CampaignDiagram from './components/CampaignDiagram'
+import CampaignDiagram from './components/CampaignDiagram'
 import CampaignForm from './components/CampaignForm'
 import Navigation from './components/Navigation'
 import {
@@ -116,8 +116,8 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
           fullPage: true,
           title: campaign.name,
           // eslint-disable-next-line react/display-name
-          render: () => <h1>Em construção</h1>,
-          // render: CampaignDiagram,
+          // render: () => <h1>Em construção</h1>,
+          render: CampaignDiagram,
           // eslint-disable-next-line react/display-name
           actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
         }}
