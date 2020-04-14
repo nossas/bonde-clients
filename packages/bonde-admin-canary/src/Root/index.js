@@ -5,12 +5,12 @@ import { createBrowserHistory } from 'history'
 import { Router, Redirect, Switch, Route, useLocation } from 'react-router'
 import { BondeSessionProvider, BondeSessionUI } from 'bonde-core-tools'
 import { Loading } from 'bonde-components'
-// import { ProviderRedux } from './services/redux'
+import { ProviderRedux } from 'services/redux'
 // Routes
 // import Dashboard from './scenes/Dashboard'
 // import { Root as AuthRoot } from './scenes/Auth'
 import HomePage from 'scenes/HomePage'
-import ChatbotPage from 'scenes/ChatbotPage'
+import ChatbotPage from 'scenes/ChatbotPage/page'
 import CommunityPage from 'scenes/CommunityPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
@@ -72,9 +72,11 @@ const Root = () => (
     loading={TextLoading}
     extraConfig={extraConfig}
   >
-    <Router history={history}>
-      <PagesRoute />
-    </Router>
+    <ProviderRedux>
+      <Router history={history}>
+        <PagesRoute />
+      </Router>
+    </ProviderRedux>
   </BondeSessionProvider>
 )
 

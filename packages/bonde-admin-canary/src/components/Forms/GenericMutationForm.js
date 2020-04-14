@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Mutation } from 'react-apollo'
+// import { Mutation } from 'react-apollo'
+import { useMutation } from 'bonde-core-tools'
 import { SubmissionError } from 'redux-form'
 import { toast } from 'react-toastify'
 import GenericReduxForm from './GenericReduxForm'
@@ -25,9 +26,9 @@ const GenericMutationForm = ({
   onError,
   ...rest
 }) => {
-  const mutationProps = { mutation, refetchQueries }
+  const mutationOpts = { refetchQueries }
   if (updateQuery && refetchQueries) {
-    mutationProps.update = (cache, { data }) => {
+    mutationOpts.update = (cache, { data }) => {
       const { query, variables: queryVariables } = refetchQueries[0]
       const readQuery = () => cache.readQuery({ query, variables: queryVariables })
       const writeQuery = (writeData) => {
@@ -63,34 +64,32 @@ const GenericMutationForm = ({
     return Promise.reject(error)
   } */
 
+  const [submit] = useMutation(mutation, mutationOpts)
+
   return (
-    <Mutation {...mutationProps}>
-      {(action) => (
-        <GenericReduxForm
-          {...rest}
-          onSubmit={values => {
-            const mutationProps = {
-              variables: { ...variables, ...values }
+    <GenericReduxForm
+      {...rest}
+      onSubmit={values => {
+        const mutationProps = {
+          variables: { ...variables, ...values }
+        }
+        if (parse) {
+          mutationProps.variables = {
+            ...mutationProps.variables,
+            ...parse(values)
+          }
+        }
+        return submit(mutationProps)
+          .then((args) => {
+            if (typeof onSuccess === 'string') {
+              toast(onSuccess, { type: toast.TYPE.SUCCESS })
+              return Promise.resolve(args)
             }
-            if (parse) {
-              mutationProps.variables = {
-                ...mutationProps.variables,
-                ...parse(values)
-              }
-            }
-            return action(mutationProps)
-              .then((args) => {
-                if (typeof onSuccess === 'string') {
-                  toast(onSuccess, { type: toast.TYPE.SUCCESS })
-                  return Promise.resolve(args)
-                }
-                return onSuccess(args)
-              })
-              .catch(handleError)
-          }}
-        />
-      )}
-    </Mutation>
+            return onSuccess(args)
+          })
+          .catch(handleError)
+      }}
+    />
   )
 }
 
