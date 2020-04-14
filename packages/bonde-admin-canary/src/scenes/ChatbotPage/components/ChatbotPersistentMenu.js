@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
+import styled from 'styled-components'
 import {
   Button,
   Card,
   Flexbox2 as Flexbox,
   Grid,
   Cell,
-  Icon,
   Input,
+  Icon,
   Text,
   Title
 } from 'bonde-styleguide'
+import { useHistory } from 'react-router'
+import { Header, Icon as IconComponent } from 'bonde-components'
 import { MutationForm, Field, FieldArray, FormField, SubmitButton } from 'components/Forms'
-import { ContentPageComponent } from 'scenes/Dashboard/components'
 import { updateChatbotMutation } from '../graphql'
 
 import './chatbot-persistent-menu.css'
@@ -107,35 +109,48 @@ SuggestCampaignsInput.defaultProps = {
   minLength: 3
 }
 
-const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed }, history }) => {
-  const contentProps = {
-    title: 'Voltar',
-    // eslint-disable-next-line react/display-name
-    backward: () => { history.goBack() },
-    // eslint-disable-next-line react/display-name
-    actions: () => (
-      <div>
-        <Button
-          light
-          type='button'
-          disabled={fields.length > 2}
-          onClick={() => fields.push({})}
-          margin={{ right: '18px' }}
-        >
-          <Icon name='plus' /> Novo menu
-        </Button>
-        <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
-      </div>
-    )
+const Styles = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 30px;
+
+  ${Header.h5} {
+    display: flex;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
   }
+`
+
+const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed } }) => {
+  const history = useHistory()
   return (
-    <ContentPageComponent fixRender {...contentProps}>
+    <>
+      <Styles>
+        <Header.h5 onClick={() => history.goBack()}>
+          <IconComponent name='ArrowLeft' size='small' /> Voltar
+        </Header.h5>
+        <div>
+          <Button
+            light
+            type='button'
+            disabled={fields.length > 2}
+            onClick={() => fields.push({})}
+            margin={{ right: '18px' }}
+          >
+            <Icon name='plus' /> Novo menu
+          </Button>
+          <SubmitButton formId='ChatbotPersistentMenu'>Salvar</SubmitButton>
+        </div>
+      </Styles>
       <Grid>
         {fields.map((menu, index) => (
           <Cell key={`menu-field-${index}`} size={[4, 6, 12]}>
             <Card rounded={5} padding={{ x: 40, y: 40 }} margin={{ bottom: 20 }}>
               <Flexbox horizontal spacing='between'>
-                <Title.H3>{`Menu #${index}`}</Title.H3>
+                <Title.H3>{`Menu #${index + 1}`}</Title.H3>
                 <Button flat type='button' onClick={() => fields.remove(index)}>
                   <Icon name='trash' size={25} color='red' />
                 </Button>
@@ -160,7 +175,7 @@ const MenuFieldArray = ({ campaigns, fields, meta: { error, submitFailed }, hist
           </Cell>
         ))}
       </Grid>
-    </ContentPageComponent>
+    </>
   )
 }
 

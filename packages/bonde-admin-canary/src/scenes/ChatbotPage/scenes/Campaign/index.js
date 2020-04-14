@@ -5,7 +5,7 @@ import { createFirstMessage } from 'bonde-diagram'
 import { MutationForm, SubmitButton } from 'components/Forms'
 import { Route } from 'services/auth'
 import { FormContentPage } from 'scenes/Dashboard/components'
-import CampaignDiagram from './components/CampaignDiagram'
+// import CampaignDiagram from './components/CampaignDiagram'
 import CampaignForm from './components/CampaignForm'
 import Navigation from './components/Navigation'
 import {
@@ -13,6 +13,8 @@ import {
   chatbotCampaignsQuery,
   insertChatbotCampaignsMutation
 } from '../../graphql'
+
+import Section from 'scenes/components/Section'
 
 const formName = 'CampaignForm'
 
@@ -103,25 +105,28 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
         writeQuery({ chatbot_campaigns: campaigns })
       }
     }
+    console.log('props', formProps)
 
     return (
-      <React.Fragment>
-        <Route
-          exact
-          path={match.path}
-          component={FormContentPage}
-          componentProps={{
-            ...defaultComponentProps,
-            campaign,
-            formProps,
-            fullPage: true,
-            title: campaign.name,
-            render: CampaignDiagram,
-            // eslint-disable-next-line react/display-name
-            actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
-          }}
-        />
-      </React.Fragment>
+      <Route exact path={match.path}>
+        <Section title='Bang Bang 3' navigation={Navigation}>
+          <p>Children</p>
+        </Section>
+      </Route>
+      //   component={FormContentPage}
+      //   componentProps={{
+      //     ...defaultComponentProps,
+      //     campaign,
+      //     formProps,
+      //     fullPage: true,
+      //     title: campaign.name,
+      //     render: () => <h1>Bang Bang 3</h1>,
+      //     // render: CampaignDiagram,
+      //     // eslint-disable-next-line react/display-name
+      //     actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
+      //   }}
+      // />
+
     )
   }
 }
