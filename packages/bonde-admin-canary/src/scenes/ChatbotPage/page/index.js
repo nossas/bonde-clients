@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route, useLocation } from 'react-router'
+import { Route, useLocation, useRouteMatch } from 'react-router'
 import { useSession, useQuery } from 'bonde-core-tools'
 
 import Section from 'scenes/components/Section'
@@ -11,6 +11,7 @@ import {
   ChatbotPersistentMenu,
   FetchChatbotCampaigns
 } from 'scenes/ChatbotPage/components'
+import CampaignPage from 'scenes/ChatbotPage/scenes/Campaign'
 import Navigation from 'scenes/ChatbotPage/page/Navigation'
 
 const Container = ({ children }) => (
@@ -21,6 +22,19 @@ const Container = ({ children }) => (
 
 Container.propTypes = {
   children: PropTypes.any
+}
+
+const CampaignPageRoute = ({ path, campaigns }) => {
+  let match = useRouteMatch(path)
+
+  return match ? (
+    <CampaignPage match={match} chatbotCampaigns={campaigns} />
+  ) : null
+}
+
+CampaignPageRoute.propTypes = {
+  path: PropTypes.string.isRequired,
+  campaigns: PropTypes.array
 }
 
 const ChatbotPage = ({ match }) => {
@@ -36,35 +50,35 @@ const ChatbotPage = ({ match }) => {
   const chatbot = data.chatbots[0]
 
   return (
-    <FetchChatbotCampaigns
-      chatbotId={chatbot.id}
-      queryParams={search}
-      match={match}
-    >
-      {({ campaigns, params }) => (
-        <>
-          <Route exact path={match.path}>
-            <Container>
+    <Container>
+      <FetchChatbotCampaigns
+        chatbotId={chatbot.id}
+        queryParams={search}
+        match={match}
+      >
+        {({ campaigns, params }) => (
+          <>
+            <Route exact path={match.path}>
               <ChatbotCampaignsList
                 match={match}
                 params={params}
                 chatbotCampaigns={campaigns}
               />
-            </Container>
-          </Route>
-          <Route exact path={`${match.path}/menu`}>
-            <Container>
+            </Route>
+            <Route exact path={`${match.path}/menu`}>
               <ChatbotPersistentMenu chatbot={{ ...chatbot, campaigns }} />
-            </Container>
-          </Route>
-          <Route exact path={`${match.path}/settings`}>
-            <Container>
+            </Route>
+            <Route exact path={`${match.path}/settings`}>
               <ChatbotSettingsForm chatbotId={chatbot.id} />
-            </Container>
-          </Route>
-        </>
-      )}
-    </FetchChatbotCampaigns>
+            </Route>
+            <CampaignPageRoute
+              path={`${match.path}/campaign/:campaignId`}
+              campaigns={campaigns}
+            />
+          </>
+        )}
+      </FetchChatbotCampaigns>
+    </Container>
   )
 }
 

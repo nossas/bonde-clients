@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useLocation } from 'react-router'
 import { Flexbox2 as Flexbox, Icon } from 'bonde-styleguide'
 import { ButtonLink } from 'components/Link'
 
-const Navigation = ({ match, location }) => {
-  const baseUrl = location.pathname.replace(match.url, '')
+const Navigation = ({ match }) => {
+  const { pathname } = useLocation()
+  const baseUrl = pathname.replace(match.url, '')
   if (match.params.campaignId === 'new') {
     return (
       <Flexbox horizontal middle>
@@ -27,8 +29,7 @@ const Navigation = ({ match, location }) => {
 
 Navigation.propTypes = {
   // is very important this prop be a reference of outside component match
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired
 }
 
 export default Navigation

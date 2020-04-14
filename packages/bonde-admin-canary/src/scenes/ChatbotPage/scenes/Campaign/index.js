@@ -14,8 +14,6 @@ import {
   insertChatbotCampaignsMutation
 } from '../../graphql'
 
-import Section from 'scenes/components/Section'
-
 const formName = 'CampaignForm'
 
 const Campaign = ({ match, community, chatbotCampaigns, history }) => {
@@ -105,28 +103,25 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
         writeQuery({ chatbot_campaigns: campaigns })
       }
     }
-    console.log('props', formProps)
 
     return (
-      <Route exact path={match.path}>
-        <Section title='Bang Bang 3' navigation={Navigation}>
-          <p>Children</p>
-        </Section>
-      </Route>
-      //   component={FormContentPage}
-      //   componentProps={{
-      //     ...defaultComponentProps,
-      //     campaign,
-      //     formProps,
-      //     fullPage: true,
-      //     title: campaign.name,
-      //     render: () => <h1>Bang Bang 3</h1>,
-      //     // render: CampaignDiagram,
-      //     // eslint-disable-next-line react/display-name
-      //     actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
-      //   }}
-      // />
-
+      <Route
+        exact
+        path={match.path}
+        component={FormContentPage}
+        componentProps={{
+          ...defaultComponentProps,
+          campaign,
+          formProps,
+          fullPage: true,
+          title: campaign.name,
+          // eslint-disable-next-line react/display-name
+          render: () => <h1>Em construção</h1>,
+          // render: CampaignDiagram,
+          // eslint-disable-next-line react/display-name
+          actions: () => <SubmitButton formId={formName}>Salvar</SubmitButton>
+        }}
+      />
     )
   }
 }
