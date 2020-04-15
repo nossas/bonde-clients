@@ -57,7 +57,7 @@ const CommunityPage = ({ match, location }) => {
               <Route exact path={`${match.path}/mobilizers`}>
                 <Mobilizers community={community} />
               </Route>
-              <Redirect from={`${match.path}/settings`} to={`${match.path}/mobilizers`} />
+              <Redirect from={match.path} to={`${match.path}/mobilizers`} />
             </Switch>
           </Col>
         </Row>

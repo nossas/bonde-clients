@@ -61,16 +61,11 @@ BondeSessionProvider.displayName = 'BondeSessionProvider'
 
 const history = createBrowserHistory()
 
-const extraConfig = {
-  chatbot: 'http://admin-canary.bonde.devel:5001/chatbot'
-}
-
 const Root = () => (
   <BondeSessionProvider
     fetchData
     environment={process.env.REACT_APP_ENVIRONMENT || 'development'}
     loading={TextLoading}
-    extraConfig={extraConfig}
   >
     <ProviderRedux>
       <Router history={history}>
