@@ -149,6 +149,7 @@ pipeline:
       - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
       - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
       - REACT_APP_AWS_BUCKET=bonde-assets
+      - REACT_APP_LOGIN_URL=http://accounts.bonde.org/login
       - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
     commands:
       - apk --update add curl
