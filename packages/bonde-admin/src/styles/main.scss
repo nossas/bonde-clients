@@ -1,5 +1,7 @@
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
+@import './font-sets/proxima-nova/font-face.scss';
+@import './font-sets/pf-din/font-face.scss';
 
 @import './basscss_and_override';
 @import './animations.scss';
@@ -18,8 +20,6 @@ $fa-font-path: "~font-awesome/fonts";
 @import './color_schemes/nuestrasciudades.scss';
 @import './color_schemes/ourcities.scss';
 
-@import './font-sets/proxima-nova/font-face.scss';
-@import './font-sets/pf-din/font-face.scss';
 @import './forms.scss';
 
 //

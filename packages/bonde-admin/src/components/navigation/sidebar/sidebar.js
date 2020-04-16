@@ -157,8 +157,8 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
                 crossStorage
                   .del('auth', 'community')
                   .then(() => {
-                    const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
-                    window.location.href = `${domain}/auth/login`
+                    const loginUrl = process.env.REACT_APP_LOGIN_URL || 'http://accounts.bonde.devel:5000/login'
+                    window.location.href = loginUrl
                   })
               })
           }}

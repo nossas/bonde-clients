@@ -15,7 +15,7 @@ class FormField extends React.Component {
       label,
       hint,
       placeholder,
-      meta: { error, valid, touched, dirty },
+      meta: { error, valid, touched },
       inputComponent: InputComponent,
       input,
       showValid,

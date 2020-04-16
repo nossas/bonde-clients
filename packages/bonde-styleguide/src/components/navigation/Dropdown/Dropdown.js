@@ -1,148 +1,132 @@
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Icon from '../../content/Icon/Icon'
-import Spacing from '../../layout/Spacing/Spacing'
+import DropdownList from './ui/DropdownList'
+import DropdownItem from './ui/DropdownItem'
+import DropdownInput from './ui/DropdownInput'
 
-export const Header = styled.div`
-  width: auto;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 900;
-  color: #000;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  justify-content: flex-start;
 
-  & > img {
-    margin-right: 15px;
-  }
-`
-
-const DropdownMenu = styled.div`
-  background-color: #fff;
-  padding: 20px 0;
-  white-space: nowrap;
-  position: absolute;
-  top: calc(100% + 15px);
-  right: 0;
-  z-index: 9;
-  overflow-y: auto;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.45), 0 2px 2px rgba(0, 0, 0, 0.45);
-  max-height: calc(100vh - 30px - 40px);
-  min-width: calc(100% + 15px);
-`
-
-const DropdownMenuArrow = styled.div`
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 8px solid #fff;
-  position: absolute;
-  bottom: -15px;
-  right: 3px;
-`
-
-const DropdownComponent = styled.div`
-  position: relative;
-  display: flex;
-  width: ${props => props.width ? `${props.width}px` : 'auto'};
-
-  &  button {
-    cursor: pointer;
-    color: ${props => props.inverted ? '#000000' : '#FFFFFF'};
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    background: none;
-    border: none;
-    width: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &:active, &:focus {
-      border:none;
-      outline: none;
+const useOutsideAlerter = (ref, onEvent) => {
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      onEvent()
     }
   }
 
-  & button span {
-    margin: 0 10px 0 0;
-    line-height: 1.15;
-    letter-spacing: 0.5px;
-  }
-`
-
-const DropdownTriggerButton = styled.button.attrs(props => ({ type: 'button' }))`
-  height: 100%;
-`
-
-class Dropdown extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { show: false }
-  }
-
-  toggleMenu () {
-    this.setState({ show: !this.state.show })
-  }
-
-  closeMenu () {
-    this.setState({ show: false })
-  }
-
-  render () {
-    const { children, label, icon, width, disabled, inverted } = this.props
-    const show = this.state.show && !disabled
-    const colorStrategy = inverted ? '#000000' : '#FFFFFF'
-
-    return (
-      <DropdownComponent width={width} inverted={inverted}>
-        <React.Fragment>
-          {icon && (
-            <Spacing margin={{ right: 17, top: -2 }}>
-              <Icon name={icon} size={16} color={colorStrategy} />
-            </Spacing>
-          )}
-          <DropdownTriggerButton onClick={this.toggleMenu.bind(this)}>
-            {typeof label === 'string' ? (<span>{label}</span>) : label()}
-            {show ? (
-              <Icon name='angle-right' color={colorStrategy} />
-            ) : (
-              <Icon name='angle-down' color={colorStrategy} />
-            )}
-          </DropdownTriggerButton>
-        </React.Fragment>
-        {show && (
-          <React.Fragment>
-            <DropdownMenu>
-              {React.Children.map(children, child => (
-                React.cloneElement(child, { closeMenu: this.closeMenu.bind(this) })
-              ))}
-            </DropdownMenu>
-            <DropdownMenuArrow />
-          </React.Fragment>
-        )}
-      </DropdownComponent>
-    )
-  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  })
 }
 
+const DropdownFluid = styled.span`
+  display: flex;
+  flex-direction: column;
+`
+
+const DropdownFluidList = styled.div`
+  position: absolute;
+  top: calc(100% + 15px);
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+`
+
+const DropdownFluidInput = styled.div`
+  display: flex;
+  z-index: 2;
+  cursor: pointer;
+`
+
+const DropdownFluidItem = styled.div`
+  display: flex;
+  ${props => props.clickable && `cursor: pointer;`}
+`
+
+const DropdownFluidLayout = styled.div`
+  position: relative;
+`
+
+const Dropdown = ({
+  placeholder,
+  item,
+  list,
+  selectable,
+  onSelect,
+  dropdownInput: DropdownInputUI,
+  dropdownItem: DropdownItemUI,
+  dropdownList: DropdownListUI
+}) => {
+  const [open, setOpen] = useState(false)
+  // click ousite dropdown is close
+  const dropdownRef = useRef(null)
+  useOutsideAlerter(dropdownRef, () => setOpen(false))
+
+  return (
+    <DropdownFluid ref={dropdownRef}>
+      <DropdownFluidInput onClick={() => setOpen(!open)}>
+        <DropdownInputUI
+          selectable={selectable}
+          placeholder={placeholder}
+          selected={item}
+          open={open}
+        />
+      </DropdownFluidInput>
+      <DropdownFluidLayout>
+      {open && (
+        <DropdownFluidList>
+          <DropdownListUI>
+          {list.map((value, index) => {
+            const clickable = typeof value === 'string'
+              ? true : typeof value.clickable === 'undefined'
+              ? true : value.clickable
+            
+            const itemProps = {
+              clickable,
+              onClick: !clickable ? null : () => {
+                onSelect(value)
+                setOpen(false)
+              }
+            }
+
+            return (
+              <DropdownFluidItem key={`dropdown-item-${index}`} {...itemProps}>
+                {typeof value !== 'string' && value.render
+                  ? <value.render value={value} selected={item} />
+                  : <DropdownItemUI clickable value={value} selected={item} />
+                }
+              </DropdownFluidItem>
+            )
+          })}
+          </DropdownListUI>
+        </DropdownFluidList>
+      )}
+      </DropdownFluidLayout>
+    </DropdownFluid>
+  )
+}
+
+const { bool, string, any, array, func } = PropTypes
+
 Dropdown.propTypes = {
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func
-  ]).isRequired,
-  inverted: PropTypes.bool
+  title: string,
+  item: any,
+  items: array.isRequired,
+  selectable: bool.isRequired,
+  onSelect: func,
+  dropdownInput: any,
+  dropdownItem: any,
+  dropdownList: any
 }
 
 Dropdown.defaultProps = {
-  inverted: false
+  selectable: true,
+  items: [],
+  dropdownInput: DropdownInput,
+  dropdownItem: DropdownItem,
+  dropdownList: DropdownList
 }
 
-Dropdown.displayName = 'Dropdown'
-
-/** @component */
 export default Dropdown

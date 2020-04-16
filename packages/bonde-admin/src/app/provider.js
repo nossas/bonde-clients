@@ -43,9 +43,9 @@ class Application extends React.Component {
             return Promise.reject(err)
           }
           const { store } = this.props
-          const { jwtToken } = JSON.parse(authJson)
+          const { token } = JSON.parse(authJson)
           // authenticate on store
-          const auth = { credentials: { 'access-token': jwtToken } }
+          const auth = { credentials: { 'access-token': token } }
           store.dispatch(createAction(authTypes.SIGN_SUCCESS, auth))
 
           // select community on store
@@ -54,16 +54,15 @@ class Application extends React.Component {
             store.dispatch(createAction(communityTypes.REHYDRATE, community))
           }
           // authenticate on context
-          this.setState({ signing: false, signed: true, token: jwtToken })
+          this.setState({ signing: false, signed: true, token })
 
           return Promise.resolve()
         })
         .catch(err => {
           if (err && err.status === 401) {
-            const domain = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://admin-canary.bonde.devel:5002'
+            const domain = process.env.REACT_APP_LOGIN_URL || 'http://accounts.bonde.devel:5000/login'
             // TODO: Fix redirect, removed for change flux to select communities
-            // window.location.href = `${domain}/auth/login?next=${window.location.href}`
-            window.location.href = urljoin(domain, '/auth/login')
+            window.location.href = urljoin(domain, `?next=${window.location.href}`)
           } else {
             console.log('err', err)
             this.setState({ signing: false, signed: false, token: undefined })
