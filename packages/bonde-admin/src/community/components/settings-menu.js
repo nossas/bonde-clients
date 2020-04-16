@@ -42,7 +42,7 @@ export const SettingsMenu = ({ location: { pathname }, community }) => {
         />
         <Tab
           onClick={() => {
-            const url = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, `admin/${community.id}`, 'invitations')
+            const url = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, `/community/mobilizers`)
             window.open(url, '_self')
           }}
           text={
