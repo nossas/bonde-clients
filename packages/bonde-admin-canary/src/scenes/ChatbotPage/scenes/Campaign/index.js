@@ -27,7 +27,7 @@ const Campaign = ({ match, community, chatbotCampaigns, history }) => {
     // use div component to fix Flexbox render
     // eslint-disable-next-line react/display-name
     tabs: (props) => (
-      <div>
+      <div style={{ paddingBottom: '20px' }}>
         <Navigation {...props} match={match} />
       </div>
     )

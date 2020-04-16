@@ -16,7 +16,7 @@ const ContentPage = ({ backward, title, children, tabs, actions, fullPage, fixRe
   }
 
   return (
-    <Flexbox vertical padding={{ top: 13 }}>
+    <Flexbox vertical>
       {(tabs || backward || actions) && (
         <Flexbox horizontal spacing='between' align='middle'>
           {backward ? (
@@ -33,12 +33,7 @@ const ContentPage = ({ backward, title, children, tabs, actions, fullPage, fixRe
           {actions ? actions({ ...rest }) : <div />}
         </Flexbox>
       )}
-      <section
-        style={{
-          height: '100%',
-          padding: fullPage ? '0 0 0 0' : '0 60px 13px'
-        }}
-      >
+      <section style={{ height: '100%' }}>
         {children}
       </section>
     </Flexbox>

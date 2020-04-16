@@ -23,7 +23,7 @@ const ChatbotNavigation = () => {
 
   const isActiveHome = re(
     /^\/chatbot(\/)*$/,
-    /^\/chatbot\/campaign\/(\d)+(\/)*$/
+    /^\/chatbot\/campaign\/(\d|new)+(\/)*$/
   ).test(pathname)
 
   return (
