@@ -154,6 +154,7 @@ pipeline:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
+      - pnpm m i
       - pnpm m run build
     secrets: [ prod_pagarme_key ]
     group: build
