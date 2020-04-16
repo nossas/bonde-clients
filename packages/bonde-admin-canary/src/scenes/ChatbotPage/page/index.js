@@ -24,16 +24,21 @@ Container.propTypes = {
   children: PropTypes.any
 }
 
-const CampaignPageRoute = ({ path, campaigns }) => {
+const CampaignPageRoute = ({ path, campaigns, chatbot }) => {
   let match = useRouteMatch(path)
 
   return match ? (
-    <CampaignPage match={match} chatbotCampaigns={campaigns} />
+    <CampaignPage
+      match={match}
+      chatbotId={chatbot.id}
+      chatbotCampaigns={campaigns}
+    />
   ) : null
 }
 
 CampaignPageRoute.propTypes = {
   path: PropTypes.string.isRequired,
+  chatbot: PropTypes.any.isRequired,
   campaigns: PropTypes.array
 }
 
@@ -73,6 +78,7 @@ const ChatbotPage = ({ match }) => {
             </Route>
             <CampaignPageRoute
               path={`${match.path}/campaign/:campaignId`}
+              chatbot={chatbot}
               campaigns={campaigns}
             />
           </>

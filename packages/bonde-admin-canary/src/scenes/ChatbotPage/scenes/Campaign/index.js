@@ -8,6 +8,7 @@ import { FormContentPage } from 'scenes/Dashboard/components'
 import CampaignDiagram from './components/CampaignDiagram'
 import CampaignForm from './components/CampaignForm'
 import Navigation from './components/Navigation'
+import { useHistory } from 'react-router'
 import {
   updateChatbotCampaignsMutation,
   chatbotCampaignsQuery,
@@ -16,8 +17,8 @@ import {
 
 const formName = 'CampaignForm'
 
-const Campaign = ({ match, community, chatbotCampaigns, history }) => {
-  const chatbotId = Number(match.params.chatbotId)
+const Campaign = ({ match, chatbotId, community, chatbotCampaigns }) => {
+  const history = useHistory()
   const defaultComponentProps = {
     community,
     form: MutationForm,
