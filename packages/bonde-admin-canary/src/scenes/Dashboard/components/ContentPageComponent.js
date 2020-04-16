@@ -16,31 +16,24 @@ const ContentPage = ({ backward, title, children, tabs, actions, fullPage, fixRe
   }
 
   return (
-    <Flexbox vertical padding={{ top: 13 }}>
+    <Flexbox vertical>
       {(tabs || backward || actions) && (
-        <Spacing margin={{ bottom: 13, x: 60 }}>
-          <Flexbox horizontal spacing='between' align='middle'>
-            {backward ? (
-              <ButtonLink flat padding='0!important' style={{ minWidth: '200px' }} {...linkProps}>
-                <Flexbox horizontal align='middle'>
-                  <Spacing margin={{ right: 5, top: 1 }}>
-                    <Icon name='arrow-left' />
-                  </Spacing>
-                  <Title.H5 margin={{ top: 5, bottom: 0 }}>{title}</Title.H5>
-                </Flexbox>
-              </ButtonLink>
-            ) : <div />}
-            {tabs ? tabs({ ...rest }) : <div />}
-            {actions ? actions({ ...rest }) : <div />}
-          </Flexbox>
-        </Spacing>
+        <Flexbox horizontal spacing='between' align='middle'>
+          {backward ? (
+            <ButtonLink flat padding='0!important' style={{ minWidth: '200px' }} {...linkProps}>
+              <Flexbox horizontal align='middle'>
+                <Spacing margin={{ right: 5, top: 1 }}>
+                  <Icon name='arrow-left' />
+                </Spacing>
+                <Title.H5 margin={{ top: 5, bottom: 0 }}>{title}</Title.H5>
+              </Flexbox>
+            </ButtonLink>
+          ) : <div />}
+          {tabs ? tabs({ ...rest }) : <div />}
+          {actions ? actions({ ...rest }) : <div />}
+        </Flexbox>
       )}
-      <section
-        style={{
-          height: '100%',
-          padding: fullPage ? '0 0 0 0' : '0 60px 13px'
-        }}
-      >
+      <section style={{ height: '100%' }}>
         {children}
       </section>
     </Flexbox>

@@ -29,6 +29,10 @@ const Flexbox = styled(({ children, className }) => {
     justify-content: center;
   `}
 
+  ${props => props.align && `
+    align-items: ${props.align};
+  `}
+
   ${props => props.end && `
     align-items: end;
     justify-content: flex-end;

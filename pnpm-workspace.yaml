@@ -1,0 +1,9 @@
+packages:
+  # all packages in subdirs of packages/ and components/
+  - '.'
+  - 'packages/bonde-admin'
+  - 'packages/bonde-admin-canary'
+  - 'packages/bonde-public'
+  - 'packages/bonde-webpage'
+  # exclude packages that are inside test/ directories
+  - '!**/test/**'

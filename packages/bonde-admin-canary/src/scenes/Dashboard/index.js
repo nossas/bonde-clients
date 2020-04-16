@@ -6,7 +6,7 @@ import { AuthProvider } from 'services/auth'
 import { PageLayout, TutorialPageLayout } from 'services/router'
 import { FullPageLayout, ContentPage } from './components'
 // local scenes
-import ChatbotPage from './scenes/Chatbot'
+// import ChatbotPage from './scenes/Chatbot'
 import HomePage from './scenes/Home'
 import SettingsPage from './scenes/Settings'
 import TagsPage from './scenes/Tags'
@@ -41,7 +41,7 @@ const Dashboard = ({ match }) => {
         }}
       />
       {/* Configurações de Chatbot */}
-      <FullPageLayout
+      {/* <FullPageLayout
         path={`${match.path}/:communityId/chatbot/:chatbotId`}
         component={ChatbotPage}
         loading={FullPageLoading}
@@ -51,7 +51,7 @@ const Dashboard = ({ match }) => {
           { name: 'Menu Persistente', to: '/persistent-menu' },
           { name: 'Configurações', to: '/settings' }
         ]}
-      />
+      /> */}
       {/* Configurações de Comunidade */}
       <FullPageLayout
         path={`${match.path}/:communityId/settings`}

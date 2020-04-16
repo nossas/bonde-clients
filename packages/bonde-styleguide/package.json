@@ -5,7 +5,12 @@
   "private": false,
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/runtime": "^7.8.7",
     "babel-plugin-styled-components": "^1.10.6",
     "prop-types": "^15.7.2",
     "recharts": "^1.6.2",
@@ -13,10 +18,10 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "prepare": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
-    "watch": "yarn prepare --watch",
-    "dev": "yarn prepare --watch",
-    "build": "styleguidist build",
+    "build": "cross-env NODE_ENV=production babel src --out-dir dist --copy-files",
+    "prepare": "yarn build",
+    "dev": "yarn build --watch",
+    "build:server": "styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "eject": "react-scripts eject",
     "start": "styleguidist server"
