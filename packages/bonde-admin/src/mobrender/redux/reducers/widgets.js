@@ -9,6 +9,19 @@ export const initialState = {
   error: undefined
 }
 
+const getWidget = (widget) => {
+  if(widget.settings && widget.settings.fields) {
+    return {
+      ...widget,
+      settings: {
+        ...widget.settings,
+        fields: JSON.parse(widget.settings.fields)
+      }
+    }
+  }
+  return widget
+}
+
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case t.SELECT_WIDGET:
@@ -24,7 +37,7 @@ export default (state = initialState, action = {}) => {
       return {...state,
         isLoaded: true,
         fetching: false,
-        data: action.payload
+        data: action.payload.map(getWidget)
       }
     case t.FETCH_WIDGETS_FAILURE:
     case t.FILTER_WIDGETS_FAILURE:
@@ -43,7 +56,7 @@ export default (state = initialState, action = {}) => {
       return {...state,
         saving: false,
         data: state.data.map(
-          w => w.id === action.payload.id ? action.payload : w
+          w => w.id === action.payload.id ? getWidget(action.payload) : w
         )
       }
     case t.UPDATE_WIDGET_FAILURE:
@@ -54,7 +67,7 @@ export default (state = initialState, action = {}) => {
       }
     case t.ADD_WIDGETS_SUCCESS:
       return {...state,
-        data: [...state.data, ...action.payload]
+        data: [...state.data, ...getWidget(action.payload)]
       }
     case t.SET_WIDGET_LIST:
       return { ...state, data: action.payload }
