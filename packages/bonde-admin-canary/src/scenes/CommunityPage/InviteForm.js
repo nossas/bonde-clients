@@ -11,6 +11,7 @@ import {
 } from 'bonde-components'
 import { toast } from 'react-toastify'
 import { useMutation, useSession } from 'bonde-core-tools'
+import SelectField from './SelectField'
 
 const Styles = styled.div`
   width: 100%;
@@ -55,26 +56,31 @@ const InviteMutation = gql`
 
 const InviteForm = ({ onSuccess }) => {
   const [invite] = useMutation(InviteMutation)
-  const { user, community } = useSession()
+  // const { user, community } = useSession()
+  const { community } = useSession()
   const { composeValidators, required, isEmail } = Validators
 
   return (
     <Styles>
       <ConnectedForm
-        onSubmit={async ({ email }, form) => {
+        initialValues={{ role: 2 }}
+        onSubmit={async ({ email, role }, form) => {
           const input = {
-            user_id: user.id,
             community_id: community.id,
             email,
-            // default role to mobilizers
-            role: 2
+            role
           }
+          // console.log('user', { user })
+          // // TODO: CHECK THIS
+          // if (user.admin) {
+          //   input.user_id = user.id
+          // }
 
           const { data } = await invite({ variables: { input } })
           onSuccess(data.insert_invitations.returning)
             .then(() => {
-              form.reset()
               toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS })
+              form.reset()
             })
         }}
       >
@@ -91,6 +97,10 @@ const InviteForm = ({ onSuccess }) => {
                 )
               }
             />
+            <SelectField name='role' label='Função'>
+              <option value={1}>Administrador (a)</option>
+              <option value={2}>Mobilizador (a)</option>
+            </SelectField>
             <Button type='submit' disabled={submitting}>Convidar</Button>
           </InlineFormWrap>
         )}
