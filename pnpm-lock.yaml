@@ -247,7 +247,7 @@ importers:
       apollo-link-context: 1.0.20_graphql@0.13.2
       apollo-link-http: 1.5.17_graphql@0.13.2
       bonde-components: 0.0.2_react-dom@16.13.1+react@16.13.1
-      bonde-core-tools: 0.1.4_39897cbfc2b24151ba16fcee652b3086
+      bonde-core-tools: 0.1.5-alpha.0_39897cbfc2b24151ba16fcee652b3086
       bonde-diagram: 1.1.0-alpha.6_react-dom@16.13.1+react@16.13.1
       bonde-styleguide: 0.16.5-alpha.5_react-dom@16.13.1+react@16.13.1
       chai: 4.2.0
@@ -315,7 +315,7 @@ importers:
       apollo-link-context: ^1.0.8
       apollo-link-http: ^1.5.14
       bonde-components: 0.0.2
-      bonde-core-tools: 0.1.4
+      bonde-core-tools: 0.1.5-alpha.0
       bonde-diagram: 1.1.0-alpha.6
       bonde-styleguide: 0.16.4
       chai: ^4.2.0
@@ -7068,9 +7068,9 @@ packages:
       integrity: sha512-dhEPs72UPbDnAQJ9ZKMNTP6ptJaionhP5cBb541nXPlW60Jepo9RV/a4fX4XWW9CuFNK22krhrj1+rgzifNCsw==
   /bonde-components/0.0.2-alpha.16_react-dom@16.13.1+react@16.13.1:
     dependencies:
-      final-form: 4.19.1
+      final-form: 4.20.0
       react: 16.13.1
-      react-final-form: 6.4.0_final-form@4.19.1+react@16.13.1
+      react-final-form: 6.4.0_final-form@4.20.0+react@16.13.1
       styled-components: 5.1.0_e0769e62e3c98bcdfe1795b4a7453784
     dev: false
     peerDependencies:
@@ -7090,7 +7090,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-vuUvEWqDm+St+y3hnQ7/3wCnC//lL+oSINfcl5232SfK4/zG6txNTCvr/af36LQHOXjZcjQ32jWt55fuhqj1Ww==
-  /bonde-core-tools/0.1.4_39897cbfc2b24151ba16fcee652b3086:
+  /bonde-core-tools/0.1.5-alpha.0_39897cbfc2b24151ba16fcee652b3086:
     dependencies:
       '@apollo/react-hooks': 3.1.5_54b8f67511554ae1ffd497a3dd0c4d88
       '@types/react-router-dom': 5.1.5
@@ -7110,7 +7110,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-49SLYwhQe7fZidwMJq6EEyzed5cofBPUIzcOOWhTvzVWeKaHJzyUkkyCEvx81nOgjmzpmd4ToXda544uxegfTA==
+      integrity: sha512-L7mV58YEmGuswQpPEmDmE+9e0Ssu6uEpcgf2MjYtZGKrV5aFIDjQ2Vv/YzVeTC1U1bgRCQVnz9/gSRxjyTYFfg==
   /bonde-diagram/1.1.0-alpha.6_react-dom@16.13.1+react@16.13.1:
     dependencies:
       '@emotion/core': 10.0.28_react@16.13.1
@@ -10991,12 +10991,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
-  /final-form/4.19.1:
-    dependencies:
-      '@babel/runtime': 7.9.2
-    dev: false
-    resolution:
-      integrity: sha512-C4RldRCUs8YZod91ydtrsT+TOeG3fwU4ip9oBDXhvbWdQ6iXl4cIrTAQkqpWijbnI3XFVA0akV7YTjSFJMJ2uw==
   /final-form/4.20.0:
     dependencies:
       '@babel/runtime': 7.10.2
@@ -18008,18 +18002,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
-  /react-final-form/6.4.0_final-form@4.19.1+react@16.13.1:
-    dependencies:
-      '@babel/runtime': 7.9.2
-      final-form: 4.19.1
-      react: 16.13.1
-      ts-essentials: 6.0.4
-    dev: false
-    peerDependencies:
-      final-form: ^4.19.0
-      react: ^16.8.0
-    resolution:
-      integrity: sha512-M7J7f0pnoj0o8sBq3iG6jsWJEh08pNUyl2D4wBC9SJvCNkGdol2UdyjMiEFYD3rz9LIFzQqFSG0kbRBCadqzhA==
   /react-final-form/6.4.0_final-form@4.20.0+react@16.13.1:
     dependencies:
       '@babel/runtime': 7.9.2

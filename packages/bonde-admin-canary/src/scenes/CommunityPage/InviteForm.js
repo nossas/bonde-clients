@@ -56,8 +56,7 @@ const InviteMutation = gql`
 
 const InviteForm = ({ onSuccess }) => {
   const [invite] = useMutation(InviteMutation)
-  // const { user, community } = useSession()
-  const { community } = useSession()
+  const { user, community } = useSession()
   const { composeValidators, required, isEmail } = Validators
 
   return (
@@ -70,18 +69,25 @@ const InviteForm = ({ onSuccess }) => {
             email,
             role
           }
-          // console.log('user', { user })
-          // // TODO: CHECK THIS
-          // if (user.admin) {
-          //   input.user_id = user.id
-          // }
+          if (user.isAdmin) {
+            input.user_id = user.id
+          }
 
-          const { data } = await invite({ variables: { input } })
-          onSuccess(data.insert_invitations.returning)
-            .then(() => {
-              toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS })
-              form.reset()
-            })
+          try {
+            const { data } = await invite({ variables: { input } })
+  
+            onSuccess(data.insert_invitations.returning)
+              .then(() => {
+                toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS })
+                form.reset()
+              })
+          } catch ({ graphQLErrors, ...errors }) {
+            if (graphQLErrors.filter(err => err.extensions.code === 'permission-error').length > 0) {
+              toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR })
+            } else {
+              console.error({ graphQLErrors, ...errors })
+            }
+          }
         }}
       >
         {({ submitting }) => (
