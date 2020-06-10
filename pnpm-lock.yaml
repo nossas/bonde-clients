@@ -266,6 +266,7 @@ importers:
       i18next-browser-languagedetector: 2.2.4
       i18next-xhr-backend: 1.5.1
       lowdb: 1.0.0
+      moment: 2.26.0
       node-sass: 4.13.1
       prop-types: 15.7.2
       query-string: 5.1.1
@@ -343,6 +344,7 @@ importers:
       i18next-xhr-backend: ^1.5.1
       jsdom: ^11.11.0
       lowdb: ^1.0.0
+      moment: ^2.26.0
       node-sass: ^4.12.0
       nyc: ^14.1.1
       prop-types: ^15.7.2
@@ -15094,6 +15096,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-0R/3FvjIGH3eEuG17ccFPk117XL2rWxatr81a57D+r/x2uTYZRbdZ4oVidEUMh2W2TJDa7MdAb12Lm2/qrKajg==
+  /moment/2.26.0:
+    dev: false
+    resolution:
+      integrity: sha512-oIixUO+OamkUkwjhAVE18rAMfRJNsNe/Stid/gwHSOfHrOtw9EhAY2AHvdKZ/k/MggcYELFCJz/Sn2pL8b8JMw==
   /moo/0.5.1:
     resolution:
       integrity: sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w==
