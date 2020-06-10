@@ -1,19 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Header, Button } from 'bonde-components'
+import { Header } from 'bonde-components'
 import moment from 'moment'
 import Table, { Styles } from './Table'
+import Role from './Role'
+import Resend from './Resend'
 
-const Expired = ({ data }) => {
-  moment.locale()
-  const relative = moment(data.expires).endOf('day').fromNow();
-  if (relative.indexOf('ago') > -1) {
-    return <Button dark type='button'>Reenviar</Button>
+import 'moment/locale/pt-br'
+
+const Expired = (refetch) => ({ row: { original: data } }) => {
+  const relative = moment(data.expires)
+    .locale('pt-br')
+    .endOf('day')
+    .fromNow()
+
+  if (relative.indexOf('há') > -1) {
+    return <Resend data={data} refetch={refetch} />
   }
-  return relative;
+  return relative
 }
 
-function App({ data: defaultData }) {
+const Timestamp = ({ row: { original } }) => {
+  return moment(original.created_at)
+    .locale('pt-br')
+    .format('llll')
+}
+
+function App ({ data: defaultData, refetch }) {
   // { "user_id": 152, "created_at": "2020-01-08T12:17:44.304143", "role": 2, "email": "diego@dorgam.com.br", "expired": true, "expires": "2020-01-11T00:00:00", "__typename": "invitations" }
   const columns = React.useMemo(
     () => [
@@ -26,8 +39,7 @@ function App({ data: defaultData }) {
         Header: <Header.h5>Função</Header.h5>,
         accessor: 'role',
         width: 100,
-        Cell: ({ row: { original } }) =>
-          original.role === 2 ? 'Mobilizador(a)' : 'Administrador'
+        Cell: Role
       },
       {
         Header: <Header.h5>Convidado</Header.h5>,
@@ -39,18 +51,16 @@ function App({ data: defaultData }) {
         accessor: 'created_at',
         minWidth: 100,
         width: 200,
-        Cell: ({ row: { original } }) => new Date(original.created_at).toISOString().slice(0, 10)
+        Cell: Timestamp
       },
       {
         Header: <Header.h5>Expira em</Header.h5>,
         accessor: 'expires',
         minWidth: 100,
-        Cell: ({ row: { original } }) => {
-          return <Expired data={original} />
-        }
+        Cell: Expired(refetch)
       }
     ],
-    []
+    [refetch]
   )
 
   return (
@@ -61,7 +71,8 @@ function App({ data: defaultData }) {
 }
 
 App.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  refetch: PropTypes.func
 }
 
 export default App

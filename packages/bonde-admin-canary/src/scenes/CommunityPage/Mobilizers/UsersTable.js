@@ -5,10 +5,8 @@ import { Header, Button, Icon } from 'bonde-components'
 import { useMutation } from 'bonde-core-tools'
 import gql from 'graphql-tag'
 import Table, { Styles } from './Table'
-
-function DeleteException(any) {
-  return any
-}
+import Role from './Role'
+import DeleteException from './DeleteException'
 
 const DeleteCommunityUsersMutation = gql`
   mutation DeleteCommunityUsers($id: Int!) {
@@ -23,7 +21,7 @@ const DeleteCommunityUsersMutation = gql`
   }
 `
 
-const Delete = ({ data: { id, user }, refetch}) => {
+const Delete = ({ row: { original: { id, user } }, refetch }) => {
   const [deleteCommunityUsers] = useMutation(DeleteCommunityUsersMutation)
 
   return (
@@ -54,8 +52,14 @@ const Delete = ({ data: { id, user }, refetch}) => {
   )
 }
 
+Delete.propTypes = {
+  row: PropTypes.any.isRequired,
+  refetch: PropTypes.func
+}
 
-function App({ data: defaultData, refetch }) {
+const createDeleteButton = (refetch) => (props) => <Delete {...props} refetch={refetch} />
+
+function UsersTable ({ data: defaultData, refetch }) {
   const columns = React.useMemo(
     () => [
       {
@@ -72,16 +76,13 @@ function App({ data: defaultData, refetch }) {
         Header: <Header.h5>Função</Header.h5>,
         accessor: 'role',
         width: 100,
-        Cell: ({ row: { original } }) =>
-          original.role === 2 ? 'Mobilizador(a)' : 'Administrador'
+        Cell: Role
       },
       {
         Header: <Header.h5>Ações</Header.h5>,
         accessor: 'id',
         minWidth: 100,
-        Cell: ({ row: { original } }) => {
-          return <Delete data={original} refetch={refetch} />
-        }
+        Cell: createDeleteButton(refetch)
       }
     ],
     [refetch]
@@ -94,9 +95,9 @@ function App({ data: defaultData, refetch }) {
   )
 }
 
-App.propTypes = {
+UsersTable.propTypes = {
   data: PropTypes.array.isRequired,
   refetch: PropTypes.func
 }
 
-export default App
+export default UsersTable

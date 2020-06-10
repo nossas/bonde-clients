@@ -6,7 +6,7 @@ import {
   Button,
   ConnectedForm,
   InputField,
-  Validators,
+  Validators
   // Hint
 } from 'bonde-components'
 
@@ -48,7 +48,7 @@ const CommunityForm = () => {
   const [insertCommunity] = useMutation(InsertCommunityMutation)
   const { user } = useSession()
 
-  const { required } = Validators;
+  const { required } = Validators
   const initialValues = {
     community_users: {
       data: {

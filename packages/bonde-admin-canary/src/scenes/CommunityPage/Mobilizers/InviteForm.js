@@ -34,7 +34,7 @@ const InlineFormWrap = styled.div`
   }
 `
 
-const InviteMutation = gql`
+export const InviteMutation = gql`
   mutation Invite ($input: [invitations_insert_input!]!) {
     insert_invitations (
       objects: $input
@@ -75,7 +75,7 @@ const InviteForm = ({ onSuccess }) => {
 
           try {
             const { data } = await invite({ variables: { input } })
-  
+
             onSuccess(data.insert_invitations.returning)
               .then(() => {
                 toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS })

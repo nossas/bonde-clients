@@ -15,6 +15,7 @@ const InvitationsQuery = gql`
       order_by: { created_at: desc_nulls_last }
     ) {
       nodes {
+        id
         user {
           first_name
           email
@@ -40,6 +41,7 @@ const InvitationsQuery = gql`
           email
         }
         role
+        community_id
       }
       aggregate {
         count
@@ -94,10 +96,12 @@ const FetchInvitations = ({ community }) => {
     }
   } = data
 
+  const onRefetch = () => refetch(variables)
+
   return (
     <Styles>
       <Header.h3>Convide um mobilizador</Header.h3>
-      <InviteForm onSuccess={() => refetch(variables)} />
+      <InviteForm onSuccess={onRefetch} />
       <Flex>
         <Header.h5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
           {`Mobilizadores (${communityUsersCount})`}
@@ -106,8 +110,8 @@ const FetchInvitations = ({ community }) => {
           {`Convites (${invitationsCount})`}
         </Header.h5>
       </Flex>
-      {menu === 1 && <UsersTable data={communityUsers} refetch={() => refetch(variables)} />}
-      {menu === 2 && <InvitationsTable data={invitations} />}
+      {menu === 1 && <UsersTable data={communityUsers} refetch={onRefetch} />}
+      {menu === 2 && <InvitationsTable data={invitations} refetch={onRefetch} />}
     </Styles>
   )
 }
