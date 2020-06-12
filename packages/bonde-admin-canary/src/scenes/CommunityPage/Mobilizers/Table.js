@@ -12,16 +12,16 @@ export const Styles = styled.div`
   width: 100%;
   padding: 0;
   background-color: #fff;
-  ${''}
+  box-shadow: 0 10px 20px -7px rgba(0,0,0,0.05);
+  padding: 0 0 20px;
+
   display: block;
-  ${''}
   overflow: auto;
 
   .table {
     border-spacing: 0;
 
     .thead {
-      ${''}
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -30,8 +30,13 @@ export const Styles = styled.div`
       }
     }
 
+    .th {
+      h5 {
+        text-transform: uppercase;
+      }
+    }
+
     .tbody {
-      ${''}
       overflow-y: scroll;
       overflow-x: hidden;
       ${props => props.height && `height: ${props.height}`};

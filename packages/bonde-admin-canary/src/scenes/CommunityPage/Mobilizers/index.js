@@ -69,7 +69,7 @@ const Flex = styled.div`
   }
 
   ${Header.h5}.active {
-    border-bottom: 2px solid #ee0099;
+    color: #ee0099;
   }
 `
 
@@ -100,18 +100,18 @@ const FetchInvitations = ({ community }) => {
 
   return (
     <Styles>
-      <Header.h3>Convide um mobilizador</Header.h3>
+      <Header.h3>Convidar um mobilizador(a)</Header.h3>
       <InviteForm onSuccess={onRefetch} />
       <Flex>
         <Header.h5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
-          {`Mobilizadores (${communityUsersCount})`}
-        </Header.h5>
-        <Header.h5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
           {`Convites (${invitationsCount})`}
         </Header.h5>
+        <Header.h5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
+          {`Mobilizadores (${communityUsersCount})`}
+        </Header.h5>
       </Flex>
-      {menu === 1 && <UsersTable data={communityUsers} refetch={onRefetch} />}
-      {menu === 2 && <InvitationsTable data={invitations} refetch={onRefetch} />}
+      {menu === 1 && <InvitationsTable data={invitations} refetch={onRefetch} />}
+      {menu === 2 && <UsersTable data={communityUsers} refetch={onRefetch} />}
     </Styles>
   )
 }

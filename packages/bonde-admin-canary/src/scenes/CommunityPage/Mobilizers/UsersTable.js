@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { Header, Button, Icon } from 'bonde-components'
+import { Header, Link, Icon } from 'bonde-components'
+import styled from 'styled-components'
 import { useMutation } from 'bonde-core-tools'
 import gql from 'graphql-tag'
 import Table, { Styles } from './Table'
@@ -21,34 +22,41 @@ const DeleteCommunityUsersMutation = gql`
   }
 `
 
+const MenuStyles = styled.div`
+  a {
+    font-weight: bold;
+  }
+`
+
 const Delete = ({ row: { original: { id, user } }, refetch }) => {
   const [deleteCommunityUsers] = useMutation(DeleteCommunityUsersMutation)
 
   return (
-    <Button
-      dark
-      type='button'
-      onClick={async () => {
-        try {
-          const { data } = await deleteCommunityUsers({ variables: { id } })
-          if (data.delete_community_users.returning.length > 0) {
-            toast(`${user.first_name} removido com sucesso.`, { type: toast.TYPE.SUCCESS })
-            return await refetch()
+    <MenuStyles>
+      <Link
+        href="#"
+        onClick={async () => {
+          try {
+            const { data } = await deleteCommunityUsers({ variables: { id } })
+            if (data.delete_community_users.returning.length > 0) {
+              toast(`${user.first_name} removido com sucesso.`, { type: toast.TYPE.SUCCESS })
+              return await refetch()
+            }
+            throw new DeleteException({
+              graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
+            })
+          } catch ({ graphQLErrors, ...errors }) {
+            if (graphQLErrors && graphQLErrors.filter(err => err.extensions.code === 'validation-failed').length > 0) {
+              toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR })
+            } else {
+              console.error({ graphQLErrors, ...errors })
+            }
           }
-          throw new DeleteException({
-            graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
-          })
-        } catch ({ graphQLErrors, ...errors }) {
-          if (graphQLErrors && graphQLErrors.filter(err => err.extensions.code === 'validation-failed').length > 0) {
-            toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR })
-          } else {
-            console.error({ graphQLErrors, ...errors })
-          }
-        }
-      }}
-    >
-      <Icon name='Close' size='small' /> Remover
-    </Button>
+        }}
+      >
+        <Icon name='Close' size='small' /> Excluir
+      </Link>
+    </MenuStyles>
   )
 }
 

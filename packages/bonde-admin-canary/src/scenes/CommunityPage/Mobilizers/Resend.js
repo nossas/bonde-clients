@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { Button } from 'bonde-components'
+import { Link } from 'bonde-components'
 import gql from 'graphql-tag'
 import { useMutation, useSession } from 'bonde-core-tools'
+import styled from 'styled-components'
 import { InviteMutation } from './InviteForm'
 import DeleteException from './DeleteException'
 
@@ -14,6 +15,12 @@ const DeleteInviteMutation = gql`
         id
       }
     }
+  }
+`
+
+const Styles = styled.div`
+  a {
+    font-weight: bold;
   }
 `
 
@@ -54,7 +61,11 @@ const Resend = ({ data: { id, email, role }, refetch }) => {
     }
   }
 
-  return <Button dark type='button' onClick={onClick}>Reenviar</Button>
+  return (
+    <Styles>
+      <Link href="#" onClick={onClick}>Reenviar</Link>
+    </Styles>
+  )
 }
 
 Resend.propTypes = {

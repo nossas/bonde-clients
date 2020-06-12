@@ -23,7 +23,7 @@ const Expired = (refetch) => ({ row: { original: data } }) => {
 const Timestamp = ({ row: { original } }) => {
   return moment(original.created_at)
     .locale('pt-br')
-    .format('llll')
+    .format('DD/MM/YYYY')
 }
 
 function App ({ data: defaultData, refetch }) {
@@ -31,8 +31,8 @@ function App ({ data: defaultData, refetch }) {
   const columns = React.useMemo(
     () => [
       {
-        Header: <Header.h5>Solicitante</Header.h5>,
-        accessor: 'user.email',
+        Header: <Header.h5>Email</Header.h5>,
+        accessor: 'email',
         minWidth: 350
       },
       {
@@ -42,9 +42,9 @@ function App ({ data: defaultData, refetch }) {
         Cell: Role
       },
       {
-        Header: <Header.h5>Convidado</Header.h5>,
-        accessor: 'email',
-        minWidth: 350
+        Header: <Header.h5>Enviado por</Header.h5>,
+        accessor: 'user.email',
+        minWidth: 300
       },
       {
         Header: <Header.h5>Data de envio</Header.h5>,
