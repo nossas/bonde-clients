@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { Loading, Header } from 'bonde-components'
-import { useQuery } from 'bonde-core-tools'
+import { useQuery, useSession } from 'bonde-core-tools'
 import UsersTable from './UsersTable'
 import InvitationsTable from './InvitationsTable'
 import InviteForm from './InviteForm'
@@ -35,6 +35,7 @@ const InvitationsQuery = gql`
       nodes {
         id
         user {
+          id
           avatar
           first_name
           last_name
@@ -77,6 +78,7 @@ const FetchInvitations = ({ community }) => {
   const variables = { communityId: community.id }
   const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables })
   const [menu, setMenu] = useState(1)
+  const { user } = useSession()
 
   if (loading) return <Loading />
   if (error) return <div>Error</div>
@@ -98,10 +100,21 @@ const FetchInvitations = ({ community }) => {
 
   const onRefetch = () => refetch(variables)
 
+  // Check if permissions on frontend
+  let isCommunityAdmin = user.isAdmin
+  if (!isCommunityAdmin) {
+    isCommunityAdmin = communityUsers.filter(c => c.user.id === user.id)[0].role === 1
+  }
+
+  const tableProps = {
+    refetch: onRefetch,
+    isCommunityAdmin
+  }
+
   return (
     <Styles>
       <Header.h3>Convidar um mobilizador(a)</Header.h3>
-      <InviteForm onSuccess={onRefetch} />
+      <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       <Flex>
         <Header.h5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
           {`Convites (${invitationsCount})`}
@@ -110,8 +123,8 @@ const FetchInvitations = ({ community }) => {
           {`Mobilizadores (${communityUsersCount})`}
         </Header.h5>
       </Flex>
-      {menu === 1 && <InvitationsTable data={invitations} refetch={onRefetch} />}
-      {menu === 2 && <UsersTable data={communityUsers} refetch={onRefetch} />}
+      {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
+      {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}
     </Styles>
   )
 }

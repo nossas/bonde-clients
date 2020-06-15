@@ -54,7 +54,7 @@ const Delete = ({ row: { original: { id, user } }, refetch }) => {
           }
         }}
       >
-        <Icon name='Close' size='small' /> Excluir
+        <Icon name='Trash' size='small' /> Excluir
       </Link>
     </MenuStyles>
   )
