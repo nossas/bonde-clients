@@ -2,7 +2,7 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 import gql from 'graphql-tag'
 import urljoin from 'url-join'
-import { Flexbox2 as Flexbox, Input } from 'bonde-styleguide'
+import { Flexbox2 as Flexbox, Input, Select } from 'bonde-styleguide'
 import { MutationForm, Field, FormField, SubmitButton } from 'components/Forms'
 import { Auth } from 'services/auth'
 import { isEmail, required } from 'services/validations'
@@ -66,6 +66,16 @@ const InviteForm = ({ community }) => {
                     isEmail('invalid email')
                   ]}
                 />
+                <Field
+                  name='input.role'
+                  label='Enviar convite para:'
+                  placeholder='Insira aqui o e-mail de cadastro de quem quiser convidar'
+                  component={FormField}
+                  inputComponent={Select}
+                >
+                  <option value='2'>Mobilizador</option>
+                  <option value='1'>Administrador</option>
+                </Field>
               </div>
               <SubmitButton formId={FORM_ID}>Convidar</SubmitButton>
             </Flexbox>

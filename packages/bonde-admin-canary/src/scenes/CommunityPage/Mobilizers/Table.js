@@ -7,21 +7,21 @@ import {
   useFlexLayout
   // useRowSelect,
 } from 'react-table'
-import { Header } from 'bonde-components'
 
-const Styles = styled.div`
+export const Styles = styled.div`
   width: 100%;
   padding: 0;
-  ${''}
+  background-color: #fff;
+  box-shadow: 0 10px 20px -7px rgba(0,0,0,0.05);
+  padding: 0 0 20px;
+
   display: block;
-  ${''}
   overflow: auto;
 
   .table {
     border-spacing: 0;
 
     .thead {
-      ${''}
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -30,24 +30,21 @@ const Styles = styled.div`
       }
     }
 
+    .th {
+      h5 {
+        text-transform: uppercase;
+      }
+    }
+
     .tbody {
-      ${''}
       overflow-y: scroll;
       overflow-x: hidden;
-      height: ${props => props.height};
+      ${props => props.height && `height: ${props.height}`};
 
       .th, .td {
         padding: 0.7rem;
         margin: auto;
-
         background-color: #fff;
-
-        :first-child {
-          border-left: 1px solid #c7c7c7;
-        }
-        :last-child {
-          border-right: 1px solid #c7c7c7;
-        }
       }
 
       &::-webkit-scrollbar {
@@ -60,6 +57,10 @@ const Styles = styled.div`
         border-style: solid;
         border-color: transparent;
         border-image: initial;
+      }
+
+      .tr {
+        border-bottom: 1px solid #c7c7c74a;
       }
     }
 
@@ -99,10 +100,6 @@ const Styles = styled.div`
     }
   }
 `
-
-Styles.defaultProps = {
-  height: '500px'
-}
 
 const headerProps = (props, { column }) => getStyles(props, column.align)
 
@@ -243,61 +240,4 @@ Table.propTypes = {
   data: PropTypes.array.isRequired
 }
 
-function App ({ data: defaultData }) {
-  // { "user_id": 152, "created_at": "2020-01-08T12:17:44.304143", "role": 2, "email": "diego@dorgam.com.br", "expired": true, "expires": "2020-01-11T00:00:00", "__typename": "invitations" }
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: <Header.h5>Solicitante</Header.h5>,
-        accessor: 'user.email',
-        minWidth: 350
-      },
-      {
-        Header: <Header.h5>Função</Header.h5>,
-        accessor: 'role',
-        width: 100,
-        Cell: ({ row: { original } }) =>
-          original.role === 2 ? 'Mobilizador(a)' : 'Administrador'
-      },
-      {
-        Header: <Header.h5>Convidado</Header.h5>,
-        accessor: 'email',
-        minWidth: 350
-      },
-      {
-        Header: <Header.h5>Data de envio</Header.h5>,
-        accessor: 'created_at',
-        minWidth: 100,
-        width: 200,
-        Cell: ({ row: { original } }) => new Date(original.created_at).toISOString().slice(0, 10)
-      },
-      {
-        Header: <Header.h5>Status</Header.h5>,
-        accessor: 'expired',
-        minWidth: 100,
-        Cell: ({ row: { original } }) => {
-          // CHANGE CONVITE FIELDS STATUS
-          const { expires, expired } = original
-          return expired
-            ? 'Convite aceito'
-            : new Date() > new Date(expires)
-              ? 'Convite expirado'
-              : 'Aguardando confirmação'
-        }
-      }
-    ],
-    []
-  )
-
-  return (
-    <Styles>
-      <Table columns={columns} data={defaultData} />
-    </Styles>
-  )
-}
-
-App.propTypes = {
-  data: PropTypes.array.isRequired
-}
-
-export default App
+export default Table

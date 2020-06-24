@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
 import { createBrowserHistory } from 'history'
 import { Router, Redirect, Switch, Route, useLocation } from 'react-router'
-import { BondeSessionProvider, BondeSessionUI } from 'bonde-core-tools'
+import { BondeSessionProvider, BondeSessionUI, useSession } from 'bonde-core-tools'
 import { Loading } from 'bonde-components'
 import { ProviderRedux } from 'services/redux'
 // Routes
@@ -12,12 +12,21 @@ import { ProviderRedux } from 'services/redux'
 import HomePage from 'scenes/HomePage'
 import ChatbotPage from 'scenes/ChatbotPage/page'
 import CommunityPage from 'scenes/CommunityPage'
+import SuperuserPage from 'scenes/SuperuserPage'
 // import SettingsPage from './scenes/Dashboard/scenes/Settings'
 // import TagsPage from './scenes/Dashboard/scenes/Tags'
 // import InvitationsPage from './scenes/Dashboard/scenes/Invitations'
 import { NotFound } from 'components'
 // Styles
 import 'react-toastify/dist/ReactToastify.css'
+
+const SuperRoute = (props) => {
+  const { user } = useSession()
+  if (user.isAdmin) {
+    return <Route {...props} />
+  }
+  return <h2>Permission Denied</h2>
+}
 
 const PagesRoute = () => {
   const location = useLocation()
@@ -35,6 +44,7 @@ const PagesRoute = () => {
         <Route exact path='/' component={HomePage} />
         <Route path='/chatbot' component={ChatbotPage} />
         <Route path='/community' component={CommunityPage} />
+        <SuperRoute path='/superuser' component={SuperuserPage} />
         <Redirect from='/admin' to='/' />
         <Route component={NotFound} />
       </Switch>
