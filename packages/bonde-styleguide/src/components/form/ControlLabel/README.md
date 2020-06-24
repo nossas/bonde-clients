@@ -1,3 +1,0 @@
-```js
-<ControlLabel>Label</ControlLabel>
-```
