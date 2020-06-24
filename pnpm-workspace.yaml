@@ -3,7 +3,6 @@ packages:
   - '.'
   - 'packages/bonde-admin'
   - 'packages/bonde-admin-canary'
-  - 'packages/bonde-public'
   - 'packages/bonde-webpage'
   # exclude packages that are inside test/ directories
   - '!**/test/**'

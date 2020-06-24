@@ -31,7 +31,7 @@
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.16.0",
     "basscss-sass": "^4.0.0",
-    "bonde-webpage": "workspace:0.16.4",
+    "bonde-webpage": "workspace:0.16.5",
     "chai": "^4.2.0",
     "classnames": "^2.2.6",
     "cpf_cnpj": "^0.2.0",
