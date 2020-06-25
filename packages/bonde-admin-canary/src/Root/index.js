@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ToastContainer } from 'react-toastify'
 import { createBrowserHistory } from 'history'
-import { Router, Redirect, Switch, Route, useLocation } from 'react-router'
+import { BrowserRouter as Router, Redirect, Switch, Route, useLocation } from 'react-router-dom';
 import { BondeSessionProvider, BondeSessionUI, useSession } from 'bonde-core-tools'
 import { Loading } from 'bonde-components'
 import { ProviderRedux } from 'services/redux'
