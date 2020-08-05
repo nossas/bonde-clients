@@ -1,8 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import styled from "styled-components"
 import { Text } from "bonde-components"
+
+import logo from './logo.svg';
+import './App.css';
 
 const AppHeader = styled.header`
   background-color: #282c34;
@@ -17,22 +20,26 @@ const AppHeader = styled.header`
 
 function App() {
   return (
-    <div className="App">
-      <AppHeader>
-        <img src={logo} className="App-logo" alt="logo" />
-        <Text>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </Text>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </AppHeader>
-    </div>
+    <Router>
+      <Route exact path="/">
+        <div className="App">
+          <AppHeader>
+            <img src={logo} className="App-logo" alt="logo" />
+            <Text>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </Text>
+            <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn React
+            </a>
+          </AppHeader>
+        </div>
+      </Route>
+    </Router>
   );
 }
 
