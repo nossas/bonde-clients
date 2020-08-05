@@ -18,7 +18,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2"
+    "typescript": "3.8"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
-    "eslint": "^7.6.0",
+    "eslint": "6.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
