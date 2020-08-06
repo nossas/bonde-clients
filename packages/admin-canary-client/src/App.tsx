@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BondeSessionProvider } from "bonde-core-tools";
+import { useTranslation, Trans } from "react-i18next";
 
 import styled from "styled-components";
 import { Loading, Text } from "bonde-components";
@@ -9,7 +10,6 @@ import logo from "./logo.svg";
 import "./App.css";
 
 const AppHeader = styled.header`
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -42,6 +42,12 @@ function App() {
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
 
+  const { t, i18n } = useTranslation("app");
+
+  const changeLanguage = (locale: string) => {
+    i18n.changeLanguage(locale);
+  };
+
   return (
     <BondeSessionProvider
       fetchData
@@ -54,7 +60,9 @@ function App() {
             <AppHeader>
               <img src={logo} className="App-logo" alt="logo" />
               <Text>
-                Edit <code>src/App.tsx</code> and save to reload.
+                <Trans i18nKey="app:reload">
+                  Edite <code>src/App.tsx</code> e salve para recarregar
+                </Trans>
               </Text>
               <a
                 className="App-link"
@@ -62,8 +70,11 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn React
+                {t("learn")}
               </a>
+              <button onClick={() => changeLanguage("en")}>EN</button>
+              <button onClick={() => changeLanguage("es")}>ES</button>
+              <button onClick={() => changeLanguage("pt-BR")}>PT-BR</button>
             </AppHeader>
           </div>
         </Route>
@@ -72,4 +83,8 @@ function App() {
   );
 }
 
-export default App;
+export default () => (
+  <React.Suspense fallback={Loading}>
+    <App />
+  </React.Suspense>
+);
