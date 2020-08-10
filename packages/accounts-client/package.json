@@ -6,8 +6,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . --fix --ext js,ts,tsx"
-  },
-  "dependencies": {
-    "react-final-form": "^6.5.1"
   }
 }

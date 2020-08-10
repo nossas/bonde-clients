@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import {
   Button,
-  Form,
+  ConnectedForm,
   InputField,
   Link as LinkStyled,
   Validators,
   Row,
   Col
 } from 'bonde-components';
-import { Form as FinalForm } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -31,9 +30,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
   return (
     <Styles>
-      <FinalForm onSubmit={onSubmit}>
-        {({ handleSubmit, submitting }: any) => (
-          <Form onSubmit={handleSubmit}>
+      <ConnectedForm onSubmit={onSubmit}>
+        {({ submitting }: any) => (
+          <>
             <InputField
               name='email'
               label={t('fields.email.label')}
@@ -54,7 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               )}
             />
             <Row spacing='between'>
-              <Col size={[3, 3, 12, 12]}>
+              <Col size={[4, 4, 12, 12]}>
                 <LinkStyled component={Link} to='/forget-password'>
                   {t('links.forgetPassword')}
                 </LinkStyled>
@@ -65,9 +64,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 </Button>
               </Col>
             </Row>
-          </Form>
+          </>
         )}
-      </FinalForm>
+      </ConnectedForm>
     </Styles>
   );
 };

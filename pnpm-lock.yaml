@@ -67,7 +67,9 @@ importers:
       serve: ^11.3.2
       styled-components: ^5.1.1
       typescript: '3.8'
-  packages/admin-canary-client:
+  packages/accounts-client:
+    specifiers: {}
+  packages/example-client:
     specifiers: {}
   packages/redes-client:
     specifiers: {}
@@ -2278,6 +2280,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-vv950slTF5UZ5eDOf13b8qC1SD4rTvkqg3HfaUKzr17U97oeJZAa+dUaIHn0QoOJflNTIt6Pem9MmapULs9dkA==
+  /@types/react/16.9.46:
+    dependencies:
+      '@types/prop-types': 15.7.3
+      csstype: 3.0.2
+    dev: false
+    resolution:
+      integrity: sha512-dbHzO3aAq1lB3jRQuNpuZ/mnu+CdD3H0WVaaBQA8LTT3S33xhVBUj232T8M3tAhSWJs/D/UqORYUlJNl/8VQZg==
   /@types/stack-utils/1.0.1:
     dev: false
     resolution:
@@ -3519,7 +3528,7 @@ packages:
   /bonde-core-tools/0.1.6:
     dependencies:
       '@apollo/client': 3.1.3_graphql@15.3.0+react@16.13.1
-      '@types/react': 16.9.45
+      '@types/react': 16.9.46
       '@types/react-router-dom': 5.1.5
       axios: 0.19.2
       bonde-components: 0.0.2-alpha.16_react-dom@16.13.1+react@16.13.1
