@@ -21,10 +21,11 @@ const isLocalhost = Boolean(
 );
 
 type Config = {
-  onSuccess?: (registration: ServiceWorkerRegistration) => void;
-  onUpdate?: (registration: ServiceWorkerRegistration) => void;
+  onSuccess?: (registration: ServiceWorkerRegistration) => void
+  onUpdate?: (registration: ServiceWorkerRegistration) => void
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function register(config?: Config) {
   if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -133,6 +134,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
     });
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function unregister() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready

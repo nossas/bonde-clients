@@ -1,5 +1,5 @@
 {
-  "name": "redes-client",
+  "name": "example-client",
   "scripts": {
     "start": "serve -s build",
     "dev": "react-scripts start",
