@@ -1,21 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { BondeSessionProvider } from "bonde-core-tools";
+import { BondeSessionProvider as Session } from "bonde-core-tools";
 import { Loading } from "bonde-components";
+import { useTranslation } from "react-i18next";
 // Scenes to router
 import Home from './scenes/Home';
 
-type SessionLoadingProps = {
+type AppLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module"
 };
 
-const SessionLoading = ({ fetching }: SessionLoadingProps) => {
+const AppLoading = ({ fetching }: AppLoadingProps) => {
+  const { t } = useTranslation("loading");
+
   const messages = {
-    session: "Carregando sessão...",
-    user: "Carregando usuário...",
-    communities: "Carregando communities...",
-    redirect: "Redirecionando para autenticação...",
-    module: "Redirecionando para módulo...",
+    session: t("session"),
+    user: t("user"),
+    communities: t("communities"),
+    // TODO: change this implementation
+    redirect: t("redirect"),
+    module: t("module"),
   };
 
   return <Loading fullsize message={messages[fetching]} />;
@@ -24,24 +28,18 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 type Environment = "development" | "staging" | "production";
 
 function App() {
-  const environment: string =
-    process.env.REACT_APP_ENVIRONMENT || "development";
+  const envConfig: Environment =
+    (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
 
   return (
-    <BondeSessionProvider
-      fetchData
-      environment={environment as Environment}
-      loading={SessionLoading}
-    >
-      <Router>
-        <Route exact path="/" component={Home} />
-      </Router>
-    </BondeSessionProvider>
+    <React.Suspense fallback={Loading}>
+      <Session fetchData environment={envConfig} loading={AppLoading}>
+        <Router>
+          <Route exact path="/" component={Home} />
+        </Router>
+      </Session>
+    </React.Suspense>
   );
 }
 
-export default () => (
-  <React.Suspense fallback={Loading}>
-    <App />
-  </React.Suspense>
-);
+export default App;
