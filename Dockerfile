@@ -2,9 +2,9 @@ FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-
 RUN yarn global add pnpm
+
+COPY package*.json ./
 
 COPY tsconfig*.json ./
 

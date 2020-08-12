@@ -1,0 +1,30 @@
+workspace:
+  base: /code
+
+pipeline:
+  publish-builder:
+    image: plugins/docker
+    repo: nossas/bonde
+    dockerfile: Dockerfile
+    secrets: [ docker_username, docker_password ]
+    group: builder
+    tags:
+      - builder
+    when:
+      status: success
+      event: [push]
+
+  publish-accounts:
+    image: plugins/docker
+    repo: nossas/bonde
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/accounts-client/Dockerfile
+    context: packages/accounts-client/
+    environment:
+      - REACT_APP_ENVIRONMENT=staging
+    group: clients
+    tags:
+      - accounts
+    when:
+      status: success
+      event: [push]

@@ -1,4 +1,4 @@
-.env
+# .env
 node_modules/
 packages/**/.env
 packages/**/node_modules/

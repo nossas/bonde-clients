@@ -38,6 +38,7 @@ function App() {
   const envConfig: Environment =
     (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
   
+  console.log('REACT_APP_ENVIRONMENT', envConfig);
   // App URL
   const appUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001';
   // Extra config
