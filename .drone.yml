@@ -2,7 +2,7 @@ workspace:
   base: /code
 
 pipeline:
-  publish-builder:
+  publish-staging-build:
     image: plugins/docker
     repo: nossas/bonde
     dockerfile: Dockerfile
@@ -23,6 +23,20 @@ pipeline:
     group: clients
     tags:
       - accounts
+    when:
+      status: success
+      event: [push]
+
+  
+  accounts-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: accounts/client
+    group: deploying
+    docker_image: nossas/bonde:accounts
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
     when:
       status: success
       event: [push]
