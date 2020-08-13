@@ -20,7 +20,6 @@ packages/**/build
 .env.test.local
 .env.production.local
 packages/**/.env
-packages/**/.env*
 
 npm-debug.log*
 yarn-debug.log*

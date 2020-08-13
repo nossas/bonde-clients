@@ -14,4 +14,4 @@ COPY packages packages
 
 RUN pnpm i
 
-RUN pnpm m run build
+RUN pnpm m run build:staging

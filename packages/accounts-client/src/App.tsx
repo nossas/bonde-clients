@@ -38,9 +38,9 @@ function App() {
   const envConfig: Environment =
     (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
   
-  console.log('REACT_APP_ENVIRONMENT', envConfig);
+  console.info('Build environment:', envConfig);
   // App URL
-  const appUrl = process.env.REACT_APP_ADMIN_URL || 'http://app.bonde.devel:5001';
+  const appUrl = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://app.bonde.devel:5001';
   // Extra config
   const config: any = {
     // Stop redirect recursive accounts to accounts
@@ -48,7 +48,7 @@ function App() {
     accounts: "",
     // Setup local cross-storage and staging api
     crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
-    apiGraphql: process.env.REACT_APP_HASURA_API_URL || 'https://api-graphql.staging.bonde.org/v1/graphql'
+    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'https://api-graphql.staging.bonde.org/v1/graphql'
   };
 
   return (

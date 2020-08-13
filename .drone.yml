@@ -20,8 +20,6 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     dockerfile: packages/accounts-client/Dockerfile
     context: packages/accounts-client/
-    environment:
-      - REACT_APP_ENVIRONMENT=staging
     group: clients
     tags:
       - accounts
