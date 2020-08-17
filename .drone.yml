@@ -40,7 +40,6 @@ pipeline:
       status: success
       event: [push]
 
-  
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org

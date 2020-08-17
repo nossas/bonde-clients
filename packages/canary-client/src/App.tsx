@@ -1,16 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Route, useLocation } from "react-router-dom";
-import { BondeSessionProvider as Session, BondeSessionUI as SessionUI } from "bonde-core-tools";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+  useLocation
+} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import {
+  BondeSessionProvider as Session,
+  BondeSessionUI as SessionUI,
+  useSession
+} from "bonde-core-tools";
 import { Loading } from "bonde-components";
 import { useTranslation } from "react-i18next";
 // Scenes and Components to make your application
+import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
-// import SessionRedirect from './components/SessionRedirect';
-// import TextLoading from './components/TextLoading';
-// import LoginPage from './scenes/LoginPage';
-// import RegisterPage from './scenes/RegisterPage';
-// import ForgetPasswordPage from './scenes/ForgetPasswordPage';
-// import ResetPasswordPage from './scenes/ResetPasswordPage';
+import SuperuserPage from './scenes/Superuser';
+import NotFound from './components/NotFound';
 
 type AppLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module"
@@ -31,14 +39,30 @@ const AppLoading = ({ fetching }: AppLoadingProps) => {
   return <Loading fullsize message={messages[fetching]} />;
 };
 
+const RouteIsAdmin = (props: any) => {
+  const { user } = useSession();
+
+  if (user.isAdmin) return <Route {...props} />;
+
+  return <h2>Permission Denied</h2>;
+};
+
 const PageRouting = () => {
   const { pathname } = useLocation();
 
   return (
     <SessionUI indexRoute='/' disableNavigation={pathname === '/'}>
-      <Route exact path='/'>
-        <HomePage />
-      </Route>
+      <ToastContainer
+        className='BondeToastify'
+        hideProgressBar={true}
+      />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/community' component={CommunityPage} />
+        <RouteIsAdmin path='/superuser' component={SuperuserPage} />
+        <Redirect from='/admin' to='/' />
+        <Route component={NotFound} />
+      </Switch>
     </SessionUI>
   );
 }
@@ -63,25 +87,6 @@ function App() {
       <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
         <Router>
           <PageRouting />
-          {/* <SessionRedirect loading={TextLoading} paths={['/auth/login']} to={appUrl}>
-            <BaseLayout>
-            <Route exact path='/'>
-            <Redirect to='/login' />
-            </Route>
-            <Route exact path='/login'>
-            <LoginPage to={appUrl} />
-              </Route>
-              <Route exact path='/register'>
-                <RegisterPage to={appUrl} />
-              </Route>
-              <Route exact path='/forget-password'>
-                <ForgetPasswordPage />
-              </Route>
-              <Route exact path='/reset-password'>
-                <ResetPasswordPage />
-              </Route>
-            </BaseLayout>
-          </SessionRedirect> */}
         </Router>
       </Session>
     </React.Suspense>
