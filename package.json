@@ -13,6 +13,7 @@
     "@types/styled-components": "^5.1.2",
     "bonde-components": "^0.0.4-alpha.2",
     "bonde-core-tools": "0.1.6",
+    "eslint": "^7.7.0",
     "jest": "24.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
