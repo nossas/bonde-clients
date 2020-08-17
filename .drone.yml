@@ -27,6 +27,19 @@ pipeline:
       status: success
       event: [push]
 
+  publish-canary:
+    image: plugins/docker
+    repo: nossas/bonde
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/canary-client/Dockerfile
+    context: packages/canary-client/
+    group: clients
+    tags:
+      - canary
+    when:
+      status: success
+      event: [push]
+
   
   accounts-staging-deploy:
     image: peloton/drone-rancher
@@ -34,6 +47,19 @@ pipeline:
     service: accounts/client
     group: deploying
     docker_image: nossas/bonde:accounts
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      event: [push]
+
+  canary-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: webservers/admin-canary
+    group: deploying
+    docker_image: nossas/bonde:canary
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
