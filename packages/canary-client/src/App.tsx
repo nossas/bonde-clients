@@ -20,6 +20,8 @@ import HomePage from './scenes/Home';
 import SuperuserPage from './scenes/Superuser';
 import NotFound from './components/NotFound';
 
+import 'react-toastify/dist/ReactToastify.css'
+
 type AppLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module"
 };
