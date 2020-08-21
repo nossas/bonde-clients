@@ -4,7 +4,7 @@ import { Empty } from "../../components";
 
 const MATCHES = gql`
   query RedeRelationships($context: Int_comparison_exp!) {
-    rede_relationships(
+    relations: rede_relationships(
       where: { recipient: { group: { community_id: $context } } }
     ) {
       status
@@ -30,6 +30,10 @@ const MATCHES = gql`
       }
       id
     }
+    groups: rede_groups(where: { community_id: $context }) {
+      is_volunteer
+      name
+    }
   }
 `;
 
@@ -45,7 +49,7 @@ const FetchMatches = (props: any) => {
     console.log("error", error);
     return <p>Error</p>;
   }
-  return children(data.rede_relationships);
+  return children(data);
 };
 
 export default (props: any = {}) => {
