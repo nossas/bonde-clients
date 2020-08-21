@@ -4,11 +4,15 @@ import { useSession } from "bonde-core-tools";
 import Data from "../data";
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ({ data }: { data: any }) => React.ReactElement | null;
   path: string;
 };
 
-const FetchData = ({ component: ComponentToRender, ...rest }: Props) => {
+const SelectMapaOrRedes = ({
+  component: ComponentToRender,
+  ...rest
+}: Props): React.ReactElement => {
   const { community } = useSession();
   return (
     <Route
@@ -25,4 +29,4 @@ const FetchData = ({ component: ComponentToRender, ...rest }: Props) => {
   );
 };
 
-export default FetchData;
+export default SelectMapaOrRedes;
