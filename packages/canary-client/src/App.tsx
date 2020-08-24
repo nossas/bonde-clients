@@ -14,6 +14,7 @@ import {
 } from "bonde-core-tools";
 import { Loading } from "bonde-components";
 import { useTranslation } from "react-i18next";
+import { ScreenClassProvider } from 'react-grid-system';
 // Scenes and Components to make your application
 import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
@@ -53,19 +54,21 @@ const PageRouting = () => {
   const { pathname } = useLocation();
 
   return (
-    <SessionUI indexRoute='/' disableNavigation={pathname === '/'}>
-      <ToastContainer
-        className='BondeToastify'
-        hideProgressBar={true}
-      />
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/community' component={CommunityPage} />
-        <RouteIsAdmin path='/superuser' component={SuperuserPage} />
-        <Redirect from='/admin' to='/' />
-        <Route component={NotFound} />
-      </Switch>
-    </SessionUI>
+    <ScreenClassProvider>
+      <SessionUI indexRoute='/' disableNavigation={pathname === '/'}>
+        <ToastContainer
+          className='BondeToastify'
+          hideProgressBar={true}
+        />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/community' component={CommunityPage} />
+          <RouteIsAdmin path='/superuser' component={SuperuserPage} />
+          <Redirect from='/admin' to='/' />
+          <Route component={NotFound} />
+        </Switch>
+      </SessionUI>
+    </ScreenClassProvider>
   );
 }
 

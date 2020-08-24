@@ -74,12 +74,14 @@ importers:
       '@types/react-table': 7.0.22
       bonde-styleguide: 0.16.5-alpha.5
       moment: 2.27.0
+      react-grid-system: 7.0.3
       react-table: 7.5.0
       react-toastify: 6.0.8
     specifiers:
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
       moment: ^2.27.0
+      react-grid-system: ^7.0.3
       react-table: ^7.5.0
       react-toastify: ^6.0.8
   packages/example-client:
@@ -11496,6 +11498,14 @@ packages:
       react: ^16.8.0
     resolution:
       integrity: sha512-+Hzd9PqYY1Cv3MnWzw64QOl5BjC5BtSDakx+N7Re49r0FASdFhgpXLFFCJ31fvegq2euP6hz6Ow9K6XM9BSqCA==
+  /react-grid-system/7.0.3:
+    dependencies:
+      prop-types: 15.7.2
+    dev: false
+    peerDependencies:
+      react: ^16.8.0
+    resolution:
+      integrity: sha512-8ppMdkKFu6geeg8bjvR0Yq54aUDcf9ghP5zcWg/po0ThRCbyLvadyNImjN2ZrL/zy3daEJpVtTq638N0FtmPDw==
   /react-i18next/11.7.0_i18next@19.6.3+react@16.13.1:
     dependencies:
       '@babel/runtime': 7.11.2

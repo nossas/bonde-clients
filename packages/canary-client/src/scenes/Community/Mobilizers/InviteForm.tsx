@@ -11,15 +11,8 @@ import {
 } from 'bonde-components';
 import { toast } from 'react-toastify';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
-import SelectField from './SelectField';
-
-const Styles = styled.div`
-  width: 100%;
-  background-color: #fff;
-  padding: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 20px -7px rgba(0,0,0,0.05);
-`;
+import Panel from '../Panel';
+import SelectField from '../SelectField';
 
 const InlineFormWrap = styled.div`
   flex-grow: 1;
@@ -83,7 +76,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
 
   if (community) {
     return (
-      <Styles>
+      <Panel>
         {isCommunityAdmin ? (
           <ConnectedForm
             initialValues={{ role: 2 }}
@@ -140,7 +133,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
             <Text>Apenas os administradores da comunidade podem convidar mobilizadores.</Text>
           </Inline>
         )}
-      </Styles>
+      </Panel>
     );
   }
 

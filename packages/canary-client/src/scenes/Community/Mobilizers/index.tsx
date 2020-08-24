@@ -49,12 +49,6 @@ const InvitationsQuery = gql`
   }
 `;
 
-const Styles = styled.div`
-  ${Header.h3} {
-    margin-bottom: 20px;
-  }
-`;
-
 const Flex = styled.div`
   display: flex;
   flex-direction: row;
@@ -114,7 +108,7 @@ const FetchInvitations = ({ community }: Props) => {
   };
 
   return (
-    <Styles>
+    <>
       <Header.h3>Convidar um mobilizador(a)</Header.h3>
       <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       <Flex>
@@ -127,7 +121,7 @@ const FetchInvitations = ({ community }: Props) => {
       </Flex>
       {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
       {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}
-    </Styles>
+    </>
   );
 };
 

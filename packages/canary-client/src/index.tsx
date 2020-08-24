@@ -1,8 +1,12 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
+import { setConfiguration } from 'react-grid-system';
 import "./i18n";
 import App from "./App";
+
 import * as serviceWorker from "./serviceWorker";
+
+setConfiguration({ maxScreenClass: 'xl' });
 
 ReactDOM.render(
   <React.StrictMode>
