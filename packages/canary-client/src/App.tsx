@@ -20,6 +20,8 @@ import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
 import SuperuserPage from './scenes/Superuser';
 import NotFound from './components/NotFound';
+import LanguageTool from './LanguageTool';
+import * as Flag from './Flag';
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -50,8 +52,28 @@ const RouteIsAdmin = (props: any) => {
   return <h2>Permission Denied</h2>;
 };
 
+const languages = [
+  {
+    locale: 'pt-BR',
+    flag: Flag.Portuguese,
+  },
+  {
+    locale: 'en',
+    flag: Flag.English,
+  },
+  {
+    locale: 'es',
+    flag: Flag.Spanish,
+  },
+]
+
 const PageRouting = () => {
   const { pathname } = useLocation();
+  const { i18n } = useTranslation('auth');
+
+  const changeLanguage = (lng: 'en' | 'es' | 'pt-BR' | string) => {
+    i18n.changeLanguage(lng);
+  };
 
   return (
     <ScreenClassProvider>
@@ -67,6 +89,18 @@ const PageRouting = () => {
           <Redirect from='/admin' to='/' />
           <Route component={NotFound} />
         </Switch>
+        <LanguageTool>
+          {languages.map(({ flag: Flag, locale }, index) => (
+            <button
+              key={`language-button-${locale}`}
+              className={locale === i18n.language ? 'active' : undefined}
+              onClick={() => changeLanguage(locale)}
+              title={locale}
+            >
+              <Flag />
+            </button>
+          ))}
+        </LanguageTool>
       </SessionUI>
     </ScreenClassProvider>
   );

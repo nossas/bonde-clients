@@ -1,0 +1,38 @@
+{
+  "info": {
+    "form": {
+      "success": "Datos guardados exitosamente :)",
+      "submit": "Guardar formulario",
+      "fields": {
+        "image": {
+          "label": "Logo de tu comunidad"
+        },
+        "name": {
+          "label": "Nombre de la comunidad",
+          "placeholder": "Inserta el nombre de tu comunidad",
+          "errors": {
+            "required": "Campo obligatprio"
+          }
+        },
+        "description": {
+          "label": "Descripción",
+          "placeholder": "¿Cuál es el propósito de tu comunidad?"
+        },
+        "city": {
+          "label": "Ciudad",
+          "errors": {
+            "required": "Informa en qué ciudad actúa tu comunidad"
+          }
+        },
+        "email_template_from": {
+          "label": "Correo patrón para la comunicación",
+          "placeholder": "Inserta con este formato: Nombre del remitente<remitente@email.com>",
+          "hint": "Este correo es usado como remitente patrón de las comunicaciones enviadas a través de BONDE.",
+          "errors": {
+            "format": "Formato inválido"
+          }
+        }
+      }
+    }
+  }
+}

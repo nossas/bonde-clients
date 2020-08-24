@@ -1,30 +1,33 @@
 import React from 'react';
 import { InputField } from 'bonde-components';
+import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 
 const SettingsPage = () => {
+  const { t } = useTranslation('community');
+
   return (
     <CommunityForm>
       <Panel>
         <InputField
           name='community.name'
-          label='Nome'
-          placeholder='Insira o nome da sua comunidade'
+          label={t('info.form.fields.name.label')}
+          placeholder={t('info.form.fields.name.placeholder')}
         />
         <InputField
           name='community.description'
-          label='Descrição'
-          placeholder='Insira uma descrição para a sua comunidade'
+          label={t('info.form.fields.description.label')}
+          placeholder={t('info.form.fields.description.placeholder')}
         />
         <InputField
           name='community.city'
-          label='Cidade'
+          label={t('info.form.fields.city.label')}
         />
         <InputField
           name='community.email_template_from'
-          label='E-mail de resposta para notificações'
-          placeholder='Ex: Nome do remetente <remetente@provedor.com>'
+          label={t('info.form.fields.email_template_from.label')}
+          placeholder={t('info.form.fields.email_template_from.placeholder')}
         />
       </Panel>
     </CommunityForm>
@@ -32,7 +35,6 @@ const SettingsPage = () => {
 }
 
 // TODO:
-// - Translate
 // - Validate
 // - Hint
 // - UploadField

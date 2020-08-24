@@ -1,0 +1,38 @@
+{
+  "info": {
+    "form": {
+      "success": "Informações básicas inseridas com sucesso",
+      "submit": "Save form",
+      "fields": {
+        "image": {
+          "label": "Soon"
+        },
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter your community name",
+          "errors": {
+            "required": "Enter community name"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter a description for your community"
+        },
+        "city": {
+          "label": "City",
+          "errors": {
+            "required": "Tell us which city your community operates in"
+          }
+        },
+        "email_template_from": {
+          "label": "Notification reply email",
+          "placeholder": "Ex: Name of sender <sender@provider.com>",
+          "hint": "This email is used as the default sender of notifications.",
+          "errors": {
+            "format": "Response email out of standard format"
+          }
+        }
+      }
+    }
+  }
+}
