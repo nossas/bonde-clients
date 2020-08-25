@@ -1,8 +1,6 @@
 {
   "info": {
     "form": {
-      "success": "Datos guardados exitosamente :)",
-      "submit": "Guardar formulario",
       "fields": {
         "image": {
           "label": "Logo de tu comunidad"
@@ -34,5 +32,62 @@
         }
       }
     }
+  },
+  "integrations": {
+    "form": {
+      "fields": {
+        "mailchimp_api_key": {
+          "label": "Mailchimp API Key",
+          "placeholder": "Inserta aquí el contenido de \"API key\"",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Inicia sesión en tu cuenta de Mailchimp y haz click en tu nombre de usuario. Aparecerá un menú, haz click en la opción {accountStrong}.",
+            "step2": "Luego, sigue los siguientes pisos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}",
+            "step3": "Ahora solo tienes que copiar el código y pegarlo en el campo de abajo {apiKeyStrong}."
+          }
+        },
+        "mailchimp_list_id": {
+          "label": "Mailchimp ID de la lista",
+          "placeholder": "Inserta aquí el \"ID de la lista\"",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Inicia sesión en tu cuenta de Mailchimp y haz click en tu nombre de usuario. Aparecerá un menú, haz click en la opción {listStrong}.",
+            "step2": "Selecciona la lista correspondiente y sigue los siguientes pasos: {settingsStrong} > {listAndDefaultsStrong}",
+            "step3": "Ahora solo tienes que pegar en el campo de abajo el contenido de la columna a la mano derecha, debajo del título {listIdStrong}"
+          }
+        },
+        "twilio_account_sid": {
+          "label": "Twilio Account SID",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Solo tienes que seguir los siguientes pasos: inicia sesión en {link} tu cuenta de Twilio"
+          }
+        },
+        "twilio_auth_token": {
+          "label": "Twilio Auth Token",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Hacer click en el ícono del ojo"
+          }
+        },
+        "twilio_number": {
+          "label": "Twilio Number",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Haz click en {strongPhoneNumber} (símbolo de {strongHashtag} en el menú a la mano izquierda)",
+            "step2": "Escoge qué número de Twilio quieres usar"
+          }
+        }
+      },
+      "buttons": {
+        "syncronize": "Sincronizar"
+      }
+    }
+  },
+  "buttons": {
+    "submit": "Guardar formulario"
+  },
+  "messages": {
+    "success": "Datos guardados exitosamente :)"
   }
 }

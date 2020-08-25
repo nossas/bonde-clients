@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputField } from 'bonde-components';
-import { useTranslation } from "react-i18next";
+  import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 

@@ -1,8 +1,6 @@
 {
   "info": {
     "form": {
-      "success": "Informações básicas inseridas com sucesso",
-      "submit": "Save form",
       "fields": {
         "image": {
           "label": "Soon"
@@ -34,5 +32,62 @@
         }
       }
     }
+  },
+  "integrations": {
+    "form": {
+      "fields": {
+        "mailchimp_api_key": {
+          "label": "Mailchimp API Key",
+          "placeholder": "Enter here the content of \"API key\"",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "After logging in as administrator in mailchimp, click on your username. A menu will appear, click the {accountStrong} option.",
+            "step2": "Follow the steps: {extrasStrong}> {apiKeysStrong}> {yourApiKeysStrong}> {createKeyStrong}",
+            "step3": "Now just paste the contents of {apiKeyStrong} into the field below."
+          }
+        },
+        "mailchimp_list_id": {
+          "label": "Mailchimp List ID",
+          "placeholder": "Enter here the \"List ID\"",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "After logging in as administrator in mailchimp, click on your username. A menu will appear, click the {listStrong} option.",
+            "step2": "Select the corresponding list and follow the steps: {settingsStrong}> {listAndDefaultsStrong}",
+            "step3": "Now just paste in the field below the contents of the right column below the title {listIdStrong}"
+          }
+        },
+        "twilio_account_sid": {
+          "label": "Twilio Account SID",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "Sign in to {link} Twilio's website"
+          }
+        },
+        "twilio_auth_token": {
+          "label": "Twilio Auth Token",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "Click the eye icon"
+          }
+        },
+        "twilio_number": {
+          "label": "Twilio Number",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "Click {strongPhoneNumber} ({strongHashtag} symbol in the left menu)",
+            "step2": "Choose which number Twilio wants to use"
+          }
+        }
+      },
+      "buttons": {
+        "syncronize": "Synchronize"
+      }
+    }
+  },
+  "buttons": {
+    "submit": "Save form"
+  },
+  "messages": {
+    "success": "Data edited successfully"
   }
 }

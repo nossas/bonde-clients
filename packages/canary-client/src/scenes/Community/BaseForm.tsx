@@ -19,9 +19,12 @@ export default ({ children }: any) => {
       {({ submitting }) => (
         <>
           {children}
-          <Button type='submit' disabled={submitting}>{t('info.form.submit')}</Button>
+          <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>
         </>
       )}
     </ConnectedForm>
   );
 }
+
+// TODO:
+// - Success Message (Toastify)
