@@ -10,15 +10,16 @@ export type Filters = {
   availability: {
     _eq: string | undefined;
   };
-  order_by: {
-    created_at: string;
-  };
   state: {
     _eq: string | undefined;
   };
-  created_at: {
-    _eq: string | undefined;
+  // created_at: {
+  //   _eq: string | undefined;
+  // };
+  agent: {
+    _eq: number | undefined;
   };
+  order_by: Record<string, string>[] | undefined;
 };
 
 type Action =
@@ -27,8 +28,10 @@ type Action =
   | { type: "status"; value: string }
   | { type: "availability"; value: string }
   | { type: "state"; value: string }
-  | { type: "created_at"; value: string }
-  | { type: "reset"; value?: any };
+  // | { type: "created_at"; value: string }
+  | { type: "reset"; value?: any }
+  | { type: "order_by"; value: Record<string, string>[] }
+  | { type: "agent"; value: number };
 
 type Dispatch = (action: Action) => void;
 
@@ -75,23 +78,36 @@ function filterReducer(state: Filters, action: Action) {
         state: { _eq: valid },
       };
     }
-    case "created_at": {
-      const valid = action.value === "all" ? undefined : action.value;
+    case "agent": {
       return {
         ...state,
-        created_at: { _eq: valid },
+        agent: { _eq: action.value },
       };
     }
+    case "order_by": {
+      return {
+        ...state,
+        order_by: action.value,
+      };
+    }
+    // case "created_at": {
+    //   const valid = action.value === "all" ? undefined : action.value;
+    //   return {
+    //     ...state,
+    //     created_at: { _eq: valid },
+    //   };
+    // }
     case "reset": {
       return {
-        rows: 1000,
-        offset: 1000 * 0,
+        rows: 10,
+        offset: 10 * 0,
         page: 0,
         status: { _eq: undefined },
         availability: { _eq: undefined },
         state: { _eq: undefined },
-        created_at: { _eq: undefined },
-        order_by: { created_at: "asc" },
+        // created_at: { _eq: undefined },
+        agent: { _eq: undefined },
+        order_by: undefined,
       };
     }
     default: {
@@ -102,14 +118,15 @@ function filterReducer(state: Filters, action: Action) {
 
 const FilterProvider = ({ children }: { children: any }): any => {
   const filtered = {
-    rows: 1000,
-    offset: 1000 * 0,
+    rows: 10,
+    offset: 10 * 0,
     page: 0,
     status: { _eq: undefined },
     availability: { _eq: undefined },
     state: { _eq: undefined },
-    created_at: { _eq: undefined },
-    order_by: { created_at: "asc" },
+    // created_at: { _eq: undefined },
+    agent: { _eq: undefined },
+    order_by: undefined,
   };
 
   const [state, dispatch] = React.useReducer(filterReducer, filtered);

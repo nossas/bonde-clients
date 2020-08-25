@@ -3,6 +3,7 @@ import { Header } from "bonde-components";
 import styled from "styled-components";
 // import { useSession } from "bonde-core-tools";
 import { Table } from "../../components";
+import { useFilter } from "../../utils/FilterProvider";
 import columns from "./columns";
 
 export const Wrap = styled.div`
@@ -10,30 +11,51 @@ export const Wrap = styled.div`
 `;
 
 type Props = {
+  loading?: boolean;
+  error?: any;
   data: {
     FetchMatches: ({
       children,
     }: {
       children: (data: {
-        relations: Array<any>;
+        relationships: Array<any>;
         groups: { is_volunteer: boolean; name: string }[];
+        relationships_count: {
+          aggregate: {
+            count: number;
+          };
+        };
       }) => React.ReactElement;
     }) => React.ReactElement | null;
   };
 };
 
 export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
-  // const { community } = useSession();
+  const [state, dispatch] = useFilter();
+
   return (
     <FetchMatches>
-      {(data) => {
-        return data.relations.length < 1 ? (
+      {({
+        groups,
+        relationships,
+        relationships_count: {
+          aggregate: { count },
+        },
+      }) => {
+        const pagination = {
+          totalPages: Math.round(count / state.rows),
+          goToPage: (e: number) => dispatch({ type: "page", value: e }),
+          setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
+          pageIndex: state.page,
+          pageSize: state.rows,
+        };
+        return count < 1 ? (
           <Wrap>
             <Header.H4>
               Não existem conexões realizadas nessa comunidade.
             </Header.H4>
           </Wrap>
-        ) : data.groups.length < 2 ? (
+        ) : groups.length < 2 ? (
           <Wrap>
             <Header.H4>
               Não existem grupos suficientes nessa comunidade.
@@ -41,11 +63,12 @@ export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
           </Wrap>
         ) : (
           <Wrap>
-            <Header.H4>Total ({data.relations.length})</Header.H4>
+            <Header.H4>Total ({count})</Header.H4>
             <Table
-              data={data.relations}
-              columns={columns(data.groups)}
+              data={relationships}
+              columns={columns(groups)}
               sticky="end"
+              pagination={pagination}
             />
           </Wrap>
         );
