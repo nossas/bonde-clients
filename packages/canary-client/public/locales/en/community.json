@@ -120,29 +120,52 @@
             "label": "Bank",
             "options": {
               "empty": "Select the bank"
+            },
+            "errors": {
+              "required": "Required field"
             }
           },
           "agencia": {
             "label": "Agency",
-            "placeholder": "Enter numbers only"
+            "placeholder": "Enter numbers only",
+            "errors": {
+              "required": "Required field"
+            }
           },
           "agencia_dv": {
-            "label": "Digit"
+            "label": "Digit",
+            "errors": {
+              "required": "Required field"
+            }
           },
           "conta": {
             "label": "Account",
-            "placeholder": "Enter numbers only"
+            "placeholder": "Enter numbers only",
+            "errors": {
+              "required": "Required field"
+            }
           },
           "conta_dv": {
-            "label": "Digit"
+            "label": "Digit",
+            "errors": {
+              "required": "Required field"
+            }
           },
           "legal_name": {
             "label": "Name / Company Name",
-            "placeholder": "Ex: My Sampa"
+            "placeholder": "Ex: My Sampa",
+            "errors": {
+              "required": "Required field"
+            }
           },
           "document_number": {
             "label": "CPF / CNPJ",
-            "placeholder": "Enter numbers only"
+            "placeholder": "Enter numbers only",
+            "errors": {
+              "required": "Required field",
+              "cpf": "Invalid CPF",
+              "cnpj": "Invalid CNPJ"
+            }
           }
         }
       }

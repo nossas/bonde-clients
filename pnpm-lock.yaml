@@ -71,6 +71,8 @@ importers:
     specifiers: {}
   packages/canary-client:
     dependencies:
+      '@fnando/cnpj': 1.0.2
+      '@fnando/cpf': 1.0.2
       '@types/react-table': 7.0.22
       bonde-styleguide: 0.16.5-alpha.5
       moment: 2.27.0
@@ -78,6 +80,8 @@ importers:
       react-table: 7.5.0
       react-toastify: 6.0.8
     specifiers:
+      '@fnando/cnpj': ^1.0.2
+      '@fnando/cpf': ^1.0.2
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
       moment: ^2.27.0
@@ -1577,6 +1581,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
+  /@fnando/cnpj/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-U0r8Mu55rvEDfDIzo1j6szZHHcIZVKg9PKCHvewfHrmYDNDuCt2zjp6TMMI0oIg9hh9fJQqAavzLxMSKHW/W7w==
+  /@fnando/cpf/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-lfSfdONVQ/1aKvsA7PnawQjSoE5PXOyHich3WFIbAuYRMAw6Ax1FmIWxPxCfHP/Rh0R2cG/CxaimUW7NI6rgEQ==
   /@hapi/address/2.1.4:
     deprecated: This version has been deprecated and is no longer supported or maintained
     dev: false

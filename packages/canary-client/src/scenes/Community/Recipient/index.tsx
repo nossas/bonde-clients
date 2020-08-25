@@ -1,16 +1,18 @@
 import React from 'react';
-import { InputField } from 'bonde-components';
+import { InputField, Validators } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import SelectField from '../SelectField';
-import { SelectFieldCondition } from './ScheduleField';
+import SelectFieldCondition from './SelectFieldCondition';
 import BankField from './BankField';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
 import * as normalize from './normalize';
+import { cpfCnpj } from './validators';
 
 const RecipientPage = () => {
   const { t } = useTranslation('community');
+  const { composeValidators, required } = Validators;
 
   return (
     <CommunityForm>
@@ -66,6 +68,7 @@ const RecipientPage = () => {
                 label={t('recipient.form.fields.bank_account.bank_code.label')}
                 component={BankField}
                 emptyText={t('recipient.form.fields.bank_account.bank_code.options.empty')}
+                validate={required(t('recipient.form.fields.bank_account.bank_code.errors.required'))}
               />
             </Col>
             <Col sm={4}>
@@ -87,6 +90,7 @@ const RecipientPage = () => {
                 placeholder={t('recipient.form.fields.bank_account.agencia.placeholder')}
                 parse={normalize.max(5)}
                 component={InputField}
+                validate={required(t('recipient.form.fields.bank_account.agencia.errors.required'))}
               />
             </Col>
             <Col sm={2}>
@@ -96,6 +100,7 @@ const RecipientPage = () => {
                 placeholder='Ex: 0'
                 parse={normalize.max(1)}
                 component={InputField}
+                validate={required(t('recipient.form.fields.bank_account.agencia_dv.errors.required'))}
               />
             </Col>
             <Col sm={5}>
@@ -105,6 +110,7 @@ const RecipientPage = () => {
                 placeholder={t('recipient.form.fields.bank_account.conta.placeholder')}
                 parse={normalize.max(13)}
                 component={InputField}
+                validate={required(t('recipient.form.fields.bank_account.conta.errors.required'))}
               />
             </Col>
             <Col sm={2}>
@@ -114,6 +120,7 @@ const RecipientPage = () => {
                 placeholder='Ex: 0'
                 parse={normalize.max(2)}
                 component={InputField}
+                validate={required(t('recipient.form.fields.bank_account.conta_dv.errors.required'))}
               />
             </Col>
           </Row>
@@ -122,6 +129,7 @@ const RecipientPage = () => {
             label={t('recipient.form.fields.bank_account.legal_name.label')}
             placeholder={t('recipient.form.fields.bank_account.legal_name.placeholder')}
             component={InputField}
+            validate={required(t('recipient.form.fields.bank_account.legal_name.errors.required'))}
           />
           <PrefixedField
             name='document_number'
@@ -129,6 +137,13 @@ const RecipientPage = () => {
             placeholder={t('recipient.form.fields.bank_account.document_number.placeholder')}
             parse={normalize.document}
             component={InputField}
+            validate={composeValidators(
+              required(t('recipient.form.fields.bank_account.document_number.errors.required')),
+              cpfCnpj({
+                cpf: t('recipient.form.fields.bank_account.document_number.errors.cpf'),
+                cnpj: t('recipient.form.fields.bank_account.document_number.errors.cnpj')
+              })
+            )}
           />
         </FieldPrefix>
       </Container>
@@ -140,6 +155,5 @@ const RecipientPage = () => {
 // - Translate
 // - Validate
 // - Hint
-// - SelectField
 
 export default RecipientPage;

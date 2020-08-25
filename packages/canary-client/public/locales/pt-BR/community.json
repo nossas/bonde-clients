@@ -120,29 +120,52 @@
             "label": "Banco",
             "options": {
               "empty": "Selecione o banco"
+            },
+            "errors": {
+              "required": "Campo obrigatório"
             }
           },
           "agencia": {
             "label": "Agência",
-            "placeholder": "Digite apenas números"
+            "placeholder": "Digite apenas números",
+            "errors": {
+              "required": "Campo obrigatório"
+            }
           },
           "agencia_dv": {
-            "label": "Dígito"
+            "label": "Dígito",
+            "errors": {
+              "required": "Campo obrigatório"
+            }
           },
           "conta": {
             "label": "Conta",
-            "placeholder": "Digite apenas números"
+            "placeholder": "Digite apenas números",
+            "errors": {
+              "required": "Campo obrigatório"
+            }
           },
           "conta_dv": {
-            "label": "Dígito"
+            "label": "Dígito",
+            "errors": {
+              "required": "Campo obrigatório"
+            }
           },
           "legal_name": {
             "label": "Nome / Razão Social",
-            "placeholder": "Ex: Minha Sampa"
+            "placeholder": "Ex: Minha Sampa",
+            "errors": {
+              "required": "Campo obrigatório"
+            }
           },
           "document_number": {
             "label": "CPF / CNPJ",
-            "placeholder": "Digite apenas números"
+            "placeholder": "Digite apenas números",
+            "errors": {
+              "required": "Campo obrigatório",
+              "cpf": "CPF inválido",
+              "cnpj": "CNPJ inválido"
+            }
           }
         }
       }

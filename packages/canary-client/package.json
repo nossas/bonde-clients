@@ -9,6 +9,8 @@
     "lint": "eslint . --fix --ext js,ts,tsx"
   },
   "dependencies": {
+    "@fnando/cnpj": "^1.0.2",
+    "@fnando/cpf": "^1.0.2",
     "@types/react-table": "^7.0.22",
     "bonde-styleguide": "^0.16.5-alpha.5",
     "moment": "^2.27.0",
