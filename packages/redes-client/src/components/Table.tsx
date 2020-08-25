@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
-import { useTable, usePagination } from "react-table";
+import { useTable } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Pagination } from "bonde-components";
+// import Pagination from "./Pagination";
 import theme from "./theme";
 
-const StyledTh = styled.th<{ theme: any }>`
+const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: 13px;
   font-weight: 600;
@@ -16,6 +17,17 @@ const StyledTh = styled.th<{ theme: any }>`
   text-align: left;
   padding: 10px 0 10px 20px;
   border-bottom: 1px solid #e5e5e5;
+
+  // Sticky
+  position: sticky !important;
+  top: 0;
+  z-index: 1;
+  background-color: ${(props) => props.backgroundColor};
+
+  &:last-child.sticky,
+  &:first-child.sticky {
+    z-index: 2;
+  }
 `;
 
 const StyledTd = styled.td<{ theme: any; bold?: boolean }>`
@@ -51,6 +63,7 @@ const StyledTr = styled.tr`
 `;
 
 const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
+  max-height: 700px;
   overflow: auto;
   display: inherit;
   width: 100%;
@@ -108,6 +121,13 @@ type Props = {
   data: Array<any>;
   backgroundColor: string;
   sticky?: "end" | "start";
+  pagination?: {
+    totalPages: number;
+    goToPage: (page: number) => void;
+    setPageSize: (arg0: number) => void;
+    pageIndex: number;
+    pageSize: number;
+  };
 };
 
 function Table({
@@ -115,28 +135,19 @@ function Table({
   data,
   backgroundColor,
   sticky,
+  pagination,
 }: Props): React.ReactElement {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    rows,
     prepareRow,
-    // The rest of these things are super handy, too ;)
-    pageCount,
-    pageOptions,
-    gotoPage,
-    setPageSize,
-    state: { pageIndex, pageSize },
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: 0 },
-    },
-    usePagination
-  );
+  } = useTable({
+    columns,
+    data,
+  });
 
   // Render the UI for your table
   return (
@@ -156,6 +167,7 @@ function Table({
                     style: column.style,
                   })}
                   theme={theme}
+                  backgroundColor={backgroundColor}
                 >
                   {column.render("Header")}
                 </StyledTh>
@@ -163,8 +175,8 @@ function Table({
             </StyledTr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+        <tbody {...getTableBodyProps()} style={{ overflow: "auto" }}>
+          {rows.map((row) => {
             prepareRow(row);
             return (
               <StyledTr {...row.getRowProps()}>
@@ -185,14 +197,15 @@ function Table({
           })}
         </tbody>
       </StyledTable>
-      <Pagination
-        goToPage={gotoPage}
-        pageCount={pageCount}
-        pageIndex={pageIndex}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        totalPages={pageOptions.length}
-      />
+      {pagination && (
+        <Pagination
+          goToPage={pagination.goToPage}
+          pageIndex={pagination.pageIndex}
+          pageSize={pagination.pageSize}
+          setPageSize={pagination.setPageSize}
+          totalPages={pagination.totalPages}
+        />
+      )}
     </>
   );
 }
