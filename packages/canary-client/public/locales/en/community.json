@@ -84,6 +84,70 @@
       }
     }
   },
+  "recipient": {
+    "form": {
+      "titles": {
+        "transfer_date": "Scheduling of Looting",
+        "account": "Bank account"
+      },
+      "fields": {
+        "transfer_interval": {
+          "label": "Recurrence",
+          "options": {
+            "weekly": "Weekly",
+            "monthly": "Monthly"
+          }
+        },
+        "transfer_day": {
+          "label": "Execution day",
+          "options": {
+            "mon": "Monday",
+            "tue": "Tuesday",
+            "wed": "Fourth",
+            "thu": "Fifth",
+            "fri": "Friday"
+          }
+        },
+        "bank_account": {
+          "type": {
+            "label": "Account Type",
+            "options": {
+              "conta_corrente": "Chain",
+              "conta_poupanca": "Savings"
+            }
+          },
+          "bank_code": {
+            "label": "Bank",
+            "options": {
+              "empty": "Select the bank"
+            }
+          },
+          "agencia": {
+            "label": "Agency",
+            "placeholder": "Enter numbers only"
+          },
+          "agencia_dv": {
+            "label": "Digit"
+          },
+          "conta": {
+            "label": "Account",
+            "placeholder": "Enter numbers only"
+          },
+          "conta_dv": {
+            "label": "Digit"
+          },
+          "legal_name": {
+            "label": "Name / Company Name",
+            "placeholder": "Ex: My Sampa"
+          },
+          "document_number": {
+            "label": "CPF / CNPJ",
+            "placeholder": "Enter numbers only"
+          }
+        }
+      }
+    }
+  },
   "buttons": {
     "submit": "Save form"
   },

@@ -241,10 +241,11 @@ const banks = [
   .sort((b1: any, b2: any) => Number(b1.code) - Number(b2.code))
 ;
 
-export default (props: any) => (
+export default ({ emptyText, ...props }: any) => (
   <SelectField
     {...props}
   >
+    {emptyText && (<option value="">{emptyText}</option>)}
     {banks.map((b: any, i: number) => (
       <option key={i} value={b.code}>{`${b.code} - ${b.name}`}</option>
     ))}

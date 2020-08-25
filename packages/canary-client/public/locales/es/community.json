@@ -84,6 +84,70 @@
       }
     }
   },
+  "recipient": {
+    "form": {
+      "titles": {
+        "transfer_date": "Fecha de transferencia",
+        "account": "Cuenta bancaria"
+      },
+      "fields": {
+        "transfer_interval": {
+          "label": "Frecuencia",
+          "options": {
+            "weekly": "Semanal",
+            "monthly": "Mensual"
+          }
+        },
+        "transfer_day": {
+          "label": "Día de transferencia",
+          "options": {
+            "mon": "Lunes",
+            "tue": "Martes",
+            "wed": "Miércoles",
+            "thu": "Jueves",
+            "fri": "Viernes"
+          }
+        },
+        "bank_account": {
+          "type": {
+            "label": "Tipo de cuenta",
+            "options": {
+              "conta_corrente": "Corriente",
+              "conta_poupanca": "Ahorro"
+            }
+          },
+          "bank_code": {
+            "label": "Banco",
+            "options": {
+              "empty": "Selecciona el banco"
+            }
+          },
+          "agencia": {
+            "label": "Agencia",
+            "placeholder": "DÚnicamente digite números"
+          },
+          "agencia_dv": {
+            "label": "Dígito"
+          },
+          "conta": {
+            "label": "Cuenta",
+            "placeholder": "Únicamente digite números"
+          },
+          "conta_dv": {
+            "label": "Dígito"
+          },
+          "legal_name": {
+            "label": "Nombre / Razón social",
+            "placeholder": "Ejm: Minha Sampa"
+          },
+          "document_number": {
+            "label": "CPF / CNPJ",
+            "placeholder": "Únicamente digite números"
+          }
+        }
+      }
+    }
+  },
   "buttons": {
     "submit": "Guardar formulario"
   },

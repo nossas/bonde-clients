@@ -39,4 +39,14 @@ const ScheduleField = ({ title, interval, day }: any) => {
   );
 }
 
+export const SelectFieldCondition = ({ children, title, parent, ...props }: any) => {
+  const { input } = useField(parent);
+
+  return (
+    <SelectField  {...props}>
+      {children(input.value)}
+    </SelectField>
+  );
+}
+
 export default ScheduleField;
