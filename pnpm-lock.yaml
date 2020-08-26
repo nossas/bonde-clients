@@ -3723,6 +3723,7 @@ packages:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
   /bonde-components/0.0.3-alpha.1_react-dom@16.13.1+react@16.13.1:
     dependencies:
+      deep-object-diff: 1.1.0
       final-form: 4.20.1
       jsonwebtoken: 8.5.1
       react: 16.13.1
@@ -4642,7 +4643,7 @@ packages:
     dependencies:
       '@types/parse-json': 4.0.0
       import-fresh: 3.2.1
-      parse-json: 5.0.1
+      parse-json: 5.1.0
       path-type: 4.0.0
       yaml: 1.10.0
     engines:
@@ -5177,6 +5178,10 @@ packages:
   /deep-is/0.1.3:
     resolution:
       integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+  /deep-object-diff/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-b+QLs5vHgS+IoSNcUE4n9HP2NwcHj7aqnJWsjPtuG75Rh5TOaGt0OjAYInh77d5T16V5cRDC+Pw/6ZZZiETBGw==
   /deepmerge/4.2.2:
     dev: false
     engines:
@@ -5375,7 +5380,7 @@ packages:
   /dom-helpers/5.2.0:
     dependencies:
       '@babel/runtime': 7.11.2
-      csstype: 3.0.2
+      csstype: 3.0.3
     dev: false
     resolution:
       integrity: sha512-Ru5o9+V8CpunKnz5LGgWXkmrH/20cGKwcHwS4m73zIvs54CN9epEmT/HLqFJW3kXpakAFkEdzgy1hzlJe3E4OQ==
@@ -8835,6 +8840,7 @@ packages:
     resolution:
       integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
   /json-parse-better-errors/1.0.2:
+    dev: false
     resolution:
       integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
   /json-parse-even-better-errors/2.3.0:
@@ -10280,11 +10286,11 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=
-  /parse-json/5.0.1:
+  /parse-json/5.1.0:
     dependencies:
       '@babel/code-frame': 7.10.4
       error-ex: 1.3.2
-      json-parse-better-errors: 1.0.2
+      json-parse-even-better-errors: 2.3.0
       lines-and-columns: 1.1.6
     engines:
       node: '>=8'
