@@ -1,38 +1,36 @@
 import React from "react";
 import { FormSpy, diff } from "bonde-components";
 
+type Values = {
+  [x: string]: { value: string | number; label: string } & string;
+};
+
 type MyProps = {
-  values: { [x: string]: { value: unknown; label: string } & string };
-  save: (e: any) => Promise<any>;
+  values: Values;
+  save: (e: Values) => Promise<any>;
   active?: string;
 };
 
 type MyState = {
-  values: any;
+  values: Values;
   active?: string;
 };
 
-const getValues = (values: {
-  [x: string]: { value: unknown; label: string } & string;
-}) =>
-  Object.keys(values).reduce((newObj, old) => {
-    const newValue =
-      typeof values[old] === "object" ? values[old].value : values[old];
-    return {
-      ...newObj,
-      [old]: newValue,
-    };
-  }, {});
-
 class AutoSave extends React.Component<MyProps, MyState> {
-  state = { values: this.props.values };
+  state = { values: this.props.values, active: this.props.active };
   promise: any;
 
-  UNSAFE_componentWillReceiveProps(nextProps: MyProps) {
-    if (this.props.active && this.props.active !== nextProps.active) {
-      // blur occurred
+  componentDidUpdate(_prevProps: MyProps, prevState: MyState) {
+    if (prevState.active !== this.state.active) {
       this.save();
     }
+  }
+
+  static getDerivedStateFromProps(nextProps: MyProps, prevState: MyState) {
+    if (nextProps.active !== prevState.active) {
+      console.log({ active: nextProps.active });
+      return { active: nextProps.active };
+    } else return null;
   }
 
   save = async () => {
@@ -40,15 +38,14 @@ class AutoSave extends React.Component<MyProps, MyState> {
       await this.promise;
     }
     const { values, save } = this.props;
-    const stripValue = getValues(values);
 
     // This diff step is totally optional
-    const difference = diff(this.state.values, stripValue);
+    const difference = diff(this.state.values, values);
     if (Object.keys(difference).length) {
       // values have changed
-      this.setState({ values: stripValue });
+      this.setState({ values });
       // setFieldData(blurredField, { saving: true });
-      this.promise = save(difference);
+      this.promise = save(difference as any);
       await this.promise;
       delete this.promise;
       // this.setState({ submitting: false });
