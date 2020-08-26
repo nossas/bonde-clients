@@ -2,8 +2,8 @@ import React from "react";
 import { Header } from "bonde-components";
 import styled from "styled-components";
 // import { useSession } from "bonde-core-tools";
-import { Table } from "../../components";
-import { useFilter } from "../../utils/FilterProvider";
+import { Table, Filters } from "../../components";
+import { useFilter } from "../../services/FilterProvider";
 import columns from "./columns";
 
 export const Wrap = styled.div`
@@ -19,19 +19,47 @@ type Props = {
     }: {
       children: (data: {
         relationships: Array<any>;
-        groups: { is_volunteer: boolean; name: string }[];
+        groups: Array<{ is_volunteer: boolean; name: string }>;
         relationships_count: {
           aggregate: {
             count: number;
           };
         };
+        agents: Array<{
+          community_users: Array<{
+            user: {
+              first_name: string;
+              last_name: string;
+              id: number;
+            };
+          }>;
+        }>;
       }) => React.ReactElement;
     }) => React.ReactElement | null;
+    FilterOptions: {
+      [x: string]: { label: string; value: string | number }[];
+    };
   };
 };
 
-export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
+export default ({
+  data: { FetchMatches, FilterOptions },
+}: Props): React.ReactElement => {
   const [state, dispatch] = useFilter();
+
+  const save = async (values: any) =>
+    dispatch({ type: "relationships", value: values });
+
+  const reset = () =>
+    dispatch({
+      type: "relationships",
+      value: {
+        search: undefined,
+        state: undefined,
+        agent: undefined,
+        status: undefined,
+      },
+    });
 
   return (
     <FetchMatches>
@@ -41,6 +69,7 @@ export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
         relationships_count: {
           aggregate: { count },
         },
+        agents,
       }) => {
         const pagination = {
           totalPages: Math.round(count / state.rows),
@@ -49,6 +78,7 @@ export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
           pageIndex: state.page,
           pageSize: state.rows,
         };
+
         return count < 1 ? (
           <Wrap>
             <Header.H4>
@@ -63,6 +93,22 @@ export default ({ data: { FetchMatches } }: Props): React.ReactElement => {
           </Wrap>
         ) : (
           <Wrap>
+            <Filters
+              save={save}
+              options={{
+                ...FilterOptions,
+                agents: agents[0].community_users.map(({ user }) => ({
+                  label: `${user.first_name} ${user.last_name}`,
+                  value: user.id,
+                })),
+              }}
+              initialValues={state.relationships}
+              reset={reset}
+              search
+              state
+              agent
+              relationshipStatus
+            />
             <Header.H4>Total ({count})</Header.H4>
             <Table
               data={relationships}
