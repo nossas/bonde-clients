@@ -11,7 +11,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
-    "bonde-components": "^0.0.4-alpha.4",
+    "bonde-components": "^0.0.4-alpha.6",
     "bonde-core-tools": "0.1.7-alpha.0",
     "jest": "24.9.0",
     "react": "^16.13.1",
