@@ -2,23 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 
-import styled from "styled-components";
-import { Loading, Text, Main, Body } from "bonde-components";
+import { Loading, Main, Body } from "bonde-components";
 
 import { Relations } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
-import logo from "./logo.svg";
-
-const AppHeader = styled.header`
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-`;
+import { FilterProvider } from "./services/FilterProvider";
 
 type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
@@ -51,36 +39,23 @@ const App = (): React.ReactElement => {
       environment={environment as Environment}
       loading={SessionLoading}
     >
-      <Router>
-        <BondeSessionUI indexRoute={adminUrl}>
-          <Main style={{ minWidth: "100%" }}>
-            <Header />
-            <Body>
-              <Switch>
-                <SelectMapaOrRedes path="/relations" component={Relations} />
-                <Route exact path="/">
-                  <div className="App">
-                    <AppHeader>
-                      <img src={logo} className="App-logo" alt="logo" />
-                      <Text>
-                        Edit <code>src/App.tsx</code> and save to reload.
-                      </Text>
-                      <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Learn React
-                      </a>
-                    </AppHeader>
-                  </div>
-                </Route>
-              </Switch>
-            </Body>
-          </Main>
-        </BondeSessionUI>
-      </Router>
+      <FilterProvider>
+        <Router>
+          <BondeSessionUI indexRoute={adminUrl}>
+            <Main style={{ minWidth: "100%" }}>
+              <Header />
+              <Body>
+                <Switch>
+                  <SelectMapaOrRedes path="/relations" component={Relations} />
+                  <Route exact path="/">
+                    <div className="App">{/* <Filters /> */}</div>
+                  </Route>
+                </Switch>
+              </Body>
+            </Main>
+          </BondeSessionUI>
+        </Router>
+      </FilterProvider>
     </BondeSessionProvider>
   );
 };
