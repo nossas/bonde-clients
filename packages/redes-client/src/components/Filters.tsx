@@ -1,117 +1,177 @@
 import React from "react";
-import { RoundSelect, InputWithIcon, Button, Icon } from "bonde-components";
+import {
+  RoundSelectField,
+  InputField,
+  Button,
+  Icon,
+  ConnectedForm,
+  Form,
+} from "bonde-components";
 import styled from "styled-components";
+import { AutoSaveFilters } from "./";
+// import { useFilter } from "../utils/FilterProvider";
 
 const Filters = (): React.ReactElement => {
+  // const [, dispatch] = useFilter();
   const statusOptions = [
     {
-      value: "Disponível",
-      label: "Disponível",
+      label: "Inscrita",
+      value: "inscrita",
     },
-  ];
-  const statusValue = {
-    value: "Disponível",
-    label: "Disponível",
-  };
-
-  const availabilityOptions = [
     {
-      value: "Disponível",
-      label: "Disponível",
+      label: "Reprovada",
+      value: "reprovada",
+    },
+    {
+      label: "Aprovada",
+      value: "aprovada",
     },
   ];
-  const availabilityValue = {
-    value: "Disponível",
-    label: "Disponível",
-  };
+
+  // const availabilityOptions = [
+  //   {
+  //     label: "Disponível",
+  //     value: "disponível",
+  //   },
+  //   {
+  //     label: "Indisponível",
+  //     value: "indisponível",
+  //   },
+  //   {
+  //     label: "Anti-ética",
+  //     value: "anti-ética",
+  //   },
+  //   {
+  //     label: "Férias",
+  //     value: "férias",
+  //   },
+  //   {
+  //     label: "Licença",
+  //     value: "licença",
+  //   },
+  //   {
+  //     label: "Descadastrada",
+  //     value: "descadastrada",
+  //   },
+  // ];
 
   const stateOptions = [
     {
-      value: "Disponível",
-      label: "Disponível",
+      value: "sp",
+      label: "SP",
     },
-  ];
-  const stateValue = {
-    value: "Disponível",
-    label: "Disponível",
-  };
-
-  const createdAtOptions = [
     {
-      value: "Disponível",
-      label: "Disponível",
+      value: "bh",
+      label: "BH",
     },
-  ];
-  const createdAtValue = {
-    value: "Disponível",
-    label: "Disponível",
-  };
-
-  const groupOptions = [
     {
-      value: "Disponível",
-      label: "Disponível",
+      value: "rj",
+      label: "RJ",
+    },
+    {
+      value: "mg",
+      label: "MG",
+    },
+    {
+      value: "rn",
+      label: "RN",
     },
   ];
-  const groupValue = {
-    value: "Disponível",
-    label: "Disponível",
-  };
+
+  // const createdAtOptions = [
+  //   {
+  //     value: "Disponível",
+  //     label: "Disponível",
+  //   },
+  // ];
+
+  // const groupOptions = [
+  //   {
+  //     value: "individual",
+  //     label: "MSR",
+  //   },
+  //   {
+  //     value: "therapist",
+  //     label: "Psicóloga",
+  //   },
+  //   {
+  //     value: "lawyer",
+  //     label: "Advogada",
+  //   },
+  // ];
 
   const Wrap = styled.div`
-    display: grid;
-    grid-template-columns: 25% repeat(5, minmax(100px, 200px)) auto;
-    width: 100%;
-    justify-content: start;
-    grid-gap: 15px;
-    align-items: center;
+    & > ${Form} {
+      display: grid;
+      grid-template-columns: 15% repeat(5, minmax(100px, 200px)) auto;
+      width: 100%;
+      justify-content: start;
+      grid-gap: 15px;
+      align-items: center;
+      & > div {
+        padding: 0;
+      }
+    }
   `;
+
+  // const save = useCallback(
+  //   (values: Record<string, unknown>) => {
+  //     console.log("Saving", values);
+  //     setFilter({ type: "relations", value: values });
+  //     return true;
+  //   },
+  //   [filters]
+  // );
+
+  const sleep = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
+  const save = async (values: any) => {
+    console.log("Saving", values);
+    // dispatch({ type: "relations", value: values });
+    await sleep(1000);
+  };
 
   return (
     <Wrap>
-      <InputWithIcon
-        icon="Search"
-        placeholder="Buscar nome, email, especialidade..."
-      />
-      <RoundSelect
-        placeholder=""
-        options={groupOptions}
-        onChange={(e) => console.log(e)}
-        value={groupValue}
-        menuPortalTarget={document.querySelector("body")}
-      />
-      <RoundSelect
-        placeholder="Status"
-        options={statusOptions}
-        onChange={(e) => console.log(e)}
-        value={statusValue}
-        menuPortalTarget={document.querySelector("body")}
-      />
-      <RoundSelect
-        placeholder="Disponibilidade"
-        options={availabilityOptions}
-        onChange={(e) => console.log(e)}
-        value={availabilityValue}
-        menuPortalTarget={document.querySelector("body")}
-      />
-      <RoundSelect
-        placeholder="Data Inscrição"
-        options={createdAtOptions}
-        onChange={(e) => console.log(e)}
-        value={createdAtValue}
-        menuPortalTarget={document.querySelector("body")}
-      />
-      <RoundSelect
-        placeholder="Estado"
-        options={stateOptions}
-        onChange={(e) => console.log(e)}
-        value={stateValue}
-        menuPortalTarget={document.querySelector("body")}
-      />
-      <Button dark>
-        Limpar
-        <Icon name="Close" size="xs" />
-      </Button>
+      <ConnectedForm
+        onSubmit={save}
+        initialValues={{
+          search: "Viviane",
+          status: { value: "inscrita", label: "Inscrita" },
+        }}
+      >
+        {({ form }) => {
+          return (
+            <>
+              <AutoSaveFilters save={save} />
+              <InputField name="search" />
+              {/* <RoundSelectField
+                name="group"
+                placeholder="Grupo"
+                options={groupOptions}
+                menuPortalTarget={document.querySelector("body")}
+              /> */}
+              <RoundSelectField
+                name="status"
+                placeholder="Status"
+                options={statusOptions}
+                menuPortalTarget={document.querySelector("body")}
+              />
+              <RoundSelectField
+                name="state"
+                placeholder="Estado"
+                options={stateOptions}
+                menuPortalTarget={document.querySelector("body")}
+              />
+              <Button dark onClick={form.reset}>
+                Limpar
+                <Icon name="Close" size="xs" />
+              </Button>
+            </>
+          );
+        }}
+      </ConnectedForm>
     </Wrap>
   );
 };
