@@ -40,6 +40,19 @@ pipeline:
       status: success
       event: [push]
 
+  publish-redes:
+    image: plugins/docker
+    repo: nossas/bonde
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/redes-client/Dockerfile
+    context: packages/redes-client/
+    group: clients
+    tags:
+      - redes
+    when:
+      status: success
+      event: [push]
+
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
@@ -59,6 +72,19 @@ pipeline:
     service: webservers/admin-canary
     group: deploying
     docker_image: nossas/bonde:canary
+    timeout: 360
+    confirm: true
+    secrets: [ rancher_access_key, rancher_secret_key ]
+    when:
+      status: success
+      event: [push]
+
+  redes-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: webservers/redes
+    group: deploying
+    docker_image: nossas/bonde:redes
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
