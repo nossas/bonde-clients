@@ -57,7 +57,19 @@ const MATCHES = gql`
       id
     }
     relationships_count: rede_relationships_aggregate(
-      where: { recipient: { group: { community_id: $context } } }
+      where: {
+        recipient: { group: { community_id: $context }, state: $state }
+        user_id: $agent
+        status: $status
+        _or: [
+          { recipient: { first_name: { _ilike: $query } } }
+          { recipient: { last_name: { _ilike: $query } } }
+          { recipient: { email: { _ilike: $query } } }
+          { volunteer: { first_name: { _ilike: $query } } }
+          { volunteer: { last_name: { _ilike: $query } } }
+          { volunteer: { email: { _ilike: $query } } }
+        ]
+      }
     ) {
       aggregate {
         count
