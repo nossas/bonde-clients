@@ -1,26 +1,7 @@
+import { getStates } from "../../services/utils";
+
 export default {
-  state: [
-    {
-      value: "sp",
-      label: "SP",
-    },
-    {
-      value: "bh",
-      label: "BH",
-    },
-    {
-      value: "rj",
-      label: "RJ",
-    },
-    {
-      value: "mg",
-      label: "MG",
-    },
-    {
-      value: "rn",
-      label: "RN",
-    },
-  ],
+  state: getStates(),
   availability: [
     {
       label: "Disponível",

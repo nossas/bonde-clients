@@ -33,7 +33,6 @@ const FilterDispatchContext = React.createContext<Dispatch | undefined>(
 );
 
 function filterReducer(state: State, action: Action) {
-  console.log({ state, action });
   switch (action.type) {
     case "page": {
       const valid =
