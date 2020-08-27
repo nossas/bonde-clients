@@ -176,5 +176,11 @@
   },
   "messages": {
     "success": "Datos guardados exitosamente :)"
+  },
+  "navigation": {
+    "settings": "Información",
+    "mobilizers": "Movilizadores",
+    "integrations": "Integraciones",
+    "recipient": "Receptor"
   }
 }

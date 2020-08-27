@@ -3,8 +3,9 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Empty, Header, Navigation, Tab, Row, Col } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
+import { useTranslation } from 'react-i18next';
 import Content from '../../components/Content';
-
+// Subroutes
 import Styles from './Styles';
 import Mobilizers from './Mobilizers';
 import Settings from './Settings';
@@ -37,27 +38,23 @@ type Props = {
 const CommunityPage = ({ match, location }: Props) => {
   const history = useHistory();
   const { community } = useSession();
+  const { t } = useTranslation('community');
 
-  // RegexWith parameters number
-  // \/community\/\d+\/mobilizers\/*
-  const isMobilizers = new RegExp(/\/community\/mobilizers\/*/).test(location.pathname);
-  const isSettings = new RegExp(/\/community\/settings\/*/).test(location.pathname);
-  const isIntegrations = new RegExp(/\/community\/integrations\/*/).test(location.pathname);
-  const isRecipient = new RegExp(/\/community\/recipient\/*/).test(location.pathname);
-
-  const push = (path: string) => {
-    history.push(`${match.path}${path}`);
-  }
+  // Utils
+  // Test is active pathname
+  const is = (regexPath: any): boolean => new RegExp(regexPath).test(location.pathname);
+  // Redirect to pathname
+  const push = (path: string) => () => history.push(`${match.path}${path}`);
 
   return community ? (
     <PageWrap>
       <SubHeader>
         <Header.h3>{community.name}</Header.h3>
         <Navigation>
-          <Tab active={isSettings} onClick={() => push('/settings')}>Informações</Tab>
-          <Tab active={isMobilizers} onClick={() => push('/mobilizers')}>Mobilizadores</Tab>
-          <Tab active={isIntegrations} onClick={() => push('/integrations')}>Integrações</Tab>
-          <Tab active={isRecipient} onClick={() => push('/recipient')}>Recebedor</Tab>
+          <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
+          <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
+          <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations')}>{t('navigation.integrations')}</Tab>
+          <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
         </Navigation>
       </SubHeader>
       <Styles>

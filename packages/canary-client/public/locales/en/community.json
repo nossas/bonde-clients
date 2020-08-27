@@ -176,5 +176,11 @@
   },
   "messages": {
     "success": "Data edited successfully"
+  },
+  "navigation": {
+    "settings": "Information",
+    "mobilizers": "Mobilizers",
+    "integrations": "Integrations",
+    "recipient": "Recipient"
   }
 }
