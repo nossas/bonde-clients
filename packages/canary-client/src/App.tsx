@@ -99,10 +99,6 @@ const PageRouting = () => {
         disableNavigation={pathname === '/'}
         languageTool={ChangeLanguage}
       >
-        <ToastContainer
-          className='BondeToastify'
-          hideProgressBar={true}
-        />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/community' component={CommunityPage} />
@@ -132,11 +128,17 @@ function App() {
 
   return (
     <React.Suspense fallback={Loading}>
-      <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
-        <Router>
-          <PageRouting />
-        </Router>
-      </Session>
+      <>
+        <ToastContainer
+          className='BondeToastify'
+          hideProgressBar={true}
+        />
+        <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
+          <Router>
+            <PageRouting />
+          </Router>
+        </Session>
+      </>
     </React.Suspense>
   );
 }
