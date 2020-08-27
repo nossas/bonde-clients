@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery, useSession } from 'bonde-core-tools';
 import { Header } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
 import MobilizationCard, { Mobilization } from './MobilizationCard';
 import mobilizationsLastUpdated from './query.graphql';
 import LoadingCards from './Loading';
@@ -47,13 +48,14 @@ const GadgetWrap = styled.div`
 `;
 
 const MobilizationsGadget = () => {
-  const { user, storage, communities } = useSession()
+  const { t } = useTranslation('home');
+  const { user, storage, communities } = useSession();
   const { data, loading } = useQuery(
     mobilizationsLastUpdated,
     { variables: { userId: user.id } }
-  )
+  );
 
-  if (loading) return <LoadingCards />
+  if (loading) return <LoadingCards />;
 
   const parse = (m: any): Mobilization => ({
     id: m.id,
@@ -63,14 +65,14 @@ const MobilizationsGadget = () => {
     customDomain: m.custom_domain,
     slug: m.slug,
     community: m.community
-  })
+  });
 
   const { mobilizations } = data
 
   return (
     <Styles>
       <div className='header'>
-        <Header.h5>Últimas atualizações</Header.h5>
+        <Header.h5>{t('gadgets.mobilizations.title')}</Header.h5>
       </div>
       <GadgetWrap>
         {(mobilizations).map(parse).map((mobilization: Mobilization) =>

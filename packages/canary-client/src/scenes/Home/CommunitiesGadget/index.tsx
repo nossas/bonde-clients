@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Header } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
+import { useTranslation } from 'react-i18next';
 
 import SearchInput from './SearchInput';
 import CommunitiesScrollBox from './CommunitiesScrollBox';
@@ -26,16 +27,17 @@ const Styles = styled.div`
 `;
 
 const CommunitiesGadget = () => {
-  const { communities } = useSession()
-  const [data, setData] = useState(communities)
+  const { t } = useTranslation('home');
+  const { communities } = useSession();
+  const [data, setData] = useState(communities);
 
   return (
     <Styles>
       <div className='header'>
         {/** TODO: i18n */}
-        <Header.h5>Suas comunidades</Header.h5>
+        <Header.h5>{t('gadgets.communities.title')}</Header.h5>
         <SearchInput
-          placeholder='Buscar comunidade'
+          placeholder={t('gadgets.communities.search')}
           field='name'
           data={communities}
           onChange={setData}
@@ -43,7 +45,7 @@ const CommunitiesGadget = () => {
       </div>
       <CommunitiesScrollBox communities={data} />
     </Styles>
-  )
+  );
 };
 
 export default CommunitiesGadget;
