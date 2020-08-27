@@ -30,8 +30,15 @@ export default ({
   const [state, dispatch] = useFilter();
 
   const save = async (values: any) => {
-    console.log({ values });
-    return dispatch({ type: "relationships", value: values });
+    // This needs to be done because when the text input is cleaned, it doesn't come as an `undefined` value, it's just not present and the previous state is maintained in the provider. Because of that, every time we dispatch the newValues, we need to clear them first.
+    const newValues = {
+      query: undefined,
+      state: undefined,
+      agent: undefined,
+      relationshipStatus: undefined,
+      ...values,
+    };
+    return dispatch({ type: "relationships", value: newValues });
   };
 
   const reset = () =>
