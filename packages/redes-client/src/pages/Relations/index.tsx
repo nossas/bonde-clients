@@ -1,9 +1,17 @@
 import React from "react";
-import { Header } from "bonde-components";
+import styled from "styled-components";
+import { Header, Empty } from "bonde-components";
 // import { useSession } from "bonde-core-tools";
 import { Table, Filters } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
 import columns from "./columns";
+
+const WrapEmpty = styled.div`
+  height: 100%;
+  & > div {
+    height: 100%;
+  }
+`;
 
 type Props = {
   loading?: boolean;
@@ -76,13 +84,13 @@ export default ({
           };
 
           return relationships_count < 1 ? (
-            <Header.H4>
-              Não existem conexões realizadas nessa comunidade.
-            </Header.H4>
+            <WrapEmpty>
+              <Empty message="Nada por aqui..." />
+            </WrapEmpty>
           ) : groups.length < 2 ? (
-            <Header.H4>
-              Não existem grupos suficientes nessa comunidade.
-            </Header.H4>
+            <WrapEmpty>
+              <Empty message="Não existem grupos suficientes nessa comunidade." />
+            </WrapEmpty>
           ) : (
             <>
               <Header.H4>Total ({relationships_count})</Header.H4>

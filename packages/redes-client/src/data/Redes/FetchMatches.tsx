@@ -1,8 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "../../components";
+import { Empty } from "bonde-components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
+
+const WrapEmpty = styled.div`
+  height: 100%;
+  & > div {
+    height: 100%;
+  }
+`;
 
 const MATCHES = gql`
   query RedeRelationships(
@@ -140,6 +148,8 @@ export default (props: any = {}) => {
   return community ? (
     <FetchMatches community={community} {...props} />
   ) : (
-    <Empty message="Selecione uma comunidade" />
+    <WrapEmpty>
+      <Empty message="Selecione uma comunidade" />
+    </WrapEmpty>
   );
 };
