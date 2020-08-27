@@ -13,6 +13,7 @@ const MATCHES = gql`
     $state: String_comparison_exp
     $agent: Int_comparison_exp
     $order_by: [rede_relationships_order_by!]
+    $query: String
   ) {
     relationships: rede_relationships(
       limit: $rows
@@ -22,6 +23,14 @@ const MATCHES = gql`
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
         status: $status
+        _or: [
+          { recipient: { first_name: { _ilike: $query } } }
+          { recipient: { last_name: { _ilike: $query } } }
+          { recipient: { email: { _ilike: $query } } }
+          { volunteer: { first_name: { _ilike: $query } } }
+          { volunteer: { last_name: { _ilike: $query } } }
+          { volunteer: { email: { _ilike: $query } } }
+        ]
       }
     ) {
       status
@@ -58,23 +67,26 @@ const MATCHES = gql`
       is_volunteer
       name
     }
-    agents: communities(where: { id: $context }) {
-      community_users {
-        user {
-          first_name
-          last_name
-          id
-        }
-      }
-    }
   }
 `;
+
+type Data = {
+  relationships: Array<any>;
+  groups: Array<{ is_volunteer: boolean; name: string }>;
+  relationships_count: {
+    aggregate: {
+      count: number;
+    };
+  };
+};
 
 const FetchMatches = (props: any) => {
   const { children, community } = props;
   const { relationships, page: _, ...pagination } = useFilterState();
 
-  const { relationshipStatus, state, agent } = getSelectValues(relationships);
+  const { relationshipStatus, state, agent, query } = getSelectValues(
+    relationships
+  );
 
   const variables = {
     context: { _eq: community && community.id },
@@ -87,6 +99,7 @@ const FetchMatches = (props: any) => {
     agent: {
       _eq: agent,
     },
+    query: `%${query || ""}%`,
     ...pagination,
     // created_at: {
     //   _eq: created_at,
@@ -96,14 +109,18 @@ const FetchMatches = (props: any) => {
     // },
   };
 
-  const { loading, error, data } = useQuery(MATCHES, { variables });
+  const { loading, error, data } = useQuery<Data>(MATCHES, { variables });
 
   if (loading) return <p>Loading...</p>;
   if (error) {
     console.log("error", error);
     return <p>Error</p>;
   }
-  return children(data);
+
+  return children({
+    ...data,
+    relationships_count: data?.relationships_count.aggregate.count,
+  });
 };
 
 export default (props: any = {}) => {

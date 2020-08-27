@@ -68,7 +68,7 @@ function filterReducer(state: State, action: Action) {
 
 const FilterProvider = ({ children }: { children: any }): any => {
   const initialFilter = {
-    search: undefined,
+    query: undefined,
     status: undefined,
     state: undefined,
     agent: undefined,
