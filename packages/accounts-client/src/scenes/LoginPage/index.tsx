@@ -29,7 +29,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ to }) => {
   return (
     <Row>
       <Col>
-        <Header.h1>{t('welcome.subtitle')}</Header.h1>
+        <Header.H1>{t('welcome.subtitle')}</Header.H1>
         <LoginForm
           onSubmit={async (values: any) => {
             try {

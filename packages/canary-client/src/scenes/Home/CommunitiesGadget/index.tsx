@@ -18,7 +18,7 @@ const Styles = styled.div`
     align-items: flex-end;
     margin-bottom: 15px;
 
-    ${Header.h5} {
+    ${Header.H5} {
       font-weight: bold;
       text-transform: uppercase;
     }
@@ -33,7 +33,7 @@ const CommunitiesGadget = () => {
     <Styles>
       <div className='header'>
         {/** TODO: i18n */}
-        <Header.h5>Suas comunidades</Header.h5>
+        <Header.H5>Suas comunidades</Header.H5>
         <SearchInput
           placeholder='Buscar comunidade'
           field='name'

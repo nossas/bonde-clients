@@ -60,7 +60,7 @@ const Colunm = styled.div<ColumnProps>`
   ${props => props.grow && `flex-grow: ${props.grow};`}
   padding: 13px 15px 14px;
 
-  ${Header.h4}, ${Header.h5} {
+  ${Header.H4}, ${Header.H5} {
     margin: 0;
   };
 
@@ -99,8 +99,8 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
                 <Image src={c.image || `https://via.placeholder.com/100?text=${c.name.substring(0, 1)}`} alt={c.name} />
               </Colunm>
               <Colunm grow={1}>
-                <Header.h4>{c.name}</Header.h4>
-                <Header.h5>{c.description || c.city}</Header.h5>
+                <Header.H4>{c.name}</Header.H4>
+                <Header.H5>{c.description || c.city}</Header.H5>
               </Colunm>
               <Colunm mobile='hide'>
                 <CommunityMenu community={c} />

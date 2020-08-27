@@ -40,7 +40,7 @@ const UserPage = ({ match }: Props) => {
     <PageWrap>
       <SubHeader>
         {/** TODO: i18n */}
-        <Header.h3>Superusuário</Header.h3>
+        <Header.H3>Superusuário</Header.H3>
         <Navigation>
           {/** TODO: i18n */}
           <Tab active>Criar Comunidade</Tab>

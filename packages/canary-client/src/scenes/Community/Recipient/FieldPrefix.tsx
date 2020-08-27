@@ -12,7 +12,7 @@ type Props = {
 
 export const FieldPrefix = ({ prefix, title, children }: Props) => (
   <FieldPrexiContext.Provider value={prefix}>
-    {title && (<Header.h3>{title}</Header.h3>)}
+    {title && (<Header.H3>{title}</Header.H3>)}
     <Panel>
       {children}
     </Panel>

@@ -45,7 +45,7 @@ const MobilizationCard = styled(({ className, mobilization, onClick }: Props) =>
       <Card>
         <Image src={mobilization.facebookShareImage} title={mobilization.name} />
         <CardContent>
-          <Header.h4>{mobilization.name}</Header.h4>
+          <Header.H4>{mobilization.name}</Header.H4>
           <Text>Por {mobilization.community.name}</Text>
         </CardContent>
       </Card>

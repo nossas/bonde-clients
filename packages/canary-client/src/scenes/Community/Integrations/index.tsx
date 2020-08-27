@@ -13,7 +13,7 @@ const SettingsPage = () => {
       <Container fluid style={{ width: '100%', padding: '0' }}>
         <Row>
           <Col sm={12}>
-            <Header.h3 margin="0 0 25px 0">Mailchimp</Header.h3>
+            <Header.H3 margin="0 0 25px 0">Mailchimp</Header.H3>
             <Panel>
               <InputField
                 name='community.mailchimp_api_key'
@@ -28,7 +28,7 @@ const SettingsPage = () => {
             </Panel>
           </Col>
           <Col sm={12}>
-            <Header.h3>Twilio</Header.h3>
+            <Header.H3>Twilio</Header.H3>
             <Panel>
               <InputField
                 name='community.twilio_account_sid'

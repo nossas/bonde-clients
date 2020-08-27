@@ -18,7 +18,7 @@ const Styles = styled.div`
     margin-bottom: 15px;
   }
 
-  ${Header.h5} {
+  ${Header.H5} {
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -70,7 +70,7 @@ const MobilizationsGadget = () => {
   return (
     <Styles>
       <div className='header'>
-        <Header.h5>Últimas atualizações</Header.h5>
+        <Header.H5>Últimas atualizações</Header.H5>
       </div>
       <GadgetWrap>
         {(mobilizations).map(parse).map((mobilization: Mobilization) =>

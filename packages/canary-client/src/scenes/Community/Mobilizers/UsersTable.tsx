@@ -78,23 +78,23 @@ function UsersTable({ data: defaultData, refetch }: Props) {
   const columns = React.useMemo(
     () => [
       {
-        Header: <Header.h5>Nome</Header.h5>,
+        Header: <Header.H5>Nome</Header.H5>,
         accessor: 'user.first_name',
         minWidth: 350
       },
       {
-        Header: <Header.h5>Email</Header.h5>,
+        Header: <Header.H5>Email</Header.H5>,
         accessor: 'user.email',
         minWidth: 350
       },
       {
-        Header: <Header.h5>Função</Header.h5>,
+        Header: <Header.H5>Função</Header.H5>,
         accessor: 'role',
         width: 100,
         Cell: Role
       },
       {
-        Header: <Header.h5>Ações</Header.h5>,
+        Header: <Header.H5>Ações</Header.H5>,
         accessor: 'id',
         minWidth: 100,
         Cell: createDeleteButton(refetch)
