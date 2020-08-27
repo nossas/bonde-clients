@@ -30,7 +30,7 @@ const App = (): React.ReactElement => {
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
   const adminUrl =
-    process.env.REACT_APP_ADMIN_URL ||
+    process.env.REACT_APP_DOMAIN_ADMIN_CANARY ||
     "http://admin-canary.bonde.devel:5001/admin";
 
   return (
