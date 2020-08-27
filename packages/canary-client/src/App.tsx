@@ -67,17 +67,38 @@ const languages = [
   },
 ]
 
-const PageRouting = () => {
-  const { pathname } = useLocation();
+const ChangeLanguage = () => {
   const { i18n } = useTranslation('auth');
-
   const changeLanguage = (lng: 'en' | 'es' | 'pt-BR' | string) => {
     i18n.changeLanguage(lng);
   };
 
   return (
+    <LanguageTool>
+      {languages.map(({ flag: Flag, locale }, index) => (
+        <button
+          key={`language-button-${locale}`}
+          className={locale === i18n.language ? 'active' : undefined}
+          onClick={() => changeLanguage(locale)}
+          title={locale}
+        >
+          <Flag />
+        </button>
+      ))}
+    </LanguageTool>
+  );
+}
+
+const PageRouting = () => {
+  const { pathname } = useLocation();
+
+  return (
     <ScreenClassProvider>
-      <SessionUI indexRoute='/' disableNavigation={pathname === '/'}>
+      <SessionUI
+        indexRoute='/'
+        disableNavigation={pathname === '/'}
+        languageTool={ChangeLanguage}
+      >
         <ToastContainer
           className='BondeToastify'
           hideProgressBar={true}
@@ -89,18 +110,6 @@ const PageRouting = () => {
           <Redirect from='/admin' to='/' />
           <Route component={NotFound} />
         </Switch>
-        <LanguageTool>
-          {languages.map(({ flag: Flag, locale }, index) => (
-            <button
-              key={`language-button-${locale}`}
-              className={locale === i18n.language ? 'active' : undefined}
-              onClick={() => changeLanguage(locale)}
-              title={locale}
-            >
-              <Flag />
-            </button>
-          ))}
-        </LanguageTool>
       </SessionUI>
     </ScreenClassProvider>
   );

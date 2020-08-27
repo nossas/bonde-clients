@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 const LanguageTool = styled.div`
   display: flex;
+  flex: auto;
   flex-direction: row;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  justify-content: flex-end;
 
   button {
     padding: 0;
