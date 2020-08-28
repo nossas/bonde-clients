@@ -56,6 +56,7 @@ const MATCHES = gql`
         id
         first_name
         last_name
+        whatsapp
       }
       agent {
         id

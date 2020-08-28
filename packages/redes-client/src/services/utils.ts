@@ -41,3 +41,11 @@ export const getStates = (): Array<{ label: string; value?: string }> => [
   { label: "SE", value: "se" },
   { label: "TO", value: "to" },
 ];
+
+export const createWhatsappLink = (
+  number: string,
+  textVariables: string
+): string | undefined => {
+  if (!number) return undefined;
+  return `https://web.whatsapp.com/send?phone=55${number}&text=${textVariables}`;
+};

@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, Button } from "bonde-components";
+import { createWhatsappLink } from "../../services/utils";
 
 interface Columns {
   accessor: string;
@@ -83,15 +84,17 @@ const columns = (
       value ? <span>{`${value.first_name} ${value.last_name}`}</span> : "-",
   },
   {
-    accessor: "id",
+    accessor: "volunteer.whatsapp",
     Header: "Ação",
     className: "sticky",
-    Cell: (): JSX.Element | null => (
-      <Button main="#ee0099" hover="#e2058a" focus="#b4006c" secondary>
-        <Icon name="Whatsapp" size="small" />
-        Whatsapp
-      </Button>
-    ),
+    Cell: ({ value }: { value: string }): JSX.Element | null => (
+      <a href={createWhatsappLink(value, "texto")} style={{ textDecoration: "none" }}>
+        <Button main="#ee0099" hover="#e2058a" focus="#b4006c" secondary>
+          <Icon name="Whatsapp" size="small" />
+          Whatsapp
+        </Button>
+      </a>
+    )
   },
 ];
 
