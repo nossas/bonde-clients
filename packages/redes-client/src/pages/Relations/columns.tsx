@@ -22,16 +22,15 @@ type valueFirstName = {
   value: {
     first_name: string;
     last_name?: string;
-    bla: string;
   };
 };
 
 const columns = (
-  groups: Array<{ is_volunteer: boolean; name: string }>
+  groups: Array<{ isVolunteer: boolean; name: string }>
 ): Array<Columns> => [
   {
     accessor: "volunteer",
-    Header: () => (groups ? groups.find((i) => !!i.is_volunteer)?.name : "-"),
+    Header: () => (groups ? groups.find((i) => !!i.isVolunteer)?.name : "-"),
     Cell: ({ value }: valueFirstName): JSX.Element | string =>
       value ? (
         <span>{`${value.first_name} ${value.last_name || ""}`}</span>
@@ -42,7 +41,7 @@ const columns = (
   },
   {
     accessor: "recipient",
-    Header: () => (groups ? groups.find((i) => !i.is_volunteer)?.name : "-"),
+    Header: () => (groups ? groups.find((i) => !i.isVolunteer)?.name : "-"),
     Cell: ({ value }: valueFirstName): JSX.Element | string =>
       value ? (
         <span>{`${value.first_name} ${value.last_name || ""}`}</span>
@@ -56,7 +55,7 @@ const columns = (
   //   Header: "Tipo"
   // },
   {
-    accessor: "created_at",
+    accessor: "createdAt",
     Header: "Data de criação",
     Cell: ({ value }: valueString): string => {
       if (!value) {
@@ -67,7 +66,7 @@ const columns = (
     },
   },
   {
-    accessor: "updated_at",
+    accessor: "updatedAt",
     Header: "Última atualização",
     Cell: ({ value }: valueString): string => {
       if (!value) {
@@ -88,13 +87,18 @@ const columns = (
     Header: "Ação",
     className: "sticky",
     Cell: ({ value }: { value: string }): JSX.Element | null => (
-      <a href={createWhatsappLink(value, "texto")} style={{ textDecoration: "none" }}>
+      <a
+        href={createWhatsappLink(value, "texto")}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none" }}
+      >
         <Button main="#ee0099" hover="#e2058a" focus="#b4006c" secondary>
           <Icon name="Whatsapp" size="small" />
           Whatsapp
         </Button>
       </a>
-    )
+    ),
   },
 ];
 

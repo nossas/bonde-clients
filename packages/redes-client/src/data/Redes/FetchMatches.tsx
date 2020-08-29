@@ -45,8 +45,8 @@ const MATCHES = gql`
       is_archived
       comments
       metadata
-      updated_at
-      created_at
+      updatedAt: updated_at
+      createdAt: created_at
       recipient {
         id
         first_name
@@ -65,7 +65,7 @@ const MATCHES = gql`
       }
       id
     }
-    relationships_count: rede_relationships_aggregate(
+    relationshipsCount: rede_relationships_aggregate(
       where: {
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
@@ -85,7 +85,7 @@ const MATCHES = gql`
       }
     }
     groups: rede_groups(where: { community_id: $context }) {
-      is_volunteer
+      isVolunteer: is_volunteer
       name
     }
   }
@@ -94,7 +94,7 @@ const MATCHES = gql`
 type Data = {
   relationships: Array<any>;
   groups: Array<{ is_volunteer: boolean; name: string }>;
-  relationships_count: {
+  relationshipsCount: {
     aggregate: {
       count: number;
     };
@@ -140,7 +140,7 @@ const FetchMatches = (props: any) => {
 
   return children({
     ...data,
-    relationships_count: data?.relationships_count.aggregate.count,
+    relationshipsCount: data?.relationshipsCount.aggregate.count,
   });
 };
 

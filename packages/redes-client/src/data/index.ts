@@ -1,4 +1,4 @@
 export default {
   redes: require("./Redes"),
-  mapa: require("./Redes"),
+  mapa: require("./Mapa"),
 };

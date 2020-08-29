@@ -22,8 +22,8 @@ type Props = {
     }: {
       children: (data: {
         relationships: Array<any>;
-        groups: Array<{ is_volunteer: boolean; name: string }>;
-        relationships_count: number;
+        groups: Array<{ isVolunteer: boolean; name: string }>;
+        relationshipsCount: number;
       }) => React.ReactElement;
     }) => React.ReactElement | null;
     FilterOptions: {
@@ -74,16 +74,16 @@ export default ({
         relationshipStatus
       />
       <FetchMatches>
-        {({ groups, relationships, relationships_count }) => {
+        {({ groups, relationships, relationshipsCount }) => {
           const pagination = {
-            totalPages: Math.round(relationships_count / state.rows),
+            totalPages: Math.round(relationshipsCount / state.rows),
             goToPage: (e: number) => dispatch({ type: "page", value: e }),
             setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
             pageIndex: state.page,
             pageSize: state.rows,
           };
 
-          return relationships_count < 1 ? (
+          return relationshipsCount < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
             </WrapEmpty>
@@ -93,7 +93,7 @@ export default ({
             </WrapEmpty>
           ) : (
             <>
-              <Header.H4>Total ({relationships_count})</Header.H4>
+              <Header.H4>Total ({relationshipsCount})</Header.H4>
               <Table
                 data={relationships}
                 columns={columns(groups)}

@@ -49,3 +49,35 @@ export const createWhatsappLink = (
   if (!number) return undefined;
   return `https://web.whatsapp.com/send?phone=55${number}&text=${textVariables}`;
 };
+
+export const fuseTicketsWithUsers = (
+  tickets: Array<{
+    volunteersUserId: number;
+    individualsUserId: number;
+    individualsTicketId: number;
+    volunteersTicketId: number;
+    created_at: number;
+  }>,
+  users: Array<{
+    name: string;
+    whatsapp: string;
+    state: string;
+    phone: string;
+    organization_id: number;
+    user_id: number;
+  }>
+) => {
+  return tickets.map((ticket) => {
+    return {
+      recipient: {
+        ...users.find((user) => user.user_id === ticket.individualsUserId),
+        ticketId: ticket.individualsTicketId,
+      },
+      volunteer: {
+        ...users.find((user) => user.user_id === ticket.volunteersUserId),
+        ticketId: ticket.volunteersTicketId,
+      },
+      createdAt: ticket.created_at,
+    };
+  });
+};
