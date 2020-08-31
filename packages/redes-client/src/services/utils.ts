@@ -5,7 +5,9 @@ export const getSelectValues = (values: {
 } =>
   Object.keys(values).reduce((newObj, old) => {
     const newValue =
-      typeof values[old] === "object" ? values[old].value : values[old];
+      typeof values[old] === "object" && values[old] !== null
+        ? values[old].value
+        : values[old];
     return {
       ...newObj,
       [old]: newValue,
@@ -50,13 +52,35 @@ export const createWhatsappLink = (
   return `https://web.whatsapp.com/send?phone=55${number}&text=${textVariables}`;
 };
 
+type TicketsWithUsers = Array<{
+  recipient: {
+    name?: string;
+    whatsapp?: string | null;
+    state?: string;
+    phone?: string | null;
+    organization_id?: number;
+    user_id?: number;
+    ticketId: number;
+  };
+  volunteer: {
+    name?: string;
+    whatsapp?: string | null;
+    state?: string;
+    phone?: string | null;
+    organization_id?: number;
+    user_id?: number;
+    ticketId: number;
+  };
+  createdAt: string;
+}>;
+
 export const fuseTicketsWithUsers = (
   tickets: Array<{
     volunteersUserId: number;
     individualsUserId: number;
     individualsTicketId: number;
     volunteersTicketId: number;
-    created_at: number;
+    created_at: string;
   }>,
   users: Array<{
     name: string;
@@ -66,7 +90,7 @@ export const fuseTicketsWithUsers = (
     organization_id: number;
     user_id: number;
   }>
-) => {
+): TicketsWithUsers => {
   return tickets.map((ticket) => {
     return {
       recipient: {
@@ -81,3 +105,14 @@ export const fuseTicketsWithUsers = (
     };
   });
 };
+
+type Organizations = {
+  lawyer: number;
+  therapist: number;
+  individual: number;
+};
+
+const parseZendeskOrganizations = (input?: string) => JSON.parse(input || "");
+export const zendeskOrganizations: Organizations = parseZendeskOrganizations(
+  process.env.REACT_APP_ZENDESK_ORGANIZATIONS
+);

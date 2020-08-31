@@ -113,40 +113,45 @@ const Filters = ({
                 <RoundSelectField
                   name="group"
                   placeholder="Grupo"
-                  options={options.group as any}
+                  options={options.group}
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               {props.userStatus && (
                 <RoundSelectField
                   name="userStatus"
                   placeholder="Status"
-                  options={options.status as any}
+                  options={options.status}
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               {props.relationshipStatus && (
                 <RoundSelectField
                   name="relationshipStatus"
                   placeholder="Status"
-                  options={options.relationshipStatus as any}
+                  options={options.relationshipStatus}
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               {props.availability && (
                 <RoundSelectField
                   name="availability"
                   placeholder="Disponibilidade"
-                  options={options.availability as any}
+                  options={options.availability}
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               {props.state && (
                 <RoundSelectField
                   name="state"
                   placeholder="Estado"
-                  options={options.state as any}
+                  options={options.state}
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               {props.agent && (
@@ -167,6 +172,7 @@ const Filters = ({
                       : agentOptions) as any
                   }
                   menuPortalTarget={document.querySelector("body")}
+                  isClearable={true}
                 />
               )}
               <Button
