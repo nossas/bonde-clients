@@ -32,9 +32,9 @@ type Props = {
   };
 };
 
-export default ({
+export default function Relations({
   data: { FetchMatches, FilterOptions },
-}: Props): React.ReactElement => {
+}: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
 
   const save = async (values: any) => {
@@ -106,4 +106,6 @@ export default ({
       </FetchMatches>
     </>
   );
-};
+}
+
+Relations.displayName = "Relations";

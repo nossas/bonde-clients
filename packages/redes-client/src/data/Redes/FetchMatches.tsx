@@ -49,19 +49,19 @@ const MATCHES = gql`
       createdAt: created_at
       recipient {
         id
-        first_name
-        last_name
+        firstName: first_name
+        lastName: last_name
       }
       volunteer {
         id
-        first_name
-        last_name
+        firstName: first_name
+        lastName: last_name
         whatsapp
       }
       agent {
         id
-        first_name
-        last_name
+        firstName: first_name
+        lastName: last_name
       }
       id
     }
@@ -144,7 +144,7 @@ const FetchMatches = (props: any) => {
   });
 };
 
-export default (props: any = {}) => {
+export default function CheckCommunity(props: any = {}): React.ReactElement {
   const { community } = useSession();
   return community ? (
     <FetchMatches community={community} {...props} />
@@ -153,4 +153,6 @@ export default (props: any = {}) => {
       <Empty message="Selecione uma comunidade" />
     </WrapEmpty>
   );
-};
+}
+
+CheckCommunity.displayName = "CheckCommunityMatches";
