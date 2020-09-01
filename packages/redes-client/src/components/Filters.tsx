@@ -1,5 +1,5 @@
 import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
+import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import {
   RoundSelectField,
   InputWithIconField,
@@ -44,32 +44,6 @@ type FilterProps = {
   searchPlaceholder?: string;
 };
 
-const AGENTS = gql`
-  query Agents($context: Int_comparison_exp!) {
-    communities(where: { id: $context }) {
-      community_users {
-        user {
-          first_name
-          last_name
-          id
-        }
-      }
-    }
-  }
-`;
-
-type Data = {
-  communities: Array<{
-    community_users: Array<{
-      user: {
-        first_name: string;
-        last_name: string;
-        id: number;
-      };
-    }>;
-  }>;
-};
-
 const Filters = ({
   save,
   initialValues,
@@ -78,18 +52,10 @@ const Filters = ({
   searchPlaceholder,
   ...props
 }: FilterProps): React.ReactElement => {
-  const { community } = useSession();
-  const variables = {
-    context: { _eq: community?.id },
-  };
-  const { loading, error, data } = useQuery<Data>(AGENTS, { variables });
+  const { users } = useCommunityExtra();
 
-  if (error) {
-    console.log(error);
-  }
-
-  const agentOptions = data?.communities[0].community_users.map(({ user }) => ({
-    label: `${user.first_name} ${user.last_name || ""}`,
+  const agentOptions = users?.map(({ user }) => ({
+    label: `${user.firstName} ${user.lastName || ""}`,
     value: user.id,
   }));
 
@@ -158,19 +124,7 @@ const Filters = ({
                 <RoundSelectField
                   name="agent"
                   placeholder="Feito por"
-                  options={
-                    (error || loading
-                      ? [
-                          {
-                            value: undefined,
-                            label:
-                              (loading && "Carregando...") ||
-                              (error &&
-                                "Ocorreu um erro ao carregar os agentes da comunidade"),
-                          },
-                        ]
-                      : agentOptions) as any
-                  }
+                  options={agentOptions as any}
                   menuPortalTarget={document.querySelector("body")}
                   isClearable={true}
                 />
