@@ -22,7 +22,11 @@ type Props = {
     }: {
       children: (data: {
         relationships: Array<any>;
-        groups: Array<{ isVolunteer: boolean; name: string }>;
+        groups: Array<{
+          isVolunteer: boolean;
+          name: string;
+          communityId: number;
+        }>;
         relationshipsCount: number;
       }) => React.ReactElement;
     }) => React.ReactElement | null;

@@ -87,13 +87,14 @@ const MATCHES = gql`
     groups: rede_groups(where: { community_id: $context }) {
       isVolunteer: is_volunteer
       name
+      communityId: community_id
     }
   }
 `;
 
 type Data = {
   relationships: Array<any>;
-  groups: Array<{ is_volunteer: boolean; name: string }>;
+  groups: Array<{ is_volunteer: boolean; name: string; communityId: number }>;
   relationshipsCount: {
     aggregate: {
       count: number;
@@ -125,9 +126,6 @@ const FetchMatches = (props: any) => {
     // created_at: {
     //   _eq: created_at,
     // };
-    // agent: {
-    //   _eq: agent,
-    // },
   };
 
   const { loading, error, data } = useQuery<Data>(MATCHES, { variables });

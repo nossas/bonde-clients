@@ -1,3 +1,5 @@
+import { MatchesData } from "../types";
+
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
 }): {
@@ -116,3 +118,42 @@ const parseZendeskOrganizations = (input?: string) => JSON.parse(input || "");
 export const zendeskOrganizations: Organizations = parseZendeskOrganizations(
   process.env.REACT_APP_ZENDESK_ORGANIZATIONS
 );
+
+export const getAgentZendeskUserId = (
+  id?: number | null
+): number | undefined => {
+  switch (id) {
+    case 281: //"Larissa"
+      return 377510044432;
+    case 346: //"Ana",
+      return 377577169651;
+    case 339: //"Gabriela",
+      return 377511446392;
+    case null:
+    case undefined:
+      return undefined;
+    default:
+      // "Voluntária"
+      return 373018450472;
+  }
+};
+
+export const getAgentFromZendeskUserId: Record<number, string> = {
+  377510044432: "Larissa",
+  377577169651: "Ana",
+  377511446392: "Gabriela",
+  373018450472: "Voluntária",
+};
+
+export const deconstructAgent = (
+  data?: MatchesData
+): MatchesData | Record<string, unknown> => {
+  if (!data) return {};
+  return {
+    ...data,
+    relationships: data.relationships.map((i: any) => ({
+      ...i,
+      agent: i.recipientTicket.agentId,
+    })),
+  };
+};

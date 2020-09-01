@@ -1,6 +1,11 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import { Icon, Button } from "bonde-components";
-import { createWhatsappLink } from "../../services/utils";
+import {
+  createWhatsappLink,
+  zendeskOrganizations,
+  getAgentFromZendeskUserId,
+} from "../../services/utils";
 
 interface Columns {
   accessor: string;
@@ -20,40 +25,80 @@ type valueString = {
 
 type valueFirstName = {
   value: {
-    first_name: string;
-    last_name?: string;
+    firstName: string;
+    lastName?: string;
+    id?: number;
   };
 };
 
 const columns = (
-  groups: Array<{ isVolunteer: boolean; name: string }>
+  groups: Array<{ isVolunteer: boolean; name: string; communityId: number }>
 ): Array<Columns> => [
   {
     accessor: "volunteer",
     Header: () => (groups ? groups.find((i) => !!i.isVolunteer)?.name : "-"),
-    Cell: ({ value }: valueFirstName): JSX.Element | string =>
-      value ? (
-        <span>{`${value.first_name} ${value.last_name || ""}`}</span>
+    Cell: ({ value }: valueFirstName): JSX.Element | string => {
+      if (groups.find((i) => !!i.isVolunteer)?.communityId !== 40) {
+        return value ? (
+          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+        ) : (
+          "-"
+        );
+      }
+      return value ? (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit" }}
+          href={`https://mapadoacolhimento.zendesk.com/agent/users/${value.id}/requested_tickets`}
+        >
+          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+        </a>
       ) : (
         "-"
-      ),
+      );
+    },
     bold: true,
   },
   {
     accessor: "recipient",
     Header: () => (groups ? groups.find((i) => !i.isVolunteer)?.name : "-"),
-    Cell: ({ value }: valueFirstName): JSX.Element | string =>
-      value ? (
-        <span>{`${value.first_name} ${value.last_name || ""}`}</span>
+    Cell: ({ value }: valueFirstName): JSX.Element | string => {
+      if (groups.find((i) => !i.isVolunteer)?.communityId !== 40) {
+        return value ? (
+          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+        ) : (
+          "-"
+        );
+      }
+      return value ? (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit" }}
+          href={`https://mapadoacolhimento.zendesk.com/agent/users/${value.id}/requested_tickets`}
+        >
+          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+        </a>
       ) : (
         "-"
-      ),
+      );
+    },
     bold: true,
   },
-  // {
-  //   accessor: "volunteer",
-  //   Header: "Tipo"
-  // },
+  {
+    accessor: "volunteer.organizationId",
+    Header: "Tipo",
+    Cell: ({ value }: { value: number }): JSX.Element | string => {
+      return value === zendeskOrganizations.lawyer ? (
+        <span>Jurídico</span>
+      ) : value === zendeskOrganizations.therapist ? (
+        <span>Psicológico</span>
+      ) : (
+        "-"
+      );
+    },
+  },
   {
     accessor: "createdAt",
     Header: "Data de criação",
@@ -79,11 +124,23 @@ const columns = (
   {
     accessor: "agent",
     Header: "Feito por",
-    Cell: ({ value }: valueFirstName): JSX.Element | string =>
-      value ? <span>{`${value.first_name} ${value.last_name}`}</span> : "-",
+    Cell: ({ value }: valueFirstName): JSX.Element | string => {
+      if (groups.find((i) => !i.isVolunteer)?.communityId !== 40) {
+        return value ? (
+          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+        ) : (
+          "-"
+        );
+      }
+      return value ? (
+        <span>{getAgentFromZendeskUserId[(value as unknown) as number]}</span>
+      ) : (
+        "-"
+      );
+    },
   },
   {
-    accessor: "volunteer.whatsapp",
+    accessor: "id",
     Header: "Ação",
     className: "sticky",
     Cell: ({ value }: { value: string }): JSX.Element | null => (
