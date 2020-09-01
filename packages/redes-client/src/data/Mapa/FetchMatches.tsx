@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { useSession, useQuery, gql } from "bonde-core-tools";
 import { Empty } from "bonde-components";
 import { useFilterState } from "../../services/FilterProvider";
-import { getSelectValues, fuseTicketsWithUsers } from "../../services/utils";
+import {
+  getSelectValues,
+  getAgentZendeskUserId,
+  deconstructAgent,
+} from "../../services/utils";
+import { MatchesData } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -17,10 +22,13 @@ const MATCHES = gql`
     $rows: Int!
     $offset: Int!
     $status: String_comparison_exp
+    $state: String_comparison_exp
+    $agent: bigint_comparison_exp
+    $query: String
     $order_by: [solidarity_matches_order_by!]
     $created_at: timestamp_comparison_exp
   ) {
-    solidarity_matches(
+    relationships: solidarity_matches(
       limit: $rows
       offset: $offset
       order_by: $order_by
@@ -30,43 +38,53 @@ const MATCHES = gql`
           { status: { _neq: "solicitação_recebida" } }
           { status: { _neq: "solicitação_repetida" } }
           { status: $status }
+          { recipient: { state: $state } }
+          { recipient_ticket: { assignee_id: $agent } }
+        ]
+        _or: [
+          { recipient: { name: { _ilike: $query } } }
+          { recipient: { email: { _ilike: $query } } }
+          { volunteer: { name: { _ilike: $query } } }
+          { volunteer: { email: { _ilike: $query } } }
         ]
       }
     ) {
-      volunteersUserId: volunteers_user_id
-      individualsUserId: individuals_user_id
+      id
       individualsTicketId: individuals_ticket_id
       volunteersTicketId: volunteers_ticket_id
-      created_at
+      status
+      createdAt: created_at
+      recipientTicket: recipient_ticket {
+        agentId: assignee_id
+      }
+      volunteer {
+        firstName: name
+        organizationId: organization_id
+        id: user_id
+        state
+        phone
+        whatsapp
+      }
+      recipient {
+        firstName: name
+        organizationId: organization_id
+        id: user_id
+        state
+        phone
+        whatsapp
+      }
     }
-  }
-`;
-
-type MatchesData = {
-  solidarity_matches: Array<{
-    volunteersUserId: number;
-    individualsUserId: number;
-    individualsTicketId: number;
-    volunteersTicketId: number;
-    created_at: number;
-  }>;
-};
-
-const USERS = gql`
-  query MapaUsers(
-    $state: String_comparison_exp
-    $requesters: [solidarity_users_bool_exp]!
-  ) {
-    users: solidarity_users(where: { state: $state, _or: $requesters }) {
-      first_name: name
-      organization_id
-      user_id
-      state
-      phone
-      whatsapp
-    }
-    usersCount: solidarity_users_aggregate(
-      where: { state: $state, _or: $requesters }
+    relationshipsCount: solidarity_matches_aggregate(
+      where: {
+        created_at: $created_at
+        _and: [
+          { status: { _neq: "solicitação_recebida" } }
+          { status: { _neq: "solicitação_repetida" } }
+          { status: $status }
+          { recipient: { state: $state } }
+          { recipient_ticket: { assignee_id: $agent } }
+        ]
+      }
     ) {
       aggregate {
         count
@@ -75,103 +93,64 @@ const USERS = gql`
   }
 `;
 
-type UsersData = {
-  users: Array<{
-    name: string;
-    whatsapp: string;
-    state: string;
-    phone: string;
-    organization_id: number;
-    user_id: number;
-  }>;
-  usersCount: {
-    aggregate: {
-      count: number;
-    };
-  };
-};
-
 const FetchMatches = (props: any) => {
   const { children, _community } = props;
   const { relationships, page: _, ...pagination } = useFilterState();
 
-  const { relationshipStatus, state, _query } = getSelectValues(relationships);
+  const { relationshipStatus, state, query, agent } = getSelectValues(
+    relationships
+  );
 
-  const ticketVariables = {
+  const variables = {
     status: {
       _eq: relationshipStatus,
     },
+    state: {
+      _eq: typeof state === "string" ? state.toUpperCase() : state,
+    },
+    agent: {
+      _eq: getAgentZendeskUserId(agent as number | null),
+    },
+    query: `%${query || ""}%`,
     ...pagination,
     // created_at: {
     //   _eq: created_at,
     // };
   };
 
-  const {
-    loading: loadingMatches,
-    error: matchesError,
-    data: matchesData,
-  } = useQuery<MatchesData>(MATCHES, { variables: ticketVariables });
+  const { loading, error, data } = useQuery<MatchesData>(MATCHES, {
+    variables,
+  });
 
-  const usersMatches = matchesData?.solidarity_matches
-    .map(({ individualsUserId, volunteersUserId }) => [
-      individualsUserId,
-      volunteersUserId,
-    ])
-    .flat(2);
-
-  // const conditionals = [{ name: { _ilike: query } }, { email: { _ilike: query } }]
-
-  const userVariables = {
-    state: {
-      _eq: typeof state === "string" ? state.toUpperCase() : state,
-    },
-    // query: `%${query || ""}%`,
-    requesters: usersMatches?.map((id) => ({
-      user_id: {
-        _eq: id,
-      },
-    })),
-  };
-
-  const { loading: loadingUsers, error: userError, data: userData } = useQuery<
-    UsersData
-  >(USERS, { variables: userVariables });
-
-  if (loadingMatches || loadingUsers) return <p>Loading...</p>;
-  if (matchesError || userError) {
-    console.log("error", matchesError || userError);
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    console.log("error", error);
     return <p>Error</p>;
   }
 
-  const data = fuseTicketsWithUsers(
-    matchesData?.solidarity_matches as any,
-    userData?.users as any
-  );
-  console.log({ data });
   const groups = [
     {
       isVolunteer: true,
-      name: "Psicólogas",
-    },
-    {
-      isVolunteer: true,
-      name: "Advogadas",
+      name: "Voluntárias",
+      communityId: 40,
     },
     {
       isVolunteer: false,
       name: "MSRs",
+      communityId: 40,
     },
   ];
 
+  const dataWithAgents = deconstructAgent(data);
+
   return children({
-    relationships: data,
-    relationshipsCount: userData?.usersCount.aggregate.count,
+    ...dataWithAgents,
+    relationshipsCount: data?.relationshipsCount.aggregate.count,
     groups,
   });
 };
 
-export default (props: any = {}) => {
+export default function CheckCommunity(props: any = {}): React.ReactElement {
   const { community } = useSession();
   return community ? (
     <FetchMatches community={community} {...props} />
@@ -180,4 +159,6 @@ export default (props: any = {}) => {
       <Empty message="Selecione uma comunidade" />
     </WrapEmpty>
   );
-};
+}
+
+CheckCommunity.displayName = "CheckCommunityMatches";

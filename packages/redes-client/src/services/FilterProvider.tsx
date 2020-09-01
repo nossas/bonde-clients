@@ -14,12 +14,6 @@ type Action =
   | { type: "page"; value: number }
   | { type: "rows"; value: number }
   | { type: "relationships"; value: any };
-// | { type: "status"; value: string }
-// | { type: "availability"; value: string }
-// | { type: "state"; value: string }
-// | { type: "created_at"; value: string }
-// | { type: "order_by"; value: Record<string, string>[] }
-// | { type: "agent"; value: number }
 
 type Dispatch = (action: Action) => void;
 
