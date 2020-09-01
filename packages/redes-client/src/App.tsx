@@ -7,6 +7,7 @@ import { Loading, Main, Body } from "bonde-components";
 import { Relations } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
+import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
 
 type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
@@ -40,21 +41,26 @@ const App = (): React.ReactElement => {
       loading={SessionLoading}
     >
       <FilterProvider>
-        <Router>
-          <BondeSessionUI indexRoute={adminUrl}>
-            <Main style={{ minWidth: "100%" }}>
-              <Header />
-              <Body>
-                <Switch>
-                  <SelectMapaOrRedes path="/relations" component={Relations} />
-                  <Route exact path="/">
-                    <div className="App">{/* <Filters /> */}</div>
-                  </Route>
-                </Switch>
-              </Body>
-            </Main>
-          </BondeSessionUI>
-        </Router>
+        <CommunityExtraProvider>
+          <Router>
+            <BondeSessionUI indexRoute={adminUrl}>
+              <Main style={{ minWidth: "100%" }}>
+                <Header />
+                <Body>
+                  <Switch>
+                    <SelectMapaOrRedes
+                      path="/relations"
+                      component={Relations}
+                    />
+                    <Route exact path="/">
+                      <div className="App">{/* <Filters /> */}</div>
+                    </Route>
+                  </Switch>
+                </Body>
+              </Main>
+            </BondeSessionUI>
+          </Router>
+        </CommunityExtraProvider>
       </FilterProvider>
     </BondeSessionProvider>
   );
