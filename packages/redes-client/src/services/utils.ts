@@ -147,7 +147,7 @@ export const getAgentFromZendeskUserId: Record<number, string> = {
 
 export const groupsToSelect = (
   groups: Groups
-): Array<{ label: string; value: unknown }> => {
+): Array<{ label: string; value: number }> => {
   return groups.map((group) => ({
     label: group.name,
     value: group.id,
@@ -172,3 +172,5 @@ export const groupToOrganization: Record<number, number> = {
   8: zendeskOrganizations["lawyer"],
   9: zendeskOrganizations["individual"],
 };
+
+export const MAPA_DO_ACOLHIMENTO_COMMUNITY = 40;

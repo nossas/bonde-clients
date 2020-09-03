@@ -5,48 +5,19 @@ import {
   createWhatsappLink,
   zendeskOrganizations,
   getAgentFromZendeskUserId,
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
 } from "../../services/utils";
+import { Groups, Columns, valueFirstName, valueString } from "../../types";
 
-interface Columns {
-  accessor: string;
-  Header: any;
-  Cell?: (arg0: any) => string | JSX.Element | null;
-  width?: number;
-  className?: string;
-  bold?: boolean;
-  show?: boolean;
-  Column?: any;
-}
-
-type valueString = {
-  value: string;
-  row?: any;
-};
-
-type valueFirstName = {
-  value: {
-    firstName: string;
-    lastName?: string;
-    id?: number;
-  };
-};
-
-const columns = (
-  groups: Array<{
-    isVolunteer: boolean;
-    name: string;
-    communityId: number;
-    organizationId?: number;
-  }>
-): Array<Columns> => {
+const columns = (groups: Groups): Array<Columns> => {
   const volunteerGroup = groups.find((i) => !!i.isVolunteer);
-  const individualGroup = groups.find((i) => !i.isVolunteer);
+  const recipientGroup = groups.find((i) => !i.isVolunteer);
   return [
     {
       accessor: "volunteer",
       Header: () => volunteerGroup?.name || "-",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (volunteerGroup?.communityId !== 40) {
+        if (volunteerGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
           return value ? (
             <span>{`${value.firstName} ${value.lastName || ""}`}</span>
           ) : (
@@ -70,9 +41,9 @@ const columns = (
     },
     {
       accessor: "recipient",
-      Header: () => individualGroup?.name || "-",
+      Header: () => recipientGroup?.name || "-",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (individualGroup?.communityId !== 40) {
+        if (recipientGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
           return value ? (
             <span>{`${value.firstName} ${value.lastName || ""}`}</span>
           ) : (
@@ -133,7 +104,7 @@ const columns = (
       accessor: "agent",
       Header: "Feito por",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (groups.find((i) => !i.isVolunteer)?.communityId !== 40) {
+        if (recipientGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
           return value ? (
             <span>{`${value.firstName} ${value.lastName || ""}`}</span>
           ) : (
@@ -158,7 +129,12 @@ const columns = (
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
         >
-          <Button main="#ee0099" hover="#e2058a" focus="#b4006c" secondary>
+          <Button
+            main="#ee0099"
+            hover="#e2058a"
+            focus="#bMAPA_DO_ACOLHIMENTO_COMMUNITY06c"
+            secondary
+          >
             <Icon name="Whatsapp" size="small" />
             Whatsapp
           </Button>
