@@ -28,6 +28,24 @@ const FilterDispatchContext = React.createContext<Dispatch | undefined>(
   undefined
 );
 
+const initialFilters = {
+  query: undefined,
+  status: undefined,
+  relationshipStatus: undefined,
+  userStatus: undefined,
+  agent: undefined,
+  group: undefined,
+  // created_at: undefined,
+};
+
+const initialState = {
+  rows: 10,
+  offset: 10 * 0,
+  page: 0,
+  relationships: initialFilters,
+  individuals: initialFilters,
+};
+
 function filterReducer(state: State, action: Action) {
   switch (action.type) {
     case "page": {
@@ -71,25 +89,10 @@ function filterReducer(state: State, action: Action) {
 }
 
 const FilterProvider = ({ children }: { children: any }): any => {
-  const initialFilter = {
-    query: undefined,
-    status: undefined,
-    relationshipStatus: undefined,
-    userStatus: undefined,
-    agent: undefined,
-    group: undefined,
-    // created_at: undefined,
-  };
-
-  const filtered = {
-    rows: 10,
-    offset: 10 * 0,
-    page: 0,
-    relationships: initialFilter,
-    individuals: initialFilter,
-  };
-
-  const [state, dispatch] = React.useReducer(filterReducer, filtered);
+  const [state, dispatch] = React.useReducer(
+    filterReducer,
+    initialState as never
+  );
 
   return (
     <FilterStateContext.Provider value={state}>
