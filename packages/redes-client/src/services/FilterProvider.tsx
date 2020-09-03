@@ -13,12 +13,14 @@ export type Pagination = {
 type Action =
   | { type: "page"; value: number }
   | { type: "rows"; value: number }
-  | { type: "relationships"; value: any };
+  | { type: "relationships"; value: any }
+  | { type: "individuals"; value: any };
 
 type Dispatch = (action: Action) => void;
 
 type State = {
   relationships: any;
+  individuals: any;
 } & Pagination;
 
 const FilterStateContext = React.createContext<State | undefined>(undefined);
@@ -53,6 +55,15 @@ function filterReducer(state: State, action: Action) {
         },
       };
     }
+    case "individuals": {
+      return {
+        ...state,
+        individuals: {
+          ...state.individuals,
+          ...action.value,
+        },
+      };
+    }
     default: {
       throw new Error(`Unhandled action type`);
     }
@@ -63,8 +74,10 @@ const FilterProvider = ({ children }: { children: any }): any => {
   const initialFilter = {
     query: undefined,
     status: undefined,
-    state: undefined,
+    relationshipStatus: undefined,
+    userStatus: undefined,
     agent: undefined,
+    group: undefined,
     // created_at: undefined,
   };
 
@@ -73,6 +86,7 @@ const FilterProvider = ({ children }: { children: any }): any => {
     offset: 10 * 0,
     page: 0,
     relationships: initialFilter,
+    individuals: initialFilter,
   };
 
   const [state, dispatch] = React.useReducer(filterReducer, filtered);

@@ -11,7 +11,7 @@ const StyledNavigation = styled(Navigation)`
   }
   justify-items: center;
 `;
-const Header = () => {
+const Header = (): React.ReactElement => {
   return (
     <StyledNavigation>
       <Link to="/">
@@ -26,11 +26,11 @@ const Header = () => {
           Início
         </Tab>
       </Link>
-      <Link to="/users">
+      <Link to="/pessoas">
         <Tab
           active={
             !!useRouteMatch({
-              path: "/users",
+              path: "/pessoas",
               exact: false,
             })
           }
@@ -38,11 +38,11 @@ const Header = () => {
           Pessoas
         </Tab>
       </Link>
-      <Link to="/relations">
+      <Link to="/matchs">
         <Tab
           active={
             !!useRouteMatch({
-              path: "/relations",
+              path: "/matchs",
               exact: false,
             })
           }

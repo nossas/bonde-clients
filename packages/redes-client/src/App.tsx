@@ -4,7 +4,7 @@ import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 
 import { Loading, Main, Body } from "bonde-components";
 
-import { Relations } from "./pages";
+import { Relations, Individuals } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
 import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
@@ -48,9 +48,10 @@ const App = (): React.ReactElement => {
                 <Header />
                 <Body>
                   <Switch>
+                    <SelectMapaOrRedes path="/matchs" component={Relations} />
                     <SelectMapaOrRedes
-                      path="/relations"
-                      component={Relations}
+                      path="/pessoas"
+                      component={Individuals}
                     />
                     <Route exact path="/">
                       <div className="App">{/* <Filters /> */}</div>

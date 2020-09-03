@@ -1,4 +1,4 @@
-import { MatchesData } from "../types";
+import { MatchesData, Groups } from "../types";
 
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
@@ -145,6 +145,15 @@ export const getAgentFromZendeskUserId: Record<number, string> = {
   373018450472: "Voluntária",
 };
 
+export const groupsToSelect = (
+  groups: Groups
+): Array<{ label: string; value: unknown }> => {
+  return groups.map((group) => ({
+    label: group.name,
+    value: group.id,
+  }));
+};
+
 export const deconstructAgent = (
   data?: MatchesData
 ): MatchesData | Record<string, unknown> => {
@@ -156,4 +165,10 @@ export const deconstructAgent = (
       agent: i.recipientTicket.agentId,
     })),
   };
+};
+
+export const groupToOrganization: Record<number, number> = {
+  7: zendeskOrganizations["therapist"],
+  8: zendeskOrganizations["lawyer"],
+  9: zendeskOrganizations["individual"],
 };
