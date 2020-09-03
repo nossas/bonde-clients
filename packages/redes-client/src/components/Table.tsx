@@ -17,7 +17,7 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   padding: 10px 0 10px 20px;
   border-bottom: 1px solid #e5e5e5;
 
-  // Sticky
+  /* Sticky */
   position: sticky !important;
   top: 0;
   z-index: 1;
@@ -27,9 +27,13 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   &:first-child.sticky {
     z-index: 2;
   }
+
+  &.hide {
+    display: none;
+  }
 `;
 
-const StyledTd = styled.td<{ theme: any; bold?: boolean }>`
+const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
   min-width: 300px;
 
   font-family: ${(props) => props.theme.fontFamily};
@@ -50,6 +54,10 @@ const StyledTd = styled.td<{ theme: any; bold?: boolean }>`
   /* But "collapsed" cells should be as small as possible */
   &.collapse {
     width: 0.0000000001%;
+  }
+
+  &.hide {
+    display: none;
   }
 `;
 
