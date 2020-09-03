@@ -4,6 +4,7 @@ import { Header, Empty } from "bonde-components";
 // import { useSession } from "bonde-core-tools";
 import { Table, Filters } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
+import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import columns from "./columns";
 
 const WrapEmpty = styled.div`
@@ -22,11 +23,6 @@ type Props = {
     }: {
       children: (data: {
         relationships: Array<any>;
-        groups: Array<{
-          isVolunteer: boolean;
-          name: string;
-          communityId: number;
-        }>;
         relationshipsCount: number;
       }) => React.ReactElement;
     }) => React.ReactElement | null;
@@ -40,6 +36,7 @@ export default function Relations({
   data: { FetchMatches, FilterOptions },
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
+  const { groups } = useCommunityExtra();
 
   const save = async (values: any) => {
     // This needs to be done because when the text input is cleaned, it doesn't come as an `undefined` value, it's just not present and the previous state is maintained in the provider. Because of that, every time we dispatch the newValues, we need to clear them first.
@@ -50,7 +47,8 @@ export default function Relations({
       relationshipStatus: undefined,
       ...values,
     };
-    return dispatch({ type: "relationships", value: newValues });
+    dispatch({ type: "relationships", value: newValues });
+    return dispatch({ type: "page", value: 0 });
   };
 
   const reset = () =>
@@ -78,7 +76,7 @@ export default function Relations({
         relationshipStatus
       />
       <FetchMatches>
-        {({ groups, relationships, relationshipsCount }) => {
+        {({ relationships, relationshipsCount }) => {
           const pagination = {
             totalPages: Math.round(relationshipsCount / state.rows),
             goToPage: (e: number) => dispatch({ type: "page", value: e }),

@@ -84,11 +84,6 @@ const MATCHES = gql`
         count
       }
     }
-    groups: rede_groups(where: { community_id: $context }) {
-      isVolunteer: is_volunteer
-      name
-      communityId: community_id
-    }
   }
 `;
 
@@ -102,9 +97,8 @@ type Data = {
   };
 };
 
-const FetchMatches = (props: any) => {
-  const { children, community } = props;
-  const { relationships, page: _, ...pagination } = useFilterState();
+const FetchMatches = ({ children, community }: any) => {
+  const { relationships, rows, offset } = useFilterState();
 
   const { relationshipStatus, state, agent, query } = getSelectValues(
     relationships
@@ -122,7 +116,8 @@ const FetchMatches = (props: any) => {
       _eq: agent,
     },
     query: `%${query || ""}%`,
-    ...pagination,
+    rows,
+    offset,
     // created_at: {
     //   _eq: created_at,
     // };

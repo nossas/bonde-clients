@@ -93,9 +93,8 @@ const MATCHES = gql`
   }
 `;
 
-const FetchMatches = (props: any) => {
-  const { children, _community } = props;
-  const { relationships, page: _, ...pagination } = useFilterState();
+const FetchMatches = ({ children }: any) => {
+  const { relationships, rows, offset } = useFilterState();
 
   const { relationshipStatus, state, query, agent } = getSelectValues(
     relationships
@@ -112,7 +111,8 @@ const FetchMatches = (props: any) => {
       _eq: getAgentZendeskUserId(agent as number | null),
     },
     query: `%${query || ""}%`,
-    ...pagination,
+    rows,
+    offset,
     // created_at: {
     //   _eq: created_at,
     // };
@@ -128,25 +128,11 @@ const FetchMatches = (props: any) => {
     return <p>Error</p>;
   }
 
-  const groups = [
-    {
-      isVolunteer: true,
-      name: "Voluntárias",
-      communityId: 40,
-    },
-    {
-      isVolunteer: false,
-      name: "MSRs",
-      communityId: 40,
-    },
-  ];
-
   const dataWithAgents = deconstructAgent(data);
 
   return children({
     ...dataWithAgents,
     relationshipsCount: data?.relationshipsCount.aggregate.count,
-    groups,
   });
 };
 
