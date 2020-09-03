@@ -38,7 +38,8 @@ export type GroupsVars = {
   rows: number;
   offset: number;
   order_by?: string;
-  status: { _eq: string | number | undefined };
+  userStatus: { _eq: string | number | undefined };
+  relationshipStatus: { _eq: string | number | undefined };
   state: { _eq: string | number | undefined };
   availability: { _eq: string | number | undefined };
   individualId: { _eq: number };

@@ -89,6 +89,14 @@ export default function Individuals({
       },
     });
 
+  const isVolunteerSelected =
+    typeof state.individuals.group !== "undefined" &&
+    state.individuals.group !== null
+      ? groups
+          .filter((i) => !!i.isVolunteer)
+          .find((i) => i.id === state.individuals.group.value)
+      : false;
+
   return (
     <>
       <Filters
@@ -104,7 +112,8 @@ export default function Individuals({
         search
         state
         availability
-        userStatus
+        userStatus={!!isVolunteerSelected === true}
+        relationshipStatus={!!isVolunteerSelected === false}
       />
       <FetchUsersByGroup>
         {({ data, count }) => {
@@ -129,7 +138,7 @@ export default function Individuals({
               <Header.H4>Total ({count})</Header.H4>
               <Table
                 data={data}
-                columns={columns(groups)}
+                columns={columns(groups, !!isVolunteerSelected)}
                 sticky="end"
                 pagination={pagination}
               />

@@ -10,7 +10,8 @@ export const INDIVIDUALS_BY_GROUP = gql`
     $rows: Int!
     $offset: Int!
     $order_by: [solidarity_tickets_order_by!]
-    $status: String_comparison_exp
+    $userStatus: String_comparison_exp
+    $relationshipStatus: String_comparison_exp
     $state: String_comparison_exp
     $availability: String_comparison_exp
     $individualId: bigint_comparison_exp
@@ -18,7 +19,8 @@ export const INDIVIDUALS_BY_GROUP = gql`
   ) {
     data: solidarity_tickets(
       where: {
-        status_inscricao: $status
+        status_inscricao: $userStatus
+        status_acolhimento: $relationshipStatus
         individual: {
           condition: $availability
           state: $state
@@ -38,7 +40,8 @@ export const INDIVIDUALS_BY_GROUP = gql`
     }
     count: solidarity_tickets_aggregate(
       where: {
-        status_inscricao: $status
+        status_inscricao: $userStatus
+        status_acolhimento: $relationshipStatus
         individual: {
           condition: $availability
           state: $state
@@ -79,7 +82,8 @@ export const INDIVIDUALS_BY_GROUP = gql`
       atendimentosConcluidos: atendimentos_concludos_calculado_
       atendimentosEmAndamento: atendimentos_em_andamento_calculado_
     }
-    status: status_inscricao
+    relationshipStatus: status_inscricao
+    userStatus: status_acolhimento
     createdAt: created_at
     updateAt: updated_at
     organizationId: organization_id
@@ -89,13 +93,21 @@ export const INDIVIDUALS_BY_GROUP = gql`
 const FetchUsersByGroup = ({ children }: any) => {
   const { individuals, rows, offset } = useFilterState();
 
-  const { userStatus, availability, state, group, query } = getSelectValues(
-    individuals
-  );
+  const {
+    userStatus,
+    availability,
+    state,
+    query,
+    relationshipStatus,
+    group,
+  } = getSelectValues(individuals);
 
   const variables = {
-    status: {
+    userStatus: {
       _eq: userStatus,
+    },
+    relationshipStatus: {
+      _eq: relationshipStatus,
     },
     availability: {
       _eq: availability,
@@ -104,7 +116,9 @@ const FetchUsersByGroup = ({ children }: any) => {
       _eq: state,
     },
     query: `%${query || ""}%`,
-    individualId: { _eq: groupToOrganization[group as number] },
+    individualId: {
+      _eq: groupToOrganization[group as number],
+    },
     rows,
     offset,
     // created_at: {
