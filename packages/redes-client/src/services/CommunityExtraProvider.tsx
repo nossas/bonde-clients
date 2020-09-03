@@ -3,7 +3,7 @@ import { useSession, useQuery, gql } from "bonde-core-tools";
 import {
   CommunityExtraData,
   CommunityExtraVars,
-  CommunityExtra,
+  CommunityExtraState,
 } from "../types";
 
 const initialValue = {
@@ -12,9 +12,25 @@ const initialValue = {
     volunteer_msg: "",
     individual_msg: "",
   },
+  groups: [
+    {
+      isVolunteer: true,
+      name: "Voluntária",
+      communityId: 0,
+      id: 0,
+    },
+    {
+      isVolunteer: false,
+      name: "PSR",
+      communityId: 0,
+      id: 0,
+    },
+  ],
 };
 
-const CommunityExtraContext = React.createContext<CommunityExtra>(initialValue);
+const CommunityExtraContext = React.createContext<CommunityExtraState>(
+  initialValue
+);
 
 const COMMUNITY_EXTRA = gql`
   query fetchCommunityExtra($communityId: bigint!, $context: Int!) {
@@ -23,7 +39,7 @@ const COMMUNITY_EXTRA = gql`
     ) {
       settings
     }
-    communities(where: { id: { _eq: $context } }) {
+    community: communities(where: { id: { _eq: $context } }) {
       users: community_users {
         user {
           firstName: first_name
@@ -31,6 +47,12 @@ const COMMUNITY_EXTRA = gql`
           id
         }
       }
+    }
+    groups: rede_groups(where: { community_id: { _eq: $context } }) {
+      isVolunteer: is_volunteer
+      name
+      communityId: community_id
+      id
     }
   }
 `;
@@ -61,10 +83,14 @@ const CommunityExtraProvider = ({
     (data && data.communitySettings && data.communitySettings[0]) ||
     initialValue;
 
-  const users =
-    data && data.communities && data.communities[0] && data.communities[0];
+  const groups = (data && data.groups) || initialValue.groups;
 
-  const value = users && settings ? { ...settings, ...users } : initialValue;
+  const users = data && data.community && data.community[0];
+
+  const value =
+    users && settings && groups
+      ? { ...settings, ...users, groups }
+      : initialValue;
 
   return (
     <CommunityExtraContext.Provider value={value}>
@@ -73,7 +99,7 @@ const CommunityExtraProvider = ({
   );
 };
 
-const useCommunityExtra = (): CommunityExtra => {
+const useCommunityExtra = (): CommunityExtraState => {
   const context = React.useContext(CommunityExtraContext);
   if (context === undefined) {
     throw new Error(

@@ -1,21 +1,32 @@
-export type CommunityExtra = {
+export interface CommunitySettings {
   settings: {
     volunteer_msg: string;
     individual_msg: string;
     distance: number;
   };
-  users?: {
+}
+
+export type Groups = Array<{
+  isVolunteer: boolean;
+  name: string;
+  communityId: number;
+  id: number;
+}>;
+
+export interface CommunityExtraState extends CommunitySettings {
+  users?: Array<{
     user: {
       firstName: string;
       lastName: string;
       id: number;
     };
-  }[];
-};
+  }>;
+  groups: Groups;
+}
 
 export interface CommunityExtraData {
-  communitySettings: CommunityExtra[];
-  communities: Array<{
+  communitySettings: CommunitySettings[];
+  community: Array<{
     users: Array<{
       user: {
         firstName: string;
@@ -24,6 +35,7 @@ export interface CommunityExtraData {
       };
     }>;
   }>;
+  groups?: Groups;
 }
 
 export type CommunityExtraVars = {
