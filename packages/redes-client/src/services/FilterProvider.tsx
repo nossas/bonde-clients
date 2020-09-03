@@ -13,6 +13,7 @@ export type Pagination = {
 type Action =
   | { type: "page"; value: number }
   | { type: "rows"; value: number }
+  | { type: "group"; value: { value: number; label: string } }
   | { type: "relationships"; value: any }
   | { type: "individuals"; value: any };
 
@@ -21,6 +22,7 @@ type Dispatch = (action: Action) => void;
 type State = {
   relationships: any;
   individuals: any;
+  group: { value: number; label: string };
 } & Pagination;
 
 const FilterStateContext = React.createContext<State | undefined>(undefined);
@@ -34,7 +36,8 @@ const initialFilters = {
   relationshipStatus: undefined,
   userStatus: undefined,
   agent: undefined,
-  group: undefined,
+  state: undefined,
+  availability: undefined,
   // created_at: undefined,
 };
 
@@ -42,6 +45,7 @@ const initialState = {
   rows: 10,
   offset: 10 * 0,
   page: 0,
+  group: undefined,
   relationships: initialFilters,
   individuals: initialFilters,
 };
@@ -62,6 +66,12 @@ function filterReducer(state: State, action: Action) {
         ...state,
         rows: action.value,
         offset: action.value * state.page,
+      };
+    }
+    case "group": {
+      return {
+        ...initialState,
+        group: action.value,
       };
     }
     case "relationships": {

@@ -32,6 +32,7 @@ type Options = {
 type FilterProps = {
   initialValues?: any;
   save: (e: any) => Promise<any>;
+  onGroupChange: (e: any) => void;
   options: Options;
   reset: () => void;
   search?: boolean;
@@ -50,6 +51,7 @@ const Filters = ({
   options,
   reset,
   searchPlaceholder,
+  onGroupChange,
   ...props
 }: FilterProps): React.ReactElement => {
   const { users } = useCommunityExtra();
@@ -79,16 +81,17 @@ const Filters = ({
                 <RoundSelectField
                   name="group"
                   placeholder="Grupo"
-                  options={options.group}
+                  options={options.groups}
                   menuPortalTarget={document.querySelector("body")}
                   isClearable={true}
+                  onChange={onGroupChange}
                 />
               )}
               {props.userStatus && (
                 <RoundSelectField
                   name="userStatus"
                   placeholder="Status"
-                  options={options.status}
+                  options={options.userStatus}
                   menuPortalTarget={document.querySelector("body")}
                   isClearable={true}
                 />
@@ -145,6 +148,10 @@ const Filters = ({
       </ConnectedForm>
     </Wrap>
   );
+};
+
+Filters.defaultProps = {
+  onGroupChange: (e: any) => e,
 };
 
 export default Filters;

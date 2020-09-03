@@ -40,72 +40,50 @@ export default function Individuals({
   const { groups } = useCommunityExtra();
 
   useEffect(() => {
-    if (
-      state.individuals.group === null ||
-      typeof state.individuals.group === "undefined"
-    )
+    if (state.group === null || typeof state.group === "undefined")
       return dispatch({
-        type: "individuals",
+        type: "group",
         value: {
-          group: {
-            value: groups.find((group) => !group.isVolunteer)?.id,
-            label: groups.find((group) => !group.isVolunteer)?.name,
-          },
+          value: groups.find((group) => !group.isVolunteer)?.id || 0,
+          label: groups.find((group) => !group.isVolunteer)?.name || "",
         },
       });
-  }, [state.individuals.group]);
+  }, [state.group]);
 
   const save = async (values: any) => {
-    // This needs to be done because when the text input is cleaned, it doesn't come as an `undefined` value, it's just not present and the previous state is maintained in the provider. Because of that, every time we dispatch the newValues, we need to clear them first.
-    const newValues = {
-      query: undefined,
-      state: undefined,
-      agent: undefined,
-      availability: undefined,
-      userStatus: undefined,
-      group: {
-        value: groups.find((group) => !group.isVolunteer)?.id,
-        label: groups.find((group) => !group.isVolunteer)?.name,
-      },
-      ...values,
-    };
-    dispatch({ type: "individuals", value: newValues });
+    dispatch({ type: "individuals", value: values });
     return dispatch({ type: "page", value: 0 });
   };
 
   const reset = () =>
     dispatch({
-      type: "individuals",
+      type: "group",
       value: {
-        query: undefined,
-        state: undefined,
-        agent: undefined,
-        availability: undefined,
-        userStatus: undefined,
-        group: {
-          value: groups.find((group) => !group.isVolunteer)?.id,
-          label: groups.find((group) => !group.isVolunteer)?.name,
-        },
+        value: groups.find((group) => !group.isVolunteer)?.id || 0,
+        label: groups.find((group) => !group.isVolunteer)?.name || "",
       },
     });
 
   const isVolunteerSelected =
-    typeof state.individuals.group !== "undefined" &&
-    state.individuals.group !== null
+    typeof state.group !== "undefined" && state.group !== null
       ? groups
           .filter((i) => !!i.isVolunteer)
-          .find((i) => i.id === state.individuals.group.value)
+          .find((i) => i.id === state.group.value)
       : false;
 
   return (
     <>
       <Filters
         save={save}
+        onGroupChange={(e) => dispatch({ type: "group", value: e })}
         options={{
           ...FilterOptions,
           groups: groupsToSelect(groups),
         }}
-        initialValues={state.individuals}
+        initialValues={{
+          ...state.individuals,
+          group: state.group,
+        }}
         reset={reset}
         searchPlaceholder="Buscar nome, email, especialidade..."
         groups

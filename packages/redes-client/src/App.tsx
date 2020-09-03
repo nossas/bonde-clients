@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
-
-import { Loading, Main, Body } from "bonde-components";
+import { Loading, Main, Body as ComponentsBody } from "bonde-components";
+import styled from "styled-components";
 
 import { Relations, Individuals } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
@@ -26,6 +26,11 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 };
 
 type Environment = "development" | "staging" | "production";
+
+const Body = styled(ComponentsBody)`
+  display: unset;
+  padding: 20px 65px;
+`;
 
 const App = (): React.ReactElement => {
   const environment: string =

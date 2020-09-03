@@ -91,7 +91,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
 `;
 
 const FetchUsersByGroup = ({ children }: any) => {
-  const { individuals, rows, offset } = useFilterState();
+  const { individuals, rows, offset, group } = useFilterState();
 
   const {
     userStatus,
@@ -99,7 +99,6 @@ const FetchUsersByGroup = ({ children }: any) => {
     state,
     query,
     relationshipStatus,
-    group,
   } = getSelectValues(individuals);
 
   const variables = {
@@ -117,7 +116,7 @@ const FetchUsersByGroup = ({ children }: any) => {
     },
     query: `%${query || ""}%`,
     individualId: {
-      _eq: groupToOrganization[group as number],
+      _eq: groupToOrganization[group && (group.value as number)],
     },
     rows,
     offset,
