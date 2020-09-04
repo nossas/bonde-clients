@@ -2,7 +2,13 @@
 import React from "react";
 import { Button } from "bonde-components";
 import { Link } from "react-router-dom";
-import { Groups, Columns, valueFirstName, valueString } from "../../types";
+import {
+  Groups,
+  Columns,
+  valueFirstName,
+  valueString,
+  MapaIndividual,
+} from "../../types";
 import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../../services/utils";
 
 const columns = (
@@ -150,12 +156,21 @@ const columns = (
       accessor: "id",
       Header: "Ação",
       className: "sticky",
-      Cell: (props: any): JSX.Element | null => {
-        // console.log({ props });
+      Cell: ({
+        row: { original },
+      }: {
+        row: { original: MapaIndividual };
+      }): JSX.Element | null => {
         return (
           <Link
             to={{
               pathname: "/match",
+              search: `?email=${original.individual.email}`,
+              state: {
+                [!!isVolunteerSelected ? "volunteer" : "recipient"]: {
+                  ...original,
+                },
+              },
             }}
           >
             <Button
@@ -163,7 +178,6 @@ const columns = (
               hover="#e2058a"
               focus="#bMAPA_DO_ACOLHIMENTO_COMMUNITY06c"
               secondary
-              onClick={() => console.log(props.value)}
             >
               Buscar match
             </Button>

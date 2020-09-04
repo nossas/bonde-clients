@@ -16,8 +16,6 @@ const WrapEmpty = styled.div`
 `;
 
 type Props = {
-  loading?: boolean;
-  error?: any;
   data: {
     FetchUsersByGroup: ({
       children,
