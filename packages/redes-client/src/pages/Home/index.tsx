@@ -1,21 +1,21 @@
 import React from "react";
-import { Header, Shortcut, Icon, Question } from "bonde-components";
+import { Header, Shortcut, Icon } from "bonde-components";
 import { useSession } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import { useFilter } from "../../services/FilterProvider";
 
-const DashboardGrid = styled.div`
-  border-color: 1px solid #000;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(auto, 450px));
-  grid-template-rows: repeat(3, minmax(auto, 300px));
-  grid-gap: 20px;
-  & iframe > html {
-    display: none;
-  }
-`;
+// const DashboardGrid = styled.div`
+//   border-color: 1px solid #000;
+//   display: grid;
+//   grid-template-columns: repeat(3, minmax(auto, 450px));
+//   grid-template-rows: repeat(3, minmax(auto, 300px));
+//   grid-gap: 20px;
+//   & iframe > html {
+//     display: none;
+//   }
+// `;
 
 const Grid = styled.div`
   display: grid;
@@ -24,13 +24,13 @@ const Grid = styled.div`
   justify-content: start;
 `;
 
-const BlocksGrid = styled.div`
-  border-color: 1px solid #000;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(auto, 200px));
-  grid-template-rows: repeat(2, minmax(auto, 150px));
-  grid-gap: 20px;
-`;
+// const BlocksGrid = styled.div`
+//   border-color: 1px solid #000;
+//   display: grid;
+//   grid-template-columns: repeat(2, minmax(auto, 200px));
+//   grid-template-rows: repeat(2, minmax(auto, 150px));
+//   grid-gap: 20px;
+// `;
 
 export default function Home(): React.ReactElement {
   const { community } = useSession();
@@ -80,103 +80,85 @@ export default function Home(): React.ReactElement {
         </Link>
         <Link to="/matchs" style={{ textDecoration: "none" }}>
           <Shortcut
-            icon={<Icon name="Show" size="small" />}
+            icon={<Icon name="Open" size="small" />}
             text="Ver meus matchs"
           />
         </Link>
       </Grid>
-      <Header.H5>DADOS DA SEMANA</Header.H5>
+      {/* <Header.H5>DADOS DA SEMANA</Header.H5>
+      <Grid>
+        <Question
+          config={{ resource: { question: 1197 }, params: {} }} // Novas msrs inscritas
+        />
+        <Question
+          config={{ resource: { question: 1198 }, params: {} }} // enc. real.
+        />
+        <Question
+          config={{ resource: { question: 1199 }, params: {} }} // enc. serv. pub.
+        />
+        <Question
+          config={{ resource: { question: 1200 }, params: {} }} // atd. in.
+        />
+        <Question
+          config={{ resource: { question: 1201 }, params: {} }} // novas vol. aprov.
+        />
+        <Question
+          config={{ resource: { question: 1202 }, params: {} }} // novas vol. disp.
+        />
+      </Grid> */}
       <Header.H5>DADOS GERAIS</Header.H5>
-      <DashboardGrid>
+      {/* <DashboardGrid>
         <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
           config={{ resource: { question: 1187 }, params: {} }} // msr / dia
-          questionOptions={"#bordered=false&titled=true"}
+          title
         />
         <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
           config={{ resource: { question: 1020 }, params: {} }} // voluntarias / dia
-          questionOptions={"#bordered=false&titled=true"}
+          title
         />
         <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
           config={{ resource: { question: 1140 }, params: {} }} // match / dia
-          questionOptions={"#bordered=false&titled=true"}
+          title
         />
         <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
           config={{ resource: { question: 1186 }, params: {} }} // msr serv. pub.
-          questionOptions={"#bordered=false&titled=true"}
+          title
         />
         <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
           config={{ resource: { question: 1188 }, params: {} }} // total dos acolhimentos
-          questionOptions={"#bordered=false&titled=true"}
+          title
         />
         <BlocksGrid>
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1190 }, params: {} }} // enc. realizados
-            questionOptions={"#bordered=false&titled=false"}
           />
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1191 }, params: {} }} // atendimentos iniciados
-            questionOptions={"#bordered=false&titled=false"}
           />
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1192 }, params: {} }} // atendimentos concluidos
-            questionOptions={"#bordered=false&titled=false"}
           />
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1193 }, params: {} }} // atendimentos interrompidos
-            questionOptions={"#bordered=false&titled=false"}
           />
         </BlocksGrid>
-        <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
-          config={{ resource: { question: 1151 }, params: {} }}
-          questionOptions={"#bordered=false&titled=true"}
-        />
+        <Question config={{ resource: { question: 1151 }, params: {} }} title />
         <BlocksGrid>
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1194 }, params: {} }} // aprovadas e validadas
-            questionOptions={"#bordered=false&titled=true"}
+            title
           />
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1196 }, params: {} }} // rep. estudo de caso
-            questionOptions={"#bordered=false&titled=true"}
+            title
           />
           <Question
-            siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-            secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
             config={{ resource: { question: 1195 }, params: {} }} // rep. diretrizes
-            questionOptions={"#bordered=false&titled=true"}
+            title
           />
         </BlocksGrid>
-        <Question
-          siteUrl={process.env.REACT_APP_METABASE_SITE_URL || ""}
-          secretKey={process.env.REACT_APP_METABASE_SECRET_KEY || ""}
-          config={{ resource: { question: 1189 }, params: {} }}
-          questionOptions={"#bordered=false&titled=true"}
-        />
-      </DashboardGrid>
+        <Question config={{ resource: { question: 1189 }, params: {} }} title />
+      </DashboardGrid> */}
     </>
   ) : (
     <Header.H4>

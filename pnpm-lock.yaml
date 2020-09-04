@@ -10,7 +10,7 @@ importers:
       '@types/react-dom': 16.9.8
       '@types/react-router-dom': 5.1.5
       '@types/styled-components': 5.1.2
-      bonde-components: 0.0.4-alpha.9_react-dom@16.13.1+react@16.13.1
+      bonde-components: 0.0.4-alpha.11_react-dom@16.13.1+react@16.13.1
       bonde-core-tools: 0.1.7-alpha.1
       i18next: 19.7.0
       i18next-browser-languagedetector: 5.0.1
@@ -42,7 +42,7 @@ importers:
       '@types/styled-components': ^5.1.2
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
-      bonde-components: ^0.0.4-alpha.9
+      bonde-components: ^0.0.4-alpha.11
       bonde-core-tools: 0.1.7-alpha.1
       eslint: ^6.6.0
       husky: ^4.2.5
@@ -3694,7 +3694,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
-  /bonde-components/0.0.4-alpha.9_react-dom@16.13.1+react@16.13.1:
+  /bonde-components/0.0.4-alpha.11_react-dom@16.13.1+react@16.13.1:
     dependencies:
       final-form: 4.20.1
       jsonwebtoken: 8.5.1
@@ -3708,7 +3708,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-q6cFEuezpPtYBYRjOCQfr1TPI3IdKQheL6QWcrXz28HLFU8bvlYGEkP0LBucU8p6hoAuVOI1KP8ImtMocKL2Hw==
+      integrity: sha512-doCQYXGKwXBkEqXzoYUzcYk5z6UHDLouG8/TAcItPdUOqbrer+p+255jYCmg/q6fPWk+8AUsICVKycKRQ2nhzw==
   /bonde-core-tools/0.1.7-alpha.1:
     dependencies:
       '@apollo/client': 3.1.4_graphql@15.3.0+react@16.13.1

@@ -9,7 +9,6 @@ const StyledNavigation = styled(Navigation)`
     color: inherit;
     text-decoration: none;
   }
-  justify-items: center;
 `;
 const Header = (): React.ReactElement => {
   return (
