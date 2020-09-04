@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 import { Loading, Main, Body as ComponentsBody } from "bonde-components";
 import styled from "styled-components";
 
-import { Relations, Individuals } from "./pages";
+import { Relations, Individuals, Home } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
 import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
@@ -17,7 +17,7 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
     session: "Carregando sessão...",
     user: "Carregando usuário...",
-    communities: "Carregando communities...",
+    communities: "Carregando communidades...",
     redirect: "Redirecionando para autenticação...",
     module: "Redirecionando para módulo...",
   };
@@ -33,6 +33,7 @@ const Body = styled(ComponentsBody)`
 `;
 
 const App = (): React.ReactElement => {
+  console.log({ envs: process.env });
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
   const adminUrl =
@@ -58,9 +59,7 @@ const App = (): React.ReactElement => {
                       path="/pessoas"
                       component={Individuals}
                     />
-                    <Route exact path="/">
-                      <div className="App">{/* <Filters /> */}</div>
-                    </Route>
+                    <SelectMapaOrRedes path="/" component={Home} />
                   </Switch>
                 </Body>
               </Main>

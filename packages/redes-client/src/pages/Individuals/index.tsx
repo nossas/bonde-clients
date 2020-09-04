@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
+import { useSession } from "bonde-core-tools";
 import { Table, Filters } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
@@ -36,6 +37,7 @@ export default function Individuals({
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
   const { groups } = useCommunityExtra();
+  const { community } = useSession();
 
   useEffect(() => {
     if (state.group === null || typeof state.group === "undefined")
@@ -91,37 +93,43 @@ export default function Individuals({
         userStatus={!!isVolunteerSelected === true}
         relationshipStatus={!!isVolunteerSelected === false}
       />
-      <FetchUsersByGroup>
-        {({ data, count }) => {
-          const pagination = {
-            totalPages: Math.round(count / state.rows),
-            goToPage: (e: number) => dispatch({ type: "page", value: e }),
-            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-            pageIndex: state.page,
-            pageSize: state.rows,
-          };
+      {community?.id === 40 ? (
+        <FetchUsersByGroup>
+          {({ data, count }) => {
+            const pagination = {
+              totalPages: Math.round(count / state.rows),
+              goToPage: (e: number) => dispatch({ type: "page", value: e }),
+              setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
+              pageIndex: state.page,
+              pageSize: state.rows,
+            };
 
-          return count < 1 ? (
-            <WrapEmpty>
-              <Empty message="Nada por aqui..." />
-            </WrapEmpty>
-          ) : groups.length < 2 ? (
-            <WrapEmpty>
-              <Empty message="Não existem grupos suficientes nessa comunidade." />
-            </WrapEmpty>
-          ) : (
-            <>
-              <Header.H4>Total ({count})</Header.H4>
-              <Table
-                data={data}
-                columns={columns(groups, !!isVolunteerSelected)}
-                sticky="end"
-                pagination={pagination}
-              />
-            </>
-          );
-        }}
-      </FetchUsersByGroup>
+            return count < 1 ? (
+              <WrapEmpty>
+                <Empty message="Nada por aqui..." />
+              </WrapEmpty>
+            ) : groups.length < 2 ? (
+              <WrapEmpty>
+                <Empty message="Não existem grupos suficientes nessa comunidade." />
+              </WrapEmpty>
+            ) : (
+              <>
+                <Header.H4>Total ({count})</Header.H4>
+                <Table
+                  data={data}
+                  columns={columns(groups, !!isVolunteerSelected)}
+                  sticky="end"
+                  pagination={pagination}
+                />
+              </>
+            );
+          }}
+        </FetchUsersByGroup>
+      ) : (
+        <Header.H4>
+          Sua rede de solidariedade ainda não possui acesso a essa página.
+        </Header.H4>
+      )}
     </>
   );
 }
