@@ -109,7 +109,7 @@ export default {
     },
     {
       label: "Encaminhamento: Realizado",
-      value: "encaminhamento_realizado",
+      value: "encaminhamento__realizado",
     },
     {
       label: "Encaminhamento: Realizado para Serviço Público",
@@ -117,15 +117,15 @@ export default {
     },
     {
       label: "Atendimento: Iniciado",
-      value: "atendimento_iniciado",
+      value: "atendimento__iniciado",
     },
     {
       label: "Atendimento: Concluído",
-      value: "atendimento_concluído",
+      value: "atendimento__concluído",
     },
     {
       label: "Atendimento: Interrompido",
-      value: "atendimento_interrompido",
+      value: "atendimento__interrompido",
     },
     {
       label: "Encaminhamento: Antigo",

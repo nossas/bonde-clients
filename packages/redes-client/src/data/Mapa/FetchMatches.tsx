@@ -34,18 +34,12 @@ const MATCHES = gql`
       order_by: $order_by
       where: {
         created_at: $created_at
-        _and: [
-          { status: { _neq: "solicitação_recebida" } }
-          { status: { _neq: "solicitação_repetida" } }
-          { status: $status }
-          { recipient: { state: $state } }
-          { recipient_ticket: { assignee_id: $agent } }
-        ]
+        status: $status
+        recipient: { state: $state }
+        recipient_ticket: { assignee_id: $agent }
         _or: [
-          { recipient: { name: { _ilike: $query } } }
-          { recipient: { email: { _ilike: $query } } }
-          { volunteer: { name: { _ilike: $query } } }
-          { volunteer: { email: { _ilike: $query } } }
+          { recipient: { name: { _ilike: $query }, email: { _ilike: $query } } }
+          { volunteer: { name: { _ilike: $query }, email: { _ilike: $query } } }
         ]
       }
     ) {
@@ -77,12 +71,12 @@ const MATCHES = gql`
     relationshipsCount: solidarity_matches_aggregate(
       where: {
         created_at: $created_at
-        _and: [
-          { status: { _neq: "solicitação_recebida" } }
-          { status: { _neq: "solicitação_repetida" } }
-          { status: $status }
-          { recipient: { state: $state } }
-          { recipient_ticket: { assignee_id: $agent } }
+        status: $status
+        recipient: { state: $state }
+        recipient_ticket: { assignee_id: $agent }
+        _or: [
+          { recipient: { name: { _ilike: $query }, email: { _ilike: $query } } }
+          { volunteer: { name: { _ilike: $query }, email: { _ilike: $query } } }
         ]
       }
     ) {
