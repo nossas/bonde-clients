@@ -175,7 +175,8 @@
     "submit": "Salvar formulário"
   },
   "messages": {
-    "success": "Informações salvas com sucesso"
+    "success": "Informações salvas com sucesso",
+    "invalid_permission": "Você não tem permissão para atualizar essas informações"
   },
   "navigation": {
     "settings": "Informações",

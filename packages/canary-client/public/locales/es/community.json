@@ -175,7 +175,8 @@
     "submit": "Guardar formulario"
   },
   "messages": {
-    "success": "Datos guardados exitosamente :)"
+    "success": "Datos guardados exitosamente :)",
+    "invalid_permission": "No se le permite actualizar esta información"
   },
   "navigation": {
     "settings": "Información",

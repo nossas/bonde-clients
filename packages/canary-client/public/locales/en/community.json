@@ -175,7 +175,8 @@
     "submit": "Save form"
   },
   "messages": {
-    "success": "Data edited successfully"
+    "success": "Data edited successfully",
+    "invalid_permission": "You are not allowed to update this information"
   },
   "navigation": {
     "settings": "Information",
