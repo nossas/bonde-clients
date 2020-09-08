@@ -100,7 +100,6 @@ const RecipientPage = () => {
                 placeholder='Ex: 0'
                 parse={normalize.max(1)}
                 component={InputField}
-                validate={required(t('recipient.form.fields.bank_account.agencia_dv.errors.required'))}
               />
             </Col>
             <Col sm={5}>

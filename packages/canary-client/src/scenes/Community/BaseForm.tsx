@@ -39,14 +39,29 @@ const UpdateCommunityGQL = gql`
 `;
 
 const UpdateRecipientGQL = gql`
-  mutation UpdateRecipient($update_fields: recipients_set_input, $id: Int!) {
-    update_recipients(_set: $update_fields, where: { id: { _eq: $id } }) {
-      returning {
+  mutation UpInsertRecipient($input: RecipientEntityInput) {
+    create_or_update_recipient(input: $input) {
+      id
+      community_id
+      recipient {
         id
-        transfer_day: recipient(path: "transfer_day")
-        transfer_interval: recipient(path: "transfer_interval")
-        transfer_enabled: recipient(path: "transfer_enabled")
-        bank_account: recipient(path: "bank_account")
+        object
+        transfer_day
+        transfer_enabled
+        transfer_interval
+        bank_account {
+          id
+          object
+          type
+          bank_code
+          conta
+          conta_dv
+          agencia
+          agencia_dv
+          legal_name
+          document_type
+          document_number
+        }
       }
     }
   }
@@ -60,7 +75,7 @@ export default ({ children }: any) => {
 
   const submit = async ({ community: { __typename, id, recipient: { id: recipient_id, ...recipient }, ...update_fields } }: any) => {
     // Update Recipient before to return UpdateCommunity outdate
-    await updateRecipient({ variables: { update_fields: { recipient }, id: recipient_id }});
+    await updateRecipient({ variables: { input: { id: recipient_id, community_id: id, recipient } }});
     const { data: { update_communities: { returning }}}: any = await updateCommunity({ variables: { id, update_fields } });
     // Update Session
     await onChange({ community: returning[0] });
