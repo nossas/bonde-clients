@@ -8,7 +8,9 @@ type Props = {
   FetchWeeklyStats: ({
     children,
   }: {
-    children: (data: WeeklyStatsData) => React.ReactElement;
+    children: (
+      data: WeeklyStatsData & { communityId: number }
+    ) => React.ReactElement;
   }) => React.ReactElement | null;
   FilterOptions: {
     [x: string]: { label: string; value: string | number }[];
@@ -23,7 +25,6 @@ type Props = {
     id: number;
     isVolunteer: boolean;
   };
-  communityId: number;
   dispatch: (arg0: any) => void;
 };
 
@@ -32,7 +33,6 @@ export default function WeeklyStats({
   FilterOptions,
   volunteerGroup,
   individualGroup,
-  communityId,
   dispatch,
 }: Props): React.ReactElement {
   const getOption = (status: string, field: string) =>
@@ -47,6 +47,7 @@ export default function WeeklyStats({
         atendimentosIniciados,
         newlyApprovedVolunteers,
         newlyAvailableVolunteers,
+        communityId,
       }) => (
         <>
           <Link to="/pessoas">
@@ -129,7 +130,7 @@ export default function WeeklyStats({
               }
             >
               <Header.H2>{atendimentosIniciados.aggregate.count}</Header.H2>
-              <Text>Atendimento Iniciado</Text>
+              <Text>Atendimento Iniciados</Text>
             </StatsCard>
           </Link>
           <Link to="/pessoas">

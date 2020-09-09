@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Shortcut, Icon } from "bonde-components";
+import { Header, Shortcut, Icon, Empty } from "bonde-components";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { WeeklyStats, GeneralStats } from "../../components";
@@ -20,13 +20,24 @@ const Grid = styled.div`
   }
 `;
 
+const WrapEmpty = styled.div`
+  height: 100%;
+  & > div {
+    height: 100%;
+  }
+`;
+
 type Props = {
-  community?: { id: number };
+  community?: {
+    id: number;
+  };
   data: {
     FetchWeeklyStats: ({
       children,
     }: {
-      children: (data: WeeklyStatsData) => React.ReactElement;
+      children: (
+        data: WeeklyStatsData & { communityId: number }
+      ) => React.ReactElement;
     }) => React.ReactElement | null;
     FetchGeneralStats: ({
       children,
@@ -48,7 +59,7 @@ export default function Home({
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
 
-  return community?.id === 40 ? (
+  return community ? (
     <>
       <Header.H5>ATALHOS</Header.H5>
       <Grid>
@@ -102,7 +113,6 @@ export default function Home({
           FilterOptions={FilterOptions}
           volunteerGroup={volunteerGroup}
           individualGroup={individualGroup}
-          communityId={community.id}
           dispatch={dispatch}
         />
       </Grid>
@@ -110,9 +120,9 @@ export default function Home({
       <GeneralStats FetchGeneralStats={FetchGeneralStats} />
     </>
   ) : (
-    <Header.H4>
-      Sua rede de solidariedade ainda não possui acesso ao dashboard.
-    </Header.H4>
+    <WrapEmpty>
+      <Empty message="Selecione uma comunidade" />
+    </WrapEmpty>
   );
 }
 

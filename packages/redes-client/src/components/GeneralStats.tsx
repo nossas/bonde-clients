@@ -7,7 +7,7 @@ import { GeneralStatsData } from "../types";
 const DashboardGrid = styled.div`
   border-color: 1px solid #000;
   display: grid;
-  grid-template-columns: repeat(3, minmax(auto, 450px));
+  grid-template-columns: repeat(3, minmax(auto, 400px));
   grid-template-rows: repeat(3, minmax(auto, 300px));
   grid-gap: 20px;
 `;
@@ -15,10 +15,11 @@ const DashboardGrid = styled.div`
 const BlocksGrid = styled.div`
   border-color: 1px solid #000;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, minmax(auto, 200px));
   grid-template-rows: repeat(2, 140px);
   grid-gap: 20px;
   & > button {
+    width: unset;
     min-width: 100%;
     cursor: default;
   }
@@ -99,14 +100,20 @@ export default function GeneralStats({
                 <Header.H2>{aprovadas.aggregate.count}</Header.H2>
                 <Text>Aprovadas e Validadas</Text>
               </StatsCard>
-              <StatsCard>
-                <Header.H2>{reprovadasDiretrizes.aggregate.count}</Header.H2>
-                <Text>Reprovadas Diretrizes</Text>
-              </StatsCard>
-              <StatsCard>
-                <Header.H2>{reprovadasEstudoDeCaso.aggregate.count}</Header.H2>
-                <Text>Reprovadas Estudo de Caso</Text>
-              </StatsCard>
+              {reprovadasDiretrizes && (
+                <StatsCard>
+                  <Header.H2>{reprovadasDiretrizes.aggregate.count}</Header.H2>
+                  <Text>Reprovadas Diretrizes</Text>
+                </StatsCard>
+              )}
+              {reprovadasEstudoDeCaso && (
+                <StatsCard>
+                  <Header.H2>
+                    {reprovadasEstudoDeCaso.aggregate.count}
+                  </Header.H2>
+                  <Text>Reprovadas Estudo de Caso</Text>
+                </StatsCard>
+              )}
             </BlocksGrid>
           </>
         )}
