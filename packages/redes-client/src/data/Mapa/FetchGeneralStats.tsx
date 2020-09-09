@@ -1,16 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "bonde-components";
 import { zendeskOrganizations } from "../../services/utils";
-import { GeneralStatsData, GeneralStatsVars } from "../../types";
-
-const WrapEmpty = styled.div`
-  height: 100%;
-  & > div {
-    height: 100%;
-  }
-`;
+import { GeneralStatsData, MapaGeneralStatsVars } from "../../types";
 
 const WEEKLY_DATA = gql`
   query GeneralData($individualOrganizationId: bigint) {
@@ -96,12 +87,12 @@ const FetchGeneralStats = ({ children }: any) => {
     individualOrganizationId: zendeskOrganizations["individual"],
   };
 
-  const { loading, error, data } = useQuery<GeneralStatsData, GeneralStatsVars>(
-    WEEKLY_DATA,
-    {
-      variables,
-    }
-  );
+  const { loading, error, data } = useQuery<
+    GeneralStatsData,
+    MapaGeneralStatsVars
+  >(WEEKLY_DATA, {
+    variables,
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -114,13 +105,7 @@ const FetchGeneralStats = ({ children }: any) => {
 
 export default function CheckCommunity(props: any = {}): React.ReactElement {
   const { community } = useSession();
-  return community ? (
-    <FetchGeneralStats community={community} {...props} />
-  ) : (
-    <WrapEmpty>
-      <Empty message="Selecione uma comunidade" />
-    </WrapEmpty>
-  );
+  return <FetchGeneralStats community={community} {...props} />;
 }
 
 CheckCommunity.displayName = "CheckCommunityMatches";

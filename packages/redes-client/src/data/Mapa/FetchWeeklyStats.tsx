@@ -1,29 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "bonde-components";
 import { zendeskOrganizations } from "../../services/utils";
-import { WeeklyStatsData, WeeklyStatsVars } from "../../types";
-
-const WrapEmpty = styled.div`
-  height: 100%;
-  & > div {
-    height: 100%;
-  }
-`;
+import { WeeklyStatsData, MapaWeeklyStatsVars } from "../../types";
 
 const WEEKLY_DATA = gql`
   query WeeklyData(
     $lastWeek: timestamp_comparison_exp
-    $context: Int_comparison_exp
     $individualOrganizationId: bigint
   ) {
     newRecipients: form_entries_aggregate(
-      where: {
-        cached_community_id: $context
-        widget_id: { _in: [3297, 16850, 62625] }
-        created_at: $lastWeek
-      }
+      where: { widget_id: { _in: [3297, 16850, 62625] }, created_at: $lastWeek }
     ) {
       aggregate {
         count
@@ -92,23 +78,28 @@ const WEEKLY_DATA = gql`
   }
 `;
 
-const FetchWeeklyStats = ({ children, timestamp, community }: any) => {
+type Props = {
+  children: any;
+  timestamp: string;
+  community: {
+    id: number;
+  };
+};
+
+const FetchWeeklyStats = ({ children, timestamp, community }: Props) => {
   const variables = {
     lastWeek: {
       _gte: timestamp,
     },
     individualOrganizationId: zendeskOrganizations["individual"],
-    context: {
-      _eq: community.id,
-    },
   };
 
-  const { loading, error, data } = useQuery<WeeklyStatsData, WeeklyStatsVars>(
-    WEEKLY_DATA,
-    {
-      variables,
-    }
-  );
+  const { loading, error, data } = useQuery<
+    WeeklyStatsData,
+    MapaWeeklyStatsVars
+  >(WEEKLY_DATA, {
+    variables,
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -116,7 +107,10 @@ const FetchWeeklyStats = ({ children, timestamp, community }: any) => {
     return <p>Error</p>;
   }
 
-  return children(data);
+  return children({
+    ...data,
+    communityId: community.id,
+  });
 };
 
 export default function CheckCommunity(props: any = {}): React.ReactElement {
@@ -126,12 +120,8 @@ export default function CheckCommunity(props: any = {}): React.ReactElement {
   const lastWeek = new Date().setDate(today.getDate() - 7);
   // format lastWeek timestamp
   const timestamp = new Date(lastWeek).toISOString();
-  return community ? (
-    <FetchWeeklyStats community={community} timestamp={timestamp} {...props} />
-  ) : (
-    <WrapEmpty>
-      <Empty message="Selecione uma comunidade" />
-    </WrapEmpty>
+  return (
+    <FetchWeeklyStats timestamp={timestamp} community={community} {...props} />
   );
 }
 

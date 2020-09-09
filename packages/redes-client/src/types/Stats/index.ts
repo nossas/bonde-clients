@@ -31,14 +31,23 @@ export type WeeklyStatsData = {
   };
 };
 
-export type WeeklyStatsVars = {
+export type MapaWeeklyStatsVars = {
   individualOrganizationId: number;
   lastWeek: { _gte: string };
-  context: { _eq: number };
 };
 
-export type GeneralStatsVars = {
+export type MapaGeneralStatsVars = {
   individualOrganizationId: number;
+};
+
+export type RedesWeeklyStatsVars = {
+  lastWeek: { _gte: string };
+  context: { _eq: number };
+  widgets: { _in: Array<number> };
+};
+
+export type RedesGeneralStatsVars = {
+  context: { _eq: number };
 };
 
 export type GeneralStatsData = {
@@ -67,12 +76,12 @@ export type GeneralStatsData = {
       count: number;
     };
   };
-  reprovadasEstudoDeCaso: {
+  reprovadasEstudoDeCaso?: {
     aggregate: {
       count: number;
     };
   };
-  reprovadasDiretrizes: {
+  reprovadasDiretrizes?: {
     aggregate: {
       count: number;
     };

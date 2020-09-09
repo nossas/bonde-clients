@@ -11,6 +11,7 @@ export type Groups = Array<{
   name: string;
   communityId: number;
   id: number;
+  widgetId: number;
 }>;
 
 export interface CommunityExtraState extends CommunitySettings {

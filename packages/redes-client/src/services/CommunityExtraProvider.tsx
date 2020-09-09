@@ -18,12 +18,14 @@ const initialValue = {
       name: "Voluntária",
       communityId: 0,
       id: 0,
+      widgetId: 0,
     },
     {
       isVolunteer: false,
       name: "PSR",
       communityId: 0,
       id: 0,
+      widgetId: 0,
     },
   ],
 };
@@ -53,6 +55,7 @@ const COMMUNITY_EXTRA = gql`
       name
       communityId: community_id
       id
+      widgetId: widget_id
     }
   }
 `;
