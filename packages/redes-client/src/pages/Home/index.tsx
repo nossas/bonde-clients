@@ -1,43 +1,53 @@
 import React from "react";
 import { Header, Shortcut, Icon } from "bonde-components";
-import { useSession } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { WeeklyStats, GeneralStats } from "../../components";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import { useFilter } from "../../services/FilterProvider";
-
-// const DashboardGrid = styled.div`
-//   border-color: 1px solid #000;
-//   display: grid;
-//   grid-template-columns: repeat(3, minmax(auto, 450px));
-//   grid-template-rows: repeat(3, minmax(auto, 300px));
-//   grid-gap: 20px;
-//   & iframe > html {
-//     display: none;
-//   }
-// `;
+import { WeeklyStatsData, GeneralStatsData } from "../../types";
 
 const Grid = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-column-gap: 20px;
   justify-content: start;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  & > a {
+    text-decoration: none;
+    display: flex;
+  }
 `;
 
-// const BlocksGrid = styled.div`
-//   border-color: 1px solid #000;
-//   display: grid;
-//   grid-template-columns: repeat(2, minmax(auto, 200px));
-//   grid-template-rows: repeat(2, minmax(auto, 150px));
-//   grid-gap: 20px;
-// `;
+type Props = {
+  community?: { id: number };
+  data: {
+    FetchWeeklyStats: ({
+      children,
+    }: {
+      children: (data: WeeklyStatsData) => React.ReactElement;
+    }) => React.ReactElement | null;
+    FetchGeneralStats: ({
+      children,
+    }: {
+      children: (data: GeneralStatsData) => React.ReactElement;
+    }) => React.ReactElement | null;
+    FilterOptions: {
+      [x: string]: { label: string; value: string | number }[];
+    };
+  };
+};
 
-export default function Home(): React.ReactElement {
-  const { community } = useSession();
+export default function Home({
+  data: { FetchWeeklyStats, FetchGeneralStats, FilterOptions },
+  community,
+}: Props): React.ReactElement {
   const [, dispatch] = useFilter();
   const { groups } = useCommunityExtra();
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
+
   return community?.id === 40 ? (
     <>
       <Header.H5>ATALHOS</Header.H5>
@@ -85,80 +95,19 @@ export default function Home(): React.ReactElement {
           />
         </Link>
       </Grid>
-      {/* <Header.H5>DADOS DA SEMANA</Header.H5>
+      <Header.H5>DADOS DA SEMANA</Header.H5>
       <Grid>
-        <Question
-          config={{ resource: { question: 1197 }, params: {} }} // Novas msrs inscritas
+        <WeeklyStats
+          FetchWeeklyStats={FetchWeeklyStats}
+          FilterOptions={FilterOptions}
+          volunteerGroup={volunteerGroup}
+          individualGroup={individualGroup}
+          communityId={community.id}
+          dispatch={dispatch}
         />
-        <Question
-          config={{ resource: { question: 1198 }, params: {} }} // enc. real.
-        />
-        <Question
-          config={{ resource: { question: 1199 }, params: {} }} // enc. serv. pub.
-        />
-        <Question
-          config={{ resource: { question: 1200 }, params: {} }} // atd. in.
-        />
-        <Question
-          config={{ resource: { question: 1201 }, params: {} }} // novas vol. aprov.
-        />
-        <Question
-          config={{ resource: { question: 1202 }, params: {} }} // novas vol. disp.
-        />
-      </Grid> */}
+      </Grid>
       <Header.H5>DADOS GERAIS</Header.H5>
-      {/* <DashboardGrid>
-        <Question
-          config={{ resource: { question: 1187 }, params: {} }} // msr / dia
-          title
-        />
-        <Question
-          config={{ resource: { question: 1020 }, params: {} }} // voluntarias / dia
-          title
-        />
-        <Question
-          config={{ resource: { question: 1140 }, params: {} }} // match / dia
-          title
-        />
-        <Question
-          config={{ resource: { question: 1186 }, params: {} }} // msr serv. pub.
-          title
-        />
-        <Question
-          config={{ resource: { question: 1188 }, params: {} }} // total dos acolhimentos
-          title
-        />
-        <BlocksGrid>
-          <Question
-            config={{ resource: { question: 1190 }, params: {} }} // enc. realizados
-          />
-          <Question
-            config={{ resource: { question: 1191 }, params: {} }} // atendimentos iniciados
-          />
-          <Question
-            config={{ resource: { question: 1192 }, params: {} }} // atendimentos concluidos
-          />
-          <Question
-            config={{ resource: { question: 1193 }, params: {} }} // atendimentos interrompidos
-          />
-        </BlocksGrid>
-        <Question config={{ resource: { question: 1151 }, params: {} }} title />
-        <BlocksGrid>
-          <Question
-            config={{ resource: { question: 1194 }, params: {} }} // aprovadas e validadas
-            title
-          />
-          <Question
-            config={{ resource: { question: 1196 }, params: {} }} // rep. estudo de caso
-            title
-          />
-          <Question
-            config={{ resource: { question: 1195 }, params: {} }} // rep. diretrizes
-            title
-          />
-        </BlocksGrid>
-        <Question config={{ resource: { question: 1189 }, params: {} }} title />
-      </DashboardGrid> */}
+      <GeneralStats FetchGeneralStats={FetchGeneralStats} />
     </>
   ) : (
     <Header.H4>
