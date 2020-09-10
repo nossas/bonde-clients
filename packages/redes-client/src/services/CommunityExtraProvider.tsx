@@ -71,15 +71,13 @@ const CommunityExtraProvider = ({
     context: (community && community.id) || 0,
   };
 
-  const { loading, error, data } = useQuery<
-    CommunityExtraData,
-    CommunityExtraVars
-  >(COMMUNITY_EXTRA, { variables });
+  const { error, data } = useQuery<CommunityExtraData, CommunityExtraVars>(
+    COMMUNITY_EXTRA,
+    { variables }
+  );
 
-  if (loading) return <p>Loading...</p>;
   if (error) {
     console.log("error", error);
-    return <p>Error</p>;
   }
 
   const settings =
