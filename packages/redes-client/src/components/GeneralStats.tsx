@@ -1,5 +1,5 @@
 import React from "react";
-import { Question, Header, Text } from "bonde-components";
+import { Header, Text } from "bonde-components";
 import styled from "styled-components";
 import { StatsCard } from "./";
 import { GeneralStatsData } from "../types";
@@ -38,7 +38,7 @@ export default function GeneralStats({
 }: Props): React.ReactElement {
   return (
     <DashboardGrid>
-      <Question
+      {/* <Question
         config={{ resource: { question: 1187 }, params: {} }} // msr / dia
         title
       />
@@ -57,7 +57,7 @@ export default function GeneralStats({
       <Question
         config={{ resource: { question: 1188 }, params: {} }} // total dos acolhimentos
         title
-      />
+      /> */}
       <FetchGeneralStats>
         {({
           encaminhamentosRealizados,
@@ -91,10 +91,10 @@ export default function GeneralStats({
                 <Text>Atendimentos Interrompidos</Text>
               </StatsCard>
             </BlocksGrid>
-            <Question
+            {/* <Question
               config={{ resource: { question: 1151 }, params: {} }}
               title
-            />
+            /> */}
             <BlocksGrid>
               <StatsCard>
                 <Header.H2>{aprovadas.aggregate.count}</Header.H2>
@@ -118,7 +118,7 @@ export default function GeneralStats({
           </>
         )}
       </FetchGeneralStats>
-      <Question config={{ resource: { question: 1189 }, params: {} }} title />
+      {/* <Question config={{ resource: { question: 1189 }, params: {} }} title /> */}
     </DashboardGrid>
   );
 }

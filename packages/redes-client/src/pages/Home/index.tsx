@@ -2,10 +2,10 @@ import React from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { WeeklyStats, GeneralStats } from "../../components";
+import { WeeklyStats } from "../../components";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import { useFilter } from "../../services/FilterProvider";
-import { WeeklyStatsData, GeneralStatsData } from "../../types";
+import { WeeklyStatsData } from "../../types";
 
 const Grid = styled.div`
   display: grid;
@@ -39,11 +39,11 @@ type Props = {
         data: WeeklyStatsData & { communityId: number }
       ) => React.ReactElement;
     }) => React.ReactElement | null;
-    FetchGeneralStats: ({
-      children,
-    }: {
-      children: (data: GeneralStatsData) => React.ReactElement;
-    }) => React.ReactElement | null;
+    // FetchGeneralStats: ({
+    //   children,
+    // }: {
+    //   children: (data: GeneralStatsData) => React.ReactElement;
+    // }) => React.ReactElement | null;
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
     };
@@ -51,7 +51,7 @@ type Props = {
 };
 
 export default function Home({
-  data: { FetchWeeklyStats, FetchGeneralStats, FilterOptions },
+  data: { FetchWeeklyStats, FilterOptions },
   community,
 }: Props): React.ReactElement {
   const [, dispatch] = useFilter();
@@ -116,8 +116,8 @@ export default function Home({
           dispatch={dispatch}
         />
       </Grid>
-      <Header.H5>DADOS GERAIS</Header.H5>
-      <GeneralStats FetchGeneralStats={FetchGeneralStats} />
+      {/* <Header.H5>DADOS GERAIS</Header.H5>
+      <GeneralStats FetchGeneralStats={FetchGeneralStats} /> */}
     </>
   ) : (
     <WrapEmpty>
