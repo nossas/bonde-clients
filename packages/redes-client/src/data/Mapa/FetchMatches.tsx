@@ -1,21 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "bonde-components";
+import { gql } from "bonde-core-tools";
+import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
-import {
-  getSelectValues,
-  getAgentZendeskUserId,
-  deconstructAgent,
-} from "../../services/utils";
-import { MatchesData } from "../../types";
-
-const WrapEmpty = styled.div`
-  height: 100%;
-  & > div {
-    height: 100%;
-  }
-`;
+import { getSelectValues, getAgentZendeskUserId } from "../../services/utils";
 
 const MATCHES = gql`
   query MapaRelationships(
@@ -87,7 +74,7 @@ const MATCHES = gql`
   }
 `;
 
-const FetchMatches = ({ children }: any) => {
+const FetchMatches = (props: any = {}) => {
   const { relationships, rows, offset } = useFilterState();
 
   const { relationshipStatus, state, query, agent } = getSelectValues(
@@ -112,33 +99,14 @@ const FetchMatches = ({ children }: any) => {
     // };
   };
 
-  const { loading, error, data } = useQuery<MatchesData>(MATCHES, {
-    variables,
-  });
-
-  if (loading) return <p>Loading...</p>;
-  if (error) {
-    console.log("error", error);
-    return <p>Error</p>;
-  }
-
-  const dataWithAgents = deconstructAgent(data);
-
-  return children({
-    ...dataWithAgents,
-    relationshipsCount: data?.relationshipsCount.aggregate.count,
-  });
+  return (
+    <FetchDataFromGraphql variables={variables} query={MATCHES} {...props} />
+  );
 };
 
-export default function CheckCommunity(props: any = {}): React.ReactElement {
-  const { community } = useSession();
-  return community ? (
-    <FetchMatches community={community} {...props} />
-  ) : (
-    <WrapEmpty>
-      <Empty message="Selecione uma comunidade" />
-    </WrapEmpty>
-  );
-}
+FetchMatches.displayName = "FetchMatches";
 
-CheckCommunity.displayName = "CheckCommunityMatches";
+// eslint-disable-next-line react/display-name
+export default function (props: any = {}): React.ReactElement {
+  return <CheckCommunity Component={FetchMatches} {...props} />;
+}

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-// import { useSession } from "bonde-core-tools";
 import { Table, Filters } from "../../components";
+import { deconstructAgent } from "../../services/utils";
 import { useFilter } from "../../services/FilterProvider";
-import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import columns from "./columns";
+import { Groups, MatchesData } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -15,14 +15,13 @@ const WrapEmpty = styled.div`
 `;
 
 type Props = {
+  community?: { id: number };
+  groups: Groups;
   data: {
     FetchMatches: ({
       children,
     }: {
-      children: (data: {
-        relationships: Array<any>;
-        relationshipsCount: number;
-      }) => React.ReactElement;
+      children: (data: MatchesData) => React.ReactElement;
     }) => React.ReactElement | null;
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
@@ -32,9 +31,10 @@ type Props = {
 
 export default function Relations({
   data: { FetchMatches, FilterOptions },
+  community,
+  groups,
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
-  const { groups } = useCommunityExtra();
 
   const save = async (values: any) => {
     // This needs to be done because when the text input is cleaned, it doesn't come as an `undefined` value, it's just not present and the previous state is maintained in the provider. Because of that, every time we dispatch the newValues, we need to clear them first.
@@ -67,16 +67,21 @@ export default function Relations({
         relationshipStatus
       />
       <FetchMatches>
-        {({ relationships, relationshipsCount }) => {
+        {({
+          relationships,
+          relationshipsCount: {
+            aggregate: { count },
+          },
+        }) => {
           const pagination = {
-            totalPages: Math.round(relationshipsCount / state.rows),
+            totalPages: Math.round(count / state.rows),
             goToPage: (e: number) => dispatch({ type: "page", value: e }),
             setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
             pageIndex: state.page,
             pageSize: state.rows,
           };
 
-          return relationshipsCount < 1 ? (
+          return count < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
             </WrapEmpty>
@@ -86,9 +91,13 @@ export default function Relations({
             </WrapEmpty>
           ) : (
             <>
-              <Header.H4>Total ({relationshipsCount})</Header.H4>
+              <Header.H4>Total ({count})</Header.H4>
               <Table
-                data={relationships}
+                data={
+                  community?.id === 40
+                    ? deconstructAgent(relationships)
+                    : relationships
+                }
                 columns={columns(groups)}
                 sticky="end"
                 pagination={pagination}

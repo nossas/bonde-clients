@@ -13,9 +13,7 @@ const WrapLoading = styled.div`
 
 type FetchDataFromGraphqlProps = {
   children: any;
-  variables: Record<string, unknown>;
-  Data: any;
-  Vars: any;
+  variables?: Record<string, unknown>;
   query: any;
 };
 

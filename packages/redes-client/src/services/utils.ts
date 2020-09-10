@@ -1,4 +1,4 @@
-import { MatchesData, Groups } from "../types";
+import { Relationships, Groups } from "../types";
 
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
@@ -155,16 +155,13 @@ export const groupsToSelect = (
 };
 
 export const deconstructAgent = (
-  data?: MatchesData
-): MatchesData | Record<string, unknown> => {
-  if (!data) return {};
-  return {
-    ...data,
-    relationships: data.relationships.map((i: any) => ({
-      ...i,
-      agent: i.recipientTicket.agentId,
-    })),
-  };
+  data?: Relationships
+): Relationships | Array<never> => {
+  if (!data) return [];
+  return data.map((i: any) => ({
+    ...i,
+    agent: i.recipientTicket.agentId,
+  }));
 };
 
 export const groupToOrganization: Record<number, number> = {

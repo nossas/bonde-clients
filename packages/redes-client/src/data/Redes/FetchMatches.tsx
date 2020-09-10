@@ -1,16 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "bonde-components";
+import { gql } from "bonde-core-tools";
+import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
-
-const WrapEmpty = styled.div`
-  height: 100%;
-  & > div {
-    height: 100%;
-  }
-`;
 
 const MATCHES = gql`
   query RedeRelationships(
@@ -87,17 +79,7 @@ const MATCHES = gql`
   }
 `;
 
-type Data = {
-  relationships: Array<any>;
-  groups: Array<{ is_volunteer: boolean; name: string; communityId: number }>;
-  relationshipsCount: {
-    aggregate: {
-      count: number;
-    };
-  };
-};
-
-const FetchMatches = ({ children, community }: any) => {
+const FetchMatches = ({ community, ...props }: any) => {
   const { relationships, rows, offset } = useFilterState();
 
   const { relationshipStatus, state, agent, query } = getSelectValues(
@@ -123,29 +105,14 @@ const FetchMatches = ({ children, community }: any) => {
     // };
   };
 
-  const { loading, error, data } = useQuery<Data>(MATCHES, { variables });
-
-  if (loading) return <p>Loading...</p>;
-  if (error) {
-    console.log("error", error);
-    return <p>Error</p>;
-  }
-
-  return children({
-    ...data,
-    relationshipsCount: data?.relationshipsCount.aggregate.count,
-  });
+  return (
+    <FetchDataFromGraphql variables={variables} query={MATCHES} {...props} />
+  );
 };
 
-export default function CheckCommunity(props: any = {}): React.ReactElement {
-  const { community } = useSession();
-  return community ? (
-    <FetchMatches community={community} {...props} />
-  ) : (
-    <WrapEmpty>
-      <Empty message="Selecione uma comunidade" />
-    </WrapEmpty>
-  );
-}
+FetchMatches.displayName = "FetchMatches";
 
-CheckCommunity.displayName = "CheckCommunityMatches";
+// eslint-disable-next-line react/display-name
+export default function (props: any = {}): React.ReactElement {
+  return <CheckCommunity Component={FetchMatches} {...props} />;
+}
