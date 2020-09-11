@@ -88,7 +88,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
 `;
 
 const FetchIndividuals = (props: any = {}) => {
-  const { individuals, rows, offset, group } = useFilterState();
+  const { individuals, rows, offset, selectedGroup } = useFilterState();
 
   const {
     userStatus,
@@ -113,7 +113,7 @@ const FetchIndividuals = (props: any = {}) => {
     },
     query: `%${query || ""}%`,
     individualId: {
-      _eq: group && groupToOrganization[group.value as number],
+      _eq: selectedGroup && groupToOrganization[selectedGroup.value as number],
     },
     rows,
     offset,

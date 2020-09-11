@@ -73,7 +73,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
 `;
 
 const FetchIndividuals = (props: any = {}) => {
-  const { individuals, rows, offset, group } = useFilterState();
+  const { individuals, rows, offset, selectedGroup } = useFilterState();
 
   const { userStatus, availability, state, query } = getSelectValues(
     individuals
@@ -91,7 +91,7 @@ const FetchIndividuals = (props: any = {}) => {
     },
     query: `%${query || ""}%`,
     redeGroupId: {
-      _eq: group && group.value,
+      _eq: selectedGroup && selectedGroup.value,
     },
     rows,
     offset,

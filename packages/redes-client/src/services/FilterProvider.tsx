@@ -13,8 +13,9 @@ export type Pagination = {
 type Action =
   | { type: "page"; value: number }
   | { type: "rows"; value: number }
-  | { type: "group"; value: { value: number; label: string } }
+  | { type: "group"; value: { value: number; label: string } | null }
   | { type: "relationships"; value: any }
+  | { type: "reset"; value?: any }
   | { type: "individuals"; value: any };
 
 type Dispatch = (action: Action) => void;
@@ -22,7 +23,7 @@ type Dispatch = (action: Action) => void;
 type State = {
   relationships: any;
   individuals: any;
-  group: { value: number; label: string };
+  selectedGroup?: { value: number; label: string } | null;
 } & Pagination;
 
 const FilterStateContext = React.createContext<State | undefined>(undefined);
@@ -45,7 +46,7 @@ const initialState = {
   rows: 10,
   offset: 10 * 0,
   page: 0,
-  group: undefined,
+  selectedGroup: null,
   relationships: initialFilters,
   individuals: initialFilters,
 };
@@ -71,7 +72,7 @@ function filterReducer(state: State, action: Action) {
     case "group": {
       return {
         ...initialState,
-        group: action.value,
+        selectedGroup: action.value,
       };
     }
     case "relationships": {
@@ -90,6 +91,11 @@ function filterReducer(state: State, action: Action) {
           ...state.individuals,
           ...action.value,
         },
+      };
+    }
+    case "reset": {
+      return {
+        ...initialState,
       };
     }
     default: {
