@@ -15,18 +15,12 @@ import Panel from '../Panel';
 import SelectField from '../SelectField';
 
 const InlineFormWrap = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(auto, 500px)) 200px;
   align-items: center;
-
-  ${Hint} {
-    right: 60px;
-  }
-
-  > div {
-    flex-grow: 1;
-    padding-right: 60px;
+  grid-column-gap: 20px;
+  & div:nth-child(2) {
+    margin-right: 35px;
   }
 `;
 
