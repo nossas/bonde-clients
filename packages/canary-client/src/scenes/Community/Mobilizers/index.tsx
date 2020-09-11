@@ -53,7 +53,7 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
 
-  ${Header.h5} {
+  ${Header.H5} {
     margin: 0 20px 15px 0;
     padding: 0 0 1px 0;
     cursor: pointer;
@@ -61,7 +61,7 @@ const Flex = styled.div`
     text-transform: uppercase;
   }
 
-  ${Header.h5}.active {
+  ${Header.H5}.active {
     color: #ee0099;
   }
 `;
@@ -109,15 +109,15 @@ const FetchInvitations = ({ community }: Props) => {
 
   return (
     <>
-      <Header.h3>Convidar um mobilizador(a)</Header.h3>
+      <Header.H3>Convidar um mobilizador(a)</Header.H3>
       <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       <Flex>
-        <Header.h5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
+        <Header.H5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
           {`Convites (${invitationsCount})`}
-        </Header.h5>
-        <Header.h5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
+        </Header.H5>
+        <Header.H5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
           {`Mobilizadores (${communityUsersCount})`}
-        </Header.h5>
+        </Header.H5>
       </Flex>
       {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
       {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}

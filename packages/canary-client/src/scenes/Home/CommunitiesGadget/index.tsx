@@ -19,7 +19,7 @@ const Styles = styled.div`
     align-items: flex-end;
     margin-bottom: 15px;
 
-    ${Header.h5} {
+    ${Header.H5} {
       font-weight: bold;
       text-transform: uppercase;
     }
@@ -35,7 +35,7 @@ const CommunitiesGadget = () => {
     <Styles>
       <div className='header'>
         {/** TODO: i18n */}
-        <Header.h5>{t('gadgets.communities.title')}</Header.h5>
+        <Header.H5>{t('gadgets.communities.title')}</Header.H5>
         <SearchInput
           placeholder={t('gadgets.communities.search')}
           field='name'

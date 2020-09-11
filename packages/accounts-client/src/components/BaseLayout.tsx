@@ -64,7 +64,7 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
   `}
 
   ${props => props.inverted && `
-    ${Header.h2} {
+    ${Header.H2} {
       color: #fff;
     }
   `}
@@ -116,7 +116,7 @@ const BaseLayout = ({ children }: any) => {
     <BaseStyled>
       <WrapperStyled hide='mobile' background={BackgroundImage} inverted>
         <Bonde large />
-        <Header.h2>{t('welcome.title')}</Header.h2>
+        <Header.H2>{t('welcome.title')}</Header.H2>
       </WrapperStyled>
       <WrapperStyled>
         {children}
