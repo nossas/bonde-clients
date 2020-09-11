@@ -100,7 +100,7 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
               </Colunm>
               <Colunm grow={1}>
                 <Header.H4>{c.name}</Header.H4>
-                <Header.H5>{c.description || c.city}</Header.H5>
+                <Header.H6>{c.description || c.city}</Header.H6>
               </Colunm>
               <Colunm mobile='hide'>
                 <CommunityMenu community={c} />
