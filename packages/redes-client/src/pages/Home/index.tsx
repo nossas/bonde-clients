@@ -27,6 +27,11 @@ const WrapEmpty = styled.div`
   }
 `;
 
+const H5 = styled(Header.H5)`
+  font-weight: 600;
+  margin-bottom: 15px;
+`;
+
 type Props = {
   community?: {
     id: number;
@@ -61,7 +66,7 @@ export default function Home({
 
   return community ? (
     <>
-      <Header.H5>ATALHOS</Header.H5>
+      <H5 style={{ marginTop: 0 }}>ATALHOS</H5>
       <Grid>
         <Link
           style={{ textDecoration: "none" }}
@@ -78,7 +83,7 @@ export default function Home({
         >
           <Shortcut
             text="Fazer match de MSR"
-            icon={<Icon name="User" size="small" />}
+            icon={<Icon name="User" size="default" />}
           />
         </Link>
         <Link
@@ -95,18 +100,18 @@ export default function Home({
           }
         >
           <Shortcut
-            icon={<Icon name="Favorite" size="small" />}
+            icon={<Icon name="Favorite" size="default" />}
             text="Fazer match de Voluntária"
           />
         </Link>
         <Link to="/matchs" style={{ textDecoration: "none" }}>
           <Shortcut
-            icon={<Icon name="Open" size="small" />}
+            icon={<Icon name="Open" size="default" />}
             text="Ver meus matchs"
           />
         </Link>
       </Grid>
-      <Header.H5>DADOS DA SEMANA</Header.H5>
+      <H5>DADOS DA SEMANA</H5>
       <Grid>
         <WeeklyStats
           FetchWeeklyStats={FetchWeeklyStats}
@@ -116,7 +121,7 @@ export default function Home({
           dispatch={dispatch}
         />
       </Grid>
-      {/* <Header.H5>DADOS GERAIS</Header.H5>
+      {/* <H5>DADOS GERAIS</H5>
       <GeneralStats FetchGeneralStats={FetchGeneralStats} /> */}
     </>
   ) : (

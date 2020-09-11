@@ -1,5 +1,6 @@
 import React from "react";
 import { useSession, useQuery, gql } from "bonde-core-tools";
+import { Spinner } from "bonde-components"
 import { zendeskOrganizations } from "../../services/utils";
 import { WeeklyStatsData, MapaWeeklyStatsVars } from "../../types";
 
@@ -101,7 +102,7 @@ const FetchWeeklyStats = ({ children, timestamp, community }: Props) => {
     variables,
   });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) {
     console.log("error", error);
     return <p>Error</p>;

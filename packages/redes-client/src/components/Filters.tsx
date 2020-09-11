@@ -2,7 +2,7 @@ import React from "react";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import {
   RoundSelectField,
-  InputWithIconField,
+  RoundInputField,
   Button,
   Icon,
   ConnectedForm,
@@ -11,15 +11,35 @@ import {
 import styled from "styled-components";
 import { AutoSaveFilters } from "./";
 
-const Wrap = styled.div`
+const WrapForm = styled.div`
   & > ${Form} {
     display: grid;
-    grid-template-columns: 15% repeat(5, minmax(100px, 200px)) auto;
+    grid-template-columns: 300px repeat(5, minmax(auto, 160px)) 100px;
     width: 100%;
     justify-content: start;
     grid-gap: 15px;
     align-items: center;
     & > div {
+      padding: 0;
+    }
+  }
+`;
+
+const WrapInput = styled.div`
+  position: relative;
+  & > div {
+    padding: 0;
+  }
+
+  & .icons {
+    position: absolute;
+    top: 13px;
+    display: grid;
+    width: 95%;
+    grid-template-columns: auto auto;
+    justify-content: end;
+    & button {
+      border: none;
       padding: 0;
     }
   }
@@ -62,20 +82,32 @@ const Filters = ({
   }));
 
   return (
-    <Wrap>
+    <WrapForm>
       <ConnectedForm onSubmit={save} initialValues={initialValues}>
         {({ form }) => {
           return (
             <>
               <AutoSaveFilters save={save} />
               {props.search && (
-                <InputWithIconField
-                  placeholder={
-                    searchPlaceholder || "Buscar nome, email, especialidade"
-                  }
-                  icon="Search"
-                  name="query"
-                />
+                <WrapInput>
+                  <RoundInputField
+                    placeholder={
+                      searchPlaceholder || "Buscar nome, email, especialidade"
+                    }
+                    name="query"
+                  />
+                  <div className="icons">
+                    <Button
+                      dark
+                      onClick={() => form.change("query", undefined)}
+                    >
+                      <Icon name="Close" size="xs" />
+                    </Button>
+                    <Button dark>
+                      <Icon name="Search" size="small" />
+                    </Button>
+                  </div>
+                </WrapInput>
               )}
               {props.groups && (
                 <RoundSelectField
@@ -146,7 +178,7 @@ const Filters = ({
           );
         }}
       </ConnectedForm>
-    </Wrap>
+    </WrapForm>
   );
 };
 
