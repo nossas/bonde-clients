@@ -25,16 +25,52 @@ export type MapaIndividual = {
   organizationId: number;
 };
 
+export type Individual = {
+  id: number;
+  firstName: string;
+  lastName?: string;
+  email: string;
+  whatsapp: string;
+  phone: string;
+  zipcode: string;
+  address: string;
+  city: string;
+  coordinates: {
+    latitude: string;
+    longitude: string;
+  };
+  state: string;
+  availability: string;
+  formEntryId: string;
+  tipoDeAcolhimento?: string | null;
+  createdAt: string;
+  encaminhamentosRealizados?: string;
+  atendimentosConcluidos?: string;
+  atendimentosEmAndamento?: string;
+  status: string;
+  updatedAt: string;
+  organizationId?: number;
+};
+
 export type MapaGroupsData = {
   data: MapaIndividual[];
-  count: {
+  individualsCount: {
     aggregate: {
       count: number;
     };
   };
 };
 
-export type GroupsVars = {
+export type RedesGroupsData = {
+  data: Individual[];
+  individualsCount: {
+    aggregate: {
+      count: number;
+    };
+  };
+};
+
+export type MapaGroupsVars = {
   rows: number;
   offset: number;
   order_by?: string;
@@ -46,42 +82,13 @@ export type GroupsVars = {
   query: string;
 };
 
-export type Individual = {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  whatsapp: string;
-  phone: string;
-  zipcode: string;
-  address: string;
-  city: string;
-  coordinates: Record<string, string>;
-  state: string;
-  status: string;
-  availability: string;
-  extras: Record<string, string>;
-  form_entry_id: number;
-  group: {
-    id: number;
-    community_id: number;
-    is_volunteer: boolean;
-  };
-  created_at: string;
-  updated_at: string;
+export type RedesGroupsVars = {
+  rows: number;
+  offset: number;
+  order_by?: string;
+  userStatus: { _eq: string | number | undefined };
+  state: { _eq: string | number | undefined };
+  availability: { _eq: string | number | undefined };
+  redeGroupId: { _eq: number };
+  query: string;
 };
-
-export interface GroupsData {
-  individuals: Individual[];
-  individuals_count: {
-    aggregate: {
-      count: number;
-    };
-  };
-  volunteers: Individual[];
-  volunteers_count: {
-    aggregate: {
-      count: number;
-    };
-  };
-}

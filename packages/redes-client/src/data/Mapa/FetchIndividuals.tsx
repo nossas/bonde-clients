@@ -1,9 +1,8 @@
 import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
-import { Empty } from "bonde-components";
+import { gql } from "bonde-core-tools";
+import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues, groupToOrganization } from "../../services/utils";
-import { MapaGroupsData, GroupsVars } from "../../types";
 
 export const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
@@ -38,7 +37,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
     ) {
       ...individual
     }
-    count: solidarity_tickets_aggregate(
+    individualsCount: solidarity_tickets_aggregate(
       where: {
         status_inscricao: $userStatus
         status_acolhimento: $relationshipStatus
@@ -84,13 +83,11 @@ export const INDIVIDUALS_BY_GROUP = gql`
     }
     relationshipStatus: status_inscricao
     userStatus: status_acolhimento
-    createdAt: created_at
-    updateAt: updated_at
     organizationId: organization_id
   }
 `;
 
-const FetchUsersByGroup = ({ children }: any) => {
+const FetchIndividuals = (props: any = {}) => {
   const { individuals, rows, offset, group } = useFilterState();
 
   const {
@@ -116,7 +113,7 @@ const FetchUsersByGroup = ({ children }: any) => {
     },
     query: `%${query || ""}%`,
     individualId: {
-      _eq: groupToOrganization[group && (group.value as number)],
+      _eq: group && groupToOrganization[group.value as number],
     },
     rows,
     offset,
@@ -125,33 +122,18 @@ const FetchUsersByGroup = ({ children }: any) => {
     // };
   };
 
-  const { loading, error, data } = useQuery<MapaGroupsData, GroupsVars>(
-    INDIVIDUALS_BY_GROUP,
-    {
-      variables,
-    }
+  return (
+    <FetchDataFromGraphql
+      variables={variables}
+      query={INDIVIDUALS_BY_GROUP}
+      {...props}
+    />
   );
-
-  if (error) {
-    console.log("error", error);
-    return <p>Error</p>;
-  }
-  if (loading) return <p>Loading...</p>;
-
-  return children({
-    ...data,
-    count: data?.count.aggregate.count,
-  });
 };
 
-export default function CheckCommunity(props: any): React.ReactElement {
-  const { community } = useSession();
+FetchIndividuals.displayName = "FetchIndividuals";
 
-  return community ? (
-    <FetchUsersByGroup community={community} {...props} />
-  ) : (
-    <Empty message="Selecione uma comunidade" />
-  );
+// eslint-disable-next-line react/display-name
+export default function (props: any = {}): React.ReactElement {
+  return <CheckCommunity Component={FetchIndividuals} {...props} />;
 }
-
-CheckCommunity.displayName = "CheckCommunity";
