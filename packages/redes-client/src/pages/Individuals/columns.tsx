@@ -2,40 +2,39 @@
 import React from "react";
 import { Button } from "bonde-components";
 import { Link } from "react-router-dom";
-import {
-  Groups,
-  Columns,
-  valueFirstName,
-  valueString,
-  MapaIndividual,
-} from "../../types";
+import { Columns, valueString, Individual } from "../../types";
 import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../../services/utils";
 
 const columns = (
-  groups: Groups,
+  communityId: number,
   isVolunteerSelected: boolean
 ): Array<Columns> => {
-  const communityId = groups.find((i) => !!i.isVolunteer)?.communityId;
   return [
     {
-      accessor: "individual",
+      accessor: "id",
       Header: "Nome",
-      Cell: ({ value }: valueFirstName): JSX.Element | string => {
+      Cell: ({
+        row: { original },
+        value,
+      }: {
+        row: { original: Individual };
+        value: number;
+      }): JSX.Element | string => {
         if (communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
-          return value ? (
-            <span>{`${value.firstName} ${value.lastName || ""}`}</span>
+          return original.firstName && original.lastName ? (
+            <span>{`${original.firstName} ${original.lastName || ""}`}</span>
           ) : (
             "-"
           );
         }
-        return value ? (
+        return original.firstName ? (
           <a
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none", color: "inherit" }}
-            href={`https://mapadoacolhimento.zendesk.com/agent/users/${value.id}/requested_tickets`}
+            href={`https://mapadoacolhimento.zendesk.com/agent/users/${value}/requested_tickets`}
           >
-            <span>{value.firstName}</span>
+            <span>{original.firstName}</span>
           </a>
         ) : (
           "-"
@@ -44,18 +43,18 @@ const columns = (
       bold: true,
     },
     {
-      accessor: "individual.email",
+      accessor: "email",
       Header: "E-mail",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
     },
     {
-      accessor: "individual.tipoDeAcolhimento",
+      accessor: "tipoDeAcolhimento",
       Header: "Tipo",
-      // is a volunteer or not from mapa
+      // hide if is a volunteer or not from mapa
       className:
-        !!isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
+        isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? "hide"
           : "",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
@@ -63,7 +62,7 @@ const columns = (
       ),
     },
     {
-      accessor: "individual.address",
+      accessor: "address",
       Header: "Endereço",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
@@ -71,7 +70,7 @@ const columns = (
     },
     {
       accessor: "userStatus",
-      className: !!isVolunteerSelected ? "" : "hide", // is a recipient
+      className: !isVolunteerSelected ? "hide" : "", // hide if is a recipient
       Header: "Status",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
@@ -79,9 +78,9 @@ const columns = (
     },
     {
       accessor: "relationShipStatus",
-      // is a volunteer or not from mapa
+      // hide if is a volunteer or not from mapa
       className:
-        !!isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
+        isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? "hide"
           : "",
       Header: "Status",
@@ -92,15 +91,15 @@ const columns = (
     {
       accessor: "availability",
       Header: "Disponibilidade",
-      className: !!isVolunteerSelected ? "" : "hide", // is a recipient
+      className: !isVolunteerSelected ? "hide" : "", // hide if is a recipient
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
     },
     {
-      accessor: "individual.createdAt",
+      accessor: "createdAt",
       Header: "Data Inscrição",
-      className: !!isVolunteerSelected ? "hide" : "", // is a volunteer
+      className: isVolunteerSelected ? "hide" : "", // hide if is a volunteer
       Cell: ({ value }: valueString): string => {
         if (!value) {
           return "-";
@@ -110,62 +109,66 @@ const columns = (
       },
     },
     {
-      accessor: "individual.encaminhamentosRealizados",
+      accessor: "encaminhamentosRealizados",
       Header: "ER",
-      // is not volunteer from mapa
+      // hide if is a volunteer or not from mapa
       className:
-        !!isVolunteerSelected && communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
-          ? ""
-          : "hide",
+        isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
+          ? "hide"
+          : "",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
     },
     {
-      accessor: "individual.atendimentosEmAndamento",
+      accessor: "atendimentosEmAndamento",
       Header: "AT INI",
-      // is not volunteer from mapa
+      // hide if is a volunteer or not from mapa
       className:
-        !!isVolunteerSelected && communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
-          ? ""
-          : "hide",
+        isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
+          ? "hide"
+          : "",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
     },
     {
-      accessor: "individual.atendimentosConcluidos",
+      accessor: "atendimentosConcluidos",
       Header: "AT CON",
-      // is not volunteer from mapa
+      // hide if is a volunteer or not from mapa
       className:
-        !!isVolunteerSelected && communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
-          ? ""
-          : "hide",
+        isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
+          ? "hide"
+          : "",
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
     },
     {
-      accessor: "individual.whatsapp",
+      accessor: "whatsapp",
       Header: "Whatsapp",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || "-"}</span>
-      ),
+      Cell: ({
+        value,
+        row: { original },
+      }: {
+        value: string;
+        row: { original: Individual };
+      }): JSX.Element | string => <span>{value || original.phone || "-"}</span>,
     },
     {
-      accessor: "id",
+      accessor: "phone",
       Header: "Ação",
       className: "sticky",
       Cell: ({
         row: { original },
       }: {
-        row: { original: MapaIndividual };
+        row: { original: Individual };
       }): JSX.Element | null => {
         return (
           <Link
             to={{
               pathname: "/match",
-              search: `?email=${original.individual.email}`,
+              search: `?email=${original.email}`,
               state: {
                 [!!isVolunteerSelected ? "volunteer" : "recipient"]: {
                   ...original,

@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { useSession } from "bonde-core-tools";
 import { Table, Filters } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
-import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import { groupsToSelect } from "../../services/utils";
 import columns from "./columns";
-import { MapaIndividual } from "../../types";
+import { Individual, MapaIndividual, Groups } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -17,13 +15,21 @@ const WrapEmpty = styled.div`
 `;
 
 type Props = {
+  community?: {
+    id: number;
+  };
+  groups: Groups;
   data: {
-    FetchUsersByGroup: ({
+    FetchIndividuals: ({
       children,
     }: {
       children: (data: {
-        data: MapaIndividual[];
-        count: number;
+        data: Individual[];
+        individualsCount: {
+          aggregate: {
+            count: number;
+          };
+        };
       }) => React.ReactElement;
     }) => React.ReactElement | null;
     FilterOptions: {
@@ -32,15 +38,28 @@ type Props = {
   };
 };
 
+const stripIndividualFromData = (data: MapaIndividual[]): Individual[] =>
+  data.map((d) => ({
+    ...d,
+    ...d.individual,
+    coordinates: {
+      latitude: d.individual.latitude,
+      longitude: d.individual.longitude,
+    },
+  }));
+
 export default function Individuals({
-  data: { FetchUsersByGroup, FilterOptions },
+  data: { FetchIndividuals, FilterOptions },
+  community,
+  groups,
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
-  const { groups } = useCommunityExtra();
-  const { community } = useSession();
 
   useEffect(() => {
-    if (state.group === null || typeof state.group === "undefined")
+    if (
+      state.selectedGroup === null ||
+      typeof state.selectedGroup === "undefined"
+    )
       return dispatch({
         type: "group",
         value: {
@@ -48,7 +67,7 @@ export default function Individuals({
           label: groups.find((group) => !group.isVolunteer)?.name || "",
         },
       });
-  }, [state.group]);
+  }, []);
 
   const save = async (values: any) => {
     dispatch({ type: "individuals", value: values });
@@ -57,18 +76,14 @@ export default function Individuals({
 
   const reset = () =>
     dispatch({
-      type: "group",
-      value: {
-        value: groups.find((group) => !group.isVolunteer)?.id || 0,
-        label: groups.find((group) => !group.isVolunteer)?.name || "",
-      },
+      type: "reset",
     });
 
   const isVolunteerSelected =
-    typeof state.group !== "undefined" && state.group !== null
+    typeof state.selectedGroup !== "undefined" && state.selectedGroup !== null
       ? groups
           .filter((i) => !!i.isVolunteer)
-          .find((i) => i.id === state.group.value)
+          .find((i) => i.id === state.selectedGroup?.value)
       : false;
 
   return (
@@ -82,54 +97,65 @@ export default function Individuals({
         }}
         initialValues={{
           ...state.individuals,
-          group: state.group,
+          group: state.selectedGroup,
         }}
         reset={reset}
-        searchPlaceholder="Buscar nome, email, especialidade..."
+        searchPlaceholder={
+          community?.id === 40
+            ? "Buscar nome, email, especialidade..."
+            : "Buscar nome, email..."
+        }
         groups
         search
         state
         availability
         userStatus={!!isVolunteerSelected === true}
-        relationshipStatus={!!isVolunteerSelected === false}
+        relationshipStatus={
+          !!isVolunteerSelected === false && community?.id === 40
+        }
       />
-      {community?.id === 40 ? (
-        <FetchUsersByGroup>
-          {({ data, count }) => {
-            const pagination = {
-              totalPages: Math.round(count / state.rows),
-              goToPage: (e: number) => dispatch({ type: "page", value: e }),
-              setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-              pageIndex: state.page,
-              pageSize: state.rows,
-            };
+      <FetchIndividuals>
+        {({
+          data,
+          individualsCount: {
+            aggregate: { count },
+          },
+        }) => {
+          const pagination = {
+            totalPages: Math.round(count / state.rows),
+            goToPage: (e: number) => dispatch({ type: "page", value: e }),
+            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
+            pageIndex: state.page,
+            pageSize: state.rows,
+          };
 
-            return count < 1 ? (
-              <WrapEmpty>
-                <Empty message="Nada por aqui..." />
-              </WrapEmpty>
-            ) : groups.length < 2 ? (
-              <WrapEmpty>
-                <Empty message="Não existem grupos suficientes nessa comunidade." />
-              </WrapEmpty>
-            ) : (
-              <>
-                <Header.H4>Total ({count})</Header.H4>
-                <Table
-                  data={data}
-                  columns={columns(groups, !!isVolunteerSelected)}
-                  sticky="end"
-                  pagination={pagination}
-                />
-              </>
-            );
-          }}
-        </FetchUsersByGroup>
-      ) : (
-        <Header.H4>
-          Sua rede de solidariedade ainda não possui acesso a essa página.
-        </Header.H4>
-      )}
+          return count < 1 ? (
+            <WrapEmpty>
+              <Empty message="Nada por aqui..." />
+            </WrapEmpty>
+          ) : groups.length < 2 ? (
+            <WrapEmpty>
+              <Empty message="Não existem grupos suficientes nessa comunidade." />
+            </WrapEmpty>
+          ) : (
+            <>
+              <Header.H4>Total ({count})</Header.H4>
+              <Table
+                data={
+                  community?.id === 40
+                    ? stripIndividualFromData(
+                        (data as unknown) as MapaIndividual[]
+                      )
+                    : data
+                }
+                columns={columns(community?.id || 0, !!isVolunteerSelected)}
+                sticky="end"
+                pagination={pagination}
+              />
+            </>
+          );
+        }}
+      </FetchIndividuals>
     </>
   );
 }
