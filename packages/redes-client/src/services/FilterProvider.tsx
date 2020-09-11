@@ -46,7 +46,7 @@ const initialState = {
   rows: 10,
   offset: 10 * 0,
   page: 0,
-  selectedGroup: null,
+  selectedGroup: undefined,
   relationships: initialFilters,
   individuals: initialFilters,
 };

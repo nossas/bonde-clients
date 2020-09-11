@@ -56,9 +56,10 @@ export default function Individuals({
   const [state, dispatch] = useFilter();
 
   useEffect(() => {
+    // if state.selectedGroup is null, we shouldn't change the state - the user that cleaned it
     if (
-      state.selectedGroup === null ||
-      typeof state.selectedGroup === "undefined"
+      typeof state.selectedGroup === "undefined" ||
+      state.selectedGroup?.value === 0
     )
       return dispatch({
         type: "group",
@@ -67,7 +68,7 @@ export default function Individuals({
           label: groups.find((group) => !group.isVolunteer)?.name || "",
         },
       });
-  }, []);
+  }, [state.selectedGroup]);
 
   const save = async (values: any) => {
     dispatch({ type: "individuals", value: values });
@@ -80,11 +81,13 @@ export default function Individuals({
     });
 
   const isVolunteerSelected =
-    typeof state.selectedGroup !== "undefined" && state.selectedGroup !== null
-      ? groups
+    typeof state.selectedGroup !== "undefined" &&
+    state.selectedGroup !== null &&
+    state.selectedGroup.value !== 0
+      ? !!groups
           .filter((i) => !!i.isVolunteer)
           .find((i) => i.id === state.selectedGroup?.value)
-      : false;
+      : undefined;
 
   return (
     <>
@@ -97,7 +100,7 @@ export default function Individuals({
         }}
         initialValues={{
           ...state.individuals,
-          group: state.selectedGroup,
+          groups: state.selectedGroup,
         }}
         reset={reset}
         searchPlaceholder={
@@ -109,9 +112,14 @@ export default function Individuals({
         search
         state
         availability
-        userStatus={!!isVolunteerSelected === true}
+        userStatus={
+          typeof isVolunteerSelected === "undefined" ||
+          (community?.id === 40 && isVolunteerSelected)
+        }
         relationshipStatus={
-          !!isVolunteerSelected === false && community?.id === 40
+          (!isVolunteerSelected ||
+            typeof isVolunteerSelected === "undefined") &&
+          community?.id === 40
         }
       />
       <FetchIndividuals>
@@ -148,7 +156,7 @@ export default function Individuals({
                       )
                     : data
                 }
-                columns={columns(community?.id || 0, !!isVolunteerSelected)}
+                columns={columns(community?.id || 0, isVolunteerSelected)}
                 sticky="end"
                 pagination={pagination}
               />

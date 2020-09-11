@@ -81,8 +81,8 @@ export const INDIVIDUALS_BY_GROUP = gql`
       atendimentosConcluidos: atendimentos_concludos_calculado_
       atendimentosEmAndamento: atendimentos_em_andamento_calculado_
     }
-    relationshipStatus: status_inscricao
-    userStatus: status_acolhimento
+    relationshipStatus: status_acolhimento
+    userStatus: status_inscricao
     organizationId: organization_id
   }
 `;

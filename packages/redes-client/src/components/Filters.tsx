@@ -14,7 +14,7 @@ import { AutoSaveFilters } from "./";
 const WrapForm = styled.div`
   & > ${Form} {
     display: grid;
-    grid-template-columns: 300px repeat(5, minmax(auto, 160px)) 100px;
+    grid-template-columns: 300px repeat(5, minmax(auto, 164px)) 100px;
     width: 100%;
     justify-content: start;
     grid-gap: 15px;
@@ -111,7 +111,7 @@ const Filters = ({
               )}
               {props.groups && (
                 <RoundSelectField
-                  name="group"
+                  name="groups"
                   placeholder="Grupo"
                   options={options.groups}
                   menuPortalTarget={document.querySelector("body")}
@@ -122,7 +122,7 @@ const Filters = ({
               {props.userStatus && (
                 <RoundSelectField
                   name="userStatus"
-                  placeholder="Status"
+                  placeholder="Status Inscrição"
                   options={options.userStatus}
                   menuPortalTarget={document.querySelector("body")}
                   isClearable={true}
@@ -131,7 +131,7 @@ const Filters = ({
               {props.relationshipStatus && (
                 <RoundSelectField
                   name="relationshipStatus"
-                  placeholder="Status"
+                  placeholder="Status Relação"
                   options={options.relationshipStatus}
                   menuPortalTarget={document.querySelector("body")}
                   isClearable={true}
