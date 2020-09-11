@@ -7,10 +7,10 @@ const InputAddon = styled.div`
 
   button {
     position: absolute;
-    right: 0;
     border: none;
     top: 10px;
     padding: 0;
+    justify-content: end;
   }
 
   input {
