@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
+import Mailchimp from './Mailchimp';
 
 const SettingsPage = () => {
   const { t } = useTranslation('community');
@@ -13,19 +14,7 @@ const SettingsPage = () => {
       <Container fluid style={{ width: '100%', padding: '0' }}>
         <Row>
           <Col sm={12}>
-            <Header.h3 margin="0 0 25px 0">Mailchimp</Header.h3>
-            <Panel>
-              <InputField
-                name='community.mailchimp_api_key'
-                label={t('integrations.form.fields.mailchimp_api_key.label')}
-                placeholder={t('integrations.form.fields.mailchimp_api_key.placeholder')}
-                />
-              <InputField
-                name='community.mailchimp_list_id'
-                label={t('integrations.form.fields.mailchimp_list_id.label')}
-                placeholder={t('integrations.form.fields.mailchimp_list_id.placeholder')}
-                />
-            </Panel>
+            <Mailchimp />
           </Col>
           <Col sm={12}>
             <Header.h3>Twilio</Header.h3>
