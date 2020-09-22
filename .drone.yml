@@ -14,6 +14,18 @@ pipeline:
       status: success
       event: [push]
 
+  publish-production-build:
+    image: plugins/docker
+    repo: nossas/bonde
+    dockerfile: Dockerfile.production
+    secrets: [ docker_username, docker_password ]
+    group: builder
+    tags:
+      - builder-prod
+    when:
+      status: success
+      event: tag
+
   publish-accounts:
     image: plugins/docker
     repo: nossas/bonde
@@ -26,6 +38,19 @@ pipeline:
     when:
       status: success
       event: [push]
+
+  publish-accounts-prod:
+    image: plugins/docker
+    repo: nossas/bonde
+    secrets: [ docker_username, docker_password ]
+    dockerfile: packages/accounts-client/Dockerfile.production
+    context: packages/accounts-client/
+    group: clients
+    tags:
+      - accounts-prod
+    when:
+      status: success
+      event: tag
 
   publish-canary:
     image: plugins/docker
