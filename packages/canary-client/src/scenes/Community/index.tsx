@@ -49,7 +49,7 @@ const CommunityPage = ({ match, location }: Props) => {
   return community ? (
     <PageWrap>
       <SubHeader>
-        <Header.h3>{community.name}</Header.h3>
+        <Header.H3>{community.name}</Header.H3>
         <Navigation>
           <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
           <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>

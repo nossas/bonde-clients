@@ -27,7 +27,7 @@ const Success = () => {
 
   return (
     <div>
-      <Header.h2>{t('forgetPassword.successfully.title')}</Header.h2>
+      <Header.H2>{t('forgetPassword.successfully.title')}</Header.H2>
       <Text>{t('forgetPassword.successfully.checkEmail')}</Text>
       <Text>{t('forgetPassword.successfully.checkSpam')}</Text>
       <Text>{t('forgetPassword.successfully.checkExpiry')}</Text>
@@ -56,7 +56,7 @@ const ForgetPasswordForm = () => {
     ? <Success />
     : (
       <>
-        <Header.h2>{t('forgetPassword.title')}</Header.h2>
+        <Header.H2>{t('forgetPassword.title')}</Header.H2>
         <Text>{t('forgetPassword.description')}</Text>
         <ConnectedForm
           initialValues={{

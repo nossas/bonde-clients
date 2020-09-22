@@ -36,7 +36,7 @@ const RegisterForm = ({ to, t }: any) => {
 
   return (
     <>
-      <Header.h1>{t('welcome.subtitle')}</Header.h1>
+      <Header.H1>{t('welcome.subtitle')}</Header.H1>
       <ConnectedForm
         initialValues={{ input: { email, code } }}
         onSubmit={async (values: any) => {

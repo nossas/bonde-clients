@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 const InvalidURL = () => (
   <>
-    <Header.h2>Opa!</Header.h2>
+    <Header.H2>Opa!</Header.H2>
     <Text>Esse link é inválido ou já expirou. Entre em contato com a comunidade e peça para te enviarem um novo convite.</Text>
     <Text>Se o erro persistir, envie um email para <a href="mailto:suporte@bonde.org">suporte@bonde.org</a> com o nome da comunidade que você está tentando acessar.</Text>
     <Text>Te responderemos o quanto antes :)</Text>

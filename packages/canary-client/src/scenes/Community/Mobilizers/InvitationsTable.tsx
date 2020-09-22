@@ -41,30 +41,30 @@ function App({ data: defaultData, refetch }: Props) {
   const columns = React.useMemo(
     () => [
       {
-        Header: <Header.h5>Email</Header.h5>,
+        Header: <Header.H5>Email</Header.H5>,
         accessor: 'email',
         minWidth: 350
       },
       {
-        Header: <Header.h5>Função</Header.h5>,
+        Header: <Header.H5>Função</Header.H5>,
         accessor: 'role',
         width: 100,
         Cell: Role
       },
       {
-        Header: <Header.h5>Enviado por</Header.h5>,
+        Header: <Header.H5>Enviado por</Header.H5>,
         accessor: 'user.email',
         minWidth: 300
       },
       {
-        Header: <Header.h5>Data de envio</Header.h5>,
+        Header: <Header.H5>Data de envio</Header.H5>,
         accessor: 'created_at',
         minWidth: 100,
         width: 200,
         Cell: Timestamp
       },
       {
-        Header: <Header.h5>Expira em</Header.h5>,
+        Header: <Header.H5>Expira em</Header.H5>,
         accessor: 'expires',
         minWidth: 100,
         Cell: Expired(refetch)
