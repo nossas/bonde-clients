@@ -6,9 +6,9 @@ import {
   Text,
   InputField,
   Validators,
-  Link as LinkStyled,
-  Row
+  Link as LinkStyled
 } from 'bonde-components';
+import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useMutation, gql } from 'bonde-core-tools';
@@ -55,7 +55,7 @@ const ForgetPasswordForm = () => {
   return submitted
     ? <Success />
     : (
-      <>
+      <Container fluid style={{ width: '100%', padding: '0' }}>
         <Header.H2>{t('forgetPassword.title')}</Header.H2>
         <Text>{t('forgetPassword.description')}</Text>
         <ConnectedForm
@@ -73,18 +73,22 @@ const ForgetPasswordForm = () => {
                 placeholder={t('forgetPassword.email.placeholder')}
                 validate={isEmail(t('forgetPassword.email.isEmail'))}
               />
-              <Row spacing='between'>
-                <LinkStyled component={Link} to='/login' title={t('forgetPassword.goback')}>
-                  {t('forgetPassword.goback')}
-                </LinkStyled>
-                <Button type='submit' disabled={submitting}>
-                  {t('forgetPassword.submit')}
-                </Button>
+              <Row align='center'>
+                <Col sm={6}>
+                  <LinkStyled component={Link} to='/login' title={t('forgetPassword.goback')}>
+                    {t('forgetPassword.goback')}
+                  </LinkStyled>
+                </Col>
+                <Col sm={6}>
+                  <Button type='submit' disabled={submitting}>
+                    {t('forgetPassword.submit')}
+                  </Button>
+                </Col>
               </Row>
             </>
           )}
         </ConnectedForm>
-      </>
+      </Container>
     )
   ;
 }
