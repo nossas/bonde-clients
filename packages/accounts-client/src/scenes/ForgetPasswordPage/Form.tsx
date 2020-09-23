@@ -45,8 +45,8 @@ const ForgetPasswordForm = () => {
 
   const submit = async (values: any) => {
     try {
-      const { data } = await forgetPassword({ variables: values });
-      setSubmitted(data.reset_password_request);
+      await forgetPassword({ variables: values });
+      setSubmitted(true);
     } catch (err) {
       console.log('err', err);
     }
