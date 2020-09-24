@@ -34,21 +34,18 @@ const Inline = styled.div`
 `;
 
 export const InviteMutation = gql`
-  mutation Invite ($input: [invitations_insert_input!]!) {
-    insert_invitations (
-      objects: $input
-    ) {
-      returning {
+  mutation SendInvitation ($input: InvitationInput) {
+    send_invitation(input: $input) {
+      user_id
+      id
+      role
+      created_at
+      updated_at
+      community {
         id
-        community {
-          id
-          name
-        }
-        user_id
-        created_at
-        updated_at
-        expired
+        name
       }
+      code
     }
   }
 `;
@@ -78,16 +75,14 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
               const input: any = {
                 community_id: community.id,
                 email,
-                role
+                role,
+                user_id: user.id
               };
-              if (user.isAdmin) {
-                input.user_id = user.id;
-              }
 
               try {
                 const { data } = await invite({ variables: { input } });
 
-                onSuccess(data.insert_invitations.returning)
+                onSuccess(data.send_invitation)
                   .then(() => {
                     toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS });
                   })
