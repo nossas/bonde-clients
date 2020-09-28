@@ -68,7 +68,7 @@ const UpdateRecipientGQL = gql`
   }
 `;
 
-export default ({ children }: any) => {
+export default ({ children, omitButton }: any) => {
   const { community, onChange } = useSession();
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
@@ -150,7 +150,7 @@ export default ({ children }: any) => {
       {({ submitting }) => (
         <>
           {children}
-          <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>
+          {!omitButton && <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>}
         </>
       )}
     </ConnectedForm>

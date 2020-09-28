@@ -5,7 +5,6 @@ import {
   ConnectedForm,
   InputField,
   Validators,
-  Hint,
   Text,
   Icon
 } from 'bonde-components';
