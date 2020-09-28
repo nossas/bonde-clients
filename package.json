@@ -29,9 +29,6 @@
     "styled-components": "^5.1.1",
     "typescript": "3.8"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,16 +48,13 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix --ext js,ts,tsx"
+      "eslint --fix --ext .js,.ts,.tsx"
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.8.0",
-    "@typescript-eslint/parser": "^3.8.0",
-    "eslint-plugin-jest": "^23.20.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.5",
-    "eslint-plugin-react-hooks": "^4.0.8",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^6.6.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11"
   }

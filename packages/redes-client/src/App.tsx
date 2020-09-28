@@ -1,23 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { BondeSessionProvider } from "bonde-core-tools";
-
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
+import { Loading, Main, Body as ComponentsBody } from "bonde-components";
 import styled from "styled-components";
-import { Loading, Text } from "bonde-components";
 
-import logo from "./logo.svg";
-import "./App.css";
-
-const AppHeader = styled.header`
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-`;
+import { Relations, Individuals, Home } from "./pages";
+import { Header, SelectMapaOrRedes } from "./components";
+import { FilterProvider } from "./services/FilterProvider";
+import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
 
 type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
@@ -27,7 +17,7 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
     session: "Carregando sessão...",
     user: "Carregando usuário...",
-    communities: "Carregando communities...",
+    communities: "Carregando communidades...",
     redirect: "Redirecionando para autenticação...",
     module: "Redirecionando para módulo...",
   };
@@ -37,10 +27,18 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 
 type Environment = "development" | "staging" | "production";
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function App() {
+const Body = styled(ComponentsBody)`
+  display: unset;
+  padding: 20px 65px;
+`;
+
+const App = (): React.ReactElement => {
+  console.log({ envs: process.env });
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
+  const adminUrl =
+    process.env.REACT_APP_DOMAIN_ADMIN_CANARY ||
+    "http://admin-canary.bonde.devel:5001/admin";
 
   return (
     <BondeSessionProvider
@@ -48,28 +46,29 @@ function App() {
       environment={environment as Environment}
       loading={SessionLoading}
     >
-      <Router>
-        <Route exact path="/">
-          <div className="App">
-            <AppHeader>
-              <img src={logo} className="App-logo" alt="logo" />
-              <Text>
-                Edit <code>src/App.tsx</code> and save to reload.
-              </Text>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </AppHeader>
-          </div>
-        </Route>
-      </Router>
+      <FilterProvider>
+        <CommunityExtraProvider>
+          <Router>
+            <BondeSessionUI indexRoute={adminUrl}>
+              <Main style={{ minWidth: "100%" }}>
+                <Header />
+                <Body>
+                  <Switch>
+                    <SelectMapaOrRedes path="/matchs" component={Relations} />
+                    <SelectMapaOrRedes
+                      path="/pessoas"
+                      component={Individuals}
+                    />
+                    <SelectMapaOrRedes path="/" component={Home} />
+                  </Switch>
+                </Body>
+              </Main>
+            </BondeSessionUI>
+          </Router>
+        </CommunityExtraProvider>
+      </FilterProvider>
     </BondeSessionProvider>
   );
-}
+};
 
 export default App;
