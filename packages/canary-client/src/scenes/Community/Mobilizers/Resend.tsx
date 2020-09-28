@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'bonde-components';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { InviteMutation } from './InviteForm';
 import DeleteException from './DeleteException';
 
@@ -23,7 +24,7 @@ const Styles = styled.div`
 `;
 
 type Invite = {
-  id: Number
+  id: number
   email: string
   role: string | number
 }
@@ -36,8 +37,8 @@ type Props = {
 const Resend = ({ data: { id, email, role }, refetch }: Props) => {
   const [deleteInvite] = useMutation(DeleteInviteMutation)
   const [createInvite] = useMutation(InviteMutation)
-
   const { user, community } = useSession()
+  const { t } = useTranslation('community');
 
   const onClick = async () => {
     try {
@@ -59,7 +60,7 @@ const Resend = ({ data: { id, email, role }, refetch }: Props) => {
 
           await refetch();
 
-          return toast('Convite reenviado com sucesso', { type: toast.TYPE.SUCCESS });
+          return toast(t('mobilizers.table.actions.resend.success'), { type: toast.TYPE.SUCCESS });
         }
         throw DeleteException({
           graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
@@ -69,7 +70,7 @@ const Resend = ({ data: { id, email, role }, refetch }: Props) => {
       }
     } catch ({ graphQLErrors, ...errors }) {
       if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
-        toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR });
+        toast('mobilizers.form.permission-denied', { type: toast.TYPE.ERROR });
       } else {
         console.error({ graphQLErrors, ...errors });
       }
@@ -78,7 +79,7 @@ const Resend = ({ data: { id, email, role }, refetch }: Props) => {
 
   return (
     <Styles>
-      <Link href="#" onClick={onClick}>Reenviar</Link>
+      <Link href="#" onClick={onClick}>{t('mobilizers.table.actions.resend.label')}</Link>
     </Styles>
   );
 };

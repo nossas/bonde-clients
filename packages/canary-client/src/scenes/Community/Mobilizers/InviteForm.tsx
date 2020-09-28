@@ -9,6 +9,7 @@ import {
   Icon
 } from 'bonde-components';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import Panel from '../Panel';
 import SelectField from '../SelectField';
@@ -62,6 +63,7 @@ type Props = {
 const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
   const [invite] = useMutation(InviteMutation);
   const { user, community } = useSession();
+  const { t } = useTranslation('community');
   const { composeValidators, required, isEmail } = Validators;
 
   if (community) {
@@ -83,11 +85,11 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
 
                 onSuccess(data.send_invitation)
                   .then(() => {
-                    toast('Convite enviado com sucesso', { type: toast.TYPE.SUCCESS });
+                    toast(t('mobilizers.form.success'), { type: toast.TYPE.SUCCESS });
                   })
               } catch ({ graphQLErrors, ...errors }) {
                 if (graphQLErrors.filter((err: any) => err.extensions.code === 'permission-error').length > 0) {
-                  toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR })
+                  toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
                 } else {
                   console.error({ graphQLErrors, ...errors })
                 }
@@ -98,27 +100,27 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
               <InlineFormWrap>
                 <InputField
                   name='email'
-                  label='Enviar convite para'
-                  placeholder='E-mail de cadastro do mobilizador(a)'
+                  label={t('mobilizers.form.fields.email.label')}
+                  placeholder={t('mobilizers.form.fields.email.placeholder')}
                   validate={
                     composeValidators(
-                      required('Para convidar usuário deve preencher o e-mail'),
-                      isEmail('E-mail inválido, confira se está tudo ok')
+                      required(t('mobilizers.form.fields.email.errors.required')),
+                      isEmail(t('mobilizers.form.fields.email.errors.isEmail'))
                     )
                   }
                 />
-                <SelectField name='role' label='Função'>
-                  <option value={1}>Administrador (a)</option>
-                  <option value={2}>Mobilizador (a)</option>
+                <SelectField name='role' label={t('mobilizers.form.fields.role.label')}>
+                  <option value={1}>{t('mobilizers.form.fields.role.option1')}</option>
+                  <option value={2}>{t('mobilizers.form.fields.role.option2')}</option>
                 </SelectField>
-                <Button type='submit' disabled={submitting}>Convidar</Button>
+                <Button type='submit' disabled={submitting}>{t('mobilizers.form.buttons.invite')}</Button>
               </InlineFormWrap>
             )}
           </ConnectedForm>
         ) : (
           <Inline>
             <Icon name='InfoMsg' />
-            <Text>Apenas os administradores da comunidade podem convidar mobilizadores.</Text>
+            <Text>{t('mobilizers.form.permission-info')}</Text>
           </Inline>
         )}
       </Panel>

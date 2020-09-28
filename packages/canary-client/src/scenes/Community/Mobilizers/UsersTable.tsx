@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Header, Link, Icon } from 'bonde-components';
 import styled from 'styled-components';
 import { useMutation, gql } from 'bonde-core-tools';
+import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';
 import Role from './Role';
 import DeleteException from './DeleteException';
@@ -37,6 +38,7 @@ type DeleteProps = {
 
 const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
   const [deleteCommunityUsers] = useMutation(DeleteCommunityUsersMutation);
+  const { t } = useTranslation('community');
 
   return (
     <MenuStyles>
@@ -46,7 +48,7 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
           try {
             const { data } = await deleteCommunityUsers({ variables: { id } })
             if (data.delete_community_users.returning.length > 0) {
-              toast(`${user.first_name} removido com sucesso.`, { type: toast.TYPE.SUCCESS })
+              toast(t('mobilizers.table.actions.delete.success', { name: user.first_name }), { type: toast.TYPE.SUCCESS })
               return await refetch()
             }
             throw DeleteException({
@@ -54,7 +56,7 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
             })
           } catch ({ graphQLErrors, ...errors }) {
             if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
-              toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR })
+              toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
             } else {
               console.error({ graphQLErrors, ...errors })
             }

@@ -171,6 +171,64 @@
       }
     }
   },
+  "mobilizers": {
+    "table": {
+      "columns": {
+        "email": {
+          "header": "Correo electrónico"
+        },
+        "role": {
+          "header": "Ocupación"
+        },
+        "user": {
+          "header": "Enviado por"
+        },
+        "created_at": {
+          "header": "Fecha de envío"
+        },
+        "expires": {
+          "header": "Expira en"
+        }
+      },
+      "actions": {
+        "resend": {
+          "success": "Invitación reenviada con éxito",
+          "label": "Reenviar"
+        },
+        "delete": {
+          "success": "{{name}} eliminado con éxito."
+        }
+      }
+    },
+    "form": {
+      "title": "Invita a un movilizador",
+      "success": "Invitación enviada con éxito",
+      "permission-denied": "¡Ups! Su usuario no tiene permiso para esta acción, cualquier pregunta por favor comuníquese con el soporte.",
+      "permission-info": "Solo los administradores de la comunidad pueden invitar a movilizadores.",
+      "fields": {
+        "email": {
+          "label": "Enviar invitación a",
+          "placeholder": "Correo electrónico de registro del movilizador",
+          "errors": {
+            "required": "Para invitar al usuario debe completar el correo electrónico",
+            "isEmail": "Correo electrónico no válido, compruebe si todo está bien"
+          }
+        },
+        "role": {
+          "label": "Ocupación",
+          "option1": "Administrador",
+          "option2": "Movilizador"
+        }
+      },
+      "buttons": {
+        "invite": "Invitar"
+      }
+    },
+    "filters": {
+      "invitations": "Invitaciones ({{count}})",
+      "mobilizers": "Movilizadores ({{count}})"
+    }
+  },
   "buttons": {
     "submit": "Guardar formulario"
   },

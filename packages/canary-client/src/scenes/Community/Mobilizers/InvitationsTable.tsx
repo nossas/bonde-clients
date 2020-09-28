@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header } from 'bonde-components'
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';
 import Role from './Role';
 import Resend from './Resend';
@@ -37,40 +38,41 @@ type Props = {
 }
 
 function App({ data: defaultData, refetch }: Props) {
+  const { t } = useTranslation('community');
   // { "user_id": 152, "created_at": "2020-01-08T12:17:44.304143", "role": 2, "email": "diego@dorgam.com.br", "expired": true, "expires": "2020-01-11T00:00:00", "__typename": "invitations" }
   const columns = React.useMemo(
     () => [
       {
-        Header: <Header.H5>Email</Header.H5>,
+        Header: <Header.H5>{t('mobilizers.table.columns.email.header')}</Header.H5>,
         accessor: 'email',
         minWidth: 350
       },
       {
-        Header: <Header.H5>Função</Header.H5>,
+        Header: <Header.H5>{t('mobilizers.table.columns.role.header')}</Header.H5>,
         accessor: 'role',
         width: 100,
         Cell: Role
       },
       {
-        Header: <Header.H5>Enviado por</Header.H5>,
+        Header: <Header.H5>{t('mobilizers.table.columns.user.header')}</Header.H5>,
         accessor: 'user.email',
         minWidth: 300
       },
       {
-        Header: <Header.H5>Data de envio</Header.H5>,
+        Header: <Header.H5>{t('mobilizers.table.columns.created_at.header')}</Header.H5>,
         accessor: 'created_at',
         minWidth: 100,
         width: 200,
         Cell: Timestamp
       },
       {
-        Header: <Header.H5>Expira em</Header.H5>,
+        Header: <Header.H5>{t('mobilizers.table.columns.expires.header')}</Header.H5>,
         accessor: 'expires',
         minWidth: 100,
         Cell: Expired(refetch)
       }
     ],
-    [refetch]
+    [refetch, t]
   );
 
   return (
@@ -78,6 +80,6 @@ function App({ data: defaultData, refetch }: Props) {
       <Table columns={columns} data={defaultData} />
     </Styles>
   );
-};
+}
 
 export default App;

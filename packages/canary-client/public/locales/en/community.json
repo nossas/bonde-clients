@@ -171,6 +171,64 @@
       }
     }
   },
+  "mobilizers": {
+    "table": {
+      "columns": {
+        "email": {
+          "header": "Email"
+        },
+        "role": {
+          "header": "Role"
+        },
+        "user": {
+          "header": "Sent by"
+        },
+        "created_at": {
+          "header": "Send date"
+        },
+        "expires": {
+          "header": "Expires in"
+        }
+      },
+      "actions": {
+        "resend": {
+          "success": "Invitation resent successfully",
+          "label": "Resent"
+        },
+        "delete": {
+          "success": "{{name}} successfully removed."
+        }
+      }
+    },
+    "form": {
+      "title": "Invite a mobilizer",
+      "success": "Invitation sent successfully",
+      "permission-denied": "Oops! Your user does not have permission for this action, any questions please contact support.",
+      "permission-info": "Only community administrators can invite mobilizers.",
+      "fields": {
+        "email": {
+          "label": "Send invitation to",
+          "placeholder": "Mobilizer registration email",
+          "errors": {
+            "required": "To invite user you must fill in the email",
+            "isEmail": "Invalid email, check if everything is ok"
+          }
+        },
+        "role": {
+          "label": "Role",
+          "option1": "Administrator",
+          "option2": "Mobilizer"
+        }
+      },
+      "buttons": {
+        "invite": "To invite"
+      }
+    },
+    "filters": {
+      "invitations": "Invitations ({{count}})",
+      "mobilizers": "Mobilizers ({{count}})"
+    }
+  },
   "buttons": {
     "submit": "Save form"
   },

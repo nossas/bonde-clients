@@ -171,6 +171,64 @@
       }
     }
   },
+  "mobilizers": {
+    "table": {
+      "columns": {
+        "email": {
+          "header": "Email"
+        },
+        "role": {
+          "header": "Função"
+        },
+        "user": {
+          "header": "Enviado por"
+        },
+        "created_at": {
+          "header": "Data de envio"
+        },
+        "expires": {
+          "header": "Expira em"
+        }
+      },
+      "actions": {
+        "resend": {
+          "success": "Convite reenviado com sucesso",
+          "label": "Reenviar"
+        },
+        "delete": {
+          "success": "{{name}} removido com sucesso."
+        }
+      }
+    },
+    "form": {
+      "title": "Convidar um mobilizador(a)",
+      "success": "Convite enviado com sucesso",
+      "permission-denied": "Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.",
+      "permission-info": "Apenas os administradores da comunidade podem convidar mobilizadores.",
+      "fields": {
+        "email": {
+          "label": "Enviar convite para",
+          "placeholder": "E-mail de cadastro do mobilizador(a)",
+          "errors": {
+            "required": "Para convidar usuário deve preencher o e-mail",
+            "isEmail": "E-mail inválido, confira se está tudo ok"
+          }
+        },
+        "role": {
+          "label": "Função",
+          "option1": "Administrador (a)",
+          "option2": "Mobilizador (a)"
+        }
+      },
+      "buttons": {
+        "invite": "Convidar"
+      }
+    },
+    "filters": {
+      "invitations": "Convites ({{count}})",
+      "mobilizers": "Mobilizadores ({{count}})"
+    }
+  },
   "buttons": {
     "submit": "Salvar formulário"
   },

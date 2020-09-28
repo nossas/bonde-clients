@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Loading, Header } from 'bonde-components';
 import { useQuery, useSession, gql } from 'bonde-core-tools';
+import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';
 import InvitationsTable from './InvitationsTable';
 import InviteForm from './InviteForm';
@@ -75,6 +76,7 @@ const FetchInvitations = ({ community }: Props) => {
   const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables });
   const [menu, setMenu] = useState(1);
   const { user } = useSession();
+  const { t } = useTranslation('community');
 
   if (loading) return <Loading />;
   if (error) return <div>Error</div>;
@@ -109,14 +111,14 @@ const FetchInvitations = ({ community }: Props) => {
 
   return (
     <>
-      <Header.H3>Convidar um mobilizador(a)</Header.H3>
+      <Header.H3>{t('mobilizers.form.title')}</Header.H3>
       <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       <Flex>
         <Header.H5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
-          {`Convites (${invitationsCount})`}
+          {t('mobilizers.filters.invitations', { count: invitationsCount })}
         </Header.H5>
         <Header.H5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
-          {`Mobilizadores (${communityUsersCount})`}
+          {t('mobilizers.filters.mobilizers', { count: communityUsersCount })}
         </Header.H5>
       </Flex>
       {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
