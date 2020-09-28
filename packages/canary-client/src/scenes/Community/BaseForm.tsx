@@ -28,6 +28,7 @@ const UpdateCommunityGQL = gql`
         modules
         recipient {
           id
+          pagarme_recipient_id
           transfer_day: recipient(path: "transfer_day")
           transfer_interval: recipient(path: "transfer_interval")
           transfer_enabled: recipient(path: "transfer_enabled")
@@ -39,46 +40,119 @@ const UpdateCommunityGQL = gql`
 `;
 
 const UpdateRecipientGQL = gql`
-  mutation UpdateRecipient($update_fields: recipients_set_input, $id: Int!) {
-    update_recipients(_set: $update_fields, where: { id: { _eq: $id } }) {
-      returning {
+  mutation UpInsertRecipient($input: RecipientEntityInput) {
+    create_or_update_recipient(input: $input) {
+      id
+      community_id
+      recipient {
         id
-        transfer_day: recipient(path: "transfer_day")
-        transfer_interval: recipient(path: "transfer_interval")
-        transfer_enabled: recipient(path: "transfer_enabled")
-        bank_account: recipient(path: "bank_account")
+        object
+        transfer_day
+        transfer_enabled
+        transfer_interval
+        bank_account {
+          id
+          object
+          type
+          bank_code
+          conta
+          conta_dv
+          agencia
+          agencia_dv
+          legal_name
+          document_type
+          document_number
+        }
       }
     }
   }
 `;
 
-export default ({ children }: any) => {
+export default ({ children, omitButton }: any) => {
   const { community, onChange } = useSession();
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
   const [updateCommunity] = useMutation(UpdateCommunityGQL);
 
-  const submit = async ({ community: { __typename, id, recipient: { id: recipient_id, ...recipient }, ...update_fields } }: any) => {
-    // Update Recipient before to return UpdateCommunity outdate
-    await updateRecipient({ variables: { update_fields: { recipient }, id: recipient_id }});
-    const { data: { update_communities: { returning }}}: any = await updateCommunity({ variables: { id, update_fields } });
-    // Update Session
-    await onChange({ community: returning[0] });
-    // Popup successfully
-    toast(t('messages.success'), { type: toast.TYPE.SUCCESS });
+  const submit = async ({
+    community: {
+      // Remove this field
+      __typename: __tc,
+      id,
+      recipient: {
+        // Remove this field
+        __typename: __tr,
+        id: recipient_id,
+        pagarme_recipient_id,
+        bank_account: {
+          // Remove this field
+          charge_transfer_fees: __ctf,
+          ...bank_account
+        },
+        ...recipient
+      },
+      ...update_fields
+    }
+  }: any) => {
+    try {
+      // Update Recipient before to return UpdateCommunity outdate
+      // Fix document_number
+      const document_number = bank_account.document_number.replace(/[^0-9]/g, '');
+      const bank = {
+        ...bank_account,
+        document_number: document_number,
+        document_type: document_number.length > 11 ? 'cnpj' : 'cpf'
+      }
+      // Fix input values
+      const input = {
+        id: recipient_id,
+        community_id: id,
+        recipient: {
+          ...recipient,
+          id: pagarme_recipient_id,
+          transfer_day: typeof recipient.transfer_day === 'number' ? String(recipient.transfer_day) : recipient.transfer_day,
+          transfer_enabled: true,
+          bank_account: bank
+        }
+      };
+      await updateRecipient({ variables: { input }});
+      // Update Community
+      const { data: { update_communities: { returning } } }: any = await updateCommunity({ variables: { id, update_fields } });
+      // Update Session
+      await onChange({ community: returning[0] });
+      // Popup successfully
+      toast(t('messages.success'), { type: toast.TYPE.SUCCESS });
+    } catch (e) {
+      // invalid_permission
+      if (e.message === 'invalid_permission') {
+        toast(t('messages.invalid_permission'), { type: toast.TYPE.ERROR });
+      } else {
+        console.error(e);
+      }
+    }
   }
 
+  const initialValues = {
+    community: {
+      ...community,
+      recipient: community?.recipient ? community?.recipient : {
+        transfer_interval: 'weekly',
+        transfer_day: '1',
+        bank_account: {
+          type: 'conta_corrente'
+        }
+      }
+    }
+  };
+
   return (
-    <ConnectedForm initialValues={{ community }} onSubmit={submit}>
+    <ConnectedForm initialValues={initialValues} onSubmit={submit}>
       {({ submitting }) => (
         <>
           {children}
-          <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>
+          {!omitButton && <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>}
         </>
       )}
     </ConnectedForm>
   );
 }
-
-// TODO:
-// - Success Message (Toastify)

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Header } from 'bonde-components';
-import { useSession } from 'bonde-core-tools';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Header } from "bonde-components";
+import { useSession } from "bonde-core-tools";
+import { useTranslation } from "react-i18next";
 
-import SearchInput from './SearchInput';
-import CommunitiesScrollBox from './CommunitiesScrollBox';
+import SearchInput from "./SearchInput";
+import CommunitiesScrollBox from "./CommunitiesScrollBox";
 
 const Styles = styled.div`
   display: flex;
@@ -26,24 +27,25 @@ const Styles = styled.div`
 `;
 
 const CommunitiesGadget = () => {
-  const { communities } = useSession()
-  const [data, setData] = useState(communities)
+  const { t } = useTranslation("home");
+  const { communities } = useSession();
+  const [data, setData] = useState(communities);
 
   return (
     <Styles>
-      <div className='header'>
+      <div className="header">
         {/** TODO: i18n */}
-        <Header.H5>Suas comunidades</Header.H5>
+        <Header.H5>{t("gadgets.communities.title")}</Header.H5>
         <SearchInput
-          placeholder='Buscar comunidade'
-          field='name'
+          placeholder={t("gadgets.communities.search")}
+          field="name"
           data={communities}
           onChange={setData}
         />
       </div>
       <CommunitiesScrollBox communities={data} />
     </Styles>
-  )
+  );
 };
 
 export default CommunitiesGadget;

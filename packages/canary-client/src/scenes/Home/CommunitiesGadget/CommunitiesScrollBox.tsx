@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Empty, Header } from 'bonde-components';
-import { CommunityMenu } from 'bonde-core-tools';
+import React from "react";
+import styled from "styled-components";
+import { Empty, Header } from "bonde-components";
+import { CommunityMenu } from "bonde-core-tools";
 
 type StylesProps = {
-  height?: string
-}
+  height?: string;
+};
 
 const Styles = styled.div<StylesProps>`
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  height: ${props => props.height};
-  min-height: ${props => props.height};
+  height: ${(props) => props.height};
+  min-height: ${(props) => props.height};
   overflow-y: auto;
 
   ul {
@@ -23,7 +23,6 @@ const Styles = styled.div<StylesProps>`
       display: flex;
       flex-direction: row;
       align-items: center;
-
     }
     li.mobile {
       cursor: pointer;
@@ -48,27 +47,29 @@ const Styles = styled.div<StylesProps>`
 `;
 
 Styles.defaultProps = {
-  height: '535px'
-}
+  height: "535px",
+};
 
 type ColumnProps = {
-  grow?: number | string
-  mobile?: string
-}
+  grow?: number | string;
+  mobile?: string;
+};
 
 const Colunm = styled.div<ColumnProps>`
-  ${props => props.grow && `flex-grow: ${props.grow};`}
+  ${(props) => props.grow && `flex-grow: ${props.grow};`}
   padding: 13px 15px 14px;
 
   ${Header.H4}, ${Header.H5} {
     margin: 0;
-  };
+  }
 
   @media only screen and (max-width: 768px) {
-    ${props => props.mobile === 'hide' && `
+    ${(props) =>
+      props.mobile === "hide" &&
+      `
       display: none;
     `};
-  };
+  } ;
 `;
 
 const Image = styled.img`
@@ -78,14 +79,14 @@ const Image = styled.img`
 `;
 
 type Props = {
-  communities: any[]
-}
+  communities: any[];
+};
 
 const CommunitiesScrollBox = ({ communities }: Props) => {
-  const isMobile = window.innerWidth <= 768
-  const itemProps: any = {}
+  const isMobile = window.innerWidth <= 768;
+  const itemProps: any = {};
   if (isMobile) {
-    itemProps.className = 'mobile'
+    itemProps.className = "mobile";
     // itemProps.onClick = () => { console.log('click item') }
   }
 
@@ -96,25 +97,36 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
           {communities.map((c, index) => (
             <li key={index} {...itemProps}>
               <Colunm>
-                <Image src={c.image || `https://via.placeholder.com/100?text=${c.name.substring(0, 1)}`} alt={c.name} />
+                <Image
+                  src={
+                    c.image ||
+                    `https://via.placeholder.com/100?text=${c.name.substring(
+                      0,
+                      1
+                    )}`
+                  }
+                  alt={c.name}
+                />
               </Colunm>
               <Colunm grow={1}>
                 <Header.H4>{c.name}</Header.H4>
-                <Header.H5>{c.description || c.city}</Header.H5>
+                <Header.H6>{c.description || c.city}</Header.H6>
               </Colunm>
-              <Colunm mobile='hide'>
+              <Colunm mobile="hide">
                 <CommunityMenu community={c} />
               </Colunm>
             </li>
           ))}
         </ul>
-      ) : <Empty message='Nenhuma comunidade encontrada' />}
+      ) : (
+        <Empty message="Nenhuma comunidade encontrada" />
+      )}
     </Styles>
   );
 };
 
 CommunitiesScrollBox.defaultProps = {
-  communities: []
+  communities: [],
 };
 
 export default CommunitiesScrollBox;

@@ -1,57 +1,23 @@
-import React from 'react';
-import { InputField, Header } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
-import { useTranslation } from 'react-i18next';
-import CommunityForm from '../BaseForm';
-import Panel from '../Panel';
+import React from "react";
+import { Container, Row, Col } from "react-grid-system";
+import CommunityForm from "../BaseForm";
+import Mailchimp from "./Mailchimp";
+import Twilio from "./Twilio";
 
-const SettingsPage = () => {
-  const { t } = useTranslation('community');
-
-  return (
-    <CommunityForm>
-      <Container fluid style={{ width: '100%', padding: '0' }}>
-        <Row>
-          <Col sm={12}>
-            <Header.H3 margin="0 0 25px 0">Mailchimp</Header.H3>
-            <Panel>
-              <InputField
-                name='community.mailchimp_api_key'
-                label={t('integrations.form.fields.mailchimp_api_key.label')}
-                placeholder={t('integrations.form.fields.mailchimp_api_key.placeholder')}
-                />
-              <InputField
-                name='community.mailchimp_list_id'
-                label={t('integrations.form.fields.mailchimp_list_id.label')}
-                placeholder={t('integrations.form.fields.mailchimp_list_id.placeholder')}
-                />
-            </Panel>
-          </Col>
-          <Col sm={12}>
-            <Header.H3>Twilio</Header.H3>
-            <Panel>
-              <InputField
-                name='community.twilio_account_sid'
-                label={t('integrations.form.fields.twilio_account_sid.label')}
-                placeholder='Ex: ACe4________6835_______2277_______'
-              />
-              <InputField
-                name='community.twilio_auth_token'
-                label={t('integrations.form.fields.twilio_auth_token.label')}
-                placeholder='Ex: ecd5_______a82c_______b9c9______'
-              />
-              <InputField
-                name='community.twilio_number'
-                label={t('integrations.form.fields.twilio_number.label')}
-                placeholder='Ex: +5511956781234'
-              />
-            </Panel>
-          </Col>
-        </Row>
-      </Container>
-    </CommunityForm>
-  );
-}
+const SettingsPage = () => (
+  <CommunityForm omitButton>
+    <Container fluid style={{ width: "100%", padding: "0" }}>
+      <Row>
+        <Col sm={12}>
+          <Mailchimp />
+        </Col>
+        <Col sm={12}>
+          <Twilio />
+        </Col>
+      </Row>
+    </Container>
+  </CommunityForm>
+);
 
 // TODO:
 // - Translate

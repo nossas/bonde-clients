@@ -9,7 +9,7 @@ import InviteForm from './InviteForm';
 const InvitationsQuery = gql`
   query InvitationsByCommunity($communityId: Int!) {
     invitations_aggregate(
-      where: { community_id: { _eq: $communityId }, expired: { _is_null: true } },
+      where: { community_id: { _eq: $communityId }, expired: { _neq: true } },
       order_by: { created_at: desc_nulls_last }
     ) {
       nodes {

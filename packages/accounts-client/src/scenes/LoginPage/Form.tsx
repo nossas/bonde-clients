@@ -1,23 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   Button,
   ConnectedForm,
   InputField,
   Link as LinkStyled,
   Validators,
-  Row,
-  Col
 } from 'bonde-components';
+import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-
-const Styles = styled.div`
-  button {
-    width: 100%;
-  }
-`;
 
 const { composeValidators, required, isEmail, min } = Validators;
 
@@ -29,7 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation('auth');
 
   return (
-    <Styles>
+    <Container fluid style={{ width: '100%', padding: '0' }}>
       <ConnectedForm onSubmit={onSubmit}>
         {({ submitting }: any) => (
           <>
@@ -52,13 +43,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 min(6, t('fields.password.errors.min'))
               )}
             />
-            <Row spacing='between'>
-              <Col size={[4, 4, 12, 12]}>
+            <Row align='center'>
+              <Col sm={6}>
                 <LinkStyled component={Link} to='/forget-password'>
                   {t('links.forgetPassword')}
                 </LinkStyled>
               </Col>
-              <Col size={[3, 3, 12, 12]}>
+              <Col sm={6}>
                 <Button type='submit' disabled={submitting}>
                   {t('button.submit')}
                 </Button>
@@ -67,7 +58,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           </>
         )}
       </ConnectedForm>
-    </Styles>
+    </Container>
   );
 };
 
