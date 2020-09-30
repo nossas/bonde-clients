@@ -8,9 +8,11 @@ const InputAddon = styled.div`
   button {
     position: absolute;
     border: none;
-    top: 10px;
+    top: 12px;
+    right: 0;
     padding: 0;
     justify-content: end;
+    width: auto;
   }
 
   input {
