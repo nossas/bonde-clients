@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import { Empty, Header, Navigation, Tab, Row, Col } from 'bonde-components'
@@ -64,11 +63,6 @@ const CommunityPage = ({ match, location }: any) => {
       </Content>
     </PageWrap>
   ) : <Empty message='Nada por aqui...' />
-}
-
-CommunityPage.propTypes = {
-  location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
 }
 
 export default CommunityPage

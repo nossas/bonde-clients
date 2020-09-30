@@ -52,11 +52,11 @@ export const InviteMutation = gql`
 
 type Values = {
   email: string
-  role: string
+  role: number
 }
 
 type Props = {
-  onSuccess: (values: Values) => Promise<any> | any
+  onSuccess: (values: any) => Promise<any> | any
   isCommunityAdmin: boolean
 }
 
@@ -72,11 +72,11 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
         {isCommunityAdmin ? (
           <ConnectedForm
             initialValues={{ role: 2 }}
-            onSubmit={async ({ email, role }) => {
+            onSubmit={async ({ email, role }: Values) => {
               const input: any = {
                 community_id: community.id,
                 email,
-                role,
+                role: Number(role),
                 user_id: user.id
               };
 
