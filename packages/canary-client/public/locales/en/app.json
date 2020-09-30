@@ -1,4 +1,6 @@
 {
-  "learn": "Learn React",
-  "reload": "Edit <1>src/App.tsx</1> and save to reload."
+  "upload": {
+    "button": "Upload Image Button",
+    "information": "JPEG or PNG format, up to 1mb."
+  }
 }

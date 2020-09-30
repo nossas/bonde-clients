@@ -1,4 +1,6 @@
 {
-  "learn": "Aprender React",
-  "reload": "Edite <1>src/App.tsx</1> y guárdelo para volver a cargar"
+  "upload": {
+    "button": "Botón Subir imagen",
+    "information": "Formato JPEG o PNG, hasta 1mb."
+  }
 }

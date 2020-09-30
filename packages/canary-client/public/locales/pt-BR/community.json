@@ -3,7 +3,7 @@
     "form": {
       "fields": {
         "image": {
-          "label": "Logo"
+          "label": "Logo da comunidade"
         },
         "name": {
           "label": "Nome",

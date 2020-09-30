@@ -1,6 +1,7 @@
 import React from 'react';
 import { InputField } from 'bonde-components';
-  import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import UploadField from "../../../components/UploadFile";
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 
@@ -10,6 +11,10 @@ const SettingsPage = () => {
   return (
     <CommunityForm>
       <Panel>
+        <UploadField
+          label={t('info.form.fields.image.label')}
+          name='community.image'
+        />
         <InputField
           name='community.name'
           label={t('info.form.fields.name.label')}

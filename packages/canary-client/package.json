@@ -14,6 +14,7 @@
     "@types/react-table": "^7.0.22",
     "bonde-styleguide": "^0.16.5-alpha.5",
     "moment": "^2.27.0",
+    "react-s3-uploader": "^4.9.3",
     "react-table": "^7.5.0",
     "react-toastify": "^6.0.8"
   }
