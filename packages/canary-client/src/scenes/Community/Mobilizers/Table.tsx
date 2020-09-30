@@ -136,10 +136,12 @@ function Table({ columns, data }: Props) {
         selectionGroupHeader.canResize = false;
       })
     }
-  )
+  );
+
+  const tableProps: any = getTableProps();
 
   return (
-    <div {...getTableProps()} className="table">
+    <div {...tableProps} className="table">
       <div>
         {headerGroups.map((headerGroup: any, headerIndex: number) => (
           <div
@@ -175,6 +177,6 @@ function Table({ columns, data }: Props) {
       </div>
     </div>
   );
-};
+}
 
 export default Table;
