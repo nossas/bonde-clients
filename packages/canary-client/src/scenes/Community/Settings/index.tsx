@@ -3,6 +3,7 @@ import { InputField, Button } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
 import UploadField from "../../../components/UploadFile";
+import Tooltip from '../../../components/Tooltip';
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 
@@ -36,7 +37,17 @@ const SettingsPage = () => {
               />
               <InputField
                 name='community.email_template_from'
-                label={t('info.form.fields.email_template_from.label')}
+                label={(
+                  <Tooltip
+                    label={t('info.form.fields.email_template_from.label')}
+                    info={(
+                      <>
+                        <p>{`Escolha um email ao qual tenha fácil acesso. Ele só será usado pelo BONDE quando não for definido um email específico em uma ferramenta da sua comunidade.`}</p>
+                        <p>{`Preencha com `}<b>{`Nome do Remetente <nome@mail.com>`}</b></p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder={t('info.form.fields.email_template_from.placeholder')}
               />
               <Row justify='end'>
