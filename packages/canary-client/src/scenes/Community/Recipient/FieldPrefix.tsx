@@ -1,6 +1,4 @@
 import React from 'react';
-import { Header } from 'bonde-components';
-import Panel from '../Panel';
 
 const FieldPrexiContext = React.createContext<string>('');
 
@@ -10,12 +8,9 @@ type Props = {
   children?: any
 }
 
-export const FieldPrefix = ({ prefix, title, children }: Props) => (
+export const FieldPrefix = ({ prefix, children }: Props) => (
   <FieldPrexiContext.Provider value={prefix}>
-    {title && (<Header.H3>{title}</Header.H3>)}
-    <Panel>
-      {children}
-    </Panel>
+    {children}
   </FieldPrexiContext.Provider>
 );
 
