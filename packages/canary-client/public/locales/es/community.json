@@ -18,12 +18,13 @@
         },
         "city": {
           "label": "Ciudad",
+          "placeholder": "Ciudad anfitriona o foco de actividad",
           "errors": {
             "required": "Informa en qué ciudad actúa tu comunidad"
           }
         },
         "email_template_from": {
-          "label": "Correo patrón para la comunicación",
+          "label": "Correo electrónico estándar",
           "placeholder": "Inserta con este formato: Nombre del remitente<remitente@email.com>",
           "hint": "Este correo es usado como remitente patrón de las comunicaciones enviadas a través de BONDE.",
           "errors": {
@@ -230,7 +231,7 @@
     }
   },
   "buttons": {
-    "submit": "Guardar formulario"
+    "submit": "Guardar"
   },
   "messages": {
     "success": "Datos guardados exitosamente :)",

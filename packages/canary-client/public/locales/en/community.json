@@ -18,12 +18,13 @@
         },
         "city": {
           "label": "City",
+          "placeholder": "Host city or focus of activity",
           "errors": {
             "required": "Tell us which city your community operates in"
           }
         },
         "email_template_from": {
-          "label": "Notification reply email",
+          "label": "Standard email",
           "placeholder": "Ex: Name of sender <sender@provider.com>",
           "hint": "This email is used as the default sender of notifications.",
           "errors": {
@@ -230,7 +231,7 @@
     }
   },
   "buttons": {
-    "submit": "Save form"
+    "submit": "Save"
   },
   "messages": {
     "success": "Data edited successfully",

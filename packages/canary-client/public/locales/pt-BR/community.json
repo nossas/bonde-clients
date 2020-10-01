@@ -18,12 +18,13 @@
         },
         "city": {
           "label": "Cidade",
+          "placeholder": "Cidade sede ou foco da atuação",
           "errors": {
             "required": "Informe em qual cidade sua comunidade atua"
           }
         },
         "email_template_from": {
-          "label": "E-mail de resposta para notificações",
+          "label": "E-mail padrão",
           "placeholder": "Ex: Nome do remetente <remetente@provedor.com>",
           "hint": "Esse email é utilizado como remetente padrão das notificações.",
           "errors": {
@@ -230,7 +231,7 @@
     }
   },
   "buttons": {
-    "submit": "Salvar formulário"
+    "submit": "Salvar"
   },
   "messages": {
     "success": "Informações salvas com sucesso",
