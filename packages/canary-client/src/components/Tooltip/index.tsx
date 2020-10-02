@@ -24,6 +24,11 @@ const Message = styled.span`
   right: -200px;
   top: 25px;
   line-height: 17.73px;
+  z-index: 1;
+
+  p {
+    margin-bottom: 5px;
+  }
 `;
 
 type Props = {

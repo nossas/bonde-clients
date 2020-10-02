@@ -12,7 +12,7 @@ const Panel = styled.div`
 export const Section = styled.div`
   padding: 0 0 20px;
 
-  ${Header.H4}, ${Header.H3} {
+  ${Header.H4}, ${Header.H3}, ${Header.H5} {
     padding-bottom: 12px;
   }
 

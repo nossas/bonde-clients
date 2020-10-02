@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputField, Header, Text, Button } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, Visible } from 'react-grid-system';
+import Tooltip from '../../../components/Tooltip';
 import Panel, { Section } from '../Panel';
 import TwilioIcon from './TwilioIcon';
 
@@ -12,12 +13,14 @@ const TwilioPanel = () => {
     <Panel>
       <Container fluid style={{ width: '100%', padding: '0' }}>
         <Row>
-          <Col sm={2} style={{ textAlign: 'center' }}>
+          <Col sm={12} md={2} style={{ textAlign: 'center' }}>
             <TwilioIcon />
           </Col>
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <Section>
-              <Header.H3>Twilio</Header.H3>
+              <Visible md lg xl>
+                <Header.H3>Twilio</Header.H3>
+              </Visible>
               <Text>Conecte ao Twilio para habilitar a ferramenta de pressão por telefone nas suas campanhas.</Text>
             </Section>
             <Section>
@@ -28,23 +31,63 @@ const TwilioPanel = () => {
               <Header.H4>Conectar</Header.H4>
               <InputField
                 name='community.twilio_account_sid'
-                label={t('integrations.form.fields.twilio_account_sid.label')}
+                label={(
+                  <Tooltip
+                    label={t('integrations.form.fields.twilio_account_sid.label')}
+                    info={(
+                      <>
+                        <p><b>Onde encontro essa informação?</b></p>
+                        <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
+                        <p>Logo abaixo de <b>Project Info</b> está o campo “ACCOUNT SID”.</p>
+                        <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder='Ex: ACe4________6835_______2277_______'
               />
               <InputField
                 name='community.twilio_auth_token'
-                label={t('integrations.form.fields.twilio_auth_token.label')}
+                label={(
+                  <Tooltip
+                    label={t('integrations.form.fields.twilio_auth_token.label')}
+                    info={(
+                      <>
+                        <p><b>Onde encontro essa informação?</b></p>
+                        <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
+                        <p>Logo abaixo de <b>Project Info</b> está o campo “AUTH TOKEN”.</p>
+                        <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder='Ex: ecd5_______a82c_______b9c9______'
               />
               <InputField
                 name='community.twilio_number'
-                label={t('integrations.form.fields.twilio_number.label')}
+                label={(
+                  <Tooltip
+                    label={t('integrations.form.fields.twilio_number.label')}
+                    info={(
+                      <>
+                        <p><b>Onde encontro essa informação?</b></p>
+                        <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
+                        <p>Logo abaixo de <b>Project Info</b> está o campo “TRIAL NUMBER”.</p>
+                        <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder='Ex: +5511956781234'
               />
-              <Button type='submit'>Conectar ao Twilio</Button>
+              <Row justify='end'>
+                <Col sm={12} md={12} lg={8} xl={6}>
+                  <Button type='submit'>Conectar ao Twilio</Button>
+                </Col>
+              </Row>
             </Section>
           </Col>
-          <Col sm={4}>
+          <Col xs={12} sm={12} md={4}>
             <Section>
               <Header.H4>Funcionalidades</Header.H4>
               <ul>

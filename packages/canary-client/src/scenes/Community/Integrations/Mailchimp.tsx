@@ -1,9 +1,10 @@
 import React from 'react';
 import { InputField, Header, Text, Button } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, Visible } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import Panel, { Section } from '../Panel';
 import MailchimpIcon from './MailchimpIcon';
+import Tooltip from '../../../components/Tooltip';
 
 const MailchimpPanel = () => {
   const { t } = useTranslation('community');
@@ -12,12 +13,14 @@ const MailchimpPanel = () => {
     <Panel>
       <Container fluid style={{ width: '100%', padding: '0' }}>
         <Row>
-          <Col sm={2} style={{ textAlign: 'center' }}>
+          <Col sm={12} md={2} style={{ textAlign: 'center' }}>
             <MailchimpIcon />
           </Col>
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <Section>
-              <Header.H3>Mailchimp</Header.H3>
+              <Visible md lg xl>
+                <Header.H3>Mailchimp</Header.H3>
+              </Visible>
               <Text>Conecte ao Mailchimp para se comunicar com as pessoas que agirem nas mobilizações da sua comunidade.</Text>
             </Section>
             <Section>
@@ -28,23 +31,56 @@ const MailchimpPanel = () => {
               <Header.H4>Integrar</Header.H4>
               <InputField
                 name='community.mailchimp_api_key'
-                label={t('integrations.form.fields.mailchimp_api_key.label')}
+                label={(
+                  <Tooltip
+                    label={t('integrations.form.fields.mailchimp_api_key.label')}
+                    info={(
+                      <>
+                        <p><b>Onde encontro essa informação?</b></p>
+                        <p>Faça login na sua conta no Mailchimp e <b>clique no seu nome</b> de usuário.</p>
+                        <p>Você vai ver um menu surgir, clique na opção account.</p>
+                        <p>{`Depois, siga os passos: `}<b>{`Extras > API keys > Your API keys > Create a Key`}</b></p>
+                        <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder={t('integrations.form.fields.mailchimp_api_key.placeholder')}
               />
               <InputField
                 name='community.mailchimp_list_id'
-                label={t('integrations.form.fields.mailchimp_list_id.label')}
+                label={(
+                  <Tooltip
+                    label={t('integrations.form.fields.mailchimp_list_id.label')}
+                    info={(
+                      <>
+                        <p><b>Onde encontro essa informação?</b></p>
+                        <p>Faça login na sua conta no Mailchimp e <b>clique em Audience</b>.</p>
+                        <p>Selecione a audiência correspondente e <b>clique em Settings</b>.</p>
+                        <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      </>
+                    )}
+                  />
+                )}
                 placeholder={t('integrations.form.fields.mailchimp_list_id.placeholder')}
               />
-              <Button type='submit'>Conectar ao mailchimp</Button>
+              <Row justify='end'>
+                <Col sm={12} md={12} lg={8} xl={6}>
+                  <Button type='submit'>Conectar ao mailchimp</Button>
+                </Col>
+              </Row>
             </Section>
             <Section>
               <Header.H4>Forçar sincronização</Header.H4>
               <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
-              <Button type='button' dark>Sincronizar</Button>
+              <Row justify='end'>
+                <Col sm={12} md={12} lg={8} xl={6}>
+                  <Button type='button' dark>Sincronizar</Button>
+                </Col>
+              </Row>
             </Section>
           </Col>
-          <Col sm={4}>
+          <Col sm={12} md={4}>
             <Section>
               <Header.H4>Funcionalidades</Header.H4>
               <ul>

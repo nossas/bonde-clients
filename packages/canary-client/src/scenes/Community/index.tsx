@@ -49,12 +49,12 @@ const CommunityPage = ({ match, location }: Props) => {
   return community ? (
     <PageWrap>
       <SubHeader>
-        <Header.H3>{community.name}</Header.H3>
+        <Header.H3>{t('titles.settings')}</Header.H3>
         <Navigation>
           <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
           <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
-          <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations')}>{t('navigation.integrations')}</Tab>
           <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
+          <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations')}>{t('navigation.integrations')}</Tab>
         </Navigation>
       </SubHeader>
       <Styles>
@@ -68,11 +68,11 @@ const CommunityPage = ({ match, location }: Props) => {
                 <Route exact path={`${match.path}/mobilizers`}>
                   <Mobilizers community={community} />
                 </Route>
-                <Route exact path={`${match.path}/integrations`}>
-                  <Integrations />
-                </Route>
                 <Route exact path={`${match.path}/recipient`}>
                   <Recipient />
+                </Route>
+                <Route exact path={`${match.path}/integrations`}>
+                  <Integrations />
                 </Route>
               </Switch>
             </Col>

@@ -237,10 +237,13 @@
     "success": "Datos guardados exitosamente :)",
     "invalid_permission": "No se le permite actualizar esta información"
   },
+  "titles": {
+    "settings": "Ajustes"
+  },
   "navigation": {
     "settings": "Información",
     "mobilizers": "Movilizadores",
     "integrations": "Integraciones",
-    "recipient": "Receptor"
+    "recipient": "Ingresos"
   }
 }
