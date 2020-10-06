@@ -2,8 +2,9 @@ import React from 'react';
 import { InputField, Button } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
-import UploadField from "../../../components/UploadFile";
 import Tooltip from '../../../components/Tooltip';
+import UploadField from "../../../components/UploadFile";
+import { Success } from '../../../components/Notifications';
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 
@@ -11,7 +12,9 @@ const SettingsPage = () => {
   const { t } = useTranslation('community');
 
   return (
-    <CommunityForm omitButton>
+    <CommunityForm
+      success={<Success message='UHU! Informações da comunidade atualizadas.' />}
+    >
       <Container fluid style={{ width: "100%", padding: "0" }}>
         <Row>
           <Col sm={12} lg={6}>

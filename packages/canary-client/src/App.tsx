@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
   useLocation
-} from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+} from 'react-router-dom';
+import { ToastContainer } from './components/Notifications';
 import {
   BondeSessionProvider as Session,
   BondeSessionUI as SessionUI,
   useSession
-} from "bonde-core-tools";
-import { Loading } from "bonde-components";
-import { useTranslation } from "react-i18next";
+} from 'bonde-core-tools';
+import { Loading } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
 // Scenes and Components to make your application
 import CommunityPage from './scenes/Community';
@@ -26,19 +26,19 @@ import * as Flag from './Flag';
 import 'react-toastify/dist/ReactToastify.css'
 
 type AppLoadingProps = {
-  fetching: "session" | "user" | "communities" | "redirect" | "module"
+  fetching: 'session' | 'user' | 'communities' | 'redirect' | 'module'
 };
 
 const AppLoading = ({ fetching }: AppLoadingProps) => {
-  const { t } = useTranslation("loading");
+  const { t } = useTranslation('loading');
 
   const messages = {
-    session: t("session"),
-    user: t("user"),
-    communities: t("communities"),
+    session: t('session'),
+    user: t('user'),
+    communities: t('communities'),
     // TODO: change this implementation
-    redirect: t("redirect"),
-    module: t("module"),
+    redirect: t('redirect'),
+    module: t('module'),
   };
 
   return <Loading fullsize message={messages[fetching]} />;
@@ -75,7 +75,7 @@ const ChangeLanguage = () => {
 
   return (
     <LanguageTool>
-      {languages.map(({ flag: Flag, locale }, index) => (
+      {languages.map(({ flag: Flag, locale }) => (
         <button
           key={`language-button-${locale}`}
           className={locale === i18n.language ? 'active' : undefined}
@@ -111,12 +111,12 @@ const PageRouting = () => {
   );
 }
 
-type Environment = "development" | "staging" | "production";
+type Environment = 'development' | 'staging' | 'production';
 
-function App() {
+const App: React.FC = () => {
   // Environment to use for configure bonde-core-tools
   const envConfig: Environment =
-    (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
+    (process.env.REACT_APP_ENVIRONMENT || 'development') as Environment;
   
   console.info('Build environment:', envConfig);
   // Extra config

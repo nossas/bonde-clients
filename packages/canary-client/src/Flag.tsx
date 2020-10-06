@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Spanish = () => (
+export const Spanish: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     x="0"
@@ -19,7 +19,7 @@ export const Spanish = () => (
   </svg>
 );
 
-export const Portuguese = () => (
+export const Portuguese: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     x="0"
@@ -42,7 +42,7 @@ export const Portuguese = () => (
   </svg>
 );
 
-export const English = () => (
+export const English: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     x="0"

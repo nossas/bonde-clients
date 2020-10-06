@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  ConnectedForm,
-  Button
-} from 'bonde-components';
+import { ConnectedForm } from 'bonde-components';
 import { useSession, useMutation, gql } from 'bonde-core-tools';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 const UpdateCommunityGQL = gql`
@@ -68,7 +65,7 @@ const UpdateRecipientGQL = gql`
   }
 `;
 
-export default ({ children, omitButton }: any) => {
+const BaseForm = ({ children, success }: any) => {
   const { community, onChange } = useSession();
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
@@ -121,7 +118,7 @@ export default ({ children, omitButton }: any) => {
       // Update Session
       await onChange({ community: returning[0] });
       // Popup successfully
-      toast(t('messages.success'), { type: toast.TYPE.SUCCESS });
+      toast(success, { type: toast.TYPE.SUCCESS });
     } catch (e) {
       // invalid_permission
       if (e.message === 'invalid_permission') {
@@ -147,12 +144,13 @@ export default ({ children, omitButton }: any) => {
 
   return (
     <ConnectedForm initialValues={initialValues} onSubmit={submit}>
-      {({ submitting }) => (
+      {() => (
         <>
           {children}
-          {!omitButton && <Button type='submit' disabled={submitting}>{t('buttons.submit')}</Button>}
         </>
       )}
     </ConnectedForm>
   );
 }
+
+export default BaseForm;

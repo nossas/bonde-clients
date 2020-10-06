@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Container, Row, Col } from "react-grid-system";
+import React from 'react';
+import { Container, Row, Col } from 'react-grid-system';
+import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-import { Header, Text, Link } from 'bonde-components';
-import CommunityForm from "../BaseForm";
-import Mailchimp from "./Mailchimp";
-import Twilio from "./Twilio";
+import { Header, Text, Link as LinkStyled } from 'bonde-components';
+import Mailchimp from './Mailchimp';
+import Twilio from './Twilio';
 
 const MenuStyled = styled.div`
   padding: 20px 0 24px;
 
-  ${Link} {
+  ${LinkStyled} {
     margin-right: 15px;
     text-transform: uppercase;
     font-weight: bold;
@@ -17,43 +17,44 @@ const MenuStyled = styled.div`
     border: none;
     outline: none;
   }
-  ${Link}.active {
+  ${LinkStyled}.active {
     color: #EE0099;
   }
 `;
 
 const SettingsPage = () => {
-  const [visible, setVisible] = useState('mailchimp');
-  
+  const { name } = useParams();
+  const { path } = useRouteMatch();
+
   return (
-    <CommunityForm omitButton>
-      <Container fluid style={{ width: "100%", padding: "0" }}>
-        <Row>
-          <Col xl={12}>
-            <Header.H3>Integrações</Header.H3>
-            <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
-          </Col>
-          <Col xl={12}>
-            <MenuStyled>
-              <Link component='button' type='button' onClick={() => setVisible('mailchimp')} className={visible === 'mailchimp' ? 'active' : ''}>Comunicação</Link>
-              <Link component='button' type='button' onClick={() => setVisible('twilio')} className={visible === 'twilio' ? 'active' : ''}>Pressão</Link>
-            </MenuStyled>
-          </Col>
-        </Row>
-        <Row>
-          {visible === 'mailchimp' && (
+    <Container fluid style={{ width: '100%', padding: '0' }}>
+      <Row>
+        <Col xl={12}>
+          <Header.H3>Integrações</Header.H3>
+          <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
+        </Col>
+        <Col xl={12}>
+          <MenuStyled>
+            <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
+            <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
+          </MenuStyled>
+        </Col>
+      </Row>
+      <Row>
+        <Switch>
+          <Route exact path={path.replace(':name', 'mailchimp')}>
             <Col sm={12}>
               <Mailchimp />
             </Col>
-          )}
-          {visible === 'twilio' && (
+          </Route>
+          <Route exact path={path.replace(':name', 'twilio')}>
             <Col sm={12}>
               <Twilio />
             </Col>
-          )}
-        </Row>
-      </Container>
-    </CommunityForm>
+          </Route>
+        </Switch>
+      </Row>
+    </Container>
   );
 }
 
