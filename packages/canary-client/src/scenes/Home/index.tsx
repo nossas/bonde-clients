@@ -1,34 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Row, Col } from 'bonde-components';
+import { Container, Row, Col } from 'react-grid-system';
 import Content from '../../components/Content';
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
 
-type StylesProps = {
-  margin?: string
-  padding?: string
-}
-
-const Styles = styled.div<StylesProps>`
-  ${props => props.margin && `margin: ${props.margin};`}
-  ${props => props.padding && `padding: ${props.padding};`}
-`;
-
 const HomePage = () => (
   <Content>
-    <Row spacing='between'>
-      <Col size={[6, 6]}>
-        <Styles margin='0 20px 0 0'>
+    <Container fluid style={{ width: '100%', padding: '0' }}>
+      <Row>
+        <Col sm={12} md={6}>
           <CommunitiesGadget />
-        </Styles>
-      </Col>
-      <Col size={[6, 6]}>
-        <Styles margin='0 0 0 20px'>
+        </Col>
+        <Col sm={12} md={6}>
           <MobilizationsGadget />
-        </Styles>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </Container>
   </Content>
 );
 
