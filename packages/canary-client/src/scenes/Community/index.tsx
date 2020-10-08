@@ -11,6 +11,7 @@ import Mobilizers from './Mobilizers';
 import Settings from './Settings';
 import Integrations from './Integrations';
 import Recipient from './Recipient';
+import Domains from './Domains';
 
 const SubHeader = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const CommunityPage = ({ match, location }: Props) => {
           <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
           <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
           <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations/mailchimp')}>{t('navigation.integrations')}</Tab>
+          <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Dominios</Tab>
         </Navigation>
       </SubHeader>
       <Styles>
@@ -73,6 +75,9 @@ const CommunityPage = ({ match, location }: Props) => {
                 </Route>
                 <Route exact path={`${match.path}/integrations/:name`}>
                   <Integrations />
+                </Route>
+                <Route path={`${match.path}/domains`}>
+                  <Domains />
                 </Route>
               </Switch>
             </Col>
