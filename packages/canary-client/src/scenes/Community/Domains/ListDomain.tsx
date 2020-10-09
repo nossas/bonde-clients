@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { Button, Header, Text, Icon } from 'bonde-components';
+import ActiveIcon from './ActiveIcon';
+import InactiveIcon from './InactiveIcon';
 
 type HostedZone = {
   id: number
@@ -15,34 +17,71 @@ type Props = {
   hostedZone: HostedZone
 }
 
-const DomainStyled = styled.div`
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  background-color: #fff;
+type DomainRowProps = {
+  header?: boolean
+}
+
+const DomainCol = styled.div`
 `
 
-const HeaderStyled = styled.div`
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
+const DomainRow = styled.div<DomainRowProps>`
+  display: grid;
+  grid-template-columns: 500px auto 70px;
+  grid-template-rows: ${props => !!props.header ? '30px' : '80px'};
+  background-color: ${props => !!props.header ? 'none' : '#fff'};
+  border-bottom: ${props => !!props.header ? 'none' : '1px solid #eee'};  
+
+  ${DomainCol} {
+    padding: ${props => !!props.header ? '0 20px' : '30px 20px'};
+  }
 `
 
-const ListStyled = styled.ul`
-  padding: 0;
-  margin: 0;
-  list-style: none;
-`
+const DomainList = styled.div`
+  padding: 20px 0;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+type ExtendTextProps = {
+  active?: boolean
+}
+
+const ExtendText = styled(Text)`
+  color: ${(props: ExtendTextProps) => props.active ? '#50E3C2' : '#444444'};
+
+  svg {
+    margin-right: 10px;
+  }
+`;
 
 const Domain = ({ hostedZone }: Props) => {
   return (
     <Link to={`/community/domains/${hostedZone.id}`}>
-      <DomainStyled>
-        <HeaderStyled>
-          <span>{hostedZone.domain_name}</span>
-          <span>{hostedZone.ns_ok ? 'Ativo' : 'Inativo'}</span>
+      <DomainRow>
+        <DomainCol>
+          <Header.H4>{hostedZone.domain_name}</Header.H4>
+        </DomainCol>
+        <DomainCol>
+          <ExtendText active={hostedZone.ns_ok}>
+            {hostedZone.ns_ok ? (
+              <>
+                <ActiveIcon />
+                <span>Ativo</span>
+              </>
+             ) : (
+              <>
+                <InactiveIcon />
+                <span>Inativo</span>
+              </>
+             )}
+          </ExtendText>
+        </DomainCol>
+        <DomainCol>
           <Icon name='ArrowRight' />
-        </HeaderStyled>
-      </DomainStyled>
+        </DomainCol>
+      </DomainRow>
     </Link>
   );
 }
@@ -58,11 +97,20 @@ const Domains = ({ hostedZones }: any) =>
         <Button onClick={() => console.log('Adicionar domínio')}>Adicionar domínio</Button>
       </Col>
     </Row>
-    <ListStyled>
+    <DomainList>
+      <DomainRow header>
+        <DomainCol>
+          <Header.H5>Domínio</Header.H5>
+        </DomainCol>
+        <DomainCol>
+          <Header.H5>Status</Header.H5>
+        </DomainCol>
+        <DomainCol />
+      </DomainRow>
       {hostedZones.map((hostedZone: HostedZone, index: number) => (
-        <li key={index}><Domain hostedZone={hostedZone} /></li>
+        <Domain key={index} hostedZone={hostedZone} />
       ))}
-    </ListStyled>
+    </DomainList>
   </Container>
 ;
 
