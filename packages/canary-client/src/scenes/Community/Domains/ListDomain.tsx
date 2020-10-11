@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { Button, Header, Text, Icon } from 'bonde-components';
-import ActiveIcon from './ActiveIcon';
-import InactiveIcon from './InactiveIcon';
+import { DNS as DTRow, Col as DTCol, StatusView, List as DTList } from './Styles';
 
 type HostedZone = {
   id: number
@@ -17,76 +15,29 @@ type Props = {
   hostedZone: HostedZone
 }
 
-type DomainRowProps = {
-  header?: boolean
-}
-
-const DomainCol = styled.div`
-`
-
-const DomainRow = styled.div<DomainRowProps>`
-  display: grid;
-  grid-template-columns: 500px auto 70px;
-  grid-template-rows: ${props => !!props.header ? '30px' : '80px'};
-  background-color: ${props => !!props.header ? 'none' : '#fff'};
-  border-bottom: ${props => !!props.header ? 'none' : '1px solid #eee'};  
-
-  ${DomainCol} {
-    padding: ${props => !!props.header ? '0 20px' : '30px 20px'};
-  }
-`
-
-const DomainList = styled.div`
-  padding: 20px 0;
-
-  a {
-    text-decoration: none;
-  }
-`;
-
-type ExtendTextProps = {
-  active?: boolean
-}
-
-const ExtendText = styled(Text)`
-  color: ${(props: ExtendTextProps) => props.active ? '#50E3C2' : '#444444'};
-
-  svg {
-    margin-right: 10px;
-  }
-`;
-
 const Domain = ({ hostedZone }: Props) => {
   return (
     <Link to={`/community/domains/${hostedZone.id}`}>
-      <DomainRow>
-        <DomainCol>
+      <DTRow>
+        <DTCol>
           <Header.H4>{hostedZone.domain_name}</Header.H4>
-        </DomainCol>
-        <DomainCol>
-          <ExtendText active={hostedZone.ns_ok}>
-            {hostedZone.ns_ok ? (
-              <>
-                <ActiveIcon />
-                <span>Ativo</span>
-              </>
-             ) : (
-              <>
-                <InactiveIcon />
-                <span>Inativo</span>
-              </>
-             )}
-          </ExtendText>
-        </DomainCol>
-        <DomainCol>
+        </DTCol>
+        <DTCol>
+          <StatusView active={hostedZone.ns_ok} />
+        </DTCol>
+        <DTCol>
           <Icon name='ArrowRight' />
-        </DomainCol>
-      </DomainRow>
+        </DTCol>
+      </DTRow>
     </Link>
   );
 }
 
-const Domains = ({ hostedZones }: any) =>
+type DomainsProps = {
+  hostedZones: HostedZone[]
+}
+
+const Domains = ({ hostedZones }: DomainsProps) =>
   <Container fluid style={{ width: '100%', padding: '0' }}>
     <Row>
       <Col xs={12} sm={8} md={9} lg={10}>
@@ -97,20 +48,20 @@ const Domains = ({ hostedZones }: any) =>
         <Button onClick={() => console.log('Adicionar domínio')}>Adicionar domínio</Button>
       </Col>
     </Row>
-    <DomainList>
-      <DomainRow header>
-        <DomainCol>
+    <DTList>
+      <DTRow header>
+        <DTCol>
           <Header.H5>Domínio</Header.H5>
-        </DomainCol>
-        <DomainCol>
+        </DTCol>
+        <DTCol>
           <Header.H5>Status</Header.H5>
-        </DomainCol>
-        <DomainCol />
-      </DomainRow>
+        </DTCol>
+        <DTCol />
+      </DTRow>
       {hostedZones.map((hostedZone: HostedZone, index: number) => (
         <Domain key={index} hostedZone={hostedZone} />
       ))}
-    </DomainList>
+    </DTList>
   </Container>
 ;
 
