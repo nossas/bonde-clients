@@ -3,6 +3,7 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
+import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
 export const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
@@ -51,25 +52,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       }
     }
   }
-
-  fragment individual on rede_individuals {
-    id
-    firstName: first_name
-    lastName: last_name
-    email
-    whatsapp
-    phone
-    zipcode
-    address
-    city
-    state
-    coordinates
-    availability
-    formEntryId: form_entry_id
-    userStatus: status
-    createdAt: created_at
-    updateAt: updated_at
-  }
+  ${REDE_INDIVIDUAL}
 `;
 
 const FetchIndividuals = (props: any = {}) => {

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
 import { Table, Filters } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
-import { groupsToSelect } from "../../services/utils";
+import { groupsToSelect, stripIndividualFromData } from "../../services/utils";
 import columns from "./columns";
-import { Individual, MapaIndividual, Groups } from "../../types";
+import { Individual, Groups, MapaIndividualTicket } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -37,16 +37,6 @@ type Props = {
     };
   };
 };
-
-const stripIndividualFromData = (data: MapaIndividual[]): Individual[] =>
-  data.map((d) => ({
-    ...d,
-    ...d.individual,
-    coordinates: {
-      latitude: d.individual.latitude,
-      longitude: d.individual.longitude,
-    },
-  }));
 
 export default function Individuals({
   data: { FetchIndividuals, FilterOptions },
@@ -152,7 +142,7 @@ export default function Individuals({
                 data={
                   community?.id === 40
                     ? stripIndividualFromData(
-                        (data as unknown) as MapaIndividual[]
+                        (data as unknown) as MapaIndividualTicket[]
                       )
                     : data
                 }

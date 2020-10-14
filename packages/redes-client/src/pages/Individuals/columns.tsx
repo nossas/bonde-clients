@@ -3,7 +3,10 @@ import React from "react";
 import { Button } from "bonde-components";
 import { Link } from "react-router-dom";
 import { Columns, valueString, Individual } from "../../types";
-import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../../services/utils";
+import {
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
+  zendeskOrganizations,
+} from "../../services/utils";
 
 const columns = (
   communityId: number,
@@ -211,11 +214,7 @@ const columns = (
             to={{
               pathname: "/match",
               search: `?email=${original.email}`,
-              state: {
-                [!!isVolunteerSelected ? "volunteer" : "recipient"]: {
-                  ...original,
-                },
-              },
+              state: { ...original },
             }}
           >
             <Button
@@ -223,6 +222,11 @@ const columns = (
               hover="#e2058a"
               focus="#bMAPA_DO_ACOLHIMENTO_COMMUNITY06c"
               secondary
+              disabled={
+                original.organizationId === zendeskOrganizations["individual"]
+                  ? original.availability !== "inscrita"
+                  : original.availability !== "disponivel"
+              }
             >
               Buscar match
             </Button>
