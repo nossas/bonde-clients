@@ -5,6 +5,7 @@ import { Columns, valueString, Individual } from "../../../types";
 
 const columns = (
   setIndividual: (individual: any) => void,
+  seStatus: (status?: string) => void,
   isVolunteerSelected?: boolean
 ): Array<Columns> => {
   return [
@@ -144,12 +145,13 @@ const columns = (
       }): JSX.Element | null => {
         return (
           <Button
-            onClick={() =>
+            onClick={() => {
               setIndividual((prevState: any) => ({
                 ...prevState,
                 [isVolunteerSelected ? "volunteer" : "recipient"]: original,
-              }))
-            }
+              }));
+              return seStatus("pending");
+            }}
             main="#ee0099"
             hover="#e2058a"
             focus="#b06c"
