@@ -15,14 +15,12 @@ const Wrap = styled.div`
   flex-direction: column;
   background-color: rgb(0, 0, 0);
   padding: 0px 60px;
-`
+`;
 
 const Header = (): React.ReactElement => {
   return (
     <Wrap>
-      <Heading.H3 style={{ color: "#fff" }}>
-        Redes
-      </Heading.H3>
+      <Heading.H3 style={{ color: "#fff" }}>Redes</Heading.H3>
       <StyledNavigation>
         <Link to="/">
           <Tab
@@ -52,7 +50,7 @@ const Header = (): React.ReactElement => {
           <Tab
             active={
               !!useRouteMatch({
-                path: "/matchs",
+                path: "/matches",
                 exact: false,
               })
             }

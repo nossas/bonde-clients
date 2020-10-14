@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { getMatchGroup } from "../../services/utils";
 import { Columns, Groups, Individual } from "../../types";
-import { Table } from "../../components";
+import { Table, Popup } from "../../components";
 import { useFilter } from "../../services/FilterProvider";
 
 type Props = {
@@ -19,6 +19,7 @@ type Props = {
     }) => React.ReactElement | null;
     ColumnsMatch: (
       setIndividual: (individual: any) => void,
+      setStatus: (status?: string) => void,
       isVolunteerSelected?: boolean
     ) => Array<Columns>;
   };
@@ -37,7 +38,11 @@ export default function Match({
   const { state: linkState } = useLocation();
   const { goBack } = useHistory();
   const [state, dispatch] = useFilter();
-  const [matchPair, setMatchPair] = useState({ recipient: {}, volunteer: {} });
+  const [matchPair, setMatchPair] = useState<{
+    recipient: Individual;
+    volunteer: Individual;
+  }>({ recipient: {} as Individual, volunteer: {} as Individual });
+  const [status, setStatus] = useState<undefined | string>();
 
   const {
     firstName,
@@ -89,7 +94,6 @@ export default function Match({
         .sort((a, b) => Number(a.distance) - Number(b.distance)),
     [latitude, longitude]
   );
-  console.log({ matchPair });
   return (
     <div>
       <WrapButton>
@@ -115,7 +119,11 @@ export default function Match({
               </Text>
               <Table
                 data={filteredTableData}
-                columns={ColumnsMatch(setMatchPair, !isVolunteerSelected)}
+                columns={ColumnsMatch(
+                  setMatchPair,
+                  setStatus,
+                  !isVolunteerSelected
+                )}
                 sticky="end"
                 pagination={pagination}
               />
@@ -123,6 +131,7 @@ export default function Match({
           );
         }}
       </FetchIndividualsForMatch>
+      <Popup status={status} match={matchPair} setStatus={setStatus} />
     </div>
   );
 }

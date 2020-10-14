@@ -8,3 +8,4 @@ export { default as GeneralStats } from "./GeneralStats";
 export { default as StatsCard } from "./StatsCard";
 export { default as CheckCommunity } from "./CheckCommunity";
 export { default as FetchDataFromGraphql } from "./FetchDataFromGraphql";
+export { default as Popup } from "./Popups";
