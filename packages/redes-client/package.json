@@ -11,6 +11,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@turf/distance": "^6.0.1",
+    "@turf/turf": "^5.1.6",
     "@types/react-table": "^7.0.22",
     "deep-object-diff": "^1.1.0",
     "react-table": "^7.5.0"
