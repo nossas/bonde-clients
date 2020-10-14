@@ -17,6 +17,7 @@ type Props = {
     groups: Groups;
   }) => React.ReactElement | null;
   path: string;
+  exact?: boolean;
 };
 
 const SelectMapaOrRedes = ({

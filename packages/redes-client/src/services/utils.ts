@@ -1,4 +1,9 @@
-import { Relationships, Groups } from "../types";
+import {
+  Relationships,
+  Groups,
+  Individual,
+  MapaIndividualTicket,
+} from "../types";
 
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
@@ -171,3 +176,47 @@ export const groupToOrganization: Record<number, number> = {
 };
 
 export const MAPA_DO_ACOLHIMENTO_COMMUNITY = 40;
+
+export const getVolunteerOrganizationId = (
+  subject?: string
+): number | undefined => {
+  const str = typeof subject === "string" ? subject.toLowerCase() : "";
+  const removeSpecialCaracters = str.replace(/[^\w\s]/gi, "");
+  if (removeSpecialCaracters.indexOf("jurdico") !== -1)
+    return zendeskOrganizations["lawyer"];
+  if (removeSpecialCaracters.indexOf("psicolgico") !== -1)
+    return zendeskOrganizations["therapist"];
+  return undefined;
+};
+
+export const getMatchGroup = (
+  groups: Groups,
+  individual: Individual
+): string => {
+  if (typeof individual.organizationId !== "undefined") {
+    return individual.organizationId !== zendeskOrganizations["individual"]
+      ? "MSRs"
+      : getVolunteerOrganizationId(individual.subject) ===
+        zendeskOrganizations["lawyer"]
+      ? "advogadas"
+      : "psicólogas";
+  }
+  const group = groups.find((group) => {
+    if (typeof individual.group !== "undefined") {
+      return group.isVolunteer !== individual.group.isVolunteer;
+    }
+  });
+  return group?.name?.toLowerCase() || "sem nome";
+};
+
+export const stripIndividualFromData = (
+  data: MapaIndividualTicket[]
+): Individual[] =>
+  data.map((d) => ({
+    ...d,
+    ...d.individual,
+    coordinates: {
+      latitude: d.individual.latitude,
+      longitude: d.individual.longitude,
+    },
+  }));

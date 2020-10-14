@@ -4,7 +4,7 @@ import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 import { Loading, Main, Body as ComponentsBody } from "bonde-components";
 import styled from "styled-components";
 
-import { Relations, Individuals, Home } from "./pages";
+import { Relations, Individuals, Home, Match } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
 import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
@@ -54,12 +54,13 @@ const App = (): React.ReactElement => {
                 <Header />
                 <Body>
                   <Switch>
-                    <SelectMapaOrRedes path="/matchs" component={Relations} />
+                    <SelectMapaOrRedes exact path="/" component={Home} />
+                    <SelectMapaOrRedes path="/matches" component={Relations} />
                     <SelectMapaOrRedes
                       path="/pessoas"
                       component={Individuals}
                     />
-                    <SelectMapaOrRedes path="/" component={Home} />
+                    <SelectMapaOrRedes path="/match" component={Match} />
                   </Switch>
                 </Body>
               </Main>

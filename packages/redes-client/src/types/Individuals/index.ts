@@ -1,28 +1,32 @@
 export type MapaIndividual = {
   id: number;
-  individual: {
-    firstName: string;
-    email: string;
-    whatsapp: string;
-    phone: string;
-    zipcode: string;
-    address: string;
-    city: string;
-    latitude: string;
-    longitude: string;
-    state: string;
-    availability: string;
-    formEntryId: string;
-    tipoDeAcolhimento: string | null;
-    createdAt: string;
-    encaminhamentosRealizados: string;
-    atendimentosConcluidos: string;
-    atendimentosEmAndamento: string;
-  };
-  status: string;
+  firstName: string;
+  email: string;
+  whatsapp: string;
+  phone: string;
+  zipcode: string;
+  address: string;
+  city: string;
+  latitude: string;
+  longitude: string;
+  state: string;
+  availability: string;
+  formEntryId: string;
+  tipoDeAcolhimento: string | null;
   createdAt: string;
-  updatedAt: string;
+  encaminhamentosRealizados: string;
+  atendimentosConcluidos: string;
+  atendimentosEmAndamento: string;
   organizationId: number;
+  updatedAt: string;
+};
+
+export type MapaIndividualTicket = {
+  individual: MapaIndividual;
+  id: number;
+  subject: string;
+  relationshipStatus: string;
+  userStatus: string;
 };
 
 export type Individual = {
@@ -47,9 +51,13 @@ export type Individual = {
   encaminhamentosRealizados?: string;
   atendimentosConcluidos?: string;
   atendimentosEmAndamento?: string;
-  status: string;
+  userStatus: string;
   updatedAt: string;
   organizationId?: number;
+  subject?: string;
+  group?: {
+    isVolunteer: boolean;
+  };
 };
 
 export type MapaGroupsData = {
