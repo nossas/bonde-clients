@@ -2,13 +2,18 @@ import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { Button, Header, Text, Icon } from 'bonde-components';
-import { DNS as DTRow, Col as DTCol, StatusView, List as DTList } from './Styles';
+import { DNS as DTRow, Col as DTCol, Status, List as DTList } from './Styles';
+
+type Certificate = {
+  is_active: boolean
+}
 
 type HostedZone = {
   id: number
   domain_name: string
   name_servers?: string[]
   ns_ok?: boolean
+  certificate?: Certificate
 }
 
 type Props = {
@@ -23,7 +28,10 @@ const Domain = ({ hostedZone }: Props) => {
           <Header.H4>{hostedZone.domain_name}</Header.H4>
         </DTCol>
         <DTCol>
-          <StatusView active={hostedZone.ns_ok} />
+          <Status
+            value={hostedZone.ns_ok ? 'active' : 'inactive'}
+            labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+          />
         </DTCol>
         <DTCol>
           <Icon name='ArrowRight' />

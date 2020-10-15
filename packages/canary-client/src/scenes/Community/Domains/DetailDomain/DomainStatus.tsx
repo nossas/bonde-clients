@@ -11,7 +11,7 @@ import {
 import {
   DNS as DTRow,
   Col as DTCol,
-  StatusView,
+  Status,
   List as DTList,
   MainTitle,
   ActionTitle,
@@ -37,7 +37,10 @@ const DomainStatus = ({ hostedZone }: any) => {
               <Header.H4>{hostedZone.domain_name}</Header.H4>
             </DTCol>
             <DTCol>
-              <StatusView active={hostedZone.ns_ok} />
+              <Status
+                value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+              />
             </DTCol>
             <DTCol>
               <ActionTitle><Icon name='Trash' /> Excluir</ActionTitle>
@@ -53,6 +56,11 @@ const DomainStatus = ({ hostedZone }: any) => {
               <InsertDomainIcon />
               <Header.H5>Inserir domínio</Header.H5>
               <SmallText>O primeiro passo é comprar o domínio em um site como GoDaddy ou RegistroBR e inserir aqui no BONDE.</SmallText>
+              <Status
+                activeStatus='done'
+                value='done'
+                labels={{ 'done': 'Concluído' }}
+              />
             </DTCol>
             <DTCol>
               <Icon name='ArrowRight' size='small' />
@@ -61,6 +69,11 @@ const DomainStatus = ({ hostedZone }: any) => {
               <ConnectDomainIcon />
               <Header.H5>Conectar ao BONDE</Header.H5>
               <SmallText>Copie os registros abaixo e cole no site onde comprou seu domínio. Clique aqui para ver o passo a passo.</SmallText>
+              <Status
+                activeStatus='done'
+                value='done'
+                labels={{ 'done': 'Concluído' }}
+              />
             </DTCol>
             <DTCol>
               <Icon name='ArrowRight' size='small' />
@@ -69,6 +82,10 @@ const DomainStatus = ({ hostedZone }: any) => {
               <PropagateDomainIcon />
               <Header.H5>Propagar Domínio</Header.H5>
               <SmallText>O provedor onde você comprou seu domínio faz a propagação. Esse processo pode levar até 48h.</SmallText>
+              <Status
+                value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}
+              />
             </DTCol>
             <DTCol>
               <Icon name='ArrowRight' size='small' />
@@ -77,6 +94,10 @@ const DomainStatus = ({ hostedZone }: any) => {
               <CertificateDomainIcon />
               <Header.H5>Certificar Domínio</Header.H5>
               <SmallText>Quando o provedor concluir a propagação, o BONDE faz a certificação. Esse processo pode levar até 24 horas.</SmallText>
+              <Status
+                value={hostedZone.certificate?.is_active ? 'active' : 'inactive'}
+                labels={{ 'active': 'Completo', 'inactive': 'Inativo' }}
+              />
             </DTCol>
             <DTCol>
               <Icon name='ArrowRight' size='small' />
@@ -85,6 +106,11 @@ const DomainStatus = ({ hostedZone }: any) => {
               <ActiveDomainIcon />
               <Header.H5>Domínio Ativo</Header.H5>
               <SmallText>Pronto! Seu domínio está  ativo e disponível para utilizar nas páginas da sua comunidade no BONDE.</SmallText>
+              <Status
+                activeStatus='done'
+                value='done'
+                labels={{ 'done': 'Concluído' }}
+              />
             </DTCol>
           </DTRow>
         </DTList>

@@ -13,6 +13,10 @@ const fetchGraphqlQuery = gql`
       hosted_zone: response(path: "hosted_zone")
       name_servers: response(path: "delegation_set.name_servers")
 
+      certificate {
+        is_active
+      }
+
       dns_records {
         name
         value

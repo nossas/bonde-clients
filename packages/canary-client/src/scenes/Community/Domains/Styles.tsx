@@ -9,6 +9,10 @@ export type ColProps = {
 
 export const Col = styled.div<ColProps>`
   text-align: ${props => props.align};
+
+  p {
+    text-align: ${props => props.align};
+  }
 `;
 
 Col.defaultProps = {
@@ -36,32 +40,46 @@ export const DNS = styled.div<DNSProps>`
 `
 
 export type StatusProps = {
+  value: string
+  labels: Record<string, string>
+  activeStatus?: string
+}
+
+type StatusStyledProps = {
   active?: boolean
 }
 
-export const Status = styled(Text)`
-  color: ${(props: StatusProps) => props.active ? '#50E3C2' : '#444444'};
+export const StatusStyled = styled(Text)`
+  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#444444'};
 
   svg {
     margin-right: 10px;
   }
-`
+`;
 
-export const StatusView = ({ active }: StatusProps) => (
-  <Status active={active}>
-    {active ? (
+export const Status = ({ value, labels, activeStatus }: StatusProps) => {
+  const isActive = value === activeStatus;
+
+  return (
+    <StatusStyled active={isActive}>
+      {isActive ? (
         <>
           <ActiveIcon />
-          <span>Ativo</span>
+          <span>{labels[value]}</span>
         </>
       ) : (
         <>
           <InactiveIcon />
-          <span>Inativo</span>
+          <span>{labels[value]}</span>
         </>
       )}
-  </Status>
-)
+    </StatusStyled>
+  );
+}
+
+Status.defaultProps = {
+  activeStatus: 'active'
+}
 
 type ListProps = {
   columnSize?: string
@@ -96,6 +114,7 @@ export const MainTitle = styled(Header.H5)`
 export const SmallText = styled(Text)`
   font-size: 13px;
   text-align: center;
+  margin-bottom: 10px;
 `;
 
 export const ActionTitle = styled(Header.H4)`

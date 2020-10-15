@@ -6,7 +6,7 @@ import copy from 'clipboard-copy';
 import Tooltip from '../../../../components/Tooltip';
 import { toast } from 'react-toastify';
 import { Success } from '../../../../components/Notifications';
-import { DNS as DTRow, Col as DTCol, StatusView, List as DTList, MainTitle, ActionTitle } from '../Styles';
+import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, ActionTitle } from '../Styles';
 import { CopyIcon } from '../Icons';
 import Navigation from './Navigation';
 import DomainStatus from './DomainStatus';
@@ -42,7 +42,10 @@ const DetailDomain = ({ hostedZones }: Props) => {
                     <Header.H4>{dnsRecord.name}</Header.H4>
                   </DTCol>
                   <DTCol>
-                    <StatusView active={hostedZone.ns_ok} />
+                    <Status
+                      value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                      labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+                    />
                   </DTCol>
                   <DTCol>
                     <ActionTitle><Icon name='Trash' /> Excluir</ActionTitle>
