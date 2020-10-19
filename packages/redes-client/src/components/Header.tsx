@@ -46,7 +46,7 @@ const Header = (): React.ReactElement => {
             Pessoas
           </Tab>
         </Link>
-        <Link to="/matchs">
+        <Link to="/matches">
           <Tab
             active={
               !!useRouteMatch({

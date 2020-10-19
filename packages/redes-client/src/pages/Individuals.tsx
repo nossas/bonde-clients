@@ -34,7 +34,12 @@ type Props = {
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
     };
-    ColumnsIndividuals: (isVolunteerSelected?: boolean) => Array<Columns>;
+    ColumnsIndividuals: (
+      FilterOptions: {
+        [x: string]: { label: string; value: string | number }[];
+      },
+      isVolunteerSelected?: boolean
+    ) => Array<Columns>;
   };
 };
 
@@ -143,7 +148,7 @@ export default function Individuals({
                       )
                     : data
                 }
-                columns={ColumnsIndividuals(isVolunteerSelected)}
+                columns={ColumnsIndividuals(FilterOptions, isVolunteerSelected)}
                 sticky="end"
                 pagination={pagination}
               />
