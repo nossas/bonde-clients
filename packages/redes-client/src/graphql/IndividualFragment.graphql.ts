@@ -22,18 +22,20 @@ export const MAPA_INDIVIDUAL = gql`
     atendimentosEmAndamento: atendimentos_em_andamento_calculado_
     organizationId: organization_id
     updatedAt: updated_at
+    registrationNumber: registration_number
   }
 `;
 
 export const MAPA_TICKET_INDIVIDUAL = gql`
   fragment ticketIndividual on solidarity_tickets {
-    id: ticket_id
+    ticketId: ticket_id
     individual {
       ...individual
     }
     subject
     relationshipStatus: status_acolhimento
     userStatus: status_inscricao
+    externalId: external_id
   }
   ${MAPA_INDIVIDUAL}
 `;

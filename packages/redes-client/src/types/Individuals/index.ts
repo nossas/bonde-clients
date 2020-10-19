@@ -19,11 +19,12 @@ export type MapaIndividual = {
   atendimentosEmAndamento: string;
   organizationId: number;
   updatedAt: string;
+  registrationNumber: string;
 };
 
 export type MapaIndividualTicket = {
   individual: MapaIndividual;
-  id: number;
+  ticketId: number;
   subject: string;
   relationshipStatus: string;
   userStatus: string;
@@ -58,6 +59,9 @@ export type Individual = {
   group?: {
     isVolunteer: boolean;
   };
+  externalId?: number;
+  ticketId?: number;
+  registrationNumber: string;
 };
 
 export type MapaGroupsData = {
