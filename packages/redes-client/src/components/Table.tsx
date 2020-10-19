@@ -2,7 +2,7 @@
 import { useTable, useSortBy } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
-import { Pagination } from "bonde-components";
+import { Pagination, Icon } from "bonde-components";
 // import Pagination from "./Pagination";
 import theme from "./theme";
 
@@ -181,7 +181,26 @@ function Table({
                   theme={theme}
                   backgroundColor={backgroundColor}
                 >
-                  {column.render("Header")}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingRight: "5px",
+                    }}
+                  >
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <Icon name="ArrowDown" size="small" />
+                        ) : (
+                          <Icon name="ArrowUp" size="small" />
+                        )
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                  </div>
                 </StyledTh>
               ))}
             </StyledTr>
