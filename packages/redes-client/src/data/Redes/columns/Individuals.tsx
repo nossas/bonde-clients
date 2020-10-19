@@ -2,9 +2,16 @@
 import React from "react";
 import { Button } from "bonde-components";
 import { Link } from "react-router-dom";
-import { Columns, valueString, Individual } from "../../../types";
+import { UpdateStatus } from "../../../components";
+import { Columns, valueString, Individual, valueAndRow } from "../../../types";
+import UPDATE_INDIVIDUAL_MUTATION from "../UpdateIndividual";
 
-const columns = (isVolunteerSelected?: boolean): Array<Columns> => [
+const columns = (
+  FilterOptions: {
+    [x: string]: { label: string; value: string | number }[];
+  },
+  isVolunteerSelected?: boolean
+): Array<Columns> => [
   {
     accessor: "id",
     Header: "Nome",
@@ -39,26 +46,32 @@ const columns = (isVolunteerSelected?: boolean): Array<Columns> => [
   {
     accessor: "userStatus",
     Header: "Status Inscrição",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
-    ),
+    Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
+      value && row ? (
+        <UpdateStatus
+          name="status"
+          row={row}
+          options={FilterOptions.userStatus}
+          selected={value}
+          type="individual"
+          query={UPDATE_INDIVIDUAL_MUTATION}
+        />
+      ) : null,
   },
   {
     accessor: "availability",
     Header: "Disponibilidade",
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "", // hide if is a recipient
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
-    ),
+    Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
+      value ? (
+        <UpdateStatus
+          name="availability"
+          row={row}
+          options={FilterOptions.availability}
+          selected={value}
+          type="individual"
+          query={UPDATE_INDIVIDUAL_MUTATION}
+        />
+      ) : null,
   },
   {
     accessor: "createdAt",

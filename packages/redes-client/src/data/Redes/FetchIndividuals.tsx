@@ -9,7 +9,6 @@ export const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
     $rows: Int!
     $offset: Int!
-    $order_by: [rede_individuals_order_by!]
     $userStatus: String_comparison_exp
     $state: String_comparison_exp
     $availability: String_comparison_exp
@@ -30,7 +29,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       }
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: asc }
     ) {
       ...individual
     }
@@ -78,9 +77,6 @@ const FetchIndividuals = (props: any = {}) => {
     },
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
   };
 
   return (

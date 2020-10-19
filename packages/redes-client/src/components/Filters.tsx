@@ -14,11 +14,13 @@ import { AutoSaveFilters } from "./";
 const WrapForm = styled.div`
   & > ${Form} {
     display: grid;
-    grid-template-columns: 300px repeat(5, minmax(auto, 164px)) 100px;
     width: 100%;
-    justify-content: start;
     grid-gap: 15px;
-    align-items: center;
+    @media (min-width: 992px) {
+      grid-template-columns: 300px repeat(5, minmax(auto, 164px)) 100px;
+      justify-content: start;
+      align-items: center;
+    }
     & > div {
       padding: 0;
     }
@@ -164,16 +166,18 @@ const Filters = ({
                   isClearable={true}
                 />
               )}
-              <Button
-                dark
-                onClick={() => {
-                  reset();
-                  form.reset();
-                }}
-              >
-                Limpar
-                <Icon name="Close" size="xs" />
-              </Button>
+              <div style={{ maxWidth: "200px" }}>
+                <Button
+                  dark
+                  onClick={() => {
+                    reset();
+                    form.reset();
+                  }}
+                >
+                  Limpar
+                  <Icon name="Close" size="xs" />
+                </Button>
+              </div>
             </>
           );
         }}

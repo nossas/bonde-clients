@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { Columns, valueString, Individual } from "../../../types";
 import { zendeskOrganizations } from "../../../services/utils";
 
-const columns = (isVolunteerSelected?: boolean): Array<Columns> => [
+const columns = (
+  _FilterOptions: {
+    [x: string]: { label: string; value: string | number }[];
+  },
+  isVolunteerSelected?: boolean
+): Array<Columns> => [
   {
     accessor: "id",
     Header: "Nome",
