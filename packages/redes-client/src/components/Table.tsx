@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useTable } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Pagination } from "bonde-components";
@@ -16,6 +16,7 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   text-align: left;
   padding: 10px 0 10px 20px;
   border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
 
   /* Sticky */
   position: sticky !important;
@@ -151,10 +152,13 @@ function Table({
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({
-    columns,
-    data,
-  });
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy
+  );
 
   // Render the UI for your table
   return (
@@ -170,6 +174,7 @@ function Table({
               {headerGroup.headers.map((column: any) => (
                 <StyledTh
                   {...column.getHeaderProps({
+                    ...column.getSortByToggleProps(),
                     className: column.className,
                     style: column.style,
                   })}

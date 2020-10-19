@@ -23,7 +23,7 @@ export default function Default({
   return (
     <>
       <Header.H2>{title}</Header.H2>
-      <Text align="center">{text}</Text>
+      <Text>{text}</Text>
       <WrapButtons>
         {SecondaryBtn}
         {MainBtn}
