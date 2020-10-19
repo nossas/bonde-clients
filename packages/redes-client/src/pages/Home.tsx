@@ -2,10 +2,10 @@ import React from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { WeeklyStats } from "../../components";
-import { useCommunityExtra } from "../../services/CommunityExtraProvider";
-import { useFilter } from "../../services/FilterProvider";
-import { WeeklyStatsData } from "../../types";
+import { WeeklyStats } from "../components";
+import { useCommunityExtra } from "../services/CommunityExtraProvider";
+import { useFilter } from "../services/FilterProvider";
+import { WeeklyStatsData } from "../types";
 
 const Grid = styled.div`
   display: grid;
