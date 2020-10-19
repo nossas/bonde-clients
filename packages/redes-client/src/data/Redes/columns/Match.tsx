@@ -14,20 +14,11 @@ const columns = (
       Header: "Nome",
       Cell: ({
         row: { original },
-        value,
       }: {
         row: { original: Individual };
-        value: number;
       }): JSX.Element | string => {
         return original.firstName ? (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none", color: "inherit" }}
-            href={`https://mapadoacolhimento.zendesk.com/agent/users/${value}/requested_tickets`}
-          >
-            <span>{original.firstName}</span>
-          </a>
+          <span>{`${original.firstName} ${original.lastName}`}</span>
         ) : (
           "-"
         );
@@ -66,17 +57,6 @@ const columns = (
       ),
     },
     {
-      accessor: "relationshipStatus",
-      // hide if is a volunteer
-      className: isVolunteerSelected === true ? "hide" : "",
-      Header: "Status Relação",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "capitalize" }}>
-          {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-        </span>
-      ),
-    },
-    {
       accessor: "availability",
       Header: "Disponibilidade",
       className: isVolunteerSelected === false ? "hide" : "", // hide if is a recipient
@@ -97,42 +77,6 @@ const columns = (
         const data = new Date(value);
         return data.toLocaleDateString("pt-BR");
       },
-    },
-    {
-      accessor: "ultimosEncaminhamentosRealizados",
-      Header: "ER 30D.",
-      // hide if is a recipient
-      className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-    },
-    {
-      accessor: "encaminhamentosRealizados",
-      Header: "ER",
-      // hide if is a recipient
-      className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-    },
-    {
-      accessor: "atendimentosEmAndamento",
-      Header: "AT INI",
-      // hide if is a recipient
-      className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-    },
-    {
-      accessor: "atendimentosConcluidos",
-      Header: "AT CON",
-      // hide if is a recipient
-      className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
     },
     {
       accessor: "phone",
