@@ -44,13 +44,7 @@ export default function Relations({
 
   const reset = () =>
     dispatch({
-      type: "relationships",
-      value: {
-        query: undefined,
-        state: undefined,
-        agent: undefined,
-        relationshipStatus: undefined,
-      },
+      type: "reset",
     });
 
   return (
