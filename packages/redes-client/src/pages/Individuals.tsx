@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { Table, Filters } from "../../components";
-import { useFilter } from "../../services/FilterProvider";
-import { groupsToSelect, stripIndividualFromData } from "../../services/utils";
-import columns from "./columns";
-import { Individual, Groups, MapaIndividualTicket } from "../../types";
+import { Table, Filters } from "../components";
+import { useFilter } from "../services/FilterProvider";
+import { groupsToSelect, stripIndividualFromData } from "../services/utils";
+import { Individual, Groups, MapaIndividualTicket, Columns } from "../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -35,11 +34,12 @@ type Props = {
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
     };
+    ColumnsIndividuals: (isVolunteerSelected?: boolean) => Array<Columns>;
   };
 };
 
 export default function Individuals({
-  data: { FetchIndividuals, FilterOptions },
+  data: { FetchIndividuals, FilterOptions, ColumnsIndividuals },
   community,
   groups,
 }: Props): React.ReactElement {
@@ -102,10 +102,7 @@ export default function Individuals({
         search
         state
         availability
-        userStatus={
-          typeof isVolunteerSelected === "undefined" ||
-          (community?.id === 40 && isVolunteerSelected)
-        }
+        userStatus={community?.id === 40 ? isVolunteerSelected : true}
         relationshipStatus={
           (!isVolunteerSelected ||
             typeof isVolunteerSelected === "undefined") &&
@@ -146,7 +143,7 @@ export default function Individuals({
                       )
                     : data
                 }
-                columns={columns(community?.id || 0, isVolunteerSelected)}
+                columns={ColumnsIndividuals(isVolunteerSelected)}
                 sticky="end"
                 pagination={pagination}
               />
