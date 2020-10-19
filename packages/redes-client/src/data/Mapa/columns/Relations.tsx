@@ -115,17 +115,25 @@ const columns = (
       Header: "Ação",
       className: "sticky",
       Cell: ({ value }: { value: string }): JSX.Element | null => (
-        <a
-          href={createWhatsappLink(value, "texto")}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "none" }}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "200px",
+            justifyContent: "center",
+          }}
         >
-          <Button main="#ee0099" hover="#e2058a" focus="#b06c" secondary>
-            <Icon name="Whatsapp" size="small" />
-            Whatsapp
-          </Button>
-        </a>
+          <a
+            href={createWhatsappLink(value, "texto")}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            <Button main="#ee0099" hover="#e2058a" focus="#b06c" secondary>
+              <Icon name="Whatsapp" size="small" />
+              Whatsapp
+            </Button>
+          </a>
+        </div>
       ),
     },
   ];

@@ -88,21 +88,29 @@ const columns = (
         row: { original: Individual };
       }): JSX.Element | null => {
         return (
-          <Button
-            onClick={() => {
-              setIndividual((prevState: any) => ({
-                ...prevState,
-                [isVolunteerSelected ? "volunteer" : "recipient"]: original,
-              }));
-              return setModal(true);
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "200px",
+              justifyContent: "center",
             }}
-            main="#ee0099"
-            hover="#e2058a"
-            focus="#b06c"
-            secondary
           >
-            Selecionar
-          </Button>
+            <Button
+              onClick={() => {
+                setIndividual((prevState: any) => ({
+                  ...prevState,
+                  [isVolunteerSelected ? "volunteer" : "recipient"]: original,
+                }));
+                return setModal(true);
+              }}
+              main="#ee0099"
+              hover="#e2058a"
+              focus="#b06c"
+              secondary
+            >
+              Selecionar
+            </Button>
+          </div>
         );
       },
     },

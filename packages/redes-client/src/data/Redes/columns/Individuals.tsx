@@ -111,27 +111,35 @@ const columns = (
       row: { original: Individual };
     }): JSX.Element | null => {
       return (
-        <Link
-          style={{ textDecoration: "none" }}
-          to={{
-            pathname: "/match",
-            search: `?email=${original.email}`,
-            state: { ...original },
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "200px",
+            justifyContent: "center",
           }}
         >
-          <Button
-            main="#ee0099"
-            hover="#e2058a"
-            focus="#b06c"
-            secondary
-            disabled={
-              original.userStatus !== "aprovada" ||
-              original.availability !== "disponível"
-            }
+          <Link
+            style={{ textDecoration: "none" }}
+            to={{
+              pathname: "/match",
+              search: `?email=${original.email}`,
+              state: { ...original },
+            }}
           >
-            Buscar match
-          </Button>
-        </Link>
+            <Button
+              main="#ee0099"
+              hover="#e2058a"
+              focus="#b06c"
+              secondary
+              disabled={
+                original.userStatus !== "aprovada" ||
+                original.availability !== "disponível"
+              }
+            >
+              Buscar match
+            </Button>
+          </Link>
+        </div>
       );
     },
   },
