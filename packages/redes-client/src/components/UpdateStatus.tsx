@@ -10,6 +10,9 @@ const Select = styled.select`
   background-color: #fff;
   border: unset;
   border-bottom: 1px solid #ee0099;
+  font-size: 16px;
+  font-family: inherit;
+  color: #4a4a4a;
   &:active,
   &:hover {
     box-shadow: 0 0 4px rgb(204, 204, 204);
@@ -21,6 +24,9 @@ const Select = styled.select`
 
 const Option = styled.option`
   text-transform: capitalize;
+  font-size: 16px;
+  color: #4a4a4a;
+  font-family: inherit;
 `;
 
 type Props = {
