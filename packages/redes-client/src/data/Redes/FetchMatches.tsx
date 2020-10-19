@@ -5,20 +5,19 @@ import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
 
 const MATCHES = gql`
-  query RedeRelationships(
+  query Relationships(
     $context: Int_comparison_exp!
     $rows: Int!
     $offset: Int!
     $status: String_comparison_exp
     $state: String_comparison_exp
     $agent: Int_comparison_exp
-    $order_by: [rede_relationships_order_by!]
     $query: String
   ) {
     relationships: rede_relationships(
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: asc }
       where: {
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
@@ -33,7 +32,7 @@ const MATCHES = gql`
         ]
       }
     ) {
-      status
+      relationshipStatus: status
       is_archived
       comments
       metadata

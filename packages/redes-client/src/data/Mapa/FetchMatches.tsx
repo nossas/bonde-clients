@@ -5,7 +5,7 @@ import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues, getAgentZendeskUserId } from "../../services/utils";
 
 const MATCHES = gql`
-  query MapaRelationships(
+  query Relationships(
     $rows: Int!
     $offset: Int!
     $status: String_comparison_exp
@@ -33,7 +33,7 @@ const MATCHES = gql`
       id
       individualsTicketId: individuals_ticket_id
       volunteersTicketId: volunteers_ticket_id
-      status
+      relationshipStatus: status
       createdAt: created_at
       recipientTicket: recipient_ticket {
         agentId: assignee_id
