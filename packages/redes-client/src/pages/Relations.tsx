@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { Table, Filters } from "../../components";
-import { deconstructAgent } from "../../services/utils";
-import { useFilter } from "../../services/FilterProvider";
-import columns from "./columns";
-import { Groups, MatchesData } from "../../types";
+import { Table, Filters } from "../components";
+import { deconstructAgent } from "../services/utils";
+import { useFilter } from "../services/FilterProvider";
+import { Groups, MatchesData, Columns } from "../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -26,11 +25,17 @@ type Props = {
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
     };
+    ColumnsRelations: (
+      groups: Groups,
+      FilterOptions: {
+        [x: string]: { label: string; value: string | number }[];
+      }
+    ) => Array<Columns>;
   };
 };
 
 export default function Relations({
-  data: { FetchMatches, FilterOptions },
+  data: { FetchMatches, FilterOptions, ColumnsRelations },
   community,
   groups,
 }: Props): React.ReactElement {
@@ -92,7 +97,7 @@ export default function Relations({
                     ? deconstructAgent(relationships)
                     : relationships
                 }
-                columns={columns(groups)}
+                columns={ColumnsRelations(groups, FilterOptions)}
                 sticky="end"
                 pagination={pagination}
               />

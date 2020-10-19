@@ -21,3 +21,12 @@ export type valueFirstName = {
     id?: number;
   };
 };
+
+export type valueAndRow = {
+  value: string;
+  row: {
+    original: {
+      id: number;
+    };
+  };
+};

@@ -5,11 +5,16 @@ import {
   createWhatsappLink,
   zendeskOrganizations,
   getAgentFromZendeskUserId,
-  MAPA_DO_ACOLHIMENTO_COMMUNITY,
-} from "../../services/utils";
-import { Groups, Columns, valueFirstName, valueString } from "../../types";
+} from "../../../services/utils";
+import { Groups, Columns, valueFirstName, valueString } from "../../../types";
 
-const columns = (groups: Groups): Array<Columns> => {
+const columns = (
+  groups: Groups,
+  FilterOptions: {
+    [x: string]: { label: string; value: string | number }[];
+  }
+): Array<Columns> => {
+  console.log(FilterOptions);
   const volunteerGroup = groups.find((i) => !!i.isVolunteer);
   const recipientGroup = groups.find((i) => !i.isVolunteer);
   return [
@@ -17,13 +22,6 @@ const columns = (groups: Groups): Array<Columns> => {
       accessor: "volunteer",
       Header: () => volunteerGroup?.name || "-",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (volunteerGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
-          return value ? (
-            <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-          ) : (
-            "-"
-          );
-        }
         return value ? (
           <a
             target="_blank"
@@ -43,13 +41,6 @@ const columns = (groups: Groups): Array<Columns> => {
       accessor: "recipient",
       Header: () => recipientGroup?.name || "-",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (recipientGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
-          return value ? (
-            <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-          ) : (
-            "-"
-          );
-        }
         return value ? (
           <a
             target="_blank"
@@ -62,6 +53,14 @@ const columns = (groups: Groups): Array<Columns> => {
         ) : (
           "-"
         );
+      },
+      bold: true,
+    },
+    {
+      accessor: "relationshipStatus",
+      Header: () => "Status",
+      Cell: ({ value }: valueFirstName): JSX.Element | string => {
+        return value ? <span>{value}</span> : "-";
       },
       bold: true,
     },
@@ -104,13 +103,6 @@ const columns = (groups: Groups): Array<Columns> => {
       accessor: "agent",
       Header: "Feito por",
       Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        if (recipientGroup?.communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY) {
-          return value ? (
-            <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-          ) : (
-            "-"
-          );
-        }
         return value ? (
           <span>{getAgentFromZendeskUserId[(value as unknown) as number]}</span>
         ) : (
@@ -129,12 +121,7 @@ const columns = (groups: Groups): Array<Columns> => {
           rel="noopener noreferrer"
           style={{ textDecoration: "none" }}
         >
-          <Button
-            main="#ee0099"
-            hover="#e2058a"
-            focus="#bMAPA_DO_ACOLHIMENTO_COMMUNITY06c"
-            secondary
-          >
+          <Button main="#ee0099" hover="#e2058a" focus="#b06c" secondary>
             <Icon name="Whatsapp" size="small" />
             Whatsapp
           </Button>
