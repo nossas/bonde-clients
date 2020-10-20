@@ -28,6 +28,8 @@ const VOLUNTEERS_FOR_MATCH = gql`
   query VolunteersForMatch(
     $individualOrganizationId: bigint_comparison_exp!
     $lastMonth: timestamp_comparison_exp!
+    $rows: Int!
+    $offset: Int!
   ) {
     volunteers: solidarity_users(
       where: {
@@ -42,8 +44,28 @@ const VOLUNTEERS_FOR_MATCH = gql`
         organization_id: $individualOrganizationId
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
       }
+      limit: $rows
+      offset: $offset
     ) {
       ...individual
+    }
+    volunteersCount: solidarity_users_aggregate(
+      where: {
+        condition: { _eq: "disponivel" }
+        longitude: { _is_null: false }
+        latitude: { _is_null: false }
+        name: { _is_null: false }
+        registration_number: { _is_null: false }
+        atendimentos_em_andamento_calculado_: { _eq: 0 }
+        state: { _neq: "int" }
+        city: { _neq: "Internacional" }
+        organization_id: $individualOrganizationId
+        _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
+      }
+    ) {
+      aggregate {
+        count
+      }
     }
     pendingTickets: solidarity_matches(
       order_by: { created_at: desc }
@@ -136,8 +158,9 @@ type MatchVolunteerIndividual = {
   whatsapp: string;
   phone: string;
   registrationNumber: string;
+  availability: string;
   pending?: number;
-  availability?: number;
+  availabilityCount?: number;
 };
 
 const FetchIndividualsForMatch = ({
@@ -156,6 +179,8 @@ const FetchIndividualsForMatch = ({
     },
   };
   const volunteerVariables = {
+    rows,
+    offset,
     individualOrganizationId: {
       _eq: getVolunteerOrganizationId(subject),
     },
@@ -196,12 +221,12 @@ const FetchIndividualsForMatch = ({
               (ticket: MatchTickets) => ticket.volunteersUserId === id
             ).length;
 
-            const availability = 1 - (countForwardings || 0);
+            const availabilityCount = 1 - (countForwardings || 0);
 
             return {
               ...user,
               ultimosEncaminhamentosRealizados: countForwardings,
-              availability,
+              availabilityCount,
               coordinates: {
                 latitude: user.latitude,
                 longitude: user.longitude,
@@ -209,7 +234,8 @@ const FetchIndividualsForMatch = ({
             };
           })
           .filter(
-            (user: MatchVolunteerIndividual) => (user.availability || 0) > 0
+            (user: MatchVolunteerIndividual) =>
+              (user.availabilityCount || 0) > 0
           )
       : undefined;
 
@@ -219,7 +245,7 @@ const FetchIndividualsForMatch = ({
           data: stripIndividualFromData(data.recipients),
           count: data.recipientsCount.aggregate.count,
         }
-      : { data: newData, count: newData.length }
+      : { data: newData, count: data.volunteersCount.aggregate.count }
   );
 };
 

@@ -1,10 +1,11 @@
 import React from "react";
 import { gql, useQuery } from "bonde-core-tools";
-import { CheckCommunity } from "../../components";
-
 import styled from "styled-components";
 import { Loading } from "bonde-components";
+
+import { CheckCommunity } from "../../components";
 import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
+import { useFilterState } from "../../services/FilterProvider";
 import { Individual } from "../../types";
 
 const WrapLoading = styled.div`
@@ -16,7 +17,11 @@ const WrapLoading = styled.div`
 `;
 
 const INDIVIDUALS_FOR_MATCH = gql`
-  query IndividualsForMatch($isVolunteer: Boolean_comparison_exp) {
+  query IndividualsForMatch(
+    $isVolunteer: Boolean_comparison_exp
+    $rows: Int!
+    $offset: Int!
+  ) {
     individuals: rede_individuals(
       where: {
         status: { _eq: "aprovada" }
@@ -28,6 +33,8 @@ const INDIVIDUALS_FOR_MATCH = gql`
         city: { _neq: "ZERO_RESULTS" }
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
       }
+      limit: $rows
+      offset: $offset
       order_by: { created_at: asc }
     ) {
       ...individual
@@ -68,16 +75,21 @@ export type IndividualsData = {
 
 type IndividualsVars = {
   isVolunteer: { _eq: boolean };
+  rows: number;
+  offset: number;
 };
 
 const FetchIndividualsForMatch = ({
   children,
   group: { isVolunteer },
 }: Props) => {
+  const { rows, offset } = useFilterState();
   const { loading, error, data } = useQuery<IndividualsData, IndividualsVars>(
     INDIVIDUALS_FOR_MATCH,
     {
       variables: {
+        rows,
+        offset,
         isVolunteer: {
           _eq: !isVolunteer,
         },
