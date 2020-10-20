@@ -17,7 +17,7 @@ const WrapForm = styled.div`
     width: 100%;
     grid-gap: 15px;
     @media (min-width: 992px) {
-      grid-template-columns: 300px repeat(5, minmax(auto, 164px)) 100px;
+      grid-template-columns: 300px repeat(auto-fill, minmax(165px, 1fr));
       justify-content: start;
       align-items: center;
     }

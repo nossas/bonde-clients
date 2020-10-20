@@ -4,7 +4,10 @@ import { Button } from "bonde-components";
 import { Columns, valueString, Individual } from "../../../types";
 
 const columns = (
-  setIndividual: (individual: any) => void,
+  dispatch: (value: {
+    type: string;
+    value: { [x: string]: Individual };
+  }) => void,
   setModal: (value: boolean) => void,
   isVolunteerSelected?: boolean
 ): Array<Columns> => {
@@ -97,11 +100,13 @@ const columns = (
           >
             <Button
               onClick={() => {
-                setIndividual((prevState: any) => ({
-                  ...prevState,
-                  [isVolunteerSelected ? "volunteer" : "recipient"]: original,
-                }));
-                return setModal(true);
+                setModal(true);
+                dispatch({
+                  type: "match",
+                  value: {
+                    [isVolunteerSelected ? "volunteer" : "recipient"]: original,
+                  },
+                });
               }}
               main="#ee0099"
               hover="#e2058a"

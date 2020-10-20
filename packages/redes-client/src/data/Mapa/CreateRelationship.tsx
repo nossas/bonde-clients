@@ -1,24 +1,6 @@
-import React from "react";
-import { gql, useMutation } from "bonde-core-tools";
-import { CheckCommunity } from "../../components";
-// import {
-//   createVolunteerTicket,
-//   updateRecipientTicket,
-// } from "../../services/Zendesk";
-// import { Individual } from "../../types";
+import { gql } from "bonde-core-tools";
 
-import styled from "styled-components";
-import { Loading } from "bonde-components";
-
-const WrapLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const CREATE_RELATIONSHIP = gql`
+export default gql`
   mutation createRelationship(
     $tickets: [solidarity_tickets_insert_input!]!
     $match: solidarity_matches_insert_input!
@@ -63,41 +45,3 @@ const CREATE_RELATIONSHIP = gql`
     }
   }
 `;
-
-type Props = {
-  children: any;
-};
-
-const CreateRelationship = ({
-  // individuals,
-  children,
-}: Props) => {
-  // const volunteerTicket = await createVolunteerTicket(individuals);
-  // const recipientTicket = await updateRecipientTicket(individuals);
-
-  const [createRelationship, { data, loading, error }] = useMutation(
-    CREATE_RELATIONSHIP
-  );
-
-  if (loading)
-    return (
-      <WrapLoading>
-        <Loading />
-      </WrapLoading>
-    );
-
-  return children({
-    createRelationship,
-    data,
-    error,
-    // volunteerTicket,
-    // recipientTicket
-  });
-};
-
-CreateRelationship.displayName = "CreateRelationship";
-
-// eslint-disable-next-line react/display-name
-export default function (props: any = {}): React.ReactElement {
-  return <CheckCommunity Component={CreateRelationship} {...props} />;
-}

@@ -9,8 +9,8 @@ import { WeeklyStatsData } from "../types";
 
 const Grid = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  grid-column-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  grid-gap: 20px;
   justify-content: start;
   overflow-x: auto;
   padding-bottom: 15px;
