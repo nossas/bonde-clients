@@ -68,7 +68,6 @@ const UpdateStatus = ({
       ],
     });
   };
-  console.log({ row });
   return (
     <Text color="#000">
       <Select onChange={handleOnChange} value={selected}>

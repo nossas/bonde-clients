@@ -1,35 +1,44 @@
-import React from "react";
-import { Modal, Button } from "bonde-components";
-import { useSession } from "bonde-core-tools";
+import React, { useState } from "react";
+import { Modal, Button, Loading } from "bonde-components";
+import { useSession, useMutation } from "bonde-core-tools";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";
 import { Individual } from "../../types";
 
-const getVariables = (match: {
-  recipient: Individual;
-  volunteer: Individual;
-}) => {
-  const { user, community } = useSession();
-  if (community?.id === 40) {
+const WrapLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+`;
+
+const getVariables = (
+  match: {
+    recipient: Individual;
+    volunteer: Individual;
+  },
+  communityId?: number
+) => {
+  if (communityId === 40) {
     // make api calls to mapa graphql endpoint
     return {
       ...match,
     };
-  } else {
-    return {
-      recipientId: match.recipient.id,
-      volunteerId: match.volunteer.id,
-      agentId: user.id,
-    };
   }
+  return {
+    recipientId: match.recipient.id,
+    volunteerId: match.volunteer.id,
+  };
 };
 
 export default function Popups({
   match,
   isOpen,
   setModal,
-  CreateRelationship,
+  CreateRelationship: CREATE_RELATIONSHIP,
 }: {
   match: {
     recipient: Individual;
@@ -37,91 +46,88 @@ export default function Popups({
   };
   setModal: (value: boolean) => void;
   isOpen: boolean;
-  CreateRelationship: ({
-    children,
-  }: {
-    children: (
-      data: any,
-      createRelationship: (value: any) => void
-    ) => React.ReactElement;
-  }) => React.ReactElement | null;
+  CreateRelationship: any;
 }): React.ReactElement {
-  const { user } = useSession();
+  const [createRelationship, { loading }] = useMutation(CREATE_RELATIONSHIP);
+  const { user, community } = useSession();
   const dispatch = useFilterDispatch();
+  const [error, setError] = useState<string | undefined>();
+  const [data, setData] = useState();
+
+  const handleClick = async () => {
+    try {
+      const { data } = await createRelationship({
+        variables: getVariables(match, community?.id),
+      });
+      return setData(data);
+    } catch (e) {
+      e.graphQLErrors.map((error: any) => {
+        console.log(error);
+      });
+      return setError(e.message);
+    }
+  };
+
   return (
-    <CreateRelationship>
-      {({ createRelationship, data, error }) => {
-        return (
-          <Modal isOpen={isOpen} onClose={() => setModal(false)}>
-            {isOpen && (
-              <Default
-                title="Confirma?"
-                text={`${match.recipient.firstName} será encaminhada para ${match.volunteer.firstName}.`}
-                MainBtn={
-                  <Button
-                    onClick={() =>
-                      createRelationship({
-                        variables: getVariables(match),
-                      })
-                    }
-                  >
-                    Confirmar
-                  </Button>
-                }
-                SecondaryBtn={
-                  <Button onClick={() => setModal(false)} secondary>
-                    Voltar
-                  </Button>
-                }
-              />
-            )}
-            {data && (
-              <Default
-                title="Eba!"
-                text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
-                MainBtn={
-                  <a
-                    href={`https://api.whatsapp.com/send?phone=55${match.volunteer.phone}`}
-                  >
-                    <Button>enviar whats para voluntária</Button>
-                  </a>
-                }
-                SecondaryBtn={
-                  <Link
-                    to={"/matches"}
-                    onClick={() =>
-                      dispatch({
-                        type: "relationships",
-                        value: {
-                          state: match.recipient.state,
-                          agent: {
-                            label: `${user.firstName} ${user.lastName || ""}`,
-                            value: user.id,
-                          },
-                        },
-                      })
-                    }
-                  >
-                    <Button secondary>Ver relação</Button>
-                  </Link>
-                }
-              />
-            )}
-            {error && (
-              <Error
-                match={match}
-                errorMsg={error.msg}
-                onSubmit={() =>
-                  createRelationship({
-                    variables: getVariables(match),
-                  })
-                }
-              />
-            )}
-          </Modal>
-        );
-      }}
-    </CreateRelationship>
+    <Modal isOpen={isOpen} onClose={() => setModal(false)}>
+      {isOpen && !error && !data && !loading && (
+        <Default
+          title="Confirma?"
+          text={`${match.recipient.firstName} será encaminhada para ${match.volunteer.firstName}.`}
+          MainBtn={<Button onClick={handleClick}>Confirmar</Button>}
+          SecondaryBtn={
+            <Button onClick={() => setModal(false)} secondary>
+              Voltar
+            </Button>
+          }
+        />
+      )}
+      {isOpen && loading && (
+        <WrapLoading>
+          <Loading />
+        </WrapLoading>
+      )}
+      {isOpen && data && (
+        <Default
+          title="Eba!"
+          text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
+          MainBtn={
+            <a
+              href={`https://api.whatsapp.com/send?phone=55${match.volunteer.phone}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Button>enviar whats para voluntária</Button>
+            </a>
+          }
+          SecondaryBtn={
+            <Link
+              to={"/matches"}
+              onClick={() =>
+                dispatch({
+                  type: "relationships",
+                  value: {
+                    state: {
+                      value: match.recipient.state.toLowerCase(),
+                      label: match.recipient.state.toUpperCase(),
+                    },
+                    agent: {
+                      label: `${user.firstName} ${user.lastName || ""}`,
+                      value: user.id,
+                    },
+                  },
+                })
+              }
+              style={{ textDecoration: "none" }}
+            >
+              <Button secondary>Ver relação</Button>
+            </Link>
+          }
+        />
+      )}
+      {isOpen && error && (
+        <Error match={match} errorMsg={error} onSubmit={handleClick} />
+      )}
+    </Modal>
   );
 }
 

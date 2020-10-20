@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Individual } from "../types";
 // export type Filters = {
 //   [x: string]: { label: string; value: string | number } & string;
 // };
@@ -16,6 +16,7 @@ type Action =
   | { type: "group"; value: { value: number; label: string } | null }
   | { type: "relationships"; value: any }
   | { type: "reset"; value?: any }
+  | { type: "match"; value: { [x: string]: Individual } }
   | { type: "individuals"; value: any };
 
 type Dispatch = (action: Action) => void;
@@ -24,6 +25,10 @@ type State = {
   relationships: any;
   individuals: any;
   selectedGroup?: { value: number; label: string } | null;
+  match: {
+    recipient: Individual;
+    volunteer: Individual;
+  };
 } & Pagination;
 
 const FilterStateContext = React.createContext<State | undefined>(undefined);
@@ -49,6 +54,10 @@ const initialState = {
   selectedGroup: undefined,
   relationships: initialFilters,
   individuals: initialFilters,
+  match: {
+    recipient: {},
+    individuals: {},
+  },
 };
 
 function filterReducer(state: State, action: Action) {
@@ -96,6 +105,15 @@ function filterReducer(state: State, action: Action) {
     case "reset": {
       return {
         ...initialState,
+      };
+    }
+    case "match": {
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          ...action.value,
+        },
       };
     }
     default: {

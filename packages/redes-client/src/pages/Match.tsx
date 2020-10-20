@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { getMatchGroup } from "../services/utils";
 import { Columns, Groups, Individual } from "../types";
 import { Table, Popup } from "../components";
-import { useFilterState } from "../services/FilterProvider";
+import { useFilter } from "../services/FilterProvider";
 
 type Props = {
   groups: Groups;
@@ -17,14 +17,7 @@ type Props = {
     }: {
       children: (data: any) => React.ReactElement;
     }) => React.ReactElement | null;
-    CreateRelationship: ({
-      children,
-    }: {
-      children: (
-        data: any,
-        createRelationship: (value: any) => void
-      ) => React.ReactElement;
-    }) => React.ReactElement | null;
+    CreateRelationship: string;
     ColumnsMatch: (
       setIndividual: (individual: any) => void,
       setModal: (value: boolean) => void,
@@ -45,11 +38,7 @@ export default function Match({
 }: Props): React.ReactElement {
   const { state: linkState } = useLocation();
   const { goBack } = useHistory();
-  const state = useFilterState();
-  const [matchPair, setMatchPair] = useState<{
-    recipient: Individual;
-    volunteer: Individual;
-  }>({ recipient: {} as Individual, volunteer: {} as Individual });
+  const [state, dispatch] = useFilter();
   const [isOpen, setModal] = useState<boolean>(false);
 
   const {
@@ -71,11 +60,16 @@ export default function Match({
       : undefined;
 
   useEffect(() => {
-    setMatchPair((prevState) => ({
-      ...prevState,
-      [isVolunteerSelected ? "volunteer" : "recipient"]: linkState,
-    }));
-  }, [linkState, setMatchPair]);
+    dispatch({
+      type: "match",
+      value: {
+        [isVolunteerSelected
+          ? "volunteer"
+          : "recipient"]: linkState as Individual,
+      },
+    });
+    dispatch({ type: "rows", value: 30 });
+  }, [linkState, dispatch]);
 
   const filterByDistance = useCallback(
     (data: Individual[]) =>
@@ -101,8 +95,9 @@ export default function Match({
         .sort((a, b) => Number(a.distance) - Number(b.distance)),
     [latitude, longitude]
   );
+
   return (
-    <div>
+    <>
       <WrapButton>
         <Button secondary align="left" onClick={goBack}>
           {"< fazer match"}
@@ -111,6 +106,13 @@ export default function Match({
       <FetchIndividualsForMatch {...linkState}>
         {({ data, count }) => {
           const filteredTableData = filterByDistance(data);
+          const pagination = {
+            totalPages: Math.round(count / state.rows),
+            goToPage: (e: number) => dispatch({ type: "page", value: e }),
+            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
+            pageIndex: state.page,
+            pageSize: state.rows,
+          };
           return (
             <>
               <Header.H4>Match Realizado!</Header.H4>
@@ -119,12 +121,9 @@ export default function Match({
               </Text>
               <Table
                 data={filteredTableData}
-                columns={ColumnsMatch(
-                  setMatchPair,
-                  setModal,
-                  !isVolunteerSelected
-                )}
+                columns={ColumnsMatch(dispatch, setModal, !isVolunteerSelected)}
                 sticky="end"
+                pagination={pagination}
               />
             </>
           );
@@ -132,10 +131,10 @@ export default function Match({
       </FetchIndividualsForMatch>
       <Popup
         isOpen={isOpen}
-        match={matchPair}
+        match={state.match}
         setModal={setModal}
         CreateRelationship={CreateRelationship}
       />
-    </div>
+    </>
   );
 }
