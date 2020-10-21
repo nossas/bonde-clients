@@ -62,12 +62,15 @@ export default function WeeklyStats({
                 });
                 return dispatch({
                   type: "individuals",
-                  value: {
-                    availability:
-                      communityId === 40
-                        ? getOption("MSR-Inscrita", "availability")
-                        : getOption("Inscrita", "userStatus"),
-                  },
+                  value:
+                    communityId === 40
+                      ? {
+                          availability: getOption(
+                            "MSR-Inscrita",
+                            "availability"
+                          ),
+                        }
+                      : { userStatus: getOption("Inscrita", "userStatus") },
                 });
               }}
             >
@@ -75,7 +78,7 @@ export default function WeeklyStats({
               <Text>{`Novas(os) ${individualGroup?.name} inscritas(os)`}</Text>
             </StatsCard>
           </Link>
-          <Link to="/matchs">
+          <Link to="/matches">
             <StatsCard
               onClick={() =>
                 dispatch({
@@ -94,7 +97,7 @@ export default function WeeklyStats({
             </StatsCard>
           </Link>
           {communityId === 40 && (
-            <Link to="/matchs">
+            <Link to="/matches">
               <StatsCard
                 onClick={() =>
                   dispatch({
@@ -115,7 +118,7 @@ export default function WeeklyStats({
               </StatsCard>
             </Link>
           )}
-          <Link to="/matchs">
+          <Link to="/matches">
             <StatsCard
               onClick={() =>
                 dispatch({
