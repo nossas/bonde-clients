@@ -17,7 +17,7 @@ const MATCHES = gql`
     relationships: rede_relationships(
       limit: $rows
       offset: $offset
-      order_by: { created_at: asc }
+      order_by: { created_at: desc }
       where: {
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
@@ -99,9 +99,6 @@ const FetchMatches = ({ community, ...props }: any) => {
     query: `%${query || ""}%`,
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
   };
 
   return (

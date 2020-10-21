@@ -12,13 +12,12 @@ const MATCHES = gql`
     $state: String_comparison_exp
     $agent: bigint_comparison_exp
     $query: String
-    $order_by: [solidarity_matches_order_by!]
     $created_at: timestamp_comparison_exp
   ) {
     relationships: solidarity_matches(
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: desc }
       where: {
         created_at: $created_at
         status: $status
