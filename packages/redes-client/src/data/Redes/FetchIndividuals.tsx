@@ -69,7 +69,7 @@ const FetchIndividuals = (props: any = {}) => {
       _eq: availability,
     },
     state: {
-      _eq: state,
+      _eq: typeof state === "string" ? state.toUpperCase() : state,
     },
     query: `%${query || ""}%`,
     redeGroupId: {
