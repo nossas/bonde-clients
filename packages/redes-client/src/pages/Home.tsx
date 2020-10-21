@@ -1,10 +1,11 @@
 import React from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
+import { useSession } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { WeeklyStats } from "../components";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
-import { useFilter } from "../services/FilterProvider";
+import { useFilterDispatch } from "../services/FilterProvider";
 import { WeeklyStatsData } from "../types";
 
 const Grid = styled.div`
@@ -59,8 +60,9 @@ export default function Home({
   data: { FetchWeeklyStats, FilterOptions },
   community,
 }: Props): React.ReactElement {
-  const [, dispatch] = useFilter();
+  const dispatch = useFilterDispatch();
   const { groups } = useCommunityExtra();
+  const { user } = useSession();
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
 
@@ -104,7 +106,21 @@ export default function Home({
             text="Fazer match de Voluntária"
           />
         </Link>
-        <Link to="/matchs" style={{ textDecoration: "none" }}>
+        <Link
+          to="/matches"
+          style={{ textDecoration: "none" }}
+          onClick={() =>
+            dispatch({
+              type: "relationships",
+              value: {
+                agent: {
+                  label: `${user.firstName} ${user.lastName || ""}`,
+                  value: user.id,
+                },
+              },
+            })
+          }
+        >
           <Shortcut
             icon={<Icon name="Open" size="default" />}
             text="Ver meus matchs"

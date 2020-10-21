@@ -106,10 +106,7 @@ export default function Popups({
                 dispatch({
                   type: "relationships",
                   value: {
-                    state: {
-                      value: match.recipient.state.toLowerCase(),
-                      label: match.recipient.state.toUpperCase(),
-                    },
+                    query: `${match.volunteer.email}`,
                     agent: {
                       label: `${user.firstName} ${user.lastName || ""}`,
                       value: user.id,
