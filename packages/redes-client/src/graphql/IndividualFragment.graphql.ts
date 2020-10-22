@@ -50,7 +50,6 @@ export const REDE_INDIVIDUAL = gql`
     phone
     zipcode
     address
-    city
     state
     coordinates
     availability
@@ -61,5 +60,6 @@ export const REDE_INDIVIDUAL = gql`
     group {
       isVolunteer: is_volunteer
     }
+    extras
   }
 `;

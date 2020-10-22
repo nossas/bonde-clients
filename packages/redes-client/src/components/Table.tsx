@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { Pagination, Icon } from "bonde-components";
 // import Pagination from "./Pagination";
 import theme from "./theme";
+import { Columns } from "../types";
 
 const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   font-family: ${(props) => props.theme.fontFamily};
@@ -116,16 +117,7 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
 `;
 
 type Props = {
-  columns: Array<{
-    Header: string;
-    accessor: string;
-    className?: string;
-    columns?: Array<{
-      Header: string;
-      accessor: string;
-      className: string;
-    }>;
-  }>;
+  columns: Array<Columns>;
   data: Array<any>;
   backgroundColor: string;
   sticky?: "end" | "start";
