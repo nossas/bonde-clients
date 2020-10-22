@@ -54,11 +54,13 @@ services:
       traefik.port: '80'
 
   accounts:
-    build: packages/accounts-client
+    # build: packages/accounts-client
+    image: nossas/bonde:feature-upload-image
+    command: yarn pnpm m run start --filter accounts-client
     ports:
-      - "4000:4000"
+      - "5000:5000"
     labels:
       traefik.frontend.rule: Host:accounts.bonde.devel
       traefik.enable: 'true'
       traefik.alias: accounts
-      traefik.port: '4000'
+      traefik.port: '5000'

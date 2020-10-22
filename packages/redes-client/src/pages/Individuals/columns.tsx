@@ -55,7 +55,7 @@ const columns = (
       // hide if is a volunteer or not from mapa
       className:
         typeof isVolunteerSelected === "undefined" &&
-        communityId == MAPA_DO_ACOLHIMENTO_COMMUNITY
+        communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? ""
           : isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? "hide"
@@ -93,7 +93,7 @@ const columns = (
       // hide if is a volunteer or not from mapa
       className:
         typeof isVolunteerSelected === "undefined" &&
-        communityId == MAPA_DO_ACOLHIMENTO_COMMUNITY
+        communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? ""
           : isVolunteerSelected || communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? "hide"
@@ -143,7 +143,7 @@ const columns = (
       // hide if is a recipient or not from mapa
       className:
         typeof isVolunteerSelected === "undefined" &&
-        communityId == MAPA_DO_ACOLHIMENTO_COMMUNITY
+        communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? ""
           : !isVolunteerSelected ||
             communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
@@ -159,7 +159,7 @@ const columns = (
       // hide if is a recipient or not from mapa
       className:
         typeof isVolunteerSelected === "undefined" &&
-        communityId == MAPA_DO_ACOLHIMENTO_COMMUNITY
+        communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? ""
           : !isVolunteerSelected ||
             communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY
@@ -175,7 +175,7 @@ const columns = (
       /// hide if is a recipient or not from mapa
       className:
         typeof isVolunteerSelected === "undefined" &&
-        communityId == MAPA_DO_ACOLHIMENTO_COMMUNITY
+        communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
           ? ""
           : !isVolunteerSelected ||
             communityId !== MAPA_DO_ACOLHIMENTO_COMMUNITY

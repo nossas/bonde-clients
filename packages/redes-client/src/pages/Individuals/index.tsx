@@ -68,7 +68,7 @@ export default function Individuals({
           label: groups.find((group) => !group.isVolunteer)?.name || "",
         },
       });
-  }, [state.selectedGroup]);
+  }, [state.selectedGroup, dispatch, groups]);
 
   const save = async (values: any) => {
     dispatch({ type: "individuals", value: values });
