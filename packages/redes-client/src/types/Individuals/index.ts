@@ -62,6 +62,7 @@ export type Individual = {
   externalId?: number;
   ticketId?: number;
   registrationNumber: string;
+  extras?: Record<string, any>;
 };
 
 export type MapaGroupsData = {
