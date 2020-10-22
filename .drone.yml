@@ -86,6 +86,45 @@ pipeline:
       status: success
       event: tag
 
+  # publish-accounts:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/accounts-client/Dockerfile
+  #   context: packages/accounts-client/
+  #   group: clients
+  #   tags:
+  #     - accounts
+  #   when:
+  #     status: success
+  #     event: [push]
+
+  # publish-canary:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/canary-client/Dockerfile
+  #   context: packages/canary-client/
+  #   group: clients
+  #   tags:
+  #     - canary
+  #   when:
+  #     status: success
+  #     event: [push]
+
+  # publish-redes:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/redes-client/Dockerfile
+  #   context: packages/redes-client/
+  #   group: clients
+  #   tags:
+  #     - redes
+  #   when:
+  #     status: success
+  #     event: [push]
+
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
@@ -124,3 +163,42 @@ pipeline:
     when:
       status: success
       event: [push]
+
+  # publish-accounts-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/accounts-client/Dockerfile.production
+  #   context: packages/accounts-client/
+  #   group: clients
+  #   tags:
+  #     - accounts-prod
+  #   when:
+  #     status: success
+  #     event: tag
+
+  # publish-canary-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/canary-client/Dockerfile.production
+  #   context: packages/canary-client/
+  #   group: clients
+  #   tags:
+  #     - canary-prod
+  #   when:
+  #     status: success
+  #     event: tag
+
+  # publish-redes-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/redes-client/Dockerfile.production
+  #   context: packages/redes-client/
+  #   group: clients
+  #   tags:
+  #     - redes-prod
+  #   when:
+  #     status: success
+  #     event: tag
