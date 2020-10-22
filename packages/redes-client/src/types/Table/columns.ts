@@ -2,12 +2,13 @@ export interface Columns {
   accessor?: string
   Header: any;
   Cell?: (arg0: any) => string | JSX.Element | null;
-  width?: number;
   className?: string;
   bold?: boolean;
   show?: boolean;
   Column?: any;
   columns?: Array<any>
+  minWidth?: number
+  width?: number
 }
 
 export type valueString = {
