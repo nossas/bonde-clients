@@ -42,11 +42,11 @@ const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
   font-weight: ${(props) => (props.bold ? "bold" : "normal")};
   line-height: 22px;
   color: ${(props) => props.theme.commons.dark};
-  text-align: center;
   letter-spacing: normal;
 
   margin: 0;
   padding: 0.5rem;
+  padding-left: 20px;
   border-bottom: 1px solid #e5e5e5;
 
   /* The secret sauce */

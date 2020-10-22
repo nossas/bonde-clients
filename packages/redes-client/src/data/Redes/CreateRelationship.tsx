@@ -1,12 +1,17 @@
 import { gql } from "bonde-core-tools";
 
 export default gql`
-  mutation createRelationship($recipientId: Int!, $volunteerId: Int!) {
+  mutation createRelationship(
+    $recipientId: Int!
+    $volunteerId: Int!
+    $agentId: Int!
+  ) {
     insert_rede_relationships(
       objects: {
         recipient_id: $recipientId
         volunteer_id: $volunteerId
         status: "encaminhamento_realizado"
+        user_id: $agentId
       }
     ) {
       returning {

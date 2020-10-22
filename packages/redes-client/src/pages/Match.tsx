@@ -32,6 +32,15 @@ const WrapButton = styled.div`
   }
 `;
 
+const Wrap = styled.div`
+  & > ${Header.H4} {
+    margin: 15px 0 10px;
+  }
+  & > ${Text} {
+    margin-top: 0;
+  }
+`;
+
 export default function Match({
   data: { FetchIndividualsForMatch, ColumnsMatch, CreateRelationship },
   groups,
@@ -100,7 +109,7 @@ export default function Match({
     <>
       <WrapButton>
         <Button secondary align="left" onClick={goBack}>
-          {"< fazer match"}
+          {"< voltar"}
         </Button>
       </WrapButton>
       <FetchIndividualsForMatch {...linkState}>
@@ -114,7 +123,7 @@ export default function Match({
             pageSize: state.rows,
           };
           return (
-            <>
+            <Wrap>
               <Header.H4>Match Realizado!</Header.H4>
               <Text>
                 {count} {matchGroup} próximas de {firstName}
@@ -125,7 +134,7 @@ export default function Match({
                 sticky="end"
                 pagination={pagination}
               />
-            </>
+            </Wrap>
           );
         }}
       </FetchIndividualsForMatch>
