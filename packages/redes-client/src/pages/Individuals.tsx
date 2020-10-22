@@ -129,6 +129,21 @@ export default function Individuals({
             pageSize: state.rows,
           };
 
+          const originalColumns = ColumnsIndividuals(FilterOptions, isVolunteerSelected)
+          const dynamicColumns = {
+            Header: "Extras",
+            columns: data[0].extras ? Object.keys(data[0].extras).map((e: any) => ({
+              accessor: `extras.${e}`,
+              Header: e,
+              // eslint-disable-next-line react/display-name
+              Cell: (props: any): JSX.Element | string => {
+                console.log(props)
+                return <span>{props.value || "-"}</span>
+              },
+            })) : []
+          }
+          const columnsWithDynamiContent = [...originalColumns.slice(0, originalColumns.length - 1), dynamicColumns, ...originalColumns.slice(originalColumns.length - 1)]
+        
           return count < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
@@ -148,7 +163,7 @@ export default function Individuals({
                       )
                     : data
                 }
-                columns={ColumnsIndividuals(FilterOptions, isVolunteerSelected)}
+                columns={columnsWithDynamiContent}
                 sticky="end"
                 pagination={pagination}
               />

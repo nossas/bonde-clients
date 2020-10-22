@@ -1,5 +1,5 @@
 export interface Columns {
-  accessor: string;
+  accessor?: string
   Header: any;
   Cell?: (arg0: any) => string | JSX.Element | null;
   width?: number;
@@ -7,6 +7,7 @@ export interface Columns {
   bold?: boolean;
   show?: boolean;
   Column?: any;
+  columns?: Array<any>
 }
 
 export type valueString = {
