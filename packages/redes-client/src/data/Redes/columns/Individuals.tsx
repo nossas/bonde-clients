@@ -44,6 +44,13 @@ const columns = (
     ),
   },
   {
+    accessor: "state",
+    Header: "Estado",
+    Cell: ({ value }: { value: string }): JSX.Element | string => (
+      <span>{value || "-"}</span>
+    ),
+  },
+  {
     accessor: "userStatus",
     Header: "Status Inscrição",
     Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
