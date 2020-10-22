@@ -15,11 +15,18 @@ const WrapLoading = styled.div`
   height: 300px;
 `;
 
+const WrapButton = styled.div`
+  & button {
+    padding-left: 0;
+  }
+`;
+
 const getVariables = (
   match: {
     recipient: Individual;
     volunteer: Individual;
   },
+  userId: number,
   communityId?: number
 ) => {
   if (communityId === 40) {
@@ -31,6 +38,7 @@ const getVariables = (
   return {
     recipientId: match.recipient.id,
     volunteerId: match.volunteer.id,
+    agentId: userId,
   };
 };
 
@@ -57,7 +65,7 @@ export default function Popups({
   const handleClick = async () => {
     try {
       const { data } = await createRelationship({
-        variables: getVariables(match, community?.id),
+        variables: getVariables(match, user.id, community?.id),
       });
       return setData(data);
     } catch (e) {
@@ -69,16 +77,18 @@ export default function Popups({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={() => setModal(false)}>
+    <Modal width={"400px"} isOpen={isOpen} onClose={() => setModal(false)}>
       {isOpen && !error && !data && !loading && (
         <Default
           title="Confirma?"
           text={`${match.recipient.firstName} será encaminhada para ${match.volunteer.firstName}.`}
           MainBtn={<Button onClick={handleClick}>Confirmar</Button>}
           SecondaryBtn={
-            <Button onClick={() => setModal(false)} secondary>
-              Voltar
-            </Button>
+            <WrapButton>
+              <Button align="left" onClick={() => setModal(false)} secondary>
+                Voltar
+              </Button>
+            </WrapButton>
           }
         />
       )}
@@ -100,24 +110,26 @@ export default function Popups({
             </a>
           }
           SecondaryBtn={
-            <Link
-              to={"/matches"}
-              onClick={() =>
-                dispatch({
-                  type: "relationships",
-                  value: {
-                    query: `${match.volunteer.email}`,
-                    agent: {
-                      label: `${user.firstName} ${user.lastName || ""}`,
-                      value: user.id,
+            <WrapButton>
+              <Link
+                to={"/matches"}
+                onClick={() =>
+                  dispatch({
+                    type: "relationships",
+                    value: {
+                      query: `${match.volunteer.email}`,
+                      agent: {
+                        label: `${user.firstName} ${user.lastName || ""}`,
+                        value: user.id,
+                      },
                     },
-                  },
-                })
-              }
-              style={{ textDecoration: "none" }}
-            >
-              <Button secondary>Ver relação</Button>
-            </Link>
+                  })
+                }
+                style={{ textDecoration: "none" }}
+              >
+                <Button secondary>Ver relação</Button>
+              </Link>
+            </WrapButton>
           }
         />
       )}
