@@ -2,9 +2,7 @@
   "name": "canary-client",
   "scripts": {
     "start": "react-scripts start",
-    "build": "sh -ac '. .env.${REACT_APP_ENVIRONMENT}; react-scripts build'",
-    "build:staging": "REACT_APP_ENVIRONMENT=staging npm run build",
-    "build:production": "REACT_APP_ENVIRONMENT=production npm run build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint . --fix --ext js,ts,tsx"
   },

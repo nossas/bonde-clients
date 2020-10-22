@@ -2,14 +2,73 @@ workspace:
   base: /code
 
 pipeline:
+
+  build:
+    image: node:14-alpine
+    environment:
+      - REACT_APP_ENVIRONMENT=staging
+      - REACT_APP_DOMAIN_ACCOUNTS=https://accounts.staging.bonde.org
+      - REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
+      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
+      - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.staging.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.staging.bonde.org/v1/graphql
+      - REACT_APP_HASURA_API_URL=https://api-graphql.staging.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
+      - REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
+      - REACT_APP_AWS_BUCKET=bonde-assets-staging
+      - REACT_APP_LOGIN_URL=https://accounts.staging.bonde.org/login
+      - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
+      - REACT_APP_UPLOADS_URL=http://api-rest.staging.bonde.org/uploads
+      - REACT_APP_ZENDESK_ORGANIZATIONS='{"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}'
+    commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - pnpm i
+      - pnpm m run build
+    group: build
+    when:
+      status: success
+      event: [push]
+
+  production-build:
+    image: node:14-alpine
+    environment:
+      - REACT_APP_ENVIRONMENT=production
+      - REACT_APP_DOMAIN_ACCOUNTS=https://accounts.bonde.org
+      - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
+      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
+      - REACT_APP_DOMAIN_PUBLIC=bonde.org
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_HASURA_API_URL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
+      - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
+      - REACT_APP_AWS_BUCKET=bonde-assets
+      - REACT_APP_LOGIN_URL=https://accounts.bonde.org/login
+      - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
+      - REACT_APP_UPLOADS_URL=http://api-rest.bonde.org/uploads
+      - REACT_APP_ZENDESK_ORGANIZATIONS='{"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}'
+    commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - pnpm i
+      - pnpm m run build
+    group: build
+    when:
+      status: success
+      event: tag
+
   publish-staging-build:
     image: plugins/docker
     repo: nossas/bonde
     dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
-    group: builder
+    group: publish
     tags:
-      - builder
+      - ${DRONE_BRANCH/\//-}
     when:
       status: success
       event: [push]
@@ -17,60 +76,61 @@ pipeline:
   publish-production-build:
     image: plugins/docker
     repo: nossas/bonde
-    dockerfile: Dockerfile.production
+    dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
-    group: builder
+    group: publish
     tags:
-      - builder-prod
+      - ${DRONE_TAG##v}
+      - latest
     when:
       status: success
       event: tag
 
-  publish-accounts:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/accounts-client/Dockerfile
-    context: packages/accounts-client/
-    group: clients
-    tags:
-      - accounts
-    when:
-      status: success
-      event: [push]
+  # publish-accounts:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/accounts-client/Dockerfile
+  #   context: packages/accounts-client/
+  #   group: clients
+  #   tags:
+  #     - accounts
+  #   when:
+  #     status: success
+  #     event: [push]
 
-  publish-canary:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/canary-client/Dockerfile
-    context: packages/canary-client/
-    group: clients
-    tags:
-      - canary
-    when:
-      status: success
-      event: [push]
+  # publish-canary:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/canary-client/Dockerfile
+  #   context: packages/canary-client/
+  #   group: clients
+  #   tags:
+  #     - canary
+  #   when:
+  #     status: success
+  #     event: [push]
 
-  publish-redes:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/redes-client/Dockerfile
-    context: packages/redes-client/
-    group: clients
-    tags:
-      - redes
-    when:
-      status: success
-      event: [push]
+  # publish-redes:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/redes-client/Dockerfile
+  #   context: packages/redes-client/
+  #   group: clients
+  #   tags:
+  #     - redes
+  #   when:
+  #     status: success
+  #     event: [push]
 
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/accounts
     group: deploying
-    docker_image: nossas/bonde:accounts
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -83,7 +143,7 @@ pipeline:
     url: http://cluster.bonde.org
     service: clients/canary
     group: deploying
-    docker_image: nossas/bonde:canary
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -96,7 +156,7 @@ pipeline:
     url: http://cluster.bonde.org
     service: clients/redes
     group: deploying
-    docker_image: nossas/bonde:redes
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [ rancher_access_key, rancher_secret_key ]
@@ -104,41 +164,41 @@ pipeline:
       status: success
       event: [push]
 
-  publish-accounts-prod:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/accounts-client/Dockerfile.production
-    context: packages/accounts-client/
-    group: clients
-    tags:
-      - accounts-prod
-    when:
-      status: success
-      event: tag
+  # publish-accounts-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/accounts-client/Dockerfile.production
+  #   context: packages/accounts-client/
+  #   group: clients
+  #   tags:
+  #     - accounts-prod
+  #   when:
+  #     status: success
+  #     event: tag
 
-  publish-canary-prod:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/canary-client/Dockerfile.production
-    context: packages/canary-client/
-    group: clients
-    tags:
-      - canary-prod
-    when:
-      status: success
-      event: tag
+  # publish-canary-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/canary-client/Dockerfile.production
+  #   context: packages/canary-client/
+  #   group: clients
+  #   tags:
+  #     - canary-prod
+  #   when:
+  #     status: success
+  #     event: tag
 
-  publish-redes-prod:
-    image: plugins/docker
-    repo: nossas/bonde
-    secrets: [ docker_username, docker_password ]
-    dockerfile: packages/redes-client/Dockerfile.production
-    context: packages/redes-client/
-    group: clients
-    tags:
-      - redes-prod
-    when:
-      status: success
-      event: tag
+  # publish-redes-prod:
+  #   image: plugins/docker
+  #   repo: nossas/bonde
+  #   secrets: [ docker_username, docker_password ]
+  #   dockerfile: packages/redes-client/Dockerfile.production
+  #   context: packages/redes-client/
+  #   group: clients
+  #   tags:
+  #     - redes-prod
+  #   when:
+  #     status: success
+  #     event: tag
