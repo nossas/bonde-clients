@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, useBlockLayout } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Pagination, Icon } from "bonde-components";
@@ -36,14 +36,13 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
 `;
 
 const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
-  min-width: 300px;
-
   font-family: ${(props) => props.theme.fontFamily};
   font-size: 16px;
   font-weight: ${(props) => (props.bold ? "bold" : "normal")};
   line-height: 22px;
   color: ${(props) => props.theme.commons.dark};
   letter-spacing: normal;
+  word-break: break-all;
 
   margin: 0;
   padding: 0.5rem;
@@ -138,6 +137,14 @@ function Table({
   pagination,
 }: Props): React.ReactElement {
   // Use the state and functions returned from useTable to build your UI
+  const defaultColumn = React.useMemo(
+    () => ({
+      minWidth: 30,
+      width: 200,
+      maxWidth: 400,
+    }),
+    []
+  )
   const {
     getTableProps,
     getTableBodyProps,
@@ -148,8 +155,10 @@ function Table({
     {
       columns,
       data,
+      defaultColumn
     },
-    useSortBy
+    useSortBy,
+    useBlockLayout
   );
 
   // Render the UI for your table

@@ -132,6 +132,11 @@ export default function Individuals({
           const originalColumns = ColumnsIndividuals(FilterOptions, isVolunteerSelected)
           const dynamicColumns = {
             Header: "Extras",
+            style: {
+              "justifyContent": "center",
+              "display": "flex",
+              "borderLeft": "1px solid #e5e5e5",
+            },
             columns: data[0].extras ? Object.keys(data[0].extras).map((e: any) => ({
               accessor: `extras.${e}`,
               Header: e,
