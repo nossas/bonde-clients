@@ -25,13 +25,7 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   /* Sticky */
   position: sticky !important;
   top: 0;
-  z-index: 1;
   background-color: ${(props) => props.backgroundColor};
-
-  &:last-child.sticky,
-  &:first-child.sticky {
-    z-index: 2;
-  }
 
   &.hide {
     display: none;
@@ -46,6 +40,7 @@ const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
   color: ${(props) => props.theme.commons.dark};
   letter-spacing: normal;
   word-break: break-word;
+  min-height: 60px;
 
   margin: 0;
   border-bottom: 1px solid #e5e5e5;
