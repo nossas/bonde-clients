@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, useFlexLayout } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Pagination, Icon } from "bonde-components";
@@ -15,9 +15,12 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   text-transform: uppercase;
   color: #a4a4a4;
   text-align: left;
-  padding: 10px 0 10px 20px;
   border-bottom: 1px solid #e5e5e5;
   cursor: pointer;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
 
   /* Sticky */
   position: sticky !important;
@@ -42,12 +45,13 @@ const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
   line-height: 22px;
   color: ${(props) => props.theme.commons.dark};
   letter-spacing: normal;
-  word-break: break-all;
+  word-break: break-word;
 
   margin: 0;
-  padding: 0.5rem;
-  padding-left: 20px;
   border-bottom: 1px solid #e5e5e5;
+
+  display: flex;
+  align-items: center;
 
   &.hide {
     display: none;
@@ -60,29 +64,36 @@ const StyledTr = styled.tr`
       border-bottom: 0;
     }
   }
+  border-bottom: 1px solid #e5e5e5;
 `;
 
 const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
-  width: 100%;
   border-spacing: 0;
-  max-height: 700px;
-  overflow: auto;
-  display: inherit;
   border: 1px solid #e5e5e5;
   background-color: ${(props) => props.backgroundColor};
+  width: 100%;
+
+  thead {
+    /* These styles are required for a scrollable body to align with the header properly */
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  tbody {
+    /* These styles are required for a scrollable table body */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 250px;
+  }
 
   th,
   td {
     margin: 0;
-    padding: 0.5rem;
+    padding-left: 20px;
 
-    /* The secret sauce */
-    /* Each cell should grow equally */
-    width: 1%;
-    /* But "collapsed" cells should be as small as possible */
-    &.collapse {
-      width: 0.0000000001%;
-    }
+    /* In this example we use an absolutely position resizer,
+      so this is required. */
+    position: relative;
 
     :last-child {
       border-right: 0;
@@ -103,6 +114,7 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
       tr {
         td:last-child {
           border-left: 1px solid #e5e5e5;
+          padding-left: 0;
         }
       }
     `}
@@ -134,15 +146,10 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
 `;
 
 const Main = styled.div`
+  /* These styles are suggested for the table fill all available space in its containing element */
   display: block;
-  max-width: 100%;
-`
-
-const WrapTable = styled.div`
-  display: block;
-  max-width: 100%;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  /* These styles are required for a horizontaly scrollable table overflow */
+  overflow: auto;
 `
 
 type Props = {
@@ -166,6 +173,16 @@ function Table({
   sticky,
   pagination,
 }: Props): React.ReactElement {
+  const defaultColumn = React.useMemo(
+    () => ({
+      // When using the useFlexLayout:
+      minWidth: 30, // minWidth is only used as a limit for resizing
+      width: 150, // width is used for both the flex-basis and flex-grow
+      maxWidth: 300, // maxWidth is only used as a limit for resizing
+    }),
+    []
+  )
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -176,14 +193,15 @@ function Table({
     {
       columns,
       data,
+      defaultColumn
     },
     useSortBy,
+    useFlexLayout,
   );
 
   // Render the UI for your table
   return (
     <Main>
-      <WrapTable>
         <StyledTable
           sticky={sticky as string}
           backgroundColor={backgroundColor}
@@ -227,7 +245,7 @@ function Table({
               </StyledTr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()} style={{ overflow: "auto" }}>
+        <tbody {...getTableBodyProps()}>
             {rows.map((row) => {
               prepareRow(row);
               return (
@@ -235,7 +253,7 @@ function Table({
                   {row.cells.map((cell: any) => (
                     <StyledTd
                       {...cell.getCellProps({
-                        className: cell.column.collapse ? 'collapse ' : '' + cell.column.className || "",
+                        className: cell.column.className,
                         style: cell.column.style,
                         bold: cell.column.bold,
                       })}
@@ -248,8 +266,7 @@ function Table({
               );
             })}
           </tbody>
-        </StyledTable>
-      </WrapTable>
+      </StyledTable>
       {pagination && (
         <Pagination
           goToPage={pagination.goToPage}
