@@ -35,11 +35,9 @@ const WrapInput = styled.div`
 
   & .icons {
     position: absolute;
-    top: 13px;
-    display: grid;
-    width: 95%;
-    grid-template-columns: auto auto;
-    justify-content: end;
+    right: 10px;
+    top: 15px;
+    display: flex;
     & button {
       border: none;
       padding: 0;
@@ -99,12 +97,14 @@ const Filters = ({
                     name="query"
                   />
                   <div className="icons">
-                    <Button
-                      dark
-                      onClick={() => form.change("query", undefined)}
-                    >
-                      <Icon name="Close" size="xs" />
-                    </Button>
+                    {initialValues.query && (
+                      <Button
+                        dark
+                        onClick={() => form.change("query", undefined)}
+                      >
+                        <Icon name="Close" size="xs" />
+                      </Button>
+                    )}
                     <Button dark>
                       <Icon name="Search" size="small" />
                     </Button>
