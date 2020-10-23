@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useMutation } from "bonde-core-tools";
-import { Text } from "bonde-components";
+import { Icon, CleanButton } from "bonde-components";
 
 const Select = styled.select`
   text-transform: capitalize;
@@ -9,10 +9,11 @@ const Select = styled.select`
   width: 100%;
   background-color: #fff;
   border: unset;
-  border-bottom: 1px solid #ee0099;
   font-size: 16px;
   font-family: inherit;
   color: #4a4a4a;
+  appearance: none;
+  cursor: pointer;
   &:active,
   &:hover {
     box-shadow: 0 0 4px rgb(204, 204, 204);
@@ -69,7 +70,7 @@ const UpdateStatus = ({
     });
   };
   return (
-    <Text color="#000">
+    <>
       <Select onChange={handleOnChange} value={selected}>
         {options.map((i) => (
           <Option key={`status-options-${i}`} value={i.value.toString()}>
@@ -77,7 +78,8 @@ const UpdateStatus = ({
           </Option>
         ))}
       </Select>
-    </Text>
+      <CleanButton style={{ position: "absolute", right: "10px", top: "12px" }}><Icon size="small" name="ArrowDown" /></CleanButton>
+    </>
   );
 };
 

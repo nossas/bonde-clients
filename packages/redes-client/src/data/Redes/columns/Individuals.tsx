@@ -42,6 +42,7 @@ const columns = (
       {
         accessor: "address",
         Header: "Endereço",
+        style: { padding: "10px 0 0 20px" },
         Cell: ({ value }: { value: string }): JSX.Element | string => (
           <span>{value || "-"}</span>
         ),
@@ -57,6 +58,7 @@ const columns = (
       {
         accessor: "userStatus",
         Header: "Status Inscrição",
+        width: 200,
         Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
           value && row ? (
             <UpdateStatus
@@ -72,6 +74,7 @@ const columns = (
       {
         accessor: "availability",
         Header: "Disponibilidade",
+        width: 200,
         Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
           value ? (
             <UpdateStatus
