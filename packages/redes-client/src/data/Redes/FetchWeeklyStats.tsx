@@ -23,7 +23,7 @@ const WEEKLY_DATA = gql`
     encaminhamentosRealizados: rede_relationships_aggregate(
       where: {
         status: { _eq: "encaminhamento_realizado" }
-        updated_at: $lastWeek
+        created_at: $lastWeek
         recipient: { group: { community_id: $context } }
       }
     ) {
