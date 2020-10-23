@@ -47,18 +47,12 @@ export default function Relations({
     return dispatch({ type: "page", value: 0 });
   };
 
-  const reset = () =>
-    dispatch({
-      type: "reset",
-    });
-
   return (
     <>
       <Filters
         save={save}
         options={FilterOptions}
         initialValues={state.relationships}
-        reset={reset}
         searchPlaceholder="Buscar nome, email..."
         search
         state

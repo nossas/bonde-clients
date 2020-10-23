@@ -54,7 +54,6 @@ type FilterProps = {
   save: (e: any) => Promise<any>;
   onGroupChange: (e: any) => void;
   options: Options;
-  reset: () => void;
   search?: boolean;
   groups?: boolean;
   userStatus?: boolean;
@@ -69,7 +68,6 @@ const Filters = ({
   save,
   initialValues,
   options,
-  reset,
   searchPlaceholder,
   onGroupChange,
   ...props
@@ -166,18 +164,6 @@ const Filters = ({
                   isClearable={true}
                 />
               )}
-              <div style={{ maxWidth: "200px" }}>
-                <Button
-                  dark
-                  onClick={() => {
-                    reset();
-                    form.reset();
-                  }}
-                >
-                  Limpar
-                  <Icon name="Close" size="xs" />
-                </Button>
-              </div>
             </>
           );
         }}
