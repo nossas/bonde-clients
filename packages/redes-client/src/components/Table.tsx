@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { useTable, useSortBy, useBlockLayout } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Pagination, Icon } from "bonde-components";
@@ -49,14 +49,6 @@ const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
   padding-left: 20px;
   border-bottom: 1px solid #e5e5e5;
 
-  /* The secret sauce */
-  /* Each cell should grow equally */
-  width: 1%;
-  /* But "collapsed" cells should be as small as possible */
-  &.collapse {
-    width: 0.0000000001%;
-  }
-
   &.hide {
     display: none;
   }
@@ -71,13 +63,31 @@ const StyledTr = styled.tr`
 `;
 
 const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
+  width: 100%;
+  border-spacing: 0;
   max-height: 700px;
   overflow: auto;
   display: inherit;
-  width: 100%;
   border: 1px solid #e5e5e5;
-  border-spacing: 0;
   background-color: ${(props) => props.backgroundColor};
+
+  th,
+  td {
+    margin: 0;
+    padding: 0.5rem;
+
+    /* The secret sauce */
+    /* Each cell should grow equally */
+    width: 1%;
+    /* But "collapsed" cells should be as small as possible */
+    &.collapse {
+      width: 0.0000000001%;
+    }
+
+    :last-child {
+      border-right: 0;
+    }
+  }
 
   ${({ sticky }) =>
     sticky === "end" &&
@@ -85,8 +95,12 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
       .sticky {
         right: 0;
       }
+      tr:nth-child(2) {
+        th:last-child {
+          border-left: 1px solid #e5e5e5;
+        }
+      }
       tr {
-        th:last-child,
         td:last-child {
           border-left: 1px solid #e5e5e5;
         }
@@ -99,9 +113,13 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
       .sticky {
         left: 0;
       }
+      tr:nth-child(2) {
+        th:last-child {
+          border-right: 1px solid #e5e5e5;
+        }
+      }
       tr {
-        th:first-child,
-        td:first-child {
+        td:last-child {
           border-right: 1px solid #e5e5e5;
         }
       }
@@ -114,6 +132,18 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
     background-color: ${(props) => props.backgroundColor};
   }
 `;
+
+const Main = styled.div`
+  display: block;
+  max-width: 100%;
+`
+
+const WrapTable = styled.div`
+  display: block;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+`
 
 type Props = {
   columns: Array<Columns>;
@@ -136,15 +166,6 @@ function Table({
   sticky,
   pagination,
 }: Props): React.ReactElement {
-  // Use the state and functions returned from useTable to build your UI
-  const defaultColumn = React.useMemo(
-    () => ({
-      minWidth: 30,
-      width: 200,
-      maxWidth: 400,
-    }),
-    []
-  )
   const {
     getTableProps,
     getTableBodyProps,
@@ -155,80 +176,80 @@ function Table({
     {
       columns,
       data,
-      defaultColumn
     },
     useSortBy,
-    useBlockLayout
   );
 
   // Render the UI for your table
   return (
-    <>
-      <StyledTable
-        sticky={sticky as string}
-        backgroundColor={backgroundColor}
-        {...getTableProps()}
-      >
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <StyledTr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: any) => (
-                <StyledTh
-                  {...column.getHeaderProps({
-                    ...column.getSortByToggleProps(),
-                    className: column.className,
-                    style: column.style,
-                  })}
-                  theme={theme}
-                  backgroundColor={backgroundColor}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingRight: "5px",
-                    }}
-                  >
-                    {column.render("Header")}
-                    <span>
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <Icon name="ArrowDown" size="small" />
-                        ) : (
-                          <Icon name="ArrowUp" size="small" />
-                        )
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                  </div>
-                </StyledTh>
-              ))}
-            </StyledTr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()} style={{ overflow: "auto" }}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <StyledTr {...row.getRowProps()}>
-                {row.cells.map((cell: any) => (
-                  <StyledTd
-                    {...cell.getCellProps({
-                      className: cell.column.className,
-                      style: cell.column.style,
-                      bold: cell.column.bold,
+    <Main>
+      <WrapTable>
+        <StyledTable
+          sticky={sticky as string}
+          backgroundColor={backgroundColor}
+          {...getTableProps()}
+        >
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <StyledTr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column: any) => (
+                  <StyledTh
+                    {...column.getHeaderProps({
+                      ...column.getSortByToggleProps(),
+                      className: column.collapse ? 'collapse ' : '' + column.className || "",
+                      style: column.style,
                     })}
                     theme={theme}
+                    backgroundColor={backgroundColor}
                   >
-                    {cell.render("Cell")}
-                  </StyledTd>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        paddingRight: "5px",
+                      }}
+                    >
+                      {column.render("Header")}
+                      <span>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <Icon name="ArrowDown" size="small" />
+                          ) : (
+                            <Icon name="ArrowUp" size="small" />
+                          )
+                        ) : (
+                          ""
+                        )}
+                      </span>
+                    </div>
+                  </StyledTh>
                 ))}
               </StyledTr>
-            );
-          })}
-        </tbody>
-      </StyledTable>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()} style={{ overflow: "auto" }}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <StyledTr {...row.getRowProps()}>
+                  {row.cells.map((cell: any) => (
+                    <StyledTd
+                      {...cell.getCellProps({
+                        className: cell.column.collapse ? 'collapse ' : '' + cell.column.className || "",
+                        style: cell.column.style,
+                        bold: cell.column.bold,
+                      })}
+                      theme={theme}
+                    >
+                      {cell.render("Cell")}
+                    </StyledTd>
+                  ))}
+                </StyledTr>
+              );
+            })}
+          </tbody>
+        </StyledTable>
+      </WrapTable>
       {pagination && (
         <Pagination
           goToPage={pagination.goToPage}
@@ -238,7 +259,7 @@ function Table({
           totalPages={pagination.totalPages}
         />
       )}
-    </>
+    </Main>
   );
 }
 

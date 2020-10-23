@@ -9,6 +9,7 @@ export interface Columns {
   columns?: Array<any>
   minWidth?: number
   width?: number
+  collapse?: boolean
 }
 
 export type valueString = {
