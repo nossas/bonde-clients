@@ -50,6 +50,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
+      width: 50
     },
     {
       accessor: "address",
@@ -99,6 +100,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || 0}</span>
       ),
+      width: 50
     },
     {
       accessor: "encaminhamentosRealizados",
@@ -108,6 +110,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || 0}</span>
       ),
+      width: 50
     },
     {
       accessor: "atendimentosEmAndamento",
@@ -117,6 +120,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || 0}</span>
       ),
+      width: 50
     },
     {
       accessor: "atendimentosConcluidos",
@@ -126,6 +130,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || 0}</span>
       ),
+      width: 50
     },
     {
       accessor: "phone",
@@ -140,8 +145,8 @@ const columns = (
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "200px",
               justifyContent: "center",
+              width: "100%"
             }}
           >
             <Button
