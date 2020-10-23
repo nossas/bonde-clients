@@ -1,9 +1,18 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "bonde-components"
+import { useSession } from "bonde-core-tools"
+import { zendeskOrganizations } from "../../../services/utils"
 
-const BtnSearchMatch = ({ original }: { original: { email: string; userStatus: string; availability: string } }): React.ReactElement =>
-  <div
+const BtnSearchMatch = ({ original }: { original: { email: string; userStatus: string; availability: string; organizationId?: number } }): React.ReactElement => {
+  const { community } = useSession()
+  const isDisabled = community?.id === 40
+    ? original.organizationId === zendeskOrganizations["individual"]
+      ? original.availability !== "inscrita"
+      : original.availability !== "disponivel"
+    : original.userStatus !== "aprovada" ||
+    original.availability !== "disponível"
+  return (<div
     style={{
       display: "flex",
       justifyContent: "center",
@@ -22,14 +31,13 @@ const BtnSearchMatch = ({ original }: { original: { email: string; userStatus: s
         hover="#e2058a"
         focus="#b06c"
         secondary
-        disabled={
-          original.userStatus !== "aprovada" ||
-          original.availability !== "disponível"
-        }
+        disabled={isDisabled}
       >
         Buscar match
         </Button>
     </Link>
   </div>
+  )
+}
 
 export default BtnSearchMatch

@@ -1,9 +1,6 @@
 /* eslint-disable react/display-name */
 import React from "react";
-import { Button } from "bonde-components";
-import { Link } from "react-router-dom";
 import { Columns, valueString, Individual } from "../../../types";
-import { zendeskOrganizations } from "../../../services/utils";
 
 const columns = (
   _FilterOptions: {
@@ -35,6 +32,7 @@ const columns = (
       );
     },
     bold: true,
+    width: 250,
   },
   {
     accessor: "email",
@@ -42,6 +40,7 @@ const columns = (
     Cell: ({ value }: { value: string }): JSX.Element | string => (
       <span>{value || "-"}</span>
     ),
+    width: 200
   },
   {
     accessor: "tipoDeAcolhimento",
@@ -65,8 +64,16 @@ const columns = (
     Cell: ({ value }: { value: string }): JSX.Element | string => (
       <span>{value || "-"}</span>
     ),
+    width: 300
   },
   {
+      accessor: "state",
+      Header: "Estado",
+      Cell: ({ value }: { value: string }): JSX.Element | string => (
+        <span style={{ textTransform: "uppercase" }}>{value || "-"}</span>
+      ),
+    },
+    {
     accessor: "userStatus",
     className:
       typeof isVolunteerSelected === "undefined"
@@ -80,6 +87,7 @@ const columns = (
         {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
       </span>
     ),
+    width: 200,
   },
   {
     accessor: "relationshipStatus",
@@ -111,6 +119,7 @@ const columns = (
         {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
       </span>
     ),
+    width: 200,
   },
   {
     accessor: "createdAt",
@@ -142,6 +151,7 @@ const columns = (
     Cell: ({ value }: { value: string }): JSX.Element | string => (
       <span>{value || 0}</span>
     ),
+    width: 50
   },
   {
     accessor: "atendimentosEmAndamento",
@@ -156,6 +166,7 @@ const columns = (
     Cell: ({ value }: { value: string }): JSX.Element | string => (
       <span>{value || 0}</span>
     ),
+    width: 50
   },
   {
     accessor: "atendimentosConcluidos",
@@ -170,6 +181,7 @@ const columns = (
     Cell: ({ value }: { value: string }): JSX.Element | string => (
       <span>{value || 0}</span>
     ),
+    width: 80
   },
   {
     accessor: "whatsapp",
@@ -181,50 +193,7 @@ const columns = (
       value: string;
       row: { original: Individual };
     }): JSX.Element | string => <span>{value || original.phone || "-"}</span>,
-  },
-  {
-    accessor: "phone",
-    Header: "Ação",
-    className: "sticky",
-    Cell: ({
-      row: { original },
-    }: {
-      row: { original: Individual };
-    }): JSX.Element | null => {
-      return (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "200px",
-            justifyContent: "center",
-          }}
-        >
-          <Link
-            style={{ textDecoration: "none" }}
-            to={{
-              pathname: "/match",
-              search: `?email=${original.email}`,
-              state: { ...original },
-            }}
-          >
-            <Button
-              main="#ee0099"
-              hover="#e2058a"
-              focus="#bMAPA_DO_ACOLHIMENTO_COMMUNITY06c"
-              secondary
-              disabled={
-                original.organizationId === zendeskOrganizations["individual"]
-                  ? original.availability !== "inscrita"
-                  : original.availability !== "disponivel"
-              }
-            >
-              Buscar match
-            </Button>
-          </Link>
-        </div>
-      );
     },
-  },
 ];
 
 export default columns;

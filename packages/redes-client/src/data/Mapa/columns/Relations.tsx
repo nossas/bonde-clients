@@ -58,11 +58,17 @@ const columns = (
     },
     {
       accessor: "relationshipStatus",
-      Header: () => "Status",
-      Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        return value ? <span>{value}</span> : "-";
+      Header: "Status",
+      Cell: ({ value }: valueString): JSX.Element | string => {
+        return <span style={{ textTransform: "capitalize" }}>{value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}</span>
       },
-      bold: true,
+    },
+    {
+      accessor: "recipient.state",
+      Header: "Estado",
+      Cell: ({ value }: { value: string }): JSX.Element | string => (
+        <span style={{ textTransform: "uppercase" }}>{value || "-"}</span>
+      ),
     },
     {
       accessor: "volunteer.organizationId",
@@ -80,17 +86,6 @@ const columns = (
     {
       accessor: "createdAt",
       Header: "Data de criação",
-      Cell: ({ value }: valueString): string => {
-        if (!value) {
-          return "-";
-        }
-        const data = new Date(value);
-        return data.toLocaleDateString("pt-BR");
-      },
-    },
-    {
-      accessor: "updatedAt",
-      Header: "Última atualização",
       Cell: ({ value }: valueString): string => {
         if (!value) {
           return "-";

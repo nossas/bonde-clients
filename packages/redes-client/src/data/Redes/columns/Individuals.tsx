@@ -28,8 +28,8 @@ const columns = (
             "-"
           );
         },
-        width: 250,
         bold: true,
+        width: 250,
       },
       {
         accessor: "email",
@@ -58,7 +58,6 @@ const columns = (
       {
         accessor: "userStatus",
         Header: "Status Inscrição",
-        width: 200,
         Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
           value && row ? (
             <UpdateStatus
@@ -70,11 +69,11 @@ const columns = (
               query={UPDATE_INDIVIDUAL_MUTATION}
             />
           ) : null,
+        width: 200,
       },
       {
         accessor: "availability",
         Header: "Disponibilidade",
-        width: 200,
         Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
           value ? (
             <UpdateStatus
@@ -86,6 +85,7 @@ const columns = (
               query={UPDATE_INDIVIDUAL_MUTATION}
             />
           ) : null,
+        width: 200,
       },
       {
         accessor: "createdAt",

@@ -78,7 +78,7 @@ const UpdateStatus = ({
           </Option>
         ))}
       </Select>
-      <CleanButton style={{ position: "absolute", right: "10px", top: "12px" }}><Icon size="small" name="ArrowDown" /></CleanButton>
+      <CleanButton style={{ position: "absolute", right: "10px", top: "20px" }}><Icon size="small" name="ArrowDown" /></CleanButton>
     </>
   );
 };
