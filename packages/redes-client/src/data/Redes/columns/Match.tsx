@@ -41,6 +41,7 @@ const columns = (
       Cell: ({ value }: { value: string }): JSX.Element | string => (
         <span>{value || "-"}</span>
       ),
+      width: 50
     },
     {
       accessor: "address",
@@ -58,6 +59,7 @@ const columns = (
           {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
         </span>
       ),
+      width: 100
     },
     {
       accessor: "availability",
@@ -68,6 +70,7 @@ const columns = (
           {value ? value : "-"}
         </span>
       ),
+      width: 100
     },
     {
       accessor: "createdAt",
@@ -93,9 +96,9 @@ const columns = (
         return (
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "200px",
+              display: "flex",
               justifyContent: "center",
+              width: "100%"
             }}
           >
             <Button

@@ -47,7 +47,8 @@ const columns = (
     },
     {
       accessor: "relationshipStatus",
-      Header: () => "Status",
+      Header: "Status",
+      width: 200,
       Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
         value ? (
           <UpdateStatus
