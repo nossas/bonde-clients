@@ -70,11 +70,6 @@ export default function Individuals({
     return dispatch({ type: "page", value: 0 });
   };
 
-  const reset = () =>
-    dispatch({
-      type: "reset",
-    });
-
   const isVolunteerSelected =
     typeof state.selectedGroup !== "undefined" &&
     state.selectedGroup !== null &&
@@ -97,7 +92,6 @@ export default function Individuals({
           ...state.individuals,
           groups: state.selectedGroup,
         }}
-        reset={reset}
         searchPlaceholder={
           community?.id === 40
             ? "Buscar nome, email, especialidade..."
@@ -133,22 +127,17 @@ export default function Individuals({
           const dynamicColumns = {
             Header: "Extras",
             style: {
-              "justifyContent": "center",
-              "display": "flex",
               "borderLeft": "1px solid #e5e5e5",
             },
-            columns: data[0].extras ? Object.keys(data[0].extras).map((e: any) => ({
+            columns: count > 0 && data && data[0] && data[0].extras ? Object.keys(data[0].extras).map((e: any) => ({
               accessor: `extras.${e}`,
               Header: e,
               // eslint-disable-next-line react/display-name
-              Cell: (props: any): JSX.Element | string => {
-                console.log(props)
-                return <span>{props.value || "-"}</span>
-              },
+              Cell: (props: any): JSX.Element | string => <span>{props.value || "-"}</span>
             })) : []
           }
           const columnsWithDynamiContent = [...originalColumns.slice(0, originalColumns.length - 1), dynamicColumns, ...originalColumns.slice(originalColumns.length - 1)]
-        
+
           return count < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
