@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { Table, Filters } from "../components";
-import { useFilter } from "../services/FilterProvider";
-import { groupsToSelect, stripIndividualFromData } from "../services/utils";
-import { Individual, Groups, MapaIndividualTicket, Columns } from "../types";
+import { Table, Filters } from "../../components";
+import { useFilter } from "../../services/FilterProvider";
+import { groupsToSelect, stripIndividualFromData } from "../../services/utils";
+import { Individual, Groups, MapaIndividualTicket, Columns } from "../../types";
+import BtnSearchMatch from "./scenes/BtnSearchMatch"
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -72,11 +73,11 @@ export default function Individuals({
 
   const isVolunteerSelected =
     typeof state.selectedGroup !== "undefined" &&
-    state.selectedGroup !== null &&
-    state.selectedGroup.value !== 0
+      state.selectedGroup !== null &&
+      state.selectedGroup.value !== 0
       ? !!groups
-          .filter((i) => !!i.isVolunteer)
-          .find((i) => i.id === state.selectedGroup?.value)
+        .filter((i) => !!i.isVolunteer)
+        .find((i) => i.id === state.selectedGroup?.value)
       : undefined;
 
   return (
@@ -136,7 +137,20 @@ export default function Individuals({
               Cell: (props: any): JSX.Element | string => <span>{props.value || "-"}</span>
             })) : []
           }
-          const columnsWithDynamiContent = [...originalColumns.slice(0, originalColumns.length - 1), dynamicColumns, ...originalColumns.slice(originalColumns.length - 1)]
+          // insert sticky button after extras columns
+          const action = {
+            accessor: "phone",
+            Header: "Ação",
+            className: "sticky",
+            width: 200,
+            // eslint-disable-next-line react/display-name
+            Cell: ({
+              row: { original },
+            }: {
+              row: { original: Individual };
+            }): JSX.Element | null => <BtnSearchMatch original={original} />
+          }
+          const columnsWithDynamiContent = [...originalColumns, ...[dynamicColumns], ...[action]]
 
           return count < 1 ? (
             <WrapEmpty>
@@ -147,22 +161,22 @@ export default function Individuals({
               <Empty message="Não existem grupos suficientes nessa comunidade." />
             </WrapEmpty>
           ) : (
-            <>
-              <Header.H4>Total ({count})</Header.H4>
-              <Table
-                data={
-                  community?.id === 40
-                    ? stripIndividualFromData(
-                        (data as unknown) as MapaIndividualTicket[]
-                      )
-                    : data
-                }
-                columns={columnsWithDynamiContent}
-                sticky="end"
-                pagination={pagination}
-              />
-            </>
-          );
+                <>
+                  <Header.H4>Total ({count})</Header.H4>
+                  <Table
+                    data={
+                      community?.id === 40
+                        ? stripIndividualFromData(
+                          (data as unknown) as MapaIndividualTicket[]
+                        )
+                        : data
+                    }
+                    columns={columnsWithDynamiContent}
+                    sticky="end"
+                    pagination={pagination}
+                  />
+                </>
+              );
         }}
       </FetchIndividuals>
     </>
