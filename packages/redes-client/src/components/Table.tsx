@@ -269,6 +269,7 @@ function Table({
           pageSize={pagination.pageSize}
           setPageSize={pagination.setPageSize}
           totalPages={pagination.totalPages}
+          showMorePlacement="top"
         />
       )}
     </Main>
