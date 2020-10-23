@@ -3,7 +3,7 @@ import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import {
   RoundSelectField,
   RoundInputField,
-  Button,
+  CleanButton,
   Icon,
   ConnectedForm,
   Form,
@@ -35,8 +35,8 @@ const WrapInput = styled.div`
 
   & .icons {
     position: absolute;
-    right: 10px;
-    top: 15px;
+    right: 12px;
+    top: 12px;
     display: flex;
     & button {
       border: none;
@@ -96,16 +96,16 @@ const Filters = ({
                   />
                   <div className="icons">
                     {initialValues.query && (
-                      <Button
-                        dark
+                      <CleanButton
                         onClick={() => form.change("query", undefined)}
+                        style={{ paddingRight: "5px" }}
                       >
-                        <Icon name="Close" size="xs" />
-                      </Button>
+                        <Icon name="Close" size="xs" color={initialValues.query ? "#ee0099" : "#aaa"} />
+                      </CleanButton>
                     )}
-                    <Button dark>
-                      <Icon name="Search" size="small" />
-                    </Button>
+                    <CleanButton>
+                      <Icon name="Search" size="small" color={initialValues.query ? "#ee0099" : "#aaa"} />
+                    </CleanButton>
                   </div>
                 </WrapInput>
               )}
