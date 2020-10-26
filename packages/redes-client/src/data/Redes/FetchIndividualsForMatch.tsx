@@ -21,12 +21,13 @@ const INDIVIDUALS_FOR_MATCH = gql`
     $isVolunteer: Boolean_comparison_exp
     $rows: Int!
     $offset: Int!
+    $context: Int_comparison_exp!
   ) {
     individuals: rede_individuals(
       where: {
         status: { _eq: "aprovada" }
         availability: { _eq: "disponível" }
-        group: { is_volunteer: $isVolunteer }
+        group: { is_volunteer: $isVolunteer, community_id: $context }
         email: { _is_null: false }
         first_name: { _is_null: false }
         state: { _neq: "ZERO_RESULTS" }
@@ -62,6 +63,9 @@ const INDIVIDUALS_FOR_MATCH = gql`
 type Props = {
   children: any;
   group: { isVolunteer: boolean };
+  community: {
+    id: number;
+  };
 };
 
 export type IndividualsData = {
@@ -77,11 +81,15 @@ type IndividualsVars = {
   isVolunteer: { _eq: boolean };
   rows: number;
   offset: number;
+  context: {
+    _eq: number;
+  };
 };
 
 const FetchIndividualsForMatch = ({
   children,
   group: { isVolunteer },
+  community
 }: Props) => {
   const { rows, offset } = useFilterState();
   const { loading, error, data } = useQuery<IndividualsData, IndividualsVars>(
@@ -93,6 +101,9 @@ const FetchIndividualsForMatch = ({
         isVolunteer: {
           _eq: !isVolunteer,
         },
+        context: {
+          _eq: community && community.id
+        }
       },
     }
   );

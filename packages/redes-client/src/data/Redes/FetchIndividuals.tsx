@@ -9,6 +9,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
     $rows: Int!
     $offset: Int!
+    $context: Int_comparison_exp!
     $userStatus: String_comparison_exp
     $state: String_comparison_exp
     $availability: String_comparison_exp
@@ -26,6 +27,9 @@ export const INDIVIDUALS_BY_GROUP = gql`
           { last_name: { _ilike: $query } }
           { email: { _ilike: $query } }
         ]
+        group: {
+          community_id: $context
+        }
       }
       limit: $rows
       offset: $offset
@@ -77,6 +81,9 @@ const FetchIndividuals = (props: any = {}) => {
     },
     rows,
     offset,
+    context: {
+      _eq: props.community && props.community.id
+    }
   };
 
   return (
