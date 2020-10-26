@@ -66,6 +66,7 @@ export default function Popups({
     try {
       const { data } = await createRelationship({
         variables: getVariables(match, user.id, community?.id),
+        refetchQueries: ["IndividualsForMatch"]
       });
       return setData(data);
     } catch (e) {
@@ -117,7 +118,7 @@ export default function Popups({
                   dispatch({
                     type: "relationships",
                     value: {
-                      query: `${match.volunteer.email}`,
+                      query: `${match.recipient.email}`,
                       agent: {
                         label: `${user.firstName} ${user.lastName || ""}`,
                         value: user.id,
