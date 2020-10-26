@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 import { Loading, Main, Body as ComponentsBody } from "bonde-components";
+import * as _types from "styled-components/cssprop";
 import styled from "styled-components";
 
 import { Relations, Individuals, Home, Match } from "./pages";
