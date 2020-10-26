@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import * as turf from "@turf/turf";
-import { Button, Header, Text } from "bonde-components";
+import { Button, Header, Text, Empty } from "bonde-components";
 import { useLocation, useHistory } from "react-router-dom";
-import styled from "styled-components";
 
 import { getMatchGroup } from "../services/utils";
 import { Columns, Groups, Individual } from "../types";
@@ -25,21 +24,6 @@ type Props = {
     ) => Array<Columns>;
   };
 };
-
-const WrapButton = styled.div`
-  & > button {
-    padding: 0;
-  }
-`;
-
-const Wrap = styled.div`
-  & > ${Header.H4} {
-    margin: 15px 0 10px;
-  }
-  & > ${Text} {
-    margin-top: 0;
-  }
-`;
 
 export default function Match({
   data: { FetchIndividualsForMatch, ColumnsMatch, CreateRelationship },
@@ -107,11 +91,17 @@ export default function Match({
 
   return (
     <>
-      <WrapButton>
+      <div
+        css={`
+          & > button {
+            padding: 0;
+          }
+        `}
+      >
         <Button secondary align="left" onClick={goBack}>
           {"< voltar"}
         </Button>
-      </WrapButton>
+      </div>
       <FetchIndividualsForMatch {...linkState}>
         {({ data, count }) => {
           const filteredTableData = filterByDistance(data);
@@ -122,8 +112,28 @@ export default function Match({
             pageIndex: state.page,
             pageSize: state.rows,
           };
-          return (
-            <Wrap>
+          return count < 1 ? (
+            <div
+              css={`
+                height: 100%;
+                & > div {
+                  height: 100%;
+                }
+              `}
+            >
+              <Empty message="Nada por aqui..." />
+            </div>
+          ) : (
+            <div
+              css={`
+                & > ${Header.H4} {
+                  margin: 15px 0 10px;
+                }
+                & > ${Text} {
+                  margin-top: 0;
+                }
+              `}
+            >
               <Header.H4>Match Realizado!</Header.H4>
               <Text>
                 {count} {matchGroup} próximas de {firstName}
@@ -134,7 +144,7 @@ export default function Match({
                 sticky="end"
                 pagination={pagination}
               />
-            </Wrap>
+            </div>
           );
         }}
       </FetchIndividualsForMatch>
