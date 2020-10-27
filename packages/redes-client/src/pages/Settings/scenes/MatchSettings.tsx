@@ -67,18 +67,16 @@ const MatchSettings = ({
           (g) => g.name.toLowerCase().split(" ").join("_") === i
         );
         return {
-          redeGroupId: group?.id,
-          updatedGroup: {
-            settings: {
-              communication: {
-                whatsapp: `${whatsapp[i]}`,
-              },
+          redeGroupId: { _eq: group?.id },
+          updatedSettings: {
+            communication: {
+              whatsapp: `${whatsapp[i]}`,
             },
           },
         };
       });
       await Promise.all(
-        newMsgs.map(async (i) => saveSettings({ variables: i }))
+        newMsgs.map(async (i) => await saveSettings({ variables: i }))
       );
       if (!error) {
         toast.success(settingsSaved().success, {
