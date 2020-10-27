@@ -11,9 +11,10 @@ const fetchGraphqlQuery = gql`
       domain_name
       ns_ok
       hosted_zone: response(path: "hosted_zone")
-      name_servers: response(path: "delegation_set.name_servers")
+      name_servers_rest: response(path: "delegation_set.name_servers")
+      name_servers: response(path: "DelegationSet.NameServers")
 
-      certificate {
+      certificates {
         is_active
       }
 
@@ -38,7 +39,12 @@ const FetchDNSHostedZones = ({ children }: any) => {
   if (loading) return 'Carregando DNS Hosted Zones';
   else if (error) return `Failed ${error}`;
 
-  return children({ hostedZones: data.dns_hosted_zones });
+  return children({
+    hostedZones: data.dns_hosted_zones.map((dns: any) => ({
+      ...dns,
+      name_servers: dns.name_servers || dns.name_servers_rest
+    }))
+  });
 }
 
 export default FetchDNSHostedZones;

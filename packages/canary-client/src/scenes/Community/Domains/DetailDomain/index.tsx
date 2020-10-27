@@ -1,15 +1,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
-import { Header, Text, Icon } from 'bonde-components';
-import copy from 'clipboard-copy';
-import Tooltip from '../../../../components/Tooltip';
-import { toast } from 'react-toastify';
-import { Success } from '../../../../components/Notifications';
+import { Header, Icon } from 'bonde-components';
 import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, ActionTitle } from '../Styles';
-import { CopyIcon } from '../Icons';
 import Navigation from './Navigation';
 import DomainStatus from './DomainStatus';
+import NameServers from '../NameServers';
 
 type Props = {
   hostedZones: any[]
@@ -56,29 +52,7 @@ const DetailDomain = ({ hostedZones }: Props) => {
           </Col>
         )}
         <Col xs={12}>
-          <MainTitle>
-            {`Registros de nome (Name servers)`}
-            <Tooltip info='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.' />
-          </MainTitle>
-          <DTList columnSize='auto 200px' rowSize='60px' padding='20px 20px'>
-            {hostedZone.name_servers.map((ns: string) => (
-              <DTRow key={ns}>
-                <DTCol>
-                  <Text>{ns}</Text>
-                </DTCol>
-                <DTCol>
-                  <ActionTitle
-                    onClick={() => {
-                      copy(ns)
-                      toast(<Success message='Name Server copiado com sucesso!' />, { type: toast.TYPE.SUCCESS });
-                    }}
-                  >
-                    <CopyIcon /> Copiar
-                  </ActionTitle>
-                </DTCol>
-              </DTRow>
-            ))}
-          </DTList>
+          <NameServers dnsHostedZone={hostedZone} />
         </Col>
       </Row>
     </Container>
