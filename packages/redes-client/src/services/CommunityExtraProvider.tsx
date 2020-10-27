@@ -32,7 +32,7 @@ const CommunityExtraContext = React.createContext<CommunityExtraState>(
 );
 
 const COMMUNITY_EXTRA = gql`
-  query fetchCommunityExtra($context: Int_comparison_exp!) {
+  query FetchCommunityExtra($context: Int_comparison_exp!) {
     community: communities(where: { id: $context }) {
       users: community_users {
         user {

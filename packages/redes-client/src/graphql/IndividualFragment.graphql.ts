@@ -59,6 +59,7 @@ export const REDE_INDIVIDUAL = gql`
     updateAt: updated_at
     group {
       isVolunteer: is_volunteer
+      settings
     }
     extras
   }

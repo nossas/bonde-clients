@@ -5,7 +5,7 @@ export interface CommunitySettings {
   };
 }
 
-export type Groups = Array<{
+export type Group = {
   isVolunteer: boolean;
   name: string;
   communityId: number;
@@ -16,7 +16,9 @@ export type Groups = Array<{
       whatsapp?: string;
     };
   };
-}>;
+};
+
+export type Groups = Array<Group>;
 
 export interface CommunityExtraState {
   users?: Array<{

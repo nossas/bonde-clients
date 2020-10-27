@@ -51,12 +51,83 @@ export const getStates = (): Array<{ label: string; value?: string }> => [
   { label: "TO", value: "to" },
 ];
 
-export const createWhatsappLink = (
-  number: string,
-  textVariables: string
-): string | undefined => {
-  if (!number) return undefined;
-  return `https://web.whatsapp.com/send?phone=55${number}&text=${textVariables}`;
+export const encodeText = (input: string): string => encodeURIComponent(input);
+
+export const parseNumber = (input: string): string => input.replace(/\D/g, "");
+
+/**
+ * @param name Inital letter that will agreggate with propriety name
+ * @param obj Object that contains all key/value pairs
+ * @return {"VFIRST_NAME": Test, "VEMAIL: "teste@nossas.org"}
+ */
+export const dicio = (
+  name: string,
+  obj: Record<string, any>
+): Record<string, any> =>
+  Object.keys(obj).reduce((acumulator, k) => {
+    const key = k !== "agent" ? name + k : k;
+    return {
+      ...acumulator,
+      [key.toUpperCase()]: obj[k],
+    };
+  }, {});
+
+/**
+ * @param msg Message set in rede_group settings
+ * @param dicio Dicionary made to transpile msg using volunteer/recipient data
+ * @return { string }
+ */
+export const customText = (msg = "", dicio: any): string => {
+  const re = new RegExp(Object.keys(dicio).join("|"), "gi");
+
+  return msg.replace(re, (matched) => dicio[matched]);
+};
+
+export const whatsappLink = (number: string, text: string): string =>
+  `https://web.whatsapp.com/send?phone=55${number}&text=${encodeURIComponent(
+    text
+  )}`;
+
+export const createCustomWhatsappLink = (
+  {
+    volunteer,
+    recipient,
+  }: {
+    volunteer: Individual;
+    recipient: Individual;
+  },
+  agent: string
+): {
+  volunteer: string;
+  recipient: string;
+} => {
+  if (volunteer && recipient) {
+    const messageDicio = {
+      ...dicio("v", { ...volunteer, agent }),
+      ...dicio("r", { ...recipient, agent }),
+    };
+
+    const volunteerText = customText(
+      volunteer.group?.settings?.communication?.whatsapp,
+      messageDicio
+    );
+    const recipientText = customText(
+      recipient.group?.settings?.communication?.whatsapp,
+      messageDicio
+    );
+
+    return {
+      volunteer: whatsappLink(
+        volunteer.whatsapp || volunteer.phone,
+        volunteerText
+      ),
+      recipient: whatsappLink(
+        recipient.whatsapp || recipient.phone,
+        recipientText
+      ),
+    };
+  }
+  return { volunteer: "", recipient: "" };
 };
 
 type TicketsWithUsers = Array<{

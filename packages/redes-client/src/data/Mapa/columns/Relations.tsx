@@ -1,12 +1,19 @@
 /* eslint-disable react/display-name */
 import React from "react";
-import { Icon, Button } from "bonde-components";
+import { css } from "styled-components";
+import { Icon, Theme as theme } from "bonde-components";
 import {
-  createWhatsappLink,
+  whatsappLink,
   zendeskOrganizations,
   getAgentFromZendeskUserId,
 } from "../../../services/utils";
-import { Groups, Columns, valueFirstName, valueString } from "../../../types";
+import {
+  Groups,
+  Columns,
+  valueFirstName,
+  valueString,
+  valueAndRow,
+} from "../../../types";
 
 const columns = (
   groups: Groups,
@@ -60,7 +67,11 @@ const columns = (
       accessor: "relationshipStatus",
       Header: "Status",
       Cell: ({ value }: valueString): JSX.Element | string => {
-        return <span style={{ textTransform: "capitalize" }}>{value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}</span>
+        return (
+          <span style={{ textTransform: "capitalize" }}>
+            {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
+          </span>
+        );
       },
     },
     {
@@ -106,28 +117,46 @@ const columns = (
       },
     },
     {
-      accessor: "id",
+      accessor: "phone",
       Header: "Ação",
       className: "sticky",
-      Cell: ({ value }: { value: string }): JSX.Element | null => (
+      Cell: ({ row }: valueAndRow): JSX.Element | null => (
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "200px",
-            justifyContent: "center",
-          }}
+          css={css`
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            width: 100%;
+            grid-gap: 20px;
+            align-items: center;
+            height: 100%;
+          `}
         >
-          <a
-            href={createWhatsappLink(value, "texto")}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none" }}
-          >
-            <Button main="#ee0099" hover="#e2058a" focus="#b06c" secondary>
-              <Icon name="Whatsapp" size="small" />
-              Whatsapp
-            </Button>
-          </a>
+          <Icon name="Whatsapp" size="small" color={theme.brand.main} />
+          <div style={{ display: "grid" }}>
+            {groups.map((group, i) => {
+              const individual = group.isVolunteer ? "volunteer" : "recipient";
+              return (
+                <a
+                  href={whatsappLink(
+                    row.original[individual]?.whatsapp ||
+                      row.original[individual]?.phone ||
+                      "",
+                    ""
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none" }}
+                  key={`whatsapp-link-${i}`}
+                  css={css`
+                    color: ${theme.brand.main};
+                  `}
+                >
+                  {group.name}
+                </a>
+              );
+            })}
+          </div>
         </div>
       ),
     },
