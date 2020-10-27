@@ -1,11 +1,14 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 import { Loading, Main, Body as ComponentsBody } from "bonde-components";
+import { ToastContainer } from "react-toastify";
 import * as _types from "styled-components/cssprop";
 import styled from "styled-components";
 
-import { Relations, Individuals, Home, Match } from "./pages";
+import { Relations, Individuals, Home, Match, Settings } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
 import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
@@ -33,6 +36,21 @@ const Body = styled(ComponentsBody)`
   padding: 20px 65px;
 `;
 
+const BondeToastify = styled(ToastContainer)`
+  & > .Toastify_toast {
+    padding: 15px;
+  }
+  & > .Toastify__toast.Toastify__toast--success {
+    background-color: #50e3c2;
+  }
+  & > .Toastify__toast .Toastify__toast-body {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+  }
+`;
+
 const App = (): React.ReactElement => {
   console.log({ envs: process.env });
   const environment: string =
@@ -53,6 +71,18 @@ const App = (): React.ReactElement => {
             <BondeSessionUI indexRoute={adminUrl}>
               <Main style={{ minWidth: "100%" }}>
                 <Header />
+                <BondeToastify>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    draggable={false}
+                    pauseOnHover
+                  />
+                </BondeToastify>
                 <Body>
                   <Switch>
                     <SelectMapaOrRedes exact path="/" component={Home} />
@@ -62,6 +92,10 @@ const App = (): React.ReactElement => {
                       component={Individuals}
                     />
                     <SelectMapaOrRedes path="/match" component={Match} />
+                    <SelectMapaOrRedes
+                      path="/configuracoes"
+                      component={Settings}
+                    />
                   </Switch>
                 </Body>
               </Main>
