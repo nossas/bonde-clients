@@ -3,7 +3,7 @@ import { useFilterState } from "../services/FilterProvider";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import { Group } from "../types";
 
-export default function useSelectedGroup(): Array<Group | boolean | undefined> {
+export default function useSelectedGroup(): Array<any> {
   const state = useFilterState();
   const { groups } = useCommunityExtra();
   const [selectedGroup, setSelectedGroup] = useState<Group | undefined>();
