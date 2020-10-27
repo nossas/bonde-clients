@@ -1,12 +1,14 @@
-import React, { useCallback, useState, useEffect } from "react";
-import * as turf from "@turf/turf";
+import React, { useState, useEffect, useCallback } from "react";
+import { css } from "styled-components/macro";
 import { Button, Header, Text, Empty } from "bonde-components";
 import { useLocation, useHistory } from "react-router-dom";
+import * as turf from "@turf/turf";
 
+import { Table, Popup } from "../components";
+import { useSelectedGroup } from "../hooks";
+import { useFilter } from "../services/FilterProvider";
 import { getMatchGroup } from "../services/utils";
 import { Columns, Groups, Individual } from "../types";
-import { Table, Popup } from "../components";
-import { useFilter } from "../services/FilterProvider";
 
 type Props = {
   groups: Groups;
@@ -30,27 +32,13 @@ export default function Match({
   groups,
 }: Props): React.ReactElement {
   const { state: linkState } = useLocation();
+  const selectedIndividual: Individual = (linkState as unknown) as Individual;
   const { goBack } = useHistory();
   const [state, dispatch] = useFilter();
   const [isOpen, setModal] = useState<boolean>(false);
+  const [isVolunteerSelected] = useSelectedGroup();
 
-  const {
-    firstName,
-    coordinates: { latitude, longitude },
-  } = (linkState as unknown) as Individual;
-  const matchGroup = getMatchGroup(
-    groups,
-    (linkState as unknown) as Individual
-  );
-
-  const isVolunteerSelected =
-    typeof state.selectedGroup !== "undefined" &&
-    state.selectedGroup !== null &&
-    state.selectedGroup.value !== 0
-      ? !!groups
-          .filter((i) => !!i.isVolunteer)
-          .find((i) => i.id === state.selectedGroup?.value)
-      : undefined;
+  const matchGroup = getMatchGroup(groups, selectedIndividual);
 
   useEffect(() => {
     dispatch({
@@ -72,7 +60,10 @@ export default function Match({
             Number(i.coordinates.latitude),
             Number(i.coordinates.longitude),
           ];
-          const pointB = [Number(latitude), Number(longitude)];
+          const pointB = [
+            Number(selectedIndividual.coordinates.latitude),
+            Number(selectedIndividual.coordinates.longitude),
+          ];
           const calculatedDistance =
             !Number.isNaN(pointA[0]) &&
             !Number.isNaN(pointA[1]) &&
@@ -86,13 +77,16 @@ export default function Match({
           };
         })
         .sort((a, b) => Number(a.distance) - Number(b.distance)),
-    [latitude, longitude]
+    [
+      selectedIndividual.coordinates.latitude,
+      selectedIndividual.coordinates.longitude,
+    ]
   );
 
   return (
     <>
       <div
-        css={`
+        css={css`
           & > button {
             padding: 0;
           }
@@ -102,7 +96,7 @@ export default function Match({
           {"< voltar"}
         </Button>
       </div>
-      <FetchIndividualsForMatch {...linkState}>
+      <FetchIndividualsForMatch {...selectedIndividual}>
         {({ data, count }) => {
           const filteredTableData = filterByDistance(data);
           const pagination = {
@@ -114,7 +108,7 @@ export default function Match({
           };
           return count < 1 ? (
             <div
-              css={`
+              css={css`
                 height: 100%;
                 & > div {
                   height: 100%;
@@ -125,7 +119,7 @@ export default function Match({
             </div>
           ) : (
             <div
-              css={`
+              css={css`
                 & > ${Header.H4} {
                   margin: 15px 0 10px;
                 }
@@ -136,7 +130,7 @@ export default function Match({
             >
               <Header.H4>Match Realizado!</Header.H4>
               <Text>
-                {count} {matchGroup} próximas de {firstName}
+                {count} {matchGroup} próximas de {selectedIndividual.firstName}
               </Text>
               <Table
                 data={filteredTableData}
