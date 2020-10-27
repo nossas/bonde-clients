@@ -58,6 +58,11 @@ export type Individual = {
   subject?: string;
   group?: {
     isVolunteer: boolean;
+    settings: {
+      communication?: {
+        whatsapp?: string;
+      };
+    };
   };
   externalId?: number;
   ticketId?: number;

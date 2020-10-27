@@ -16,41 +16,41 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
         return group.isVolunteer ? (
           <>
             <Text>
-              <span style={{ fontWeight: 800 }}>NOME_VOLUNTARIA</span>: Primeiro
-              nome ({group.name})
+              <span style={{ fontWeight: 800 }}>VFIRSTNAME</span>: Primeiro nome
+              ({group.name})
             </Text>
             <Text>
-              <span style={{ fontWeight: 800 }}>EMAIL_VOLUNTARIA</span>: Email (
+              <span style={{ fontWeight: 800 }}>VEMAIL</span>: Email (
               {group.name})
               <Text>
-                <span style={{ fontWeight: 800 }}>WHATSAPP_VOLUNTARIA</span>:
-                Whatsapp ({group.name})
+                <span style={{ fontWeight: 800 }}>VWHATSAPP</span>: Whatsapp (
+                {group.name})
               </Text>
             </Text>
             <Text>
-              <span style={{ fontWeight: 800 }}>REGISTRO_VOLUNTARIA</span>: Nº
+              <span style={{ fontWeight: 800 }}>VREGISTEROCCUPATION</span>: Nº
               de registro ({group.name})
             </Text>
           </>
         ) : (
           <>
             <Text>
-              <span style={{ fontWeight: 800 }}>NOME_PSR</span>: Primeiro nome (
+              <span style={{ fontWeight: 800 }}>RFIRSTNAME</span>: Primeiro nome
+              ({group.name})
+            </Text>
+            <Text>
+              <span style={{ fontWeight: 800 }}>REMAIL</span>: Email (
               {group.name})
             </Text>
             <Text>
-              <span style={{ fontWeight: 800 }}>EMAIL_PSR</span>: Email (
-              {group.name})
-            </Text>
-            <Text>
-              <span style={{ fontWeight: 800 }}>WHATSAPP_PSR</span>: Whatsapp (
+              <span style={{ fontWeight: 800 }}>RWHATSAPP</span>: Whatsapp (
               {group.name})
             </Text>
           </>
         );
       })}
       <Text>
-        <span style={{ fontWeight: 800 }}>AGENTE</span>: Pessoa que faz o match
+        <span style={{ fontWeight: 800 }}>AGENT</span>: Pessoa que faz o match
       </Text>
     </Card>
   );

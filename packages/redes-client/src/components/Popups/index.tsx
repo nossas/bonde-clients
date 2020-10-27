@@ -1,19 +1,14 @@
-import React, { useState } from "react";
-import { Modal, Button, Loading } from "bonde-components";
-import { useSession, useMutation } from "bonde-core-tools";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components/macro";
+
+import { Modal, Button, Loading, Icon } from "bonde-components";
+import { useSession, useMutation } from "bonde-core-tools";
+
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";
+import { createCustomWhatsappLink } from "../../services/utils";
 import { Individual } from "../../types";
-
-const WrapLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 300px;
-`;
 
 const WrapButton = styled.div`
   & button {
@@ -61,12 +56,20 @@ export default function Popups({
   const dispatch = useFilterDispatch();
   const [error, setError] = useState<string | undefined>();
   const [data, setData] = useState();
+  const [customLink, setCustomLink] = useState({
+    volunteer: "",
+    recipient: "",
+  });
+
+  useEffect(() => {
+    const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
+    setCustomLink(customWhatsappLink);
+  }, [match]);
 
   const handleClick = async () => {
     try {
       const { data } = await createRelationship({
         variables: getVariables(match, user.id, community?.id),
-        refetchQueries: ["IndividualsForMatch"]
       });
       return setData(data);
     } catch (e) {
@@ -94,21 +97,52 @@ export default function Popups({
         />
       )}
       {isOpen && loading && (
-        <WrapLoading>
+        <div
+          css={css`
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            height: 300px;
+          `}
+        >
           <Loading />
-        </WrapLoading>
+        </div>
       )}
       {isOpen && data && (
         <Default
           title="Eba!"
           text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
           MainBtn={
-            <a
-              href={`https://api.whatsapp.com/send?phone=55${match.volunteer.phone}`}
-              style={{ textDecoration: "none" }}
+            <div
+              css={css`
+                display: grid;
+                grid-gap: 10px;
+              `}
             >
-              <Button>enviar whats para voluntária</Button>
-            </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={customLink.volunteer}
+                style={{ textDecoration: "none" }}
+              >
+                <Button>
+                  <Icon name="Whatsapp" size="small" />
+                  {match.volunteer.firstName}
+                </Button>
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={customLink.recipient}
+                style={{ textDecoration: "none" }}
+              >
+                <Button>
+                  <Icon name="Whatsapp" size="small" />
+                  {match.recipient.firstName}
+                </Button>
+              </a>
+            </div>
           }
           SecondaryBtn={
             <WrapButton>

@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
 import React from "react";
-import { Icon, Button } from "bonde-components";
-import { createWhatsappLink } from "../../../services/utils";
+import { css } from "styled-components/macro";
+import { Icon, Theme as theme } from "bonde-components";
+import { whatsappLink } from "../../../services/utils";
 import { UpdateStatus } from "../../../components";
 import {
   Groups,
@@ -99,27 +100,49 @@ const columns = (
       accessor: "id",
       Header: "Ação",
       className: "sticky",
-      Cell: ({ value }: { value: string }): JSX.Element | null => (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "200px",
-            justifyContent: "center",
-          }}
-        >
-          <a
-            href={createWhatsappLink(value, "texto")}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none" }}
+      Cell: ({ row }: valueAndRow): JSX.Element | null => {
+        return (
+          <div
+            css={css`
+              display: grid;
+              grid-template-columns: auto auto;
+              justify-content: center;
+              width: 100%;
+              grid-gap: 20px;
+              align-items: center;
+              height: 100%;
+            `}
           >
-            <Button main="#ee0099" hover="#e2058a" focus="#b06c" secondary>
-              <Icon name="Whatsapp" size="small" />
-              Whatsapp
-            </Button>
-          </a>
-        </div>
-      ),
+            <Icon name="Whatsapp" size="small" color={theme.brand.main} />
+            <div style={{ display: "grid" }}>
+              {groups.map((group, i) => {
+                const individual = group.isVolunteer
+                  ? "volunteer"
+                  : "recipient";
+                return (
+                  <a
+                    href={whatsappLink(
+                      row.original[individual]?.whatsapp ||
+                        row.original[individual]?.phone ||
+                        "",
+                      ""
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none" }}
+                    key={`whatsapp-link-${i}`}
+                    css={css`
+                      color: ${theme.brand.main};
+                    `}
+                  >
+                    {group.name}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        );
+      },
     },
   ];
 };

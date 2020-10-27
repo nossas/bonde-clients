@@ -42,12 +42,15 @@ const MATCHES = gql`
         id
         firstName: first_name
         lastName: last_name
+        whatsapp
+        phone
       }
       volunteer {
         id
         firstName: first_name
         lastName: last_name
         whatsapp
+        phone
       }
       agent {
         id
