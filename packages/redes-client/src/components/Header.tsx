@@ -1,8 +1,13 @@
 import React from "react";
-import { Navigation, Tab, Header as Heading, SubHeader } from "bonde-components";
+import {
+  Navigation,
+  Tab,
+  Header as Heading,
+  SubHeader,
+} from "bonde-components";
 import { Link, useRouteMatch } from "react-router-dom";
 
-const Header = (): React.ReactElement =>
+const Header = (): React.ReactElement => (
   <SubHeader>
     <Heading.H3>Redes</Heading.H3>
     <Navigation>
@@ -42,7 +47,20 @@ const Header = (): React.ReactElement =>
           Relações
         </Tab>
       </Link>
+      <Link to="/configuracoes/match">
+        <Tab
+          active={
+            !!useRouteMatch({
+              path: "/configuracoes/match",
+              exact: false,
+            })
+          }
+        >
+          Configurações
+        </Tab>
+      </Link>
     </Navigation>
   </SubHeader>
+);
 
 export default Header;
