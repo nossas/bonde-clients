@@ -7,7 +7,10 @@ import { useSession, useMutation } from "bonde-core-tools";
 
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";
-import { createCustomWhatsappLink } from "../../services/utils";
+import {
+  createCustomWhatsappLink,
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
+} from "../../services/utils";
 import { Individual } from "../../types";
 
 const WrapButton = styled.div`
@@ -24,7 +27,7 @@ const getVariables = (
   userId: number,
   communityId?: number
 ) => {
-  if (communityId === 40) {
+  if (communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY) {
     // make api calls to mapa graphql endpoint
     return {
       ...match,

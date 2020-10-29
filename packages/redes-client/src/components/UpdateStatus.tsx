@@ -72,13 +72,15 @@ const UpdateStatus = ({
   return (
     <>
       <Select onChange={handleOnChange} value={selected}>
-        {options.map((i) => (
-          <Option key={`status-options-${i}`} value={i.value.toString()}>
+        {options.map((i, index) => (
+          <Option key={`status-options-${index}`} value={i.value.toString()}>
             {i.label}
           </Option>
         ))}
       </Select>
-      <CleanButton style={{ position: "absolute", right: "10px", top: "20px" }}><Icon size="small" name="ArrowDown" /></CleanButton>
+      <CleanButton style={{ position: "absolute", right: "10px", top: "20px" }}>
+        <Icon size="small" name="ArrowDown" />
+      </CleanButton>
     </>
   );
 };

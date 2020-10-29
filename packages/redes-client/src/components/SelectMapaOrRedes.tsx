@@ -1,8 +1,10 @@
 import React from "react";
 import { Route, useLocation, Redirect } from "react-router-dom";
 import { useSession } from "bonde-core-tools";
-import { useCommunityExtra } from "../services/CommunityExtraProvider";
+
 import Data from "../data";
+import { useCommunityExtra } from "../services/CommunityExtraProvider";
+import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../services/utils";
 import { Groups } from "../types";
 
 type Props = {
@@ -20,13 +22,13 @@ type Props = {
 };
 
 const redirect = () => {
-  alert("Você precisa selecionar alguma usuária para começar o Match")
-  return <Redirect to="/pessoas" />
-}
+  alert("Você precisa selecionar alguma usuária para começar o Match");
+  return <Redirect to="/pessoas" />;
+};
 
 const validateIfUserIsSelected = (component: any, state: any) => {
-  return state ? component : redirect()
-}
+  return state ? component : redirect();
+};
 
 const SelectMapaOrRedes = ({
   component: ComponentToRender,
@@ -45,10 +47,16 @@ const SelectMapaOrRedes = ({
             {...props}
             groups={groups}
             community={community}
-            data={community?.id === 40 ? Data.mapa : Data.redes}
+            data={
+              community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
+                ? Data.mapa
+                : Data.redes
+            }
           />
-        )
-        return rest.path === "/match" ? validateIfUserIsSelected(render, state) : render;
+        );
+        return rest.path === "/match"
+          ? validateIfUserIsSelected(render, state)
+          : render;
       }}
     />
   );

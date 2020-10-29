@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Header, Text } from "bonde-components";
+
 import { StatsCard } from "./";
+import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../services/utils";
 import { WeeklyStatsData } from "../types";
 
 type Props = {
@@ -63,7 +65,7 @@ export default function WeeklyStats({
                 return dispatch({
                   type: "individuals",
                   value:
-                    communityId === 40
+                    communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY
                       ? {
                           availability: getOption(
                             "MSR-Inscrita",
@@ -96,7 +98,7 @@ export default function WeeklyStats({
               <Text>Encaminhamentos Realizados</Text>
             </StatsCard>
           </Link>
-          {communityId === 40 && (
+          {communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY && (
             <Link to="/matches">
               <StatsCard
                 onClick={() =>
