@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { Table, Filters } from "../components";
-import { deconstructAgent } from "../services/utils";
-import { useFilter } from "../services/FilterProvider";
-import { Groups, MatchesData, Columns } from "../types";
+
+import { useFilter } from "../../services/FilterProvider";
+import { Table, Filters } from "../../components";
+import {
+  deconstructAgent,
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
+} from "../../services/utils";
+import { Groups, MatchesData, Columns } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -87,7 +91,7 @@ export default function Relations({
               <Header.H4>Total ({count})</Header.H4>
               <Table
                 data={
-                  community?.id === 40
+                  community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
                     ? deconstructAgent(relationships)
                     : relationships
                 }
