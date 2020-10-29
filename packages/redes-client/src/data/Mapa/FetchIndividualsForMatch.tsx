@@ -212,32 +212,30 @@ const FetchIndividualsForMatch = ({
     return <p>Error</p>;
   }
 
-  const newData =
-    data && data.volunteers
-      ? data.volunteers
-          .map((user: MatchVolunteerIndividual) => {
-            const { id } = user;
-            const countForwardings = data.pendingTickets.filter(
-              (ticket: MatchTickets) => ticket.volunteersUserId === id
-            ).length;
+  const newData = data.volunteers
+    ? data.volunteers
+        .map((user: MatchVolunteerIndividual) => {
+          const { id } = user;
+          const countForwardings = data.pendingTickets.filter(
+            (ticket: MatchTickets) => ticket.volunteersUserId === id
+          ).length;
 
-            const availabilityCount = 1 - (countForwardings || 0);
+          const availabilityCount = 1 - (countForwardings || 0);
 
-            return {
-              ...user,
-              ultimosEncaminhamentosRealizados: countForwardings,
-              availabilityCount,
-              coordinates: {
-                latitude: user.latitude,
-                longitude: user.longitude,
-              },
-            };
-          })
-          .filter(
-            (user: MatchVolunteerIndividual) =>
-              (user.availabilityCount || 0) > 0
-          )
-      : undefined;
+          return {
+            ...user,
+            ultimosEncaminhamentosRealizados: countForwardings,
+            availabilityCount,
+            coordinates: {
+              latitude: user.latitude,
+              longitude: user.longitude,
+            },
+          };
+        })
+        .filter(
+          (user: MatchVolunteerIndividual) => (user.availabilityCount || 0) > 0
+        )
+    : undefined;
 
   return children(
     organizationId !== zendeskOrganizations["individual"]

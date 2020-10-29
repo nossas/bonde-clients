@@ -12,9 +12,9 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
           abaixo:
         </Text>
       </div>
-      {groups.map((group) => {
+      {groups.map((group, i) => {
         return group.isVolunteer ? (
-          <>
+          <React.Fragment key={`tip-volunteer-${i}`}>
             <Text>
               <span style={{ fontWeight: 800 }}>VFIRSTNAME</span>: Primeiro nome
               ({group.name})
@@ -31,9 +31,9 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
               <span style={{ fontWeight: 800 }}>VREGISTEROCCUPATION</span>: Nº
               de registro ({group.name})
             </Text>
-          </>
+          </React.Fragment>
         ) : (
-          <>
+          <React.Fragment key={`tip-recipient-${i}`}>
             <Text>
               <span style={{ fontWeight: 800 }}>RFIRSTNAME</span>: Primeiro nome
               ({group.name})
@@ -46,7 +46,7 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
               <span style={{ fontWeight: 800 }}>RWHATSAPP</span>: Whatsapp (
               {group.name})
             </Text>
-          </>
+          </React.Fragment>
         );
       })}
       <Text>
