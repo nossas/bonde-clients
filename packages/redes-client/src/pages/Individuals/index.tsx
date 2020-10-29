@@ -7,8 +7,18 @@ import BtnSearchMatch from "./scenes/BtnSearchMatch";
 
 import { useFilter } from "../../services/FilterProvider";
 import useSelectedGroup from "../../hooks/useSelectedGroup";
-import { groupsToSelect, stripIndividualFromData } from "../../services/utils";
-import { Individual, Groups, MapaIndividualTicket, Columns } from "../../types";
+import {
+  groupsToSelect,
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
+  stripIndividualFromData,
+} from "../../services/utils";
+import {
+  Individual,
+  Groups,
+  MapaIndividualTicket,
+  Columns,
+  valueAndRow,
+} from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -88,7 +98,7 @@ export default function Individuals({
           groups: state.selectedGroup,
         }}
         searchPlaceholder={
-          community?.id === 40
+          community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
             ? "Buscar nome, email, especialidade..."
             : "Buscar nome, email..."
         }
@@ -96,8 +106,15 @@ export default function Individuals({
         search
         state
         availability
-        userStatus={community?.id === 40 ? isVolunteerSelected : true}
-        relationshipStatus={!isVolunteerSelected && community?.id === 40}
+        userStatus={
+          community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
+            ? isVolunteerSelected
+            : true
+        }
+        relationshipStatus={
+          !isVolunteerSelected &&
+          community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
+        }
       />
       <FetchIndividuals>
         {({
@@ -142,11 +159,9 @@ export default function Individuals({
             className: "sticky",
             width: 200,
             // eslint-disable-next-line react/display-name
-            Cell: ({
-              row: { original },
-            }: {
-              row: { original: Individual };
-            }): JSX.Element | null => <BtnSearchMatch original={original} />,
+            Cell: ({ row: { original } }: valueAndRow): React.ReactElement => (
+              <BtnSearchMatch original={original} />
+            ),
           };
           const columnsWithDynamiContent = [
             ...originalColumns,
@@ -167,7 +182,7 @@ export default function Individuals({
               <Header.H4>Total ({count})</Header.H4>
               <Table
                 data={
-                  community?.id === 40
+                  community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
                     ? stripIndividualFromData(
                         (data as unknown) as MapaIndividualTicket[]
                       )
