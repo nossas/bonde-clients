@@ -10,7 +10,7 @@ const columns = (
   },
   isVolunteerSelected?: boolean
 ): Array<Columns> => [
-    {
+  {
     Header: "Dados Principais",
     columns: [
       {
@@ -22,7 +22,7 @@ const columns = (
           row: { original: Individual };
           value: number;
         }): JSX.Element | string => {
-          return original.firstName && original.lastName ? (
+          return original.firstName ? (
             <span>{`${original.firstName} ${original.lastName || ""}`}</span>
           ) : (
             "-"
@@ -37,7 +37,7 @@ const columns = (
         Cell: ({ value }: { value: string }): JSX.Element | string => (
           <span>{value || "-"}</span>
         ),
-        width: 300
+        width: 300,
       },
       {
         accessor: "address",
@@ -46,7 +46,7 @@ const columns = (
         Cell: ({ value }: { value: string }): JSX.Element | string => (
           <span>{value || "-"}</span>
         ),
-        width: 300
+        width: 300,
       },
       {
         accessor: "state",
@@ -113,10 +113,12 @@ const columns = (
         }: {
           value: string;
           row: { original: Individual };
-        }): JSX.Element | string => <span>{value || original.phone || "-"}</span>,
-      }
-    ]
-  }
+        }): JSX.Element | string => (
+          <span>{value || original.phone || "-"}</span>
+        ),
+      },
+    ],
+  },
 ];
 
 export default columns;

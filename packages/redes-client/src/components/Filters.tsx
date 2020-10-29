@@ -100,11 +100,15 @@ const Filters = ({
                         onClick={() => form.change("query", undefined)}
                         style={{ paddingRight: "5px" }}
                       >
-                        <Icon name="Close" size="xs" color={initialValues.query ? "#ee0099" : "#aaa"} />
+                        <Icon name="Close" size="xs" color="#ee0099" />
                       </CleanButton>
                     )}
                     <CleanButton>
-                      <Icon name="Search" size="small" color={initialValues.query ? "#ee0099" : "#aaa"} />
+                      <Icon
+                        name="Search"
+                        size="small"
+                        color={initialValues.query ? "#ee0099" : "#aaa"}
+                      />
                     </CleanButton>
                   </div>
                 </WrapInput>
