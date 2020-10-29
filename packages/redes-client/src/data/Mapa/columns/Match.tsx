@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { ReactElement } from "react";
 import { Button } from "bonde-components";
-import { Columns, valueString, Individual } from "../../../types";
+import { CellStatus, CellDate } from "../../../components";
+import { Columns, valueString, Individual, valueAndRow } from "../../../types";
 
 const columns = (
   dispatch: (value: {
@@ -21,7 +22,7 @@ const columns = (
       }: {
         row: { original: Individual };
         value: number;
-      }): JSX.Element | string => {
+      }): ReactElement | string => {
         return original.firstName ? (
           <a
             target="_blank"
@@ -40,113 +41,82 @@ const columns = (
     {
       accessor: "email",
       Header: "E-mail",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: valueString): ReactElement => (
         <span>{value || "-"}</span>
       ),
     },
     {
       accessor: "distance",
       Header: "Distância",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: valueString): ReactElement => (
         <span>{value || "-"}</span>
       ),
-      width: 50
+      width: 50,
     },
     {
       accessor: "address",
       Header: "Endereço",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: valueString): ReactElement => (
         <span>{value || "-"}</span>
       ),
     },
     {
       accessor: "relationshipStatus",
-      // hide if is a volunteer
-      className: isVolunteerSelected === true ? "hide" : "",
+      className: isVolunteerSelected ? "hide" : "",
       Header: "Status Relação",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "capitalize" }}>
-          {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-        </span>
-      ),
+      Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
     },
     {
       accessor: "availability",
       Header: "Disponibilidade",
       className: isVolunteerSelected === false ? "hide" : "", // hide if is a recipient
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "capitalize" }}>
-          {value ? value : "-"}
-        </span>
-      ),
+      Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
     },
     {
       accessor: "createdAt",
       Header: "Data Inscrição",
-      className: isVolunteerSelected === true ? "hide" : "", // hide if is a volunteer
-      Cell: ({ value }: valueString): string => {
-        if (!value) {
-          return "-";
-        }
-        const data = new Date(value);
-        return data.toLocaleDateString("pt-BR");
-      },
+      className: isVolunteerSelected ? "hide" : "", // hide if is a volunteer
+      Cell: ({ value }: valueString): string => CellDate({ value }),
     },
     {
       accessor: "ultimosEncaminhamentosRealizados",
       Header: "ER 30D.",
-      // hide if is a recipient
       className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-      width: 50
+      Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+      width: 50,
     },
     {
       accessor: "encaminhamentosRealizados",
       Header: "ER",
-      // hide if is a recipient
       className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-      width: 50
+      Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+      width: 50,
     },
     {
       accessor: "atendimentosEmAndamento",
       Header: "AT INI",
-      // hide if is a recipient
       className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-      width: 50
+      Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+      width: 50,
     },
     {
       accessor: "atendimentosConcluidos",
       Header: "AT CON",
-      // hide if is a recipient
       className: isVolunteerSelected === false ? "hide" : "",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span>{value || 0}</span>
-      ),
-      width: 50
+      Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+      width: 50,
     },
     {
       accessor: "phone",
       Header: "Ação",
       className: "sticky",
-      Cell: ({
-        row: { original },
-      }: {
-        row: { original: Individual };
-      }): JSX.Element | null => {
+      Cell: ({ row: { original } }: valueAndRow): ReactElement | null => {
         return (
           <div
             style={{
               display: "grid",
               justifyContent: "center",
-              width: "100%"
+              width: "100%",
             }}
           >
             <Button

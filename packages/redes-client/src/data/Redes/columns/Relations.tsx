@@ -1,17 +1,17 @@
 /* eslint-disable react/display-name */
-import React from "react";
-import { css } from "styled-components/macro";
-import { Icon, Theme as theme } from "bonde-components";
-import { whatsappLink } from "../../../services/utils";
-import { UpdateStatus } from "../../../components";
+import React, { ReactElement } from "react";
+
+import UPDATE_RELATIONSHIP_MUTATION from "../UpdateRelationship";
+import { BtnWhatsapp } from "../../../pages/Relations/scenes";
+import { UpdateStatus, CellName, CellDate } from "../../../components";
 import {
   Groups,
   Columns,
   valueFirstName,
   valueString,
   valueAndRow,
+  Individual,
 } from "../../../types";
-import UPDATE_RELATIONSHIP_MUTATION from "../UpdateRelationship";
 
 const columns = (
   groups: Groups,
@@ -24,34 +24,22 @@ const columns = (
   return [
     {
       accessor: "volunteer",
-      Header: () => volunteerGroup?.name || "-",
-      Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        return value ? (
-          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-        ) : (
-          "-"
-        );
-      },
+      Header: volunteerGroup?.name || "-",
+      Cell: ({ value }: valueFirstName): ReactElement => CellName({ value }),
       bold: true,
     },
     {
       accessor: "recipient",
-      Header: () => recipientGroup?.name || "-",
-      Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        return value ? (
-          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-        ) : (
-          "-"
-        );
-      },
+      Header: recipientGroup?.name || "-",
+      Cell: ({ value }: valueFirstName): ReactElement => CellName({ value }),
       bold: true,
     },
     {
       accessor: "relationshipStatus",
       Header: "Status",
       width: 200,
-      Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
-        value ? (
+      Cell: ({ value, row }: valueAndRow): ReactElement | string =>
+        value && row ? (
           <UpdateStatus
             name="status"
             row={row}
@@ -60,89 +48,37 @@ const columns = (
             query={UPDATE_RELATIONSHIP_MUTATION}
             type="relationship"
           />
-        ) : null,
+        ) : (
+          "-"
+        ),
       bold: true,
     },
     {
       accessor: "createdAt",
       Header: "Data de criação",
-      Cell: ({ value }: valueString): string => {
-        if (!value) {
-          return "-";
-        }
-        const data = new Date(value);
-        return data.toLocaleDateString("pt-BR");
-      },
+      Cell: ({ value }: valueString): string => CellDate({ value }),
     },
     {
       accessor: "updatedAt",
       Header: "Última atualização",
-      Cell: ({ value }: valueString): string => {
-        if (!value) {
-          return "-";
-        }
-        const data = new Date(value);
-        return data.toLocaleDateString("pt-BR");
-      },
+      Cell: ({ value }: valueString): string => CellDate({ value }),
     },
     {
       accessor: "agent",
       Header: "Feito por",
-      Cell: ({ value }: valueFirstName): JSX.Element | string => {
-        return value ? (
-          <span>{`${value.firstName} ${value.lastName || ""}`}</span>
-        ) : (
-          "-"
-        );
-      },
+      Cell: ({ value }: valueFirstName): ReactElement => CellName({ value }),
     },
     {
       accessor: "id",
       Header: "Ação",
       className: "sticky",
-      Cell: ({ row }: valueAndRow): JSX.Element | null => {
-        return (
-          <div
-            css={css`
-              display: grid;
-              grid-template-columns: auto auto;
-              justify-content: center;
-              width: 100%;
-              grid-gap: 20px;
-              align-items: center;
-              height: 100%;
-            `}
-          >
-            <Icon name="Whatsapp" size="small" color={theme.brand.main} />
-            <div style={{ display: "grid" }}>
-              {groups.map((group, i) => {
-                const individual = group.isVolunteer
-                  ? "volunteer"
-                  : "recipient";
-                return (
-                  <a
-                    href={whatsappLink(
-                      row.original[individual]?.whatsapp ||
-                        row.original[individual]?.phone ||
-                        "",
-                      ""
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: "none" }}
-                    key={`whatsapp-link-${i}`}
-                    css={css`
-                      color: ${theme.brand.main};
-                    `}
-                  >
-                    {group.name}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        );
-      },
+      Cell: ({
+        row,
+      }: {
+        row: { original: { volunteer: Individual; recipient: Individual } };
+      }): ReactElement => (
+        <BtnWhatsapp groups={groups} original={row.original} />
+      ),
     },
   ];
 };

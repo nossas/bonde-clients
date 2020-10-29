@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
-import React from "react";
-import { UpdateStatus } from "../../../components";
-import { Columns, valueString, Individual, valueAndRow } from "../../../types";
+import React, { ReactElement } from "react";
+
 import UPDATE_INDIVIDUAL_MUTATION from "../UpdateIndividual";
+import { UpdateStatus, CellName, CellDate } from "../../../components";
+import { Columns, valueString, valueAndRow } from "../../../types";
 
 const columns = (
   FilterOptions: {
@@ -16,25 +17,15 @@ const columns = (
       {
         accessor: "id",
         Header: "Nome",
-        Cell: ({
-          row: { original },
-        }: {
-          row: { original: Individual };
-          value: number;
-        }): JSX.Element | string => {
-          return original.firstName ? (
-            <span>{`${original.firstName} ${original.lastName || ""}`}</span>
-          ) : (
-            "-"
-          );
-        },
+        Cell: ({ row: { original } }: valueAndRow): ReactElement =>
+          CellName({ value: original }),
         bold: true,
         width: 250,
       },
       {
         accessor: "email",
         Header: "E-mail",
-        Cell: ({ value }: { value: string }): JSX.Element | string => (
+        Cell: ({ value }: { value: string }): ReactElement => (
           <span>{value || "-"}</span>
         ),
         width: 300,
@@ -43,7 +34,7 @@ const columns = (
         accessor: "address",
         Header: "Endereço",
         style: { padding: "10px 0 0 20px" },
-        Cell: ({ value }: { value: string }): JSX.Element | string => (
+        Cell: ({ value }: { value: string }): ReactElement => (
           <span>{value || "-"}</span>
         ),
         width: 300,
@@ -51,14 +42,14 @@ const columns = (
       {
         accessor: "state",
         Header: "Estado",
-        Cell: ({ value }: { value: string }): JSX.Element | string => (
+        Cell: ({ value }: { value: string }): ReactElement => (
           <span>{value || "-"}</span>
         ),
       },
       {
         accessor: "userStatus",
         Header: "Status Inscrição",
-        Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
+        Cell: ({ value, row }: valueAndRow): ReactElement | null =>
           value && row ? (
             <UpdateStatus
               name="status"
@@ -74,8 +65,8 @@ const columns = (
       {
         accessor: "availability",
         Header: "Disponibilidade",
-        Cell: ({ value, row }: valueAndRow): JSX.Element | null =>
-          value ? (
+        Cell: ({ value, row }: valueAndRow): ReactElement | null =>
+          value && row ? (
             <UpdateStatus
               name="availability"
               row={row}
@@ -90,30 +81,13 @@ const columns = (
       {
         accessor: "createdAt",
         Header: "Data Inscrição",
-        className:
-          typeof isVolunteerSelected === "undefined"
-            ? ""
-            : isVolunteerSelected
-            ? "hide"
-            : "", // hide if is a volunteer
-        Cell: ({ value }: valueString): string => {
-          if (!value) {
-            return "-";
-          }
-          const data = new Date(value);
-          return data.toLocaleDateString("pt-BR");
-        },
+        className: isVolunteerSelected ? "hide" : "", // hide if is a volunteer
+        Cell: ({ value }: valueString): string => CellDate({ value }),
       },
       {
         accessor: "whatsapp",
         Header: "Whatsapp",
-        Cell: ({
-          value,
-          row: { original },
-        }: {
-          value: string;
-          row: { original: Individual };
-        }): JSX.Element | string => (
+        Cell: ({ value, row: { original } }: valueAndRow): ReactElement => (
           <span>{value || original.phone || "-"}</span>
         ),
       },
