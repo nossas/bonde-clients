@@ -10,3 +10,4 @@ export { default as CheckCommunity } from "./CheckCommunity";
 export { default as FetchDataFromGraphql } from "./FetchDataFromGraphql";
 export { default as Popup } from "./Popups";
 export { default as UpdateStatus } from "./UpdateStatus";
+export * from "./Cells";

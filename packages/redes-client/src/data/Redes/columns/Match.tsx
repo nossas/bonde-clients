@@ -1,6 +1,8 @@
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { ReactElement } from "react";
 import { Button } from "bonde-components";
+
+import { CellDate, CellName, CellStatus } from "../../../components";
 import { Columns, valueString, Individual } from "../../../types";
 
 const columns = (
@@ -19,34 +21,28 @@ const columns = (
         row: { original },
       }: {
         row: { original: Individual };
-      }): JSX.Element | string => {
-        return original.firstName ? (
-          <span>{`${original.firstName} ${original.lastName}`}</span>
-        ) : (
-          "-"
-        );
-      },
+      }): ReactElement => CellName({ value: original }),
       bold: true,
     },
     {
       accessor: "email",
       Header: "E-mail",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: { value: string }): ReactElement => (
         <span>{value || "-"}</span>
       ),
     },
     {
       accessor: "distance",
       Header: "Distância",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: { value: string }): ReactElement => (
         <span>{value || "-"}</span>
       ),
-      width: 50
+      width: 50,
     },
     {
       accessor: "address",
       Header: "Endereço",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
+      Cell: ({ value }: { value: string }): ReactElement => (
         <span>{value || "-"}</span>
       ),
     },
@@ -54,35 +50,21 @@ const columns = (
       accessor: "userStatus",
       className: isVolunteerSelected === false ? "hide" : "", // hide if is a recipient
       Header: "Status Inscrição",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "capitalize" }}>
-          {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-        </span>
-      ),
-      width: 100
+      Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
+      width: 100,
     },
     {
       accessor: "availability",
       Header: "Disponibilidade",
       className: isVolunteerSelected === false ? "hide" : "", // hide if is a recipient
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "capitalize" }}>
-          {value ? value : "-"}
-        </span>
-      ),
-      width: 100
+      Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
+      width: 100,
     },
     {
       accessor: "createdAt",
       Header: "Data Inscrição",
-      className: isVolunteerSelected === true ? "hide" : "", // hide if is a volunteer
-      Cell: ({ value }: valueString): string => {
-        if (!value) {
-          return "-";
-        }
-        const data = new Date(value);
-        return data.toLocaleDateString("pt-BR");
-      },
+      className: isVolunteerSelected ? "hide" : "", // hide if is a volunteer
+      Cell: ({ value }: valueString): string => CellDate({ value }),
     },
     {
       accessor: "phone",
@@ -92,13 +74,13 @@ const columns = (
         row: { original },
       }: {
         row: { original: Individual };
-      }): JSX.Element | null => {
+      }): ReactElement | null => {
         return (
           <div
             style={{
               display: "flex",
               justifyContent: "center",
-              width: "100%"
+              width: "100%",
             }}
           >
             <Button

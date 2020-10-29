@@ -3,7 +3,7 @@ import { Individual } from "../Individuals";
 export interface Columns {
   accessor?: string;
   Header: any;
-  Cell?: (arg0: any) => string | JSX.Element | null;
+  Cell?: (arg0: any) => string | React.ReactElement | null;
   className?: string;
   bold?: boolean;
   show?: boolean;
@@ -30,10 +30,6 @@ export type valueFirstName = {
 export type valueAndRow = {
   value: string;
   row: {
-    original: {
-      id: number;
-      volunteer?: Individual;
-      recipient?: Individual;
-    };
+    original: Individual;
   };
 };

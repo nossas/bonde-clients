@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
-import React from "react";
-import { Columns, valueString, Individual } from "../../../types";
+import React, { ReactElement } from "react";
+import { CellStatus, CellDate } from "../../../components";
+import { Columns, valueString, valueAndRow } from "../../../types";
 
 const columns = (
   _FilterOptions: {
@@ -14,10 +15,7 @@ const columns = (
     Cell: ({
       row: { original },
       value,
-    }: {
-      row: { original: Individual };
-      value: number;
-    }): JSX.Element | string => {
+    }: valueAndRow): ReactElement | string => {
       return original.firstName ? (
         <a
           target="_blank"
@@ -37,151 +35,74 @@ const columns = (
   {
     accessor: "email",
     Header: "E-mail",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span>{value || "-"}</span>
-    ),
-    width: 200
+    Cell: ({ value }: valueString): ReactElement => <span>{value || "-"}</span>,
+    width: 200,
   },
   {
     accessor: "tipoDeAcolhimento",
     Header: "Tipo",
-    // hide if is a volunteer
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : isVolunteerSelected
-        ? "hide"
-        : "",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
-    ),
+    className: isVolunteerSelected ? "hide" : "",
+    Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
   },
   {
     accessor: "address",
     Header: "Endereço",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span>{value || "-"}</span>
-    ),
-    width: 300
+    Cell: ({ value }: valueString): ReactElement => <span>{value || "-"}</span>,
+    width: 300,
   },
   {
-      accessor: "state",
-      Header: "Estado",
-      Cell: ({ value }: { value: string }): JSX.Element | string => (
-        <span style={{ textTransform: "uppercase" }}>{value || "-"}</span>
-      ),
-    },
-    {
-    accessor: "userStatus",
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "", // hide if is a recipient
-    Header: "Status Inscrição",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
+    accessor: "state",
+    Header: "Estado",
+    Cell: ({ value }: valueString): ReactElement => (
+      <span style={{ textTransform: "uppercase" }}>{value || "-"}</span>
     ),
+  },
+  {
+    accessor: "userStatus",
+    className: isVolunteerSelected === false ? "hide" : "",
+    Header: "Status Inscrição",
+    Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
     width: 200,
   },
   {
     accessor: "relationshipStatus",
-    // hide if is a volunteer
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : isVolunteerSelected
-        ? "hide"
-        : "",
+    className: isVolunteerSelected ? "hide" : "",
     Header: "Status Relação",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
-    ),
+    Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
   },
   {
     accessor: "availability",
     Header: "Disponibilidade",
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "", // hide if is a recipient
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span style={{ textTransform: "capitalize" }}>
-        {value ? value.replace(/__/g, ": ").replace(/_/g, " ") : "-"}
-      </span>
-    ),
+    className: isVolunteerSelected === false ? "hide" : "",
+    Cell: ({ value }: valueString): ReactElement => CellStatus({ value }),
     width: 200,
   },
   {
     accessor: "createdAt",
     Header: "Data Inscrição",
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : isVolunteerSelected
-        ? "hide"
-        : "", // hide if is a volunteer
-    Cell: ({ value }: valueString): string => {
-      if (!value) {
-        return "-";
-      }
-      const data = new Date(value);
-      return data.toLocaleDateString("pt-BR");
-    },
+    className: isVolunteerSelected ? "hide" : "", // hide if is a volunteer
+    Cell: ({ value }: valueString): string => CellDate({ value }),
   },
   {
     accessor: "encaminhamentosRealizados",
     Header: "ER",
-    // hide if is a recipient or not from mapa
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span>{value || 0}</span>
-    ),
-    width: 50
+    className: isVolunteerSelected === false ? "hide" : "",
+    Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+    width: 50,
   },
   {
     accessor: "atendimentosEmAndamento",
     Header: "AT INI",
-    // hide if is a recipient or not from mapa
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span>{value || 0}</span>
-    ),
-    width: 50
+    className: isVolunteerSelected === false ? "hide" : "",
+    Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+    width: 50,
   },
   {
     accessor: "atendimentosConcluidos",
     Header: "AT CON",
-    /// hide if is a recipient or not from mapa
-    className:
-      typeof isVolunteerSelected === "undefined"
-        ? ""
-        : !isVolunteerSelected
-        ? "hide"
-        : "",
-    Cell: ({ value }: { value: string }): JSX.Element | string => (
-      <span>{value || 0}</span>
-    ),
-    width: 80
+    className: isVolunteerSelected === false ? "hide" : "",
+    Cell: ({ value }: valueString): ReactElement => <span>{value || 0}</span>,
+    width: 80,
   },
   {
     accessor: "whatsapp",
@@ -189,11 +110,10 @@ const columns = (
     Cell: ({
       value,
       row: { original },
-    }: {
-      value: string;
-      row: { original: Individual };
-    }): JSX.Element | string => <span>{value || original.phone || "-"}</span>,
-    },
+    }: valueAndRow): ReactElement | string => (
+      <span>{value || original.phone || "-"}</span>
+    ),
+  },
 ];
 
 export default columns;
