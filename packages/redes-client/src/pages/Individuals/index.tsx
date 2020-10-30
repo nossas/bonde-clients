@@ -63,7 +63,7 @@ export default function Individuals({
   groups,
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
-  const [isVolunteerSelected] = useSelectedGroup();
+  const [_,isVolunteerSelected] = useSelectedGroup();
   useEffect(() => {
     // if state.selectedGroup is null, we shouldn't change the state - the user that cleaned it
     if (
@@ -123,14 +123,6 @@ export default function Individuals({
             aggregate: { count },
           },
         }) => {
-          const pagination = {
-            totalPages: Math.round(count / state.rows),
-            goToPage: (e: number) => dispatch({ type: "page", value: e }),
-            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-            pageIndex: state.page,
-            pageSize: state.rows,
-          };
-
           const originalColumns = ColumnsIndividuals(
             FilterOptions,
             isVolunteerSelected
@@ -190,7 +182,7 @@ export default function Individuals({
                 }
                 columns={columnsWithDynamiContent}
                 sticky="end"
-                pagination={pagination}
+                totalResults={count}
               />
             </>
           );

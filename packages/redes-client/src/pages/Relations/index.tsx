@@ -70,14 +70,6 @@ export default function Relations({
             aggregate: { count },
           },
         }) => {
-          const pagination = {
-            totalPages: Math.round(count / state.rows),
-            goToPage: (e: number) => dispatch({ type: "page", value: e }),
-            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-            pageIndex: state.page,
-            pageSize: state.rows,
-          };
-
           return count < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
@@ -97,7 +89,7 @@ export default function Relations({
                 }
                 columns={ColumnsRelations(groups, FilterOptions)}
                 sticky="end"
-                pagination={pagination}
+                totalResults={count}
               />
             </>
           );

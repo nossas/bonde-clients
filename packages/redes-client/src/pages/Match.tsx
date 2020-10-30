@@ -31,12 +31,13 @@ export default function Match({
   data: { FetchIndividualsForMatch, ColumnsMatch, CreateRelationship },
   groups,
 }: Props): React.ReactElement {
-  const { state: linkState } = useLocation();
-  const selectedIndividual: Individual = (linkState as unknown) as Individual;
-  const { goBack } = useHistory();
-  const [state, dispatch] = useFilter();
   const [isOpen, setModal] = useState<boolean>(false);
-  const [isVolunteerSelected] = useSelectedGroup();
+  const [, isVolunteerSelected] = useSelectedGroup();
+  const [state, dispatch] = useFilter();
+  const { state: linkState } = useLocation();
+  const { goBack } = useHistory();
+
+  const selectedIndividual: Individual = (linkState as unknown) as Individual;
 
   const matchGroup = getMatchGroup(groups, selectedIndividual);
 
@@ -99,13 +100,6 @@ export default function Match({
       <FetchIndividualsForMatch {...selectedIndividual}>
         {({ data, count }) => {
           const filteredTableData = filterByDistance(data);
-          const pagination = {
-            totalPages: Math.round(count / state.rows),
-            goToPage: (e: number) => dispatch({ type: "page", value: e }),
-            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-            pageIndex: state.page,
-            pageSize: state.rows,
-          };
           return count < 1 ? (
             <div
               css={css`
@@ -136,7 +130,7 @@ export default function Match({
                 data={filteredTableData}
                 columns={ColumnsMatch(dispatch, setModal, !isVolunteerSelected)}
                 sticky="end"
-                pagination={pagination}
+                totalResults={count}
               />
             </div>
           );
