@@ -43,10 +43,11 @@ const Domain = ({ dnsHostedZone }: Props) => {
 }
 
 type DomainsProps = {
+  refetch: any
   dnsHostedZones: DNSHostedZone[]
 }
 
-const Domains = ({ dnsHostedZones }: DomainsProps) => (
+const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
   <Container fluid style={{ width: '100%', padding: '0' }}>
     <Row>
       <Col xs={12} sm={8} md={9} lg={10}>
@@ -54,7 +55,7 @@ const Domains = ({ dnsHostedZones }: DomainsProps) => (
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
       </Col>
       <Col xs={12} sm={4} md={3} lg={2}>
-        <CreateDomainFlow btnText='Adicionar domínio' />
+        <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
       </Col>
     </Row>
     <DTList>

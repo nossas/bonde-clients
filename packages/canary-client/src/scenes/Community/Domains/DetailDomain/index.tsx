@@ -8,17 +8,18 @@ import DomainStatus from './DomainStatus';
 import NameServers from '../NameServers';
 
 type Props = {
+  refetch: any
   dnsHostedZones: any[]
 }
 
-const DetailDomain = ({ dnsHostedZones }: Props) => {
+const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
   const { hostedZoneId } = useParams();
   const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 
   return (
     <Container fluid style={{ width: '100%', padding: '0' }}>
       <Navigation hostedZone={dnsHostedZone} />
-      <DomainStatus dnsHostedZone={dnsHostedZone} />
+      <DomainStatus dnsHostedZone={dnsHostedZone} refetch={refetch} />
       <Row>
         {/* {dnsHostedZone.ns_ok && (
           <Col xs={12}>

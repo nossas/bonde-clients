@@ -8,13 +8,13 @@ const Domains = () => {
   const { path } = useRouteMatch();
   return (
     <FetchDNSHostedZones>
-      {({ dnsHostedZones }: any) => (
+      {({ dnsHostedZones, refetch }: any) => (
         <Switch>
           <Route exact path={path}>
-            <ListDomain dnsHostedZones={dnsHostedZones} />
+            <ListDomain dnsHostedZones={dnsHostedZones} refetch={refetch} />
           </Route>
           <Route exact path={`${path}/:hostedZoneId`}>
-            <DetailDomain dnsHostedZones={dnsHostedZones} />
+            <DetailDomain dnsHostedZones={dnsHostedZones} refetch={refetch} />
           </Route>
         </Switch>
       )}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal, Header, Text, Button, Link } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
+import { toast } from 'react-toastify';
+import { Success } from '../../../../components/Notifications';
 import NameServers from '../NameServers';
 
 const Radio = styled.label`
@@ -126,8 +128,8 @@ const NameServersModal = ({ open, onClose, dnsHostedZone }: Props) => {
           <Col xs={6}>
             <Button
               onClick={() => {
-                alert('salvar status do dominio como registrado!');
-                onClose();
+                toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
+                onClose()
               }}
               disabled={status !== 'registered'}
               type='button'

@@ -34,7 +34,7 @@ const fetchGraphqlQuery = gql`
 
 const FetchDNSHostedZones = ({ children }: any) => {
   const { community } = useSession();
-  const { data, loading, error } = useQuery(
+  const { data, loading, error, refetch } = useQuery(
     fetchGraphqlQuery,
     { variables: { communityId: community?.id } }
   );
@@ -43,6 +43,7 @@ const FetchDNSHostedZones = ({ children }: any) => {
   else if (error) return `Failed ${error}`;
 
   return children({
+    refetch,
     dnsHostedZones: data.dns_hosted_zones.map((dns: any) => ({
       ...dns,
       hosted_zone: dns.hosted_zone || dns.hosted_zone_rest,

@@ -3,6 +3,7 @@ import { Header, Icon } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { Row, Col } from 'react-grid-system';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import { Success } from '../../../../components/Notifications';
 import {
   ActiveDomainIcon,
@@ -27,8 +28,9 @@ const deleteDomainGQL = gql`
   }
 `;
 
-const DomainStatus = ({ dnsHostedZone }: any) => {
+const DomainStatus = ({ dnsHostedZone, refetch }: any) => {
   const [deleteDomain] = useMutation(deleteDomainGQL);
+  const { push } = useHistory();
 
   return (
     <Row>
@@ -62,8 +64,11 @@ const DomainStatus = ({ dnsHostedZone }: any) => {
                       community_id: dnsHostedZone.community.id
                     };
                     await deleteDomain({ variables: { input } });
-  
                     toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
+
+                    refetch();
+
+                    push('/community/domains');
                   } catch (err) {
                     console.log('err', err);
                     toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
