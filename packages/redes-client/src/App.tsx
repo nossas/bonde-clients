@@ -3,11 +3,11 @@ import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
-import { Loading, Main, Body as ComponentsBody } from "bonde-components";
+import { Loading, Main, Body } from "bonde-components";
 import { ToastContainer } from "react-toastify";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import { Relations, Individuals, Home, Match, Settings } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
@@ -31,11 +31,6 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 };
 
 type Environment = "development" | "staging" | "production";
-
-const Body = styled(ComponentsBody)`
-  display: unset;
-  padding: 20px 65px;
-`;
 
 const BondeToastify = styled(ToastContainer)`
   & > .Toastify_toast {
@@ -84,7 +79,7 @@ const App = (): React.ReactElement => {
                     pauseOnHover
                   />
                 </BondeToastify>
-                <Body>
+                <Body style={{ paddingTop: "20px", display: "unset" }}>
                   <Switch>
                     <SelectMapaOrRedes exact path="/" component={Home} />
                     <SelectMapaOrRedes path="/matches" component={Relations} />
