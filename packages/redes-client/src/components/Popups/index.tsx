@@ -67,7 +67,7 @@ export default function Popups({
   useEffect(() => {
     const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
     setCustomLink(customWhatsappLink);
-  }, [match]);
+  }, [match, user.firstName]);
 
   const handleClick = async () => {
     try {
@@ -76,9 +76,7 @@ export default function Popups({
       });
       return setData(data);
     } catch (e) {
-      e.graphQLErrors.map((error: any) => {
-        console.log(error);
-      });
+      e.graphQLErrors.map((error: any) => console.log(error));
       return setError(e.message);
     }
   };

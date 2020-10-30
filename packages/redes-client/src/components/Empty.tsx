@@ -39,9 +39,13 @@ const EmptyWrap = styled.div`
   justify-content: center;
 `;
 
-export default ({ message }: { message: string }) => (
+const Empty = ({ message }: { message: string }) => (
   <EmptyWrap>
     <EmptyIcon />
     <Header.H4>{message}</Header.H4>
   </EmptyWrap>
 );
+
+export default Empty;
+
+Empty.displayName = 'Empty'

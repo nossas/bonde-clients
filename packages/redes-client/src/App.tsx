@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
 import { Loading, Main, Body as ComponentsBody } from "bonde-components";
 import { ToastContainer } from "react-toastify";
-import * as _types from "styled-components/cssprop";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as types from "styled-components/cssprop";
 import styled from "styled-components";
 
 import { Relations, Individuals, Home, Match, Settings } from "./pages";

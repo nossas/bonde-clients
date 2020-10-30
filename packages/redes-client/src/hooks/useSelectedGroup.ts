@@ -13,7 +13,7 @@ export default function useSelectedGroup(): Array<any> {
       (group) => group.id === state.selectedGroup?.value
     );
     setSelectedGroup(group);
-  }, [state.selectedGroup]);
+  }, [state.selectedGroup, groups]);
 
   const isVolunteerSelected = !!selectedGroup?.isVolunteer;
 

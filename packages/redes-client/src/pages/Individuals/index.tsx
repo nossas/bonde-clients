@@ -63,7 +63,7 @@ export default function Individuals({
   groups,
 }: Props): React.ReactElement {
   const [state, dispatch] = useFilter();
-  const [_,isVolunteerSelected] = useSelectedGroup();
+  const [,isVolunteerSelected] = useSelectedGroup();
   useEffect(() => {
     // if state.selectedGroup is null, we shouldn't change the state - the user that cleaned it
     if (

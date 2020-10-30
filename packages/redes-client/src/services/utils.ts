@@ -276,6 +276,7 @@ export const getMatchGroup = (
     if (typeof individual.group !== "undefined") {
       return group.isVolunteer !== individual.group.isVolunteer;
     }
+    return undefined;
   });
   return group?.name?.toLowerCase() || "sem nome";
 };

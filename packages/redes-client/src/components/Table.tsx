@@ -24,12 +24,12 @@ function Table({
   useEffect(() => {
     const total = Math.round(totalResults / state.rows);
     setTotalPages(total < 1 ? 1 : total)
-  }, [totalResults])
+  }, [totalResults, state.rows])
 
   return (
     <TableContent
-      data={React.useMemo(() => data, [state.page, state.rows])}
-      columns={React.useMemo(() => columns, [])}
+      data={React.useMemo(() => data, [data])}
+      columns={React.useMemo(() => columns, [columns])}
       pagination={{
         totalPages,
         goToPage: (e: number) => dispatch({ type: "page", value: e }),
