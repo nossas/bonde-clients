@@ -1,6 +1,9 @@
 import React from 'react';
-import { Row, Col } from 'react-grid-system';
 import { Header, Icon } from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
+import { Row, Col } from 'react-grid-system';
+import { toast } from 'react-toastify';
+import { Success } from '../../../../components/Notifications';
 import {
   ActiveDomainIcon,
   CertificateDomainIcon,
@@ -14,11 +17,19 @@ import {
   Status,
   List as DTList,
   MainTitle,
-  ActionTitle,
+  Button,
   SmallText
 } from '../Styles';
 
-const DomainStatus = ({ hostedZone }: any) => {
+const deleteDomainGQL = gql`
+  mutation ($input: DeleteDomainInput) {
+    delete_domain(input: $input)
+  }
+`;
+
+const DomainStatus = ({ dnsHostedZone }: any) => {
+  const [deleteDomain] = useMutation(deleteDomainGQL);
+
   return (
     <Row>
       <Col xs={12}>
@@ -34,22 +45,39 @@ const DomainStatus = ({ hostedZone }: any) => {
           </DTRow>
           <DTRow>
             <DTCol>
-              <Header.H4>{hostedZone.domain_name}</Header.H4>
+              <Header.H4>{dnsHostedZone.domain_name}</Header.H4>
             </DTCol>
             <DTCol>
               <Status
-                value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
                 labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
               />
             </DTCol>
             <DTCol>
-              <ActionTitle><Icon name='Trash' /> Excluir</ActionTitle>
+              <Button
+                onClick={async () => {
+                  try {
+                    const input = {
+                      dns_hosted_zone_id: dnsHostedZone.id,
+                      community_id: dnsHostedZone.community.id
+                    };
+                    await deleteDomain({ variables: { input } });
+  
+                    toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
+                  } catch (err) {
+                    console.log('err', err);
+                    toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
+                  }
+                }}
+              >
+                <Icon name='Trash' /> Excluir
+              </Button>
             </DTCol>
           </DTRow>
         </DTList>
       </Col>
       <Col xs={12}>
-        <MainTitle>{!hostedZone.ns_ok ? 'Entenda o processo' : 'Detalhes'}</MainTitle>
+        <MainTitle>{!dnsHostedZone.ns_ok ? 'Entenda o processo' : 'Detalhes'}</MainTitle>
         <DTList columnSize='auto 50px auto 50px auto 50px auto 50px auto' rowSize='auto'>
           <DTRow style={{ alignItems: 'center', padding: '10px' }}>
             <DTCol align='center'>
@@ -83,7 +111,7 @@ const DomainStatus = ({ hostedZone }: any) => {
               <Header.H5>Propagar Domínio</Header.H5>
               <SmallText>O provedor onde você comprou seu domínio faz a propagação. Esse processo pode levar até 48h.</SmallText>
               <Status
-                value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
                 labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}
               />
             </DTCol>
@@ -95,7 +123,7 @@ const DomainStatus = ({ hostedZone }: any) => {
               <Header.H5>Certificar Domínio</Header.H5>
               <SmallText>Quando o provedor concluir a propagação, o BONDE faz a certificação. Esse processo pode levar até 24 horas.</SmallText>
               <Status
-                value={hostedZone.certificate?.is_active ? 'active' : 'inactive'}
+                value={dnsHostedZone.certificate?.is_active ? 'active' : 'inactive'}
                 labels={{ 'active': 'Completo', 'inactive': 'Inativo' }}
               />
             </DTCol>

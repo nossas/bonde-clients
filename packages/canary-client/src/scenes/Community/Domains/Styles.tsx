@@ -117,9 +117,14 @@ export const SmallText = styled(Text)`
   margin-bottom: 10px;
 `;
 
-export const ActionTitle = styled(Header.H4)`
+export const Button = styled.button.attrs({ type: 'button' })`
+  font-family: Nunito Sans;
+  font-size: 16px;
+  border: none;
+  outline: none;
   text-transform: uppercase;
   cursor: pointer;
+  font-weight: bold;
 
   svg {
     margin-right: 10px;

@@ -1,26 +1,26 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
-import { Header, Icon } from 'bonde-components';
-import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, ActionTitle } from '../Styles';
+// import { Header, Icon } from 'bonde-components';
+// import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, Button } from '../Styles';
 import Navigation from './Navigation';
 import DomainStatus from './DomainStatus';
 import NameServers from '../NameServers';
 
 type Props = {
-  hostedZones: any[]
+  dnsHostedZones: any[]
 }
 
-const DetailDomain = ({ hostedZones }: Props) => {
+const DetailDomain = ({ dnsHostedZones }: Props) => {
   const { hostedZoneId } = useParams();
-  const hostedZone = hostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
+  const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 
   return (
     <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Navigation hostedZone={hostedZone} />
-      <DomainStatus hostedZone={hostedZone} />
+      <Navigation hostedZone={dnsHostedZone} />
+      <DomainStatus dnsHostedZone={dnsHostedZone} />
       <Row>
-        {hostedZone.ns_ok && (
+        {/* {dnsHostedZone.ns_ok && (
           <Col xs={12}>
             <DTList columnSize='500px auto 200px'>
               <DTRow header>
@@ -32,27 +32,34 @@ const DetailDomain = ({ hostedZones }: Props) => {
                 </DTCol>
                 <DTCol />
               </DTRow>
-              {hostedZone.dns_records.map((dnsRecord: any) => (
+              {dnsHostedZone.dns_records.map((dnsRecord: any) => (
                 <DTRow key={dnsRecord.name}>
                   <DTCol>
                     <Header.H4>{dnsRecord.name}</Header.H4>
                   </DTCol>
                   <DTCol>
                     <Status
-                      value={hostedZone.ns_ok ? 'active' : 'inactive'}
+                      value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
                       labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
                     />
                   </DTCol>
                   <DTCol>
-                    <ActionTitle><Icon name='Trash' /> Excluir</ActionTitle>
+                    <Button
+                      onClick={() => {
+                        console.log(`Remove ${dnsHostedZone.hostedZone.Id || dnsHostedZone.hostedZone.id}`)
+                        alert(`Remove ${dnsHostedZone.hostedZone.Id || dnsHostedZone.hostedZone.id}`)
+                      }}
+                    >
+                      <Icon name='Trash' /> Excluir
+                    </Button>
                   </DTCol>
                 </DTRow>
               ))}
             </DTList>
           </Col>
-        )}
+        )} */}
         <Col xs={12}>
-          <NameServers dnsHostedZone={hostedZone} />
+          <NameServers dnsHostedZone={dnsHostedZone} />
         </Col>
       </Row>
     </Container>

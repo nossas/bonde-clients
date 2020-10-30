@@ -5,12 +5,14 @@ const fetchGraphqlQuery = gql`
     dns_hosted_zones (where: { community_id: { _eq: $communityId }}) {
       id
       community {
+        id
         name
       }
       comment
       domain_name
       ns_ok
-      hosted_zone: response(path: "hosted_zone")
+      hosted_zone_rest: response(path: "hosted_zone")
+      hosted_zone: response(path: "HostedZone")
       name_servers_rest: response(path: "delegation_set.name_servers")
       name_servers: response(path: "DelegationSet.NameServers")
 
@@ -19,6 +21,7 @@ const fetchGraphqlQuery = gql`
       }
 
       dns_records {
+        id
         name
         value
         record_type
@@ -40,8 +43,9 @@ const FetchDNSHostedZones = ({ children }: any) => {
   else if (error) return `Failed ${error}`;
 
   return children({
-    hostedZones: data.dns_hosted_zones.map((dns: any) => ({
+    dnsHostedZones: data.dns_hosted_zones.map((dns: any) => ({
       ...dns,
+      hosted_zone: dns.hosted_zone || dns.hosted_zone_rest,
       name_servers: dns.name_servers || dns.name_servers_rest
     }))
   });

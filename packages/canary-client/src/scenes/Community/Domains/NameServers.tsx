@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Tooltip from '../../../components/Tooltip';
 import { Success } from '../../../components/Notifications';
 import { CopyIcon } from './Icons';
-import { DNS as DTRow, Col as DTCol, List as DTList, MainTitle, ActionTitle } from './Styles';
+import { DNS as DTRow, Col as DTCol, List as DTList, MainTitle, Button } from './Styles';
 
 const NameServers = ({ dnsHostedZone }: any) => {
   return (
@@ -21,14 +21,14 @@ const NameServers = ({ dnsHostedZone }: any) => {
               <Text>{ns}</Text>
             </DTCol>
             <DTCol>
-              <ActionTitle
+              <Button
                 onClick={() => {
                   copy(ns)
                   toast(<Success message='Name Server copiado com sucesso!' />, { type: toast.TYPE.SUCCESS });
                 }}
               >
                 <CopyIcon /> Copiar
-                    </ActionTitle>
+              </Button>
             </DTCol>
           </DTRow>
         ))}

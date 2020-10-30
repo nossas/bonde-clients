@@ -9,7 +9,7 @@ type Certificate = {
   is_active: boolean
 }
 
-type HostedZone = {
+type DNSHostedZone = {
   id: number
   domain_name: string
   name_servers?: string[]
@@ -18,19 +18,19 @@ type HostedZone = {
 }
 
 type Props = {
-  hostedZone: HostedZone
+  dnsHostedZone: DNSHostedZone
 }
 
-const Domain = ({ hostedZone }: Props) => {
+const Domain = ({ dnsHostedZone }: Props) => {
   return (
-    <Link to={`/community/domains/${hostedZone.id}`}>
+    <Link to={`/community/domains/${dnsHostedZone.id}`}>
       <DTRow>
         <DTCol>
-          <Header.H4>{hostedZone.domain_name}</Header.H4>
+          <Header.H4>{dnsHostedZone.domain_name}</Header.H4>
         </DTCol>
         <DTCol>
           <Status
-            value={hostedZone.ns_ok ? 'active' : 'inactive'}
+            value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
             labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
           />
         </DTCol>
@@ -43,10 +43,10 @@ const Domain = ({ hostedZone }: Props) => {
 }
 
 type DomainsProps = {
-  hostedZones: HostedZone[]
+  dnsHostedZones: DNSHostedZone[]
 }
 
-const Domains = ({ hostedZones }: DomainsProps) => (
+const Domains = ({ dnsHostedZones }: DomainsProps) => (
   <Container fluid style={{ width: '100%', padding: '0' }}>
     <Row>
       <Col xs={12} sm={8} md={9} lg={10}>
@@ -67,8 +67,8 @@ const Domains = ({ hostedZones }: DomainsProps) => (
         </DTCol>
         <DTCol />
       </DTRow>
-      {hostedZones.map((hostedZone: HostedZone, index: number) => (
-        <Domain key={index} hostedZone={hostedZone} />
+      {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
+        <Domain key={index} dnsHostedZone={dnsHostedZone} />
       ))}
     </DTList>
   </Container>
