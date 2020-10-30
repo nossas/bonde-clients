@@ -44,7 +44,7 @@ const INDIVIDUALS_FOR_MATCH = gql`
       where: {
         status: { _eq: "aprovada" }
         availability: { _eq: "disponível" }
-        group: { is_volunteer: $isVolunteer }
+        group: { is_volunteer: $isVolunteer, community_id: $context }
         email: { _is_null: false }
         first_name: { _is_null: false }
         state: { _neq: "ZERO_RESULTS" }

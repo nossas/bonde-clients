@@ -12,7 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
-    "bonde-components": "0.0.4-alpha.19",
+    "bonde-components": "0.0.4-alpha.20",
     "bonde-core-tools": "0.1.7-alpha.2",
     "eslint": "6.6.0",
     "i18next": "^19.6.3",

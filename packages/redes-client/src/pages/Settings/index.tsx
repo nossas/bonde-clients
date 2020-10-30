@@ -1,3 +1,4 @@
+import { Header } from "bonde-components";
 import React from "react";
 import { NavLink, useRouteMatch, Switch, Route } from "react-router-dom";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
@@ -31,7 +32,13 @@ const Settings = ({
       </Navigation>
       <Switch>
         <Route path={`${path}/match`}>
-          <MatchSettings community={community} groups={groups} />
+          {groups.length < 1 ? (
+            <Header.H4>
+              Para adicionar uma comunicação a comunidade precisa ter pelo menos um grupo configurado.
+            </Header.H4>
+          ) : (
+            <MatchSettings community={community} groups={groups} />
+          )}
         </Route>
       </Switch>
     </div>
