@@ -35,15 +35,15 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
         ) : (
           <React.Fragment key={`tip-recipient-${i}`}>
             <Text>
-              <span style={{ fontWeight: 800 }}>RFIRSTNAME</span>: Primeiro nome
+              <span style={{ fontWeight: 800 }}>IFIRSTNAME</span>: Primeiro nome
               ({group.name})
             </Text>
             <Text>
-              <span style={{ fontWeight: 800 }}>REMAIL</span>: Email (
+              <span style={{ fontWeight: 800 }}>IEMAIL</span>: Email (
               {group.name})
             </Text>
             <Text>
-              <span style={{ fontWeight: 800 }}>RWHATSAPP</span>: Whatsapp (
+              <span style={{ fontWeight: 800 }}>IWHATSAPP</span>: Whatsapp (
               {group.name})
             </Text>
           </React.Fragment>

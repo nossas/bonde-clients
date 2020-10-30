@@ -104,7 +104,7 @@ export const createCustomWhatsappLink = (
   if (volunteer && recipient) {
     const messageDicio = {
       ...dicio("v", { ...volunteer, agent }),
-      ...dicio("r", { ...recipient, agent }),
+      ...dicio("i", { ...recipient, agent }),
     };
 
     const volunteerText = customText(
