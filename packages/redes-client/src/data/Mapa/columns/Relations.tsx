@@ -17,11 +17,10 @@ import {
 
 const columns = (
   groups: Groups,
-  FilterOptions: {
-    [x: string]: { label: string; value: string | number }[];
-  }
+  // FilterOptions: {
+  //   [x: string]: { label: string; value: string | number }[];
+  // }
 ): Array<Columns> => {
-  console.log(FilterOptions);
   const volunteerGroup = groups.find((i) => !!i.isVolunteer);
   const recipientGroup = groups.find((i) => !i.isVolunteer);
   return [
@@ -107,11 +106,29 @@ const columns = (
       Header: "Ação",
       className: "sticky",
       Cell: ({
-        row,
+        row: { original },
       }: {
         row: { original: { volunteer: Individual; recipient: Individual } };
       }): ReactElement => (
-        <BtnWhatsapp groups={groups} original={row.original} />
+        <BtnWhatsapp original={{
+          ...original,
+          volunteer: {
+            ...original.volunteer,
+            group: {
+              isVolunteer: true,
+              name: original.volunteer.organizationId === zendeskOrganizations["lawyer"] ? "Advogada" : "Psicóloga",
+              settings: {}
+            }
+          },
+          recipient: {
+            ...original.volunteer,
+            group: {
+              isVolunteer: false,
+              name: "MSR",
+              settings: {}
+            }
+          }
+        }} />
       ),
     },
   ];

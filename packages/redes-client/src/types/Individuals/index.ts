@@ -58,6 +58,7 @@ export type Individual = {
   subject?: string;
   group?: {
     isVolunteer: boolean;
+    name: string;
     settings: {
       communication?: {
         whatsapp?: string;

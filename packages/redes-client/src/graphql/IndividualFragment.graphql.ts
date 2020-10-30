@@ -60,6 +60,7 @@ export const REDE_INDIVIDUAL = gql`
     group {
       isVolunteer: is_volunteer
       settings
+      name
     }
     extras
   }

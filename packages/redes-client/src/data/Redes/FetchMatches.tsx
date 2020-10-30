@@ -3,8 +3,9 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
+import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
-const MATCHES = gql`
+export const MATCHES = gql`
   query Relationships(
     $context: Int_comparison_exp!
     $rows: Int!
@@ -39,18 +40,10 @@ const MATCHES = gql`
       updatedAt: updated_at
       createdAt: created_at
       recipient {
-        id
-        firstName: first_name
-        lastName: last_name
-        whatsapp
-        phone
+        ...individual
       }
       volunteer {
-        id
-        firstName: first_name
-        lastName: last_name
-        whatsapp
-        phone
+        ...individual
       }
       agent {
         id
@@ -79,6 +72,7 @@ const MATCHES = gql`
       }
     }
   }
+  ${REDE_INDIVIDUAL}
 `;
 
 const FetchMatches = ({ community, ...props }: any) => {

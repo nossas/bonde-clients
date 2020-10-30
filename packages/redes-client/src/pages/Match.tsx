@@ -51,7 +51,7 @@ export default function Match({
       },
     });
     dispatch({ type: "rows", value: 30 });
-  }, []);
+  }, [dispatch, isVolunteerSelected, linkState]);
 
   const filterByDistance = useCallback(
     (data: Individual[]) =>

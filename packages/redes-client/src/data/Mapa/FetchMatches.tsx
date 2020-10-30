@@ -3,6 +3,7 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues, getAgentZendeskUserId } from "../../services/utils";
+import { MAPA_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
 const MATCHES = gql`
   query Relationships(
@@ -37,20 +38,10 @@ const MATCHES = gql`
         agentId: assignee_id
       }
       volunteer {
-        firstName: name
-        organizationId: organization_id
-        id: user_id
-        state
-        phone
-        whatsapp
+        ...individual
       }
       recipient {
-        firstName: name
-        organizationId: organization_id
-        id: user_id
-        state
-        phone
-        whatsapp
+        ...individual
       }
     }
     relationshipsCount: solidarity_matches_aggregate(
@@ -70,6 +61,7 @@ const MATCHES = gql`
       }
     }
   }
+  ${MAPA_INDIVIDUAL}
 `;
 
 const FetchMatches = (props: any = {}) => {

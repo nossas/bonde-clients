@@ -2,6 +2,7 @@
 import React, { ReactElement } from "react";
 
 import UPDATE_RELATIONSHIP_MUTATION from "../UpdateRelationship";
+// import { MATCHES } from "../FetchMatches";
 import { BtnWhatsapp } from "../../../pages/Relations/scenes";
 import { UpdateStatus, CellName, CellDate } from "../../../components";
 import {
@@ -47,6 +48,7 @@ const columns = (
             selected={value}
             query={UPDATE_RELATIONSHIP_MUTATION}
             type="relationship"
+            // refetchQuery={MATCHES}
           />
         ) : (
           "-"
@@ -77,7 +79,7 @@ const columns = (
       }: {
         row: { original: { volunteer: Individual; recipient: Individual } };
       }): ReactElement => (
-        <BtnWhatsapp groups={groups} original={row.original} />
+        <BtnWhatsapp original={row.original} />
       ),
     },
   ];
