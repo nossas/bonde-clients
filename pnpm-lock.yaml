@@ -10,7 +10,7 @@ importers:
       '@types/react-dom': 16.9.8
       '@types/react-router-dom': 5.1.5
       '@types/styled-components': 5.1.3
-      bonde-components: 0.0.4-alpha.20_react-dom@16.13.1+react@16.13.1
+      bonde-components: 0.0.4-alpha.21_react-dom@16.13.1+react@16.13.1
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       i18next: 19.7.0
@@ -44,7 +44,7 @@ importers:
       '@types/styled-components': ^5.1.2
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
-      bonde-components: 0.0.4-alpha.20
+      bonde-components: 0.0.4-alpha.21
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       husky: ^4.2.5
@@ -206,6 +206,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-DWtQ1PV3r+cLbySoHrwn9RWEgKMBLLma4OBQloPRyDYvc5msJM9kvTLo1YnlJd1P/ZuKbdli3ijr5q3FvAF3uA==
+  /@babel/generator/7.12.1:
+    dependencies:
+      '@babel/types': 7.12.1
+      jsesc: 2.5.2
+      source-map: 0.5.7
+    dev: false
+    resolution:
+      integrity: sha512-DB+6rafIdc9o72Yc3/Ph5h+6hUjeOp66pF0naQBgUFFuPqzQwIlPTm3xZR7YNvduIMtkDIj2t21LSQwnbCrXvg==
   /@babel/helper-annotate-as-pure/7.10.4:
     dependencies:
       '@babel/types': 7.11.5
@@ -436,6 +444,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-X9rD8qqm695vgmeaQ4fvz/o3+Wk4ZzQvSHkDBgpYKxpD4qTAUm88ZKtHkVqIOsYFFbIQ6wQYhC6q7pjqVK0E0Q==
+  /@babel/parser/7.12.3:
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-kFsOS0IbsuhO5ojF8Hc8z/8vEIOkylVBrjiZUbLTE3XFe0Qi+uu6HjzQixkFaqr0ZPAMZcBVxEwmsnsLPZ2Xsw==
   /@babel/plugin-proposal-async-generator-functions/7.10.5_@babel+core@7.9.0:
     dependencies:
       '@babel/core': 7.9.0
@@ -1572,6 +1587,22 @@ packages:
       supports-color: '*'
     resolution:
       integrity: sha512-EjiPXt+r7LiCZXEfRpSJd+jUMnBd4/9OUv7Nx3+0u9+eimMwJmG0Q98lw4/289JCoxSE8OolDMNZaaF/JZ69WQ==
+  /@babel/traverse/7.12.1_supports-color@5.5.0:
+    dependencies:
+      '@babel/code-frame': 7.10.4
+      '@babel/generator': 7.12.1
+      '@babel/helper-function-name': 7.10.4
+      '@babel/helper-split-export-declaration': 7.11.0
+      '@babel/parser': 7.12.3
+      '@babel/types': 7.12.1
+      debug: 4.2.0_supports-color@5.5.0
+      globals: 11.12.0
+      lodash: 4.17.20
+    dev: false
+    peerDependencies:
+      supports-color: '*'
+    resolution:
+      integrity: sha512-MA3WPoRt1ZHo2ZmoGKNqi20YnPt0B1S0GTZEPhhd+hw2KGUzBlHuVunj6K4sNuK+reEvyiPwtp0cpaqLzJDmAw==
   /@babel/types/7.11.5:
     dependencies:
       '@babel/helper-validator-identifier': 7.10.4
@@ -4561,6 +4592,18 @@ packages:
       styled-components: '>= 2'
     resolution:
       integrity: sha512-YwrInHyKUk1PU3avIRdiLyCpM++18Rs1NgyMXEAQC33rIXs/vro0A+stf4sT0Gf22Got+xRWB8Cm0tw+qkRzBA==
+  /babel-plugin-styled-components/1.11.1_styled-components@5.2.1:
+    dependencies:
+      '@babel/helper-annotate-as-pure': 7.10.4
+      '@babel/helper-module-imports': 7.10.4
+      babel-plugin-syntax-jsx: 6.18.0
+      lodash: 4.17.20
+      styled-components: 5.2.1_311d0acb1381dc11396a379aee0c92d5
+    dev: false
+    peerDependencies:
+      styled-components: '>= 2'
+    resolution:
+      integrity: sha512-YwrInHyKUk1PU3avIRdiLyCpM++18Rs1NgyMXEAQC33rIXs/vro0A+stf4sT0Gf22Got+xRWB8Cm0tw+qkRzBA==
   /babel-plugin-syntax-jsx/6.18.0:
     dev: false
     resolution:
@@ -4766,7 +4809,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
-  /bonde-components/0.0.4-alpha.20_react-dom@16.13.1+react@16.13.1:
+  /bonde-components/0.0.4-alpha.21_react-dom@16.13.1+react@16.13.1:
     dependencies:
       final-form: 4.20.1
       jsonwebtoken: 8.5.1
@@ -4774,13 +4817,13 @@ packages:
       react-final-form: 6.5.2_final-form@4.20.1+react@16.13.1
       react-select: 3.1.0_react-dom@16.13.1+react@16.13.1
       react-table: 7.6.1_react@16.13.1
-      styled-components: 5.2.0_975908421a0f349b287d23c767f90c42
+      styled-components: 5.2.1_311d0acb1381dc11396a379aee0c92d5
     dev: false
     peerDependencies:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-Y4ifof1BfJK1aFYf2OCUsYSC54rGAQfhBLSkE0dBVnUqAnZ1J5w+FBtuX3/PwY3EL+zApuRqcnV2BKlJjKifmA==
+      integrity: sha512-Do0PhOAQsXMUkw77FGAIB6BVd3fVJvKSHXxK4JSV/hvVA/RlsvLJrPk2Y2MbbaHKrHApfr+yIVme2xMygl+enQ==
   /bonde-core-tools/0.1.7-alpha.2:
     dependencies:
       '@apollo/client': 3.2.1_graphql@15.3.0+react@16.13.1
@@ -14634,6 +14677,30 @@ packages:
       styled-components: '*'
     resolution:
       integrity: sha512-9qE8Vgp8C5cpGAIdFaQVAl89Zgx1TDM4Yf4tlHbO9cPijtpSXTMLHy9lmP0lb+yImhgPFb1AmZ1qMUubmg3HLg==
+  /styled-components/5.2.1_311d0acb1381dc11396a379aee0c92d5:
+    dependencies:
+      '@babel/helper-module-imports': 7.12.1
+      '@babel/traverse': 7.12.1_supports-color@5.5.0
+      '@emotion/is-prop-valid': 0.8.8
+      '@emotion/stylis': 0.8.5
+      '@emotion/unitless': 0.7.5
+      babel-plugin-styled-components: 1.11.1_styled-components@5.2.1
+      css-to-react-native: 3.0.0
+      hoist-non-react-statics: 3.3.2
+      react: 16.13.1
+      react-dom: 16.13.1_react@16.13.1
+      shallowequal: 1.1.0
+      supports-color: 5.5.0
+    dev: false
+    engines:
+      node: '>=10'
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+      styled-components: '*'
+    resolution:
+      integrity: sha512-sBdgLWrCFTKtmZm/9x7jkIabjFNVzCUeKfoQsM6R3saImkUnjx0QYdLwJHBjY9ifEcmjDamJDVfknWm1yxZPxQ==
   /stylehacks/4.0.3:
     dependencies:
       browserslist: 4.14.5

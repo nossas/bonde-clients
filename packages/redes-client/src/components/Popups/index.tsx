@@ -82,7 +82,7 @@ export default function Popups({
   };
 
   return (
-    <Modal width={400} isOpen={isOpen} onClose={() => setModal(false)}>
+    <Modal width="400px" isOpen={isOpen} onClose={() => setModal(false)}>
       {isOpen && !error && !data && !loading && (
         <Default
           title="Confirma?"
