@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components/macro";
 
@@ -64,16 +64,15 @@ export default function Popups({
     recipient: "",
   });
 
-  useEffect(() => {
-    const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
-    setCustomLink(customWhatsappLink);
-  }, [match, user.firstName]);
+  console.log({match, bla:user.firstName})
 
   const handleClick = async () => {
     try {
       const { data } = await createRelationship({
         variables: getVariables(match, user.id, community?.id),
       });
+      const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
+      setCustomLink(customWhatsappLink);
       return setData(data);
     } catch (e) {
       e.graphQLErrors.map((error: any) => console.log(error));
