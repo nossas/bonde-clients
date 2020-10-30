@@ -67,8 +67,8 @@ export default function Individuals({
   useEffect(() => {
     // if state.selectedGroup is null, we shouldn't change the state - the user that cleaned it
     if (
-      typeof state.selectedGroup === "undefined" ||
-      state.selectedGroup?.value === 0
+      (typeof state.selectedGroup === "undefined" ||
+      state.selectedGroup?.value === 0) && groups.length > 0
     )
       return dispatch({
         type: "group",

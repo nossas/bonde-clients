@@ -20,12 +20,11 @@ const columns = (
     [x: string]: { label: string; value: string | number }[];
   }
 ): Array<Columns> => {
-  const volunteerGroup = groups.find((i) => !!i.isVolunteer);
   const recipientGroup = groups.find((i) => !i.isVolunteer);
   return [
     {
       accessor: "volunteer",
-      Header: volunteerGroup?.name || "-",
+      Header: "Voluntárias(os)",
       Cell: ({ value }: valueFirstName): ReactElement => CellName({ value }),
       bold: true,
     },
