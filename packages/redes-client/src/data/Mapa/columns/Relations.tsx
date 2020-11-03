@@ -108,27 +108,30 @@ const columns = (
         row: { original },
       }: {
         row: { original: { volunteer: Individual; recipient: Individual } };
-      }): ReactElement => (
-        <BtnWhatsapp original={{
-          ...original,
-          volunteer: {
-            ...original.volunteer,
-            group: {
-              isVolunteer: true,
-              name: original.volunteer.organizationId === zendeskOrganizations["lawyer"] ? "Advogada" : "Psicóloga",
-              settings: {}
+      }): ReactElement => {
+        console.log({original})
+        return (
+          <BtnWhatsapp original={{
+            ...original,
+            volunteer: {
+              ...original.volunteer,
+              group: {
+                isVolunteer: true,
+                name: original.volunteer.organizationId === zendeskOrganizations["lawyer"] ? "Advogada" : "Psicóloga",
+                settings: {}
+              }
+            },
+            recipient: {
+              ...original.volunteer,
+              group: {
+                isVolunteer: false,
+                name: "MSR",
+                settings: {}
+              }
             }
-          },
-          recipient: {
-            ...original.volunteer,
-            group: {
-              isVolunteer: false,
-              name: "MSR",
-              settings: {}
-            }
-          }
-        }} />
-      ),
+          }} />
+        )
+      }
     },
   ];
 };

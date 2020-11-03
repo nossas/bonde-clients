@@ -23,10 +23,8 @@ const MATCHES = gql`
         created_at: $created_at
         status: $status
         recipient_ticket: { assignee_id: $agent }
-        _or: [
-          { recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } }
-          { volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } }
-        ]
+        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
+        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
       }
     ) {
       id
@@ -48,12 +46,9 @@ const MATCHES = gql`
       where: {
         created_at: $created_at
         status: $status
-        recipient: { state: $state }
         recipient_ticket: { assignee_id: $agent }
-        _or: [
-          { recipient: { name: { _ilike: $query }, email: { _ilike: $query } } }
-          { volunteer: { name: { _ilike: $query }, email: { _ilike: $query } } }
-        ]
+        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
+        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
       }
     ) {
       aggregate {

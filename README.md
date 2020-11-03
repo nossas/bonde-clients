@@ -74,3 +74,18 @@ pnpm m run start
 pnpm m run build
 # pnpm m run start
 ```
+
+
+## How to add new env variables to build
+
+Add them inside the `.drone.yml` file. That's where our CI setup lives, so when needed, add enviroment variables inside the "enviroment" indentation.
+
+```yml
+  build:
+    enviroment: 
+      - ENV=FOOBAR
+```
+
+You'll need to specify them inside the "build" (staging) and "production-build" (production) indentation. Therefore, change the env according to what you'll need in each enviroment.
+
+PS: Don't add secret envs in there, this file is public and so will be the tokens/sensity info you'll be inserting there.
