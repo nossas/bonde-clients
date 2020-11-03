@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 // import { Header, Icon } from 'bonde-components';
 // import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, Button } from '../Styles';
 import Navigation from './Navigation';
-import DomainStatus from './DomainStatus';
+import DetailDomain from './DetailDomain';
 import NameServers from '../NameServers';
 
 type Props = {
@@ -12,14 +12,14 @@ type Props = {
   dnsHostedZones: any[]
 }
 
-const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
+const Content = ({ dnsHostedZones, refetch }: Props) => {
   const { hostedZoneId } = useParams();
   const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 
   return (
     <Container fluid style={{ width: '100%', padding: '0' }}>
       <Navigation hostedZone={dnsHostedZone} />
-      <DomainStatus dnsHostedZone={dnsHostedZone} refetch={refetch} />
+      <DetailDomain dnsHostedZone={dnsHostedZone} refetch={refetch} />
       <Row>
         {/* {dnsHostedZone.ns_ok && (
           <Col xs={12}>
@@ -67,4 +67,4 @@ const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
   )
 }
 
-export default DetailDomain;
+export default Content;

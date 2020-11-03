@@ -26,17 +26,25 @@ export type DNSProps = {
 export const DNS = styled.div<DNSProps>`
   display: grid;
   grid-template-columns: 500px auto 150px;
-  grid-template-rows: ${props => !!props.header ? '30px' : '80px'};
+  grid-template-rows: ${props => !!props.header ? '35px' : '60px'};
   background-color: ${props => !!props.header ? 'none' : '#fff'};
   border-bottom: ${props => !!props.header ? 'none' : '1px solid #eee'};  
 
   ${Col} {
-    padding: ${props => !!props.header ? '0 20px' : '30px 20px'};
+    padding: ${props => !!props.header ? '0 20px 18px' : '18px 20px'};
 
     ${Header.H5} {
       margin: 14px 0 8px;
     }
   }
+
+  ${props => !!props.header && `
+    p {
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 700;
+    }
+  `}
 `
 
 export type StatusProps = {
@@ -49,11 +57,17 @@ type StatusStyledProps = {
   active?: boolean
 }
 
-export const StatusStyled = styled(Text)`
-  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#444444'};
+// Status propagando: #444444
+export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
+  font-size: 13px;
+  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'};
 
   svg {
     margin-right: 10px;
+
+    g {
+      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'};
+    }
   }
 `;
 
@@ -88,7 +102,11 @@ type ListProps = {
 }
 
 export const List = styled.div<ListProps>`
-  padding: 20px 0 30px;
+  padding: 18px 0 30px;
+
+  a {
+    text-decoration: none;
+  }
 
   ${DNS} {
     grid-template-columns: ${props => !props.columnSize ? '500px auto 150px' : props.columnSize};
@@ -105,10 +123,10 @@ export const List = styled.div<ListProps>`
   }
 `
 
-export const MainTitle = styled(Header.H5)`
+export const MainTitle = styled(Text).attrs({ uppercase: true })`
   display: flex;
-  text-transform: uppercase;
-  margin: 0!important;
+  font-size: 13px;
+  font-weight: 600;
 `;
 
 export const SmallText = styled(Text)`
@@ -119,15 +137,65 @@ export const SmallText = styled(Text)`
 
 export const Button = styled.button.attrs({ type: 'button' })`
   font-family: Nunito Sans;
-  font-size: 16px;
+  font-size: 13px;
   border: none;
   outline: none;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: bold;
 
+  &:hover {
+    color: #c7c7c7;
+
+    svg {
+      path {
+        fill: #c7c7c7;
+      }
+    }
+  }
+
   svg {
     margin-right: 10px;
-    margin-top: -5px;
+    margin-bottom: -2px;
   }
 `;
+
+export const Fluid = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: middle;
+
+  button {
+    max-height: 35px;
+    max-width: 250px;
+    padding: 8px 24px;
+  }
+
+  h3 {
+    font-size: 21px;
+    line-height: 28.6px;
+    margin-bottom: 6px !important;
+  }
+
+  p {
+    line-height: 27px;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+
+      svg {
+        path {
+          fill: #c7c7c7;
+        }
+      }
+
+      h5 {
+        color: #c7c7c7;
+      }
+    }
+  }
+`

@@ -1,8 +1,13 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { Header, Text, Icon } from 'bonde-components';
-import { DNS as DTRow, Col as DTCol, Status, List as DTList } from './Styles';
+import {
+  DNS as DTRow,
+  Col as DTCol,
+  List as DTList,
+  Status,
+  Fluid
+} from './Styles';
 import CreateDomainFlow from './CreateDomainFlow';
 
 type Certificate = {
@@ -26,7 +31,7 @@ const Domain = ({ dnsHostedZone }: Props) => {
     <Link to={`/community/domains/${dnsHostedZone.id}`}>
       <DTRow>
         <DTCol>
-          <Header.H4>{dnsHostedZone.domain_name}</Header.H4>
+          <Text bold>{dnsHostedZone.domain_name}</Text>
         </DTCol>
         <DTCol>
           <Status
@@ -35,7 +40,7 @@ const Domain = ({ dnsHostedZone }: Props) => {
           />
         </DTCol>
         <DTCol>
-          <Icon name='ArrowRight' />
+          <Icon size='small' name='ArrowRight' />
         </DTCol>
       </DTRow>
     </Link>
@@ -48,23 +53,21 @@ type DomainsProps = {
 }
 
 const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
-  <Container fluid style={{ width: '100%', padding: '0' }}>
-    <Row>
-      <Col xs={12} sm={8} md={9} lg={10}>
+  <>
+    <Fluid>
+      <div>
         <Header.H3>Domínios</Header.H3>
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-      </Col>
-      <Col xs={12} sm={4} md={3} lg={2}>
-        <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
-      </Col>
-    </Row>
+      </div>
+      <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
+    </Fluid>
     <DTList>
       <DTRow header>
         <DTCol>
-          <Header.H5>Domínio</Header.H5>
+          <Text>Domínio</Text>
         </DTCol>
         <DTCol>
-          <Header.H5>Status</Header.H5>
+          <Text>Status</Text>
         </DTCol>
         <DTCol />
       </DTRow>
@@ -72,7 +75,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
         <Domain key={index} dnsHostedZone={dnsHostedZone} />
       ))}
     </DTList>
-  </Container>
+  </>
 );
 
 export default Domains;

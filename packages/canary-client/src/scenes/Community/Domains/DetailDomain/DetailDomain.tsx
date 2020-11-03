@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header, Icon } from 'bonde-components';
-import { useMutation, gql } from 'bonde-core-tools';
 import { Row, Col } from 'react-grid-system';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
+import { Header, Icon, Text } from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
 import { Success } from '../../../../components/Notifications';
 import {
   ActiveDomainIcon,
@@ -28,9 +28,27 @@ const deleteDomainGQL = gql`
   }
 `;
 
-const DomainStatus = ({ dnsHostedZone, refetch }: any) => {
+const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
   const [deleteDomain] = useMutation(deleteDomainGQL);
   const { push } = useHistory();
+
+  const onDelete = async () => {
+    try {
+      const input = {
+        dns_hosted_zone_id: dnsHostedZone.id,
+        community_id: dnsHostedZone.community.id
+      };
+      await deleteDomain({ variables: { input } });
+      toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
+
+      refetch();
+
+      push('/community/domains');
+    } catch (err) {
+      console.log('err', err);
+      toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
+    }
+  }
 
   return (
     <Row>
@@ -43,11 +61,13 @@ const DomainStatus = ({ dnsHostedZone, refetch }: any) => {
             <DTCol>
               <MainTitle>Status</MainTitle>
             </DTCol>
-            <DTCol />
+            <DTCol>
+              <MainTitle>Ações</MainTitle>
+            </DTCol>
           </DTRow>
           <DTRow>
             <DTCol>
-              <Header.H4>{dnsHostedZone.domain_name}</Header.H4>
+              <Text bold>{dnsHostedZone.domain_name}</Text>
             </DTCol>
             <DTCol>
               <Status
@@ -56,26 +76,8 @@ const DomainStatus = ({ dnsHostedZone, refetch }: any) => {
               />
             </DTCol>
             <DTCol>
-              <Button
-                onClick={async () => {
-                  try {
-                    const input = {
-                      dns_hosted_zone_id: dnsHostedZone.id,
-                      community_id: dnsHostedZone.community.id
-                    };
-                    await deleteDomain({ variables: { input } });
-                    toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
-
-                    refetch();
-
-                    push('/community/domains');
-                  } catch (err) {
-                    console.log('err', err);
-                    toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
-                  }
-                }}
-              >
-                <Icon name='Trash' /> Excluir
+              <Button onClick={onDelete} style={{ fontSize: '13px' }}>
+                <Icon size='small' name='Trash' /> Excluir
               </Button>
             </DTCol>
           </DTRow>
@@ -152,4 +154,4 @@ const DomainStatus = ({ dnsHostedZone, refetch }: any) => {
   );
 }
 
-export default DomainStatus;
+export default DetailDomain;
