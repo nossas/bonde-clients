@@ -6,13 +6,12 @@ import {
   Switch,
   useLocation
 } from 'react-router-dom';
-import { ToastContainer } from './components/Notifications';
 import {
   BondeSessionProvider as Session,
   BondeSessionUI as SessionUI,
   useSession
 } from 'bonde-core-tools';
-import { Loading } from 'bonde-components';
+import { Loading, ToastContainer } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
 // Scenes and Components to make your application

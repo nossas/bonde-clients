@@ -2,9 +2,8 @@ import React from 'react';
 import { Row, Col } from 'react-grid-system';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { Header, Icon, Text } from 'bonde-components';
+import { Header, Icon, Text, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Success } from '../../../../components/Notifications';
 import {
   ActiveDomainIcon,
   CertificateDomainIcon,

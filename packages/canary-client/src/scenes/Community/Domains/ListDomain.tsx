@@ -61,7 +61,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
       </div>
       <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
     </Fluid>
-    <DTList>
+    <DTList columnSize='500px auto 70px'>
       <DTRow header>
         <DTCol>
           <Text>Domínio</Text>

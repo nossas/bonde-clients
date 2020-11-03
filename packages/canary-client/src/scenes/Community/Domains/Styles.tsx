@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Header } from 'bonde-components';
-import { ActiveIcon, InactiveIcon } from './Icons';
+import { Text, Header, Icon } from 'bonde-components';
 
 export type ColProps = {
   align?: string
@@ -59,14 +58,14 @@ type StatusStyledProps = {
 
 // Status propagando: #444444
 export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
-  font-size: 13px;
-  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'};
+  font-size: 13px !important;
+  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'} !important;
 
   svg {
-    margin-right: 10px;
+    margin: 0 5px 3px 0;
 
-    g {
-      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'};
+    g, path {
+      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'} !important;
     }
   }
 `;
@@ -78,12 +77,12 @@ export const Status = ({ value, labels, activeStatus }: StatusProps) => {
     <StatusStyled active={isActive}>
       {isActive ? (
         <>
-          <ActiveIcon />
+          <Icon size='small' name='Check' />
           <span>{labels[value]}</span>
         </>
       ) : (
         <>
-          <InactiveIcon />
+          <Icon size='small' name='Warning' />
           <span>{labels[value]}</span>
         </>
       )}
@@ -155,8 +154,7 @@ export const Button = styled.button.attrs({ type: 'button' })`
   }
 
   svg {
-    margin-right: 10px;
-    margin-bottom: -2px;
+    margin: 0 5px 3px 0;
   }
 `;
 

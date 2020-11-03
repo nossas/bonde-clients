@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal, Header, Text, Button, Link } from 'bonde-components';
+import { Modal, Header, Text, Button, Link, toast, Success } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
-import { toast } from 'react-toastify';
-import { Success } from '../../../../components/Notifications';
 import NameServers from '../NameServers';
 
 const Radio = styled.label`

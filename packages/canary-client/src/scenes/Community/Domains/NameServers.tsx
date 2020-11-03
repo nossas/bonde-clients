@@ -1,10 +1,6 @@
 import React from 'react';
-import { Text } from 'bonde-components';
+import { Text, Tooltip, toast, Success, Icon } from 'bonde-components';
 import copy from 'clipboard-copy';
-import { toast } from 'react-toastify';
-import Tooltip from '../../../components/Tooltip';
-import { Success } from '../../../components/Notifications';
-import { CopyIcon } from './Icons';
 import { DNS as DTRow, Col as DTCol, List as DTList, MainTitle, Button } from './Styles';
 
 const NameServers = ({ dnsHostedZone }: any) => {
@@ -27,7 +23,7 @@ const NameServers = ({ dnsHostedZone }: any) => {
                   toast(<Success message='Name Server copiado com sucesso!' />, { type: toast.TYPE.SUCCESS });
                 }}
               >
-                <CopyIcon /> Copiar
+                <Icon size='small' name='Copy' /> Copiar
               </Button>
             </DTCol>
           </DTRow>
