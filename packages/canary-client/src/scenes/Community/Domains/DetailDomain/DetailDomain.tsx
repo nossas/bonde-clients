@@ -1,12 +1,11 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
-import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { Header, Icon, Text, Success } from 'bonde-components';
+import { Header, Icon, Text, Success, toast } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import {
-  ActiveDomainIcon,
-  CertificateDomainIcon,
+  // ActiveDomainIcon,
+  // CertificateDomainIcon,
   ConnectDomainIcon,
   InsertDomainIcon,
   PropagateDomainIcon
@@ -21,14 +20,49 @@ import {
   SmallText
 } from '../Styles';
 
+
+
+// type Response = {
+//   json: () => 
+// }
+
 const deleteDomainGQL = gql`
   mutation ($input: DeleteDomainInput) {
     delete_domain(input: $input)
   }
 `;
 
-const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
+const updateDomainGQL = gql`
+  mutation ($dns_hosted_zone_id: Int!, $status: dnshostedzonestatus!) {
+    update_dns_hosted_zones_by_pk(
+      pk_columns: { id: $dns_hosted_zone_id },
+      _set: { status: $status }
+    ) {
+      id
+      domain_name
+      community_id
+      status
+    }
+  }
+`
+
+type Record = {
+  data: string
+  name: string
+}
+
+type CheckDNS = {
+  Answer?: Record[]
+}
+
+type Props = {
+  dnsHostedZone: any
+  refetch: any
+}
+
+const DetailDomain = ({ dnsHostedZone, refetch }: Props) => {
   const [deleteDomain] = useMutation(deleteDomainGQL);
+  const [updateDomain] = useMutation(updateDomainGQL);
   const { push } = useHistory();
 
   const onDelete = async () => {
@@ -49,10 +83,44 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
     }
   }
 
+  const onCheckNS = async () => {
+    try {
+      const result = await fetch(`https://dns.google.com/resolve?name=${dnsHostedZone.domain_name}&type=NS`);
+      const dns: CheckDNS = await result.json();     
+      const nsOK: boolean = dns.Answer ? dns.Answer.reduce(
+        (acc: boolean, el: Record) => acc
+          ? !!(dnsHostedZone.name_servers.find((ns: string) => el.data.replace(/[.]$/, '') === ns))
+          : false,
+        true
+      ) : false;
+
+      if (nsOK) {
+        if (dnsHostedZone.status === 'propagating' || dnsHostedZone.status === 'created' || !dnsHostedZone.ns_ok) {
+          // Change domain to propagated only required change status
+          await updateDomain({ variables: { dns_hosted_zone_id: dnsHostedZone.id, status: 'propagated' } });
+          refetch();
+        }
+        toast(<Success message='DNS propagado com sucesso.' />, { type: toast.TYPE.SUCCESS });
+      } else {
+        if ((dnsHostedZone.status !== 'propagating' && dnsHostedZone.status !== 'created') || dnsHostedZone.ns_ok) {
+          // Change domain to created only required change status
+          await updateDomain({ variables: { dns_hosted_zone_id: dnsHostedZone.id, status: 'created' } });
+          toast('Verifique se o seu dominio foi configurado corretamente.', { type: toast.TYPE.INFO });
+          refetch();
+        } else {
+          toast('DNS ainda não foi propagado, tente novamente mais tarde.', { type: toast.TYPE.INFO });
+        }
+      }
+    } catch (err) {
+      console.log('err', err);
+      toast('Houve um problema ao tentar checar DNS', { type: toast.TYPE.ERROR });
+    }
+  }
+
   return (
     <Row>
       <Col xs={12}>
-        <DTList columnSize='500px auto 200px'>
+        <DTList columnSize='500px auto 280px'>
           <DTRow header>
             <DTCol>
               <MainTitle>Domínio</MainTitle>
@@ -66,7 +134,7 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
           </DTRow>
           <DTRow>
             <DTCol>
-              <Text bold>{dnsHostedZone.domain_name}</Text>
+              <Text bold>{dnsHostedZone?.domain_name}</Text>
             </DTCol>
             <DTCol>
               <Status
@@ -74,7 +142,10 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
                 labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
               />
             </DTCol>
-            <DTCol>
+            <DTCol style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Button onClick={onCheckNS} style={{ fontSize: '13px' }}>
+                <Icon size='small' name='Settings' /> Verificar DNS
+              </Button>
               <Button onClick={onDelete} style={{ fontSize: '13px' }}>
                 <Icon size='small' name='Trash' /> Excluir
               </Button>
@@ -104,9 +175,8 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
               <Header.H5>Conectar ao BONDE</Header.H5>
               <SmallText>Copie os registros abaixo e cole no site onde comprou seu domínio. Clique aqui para ver o passo a passo.</SmallText>
               <Status
-                activeStatus='done'
-                value='done'
-                labels={{ 'done': 'Concluído' }}
+                isActived={() => !!(dnsHostedZone.status !== 'created' || dnsHostedZone.ns_ok)}
+                labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}
               />
             </DTCol>
             <DTCol>
@@ -117,11 +187,11 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
               <Header.H5>Propagar Domínio</Header.H5>
               <SmallText>O provedor onde você comprou seu domínio faz a propagação. Esse processo pode levar até 48h.</SmallText>
               <Status
-                value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
-                labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}
+                isActived={() => !(['propagating', 'created'].filter((s: string) => dnsHostedZone.status === s)) || dnsHostedZone.ns_ok}
+                labels={{ active: 'Concluído', inactive: 'Inativo' }}
               />
             </DTCol>
-            <DTCol>
+            {/* <DTCol>
               <Icon name='ArrowRight' size='small' />
             </DTCol>
             <DTCol align='center'>
@@ -145,7 +215,7 @@ const DetailDomain = ({ dnsHostedZone, refetch }: any) => {
                 value='done'
                 labels={{ 'done': 'Concluído' }}
               />
-            </DTCol>
+            </DTCol> */}
           </DTRow>
         </DTList>
       </Col>

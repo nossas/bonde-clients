@@ -20,6 +20,7 @@ type DNSHostedZone = {
   name_servers?: string[]
   ns_ok?: boolean
   certificates?: Certificate[]
+  status: 'created' | 'propagating' | 'propagated' | 'certifying' | 'certified'
 }
 
 type Props = {
@@ -35,8 +36,8 @@ const Domain = ({ dnsHostedZone }: Props) => {
         </DTCol>
         <DTCol>
           <Status
-            value={dnsHostedZone.ns_ok ? 'active' : 'inactive'}
-            labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+            value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'active' : 'inactive'}
+            labels={{ active: 'Ativo', inactive: 'Inativo'}}
           />
         </DTCol>
         <DTCol>

@@ -47,9 +47,10 @@ export const DNS = styled.div<DNSProps>`
 `
 
 export type StatusProps = {
-  value: string
+  value?: string
   labels: Record<string, string>
   activeStatus?: string
+  isActived?: () => boolean
 }
 
 type StatusStyledProps = {
@@ -70,20 +71,20 @@ export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
   }
 `;
 
-export const Status = ({ value, labels, activeStatus }: StatusProps) => {
-  const isActive = value === activeStatus;
+export const Status = ({ value, labels, activeStatus, isActived }: StatusProps) => {
+  const isActive = !!isActived ? isActived() : value === activeStatus;
 
   return (
     <StatusStyled active={isActive}>
       {isActive ? (
         <>
           <Icon size='small' name='Check' />
-          <span>{labels[value]}</span>
+          <span>{labels[value || 'active']}</span>
         </>
       ) : (
         <>
           <Icon size='small' name='Warning' />
-          <span>{labels[value]}</span>
+          <span>{labels[value || 'inactive']}</span>
         </>
       )}
     </StatusStyled>

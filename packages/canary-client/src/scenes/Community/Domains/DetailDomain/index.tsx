@@ -1,24 +1,27 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 // import { Header, Icon } from 'bonde-components';
 // import { DNS as DTRow, Col as DTCol, Status, List as DTList, MainTitle, Button } from '../Styles';
 import Navigation from './Navigation';
 import DetailDomain from './DetailDomain';
 import NameServers from '../NameServers';
+import { DNSHostedZone } from '../types';
 
 type Props = {
   refetch: any
-  dnsHostedZones: any[]
+  dnsHostedZones: DNSHostedZone[]
 }
 
 const Content = ({ dnsHostedZones, refetch }: Props) => {
   const { hostedZoneId } = useParams();
   const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 
+  if (!dnsHostedZone) return <Redirect to='/community/domains' />
+
   return (
     <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Navigation hostedZone={dnsHostedZone} />
+      <Navigation dnsHostedZone={dnsHostedZone} />
       <DetailDomain dnsHostedZone={dnsHostedZone} refetch={refetch} />
       <Row>
         {/* {dnsHostedZone.ns_ok && (
