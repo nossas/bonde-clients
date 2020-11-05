@@ -6,7 +6,10 @@ import { Container, Row, Col } from 'react-grid-system';
 import NameServers from '../NameServers';
 import Radio from './Radio';
 
-const TopicList = styled.ol``;
+const TopicList = styled.ol`
+  margin-left: 20px;
+  padding: 18px 0;
+`;
 
 type DNSHostedZone = {
   id: number
@@ -83,7 +86,7 @@ const NameServersModal = ({ open, onClose, dnsHostedZone }: Props) => {
           <Col xs={6}>
             <Link onClick={onClose}>Voltar</Link>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button
               onClick={async () => {
                 const { data, errors } = await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id }});

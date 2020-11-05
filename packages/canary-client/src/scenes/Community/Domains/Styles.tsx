@@ -50,41 +50,49 @@ export type StatusProps = {
   value?: string
   labels: Record<string, string>
   activeStatus?: string
+  inactiveStatus?: string
   isActived?: () => boolean
 }
 
 type StatusStyledProps = {
   active?: boolean
+  disabled?: boolean
 }
 
 // Status propagando: #444444
 export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
   font-size: 13px !important;
-  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'} !important;
+  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#FF2B4E' : '#444444'} !important;
 
   svg {
     margin: 0 5px 3px 0;
 
     g, path {
-      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : '#FF2B4E'} !important;
+      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#FF2B4E' : '#444444'} !important;
     }
   }
 `;
 
-export const Status = ({ value, labels, activeStatus, isActived }: StatusProps) => {
+export const Status = ({ value, labels, activeStatus, inactiveStatus, isActived }: StatusProps) => {
   const isActive = !!isActived ? isActived() : value === activeStatus;
+  const isDisabled = !!isActived ? !isActived() : value === inactiveStatus;
 
   return (
-    <StatusStyled active={isActive}>
+    <StatusStyled active={isActive} disabled={isDisabled}>
       {isActive ? (
         <>
           <Icon size='small' name='Check' />
           <span>{labels[value || 'active']}</span>
         </>
-      ) : (
+      ) : inactiveStatus ? (
         <>
           <Icon size='small' name='Warning' />
           <span>{labels[value || 'inactive']}</span>
+        </>
+      ) : (
+        <>
+          <Icon size='small' name='Sync' />
+          <span>{labels[value || '']}</span>
         </>
       )}
     </StatusStyled>

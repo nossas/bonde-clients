@@ -10,7 +10,7 @@ importers:
       '@types/react-dom': 16.9.9
       '@types/react-router-dom': 5.1.6
       '@types/styled-components': 5.1.4
-      bonde-components: 0.0.4-alpha.23_react-dom@16.14.0+react@16.14.0
+      bonde-components: 0.0.4-alpha.24_react-dom@16.14.0+react@16.14.0
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       i18next: 19.8.3
@@ -43,7 +43,7 @@ importers:
       '@types/styled-components': ^5.1.2
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
-      bonde-components: 0.0.4-alpha.23
+      bonde-components: 0.0.4-alpha.24
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       husky: ^4.2.5
@@ -4501,7 +4501,7 @@ packages:
       integrity: sha512-PO9t0697lNTmcEHH69mdtYiOIkkOlj9fySqfO3K1eCcdISevLAE0xY59VLLUj0SoiPiTX/JU2CYFpILydUa5Lw==
   /babel-plugin-macros/2.8.0:
     dependencies:
-      '@babel/runtime': 7.9.0
+      '@babel/runtime': 7.12.5
       cosmiconfig: 6.0.0
       resolve: 1.18.1
     dev: false
@@ -4757,7 +4757,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
-  /bonde-components/0.0.4-alpha.23_react-dom@16.14.0+react@16.14.0:
+  /bonde-components/0.0.4-alpha.24_react-dom@16.14.0+react@16.14.0:
     dependencies:
       final-form: 4.20.1
       react: 16.14.0
@@ -4771,7 +4771,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-b7hPFsi6j1SKYqEpWPjzSUi5jJwJvksWCiaeI1AkA2A0rk8YlbIrzneG/Vg95+4vYDaiOr77s6Eo4hXjxpaWmg==
+      integrity: sha512-OiWi3+1ebYA7oc8ztWKHd25qGuvDgkc6JKEcz+yjVFhgTNhFigm0qM+qjD472jTlNYpjbluROY8Tfkk7HBtE9A==
   /bonde-core-tools/0.1.7-alpha.2:
     dependencies:
       '@apollo/client': 3.2.5_graphql@15.4.0+react@16.14.0

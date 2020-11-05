@@ -16,6 +16,7 @@ const InputDomain = styled.div`
     padding: 9px 15px;
     margin-left: 10px;
     flex-grow: 1;
+    width: 100%;
   }
 `;
 
@@ -29,7 +30,7 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
   const [value, onChange] = useState('');
   
   return (
-    <Modal width='30%' isOpen={open} onClose={onClose}>
+    <Modal width='40%' isOpen={open} onClose={onClose}>
       <Container fluid style={{ width: '100%', padding: '0' }}>
         <Row style={{ marginBottom: '24px' }}>
           <Col xs={12}>
@@ -54,7 +55,7 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
           <Col xs={6}>
             <Link onClick={onClose}>Cancelar</Link>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button onClick={() => onSubmit({ value })} type='button'>Continuar</Button>
           </Col>
         </Row>
