@@ -1,3 +1,4 @@
+import "./ReactToastify.css";
 
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
@@ -15,7 +16,6 @@ type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
 };
 
-// import "react-toastify/dist/ReactToastify.css";
 
 const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
