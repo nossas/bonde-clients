@@ -3,68 +3,52 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues, getAgentZendeskUserId } from "../../services/utils";
+import { MAPA_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
 const MATCHES = gql`
-  query MapaRelationships(
+  query Relationships(
     $rows: Int!
     $offset: Int!
     $status: String_comparison_exp
     $state: String_comparison_exp
     $agent: bigint_comparison_exp
     $query: String
-    $order_by: [solidarity_matches_order_by!]
     $created_at: timestamp_comparison_exp
   ) {
     relationships: solidarity_matches(
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: desc }
       where: {
         created_at: $created_at
         status: $status
-        recipient: { state: $state }
         recipient_ticket: { assignee_id: $agent }
-        _or: [
-          { recipient: { name: { _ilike: $query }, email: { _ilike: $query } } }
-          { volunteer: { name: { _ilike: $query }, email: { _ilike: $query } } }
-        ]
+        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
+        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
       }
     ) {
       id
       individualsTicketId: individuals_ticket_id
       volunteersTicketId: volunteers_ticket_id
-      status
+      relationshipStatus: status
       createdAt: created_at
       recipientTicket: recipient_ticket {
         agentId: assignee_id
       }
       volunteer {
-        firstName: name
-        organizationId: organization_id
-        id: user_id
-        state
-        phone
-        whatsapp
+        ...individual
       }
       recipient {
-        firstName: name
-        organizationId: organization_id
-        id: user_id
-        state
-        phone
-        whatsapp
+        ...individual
       }
     }
     relationshipsCount: solidarity_matches_aggregate(
       where: {
         created_at: $created_at
         status: $status
-        recipient: { state: $state }
         recipient_ticket: { assignee_id: $agent }
-        _or: [
-          { recipient: { name: { _ilike: $query }, email: { _ilike: $query } } }
-          { volunteer: { name: { _ilike: $query }, email: { _ilike: $query } } }
-        ]
+        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
+        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
       }
     ) {
       aggregate {
@@ -72,6 +56,7 @@ const MATCHES = gql`
       }
     }
   }
+  ${MAPA_INDIVIDUAL}
 `;
 
 const FetchMatches = (props: any = {}) => {
@@ -86,7 +71,7 @@ const FetchMatches = (props: any = {}) => {
       _eq: relationshipStatus,
     },
     state: {
-      _eq: typeof state === "string" ? state.toUpperCase() : state,
+      _eq: typeof state === "string" ? state.toLowerCase() : state,
     },
     agent: {
       _eq: getAgentZendeskUserId(agent as number | null),

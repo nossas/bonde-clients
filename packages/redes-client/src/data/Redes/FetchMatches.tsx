@@ -3,22 +3,22 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
+import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
-const MATCHES = gql`
-  query RedeRelationships(
+export const MATCHES = gql`
+  query Relationships(
     $context: Int_comparison_exp!
     $rows: Int!
     $offset: Int!
     $status: String_comparison_exp
     $state: String_comparison_exp
     $agent: Int_comparison_exp
-    $order_by: [rede_relationships_order_by!]
     $query: String
   ) {
     relationships: rede_relationships(
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: desc }
       where: {
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
@@ -33,22 +33,17 @@ const MATCHES = gql`
         ]
       }
     ) {
-      status
+      relationshipStatus: status
       is_archived
       comments
       metadata
       updatedAt: updated_at
       createdAt: created_at
       recipient {
-        id
-        firstName: first_name
-        lastName: last_name
+        ...individual
       }
       volunteer {
-        id
-        firstName: first_name
-        lastName: last_name
-        whatsapp
+        ...individual
       }
       agent {
         id
@@ -77,6 +72,7 @@ const MATCHES = gql`
       }
     }
   }
+  ${REDE_INDIVIDUAL}
 `;
 
 const FetchMatches = ({ community, ...props }: any) => {
@@ -100,9 +96,6 @@ const FetchMatches = ({ community, ...props }: any) => {
     query: `%${query || ""}%`,
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
   };
 
   return (

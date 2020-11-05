@@ -2,19 +2,25 @@ export interface CommunitySettings {
   settings: {
     volunteer_msg: string;
     individual_msg: string;
-    distance: number;
   };
 }
 
-export type Groups = Array<{
+export type Group = {
   isVolunteer: boolean;
   name: string;
   communityId: number;
   id: number;
   widgetId: number;
-}>;
+  settings: {
+    communication?: {
+      whatsapp?: string;
+    };
+  };
+};
 
-export interface CommunityExtraState extends CommunitySettings {
+export type Groups = Array<Group>;
+
+export interface CommunityExtraState {
   users?: Array<{
     user: {
       firstName: string;
@@ -40,13 +46,11 @@ export interface CommunityExtraData {
 }
 
 export type CommunityExtraVars = {
-  communityId: number;
-  context: number;
+  context: { _eq: number };
 };
 
 export type Form = {
   input: {
-    distance: number;
     volunteer_msg: string;
     individual_msg: string;
   };

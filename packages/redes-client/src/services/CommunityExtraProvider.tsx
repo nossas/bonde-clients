@@ -7,11 +7,6 @@ import {
 } from "../types";
 
 const initialValue = {
-  settings: {
-    distance: 0,
-    volunteer_msg: "",
-    individual_msg: "",
-  },
   groups: [
     {
       isVolunteer: true,
@@ -19,6 +14,7 @@ const initialValue = {
       communityId: 0,
       id: 0,
       widgetId: 0,
+      settings: {},
     },
     {
       isVolunteer: false,
@@ -26,6 +22,7 @@ const initialValue = {
       communityId: 0,
       id: 0,
       widgetId: 0,
+      settings: {},
     },
   ],
 };
@@ -35,13 +32,8 @@ const CommunityExtraContext = React.createContext<CommunityExtraState>(
 );
 
 const COMMUNITY_EXTRA = gql`
-  query fetchCommunityExtra($communityId: bigint!, $context: Int!) {
-    communitySettings: community_settings(
-      where: { community_id: { _eq: $communityId } }
-    ) {
-      settings
-    }
-    community: communities(where: { id: { _eq: $context } }) {
+  query FetchCommunityExtra($context: Int_comparison_exp!) {
+    community: communities(where: { id: $context }) {
       users: community_users {
         user {
           firstName: first_name
@@ -50,12 +42,13 @@ const COMMUNITY_EXTRA = gql`
         }
       }
     }
-    groups: rede_groups(where: { community_id: { _eq: $context } }) {
+    groups: rede_groups(where: { community_id: $context }) {
       isVolunteer: is_volunteer
       name
       communityId: community_id
       id
       widgetId: widget_id
+      settings
     }
   }
 `;
@@ -67,8 +60,7 @@ const CommunityExtraProvider = ({
 }): React.ReactElement => {
   const { community } = useSession();
   const variables = {
-    communityId: (community && community.id) || 0,
-    context: (community && community.id) || 0,
+    context: { _eq: (community && community.id) || 0 },
   };
 
   const { error, data } = useQuery<CommunityExtraData, CommunityExtraVars>(

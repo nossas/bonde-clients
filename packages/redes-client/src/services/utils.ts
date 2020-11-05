@@ -1,4 +1,9 @@
-import { Relationships, Groups } from "../types";
+import {
+  Relationships,
+  Groups,
+  Individual,
+  MapaIndividualTicket,
+} from "../types";
 
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
@@ -46,12 +51,83 @@ export const getStates = (): Array<{ label: string; value?: string }> => [
   { label: "TO", value: "to" },
 ];
 
-export const createWhatsappLink = (
-  number: string,
-  textVariables: string
-): string | undefined => {
-  if (!number) return undefined;
-  return `https://web.whatsapp.com/send?phone=55${number}&text=${textVariables}`;
+export const encodeText = (input: string): string => encodeURIComponent(input);
+
+export const parseNumber = (input: string): string => input.replace(/\D/g, "");
+
+/**
+ * @param name Inital letter that will agreggate with propriety name
+ * @param obj Object that contains all key/value pairs
+ * @return {"VFIRST_NAME": Test, "VEMAIL: "teste@nossas.org"}
+ */
+export const dicio = (
+  name: string,
+  obj: Record<string, any>
+): Record<string, any> =>
+  Object.keys(obj).reduce((acumulator, k) => {
+    const key = k !== "agent" ? name + k : k;
+    return {
+      ...acumulator,
+      [key.toUpperCase()]: obj[k],
+    };
+  }, {});
+
+/**
+ * @param msg Message set in rede_group settings
+ * @param dicio Dicionary made to transpile msg using volunteer/recipient data
+ * @return { string }
+ */
+export const customText = (msg = "", dicio: any): string => {
+  const re = new RegExp(Object.keys(dicio).join("|"), "gi");
+
+  return msg.replace(re, (matched) => dicio[matched]);
+};
+
+export const whatsappLink = (number: string, text: string): string =>
+  `https://web.whatsapp.com/send?phone=55${number}&text=${encodeURIComponent(
+    text
+  )}`;
+
+export const createCustomWhatsappLink = (
+  {
+    volunteer,
+    recipient,
+  }: {
+    volunteer: Individual;
+    recipient: Individual;
+  },
+  agent: string
+): {
+  volunteer: string;
+  recipient: string;
+} => {
+  if (volunteer && recipient) {
+    const messageDicio = {
+      ...dicio("v", { ...volunteer, agent }),
+      ...dicio("i", { ...recipient, agent }),
+    };
+
+    const volunteerText = customText(
+      volunteer.group?.settings?.communication?.whatsapp,
+      messageDicio
+    );
+    const recipientText = customText(
+      recipient.group?.settings?.communication?.whatsapp,
+      messageDicio
+    );
+
+    return {
+      volunteer: whatsappLink(
+        volunteer.whatsapp || volunteer.phone,
+        volunteerText
+      ),
+      recipient: whatsappLink(
+        recipient.whatsapp || recipient.phone,
+        recipientText
+      ),
+    };
+  }
+  return { volunteer: "", recipient: "" };
 };
 
 type TicketsWithUsers = Array<{
@@ -171,3 +247,48 @@ export const groupToOrganization: Record<number, number> = {
 };
 
 export const MAPA_DO_ACOLHIMENTO_COMMUNITY = 40;
+
+export const getVolunteerOrganizationId = (
+  subject?: string
+): number | undefined => {
+  const str = typeof subject === "string" ? subject.toLowerCase() : "";
+  const removeSpecialCaracters = str.replace(/[^\w\s]/gi, "");
+  if (removeSpecialCaracters.indexOf("jurdico") !== -1)
+    return zendeskOrganizations["lawyer"];
+  if (removeSpecialCaracters.indexOf("psicolgico") !== -1)
+    return zendeskOrganizations["therapist"];
+  return undefined;
+};
+
+export const getMatchGroup = (
+  groups: Groups,
+  individual: Individual
+): string => {
+  if (typeof individual.organizationId !== "undefined") {
+    return individual.organizationId !== zendeskOrganizations["individual"]
+      ? "MSRs"
+      : getVolunteerOrganizationId(individual.subject) ===
+        zendeskOrganizations["lawyer"]
+      ? "advogadas"
+      : "psicólogas";
+  }
+  const group = groups.find((group) => {
+    if (typeof individual.group !== "undefined") {
+      return group.isVolunteer !== individual.group.isVolunteer;
+    }
+    return undefined;
+  });
+  return group?.name?.toLowerCase() || "sem nome";
+};
+
+export const stripIndividualFromData = (
+  data: MapaIndividualTicket[]
+): Individual[] =>
+  data.map((d) => ({
+    ...d,
+    ...d.individual,
+    coordinates: {
+      latitude: d.individual.latitude,
+      longitude: d.individual.longitude,
+    },
+  }));

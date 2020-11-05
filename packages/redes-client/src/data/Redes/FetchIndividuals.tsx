@@ -3,12 +3,13 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues } from "../../services/utils";
+import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
 export const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
     $rows: Int!
     $offset: Int!
-    $order_by: [rede_individuals_order_by!]
+    $context: Int_comparison_exp!
     $userStatus: String_comparison_exp
     $state: String_comparison_exp
     $availability: String_comparison_exp
@@ -26,10 +27,13 @@ export const INDIVIDUALS_BY_GROUP = gql`
           { last_name: { _ilike: $query } }
           { email: { _ilike: $query } }
         ]
+        group: {
+          community_id: $context
+        }
       }
       limit: $rows
       offset: $offset
-      order_by: $order_by
+      order_by: { created_at: asc }
     ) {
       ...individual
     }
@@ -51,25 +55,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       }
     }
   }
-
-  fragment individual on rede_individuals {
-    id
-    firstName: first_name
-    lastName: last_name
-    email
-    whatsapp
-    phone
-    zipcode
-    address
-    city
-    state
-    coordinates
-    availability
-    formEntryId: form_entry_id
-    userStatus: status
-    createdAt: created_at
-    updateAt: updated_at
-  }
+  ${REDE_INDIVIDUAL}
 `;
 
 const FetchIndividuals = (props: any = {}) => {
@@ -87,7 +73,7 @@ const FetchIndividuals = (props: any = {}) => {
       _eq: availability,
     },
     state: {
-      _eq: state,
+      _eq: typeof state === "string" ? state.toUpperCase() : state,
     },
     query: `%${query || ""}%`,
     redeGroupId: {
@@ -95,9 +81,9 @@ const FetchIndividuals = (props: any = {}) => {
     },
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
+    context: {
+      _eq: props.community && props.community.id
+    }
   };
 
   return (

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Header, Empty } from "bonde-components";
-import { Table, Filters } from "../../components";
-import { deconstructAgent } from "../../services/utils";
+
 import { useFilter } from "../../services/FilterProvider";
-import columns from "./columns";
-import { Groups, MatchesData } from "../../types";
+import { Table, Filters } from "../../components";
+import {
+  deconstructAgent,
+  MAPA_DO_ACOLHIMENTO_COMMUNITY,
+} from "../../services/utils";
+import { Groups, MatchesData, Columns } from "../../types";
 
 const WrapEmpty = styled.div`
   height: 100%;
@@ -26,11 +29,17 @@ type Props = {
     FilterOptions: {
       [x: string]: { label: string; value: string | number }[];
     };
+    ColumnsRelations: (
+      groups: Groups,
+      FilterOptions: {
+        [x: string]: { label: string; value: string | number }[];
+      }
+    ) => Array<Columns>;
   };
 };
 
 export default function Relations({
-  data: { FetchMatches, FilterOptions },
+  data: { FetchMatches, FilterOptions, ColumnsRelations },
   community,
   groups,
 }: Props): React.ReactElement {
@@ -42,24 +51,12 @@ export default function Relations({
     return dispatch({ type: "page", value: 0 });
   };
 
-  const reset = () =>
-    dispatch({
-      type: "relationships",
-      value: {
-        query: undefined,
-        state: undefined,
-        agent: undefined,
-        relationshipStatus: undefined,
-      },
-    });
-
   return (
     <>
       <Filters
         save={save}
         options={FilterOptions}
         initialValues={state.relationships}
-        reset={reset}
         searchPlaceholder="Buscar nome, email..."
         search
         state
@@ -73,14 +70,6 @@ export default function Relations({
             aggregate: { count },
           },
         }) => {
-          const pagination = {
-            totalPages: Math.round(count / state.rows),
-            goToPage: (e: number) => dispatch({ type: "page", value: e }),
-            setPageSize: (e: number) => dispatch({ type: "rows", value: e }),
-            pageIndex: state.page,
-            pageSize: state.rows,
-          };
-
           return count < 1 ? (
             <WrapEmpty>
               <Empty message="Nada por aqui..." />
@@ -94,13 +83,13 @@ export default function Relations({
               <Header.H4>Total ({count})</Header.H4>
               <Table
                 data={
-                  community?.id === 40
+                  community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
                     ? deconstructAgent(relationships)
                     : relationships
                 }
-                columns={columns(groups)}
+                columns={ColumnsRelations(groups, FilterOptions)}
                 sticky="end"
-                pagination={pagination}
+                totalResults={count}
               />
             </>
           );

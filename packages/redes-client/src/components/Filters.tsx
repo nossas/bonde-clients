@@ -3,7 +3,7 @@ import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import {
   RoundSelectField,
   RoundInputField,
-  Button,
+  CleanButton,
   Icon,
   ConnectedForm,
   Form,
@@ -14,11 +14,13 @@ import { AutoSaveFilters } from "./";
 const WrapForm = styled.div`
   & > ${Form} {
     display: grid;
-    grid-template-columns: 300px repeat(5, minmax(auto, 164px)) 100px;
     width: 100%;
-    justify-content: start;
     grid-gap: 15px;
-    align-items: center;
+    @media (min-width: 992px) {
+      grid-template-columns: 300px repeat(auto-fill, minmax(165px, 1fr));
+      justify-content: start;
+      align-items: center;
+    }
     & > div {
       padding: 0;
     }
@@ -33,11 +35,9 @@ const WrapInput = styled.div`
 
   & .icons {
     position: absolute;
-    top: 13px;
-    display: grid;
-    width: 95%;
-    grid-template-columns: auto auto;
-    justify-content: end;
+    right: 12px;
+    top: 12px;
+    display: flex;
     & button {
       border: none;
       padding: 0;
@@ -54,7 +54,6 @@ type FilterProps = {
   save: (e: any) => Promise<any>;
   onGroupChange: (e: any) => void;
   options: Options;
-  reset: () => void;
   search?: boolean;
   groups?: boolean;
   userStatus?: boolean;
@@ -69,7 +68,6 @@ const Filters = ({
   save,
   initialValues,
   options,
-  reset,
   searchPlaceholder,
   onGroupChange,
   ...props
@@ -97,15 +95,21 @@ const Filters = ({
                     name="query"
                   />
                   <div className="icons">
-                    <Button
-                      dark
-                      onClick={() => form.change("query", undefined)}
-                    >
-                      <Icon name="Close" size="xs" />
-                    </Button>
-                    <Button dark>
-                      <Icon name="Search" size="small" />
-                    </Button>
+                    {initialValues.query && (
+                      <CleanButton
+                        onClick={() => form.change("query", undefined)}
+                        style={{ paddingRight: "5px" }}
+                      >
+                        <Icon name="Close" size="xs" color="#ee0099" />
+                      </CleanButton>
+                    )}
+                    <CleanButton>
+                      <Icon
+                        name="Search"
+                        size="small"
+                        color={initialValues.query ? "#ee0099" : "#aaa"}
+                      />
+                    </CleanButton>
                   </div>
                 </WrapInput>
               )}
@@ -164,16 +168,6 @@ const Filters = ({
                   isClearable={true}
                 />
               )}
-              <Button
-                dark
-                onClick={() => {
-                  reset();
-                  form.reset();
-                }}
-              >
-                Limpar
-                <Icon name="Close" size="xs" />
-              </Button>
             </>
           );
         }}

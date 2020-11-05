@@ -1,10 +1,12 @@
+
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
-import { Loading, Main, Body as ComponentsBody } from "bonde-components";
-import styled from "styled-components";
+import { Loading, Main, Body, ToastContainer } from "bonde-components";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as types from "styled-components/cssprop";
 
-import { Relations, Individuals, Home } from "./pages";
+import { Relations, Individuals, Home, Match, Settings } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
 import { FilterProvider } from "./services/FilterProvider";
 import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
@@ -12,6 +14,8 @@ import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
 type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
 };
+
+// import "react-toastify/dist/ReactToastify.css";
 
 const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
@@ -27,13 +31,7 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 
 type Environment = "development" | "staging" | "production";
 
-const Body = styled(ComponentsBody)`
-  display: unset;
-  padding: 20px 65px;
-`;
-
 const App = (): React.ReactElement => {
-  console.log({ envs: process.env });
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
   const adminUrl =
@@ -52,14 +50,23 @@ const App = (): React.ReactElement => {
             <BondeSessionUI indexRoute={adminUrl}>
               <Main style={{ minWidth: "100%" }}>
                 <Header />
-                <Body>
+                <ToastContainer
+                  className='BondeToastify'
+                  hideProgressBar={true}
+                />
+                <Body style={{ paddingTop: "20px", display: "unset" }}>
                   <Switch>
-                    <SelectMapaOrRedes path="/matchs" component={Relations} />
+                    <SelectMapaOrRedes exact path="/" component={Home} />
+                    <SelectMapaOrRedes path="/matches" component={Relations} />
                     <SelectMapaOrRedes
                       path="/pessoas"
                       component={Individuals}
                     />
-                    <SelectMapaOrRedes path="/" component={Home} />
+                    <SelectMapaOrRedes path="/match" component={Match} />
+                    <SelectMapaOrRedes
+                      path="/configuracoes"
+                      component={Settings}
+                    />
                   </Switch>
                 </Body>
               </Main>

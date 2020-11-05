@@ -1,12 +1,13 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, useLocation, Redirect } from "react-router-dom";
 import { useSession } from "bonde-core-tools";
-import { useCommunityExtra } from "../services/CommunityExtraProvider";
+
 import Data from "../data";
+import { useCommunityExtra } from "../services/CommunityExtraProvider";
+import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../services/utils";
 import { Groups } from "../types";
 
 type Props = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ({
     data,
     community,
@@ -16,7 +17,17 @@ type Props = {
     community?: { id: number };
     groups: Groups;
   }) => React.ReactElement | null;
-  path: string;
+  path?: string;
+  exact?: boolean;
+};
+
+const redirect = () => {
+  alert("Você precisa selecionar alguma usuária para começar o Match");
+  return <Redirect to="/pessoas" />;
+};
+
+const validateIfUserIsSelected = (component: any, state: any) => {
+  return state ? component : redirect();
 };
 
 const SelectMapaOrRedes = ({
@@ -25,19 +36,27 @@ const SelectMapaOrRedes = ({
 }: Props): React.ReactElement => {
   const { community } = useSession();
   const { groups } = useCommunityExtra();
+  const { state } = useLocation();
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        return (
+        const render = (
           <ComponentToRender
             {...props}
             groups={groups}
             community={community}
-            data={community?.id === 40 ? Data.mapa : Data.redes}
+            data={
+              community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
+                ? Data.mapa
+                : Data.redes
+            }
           />
         );
+        return rest.path === "/match"
+          ? validateIfUserIsSelected(render, state)
+          : render;
       }}
     />
   );

@@ -3,8 +3,9 @@ import { gql } from "bonde-core-tools";
 import { CheckCommunity, FetchDataFromGraphql } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
 import { getSelectValues, groupToOrganization } from "../../services/utils";
+import { MAPA_TICKET_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 
-export const INDIVIDUALS_BY_GROUP = gql`
+const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
     $rows: Int!
     $offset: Int!
@@ -35,7 +36,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       offset: $offset
       order_by: $order_by
     ) {
-      ...individual
+      ...ticketIndividual
     }
     individualsCount: solidarity_tickets_aggregate(
       where: {
@@ -58,33 +59,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       }
     }
   }
-
-  fragment individual on solidarity_tickets {
-    id: ticket_id
-    individual {
-      id: user_id
-      firstName: name
-      email
-      whatsapp
-      phone
-      zipcode: cep
-      address
-      city
-      latitude
-      longitude
-      state
-      availability: condition
-      formEntryId: external_id
-      tipoDeAcolhimento: tipo_de_acolhimento
-      createdAt: data_de_inscricao_no_bonde
-      encaminhamentosRealizados: encaminhamentos_realizados_calculado_
-      atendimentosConcluidos: atendimentos_concludos_calculado_
-      atendimentosEmAndamento: atendimentos_em_andamento_calculado_
-    }
-    relationshipStatus: status_acolhimento
-    userStatus: status_inscricao
-    organizationId: organization_id
-  }
+  ${MAPA_TICKET_INDIVIDUAL}
 `;
 
 const FetchIndividuals = (props: any = {}) => {
