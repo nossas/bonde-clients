@@ -15,7 +15,7 @@ type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
 };
 
-// import "react-toastify/dist/ReactToastify.css";
+import "./ReactToastify.css";
 
 const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
