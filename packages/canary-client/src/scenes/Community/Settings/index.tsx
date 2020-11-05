@@ -1,10 +1,8 @@
 import React from 'react';
-import { InputField, Button } from 'bonde-components';
+import { InputField, Button, Tooltip, Success } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
-import Tooltip from '../../../components/Tooltip';
 import UploadField from "../../../components/UploadFile";
-import { Success } from '../../../components/Notifications';
 import CommunityForm from '../BaseForm';
 import Panel from '../Panel';
 
