@@ -36,8 +36,14 @@ const Domain = ({ dnsHostedZone }: Props) => {
         </DTCol>
         <DTCol>
           <Status
-            value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'active' : 'inactive'}
-            labels={{ active: 'Ativo', inactive: 'Inativo'}}
+            activeStatus='propagated'
+            inactiveStatus='created'
+            value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
+            labels={{
+              created: 'Aguardando configurar DNS',
+              propagating: 'Propagando',
+              propagated: 'Propagado'
+            }}
           />
         </DTCol>
         <DTCol>

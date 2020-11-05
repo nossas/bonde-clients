@@ -16,7 +16,6 @@ type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
 };
 
-
 const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
     session: "Carregando sessão...",
