@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
-import { Button, Header, Text } from 'bonde-components';
-import { Success } from '../../../components/Notifications';
+import { Button, Header, Text, Success } from 'bonde-components';
 import CommunityForm from '../BaseForm';
 import Panel, { Section } from '../Panel';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';

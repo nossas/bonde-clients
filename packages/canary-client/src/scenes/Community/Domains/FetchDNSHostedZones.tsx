@@ -1,16 +1,20 @@
 import { useQuery, gql, useSession } from 'bonde-core-tools';
+import { DNSHostedZone } from './types';
 
 const fetchGraphqlQuery = gql`
   query DNS ($communityId: Int!){
     dns_hosted_zones (where: { community_id: { _eq: $communityId }}) {
       id
       community {
+        id
         name
       }
       comment
       domain_name
       ns_ok
-      hosted_zone: response(path: "hosted_zone")
+      status
+      hosted_zone_rest: response(path: "hosted_zone")
+      hosted_zone: response(path: "HostedZone")
       name_servers_rest: response(path: "delegation_set.name_servers")
       name_servers: response(path: "DelegationSet.NameServers")
 
@@ -19,6 +23,7 @@ const fetchGraphqlQuery = gql`
       }
 
       dns_records {
+        id
         name
         value
         record_type
@@ -31,7 +36,7 @@ const fetchGraphqlQuery = gql`
 
 const FetchDNSHostedZones = ({ children }: any) => {
   const { community } = useSession();
-  const { data, loading, error } = useQuery(
+  const { data, loading, error, refetch } = useQuery(
     fetchGraphqlQuery,
     { variables: { communityId: community?.id } }
   );
@@ -40,10 +45,12 @@ const FetchDNSHostedZones = ({ children }: any) => {
   else if (error) return `Failed ${error}`;
 
   return children({
-    hostedZones: data.dns_hosted_zones.map((dns: any) => ({
+    refetch,
+    dnsHostedZones: (data.dns_hosted_zones.map((dns: any) => ({
       ...dns,
+      hosted_zone: dns.hosted_zone || dns.hosted_zone_rest,
       name_servers: dns.name_servers || dns.name_servers_rest
-    }))
+    })) as DNSHostedZone[])
   });
 }
 

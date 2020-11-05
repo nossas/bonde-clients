@@ -1,9 +1,14 @@
 import React from 'react';
-import { InputField, Header, Text, Button } from 'bonde-components';
+import {
+  InputField,
+  Header,
+  Text,
+  Button,
+  Tooltip,
+  Success
+} from 'bonde-components';
 import { Container, Row, Col, Visible } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
-import Tooltip from '../../../components/Tooltip';
-import { Success } from '../../../components/Notifications';
 import CommunityForm from '../BaseForm';
 import Panel, { Section } from '../Panel';
 import MailchimpIcon from './MailchimpIcon';

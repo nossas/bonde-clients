@@ -30,7 +30,7 @@ type DNSHostedZone = {
   updated_at?: string
 }
 
-const CreateDomainFlow = ({ btnText }: any) => {
+const CreateDomainFlow = ({ btnText, refetch }: any) => {
   const [open, setOpen] = useState(false);
   const [dnsHostedZone, setDnsHostedZone] = useState<DNSHostedZone>();
   const [mutation] = useMutation(createDomainGQL);
@@ -49,12 +49,24 @@ const CreateDomainFlow = ({ btnText }: any) => {
     setDnsHostedZone(data.create_domain);
   }
 
+  const onClose = () => {
+    setOpen(false)
+    setDnsHostedZone(undefined)
+  }
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>{btnText}</Button>
       {!dnsHostedZone
-        ? <CreateDomainModal open={open} onClose={() => setOpen(false)} onSubmit={onSubmit} />
-        : <NameServersModal open={open} onClose={() => setOpen(false)} dnsHostedZone={dnsHostedZone} />
+        ? <CreateDomainModal open={open} onClose={onClose} onSubmit={onSubmit} />
+        : <NameServersModal
+            open={open}
+            onClose={() => {
+              onClose()
+              refetch()
+            }}
+            dnsHostedZone={dnsHostedZone}
+          />
       }
     </>
   );

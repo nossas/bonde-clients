@@ -1,41 +1,47 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { Header, Text, Icon } from 'bonde-components';
-import { DNS as DTRow, Col as DTCol, Status, List as DTList } from './Styles';
+import {
+  DNS as DTRow,
+  Col as DTCol,
+  List as DTList,
+  Status,
+  Fluid
+} from './Styles';
 import CreateDomainFlow from './CreateDomainFlow';
 
 type Certificate = {
   is_active: boolean
 }
 
-type HostedZone = {
+type DNSHostedZone = {
   id: number
   domain_name: string
   name_servers?: string[]
   ns_ok?: boolean
   certificates?: Certificate[]
+  status: 'created' | 'propagating' | 'propagated' | 'certifying' | 'certified'
 }
 
 type Props = {
-  hostedZone: HostedZone
+  dnsHostedZone: DNSHostedZone
 }
 
-const Domain = ({ hostedZone }: Props) => {
+const Domain = ({ dnsHostedZone }: Props) => {
   return (
-    <Link to={`/community/domains/${hostedZone.id}`}>
+    <Link to={`/community/domains/${dnsHostedZone.id}`}>
       <DTRow>
         <DTCol>
-          <Header.H4>{hostedZone.domain_name}</Header.H4>
+          <Text bold>{dnsHostedZone.domain_name}</Text>
         </DTCol>
         <DTCol>
           <Status
-            value={hostedZone.ns_ok ? 'active' : 'inactive'}
-            labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+            value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'active' : 'inactive'}
+            labels={{ active: 'Ativo', inactive: 'Inativo'}}
           />
         </DTCol>
         <DTCol>
-          <Icon name='ArrowRight' />
+          <Icon size='small' name='ArrowRight' />
         </DTCol>
       </DTRow>
     </Link>
@@ -43,35 +49,34 @@ const Domain = ({ hostedZone }: Props) => {
 }
 
 type DomainsProps = {
-  hostedZones: HostedZone[]
+  refetch: any
+  dnsHostedZones: DNSHostedZone[]
 }
 
-const Domains = ({ hostedZones }: DomainsProps) => (
-  <Container fluid style={{ width: '100%', padding: '0' }}>
-    <Row>
-      <Col xs={12} sm={8} md={9} lg={10}>
+const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
+  <>
+    <Fluid>
+      <div>
         <Header.H3>Domínios</Header.H3>
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-      </Col>
-      <Col xs={12} sm={4} md={3} lg={2}>
-        <CreateDomainFlow btnText='Adicionar domínio' />
-      </Col>
-    </Row>
-    <DTList>
+      </div>
+      <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
+    </Fluid>
+    <DTList columnSize='500px auto 70px'>
       <DTRow header>
         <DTCol>
-          <Header.H5>Domínio</Header.H5>
+          <Text>Domínio</Text>
         </DTCol>
         <DTCol>
-          <Header.H5>Status</Header.H5>
+          <Text>Status</Text>
         </DTCol>
         <DTCol />
       </DTRow>
-      {hostedZones.map((hostedZone: HostedZone, index: number) => (
-        <Domain key={index} hostedZone={hostedZone} />
+      {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
+        <Domain key={index} dnsHostedZone={dnsHostedZone} />
       ))}
     </DTList>
-  </Container>
+  </>
 );
 
 export default Domains;

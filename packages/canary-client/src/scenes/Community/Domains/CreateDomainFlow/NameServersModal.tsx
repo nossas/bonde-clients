@@ -1,70 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal, Header, Text, Button, Link } from 'bonde-components';
+import { Modal, Header, Text, Button, Link, toast, Success } from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
 import { Container, Row, Col } from 'react-grid-system';
 import NameServers from '../NameServers';
+import Radio from './Radio';
 
-const Radio = styled.label`
-  display: flex;
-  cursor: pointer;
-
-  input {
-    margin: 5px 10px 0 0;
-
-    &:checked,
-    &:not(:checked) {
-      position: absolute;
-      left: -9999px;
-    }
-    &:checked + p,
-    &:not(:checked) + p
-    {
-      position: relative;
-      padding-left: 28px;
-      color: #666;
-    }
-    &:checked + p:before,
-    &:not(:checked) + p:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      border: 1px solid #ddd;
-      border-radius: 100%;
-      background: #fff;
-    }
-    &:checked + p:after,
-    &:not(:checked) + p:after {
-      content: '';
-      width: 12px;
-      height: 12px;
-      background: #F87DA9;
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      border-radius: 100%;
-      -webkit-transition: all 0.2s ease;
-      transition: all 0.2s ease;
-    }
-    &:not(:checked) + p:after {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    }
-    &:checked + p:after {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-  }
-`
-
-const TopicList = styled.ol`
-`
+const TopicList = styled.ol``;
 
 type DNSHostedZone = {
+  id: number
   name_servers: string[]
 }
 
@@ -74,8 +19,23 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
+const PropagatingDNSGQL = gql`
+  mutation ($dns_hosted_zone_id: Int!) {
+    update_dns_hosted_zones_by_pk(
+      pk_columns: { id: $dns_hosted_zone_id },
+      _set: { status: "propagating" }
+    ) {
+      id
+      domain_name
+      community_id
+      status
+    }
+  }
+`;
+
 const NameServersModal = ({ open, onClose, dnsHostedZone }: Props) => {
-  const [status, setStatus] = useState<string>();
+  const [status, setStatus] = useState();
+  const [setPropagating] = useMutation(PropagatingDNSGQL);
 
   return (
     <Modal width='60%' isOpen={open} onClose={onClose}>
@@ -121,10 +81,21 @@ const NameServersModal = ({ open, onClose, dnsHostedZone }: Props) => {
         </Row>
         <Row>
           <Col xs={6}>
-            <Link>Voltar</Link>
+            <Link onClick={onClose}>Voltar</Link>
           </Col>
           <Col xs={6}>
-            <Button disabled={status !== 'registered'} type='button'>Pronto!</Button>
+            <Button
+              onClick={async () => {
+                const { data, errors } = await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id }});
+                console.log('data, errors', { data, errors });
+                toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
+                onClose()
+              }}
+              disabled={status !== 'registered'}
+              type='button'
+            >
+              Pronto!
+            </Button>
           </Col>
         </Row>
       </Container>
