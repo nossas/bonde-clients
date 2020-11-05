@@ -102,7 +102,7 @@ export default function Home({
           }
         >
           <Shortcut
-            icon={<Icon name="Favorite" size="default" />}
+            icon={<Icon name="Heart" size="default" />}
             text="Fazer match de Voluntária"
           />
         </Link>

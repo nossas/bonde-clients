@@ -1,13 +1,10 @@
-import "react-toastify/dist/ReactToastify.css";
 
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
-import { Loading, Main, Body } from "bonde-components";
-import { ToastContainer } from "react-toastify";
+import { Loading, Main, Body, ToastContainer } from "bonde-components";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
-import styled from "styled-components/macro";
 
 import { Relations, Individuals, Home, Match, Settings } from "./pages";
 import { Header, SelectMapaOrRedes } from "./components";
@@ -17,6 +14,8 @@ import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
 type SessionLoadingProps = {
   fetching: "session" | "user" | "communities" | "redirect" | "module";
 };
+
+// import "react-toastify/dist/ReactToastify.css";
 
 const SessionLoading = ({ fetching }: SessionLoadingProps) => {
   const messages = {
@@ -32,23 +31,7 @@ const SessionLoading = ({ fetching }: SessionLoadingProps) => {
 
 type Environment = "development" | "staging" | "production";
 
-const BondeToastify = styled(ToastContainer)`
-  & > .Toastify_toast {
-    padding: 15px;
-  }
-  & > .Toastify__toast.Toastify__toast--success {
-    background-color: #50e3c2;
-  }
-  & > .Toastify__toast .Toastify__toast-body {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: white;
-  }
-`;
-
 const App = (): React.ReactElement => {
-  console.log({ envs: process.env });
   const environment: string =
     process.env.REACT_APP_ENVIRONMENT || "development";
   const adminUrl =
@@ -67,18 +50,10 @@ const App = (): React.ReactElement => {
             <BondeSessionUI indexRoute={adminUrl}>
               <Main style={{ minWidth: "100%" }}>
                 <Header />
-                <BondeToastify>
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    draggable={false}
-                    pauseOnHover
-                  />
-                </BondeToastify>
+                <ToastContainer
+                  className='BondeToastify'
+                  hideProgressBar={true}
+                />
                 <Body style={{ paddingTop: "20px", display: "unset" }}>
                   <Switch>
                     <SelectMapaOrRedes exact path="/" component={Home} />

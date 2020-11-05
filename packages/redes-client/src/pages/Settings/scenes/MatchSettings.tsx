@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useMutation } from "bonde-core-tools";
-import { toast } from "react-toastify";
+import { Success, toast } from "bonde-components";
 import {
   Button,
   ConnectedForm,
@@ -13,7 +13,6 @@ import {
   Hint,
 } from "bonde-components";
 
-import { settingsSaved } from "../../../services/notifications";
 import UPDATE_GROUPS from "../../../graphql/UpdateGroups";
 import { Tip, WhatsappCards } from ".";
 import { Groups } from "../../../types";
@@ -79,18 +78,10 @@ const MatchSettings = ({
         newMsgs.map(async (i) => await saveSettings({ variables: i }))
       );
       if (!error) {
-        toast.success(settingsSaved().success, {
-          autoClose: settingsSaved().dismissAfter,
-          hideProgressBar: settingsSaved().progress,
-          closeButton: settingsSaved().closeButton,
-        });
+        toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
       }
     } catch (e) {
-      toast.error(settingsSaved().error, {
-        autoClose: settingsSaved().dismissAfter,
-        hideProgressBar: settingsSaved().progress,
-        closeButton: settingsSaved().closeButton,
-      });
+      toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
       console.log("err", e);
     }
   };
