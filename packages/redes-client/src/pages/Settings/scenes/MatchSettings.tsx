@@ -21,7 +21,7 @@ const WrapButton = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   bottom: 65px;
   & > button {
     width: 220px;
@@ -111,9 +111,9 @@ const MatchSettings = ({
                       margin={{ bottom: 30 }}
                       key={`whatsapp-card-${i}`}
                     >
-                      <div style={{ marginBottom: 20 }}>
-                        <Header.H3>{group.name}</Header.H3>
-                      </div>
+                      <Header.H3 style={{ margin: 0, marginBottom: '15px' }}> 
+                        {group.name}
+                      </Header.H3>
                       {error && <Hint color="error">{error.message}</Hint>}
                       <div
                         css={`
