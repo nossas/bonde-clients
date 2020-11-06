@@ -19,12 +19,23 @@ const WrapButton = styled.div`
   }
 `;
 
+type MatchUsers = {
+  input: {
+    recipient_id: number;
+    user_id?: number;
+    volunteer_id: number;
+    status: string;
+  };
+  recipientId: number;
+  volunteerId: number;
+}
+
 const getVariables = (
   match: {
     recipient: Individual;
     volunteer: Individual;
   },
-  userId: number,
+  user: any,
   communityId?: number
 ) => {
   if (communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY) {
@@ -33,11 +44,19 @@ const getVariables = (
       ...match,
     };
   }
-  return {
+  const usersForMatch: MatchUsers = {
+    input: {
+      recipient_id: match.recipient.id,
+      volunteer_id: match.volunteer.id,
+      status: "encaminhamento_realizado"
+    },
     recipientId: match.recipient.id,
     volunteerId: match.volunteer.id,
-    agentId: userId,
-  };
+  }
+  if(user.isAdmin) {
+    usersForMatch.input["user_id"] = user.id
+  }
+  return usersForMatch
 };
 
 export default function Popups({
@@ -64,12 +83,10 @@ export default function Popups({
     recipient: "",
   });
 
-  console.log({match, bla:user.firstName})
-
   const handleClick = async () => {
     try {
       const { data } = await createRelationship({
-        variables: getVariables(match, user.id, community?.id),
+        variables: getVariables(match, user, community?.id),
       });
       const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
       setCustomLink(customWhatsappLink);
@@ -102,7 +119,7 @@ export default function Popups({
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 300px;
+            width: 100%;
             height: 300px;
           `}
         >
