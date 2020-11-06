@@ -78,10 +78,10 @@ const MatchSettings = ({
         newMsgs.map(async (i) => await saveSettings({ variables: i }))
       );
       if (!error) {
-        toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
+        toast(<Success message='Configuração salva com sucesso!' />, { type: toast.TYPE.SUCCESS });
       }
     } catch (e) {
-      toast('Houve um problema ao tentar remover domínio', { type: toast.TYPE.ERROR });
+      toast('Houve um problema ao tentar salvar as configurações', { type: toast.TYPE.ERROR });
       console.log("err", e);
     }
   };

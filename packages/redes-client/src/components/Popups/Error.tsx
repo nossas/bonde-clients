@@ -16,8 +16,8 @@ export default function Error({
 }): React.ReactElement {
   return (
     <div>
-      <Header.H2>Ops!</Header.H2>
-      <Text align="center">
+      <Header.H2 style={{ margin: 0 }}>Ops!</Header.H2>
+      <Text style={{ margin: '15px 0 25px 0' }}>
         Encontramos um erro e {match.recipient.firstName} não pôde ser
         encaminhada para {match.volunteer.firstName}
       </Text>
@@ -29,7 +29,7 @@ export default function Error({
       >
         <Text>{errorMsg}</Text>
       </div>
-      <Text align="center">
+      <Text align="center" style={{ margin: '25px 0' }}>
         Clique abaixo para tentar outra vez. Se o erro persistir, comunique a
         equipe de tecnologia.
       </Text>
