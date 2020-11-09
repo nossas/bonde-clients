@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { Button, Header, Text, Success } from 'bonde-components';
+import SelectField from '../../../components/SelectField';
 import CommunityForm from '../BaseForm';
 import Panel, { Section } from '../Panel';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
-import SelectField from '../SelectField';
 import SelectFieldCondition from './SelectFieldCondition';
 
 const TransferPanel: React.FC = () => {

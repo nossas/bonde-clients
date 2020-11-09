@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectField from '../SelectField';
+import SelectField from '../../../components/SelectField';
 
 const banks = [
   { code: "332", name: "Acesso Soluções de Pagamento S.A." },
@@ -241,7 +241,7 @@ const banks = [
   .sort((b1: any, b2: any) => Number(b1.code) - Number(b2.code))
 ;
 
-export default ({ emptyText, ...props }: any) => (
+const BankField = ({ emptyText, ...props }: any) => (
   <SelectField
     {...props}
   >
@@ -251,3 +251,5 @@ export default ({ emptyText, ...props }: any) => (
     ))}
   </SelectField>
 );
+
+export default BankField;

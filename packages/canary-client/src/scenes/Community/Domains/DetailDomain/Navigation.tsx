@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Header, Icon } from 'bonde-components';
 import { Fluid } from '../Styles';
 import { DNSHostedZone } from '../types';
+import RecordModal from './RecordModal';
 
 const LinkStyled = styled(Link)`
   display: flex;
@@ -14,16 +15,24 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
-const DetailHeader = ({ dnsHostedZone }: Props) => {
+const Navigation = ({ dnsHostedZone }: Props) => {
+  const [open, setOpen] = useState(false);
+  const disabled = (dnsHostedZone.status === 'created' || dnsHostedZone.status === 'propagating') && !dnsHostedZone.ns_ok
+
   return (
     <Fluid>
       <LinkStyled to='/community/domains'>
         <Icon name='ArrowLeft' size='small' />
         <Header.H5>Detalhes do domínio</Header.H5>
       </LinkStyled>
-      <Button disabled={!dnsHostedZone.ns_ok} onClick={() => console.log('Adicionar domínio')}>Adicionar subdomínio</Button>
+      <Button disabled={disabled} onClick={() => setOpen(true)}>Adicionar subdomínio</Button>
+      <RecordModal
+        dnsHostedZone={dnsHostedZone}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </Fluid>
   );
 }
 
-export default DetailHeader;
+export default Navigation;

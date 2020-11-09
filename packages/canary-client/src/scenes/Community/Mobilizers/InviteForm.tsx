@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import Panel from '../Panel';
-import SelectField from '../SelectField';
+import SelectField from '../../../components/SelectField';
 
 const InlineFormWrap = styled.div`
   display: grid;

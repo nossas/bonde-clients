@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField } from 'bonde-components';
-import SelectField from '../SelectField';
+import SelectField from '../../../components/SelectField';
 
 const SelectFieldCondition = ({ children, parent, ...props }: any) => {
   const { input } = useField(parent);
