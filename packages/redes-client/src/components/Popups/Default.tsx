@@ -2,12 +2,18 @@ import React from "react";
 import { Header, Text } from "bonde-components";
 import styled from "styled-components";
 
-const WrapButtons = styled.div`
+const WrapButtons = styled.div<{ direction?: 'column' | 'row' }>`
   display: grid;
-  grid-template-columns: auto auto;
-  justify-content: space-between;
-  align-items: center;
+  ${({ direction }) => direction === 'row' && `
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+  `}
 `;
+
+WrapButtons.defaultProps = {
+  direction: 'row'
+}
 
 const Wrap = styled.div`
   & > ${Header.H2} {
@@ -20,17 +26,19 @@ export default function Default({
   text,
   MainBtn,
   SecondaryBtn,
+  direction
 }: {
   title: string;
   text: string;
   MainBtn: React.ReactNode;
   SecondaryBtn: React.ReactNode;
+  direction?: 'column' | 'row';
 }): React.ReactElement {
   return (
     <Wrap>
       <Header.H2>{title}</Header.H2>
       <Text>{text}</Text>
-      <WrapButtons>
+      <WrapButtons direction={direction}>
         {SecondaryBtn}
         {MainBtn}
       </WrapButtons>

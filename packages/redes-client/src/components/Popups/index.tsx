@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components/macro";
+import { css } from "styled-components/macro";
 
 import { Modal, Button, Loading, Icon } from "bonde-components";
 import { useSession, useMutation } from "bonde-core-tools";
@@ -12,12 +12,6 @@ import {
   MAPA_DO_ACOLHIMENTO_COMMUNITY,
 } from "../../services/utils";
 import { Individual } from "../../types";
-
-const WrapButton = styled.div`
-  & button {
-    padding-left: 0;
-  }
-`;
 
 type MatchUsers = {
   input: {
@@ -98,18 +92,24 @@ export default function Popups({
   };
 
   return (
-    <Modal width="400px" isOpen={isOpen} onClose={() => setModal(false)}>
+    <Modal width="375px" isOpen={isOpen} onClose={() => setModal(false)}>
       {isOpen && !error && !data && !loading && (
         <Default
           title="Confirma?"
           text={`${match.recipient.firstName} será encaminhada para ${match.volunteer.firstName}.`}
           MainBtn={<Button onClick={handleClick}>Confirmar</Button>}
           SecondaryBtn={
-            <WrapButton>
+            <div
+              css={css`
+                & button {
+                  padding-left: 0;
+                }
+              `}
+            >
               <Button align="left" onClick={() => setModal(false)} secondary>
                 Voltar
               </Button>
-            </WrapButton>
+            </div>
           }
         />
       )}
@@ -130,11 +130,38 @@ export default function Popups({
         <Default
           title="Eba!"
           text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
+          direction="column"
           MainBtn={
+            <div css={css`
+              & button {
+                padding: 20px 0 0;
+              }
+            `}>
+              <Link
+                to={"/matches"}
+                onClick={() =>
+                  dispatch({
+                    type: "relationships",
+                    value: {
+                      query: `${match.recipient.email}`,
+                      agent: {
+                        label: `${user.firstName} ${user.lastName || ""}`,
+                        value: user.id,
+                      },
+                    },
+                  })
+                }
+                style={{ textDecoration: "none" }}
+              >
+                <Button secondary>Ver relação</Button>
+              </Link>
+            </div>
+          }
+          SecondaryBtn={
             <div
               css={css`
                 display: grid;
-                grid-gap: 10px;
+                grid-gap: 15px;
               `}
             >
               <a
@@ -160,28 +187,6 @@ export default function Popups({
                 </Button>
               </a>
             </div>
-          }
-          SecondaryBtn={
-            <WrapButton>
-              <Link
-                to={"/matches"}
-                onClick={() =>
-                  dispatch({
-                    type: "relationships",
-                    value: {
-                      query: `${match.recipient.email}`,
-                      agent: {
-                        label: `${user.firstName} ${user.lastName || ""}`,
-                        value: user.id,
-                      },
-                    },
-                  })
-                }
-                style={{ textDecoration: "none" }}
-              >
-                <Button secondary>Ver relação</Button>
-              </Link>
-            </WrapButton>
           }
         />
       )}

@@ -29,7 +29,7 @@ export default function Error({
       >
         <Text>{errorMsg}</Text>
       </div>
-      <Text align="center" style={{ margin: '25px 0' }}>
+      <Text style={{ margin: '25px 0' }}>
         Clique abaixo para tentar outra vez. Se o erro persistir, comunique a
         equipe de tecnologia.
       </Text>
