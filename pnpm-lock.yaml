@@ -10,7 +10,7 @@ importers:
       '@types/react-dom': 16.9.9
       '@types/react-router-dom': 5.1.6
       '@types/styled-components': 5.1.4
-      bonde-components: 0.0.4-alpha.24_react-dom@16.14.0+react@16.14.0
+      bonde-components: 0.0.4-alpha.26_react-dom@16.14.0+react@16.14.0
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       i18next: 19.8.3
@@ -43,7 +43,7 @@ importers:
       '@types/styled-components': ^5.1.2
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
-      bonde-components: 0.0.4-alpha.24
+      bonde-components: 0.0.4-alpha.26
       bonde-core-tools: 0.1.7-alpha.2
       eslint: 6.6.0
       husky: ^4.2.5
@@ -4757,21 +4757,21 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
-  /bonde-components/0.0.4-alpha.24_react-dom@16.14.0+react@16.14.0:
+  /bonde-components/0.0.4-alpha.26_react-dom@16.14.0+react@16.14.0:
     dependencies:
       final-form: 4.20.1
       react: 16.14.0
       react-final-form: 6.5.2_final-form@4.20.1+react@16.14.0
       react-select: 3.1.0_react-dom@16.14.0+react@16.14.0
       react-table: 7.6.1_react@16.14.0
-      react-toastify: 6.0.9_react-dom@16.14.0+react@16.14.0
+      react-toastify: 6.1.0_react-dom@16.14.0+react@16.14.0
       styled-components: 5.2.1_e9c460b9a74d742899d58632cd56c5d4
     dev: false
     peerDependencies:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-OiWi3+1ebYA7oc8ztWKHd25qGuvDgkc6JKEcz+yjVFhgTNhFigm0qM+qjD472jTlNYpjbluROY8Tfkk7HBtE9A==
+      integrity: sha512-D5k9kJgKEHEi5EM8uIA5mrrBigBEce1KM5bZud4Kd18GiXqXgfVfGn6WoA6sU+DvyYnKD+W1vxCZEjVVTQYEqw==
   /bonde-core-tools/0.1.7-alpha.2:
     dependencies:
       '@apollo/client': 3.2.5_graphql@15.4.0+react@16.14.0
@@ -5399,6 +5399,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-neHB9xuzh/wk0dIHweyAXv2aPGZIVk3pLMe+/RNzINf17fe0OG96QroktYAUm7SM1PBnzTabaLboqqxDyMU+SQ==
+  /clsx/1.1.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
   /co/4.6.0:
     dev: false
     engines:
@@ -12989,9 +12995,9 @@ packages:
       react: '>=16'
     resolution:
       integrity: sha512-StHXv+4kezHUnPyoILlvygSptQ79bxVuvKcC05yXP0FlqQgPA1ue+80BqxZZiCw2jWDGiY2MHyqBfFKf5YzZbA==
-  /react-toastify/6.0.9_react-dom@16.14.0+react@16.14.0:
+  /react-toastify/6.1.0_react-dom@16.14.0+react@16.14.0:
     dependencies:
-      classnames: 2.2.6
+      clsx: 1.1.1
       prop-types: 15.7.2
       react: 16.14.0
       react-transition-group: 4.4.1_react-dom@16.14.0+react@16.14.0
@@ -13000,7 +13006,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-StHXv+4kezHUnPyoILlvygSptQ79bxVuvKcC05yXP0FlqQgPA1ue+80BqxZZiCw2jWDGiY2MHyqBfFKf5YzZbA==
+      integrity: sha512-Ne+wIoO9A+jZlaqGqgeuXDC/DQfqTuJdyoc7G5SsuCHsr8mNRx7W26417YKtHRH0LcnFFd5ii76tGnmm0cMlLg==
   /react-transition-group/2.9.0:
     dependencies:
       dom-helpers: 3.4.0

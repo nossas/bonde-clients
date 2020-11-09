@@ -10,7 +10,7 @@ import { WeeklyStatsData } from "../types";
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
   grid-gap: 20px;
   justify-content: start;
   overflow-x: auto;
@@ -65,47 +65,36 @@ export default function Home({
   const { user } = useSession();
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
-
+  // TODO: Fazer um map dos grupos e criar botoes em cima dos grupos da comunidade
   return community ? (
     <>
       <H5 style={{ marginTop: 0 }}>ATALHOS</H5>
       <Grid>
-        <Link
-          style={{ textDecoration: "none" }}
-          to="/pessoas"
-          onClick={() =>
-            dispatch({
-              type: "group",
-              value: {
-                label: individualGroup?.name || "",
-                value: individualGroup?.id || 0,
-              },
-            })
-          }
-        >
-          <Shortcut
-            text="Fazer match de MSR"
-            icon={<Icon name="User" size="default" />}
-          />
-        </Link>
-        <Link
-          to="/pessoas"
-          style={{ textDecoration: "none" }}
-          onClick={() =>
-            dispatch({
-              type: "group",
-              value: {
-                label: volunteerGroup?.name || "",
-                value: volunteerGroup?.id || 0,
-              },
-            })
-          }
-        >
-          <Shortcut
-            icon={<Icon name="Heart" size="default" />}
-            text="Fazer match de Voluntária"
-          />
-        </Link>
+        {groups.map((group) => (
+          <>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/pessoas"
+              onClick={() =>
+                dispatch({
+                  type: "group",
+                  value: {
+                    label: group.name || "",
+                    value: group.id || 0,
+                  },
+                })
+              }
+            >
+              <Shortcut
+                text={`Fazer match de ${group.name}`}
+                icon={group.isVolunteer 
+                  ? <Icon name="Heart" size="default" /> 
+                  : <Icon name="User" size="default" />
+                }
+              />
+            </Link>
+          </>
+        ))}
         <Link
           to="/matches"
           style={{ textDecoration: "none" }}
