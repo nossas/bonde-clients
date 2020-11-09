@@ -5,7 +5,7 @@ import { Icon, CleanButton } from "bonde-components";
 
 const Select = styled.select`
   text-transform: capitalize;
-  padding: 5px 0 2px 5px;
+  padding: 5px 40px 2px 5px;
   width: 100%;
   background-color: #fff;
   border: unset;
@@ -78,7 +78,7 @@ const UpdateStatus = ({
           </Option>
         ))}
       </Select>
-      <CleanButton style={{ position: "absolute", right: "10px", top: "20px" }}>
+      <CleanButton style={{ position: "absolute", right: 0, marginRight: "10px" }}>
         <Icon size="small" name="ArrowDown" />
       </CleanButton>
     </>
