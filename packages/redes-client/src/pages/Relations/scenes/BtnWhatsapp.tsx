@@ -14,20 +14,24 @@ const BtnWhatsapp = ({
   return (
     <div
       css={css`
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
         width: 100%;
-        grid-gap: 20px;
-        align-items: center;
-        height: 100%;
+        display: grid;
+        justify-content: space-around;
+        padding: 10px;
+        grid-row-gap: 5px;
       `}
     >
-      <Icon name="Whatsapp" size="small" color={theme.brand.main} />
-      <div style={{ display: "grid" }}>
-        {matchGroups.map((group, i) => {
-          const individual = group?.isVolunteer ? "volunteer" : "recipient";
-          return (
+      {matchGroups.map((group, i) => {
+        const individual = group?.isVolunteer ? "volunteer" : "recipient";
+        return (
+          <div 
+            key={`match-groups-${i}`}
+            css={css`
+              display: flex;
+              align-items: center;
+            `}
+          >
+            <Icon name="Whatsapp" size="small" color={theme.brand.main} />
             <a
               href={whatsappLink(
                 original[individual]?.whatsapp ||
@@ -45,9 +49,9 @@ const BtnWhatsapp = ({
             >
               {group?.name}
             </a>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   )
 }
