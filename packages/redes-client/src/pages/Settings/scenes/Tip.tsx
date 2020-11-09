@@ -20,6 +20,10 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
               ({group.name})
             </Text>
             <Text>
+              <span style={{ fontWeight: 800 }}>VLASTNAME</span>: Sobrenome
+              ({group.name})
+            </Text>
+            <Text>
               <span style={{ fontWeight: 800 }}>VEMAIL</span>: Email (
               {group.name})
               <Text>
@@ -36,6 +40,10 @@ const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
           <React.Fragment key={`tip-recipient-${i}`}>
             <Text>
               <span style={{ fontWeight: 800 }}>IFIRSTNAME</span>: Primeiro nome
+              ({group.name})
+            </Text>
+            <Text>
+              <span style={{ fontWeight: 800 }}>ILASTNAME</span>: Sobrenome
               ({group.name})
             </Text>
             <Text>
