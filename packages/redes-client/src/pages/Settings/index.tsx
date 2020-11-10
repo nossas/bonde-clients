@@ -1,8 +1,8 @@
 import { Header } from "bonde-components";
 import React from "react";
-import { NavLink, useRouteMatch, Switch, Route } from "react-router-dom";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
-import { Navigation, MatchSettings } from "./scenes";
+import { MatchSettings } from "./scenes";
 
 type Settings = {
   id?: number;
@@ -20,16 +20,16 @@ const Settings = ({
 }: {
   community?: { id: number };
 }): React.ReactElement => {
-  const { path, url } = useRouteMatch();
+  const { path } = useRouteMatch();
   const { groups } = useCommunityExtra();
 
   return (
     <div style={{ width: "100%" }}>
-      <Navigation>
+      {/* <Navigation>
         <NavLink to={`${url}/match`} activeClassName="active">
           Match
         </NavLink>
-      </Navigation>
+      </Navigation> */}
       <Switch>
         <Route path={`${path}/match`}>
           {groups.length < 1 ? (
