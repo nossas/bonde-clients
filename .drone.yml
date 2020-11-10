@@ -2,7 +2,6 @@ workspace:
   base: /code
 
 pipeline:
-
   build:
     image: node:14-alpine
     environment:
@@ -65,7 +64,7 @@ pipeline:
     image: plugins/docker
     repo: nossas/bonde
     dockerfile: Dockerfile
-    secrets: [ docker_username, docker_password ]
+    secrets: [docker_username, docker_password]
     group: publish
     tags:
       - ${DRONE_BRANCH/\//-}
@@ -77,7 +76,7 @@ pipeline:
     image: plugins/docker
     repo: nossas/bonde
     dockerfile: Dockerfile
-    secrets: [ docker_username, docker_password ]
+    secrets: [docker_username, docker_password]
     group: publish
     tags:
       - ${DRONE_TAG##v}
@@ -94,7 +93,7 @@ pipeline:
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets: [rancher_access_key, rancher_secret_key]
     when:
       status: success
       event: [push]
@@ -107,7 +106,7 @@ pipeline:
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets: [rancher_access_key, rancher_secret_key]
     when:
       status: success
       event: [push]
@@ -120,7 +119,24 @@ pipeline:
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
-    secrets: [ rancher_access_key, rancher_secret_key ]
+    secrets: [rancher_access_key, rancher_secret_key]
     when:
       status: success
       event: [push]
+
+  redes-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/redes
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
