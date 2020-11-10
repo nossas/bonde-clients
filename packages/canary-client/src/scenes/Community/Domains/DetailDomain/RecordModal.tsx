@@ -1,22 +1,61 @@
 import React from 'react';
 // import styled from 'styled-components';
-import { Modal, Header, Text, Button, Link, ConnectedForm, InputField } from 'bonde-components';
+import {
+  Modal,
+  Header,
+  Text,
+  Button,
+  Link,
+  ConnectedForm,
+  InputField,
+  toast,
+  Success
+} from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
 import { Container, Row, Col } from 'react-grid-system';
 import SelectField from '../../../../components/SelectField';
+import { DNSHostedZone } from '../types';
+
+const createRecordGQL = gql`
+  mutation ($input: RecordInput) {
+    create_record(input: $input)
+  }
+`;
 
 type Props = {
   open: boolean
   onClose: any
-  dnsHostedZone: any
+  refetch: any
+  dnsHostedZone: DNSHostedZone
 }
 
-const RecordModal = ({ dnsHostedZone, open, onClose }: Props) => {
+const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
+  const [createRecord] = useMutation(createRecordGQL);
+
   return (
-    <Modal width='40%' isOpen={open} onClose={onClose}>
+    <Modal width='50%' isOpen={open} onClose={onClose}>
       <ConnectedForm
-        initialValues={{ role: 2 }}
-        onSubmit={async (values: any) => {
-          console.log('values', { values });
+        initialValues={{
+          community_id: dnsHostedZone.community.id,
+          dns_hosted_zone_id: dnsHostedZone.id,
+          hosted_zone_id: dnsHostedZone.hosted_zone.Id || dnsHostedZone.hosted_zone.id
+        }}
+        onSubmit={async ({ ttl, ...values }: any) => {
+          try {
+            await createRecord({
+              variables: {
+                input: {
+                  ...values,
+                  ttl: Number(ttl)
+                }
+              }
+            });
+            toast(<Success message='Registro adicionado com success' />, { type: toast.TYPE.SUCCESS });
+            onClose();
+            refetch();
+          } catch (err) {
+            toast(err, { type: toast.TYPE.ERROR });
+          }
         }}
       >
         {({ submitting }) => (
@@ -40,7 +79,7 @@ const RecordModal = ({ dnsHostedZone, open, onClose }: Props) => {
                 placeholder={`.${dnsHostedZone.domain_name}`}
               />
             </Col>
-            <Col xs={3}>
+            <Col xs={2}>
               <SelectField
                 name='record_type'
                 label='Tipo'
@@ -52,7 +91,7 @@ const RecordModal = ({ dnsHostedZone, open, onClose }: Props) => {
                 <option value='AAA'>AAA</option>
               </SelectField>
             </Col>
-            <Col xs={3}>
+            <Col xs={4}>
               <InputField
                 name='value'
                 type='text'

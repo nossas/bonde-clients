@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, Icon, Text } from 'bonde-components';
+import { Header, Icon, Text, toast, Success } from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
 import {
   DNS as DTRow,
   Col as DTCol,
@@ -9,11 +10,19 @@ import {
 } from '../Styles';
 import { DNSHostedZone, DNSRecord } from '../types';
 
+const deleteRecordGQL = gql`
+  mutation ($input: DeleteRecordsInput) {
+    delete_records(input: $input)
+  }
+`
+
 type Props = {
   dnsHostedZone: DNSHostedZone
+  refetch: any
 }
 
-const Records = ({ dnsHostedZone }: Props) => {
+const Records = ({ dnsHostedZone, refetch }: Props) => {
+  const [deleteRecord] = useMutation(deleteRecordGQL);
 
   return (
     <DTList
@@ -61,9 +70,19 @@ const Records = ({ dnsHostedZone }: Props) => {
             </DTCol>
             <DTCol>
               <Button
-                onClick={() => {
-                  console.log(`Remove ${dnsHostedZone.hosted_zone.Id || dnsHostedZone.hosted_zone.id}`)
-                  alert(`Remove ${dnsHostedZone.hosted_zone.Id || dnsHostedZone.hosted_zone.id}`)
+                onClick={async () => {
+                  try {
+                    const input = {
+                      dns_hosted_zone_id: dnsHostedZone.id,
+                      records: [dnsRecord.id],
+                      community_id: dnsHostedZone.community.id
+                    };
+                    await deleteRecord({ variables: { input } });
+                    toast(<Success message='Registro removido com sucesso' />, { type: toast.TYPE.SUCCESS });
+                    refetch();
+                  } catch (err) {
+                    toast(err, { type: toast.TYPE.ERROR });
+                  }
                 }}
               >
                 <Icon name='Trash' /> Excluir

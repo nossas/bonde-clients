@@ -13,9 +13,10 @@ const LinkStyled = styled(Link)`
 
 type Props = {
   dnsHostedZone: DNSHostedZone
+  refetch: any
 }
 
-const Navigation = ({ dnsHostedZone }: Props) => {
+const Navigation = ({ dnsHostedZone, refetch }: Props) => {
   const [open, setOpen] = useState(false);
   const disabled = (dnsHostedZone.status === 'created' || dnsHostedZone.status === 'propagating') && !dnsHostedZone.ns_ok
 
@@ -27,6 +28,7 @@ const Navigation = ({ dnsHostedZone }: Props) => {
       </LinkStyled>
       <Button disabled={disabled} onClick={() => setOpen(true)}>Adicionar subdomínio</Button>
       <RecordModal
+        refetch={refetch}
         dnsHostedZone={dnsHostedZone}
         open={open}
         onClose={() => setOpen(false)}

@@ -27,7 +27,7 @@ const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
 
   return (
     <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Navigation dnsHostedZone={dnsHostedZone} />
+      <Navigation dnsHostedZone={dnsHostedZone} refetch={refetch} />
       <Row>
         <Col xs={12}>
           <Domain
@@ -44,7 +44,7 @@ const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
         </Col>
         {(dnsIsActivated) && (
           <Col xs={12}>
-            <Records dnsHostedZone={dnsHostedZone} />
+            <Records dnsHostedZone={dnsHostedZone} refetch={refetch} />
           </Col>
         )}
         <Col xs={12}>
