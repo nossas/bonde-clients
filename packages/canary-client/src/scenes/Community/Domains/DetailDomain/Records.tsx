@@ -50,7 +50,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
         .map((dnsRecord: DNSRecord) => (
           <DTRow key={dnsRecord.name}>
             <DTCol>
-              <Header.H4>{dnsRecord.name}</Header.H4>
+              <Header.H5>{dnsRecord.name}</Header.H5>
             </DTCol>
             <DTCol>
               <Text
@@ -85,7 +85,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
                   }
                 }}
               >
-                <Icon name='Trash' /> Excluir
+                <Icon name='Trash' size='small' /> Excluir
               </Button>
             </DTCol>
           </DTRow>
