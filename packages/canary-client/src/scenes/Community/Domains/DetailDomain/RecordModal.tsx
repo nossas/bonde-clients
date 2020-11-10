@@ -46,10 +46,11 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
               input: {
                 ...values,
                 record_type,
-                value: record_type !== 'MX' ? values.value : value.split(/\. /).map((v: string) => `${v.replace(/\.$/, '')}.`),
+                value: record_type !== 'MX' ? value : value.split(/\. /).map((v: string) => `${v.replace(/\.$/, '')}.`),
                 ttl: Number(ttl)
               }
             }
+            console.log('variables', { variables });
             await createRecord({ variables });
             toast(<Success message='Registro adicionado com success' />, { type: toast.TYPE.SUCCESS });
             onClose();
