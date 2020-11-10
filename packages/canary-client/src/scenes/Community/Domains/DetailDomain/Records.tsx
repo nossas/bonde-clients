@@ -59,7 +59,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
                   : { whiteSpace: "break-spaces" }
                 }
               >
-                {dnsRecord.value}
+                {dnsRecord.record_type === 'MX' ? dnsRecord.value.split(/\. /).map((v: string) => `${v.replace(/\.$/, '')}.\n`) : dnsRecord.value}
               </Text>
             </DTCol>
             <DTCol>

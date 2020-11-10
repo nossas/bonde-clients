@@ -40,16 +40,17 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
           dns_hosted_zone_id: dnsHostedZone.id,
           hosted_zone_id: dnsHostedZone.hosted_zone.Id || dnsHostedZone.hosted_zone.id
         }}
-        onSubmit={async ({ ttl, ...values }: any) => {
+        onSubmit={async ({ ttl, value, record_type, ...values }: any) => {
           try {
-            await createRecord({
-              variables: {
-                input: {
-                  ...values,
-                  ttl: Number(ttl)
-                }
+            const variables = {
+              input: {
+                ...values,
+                record_type,
+                value: record_type !== 'MX' ? values.value : value.split(/\. /).map((v: string) => `${v.replace(/\.$/, '')}.`),
+                ttl: Number(ttl)
               }
-            });
+            }
+            await createRecord({ variables });
             toast(<Success message='Registro adicionado com success' />, { type: toast.TYPE.SUCCESS });
             onClose();
             refetch();
