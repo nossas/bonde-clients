@@ -27,8 +27,9 @@ const BtnWhatsapp = ({
           <div 
             key={`match-groups-${i}`}
             css={css`
-              display: flex;
-              align-items: center;
+              & > svg {
+                margin-right: 5px;
+              }
             `}
           >
             <Icon name="Whatsapp" size="small" color={theme.brand.main} />

@@ -22,7 +22,7 @@ const WrapButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  bottom: 65px;
+  bottom: 0;
   & > button {
     width: 220px;
   }
