@@ -5,7 +5,7 @@ import { Groups } from "../../../types";
 const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {
   return (
     <Card rounded={"5px"} padding={{ x: 20, y: 30 }}>
-      <Header.H3>Dica</Header.H3>
+      <Header.H3 style={{ marginTop: 0 }}>Dica</Header.H3>
       <div style={{ marginTop: 15, marginBottom: 10 }}>
         <Text>
           Pra usar dados das pessoas diretamente na mensagem, use as variáveis

@@ -15,11 +15,7 @@ type Settings = {
   community_id?: number;
 };
 
-const Settings = ({
-  community,
-}: {
-  community?: { id: number };
-}): React.ReactElement => {
+const Settings = (): React.ReactElement => {
   const { path } = useRouteMatch();
   const { groups } = useCommunityExtra();
 
@@ -37,7 +33,7 @@ const Settings = ({
               Para adicionar uma comunicação a comunidade precisa ter pelo menos um grupo configurado.
             </Header.H4>
           ) : (
-            <MatchSettings community={community} groups={groups} />
+            <MatchSettings groups={groups} />
           )}
         </Route>
       </Switch>

@@ -109,7 +109,7 @@ export default function Match({
                 }
               `}
             >
-              <Empty message="Nada por aqui..." />
+              <Empty message={`Ops! Não encontramos nenhum resultado para essa busca. Confira na lista de ${matchGroup} se há pessoas disponíveis para fazer o match.`}/>
             </div>
           ) : (
             <div

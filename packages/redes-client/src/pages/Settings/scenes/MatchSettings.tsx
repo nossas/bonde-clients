@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components/macro";
 import { useMutation } from "bonde-core-tools";
 import { Success, toast } from "bonde-components";
 import {
@@ -23,6 +23,7 @@ const WrapButton = styled.div`
   display: flex;
   justify-content: flex-end;
   bottom: 0;
+  z-index: 1;
   & > button {
     width: 220px;
   }
@@ -30,10 +31,8 @@ const WrapButton = styled.div`
 
 const MatchSettings = ({
   groups,
-  community: _ola,
 }: {
   groups: Groups;
-  community?: { id: number };
 }): React.ReactElement => {
   const { required } = Validators;
   const [saveSettings, { error }] = useMutation(UPDATE_GROUPS);
@@ -111,12 +110,12 @@ const MatchSettings = ({
                       margin={{ bottom: 30 }}
                       key={`whatsapp-card-${i}`}
                     >
-                      <Header.H3 style={{ margin: 0, marginBottom: '15px' }}> 
+                      <Header.H4 style={{ margin: 0, marginBottom: '15px' }}> 
                         {group.name}
-                      </Header.H3>
+                      </Header.H4>
                       {error && <Hint color="error">{error.message}</Hint>}
                       <div
-                        css={`
+                        css={css`
                           & textarea {
                             height: 100px;
                             margin-bottom: 30px;
