@@ -4,6 +4,7 @@ import {
   Individual,
   MapaIndividualTicket,
 } from "../types";
+import * as turf from "@turf/turf";
 
 export const getSelectValues = (values: {
   [x: string]: { value: unknown; label: string } & string;
@@ -292,3 +293,41 @@ export const stripIndividualFromData = (
       longitude: d.individual.longitude,
     },
   }));
+
+type AddDistanceType = {
+  data: any;
+  selectedIndividual: {
+    coordinates: {
+      latitude: string;
+      longitude: string;
+    };
+  };
+}
+
+type Coordinates = {
+  latitude: string;
+  longitude: string;
+}
+
+export const addDistance = (coordinates: Coordinates, data?: Individual[]): any => data ? data.map((i: any) => {
+    const pointA = [
+      Number(i.coordinates.latitude),
+      Number(i.coordinates.longitude),
+    ];
+    const pointB = [
+      Number(coordinates.latitude),
+      Number(coordinates.longitude),
+    ];
+    const calculatedDistance =
+      !Number.isNaN(pointA[0]) &&
+      !Number.isNaN(pointA[1]) &&
+      !Number.isNaN(pointB[0]) &&
+      !Number.isNaN(pointB[1]) &&
+      turf.distance(pointB, pointA);
+    const formatDistance = Number(calculatedDistance).toFixed(2);
+    return {
+      ...i,
+      distance: formatDistance,
+    };
+})
+.sort((a: any, b: any) => Number(a.distance) - Number(b.distance)) : []

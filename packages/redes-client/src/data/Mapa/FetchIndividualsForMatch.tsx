@@ -2,6 +2,8 @@ import React from "react";
 import { gql, useQuery } from "bonde-core-tools";
 import { CheckCommunity } from "../../components";
 import { useFilterState } from "../../services/FilterProvider";
+import { addDistance } from "../../services/utils";
+
 import {
   getVolunteerOrganizationId,
   zendeskOrganizations,
@@ -28,8 +30,6 @@ const VOLUNTEERS_FOR_MATCH = gql`
   query VolunteersForMatch(
     $individualOrganizationId: bigint_comparison_exp!
     $lastMonth: timestamp_comparison_exp!
-    $rows: Int!
-    $offset: Int!
   ) {
     volunteers: solidarity_users(
       where: {
@@ -44,28 +44,8 @@ const VOLUNTEERS_FOR_MATCH = gql`
         organization_id: $individualOrganizationId
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
       }
-      limit: $rows
-      offset: $offset
     ) {
       ...individual
-    }
-    volunteersCount: solidarity_users_aggregate(
-      where: {
-        condition: { _eq: "disponivel" }
-        longitude: { _is_null: false }
-        latitude: { _is_null: false }
-        name: { _is_null: false }
-        registration_number: { _is_null: false }
-        atendimentos_em_andamento_calculado_: { _eq: 0 }
-        state: { _neq: "int" }
-        city: { _neq: "Internacional" }
-        organization_id: $individualOrganizationId
-        _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
-      }
-    ) {
-      aggregate {
-        count
-      }
     }
     pendingTickets: solidarity_matches(
       order_by: { created_at: desc }
@@ -84,13 +64,9 @@ const VOLUNTEERS_FOR_MATCH = gql`
 
 const RECIPIENTS_FOR_MATCH = gql`
   query RecipientsForMatch(
-    $rows: Int!
-    $offset: Int!
     $recipientOrganizationId: bigint_comparison_exp!
   ) {
     recipients: solidarity_tickets(
-      limit: $rows
-      offset: $offset
       where: {
         status: { _nin: ["deleted", "solved"] }
         status_acolhimento: {
@@ -112,33 +88,19 @@ const RECIPIENTS_FOR_MATCH = gql`
     ) {
       ...ticketIndividual
     }
-    recipientsCount: solidarity_tickets_aggregate(
-      where: {
-        status: { _nin: ["deleted", "solved"] }
-        status_acolhimento: {
-          _in: [
-            "solicitação_recebida"
-            "encaminhamento__realizado_para_serviço_público"
-          ]
-        }
-        individual: {
-          organization_id: $recipientOrganizationId
-          condition: { _eq: "inscrita" }
-        }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
   }
   ${MAPA_TICKET_INDIVIDUAL}
 `;
 
 type Props = {
-  individual: any;
+  organizationId: number;
+  subject: string;
   children: any;
   monthlyTimestamp: string;
+  coordinates: {
+    latitude: string;
+    longitude: string;
+  };
 };
 
 export type MatchTickets = {
@@ -164,23 +126,21 @@ type MatchVolunteerIndividual = {
 };
 
 const FetchIndividualsForMatch = ({
-  individual,
+  organizationId,
+  subject,
   children,
   monthlyTimestamp,
+  coordinates
 }: Props) => {
-  const { organizationId, subject } = individual;
   const { rows, offset } = useFilterState();
 
   const recipientVariables = {
-    rows,
-    offset,
     recipientOrganizationId: {
       _eq: zendeskOrganizations["individual"],
     },
   };
+
   const volunteerVariables = {
-    rows,
-    offset,
     individualOrganizationId: {
       _eq: getVolunteerOrganizationId(subject),
     },
@@ -237,14 +197,16 @@ const FetchIndividualsForMatch = ({
         )
     : undefined;
 
-  return children(
-    organizationId !== zendeskOrganizations["individual"]
-      ? {
-          data: stripIndividualFromData(data.recipients),
-          count: data.recipientsCount.aggregate.count,
-        }
-      : { data: newData, count: data.volunteersCount.aggregate.count }
-  );
+  const individuals = organizationId !== zendeskOrganizations["individual"] 
+    ? stripIndividualFromData(data.recipients)
+    : newData
+
+  const addDistanceToData = addDistance(coordinates, individuals)
+
+  return children({
+    data: addDistanceToData.slice(offset, (rows + offset)),
+    count: individuals.length
+  });
 };
 
 FetchIndividualsForMatch.displayName = "FetchIndividualsForMatch";

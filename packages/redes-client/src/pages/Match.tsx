@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "styled-components/macro";
 import { Button, Header, Text, Empty } from "bonde-components";
 import { useLocation, useHistory } from "react-router-dom";
-import * as turf from "@turf/turf";
 
 import { Table, Popup } from "../components";
 import { useSelectedGroup } from "../hooks";
@@ -53,37 +52,6 @@ export default function Match({
     dispatch({ type: "rows", value: 30 });
   }, [dispatch, isVolunteerSelected, linkState]);
 
-  const filterByDistance = useCallback(
-    (data: Individual[]) =>
-      data
-        .map((i) => {
-          const pointA = [
-            Number(i.coordinates.latitude),
-            Number(i.coordinates.longitude),
-          ];
-          const pointB = [
-            Number(selectedIndividual.coordinates.latitude),
-            Number(selectedIndividual.coordinates.longitude),
-          ];
-          const calculatedDistance =
-            !Number.isNaN(pointA[0]) &&
-            !Number.isNaN(pointA[1]) &&
-            !Number.isNaN(pointB[0]) &&
-            !Number.isNaN(pointB[1]) &&
-            turf.distance(pointB, pointA);
-          const formatDistance = Number(calculatedDistance).toFixed(2);
-          return {
-            ...i,
-            distance: formatDistance,
-          };
-        })
-        .sort((a, b) => Number(a.distance) - Number(b.distance)),
-    [
-      selectedIndividual.coordinates.latitude,
-      selectedIndividual.coordinates.longitude,
-    ]
-  );
-
   return (
     <>
       <div
@@ -99,7 +67,6 @@ export default function Match({
       </div>
       <FetchIndividualsForMatch {...selectedIndividual}>
         {({ data, count }) => {
-          const filteredTableData = filterByDistance(data);
           return count < 1 ? (
             <div
               css={css`
@@ -127,7 +94,7 @@ export default function Match({
                 {count} {matchGroup} próximas de {selectedIndividual.firstName}
               </Text>
               <Table
-                data={filteredTableData}
+                data={data}
                 columns={ColumnsMatch(dispatch, setModal, !isVolunteerSelected)}
                 sticky="end"
                 totalResults={count}

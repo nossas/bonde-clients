@@ -6,6 +6,7 @@ import { Loading } from "bonde-components";
 import { CheckCommunity } from "../../components";
 import { REDE_INDIVIDUAL } from "../../graphql/IndividualFragment.graphql";
 import { useFilterState } from "../../services/FilterProvider";
+import { addDistance } from "../../services/utils";
 import { Individual } from "../../types";
 
 const WrapLoading = styled.div`
@@ -19,8 +20,6 @@ const WrapLoading = styled.div`
 const INDIVIDUALS_FOR_MATCH = gql`
   query IndividualsForMatch(
     $isVolunteer: Boolean_comparison_exp
-    $rows: Int!
-    $offset: Int!
     $context: Int_comparison_exp!
   ) {
     individuals: rede_individuals(
@@ -34,27 +33,9 @@ const INDIVIDUALS_FOR_MATCH = gql`
         city: { _neq: "ZERO_RESULTS" }
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
       }
-      limit: $rows
-      offset: $offset
       order_by: { created_at: asc }
     ) {
       ...individual
-    }
-    individualsCount: rede_individuals_aggregate(
-      where: {
-        status: { _eq: "aprovada" }
-        availability: { _eq: "disponível" }
-        group: { is_volunteer: $isVolunteer, community_id: $context }
-        email: { _is_null: false }
-        first_name: { _is_null: false }
-        state: { _neq: "ZERO_RESULTS" }
-        city: { _neq: "ZERO_RESULTS" }
-        _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
-      }
-    ) {
-      aggregate {
-        count
-      }
     }
   }
   ${REDE_INDIVIDUAL}
@@ -65,6 +46,10 @@ type Props = {
   group: { isVolunteer: boolean };
   community: {
     id: number;
+  };
+  coordinates: {
+    latitude: string;
+    longitude: string;
   };
 };
 
@@ -79,8 +64,6 @@ export type IndividualsData = {
 
 type IndividualsVars = {
   isVolunteer: { _eq: boolean };
-  rows: number;
-  offset: number;
   context: {
     _eq: number;
   };
@@ -89,15 +72,14 @@ type IndividualsVars = {
 const FetchIndividualsForMatch = ({
   children,
   group: { isVolunteer },
-  community
+  community,
+  coordinates
 }: Props) => {
   const { rows, offset } = useFilterState();
   const { loading, error, data } = useQuery<IndividualsData, IndividualsVars>(
     INDIVIDUALS_FOR_MATCH,
     {
       variables: {
-        rows,
-        offset,
         isVolunteer: {
           _eq: !isVolunteer,
         },
@@ -119,9 +101,11 @@ const FetchIndividualsForMatch = ({
     return <p>Error</p>;
   }
 
+  const addDistanceToData = addDistance(coordinates, data?.individuals)
+
   return children({
-    data: data?.individuals,
-    count: data?.individualsCount?.aggregate.count,
+    data: addDistanceToData.slice(offset, (rows + offset)),
+    count: data?.individuals.length,
   });
 };
 
