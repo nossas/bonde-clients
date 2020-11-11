@@ -16,6 +16,7 @@ const AccountPanel: React.FC = () => {
 
   return (
     <CommunityForm
+      formName='Recipient'
       success={<Success message='EBA! Conta bancária atualizada.' />}
     >
       <Panel>

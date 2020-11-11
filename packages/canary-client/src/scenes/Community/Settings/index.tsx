@@ -11,6 +11,7 @@ const SettingsPage = () => {
 
   return (
     <CommunityForm
+      formName='Settings'
       success={<Success message='UHU! Informações da comunidade atualizadas.' />}
     >
       <Container fluid style={{ width: "100%", padding: "0" }}>

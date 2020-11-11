@@ -65,8 +65,14 @@ const UpdateRecipientGQL = gql`
   }
 `;
 
-const BaseForm = ({ children, success }: any) => {
-  const { community, onChange } = useSession();
+type Props = {
+  children: any
+  formName: 'Settings' | 'Recipient' | 'Mobilizers' | 'Integrations' | 'Domains'
+  success: string | any
+}
+
+const BaseForm = ({ children, formName, success }: Props) => {
+  const { community, onChangeAsync } = useSession();
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
   const [updateCommunity] = useMutation(UpdateCommunityGQL);
@@ -92,31 +98,33 @@ const BaseForm = ({ children, success }: any) => {
     }
   }: any) => {
     try {
-      // Update Recipient before to return UpdateCommunity outdate
-      // Fix document_number
-      const document_number = bank_account.document_number.replace(/[^0-9]/g, '');
-      const bank = {
-        ...bank_account,
-        document_number: document_number,
-        document_type: document_number.length > 11 ? 'cnpj' : 'cpf'
-      }
-      // Fix input values
-      const input = {
-        id: recipient_id,
-        community_id: id,
-        recipient: {
-          ...recipient,
-          id: pagarme_recipient_id,
-          transfer_day: typeof recipient.transfer_day === 'number' ? String(recipient.transfer_day) : recipient.transfer_day,
-          transfer_enabled: true,
-          bank_account: bank
+      if (formName === 'Recipient') {
+        // Update Recipient before to return UpdateCommunity outdate
+        // Fix document_number
+        const document_number = bank_account.document_number.replace(/[^0-9]/g, '');
+        const bank = {
+          ...bank_account,
+          document_number: document_number,
+          document_type: document_number.length > 11 ? 'cnpj' : 'cpf'
         }
-      };
-      await updateRecipient({ variables: { input }});
+        // Fix input values
+        const input = {
+          id: recipient_id,
+          community_id: id,
+          recipient: {
+            ...recipient,
+            id: pagarme_recipient_id,
+            transfer_day: typeof recipient.transfer_day === 'number' ? String(recipient.transfer_day) : recipient.transfer_day,
+            transfer_enabled: true,
+            bank_account: bank
+          }
+        };
+        await updateRecipient({ variables: { input }});
+      }
       // Update Community
       const { data: { update_communities: { returning } } }: any = await updateCommunity({ variables: { id, update_fields } });
       // Update Session
-      await onChange({ community: returning[0] });
+      await onChangeAsync({ community: returning[0] });
       // Popup successfully
       toast(success, { type: toast.TYPE.SUCCESS });
     } catch (e) {
@@ -124,6 +132,7 @@ const BaseForm = ({ children, success }: any) => {
       if (e.message === 'invalid_permission') {
         toast(t('messages.invalid_permission'), { type: toast.TYPE.ERROR });
       } else {
+        toast(e.message, { type: toast.TYPE.ERROR });
         console.error(e);
       }
     }

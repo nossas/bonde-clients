@@ -127,17 +127,15 @@ const App: React.FC = () => {
 
   return (
     <React.Suspense fallback={Loading}>
-      <>
-        <ToastContainer
-          className='BondeToastify'
-          hideProgressBar={true}
-        />
-        <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
-          <Router>
-            <PageRouting />
-          </Router>
-        </Session>
-      </>
+      <ToastContainer
+        className='BondeToastify'
+        hideProgressBar={true}
+      />
+      <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
+        <Router>
+          <PageRouting />
+        </Router>
+      </Session>
     </React.Suspense>
   );
 }

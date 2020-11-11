@@ -18,6 +18,7 @@ const MailchimpPanel = () => {
   
   return (
     <CommunityForm
+      formName='Integrations'
       success={<Success message='Yeaa! Mailchimp conectado ao BONDE.' />}
     >
       <Panel>

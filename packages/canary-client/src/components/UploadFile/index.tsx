@@ -76,9 +76,11 @@ const Upload = ({ label, name }: Props) => {
           inputRef={uploadInput}
           style={{ display: 'none' }}
         />
-        <Link component='button' type='button' onClick={() => input.onChange(null)}>
-          Remover
-        </Link>
+        {input.value && (
+          <Link component='button' type='button' onClick={() => input.onChange(null)}>
+            Remover
+          </Link>
+        )}
       </div>
     </UploadField>
   );

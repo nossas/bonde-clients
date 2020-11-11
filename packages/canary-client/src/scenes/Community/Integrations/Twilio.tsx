@@ -11,6 +11,7 @@ const TwilioPanel = () => {
 
   return (
     <CommunityForm
+      formName='Integrations'
       success={<Success message='Uhuu! Twilio conectado ao BONDE.' />}
     >
       <Panel>

@@ -13,6 +13,7 @@ const TransferPanel: React.FC = () => {
 
   return (
     <CommunityForm
+      formName='Recipient'
       success={<Success message='Data de transferência atualizada.' />}
     >
       <Panel>
