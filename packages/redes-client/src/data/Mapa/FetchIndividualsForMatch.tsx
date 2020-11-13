@@ -28,7 +28,7 @@ const WrapLoading = styled.div`
 
 const VOLUNTEERS_FOR_MATCH = gql`
   query VolunteersForMatch(
-    $individualOrganizationId: bigint_comparison_exp!
+    $volunteerOrganizationId: bigint_comparison_exp!
     $lastMonth: timestamp_comparison_exp!
   ) {
     volunteers: solidarity_users(
@@ -41,8 +41,11 @@ const VOLUNTEERS_FOR_MATCH = gql`
         atendimentos_em_andamento_calculado_: { _eq: 0 }
         state: { _neq: "int" }
         city: { _neq: "Internacional" }
-        organization_id: $individualOrganizationId
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
+        _and: [
+          { organization_id: $volunteerOrganizationId }
+          { organization_id: { _is_null: false } }
+        ]
       }
     ) {
       ...individual
@@ -141,7 +144,7 @@ const FetchIndividualsForMatch = ({
   };
 
   const volunteerVariables = {
-    individualOrganizationId: {
+    volunteerOrganizationId: {
       _eq: getVolunteerOrganizationId(subject),
     },
     lastMonth: { _gte: monthlyTimestamp },

@@ -35,7 +35,7 @@ const columns = (
       accessor: "distance",
       Header: "Distância",
       Cell: ({ value }: { value: string }): ReactElement => (
-        <span>{value || "-"}</span>
+        <span>{Number(value).toFixed(2) || "-"}</span>
       ),
       width: 50,
     },
