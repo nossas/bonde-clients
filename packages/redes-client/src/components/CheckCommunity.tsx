@@ -17,31 +17,30 @@ type ComponentProps = {
     id: number;
   };
   groups: Groups;
-  timestamp: string;
+  weeklyTimestamp: string;
+  monthlyTimestamp: string;
 };
 
 export default function CheckCommunity({
   Component,
   ...props
 }: {
-  Component: ({
-    community,
-    groups,
-    timestamp,
-  }: ComponentProps) => React.ReactElement;
+  Component: (props: ComponentProps) => React.ReactElement;
 }): React.ReactElement {
   const { community } = useSession();
   const { groups } = useCommunityExtra();
   const today = new Date();
   // get last week and format
   const lastWeek = new Date().setDate(today.getDate() - 7);
-  // format lastWeek timestamp
-  const timestamp = new Date(lastWeek).toISOString();
+  // get last month and format
+  const lastMonth = new Date().setDate(today.getDate() - 30);
+
   return community ? (
     <Component
       community={community}
       groups={groups}
-      timestamp={timestamp}
+      weeklyTimestamp={new Date(lastWeek).toISOString()}
+      monthlyTimestamp={new Date(lastMonth).toISOString()}
       {...props}
     />
   ) : (

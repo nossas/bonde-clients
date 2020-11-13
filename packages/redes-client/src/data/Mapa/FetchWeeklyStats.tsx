@@ -1,6 +1,8 @@
+/* eslint-disable react/display-name */
 import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
+import { useQuery, gql } from "bonde-core-tools";
 import { Spinner } from "bonde-components"
+import { CheckCommunity } from "../../components";
 import { zendeskOrganizations } from "../../services/utils";
 import { WeeklyStatsData, MapaWeeklyStatsVars } from "../../types";
 
@@ -81,16 +83,16 @@ const WEEKLY_DATA = gql`
 
 type Props = {
   children: any;
-  timestamp: string;
+  weeklyTimestamp: string;
   community: {
     id: number;
   };
 };
 
-const FetchWeeklyStats = ({ children, timestamp, community }: Props) => {
+const FetchWeeklyStats = ({ children, weeklyTimestamp, community }: Props) => {
   const variables = {
     lastWeek: {
-      _gte: timestamp,
+      _gte: weeklyTimestamp,
     },
     individualOrganizationId: zendeskOrganizations["individual"],
   };
@@ -114,16 +116,6 @@ const FetchWeeklyStats = ({ children, timestamp, community }: Props) => {
   });
 };
 
-export default function CheckCommunity(props: any = {}): React.ReactElement {
-  const { community } = useSession();
-  const today = new Date();
-  // get last week and format
-  const lastWeek = new Date().setDate(today.getDate() - 7);
-  // format lastWeek timestamp
-  const timestamp = new Date(lastWeek).toISOString();
-  return (
-    <FetchWeeklyStats timestamp={timestamp} community={community} {...props} />
-  );
+export default function (props: any = {}): React.ReactElement {
+  return <CheckCommunity Component={FetchWeeklyStats} {...props} />;
 }
-
-CheckCommunity.displayName = "CheckCommunityMatches";
