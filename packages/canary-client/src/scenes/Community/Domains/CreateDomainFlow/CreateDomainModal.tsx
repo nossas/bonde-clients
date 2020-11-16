@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Modal, Header, Text, Button, Link, ConnectedForm, InputField } from 'bonde-components';
+import { Modal, Header, Text, Button, Link, ConnectedForm, InputField, Hint, Validators } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 
 const AddOn = styled.div`
@@ -35,6 +35,8 @@ type Props = {
   onSubmit: any
 }
 
+const { composeValidators, required } = Validators;
+
 const isDomain = (value: any) => /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/.test(value) ? undefined : ' X ';
 
 const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
@@ -43,7 +45,7 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
   return (
     <Modal width='40%' isOpen={open} onClose={onClose}>
       <ConnectedForm onSubmit={onSubmit}>
-        {({ submiting, valid }) => (
+        {({ submiting, submitError }) => (
           <Container fluid style={{ width: '100%', padding: '0' }}>
             <Row style={{ marginBottom: '24px' }}>
               <Col xs={12}>
@@ -63,17 +65,25 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
                     label='http://www.'
                     name='value'
                     type='text'
-                    validate={isDomain}
+                    validate={composeValidators(
+                      required('Preencha o dominio'),
+                      isDomain
+                    )}
                   />
                 </AddOn>
               </Col>
+              {submitError && (
+                <Col xs={12}>
+                  <Hint color='error'>{submitError}</Hint>
+                </Col>
+              )}
             </Row>
             <Row>
               <Col xs={6}>
                 <Link style={{ cursor: 'pointer' }} onClick={onClose}>Cancelar</Link>
               </Col>
               <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button disabled={submiting || !valid} type='submit'>Continuar</Button>
+                <Button disabled={submiting} type='submit'>Continuar</Button>
               </Col>
             </Row>
           </Container>

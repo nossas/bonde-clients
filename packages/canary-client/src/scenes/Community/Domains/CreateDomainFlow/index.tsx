@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, gql, useSession } from 'bonde-core-tools';
 import { Button } from 'bonde-components';
+// import { FORM_ERROR } from 'final-form';
 import CreateDomainModal from './CreateDomainModal';
 import NameServersModal from './NameServersModal';
 
@@ -37,16 +38,22 @@ const CreateDomainFlow = ({ btnText, refetch }: any) => {
   const { community, user } = useSession();
 
   const onSubmit = async ({ value }: any) => {
-    const { data } = await mutation({
-      variables: {
-        input: {
-          domain: value,
-          community_id: community?.id,
-          comment: `Created by ${user.firstName}`
+    try {
+      const { data } = await mutation({
+        variables: {
+          input: {
+            domain: value,
+            community_id: community?.id,
+            comment: `Created by ${user.firstName}`
+          }
         }
+      });
+      setDnsHostedZone(data.create_domain);
+    } catch (err) {
+      if (err && err.message === 'domain_name_exists') {
+        return { "FINAL_FORM/form-error": 'Esse domínio já existe no BONDE!' };
       }
-    });
-    setDnsHostedZone(data.create_domain);
+    }
   }
 
   const onClose = () => {
