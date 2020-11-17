@@ -50,25 +50,21 @@ function App({ data: defaultData, refetch }: Props) {
       {
         Header: <Header.H5>{t('mobilizers.table.columns.role.header')}</Header.H5>,
         accessor: 'role',
-        width: 100,
         Cell: Role
       },
       {
         Header: <Header.H5>{t('mobilizers.table.columns.user.header')}</Header.H5>,
         accessor: 'user.email',
-        minWidth: 300
+        minWidth: 350
       },
       {
         Header: <Header.H5>{t('mobilizers.table.columns.created_at.header')}</Header.H5>,
         accessor: 'created_at',
-        minWidth: 100,
-        width: 200,
         Cell: Timestamp
       },
       {
         Header: <Header.H5>{t('mobilizers.table.columns.expires.header')}</Header.H5>,
         accessor: 'expires',
-        minWidth: 100,
         Cell: Expired(refetch)
       }
     ],

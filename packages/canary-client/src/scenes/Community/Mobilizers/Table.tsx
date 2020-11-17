@@ -34,6 +34,8 @@ export const Styles = styled.div<StylesProps>`
     }
 
     .th {
+      flex: none !important;
+
       h5 {
         text-transform: uppercase;
       }
@@ -43,6 +45,11 @@ export const Styles = styled.div<StylesProps>`
       overflow-y: scroll;
       overflow-x: hidden;
       ${props => props.height && `height: ${props.height}`};
+
+      .td {
+        flex: none !important;
+        margin: 0 !important;
+      }
 
       .th, .td {
         padding: 0.7rem;
