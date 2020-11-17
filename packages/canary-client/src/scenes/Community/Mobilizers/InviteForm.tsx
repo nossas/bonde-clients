@@ -6,9 +6,9 @@ import {
   InputField,
   Validators,
   Text,
-  Icon
+  Icon,
+  toast
 } from 'bonde-components';
-import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import Panel from '../Panel';

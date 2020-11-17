@@ -1,8 +1,7 @@
 import React from 'react';
-import { ConnectedForm } from 'bonde-components';
+import { ConnectedForm, toast } from 'bonde-components';
 import { useSession, useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 
 const UpdateCommunityGQL = gql`
   mutation UpdateCommunity ($update_fields: communities_set_input!, $id: Int!) {
@@ -123,10 +122,12 @@ const BaseForm = ({ children, formName, success }: Props) => {
       }
       // Update Community
       const { data: { update_communities: { returning } } }: any = await updateCommunity({ variables: { id, update_fields } });
-      // Update Session
-      await onChangeAsync({ community: returning[0] });
+
       // Popup successfully
       toast(success, { type: toast.TYPE.SUCCESS });
+
+      // Update Session
+      await onChangeAsync({ community: returning[0] });
     } catch (e) {
       // invalid_permission
       if (e.message === 'invalid_permission') {

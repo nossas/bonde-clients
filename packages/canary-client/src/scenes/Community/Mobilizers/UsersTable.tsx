@@ -1,6 +1,5 @@
 import React from 'react';
-import { toast } from 'react-toastify';
-import { Header, Link, Icon } from 'bonde-components';
+import { Header, Link, Icon, toast } from 'bonde-components';
 import styled from 'styled-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +81,7 @@ function UsersTable({ data: defaultData, refetch }: Props) {
       {
         Header: <Header.H5>Nome</Header.H5>,
         accessor: 'user.first_name',
-        minWidth: 350
+        minWidth: 250
       },
       {
         Header: <Header.H5>Email</Header.H5>,
@@ -93,7 +92,8 @@ function UsersTable({ data: defaultData, refetch }: Props) {
         Header: <Header.H5>Função</Header.H5>,
         accessor: 'role',
         width: 100,
-        Cell: Role
+        Cell: Role,
+        minWidth: 200
       },
       {
         Header: <Header.H5>Ações</Header.H5>,

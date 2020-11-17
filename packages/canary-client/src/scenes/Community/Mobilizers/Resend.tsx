@@ -1,6 +1,5 @@
 import React from 'react';
-import { toast } from 'react-toastify';
-import { Link } from 'bonde-components';
+import { Link, toast } from 'bonde-components';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';

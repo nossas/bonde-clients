@@ -1,11 +1,11 @@
 import React from 'react';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
-import { toast } from 'react-toastify';
 import {
   Button,
   ConnectedForm,
   InputField,
-  Validators
+  Validators,
+  toast
 } from 'bonde-components';
 
 const InsertCommunityMutation = gql`
