@@ -45,7 +45,7 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
   return (
     <Modal width='40%' isOpen={open} onClose={onClose}>
       <ConnectedForm onSubmit={onSubmit}>
-        {({ submiting, submitError }) => (
+        {({ submiting, dirty, submitError }) => (
           <Container fluid style={{ width: '100%', padding: '0' }}>
             <Row style={{ marginBottom: '24px' }}>
               <Col xs={12}>
@@ -83,7 +83,7 @@ const CreateDomainModal = ({ open, onSubmit, onClose }: Props) => {
                 <Link style={{ cursor: 'pointer' }} onClick={onClose}>Cancelar</Link>
               </Col>
               <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button disabled={submiting} type='submit'>Continuar</Button>
+                <Button disabled={submiting || !dirty} type='submit'>Continuar</Button>
               </Col>
             </Row>
           </Container>

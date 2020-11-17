@@ -153,11 +153,14 @@ const BaseForm = ({ children, formName, success }: Props) => {
 
   return (
     <ConnectedForm initialValues={initialValues} onSubmit={submit}>
-      {() => (
-        <>
-          {children}
-        </>
-      )}
+      {(props: any) => typeof children === 'function'
+        ? children(props)
+        : (
+          <>
+            {children}
+          </>
+        )
+      }
     </ConnectedForm>
   );
 }

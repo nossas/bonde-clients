@@ -96,7 +96,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
               }
             }}
           >
-            {({ submitting }) => (
+            {({ submitting, dirty }: any) => (
               <InlineFormWrap>
                 <InputField
                   name='email'
@@ -113,7 +113,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
                   <option value={1}>{t('mobilizers.form.fields.role.option1')}</option>
                   <option value={2}>{t('mobilizers.form.fields.role.option2')}</option>
                 </SelectField>
-                <Button type='submit' disabled={submitting}>{t('mobilizers.form.buttons.invite')}</Button>
+                <Button type='submit' disabled={submitting || !dirty}>{t('mobilizers.form.buttons.invite')}</Button>
               </InlineFormWrap>
             )}
           </ConnectedForm>
