@@ -23,6 +23,10 @@ const SubHeader = styled.div`
     color: #fff;
     margin: 10px 0 30px;
   }
+
+  ${Tab} {
+    outline: none;
+  }
 `;
 
 const PageWrap = styled.div`

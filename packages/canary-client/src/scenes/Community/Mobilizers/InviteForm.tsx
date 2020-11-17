@@ -68,7 +68,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
 
   if (community) {
     return (
-      <Panel>
+      <Panel style={{ marginTop: '24px' }}>
         {isCommunityAdmin ? (
           <ConnectedForm
             initialValues={{ role: 2 }}

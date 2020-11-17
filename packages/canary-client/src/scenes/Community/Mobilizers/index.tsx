@@ -111,7 +111,7 @@ const FetchInvitations = ({ community }: Props) => {
 
   return (
     <>
-      <Header.H3>{t('mobilizers.form.title')}</Header.H3>
+      <Header.H4>{t('mobilizers.form.title')}</Header.H4>
       <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       <Flex>
         <Header.H5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
