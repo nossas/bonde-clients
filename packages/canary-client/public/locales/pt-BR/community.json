@@ -238,12 +238,12 @@
     "invalid_permission": "Você não tem permissão para atualizar essas informações"
   },
   "titles": {
-    "settings": "Configurações"
+    "settings": "Configurações da Comunidade"
   },
   "navigation": {
     "settings": "Informações",
     "mobilizers": "Mobilizadores",
     "integrations": "Integrações",
-    "recipient": "Recebimentos"
+    "recipient": "Pagamentos"
   }
 }

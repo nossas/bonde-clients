@@ -238,12 +238,12 @@
     "invalid_permission": "You are not allowed to update this information"
   },
   "titles": {
-    "settings": "Settings"
+    "settings": "Community Settings"
   },
   "navigation": {
     "settings": "Information",
     "mobilizers": "Mobilizers",
     "integrations": "Integrations",
-    "recipient": "Recipients"
+    "recipient": "Payments"
   }
 }
