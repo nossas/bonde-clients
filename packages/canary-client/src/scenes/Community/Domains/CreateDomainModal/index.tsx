@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation, gql, useSession } from 'bonde-core-tools';
-import { Button } from 'bonde-components';
+import { Button, Modal } from 'bonde-components';
 // import { FORM_ERROR } from 'final-form';
-import CreateDomainModal from './CreateDomainModal';
-import NameServersModal from './NameServersModal';
+import { DNSHostedZone } from '../types';
+import DomainForm from './DomainForm';
+import ConnectDNS from './ConnectDNS';
 
 const createDomainGQL = gql`
   mutation ($input: DomainInput) {
@@ -20,26 +21,15 @@ const createDomainGQL = gql`
   }
 `;
 
-type DNSHostedZone = {
-  id: number
-  domain_name: string
-  name_servers: string[]
-  ns_ok: boolean
-  comment?: string
-  community_id: number
-  created_at?: string
-  updated_at?: string
-}
-
-const CreateDomainFlow = ({ btnText, refetch }: any) => {
+const CreateDomainModal = ({ btnText, refetch }: any) => {
   const [open, setOpen] = useState(false);
   const [dnsHostedZone, setDnsHostedZone] = useState<DNSHostedZone>();
-  const [mutation] = useMutation(createDomainGQL);
+  const [createDomain] = useMutation(createDomainGQL);
   const { community, user } = useSession();
 
   const onSubmit = async ({ value }: any) => {
     try {
-      const { data } = await mutation({
+      const { data } = await createDomain({
         variables: {
           input: {
             domain: value,
@@ -64,19 +54,20 @@ const CreateDomainFlow = ({ btnText, refetch }: any) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>{btnText}</Button>
-      {!dnsHostedZone
-        ? <CreateDomainModal open={open} onClose={onClose} onSubmit={onSubmit} />
-        : <NameServersModal
-            open={open}
-            onClose={() => {
-              onClose()
-              refetch()
-            }}
-            dnsHostedZone={dnsHostedZone}
-          />
-      }
+      <Modal width={!dnsHostedZone ? '40%' : '60%'} isOpen={open} onClose={onClose}>
+        {!dnsHostedZone
+          ? <DomainForm onClose={onClose} onSubmit={onSubmit} />
+          : <ConnectDNS
+              onClose={() => {
+                onClose()
+                refetch()
+              }}
+              dnsHostedZone={dnsHostedZone}
+            />
+        }
+      </Modal>
     </>
   );
 }
 
-export default CreateDomainFlow;
+export default CreateDomainModal;

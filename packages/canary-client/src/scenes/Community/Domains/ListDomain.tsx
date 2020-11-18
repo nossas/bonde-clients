@@ -8,7 +8,7 @@ import {
   Status,
   Fluid
 } from './Styles';
-import CreateDomainFlow from './CreateDomainFlow';
+import CreateDomainModal from './CreateDomainModal';
 
 type Certificate = {
   is_active: boolean
@@ -66,7 +66,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
         <Header.H3>Domínios</Header.H3>
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
       </div>
-      <CreateDomainFlow btnText='Adicionar domínio' refetch={refetch} />
+      <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
     </Fluid>
     <DTList columnSize='500px auto 70px'>
       <DTRow header>
