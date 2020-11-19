@@ -24,8 +24,10 @@ pipeline:
     commands:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - pnpm i
       - pnpm m run build
+    secrets: [ aws_route_ip ]
     group: build
     when:
       status: success
@@ -53,8 +55,10 @@ pipeline:
     commands:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - pnpm i
       - pnpm m run build
+    secrets: [ aws_route_ip ]
     group: build
     when:
       status: success
