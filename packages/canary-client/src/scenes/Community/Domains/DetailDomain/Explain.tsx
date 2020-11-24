@@ -44,7 +44,7 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
           <DTCol align='center'>
             <ConnectDomainIcon />
             <Header.H5>Conectar ao BONDE</Header.H5>
-            <SmallText>Copie os registros abaixo e cole no site onde comprou seu domínio. Clique aqui para ver o passo a passo.</SmallText>
+            <SmallText>Para conseguir usar seu endereço no BONDE, copie os registros abaixo e cole no site onde comprou seu domínio. <a href="https://www.faq.bonde.org/#block-7283" title='Passo a passo'>Clique aqui</a> para ver o passo a passo.</SmallText>
             <Status
               isActived={() => !!(dnsHostedZone.status !== 'created' || dnsHostedZone.ns_ok)}
               labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}

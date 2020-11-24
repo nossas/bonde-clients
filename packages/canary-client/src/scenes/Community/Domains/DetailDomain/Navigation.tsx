@@ -26,7 +26,7 @@ const Navigation = ({ dnsHostedZone, refetch }: Props) => {
         <Icon name='ArrowLeft' size='small' />
         <Header.H5>Detalhes do domínio</Header.H5>
       </LinkStyled>
-      <Button disabled={disabled} onClick={() => setOpen(true)}>Adicionar subdomínio</Button>
+      <Button disabled={disabled} onClick={() => setOpen(true)}>Adicionar registro</Button>
       <RecordModal
         refetch={refetch}
         dnsHostedZone={dnsHostedZone}

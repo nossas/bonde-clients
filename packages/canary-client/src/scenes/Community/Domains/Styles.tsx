@@ -141,6 +141,14 @@ export const SmallText = styled(Text)`
   font-size: 13px;
   text-align: center;
   margin-bottom: 10px;
+
+  a {
+    color: #ee0099;
+
+    &:hover {
+      color: #e2058a
+    }
+  }
 `;
 
 export const Button = styled.button.attrs({ type: 'button' })`

@@ -9,11 +9,14 @@ import {
   ConnectedForm,
   InputField,
   toast,
-  Success
+  Success,
+  useField,
+  Validators
 } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { Container, Row, Col } from 'react-grid-system';
 import SelectField from '../../../../components/SelectField';
+import { InputGroup, Addon } from '../InputGroup';
 import { DNSHostedZone } from '../types';
 
 const createRecordGQL = gql`
@@ -29,6 +32,43 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
+const ValueRecordTypeField = (props: any) => {
+  const typeField = useField('record_type');
+  const placeholders: any = { A: '192.0.0.1', CNAME: 'domain.example.org' };
+  return (
+    <InputField
+      {...props}
+      placeholder={placeholders[typeField.input.value] || props.placeholder}
+    />
+  );
+}
+
+const TTLRecordTypeField = (props: any) => {
+  const typeField = useField('record_type');
+  return (
+    <InputField
+      {...props}
+      defaultValue={typeField.input.value === 'A' ? 300 : 3600}
+    />
+  );
+}
+
+const NameField = ({ domainName, name, ...props }: any) => {
+  // const { input } = useField(name);
+
+  return (
+    <InputGroup>
+      <InputField
+        {...props}
+        name={name}
+      />
+      <Addon>{`.${domainName}`}</Addon>
+    </InputGroup>
+  );
+}
+
+const { required } = Validators;
+
 const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
   const [createRecord] = useMutation(createRecordGQL);
 
@@ -36,21 +76,22 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
     <Modal width='50%' isOpen={open} onClose={onClose}>
       <ConnectedForm
         initialValues={{
+          record_type: 'A',
           community_id: dnsHostedZone.community.id,
           dns_hosted_zone_id: dnsHostedZone.id,
           hosted_zone_id: dnsHostedZone.hosted_zone.Id || dnsHostedZone.hosted_zone.id
         }}
-        onSubmit={async ({ ttl, value, record_type, ...values }: any) => {
+        onSubmit={async ({ ttl, value, record_type, name, ...values }: any) => {
           try {
             const variables = {
               input: {
                 ...values,
+                name: `${name}.${dnsHostedZone.domain_name}`,
                 record_type,
                 value: record_type !== 'MX' ? value : value.split(/\. /).map((v: string) => `${v.replace(/\.$/, '')}.`),
                 ttl: Number(ttl)
               }
             }
-            console.log('variables', { variables });
             await createRecord({ variables });
             toast(<Success message='Registro adicionado com success' />, { type: toast.TYPE.SUCCESS });
             onClose();
@@ -73,15 +114,16 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
             </Col>
           </Row>
           <Row style={{ marginBottom: '20px' }}>
-            <Col xs={4}>
-              <InputField
+            <Col xs={12}>
+              <NameField
                 name='name'
                 type='text'
                 label='Nome'
-                placeholder={`.${dnsHostedZone.domain_name}`}
+                domainName={dnsHostedZone.domain_name}
+                validate={required('Nome deve ser preenchido')}
               />
             </Col>
-            <Col xs={2}>
+            <Col xs={3}>
               <SelectField
                 name='record_type'
                 label='Tipo'
@@ -93,15 +135,16 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
                 <option value='AAA'>AAA</option>
               </SelectField>
             </Col>
-            <Col xs={4}>
-              <InputField
+            <Col xs={6}>
+              <ValueRecordTypeField
                 name='value'
                 type='text'
                 label='Valor'
+                validate={required('Valor deve ser preenchido')}
               />
             </Col>
-            <Col xs={2}>
-              <InputField
+            <Col xs={3}>
+              <TTLRecordTypeField
                 name='ttl'
                 type='number'
                 label='TTL'
