@@ -7,6 +7,9 @@ import TotalActivists from './TotalActivists';
 import LastActivists from './LastActivists';
 import LastPressures from './LastPressures';
 import LastFormEntries from './LastFormEntries';
+import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
+import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
+import TotalDonations from './TotalDonations';
 import Panel from '../Panel';
 
 
@@ -81,16 +84,34 @@ const AnalyticsCard = ({ label, children, full }: any) => (
   </Styles>
 )
 
-const Number = ({ query: Query }: any) => {
+type NumberProps = {
+  query: any
+  children?: any
+  format: 'default' | 'money'
+}
+
+const Number = ({ query: Query, children, format }: NumberProps) => {
   const { community } = useSession();
 
   return (
     <Query communityId={community?.id || 0}>
-      {({ total }: any) => (
-        <Header.H2>{total}</Header.H2>
+      {({ total, waiting }: any) => (
+        <>
+          <Header.H2>{format === 'money' ? `${total},00` : total}</Header.H2>
+          {waiting && (
+            <Header.H3 style={{ color: '#a4a4a4' }}>
+              <Icon name='Sync' size='small' /> {format === 'money' ? `${waiting},00` : waiting}
+            </Header.H3>
+          )}
+          {children}
+        </>
       )}
     </Query>
   );
+}
+
+Number.defaultProps = {
+  format: 'default'
 }
 
 const Analytics = () => (
@@ -137,23 +158,23 @@ const Analytics = () => (
         <Row>
           <Col xs={4}>
             <AnalyticsCard full label='Doações únicas (R$)'>
-              <Header.H2>1.120,00</Header.H2>
-              <Text>Nos últimos 30 dias</Text>
+              <Number query={SubscriptionDonationsLastMonth} format='money'>
+                <Text>Nos últimos 30 dias</Text>
+              </Number>
             </AnalyticsCard>
           </Col>
           <Col xs={4}>
             <AnalyticsCard full label='Doações recorrentes (R$)'>
-              <Header.H2>2.980,00</Header.H2>
-              <Text>Nos últimos 30 dias</Text>
+              <Number query={UniqueDonationsLastMonth} format='money'>
+                <Text>Nos últimos 30 dias</Text>
+              </Number>
             </AnalyticsCard>
           </Col>
           <Col xs={4}>
             <AnalyticsCard full label='Total arrecadado (R$)'>
-              <Header.H2>10.590,00</Header.H2>
-              <Header.H3 style={{ color: '#a4a4a4' }}>
-                <Icon name='Sync' size='small' /> 140,00
-              </Header.H3>
-              <Text>(Confirmadas / Aguardando pagamento)</Text>
+              <Number query={TotalDonations} format='money'>
+                <Text>(Confirmadas / Aguardando pagamento)</Text>
+              </Number>
             </AnalyticsCard>
           </Col>
         </Row>
