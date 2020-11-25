@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Text } from 'bonde-components';
+import { Header, Icon, Text, Tooltip } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
 import TotalActivists from './TotalActivists';
@@ -50,12 +50,13 @@ const ReportButton = styled.button`
 
 type ReportProps = {
   label: string
+  icon: string
 }
 
-const Report = ({ label }: ReportProps) => (
+const Report = ({ label, icon }: ReportProps) => (
   <ReportButton type='button'>
     <Panel style={{ maxWidth: '205px' }}>
-      <Icon name='Settings' />
+      <Icon name={icon as any} />
       <Header.H5 uppercase color='#000'>{label}</Header.H5>
     </Panel>
   </ReportButton>
@@ -75,14 +76,22 @@ const Styles = styled.div<StylesProps>`
   }
 `
 
-const AnalyticsCard = ({ label, children, full }: any) => (
-  <Styles full={full}>
-    <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>{label}</Header.H5>
-    <Panel>
-      {children}
-    </Panel>
-  </Styles>
-)
+const AnalyticsCard = ({ label, tooltip, children, full }: any) => {
+  const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>{label}</Header.H5>;
+  return (
+    <Styles full={full}>
+      {tooltip ? (
+        <Tooltip
+          label={Label}
+          info={tooltip}
+        />
+      ) : Label}
+      <Panel>
+        {children}
+      </Panel>
+    </Styles>
+  );
+}
 
 type NumberProps = {
   query: any
@@ -121,34 +130,46 @@ const Analytics = () => (
         <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>Baixar relatórios</Header.H5>
       </Col>
       <Col xs={12}>
-        <Report label='Relatórios de doações' />
-        <Report label='Doações recorrentes' />
-        <Report label='Relatórios de ações' />
-        <Report label='Relatórios de ativistas' />
+        <Report label='Relatórios de doações' icon='Ticket' />
+        <Report label='Doações recorrentes' icon='TicketRecurring' />
+        <Report label='Relatórios de ações' icon='Bolt' />
+        <Report label='Relatórios de ativistas' icon='Network' />
       </Col>
     </Row>
     <Row>
       <Col xs={5}>
         <Row>
           <Col xs={6}>
-            <AnalyticsCard label='Ativistas'>
+            <AnalyticsCard
+              label='Ativistas'
+              tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
+            >
               <Number query={TotalActivists} />
             </AnalyticsCard>
           </Col>
           <Col xs={6}>
-            <AnalyticsCard label='Ativistas recentes'>
+            <AnalyticsCard
+              label='Ativistas recentes'
+              tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
+            >
               <Number query={LastActivists} />
             </AnalyticsCard>
           </Col>
         </Row>
         <Row>
           <Col xs={6}>
-            <AnalyticsCard label='Pressões recentes'>
+            <AnalyticsCard
+              label='Pressões recentes'
+              tooltip='Total de ações de pressão feitas em páginas da sua comunidade nos últimos 90 dias.'
+            >
               <Number query={LastPressures} />
             </AnalyticsCard>
           </Col>
           <Col xs={6}>
-            <AnalyticsCard label='Inscrições recentes'>
+            <AnalyticsCard
+              label='Inscrições recentes'
+              tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
+            >
               <Number query={LastFormEntries} />
             </AnalyticsCard>
           </Col>
@@ -157,21 +178,33 @@ const Analytics = () => (
       <Col xs={7}>
         <Row>
           <Col xs={4}>
-            <AnalyticsCard full label='Doações únicas (R$)'>
+            <AnalyticsCard
+              full
+              label='Doações únicas (R$)'
+              tooltip='Valor total das doações únicas confirmadas na comunidade nos últimos 30 dias.'
+            >
               <Number query={SubscriptionDonationsLastMonth} format='money'>
                 <Text>Nos últimos 30 dias</Text>
               </Number>
             </AnalyticsCard>
           </Col>
           <Col xs={4}>
-            <AnalyticsCard full label='Doações recorrentes (R$)'>
+            <AnalyticsCard
+              full
+              label='Doações recorrentes (R$)'
+              tooltip='Valor total das doações recorrentes confirmadas na comunidade nos últimos 30 dias.'
+            >
               <Number query={UniqueDonationsLastMonth} format='money'>
                 <Text>Nos últimos 30 dias</Text>
               </Number>
             </AnalyticsCard>
           </Col>
           <Col xs={4}>
-            <AnalyticsCard full label='Total arrecadado (R$)'>
+            <AnalyticsCard
+              full
+              label='Total arrecadado (R$)'
+              tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
+            >
               <Number query={TotalDonations} format='money'>
                 <Text>(Confirmadas / Aguardando pagamento)</Text>
               </Number>
