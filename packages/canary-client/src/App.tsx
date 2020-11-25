@@ -37,7 +37,7 @@ const AppLoading = ({ fetching }: AppLoadingProps) => {
     communities: t('communities'),
     // TODO: change this implementation
     redirect: t('redirect'),
-    module: t('module'),
+    module: t('module')
   };
 
   return <Loading fullsize message={messages[fetching]} />;

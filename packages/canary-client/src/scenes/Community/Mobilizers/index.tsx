@@ -67,16 +67,14 @@ const Flex = styled.div`
   }
 `;
 
-type Props = {
-  community: any
-}
-
-const FetchInvitations = ({ community }: Props) => {
-  const variables = { communityId: community.id };
-  const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables });
+const FetchInvitations = () => {
   const [menu, setMenu] = useState(1);
-  const { user } = useSession();
   const { t } = useTranslation('community');
+  // Session
+  const { user, community } = useSession();
+  // Query
+  const variables = { communityId: community?.id };
+  const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables });
 
   if (loading) return <Loading />;
   if (error) return <div>Error</div>;

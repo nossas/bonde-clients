@@ -6,12 +6,13 @@ import { useSession } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import Content from '../../components/Content';
 // Subroutes
-import Styles from './Styles';
-import Mobilizers from './Mobilizers';
-import Settings from './Settings';
-import Integrations from './Integrations';
-import Recipient from './Recipient';
+import Analytics from './Analytics';
 import Domains from './Domains';
+import Integrations from './Integrations';
+import Mobilizers from './Mobilizers';
+import Recipient from './Recipient';
+import Settings from './Settings';
+import Styles from './Styles';
 
 const SubHeader = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const CommunityPage = ({ match, location }: Props) => {
       <SubHeader>
         <Header.H3>{t('titles.settings')}</Header.H3>
         <Navigation>
+          <Tab active={is(/\/community\/analytics\/*/)} onClick={push('/analytics')}>{t('navigation.analytics')}</Tab>
           <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
           <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
           <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
@@ -68,11 +70,14 @@ const CommunityPage = ({ match, location }: Props) => {
           <Row>
             <Col>
               <Switch>
+                <Route exact path={`${match.path}/analytics`}>
+                  <Analytics />
+                </Route>
                 <Route exact path={`${match.path}/settings`}>
                   <Settings />
                 </Route>
                 <Route exact path={`${match.path}/mobilizers`}>
-                  <Mobilizers community={community} />
+                  <Mobilizers />
                 </Route>
                 <Route exact path={`${match.path}/recipient`}>
                   <Recipient />

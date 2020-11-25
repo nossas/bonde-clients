@@ -241,6 +241,7 @@
     "settings": "Community Settings"
   },
   "navigation": {
+    "analytics": "Data",
     "settings": "Information",
     "mobilizers": "Mobilizers",
     "integrations": "Integrations",
