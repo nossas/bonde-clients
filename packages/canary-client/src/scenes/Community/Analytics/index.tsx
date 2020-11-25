@@ -11,56 +11,7 @@ import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
 import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
 import TotalDonations from './TotalDonations';
 import Panel from '../Panel';
-
-
-const ReportButton = styled.button`
-  margin-right: 18px;
-  border: none;
-  outline: none;
-
-  &:active, &:focus, &:hover {
-    border: none;
-    outline: none;
-  }
-
-  &:hover {
-    h5 {
-      color: #a4a4a4 !important;
-    }
-
-    .fill {
-      path {
-        fill: #a4a4a4 !important;
-      }
-    }
-  }
-
-  ${Panel} {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    text-align: left;
-
-    svg {
-      margin-right: 8px;
-    }
-  }
-`
-
-type ReportProps = {
-  label: string
-  icon: string
-}
-
-const Report = ({ label, icon }: ReportProps) => (
-  <ReportButton type='button'>
-    <Panel style={{ maxWidth: '205px' }}>
-      <Icon name={icon as any} />
-      <Header.H5 uppercase color='#000'>{label}</Header.H5>
-    </Panel>
-  </ReportButton>
-)
+import DownloadCSV from './DownloadCSV';
 
 type StylesProps = {
   full?: boolean
@@ -130,10 +81,26 @@ const Analytics = () => (
         <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>Baixar relatórios</Header.H5>
       </Col>
       <Col xs={12}>
-        <Report label='Relatórios de doações' icon='Ticket' />
-        <Report label='Doações recorrentes' icon='TicketRecurring' />
-        <Report label='Relatórios de ações' icon='Bolt' />
-        <Report label='Relatórios de ativistas' icon='Network' />
+        <DownloadCSV
+          label='Relatórios de doações'
+          icon='Ticket'
+          path='donation_reports'
+        />
+        <DownloadCSV
+          label='Doações recorrentes'
+          icon='TicketRecurring'
+          path='download_subscriptions'
+        />
+        <DownloadCSV
+          label='Relatórios de ações'
+          icon='Bolt'
+          path='activist_actions'
+        />
+        <DownloadCSV
+          label='Relatórios de ativistas'
+          icon='Network'
+          path='activists'
+        />
       </Col>
     </Row>
     <Row>

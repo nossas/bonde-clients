@@ -67,9 +67,11 @@ importers:
     dependencies:
       '@fnando/cnpj': 1.0.2
       '@fnando/cpf': 1.0.2
+      '@types/downloadjs': 1.4.2
       '@types/react-table': 7.0.25
       bonde-styleguide: 0.16.5-alpha.5
       clipboard-copy: 3.2.0
+      downloadjs: 1.4.7
       moment: 2.29.1
       react-s3-uploader: 4.9.3
       react-table: 7.6.1
@@ -77,9 +79,11 @@ importers:
     specifiers:
       '@fnando/cnpj': ^1.0.2
       '@fnando/cpf': ^1.0.2
+      '@types/downloadjs': ^1.4.2
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
       clipboard-copy: ^3.1.0
+      downloadjs: ^1.4.7
       moment: ^2.27.0
       react-s3-uploader: ^4.9.3
       react-table: ^7.5.0
@@ -1631,8 +1635,6 @@ packages:
       globals: 11.12.0
       lodash: 4.17.20
     dev: false
-    peerDependencies:
-      supports-color: '*'
     resolution:
       integrity: sha512-iX9ajqnLdoU1s1nHt36JDI9KG4k+vmI8WgjK5d+aDTwQbL2fUnzedNedssA645Ede3PM2ma1n8Q4h2ohwXgMXw==
   /@babel/traverse/7.12.9_supports-color@5.5.0:
@@ -3455,6 +3457,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Pzh9O3sTK8V6I1olsXpCfj2k/ygO2q1X0vhhnDrEQyYLHZesWz+zMZMVcwXLCYf0U36EtmyYaFGPfXlTtDHe3A==
+  /@types/downloadjs/1.4.2:
+    dev: false
+    resolution:
+      integrity: sha512-9UWO+nrRhwyKcFe45SFc98sWI8RGwpVwtZiZzi0W/dWdrp1SiUWFNANLlAXZb5QCMFDbeRiAQEhRn5btLd4a4w==
   /@types/eslint-visitor-keys/1.0.0:
     resolution:
       integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
@@ -6738,6 +6744,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+  /downloadjs/1.4.7:
+    dev: false
+    resolution:
+      integrity: sha1-9p+W+UDg0FU9rCkROYZaPNAQHjw=
   /duplexer/0.1.2:
     dev: false
     resolution:
