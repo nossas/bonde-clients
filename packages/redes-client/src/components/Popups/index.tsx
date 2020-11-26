@@ -49,6 +49,9 @@ const getVariables = (
           name: volunteer.firstName,
           user_id: volunteer.id,
           organization_id: volunteer.organizationId,
+          registration_number: volunteer.registrationNumber,
+          phone: volunteer.phone,
+          whatsapp: volunteer.whatsapp,
         },
         community_id: communityId
       }
