@@ -34,8 +34,6 @@ const VOLUNTEERS_FOR_MATCH = gql`
     volunteers: solidarity_users(
       where: {
         condition: { _eq: "disponivel" }
-        longitude: { _is_null: false }
-        latitude: { _is_null: false }
         name: { _is_null: false }
         registration_number: { _is_null: false }
         atendimentos_em_andamento_calculado_: { _eq: 0 }
@@ -45,6 +43,10 @@ const VOLUNTEERS_FOR_MATCH = gql`
         _and: [
           { organization_id: $volunteerOrganizationId }
           { organization_id: { _is_null: false } }
+          { longitude: { _is_null: false } }
+          { longitude: { _neq: "ZERO_RESULTS" } }
+          { latitude: { _is_null: false } }
+          { latitude: { _neq: "ZERO_RESULTS" } }
         ]
       }
     ) {
@@ -86,6 +88,12 @@ const RECIPIENTS_FOR_MATCH = gql`
           email: { _is_null: false }
           name: { _is_null: false }
         }
+        _and: [
+          { individual: { latitude: {_is_null: false} } }
+          { individual: { longitude: {_is_null: false} } }
+          { individual: { latitude: {_neq: "ZERO_RESULTS"} } }
+          { individual: { longitude: {_neq: "ZERO_RESULTS"} } }
+        ]
       }
       order_by: { individual: { data_de_inscricao_no_bonde: asc } }
     ) {
