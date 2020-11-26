@@ -23,8 +23,13 @@ const MATCHES = gql`
         created_at: $created_at
         status: $status
         recipient_ticket: { assignee_id: $agent }
-        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
-        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
+        recipient: { state: $state }
+        _or: [
+          { recipient: { name: { _ilike: $query } } }
+          { recipient: { email: { _ilike: $query } } }
+          { volunteer: { name: { _ilike: $query } } }
+          { volunteer: { email: { _ilike: $query } } }
+        ]
       }
     ) {
       id
@@ -47,8 +52,13 @@ const MATCHES = gql`
         created_at: $created_at
         status: $status
         recipient_ticket: { assignee_id: $agent }
-        recipient: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } }
-        volunteer: { name: { _ilike: $query }, state: $state, email: { _ilike: $query } } 
+        recipient: { state: $state }
+        _or: [
+          { recipient: { name: { _ilike: $query } } }
+          { recipient: { email: { _ilike: $query } } }
+          { volunteer: { name: { _ilike: $query } } }
+          { volunteer: { email: { _ilike: $query } } }
+        ]
       }
     ) {
       aggregate {
