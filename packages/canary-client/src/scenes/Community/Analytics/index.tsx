@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Text, Tooltip } from 'bonde-components';
+import { Header, Icon, Text, Tooltip, Hint } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
 import TotalActivists from './TotalActivists';
@@ -24,6 +24,10 @@ const Styles = styled.div<StylesProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  ${Hint} {
+    word-break: break-word;
   }
 `
 

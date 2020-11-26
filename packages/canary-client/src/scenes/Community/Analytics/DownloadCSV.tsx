@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Loading } from 'bonde-components';
+import { Header, Icon, Loading, toast, Success } from 'bonde-components';
 import downloadjs from 'downloadjs'
 import styled from 'styled-components';
 import Panel from '../Panel';
@@ -69,7 +69,7 @@ type DownloadCSVProps = {
 const DownloadCSV = ({ path, label, icon }: DownloadCSVProps) => {
   const [loading, setLoading] = useState(false);
   const { community, token } = useSession();
-  const apiUrl = 'https://api-rest.staging.bonde.org/communities';
+  const apiUrl = process.env.REACT_APP_DOMAIN_API_REST;
   const headers = { 'access-token': token || 'no-token' };
   const reportNames = {
     donation_reports: 'Doação',
@@ -81,31 +81,29 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps) => {
   const handleClick = async () => {
     setLoading(true);
     try {
-
-    
-      const response = await fetch(`${apiUrl}/${community?.id}/${path}.csv`, { method: 'GET', headers });
+      const response = await fetch(`${apiUrl}/communities/${community?.id}/${path}.csv`, { method: 'GET', headers });
 
       if (response.status === 200) {
         const filename = `[Relatório][${reportNames[path]}] ${community?.name}.csv`;
-        downloadjs(new Blob([(await response.blob())]), filename, 'text/csv')
+        downloadjs(new Blob([(await response.blob())]), filename, 'text/csv');
+        
+        toast(<Success message={`O download de ${filename} foi feito com sucesso.`} />, { type: toast.TYPE.SUCCESS });
       }
       setLoading(false);
-      console.log('response', { response });
-      //     if (status === 400 && data.errors) {
-      //       notifyError()
-      //       return Promise.reject({ ...data.errors })
-      //     } else if (status === 200) {
-      //       if (data.length > 0) {
-      //         notifySuccess()
-      //         downloadjs(new Blob([data]), filename, 'text/csv')
     } catch (err) {
-      setLoading(false);
       console.error('error', err);
+      toast(err.message, { type: toast.TYPE.ERROR });
+      setLoading(false);
     }
   }
 
   return (
-    <ReportButton type='button' onClick={handleClick} loading={loading}>
+    <ReportButton
+      type='button'
+      onClick={handleClick}
+      loading={loading}
+      disabled={loading}
+    >
       <Panel>
         {loading
           ? <Loading size='small' />
