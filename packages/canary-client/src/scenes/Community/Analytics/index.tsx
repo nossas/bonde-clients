@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Text, Tooltip, Hint } from 'bonde-components';
+import { Header, Icon, Text, Tooltip, Message, Hint } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
 import TotalActivists from './TotalActivists';
@@ -24,6 +24,7 @@ const Styles = styled.div<StylesProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 25px 30px;
   }
 
   ${Hint} {
@@ -31,15 +32,30 @@ const Styles = styled.div<StylesProps>`
   }
 `
 
-const AnalyticsCard = ({ label, tooltip, children, full }: any) => {
+type PositionProps = {
+  direction?: 'right' | 'left'
+}
+
+const Position = styled.div<PositionProps>`
+  ${Message} {
+    ${props => props.direction === 'right' ? 'right: -20px' : 'left: -20px'};
+  }
+`
+Position.defaultProps = {
+  direction: 'left'
+}
+
+const AnalyticsCard = ({ label, tooltip, children, full, direction }: any) => {
   const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>{label}</Header.H5>;
   return (
     <Styles full={full}>
       {tooltip ? (
-        <Tooltip
-          label={Label}
-          info={tooltip}
-        />
+        <Position direction={direction}>
+          <Tooltip
+            label={Label}
+            info={tooltip}
+          />
+        </Position>
       ) : Label}
       <Panel>
         {children}
@@ -63,9 +79,10 @@ const Number = ({ query: Query, children, format }: NumberProps) => {
         <>
           <Header.H2>{format === 'money' ? `${total},00` : total}</Header.H2>
           {waiting && (
-            <Header.H3 style={{ color: '#a4a4a4' }}>
-              <Icon name='Sync' size='small' /> {format === 'money' ? `${waiting},00` : waiting}
-            </Header.H3>
+            <Text style={{ color: '#a4a4a4' }}>
+              <Icon color='#c7c7c7' name='Sync' size='small' />
+              <span>{format === 'money' ? `${waiting},00` : waiting}</span>
+            </Text>
           )}
           {children}
         </>
@@ -175,6 +192,7 @@ const Analytics = () => (
               full
               label='Total arrecadado (R$)'
               tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
+              direction='right'
             >
               <Number query={TotalDonations} format='money'>
                 <Text>(Confirmadas / Aguardando pagamento)</Text>

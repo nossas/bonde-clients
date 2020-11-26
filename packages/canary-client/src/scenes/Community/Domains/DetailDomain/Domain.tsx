@@ -135,7 +135,7 @@ const Domain = (props: Omit<Props, 'action'>) => {
         </DTCol>
         <DTCol style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <Button onClick={handleCheckDNS({ ...props, action: updateDomain })} style={{ fontSize: '13px' }}>
-            <Icon size='small' name='Settings' /> Verificar DNS
+            <Icon size='small' name='Sync' /> Verificar DNS
           </Button>
           <Button onClick={handleDelete({ ...props, action: deleteDomain, push })} style={{ fontSize: '13px' }}>
             <Icon size='small' name='Trash' /> Excluir

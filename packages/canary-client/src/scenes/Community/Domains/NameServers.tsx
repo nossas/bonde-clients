@@ -10,7 +10,7 @@ const NameServers = ({ dnsHostedZone }: any) => {
         {`Registros de nome (Name servers)`}
         <Tooltip info='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.' />
       </MainTitle>
-      <DTList columnSize='auto 200px' rowSize='50px' padding='18px 20px'>
+      <DTList columnSize='auto 200px' rowSize='auto' padding='15px 20px'>
         {dnsHostedZone.name_servers.map((ns: string) => (
           <DTRow key={ns}>
             <DTCol>

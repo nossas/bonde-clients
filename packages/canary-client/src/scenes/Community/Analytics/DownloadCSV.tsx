@@ -10,7 +10,7 @@ type ReportButtonProps = {
 }
 
 const ReportButton = styled.button<ReportButtonProps>`
-  margin-right: 18px;
+  margin: 0 18px 5px 0;
   border: none;
   outline: none;
 
@@ -37,6 +37,7 @@ const ReportButton = styled.button<ReportButtonProps>`
     align-items: center;
     width: 205px;
     height: 96px;
+    padding: 25px 30px;
 
     text-align: left;
 

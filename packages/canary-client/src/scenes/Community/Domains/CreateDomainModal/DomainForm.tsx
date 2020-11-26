@@ -29,6 +29,16 @@ const AddOn = styled.div`
   }
 `;
 
+const RichText = styled(Text)`
+  a {
+    color: #ee0099;
+
+    &:hover {
+      color: #e2058a;
+    }
+  }
+`
+
 type Props = {
   onClose: any
   onSubmit: any
@@ -50,7 +60,7 @@ const DomainForm = ({ onSubmit, onClose }: Props) => {
           </Row>
           <Row style={{ marginBottom: '20px' }}>
             <Col xs={12}>
-              <Text>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, clique aqui pra saber mais.</Text>
+              <RichText>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, <a href="https://www.faq.bonde.org/#block-7283" title="FAQ Dominios" target="_blank" rel="noopener noreferrer">clique aqui</a> pra saber mais.</RichText>
             </Col>
           </Row>
           <Row style={{ marginBottom: '20px' }}>
@@ -74,7 +84,7 @@ const DomainForm = ({ onSubmit, onClose }: Props) => {
               </Col>
             )}
           </Row>
-          <Row>
+          <Row style={{ alignItems: 'center' }}>
             <Col xs={6}>
               <Link style={{ cursor: 'pointer' }} onClick={onClose}>Cancelar</Link>
             </Col>

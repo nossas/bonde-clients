@@ -12,6 +12,10 @@ export const Col = styled.div<ColProps>`
   p {
     text-align: ${props => props.align};
   }
+
+  ${Text} {
+    word-break: break-all;
+  }
 `;
 
 Col.defaultProps = {

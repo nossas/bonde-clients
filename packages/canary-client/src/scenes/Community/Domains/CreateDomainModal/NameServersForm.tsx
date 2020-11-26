@@ -71,16 +71,16 @@ const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: P
           <Header.H4>Passo a passo</Header.H4>
           <TopicList>
             <li>
-              <Text>{`Abra o site onde comprou o domínio, (GoDaddy.com, por exemplo), e entre nas configurações do domínio.`}</Text>
+              <Text>Abra o site onde comprou o domínio, (GoDaddy.com, por exemplo), e entre nas <b>configurações do domínio</b>.</Text>
             </li>
             <li>
-              <Text>{`Procure a opção "Manage DNS" e clique nela.`}</Text>
+              <Text>Procure a opção <b>{`"Gerenciar DNS"`}</b> e clique nela.</Text>
             </li>
             <li>
-              <Text>{`Em "nameservers", selecione "custom".`}</Text>
+              <Text>Em <b>{`"Servidores de Nome"`}</b>, selecione <b>{`"alterar"`}</b>. Depois, clique em <b>{`"Inserir meus próprios servidores de nome"`}</b>.</Text>
             </li>
             <li>
-              <Text>{`Copie os 4 códigos abaixo e cole nos campos que apareceram, um em cada campo. (Se necessário, pode adicionar mais campos até colar todos os quatro.)`}</Text>
+              <Text><b>Copie os 4 códigos abaixo e cole</b> nos campos que apareceram, um em cada campo. (Se necessário, pode adicionar mais campos até colar todos os quatro.)</Text>
             </li>
             <li>
               <Text>Clique em salvar.</Text>
