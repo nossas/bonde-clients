@@ -18,6 +18,9 @@ const Grid = styled.div`
   & > a {
     text-decoration: none;
     display: flex;
+    & > button {
+      width: 100%;
+    }
   }
 `;
 
