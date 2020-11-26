@@ -10,6 +10,7 @@ import { useFilterDispatch } from "../../services/FilterProvider";
 import {
   createCustomWhatsappLink,
   MAPA_DO_ACOLHIMENTO_COMMUNITY,
+  getAgentZendeskUserId
 } from "../../services/utils";
 import { Individual } from "../../types";
 
@@ -33,9 +34,24 @@ const getVariables = (
   communityId?: number
 ) => {
   if (communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY) {
-    // make api calls to mapa graphql endpoint
+    const { recipient, volunteer } = match
     return {
-      ...match,
+      input: {
+        recipient: {
+          external_id: recipient.externalId,
+          nome_msr: recipient.firstName,
+          ticket_id: recipient.ticketId,
+          organization_id: recipient.organizationId,
+          requester_id: recipient.id
+        },
+        agent: getAgentZendeskUserId(user.id),
+        volunteer: {
+          name: volunteer.firstName,
+          user_id: volunteer.id,
+          organization_id: volunteer.organizationId,
+        },
+        community_id: communityId
+      }
     };
   }
   const usersForMatch: MatchUsers = {
