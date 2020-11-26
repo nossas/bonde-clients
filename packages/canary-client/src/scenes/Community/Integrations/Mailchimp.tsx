@@ -122,7 +122,7 @@ const MailchimpPanel = () => {
                   </ul>
                 </Section>
                 <Section>
-                  <Header.H4>Dificuldade: Fácil</Header.H4>
+                  <Header.H4>Observações</Header.H4>
                   <Text>Os segmentos criados pelo BONDE no Mailchimp seguem esse formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)</Text>
                 </Section>
               </Col>
