@@ -245,6 +245,7 @@
     "settings": "Information",
     "mobilizers": "Mobilizers",
     "integrations": "Integrations",
-    "recipient": "Payments"
+    "recipient": "Payments",
+    "domains": "Domains"
   }
 }
