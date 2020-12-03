@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom"
 import { Empty, Header } from "bonde-components";
 import { CommunityMenu } from "bonde-core-tools";
 
@@ -14,6 +15,10 @@ const Styles = styled.div<StylesProps>`
   height: ${(props) => props.height};
   min-height: ${(props) => props.height};
   overflow-y: auto;
+
+  a {
+    text-decoration: none;
+  }
 
   ul {
     margin: 0;
@@ -109,7 +114,7 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
                 />
               </Colunm>
               <Colunm grow={1}>
-                <Header.H4>{c.name}</Header.H4>
+              <Link to="/widgets"><Header.H4>{c.name}</Header.H4></Link>
                 <Header.H6>{c.description || c.city}</Header.H6>
               </Colunm>
               <Colunm mobile="hide">
