@@ -9,13 +9,13 @@ const INDIVIDUALS_BY_GROUP = gql`
   query Individuals(
     $rows: Int!
     $offset: Int!
-    $order_by: [solidarity_tickets_order_by!]
     $userStatus: String_comparison_exp
     $relationshipStatus: String_comparison_exp
     $state: String_comparison_exp
     $availability: String_comparison_exp
     $individualId: bigint_comparison_exp
     $query: String
+    $order_by: [solidarity_tickets_order_by!]
   ) {
     data: solidarity_tickets(
       where: {
@@ -63,7 +63,9 @@ const INDIVIDUALS_BY_GROUP = gql`
 `;
 
 const FetchIndividuals = (props: any = {}) => {
-  const { individuals, rows, offset, selectedGroup } = useFilterState();
+  const { 
+    individuals, rows, offset, selectedGroup, order_by 
+  } = useFilterState();
 
   const {
     userStatus,
@@ -92,9 +94,7 @@ const FetchIndividuals = (props: any = {}) => {
     },
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
+    order_by: order_by || [{ created_at: 'asc' }]
   };
 
   return (
