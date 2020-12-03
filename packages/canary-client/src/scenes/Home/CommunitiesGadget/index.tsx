@@ -4,7 +4,7 @@ import { Header } from "bonde-components";
 import { useSession } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 
-import SearchInput from "./SearchInput";
+import SearchInput from "../../../components/SearchInput";
 import CommunitiesScrollBox from "./CommunitiesScrollBox";
 
 const Styles = styled.div`

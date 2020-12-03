@@ -6,7 +6,9 @@ import { useSession } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 import Content from "../../components/Content";
 // Subroutes
-import Home from "./Home";
+import FetchWidgets from "./FetchWidgets";
+import ActionList from './ActionList';
+import WidgetButton from './WidgetButton';
 
 const SubHeader = styled.div`
   display: flex;
@@ -52,7 +54,7 @@ const WidgetsActionsPage = ({ match, location }: Props) => {
       <SubHeader>
         <Header.H3>{t("titles.home")}</Header.H3>
         <Navigation>
-          <Tab active={is(/\/widgets\/*/)} onClick={push("/")}>
+          <Tab active={is(/\/widgets\/*/)} onClick={push('/')}>
             {t("navigation.home")}
           </Tab>
         </Navigation>
@@ -62,7 +64,15 @@ const WidgetsActionsPage = ({ match, location }: Props) => {
           <Col>
             <Switch>
               <Route exact path={`${match.path}`}>
-                <Home />
+                <FetchWidgets communityId={community.id}>
+                  {({ widgets }: any) => (
+                    <ActionList widgets={widgets}>
+                      {({ result }: any) => result.map((w: any) => (
+                        <WidgetButton key={w.id} widget={w} />
+                      ))}
+                    </ActionList>
+                  )}
+                </FetchWidgets>
               </Route>
             </Switch>
           </Col>

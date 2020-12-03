@@ -27,6 +27,12 @@ type Props = {
   onChange: (data: any[]) => void
 }
 
+const getProp = (obj: any, prop: string) => {
+  return prop.split('.').reduce((r, e) => {
+    return r[e];
+  }, obj);
+};
+
 const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +41,8 @@ const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
   const searching = (c: any) => {
     const search = (inputRef as any).current.value;
     if (search) {
-      return normalize(c[field]).indexOf(normalize(search)) !== -1;
+
+      return normalize(getProp(c, field)).indexOf(normalize(search)) !== -1;
     }
     return true;
   }
