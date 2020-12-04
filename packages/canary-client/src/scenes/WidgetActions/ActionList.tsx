@@ -7,6 +7,7 @@ const Flex = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  margin: -10px;
 `;
 
 const HeaderInfo = styled.div`

@@ -29,22 +29,49 @@ const widgetsByCommunityGQL = gql`
           community_id
         }
       }
+
+      actions: activist_actions_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `
 
+export type Widget = {
+  id: number
+  kind: 'pressure' | 'form' | 'donation'
+  block: {
+    mobilization: {
+      image?: string
+      name: string
+      community_id: number
+    }
+  }
+  actions: {
+    aggregate: {
+      count: number
+    }
+  }
+}
+
+type RenderProps = {
+  widgets: Widget[]
+}
+
 type Props = {
   communityId: number
-  children: any
+  children: ({ widgets }: RenderProps) => any
 }
 
 const FetchWidgets = ({ children, communityId }: Props) => {
-  const { data, loading, error } = useQuery(widgetsByCommunityGQL, { variables: { communityId } });
+  const { data, loading, error } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
   if (loading) return 'Carregando widgets...';
 
-  return children({ widgets: data.widgets });
+  return children({ widgets: data?.widgets || [] });
 }
 
 export default FetchWidgets;
