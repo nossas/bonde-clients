@@ -6,9 +6,7 @@ import { useSession } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 import Content from "../../components/Content";
 // Subroutes
-import FetchWidgets from "./FetchWidgets";
-import ActionList from './ActionList';
-import WidgetButton from './WidgetButton';
+import HomeIndex from './HomeIndex';
 
 const SubHeader = styled.div`
   display: flex;
@@ -64,15 +62,7 @@ const WidgetsActionsPage = ({ match, location }: Props) => {
           <Col>
             <Switch>
               <Route exact path={`${match.path}`}>
-                <FetchWidgets communityId={community.id}>
-                  {({ widgets }: any) => (
-                    <ActionList widgets={widgets}>
-                      {({ result }: any) => result.map((w: any) => (
-                        <WidgetButton key={w.id} widget={w} />
-                      ))}
-                    </ActionList>
-                  )}
-                </FetchWidgets>
+                <HomeIndex community={community} />
               </Route>
             </Switch>
           </Col>

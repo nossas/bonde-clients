@@ -18,6 +18,12 @@ const InputAddon = styled.div`
   input {
     padding-right: 20px;
   }
+
+  svg {
+    width: calc(0.75*20px);
+    height: calc(0.75*15px);
+    margin-top: 3px;
+  }
 `;
 
 type Props = {
@@ -60,7 +66,7 @@ const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
           ref={inputRef}
           placeholder={placeholder}
         />
-        <Button dark type='submit'><Icon name='Search' size='small' /></Button>
+        <Button dark type='submit'><Icon name='Search' size='small' color='#c7c7c7 !important' /></Button>
       </InputAddon>
     </form>
   );

@@ -6,15 +6,13 @@ import { Widget } from './FetchWidgets';
 const Panel = styled.div`
   display: flex;
   flex-direction: column;
-  width: 205px;
   height: 175px;
   background-color: #fff;
   padding: 25px 20px;
   box-shadow: 0 10px 20px -7px rgba(0,0,0,0.05);
   border-radius: 4px;
 
-  margin: 10px;
-  flex: 1 1 205px;
+  margin: 15px 9px;
 `;
 
 type FlexProps = {
@@ -94,7 +92,7 @@ const WidgetButton = ({ widget }: Props) => {
         <Text className='break'>{name}</Text>
       </Flex>
       <Flex align='flex-end'>
-        <Header.H2>{count}</Header.H2>
+        <Header.H2 style={{ marginRight: '5px' }}>{count}</Header.H2>
         <Text>{labels.count}</Text>
       </Flex>
     </Panel>
