@@ -10,7 +10,7 @@ importers:
       '@types/react-dom': 16.9.9
       '@types/react-router-dom': 5.1.6
       '@types/styled-components': 5.1.4
-      bonde-components: 0.0.4-alpha.28_react-dom@16.14.0+react@16.14.0
+      bonde-components: 0.0.4-alpha.30_react-dom@16.14.0+react@16.14.0
       bonde-core-tools: 0.1.7-alpha.8
       eslint: 6.6.0
       i18next: 19.8.3
@@ -43,7 +43,7 @@ importers:
       '@types/styled-components': ^5.1.2
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
-      bonde-components: 0.0.4-alpha.28
+      bonde-components: 0.0.4-alpha.30
       bonde-core-tools: 0.1.7-alpha.8
       eslint: 6.6.0
       husky: ^4.2.5
@@ -105,7 +105,7 @@ importers:
       '@types/react-table': ^7.0.22
       deep-object-diff: ^1.1.0
       react-table: ^7.6.0
-lockfileVersion: 5.2
+lockfileVersion: 5.1
 packages:
   /@apollo/client/3.2.9_graphql@15.4.0+react@16.14.0:
     dependencies:
@@ -1605,8 +1605,6 @@ packages:
       globals: 11.12.0
       lodash: 4.17.20
     dev: false
-    peerDependencies:
-      supports-color: '*'
     resolution:
       integrity: sha512-xa15FbQnias7z9a62LwYAA5SZZPkHIXpd42C6uW68o8uTuua96FHZy1y61Va5P/i83FAAcMpW8+A/QayntzuqA==
   /@babel/traverse/7.12.5_supports-color@5.5.0:
@@ -4883,7 +4881,7 @@ packages:
       react-dom: '*'
     resolution:
       integrity: sha512-OOG3XnrcYRTPwQRoS+652bSiM9iLYMFOUE7KZIU+44WKbz8L+OaKMI+/lEEu3FK2QOLeOoDlNjiR/dFbF1x+6w==
-  /bonde-components/0.0.4-alpha.28_react-dom@16.14.0+react@16.14.0:
+  /bonde-components/0.0.4-alpha.30_react-dom@16.14.0+react@16.14.0:
     dependencies:
       final-form: 4.20.1
       react: 16.14.0
@@ -4897,7 +4895,7 @@ packages:
       react: '>=16'
       react-dom: '*'
     resolution:
-      integrity: sha512-qOsmaKAqpw9fQ5G3fYMC8MukMaETsgbZydWG5lv/T6PsAiWXpQF1ggc6rISMFj9UddNe09pbXjxOTSGuZmDDcA==
+      integrity: sha512-tVZM1bU3oYJ4OocuDGTTsDaNY7umCNI7hBCMXKq3VSCHqJaoeIdtDBMg+0H+AoMchstd5Y/w3vDhnLUKAa8d7A==
   /bonde-core-tools/0.1.7-alpha.8:
     dependencies:
       '@apollo/client': 3.2.9_graphql@15.4.0+react@16.14.0
@@ -8799,6 +8797,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-YcV7BgVMRFRua2FqQzKtTDMz8iCuLEyGKjr70q8Zm1yy2qKcurbFEd79PAdHV77oL3NrAaOVQIbMmiHQCHB7ZA==
+  /is-core-module/2.2.0:
+    dependencies:
+      has: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha512-XRAfAdyyY5F5cOXn7hYQDqh2Xmii+DEfIcQGxK/uNwMHhIkPWO0g8msXcbzLe+MpGoR951MlqM/2iIlU4vKDdQ==
   /is-data-descriptor/0.1.4:
     dependencies:
       kind-of: 3.2.2
@@ -13671,7 +13675,7 @@ packages:
       integrity: sha512-lDfCPaMKfOJXjy0dPayzPdF1phampNWr3qFCjAu+rw/qbQmr5jWH5xN2hwh9QKfw9E5v4hwV7A+jrCmL8yjjqA==
   /resolve/1.19.0:
     dependencies:
-      is-core-module: 2.1.0
+      is-core-module: 2.2.0
       path-parse: 1.0.6
     dev: false
     resolution:

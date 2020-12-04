@@ -6,7 +6,7 @@ import { useSession } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 import Content from "../../components/Content";
 // Subroutes
-import HomeIndex from './HomeIndex';
+import Home from './Home';
 
 const SubHeader = styled.div`
   display: flex;
@@ -35,9 +35,9 @@ type Props = {
   location: any;
 };
 
-const WidgetsActionsPage = ({ match, location }: Props) => {
+const WidgetsActionsPage = ({ match, location }: Props): React.ReactElement => {
   const history = useHistory();
-  const { community } = useSession();
+  const { community, storage } = useSession();
   const { t } = useTranslation("widget");
 
   // Utils
@@ -62,7 +62,7 @@ const WidgetsActionsPage = ({ match, location }: Props) => {
           <Col>
             <Switch>
               <Route exact path={`${match.path}`}>
-                <HomeIndex community={community} />
+                <Home storage={storage} community={community} />
               </Route>
             </Switch>
           </Col>
