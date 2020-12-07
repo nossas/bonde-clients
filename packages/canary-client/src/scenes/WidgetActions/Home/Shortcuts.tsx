@@ -45,7 +45,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
             storage.setAsyncItem("community", community).then(() => {
               window.location.href = new URL(
-                `/mobilizations/new`,
+                `/mobilizations`,
                 process.env.REACT_APP_DOMAIN_ADMIN
               ).href;
             });

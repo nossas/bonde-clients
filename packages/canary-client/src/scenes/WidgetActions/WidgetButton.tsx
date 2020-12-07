@@ -1,7 +1,9 @@
 import React from 'react';
 import { Header, Text, Icon } from 'bonde-components';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Widget } from './FetchWidgets';
+import Labels from './Labels';
 
 const Panel = styled.div`
   display: flex;
@@ -60,6 +62,7 @@ type Props = {
 
 const WidgetButton = ({ widget }: Props) => {
   const {
+    id,
     kind,
     block: {
       mobilization: {
@@ -74,18 +77,15 @@ const WidgetButton = ({ widget }: Props) => {
     }
   } = widget;
 
-  const labels: { title: string, count: string } = ({
-    pressure: { title: 'Pressão', count: 'pressões' },
-    form: { title: 'Formulário', count: 'envios' },
-    donation: { title: 'Doação', count: 'doações' },
-    'pressure-phone': { title: 'Telefone', count: 'pressões' }
-  })[kind]
+  const label = Labels.get(kind);
 
   return (
     <Panel>
       <Flex spacing margin='0 0 12px'>
-        <Text bold uppercase>{labels.title}</Text>
-        <Icon name='Settings' size='small' />
+        <Text bold uppercase>{label.title}</Text>
+        <Link to={`/widgets/${id}/settings`}>
+          <Icon name='Settings' size='small' />
+        </Link>
       </Flex>
       <Flex grow='1' margin='0 0 12px'>
         <img src={image || 'https://via.placeholder.com/40'} alt={name} />
@@ -93,7 +93,7 @@ const WidgetButton = ({ widget }: Props) => {
       </Flex>
       <Flex align='flex-end'>
         <Header.H2 style={{ marginRight: '5px' }}>{count}</Header.H2>
-        <Text>{labels.count}</Text>
+        <Text>{label.count}</Text>
       </Flex>
     </Panel>
   )
