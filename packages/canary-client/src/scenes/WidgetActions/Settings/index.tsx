@@ -7,9 +7,9 @@ import Container, { NavigationArgs } from '../Container';
 import { Widget } from '../FetchWidgets';
 import Labels from '../Labels';
 import TabRoute from '../TabRoute';
+import ConfigurePressureTargets from '../ConfigurePressureTargets';
 
 const Tabs = styled.div`
-
   ${Tab} {
     color: #424242;
 
@@ -82,7 +82,7 @@ const Settings = ({ widgets }: Props) => {
         <Col xs={12}>
           <Switch>
             <Route exact path={`${match.path}`}>
-              <Header.H4>Configurações</Header.H4>
+              {widget.kind === 'pressure' && <ConfigurePressureTargets />}
             </Route>
             <Route exact path={`${match.path}/adjusts`}>
               <Header.H4>Ajustes</Header.H4>

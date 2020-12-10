@@ -22,6 +22,8 @@ import WidgetsActionsPage from './scenes/WidgetActions';
 import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as types from "styled-components/cssprop";
 
 import 'react-toastify/dist/ReactToastify.css'
 

@@ -1,9 +1,9 @@
-const labels: any = {
-  pressure: { title: 'Pressão', count: 'pressões' },
-  form: { title: 'Formulário', count: 'envios' },
-  donation: { title: 'Doação', count: 'doações' },
-  'pressure-phone': { title: 'Telefone', count: 'pressões' }
-}
+const labels: Record<string, { title: string; count: string }> = {
+  pressure: { title: "Pressão", count: "pressões" },
+  form: { title: "Formulário", count: "envios" },
+  donation: { title: "Doação", count: "doações" },
+  "pressure-phone": { title: "Telefone", count: "pressões" },
+};
 
 type Label = {
   title: string
