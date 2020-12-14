@@ -89,7 +89,7 @@ const Settings = ({ widgets }: Props) => {
           <Switch>
             <Route exact path={`${match.path}`}>
               {widget.kind === "pressure" && (
-                <ConfigurePressureTargets />
+                <ConfigurePressureTargets widget={widget} />
               )}
             </Route>
             <Route exact path={`${match.path}/adjusts`}>

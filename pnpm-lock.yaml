@@ -79,6 +79,7 @@ importers:
       react-s3-uploader: 4.9.3
       react-table: 7.6.1
       react-toastify: 6.0.9
+      slugify: 1.4.6
     specifiers:
       '@fnando/cnpj': ^1.0.2
       '@fnando/cpf': ^1.0.2
@@ -94,6 +95,7 @@ importers:
       react-s3-uploader: ^4.9.3
       react-table: ^7.5.0
       react-toastify: ^6.0.8
+      slugify: ^1.4.6
   packages/example-client:
     specifiers: {}
   packages/redes-client:
@@ -14200,6 +14202,12 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==
+  /slugify/1.4.6:
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    resolution:
+      integrity: sha512-ZdJIgv9gdrYwhXqxsH9pv7nXxjUEyQ6nqhngRxoAAOlmMGA28FDq5O4/5US4G2/Nod7d1ovNcgURQJ7kHq50KQ==
   /snapdragon-node/2.1.1:
     dependencies:
       define-property: 1.0.0

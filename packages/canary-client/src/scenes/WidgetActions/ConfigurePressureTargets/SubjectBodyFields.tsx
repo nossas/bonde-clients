@@ -13,12 +13,12 @@ const SubjectBodyFields = ({ prefix }: SubjectBodyFieldsProps) => (
       label="Nome e e-mail dos alvos"
     />
     <InputField
-      name={prefix ? prefix + ".subject" : "subject"}
+      name={prefix ? prefix + ".email_subject" : "email_subject"}
       placeholder="Escreva um assunto"
       label="Assunto do e-mail para os alvos"
     />
     <TextareaField
-      name={prefix ? prefix + ".body" : "body"}
+      name={prefix ? prefix + ".email_body" : "email_body"}
       placeholder="Escreva aqui o email..."
       label="Corpo do e-mail para os alvos"
     />

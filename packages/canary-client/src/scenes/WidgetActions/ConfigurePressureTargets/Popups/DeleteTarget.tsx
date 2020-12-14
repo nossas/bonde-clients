@@ -3,12 +3,11 @@ import { useMutation, gql } from "bonde-core-tools";
 import { Header, Text, Button, toast } from "bonde-components";
 import { useTranslation } from "react-i18next";
 import { css } from "styled-components/macro";
-import { PressureTarget } from "../FetchPressureTargets";
 
 type Props = {
-  setModal: (arg?: "insert" | "delete" | "update") => void;
+  remove: () => void;
+  onClose: () => void;
   pressureTargetId: number;
-  setPressureTarget: (arg?: PressureTarget) => void;
 };
 
 const DELETE_PRESSURE_TARGET = gql`
@@ -20,9 +19,9 @@ const DELETE_PRESSURE_TARGET = gql`
 `;
 
 const InsertTarget = ({
-  setModal,
-  pressureTargetId,
-  setPressureTarget,
+  remove,
+  onClose,
+  pressureTargetId
 }: Props): React.ReactElement => {
   const { t } = useTranslation("widget");
   const [deleteTarget] = useMutation(DELETE_PRESSURE_TARGET);
@@ -34,8 +33,11 @@ const InsertTarget = ({
         },
       });
       console.log({ targetDeleted });
-      setPressureTarget(undefined);
-      setModal(undefined);
+      
+      remove();
+      
+      onClose();
+      
       return toast(t("pressure.target.delete.message.success"), {
         type: toast.TYPE.SUCCESS,
       });
@@ -65,10 +67,7 @@ const InsertTarget = ({
       >
         <Button
           secondary
-          onClick={() => {
-            setPressureTarget(undefined);
-            return setModal(undefined);
-          }}
+          onClick={onClose}
         >
           Cancelar
         </Button>

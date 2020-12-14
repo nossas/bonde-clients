@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Icon, InputField, Label, Text } from 'bonde-components';
+import { Button, Icon, InputField, Label, Text, Modal } from 'bonde-components';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { FieldArray } from 'react-final-form-arrays';
 import SubjectBodyFields from './SubjectBodyFields';
+import DeleteTarget from './Popups/DeleteTarget';
 
 const ButtonStyled = styled(Button).attrs({ type: 'button' })`
   border: 1px solid #eee;
@@ -22,10 +23,13 @@ const IconButton = styled.button.attrs({ type: 'button' })`
 
 const GroupField = ({ name, group, remove, status }: any) => {
   const [open, setOpen] = useState(true);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   useEffect(() => {
     if (status === 'unrender') setOpen(false);
   }, [status]);
+
+  const onClose = () => setOpenDeleteModal(false);
 
   return group && !open ? (
     <div
@@ -42,13 +46,20 @@ const GroupField = ({ name, group, remove, status }: any) => {
         }
       `}
     >
-      <Text color='#000' style={{ flexGrow: 1 }}>{group.name}</Text>
+      <Text color='#000' style={{ flexGrow: 1 }}>{group.label}</Text>
       <IconButton onClick={() => setOpen(true)}>
         <Icon name='Pencil' size='small' />
       </IconButton>
-      <IconButton onClick={remove}>
+      <IconButton onClick={() => setOpenDeleteModal(true)}>
         <Icon name='Trash' size='small' />
       </IconButton>
+      <Modal isOpen={openDeleteModal} onClose={onClose}>
+        <DeleteTarget
+          pressureTargetId={group.id}
+          remove={remove}
+          onClose={onClose}
+        />
+      </Modal>
     </div>
   ) : (
       <div
@@ -59,7 +70,7 @@ const GroupField = ({ name, group, remove, status }: any) => {
         `}
       >
         <InputField
-          name={`${name}.name`}
+          name={`${name}.label`}
           label="Nome do grupo de alvos"
           placeholder="Ex. Rio de Janeiro"
         />

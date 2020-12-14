@@ -29,6 +29,14 @@ const widgetsByCommunityGQL = gql`
           community_id
         }
       }
+      groups: pressure_targets {
+        id
+        targets
+        identify
+        label
+        email_subject
+        email_body
+      }
 
       actions: activist_actions_aggregate {
         aggregate {
@@ -48,6 +56,14 @@ export type Widget = {
       name: string
       community_id: number
     }
+  }
+  groups: {
+    id: number
+    targets: string[]
+    identify: string
+    label: string
+    email_subject?: string
+    email_body?: string
   }
   actions: {
     aggregate: {
