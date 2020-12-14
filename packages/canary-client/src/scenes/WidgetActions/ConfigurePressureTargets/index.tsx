@@ -1,63 +1,47 @@
-import React, { useState } from "react";
-import { Header } from "bonde-components";
+import React from "react";
+import { Card, ConnectedForm, Header } from 'bonde-components';
+import arrayMutators from 'final-form-arrays'
 import { css } from "styled-components/macro";
+import UniqueForm, { UniqueFormExplainCard } from "./UniqueForm";
+import GroupForm from './GroupForm';
+import Selectable, { SelectableRenderProps } from './Selectable';
 
-import UniqueTargetsForm from "./UniqueTargetsForm";
-import GroupTargetsForm from "./GroupTargetsForm";
-import Radio from "../../../components/Radio";
+// type Props = {
+//   widgetId: number;
+// };
 
-type Props = {
-  widgetId: number;
-};
-
-const ConfigurePressureTargets = ({ widgetId }: Props): React.ReactElement => {
-  const [pressureType, setPressureType] = useState("unique");
-  return (
-    <>
-      <Header.H5 style={{ fontWeight: 600, marginTop: "15px" }}>
-        TIPO DE PRESSÃO
-      </Header.H5>
-      <div
-        css={css`
-          display: flex;
-          margin-bottom: 30px;
-        `}
-      >
-        <Radio
-          type="radio"
-          name="pressureType"
-          value="unique"
-          checked={pressureType === "unique"}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setPressureType(e.target.value)
-          }
+const ConfigurePressureTargets = (): React.ReactElement => {
+  return (    
+    <Selectable>
+      {({ selected }: SelectableRenderProps) => (
+        <ConnectedForm
+          mutators={{...arrayMutators}}
+          onSubmit={(values: any) => console.log('values', { values })}
         >
-          Um grupo de alvos
-        </Radio>
-        <Radio
-          type="radio"
-          name="pressureType"
-          value="group"
-          checked={pressureType === "group"}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-            setPressureType(e.target.value)
-          }
-        >
-          Mais de um grupo de alvos (Ex: Por estado)
-        </Radio>
-      </div>
-      <div
-        css={css`
-          display: grid;
-          grid-template-columns: 55% 45%;
-          grid-column-gap: 20px;
-          height: 100%;
-        `}
-      >
-        {pressureType === "unique" && <UniqueTargetsForm widgetId={widgetId} />}
-        {pressureType === "group" && <GroupTargetsForm widgetId={widgetId} />}
-      </div>
-    </>
+          {({ form }: any) => (
+            <div
+              css={css`
+              display: grid;
+              grid-template-columns: 55% 45%;
+              grid-column-gap: 20px;
+              height: 100%;
+            `}
+            >
+              <Card padding={{ x: 50, y: 40 }}>
+                <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
+                {selected === 'unique'
+                  ? <UniqueForm />
+                  : <GroupForm form={form} />
+                }
+              </Card>
+              {selected === 'unique' && (
+                <UniqueFormExplainCard />
+              )}
+            </div>
+          )}
+        </ConnectedForm>
+      )}
+    </Selectable>
   );
 };
 
