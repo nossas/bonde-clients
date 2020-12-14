@@ -31,7 +31,7 @@ type Props = {
 
 const Settings = ({ widgets }: Props) => {
   const match = useRouteMatch();
-  const { widgetId } = useParams();
+  const { widgetId }: any = useParams();
 
   const widget = widgets.filter((w: Widget) => w.id === Number(widgetId))[0];
 

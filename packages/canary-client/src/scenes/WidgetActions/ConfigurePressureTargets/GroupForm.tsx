@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Icon, InputField, Label, Text } from 'bonde-components';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
@@ -20,8 +20,12 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   background: none;
 `;
 
-const GroupField = ({ name, group, remove }: any) => {
+const GroupField = ({ name, group, remove, status }: any) => {
   const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    if (status === 'unrender') setOpen(false);
+  }, [status]);
 
   return group && !open ? (
     <div
@@ -74,44 +78,56 @@ export type GroupFormProps = {
   }
 }
 
-const GroupForm = ({ form: { mutators } }: GroupFormProps) => (
-  <>
-    <InputField
-      name='select_label'
-      label='Nome do campo de seleção'
-      placeholder='Ex: Selecione seu estado'
-    />
-    <div
-      css={css`
-        margin-bottom: 15px;
+const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
+  // This effect used to resolve when an GroupField open for
+  // first time, the inputs pattern must closed.
+  const [status, setStatus] = useState('unrender');
 
-        ${Label} {
-          display: block;
-          margin-bottom: 8px;
-        }
-      `}
-    >
-      <Label>Adicionar grupo de alvos</Label>
-      <FieldArray name="groups">
-        {({ fields }) =>
-          fields.map((name, index) => (
-            <GroupField
-              key={name}
-              name={name}
-              group={fields.value[index]}
-              remove={() => fields.remove(index)}
-            />
-          ))
-        }
-      </FieldArray>
-      <ButtonStyled
-        secondary
-        onClick={() => mutators.push('groups', undefined)}
+  useEffect(() => {
+    setStatus('render');
+  }, [])
+
+  // Render
+  return (
+    <>
+      <InputField
+        name='select_label'
+        label='Nome do campo de seleção'
+        placeholder='Ex: Selecione seu estado'
+      />
+      <div
+        css={css`
+          margin-bottom: 15px;
+
+          ${Label} {
+            display: block;
+            margin-bottom: 8px;
+          }
+        `}
       >
-        {`+ ADD GRUPO DE ALVOS`}
-      </ButtonStyled>
-    </div>
-  </>
-);
+        <Label>Adicionar grupo de alvos</Label>
+        <FieldArray name="groups">
+          {({ fields }) =>
+            fields.map((name, index) => (
+              <GroupField
+                key={name}
+                name={name}
+                status={status}
+                group={fields.value[index]}
+                remove={() => fields.remove(index)}
+              />
+            ))
+          }
+        </FieldArray>
+        <ButtonStyled
+          secondary
+          onClick={() => mutators.push('groups', undefined)}
+        >
+          {`+ ADD GRUPO DE ALVOS`}
+        </ButtonStyled>
+      </div>
+    </>
+  );
+}
 
 export default GroupForm;
