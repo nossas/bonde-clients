@@ -29,9 +29,10 @@ const Tabs = styled.div`
 
 type Props = {
   widgets: Widget[];
+  refetch: any
 };
 
-const Settings = ({ widgets }: Props) => {
+const Settings = ({ widgets, refetch }: Props) => {
   const match = useRouteMatch();
   const { widgetId } = useParams();
   const { t } = useTranslation("widget");
@@ -106,7 +107,7 @@ const Settings = ({ widgets }: Props) => {
           <Switch>
             <Route exact path={`${match.path}`}>
               {widget.kind === "pressure" && (
-                <ConfigurePressureTargets widget={widget} />
+                <ConfigurePressureTargets widget={widget} refetch={refetch} />
               )}
             </Route>
             <Route exact path={`${match.path}/adjusts`}>

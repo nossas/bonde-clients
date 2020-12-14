@@ -22,7 +22,7 @@ const upsertPressureTargets = gql`
       objects: $input,
       on_conflict: {
         constraint: unique_identify_widget_id,
-        update_columns: [email_subject, email_body, label]
+        update_columns: [email_subject, email_body, label, targets]
       }
     ) {
       returning {
@@ -45,11 +45,31 @@ const upsertPressureTargets = gql`
 //   email_body: string
 // }
 
-type Props = {
-  widget: Widget
+type GroupTarget = {
+  identify: string
 }
 
-const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
+const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
+  const ret: GroupTarget[] = [];
+  arr1.forEach((g1: any) => {
+    const g2 = arr2.find((g: any) => g.identify === g1.identify);
+    
+    if (!!g2 && !Object.is(g2, g1)) {
+      ret.push(g1);
+    } else if (!g2) {
+      ret.push(g1);
+    }
+  })
+
+  return ret;
+}
+
+type Props = {
+  widget: Widget
+  refetch: any
+}
+
+const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElement => {
   const [upsert] = useMutation(upsertPressureTargets);
   
   return (    
@@ -60,11 +80,12 @@ const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
             groups: widget.groups
           }}
           mutators={{...arrayMutators}}
-          onSubmit={async ({ groups }: any) => {
-            if (groups) {
+          onSubmit={async ({ groups, ...values }: any) => {
+            console.log('values', { values });
+            if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
               try {
                 const variables = {
-                  input: groups.map((g: any) => ({
+                  input: diff(groups, widget.groups as any).map((g: any) => ({
                     email_subject: g.email_subject,
                     email_body: g.email_body,
                     targets: g.targets,
@@ -74,6 +95,7 @@ const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
                   }))
                 }
                 await upsert({ variables });
+                refetch();
                 toast(<Success message='Alvos definidos com sucesso' />, { type: toast.TYPE.SUCCESS });
               } catch (err) {
                 console.error('err', { err });

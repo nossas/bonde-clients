@@ -65,7 +65,7 @@ export type Widget = {
     label: string
     email_subject?: string
     email_body?: string
-  }
+  }[]
   actions: {
     aggregate: {
       count: number
@@ -74,8 +74,9 @@ export type Widget = {
   settings: Record<string, any>
 }
 
-type RenderProps = {
+export type RenderProps = {
   widgets: Widget[]
+  refetch: any
 }
 
 type Props = {
@@ -84,12 +85,12 @@ type Props = {
 }
 
 const FetchWidgets = ({ children, communityId }: Props) => {
-  const { data, loading, error } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
+  const { data, loading, error, refetch } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
   if (loading) return <Loading message='Carregando ações...' />;
 
-  return children({ widgets: data?.widgets || [] });
+  return children({ widgets: data?.widgets || [], refetch });
 }
 
 export default FetchWidgets;
