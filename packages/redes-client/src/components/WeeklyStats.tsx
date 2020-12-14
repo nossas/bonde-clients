@@ -62,6 +62,10 @@ export default function WeeklyStats({
                     value: individualGroup?.id || 0,
                   },
                 });
+                dispatch({
+                  type: "order_by",
+                  value: [{ created_at: 'desc' }]
+                })
                 return dispatch({
                   type: "individuals",
                   value:
@@ -82,8 +86,12 @@ export default function WeeklyStats({
           </Link>
           <Link to="/matches">
             <StatsCard
-              onClick={() =>
+              onClick={() => {
                 dispatch({
+                  type: "order_by",
+                  value: [{ created_at: 'desc' }]
+                })
+                return dispatch({
                   type: "relationships",
                   value: {
                     relationshipStatus: getOption(
@@ -93,6 +101,7 @@ export default function WeeklyStats({
                   },
                 })
               }
+              }
             >
               <Header.H2>{encaminhamentosRealizados.aggregate.count}</Header.H2>
               <Text>Encaminhamentos Realizados</Text>
@@ -101,8 +110,12 @@ export default function WeeklyStats({
           {communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY && (
             <Link to="/matches">
               <StatsCard
-                onClick={() =>
+                onClick={() => {
                   dispatch({
+                    type: "order_by",
+                    value: [{ created_at: 'desc' }]
+                  })
+                  return dispatch({
                     type: "relationships",
                     value: {
                       relationshipStatus: getOption(
@@ -111,7 +124,7 @@ export default function WeeklyStats({
                       ),
                     },
                   })
-                }
+                }}
               >
                 <Header.H2>
                   {encaminhamentosServicoPublico.aggregate.count}
@@ -122,8 +135,12 @@ export default function WeeklyStats({
           )}
           <Link to="/matches">
             <StatsCard
-              onClick={() =>
+              onClick={() => {
                 dispatch({
+                  type: "order_by",
+                  value: [{ updated_at: 'desc' }]
+                })
+                return dispatch({
                   type: "relationships",
                   value: {
                     relationshipStatus: getOption(
@@ -132,10 +149,10 @@ export default function WeeklyStats({
                     ),
                   },
                 })
-              }
+              }}
             >
               <Header.H2>{atendimentosIniciados.aggregate.count}</Header.H2>
-              <Text>Atendimento Iniciados</Text>
+              <Text>Atendimentos Iniciados</Text>
             </StatsCard>
           </Link>
           <Link to="/pessoas">
@@ -148,6 +165,10 @@ export default function WeeklyStats({
                     value: volunteerGroup?.id || 0,
                   },
                 });
+                dispatch({
+                  type: "order_by",
+                  value: [{ updated_at: 'desc' }]
+                })
                 return dispatch({
                   type: "individuals",
                   value: {
@@ -170,6 +191,10 @@ export default function WeeklyStats({
                     value: volunteerGroup?.id || 0,
                   },
                 });
+                dispatch({
+                  type: "order_by",
+                  value: [{ updated_at: 'desc' }]
+                })
                 return dispatch({
                   type: "individuals",
                   value: {

@@ -14,11 +14,12 @@ export const MATCHES = gql`
     $state: String_comparison_exp
     $agent: Int_comparison_exp
     $query: String
+    $order_by: [rede_relationships_order_by!]
   ) {
     relationships: rede_relationships(
       limit: $rows
       offset: $offset
-      order_by: { created_at: desc }
+      order_by: $order_by
       where: {
         recipient: { group: { community_id: $context }, state: $state }
         user_id: $agent
@@ -76,7 +77,7 @@ export const MATCHES = gql`
 `;
 
 const FetchMatches = ({ community, ...props }: any) => {
-  const { relationships, rows, offset } = useFilterState();
+  const { relationships, rows, offset, order_by } = useFilterState();
 
   const { relationshipStatus, state, agent, query } = getSelectValues(
     relationships
@@ -96,6 +97,7 @@ const FetchMatches = ({ community, ...props }: any) => {
     query: `%${query || ""}%`,
     rows,
     offset,
+    order_by: order_by || [{ created_at: 'asc' }]
   };
 
   return (

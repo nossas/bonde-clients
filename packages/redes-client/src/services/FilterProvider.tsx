@@ -8,10 +8,12 @@ export type Pagination = {
   rows: number;
   offset: number;
   page: number;
+  order_by: Array<Record<string, 'asc' | 'desc'>>
 };
 
 type Action =
   | { type: "page"; value: number }
+  | { type: "order_by"; value: Array<Record<string, 'asc' | 'desc'>> }
   | { type: "rows"; value: number }
   | { type: "group"; value: { value: number; label: string } | null }
   | { type: "relationships"; value: any }
@@ -44,13 +46,13 @@ const initialFilters = {
   agent: undefined,
   state: undefined,
   availability: undefined,
-  // created_at: undefined,
 };
 
 const initialState = {
   rows: 10,
   offset: 10 * 0,
   page: 0,
+  order_by: undefined,
   selectedGroup: undefined,
   relationships: initialFilters,
   individuals: initialFilters,
@@ -77,6 +79,12 @@ function filterReducer(state: State, action: Action) {
         rows: action.value,
         offset: action.value * state.page,
       };
+    }
+    case "order_by": {
+      return {
+        ...state,
+        order_by: action.value
+      }
     }
     case "group": {
       return {
