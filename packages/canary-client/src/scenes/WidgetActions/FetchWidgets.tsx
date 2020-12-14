@@ -22,6 +22,7 @@ const widgetsByCommunityGQL = gql`
     ) {
       id
       kind
+      settings
       block {
         mobilization {
           image: facebook_share_image
@@ -70,6 +71,7 @@ export type Widget = {
       count: number
     }
   }
+  settings: Record<string, any>
 }
 
 type RenderProps = {
