@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -69,11 +69,30 @@ type Props = {
   refetch: any
 }
 
-const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElement => {
+const options = [
+  {
+    value: "unique",
+    label: "Um grupo de alvos"
+  },
+  {
+    value: "group",
+    label: "Mais de um grupo de alvos (Ex: Por estado)"
+  }
+]
+
+export type PressureType = "unique" | "group";
+
+const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
   const [upsert] = useMutation(upsertPressureTargets);
-  
+  const [value, setValue] = useState<PressureType>('unique');
   return (    
-    <Selectable>
+    <Selectable
+      options={options}
+      selected={value}
+      onChange={setValue}
+      name="pressureType"
+      title="Tipo de pressão"
+    >
       {({ selected }: SelectableRenderProps) => (
         <ConnectedForm
           initialValues={{
