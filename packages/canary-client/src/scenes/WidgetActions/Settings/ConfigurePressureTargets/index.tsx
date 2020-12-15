@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   Card,
   ConnectedForm,
   Header,
@@ -11,10 +10,11 @@ import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import { css } from "styled-components/macro";
 import slugify from 'slugify';
-import { Widget } from '../FetchWidgets';
+import { Widget } from '../../FetchWidgets';
 import UniqueForm, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupForm from './GroupForm';
 import Selectable, { SelectableRenderProps } from './Selectable';
+import FloatingButton from '../../FloatingButton';
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -132,13 +132,15 @@ const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
               height: 100%;
             `}
             >
+              <FloatingButton type='submit' disabled={submitting || pristine}>
+                Salvar
+              </FloatingButton>
               <Card padding={{ x: 50, y: 40 }}>
                 <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
                 {selected === 'unique'
                   ? <UniqueForm />
                   : <GroupForm form={form} />
                 }
-                <Button type='submit' disabled={submitting || pristine}>Salvar</Button>
               </Card>
               {selected === 'unique' && (
                 <UniqueFormExplainCard />

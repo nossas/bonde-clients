@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Empty } from "bonde-components";
 import { useSession } from "bonde-core-tools";
-import FetchWidgets, { RenderProps } from './FetchWidgets';
+import FetchWidgets, { RenderProps, WidgetLoading } from './FetchWidgets';
 // Subroutes
 import Home from './Home';
 import Settings from './Settings';
@@ -16,13 +16,23 @@ const WidgetsActionsPage = ({ match }: Props): React.ReactElement => {
 
   return community ? (
     <FetchWidgets communityId={community?.id || 0}>
-      {({ widgets, refetch }: RenderProps) => (
+      {({ widgets, loading, refetch }: RenderProps) => (
         <Switch>
           <Route exact path={`${match.path}`}>
-            <Home widgets={widgets} storage={storage} community={community} />
+            <Home
+              widgets={widgets}
+              loading={loading}
+              storage={storage}
+              community={community}
+            />
           </Route>
           <Route path={`${match.path}/:widgetId/settings`}>
-            <Settings widgets={widgets} refetch={refetch} />
+            {loading ? <WidgetLoading /> : (
+              <Settings
+                widgets={widgets}
+                refetch={refetch}
+              />
+            )}
           </Route>
         </Switch>
       )}

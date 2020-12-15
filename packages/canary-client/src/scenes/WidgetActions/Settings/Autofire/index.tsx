@@ -3,7 +3,6 @@ import {
   ConnectedForm,
   InputField,
   TextareaField,
-  Button,
   Card,
   Header,
   toast,
@@ -12,9 +11,9 @@ import {
 } from "bonde-components";
 import { useMutation, gql } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
-import { css } from "styled-components/macro";
-import { Widget } from "./FetchWidgets";
-import { noSpecialCharacters } from "../../services/utils";
+import { Widget } from "../../FetchWidgets";
+import { noSpecialCharacters } from "../../../../services/utils";
+import FloatingButton from '../FloatingButton';
 
 type Props = {
   widget: Widget;
@@ -73,18 +72,9 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
     >
       {({ submitting }) => (
         <>
-          <div
-            css={css`
-              position: absolute;
-              top: -170px;
-              right: 0;
-              width: 150px;
-            `}
-          >
-            <Button type="submit" disabled={submitting}>
-              Salvar
-            </Button>
-          </div>
+          <FloatingButton type="submit" disabled={submitting}>
+            Salvar
+          </FloatingButton>
           <Header.H4
             style={{
               margin: "10px 0",

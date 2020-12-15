@@ -7,8 +7,9 @@ import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
 import TabRoute from "../TabRoute";
-import ConfigurePressureTargets from "../ConfigurePressureTargets";
-import AutofireForm from "../AutofireForm";
+// import ConfigurePressureTargets from "../ConfigurePressureTargets";
+import Autofire from "./Autofire";
+import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import { useTranslation } from "react-i18next";
 
 const Tabs = styled.div`
@@ -34,7 +35,7 @@ type Props = {
 
 const Settings = ({ widgets, refetch }: Props) => {
   const match = useRouteMatch();
-  const { widgetId } = useParams();
+  const { widgetId }: any = useParams();
   const { t } = useTranslation("widget");
 
   const widget = widgets.filter((w: Widget) => w.id === Number(widgetId))[0];
@@ -114,7 +115,7 @@ const Settings = ({ widgets, refetch }: Props) => {
               <Header.H4>Ajustes</Header.H4>
             </Route>
             <Route exact path={`${match.path}/autofire`}>
-              <AutofireForm widget={widget} />
+              <Autofire widget={widget} />
             </Route>
             <Route exact path={`${match.path}/finish`}>
               <Header.H4>Pós-ação</Header.H4>

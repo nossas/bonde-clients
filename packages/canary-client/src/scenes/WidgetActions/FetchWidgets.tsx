@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql, useQuery } from 'bonde-core-tools';
 import { Hint, Loading } from 'bonde-components';
+import { css } from 'styled-components/macro';
 
 const widgetsByCommunityGQL = gql`
   query FetchWidgets ($communityId: Int!) {
@@ -76,8 +77,23 @@ export type Widget = {
 
 export type RenderProps = {
   widgets: Widget[]
+  loading: boolean
   refetch: any
 }
+
+export const WidgetLoading = () => (
+  <div
+    css={css`
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `}
+  >
+    <Loading message='Carregando ações...' />
+  </div>
+)
+
 
 type Props = {
   communityId: number
@@ -88,9 +104,10 @@ const FetchWidgets = ({ children, communityId }: Props) => {
   const { data, loading, error, refetch } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
-  if (loading) return <Loading message='Carregando ações...' />;
 
-  return children({ widgets: data?.widgets || [], refetch });
+  console.log('data, loading', { data, loading });
+
+  return children({ widgets: data?.widgets || [], refetch, loading });
 }
 
 export default FetchWidgets;

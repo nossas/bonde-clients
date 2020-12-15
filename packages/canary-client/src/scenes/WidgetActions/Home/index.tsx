@@ -3,7 +3,7 @@ import { Header, Tab } from "bonde-components"
 import { useTranslation } from 'react-i18next';
 import SearchList from '../SearchList';
 import WidgetButton from '../WidgetButton';
-import { Widget } from '../FetchWidgets';
+import { Widget, WidgetLoading } from '../FetchWidgets';
 import Container, { NavigationArgs } from '../Container';
 import Shortcuts from './Shortcuts';
 
@@ -13,9 +13,10 @@ type Props = {
   }
   storage: any
   widgets: Widget[]
+  loading: boolean
 }
 
-const Home = ({ community, storage, widgets }: Props): React.ReactElement => {
+const Home = ({ community, storage, widgets, loading }: Props): React.ReactElement => {
   const { t } = useTranslation("widget");
 
   return (
@@ -35,7 +36,9 @@ const Home = ({ community, storage, widgets }: Props): React.ReactElement => {
         <SearchList
           header={<Header.H5 uppercase>Ações</Header.H5>}
           data={widgets}
-          >
+          loading={loading}
+          renderLoading={<WidgetLoading />}
+        >
           {({ result }: any) => result.map((w: Widget) => (
             <WidgetButton key={w.id} widget={w} />
             ))}

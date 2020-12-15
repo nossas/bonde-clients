@@ -22,12 +22,16 @@ type RenderProps = {
 type Props = {
   header: any
   data: any[]
+  loading?: boolean
+  renderLoading?: any
   children: (props: RenderProps) => any
 }
 
-const SearchList = ({ header, children, data }: Props) => {
+const SearchList = ({ header, children, data, loading, renderLoading }: Props) => {
   const [datalist, setDatalist] = useState(data);
+  const isLoading = typeof loading !== 'undefined' && loading && !!renderLoading;
 
+  console.log('isLoading, datalist', { isLoading, datalist });
   return (
     <>
       <HeaderInfo>
@@ -40,7 +44,7 @@ const SearchList = ({ header, children, data }: Props) => {
         />
       </HeaderInfo>
       <Flex>
-        {children({ result: datalist })}
+        {isLoading ? renderLoading : children({ result: datalist })}
       </Flex>
     </>
   );

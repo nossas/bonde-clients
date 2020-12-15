@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Icon, InputField, Label, Text, Modal } from 'bonde-components';
+import { Button, Icon, InputField, Label, Link, Text, Modal } from 'bonde-components';
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { FieldArray } from 'react-final-form-arrays';
 import SubjectBodyFields from './SubjectBodyFields';
-import DeleteTarget from './Popups/DeleteTarget';
+import DeleteTargetPopup from './DeleteTargetPopup';
 
 const ButtonStyled = styled(Button).attrs({ type: 'button' })`
   border: 1px solid #eee;
@@ -54,7 +54,7 @@ const GroupField = ({ name, group, remove, status }: any) => {
         <Icon name='Trash' size='small' />
       </IconButton>
       <Modal isOpen={openDeleteModal} onClose={onClose}>
-        <DeleteTarget
+        <DeleteTargetPopup
           pressureTargetId={group.id}
           remove={remove}
           onClose={onClose}
@@ -75,7 +75,17 @@ const GroupField = ({ name, group, remove, status }: any) => {
           placeholder="Ex. Rio de Janeiro"
         />
         <SubjectBodyFields prefix={name} />
-        <Button type='button' onClick={() => setOpen(false)}>Salvar</Button>
+        <Link
+          onClick={() => {
+            // remove when
+            if (!group) remove();
+            // close card
+            setOpen(false)
+          }}
+        >
+          Cancelar
+        </Link>
+        <Button type='button' onClick={() => setOpen(false)}>Adicionar</Button>
       </div>
     );
 }
