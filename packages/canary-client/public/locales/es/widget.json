@@ -20,6 +20,20 @@
       "autofire": "Mensaje de Agradecimiento",
       "finish": "Acción Posterior"
     },
+    "finish": {
+      "preview": "Pré visualização",
+      "title": "Tipo de mensaje",
+      "radio": {
+        "share": "Patrón",
+        "custom": "Personalizar"
+      },
+      "default": {
+        "whatsapp": {
+          "label": "Texto para Whatsapp",
+          "placeholder": "Puede dejar un texto estándar listo aquí. Entonces, cuando alguien comparte su página a través de WhatsApp en la acción posterior, ya tendrá una sugerencia de qué decir :)"
+        }
+      }
+    },
     "autofire": {
       "validators": {
         "required": "Campo Requerido",

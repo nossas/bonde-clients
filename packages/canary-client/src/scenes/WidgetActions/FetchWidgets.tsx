@@ -29,6 +29,7 @@ const widgetsByCommunityGQL = gql`
           image: facebook_share_image
           name
           community_id
+          id
         }
       }
       groups: pressure_targets {
@@ -57,6 +58,7 @@ export type Widget = {
       image?: string
       name: string
       community_id: number
+      id: number
     }
   }
   groups: {

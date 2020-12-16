@@ -7,9 +7,9 @@ import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
 import TabRoute from "../TabRoute";
-// import ConfigurePressureTargets from "../ConfigurePressureTargets";
-import Autofire from "./Autofire";
 import ConfigurePressureTargets from "./ConfigurePressureTargets";
+import Autofire from "./Autofire";
+import ConfigurePostAction from "./ConfigurePostAction";
 import { useTranslation } from "react-i18next";
 
 const Tabs = styled.div`
@@ -118,7 +118,7 @@ const Settings = ({ widgets, refetch }: Props) => {
               <Autofire widget={widget} />
             </Route>
             <Route exact path={`${match.path}/finish`}>
-              <Header.H4>Pós-ação</Header.H4>
+              <ConfigurePostAction widget={widget} />
             </Route>
           </Switch>
         </Col>

@@ -20,6 +20,20 @@
       "autofire": "Mensagem de Agradecimento",
       "finish": "Pós-Ação"
     },
+    "finish": {
+      "preview": "Pré-Visualização",
+      "title": "Tipo de mensagem",
+      "radio": {
+        "share": "Padrão",
+        "custom": "Customizar"
+      },
+      "default": {
+        "whatsapp": {
+          "label": "Texto para o Whatsapp",
+          "placeholder": "Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)"
+        }
+      }
+    },
     "autofire": {
       "title": "Mensagem de Agradecimento",
       "subtitle": "Configure um e-mail de agradecimento que será enviado após a ação ser finalizada.",

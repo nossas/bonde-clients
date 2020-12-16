@@ -14,6 +14,20 @@
     }
   },
   "settings": {
+    "finish": {
+      "preview": "Preview",
+      "title": "Type of Message",
+      "radio": {
+        "share": "Default",
+        "custom": "Custom"
+      },
+      "default": {
+        "whatsapp": {
+          "label": "Whatsapp Text",
+          "placeholder": "Here you can add a standard Whatsapp text. When someone shares your page through Whatsapp in the post-action, they'll already have a suggestion on what to say :)"
+        }
+      }
+    },
     "autofire": {
       "title": "Thank you message",
       "subtitle": "Set up a thank you email that will be sent after the action is submitted.",
