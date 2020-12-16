@@ -24,7 +24,6 @@ const Settings = ({ widgets, refetch }: Props) => {
   if (!widget) return <Header.H2>Nenhum widget encontrado</Header.H2>;
 
   const label = Labels.get(widget.kind);
-  console.log("match", { match });
 
   return (
     <Container

@@ -122,7 +122,7 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
   return (
     <>
       <InputField
-        name='select_label'
+        name='settings.select_label'
         label='Nome do campo de seleção'
         placeholder='Ex: Selecione seu estado'
       />

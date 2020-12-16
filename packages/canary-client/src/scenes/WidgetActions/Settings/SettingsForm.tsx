@@ -27,12 +27,15 @@ type Props = {
   widget: Widget
   initialValues?: any
   children: any
+  afterSubmit?: (values: any, result: any) => Promise<any>
+  // ReactFinalForm Props
+  mutators?: any
 }
 
-const SettingsForm = ({ children, widget, initialValues }: Props) => {
+const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connectedFormProps }: Props) => {
   const [save] = useMutation(UpdateWidgetGQL);
 
-  const onSubmit = async ({ primaryKey, settings }: SubmitProps) => {
+  const onSubmit = async ({ primaryKey, settings, ...values }: SubmitProps) => {
     try {
       const result = await save({ variables: { primaryKey, settings } });
       // TODO: try catch
@@ -45,6 +48,9 @@ const SettingsForm = ({ children, widget, initialValues }: Props) => {
       toast(<Success message="Sucesso ao salvar as configurações!" />, {
         type: toast.TYPE.SUCCESS,
       });
+
+      if (afterSubmit) await afterSubmit({ primaryKey, settings, ...values }, result);
+
     } catch (e) {
       console.log(e);
       return toast("Houve um erro ao salvar o formulário", {
@@ -54,7 +60,11 @@ const SettingsForm = ({ children, widget, initialValues }: Props) => {
   }
 
   return (
-    <ConnectedForm onSubmit={onSubmit} initialValues={{ primaryKey: widget.id, ...initialValues }}>
+    <ConnectedForm
+      onSubmit={onSubmit}
+      initialValues={{ primaryKey: widget.id, ...initialValues }}
+      {...connectedFormProps}
+    >
       {({ submitting, pristine, ...formProps }: any) => (
         <div
           css={`

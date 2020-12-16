@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Card,
-  ConnectedForm,
   Header,
   toast,
   Success
@@ -13,9 +12,9 @@ import slugify from 'slugify';
 import RadioField, { Radio } from '../../../../components/Radio';
 import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
-import FloatingButton from '../../FloatingButton';
-import UniqueForm, { UniqueFormExplainCard } from "./UniqueForm";
-import GroupForm from './GroupForm';
+import SettingsForm from '../SettingsForm';
+import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
+import GroupFormFields from './GroupForm';
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -65,14 +64,17 @@ const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElemen
   const [upsert] = useMutation(upsertPressureTargets);
 
   return (    
-    <ConnectedForm
+    <SettingsForm
+      widget={widget}
       initialValues={{
-        pressureType: 'unique',
+        settings: {
+          ...widget.settings,
+          pressure_type: widget.settings.pressure_type || 'unique'
+        },
         groups: widget.groups
       }}
       mutators={{...arrayMutators}}
-      onSubmit={async ({ groups, ...values }: any) => {
-        console.log('values', { values });
+      afterSubmit={async ({ groups }: any) => {
         if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
           try {
             const variables = {
@@ -95,12 +97,9 @@ const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElemen
         }
       }}
     >
-      {({ form, submitting, pristine }: any) => (
+      {({ form }: any) => (
         <>
-          <FloatingButton type='submit' disabled={submitting || pristine}>
-            Salvar
-          </FloatingButton>
-          <RadioField label='Tipo de pressão' name='pressureType'>
+          <RadioField label='Tipo de pressão' name='settings.pressure_type'>
             <Radio value='unique'>
               Um grupo de alvos
             </Radio>
@@ -116,14 +115,14 @@ const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElemen
             height: 100%;
           `}
           >
-            <SpyField field='pressureType'>
+            <SpyField field='settings.pressure_type'>
               {({ value }: any) => (
                 <>
                   <Card padding={{ x: 50, y: 40 }}>
                     <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
                     {value === 'unique'
-                      ? <UniqueForm />
-                      : <GroupForm form={form} />
+                      ? <UniqueFormFields />
+                      : <GroupFormFields form={form} />
                     }
                   </Card>
                   {value === 'unique' && <UniqueFormExplainCard />}     
@@ -133,7 +132,7 @@ const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElemen
           </div>
         </>
       )}
-    </ConnectedForm>
+    </SettingsForm>
   );
 };
 
