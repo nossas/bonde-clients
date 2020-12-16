@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../../components/SearchInput';
 
@@ -31,7 +31,10 @@ const SearchList = ({ header, children, data, loading, renderLoading }: Props) =
   const [datalist, setDatalist] = useState(data);
   const isLoading = typeof loading !== 'undefined' && loading && !!renderLoading;
 
-  console.log('isLoading, datalist', { isLoading, datalist });
+  useEffect(() => {
+    setDatalist(data)
+  }, [data]);
+
   return (
     <>
       <HeaderInfo>

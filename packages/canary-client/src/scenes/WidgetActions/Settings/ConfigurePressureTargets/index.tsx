@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   ConnectedForm,
@@ -10,11 +10,12 @@ import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import { css } from "styled-components/macro";
 import slugify from 'slugify';
+import RadioField, { Radio } from '../../../../components/Radio';
+import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
+import FloatingButton from '../../FloatingButton';
 import UniqueForm, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupForm from './GroupForm';
-import Selectable, { SelectableRenderProps } from './Selectable';
-import FloatingButton from '../../FloatingButton';
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -35,15 +36,6 @@ const upsertPressureTargets = gql`
     }
   }
 `;
-
-// type GroupTargetInput = {
-//   widget_id: number
-//   targets: string[]
-//   identify: string,
-//   label: string,
-//   email_subject: string
-//   email_body: string
-// }
 
 type GroupTarget = {
   identify: string
@@ -69,87 +61,79 @@ type Props = {
   refetch: any
 }
 
-const options = [
-  {
-    value: "unique",
-    label: "Um grupo de alvos"
-  },
-  {
-    value: "group",
-    label: "Mais de um grupo de alvos (Ex: Por estado)"
-  }
-]
-
-export type PressureType = "unique" | "group";
-
-const ConfigurePressureTargets = ({ widget }: Props): React.ReactElement => {
+const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElement => {
   const [upsert] = useMutation(upsertPressureTargets);
-  const [value, setValue] = useState<PressureType>('unique');
+
   return (    
-    <Selectable
-      options={options}
-      selected={value}
-      onChange={setValue}
-      name="pressureType"
-      title="Tipo de pressão"
-    >
-      {({ selected }: SelectableRenderProps) => (
-        <ConnectedForm
-          initialValues={{
-            groups: widget.groups
-          }}
-          mutators={{...arrayMutators}}
-          onSubmit={async ({ groups, ...values }: any) => {
-            console.log('values', { values });
-            if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
-              try {
-                const variables = {
-                  input: diff(groups, widget.groups as any).map((g: any) => ({
-                    email_subject: g.email_subject,
-                    email_body: g.email_body,
-                    targets: g.targets,
-                    label: g.label,
-                    identify: !g.identify ? slugify(g.label, { lower: true }) : g.identify,
-                    widget_id: widget.id
-                  }))
-                }
-                await upsert({ variables });
-                refetch();
-                toast(<Success message='Alvos definidos com sucesso' />, { type: toast.TYPE.SUCCESS });
-              } catch (err) {
-                console.error('err', { err });
-                toast(err.message, { type: toast.TYPE.ERROR });
-              }
+    <ConnectedForm
+      initialValues={{
+        pressureType: 'unique',
+        groups: widget.groups
+      }}
+      mutators={{...arrayMutators}}
+      onSubmit={async ({ groups, ...values }: any) => {
+        console.log('values', { values });
+        if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
+          try {
+            const variables = {
+              input: diff(groups, widget.groups as any).map((g: any) => ({
+                email_subject: g.email_subject,
+                email_body: g.email_body,
+                targets: g.targets,
+                label: g.label,
+                identify: !g.identify ? slugify(g.label, { lower: true }) : g.identify,
+                widget_id: widget.id
+              }))
             }
-          }}
-        >
-          {({ form, submitting, pristine }: any) => (
-            <div
-              css={css`
-              display: grid;
-              grid-template-columns: 55% 45%;
-              grid-column-gap: 20px;
-              height: 100%;
-            `}
-            >
-              <FloatingButton type='submit' disabled={submitting || pristine}>
-                Salvar
-              </FloatingButton>
-              <Card padding={{ x: 50, y: 40 }}>
-                <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
-                {selected === 'unique'
-                  ? <UniqueForm />
-                  : <GroupForm form={form} />
-                }
-              </Card>
-              {selected === 'unique' && (
-                <UniqueFormExplainCard />
+            await upsert({ variables });
+            refetch();
+            toast(<Success message='Alvos definidos com sucesso' />, { type: toast.TYPE.SUCCESS });
+          } catch (err) {
+            console.error('err', { err });
+            toast(err.message, { type: toast.TYPE.ERROR });
+          }
+        }
+      }}
+    >
+      {({ form, submitting, pristine }: any) => (
+        <>
+          <FloatingButton type='submit' disabled={submitting || pristine}>
+            Salvar
+          </FloatingButton>
+          <RadioField label='Tipo de pressão' name='pressureType'>
+            <Radio value='unique'>
+              Um grupo de alvos
+            </Radio>
+            <Radio value='group'>
+              Mais de um grupo de alvos (Ex: Por estado)
+            </Radio>
+          </RadioField>
+          <div
+            css={css`
+            display: grid;
+            grid-template-columns: 55% 45%;
+            grid-column-gap: 20px;
+            height: 100%;
+          `}
+          >
+            <SpyField field='pressureType'>
+              {({ value }: any) => (
+                <>
+                  <Card padding={{ x: 50, y: 40 }}>
+                    <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
+                    {value === 'unique'
+                      ? <UniqueForm />
+                      : <GroupForm form={form} />
+                    }
+                  </Card>
+                  {value === 'unique' && <UniqueFormExplainCard />}     
+                </>
               )}
-            </div>
-          )}
-        </ConnectedForm>
+            </SpyField>
+          </div>
+        </>
       )}
-    </Selectable>
+    </ConnectedForm>
   );
 };
 

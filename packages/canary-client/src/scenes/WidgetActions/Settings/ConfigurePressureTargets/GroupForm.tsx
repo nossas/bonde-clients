@@ -75,17 +75,27 @@ const GroupField = ({ name, group, remove, status }: any) => {
           placeholder="Ex. Rio de Janeiro"
         />
         <SubjectBodyFields prefix={name} />
-        <Link
-          onClick={() => {
-            // remove when
-            if (!group) remove();
-            // close card
-            setOpen(false)
-          }}
-        >
-          Cancelar
-        </Link>
-        <Button type='button' onClick={() => setOpen(false)}>Adicionar</Button>
+        <div css={css`
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          button {
+            width: 140px;
+          }
+        `}>
+          <Link
+            onClick={() => {
+              // remove when
+              if (!group) remove();
+              // close card
+              setOpen(false)
+            }}
+          >
+            Cancelar
+          </Link>
+          <Button type='button' onClick={() => setOpen(false)}>Adicionar</Button>
+        </div>
       </div>
     );
 }

@@ -1,72 +1,61 @@
-import React from "react";
-import { Label } from "bonde-components";
-import styled from "styled-components";
+import React, { createContext, useContext } from "react";
+import { FormField, Hint, Label, useField } from "bonde-components";
+import { css } from "styled-components/macro";
 
-// const RadioInput = styled.span`
-//   display: inline-block;
-//   position: relative;
-//   padding: 0 6px;
-//   margin: 10px 0 0;
+type RadioFieldProps = {
+  children: any
+  label: string
+  name: string
+  direction?: 'row' | 'column'
+}
 
-//   & > input[type="radio"] {
-//     display: none;
-//   }
+const RadioFieldContext = createContext({});
 
-//   & > label {
-//     color: #666;
-//     font-weight: normal;
-//   }
+const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
+  const { input, meta } = useField(name);
 
-//   & > label:before {
-//     content: " ";
-//     display: inline-block;
-//     position: relative;
-//     top: 5px;
-//     margin: 0 5px 0 0;
-//     width: 20px;
-//     height: 20px;
-//     border-radius: 11px;
-//     border: 2px solid #ee0099;
-//     background-color: transparent;
-//   }
+  return (
+    <RadioFieldContext.Provider value={{ input }}>
+      <FormField>
+        <Label>{label}</Label>
+        {meta.error && <Hint color='error'>{meta.error}</Hint>}
+        <div css={css`
+          display: flex;
+          flex-direction: ${direction};
+          margin: 15px 0 0 -15px;
+        `}>
+          {children}
+        </div>
+      </FormField>
+    </RadioFieldContext.Provider>
+  );
+}
 
-//   & > input[type="radio"]:checked + label:after {
-//     border-radius: 11px;
-//     width: 12px;
-//     height: 12px;
-//     position: absolute;
-//     top: 9px;
-//     left: 10px;
-//     content: " ";
-//     display: block;
-//     background: #ee0099;
-//   }
-// `;
+RadioField.defaultProps = {
+  direction: 'row'
+}
 
-const Radio = styled(
-  ({
-    children,
-    className,
-    name,
-    value,
-    checked,
-    onChange,
-  }): React.ReactElement => {
-    return (
-      <Label className={className}>
-        <input
-          type="radio"
-          name={name}
-          checked={checked}
-          onChange={onChange}
-          value={value}
-        />
-        {children}
-      </Label>
-    );
-  }
-)`
-  margin: 15px 15px 0 0;
-`;
+export const Radio = ({ children, value }: any) => {
+  const { input }: any = useContext(RadioFieldContext);
 
-export default Radio;
+  return (
+    <Label css={css`
+      margin-left: 15px;
+      align-items: center;
+
+      input {
+        margin-right: 8px;
+      }
+    `}>
+      <input
+        type="radio"
+        checked={input.value === value}
+        onChange={input.onChange}
+        value={value}
+      />
+      {children}
+    </Label>
+  );
+}
+
+export default RadioField;

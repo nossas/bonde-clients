@@ -105,8 +105,6 @@ const FetchWidgets = ({ children, communityId }: Props) => {
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
 
-  console.log('data, loading', { data, loading });
-
   return children({ widgets: data?.widgets || [], refetch, loading });
 }
 
