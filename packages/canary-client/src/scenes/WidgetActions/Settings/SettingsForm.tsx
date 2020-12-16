@@ -25,7 +25,7 @@ type SubmitProps = {
 
 type Props = {
   widget: Widget
-  initialValues: any
+  initialValues?: any
   children: any
 }
 
@@ -76,6 +76,10 @@ const SettingsForm = ({ children, widget, initialValues }: Props) => {
       )}
     </ConnectedForm>
   )
+}
+
+SettingsForm.defaultValues = {
+  initialValues: {}
 }
 
 export default SettingsForm;
