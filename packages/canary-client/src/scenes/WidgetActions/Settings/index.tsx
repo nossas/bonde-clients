@@ -1,32 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import { Tab, Header } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { Row, Col } from "react-grid-system";
 import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
-import TabRoute from "../TabRoute";
-import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import Autofire from "./Autofire";
+import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import ConfigurePostAction from "./ConfigurePostAction";
-import { useTranslation } from "react-i18next";
-
-const Tabs = styled.div`
-  ${Tab} {
-    color: #424242;
-
-    &:hover,
-    &.active,
-    &:active,
-    &:focus {
-      color: #ee0099;
-      border: none;
-      outline: none;
-      padding: 0;
-    }
-  }
-`;
+import Navigation from './Navigation';
 
 type Props = {
   widgets: Widget[];
@@ -35,9 +17,8 @@ type Props = {
 
 const Settings = ({ widgets, refetch }: Props) => {
   const match = useRouteMatch();
-  const { widgetId }: any = useParams();
-  const { t } = useTranslation("widget");
 
+  const { widgetId }: any = useParams();
   const widget = widgets.filter((w: Widget) => w.id === Number(widgetId))[0];
 
   if (!widget) return <Header.H2>Nenhum widget encontrado</Header.H2>;
@@ -67,42 +48,7 @@ const Settings = ({ widgets, refetch }: Props) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <TabRoute>
-            {({ push, is }) => (
-              <Tabs>
-                <Tab
-                  className={is(/\/widgets\/\d+\/settings\/*$/) ? "active" : ""}
-                  onClick={() => push("")}
-                >
-                  {t("settings.navigation.settings")}
-                </Tab>
-                <Tab
-                  className={
-                    is(/\/widgets\/\d+\/settings\/adjusts\/*$/) ? "active" : ""
-                  }
-                  onClick={() => push(`/adjusts`)}
-                >
-                  {t("settings.navigation.adjusts")}
-                </Tab>
-                <Tab
-                  className={
-                    is(/\/widgets\/\d+\/settings\/autofire\/*$/) ? "active" : ""
-                  }
-                  onClick={() => push(`/autofire`)}
-                >
-                  {t("settings.navigation.autofire")}
-                </Tab>
-                <Tab
-                  className={
-                    is(/\/widgets\/\d+\/settings\/finish\/*$/) ? "active" : ""
-                  }
-                  onClick={() => push(`/finish`)}
-                >
-                  {t("settings.navigation.finish")}
-                </Tab>
-              </Tabs>
-            )}
-          </TabRoute>
+          <Navigation />
         </Col>
         <Col xs={12}>
           <Switch>

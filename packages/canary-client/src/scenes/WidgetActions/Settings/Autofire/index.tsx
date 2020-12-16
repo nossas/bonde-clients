@@ -1,80 +1,41 @@
 import React from "react";
 import {
-  ConnectedForm,
   InputField,
   TextareaField,
   Card,
   Header,
-  toast,
   Validators,
   Text,
 } from "bonde-components";
-import { useMutation, gql } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
 import { noSpecialCharacters } from "../../../../services/utils";
-import FloatingButton from '../FloatingButton';
+import SettingsForm from '../SettingsForm';
 
 type Props = {
   widget: Widget;
 };
 
-const SAVE_AUTOFIRE_SETTINGS = gql`
-  mutation SaveAutofireSettings(
-    $widgetId: Int_comparison_exp!
-    $autofireSettings: jsonb!
-  ) {
-    update_widgets(
-      _append: { settings: $autofireSettings }
-      where: { id: $widgetId }
-    ) {
-      affected_rows
-    }
-  }
-`;
-
-type FormData = {
-  sender_name: string;
-  sender_email: string;
-  email_subject: string;
-  email_body: string;
-};
+// type FormData = {
+//   sender_name: string;
+//   sender_email: string;
+//   email_subject: string;
+//   email_body: string;
+// };
+const { required, composeValidators, isEmail } = Validators;
 
 const AutofireForm = ({ widget }: Props): React.ReactElement => {
   const { t } = useTranslation("widget");
-  const [saveAutofireSettings] = useMutation(SAVE_AUTOFIRE_SETTINGS);
-  const onSubmit = async (widgetId: number, formData: FormData) => {
-    try {
-      const autofireSettings = await saveAutofireSettings({
-        variables: {
-          widgetId: { _eq: widgetId },
-          autofireSettings: formData,
-        },
-      });
-      if (!(autofireSettings.data.update_widgets.affected_rows === 1)) {
-        throw new Error("Houve um erro ao salvar o formulário");
-      }
-      toast("Sucesso ao salvar as configurações!", {
-        type: toast.TYPE.SUCCESS,
-      });
-    } catch (e) {
-      console.log(e);
-      return toast("Houve um erro ao salvar o formulário", {
-        type: toast.TYPE.ERROR,
-      });
-    }
-  };
-  const { required, composeValidators, isEmail } = Validators;
+
   return (
-    <ConnectedForm
-      onSubmit={(e) => onSubmit(widget.id, e)}
-      initialValues={{ ...widget.settings }}
+    <SettingsForm
+      widget={widget}
+      initialValues={{
+        settings: widget.settings
+      }}
     >
-      {({ submitting }) => (
+      {() => (
         <>
-          <FloatingButton type="submit" disabled={submitting}>
-            Salvar
-          </FloatingButton>
           <Header.H4
             style={{
               margin: "10px 0",
@@ -88,7 +49,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
           <Card padding={{ x: 40, y: 30 }}>
             <InputField
               label={t("settings.autofire.label.sendersName")}
-              name="sender_name"
+              name="settings.sender_name"
               placeholder={t("settings.autofire.placeholder.sendersName")}
               validate={composeValidators(
                 required(t("settings.autofire.validators.required")),
@@ -99,7 +60,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
             />
             <InputField
               label={t("settings.autofire.label.sendersEmail")}
-              name="sender_email"
+              name="settings.sender_email"
               placeholder={t("settings.autofire.placeholder.sendersEmail")}
               validate={composeValidators(
                 required(t("settings.autofire.validators.required")),
@@ -108,7 +69,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
             />
             <InputField
               label={t("settings.autofire.label.emailSubject")}
-              name="email_subject"
+              name="settings.email_subject"
               placeholder={t("settings.autofire.placeholder.emailSubject")}
               validate={composeValidators(
                 required(t("settings.autofire.validators.required"))
@@ -116,7 +77,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
             />
             <TextareaField
               label={t("settings.autofire.label.emailBody")}
-              name="email_text"
+              name="settings.email_text"
               placeholder={t("settings.autofire.placeholder.emailBody")}
               validate={composeValidators(
                 required(t("settings.autofire.validators.required"))
@@ -125,7 +86,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
           </Card>
         </>
       )}
-    </ConnectedForm>
+    </SettingsForm>
   );
 };
 
