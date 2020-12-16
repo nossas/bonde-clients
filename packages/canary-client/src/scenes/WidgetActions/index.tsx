@@ -16,7 +16,7 @@ const WidgetsActionsPage = ({ match }: Props): React.ReactElement => {
 
   return community ? (
     <FetchWidgets communityId={community?.id || 0}>
-      {({ widgets, loading, refetch }: RenderProps) => (
+      {({ widgets, loading }: RenderProps) => (
         <Switch>
           <Route exact path={`${match.path}`}>
             <Home
@@ -27,12 +27,10 @@ const WidgetsActionsPage = ({ match }: Props): React.ReactElement => {
             />
           </Route>
           <Route path={`${match.path}/:widgetId/settings`}>
-            {loading ? <WidgetLoading /> : (
-              <Settings
-                widgets={widgets}
-                refetch={refetch}
-              />
-            )}
+            {loading
+              ? <WidgetLoading />
+              : <Settings widgets={widgets} />
+            }
           </Route>
         </Switch>
       )}

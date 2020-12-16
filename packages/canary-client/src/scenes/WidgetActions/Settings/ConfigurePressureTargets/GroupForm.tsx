@@ -21,17 +21,23 @@ const IconButton = styled.button.attrs({ type: 'button' })`
   background: none;
 `;
 
-const GroupField = ({ name, group, remove, status }: any) => {
-  const [open, setOpen] = useState(true);
+type GroupFieldProps = {
+  name: string
+  group?: any
+  remove: any
+}
+
+const GroupField = ({ name, group, remove }: GroupFieldProps) => {
+  const [open, setOpen] = useState(!group);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   useEffect(() => {
-    if (status === 'unrender') setOpen(false);
-  }, [status]);
+    if (group) setOpen(false);
+  }, [])
 
   const onClose = () => setOpenDeleteModal(false);
 
-  return group && !open ? (
+  return !open ? (
     <div
       css={css`
         display: flex;
@@ -46,7 +52,7 @@ const GroupField = ({ name, group, remove, status }: any) => {
         }
       `}
     >
-      <Text color='#000' style={{ flexGrow: 1 }}>{group.label}</Text>
+      <Text color='#000' style={{ flexGrow: 1 }}>{group.label || 'Nome do grupo'}</Text>
       <IconButton onClick={() => setOpen(true)}>
         <Icon name='Pencil' size='small' />
       </IconButton>
@@ -110,14 +116,6 @@ export type GroupFormProps = {
 }
 
 const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
-  // This effect used to resolve when an GroupField open for
-  // first time, the inputs pattern must closed.
-  const [status, setStatus] = useState('unrender');
-
-  useEffect(() => {
-    setStatus('render');
-  }, [])
-
   // Render
   return (
     <>
@@ -143,7 +141,6 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
               <GroupField
                 key={name}
                 name={name}
-                status={status}
                 group={fields.value[index]}
                 remove={() => fields.remove(index)}
               />

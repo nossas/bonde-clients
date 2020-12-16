@@ -38,8 +38,6 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
   const onSubmit = async ({ primaryKey, settings, ...values }: SubmitProps) => {
     try {
       const result = await save({ variables: { primaryKey, settings } });
-      // TODO: try catch
-      console.log('data', { result });
 
       if (!(result.data.update_widgets.affected_rows === 1)) {
         throw new Error("Houve um erro ao salvar o formulário");

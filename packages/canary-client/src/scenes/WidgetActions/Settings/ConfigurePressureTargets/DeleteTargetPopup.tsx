@@ -18,7 +18,7 @@ const DELETE_PRESSURE_TARGET = gql`
   }
 `;
 
-const InsertTarget = ({
+const DeleteTargetPopup = ({
   remove,
   onClose,
   pressureTargetId
@@ -27,22 +27,16 @@ const InsertTarget = ({
   const [deleteTarget] = useMutation(DELETE_PRESSURE_TARGET);
   const onSubmit = async (pressureTargetId: number) => {
     try {
-      const targetDeleted = await deleteTarget({
-        variables: {
-          id: { _eq: pressureTargetId },
-        },
-      });
-      console.log({ targetDeleted });
+      await deleteTarget({ variables: { id: { _eq: pressureTargetId } } });
       
       remove();
-      
       onClose();
       
       return toast(t("pressure.target.delete.message.success"), {
         type: toast.TYPE.SUCCESS,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return toast(t("pressure.target.delete.message.error"), {
         type: toast.TYPE.ERROR,
       });
@@ -77,4 +71,4 @@ const InsertTarget = ({
   );
 };
 
-export default InsertTarget;
+export default DeleteTargetPopup;

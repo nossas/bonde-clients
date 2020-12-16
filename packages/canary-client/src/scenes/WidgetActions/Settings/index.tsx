@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab, Header } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { Row, Col } from "react-grid-system";
@@ -12,18 +12,22 @@ import Navigation from './Navigation';
 
 type Props = {
   widgets: Widget[];
-  refetch: any
 };
 
-const Settings = ({ widgets, refetch }: Props) => {
+const Settings = ({ widgets }: Props) => {
+  const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
 
   const { widgetId }: any = useParams();
-  const widget = widgets.filter((w: Widget) => w.id === Number(widgetId))[0];
+  const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];
 
   if (!widget) return <Header.H2>Nenhum widget encontrado</Header.H2>;
 
   const label = Labels.get(widget.kind);
+
+  const updateCache = (updated: Widget) => {
+    setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? updated : w));
+  }
 
   return (
     <Container
@@ -53,7 +57,10 @@ const Settings = ({ widgets, refetch }: Props) => {
           <Switch>
             <Route exact path={`${match.path}`}>
               {widget.kind === "pressure" && (
-                <ConfigurePressureTargets widget={widget} refetch={refetch} />
+                <ConfigurePressureTargets
+                  widget={widget}
+                  updateCache={updateCache}
+                />
               )}
             </Route>
             <Route exact path={`${match.path}/adjusts`}>

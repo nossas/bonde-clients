@@ -57,13 +57,13 @@ const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
 
 type Props = {
   widget: Widget
-  refetch: any
+  updateCache: (widget: Widget) => any
 }
 
-const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElement => {
+const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactElement => {
   const [upsert] = useMutation(upsertPressureTargets);
 
-  return (    
+  return (
     <SettingsForm
       widget={widget}
       initialValues={{
@@ -88,7 +88,7 @@ const ConfigurePressureTargets = ({ widget, refetch }: Props): React.ReactElemen
               }))
             }
             await upsert({ variables });
-            refetch();
+            updateCache({ ...widget, groups });
             toast(<Success message='Alvos definidos com sucesso' />, { type: toast.TYPE.SUCCESS });
           } catch (err) {
             console.error('err', { err });
