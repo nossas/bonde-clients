@@ -67,6 +67,19 @@ importers:
     dependencies:
       '@fnando/cnpj': 1.0.2
       '@fnando/cpf': 1.0.2
+      '@slate-editor/alignment-plugin': 5.1.0
+      '@slate-editor/bold-plugin': 5.1.0
+      '@slate-editor/color-plugin': 5.1.0
+      '@slate-editor/embed-plugin': 5.1.0
+      '@slate-editor/font-family-plugin': 5.1.0
+      '@slate-editor/font-size-plugin': 5.1.0
+      '@slate-editor/grid-plugin': 5.1.0
+      '@slate-editor/image-plugin': 5.1.1
+      '@slate-editor/italic-plugin': 5.1.0
+      '@slate-editor/link-plugin': 5.1.0
+      '@slate-editor/list-plugin': 5.1.0
+      '@slate-editor/strikethrough-plugin': 5.1.0
+      '@slate-editor/underline-plugin': 5.1.0
       '@types/downloadjs': 1.4.2
       '@types/react-table': 7.0.25
       bonde-styleguide: 0.16.5-alpha.5
@@ -79,10 +92,25 @@ importers:
       react-s3-uploader: 4.9.3
       react-table: 7.6.1
       react-toastify: 6.0.9
+      slate-editor: 5.1.1
+      slate-plain-serializer: 0.7.13
       slugify: 1.4.6
     specifiers:
       '@fnando/cnpj': ^1.0.2
       '@fnando/cpf': ^1.0.2
+      '@slate-editor/alignment-plugin': ^5.1.0
+      '@slate-editor/bold-plugin': ^5.1.0
+      '@slate-editor/color-plugin': ^5.1.0
+      '@slate-editor/embed-plugin': ^5.1.0
+      '@slate-editor/font-family-plugin': ^5.1.0
+      '@slate-editor/font-size-plugin': ^5.1.0
+      '@slate-editor/grid-plugin': ^5.1.0
+      '@slate-editor/image-plugin': ^5.1.1
+      '@slate-editor/italic-plugin': ^5.1.0
+      '@slate-editor/link-plugin': ^5.1.0
+      '@slate-editor/list-plugin': ^5.1.0
+      '@slate-editor/strikethrough-plugin': ^5.1.0
+      '@slate-editor/underline-plugin': ^5.1.0
       '@types/downloadjs': ^1.4.2
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
@@ -95,6 +123,8 @@ importers:
       react-s3-uploader: ^4.9.3
       react-table: ^7.5.0
       react-toastify: ^6.0.8
+      slate-editor: ^5.1.1
+      slate-plain-serializer: ^0.7.13
       slugify: ^1.4.6
   packages/example-client:
     specifiers: {}
@@ -1822,6 +1852,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tAag0jEcjwH+P2quUfipd7liWCNX2F8NvYjQp2wtInsZxnMlypdw0FtAOLxtvvkO+GSRRbmNi8m/5y42PQJYCQ==
+  /@icons/material/0.2.4_react@16.14.0:
+    dependencies:
+      react: 16.14.0
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==
   /@istanbuljs/load-nyc-config/1.1.0:
     dependencies:
       camelcase: 5.3.1
@@ -2222,6 +2260,171 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
+  /@slate-editor/alignment-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-bQrwVotp6ryZBgJOT7EY/OxDiD6Esy3G/2p/Q9fGhr7zo8vNnqPksaTESmzch6Hgck6bdXXXK2GPMI8VRxmQoA==
+  /@slate-editor/bold-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-18ppqv813jEAsYXVuYopLis0DwLc5pkdprttUpvYdk9X8YviiEFYdx/M6csvQI49zKlpkmA5nPjeJvAhA2P4rw==
+  /@slate-editor/color-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      prop-types: 15.7.2
+      react: 16.14.0
+      react-color: 2.19.3_react@16.14.0
+      react-draggable: 3.3.2
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-c6PCXOkdjP8TrQdryQzRVWklFr5sS5TqfOvpbpkpixoygqN4TyBH/8fhhJHScnVKy8/nzSIH27HuP5c1EbOkqw==
+  /@slate-editor/components/5.1.0:
+    dependencies:
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-M+Qbgw6MXBGOwTFZtA1b+C1mX9TOaSjePXkFguO4cJAsmPAUKDESDxAd9j+3IbAElFv5rieMcknSKtyk20/d9A==
+  /@slate-editor/embed-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-cF5ieN+mKs8vSv3j/XaccmGPL3nm9/jlsTqQo0UDUSr2nCVcIKCb2PKObsELW0r0Tg/ISIPSkBcIHcuAG/oVZw==
+  /@slate-editor/font-family-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      react: 16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-R+HL7mIOMLxsqZypNKqOzPcFRmSnZHRSyYij4yemM8EVaDIDlmnZpqPdVDcjODMAjIc6jIA2XFCYogbKFmy+0A==
+  /@slate-editor/font-size-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-fVVAKOvk91YtWBwVRybpHCfVqKDMD0GOX5ETg19QYqFGBVAoKCTfeJZR7h8MTxhT6XLWyLZJJw9mTfxk79Hcnw==
+  /@slate-editor/grid-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-ZcEAGoG5obvMdhe0Ry00zP8uSm80M/B8oUX4Q2xWI90pV6QPn9mrAINjJ7ejiRmWDf65hLHfD7fmz+c5bZWQLQ==
+  /@slate-editor/image-plugin/5.1.1:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-dom: 16.14.0_react@16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+      react-s3-uploader: 4.9.3
+    dev: false
+    resolution:
+      integrity: sha512-Gjq1d3pxezHcJrFvALYsEq+NwUV9oSJMxTQL0y8w5qkdR9H+nQg9UOrxJn6Gfn05bVLvx52QLI7/Q49tIBMdzw==
+  /@slate-editor/italic-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-4edX9hwvK+rXBMMgDWw3AbEb4zSWc4Gb/E59+WLbwQN7mCxRV13+Fbt/aXGY3EIOzyGOIeaEFQe8u1J2EDl40Q==
+  /@slate-editor/link-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-XzM2ukJq6D2hFEg1dR6FtgA5keZ2NFaekwTzGub086svZPMwTnzWtAsVn0x7xGXMUupX34RM3RnDdhGOqLdiNw==
+  /@slate-editor/list-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      classnames: 2.2.6
+      exenv: 1.2.2
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-nuZ13CSRpF2xnzuR25y+U6TsJ2wRmjKrNT7GIaYDemLXahlVMYqjR6u4eO3o4VfYjGQH5zEGfnp88LqaK9nFZw==
+  /@slate-editor/state-logger/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      json-beautify: 1.1.1
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-g+zDQUw5/h08qHh4yiNxX5uNvF0pdQYoh4H37B8UAHnmKwgeNplwXpGZl1uJTmhX4Jo9CFhRoMYNOrplcg1q3w==
+  /@slate-editor/strikethrough-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      classnames: 2.2.6
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-9hktr0CMXRth2uoq9iGfxSbiLXPwlxzlsJXkLKSjgKaYjLHeKUUi5qhTr3U6EVJxWgGV649R1BfAPCQrEjlt5Q==
+  /@slate-editor/toggle-readonly/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-CH+RyJEI09W2maK4G8j0HcPWJLsMDlDwMIDWIv64CU437OZzCsOGBZzxOdR81Kybn7iu51ZQyM7aDLu6HHKZdQ==
+  /@slate-editor/underline-plugin/5.1.0:
+    dependencies:
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      react: 16.14.0
+      react-fontawesome: 1.7.1_react@16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-+f/fV34KsdcOUuXOfc2sMCb4RpS01MX8crNWgmncfwu7M7p3iW7GURK8ei7bcZ9bsEMQWqR/laujnayP846VaQ==
+  /@slate-editor/utils/5.1.0:
+    dependencies:
+      react: 16.14.0
+    dev: false
+    resolution:
+      integrity: sha512-lVv9DfqCRV0alLnPH8N+tZUhu8UNEKlaRkiwVDVV2Z54LDHVuKGC0yFxMKRQOeex2n2S2cbTXrB8I7YOnBqhHw==
   /@svgr/babel-plugin-add-jsx-attribute/4.2.0:
     dev: false
     engines:
@@ -6355,6 +6558,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
+  /debug/3.2.7:
+    dependencies:
+      ms: 2.1.3
+    dev: false
+    resolution:
+      integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
   /debug/4.2.0:
     dependencies:
       ms: 2.1.2
@@ -6615,6 +6824,11 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-37qirFDz8cA5fimp9feo43fSuRo2gHwaIn6dXL8Ber1dGwUosDrGZeCCXq57WnIqE4aQ+u3eQZzsk1yOzhdwag==
+  /direction/0.1.5:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-zl15f5fib4vnvv9T99xA4cGp7Ew=
   /dns-equal/1.0.0:
     dev: false
     resolution:
@@ -7245,6 +7459,11 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==
+  /esrever/0.2.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-lunSj08bGnZ4TNXUkOquAQ50B7g=
   /estraverse/4.3.0:
     engines:
       node: '>=4.0'
@@ -7359,6 +7578,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-j5W0//W7f8UxAn8hXVnwG8tLwdiUy4FJLcSupCg6maBYZDpyBvTApK7KyuI4bKj8KOh1r2YH+6ucuYtJv1bTZA==
+  /exenv/1.2.2:
+    dev: false
+    resolution:
+      integrity: sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
   /exit/0.1.2:
     dev: false
     engines:
@@ -7974,6 +8197,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-JprHdtHmAiqg/Vht1wjop9Miaa8=
+  /get-document/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-SCG85m8cJMsDMWAr5strEsTwHEs=
   /get-intrinsic/1.0.1:
     dependencies:
       function-bind: 1.1.1
@@ -8018,6 +8245,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
+  /get-window/1.1.2:
+    dependencies:
+      get-document: 1.0.0
+    dev: false
+    resolution:
+      integrity: sha512-yjWpFcy9fjhLQHW1dPtg9ga4pmizLY8y4ZSHdGrAQ1NU277MRhnGnnLPxe19X8W5lWVsCZz++5xEuNozWMVmTw==
   /getpass/0.1.7:
     dependencies:
       assert-plus: 1.0.0
@@ -8538,6 +8771,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
+  /immutable/3.8.2:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -8929,6 +9168,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
+  /is-hotkey/0.1.4:
+    dev: false
+    resolution:
+      integrity: sha512-Py+aW4r5mBBY18TGzGz286/gKS+fCQ0Hee3qkaiSmEPiD0PqFpe0wuA3l7rTOUKyeXl8Mxf3XzJxIoTlSv+kxA==
+  /is-in-browser/1.1.3:
+    dev: false
+    resolution:
+      integrity: sha1-Vv9NtoOgeMYILrldrX3GLh0E+DU=
   /is-negative-zero/2.0.0:
     dev: false
     engines:
@@ -9063,6 +9310,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-RXPH5FLwJdBOUql8GAtl9SwpME59sRyO0K14wmBsyHkx830gtDt48nRFgN571Vf2jHkICZAuXKwrD3F5r/126g==
+  /is-window/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-LIlspT25feRdPDMTOmXYyfVjSA0=
   /is-windows/1.0.2:
     dev: false
     engines:
@@ -9108,6 +9359,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+  /isomorphic-base64/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-9Caq6CVpuopOxcpzrSGkSrHueAM=
   /isstream/0.1.2:
     dev: false
     resolution:
@@ -10191,6 +10446,11 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
+  /json-beautify/1.1.1:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-17j+Hk2lado0xqKtUcyAjK0AtoHnPSIgktWRsEXgdFQFG9UnaGw6CHa0J7xsvulxRpFl6CrkDFHght1p5ZJc4A==
   /json-parse-better-errors/1.0.2:
     dev: false
     resolution:
@@ -10497,6 +10757,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
+  /lodash-es/4.17.15:
+    dev: false
+    resolution:
+      integrity: sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
   /lodash._reinterpolate/3.0.0:
     dev: false
     resolution:
@@ -10637,6 +10901,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
+  /material-colors/1.2.6:
+    dev: false
+    resolution:
+      integrity: sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
   /math-expression-evaluator/1.2.22:
     dev: false
     resolution:
@@ -10673,6 +10941,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-qX2bG48pTqYRVmDB37rn/6PT7LcR8T7oAX3bf99u1Tt1nzxYfxkgqDwUwolPlXweM0XzBOBFzSx4kfp7KP1s/w==
+  /memoize-one/4.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-QmpUu4KqDmX0plH4u+tf0riMc1KHE1+lw95cMrLlXQAFOx/xnBtwhZ52XJxd9X2O6kwKBqX32kmhbhlobD0cuw==
   /memoize-one/5.1.1:
     dev: false
     resolution:
@@ -10970,6 +11242,10 @@ packages:
   /ms/2.1.2:
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
+  /ms/2.1.3:
+    dev: false
+    resolution:
+      integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
   /multicast-dns-service-types/1.1.0:
     dev: false
     resolution:
@@ -12896,6 +13172,21 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-OfBnObtnGgLGfweORmdZbyEz+3dgVePQBb3zipiaDsMHV1NpWm0rDFYIVXFV/AK+x4VIIfWHhrdMIeoTLyRr2g==
+  /react-color/2.19.3_react@16.14.0:
+    dependencies:
+      '@icons/material': 0.2.4_react@16.14.0
+      lodash: 4.17.20
+      lodash-es: 4.17.15
+      material-colors: 1.2.6
+      prop-types: 15.7.2
+      react: 16.14.0
+      reactcss: 1.2.3
+      tinycolor2: 1.4.2
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==
   /react-dev-utils/10.2.1:
     dependencies:
       '@babel/code-frame': 7.8.3
@@ -12939,6 +13230,13 @@ packages:
       react: ^16.14.0
     resolution:
       integrity: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
+  /react-draggable/3.3.2:
+    dependencies:
+      classnames: 2.2.6
+      prop-types: 15.7.2
+    dev: false
+    resolution:
+      integrity: sha512-oaz8a6enjbPtx5qb0oDWxtDNuybOylvto1QLydsXgKmwT7e3GXC2eMVDwEMIUYJIFqVG72XpOv673UuuAq6LhA==
   /react-error-overlay/6.0.8:
     dev: false
     resolution:
@@ -12966,6 +13264,17 @@ packages:
       react: ^16.8.0 || ^17.0.0
     resolution:
       integrity: sha512-c5l45FYOoxtfpvsvMFh3w2WW8KNxbuebBUrM16rUrooQkewTs0Zahmv0TuKFX5jsC9BKn5Fo84j3ZVXQdURS4w==
+  /react-fontawesome/1.7.1_react@16.14.0:
+    dependencies:
+      prop-types: 15.7.2
+      react: 16.14.0
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    peerDependencies:
+      react: '>=0.12.0'
+    resolution:
+      integrity: sha512-kottReWW1I9Uupub6A5YX4VK7qfpFnEjAcm5zB4Aepst7iofONT27GJYdTcRsj7q5uQu9PXBL7GsxAFKANNUVg==
   /react-grid-system/7.0.3_react@16.14.0:
     dependencies:
       prop-types: 15.7.2
@@ -12987,6 +13296,15 @@ packages:
       react: '>= 16.8.0'
     resolution:
       integrity: sha512-7sYZqVZgdaS9Z0ZH6nuJFErCD0zz5wK3jR4/xCrWjZcxHHF3GRu7BXdicbSPprZV4ZYz7LJzxxMHO7dg5Qb70A==
+  /react-immutable-proptypes/2.2.0_immutable@3.8.2:
+    dependencies:
+      immutable: 3.8.2
+      invariant: 2.2.4
+    dev: false
+    peerDependencies:
+      immutable: '>=3.6.2'
+    resolution:
+      integrity: sha512-Vf4gBsePlwdGvSZoLSBfd4HAP93HDauMY4fDjXhreg/vg6F3Fj/MXDNyTbltPC/xZKmZc+cjLu3598DdYK6sgQ==
   /react-input-autosize/2.2.2_react@16.14.0:
     dependencies:
       prop-types: 15.7.2
@@ -13253,6 +13571,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  /reactcss/1.2.3:
+    dependencies:
+      lodash: 4.17.20
+    dev: false
+    resolution:
+      integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==
   /read-pkg-up/2.0.0:
     dependencies:
       find-up: 2.1.0
@@ -13919,6 +14243,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
+  /selection-is-backward/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-l6VGMxiKURq6ZBn8XB+pG0Z+a+E=
   /selfsigned/1.10.8:
     dependencies:
       node-forge: 0.10.0
@@ -14172,6 +14500,131 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
+  /slate-base64-serializer/0.2.115_slate@0.41.3:
+    dependencies:
+      isomorphic-base64: 1.0.2
+      slate: 0.41.3_immutable@3.8.2+react@16.14.0
+    dev: false
+    peerDependencies:
+      slate: '>=0.32.0 <0.50.0'
+    resolution:
+      integrity: sha512-GnLV7bUW/UQ5j7rVIxCU5zdB6NOVsEU6YWsCp68dndIjSGTGLaQv2+WwV3NcnrGGZEYe5qgo33j2QWrPws2C1A==
+  /slate-dev-environment/0.2.5:
+    dependencies:
+      is-in-browser: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha512-oLD8Fclv/RqrDv6RYfN2CRzNcRXsUB99Qgcw5L/njTjxAdDPguV6edQ3DgUG9Q2pLFLhI15DwsKClzVfFzfwGQ==
+  /slate-dev-warning/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-QdXa+qmOG46VrTfnzn2gUVzs1WiO3Q+zCv3XomzMNGdgAJjCgHBs3jaeQD845h15loS3OJ181gCNAkB3dby6Hw==
+  /slate-editor/5.1.1:
+    dependencies:
+      '@slate-editor/alignment-plugin': 5.1.0
+      '@slate-editor/bold-plugin': 5.1.0
+      '@slate-editor/color-plugin': 5.1.0
+      '@slate-editor/components': 5.1.0
+      '@slate-editor/embed-plugin': 5.1.0
+      '@slate-editor/font-family-plugin': 5.1.0
+      '@slate-editor/font-size-plugin': 5.1.0
+      '@slate-editor/grid-plugin': 5.1.0
+      '@slate-editor/image-plugin': 5.1.1
+      '@slate-editor/italic-plugin': 5.1.0
+      '@slate-editor/link-plugin': 5.1.0
+      '@slate-editor/list-plugin': 5.1.0
+      '@slate-editor/state-logger': 5.1.0
+      '@slate-editor/strikethrough-plugin': 5.1.0
+      '@slate-editor/toggle-readonly': 5.1.0
+      '@slate-editor/underline-plugin': 5.1.0
+      '@slate-editor/utils': 5.1.0
+      classnames: 2.2.6
+      immutable: 3.8.2
+      prop-types: 15.7.2
+      react: 16.14.0
+      slate: 0.41.3_immutable@3.8.2+react@16.14.0
+      slate-react: 0.18.11_14d6b13fe0fc387fcbaa6509e3ca8141
+    dev: false
+    resolution:
+      integrity: sha512-L//MISou5GHAhrSX8afT3CtUCd37F7/KHXENWOm5meA1QuZfy1g6wX/YXXJk5IhUPvPbiFwkFeAiwkue8c7FFA==
+  /slate-hotkeys/0.2.11:
+    dependencies:
+      is-hotkey: 0.1.4
+      slate-dev-environment: 0.2.5
+    dev: false
+    resolution:
+      integrity: sha512-xhq/TlI74dRbO57O4ulGsvCcV4eaQ5nEEz9noZjeNLtNzFRd6lSgExRqAJqKGGIeJw+FnJ3OcqGvdb5CEc9/Ew==
+  /slate-plain-serializer/0.6.39_immutable@3.8.2+slate@0.41.3:
+    dependencies:
+      immutable: 3.8.2
+      slate: 0.41.3_immutable@3.8.2+react@16.14.0
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha512-EGl+Y+9Fw9IULtPg8sttydaeiAoaibJolMXNfqI79+5GWTQwJFIbg24keKvsTw+3f2RieaPu8fcrKyujKtZ7ZQ==
+  /slate-plain-serializer/0.7.13:
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      slate: '>=0.46.0 <0.50.0'
+    resolution:
+      integrity: sha512-TtrlaslxQBEMV0LYdf3s7VAbTxRPe1xaW10WNNGAzGA855/0RhkaHjKkQiRjHv5rvbRleVf7Nxr9fH+4uErfxQ==
+  /slate-prop-types/0.4.67_immutable@3.8.2+slate@0.41.3:
+    dependencies:
+      immutable: 3.8.2
+      slate: 0.41.3_immutable@3.8.2+react@16.14.0
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha512-FmdwitAw1Y69JHm326dfwP6Zd6R99jz1Im8jvKcnG2hytk72I1vIv6ct2CkNGwc3sg90+OIO/Rf18frYxxoTzw==
+  /slate-react/0.18.11_14d6b13fe0fc387fcbaa6509e3ca8141:
+    dependencies:
+      debug: 3.2.7
+      get-window: 1.1.2
+      immutable: 3.8.2
+      is-window: 1.0.2
+      lodash: 4.17.20
+      memoize-one: 4.0.3
+      prop-types: 15.7.2
+      react: 16.14.0
+      react-immutable-proptypes: 2.2.0_immutable@3.8.2
+      selection-is-backward: 1.0.0
+      slate: 0.41.3_immutable@3.8.2+react@16.14.0
+      slate-base64-serializer: 0.2.115_slate@0.41.3
+      slate-dev-environment: 0.2.5
+      slate-dev-warning: 0.0.1
+      slate-hotkeys: 0.2.11
+      slate-plain-serializer: 0.6.39_immutable@3.8.2+slate@0.41.3
+      slate-prop-types: 0.4.67_immutable@3.8.2+slate@0.41.3
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      react: '>=0.14.0'
+      react-dom: '>=0.14.0'
+      slate: '>=0.37.0'
+    resolution:
+      integrity: sha512-7u0+LLabGaxjWYb0oTqUDcs3iCvJdaZwcGW6hLc1hFv06KkwaIxAqYpP8dUBRVlQd+0/X0TdyagCmf0IjFSPhg==
+  /slate/0.41.3_immutable@3.8.2+react@16.14.0:
+    dependencies:
+      debug: 3.2.7
+      direction: 0.1.5
+      esrever: 0.2.0
+      immutable: 3.8.2
+      is-plain-object: 2.0.4
+      lodash: 4.17.20
+      react: 16.14.0
+      slate-dev-warning: 0.0.1
+      type-of: 2.0.1
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      react: '>=0.14.0'
+    resolution:
+      integrity: sha512-I/ymHWRxtoSOWYKh/SFgW3Vkkojt5ywWf7Wh4oBvaKic/3mAsM1wymyZmhnvSKK59IeE0JJzD4uyyQaM1KEFHA==
   /slice-ansi/2.1.0:
     dependencies:
       ansi-styles: 3.2.1
@@ -15004,6 +15457,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
+  /tinycolor2/1.4.2:
+    dev: false
+    resolution:
+      integrity: sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
   /tinyqueue/2.0.3:
     dev: false
     resolution:
@@ -15210,6 +15667,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==
+  /type-of/2.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-5yoXQYllaOn2KDeNgW1pEvfyOXI=
   /type/1.2.0:
     dev: false
     resolution:

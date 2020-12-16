@@ -4,3 +4,11 @@ export const noSpecialCharacters = (message: string) => (value: any) => {
 
   return !regexEmail.test(value) ? message : undefined;
 };
+
+export const checkToParse = (input: any) => {
+  try {
+    return JSON.parse(input);
+  } catch (e) {
+    return input;
+  }
+};
