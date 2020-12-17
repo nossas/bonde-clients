@@ -59,7 +59,7 @@ const DefaultPostAction = (): React.ReactElement => {
       <Col xs={6}>
         <TextareaField
           label={t("settings.finish.default.whatsapp.label")}
-          name="whatsapp_text"
+          name="settings.whatsapp_text"
           placeholder={t("settings.finish.default.whatsapp.placeholder")}
         />
       </Col>

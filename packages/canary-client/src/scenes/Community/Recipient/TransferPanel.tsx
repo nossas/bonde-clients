@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { Header, Text } from 'bonde-components';
 import SelectField from '../../../components/SelectField';
-import { Section } from '../Panel';
+import { Section } from '../../../components/Panel';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
 // import SelectFieldCondition from './SelectFieldCondition';
 import SpyField from '../../../components/SpyField';

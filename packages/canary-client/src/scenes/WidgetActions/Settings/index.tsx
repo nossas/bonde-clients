@@ -5,10 +5,11 @@ import { Row, Col } from "react-grid-system";
 import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
+import Navigation from './Navigation';
+import Adjusts from './Adjusts';
 import Autofire from "./Autofire";
 import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import ConfigurePostAction from "./ConfigurePostAction";
-import Navigation from './Navigation';
 
 type Props = {
   widgets: Widget[];
@@ -64,7 +65,7 @@ const Settings = ({ widgets }: Props) => {
               )}
             </Route>
             <Route exact path={`${match.path}/adjusts`}>
-              <Header.H4>Ajustes</Header.H4>
+              <Adjusts widget={widget} />
             </Route>
             <Route exact path={`${match.path}/autofire`}>
               <Autofire widget={widget} />

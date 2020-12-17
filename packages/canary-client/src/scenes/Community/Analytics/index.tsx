@@ -11,7 +11,7 @@ import LastFormEntries from './LastFormEntries';
 import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
 import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
 import TotalDonations from './TotalDonations';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 import DownloadCSV from './DownloadCSV';
 
 type StylesProps = {

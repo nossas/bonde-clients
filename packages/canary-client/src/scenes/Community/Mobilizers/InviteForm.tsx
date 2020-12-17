@@ -11,7 +11,7 @@ import {
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 import SelectField from '../../../components/SelectField';
 
 const InlineFormWrap = styled.div`

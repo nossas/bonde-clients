@@ -3,7 +3,7 @@ import { useSession } from 'bonde-core-tools';
 import { Header, Icon, Loading, toast, Success } from 'bonde-components';
 import downloadjs from 'downloadjs'
 import styled from 'styled-components';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 
 type ReportButtonProps = {
   loading: boolean

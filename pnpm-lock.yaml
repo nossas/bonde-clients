@@ -83,12 +83,14 @@ importers:
       '@slate-editor/toggle-readonly': 5.1.0
       '@slate-editor/underline-plugin': 5.1.0
       '@types/downloadjs': 1.4.2
+      '@types/react-color': 3.0.4
       '@types/react-table': 7.0.25
       bonde-styleguide: 0.16.5-alpha.5
       clipboard-copy: 3.2.0
       downloadjs: 1.4.7
       final-form-arrays: 3.0.2
       moment: 2.29.1
+      react-color: 2.19.3
       react-final-form-arrays: 3.1.3_final-form-arrays@3.0.2
       react-number-format: 4.4.1
       react-s3-uploader: 4.9.3
@@ -116,12 +118,14 @@ importers:
       '@slate-editor/toggle-readonly': ^5.1.0
       '@slate-editor/underline-plugin': ^5.1.0
       '@types/downloadjs': ^1.4.2
+      '@types/react-color': ^3.0.4
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
       clipboard-copy: ^3.1.0
       downloadjs: ^1.4.7
       final-form-arrays: ^3.0.2
       moment: ^2.27.0
+      react-color: ^2.19.3
       react-final-form-arrays: ^3.1.3
       react-number-format: ^4.4.1
       react-s3-uploader: ^4.9.3
@@ -1856,6 +1860,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tAag0jEcjwH+P2quUfipd7liWCNX2F8NvYjQp2wtInsZxnMlypdw0FtAOLxtvvkO+GSRRbmNi8m/5y42PQJYCQ==
+  /@icons/material/0.2.4:
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==
   /@icons/material/0.2.4_react@16.14.0:
     dependencies:
       react: 16.14.0
@@ -3762,6 +3772,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
+  /@types/react-color/3.0.4:
+    dependencies:
+      '@types/react': 17.0.0
+      '@types/reactcss': 1.2.3
+    dev: false
+    resolution:
+      integrity: sha512-EswbYJDF1kkrx93/YU+BbBtb46CCtDMvTiGmcOa/c5PETnwTiSWoseJ1oSWeRl/4rUXkhME9bVURvvPg0W5YQw==
   /@types/react-dom/16.9.9:
     dependencies:
       '@types/react': 16.9.55
@@ -3809,6 +3826,19 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6KLe6lkILeRwyyy7yG9rULKJ0sXplUsl98MGoCfpteXf9sPWFWWMknDcsvubcpaTdBuxtsLF6HDUwdApZL/xIg==
+  /@types/react/17.0.0:
+    dependencies:
+      '@types/prop-types': 15.7.3
+      csstype: 3.0.5
+    dev: false
+    resolution:
+      integrity: sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
+  /@types/reactcss/1.2.3:
+    dependencies:
+      '@types/react': 17.0.0
+    dev: false
+    resolution:
+      integrity: sha512-d2gQQ0IL6hXLnoRfVYZukQNWHuVsE75DzFTLPUuyyEhJS8G2VvlE+qfQQ91SJjaMqlURRCNIsX7Jcsw6cEuJlA==
   /@types/stack-utils/1.0.1:
     dev: false
     resolution:
@@ -13176,6 +13206,20 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-OfBnObtnGgLGfweORmdZbyEz+3dgVePQBb3zipiaDsMHV1NpWm0rDFYIVXFV/AK+x4VIIfWHhrdMIeoTLyRr2g==
+  /react-color/2.19.3:
+    dependencies:
+      '@icons/material': 0.2.4
+      lodash: 4.17.20
+      lodash-es: 4.17.15
+      material-colors: 1.2.6
+      prop-types: 15.7.2
+      reactcss: 1.2.3
+      tinycolor2: 1.4.2
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==
   /react-color/2.19.3_react@16.14.0:
     dependencies:
       '@icons/material': 0.2.4_react@16.14.0
