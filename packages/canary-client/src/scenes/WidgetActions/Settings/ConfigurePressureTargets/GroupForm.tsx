@@ -33,6 +33,7 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
 
   useEffect(() => {
     if (group) setOpen(false);
+    // eslint-disable-next-line
   }, [])
 
   const onClose = () => setOpenDeleteModal(false);

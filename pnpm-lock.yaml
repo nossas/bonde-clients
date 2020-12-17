@@ -78,7 +78,9 @@ importers:
       '@slate-editor/italic-plugin': 5.1.0
       '@slate-editor/link-plugin': 5.1.0
       '@slate-editor/list-plugin': 5.1.0
+      '@slate-editor/state-logger': 5.1.0
       '@slate-editor/strikethrough-plugin': 5.1.0
+      '@slate-editor/toggle-readonly': 5.1.0
       '@slate-editor/underline-plugin': 5.1.0
       '@types/downloadjs': 1.4.2
       '@types/react-table': 7.0.25
@@ -109,7 +111,9 @@ importers:
       '@slate-editor/italic-plugin': ^5.1.0
       '@slate-editor/link-plugin': ^5.1.0
       '@slate-editor/list-plugin': ^5.1.0
+      '@slate-editor/state-logger': ^5.1.0
       '@slate-editor/strikethrough-plugin': ^5.1.0
+      '@slate-editor/toggle-readonly': ^5.1.0
       '@slate-editor/underline-plugin': ^5.1.0
       '@types/downloadjs': ^1.4.2
       '@types/react-table': ^7.0.22

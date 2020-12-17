@@ -13,3 +13,5 @@ declare module "@slate-editor/image-plugin";
 declare module "@slate-editor/color-plugin";
 declare module "@slate-editor/grid-plugin";
 declare module "@slate-editor/embed-plugin";
+declare module "@slate-editor/state-logger";
+declare module "@slate-editor/toggle-readonly";
