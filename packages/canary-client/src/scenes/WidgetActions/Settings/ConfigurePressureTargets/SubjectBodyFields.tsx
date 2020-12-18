@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 type SubjectBodyFieldsProps = {
   prefix?: string
+  emailSubjectName?: string
+  emailBodyName?: string
 }
 
 const targetsFormart = (value: any) => {
@@ -14,8 +16,11 @@ const targetsParse = (value: any) => {
   return value.split(';');
 }
 
-const SubjectBodyFields = ({ prefix }: SubjectBodyFieldsProps) => {
+const SubjectBodyFields = ({ prefix, emailSubjectName, emailBodyName }: SubjectBodyFieldsProps) => {
   const { t } = useTranslation('widgetActions');
+
+  const emailSubject = emailSubjectName ? emailSubjectName : 'pressure_subject';
+  const emailBody = emailBodyName ? emailBodyName : 'pressure_body';
 
   return (
     <>
@@ -27,12 +32,12 @@ const SubjectBodyFields = ({ prefix }: SubjectBodyFieldsProps) => {
         parse={targetsParse}
       />
       <InputField
-        name={prefix ? prefix + ".email_subject" : "email_subject"}
+        name={prefix ? prefix + `.${emailSubject}` : emailSubject}
         placeholder={t('settings.pressure.placeholder.email_subject')}
         label={t('settings.pressure.label.email_subject')}
       />
       <TextareaField
-        name={prefix ? prefix + ".email_body" : "email_body"}
+        name={prefix ? prefix + `.${emailBody}` : emailBody}
         placeholder={t('settings.pressure.placeholder.email_body')}
         label={t('settings.pressure.label.email_body')}
       />

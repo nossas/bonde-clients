@@ -98,6 +98,19 @@ const WidgetButton = ({ widget }: Props) => {
     linkProps = { to: `/widgets/${id}/settings` };
   }
 
+  const mobilizationLinkProps: any = {
+    onClick: () => {
+      if (process.env.REACT_APP_DOMAIN_ADMIN) {
+        storage.setAsyncItem("community", community).then(() => {
+          window.location.href = new URL(
+            `/mobilizations/${mobilization_id}/edit`,
+            process.env.REACT_APP_DOMAIN_ADMIN
+          ).href;
+        });
+      }
+    }
+  }
+
   return (
     <Panel>
       <Flex spacing margin='0 0 12px'>
@@ -106,10 +119,12 @@ const WidgetButton = ({ widget }: Props) => {
           <Icon name='Settings' size='small' />
         </Link>
       </Flex>
-      <Flex grow='1' margin='0 0 12px'>
-        <img src={image || 'https://via.placeholder.com/40'} alt={name} />
-        <Text className='break'>{name}</Text>
-      </Flex>
+      <Link {...mobilizationLinkProps}>
+        <Flex grow='1' margin='0 0 12px'>
+          <img src={image || 'https://via.placeholder.com/40'} alt={name} />
+          <Text className='break'>{name}</Text>
+        </Flex>
+      </Link>
       <Flex align='flex-end'>
         <Header.H2 style={{ marginRight: '5px' }}>{count}</Header.H2>
         <Text>{label.count}</Text>

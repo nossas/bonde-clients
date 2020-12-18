@@ -83,7 +83,11 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
           label={t('settings.pressure.label.group_label')}
           placeholder={t('settings.pressure.placeholder.group_label')}
         />
-        <SubjectBodyFields prefix={name} />
+        <SubjectBodyFields
+          prefix={name}
+          emailSubjectName='email_subject'
+          emailBodyName='email_body'
+        />
         <div css={css`
           display: flex;
           align-items: center;
