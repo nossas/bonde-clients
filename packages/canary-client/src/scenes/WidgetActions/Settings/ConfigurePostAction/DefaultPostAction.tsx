@@ -52,7 +52,7 @@ const Preview = styled.div`
 `;
 
 const DefaultPostAction = (): React.ReactElement => {
-  const { t } = useTranslation("widget");
+  const { t } = useTranslation("widgetActions");
 
   return (
     <Row>
@@ -65,12 +65,12 @@ const DefaultPostAction = (): React.ReactElement => {
       </Col>
       <Col xs={6}>
         <Preview>
-          <h3>Oba, sua pressão foi enviada!</h3>
+          <h3>{t('settings.finish.default.preview.title')}</h3>
           <img src={process.env.PUBLIC_URL + '/check-mark-image.png'} alt='Check Mark' />
-          <p>Compartilhe com sua galera para aumentarmos nosso impacto!</p>
-          <button type='button' className='fb'>Compartilhar no facebook</button>
-          <button type='button' className='tt'>Compartilhar no Twitter</button>
-          <button type='button' className='wp'>Compartilhar no Whatsapp</button>
+          <p>{t('settings.finish.default.preview.message')}</p>
+          <button type='button' className='fb'>{t('settings.finish.default.preview.facebook')}</button>
+          <button type='button' className='tt'>{t('settings.finish.default.preview.twitter')}</button>
+          <button type='button' className='wp'>{t('settings.finish.default.preview.whatsapp')}</button>
         </Preview>
       </Col>
     </Row>

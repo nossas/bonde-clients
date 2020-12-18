@@ -3,6 +3,7 @@ import { Button, Icon, InputField, Label, Link, Text, Modal } from 'bonde-compon
 import styled from 'styled-components';
 import { css } from 'styled-components/macro';
 import { FieldArray } from 'react-final-form-arrays';
+import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
 import DeleteTargetPopup from './DeleteTargetPopup';
 
@@ -30,6 +31,7 @@ type GroupFieldProps = {
 const GroupField = ({ name, group, remove }: GroupFieldProps) => {
   const [open, setOpen] = useState(!group);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const { t } = useTranslation('widgetActions');
 
   useEffect(() => {
     if (group) setOpen(false);
@@ -78,8 +80,8 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
       >
         <InputField
           name={`${name}.label`}
-          label="Nome do grupo de alvos"
-          placeholder="Ex. Rio de Janeiro"
+          label={t('settings.pressure.label.group_label')}
+          placeholder={t('settings.pressure.placeholder.group_label')}
         />
         <SubjectBodyFields prefix={name} />
         <div css={css`
@@ -99,9 +101,11 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
               setOpen(false)
             }}
           >
-            Cancelar
+            {t('settings.pressure.button.cancel')}
           </Link>
-          <Button type='button' onClick={() => setOpen(false)}>Adicionar</Button>
+          <Button type='button' onClick={() => setOpen(false)}>
+            {t('settings.pressure.button.add')}
+          </Button>
         </div>
       </div>
     );
@@ -117,13 +121,15 @@ export type GroupFormProps = {
 }
 
 const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
+  const { t } = useTranslation('widgetActions');
+
   // Render
   return (
     <>
       <InputField
         name='settings.select_label'
-        label='Nome do campo de seleção'
-        placeholder='Ex: Selecione seu estado'
+        label={t('settings.pressure.label.select_label')}
+        placeholder={t('settings.pressure.placeholder.select_label')}
       />
       <div
         css={css`
@@ -152,7 +158,7 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
           secondary
           onClick={() => mutators.push('groups', undefined)}
         >
-          {`+ ADD GRUPO DE ALVOS`}
+          {t('settings.pressure.button.addGroup')}
         </ButtonStyled>
       </div>
     </>

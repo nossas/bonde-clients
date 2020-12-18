@@ -9,6 +9,7 @@ import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import { css } from "styled-components/macro";
 import slugify from 'slugify';
+import { useTranslation } from 'react-i18next';
 import RadioField, { Radio } from '../../../../components/Radio';
 import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
@@ -62,6 +63,7 @@ type Props = {
 
 const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactElement => {
   const [upsert] = useMutation(upsertPressureTargets);
+  const { t } = useTranslation('widgetActions');
 
   return (
     <SettingsForm
@@ -89,7 +91,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
             }
             await upsert({ variables });
             updateCache({ ...widget, groups });
-            toast(<Success message='Alvos definidos com sucesso' />, { type: toast.TYPE.SUCCESS });
+            toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
           } catch (err) {
             console.error('err', { err });
             toast(err.message, { type: toast.TYPE.ERROR });
@@ -99,13 +101,12 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
     >
       {({ form }: any) => (
         <>
-          <RadioField label='Tipo de pressão' name='settings.pressure_type'>
-            <Radio value='unique'>
-              Um grupo de alvos
-            </Radio>
-            <Radio value='group'>
-              Mais de um grupo de alvos (Ex: Por estado)
-            </Radio>
+          <RadioField
+            name='settings.pressure_type'
+            label={t('settings.pressure.label.pressure_type')}
+          >
+            <Radio value='unique'>{t('settings.pressures.radio.unique')}</Radio>
+            <Radio value='group'>{t('settings.pressures.radio.group')}</Radio>
           </RadioField>
           <div
             css={css`
@@ -119,7 +120,9 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
               {({ value }: any) => (
                 <>
                   <Card padding={{ x: 50, y: 40 }}>
-                    <Header.H4 style={{ marginBottom: '15px' }}>Definir alvos</Header.H4>
+                    <Header.H4 style={{ marginBottom: '15px' }}>
+                      {t('settings.pressure.title.targets')}
+                    </Header.H4>
                     {value === 'unique'
                       ? <UniqueFormFields />
                       : <GroupFormFields form={form} />

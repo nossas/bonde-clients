@@ -23,7 +23,7 @@ const DeleteTargetPopup = ({
   onClose,
   pressureTargetId
 }: Props): React.ReactElement => {
-  const { t } = useTranslation("widget");
+  const { t } = useTranslation("widgetActions");
   const [deleteTarget] = useMutation(DELETE_PRESSURE_TARGET);
   const onSubmit = async (pressureTargetId: number) => {
     try {
@@ -32,22 +32,21 @@ const DeleteTargetPopup = ({
       remove();
       onClose();
       
-      return toast(t("pressure.target.delete.message.success"), {
+      return toast(t("settings.pressure.delete.success"), {
         type: toast.TYPE.SUCCESS,
       });
     } catch (e) {
       console.error(e);
-      return toast(t("pressure.target.delete.message.error"), {
+      return toast(t("settings.pressure.delete.error"), {
         type: toast.TYPE.ERROR,
       });
     }
   };
   return (
     <>
-      <Header.H2>Excluir o grupo?</Header.H2>
+      <Header.H2>{t('settings.pressure.delete.title')}</Header.H2>
       <Text style={{ margin: "20px 0" }}>
-        O grupo de alvos será excluído e os contatos adicionados a ele serão
-        perdidos.
+        {t('settings.pressure.delete.confirm')}
       </Text>
       <div
         css={css`
@@ -63,9 +62,11 @@ const DeleteTargetPopup = ({
           secondary
           onClick={onClose}
         >
-          Cancelar
+          {t('settings.pressure.button.cancel')}
         </Button>
-        <Button onClick={() => onSubmit(pressureTargetId)}>Excluir</Button>
+        <Button onClick={() => onSubmit(pressureTargetId)}>
+          {t('settings.pressure.button.delete')}
+        </Button>
       </div>
     </>
   );
