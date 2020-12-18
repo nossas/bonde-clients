@@ -17,7 +17,7 @@ type Props = {
 }
 
 const Home = ({ community, storage, widgets, loading }: Props): React.ReactElement => {
-  const { t } = useTranslation("widget");
+  const { t } = useTranslation("widgetActions");
 
   return (
     <Container
@@ -32,13 +32,13 @@ const Home = ({ community, storage, widgets, loading }: Props): React.ReactEleme
     >
       <>
         <section style={{ marginBottom: '15px' }}>
-          <Header.H5 uppercase>Atalhos</Header.H5>
+          <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
           <Shortcuts community={community} storage={storage} />
         </section>
         <SearchList
-          header={<Header.H5 uppercase>Ações</Header.H5>}
+          header={<Header.H5 uppercase>{t('home.actions')}</Header.H5>}
           data={widgets}
-          empty={<Header.H4 style={{ textAlign: 'center' }}>Resultado não encontrado</Header.H4>}
+          empty={<Header.H4 style={{ textAlign: 'center' }}>{t('home.searchEmpty')}</Header.H4>}
           loading={loading}
           renderLoading={<WidgetLoading />}
         >

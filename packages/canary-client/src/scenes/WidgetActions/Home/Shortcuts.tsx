@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Shortcut, Icon } from "bonde-components";
 import styled from "styled-components";
+import { useTranslation } from 'react-i18next';
 
 const Grid = styled.div`
   display: grid;
@@ -24,6 +25,8 @@ type Props = {
 }
 
 const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
+  const { t } = useTranslation('widget');
+
   return (
     <Grid>
       <Shortcut
@@ -37,7 +40,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text="Criar uma página"
+        text={t('home.shortcuts.buttons.newMobilization')}
         icon={<Icon name="Mobilization" size="default" />}
       />
       <Shortcut
@@ -51,18 +54,18 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text="Ver as mobilizações"
+        text={t('home.shortcuts.buttons.mobilizations')}
         icon={<Icon name="Bolt" size="default" />}
       />
       <Link to="/community/analytics">
         <Shortcut
-          text="Ver dados e relatórios"
+          text={t('home.shortcuts.buttons.reports')}
           icon={<Icon name="Open" size="large" />}
         />
       </Link>
       <Link to="/community/domains">
         <Shortcut
-          text="Configurar domínio"
+          text={t('home.shortcuts.buttons.domains')}
           icon={<Icon name="Cloud" size="default" />}
         />
       </Link>

@@ -60,7 +60,7 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
       <IconButton onClick={() => setOpenDeleteModal(true)}>
         <Icon name='Trash' size='small' />
       </IconButton>
-      <Modal isOpen={openDeleteModal} onClose={onClose}>
+      <Modal width='385px' isOpen={openDeleteModal} onClose={onClose}>
         <DeleteTargetPopup
           pressureTargetId={group.id}
           remove={remove}

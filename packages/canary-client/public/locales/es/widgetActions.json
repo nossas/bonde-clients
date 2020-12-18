@@ -1,0 +1,102 @@
+{
+  "titles": {
+    "home": "Comunidade"
+  },
+  "navigation": {
+    "home": "Início"
+  },
+  "pressure": {
+    "target": {
+      "delete": {
+        "error": "Houve um erro ao deletar o alvo",
+        "success": "Alvo eliminado."
+      }
+    }
+  },
+  "empty": "Nada por aqui...",
+  "home": {
+    "shortcuts": {
+      "title": "Atalhos",
+      "buttons": {
+        "newMobilization": "Criar uma página",
+        "mobilizations": "Ver as mobilizações",
+        "reports": "Ver dados e relatórios",
+        "domains": "Configurar domínio"
+      }
+    },
+    "actions": "Ações",
+    "searchEmpty": "Resultado não encontrado",
+  },
+  "settings": {
+    "emtpy": "Nenhuma widget encontrado",
+    "header": "Configurar {{ label }}",
+    "navigation": {
+      "edit": "Editar",
+      "settings": "Configurações",
+      "adjusts": "Ajustes",
+      "autofire": "Mensagem de Agradecimento",
+      "finish": "Pós-Ação"
+    },
+    "defaultForm": {
+      "error": "Houve um erro ao salvar o formulário",
+      "success": "Successo ao salvar as configurações!",
+      "submit": "Salvar"
+    },
+    "adjusts": {
+      "fields": {
+        "call_to_action": {
+          "label": "Título do formulário",
+          "placeholder": "Ex: Preencha o formulário abaixo para assinar o formulário"
+        },
+        "button_text": {
+          "label": "Botão",
+          "placeholder": "Defina o texto do botão de confirmação do formulário"
+        },
+        "count_text": {
+          "label": "Contador",
+          "placeholder": "Defina o valor que ficará ao lado do número de pessoas que agiram",
+          "tooltip": "O contador será mostrado se existir um texto"
+        },
+        "main_color": {
+          "label": "Cor padrão",
+          "tooltip": "Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE"
+        }
+      }
+    },
+    "finish": {
+      "preview": "Pré-Visualização",
+      "title": "Tipo de mensagem",
+      "radio": {
+        "share": "Padrão",
+        "custom": "Customizar"
+      },
+      "default": {
+        "whatsapp": {
+          "label": "Texto para o Whatsapp",
+          "placeholder": "Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)"
+        }
+      }
+    },
+    "autofire": {
+      "title": "Mensagem de Agradecimento",
+      "subtitle": "Configure um e-mail de agradecimento que será enviado após a ação ser finalizada.",
+      "validators": {
+        "required": "Campo Obrigatório",
+        "isEmail": "Email inválido",
+        "noSpecialCharacter": "Não utilize números ou caractéres especiais"
+      },
+      "label": {
+        "sendersName": "Nome do remetente",
+        "sendersEmail": "Email do remetente",
+        "emailSubject": "Assunto do email",
+        "emailBody": "Corpo do email"
+      },
+      "placeholder": {
+        "sendersName": "Adicione o nome do remetente",
+        "sendersEmail": "Adicione o email do remetente",
+        "emailSubject": "Adicione o assunto do email",
+        "emailBody": "Adicione o corpo do email"
+      }
+    }
+  }
+}

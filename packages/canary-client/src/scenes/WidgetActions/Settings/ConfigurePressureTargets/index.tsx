@@ -125,7 +125,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                       : <GroupFormFields form={form} />
                     }
                   </Card>
-                  {value === 'unique' && <UniqueFormExplainCard />}     
+                  <UniqueFormExplainCard />
                 </>
               )}
             </SpyField>

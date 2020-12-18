@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { Empty } from "bonde-components";
 import { useSession } from "bonde-core-tools";
+import { useTranslation } from 'react-i18next';
 import FetchWidgets, { RenderProps, WidgetLoading } from './FetchWidgets';
 // Subroutes
 import Home from './Home';
@@ -13,6 +14,7 @@ type Props = {
 
 const WidgetsActionsPage = ({ match }: Props): React.ReactElement => {
   const { community, storage } = useSession();
+  const { t } = useTranslation('widgetActions');
 
   return community ? (
     <FetchWidgets communityId={community?.id || 0}>
@@ -36,7 +38,7 @@ const WidgetsActionsPage = ({ match }: Props): React.ReactElement => {
       )}
     </FetchWidgets>
   ) : (
-    <Empty message="Nada por aqui..." />
+    <Empty message={t('empty')} />
   );
 };
 

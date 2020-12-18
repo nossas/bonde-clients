@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, ConnectedForm, toast, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { css } from 'styled-components/macro';
+import { useTranslation } from 'react-i18next';
 import { Widget } from '../FetchWidgets';
 
 const UpdateWidgetGQL = gql`
@@ -34,16 +35,17 @@ type Props = {
 
 const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connectedFormProps }: Props) => {
   const [save] = useMutation(UpdateWidgetGQL);
+  const { t } = useTranslation('widgetActions');
 
   const onSubmit = async ({ primaryKey, settings, ...values }: SubmitProps) => {
     try {
       const result = await save({ variables: { primaryKey, settings } });
 
       if (!(result.data.update_widgets.affected_rows === 1)) {
-        throw new Error("Houve um erro ao salvar o formulário");
+        throw new Error(t('settings.defaultForm.error'));
       }
 
-      toast(<Success message="Sucesso ao salvar as configurações!" />, {
+      toast(<Success message={t('settings.defaultForm.success')} />, {
         type: toast.TYPE.SUCCESS,
       });
 
@@ -51,7 +53,7 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
 
     } catch (e) {
       console.log(e);
-      return toast("Houve um erro ao salvar o formulário", {
+      return toast(t('settings.defaultForm.error'), {
         type: toast.TYPE.ERROR,
       });
     }
@@ -77,7 +79,7 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
               width: 150px;
             `}
           >
-            <Button type='submit' disabled={submitting || pristine}>Salvar</Button>
+            <Button type='submit' disabled={submitting || pristine}>{t('settings.defaultForm.submit')}</Button>
           </div>
           {children({ submitting, pristine, ...formProps })}
         </div>

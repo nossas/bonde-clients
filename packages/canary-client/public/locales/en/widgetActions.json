@@ -13,12 +13,55 @@
       }
     }
   },
+  "empty": "Nada por aqui...",
+  "home": {
+    "shortcuts": {
+      "title": "Atalhos",
+      "buttons": {
+        "newMobilization": "Criar uma página",
+        "mobilizations": "Ver as mobilizações",
+        "reports": "Ver dados e relatórios",
+        "domains": "Configurar domínio"
+      }
+    },
+    "actions": "Ações",
+    "searchEmpty": "Resultado não encontrado",
+  },
   "settings": {
+    "emtpy": "Nenhuma widget encontrado",
+    "header": "Configurar {{ label }}",
     "navigation": {
+      "edit": "Editar",
       "settings": "Configurações",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
       "finish": "Pós-Ação"
+    },
+    "defaultForm": {
+      "error": "Houve um erro ao salvar o formulário",
+      "success": "Successo ao salvar as configurações!",
+      "submit": "Salvar"
+    },
+    "adjusts": {
+      "fields": {
+        "call_to_action": {
+          "label": "Título do formulário",
+          "placeholder": "Ex: Preencha o formulário abaixo para assinar o formulário"
+        },
+        "button_text": {
+          "label": "Botão",
+          "placeholder": "Defina o texto do botão de confirmação do formulário"
+        },
+        "count_text": {
+          "label": "Contador",
+          "placeholder": "Defina o valor que ficará ao lado do número de pessoas que agiram",
+          "tooltip": "O contador será mostrado se existir um texto"
+        },
+        "main_color": {
+          "label": "Cor padrão",
+          "tooltip": "Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE"
+        }
+      }
     },
     "finish": {
       "preview": "Pré-Visualização",

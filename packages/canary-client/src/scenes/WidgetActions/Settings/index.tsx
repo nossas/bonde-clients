@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tab, Header } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { Row, Col } from "react-grid-system";
+import { useTranslation } from 'react-i18next';
 import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
@@ -18,11 +19,12 @@ type Props = {
 const Settings = ({ widgets }: Props) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
+  const { t } = useTranslation('widget');
 
   const { widgetId }: any = useParams();
   const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];
 
-  if (!widget) return <Header.H2>Nenhum widget encontrado</Header.H2>;
+  if (!widget) return <Header.H2>{t('settings.empty')}</Header.H2>;
 
   const label = Labels.get(widget.kind);
 
@@ -35,19 +37,19 @@ const Settings = ({ widgets }: Props) => {
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
         <>
-          <Tab onClick={() => console.log("redirect to edit")}>Editar</Tab>
+          <Tab onClick={() => console.log("redirect to edit")}>{t('settings.navigation.edit')}</Tab>
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
           >
-            Configurações
+            {t('settings.navigation.settings')}
           </Tab>
         </>
       )}
     >
       <Row style={{ marginBottom: "20px" }}>
         <Col xs={12}>
-          <Header.H3>{`Configurar ${label.title.toLowerCase()}`}</Header.H3>
+          <Header.H3>{t('settings.header', { label: label.title.toLowerCase() })}</Header.H3>
         </Col>
       </Row>
       <Row>
