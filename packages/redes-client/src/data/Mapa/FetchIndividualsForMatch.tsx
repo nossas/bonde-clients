@@ -83,8 +83,6 @@ const RECIPIENTS_FOR_MATCH = gql`
         individual: {
           organization_id: $recipientOrganizationId
           condition: { _eq: "inscrita" }
-          latitude: { _is_null: false }
-          longitude: { _is_null: false }
           email: { _is_null: false }
           name: { _is_null: false }
         }
