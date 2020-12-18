@@ -5,14 +5,6 @@
   "navigation": {
     "home": "Início"
   },
-  "pressure": {
-    "target": {
-      "delete": {
-        "error": "Houve um erro ao deletar o alvo",
-        "success": "Alvo eliminado."
-      }
-    }
-  },
   "empty": "Nada por aqui...",
   "home": {
     "shortcuts": {
@@ -120,12 +112,28 @@
         "pressure_type": "Tipo de pressão",
         "targets": "Nome e e-mail dos alvos",
         "email_subject": "Assunto do e-mail para os alvos",
-        "email_body": "Corpo do e-mail para os alvos"
+        "email_body": "Corpo do e-mail para os alvos",
+        "group_label": "Nome do grupo de alvos",
+        "select_label": "Nome do campo de seleção"
       },
       "placeholder": {
         "targets": "Nome do alvo 1 <nome1@alvo.org>;Nome do alvo 2 <nome2@alvo.org>",
         "email_subject": "Escreva um assunto",
-        "email_body": "Escreva aqui o email..."
+        "email_body": "Escreva aqui o email...",
+        "group_label": "Ex. Rio de Janeiro",
+        "select_label": "Ex: Selecione seu estado"
+      },
+      "button": {
+        "cancel": "Cancelar",
+        "add": "Adicionar",
+        "addGroup": "+ ADD GRUPO DE ALVOS",
+        "delete": "Excluir"
+      },
+      "delete": {
+        "success": "Pronto! Grupo excluído.",
+        "error": "Houve um problema ao tentar excluir grupo!",
+        "title": "Excluir o grupo?",
+        "confirm": "O grupo de alvos será excluído e os contatos adicionados a ele serão perdidos."
       }
     }
   }

@@ -7,7 +7,7 @@ type SubjectBodyFieldsProps = {
 }
 
 const targetsFormart = (value: any) => {
-  return value ? value.join(';') : value;
+  return value && typeof value !== 'string' ? value.join(';') : value;
 }
 
 const targetsParse = (value: any) => {

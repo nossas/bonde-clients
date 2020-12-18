@@ -105,8 +105,8 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
             name='settings.pressure_type'
             label={t('settings.pressure.label.pressure_type')}
           >
-            <Radio value='unique'>{t('settings.pressures.radio.unique')}</Radio>
-            <Radio value='group'>{t('settings.pressures.radio.group')}</Radio>
+            <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
+            <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
           </RadioField>
           <div
             css={css`

@@ -23,7 +23,7 @@ export const UniqueFormExplainCard = () => (
 )
 
 const UniqueForm = () => (
-  <SubjectBodyFields />
+  <SubjectBodyFields prefix='settings' />
 );
 
 export default UniqueForm;
