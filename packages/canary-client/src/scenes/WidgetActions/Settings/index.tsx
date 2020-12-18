@@ -19,7 +19,7 @@ type Props = {
 const Settings = ({ widgets }: Props) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
-  const { t } = useTranslation('widget');
+  const { t } = useTranslation('widgetActions');
 
   const { widgetId }: any = useParams();
   const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];

@@ -21,7 +21,7 @@ const Tabs = styled.div`
 `;
 
 const Navigation = () => {
-  const { t } = useTranslation("widget");
+  const { t } = useTranslation("widgetActions");
 
   return (
     <TabRoute>

@@ -25,7 +25,7 @@
       }
     },
     "actions": "Ações",
-    "searchEmpty": "Resultado não encontrado",
+    "searchEmpty": "Resultado não encontrado"
   },
   "settings": {
     "emtpy": "Nenhuma widget encontrado",
@@ -63,20 +63,6 @@
         }
       }
     },
-    "finish": {
-      "preview": "Pré-Visualização",
-      "title": "Tipo de mensagem",
-      "radio": {
-        "share": "Padrão",
-        "custom": "Customizar"
-      },
-      "default": {
-        "whatsapp": {
-          "label": "Texto para o Whatsapp",
-          "placeholder": "Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)"
-        }
-      }
-    },
     "autofire": {
       "title": "Mensagem de Agradecimento",
       "subtitle": "Configure um e-mail de agradecimento que será enviado após a ação ser finalizada.",
@@ -96,6 +82,20 @@
         "sendersEmail": "Adicione o email do remetente",
         "emailSubject": "Adicione o assunto do email",
         "emailBody": "Adicione o corpo do email"
+      }
+    },
+    "finish": {
+      "preview": "Pré-Visualização",
+      "title": "Tipo de mensagem",
+      "radio": {
+        "share": "Padrão",
+        "custom": "Customizar"
+      },
+      "default": {
+        "whatsapp": {
+          "label": "Texto para o Whatsapp",
+          "placeholder": "Você pode deixar pronto aqui um textinho padrão. Assim, quando alguém compartilhar sua página pelo WhatsApp no pós-ação, já vai ter uma sugestão do que falar :)"
+        }
       }
     }
   }

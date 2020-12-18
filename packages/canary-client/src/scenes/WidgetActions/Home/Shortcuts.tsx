@@ -25,7 +25,7 @@ type Props = {
 }
 
 const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
-  const { t } = useTranslation('widget');
+  const { t } = useTranslation('widgetActions');
 
   return (
     <Grid>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import { Header } from 'bonde-components';
 import { SlateEditor, SlateToolbar, SlateContent } from "slate-editor";
 import { BoldPlugin, BoldButton } from "@slate-editor/bold-plugin";
 import { ItalicPlugin, ItalicButton } from "@slate-editor/italic-plugin";
@@ -14,15 +15,32 @@ import { ImagePlugin, ImageButton } from "@slate-editor/image-plugin";
 import { ColorPlugin, ColorButton, ColorStateModel } from "@slate-editor/color-plugin";
 import { GridPlugin, GridButtonBar } from "@slate-editor/grid-plugin";
 import { EmbedPlugin, EmbedButton } from "@slate-editor/embed-plugin";
-import { StateLoggerButton } from '@slate-editor/state-logger'
-import { ToggleReadOnlyButton } from '@slate-editor/toggle-readonly'
 
 const Styles = styled.div`
   .editor--root {
-    width: 65%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 30px;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 45px;
+    margin-bottom: 15px;
+
+    h5:first-child {
+      min-width: 265px;
+    }
   }
 
   .editor--content {
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
     border: 1px solid #ccc;
     padding: .2rem;
 
@@ -32,7 +50,17 @@ const Styles = styled.div`
   }
 
   .editor--toolbar {
-    background-color: #0275d8;
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    &.buttons {
+      grid-template-columns: repeat(3,45px) 135px;
+    }
+    &.inputs {
+      grid-template-columns: 1fr auto;
+      grid-column-gap: 15px;
+    }
   }
 
   .toolbar--footer > * {
@@ -41,8 +69,7 @@ const Styles = styled.div`
 
   .toolbar--button {
     border-radius: 0;
-    color: #fff;
-    background-color: #0074d9;
+    color: #000;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
@@ -50,37 +77,44 @@ const Styles = styled.div`
     line-height: 1.125rem;
     padding: .5rem 1rem;
     margin: 0;
+    width: 45px;
     height: 38px;
-    border: 1px solid transparent;
-    border-right: 1px solid #fff;
     vertical-align: middle;
+
+    &:hover {
+      border: 1px solid #000;
+    }
   }
+
+  .slate-alignment-plugin--button-bar,
+  .slate-list-plugin--button-bar,
+  .slate-grid-plugin--button-bar {
+    display: flex;
+  }
+
   .toolbar--dropdown {
     border-radius: 0;
-    width: 25%;
-    display: inline-block;
     position: relative;
     background-color: white;
-    color: #0275d8;
+    color: #000;
     margin: 0;
     padding: 0 10px 0 15px;
     height: 38px;
-    border: 3px solid #0275d8;
+    border-bottom: 1px solid #ee0099;
 
     &:focus {
       outline: none;
     }
   }
   .toolbar--input {
-    display: inline-block;
     height: 38px;
     padding: 0px 10px 0px 15px;
     position: relative;
     background-color: white;
     border-radius: 0;
     margin: 0;
-    color: #0275d8;
-    border: 3px solid #0275d8;
+    color: #000;
+    border-bottom: 1px solid #ee0099;
     
     &:focus {
       outline: none;
@@ -123,47 +157,46 @@ type RichEditorProps = {
 
 const RichEditor = ({ value, onChange }: RichEditorProps) => (
   <Styles>
+    <div className='header'>
+      <Header.H5 uppercase>Customização</Header.H5>
+      <Header.H5 uppercase>Preview</Header.H5>
+    </div>
     <SlateEditor
       plugins={plugins}
       initialState={value}
       onChange={onChange}
     >
       {/* Toolbar */}
-      <SlateToolbar>
+      <SlateToolbar className='buttons'>
         <BoldButton className={classNames.button} />
         <ItalicButton className={classNames.button} />
         <UnderlineButton className={classNames.button} />
-        <StrikethroughButton className={classNames.button} />
         <AlignmentButtonBar className={classNames.button} />
+        <StrikethroughButton className={classNames.button} />
         <LinkButton className={classNames.button} />
-        <ListButtonBar className={classNames.button} />
-      </SlateToolbar>
-      {/* Toolbar */}
-      <SlateToolbar>
-        <FontFamilyDropdown className={classNames.dropdown} />
-        <FontSizeInput
-          {...fontSizePluginOptions}
-          className={classNames.input}
-        />
         <ImageButton
           className={classNames.button}
           signingUrl={process.env.REACT_APP_UPLOADS_URL}
         />
+        <ListButtonBar className={classNames.button} />
         <ColorButton
           className={classNames.button}
           initialState={colorPluginOptions}
           pickerDefaultPosition={{ x: -520, y: 17 }}
         />
-        <GridButtonBar className={classNames.button} />
         <EmbedButton className={classNames.button} />
+        <GridButtonBar className={classNames.button} />
+      </SlateToolbar>
+      {/* Toolbar */}
+      <SlateToolbar className='inputs'>
+        <FontFamilyDropdown className={classNames.dropdown} />
+        <FontSizeInput
+          {...fontSizePluginOptions}
+          className={classNames.input}
+        />
       </SlateToolbar>
       {/* Content */}
       <SlateContent />
-      {/* Toolbar */}
-      <SlateToolbar className='toolbar--footer'>
-        <StateLoggerButton className={classNames.button} />
-        <ToggleReadOnlyButton className={classNames.button} />
-      </SlateToolbar>
     </SlateEditor>
   </Styles>
 );

@@ -16,16 +16,10 @@ type Props = {
   widget: Widget;
 };
 
-// type FormData = {
-//   sender_name: string;
-//   sender_email: string;
-//   email_subject: string;
-//   email_body: string;
-// };
 const { required, composeValidators, isEmail } = Validators;
 
 const AutofireForm = ({ widget }: Props): React.ReactElement => {
-  const { t } = useTranslation("widget");
+  const { t } = useTranslation("widgetActions");
 
   return (
     <SettingsForm
