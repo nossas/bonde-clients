@@ -11,8 +11,8 @@ const Flex = styled.div`
 const HeaderInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
+  align-items: flex-end;
+  margin-bottom: 18px;
 `;
 
 type RenderProps = {
@@ -21,13 +21,14 @@ type RenderProps = {
 
 type Props = {
   header: any
+  empty: any
   data: any[]
   loading?: boolean
   renderLoading?: any
   children: (props: RenderProps) => any
 }
 
-const SearchList = ({ header, children, data, loading, renderLoading }: Props) => {
+const SearchList = ({ header, children, data, empty, loading, renderLoading }: Props) => {
   const [datalist, setDatalist] = useState(data);
   const isLoading = typeof loading !== 'undefined' && loading && !!renderLoading;
 
@@ -46,9 +47,11 @@ const SearchList = ({ header, children, data, loading, renderLoading }: Props) =
           onChange={(result: any[]) => setDatalist(result)}
         />
       </HeaderInfo>
-      <Flex>
-        {isLoading ? renderLoading : children({ result: datalist })}
-      </Flex>
+      {isLoading ? renderLoading : datalist.length > 0 ? (
+        <Flex>
+          {children({ result: datalist })}
+        </Flex>
+      ) : empty}
     </>
   );
 }
