@@ -94,7 +94,7 @@ export const createCustomWhatsappLink = (
     volunteer,
     recipient,
   }: {
-    volunteer: Individual;
+    volunteer: Omit<Individual, "userStatus" | "ticketId" | "externalId">;
     recipient: Individual;
   },
   agent: string
@@ -119,11 +119,11 @@ export const createCustomWhatsappLink = (
 
     return {
       volunteer: whatsappLink(
-        volunteer.whatsapp || volunteer.phone,
+        volunteer.whatsapp || volunteer.phone || "0",
         volunteerText
       ),
       recipient: whatsappLink(
-        recipient.whatsapp || recipient.phone,
+        recipient.whatsapp || recipient.phone || "0",
         recipientText
       ),
     };
@@ -304,9 +304,14 @@ export const calcDistance = (pointA: number[], pointB: number[]): number | undef
     typeof pointA[0] !== "number" ||
     typeof pointA[1] !== "number" ||
     typeof pointB[0] !== "number" ||
-    typeof pointB[1] !== "number"
-  )
+    typeof pointB[1] !== "number" ||
+    isNaN(pointA[0]) ||
+    isNaN(pointA[1]) ||
+    isNaN(pointB[0]) ||
+    isNaN(pointB[1])
+  ) {
     return undefined;
+  }
   const a = turf.point(pointA);
   const b = turf.point(pointB);
 
