@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header, Text, Icon } from 'bonde-components';
+import { useSession } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Widget } from './FetchWidgets';
@@ -61,11 +62,13 @@ type Props = {
 }
 
 const WidgetButton = ({ widget }: Props) => {
+  const { storage, community } = useSession();
   const {
     id,
     kind,
     block: {
       mobilization: {
+        id: mobilization_id,
         image,
         name
       }
@@ -78,12 +81,28 @@ const WidgetButton = ({ widget }: Props) => {
   } = widget;
 
   const label = Labels.get(kind);
+  let linkProps: any = {
+    onClick: () => {
+      if (process.env.REACT_APP_DOMAIN_ADMIN) {
+        storage.setAsyncItem("community", community).then(() => {
+          window.location.href = new URL(
+            `/mobilizations/${mobilization_id}/widgets/${id}/${kind}`,
+            process.env.REACT_APP_DOMAIN_ADMIN
+          ).href;
+        });
+      }
+    }
+  };
+
+  if (kind === 'pressure') {
+    linkProps = { to: `/widgets/${id}/settings` };
+  }
 
   return (
     <Panel>
       <Flex spacing margin='0 0 12px'>
         <Text bold uppercase>{label.title}</Text>
-        <Link to={`/widgets/${id}/settings`}>
+        <Link {...linkProps}>
           <Icon name='Settings' size='small' />
         </Link>
       </Flex>

@@ -3,6 +3,7 @@ import { Tab, Header } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { Row, Col } from "react-grid-system";
 import { useTranslation } from 'react-i18next';
+import { useSession } from 'bonde-core-tools';
 import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
@@ -20,6 +21,7 @@ const Settings = ({ widgets }: Props) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
   const { t } = useTranslation('widgetActions');
+  const { community, storage } = useSession();
 
   const { widgetId }: any = useParams();
   const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];
@@ -37,7 +39,20 @@ const Settings = ({ widgets }: Props) => {
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
         <>
-          <Tab onClick={() => console.log("redirect to edit")}>{t('settings.navigation.edit')}</Tab>
+          <Tab
+            onClick={() => {
+              if (process.env.REACT_APP_DOMAIN_ADMIN) {
+                storage.setAsyncItem("community", community).then(() => {
+                  window.location.href = new URL(
+                    `/mobilizations/${widget.block.mobilization.id}/edit`,
+                    process.env.REACT_APP_DOMAIN_ADMIN
+                  ).href;
+                });
+              }
+            }}
+          >
+            {t('settings.navigation.edit')}
+          </Tab>
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
