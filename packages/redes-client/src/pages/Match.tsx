@@ -38,7 +38,7 @@ export default function Match({
   const [createRelationship, { loading }] = useMutation(CreateRelationship);
   const { user, community } = useSession()
   const [isOpen, setModal] = useState<boolean>(false);
-  const [, isVolunteerSelected] = useSelectedGroup();
+  const [selectedGroup, isVolunteerSelected] = useSelectedGroup();
   const [state, dispatch] = useFilter();
   const { state: linkState } = useLocation();
   const { goBack } = useHistory();
@@ -53,11 +53,14 @@ export default function Match({
       value: {
         [isVolunteerSelected
           ? "volunteer"
-          : "recipient"]: linkState as Individual,
+          : "recipient"]: {
+            ...linkState as Individual,
+            group: selectedGroup
+          },
       },
     });
     dispatch({ type: "rows", value: 30 });
-  }, [dispatch, isVolunteerSelected, linkState]);
+  }, [dispatch, isVolunteerSelected, linkState, selectedGroup]);
 
   return (
     <>

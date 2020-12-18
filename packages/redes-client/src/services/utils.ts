@@ -3,6 +3,7 @@ import {
   Groups,
   Individual,
   MapaIndividualTicket,
+  Group,
 } from "../types";
 import * as turf from "@turf/turf";
 
@@ -261,6 +262,18 @@ export const getVolunteerOrganizationId = (
   return undefined;
 };
 
+export const getVolunteerGroup = (
+  groups: Group[],
+  organizationId?: number
+): Group | undefined => {
+  if (zendeskOrganizations["lawyer"] === organizationId) {
+    return groups.find((group) => group.name === "Advogadas");
+  } else if (zendeskOrganizations["therapist"] === organizationId) {
+    return groups.find((group) => group.name === "Psicólogas");
+  }
+  return undefined;
+};
+
 export const getMatchGroup = (
   groups: Groups,
   individual: Individual
@@ -297,9 +310,12 @@ export const stripIndividualFromData = (
 type Coordinates = {
   latitude: string;
   longitude: string;
-}
+};
 
-export const calcDistance = (pointA: number[], pointB: number[]): number | undefined => {
+export const calcDistance = (
+  pointA: number[],
+  pointB: number[]
+): number | undefined => {
   if (
     typeof pointA[0] !== "number" ||
     typeof pointA[1] !== "number" ||
@@ -318,20 +334,34 @@ export const calcDistance = (pointA: number[], pointB: number[]): number | undef
   return Number(turf.distance(a, b));
 };
 
-export const addDistance = (coordinates: Coordinates, data?: Individual[]): any => data 
-  ? data.map((i: any) => {
-      const pointA = [
-        Number(coordinates.longitude),
-        Number(coordinates.latitude),
-      ];
-      const pointB = [
-        Number(i.coordinates.longitude),
-        Number(i.coordinates.latitude),
-      ];
-      const distance = calcDistance(pointA, pointB);
-      return {
-        ...i,
-        distance,
-      };
-  }).sort((a: any, b: any) => Number(a.distance) - Number(b.distance))
-  : []
+export const addDistance = (
+  coordinates: Coordinates,
+  data?: Individual[]
+): any =>
+  data
+    ? data
+        .map((i: any) => {
+          const pointA = [
+            Number(coordinates.longitude),
+            Number(coordinates.latitude),
+          ];
+          const pointB = [
+            Number(i.coordinates.longitude),
+            Number(i.coordinates.latitude),
+          ];
+          const distance = calcDistance(pointA, pointB);
+          return {
+            ...i,
+            distance,
+          };
+        })
+        .sort((a: any, b: any) => Number(a.distance) - Number(b.distance))
+    : [];
+
+export const addGroup = (data: Individual[], group?: Group): Individual[] =>
+  data.map((i) => {
+    return {
+      ...i,
+      group: group,
+    };
+  });
