@@ -86,7 +86,7 @@ const WidgetButton = ({ widget }: Props) => {
       if (process.env.REACT_APP_DOMAIN_ADMIN) {
         storage.setAsyncItem("community", community).then(() => {
           window.location.href = new URL(
-            `/mobilizations/${mobilization_id}/widgets/${id}/${kind}`,
+            `/mobilizations/${mobilization_id}/widgets/${id}/${kind.replace('-phone', '')}`,
             process.env.REACT_APP_DOMAIN_ADMIN
           ).href;
         });
