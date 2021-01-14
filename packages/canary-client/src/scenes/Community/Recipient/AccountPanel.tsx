@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
-import { InputField, Header, Text, Validators } from 'bonde-components';
+import { InputField, Header, Validators } from 'bonde-components';
 import SelectField from '../../../components/SelectField';
 import { Section } from '../../../components/Panel';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
@@ -16,11 +16,6 @@ const AccountPanel: React.FC = () => {
   return (
     <Section>
       <Header.H4>{t('recipient.form.titles.account')}</Header.H4>
-      <Row>
-        <Col xs={12} md={6} style={{ marginBottom: '15px' }}>
-          <Text>Insira os dados da sua conta bancária para começar a receber doações pela ferramenta de crowdfunding.</Text>
-        </Col>
-      </Row>
       <FieldPrefix prefix='community.recipient.bank_account'>
         <Row>
           <Col xs={12} sm={6}>
