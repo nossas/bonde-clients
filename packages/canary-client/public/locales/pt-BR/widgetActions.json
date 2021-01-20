@@ -103,7 +103,9 @@
       },
       "radio": {
         "unique": "Um grupo de alvos",
-        "group": "Mais de um grupo de alvos (Ex: Por estado)"
+        "group": "Mais de um grupo de alvos (Ex: Por estado)",
+        "yes": "Sim",
+        "no": "Não"
       },
       "title": {
         "targets": "Definir alvos"
@@ -114,7 +116,8 @@
         "email_subject": "Assunto do e-mail para os alvos",
         "email_body": "Corpo do e-mail para os alvos",
         "group_label": "Nome do grupo de alvos",
-        "select_label": "Nome do campo de seleção"
+        "select_label": "Nome do campo de seleção",
+        "disable_edit_field": "Desabilitar edição de assunto e corpo do email?"
       },
       "placeholder": {
         "targets": "Nome do alvo 1 <nome1@alvo.org>;Nome do alvo 2 <nome2@alvo.org>",

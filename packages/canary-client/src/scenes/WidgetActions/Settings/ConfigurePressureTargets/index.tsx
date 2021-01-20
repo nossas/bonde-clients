@@ -102,6 +102,13 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
       {({ form }: any) => (
         <>
           <RadioField
+            name='settings.disable_edit_field'
+            label={t('settings.pressure.label.disable_edit_field')}
+          >
+            <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
+            <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
+          </RadioField>
+          <RadioField
             name='settings.pressure_type'
             label={t('settings.pressure.label.pressure_type')}
           >
