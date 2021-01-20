@@ -76,7 +76,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
         groups: widget.groups
       }}
       mutators={{...arrayMutators}}
-      afterSubmit={async ({ groups }: any) => {
+      afterSubmit={async ({ groups, settings }: any) => {
         if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
           try {
             const variables = {
@@ -90,12 +90,14 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
               }))
             }
             await upsert({ variables });
-            updateCache({ ...widget, groups });
+            updateCache({ ...widget, settings, groups });
             toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
           } catch (err) {
             console.error('err', { err });
             toast(err.message, { type: toast.TYPE.ERROR });
           }
+        } else {
+          updateCache({ ...widget, settings });
         }
       }}
     >

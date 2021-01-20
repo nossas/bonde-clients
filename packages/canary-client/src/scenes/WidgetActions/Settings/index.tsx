@@ -31,6 +31,7 @@ const Settings = ({ widgets }: Props) => {
   const label = Labels.get(widget.kind);
 
   const updateCache = (updated: Widget) => {
+
     setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? updated : w));
   }
 
