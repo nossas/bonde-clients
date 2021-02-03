@@ -10,7 +10,7 @@ import {
 import { Container, Row, Col, Visible } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
-import Panel, { Section } from '../Panel';
+import Panel, { Section } from '../../../components/Panel';
 import MailchimpIcon from './MailchimpIcon';
 
 const MailchimpPanel = () => {

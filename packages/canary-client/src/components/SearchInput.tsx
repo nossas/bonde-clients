@@ -18,6 +18,12 @@ const InputAddon = styled.div`
   input {
     padding-right: 20px;
   }
+
+  svg {
+    width: calc(0.75*20px);
+    height: calc(0.75*15px);
+    margin-top: 3px;
+  }
 `;
 
 type Props = {
@@ -27,6 +33,12 @@ type Props = {
   onChange: (data: any[]) => void
 }
 
+const getProp = (obj: any, prop: string) => {
+  return prop.split('.').reduce((r, e) => {
+    return r[e];
+  }, obj);
+};
+
 const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +47,8 @@ const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
   const searching = (c: any) => {
     const search = (inputRef as any).current.value;
     if (search) {
-      return normalize(c[field]).indexOf(normalize(search)) !== -1;
+
+      return normalize(getProp(c, field)).indexOf(normalize(search)) !== -1;
     }
     return true;
   }
@@ -53,7 +66,7 @@ const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
           ref={inputRef}
           placeholder={placeholder}
         />
-        <Button dark type='submit'><Icon name='Search' size='small' /></Button>
+        <Button dark type='submit'><Icon name='Search' size='small' color='#c7c7c7 !important' /></Button>
       </InputAddon>
     </form>
   );

@@ -18,9 +18,12 @@ import { ScreenClassProvider } from 'react-grid-system';
 import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
 import SuperuserPage from './scenes/Superuser';
+import WidgetsActionsPage from './scenes/WidgetActions';
 import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as types from "styled-components/cssprop";
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -102,6 +105,7 @@ const PageRouting = () => {
           <Route exact path='/' component={HomePage} />
           <Route path='/community' component={CommunityPage} />
           <RouteIsAdmin path='/superuser' component={SuperuserPage} />
+          <Route path='/widgets' component={WidgetsActionsPage} />
           <Redirect from='/admin' to='/' />
           <Route component={NotFound} />
         </Switch>

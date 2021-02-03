@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { Success, Button, Header, Text } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 import AccountPanel from './AccountPanel';
 import TransferPanel from './TransferPanel';
 import CommunityForm from '../BaseForm';

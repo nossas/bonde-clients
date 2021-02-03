@@ -245,6 +245,7 @@
     "settings": "Información",
     "mobilizers": "Movilizadores",
     "integrations": "Integraciones",
-    "recipient": "Pagos"
+    "recipient": "Pagos",
+    "domains": "Dominio"
   }
 }
