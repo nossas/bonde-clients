@@ -3,6 +3,7 @@ import {
   Groups,
   Individual,
   MapaIndividualTicket,
+  Group,
 } from "../types";
 import * as turf from "@turf/turf";
 
@@ -94,7 +95,7 @@ export const createCustomWhatsappLink = (
     volunteer,
     recipient,
   }: {
-    volunteer: Individual;
+    volunteer: Omit<Individual, "userStatus" | "ticketId" | "externalId">;
     recipient: Individual;
   },
   agent: string
@@ -119,11 +120,11 @@ export const createCustomWhatsappLink = (
 
     return {
       volunteer: whatsappLink(
-        volunteer.whatsapp || volunteer.phone,
+        volunteer.whatsapp || volunteer.phone || "0",
         volunteerText
       ),
       recipient: whatsappLink(
-        recipient.whatsapp || recipient.phone,
+        recipient.whatsapp || recipient.phone || "0",
         recipientText
       ),
     };
@@ -261,6 +262,18 @@ export const getVolunteerOrganizationId = (
   return undefined;
 };
 
+export const getVolunteerGroup = (
+  groups: Group[],
+  organizationId?: number
+): Group | undefined => {
+  if (zendeskOrganizations["lawyer"] === organizationId) {
+    return groups.find((group) => group.name === "Advogadas");
+  } else if (zendeskOrganizations["therapist"] === organizationId) {
+    return groups.find((group) => group.name === "Psicólogas");
+  }
+  return undefined;
+};
+
 export const getMatchGroup = (
   groups: Groups,
   individual: Individual
@@ -297,36 +310,58 @@ export const stripIndividualFromData = (
 type Coordinates = {
   latitude: string;
   longitude: string;
-}
+};
 
-export const calcDistance = (pointA: number[], pointB: number[]): number | undefined => {
+export const calcDistance = (
+  pointA: number[],
+  pointB: number[]
+): number | undefined => {
   if (
     typeof pointA[0] !== "number" ||
     typeof pointA[1] !== "number" ||
     typeof pointB[0] !== "number" ||
-    typeof pointB[1] !== "number"
-  )
+    typeof pointB[1] !== "number" ||
+    isNaN(pointA[0]) ||
+    isNaN(pointA[1]) ||
+    isNaN(pointB[0]) ||
+    isNaN(pointB[1])
+  ) {
     return undefined;
+  }
   const a = turf.point(pointA);
   const b = turf.point(pointB);
 
   return Number(turf.distance(a, b));
 };
 
-export const addDistance = (coordinates: Coordinates, data?: Individual[]): any => data 
-  ? data.map((i: any) => {
-      const pointA = [
-        Number(coordinates.longitude),
-        Number(coordinates.latitude),
-      ];
-      const pointB = [
-        Number(i.coordinates.longitude),
-        Number(i.coordinates.latitude),
-      ];
-      const distance = calcDistance(pointA, pointB);
-      return {
-        ...i,
-        distance,
-      };
-  }).sort((a: any, b: any) => Number(a.distance) - Number(b.distance))
-  : []
+export const addDistance = (
+  coordinates: Coordinates,
+  data?: Individual[]
+): any =>
+  data
+    ? data
+        .map((i: any) => {
+          const pointA = [
+            Number(coordinates.longitude),
+            Number(coordinates.latitude),
+          ];
+          const pointB = [
+            Number(i.coordinates.longitude),
+            Number(i.coordinates.latitude),
+          ];
+          const distance = calcDistance(pointA, pointB);
+          return {
+            ...i,
+            distance,
+          };
+        })
+        .sort((a: any, b: any) => Number(a.distance) - Number(b.distance))
+    : [];
+
+export const addGroup = (data: Individual[], group?: Group): Individual[] =>
+  data.map((i) => {
+    return {
+      ...i,
+      group: group,
+    };
+  });
