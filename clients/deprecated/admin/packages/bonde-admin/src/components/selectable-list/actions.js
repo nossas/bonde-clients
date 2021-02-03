@@ -1,0 +1,2 @@
+export const SELECTABLE_LIST_SET_SELECTED_INDEX = 'SELECTABLE_LIST_SET_SELECTED_INDEX'
+export const setSelectedIndex = index => ({ type: SELECTABLE_LIST_SET_SELECTED_INDEX, index })
