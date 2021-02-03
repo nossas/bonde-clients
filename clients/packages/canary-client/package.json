@@ -38,7 +38,7 @@
     "react-number-format": "^4.4.1",
     "react-s3-uploader": "^4.9.3",
     "react-table": "^7.5.0",
-    "react-toastify": "^6.0.8",
+    "react-toastify": "6.0.8",
     "slate-editor": "^5.1.1",
     "slate-plain-serializer": "^0.7.13",
     "slugify": "^1.4.6"
