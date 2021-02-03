@@ -15,6 +15,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
     $availability: String_comparison_exp
     $redeGroupId: Int_comparison_exp
     $query: String
+    $order_by: [rede_individuals_order_by!]
   ) {
     data: rede_individuals(
       where: {
@@ -33,7 +34,7 @@ export const INDIVIDUALS_BY_GROUP = gql`
       }
       limit: $rows
       offset: $offset
-      order_by: { created_at: asc }
+      order_by: $order_by
     ) {
       ...individual
     }
@@ -59,7 +60,9 @@ export const INDIVIDUALS_BY_GROUP = gql`
 `;
 
 const FetchIndividuals = (props: any = {}) => {
-  const { individuals, rows, offset, selectedGroup } = useFilterState();
+  const { 
+    individuals, rows, offset, selectedGroup, order_by 
+  } = useFilterState();
 
   const { userStatus, availability, state, query } = getSelectValues(
     individuals
@@ -83,7 +86,8 @@ const FetchIndividuals = (props: any = {}) => {
     offset,
     context: {
       _eq: props.community && props.community.id
-    }
+    },
+    order_by: order_by || [{ created_at: 'asc' }]
   };
 
   return (

@@ -11,7 +11,7 @@ import {
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 import SelectField from '../../../components/SelectField';
 
 const InlineFormWrap = styled.div`
@@ -68,7 +68,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
 
   if (community) {
     return (
-      <Panel style={{ marginTop: '24px' }}>
+      <Panel style={{ margin: '30px 0' }}>
         {isCommunityAdmin ? (
           <ConnectedForm
             initialValues={{ role: 2 }}

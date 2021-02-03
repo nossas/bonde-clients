@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
 import UploadField from "../../../components/UploadFile";
 import CommunityForm from '../BaseForm';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 
 const { isEmail } = Validators;
 

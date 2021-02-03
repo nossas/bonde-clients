@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Empty, Header } from "bonde-components";
-import { CommunityMenu } from "bonde-core-tools";
+import { useHistory } from 'react-router-dom';
+import { Empty, Header, Link } from "bonde-components";
+import { CommunityMenu, useSession } from "bonde-core-tools";
 
 type StylesProps = {
   height?: string;
@@ -14,6 +15,14 @@ const Styles = styled.div<StylesProps>`
   height: ${(props) => props.height};
   min-height: ${(props) => props.height};
   overflow-y: auto;
+
+  ${Link} {
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
 
   ul {
     margin: 0;
@@ -83,6 +92,8 @@ type Props = {
 };
 
 const CommunitiesScrollBox = ({ communities }: Props) => {
+  const { push } = useHistory();
+  const { onChangeAsync } = useSession();
   const isMobile = window.innerWidth <= 768;
   const itemProps: any = {};
   if (isMobile) {
@@ -109,8 +120,15 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
                 />
               </Colunm>
               <Colunm grow={1}>
-                <Header.H4>{c.name}</Header.H4>
-                <Header.H6>{c.description || c.city}</Header.H6>
+                <Link onClick={() => {
+                  onChangeAsync({ community: c })
+                    .then(() => {
+                      push('/widgets');
+                    });
+                }}>
+                  <Header.H4>{c.name}</Header.H4>
+                  <Header.H6>{c.description || c.city}</Header.H6>
+                </Link>
               </Colunm>
               <Colunm mobile="hide">
                 <CommunityMenu community={c} />

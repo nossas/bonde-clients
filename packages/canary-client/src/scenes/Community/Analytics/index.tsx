@@ -3,6 +3,7 @@ import { useSession } from 'bonde-core-tools';
 import { Header, Icon, Text, Tooltip, Message, Hint } from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
+import NumberFormat from 'react-number-format';
 import TotalActivists from './TotalActivists';
 import LastActivists from './LastActivists';
 import LastPressures from './LastPressures';
@@ -10,7 +11,7 @@ import LastFormEntries from './LastFormEntries';
 import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
 import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
 import TotalDonations from './TotalDonations';
-import Panel from '../Panel';
+import Panel from '../../../components/Panel';
 import DownloadCSV from './DownloadCSV';
 
 type StylesProps = {
@@ -72,16 +73,27 @@ type NumberProps = {
 
 const Number = ({ query: Query, children, format }: NumberProps) => {
   const { community } = useSession();
+  const numberProps: any = {
+    displayType: 'text',
+    thousandSeparator: '.',
+    decimalSeparator: ','
+  }
+  if (format === 'money') {
+    numberProps.decimalScale = 2
+    numberProps.fixedDecimalScale = true
+  }
 
   return (
     <Query communityId={community?.id || 0}>
       {({ total, waiting }: any) => (
         <>
-          <Header.H2>{format === 'money' ? `${total},00` : total}</Header.H2>
+          <Header.H2>
+            <NumberFormat {...numberProps} value={total} />
+          </Header.H2>
           {waiting && (
             <Text style={{ color: '#a4a4a4' }}>
               <Icon color='#c7c7c7' name='Sync' size='small' />
-              <span>{format === 'money' ? `${waiting},00` : waiting}</span>
+              <NumberFormat {...numberProps} value={waiting} />
             </Text>
           )}
           {children}

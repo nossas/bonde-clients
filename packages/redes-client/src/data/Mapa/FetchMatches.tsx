@@ -13,14 +13,13 @@ const MATCHES = gql`
     $state: String_comparison_exp
     $agent: bigint_comparison_exp
     $query: String
-    $created_at: timestamp_comparison_exp
+    $order_by: [solidarity_matches_order_by!]
   ) {
     relationships: solidarity_matches(
       limit: $rows
       offset: $offset
-      order_by: { created_at: desc }
+      order_by: $order_by
       where: {
-        created_at: $created_at
         status: $status
         recipient_ticket: { assignee_id: $agent }
         recipient: { state: $state }
@@ -36,7 +35,6 @@ const MATCHES = gql`
       individualsTicketId: individuals_ticket_id
       volunteersTicketId: volunteers_ticket_id
       relationshipStatus: status
-      createdAt: created_at
       recipientTicket: recipient_ticket {
         agentId: assignee_id
       }
@@ -49,7 +47,6 @@ const MATCHES = gql`
     }
     relationshipsCount: solidarity_matches_aggregate(
       where: {
-        created_at: $created_at
         status: $status
         recipient_ticket: { assignee_id: $agent }
         recipient: { state: $state }
@@ -70,7 +67,7 @@ const MATCHES = gql`
 `;
 
 const FetchMatches = (props: any = {}) => {
-  const { relationships, rows, offset } = useFilterState();
+  const { relationships, rows, offset, order_by } = useFilterState();
 
   const { relationshipStatus, state, query, agent } = getSelectValues(
     relationships
@@ -89,9 +86,7 @@ const FetchMatches = (props: any = {}) => {
     query: `%${query || ""}%`,
     rows,
     offset,
-    // created_at: {
-    //   _eq: created_at,
-    // };
+    order_by: order_by || [{ created_at: 'asc' }]
   };
 
   return (

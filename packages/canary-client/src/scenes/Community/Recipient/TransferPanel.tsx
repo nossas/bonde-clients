@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Row, Col } from 'react-grid-system';
 import { Header, Text } from 'bonde-components';
 import SelectField from '../../../components/SelectField';
-import { Section } from '../Panel';
+import { Section } from '../../../components/Panel';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
-import SelectFieldCondition from './SelectFieldCondition';
+// import SelectFieldCondition from './SelectFieldCondition';
+import SpyField from '../../../components/SpyField';
 
 const TransferPanel: React.FC = () => {
   const { t } = useTranslation('community');
@@ -30,31 +31,32 @@ const TransferPanel: React.FC = () => {
               <option value='monthly'>{t('recipient.form.fields.transfer_interval.options.monthly')}</option>
             </PrefixedField>
             <PrefixedField
-              component={SelectFieldCondition}
-              parent="community.recipient.transfer_interval"
               name="transfer_day"
               label={t('recipient.form.fields.transfer_day.label')}
+              component={SelectField}
             >
-              {(value: string) => (
-                value === 'weekly' ? (
-                  <>
-                    <option value='1'>{t('recipient.form.fields.transfer_day.options.mon')}</option>
-                    <option value='2'>{t('recipient.form.fields.transfer_day.options.tue')}</option>
-                    <option value='3'>{t('recipient.form.fields.transfer_day.options.wed')}</option>
-                    <option value='4'>{t('recipient.form.fields.transfer_day.options.thu')}</option>
-                    <option value='5'>{t('recipient.form.fields.transfer_day.options.fri')}</option>
-                  </>
-                ) : (
+              <SpyField field='community.recipient.transfer_interval'>
+                {({ value }: any) => (
+                  value === 'weekly' ? (
                     <>
-                      <option value='1'>1</option>
-                      <option value='6'>6</option>
-                      <option value='11'>11</option>
-                      <option value='16'>16</option>
-                      <option value='21'>21</option>
-                      <option value='26'>26</option>
+                      <option value='1'>{t('recipient.form.fields.transfer_day.options.mon')}</option>
+                      <option value='2'>{t('recipient.form.fields.transfer_day.options.tue')}</option>
+                      <option value='3'>{t('recipient.form.fields.transfer_day.options.wed')}</option>
+                      <option value='4'>{t('recipient.form.fields.transfer_day.options.thu')}</option>
+                      <option value='5'>{t('recipient.form.fields.transfer_day.options.fri')}</option>
                     </>
-                  )
-              )}
+                  ) : (
+                      <>
+                        <option value='1'>1</option>
+                        <option value='6'>6</option>
+                        <option value='11'>11</option>
+                        <option value='16'>16</option>
+                        <option value='21'>21</option>
+                        <option value='26'>26</option>
+                      </>
+                    )
+                )}
+              </SpyField>
             </PrefixedField>
           </FieldPrefix>
         </Section>
