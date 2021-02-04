@@ -8,18 +8,18 @@ import createReducer from './createReducer'
 import DevTools from './components/dev-tools'
 
 const logoutOnCanary = () => {
-  const domain = process.env.REACT_APP_LOGIN_URL || 'http://accounts.bonde.devel:5000'
+  const domain = process.env.REACT_APP_LOGIN_URL || 'http://bonde.devel:5000'
   window.location.href = `${domain}/login?next=${window.location.href}`
 }
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_DOMAIN_API_REST || 'http://api-v1.bonde.devel'
+  baseURL: process.env.REACT_APP_DOMAIN_API_REST || 'http://api-rest.bonde.devel'
 })
 
 const middlewares = [promise]
 
 const networkInterface = createNetworkInterface({
-  uri: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-v2.bonde.devel/graphql',
+  uri: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql-deprecated.bonde.devel/graphql',
   connectToDevTools: true
 })
 

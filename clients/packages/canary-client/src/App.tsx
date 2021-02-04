@@ -120,13 +120,13 @@ const App: React.FC = () => {
   // Environment to use for configure bonde-core-tools
   const envConfig: Environment =
     (process.env.REACT_APP_ENVIRONMENT || 'development') as Environment;
-  
+
   console.info('Build environment:', envConfig);
   // Extra config
   const config: any = {
     // Setup local cross-storage and staging api
-    crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://cross-storage.bonde.devel',
-    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'https://api-graphql.staging.bonde.org/v1/graphql'
+    crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://bonde.devel:5003',
+    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql'
   };
 
   return (

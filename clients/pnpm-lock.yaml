@@ -99,7 +99,7 @@ importers:
       react-number-format: 4.4.4
       react-s3-uploader: 4.9.3
       react-table: 7.6.1
-      react-toastify: 6.0.9
+      react-toastify: 6.0.8
       slate-editor: 5.1.1
       slate-plain-serializer: 0.7.13
       slugify: 1.4.6
@@ -134,7 +134,7 @@ importers:
       react-number-format: ^4.4.1
       react-s3-uploader: ^4.9.3
       react-table: ^7.5.0
-      react-toastify: ^6.0.8
+      react-toastify: 6.0.8
       slate-editor: ^5.1.1
       slate-plain-serializer: ^0.7.13
       slugify: ^1.4.6
@@ -155,6 +155,8 @@ importers:
       deep-object-diff: ^1.1.0
       jest-environment-jsdom-sixteen: ^1.0.3
       react-table: ^7.6.0
+  packages/storage:
+    specifiers: {}
 lockfileVersion: 5.2
 packages:
   /@apollo/client/3.2.9_graphql@15.4.0+react@16.14.0:
@@ -13598,7 +13600,7 @@ packages:
       react: ^16.8.3 || ^17.0.0-0
     resolution:
       integrity: sha512-urwNZTieb+xg/+BITUIrqdH5jZfJlw7rKVAAq25iXpBPwbQojLCEKJuGycLbVwn8fzU+Ovly3y8HHNaLNrPCvQ==
-  /react-toastify/6.0.9:
+  /react-toastify/6.0.8:
     dependencies:
       classnames: 2.2.6
       prop-types: 15.7.2
@@ -13607,7 +13609,7 @@ packages:
     peerDependencies:
       react: '>=16'
     resolution:
-      integrity: sha512-StHXv+4kezHUnPyoILlvygSptQ79bxVuvKcC05yXP0FlqQgPA1ue+80BqxZZiCw2jWDGiY2MHyqBfFKf5YzZbA==
+      integrity: sha512-NSqCNwv+C4IfR+c92PFZiNyeBwOJvigrP2bcRi2f6Hg3WqcHhEHOknbSQOs9QDFuqUjmK3SOrdvScQ3z63ifXg==
   /react-toastify/6.1.0_react-dom@16.14.0+react@16.14.0:
     dependencies:
       clsx: 1.1.1

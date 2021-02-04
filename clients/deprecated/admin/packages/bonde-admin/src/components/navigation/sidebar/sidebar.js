@@ -157,7 +157,7 @@ const Sidebar = ({ children, loading, mobilization, user, community }) => loadin
                 crossStorage
                   .del('auth', 'community')
                   .then(() => {
-                    const loginUrl = process.env.REACT_APP_LOGIN_URL || 'http://accounts.bonde.devel:5000/login'
+                    const loginUrl = process.env.REACT_APP_LOGIN_URL || 'http://bonde.devel:5000/login'
                     window.location.href = loginUrl
                   })
               })
