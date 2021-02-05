@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import * as db from './db';
+import queue from './queue';
 
 const program = new Command();
 program.version('0.0.1');
@@ -8,10 +9,11 @@ program.version('0.0.1');
 // Add nested commands using `.command()`.
 const brew = program.command('brew');
 brew
-  .command('tea')
-  .action(async () => {
-    await db.check();
-    const Model = db.model();
+.command('tea')
+.action(async () => {
+  await db.check();
+  const Model = db.model();
+  queue.send("createmessages");
 
     const formEntries = await db.getActions(8, 'form', Model.FormEntry, Model)
     console.log(`There are ${(formEntries.count)} form entries`);
