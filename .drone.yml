@@ -25,6 +25,7 @@ pipeline:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
+      - cd clients
       - pnpm i
       - pnpm m run build
     secrets: [ aws_route_ip ]
@@ -56,6 +57,7 @@ pipeline:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
+      - cd clients
       - pnpm i
       - pnpm m run build
     secrets: [ aws_route_ip ]
@@ -67,7 +69,8 @@ pipeline:
   publish-staging-build:
     image: plugins/docker
     repo: nossas/bonde
-    dockerfile: Dockerfile
+    context: clients
+    dockerfile: clients/Dockerfile
     secrets: [docker_username, docker_password]
     group: publish
     tags:
@@ -79,7 +82,8 @@ pipeline:
   publish-production-build:
     image: plugins/docker
     repo: nossas/bonde
-    dockerfile: Dockerfile
+    context: clients
+    dockerfile: clients/Dockerfile
     secrets: [docker_username, docker_password]
     group: publish
     tags:

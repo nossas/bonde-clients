@@ -1,0 +1,16 @@
+.dns-hosted-zones {
+  margin-bottom: 3rem;
+
+  .container-fluid .table-row {
+    border-left-width: 2px;
+    border-left-style: solid;
+
+    &.header {
+      border-left-color: transparent;
+    }
+  }
+}
+
+.dns-detail {
+  .dns-records { margin-bottom: 3rem; }
+}
