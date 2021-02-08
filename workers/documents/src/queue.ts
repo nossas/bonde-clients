@@ -1,36 +1,18 @@
 const Queue = require('bee-queue');
+const redis = require('redis');
+import { client as elkClient } from './docs';
 
-export const queue = new Queue('example');
-
-// Process jobs from as many servers or processes as you like
-queue.process(function (job: any, done: any) {
-  console.log(`Processing job`, job.data);
-  return done(null, job.data);
+export const queue = new Queue('example', {
+  redis: redis.createClient(process.env.REDIS_URL || "redis://127.0.0.1:6379"),
 });
 
-// {
-//     id: text,
-//     community_id: number,
-//     community_name: text,
-//     mobilization_id: number,
-//     mobilization_name: text,
-//     activist_id: number,
-//     activist_email: text,
-//     activist_ip: text,
-//     activist_first_name: text,
-//     activist_last_name: text,
-//     activist_fullname: text,
-//     activist_city: text,
-//     activist_state: text,
-//     activist_phone: text,
-//     widget_id: number,
-//     action_id: number,
-//     action_type: text,
-//     action_data: text,
-//     action_created: date,
-//     donation_value: number,
-//     donation_recurring: number,
-//     donation_status: text,
-//     pressure_targets_count: number,
-//     form_custom_field_value: text
-// }
+// Process jobs from as many servers or processes as you like
+queue.process(async (job: any) => {
+  console.log(`Processing job`, job.data);
+  return await elkClient.index({
+    index: 'bonde-actions',
+    // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
+    body: job.data
+  });
+  // return ;
+});

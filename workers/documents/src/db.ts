@@ -14,7 +14,7 @@ export const getActions = async(communityId:number, kind:string, modelAction:any
               kind: kind
             },
             include: [{
-              model: modelAction,
+                model: modelAction,
             }]
           }]
         }]
@@ -49,8 +49,8 @@ export const model = () => {
     Community.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         name: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'community' });
 
     Mobilization.init({
@@ -59,8 +59,8 @@ export const model = () => {
         slug: DataTypes.STRING,
         customDomain: DataTypes.STRING,
         communityId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE,
         deletedAt: 'deleted_at'
     }, { underscored: true, sequelize, modelName: 'mobilization' });
 
@@ -70,8 +70,8 @@ export const model = () => {
     Block.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         mobilizationId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'block' });
 
     Mobilization.hasMany(Block);
@@ -81,8 +81,8 @@ export const model = () => {
         id: { type: DataTypes.STRING, primaryKey: true },
         blockId: DataTypes.STRING,
         kind: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'widget' });
 
     Block.hasMany(Widget);
@@ -91,8 +91,9 @@ export const model = () => {
     FormEntry.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         widgetId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        fields: DataTypes.HSTORE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'form_entry' });
 
     Widget.hasMany(FormEntry);
@@ -101,8 +102,8 @@ export const model = () => {
     PressureByEmail.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         widgetId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'activist_pressure' });
 
     Widget.hasMany(PressureByEmail);
@@ -111,8 +112,8 @@ export const model = () => {
     PressureByPhone.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         widgetId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'twilio_call' });
 
     Widget.hasMany(PressureByPhone);
@@ -121,8 +122,8 @@ export const model = () => {
     Donation.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         widgetId: DataTypes.STRING,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'donation' });
 
     Widget.hasMany(Donation);
@@ -130,8 +131,8 @@ export const model = () => {
 
     Activist.init({
         id: { type: DataTypes.STRING, primaryKey: true },
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'activist' });
 
     return {
