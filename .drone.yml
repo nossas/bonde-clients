@@ -19,7 +19,7 @@ pipeline:
       - REACT_APP_AWS_BUCKET=bonde-assets-staging
       - REACT_APP_LOGIN_URL=https://accounts.staging.bonde.org/login
       - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
-      - REACT_APP_UPLOADS_URL=http://api-rest.staging.bonde.org/uploads
+      - REACT_APP_UPLOADS_URL=https://api-rest.staging.bonde.org/uploads
       - REACT_APP_ZENDESK_ORGANIZATIONS={"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}
     commands:
       - apk --update add curl
@@ -51,7 +51,7 @@ pipeline:
       - REACT_APP_AWS_BUCKET=bonde-assets
       - REACT_APP_LOGIN_URL=https://accounts.bonde.org/login
       - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
-      - REACT_APP_UPLOADS_URL=http://api-rest.bonde.org/uploads
+      - REACT_APP_UPLOADS_URL=https://api-rest.bonde.org/uploads
       - REACT_APP_ZENDESK_ORGANIZATIONS={"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}
     commands:
       - apk --update add curl
