@@ -70,7 +70,7 @@ pipeline:
     image: plugins/docker
     repo: nossas/bonde
     context: clients
-    dockerfile: clients/Dockerfile
+    dockerfile: clients/Dockerfile-old
     secrets: [docker_username, docker_password]
     group: publish
     tags:
@@ -83,7 +83,7 @@ pipeline:
     image: plugins/docker
     repo: nossas/bonde
     context: clients
-    dockerfile: clients/Dockerfile
+    dockerfile: clients/Dockerfile-old
     secrets: [docker_username, docker_password]
     group: publish
     tags:
