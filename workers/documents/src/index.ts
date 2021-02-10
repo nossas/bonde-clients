@@ -1,21 +1,28 @@
 import { Command } from 'commander';
 import * as db from './db';
+import crypto from 'crypto';
 import { queue } from './queue';
-// import { client as elkClient } from './docs';
+import { main as mainCerts} from './certs';
 
 const program = new Command();
 program.version('0.0.1');
 
+const certs = program.command('certs');
 
-// Add nested commands using `.command()`.
+certs.action(mainCerts);
+
 const sync = program.command('sync');
 sync
+  .option('-c, --community-id <value>', 'Id da comunidade a ser contextualizada', "8")
+
+sync
   .command('form')
-  .action(async () => {
+  .action(async (name, options, command) => {
+    console.log(options);
     await db.check();
     const Model = db.model();
 
-    const formEntries = await db.getActions(8, 'form', Model.FormEntry, Model)
+    const formEntries = await db.getActions(options.communityId, 'form', Model.FormEntry, Model)
     console.log(`There are ${(formEntries.count)} form entries`);
 
     formEntries.rows.forEach((c: any) => {
@@ -27,8 +34,10 @@ sync
               JSON.parse(fe.fields).forEach((field:any) => {
                 preparedFields['form_' + field.label.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')] = (field.value !== undefined) ? field.value.toLowerCase() : "";
               });
+              var md5sum = crypto.createHash('md5');
+              md5sum.update(c.id + m.d + w.id + fe.id);
               const job = queue.createJob(({
-                id: "",
+                id: md5sum.digest('hex'),
                 community_id: c.id,
                 community_name: c.name,
                 mobilization_id: m.id,
@@ -44,7 +53,7 @@ sync
                 widget_id: w.id,
                 action_id: fe.id,
                 action_type: "form",
-                action_data: "",
+                action_data: JSON.stringify(preparedFields),
                 action_created: new Date(fe.createdAt),
                 donation_value: "",
                 donation_recurring: "",
@@ -63,8 +72,6 @@ sync
         });
       });
     });
-
-    // await elkClient.indices.refresh({ index: 'bonde-actions' });
   });
 ;
 sync
@@ -72,7 +79,7 @@ sync
   .action(async() => {
     const Model = db.model();
 
-    const pressures = await db.getActions(8, 'pressure', Model.PressureByEmail, Model)
+    const pressures = await db.getActions('8', 'pressure', Model.PressureByEmail, Model)
     console.log(`There are ${(pressures.count)} pressures`);
 
     pressures.rows.forEach((c: any) => {
@@ -122,7 +129,7 @@ sync
   .command('phone-pressure')
   .action(async() => {
     const Model = db.model();
-    const pressuresPhone = await db.getActions(8, 'pressure-phone', Model.PressureByPhone, Model)
+    const pressuresPhone = await db.getActions('8', 'pressure-phone', Model.PressureByPhone, Model)
     console.log(`There are ${(pressuresPhone.count)} pressures phone`);
   });
 ;
@@ -130,7 +137,7 @@ sync
   .command('donation')
   .action(async() => {
     const Model = db.model();
-    const donations = await db.getActions(8, 'donation', Model.Donation, Model)
+    const donations = await db.getActions('8', 'donation', Model.Donation, Model)
     console.log(`There are ${(donations.count)} donations`);
 
 

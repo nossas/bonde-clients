@@ -2,7 +2,7 @@ import { Sequelize, Model, DataTypes } from 'sequelize';
 
 const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:')
 
-export const getActions = async(communityId:number, kind:string, modelAction:any, models: any) => {
+export const getActions = async(communityId:string, kind:string, modelAction:any, models: any) => {
     return await models.Community.findAndCountAll({
       include: {
         model: models.Mobilization,
