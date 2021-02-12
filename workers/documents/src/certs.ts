@@ -81,6 +81,7 @@ const slugify = (string: string) => {
 }
 
 const getMobilizations: any = async () => {
+  // , where:{name:{_eq:"Minha Porto Alegre"}}    , where:{id:{_eq:49}}
   const query = `query myEntries($widgetId: Int) {
         communities(order_by: {created_at: desc} ) {
             id
@@ -97,9 +98,9 @@ const getMobilizations: any = async () => {
         }
     }`
 
-  const resp = await fetch(process.env.GRAPHQL_URL, {
+  const resp = await fetch(process.env.GRAPHQL_API_URL, {
     "headers": {
-      "x-hasura-admin-secret": process.env.GRAPHQL_SECRET_KEY,
+      "x-hasura-admin-secret": process.env.GRAPHQL_API_KEY,
       "content-type": "application/json",
     },
     "body": JSON.stringify({
@@ -116,17 +117,27 @@ const delay = (ms: number) => {
 }
 
 const checkIP = async (m: any) => {
+  const searchIp = (geoip: any, ip: string) => {
+    let ret = false;
+    if (Array.isArray(geoip.Answer)) {
+      geoip.Answer.forEach((element:any) => {
+        if (element.data !== undefined && element.data === ip) {
+          ret = true;
+        }
+      });
+    }
+    return ret;
+  };
+
   console.log(`validating DNS ${m.custom_domain}`);
   // https://stackoverflow.com/a/58299823/397927
-  //   console.log(m);
   try {
     let geoip = { Answer: [{ data: '' }] };
     const r = await fetch(`https://dns.google/resolve?name=${m.custom_domain}`);
     geoip = await r.json();
-
-    // console.log(geoip);
-    // console.log((isArray(geoip.Answer) && geoip.Answer[0].data === '54.156.173.29'));
-    return ((Array.isArray(geoip.Answer) && geoip.Answer[0].data === '50.19.148.209') ? m : false);
+    // console.log(geoip)
+    // console.log((isArray(geoip.Answer) && geoip.Answer[0].data === '50.19.148.209'));
+    return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
   } catch (error) {
     console.log(error);
     return false;
@@ -149,6 +160,7 @@ ${process.env.TPL_SERVICE_ENV}
     labels:
       traefik.port: '3000'
       traefik.enable: 'true'
+      traefik.frontend.priority: 1
       traefik.frontend.rule: Host:${validatedDNS.map((c: any) => {
         const d = c.value.custom_domain;
         if (d !== undefined) {
@@ -178,12 +190,37 @@ export async function main() {
   console.time('mapAllSettled')
   const mobsByCommunity = await getMobilizations()
   const results2 = await mapAllSettled(mobsByCommunity.data.communities, mapFnCheckIP, 1)
-  const result3 = results2.filter((f:any) => f.value.mobilizations.filter((ff:any) => ff.value !== '').length > 0);
 
   console.timeEnd('mapAllSettled')
   console.log('------------')
   dockerComposeTemplate = dockerComposeTemplate + results2.map((c: any) => {
-    return dockerComposeService(c.value, c.value.mobilizations);
+    let communityHasActiveDomain = false;
+    if (c.value.mobilizations[0] !== undefined) {
+      c.value.mobilizations.map((v:any) => {
+        if (Object.keys(v.value).length >= 1 && v.value.custom_domain !== undefined && v.value.custom_domain.length > 1) {
+          communityHasActiveDomain = true
+        }
+      });
+    }
+    return ( communityHasActiveDomain ? dockerComposeService(c.value, c.value.mobilizations) : '');
   }).join('');
-  console.log(dockerComposeTemplate);
+
+  const deploy = await fetch(`${process.env.RANCHER_API_URL}/v2-beta/projects/${process.env.RANCHER_PROJECT_ID}/stacks`, {
+    "headers": {
+      "authorization": 'Basic ' + Buffer.from(process.env.RANCHER_API_KEY).toString('base64'),
+      // "authorization": 'Bearer ' + process.env.RANCHER_API_KEY,
+      "content-type": "application/json",
+    },
+    "body": JSON.stringify({
+      name: "webservers-communities-3",
+      startOnCreate: true,
+      dockerCompose: dockerComposeTemplate
+    }),
+    "method": "POST",
+  });
+
+  const deployResults = await deploy.json();
+
+  // console.log(dockerComposeTemplate);
+  console.log(deployResults);
 }
