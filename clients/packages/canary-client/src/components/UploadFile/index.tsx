@@ -1,17 +1,24 @@
 import React, { useRef } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
-import { Text, Label, Link, useField } from 'bonde-components';
+import { Text, Label, Link, useField, Hint } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from './Image';
 import UploadImageIcon from './UploadImageIcon';
 
-const UploadField = styled.div`
+interface UploadFieldProps {
+  scale?: number
+}
+
+const UploadField = styled.div<UploadFieldProps>`
+  position: relative;
   display: flex;
   padding: 0 0 24px;
+  flex-direction: row;
+  align-items: center;
 
   button {
-    margin-right: 30px;
+    margin-right: calc(30px * ${props => props.scale});
     
     &:focus {
       outline: none;
@@ -26,17 +33,26 @@ const UploadField = styled.div`
   .detail > * {
     margin: 10px 0;
   }
+
+  .detail {
+    ${Hint} {
+      position: absolute;
+      right: 0;
+    }
+  }
 `
 
 type Props = {
   label?: string;
   name: string;
+  imageScale?: number
+  validate?: any
 };
 
-const Upload = ({ label, name }: Props) => {
+const Upload: React.FC<Props> = ({ label, name, imageScale, validate }) => {
   const uploadInput: any = useRef(null);
   // const [image, setImage] = useState<string>('');
-  const { input } = useField(name);
+  const { input, meta } = useField(name, { validate });
   const { t } = useTranslation('app');
 
   const onProgress = (args: any) => {
@@ -57,16 +73,17 @@ const Upload = ({ label, name }: Props) => {
   }
 
   return (
-    <UploadField>
+    <UploadField scale={imageScale}>
       <button onClick={handleClick} title={t('upload.button')}>
         {input.value
-          ? <Image src={input.value} alt={label} />
-          : <UploadImageIcon />
+          ? <Image src={input.value} alt={label} scale={imageScale} />
+          : <UploadImageIcon scale={imageScale} />
         }
       </button>
       <div className='detail'>
         {label && <Label>{label}</Label>}
         <Text>{t('upload.information')}</Text>
+        {meta.touched && meta.error && <Hint color='error'>{meta.error}</Hint>}
         <ReactS3Uploader
           signingUrl={process.env.REACT_APP_UPLOADS_URL}
           accept="image/*"
@@ -84,6 +101,10 @@ const Upload = ({ label, name }: Props) => {
       </div>
     </UploadField>
   );
+}
+
+Upload.defaultProps = {
+  imageScale: 1
 }
 
 export default Upload;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputField, Button, Tooltip, Success, Validators } from 'bonde-components';
+import { InputField, Button, Tooltip, Success, Validators, Text, Header } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
 import UploadField from "../../../components/UploadFile";
@@ -8,7 +8,7 @@ import Panel from '../../../components/Panel';
 
 const { isEmail } = Validators;
 
-export const isValidFromEmail = (value: any) => {
+export const isValidFromEmail = (value: string): string | undefined => {
   const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/
   if (regex.test(value)) {
     const email = value.match(regex)[1]
@@ -18,7 +18,7 @@ export const isValidFromEmail = (value: any) => {
   }
 }
 
-const SettingsPage = () => {
+const SettingsPage: React.FC = () => {
   const { t } = useTranslation('community');
 
   return (
@@ -28,9 +28,9 @@ const SettingsPage = () => {
     >
       {({ submitting, dirty }: any) => (
         <Container fluid style={{ width: "100%", padding: "0" }}>
-          <Row>
-            <Col sm={12} lg={6}>
-              <Panel>
+          <Panel>
+            <Row>
+              <Col sm={12} lg={6}>
                 <UploadField
                   label={t('info.form.fields.image.label')}
                   name='community.image'
@@ -66,14 +66,36 @@ const SettingsPage = () => {
                   placeholder={t('info.form.fields.email_template_from.placeholder')}
                   validate={isValidFromEmail}
                 />
-                <Row justify='end'>
-                  <Col xs={3}>
-                    <Button disabled={submitting || !dirty} type='submit'>{t('buttons.submit')}</Button>
-                  </Col>
-                </Row>
-              </Panel>
-            </Col>
-          </Row>
+                </Col>
+                <Col sm={12} lg={6}>
+                  <div style={{ marginBottom: '25px' }}>
+                    <Header.H4 style={{ marginBottom: '5px' }}>Assinatura Personalizada</Header.H4>
+                    <Text>Devido à LGPD, todas as suas campanhas devem exibir a assinatura da sua comunidade no footer das páginas.</Text>
+                  </div>
+                  <UploadField
+                    imageScale={0.6}
+                    label='LOGO QUE APARECE NA ASSINATURA'
+                    name='community.sign.image'
+                  />
+                  <InputField
+                    name='community.sign.name'
+                    label='Assinatura da comunidade'
+                    placeholder='Nome da comunidade'
+                  />
+                  <InputField
+                    name='community.sign.url'
+                    label='Site da comunidade'
+                    placeholder='Insira o link do site ou página oficial da sua comunidade'
+                  />
+                  <Row justify='end'>
+                    <Col xs={3}>
+                      <Button disabled={submitting || !dirty} type='submit'>{t('buttons.submit')}</Button>
+                    </Col>
+                  </Row>
+                
+                </Col>
+              </Row>
+            </Panel>
         </Container>
       )}
     </CommunityForm>
