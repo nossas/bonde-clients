@@ -26,6 +26,7 @@
     "@slate-editor/toggle-readonly": "^5.1.0",
     "@slate-editor/underline-plugin": "^5.1.0",
     "@types/downloadjs": "^1.4.2",
+    "@types/lodash": "^4.14.168",
     "@types/react-color": "^3.0.4",
     "@types/react-table": "^7.0.22",
     "bonde-styleguide": "^0.16.5-alpha.5",
