@@ -32,6 +32,7 @@
     "clipboard-copy": "^3.1.0",
     "downloadjs": "^1.4.7",
     "final-form-arrays": "^3.0.2",
+    "lodash": "^4.17.21",
     "moment": "^2.27.0",
     "react-color": "^2.19.3",
     "react-final-form-arrays": "^3.1.3",

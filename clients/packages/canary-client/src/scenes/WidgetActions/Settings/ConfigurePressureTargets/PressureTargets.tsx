@@ -3,7 +3,7 @@ import FetchPressureTargets, {
   PressureTarget as PressureTargetsType,
 } from "./FetchPressureTargets";
 import { Text, Icon, CleanButton } from "bonde-components";
-import { css } from "styled-components/macro";
+import styled from 'styled-components';
 
 type Props = {
   widgetId: number;
@@ -11,30 +11,29 @@ type Props = {
   setPressureTarget: (arg: PressureTargetsType) => void;
 };
 
+const Grid = styled.div`
+  display: grid;
+  grid-row-gap: 15px;
+`;
+
+const TargetStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #eee;
+`;
+
 const PressureTargets = ({
   widgetId,
   setModal,
   setPressureTarget,
 }: Props): React.ReactElement => {
   return (
-    <div
-      css={css`
-        display: grid;
-        grid-row-gap: 15px;
-      `}
-    >
+    <Grid>
       <FetchPressureTargets widgetId={widgetId}>
         {({ pressure_targets }: { pressure_targets: PressureTargetsType[] }) =>
           pressure_targets.map((target) => (
-            <div
-              css={css`
-                display: flex;
-                justify-content: space-between;
-                padding: 20px;
-                border: 1px solid #eee;
-              `}
-              key={target.id}
-            >
+            <TargetStyled key={target.id}>
               <Text>{target.label}</Text>
               <div>
                 <CleanButton
@@ -54,11 +53,11 @@ const PressureTargets = ({
                   <Icon name="Trash" />
                 </CleanButton>
               </div>
-            </div>
+            </TargetStyled>
           ))
         }
       </FetchPressureTargets>
-    </div>
+    </Grid>
   );
 };
 

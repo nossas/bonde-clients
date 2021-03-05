@@ -2,6 +2,7 @@ import React from 'react';
 import { ConnectedForm, toast } from 'bonde-components';
 import { useSession, useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 
 const UpdateCommunityGQL = gql`
   mutation UpdateCommunity ($update_fields: communities_set_input!, $id: Int!) {
@@ -66,7 +67,7 @@ const UpdateRecipientGQL = gql`
 
 type Props = {
   children: any
-  formName: 'Settings' | 'Recipient' | 'Mobilizers' | 'Integrations' | 'Domains'
+  formName: 'Settings' | 'SettingsIsAdmin' | 'Recipient' | 'Mobilizers' | 'Integrations' | 'Domains'
   success: string | any
 }
 
@@ -120,6 +121,11 @@ const BaseForm = ({ children, formName, success }: Props) => {
         };
         await updateRecipient({ variables: { input }});
       }
+
+      if (formName === 'Settings') {
+        update_fields = _.omit(update_fields, ['signature', 'modules', 'image', 'name']);
+      }
+
       // Update Community
       const { data: { update_communities: { returning } } }: any = await updateCommunity({ variables: { id, update_fields } });
 

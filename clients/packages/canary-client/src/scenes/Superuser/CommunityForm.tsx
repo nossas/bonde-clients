@@ -1,13 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import {
   Button,
   ConnectedForm,
   InputField,
   Validators,
-  Tooltip,
-  Text,
-  Header,
   toast
 } from 'bonde-components';
 import { Row, Col } from 'react-grid-system';
@@ -18,7 +16,7 @@ import Panel from '../../components/Panel';
 
 const { isEmail, required } = Validators;
 
-export const isValidFromEmail = (value: string): string | undefined => {
+export const isValidFromEmail = (value: any): string | undefined => {
   const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/
   if (regex.test(value)) {
     const email = value.match(regex)[1]
@@ -47,6 +45,11 @@ const InsertCommunityMutation = gql`
       }
     }
   }
+`;
+
+const ButtonStyled = styled(Button)`
+  width: auto;
+  padding: 10px 30px;
 `
 
 const CommunityForm: React.FC = () => {
@@ -82,22 +85,19 @@ const CommunityForm: React.FC = () => {
       }}
     >
       {({ submitting, dirty }: any) => (
-        <Panel>
-          <Row>
-            <Col sm={12} lg={6}>
+        <Row>
+          <Col sm={12} lg={6}>
+            <Panel>
               <UploadField
                 label={t('info.form.fields.image.label')}
                 name='community.image'
+                validate={required('Preenchimento da Imagem é obrigatório')}
               />
               <InputField
                 name='community.name'
                 label={t('info.form.fields.name.label')}
                 placeholder={t('info.form.fields.name.placeholder')}
-              />
-              <InputField
-                name='community.description'
-                label={t('info.form.fields.description.label')}
-                placeholder={t('info.form.fields.description.placeholder')}
+                validate={required('Preenchimento do Nome é obrigatório')}
               />
               <InputField
                 name='community.city'
@@ -105,52 +105,28 @@ const CommunityForm: React.FC = () => {
                 placeholder={t('info.form.fields.city.placeholder')}
               />
               <InputField
-                name='community.email_template_from'
-                label={(
-                  <Tooltip
-                    label={t('info.form.fields.email_template_from.label')}
-                    info={(
-                      <>
-                        <p>{`Escolha um email ao qual tenha fácil acesso. Ele só será usado pelo BONDE quando não for definido um email específico em uma ferramenta da sua comunidade.`}</p>
-                        <p>{`Preencha com `}<b>{`Nome do Remetente <nome@mail.com>`}</b></p>
-                      </>
-                    )}
-                  />
-                )}
-                placeholder={t('info.form.fields.email_template_from.placeholder')}
-                validate={isValidFromEmail}
-              />
-            </Col>
-            <Col sm={12} lg={6}>
-              <div style={{ marginBottom: '25px' }}>
-                <Header.H4 style={{ marginBottom: '5px' }}>Assinatura Personalizada</Header.H4>
-                <Text>Devido à LGPD, todas as suas campanhas devem exibir a assinatura da sua comunidade no footer das páginas.</Text>
-              </div>
-              <UploadField
-                imageScale={0.6}
-                label='LOGO QUE APARECE NA ASSINATURA'
-                name='community.sign.image'
-                validate={required('Imagem de assinatura é obrigatório')}
+                name='community.description'
+                label={t('info.form.fields.description.label')}
+                placeholder={t('info.form.fields.description.placeholder')}
               />
               <InputField
-                name='community.sign.name'
+                name='community.signature.name'
                 label='Assinatura da comunidade'
-                placeholder='Nome da comunidade'
+                placeholder='Nome da comunidade na assinatura'
+                validate={required('Preenchimento da Assinatura é obrigatório')}
               />
               <InputField
-                name='community.sign.url'
+                name='community.signature.url'
                 label='Site da comunidade'
                 placeholder='Insira o link do site ou página oficial da sua comunidade'
+                validate={required('Preenchimento do Site ou Página oficial é obrigatório')}
               />
               <Row justify='end'>
-                <Col xs={3}>
-                  <Button disabled={submitting || !dirty} type='submit'>{t('buttons.submit')}</Button>
-                </Col>
+                <ButtonStyled disabled={submitting || !dirty} type='submit'>Criar comunidade</ButtonStyled>
               </Row>
-
-            </Col>
-          </Row>
-        </Panel>
+            </Panel>
+          </Col>
+        </Row>
       )}
     </ConnectedForm>
   );

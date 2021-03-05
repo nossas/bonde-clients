@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Icon, InputField, Label, Link, Text, Modal } from 'bonde-components';
 import styled from 'styled-components';
-import { css } from 'styled-components/macro';
 import { FieldArray } from 'react-final-form-arrays';
 import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
@@ -28,6 +27,44 @@ type GroupFieldProps = {
   remove: any
 }
 
+const Box = styled.div<{ open?: boolean }>`
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  padding: 20px 18px;
+
+  ${props => props.open && `
+    margin: 15px 0;
+    border: 1px solid #eee;
+    padding: 20px 18px;
+  `}
+
+  ${IconButton} {
+    margin-left: 10px;
+  }
+`;
+
+const Flexable = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    width: 140px;
+  }
+`
+
+const GroupStyled = styled.div`
+  margin-bottom: 15px;
+
+  ${Label} {
+    display: block;
+    margin-bottom: 8px;
+  }
+`
+
 const GroupField = ({ name, group, remove }: GroupFieldProps) => {
   const [open, setOpen] = useState(!group);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -41,20 +78,7 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
   const onClose = () => setOpenDeleteModal(false);
 
   return !open ? (
-    <div
-      css={css`
-        display: flex;
-        align-items: center;
-        border: 1px solid #eee;
-        border-radius: 2px;
-        margin-bottom: 10px;
-        padding: 20px 18px;
-
-        ${IconButton} {
-          margin-left: 10px;
-        }
-      `}
-    >
+    <Box>
       <Text color='#000' style={{ flexGrow: 1 }}>{group.label || 'Nome do grupo'}</Text>
       <IconButton onClick={() => setOpen(true)}>
         <Icon name='Pencil' size='small' />
@@ -69,49 +93,35 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
           onClose={onClose}
         />
       </Modal>
-    </div>
+    </Box>
   ) : (
-      <div
-        css={css`
-          margin: 15px 0;
-          border: 1px solid #eee;
-          padding: 20px 18px;
-        `}
-      >
-        <InputField
-          name={`${name}.label`}
-          label={t('settings.pressure.label.group_label')}
-          placeholder={t('settings.pressure.placeholder.group_label')}
-        />
-        <SubjectBodyFields
-          prefix={name}
-          emailSubjectName='email_subject'
-          emailBodyName='email_body'
-        />
-        <div css={css`
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-
-          button {
-            width: 140px;
-          }
-        `}>
-          <Link
-            onClick={() => {
-              // remove when
-              if (!group) remove();
-              // close card
-              setOpen(false)
-            }}
-          >
-            {t('settings.pressure.button.cancel')}
-          </Link>
-          <Button type='button' onClick={() => setOpen(false)}>
-            {t('settings.pressure.button.add')}
-          </Button>
-        </div>
-      </div>
+    <Box open={open}>
+      <InputField
+        name={`${name}.label`}
+        label={t('settings.pressure.label.group_label')}
+        placeholder={t('settings.pressure.placeholder.group_label')}
+      />
+      <SubjectBodyFields
+        prefix={name}
+        emailSubjectName='email_subject'
+        emailBodyName='email_body'
+      />
+      <Flexable>
+        <Link
+          onClick={() => {
+            // remove when
+            if (!group) remove();
+            // close card
+            setOpen(false)
+          }}
+        >
+          {t('settings.pressure.button.cancel')}
+        </Link>
+        <Button type='button' onClick={() => setOpen(false)}>
+          {t('settings.pressure.button.add')}
+        </Button>
+      </Flexable>
+    </Box>
     );
 }
 
@@ -135,16 +145,7 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
         label={t('settings.pressure.label.select_label')}
         placeholder={t('settings.pressure.placeholder.select_label')}
       />
-      <div
-        css={css`
-          margin-bottom: 15px;
-
-          ${Label} {
-            display: block;
-            margin-bottom: 8px;
-          }
-        `}
-      >
+      <GroupStyled>
         <Label>Adicionar grupo de alvos</Label>
         <FieldArray name="groups">
           {({ fields }) =>
@@ -164,7 +165,7 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
         >
           {t('settings.pressure.button.addGroup')}
         </ButtonStyled>
-      </div>
+      </GroupStyled>
     </>
   );
 }

@@ -6,7 +6,7 @@ interface ImageStyledProps {
   scale?: number
 }
 
-const ImageStyled = styled.div<ImageStyledProps>`
+export const ImageStyled = styled.div<ImageStyledProps>`
   position: relative;
   transform: ${props => `scale(${props.scale})`};
 

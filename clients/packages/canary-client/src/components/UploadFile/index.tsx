@@ -38,6 +38,7 @@ const UploadField = styled.div<UploadFieldProps>`
     ${Hint} {
       position: absolute;
       right: 0;
+      top: 0;
     }
   }
 `
@@ -47,9 +48,10 @@ type Props = {
   name: string;
   imageScale?: number
   validate?: any
+  disabled?: boolean
 };
 
-const Upload: React.FC<Props> = ({ label, name, imageScale, validate }) => {
+const Upload: React.FC<Props> = ({ label, name, imageScale, validate, disabled }) => {
   const uploadInput: any = useRef(null);
   // const [image, setImage] = useState<string>('');
   const { input, meta } = useField(name, { validate });
@@ -74,7 +76,7 @@ const Upload: React.FC<Props> = ({ label, name, imageScale, validate }) => {
 
   return (
     <UploadField scale={imageScale}>
-      <button onClick={handleClick} title={t('upload.button')}>
+      <button onClick={handleClick} title={t('upload.button')} disabled={disabled}>
         {input.value
           ? <Image src={input.value} alt={label} scale={imageScale} />
           : <UploadImageIcon scale={imageScale} />
@@ -108,3 +110,5 @@ Upload.defaultProps = {
 }
 
 export default Upload;
+
+export { ImageStyled as Image } from './Image';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { gql, useQuery } from 'bonde-core-tools';
 import { Hint, Loading } from 'bonde-components';
-import { css } from 'styled-components/macro';
+import styled from 'styled-components';
 
 const widgetsByCommunityGQL = gql`
   query FetchWidgets ($communityId: Int!) {
@@ -83,17 +83,17 @@ export type RenderProps = {
   refetch: any
 }
 
+const WidgetLoadingStyled = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 export const WidgetLoading = () => (
-  <div
-    css={css`
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `}
-  >
+  <WidgetLoadingStyled>
     <Loading message='Carregando ações...' />
-  </div>
+  </WidgetLoadingStyled>
 )
 
 

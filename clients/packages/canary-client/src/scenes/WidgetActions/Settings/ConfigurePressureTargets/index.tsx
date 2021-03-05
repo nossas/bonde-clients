@@ -7,7 +7,7 @@ import {
 } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
-import { css } from "styled-components/macro";
+import styled from "styled-components";
 import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
 import RadioField, { Radio } from '../../../../components/Radio';
@@ -55,6 +55,13 @@ const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
 
   return ret;
 }
+
+const SpyStyled = styled.div`
+  display: grid;
+  grid-template-columns: 55% 45%;
+  grid-column-gap: 20px;
+  height: 100%;
+`;
 
 type Props = {
   widget: Widget
@@ -117,14 +124,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
             <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
             <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
           </RadioField>
-          <div
-            css={css`
-            display: grid;
-            grid-template-columns: 55% 45%;
-            grid-column-gap: 20px;
-            height: 100%;
-          `}
-          >
+          <SpyStyled>
             <SpyField field='settings.pressure_type'>
               {({ value }: any) => (
                 <>
@@ -141,7 +141,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                 </>
               )}
             </SpyField>
-          </div>
+          </SpyStyled>
         </>
       )}
     </SettingsForm>
