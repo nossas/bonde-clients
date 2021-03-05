@@ -169,6 +169,7 @@ importers:
       '@slate-editor/toggle-readonly': 5.1.0
       '@slate-editor/underline-plugin': 5.1.0
       '@types/downloadjs': 1.4.2
+      '@types/lodash': 4.14.168
       '@types/react-color': 3.0.4
       '@types/react-table': 7.0.25
       bonde-styleguide: 0.16.5-alpha.5
@@ -205,6 +206,7 @@ importers:
       '@slate-editor/toggle-readonly': ^5.1.0
       '@slate-editor/underline-plugin': ^5.1.0
       '@types/downloadjs': ^1.4.2
+      '@types/lodash': ^4.14.168
       '@types/react-color': ^3.0.4
       '@types/react-table': ^7.0.22
       bonde-styleguide: ^0.16.5-alpha.5
@@ -4970,6 +4972,10 @@ packages:
   /@types/json-schema/7.0.6:
     resolution:
       integrity: sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
+  /@types/lodash/4.14.168:
+    dev: false
+    resolution:
+      integrity: sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
   /@types/minimatch/3.0.3:
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
