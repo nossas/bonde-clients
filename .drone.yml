@@ -29,6 +29,9 @@ pipeline:
       - pnpm i
       - pnpm m run build --filter bonde-core-tools --filter bonde-components
       - pnpm m run build --filter accounts-client --filter canary-client
+      - cd deprecated/admin
+      - pnpm i
+      - pnpm m run build --filter bonde-admin
     secrets: [ aws_route_ip ]
     group: build
     when:
@@ -61,6 +64,9 @@ pipeline:
       - cd clients
       - pnpm i
       - pnpm m run build
+      - cd deprecated/admin
+      - pnpm i
+      - pnpm m run build --filter bonde-admin
     secrets: [ aws_route_ip ]
     group: build
     when:
@@ -79,6 +85,33 @@ pipeline:
     when:
       status: success
       event: [push]
+  
+  publish-staging-deprecated-build:
+    image: plugins/docker
+    repo: nossas/bonde-deprecated
+    context: clients/deprecated/admin/packages/bonde-admin
+    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
+    secrets: [docker_username, docker_password]
+    group: publish
+    tags:
+      - ${DRONE_BRANCH/\//-}
+    when:
+      status: success
+      event: [push]
+
+  publish-production-deprecated-build:
+    image: plugins/docker
+    repo: nossas/bonde-deprecated
+    context: clients/deprecated/admin/packages/bonde-admin
+    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
+    secrets: [docker_username, docker_password]
+    group: publish
+    tags:
+      - ${DRONE_TAG##v}
+      - latest
+    when:
+      status: success
+      event: tag
 
   publish-production-build:
     image: plugins/docker
@@ -100,6 +133,19 @@ pipeline:
     service: clients/accounts
     group: deploying
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [rancher_access_key, rancher_secret_key]
+    when:
+      status: success
+      event: [push]
+
+  admin-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/admin
+    group: deploying
+    docker_image: nossas/bonde-deprecated:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [rancher_access_key, rancher_secret_key]

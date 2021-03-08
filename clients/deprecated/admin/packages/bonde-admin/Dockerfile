@@ -1,6 +1,7 @@
-FROM node:12-alpine
-MAINTAINER Nossas <tech@nossas.org>
+FROM node:14-alpine
 
 WORKDIR /code
-RUN yarn add serve
+
+RUN yarn add pnpm serve
+
 COPY . .
