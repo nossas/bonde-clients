@@ -1,20 +1,17 @@
 //
 // @route /community/report
 //
-import { connect } from 'react-redux'
+import React from 'react'
+import urljoin from 'url-join';
 
-import * as CommunityActions from 'community/action-creators'
-import * as CommunitySelectors from 'community/selectors'
+export default class extends React.Component {
+  componentDidMount() {
+    window.location.href = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, '/community/analytics');
+  }
 
-import Page from './page'
-
-const mapStateToProps = state => ({
-  community: CommunitySelectors.getCurrent(state)
-})
-
-const mapDispatchToProps = {
-  submit: CommunityActions.asyncEdit,
-  ...CommunityActions
+  render() {
+    return (
+      <p>Redirecionando para admin-canary</p>
+    );
+  }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Page)

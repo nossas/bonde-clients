@@ -1,89 +1,17 @@
 //
 // @route /community/domain
 //
-import { provideHooks } from 'redial'
-import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { injectIntl } from 'react-intl'
+import React from 'react';
+import urljoin from 'url-join';
 
-import DNSControlSelectors from 'community/dns-control-selectors'
-import {
-  asyncFetchHostedZones,
-  asyncFetchDNSRecords,
-  asyncDeleteHostedZone,
-  asyncAddDNSRecord,
-  asyncDeleteDNSRecord,
-  asyncCheckHostedZone
-} from 'community/action-creators/dns-control'
-
-import Page from './page'
-
-const fields = ['name', 'record_type', 'value']
-
-const validate = (values, { intl }) => {
-  const errors = {}
-  if (!values.name) {
-    errors.name = intl.formatMessage({
-      id: 'page--community-domain.form.validation.required',
-      defaultMessage: 'Preenchimento obrigatório'
-    })
+export default class extends React.Component {
+  componentDidMount() {
+    window.location.href = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, '/community/domains');
   }
-  if (!values.record_type) {
-    errors.record_type = intl.formatMessage({
-      id: 'page--community-domain.form.validation.required',
-      defaultMessage: 'Preenchimento obrigatório'
-    })
-  }
-  if (!values.value) {
-    errors.value = intl.formatMessage({
-      id: 'page--community-domain.form.validation.required',
-      defaultMessage: 'Preenchimento obrigatório'
-    })
+
+  render() {
+    return (
+      <p>Redirecionando para admin-canary</p>
+    );
   }
 }
-
-const redial = {
-  fetch: ({ dispatch, getState }) => {
-    const state = getState()
-    const promises = []
-    const selectors = DNSControlSelectors(state)
-    !selectors.dnsHostedZones().isLoaded() && promises.push(
-      dispatch(asyncFetchHostedZones())
-    )
-    return Promise.all(promises)
-  }
-}
-
-const mapStateToProps = (state, props) => {
-  const selectors = DNSControlSelectors(state)
-
-  const dnsHostedZoneIsLoading = (
-    selectors.dnsHostedZones().isLoading() ||
-    selectors.dnsHostedZones().isSaving()
-  )
-
-  const dnsRecordsIsLoading = (
-    selectors.dnsRecords().isLoading() ||
-    selectors.dnsRecords().isSaving()
-  )
-
-  return {
-    dnsHostedZoneIsLoading,
-    dnsRecordsIsLoading,
-    dnsHostedZones: selectors.dnsHostedZones().getList()
-  }
-}
-
-const mapActionsToProps = {
-  fetchDNSRecords: asyncFetchDNSRecords,
-  deleteHostedZone: asyncDeleteHostedZone,
-  createDNSRecord: asyncAddDNSRecord,
-  deleteDNSRecord: asyncDeleteDNSRecord,
-  checkHostedZone: asyncCheckHostedZone
-}
-
-export default injectIntl(provideHooks(redial)(
-  reduxForm({ form: 'createDNSRecordForm', fields, validate })(
-    connect(mapStateToProps, mapActionsToProps)(Page)
-  )
-))
