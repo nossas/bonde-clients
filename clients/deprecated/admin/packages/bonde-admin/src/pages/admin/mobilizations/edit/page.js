@@ -8,31 +8,7 @@ import * as paths from 'paths'
 
 import Mobilization from 'mobrender/components/mobilization.connected'
 
-
-const styles = {
-  modeButton: {
-    position: 'fixed',
-    bottom: '10px',
-    left: 0,
-    right: 0,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '100px'
-  }
-}
-
-const ModeButton = ({ mode, toggle }) => (
-  <button type='button' onClick={toggle} style={styles.modeButton}>
-    {mode === 'preview' ? 'Editar' : 'Visualizar'}
-  </button>
-)
-
 export class MobilizationsEditPage extends Component {
-  
-  constructor (props) {
-    super(props)
-    this.state = { preview: false }
-  }
 
   componentWillReceiveProps (nextProps) {
     const { mobilization, blocksIsLoaded, blocks } = nextProps
