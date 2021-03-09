@@ -90,33 +90,33 @@ const CommunityForm: React.FC = () => {
             <Panel>
               <UploadField
                 label={t('info.form.fields.image.label')}
-                name='community.image'
+                name='image'
                 validate={required('Preenchimento da Imagem é obrigatório')}
               />
               <InputField
-                name='community.name'
+                name='name'
                 label={t('info.form.fields.name.label')}
                 placeholder={t('info.form.fields.name.placeholder')}
                 validate={required('Preenchimento do Nome é obrigatório')}
               />
               <InputField
-                name='community.city'
+                name='city'
                 label={t('info.form.fields.city.label')}
                 placeholder={t('info.form.fields.city.placeholder')}
               />
               <InputField
-                name='community.description'
+                name='description'
                 label={t('info.form.fields.description.label')}
                 placeholder={t('info.form.fields.description.placeholder')}
               />
               <InputField
-                name='community.signature.name'
+                name='signature.name'
                 label='Assinatura da comunidade'
                 placeholder='Nome da comunidade na assinatura'
                 validate={required('Preenchimento da Assinatura é obrigatório')}
               />
               <InputField
-                name='community.signature.url'
+                name='signature.url'
                 label='Site da comunidade'
                 placeholder='Insira o link do site ou página oficial da sua comunidade'
                 validate={required('Preenchimento do Site ou Página oficial é obrigatório')}
