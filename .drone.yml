@@ -31,6 +31,7 @@ pipeline:
       - pnpm m run build --filter accounts-client --filter canary-client
       - cd deprecated/admin
       - pnpm i
+      - pnpm m run build --filter bonde-webpage
       - pnpm m run build --filter bonde-admin
     secrets: [ aws_route_ip ]
     group: build

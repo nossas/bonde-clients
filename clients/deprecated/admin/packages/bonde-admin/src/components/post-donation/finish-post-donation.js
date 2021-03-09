@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FinishPostDonation } from 'bonde-webpage/lib/plugins/donation/components/'
+import { FinishPostDonation } from 'bonde-webpage/lib/plugins/donation/components'
 
 const imageUrl = require('exenv').canUseDOM ? require('../share/check-mark-image.png') : null
 
