@@ -50,6 +50,7 @@ const InsertCommunityMutation = gql`
 const ButtonStyled = styled(Button)`
   width: auto;
   padding: 10px 30px;
+  margin-right: 15px;
 `
 
 const CommunityForm: React.FC = () => {

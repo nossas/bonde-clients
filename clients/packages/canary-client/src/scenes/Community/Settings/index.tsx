@@ -23,6 +23,7 @@ export const isValidFromEmail = (value: any): string | undefined => {
 const ButtonStyled = styled(Button)`
   width: auto;
   min-width: 140px;
+  margin-right: 15px;
 `
 
 const SettingsPage: React.FC = () => {
