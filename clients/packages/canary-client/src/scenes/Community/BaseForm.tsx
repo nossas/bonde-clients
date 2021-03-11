@@ -72,7 +72,7 @@ type Props = {
 }
 
 const BaseForm = ({ children, formName, success }: Props) => {
-  const { community, onChangeAsync } = useSession();
+  const { community, onChangeAsync, user } = useSession();
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
   const [updateCommunity] = useMutation(UpdateCommunityGQL);
@@ -122,7 +122,7 @@ const BaseForm = ({ children, formName, success }: Props) => {
         await updateRecipient({ variables: { input }});
       }
 
-      if (formName === 'Settings') {
+      if (!user.isAdmin) {
         update_fields = _.omit(update_fields, ['signature', 'modules', 'image', 'name']);
       }
 
