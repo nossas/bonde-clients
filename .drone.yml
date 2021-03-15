@@ -64,9 +64,11 @@ pipeline:
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - cd clients
       - pnpm i
-      - pnpm m run build
+      - pnpm m run build --filter bonde-core-tools --filter bonde-components
+      - pnpm m run build --filter accounts-client --filter canary-client
       - cd deprecated/admin
       - pnpm i
+      - pnpm m run build --filter bonde-webpage
       - pnpm m run build --filter bonde-admin
     secrets: [ aws_route_ip ]
     group: build
