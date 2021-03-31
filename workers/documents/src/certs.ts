@@ -135,9 +135,9 @@ const checkIP = async (m: any) => {
     let geoip = { Answer: [{ data: '' }] };
     const r = await fetch(`https://dns.google/resolve?name=${m.custom_domain}`);
     geoip = await r.json();
-    // console.log(geoip)
-    // console.log((isArray(geoip.Answer) && geoip.Answer[0].data === '50.19.148.209'));
-    return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
+
+    return (searchIp(geoip, '50.19.148.209') ? m : { error: true });
+    // return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
   } catch (error) {
     console.log(error);
     return false;
@@ -151,7 +151,7 @@ services:`;
 // sofisticar o valor do host do serviço para incluir domínios com www e sem www
 let dockerComposeServiceTemplate = (element_name: any, validatedDNS: any) => `
   ${slugify(element_name)}:
-    image: nossas/bonde-public-ts:0.3.4
+    image: nossas/bonde-public-ts:0.3.5-alpha.0
     environment:
 ${process.env.TPL_SERVICE_ENV}
     command:
@@ -212,7 +212,7 @@ export async function main() {
       "content-type": "application/json",
     },
     "body": JSON.stringify({
-      name: "webservers-communities-3",
+      name: "webservers-" + Date.now(),
       startOnCreate: true,
       dockerCompose: dockerComposeTemplate
     }),

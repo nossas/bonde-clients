@@ -101,6 +101,7 @@ export const model = () => {
 
     PressureByEmail.init({
         id: { type: DataTypes.STRING, primaryKey: true },
+        targets: DataTypes.JSONB,
         widgetId: DataTypes.STRING,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
@@ -122,6 +123,13 @@ export const model = () => {
     Donation.init({
         id: { type: DataTypes.STRING, primaryKey: true },
         widgetId: DataTypes.STRING,
+        paymentMethod: DataTypes.STRING,
+        amount: DataTypes.NUMBER,
+        email: DataTypes.STRING,
+        customer: DataTypes.HSTORE,
+        transactionStatus: DataTypes.STRING,
+        subscription: DataTypes.BOOLEAN,
+        checkout_data: DataTypes.JSONB,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'donation' });
