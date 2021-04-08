@@ -18,6 +18,7 @@ const Styles = styled.div<StylesProps>`
 
   ${Link} {
     cursor: pointer;
+    text-transform: none;
   }
 
   a {
@@ -127,7 +128,6 @@ const CommunitiesScrollBox = ({ communities }: Props) => {
                     });
                 }}>
                   <Header.H4>{c.name}</Header.H4>
-                  <Header.H6>{c.description || c.city}</Header.H6>
                 </Link>
               </Colunm>
               <Colunm mobile="hide">
