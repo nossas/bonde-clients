@@ -14,13 +14,15 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
+  RadioGroup,
+  Radio,
   HelpBlock,
   UploadImageField
 } from 'components/forms'
 import * as paths from 'paths'
 
 export const MobilizationBasicsForm = ({
-  fields: { name, slug, goal, favicon },
+  fields: { name, slug, goal, favicon, language },
   floatSubmit,
   intl,
   ...formProps
@@ -76,6 +78,37 @@ export const MobilizationBasicsForm = ({
         />
       </FormGroup>
       <FormGroup
+        {...language}
+        controlId='language'
+      >
+        <ControlLabel>
+          <FormattedMessage
+            id='mobilizations.components--basics-form.language.label'
+            defaultMessage='Idioma padrão da página'
+          />
+        </ControlLabel>
+        <HelpBlock>
+          <FormattedMessage
+            id='mobilizations.components--basics-form.language.helper'
+            defaultMessage='Defina o idioma padrão que os textos do BONDE aparecem na sua página.'
+          />
+        </HelpBlock>
+        <RadioGroup>
+          <Radio value='pt-BR'>
+            <FormattedMessage
+              id='mobilizations.components--basics-form.language.ptBR'
+              defaultMessage='Português'
+            />
+          </Radio>
+          <Radio value='es'>
+            <FormattedMessage
+              id='mobilizations.components--basics-form.language.es'
+              defaultMessage='Espanhol'
+            />
+          </Radio>
+        </RadioGroup>
+      </FormGroup>
+      <FormGroup
         {...slug}
         controlId='slug'
         className={classnames({ hide: isNewMobilizationPath })}
@@ -122,7 +155,7 @@ export const MobilizationBasicsForm = ({
   )
 }
 
-export const fields = ['name', 'slug', 'goal', 'favicon', 'community_id']
+export const fields = ['name', 'slug', 'goal', 'favicon', 'community_id', 'language']
 
 export const validate = (values, { intl }) => {
   const errors = {}
