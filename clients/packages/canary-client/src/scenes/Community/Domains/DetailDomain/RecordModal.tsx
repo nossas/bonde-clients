@@ -101,7 +101,7 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
           }
         }}
       >
-        {({ submitting }) => (
+        {({ submitting }: any) => (
         <Container fluid style={{ width: '100%', padding: '0' }}>
           <Row style={{ marginBottom: '24px' }}>
             <Col xs={12}>

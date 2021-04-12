@@ -103,7 +103,7 @@ type Props = {
 }
 
 const FetchWidgets = ({ children, communityId }: Props) => {
-  const { data, loading, error, refetch } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
+  const { data, loading, error, refetch } = useQuery(widgetsByCommunityGQL, { variables: { communityId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
 

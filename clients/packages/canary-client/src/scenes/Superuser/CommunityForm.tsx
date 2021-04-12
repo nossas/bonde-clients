@@ -76,7 +76,7 @@ const CommunityForm: React.FC = () => {
             // TODO: i18n
             toast(`Parabéns, a comunidade ${values.name} foi adicionada ao Bonde`, { type: toast.TYPE.SUCCESS });
           })
-          .catch(({ graphQLErrors, ...errors }) => {
+          .catch(({ graphQLErrors, ...errors }: any) => {
             if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'permission-error').length > 0) {
               toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR });
             } else {

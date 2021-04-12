@@ -41,10 +41,7 @@ const FetchPressureTargets = ({
   children,
   widgetId,
 }: Props): React.ReactElement => {
-  const { data, loading, error } = useQuery<
-    FetchPressureTargetsData,
-    FetchPressureTargetsVars
-  >(pressureTargetsByWidgets, { variables: { widgetId } });
+  const { data, loading, error } = useQuery(pressureTargetsByWidgets, { variables: { widgetId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
   if (loading) return <Text>Carregando alvos...</Text>;
