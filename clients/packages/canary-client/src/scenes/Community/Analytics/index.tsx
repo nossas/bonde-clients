@@ -47,11 +47,11 @@ Position.defaultProps = {
 }
 
 const AnalyticsCard = ({ label, tooltip, children, full, direction }: any) => {
-  const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>{label}</Header.H5>;
+  const Label = <Header.H5 style={{fontWeight: 600, marginBottom: '12px', whiteSpace: 'nowrap'}} uppercase>{label}</Header.H5>;
   return (
     <Styles full={full}>
       {tooltip ? (
-        <Position direction={direction}>
+        <Position direction={direction} style={{marginTop: '27px'}}>
           <Tooltip
             label={Label}
             info={tooltip}
@@ -91,7 +91,7 @@ const Number = ({ query: Query, children, format }: NumberProps) => {
             <NumberFormat {...numberProps} value={total} />
           </Header.H2>
           {waiting && (
-            <Text style={{ color: '#a4a4a4' }}>
+            <Text style={{ color: '#a4a4a4'}}>
               <Icon color='#c7c7c7' name='Sync' size='small' />
               <NumberFormat {...numberProps} value={waiting} />
             </Text>
@@ -111,7 +111,8 @@ const Analytics = () => (
   <Container fluid style={{ width: "100%", padding: "0" }}>
     <Row>
       <Col xs={12}>
-        <Header.H5 style={{ fontWeight: 600, marginBottom: '12px' }} uppercase>Baixar relatórios</Header.H5>
+        <Header.H5 style={{ fontWeight: 600, marginBottom: '12px', marginTop: '7px' }} uppercase>Baixar relatórios</Header.H5>
+        
       </Col>
       <Col xs={12}>
         <DownloadCSV
@@ -120,7 +121,7 @@ const Analytics = () => (
           path='donation_reports'
         />
         <DownloadCSV
-          label='Doações recorrentes'
+          label='Doadores recorrentes'
           icon='TicketRecurring'
           path='download_subscriptions'
         />
@@ -136,18 +137,18 @@ const Analytics = () => (
         />
       </Col>
     </Row>
-    <Row>
+    <Row style={{marginTop: '10px'}}>
       <Col xs={5}>
         <Row>
           <Col xs={6}>
             <AnalyticsCard
               label='Ativistas'
               tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
-            >
+            > 
               <Number query={TotalActivists} />
             </AnalyticsCard>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} style={{paddingLeft:'4px'}}>
             <AnalyticsCard
               label='Ativistas recentes'
               tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
@@ -165,7 +166,7 @@ const Analytics = () => (
               <Number query={LastPressures} />
             </AnalyticsCard>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} style={{paddingLeft:'4px'}}>
             <AnalyticsCard
               label='Inscrições recentes'
               tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
@@ -177,7 +178,7 @@ const Analytics = () => (
       </Col>
       <Col xs={7}>
         <Row>
-          <Col xs={4}>
+          <Col xs={4} style={{paddingLeft:'4px'}}>
             <AnalyticsCard
               full
               label='Doações únicas (R$)'
@@ -188,7 +189,7 @@ const Analytics = () => (
               </Number>
             </AnalyticsCard>
           </Col>
-          <Col xs={4}>
+          <Col xs={4} style={{paddingLeft:'4px'}}>
             <AnalyticsCard
               full
               label='Doações recorrentes (R$)'
@@ -199,7 +200,7 @@ const Analytics = () => (
               </Number>
             </AnalyticsCard>
           </Col>
-          <Col xs={4}>
+          <Col xs={4} style={{paddingLeft:'4px'}}>
             <AnalyticsCard
               full
               label='Total arrecadado (R$)'
