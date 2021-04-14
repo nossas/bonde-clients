@@ -13,7 +13,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
     "babel-plugin-transform-async-to-promises": "^0.8.15",
-    "bonde-components": "workspace:0.0.4-alpha.28",
+    "bonde-components": "workspace:0.0.4-alpha.29",
     "bonde-core-tools": "workspace:0.1.7-alpha.10",
     "faker": "^5.1.0",
     "i18next": "^19.6.3",
