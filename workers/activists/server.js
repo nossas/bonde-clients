@@ -1,5 +1,11 @@
 let express = require('express');
 let Queue = require('bull');
+const Stream = require('stream');
+const { Client } = require('pg');
+const client = new Client();
+client.connect();
+ const QueryStream = require('pg-query-stream')
+const JSONStream = require('JSONStream')
 
 // Serve on PORT on Heroku and on localhost:5000 locally
 let PORT = process.env.PORT || '5000';
@@ -24,19 +30,23 @@ app.post('/job', async (req, res) => {
   res.json({ id: job.id });
 });
 
-// Allows the client to query the state of a background job
-app.get('/job/:id', async (req, res) => {
-  let id = req.params.id;
-  let job = await workQueue.getJob(id);
+const writableStream = new Stream.Writable()
 
-  if (job === null) {
-    res.status(404).end();
-  } else {
-    let state = await job.getState();
-    let progress = job._progress;
-    let reason = job.failedReason;
-    res.json({ id, state, progress, reason });
-  }
+writableStream._write = (chunk, encoding, next) => {
+    console.log(chunk.toString())
+    // let job = await workQueue.add(chunk.toString());
+    next()
+}
+
+// Allows the client to query the state of a background job
+app.get('/actions/:year', async (req, res) => {
+  let year = req.params.year;
+  const query = new QueryStream('SELECT count(1) FROM activists where created_at > $1 and created_at < $2', [`01-01-${year} 00:00:00`, `12-31-${year} 23:59:59`])
+  const stream = client.query(query)
+  //release the client when the stream is finished
+  stream.on('end', () => console.log('terminou...'))
+  stream.pipe(JSONStream.stringify()).pipe(writableStream)
+  res.json({});
 });
 
 // You can listen to global events to get notified when jobs are processed
