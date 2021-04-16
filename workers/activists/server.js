@@ -49,6 +49,14 @@ app.post("/job", async (req, res) => {
   res.json({ id: job.id });
 });
 
+const writableStream = new Stream.Writable();
+
+writableStream._write = (chunk, encoding, next) => {
+  console.log(chunk.toString());
+  // let job = await workQueue.add(chunk.toString());
+  next();
+};
+
 // Allows the client to query the state of a background job
 app.get("/activists/:community_id", async (req, res) => {
   const client = await db.getClient();
