@@ -45,8 +45,11 @@ app.get('/actions/:year', async (req, res) => {
   const stream = client.query(query)
   //release the client when the stream is finished
   stream.on('end', () => console.log('terminou...'))
-  stream.pipe(JSONStream.stringify()).pipe(writableStream)
-  res.json({});
+
+
+
+  stream.pipe(JSONStream.stringify()).pipe(res)
+  // res.json({});
 });
 
 // You can listen to global events to get notified when jobs are processed
