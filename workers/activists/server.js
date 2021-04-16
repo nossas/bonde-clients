@@ -70,79 +70,8 @@ app.get("/activists/:community_id", async (req, res) => {
   //release the client when the stream is finished
   stream.on("end", () => console.log("terminou..."));
 
-  stream
-    .pipe(JSONStream.stringify())
-    .pipe(JSONStream.parse("*"))
-    .pipe(
-      es.map((data, callback) => {
-        let hello = async (data) => {
-          return await typeQueueActivists.add(
-            { ...data, fixCreatedAt: true },
-            {
-              removeOnComplete: true,
-            }
-          );
-        };
-
-        hello(data)
-          .then((data) => {
-            callback(null, JSON.stringify(data));
-          })
-          .catch((r) => {
-            console.log(`ERROR ADD QUEUE: ${r}`);
-          });
-      })
-    )
-    .pipe(res);
-});
-
-// Allows the client to query the state of a background job
-app.get("/actions/:type", async (req, res) => {
-  const client = await db.getClient();
-  let action_type = req.params.type;
-
-  const query = new QueryStream(
-    `select
-fe.* as fe,
-w.id as w,
-b.id as b,
-m.id as m,
-c.id as c
-from
-    ${action_type} fe
-        left join widgets w on fe.widget_id = w.id
-        left join blocks b on w.block_id = b.id
-        left join mobilizations m on b.mobilization_id = m.id
-        left join communities c on m.community_id = c.id
-where c.type ~ 'Nossas'
-order by fe.created_at asc
-`
-  );
-  const stream = client.query(query);
-  //release the client when the stream is finished
-  stream.on("end", () => console.log("terminou..."));
-
-  stream
-    .pipe(JSONStream.stringify())
-    .pipe(JSONStream.parse("*"))
-    .pipe(
-      es.map((data, callback) => {
-        let hello = async (data) => {
-          return await typeQueue(action_type).add(data, {
-            removeOnComplete: true,
-          });
-        };
-
-        hello(data)
-          .then((data) => {
-            callback(null, JSON.stringify(data.data));
-          })
-          .catch((r) => {
-            console.log(`ERROR ADD QUEUE: ${r}`);
-          });
-      })
-    )
-    .pipe(res);
+  stream.pipe(JSONStream.stringify()).pipe(res);
+  // res.json({});
 });
 
 // You can listen to global events to get notified when jobs are processed
