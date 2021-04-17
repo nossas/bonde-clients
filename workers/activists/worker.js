@@ -61,7 +61,8 @@ function start_form_entries() {
       // var md5sum = crypto.createHash('md5');
       // md5sum.update(''+c.id + m.id + w.id + fe.id);
       // const indexEmail = extractEmail(preparedFields);
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       let activistEmail = "";
       let activistName = "";
 
@@ -301,6 +302,7 @@ function start_activists() {
     }
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
+    return job.data;
   });
 }
 

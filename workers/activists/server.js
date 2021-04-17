@@ -1,38 +1,22 @@
 const express = require("express");
 const Queue = require("bull");
-const db = require("./db.js");
+const { Client } = require("pg");
 const QueryStream = require("pg-query-stream");
 const JSONStream = require("JSONStream");
 const es = require("event-stream");
 
+const client = new Client();
+client.connect();
+
 // Serve on PORT on Heroku and on localhost:5000 locally
-const PORT = process.env.PORT || "5000";
+let PORT = process.env.PORT || "5000";
 // Connect to a local redis intance locally, and the Heroku-provided URL in production
-const REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
+let REDIS_URL = process.env.REDIS_URL || "redis://127.0.0.1:6379";
 
 const app = express();
 
 // Create / Connect to a named work queue
-// const activistsQueue = new Queue("activists", REDIS_URL);
-const typeQueueActivists = new Queue("activists", REDIS_URL);
-const typeQueueActivistPressures = new Queue("activist_pressures", REDIS_URL);
-const typeQueueFormEntries = new Queue("form_entries", REDIS_URL);
-const typeQueueDonations = new Queue("donations", REDIS_URL);
-
-const typeQueue = (type) => {
-  switch (type) {
-    case "activists":
-      return typeQueueActivists;
-    case "activist_pressures":
-      return typeQueueActivistPressures;
-    case "form_entries":
-      return typeQueueFormEntries;
-    case "donations":
-      return typeQueueDonations;
-    default:
-      break;
-  }
-};
+let workQueue = new Queue("work", REDIS_URL);
 
 // Serve the two static assets
 app.get("/", (req, res) => res.sendFile("index.html", { root: __dirname }));
@@ -49,43 +33,41 @@ app.post("/job", async (req, res) => {
   res.json({ id: job.id });
 });
 
-const writableStream = new Stream.Writable();
-
-writableStream._write = (chunk, encoding, next) => {
-  console.log(chunk.toString());
-  // let job = await workQueue.add(chunk.toString());
-  next();
-};
-
 // Allows the client to query the state of a background job
-app.get("/activists/:community_id", async (req, res) => {
-  const client = await db.getClient();
-  // let community_id = req.params.community_id;
-  // const query = new QueryStream(
-  //   "SELECT a.* FROM activists a where a.community_id = $1",
-  //   [community_id]
-  // );
-  const query = new QueryStream("SELECT a.* FROM activists a");
+app.get("/actions/:year", async (req, res) => {
+  let year = req.params.year;
+  const query = new QueryStream(
+    "SELECT * FROM activists where created_at > $1 and created_at < $2",
+    [`01-01-${year} 00:00:00`, `12-31-${year} 23:59:59`]
+  );
   const stream = client.query(query);
   //release the client when the stream is finished
   stream.on("end", () => console.log("terminou..."));
 
-  stream.pipe(JSONStream.stringify()).pipe(res);
-  // res.json({});
+  stream
+    .pipe(JSONStream.stringify())
+    .pipe(JSONStream.parse("*"))
+    .pipe(
+      es.map((data, callback) => {
+        let hello = async (data) => {
+          return await workQueue.add(data, { removeOnComplete: true });
+        };
+
+        hello(data)
+          .then((data) => {
+            callback(null, JSON.stringify(data));
+          })
+          .catch((r) => {
+            console.log(`ERROR ADD QUEUE: ${r}`);
+          });
+      })
+    )
+    .pipe(res);
 });
 
 // You can listen to global events to get notified when jobs are processed
-typeQueue("activists").on("global:completed", (jobId, result) => {
-  console.log(`Activists Job completed ${result}`);
-});
-typeQueue("form_entries").on("global:completed", (jobId, result) => {
-  console.log(`Actions Job completed ${result}`);
-});
-typeQueue("donations").on("global:completed", (jobId, result) => {
-  console.log(`Actions Job completed ${result}`);
-});
-typeQueue("activist_pressures").on("global:completed", (jobId, result) => {
-  console.log(`Actions Job completed ${result}`);
+workQueue.on("global:completed", (jobId, result) => {
+  console.log(`Job completed with result ${result}`);
 });
 
 app.listen(PORT, () => console.log("Server started!"));
