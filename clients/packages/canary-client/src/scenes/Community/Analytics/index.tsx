@@ -127,7 +127,7 @@ const Analytics = () => (
         />
         <DownloadCSV
           label='Relatórios de ações'
-          icon='Bolt'
+          icon='BoltUnfilled'
           path='activist_actions'
         />
         <DownloadCSV
