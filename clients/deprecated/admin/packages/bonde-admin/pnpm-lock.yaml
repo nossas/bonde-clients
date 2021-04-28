@@ -1,0 +1,7 @@
+lockfileVersion: 5.3
+
+specifiers:
+  bonde-webpage: workspace:0.16.5
+
+dependencies:
+  bonde-webpage: link:../bonde-webpage
