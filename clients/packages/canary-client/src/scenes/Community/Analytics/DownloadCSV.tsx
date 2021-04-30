@@ -32,13 +32,13 @@ const ReportButton = styled.button<ReportButtonProps>`
   }
 
   ${Panel} {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     align-items: center;
+    grid-gap: 20px;
     width: 205px;
     height: 96px;
-    padding: 25px 30px;
-
+    padding: 25px 20px;
     text-align: left;
 
     div {
@@ -52,10 +52,10 @@ const ReportButton = styled.button<ReportButtonProps>`
           height: calc(0.4*135px);
           margin-top: -19px;
           margin-bottom: -10px;
-          `
+        `
         : `
-          margin-right: 8px;
-          `
+          margin-right: 0;
+        `
       }
     }
   }
@@ -64,10 +64,10 @@ const ReportButton = styled.button<ReportButtonProps>`
 type DownloadCSVProps = {
   path: 'donation_reports' | 'download_subscriptions' | 'activist_actions' | 'activists'
   label: string
-  icon: string
+  icon: any
 }
 
-const DownloadCSV = ({ path, label, icon }: DownloadCSVProps) => {
+const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const { community, token } = useSession();
   const apiUrl = process.env.REACT_APP_DOMAIN_API_REST;
@@ -110,8 +110,8 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps) => {
           ? <Loading size='small' />
           : (
             <>
-              <Icon name={icon as any} />
-              <Header.H5 uppercase color='#000'>{label}</Header.H5>
+              <Icon name={icon as any} size="large" />
+              <Header.H5 uppercase  style={{ fontWeight: 800, color: '#000' }}>{label}</Header.H5>
             </>
           )
         }
