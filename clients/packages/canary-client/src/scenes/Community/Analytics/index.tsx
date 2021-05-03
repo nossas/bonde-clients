@@ -106,18 +106,7 @@ const Number = ({ query: Query, children, format }: NumberProps) => {
 Number.defaultProps = {
   format: 'default'
 }
-
-const SvgContainer = styled.div`
-  display: inline-block;
-
-  svg {
-    width: 47px;
-    height: 37px;
-    margin-top: 0px;
-  }
-`
-
-const Analytics = () => (
+const Analytics = ():JSX.Element => (
   <Container fluid style={{ width: "100%", padding: "0" }}>
     <Row>
       <Col xs={12}>
@@ -125,14 +114,11 @@ const Analytics = () => (
       </Col>
 
       <Col xs={12} style={{ display: 'flex', alignItems: 'center'}}>
-        <SvgContainer>
           <DownloadCSV
             label='Relatórios de doações'
             icon='Ticket'
             path='donation_reports'
           />
-        </SvgContainer>
-
         <DownloadCSV
           label='Doadores recorrentes'
           icon='TicketRecurring'

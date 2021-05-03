@@ -110,7 +110,7 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
           ? <Loading size='small' />
           : (
             <>
-              <Icon name={icon as any} size="large" />
+              <Icon name={icon as any} />
               <Header.H5 uppercase  style={{ fontWeight: 800, color: '#000' }}>{label}</Header.H5>
             </>
           )
