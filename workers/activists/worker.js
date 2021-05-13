@@ -302,7 +302,6 @@ function start_activists() {
     }
     // A job can return values that will be stored in Redis as JSON
     // This return value is unused in this demo application.
-    return job.data;
   });
 }
 
