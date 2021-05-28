@@ -3,6 +3,8 @@ import * as db from './db';
 import crypto from 'crypto';
 import { queue } from './queue';
 import { main as mainCerts} from './certs';
+import {makeCommad as makeCleanCommad} from './clean';
+
 
 const communityId = '9';
 const program = new Command();
@@ -203,5 +205,7 @@ function makeHeatCommand() {
   return heat;
 }
 program.addCommand(makeHeatCommand());
+
+program.addCommand(makeCleanCommad()); 
 
 program.parse(process.argv);
