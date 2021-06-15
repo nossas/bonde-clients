@@ -17,7 +17,7 @@ spec:
             requests:
               cpu: 400m
               memory: 512Mi
-          workingDir: /workspace/source/clients
+          workingDir: /workspace/source
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@versionStream
           name: ""
@@ -25,12 +25,25 @@ spec:
         - name: jx-variables
           resources: {}
         - name: build-npm-install
+          script: |
+            #!/bin/sh
+            cd clients
+            npm install
           resources: {}
         - name: build-npm-test
+          script: |
+            #!/bin/sh
+            cd clients
+            CI=true DISPLAY=:99 npm test
           resources: {}
         - name: check-registry
           resources: {}
         - name: build-container-build
+          script: |
+            #!/busybox/sh
+            source .jx/variables.sh
+            cp /tekton/creds-secrets/tekton-container-registry-auth/.dockerconfigjson /kaniko/.docker/config.json
+            /kaniko/executor $KANIKO_FLAGS --context=/workspace/source/clients --dockerfile=Dockerfile --destination=$PUSH_CONTAINER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION
           resources: {}
         - name: promote-jx-preview
           resources: {}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "AGPL-3.0",
   "scripts": {
+    "postinstall": "pnpm i",
     "test": "pnpm m run test",
     "build": "pnpm m run build",
     "start": "pnpm m run start"
