@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:')
+export const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:')
 
 export const getActions = async(communityId:string, kind:string, modelAction:any, models: any) => {
     return await models.Community.findAndCountAll({
@@ -45,6 +45,7 @@ export const model = () => {
     class PressureByPhone extends Model { }
     class Donation extends Model { }
     class Activist extends Model { }
+    class ActivistPressures extends Model { }
 
     Community.init({
         id: { type: DataTypes.STRING, primaryKey: true },
@@ -90,10 +91,12 @@ export const model = () => {
 
     FormEntry.init({
         id: { type: DataTypes.STRING, primaryKey: true },
+        activist_id : DataTypes.STRING,
         widgetId: DataTypes.STRING,
         createdAt: DataTypes.DATE,
         fields: DataTypes.HSTORE,
         updatedAt: DataTypes.DATE
+     
     }, { underscored: true, sequelize, modelName: 'form_entry' });
 
     Widget.hasMany(FormEntry);
@@ -122,6 +125,7 @@ export const model = () => {
 
     Donation.init({
         id: { type: DataTypes.STRING, primaryKey: true },
+        activist_id : DataTypes.STRING,
         widgetId: DataTypes.STRING,
         paymentMethod: DataTypes.STRING,
         amount: DataTypes.NUMBER,
@@ -139,10 +143,23 @@ export const model = () => {
 
     Activist.init({
         id: { type: DataTypes.STRING, primaryKey: true },
+        name : DataTypes.STRING,
+        email: DataTypes.STRING,
+        phone : DataTypes.STRING,
+        document_number : DataTypes.STRING,
+        document_type : DataTypes.STRING,
+        city : DataTypes.STRING,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
     }, { underscored: true, sequelize, modelName: 'activist' });
-
+    
+    ActivistPressures.init({
+        id: { type: DataTypes.STRING, primaryKey: true },
+        activist_id : DataTypes.STRING,
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
+    }, { underscored: true, sequelize, modelName: 'activist_pressures' });
+    
     return {
         Community,
         Mobilization,
@@ -152,6 +169,7 @@ export const model = () => {
         PressureByEmail,
         PressureByPhone,
         Donation,
-        Activist
+        Activist,
+        ActivistPressures
     };
 };
