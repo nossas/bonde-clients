@@ -120,7 +120,7 @@ const checkIP = async (m: any) => {
   const searchIp = (geoip: any, ip: string) => {
     let ret = false;
     if (Array.isArray(geoip.Answer)) {
-      geoip.Answer.forEach((element:any) => {
+      geoip.Answer.forEach((element: any) => {
         if (element.data !== undefined && element.data === ip) {
           ret = true;
         }
@@ -136,8 +136,8 @@ const checkIP = async (m: any) => {
     const r = await fetch(`https://dns.google/resolve?name=${m.custom_domain}`);
     geoip = await r.json();
 
-    return (searchIp(geoip, '50.19.148.209') ? m : { error: true });
-    // return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
+    // return (searchIp(geoip, '50.19.148.209') ? m : { error: true });
+    return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
   } catch (error) {
     console.log(error);
     return false;
@@ -151,9 +151,11 @@ services:`;
 // sofisticar o valor do host do serviço para incluir domínios com www e sem www
 let dockerComposeServiceTemplate = (element_name: any, validatedDNS: any) => `
   ${slugify(element_name)}:
-    image: nossas/bonde-public-ts:0.3.5-alpha.0
+    image: nossas/bonde-public-ts:0.3.4
     environment:
 ${process.env.TPL_SERVICE_ENV}
+    external_links:
+      - webservers/api-graphql:api-graphql
     command:
       - yarn
       - start
@@ -162,12 +164,12 @@ ${process.env.TPL_SERVICE_ENV}
       traefik.enable: 'true'
       traefik.frontend.priority: 1
       traefik.frontend.rule: Host:${validatedDNS.map((c: any) => {
-        const d = c.value.custom_domain;
-        if (d !== undefined) {
-          return d + ',' + d.replace('www.', '');
-        }
-        return '';
-      }).join(',')};
+  const d = c.value.custom_domain;
+  if (d !== undefined) {
+    return d + ',' + d.replace('www.', '');
+  }
+  return '';
+}).join(',')};
       traefik.acme: 'true'`;
 
 const dockerComposeService = (community: any, validatedDNS: any) => {
@@ -196,13 +198,13 @@ export async function main() {
   dockerComposeTemplate = dockerComposeTemplate + results2.map((c: any) => {
     let communityHasActiveDomain = false;
     if (c.value.mobilizations[0] !== undefined) {
-      c.value.mobilizations.map((v:any) => {
+      c.value.mobilizations.map((v: any) => {
         if (Object.keys(v.value).length >= 1 && v.value.custom_domain !== undefined && v.value.custom_domain.length > 1) {
           communityHasActiveDomain = true
         }
       });
     }
-    return ( communityHasActiveDomain ? dockerComposeService(c.value, c.value.mobilizations) : '');
+    return (communityHasActiveDomain ? dockerComposeService(c.value, c.value.mobilizations) : '');
   }).join('');
 
   const deploy = await fetch(`${process.env.RANCHER_API_URL}/v2-beta/projects/${process.env.RANCHER_PROJECT_ID}/stacks`, {

@@ -193,7 +193,14 @@ function makeHeatCommand() {
   heat
     .command('jug')
     .action(() => {
-      console.log('heat jug');
+      console.log('heat jug txt');
+
+      // const Model = db.model();
+      // const activist = Model.Activist.findAll();
+      // activist.forEach((element: any) => {
+      //   console.log(element.name)
+      // });
+
     });
   heat
     .command('pot')
