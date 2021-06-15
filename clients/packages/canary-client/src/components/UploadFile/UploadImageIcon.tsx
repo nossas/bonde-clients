@@ -1,6 +1,6 @@
 import React from "react";
 
-function Icon() {
+const Icon: React.FC<{ scale?: number }> = ({ scale }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ function Icon() {
       height="84"
       fill="none"
       viewBox="0 0 84 84"
+      style={{ transform: `scale(${scale})` }}
     >
       <circle cx="42" cy="42" r="41.5" fill="#424242" stroke="#EEE"></circle>
       <path fill="#000" d="M59.58 29H25v25.56h34.58V29z" opacity="0.502"></path>
@@ -39,6 +40,10 @@ function Icon() {
       ></path>
     </svg>
   );
+}
+
+Icon.defaultProps = {
+  scale: 1
 }
 
 export default Icon;

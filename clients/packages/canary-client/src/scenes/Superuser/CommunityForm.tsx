@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import {
   Button,
@@ -7,6 +8,23 @@ import {
   Validators,
   toast
 } from 'bonde-components';
+import { Row, Col } from 'react-grid-system';
+import { useTranslation } from 'react-i18next';
+
+import UploadField from "../../components/UploadFile";
+import Panel from '../../components/Panel';
+
+const { isEmail, required } = Validators;
+
+export const isValidFromEmail = (value: any): string | undefined => {
+  const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/
+  if (regex.test(value)) {
+    const email = value.match(regex)[1]
+    return isEmail('E-mail inválido')(email);
+  } else {
+    return 'Padrão inválido. Ex: Nome do remente <email@host.com>';
+  }
+}
 
 const InsertCommunityMutation = gql`
   mutation InsertCommunities($input: [communities_insert_input!]!) {
@@ -27,13 +45,19 @@ const InsertCommunityMutation = gql`
       }
     }
   }
+`;
+
+const ButtonStyled = styled(Button)`
+  width: auto;
+  padding: 10px 30px;
+  margin-right: 15px;
 `
 
-const CommunityForm = () => {
+const CommunityForm: React.FC = () => {
   const [insertCommunity] = useMutation(InsertCommunityMutation);
   const { user } = useSession();
+  const { t } = useTranslation('community');
 
-  const { required } = Validators;
   const initialValues = {
     community_users: {
       data: {
@@ -52,7 +76,7 @@ const CommunityForm = () => {
             // TODO: i18n
             toast(`Parabéns, a comunidade ${values.name} foi adicionada ao Bonde`, { type: toast.TYPE.SUCCESS });
           })
-          .catch(({ graphQLErrors, ...errors }) => {
+          .catch(({ graphQLErrors, ...errors }: any) => {
             if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'permission-error').length > 0) {
               toast('Ops! Seu usuário não possui permissão para essa ação, qualquer dúvida entre em contato pelo suporte.', { type: toast.TYPE.ERROR });
             } else {
@@ -61,26 +85,49 @@ const CommunityForm = () => {
           })
       }}
     >
-      {({ submitting }) => (
-        <>
-          <InputField
-            name='name'
-            label='Nome'
-            placeholder='Insira o nome da comunidade'
-            validate={required('Preencha o nome da comunidade')}
-          />
-          <InputField
-            name='city'
-            label='Cidade'
-            placeholder='Insira a cidade da comunidade'
-          />
-          <InputField
-            name='description'
-            label='Sobre a comunidade'
-            placeholder='Insira uma breve descrição sobre o que está comunidade faz'
-          />
-          <Button type='submit' disabled={submitting}>Criar comunidade</Button>
-        </>
+      {({ submitting, dirty }: any) => (
+        <Row>
+          <Col sm={12} lg={6}>
+            <Panel>
+              <UploadField
+                label={t('info.form.fields.image.label')}
+                name='image'
+                validate={required('Preenchimento da Imagem é obrigatório')}
+              />
+              <InputField
+                name='name'
+                label={t('info.form.fields.name.label')}
+                placeholder={t('info.form.fields.name.placeholder')}
+                validate={required('Preenchimento do Nome é obrigatório')}
+              />
+              <InputField
+                name='city'
+                label={t('info.form.fields.city.label')}
+                placeholder={t('info.form.fields.city.placeholder')}
+              />
+              <InputField
+                name='description'
+                label={t('info.form.fields.description.label')}
+                placeholder={t('info.form.fields.description.placeholder')}
+              />
+              <InputField
+                name='signature.name'
+                label='Assinatura da comunidade'
+                placeholder='Nome da comunidade na assinatura'
+                validate={required('Preenchimento da Assinatura é obrigatório')}
+              />
+              <InputField
+                name='signature.url'
+                label='Site da comunidade'
+                placeholder='Insira o link do site ou página oficial da sua comunidade'
+                validate={required('Preenchimento do Site ou Página oficial é obrigatório')}
+              />
+              <Row justify='end'>
+                <ButtonStyled disabled={submitting || !dirty} type='submit'>Criar comunidade</ButtonStyled>
+              </Row>
+            </Panel>
+          </Col>
+        </Row>
       )}
     </ConnectedForm>
   );

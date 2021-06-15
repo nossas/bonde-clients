@@ -6,14 +6,17 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "@types/graceful-fs": "^4.1.5",
     "@types/jest": "24.0.0",
     "@types/node": "^12.0.0",
+    "@types/normalize-package-data": "^2.4.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
-    "bonde-components": "0.0.4-alpha.30",
-    "bonde-core-tools": "0.1.7-alpha.10",
+    "babel-plugin-transform-async-to-promises": "^0.8.15",
+    "bonde-components": "workspace:0.0.4-alpha.28",
+    "bonde-core-tools": "workspace:0.1.7-alpha.7",
     "faker": "^5.1.0",
     "i18next": "^19.6.3",
     "i18next-browser-languagedetector": "^5.0.1",
@@ -26,8 +29,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "serve": "^11.3.2",
-    "styled-components": "5.0.0",
-    "typescript": "3.8"
+    "styled-components": "5.0.1",
+    "typescript": "^3.9.6"
   },
   "browserslist": {
     "production": [
@@ -53,6 +56,8 @@
   },
   "devDependencies": {
     "@types/faker": "^5.1.5",
+    "@types/prettier": "^2.2.3",
+    "@types/scheduler": "^0.16.1",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
     "eslint": "^6.6.0",

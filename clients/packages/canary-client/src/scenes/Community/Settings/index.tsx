@@ -1,14 +1,16 @@
 import React from 'react';
-import { InputField, Button, Tooltip, Success, Validators } from 'bonde-components';
+import { InputField, Button, Tooltip, Success, Validators, Text, Header } from 'bonde-components';
+import { useSession } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
-import UploadField from "../../../components/UploadFile";
+import UploadField, { Image } from "../../../components/UploadFile";
 import CommunityForm from '../BaseForm';
 import Panel from '../../../components/Panel';
+import styled from 'styled-components';
 
 const { isEmail } = Validators;
 
-export const isValidFromEmail = (value: any) => {
+export const isValidFromEmail = (value: any): string | undefined => {
   const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/
   if (regex.test(value)) {
     const email = value.match(regex)[1]
@@ -18,28 +20,53 @@ export const isValidFromEmail = (value: any) => {
   }
 }
 
-const SettingsPage = () => {
+const ButtonStyled = styled(Button)`
+  width: auto;
+  min-width: 140px;
+  margin-right: 15px;
+`
+
+const SettingsPage: React.FC = () => {
   const { t } = useTranslation('community');
+  const { user } = useSession();
 
   return (
     <CommunityForm
-      formName='Settings'
+      formName={user.isAdmin ? 'SettingsIsAdmin' : 'Settings'}
       success={<Success message='UHU! Informações da comunidade atualizadas.' />}
     >
-      {({ submitting, dirty }: any) => (
+      {({ submitting, dirty, values }: any) => (
         <Container fluid style={{ width: "100%", padding: "0" }}>
           <Row>
-            <Col sm={12} lg={6}>
+            <Col sm={12} md={12} lg={6}>
               <Panel>
-                <UploadField
-                  label={t('info.form.fields.image.label')}
-                  name='community.image'
-                />
-                <InputField
-                  name='community.name'
-                  label={t('info.form.fields.name.label')}
-                  placeholder={t('info.form.fields.name.placeholder')}
-                />
+                {user.isAdmin ? (
+                  <>
+                    <UploadField
+                      label={t('info.form.fields.image.label')}
+                      name='community.image'
+                      disabled={!user.isAdmin}
+                    />
+                    <InputField
+                      name='community.name'
+                      label={t('info.form.fields.name.label')}
+                      placeholder={t('info.form.fields.name.placeholder')}
+                    />
+                  </>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '20px', alignItems: 'flex-end' }}>
+                    <Image scale={0.7}>
+                      <img
+                        src={values.community.image || `https://via.placeholder.com/100?text=${values.community.name.charAt(0)}`}
+                        alt={values.community.name}
+                      />
+                    </Image>
+                    <div style={{ marginLeft: '30px' }}>
+                      <Header.H3 style={{ marginBottom: '5px' }}>{values.community.name}</Header.H3>
+                      <Text>Para alterar logo, nome ou assinatura da sua comunidade, entre em contato com o suporte.</Text>
+                    </div>
+                  </div>
+                )}
                 <InputField
                   name='community.description'
                   label={t('info.form.fields.description.label')}
@@ -66,10 +93,20 @@ const SettingsPage = () => {
                   placeholder={t('info.form.fields.email_template_from.placeholder')}
                   validate={isValidFromEmail}
                 />
+                <InputField
+                  disabled={!user.isAdmin}
+                  name='community.signature.name'
+                  label='Assinatura da comunidade'
+                  placeholder='Nome da comunidade'
+                />
+                <InputField
+                  disabled={!user.isAdmin}
+                  name='community.signature.url'
+                  label='Site da comunidade'
+                  placeholder='Insira o link do site ou página oficial da sua comunidade'
+                />
                 <Row justify='end'>
-                  <Col xs={3}>
-                    <Button disabled={submitting || !dirty} type='submit'>{t('buttons.submit')}</Button>
-                  </Col>
+                  <ButtonStyled disabled={submitting || !dirty} type='submit'>{t('buttons.submit')}</ButtonStyled>
                 </Row>
               </Panel>
             </Col>

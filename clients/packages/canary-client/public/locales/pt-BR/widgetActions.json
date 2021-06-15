@@ -10,8 +10,8 @@
     "shortcuts": {
       "title": "Atalhos",
       "buttons": {
-        "newMobilization": "Criar uma página",
-        "mobilizations": "Ver as mobilizações",
+        "newMobilization": "Criar página",
+        "mobilizations": "Ver páginas",
         "reports": "Ver dados e relatórios",
         "domains": "Configurar domínio"
       }

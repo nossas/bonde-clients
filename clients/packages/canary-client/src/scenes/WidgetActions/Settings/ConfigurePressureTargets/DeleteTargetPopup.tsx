@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, gql } from "bonde-core-tools";
 import { Header, Text, Button, toast } from "bonde-components";
 import { useTranslation } from "react-i18next";
-import { css } from "styled-components/macro";
+import styled from "styled-components";
 
 type Props = {
   remove: () => void;
@@ -15,6 +15,15 @@ const DELETE_PRESSURE_TARGET = gql`
     delete_pressure_targets(where: { id: $id }) {
       affected_rows
     }
+  }
+`;
+
+const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+  & > button:first-child {
+    padding-left: 0;
+    justify-content: start;
   }
 `;
 
@@ -48,16 +57,7 @@ const DeleteTargetPopup = ({
       <Text style={{ margin: "20px 0" }}>
         {t('settings.pressure.delete.confirm')}
       </Text>
-      <div
-        css={css`
-          display: flex;
-          justify-content: space-between;
-          & > button:first-child {
-            padding-left: 0;
-            justify-content: start;
-          }
-        `}
-      >
+      <Box>
         <Button
           secondary
           onClick={onClose}
@@ -67,7 +67,7 @@ const DeleteTargetPopup = ({
         <Button onClick={() => onSubmit(pressureTargetId)}>
           {t('settings.pressure.button.delete')}
         </Button>
-      </div>
+      </Box>
     </>
   );
 };

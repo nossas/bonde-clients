@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
-import { Header, Navigation, Tab, Row, Col } from 'bonde-components';
+import { Header, Navigation, Tab } from 'bonde-components';
+import { Container, Row, Col } from 'react-grid-system';
 // import { useSession } from 'bonde-core-tools'
-import Content from '../../components/Content';
 import CommunityForm from './CommunityForm';
 // import Mobilizers from './Mobilizers'
 
@@ -25,28 +25,71 @@ const PageWrap = styled.div`
   flex-grow: 1;
 `;
 
+// const MenuItem = styled.button`
+//   display: flex;
+//   align-items: center;
+//   text-align: left;
+
+//   width: 205px;
+//   height: 96px;
+//   padding: 25px 30px;
+//   margin: 0 18px 5px 0;
+//   background-color: #fff;
+//   text-transform: uppercase;
+//   border: none;
+//   outline: none;
+//   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.28);
+
+//   svg {
+//     margin-right: 15px;
+//   }
+
+//   &:active, &:focus, &:hover {
+//     border: none;
+//     outline: none;
+//   }
+
+//   &:hover {
+//     h5 {
+//       color: #a4a4a4 !important;
+//     }
+
+//     .fill {
+//       path {
+//         fill: #a4a4a4 !important;
+//       }
+//     }
+//   }
+// `
+
 type Props = {
   match: any
+  // history: any
 }
 
-const UserPage = ({ match }: Props) => {
-  // const { user } = useSession()
-
-  // RegexWith parameters number
-  // \/community\/\d+\/mobilizers\/*
-  // const isActive = new RegExp(/\/user\/profile\/*/).test(location.pathname)
-
+const SuperuserPage: React.FC<Props> = ({ match }) => {
   return (
     <PageWrap>
       <SubHeader>
         {/** TODO: i18n */}
-        <Header.H3>Superusuário</Header.H3>
+        <Header.H3>Superadmin</Header.H3>
         <Navigation>
           {/** TODO: i18n */}
-          <Tab active>Criar Comunidade</Tab>
+          <Tab active>CRIAR COMUNIDADE</Tab>
         </Navigation>
       </SubHeader>
-      <Content>
+      <Container fluid style={{ width: "100%", padding: "30px 60px" }}>
+        {/* <Row style={{ marginBottom: '20px' }}>
+          <Col sm={12}>
+            <Header.H5 style={{ marginBottom: '15px' }}>FUNÇÕES</Header.H5>
+          </Col>
+          <Col>
+            <MenuItem onClick={() => history.push(`${match.url}/add`)}>
+              <Icon name='Plus' />
+              <span>Nova comundidade</span>
+            </MenuItem>
+          </Col>
+        </Row> */}
         <Row>
           <Col>
             <Switch>
@@ -56,9 +99,9 @@ const UserPage = ({ match }: Props) => {
             </Switch>
           </Col>
         </Row>
-      </Content>
+      </Container>
     </PageWrap>
   );
 };
 
-export default UserPage;
+export default SuperuserPage;

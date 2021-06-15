@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import EditImageIcon from './EditImageIcon';
 
-const ImageStyled = styled.div`
+interface ImageStyledProps {
+  scale?: number
+}
+
+export const ImageStyled = styled.div<ImageStyledProps>`
   position: relative;
+  transform: ${props => `scale(${props.scale})`};
 
   img {
     width: 83px;
@@ -23,11 +28,20 @@ const ImageStyled = styled.div`
   }
 `
 
-const Image = ({ src, alt }: any) => (
-  <ImageStyled>
+interface ImageProps extends ImageStyledProps {
+  src: string
+  alt?: string
+}
+
+const Image: React.FC<ImageProps> = ({ src, alt, scale }) => (
+  <ImageStyled scale={scale}>
     <img src={src} alt={alt} />
     <EditImageIcon />
   </ImageStyled>
-)
+);
+
+Image.defaultProps = {
+  scale: 1
+}
 
 export default Image;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ConnectedForm, toast, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
-import { css } from 'styled-components/macro';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Widget } from '../FetchWidgets';
 
@@ -32,6 +32,17 @@ type Props = {
   // ReactFinalForm Props
   mutators?: any
 }
+
+const Box = styled.div`
+  position: relative;
+
+  .floating {
+    position: absolute;
+    top: -170px;
+    right: 0;
+    width: 150px;
+  }
+`
 
 const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connectedFormProps }: Props) => {
   const [save] = useMutation(UpdateWidgetGQL);
@@ -66,23 +77,12 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
       {...connectedFormProps}
     >
       {({ submitting, pristine, ...formProps }: any) => (
-        <div
-          css={`
-            position: relative;
-          `}
-        >
-          <div
-            css={css`
-              position: absolute;
-              top: -170px;
-              right: 0;
-              width: 150px;
-            `}
-          >
+        <Box>
+          <div className='floating'>
             <Button type='submit' disabled={submitting || pristine}>{t('settings.defaultForm.submit')}</Button>
           </div>
           {children({ submitting, pristine, ...formProps })}
-        </div>
+        </Box>
       )}
     </ConnectedForm>
   )

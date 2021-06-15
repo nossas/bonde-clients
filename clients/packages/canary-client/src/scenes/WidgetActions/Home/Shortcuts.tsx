@@ -41,7 +41,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
           }
         }}
         text={t('home.shortcuts.buttons.newMobilization')}
-        icon={<Icon name="Mobilization" size="default" />}
+        icon={<Icon name="New" size="large" />}
       />
       <Shortcut
         onClick={() => {
@@ -55,7 +55,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
           }
         }}
         text={t('home.shortcuts.buttons.mobilizations')}
-        icon={<Icon name="Bolt" size="default" />}
+        icon={<Icon name="Window" size="default" />}
       />
       <Link to="/community/analytics">
         <Shortcut
@@ -66,7 +66,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
       <Link to="/community/domains">
         <Shortcut
           text={t('home.shortcuts.buttons.domains')}
-          icon={<Icon name="Cloud" size="default" />}
+          icon={<Icon name="Cloud" size="large" />}
         />
       </Link>
     </Grid>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { FormField, Hint, Label, useField } from "bonde-components";
-import { css } from "styled-components/macro";
+import styled from "styled-components";
 
 type RadioFieldProps = {
   children: any
@@ -11,6 +11,12 @@ type RadioFieldProps = {
 
 const RadioFieldContext = createContext({});
 
+const Box = styled.div<{ direction?: 'row' | 'column' }>`
+  display: flex;
+  flex-direction: ${props => props.direction};
+  margin: 15px 0 0 -15px;
+`
+
 const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
   const { input, meta } = useField(name);
 
@@ -19,13 +25,9 @@ const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
       <FormField>
         <Label>{label}</Label>
         {meta.error && <Hint color='error'>{meta.error}</Hint>}
-        <div css={css`
-          display: flex;
-          flex-direction: ${direction};
-          margin: 15px 0 0 -15px;
-        `}>
+        <Box direction={direction}>
           {children}
-        </div>
+        </Box>
       </FormField>
     </RadioFieldContext.Provider>
   );
@@ -35,18 +37,20 @@ RadioField.defaultProps = {
   direction: 'row'
 }
 
+const LabelStyled = styled(Label)`
+  margin-left: 15px;
+  align-items: center;
+
+  input {
+    margin-right: 8px;
+  }
+`
+
 export const Radio = ({ children, value }: any) => {
   const { input }: any = useContext(RadioFieldContext);
 
   return (
-    <Label css={css`
-      margin-left: 15px;
-      align-items: center;
-
-      input {
-        margin-right: 8px;
-      }
-    `}>
+    <LabelStyled>
       <input
         type="radio"
         checked={input.value === value}
@@ -54,7 +58,7 @@ export const Radio = ({ children, value }: any) => {
         value={value}
       />
       {children}
-    </Label>
+    </LabelStyled>
   );
 }
 
