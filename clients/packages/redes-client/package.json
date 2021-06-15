@@ -17,6 +17,8 @@
     "@types/styled-components": "^5.1.10",
     "deep-object-diff": "^1.1.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
+    "bonde-components": "workspace:0.0.4-alpha.28",
+    "bonde-core-tools": "workspace:0.1.7-alpha.7",
     "react-table": "^7.6.0"
   },
   "devDependencies": {

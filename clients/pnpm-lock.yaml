@@ -21,8 +21,6 @@ importers:
       '@typescript-eslint/eslint-plugin': ^3.10.1
       '@typescript-eslint/parser': ^3.10.1
       babel-plugin-transform-async-to-promises: ^0.8.15
-      bonde-components: workspace:0.0.4-alpha.28
-      bonde-core-tools: workspace:0.1.7-alpha.7
       eslint: ^6.6.0
       faker: ^5.1.0
       husky: ^4.2.5
@@ -31,6 +29,7 @@ importers:
       i18next-http-backend: ^1.0.17
       jest: 24.9.0
       lint-staged: ^10.2.11
+      pnpm: ^6.7.6
       react: ^16.13.1
       react-dom: ^16.13.1
       react-grid-system: 7.0.3
@@ -53,13 +52,12 @@ importers:
       '@types/react-router-dom': 5.1.6
       '@types/styled-components': 5.1.4
       babel-plugin-transform-async-to-promises: 0.8.15
-      bonde-components: link:libs/components
-      bonde-core-tools: link:libs/core-tools
       faker: 5.1.0
       i18next: 19.8.3
       i18next-browser-languagedetector: 5.0.1
       i18next-http-backend: 1.0.21
       jest: 24.9.0
+      pnpm: 6.7.6
       react: 16.14.0
       react-dom: 16.14.0_react@16.14.0
       react-grid-system: 7.0.3_react@16.14.0
@@ -201,9 +199,13 @@ importers:
       '@types/normalize-package-data': ^2.4.0
       '@types/prettier': ^2.2.3
       '@types/scheduler': ^0.16.1
+      bonde-components: workspace:0.0.4-alpha.28
+      bonde-core-tools: workspace:0.1.7-alpha.7
     dependencies:
       '@types/graceful-fs': 4.1.5
       '@types/normalize-package-data': 2.4.0
+      bonde-components: link:../../libs/components
+      bonde-core-tools: link:../../libs/core-tools
     devDependencies:
       '@types/prettier': 2.3.0
       '@types/scheduler': 0.16.1
@@ -235,6 +237,8 @@ importers:
       '@types/react-color': ^3.0.4
       '@types/react-table': ^7.0.22
       '@types/scheduler': ^0.16.1
+      bonde-components: workspace:0.0.4-alpha.28
+      bonde-core-tools: workspace:0.1.7-alpha.7
       bonde-styleguide: ^0.16.5-alpha.5
       clipboard-copy: ^3.1.0
       downloadjs: ^1.4.7
@@ -274,6 +278,8 @@ importers:
       '@types/normalize-package-data': 2.4.0
       '@types/react-color': 3.0.4
       '@types/react-table': 7.0.25
+      bonde-components: link:../../libs/components
+      bonde-core-tools: link:../../libs/core-tools
       bonde-styleguide: 0.16.5-alpha.5
       clipboard-copy: 3.2.0
       downloadjs: 1.4.7
@@ -303,6 +309,8 @@ importers:
       '@types/react-table': ^7.0.22
       '@types/scheduler': ^0.16.1
       '@types/styled-components': ^5.1.10
+      bonde-components: workspace:0.0.4-alpha.28
+      bonde-core-tools: workspace:0.1.7-alpha.7
       deep-object-diff: ^1.1.0
       jest-environment-jsdom-sixteen: ^1.0.3
       react-table: ^7.6.0
@@ -313,6 +321,8 @@ importers:
       '@types/normalize-package-data': 2.4.0
       '@types/react-table': 7.0.25
       '@types/styled-components': 5.1.10
+      bonde-components: link:../../libs/components
+      bonde-core-tools: link:../../libs/core-tools
       deep-object-diff: 1.1.0
       jest-environment-jsdom-sixteen: 1.0.3
       react-table: 7.6.1
@@ -13827,7 +13837,7 @@ packages:
     resolution: {integrity: sha512-jd9olUr9D7do+RN8Wspzhpxhgp1n6Vd0NtQ4SFkmIACZoEL1nkyAdW9Ygrinjec0vgDcWjscFQQ1gDW8rsfKTg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.1.6_typescript@3.9.9
+      ts-pnp: 1.1.6_typescript@3.8.3
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -13836,9 +13846,15 @@ packages:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.1.6_typescript@3.9.9
+      ts-pnp: 1.1.6_typescript@3.8.3
     transitivePeerDependencies:
       - typescript
+    dev: false
+
+  /pnpm/6.7.6:
+    resolution: {integrity: sha512-VhO6zVIuhVkKXP3kWMZs9W5b3rhcztq524WoAc9OEwjmj7SiKyp0UNltaaLR0VRjFGJPuQOcqDbNkWwzao6dUw==}
+    engines: {node: '>=12.17'}
+    hasBin: true
     dev: false
 
   /point-in-polygon/1.0.1:
@@ -15272,7 +15288,7 @@ packages:
       semver: 6.3.0
       style-loader: 0.23.1
       terser-webpack-plugin: 2.3.5_webpack@4.42.0
-      ts-pnp: 1.1.6_typescript@3.9.9
+      ts-pnp: 1.1.6_typescript@3.8.3
       typescript: 3.9.9
       url-loader: 2.3.0_file-loader@4.3.0+webpack@4.42.0
       webpack: 4.42.0
@@ -17510,7 +17526,7 @@ packages:
       typescript: 3.8.3
     dev: true
 
-  /ts-pnp/1.1.6_typescript@3.9.9:
+  /ts-pnp/1.1.6_typescript@3.8.3:
     resolution: {integrity: sha512-CrG5GqAAzMT7144Cl+UIFP7mz/iIhiy+xQ6GGcnjTezhALT02uPMRw7tgDSESgB5MsfKt55+GPWw4ir1kVtMIQ==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -17519,7 +17535,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      typescript: 3.9.9
+      typescript: 3.8.3
 
   /tsdx/0.12.3:
     resolution: {integrity: sha512-BQ0oj9S5Yti6Esol+29ztiJs0kSUA57LngT0G4VF2lqTDRZcMlByCMyWa7yOih08t1wNUj8ah0ml7WJkf8PIbA==}

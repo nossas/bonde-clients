@@ -23,7 +23,7 @@ spec:
           volumeMounts:
           - mountPath: /tekton/home/npm
             name: npmrc
-          workingDir: /workspace/source
+          workingDir: /workspace/source/clients
         steps:
         - image: uses:jenkins-x/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
