@@ -12,7 +12,7 @@ import {
   Columns,
   valueFirstName,
   valueString,
-  Individual,
+  Relation
 } from "../../../types";
 
 const columns = (
@@ -107,7 +107,7 @@ const columns = (
       Cell: ({
         row: { original },
       }: {
-        row: { original: { volunteer: Individual; recipient: Individual } };
+        row: { original: any };
       }): ReactElement => {
         console.log({original})
         return (
