@@ -92,7 +92,6 @@ const RECIPIENTS_FOR_MATCH = gql`
           { individual: { longitude: {_is_null: false} } }
           { individual: { latitude: {_neq: "ZERO_RESULTS"} } }
           { individual: { longitude: {_neq: "ZERO_RESULTS"} } }
-          { individual: { city: {_neq: "ZERO_RESULTS"} } }
           { individual: { city: {_neq: "Internacional"} } }
         ]
       }
