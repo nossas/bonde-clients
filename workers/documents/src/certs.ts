@@ -136,8 +136,8 @@ const checkIP = async (m: any) => {
     const r = await fetch(`https://dns.google/resolve?name=${m.custom_domain}`);
     geoip = await r.json();
 
-    // return (searchIp(geoip, '50.19.148.209') ? m : { error: true });
-    return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
+    return (searchIp(geoip, '50.19.148.209') ? m : { error: true });
+    // return (searchIp(geoip, '54.156.173.29') ? m : { error: true });
   } catch (error) {
     console.log(error);
     return false;
@@ -151,7 +151,7 @@ services:`;
 // sofisticar o valor do host do serviço para incluir domínios com www e sem www
 let dockerComposeServiceTemplate = (element_name: any, validatedDNS: any) => `
   ${slugify(element_name)}:
-    image: nossas/bonde-public-ts:0.3.4
+    image: nossas/bonde-public-ts:0.4.1-alpha.3
     environment:
 ${process.env.TPL_SERVICE_ENV}
     external_links:
@@ -162,7 +162,7 @@ ${process.env.TPL_SERVICE_ENV}
     labels:
       traefik.port: '3000'
       traefik.enable: 'true'
-      traefik.frontend.priority: 1
+      traefik.frontend.priority: 10
       traefik.frontend.rule: Host:${validatedDNS.map((c: any) => {
   const d = c.value.custom_domain;
   if (d !== undefined) {
