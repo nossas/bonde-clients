@@ -11,8 +11,7 @@ import {
   Groups,
   Columns,
   valueFirstName,
-  valueString,
-  Relation
+  valueString
 } from "../../../types";
 
 const columns = (
