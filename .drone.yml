@@ -29,7 +29,8 @@ pipeline:
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
       - cd clients
       - pnpm i
-      - pnpm m run build
+      - pnpm m run build --filter {libs}
+      - pnpm m run build --filter {packages}
       - cd deprecated/admin
       - pnpm i
       - pnpm m run build --filter bonde-webpage
