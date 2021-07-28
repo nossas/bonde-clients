@@ -51,7 +51,7 @@ const isDomain = (value: any) => /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-
 const DomainForm = ({ onSubmit, onClose }: Props) => {
   return (
     <ConnectedForm onSubmit={onSubmit}>
-      {({ submiting, dirty, submitError }: any) => (
+      {({ submiting, dirty, submitError, valid }: any) => (
         <Container fluid style={{ width: '100%', padding: '0' }}>
           <Row style={{ marginBottom: '24px' }}>
             <Col xs={12}>
@@ -66,13 +66,15 @@ const DomainForm = ({ onSubmit, onClose }: Props) => {
           <Row style={{ marginBottom: '20px' }}>
             <Col xs={12}>
               <Text><b>Já tem um domínio?</b> Então adicione ele aqui:</Text>
+              <Text><b>Obs:</b> Não é permitido caracteres especiais!</Text>
+
               <AddOn>
                 <InputField
                   label='http://www.'
                   name='value'
                   type='text'
                   validate={composeValidators(
-                    required('Preencha o dominio'),
+                    required('Preencha o domínio'),
                     isDomain
                   )}
                 />
@@ -89,7 +91,9 @@ const DomainForm = ({ onSubmit, onClose }: Props) => {
               <Link style={{ cursor: 'pointer' }} onClick={onClose}>Cancelar</Link>
             </Col>
             <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button disabled={submiting || !dirty} type='submit'>Continuar</Button>
+              <Button disabled={!valid || submiting || !dirty} type='submit'>
+                Continuar
+              </Button>
             </Col>
           </Row>
         </Container>
