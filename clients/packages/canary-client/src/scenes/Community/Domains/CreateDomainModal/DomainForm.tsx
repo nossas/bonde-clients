@@ -46,7 +46,7 @@ type Props = {
 
 const { composeValidators, required } = Validators;
 
-const isDomain = (value: any) => /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/.test(value) ? undefined : ' X ';
+const isDomain = (value: any) => /[\w][^A-Zç!'(?=*[}{,^?~=+\_\/*+\|]+\.[^A-Z][\w]{1,}(\.[\w]{1,})?/g.test(value) ? undefined : ' X ';
 
 const DomainForm = ({ onSubmit, onClose }: Props) => {
   return (
@@ -66,7 +66,7 @@ const DomainForm = ({ onSubmit, onClose }: Props) => {
           <Row style={{ marginBottom: '20px' }}>
             <Col xs={12}>
               <Text><b>Já tem um domínio?</b> Então adicione ele aqui:</Text>
-              <Text><b>Obs:</b> Não é permitido caracteres especiais!</Text>
+              <Text><b>Obs:</b> Não é permitido letras maiúsculas e caracteres especiais!</Text>
 
               <AddOn>
                 <InputField
