@@ -12,6 +12,7 @@ import Adjusts from './Adjusts';
 import Autofire from "./Autofire";
 import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import ConfigurePostAction from "./ConfigurePostAction";
+import Sending from "./Sending";
 
 type Props = {
   widgets: Widget[];
@@ -36,6 +37,8 @@ const Settings = ({ widgets }: Props) => {
   }
 
   return (
+    // - Nome da mobilização
+    // - Editar/Configurações
     <Container
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
@@ -54,15 +57,17 @@ const Settings = ({ widgets }: Props) => {
           >
             {t('settings.navigation.edit')}
           </Tab>
+       
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
           >
-            {t('settings.navigation.settings')}
+            {t('settings.navigation.targets')}
           </Tab>
         </>
       )}
     >
+      {/* Corpo */}
       <Row style={{ marginBottom: "20px" }}>
         <Col xs={12}>
           <Header.H3>{t('settings.header', { label: label.title.toLowerCase() })}</Header.H3>
@@ -81,6 +86,9 @@ const Settings = ({ widgets }: Props) => {
                   updateCache={updateCache}
                 />
               )}
+            </Route>
+            <Route exact path={`${match.path}/sending`}>
+              <Sending widget={widget}/>
             </Route>
             <Route exact path={`${match.path}/adjusts`}>
               <Adjusts widget={widget} />

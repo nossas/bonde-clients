@@ -24,7 +24,8 @@
     "header": "Configurar {{ label }}",
     "navigation": {
       "edit": "Editar",
-      "settings": "Configurações",
+      "targets": "Alvos",
+      "sending": "Envio",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
       "finish": "Pós-Ação"
@@ -33,6 +34,56 @@
       "error": "Houve um erro ao salvar o formulário",
       "success": "Successo ao salvar as configurações!",
       "submit": "Salvar"
+    },
+    "pressure": {
+      "targets": {
+        "success": "Alvos definidos com sucesso"
+      },
+      "radio": {
+        "unique": "Um grupo de alvos",
+        "group": "Mais de um grupo de alvos (Ex: Por estado)",
+        "yes": "Sim",
+        "no": "Não"
+      },
+      "title": {
+        "targets": "Definir alvos"
+      },
+      "label": {
+        "pressure_type": "Tipo de pressão",
+        "targets": "Adicionar alvos",
+        "email_subject": "Assunto do e-mail para os alvos",
+        "email_body": "Corpo do e-mail para os alvos",
+        "group_label": "Nome do grupo de alvos",
+        "select_label": "Nome do campo de seleção",
+        "disable_edit_field": "Desabilitar edição de assunto e corpo do email?"
+      },
+      "placeholder": {
+        "targets": "Nome do alvo 1 <nome1@alvo.org>;Nome do alvo 2 <nome2@alvo.org>",
+        "email_subject": "Escreva um assunto",
+        "email_body": "Escreva aqui o email...",
+        "group_label": "Ex. Rio de Janeiro",
+        "select_label": "Ex: Selecione seu estado"
+      },
+      "button": {
+        "cancel": "Cancelar",
+        "add": "Adicionar",
+        "addGroup": "+ ADD GRUPO DE ALVOS",
+        "delete": "Excluir"
+      },
+      "delete": {
+        "success": "Pronto! Grupo excluído.",
+        "error": "Houve um problema ao tentar excluir grupo!",
+        "title": "Excluir o grupo?",
+        "confirm": "O grupo de alvos será excluído e os contatos adicionados a ele serão perdidos."
+      }
+    },
+    "sending": {
+      "title": "Envio Otimizado",
+      "subtitle": "Indicado especialmente para campanhas de grande alcance.",
+      "how_it_works": {
+        "title": "Como funciona",
+        "description": "O envio otimizado garante que campanhas de alto engajamento não gerem impacto financeiro para a sua organização. </br>Quando sua campanha atingir o limite de envios únicos, o BONDE passará a enviar as pressões em lotes, de acordo com o intervalo de envio definido. <br/>Por ex: Quando sua campanha atingir 1000 pressões, o BONDE passará a enviar 1 e-mail para o alvo a cada 100 pressões, com todas(os) que pressionaram nesse intervalo."
+      }
     },
     "adjusts": {
       "fields": {
@@ -95,48 +146,6 @@
           "twitter": "Compartilhar no Twitter",
           "whatsapp": "Compartilhar no Whatsapp"
         }
-      }
-    },
-    "pressure": {
-      "targets": {
-        "success": "Alvos definidos com sucesso"
-      },
-      "radio": {
-        "unique": "Um grupo de alvos",
-        "group": "Mais de um grupo de alvos (Ex: Por estado)",
-        "yes": "Sim",
-        "no": "Não"
-      },
-      "title": {
-        "targets": "Definir alvos"
-      },
-      "label": {
-        "pressure_type": "Tipo de pressão",
-        "targets": "Nome e e-mail dos alvos",
-        "email_subject": "Assunto do e-mail para os alvos",
-        "email_body": "Corpo do e-mail para os alvos",
-        "group_label": "Nome do grupo de alvos",
-        "select_label": "Nome do campo de seleção",
-        "disable_edit_field": "Desabilitar edição de assunto e corpo do email?"
-      },
-      "placeholder": {
-        "targets": "Nome do alvo 1 <nome1@alvo.org>;Nome do alvo 2 <nome2@alvo.org>",
-        "email_subject": "Escreva um assunto",
-        "email_body": "Escreva aqui o email...",
-        "group_label": "Ex. Rio de Janeiro",
-        "select_label": "Ex: Selecione seu estado"
-      },
-      "button": {
-        "cancel": "Cancelar",
-        "add": "Adicionar",
-        "addGroup": "+ ADD GRUPO DE ALVOS",
-        "delete": "Excluir"
-      },
-      "delete": {
-        "success": "Pronto! Grupo excluído.",
-        "error": "Houve um problema ao tentar excluir grupo!",
-        "title": "Excluir o grupo?",
-        "confirm": "O grupo de alvos será excluído e os contatos adicionados a ele serão perdidos."
       }
     }
   }
