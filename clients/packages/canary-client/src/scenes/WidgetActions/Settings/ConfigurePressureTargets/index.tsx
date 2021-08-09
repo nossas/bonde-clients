@@ -17,6 +17,8 @@ import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
 import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
+import { Targets } from "../../../Community/Domains/Icons";
+import { Flex } from "../Sending/Flex";
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -116,13 +118,15 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
               {({ value }: any) => (
                 <>
                   <Card padding={{ x: 50, y: 40 }}>
-                    <div style={{ marginBottom: '1.5rem' }}>
-                      <Header.H3 style={{ marginBottom: '15px' }}>Alvos</Header.H3>
-                      <Text>
-                        Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
-                      </Text>
-                    </div>
-
+                    <Flex spacing="32px">
+                      <Targets />
+                      <div style={{ marginBottom: '1.5rem' }}>
+                        <Header.H3 style={{ marginBottom: '15px' }}>Alvos</Header.H3>
+                        <Text>
+                          Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
+                        </Text>
+                      </div>
+                    </Flex>
                     <RadioField
                       name='settings.pressure_type'
                       label={t('settings.pressure.label.pressure_type')}
