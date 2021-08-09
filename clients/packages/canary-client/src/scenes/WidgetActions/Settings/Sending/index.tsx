@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	Card,
 	Header,
@@ -28,8 +28,6 @@ const SpyStyled = styled.div`
 const Sending = ({ widget }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
 
-	const [switchChecked, setSwitchChecked] = useState(false)
-
 	return (
 		<SettingsForm
 			widget={widget}
@@ -55,8 +53,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 								</Text>
 
 								<div>
-									<span>{switchChecked ? 'ATIVADO' : 'DESATIVADO'}</span>
-									<SwitchField name="settings.optimization_disabled" onClick={() => setSwitchChecked(!switchChecked)} checked={switchChecked} />
+									<SwitchField name="settings.optimization_disabled" textOn="ATIVADO" textOff="DESATIVADO" />
 								</div>
 
 								<SelectField
