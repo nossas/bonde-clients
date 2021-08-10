@@ -107,8 +107,7 @@
       }
     },
     "autofire": {
-      "title": "Mensagem de Agradecimento",
-      "subtitle": "Configure um e-mail de agradecimento que será enviado após a ação ser finalizada.",
+      "title": "E-mail de Agradecimento",
       "validators": {
         "required": "Campo Obrigatório",
         "isEmail": "Email inválido",
