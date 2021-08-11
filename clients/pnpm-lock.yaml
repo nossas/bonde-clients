@@ -142,7 +142,9 @@ importers:
       '@types/jest': ^25.2.3
       '@types/pino': ^6.3.0
       '@types/react': ^16.9.43
+      '@types/react-dom': ^16
       '@types/react-router-dom': ^5.1.3
+      '@types/styled-components': ^5.1.11
       axios: ^0.21.1
       cross-storage: ^1.0.0
       faker: ^4.1.0
@@ -150,6 +152,8 @@ importers:
       husky: ^4.2.3
       lint-staged: ^10.5.4
       pino: ^6.4.0
+      react: ^16
+      react-dom: ^16
       ts-jest: ^26.1.2
       tsdx: ^0.12.3
       tslib: ^1.11.1
@@ -161,15 +165,19 @@ importers:
       graphql: 15.5.1
       lint-staged: 10.5.4
       pino: 6.13.0
+      react: 16.14.0
+      react-dom: 16.14.0_react@16.14.0
     devDependencies:
       '@types/cross-storage': 0.8.30
       '@types/faker': 4.1.12
       '@types/jest': 25.2.3
       '@types/pino': 6.3.11
       '@types/react': 16.14.13
+      '@types/react-dom': 16.9.14
       '@types/react-router-dom': 5.1.8
+      '@types/styled-components': 5.1.12
       husky: 4.3.8
-      ts-jest: 26.5.6_jest@24.9.0+typescript@3.9.10
+      ts-jest: 26.5.6
       tsdx: 0.12.3
       tslib: 1.14.1
 
@@ -260,19 +268,19 @@ importers:
       '@types/react-table': 7.7.2
       bonde-components: link:../../libs/components
       bonde-core-tools: link:../../libs/core-tools
-      bonde-styleguide: 0.16.5-alpha.5_react-dom@16.14.0+react@16.14.0
+      bonde-styleguide: 0.16.5-alpha.5
       clipboard-copy: 3.2.0
       downloadjs: 1.4.7
       final-form-arrays: 3.0.2
       lodash: 4.17.21
       moment: 2.29.1
-      react-color: 2.19.3_react@16.14.0
-      react-final-form-arrays: 3.1.3_b5ff98baa05cbe0eec74ff33faede482
-      react-number-format: 4.7.3_react-dom@16.14.0+react@16.14.0
+      react-color: 2.19.3
+      react-final-form-arrays: 3.1.3_final-form-arrays@3.0.2
+      react-number-format: 4.7.3
       react-s3-uploader: 4.9.3
-      react-table: 7.7.0_react@16.14.0
-      react-toastify: 6.0.8_react-dom@16.14.0+react@16.14.0
-      slate-editor: 5.1.1_react-dom@16.14.0
+      react-table: 7.7.0
+      react-toastify: 6.0.8
+      slate-editor: 5.1.1
       slate-plain-serializer: 0.7.13
       slugify: 1.6.0
     devDependencies:
@@ -305,7 +313,7 @@ importers:
       bonde-core-tools: link:../../libs/core-tools
       deep-object-diff: 1.1.0
       jest-environment-jsdom-sixteen: 1.0.3
-      react-table: 7.7.0_react@16.14.0
+      react-table: 7.7.0
     devDependencies:
       '@types/prettier': 2.3.2
       '@types/scheduler': 0.16.2
@@ -2948,6 +2956,12 @@ packages:
       warning: 4.0.3
     dev: true
 
+  /@icons/material/0.2.4:
+    resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
+    peerDependencies:
+      react: '*'
+    dev: false
+
   /@icons/material/0.2.4_react@16.14.0:
     resolution: {integrity: sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==}
     peerDependencies:
@@ -5138,7 +5152,7 @@ packages:
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 16.14.13
+      '@types/react': 17.0.17
       hoist-non-react-statics: 3.3.2
 
   /@types/html-minifier-terser/5.1.2:
@@ -5320,7 +5334,6 @@ packages:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
       csstype: 3.0.8
-    dev: false
 
   /@types/reactcss/1.2.4:
     resolution: {integrity: sha512-1rhVqteMSD6KQjO+dPBObE1OkKadw00HVJkG5WCYsyvMwGgdTZ530wF7Bkrg/4TWxB2AtINIzFotjW51eViw+w==}
@@ -5362,7 +5375,7 @@ packages:
     resolution: {integrity: sha512-sTjc0+gMl08JvOHchQKgEGbbiSexSvWg5khUNSH4kosb7Tl4782AtfWMkAhQmeXMg2vIn6PthGVHFW+U/Dpihg==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 16.14.13
+      '@types/react': 17.0.17
       csstype: 3.0.8
 
   /@types/tapable/1.0.8:
@@ -6765,7 +6778,7 @@ packages:
       '@babel/helper-module-imports': 7.14.5
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
-      styled-components: 4.4.1_react-dom@16.14.0+react@16.14.0
+      styled-components: 4.4.1
     dev: false
 
   /babel-plugin-styled-components/1.13.2_styled-components@5.0.1:
@@ -7049,15 +7062,15 @@ packages:
       raw-body: 2.4.0
       type-is: 1.6.18
 
-  /bonde-styleguide/0.16.5-alpha.5_react-dom@16.14.0+react@16.14.0:
+  /bonde-styleguide/0.16.5-alpha.5:
     resolution: {integrity: sha512-9RhVcjTdLPto+bcOhYaCOCWt9k40pbVertys+4fK5rWY9sjJow2hUCe1BUWmr/DpordxuNkqXcrIIfoR11OD+Q==}
     dependencies:
       '@babel/plugin-proposal-class-properties': 7.14.5
       '@babel/plugin-transform-runtime': 7.15.0
       babel-plugin-styled-components: 1.13.2_styled-components@4.4.1
       prop-types: 15.7.2
-      recharts: 1.8.5_react-dom@16.14.0+react@16.14.0
-      styled-components: 4.4.1_react-dom@16.14.0+react@16.14.0
+      recharts: 1.8.5
+      styled-components: 4.4.1
       webfontloader: 1.6.28
     transitivePeerDependencies:
       - '@babel/core'
@@ -14890,6 +14903,20 @@ packages:
       react: 16.14.0
     dev: true
 
+  /react-color/2.19.3:
+    resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      '@icons/material': 0.2.4
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      material-colors: 1.2.6
+      prop-types: 15.7.2
+      reactcss: 1.2.3
+      tinycolor2: 1.4.2
+    dev: false
+
   /react-color/2.19.3_react@16.14.0:
     resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
     peerDependencies:
@@ -15017,7 +15044,7 @@ packages:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
     dev: true
 
-  /react-final-form-arrays/3.1.3_b5ff98baa05cbe0eec74ff33faede482:
+  /react-final-form-arrays/3.1.3_final-form-arrays@3.0.2:
     resolution: {integrity: sha512-dzBiLfbr9l1YRExARBpJ8uA/djBenCvFrbrsXjd362joDl3vT+WhmMKKr6HDQMJffjA8T4gZ3n5+G9M59yZfuQ==}
     peerDependencies:
       final-form: ^4.15.0
@@ -15027,7 +15054,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.15.3
       final-form-arrays: 3.0.2
-      react: 16.14.0
     dev: false
 
   /react-final-form/6.5.3_final-form@4.20.2+react@16.14.0:
@@ -15151,15 +15177,13 @@ packages:
   /react-lifecycles-compat/3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
 
-  /react-number-format/4.7.3_react-dom@16.14.0+react@16.14.0:
+  /react-number-format/4.7.3:
     resolution: {integrity: sha512-4EvcANjstypQ5anhanmdEioGc49qbnErfS+yqbhatC0vzQ1okplkWNb0DIY7ABu4RhaxzttEz6pypEy8KsqgBQ==}
     peerDependencies:
       react: ^0.14 || ^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0
       react-dom: ^0.14 || ^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0
     dependencies:
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
     dev: false
 
   /react-popper-tooltip/2.11.1_react-dom@16.14.0+react@16.14.0:
@@ -15189,7 +15213,7 @@ packages:
       warning: 4.0.3
     dev: true
 
-  /react-resize-detector/2.3.0_react@16.14.0:
+  /react-resize-detector/2.3.0:
     resolution: {integrity: sha512-oCAddEWWeFWYH5FAcHdBYcZjAw9fMzRUK9sWSx6WvSSOPVRxcHd5zTIGy/mOus+AhN/u6T4TMiWxvq79PywnJQ==}
     peerDependencies:
       react: ^0.14.7 || ^15.0.0 || ^16.0.0
@@ -15197,7 +15221,6 @@ packages:
       lodash.debounce: 4.0.8
       lodash.throttle: 4.1.1
       prop-types: 15.7.2
-      react: 16.14.0
       resize-observer-polyfill: 1.5.1
     dev: false
 
@@ -15349,7 +15372,7 @@ packages:
       throttle-debounce: 2.3.0
     dev: true
 
-  /react-smooth/1.0.6_react-dom@16.14.0+react@16.14.0:
+  /react-smooth/1.0.6:
     resolution: {integrity: sha512-B2vL4trGpNSMSOzFiAul9kFAsxTukL9Wyy9EXtkQy3GJr6sZqW9e1nShdVOJ3hRYamPZ94O17r3Q0bjSw3UYtg==}
     peerDependencies:
       react: ^15.0.0 || ^16.0.0
@@ -15358,9 +15381,7 @@ packages:
       lodash: 4.17.21
       prop-types: 15.7.2
       raf: 3.4.1
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
-      react-transition-group: 2.9.0_react-dom@16.14.0+react@16.14.0
+      react-transition-group: 2.9.0
     dev: false
 
   /react-syntax-highlighter/11.0.3_react@16.14.0:
@@ -15375,6 +15396,12 @@ packages:
       react: 16.14.0
       refractor: 2.10.1
     dev: true
+
+  /react-table/7.7.0:
+    resolution: {integrity: sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA==}
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0
+    dev: false
 
   /react-table/7.7.0_react@16.14.0:
     resolution: {integrity: sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA==}
@@ -15394,15 +15421,14 @@ packages:
       react: 16.14.0
     dev: true
 
-  /react-toastify/6.0.8_react-dom@16.14.0+react@16.14.0:
+  /react-toastify/6.0.8:
     resolution: {integrity: sha512-NSqCNwv+C4IfR+c92PFZiNyeBwOJvigrP2bcRi2f6Hg3WqcHhEHOknbSQOs9QDFuqUjmK3SOrdvScQ3z63ifXg==}
     peerDependencies:
       react: '>=16'
     dependencies:
       classnames: 2.3.1
       prop-types: 15.7.2
-      react: 16.14.0
-      react-transition-group: 4.4.2_react-dom@16.14.0+react@16.14.0
+      react-transition-group: 4.4.2
     transitivePeerDependencies:
       - react-dom
     dev: false
@@ -15420,7 +15446,7 @@ packages:
       - react-dom
     dev: false
 
-  /react-transition-group/2.9.0_react-dom@16.14.0+react@16.14.0:
+  /react-transition-group/2.9.0:
     resolution: {integrity: sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg==}
     peerDependencies:
       react: '>=15.0.0'
@@ -15429,9 +15455,19 @@ packages:
       dom-helpers: 3.4.0
       loose-envify: 1.4.0
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
       react-lifecycles-compat: 3.0.4
+    dev: false
+
+  /react-transition-group/4.4.2:
+    resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.15.3
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.7.2
     dev: false
 
   /react-transition-group/4.4.2_react-dom@16.14.0+react@16.14.0:
@@ -15547,7 +15583,7 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts/1.8.5_react-dom@16.14.0+react@16.14.0:
+  /recharts/1.8.5:
     resolution: {integrity: sha512-tM9mprJbXVEBxjM7zHsIy6Cc41oO/pVYqyAsOHLxlJrbNBuLs0PHB3iys2M+RqCF0//k8nJtZF6X6swSkWY3tg==}
     peerDependencies:
       react: ^15.0.0 || ^16.0.0
@@ -15560,10 +15596,8 @@ packages:
       d3-shape: 1.3.7
       lodash: 4.17.21
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
-      react-resize-detector: 2.3.0_react@16.14.0
-      react-smooth: 1.0.6_react-dom@16.14.0+react@16.14.0
+      react-resize-detector: 2.3.0
+      react-smooth: 1.0.6
       recharts-scale: 0.4.5
       reduce-css-calc: 1.3.0
     dev: false
@@ -16424,7 +16458,7 @@ packages:
     resolution: {integrity: sha512-QdXa+qmOG46VrTfnzn2gUVzs1WiO3Q+zCv3XomzMNGdgAJjCgHBs3jaeQD845h15loS3OJ181gCNAkB3dby6Hw==}
     dev: false
 
-  /slate-editor/5.1.1_react-dom@16.14.0:
+  /slate-editor/5.1.1:
     resolution: {integrity: sha512-L//MISou5GHAhrSX8afT3CtUCd37F7/KHXENWOm5meA1QuZfy1g6wX/YXXJk5IhUPvPbiFwkFeAiwkue8c7FFA==}
     dependencies:
       '@slate-editor/alignment-plugin': 5.1.0
@@ -16449,7 +16483,7 @@ packages:
       prop-types: 15.7.2
       react: 16.14.0
       slate: 0.41.3_immutable@3.8.2+react@16.14.0
-      slate-react: 0.18.11_95b3be89ddb9ff79d550bf6d9793971c
+      slate-react: 0.18.11_14d6b13fe0fc387fcbaa6509e3ca8141
     transitivePeerDependencies:
       - react-dom
     dev: false
@@ -16488,7 +16522,7 @@ packages:
       slate: 0.41.3_immutable@3.8.2+react@16.14.0
     dev: false
 
-  /slate-react/0.18.11_95b3be89ddb9ff79d550bf6d9793971c:
+  /slate-react/0.18.11_14d6b13fe0fc387fcbaa6509e3ca8141:
     resolution: {integrity: sha512-7u0+LLabGaxjWYb0oTqUDcs3iCvJdaZwcGW6hLc1hFv06KkwaIxAqYpP8dUBRVlQd+0/X0TdyagCmf0IjFSPhg==}
     peerDependencies:
       immutable: '>=3.8.1'
@@ -16504,7 +16538,6 @@ packages:
       memoize-one: 4.0.3
       prop-types: 15.7.2
       react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
       react-immutable-proptypes: 2.2.0_immutable@3.8.2
       selection-is-backward: 1.0.0
       slate: 0.41.3_immutable@3.8.2+react@16.14.0
@@ -16997,7 +17030,7 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /styled-components/4.4.1_react-dom@16.14.0+react@16.14.0:
+  /styled-components/4.4.1:
     resolution: {integrity: sha512-RNqj14kYzw++6Sr38n7197xG33ipEOktGElty4I70IKzQF1jzaD1U4xQ+Ny/i03UUhHlC5NWEO+d8olRCDji6g==}
     requiresBuild: true
     peerDependencies:
@@ -17013,8 +17046,6 @@ packages:
       memoize-one: 5.2.1
       merge-anything: 2.4.4
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
       react-is: 16.13.1
       stylis: 3.5.4
       stylis-rule-sheet: 0.0.10_stylis@3.5.4
@@ -17477,7 +17508,7 @@ packages:
       yargs-parser: 10.1.0
     dev: true
 
-  /ts-jest/26.5.6_jest@24.9.0+typescript@3.9.10:
+  /ts-jest/26.5.6:
     resolution: {integrity: sha512-rua+rCP8DxpA8b4DQD/6X2HQS8Zy/xzViVYfEs2OQu68tkCuKLV0Md8pmX55+W24uRIyAsf/BajRfxOs+R2MKA==}
     engines: {node: '>= 10'}
     hasBin: true
@@ -17488,14 +17519,12 @@ packages:
       bs-logger: 0.2.6
       buffer-from: 1.1.2
       fast-json-stable-stringify: 2.1.0
-      jest: 24.9.0
       jest-util: 26.6.2
       json5: 2.2.0
       lodash: 4.17.21
       make-error: 1.3.6
       mkdirp: 1.0.4
       semver: 7.3.5
-      typescript: 3.9.10
       yargs-parser: 20.2.9
     dev: true
 
