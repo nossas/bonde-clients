@@ -53,7 +53,11 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 								</Text>
 
 								<div>
-									<SwitchField name="settings.optimization_disabled" textOn="ATIVADO" textOff="DESATIVADO" />
+									<SwitchField
+										name="settings.optimization_enabled"
+										textOn="ATIVADO"
+										textOff="DESATIVADO"
+									/>
 								</div>
 
 								<SelectField
