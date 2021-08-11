@@ -33,7 +33,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 			widget={widget}
 			initialValues={{
 				settings: {
-					optimization_disabled: true,
+					optimization_enabled: true,
 					...widget.settings
 				}
 			}}
