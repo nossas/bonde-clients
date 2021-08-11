@@ -46,6 +46,7 @@ type Props = {
 
 const { composeValidators, required } = Validators;
 
+//eslint-disable-next-line
 const isDomain = (value: any) => /[\w][^A-Zç!'(?=*[}{,^?~=+\_\/*+\|]+\.[^A-Z][\w]{1,}(\.[\w]{1,})?/g.test(value) ? undefined : ' X ';
 
 const DomainForm = ({ onSubmit, onClose }: Props) => {
