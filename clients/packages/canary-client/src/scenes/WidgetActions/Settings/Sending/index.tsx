@@ -1,18 +1,14 @@
-import React from "react";
-import {
-	Card,
-	Header,
-	Text,
-} from "bonde-components";
+import React, {useState} from "react";
+import { Card, Header, Text, Button, SwitchField } from "bonde-components";
+import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
 import SelectField from "../../../../components/SelectField";
-import { Button } from "bonde-components";
 import styled from "styled-components";
 import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Flex } from "./Flex";
-import { SwitchField } from "bonde-components";
+import SpyField from "../../../../components/SpyField";
 
 type Props = {
 	widget: Widget;
@@ -27,6 +23,7 @@ const SpyStyled = styled.div`
 
 const Sending = ({ widget }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<SettingsForm
@@ -38,7 +35,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 				}
 			}}
 		>
-			{() => (
+			{({form}: any) => (
 				<Card padding={{ x: 40, y: 30 }}>
 					<SpyStyled>
 						<Flex spacing="32px">
@@ -52,14 +49,18 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 									{t("settings.sending.subtitle")}
 								</Text>
 
-								<div>
-									<SwitchField
-										name="settings.optimization_enabled"
-										textOn="ATIVADO"
-										textOff="DESATIVADO"
-									/>
-								</div>
-
+								<SwitchField name="settings.optimization_enabled" textOn="ATIVADO" textOff="DESATIVADO" />
+								<SpyField field="settings.optimization_enabled">
+									{({ value }: any) => !value && (
+										<Modal width={400} isOpen={isOpen} onClose={()=> {
+											form.change("settings.optimization_enabled", true)
+											setIsOpen(false)
+										}}>
+											<h1>Salve!!!</h1>
+										</Modal>
+									)}
+								</SpyField>
+								
 								<SelectField
 									name='settings.mail_limit'
 									label='Limite de envios únicos'
