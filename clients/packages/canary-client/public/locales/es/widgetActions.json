@@ -57,6 +57,13 @@
           "placeholder": "Defina o valor que ficará ao lado do número de pessoas que agiram",
           "tooltip": "O contador será mostrado se existir um texto"
         },
+        "state": {
+          "title": "Incluir campo de estado?",
+          "radio": {
+            "yes": "Sim",
+            "no": "Não"
+          }
+        },
         "main_color": {
           "label": "Cor padrão",
           "tooltip": "Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE"
