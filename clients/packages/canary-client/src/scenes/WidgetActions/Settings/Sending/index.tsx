@@ -21,9 +21,48 @@ const SpyStyled = styled.div`
 	height: 100%;
 `;
 
+
+const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
+	const [isOpen, setIsOpen] = useState(defaultIsOpen);
+
+	// useEffect serve para determinar que a propriedade 
+	// defaultIsOpen tenha um peso maior que a propriedade isOpen
+	// isOpen pode ser alterado, sempre que defaultIsOpen for alterado
+	// devemos confirmar recalcular a possibilidade de abrir ou não o modal
+	React.useEffect(() => {
+		setIsOpen(defaultIsOpen)
+	}, [defaultIsOpen])
+
+	return (
+		<Modal
+			isOpen={isOpen}
+			onClose={() => {
+				setIsOpen(false)
+				onCancel()
+			}}
+		>
+			<Header.H4>Desativar envio otimizado?</Header.H4>
+			<Text>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails</Text>
+			<div
+				style={{ display: "flex", flexDirection: "row" }}
+			>
+				<Button
+					type="button"
+					onClick={() => {
+						setIsOpen(false)
+						onCancel()
+					}}
+				>Cancelar</Button>
+				<Button type="button" onClick={() => setIsOpen(false)}>
+					Desativar
+				</Button>
+			</div>
+		</Modal>
+	);
+}
+
 const Sending = ({ widget }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
-	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<SettingsForm
@@ -31,6 +70,8 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 			initialValues={{
 				settings: {
 					optimization_enabled: true,
+					mail_limit: 1000,
+					batch_limit: 50,
 					...widget.settings
 				}
 			}}
@@ -49,15 +90,20 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 									{t("settings.sending.subtitle")}
 								</Text>
 
-								<SwitchField name="settings.optimization_enabled" textOn="ATIVADO" textOff="DESATIVADO" />
+								<SwitchField
+									defaultValue={widget.settings.optimization_enabled}
+									name="settings.optimization_enabled"
+									textOn="ATIVADO"
+									textOff="DESATIVADO"
+								/>
 								<SpyField field="settings.optimization_enabled">
-									{({ value }: any) => !value && (
-										<Modal width={400} isOpen={isOpen} onClose={()=> {
-											form.change("settings.optimization_enabled", true)
-											setIsOpen(false)
-										}}>
-											<h1>Salve!!!</h1>
-										</Modal>
+									{({ value, meta }) => (
+										<ConfirmModal
+											defaultIsOpen={!value && meta.modified}
+											onCancel={() => {
+												form.change("settings.optimization_enabled", true)
+											}}
+										/>
 									)}
 								</SpyField>
 								
