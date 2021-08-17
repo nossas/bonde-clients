@@ -35,18 +35,20 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 
 	return (
 		<Modal
+			width="450px"
 			isOpen={isOpen}
 			onClose={() => {
 				setIsOpen(false)
 				onCancel()
 			}}
 		>
-			<Header.H4>Desativar envio otimizado?</Header.H4>
-			<Text>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails</Text>
+			<Header.H2 mb="18px">Desativar envio otimizado?</Header.H2>
+			<Text>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails.</Text>
 			<div
 				style={{ display: "flex", flexDirection: "row" }}
 			>
 				<Button
+					secondary					
 					type="button"
 					onClick={() => {
 						setIsOpen(false)
@@ -96,6 +98,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 									textOn="ATIVADO"
 									textOff="DESATIVADO"
 								/>
+
 								<SpyField field="settings.optimization_enabled">
 									{({ value, meta }) => (
 										<ConfirmModal
