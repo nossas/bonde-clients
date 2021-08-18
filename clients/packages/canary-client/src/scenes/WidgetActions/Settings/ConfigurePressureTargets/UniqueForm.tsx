@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Header, Text } from 'bonde-components';
+import { Header, Text } from 'bonde-components';
 import SubjectBodyFields from './SubjectBodyFields';
 
 export const UniqueFormExplainCard = () => (
-  <Card padding={{ x: 50, y: 40 }}>
+  <>
     <Header.H4 style={{ marginBottom: "10px" }}>
       Como adicionar alvos
     </Header.H4>
@@ -24,7 +24,7 @@ export const UniqueFormExplainCard = () => (
       Ou seja, cada vez que a mobilização for acessada, a ordem de exibição 
       será diferente.`}
     </Text>
-  </Card>
+  </>
 )
 
 const UniqueForm = () => (

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Panel from '../../../../components/Panel';
 import ColorField from '../../../../components/ColorField';
 import SettingsForm from '../SettingsForm';
+import RadioField, { Radio } from '../../../../components/Radio';
 
 const AdjustsFields = ({ widget }: any) => {
   const { t } = useTranslation('widgetActions');
@@ -12,7 +13,10 @@ const AdjustsFields = ({ widget }: any) => {
     <SettingsForm
       widget={widget}
       initialValues={{
-        settings: widget.settings
+        settings: {
+          show_state:"n",
+          ...widget.settings
+        }
       }}
     >
       {() => (
@@ -37,6 +41,17 @@ const AdjustsFields = ({ widget }: any) => {
             }
             placeholder={t('settings.adjusts.fields.count_text.placeholder')}
           />
+
+          {widget.kind === "pressure" && (
+            <RadioField
+              name='settings.show_state'
+              label={t('settings.adjusts.fields.state.title')}
+            >
+              <Radio value='s'>{t('settings.adjusts.fields.state.radio.yes')}</Radio>
+              <Radio value='n'>{t('settings.adjusts.fields.state.radio.no')}</Radio>
+            </RadioField>
+          )}
+          
           <ColorField
             name='settings.main_color'
             label={

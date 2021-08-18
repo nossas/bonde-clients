@@ -5,7 +5,6 @@ import {
   Card,
   Header,
   Validators,
-  Text,
 } from "bonde-components";
 import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
@@ -37,9 +36,7 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
           >
             {t("settings.autofire.title")}
           </Header.H4>
-          <Text style={{ marginBottom: "15px" }}>
-            {t("settings.autofire.subtitle")}
-          </Text>
+
           <Card padding={{ x: 40, y: 30 }}>
             <InputField
               label={t("settings.autofire.label.sendersName")}

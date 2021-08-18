@@ -31,7 +31,15 @@ const Navigation = () => {
             className={is(/\/widgets\/\d+\/settings\/*$/) ? "active" : ""}
             onClick={() => push("")}
           >
-            {t("settings.navigation.settings")}
+            {t("settings.navigation.targets")}
+          </Tab>
+          <Tab
+            className={
+              is(/\/widgets\/\d+\/settings\/sending\/*$/) ? "active" : ""
+            }
+            onClick={() => push(`/sending`)}
+          >
+            {t("settings.navigation.sending")}
           </Tab>
           <Tab
             className={

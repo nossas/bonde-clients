@@ -8,8 +8,8 @@
     "lint": "eslint . --fix --ext js,ts,tsx"
   },
   "dependencies": {
-    "bonde-components": "workspace:0.0.4-alpha.32",
-    "bonde-core-tools": "workspace:0.1.8-alpha.9",
+    "bonde-components": "workspace:*",
+    "bonde-core-tools": "workspace:*",
     "@types/graceful-fs": "^4.1.5",
     "@types/normalize-package-data": "^2.4.0"
   },
