@@ -8,10 +8,10 @@ import {
 } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
-import styled from "styled-components";
 import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
 import RadioField, { Radio } from '../../../../components/Radio';
+import styled from  'styled-components'
 import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
@@ -60,10 +60,10 @@ const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
 }
 
 const SpyStyled = styled.div`
-  display: grid;
-  grid-template-columns: 55% 45%;
-  grid-column-gap: 20px;
-  height: 100%;
+	display: grid;
+	grid-template-columns: 55% 45%;
+	grid-column-gap: 20px;
+	height: 100%;
 `;
 
 type Props = {
@@ -113,47 +113,58 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
     >
       {({ form }: any) => (
         <>
-          <SpyStyled>
-            <SpyField field='settings.pressure_type'>
-              {({ value }: any) => (
-                <>
-                  <Card padding={{ x: 50, y: 40 }}>
-                    <Flex spacing="32px">
-                      <Targets />
-                      <div style={{ marginBottom: '1.5rem' }}>
-                        <Header.H3 style={{ marginBottom: '15px' }}>Alvos</Header.H3>
-                        <Text>
-                          Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
-                        </Text>
-                      </div>
-                    </Flex>
-                    <RadioField
-                      name='settings.pressure_type'
-                      label={t('settings.pressure.label.pressure_type')}
-                    >
-                      <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
-                      <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
-                    </RadioField>
+          <SpyField field='settings.pressure_type'>
+            {({ value }: any) => (
+              <>
+                <Card padding={{ x: 50, y: 40 }}>
+                  <SpyStyled>
+                  <Flex spacing="32px">
+                    <Targets />
+                    <div style={{ marginBottom: '1.5rem' }}>
+                      <Header.H3 style={{ marginBottom: '15px' }}>Alvos</Header.H3>
+                      <Text>
+                        Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
+                      </Text>
+                    
+                  
 
-                    {value === 'unique'
-                      ? <UniqueFormFields />
-                      : <GroupFormFields form={form} />
-                    }
+                  <RadioField
+                    name='settings.pressure_type'
+                    label={t('settings.pressure.label.pressure_type')}
+                  >
+                    <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
+                    <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
+                  </RadioField>
 
-                    <RadioField
-                      name='settings.disable_edit_field'
-                      label={t('settings.pressure.label.disable_edit_field')}
-                    >
-                      <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
-                      <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
-                    </RadioField>
-                  </Card>
 
+                  {value === 'unique'
+                    ? <UniqueFormFields />
+                    : <GroupFormFields form={form} />
+                  }
+
+                  <RadioField
+                    name='settings.disable_edit_field'
+                    label={t('settings.pressure.label.disable_edit_field')}
+                  >
+                    <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
+                    <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
+                  </RadioField>
+                  </div>
+                  </Flex>
+                  
+                  
+
+                  
+                  <div>
                   <UniqueFormExplainCard />
-                </>
-              )}
-            </SpyField>
-          </SpyStyled>
+                  </div>
+                  </SpyStyled>
+                  
+                  
+                </Card>
+              </>
+            )}
+          </SpyField>
         </>
       )}
     </SettingsForm>
