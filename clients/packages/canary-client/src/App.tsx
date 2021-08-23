@@ -11,7 +11,15 @@ import {
   BondeSessionUI as SessionUI,
   useSession
 } from 'bonde-core-tools';
-import { Loading, ToastContainer } from 'bonde-components';
+import {
+  Loading,
+  ToastContainer,
+  ChakraProvider,
+  chakraTheme,
+  FontsLoader,
+  CSSReset
+} from 'bonde-components';
+
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
 // Scenes and Components to make your application
@@ -131,15 +139,21 @@ const App: React.FC = () => {
 
   return (
     <React.Suspense fallback={Loading}>
-      <ToastContainer
-        className='BondeToastify'
-        hideProgressBar={true}
-      />
-      <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
-        <Router>
-          <PageRouting />
-        </Router>
-      </Session>
+      <>
+        <FontsLoader />
+        <ChakraProvider theme={chakraTheme}>
+          <CSSReset />
+          <ToastContainer
+            className='BondeToastify'
+            hideProgressBar={true}
+          />
+          <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
+            <Router>
+              <PageRouting />
+            </Router>
+          </Session>
+        </ChakraProvider>
+      </>
     </React.Suspense>
   );
 }

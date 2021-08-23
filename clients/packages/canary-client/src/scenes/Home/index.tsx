@@ -1,21 +1,19 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
+import { SimpleGrid, Box } from "bonde-components";
 import Content from '../../components/Content';
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
 
-const HomePage = () => (
+const HomePage = (): React.ReactElement => (
   <Content>
-    <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Row>
-        <Col sm={12} md={6}>
-          <CommunitiesGadget />
-        </Col>
-        <Col sm={12} md={6}>
-          <MobilizationsGadget />
-        </Col>
-      </Row>
-    </Container>
+    <SimpleGrid columns={[1, null, null, 2]} spacing={8}>
+      <Box>
+        <CommunitiesGadget />
+      </Box>
+      <Box>
+        <MobilizationsGadget />
+      </Box>
+    </SimpleGrid>
   </Content>
 );
 
