@@ -151,7 +151,7 @@ services:`;
 // sofisticar o valor do host do serviço para incluir domínios com www e sem www
 let dockerComposeServiceTemplate = (element_name: any, validatedDNS: any) => `
   ${slugify(element_name)}:
-    image: nossas/bonde-public-ts:0.4.1-alpha.3
+    image: nossas/bonde-public-ts:0.4.2
     environment:
 ${process.env.TPL_SERVICE_ENV}
     external_links:
