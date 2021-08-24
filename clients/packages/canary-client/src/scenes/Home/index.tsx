@@ -1,11 +1,10 @@
 import React from 'react';
-import { SimpleGrid, Box } from "bonde-components";
-import Content from '../../components/Content';
+import { Container, SimpleGrid, Box } from "bonde-components";
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
 
 const HomePage = (): React.ReactElement => (
-  <Content>
+  <Container>
     <SimpleGrid columns={[1, null, null, 2]} spacing={8}>
       <Box>
         <CommunitiesGadget />
@@ -14,7 +13,7 @@ const HomePage = (): React.ReactElement => (
         <MobilizationsGadget />
       </Box>
     </SimpleGrid>
-  </Content>
+  </Container>
 );
 
 export default HomePage;

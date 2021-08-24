@@ -1,10 +1,9 @@
 import React from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { Empty, Header, Navigation, Tab, Row, Col } from 'bonde-components';
+import { Empty, Header, Navigation, Tab, Row, Col, Container as Content } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
-import Content from '../../components/Content';
 // Subroutes
 import Analytics from './Analytics';
 import Domains from './Domains';
@@ -41,7 +40,7 @@ type Props = {
   location: any
 }
 
-const CommunityPage = ({ match, location }: Props) => {
+const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement => {
   const history = useHistory();
   const { community } = useSession();
   const { t } = useTranslation('community');
