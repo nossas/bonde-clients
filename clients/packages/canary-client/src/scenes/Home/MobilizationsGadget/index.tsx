@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery, useSession } from "bonde-core-tools";
 import { SimpleGrid } from "bonde-components";
 import { useTranslation } from "react-i18next";
-import MobilizationCard, { Mobilization } from "./MobilizationCard";
+import MobilizationBox, { MobilizationProps } from "./MobilizationCard";
 import mobilizationsLastUpdated from "./query.graphql";
 import LoadingCards from "./Loading";
 import GadgetHeader from "../GadgetHeader";
@@ -16,7 +16,7 @@ const MobilizationsGadget = (): React.ReactElement => {
 
   if (loading) return <LoadingCards />;
 
-  const parse = (m: any): Mobilization => ({
+  const parse = (m: any): MobilizationProps => ({
     id: m.id,
     name: m.name,
     goal: m.goal,
@@ -31,9 +31,9 @@ const MobilizationsGadget = (): React.ReactElement => {
   return (
     <>
       <GadgetHeader title={t("gadgets.mobilizations.title")} />
-      <SimpleGrid columns={[1, null, 2]} spacing={6}>
-        {mobilizations.map(parse).map((mobilization: Mobilization) => (
-          <MobilizationCard
+      <SimpleGrid columns={[1, null, 2]} spacing={4}>
+        {mobilizations.map(parse).map((mobilization: MobilizationProps) => (
+          <MobilizationBox
             key={mobilization.id}
             mobilization={mobilization}
             onClick={() => {

@@ -88,6 +88,8 @@ importers:
   libs/components:
     specifiers:
       '@babel/core': ^7.8.7
+      '@chakra-ui/icon': ^1.1.11
+      '@chakra-ui/icons': ^1.0.15
       '@chakra-ui/react': ^1.6.6
       '@emotion/react': ^11
       '@emotion/styled': ^11
@@ -119,6 +121,8 @@ importers:
       tslib: ^1.11.1
       typescript: ^3.8.3
     dependencies:
+      '@chakra-ui/icon': 1.1.11_react@16.14.0
+      '@chakra-ui/icons': 1.0.15_react@16.14.0
       '@chakra-ui/react': 1.6.6_3a14d6e999c432d94786b9ebbfd6670e
       '@emotion/react': 11.4.1_9096f533e910b3a38c574b960003e784
       '@emotion/styled': 11.3.0_09984bf53bae42cfbd2a55d1a1aeb0c2
@@ -3075,6 +3079,27 @@ packages:
     dependencies:
       '@chakra-ui/system': 1.7.2_4d7126b233611f733cb5d2dfe946a2b2
       '@chakra-ui/utils': 1.8.2
+      react: 16.14.0
+    dev: false
+
+  /@chakra-ui/icon/1.1.11_react@16.14.0:
+    resolution: {integrity: sha512-w+TkBr8eA8023j1SdhBzCFrEeU4lolf96cYVz0t/FVUBdIHYPGt56iHdaE2HYXW8Jyp15WLZcJJZQnZo91GRww==}
+    peerDependencies:
+      '@chakra-ui/system': '>=1.0.0'
+      react: '>=16.8.6'
+    dependencies:
+      '@chakra-ui/utils': 1.8.2
+      react: 16.14.0
+    dev: false
+
+  /@chakra-ui/icons/1.0.15_react@16.14.0:
+    resolution: {integrity: sha512-MMuPwmeCil9vAXceIN/Fxn6CNHbhkLofFQaKUfs+UaBsviiU2tvS0nqGaxm/9FNzLr5ithPVWpbz3uV7DXc77g==}
+    peerDependencies:
+      '@chakra-ui/system': '>=1.0.0'
+      react: '>=16.8.6'
+    dependencies:
+      '@chakra-ui/icon': 1.1.11_react@16.14.0
+      '@types/react': 17.0.19
       react: 16.14.0
     dev: false
 

@@ -77,7 +77,7 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                       });
                   }}
                 >
-                  <Text fontWeight="800" fontSize="md">{c.name}</Text>
+                  <Text as="h4" fontWeight="800" fontSize="md">{c.name}</Text>
                 </Link>
                 <CommunityMenu community={c} size="sm" />
               </Stack>

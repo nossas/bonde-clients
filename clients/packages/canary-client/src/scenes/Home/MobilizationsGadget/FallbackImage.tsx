@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ImageStyled = styled.div`
+const WrapperStyled = styled.div`
   filter: contrast(70%);
   overflow: hidden;
   position: relative;
@@ -21,7 +21,7 @@ const ImageStyled = styled.div`
   }
 `;
 
-const DefaultImage = () => {
+const ImageSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -43,20 +43,12 @@ const DefaultImage = () => {
   )
 };
 
-type ImageProps = {
-  src?: string,
-  title?: string
-}
-
-const Image = (props: ImageProps) => {
+const FallbackImage = (): React.ReactElement => {
   return (
-    <ImageStyled>
-      {props.src
-        ? <img src={props.src} alt={props.title} />
-        : <DefaultImage />
-      }
-    </ImageStyled>
+    <WrapperStyled>
+      <ImageSVG />
+    </WrapperStyled>
   )
 };
 
-export default Image;
+export default FallbackImage;

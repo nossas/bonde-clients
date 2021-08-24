@@ -3,8 +3,8 @@ import {
   InputGroup,
   InputRightElement,
   Input,
-  Icon,
-  IconButton
+  IconButton,
+  SearchIcon
 } from 'bonde-components';
 
 type Props = {
@@ -20,7 +20,7 @@ const getProp = (obj: any, prop: string) => {
   }, obj);
 };
 
-const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
+const SearchInput: React.FC<Props> = ({ data, field, placeholder, onChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const normalize = (str: string) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()
@@ -53,8 +53,9 @@ const SearchInput = ({ data, field, placeholder, onChange }: Props) => {
           children={(
             <IconButton
               variant="link"
+              colorScheme="gray"
               type='submit'
-              icon={<Icon name='Search' size='small' color='#c7c7c7 !important' />}
+              icon={<SearchIcon boxSize={4} />}
             />
           )}
         />
