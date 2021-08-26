@@ -15,16 +15,20 @@ import SettingsForm from '../SettingsForm';
 
 type Props = {
   widget: Widget;
+  updateCache: any;
 };
 
 const { required, composeValidators, isEmail } = Validators;
 
-const AutofireForm = ({ widget }: Props): React.ReactElement => {
+const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
   return (
     <SettingsForm
       widget={widget}
+      afterSubmit={async (values:any, result:any) => {
+        updateCache(result.data.update_widgets.returning[0])
+      }}
       initialValues={{
         settings: widget.settings
       }}

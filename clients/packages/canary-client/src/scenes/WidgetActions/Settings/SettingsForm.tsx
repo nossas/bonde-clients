@@ -15,6 +15,10 @@ const UpdateWidgetGQL = gql`
       _append: { settings: $settings }
     ) {
       affected_rows
+      returning {
+        id
+        settings
+      }
     }
   }
 `;

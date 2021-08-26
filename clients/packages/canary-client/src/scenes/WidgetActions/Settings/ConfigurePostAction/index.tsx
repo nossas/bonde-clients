@@ -14,9 +14,10 @@ import RichInputField from "./RichInputField";
 
 type Props = {
 	widget: Widget;
+	updateCache: any;
 };
 
-const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
+const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
 
 	// Parse older finish messages saved like text
@@ -29,6 +30,9 @@ const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
 	return (
 		<SettingsForm
 			widget={widget}
+			afterSubmit={async (values:any, result:any) => {
+        updateCache(result.data.update_widgets.returning[0])
+      }}
 			initialValues={{
 				settings: {
 					...widget.settings,

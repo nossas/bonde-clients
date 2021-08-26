@@ -33,7 +33,7 @@ const Settings = ({ widgets }: Props) => {
 
   const updateCache = (updated: Widget) => {
 
-    setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? updated : w));
+    setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? {...w, ...updated} : w));
   }
 
   return (
@@ -88,16 +88,16 @@ const Settings = ({ widgets }: Props) => {
               )}
             </Route>
             <Route exact path={`${match.path}/sending`}>
-              <Sending widget={widget}/>
+              <Sending widget={widget} updateCache={updateCache}/>
             </Route>
             <Route exact path={`${match.path}/adjusts`}>
-              <Adjusts widget={widget} />
+              <Adjusts widget={widget} updateCache={updateCache}/>
             </Route>
             <Route exact path={`${match.path}/autofire`}>
-              <Autofire widget={widget} />
+              <Autofire widget={widget} updateCache={updateCache}/>
             </Route>
             <Route exact path={`${match.path}/finish`}>
-              <ConfigurePostAction widget={widget} />
+              <ConfigurePostAction widget={widget} updateCache={updateCache}/>
             </Route>
           </Switch>
         </Col>

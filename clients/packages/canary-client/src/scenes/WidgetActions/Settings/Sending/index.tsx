@@ -15,9 +15,10 @@ import { Flex } from "../Sending/Flex";
 
 type Props = {
 	widget: Widget;
+	updateCache: any;
 };
 
-const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
+const ConfirmModal = ({ defaultIsOpen, onCancel}: any) => {
 	const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
 	// useEffect serve para determinar que a propriedade 
@@ -61,12 +62,15 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 	);
 }
 
-const Sending = ({ widget }: Props): React.ReactElement => {
+const Sending = ({ widget, updateCache }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
 
 	return (
 		<SettingsForm
 			widget={widget}
+			afterSubmit={async (values:any, result:any) => {
+        updateCache(result.data.update_widgets.returning[0])
+      }}
 			initialValues={{
 				settings: {
 					optimization_enabled: true,

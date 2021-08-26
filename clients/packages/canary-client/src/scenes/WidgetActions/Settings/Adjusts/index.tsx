@@ -9,12 +9,15 @@ import SettingsForm from '../SettingsForm';
 import RadioField, { Radio } from '../../../../components/Radio';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const AdjustsFields = ({ widget }: any) => {
+const AdjustsFields = ({ widget, updateCache }: any) => {
   const { t } = useTranslation('widgetActions');
 
   return (
     <SettingsForm
       widget={widget}
+      afterSubmit={async (values:any, result:any) => {
+        updateCache(result.data.update_widgets.returning[0])
+      }}
       initialValues={{
         settings: {
           show_city: "city-false",
