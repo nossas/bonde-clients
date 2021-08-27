@@ -54,9 +54,18 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
   const { t } = useTranslation('widgetActions');
 
   const onSubmit = async ({ primaryKey, settings, ...values }: SubmitProps) => {
+    const newSettings: any = {}
+    Object.keys(initialValues.settings).forEach((key: string) => {
+      if (Object.keys(settings).filter((key2) => key2 === key).length === 0) {
+        newSettings[key] = ""
+      }
+    });
+    const mergeSettings = {
+      ...settings,
+      ...newSettings
+    }
+    const result = await save({ variables: { primaryKey, settings: mergeSettings } });
     try {
-      const result = await save({ variables: { primaryKey, settings } });
-
       if (!(result.data.update_widgets.affected_rows === 1)) {
         throw new Error(t('settings.defaultForm.error'));
       }
@@ -65,7 +74,7 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
         type: toast.TYPE.SUCCESS,
       });
 
-      if (afterSubmit) await afterSubmit({ primaryKey, settings, ...values }, result);
+      if (afterSubmit) await afterSubmit({ primaryKey, settings: mergeSettings, ...values }, result);
 
     } catch (e) {
       console.log(e);
