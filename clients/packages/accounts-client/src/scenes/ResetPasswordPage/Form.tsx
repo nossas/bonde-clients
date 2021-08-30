@@ -43,7 +43,7 @@ const ResetPasswordForm = ({ token }: any) => {
   return (
     <Container fluid style={{ width: "100%", padding: "0" }}>
       <Header.H2>{t("resetPassword.form.title")}</Header.H2>
-      <Text>{t("resetPassword.form.subtitle")}</Text>
+      <Text marginBottom={1}>{t("resetPassword.form.subtitle")}</Text>
       <ConnectedForm initialValues={{ token }} onSubmit={submit}>
         {({ submitting }: any) => (
           <>
