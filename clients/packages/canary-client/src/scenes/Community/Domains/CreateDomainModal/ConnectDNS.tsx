@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Link, Button, toast, Success } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Link, Button, toast, Success, Flex } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import NameServersForm from './NameServersForm';
 import IPConnectForm from './IPConnectForm';
@@ -35,29 +34,21 @@ const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
 
   const done = async () => {
     await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
-    // const { data, errors } = await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
-    // console.log('data, errors', { data, errors });
     toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
     onClose()
   }
 
   return (
-    <Container fluid style={{ width: '100%', padding: '0' }}>
+    <>
       {isNameServers
         ? <NameServersForm status={status} changeStatus={changeStatus} connectByIP={connectByIP} dnsHostedZone={dnsHostedZone} />
         : <IPConnectForm status={status} changeStatus={changeStatus} />
       }
-      <Row>
-        <Col xs={6}>
-          <Link onClick={onClose}>Voltar</Link>
-        </Col>
-        <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={done} disabled={status !== 'registered'} type='button'>
-            Pronto!
-        </Button>
-        </Col>
-      </Row>
-    </Container>
+      <Flex direction="row" justify="space-between" align="center" pt={6}>
+        <Link onClick={onClose}>Voltar</Link>
+        <Button onClick={done} disabled={status !== 'registered'} type='button'>Pronto!</Button>
+      </Flex>
+    </>
   )
 }
 
