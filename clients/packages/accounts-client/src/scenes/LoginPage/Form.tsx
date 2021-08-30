@@ -7,7 +7,6 @@ import {
   Stack,
   Validators,
 } from 'bonde-components';
-import { Container } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -21,7 +20,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation('auth');
 
   return (
-    <Container fluid style={{ width: '100%', padding: '0' }}>
       <ConnectedForm onSubmit={onSubmit}>
         {({ submitting }: any) => (
           <>
@@ -50,14 +48,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 {t('links.forgetPassword')}
               </LinkStyled>
 
-              <Button type='submit' disabled={submitting} padding="10px">
+              <Button type='submit' disabled={submitting}>
                 {t('button.submit')}
               </Button>
             </Stack>
           </>
         )}
       </ConnectedForm>
-    </Container>
   );
 };
 
