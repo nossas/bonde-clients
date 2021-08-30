@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Header, Empty } from "bonde-components";
+import { Header, Empty, Stack } from "bonde-components";
 
 import { useFilter } from "../../services/FilterProvider";
 import { Table, Filters } from "../../components";
@@ -52,7 +52,7 @@ export default function Relations({
   };
 
   return (
-    <>
+    <Stack direction="column" spacing={4}>
       <Filters
         save={save}
         options={FilterOptions}
@@ -98,7 +98,7 @@ export default function Relations({
           );
         }}
       </FetchMatches>
-    </>
+    </Stack>
   );
 }
 
