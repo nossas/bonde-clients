@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Header, Tab, Navigation, Container as Content } from 'bonde-components';
-import { Container as GridContainer } from 'react-grid-system';
 import TabRoute from './TabRoute';
 
 
@@ -50,9 +49,7 @@ const Container: React.FC<Props> = ({ children, title, navigation }): React.Reac
             </Navigation>
           </SubHeader>
           <Content>
-            <GridContainer fluid style={{ width: "100%", padding: "0" }}>
-              {children}
-            </GridContainer>
+            {children}
           </Content>
         </PageWrap>
       )}
