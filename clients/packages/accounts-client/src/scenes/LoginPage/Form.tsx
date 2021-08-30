@@ -4,9 +4,10 @@ import {
   ConnectedForm,
   InputField,
   Link as LinkStyled,
+  Stack,
   Validators,
 } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -43,18 +44,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 min(6, t('fields.password.errors.min'))
               )}
             />
-            <Row align='center'>
-              <Col sm={6}>
-                <LinkStyled component={Link} to='/forget-password'>
-                  {t('links.forgetPassword')}
-                </LinkStyled>
-              </Col>
-              <Col sm={6}>
-                <Button type='submit' disabled={submitting}>
-                  {t('button.submit')}
-                </Button>
-              </Col>
-            </Row>
+
+            <Stack direction="row" alignItems="center" spacing={4}>
+              <LinkStyled component={Link} to='/forget-password'>
+                {t('links.forgetPassword')}
+              </LinkStyled>
+
+              <Button type='submit' disabled={submitting} padding="10px">
+                {t('button.submit')}
+              </Button>
+            </Stack>
           </>
         )}
       </ConnectedForm>
