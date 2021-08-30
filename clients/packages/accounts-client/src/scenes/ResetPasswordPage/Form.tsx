@@ -5,10 +5,11 @@ import {
   Header,
   InputField,
   Link as LinkStyled,
+  Stack,
   Text,
   Validators,
 } from "bonde-components";
-import { Container, Row, Col } from "react-grid-system";
+import { Container } from "react-grid-system";
 import { useMutation, gql } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -56,18 +57,17 @@ const ResetPasswordForm = ({ token }: any) => {
                 min(6, t("resetPassword.fields.password.min6"))
               )}
             />
-            <Row align="center">
-              <Col sm={6}>
-                <LinkStyled component={Link} to="/login">
-                  {t("resetPassword.form.cancel")}
-                </LinkStyled>
-              </Col>
-              <Col sm={6}>
-                <Button type="submit" disabled={submitting}>
-                  {t("resetPassword.form.submit")}
-                </Button>
-              </Col>
-            </Row>
+
+            <Stack direction="row" alignItems="center" spacing={4}>
+              <LinkStyled component={Link} to="/login">
+                {t("resetPassword.form.cancel")}
+              </LinkStyled>
+
+              <Button type="submit" disabled={submitting}>
+                {t("resetPassword.form.submit")}
+              </Button>
+            </Stack>
+
           </>
         )}
       </ConnectedForm>
