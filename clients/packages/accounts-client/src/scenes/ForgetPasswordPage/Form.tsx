@@ -7,8 +7,9 @@ import {
   InputField,
   Validators,
   Link as LinkStyled,
+  Stack,
 } from "bonde-components";
-import { Container, Row, Col } from "react-grid-system";
+import { Container } from "react-grid-system";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, gql } from "bonde-core-tools";
@@ -84,22 +85,20 @@ const ForgetPasswordForm = () => {
               placeholder={t("forgetPassword.email.placeholder")}
               validate={isEmail(t("forgetPassword.email.isEmail"))}
             />
-            <Row align="center">
-              <Col sm={6}>
-                <LinkStyled
-                  component={Link}
-                  to="/login"
-                  title={t("forgetPassword.goback")}
-                >
-                  {t("forgetPassword.goback")}
-                </LinkStyled>
-              </Col>
-              <Col sm={6}>
-                <Button type="submit" disabled={submitting}>
-                  {t("forgetPassword.submit")}
-                </Button>
-              </Col>
-            </Row>
+
+            <Stack direction="row" alignItems="center" spacing={4}>
+              <LinkStyled
+                component={Link}
+                to="/login"
+                title={t("forgetPassword.goback")}
+              >
+                {t("forgetPassword.goback")}
+              </LinkStyled>
+
+              <Button type="submit" disabled={submitting}>
+                {t("forgetPassword.submit")}
+              </Button>
+            </Stack>
           </>
         )}
       </ConnectedForm>
