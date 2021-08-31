@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Image } from 'bonde-components';
+import { Box, Text, Image, Heading } from 'bonde-components';
 import FallbackImage from "./FallbackImage";
 
 export type MobilizationProps = {
@@ -42,7 +42,7 @@ export const MobilizationBox: React.FC<MobilizationBoxProps> = ({
       h="188px"
     />
     <Box p={4}>
-      <Text as="h4" fontWeight="800" fontSize="md">{name}</Text>
+      <Heading as="h4" fontWeight="extrabold" size="md">{name}</Heading>
       <Text>Por {community.name}</Text>
     </Box>
   </Box>

@@ -2,10 +2,10 @@ import React from "react";
 import { useHistory } from 'react-router-dom';
 import {
   Empty,
-  Link,
+  Button,
   // Chakra UI
   Box,
-  Text,
+  Heading,
   List,
   ListItem,
   Stack,
@@ -69,7 +69,10 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Link
+                <Button
+                  variant="link"
+                  colorScheme="black"
+                  textTransform="normal"
                   onClick={() => {
                     onChangeAsync({ community: c })
                       .then(() => {
@@ -77,9 +80,9 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                       });
                   }}
                 >
-                  <Text as="h4" fontWeight="800" fontSize="md">{c.name}</Text>
-                </Link>
-                <CommunityMenu community={c} size="sm" />
+                  <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>
+                </Button>
+                <CommunityMenu community={c} />
               </Stack>
             </ListItem>
           ))}

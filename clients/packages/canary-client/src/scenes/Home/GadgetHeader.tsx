@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Text } from "bonde-components";
+import { Stack, Heading } from "bonde-components";
 
 type Props = {
   title: string
@@ -14,7 +14,14 @@ const GadgetHeader: React.FC<Props> = ({ title, actionRightElement }) => (
     alignItems="flex-end"
     py={4}
   >
-    <Text as="h5" size="sm" textTransform="uppercase">{title}</Text>
+    <Heading
+      as="h5"
+      size="xs"
+      color="gray.300"
+      textTransform="uppercase"
+    >
+      {title}
+    </Heading>
     {actionRightElement}
   </Stack>
 );
