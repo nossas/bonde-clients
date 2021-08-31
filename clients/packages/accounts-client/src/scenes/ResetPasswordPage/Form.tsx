@@ -9,7 +9,6 @@ import {
   Text,
   Validators,
 } from "bonde-components";
-import { Container } from "react-grid-system";
 import { useMutation, gql } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -41,7 +40,7 @@ const ResetPasswordForm = ({ token }: any) => {
   };
 
   return (
-    <Container fluid style={{ width: "100%", padding: "0" }}>
+    <>
       <Header.H2>{t("resetPassword.form.title")}</Header.H2>
       <Text marginBottom={1}>{t("resetPassword.form.subtitle")}</Text>
       <ConnectedForm initialValues={{ token }} onSubmit={submit}>
@@ -71,7 +70,7 @@ const ResetPasswordForm = ({ token }: any) => {
           </>
         )}
       </ConnectedForm>
-    </Container>
+    </>
   );
 };
 
