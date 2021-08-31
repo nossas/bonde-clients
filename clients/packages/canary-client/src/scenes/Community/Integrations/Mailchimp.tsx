@@ -83,7 +83,7 @@ const MailchimpPanel = () => {
                 <Header.H4>Forçar sincronização</Header.H4>
                 <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
                 <Flex justifyContent="flex-end">
-                  <Button type='button' dark>Sincronizar</Button>
+                  <Button type='button'>Sincronizar</Button>
                 </Flex>
               </Section>
             </GridItem>
