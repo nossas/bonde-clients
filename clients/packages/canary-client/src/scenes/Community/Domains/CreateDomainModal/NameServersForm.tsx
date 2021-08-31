@@ -4,6 +4,7 @@ import {
   Header,
   Text,
   Button,
+  Stack,
   Icon,
   Grid,
   GridItem
@@ -30,11 +31,11 @@ type Props = {
 
 const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: Props) => {
   return (
-    <Grid templateColumns="repeat(12, 1fr)" gap={6} rowGap={6}>
-      <GridItem colSpan={6}>
+    <Grid templateColumns="repeat(12, 1fr)" gap={20} rowGap={6}>
+      <GridItem colSpan={12} colStart={1} colEnd={6}>
         <Header.H2>Agora, precisamos da sua ajuda para conectá-lo ao BONDE</Header.H2>
       </GridItem>
-      <GridItem colSpan={6} rowSpan={2}>
+      <GridItem colSpan={6} rowStart={2}>
         <Header.H4>Passo a passo</Header.H4>
         <TopicList>
           <li>
@@ -54,22 +55,29 @@ const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: P
           </li>
         </TopicList>
       </GridItem>
-      <GridItem colSpan={6}>
-        <NameServers dnsHostedZone={dnsHostedZone} />
+      <GridItem colSpan={6} rowStart={2}>
+        <Stack direction="column" spacing={4}>
+          <NameServers dnsHostedZone={dnsHostedZone} />
+          <Radio>
+            <input
+              type='radio'
+              value='registered'
+              checked={status === 'registered'}
+              onChange={changeStatus}
+              />
+            <Text>Os registros de nome foram atualizados.</Text>
+          </Radio>
+        </Stack>
       </GridItem>
-      <GridItem colSpan={6}>
-        <Radio>
-          <input
-            type='radio'
-            value='registered'
-            checked={status === 'registered'}
-            onChange={changeStatus}
-            />
-          <Text>Os registros de nome foram atualizados.</Text>
-        </Radio>
-      </GridItem>
-      <GridItem colSpan={6}>
-        <Button variant="link" colorScheme="gray" type='button' onClick={connectByIP}>
+      <GridItem colSpan={12}>
+        <Button
+          isFullWidth
+          justifyContent="space-between"
+          variant="link"
+          colorScheme="gray"
+          type='button'
+          onClick={connectByIP}
+        >
           Prefiro conectar por IP (Avançado)
           <Icon name='ArrowRight' size='small' />
         </Button>

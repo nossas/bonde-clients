@@ -31,7 +31,7 @@ const NameServers = ({ dnsHostedZone }: any) => {
               <GridItem>
                 <Button
                   variant="link"
-                  colorScheme="gray"
+                  colorScheme="black"
                   onClick={() => {
                     copy(ns)
                     toast(<Success message='Name Server copiado com sucesso!' />, { type: toast.TYPE.SUCCESS });

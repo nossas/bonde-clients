@@ -30,6 +30,7 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
     <Box
       bg="white"
       overflowY="auto"
+      overflowX="hidden"
       h="535px"
       css={{
         "::-webkit-scrollbar": {

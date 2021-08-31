@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Link, Button, toast, Success, Flex } from 'bonde-components';
+import { Button, toast, Success, Flex, Stack } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import NameServersForm from './NameServersForm';
 import IPConnectForm from './IPConnectForm';
@@ -45,8 +45,11 @@ const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
         : <IPConnectForm status={status} changeStatus={changeStatus} />
       }
       <Flex direction="row" justify="space-between" align="center" pt={6}>
-        <Link onClick={onClose}>Voltar</Link>
-        <Button onClick={done} disabled={status !== 'registered'} type='button'>Pronto!</Button>
+        <Button variant="link" colorScheme="black" onClick={onClose}>Voltar</Button>
+        <Stack direction="row" spacing={4}>
+          <Button variant="link" colorScheme="black" onClick={done}>Deixar para depois</Button>
+          <Button onClick={done} disabled={status !== 'registered'} type='button'>Pronto!</Button>
+        </Stack>
       </Flex>
     </>
   )
