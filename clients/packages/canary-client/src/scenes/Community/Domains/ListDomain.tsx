@@ -32,15 +32,17 @@ type DomainsProps = {
 }
 
 const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
-  <Box>
-    <Flex direction="row" justify="space-between" pb={4}>
-      <Stack direction="column" spacing={2}>
-        <Heading as="h3" size="md">Domínios</Heading>
-        <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-      </Stack>
-      <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
-    </Flex>
-    <Box pb={4} display={["none", "flex"]}>
+  <Stack spacing={4}>
+    <Box bg="white" p={6}>
+      <Flex direction="row" justify="space-between" pb={4}>
+        <Stack direction="column" spacing={2}>
+          <Heading as="h3" size="lg">Domínios</Heading>
+          <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
+        </Stack>
+        <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
+      </Flex>
+    </Box>
+    <Box display={["none", "flex"]}>
       <Grid templateColumns='500px auto 70px' gap={4}>
         <GridItem>
           <Text>Domínio</Text>
@@ -50,33 +52,35 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
         </GridItem>
       </Grid>
     </Box>
-    {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
-      <Link key={`dns-hosted-zone-${index}`} to={`/community/domains/${dnsHostedZone.id}`}>
-        <Box bg="white" p={4} borderBottomWidth={1} borderColor="gray.100">
-          <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]} gap={4}>
-            <GridItem>
-              <Text bold>{dnsHostedZone.domain_name}</Text>
-            </GridItem>
-            <GridItem>
-              <Status
-                activeStatus='propagated'
-                inactiveStatus='created'
-                value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
-                labels={{
-                  created: 'Aguardando configurar DNS',
-                  propagating: 'Propagando',
-                  propagated: 'Propagado'
-                }}
-              />
-            </GridItem>
-            <GridItem>
-              <Icon size='small' name='ArrowRight' />
-            </GridItem>
-          </Grid>
-        </Box>
-      </Link>
-    ))}
-  </Box>
+    <Box>
+      {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
+        <Link key={`dns-hosted-zone-${index}`} to={`/community/domains/${dnsHostedZone.id}`}>
+          <Box bg="white" p={4} borderBottomWidth={1} borderColor="gray.100">
+            <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]} gap={4}>
+              <GridItem>
+                <Text bold>{dnsHostedZone.domain_name}</Text>
+              </GridItem>
+              <GridItem>
+                <Status
+                  activeStatus='propagated'
+                  inactiveStatus='created'
+                  value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
+                  labels={{
+                    created: 'Aguardando configurar DNS',
+                    propagating: 'Propagando',
+                    propagated: 'Propagado'
+                  }}
+                />
+              </GridItem>
+              <GridItem>
+                <Icon size='small' name='ArrowRight' />
+              </GridItem>
+            </Grid>
+          </Box>
+        </Link>
+      ))}
+    </Box>
+  </Stack>
 );
 
 export default Domains;
