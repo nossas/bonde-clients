@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { Header, Text, Button, SwitchField } from "bonde-components";
+import {
+	Header,
+	Text,
+	Button,
+	SwitchField,
+	SelectField,
+	Grid,
+	GridItem,
+	Stack,
+	Flex
+} from "bonde-components";
 import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
-import { Container, Row, Col, Visible } from 'react-grid-system';
 
 import Panel from "../../../../components/Panel";
 import ButtonStyled from "../../../../components/ButtonStyled";
 import SpyField from "../../../../components/SpyField";
-import SelectField from "../../../../components/SelectField";
 import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
-import { Flex } from "../Sending/Flex";
 
 type Props = {
 	widget: Widget;
@@ -78,13 +85,12 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 		>
 			{({ form, submitting, dirty }: any) => (
 				<Panel>
-					<Container fluid style={{ width: "100%", padding: "0" }}>
-						<Row justify="between">
-							<Col sm={12} md={12} lg={6}>
-								<Flex spacing="32px">
-									<Visible lg xl>
-										<OptimizedPressure />
-									</Visible>
+					<Grid templateColumns="repeat(12, 1fr)" gap={6}>
+							<GridItem colSpan={[null, 12, 12, 6]}>
+								<Stack direction="column" spacing={4}>
+									{/* <Visible lg xl> */}
+									<OptimizedPressure />
+									{/* </Visible> */}
 									<div style={{ flex: 1 }}>
 										<div style={{ marginBottom: "10px" }}>
 											<Header.H3>
@@ -131,13 +137,13 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 											<option value={500}>A cada 500 pressões</option>
 											<option value={1000}>A cada 1.000 pressões</option>
 										</SelectField>
-										<Row justify='end'>
+										<Flex justify='end'>
 											<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
-										</Row>
+										</Flex>
 									</div>
-								</Flex>
-							</Col>
-							<Col sm={12} md={12} lg={5}>
+								</Stack>
+							</GridItem>
+							<GridItem colSpan={[null, 12, 12, 6]}>
 								<Header.H4  style={{ marginBottom: "10px" }}>
 									{t("settings.sending.how_it_works.title")}
 								</Header.H4>
@@ -150,9 +156,8 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 								<Text>
 									{t("settings.sending.how_it_works.description3")}
 								</Text>
-							</Col>
-						</Row>
-					</Container>
+							</GridItem>
+						</Grid>
 				</Panel>
 			)}
 		</SettingsForm>

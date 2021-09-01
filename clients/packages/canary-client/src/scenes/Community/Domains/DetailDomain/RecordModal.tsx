@@ -1,5 +1,4 @@
 import React from 'react';
-// import styled from 'styled-components';
 import {
   Modal,
   Header,
@@ -8,14 +7,16 @@ import {
   Link,
   ConnectedForm,
   InputField,
-  toast,
   Success,
-  useField,
-  Validators
+  SelectField,
+  Grid,
+  GridItem,
+  Validators,
+  Flex,
+  toast,
+  useField
 } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Container, Row, Col } from 'react-grid-system';
-import SelectField from '../../../../components/SelectField';
 import { InputGroup, Addon } from '../InputGroup';
 import { DNSHostedZone } from '../types';
 
@@ -102,66 +103,58 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
         }}
       >
         {({ submitting }: any) => (
-        <Container fluid style={{ width: '100%', padding: '0' }}>
-          <Row style={{ marginBottom: '24px' }}>
-            <Col xs={12}>
-              <Header.H2>Adicionar registro</Header.H2>
-            </Col>
-          </Row>
-          <Row style={{ marginBottom: '20px' }}>
-            <Col xs={12}>
-              <Text>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, clique aqui pra saber mais.</Text>
-            </Col>
-          </Row>
-          <Row style={{ marginBottom: '20px' }}>
-            <Col xs={12}>
-              <NameField
-                name='name'
-                type='text'
-                label='Nome'
-                domainName={dnsHostedZone.domain_name}
-                validate={required('Nome deve ser preenchido')}
-              />
-            </Col>
-            <Col xs={3}>
-              <SelectField
-                name='record_type'
-                label='Tipo'
-              >
-                <option value='A'>A</option>
-                <option value='CNAME'>CNAME</option>
-                <option value='MX'>MX</option>
-                <option value='TXT'>TXT</option>
-                <option value='AAA'>AAA</option>
-              </SelectField>
-            </Col>
-            <Col xs={6}>
-              <ValueRecordTypeField
-                name='value'
-                type='text'
-                label='Valor'
-                validate={required('Valor deve ser preenchido')}
-              />
-            </Col>
-            <Col xs={3}>
-              <TTLRecordTypeField
-                name='ttl'
-                type='number'
-                label='TTL'
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
+        <Grid templateColumns="repeat(12, 1fr)" gap={4} rowGap={4}>
+          <GridItem colSpan={12}>
+            <Header.H2>Adicionar registro</Header.H2>
+          </GridItem>
+          <GridItem colSpan={12}>
+            <Text>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, clique aqui pra saber mais.</Text>
+          </GridItem>
+          <GridItem colSpan={12}>
+            <NameField
+              name='name'
+              type='text'
+              label='Nome'
+              domainName={dnsHostedZone.domain_name}
+              validate={required('Nome deve ser preenchido')}
+            />
+          </GridItem>
+          <GridItem colSpan={3}>
+            <SelectField
+              name='record_type'
+              label='Tipo'
+            >
+              <option value='A'>A</option>
+              <option value='CNAME'>CNAME</option>
+              <option value='MX'>MX</option>
+              <option value='TXT'>TXT</option>
+              <option value='AAA'>AAA</option>
+            </SelectField>
+          </GridItem>
+          <GridItem colSpan={6}>
+            <ValueRecordTypeField
+              name='value'
+              type='text'
+              label='Valor'
+              validate={required('Valor deve ser preenchido')}
+            />
+          </GridItem>
+          <GridItem colSpan={3}>
+            <TTLRecordTypeField
+              name='ttl'
+              type='number'
+              label='TTL'
+            />
+          </GridItem>
+          <GridItem colSpan={3}>
+            <Flex direction="row" justify="space-between">
               <Link onClick={onClose}>Cancelar</Link>
-            </Col>
-            <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button type='submit' disabled={submitting}>Continuar</Button>
-            </Col>
-          </Row>
-        </Container>
+            </Flex>
+          </GridItem>
+        </Grid>
         )}
-      </ ConnectedForm>
+      </ConnectedForm>
     </Modal>
   );
 }

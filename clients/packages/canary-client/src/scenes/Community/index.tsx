@@ -63,7 +63,7 @@ const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement
           <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Dominios</Tab>
         </Navigation>
       </SubHeader>
-      <Container>
+      <Container w="100%">
         <Switch>
           <Route exact path={`${match.path}`}>
             {/* Redirect /community to index tab */}

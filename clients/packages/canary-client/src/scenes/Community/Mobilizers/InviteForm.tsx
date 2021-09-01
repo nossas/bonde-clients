@@ -1,37 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   Button,
   ConnectedForm,
   InputField,
+  SelectField,
   Validators,
   Text,
   Icon,
+  Grid,
+  GridItem,
+  Stack,
   toast
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import Panel from '../../../components/Panel';
-import SelectField from '../../../components/SelectField';
-
-const InlineFormWrap = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(auto, 500px)) 200px;
-  align-items: center;
-  grid-column-gap: 20px;
-  & div:nth-child(2) {
-    margin-right: 35px;
-  }
-`;
-
-const Inline = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  svg {
-    margin-right: 15px;
-  }
-`;
 
 export const InviteMutation = gql`
   mutation SendInvitation ($input: InvitationInput) {
@@ -97,31 +80,37 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
             }}
           >
             {({ submitting, dirty }: any) => (
-              <InlineFormWrap>
-                <InputField
-                  name='email'
-                  label={t('mobilizers.form.fields.email.label')}
-                  placeholder={t('mobilizers.form.fields.email.placeholder')}
-                  validate={
-                    composeValidators(
-                      required(t('mobilizers.form.fields.email.errors.required')),
-                      isEmail(t('mobilizers.form.fields.email.errors.isEmail'))
-                    )
-                  }
-                />
-                <SelectField name='role' label={t('mobilizers.form.fields.role.label')}>
-                  <option value={1}>{t('mobilizers.form.fields.role.option1')}</option>
-                  <option value={2}>{t('mobilizers.form.fields.role.option2')}</option>
-                </SelectField>
-                <Button type='submit' disabled={submitting || !dirty}>{t('mobilizers.form.buttons.invite')}</Button>
-              </InlineFormWrap>
+              <Grid templateColumns="repeat(2, minmax(auto, 500px)) 200px" gap={4}>
+                <GridItem>
+                  <InputField
+                    name='email'
+                    label={t('mobilizers.form.fields.email.label')}
+                    placeholder={t('mobilizers.form.fields.email.placeholder')}
+                    validate={
+                      composeValidators(
+                        required(t('mobilizers.form.fields.email.errors.required')),
+                        isEmail(t('mobilizers.form.fields.email.errors.isEmail'))
+                      )
+                    }
+                  />
+                </GridItem>
+                <GridItem>
+                  <SelectField name='role' label={t('mobilizers.form.fields.role.label')}>
+                    <option value={1}>{t('mobilizers.form.fields.role.option1')}</option>
+                    <option value={2}>{t('mobilizers.form.fields.role.option2')}</option>
+                  </SelectField>
+                </GridItem>
+                <GridItem>
+                  <Button type='submit' disabled={submitting || !dirty}>{t('mobilizers.form.buttons.invite')}</Button>
+                </GridItem>
+              </Grid>
             )}
           </ConnectedForm>
         ) : (
-          <Inline>
+          <Stack direction="row" spacing={2}>
             <Icon name='InfoMsg' />
             <Text>{t('mobilizers.form.permission-info')}</Text>
-          </Inline>
+          </Stack>
         )}
       </Panel>
     );

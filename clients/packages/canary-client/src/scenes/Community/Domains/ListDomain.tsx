@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Header, Text, Icon, Grid, GridItem, Box, Flex } from 'bonde-components';
+import {
+  Text,
+  Icon,
+  Grid,
+  GridItem,
+  Box,
+  Flex,
+  Stack,
+  Heading
+} from 'bonde-components';
 import { Status } from './Styles';
 import CreateDomainModal from './CreateDomainModal';
 
@@ -23,15 +32,15 @@ type DomainsProps = {
 }
 
 const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
-  <>
-    <Flex direction="row" justify="space-between">
-      <div>
-        <Header.H3>Domínios</Header.H3>
+  <Box>
+    <Flex direction="row" justify="space-between" pb={4}>
+      <Stack direction="column" spacing={2}>
+        <Heading as="h3" size="md">Domínios</Heading>
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-      </div>
+      </Stack>
       <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
     </Flex>
-    <Box py={4}>
+    <Box pb={4} display={["none", "flex"]}>
       <Grid templateColumns='500px auto 70px' gap={4}>
         <GridItem>
           <Text>Domínio</Text>
@@ -44,7 +53,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
     {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
       <Link key={`dns-hosted-zone-${index}`} to={`/community/domains/${dnsHostedZone.id}`}>
         <Box bg="white" p={4} borderBottomWidth={1} borderColor="gray.100">
-          <Grid key={`domain-item-${index}`} templateColumns='500px auto 70px' gap={4}>
+          <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]} gap={4}>
             <GridItem>
               <Text bold>{dnsHostedZone.domain_name}</Text>
             </GridItem>
@@ -67,7 +76,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
         </Box>
       </Link>
     ))}
-  </>
+  </Box>
 );
 
 export default Domains;
