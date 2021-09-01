@@ -23,11 +23,11 @@ const RecipientPage = () => {
     >
       {({ submitting, dirty }: any) => (
         <Box bg="white" boxShadow="sm" p={6}>
-          <Stack direction="column" spacing={2} mb={4}>
+          <Stack spacing={2} mb={4}>
             <Heading as="h3" size="lg">Recebimentos</Heading>
             <Text>Insira os dados da sua conta bancária para começar a receber doações pela ferramenta de crowdfunding.</Text>
           </Stack>
-          <Stack direction="column" spacing={4}>
+          <Stack spacing={4}>
             <AccountPanel />
             <TransferPanel />
           </Stack>

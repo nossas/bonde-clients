@@ -1,21 +1,17 @@
 import React from 'react';
-// import { Container, Row, Col } from 'react-grid-system';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  Header,
+  Heading,
   Text,
   Box,
   Link as LinkStyled,
-  Grid,
-  GridItem
+  Stack
 } from 'bonde-components';
 import Mailchimp from './Mailchimp';
 import Twilio from './Twilio';
 
 const MenuStyled = styled.div`
-  padding: 20px 0 24px;
-
   ${LinkStyled} {
     margin-right: 15px;
     text-transform: uppercase;
@@ -35,30 +31,24 @@ const SettingsPage = () => {
 
   return (
     <Box bg="white" boxShadow="sm" p={6}>
-      <Grid templateColumns="repeat(12, ifr);">
-        <GridItem colSpan={12}>
-          <Header.H3>Integrações</Header.H3>
-          <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
-        </GridItem>
-        <GridItem colSpan={12}>
-          <MenuStyled>
-            <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
-            <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
-          </MenuStyled>
-        </GridItem>
-        <Switch>
-          <Route exact path={path.replace(':name', 'mailchimp')}>
-            <GridItem colSpan={12}>
-              <Mailchimp />
-            </GridItem>
-          </Route>
-          <Route exact path={path.replace(':name', 'twilio')}>
-            <GridItem colSpan={12}>
-              <Twilio />
-            </GridItem>
-          </Route>
-        </Switch>
-      </Grid>
+      <Stack spacing={2} mb={4}>
+        <Heading as="h3" size="lg">Integrações</Heading>
+        <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
+      </Stack>
+      <Stack mb={4}>
+        <MenuStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
+        </MenuStyled>
+      </Stack>
+      <Switch>
+        <Route exact path={path.replace(':name', 'mailchimp')}>
+          <Mailchimp />
+        </Route>
+        <Route exact path={path.replace(':name', 'twilio')}>
+          <Twilio />
+        </Route>
+      </Switch>
     </Box>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Loading, Header } from 'bonde-components';
+import { Loading, Heading, Box, Stack, Button } from 'bonde-components';
 import { useQuery, useSession, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';
@@ -50,23 +49,6 @@ const InvitationsQuery = gql`
   }
 `;
 
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  ${Header.H5} {
-    margin: 0 20px 15px 0;
-    padding: 0 0 1px 0;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  ${Header.H5}.active {
-    color: #ee0099;
-  }
-`;
-
 const FetchInvitations = () => {
   const [menu, setMenu] = useState(1);
   const { t } = useTranslation('community');
@@ -107,21 +89,33 @@ const FetchInvitations = () => {
     isCommunityAdmin
   };
 
+  const customTheme = (index: number) => ({
+    variant: "link",
+    colorScheme: "gray",
+    isActive: menu === index,
+    onClick: () => setMenu(index),
+    _active: {
+      color: "pink.200"
+    }
+  })
+
   return (
-    <>
-      <Header.H4>{t('mobilizers.form.title')}</Header.H4>
-      <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
-      <Flex>
-        <Header.H5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
+    <Stack spacing={4}>
+      <Box bg="white" boxShadow="sm" p={6}>
+        <Heading as="h3" size="lg" mb={4}>{t('mobilizers.form.title')}</Heading>
+        <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
+      </Box>
+      <Stack direction="row" spacing={4}>
+        <Button {...customTheme(1)}>
           {t('mobilizers.filters.invitations', { count: invitationsCount })}
-        </Header.H5>
-        <Header.H5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
+        </Button>
+        <Button {...customTheme(2)}>
           {t('mobilizers.filters.mobilizers', { count: communityUsersCount })}
-        </Header.H5>
-      </Flex>
+        </Button>
+      </Stack>
       {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
       {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}
-    </>
+    </Stack>
   );
 };
 
