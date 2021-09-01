@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {
   Header,
   Text,
+  Box,
   Link as LinkStyled,
   Grid,
   GridItem
@@ -33,30 +34,32 @@ const SettingsPage = () => {
   const { path } = useRouteMatch();
 
   return (
-    <Grid templateColumns="repeat(12, ifr);">
-      <GridItem colSpan={12}>
-        <Header.H3>Integrações</Header.H3>
-        <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
-      </GridItem>
-      <GridItem colSpan={12}>
-        <MenuStyled>
-          <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
-          <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
-        </MenuStyled>
-      </GridItem>
-      <Switch>
-        <Route exact path={path.replace(':name', 'mailchimp')}>
-          <GridItem colSpan={12}>
-            <Mailchimp />
-          </GridItem>
-        </Route>
-        <Route exact path={path.replace(':name', 'twilio')}>
-          <GridItem colSpan={12}>
-            <Twilio />
-          </GridItem>
-        </Route>
-      </Switch>
-    </Grid>
+    <Box bg="white" boxShadow="sm" p={6}>
+      <Grid templateColumns="repeat(12, ifr);">
+        <GridItem colSpan={12}>
+          <Header.H3>Integrações</Header.H3>
+          <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
+        </GridItem>
+        <GridItem colSpan={12}>
+          <MenuStyled>
+            <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
+            <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
+          </MenuStyled>
+        </GridItem>
+        <Switch>
+          <Route exact path={path.replace(':name', 'mailchimp')}>
+            <GridItem colSpan={12}>
+              <Mailchimp />
+            </GridItem>
+          </Route>
+          <Route exact path={path.replace(':name', 'twilio')}>
+            <GridItem colSpan={12}>
+              <Twilio />
+            </GridItem>
+          </Route>
+        </Switch>
+      </Grid>
+    </Box>
   );
 }
 

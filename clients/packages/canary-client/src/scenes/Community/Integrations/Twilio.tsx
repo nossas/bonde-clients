@@ -2,17 +2,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   InputField,
-  Header,
+  Heading,
   Text,
   Button,
   Tooltip,
   Success,
   Grid,
   GridItem,
-  Flex
+  Flex,
+  Stack,
+  UnorderedList,
+  ListItem
 } from 'bonde-components';
 import CommunityForm from '../BaseForm';
-import Panel, { Section } from '../../../components/Panel';
 import TwilioIcon from './TwilioIcon';
 
 const TwilioPanel = () => {
@@ -24,22 +26,21 @@ const TwilioPanel = () => {
       success={<Success message='Uhuu! Twilio conectado ao BONDE.' />}
     >
       {({ submitting, dirty }: any) => (
-        <Panel>
-          <Grid templateColumns="repeat(12, 1fr)" gap={6}>
-            <GridItem colSpan={[12, null, null, 1]} m="0 auto">
-              <TwilioIcon />
-            </GridItem>
-            <GridItem colSpan={[12, null, null, 7]}>
-              <Section>
-                <Header.H3>Twilio</Header.H3>
+        <Grid templateColumns="repeat(12, 1fr)" gap={16}>
+          <GridItem colSpan={[12, null, null, 1]} m="0 auto">
+            <TwilioIcon />
+          </GridItem>
+          <GridItem colSpan={[12, null, null, 7]}>
+            <Stack spacing={4}>
+              <Stack>
+                <Heading as="h3" size="lg">Twilio</Heading>
                 <Text>Conecte ao Twilio para habilitar a ferramenta de pressão por telefone nas suas campanhas.</Text>
-              </Section>
-              <Section>
-                <Header.H4>Pra começar</Header.H4>
+              </Stack>
+              <Stack>
+                <Heading as="h4" size="md">Pra começar</Heading>
                 <Text>Cadastra-se no Twilio e crie um número de telefone.</Text>
-              </Section>
-              <Section>
-                <Header.H4>Conectar</Header.H4>
+              </Stack>
+              <Stack>
                 <InputField
                   name='community.twilio_account_sid'
                   label={(
@@ -94,37 +95,39 @@ const TwilioPanel = () => {
                 <Flex justifyContent="flex-end">
                   <Button type='submit' disabled={submitting || !dirty}>Conectar ao Twilio</Button>
                 </Flex>
-              </Section>
-            </GridItem>
-            <GridItem colSpan={[12, null, null, 4]}>
-              <Section>
-                <Header.H4>Funcionalidades</Header.H4>
-                <ul>
-                  <li>
+              </Stack>
+            </Stack>
+          </GridItem>
+          <GridItem colSpan={[12, null, null, 4]}>
+            <Stack spacing={4}>
+              <Stack spacing={2}>
+                <Heading as="h4" size="md">Funcionalidades</Heading>
+                <UnorderedList>
+                  <ListItem>
                     <Text>Habilitar a pressão por telefone nas páginas da sua comunidade.</Text>
-                  </li>
-                  <li>
+                  </ListItem>
+                  <ListItem>
                     <Text>Enviar mensagens e fazer chamadas por telefone.</Text>
-                  </li>
-                </ul>
-              </Section>
-              <Section>
-                <Header.H4>Dificuldade: Fácil</Header.H4>
-                <ul>
-                  <li>
+                  </ListItem>
+                </UnorderedList>
+              </Stack>
+              <Stack spacing={2}>
+                <Heading as="h4" size="md">Dificuldade: Fácil</Heading>
+                <UnorderedList>
+                  <ListItem>
                     <Text>Não precisa saber programar :)</Text>
-                  </li>
-                  <li>
+                  </ListItem>
+                  <ListItem>
                     <Text>Ferramenta em inglês.</Text>
-                  </li>
-                  <li>
+                  </ListItem>
+                  <ListItem>
                     <Text>Ferramenta paga, com versão gratuita para testar.</Text>
-                  </li>
-                </ul>
-              </Section>
-            </GridItem>
-          </Grid>
-        </Panel>
+                  </ListItem>
+                </UnorderedList>
+              </Stack>
+            </Stack>
+          </GridItem>
+        </Grid>
       )}
     </CommunityForm>
   )
