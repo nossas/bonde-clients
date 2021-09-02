@@ -99,7 +99,7 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
               </SelectField>
             </GridItem>
             <GridItem>
-              <Flex align="flex-end" justify="flex-start" h="100%">
+              <Flex align="center" justify="flex-start" h="100%">
                 <Button type='submit' disabled={submitting || !dirty}>{t('mobilizers.form.buttons.invite')}</Button>
               </Flex>
             </GridItem>
