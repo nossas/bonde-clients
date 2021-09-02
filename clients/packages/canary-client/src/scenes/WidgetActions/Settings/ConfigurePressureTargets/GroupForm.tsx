@@ -122,7 +122,7 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
         </Button>
       </Flexable>
     </Box>
-    );
+  );
 }
 
 export type GroupFormProps = {
