@@ -30,9 +30,9 @@ const SettingsPage = () => {
   const { path } = useRouteMatch();
 
   return (
-    <Box bg="white" boxShadow="sm" p={6}>
+    <>
       <Stack spacing={2} mb={4}>
-        <Heading as="h3" size="lg">Integrações</Heading>
+        <Heading as="h3" size="md">Integrações</Heading>
         <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
       </Stack>
       <Stack mb={4}>
@@ -41,15 +41,19 @@ const SettingsPage = () => {
           <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
         </MenuStyled>
       </Stack>
-      <Switch>
-        <Route exact path={path.replace(':name', 'mailchimp')}>
-          <Mailchimp />
-        </Route>
-        <Route exact path={path.replace(':name', 'twilio')}>
-          <Twilio />
-        </Route>
-      </Switch>
-    </Box>
+
+      <Box bg="white" boxShadow="sm" p={10}>
+
+        <Switch>
+          <Route exact path={path.replace(':name', 'mailchimp')}>
+            <Mailchimp />
+          </Route>
+          <Route exact path={path.replace(':name', 'twilio')}>
+            <Twilio />
+          </Route>
+        </Switch>
+      </Box>
+    </>
   );
 }
 

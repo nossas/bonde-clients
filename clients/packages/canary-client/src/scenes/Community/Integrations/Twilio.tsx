@@ -31,16 +31,17 @@ const TwilioPanel = () => {
             <TwilioIcon />
           </GridItem>
           <GridItem colSpan={[12, null, null, 7]}>
-            <Stack spacing={4}>
-              <Stack>
-                <Heading as="h3" size="lg">Twilio</Heading>
+            <Stack spacing={6}>
+              <Stack spacing={2}>
+                <Heading as="h3" size="md">Twilio</Heading>
                 <Text>Conecte ao Twilio para habilitar a ferramenta de pressão por telefone nas suas campanhas.</Text>
               </Stack>
-              <Stack>
-                <Heading as="h4" size="md">Pra começar</Heading>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Pra começar</Heading>
                 <Text>Cadastra-se no Twilio e crie um número de telefone.</Text>
               </Stack>
-              <Stack>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Conectar</Heading>
                 <InputField
                   name='community.twilio_account_sid'
                   label={(
@@ -99,9 +100,9 @@ const TwilioPanel = () => {
             </Stack>
           </GridItem>
           <GridItem colSpan={[12, null, null, 4]}>
-            <Stack spacing={4}>
+            <Stack spacing={6}>
               <Stack spacing={2}>
-                <Heading as="h4" size="md">Funcionalidades</Heading>
+                <Heading as="h4" size="sm">Funcionalidades</Heading>
                 <UnorderedList>
                   <ListItem>
                     <Text>Habilitar a pressão por telefone nas páginas da sua comunidade.</Text>
@@ -112,7 +113,7 @@ const TwilioPanel = () => {
                 </UnorderedList>
               </Stack>
               <Stack spacing={2}>
-                <Heading as="h4" size="md">Dificuldade: Fácil</Heading>
+                <Heading as="h4" size="sm">Dificuldade: Fácil</Heading>
                 <UnorderedList>
                   <ListItem>
                     <Text>Não precisa saber programar :)</Text>

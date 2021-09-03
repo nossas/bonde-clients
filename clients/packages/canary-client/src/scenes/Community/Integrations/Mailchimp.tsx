@@ -19,7 +19,7 @@ import MailchimpIcon from './MailchimpIcon';
 
 const MailchimpPanel = () => {
   const { t } = useTranslation('community');
-  
+
   return (
     <CommunityForm
       formName='Integrations'
@@ -31,16 +31,17 @@ const MailchimpPanel = () => {
             <MailchimpIcon />
           </GridItem>
           <GridItem colSpan={[12, null, null, 7]}>
-            <Stack spacing={4}>
-              <Stack>
-                <Heading as="h3" size="lg">Mailchimp</Heading>
+            <Stack spacing={6}>
+              <Stack spacing={2}>
+                <Heading as="h3" size="md">Mailchimp</Heading>
                 <Text>Conecte ao Mailchimp para se comunicar com as pessoas que agirem nas mobilizações da sua comunidade.</Text>
               </Stack>
-              <Stack>
-                <Heading as="h4" size="md">Pra começar</Heading>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Pra começar</Heading>
                 <Text>Crie ou acesse sua conta no <a href='https://login.mailchimp.com/signup/' title='Mailchimp' target='_blank' rel="noopener noreferrer">Mailchimp</a>.</Text>
               </Stack>
               <Stack>
+                <Heading as="h4" size="sm">Integrar</Heading>
                 <InputField
                   name='community.mailchimp_api_key'
                   label={(
@@ -81,7 +82,7 @@ const MailchimpPanel = () => {
                 </Flex>
               </Stack>
               <Stack>
-                <Heading as="h4" size="md">Forçar sincronização</Heading>
+                <Heading as="h4" size="sm">Forçar sincronização</Heading>
                 <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
                 <Flex justifyContent="flex-end">
                   <Button type='button'>Sincronizar</Button>
@@ -90,37 +91,39 @@ const MailchimpPanel = () => {
             </Stack>
           </GridItem>
           <GridItem colSpan={[12, null, null, 4]}>
-            <Stack>
-              <Heading as="h4" size="md">Funcionalidades</Heading>
-              <UnorderedList>
-                <ListItem>
-                  <Text>Comunicação por e-mail com todas as pessoas que agirem nas páginas da sua comunidade.</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Criação automática de segmentos estáticos no Mailchimp</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Comunicação segmentada para reengajar membros da comunidade.</Text>
-                </ListItem>
-              </UnorderedList>
-            </Stack>
-            <Stack>
-              <Heading as="h4" size="md">Dificuldade: Fácil</Heading>
-              <UnorderedList>
-                <ListItem>
-                  <Text>Não precisa saber programar :)</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Ferramenta em inglês.</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Ferramenta paga.</Text>
-                </ListItem>
-              </UnorderedList>
-            </Stack>
-            <Stack>
-              <Heading as="h4" size="md">Observações</Heading>
-              <Text>Os segmentos criados pelo BONDE no Mailchimp seguem esse formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)</Text>
+            <Stack spacing={6}>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Funcionalidades</Heading>
+                <UnorderedList>
+                  <ListItem>
+                    <Text>Comunicação por e-mail com todas as pessoas que agirem nas páginas da sua comunidade.</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Criação automática de segmentos estáticos no Mailchimp</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Comunicação segmentada para reengajar membros da comunidade.</Text>
+                  </ListItem>
+                </UnorderedList>
+              </Stack>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Dificuldade: Fácil</Heading>
+                <UnorderedList>
+                  <ListItem>
+                    <Text>Não precisa saber programar :)</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Ferramenta em inglês.</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Ferramenta paga.</Text>
+                  </ListItem>
+                </UnorderedList>
+              </Stack>
+              <Stack spacing={2}>
+                <Heading as="h4" size="sm">Observações</Heading>
+                <Text>Os segmentos criados pelo BONDE no Mailchimp seguem esse formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)</Text>
+              </Stack>
             </Stack>
           </GridItem>
         </Grid>
