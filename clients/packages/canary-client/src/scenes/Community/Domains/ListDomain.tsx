@@ -33,15 +33,13 @@ type DomainsProps = {
 
 const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
   <Stack spacing={4}>
-    <Box bg="white" p={6}>
-      <Flex direction="row" justify="space-between" pb={4}>
-        <Stack direction="column" spacing={2}>
-          <Heading as="h4" size="md">Domínios</Heading>
-          <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-        </Stack>
-        <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
-      </Flex>
-    </Box>
+    <Flex direction="row" justify="space-between" pb={4}>
+      <Stack spacing={2}>
+        <Heading as="h4" size="md">Domínios</Heading>
+        <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
+      </Stack>
+      <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
+    </Flex>
     <Box display={["none", "flex"]}>
       <Grid templateColumns='500px auto 70px' gap={4}>
         <GridItem>
