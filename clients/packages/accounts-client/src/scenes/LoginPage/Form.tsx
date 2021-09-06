@@ -48,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               {t('links.forgetPassword')}
             </LinkStyled>
 
-            <Button type='submit' disabled={submitting} size="xs">
+            <Button type='submit' disabled={submitting}>
               {t('button.submit')}
             </Button>
           </Stack>
