@@ -49,8 +49,14 @@ const InvitationsQuery = gql`
   }
 `;
 
+enum Menu {
+  invitations,
+  mobilizers
+}
+
 const FetchInvitations = () => {
-  const [menu, setMenu] = useState(1);
+  // Menu options: invitations and mobilizers
+  const [menu, setMenu] = useState(Menu.mobilizers);
   const { t } = useTranslation('community');
   // Session
   const { user, community } = useSession();
@@ -89,7 +95,7 @@ const FetchInvitations = () => {
     isCommunityAdmin
   };
 
-  const customTheme = (index: number) => ({
+  const customTheme = (index: Menu) => ({
     variant: "link",
     colorScheme: "gray",
     isActive: menu === index,
@@ -101,20 +107,20 @@ const FetchInvitations = () => {
 
   return (
     <Stack spacing={4}>
+      <Heading as="h4" size="md">{t('mobilizers.form.title')}</Heading>
       <Box bg="white" boxShadow="sm" p={6}>
-        <Heading as="h3" size="lg" mb={4}>{t('mobilizers.form.title')}</Heading>
         <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
       </Box>
       <Stack direction="row" spacing={4}>
-        <Button {...customTheme(1)}>
-          {t('mobilizers.filters.invitations', { count: invitationsCount })}
-        </Button>
-        <Button {...customTheme(2)}>
+        <Button {...customTheme(Menu.mobilizers)}>
           {t('mobilizers.filters.mobilizers', { count: communityUsersCount })}
         </Button>
+        <Button {...customTheme(Menu.invitations)}>
+          {t('mobilizers.filters.invitations', { count: invitationsCount })}
+        </Button>
       </Stack>
-      {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
-      {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}
+      {menu === Menu.invitations && <InvitationsTable data={invitations} {...tableProps} />}
+      {menu === Menu.mobilizers && <UsersTable data={communityUsers} {...tableProps} />}
     </Stack>
   );
 };
