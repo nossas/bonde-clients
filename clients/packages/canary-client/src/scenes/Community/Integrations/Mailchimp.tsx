@@ -78,14 +78,14 @@ const MailchimpPanel = () => {
                   placeholder={t('integrations.form.fields.mailchimp_list_id.placeholder')}
                 />
                 <Flex justifyContent="flex-end">
-                  <Button type='submit' disabled={submitting || !dirty}>Conectar ao mailchimp</Button>
+                  <Button type='submit' disabled={submitting || !dirty} marginTop={4}>Conectar ao mailchimp</Button>
                 </Flex>
               </Stack>
               <Stack>
                 <Heading as="h4" size="sm">Forçar sincronização</Heading>
                 <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
                 <Flex justifyContent="flex-end">
-                  <Button type='button'>Sincronizar</Button>
+                  <Button type='button' marginTop={4}>Sincronizar</Button>
                 </Flex>
               </Stack>
             </Stack>
