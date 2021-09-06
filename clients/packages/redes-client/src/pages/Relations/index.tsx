@@ -52,7 +52,7 @@ export default function Relations({
   };
 
   return (
-    <Stack direction="column" spacing={4}>
+    <Stack direction="column" spacing={4} mb={4}>
       <Filters
         save={save}
         options={FilterOptions}
@@ -79,7 +79,7 @@ export default function Relations({
               <Empty message="Não existem grupos suficientes nessa comunidade." />
             </WrapEmpty>
           ) : (
-            <>
+            <Stack spacing={2}>
               <Header.H4>Total ({count})</Header.H4>
               <Table
                 // A query que carrega os matches do Mapa do Acolhimento
@@ -94,7 +94,7 @@ export default function Relations({
                 sticky="end"
                 totalResults={count}
               />
-            </>
+            </Stack>
           );
         }}
       </FetchMatches>

@@ -85,7 +85,7 @@ export default function Individuals({
   };
 
   return (
-    <Stack direction="column" spacing={4}>
+    <Stack direction="column" spacing={4} mb={4}>
       <Filters
         save={save}
         onGroupChange={(e) => dispatch({ type: "group", value: e })}
