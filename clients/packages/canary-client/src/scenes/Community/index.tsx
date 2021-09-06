@@ -60,7 +60,7 @@ const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement
           <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
           <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
           <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations/mailchimp')}>{t('navigation.integrations')}</Tab>
-          <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Dominios</Tab>
+          <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Domínios</Tab>
         </Navigation>
       </SubHeader>
       <Container w="100%">
