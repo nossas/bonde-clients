@@ -36,7 +36,7 @@ const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
     <Box bg="white" p={6}>
       <Flex direction="row" justify="space-between" pb={4}>
         <Stack direction="column" spacing={2}>
-          <Heading as="h3" size="lg">Domínios</Heading>
+          <Heading as="h4" size="md">Domínios</Heading>
           <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
         </Stack>
         <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />

@@ -20,7 +20,7 @@ const TransferPanel: React.FC = () => {
     <Grid templateColumns="repeat(12, 1fr)" gap={[null, 6, 16]} rowGap="0!important">
       <GridItem colSpan={[null, null, 12, 6]}>
         <Stack direction="column" spacing={2} mb={3}>
-          <Heading as="h4" size="md">{t('recipient.form.titles.transfer_date')}</Heading>
+          <Heading as="h5" size="sm">{t('recipient.form.titles.transfer_date')}</Heading>
           <Text className='about'>Defina o dia em que o valor arrecadado pela sua comunidade será automaticamente transferido para a conta cadastrada aqui.</Text>
         </Stack>
         <FieldPrefix prefix="community.recipient">
@@ -48,15 +48,15 @@ const TransferPanel: React.FC = () => {
                     <option value='5'>{t('recipient.form.fields.transfer_day.options.fri')}</option>
                   </>
                 ) : (
-                    <>
-                      <option value='1'>1</option>
-                      <option value='6'>6</option>
-                      <option value='11'>11</option>
-                      <option value='16'>16</option>
-                      <option value='21'>21</option>
-                      <option value='26'>26</option>
-                    </>
-                  )
+                  <>
+                    <option value='1'>1</option>
+                    <option value='6'>6</option>
+                    <option value='11'>11</option>
+                    <option value='16'>16</option>
+                    <option value='21'>21</option>
+                    <option value='26'>26</option>
+                  </>
+                )
               )}
             </SpyField>
           </PrefixedField>
@@ -64,7 +64,7 @@ const TransferPanel: React.FC = () => {
       </GridItem>
       <GridItem colSpan={[null, null, 12, 6]}>
         <Stack direction="column" spacing={2} mb={3}>
-          <Heading as="h4" size="md">Observações</Heading>
+          <Heading as="h5" size="sm">Observações</Heading>
         </Stack>
         <UnorderedList>
           <ListItem>

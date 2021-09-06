@@ -37,7 +37,7 @@ const MailchimpPanel = () => {
                 <Text>Conecte ao Mailchimp para se comunicar com as pessoas que agirem nas mobilizações da sua comunidade.</Text>
               </Stack>
               <Stack spacing={2}>
-                <Heading as="h4" size="sm">Pra começar</Heading>
+                <Heading as="h5" size="sm">Pra começar</Heading>
                 <Text>Crie ou acesse sua conta no <a href='https://login.mailchimp.com/signup/' title='Mailchimp' target='_blank' rel="noopener noreferrer">Mailchimp</a>.</Text>
               </Stack>
               <Stack>
