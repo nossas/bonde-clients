@@ -8,8 +8,9 @@ import {
   Validators,
   Link as LinkStyled,
   Stack,
+  Flex
 } from "bonde-components";
-import { Container } from "react-grid-system";
+// import { Container } from "react-grid-system";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, gql } from "bonde-core-tools";
@@ -36,7 +37,7 @@ const Success = () => {
   const { t } = useTranslation("auth");
 
   return (
-    <div>
+    <Stack spacing={4}>
       <Header.H2>{t("forgetPassword.successfully.title")}</Header.H2>
       <Text>{t("forgetPassword.successfully.checkEmail")}</Text>
       <Text>{t("forgetPassword.successfully.checkSpam")}</Text>
@@ -44,7 +45,7 @@ const Success = () => {
       <LinkStyled to="/login" component={Link}>
         {t("forgetPassword.goback")}
       </LinkStyled>
-    </div>
+    </Stack>
   );
 };
 
@@ -67,7 +68,7 @@ const ForgetPasswordForm = () => {
   return submitted ? (
     <Success />
   ) : (
-    <Container fluid style={{ width: "100%", padding: "0" }}>
+    <Stack spacing={4}>
       <Header.H2>{t("forgetPassword.title")}</Header.H2>
       <Text>{t("forgetPassword.description")}</Text>
       <ConnectedForm
@@ -86,7 +87,7 @@ const ForgetPasswordForm = () => {
               validate={isEmail(t("forgetPassword.email.isEmail"))}
             />
 
-            <Stack direction="row" alignItems="center" spacing={4}>
+            <Flex direction="row" alignItems="center" justify="space-between">
               <LinkStyled
                 component={Link}
                 to="/login"
@@ -94,15 +95,14 @@ const ForgetPasswordForm = () => {
               >
                 {t("forgetPassword.goback")}
               </LinkStyled>
-
               <Button type="submit" disabled={submitting}>
                 {t("forgetPassword.submit")}
               </Button>
-            </Stack>
+            </Flex>
           </>
         )}
       </ConnectedForm>
-    </Container>
+    </Stack>
   );
 };
 
