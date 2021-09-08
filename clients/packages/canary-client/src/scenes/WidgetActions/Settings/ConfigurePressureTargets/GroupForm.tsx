@@ -1,69 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Icon, InputField, Label, Link, Text, Modal } from 'bonde-components';
-import styled from 'styled-components';
+import {
+  Box,
+  Button,
+  Icon,
+  IconButton,
+  InputField,
+  Flex,
+  FormLabel,
+  Text,
+  Stack,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  ModalHeader
+} from 'bonde-components';
 import { FieldArray } from 'react-final-form-arrays';
 import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
 import DeleteTargetPopup from './DeleteTargetPopup';
-
-const ButtonStyled = styled(Button).attrs({ type: 'button' })`
-  border: 1px solid #eee;
-  border-radius: 2px;
-  padding: 20px 18px;
-  justify-content: flex-start;
-`;
-
-const IconButton = styled.button.attrs({ type: 'button' })`
-  margin: 0;
-  padding: 0;
-  outline: none;
-  border: none;
-  background: none;
-`;
 
 type GroupFieldProps = {
   name: string
   group?: any
   remove: any
 }
-
-const Box = styled.div<{ open?: boolean }>`
-  display: flex;
-  align-items: center;
-  border: 1px solid #eee;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  padding: 20px 18px;
-
-  ${props => props.open && `
-    margin: 15px 0;
-    border: 1px solid #eee;
-    padding: 20px 18px;
-  `}
-
-  ${IconButton} {
-    margin-left: 10px;
-  }
-`;
-
-const Flexable = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  button {
-    width: 140px;
-  }
-`
-
-const GroupStyled = styled.div`
-  margin-bottom: 15px;
-
-  ${Label} {
-    display: block;
-    margin-bottom: 8px;
-  }
-`
 
 const GroupField = ({ name, group, remove }: GroupFieldProps) => {
   const [open, setOpen] = useState(!group);
@@ -78,50 +40,61 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
   const onClose = () => setOpenDeleteModal(false);
 
   return !open ? (
-    <Box>
-      <Text color='#000' style={{ flexGrow: 1 }}>{group.label || 'Nome do grupo'}</Text>
-      <IconButton onClick={() => setOpen(true)}>
-        <Icon name='Pencil' size='small' />
-      </IconButton>
-      <IconButton onClick={() => setOpenDeleteModal(true)}>
-        <Icon name='Trash' size='small' />
-      </IconButton>
-      <Modal width='385px' isOpen={openDeleteModal} onClose={onClose}>
-        <DeleteTargetPopup
-          pressureTargetId={group.id}
-          remove={remove}
-          onClose={onClose}
-        />
-      </Modal>
+    <Box p={2} borderColor="gray.200" borderWidth="1px">
+      <Flex direction="row" justify="space-between">
+        <Text color='#000' style={{ flexGrow: 1 }}>{group.label || 'Nome do grupo'}</Text>
+        <Stack direction="row" spacing={2}>
+          <IconButton variant="link" colorScheme="gray" onClick={() => setOpen(true)}>
+            <Icon name='Pencil' size='small' />
+          </IconButton>
+          <IconButton variant="link" colorScheme="gray" onClick={() => setOpenDeleteModal(true)}>
+            <Icon name='Trash' size='small' />
+          </IconButton>
+          <DeleteTargetPopup
+            pressureTargetId={group.id}
+            open={openDeleteModal}
+            remove={remove}
+            onClose={onClose}
+          />
+        </Stack>
+      </Flex>
     </Box>
   ) : (
-    <Box open={open}>
-      <InputField
-        name={`${name}.label`}
-        label={t('settings.pressure.label.group_label')}
-        placeholder={t('settings.pressure.placeholder.group_label')}
-      />
-      <SubjectBodyFields
-        prefix={name}
-        emailSubjectName='email_subject'
-        emailBodyName='email_body'
-      />
-      <Flexable>
-        <Link
-          onClick={() => {
-            // remove when
-            if (!group) remove();
-            // close card
-            setOpen(false)
-          }}
-        >
-          {t('settings.pressure.button.cancel')}
-        </Link>
-        <Button type='button' onClick={() => setOpen(false)}>
-          {t('settings.pressure.button.add')}
-        </Button>
-      </Flexable>
-    </Box>
+    <Modal size="lg" isOpen={open} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Adicionar alvos</ModalHeader>
+        <ModalBody>
+          <InputField
+            name={`${name}.label`}
+            label={t('settings.pressure.label.group_label')}
+            placeholder={t('settings.pressure.placeholder.group_label')}
+          />
+          <SubjectBodyFields
+            prefix={name}
+            emailSubjectName='email_subject'
+            emailBodyName='email_body'
+          />
+        </ModalBody>
+        <ModalFooter justifyContent="space-between">
+          <Button
+            variant="link"
+            colorScheme="gray"
+            onClick={() => {
+              // remove when
+              if (!group) remove();
+              // close card
+              setOpen(false)
+            }}
+          >
+            {t('settings.pressure.button.cancel')}
+          </Button>
+          <Button type='button' onClick={() => setOpen(false)}>
+            {t('settings.pressure.button.add')}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 }
 
@@ -145,27 +118,34 @@ const GroupForm = ({ form: { mutators } }: GroupFormProps) => {
         label={t('settings.pressure.label.select_label')}
         placeholder={t('settings.pressure.placeholder.select_label')}
       />
-      <GroupStyled>
-        <Label>Adicionar grupo de alvos</Label>
+      <Box mb={4}>
+        <FormLabel>Adicionar grupo de alvos</FormLabel>
         <FieldArray name="groups">
-          {({ fields }) =>
-            fields.map((name, index) => (
-              <GroupField
-                key={name}
-                name={name}
-                group={fields.value[index]}
-                remove={() => fields.remove(index)}
-              />
-            ))
-          }
+          {({ fields }) => (
+            <Stack spacing={2} mt={2}>
+              {fields.map((name, index) => (
+                <GroupField
+                  key={name}
+                  name={name}
+                  group={fields.value[index]}
+                  remove={() => fields.remove(index)}
+                />
+              ))}
+            </Stack>
+          )}
         </FieldArray>
-        <ButtonStyled
-          secondary
-          onClick={() => mutators.push('groups', undefined)}
-        >
-          {t('settings.pressure.button.addGroup')}
-        </ButtonStyled>
-      </GroupStyled>
+        <Flex justify="end" mt={2}>
+          <Button
+            isFullWidth
+            borderRadius="none"
+            variant="outline"
+            colorScheme="gray"
+            onClick={() => mutators.push('groups', undefined)}
+          >
+            {t('settings.pressure.button.addGroup')}
+          </Button>
+        </Flex>
+      </Box>
     </>
   );
 }

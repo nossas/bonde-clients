@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
-	Header,
+	Heading,
+	Box,
 	Text,
 	Button,
 	SwitchField,
@@ -13,7 +14,6 @@ import {
 import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
 
-import Panel from "../../../../components/Panel";
 import ButtonStyled from "../../../../components/ButtonStyled";
 import SpyField from "../../../../components/SpyField";
 import { OptimizedPressure } from "../../../Community/Domains/Icons";
@@ -44,8 +44,8 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 				onCancel()
 			}}
 		>
-			<Header.H2 style={{ marginBottom: "18px" }}>Desativar envio otimizado?</Header.H2>
-			<Text style={{ marginBottom: "30px" }}>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails.</Text>
+			<Heading as="h2" size="2xl">Desativar envio otimizado?</Heading>
+			<Text>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails.</Text>
 			<div
 				style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
 			>
@@ -84,81 +84,81 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 			}}
 		>
 			{({ form, submitting, dirty }: any) => (
-				<Panel>
+				<Box bg="white" p={6} boxShadow="sm">
 					<Grid templateColumns="repeat(12, 1fr)" gap={6}>
-							<GridItem colSpan={[null, 12, 12, 6]}>
-								<Stack direction="column" spacing={4}>
-									{/* <Visible lg xl> */}
-									<OptimizedPressure />
-									{/* </Visible> */}
-									<div style={{ flex: 1 }}>
-										<div style={{ marginBottom: "10px" }}>
-											<Header.H3>
-												{t("settings.sending.title")}
-											</Header.H3>
-										</div>
-										<Text style={{ marginBottom: "15px" }}>
-											{t("settings.sending.subtitle")}
-										</Text>
-
-										<SwitchField
-											defaultValue={widget.settings.optimization_enabled}
-											name="settings.optimization_enabled"
-											textOn="ATIVADO"
-											textOff="DESATIVADO"
-										/>
-
-										<SpyField field="settings.optimization_enabled">
-											{({ value, meta }) => (
-												<ConfirmModal
-													defaultIsOpen={!value && meta.modified}
-													onCancel={() => {
-														form.change("settings.optimization_enabled", true)
-													}}
-												/>
-											)}
-										</SpyField>
-										<SelectField
-											name='settings.mail_limit'
-											label='Limite de envios únicos'
-										>
-											<option value={500}>500 pressões</option>
-											<option value={1000}>1.000 pressões</option>
-											<option value={5000}>5.000 pressões</option>
-											<option value={10000}>10.000 pressões</option>
-										</SelectField>
-
-										<SelectField
-											name='settings.batch_limit'
-											label='Intervalo de envio'
-										>
-											<option value={50}>A cada 50 pressões</option>
-											<option value={100}>A cada 100 pressões</option>
-											<option value={500}>A cada 500 pressões</option>
-											<option value={1000}>A cada 1.000 pressões</option>
-										</SelectField>
-										<Flex justify='end'>
-											<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
-										</Flex>
+						<GridItem colSpan={[null, 12, 12, 6]}>
+							<Stack direction="column" spacing={4}>
+								{/* <Visible lg xl> */}
+								<OptimizedPressure />
+								{/* </Visible> */}
+								<div style={{ flex: 1 }}>
+									<div style={{ marginBottom: "10px" }}>
+										<Heading as="h3" size="lg">
+											{t("settings.sending.title")}
+										</Heading>
 									</div>
-								</Stack>
-							</GridItem>
-							<GridItem colSpan={[null, 12, 12, 6]}>
-								<Header.H4  style={{ marginBottom: "10px" }}>
-									{t("settings.sending.how_it_works.title")}
-								</Header.H4>
-								<Text style={{ marginBottom: "10px" }}>
-									{t("settings.sending.how_it_works.description1")}
-								</Text>
-								<Text style={{ marginBottom: "10px" }}>
-									{t("settings.sending.how_it_works.description2")}
-								</Text>
-								<Text>
-									{t("settings.sending.how_it_works.description3")}
-								</Text>
-							</GridItem>
-						</Grid>
-				</Panel>
+									<Text style={{ marginBottom: "15px" }}>
+										{t("settings.sending.subtitle")}
+									</Text>
+
+									<SwitchField
+										defaultValue={widget.settings.optimization_enabled}
+										name="settings.optimization_enabled"
+										textOn="ATIVADO"
+										textOff="DESATIVADO"
+									/>
+
+									<SpyField field="settings.optimization_enabled">
+										{({ value, meta }) => (
+											<ConfirmModal
+												defaultIsOpen={!value && meta.modified}
+												onCancel={() => {
+													form.change("settings.optimization_enabled", true)
+												}}
+											/>
+										)}
+									</SpyField>
+									<SelectField
+										name='settings.mail_limit'
+										label='Limite de envios únicos'
+									>
+										<option value={500}>500 pressões</option>
+										<option value={1000}>1.000 pressões</option>
+										<option value={5000}>5.000 pressões</option>
+										<option value={10000}>10.000 pressões</option>
+									</SelectField>
+
+									<SelectField
+										name='settings.batch_limit'
+										label='Intervalo de envio'
+									>
+										<option value={50}>A cada 50 pressões</option>
+										<option value={100}>A cada 100 pressões</option>
+										<option value={500}>A cada 500 pressões</option>
+										<option value={1000}>A cada 1.000 pressões</option>
+									</SelectField>
+									<Flex justify='end'>
+										<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
+									</Flex>
+								</div>
+							</Stack>
+						</GridItem>
+						<GridItem colSpan={[null, 12, 12, 6]}>
+							<Heading as="h4" size="md">
+								{t("settings.sending.how_it_works.title")}
+							</Heading>
+							<Text>
+								{t("settings.sending.how_it_works.description1")}
+							</Text>
+							<Text>
+								{t("settings.sending.how_it_works.description2")}
+							</Text>
+							<Text>
+								{t("settings.sending.how_it_works.description3")}
+							</Text>
+						</GridItem>
+					</Grid>
+				</Box>
 			)}
 		</SettingsForm>
 	);

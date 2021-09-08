@@ -1,10 +1,20 @@
 import React from "react";
 import { useMutation, gql } from "bonde-core-tools";
-import { Header, Text, Button, toast } from "bonde-components";
+import {
+  Text,
+  Button,
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  ModalOverlay,
+  toast
+} from "bonde-components";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 
 type Props = {
+  open: boolean;
   remove: () => void;
   onClose: () => void;
   pressureTargetId: number;
@@ -18,16 +28,8 @@ const DELETE_PRESSURE_TARGET = gql`
   }
 `;
 
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  & > button:first-child {
-    padding-left: 0;
-    justify-content: start;
-  }
-`;
-
 const DeleteTargetPopup = ({
+  open,
   remove,
   onClose,
   pressureTargetId
@@ -52,23 +54,28 @@ const DeleteTargetPopup = ({
     }
   };
   return (
-    <>
-      <Header.H2>{t('settings.pressure.delete.title')}</Header.H2>
-      <Text style={{ margin: "20px 0" }}>
-        {t('settings.pressure.delete.confirm')}
-      </Text>
-      <Box>
-        <Button
-          secondary
-          onClick={onClose}
-        >
-          {t('settings.pressure.button.cancel')}
-        </Button>
-        <Button onClick={() => onSubmit(pressureTargetId)}>
-          {t('settings.pressure.button.delete')}
-        </Button>
-      </Box>
-    </>
+    <Modal isOpen={open}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>{t('settings.pressure.delete.title')}</ModalHeader>
+        <ModalBody>
+          <Text>{t('settings.pressure.delete.confirm')}</Text>
+        </ModalBody>
+        <ModalFooter justifyContent="space-between">
+          <Button
+            type="button"
+            variant="link"
+            colorScheme="gray"
+            onClick={onClose}
+          >
+            {t('settings.pressure.button.cancel')}
+          </Button>
+          <Button type="button" onClick={() => onSubmit(pressureTargetId)}>
+            {t('settings.pressure.button.delete')}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 
