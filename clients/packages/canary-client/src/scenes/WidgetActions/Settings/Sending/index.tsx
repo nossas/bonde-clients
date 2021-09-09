@@ -26,6 +26,7 @@ import SettingsForm from '../SettingsForm';
 
 type Props = {
   widget: Widget;
+  updateCache: any;
 };
 
 const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
@@ -34,7 +35,7 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
   // useEffect serve para determinar que a propriedade
   // defaultIsOpen tenha um peso maior que a propriedade isOpen
   // isOpen pode ser alterado, sempre que defaultIsOpen for alterado
-  // devemos confirmar recalcular a possibilidade de abrir ou não o modal
+  // devemos recalcular a possibilidade de abrir ou não o modal
   React.useEffect(() => {
     setIsOpen(defaultIsOpen)
   }, [defaultIsOpen]);
@@ -65,12 +66,15 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
   );
 }
 
-const Sending = ({ widget }: Props): React.ReactElement => {
+const Sending = ({ widget, updateCache }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
   return (
     <SettingsForm
       widget={widget}
+      afterSubmit={async (_: any, result: any) => {
+        updateCache(result.data.update_widgets.returning[0]);
+      }}
       initialValues={{
         settings: {
           optimization_enabled: true,
@@ -99,7 +103,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
                 <SpyField field="settings.optimization_enabled">
                   {({ value, meta }) => (
                     <ConfirmModal
-                      defaultIsOpen={!value && meta.modified}
+                      defaultIsOpen={!value && meta.modified && dirty}
                       onCancel={() => {
                         form.change("settings.optimization_enabled", true)
                       }}
